@@ -1,8 +1,8 @@
 [submodule "VoxelEngine/vendor/spdlog"]
 	path = VoxelEngine/vendor/spdlog
 	url = https://github.com/gabime/spdlog.git
-[submodule "VoxelEngine/vendor/GLFW"]
-	path = VoxelEngine/vendor/GLFW
+[submodule "VoxelEngine/vendor/glfw"]
+	path = VoxelEngine/vendor/glfw
 	url = https://github.com/glfw/glfw
 [submodule "VoxelEngine/vendor/imgui"]
 	path = VoxelEngine/vendor/imgui
