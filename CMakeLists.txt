@@ -10,12 +10,11 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE bin.rel)
 
 if (WIN32)
     add_compile_definitions(VE_PLATFORM_WINDOWS)
-endif (WIN32)
+endif ()
 
 add_compile_definitions(VE_BUILD_DLL)
 
-string(TOLOWER ${CMAKE_BUILD_TYPE} build_type)
-if (build_type STREQUAL debug)
+if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
   add_compile_definitions(VE_DEBUG)
 endif()
 
