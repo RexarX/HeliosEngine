@@ -10,7 +10,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE bin.rel)
 
 if (WIN32)
     add_compile_definitions(VE_PLATFORM_WINDOWS)
-endif ()
+endif()
 
 add_compile_definitions(VE_BUILD_DLL)
 
@@ -18,7 +18,13 @@ if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
   add_compile_definitions(VE_DEBUG)
 endif()
 
-add_compile_definitions(GLFW_INCLUDE_NONE)
+#add_compile_definitions(GLFW_INCLUDE_NONE)
+
+include_directories(VoxelEngine/src)
+
+include_directories(VoxelEngine/src/VoxelEngine)
+
+include_directories(VoxelEngine/src/Platform)
 
 add_subdirectory(VoxelCraft)
 

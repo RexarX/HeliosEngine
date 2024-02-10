@@ -1,13 +1,13 @@
 #pragma once
 
-#include "Core.h"
+#include "VoxelEngine/Core.h"
 
-#include "Window.h"
+#include "VoxelEngine/Window.h"
 
-#include "LayerStack.h"
+#include "VoxelEngine/LayerStack.h"
 
-#include "Events/Event.h"
-#include "Events/ApplicationEvent.h"
+#include "VoxelEngine/Events/Event.h"
+#include "VoxelEngine/Events/ApplicationEvent.h"
 
 namespace VoxelEngine
 {

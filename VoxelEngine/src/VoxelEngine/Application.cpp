@@ -1,8 +1,10 @@
-#include "Application.h"
+#include "vepch.h"
 
-#include "Input.h"
+#include "VoxelEngine/Application.h"
 
-#include "Log.h"
+#include "VoxelEngine/Input.h"
+
+#include "VoxelEngine/Log.h"
 
 #include <glad/glad.h>
 
@@ -15,6 +17,9 @@ namespace VoxelEngine
 	{
 		VE_CORE_ASSERT(!s_Instance, "Application already exists!");
 		s_Instance = this;
+
+		m_Window = std::unique_ptr<Window>(Window::Create());
+		m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
 	}
 	
 	Application::~Application()
@@ -44,10 +49,19 @@ namespace VoxelEngine
 		}
 	}
 
+	bool Application::OnWindowClose(WindowCloseEvent& e)
+	{
+		m_Running = false;
+		return true;
+	}
+
 	void Application::Run()
 	{
 		while (m_Running) {
-
+			for (Layer* layer : m_LayerStack) {
+				layer->OnUpdate();
+			}
+			m_Window->OnUpdate();
 		}
 	}
 }

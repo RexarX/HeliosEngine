@@ -2,9 +2,9 @@
 
 #include "vepch.h"
 
-#include "Core.h"
+#include "VoxelEngine/Core.h"
 
-#include "Events/Event.h"
+#include "VoxelEngine/Events/Event.h"
 
 namespace VoxelEngine
 {

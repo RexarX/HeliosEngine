@@ -2,7 +2,7 @@
 
 #include "vepch.h"
 
-#include "../Core.h"
+#include "VoxelEngine/Core.h"
 
 namespace VoxelEngine {
 	enum class EventType

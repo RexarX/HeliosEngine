@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Event.h"
+#include "VoxelEngine/Events/Event.h"
 
-#include "../MouseButtonCodes.h"
+#include "VoxelEngine/MouseButtonCodes.h"
 
 namespace VoxelEngine 
 {

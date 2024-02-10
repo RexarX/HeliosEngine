@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Core.h"
+#include "VoxelEngine/Core.h"
 
-#include "MouseButtonCodes.h"
-#include "KeyCodes.h"
+#include "VoxelEngine/MouseButtonCodes.h"
+#include "VoxelEngine/KeyCodes.h"
 
 namespace VoxelEngine
 {
