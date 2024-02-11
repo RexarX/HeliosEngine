@@ -1,6 +1,6 @@
 #pragma once
 
-#include "VoxelEngine/Events/Event.h"
+#include "Event.h"
 
 namespace VoxelEngine 
 {

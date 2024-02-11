@@ -1,8 +1,8 @@
 #pragma once
 
-#include "VoxelEngine/Core.h"
+#include "Core.h"
 
-#include "VoxelEngine/Events/Event.h"
+#include "Events/Event.h"
 
 namespace VoxelEngine
 {

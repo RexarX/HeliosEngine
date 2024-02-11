@@ -2,9 +2,9 @@
 
 #include "vepch.h"
 
-#include "VoxelEngine/Core.h"
+#include "Core.h"
 
-#include "VoxelEngine/Layer.h"
+#include "Layer.h"
 
 namespace VoxelEngine 
 {

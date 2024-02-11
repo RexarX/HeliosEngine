@@ -1,6 +1,6 @@
 #include "vepch.h"
 
-#include "Windows/WindowsWindow.h"
+#include "WindowsWindow.h"
 
 #include "VoxelEngine/Events/ApplicationEvent.h"
 #include "VoxelEngine/Events/MouseEvent.h"
@@ -11,6 +11,11 @@
 namespace VoxelEngine
 {
   static bool s_GLFWInitialized = false;
+
+	static void GLFWErrorCallback(int error, const char* description)
+	{
+		VE_CORE_ERROR("GLFW Error ({0}): {1}", error, description);
+	}
 
   Window* Window::Create(const WindowProps& props)
   {

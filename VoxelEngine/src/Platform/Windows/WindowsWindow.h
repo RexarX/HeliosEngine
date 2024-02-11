@@ -41,5 +41,5 @@ namespace VoxelEngine
 		};
 
 		WindowData m_Data;
-	}
-
+	};
+}

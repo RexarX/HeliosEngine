@@ -1,31 +1,61 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.16.0 FATAL_ERROR)
 
 project(VoxelCraft)
 
+if(NOT CMAKE_VS_PLATFORM_NAME)
+    set(CMAKE_VS_PLATFORM_NAME "x64")
+endif()
+
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY bin)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG bin.dbg)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE bin.rel)
+set(CMAKE_CONFIGURATION_TYPES
+    "Debug"
+    "Dist"
+    "Release"
+    CACHE STRING "" FORCE
+)
 
-if (WIN32)
-    add_compile_definitions(VE_PLATFORM_WINDOWS)
+if(MSVC)
+    set(CMAKE_C_FLAGS "")
+    set(CMAKE_C_FLAGS_DEBUG "")
+    set(CMAKE_C_FLAGS_DIST "")
+    set(CMAKE_C_FLAGS_RELEASE "")
+    set(CMAKE_CXX_FLAGS "")
+    set(CMAKE_CXX_FLAGS_DEBUG "")
+    set(CMAKE_CXX_FLAGS_DIST "")
+    set(CMAKE_CXX_FLAGS_RELEASE "")
 endif()
 
-add_compile_definitions(VE_BUILD_DLL)
-
-if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
-  add_compile_definitions(VE_DEBUG)
+if(MSVC)
+    set(CMAKE_EXE_LINKER_FLAGS "")
+    set(CMAKE_MODULE_LINKER_FLAGS "")
+    set(CMAKE_SHARED_LINKER_FLAGS "")
+    set(CMAKE_STATIC_LINKER_FLAGS "")
+    set(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS}")
+    set(CMAKE_MODULE_LINKER_FLAGS_DEBUG "${CMAKE_MODULE_LINKER_FLAGS}")
+    set(CMAKE_SHARED_LINKER_FLAGS_DEBUG "${CMAKE_SHARED_LINKER_FLAGS}")
+    set(CMAKE_STATIC_LINKER_FLAGS_DEBUG "${CMAKE_STATIC_LINKER_FLAGS}")
+    set(CMAKE_EXE_LINKER_FLAGS_DIST "${CMAKE_EXE_LINKER_FLAGS}")
+    set(CMAKE_MODULE_LINKER_FLAGS_DIST "${CMAKE_MODULE_LINKER_FLAGS}")
+    set(CMAKE_SHARED_LINKER_FLAGS_DIST "${CMAKE_SHARED_LINKER_FLAGS}")
+    set(CMAKE_STATIC_LINKER_FLAGS_DIST "${CMAKE_STATIC_LINKER_FLAGS}")
+    set(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS}")
+    set(CMAKE_MODULE_LINKER_FLAGS_RELEASE "${CMAKE_MODULE_LINKER_FLAGS}")
+    set(CMAKE_SHARED_LINKER_FLAGS_RELEASE "${CMAKE_SHARED_LINKER_FLAGS}")
+    set(CMAKE_STATIC_LINKER_FLAGS_RELEASE "${CMAKE_STATIC_LINKER_FLAGS}")
 endif()
 
-#add_compile_definitions(GLFW_INCLUDE_NONE)
+include(CMake/Utils.cmake)
+include(CMake/GlobalSettingsInclude.cmake OPTIONAL)
+
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 include_directories(VoxelEngine/src)
-
 include_directories(VoxelEngine/src/VoxelEngine)
-
 include_directories(VoxelEngine/src/Platform)
 
 add_subdirectory(VoxelCraft)
-
 add_subdirectory(VoxelEngine)
+add_subdirectory(VoxelEngine/vendor/glad)
+add_subdirectory(VoxelEngine/vendor/glm)
+add_subdirectory(VoxelEngine/vendor/glfw)

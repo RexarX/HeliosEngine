@@ -1,1 +1,0 @@
-set(EVENTS ApplicationEvent.h Event.h KeyEvent.h MouseEvent.h PARENT_SCOPE)

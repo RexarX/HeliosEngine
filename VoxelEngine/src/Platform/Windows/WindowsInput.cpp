@@ -1,6 +1,8 @@
 #include "vepch.h"
 
-#include "Windows/WindowsInput.h"
+#include "WindowsInput.h"
+
+#include "VoxelEngine/Application.h"
 
 #include <GLFW/glfw3.h>
 
@@ -15,7 +17,7 @@ namespace VoxelEngine
 		return state == GLFW_PRESS || state == GLFW_REPEAT;
 	}
 
-	bool WindowsInput::IsMouseButtonPressedImpl(KeyCode button)
+	bool WindowsInput::IsMouseButtonPressedImpl(MouseCode button)
 	{
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 		auto state = glfwGetKey(window, button);

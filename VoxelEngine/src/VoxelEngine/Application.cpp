@@ -1,10 +1,10 @@
 #include "vepch.h"
 
-#include "VoxelEngine/Application.h"
+#include "Application.h"
 
-#include "VoxelEngine/Input.h"
+#include "Input.h"
 
-#include "VoxelEngine/Log.h"
+#include "Log.h"
 
 #include <glad/glad.h>
 
@@ -13,6 +13,7 @@
 namespace VoxelEngine
 {
 	Application* Application::s_Instance = nullptr;
+
 	Application::Application()
 	{
 		VE_CORE_ASSERT(!s_Instance, "Application already exists!");
