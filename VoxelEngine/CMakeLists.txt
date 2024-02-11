@@ -13,7 +13,7 @@ source_group("src" FILES ${src})
 #    "src/Platform/OpenGL/OpenGLContext.cpp"
 #    "src/Platform/OpenGL/OpenGLContext.h"
 #    "src/Platform/OpenGL/OpenGLVertexArray.cpp"
- #   "src/Platform/OpenGL/OpenGLVertexArray.h"
+#    "src/Platform/OpenGL/OpenGLVertexArray.h"
 #)
 
 #source_group("src\\Platform\\OpenGL" FILES ${src__Platform__OpenGL})
@@ -216,6 +216,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
     glfw
     glad
     glm
+	spdlog
 )
 
 set(ADDITIONAL_LIBRARY_DEPENDENCIES
