@@ -45,7 +45,7 @@ An attempt to create a clone of Minecraft ^_^
 
 ## License
 
-Distributed under the Unlicense license. See `LICENSE.txt` for more information.
+Distributed under the Unlicense license. See `LICENSE` for more information.
 
 
 
