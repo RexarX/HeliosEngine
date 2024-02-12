@@ -1,13 +1,5 @@
 <a name="readme-top"></a>
 
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![Unlicense license][license-shield]][license-url]
-
-
-
 <details>
   <summary>Table of Contents</summary>
   <ol>
