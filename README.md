@@ -20,6 +20,12 @@
 
 
 
+## About The Project
+
+An attempt to create a clone of Minecraft ^_^
+
+
+
 ## Getting Started
 
 ### Requirements
