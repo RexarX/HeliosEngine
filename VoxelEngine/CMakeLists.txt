@@ -203,20 +203,15 @@ if(MSVC)
     )
 endif()
 
-add_custom_command_if(
-    TARGET ${PROJECT_NAME}
-    POST_BUILD
-    COMMANDS
-    COMMAND   $<CONFIG:Debug> IF EXIST ..\\bin\\Debug-windows-x86_64\\VoxelEngine\\VoxelEngine.dll\\ (xcopy /Q /E /Y /I ..\\bin\\Debug-windows-x86_64\\VoxelEngine\\VoxelEngine.dll ..\\bin\\Debug-windows-x86_64\\VoxelCraft > nul) ELSE (xcopy /Q /Y /I ..\\bin\\Debug-windows-x86_64\\VoxelEngine\\VoxelEngine.dll ..\\bin\\Debug-windows-x86_64\\VoxelCraft > nul)
-    COMMAND    $<CONFIG:Dist> IF EXIST ..\\bin\\Dist-windows-x86_64\\VoxelEngine\\VoxelEngine.dll\\ (xcopy /Q /E /Y /I ..\\bin\\Dist-windows-x86_64\\VoxelEngine\\VoxelEngine.dll ..\\bin\\Dist-windows-x86_64\\VoxelCraft > nul) ELSE (xcopy /Q /Y /I ..\\bin\\Dist-windows-x86_64\\VoxelEngine\\VoxelEngine.dll ..\\bin\\Dist-windows-x86_64\\VoxelCraft > nul)
-    COMMAND $<CONFIG:Release> IF EXIST ..\\bin\\Release-windows-x86_64\\VoxelEngine\\VoxelEngine.dll\\ (xcopy /Q /E /Y /I ..\\bin\\Release-windows-x86_64\\VoxelEngine\\VoxelEngine.dll ..\\bin\\Release-windows-x86_64\\VoxelCraft > nul) ELSE (xcopy /Q /Y /I ..\\bin\\Release-windows-x86_64\\VoxelEngine\\VoxelEngine.dll ..\\bin\\Release-windows-x86_64\\VoxelCraft > nul)
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD        # Adds a post-build event to MyTest
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different  # which executes "cmake - E copy_if_different..."
+        "${CMAKE_SOURCE_DIR}/bin/Debug-windows-x86_64/VoxelEngine/VoxelEngine.dll"      # <--this is in-file
+        "${CMAKE_SOURCE_DIR}/bin/Debug-windows-x86_64/VoxelCraft"
 )
 
 target_link_libraries(${PROJECT_NAME} PUBLIC
+	glad
     glfw
-    glad
-    glm
-	spdlog
 )
 
 set(ADDITIONAL_LIBRARY_DEPENDENCIES
