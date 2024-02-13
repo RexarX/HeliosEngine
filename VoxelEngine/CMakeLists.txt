@@ -150,13 +150,15 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
     "$<$<CONFIG:Release>:"
         "VE_RELEASE"
     ">"
-    "VE_PLATFORM_WINDOWS;"
     "VE_BUILD_DLL;"
     "GLFW_INCLUDE_NONE;"
     "UNICODE;"
-    "_UNICODE"
+    "_UNICODE;"
 )
 
+if(WIN32)
+	target_compile_definitions(${PROJECT_NAME} PRIVATE "VE_PLATFORM_WINDOWS;")
+endif()
 if(MSVC)
     target_compile_options(${PROJECT_NAME} PRIVATE
         $<$<CONFIG:Debug>:
