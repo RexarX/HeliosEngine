@@ -206,10 +206,19 @@ if(MSVC)
     )
 endif()
 
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD        # Adds a post-build event to MyTest
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different  # which executes "cmake - E copy_if_different..."
-        "${CMAKE_SOURCE_DIR}/bin/Debug-windows-x86_64/VoxelEngine/VoxelEngine.dll"      # <--this is in-file
-        "${CMAKE_SOURCE_DIR}/bin/Debug-windows-x86_64/VoxelCraft"
+add_custom_command_if(
+    TARGET ${PROJECT_NAME}
+    POST_BUILD
+    COMMANDS
+    COMMAND $<CONFIG:Debug> ${CMAKE_COMMAND} -E copy_if_different 
+	"${CMAKE_SOURCE_DIR}/bin/Debug-windows-x86_64/VoxelEngine/VoxelEngine.dll"
+	"${CMAKE_SOURCE_DIR}/bin/Debug-windows-x86_64/VoxelCraft/"
+    COMMAND $<CONFIG:Dist> ${CMAKE_COMMAND} -E copy_if_different
+	"${CMAKE_SOURCE_DIR}/bin/Dist-windows-x86_64/VoxelEngine/VoxelEngine.dll"
+	"${CMAKE_SOURCE_DIR}/bin/Dist-windows-x86_64/VoxelCraft/"
+    COMMAND $<CONFIG:Release> ${CMAKE_COMMAND} -E copy_if_different
+	"${CMAKE_SOURCE_DIR}/bin/Release-windows-x86_64/VoxelEngine/VoxelEngine.dll"
+	"${CMAKE_SOURCE_DIR}/bin/Release-windows-x86_64/VoxelCraft/"
 )
 
 target_link_libraries(${PROJECT_NAME} PUBLIC
