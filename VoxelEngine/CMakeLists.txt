@@ -159,6 +159,7 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 if(WIN32)
 	target_compile_definitions(${PROJECT_NAME} PRIVATE "VE_PLATFORM_WINDOWS;")
 endif()
+
 if(MSVC)
     target_compile_options(${PROJECT_NAME} PRIVATE
         $<$<CONFIG:Debug>:
