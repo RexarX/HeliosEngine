@@ -53,5 +53,6 @@ Distributed under the Unlicense license. See `LICENSE` for more information.
 
 RexarX - who727cares@gmail.com
 
+PlatonFPS - platonfps@yandex.ru
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
