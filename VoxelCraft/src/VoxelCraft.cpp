@@ -1,5 +1,5 @@
 #include <VoxelEngine.h>
-#include <VoxelEngine/Events/KeyEvent.h>
+
 
 class GameLayer : public VoxelEngine::Layer
 {
@@ -12,15 +12,45 @@ public:
 	void OnUpdate() override
 	{
 		if (VoxelEngine::Input::IsKeyPressed(VoxelEngine::Key::Q)) {
-			VE_TRACE("Tab key is pressed (poll)!");
+			VE_TRACE("Q key is pressed (poll)!");
 		}
 	}
 
 	void OnEvent(VoxelEngine::Event& event) override
 	{
+		if (event.GetEventType() == VoxelEngine::EventType::MouseMoved) {
+			VoxelEngine::MouseMovedEvent& e = (VoxelEngine::MouseMovedEvent&)event;
+			VE_TRACE("Mouse moved to {0}x{1}!", e.GetX(), e.GetY());
+		}
+
+		if (event.GetEventType() == VoxelEngine::EventType::MouseButtonPressed) {
+			VoxelEngine::MouseButtonPressedEvent& e = (VoxelEngine::MouseButtonPressedEvent&)event;
+			VE_TRACE("Mouse button ({0}) pressed!", e.GetMouseButton());
+		}
+
+		if (event.GetEventType() == VoxelEngine::EventType::MouseButtonReleased) {
+			VoxelEngine::MouseButtonReleasedEvent& e = (VoxelEngine::MouseButtonReleasedEvent&)event;
+			VE_TRACE("Mouse button ({0}) released!", e.GetMouseButton());
+		}
+
+		if (event.GetEventType() == VoxelEngine::EventType::MouseScrolled) {
+			VoxelEngine::MouseScrolledEvent& e = (VoxelEngine::MouseScrolledEvent&)event;
+			VE_TRACE("Mouse scrolled ({0}, {1})!", e.GetXOffset(), e.GetYOffset());
+		}
+
 		if (event.GetEventType() == VoxelEngine::EventType::KeyPressed) {
 			VoxelEngine::KeyPressedEvent& e = (VoxelEngine::KeyPressedEvent&)event;
-			if (e.GetKeyCode() == VoxelEngine::Key::Tab) { VE_TRACE("{0} key is pressed (event)!", e.GetKeyCode()); }
+			VE_TRACE("{0} key is pressed!", e.GetKeyCode());
+		}
+
+		if (event.GetEventType() == VoxelEngine::EventType::WindowResize) {
+			VoxelEngine::WindowResizeEvent& e = (VoxelEngine::WindowResizeEvent&)event;
+			VE_TRACE("Window resized to {0}x{1}", e.GetWidth(), e.GetHeight());
+		}
+
+		if (event.GetEventType() == VoxelEngine::EventType::WindowClose) {
+			VoxelEngine::WindowCloseEvent& e = (VoxelEngine::WindowCloseEvent&)event;
+			VE_TRACE("Window closed");
 		}
 	}
 };
