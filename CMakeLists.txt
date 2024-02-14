@@ -50,6 +50,10 @@ include(CMake/GlobalSettingsInclude.cmake OPTIONAL)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
+set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Release>:Release>")
+set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Dist>:Dist>")
+
 include_directories(VoxelEngine/src)
 include_directories(VoxelEngine/src/VoxelEngine)
 include_directories(VoxelEngine/src/Platform)
