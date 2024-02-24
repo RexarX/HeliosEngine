@@ -15,7 +15,6 @@ source_group("src" FILES ${src})
 #    "src/Platform/OpenGL/OpenGLVertexArray.cpp"
 #    "src/Platform/OpenGL/OpenGLVertexArray.h"
 #)
-
 #source_group("src\\Platform\\OpenGL" FILES ${src__Platform__OpenGL})
 
 set(src__Platform__Windows
@@ -42,7 +41,6 @@ set(src__VoxelEngine
     "src/VoxelEngine/MouseButtonCodes.h"
     "src/VoxelEngine/Window.h"
 )
-
 source_group("src\\VoxelEngine" FILES ${src__VoxelEngine})
 
 set(src__VoxelEngine__Events
@@ -98,15 +96,15 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
-    OUTPUT_DIRECTORY_DEBUG   "${CMAKE_CURRENT_SOURCE_DIR}/../bin/Debug-windows-x86_64/VoxelEngine/"
-    OUTPUT_DIRECTORY_DIST    "${CMAKE_CURRENT_SOURCE_DIR}/../bin/Dist-windows-x86_64/VoxelEngine/"
-    OUTPUT_DIRECTORY_RELEASE "${CMAKE_CURRENT_SOURCE_DIR}/../bin/Release-windows-x86_64/VoxelEngine/"
+    OUTPUT_DIRECTORY_DEBUG   "${CMAKE_CURRENT_SOURCE_DIR}/../bin/Debug-windows-x86_64/VoxelCraft/"
+    OUTPUT_DIRECTORY_DIST    "${CMAKE_CURRENT_SOURCE_DIR}/../bin/Dist-windows-x86_64/VoxelCraft/"
+    OUTPUT_DIRECTORY_RELEASE "${CMAKE_CURRENT_SOURCE_DIR}/../bin/Release-windows-x86_64/VoxelCraft/"
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
-    ARCHIVE_OUTPUT_DIRECTORY_DEBUG   "${CMAKE_CURRENT_SOURCE_DIR}/../bin/Debug-windows-x86_64/VoxelEngine"
-    ARCHIVE_OUTPUT_DIRECTORY_DIST    "${CMAKE_CURRENT_SOURCE_DIR}/../bin/Dist-windows-x86_64/VoxelEngine"
-    ARCHIVE_OUTPUT_DIRECTORY_RELEASE "${CMAKE_CURRENT_SOURCE_DIR}/../bin/Release-windows-x86_64/VoxelEngine"
+    ARCHIVE_OUTPUT_DIRECTORY_DEBUG   "${CMAKE_CURRENT_SOURCE_DIR}/../bin/Debug-windows-x86_64/VoxelCraft"
+    ARCHIVE_OUTPUT_DIRECTORY_DIST    "${CMAKE_CURRENT_SOURCE_DIR}/../bin/Dist-windows-x86_64/VoxelCraft"
+    ARCHIVE_OUTPUT_DIRECTORY_RELEASE "${CMAKE_CURRENT_SOURCE_DIR}/../bin/Release-windows-x86_64/VoxelCraft"
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
@@ -205,21 +203,6 @@ if(MSVC)
         /SUBSYSTEM:WINDOWS
     )
 endif()
-
-add_custom_command_if(
-    TARGET ${PROJECT_NAME}
-    POST_BUILD
-    COMMANDS
-    COMMAND $<CONFIG:Debug> ${CMAKE_COMMAND} -E copy_if_different 
-	"${CMAKE_SOURCE_DIR}/bin/Debug-windows-x86_64/VoxelEngine/VoxelEngine.dll"
-	"${CMAKE_SOURCE_DIR}/bin/Debug-windows-x86_64/VoxelCraft/"
-    COMMAND $<CONFIG:Dist> ${CMAKE_COMMAND} -E copy_if_different
-	"${CMAKE_SOURCE_DIR}/bin/Dist-windows-x86_64/VoxelEngine/VoxelEngine.dll"
-	"${CMAKE_SOURCE_DIR}/bin/Dist-windows-x86_64/VoxelCraft/"
-    COMMAND $<CONFIG:Release> ${CMAKE_COMMAND} -E copy_if_different
-	"${CMAKE_SOURCE_DIR}/bin/Release-windows-x86_64/VoxelEngine/VoxelEngine.dll"
-	"${CMAKE_SOURCE_DIR}/bin/Release-windows-x86_64/VoxelCraft/"
-)
 
 target_link_libraries(${PROJECT_NAME} PUBLIC
 	glad

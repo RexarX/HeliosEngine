@@ -15,7 +15,7 @@ namespace VoxelEngine
     GLint isCompiled = 0;
     glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &isCompiled);
     if (isCompiled == GL_FALSE) {
-      GLuint maxLength = 0;
+      GLint maxLength = 0;
       glGetShaderiv(vertexShader, GL_INFO_LOG_LENGTH, &maxLength);
 
       std::vector<GLchar> infoLog(maxLength);
@@ -29,13 +29,13 @@ namespace VoxelEngine
     }
 
     GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-    const GLchar* src = fragment.c_str();
+    src = fragment.c_str();
     glCompileShader(fragmentShader);
 
-    GLint isCompiled = 0;
+    isCompiled = 0;
     glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &isCompiled);
     if (isCompiled == GL_FALSE) {
-      GLuint maxLength = 0;
+      GLint maxLength = 0;
       glGetShaderiv(fragmentShader, GL_INFO_LOG_LENGTH, &maxLength);
 
       std::vector<GLchar> infoLog(maxLength);
@@ -53,6 +53,29 @@ namespace VoxelEngine
     
     glAttachShader(program, vertexShader);
     glAttachShader(program, fragmentShader);
+
+    glLinkProgram(program);
+
+    GLint isLinked = 0;
+    glGetProgramiv(program, GL_LINK_STATUS, (int*)&isLinked);
+    if (isLinked == GL_FALSE) {
+      GLint maxLength = 0;
+      glGetProgramiv(program, GL_INFO_LOG_LENGTH, &maxLength);
+
+      std::vector<GLchar> infoLog(maxLength);
+      glGetProgramInfoLog(program, maxLength, &maxLength, &infoLog[0]);
+
+      glDeleteProgram(program);
+      glDeleteShader(vertexShader);
+      glDeleteShader(fragmentShader);
+
+      VE_CORE_ERROR("{0}", infoLog.data());
+      VE_CORE_ASSERT(false, "Shader link failure!");
+      return;
+    }
+
+    glDetachShader(program, vertexShader);
+    glDetachShader(program, fragmentShader);
   }
 
   Shader::~Shader()
