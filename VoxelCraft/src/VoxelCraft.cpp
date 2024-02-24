@@ -11,9 +11,7 @@ public:
 
 	void OnUpdate() override
 	{
-		if (VoxelEngine::Input::IsKeyPressed(VoxelEngine::Key::Q)) {
-			VE_TRACE("Q key is pressed (poll)!");
-		}
+
 	}
 
 	void OnEvent(VoxelEngine::Event& event) override

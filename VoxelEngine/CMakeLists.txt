@@ -53,18 +53,18 @@ set(src__VoxelEngine__Events
 )
 source_group("src\\VoxelEngine\\Events" FILES ${src__VoxelEngine__Events})
 
-#set(src__VoxelEngine__Render
+set(src__VoxelEngine__Render
 #    "src/VoxelEngine/Render/Buffer.cpp"
 #    "src/VoxelEngine/Render/Buffer.h"
 #    "src/VoxelEngine/Render/GraphicsContext.h"
 #    "src/VoxelEngine/Render/Renderer.cpp"
 #    "src/VoxelEngine/Render/Renderer.h"
-#    "src/VoxelEngine/Render/Shader.cpp"
-#    "src/VoxelEngine/Render/Shader.h"
+    "src/VoxelEngine/Render/Shader.cpp"
+    "src/VoxelEngine/Render/Shader.h"
 #    "src/VoxelEngine/Render/VertexArray.cpp"
 #    "src/VoxelEngine/Render/VertexArray.h"
-#)
-#source_group("src\\VoxelEngine\\Render" FILES ${src__VoxelEngine__Render})
+)
+source_group("src\\VoxelEngine\\Render" FILES ${src__VoxelEngine__Render})
 
 set(ALL_FILES
     ${src}
@@ -72,7 +72,7 @@ set(ALL_FILES
     ${src__Platform__Windows}
     ${src__VoxelEngine}
     ${src__VoxelEngine__Events}
-    #${src__VoxelEngine__Render}
+    ${src__VoxelEngine__Render}
 )
 
 add_library(${PROJECT_NAME} SHARED ${ALL_FILES})
