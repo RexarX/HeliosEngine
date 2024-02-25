@@ -54,7 +54,7 @@ source_group("src\\VoxelEngine\\Events" FILES ${src__VoxelEngine__Events})
 set(src__VoxelEngine__Render
 #    "src/VoxelEngine/Render/Buffer.cpp"
 #    "src/VoxelEngine/Render/Buffer.h"
-#    "src/VoxelEngine/Render/GraphicsContext.h"
+    "src/VoxelEngine/Render/GraphicsContext.h"
     "src/VoxelEngine/Render/Renderer.cpp"
     "src/VoxelEngine/Render/Renderer.h"
     "src/VoxelEngine/Render/Shader.cpp"
