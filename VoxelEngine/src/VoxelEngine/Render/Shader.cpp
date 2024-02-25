@@ -8,8 +8,43 @@ namespace VoxelEngine
 {
   Shader::Shader(const std::string& vertex, const std::string& fragment)
   {
+    //reading shaders from files
+
+    std::string vertexCode;
+    std::string fragmentCode;
+    std::ifstream vShaderFile;
+    std::ifstream fShaderFile;
+
+    vShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+    fShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+
+    try
+    {
+      vShaderFile.open(vertex);
+      fShaderFile.open(fragment);
+
+      std::stringstream vShaderStream;
+      std::stringstream fShaderStream;
+
+      vShaderStream << vShaderFile.rdbuf();
+      fShaderStream << fShaderFile.rdbuf();
+
+      vShaderFile.close();
+      fShaderFile.close();
+
+      vertexCode = vShaderStream.str();
+      fragmentCode = fShaderStream.str();
+    }
+    catch (std::ifstream::failure e)
+    {
+      std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ" << std::endl;
+    }
+
+    const char* vShaderCode = vertexCode.c_str();
+    const char* fShaderCode = fragmentCode.c_str();
+
     GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-    const GLchar* src = vertex.c_str();
+    const GLchar* src = vShaderCode;
     glCompileShader(vertexShader);
 
     GLint isCompiled = 0;
@@ -29,7 +64,7 @@ namespace VoxelEngine
     }
 
     GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-    src = fragment.c_str();
+    src = fShaderCode;
     glCompileShader(fragmentShader);
 
     isCompiled = 0;
@@ -91,5 +126,17 @@ namespace VoxelEngine
   void Shader::UnBind() const
   {
     glUseProgram(0);
+  }
+
+  void Shader::SetBool(const std::string& name, bool value) const {
+    glUniform1i(glGetUniformLocation(m_RendererID, name.c_str()), static_cast<int>(value));
+  }
+
+  void Shader::SetInt(const std::string& name, int value) const {
+    glUniform1i(glGetUniformLocation(m_RendererID, name.c_str()), value);
+  }
+
+  void Shader::SetFloat(const std::string& name, float value) const {
+    glUniform1f(glGetUniformLocation(m_RendererID, name.c_str()), value);
   }
 };
