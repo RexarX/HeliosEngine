@@ -23,12 +23,12 @@ public:
 
 		if (event.GetEventType() == VoxelEngine::EventType::MouseButtonPressed) {
 			VoxelEngine::MouseButtonPressedEvent& e = (VoxelEngine::MouseButtonPressedEvent&)event;
-			VE_TRACE("Mouse button ({0}) pressed!", e.GetMouseButton());
+			VE_TRACE("Mouse button {0} pressed!", e.GetMouseButton());
 		}
 
 		if (event.GetEventType() == VoxelEngine::EventType::MouseButtonReleased) {
 			VoxelEngine::MouseButtonReleasedEvent& e = (VoxelEngine::MouseButtonReleasedEvent&)event;
-			VE_TRACE("Mouse button ({0}) released!", e.GetMouseButton());
+			VE_TRACE("Mouse button {0} released!", e.GetMouseButton());
 		}
 
 		if (event.GetEventType() == VoxelEngine::EventType::MouseScrolled) {
@@ -39,6 +39,11 @@ public:
 		if (event.GetEventType() == VoxelEngine::EventType::KeyPressed) {
 			VoxelEngine::KeyPressedEvent& e = (VoxelEngine::KeyPressedEvent&)event;
 			VE_TRACE("{0} key is pressed!", e.GetKeyCode());
+		}
+
+		if (event.GetEventType() == VoxelEngine::EventType::KeyReleased) {
+			VoxelEngine::KeyReleasedEvent& e = (VoxelEngine::KeyReleasedEvent&)event;
+			VE_TRACE("{0} key is released!", e.GetKeyCode());
 		}
 
 		if (event.GetEventType() == VoxelEngine::EventType::WindowResize) {
