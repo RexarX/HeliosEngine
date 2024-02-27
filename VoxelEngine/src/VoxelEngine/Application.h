@@ -9,6 +9,10 @@
 #include "Events/Event.h"
 #include "Events/ApplicationEvent.h"
 
+#include "VoxelEngine/Render/Shader.h"
+#include "VoxelEngine/Render/Buffer.h"
+#include "VoxelEngine/Render/VertexArray.h"
+
 namespace VoxelEngine
 {
 	class VOXELENGINE_API Application {
@@ -33,6 +37,13 @@ namespace VoxelEngine
 	private:
 		std::unique_ptr<Window> m_Window;
 		LayerStack m_LayerStack;
+
+		std::shared_ptr<Shader> m_Shader;
+		std::shared_ptr<VertexArray> m_VertexArray;
+
+		std::shared_ptr<Shader> m_BlueShader;
+		std::shared_ptr<VertexArray> m_SquareVA;
+
 		bool m_Running = true;
 
 		static Application* s_Instance;

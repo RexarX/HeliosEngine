@@ -12,8 +12,8 @@ set(src__Platform__OpenGL
     "src/Platform/OpenGL/OpenGLBuffer.h"
     "src/Platform/OpenGL/OpenGLContext.cpp"
     "src/Platform/OpenGL/OpenGLContext.h"
-#    "src/Platform/OpenGL/OpenGLVertexArray.cpp"
-#    "src/Platform/OpenGL/OpenGLVertexArray.h"
+    "src/Platform/OpenGL/OpenGLVertexArray.cpp"
+    "src/Platform/OpenGL/OpenGLVertexArray.h"
 )
 source_group("src\\Platform\\OpenGL" FILES ${src__Platform__OpenGL})
 
@@ -59,8 +59,8 @@ set(src__VoxelEngine__Render
     "src/VoxelEngine/Render/Renderer.h"
     "src/VoxelEngine/Render/Shader.cpp"
     "src/VoxelEngine/Render/Shader.h"
-#    "src/VoxelEngine/Render/VertexArray.cpp"
-#    "src/VoxelEngine/Render/VertexArray.h"
+    "src/VoxelEngine/Render/VertexArray.cpp"
+    "src/VoxelEngine/Render/VertexArray.h"
 )
 source_group("src\\VoxelEngine\\Render" FILES ${src__VoxelEngine__Render})
 

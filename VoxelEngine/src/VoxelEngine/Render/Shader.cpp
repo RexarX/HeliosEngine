@@ -37,14 +37,17 @@ namespace VoxelEngine
     }
     catch (std::ifstream::failure e)
     {
-      std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ" << std::endl;
+      VE_CORE_ASSERT(false, "Shader file read failed!");
     }
-
+    
     const char* vShaderCode = vertexCode.c_str();
     const char* fShaderCode = fragmentCode.c_str();
-
+    
     GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
     const GLchar* src = vShaderCode;
+
+    glShaderSource(vertexShader, 1, &src, 0);
+
     glCompileShader(vertexShader);
 
     GLint isCompiled = 0;
@@ -65,6 +68,9 @@ namespace VoxelEngine
 
     GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
     src = fShaderCode;
+
+    glShaderSource(fragmentShader, 1, &src, 0);
+
     glCompileShader(fragmentShader);
 
     isCompiled = 0;
@@ -77,6 +83,7 @@ namespace VoxelEngine
       glGetShaderInfoLog(fragmentShader, maxLength, &maxLength, &infoLog[0]);
 
       glDeleteShader(fragmentShader);
+      glDeleteShader(vertexShader);
 
       VE_CORE_ASSERT("{0}", infoLog.data());
       VE_CORE_ASSERT(false, "Fragment shader compilation failed!");

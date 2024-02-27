@@ -58,16 +58,16 @@ public:
 	}
 };
 
-class Minecraft : public VoxelEngine::Application
+class VoxelCraft : public VoxelEngine::Application
 {
 public:
-	Minecraft()
+	VoxelCraft()
 	{
 		PushLayer(new GameLayer());
 		//PushOverlay(new VoxelEngine::ImGuiLayer());
 	}
 
-	~Minecraft()
+	~VoxelCraft()
 	{
 
 	}
@@ -75,5 +75,5 @@ public:
 
 VoxelEngine::Application* VoxelEngine::CreateApplication()
 {
-	return new Minecraft();
+	return new VoxelCraft();
 }
