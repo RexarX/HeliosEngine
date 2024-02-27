@@ -7,15 +7,15 @@ set(src
 )
 source_group("src" FILES ${src})
 
-#set(src__Platform__OpenGL
-#    "src/Platform/OpenGL/OpenGLBuffer.cpp"
-#    "src/Platform/OpenGL/OpenGLBuffer.h"
-#    "src/Platform/OpenGL/OpenGLContext.cpp"
-#    "src/Platform/OpenGL/OpenGLContext.h"
+set(src__Platform__OpenGL
+    "src/Platform/OpenGL/OpenGLBuffer.cpp"
+    "src/Platform/OpenGL/OpenGLBuffer.h"
+    "src/Platform/OpenGL/OpenGLContext.cpp"
+    "src/Platform/OpenGL/OpenGLContext.h"
 #    "src/Platform/OpenGL/OpenGLVertexArray.cpp"
 #    "src/Platform/OpenGL/OpenGLVertexArray.h"
-#)
-#source_group("src\\Platform\\OpenGL" FILES ${src__Platform__OpenGL})
+)
+source_group("src\\Platform\\OpenGL" FILES ${src__Platform__OpenGL})
 
 set(src__Platform__Windows
     "src/Platform/Windows/WindowsInput.cpp"
@@ -52,8 +52,8 @@ set(src__VoxelEngine__Events
 source_group("src\\VoxelEngine\\Events" FILES ${src__VoxelEngine__Events})
 
 set(src__VoxelEngine__Render
-#    "src/VoxelEngine/Render/Buffer.cpp"
-#    "src/VoxelEngine/Render/Buffer.h"
+    "src/VoxelEngine/Render/Buffer.cpp"
+    "src/VoxelEngine/Render/Buffer.h"
     "src/VoxelEngine/Render/GraphicsContext.h"
     "src/VoxelEngine/Render/Renderer.cpp"
     "src/VoxelEngine/Render/Renderer.h"
@@ -66,7 +66,7 @@ source_group("src\\VoxelEngine\\Render" FILES ${src__VoxelEngine__Render})
 
 set(ALL_FILES
     ${src}
-    #${src__Platform__OpenGL}
+    ${src__Platform__OpenGL}
     ${src__Platform__Windows}
     ${src__VoxelEngine}
     ${src__VoxelEngine__Events}
