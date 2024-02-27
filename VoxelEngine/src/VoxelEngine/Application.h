@@ -6,12 +6,10 @@
 
 #include "LayerStack.h"
 
+#include "Timestep.h"
+
 #include "Events/Event.h"
 #include "Events/ApplicationEvent.h"
-
-#include "VoxelEngine/Render/Shader.h"
-#include "VoxelEngine/Render/Buffer.h"
-#include "VoxelEngine/Render/VertexArray.h"
 
 namespace VoxelEngine
 {
@@ -38,11 +36,7 @@ namespace VoxelEngine
 		std::unique_ptr<Window> m_Window;
 		LayerStack m_LayerStack;
 
-		std::shared_ptr<Shader> m_Shader;
-		std::shared_ptr<VertexArray> m_VertexArray;
-
-		std::shared_ptr<Shader> m_BlueShader;
-		std::shared_ptr<VertexArray> m_SquareVA;
+		float m_LastFrameTime = 0.0f;
 
 		bool m_Running = true;
 

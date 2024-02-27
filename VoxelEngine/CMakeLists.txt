@@ -1,66 +1,37 @@
 set(PROJECT_NAME VoxelEngine)
 
-set(src
-    "src/vepch.cpp"
-    "src/vepch.h"
-    "src/VoxelEngine.h"
+file(GLOB_RECURSE src
+    "src/*.cpp"
+    "src/*.h"
 )
 source_group("src" FILES ${src})
 
-set(src__Platform__OpenGL
-    "src/Platform/OpenGL/OpenGLBuffer.cpp"
-    "src/Platform/OpenGL/OpenGLBuffer.h"
-    "src/Platform/OpenGL/OpenGLContext.cpp"
-    "src/Platform/OpenGL/OpenGLContext.h"
-    "src/Platform/OpenGL/OpenGLVertexArray.cpp"
-    "src/Platform/OpenGL/OpenGLVertexArray.h"
+file(GLOB_RECURSE src__Platform__OpenGL
+    "src/Platform/OpenGL/*.cpp"
+    "src/Platform/OpenGL/*.h"
 )
 source_group("src\\Platform\\OpenGL" FILES ${src__Platform__OpenGL})
 
-set(src__Platform__Windows
-    "src/Platform/Windows/WindowsInput.cpp"
-    "src/Platform/Windows/WindowsInput.h"
-    "src/Platform/Windows/WindowsWindow.cpp"
-    "src/Platform/Windows/WindowsWindow.h"
+file(GLOB_RECURSE src__Platform__Windows
+    "src/Platform/Windows/*.cpp"
+    "src/Platform/Windows/*.h"
 )
 source_group("src\\Platform\\Windows" FILES ${src__Platform__Windows})
 
-set(src__VoxelEngine
-    "src/VoxelEngine/Application.cpp"
-    "src/VoxelEngine/Application.h"
-    "src/VoxelEngine/Core.h"
-    "src/VoxelEngine/EntryPoint.h"
-    "src/VoxelEngine/Input.h"
-    "src/VoxelEngine/KeyCodes.h"
-    "src/VoxelEngine/Layer.cpp"
-    "src/VoxelEngine/Layer.h"
-    "src/VoxelEngine/LayerStack.cpp"
-    "src/VoxelEngine/LayerStack.h"
-    "src/VoxelEngine/Log.cpp"
-    "src/VoxelEngine/Log.h"
-    "src/VoxelEngine/MouseButtonCodes.h"
-    "src/VoxelEngine/Window.h"
+file(GLOB_RECURSE src__VoxelEngine
+    "src/VoxelEngine/*.cpp"
+    "src/VoxelEngine/*.h"
 )
 source_group("src\\VoxelEngine" FILES ${src__VoxelEngine})
 
-set(src__VoxelEngine__Events
-    "src/VoxelEngine/Events/ApplicationEvent.h"
-    "src/VoxelEngine/Events/Event.h"
-    "src/VoxelEngine/Events/KeyEvent.h"
-    "src/VoxelEngine/Events/MouseEvent.h"
+file(GLOB_RECURSE src__VoxelEngine__Events
+    "src/VoxelEngine/Events/*.h"
 )
 source_group("src\\VoxelEngine\\Events" FILES ${src__VoxelEngine__Events})
 
-set(src__VoxelEngine__Render
-    "src/VoxelEngine/Render/Buffer.cpp"
-    "src/VoxelEngine/Render/Buffer.h"
-    "src/VoxelEngine/Render/GraphicsContext.h"
-    "src/VoxelEngine/Render/Renderer.cpp"
-    "src/VoxelEngine/Render/Renderer.h"
-    "src/VoxelEngine/Render/Shader.cpp"
-    "src/VoxelEngine/Render/Shader.h"
-    "src/VoxelEngine/Render/VertexArray.cpp"
-    "src/VoxelEngine/Render/VertexArray.h"
+file(GLOB_RECURSE src__VoxelEngine__Render
+    "src/VoxelEngine/Render/*.cpp"
+    "src/VoxelEngine/Render/*.h"
 )
 source_group("src\\VoxelEngine\\Render" FILES ${src__VoxelEngine__Render})
 

@@ -12,4 +12,13 @@
 
 #include "VoxelEngine/Log.h"
 
+#include "VoxelEngine/Render/Renderer.h"
+#include "VoxelEngine/Render/RenderStart.h"
+
+#include "VoxelEngine/Render/Buffer.h"
+#include "VoxelEngine/Render/Shader.h"
+#include "VoxelEngine/Render/VertexArray.h"
+
+#include "VoxelEngine/Render/Camera.h"
+
 #include "VoxelEngine/EntryPoint.h"

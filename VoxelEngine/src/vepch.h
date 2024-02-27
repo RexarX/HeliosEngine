@@ -13,10 +13,6 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#include "VoxelEngine/Application.h"
-
-#include "VoxelEngine/Layer.h"
-
 #include "VoxelEngine/Log.h"
 
 #include "VoxelEngine/Input.h"

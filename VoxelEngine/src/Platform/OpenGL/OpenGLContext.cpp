@@ -2,10 +2,8 @@
 
 #include "OpenGLContext.h"
 
-#include <GLFW/glfw3.h>
-
-#include <GLAD/glad.h>
-
+#include <glfw/glfw3.h>
+#include <glad/glad.h>
 #include <GL/GL.h>
 
 namespace VoxelEngine

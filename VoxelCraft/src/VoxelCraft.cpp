@@ -1,5 +1,6 @@
 #include <VoxelEngine.h>
 
+#include "Platform/OpenGL/OpenGLShader.h"
 
 class GameLayer : public VoxelEngine::Layer
 {
@@ -7,6 +8,7 @@ public:
 	GameLayer()
 		: Layer("Game")
 	{
+
 	}
 
 	void OnUpdate() override
