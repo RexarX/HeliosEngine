@@ -26,6 +26,6 @@ namespace VoxelEngine
 		virtual float GetMouseYImpl() = 0;
 
 	private:
-		static Input* s_Instance;
+		static std::unique_ptr<Input> s_Instance;
 	};
 }

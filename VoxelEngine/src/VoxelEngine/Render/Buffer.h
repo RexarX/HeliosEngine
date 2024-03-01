@@ -116,7 +116,7 @@ namespace VoxelEngine
     virtual const BufferLayout& GetLayout() const = 0;
     virtual void SetLayout(const BufferLayout& layout) = 0;
 
-    static VertexBuffer* Create(const float* vertices, const uint32_t& size);
+    static std::shared_ptr<VertexBuffer> Create(const float* vertices, const uint32_t& size);
   };
 
   class IndexBuffer
@@ -129,6 +129,6 @@ namespace VoxelEngine
 
     virtual uint32_t GetCount() const = 0;
 
-    static IndexBuffer* Create(const uint32_t* indices, const uint32_t& size);
+    static std::shared_ptr<IndexBuffer> Create(const uint32_t* indices, const uint32_t& size);
   };
 }

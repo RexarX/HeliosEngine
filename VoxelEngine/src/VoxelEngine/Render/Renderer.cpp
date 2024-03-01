@@ -6,7 +6,7 @@
 
 namespace VoxelEngine 
 {
-	Renderer::SceneData* Renderer::s_SceneData = new Renderer::SceneData;
+	std::unique_ptr<Renderer::SceneData> Renderer::s_SceneData = std::make_unique<Renderer::SceneData>();
 
 	void Renderer::Init()
 	{

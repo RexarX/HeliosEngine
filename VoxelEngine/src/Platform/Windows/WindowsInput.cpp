@@ -8,7 +8,7 @@
 
 namespace VoxelEngine
 {
-	Input* Input::s_Instance = new WindowsInput();
+	std::unique_ptr<Input> Input::s_Instance = std::make_unique<WindowsInput>();
 
 	bool WindowsInput::IsKeyPressedImpl(KeyCode keycode)
 	{
