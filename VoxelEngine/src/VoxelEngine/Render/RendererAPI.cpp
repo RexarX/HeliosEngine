@@ -1,8 +1,6 @@
 #include "RendererAPI.h"
 
-#include "Platform/OpenGL/OpenGLRendererAPI.h"
-
-namespace VoxelEngine 
+namespace VoxelEngine
 {
-	RendererAPI::API s_API = RendererAPI::API::OpenGL;
+	RendererAPI::API RendererAPI::s_API = RendererAPI::API::OpenGL;
 }
