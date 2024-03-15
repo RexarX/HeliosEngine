@@ -1,7 +1,5 @@
 #include <VoxelEngine.h>
 
-#include "Platform/OpenGL/OpenGLShader.h"
-
 class GameLayer : public VoxelEngine::Layer
 {
 public:
@@ -73,6 +71,12 @@ public:
 	{
 
 	}
+
+private:
+	std::shared_ptr<VoxelEngine::VertexArray> m_SquareVA;
+	std::shared_ptr<VoxelEngine::Shader> m_FlatColorShader;
+
+	std::shared_ptr<VoxelEngine::Texture> m_CheckerboardTexture;
 };
 
 VoxelEngine::Application* VoxelEngine::CreateApplication()

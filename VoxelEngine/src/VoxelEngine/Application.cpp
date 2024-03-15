@@ -2,11 +2,7 @@
 
 #include "Application.h"
 
-#include "Input.h"
-
-#include "Log.h"
-
-#include "VoxelEngine/Render/Renderer.h"
+#include "Render/Renderer.h"
 
 #include <glfw/glfw3.h>
 

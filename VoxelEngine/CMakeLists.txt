@@ -107,6 +107,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/vendor/glad/include;"
     "${CMAKE_CURRENT_SOURCE_DIR}/vendor/imgui;"
     "${CMAKE_CURRENT_SOURCE_DIR}/vendor/glm"
+    "${CMAKE_CURRENT_SOURCE_DIR}/vendor/stb_image;"
 )
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE
@@ -178,6 +179,7 @@ endif()
 target_link_libraries(${PROJECT_NAME} PUBLIC
 	glad
     glfw
+    stb_image
 )
 
 set(ADDITIONAL_LIBRARY_DEPENDENCIES
