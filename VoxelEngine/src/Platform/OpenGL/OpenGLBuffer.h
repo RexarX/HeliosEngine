@@ -7,6 +7,7 @@ namespace VoxelEngine
 	class OpenGLVertexBuffer : public VertexBuffer
 	{
 	public:
+		OpenGLVertexBuffer(uint32_t size);
 		OpenGLVertexBuffer(const float* vertices, const uint32_t& size);
 		virtual ~OpenGLVertexBuffer();
 
