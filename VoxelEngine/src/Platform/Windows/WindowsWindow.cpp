@@ -47,6 +47,10 @@ namespace VoxelEngine
       s_GLFWInitialized = true;
     }
 
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
+		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
 		glfwMakeContextCurrent(m_Window);
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
@@ -54,11 +58,14 @@ namespace VoxelEngine
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 
+		glViewport(0, 0, props.Width, props.Height);
+
     glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height)
       {
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 				data.Width = width;
 				data.Height = height;
+				glViewport(0, 0, width, height);
 
 				WindowResizeEvent event(width, height);
 				data.EventCallback(event);

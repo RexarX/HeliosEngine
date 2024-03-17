@@ -44,6 +44,9 @@ namespace VoxelEngine
 
 		glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+		float borderColor[] = { 1.0f, 1.0f, 0.0f, 1.0f };
+		glTexParameterfv(m_RendererID, GL_TEXTURE_BORDER_COLOR, borderColor);
 	}
 
 	OpenGLTexture::OpenGLTexture(const std::string& path)
