@@ -29,6 +29,7 @@ namespace VoxelEngine
 
 		virtual ~Window() = default;
 
+		virtual void ClearBuffer() = 0;
 		virtual void OnUpdate() = 0;
 
 		virtual uint16_t GetWidth() const = 0;

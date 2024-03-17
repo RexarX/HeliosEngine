@@ -23,8 +23,9 @@ public:
 	void OnUpdate(VoxelEngine::Timestep ts) override
 	{
 		m_CameraController.OnUpdate(ts);
-		glm::vec3 test = { 0.0f, 0.0f, 0.0f };
-		VoxelEngine::Renderer::DrawCube(test, test, m_CheckerboardTexture);
+		glm::vec3 pos = { 0.0f, 0.0f, -3.0f };
+		glm::vec3 rot = { 0.0f,0.0f,0.0f };
+		VoxelEngine::Renderer::DrawCube(pos, rot, m_CheckerboardTexture);
 	}
 
 	void OnEvent(VoxelEngine::Event& event) override

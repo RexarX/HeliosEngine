@@ -59,6 +59,8 @@ namespace VoxelEngine
 	void Application::Run()
 	{
 		while (m_Running) {
+			m_Window->ClearBuffer();
+
 			float time = (float)glfwGetTime();
 			Timestep timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;

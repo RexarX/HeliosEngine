@@ -12,6 +12,7 @@ namespace VoxelEngine
 		WindowsWindow(const WindowProps& props);
 		virtual ~WindowsWindow();
 
+		void ClearBuffer() override;
 		void OnUpdate() override;
 
 		inline uint16_t GetWidth() const override { return m_Data.Width; }
