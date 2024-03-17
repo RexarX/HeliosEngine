@@ -1,4 +1,6 @@
 #include <VoxelEngine.h>
+#include <glm/glm.hpp>
+
 
 class GameLayer : public VoxelEngine::Layer
 {
@@ -21,6 +23,8 @@ public:
 	void OnUpdate(VoxelEngine::Timestep ts) override
 	{
 		m_CameraController.OnUpdate(ts);
+		glm::vec3 test = { 0.0f, 0.0f, 0.0f };
+		VoxelEngine::Renderer::DrawCube(test, test, m_CheckerboardTexture);
 	}
 
 	void OnEvent(VoxelEngine::Event& event) override

@@ -4,8 +4,13 @@
 
 #include "Platform/OpenGL/OpenGLShader.h"
 
-namespace VoxelEngine 
+namespace VoxelEngine
 {
+	struct Cube 
+	{
+
+	};
+
 	std::unique_ptr<Renderer::SceneData> Renderer::s_SceneData = std::make_unique<Renderer::SceneData>();
 
 	void Renderer::Init()
@@ -30,5 +35,10 @@ namespace VoxelEngine
 
 		vertexArray->Bind();
 		RenderCommand::DrawIndexed(vertexArray);
+	}
+
+	void Renderer::DrawCube(const glm::vec3& transform, const glm::vec3& rotation, const std::shared_ptr<Texture>& texture) 
+	{
+
 	}
 }

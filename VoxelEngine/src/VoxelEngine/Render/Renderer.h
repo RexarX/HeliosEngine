@@ -24,6 +24,8 @@ namespace VoxelEngine
 
 		inline static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
 
+		static void DrawCube(const glm::vec3& transform, const glm::vec3& rotation, const std::shared_ptr<Texture>& texture);
+
 	private:
 		struct SceneData
 		{
