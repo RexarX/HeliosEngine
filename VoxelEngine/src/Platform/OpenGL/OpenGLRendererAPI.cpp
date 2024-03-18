@@ -12,6 +12,8 @@ namespace VoxelEngine
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		glEnable(GL_DEPTH_TEST);
+
+		SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 	}
 
 	void OpenGLRendererAPI::SetClearColor(const glm::vec4& color)

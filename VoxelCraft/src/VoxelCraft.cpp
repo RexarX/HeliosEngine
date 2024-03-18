@@ -24,9 +24,6 @@ public:
 	{
 		m_CameraController.OnUpdate(ts);
 
-		VoxelEngine::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
-		VoxelEngine::RenderCommand::Clear();
-
 		glm::vec3 pos = { 0.0f, 0.0f, -3.0f };
 		glm::vec3 rot = { 0.0f, 0.0f, 0.0f };
 
@@ -93,7 +90,7 @@ class VoxelCraft : public VoxelEngine::Application
 {
 public:
 	VoxelCraft()
-	{
+		: VoxelEngine::Application() {
 		PushLayer(new GameLayer());
 		//PushOverlay(new VoxelEngine::ImGuiLayer());
 	}

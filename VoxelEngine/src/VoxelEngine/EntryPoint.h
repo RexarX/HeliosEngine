@@ -1,10 +1,8 @@
 #pragma once
 
-#include "VoxelEngine/Application.h"
+#include "Application.h"
 
 #ifdef VE_PLATFORM_WINDOWS
-
-extern VoxelEngine::Application* VoxelEngine::CreateApplication();
 
 int main(int argc, char** argv)
 {
