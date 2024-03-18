@@ -7,7 +7,22 @@
 
 namespace VoxelEngine
 {
-  static float vertices[180] = {
+	struct Cube 
+	{
+    std::shared_ptr<VertexArray> CubeVertex;
+    std::shared_ptr<Shader> CubeShader;
+    std::shared_ptr<Shader> CubeTextureShader;
+	};
+
+	std::unique_ptr<Renderer::SceneData> Renderer::s_SceneData = std::make_unique<Renderer::SceneData>();
+
+  static std::unique_ptr<Cube> s_Cube;
+
+	void Renderer::Init()
+	{
+		RenderCommand::Init();
+
+    const float vertices[180] = {
     -0.5f, 0.5f, 0.5f, 0.0f, 1.0f, // top left front 
     -0.5f, -0.5f, 0.5f, 0.0f, 0.0f, // bottom left front 
     0.5f, -0.5f, 0.5f, 1.0f, 0.0f, // bottom right front 
@@ -49,30 +64,40 @@ namespace VoxelEngine
     -0.5f, -0.5f, -0.5f, 0.0f, 1.0f, // top left bottom
     0.5f, -0.5f, -0.5f, 1.0f, 1.0f, // top right bottom
     0.5f, -0.5f, 0.5f, 1.0f, 0.0f, // bottom right bottom
-  };
+    };
 
-  
+    uint32_t CubeIndices[6 * 6] = {
+        0, 1, 3, 3, 1, 2,
+        1, 5, 2, 2, 5, 6,
+        5, 4, 6, 6, 4, 7,
+        4, 0, 7, 7, 0, 3,
+        3, 2, 7, 7, 2, 6,
+        4, 5, 0, 0, 5, 1
+    };
 
-	struct Cube 
-	{
-    
-	};
+    s_Cube = std::make_unique<Cube>();
 
-	std::unique_ptr<Renderer::SceneData> Renderer::s_SceneData = std::make_unique<Renderer::SceneData>();
+    s_Cube->CubeVertex = VertexArray::Create();
 
-	void Renderer::Init()
-	{
-		RenderCommand::Init();
+    std::shared_ptr<VertexBuffer> CubeVB = VertexBuffer::Create(vertices, sizeof(vertices));
+    CubeVB->SetLayout({
+      { ShaderDataType::Float3, "a_Pos" },
+      { ShaderDataType::Float2, "a_TexCoord" }
+     });
 
-    std::unique_ptr<VertexArray> vao = VertexArray::Create();
-    vao.get()->Bind();
+    s_Cube->CubeVertex->AddVertexBuffer(CubeVB);
 
-    unsigned int VBO;
-    glGenBuffers(1, &VBO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    std::shared_ptr<IndexBuffer> CubeIB = IndexBuffer::Create(CubeIndices, sizeof(CubeIndices) / sizeof(uint32_t));
+    s_Cube->CubeVertex->SetIndexBuffer(CubeIB);
 
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    s_Cube->CubeShader = Shader::Create("C:/Cube.glsl");
+    s_Cube->CubeShader->Bind();
 	}
+
+  void Renderer::OnWindowResize(const uint32_t& width, const uint32_t& height)
+  {
+    RenderCommand::SetViewport(0, 0, width, height);
+  }
 
 	void Renderer::BeginScene(Camera& camera)
 	{
@@ -95,20 +120,7 @@ namespace VoxelEngine
 
 	void Renderer::DrawCube(const glm::vec3& transform, const glm::vec3& rotation, const std::shared_ptr<Texture>& texture) 
 	{
-    std::shared_ptr<Shader> cubeShader = Shader::Create("C:/VoxelCraft/VoxelCraft/Assets/Shaders/Cube.glsl");
-
-    //vertices
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
-
-    //vertex texture
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
-    glEnableVertexAttribArray(1);
-
-    cubeShader.get()->Bind();
-
-    texture.get()->Bind();
-
-    glDrawArrays(GL_TRIANGLES, 0, 36);
+    texture->Bind();
+    Submit(s_Cube->CubeShader, s_Cube->CubeVertex);
 	}
 }

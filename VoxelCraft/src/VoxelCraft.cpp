@@ -13,7 +13,7 @@ public:
 
 	void OnAttach() override
 	{
-		m_CheckerboardTexture = VoxelEngine::Texture::Create("Assets/Textures/Checkerboard.png");
+		m_CheckerboardTexture = VoxelEngine::Texture::Create("../../../Assets/Textures/Checkerboard.png");
 	}
 
 	void OnDetach() override
@@ -24,7 +24,7 @@ public:
 	{
 		m_CameraController.OnUpdate(ts);
 		glm::vec3 pos = { 0.0f, 0.0f, -3.0f };
-		glm::vec3 rot = { 0.0f,0.0f,0.0f };
+		glm::vec3 rot = { 0.0f, 0.0f, 0.0f };
 		VoxelEngine::Renderer::DrawCube(pos, rot, m_CheckerboardTexture);
 	}
 
