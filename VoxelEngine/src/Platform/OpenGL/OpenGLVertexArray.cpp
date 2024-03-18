@@ -56,13 +56,14 @@ namespace VoxelEngine
 
 		const auto& layout = vertexBuffer->GetLayout();
 		for (const auto& element : layout) {
-			glEnableVertexAttribArray(m_VertexBufferIndex);
 			glVertexAttribPointer(m_VertexBufferIndex,
 				element.GetComponentCount(),
 				ShaderDataTypeToOpenGLBaseType(element.type_),
 				element.normalized_ ? GL_TRUE : GL_FALSE,
 				layout.GetStride(),
 				(const void*)element.offset_);
+			glEnableVertexAttribArray(m_VertexBufferIndex);
+			
 
 			++m_VertexBufferIndex;
 		}
