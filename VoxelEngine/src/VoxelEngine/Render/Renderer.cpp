@@ -1,13 +1,14 @@
 #include "vepch.h"
 
 #include "Renderer.h"
-#include <glad/glad.h>
 
-#include "Platform/OpenGL/OpenGLShader.h"
+#include "VertexArray.h"
+
+#include <Platform/OpenGL/OpenGLShader.h>
 
 namespace VoxelEngine
 {
-	struct Cube 
+	struct Cube
 	{
     std::shared_ptr<VertexArray> CubeVertex;
     std::shared_ptr<Shader> CubeShader;

@@ -1,7 +1,5 @@
 #pragma once
 
-#include "vepch.h"
-
 #include <glm/glm.hpp>
 
 #include "VertexArray.h"
@@ -24,6 +22,8 @@ namespace VoxelEngine
 		virtual void Clear() = 0;
 
 		virtual void DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray) = 0;
+
+		static std::unique_ptr<RendererAPI> Create();
 
 		inline static API GetAPI() { return s_API; }
 

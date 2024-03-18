@@ -23,9 +23,16 @@ public:
 	void OnUpdate(VoxelEngine::Timestep ts) override
 	{
 		m_CameraController.OnUpdate(ts);
+
+		VoxelEngine::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
+		VoxelEngine::RenderCommand::Clear();
+
 		glm::vec3 pos = { 0.0f, 0.0f, -3.0f };
 		glm::vec3 rot = { 0.0f, 0.0f, 0.0f };
+
+		VoxelEngine::Renderer::BeginScene(m_CameraController.GetCamera());
 		VoxelEngine::Renderer::DrawCube(pos, rot, m_CheckerboardTexture);
+		VoxelEngine::Renderer::EndScene();
 	}
 
 	void OnEvent(VoxelEngine::Event& event) override
