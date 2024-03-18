@@ -1,5 +1,7 @@
 #pragma once
 
+#include "VoxelEngine/Application.h"
+
 #ifdef VE_PLATFORM_WINDOWS
 
 extern VoxelEngine::Application* VoxelEngine::CreateApplication();

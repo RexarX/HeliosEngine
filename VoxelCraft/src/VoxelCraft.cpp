@@ -1,23 +1,37 @@
 #include <VoxelEngine.h>
+#include <glm/glm.hpp>
 
-#include "Platform/OpenGL/OpenGLShader.h"
 
 class GameLayer : public VoxelEngine::Layer
 {
 public:
 	GameLayer()
-		: Layer("Game")
+		: Layer("VoxelCraft"), m_CameraController(1280.0f / 720.0f)
 	{
 
 	}
 
-	void OnUpdate() override
+	void OnAttach() override
 	{
+		m_CheckerboardTexture = VoxelEngine::Texture::Create("Assets/Textures/Checkerboard.png");
+	}
 
+	void OnDetach() override
+	{
+	}
+
+	void OnUpdate(VoxelEngine::Timestep ts) override
+	{
+		m_CameraController.OnUpdate(ts);
+		glm::vec3 pos = { 0.0f, 0.0f, -3.0f };
+		glm::vec3 rot = { 0.0f,0.0f,0.0f };
+		VoxelEngine::Renderer::DrawCube(pos, rot, m_CheckerboardTexture);
 	}
 
 	void OnEvent(VoxelEngine::Event& event) override
 	{
+		m_CameraController.OnEvent(event);
+
 		if (event.GetEventType() == VoxelEngine::EventType::MouseMoved) {
 			VoxelEngine::MouseMovedEvent& e = (VoxelEngine::MouseMovedEvent&)event;
 			VE_TRACE("Mouse moved to {0}x{1}!", e.GetX(), e.GetY());
@@ -58,6 +72,14 @@ public:
 			VE_TRACE("Window closed");
 		}
 	}
+
+private:
+	VoxelEngine::CameraController m_CameraController;
+
+	std::shared_ptr<VoxelEngine::VertexArray> m_SquareVA;
+	std::shared_ptr<VoxelEngine::Shader> m_FlatColorShader;
+
+	std::shared_ptr<VoxelEngine::Texture> m_CheckerboardTexture;
 };
 
 class VoxelCraft : public VoxelEngine::Application

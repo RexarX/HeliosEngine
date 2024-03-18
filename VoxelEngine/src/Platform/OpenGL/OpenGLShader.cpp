@@ -8,6 +8,8 @@
 
 #include <glm/gtc/type_ptr.hpp>
 
+#include <iostream>
+
 namespace VoxelEngine 
 {
 	static GLenum ShaderTypeFromString(const std::string& type)

@@ -9,6 +9,8 @@ namespace VoxelEngine
 	public:
 		Camera(const float& left, const float& right, const float& bottom, const float& top);
 
+		void SetProjection(const float& left, const float& right, const float& bottom, const float& top);
+
 		const glm::vec3& GetPosition() const { return m_Position; }
 		void SetPosition(const glm::vec3& position) { m_Position = position; RecalculateViewMatrix(); }
 

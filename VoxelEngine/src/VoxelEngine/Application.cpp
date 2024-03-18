@@ -2,11 +2,7 @@
 
 #include "Application.h"
 
-#include "Input.h"
-
-#include "Log.h"
-
-#include "VoxelEngine/Render/Renderer.h"
+#include "Render/Renderer.h"
 
 #include <glfw/glfw3.h>
 
@@ -63,6 +59,8 @@ namespace VoxelEngine
 	void Application::Run()
 	{
 		while (m_Running) {
+			m_Window->ClearBuffer();
+
 			float time = (float)glfwGetTime();
 			Timestep timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;

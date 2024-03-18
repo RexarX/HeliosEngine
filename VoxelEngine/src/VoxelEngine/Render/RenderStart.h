@@ -12,6 +12,12 @@ namespace VoxelEngine
 			s_RendererAPI->Init();
 		}
 
+		static void SetViewport(const uint32_t& x, const uint32_t& y, const uint32_t& width, const uint32_t& height)
+		{
+			s_RendererAPI->SetViewport(x, y, width, height);
+		}
+
+
 		inline static void SetClearColor(const glm::vec4& color)
 		{
 			s_RendererAPI->SetClearColor(color);
