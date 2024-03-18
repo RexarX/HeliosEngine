@@ -88,11 +88,11 @@ namespace VoxelEngine
 
     s_Cube->CubeVertex->AddVertexBuffer(CubeVB);
 
-    std::shared_ptr<IndexBuffer> CubeIB = IndexBuffer::Create(CubeIndices, sizeof(CubeIndices) / sizeof(uint32_t));
-    s_Cube->CubeVertex->SetIndexBuffer(CubeIB);
+    //std::shared_ptr<IndexBuffer> CubeIB = IndexBuffer::Create(CubeIndices, sizeof(CubeIndices) / sizeof(uint32_t));
+    //s_Cube->CubeVertex->SetIndexBuffer(CubeIB);
 
     s_Cube->CubeShader = Shader::Create("C:/Cube.glsl");
-    s_Cube->CubeShader->Bind();
+    //s_Cube->CubeShader->Bind();
 	}
 
   void Renderer::OnWindowResize(const uint32_t& width, const uint32_t& height)
@@ -107,15 +107,15 @@ namespace VoxelEngine
 
 	void Renderer::EndScene()
 	{
+
 	}
 
 	void Renderer::Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray, const glm::mat4& transform)
 	{
 		shader->Bind();
-		std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("u_ViewProjection", s_SceneData->ViewProjectionMatrix);
-		std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("u_Transform", transform);
+		//std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("u_ViewProjection", s_SceneData->ViewProjectionMatrix);
+		//std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("u_Transform", transform);
 
-		vertexArray->Bind();
 		RenderCommand::DrawIndexed(vertexArray);
 	}
 
