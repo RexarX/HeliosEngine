@@ -8,8 +8,6 @@
 
 #include <glm/gtc/type_ptr.hpp>
 
-#include <iostream>
-
 namespace VoxelEngine 
 {
 	static GLenum ShaderTypeFromString(const std::string& type)
@@ -50,6 +48,7 @@ namespace VoxelEngine
 
 	std::string OpenGLShader::ReadFile(const std::string& filepath)
 	{
+		VE_INFO("Reading file '{0}'", filepath);
 		std::string result;
 		std::ifstream in(filepath, std::ios::in | std::ios::binary);
 		if (in) {
@@ -127,7 +126,7 @@ namespace VoxelEngine
 		glLinkProgram(program);
 
 		GLint isLinked = 0;
-		glGetProgramiv(program, GL_LINK_STATUS, (int*)&isLinked);
+		glGetProgramiv(program, GL_LINK_STATUS, &isLinked);
 		if (isLinked == GL_FALSE) {
 			GLint maxLength = 0;
 			glGetProgramiv(program, GL_INFO_LOG_LENGTH, &maxLength);

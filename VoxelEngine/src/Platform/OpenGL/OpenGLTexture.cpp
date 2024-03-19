@@ -6,6 +6,7 @@
 
 namespace VoxelEngine
 {
+#define ROOT std::filesystem::current_path().parent_path().string()
 	static GLenum VoxelEngineImageFormatToGLDataFormat(ImageFormat format)
 	{
 		switch (format)

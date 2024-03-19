@@ -26,7 +26,7 @@ namespace VoxelEngine
     std::shared_ptr<IndexBuffer> CubeIndex;
 
     std::shared_ptr<Shader> CubeShader;
-    std::shared_ptr<Shader> CubeTextureShader;
+    std::shared_ptr<Texture> CubeTexture;
   };
 
 	std::unique_ptr<Renderer::SceneData> Renderer::s_SceneData = std::make_unique<Renderer::SceneData>();
@@ -92,7 +92,7 @@ namespace VoxelEngine
     s_Cube.CubeBuffer->Unbind();
     s_Cube.CubeVertex->Unbind();
 
-    s_Cube.CubeShader = Shader::Create("C:/Cube.glsl");
+    s_Cube.CubeShader = Shader::Create(ROOT + "/VoxelEngine/Assets/Shaders/Cube.glsl");
 	}
 
   void Renderer::OnWindowResize(const uint32_t& width, const uint32_t& height)
@@ -129,6 +129,7 @@ namespace VoxelEngine
 
 	void Renderer::DrawCube(const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& size, const std::shared_ptr<Texture>& texture)
 	{
+    texture->Bind();
     glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), size);
     transform = glm::rotate(transform, glm::radians(rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
     transform = glm::rotate(transform, glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));

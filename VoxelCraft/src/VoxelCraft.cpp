@@ -13,7 +13,7 @@ public:
 
 	void OnAttach() override
 	{
-		m_CheckerboardTexture = VoxelEngine::Texture::Create("../../../Assets/Textures/Checkerboard.png");
+		m_CheckerboardTexture = VoxelEngine::Texture::Create(ROOT + "/VoxelCraft/Assets/Textures/Checkerboard.png");
 	}
 
 	void OnDetach() override
@@ -26,7 +26,7 @@ public:
 
 		glm::vec3 pos = { 0.0f, 0.0f, -10.0f };
 		glm::vec3 rotation = { 30.0f, 30.0f, 0.0f };
-		glm::vec3 size = { 1.0f, 1.0f, 1.0f };
+		glm::vec3 size = { 2.0f, 2.0f, 2.0f };
 
 		VoxelEngine::Renderer::BeginScene(m_CameraController.GetCamera());
 		VoxelEngine::Renderer::DrawCube(pos, rotation, size, m_CheckerboardTexture);
@@ -91,7 +91,8 @@ class VoxelCraft : public VoxelEngine::Application
 {
 public:
 	VoxelCraft()
-		: VoxelEngine::Application() {
+		: VoxelEngine::Application()
+	{
 		PushLayer(new GameLayer());
 		//PushOverlay(new VoxelEngine::ImGuiLayer());
 	}
