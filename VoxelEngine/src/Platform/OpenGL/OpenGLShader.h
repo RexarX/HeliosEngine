@@ -28,7 +28,7 @@ namespace VoxelEngine
 		void UploadUniformFloat4(const std::string& name, const glm::vec4& value);
 
 		void UploadUniformMat3(const std::string& name, const glm::mat3& matrix);
-		void UploadUniformMat4(const std::string& name, const glm::mat4& matrix);
+		virtual void UploadUniformMat4(const std::string& name, const glm::mat4& matrix) override;
 
 	private:
 		std::string ReadFile(const std::string& filepath);

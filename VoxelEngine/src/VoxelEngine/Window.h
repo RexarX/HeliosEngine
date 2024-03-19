@@ -14,7 +14,7 @@ namespace VoxelEngine
 		uint16_t Width;
 		uint16_t Height;
 
-		WindowProps(const std::string& title = "Voxel Engine",
+		WindowProps(const std::string& title = "VoxelCraft",
 			uint16_t width = 1280,
 			uint16_t height = 720)
 			: Title(title), Width(width), Height(height)

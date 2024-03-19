@@ -7,7 +7,8 @@
 #include "VertexArray.h"
 
 #include <Platform/OpenGL/OpenGLShader.h>
-#include <glm/ext/matrix_transform.hpp>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 namespace VoxelEngine
 {
@@ -37,14 +38,14 @@ namespace VoxelEngine
 		RenderCommand::Init();
 
     const float vertices[8 * 3] = {
-        -1, -1,  0.5, //0
-         1, -1,  0.5, //1
-        -1,  1,  0.5, //2
-         1,  1,  0.5, //3
-        -1, -1, -0.5, //4
-         1, -1, -0.5, //5
-        -1,  1, -0.5, //6
-         1,  1, -0.5  //7
+        -0.5, -0.5,  0.5, //0
+         0.5, -0.5,  0.5, //0.5
+        -0.5,  0.5,  0.5, //2
+         0.5,  0.5,  0.5, //3
+        -0.5, -0.5, -0.5, //4
+         0.5, -0.5, -0.5, //5
+        -0.5,  0.5, -0.5, //6
+         0.5,  0.5, -0.5  //7
     };
 
     const uint32_t CubeIndices[6 * 6] = {
@@ -111,20 +112,33 @@ namespace VoxelEngine
     s_Cube.CubeIndex->Unbind();
 	}
 
-	void Renderer::Submit()
+	void Renderer::Submit(glm::mat4& projection, glm::mat4& view, glm::mat4& transform)
 	{
 		s_Cube.CubeShader->Bind();
     s_Cube.CubeVertex->Bind();
     s_Cube.CubeIndex->Bind();
 
+    s_Cube.CubeShader->UploadUniformMat4("u_Projection", s_SceneData->ViewProjectionMatrix);
+    s_Cube.CubeShader->UploadUniformMat4("u_View", view);
+    s_Cube.CubeShader->UploadUniformMat4("u_Transform", transform);
+
 		RenderCommand::DrawIndexed(s_Cube.CubeVertex, 36);
 	}
 
-	void Renderer::DrawCube(const glm::vec3& position, const glm::vec3& size, const std::shared_ptr<Texture>& texture)
+	void Renderer::DrawCube(const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& size, const std::shared_ptr<Texture>& texture)
 	{
-    glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
-      * glm::scale(glm::mat4(1.0f), size);
+    glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), size);
+    transform = glm::rotate(transform, glm::radians(rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
+    transform = glm::rotate(transform, glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
+    transform = glm::rotate(transform, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
 
-    Submit();
+    glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
+
+    glm::mat4 projection;
+    projection = glm::perspective(glm::radians(45.0f), 1280.0f  / 720.0f, 0.1f, 100.0f);
+
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+    Submit(projection, view, transform);
 	}
 }

@@ -59,7 +59,7 @@ namespace VoxelEngine
 	void Application::Run()
 	{
 		while (m_Running) {
-			RenderCommand::Clear(); //works
+			RenderCommand::Clear(); 
 
 			float time = (float)glfwGetTime();
 			Timestep timestep = time - m_LastFrameTime;
@@ -68,7 +68,7 @@ namespace VoxelEngine
 			for (Layer* layer : m_LayerStack) {
 				layer->OnUpdate(timestep);
 			}
-			m_Window->OnUpdate(); //works
+			m_Window->OnUpdate(); 
 		}
 	}
 }

@@ -24,11 +24,12 @@ public:
 	{
 		m_CameraController.OnUpdate(ts);
 
-		glm::vec3 pos = { 0.0f, 0.0f, 1.0f };
-		glm::vec3 size = { 0.5f, 0.5f, 0.5f };
+		glm::vec3 pos = { 0.0f, 0.0f, -1.0f };
+		glm::vec3 rotation = { 30.0f, 30.0f, 0.0f };
+		glm::vec3 size = { 1.0f, 1.0f, 1.0f };
 
 		VoxelEngine::Renderer::BeginScene(m_CameraController.GetCamera());
-		VoxelEngine::Renderer::DrawCube(pos, size, m_CheckerboardTexture);
+		VoxelEngine::Renderer::DrawCube(pos, rotation, size, m_CheckerboardTexture);
 		VoxelEngine::Renderer::EndScene();
 	}
 

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <glm/glm.hpp>
+
 namespace VoxelEngine
 {
 	class Shader
@@ -14,6 +16,8 @@ namespace VoxelEngine
 
 		static std::shared_ptr<Shader> Create(const std::string& filepath);
 		static std::shared_ptr<Shader> Create(const std::string& name, const std::string& vertex, const std::string& fragment);
+
+		virtual void UploadUniformMat4(const std::string& name, const glm::mat4& matrix) = 0;
 	};
 
 	class ShaderLibrary
