@@ -86,6 +86,7 @@ namespace VoxelEngine
     s_Cube.CubeIndex = IndexBuffer::Create(CubeIndices, 36);
     s_Cube.CubeVertex->SetIndexBuffer(s_Cube.CubeIndex);
 
+
     s_Cube.CubeVertex->AddVertexBuffer(s_Cube.CubeBuffer);
     
     s_Cube.CubeBuffer->Unbind();
