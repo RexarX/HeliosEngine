@@ -118,9 +118,10 @@ namespace VoxelEngine
     s_Cube.CubeVertex->Bind();
     s_Cube.CubeIndex->Bind();
 
-    s_Cube.CubeShader->UploadUniformMat4("u_Projection", s_SceneData->ViewProjectionMatrix);
+    s_Cube.CubeShader->UploadUniformMat4("u_Projection", projection);
     s_Cube.CubeShader->UploadUniformMat4("u_View", view);
     s_Cube.CubeShader->UploadUniformMat4("u_Transform", transform);
+
 
 		RenderCommand::DrawIndexed(s_Cube.CubeVertex, 36);
 	}

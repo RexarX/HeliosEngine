@@ -24,7 +24,7 @@ public:
 	{
 		m_CameraController.OnUpdate(ts);
 
-		glm::vec3 pos = { 0.0f, 0.0f, -1.0f };
+		glm::vec3 pos = { 0.0f, 0.0f, -10.0f };
 		glm::vec3 rotation = { 30.0f, 30.0f, 0.0f };
 		glm::vec3 size = { 1.0f, 1.0f, 1.0f };
 
