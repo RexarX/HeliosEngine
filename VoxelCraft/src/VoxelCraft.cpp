@@ -22,14 +22,14 @@ public:
 
 	void OnUpdate(VoxelEngine::Timestep ts) override
 	{
-		//m_CameraController.OnUpdate(ts);
+		m_CameraController.OnUpdate(ts);
 
-		glm::vec3 pos = { 0.0f, 0.0f, -3.0f };
-		glm::vec3 rot = { 0.0f, 0.0f, 0.0f };
+		glm::vec3 pos = { 0.0f, 0.0f, 1.0f };
+		glm::vec3 size = { 0.5f, 0.5f, 0.5f };
 
-		//VoxelEngine::Renderer::BeginScene(m_CameraController.GetCamera());
-		VoxelEngine::Renderer::DrawCube(pos, rot, m_CheckerboardTexture);
-		//VoxelEngine::Renderer::EndScene();
+		VoxelEngine::Renderer::BeginScene(m_CameraController.GetCamera());
+		VoxelEngine::Renderer::DrawCube(pos, size, m_CheckerboardTexture);
+		VoxelEngine::Renderer::EndScene();
 	}
 
 	void OnEvent(VoxelEngine::Event& event) override

@@ -20,11 +20,11 @@ namespace VoxelEngine
 
 		static void OnWindowResize(const uint32_t& width, const uint32_t& height);
 
-		static void Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray, const glm::mat4& transform = glm::mat4(1.0f));
+		static void Submit();
 
 		inline static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
 
-		static void DrawCube(const glm::vec3& transform, const glm::vec3& rotation, const std::shared_ptr<Texture>& texture);
+		static void DrawCube(const glm::vec3& position, const glm::vec3& size, const std::shared_ptr<Texture>& texture);
 
 	private:
 		struct SceneData
