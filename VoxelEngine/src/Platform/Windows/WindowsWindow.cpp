@@ -56,7 +56,7 @@ namespace VoxelEngine
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		VE_CORE_ASSERT(status, "Failed to initialize Glad!");
 		glfwSetWindowUserPointer(m_Window, &m_Data);
-		SetVSync(true);
+		SetVSync(false);
 
 		glViewport(0, 0, props.Width, props.Height);
 

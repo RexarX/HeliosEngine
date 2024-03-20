@@ -65,6 +65,8 @@ namespace VoxelEngine
 			Timestep timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
 
+			VE_INFO("Framerate: {0}fps", timestep.GetFramerate());
+
 			for (Layer* layer : m_LayerStack) {
 				layer->OnUpdate(timestep);
 			}

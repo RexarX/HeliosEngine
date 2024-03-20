@@ -25,12 +25,25 @@ public:
 		m_CameraController.OnUpdate(ts);
 
 		glm::vec3 pos = { 0.0f, 0.0f, -10.0f };
-		glm::vec3 rotation = { 30.0f, 30.0f, 0.0f };
+		static glm::vec3 rotation = { 0.0f, 0.0f, 0.0f };
 		glm::vec3 size = { 2.0f, 2.0f, 2.0f };
+
+		if (rotation.x >= 360.0f) {
+      rotation.x = 0.0f;
+    }
+    if (rotation.y >= 360.0f) {
+      rotation.y = 0.0f;
+    }
+    if (rotation.z >= 360.0f) {
+      rotation.z = 0.0f;
+    }
 
 		VoxelEngine::Renderer::BeginScene(m_CameraController.GetCamera());
 		VoxelEngine::Renderer::DrawCube(pos, rotation, size, m_CheckerboardTexture);
 		VoxelEngine::Renderer::EndScene();
+
+		rotation.x += 30.0f * ts;
+    rotation.y += 30.0f * ts;
 	}
 
 	void OnEvent(VoxelEngine::Event& event) override
@@ -80,9 +93,6 @@ public:
 
 private:
 	VoxelEngine::CameraController m_CameraController;
-
-	std::shared_ptr<VoxelEngine::VertexArray> m_SquareVA;
-	std::shared_ptr<VoxelEngine::Shader> m_FlatColorShader;
 
 	std::shared_ptr<VoxelEngine::Texture> m_CheckerboardTexture;
 };

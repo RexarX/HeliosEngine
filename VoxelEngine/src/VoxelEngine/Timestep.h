@@ -14,6 +14,7 @@ namespace VoxelEngine
 
 		float GetSeconds() const { return m_Time; }
 		float GetMilliseconds() const { return m_Time * 1000.0f; }
+		float GetFramerate() const { return 1000.0f / GetMilliseconds(); }
 
 	private:
 		float m_Time;
