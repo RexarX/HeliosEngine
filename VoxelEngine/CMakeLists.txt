@@ -10,30 +10,30 @@ file(GLOB_RECURSE src__Platform__OpenGL
     "src/Platform/OpenGL/*.cpp"
     "src/Platform/OpenGL/*.h"
 )
-source_group("src\\Platform\\OpenGL" FILES ${src__Platform__OpenGL})
+source_group("src/Platform/OpenGL" FILES ${src__Platform__OpenGL})
 
 file(GLOB_RECURSE src__Platform__Windows
     "src/Platform/Windows/*.cpp"
     "src/Platform/Windows/*.h"
 )
-source_group("src\\Platform\\Windows" FILES ${src__Platform__Windows})
+source_group("src/Platform/Windows" FILES ${src__Platform__Windows})
 
 file(GLOB_RECURSE src__VoxelEngine
     "src/VoxelEngine/*.cpp"
     "src/VoxelEngine/*.h"
 )
-source_group("src\\VoxelEngine" FILES ${src__VoxelEngine})
+source_group("src/VoxelEngine" FILES ${src__VoxelEngine})
 
 file(GLOB_RECURSE src__VoxelEngine__Events
     "src/VoxelEngine/Events/*.h"
 )
-source_group("src\\VoxelEngine\\Events" FILES ${src__VoxelEngine__Events})
+source_group("src/VoxelEngine/Events" FILES ${src__VoxelEngine__Events})
 
 file(GLOB_RECURSE src__VoxelEngine__Render
     "src/VoxelEngine/Render/*.cpp"
     "src/VoxelEngine/Render/*.h"
 )
-source_group("src\\VoxelEngine\\Render" FILES ${src__VoxelEngine__Render})
+source_group("src/VoxelEngine/Render" FILES ${src__VoxelEngine__Render})
 
 set(ALL_FILES
     ${src}
@@ -67,15 +67,15 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
-    OUTPUT_DIRECTORY_DEBUG   "${CMAKE_CURRENT_SOURCE_DIR}/../bin/Debug-windows-x86_64/VoxelCraft/"
-    OUTPUT_DIRECTORY_DIST    "${CMAKE_CURRENT_SOURCE_DIR}/../bin/Dist-windows-x86_64/VoxelCraft/"
-    OUTPUT_DIRECTORY_RELEASE "${CMAKE_CURRENT_SOURCE_DIR}/../bin/Release-windows-x86_64/VoxelCraft/"
+    OUTPUT_DIRECTORY_DEBUG   "${CMAKE_CURRENT_SOURCE_DIR}/../bin/Debug-windows-x86_64/"
+    OUTPUT_DIRECTORY_DIST    "${CMAKE_CURRENT_SOURCE_DIR}/../bin/Dist-windows-x86_64/"
+    OUTPUT_DIRECTORY_RELEASE "${CMAKE_CURRENT_SOURCE_DIR}/../bin/Release-windows-x86_64/"
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
-    ARCHIVE_OUTPUT_DIRECTORY_DEBUG   "${CMAKE_CURRENT_SOURCE_DIR}/../bin/Debug-windows-x86_64/VoxelCraft"
-    ARCHIVE_OUTPUT_DIRECTORY_DIST    "${CMAKE_CURRENT_SOURCE_DIR}/../bin/Dist-windows-x86_64/VoxelCraft"
-    ARCHIVE_OUTPUT_DIRECTORY_RELEASE "${CMAKE_CURRENT_SOURCE_DIR}/../bin/Release-windows-x86_64/VoxelCraft"
+    ARCHIVE_OUTPUT_DIRECTORY_DEBUG   "${CMAKE_CURRENT_SOURCE_DIR}/../bin/Debug-windows-x86_64"
+    ARCHIVE_OUTPUT_DIRECTORY_DIST    "${CMAKE_CURRENT_SOURCE_DIR}/../bin/Dist-windows-x86_64"
+    ARCHIVE_OUTPUT_DIRECTORY_RELEASE "${CMAKE_CURRENT_SOURCE_DIR}/../bin/Release-windows-x86_64"
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
