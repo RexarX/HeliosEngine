@@ -14,6 +14,7 @@ namespace VoxelEngine
 
 		void ClearBuffer() override;
 		void OnUpdate() override;
+		void PollEvents() override;
 
 		inline uint16_t GetWidth() const override { return m_Data.Width; }
 		inline uint16_t GetHeight() const override { return m_Data.Height; }
@@ -21,6 +22,10 @@ namespace VoxelEngine
 		inline void SetEventCallback(const EventCallbackFn& callback) override { m_Data.EventCallback = callback; }
 
 		void SetVSync(bool enabled) override;
+		void SetFramerate(const float& framerate) override;
+
+		float GetFramerate() const override;
+
 		bool IsVSync() const override;
 
 		inline virtual void* GetNativeWindow() const { return m_Window; }
@@ -36,6 +41,7 @@ namespace VoxelEngine
 		{
 			std::string Title;
 			uint16_t Width, Height;
+			float Framerate;
 			bool VSync;
 
 			EventCallbackFn EventCallback;

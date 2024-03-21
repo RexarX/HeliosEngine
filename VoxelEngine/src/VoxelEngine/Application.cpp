@@ -58,19 +58,33 @@ namespace VoxelEngine
 
 	void Application::Run()
 	{
+		Timestep timestep;
+		Timestep frametime;
+		float time;
+
+		m_FramerateLimit = 1.0f / m_Window->GetFramerate();
+
 		while (m_Running) {
 			RenderCommand::Clear(); 
 
-			float time = (float)glfwGetTime();
-			Timestep timestep = time - m_LastFrameTime;
-			m_LastFrameTime = time;
-
-			VE_INFO("Framerate: {0}fps", timestep.GetFramerate());
-
+			time = (float)glfwGetTime();
+			timestep = time - m_LastFrameUpdate;
+			frametime = time - m_LastFrameTime;
+			
 			for (Layer* layer : m_LayerStack) {
 				layer->OnUpdate(timestep);
 			}
-			m_Window->OnUpdate(); 
+
+			m_Window->PollEvents();
+
+			if (time - m_LastFrameTime >= m_FramerateLimit) {
+				VE_INFO("Framerate: {0}fps", frametime.GetFramerate());
+
+				m_Window->OnUpdate();
+				m_LastFrameTime = time;
+			}
+
+			m_LastFrameUpdate = time;
 		}
 	}
 }

@@ -38,6 +38,10 @@ namespace VoxelEngine
 
 		float m_LastFrameTime = 0.0f;
 
+		float m_LastFrameUpdate = 0.0f;
+
+		float m_FramerateLimit = 0.0f;
+
 		bool m_Running = true;
 
 		static Application* s_Instance;

@@ -1,6 +1,6 @@
 #include <VoxelEngine.h>
-#include <glm/glm.hpp>
 
+#include <glm/glm.hpp>
 
 class GameLayer : public VoxelEngine::Layer
 {
@@ -13,6 +13,9 @@ public:
 
 	void OnAttach() override
 	{
+		VoxelEngine::Application::Application::Get().GetWindow().SetVSync(false);
+		VoxelEngine::Application::Application::Get().GetWindow().SetFramerate(60.0f);
+
 		m_CheckerboardTexture = VoxelEngine::Texture::Create(ROOT + "/VoxelCraft/Assets/Textures/Checkerboard.png");
 	}
 
