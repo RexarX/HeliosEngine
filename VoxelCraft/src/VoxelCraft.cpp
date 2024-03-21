@@ -6,15 +6,16 @@ class GameLayer : public VoxelEngine::Layer
 {
 public:
 	GameLayer()
-		: Layer("VoxelCraft"), m_CameraController(1280.0f / 720.0f)
+		: Layer("VoxelCraft"), m_CameraController(VoxelEngine::Application::Get().GetWindow().GetWidth() / 
+			(float)VoxelEngine::Application::Get().GetWindow().GetHeight())
 	{
 
 	}
 
 	void OnAttach() override
 	{
-		VoxelEngine::Application::Application::Get().GetWindow().SetVSync(false);
-		VoxelEngine::Application::Application::Get().GetWindow().SetFramerate(60.0f);
+		VoxelEngine::Application::Get().GetWindow().SetVSync(false);
+		VoxelEngine::Application::Get().GetWindow().SetFramerate(60.0f);
 
 		m_CheckerboardTexture = VoxelEngine::Texture::Create(ROOT + "/VoxelCraft/Assets/Textures/Checkerboard.png");
 	}
@@ -32,13 +33,13 @@ public:
 		glm::vec3 size = { 2.0f, 2.0f, 2.0f };
 
 		if (rotation.x >= 360.0f) {
-      rotation.x = 0.0f;
+			rotation.x = 360.0f - rotation.x;
     }
     if (rotation.y >= 360.0f) {
-      rotation.y = 0.0f;
+			rotation.y = 360.0f - rotation.y;
     }
     if (rotation.z >= 360.0f) {
-      rotation.z = 0.0f;
+      rotation.z = 360.0f - rotation.z;
     }
 
 		VoxelEngine::Renderer::BeginScene(m_CameraController.GetCamera());
