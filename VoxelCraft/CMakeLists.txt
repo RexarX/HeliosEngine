@@ -38,13 +38,13 @@ get_property(MSVC_RUNTIME_LIBRARY_DEFAULT TARGET ${PROJECT_NAME} PROPERTY MSVC_R
 
 string(CONCAT "MSVC_RUNTIME_LIBRARY_STR"
     $<$<CONFIG:Debug>:
-        MultiThreadedDebug
+        MultiThreadedDebugDLL
     >
     $<$<CONFIG:Dist>:
-        MultiThreaded
+        MultiThreadedDLL
     >
     $<$<CONFIG:Release>:
-        MultiThreaded
+        MultiThreadedDLL
     >
     $<$<NOT:$<OR:$<CONFIG:Debug>,$<CONFIG:Dist>,$<CONFIG:Release>>>:${MSVC_RUNTIME_LIBRARY_DEFAULT}>
 )
@@ -78,18 +78,14 @@ if(MSVC)
             /ZI
         >
         $<$<CONFIG:Dist>:
-            /Gm-;
-            /Ox;
+            /O2;
             /Oi;
-            /GF;
             /Gy;
             ${DEFAULT_CXX_DEBUG_INFORMATION_FORMAT}
         >
         $<$<CONFIG:Release>:
-            /Gm-;
-            /Ox;
+            /O2;
             /Oi;
-            /GF;
             /Gy;
             ${DEFAULT_CXX_DEBUG_INFORMATION_FORMAT}
         >
@@ -103,13 +99,13 @@ if(MSVC)
             /INCREMENTAL
         >
         $<$<CONFIG:Dist>:
-            /DEBUG:FULL;
+            /DEBUG:NONE;
             /OPT:REF;
             /OPT:ICF;
             /INCREMENTAL:NO
         >
         $<$<CONFIG:Release>:
-            /DEBUG:FULL;
+            /DEBUG:NONE;
             /OPT:REF;
             /OPT:ICF;
             /INCREMENTAL:NO

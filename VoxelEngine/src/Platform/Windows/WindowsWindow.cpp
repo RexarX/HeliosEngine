@@ -57,6 +57,8 @@ namespace VoxelEngine
 		VE_CORE_ASSERT(status, "Failed to initialize Glad!");
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 
+		SetVSync(true);
+
 		glViewport(0, 0, props.Width, props.Height);
 
     glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height)
@@ -159,7 +161,6 @@ namespace VoxelEngine
 
 	void WindowsWindow::ClearBuffer() 
 	{
-		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 

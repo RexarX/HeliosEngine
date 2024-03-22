@@ -13,13 +13,6 @@
 
 namespace VoxelEngine
 {
-  struct CubeData
-  {
-    glm::vec3 Position;
-    glm::vec4 Color;
-    glm::vec2 TexCoord;
-  };
-
   struct Cube
   {
     std::shared_ptr<VertexArray> CubeVertex;
@@ -93,7 +86,7 @@ namespace VoxelEngine
     s_Cube.CubeBuffer->Unbind();
     s_Cube.CubeVertex->Unbind();
 
-    s_Cube.CubeShader = Shader::Create(ROOT + "/VoxelEngine/Assets/Shaders/Cube.glsl");
+    s_Cube.CubeShader = Shader::Create(ROOT + "VoxelEngine/Assets/Shaders/Cube.glsl");
 	}
 
   void Renderer::OnWindowResize(const uint32_t& width, const uint32_t& height)
@@ -139,7 +132,7 @@ namespace VoxelEngine
     glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
 
     glm::mat4 projection;
-    projection = glm::perspective(glm::radians(45.0f), 1280.0f  / 720.0f, 0.1f, 100.0f);
+    projection = glm::perspective(glm::radians(45.0f), 1280.0f / 720.0f, 0.1f, 100.0f);
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 

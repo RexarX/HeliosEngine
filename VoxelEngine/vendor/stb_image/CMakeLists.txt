@@ -6,16 +6,59 @@ add_library(stb_image STATIC ${STB_IMAGE})
 
 string(CONCAT "MSVC_RUNTIME_LIBRARY_STR"
     $<$<CONFIG:Debug>:
-        MultiThreadedDebug
+        MultiThreadedDebugDLL
     >
     $<$<CONFIG:Dist>:
-        MultiThreaded
+        MultiThreadedDLL
     >
     $<$<CONFIG:Release>:
-        MultiThreaded
+        MultiThreadedDLL
     >
     $<$<NOT:$<OR:$<CONFIG:Debug>,$<CONFIG:Dist>,$<CONFIG:Release>>>:${MSVC_RUNTIME_LIBRARY_DEFAULT}>
 )
 set_target_properties(stb_image PROPERTIES MSVC_RUNTIME_LIBRARY ${MSVC_RUNTIME_LIBRARY_STR})
+
+if(MSVC)
+    target_compile_options(stb_image PRIVATE
+        $<$<CONFIG:Debug>:
+            /Od;
+            /ZI
+        >
+        $<$<CONFIG:Dist>:
+            /O2;
+            /Oi;
+            /Gy;
+            ${DEFAULT_CXX_DEBUG_INFORMATION_FORMAT}
+        >
+        $<$<CONFIG:Release>:
+            /O2;
+            /Oi;
+            /Gy;
+            ${DEFAULT_CXX_DEBUG_INFORMATION_FORMAT}
+        >
+        /W1;
+        ${DEFAULT_CXX_EXCEPTION_HANDLING};
+        /Y-
+    )
+    target_link_options(stb_image PRIVATE
+        $<$<CONFIG:Debug>:
+            /DEBUG;
+            /INCREMENTAL
+        >
+        $<$<CONFIG:Dist>:
+            /DEBUG:NONE;
+            /OPT:REF;
+            /OPT:ICF;
+            /INCREMENTAL:NO
+        >
+        $<$<CONFIG:Release>:
+            /DEBUG:NONE;
+            /OPT:REF;
+            /OPT:ICF;
+            /INCREMENTAL:NO
+        >
+        /SUBSYSTEM:CONSOLE
+    )
+endif()
 
 target_include_directories(stb_image PUBLIC)

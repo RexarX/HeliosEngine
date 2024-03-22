@@ -9,15 +9,18 @@ public:
 		: Layer("VoxelCraft"), m_CameraController(VoxelEngine::Application::Get().GetWindow().GetWidth() / 
 			(float)VoxelEngine::Application::Get().GetWindow().GetHeight())
 	{
-
+		m_Cube.Position = { 0.0f, 0.0f, 0.0f };
+    m_Cube.Size = { 0.0f, 0.0f, 0.0f };
+    m_Cube.Rotation = { 0.0f, 0.0f, 0.0f };
+		m_Cube.TexCoord = { 0.0f, 0.0f };
 	}
 
 	void OnAttach() override
 	{
-		VoxelEngine::Application::Get().GetWindow().SetVSync(false);
-		VoxelEngine::Application::Get().GetWindow().SetFramerate(60.0f);
+		VoxelEngine::Application::Get().GetWindow().SetVSync(true);
+		//VoxelEngine::Application::Get().GetWindow().SetFramerate(144.0f);
 
-		m_CheckerboardTexture = VoxelEngine::Texture::Create(ROOT + "/VoxelCraft/Assets/Textures/Checkerboard.png");
+		m_CheckerboardTexture = VoxelEngine::Texture::Create(ROOT + "VoxelCraft/Assets/Textures/Checkerboard.png");
 	}
 
 	void OnDetach() override
@@ -28,26 +31,21 @@ public:
 	{
 		m_CameraController.OnUpdate(ts);
 
-		glm::vec3 pos = { 0.0f, 0.0f, -10.0f };
-		static glm::vec3 rotation = { 0.0f, 0.0f, 0.0f };
-		glm::vec3 size = { 2.0f, 2.0f, 2.0f };
-
-		if (rotation.x >= 360.0f) {
-			rotation.x = 360.0f - rotation.x;
+		m_Cube.Position = { 0.0f, 0.0f, -10.0f };
+		m_Cube.Size = { 2.0f, 2.0f, 2.0f };
+		
+		if (m_Cube.Rotation.x >= 360.0f) {
+			m_Cube.Rotation.x = 360.0f - m_Cube.Rotation.x;
     }
-    if (rotation.y >= 360.0f) {
-			rotation.y = 360.0f - rotation.y;
+    if (m_Cube.Rotation.y >= 360.0f) {
+			m_Cube.Rotation.y = 360.0f - m_Cube.Rotation.y;
     }
-    if (rotation.z >= 360.0f) {
-      rotation.z = 360.0f - rotation.z;
+    if (m_Cube.Rotation.z >= 360.0f) {
+      m_Cube.Rotation.z = 360.0f - m_Cube.Rotation.z;
     }
 
-		VoxelEngine::Renderer::BeginScene(m_CameraController.GetCamera());
-		VoxelEngine::Renderer::DrawCube(pos, rotation, size, m_CheckerboardTexture);
-		VoxelEngine::Renderer::EndScene();
-
-		rotation.x += 30.0f * ts;
-    rotation.y += 30.0f * ts;
+		m_Cube.Rotation.x += 30.0f * ts;
+    m_Cube.Rotation.y += 30.0f * ts;
 	}
 
 	void OnEvent(VoxelEngine::Event& event) override
@@ -95,7 +93,24 @@ public:
 		}
 	}
 
+	void Draw() override
+	{
+		VoxelEngine::Renderer::BeginScene(m_CameraController.GetCamera());
+		VoxelEngine::Renderer::DrawCube(m_Cube.Position, m_Cube.Rotation, m_Cube.Size, m_CheckerboardTexture);
+		VoxelEngine::Renderer::EndScene();
+	}
+
 private:
+	struct CubeData
+	{
+		glm::vec3 Position;
+		glm::vec3 Size;
+		glm::vec3 Rotation;
+		glm::vec2 TexCoord;
+	};
+
+	CubeData m_Cube;
+
 	VoxelEngine::CameraController m_CameraController;
 
 	std::shared_ptr<VoxelEngine::Texture> m_CheckerboardTexture;

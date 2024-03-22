@@ -50,16 +50,22 @@ include(CMake/GlobalSettingsInclude.cmake OPTIONAL)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
-set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Release>:Release>")
-set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Dist>:Dist>")
-
 include_directories(VoxelEngine/src)
 include_directories(VoxelEngine/src/VoxelEngine)
 include_directories(VoxelEngine/src/Platform)
+
+option(BUILD_SHARED_LIBS "Build shared libraries" ON)
+set(BUILD_SHARED_LIBS OFF)
+
+option(GLM_ENABLE_FAST_MATH "Enable fast math optimizations" OFF)
+set(GLM_ENABLE_FAST_MATH ON)
+
+option(SPDLOG_BUILD_SHARED "Build shared library" OFF)
+set(SPDLOG_BUILD_SHARED ON)
 
 add_subdirectory(VoxelCraft)
 add_subdirectory(VoxelEngine)
 add_subdirectory(VoxelEngine/vendor/glad)
 add_subdirectory(VoxelEngine/vendor/stb_image)
 add_subdirectory(VoxelEngine/vendor/glfw)
+add_subdirectory(VoxelEngine/vendor/glm)

@@ -65,12 +65,12 @@ namespace VoxelEngine
 		m_FramerateLimit = 1.0f / m_Window->GetFramerate();
 
 		while (m_Running) {
-			RenderCommand::Clear(); 
+			m_Window->ClearBuffer();
 
 			time = (float)glfwGetTime();
 			timestep = time - m_LastFrameUpdate;
 			frametime = time - m_LastFrameTime;
-			
+
 			for (Layer* layer : m_LayerStack) {
 				layer->OnUpdate(timestep);
 			}
@@ -78,10 +78,14 @@ namespace VoxelEngine
 			m_Window->PollEvents();
 
 			if (time - m_LastFrameTime >= m_FramerateLimit) {
-				VE_INFO("Framerate: {0}fps", frametime.GetFramerate());
+				for (Layer* layer : m_LayerStack) {
+					layer->Draw();
+				}
 
 				m_Window->OnUpdate();
 				m_LastFrameTime = time;
+
+				VE_INFO("Framerate: {0}fps", frametime.GetFramerate());
 			}
 
 			m_LastFrameUpdate = time;

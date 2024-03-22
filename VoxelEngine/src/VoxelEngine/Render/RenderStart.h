@@ -22,11 +22,6 @@ namespace VoxelEngine
 			s_RendererAPI->SetClearColor(color);
 		}
 
-		inline static void Clear()
-		{
-			s_RendererAPI->Clear();
-		}
-
 		inline static void DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray, uint32_t indexCount)
 		{
 			s_RendererAPI->DrawIndexed(vertexArray, indexCount);
