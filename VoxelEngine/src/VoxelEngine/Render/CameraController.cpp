@@ -7,12 +7,12 @@
 
 namespace VoxelEngine
 {
-	CameraController::CameraController(const float& aspectRatio, const bool& rotation)
+	CameraController::CameraController(const float aspectRatio, const bool rotation)
 		: m_AspectRatio(aspectRatio), m_Camera(-m_AspectRatio * m_ZoomLevel, m_AspectRatio* m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel), m_Rotation(rotation)
 	{
 	}
 
-	void CameraController::OnUpdate(Timestep ts)
+	void CameraController::OnUpdate(const Timestep ts)
 	{
 		if (Input::IsKeyPressed(Key::A)) {
 			m_CameraPosition.x -= cos(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
@@ -54,7 +54,7 @@ namespace VoxelEngine
 		dispatcher.Dispatch<WindowResizeEvent>(VE_BIND_EVENT_FN(CameraController::OnWindowResized));
 	}
 
-	void CameraController::OnResize(const float& width, const float& height)
+	void CameraController::OnResize(const float width, const float height)
 	{
 		m_AspectRatio = width / height;
 		m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);

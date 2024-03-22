@@ -18,7 +18,7 @@ namespace VoxelEngine
 		static void BeginScene(Camera& camera);
 		static void EndScene();
 
-		static void OnWindowResize(const uint32_t& width, const uint32_t& height);
+		static void OnWindowResize(const uint32_t width, const uint32_t height);
 
 		static void Submit(glm::mat4& projection, glm::mat4& view, glm::mat4& transform);
 

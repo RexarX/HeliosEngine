@@ -12,18 +12,18 @@ namespace VoxelEngine
 	class CameraController
 	{
 	public:
-		CameraController(const float& aspectRatio, const bool& rotation = false);
+		CameraController(const float aspectRatio, const bool rotation = false);
 
 		void OnUpdate(Timestep ts);
 		void OnEvent(Event& event);
 
-		void OnResize(const float& width, const float& height);
+		void OnResize(const float width, const float height);
 
 		Camera& GetCamera() { return m_Camera; }
 		const Camera& GetCamera() const { return m_Camera; }
 
 		float GetZoomLevel() const { return m_ZoomLevel; }
-		void SetZoomLevel(const float& level) { m_ZoomLevel = level; }
+		void SetZoomLevel(const float level) { m_ZoomLevel = level; }
 
 	private:
 		bool OnMouseScrolled(MouseScrolledEvent& event);

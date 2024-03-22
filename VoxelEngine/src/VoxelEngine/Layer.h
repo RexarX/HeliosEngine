@@ -16,7 +16,7 @@ namespace VoxelEngine
 
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}
-		virtual void OnUpdate(Timestep ts) {}
+		virtual void OnUpdate(const Timestep ts) {}
 		virtual void OnEvent(Event& event) {}
 
 		virtual void Draw() {}

@@ -16,13 +16,13 @@ namespace VoxelEngine
 		void OnUpdate() override;
 		void PollEvents() override;
 
-		inline uint16_t GetWidth() const override { return m_Data.Width; }
-		inline uint16_t GetHeight() const override { return m_Data.Height; }
+		inline uint32_t GetWidth() const override { return m_Data.Width; }
+		inline uint32_t GetHeight() const override { return m_Data.Height; }
 
 		inline void SetEventCallback(const EventCallbackFn& callback) override { m_Data.EventCallback = callback; }
 
-		void SetVSync(bool enabled) override;
-		void SetFramerate(const float& framerate) override;
+		void SetVSync(const bool enabled) override;
+		void SetFramerate(const float framerate) override;
 
 		float GetFramerate() const override;
 
@@ -40,7 +40,7 @@ namespace VoxelEngine
 		struct WindowData
 		{
 			std::string Title;
-			uint16_t Width, Height;
+			uint32_t Width, Height;
 			float Framerate;
 			bool VSync;
 

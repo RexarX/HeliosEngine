@@ -5,6 +5,7 @@
 #include <utility>
 #include <algorithm>
 #include <functional>
+#include <thread>
 
 #include <cstdint>
 #include <string>

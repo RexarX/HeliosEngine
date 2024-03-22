@@ -160,13 +160,13 @@ namespace VoxelEngine
 		glUseProgram(0);
 	}
 
-	void OpenGLShader::UploadUniformInt(const std::string& name, const int& value)
+	void OpenGLShader::UploadUniformInt(const std::string& name, const int value)
 	{
 		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniform1i(location, value);
 	}
 
-	void OpenGLShader::UploadUniformFloat(const std::string& name, const float& value)
+	void OpenGLShader::UploadUniformFloat(const std::string& name, const float value)
 	{
 		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniform1f(location, value);

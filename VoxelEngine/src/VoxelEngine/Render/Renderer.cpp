@@ -89,7 +89,7 @@ namespace VoxelEngine
     s_Cube.CubeShader = Shader::Create(ROOT + "VoxelEngine/Assets/Shaders/Cube.glsl");
 	}
 
-  void Renderer::OnWindowResize(const uint32_t& width, const uint32_t& height)
+  void Renderer::OnWindowResize(const uint32_t width, const uint32_t height)
   {
     RenderCommand::SetViewport(0, 0, width, height);
   }

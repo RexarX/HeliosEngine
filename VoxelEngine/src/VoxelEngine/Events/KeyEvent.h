@@ -14,7 +14,7 @@ namespace VoxelEngine
 		EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput);
 
 	protected:
-		KeyEvent(KeyCode keycode)
+		KeyEvent(const KeyCode keycode)
 			: m_KeyCode(keycode) 
 		{
 		}
@@ -25,7 +25,7 @@ namespace VoxelEngine
 	class VOXELENGINE_API KeyPressedEvent : public KeyEvent
 	{
 	public:
-		KeyPressedEvent(KeyCode keycode, int repeatCount)
+		KeyPressedEvent(const KeyCode keycode, const int repeatCount)
 			: KeyEvent(keycode), m_RepeatCount(repeatCount) 
 		{
 		}
@@ -48,7 +48,7 @@ namespace VoxelEngine
 	class VOXELENGINE_API KeyReleasedEvent : public KeyEvent
 	{
 	public:
-		KeyReleasedEvent(KeyCode keycode)
+		KeyReleasedEvent(const KeyCode keycode)
 			: KeyEvent(keycode) 
 		{
 		}

@@ -12,7 +12,7 @@ namespace VoxelEngine
 {
   static bool s_GLFWInitialized = false;
 
-	static void GLFWErrorCallback(int error, const char* description)
+	static void GLFWErrorCallback(const int error, const char* description)
 	{
 		VE_CORE_ERROR("GLFW Error ({0}): {1}", error, description);
 	}
@@ -61,7 +61,7 @@ namespace VoxelEngine
 
 		glViewport(0, 0, props.Width, props.Height);
 
-    glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height)
+    glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, const int width, const int height)
       {
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 				data.Width = width;
@@ -79,7 +79,7 @@ namespace VoxelEngine
 				data.EventCallback(event);
 			});
 
-		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
+		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, const int key, const int scancode, const int action, const int mods)
 			{
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
@@ -108,7 +108,7 @@ namespace VoxelEngine
 				}
 			});
 
-		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods)
+		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, const int button, const int action, const int mods)
 			{
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
@@ -137,7 +137,7 @@ namespace VoxelEngine
 				}
 			});
 
-		glfwSetScrollCallback(m_Window, [](GLFWwindow* window, double xOffset, double yOffset)
+		glfwSetScrollCallback(m_Window, [](GLFWwindow* window, const double xOffset, const double yOffset)
 			{
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
@@ -145,7 +145,7 @@ namespace VoxelEngine
 				data.EventCallback(event);
 			});
 
-		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, double xPos, double yPos)
+		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, const double xPos, const double yPos)
 			{
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
@@ -174,7 +174,7 @@ namespace VoxelEngine
 		glfwSwapBuffers(m_Window);
   }
 
-  void WindowsWindow::SetVSync(bool enabled)
+  void WindowsWindow::SetVSync(const bool enabled)
   {
 		if (enabled) { glfwSwapInterval(1); }
 		else { glfwSwapInterval(0); }
@@ -182,7 +182,7 @@ namespace VoxelEngine
 		m_Data.VSync = enabled;
   }
 
-  void WindowsWindow::SetFramerate(const float& framerate)
+  void WindowsWindow::SetFramerate(const float framerate)
   {
     m_Data.Framerate = framerate;
   }

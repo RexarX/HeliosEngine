@@ -2,7 +2,7 @@
 
 namespace VoxelEngine
 {
-	using MouseCode = uint16_t;
+	using MouseCode = uint32_t;
 
 	namespace Mouse
 	{

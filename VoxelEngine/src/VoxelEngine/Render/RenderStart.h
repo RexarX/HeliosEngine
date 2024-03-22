@@ -12,7 +12,7 @@ namespace VoxelEngine
 			s_RendererAPI->Init();
 		}
 
-		inline static void SetViewport(const uint32_t& x, const uint32_t& y, const uint32_t& width, const uint32_t& height)
+		inline static void SetViewport(const uint32_t x, const uint32_t y, const uint32_t width, const uint32_t height)
 		{
 			s_RendererAPI->SetViewport(x, y, width, height);
 		}
@@ -22,7 +22,7 @@ namespace VoxelEngine
 			s_RendererAPI->SetClearColor(color);
 		}
 
-		inline static void DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray, uint32_t indexCount)
+		inline static void DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray, const uint32_t indexCount)
 		{
 			s_RendererAPI->DrawIndexed(vertexArray, indexCount);
 		}

@@ -10,14 +10,14 @@ namespace VoxelEngine
 {
 	std::unique_ptr<Input> Input::s_Instance = std::make_unique<WindowsInput>();
 
-	bool WindowsInput::IsKeyPressedImpl(KeyCode keycode)
+	bool WindowsInput::IsKeyPressedImpl(const KeyCode keycode)
 	{
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 		auto state = glfwGetKey(window, keycode);
 		return state == GLFW_PRESS || state == GLFW_REPEAT;
 	}
 
-	bool WindowsInput::IsMouseButtonPressedImpl(MouseCode button)
+	bool WindowsInput::IsMouseButtonPressedImpl(const MouseCode button)
 	{
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 		auto state = glfwGetKey(window, button);

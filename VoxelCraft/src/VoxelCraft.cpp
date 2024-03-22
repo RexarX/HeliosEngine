@@ -27,7 +27,7 @@ public:
 	{
 	}
 
-	void OnUpdate(VoxelEngine::Timestep ts) override
+	void OnUpdate(const VoxelEngine::Timestep ts) override
 	{
 		m_CameraController.OnUpdate(ts);
 
