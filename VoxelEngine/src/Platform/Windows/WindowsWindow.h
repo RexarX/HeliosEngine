@@ -22,9 +22,9 @@ namespace VoxelEngine
 		inline void SetEventCallback(const EventCallbackFn& callback) override { m_Data.EventCallback = callback; }
 
 		void SetVSync(const bool enabled) override;
-		void SetFramerate(const float framerate) override;
+		void SetFramerate(const double framerate) override;
 
-		float GetFramerate() const override;
+		double GetFramerate() const override;
 
 		bool IsVSync() const override;
 
@@ -41,7 +41,7 @@ namespace VoxelEngine
 		{
 			std::string Title;
 			uint32_t Width, Height;
-			float Framerate;
+			double Framerate;
 			bool VSync;
 
 			EventCallbackFn EventCallback;

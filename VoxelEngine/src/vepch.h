@@ -18,6 +18,8 @@
 
 #include "VoxelEngine/Log.h"
 
+#include "VoxelEngine/Utils/Timer.h"
+
 #include "VoxelEngine/Input.h"
 #include "VoxelEngine/KeyCodes.h"
 #include "VoxelEngine/MouseButtonCodes.h"

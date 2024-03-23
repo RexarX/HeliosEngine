@@ -37,10 +37,10 @@ namespace VoxelEngine
 		virtual uint32_t GetHeight() const = 0;
 
 		virtual void SetEventCallback(const EventCallbackFn& callback) = 0;
-		virtual void SetVSync(bool enabled) = 0;
-		virtual void SetFramerate(const float framerate) = 0;
+		virtual void SetVSync(const bool enabled) = 0;
+		virtual void SetFramerate(const double framerate) = 0;
 
-		virtual float GetFramerate() const = 0;
+		virtual double GetFramerate() const = 0;
 
 		virtual bool IsVSync() const = 0;
 

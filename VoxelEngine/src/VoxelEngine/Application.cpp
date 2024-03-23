@@ -4,6 +4,8 @@
 
 #include "Render/Renderer.h"
 
+#include "Utils/sleep_util.h"
+
 #include <glfw/glfw3.h>
 
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
@@ -56,39 +58,39 @@ namespace VoxelEngine
 		return true;
 	}
 
+	void Application::SleepFor(const double seconds)
+	{
+		usleep(seconds * 1000000);
+	}
+
 	void Application::Run()
 	{
 		Timestep timestep;
-		Timestep frametime;
-		float time;
+		double frameTime;
 
-		m_FramerateLimit = 1.0f / m_Window->GetFramerate();
+		m_FramerateLimit = 1 / m_Window->GetFramerate();
 
 		while (m_Running) {
+			m_Timer.Start();
+			
 			m_Window->ClearBuffer();
-
-			time = (float)glfwGetTime();
-			timestep = time - m_LastFrameUpdate;
-			frametime = time - m_LastFrameTime;
+			m_Window->PollEvents();
 
 			for (Layer* layer : m_LayerStack) {
 				layer->OnUpdate(timestep);
 			}
 
-			m_Window->PollEvents();
+			m_Window->OnUpdate();
 
-			if (time - m_LastFrameTime >= m_FramerateLimit) {
-				for (Layer* layer : m_LayerStack) {
-					layer->Draw();
+			if (m_Window->GetHeight() != 0 && m_Window->GetWidth() != 0) {
+				frameTime = m_Timer.Stop();
+				if (m_FramerateLimit != 0 && (frameTime < m_FramerateLimit)) {
+					SleepFor(m_FramerateLimit - frameTime);
 				}
 
-				m_Window->OnUpdate();
-				m_LastFrameTime = time;
-
-				VE_INFO("Framerate: {0}fps", frametime.GetFramerate());
+				timestep = m_Timer.Stop();
+				VE_TRACE("Framerate: {0}fps", timestep.GetFramerate());
 			}
-
-			m_LastFrameUpdate = time;
 		}
 	}
 }

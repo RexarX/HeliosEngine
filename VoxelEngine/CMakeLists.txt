@@ -35,6 +35,11 @@ file(GLOB_RECURSE src__VoxelEngine__Render
 )
 source_group("src/VoxelEngine/Render" FILES ${src__VoxelEngine__Render})
 
+file(GLOB_RECURSE src__VoxelEngine__Utils
+    "src/VoxelEngine/Events/*.h"
+)
+source_group("src/VoxelEngine/Utils" FILES ${src__VoxelEngine__Utils})
+
 set(ALL_FILES
     ${src}
     ${src__Platform__OpenGL}
@@ -42,6 +47,7 @@ set(ALL_FILES
     ${src__VoxelEngine}
     ${src__VoxelEngine__Events}
     ${src__VoxelEngine__Render}
+    ${src__VoxelEngine__Utils}
 )
 
 add_library(${PROJECT_NAME} SHARED ${ALL_FILES})

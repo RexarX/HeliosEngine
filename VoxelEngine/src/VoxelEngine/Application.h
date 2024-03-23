@@ -7,6 +7,7 @@
 #include "LayerStack.h"
 
 #include "Timestep.h"
+#include "Utils/Timer.h"
 
 #include "Events/Event.h"
 #include "Events/ApplicationEvent.h"
@@ -32,15 +33,16 @@ namespace VoxelEngine
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
 
+		void SleepFor(const double seconds);
+
 	private:
 		std::unique_ptr<Window> m_Window;
+
 		LayerStack m_LayerStack;
 
-		float m_LastFrameTime = 0.0f;
+		Timer m_Timer;
 
-		float m_LastFrameUpdate = 0.0f;
-
-		float m_FramerateLimit = 0.0f;
+		double m_FramerateLimit = 0.0;
 
 		bool m_Running = true;
 

@@ -182,12 +182,12 @@ namespace VoxelEngine
 		m_Data.VSync = enabled;
   }
 
-  void WindowsWindow::SetFramerate(const float framerate)
+  void WindowsWindow::SetFramerate(const double framerate)
   {
     m_Data.Framerate = framerate;
   }
 
-	float WindowsWindow::GetFramerate() const
+	double WindowsWindow::GetFramerate() const
 	{
 		return m_Data.Framerate;
 	}
