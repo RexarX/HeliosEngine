@@ -82,15 +82,13 @@ namespace VoxelEngine
 
 			m_Window->OnUpdate();
 
-			if (m_Window->GetHeight() != 0 && m_Window->GetWidth() != 0) {
-				frameTime = m_Timer.Stop();
-				if (m_FramerateLimit != 0 && (frameTime < m_FramerateLimit)) {
-					SleepFor(m_FramerateLimit - frameTime);
-				}
-
-				timestep = m_Timer.Stop();
-				VE_TRACE("Framerate: {0}fps", timestep.GetFramerate());
+			frameTime = m_Timer.Stop();
+			if (m_FramerateLimit != 0 && (frameTime < m_FramerateLimit)) {
+				SleepFor(m_FramerateLimit - frameTime);
 			}
+
+			timestep = m_Timer.Stop();
+			VE_TRACE("Framerate: {0}fps", timestep.GetFramerate());
 		}
 	}
 }
