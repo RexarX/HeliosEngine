@@ -60,7 +60,7 @@ namespace VoxelEngine
 
 	void Application::SleepFor(const double seconds)
 	{
-		usleep(seconds * 1000000);
+		sleep(seconds);
 	}
 
 	void Application::Run()
