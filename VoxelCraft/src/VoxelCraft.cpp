@@ -17,8 +17,8 @@ public:
 
 	void OnAttach() override
 	{
-		VoxelEngine::Application::Get().GetWindow().SetVSync(false);
-		VoxelEngine::Application::Get().GetWindow().SetFramerate(60);
+		//VoxelEngine::Application::Get().GetWindow().SetVSync(false);
+		//VoxelEngine::Application::Get().GetWindow().SetFramerate(60.0);
 
 		m_CheckerboardTexture = VoxelEngine::Texture::Create(ROOT + "VoxelCraft/Assets/Textures/Checkerboard.png");
 	}
@@ -37,10 +37,6 @@ public:
 		if (m_Cube.Rotation.x >= 360.0f) { m_Cube.Rotation.x = 360.0f - m_Cube.Rotation.x; }
     else if (m_Cube.Rotation.y >= 360.0f) { m_Cube.Rotation.y = 360.0f - m_Cube.Rotation.y; }
     else if (m_Cube.Rotation.z >= 360.0f) { m_Cube.Rotation.z = 360.0f - m_Cube.Rotation.z; }
-
-		VoxelEngine::Renderer::BeginScene(m_CameraController.GetCamera());
-		VoxelEngine::Renderer::DrawCube(m_Cube.Position, m_Cube.Rotation, m_Cube.Size, m_CheckerboardTexture);
-		VoxelEngine::Renderer::EndScene();
 
 		m_Cube.Rotation.x += 30.0f * ts;
     m_Cube.Rotation.y += 30.0f * ts;
@@ -89,6 +85,13 @@ public:
 			VoxelEngine::WindowCloseEvent& e = (VoxelEngine::WindowCloseEvent&)event;
 			VE_TRACE("Window closed");
 		}
+	}
+
+	void Draw() override
+	{
+		VoxelEngine::Renderer::BeginScene(m_CameraController.GetCamera());
+		VoxelEngine::Renderer::DrawCube(m_Cube.Position, m_Cube.Rotation, m_Cube.Size, m_CheckerboardTexture);
+		VoxelEngine::Renderer::EndScene();
 	}
 
 private:

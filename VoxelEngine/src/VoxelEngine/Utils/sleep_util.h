@@ -2,6 +2,8 @@
 
 #ifdef VE_PLATFORM_WINDOWS
 
+//Pure evil sleep function
+
 #include <windows.h>
 #include <thread>
 

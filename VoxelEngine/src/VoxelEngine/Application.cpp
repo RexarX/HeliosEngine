@@ -65,30 +65,35 @@ namespace VoxelEngine
 
 	void Application::Run()
 	{
-		Timestep timestep;
-		double frameTime;
+		Timestep timestep, frametime;
+		double time;
+		double m_LastFrameUpdate(0.0), m_LastFrameTime(0.0);
 
 		m_FramerateLimit = 1 / m_Window->GetFramerate();
 
 		while (m_Running) {
-			m_Timer.Start();
-			
-			m_Window->ClearBuffer();
+			time = glfwGetTime();
+			timestep = time - m_LastFrameUpdate;
+			frametime = time - m_LastFrameTime;
+
 			m_Window->PollEvents();
 
 			for (Layer* layer : m_LayerStack) {
 				layer->OnUpdate(timestep);
 			}
 
-			m_Window->OnUpdate();
+			if (frametime >= m_FramerateLimit) {
+				m_Window->ClearBuffer();
+				for (Layer* layer : m_LayerStack) {
+					layer->Draw();
+				}
+				m_Window->OnUpdate();
+				m_LastFrameTime = time;
 
-			frameTime = m_Timer.Stop();
-			if (m_FramerateLimit != 0 && (frameTime < m_FramerateLimit)) {
-				SleepFor(m_FramerateLimit - frameTime);
+				VE_TRACE("Framerate: {0}fps", frametime.GetFramerate());
 			}
 
-			timestep = m_Timer.Stop();
-			VE_TRACE("Framerate: {0}fps", timestep.GetFramerate());
+			m_LastFrameUpdate = time;
 		}
 	}
 }

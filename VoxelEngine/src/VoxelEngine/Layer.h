@@ -19,6 +19,8 @@ namespace VoxelEngine
 		virtual void OnUpdate(const Timestep ts) {}
 		virtual void OnEvent(Event& event) {}
 
+		virtual void Draw() {}
+
 		inline const std::string& GetName() const { return m_Name; }
 
 	protected:
