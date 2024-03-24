@@ -82,7 +82,7 @@ namespace VoxelEngine
 				layer->OnUpdate(timestep);
 			}
 
-			if (frametime >= m_FramerateLimit) {
+			if (m_FramerateLimit != 0.0 && frametime >= m_FramerateLimit) {
 				m_Window->ClearBuffer();
 				for (Layer* layer : m_LayerStack) {
 					layer->Draw();
