@@ -4,8 +4,6 @@
 
 #include "Render/Renderer.h"
 
-#include "Utils/sleep_util.h"
-
 #include <glfw/glfw3.h>
 
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
