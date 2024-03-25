@@ -22,11 +22,15 @@ namespace VoxelEngine
 		inline void SetEventCallback(const EventCallbackFn& callback) override { m_Data.EventCallback = callback; }
 
 		void SetVSync(const bool enabled) override;
+		void SetMinimized(const bool enabled) override;
 		void SetFramerate(const double framerate) override;
+		void SetLastFramerate(const double framerate) override;
 
 		double GetFramerate() const override;
+		double GetLastFramerate() const override;
 
 		bool IsVSync() const override;
+		bool IsMinimized() const override;
 
 		inline virtual void* GetNativeWindow() const { return m_Window; }
 
@@ -42,7 +46,9 @@ namespace VoxelEngine
 			std::string Title;
 			uint32_t Width, Height;
 			double Framerate;
+			double LastFramerate;
 			bool VSync;
+			bool Minimized;
 
 			EventCallbackFn EventCallback;
 		};

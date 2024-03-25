@@ -56,11 +56,6 @@ namespace VoxelEngine
 		return true;
 	}
 
-	void Application::SleepFor(const double seconds)
-	{
-		sleep(seconds);
-	}
-
 	void Application::Run()
 	{
 		Timestep timestep, frametime;
@@ -73,19 +68,20 @@ namespace VoxelEngine
 			time = glfwGetTime();
 			timestep = time - m_LastFrameUpdate;
 			frametime = time - m_LastFrameTime;
-
+			
 			m_Window->PollEvents();
 
 			for (Layer* layer : m_LayerStack) {
 				layer->OnUpdate(timestep);
 			}
 
-			if (m_FramerateLimit != 0.0 && frametime >= m_FramerateLimit) {
+			if (!m_Window->IsMinimized() && (frametime >= m_FramerateLimit || m_Window->GetFramerate() == 0.0)) {
 				m_Window->ClearBuffer();
 				for (Layer* layer : m_LayerStack) {
 					layer->Draw();
 				}
 				m_Window->OnUpdate();
+				
 				m_LastFrameTime = time;
 
 				VE_TRACE("Framerate: {0}fps", frametime.GetFramerate());

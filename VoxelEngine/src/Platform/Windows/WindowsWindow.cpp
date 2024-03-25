@@ -58,6 +58,8 @@ namespace VoxelEngine
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 
 		SetVSync(true);
+		SetMinimized(false);
+		SetFramerate(0.0);
 
 		glViewport(0, 0, props.Width, props.Height);
 
@@ -182,18 +184,37 @@ namespace VoxelEngine
 		m_Data.VSync = enabled;
   }
 
+  void WindowsWindow::SetMinimized(const bool enabled)
+  {
+		m_Data.Minimized = enabled;
+  }
+
   void WindowsWindow::SetFramerate(const double framerate)
   {
     m_Data.Framerate = framerate;
   }
+
+	void WindowsWindow::SetLastFramerate(const double framerate)
+	{
+		m_Data.LastFramerate = framerate;
+	}
 
 	double WindowsWindow::GetFramerate() const
 	{
 		return m_Data.Framerate;
 	}
 
+	double WindowsWindow::GetLastFramerate() const
+	{
+		return m_Data.LastFramerate;
+	}
+
   bool WindowsWindow::IsVSync() const
   {
 		return m_Data.VSync;
   }
+	bool WindowsWindow::IsMinimized() const
+	{
+		return m_Data.Minimized;
+	}
 }

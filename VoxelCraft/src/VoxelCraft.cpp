@@ -18,7 +18,7 @@ public:
 	void OnAttach() override
 	{
 		//VoxelEngine::Application::Get().GetWindow().SetVSync(false);
-		//VoxelEngine::Application::Get().GetWindow().SetFramerate(60.0);
+		//VoxelEngine::Application::Get().GetWindow().SetFramerate(90.0);
 
 		m_CheckerboardTexture = VoxelEngine::Texture::Create(ROOT + "VoxelCraft/Assets/Textures/Checkerboard.png");
 	}
@@ -44,6 +44,8 @@ public:
 
 	void OnEvent(VoxelEngine::Event& event) override
 	{
+		static double LastFramerate;
+
 		m_CameraController.OnEvent(event);
 
 		if (event.GetEventType() == VoxelEngine::EventType::MouseMoved) {
@@ -78,6 +80,12 @@ public:
 
 		else if (event.GetEventType() == VoxelEngine::EventType::WindowResize) {
 			VoxelEngine::WindowResizeEvent& e = (VoxelEngine::WindowResizeEvent&)event;
+			if (e.GetHeight() == 0 && e.GetWidth() == 0) {
+				VoxelEngine::Application::Get().GetWindow().SetMinimized(true);
+			}
+			else if (VoxelEngine::Application::Get().GetWindow().IsMinimized()) {
+				VoxelEngine::Application::Get().GetWindow().SetMinimized(false);
+			}
 			VE_TRACE("Window resized to {0}x{1}", e.GetWidth(), e.GetHeight());
 		}
 

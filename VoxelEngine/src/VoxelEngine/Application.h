@@ -33,8 +33,6 @@ namespace VoxelEngine
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
 
-		void SleepFor(const double seconds);
-
 	private:
 		std::unique_ptr<Window> m_Window;
 
