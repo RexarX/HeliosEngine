@@ -6,8 +6,8 @@ class GameLayer : public VoxelEngine::Layer
 {
 public:
 	GameLayer()
-		: Layer("VoxelCraft"), m_CameraController(VoxelEngine::Application::Get().GetWindow().GetWidth() / 
-			(float)VoxelEngine::Application::Get().GetWindow().GetHeight())
+		: Layer("VoxelCraft"), m_CameraController(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, -90.0f, 0.0f), 
+			VoxelEngine::Application::Get().GetWindow().GetWidth() / (float)VoxelEngine::Application::Get().GetWindow().GetHeight())
 	{
 		m_Cube.Position = { 0.0f, 0.0f, 0.0f };
     m_Cube.Size = { 0.0f, 0.0f, 0.0f };
@@ -95,10 +95,21 @@ public:
 		}
 	}
 
+	glm::vec3 cubePositions[6] = {
+		glm::vec3(0.0f, 0.0f, 2.0f), // front
+		glm::vec3(0.0f, 0.0f, -2.0f), // back
+		glm::vec3(0.0f, 4.0f, 0.0f), // up
+		glm::vec3(0.0f, -4.0f, 0.0f), // down
+		glm::vec3(6.0f, 0.0f, 0.0f), // left
+		glm::vec3(-6.0f, 0.0f, 0.0f), // right
+	};
+
 	void Draw() override
 	{
 		VoxelEngine::Renderer::BeginScene(m_CameraController.GetCamera());
-		VoxelEngine::Renderer::DrawCube(m_Cube.Position, m_Cube.Rotation, m_Cube.Size, m_CheckerboardTexture);
+		for (auto pos : cubePositions) {
+			VoxelEngine::Renderer::DrawCube(pos, m_Cube.Rotation, m_Cube.Size, m_CheckerboardTexture);
+		}
 		VoxelEngine::Renderer::EndScene();
 	}
 

@@ -6,6 +6,8 @@
 
 #include "VertexArray.h"
 
+#include "Application.h"
+
 #include <Platform/OpenGL/OpenGLShader.h>
 
 #include <glm/glm.hpp>
@@ -97,6 +99,8 @@ namespace VoxelEngine
 	void Renderer::BeginScene(Camera& camera)
 	{
 		s_SceneData->ViewProjectionMatrix = camera.GetViewProjectionMatrix();
+    s_SceneData->ProjectionMatrix = camera.GetProjectionMatrix();
+    s_SceneData->ViewMatrix = camera.GetViewMatrix();
 	}
 
 	void Renderer::EndScene()
@@ -107,14 +111,14 @@ namespace VoxelEngine
     s_Cube.CubeIndex->Unbind();
 	}
 
-	void Renderer::Submit(glm::mat4& projection, glm::mat4& view, glm::mat4& transform)
+	void Renderer::Submit(glm::mat4& transform)
 	{
 		s_Cube.CubeShader->Bind();
     s_Cube.CubeVertex->Bind();
     s_Cube.CubeIndex->Bind();
 
-    s_Cube.CubeShader->UploadUniformMat4("u_Projection", projection);
-    s_Cube.CubeShader->UploadUniformMat4("u_View", view);
+    s_Cube.CubeShader->UploadUniformMat4("u_Projection", s_SceneData->ProjectionMatrix);
+    s_Cube.CubeShader->UploadUniformMat4("u_View", s_SceneData->ViewMatrix);
     s_Cube.CubeShader->UploadUniformMat4("u_Transform", transform);
 
 
@@ -129,13 +133,8 @@ namespace VoxelEngine
     transform = glm::rotate(transform, glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
     transform = glm::rotate(transform, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
 
-    glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
-
-    glm::mat4 projection;
-    projection = glm::perspective(glm::radians(45.0f), 1280.0f / 720.0f, 0.1f, 100.0f);
-
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-    Submit(projection, view, transform);
+    Submit(transform);
 	}
 }

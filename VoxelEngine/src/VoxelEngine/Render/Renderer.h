@@ -20,7 +20,7 @@ namespace VoxelEngine
 
 		static void OnWindowResize(const uint32_t width, const uint32_t height);
 
-		static void Submit(glm::mat4& projection, glm::mat4& view, glm::mat4& transform);
+		static void Submit(glm::mat4& transform);
 
 		inline static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
 
@@ -30,6 +30,8 @@ namespace VoxelEngine
 		struct SceneData
 		{
 			glm::mat4 ViewProjectionMatrix;
+			glm::mat4 ProjectionMatrix;
+			glm::mat4 ViewMatrix;
 		};
 
 		static std::unique_ptr<SceneData> s_SceneData;
