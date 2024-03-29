@@ -38,8 +38,8 @@ public:
     else if (m_Cube.Rotation.y >= 360.0f) { m_Cube.Rotation.y = 360.0f - m_Cube.Rotation.y; }
     else if (m_Cube.Rotation.z >= 360.0f) { m_Cube.Rotation.z = 360.0f - m_Cube.Rotation.z; }
 
-		m_Cube.Rotation.x += 30.0f * ts;
-    m_Cube.Rotation.y += 30.0f * ts;
+		//m_Cube.Rotation.x += 30.0f * ts;
+    //m_Cube.Rotation.y += 30.0f * ts;
 	}
 
 	void OnEvent(VoxelEngine::Event& event) override
