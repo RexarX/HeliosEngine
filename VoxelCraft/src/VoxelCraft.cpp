@@ -10,15 +10,15 @@ public:
 			VoxelEngine::Application::Get().GetWindow().GetWidth() / (float)VoxelEngine::Application::Get().GetWindow().GetHeight())
 	{
 		m_Cube.Position = { 0.0f, 0.0f, 0.0f };
-    m_Cube.Size = { 0.0f, 0.0f, 0.0f };
+    m_Cube.Size = { 2.0f, 2.0f, 2.0f };
     m_Cube.Rotation = { 0.0f, 0.0f, 0.0f };
 		m_Cube.TexCoord = { 0.0f, 0.0f };
 	}
 
 	void OnAttach() override
 	{
-		//VoxelEngine::Application::Get().GetWindow().SetVSync(false);
-		//VoxelEngine::Application::Get().GetWindow().SetFramerate(90.0);
+		VoxelEngine::Application::Get().GetWindow().SetVSync(false);
+		//VoxelEngine::Application::Get().GetWindow().SetFramerate(60.0);
 
 		m_CheckerboardTexture = VoxelEngine::Texture::Create(ROOT + "VoxelCraft/Assets/Textures/Checkerboard.png");
 	}
@@ -30,9 +30,6 @@ public:
 	void OnUpdate(const VoxelEngine::Timestep ts) override
 	{
 		m_CameraController.OnUpdate(ts);
-
-		m_Cube.Position = { 0.0f, 0.0f, -10.0f };
-		m_Cube.Size = { 2.0f, 2.0f, 2.0f };
 		
 		if (m_Cube.Rotation.x >= 360.0f) { m_Cube.Rotation.x = 360.0f - m_Cube.Rotation.x; }
     else if (m_Cube.Rotation.y >= 360.0f) { m_Cube.Rotation.y = 360.0f - m_Cube.Rotation.y; }

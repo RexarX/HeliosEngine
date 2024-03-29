@@ -133,8 +133,6 @@ namespace VoxelEngine
     transform = glm::rotate(transform, glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
     transform = glm::rotate(transform, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
 
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
     Submit(transform);
 	}
 }
