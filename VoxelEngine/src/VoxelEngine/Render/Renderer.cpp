@@ -85,8 +85,7 @@ namespace VoxelEngine
       { ShaderDataType::Float3, "a_Pos" },
       { ShaderDataType::Float3, "a_Normal" },
       { ShaderDataType::Float2, "a_TexCoord" }
-     });
-
+      });
 
     s_Cube.CubeVertex->AddVertexBuffer(s_Cube.CubeBuffer);
     

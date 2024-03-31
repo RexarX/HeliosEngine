@@ -37,7 +37,6 @@ namespace VoxelEngine
 
 	void OpenGLRendererAPI::DrawArray(const std::shared_ptr<VertexArray>& vertexArray, const uint32_t vertexCount)
 	{
-		vertexArray.get();
     glDrawArrays(GL_TRIANGLES, 0, vertexCount);
 	}
 }

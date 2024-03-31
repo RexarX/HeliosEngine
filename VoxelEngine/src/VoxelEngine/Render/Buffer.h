@@ -37,7 +37,7 @@ namespace VoxelEngine
     BufferElement() = default;
 
     BufferElement(const ShaderDataType& type, const std::string& name, const bool normalized = false)
-      : name_(name), type_(type), normalized_(normalized)
+      : name_(name), type_(type), normalized_(normalized), size_(ShaderDataTypeSize(type))
     {
     }
 

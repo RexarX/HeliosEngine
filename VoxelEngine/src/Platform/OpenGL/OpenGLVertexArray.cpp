@@ -51,10 +51,8 @@ namespace VoxelEngine
 	{
 		VE_CORE_ASSERT(vertexBuffer->GetLayout().GetElements().size(), "Vertex Buffer has no layout!");
 
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-		glEnableVertexAttribArray(0);
-
-		/*const auto& layout = vertexBuffer->GetLayout();
+		const auto& layout = vertexBuffer->GetLayout();
+		m_VertexBufferIndex = 0;
 		for (const auto& element : layout) {
 			glVertexAttribPointer(m_VertexBufferIndex,
 				element.GetComponentCount(),
@@ -63,12 +61,10 @@ namespace VoxelEngine
 				layout.GetStride(),
 				(const void*)element.offset_);
 			glEnableVertexAttribArray(m_VertexBufferIndex);
-			
-
 			++m_VertexBufferIndex;
 		}
 
-		m_VertexBuffers.push_back(vertexBuffer);*/
+		m_VertexBuffers.push_back(vertexBuffer);
 	}
 
 	void OpenGLVertexArray::SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer)
