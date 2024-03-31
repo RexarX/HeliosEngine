@@ -31,10 +31,11 @@ namespace VoxelEngine
 	{
 		NormalizeDirection();
 
-		glm::vec3 cameraRight = glm::cross(m_Direction, glm::vec3(0.0f, 1.0f, 0.0f));
-		glm::vec3 cameraUp = glm::cross(cameraRight, m_Direction);
+		m_CameraLeft = glm::cross(m_Direction, glm::vec3(0.0f, 1.0f, 0.0f));
+		m_CameraUp = glm::cross(m_CameraLeft, m_Direction);
+		m_CameraForward = glm::cross(m_CameraLeft, m_CameraUp);
 
-		m_ViewMatrix = glm::lookAt(m_Position, m_Position - m_Direction, cameraUp);
+		m_ViewMatrix = glm::lookAt(m_Position, m_Position - m_Direction, m_CameraUp);
 
 		m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
 	}

@@ -96,17 +96,19 @@ public:
 		glm::vec3(0.0f, 0.0f, 2.0f), // front
 		glm::vec3(0.0f, 0.0f, -2.0f), // back
 		glm::vec3(0.0f, 4.0f, 0.0f), // up
-		glm::vec3(0.0f, -4.0f, 0.0f), // down
-		glm::vec3(6.0f, 0.0f, 0.0f), // left
-		glm::vec3(-6.0f, 0.0f, 0.0f), // right
+		glm::vec3(0.0f, -2.0f, 0.0f), // down
+		glm::vec3(2.0f, 0.0f, 0.0f), // left
+		glm::vec3(-2.0f, 0.0f, 0.0f), // right
 	};
 
 	void Draw() override
 	{
 		VoxelEngine::Renderer::BeginScene(m_CameraController.GetCamera());
+
 		for (const auto& pos : cubePositions) {
 			VoxelEngine::Renderer::DrawCube(pos, m_Cube.Rotation, m_Cube.Size, m_CheckerboardTexture);
 		}
+
 		VoxelEngine::Renderer::EndScene();
 	}
 

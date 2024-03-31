@@ -29,17 +29,21 @@ namespace VoxelEngine
 		bool OnMouseScrolled(MouseScrolledEvent& event);
 		bool OnWindowResized(WindowResizeEvent& event);
 
-		void ClampPitch();
+		void CalculateMouseOffset();
 
 	private:
 		float m_AspectRatio;
 		float m_ZoomLevel = 1.0f;
 		float m_CameraTranslationSpeed = 5.0f;
-		float m_CameraRotationSpeed = 180.0f;
+		float m_CameraRotationSpeed = 0.1f;
 
 		glm::vec3 m_CameraPosition = { 0.0f, 0.0f, 0.0f };
 		glm::vec3 m_CameraRotation = { 0.0f, 0.0f, 0.0f };
 
 		Camera m_Camera;
+
+		bool m_FirstInput = true;
+		float xLast;
+		float yLast;
 	};
 }

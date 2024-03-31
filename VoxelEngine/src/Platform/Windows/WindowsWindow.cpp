@@ -57,6 +57,8 @@ namespace VoxelEngine
 		VE_CORE_ASSERT(status, "Failed to initialize Glad!");
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 
+		glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
 		SetVSync(true);
 		SetMinimized(false);
 		SetFramerate(0.0);
