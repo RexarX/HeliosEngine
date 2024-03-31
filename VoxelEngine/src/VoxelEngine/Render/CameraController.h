@@ -12,7 +12,7 @@ namespace VoxelEngine
 	class CameraController
 	{
 	public:
-		CameraController(const glm::vec3 position, const glm::vec3 rotation, const float aspectRatio);
+		CameraController(const glm::vec3& position, const glm::vec3& rotation, const float aspectRatio);
 
 		void OnUpdate(Timestep ts);
 		void OnEvent(Event& event);
@@ -37,13 +37,14 @@ namespace VoxelEngine
 		float m_CameraTranslationSpeed = 5.0f;
 		float m_CameraRotationSpeed = 0.1f;
 
+		float xLast;
+		float yLast;
+
+		bool m_FirstInput = true;
+
 		glm::vec3 m_CameraPosition = { 0.0f, 0.0f, 0.0f };
 		glm::vec3 m_CameraRotation = { 0.0f, 0.0f, 0.0f };
 
 		Camera m_Camera;
-
-		bool m_FirstInput = true;
-		float xLast;
-		float yLast;
 	};
 }

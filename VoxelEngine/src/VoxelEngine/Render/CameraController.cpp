@@ -7,7 +7,7 @@
 
 namespace VoxelEngine
 {
-	CameraController::CameraController(const glm::vec3 position, const glm::vec3 rotation, const float aspectRatio)
+	CameraController::CameraController(const glm::vec3& position, const glm::vec3& rotation, const float aspectRatio)
 		: m_AspectRatio(aspectRatio), m_Camera(position, rotation, aspectRatio), m_CameraRotation(rotation), m_CameraPosition(position)
 	{
 	}
@@ -17,19 +17,19 @@ namespace VoxelEngine
 		if (Input::IsKeyPressed(Key::A) || Input::IsKeyPressed(Key::Left)) {
 			m_CameraPosition += m_Camera.GetCameraLeft() * m_CameraTranslationSpeed * (float)ts;
 		}
-		if (Input::IsKeyPressed(Key::D) || Input::IsKeyPressed(Key::Right)) {
+		else if (Input::IsKeyPressed(Key::D) || Input::IsKeyPressed(Key::Right)) {
 			m_CameraPosition -= m_Camera.GetCameraLeft() * m_CameraTranslationSpeed * (float)ts;
 		}
 		if (Input::IsKeyPressed(Key::W) || Input::IsKeyPressed(Key::Up)) {
 			m_CameraPosition += m_Camera.GetCameraForward() * m_CameraTranslationSpeed * (float)ts;
 		}
-		if (Input::IsKeyPressed(Key::S) || Input::IsKeyPressed(Key::Down)) {
+		else if (Input::IsKeyPressed(Key::S) || Input::IsKeyPressed(Key::Down)) {
 			m_CameraPosition -= m_Camera.GetCameraForward() * m_CameraTranslationSpeed * (float)ts;
 		}
 		if (Input::IsKeyPressed(Key::Space)) {
 			m_CameraPosition += m_Camera.GetCameraUp() * m_CameraTranslationSpeed * (float)ts;
 		}
-		if (Input::IsKeyPressed(Key::LeftShift)) {
+		else if (Input::IsKeyPressed(Key::LeftShift)) {
 			m_CameraPosition -= m_Camera.GetCameraUp() * m_CameraTranslationSpeed * (float)ts;
 		}
 
@@ -60,10 +60,10 @@ namespace VoxelEngine
 		m_CameraRotation.x += deltaY;
 		m_CameraRotation.y += deltaX;
 
-		if(m_CameraRotation.x > 89.0f) {
+		if (m_CameraRotation.x > 89.0f) {
       m_CameraRotation.x = 89.0f;
     }
-    if(m_CameraRotation.x < -89.0f) {
+    else if (m_CameraRotation.x < -89.0f) {
       m_CameraRotation.x = -89.0f;
     }
 	}
