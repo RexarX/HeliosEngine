@@ -33,54 +33,59 @@ namespace VoxelEngine
 	{
 		RenderCommand::Init();
 
-    const float vertices[8 * 3] = {
-        -0.5, -0.5,  0.5, //0
-         0.5, -0.5,  0.5, //0.5
-        -0.5,  0.5,  0.5, //2
-         0.5,  0.5,  0.5, //3
-        -0.5, -0.5, -0.5, //4
-         0.5, -0.5, -0.5, //5
-        -0.5,  0.5, -0.5, //6
-         0.5,  0.5, -0.5  //7
-    };
+    float vertices[] = {
+    -0.5f, 0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, // top left front 
+    -0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom left front 
+    0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, // bottom right front 
+    -0.5f, 0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, // top left front 
+    0.5f, 0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, // top right front
+    0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, // bottom right front 
 
-    const uint32_t CubeIndices[6 * 6] = {
-        //Top
-        2, 6, 7,
-        2, 3, 7,
+    -0.5f, 0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 0.0f, 1.0f, // top left back
+    -0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, // bottom left back 
+    0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 1.0f, 0.0f, // bottom right back 
+    -0.5f, 0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 0.0f, 1.0f, // top left back 
+    0.5f, 0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 1.0f, 1.0f, // top right back
+    0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 1.0f, 0.0f, // bottom right back
 
-        //Bottom
-        0, 4, 5,
-        0, 1, 5,
+    0.5f, 0.5f, 0.5f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, // top left right
+    0.5f, -0.5f, 0.5f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, // bottom left right
+    0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, // bottom right right
+    0.5f, 0.5f, 0.5f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, // top left right
+    0.5f, 0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // top right right
+    0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, // bottom right right
 
-        //Left
-        0, 2, 6,
-        0, 4, 6,
+    -0.5f, 0.5f, 0.5f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f, // top left left
+    -0.5f, -0.5f, 0.5f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, // bottom left left
+    -0.5f, -0.5f, -0.5f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f, // bottom right left
+    -0.5f, 0.5f, 0.5f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f, // top left left
+    -0.5f, 0.5f, -0.5f, -1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // top right left
+    -0.5f, -0.5f, -0.5f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f, // bottom right left
 
-        //Right
-        1, 3, 7,
-        1, 5, 7,
+    -0.5f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, // top left up
+    -0.5f, 0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, // bottom left up
+    0.5f, 0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, // bottom right up
+    -0.5f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, // top left up
+    0.5f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, // top right up
+    0.5f, 0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, // bottom right up
 
-        //Front
-        0, 2, 3,
-        0, 1, 3,
-
-        //Back
-        4, 6, 7,
-        4, 5, 7
+    -0.5f, -0.5f, -0.5f, 0.0f, -1.0f, 0.0f, 0.0f, 1.0f, // top left bottom
+    -0.5f, -0.5f, 0.5f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f, // bottom left bottom
+    0.5f, -0.5f, 0.5f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f, // bottom right bottom
+    -0.5f, -0.5f, -0.5f, 0.0f, -1.0f, 0.0f, 0.0f, 1.0f, // top left bottom
+    0.5f, -0.5f, -0.5f, 0.0f, -1.0f, 0.0f, 1.0f, 1.0f, // top right bottom
+    0.5f, -0.5f, 0.5f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f, // bottom right bottom
     };
 
     s_Cube.CubeVertex = VertexArray::Create();
     s_Cube.CubeVertex->Bind();
 
-    s_Cube.CubeBuffer = VertexBuffer::Create(vertices, 36 * sizeof(float));
+    s_Cube.CubeBuffer = VertexBuffer::Create(vertices, sizeof(vertices));
     s_Cube.CubeBuffer->SetLayout({
       { ShaderDataType::Float3, "a_Pos" },
+      { ShaderDataType::Float3, "a_Normal" },
       { ShaderDataType::Float2, "a_TexCoord" }
      });
-
-    s_Cube.CubeIndex = IndexBuffer::Create(CubeIndices, 36);
-    s_Cube.CubeVertex->SetIndexBuffer(s_Cube.CubeIndex);
 
 
     s_Cube.CubeVertex->AddVertexBuffer(s_Cube.CubeBuffer);
@@ -108,20 +113,18 @@ namespace VoxelEngine
     s_Cube.CubeShader->Unbind();
     s_Cube.CubeVertex->Unbind();
     s_Cube.CubeBuffer->Unbind();
-    s_Cube.CubeIndex->Unbind();
 	}
 
 	void Renderer::Submit(glm::mat4& transform)
 	{
 		s_Cube.CubeShader->Bind();
     s_Cube.CubeVertex->Bind();
-    s_Cube.CubeIndex->Bind();
 
     s_Cube.CubeShader->UploadUniformMat4("u_Projection", s_SceneData->ProjectionMatrix);
     s_Cube.CubeShader->UploadUniformMat4("u_View", s_SceneData->ViewMatrix);
     s_Cube.CubeShader->UploadUniformMat4("u_Transform", transform);
 
-		RenderCommand::DrawIndexed(s_Cube.CubeVertex, 36);
+		RenderCommand::DrawArray(s_Cube.CubeVertex, 36);
 	}
 
 	void Renderer::DrawCube(const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& size, const std::shared_ptr<Texture>& texture)

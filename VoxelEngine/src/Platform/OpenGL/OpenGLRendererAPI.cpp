@@ -34,4 +34,10 @@ namespace VoxelEngine
 		uint32_t count = indexCount ? indexCount : vertexArray->GetIndexBuffer()->GetCount();
 		glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, nullptr);
 	}
+
+	void OpenGLRendererAPI::DrawArray(const std::shared_ptr<VertexArray>& vertexArray, const uint32_t vertexCount)
+	{
+		vertexArray.get();
+    glDrawArrays(GL_TRIANGLES, 0, vertexCount);
+	}
 }
