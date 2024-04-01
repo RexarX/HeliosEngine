@@ -129,6 +129,7 @@ namespace VoxelEngine
 	void Renderer::DrawCube(const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& size, const std::shared_ptr<Texture>& texture)
 	{
     texture->Bind();
+
     glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), size);
     transform = glm::rotate(transform, glm::radians(rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
     transform = glm::rotate(transform, glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));

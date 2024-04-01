@@ -93,12 +93,12 @@ public:
 	}
 
 	glm::vec3 cubePositions[6] = {
-		glm::vec3(0.0f, 0.0f, 2.0f), // front
-		glm::vec3(0.0f, 0.0f, -2.0f), // back
+		glm::vec3(0.0f, 0.0f, 4.0f), // front
+		glm::vec3(0.0f, 0.0f, -4.0f), // back
 		glm::vec3(0.0f, 4.0f, 0.0f), // up
-		glm::vec3(0.0f, -2.0f, 0.0f), // down
-		glm::vec3(2.0f, 0.0f, 0.0f), // left
-		glm::vec3(-2.0f, 0.0f, 0.0f), // right
+		glm::vec3(0.0f, -4.0f, 0.0f), // down
+		glm::vec3(4.0f, 0.0f, 0.0f), // left
+		glm::vec3(-4.0f, 0.0f, 0.0f), // right
 	};
 
 	void Draw() override
