@@ -18,7 +18,6 @@ namespace VoxelEngine
 		glGenBuffers(1, &m_RendererID);
 		glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
 		glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
-		VE_WARN(sizeof(vertices));
 	}
 
 	OpenGLVertexBuffer::~OpenGLVertexBuffer()

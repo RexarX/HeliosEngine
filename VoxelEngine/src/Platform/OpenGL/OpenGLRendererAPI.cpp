@@ -14,7 +14,7 @@ namespace VoxelEngine
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_LINE_SMOOTH);
 
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 		SetClearColor({ 0.0f, 0.0f, 0.0f, 0.0f });
 	}

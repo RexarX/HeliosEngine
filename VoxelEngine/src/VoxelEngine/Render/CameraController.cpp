@@ -7,8 +7,8 @@
 
 namespace VoxelEngine
 {
-	CameraController::CameraController(const glm::vec3& position, const glm::vec3& rotation, const float aspectRatio)
-		: m_AspectRatio(aspectRatio), m_Camera(position, rotation, aspectRatio), m_CameraRotation(rotation), m_CameraPosition(position)
+	CameraController::CameraController(const glm::vec3& position, const glm::vec3& rotation, const float aspectRatio, const float fov)
+		: m_AspectRatio(aspectRatio), m_Camera(position, rotation, aspectRatio, fov), m_CameraRotation(rotation), m_CameraPosition(position)
 	{
 	}
 
@@ -78,14 +78,14 @@ namespace VoxelEngine
 	void CameraController::OnResize(const float width, const float height)
 	{
 		m_AspectRatio = width / height;
-		m_Camera.SetProjection(m_AspectRatio);
+		m_Camera.SetProjection(m_AspectRatio, m_Fov);
 	}
 
 	bool CameraController::OnMouseScrolled(MouseScrolledEvent& event)
 	{
-		m_ZoomLevel -= event.GetYOffset() * 0.25f;
-		m_ZoomLevel = std::max(m_ZoomLevel, 0.25f);
-		m_Camera.SetProjection(m_AspectRatio);
+		m_Fov -= event.GetYOffset() * 0.1f;
+		m_Fov = std::max(m_Fov, 0.1f);
+		m_Camera.SetProjection(m_AspectRatio, m_Fov);
 		return false;
 	}
 

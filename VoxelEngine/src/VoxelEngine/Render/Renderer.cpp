@@ -22,7 +22,6 @@ namespace VoxelEngine
     std::shared_ptr<IndexBuffer> CubeIndex;
 
     std::shared_ptr<Shader> CubeShader;
-    std::shared_ptr<Texture> CubeTexture;
   };
 
 	std::unique_ptr<Renderer::SceneData> Renderer::s_SceneData = std::make_unique<Renderer::SceneData>();

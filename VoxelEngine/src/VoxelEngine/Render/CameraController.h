@@ -12,7 +12,7 @@ namespace VoxelEngine
 	class CameraController
 	{
 	public:
-		CameraController(const glm::vec3& position, const glm::vec3& rotation, const float aspectRatio);
+		CameraController(const glm::vec3& position, const glm::vec3& rotation, const float aspectRatio, const float fov = 45.0f);
 
 		void OnUpdate(Timestep ts);
 		void OnEvent(Event& event);
@@ -22,8 +22,8 @@ namespace VoxelEngine
 		Camera& GetCamera() { return m_Camera; }
 		const Camera& GetCamera() const { return m_Camera; }
 
-		float GetZoomLevel() const { return m_ZoomLevel; }
-		void SetZoomLevel(const float level) { m_ZoomLevel = level; }
+		float GetFov() const { return m_Fov; }
+		void SetFov(const float fov) { m_Fov = fov; }
 
 	private:
 		bool OnMouseScrolled(MouseScrolledEvent& event);
@@ -33,7 +33,7 @@ namespace VoxelEngine
 
 	private:
 		float m_AspectRatio;
-		float m_ZoomLevel = 1.0f;
+		float m_Fov = 45.0f;
 		float m_CameraTranslationSpeed = 5.0f;
 		float m_CameraRotationSpeed = 0.1f;
 
