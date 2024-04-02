@@ -36,7 +36,8 @@ file(GLOB_RECURSE src__VoxelEngine__Render
 source_group("src/VoxelEngine/Render" FILES ${src__VoxelEngine__Render})
 
 file(GLOB_RECURSE src__VoxelEngine__Utils
-    "src/VoxelEngine/Events/*.h"
+    "src/VoxelEngine/Utils/*.h"
+    "src/VoxelEngine/Utils/*.cpp"
 )
 source_group("src/VoxelEngine/Utils" FILES ${src__VoxelEngine__Utils})
 

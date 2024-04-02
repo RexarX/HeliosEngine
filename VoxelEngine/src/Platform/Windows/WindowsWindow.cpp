@@ -191,6 +191,17 @@ namespace VoxelEngine
 		m_Data.Minimized = enabled;
   }
 
+	void WindowsWindow::SetFocused(const double enabled)
+	{
+		if (enabled) {
+			glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+		}
+		else {
+			glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+		}
+		m_Data.Focus = enabled;
+	}
+
   void WindowsWindow::SetFramerate(const double framerate)
   {
     m_Data.Framerate = framerate;
@@ -218,5 +229,9 @@ namespace VoxelEngine
 	bool WindowsWindow::IsMinimized() const
 	{
 		return m_Data.Minimized;
+	}
+	bool WindowsWindow::IsFocused() const
+	{
+		return m_Data.Focus;
 	}
 }

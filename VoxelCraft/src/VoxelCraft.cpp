@@ -29,7 +29,9 @@ public:
 
 	void OnUpdate(const VoxelEngine::Timestep ts) override
 	{
-		m_CameraController.OnUpdate(ts);
+		if (VoxelEngine::Application::Get().GetWindow().IsFocused()) {
+			m_CameraController.OnUpdate(ts);
+		}
 		
 		if (m_Cube.Rotation.x >= 360.0f) { m_Cube.Rotation.x = 360.0f - m_Cube.Rotation.x; }
     else if (m_Cube.Rotation.y >= 360.0f) { m_Cube.Rotation.y = 360.0f - m_Cube.Rotation.y; }
@@ -67,6 +69,15 @@ public:
 
 		else if (event.GetEventType() == VoxelEngine::EventType::KeyPressed) {
 			VoxelEngine::KeyPressedEvent& e = (VoxelEngine::KeyPressedEvent&)event;
+			if (e.GetKeyCode() == VoxelEngine::Key::Escape) {
+				if (VoxelEngine::Application::Get().GetWindow().IsFocused()) {
+					VoxelEngine::Application::Get().GetWindow().SetFocused(false);
+					m_CameraController.SetFirstInput();
+				}
+				else {
+					VoxelEngine::Application::Get().GetWindow().SetFocused(true);
+				}
+			}
 			VE_TRACE("{0} key is pressed!", e.GetKeyCode());
 		}
 

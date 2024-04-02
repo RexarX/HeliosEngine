@@ -25,6 +25,8 @@ namespace VoxelEngine
 		float GetFov() const { return m_Fov; }
 		void SetFov(const float fov) { m_Fov = fov; }
 
+		void SetFirstInput() { m_FirstInput = true; }
+
 	private:
 		bool OnMouseScrolled(MouseScrolledEvent& event);
 		bool OnWindowResized(WindowResizeEvent& event);

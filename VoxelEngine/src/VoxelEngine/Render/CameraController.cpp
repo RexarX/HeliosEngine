@@ -77,8 +77,10 @@ namespace VoxelEngine
 
 	void CameraController::OnResize(const float width, const float height)
 	{
-		m_AspectRatio = width / height;
-		m_Camera.SetProjection(m_AspectRatio, m_Fov);
+		if (width != 0.0f && height != 0.0f) {
+			m_AspectRatio = width / height;
+			m_Camera.SetProjection(m_AspectRatio, m_Fov);
+		}
 	}
 
 	bool CameraController::OnMouseScrolled(MouseScrolledEvent& event)

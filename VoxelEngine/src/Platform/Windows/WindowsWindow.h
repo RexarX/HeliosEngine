@@ -2,6 +2,8 @@
 
 #include "VoxelEngine/Window.h"
 
+#include "Events/KeyEvent.h"
+
 #include <GLFW/glfw3.h>
 
 namespace VoxelEngine
@@ -23,6 +25,7 @@ namespace VoxelEngine
 
 		void SetVSync(const bool enabled) override;
 		void SetMinimized(const bool enabled) override;
+		void SetFocused(const double enabled) override;
 		void SetFramerate(const double framerate) override;
 		void SetLastFramerate(const double framerate) override;
 
@@ -31,6 +34,7 @@ namespace VoxelEngine
 
 		bool IsVSync() const override;
 		bool IsMinimized() const override;
+		bool IsFocused() const override;
 
 		inline virtual void* GetNativeWindow() const { return m_Window; }
 
@@ -49,6 +53,7 @@ namespace VoxelEngine
 			double LastFramerate;
 			bool VSync;
 			bool Minimized;
+			bool Focus;
 
 			EventCallbackFn EventCallback;
 		};
