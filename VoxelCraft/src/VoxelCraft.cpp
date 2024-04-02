@@ -20,7 +20,7 @@ public:
 		//VoxelEngine::Application::Get().GetWindow().SetVSync(false);
 		//VoxelEngine::Application::Get().GetWindow().SetFramerate(60.0);
 
-		m_CheckerboardTexture = VoxelEngine::Texture::Create(ROOT + "VoxelCraft/Assets/Textures/Checkerboard.png");
+		m_CheckerboardTexture = VoxelEngine::Texture::Create(ROOT + "VoxelCraft/Assets/Textures/Dirt.png");
 	}
 
 	void OnDetach() override
