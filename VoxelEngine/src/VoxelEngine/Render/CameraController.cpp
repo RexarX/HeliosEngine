@@ -7,8 +7,10 @@
 
 namespace VoxelEngine
 {
-	CameraController::CameraController(const glm::vec3& position, const glm::vec3& rotation, const float aspectRatio, const float fov)
-		: m_AspectRatio(aspectRatio), m_Camera(position, rotation, aspectRatio, fov), m_CameraRotation(rotation), m_CameraPosition(position)
+	CameraController::CameraController(const glm::vec3& position, const glm::vec3& rotation,
+		const float aspectRatio, const float fov)
+		: m_AspectRatio(aspectRatio), m_Camera(position, rotation, aspectRatio, fov),
+		m_CameraRotation(rotation), m_CameraPosition(position)
 	{
 	}
 

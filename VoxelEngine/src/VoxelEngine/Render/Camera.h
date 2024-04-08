@@ -7,7 +7,8 @@ namespace VoxelEngine
 	class Camera
 	{
 	public:
-		Camera(const glm::vec3& cameraPos, const glm::vec3& cameraRotation, const float aspectRatio, const float fov);
+		Camera(const glm::vec3& cameraPos, const glm::vec3& cameraRotation,
+			const float aspectRatio, const float fov);
 
 		void SetProjection(const float aspectRatio, const float fov);
 

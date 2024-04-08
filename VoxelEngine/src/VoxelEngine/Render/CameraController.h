@@ -2,6 +2,8 @@
 
 #include "Camera.h"
 
+#include "Frustum.h"
+
 #include "Timestep.h"
 
 #include "Events/ApplicationEvent.h"
@@ -12,9 +14,10 @@ namespace VoxelEngine
 	class CameraController
 	{
 	public:
-		CameraController(const glm::vec3& position, const glm::vec3& rotation, const float aspectRatio, const float fov = 45.0f);
+		CameraController(const glm::vec3& position, const glm::vec3& rotation,
+			const float aspectRatio, const float fov = 45.0f);
 
-		void OnUpdate(Timestep ts);
+		void OnUpdate(const Timestep ts);
 		void OnEvent(Event& event);
 
 		void OnResize(const float width, const float height);
@@ -24,6 +27,8 @@ namespace VoxelEngine
 
 		float GetFov() const { return m_Fov; }
 		void SetFov(const float fov) { m_Fov = fov; }
+
+		Frustum GetFrustum() const { return m_Frustum; }
 
 		void SetFirstInput() { m_FirstInput = true; }
 
@@ -48,5 +53,6 @@ namespace VoxelEngine
 		glm::vec3 m_CameraRotation = { 0.0f, 0.0f, 0.0f };
 
 		Camera m_Camera;
+		Frustum m_Frustum;
 	};
 }

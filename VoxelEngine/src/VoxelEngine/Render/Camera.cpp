@@ -6,7 +6,8 @@
 
 namespace VoxelEngine
 {
-	Camera::Camera(const glm::vec3& cameraPos, const glm::vec3& cameraDirection, const float aspectRatio, const float fov)
+	Camera::Camera(const glm::vec3& cameraPos, const glm::vec3& cameraDirection,
+		const float aspectRatio, const float fov)
 		: m_ProjectionMatrix(glm::perspective(fov, aspectRatio, 0.1f, 100.0f))
 		, m_Position(cameraPos)
 	{

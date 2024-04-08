@@ -1,14 +1,8 @@
-#include <glad/glad.h>
-
 #include "vepch.h"
 
 #include "Renderer.h"
 
 #include "VertexArray.h"
-
-#include "Application.h"
-
-#include <Platform/OpenGL/OpenGLShader.h>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -32,7 +26,7 @@ namespace VoxelEngine
 	{
 		RenderCommand::Init();
     
-    float vertices[] = {
+    const float vertices[] = {
       //front
       -0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom left
       0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, // bottom right
@@ -105,7 +99,7 @@ namespace VoxelEngine
     RenderCommand::SetViewport(0, 0, width, height);
   }
 
-	void Renderer::BeginScene(Camera& camera)
+	void Renderer::BeginScene(const Camera& camera)
 	{
 		s_SceneData->ViewProjectionMatrix = camera.GetViewProjectionMatrix();
     s_SceneData->ProjectionMatrix = camera.GetProjectionMatrix();
@@ -131,7 +125,8 @@ namespace VoxelEngine
 		RenderCommand::DrawArray(s_Cube.CubeVertex, 36);
 	}
 
-	void Renderer::DrawCube(const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& size, const std::shared_ptr<Texture>& texture)
+	void Renderer::DrawCube(const glm::vec3& position, const glm::vec3& rotation,
+    const glm::vec3& size, const std::shared_ptr<Texture>& texture)
 	{
     texture->Bind();
 

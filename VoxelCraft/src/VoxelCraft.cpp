@@ -9,18 +9,21 @@ public:
 		: Layer("VoxelCraft"), m_CameraController(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, -90.0f, 0.0f), 
 			VoxelEngine::Application::Get().GetWindow().GetWidth() / (float)VoxelEngine::Application::Get().GetWindow().GetHeight())
 	{
-		m_Cube.Position = { 0.0f, 0.0f, 0.0f };
-		m_Cube.Size = { 2.0f, 2.0f, 2.0f };
-    m_Cube.Rotation = { 0.0f, 0.0f, 0.0f };
-		m_Cube.TexCoord = { 0.0f, 0.0f };
 	}
 
 	void OnAttach() override
 	{
-		//VoxelEngine::Application::Get().GetWindow().SetVSync(false);
+		VoxelEngine::Application::Get().GetWindow().SetVSync(false);
 		//VoxelEngine::Application::Get().GetWindow().SetFramerate(60.0);
 
 		m_CheckerboardTexture = VoxelEngine::Texture::Create(ROOT + "VoxelCraft/Assets/Textures/Dirt.png");
+
+		for (float i = 0; i < 25; ++i) {
+			for (float j = 0; j < 25; ++j) {
+				m_Cube.push_back({ glm::vec3(i, 0.0f, j), glm::vec3(1.0f, 1.0f, 1.0f),
+					glm::vec3(0.0f, 0.0f, 0.0f), glm::vec2(0.0f, 0.0f) });
+			}
+		}
 	}
 
 	void OnDetach() override
@@ -32,13 +35,6 @@ public:
 		if (VoxelEngine::Application::Get().GetWindow().IsFocused()) {
 			m_CameraController.OnUpdate(ts);
 		}
-		
-		if (m_Cube.Rotation.x >= 360.0f) { m_Cube.Rotation.x = 360.0f - m_Cube.Rotation.x; }
-    else if (m_Cube.Rotation.y >= 360.0f) { m_Cube.Rotation.y = 360.0f - m_Cube.Rotation.y; }
-    else if (m_Cube.Rotation.z >= 360.0f) { m_Cube.Rotation.z = 360.0f - m_Cube.Rotation.z; }
-
-		//m_Cube.Rotation.x += 30.0f * ts;
-    //m_Cube.Rotation.y += 30.0f * ts;
 	}
 
 	void OnEvent(VoxelEngine::Event& event) override
@@ -103,21 +99,15 @@ public:
 		}
 	}
 
-	glm::vec3 cubePositions[6] = {
-		glm::vec3(0.0f, 0.0f, 4.0f), // front
-		glm::vec3(0.0f, 0.0f, -4.0f), // back
-		glm::vec3(0.0f, 4.0f, 0.0f), // up
-		glm::vec3(0.0f, -4.0f, 0.0f), // down
-		glm::vec3(4.0f, 0.0f, 0.0f), // left
-		glm::vec3(-4.0f, 0.0f, 0.0f), // right
-	};
-
 	void Draw() override
 	{
 		VoxelEngine::Renderer::BeginScene(m_CameraController.GetCamera());
+		m_CameraController.GetFrustum().CreateFrustum(m_CameraController.GetCamera().GetViewProjectionMatrix());
 
-		for (const auto& pos : cubePositions) {
-			VoxelEngine::Renderer::DrawCube(pos, m_Cube.Rotation, m_Cube.Size, m_CheckerboardTexture);
+		for (const auto& cube : m_Cube) {
+			if (m_CameraController.GetFrustum().IsCubeInFrustrum(cube.Size.x, cube.Position)) {
+				VoxelEngine::Renderer::DrawCube(cube.Position, cube.Rotation, cube.Size, m_CheckerboardTexture);
+			}
 		}
 
 		VoxelEngine::Renderer::EndScene();
@@ -132,7 +122,7 @@ private:
 		glm::vec2 TexCoord;
 	};
 
-	CubeData m_Cube;
+	std::vector<CubeData> m_Cube;
 
 	VoxelEngine::CameraController m_CameraController;
 
