@@ -46,8 +46,6 @@ namespace VoxelEngine
     m_ModelMatrix = glm::rotate(m_ModelMatrix, glm::radians(m_Rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
     m_ModelMatrix = glm::rotate(m_ModelMatrix, glm::radians(m_Rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
 
-		m_ModelViewMatrix = m_ViewMatrix * m_ModelMatrix;
-
 		m_ViewProjectionModelMatrix = m_ViewProjectionMatrix * m_ModelMatrix;
 	}
 }

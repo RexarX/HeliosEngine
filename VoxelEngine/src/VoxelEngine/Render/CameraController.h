@@ -40,7 +40,7 @@ namespace VoxelEngine
 
 	private:
 		float m_AspectRatio;
-		float m_Fov = 45.0f;
+		float m_Fov;
 		float m_CameraTranslationSpeed = 5.0f;
 		float m_CameraRotationSpeed = 0.1f;
 
