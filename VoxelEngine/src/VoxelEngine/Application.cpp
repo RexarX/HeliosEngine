@@ -82,7 +82,7 @@ namespace VoxelEngine
 				
 				m_LastFrameTime = time;
 
-				VE_TRACE("Framerate: {0}fps", frametime.GetFramerate());
+				//VE_TRACE("Framerate: {0}fps", frametime.GetFramerate());
 			}
 
 			m_Window->PollEvents();

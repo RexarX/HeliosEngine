@@ -102,13 +102,17 @@ public:
 	void Draw() override
 	{
 		VoxelEngine::Renderer::BeginScene(m_CameraController.GetCamera());
-		m_CameraController.GetFrustum().CreateFrustum(m_CameraController.GetCamera().GetViewProjectionMatrix());
+		m_CameraController.GetFrustum().CreateFrustum(m_CameraController.GetCamera().GetViewProjectionModelMatrix());
 
+		int cubeCount = 0;
 		for (const auto& cube : m_Cube) {
 			if (m_CameraController.GetFrustum().IsCubeInFrustrum(cube.Size.x, cube.Position)) {
 				VoxelEngine::Renderer::DrawCube(cube.Position, cube.Rotation, cube.Size, m_CheckerboardTexture);
+				cubeCount += 1;
 			}
 		}
+		std::string debug = std::to_string(cubeCount) + " | " + std::to_string(m_Cube.size());
+		VE_TRACE(debug);
 
 		VoxelEngine::Renderer::EndScene();
 	}
