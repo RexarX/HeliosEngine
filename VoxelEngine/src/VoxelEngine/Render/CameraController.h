@@ -39,8 +39,8 @@ namespace VoxelEngine
 		void CalculateMouseOffset();
 
 	private:
-		float m_AspectRatio;
-		float m_Fov;
+		float m_AspectRatio = 16.0f / 9.0f;
+		float m_Fov = 45.0f;
 		float m_CameraTranslationSpeed = 5.0f;
 		float m_CameraRotationSpeed = 0.1f;
 

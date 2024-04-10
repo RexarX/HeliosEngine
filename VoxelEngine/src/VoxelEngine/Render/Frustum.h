@@ -11,7 +11,7 @@ namespace VoxelEngine
 
     void CreateFrustum(const glm::mat4& viewProjectionModel);
 
-    bool IsCubeInFrustrum(const float size, const glm::vec3& position);
+    bool IsCubeInFrustrum(const float size, const glm::vec3& position) const;
 
   private:
     float m_Frustum[6][4];

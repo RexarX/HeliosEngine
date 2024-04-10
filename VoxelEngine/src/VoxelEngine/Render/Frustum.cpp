@@ -1,4 +1,5 @@
 #include "Frustum.h"
+#include "glad/glad.h"
 
 namespace VoxelEngine
 {
@@ -9,39 +10,36 @@ namespace VoxelEngine
     m_Frustum[0][1] = viewProjectionModel[1][3] - viewProjectionModel[1][0];
     m_Frustum[0][2] = viewProjectionModel[2][3] - viewProjectionModel[2][0];
     m_Frustum[0][3] = viewProjectionModel[3][3] - viewProjectionModel[3][0];
+
     //left plane
     m_Frustum[1][0] = viewProjectionModel[0][3] + viewProjectionModel[0][0];
     m_Frustum[1][1] = viewProjectionModel[1][3] + viewProjectionModel[1][0];
     m_Frustum[1][2] = viewProjectionModel[2][3] + viewProjectionModel[2][0];
     m_Frustum[1][3] = viewProjectionModel[3][3] + viewProjectionModel[3][0];
+
     //bottom plane
     m_Frustum[2][0] = viewProjectionModel[0][3] + viewProjectionModel[0][1];
     m_Frustum[2][1] = viewProjectionModel[1][3] + viewProjectionModel[1][1];
     m_Frustum[2][2] = viewProjectionModel[2][3] + viewProjectionModel[2][1];
     m_Frustum[2][3] = viewProjectionModel[3][3] + viewProjectionModel[3][1];
+
     //top plane
     m_Frustum[3][0] = viewProjectionModel[0][3] - viewProjectionModel[0][1];
     m_Frustum[3][1] = viewProjectionModel[1][3] - viewProjectionModel[1][1];
     m_Frustum[3][2] = viewProjectionModel[2][3] - viewProjectionModel[2][1];
     m_Frustum[3][3] = viewProjectionModel[3][3] - viewProjectionModel[3][1];
+
     //far plane
     m_Frustum[4][0] = viewProjectionModel[0][3] - viewProjectionModel[0][2];
     m_Frustum[4][1] = viewProjectionModel[1][3] - viewProjectionModel[1][2];
     m_Frustum[4][2] = viewProjectionModel[2][3] - viewProjectionModel[2][2];
     m_Frustum[4][3] = viewProjectionModel[3][3] - viewProjectionModel[3][2];
+
     //near plane
     m_Frustum[5][0] = viewProjectionModel[0][2];
     m_Frustum[5][1] = viewProjectionModel[1][2];
     m_Frustum[5][2] = viewProjectionModel[2][2];
     m_Frustum[5][3] = viewProjectionModel[3][2];
-
-    VE_TRACE("\n{0} {1} {2} {3}\n{4} {5} {6} {7}\n{8} {9} {10} {11}\n{12} {13} {14} {15}\n{16} {17} {18} {19}\n{20} {21} {22} {23}",
-      m_Frustum[0][0], m_Frustum[0][1], m_Frustum[0][2], m_Frustum[0][3],
-      m_Frustum[1][0], m_Frustum[1][1], m_Frustum[1][2], m_Frustum[1][3],
-      m_Frustum[2][0], m_Frustum[2][1], m_Frustum[2][2], m_Frustum[2][3],
-      m_Frustum[3][0], m_Frustum[3][1], m_Frustum[3][2], m_Frustum[3][3],
-      m_Frustum[4][0], m_Frustum[4][1], m_Frustum[4][2], m_Frustum[4][3],
-      m_Frustum[5][0], m_Frustum[5][1], m_Frustum[5][2], m_Frustum[5][3]);
 
     //normalization
     for (int i = 0; i < 6; ++i) {
@@ -52,52 +50,64 @@ namespace VoxelEngine
       m_Frustum[i][2] /= m_Normalize;
       m_Frustum[i][3] /= m_Normalize;
     }
+
+    VE_TRACE("\n{0} {1} {2} {3}\n{4} {5} {6} {7}\n{8} {9} {10} {11}\n{12} {13} {14} {15}\n{16} {17} {18} {19}\n{20} {21} {22} {23}",
+      m_Frustum[0][0], m_Frustum[0][1], m_Frustum[0][2], m_Frustum[0][3],
+      m_Frustum[1][0], m_Frustum[1][1], m_Frustum[1][2], m_Frustum[1][3],
+      m_Frustum[2][0], m_Frustum[2][1], m_Frustum[2][2], m_Frustum[2][3],
+      m_Frustum[3][0], m_Frustum[3][1], m_Frustum[3][2], m_Frustum[3][3],
+      m_Frustum[4][0], m_Frustum[4][1], m_Frustum[4][2], m_Frustum[4][3],
+      m_Frustum[5][0], m_Frustum[5][1], m_Frustum[5][2], m_Frustum[5][3]);
   }
 
-  bool Frustum::IsCubeInFrustrum(const float size, const glm::vec3& position)
+  bool Frustum::IsCubeInFrustrum(const float size, const glm::vec3& position) const
   {
+    int point_cnt = 0;
+    int plane_cnt = 0;
     for (int i = 0; i < 6; ++i) {
+      point_cnt = 0;
       if (m_Frustum[i][0] * (position.x - size) + m_Frustum[i][1] * (position.y - size) +
-        m_Frustum[i][2] * (position.z - size) + m_Frustum[i][3] > 0) {
-        continue;
+        m_Frustum[i][2] * (position.z - size) + m_Frustum[i][3] < 0) {
+        ++point_cnt;
       }
 
       if (m_Frustum[i][0] * (position.x + size) + m_Frustum[i][1] * (position.y - size) +
-        m_Frustum[i][2] * (position.z - size) + m_Frustum[i][3] > 0) {
-        continue;
+        m_Frustum[i][2] * (position.z - size) + m_Frustum[i][3] < 0) {
+        ++point_cnt;
       }
 
       if (m_Frustum[i][0] * (position.x - size) + m_Frustum[i][1] * (position.y + size) +
-      m_Frustum[i][2] * (position.z - size) + m_Frustum[i][3] > 0) {
-        continue;
+      m_Frustum[i][2] * (position.z - size) + m_Frustum[i][3] < 0) {
+        ++point_cnt;
       }
 
       if (m_Frustum[i][0] * (position.x + size) + m_Frustum[i][1] * (position.y + size) +
-      m_Frustum[i][2] * (position.z - size) + m_Frustum[i][3] > 0) {
-        continue;
+      m_Frustum[i][2] * (position.z - size) + m_Frustum[i][3] < 0) {
+        ++point_cnt;
       }
 
       if (m_Frustum[i][0] * (position.x - size) + m_Frustum[i][1] * (position.y - size) +
-      m_Frustum[i][2] * (position.z + size) + m_Frustum[i][3] > 0) {
-        continue;
+      m_Frustum[i][2] * (position.z + size) + m_Frustum[i][3] < 0) {
+        ++point_cnt;
       }
 
       if (m_Frustum[i][0] * (position.x + size) + m_Frustum[i][1] * (position.y - size) +
-      m_Frustum[i][2] * (position.z + size) + m_Frustum[i][3] > 0) {
-        continue;
+      m_Frustum[i][2] * (position.z + size) + m_Frustum[i][3] < 0) {
+        ++point_cnt;
       }
 
       if (m_Frustum[i][0] * (position.x - size) + m_Frustum[i][1] * (position.y + size) +
-      m_Frustum[i][2] * (position.z + size) + m_Frustum[i][3] > 0) {
-        continue;
+      m_Frustum[i][2] * (position.z + size) + m_Frustum[i][3] < 0) {
+        ++point_cnt;
       }
 
       if (m_Frustum[i][0] * (position.x + size) + m_Frustum[i][1] * (position.y + size) +
-      m_Frustum[i][2] * (position.z + size) + m_Frustum[i][3] > 0) {
-        continue;
+      m_Frustum[i][2] * (position.z + size) + m_Frustum[i][3] < 0) {
+        ++point_cnt;
       }
-      return false;
+      
+      if (point_cnt == 8) return true;
     }
-    return true;
+    return false;
   }
 }

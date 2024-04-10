@@ -16,7 +16,7 @@ namespace VoxelEngine
 		void SetPosition(const glm::vec3& position) { m_Position = position; RecalculateViewMatrix(); }
 
 		const glm::vec3& GetRotation() const { return m_Rotation; }
-		void SetRotation(glm::vec3& rotation) { m_Rotation = rotation; RecalculateViewMatrix(); }
+		void SetRotation(const glm::vec3& rotation) { m_Rotation = rotation; RecalculateViewMatrix(); }
 
 		const glm::vec3& GetCameraUp() const { return m_CameraUp; }
     const glm::vec3& GetCameraLeft() const { return m_CameraLeft; }
