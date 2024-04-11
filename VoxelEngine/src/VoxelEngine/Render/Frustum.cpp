@@ -1,10 +1,13 @@
 #include "Frustum.h"
-#include "glad/glad.h"
+
+#include "vepch.h"
 
 namespace VoxelEngine
 {
-  void Frustum::CreateFrustum(const glm::mat4& viewProjectionModel)
+  void Frustum::CreateFrustum(const Camera& camera)
   {
+    glm::mat4 viewProjectionModel = camera.GetViewProjectionModelMatrix();
+
     //right plane
     m_Frustum[0][0] = viewProjectionModel[0][3] - viewProjectionModel[0][0];
     m_Frustum[0][1] = viewProjectionModel[1][3] - viewProjectionModel[1][0];
@@ -67,47 +70,48 @@ namespace VoxelEngine
     for (int i = 0; i < 6; ++i) {
       point_cnt = 0;
       if (m_Frustum[i][0] * (position.x - size) + m_Frustum[i][1] * (position.y - size) +
-        m_Frustum[i][2] * (position.z - size) + m_Frustum[i][3] < 0) {
+        m_Frustum[i][2] * (position.z - size) + m_Frustum[i][3] > 0) {
         ++point_cnt;
       }
 
       if (m_Frustum[i][0] * (position.x + size) + m_Frustum[i][1] * (position.y - size) +
-        m_Frustum[i][2] * (position.z - size) + m_Frustum[i][3] < 0) {
+        m_Frustum[i][2] * (position.z - size) + m_Frustum[i][3] > 0) {
         ++point_cnt;
       }
 
       if (m_Frustum[i][0] * (position.x - size) + m_Frustum[i][1] * (position.y + size) +
-      m_Frustum[i][2] * (position.z - size) + m_Frustum[i][3] < 0) {
+        m_Frustum[i][2] * (position.z - size) + m_Frustum[i][3] > 0) {
         ++point_cnt;
       }
 
       if (m_Frustum[i][0] * (position.x + size) + m_Frustum[i][1] * (position.y + size) +
-      m_Frustum[i][2] * (position.z - size) + m_Frustum[i][3] < 0) {
+        m_Frustum[i][2] * (position.z - size) + m_Frustum[i][3] > 0) {
         ++point_cnt;
       }
 
       if (m_Frustum[i][0] * (position.x - size) + m_Frustum[i][1] * (position.y - size) +
-      m_Frustum[i][2] * (position.z + size) + m_Frustum[i][3] < 0) {
+        m_Frustum[i][2] * (position.z + size) + m_Frustum[i][3] > 0) {
         ++point_cnt;
       }
 
       if (m_Frustum[i][0] * (position.x + size) + m_Frustum[i][1] * (position.y - size) +
-      m_Frustum[i][2] * (position.z + size) + m_Frustum[i][3] < 0) {
+        m_Frustum[i][2] * (position.z + size) + m_Frustum[i][3] > 0) {
         ++point_cnt;
       }
 
       if (m_Frustum[i][0] * (position.x - size) + m_Frustum[i][1] * (position.y + size) +
-      m_Frustum[i][2] * (position.z + size) + m_Frustum[i][3] < 0) {
+        m_Frustum[i][2] * (position.z + size) + m_Frustum[i][3] > 0) {
         ++point_cnt;
       }
 
       if (m_Frustum[i][0] * (position.x + size) + m_Frustum[i][1] * (position.y + size) +
-      m_Frustum[i][2] * (position.z + size) + m_Frustum[i][3] < 0) {
+        m_Frustum[i][2] * (position.z + size) + m_Frustum[i][3] > 0) {
         ++point_cnt;
       }
-      
-      if (point_cnt == 8) return true;
+
+      if (point_cnt != 0) { ++plane_cnt; }
+      else { return false; }
     }
-    return false;
+    return (plane_cnt == 6) ? true : false;
   }
 }

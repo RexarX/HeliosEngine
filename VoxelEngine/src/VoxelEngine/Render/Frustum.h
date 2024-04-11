@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Camera.h"
+
 #include <glm/glm.hpp>
 
 namespace VoxelEngine
@@ -9,7 +11,7 @@ namespace VoxelEngine
   public:
     Frustum() = default;
 
-    void CreateFrustum(const glm::mat4& viewProjectionModel);
+    void CreateFrustum(const Camera& viewProjectionModel);
 
     bool IsCubeInFrustrum(const float size, const glm::vec3& position) const;
 

@@ -6,7 +6,7 @@ class GameLayer : public VoxelEngine::Layer
 {
 public:
 	GameLayer()
-		: Layer("VoxelCraft"), m_CameraController(glm::vec3(12.0f, 0.0f, 12.0f), glm::vec3(0.0f, -90.0f, 0.0f), 
+		: Layer("VoxelCraft"), m_CameraController(glm::vec3(0.0f, 0.0f, 12.0f), glm::vec3(0.0f, -90.0f, 0.0f), 
 			VoxelEngine::Application::Get().GetWindow().GetWidth() / (float)VoxelEngine::Application::Get().GetWindow().GetHeight())
 	{
 	}
@@ -103,7 +103,7 @@ public:
 	void Draw() override
 	{
 		VoxelEngine::Renderer::BeginScene(m_CameraController.GetCamera());
-		m_CameraController.GetFrustum().CreateFrustum(m_CameraController.GetCamera().GetViewProjectionModelMatrix());
+		m_CameraController.GetFrustum().CreateFrustum(m_CameraController.GetCamera());
 
 		int cubeCount = 0;
 		for (const auto& cube : m_Cube) {

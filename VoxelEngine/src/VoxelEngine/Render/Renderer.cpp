@@ -125,6 +125,10 @@ namespace VoxelEngine
 		RenderCommand::DrawArray(s_Cube.CubeVertex, 36);
 	}
 
+  void Renderer::Shutdown()
+  {
+  }
+
 	void Renderer::DrawCube(const glm::vec3& position, const glm::vec3& rotation,
     const glm::vec3& size, const std::shared_ptr<Texture>& texture)
 	{
