@@ -1,4 +1,4 @@
-#include <VoxelEngine.h>
+﻿#include <VoxelEngine.h>
 
 #include <glm/glm.hpp>
 
@@ -117,6 +117,8 @@ public:
 		}
 		std::string debug = std::to_string(cubeCount) + " | " + std::to_string(m_Cube.size());
 		VE_TRACE(std::string_view(debug));
+
+		VoxelEngine::Renderer::DrawLine(glm::vec3(12.5f, 12.5f, 12.5f), glm::vec3(0.0f, 0.0f, 0.0f), 100.0f); // (ray origin, ray direction, ray lenght)
 
 		VoxelEngine::Renderer::EndScene();
 	}

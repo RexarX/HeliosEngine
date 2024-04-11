@@ -31,6 +31,8 @@ namespace VoxelEngine
 		static void DrawCube(const glm::vec3& position, const glm::vec3& rotation,
 			const glm::vec3& size, const std::shared_ptr<Texture>& texture);
 
+		static void DrawLine(const glm::vec3& position, const glm::vec3& rotation, const float lenght);
+
 	private:
 		struct SceneData
 		{

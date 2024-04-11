@@ -41,4 +41,9 @@ namespace VoxelEngine
 	{
     glDrawArrays(GL_TRIANGLES, 0, vertexCount);
 	}
+
+	void OpenGLRendererAPI::DrawLine(const std::shared_ptr<VertexArray>& vertexArray, const uint32_t vertexCount)
+	{
+    glDrawArrays(GL_LINES, 0, vertexCount);
+	}
 }

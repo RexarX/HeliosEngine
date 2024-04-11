@@ -32,6 +32,11 @@ namespace VoxelEngine
       s_RendererAPI->DrawArray(vertexArray, vertexCount);
 		}
 
+		inline static void DrawLine(const std::shared_ptr<VertexArray>& vertexArray, const uint32_t vertexCount)
+		{
+      s_RendererAPI->DrawLine(vertexArray, vertexCount);
+		}
+
 	private:
 		static std::unique_ptr<RendererAPI> s_RendererAPI;
 	};

@@ -11,7 +11,7 @@ namespace VoxelEngine
   public:
     Frustum() = default;
 
-    void CreateFrustum(const Camera& viewProjectionModel);
+    void CreateFrustum(const Camera& camera);
 
     bool IsCubeInFrustrum(const float size, const glm::vec3& position) const;
 

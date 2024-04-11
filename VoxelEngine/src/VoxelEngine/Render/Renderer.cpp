@@ -18,9 +18,18 @@ namespace VoxelEngine
     std::shared_ptr<Shader> CubeShader;
   };
 
+  struct Line
+  {
+    std::shared_ptr<VertexArray> LineVertex;
+    std::shared_ptr<VertexBuffer> LineBuffer;
+
+    std::shared_ptr<Shader> LineShader;
+  };
+
 	std::unique_ptr<Renderer::SceneData> Renderer::s_SceneData = std::make_unique<Renderer::SceneData>();
 
   static Cube s_Cube;
+  static Line s_Line;
 
 	void Renderer::Init()
 	{
@@ -88,10 +97,27 @@ namespace VoxelEngine
 
     s_Cube.CubeVertex->AddVertexBuffer(s_Cube.CubeBuffer);
     
-    s_Cube.CubeBuffer->Unbind();
     s_Cube.CubeVertex->Unbind();
 
     s_Cube.CubeShader = Shader::Create(ROOT + "VoxelEngine/Assets/Shaders/Cube.glsl");
+
+    const float lineVertices[] = {
+      0.0f, 0.0f, 0.0f,
+      0.0f, 0.0f, 1.0f
+    };
+
+    s_Line.LineVertex = VertexArray::Create();
+    s_Line.LineVertex->Bind();
+
+    s_Line.LineBuffer = VertexBuffer::Create(lineVertices, sizeof(lineVertices));
+    s_Line.LineBuffer->SetLayout({ { ShaderDataType::Float3, "a_Pos" } });
+
+    s_Line.LineVertex->AddVertexBuffer(s_Line.LineBuffer);
+
+    s_Line.LineVertex->Unbind();
+
+    s_Line.LineShader = Shader::Create(ROOT + "VoxelEngine/Assets/Shaders/Line.glsl");
+
 	}
 
   void Renderer::OnWindowResize(const uint32_t width, const uint32_t height)
@@ -110,7 +136,9 @@ namespace VoxelEngine
 	{
     s_Cube.CubeShader->Unbind();
     s_Cube.CubeVertex->Unbind();
-    s_Cube.CubeBuffer->Unbind();
+
+    s_Line.LineShader->Unbind();
+    s_Line.LineVertex->Unbind();
 	}
 
 	void Renderer::Submit(glm::mat4& transform)
@@ -141,4 +169,21 @@ namespace VoxelEngine
 
     Submit(transform);
 	}
+
+  void Renderer::DrawLine(const glm::vec3& position, const glm::vec3& rotation, const float lenght) 
+  {
+    glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), glm::vec3(lenght));
+    transform = glm::rotate(transform, glm::radians(rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
+    transform = glm::rotate(transform, glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
+    transform = glm::rotate(transform, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
+
+    s_Line.LineShader->Bind();
+    s_Line.LineVertex->Bind();
+
+    s_Line.LineShader->UploadUniformMat4("u_Projection", s_SceneData->ProjectionMatrix);
+    s_Line.LineShader->UploadUniformMat4("u_View", s_SceneData->ViewMatrix);
+    s_Line.LineShader->UploadUniformMat4("u_Transform", transform);
+
+    RenderCommand::DrawLine(s_Line.LineVertex, 2);
+  }
 }

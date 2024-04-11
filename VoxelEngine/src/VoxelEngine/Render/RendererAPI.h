@@ -22,6 +22,7 @@ namespace VoxelEngine
 
 		virtual void DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray, const uint32_t indexCount = 0) = 0;
 		virtual void DrawArray(const std::shared_ptr<VertexArray>& vertexArray, const uint32_t vertexCount = 0) = 0;
+		virtual void DrawLine(const std::shared_ptr<VertexArray>& vertexArray, const uint32_t vertexCount = 0) = 0;
 
 		static std::unique_ptr<RendererAPI> Create();
 
