@@ -32,7 +32,8 @@ namespace VoxelEngine
 		m_Name = filepath.substr(lastSlash, count);
 	}
 
-	OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertex, const std::string& fragment)
+	OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertex,
+														 const std::string& fragment)
 		: m_Name(name)
 	{
 		std::unordered_map<GLenum, std::string> sources;
@@ -78,7 +79,8 @@ namespace VoxelEngine
 
 			size_t nextLinePos = source.find_first_not_of("\r\n", eol);
 			pos = source.find(typeToken, nextLinePos);
-			shaderSources[ShaderTypeFromString(type)] = source.substr(nextLinePos, pos - (nextLinePos == std::string::npos ? source.size() - 1 : nextLinePos));
+			shaderSources[ShaderTypeFromString(type)] = source.substr(nextLinePos,
+				pos - (nextLinePos == std::string::npos ? source.size() - 1 : nextLinePos));
 		}
 
 		return shaderSources;

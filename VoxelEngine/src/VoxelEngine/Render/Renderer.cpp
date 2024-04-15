@@ -127,7 +127,7 @@ namespace VoxelEngine
 
 	void Renderer::BeginScene(const Camera& camera)
 	{
-		s_SceneData->ViewProjectionMatrix = camera.GetViewProjectionMatrix();
+		s_SceneData->ViewProjectionMatrix = camera.GetProjectionViewMatrix();
     s_SceneData->ProjectionMatrix = camera.GetProjectionMatrix();
     s_SceneData->ViewMatrix = camera.GetViewMatrix();
 	}
@@ -141,24 +141,12 @@ namespace VoxelEngine
     s_Line.LineVertex->Unbind();
 	}
 
-	void Renderer::Submit(glm::mat4& transform)
-	{
-		s_Cube.CubeShader->Bind();
-    s_Cube.CubeVertex->Bind();
-
-    s_Cube.CubeShader->UploadUniformMat4("u_Projection", s_SceneData->ProjectionMatrix);
-    s_Cube.CubeShader->UploadUniformMat4("u_View", s_SceneData->ViewMatrix);
-    s_Cube.CubeShader->UploadUniformMat4("u_Transform", transform);
-
-		RenderCommand::DrawArray(s_Cube.CubeVertex, 36);
-	}
-
   void Renderer::Shutdown()
   {
   }
 
 	void Renderer::DrawCube(const glm::vec3& position, const glm::vec3& rotation,
-    const glm::vec3& size, const std::shared_ptr<Texture>& texture)
+                          const glm::vec3& size, const std::shared_ptr<Texture>& texture)
 	{
     texture->Bind();
 
@@ -167,10 +155,18 @@ namespace VoxelEngine
     transform = glm::rotate(transform, glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
     transform = glm::rotate(transform, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
 
-    Submit(transform);
+    s_Cube.CubeShader->Bind();
+    s_Cube.CubeVertex->Bind();
+
+    s_Cube.CubeShader->UploadUniformMat4("u_Projection", s_SceneData->ProjectionMatrix);
+    s_Cube.CubeShader->UploadUniformMat4("u_View", s_SceneData->ViewMatrix);
+    s_Cube.CubeShader->UploadUniformMat4("u_Transform", transform);
+
+    RenderCommand::DrawArray(s_Cube.CubeVertex, 36);
 	}
 
-  void Renderer::DrawLine(const glm::vec3& position, const glm::vec3& rotation, const float lenght) 
+  void Renderer::DrawLine(const glm::vec3& position, const glm::vec3& rotation,
+                          const float lenght) 
   {
     glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), glm::vec3(lenght));
     transform = glm::rotate(transform, glm::radians(rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));

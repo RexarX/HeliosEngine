@@ -51,7 +51,8 @@ namespace VoxelEngine
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
+		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(),
+																nullptr, nullptr);
 		glfwMakeContextCurrent(m_Window);
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		VE_CORE_ASSERT(status, "Failed to initialize Glad!");
@@ -65,7 +66,8 @@ namespace VoxelEngine
 
 		glViewport(0, 0, props.Width, props.Height);
 
-    glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, const int width, const int height)
+    glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, const int width,
+															const int height)
       {
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 				data.Width = width;
@@ -83,7 +85,8 @@ namespace VoxelEngine
 				data.EventCallback(event);
 			});
 
-		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, const int key, const int scancode, const int action, const int mods)
+		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, const int key, const int scancode,
+											 const int action, const int mods)
 			{
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
@@ -112,7 +115,8 @@ namespace VoxelEngine
 				}
 			});
 
-		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, const int button, const int action, const int mods)
+		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, const int button,
+															 const int action, const int mods)
 			{
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
@@ -141,7 +145,8 @@ namespace VoxelEngine
 				}
 			});
 
-		glfwSetScrollCallback(m_Window, [](GLFWwindow* window, const double xOffset, const double yOffset)
+		glfwSetScrollCallback(m_Window, [](GLFWwindow* window, const double xOffset,
+													const double yOffset)
 			{
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
@@ -149,7 +154,8 @@ namespace VoxelEngine
 				data.EventCallback(event);
 			});
 
-		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, const double xPos, const double yPos)
+		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, const double xPos,
+														 const double yPos)
 			{
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 

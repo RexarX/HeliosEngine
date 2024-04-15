@@ -25,10 +25,11 @@ namespace VoxelEngine
 		Camera& GetCamera() { return m_Camera; }
 		const Camera& GetCamera() const { return m_Camera; }
 
+		Frustum& GetFrustum() { return m_Frustum; }
+		const Frustum& GetFrustum() const { return m_Frustum; }
+
 		float GetFov() const { return m_Fov; }
 		void SetFov(const float fov) { m_Fov = fov; }
-
-		Frustum GetFrustum() const { return m_Frustum; }
 
 		void SetFirstInput() { m_FirstInput = true; }
 

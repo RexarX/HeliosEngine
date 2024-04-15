@@ -13,10 +13,10 @@ namespace VoxelEngine
 		void SetProjection(const float aspectRatio, const float fov);
 
 		const glm::vec3& GetPosition() const { return m_Position; }
-		void SetPosition(const glm::vec3& position) { m_Position = position; RecalculateViewMatrix(); }
+		void SetPosition(const glm::vec3& position) { m_Position = position; RecalculateMatrix(); }
 
 		const glm::vec3& GetRotation() const { return m_Rotation; }
-		void SetRotation(const glm::vec3& rotation) { m_Rotation = rotation; RecalculateViewMatrix(); }
+		void SetRotation(const glm::vec3& rotation) { m_Rotation = rotation; RecalculateMatrix(); }
 
 		const glm::vec3& GetCameraUp() const { return m_CameraUp; }
     const glm::vec3& GetCameraLeft() const { return m_CameraLeft; }
@@ -24,19 +24,19 @@ namespace VoxelEngine
 
 		const glm::mat4& GetProjectionMatrix() const { return m_ProjectionMatrix; }
 		const glm::mat4& GetViewMatrix() const { return m_ViewMatrix; }
-		const glm::mat4& GetViewProjectionMatrix() const { return m_ViewProjectionMatrix; }
-    const glm::mat4& GetViewProjectionModelMatrix() const { return m_ViewProjectionModelMatrix; }
+		const glm::mat4& GetProjectionViewMatrix() const { return m_ProjectionViewMatrix; }
+    const glm::mat4& GetProjectionViewModelMatrix() const { return m_ProjectionViewModelMatrix; }
 
 	private:
 		void NormalizeDirection();
-		void RecalculateViewMatrix();
+		void RecalculateMatrix();
 
 	private:
 		glm::mat4 m_ProjectionMatrix;
 		glm::mat4 m_ViewMatrix;
 		glm::mat4 m_ModelMatrix;
-		glm::mat4 m_ViewProjectionMatrix;
-		glm::mat4 m_ViewProjectionModelMatrix;
+		glm::mat4 m_ProjectionViewMatrix;
+		glm::mat4 m_ProjectionViewModelMatrix;
 
 		glm::vec3 m_CameraUp;
 		glm::vec3 m_CameraLeft;

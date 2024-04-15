@@ -9,7 +9,7 @@ namespace VoxelEngine
 		double Stop();
 
 	private:
-		double startTimeStamp;
-		double stopTimeStamp;
+		double m_StartTimeStamp;
+		double m_StopTimeStamp;
 	};
 }

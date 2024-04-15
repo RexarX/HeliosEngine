@@ -20,7 +20,8 @@ namespace VoxelEngine
 		return nullptr;
 	}
 
-	std::shared_ptr<Shader> Shader::Create(const std::string& name, const std::string& vertex, const std::string& fragment)
+	std::shared_ptr<Shader> Shader::Create(const std::string& name, const std::string& vertex,
+																				 const std::string& fragment)
 	{
 		switch (Renderer::GetAPI())
 		{
@@ -51,7 +52,8 @@ namespace VoxelEngine
 		return shader;
 	}
 
-	std::shared_ptr<Shader> ShaderLibrary::Load(const std::string& name, const std::string& filepath)
+	std::shared_ptr<Shader> ShaderLibrary::Load(const std::string& name,
+																							const std::string& filepath)
 	{
 		auto shader = Shader::Create(filepath);
 		Add(name, shader);

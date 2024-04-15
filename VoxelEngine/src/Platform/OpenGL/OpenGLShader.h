@@ -12,7 +12,8 @@ namespace VoxelEngine
 	{
 	public:
 		OpenGLShader(const std::string& filepath);
-		OpenGLShader(const std::string& name, const std::string& vertex, const std::string& fragment);
+		OpenGLShader(const std::string& name, const std::string& vertex,
+								 const std::string& fragment);
 		virtual ~OpenGLShader();
 
 		virtual void Bind() const override;

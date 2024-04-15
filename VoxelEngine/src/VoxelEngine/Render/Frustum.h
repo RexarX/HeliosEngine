@@ -15,6 +15,8 @@ namespace VoxelEngine
 
     bool IsCubeInFrustrum(const float size, const glm::vec3& position) const;
 
+    float Get(const int32_t i, const int32_t j) const { return m_Frustum[i][j]; }
+
   private:
     float m_Frustum[6][4];
     float m_Normalize;

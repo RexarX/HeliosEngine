@@ -32,7 +32,8 @@ namespace VoxelEngine
 	}
 
 	OpenGLTexture::OpenGLTexture(const TextureSpecification& specification)
-		: m_Specification(specification), m_Width(m_Specification.Width), m_Height(m_Specification.Height)
+		: m_Specification(specification), m_Width(m_Specification.Width),
+			m_Height(m_Specification.Height)
 	{
 		m_InternalFormat = VoxelEngineImageFormatToGLInternalFormat(m_Specification.Format);
 		m_DataFormat = VoxelEngineImageFormatToGLDataFormat(m_Specification.Format);
@@ -84,10 +85,12 @@ namespace VoxelEngine
 			glCreateTextures(GL_TEXTURE_2D, 1, &m_RendererID);
 			glTextureStorage2D(m_RendererID, 1, internalFormat, m_Width, m_Height);
 
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB,
+									 GL_UNSIGNED_BYTE, data);
 			glGenerateMipmap(GL_TEXTURE_2D);
 
-			glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Width, m_Height, dataFormat, GL_UNSIGNED_BYTE, data);
+			glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Width, m_Height, dataFormat,
+													GL_UNSIGNED_BYTE, data);
 
 			stbi_image_free(data);
 		}
@@ -102,7 +105,8 @@ namespace VoxelEngine
 	{
 		uint32_t bpp = m_DataFormat == GL_RGBA ? 4 : 3;
 		VE_CORE_ASSERT(size == m_Width * m_Height * bpp, "Data must be entire texture!");
-		glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Width, m_Height, m_DataFormat, GL_UNSIGNED_BYTE, data);
+		glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Width, m_Height, m_DataFormat,
+												GL_UNSIGNED_BYTE, data);
 	}
 
 	void OpenGLTexture::Bind(const uint32_t slot) const
