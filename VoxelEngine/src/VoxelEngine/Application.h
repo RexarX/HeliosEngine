@@ -26,6 +26,8 @@ namespace VoxelEngine
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* layer);
 
+		inline Timestep GetDeltaTime() { return m_DeltaTime; }
+
 		inline Window& GetWindow() { return *m_Window; }
 
 		inline static Application& Get() { return *s_Instance; }
@@ -38,7 +40,7 @@ namespace VoxelEngine
 
 		LayerStack m_LayerStack;
 
-		Timer m_Timer;
+		Timestep m_DeltaTime;
 
 		double m_FramerateLimit = 0.0;
 

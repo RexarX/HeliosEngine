@@ -13,14 +13,14 @@ public:
 
 	void OnAttach() override
 	{
-		//VoxelEngine::Application::Get().GetWindow().SetVSync(false);
+		VoxelEngine::Application::Get().GetWindow().SetVSync(false);
 		//VoxelEngine::Application::Get().GetWindow().SetFramerate(60.0);
 
 		m_CheckerboardTexture = VoxelEngine::Texture::Create(ROOT + "VoxelCraft/Assets/Textures/Checkerboard.png");
 		m_DirtTexture = VoxelEngine::Texture::Create(ROOT + "VoxelCraft/Assets/Textures/Dirt.png");
 
-		for (float i = 0; i < 25; ++i) {
-			for (float j = 0; j < 25; ++j) {
+		for (float i = 0; i < 100; ++i) {
+			for (float j = 0; j < 100; ++j) {
 				m_Cube.push_back({ glm::vec3(i, -1.0f, j), glm::vec3(1.0f, 1.0f, 1.0f),
 					glm::vec3(0.0f, 0.0f, 0.0f), glm::vec2(0.0f, 0.0f) });
 			}
@@ -102,17 +102,11 @@ public:
 	{
 		VoxelEngine::Renderer::BeginScene(m_CameraController.GetCamera());
 		m_CameraController.GetFrustum().CreateFrustum(m_CameraController.GetCamera());
-		 
-		int cubeCount = 0;
 		for (const auto& cube : m_Cube) {
 			if (m_CameraController.GetFrustum().IsCubeInFrustrum(cube.Size.x, cube.Position)) {
 				VoxelEngine::Renderer::DrawCube(cube.Position, cube.Rotation, cube.Size, m_DirtTexture);
-				++cubeCount;
 			}
 		}
-		std::string debug = std::to_string(cubeCount) + " | " + std::to_string(m_Cube.size());
-		VE_TRACE(std::string_view(debug));
-
 		VoxelEngine::Renderer::DrawLine(glm::vec3(12.5f, 12.5f, 12.5f), glm::vec3(0.0f, 0.0f, 0.0f), 100.0f); // (ray origin, ray direction, ray lenght)
 
 		VoxelEngine::Renderer::EndScene();

@@ -9,10 +9,14 @@ namespace VoxelEngine
 		m_StartTimeStamp = glfwGetTime();
 	}
 
-	double Timer::Stop()
+	void Timer::Stop()
 	{
 		m_StopTimeStamp = glfwGetTime();
+		m_Elapsed = m_StopTimeStamp - m_StartTimeStamp;
+	}
 
-		return m_StopTimeStamp - m_StartTimeStamp;
+	double Timer::GetElapsedSec()
+	{
+		return m_Elapsed;
 	}
 }

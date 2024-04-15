@@ -13,10 +13,10 @@ namespace VoxelEngine
 		void SetProjection(const float aspectRatio, const float fov);
 
 		const glm::vec3& GetPosition() const { return m_Position; }
-		void SetPosition(const glm::vec3& position) { m_Position = position; RecalculateMatrix(); }
+		void SetPosition(const glm::vec3& position);
 
 		const glm::vec3& GetRotation() const { return m_Rotation; }
-		void SetRotation(const glm::vec3& rotation) { m_Rotation = rotation; RecalculateMatrix(); }
+		void SetRotation(const glm::vec3& rotation);
 
 		const glm::vec3& GetCameraUp() const { return m_CameraUp; }
     const glm::vec3& GetCameraLeft() const { return m_CameraLeft; }
@@ -29,7 +29,6 @@ namespace VoxelEngine
 
 	private:
 		void NormalizeDirection();
-		void RecalculateMatrix();
 
 	private:
 		glm::mat4 m_ProjectionMatrix;

@@ -57,22 +57,22 @@ namespace VoxelEngine
 
 	void Application::Run()
 	{
-		Timestep timestep, frametime;
+		Timestep timestep;
 		double time;
-		double m_LastFrameUpdate(0.0), m_LastFrameTime(0.0);
+		double LastFrameUpdate(0.0), LastFrameTime(0.0);
 
 		m_FramerateLimit = 1 / m_Window->GetFramerate();
 
 		while (m_Running) {
 			time = glfwGetTime();
-			timestep = time - m_LastFrameUpdate;
-			frametime = time - m_LastFrameTime;
+			timestep = time - LastFrameTime;
+			m_DeltaTime = time - LastFrameUpdate;
 			
 			for (Layer* layer : m_LayerStack) {
 				layer->OnUpdate(timestep);
 			}
 
-			if (!m_Window->IsMinimized() && (frametime >= m_FramerateLimit ||
+			if (!m_Window->IsMinimized() && (m_DeltaTime >= m_FramerateLimit ||
 																			 m_Window->GetFramerate() == 0.0)) {
 				m_Window->ClearBuffer();
 				for (Layer* layer : m_LayerStack) {
@@ -80,14 +80,12 @@ namespace VoxelEngine
 				}
 				m_Window->OnUpdate();
 				
-				m_LastFrameTime = time;
-
-				//VE_TRACE("Framerate: {0}fps", frametime.GetFramerate());
+				LastFrameUpdate = time;
 			}
 
 			m_Window->PollEvents();
 
-			m_LastFrameUpdate = time;
+			LastFrameTime = time;
 		}
 	}
 }
