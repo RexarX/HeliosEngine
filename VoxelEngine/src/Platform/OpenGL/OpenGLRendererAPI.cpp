@@ -17,7 +17,6 @@ namespace VoxelEngine
 		glEnable(GL_CULL_FACE);
 
 		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-		SetViewport(0, 0, 1280, 720);
 
 		SetClearColor({ 0.0f, 0.0f, 0.0f, 0.0f });
 	}
