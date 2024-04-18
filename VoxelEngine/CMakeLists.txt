@@ -69,26 +69,26 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
     TARGET_NAME_DEBUG   "VoxelEngine"
-    TARGET_NAME_DIST    "VoxelEngine"
     TARGET_NAME_RELEASE "VoxelEngine"
+    TARGET_NAME_DIST    "VoxelEngine"
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
     OUTPUT_DIRECTORY_DEBUG   "${CMAKE_CURRENT_SOURCE_DIR}/../bin/Debug-windows-x86_64/"
-    OUTPUT_DIRECTORY_DIST    "${CMAKE_CURRENT_SOURCE_DIR}/../bin/Dist-windows-x86_64/"
     OUTPUT_DIRECTORY_RELEASE "${CMAKE_CURRENT_SOURCE_DIR}/../bin/Release-windows-x86_64/"
+    OUTPUT_DIRECTORY_DIST    "${CMAKE_CURRENT_SOURCE_DIR}/../bin/Dist-windows-x86_64/"
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
     ARCHIVE_OUTPUT_DIRECTORY_DEBUG   "${CMAKE_CURRENT_SOURCE_DIR}/../bin/Debug-windows-x86_64"
-    ARCHIVE_OUTPUT_DIRECTORY_DIST    "${CMAKE_CURRENT_SOURCE_DIR}/../bin/Dist-windows-x86_64"
     ARCHIVE_OUTPUT_DIRECTORY_RELEASE "${CMAKE_CURRENT_SOURCE_DIR}/../bin/Release-windows-x86_64"
+    ARCHIVE_OUTPUT_DIRECTORY_DIST    "${CMAKE_CURRENT_SOURCE_DIR}/../bin/Dist-windows-x86_64"
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
     ARCHIVE_OUTPUT_NAME_DEBUG   "VoxelEngine"
-    ARCHIVE_OUTPUT_NAME_DIST    "VoxelEngine"
     ARCHIVE_OUTPUT_NAME_RELEASE "VoxelEngine"
+    ARCHIVE_OUTPUT_NAME_DIST    "VoxelEngine"
 )
 
 get_property(MSVC_RUNTIME_LIBRARY_DEFAULT TARGET ${PROJECT_NAME} PROPERTY MSVC_RUNTIME_LIBRARY)
@@ -97,13 +97,13 @@ string(CONCAT "MSVC_RUNTIME_LIBRARY_STR"
     $<$<CONFIG:Debug>:
         MultiThreadedDebugDLL
     >
-    $<$<CONFIG:Dist>:
-        MultiThreadedDLL
-    >
     $<$<CONFIG:Release>:
         MultiThreadedDLL
     >
-    $<$<NOT:$<OR:$<CONFIG:Debug>,$<CONFIG:Dist>,$<CONFIG:Release>>>:${MSVC_RUNTIME_LIBRARY_DEFAULT}>
+    $<$<CONFIG:Dist>:
+        MultiThreadedDLL
+    >
+    $<$<NOT:$<OR:$<CONFIG:Debug>,$<CONFIG:Release>,$<CONFIG:Dist>>>:${MSVC_RUNTIME_LIBRARY_DEFAULT}>
 )
 set_target_properties(${PROJECT_NAME} PROPERTIES MSVC_RUNTIME_LIBRARY ${MSVC_RUNTIME_LIBRARY_STR})
 
@@ -121,11 +121,11 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
     "$<$<CONFIG:Debug>:"
         "VE_DEBUG"
     ">"
-    "$<$<CONFIG:Dist>:"
-        "VE_DIST"
-    ">"
     "$<$<CONFIG:Release>:"
         "VE_RELEASE"
+    ">"
+    "$<$<CONFIG:Dist>:"
+        "VE_DIST"
     ">"
     "VE_BUILD_DLL;"
     "GLFW_INCLUDE_NONE;"
@@ -143,13 +143,13 @@ if(MSVC)
             /Od;
             /ZI
         >
-        $<$<CONFIG:Dist>:
+        $<$<CONFIG:Release>:
             /O2;
             /Oi;
             /Gy;
             ${DEFAULT_CXX_DEBUG_INFORMATION_FORMAT}
         >
-        $<$<CONFIG:Release>:
+        $<$<CONFIG:Dist>:
             /O2;
             /Oi;
             /Gy;
@@ -163,13 +163,13 @@ if(MSVC)
             /DEBUG;
             /INCREMENTAL
         >
-        $<$<CONFIG:Dist>:
+         $<$<CONFIG:Release>:
             /DEBUG:NONE;
             /OPT:REF;
             /OPT:ICF;
             /INCREMENTAL:NO
         >
-        $<$<CONFIG:Release>:
+        $<$<CONFIG:Dist>:
             /DEBUG:NONE;
             /OPT:REF;
             /OPT:ICF;

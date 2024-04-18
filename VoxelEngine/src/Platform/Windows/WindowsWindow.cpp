@@ -2,11 +2,13 @@
 
 #include "WindowsWindow.h"
 
-#include "VoxelEngine/Events/ApplicationEvent.h"
-#include "VoxelEngine/Events/MouseEvent.h"
-#include "VoxelEngine/Events/KeyEvent.h"
+#include "Events/ApplicationEvent.h"
+#include "Events/MouseEvent.h"
+#include "Events/KeyEvent.h"
 
-#include <glad/glad.h>
+#include "Platform/OpenGL/OpenGLContext.h"
+
+#include <GLFW/glfw3.h>
 
 namespace VoxelEngine
 {
@@ -53,9 +55,11 @@ namespace VoxelEngine
 
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(),
 																nullptr, nullptr);
-		glfwMakeContextCurrent(m_Window);
-		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		VE_CORE_ASSERT(status, "Failed to initialize Glad!");
+ 
+		m_Context = std::make_unique<OpenGLContext>(m_Window);
+		m_Context->Init();
+		m_Context->SetViewport(props.Width, props.Height);
+
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 
 		glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
@@ -64,16 +68,12 @@ namespace VoxelEngine
 		SetMinimized(false);
 		SetFramerate(0.0);
 
-		glViewport(0, 0, props.Width, props.Height);
-
     glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, const int width,
 															const int height)
       {
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 				data.Width = width;
 				data.Height = height;
-				glViewport(0, 0, width, height);
-
 				WindowResizeEvent event(width, height);
 				data.EventCallback(event);
 			});
@@ -171,17 +171,14 @@ namespace VoxelEngine
 
 	void WindowsWindow::ClearBuffer() 
 	{
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	}
-
-	void WindowsWindow::PollEvents()
-	{
-		glfwPollEvents();
+		m_Context->ClearBuffer();
 	}
 
   void WindowsWindow::OnUpdate()
   {
+		glfwPollEvents();
 		glfwSwapBuffers(m_Window);
+		ClearBuffer();
   }
 
   void WindowsWindow::SetVSync(const bool enabled)

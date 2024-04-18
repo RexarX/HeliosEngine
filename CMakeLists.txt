@@ -10,8 +10,8 @@ set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
 set(CMAKE_CONFIGURATION_TYPES
     "Debug"
-    "Dist"
     "Release"
+    "Dist"
     CACHE STRING "" FORCE
 )
 
@@ -54,13 +54,13 @@ include_directories(VoxelEngine/src)
 include_directories(VoxelEngine/src/VoxelEngine)
 include_directories(VoxelEngine/src/Platform)
 
-option(BUILD_SHARED_LIBS "Build shared libraries" ON)
+option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 set(BUILD_SHARED_LIBS OFF)
 
-option(GLM_ENABLE_FAST_MATH "Enable fast math optimizations" OFF)
+option(GLM_ENABLE_FAST_MATH "Enable fast math optimizations" ON)
 set(GLM_ENABLE_FAST_MATH ON)
 
-option(SPDLOG_BUILD_SHARED "Build shared library" OFF)
+option(SPDLOG_BUILD_SHARED "Build shared library" ON)
 set(SPDLOG_BUILD_SHARED ON)
 
 add_subdirectory(VoxelCraft)

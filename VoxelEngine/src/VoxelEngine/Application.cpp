@@ -42,6 +42,7 @@ namespace VoxelEngine
 	{
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
+		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(OnWindowResize));
 
 		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin(); ) {
 			(*--it)->OnEvent(e);
@@ -52,6 +53,19 @@ namespace VoxelEngine
 	bool Application::OnWindowClose(WindowCloseEvent& e)
 	{
 		m_Running = false;
+		return true;
+	}
+
+	bool Application::OnWindowResize(WindowResizeEvent& e)
+	{
+		if (e.GetWidth() == 0 || e.GetHeight() == 0) {
+			m_Window->SetMinimized(true);
+			return true;
+		}
+
+		m_Window->SetMinimized(false);
+		Renderer::OnWindowResize(e.GetWidth(), e.GetHeight());
+
 		return true;
 	}
 
@@ -74,7 +88,6 @@ namespace VoxelEngine
 
 			if (!m_Window->IsMinimized() && (m_DeltaTime >= m_FramerateLimit ||
 																			 m_Window->GetFramerate() == 0.0)) {
-				m_Window->ClearBuffer();
 				for (Layer* layer : m_LayerStack) {
 					layer->Draw();
 				}
@@ -82,8 +95,6 @@ namespace VoxelEngine
 				
 				LastFrameUpdate = time;
 			}
-
-			m_Window->PollEvents();
 
 			LastFrameTime = time;
 		}

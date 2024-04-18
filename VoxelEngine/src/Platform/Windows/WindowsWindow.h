@@ -1,10 +1,12 @@
 #pragma once
 
-#include "VoxelEngine/Window.h"
+#include "Window.h"
+
+#include "Render/GraphicsContext.h"
 
 #include "Events/KeyEvent.h"
 
-#include <GLFW/glfw3.h>
+struct GLFWwindow;
 
 namespace VoxelEngine
 {
@@ -16,7 +18,6 @@ namespace VoxelEngine
 
 		void ClearBuffer() override;
 		void OnUpdate() override;
-		void PollEvents() override;
 
 		inline uint32_t GetWidth() const override { return m_Data.Width; }
 		inline uint32_t GetHeight() const override { return m_Data.Height; }
@@ -44,6 +45,7 @@ namespace VoxelEngine
 
 	private:
 		GLFWwindow* m_Window;
+		std::unique_ptr<GraphicsContext> m_Context;
 
 		struct WindowData
 		{

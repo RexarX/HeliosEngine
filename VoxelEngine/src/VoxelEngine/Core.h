@@ -24,4 +24,8 @@
 
 #define VE_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
 
-#define ROOT std::filesystem::current_path().parent_path().parent_path().string() + '/'
+#ifdef VE_DIST
+	#define ROOT
+#else
+	#define ROOT std::filesystem::current_path().parent_path().parent_path().string() + '/'
+#endif

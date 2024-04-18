@@ -42,27 +42,7 @@ public:
 	{
 		m_CameraController.OnEvent(event);
 
-		if (event.GetEventType() == VoxelEngine::EventType::MouseMoved) {
-			VoxelEngine::MouseMovedEvent& e = (VoxelEngine::MouseMovedEvent&)event;
-			VE_TRACE("Mouse moved to {0}x{1}!", e.GetX(), e.GetY());
-		}
-
-		else if (event.GetEventType() == VoxelEngine::EventType::MouseButtonPressed) {
-			VoxelEngine::MouseButtonPressedEvent& e = (VoxelEngine::MouseButtonPressedEvent&)event;
-			VE_TRACE("Mouse button {0} pressed!", e.GetMouseButton());
-		}
-
-		else if (event.GetEventType() == VoxelEngine::EventType::MouseButtonReleased) {
-			VoxelEngine::MouseButtonReleasedEvent& e = (VoxelEngine::MouseButtonReleasedEvent&)event;
-			VE_TRACE("Mouse button {0} released!", e.GetMouseButton());
-		}
-
-		else if (event.GetEventType() == VoxelEngine::EventType::MouseScrolled) {
-			VoxelEngine::MouseScrolledEvent& e = (VoxelEngine::MouseScrolledEvent&)event;
-			VE_TRACE("Mouse scrolled ({0}, {1})!", e.GetXOffset(), e.GetYOffset());
-		}
-
-		else if (event.GetEventType() == VoxelEngine::EventType::KeyPressed) {
+		if (event.GetEventType() == VoxelEngine::EventType::KeyPressed) {
 			VoxelEngine::KeyPressedEvent& e = (VoxelEngine::KeyPressedEvent&)event;
 			if (e.GetKeyCode() == VoxelEngine::Key::Escape) {
 				if (VoxelEngine::Application::Get().GetWindow().IsFocused()) {
@@ -73,28 +53,6 @@ public:
 					VoxelEngine::Application::Get().GetWindow().SetFocused(true);
 				}
 			}
-			VE_TRACE("{0} key is pressed!", e.GetKeyCode());
-		}
-
-		else if (event.GetEventType() == VoxelEngine::EventType::KeyReleased) {
-			VoxelEngine::KeyReleasedEvent& e = (VoxelEngine::KeyReleasedEvent&)event;
-			VE_TRACE("{0} key is released!", e.GetKeyCode());
-		}
-
-		else if (event.GetEventType() == VoxelEngine::EventType::WindowResize) {
-			VoxelEngine::WindowResizeEvent& e = (VoxelEngine::WindowResizeEvent&)event;
-			if (e.GetHeight() == 0 && e.GetWidth() == 0) {
-				VoxelEngine::Application::Get().GetWindow().SetMinimized(true);
-			}
-			else if (VoxelEngine::Application::Get().GetWindow().IsMinimized()) {
-				VoxelEngine::Application::Get().GetWindow().SetMinimized(false);
-			}
-			VE_TRACE("Window resized to {0}x{1}", e.GetWidth(), e.GetHeight());
-		}
-
-		else if (event.GetEventType() == VoxelEngine::EventType::WindowClose) {
-			VoxelEngine::WindowCloseEvent& e = (VoxelEngine::WindowCloseEvent&)event;
-			VE_TRACE("Window closed");
 		}
 	}
 
