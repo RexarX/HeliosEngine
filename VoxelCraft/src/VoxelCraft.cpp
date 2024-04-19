@@ -16,13 +16,13 @@ public:
 		VoxelEngine::Application::Get().GetWindow().SetVSync(false);
 		//VoxelEngine::Application::Get().GetWindow().SetFramerate(60.0);
 
-		m_CheckerboardTexture = VoxelEngine::Texture::Create(ROOT + "VoxelCraft/Assets/Textures/Checkerboard.png");
-		m_DirtTexture = VoxelEngine::Texture::Create(ROOT + "VoxelCraft/Assets/Textures/Dirt.png");
+		m_CheckerboardTexture = VoxelEngine::Texture::Create(VOXELCRAFT_DIR + "Assets/Textures/Checkerboard.png");
+		m_DirtTexture = VoxelEngine::Texture::Create(VOXELCRAFT_DIR + "Assets/Textures/Dirt.png");
 
 		for (float i = 0; i < 100; ++i) {
 			for (float j = 0; j < 100; ++j) {
 				m_Cube.push_back({ glm::vec3(i, -1.0f, j), glm::vec3(1.0f, 1.0f, 1.0f),
-					glm::vec3(0.0f, 0.0f, 0.0f), glm::vec2(0.0f, 0.0f) });
+					glm::vec3(0.0f, 0.0f, 0.0f) });
 			}
 		}
 	}
@@ -60,26 +60,23 @@ public:
 	{
 		VoxelEngine::Renderer::BeginScene(m_CameraController.GetCamera());
 		m_CameraController.GetFrustum().CreateFrustum(m_CameraController.GetCamera());
-		for (const auto& cube : m_Cube) {
-			if (m_CameraController.GetFrustum().IsCubeInFrustrum(cube.Size.x, cube.Position)) {
-				VoxelEngine::Renderer::DrawCube(cube.Position, cube.Rotation, cube.Size, m_DirtTexture);
+		for (int32_t i = 0; i < m_Cube.size(); ++i) {
+			if (m_CameraController.GetFrustum().IsCubeInFrustrum(m_Cube[i][1].x, m_Cube[i][0])) {
+				m_ToDraw.push_back(m_Cube[i]);
 			}
 		}
+
+		VoxelEngine::Renderer::DrawCubesInstanced(m_ToDraw, m_DirtTexture);
 		VoxelEngine::Renderer::DrawLine(glm::vec3(12.5f, 12.5f, 12.5f), glm::vec3(0.0f, 0.0f, 0.0f), 100.0f); // (ray origin, ray direction, ray lenght)
+		
+		m_ToDraw.clear();
 
 		VoxelEngine::Renderer::EndScene();
 	}
 
 private:
-	struct CubeData
-	{
-		glm::vec3 Position;
-		glm::vec3 Size;
-		glm::vec3 Rotation;
-		glm::vec2 TexCoord;
-	};
-
-	std::vector<CubeData> m_Cube;
+	std::vector<glm::mat3> m_Cube;
+	std::vector<glm::mat3> m_ToDraw;
 
 	VoxelEngine::CameraController m_CameraController;
 

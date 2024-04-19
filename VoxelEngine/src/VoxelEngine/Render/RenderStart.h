@@ -29,6 +29,12 @@ namespace VoxelEngine
 			s_RendererAPI->DrawIndexed(vertexArray, indexCount);
 		}
 
+		inline static void DrawArraysInstanced(const std::shared_ptr<VertexArray>& vertexArray,
+			const uint32_t indexCount, const uint32_t instanceCount)
+		{
+			s_RendererAPI->DrawArraysInstanced(vertexArray, indexCount, instanceCount);
+		}
+
 		inline static void DrawArray(const std::shared_ptr<VertexArray>& vertexArray,
 																 const uint32_t vertexCount)
 		{

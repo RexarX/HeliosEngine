@@ -10,7 +10,7 @@ namespace VoxelEngine
 	{
 		glCreateBuffers(1, &m_RendererID);
 		glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
-		glBufferData(GL_ARRAY_BUFFER, size, nullptr, GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, size, nullptr, GL_STREAM_DRAW);
 	}
 
 	OpenGLVertexBuffer::OpenGLVertexBuffer(const float* vertices, const uint32_t size)
@@ -37,7 +37,6 @@ namespace VoxelEngine
 
 	void OpenGLVertexBuffer::SetData(const void* data, const uint32_t size)
 	{
-		glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
 		glBufferSubData(GL_ARRAY_BUFFER, 0, size, data);
 	}
 

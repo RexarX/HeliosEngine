@@ -26,7 +26,7 @@ namespace VoxelEngine
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 		VE_CORE_INFO("OpenGL Info:");
-		VE_CORE_INFO("	Vendor: {0}", (const char*)glGetString(GL_VENDOR));
+		VE_CORE_INFO("  Vendor: {0}", (const char*)glGetString(GL_VENDOR));
 		VE_CORE_INFO("  GPU: {0}", (const char*)glGetString(GL_RENDERER));
 		VE_CORE_INFO("  Version: {0}", (const char*)glGetString(GL_VERSION));
 	}

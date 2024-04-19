@@ -39,6 +39,12 @@ namespace VoxelEngine
 		glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, nullptr);
 	}
 
+	void OpenGLRendererAPI::DrawArraysInstanced(const std::shared_ptr<VertexArray>& vertexArray,
+																							const uint32_t vertexCount, const uint32_t instanceCount)
+	{
+		glDrawArraysInstanced(GL_TRIANGLES, 0, vertexCount, instanceCount);
+	}
+
 	void OpenGLRendererAPI::DrawArray(const std::shared_ptr<VertexArray>& vertexArray,
 																		const uint32_t vertexCount)
 	{

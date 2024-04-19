@@ -25,5 +25,5 @@
 #include "VoxelEngine/MouseButtonCodes.h"
 
 #ifdef VE_PLATFORM_WINDOWS
-#include <Windows.h>
+  #include <Windows.h>
 #endif

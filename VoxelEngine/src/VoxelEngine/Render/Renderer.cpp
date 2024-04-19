@@ -6,6 +6,8 @@
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#define GLM_ENABLE_EXPERIMENTAL
+#include <glm/gtx/string_cast.hpp>
 
 namespace VoxelEngine
 {
@@ -13,9 +15,17 @@ namespace VoxelEngine
   {
     std::shared_ptr<VertexArray> CubeVertex;
     std::shared_ptr<VertexBuffer> CubeBuffer;
+    std::shared_ptr<VertexBuffer> CubeMatrixBuffer;
     std::shared_ptr<IndexBuffer> CubeIndex;
 
     std::shared_ptr<Shader> CubeShader;
+  };
+
+  struct CubeData
+  {
+    glm::vec3 Position;
+    glm::vec3 Size;
+    glm::vec3 Rotation;
   };
 
   struct Line
@@ -96,10 +106,23 @@ namespace VoxelEngine
       });
 
     s_Cube.CubeVertex->AddVertexBuffer(s_Cube.CubeBuffer);
+
+    s_Cube.CubeBuffer->Unbind();
     
+    s_Cube.CubeMatrixBuffer = VertexBuffer::Create(sizeof(glm::mat4) * 10000);
+    s_Cube.CubeMatrixBuffer->SetLayout({
+      { ShaderDataType::Mat4, "a_Transform" }
+      });
+
+    s_Cube.CubeVertex->AddVertexBuffer(s_Cube.CubeMatrixBuffer);
+    s_Cube.CubeVertex->AddVertexAttribDivisor(3, 1);
+
+    s_Cube.CubeMatrixBuffer->Unbind();
+
     s_Cube.CubeVertex->Unbind();
 
-    s_Cube.CubeShader = Shader::Create(ROOT + "VoxelEngine/Assets/Shaders/Cube.glsl");
+    s_Cube.CubeShader = Shader::Create(VOXELENGINE_DIR + "Assets/Shaders/Cube.glsl");
+    s_Cube.CubeShader->Unbind();
 
     const float lineVertices[] = {
       0.0f, 0.0f, 0.0f,
@@ -114,10 +137,12 @@ namespace VoxelEngine
 
     s_Line.LineVertex->AddVertexBuffer(s_Line.LineBuffer);
 
+    s_Line.LineBuffer->Unbind();
+
     s_Line.LineVertex->Unbind();
 
-    s_Line.LineShader = Shader::Create(ROOT + "VoxelEngine/Assets/Shaders/Line.glsl");
-
+    s_Line.LineShader = Shader::Create(VOXELENGINE_DIR + "Assets/Shaders/Line.glsl");
+    s_Line.LineShader->Unbind();
 	}
 
   void Renderer::OnWindowResize(const uint32_t width, const uint32_t height)
@@ -136,9 +161,12 @@ namespace VoxelEngine
 	{
     s_Cube.CubeShader->Unbind();
     s_Cube.CubeVertex->Unbind();
+    s_Cube.CubeBuffer->Unbind();
+    s_Cube.CubeMatrixBuffer->Unbind();
 
     s_Line.LineShader->Unbind();
     s_Line.LineVertex->Unbind();
+    s_Line.LineBuffer->Unbind();
 	}
 
   void Renderer::Shutdown()
@@ -157,6 +185,7 @@ namespace VoxelEngine
 
     s_Cube.CubeShader->Bind();
     s_Cube.CubeVertex->Bind();
+    s_Cube.CubeBuffer->Bind();
 
     s_Cube.CubeShader->UploadUniformMat4("u_Projection", s_SceneData->ProjectionMatrix);
     s_Cube.CubeShader->UploadUniformMat4("u_View", s_SceneData->ViewMatrix);
@@ -164,6 +193,35 @@ namespace VoxelEngine
 
     RenderCommand::DrawArray(s_Cube.CubeVertex, 36);
 	}
+
+  void Renderer::DrawCubesInstanced(const std::vector<glm::mat3>& cubes, const std::shared_ptr<Texture>& texture)
+  {
+    texture->Bind();
+
+    glm::mat4* transform = new glm::mat4[cubes.size()];
+    for (int32_t i = 0; i < cubes.size(); ++i) {
+      glm::mat4 cubeTransform = glm::translate(glm::mat4(1.0f), cubes[i][0]) * glm::scale(glm::mat4(1.0f), cubes[i][1]);
+      cubeTransform = glm::rotate(cubeTransform, glm::radians(cubes[i][2].x), glm::vec3(1.0f, 0.0f, 0.0f));
+      cubeTransform = glm::rotate(cubeTransform, glm::radians(cubes[i][2].y), glm::vec3(0.0f, 1.0f, 0.0f));
+      cubeTransform = glm::rotate(cubeTransform, glm::radians(cubes[i][2].z), glm::vec3(0.0f, 0.0f, 1.0f));
+
+      transform[i] = cubeTransform;
+    }
+
+    s_Cube.CubeMatrixBuffer->Bind();
+    s_Cube.CubeMatrixBuffer->SetData(transform, cubes.size() * sizeof(glm::mat4));
+
+    s_Cube.CubeShader->Bind();
+    s_Cube.CubeVertex->Bind();
+    s_Cube.CubeBuffer->Bind();
+
+    s_Cube.CubeShader->UploadUniformMat4("u_Projection", s_SceneData->ProjectionMatrix);
+    s_Cube.CubeShader->UploadUniformMat4("u_View", s_SceneData->ViewMatrix);
+
+    RenderCommand::DrawArraysInstanced(s_Cube.CubeVertex, 36, cubes.size());
+
+    delete[] transform;
+  }
 
   void Renderer::DrawLine(const glm::vec3& position, const glm::vec3& rotation,
                           const float lenght) 
@@ -175,6 +233,7 @@ namespace VoxelEngine
 
     s_Line.LineShader->Bind();
     s_Line.LineVertex->Bind();
+    s_Line.LineBuffer->Bind();
 
     s_Line.LineShader->UploadUniformMat4("u_Projection", s_SceneData->ProjectionMatrix);
     s_Line.LineShader->UploadUniformMat4("u_View", s_SceneData->ViewMatrix);
