@@ -23,6 +23,11 @@ namespace VoxelEngine
 			s_RendererAPI->SetClearColor(color);
 		}
 
+		inline static void SetDepthMask(const bool mask)
+		{
+			s_RendererAPI->SetDepthMask(mask);
+		}
+
 		inline static void DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray,
 																	 const uint32_t indexCount)
 		{

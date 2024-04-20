@@ -32,6 +32,12 @@ namespace VoxelEngine
 		glViewport(x, y, width, height);
 	}
 
+	void OpenGLRendererAPI::SetDepthMask(const bool mask)
+	{
+		if (mask) { glDepthMask(GL_TRUE); }
+		else { glDepthMask(GL_FALSE); }
+	}
+
 	void OpenGLRendererAPI::DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray,
 																			const uint32_t indexCount)
 	{

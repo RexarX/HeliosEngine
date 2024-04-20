@@ -34,6 +34,8 @@ namespace VoxelEngine
 		static void DrawLine(const glm::vec3& position, const glm::vec3& rotation,
 												 const float lenght);
 
+		static void DrawSkybox(const std::shared_ptr<Texture>& texture);
+
 	private:
 		struct SceneData
 		{

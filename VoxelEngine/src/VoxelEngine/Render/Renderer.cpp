@@ -6,8 +6,7 @@
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#define GLM_ENABLE_EXPERIMENTAL
-#include <glm/gtx/string_cast.hpp>
+#include <glad/glad.h>
 
 namespace VoxelEngine
 {
@@ -21,13 +20,6 @@ namespace VoxelEngine
     std::shared_ptr<Shader> CubeShader;
   };
 
-  struct CubeData
-  {
-    glm::vec3 Position;
-    glm::vec3 Size;
-    glm::vec3 Rotation;
-  };
-
   struct Line
   {
     std::shared_ptr<VertexArray> LineVertex;
@@ -36,16 +28,25 @@ namespace VoxelEngine
     std::shared_ptr<Shader> LineShader;
   };
 
+  struct Skybox
+  {
+    std::shared_ptr<VertexArray> SkyboxVertex;
+    std::shared_ptr<VertexBuffer> SkyboxBuffer;
+
+    std::shared_ptr<Shader> SkyboxShader;
+  };
+
 	std::unique_ptr<Renderer::SceneData> Renderer::s_SceneData = std::make_unique<Renderer::SceneData>();
 
   static Cube s_Cube;
   static Line s_Line;
+  static Skybox s_Skybox;
 
 	void Renderer::Init()
 	{
 		RenderCommand::Init();
     
-    const float vertices[] = {
+    const float cubeVertices[] = {
       //front
       -0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom left
       0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, // bottom right
@@ -95,10 +96,60 @@ namespace VoxelEngine
       -0.5f, 0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, // bottom left
     };
 
+    const float lineVertices[] = {
+      0.0f, 0.0f, 0.0f,
+      0.0f, 0.0f, 1.0f
+    };
+
+    const float skyboxVertices[] = {
+      // positions          
+      -1.0f,  1.0f, -1.0f,
+      -1.0f, -1.0f, -1.0f,
+       1.0f, -1.0f, -1.0f,
+       1.0f, -1.0f, -1.0f,
+       1.0f,  1.0f, -1.0f,
+      -1.0f,  1.0f, -1.0f,
+
+      -1.0f, -1.0f,  1.0f,
+      -1.0f, -1.0f, -1.0f,
+      -1.0f,  1.0f, -1.0f,
+      -1.0f,  1.0f, -1.0f,
+      -1.0f,  1.0f,  1.0f,
+      -1.0f, -1.0f,  1.0f,
+
+       1.0f, -1.0f, -1.0f,
+       1.0f, -1.0f,  1.0f,
+       1.0f,  1.0f,  1.0f,
+       1.0f,  1.0f,  1.0f,
+       1.0f,  1.0f, -1.0f,
+       1.0f, -1.0f, -1.0f,
+
+      -1.0f, -1.0f,  1.0f,
+      -1.0f,  1.0f,  1.0f,
+       1.0f,  1.0f,  1.0f,
+       1.0f,  1.0f,  1.0f,
+       1.0f, -1.0f,  1.0f,
+      -1.0f, -1.0f,  1.0f,
+
+      -1.0f,  1.0f, -1.0f,
+       1.0f,  1.0f, -1.0f,
+       1.0f,  1.0f,  1.0f,
+       1.0f,  1.0f,  1.0f,
+      -1.0f,  1.0f,  1.0f,
+      -1.0f,  1.0f, -1.0f,
+
+      -1.0f, -1.0f, -1.0f,
+      -1.0f, -1.0f,  1.0f,
+       1.0f, -1.0f, -1.0f,
+       1.0f, -1.0f, -1.0f,
+      -1.0f, -1.0f,  1.0f,
+       1.0f, -1.0f,  1.0f
+    };
+
     s_Cube.CubeVertex = VertexArray::Create();
     s_Cube.CubeVertex->Bind();
 
-    s_Cube.CubeBuffer = VertexBuffer::Create(vertices, sizeof(vertices));
+    s_Cube.CubeBuffer = VertexBuffer::Create(cubeVertices, sizeof(cubeVertices));
     s_Cube.CubeBuffer->SetLayout({
       { ShaderDataType::Float3, "a_Pos" },
       { ShaderDataType::Float3, "a_Normal" },
@@ -109,13 +160,19 @@ namespace VoxelEngine
 
     s_Cube.CubeBuffer->Unbind();
     
-    s_Cube.CubeMatrixBuffer = VertexBuffer::Create(sizeof(glm::mat4) * 10000);
+    s_Cube.CubeMatrixBuffer = VertexBuffer::Create(sizeof(glm::mat4) * 100000);
     s_Cube.CubeMatrixBuffer->SetLayout({
-      { ShaderDataType::Mat4, "a_Transform" }
+      { ShaderDataType::Float4, "a_Transform" },
+      { ShaderDataType::Float4, "a_Transform" },
+      { ShaderDataType::Float4, "a_Transform" },
+      { ShaderDataType::Float4, "a_Transform" },
       });
 
     s_Cube.CubeVertex->AddVertexBuffer(s_Cube.CubeMatrixBuffer);
     s_Cube.CubeVertex->AddVertexAttribDivisor(3, 1);
+    s_Cube.CubeVertex->AddVertexAttribDivisor(4, 1);
+    s_Cube.CubeVertex->AddVertexAttribDivisor(5, 1);
+    s_Cube.CubeVertex->AddVertexAttribDivisor(6, 1);
 
     s_Cube.CubeMatrixBuffer->Unbind();
 
@@ -123,11 +180,6 @@ namespace VoxelEngine
 
     s_Cube.CubeShader = Shader::Create(VOXELENGINE_DIR + "Assets/Shaders/Cube.glsl");
     s_Cube.CubeShader->Unbind();
-
-    const float lineVertices[] = {
-      0.0f, 0.0f, 0.0f,
-      0.0f, 0.0f, 1.0f
-    };
 
     s_Line.LineVertex = VertexArray::Create();
     s_Line.LineVertex->Bind();
@@ -143,6 +195,21 @@ namespace VoxelEngine
 
     s_Line.LineShader = Shader::Create(VOXELENGINE_DIR + "Assets/Shaders/Line.glsl");
     s_Line.LineShader->Unbind();
+
+    s_Skybox.SkyboxVertex = VertexArray::Create();
+    s_Skybox.SkyboxVertex->Bind();
+
+    s_Skybox.SkyboxBuffer = VertexBuffer::Create(skyboxVertices, sizeof(skyboxVertices));
+    s_Skybox.SkyboxBuffer->SetLayout({ { ShaderDataType::Float3, "a_Pos" } });
+
+    s_Skybox.SkyboxVertex->AddVertexBuffer(s_Skybox.SkyboxBuffer);
+
+    s_Skybox.SkyboxBuffer->Unbind();
+
+    s_Skybox.SkyboxVertex->Unbind();
+
+    s_Skybox.SkyboxShader = Shader::Create(VOXELENGINE_DIR + "Assets/Shaders/Skybox.glsl");
+    s_Skybox.SkyboxShader->Unbind();
 	}
 
   void Renderer::OnWindowResize(const uint32_t width, const uint32_t height)
@@ -183,13 +250,15 @@ namespace VoxelEngine
     transform = glm::rotate(transform, glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
     transform = glm::rotate(transform, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
 
+    s_Cube.CubeMatrixBuffer->Bind();
+    s_Cube.CubeMatrixBuffer->SetData(&transform, sizeof(transform));
+
     s_Cube.CubeShader->Bind();
     s_Cube.CubeVertex->Bind();
     s_Cube.CubeBuffer->Bind();
 
     s_Cube.CubeShader->UploadUniformMat4("u_Projection", s_SceneData->ProjectionMatrix);
     s_Cube.CubeShader->UploadUniformMat4("u_View", s_SceneData->ViewMatrix);
-    s_Cube.CubeShader->UploadUniformMat4("u_Transform", transform);
 
     RenderCommand::DrawArray(s_Cube.CubeVertex, 36);
 	}
@@ -200,12 +269,10 @@ namespace VoxelEngine
 
     glm::mat4* transform = new glm::mat4[cubes.size()];
     for (int32_t i = 0; i < cubes.size(); ++i) {
-      glm::mat4 cubeTransform = glm::translate(glm::mat4(1.0f), cubes[i][0]) * glm::scale(glm::mat4(1.0f), cubes[i][1]);
-      cubeTransform = glm::rotate(cubeTransform, glm::radians(cubes[i][2].x), glm::vec3(1.0f, 0.0f, 0.0f));
-      cubeTransform = glm::rotate(cubeTransform, glm::radians(cubes[i][2].y), glm::vec3(0.0f, 1.0f, 0.0f));
-      cubeTransform = glm::rotate(cubeTransform, glm::radians(cubes[i][2].z), glm::vec3(0.0f, 0.0f, 1.0f));
-
-      transform[i] = cubeTransform;
+      transform[i] = glm::translate(glm::mat4(1.0f), cubes[i][0]) * glm::scale(glm::mat4(1.0f), cubes[i][1]);
+      transform[i] = glm::rotate(transform[i], glm::radians(cubes[i][2].x), glm::vec3(1.0f, 0.0f, 0.0f));
+      transform[i] = glm::rotate(transform[i], glm::radians(cubes[i][2].y), glm::vec3(0.0f, 1.0f, 0.0f));
+      transform[i] = glm::rotate(transform[i], glm::radians(cubes[i][2].z), glm::vec3(0.0f, 0.0f, 1.0f));
     }
 
     s_Cube.CubeMatrixBuffer->Bind();
@@ -240,5 +307,23 @@ namespace VoxelEngine
     s_Line.LineShader->UploadUniformMat4("u_Transform", transform);
 
     RenderCommand::DrawLine(s_Line.LineVertex, 2);
+  }
+
+  void Renderer::DrawSkybox(const std::shared_ptr<Texture>& texture)
+  {
+    RenderCommand::SetDepthMask(false);
+
+    texture->BindSkybox();
+
+    s_Skybox.SkyboxShader->Bind();
+    s_Skybox.SkyboxVertex->Bind();
+    s_Skybox.SkyboxBuffer->Bind();
+
+    s_Skybox.SkyboxShader->UploadUniformMat4("u_Projection", s_SceneData->ProjectionMatrix);
+    s_Skybox.SkyboxShader->UploadUniformMat4("u_View", glm::mat4(glm::mat3(s_SceneData->ViewMatrix)));
+
+    RenderCommand::DrawArray(s_Skybox.SkyboxVertex, 36);
+
+    RenderCommand::SetDepthMask(true);
   }
 }

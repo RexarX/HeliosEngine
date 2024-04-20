@@ -15,6 +15,14 @@ public:
 	{
 		VoxelEngine::Application::Get().GetWindow().SetVSync(false);
 		//VoxelEngine::Application::Get().GetWindow().SetFramerate(60.0);
+		
+		m_Skybox = VoxelEngine::Texture::Create(VOXELCRAFT_DIR + "Assets/Textures/Skybox/right.png",
+																						VOXELCRAFT_DIR + "Assets/Textures/Skybox/left.png",
+																						VOXELCRAFT_DIR + "Assets/Textures/Skybox/top.png",
+																						VOXELCRAFT_DIR + "Assets/Textures/Skybox/bottom.png",
+																						VOXELCRAFT_DIR + "Assets/Textures/Skybox/front.png",								
+																						VOXELCRAFT_DIR + "Assets/Textures/Skybox/back.png"
+																						);
 
 		m_CheckerboardTexture = VoxelEngine::Texture::Create(VOXELCRAFT_DIR + "Assets/Textures/Checkerboard.png");
 		m_DirtTexture = VoxelEngine::Texture::Create(VOXELCRAFT_DIR + "Assets/Textures/Dirt.png");
@@ -66,8 +74,9 @@ public:
 			}
 		}
 
+		VoxelEngine::Renderer::DrawSkybox(m_Skybox);
 		VoxelEngine::Renderer::DrawCubesInstanced(m_ToDraw, m_DirtTexture);
-		VoxelEngine::Renderer::DrawLine(glm::vec3(12.5f, 12.5f, 12.5f), glm::vec3(0.0f, 0.0f, 0.0f), 100.0f); // (ray origin, ray direction, ray lenght)
+		//VoxelEngine::Renderer::DrawLine(glm::vec3(12.5f, 12.5f, 12.5f), glm::vec3(0.0f, 0.0f, 0.0f), 100.0f); // (ray origin, ray direction, ray lenght)
 		
 		m_ToDraw.clear();
 
@@ -80,6 +89,7 @@ private:
 
 	VoxelEngine::CameraController m_CameraController;
 
+  std::shared_ptr<VoxelEngine::Texture> m_Skybox;
 	std::shared_ptr<VoxelEngine::Texture> m_CheckerboardTexture;
 	std::shared_ptr<VoxelEngine::Texture> m_DirtTexture;
 };

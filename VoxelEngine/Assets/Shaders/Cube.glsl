@@ -10,7 +10,6 @@ out vec2 TexCoord;
 
 uniform mat4 u_Projection;
 uniform mat4 u_View;
-uniform mat4 u_Transform;
 
 void main()
 {

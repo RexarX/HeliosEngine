@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Renderer/UniformBuffer.h"
+#include "Render/UniformBuffer.h"
 
 namespace VoxelEngine
 {
