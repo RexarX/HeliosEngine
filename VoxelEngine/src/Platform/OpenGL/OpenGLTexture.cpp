@@ -98,10 +98,8 @@ namespace VoxelEngine
 		: m_Paths({ right, left, top, bottom, front, back })
 	{
 		glGenTextures(1, &m_RendererID);
-		glBindTexture(GL_TEXTURE_CUBE_MAP, m_RendererID);
 
 		int32_t width, height, channels;
-		//stbi_set_flip_vertically_on_load(1);
 		stbi_uc* data = nullptr;
 		for (uint32_t i = 0; i < 6; ++i) {
 			data = stbi_load(m_Paths[i].c_str(), &width, &height, &channels, 0);
@@ -155,10 +153,5 @@ namespace VoxelEngine
 	void OpenGLTexture::Bind(const uint32_t slot) const
 	{
 		glBindTextureUnit(slot, m_RendererID);
-	}
-
-	void OpenGLTexture::BindSkybox() const
-	{
-		glBindTextureUnit(GL_TEXTURE_CUBE_MAP, m_RendererID);
 	}
 }

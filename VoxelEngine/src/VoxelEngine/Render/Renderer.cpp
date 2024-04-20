@@ -313,7 +313,7 @@ namespace VoxelEngine
   {
     RenderCommand::SetDepthMask(false);
 
-    texture->BindSkybox();
+    texture->Bind();
 
     s_Skybox.SkyboxShader->Bind();
     s_Skybox.SkyboxVertex->Bind();

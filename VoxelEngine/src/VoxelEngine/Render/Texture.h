@@ -27,7 +27,6 @@ namespace VoxelEngine
 		virtual ~Texture() = default;
 
 		virtual void Bind(const uint32_t slot = 0) const = 0;
-		virtual void BindSkybox() const = 0;
 
 		virtual const TextureSpecification& GetSpecification() const = 0;
 

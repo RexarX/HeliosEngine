@@ -29,8 +29,6 @@ namespace VoxelEngine
 
 		virtual void Bind(const uint32_t slot = 0) const override;
 
-		virtual void BindSkybox() const override;
-
 		virtual bool IsLoaded() const override { return m_IsLoaded; }
 
 		virtual bool operator==(const Texture& other) const override
