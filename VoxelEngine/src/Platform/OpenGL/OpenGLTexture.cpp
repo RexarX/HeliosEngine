@@ -50,7 +50,7 @@ namespace VoxelEngine
 		glTexParameterfv(m_RendererID, GL_TEXTURE_BORDER_COLOR, borderColor);
 	}
 
-	OpenGLTexture::OpenGLTexture(const std::string& path, const bool generateMips)
+	OpenGLTexture::OpenGLTexture(const std::string& path, const bool generateMips, const float anisoLevel)
 		: m_Path(path)
 	{
 		int32_t width, height, channels;
@@ -79,19 +79,27 @@ namespace VoxelEngine
 
 			VE_CORE_ASSERT(m_InternalFormat & m_DataFormat, "Format not supported!");
 
-			glCreateTextures(GL_TEXTURE_2D, 1, &m_RendererID);
+			glGenTextures(1, &m_RendererID);
+			glBindTexture(GL_TEXTURE_2D, m_RendererID);
 
-			glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_S, GL_REPEAT);
-			glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_T, GL_REPEAT);
-			glTextureParameteri(m_RendererID, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_LINEAR);
-			glTextureParameteri(m_RendererID, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-			glTextureStorage2D(m_RendererID, 1, internalFormat, m_Width, m_Height);
+			if (generateMips) {
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+			}
+			else {
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+			}
 
-			glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Width, m_Height, m_DataFormat,
-									 GL_UNSIGNED_BYTE, data);
+			glTexImage2D(GL_TEXTURE_2D, 0, m_InternalFormat, m_Width, m_Height, 0, m_DataFormat,
+				GL_UNSIGNED_BYTE, data);
 
-			if (generateMips) { glGenerateTextureMipmap(m_RendererID); }
+			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY, anisoLevel);
+
+			if (generateMips) { glGenerateMipmap(GL_TEXTURE_2D); }
 
 			stbi_image_free(data);
 		}
@@ -130,6 +138,8 @@ namespace VoxelEngine
 			}
 			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, m_InternalFormat, m_Width, m_Height, 0,
 				m_DataFormat, GL_UNSIGNED_BYTE, data);
+
+			if (m_LoadedCnt == 6) { m_IsLoaded = true; }
 
 			stbi_image_free(data);
 		}

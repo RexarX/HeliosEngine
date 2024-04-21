@@ -10,7 +10,7 @@ namespace VoxelEngine
 	{
 	public:
 		OpenGLTexture(const TextureSpecification& specification);
-		OpenGLTexture(const std::string& path, const bool generateMips = false);
+		OpenGLTexture(const std::string& path, const bool generateMips = false, const float anisoLevel = 0.0f);
 		OpenGLTexture(const std::string& right, const std::string& left,
 			const std::string& top, const std::string& bottom,
 			const std::string& front, const std::string& back);
