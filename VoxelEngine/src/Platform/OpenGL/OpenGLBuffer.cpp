@@ -8,7 +8,7 @@ namespace VoxelEngine
 {
 	OpenGLVertexBuffer::OpenGLVertexBuffer(const uint32_t size)
 	{
-		glCreateBuffers(1, &m_RendererID);
+		glGenBuffers(1, &m_RendererID);
 		glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
 		glBufferData(GL_ARRAY_BUFFER, size, nullptr, GL_STREAM_DRAW);
 	}

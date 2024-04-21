@@ -275,12 +275,12 @@ namespace VoxelEngine
       transform[i] = glm::rotate(transform[i], glm::radians(cubes[i][2].z), glm::vec3(0.0f, 0.0f, 1.0f));
     }
 
-    s_Cube.CubeMatrixBuffer->Bind();
-    s_Cube.CubeMatrixBuffer->SetData(transform, cubes.size() * sizeof(glm::mat4));
-
     s_Cube.CubeShader->Bind();
     s_Cube.CubeVertex->Bind();
     s_Cube.CubeBuffer->Bind();
+
+    s_Cube.CubeMatrixBuffer->Bind();
+    s_Cube.CubeMatrixBuffer->SetData(transform, cubes.size() * sizeof(glm::mat4));
 
     s_Cube.CubeShader->UploadUniformMat4("u_Projection", s_SceneData->ProjectionMatrix);
     s_Cube.CubeShader->UploadUniformMat4("u_View", s_SceneData->ViewMatrix);

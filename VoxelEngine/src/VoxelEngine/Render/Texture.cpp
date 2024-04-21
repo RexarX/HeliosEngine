@@ -20,12 +20,12 @@ namespace VoxelEngine
 		return nullptr;
 	}
 
-	std::shared_ptr<Texture> Texture::Create(const std::string& path)
+	std::shared_ptr<Texture> Texture::Create(const std::string& path, const bool generateMips)
 	{
 		switch (Renderer::GetAPI())
 		{
 		case RendererAPI::API::None:    VE_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-		case RendererAPI::API::OpenGL:  return std::make_shared<OpenGLTexture>(path);
+		case RendererAPI::API::OpenGL:  return std::make_shared<OpenGLTexture>(path, generateMips);
 		}
 
 		VE_CORE_ASSERT(false, "Unknown RendererAPI!");

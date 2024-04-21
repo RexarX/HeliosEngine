@@ -24,8 +24,8 @@ public:
 																						VOXELCRAFT_DIR + "Assets/Textures/Skybox/back.png"
 																						);
 
-		m_CheckerboardTexture = VoxelEngine::Texture::Create(VOXELCRAFT_DIR + "Assets/Textures/Checkerboard.png");
-		m_DirtTexture = VoxelEngine::Texture::Create(VOXELCRAFT_DIR + "Assets/Textures/Dirt.png");
+		m_CheckerboardTexture = VoxelEngine::Texture::Create(VOXELCRAFT_DIR + "Assets/Textures/Checkerboard.png", true);
+		m_DirtTexture = VoxelEngine::Texture::Create(VOXELCRAFT_DIR + "Assets/Textures/Dirt.png", true);
 
 		for (float i = 0; i < 100; ++i) {
 			for (float j = 0; j < 100; ++j) {

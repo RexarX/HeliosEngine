@@ -44,7 +44,7 @@ namespace VoxelEngine
 		virtual bool operator==(const Texture& other) const = 0;
 
 		static std::shared_ptr<Texture> Create(const TextureSpecification& specification);
-		static std::shared_ptr<Texture> Create(const std::string& path);
+		static std::shared_ptr<Texture> Create(const std::string& path, const bool generateMips = false);
 		static std::shared_ptr<Texture> Create(const std::string& right, const std::string& left,
 																					 const std::string& top, const std::string& bottom,
 																					 const std::string& front, const std::string& back);
