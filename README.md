@@ -39,7 +39,12 @@ An attempt to create a clone of Minecraft ^_^
   cd VoxelCraft
   git submodule update --init --recursive
   ```
-2. Thats it...
+2. Build with cmake
+  ```sh
+  mkdir build
+  cd build
+  cmake ..
+  ```
 
 
 
