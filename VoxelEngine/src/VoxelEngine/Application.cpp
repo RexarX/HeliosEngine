@@ -42,6 +42,7 @@ namespace VoxelEngine
 	{
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
+		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(OnWindowResize));
 
 		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin(); ) {
 			(*--it)->OnEvent(e);
@@ -55,38 +56,47 @@ namespace VoxelEngine
 		return true;
 	}
 
+	bool Application::OnWindowResize(WindowResizeEvent& e)
+	{
+		if (e.GetWidth() == 0 || e.GetHeight() == 0) {
+			m_Window->SetMinimized(true);
+			return true;
+		}
+
+		m_Window->SetMinimized(false);
+		Renderer::OnWindowResize(e.GetWidth(), e.GetHeight());
+
+		return true;
+	}
+
 	void Application::Run()
 	{
-		Timestep timestep, frametime;
+		Timestep timestep;
 		double time;
-		double m_LastFrameUpdate(0.0), m_LastFrameTime(0.0);
+		double LastFrameUpdate(0.0), LastFrameTime(0.0);
 
 		m_FramerateLimit = 1 / m_Window->GetFramerate();
 
 		while (m_Running) {
 			time = glfwGetTime();
-			timestep = time - m_LastFrameUpdate;
-			frametime = time - m_LastFrameTime;
+			timestep = time - LastFrameTime;
+			m_DeltaTime = time - LastFrameUpdate;
 			
 			for (Layer* layer : m_LayerStack) {
 				layer->OnUpdate(timestep);
 			}
 
-			if (!m_Window->IsMinimized() && (frametime >= m_FramerateLimit || m_Window->GetFramerate() == 0.0)) {
-				m_Window->ClearBuffer();
+			if (!m_Window->IsMinimized() && (m_DeltaTime >= m_FramerateLimit ||
+																			 m_Window->GetFramerate() == 0.0)) {
 				for (Layer* layer : m_LayerStack) {
 					layer->Draw();
 				}
 				m_Window->OnUpdate();
 				
-				m_LastFrameTime = time;
-
-				//VE_TRACE("Framerate: {0}fps", frametime.GetFramerate());
+				LastFrameUpdate = time;
 			}
 
-			m_Window->PollEvents();
-
-			m_LastFrameUpdate = time;
+			LastFrameTime = time;
 		}
 	}
 }

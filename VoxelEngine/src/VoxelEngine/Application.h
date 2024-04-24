@@ -11,6 +11,7 @@
 
 #include "Events/Event.h"
 #include "Events/ApplicationEvent.h"
+#include "Events/KeyEvent.h"
 
 namespace VoxelEngine
 {
@@ -26,25 +27,27 @@ namespace VoxelEngine
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* layer);
 
+		inline Timestep GetDeltaTime() { return m_DeltaTime; }
+
 		inline Window& GetWindow() { return *m_Window; }
 
 		inline static Application& Get() { return *s_Instance; }
 	
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
+		bool OnWindowResize(WindowResizeEvent& e);
 
 	private:
+		static Application* s_Instance;
+
 		std::unique_ptr<Window> m_Window;
 
 		LayerStack m_LayerStack;
 
-		Timer m_Timer;
-
-		double m_FramerateLimit = 0.0;
-
 		bool m_Running = true;
 
-		static Application* s_Instance;
+		Timestep m_DeltaTime;
+		double m_FramerateLimit = 0.0;
 	};
 
 	Application* CreateApplication();

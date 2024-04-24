@@ -4,16 +4,16 @@
 layout (location = 0) in vec3 a_Pos;
 layout (location = 1) in vec3 a_Normal;
 layout (location = 2) in vec2 a_TexCoord;
+layout (location = 3) in mat4 a_Transform;
 
 out vec2 TexCoord;
 
-uniform mat4 u_Transform;
-uniform mat4 u_View;
 uniform mat4 u_Projection;
+uniform mat4 u_View;
 
 void main()
 {
-  gl_Position = u_Projection * u_View * u_Transform * vec4(a_Pos, 1.0);
+  gl_Position = u_Projection * u_View * a_Transform * vec4(a_Pos, 1.0);
   TexCoord = a_TexCoord;
 }
 
@@ -29,5 +29,4 @@ uniform sampler2D texture1;
 void main()
 {
   FragColor = texture(texture1, TexCoord);
-  //FragColor = vec4(0.0f,1.0f,0.0f,1.0f);
 }

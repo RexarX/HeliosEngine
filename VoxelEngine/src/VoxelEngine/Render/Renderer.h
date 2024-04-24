@@ -24,21 +24,19 @@ namespace VoxelEngine
 
 		static void OnWindowResize(const uint32_t width, const uint32_t height);
 
-		static void Submit(glm::mat4& transform);
-
 		inline static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
 
 		static void DrawCube(const glm::vec3& position, const glm::vec3& rotation,
-			const glm::vec3& size, const std::shared_ptr<Texture>& texture);
+												 const glm::vec3& size, const std::shared_ptr<Texture>& texture);
 
-		//convert data and then call RenderLine
-		static void DrawLine(const glm::vec3& position, const glm::vec3& rotation, const float lenght);
-		static void DrawLine(const glm::vec3& originPosition, const glm::vec3& endPosition); 
+		static void DrawCubesInstanced(const std::vector<glm::mat3>& cubes, const std::shared_ptr<Texture>& texture);
+
+		static void DrawLine(const glm::vec3& position, const glm::vec3& rotation,
+												 const float lenght);
+
+		static void DrawSkybox(const std::shared_ptr<Texture>& texture);
 
 	private:
-
-		static void RenderLine(const const glm::vec3& position, const glm::vec3& rotation, const float lenght); //sets up opengl and matrices then draws
-
 		struct SceneData
 		{
 			glm::mat4 ViewProjectionMatrix;

@@ -50,16 +50,14 @@ namespace VoxelEngine
 	void OpenGLVertexArray::AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer)
 	{
 		VE_CORE_ASSERT(vertexBuffer->GetLayout().GetElements().size(), "Vertex Buffer has no layout!");
-
 		const auto& layout = vertexBuffer->GetLayout();
-		m_VertexBufferIndex = 0;
 		for (const auto& element : layout) {
 			glVertexAttribPointer(m_VertexBufferIndex,
 				element.GetComponentCount(),
 				ShaderDataTypeToOpenGLBaseType(element.type_),
 				element.normalized_ ? GL_TRUE : GL_FALSE,
 				layout.GetStride(),
-				(const void*)element.offset_);
+				(void*)element.offset_);
 			glEnableVertexAttribArray(m_VertexBufferIndex);
 			++m_VertexBufferIndex;
 		}
@@ -72,5 +70,9 @@ namespace VoxelEngine
 		indexBuffer->Bind();
 
 		m_IndexBuffer = indexBuffer;
+	}
+	void OpenGLVertexArray::AddVertexAttribDivisor(const uint32_t index, const uint32_t divisor)
+	{
+    glVertexAttribDivisor(index, divisor);
 	}
 }

@@ -36,7 +36,8 @@ namespace VoxelEngine
   {
     BufferElement() = default;
 
-    BufferElement(const ShaderDataType& type, const std::string& name, const bool normalized = false)
+    BufferElement(const ShaderDataType& type, const std::string& name,
+                  const bool normalized = false)
       : name_(name), type_(type), normalized_(normalized), size_(ShaderDataTypeSize(type))
     {
     }
@@ -119,7 +120,8 @@ namespace VoxelEngine
     virtual void SetLayout(const BufferLayout& layout) = 0;
 
     static std::shared_ptr<VertexBuffer> Create(const uint32_t size);
-    static std::shared_ptr<VertexBuffer> Create(const float* vertices, const uint32_t size);
+    static std::shared_ptr<VertexBuffer> Create(const float* vertices,
+                                                const uint32_t size);
   };
 
   class IndexBuffer
@@ -132,6 +134,7 @@ namespace VoxelEngine
 
     virtual uint32_t GetCount() const = 0;
 
-    static std::shared_ptr<IndexBuffer> Create(const uint32_t* indices, const uint32_t size);
+    static std::shared_ptr<IndexBuffer> Create(const uint32_t* indices,
+                                               const uint32_t size);
   };
 }

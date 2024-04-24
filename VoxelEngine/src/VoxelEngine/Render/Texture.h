@@ -26,7 +26,7 @@ namespace VoxelEngine
 	public:
 		virtual ~Texture() = default;
 
-		virtual void Bind(uint32_t slot = 0) const = 0;
+		virtual void Bind(const uint32_t slot = 0) const = 0;
 
 		virtual const TextureSpecification& GetSpecification() const = 0;
 
@@ -37,13 +37,17 @@ namespace VoxelEngine
 
 		virtual const std::string& GetPath() const = 0;
 
-		virtual void SetData(void* data, const uint32_t size) = 0;
+		virtual void SetData(const void* data, const uint32_t size) = 0;
 
 		virtual bool IsLoaded() const = 0;
 
 		virtual bool operator==(const Texture& other) const = 0;
 
 		static std::shared_ptr<Texture> Create(const TextureSpecification& specification);
-		static std::shared_ptr<Texture> Create(const std::string& path);
+		static std::shared_ptr<Texture> Create(const std::string& path, const bool generateMips = false,
+																					 const float anisoLevel = 0.0f);
+		static std::shared_ptr<Texture> Create(const std::string& right, const std::string& left,
+																					 const std::string& top, const std::string& bottom,
+																					 const std::string& front, const std::string& back);
 	};
 }
