@@ -44,7 +44,7 @@ namespace VoxelEngine
 	void Renderer::Init()
 	{
 		RenderCommand::Init();
-    
+
     constexpr float cubeVertices[] = {
       //front
       -0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom left
@@ -95,8 +95,30 @@ namespace VoxelEngine
       -0.5f, 0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, // bottom left
     };
 
-    uint32_t* cubeIndices = new uint32_t[]{
+    constexpr float vertices[] = {
+      0.5f, 0.5f, -0.5f, 0.0f, 2.0f / 3, // 1
+      0.5f, -0.5f, -0.5f, 0.0f, 1.0f / 3, // 2
+      -0.5f, -0.5f, -0.5f, 0.25f, 1.0f / 3, // 3
+      -0.5f, 0.5f, -0.5f, 0.25f, 2.0f / 3, // 4
+      -0.5f, -0.5f, 0.5f, 0.5f, 1.0f / 3, // 5
+      -0.5f, 0.5f, 0.5f, 0.5f, 2.0f / 3, // 6
+      -0.5f, 0.5f, -0.5f, 0.5f, 1.0f, // 7
+      0.5f, 0.5f, 0.5f, 0.75f, 2.0f / 3, // 8
+      0.5f, 0.5f, -0.5f, 0.75f, 1.0f, // 9
+      0.5f, 0.5f, -0.5f, 1.0f, 2.0f / 3, // 10
+      0.5f, -0.5f, -0.5f, 1.0f, 1.0f / 3, // 11
+      0.5f, -0.5f, 0.5f, 0.75f, 1.0f / 3, // 12
+      0.5f, -0.5f, -0.5f, 0.75f, 0.0f, // 13
+      -0.5f, -0.5f, -0.5f, 0.5f, 0.0f, // 14
+    };
 
+    uint32_t* cubeIndices = new uint32_t[]{
+      1, 2, 3, 1, 3, 4, // back
+      4, 3, 5, 4, 5, 6, // left
+      7, 6, 8, 7, 8, 9, // top
+      8, 12, 11, 8, 11, 10, // right
+      6, 5, 12, 6, 12, 8, // front
+      5, 14, 13, 5, 13, 12, // bottom
     };
 
     constexpr float lineVertices[] = {
