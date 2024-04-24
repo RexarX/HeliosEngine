@@ -70,6 +70,10 @@ namespace VoxelEngine
         m_Frustum[i][2] * (position.z - size) + m_Frustum[i][3] >= 0) {
         ++point_cnt;
       }
+      if (m_Frustum[i][0] * (position.x - size) + m_Frustum[i][1] * (position.y - size) +
+        m_Frustum[i][2] * (position.z - size) + m_Frustum[i][3] >= 0) {
+        ++point_cnt;
+      }
 
       if (m_Frustum[i][0] * (position.x + size) + m_Frustum[i][1] * (position.y - size) +
         m_Frustum[i][2] * (position.z - size) + m_Frustum[i][3] >= 0) {
