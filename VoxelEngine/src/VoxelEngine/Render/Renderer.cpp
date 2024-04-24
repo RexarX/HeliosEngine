@@ -6,7 +6,6 @@
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include <glad/glad.h>
 
 namespace VoxelEngine
 {
@@ -46,7 +45,7 @@ namespace VoxelEngine
 	{
 		RenderCommand::Init();
     
-    const float cubeVertices[] = {
+    constexpr float cubeVertices[] = {
       //front
       -0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom left
       0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, // bottom right
@@ -96,12 +95,16 @@ namespace VoxelEngine
       -0.5f, 0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, // bottom left
     };
 
-    const float lineVertices[] = {
+    uint32_t* cubeIndices = new uint32_t[]{
+
+    };
+
+    constexpr float lineVertices[] = {
       0.0f, 0.0f, 0.0f,
       0.0f, 0.0f, 1.0f
     };
 
-    const float skyboxVertices[] = {
+    constexpr float skyboxVertices[] = {
       // positions          
       -1.0f,  1.0f, -1.0f,
       -1.0f, -1.0f, -1.0f,
@@ -159,6 +162,8 @@ namespace VoxelEngine
     s_Cube.CubeVertex->AddVertexBuffer(s_Cube.CubeBuffer);
 
     s_Cube.CubeBuffer->Unbind();
+
+    s_Cube.CubeIndex = IndexBuffer::Create(cubeIndices, sizeof(cubeIndices));
     
     s_Cube.CubeMatrixBuffer = VertexBuffer::Create(sizeof(glm::mat4) * 100000);
     s_Cube.CubeMatrixBuffer->SetLayout({
@@ -210,6 +215,8 @@ namespace VoxelEngine
 
     s_Skybox.SkyboxShader = Shader::Create(VOXELENGINE_DIR + "Assets/Shaders/Skybox.glsl");
     s_Skybox.SkyboxShader->Unbind();
+
+    delete[] cubeIndices;
 	}
 
   void Renderer::OnWindowResize(const uint32_t width, const uint32_t height)

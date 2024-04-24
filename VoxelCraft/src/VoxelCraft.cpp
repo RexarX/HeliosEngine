@@ -13,7 +13,7 @@ public:
 
 	void OnAttach() override
 	{
-		VoxelEngine::Application::Get().GetWindow().SetVSync(false);
+		//VoxelEngine::Application::Get().GetWindow().SetVSync(false);
 		//VoxelEngine::Application::Get().GetWindow().SetFramerate(60.0);
 		
 		m_Skybox = VoxelEngine::Texture::Create(VOXELCRAFT_DIR + "Assets/Textures/Skybox/right.png",
