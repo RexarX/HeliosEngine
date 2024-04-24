@@ -7,6 +7,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include <GLFW/glfw3.h>
+
 namespace VoxelEngine
 {
   struct Cube
@@ -170,12 +172,12 @@ namespace VoxelEngine
     Submit(transform);
 	}
 
-  void Renderer::DrawLine(const glm::vec3& position, const glm::vec3& rotation, const float lenght) 
+  void Renderer::RenderLine(const glm::vec3& position, const glm::vec3& rotation, const float lenght) 
   {
     glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), glm::vec3(lenght));
-    transform = glm::rotate(transform, glm::radians(rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
-    transform = glm::rotate(transform, glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
-    transform = glm::rotate(transform, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
+    transform = glm::rotate(transform, rotation.x, glm::vec3(1.0f, 0.0f, 0.0f));
+    transform = glm::rotate(transform, rotation.y, glm::vec3(0.0f, 1.0f, 0.0f));
+    transform = glm::rotate(transform, rotation.z, glm::vec3(0.0f, 0.0f, 1.0f));
 
     s_Line.LineShader->Bind();
     s_Line.LineVertex->Bind();
@@ -185,5 +187,20 @@ namespace VoxelEngine
     s_Line.LineShader->UploadUniformMat4("u_Transform", transform);
 
     RenderCommand::DrawLine(s_Line.LineVertex, 2);
+  }
+
+  void Renderer::DrawLine(const glm::vec3& position, const glm::vec3& rotation, const float lenght) 
+  {
+    RenderLine(position, glm::vec3(glm::radians(rotation.x), glm::radians(rotation.y), glm::radians(rotation.z)), lenght);
+  }
+
+  void Renderer::DrawLine(const glm::vec3& originPosition, const glm::vec3& endPosition) 
+  {
+    glm::vec3 delta = endPosition - originPosition;
+    float lenght = glm::length(delta);
+    //glm::vec3 rotation(asin(-delta.y / lenght), atan2(delta.x, delta.z), 0.0f);
+    glm::vec3 rotation(glfwGetTime(), glm::radians(45.0f), 0);
+    VE_TRACE("rotation {0}, {1}, {2}; lenght {3}", glm::degrees(rotation.x), glm::degrees(rotation.y), rotation.z, lenght);
+    Renderer::RenderLine(originPosition, rotation, lenght);
   }
 }

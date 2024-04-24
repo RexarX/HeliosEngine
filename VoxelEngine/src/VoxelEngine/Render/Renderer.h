@@ -31,9 +31,14 @@ namespace VoxelEngine
 		static void DrawCube(const glm::vec3& position, const glm::vec3& rotation,
 			const glm::vec3& size, const std::shared_ptr<Texture>& texture);
 
+		//convert data and then call RenderLine
 		static void DrawLine(const glm::vec3& position, const glm::vec3& rotation, const float lenght);
+		static void DrawLine(const glm::vec3& originPosition, const glm::vec3& endPosition); 
 
 	private:
+
+		static void RenderLine(const const glm::vec3& position, const glm::vec3& rotation, const float lenght); //sets up opengl and matrices then draws
+
 		struct SceneData
 		{
 			glm::mat4 ViewProjectionMatrix;

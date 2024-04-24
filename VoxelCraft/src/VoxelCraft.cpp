@@ -25,6 +25,10 @@ public:
 					glm::vec3(0.0f, 0.0f, 0.0f), glm::vec2(0.0f, 0.0f) });
 			}
 		}
+		m_Cube.push_back({ glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f),
+					glm::vec3(0.0f, 0.0f, 0.0f), glm::vec2(0.0f, 0.0f) });
+		m_Cube.push_back({ glm::vec3(12.5f, 12.5f, 12.5f), glm::vec3(1.0f, 1.0f, 1.0f),
+					glm::vec3(0.0f, 0.0f, 0.0f), glm::vec2(0.0f, 0.0f) });
 	}
 
 	void OnDetach() override
@@ -116,9 +120,11 @@ public:
 			}
 		}
 		std::string debug = std::to_string(cubeCount) + " | " + std::to_string(m_Cube.size());
-		VE_TRACE(std::string_view(debug));
+		//VE_TRACE(std::string_view(debug));
 
-		VoxelEngine::Renderer::DrawLine(glm::vec3(12.5f, 12.5f, 12.5f), glm::vec3(0.0f, 0.0f, 0.0f), 100.0f); // (ray origin, ray direction, ray lenght)
+		VoxelEngine::Renderer::DrawLine(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 45.0f, 0.0f), 100.0f); // (ray origin, ray rotation, ray lenght)
+
+		VoxelEngine::Renderer::DrawLine(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(12.5f, 12.5f, 12.5f));
 
 		VoxelEngine::Renderer::EndScene();
 	}
