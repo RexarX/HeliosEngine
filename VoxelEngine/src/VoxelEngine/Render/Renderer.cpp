@@ -6,6 +6,7 @@
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <glad/glad.h>
 
 namespace VoxelEngine
 {
@@ -112,13 +113,13 @@ namespace VoxelEngine
       -0.5f, -0.5f, -0.5f, 0.5f, 0.0f, // 14
     };
 
-    uint32_t* cubeIndices = new uint32_t[]{
-      1, 2, 3, 1, 3, 4, // back
-      4, 3, 5, 4, 5, 6, // left
-      7, 6, 8, 7, 8, 9, // top
-      8, 12, 11, 8, 11, 10, // right
-      6, 5, 12, 6, 12, 8, // front
-      5, 14, 13, 5, 13, 12, // bottom
+    uint32_t cubeIndices[] = {
+      0, 1, 2, 0, 2, 3, // back
+      3, 2, 4, 3, 4, 5, // left
+      6, 5, 7, 6, 7, 8, // top
+      7, 11, 10, 7, 10, 9, // right
+      5, 4, 11, 5, 11, 7, // front
+      4, 13, 12, 4, 12, 11, // bottom
     };
 
     constexpr float lineVertices[] = {
@@ -174,10 +175,9 @@ namespace VoxelEngine
     s_Cube.CubeVertex = VertexArray::Create();
     s_Cube.CubeVertex->Bind();
 
-    s_Cube.CubeBuffer = VertexBuffer::Create(cubeVertices, sizeof(cubeVertices));
+    s_Cube.CubeBuffer = VertexBuffer::Create(vertices, sizeof(vertices));
     s_Cube.CubeBuffer->SetLayout({
       { ShaderDataType::Float3, "a_Pos" },
-      { ShaderDataType::Float3, "a_Normal" },
       { ShaderDataType::Float2, "a_TexCoord" }
       });
 
@@ -186,6 +186,10 @@ namespace VoxelEngine
     s_Cube.CubeBuffer->Unbind();
 
     s_Cube.CubeIndex = IndexBuffer::Create(cubeIndices, sizeof(cubeIndices));
+
+    s_Cube.CubeVertex->SetIndexBuffer(s_Cube.CubeIndex);
+
+    s_Cube.CubeIndex->Unbind();
     
     s_Cube.CubeMatrixBuffer = VertexBuffer::Create(sizeof(glm::mat4) * 100000);
     s_Cube.CubeMatrixBuffer->SetLayout({
@@ -196,10 +200,10 @@ namespace VoxelEngine
       });
 
     s_Cube.CubeVertex->AddVertexBuffer(s_Cube.CubeMatrixBuffer);
+    s_Cube.CubeVertex->AddVertexAttribDivisor(2, 1);
     s_Cube.CubeVertex->AddVertexAttribDivisor(3, 1);
     s_Cube.CubeVertex->AddVertexAttribDivisor(4, 1);
     s_Cube.CubeVertex->AddVertexAttribDivisor(5, 1);
-    s_Cube.CubeVertex->AddVertexAttribDivisor(6, 1);
 
     s_Cube.CubeMatrixBuffer->Unbind();
 
@@ -237,8 +241,6 @@ namespace VoxelEngine
 
     s_Skybox.SkyboxShader = Shader::Create(VOXELENGINE_DIR + "Assets/Shaders/Skybox.glsl");
     s_Skybox.SkyboxShader->Unbind();
-
-    delete[] cubeIndices;
 	}
 
   void Renderer::OnWindowResize(const uint32_t width, const uint32_t height)
@@ -269,9 +271,9 @@ namespace VoxelEngine
   {
   }
 
-	void Renderer::DrawCube(const glm::vec3& position, const glm::vec3& rotation,
-                          const glm::vec3& size, const std::shared_ptr<Texture>& texture)
-	{
+  void Renderer::DrawCube(const glm::vec3& position, const glm::vec3& rotation,
+    const glm::vec3& size, const std::shared_ptr<Texture>& texture)
+  {
     texture->Bind();
 
     glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), size);
@@ -285,12 +287,13 @@ namespace VoxelEngine
     s_Cube.CubeShader->Bind();
     s_Cube.CubeVertex->Bind();
     s_Cube.CubeBuffer->Bind();
+    s_Cube.CubeIndex->Bind();
 
     s_Cube.CubeShader->UploadUniformMat4("u_Projection", s_SceneData->ProjectionMatrix);
     s_Cube.CubeShader->UploadUniformMat4("u_View", s_SceneData->ViewMatrix);
 
-    RenderCommand::DrawArray(s_Cube.CubeVertex, 36);
-	}
+    RenderCommand::DrawIndexed(s_Cube.CubeVertex, s_Cube.CubeIndex->GetCount());
+  }
 
   void Renderer::DrawCubesInstanced(const std::vector<glm::mat3>& cubes, const std::shared_ptr<Texture>& texture)
   {
@@ -307,6 +310,7 @@ namespace VoxelEngine
     s_Cube.CubeShader->Bind();
     s_Cube.CubeVertex->Bind();
     s_Cube.CubeBuffer->Bind();
+    s_Cube.CubeIndex->Bind();
 
     s_Cube.CubeMatrixBuffer->Bind();
     s_Cube.CubeMatrixBuffer->SetData(transform, cubes.size() * sizeof(glm::mat4));
@@ -314,7 +318,7 @@ namespace VoxelEngine
     s_Cube.CubeShader->UploadUniformMat4("u_Projection", s_SceneData->ProjectionMatrix);
     s_Cube.CubeShader->UploadUniformMat4("u_View", s_SceneData->ViewMatrix);
 
-    RenderCommand::DrawArraysInstanced(s_Cube.CubeVertex, 36, cubes.size());
+    RenderCommand::DrawIndexedInstanced(s_Cube.CubeVertex, s_Cube.CubeIndex->GetCount(), cubes.size());
 
     delete[] transform;
   }

@@ -26,7 +26,7 @@ public:
 
 		m_CheckerboardTexture = VoxelEngine::Texture::Create(VOXELCRAFT_DIR + "Assets/Textures/Checkerboard.png",
 																												 true, 16.0f);
-		m_DirtTexture = VoxelEngine::Texture::Create(VOXELCRAFT_DIR + "Assets/Textures/Dirt.png",
+		m_DirtTexture = VoxelEngine::Texture::Create(VOXELCRAFT_DIR + "Assets/Textures/dirt(14vert).png",
 																								 true, 16.0f);
 
 		for (float i = 0; i < 100; ++i) {

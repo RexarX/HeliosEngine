@@ -18,10 +18,12 @@ namespace VoxelEngine
 
 		virtual void DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray,
 														 const uint32_t indexCount = 0) override;
-		virtual void DrawArraysInstanced(const std::shared_ptr<VertexArray>& vertexArray,
-																		 const uint32_t vertexCount = 0, const uint32_t instanceCount = 0) override;
+		virtual void DrawIndexedInstanced(const std::shared_ptr<VertexArray>& vertexArray,
+																			const uint32_t indexCount = 0, const uint32_t instanceCount = 0) override;
 		virtual void DrawArray(const std::shared_ptr<VertexArray>& vertexArray,
 													 const uint32_t vertexCount = 0) override;
+		virtual void DrawArraysInstanced(const std::shared_ptr<VertexArray>& vertexArray,
+																		 const uint32_t vertexCount = 0, const uint32_t instanceCount = 0) override;
 		virtual void DrawLine(const std::shared_ptr<VertexArray>& vertexArray,
 													const uint32_t vertexCount = 0) override;
 	};

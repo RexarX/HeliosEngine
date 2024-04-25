@@ -18,15 +18,18 @@ namespace VoxelEngine
 	public:
 		virtual void Init() = 0;
 
-		virtual void SetViewport(const uint32_t x, const uint32_t y, const uint32_t width,
-														 const uint32_t height) = 0;
+		virtual void SetViewport(const uint32_t x, const uint32_t y,
+														 const uint32_t width, const uint32_t height) = 0;
 		virtual void SetClearColor(const glm::vec4& color) = 0;
 		virtual void SetDepthMask(const bool mask) = 0;
 
 		virtual void DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray,
 														 const uint32_t indexCount = 0) = 0;
+		virtual void DrawIndexedInstanced(const std::shared_ptr<VertexArray>& vertexArray,
+																			const uint32_t indexCount = 0,
+																			const uint32_t instanceCount = 0) = 0;
 		virtual void DrawArraysInstanced(const std::shared_ptr<VertexArray>& vertexArray,
-																 const uint32_t vertexCount = 0, const uint32_t instanceCount = 0) = 0;
+																		 const uint32_t vertexCount = 0, const uint32_t instanceCount = 0) = 0;
 		virtual void DrawArray(const std::shared_ptr<VertexArray>& vertexArray,
 													 const uint32_t vertexCount = 0) = 0;
 		virtual void DrawLine(const std::shared_ptr<VertexArray>& vertexArray,

@@ -45,16 +45,22 @@ namespace VoxelEngine
 		glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, nullptr);
 	}
 
-	void OpenGLRendererAPI::DrawArraysInstanced(const std::shared_ptr<VertexArray>& vertexArray,
-																							const uint32_t vertexCount, const uint32_t instanceCount)
+	void OpenGLRendererAPI::DrawIndexedInstanced(const std::shared_ptr<VertexArray>& vertexArray, const uint32_t indexCount, const uint32_t instanceCount)
 	{
-		glDrawArraysInstanced(GL_TRIANGLES, 0, vertexCount, instanceCount);
+		uint32_t count = indexCount ? indexCount : vertexArray->GetIndexBuffer()->GetCount();
+		glDrawElementsInstanced(GL_TRIANGLES, count, GL_UNSIGNED_INT, nullptr, instanceCount);
 	}
 
 	void OpenGLRendererAPI::DrawArray(const std::shared_ptr<VertexArray>& vertexArray,
 																		const uint32_t vertexCount)
 	{
     glDrawArrays(GL_TRIANGLES, 0, vertexCount);
+	}
+
+	void OpenGLRendererAPI::DrawArraysInstanced(const std::shared_ptr<VertexArray>& vertexArray,
+		const uint32_t vertexCount, const uint32_t instanceCount)
+	{
+		glDrawArraysInstanced(GL_TRIANGLES, 0, vertexCount, instanceCount);
 	}
 
 	void OpenGLRendererAPI::DrawLine(const std::shared_ptr<VertexArray>& vertexArray,
