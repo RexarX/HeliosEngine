@@ -49,7 +49,7 @@ namespace VoxelEngine
     m_Frustum[5][3] = viewProjectionModel[3][2];
 
     //normalization
-    for (int32_t i = 0; i < 6; ++i) {
+    for (uint32_t i = 0; i < 6; ++i) {
       m_Normalize = sqrt(m_Frustum[i][0] * m_Frustum[i][0] + m_Frustum[i][1] * m_Frustum[i][1] + m_Frustum[i][2] * m_Frustum[i][2]);
 
       m_Frustum[i][0] /= m_Normalize;
@@ -59,54 +59,54 @@ namespace VoxelEngine
     }
   }
 
-  bool Frustum::IsCubeInFrustrum(const float size, const glm::vec3& position) const
+  bool Frustum::IsParallelepipedInFrustrum(const glm::vec3& position, const glm::vec3& size) const
   {
     int32_t point_cnt = 0;
     int32_t plane_cnt = 0;
 
-    for (int32_t i = 0; i < 6; ++i) {
+    for (uint32_t i = 0; i < 6; ++i) {
       point_cnt = 0;
-      if (m_Frustum[i][0] * (position.x - size) + m_Frustum[i][1] * (position.y - size) +
-        m_Frustum[i][2] * (position.z - size) + m_Frustum[i][3] >= 0) {
+      if (m_Frustum[i][0] * (position.x - size.x) + m_Frustum[i][1] * (position.y - size.y) +
+        m_Frustum[i][2] * (position.z - size.z) + m_Frustum[i][3] >= 0) {
         ++point_cnt;
       }
-      if (m_Frustum[i][0] * (position.x - size) + m_Frustum[i][1] * (position.y - size) +
-        m_Frustum[i][2] * (position.z - size) + m_Frustum[i][3] >= 0) {
-        ++point_cnt;
-      }
-
-      if (m_Frustum[i][0] * (position.x + size) + m_Frustum[i][1] * (position.y - size) +
-        m_Frustum[i][2] * (position.z - size) + m_Frustum[i][3] >= 0) {
+      if (m_Frustum[i][0] * (position.x - size.x) + m_Frustum[i][1] * (position.y - size.y) +
+        m_Frustum[i][2] * (position.z - size.z) + m_Frustum[i][3] >= 0) {
         ++point_cnt;
       }
 
-      if (m_Frustum[i][0] * (position.x - size) + m_Frustum[i][1] * (position.y + size) +
-        m_Frustum[i][2] * (position.z - size) + m_Frustum[i][3] >= 0) {
+      if (m_Frustum[i][0] * (position.x + size.x) + m_Frustum[i][1] * (position.y - size.y) +
+        m_Frustum[i][2] * (position.z - size.z) + m_Frustum[i][3] >= 0) {
         ++point_cnt;
       }
 
-      if (m_Frustum[i][0] * (position.x + size) + m_Frustum[i][1] * (position.y + size) +
-        m_Frustum[i][2] * (position.z - size) + m_Frustum[i][3] >= 0) {
+      if (m_Frustum[i][0] * (position.x - size.x) + m_Frustum[i][1] * (position.y + size.y) +
+        m_Frustum[i][2] * (position.z - size.z) + m_Frustum[i][3] >= 0) {
         ++point_cnt;
       }
 
-      if (m_Frustum[i][0] * (position.x - size) + m_Frustum[i][1] * (position.y - size) +
-        m_Frustum[i][2] * (position.z + size) + m_Frustum[i][3] >= 0) {
+      if (m_Frustum[i][0] * (position.x + size.x) + m_Frustum[i][1] * (position.y + size.y) +
+        m_Frustum[i][2] * (position.z - size.z) + m_Frustum[i][3] >= 0) {
         ++point_cnt;
       }
 
-      if (m_Frustum[i][0] * (position.x + size) + m_Frustum[i][1] * (position.y - size) +
-        m_Frustum[i][2] * (position.z + size) + m_Frustum[i][3] >= 0) {
+      if (m_Frustum[i][0] * (position.x - size.x) + m_Frustum[i][1] * (position.y - size.y) +
+        m_Frustum[i][2] * (position.z + size.z) + m_Frustum[i][3] >= 0) {
         ++point_cnt;
       }
 
-      if (m_Frustum[i][0] * (position.x - size) + m_Frustum[i][1] * (position.y + size) +
-        m_Frustum[i][2] * (position.z + size) + m_Frustum[i][3] >= 0) {
+      if (m_Frustum[i][0] * (position.x + size.x) + m_Frustum[i][1] * (position.y - size.y) +
+        m_Frustum[i][2] * (position.z + size.z) + m_Frustum[i][3] >= 0) {
         ++point_cnt;
       }
 
-      if (m_Frustum[i][0] * (position.x + size) + m_Frustum[i][1] * (position.y + size) +
-        m_Frustum[i][2] * (position.z + size) + m_Frustum[i][3] >= 0) {
+      if (m_Frustum[i][0] * (position.x - size.x) + m_Frustum[i][1] * (position.y + size.y) +
+        m_Frustum[i][2] * (position.z + size.z) + m_Frustum[i][3] >= 0) {
+        ++point_cnt;
+      }
+
+      if (m_Frustum[i][0] * (position.x + size.x) + m_Frustum[i][1] * (position.y + size.y) +
+        m_Frustum[i][2] * (position.z + size.z) + m_Frustum[i][3] >= 0) {
         ++point_cnt;
       }
 

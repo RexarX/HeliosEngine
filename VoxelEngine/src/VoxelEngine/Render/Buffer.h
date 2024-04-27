@@ -134,6 +134,8 @@ namespace VoxelEngine
 
     virtual uint32_t GetCount() const = 0;
 
+    virtual void SetData(const void* data, const uint32_t size) = 0;
+
     static std::shared_ptr<IndexBuffer> Create(const uint32_t* indices,
                                                const uint32_t size);
   };

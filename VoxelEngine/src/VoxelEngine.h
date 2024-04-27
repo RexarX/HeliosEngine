@@ -4,6 +4,8 @@
 
 #include "VoxelEngine/Application.h"
 
+#include "VoxelEngine/EntryPoint.h"
+
 #include "VoxelEngine/Layer.h"
 
 #include "VoxelEngine/Input.h"
@@ -16,10 +18,10 @@
 
 #include "VoxelEngine/Log.h"
 
+#include "VoxelEngine/Timestep.h"
+
 #include "VoxelEngine/Render/Renderer.h"
 #include "VoxelEngine/Render/RenderStart.h"
-
-#include "VoxelEngine/Timestep.h"
 
 #include "VoxelEngine/Render/Buffer.h"
 #include "VoxelEngine/Render/Shader.h"
@@ -29,4 +31,4 @@
 #include "VoxelEngine/Render/Camera.h"
 #include "VoxelEngine/Render/CameraController.h"
 
-#include "VoxelEngine/EntryPoint.h"
+#include "VoxelEngine/Render/Chunk.h"

@@ -62,4 +62,8 @@ namespace VoxelEngine
 	{
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
+	void OpenGLIndexBuffer::SetData(const void* data, const uint32_t size)
+	{
+		glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, size, data);
+	}
 }

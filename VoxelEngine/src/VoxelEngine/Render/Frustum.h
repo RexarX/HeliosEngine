@@ -13,7 +13,7 @@ namespace VoxelEngine
 
     void CreateFrustum(const Camera& camera);
 
-    bool IsCubeInFrustrum(const float size, const glm::vec3& position) const;
+    bool IsParallelepipedInFrustrum(const glm::vec3& position, const glm::vec3& size) const;
 
   private:
     float m_Frustum[6][4];

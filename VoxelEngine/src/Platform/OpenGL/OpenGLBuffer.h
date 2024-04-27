@@ -35,6 +35,8 @@ namespace VoxelEngine
 
 		virtual uint32_t GetCount() const { return m_Count; }
 
+		virtual void SetData(const void* data, const uint32_t size);
+
 	private:
 		uint32_t m_RendererID;
 		uint32_t m_Count;

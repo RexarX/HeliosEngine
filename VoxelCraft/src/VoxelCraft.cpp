@@ -70,8 +70,8 @@ public:
 	{
 		VoxelEngine::Renderer::BeginScene(m_CameraController.GetCamera());
 		m_CameraController.GetFrustum().CreateFrustum(m_CameraController.GetCamera());
-		for (int32_t i = 0; i < m_Cube.size(); ++i) {
-			if (m_CameraController.GetFrustum().IsCubeInFrustrum(m_Cube[i][1].x, m_Cube[i][0])) {
+		for (uint32_t i = 0; i < m_Cube.size(); ++i) {
+			if (m_CameraController.GetFrustum().IsParallelepipedInFrustrum(m_Cube[i][0], m_Cube[i][1])) {
 				m_ToDraw.push_back(m_Cube[i]);
 			}
 		}
@@ -86,10 +86,12 @@ public:
 	}
 
 private:
+	VoxelEngine::CameraController m_CameraController;
+
 	std::vector<glm::mat3> m_Cube;
 	std::vector<glm::mat3> m_ToDraw;
 
-	VoxelEngine::CameraController m_CameraController;
+	std::vector<VoxelEngine::Chunk> m_WorldChunks;
 
   std::shared_ptr<VoxelEngine::Texture> m_Skybox;
 	std::shared_ptr<VoxelEngine::Texture> m_CheckerboardTexture;

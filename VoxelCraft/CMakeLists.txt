@@ -1,16 +1,15 @@
 set(PROJECT_NAME VoxelCraft)
 
-set(Sources
+file(GLOB_RECURSE exec
     "src/VoxelCraft.cpp"
 )
-
-source_group("Sources" FILES ${Sources})
+source_group("exec" FILES ${exec})
 
 set(ALL_FILES
-    ${Sources}
+    ${exec}
 )
 
-add_executable(${PROJECT_NAME} ${ALL_FILES})
+add_executable(${PROJECT_NAME} ${exec})
 
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 20)
 

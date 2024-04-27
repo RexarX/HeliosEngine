@@ -6,7 +6,8 @@
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include <glad/glad.h>
+
+#define MAX_VERTICES 65536
 
 namespace VoxelEngine
 {
@@ -36,11 +37,19 @@ namespace VoxelEngine
     std::shared_ptr<Shader> SkyboxShader;
   };
 
+  struct ChunkedData
+  {
+    std::shared_ptr<VertexArray> ChunkVertex;
+    std::shared_ptr<VertexBuffer> ChunkBuffer;
+    std::shared_ptr<IndexBuffer> ChunkIndex;
+  };
+  
 	std::unique_ptr<Renderer::SceneData> Renderer::s_SceneData = std::make_unique<Renderer::SceneData>();
 
   static Cube s_Cube;
   static Line s_Line;
   static Skybox s_Skybox;
+  static ChunkedData s_ChunkedData;
 
 	void Renderer::Init()
 	{
@@ -171,6 +180,25 @@ namespace VoxelEngine
       -1.0f, -1.0f,  1.0f,
        1.0f, -1.0f,  1.0f
     };
+    s_ChunkedData.ChunkVertex = VertexArray::Create();
+    s_ChunkedData.ChunkVertex->Bind();
+
+    s_ChunkedData.ChunkBuffer = VertexBuffer::Create(nullptr, sizeof(float) * MAX_VERTICES);
+
+    s_ChunkedData.ChunkBuffer->SetLayout({
+      { ShaderDataType::Float3, "a_Pos" },
+      { ShaderDataType::Float2, "a_TexCoord" }
+      });
+
+    s_ChunkedData.ChunkVertex->AddVertexBuffer(s_ChunkedData.ChunkBuffer);
+
+    s_ChunkedData.ChunkBuffer->Unbind();
+
+    s_ChunkedData.ChunkIndex = IndexBuffer::Create(nullptr, sizeof(uint32_t) * MAX_VERTICES);
+
+    s_ChunkedData.ChunkVertex->SetIndexBuffer(s_ChunkedData.ChunkIndex);
+
+    s_ChunkedData.ChunkIndex->Unbind();
 
     s_Cube.CubeVertex = VertexArray::Create();
     s_Cube.CubeVertex->Bind();
@@ -243,9 +271,26 @@ namespace VoxelEngine
     s_Skybox.SkyboxShader->Unbind();
 	}
 
+  void Renderer::Shutdown()
+  {
+  }
+
   void Renderer::OnWindowResize(const uint32_t width, const uint32_t height)
   {
     RenderCommand::SetViewport(0, 0, width, height);
+  }
+
+  void Renderer::DrawChunk(const Chunk& chunk)
+  {
+    //algorithm
+
+    s_ChunkedData.ChunkBuffer->Bind();
+    s_ChunkedData.ChunkBuffer->SetData(chunk.GetVertices(),
+                                       chunk.GetVerticesCount() * sizeof(float));
+
+    s_ChunkedData.ChunkIndex->Bind();
+    s_ChunkedData.ChunkIndex->SetData(chunk.GetIndices(),
+                                      chunk.GetIndicesCount() * sizeof(uint32_t));
   }
 
 	void Renderer::BeginScene(const Camera& camera)
@@ -266,10 +311,6 @@ namespace VoxelEngine
     s_Line.LineVertex->Unbind();
     s_Line.LineBuffer->Unbind();
 	}
-
-  void Renderer::Shutdown()
-  {
-  }
 
   void Renderer::DrawCube(const glm::vec3& position, const glm::vec3& rotation,
     const glm::vec3& size, const std::shared_ptr<Texture>& texture)

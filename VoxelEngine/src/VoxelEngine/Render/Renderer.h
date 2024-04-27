@@ -8,7 +8,7 @@
 
 #include "Texture.h"
 
-#include "Frustum.h"
+#include "Chunk.h"
 
 namespace VoxelEngine
 {
@@ -19,12 +19,12 @@ namespace VoxelEngine
 
 		static void Shutdown();
 
-		static void BeginScene(const Camera& camera);
-		static void EndScene();
+		inline static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
 
 		static void OnWindowResize(const uint32_t width, const uint32_t height);
 
-		inline static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
+		static void BeginScene(const Camera& camera);
+		static void EndScene();
 
 		static void DrawCube(const glm::vec3& position, const glm::vec3& rotation,
 												 const glm::vec3& size, const std::shared_ptr<Texture>& texture);
@@ -35,6 +35,9 @@ namespace VoxelEngine
 												 const float lenght);
 
 		static void DrawSkybox(const std::shared_ptr<Texture>& texture);
+
+	private:
+		static void DrawChunk(const Chunk& chunk);
 
 	private:
 		struct SceneData
