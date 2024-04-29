@@ -30,7 +30,8 @@ An attempt to create a clone of Minecraft ^_^
 
 ### Requirements
 * OpenGL 4.6
-* Vulkan
+* Vulkan SDK
+
 
 ### Installation
 

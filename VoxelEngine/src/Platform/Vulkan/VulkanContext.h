@@ -2,11 +2,17 @@
 
 #include "VoxelEngine/Render/GraphicsContext.h"
 
+#include "vepch.h"
+
 #include <vulkan/vulkan.hpp>
 
-#include <glfw/glfw3.h>
+#ifdef VE_DEBUG
+	const bool enableValidationLayers = false;
+#else
+	const bool enableValidationLayers = true;
+#endif
 
-#include <optional>
+struct GLFWwindow;
 
 namespace VoxelEngine
 {
@@ -30,7 +36,23 @@ namespace VoxelEngine
 			}
 		};
 
+		struct SwapChainSupportDetails {
+			vk::SurfaceCapabilitiesKHR capabilities;
+			std::vector<vk::SurfaceFormatKHR> formats;
+			std::vector<vk::PresentModeKHR> presentModes;
+		};
+
+		const std::vector<const char*> validationLayers = {
+			"VK_LAYER_LUNARG_standard_validation"
+		};
+
+		const std::vector<const char*> deviceExtensions = {
+			VK_KHR_SWAPCHAIN_EXTENSION_NAME
+		};
+
 		vk::UniqueInstance m_Instance;
+
+		VkDebugUtilsMessengerEXT m_Callback;
 
 		vk::SurfaceKHR m_Surface;
 
@@ -40,17 +62,37 @@ namespace VoxelEngine
 		vk::Queue m_GraphicsQueue;
 		vk::Queue m_PresentQueue;
 
+		vk::SwapchainKHR m_SwapChain;
+		std::vector<vk::Image> m_SwapChainImages;
+		vk::Format m_SwapChainImageFormat;
+		vk::Extent2D m_SwapChainExtent;
+		std::vector<vk::ImageView> m_SwapChainImageViews;
+
 	private:
 		void CreateInstance();
+		void SetupDebugCallback();
     void CreateSurface();
 		void PickPhysicalDevice();
 		void CreateLogicalDevice();
-		
-		bool IsDeviceSuitable(const vk::PhysicalDevice& device) const;
-		QueueFamilyIndices FindQueueFamilies(const vk::PhysicalDevice& device) const;
+		void CreateSwapChain();
+		void CreateImageViews();
+
+		bool IsDeviceSuitable();
+		QueueFamilyIndices FindQueueFamilies() const;
 		std::vector<const char*> GetRequiredExtensions() const;
+		bool CheckDeviceExtensionSupport() const;
+		bool CheckValidationLayerSupport() const;
+
+		VkResult CreateDebugUtilsMessengerEXT(const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo,
+			const VkAllocationCallbacks* pAllocator);
+		void DestroyDebugUtilsMessengerEXT(const VkAllocationCallbacks* pAllocator) const;
+
+		vk::SurfaceFormatKHR ChooseSwapSurfaceFormat(const std::vector<vk::SurfaceFormatKHR>& availableFormats) const;
+		vk::PresentModeKHR ChooseSwapPresentMode(const std::vector<vk::PresentModeKHR>& availablePresentModes) const;
+		vk::Extent2D ChooseSwapExtent(const vk::SurfaceCapabilitiesKHR& capabilities) const;
+		SwapChainSupportDetails QuerySwapChainSupport();
 
 	private:
-		GLFWwindow* m_WindowHandle;		
+		GLFWwindow* m_WindowHandle;
 	};
 }

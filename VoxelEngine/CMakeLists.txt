@@ -137,11 +137,10 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
     "GLFW_INCLUDE_NONE;"
     "UNICODE;"
     "_UNICODE;"
-
 )
 
 if(WIN32)
-	target_compile_definitions(${PROJECT_NAME} PRIVATE "VE_PLATFORM_WINDOWS;")
+	target_compile_definitions(${PROJECT_NAME} PRIVATE "VE_PLATFORM_WINDOWS;" "-DVK_USE_PLATFORM_WIN32_KHR")
 endif()
 
 if(MSVC)
@@ -187,9 +186,9 @@ if(MSVC)
 endif()
 
 find_package(VulkanHeaders CONFIG REQUIRED)
-target_link_libraries(${PROJECT_NAME} PRIVATE Vulkan::Headers)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
+    Vulkan::Headers
 	glad
     glfw
     stb_image
@@ -197,6 +196,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 
 set(ADDITIONAL_LIBRARY_DEPENDENCIES
     "opengl32"
+    "$ENV{VULKAN_SDK}/Lib/vulkan-1.lib"
 )
 
 target_link_libraries(${PROJECT_NAME} PUBLIC "${ADDITIONAL_LIBRARY_DEPENDENCIES}")
