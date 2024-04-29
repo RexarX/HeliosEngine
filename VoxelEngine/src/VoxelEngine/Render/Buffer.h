@@ -138,5 +138,7 @@ namespace VoxelEngine
 
     static std::shared_ptr<IndexBuffer> Create(const uint32_t* indices,
                                                const uint32_t size);
+
+    static std::shared_ptr<IndexBuffer> Create(const uint32_t size);
   };
 }

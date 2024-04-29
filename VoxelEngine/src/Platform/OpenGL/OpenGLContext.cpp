@@ -31,6 +31,10 @@ namespace VoxelEngine
 		VE_CORE_INFO("  Version: {0}", (const char*)glGetString(GL_VERSION));
 	}
 
+	void OpenGLContext::Shutdown()
+	{
+	}
+
 	void OpenGLContext::ClearBuffer()
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

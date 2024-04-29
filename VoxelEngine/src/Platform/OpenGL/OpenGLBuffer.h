@@ -28,6 +28,7 @@ namespace VoxelEngine
 	{
 	public:
 		OpenGLIndexBuffer(const uint32_t* indices, const uint32_t count);
+		OpenGLIndexBuffer(const uint32_t size);
 		virtual ~OpenGLIndexBuffer();
 
 		virtual void Bind() const;

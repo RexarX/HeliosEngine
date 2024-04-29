@@ -6,8 +6,6 @@
 #include "Events/MouseEvent.h"
 #include "Events/KeyEvent.h"
 
-#include "Platform/OpenGL/OpenGLContext.h"
-
 #include <GLFW/glfw3.h>
 
 namespace VoxelEngine
@@ -49,14 +47,10 @@ namespace VoxelEngine
       s_GLFWInitialized = true;
     }
 
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
-		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(),
 																nullptr, nullptr);
- 
-		m_Context = std::make_unique<OpenGLContext>(m_Window);
+		
+		m_Context = GraphicsContext::Create(m_Window);
 		m_Context->Init();
 		m_Context->SetViewport(props.Width, props.Height);
 
@@ -166,6 +160,7 @@ namespace VoxelEngine
 
   void WindowsWindow::Shutdown()
   {
+		m_Context->Shutdown();
 		glfwDestroyWindow(m_Window);
   }
 

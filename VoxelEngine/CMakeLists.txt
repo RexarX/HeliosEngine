@@ -12,6 +12,12 @@ file(GLOB_RECURSE src__Platform__OpenGL
 )
 source_group("src/Platform/OpenGL" FILES ${src__Platform__OpenGL})
 
+file(GLOB_RECURSE src__Platform__Vulkan
+    "src/Platform/Vulkan/*.cpp"
+    "src/Platform/Vulkan/*.h"
+)
+source_group("src/Platform/Vulkan" FILES ${src__Platform__Vulkan})
+
 file(GLOB_RECURSE src__Platform__Windows
     "src/Platform/Windows/*.cpp"
     "src/Platform/Windows/*.h"
@@ -131,6 +137,7 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
     "GLFW_INCLUDE_NONE;"
     "UNICODE;"
     "_UNICODE;"
+
 )
 
 if(WIN32)
@@ -179,7 +186,10 @@ if(MSVC)
     )
 endif()
 
-target_link_libraries(${PROJECT_NAME} PUBLIC
+find_package(VulkanHeaders CONFIG REQUIRED)
+target_link_libraries(${PROJECT_NAME} PRIVATE Vulkan::Headers)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE
 	glad
     glfw
     stb_image

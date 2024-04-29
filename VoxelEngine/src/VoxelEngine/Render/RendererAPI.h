@@ -1,8 +1,8 @@
 #pragma once
 
-#include <glm/glm.hpp>
-
 #include "VertexArray.h"
+
+#include <glm/glm.hpp>
 
 namespace VoxelEngine 
 {
@@ -12,7 +12,8 @@ namespace VoxelEngine
 		enum class API
 		{
 			None = 0,
-			OpenGL = 1
+			OpenGL = 1,
+			Vulkan = 2
 		};
 
 	public:
