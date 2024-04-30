@@ -21,12 +21,12 @@ namespace VoxelEngine
 	public:
 		VulkanContext(GLFWwindow* windowHandle);
 
-		static vk::UniqueDevice& GetDevice() { return m_Device; }
-
 		virtual void Init() override;
 		virtual void Shutdown() override;
 		virtual void ClearBuffer() override;
 		virtual void SetViewport(const uint32_t width, const uint32_t height) override;
+
+		static inline vk::UniqueDevice& GetDevice() { return m_Device; }
 
 	private:
 		struct QueueFamilyIndices {
@@ -54,12 +54,13 @@ namespace VoxelEngine
 
 		static vk::UniqueInstance m_Instance;
 
-		static VkDebugUtilsMessengerEXT m_Callback;
+		static vk::UniqueDevice m_Device;
+
+		VkDebugUtilsMessengerEXT m_Callback;
 
 		vk::SurfaceKHR m_Surface;
 
-		static vk::PhysicalDevice m_PhysicalDevice;
-		static vk::UniqueDevice m_Device;
+		vk::PhysicalDevice m_PhysicalDevice;
 
 		vk::Queue m_GraphicsQueue;
 		vk::Queue m_PresentQueue;

@@ -84,20 +84,20 @@ namespace VoxelEngine
 		return shaderSources;
 	}
 
-	void VulkanShader::Compile(std::unordered_map<vk::ShaderStageFlagBits, std::string>& code)
+	void VulkanShader::Compile(std::unordered_map<vk::ShaderStageFlagBits, std::string>& shaderSources)
 	{
 		auto vertShaderModule = VulkanContext::GetDevice()->createShaderModuleUnique({
 								vk::ShaderModuleCreateFlags(),
-								code[vk::ShaderStageFlagBits::eVertex].size(),
-								reinterpret_cast<const uint32_t*>(code[vk::ShaderStageFlagBits::eVertex].data())
+								shaderSources[vk::ShaderStageFlagBits::eVertex].size(),
+								reinterpret_cast<const uint32_t*>(shaderSources[vk::ShaderStageFlagBits::eVertex].data())
 			});
 
 		VE_CORE_ASSERT(vertShaderModule, "Failed to create vertex shader module");
 
 		auto fragShaderModule = VulkanContext::GetDevice()->createShaderModuleUnique({
 								vk::ShaderModuleCreateFlags(),
-								code[vk::ShaderStageFlagBits::eFragment].size(),
-								reinterpret_cast<const uint32_t*>(code[vk::ShaderStageFlagBits::eFragment].data())
+								shaderSources[vk::ShaderStageFlagBits::eFragment].size(),
+								reinterpret_cast<const uint32_t*>(shaderSources[vk::ShaderStageFlagBits::eFragment].data())
 			});
 
 		VE_CORE_ASSERT(fragShaderModule, "Failed to create fragment shader module");
@@ -107,13 +107,13 @@ namespace VoxelEngine
 				vk::PipelineShaderStageCreateFlags(),
 				vk::ShaderStageFlagBits::eVertex,
 				*vertShaderModule,
-				"main"
+				m_Name.data()
 			},
 			{
 				vk::PipelineShaderStageCreateFlags(),
 				vk::ShaderStageFlagBits::eFragment,
 				*fragShaderModule,
-				"main"
+				m_Name.data()
 			}
 		};
 	}

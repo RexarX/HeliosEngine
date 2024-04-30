@@ -37,7 +37,6 @@ namespace VoxelEngine
 		void Compile(std::unordered_map<vk::ShaderStageFlagBits, std::string>& shaderSources);
 
 	private:
-		uint32_t m_RendererID;
 		std::string m_Name;
 	};
 }

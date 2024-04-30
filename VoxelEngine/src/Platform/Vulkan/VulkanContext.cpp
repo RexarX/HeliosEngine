@@ -16,6 +16,10 @@ namespace VoxelEngine
     return VK_FALSE;
   }
 
+  vk::UniqueInstance VulkanContext::m_Instance;
+
+  vk::UniqueDevice VulkanContext::m_Device;
+
 	VulkanContext::VulkanContext(GLFWwindow* windowHandle)
 		: m_WindowHandle(windowHandle)
 	{
@@ -24,8 +28,6 @@ namespace VoxelEngine
 
 	void VulkanContext::Init()
 	{
-		//glfwMakeContextCurrent(m_WindowHandle);
-
     CreateInstance();
     SetupDebugCallback();
     CreateSurface();
