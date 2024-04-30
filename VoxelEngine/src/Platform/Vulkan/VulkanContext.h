@@ -21,6 +21,8 @@ namespace VoxelEngine
 	public:
 		VulkanContext(GLFWwindow* windowHandle);
 
+		static vk::UniqueDevice& GetDevice() { return m_Device; }
+
 		virtual void Init() override;
 		virtual void Shutdown() override;
 		virtual void ClearBuffer() override;
@@ -50,14 +52,14 @@ namespace VoxelEngine
 			VK_KHR_SWAPCHAIN_EXTENSION_NAME
 		};
 
-		vk::UniqueInstance m_Instance;
+		static vk::UniqueInstance m_Instance;
 
-		VkDebugUtilsMessengerEXT m_Callback;
+		static VkDebugUtilsMessengerEXT m_Callback;
 
 		vk::SurfaceKHR m_Surface;
 
-		vk::PhysicalDevice m_PhysicalDevice;
-		vk::UniqueDevice m_Device;
+		static vk::PhysicalDevice m_PhysicalDevice;
+		static vk::UniqueDevice m_Device;
 
 		vk::Queue m_GraphicsQueue;
 		vk::Queue m_PresentQueue;

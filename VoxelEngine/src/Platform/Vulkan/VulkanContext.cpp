@@ -24,7 +24,7 @@ namespace VoxelEngine
 
 	void VulkanContext::Init()
 	{
-		glfwMakeContextCurrent(m_WindowHandle);
+		//glfwMakeContextCurrent(m_WindowHandle);
 
     CreateInstance();
     SetupDebugCallback();
@@ -122,20 +122,41 @@ namespace VoxelEngine
     auto devices = m_Instance->enumeratePhysicalDevices();
     VE_CORE_ASSERT(!devices.empty(), "Failed to find GPUs with Vulkan support!");
 
+    int flag = 0;
+    vk::PhysicalDevice integratedDivice;
     for (const auto& device : devices) {
       m_PhysicalDevice = device;
-      if (IsDeviceSuitable()) { break; }
+      vk::PhysicalDeviceProperties properties = m_PhysicalDevice.getProperties();
+      if (IsDeviceSuitable()) {
+        if (properties.deviceType == vk::PhysicalDeviceType::eDiscreteGpu) {
+          flag = 1;
+          break;
+        }
+        else if (properties.deviceType == vk::PhysicalDeviceType::eIntegratedGpu) {
+          flag = 2;
+          integratedDivice = m_PhysicalDevice;
+        }
+      }    
     }
+    switch (flag)
+    {
+    case 1: //discrete gpu
+      break;
 
-    VE_CORE_ASSERT(m_PhysicalDevice, "Failed to find a suitable GPU!");
-    return;
+    case 2: //integrated gpu
+      m_PhysicalDevice = integratedDivice;
+      break;
+
+    default: //no gpu :(
+      VE_CORE_ASSERT(false, "Failed to find a suitable GPU!");
+      break;
+    }
 
     vk::PhysicalDeviceProperties properties = m_PhysicalDevice.getProperties();
 
     VE_CORE_INFO("Vulkan Info:");
-    VE_CORE_INFO("  Vendor: {0}", (const char*)properties.vendorID);
-    VE_CORE_INFO("  GPU: {0}", (const char*)properties.deviceName);
-    VE_CORE_INFO("  Version: {0}", (const char*)properties.driverVersion);
+    VE_CORE_INFO("  GPU: {0}", properties.deviceName);
+    VE_CORE_INFO("  Version: {0}", properties.driverVersion);
   }
 
   void VulkanContext::CreateLogicalDevice()
@@ -147,7 +168,7 @@ namespace VoxelEngine
 
     float queuePriority = 1.0f;
 
-    for (uint32_t queueFamily : uniqueQueueFamilies) {
+    for (const uint32_t queueFamily : uniqueQueueFamilies) {
       queueCreateInfos.push_back({
           vk::DeviceQueueCreateFlags(),
           queueFamily,
@@ -303,7 +324,6 @@ namespace VoxelEngine
     details.capabilities = m_PhysicalDevice.getSurfaceCapabilitiesKHR(m_Surface);
     details.formats = m_PhysicalDevice.getSurfaceFormatsKHR(m_Surface);
     details.presentModes = m_PhysicalDevice.getSurfacePresentModesKHR(m_Surface);
-
     return details;
   }
 

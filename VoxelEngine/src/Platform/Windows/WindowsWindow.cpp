@@ -181,9 +181,9 @@ namespace VoxelEngine
 
   void WindowsWindow::SetVSync(const bool enabled)
   {
-		if (enabled) { glfwSwapInterval(1); }
-		else { glfwSwapInterval(0); }
-
+		if (RendererAPI::GetAPI() == RendererAPI::API::OpenGL) {
+			glfwSwapInterval(enabled ? 1 : 0);
+		}
 		m_Data.VSync = enabled;
   }
 
