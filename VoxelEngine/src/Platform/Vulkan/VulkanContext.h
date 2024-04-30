@@ -76,6 +76,7 @@ namespace VoxelEngine
 		void CreateLogicalDevice();
 		void CreateSwapChain();
 		void CreateImageViews();
+		void CreateGraphicsPipeline();
 
 		bool IsDeviceSuitable();
 		QueueFamilyIndices FindQueueFamilies() const;

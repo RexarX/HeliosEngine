@@ -25,7 +25,6 @@ namespace VoxelEngine
 	void VulkanContext::Init()
 	{
 		glfwMakeContextCurrent(m_WindowHandle);
-    glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 
     CreateInstance();
     SetupDebugCallback();
@@ -33,6 +32,7 @@ namespace VoxelEngine
     PickPhysicalDevice();
     CreateLogicalDevice();
     CreateSwapChain();
+    CreateImageViews();
 	}
 
   void VulkanContext::Shutdown()
@@ -40,7 +40,7 @@ namespace VoxelEngine
     for (const auto& imageView : m_SwapChainImageViews) {
       m_Device->destroyImageView(imageView);
     }
-
+    
     m_Instance->destroySurfaceKHR();
 
     m_Device->destroySwapchainKHR();
@@ -109,9 +109,9 @@ namespace VoxelEngine
 
   void VulkanContext::CreateSurface()
   {
-    vk::SurfaceKHR rawSurface;
+    VkSurfaceKHR rawSurface;
 
-    VE_CORE_ASSERT(glfwCreateWindowSurface(*m_Instance, m_WindowHandle, nullptr, &rawSurface) = VK_SUCCESS,
+    VE_CORE_ASSERT(glfwCreateWindowSurface(*m_Instance, m_WindowHandle, nullptr, &rawSurface) == VK_SUCCESS,
                    "Failed to create window surface!");
     
     m_Surface = rawSurface;
@@ -120,7 +120,7 @@ namespace VoxelEngine
   void VulkanContext::PickPhysicalDevice()
   {
     auto devices = m_Instance->enumeratePhysicalDevices();
-    VE_CORE_ASSERT(devices.empty(), "Failed to find GPUs with Vulkan support!");
+    VE_CORE_ASSERT(!devices.empty(), "Failed to find GPUs with Vulkan support!");
 
     for (const auto& device : devices) {
       m_PhysicalDevice = device;
@@ -128,6 +128,14 @@ namespace VoxelEngine
     }
 
     VE_CORE_ASSERT(m_PhysicalDevice, "Failed to find a suitable GPU!");
+    return;
+
+    vk::PhysicalDeviceProperties properties = m_PhysicalDevice.getProperties();
+
+    VE_CORE_INFO("Vulkan Info:");
+    VE_CORE_INFO("  Vendor: {0}", (const char*)properties.vendorID);
+    VE_CORE_INFO("  GPU: {0}", (const char*)properties.deviceName);
+    VE_CORE_INFO("  Version: {0}", (const char*)properties.driverVersion);
   }
 
   void VulkanContext::CreateLogicalDevice()
@@ -243,6 +251,10 @@ namespace VoxelEngine
       m_SwapChainImageViews[i] = m_Device->createImageView(createInfo);
       VE_CORE_ASSERT(m_SwapChainImageViews[i], "Failed to create image views!");
     }
+  }
+
+  void VulkanContext::CreateGraphicsPipeline()
+  {
   }
 
   vk::SurfaceFormatKHR VulkanContext::ChooseSwapSurfaceFormat(const std::vector<vk::SurfaceFormatKHR>& availableFormats) const {

@@ -6,6 +6,8 @@
 #include "Events/MouseEvent.h"
 #include "Events/KeyEvent.h"
 
+#include "Render/RendererAPI.h"
+
 #include <GLFW/glfw3.h>
 
 namespace VoxelEngine
@@ -41,11 +43,12 @@ namespace VoxelEngine
 		VE_CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
 
     if (!s_GLFWInitialized) {
-      int success = glfwInit();
-      VE_CORE_ASSERT(success, "Could not initialize GLFW!");
+      VE_CORE_ASSERT(glfwInit(), "Could not initialize GLFW!");
       glfwSetErrorCallback(GLFWErrorCallback);
       s_GLFWInitialized = true;
     }
+
+		if (RendererAPI::GetAPI() == RendererAPI::API::Vulkan) { glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API); }
 
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(),
 																nullptr, nullptr);
