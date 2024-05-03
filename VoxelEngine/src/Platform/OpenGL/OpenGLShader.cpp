@@ -1,6 +1,6 @@
-#include "vepch.h"
-
 #include "OpenGLShader.h"
+
+#include "vepch.h"
 
 #include <glad/glad.h>
 

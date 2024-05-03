@@ -12,6 +12,10 @@
 	#define VE_ENABLE_ASSERTS
 #endif
 
+#ifdef VE_RELEASE
+	#define VE_ENABLE_ASSERTS
+#endif
+
 #ifdef VE_DIST
 	#define VOXELENGINE_DIR
 	#define VOXELCRAFT_DIR

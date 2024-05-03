@@ -41,15 +41,16 @@ namespace VoxelEngine
 		m_Data.Height = props.Height;
 
 		VE_CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
-
+		
     if (!s_GLFWInitialized) {
-      VE_CORE_ASSERT(glfwInit(), "Could not initialize GLFW!");
+			auto result = glfwInit();
+			VE_CORE_ASSERT(result, "Could not initialize GLFW!");
       glfwSetErrorCallback(GLFWErrorCallback);
       s_GLFWInitialized = true;
     }
 
 		if (RendererAPI::GetAPI() == RendererAPI::API::Vulkan) { glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API); }
-
+		
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(),
 																nullptr, nullptr);
 		
@@ -167,7 +168,12 @@ namespace VoxelEngine
 		glfwDestroyWindow(m_Window);
   }
 
-	void WindowsWindow::ClearBuffer() 
+	void WindowsWindow::SwapBuffers()
+	{
+		m_Context->SwapBuffers();
+	}
+
+	void WindowsWindow::ClearBuffer()
 	{
 		m_Context->ClearBuffer();
 	}
@@ -175,8 +181,7 @@ namespace VoxelEngine
   void WindowsWindow::OnUpdate()
   {
 		glfwPollEvents();
-		glfwSwapBuffers(m_Window);
-		ClearBuffer();
+		m_Context->Update();
   }
 
   void WindowsWindow::SetVSync(const bool enabled)
@@ -196,8 +201,7 @@ namespace VoxelEngine
 	{
 		if (enabled) {
 			glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-		}
-		else {
+		} else {
 			glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 		}
 		m_Data.Focus = enabled;

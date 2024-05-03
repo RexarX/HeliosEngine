@@ -16,6 +16,7 @@ namespace VoxelEngine
 		WindowsWindow(const WindowProps& props);
 		virtual ~WindowsWindow();
 
+		void SwapBuffers() override;
 		void ClearBuffer() override;
 		void OnUpdate() override;
 

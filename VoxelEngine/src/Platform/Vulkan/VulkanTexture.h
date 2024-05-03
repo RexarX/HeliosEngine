@@ -2,19 +2,17 @@
 
 #include "Render/Texture.h"
 
-#include <glad/glad.h>
-
 namespace VoxelEngine
 {
-	class OpenGLTexture : public Texture
+	class VulkanTexture : public Texture
 	{
 	public:
-		OpenGLTexture(const TextureSpecification& specification);
-		OpenGLTexture(const std::string& path);
-		OpenGLTexture(const std::string& right, const std::string& left,
+		VulkanTexture(const TextureSpecification& specification);
+		VulkanTexture(const std::string& path);
+		VulkanTexture(const std::string& right, const std::string& left,
 			const std::string& top, const std::string& bottom,
 			const std::string& front, const std::string& back);
-		virtual ~OpenGLTexture();
+		virtual ~VulkanTexture();
 
 		virtual const TextureSpecification& GetSpecification() const override { return m_Specification; }
 
@@ -45,11 +43,10 @@ namespace VoxelEngine
 		std::string m_Path;
 		std::array<std::string, 6> m_Paths;
 
-		int32_t m_LoadedCnt = 0;
+		uint32_t m_LoadedCnt = 0;
 		bool m_IsLoaded = false;
 		uint32_t m_Width, m_Height;
 		uint32_t m_RendererID;
-		GLenum m_InternalFormat, m_DataFormat;
 
 		static bool m_GenerateMipmaps;
 		static float m_AnisoLevel;

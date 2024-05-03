@@ -15,6 +15,9 @@ public:
 	{
 		//VoxelEngine::Application::Get().GetWindow().SetVSync(false);
 		//VoxelEngine::Application::Get().GetWindow().SetFramerate(60.0);
+
+		VoxelEngine::Renderer::SetAnisoLevel(16.0f);
+		VoxelEngine::Renderer::SetGenerateMipmaps(true);
 		
 		m_Skybox = VoxelEngine::Texture::Create(VOXELCRAFT_DIR + "Assets/Textures/Skybox/right.png",
 																						VOXELCRAFT_DIR + "Assets/Textures/Skybox/left.png",
@@ -24,10 +27,8 @@ public:
 																						VOXELCRAFT_DIR + "Assets/Textures/Skybox/back.png"
 																						);
 
-		m_CheckerboardTexture = VoxelEngine::Texture::Create(VOXELCRAFT_DIR + "Assets/Textures/Checkerboard.png",
-																												 true, 16.0f);
-		m_DirtTexture = VoxelEngine::Texture::Create(VOXELCRAFT_DIR + "Assets/Textures/dirt(14vert).png",
-																								 true, 16.0f);
+		m_CheckerboardTexture = VoxelEngine::Texture::Create(VOXELCRAFT_DIR + "Assets/Textures/Checkerboard.png");
+		m_DirtTexture = VoxelEngine::Texture::Create(VOXELCRAFT_DIR + "Assets/Textures/dirt(14vert).png");
 
 		for (float i = 0; i < 100; ++i) {
 			for (float j = 0; j < 100; ++j) {
@@ -68,7 +69,7 @@ public:
 
 	void Draw() override
 	{
-		VoxelEngine::Renderer::BeginScene(m_CameraController.GetCamera());
+		//VoxelEngine::Renderer::BeginScene(m_CameraController.GetCamera());
 		m_CameraController.GetFrustum().CreateFrustum(m_CameraController.GetCamera());
 		for (uint32_t i = 0; i < m_Cube.size(); ++i) {
 			if (m_CameraController.GetFrustum().IsParallelepipedInFrustrum(m_Cube[i][0], m_Cube[i][1])) {
@@ -76,13 +77,13 @@ public:
 			}
 		}
 
-		VoxelEngine::Renderer::DrawSkybox(m_Skybox);
-		VoxelEngine::Renderer::DrawCubesInstanced(m_ToDraw, m_DirtTexture);
+		//VoxelEngine::Renderer::DrawSkybox(m_Skybox);
+		//VoxelEngine::Renderer::DrawCubesInstanced(m_ToDraw, m_DirtTexture);
 		//VoxelEngine::Renderer::DrawLine(glm::vec3(12.5f, 12.5f, 12.5f), glm::vec3(0.0f, 0.0f, 0.0f), 100.0f); // (ray origin, ray direction, ray lenght)
 		
 		m_ToDraw.clear();
 
-		VoxelEngine::Renderer::EndScene();
+		//VoxelEngine::Renderer::EndScene();
 	}
 
 private:

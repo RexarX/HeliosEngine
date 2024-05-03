@@ -50,6 +50,7 @@ source_group("src/VoxelEngine/Utils" FILES ${src__VoxelEngine__Utils})
 set(ALL_FILES
     ${src}
     ${src__Platform__OpenGL}
+    ${src__Platform__Vulkan}
     ${src__Platform__Windows}
     ${src__VoxelEngine}
     ${src__VoxelEngine__Events}

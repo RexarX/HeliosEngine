@@ -36,6 +36,9 @@ namespace VoxelEngine
 
 		static void DrawSkybox(const std::shared_ptr<Texture>& texture);
 
+		static void SetGenerateMipmaps(const bool value) { Texture::SetGenerateMipmaps(value); }
+		static void SetAnisoLevel(const float value) { Texture::SetAnisoLevel(value); }
+
 	private:
 		static void DrawChunk(const Chunk& chunk);
 

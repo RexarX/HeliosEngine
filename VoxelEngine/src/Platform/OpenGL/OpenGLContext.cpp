@@ -1,6 +1,6 @@
-#include "vepch.h"
-
 #include "OpenGLContext.h"
+
+#include "vepch.h"
 
 #include <glad/glad.h>
 
@@ -33,6 +33,17 @@ namespace VoxelEngine
 
 	void OpenGLContext::Shutdown()
 	{
+	}
+
+	void OpenGLContext::Update()
+	{
+		SwapBuffers();
+		ClearBuffer();
+	}
+
+	void OpenGLContext::SwapBuffers()
+	{
+    glfwSwapBuffers(m_WindowHandle);
 	}
 
 	void OpenGLContext::ClearBuffer()

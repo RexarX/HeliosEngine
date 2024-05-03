@@ -1,11 +1,14 @@
-#include "vepch.h"
-
 #include "OpenGLTexture.h"
+
+#include "vepch.h"
 
 #include <stb_image.h>
 
 namespace VoxelEngine
 {
+	bool OpenGLTexture::m_GenerateMipmaps = true;
+	float OpenGLTexture::m_AnisoLevel = 16.0f;
+
 	static GLenum VoxelEngineImageFormatToGLDataFormat(const ImageFormat format)
 	{
 		switch (format)
@@ -50,7 +53,7 @@ namespace VoxelEngine
 		glTexParameterfv(m_RendererID, GL_TEXTURE_BORDER_COLOR, borderColor);
 	}
 
-	OpenGLTexture::OpenGLTexture(const std::string& path, const bool generateMips, const float anisoLevel)
+	OpenGLTexture::OpenGLTexture(const std::string& path)
 		: m_Path(path)
 	{
 		int32_t width, height, channels;
@@ -85,7 +88,7 @@ namespace VoxelEngine
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-			if (generateMips) {
+			if (m_GenerateMipmaps) {
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 			}
@@ -97,9 +100,9 @@ namespace VoxelEngine
 			glTexImage2D(GL_TEXTURE_2D, 0, m_InternalFormat, m_Width, m_Height, 0, m_DataFormat,
 				GL_UNSIGNED_BYTE, data);
 
-			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY, anisoLevel);
+			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY, m_AnisoLevel);
 
-			if (generateMips) { glGenerateMipmap(GL_TEXTURE_2D); }
+			if (m_GenerateMipmaps) { glGenerateMipmap(GL_TEXTURE_2D); }
 
 			stbi_image_free(data);
 		}

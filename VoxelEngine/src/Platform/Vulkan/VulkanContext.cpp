@@ -6,19 +6,76 @@
 
 namespace VoxelEngine
 {
+  vk::UniqueInstance VulkanContext::m_Instance;
+
+  vk::UniqueDevice VulkanContext::m_Device;
+
   static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(const VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
-                                                      const VkDebugUtilsMessageTypeFlagsEXT messageType,
-                                                      const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData,
-                                                      void* pUserData)
+    const VkDebugUtilsMessageTypeFlagsEXT messageType,
+    const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData,
+    void* pUserData)
   {
     VE_CORE_INFO("Validation layer: {0}", pCallbackData->pMessage);
 
     return VK_FALSE;
   }
 
-  vk::UniqueInstance VulkanContext::m_Instance;
+  VkImageSubresourceRange image_subresource_range(const vk::ImageAspectFlags& aspectMask)
+  {
+    vk::ImageSubresourceRange subImage;
+    subImage.aspectMask = aspectMask;
+    subImage.baseMipLevel = 0;
+    subImage.levelCount = VK_REMAINING_MIP_LEVELS;
+    subImage.baseArrayLayer = 0;
+    subImage.layerCount = VK_REMAINING_ARRAY_LAYERS;
 
-  vk::UniqueDevice VulkanContext::m_Device;
+    return subImage;
+  }
+
+  void VulkanContext::transition_image(const vk::Image& image, const vk::ImageLayout& currentLayout,
+                                       const vk::ImageLayout& newLayout)
+  {
+    vk::ImageMemoryBarrier2 imageBarrier;
+    imageBarrier.sType = vk::StructureType::eImageMemoryBarrier2;
+    imageBarrier.pNext = nullptr;
+    imageBarrier.srcStageMask = vk::PipelineStageFlagBits2::eAllCommands;
+    imageBarrier.srcAccessMask = vk::AccessFlagBits2::eMemoryWrite;
+    imageBarrier.dstStageMask = vk::PipelineStageFlagBits2::eAllCommands;
+    imageBarrier.dstAccessMask = vk::AccessFlagBits2::eMemoryWrite | vk::AccessFlagBits2::eMemoryRead;
+    imageBarrier.oldLayout = currentLayout;
+    imageBarrier.newLayout = newLayout;
+
+    vk::ImageAspectFlags aspectMask = (vk::ImageLayout::eGeneral == vk::ImageLayout::eDepthStencilAttachmentOptimal) ?
+                                       vk::ImageAspectFlagBits::eDepth :
+                                       vk::ImageAspectFlagBits::eColor;
+
+    imageBarrier.subresourceRange = image_subresource_range(aspectMask);
+    imageBarrier.image = image;
+
+    vk::DependencyInfo depInfo;
+    depInfo.sType = vk::StructureType::eDependencyInfo;
+    depInfo.pNext = nullptr;
+    depInfo.imageMemoryBarrierCount = 1;
+    depInfo.pImageMemoryBarriers = &imageBarrier;
+
+    for (auto& commandBuffer : m_CommandBuffers) {
+      commandBuffer.pipelineBarrier2(depInfo);
+    }
+  }
+
+  vk::SemaphoreSubmitInfo VulkanContext::semaphore_submit_info(const vk::PipelineStageFlags2& stageMask,
+                                                             const vk::Semaphore& semaphore) const
+  {
+    vk::SemaphoreSubmitInfo submitInfo;
+    submitInfo.sType = vk::StructureType::eSemaphoreSubmitInfo;
+    submitInfo.pNext = nullptr;
+    submitInfo.semaphore = semaphore;
+    submitInfo.stageMask = stageMask;
+    submitInfo.deviceIndex = 0;
+    submitInfo.value = 1;
+
+    return submitInfo;
+  }
 
 	VulkanContext::VulkanContext(GLFWwindow* windowHandle)
 		: m_WindowHandle(windowHandle)
@@ -35,11 +92,20 @@ namespace VoxelEngine
     CreateLogicalDevice();
     CreateSwapChain();
     CreateImageViews();
+    CreateCommands();
+    CreateSyncObjects();
 	}
 
   void VulkanContext::Shutdown()
   {
-    for (const auto& imageView : m_SwapChainImageViews) {
+    m_Device->destroyCommandPool(m_CommandPool);
+
+    m_Device->destroyFence(m_RenderFence);
+
+    m_Device->destroySemaphore(m_SwapChainSemaphore);
+    m_Device->destroySemaphore(m_RenderSemaphore);
+
+    for (auto& imageView : m_SwapChainImageViews) {
       m_Device->destroyImageView(imageView);
     }
     
@@ -50,14 +116,97 @@ namespace VoxelEngine
     if (enableValidationLayers) { DestroyDebugUtilsMessengerEXT(nullptr); }
   }
 
+  void VulkanContext::Update()
+  {
+    m_Device->waitForFences(1, &m_RenderFence, true, 1000000000);
+
+    m_Device->resetFences(1, &m_RenderFence);
+
+    uint32_t swapchainImageIndex;
+    auto result = m_Device->acquireNextImageKHR(m_SwapChain, 1000000000, m_SwapChainSemaphore, nullptr,
+                                                &swapchainImageIndex);
+
+    VE_CORE_ASSERT(result == vk::Result::eSuccess, "Failed to acquire next swap chain image!");
+
+    vk::CommandBufferBeginInfo bufferBeginInfo;
+    bufferBeginInfo.sType = vk::StructureType::eCommandBufferBeginInfo;
+    bufferBeginInfo.pNext = nullptr;
+    bufferBeginInfo.pInheritanceInfo = nullptr;
+    bufferBeginInfo.flags = vk::CommandBufferUsageFlagBits::eOneTimeSubmit;
+
+    for (auto& commandBuffer : m_CommandBuffers) {
+      commandBuffer.reset(vk::CommandBufferResetFlagBits::eReleaseResources);
+      commandBuffer.begin(bufferBeginInfo);
+    }
+
+    transition_image(m_SwapChainImages[swapchainImageIndex], vk::ImageLayout::eUndefined,
+                                                             vk::ImageLayout::eGeneral);
+
+    vk::ClearColorValue clearValue;
+    float flash = std::abs(std::sin(1 / 120.0f));
+    clearValue = { 0.0f, 0.0f, flash, 1.0f };
+
+    vk::ImageSubresourceRange clearRange = image_subresource_range(vk::ImageAspectFlagBits::eColor);
+
+    for (auto& commandBuffer : m_CommandBuffers) {
+      commandBuffer.clearColorImage(m_SwapChainImages[swapchainImageIndex], vk::ImageLayout::eGeneral,
+                                    clearValue, clearRange);
+    }
+
+    for (auto& commandBuffer : m_CommandBuffers) {
+      commandBuffer.end();
+      VE_CORE_ASSERT(commandBuffer, "Failed to end command buffer!");
+    }
+
+    vk::CommandBufferSubmitInfo commandBufferSubmitInfo;
+    commandBufferSubmitInfo.sType = vk::StructureType::eCommandBufferSubmitInfo;
+    commandBufferSubmitInfo.pNext = nullptr;
+    commandBufferSubmitInfo.commandBuffer = m_CommandBuffers[0];
+    commandBufferSubmitInfo.deviceMask = 0;
+
+    vk::SemaphoreSubmitInfo waitInfo = semaphore_submit_info(vk::PipelineStageFlagBits2::eColorAttachmentOutput,
+                                                             m_SwapChainSemaphore);
+    vk::SemaphoreSubmitInfo signalInfo = semaphore_submit_info(vk::PipelineStageFlagBits2::eAllCommands,
+                                                               m_RenderSemaphore);
+
+    vk::SubmitInfo2 submitInfo;
+    submitInfo.sType = vk::StructureType::eSubmitInfo2;
+    submitInfo.pNext = nullptr;
+    submitInfo.waitSemaphoreInfoCount = &waitInfo == nullptr ? 0 : 1;
+    submitInfo.pWaitSemaphoreInfos = &waitInfo;
+    submitInfo.signalSemaphoreInfoCount = &signalInfo == nullptr ? 0 : 1;
+    submitInfo.pSignalSemaphoreInfos = &signalInfo;
+    submitInfo.commandBufferInfoCount = m_CommandBuffers.size();
+    submitInfo.pCommandBufferInfos = &commandBufferSubmitInfo;
+
+    m_GraphicsQueue.submit2(submitInfo, m_RenderFence);
+
+    VE_CORE_ASSERT(m_GraphicsQueue, "Failed to submit RenderFence!");
+
+    vk::PresentInfoKHR presentInfo;
+    presentInfo.sType = vk::StructureType::ePresentInfoKHR;
+    presentInfo.pNext = nullptr;
+    presentInfo.pSwapchains = &m_SwapChain;
+    presentInfo.swapchainCount = 1;
+    presentInfo.pWaitSemaphores = &m_RenderSemaphore;
+    presentInfo.waitSemaphoreCount = 1;
+    presentInfo.pImageIndices = &swapchainImageIndex;
+
+    m_GraphicsQueue.presentKHR(presentInfo);
+
+    VE_CORE_ASSERT(m_GraphicsQueue, "Failed to set presentKHR in GraphicsQueue!");
+  }
+
+  void VulkanContext::SwapBuffers()
+  {
+  }
+
 	void VulkanContext::ClearBuffer()
-	{
-		
+  {
 	}
 
 	void VulkanContext::SetViewport(const uint32_t width, const uint32_t height)
 	{
-    
 	}
 
   void VulkanContext::CreateInstance()
@@ -67,10 +216,10 @@ namespace VoxelEngine
     }
     auto appInfo = vk::ApplicationInfo(
       "Application",
-      VK_MAKE_VERSION(1, 0, 24),
+      VK_MAKE_VERSION(1, 3, 0),
       "VoxelEngine",
-      VK_MAKE_VERSION(1, 0, 24),
-      VK_API_VERSION_1_0
+      VK_MAKE_VERSION(1, 3, 0),
+      VK_API_VERSION_1_3
     );
 
     auto extensions = GetRequiredExtensions();
@@ -87,7 +236,7 @@ namespace VoxelEngine
       createInfo.ppEnabledLayerNames = validationLayers.data();
     }
 
-    m_Instance = vk::createInstanceUnique(createInfo, nullptr);
+    m_Instance = vk::createInstanceUnique(createInfo);
     VE_CORE_ASSERT(m_Instance, "Failed to create instance!");
   }
 
@@ -98,23 +247,24 @@ namespace VoxelEngine
     auto createInfo = vk::DebugUtilsMessengerCreateInfoEXT(
       vk::DebugUtilsMessengerCreateFlagsEXT(),
       vk::DebugUtilsMessageSeverityFlagBitsEXT::eVerbose | vk::DebugUtilsMessageSeverityFlagBitsEXT::eWarning |
-      vk::DebugUtilsMessageSeverityFlagBitsEXT::eError,
-      vk::DebugUtilsMessageTypeFlagBitsEXT::eGeneral | vk::DebugUtilsMessageTypeFlagBitsEXT::eValidation |
-      vk::DebugUtilsMessageTypeFlagBitsEXT::ePerformance,
+      vk::DebugUtilsMessageSeverityFlagBitsEXT::eError, vk::DebugUtilsMessageTypeFlagBitsEXT::eGeneral |
+      vk::DebugUtilsMessageTypeFlagBitsEXT::eValidation | vk::DebugUtilsMessageTypeFlagBitsEXT::ePerformance,
       debugCallback,
       nullptr
     );
 
-    VE_CORE_ASSERT(CreateDebugUtilsMessengerEXT(reinterpret_cast<const VkDebugUtilsMessengerCreateInfoEXT*>(&createInfo),
-                                                nullptr) == VK_SUCCESS, "Failed to set up debug callback!");
+    auto result = CreateDebugUtilsMessengerEXT(reinterpret_cast<const VkDebugUtilsMessengerCreateInfoEXT*>(&createInfo),
+                                            nullptr);
+    VE_CORE_ASSERT(result == VK_SUCCESS, "Failed to set up debug callback!");
   } 
 
   void VulkanContext::CreateSurface()
   {
     VkSurfaceKHR rawSurface;
 
-    VE_CORE_ASSERT(glfwCreateWindowSurface(*m_Instance, m_WindowHandle, nullptr, &rawSurface) == VK_SUCCESS,
-                   "Failed to create window surface!");
+    auto result = glfwCreateWindowSurface(*m_Instance, m_WindowHandle, nullptr, &rawSurface);
+
+    VE_CORE_ASSERT(result == VK_SUCCESS, "Failed to create window surface!");
     
     m_Surface = rawSurface;
   }
@@ -180,6 +330,16 @@ namespace VoxelEngine
     }
 
     auto deviceFeatures = vk::PhysicalDeviceFeatures();
+
+    vk::PhysicalDeviceVulkan13Features features;
+    features.dynamicRendering = true;
+    features.synchronization2 = true;
+
+    vk::PhysicalDeviceVulkan12Features features12;
+    features12.bufferDeviceAddress = true;
+    features12.descriptorIndexing = true;
+    features12.pNext = &features;
+
     auto createInfo = vk::DeviceCreateInfo(
       vk::DeviceCreateFlags(),
       static_cast<uint32_t>(queueCreateInfos.size()),
@@ -188,6 +348,7 @@ namespace VoxelEngine
     createInfo.pEnabledFeatures = &deviceFeatures;
     createInfo.enabledExtensionCount = static_cast<uint32_t>(deviceExtensions.size());
     createInfo.ppEnabledExtensionNames = deviceExtensions.data();
+    createInfo.pNext = &features12;
 
     if (enableValidationLayers) {
       createInfo.enabledLayerCount = static_cast<uint32_t>(validationLayers.size());
@@ -239,7 +400,6 @@ namespace VoxelEngine
     createInfo.compositeAlpha = vk::CompositeAlphaFlagBitsKHR::eOpaque;
     createInfo.presentMode = presentMode;
     createInfo.clipped = VK_TRUE;
-
     createInfo.oldSwapchain = vk::SwapchainKHR(nullptr);
     
     m_SwapChain = m_Device->createSwapchainKHR(createInfo);
@@ -272,12 +432,59 @@ namespace VoxelEngine
       createInfo.subresourceRange.layerCount = 1;
 
       m_SwapChainImageViews[i] = m_Device->createImageView(createInfo);
+
       VE_CORE_ASSERT(m_SwapChainImageViews[i], "Failed to create image views!");
     }
   }
 
-  void VulkanContext::CreateGraphicsPipeline()
+  void VulkanContext::CreateCommands()
   {
+    QueueFamilyIndices indices = FindQueueFamilies();
+
+    vk::CommandPoolCreateInfo commandPoolInfo;
+    commandPoolInfo.sType = vk::StructureType::eCommandPoolCreateInfo;
+    commandPoolInfo.pNext = nullptr;
+    commandPoolInfo.flags = vk::CommandPoolCreateFlagBits::eResetCommandBuffer;
+    commandPoolInfo.queueFamilyIndex = indices.graphicsFamily.value();
+
+    m_CommandPool = m_Device->createCommandPool(commandPoolInfo);
+
+    VE_CORE_ASSERT(m_CommandPool, "Failed to create command pool!");
+
+    vk::CommandBufferAllocateInfo cmdAllocInfo;
+    cmdAllocInfo.sType = vk::StructureType::eCommandBufferAllocateInfo;
+    cmdAllocInfo.pNext = nullptr;
+    cmdAllocInfo.commandPool = m_CommandPool;
+    cmdAllocInfo.commandBufferCount = 1;
+    cmdAllocInfo.level = vk::CommandBufferLevel::ePrimary;
+
+    m_CommandBuffers = m_Device->allocateCommandBuffers(cmdAllocInfo);
+
+    VE_CORE_ASSERT(!m_CommandBuffers.empty(), "Failed to create command buffer!");
+  }
+
+  void VulkanContext::CreateSyncObjects()
+  {
+    vk::FenceCreateInfo fenceInfo;
+    fenceInfo.sType = vk::StructureType::eFenceCreateInfo;
+    fenceInfo.pNext = nullptr;
+    fenceInfo.flags = vk::FenceCreateFlagBits::eSignaled;
+
+    m_RenderFence = m_Device->createFence(fenceInfo);
+
+    VE_CORE_ASSERT(m_RenderFence, "Failed to create fence!");
+
+    vk::SemaphoreCreateInfo semaphoreInfo;
+    semaphoreInfo.sType = vk::StructureType::eSemaphoreCreateInfo;
+    semaphoreInfo.pNext = nullptr;
+
+    m_SwapChainSemaphore = m_Device->createSemaphore(semaphoreInfo);
+    
+    VE_CORE_ASSERT(m_SwapChainSemaphore, "Failed to create semaphore!");
+
+    m_RenderSemaphore = m_Device->createSemaphore(semaphoreInfo);
+
+    VE_CORE_ASSERT(m_RenderSemaphore, "Failed to create semaphore!");
   }
 
   vk::SurfaceFormatKHR VulkanContext::ChooseSwapSurfaceFormat(const std::vector<vk::SurfaceFormatKHR>& availableFormats) const {

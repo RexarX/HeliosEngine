@@ -29,6 +29,7 @@ namespace VoxelEngine
 
 		virtual ~Window() = default;
 
+		virtual void SwapBuffers() = 0;
 		virtual void ClearBuffer() = 0;
 		virtual void OnUpdate() = 0;
 

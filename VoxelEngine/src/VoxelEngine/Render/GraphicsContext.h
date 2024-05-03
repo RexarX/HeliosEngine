@@ -9,6 +9,8 @@ namespace VoxelEngine
 
 		virtual void Init() = 0;
 		virtual void Shutdown() = 0;
+		virtual void Update() = 0;
+		virtual void SwapBuffers() = 0;
 		virtual void ClearBuffer() = 0;
 		virtual void SetViewport(const uint32_t width, const uint32_t height) = 0;
 
