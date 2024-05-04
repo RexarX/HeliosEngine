@@ -28,7 +28,9 @@ namespace VoxelEngine
 		virtual void ClearBuffer() override;
 		virtual void SetViewport(const uint32_t width, const uint32_t height) override;
 
-		static inline vk::UniqueDevice& GetDevice() { return m_Device; }
+		virtual void SetVSync(const bool enabled) override;
+
+		static inline vk::Device& GetDevice() { return m_Device; }
 
 	private:
 		struct QueueFamilyIndices
@@ -63,7 +65,7 @@ namespace VoxelEngine
 
 		static vk::UniqueInstance m_Instance;
 
-		static vk::UniqueDevice m_Device;
+		static vk::Device m_Device;
 
 		VkDebugUtilsMessengerEXT m_Callback;
 
@@ -97,6 +99,8 @@ namespace VoxelEngine
 		void CreateImageViews();
 		void CreateCommands();
 		void CreateSyncObjects();
+
+		void RecreateSwapChain();
 
 		void transition_image(const vk::Image& image, const vk::ImageLayout& currentLayout,
 													const vk::ImageLayout& newLayout);

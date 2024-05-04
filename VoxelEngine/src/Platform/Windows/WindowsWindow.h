@@ -18,6 +18,7 @@ namespace VoxelEngine
 
 		void SwapBuffers() override;
 		void ClearBuffer() override;
+		void PoolEvents() override;
 		void OnUpdate() override;
 
 		inline uint32_t GetWidth() const override { return m_Data.Width; }
@@ -44,9 +45,11 @@ namespace VoxelEngine
 		virtual void Init(const WindowProps& props);
 		virtual void Shutdown();
 
+		static void OnResize(GLFWwindow* window, const int width, const int height);
+
 	private:
 		GLFWwindow* m_Window;
-		std::unique_ptr<GraphicsContext> m_Context;
+		static std::unique_ptr<GraphicsContext> m_Context;
 
 		struct WindowData
 		{

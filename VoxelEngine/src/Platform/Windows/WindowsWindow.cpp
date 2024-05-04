@@ -14,6 +14,8 @@ namespace VoxelEngine
 {
   static bool s_GLFWInitialized = false;
 
+	std::unique_ptr<GraphicsContext> WindowsWindow::m_Context;
+
 	static void GLFWErrorCallback(const int error, const char* description)
 	{
 		VE_CORE_ERROR("GLFW Error ({0}): {1}", error, description);
@@ -66,15 +68,7 @@ namespace VoxelEngine
 		SetMinimized(false);
 		SetFramerate(0.0);
 
-    glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, const int width,
-															const int height)
-      {
-				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
-				data.Width = width;
-				data.Height = height;
-				WindowResizeEvent event(width, height);
-				data.EventCallback(event);
-			});
+    glfwSetWindowSizeCallback(m_Window, OnResize);
 
 		glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window)
 			{
@@ -168,6 +162,15 @@ namespace VoxelEngine
 		glfwDestroyWindow(m_Window);
   }
 
+	void WindowsWindow::OnResize(GLFWwindow* window, const int width, const int height)
+	{
+		WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+		data.Width = width;
+		data.Height = height;
+		WindowResizeEvent event(width, height);
+		data.EventCallback(event);
+	}
+
 	void WindowsWindow::SwapBuffers()
 	{
 		m_Context->SwapBuffers();
@@ -178,17 +181,19 @@ namespace VoxelEngine
 		m_Context->ClearBuffer();
 	}
 
+	void WindowsWindow::PoolEvents()
+	{
+		glfwPollEvents();
+	}
+
   void WindowsWindow::OnUpdate()
   {
-		glfwPollEvents();
 		m_Context->Update();
   }
 
   void WindowsWindow::SetVSync(const bool enabled)
   {
-		if (RendererAPI::GetAPI() == RendererAPI::API::OpenGL) {
-			glfwSwapInterval(enabled ? 1 : 0);
-		}
+    m_Context->SetVSync(enabled);
 		m_Data.VSync = enabled;
   }
 

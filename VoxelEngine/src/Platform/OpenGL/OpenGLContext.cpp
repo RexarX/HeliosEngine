@@ -55,4 +55,9 @@ namespace VoxelEngine
 	{
     glViewport(0, 0, width, height);
 	}
+
+	void OpenGLContext::SetVSync(const bool enabled)
+	{
+		glfwSwapInterval(enabled ? 1 : 0);
+	}
 }

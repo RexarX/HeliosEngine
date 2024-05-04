@@ -8,14 +8,14 @@ namespace VoxelEngine
 {
   vk::UniqueInstance VulkanContext::m_Instance;
 
-  vk::UniqueDevice VulkanContext::m_Device;
+  vk::Device VulkanContext::m_Device;
 
   static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(const VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
     const VkDebugUtilsMessageTypeFlagsEXT messageType,
     const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData,
     void* pUserData)
   {
-    VE_CORE_INFO("Validation layer: {0}", pCallbackData->pMessage);
+    VE_CORE_WARN(pCallbackData->pMessage);
 
     return VK_FALSE;
   }
@@ -98,35 +98,45 @@ namespace VoxelEngine
 
   void VulkanContext::Shutdown()
   {
-    m_Device->destroyCommandPool(m_CommandPool);
+    m_Device.waitIdle();
 
-    m_Device->destroyFence(m_RenderFence);
+    m_Device.destroyFence(m_RenderFence);
 
-    m_Device->destroySemaphore(m_SwapChainSemaphore);
-    m_Device->destroySemaphore(m_RenderSemaphore);
+    m_Device.destroySemaphore(m_SwapChainSemaphore);
+    m_Device.destroySemaphore(m_RenderSemaphore);
+
+    m_Device.destroyCommandPool(m_CommandPool);
 
     for (auto& imageView : m_SwapChainImageViews) {
-      m_Device->destroyImageView(imageView);
+      m_Device.destroyImageView(imageView);
     }
     
+    m_Device.destroySwapchainKHR();
+
     m_Instance->destroySurfaceKHR();
 
-    m_Device->destroySwapchainKHR();
-
     if (enableValidationLayers) { DestroyDebugUtilsMessengerEXT(nullptr); }
+
+    m_Device.destroy();
   }
 
   void VulkanContext::Update()
   {
-    m_Device->waitForFences(1, &m_RenderFence, true, 1000000000);
-
-    m_Device->resetFences(1, &m_RenderFence);
+    m_Device.waitForFences(1, &m_RenderFence, true, 1000000000);
 
     uint32_t swapchainImageIndex;
-    auto result = m_Device->acquireNextImageKHR(m_SwapChain, 1000000000, m_SwapChainSemaphore, nullptr,
+    auto result = m_Device.acquireNextImageKHR(m_SwapChain, 1000000000, m_SwapChainSemaphore, nullptr,
                                                 &swapchainImageIndex);
 
-    VE_CORE_ASSERT(result == vk::Result::eSuccess, "Failed to acquire next swap chain image!");
+    if (result == vk::Result::eErrorOutOfDateKHR) {
+      RecreateSwapChain();
+      return;
+    }
+
+    VE_CORE_ASSERT(result == vk::Result::eSuccess || result == vk::Result::eSuboptimalKHR,
+                   "Failed to acquire next swap chain image!");
+
+    m_Device.resetFences(1, &m_RenderFence);
 
     vk::CommandBufferBeginInfo bufferBeginInfo;
     bufferBeginInfo.sType = vk::StructureType::eCommandBufferBeginInfo;
@@ -143,7 +153,7 @@ namespace VoxelEngine
                                                              vk::ImageLayout::eGeneral);
 
     vk::ClearColorValue clearValue;
-    float flash = std::abs(std::sin(1 / 120.0f));
+    float flash = std::abs(std::sin(1.0f / 120.0f));
     clearValue = { 0.0f, 0.0f, flash, 1.0f };
 
     vk::ImageSubresourceRange clearRange = image_subresource_range(vk::ImageAspectFlagBits::eColor);
@@ -155,7 +165,6 @@ namespace VoxelEngine
 
     for (auto& commandBuffer : m_CommandBuffers) {
       commandBuffer.end();
-      VE_CORE_ASSERT(commandBuffer, "Failed to end command buffer!");
     }
 
     vk::CommandBufferSubmitInfo commandBufferSubmitInfo;
@@ -208,6 +217,10 @@ namespace VoxelEngine
 	void VulkanContext::SetViewport(const uint32_t width, const uint32_t height)
 	{
 	}
+
+  void VulkanContext::SetVSync(const bool enabled)
+  {
+  }
 
   void VulkanContext::CreateInstance()
   {
@@ -355,10 +368,10 @@ namespace VoxelEngine
       createInfo.ppEnabledLayerNames = validationLayers.data();
     }
 
-    m_Device = m_PhysicalDevice.createDeviceUnique(createInfo);
+    m_Device = m_PhysicalDevice.createDevice(createInfo);
 
-    m_GraphicsQueue = m_Device->getQueue(indices.graphicsFamily.value(), 0);
-    m_PresentQueue = m_Device->getQueue(indices.presentFamily.value(), 0);
+    m_GraphicsQueue = m_Device.getQueue(indices.graphicsFamily.value(), 0);
+    m_PresentQueue = m_Device.getQueue(indices.presentFamily.value(), 0);
   }
 
   void VulkanContext::CreateSwapChain()
@@ -402,11 +415,11 @@ namespace VoxelEngine
     createInfo.clipped = VK_TRUE;
     createInfo.oldSwapchain = vk::SwapchainKHR(nullptr);
     
-    m_SwapChain = m_Device->createSwapchainKHR(createInfo);
+    m_SwapChain = m_Device.createSwapchainKHR(createInfo);
     
     VE_CORE_ASSERT(m_SwapChain, "Failed to create swap chain!");
 
-    m_SwapChainImages = m_Device->getSwapchainImagesKHR(m_SwapChain);
+    m_SwapChainImages = m_Device.getSwapchainImagesKHR(m_SwapChain);
 
     m_SwapChainImageFormat = surfaceFormat.format;
     m_SwapChainExtent = extent;
@@ -417,7 +430,7 @@ namespace VoxelEngine
     m_SwapChainImageViews.resize(m_SwapChainImages.size());
 
     for (uint32_t i = 0; i < m_SwapChainImages.size(); ++i) {
-      vk::ImageViewCreateInfo createInfo = {};
+      vk::ImageViewCreateInfo createInfo;
       createInfo.image = m_SwapChainImages[i];
       createInfo.viewType = vk::ImageViewType::e2D;
       createInfo.format = m_SwapChainImageFormat;
@@ -431,7 +444,7 @@ namespace VoxelEngine
       createInfo.subresourceRange.baseArrayLayer = 0;
       createInfo.subresourceRange.layerCount = 1;
 
-      m_SwapChainImageViews[i] = m_Device->createImageView(createInfo);
+      m_SwapChainImageViews[i] = m_Device.createImageView(createInfo);
 
       VE_CORE_ASSERT(m_SwapChainImageViews[i], "Failed to create image views!");
     }
@@ -447,7 +460,7 @@ namespace VoxelEngine
     commandPoolInfo.flags = vk::CommandPoolCreateFlagBits::eResetCommandBuffer;
     commandPoolInfo.queueFamilyIndex = indices.graphicsFamily.value();
 
-    m_CommandPool = m_Device->createCommandPool(commandPoolInfo);
+    m_CommandPool = m_Device.createCommandPool(commandPoolInfo);
 
     VE_CORE_ASSERT(m_CommandPool, "Failed to create command pool!");
 
@@ -458,7 +471,7 @@ namespace VoxelEngine
     cmdAllocInfo.commandBufferCount = 1;
     cmdAllocInfo.level = vk::CommandBufferLevel::ePrimary;
 
-    m_CommandBuffers = m_Device->allocateCommandBuffers(cmdAllocInfo);
+    m_CommandBuffers = m_Device.allocateCommandBuffers(cmdAllocInfo);
 
     VE_CORE_ASSERT(!m_CommandBuffers.empty(), "Failed to create command buffer!");
   }
@@ -470,7 +483,7 @@ namespace VoxelEngine
     fenceInfo.pNext = nullptr;
     fenceInfo.flags = vk::FenceCreateFlagBits::eSignaled;
 
-    m_RenderFence = m_Device->createFence(fenceInfo);
+    m_RenderFence = m_Device.createFence(fenceInfo);
 
     VE_CORE_ASSERT(m_RenderFence, "Failed to create fence!");
 
@@ -478,13 +491,27 @@ namespace VoxelEngine
     semaphoreInfo.sType = vk::StructureType::eSemaphoreCreateInfo;
     semaphoreInfo.pNext = nullptr;
 
-    m_SwapChainSemaphore = m_Device->createSemaphore(semaphoreInfo);
+    m_SwapChainSemaphore = m_Device.createSemaphore(semaphoreInfo);
     
     VE_CORE_ASSERT(m_SwapChainSemaphore, "Failed to create semaphore!");
 
-    m_RenderSemaphore = m_Device->createSemaphore(semaphoreInfo);
+    m_RenderSemaphore = m_Device.createSemaphore(semaphoreInfo);
 
     VE_CORE_ASSERT(m_RenderSemaphore, "Failed to create semaphore!");
+  }
+
+  void VulkanContext::RecreateSwapChain()
+  {
+    m_Device.waitIdle();
+
+    for (auto& imageView : m_SwapChainImageViews) {
+      m_Device.destroyImageView(imageView);
+    }
+
+    m_Device.destroySwapchainKHR();
+
+    CreateSwapChain();
+    CreateImageViews();
   }
 
   vk::SurfaceFormatKHR VulkanContext::ChooseSwapSurfaceFormat(const std::vector<vk::SurfaceFormatKHR>& availableFormats) const {

@@ -86,7 +86,7 @@ namespace VoxelEngine
 
 	void VulkanShader::Compile(std::unordered_map<vk::ShaderStageFlagBits, std::string>& shaderSources)
 	{
-		auto vertShaderModule = VulkanContext::GetDevice()->createShaderModuleUnique({
+		auto vertShaderModule = VulkanContext::GetDevice().createShaderModuleUnique({
 								vk::ShaderModuleCreateFlags(),
 								shaderSources[vk::ShaderStageFlagBits::eVertex].size(),
 								reinterpret_cast<const uint32_t*>(shaderSources[vk::ShaderStageFlagBits::eVertex].data())
@@ -94,7 +94,7 @@ namespace VoxelEngine
 
 		VE_CORE_ASSERT(vertShaderModule, "Failed to create vertex shader module");
 
-		auto fragShaderModule = VulkanContext::GetDevice()->createShaderModuleUnique({
+		auto fragShaderModule = VulkanContext::GetDevice().createShaderModuleUnique({
 								vk::ShaderModuleCreateFlags(),
 								shaderSources[vk::ShaderStageFlagBits::eFragment].size(),
 								reinterpret_cast<const uint32_t*>(shaderSources[vk::ShaderStageFlagBits::eFragment].data())

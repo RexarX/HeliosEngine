@@ -31,6 +31,7 @@ namespace VoxelEngine
 
 		virtual void SwapBuffers() = 0;
 		virtual void ClearBuffer() = 0;
+		virtual void PoolEvents() = 0;
 		virtual void OnUpdate() = 0;
 
 		virtual uint32_t GetWidth() const = 0;

@@ -18,6 +18,8 @@ namespace VoxelEngine
 		virtual void ClearBuffer() override;
 		virtual void SetViewport(const uint32_t width, const uint32_t height) override;
 
+		virtual void SetVSync(const bool enabled) override;
+
 	private:
 		GLFWwindow* m_WindowHandle;
 	};

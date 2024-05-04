@@ -14,6 +14,8 @@ namespace VoxelEngine
 		virtual void ClearBuffer() = 0;
 		virtual void SetViewport(const uint32_t width, const uint32_t height) = 0;
 
+		virtual void SetVSync(const bool enabled) = 0;
+
 		static std::unique_ptr<GraphicsContext> Create(void* window);
 	};
 }
