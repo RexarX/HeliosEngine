@@ -122,6 +122,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/vendor/imgui;"
     "${CMAKE_CURRENT_SOURCE_DIR}/vendor/glm"
     "${CMAKE_CURRENT_SOURCE_DIR}/vendor/stb_image;"
+    "$ENV{VULKAN_SDK}/Include"
 )
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE

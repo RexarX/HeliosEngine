@@ -45,11 +45,9 @@ namespace VoxelEngine
 		virtual void Init(const WindowProps& props);
 		virtual void Shutdown();
 
-		static void OnResize(GLFWwindow* window, const int width, const int height);
-
 	private:
 		GLFWwindow* m_Window;
-		static std::unique_ptr<GraphicsContext> m_Context;
+		std::unique_ptr<GraphicsContext> m_Context;
 
 		struct WindowData
 		{

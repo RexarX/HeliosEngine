@@ -22,7 +22,7 @@
 
 ## About The Project
 
-An attempt to create a clone of Minecraft ^_^
+An attempt to create a game engine
 
 
 
@@ -33,15 +33,24 @@ An attempt to create a clone of Minecraft ^_^
 * Vulkan 1.3
 
 
+
+### Dependencies
+* vulkan-headers
+* VulkanSDK with VMA
+
+
+
 ### Installation
 
-1. Clone the repo
+1. Install dependencies
+
+2. Clone the repo
   ```sh
   git clone https://github.com/RexarX/VoxelCraft.git
   cd VoxelCraft
   git submodule update --init --recursive
   ```
-2. Build with cmake
+3. Build with cmake
   ```sh
   mkdir build
   cd build

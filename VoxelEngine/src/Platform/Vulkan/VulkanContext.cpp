@@ -100,6 +100,8 @@ namespace VoxelEngine
   {
     m_Device.waitIdle();
 
+    vmaDestroyAllocator(m_Allocator);
+
     m_Device.destroyFence(m_RenderFence);
 
     m_Device.destroySemaphore(m_SwapChainSemaphore);
@@ -128,13 +130,12 @@ namespace VoxelEngine
     auto result = m_Device.acquireNextImageKHR(m_SwapChain, 1000000000, m_SwapChainSemaphore, nullptr,
                                                 &swapchainImageIndex);
 
-    if (result == vk::Result::eErrorOutOfDateKHR) {
+    if (result == vk::Result::eErrorOutOfDateKHR || result == vk::Result::eSuboptimalKHR) {
       RecreateSwapChain();
       return;
     }
 
-    VE_CORE_ASSERT(result == vk::Result::eSuccess || result == vk::Result::eSuboptimalKHR,
-                   "Failed to acquire next swap chain image!");
+    VE_CORE_ASSERT(result == vk::Result::eSuccess, "Failed to acquire next swap chain image!");
 
     m_Device.resetFences(1, &m_RenderFence);
 
@@ -152,9 +153,7 @@ namespace VoxelEngine
     transition_image(m_SwapChainImages[swapchainImageIndex], vk::ImageLayout::eUndefined,
                                                              vk::ImageLayout::eGeneral);
 
-    vk::ClearColorValue clearValue;
-    float flash = std::abs(std::sin(1.0f / 120.0f));
-    clearValue = { 0.0f, 0.0f, flash, 1.0f };
+    vk::ClearColorValue clearValue = { 0.0f, 0.0f, 0.0f, 0.0f };
 
     vk::ImageSubresourceRange clearRange = image_subresource_range(vk::ImageAspectFlagBits::eColor);
 
@@ -413,7 +412,7 @@ namespace VoxelEngine
     createInfo.compositeAlpha = vk::CompositeAlphaFlagBitsKHR::eOpaque;
     createInfo.presentMode = presentMode;
     createInfo.clipped = VK_TRUE;
-    createInfo.oldSwapchain = vk::SwapchainKHR(nullptr);
+    createInfo.oldSwapchain = vk::SwapchainKHR(m_SwapChain);
     
     m_SwapChain = m_Device.createSwapchainKHR(createInfo);
     
@@ -500,9 +499,21 @@ namespace VoxelEngine
     VE_CORE_ASSERT(m_RenderSemaphore, "Failed to create semaphore!");
   }
 
+  void VulkanContext::CreateAllocator()
+  {
+    VmaAllocatorCreateInfo allocatorInfo = {};
+    allocatorInfo.physicalDevice = m_PhysicalDevice;
+    allocatorInfo.device = m_Device;
+    allocatorInfo.instance = m_Instance.get();
+    allocatorInfo.flags = VMA_ALLOCATOR_CREATE_BUFFER_DEVICE_ADDRESS_BIT;
+    vmaCreateAllocator(&allocatorInfo, &m_Allocator);
+  }
+
   void VulkanContext::RecreateSwapChain()
   {
     m_Device.waitIdle();
+
+    m_Device.freeCommandBuffers(m_CommandPool, m_CommandBuffers);
 
     for (auto& imageView : m_SwapChainImageViews) {
       m_Device.destroyImageView(imageView);
@@ -512,9 +523,11 @@ namespace VoxelEngine
 
     CreateSwapChain();
     CreateImageViews();
+    CreateCommands();
   }
 
-  vk::SurfaceFormatKHR VulkanContext::ChooseSwapSurfaceFormat(const std::vector<vk::SurfaceFormatKHR>& availableFormats) const {
+  vk::SurfaceFormatKHR VulkanContext::ChooseSwapSurfaceFormat(const std::vector<vk::SurfaceFormatKHR>& availableFormats) const
+  {
     if (availableFormats.size() == 1 && availableFormats[0].format == vk::Format::eUndefined) {
       return { vk::Format::eB8G8R8A8Unorm, vk::ColorSpaceKHR::eSrgbNonlinear };
     }
@@ -529,7 +542,8 @@ namespace VoxelEngine
     return availableFormats[0];
   }
 
-  vk::PresentModeKHR VulkanContext::ChooseSwapPresentMode(const std::vector<vk::PresentModeKHR>& availablePresentModes) const {
+  vk::PresentModeKHR VulkanContext::ChooseSwapPresentMode(const std::vector<vk::PresentModeKHR>& availablePresentModes) const
+  {
     vk::PresentModeKHR bestMode = vk::PresentModeKHR::eFifo;
 
     for (const auto& availablePresentMode : availablePresentModes) {
@@ -540,22 +554,20 @@ namespace VoxelEngine
     return bestMode;
   }
 
-  vk::Extent2D VulkanContext::ChooseSwapExtent(const vk::SurfaceCapabilitiesKHR& capabilities) const {
-    if (capabilities.currentExtent.width != std::numeric_limits<uint32_t>::max()) {
-      return capabilities.currentExtent;
-    } else {
-      int width, height;
-      glfwGetWindowSize(m_WindowHandle, &width, &height);
-      vk::Extent2D actualExtent = { static_cast<uint32_t>(width), static_cast<uint32_t>(height) };
+  vk::Extent2D VulkanContext::ChooseSwapExtent(const vk::SurfaceCapabilitiesKHR& capabilities) const
+  {
+    int width, height;
+    glfwGetWindowSize(m_WindowHandle, &width, &height);
+    vk::Extent2D actualExtent = { static_cast<uint32_t>(width), static_cast<uint32_t>(height) };
 
-      actualExtent.width = std::max(capabilities.minImageExtent.width, std::min(capabilities.maxImageExtent.width, actualExtent.width));
-      actualExtent.height = std::max(capabilities.minImageExtent.height, std::min(capabilities.maxImageExtent.height, actualExtent.height));
+    actualExtent.width = std::max(capabilities.minImageExtent.width, std::min(capabilities.maxImageExtent.width, actualExtent.width));
+    actualExtent.height = std::max(capabilities.minImageExtent.height, std::min(capabilities.maxImageExtent.height, actualExtent.height));
 
-      return actualExtent;
-    }
+    return actualExtent;
   }
 
-  VulkanContext::SwapChainSupportDetails VulkanContext::QuerySwapChainSupport() {
+  VulkanContext::SwapChainSupportDetails VulkanContext::QuerySwapChainSupport()
+  {
     SwapChainSupportDetails details;
     details.capabilities = m_PhysicalDevice.getSurfaceCapabilitiesKHR(m_Surface);
     details.formats = m_PhysicalDevice.getSurfaceFormatsKHR(m_Surface);

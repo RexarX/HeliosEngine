@@ -14,8 +14,6 @@ namespace VoxelEngine
 {
   static bool s_GLFWInitialized = false;
 
-	std::unique_ptr<GraphicsContext> WindowsWindow::m_Context;
-
 	static void GLFWErrorCallback(const int error, const char* description)
 	{
 		VE_CORE_ERROR("GLFW Error ({0}): {1}", error, description);
@@ -68,7 +66,14 @@ namespace VoxelEngine
 		SetMinimized(false);
 		SetFramerate(0.0);
 
-    glfwSetWindowSizeCallback(m_Window, OnResize);
+		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, const int width, const int height)
+			{
+				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+				data.Width = width;
+				data.Height = height;
+				WindowResizeEvent event(width, height);
+				data.EventCallback(event);
+			});
 
 		glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window)
 			{
@@ -161,15 +166,6 @@ namespace VoxelEngine
 		m_Context->Shutdown();
 		glfwDestroyWindow(m_Window);
   }
-
-	void WindowsWindow::OnResize(GLFWwindow* window, const int width, const int height)
-	{
-		WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
-		data.Width = width;
-		data.Height = height;
-		WindowResizeEvent event(width, height);
-		data.EventCallback(event);
-	}
 
 	void WindowsWindow::SwapBuffers()
 	{

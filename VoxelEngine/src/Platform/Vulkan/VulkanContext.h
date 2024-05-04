@@ -6,6 +6,9 @@
 
 #include <vulkan/vulkan.hpp>
 
+#define VMA_VULKAN_VERSION 1003000
+#include "vma/vk_mem_alloc.h"
+
 #ifdef VE_DEBUG
 	const bool enableValidationLayers = true;
 #else
@@ -63,6 +66,8 @@ namespace VoxelEngine
 			VK_KHR_PUSH_DESCRIPTOR_EXTENSION_NAME
 		};
 
+		VmaAllocator m_Allocator;
+
 		static vk::UniqueInstance m_Instance;
 
 		static vk::Device m_Device;
@@ -99,6 +104,7 @@ namespace VoxelEngine
 		void CreateImageViews();
 		void CreateCommands();
 		void CreateSyncObjects();
+		void CreateAllocator();
 
 		void RecreateSwapChain();
 
