@@ -68,7 +68,7 @@ namespace VoxelEngine
 
 		VmaAllocator m_Allocator;
 
-		static vk::UniqueInstance m_Instance;
+		static vk::Instance m_Instance;
 
 		static vk::Device m_Device;
 

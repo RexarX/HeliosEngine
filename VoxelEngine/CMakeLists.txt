@@ -187,10 +187,7 @@ if(MSVC)
     )
 endif()
 
-find_package(VulkanHeaders CONFIG REQUIRED)
-
 target_link_libraries(${PROJECT_NAME} PRIVATE
-    Vulkan::Headers
 	glad
     glfw
     stb_image

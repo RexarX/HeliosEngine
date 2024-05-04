@@ -1,12 +1,14 @@
-#include "vepch.h"
+#define VMA_IMPLEMENTATION
 
 #include "VulkanContext.h"
+
+#include "vepch.h"
 
 #include <glfw/glfw3.h>
 
 namespace VoxelEngine
 {
-  vk::UniqueInstance VulkanContext::m_Instance;
+  vk::Instance VulkanContext::m_Instance;
 
   vk::Device VulkanContext::m_Device;
 
@@ -94,6 +96,7 @@ namespace VoxelEngine
     CreateImageViews();
     CreateCommands();
     CreateSyncObjects();
+    CreateAllocator();
 	}
 
   void VulkanContext::Shutdown()
@@ -112,14 +115,16 @@ namespace VoxelEngine
     for (auto& imageView : m_SwapChainImageViews) {
       m_Device.destroyImageView(imageView);
     }
-    
+
     m_Device.destroySwapchainKHR();
 
-    m_Instance->destroySurfaceKHR();
+    m_Instance.destroySurfaceKHR();
 
     if (enableValidationLayers) { DestroyDebugUtilsMessengerEXT(nullptr); }
 
     m_Device.destroy();
+
+    m_Instance.destroy();
   }
 
   void VulkanContext::Update()
@@ -152,7 +157,6 @@ namespace VoxelEngine
 
     transition_image(m_SwapChainImages[swapchainImageIndex], vk::ImageLayout::eUndefined,
                                                              vk::ImageLayout::eGeneral);
-
     vk::ClearColorValue clearValue = { 0.0f, 0.0f, 0.0f, 0.0f };
 
     vk::ImageSubresourceRange clearRange = image_subresource_range(vk::ImageAspectFlagBits::eColor);
@@ -161,7 +165,6 @@ namespace VoxelEngine
       commandBuffer.clearColorImage(m_SwapChainImages[swapchainImageIndex], vk::ImageLayout::eGeneral,
                                     clearValue, clearRange);
     }
-
     for (auto& commandBuffer : m_CommandBuffers) {
       commandBuffer.end();
     }
@@ -200,9 +203,7 @@ namespace VoxelEngine
     presentInfo.waitSemaphoreCount = 1;
     presentInfo.pImageIndices = &swapchainImageIndex;
 
-    m_GraphicsQueue.presentKHR(presentInfo);
-
-    VE_CORE_ASSERT(m_GraphicsQueue, "Failed to set presentKHR in GraphicsQueue!");
+    VE_CORE_ASSERT(m_GraphicsQueue.presentKHR(presentInfo) == vk::Result::eSuccess, "Failed to set presentKHR in GraphicsQueue!");
   }
 
   void VulkanContext::SwapBuffers()
@@ -248,7 +249,7 @@ namespace VoxelEngine
       createInfo.ppEnabledLayerNames = validationLayers.data();
     }
 
-    m_Instance = vk::createInstanceUnique(createInfo);
+    m_Instance = vk::createInstance(createInfo);
     VE_CORE_ASSERT(m_Instance, "Failed to create instance!");
   }
 
@@ -274,7 +275,7 @@ namespace VoxelEngine
   {
     VkSurfaceKHR rawSurface;
 
-    auto result = glfwCreateWindowSurface(*m_Instance, m_WindowHandle, nullptr, &rawSurface);
+    auto result = glfwCreateWindowSurface(m_Instance, m_WindowHandle, nullptr, &rawSurface);
 
     VE_CORE_ASSERT(result == VK_SUCCESS, "Failed to create window surface!");
     
@@ -283,7 +284,7 @@ namespace VoxelEngine
 
   void VulkanContext::PickPhysicalDevice()
   {
-    auto devices = m_Instance->enumeratePhysicalDevices();
+    auto devices = m_Instance.enumeratePhysicalDevices();
     VE_CORE_ASSERT(!devices.empty(), "Failed to find GPUs with Vulkan support!");
 
     int flag = 0;
@@ -504,7 +505,7 @@ namespace VoxelEngine
     VmaAllocatorCreateInfo allocatorInfo = {};
     allocatorInfo.physicalDevice = m_PhysicalDevice;
     allocatorInfo.device = m_Device;
-    allocatorInfo.instance = m_Instance.get();
+    allocatorInfo.instance = m_Instance;
     allocatorInfo.flags = VMA_ALLOCATOR_CREATE_BUFFER_DEVICE_ADDRESS_BIT;
     vmaCreateAllocator(&allocatorInfo, &m_Allocator);
   }
@@ -657,14 +658,14 @@ namespace VoxelEngine
   VkResult VulkanContext::CreateDebugUtilsMessengerEXT(const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo,
                                                        const VkAllocationCallbacks* pAllocator)
   {
-    auto func = (PFN_vkCreateDebugUtilsMessengerEXT)vkGetInstanceProcAddr(*m_Instance, "vkCreateDebugUtilsMessengerEXT");
-    if (func != nullptr) { return func(*m_Instance, pCreateInfo, pAllocator, &m_Callback); } 
+    auto func = (PFN_vkCreateDebugUtilsMessengerEXT)vkGetInstanceProcAddr(m_Instance, "vkCreateDebugUtilsMessengerEXT");
+    if (func != nullptr) { return func(m_Instance, pCreateInfo, pAllocator, &m_Callback); } 
     else { return VK_ERROR_EXTENSION_NOT_PRESENT; }
   }
 
   void VulkanContext::DestroyDebugUtilsMessengerEXT(const VkAllocationCallbacks* pAllocator) const
   {
-    auto func = (PFN_vkDestroyDebugUtilsMessengerEXT)vkGetInstanceProcAddr(*m_Instance, "vkDestroyDebugUtilsMessengerEXT");
-    if (func != nullptr) { func(*m_Instance, m_Callback, pAllocator); }
+    auto func = (PFN_vkDestroyDebugUtilsMessengerEXT)vkGetInstanceProcAddr(m_Instance, "vkDestroyDebugUtilsMessengerEXT");
+    if (func != nullptr) { func(m_Instance, m_Callback, pAllocator); }
   }
 }
