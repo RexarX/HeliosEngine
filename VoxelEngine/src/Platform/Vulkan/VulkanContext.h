@@ -22,6 +22,7 @@ namespace VoxelEngine
 	class VulkanContext : public GraphicsContext
 	{
 	public:
+		uint32_t cnt = 0;
 		VulkanContext(GLFWwindow* windowHandle);
 
 		virtual void Init() override;
@@ -56,6 +57,15 @@ namespace VoxelEngine
 			std::vector<vk::PresentModeKHR> presentModes;
 		};
 
+		struct AllocatedImage {
+			VkImage image;
+			vk::ImageView imageView;
+			vk::Extent3D imageExtent;
+			vk::Format imageFormat;
+
+			VmaAllocation allocation;
+		};
+
 		struct PipelineStruct
 		{
 			const char* name;
@@ -66,10 +76,10 @@ namespace VoxelEngine
 		struct DescriptorLayoutBuilder
 		{
 			std::vector<vk::DescriptorSetLayoutBinding> bindings;
-			void AddBinding(const uint32_t binding, vk::DescriptorType& type);
+			void AddBinding(const uint32_t binding, const vk::DescriptorType type);
 			void Clear() { bindings.clear(); }
-			vk::DescriptorSetLayout Build(vk::ShaderStageFlags& shaderStages, vk::DescriptorSetLayoutCreateFlags& flags,
-																		void* pNext = nullptr);
+			vk::DescriptorSetLayout Build(const vk::ShaderStageFlags shaderStages, const vk::DescriptorSetLayoutCreateFlags flags,
+																		const void* pNext = nullptr);
 		};
 
 		struct DescriptorAllocator
@@ -81,11 +91,11 @@ namespace VoxelEngine
 			};
 
 			vk::DescriptorPool pool;
-			void InitPool(const uint32_t maxSets, std::span<PoolSizeRatio>& poolRatios);
+			void InitPool(const uint32_t maxSets, const std::span<PoolSizeRatio> poolRatios);
 			void ClearDescriptors();
 			void DestroyPool();
 
-			vk::DescriptorSet Allocate(vk::DescriptorSetLayout& layout);
+			vk::DescriptorSet Allocate(const vk::DescriptorSetLayout layout);
 		};
 
 		const std::vector<const char*> validationLayers = {
@@ -122,8 +132,15 @@ namespace VoxelEngine
 		std::vector<vk::Image> m_SwapChainImages;
 		std::vector<vk::ImageView> m_SwapChainImageViews;
     vk::Format m_SwapChainImageFormat;
+
+		vk::Extent2D m_DrawExtent;
 		
 		std::vector<PipelineStruct> m_Pipelines;
+
+		DescriptorAllocator m_DescriptorAllocator;
+
+		vk::DescriptorSet m_DrawImageDescriptors;
+		vk::DescriptorSetLayout m_DrawImageDescriptorLayout;
 
 		vk::CommandPool m_CommandPool;
 		std::vector<vk::CommandBuffer, std::allocator<vk::CommandBuffer>> m_CommandBuffers;
@@ -132,26 +149,35 @@ namespace VoxelEngine
 		vk::Semaphore m_RenderSemaphore;
 		vk::Fence m_RenderFence;
 
+		AllocatedImage m_DrawImage;
+
 	private:
 		void CreateInstance();
 		void SetupDebugCallback();
     void CreateSurface();
 		void PickPhysicalDevice();
 		void CreateLogicalDevice();
+		void CreateAllocator();
 		void CreateSwapChain();
 		void CreateImageViews();
-		void CreatePipeline();
 		void CreateCommands();
 		void CreateSyncObjects();
-		void CreateAllocator();
-
+		void CreateDescriptors();
+		void CreatePipeline();
+		
 		void RecreateSwapChain();
 
-		void transition_image(const vk::Image& image, const vk::ImageLayout& currentLayout,
-													const vk::ImageLayout& newLayout);
+		void transition_image(const vk::CommandBuffer cmd, const vk::Image image,
+													const vk::ImageLayout currentLayout, const vk::ImageLayout newLayout);
 
-		vk::SemaphoreSubmitInfo semaphore_submit_info(const vk::PipelineStageFlags2& stageMask,
-																								const vk::Semaphore& semaphore) const;
+		vk::SemaphoreSubmitInfo semaphore_submit_info(const vk::PipelineStageFlags2 stageMask,
+																									const vk::Semaphore semaphore) const;
+
+		vk::ImageCreateInfo image_create_info(const vk::ImageUsageFlags usageFlags,
+																					const vk::Extent3D extent) const;
+		vk::ImageViewCreateInfo imageview_create_info(const vk::ImageAspectFlags aspectFlags) const;
+		void copy_image_to_image(const vk::CommandBuffer cmd, const vk::Image source, const vk::Image destination,
+														 const vk::Extent2D srcSize, const vk::Extent2D dstSize) const;
 
 		bool IsDeviceSuitable();
 		QueueFamilyIndices FindQueueFamilies() const;
@@ -160,12 +186,12 @@ namespace VoxelEngine
 		bool CheckValidationLayerSupport() const;
 
 		VkResult CreateDebugUtilsMessengerEXT(const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo,
-			const VkAllocationCallbacks* pAllocator);
+																					const VkAllocationCallbacks* pAllocator);
 		void DestroyDebugUtilsMessengerEXT(const VkAllocationCallbacks* pAllocator) const;
 
-		vk::SurfaceFormatKHR ChooseSwapSurfaceFormat(const std::vector<vk::SurfaceFormatKHR>& availableFormats) const;
-		vk::PresentModeKHR ChooseSwapPresentMode(const std::vector<vk::PresentModeKHR>& availablePresentModes) const;
-		vk::Extent2D ChooseSwapExtent(const vk::SurfaceCapabilitiesKHR& capabilities) const;
+		vk::SurfaceFormatKHR ChooseSwapSurfaceFormat(const std::vector<vk::SurfaceFormatKHR> availableFormats) const;
+		vk::PresentModeKHR ChooseSwapPresentMode(const std::vector<vk::PresentModeKHR> availablePresentModes) const;
+		vk::Extent2D ChooseSwapExtent(const vk::SurfaceCapabilitiesKHR capabilities) const;
 		SwapChainSupportDetails QuerySwapChainSupport();
 
 	private:

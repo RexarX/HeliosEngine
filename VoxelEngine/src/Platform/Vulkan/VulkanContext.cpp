@@ -13,16 +13,16 @@ namespace VoxelEngine
   vk::Device VulkanContext::m_Device;
 
   static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(const VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
-    const VkDebugUtilsMessageTypeFlagsEXT messageType,
-    const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData,
-    void* pUserData)
+                                                      const VkDebugUtilsMessageTypeFlagsEXT messageType,
+                                                      const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData,
+                                                      void* pUserData)
   {
     VE_CORE_WARN(pCallbackData->pMessage);
 
     return VK_FALSE;
   }
 
-  VkImageSubresourceRange image_subresource_range(const vk::ImageAspectFlags& aspectMask)
+  vk::ImageSubresourceRange image_subresource_range(const vk::ImageAspectFlags aspectMask)
   {
     vk::ImageSubresourceRange subImage;
     subImage.aspectMask = aspectMask;
@@ -34,8 +34,8 @@ namespace VoxelEngine
     return subImage;
   }
 
-  void VulkanContext::transition_image(const vk::Image& image, const vk::ImageLayout& currentLayout,
-                                       const vk::ImageLayout& newLayout)
+  void VulkanContext::transition_image(const vk::CommandBuffer cmd, const vk::Image image,
+                                       const vk::ImageLayout currentLayout, const vk::ImageLayout newLayout)
   {
     vk::ImageMemoryBarrier2 imageBarrier;
     imageBarrier.sType = vk::StructureType::eImageMemoryBarrier2;
@@ -60,13 +60,11 @@ namespace VoxelEngine
     depInfo.imageMemoryBarrierCount = 1;
     depInfo.pImageMemoryBarriers = &imageBarrier;
 
-    for (auto& commandBuffer : m_CommandBuffers) {
-      commandBuffer.pipelineBarrier2(depInfo);
-    }
+    cmd.pipelineBarrier2(depInfo);
   }
 
-  vk::SemaphoreSubmitInfo VulkanContext::semaphore_submit_info(const vk::PipelineStageFlags2& stageMask,
-                                                             const vk::Semaphore& semaphore) const
+  vk::SemaphoreSubmitInfo VulkanContext::semaphore_submit_info(const vk::PipelineStageFlags2 stageMask,
+                                                               const vk::Semaphore semaphore) const
   {
     vk::SemaphoreSubmitInfo submitInfo;
     submitInfo.sType = vk::StructureType::eSemaphoreSubmitInfo;
@@ -77,6 +75,81 @@ namespace VoxelEngine
     submitInfo.value = 1;
 
     return submitInfo;
+  }
+
+  vk::ImageCreateInfo VulkanContext::image_create_info(const vk::ImageUsageFlags usageFlags,
+                                                       const vk::Extent3D extent) const
+  {
+    vk::ImageCreateInfo info;
+    info.sType = vk::StructureType::eImageCreateInfo;
+    info.pNext = nullptr;
+    info.imageType = vk::ImageType::e2D;
+    info.format = m_DrawImage.imageFormat;
+    info.extent = extent;
+    info.mipLevels = 1;
+    info.arrayLayers = 1;
+    info.samples = vk::SampleCountFlagBits::e1;
+    info.tiling = vk::ImageTiling::eOptimal;
+    info.usage = usageFlags;
+
+    return info;
+  }
+
+  vk::ImageViewCreateInfo VulkanContext::imageview_create_info(const vk::ImageAspectFlags aspectFlags) const
+  {
+    vk::ImageViewCreateInfo info;
+    info.sType = vk::StructureType::eImageViewCreateInfo;
+    info.pNext = nullptr;
+    info.viewType = vk::ImageViewType::e2D;
+    info.image = m_DrawImage.image;
+    info.format = m_DrawImage.imageFormat;
+    info.subresourceRange.baseMipLevel = 0;
+    info.subresourceRange.levelCount = 1;
+    info.subresourceRange.baseArrayLayer = 0;
+    info.subresourceRange.layerCount = 1;
+    info.subresourceRange.aspectMask = aspectFlags;
+
+    return info;
+  }
+
+  void VulkanContext::copy_image_to_image(const vk::CommandBuffer cmd, const vk::Image source,
+                                          const vk::Image destination, const vk::Extent2D srcSize,
+                                          const vk::Extent2D dstSize) const
+  {
+    vk::ImageBlit2 blitRegion;
+    blitRegion.sType = vk::StructureType::eImageBlit2KHR;;
+    blitRegion.pNext = nullptr;
+
+    blitRegion.srcOffsets[1].x = srcSize.width;
+    blitRegion.srcOffsets[1].y = srcSize.height;
+    blitRegion.srcOffsets[1].z = 1;
+
+    blitRegion.dstOffsets[1].x = dstSize.width;
+    blitRegion.dstOffsets[1].y = dstSize.height;
+    blitRegion.dstOffsets[1].z = 1;
+
+    blitRegion.srcSubresource.aspectMask = vk::ImageAspectFlagBits::eColor;
+    blitRegion.srcSubresource.baseArrayLayer = 0;
+    blitRegion.srcSubresource.layerCount = 1;
+    blitRegion.srcSubresource.mipLevel = 0;
+
+    blitRegion.dstSubresource.aspectMask = vk::ImageAspectFlagBits::eColor;
+    blitRegion.dstSubresource.baseArrayLayer = 0;
+    blitRegion.dstSubresource.layerCount = 1;
+    blitRegion.dstSubresource.mipLevel = 0;
+
+    vk::BlitImageInfo2 blitInfo;
+    blitInfo.sType = vk::StructureType::eBlitImageInfo2;
+    blitInfo.pNext = nullptr;
+    blitInfo.dstImage = destination;
+    blitInfo.dstImageLayout = vk::ImageLayout::eTransferDstOptimal;
+    blitInfo.srcImage = source;
+    blitInfo.srcImageLayout = vk::ImageLayout::eTransferSrcOptimal;
+    blitInfo.filter = vk::Filter::eLinear;
+    blitInfo.regionCount = 1;
+    blitInfo.pRegions = &blitRegion;
+
+    cmd.blitImage2(blitInfo);
   }
 
 	VulkanContext::VulkanContext(GLFWwindow* windowHandle)
@@ -92,18 +165,18 @@ namespace VoxelEngine
     CreateSurface();
     PickPhysicalDevice();
     CreateLogicalDevice();
+    CreateAllocator();
     CreateSwapChain();
     CreateImageViews();
+    CreatePipeline();
+    CreateDescriptors();
     CreateCommands();
     CreateSyncObjects();
-    CreateAllocator();
 	}
 
   void VulkanContext::Shutdown()
   {
     m_Device.waitIdle();
-
-    vmaDestroyAllocator(m_Allocator);
 
     m_Device.destroyFence(m_RenderFence);
 
@@ -115,6 +188,12 @@ namespace VoxelEngine
     for (auto& imageView : m_SwapChainImageViews) {
       m_Device.destroyImageView(imageView);
     }
+
+    vmaDestroyImage(m_Allocator, m_DrawImage.image, m_DrawImage.allocation);
+
+    m_Device.destroyImageView(m_DrawImage.imageView);
+
+    vmaDestroyAllocator(m_Allocator);
 
     m_Device.destroySwapchainKHR();
 
@@ -157,17 +236,36 @@ namespace VoxelEngine
       commandBuffer.begin(bufferBeginInfo);
     }
 
-    transition_image(m_SwapChainImages[swapchainImageIndex], vk::ImageLayout::eUndefined,
-                                                             vk::ImageLayout::eGeneral);
-    vk::ClearColorValue clearValue = { 0.0f, 0.0f, 0.0f, 0.0f };
+    transition_image(m_CommandBuffers[0], m_SwapChainImages[swapchainImageIndex], vk::ImageLayout::eUndefined,
+                                                                                  vk::ImageLayout::eGeneral);
+
+    float flash = std::sin(cnt);
+    vk::ClearColorValue clearValue = { 0.0f, 0.0f, flash, 1.0f };
 
     vk::ImageSubresourceRange clearRange = image_subresource_range(vk::ImageAspectFlagBits::eColor);
 
     for (auto& commandBuffer : m_CommandBuffers) {
-      commandBuffer.clearColorImage(m_SwapChainImages[swapchainImageIndex], vk::ImageLayout::eGeneral,
-                                    clearValue, clearRange);
+      commandBuffer.clearColorImage(m_DrawImage.image, vk::ImageLayout::eGeneral, clearValue, clearRange);
       commandBuffer.end();
     }
+
+    transition_image(m_CommandBuffers[0], m_DrawImage.image, vk::ImageLayout::eGeneral,
+                                                             vk::ImageLayout::eTransferSrcOptimal);
+
+    transition_image(m_CommandBuffers[0], m_SwapChainImages[swapchainImageIndex], vk::ImageLayout::eUndefined,
+                     vk::ImageLayout::eTransferDstOptimal);
+
+    copy_image_to_image(m_CommandBuffers[0], m_DrawImage.image, m_SwapChainImages[swapchainImageIndex],
+                        m_DrawExtent, m_SwapChainExtent);
+
+    transition_image(m_CommandBuffers[0], m_SwapChainImages[swapchainImageIndex],
+                     vk::ImageLayout::eTransferDstOptimal, vk::ImageLayout::eColorAttachmentOptimal);
+
+    //draw imgui
+
+    transition_image(m_CommandBuffers[0], m_SwapChainImages[swapchainImageIndex],
+                     vk::ImageLayout::eColorAttachmentOptimal, vk::ImageLayout::ePresentSrcKHR);
+
 
     vk::CommandBufferSubmitInfo commandBufferSubmitInfo;
     commandBufferSubmitInfo.sType = vk::StructureType::eCommandBufferSubmitInfo;
@@ -206,6 +304,7 @@ namespace VoxelEngine
     auto presentResult = m_PresentQueue.presentKHR(presentInfo);
 
     VE_CORE_ASSERT(presentResult == vk::Result::eSuccess, "Failed to set presentKHR in GraphicsQueue!");
+    ++cnt;
   }
 
   void VulkanContext::SwapBuffers()
@@ -308,6 +407,7 @@ namespace VoxelEngine
         }
       }    
     }
+
     switch (flag)
     {
     case 1: //discrete gpu
@@ -453,11 +553,78 @@ namespace VoxelEngine
 
       VE_CORE_ASSERT(m_SwapChainImageViews[i], "Failed to create image views!");
     }
+
+    int width, height;
+    glfwGetWindowSize(m_WindowHandle, &width, &height);
+    
+    vk::Extent3D drawImageExtent =
+    {
+      (uint32_t)width,
+      (uint32_t)height,
+      1
+    };
+
+    m_DrawImage.imageFormat = vk::Format::eR16G16B16A16Sfloat;
+    m_DrawImage.imageExtent = drawImageExtent;
+
+    vk::ImageUsageFlags drawImageUsages;
+    drawImageUsages |= vk::ImageUsageFlagBits::eTransferSrc;
+    drawImageUsages |= vk::ImageUsageFlagBits::eTransferDst;
+    drawImageUsages |= vk::ImageUsageFlagBits::eStorage;
+    drawImageUsages |= vk::ImageUsageFlagBits::eColorAttachment;
+
+    VkImageCreateInfo rimg_info = image_create_info(drawImageUsages, drawImageExtent);
+
+    VmaAllocationCreateInfo rimg_allocinfo = {};
+    rimg_allocinfo.usage = VMA_MEMORY_USAGE_GPU_ONLY;
+    rimg_allocinfo.requiredFlags = VkMemoryPropertyFlags(VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
+
+    vmaCreateImage(m_Allocator, &rimg_info, &rimg_allocinfo, &m_DrawImage.image, &m_DrawImage.allocation, nullptr);
+
+    vk::ImageViewCreateInfo rview_info = imageview_create_info(vk::ImageAspectFlagBits::eColor);
+
+    auto result = m_Device.createImageView(&rview_info, nullptr, &m_DrawImage.imageView);
+
+    VE_CORE_ASSERT(result == vk::Result::eSuccess, "Failed to create image view!");
   }
 
   void VulkanContext::CreatePipeline()
   {
 
+  }
+
+  void VulkanContext::CreateDescriptors()
+  {
+    std::vector<DescriptorAllocator::PoolSizeRatio> sizes =
+	  {
+		  { vk::DescriptorType::eStorageImage, 1 }
+	  };
+
+    m_DescriptorAllocator.InitPool(10, sizes);
+
+    {
+      DescriptorLayoutBuilder builder;
+      builder.AddBinding(0, vk::DescriptorType::eStorageImage);
+      m_DrawImageDescriptorLayout = builder.Build(vk::ShaderStageFlagBits::eCompute, vk::DescriptorSetLayoutCreateFlagBits(0));
+    }
+
+    m_DrawImageDescriptors = m_DescriptorAllocator.Allocate(m_DrawImageDescriptorLayout);
+
+    vk::DescriptorImageInfo imgInfo;
+    imgInfo.imageLayout = vk::ImageLayout::eGeneral;
+    imgInfo.imageView = m_DrawImage.imageView;
+
+    vk::WriteDescriptorSet drawImageWrite;
+    drawImageWrite.sType = vk::StructureType::eWriteDescriptorSet;
+    drawImageWrite.pNext = nullptr;
+
+    drawImageWrite.dstBinding = 0;
+    drawImageWrite.dstSet = m_DrawImageDescriptors;
+    drawImageWrite.descriptorCount = 1;
+    drawImageWrite.descriptorType = vk::DescriptorType::eStorageImage;
+    drawImageWrite.pImageInfo = &imgInfo;
+
+    m_Device.updateDescriptorSets(drawImageWrite, nullptr);
   }
 
   void VulkanContext::CreateCommands()
@@ -517,11 +684,13 @@ namespace VoxelEngine
     allocatorInfo.device = m_Device;
     allocatorInfo.instance = m_Instance;
     allocatorInfo.flags = VMA_ALLOCATOR_CREATE_BUFFER_DEVICE_ADDRESS_BIT;
+
     vmaCreateAllocator(&allocatorInfo, &m_Allocator);
   }
 
   void VulkanContext::RecreateSwapChain()
   {
+    VE_TRACE("Recreate swap chain!");
     m_Device.waitIdle();
 
     m_Device.freeCommandBuffers(m_CommandPool, m_CommandBuffers);
@@ -530,6 +699,10 @@ namespace VoxelEngine
       m_Device.destroyImageView(imageView);
     }
 
+    vmaDestroyImage(m_Allocator, m_DrawImage.image, m_DrawImage.allocation);
+
+    m_Device.destroyImageView(m_DrawImage.imageView);
+
     m_Device.destroySwapchainKHR();
 
     CreateSwapChain();
@@ -537,7 +710,7 @@ namespace VoxelEngine
     CreateCommands();
   }
 
-  vk::SurfaceFormatKHR VulkanContext::ChooseSwapSurfaceFormat(const std::vector<vk::SurfaceFormatKHR>& availableFormats) const
+  vk::SurfaceFormatKHR VulkanContext::ChooseSwapSurfaceFormat(const std::vector<vk::SurfaceFormatKHR> availableFormats) const
   {
     if (availableFormats.size() == 1 && availableFormats[0].format == vk::Format::eUndefined) {
       return { vk::Format::eB8G8R8A8Unorm, vk::ColorSpaceKHR::eSrgbNonlinear };
@@ -553,7 +726,7 @@ namespace VoxelEngine
     return availableFormats[0];
   }
 
-  vk::PresentModeKHR VulkanContext::ChooseSwapPresentMode(const std::vector<vk::PresentModeKHR>& availablePresentModes) const
+  vk::PresentModeKHR VulkanContext::ChooseSwapPresentMode(const std::vector<vk::PresentModeKHR> availablePresentModes) const
   {
     vk::PresentModeKHR bestMode = vk::PresentModeKHR::eFifo;
 
@@ -565,7 +738,7 @@ namespace VoxelEngine
     return bestMode;
   }
 
-  vk::Extent2D VulkanContext::ChooseSwapExtent(const vk::SurfaceCapabilitiesKHR& capabilities) const
+  vk::Extent2D VulkanContext::ChooseSwapExtent(const vk::SurfaceCapabilitiesKHR capabilities) const
   {
     int width, height;
     glfwGetWindowSize(m_WindowHandle, &width, &height);
@@ -583,6 +756,7 @@ namespace VoxelEngine
     details.capabilities = m_PhysicalDevice.getSurfaceCapabilitiesKHR(m_Surface);
     details.formats = m_PhysicalDevice.getSurfaceFormatsKHR(m_Surface);
     details.presentModes = m_PhysicalDevice.getSurfacePresentModesKHR(m_Surface);
+
     return details;
   }
 
@@ -679,22 +853,26 @@ namespace VoxelEngine
     if (func != nullptr) { func(m_Instance, m_Callback, pAllocator); }
   }
 
-  void VulkanContext::DescriptorLayoutBuilder::AddBinding(const uint32_t binding, vk::DescriptorType& type)
+  void VulkanContext::DescriptorLayoutBuilder::AddBinding(const uint32_t binding, vk::DescriptorType type)
   {
     vk::DescriptorSetLayoutBinding newBind;
     newBind.binding = binding;
     newBind.descriptorCount = 1;
     newBind.descriptorType = type;
+
     bindings.push_back(newBind);
   }
 
-  vk::DescriptorSetLayout VulkanContext::DescriptorLayoutBuilder::Build(vk::ShaderStageFlags& shaderStages, vk::DescriptorSetLayoutCreateFlags& flags, void* pNext)
+  vk::DescriptorSetLayout VulkanContext::DescriptorLayoutBuilder::Build(const vk::ShaderStageFlags shaderStages,
+                                                                        const vk::DescriptorSetLayoutCreateFlags flags,
+                                                                        const void* pNext)
   {
     for (auto& bind : bindings) {
       bind.stageFlags |= shaderStages;
     }
 
     vk::DescriptorSetLayoutCreateInfo info;
+    info.sType = vk::StructureType::eDescriptorSetLayoutCreateInfo;
     info.pNext = pNext;
     info.pBindings = bindings.data();
     info.bindingCount = (uint32_t)(bindings.size());
@@ -706,7 +884,7 @@ namespace VoxelEngine
     return set;
   }
 
-  void VulkanContext::DescriptorAllocator::InitPool(const uint32_t maxSets, std::span<PoolSizeRatio>& poolRatios)
+  void VulkanContext::DescriptorAllocator::InitPool(const uint32_t maxSets, const std::span<PoolSizeRatio> poolRatios)
   {
     std::vector<vk::DescriptorPoolSize> poolSizes;
     for (auto& poolRatio : poolRatios) {
@@ -718,7 +896,6 @@ namespace VoxelEngine
 
     vk::DescriptorPoolCreateInfo info;
     info.sType = vk::StructureType::eDescriptorPoolCreateInfo;
-    //info.flags = vk::DescriptorPoolCreateFlagBits;
     info.maxSets = maxSets;
     info.poolSizeCount = (uint32_t)poolSizes.size();
     info.pPoolSizes = poolSizes.data();
@@ -728,7 +905,7 @@ namespace VoxelEngine
 
   void VulkanContext::DescriptorAllocator::ClearDescriptors()
   {
-    //m_Device.resetDescriptorPool(pool, vk::DescriptorPoolResetFlagBits::);
+    m_Device.resetDescriptorPool(pool);
   }
 
   void VulkanContext::DescriptorAllocator::DestroyPool()
@@ -736,7 +913,7 @@ namespace VoxelEngine
     m_Device.destroyDescriptorPool(pool);
   }
 
-  vk::DescriptorSet VulkanContext::DescriptorAllocator::Allocate(vk::DescriptorSetLayout& layout)
+  vk::DescriptorSet VulkanContext::DescriptorAllocator::Allocate(const vk::DescriptorSetLayout layout)
   {
     vk::DescriptorSetAllocateInfo info;
     info.sType = vk::StructureType::eDescriptorSetAllocateInfo;
@@ -745,8 +922,7 @@ namespace VoxelEngine
     info.descriptorSetCount = 1;
     info.pSetLayouts = &layout;
 
-    vk::DescriptorSet set;
-    m_Device.allocateDescriptorSets(info, set);
+    vk::DescriptorSet set = m_Device.allocateDescriptorSets(info).front();
 
     return set;
   }
