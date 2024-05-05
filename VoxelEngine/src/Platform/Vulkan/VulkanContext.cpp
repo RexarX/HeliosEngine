@@ -210,14 +210,17 @@ namespace VoxelEngine
 
   void VulkanContext::SwapBuffers()
   {
+    //already done in update
   }
 
 	void VulkanContext::ClearBuffer()
   {
+    //already done in update
 	}
 
 	void VulkanContext::SetViewport(const uint32_t width, const uint32_t height)
 	{
+
 	}
 
   void VulkanContext::SetVSync(const bool enabled)
@@ -452,6 +455,11 @@ namespace VoxelEngine
     }
   }
 
+  void VulkanContext::CreatePipeline()
+  {
+
+  }
+
   void VulkanContext::CreateCommands()
   {
     QueueFamilyIndices indices = FindQueueFamilies();
@@ -669,5 +677,77 @@ namespace VoxelEngine
   {
     auto func = (PFN_vkDestroyDebugUtilsMessengerEXT)vkGetInstanceProcAddr(m_Instance, "vkDestroyDebugUtilsMessengerEXT");
     if (func != nullptr) { func(m_Instance, m_Callback, pAllocator); }
+  }
+
+  void VulkanContext::DescriptorLayoutBuilder::AddBinding(const uint32_t binding, vk::DescriptorType& type)
+  {
+    vk::DescriptorSetLayoutBinding newBind;
+    newBind.binding = binding;
+    newBind.descriptorCount = 1;
+    newBind.descriptorType = type;
+    bindings.push_back(newBind);
+  }
+
+  vk::DescriptorSetLayout VulkanContext::DescriptorLayoutBuilder::Build(vk::ShaderStageFlags& shaderStages, vk::DescriptorSetLayoutCreateFlags& flags, void* pNext)
+  {
+    for (auto& bind : bindings) {
+      bind.stageFlags |= shaderStages;
+    }
+
+    vk::DescriptorSetLayoutCreateInfo info;
+    info.pNext = pNext;
+    info.pBindings = bindings.data();
+    info.bindingCount = (uint32_t)(bindings.size());
+    info.flags = flags;
+
+    vk::DescriptorSetLayout set;
+    set = m_Device.createDescriptorSetLayout(info);
+
+    return set;
+  }
+
+  void VulkanContext::DescriptorAllocator::InitPool(const uint32_t maxSets, std::span<PoolSizeRatio>& poolRatios)
+  {
+    std::vector<vk::DescriptorPoolSize> poolSizes;
+    for (auto& poolRatio : poolRatios) {
+      poolSizes.push_back(vk::DescriptorPoolSize{
+            poolRatio.type,
+            uint32_t(poolRatio.ratio * maxSets)
+        });
+    }
+
+    vk::DescriptorPoolCreateInfo info;
+    info.sType = vk::StructureType::eDescriptorPoolCreateInfo;
+    //info.flags = vk::DescriptorPoolCreateFlagBits;
+    info.maxSets = maxSets;
+    info.poolSizeCount = (uint32_t)poolSizes.size();
+    info.pPoolSizes = poolSizes.data();
+
+    pool = m_Device.createDescriptorPool(info);
+  }
+
+  void VulkanContext::DescriptorAllocator::ClearDescriptors()
+  {
+    //m_Device.resetDescriptorPool(pool, vk::DescriptorPoolResetFlagBits::);
+  }
+
+  void VulkanContext::DescriptorAllocator::DestroyPool()
+  {
+    m_Device.destroyDescriptorPool(pool);
+  }
+
+  vk::DescriptorSet VulkanContext::DescriptorAllocator::Allocate(vk::DescriptorSetLayout& layout)
+  {
+    vk::DescriptorSetAllocateInfo info;
+    info.sType = vk::StructureType::eDescriptorSetAllocateInfo;
+    info.pNext = nullptr;
+    info.descriptorPool = pool;
+    info.descriptorSetCount = 1;
+    info.pSetLayouts = &layout;
+
+    vk::DescriptorSet set;
+    m_Device.allocateDescriptorSets(info, set);
+
+    return set;
   }
 }

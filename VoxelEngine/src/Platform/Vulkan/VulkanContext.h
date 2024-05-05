@@ -56,6 +56,38 @@ namespace VoxelEngine
 			std::vector<vk::PresentModeKHR> presentModes;
 		};
 
+		struct PipelineStruct
+		{
+			const char* name;
+			vk::Pipeline pipeline;
+			vk::PipelineLayout pipelineLayout;
+		};
+
+		struct DescriptorLayoutBuilder
+		{
+			std::vector<vk::DescriptorSetLayoutBinding> bindings;
+			void AddBinding(const uint32_t binding, vk::DescriptorType& type);
+			void Clear() { bindings.clear(); }
+			vk::DescriptorSetLayout Build(vk::ShaderStageFlags& shaderStages, vk::DescriptorSetLayoutCreateFlags& flags,
+																		void* pNext = nullptr);
+		};
+
+		struct DescriptorAllocator
+		{
+			struct PoolSizeRatio
+			{
+				vk::DescriptorType type;
+				float ratio;
+			};
+
+			vk::DescriptorPool pool;
+			void InitPool(const uint32_t maxSets, std::span<PoolSizeRatio>& poolRatios);
+			void ClearDescriptors();
+			void DestroyPool();
+
+			vk::DescriptorSet Allocate(vk::DescriptorSetLayout& layout);
+		};
+
 		const std::vector<const char*> validationLayers = {
 			"VK_LAYER_KHRONOS_validation"
 		};
@@ -90,7 +122,9 @@ namespace VoxelEngine
 		std::vector<vk::Image> m_SwapChainImages;
 		std::vector<vk::ImageView> m_SwapChainImageViews;
     vk::Format m_SwapChainImageFormat;
-				
+		
+		std::vector<PipelineStruct> m_Pipelines;
+
 		vk::CommandPool m_CommandPool;
 		std::vector<vk::CommandBuffer, std::allocator<vk::CommandBuffer>> m_CommandBuffers;
 
@@ -106,6 +140,7 @@ namespace VoxelEngine
 		void CreateLogicalDevice();
 		void CreateSwapChain();
 		void CreateImageViews();
+		void CreatePipeline();
 		void CreateCommands();
 		void CreateSyncObjects();
 		void CreateAllocator();
