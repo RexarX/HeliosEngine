@@ -16,6 +16,8 @@ namespace VoxelEngine
 
 		virtual void SetVSync(const bool enabled) = 0;
 
+		virtual void SetResized(const bool resized) = 0;
+
 		static std::unique_ptr<GraphicsContext> Create(void* window);
 	};
 }

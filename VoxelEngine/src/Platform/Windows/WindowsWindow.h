@@ -53,8 +53,7 @@ namespace VoxelEngine
 		{
 			std::string Title;
 			uint32_t Width, Height;
-			double Framerate;
-			double LastFramerate;
+			double Framerate, LastFramerate;
 			bool VSync;
 			bool Minimized;
 			bool Focus;

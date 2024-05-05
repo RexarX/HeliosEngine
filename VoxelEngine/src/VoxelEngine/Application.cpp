@@ -71,7 +71,6 @@ namespace VoxelEngine
 
 	void Application::Run()
 	{
-		Timestep timestep;
 		double time;
 		double LastFrameUpdate(0.0), LastFrameTime(0.0);
 
@@ -79,22 +78,18 @@ namespace VoxelEngine
 
 		while (m_Running) {
 			time = glfwGetTime();
-			timestep = time - LastFrameTime;
 			m_DeltaTime = time - LastFrameUpdate;
-			
-			for (Layer* layer : m_LayerStack) {
-				layer->OnUpdate(timestep);
-			}
 
 			m_Window->PoolEvents();
 
 			if (!m_Window->IsMinimized() && (m_DeltaTime >= m_FramerateLimit ||
 																			 m_Window->GetFramerate() == 0.0)) {
-				m_Window->OnUpdate();
-
 				for (Layer* layer : m_LayerStack) {
+					layer->OnUpdate(m_DeltaTime);
 					layer->Draw();
 				}
+
+				m_Window->OnUpdate();
 				
 				LastFrameUpdate = time;
 			}

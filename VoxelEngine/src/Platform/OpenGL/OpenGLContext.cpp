@@ -60,4 +60,8 @@ namespace VoxelEngine
 	{
 		glfwSwapInterval(enabled ? 1 : 0);
 	}
+
+	void OpenGLContext::SetResized(const bool resized)
+	{
+	}
 }

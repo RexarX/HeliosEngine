@@ -142,7 +142,7 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 )
 
 if(WIN32)
-	target_compile_definitions(${PROJECT_NAME} PRIVATE "VE_PLATFORM_WINDOWS;" "-DVK_USE_PLATFORM_WIN32_KHR")
+	target_compile_definitions(${PROJECT_NAME} PRIVATE "VE_PLATFORM_WINDOWS;")
 endif()
 
 if(MSVC)

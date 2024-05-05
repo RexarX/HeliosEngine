@@ -9,6 +9,7 @@
 #include "Render/RendererAPI.h"
 
 #include <GLFW/glfw3.h>
+#include <Vulkan/VulkanContext.h>
 
 namespace VoxelEngine
 {
@@ -58,7 +59,7 @@ namespace VoxelEngine
 		m_Context->Init();
 		m_Context->SetViewport(props.Width, props.Height);
 
-		glfwSetWindowUserPointer(m_Window, &m_Data);
+		glfwSetWindowUserPointer(m_Window, reinterpret_cast<void*>(this));
 
 		glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
@@ -66,47 +67,48 @@ namespace VoxelEngine
 		SetMinimized(false);
 		SetFramerate(0.0);
 
-		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, const int width, const int height)
-			{
-				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
-				data.Width = width;
-				data.Height = height;
-				WindowResizeEvent event(width, height);
-				data.EventCallback(event);
+		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height) {
+			WindowsWindow& win = *(WindowsWindow*)glfwGetWindowUserPointer(window);
+			win.m_Data.Width = width;
+      win.m_Data.Height = height;
+			WindowResizeEvent event(width, height);
+      win.m_Data.EventCallback(event);
+
+      win.m_Context->SetResized(true);
 			});
 
 		glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window)
 			{
-				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+        WindowsWindow& win = *(WindowsWindow*)glfwGetWindowUserPointer(window);
 				WindowCloseEvent event;
-				data.EventCallback(event);
+				win.m_Data.EventCallback(event);
 			});
 
 		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, const int key, const int scancode,
 											 const int action, const int mods)
 			{
-				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+        WindowsWindow& win = *(WindowsWindow*)glfwGetWindowUserPointer(window);
 
 				switch (action)
 				{
 				case GLFW_PRESS:
 				{
 					KeyPressedEvent event(key, 0);
-					data.EventCallback(event);
+					win.m_Data.EventCallback(event);
 					break;
 				}
 
 				case GLFW_RELEASE:
 				{
 					KeyReleasedEvent event(key);
-					data.EventCallback(event);
+					win.m_Data.EventCallback(event);
 					break;
 				}
 
 				case GLFW_REPEAT:
 				{
 					KeyPressedEvent event(key, 1);
-					data.EventCallback(event);
+					win.m_Data.EventCallback(event);
 					break;
 				}
 				}
@@ -115,28 +117,28 @@ namespace VoxelEngine
 		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, const int button,
 															 const int action, const int mods)
 			{
-				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+				WindowsWindow& win = *(WindowsWindow*)glfwGetWindowUserPointer(window);
 
 				switch (action)
 				{
 				case GLFW_PRESS:
 				{
 					MouseButtonPressedEvent event(button);
-					data.EventCallback(event);
+					win.m_Data.EventCallback(event);
 					break;
 				}
 
 				case GLFW_RELEASE:
 				{
 					MouseButtonReleasedEvent event(button);
-					data.EventCallback(event);
+					win.m_Data.EventCallback(event);
 					break;
 				}
 
 				case GLFW_REPEAT:
 				{
 					MouseButtonPressedEvent event(button);
-					data.EventCallback(event);
+					win.m_Data.EventCallback(event);
 					break;
 				}
 				}
@@ -145,19 +147,19 @@ namespace VoxelEngine
 		glfwSetScrollCallback(m_Window, [](GLFWwindow* window, const double xOffset,
 													const double yOffset)
 			{
-				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+				WindowsWindow& win = *(WindowsWindow*)glfwGetWindowUserPointer(window);
 
 				MouseScrolledEvent event((float)xOffset, (float)yOffset);
-				data.EventCallback(event);
+				win.m_Data.EventCallback(event);
 			});
 
 		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, const double xPos,
 														 const double yPos)
 			{
-				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+				WindowsWindow& win = *(WindowsWindow*)glfwGetWindowUserPointer(window);
 
 				MouseMovedEvent event((float)xPos, (float)yPos);
-				data.EventCallback(event);
+				win.m_Data.EventCallback(event);
 			});
   }
 
@@ -189,7 +191,7 @@ namespace VoxelEngine
 
   void WindowsWindow::SetVSync(const bool enabled)
   {
-    m_Context->SetVSync(enabled);
+		m_Context->SetVSync(enabled);
 		m_Data.VSync = enabled;
   }
 

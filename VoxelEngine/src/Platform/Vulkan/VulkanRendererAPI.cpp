@@ -6,7 +6,6 @@ namespace VoxelEngine
 {
 	void VulkanRendererAPI::Init()
 	{
-
 		SetClearColor({ 0.0f, 0.0f, 0.0f, 0.0f });
 	}
 

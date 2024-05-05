@@ -20,6 +20,8 @@ namespace VoxelEngine
 
 		virtual void SetVSync(const bool enabled) override;
 
+		virtual void SetResized(const bool resized) override;
+
 	private:
 		GLFWwindow* m_WindowHandle;
 	};

@@ -33,6 +33,8 @@ namespace VoxelEngine
 
 		virtual void SetVSync(const bool enabled) override;
 
+		virtual void SetResized(const bool resized) override { m_Resized = resized; }
+
 		static inline vk::Device& GetDevice() { return m_Device; }
 
 	private:
@@ -65,6 +67,8 @@ namespace VoxelEngine
 			VK_KHR_BUFFER_DEVICE_ADDRESS_EXTENSION_NAME,
 			VK_KHR_PUSH_DESCRIPTOR_EXTENSION_NAME
 		};
+
+		bool m_Resized = false;
 
 		VmaAllocator m_Allocator;
 

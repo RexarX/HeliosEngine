@@ -35,12 +35,11 @@ An attempt to create a game engine
 
 
 ### Dependencies
-* vulkan-headers
 * VulkanSDK with VMA
 
 
 
-### Installation
+### How to build
 
 1. Install dependencies
 

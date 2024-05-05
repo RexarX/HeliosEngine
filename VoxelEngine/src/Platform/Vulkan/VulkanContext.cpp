@@ -135,7 +135,9 @@ namespace VoxelEngine
     auto result = m_Device.acquireNextImageKHR(m_SwapChain, 1000000000, m_SwapChainSemaphore, nullptr,
                                                 &swapchainImageIndex);
 
-    if (result == vk::Result::eErrorOutOfDateKHR || result == vk::Result::eSuboptimalKHR) {
+    if (result == vk::Result::eErrorOutOfDateKHR || result == vk::Result::eSuboptimalKHR ||
+        m_Resized) {
+      m_Resized = false;
       RecreateSwapChain();
       return;
     }
@@ -164,8 +166,6 @@ namespace VoxelEngine
     for (auto& commandBuffer : m_CommandBuffers) {
       commandBuffer.clearColorImage(m_SwapChainImages[swapchainImageIndex], vk::ImageLayout::eGeneral,
                                     clearValue, clearRange);
-    }
-    for (auto& commandBuffer : m_CommandBuffers) {
       commandBuffer.end();
     }
 
@@ -203,7 +203,9 @@ namespace VoxelEngine
     presentInfo.waitSemaphoreCount = 1;
     presentInfo.pImageIndices = &swapchainImageIndex;
 
-    VE_CORE_ASSERT(m_GraphicsQueue.presentKHR(presentInfo) == vk::Result::eSuccess, "Failed to set presentKHR in GraphicsQueue!");
+    auto presentResult = m_PresentQueue.presentKHR(presentInfo);
+
+    VE_CORE_ASSERT(presentResult == vk::Result::eSuccess, "Failed to set presentKHR in GraphicsQueue!");
   }
 
   void VulkanContext::SwapBuffers()
