@@ -195,7 +195,7 @@ namespace VoxelEngine
 
     vmaDestroyAllocator(m_Allocator);
 
-    m_Device.destroySwapchainKHR();
+    m_Device.destroySwapchainKHR(m_SwapChain);
 
     m_Instance.destroySurfaceKHR(m_Surface);
 
@@ -210,13 +210,17 @@ namespace VoxelEngine
   {
     m_Device.waitForFences(1, &m_RenderFence, true, 1000000000);
 
+    if (m_Resized) {
+      m_Resized = false;
+      RecreateSwapChain();
+      return;
+    }
+
     uint32_t swapchainImageIndex;
     auto result = m_Device.acquireNextImageKHR(m_SwapChain, 1000000000, m_SwapChainSemaphore, nullptr,
                                                &swapchainImageIndex);
 
-    if (result == vk::Result::eErrorOutOfDateKHR || result == vk::Result::eSuboptimalKHR ||
-        m_Resized) {
-      m_Resized = false;
+    if (result == vk::Result::eErrorOutOfDateKHR || result == vk::Result::eSuboptimalKHR) {
       RecreateSwapChain();
       return;
     }
@@ -502,6 +506,8 @@ namespace VoxelEngine
       vk::ImageUsageFlagBits::eColorAttachment
     );
 
+    createInfo.oldSwapchain = m_SwapChain;
+
     QueueFamilyIndices indices = FindQueueFamilies();
     uint32_t queueFamilyIndices[] = { indices.graphicsFamily.value(), indices.presentFamily.value() };
 
@@ -517,7 +523,7 @@ namespace VoxelEngine
     createInfo.compositeAlpha = vk::CompositeAlphaFlagBitsKHR::eOpaque;
     createInfo.presentMode = presentMode;
     createInfo.clipped = VK_TRUE;
-    createInfo.oldSwapchain = vk::SwapchainKHR(m_SwapChain);
+    createInfo.oldSwapchain = m_SwapChain;
     
     m_SwapChain = m_Device.createSwapchainKHR(createInfo);
     
@@ -689,22 +695,35 @@ namespace VoxelEngine
   void VulkanContext::RecreateSwapChain()
   {
     m_Device.waitIdle();
-
-    m_Device.freeCommandBuffers(m_CommandPool, m_CommandBuffers);
-
+    
     for (auto& imageView : m_SwapChainImageViews) {
       m_Device.destroyImageView(imageView);
     }
 
-    vmaDestroyImage(m_Allocator, m_DrawImage.image, m_DrawImage.allocation);
-
     m_Device.destroyImageView(m_DrawImage.imageView);
 
-    m_Device.destroySwapchainKHR();
+    vmaDestroyImage(m_Allocator, m_DrawImage.image, m_DrawImage.allocation);
+
+    m_Device.destroySwapchainKHR(m_SwapChain);
 
     CreateSwapChain();
     CreateImageViews();
-    CreateCommands();
+
+    vk::DescriptorImageInfo imgInfo;
+    imgInfo.imageLayout = vk::ImageLayout::eGeneral;
+    imgInfo.imageView = m_DrawImage.imageView;
+
+    vk::WriteDescriptorSet drawImageWrite;
+    drawImageWrite.sType = vk::StructureType::eWriteDescriptorSet;
+    drawImageWrite.pNext = nullptr;
+
+    drawImageWrite.dstBinding = 0;
+    drawImageWrite.dstSet = m_DrawImageDescriptors;
+    drawImageWrite.descriptorCount = 1;
+    drawImageWrite.descriptorType = vk::DescriptorType::eStorageImage;
+    drawImageWrite.pImageInfo = &imgInfo;
+
+    m_Device.updateDescriptorSets(drawImageWrite, nullptr);
   }
 
   vk::SurfaceFormatKHR VulkanContext::ChooseSwapSurfaceFormat(const std::vector<vk::SurfaceFormatKHR>& availableFormats) const

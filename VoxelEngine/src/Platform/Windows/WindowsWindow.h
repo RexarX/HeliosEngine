@@ -53,10 +53,10 @@ namespace VoxelEngine
 		{
 			std::string Title;
 			uint32_t Width, Height;
-			double Framerate, LastFramerate;
-			bool VSync;
-			bool Minimized;
-			bool Focus;
+			double Framerate = 0.0, LastFramerate = 0.0;
+			bool VSync = true;
+			bool Minimized = false;
+			bool Focus = true;
 
 			EventCallbackFn EventCallback;
 		};

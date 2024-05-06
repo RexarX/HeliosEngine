@@ -13,7 +13,7 @@ public:
 
 	void OnAttach() override
 	{
-		VoxelEngine::Application::Get().GetWindow().SetVSync(false);
+		//VoxelEngine::Application::Get().GetWindow().SetVSync(false);
 		//VoxelEngine::Application::Get().GetWindow().SetFramerate(60.0);
 
 		VoxelEngine::Renderer::SetAnisoLevel(16.0f);
@@ -62,6 +62,18 @@ public:
 				}
 				else {
 					VoxelEngine::Application::Get().GetWindow().SetFocused(true);
+				}
+			}
+		}
+
+		if (event.GetEventType() == VoxelEngine::EventType::KeyPressed) {
+			VoxelEngine::KeyPressedEvent& e = (VoxelEngine::KeyPressedEvent&)event;
+			if (e.GetKeyCode() == VoxelEngine::Key::F1) {
+				if (VoxelEngine::Application::Get().GetWindow().IsVSync()) {
+					VoxelEngine::Application::Get().GetWindow().SetVSync(false);
+				}
+				else {
+					VoxelEngine::Application::Get().GetWindow().SetVSync(true);
 				}
 			}
 		}
