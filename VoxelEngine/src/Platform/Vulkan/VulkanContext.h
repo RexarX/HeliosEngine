@@ -7,7 +7,7 @@
 #include <vulkan/vulkan.hpp>
 
 #define VMA_VULKAN_VERSION 1003000
-#include "vma/vk_mem_alloc.h"
+#include <vma/vk_mem_alloc.h>
 
 #ifdef VE_DEBUG
 	const bool enableValidationLayers = true;
@@ -112,6 +112,8 @@ namespace VoxelEngine
 
 		bool m_Resized = false;
 
+		bool m_Vsync = true;
+
 		VmaAllocator m_Allocator;
 
 		static vk::Instance m_Instance;
@@ -170,16 +172,16 @@ namespace VoxelEngine
 		void transition_image(const vk::CommandBuffer cmd, const vk::Image image,
 													const vk::ImageLayout currentLayout, const vk::ImageLayout newLayout);
 
-		vk::SemaphoreSubmitInfo semaphore_submit_info(const vk::PipelineStageFlags2 stageMask,
-																									const vk::Semaphore semaphore) const;
+		vk::SemaphoreSubmitInfo& semaphore_submit_info(const vk::PipelineStageFlags2 stageMask,
+																									 const vk::Semaphore semaphore) const;
 
-		vk::ImageCreateInfo image_create_info(const vk::ImageUsageFlags usageFlags,
-																					const vk::Extent3D extent) const;
+		vk::ImageCreateInfo& image_create_info(const vk::ImageUsageFlags usageFlags,
+																					 const vk::Extent3D extent) const;
 		vk::ImageViewCreateInfo imageview_create_info(const vk::ImageAspectFlags aspectFlags) const;
 		void copy_image_to_image(const vk::CommandBuffer cmd, const vk::Image source, const vk::Image destination,
 														 const vk::Extent2D srcSize, const vk::Extent2D dstSize) const;
 
-		bool IsDeviceSuitable();
+		bool IsDeviceSuitable() const;
 		QueueFamilyIndices FindQueueFamilies() const;
 		std::vector<const char*> GetRequiredExtensions() const;
 		bool CheckDeviceExtensionSupport() const;
@@ -189,10 +191,10 @@ namespace VoxelEngine
 																					const VkAllocationCallbacks* pAllocator);
 		void DestroyDebugUtilsMessengerEXT(const VkAllocationCallbacks* pAllocator) const;
 
-		vk::SurfaceFormatKHR ChooseSwapSurfaceFormat(const std::vector<vk::SurfaceFormatKHR> availableFormats) const;
-		vk::PresentModeKHR ChooseSwapPresentMode(const std::vector<vk::PresentModeKHR> availablePresentModes) const;
-		vk::Extent2D ChooseSwapExtent(const vk::SurfaceCapabilitiesKHR capabilities) const;
-		SwapChainSupportDetails QuerySwapChainSupport();
+		vk::SurfaceFormatKHR ChooseSwapSurfaceFormat(const std::vector<vk::SurfaceFormatKHR>& availableFormats) const;
+		vk::PresentModeKHR ChooseSwapPresentMode(const std::vector<vk::PresentModeKHR>& availablePresentModes) const;
+		vk::Extent2D ChooseSwapExtent(const vk::SurfaceCapabilitiesKHR& capabilities) const;
+		SwapChainSupportDetails QuerySwapChainSupport() const;
 
 	private:
 		GLFWwindow* m_WindowHandle;

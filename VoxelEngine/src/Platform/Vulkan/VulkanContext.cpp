@@ -18,7 +18,7 @@ namespace VoxelEngine
                                                       void* pUserData)
   {
     VE_CORE_WARN(pCallbackData->pMessage);
-
+    
     return VK_FALSE;
   }
 
@@ -63,8 +63,8 @@ namespace VoxelEngine
     cmd.pipelineBarrier2(depInfo);
   }
 
-  vk::SemaphoreSubmitInfo VulkanContext::semaphore_submit_info(const vk::PipelineStageFlags2 stageMask,
-                                                               const vk::Semaphore semaphore) const
+  vk::SemaphoreSubmitInfo& VulkanContext::semaphore_submit_info(const vk::PipelineStageFlags2 stageMask,
+                                                                const vk::Semaphore semaphore) const
   {
     vk::SemaphoreSubmitInfo submitInfo;
     submitInfo.sType = vk::StructureType::eSemaphoreSubmitInfo;
@@ -77,8 +77,8 @@ namespace VoxelEngine
     return submitInfo;
   }
 
-  vk::ImageCreateInfo VulkanContext::image_create_info(const vk::ImageUsageFlags usageFlags,
-                                                       const vk::Extent3D extent) const
+  vk::ImageCreateInfo& VulkanContext::image_create_info(const vk::ImageUsageFlags usageFlags,
+                                                        const vk::Extent3D extent) const
   {
     vk::ImageCreateInfo info;
     info.sType = vk::StructureType::eImageCreateInfo;
@@ -168,10 +168,10 @@ namespace VoxelEngine
     CreateAllocator();
     CreateSwapChain();
     CreateImageViews();
-    CreatePipeline();
-    CreateDescriptors();
     CreateCommands();
     CreateSyncObjects();
+    CreateDescriptors();
+    CreatePipeline();
 	}
 
   void VulkanContext::Shutdown()
@@ -197,11 +197,11 @@ namespace VoxelEngine
 
     m_Device.destroySwapchainKHR();
 
-    m_Instance.destroySurfaceKHR();
-
-    if (enableValidationLayers) { DestroyDebugUtilsMessengerEXT(nullptr); }
+    m_Instance.destroySurfaceKHR(m_Surface);
 
     m_Device.destroy();
+
+    if (enableValidationLayers) { DestroyDebugUtilsMessengerEXT(nullptr); }
 
     m_Instance.destroy();
   }
@@ -212,7 +212,7 @@ namespace VoxelEngine
 
     uint32_t swapchainImageIndex;
     auto result = m_Device.acquireNextImageKHR(m_SwapChain, 1000000000, m_SwapChainSemaphore, nullptr,
-                                                &swapchainImageIndex);
+                                               &swapchainImageIndex);
 
     if (result == vk::Result::eErrorOutOfDateKHR || result == vk::Result::eSuboptimalKHR ||
         m_Resized) {
@@ -237,20 +237,16 @@ namespace VoxelEngine
     }
 
     transition_image(m_CommandBuffers[0], m_SwapChainImages[swapchainImageIndex], vk::ImageLayout::eUndefined,
-                                                                                  vk::ImageLayout::eGeneral);
+                     vk::ImageLayout::eGeneral);
 
-    float flash = std::sin(cnt);
-    vk::ClearColorValue clearValue = { 0.0f, 0.0f, flash, 1.0f };
+    vk::ClearColorValue clearValue = { 0.0f, 0.0f, 0.0f, 0.0f };
 
     vk::ImageSubresourceRange clearRange = image_subresource_range(vk::ImageAspectFlagBits::eColor);
 
-    for (auto& commandBuffer : m_CommandBuffers) {
-      commandBuffer.clearColorImage(m_DrawImage.image, vk::ImageLayout::eGeneral, clearValue, clearRange);
-      commandBuffer.end();
-    }
+    m_CommandBuffers[0].clearColorImage(m_DrawImage.image, vk::ImageLayout::eGeneral, clearValue, clearRange);
 
     transition_image(m_CommandBuffers[0], m_DrawImage.image, vk::ImageLayout::eGeneral,
-                                                             vk::ImageLayout::eTransferSrcOptimal);
+                     vk::ImageLayout::eTransferSrcOptimal);
 
     transition_image(m_CommandBuffers[0], m_SwapChainImages[swapchainImageIndex], vk::ImageLayout::eUndefined,
                      vk::ImageLayout::eTransferDstOptimal);
@@ -266,6 +262,7 @@ namespace VoxelEngine
     transition_image(m_CommandBuffers[0], m_SwapChainImages[swapchainImageIndex],
                      vk::ImageLayout::eColorAttachmentOptimal, vk::ImageLayout::ePresentSrcKHR);
 
+    m_CommandBuffers[0].end();
 
     vk::CommandBufferSubmitInfo commandBufferSubmitInfo;
     commandBufferSubmitInfo.sType = vk::StructureType::eCommandBufferSubmitInfo;
@@ -301,9 +298,9 @@ namespace VoxelEngine
     presentInfo.waitSemaphoreCount = 1;
     presentInfo.pImageIndices = &swapchainImageIndex;
 
-    auto presentResult = m_PresentQueue.presentKHR(presentInfo);
+    result = m_PresentQueue.presentKHR(presentInfo);
 
-    VE_CORE_ASSERT(presentResult == vk::Result::eSuccess, "Failed to set presentKHR in GraphicsQueue!");
+    VE_CORE_ASSERT(result == vk::Result::eSuccess, "Failed to set presentKHR in GraphicsQueue!");
     ++cnt;
   }
 
@@ -324,6 +321,8 @@ namespace VoxelEngine
 
   void VulkanContext::SetVSync(const bool enabled)
   {
+    m_Vsync = enabled;
+    RecreateSwapChain();
   }
 
   void VulkanContext::CreateInstance()
@@ -371,7 +370,7 @@ namespace VoxelEngine
     );
 
     auto result = CreateDebugUtilsMessengerEXT(reinterpret_cast<const VkDebugUtilsMessengerCreateInfoEXT*>(&createInfo),
-                                            nullptr);
+                                               nullptr);
     VE_CORE_ASSERT(result == VK_SUCCESS, "Failed to set up debug callback!");
   } 
 
@@ -590,7 +589,6 @@ namespace VoxelEngine
 
   void VulkanContext::CreatePipeline()
   {
-
   }
 
   void VulkanContext::CreateDescriptors()
@@ -690,7 +688,6 @@ namespace VoxelEngine
 
   void VulkanContext::RecreateSwapChain()
   {
-    VE_TRACE("Recreate swap chain!");
     m_Device.waitIdle();
 
     m_Device.freeCommandBuffers(m_CommandPool, m_CommandBuffers);
@@ -710,7 +707,7 @@ namespace VoxelEngine
     CreateCommands();
   }
 
-  vk::SurfaceFormatKHR VulkanContext::ChooseSwapSurfaceFormat(const std::vector<vk::SurfaceFormatKHR> availableFormats) const
+  vk::SurfaceFormatKHR VulkanContext::ChooseSwapSurfaceFormat(const std::vector<vk::SurfaceFormatKHR>& availableFormats) const
   {
     if (availableFormats.size() == 1 && availableFormats[0].format == vk::Format::eUndefined) {
       return { vk::Format::eB8G8R8A8Unorm, vk::ColorSpaceKHR::eSrgbNonlinear };
@@ -726,9 +723,11 @@ namespace VoxelEngine
     return availableFormats[0];
   }
 
-  vk::PresentModeKHR VulkanContext::ChooseSwapPresentMode(const std::vector<vk::PresentModeKHR> availablePresentModes) const
+  vk::PresentModeKHR VulkanContext::ChooseSwapPresentMode(const std::vector<vk::PresentModeKHR>& availablePresentModes) const
   {
     vk::PresentModeKHR bestMode = vk::PresentModeKHR::eFifo;
+
+    if (m_Vsync) { return bestMode; }
 
     for (const auto& availablePresentMode : availablePresentModes) {
       if (availablePresentMode == vk::PresentModeKHR::eMailbox) { return availablePresentMode; }
@@ -738,7 +737,7 @@ namespace VoxelEngine
     return bestMode;
   }
 
-  vk::Extent2D VulkanContext::ChooseSwapExtent(const vk::SurfaceCapabilitiesKHR capabilities) const
+  vk::Extent2D VulkanContext::ChooseSwapExtent(const vk::SurfaceCapabilitiesKHR& capabilities) const
   {
     int width, height;
     glfwGetWindowSize(m_WindowHandle, &width, &height);
@@ -750,7 +749,7 @@ namespace VoxelEngine
     return actualExtent;
   }
 
-  VulkanContext::SwapChainSupportDetails VulkanContext::QuerySwapChainSupport()
+  VulkanContext::SwapChainSupportDetails VulkanContext::QuerySwapChainSupport() const
   {
     SwapChainSupportDetails details;
     details.capabilities = m_PhysicalDevice.getSurfaceCapabilitiesKHR(m_Surface);
@@ -760,7 +759,7 @@ namespace VoxelEngine
     return details;
   }
 
-  bool VulkanContext::IsDeviceSuitable()
+  bool VulkanContext::IsDeviceSuitable() const
   {
     QueueFamilyIndices indices = FindQueueFamilies();
 

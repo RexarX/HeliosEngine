@@ -13,19 +13,19 @@ public:
 
 	void OnAttach() override
 	{
-		//VoxelEngine::Application::Get().GetWindow().SetVSync(false);
+		VoxelEngine::Application::Get().GetWindow().SetVSync(false);
 		//VoxelEngine::Application::Get().GetWindow().SetFramerate(60.0);
 
 		VoxelEngine::Renderer::SetAnisoLevel(16.0f);
 		VoxelEngine::Renderer::SetGenerateMipmaps(true);
 		
 		/*m_Skybox = VoxelEngine::Texture::Create(VOXELCRAFT_DIR + "Assets/Textures/Skybox/right.png",
-																						VOXELCRAFT_DIR + "Assets/Textures/Skybox/left.png",
-																						VOXELCRAFT_DIR + "Assets/Textures/Skybox/top.png",
-																						VOXELCRAFT_DIR + "Assets/Textures/Skybox/bottom.png",
-																						VOXELCRAFT_DIR + "Assets/Textures/Skybox/front.png",								
-																						VOXELCRAFT_DIR + "Assets/Textures/Skybox/back.png"
-																						);
+																							VOXELCRAFT_DIR + "Assets/Textures/Skybox/left.png",
+																							VOXELCRAFT_DIR + "Assets/Textures/Skybox/top.png",
+																							VOXELCRAFT_DIR + "Assets/Textures/Skybox/bottom.png",
+																							VOXELCRAFT_DIR + "Assets/Textures/Skybox/front.png",								
+																							VOXELCRAFT_DIR + "Assets/Textures/Skybox/back.png"
+																						 );
 
 		m_CheckerboardTexture = VoxelEngine::Texture::Create(VOXELCRAFT_DIR + "Assets/Textures/Checkerboard.png");
 		m_DirtTexture = VoxelEngine::Texture::Create(VOXELCRAFT_DIR + "Assets/Textures/dirt(14vert).png");*/
