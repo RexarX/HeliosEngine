@@ -17,7 +17,26 @@ namespace VoxelEngine
                                                       const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData,
                                                       void* pUserData)
   {
-    VE_CORE_WARN(pCallbackData->pMessage);
+    if (messageSeverity & VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT) {
+      VE_CORE_ERROR("{0} Validation Layer: {1}: {2}", pCallbackData->messageIdNumber,
+                                                      pCallbackData->pMessageIdName,
+                                                      pCallbackData->pMessage);
+    }
+    else if (messageSeverity & VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT) {
+      VE_CORE_WARN("{0} Validation Layer: {1}: {2}", pCallbackData->messageIdNumber,
+                                                     pCallbackData->pMessageIdName,
+                                                     pCallbackData->pMessage);
+    }
+    else if (messageType & VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT) {
+      VE_CORE_WARN("{0} Validation Layer: Performance warning: {1}: {2}", pCallbackData->messageIdNumber,
+                                                                          pCallbackData->pMessageIdName,
+                                                                          pCallbackData->pMessage);
+    }
+    else {
+      VE_CORE_INFO("{0} Validation Layer: {1}: {2}", pCallbackData->messageIdNumber,
+                                                     pCallbackData->pMessageIdName,
+                                                     pCallbackData->pMessage);
+    }
     
     return VK_FALSE;
   }
@@ -47,7 +66,7 @@ namespace VoxelEngine
     imageBarrier.oldLayout = currentLayout;
     imageBarrier.newLayout = newLayout;
 
-    vk::ImageAspectFlags aspectMask = (vk::ImageLayout::eGeneral == vk::ImageLayout::eDepthStencilAttachmentOptimal) ?
+    vk::ImageAspectFlags aspectMask = (newLayout == vk::ImageLayout::eDepthAttachmentOptimal) ?
                                        vk::ImageAspectFlagBits::eDepth :
                                        vk::ImageAspectFlagBits::eColor;
 
@@ -243,8 +262,7 @@ namespace VoxelEngine
       commandBuffer.begin(bufferBeginInfo);
     }
 
-    transition_image(m_CommandBuffers[0], m_SwapChainImages[swapchainImageIndex], vk::ImageLayout::eUndefined,
-                     vk::ImageLayout::eGeneral);
+    transition_image(m_CommandBuffers[0], m_DrawImage.image, vk::ImageLayout::eUndefined, vk::ImageLayout::eGeneral);
 
     vk::ClearColorValue clearValue = { 0.0f, 0.0f, 0.0f, 0.0f };
 
@@ -506,7 +524,7 @@ namespace VoxelEngine
       surfaceFormat.colorSpace,
       extent,
       1,
-      vk::ImageUsageFlagBits::eColorAttachment
+      vk::ImageUsageFlagBits::eColorAttachment //vk::ImageUsageFlagBits::eTransferDst
     );
 
     QueueFamilyIndices indices = FindQueueFamilies();
