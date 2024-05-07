@@ -149,17 +149,17 @@ if(MSVC)
     target_compile_options(${PROJECT_NAME} PRIVATE
         $<$<CONFIG:Debug>:
             /Od;
-            /ZI
+            /Zi
         >
         $<$<CONFIG:Release>:
             /O2;
             /Oi;
-            /Gy;
+            /Gy
         >
         $<$<CONFIG:Dist>:
             /O2;
             /Oi;
-            /Gy;
+            /Gy
         >
         /W3;
         ${DEFAULT_CXX_EXCEPTION_HANDLING}

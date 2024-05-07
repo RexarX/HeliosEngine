@@ -178,6 +178,10 @@ namespace VoxelEngine
   {
     m_Device.waitIdle();
 
+    m_Device.destroyDescriptorSetLayout(m_DrawImageDescriptorLayout);
+
+    m_DescriptorAllocator.DestroyPool();
+    
     m_Device.destroyFence(m_RenderFence);
 
     m_Device.destroySemaphore(m_SwapChainSemaphore);
@@ -213,7 +217,6 @@ namespace VoxelEngine
     if (m_Resized) {
       m_Resized = false;
       RecreateSwapChain();
-      return;
     }
 
     uint32_t swapchainImageIndex;
@@ -506,8 +509,6 @@ namespace VoxelEngine
       vk::ImageUsageFlagBits::eColorAttachment
     );
 
-    createInfo.oldSwapchain = m_SwapChain;
-
     QueueFamilyIndices indices = FindQueueFamilies();
     uint32_t queueFamilyIndices[] = { indices.graphicsFamily.value(), indices.presentFamily.value() };
 
@@ -523,10 +524,9 @@ namespace VoxelEngine
     createInfo.compositeAlpha = vk::CompositeAlphaFlagBitsKHR::eOpaque;
     createInfo.presentMode = presentMode;
     createInfo.clipped = VK_TRUE;
-    createInfo.oldSwapchain = m_SwapChain;
-    
+
     m_SwapChain = m_Device.createSwapchainKHR(createInfo);
-    
+
     VE_CORE_ASSERT(m_SwapChain, "Failed to create swap chain!");
 
     m_SwapChainImages = m_Device.getSwapchainImagesKHR(m_SwapChain);
@@ -611,7 +611,7 @@ namespace VoxelEngine
       builder.AddBinding(0, vk::DescriptorType::eStorageImage);
       m_DrawImageDescriptorLayout = builder.Build(vk::ShaderStageFlagBits::eCompute, vk::DescriptorSetLayoutCreateFlagBits(0));
     }
-
+    
     m_DrawImageDescriptors = m_DescriptorAllocator.Allocate(m_DrawImageDescriptorLayout);
 
     vk::DescriptorImageInfo imgInfo;
@@ -700,12 +700,12 @@ namespace VoxelEngine
       m_Device.destroyImageView(imageView);
     }
 
-    m_Device.destroyImageView(m_DrawImage.imageView);
-
     vmaDestroyImage(m_Allocator, m_DrawImage.image, m_DrawImage.allocation);
 
-    m_Device.destroySwapchainKHR(m_SwapChain);
-
+    m_Device.destroyImageView(m_DrawImage.imageView);
+    
+    m_Device.destroySwapchainKHR(m_SwapChain);  
+    
     CreateSwapChain();
     CreateImageViews();
 
