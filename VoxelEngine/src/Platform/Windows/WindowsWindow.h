@@ -56,7 +56,7 @@ namespace VoxelEngine
 			double Framerate = 0.0, LastFramerate = 0.0;
 			bool VSync = true;
 			bool Minimized = false;
-			bool Focus = true;
+			bool Focus = false;
 
 			EventCallbackFn EventCallback;
 		};

@@ -58,7 +58,6 @@ namespace VoxelEngine
   {
     vk::ImageMemoryBarrier2 imageBarrier;
     imageBarrier.sType = vk::StructureType::eImageMemoryBarrier2;
-    imageBarrier.pNext = nullptr;
     imageBarrier.srcStageMask = vk::PipelineStageFlagBits2::eAllCommands;
     imageBarrier.srcAccessMask = vk::AccessFlagBits2::eMemoryWrite;
     imageBarrier.dstStageMask = vk::PipelineStageFlagBits2::eAllCommands;
@@ -75,7 +74,6 @@ namespace VoxelEngine
 
     vk::DependencyInfo depInfo;
     depInfo.sType = vk::StructureType::eDependencyInfo;
-    depInfo.pNext = nullptr;
     depInfo.imageMemoryBarrierCount = 1;
     depInfo.pImageMemoryBarriers = &imageBarrier;
 
@@ -87,7 +85,6 @@ namespace VoxelEngine
   {
     vk::SemaphoreSubmitInfo submitInfo;
     submitInfo.sType = vk::StructureType::eSemaphoreSubmitInfo;
-    submitInfo.pNext = nullptr;
     submitInfo.semaphore = semaphore;
     submitInfo.stageMask = stageMask;
     submitInfo.deviceIndex = 0;
@@ -101,7 +98,6 @@ namespace VoxelEngine
   {
     vk::ImageCreateInfo info;
     info.sType = vk::StructureType::eImageCreateInfo;
-    info.pNext = nullptr;
     info.imageType = vk::ImageType::e2D;
     info.format = m_DrawImage.imageFormat;
     info.extent = extent;
@@ -118,7 +114,6 @@ namespace VoxelEngine
   {
     vk::ImageViewCreateInfo info;
     info.sType = vk::StructureType::eImageViewCreateInfo;
-    info.pNext = nullptr;
     info.viewType = vk::ImageViewType::e2D;
     info.image = m_DrawImage.image;
     info.format = m_DrawImage.imageFormat;
@@ -137,7 +132,6 @@ namespace VoxelEngine
   {
     vk::ImageBlit2 blitRegion;
     blitRegion.sType = vk::StructureType::eImageBlit2KHR;;
-    blitRegion.pNext = nullptr;
 
     blitRegion.srcOffsets[1].x = srcSize.width;
     blitRegion.srcOffsets[1].y = srcSize.height;
@@ -159,7 +153,6 @@ namespace VoxelEngine
 
     vk::BlitImageInfo2 blitInfo;
     blitInfo.sType = vk::StructureType::eBlitImageInfo2;
-    blitInfo.pNext = nullptr;
     blitInfo.dstImage = destination;
     blitInfo.dstImageLayout = vk::ImageLayout::eTransferDstOptimal;
     blitInfo.srcImage = source;
@@ -253,7 +246,6 @@ namespace VoxelEngine
 
     vk::CommandBufferBeginInfo bufferBeginInfo;
     bufferBeginInfo.sType = vk::StructureType::eCommandBufferBeginInfo;
-    bufferBeginInfo.pNext = nullptr;
     bufferBeginInfo.pInheritanceInfo = nullptr;
     bufferBeginInfo.flags = vk::CommandBufferUsageFlagBits::eOneTimeSubmit;
 
@@ -263,7 +255,7 @@ namespace VoxelEngine
     }
 
     transition_image(m_CommandBuffers[0], m_DrawImage.image, vk::ImageLayout::eUndefined, vk::ImageLayout::eGeneral);
-
+    
     vk::ClearColorValue clearValue = { 0.0f, 0.0f, 0.0f, 0.0f };
 
     vk::ImageSubresourceRange clearRange = image_subresource_range(vk::ImageAspectFlagBits::eColor);
@@ -281,7 +273,7 @@ namespace VoxelEngine
 
     transition_image(m_CommandBuffers[0], m_SwapChainImages[swapchainImageIndex],
                      vk::ImageLayout::eTransferDstOptimal, vk::ImageLayout::eColorAttachmentOptimal);
-
+    
     //draw imgui
 
     transition_image(m_CommandBuffers[0], m_SwapChainImages[swapchainImageIndex],
@@ -291,7 +283,6 @@ namespace VoxelEngine
 
     vk::CommandBufferSubmitInfo commandBufferSubmitInfo;
     commandBufferSubmitInfo.sType = vk::StructureType::eCommandBufferSubmitInfo;
-    commandBufferSubmitInfo.pNext = nullptr;
     commandBufferSubmitInfo.commandBuffer = m_CommandBuffers[0];
     commandBufferSubmitInfo.deviceMask = 0;
 
@@ -302,7 +293,6 @@ namespace VoxelEngine
 
     vk::SubmitInfo2 submitInfo;
     submitInfo.sType = vk::StructureType::eSubmitInfo2;
-    submitInfo.pNext = nullptr;
     submitInfo.waitSemaphoreInfoCount = &waitInfo == nullptr ? 0 : 1;
     submitInfo.pWaitSemaphoreInfos = &waitInfo;
     submitInfo.signalSemaphoreInfoCount = &signalInfo == nullptr ? 0 : 1;
@@ -316,7 +306,6 @@ namespace VoxelEngine
 
     vk::PresentInfoKHR presentInfo;
     presentInfo.sType = vk::StructureType::ePresentInfoKHR;
-    presentInfo.pNext = nullptr;
     presentInfo.pSwapchains = &m_SwapChain;
     presentInfo.swapchainCount = 1;
     presentInfo.pWaitSemaphores = &m_RenderSemaphore;
@@ -355,22 +344,22 @@ namespace VoxelEngine
     if (enableValidationLayers && !CheckValidationLayerSupport()) {
       VE_CORE_ASSERT(false, "Validation layers requested, but not available!");
     }
-    auto appInfo = vk::ApplicationInfo(
-      "Application",
-      VK_MAKE_VERSION(1, 3, 0),
-      "VoxelEngine",
-      VK_MAKE_VERSION(1, 3, 0),
-      VK_API_VERSION_1_3
-    );
+
+    vk::ApplicationInfo appInfo;
+
+    appInfo.pApplicationName = "Application";
+    appInfo.pEngineName = "VoxelEngine";
+    appInfo.applicationVersion = VK_MAKE_VERSION(1, 3, 0);
+    appInfo.engineVersion = VK_MAKE_VERSION(1, 3, 0);
+    appInfo.apiVersion = VK_API_VERSION_1_3;
 
     auto extensions = GetRequiredExtensions();
 
-    auto createInfo = vk::InstanceCreateInfo(
-      vk::InstanceCreateFlags(),
-      &appInfo,
-      0, nullptr,
-      static_cast<uint32_t>(extensions.size()), extensions.data()
-    );
+    vk::InstanceCreateInfo createInfo;
+    createInfo.flags = vk::InstanceCreateFlags();
+    createInfo.pApplicationInfo = &appInfo;
+    createInfo.enabledExtensionCount = static_cast<uint32_t>(extensions.size());
+    createInfo.ppEnabledExtensionNames = extensions.data();
 
     if (enableValidationLayers) {
       createInfo.enabledLayerCount = static_cast<uint32_t>(validationLayers.size());
@@ -447,7 +436,6 @@ namespace VoxelEngine
     }
 
     vk::PhysicalDeviceProperties properties = m_PhysicalDevice.getProperties();
-
     VE_CORE_INFO("Vulkan Info:");
     VE_CORE_INFO("  GPU: {0}", properties.deviceName);
     VE_CORE_INFO("  Version: {0}", properties.driverVersion);
@@ -482,11 +470,10 @@ namespace VoxelEngine
     features12.descriptorIndexing = true;
     features12.pNext = &features;
 
-    auto createInfo = vk::DeviceCreateInfo(
-      vk::DeviceCreateFlags(),
-      static_cast<uint32_t>(queueCreateInfos.size()),
-      queueCreateInfos.data()
-    );
+    vk::DeviceCreateInfo createInfo;
+    createInfo.flags = vk::DeviceCreateFlags();
+    createInfo.queueCreateInfoCount = static_cast<uint32_t>(queueCreateInfos.size());
+    createInfo.pQueueCreateInfos = queueCreateInfos.data();
     createInfo.pEnabledFeatures = &deviceFeatures;
     createInfo.enabledExtensionCount = static_cast<uint32_t>(deviceExtensions.size());
     createInfo.ppEnabledExtensionNames = deviceExtensions.data();
@@ -512,20 +499,21 @@ namespace VoxelEngine
     vk::Extent2D extent = ChooseSwapExtent(swapChainSupport.capabilities);
 
     uint32_t imageCount = ++swapChainSupport.capabilities.minImageCount;
-    if (swapChainSupport.capabilities.maxImageCount > 0 && imageCount > swapChainSupport.capabilities.maxImageCount) {
+    if (swapChainSupport.capabilities.maxImageCount > 0 &&
+        imageCount > swapChainSupport.capabilities.maxImageCount) {
       imageCount = swapChainSupport.capabilities.maxImageCount;
     }
 
-    vk::SwapchainCreateInfoKHR createInfo(
-      vk::SwapchainCreateFlagsKHR(),
-      m_Surface,
-      imageCount,
-      surfaceFormat.format,
-      surfaceFormat.colorSpace,
-      extent,
-      1,
-      vk::ImageUsageFlagBits::eColorAttachment //vk::ImageUsageFlagBits::eTransferDst
-    );
+    vk::SwapchainCreateInfoKHR createInfo;
+    createInfo.flags = vk::SwapchainCreateFlagsKHR();
+    createInfo.surface = m_Surface;
+    createInfo.minImageCount = imageCount;
+    createInfo.imageFormat = surfaceFormat.format;
+    createInfo.imageColorSpace = surfaceFormat.colorSpace;
+    createInfo.imageExtent = extent;
+    createInfo.imageArrayLayers = 1;
+    createInfo.imageUsage = vk::ImageUsageFlagBits::eColorAttachment |
+                            vk::ImageUsageFlagBits::eTransferDst;
 
     QueueFamilyIndices indices = FindQueueFamilies();
     uint32_t queueFamilyIndices[] = { indices.graphicsFamily.value(), indices.presentFamily.value() };
@@ -638,8 +626,6 @@ namespace VoxelEngine
 
     vk::WriteDescriptorSet drawImageWrite;
     drawImageWrite.sType = vk::StructureType::eWriteDescriptorSet;
-    drawImageWrite.pNext = nullptr;
-
     drawImageWrite.dstBinding = 0;
     drawImageWrite.dstSet = m_DrawImageDescriptors;
     drawImageWrite.descriptorCount = 1;
@@ -655,7 +641,6 @@ namespace VoxelEngine
 
     vk::CommandPoolCreateInfo commandPoolInfo;
     commandPoolInfo.sType = vk::StructureType::eCommandPoolCreateInfo;
-    commandPoolInfo.pNext = nullptr;
     commandPoolInfo.flags = vk::CommandPoolCreateFlagBits::eResetCommandBuffer;
     commandPoolInfo.queueFamilyIndex = indices.graphicsFamily.value();
 
@@ -665,7 +650,6 @@ namespace VoxelEngine
 
     vk::CommandBufferAllocateInfo cmdAllocInfo;
     cmdAllocInfo.sType = vk::StructureType::eCommandBufferAllocateInfo;
-    cmdAllocInfo.pNext = nullptr;
     cmdAllocInfo.commandPool = m_CommandPool;
     cmdAllocInfo.commandBufferCount = 1;
     cmdAllocInfo.level = vk::CommandBufferLevel::ePrimary;
@@ -679,7 +663,6 @@ namespace VoxelEngine
   {
     vk::FenceCreateInfo fenceInfo;
     fenceInfo.sType = vk::StructureType::eFenceCreateInfo;
-    fenceInfo.pNext = nullptr;
     fenceInfo.flags = vk::FenceCreateFlagBits::eSignaled;
 
     m_RenderFence = m_Device.createFence(fenceInfo);
@@ -688,7 +671,6 @@ namespace VoxelEngine
 
     vk::SemaphoreCreateInfo semaphoreInfo;
     semaphoreInfo.sType = vk::StructureType::eSemaphoreCreateInfo;
-    semaphoreInfo.pNext = nullptr;
 
     m_SwapChainSemaphore = m_Device.createSemaphore(semaphoreInfo);
     
@@ -733,7 +715,6 @@ namespace VoxelEngine
 
     vk::WriteDescriptorSet drawImageWrite;
     drawImageWrite.sType = vk::StructureType::eWriteDescriptorSet;
-    drawImageWrite.pNext = nullptr;
 
     drawImageWrite.dstBinding = 0;
     drawImageWrite.dstSet = m_DrawImageDescriptors;
@@ -953,7 +934,6 @@ namespace VoxelEngine
   {
     vk::DescriptorSetAllocateInfo info;
     info.sType = vk::StructureType::eDescriptorSetAllocateInfo;
-    info.pNext = nullptr;
     info.descriptorPool = pool;
     info.descriptorSetCount = 1;
     info.pSetLayouts = &layout;

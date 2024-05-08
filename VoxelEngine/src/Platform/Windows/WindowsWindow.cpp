@@ -61,8 +61,6 @@ namespace VoxelEngine
 
 		glfwSetWindowUserPointer(m_Window, reinterpret_cast<void*>(this));
 
-		glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-
 		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height) {
 			WindowsWindow& win = *(WindowsWindow*)glfwGetWindowUserPointer(window);
 			win.m_Data.Width = width;
