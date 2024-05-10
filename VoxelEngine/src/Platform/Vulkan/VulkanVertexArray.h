@@ -4,11 +4,11 @@
 
 namespace VoxelEngine
 {
-	class OpenGLVertexArray : public VertexArray
+	class VulkanVertexArray : public VertexArray
 	{
 	public:
-		OpenGLVertexArray();
-		virtual ~OpenGLVertexArray();
+		VulkanVertexArray();
+		virtual ~VulkanVertexArray();
 
 		virtual void Bind() const override;
 		virtual void Unbind() const override;

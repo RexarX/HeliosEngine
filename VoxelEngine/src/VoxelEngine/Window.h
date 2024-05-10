@@ -41,6 +41,7 @@ namespace VoxelEngine
 		virtual void SetVSync(const bool enabled) = 0;
 		virtual void SetMinimized(const bool enabled) = 0;
 		virtual void SetFocused(const double enabled) = 0;
+		virtual void SetFullscreen(const bool enabled) = 0;
 		virtual void SetFramerate(const double framerate) = 0;
 		virtual void SetLastFramerate(const double framerate) = 0;
 
@@ -50,6 +51,7 @@ namespace VoxelEngine
 		virtual bool IsVSync() const = 0;
 		virtual bool IsMinimized() const = 0;
 		virtual bool IsFocused() const = 0;
+    virtual bool IsFullscreen() const = 0;
 
 		virtual void* GetNativeWindow() const = 0;
 

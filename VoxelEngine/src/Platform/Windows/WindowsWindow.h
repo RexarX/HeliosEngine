@@ -7,6 +7,8 @@
 #include "Events/KeyEvent.h"
 
 struct GLFWwindow;
+struct GLFWmonitor;
+struct GLFWvidmode;
 
 namespace VoxelEngine
 {
@@ -29,6 +31,7 @@ namespace VoxelEngine
 		void SetVSync(const bool enabled) override;
 		void SetMinimized(const bool enabled) override;
 		void SetFocused(const double enabled) override;
+		void SetFullscreen(const bool enabled) override;
 		void SetFramerate(const double framerate) override;
 		void SetLastFramerate(const double framerate) override;
 
@@ -38,6 +41,7 @@ namespace VoxelEngine
 		bool IsVSync() const override;
 		bool IsMinimized() const override;
 		bool IsFocused() const override;
+		bool IsFullscreen() const override;
 
 		inline virtual void* GetNativeWindow() const { return m_Window; }
 
@@ -47,16 +51,20 @@ namespace VoxelEngine
 
 	private:
 		GLFWwindow* m_Window;
+		GLFWmonitor* m_Monitor;
+		const GLFWvidmode* m_Mode;
 		std::unique_ptr<GraphicsContext> m_Context;
 
 		struct WindowData
 		{
 			std::string Title;
 			uint32_t Width, Height;
+			uint32_t posX, posY;
 			double Framerate = 0.0, LastFramerate = 0.0;
 			bool VSync = true;
 			bool Minimized = false;
 			bool Focus = false;
+			bool Fullscreen = false;
 
 			EventCallbackFn EventCallback;
 		};

@@ -47,6 +47,7 @@ namespace VoxelEngine
 		bool m_Running = true;
 
 		Timestep m_DeltaTime;
+		Timer m_Timer;
 		double m_FramerateLimit = 0.0;
 	};
 

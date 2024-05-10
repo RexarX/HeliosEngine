@@ -1,6 +1,6 @@
 #pragma once
 
-#include "VoxelEngine/Render/Shader.h"
+#include "Render/Shader.h"
 
 #include <glm/glm.hpp>
 

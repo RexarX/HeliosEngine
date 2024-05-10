@@ -54,7 +54,7 @@ namespace VoxelEngine
 	void Renderer::Init()
 	{
 		RenderCommand::Init();
-    /*
+    
     constexpr float cubeVertices[] = {
       //front
       -0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom left
@@ -268,7 +268,7 @@ namespace VoxelEngine
     s_Skybox.SkyboxVertex->Unbind();
 
     s_Skybox.SkyboxShader = Shader::Create(VOXELENGINE_DIR + "Assets/Shaders/Skybox.glsl");
-    s_Skybox.SkyboxShader->Unbind();*/
+    s_Skybox.SkyboxShader->Unbind();
 	}
 
   void Renderer::Shutdown()

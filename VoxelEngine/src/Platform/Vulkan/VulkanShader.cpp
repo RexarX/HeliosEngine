@@ -86,7 +86,7 @@ namespace VoxelEngine
 
 	void VulkanShader::Compile(std::unordered_map<vk::ShaderStageFlagBits, std::string>& shaderSources)
 	{
-		auto vertShaderModule = VulkanContext::GetDevice().createShaderModuleUnique({
+		/*auto vertShaderModule = VulkanContext::GetDevice().createShaderModuleUnique({
 								vk::ShaderModuleCreateFlags(),
 								shaderSources[vk::ShaderStageFlagBits::eVertex].size(),
 								reinterpret_cast<const uint32_t*>(shaderSources[vk::ShaderStageFlagBits::eVertex].data())
@@ -115,7 +115,7 @@ namespace VoxelEngine
 				*fragShaderModule,
 				m_Name.data()
 			}
-		};
+		};*/
 	}
 
 	void VulkanShader::Bind() const

@@ -6,8 +6,8 @@
 
 namespace VoxelEngine
 {
-	bool VulkanTexture::m_GenerateMipmaps = true;
-	float VulkanTexture::m_AnisoLevel = 16.0f;
+	bool VulkanTexture::m_GenerateMipmaps = false;
+	float VulkanTexture::m_AnisoLevel = 0.0f;
 
 	VulkanTexture::VulkanTexture(const TextureSpecification& specification)
 		: m_Specification(specification), m_Width(m_Specification.Width),

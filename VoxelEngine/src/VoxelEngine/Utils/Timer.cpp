@@ -1,22 +1,19 @@
 #include "Timer.h"
 
-#include <GLFW/glfw3.h>
-
 namespace VoxelEngine
 {
 	void Timer::Start()
 	{
-		m_StartTimeStamp = glfwGetTime();
+		m_TimeStamp = std::chrono::high_resolution_clock::now();
 	}
 
 	void Timer::Stop()
 	{
-		m_StopTimeStamp = glfwGetTime();
-		m_Elapsed = m_StopTimeStamp - m_StartTimeStamp;
+		m_Elapsed = std::chrono::high_resolution_clock::now() - m_TimeStamp;
 	}
 
 	double Timer::GetElapsedSec()
 	{
-		return m_Elapsed;
+		return std::chrono::duration_cast<std::chrono::duration<double>>(m_Elapsed).count();
 	}
 }

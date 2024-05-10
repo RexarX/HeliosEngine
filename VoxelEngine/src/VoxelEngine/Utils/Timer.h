@@ -1,5 +1,7 @@
 #pragma once
 
+#include <chrono>
+
 namespace VoxelEngine
 {
 	class Timer
@@ -10,8 +12,7 @@ namespace VoxelEngine
 		double GetElapsedSec();
 
 	private:
-		double m_StartTimeStamp;
-		double m_StopTimeStamp;
-		double m_Elapsed;
+		std::chrono::high_resolution_clock::time_point m_TimeStamp;
+		std::chrono::duration<double> m_Elapsed = std::chrono::duration<double>(0.0);
 	};
 }

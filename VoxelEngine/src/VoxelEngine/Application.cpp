@@ -71,14 +71,15 @@ namespace VoxelEngine
 
 	void Application::Run()
 	{
-		double time;
 		double LastFrameUpdate(0.0), LastFrameTime(0.0);
 
 		m_FramerateLimit = 1 / m_Window->GetFramerate();
 
+		m_Timer.Start();
+
 		while (m_Running) {
-			time = glfwGetTime();
-			m_DeltaTime = time - LastFrameUpdate;
+			m_Timer.Stop();
+			m_DeltaTime = m_Timer.GetElapsedSec() - LastFrameUpdate;
 
 			m_Window->PoolEvents();
 
@@ -90,11 +91,9 @@ namespace VoxelEngine
 				}
 
 				m_Window->OnUpdate();
-				
-				LastFrameUpdate = time;
-			}
 
-			LastFrameTime = time;
+				LastFrameUpdate = m_Timer.GetElapsedSec();
+			}
 		}
 	}
 }

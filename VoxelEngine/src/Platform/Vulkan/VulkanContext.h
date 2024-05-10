@@ -1,6 +1,6 @@
 #pragma once
 
-#include "VoxelEngine/Render/GraphicsContext.h"
+#include "Render/GraphicsContext.h"
 
 #include "vepch.h"
 

@@ -54,7 +54,10 @@ namespace VoxelEngine
 		
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(),
 																nullptr, nullptr);
-		
+
+		m_Monitor = glfwGetPrimaryMonitor();
+		m_Mode = glfwGetVideoMode(m_Monitor);
+
 		m_Context = GraphicsContext::Create(m_Window);
 		m_Context->Init();
 		m_Context->SetViewport(props.Width, props.Height);
@@ -204,6 +207,31 @@ namespace VoxelEngine
 		m_Data.Focus = enabled;
 	}
 
+	void WindowsWindow::SetFullscreen(const bool enabled)
+	{
+		if (enabled) {
+			uint32_t width, height;
+			width = m_Data.Width;
+      height = m_Data.Height;
+
+			int xpos, ypos;
+			glfwGetWindowPos(m_Window, &xpos, &ypos);
+
+			m_Data.posX = xpos;
+			m_Data.posY = ypos;
+
+			glfwSetWindowMonitor(m_Window, m_Monitor, 0, 0, m_Mode->width, m_Mode->height, m_Mode->refreshRate);
+
+			m_Data.Width = width;
+      m_Data.Height = height;
+			m_Data.Fullscreen = enabled;
+		} else {
+			glfwSetWindowMonitor(m_Window, nullptr, m_Data.posX, m_Data.posX, m_Data.Width, m_Data.Height, GLFW_DONT_CARE);
+		}
+
+		m_Data.Fullscreen = enabled;
+	}
+
   void WindowsWindow::SetFramerate(const double framerate)
   {
     m_Data.Framerate = framerate;
@@ -235,5 +263,10 @@ namespace VoxelEngine
 	bool WindowsWindow::IsFocused() const
 	{
 		return m_Data.Focus;
+	}
+
+	bool WindowsWindow::IsFullscreen() const
+	{
+		return m_Data.Fullscreen;
 	}
 }

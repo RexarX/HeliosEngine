@@ -1,6 +1,6 @@
 #pragma once
 
-#include "VoxelEngine/Render/RendererAPI.h"
+#include "Render/RendererAPI.h"
 
 namespace VoxelEngine
 {

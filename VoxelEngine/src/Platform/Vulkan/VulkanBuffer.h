@@ -4,12 +4,12 @@
 
 namespace VoxelEngine
 {
-	class OpenGLVertexBuffer : public VertexBuffer
+	class VulkanVertexBuffer : public VertexBuffer
 	{
 	public:
-		OpenGLVertexBuffer(const uint32_t size);
-		OpenGLVertexBuffer(const float* vertices, const uint32_t size);
-		virtual ~OpenGLVertexBuffer();
+		VulkanVertexBuffer(const uint32_t size);
+		VulkanVertexBuffer(const float* vertices, const uint32_t size);
+		virtual ~VulkanVertexBuffer();
 
 		virtual void Bind() const override;
 		virtual void Unbind() const override;
@@ -24,12 +24,12 @@ namespace VoxelEngine
 		BufferLayout m_Layout;
 	};
 
-	class OpenGLIndexBuffer : public IndexBuffer
+	class VulkanIndexBuffer : public IndexBuffer
 	{
 	public:
-		OpenGLIndexBuffer(const uint32_t* indices, const uint32_t count);
-		OpenGLIndexBuffer(const uint32_t size);
-		virtual ~OpenGLIndexBuffer();
+		VulkanIndexBuffer(const uint32_t* indices, const uint32_t count);
+		VulkanIndexBuffer(const uint32_t size);
+		virtual ~VulkanIndexBuffer();
 
 		virtual void Bind() const;
 		virtual void Unbind() const;
