@@ -3,7 +3,6 @@
 #include "vepch.h"
 
 #include "Core.h"
-
 #include "Layer.h"
 
 namespace VoxelEngine 

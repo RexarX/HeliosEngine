@@ -1,10 +1,8 @@
-#include "vepch.h"
-
 #include "Application.h"
 
-#include "Render/Renderer.h"
+#include "vepch.h"
 
-#include <glfw/glfw3.h>
+#include "Render/Renderer.h"
 
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
 
@@ -21,6 +19,9 @@ namespace VoxelEngine
 		m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
 
 		Renderer::Init();
+
+		m_ImGuiLayer = new ImGuiLayer();
+		PushOverlay(m_ImGuiLayer);
 	}
 	
 	Application::~Application()
@@ -35,7 +36,7 @@ namespace VoxelEngine
 
 	void Application::PushOverlay(Layer* layer)
 	{
-		m_LayerStack.PushOverlay(layer);
+    m_LayerStack.PushOverlay(layer);
 	}
 
 	void Application::OnEvent(Event& e)
@@ -89,6 +90,14 @@ namespace VoxelEngine
 					layer->OnUpdate(m_DeltaTime);
 					layer->Draw();
 				}
+
+				m_ImGuiLayer->Begin();
+
+				for (Layer* layer : m_LayerStack) {
+					layer->OnImGuiRender(ImGui::GetCurrentContext());
+				}
+
+				m_ImGuiLayer->End();
 
 				m_Window->OnUpdate();
 

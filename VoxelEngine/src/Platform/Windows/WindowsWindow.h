@@ -23,8 +23,10 @@ namespace VoxelEngine
 		void PoolEvents() override;
 		void OnUpdate() override;
 
-		inline uint32_t GetWidth() const override { return m_Data.Width; }
-		inline uint32_t GetHeight() const override { return m_Data.Height; }
+		void InitImGui() override;
+		void ShutdownImGui() override;
+		void Begin() override;
+		void End() override;
 
 		inline void SetEventCallback(const EventCallbackFn& callback) override { m_Data.EventCallback = callback; }
 
@@ -34,6 +36,9 @@ namespace VoxelEngine
 		void SetFullscreen(const bool enabled) override;
 		void SetFramerate(const double framerate) override;
 		void SetLastFramerate(const double framerate) override;
+
+		inline uint32_t GetWidth() const override { return m_Data.Width; }
+		inline uint32_t GetHeight() const override { return m_Data.Height; }
 
 		double GetFramerate() const override;
 		double GetLastFramerate() const override;

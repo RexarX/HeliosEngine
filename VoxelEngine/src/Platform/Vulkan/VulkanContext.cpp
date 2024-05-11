@@ -333,6 +333,22 @@ namespace VoxelEngine
 
 	}
 
+  void VulkanContext::InitImGui()
+  {
+  }
+
+  void VulkanContext::ShutdownImGui()
+  {
+  }
+
+  void VulkanContext::Begin()
+  {
+  }
+
+  void VulkanContext::End()
+  {
+  }
+
   void VulkanContext::SetVSync(const bool enabled)
   {
     m_Vsync = enabled;

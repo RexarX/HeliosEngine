@@ -41,9 +41,15 @@ file(GLOB_RECURSE src__VoxelEngine__Render
 )
 source_group("src/VoxelEngine/Render" FILES ${src__VoxelEngine__Render})
 
+file(GLOB_RECURSE src__VoxelEngine__ImGui
+    "src/VoxelEngine/ImGui/*.cpp"
+    "src/VoxelEngine/ImGui/*.h"
+)
+source_group("src/VoxelEngine/ImGui" FILES ${src__VoxelEngine__ImGui})
+
 file(GLOB_RECURSE src__VoxelEngine__Utils
-    "src/VoxelEngine/Utils/*.h"
     "src/VoxelEngine/Utils/*.cpp"
+    "src/VoxelEngine/Utils/*.h"
 )
 source_group("src/VoxelEngine/Utils" FILES ${src__VoxelEngine__Utils})
 
@@ -55,6 +61,7 @@ set(ALL_FILES
     ${src__VoxelEngine}
     ${src__VoxelEngine__Events}
     ${src__VoxelEngine__Render}
+    ${src__VoxelEngine__ImGui}
     ${src__VoxelEngine__Utils}
 )
 
@@ -117,12 +124,10 @@ set_target_properties(${PROJECT_NAME} PROPERTIES MSVC_RUNTIME_LIBRARY ${MSVC_RUN
 target_include_directories(${PROJECT_NAME} PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/src;"
     "${CMAKE_CURRENT_SOURCE_DIR}/vendor/spdlog/include;"
-    "${CMAKE_CURRENT_SOURCE_DIR}/vendor/glfw/include;"
-    "${CMAKE_CURRENT_SOURCE_DIR}/vendor/glad/include;"
     "${CMAKE_CURRENT_SOURCE_DIR}/vendor/imgui;"
-    "${CMAKE_CURRENT_SOURCE_DIR}/vendor/glm"
+    "${CMAKE_CURRENT_SOURCE_DIR}/vendor/glm;"
     "${CMAKE_CURRENT_SOURCE_DIR}/vendor/stb_image;"
-    "$ENV{VULKAN_SDK}/Include"
+    "$ENV{VULKAN_SDK}/Include;"
 )
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE
@@ -149,17 +154,17 @@ if(MSVC)
     target_compile_options(${PROJECT_NAME} PRIVATE
         $<$<CONFIG:Debug>:
             /Od;
-            /Zi
+            /Zi;
         >
         $<$<CONFIG:Release>:
             /O2;
             /Oi;
-            /Gy
+            /Gy;
         >
         $<$<CONFIG:Dist>:
             /O2;
             /Oi;
-            /Gy
+            /Gy;
         >
         /W3;
         ${DEFAULT_CXX_EXCEPTION_HANDLING}
@@ -167,19 +172,19 @@ if(MSVC)
     target_link_options(${PROJECT_NAME} PRIVATE
         $<$<CONFIG:Debug>:
             /DEBUG;
-            /INCREMENTAL
+            /INCREMENTAL;
         >
          $<$<CONFIG:Release>:
             /DEBUG:NONE;
             /OPT:REF;
             /OPT:ICF;
-            /INCREMENTAL:NO
+            /INCREMENTAL:NO;
         >
         $<$<CONFIG:Dist>:
             /DEBUG:NONE;
             /OPT:REF;
             /OPT:ICF;
-            /INCREMENTAL:NO
+            /INCREMENTAL:NO;
         >
         /SUBSYSTEM:WINDOWS
     )
@@ -189,6 +194,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 	glad
     glfw
     stb_image
+    imgui
 )
 
 set(ADDITIONAL_LIBRARY_DEPENDENCIES

@@ -34,8 +34,10 @@ namespace VoxelEngine
 		virtual void PoolEvents() = 0;
 		virtual void OnUpdate() = 0;
 
-		virtual uint32_t GetWidth() const = 0;
-		virtual uint32_t GetHeight() const = 0;
+		virtual void InitImGui() = 0;
+		virtual void ShutdownImGui() = 0;
+		virtual void Begin() = 0;
+		virtual void End() = 0;
 
 		virtual void SetEventCallback(const EventCallbackFn& callback) = 0;
 		virtual void SetVSync(const bool enabled) = 0;
@@ -44,6 +46,9 @@ namespace VoxelEngine
 		virtual void SetFullscreen(const bool enabled) = 0;
 		virtual void SetFramerate(const double framerate) = 0;
 		virtual void SetLastFramerate(const double framerate) = 0;
+
+		virtual uint32_t GetWidth() const = 0;
+		virtual uint32_t GetHeight() const = 0;
 
 		virtual double GetFramerate() const = 0;
 		virtual double GetLastFramerate() const = 0;

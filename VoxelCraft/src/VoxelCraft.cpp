@@ -85,6 +85,15 @@ public:
 		}
 	}
 
+	void OnImGuiRender(ImGuiContext* context)
+	{
+		ImGui::SetCurrentContext(context);
+
+		ImGui::Begin("Debug menu");
+		ImGui::Text("FPS: %f", VoxelEngine::Application::Get().GetDeltaTime().GetFramerate());
+    ImGui::End();
+	}
+
 	void Draw() override
 	{
 		VoxelEngine::Renderer::BeginScene(m_CameraController.GetCamera());
@@ -124,7 +133,6 @@ public:
 		: VoxelEngine::Application()
 	{
 		PushLayer(new GameLayer());
-		//PushOverlay(new VoxelEngine::ImGuiLayer());
 	}
 
 	~VoxelCraft()

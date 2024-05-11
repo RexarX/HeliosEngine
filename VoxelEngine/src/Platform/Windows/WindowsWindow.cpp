@@ -64,6 +64,8 @@ namespace VoxelEngine
 
 		glfwSetWindowUserPointer(m_Window, reinterpret_cast<void*>(this));
 
+		SetVSync(true);
+
 		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height) {
 			WindowsWindow& win = *(WindowsWindow*)glfwGetWindowUserPointer(window);
 			win.m_Data.Width = width;
@@ -185,6 +187,26 @@ namespace VoxelEngine
   {
 		m_Context->Update();
   }
+
+  void WindowsWindow::InitImGui()
+  {
+    m_Context->InitImGui();
+  }
+
+	void WindowsWindow::ShutdownImGui()
+	{
+		m_Context->ShutdownImGui();
+	}
+
+	void WindowsWindow::Begin()
+	{
+		m_Context->Begin();
+	}
+
+	void WindowsWindow::End()
+	{
+    m_Context->End();
+	}
 
   void WindowsWindow::SetVSync(const bool enabled)
   {

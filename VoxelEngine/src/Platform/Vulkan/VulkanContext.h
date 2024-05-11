@@ -32,8 +32,12 @@ namespace VoxelEngine
 		virtual void ClearBuffer() override;
 		virtual void SetViewport(const uint32_t width, const uint32_t height) override;
 
-		virtual void SetVSync(const bool enabled) override;
+		virtual void InitImGui() override;
+		virtual void ShutdownImGui() override;
+		virtual void Begin() override;
+		virtual void End() override;
 
+		virtual void SetVSync(const bool enabled) override;
 		virtual void SetResized(const bool resized) override { m_Resized = resized; }
 
 		static inline vk::Device& GetDevice() { return m_Device; }

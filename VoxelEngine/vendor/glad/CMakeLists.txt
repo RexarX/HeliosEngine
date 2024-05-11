@@ -22,7 +22,7 @@ if(MSVC)
     target_compile_options(glad PRIVATE
         $<$<CONFIG:Debug>:
             /Od;
-            /ZI
+            /Zi;
         >
         $<$<CONFIG:Dist>:
             /O2;
@@ -43,19 +43,19 @@ if(MSVC)
     target_link_options(glad PRIVATE
         $<$<CONFIG:Debug>:
             /DEBUG;
-            /INCREMENTAL
+            /INCREMENTAL;
         >
         $<$<CONFIG:Dist>:
             /DEBUG:NONE;
             /OPT:REF;
             /OPT:ICF;
-            /INCREMENTAL:NO
+            /INCREMENTAL:NO;
         >
         $<$<CONFIG:Release>:
             /DEBUG:NONE;
             /OPT:REF;
             /OPT:ICF;
-            /INCREMENTAL:NO
+            /INCREMENTAL:NO;
         >
         /SUBSYSTEM:CONSOLE
     )

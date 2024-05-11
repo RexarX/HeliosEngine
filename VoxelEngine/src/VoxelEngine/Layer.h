@@ -1,10 +1,11 @@
 #pragma once
 
 #include "Core.h"
-
 #include "Timestep.h"
 
 #include "Events/Event.h"
+
+struct ImGuiContext;
 
 namespace VoxelEngine
 {
@@ -12,12 +13,13 @@ namespace VoxelEngine
 	{
 	public:
 		Layer(const std::string& name = "Layer");
-		virtual ~Layer();
+		virtual ~Layer() = default;
 
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}
 		virtual void OnUpdate(const Timestep ts) {}
 		virtual void OnEvent(Event& event) {}
+    virtual void OnImGuiRender(ImGuiContext* context) {}
 
 		virtual void Draw() {}
 

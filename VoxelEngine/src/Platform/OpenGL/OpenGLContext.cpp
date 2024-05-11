@@ -2,6 +2,9 @@
 
 #include "vepch.h"
 
+#include <backends/imgui_impl_opengl3.h>
+#include <backends/imgui_impl_glfw.h>
+
 #include <glad/glad.h>
 
 #include <glfw/glfw3.h>
@@ -36,7 +39,7 @@ namespace VoxelEngine
 	}
 
 	void OpenGLContext::Update()
-	{
+	{	
 		SwapBuffers();
 		ClearBuffer();
 	}
@@ -54,6 +57,36 @@ namespace VoxelEngine
 	void OpenGLContext::SetViewport(const uint32_t width, const uint32_t height)
 	{
     glViewport(0, 0, width, height);
+	}
+
+	void OpenGLContext::InitImGui()
+	{
+		ImGui_ImplGlfw_InitForOpenGL(m_WindowHandle, true);
+		ImGui_ImplOpenGL3_Init("#version 460");
+	}
+
+	void OpenGLContext::ShutdownImGui()
+	{
+		ImGui_ImplOpenGL3_Shutdown();
+		ImGui_ImplGlfw_Shutdown();
+	}
+
+	void OpenGLContext::Begin()
+	{
+		ImGui_ImplOpenGL3_NewFrame();
+		ImGui_ImplGlfw_NewFrame();
+		ImGui::NewFrame();
+	}
+
+	void OpenGLContext::End()
+	{
+		ImGui::Render();
+		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+		GLFWwindow* backup_current_context = glfwGetCurrentContext();
+		ImGui::UpdatePlatformWindows();
+		ImGui::RenderPlatformWindowsDefault();
+		glfwMakeContextCurrent(backup_current_context);
 	}
 
 	void OpenGLContext::SetVSync(const bool enabled)

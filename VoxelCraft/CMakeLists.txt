@@ -74,7 +74,7 @@ if(MSVC)
     target_compile_options(${PROJECT_NAME} PRIVATE
         $<$<CONFIG:Debug>:
             /Od;
-            /ZI
+            /Zi;
         >
         $<$<CONFIG:Release>:
             /O2;
@@ -95,19 +95,19 @@ if(MSVC)
     target_link_options(${PROJECT_NAME} PRIVATE
         $<$<CONFIG:Debug>:
             /DEBUG;
-            /INCREMENTAL
+            /INCREMENTAL;
         >
         $<$<CONFIG:Release>:
             /DEBUG:NONE;
             /OPT:REF;
             /OPT:ICF;
-            /INCREMENTAL:NO
+            /INCREMENTAL:NO;
         >
         $<$<CONFIG:Dist>:
             /DEBUG:NONE;
             /OPT:REF;
             /OPT:ICF;
-            /INCREMENTAL:NO
+            /INCREMENTAL:NO;
         >
         /SUBSYSTEM:CONSOLE
     )
@@ -115,4 +115,5 @@ endif()
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
     VoxelEngine
+    imgui
 )
