@@ -17,8 +17,8 @@
 #endif
 
 #ifdef VE_DIST
-	#define VOXELENGINE_DIR
-	#define VOXELCRAFT_DIR
+	#define VOXELENGINE_DIR std::string("")
+	#define VOXELCRAFT_DIR std::string("")
 #else
 	#define VOXELENGINE_DIR std::filesystem::current_path().parent_path().parent_path().string() + "/VoxelEngine/"
 	#define VOXELCRAFT_DIR std::filesystem::current_path().parent_path().parent_path().string() + "/VoxelCraft/"
