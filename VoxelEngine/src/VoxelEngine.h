@@ -2,7 +2,6 @@
 
 #include "VoxelEngine/Core.h"
 #include "VoxelEngine/Application.h"
-#include "VoxelEngine/EntryPoint.h"
 #include "VoxelEngine/Layer.h"
 #include "VoxelEngine/Input.h"
 #include "VoxelEngine/KeyCodes.h"

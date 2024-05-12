@@ -4,54 +4,45 @@ file(GLOB_RECURSE src
     "src/*.cpp"
     "src/*.h"
 )
-source_group("src" FILES ${src})
 
 file(GLOB_RECURSE src__Platform__OpenGL
     "src/Platform/OpenGL/*.cpp"
     "src/Platform/OpenGL/*.h"
 )
-source_group("src/Platform/OpenGL" FILES ${src__Platform__OpenGL})
 
 file(GLOB_RECURSE src__Platform__Vulkan
     "src/Platform/Vulkan/*.cpp"
     "src/Platform/Vulkan/*.h"
 )
-source_group("src/Platform/Vulkan" FILES ${src__Platform__Vulkan})
 
 file(GLOB_RECURSE src__Platform__Windows
     "src/Platform/Windows/*.cpp"
     "src/Platform/Windows/*.h"
 )
-source_group("src/Platform/Windows" FILES ${src__Platform__Windows})
 
 file(GLOB_RECURSE src__VoxelEngine
     "src/VoxelEngine/*.cpp"
     "src/VoxelEngine/*.h"
 )
-source_group("src/VoxelEngine" FILES ${src__VoxelEngine})
 
 file(GLOB_RECURSE src__VoxelEngine__Events
     "src/VoxelEngine/Events/*.h"
 )
-source_group("src/VoxelEngine/Events" FILES ${src__VoxelEngine__Events})
 
 file(GLOB_RECURSE src__VoxelEngine__Render
     "src/VoxelEngine/Render/*.cpp"
     "src/VoxelEngine/Render/*.h"
 )
-source_group("src/VoxelEngine/Render" FILES ${src__VoxelEngine__Render})
 
 file(GLOB_RECURSE src__VoxelEngine__ImGui
     "src/VoxelEngine/ImGui/*.cpp"
     "src/VoxelEngine/ImGui/*.h"
 )
-source_group("src/VoxelEngine/ImGui" FILES ${src__VoxelEngine__ImGui})
 
 file(GLOB_RECURSE src__VoxelEngine__Utils
     "src/VoxelEngine/Utils/*.cpp"
     "src/VoxelEngine/Utils/*.h"
 )
-source_group("src/VoxelEngine/Utils" FILES ${src__VoxelEngine__Utils})
 
 set(ALL_FILES
     ${src}
@@ -76,10 +67,6 @@ target_precompile_headers(${PROJECT_NAME} PRIVATE
 use_props(${PROJECT_NAME} "${CMAKE_CONFIGURATION_TYPES}" "${DEFAULT_CXX_PROPS}")
 
 set(ROOT_NAMESPACE VoxelEngine)
-
-set_target_properties(${PROJECT_NAME} PROPERTIES
-    VS_GLOBAL_KEYWORD "Win32Proj"
-)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
     TARGET_NAME_DEBUG   "VoxelEngine"

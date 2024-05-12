@@ -1,25 +1,16 @@
 set(PROJECT_NAME VoxelCraft)
 
-file(GLOB_RECURSE exec
-    "src/VoxelCraft.cpp"
-)
-source_group("exec" FILES ${exec})
-
-set(ALL_FILES
-    ${exec}
+file(GLOB_RECURSE src
+    "src/*.cpp"
 )
 
-add_executable(${PROJECT_NAME} ${exec})
+add_executable(${PROJECT_NAME} ${src})
 
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 20)
 
 use_props(${PROJECT_NAME} "${CMAKE_CONFIGURATION_TYPES}" "${DEFAULT_CXX_PROPS}")
 
 set(ROOT_NAMESPACE VoxelCraft)
-
-set_target_properties(${PROJECT_NAME} PROPERTIES
-    VS_GLOBAL_KEYWORD "Win32Proj"
-)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
     TARGET_NAME_DEBUG   "VoxelCraft"
@@ -50,9 +41,7 @@ string(CONCAT "MSVC_RUNTIME_LIBRARY_STR"
 set_target_properties(${PROJECT_NAME} PROPERTIES MSVC_RUNTIME_LIBRARY ${MSVC_RUNTIME_LIBRARY_STR})
 
 target_include_directories(${PROJECT_NAME} PUBLIC
-    "${CMAKE_CURRENT_SOURCE_DIR}/../VoxelEngine/vendor/spdlog/include;"
     "${CMAKE_CURRENT_SOURCE_DIR}/../VoxelEngine/src;"
-    "${CMAKE_CURRENT_SOURCE_DIR}/../VoxelEngine/vendor/glm"
 )
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE
@@ -114,6 +103,6 @@ if(MSVC)
 endif()
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
-    VoxelEngine
+	VoxelEngine
     imgui
 )
