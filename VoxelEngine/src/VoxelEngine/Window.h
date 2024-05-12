@@ -45,18 +45,18 @@ namespace VoxelEngine
 		virtual void SetFocused(const double enabled) = 0;
 		virtual void SetFullscreen(const bool enabled) = 0;
 		virtual void SetFramerate(const double framerate) = 0;
-		virtual void SetLastFramerate(const double framerate) = 0;
+		virtual void SetImGuiState(const bool enabled) = 0;
 
 		virtual uint32_t GetWidth() const = 0;
 		virtual uint32_t GetHeight() const = 0;
 
 		virtual double GetFramerate() const = 0;
-		virtual double GetLastFramerate() const = 0;
 
 		virtual bool IsVSync() const = 0;
 		virtual bool IsMinimized() const = 0;
 		virtual bool IsFocused() const = 0;
     virtual bool IsFullscreen() const = 0;
+		virtual bool IsImGuiEnabled() const = 0;
 
 		virtual void* GetNativeWindow() const = 0;
 

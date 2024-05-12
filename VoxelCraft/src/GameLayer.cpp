@@ -56,28 +56,27 @@ void GameLayer::OnEvent(VoxelEngine::Event& event)
 			if (VoxelEngine::Application::Get().GetWindow().IsFocused()) {
 				VoxelEngine::Application::Get().GetWindow().SetFocused(false);
 				m_CameraController.SetFirstInput();
-			}
-			else {
+			} else {
 				VoxelEngine::Application::Get().GetWindow().SetFocused(true);
 			}
 			break;
 
 		case VoxelEngine::Key::F1:
-			if (VoxelEngine::Application::Get().GetWindow().IsVSync()) {
-				VoxelEngine::Application::Get().GetWindow().SetVSync(false);
-			}
-			else {
-				VoxelEngine::Application::Get().GetWindow().SetVSync(true);
-			}
+			VoxelEngine::Application::Get().GetWindow().SetVSync(
+				!VoxelEngine::Application::Get().GetWindow().IsVSync()
+			);
 			break;
 
 		case VoxelEngine::Key::F2:
-			if (VoxelEngine::Application::Get().GetWindow().IsFullscreen()) {
-				VoxelEngine::Application::Get().GetWindow().SetFullscreen(false);
-			}
-			else {
-				VoxelEngine::Application::Get().GetWindow().SetFullscreen(true);
-			}
+			VoxelEngine::Application::Get().GetWindow().SetFullscreen(
+				!VoxelEngine::Application::Get().GetWindow().IsFullscreen()
+			);
+			break;
+
+		case VoxelEngine::Key::Insert:
+			VoxelEngine::Application::Get().GetWindow().SetImGuiState(
+				!VoxelEngine::Application::Get().GetWindow().IsImGuiEnabled()
+			);
 			break;
 		}
 	}

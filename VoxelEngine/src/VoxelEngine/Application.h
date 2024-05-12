@@ -30,9 +30,9 @@ namespace VoxelEngine
 
 		inline Timestep GetDeltaTime() { return m_DeltaTime; }
 
-		inline Window& GetWindow() { return *m_Window; }
-
 		inline static Application& Get() { return *s_Instance; }
+
+		inline Window& GetWindow() { return *m_Window; }
 	
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);

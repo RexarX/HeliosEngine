@@ -92,13 +92,15 @@ namespace VoxelEngine
 					layer->Draw();
 				}
 
-				m_ImGuiLayer->Begin();
+				if (m_Window->IsImGuiEnabled()) {
+					m_ImGuiLayer->Begin();
 
-				for (Layer* layer : m_LayerStack) {
-					layer->OnImGuiRender(ImGui::GetCurrentContext());
+					for (Layer* layer : m_LayerStack) {
+						layer->OnImGuiRender(ImGui::GetCurrentContext());
+					}
+
+					m_ImGuiLayer->End();
 				}
-
-				m_ImGuiLayer->End();
 
 				m_Window->OnUpdate();
 

@@ -259,9 +259,9 @@ namespace VoxelEngine
     m_Data.Framerate = framerate;
   }
 
-	void WindowsWindow::SetLastFramerate(const double framerate)
+	void WindowsWindow::SetImGuiState(const bool enabled)
 	{
-		m_Data.LastFramerate = framerate;
+    m_Data.ShowImGui = enabled;
 	}
 
 	double WindowsWindow::GetFramerate() const
@@ -269,19 +269,16 @@ namespace VoxelEngine
 		return m_Data.Framerate;
 	}
 
-	double WindowsWindow::GetLastFramerate() const
-	{
-		return m_Data.LastFramerate;
-	}
-
   bool WindowsWindow::IsVSync() const
   {
 		return m_Data.VSync;
   }
+
 	bool WindowsWindow::IsMinimized() const
 	{
 		return m_Data.Minimized;
 	}
+
 	bool WindowsWindow::IsFocused() const
 	{
 		return m_Data.Focus;
@@ -290,5 +287,10 @@ namespace VoxelEngine
 	bool WindowsWindow::IsFullscreen() const
 	{
 		return m_Data.Fullscreen;
+	}
+
+	bool WindowsWindow::IsImGuiEnabled() const
+	{
+		return m_Data.ShowImGui;
 	}
 }

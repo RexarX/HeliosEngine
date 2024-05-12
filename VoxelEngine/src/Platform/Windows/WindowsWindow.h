@@ -35,18 +35,18 @@ namespace VoxelEngine
 		void SetFocused(const double enabled) override;
 		void SetFullscreen(const bool enabled) override;
 		void SetFramerate(const double framerate) override;
-		void SetLastFramerate(const double framerate) override;
+		void SetImGuiState(const bool enabled) override;
 
 		inline uint32_t GetWidth() const override { return m_Data.Width; }
 		inline uint32_t GetHeight() const override { return m_Data.Height; }
 
 		double GetFramerate() const override;
-		double GetLastFramerate() const override;
 
 		bool IsVSync() const override;
 		bool IsMinimized() const override;
 		bool IsFocused() const override;
 		bool IsFullscreen() const override;
+		bool IsImGuiEnabled() const override;
 
 		inline virtual void* GetNativeWindow() const { return m_Window; }
 
@@ -65,11 +65,12 @@ namespace VoxelEngine
 			std::string Title;
 			uint32_t Width, Height;
 			uint32_t posX, posY;
-			double Framerate = 0.0, LastFramerate = 0.0;
+			double Framerate = 0.0;
 			bool VSync = true;
 			bool Minimized = false;
 			bool Focus = false;
 			bool Fullscreen = false;
+			bool ShowImGui = false;
 
 			EventCallbackFn EventCallback;
 		};
