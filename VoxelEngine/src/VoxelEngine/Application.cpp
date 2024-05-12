@@ -86,6 +86,7 @@ namespace VoxelEngine
 
 			if (!m_Window->IsMinimized() && (m_DeltaTime >= m_FramerateLimit ||
 																			 m_Window->GetFramerate() == 0.0)) {
+
 				for (Layer* layer : m_LayerStack) {
 					layer->OnUpdate(m_DeltaTime);
 					layer->Draw();

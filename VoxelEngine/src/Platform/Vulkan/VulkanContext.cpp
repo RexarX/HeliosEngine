@@ -6,6 +6,9 @@
 
 #include <glfw/glfw3.h>
 
+#include <backends/imgui_impl_vulkan.h>
+#include <backends/imgui_impl_glfw.h>
+
 namespace VoxelEngine
 {
   vk::Instance VulkanContext::m_Instance;
@@ -164,6 +167,38 @@ namespace VoxelEngine
     cmd.blitImage2(blitInfo);
   }
 
+  void VulkanContext::immediate_submit(const vk::CommandBuffer cmd)
+  {
+    m_Device.resetFences(1, &m_RenderFence);
+
+    vk::CommandBufferBeginInfo bufferBeginInfo;
+    bufferBeginInfo.sType = vk::StructureType::eCommandBufferBeginInfo;
+    bufferBeginInfo.pInheritanceInfo = nullptr;
+    bufferBeginInfo.flags = vk::CommandBufferUsageFlagBits::eOneTimeSubmit;
+
+    cmd.reset(vk::CommandBufferResetFlagBits::eReleaseResources);
+    cmd.begin(bufferBeginInfo);
+    cmd.end();
+
+    vk::CommandBufferSubmitInfo commandBufferSubmitInfo;
+    commandBufferSubmitInfo.sType = vk::StructureType::eCommandBufferSubmitInfo;
+    commandBufferSubmitInfo.commandBuffer = cmd;
+    commandBufferSubmitInfo.deviceMask = 0;
+
+    vk::SubmitInfo2 submitInfo;
+    submitInfo.sType = vk::StructureType::eSubmitInfo2;
+    submitInfo.waitSemaphoreInfoCount = 0;
+    submitInfo.pWaitSemaphoreInfos = nullptr;
+    submitInfo.signalSemaphoreInfoCount = 0;
+    submitInfo.pSignalSemaphoreInfos = nullptr;
+    submitInfo.commandBufferInfoCount = m_CommandBuffers.size();
+    submitInfo.pCommandBufferInfos = &commandBufferSubmitInfo;
+
+    m_GraphicsQueue.submit2(submitInfo, m_RenderFence);
+       
+    m_Device.waitForFences(1, &m_RenderFence, true, 1000000000);
+  }
+
 	VulkanContext::VulkanContext(GLFWwindow* windowHandle)
 		: m_WindowHandle(windowHandle)
 	{
@@ -189,6 +224,8 @@ namespace VoxelEngine
   void VulkanContext::Shutdown()
   {
     m_Device.waitIdle();
+
+    m_ImGuiDescriptorAllocator.DestroyPool();
 
     m_Device.destroyDescriptorSetLayout(m_DrawImageDescriptorLayout);
 
@@ -274,7 +311,7 @@ namespace VoxelEngine
     transition_image(m_CommandBuffers[0], m_SwapChainImages[swapchainImageIndex],
                      vk::ImageLayout::eTransferDstOptimal, vk::ImageLayout::eColorAttachmentOptimal);
     
-    //draw imgui
+    DrawImGui(m_SwapChainImageViews[swapchainImageIndex]);
 
     transition_image(m_CommandBuffers[0], m_SwapChainImages[swapchainImageIndex],
                      vk::ImageLayout::eColorAttachmentOptimal, vk::ImageLayout::ePresentSrcKHR);
@@ -315,7 +352,6 @@ namespace VoxelEngine
     result = m_PresentQueue.presentKHR(presentInfo);
 
     VE_CORE_ASSERT(result == vk::Result::eSuccess, "Failed to set presentKHR in GraphicsQueue!");
-    ++cnt;
   }
 
   void VulkanContext::SwapBuffers()
@@ -335,18 +371,57 @@ namespace VoxelEngine
 
   void VulkanContext::InitImGui()
   {
+    std::vector<DescriptorAllocator::PoolSizeRatio> pool_sizes =
+    {
+      { vk::DescriptorType::eSampler, 1000 },
+      { vk::DescriptorType::eCombinedImageSampler, 1000 },
+      { vk::DescriptorType::eSampledImage, 1000 },
+      { vk::DescriptorType::eStorageImage, 1000 },
+      { vk::DescriptorType::eUniformTexelBuffer, 1000 },
+      { vk::DescriptorType::eStorageTexelBuffer, 1000 },
+      { vk::DescriptorType::eUniformBuffer, 1000 },
+      { vk::DescriptorType::eStorageBuffer, 1000 },
+      { vk::DescriptorType::eUniformBufferDynamic, 1000 },
+      { vk::DescriptorType::eStorageBufferDynamic, 1000 },
+      { vk::DescriptorType::eInputAttachment, 1000 }
+    };
+
+    m_ImGuiDescriptorAllocator.InitPool(1000, pool_sizes);
+
+    ImGui_ImplVulkan_InitInfo init_info = {};
+    init_info.Instance = m_Instance;
+    init_info.PhysicalDevice = m_PhysicalDevice;
+    init_info.Device = m_Device;
+    init_info.Queue = m_GraphicsQueue;
+    init_info.DescriptorPool = m_ImGuiDescriptorAllocator.pool;
+    init_info.MinImageCount = 3;
+    init_info.ImageCount = 3;
+    init_info.UseDynamicRendering = true;
+    init_info.MSAASamples = VK_SAMPLE_COUNT_1_BIT;
+
+    ImGui_ImplGlfw_InitForVulkan(m_WindowHandle, true);
+    ImGui_ImplVulkan_Init(&init_info);
+
+    immediate_submit(m_CommandBuffers[0]);
+
+    ImGui_ImplVulkan_CreateFontsTexture();
   }
 
   void VulkanContext::ShutdownImGui()
   {
+    ImGui_ImplVulkan_Shutdown();
   }
 
   void VulkanContext::Begin()
   {
+    ImGui_ImplVulkan_NewFrame();
+    ImGui_ImplGlfw_NewFrame();
+    ImGui::NewFrame();
   }
 
   void VulkanContext::End()
   {
+    ImGui::Render();
   }
 
   void VulkanContext::SetVSync(const bool enabled)
@@ -739,6 +814,31 @@ namespace VoxelEngine
     drawImageWrite.pImageInfo = &imgInfo;
 
     m_Device.updateDescriptorSets(drawImageWrite, nullptr);
+  }
+
+  void VulkanContext::DrawImGui(const vk::ImageView view)
+  {
+    vk::RenderingAttachmentInfo colorAttachment;
+    colorAttachment.sType = vk::StructureType::eRenderingAttachmentInfo;
+    colorAttachment.imageView = view;
+    colorAttachment.imageLayout = vk::ImageLayout::eGeneral;
+    colorAttachment.loadOp = vk::AttachmentLoadOp::eLoad;
+    colorAttachment.storeOp = vk::AttachmentStoreOp::eStore;
+
+    vk::RenderingInfo renderInfo;
+    renderInfo.sType = vk::StructureType::eRenderingInfo;
+    renderInfo.renderArea = VkRect2D{ VkOffset2D { 0, 0 }, m_DrawExtent };
+    renderInfo.layerCount = 1;
+    renderInfo.colorAttachmentCount = 1;
+    renderInfo.pColorAttachments = &colorAttachment;
+    renderInfo.pDepthAttachment = nullptr;
+    renderInfo.pStencilAttachment = nullptr;
+
+    m_CommandBuffers[0].beginRendering(renderInfo);
+
+    ImGui_ImplVulkan_RenderDrawData(ImGui::GetDrawData(), m_CommandBuffers[0]);
+
+    m_CommandBuffers[0].endRendering();
   }
 
   vk::SurfaceFormatKHR VulkanContext::ChooseSwapSurfaceFormat(const std::vector<vk::SurfaceFormatKHR>& availableFormats) const

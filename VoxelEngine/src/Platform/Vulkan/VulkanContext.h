@@ -22,7 +22,6 @@ namespace VoxelEngine
 	class VulkanContext : public GraphicsContext
 	{
 	public:
-		uint32_t cnt = 0;
 		VulkanContext(GLFWwindow* windowHandle);
 
 		virtual void Init() override;
@@ -91,7 +90,7 @@ namespace VoxelEngine
 			struct PoolSizeRatio
 			{
 				vk::DescriptorType type;
-				float ratio;
+				float ratio = 1.0f;
 			};
 
 			vk::DescriptorPool pool;
@@ -144,6 +143,7 @@ namespace VoxelEngine
 		std::vector<PipelineStruct> m_Pipelines;
 
 		DescriptorAllocator m_DescriptorAllocator;
+		DescriptorAllocator m_ImGuiDescriptorAllocator;
 
 		vk::DescriptorSet m_DrawImageDescriptors;
 		vk::DescriptorSetLayout m_DrawImageDescriptorLayout;
@@ -156,6 +156,8 @@ namespace VoxelEngine
 		vk::Fence m_RenderFence;
 
 		AllocatedImage m_DrawImage;
+
+		vk::DescriptorPool m_ImGuiPool;
 
 	private:
 		void CreateInstance();
@@ -173,6 +175,8 @@ namespace VoxelEngine
 		
 		void RecreateSwapChain();
 
+		void DrawImGui(const vk::ImageView view);
+
 		void transition_image(const vk::CommandBuffer cmd, const vk::Image image,
 													const vk::ImageLayout currentLayout, const vk::ImageLayout newLayout);
 
@@ -184,6 +188,8 @@ namespace VoxelEngine
 		vk::ImageViewCreateInfo imageview_create_info(const vk::ImageAspectFlags aspectFlags) const;
 		void copy_image_to_image(const vk::CommandBuffer cmd, const vk::Image source, const vk::Image destination,
 														 const vk::Extent2D srcSize, const vk::Extent2D dstSize) const;
+
+		void immediate_submit(const vk::CommandBuffer cmd);
 
 		bool IsDeviceSuitable() const;
 		QueueFamilyIndices FindQueueFamilies() const;
