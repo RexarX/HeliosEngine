@@ -73,7 +73,7 @@ void GameLayer::OnEvent(VoxelEngine::Event& event)
 			);
 			break;
 
-		case VoxelEngine::Key::Insert:
+		case VoxelEngine::Key::F3:
 			VoxelEngine::Application::Get().GetWindow().SetImGuiState(
 				!VoxelEngine::Application::Get().GetWindow().IsImGuiEnabled()
 			);
