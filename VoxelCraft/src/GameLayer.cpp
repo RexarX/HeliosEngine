@@ -88,6 +88,7 @@ void GameLayer::OnImGuiRender(ImGuiContext* context)
 
 	ImGui::Begin("Debug menu");
 	ImGui::Text("FPS: %f", VoxelEngine::Application::Get().GetDeltaTime().GetFramerate());
+	ImGui::Text("Frametime: %f", VoxelEngine::Application::Get().GetDeltaTime().GetMilliseconds());
 	ImGui::End();
 }
 
@@ -95,9 +96,9 @@ void GameLayer::Draw()
 {
 	VoxelEngine::Renderer::BeginScene(m_CameraController.GetCamera());
 	m_CameraController.GetFrustum().CreateFrustum(m_CameraController.GetCamera());
-	for (uint32_t i = 0; i < m_Cube.size(); ++i) {
-		if (m_CameraController.GetFrustum().IsParallelepipedInFrustrum(m_Cube[i][0], m_Cube[i][1])) {
-			m_ToDraw.push_back(m_Cube[i]);
+	for (const auto& cube : m_Cube) {
+		if (m_CameraController.GetFrustum().IsParallelepipedInFrustrum(cube[0], cube[1])) {
+			m_ToDraw.push_back(cube);
 		}
 	}
 

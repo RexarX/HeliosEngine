@@ -22,8 +22,6 @@ private:
 	std::vector<glm::mat3> m_Cube;
 	std::vector<glm::mat3> m_ToDraw;
 
-	std::vector<VoxelEngine::Chunk> m_WorldChunks;
-
 	std::shared_ptr<VoxelEngine::Texture> m_Skybox;
 	std::shared_ptr<VoxelEngine::Texture> m_CheckerboardTexture;
 	std::shared_ptr<VoxelEngine::Texture> m_DirtTexture;

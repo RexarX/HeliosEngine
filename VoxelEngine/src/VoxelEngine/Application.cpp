@@ -62,9 +62,10 @@ namespace VoxelEngine
 		if (e.GetWidth() == 0 || e.GetHeight() == 0) {
 			m_Window->SetMinimized(true);
 			return true;
-		}
+		} else if (!m_Window->IsMinimized()) {
+      m_Window->SetMinimized(false);
+    }
 
-		m_Window->SetMinimized(false);
 		Renderer::OnWindowResize(e.GetWidth(), e.GetHeight());
 
 		return true;

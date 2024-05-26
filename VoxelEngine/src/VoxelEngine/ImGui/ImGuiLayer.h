@@ -23,9 +23,9 @@ namespace VoxelEngine
 
 		void Begin();
 		void End();
-		void BlockEvents(const bool block) { m_BlockEvents = block; }
+		void BlockEvents(const bool block) noexcept { m_BlockEvents = block; }
 
-		uint32_t GetActiveWidgetID() const;
+		uint32_t GetActiveWidgetID() const noexcept;
 
 	private:
 		bool m_BlockEvents = true;

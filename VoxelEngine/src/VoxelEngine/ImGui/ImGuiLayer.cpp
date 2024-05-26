@@ -17,6 +17,8 @@ namespace VoxelEngine
 		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
     io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+		io.ConfigFlags |= ImGuiConfigFlags_DpiEnableScaleFonts;
+		io.ConfigFlags |= ImGuiConfigFlags_DpiEnableScaleViewports;
 
 		float fontSize = 16.0f;
 		io.Fonts->AddFontFromFileTTF((VOXELENGINE_DIR + "Assets/Fonts/DroidSans.ttf").c_str(), fontSize);
@@ -51,18 +53,22 @@ namespace VoxelEngine
 	void ImGuiLayer::Begin()
 	{
 		Application::Get().GetWindow().Begin();
+
+		ImGui::NewFrame();
+		ImGui::DockSpaceOverViewport(ImGui::GetMainViewport(),
+																 ImGuiDockNodeFlags_PassthruCentralNode);
 	}
 
 	void ImGuiLayer::End()
 	{
 		ImGuiIO& io = ImGui::GetIO();
-		io.DisplaySize = ImVec2((float)Application::Get().GetWindow().GetWidth(),
+		ImGui::GetIO().DisplaySize = ImVec2((float)Application::Get().GetWindow().GetWidth(),
 														(float)Application::Get().GetWindow().GetHeight());
 
 		Application::Get().GetWindow().End();
 	}
 
-	uint32_t ImGuiLayer::GetActiveWidgetID() const
+	uint32_t ImGuiLayer::GetActiveWidgetID() const noexcept
 	{
     return ImGui::GetActiveID();
 	}

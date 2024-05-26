@@ -14,6 +14,6 @@ namespace VoxelEngine
 
 	double Timer::GetElapsedSec()
 	{
-		return std::chrono::duration_cast<std::chrono::duration<double>>(m_Elapsed).count();
+		return m_Elapsed.count();
 	}
 }
