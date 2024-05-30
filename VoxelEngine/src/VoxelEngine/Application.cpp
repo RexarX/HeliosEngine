@@ -8,12 +8,12 @@
 
 namespace VoxelEngine
 {
-	Application* Application::s_Instance = nullptr;
+	Application* Application::m_Instance = nullptr;
 
 	Application::Application()
 	{
-		VE_CORE_ASSERT(!s_Instance, "Application already exists!");
-		s_Instance = this;
+		VE_CORE_ASSERT(!m_Instance, "Application already exists!");
+		m_Instance = this;
 
 		m_Window = std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));

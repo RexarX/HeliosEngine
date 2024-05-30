@@ -19,6 +19,85 @@ struct GLFWwindow;
 
 namespace VoxelEngine
 {
+	struct PipelineData
+	{
+		PipelineData() { Clear(); }
+
+		void Clear();
+		void BuildPipeline(const vk::Device device, vk::PipelineLayout layout);
+
+		void SetInputTopology(const vk::PrimitiveTopology topology);
+		void SetPolygonMode(const vk::PolygonMode mode);
+		void SetCullMode(const vk::CullModeFlags cullMode, const vk::FrontFace frontFace);
+		void SetMultisamplingNone();
+		void DisableBlending();
+		void SetColorAttachmentFormat(const vk::Format format);
+		void SetDepthFormat(const vk::Format format);
+		void DisableDepthTest();
+
+		std::vector<vk::PipelineShaderStageCreateInfo> shaderStages;
+		vk::PipelineInputAssemblyStateCreateInfo inputAssembly;
+		vk::PipelineRasterizationStateCreateInfo rasterizer;
+		vk::PipelineColorBlendAttachmentState colorBlendAttachment;
+		vk::PipelineMultisampleStateCreateInfo multisampling;
+		vk::PipelineDepthStencilStateCreateInfo depthStencil;
+		vk::PipelineRenderingCreateInfo renderInfo;
+		vk::Format colorAttachmentformat;
+	};
+
+	struct QueueFamilyIndices
+	{
+		std::optional<uint32_t> graphicsFamily;
+		std::optional<uint32_t> presentFamily;
+
+		inline bool isComplete() const
+		{
+			return graphicsFamily.has_value() && presentFamily.has_value();
+		}
+	};
+
+	struct SwapChainSupportDetails
+	{
+		vk::SurfaceCapabilitiesKHR capabilities;
+		std::vector<vk::SurfaceFormatKHR> formats;
+		std::vector<vk::PresentModeKHR> presentModes;
+	};
+
+	struct AllocatedImage {
+		VkImage image;
+		vk::ImageView imageView;
+		vk::Extent3D imageExtent;
+		vk::Format imageFormat;
+
+		VmaAllocation allocation;
+	};
+
+	struct DescriptorLayoutBuilder
+	{
+		std::vector<vk::DescriptorSetLayoutBinding> bindings;
+		void AddBinding(const uint32_t binding, const vk::DescriptorType type);
+		void Clear() { bindings.clear(); }
+		vk::DescriptorSetLayout Build(const vk::Device device, const vk::ShaderStageFlags shaderStages,
+																	const vk::DescriptorSetLayoutCreateFlags flags,
+																	const void* pNext = nullptr);
+	};
+
+	struct DescriptorAllocator
+	{
+		struct PoolSizeRatio
+		{
+			vk::DescriptorType type;
+			float ratio = 1.0f;
+		};
+
+		vk::DescriptorPool pool;
+		void InitPool(const vk::Device device, const uint32_t maxSets, const std::span<PoolSizeRatio> poolRatios);
+		void ClearDescriptors(const vk::Device device);
+		void DestroyPool(const vk::Device device);
+
+		vk::DescriptorSet Allocate(const vk::Device device, const vk::DescriptorSetLayout layout);
+	};
+
 	class VulkanContext : public GraphicsContext
 	{
 	public:
@@ -39,68 +118,15 @@ namespace VoxelEngine
 		virtual void SetVSync(const bool enabled) override;
 		virtual void SetResized(const bool resized) override { m_Resized = resized; }
 
-		static inline vk::Device& GetDevice() { return m_Device; }
+		void BuildPipeline() { m_PipelineBuilder.BuildPipeline(m_Device, m_PipelineLayout); }
+
+		static inline VulkanContext& Get() { return *m_Context; }
+
+		inline vk::Device& GetDevice() { return m_Device; }
+
+		inline PipelineData& GetPipelineData() { return m_PipelineBuilder; }
 
 	private:
-		struct QueueFamilyIndices
-		{
-			std::optional<uint32_t> graphicsFamily;
-			std::optional<uint32_t> presentFamily;
-
-			inline bool isComplete() const
-			{
-				return graphicsFamily.has_value() && presentFamily.has_value();
-			}
-		};
-
-		struct SwapChainSupportDetails
-		{
-			vk::SurfaceCapabilitiesKHR capabilities;
-			std::vector<vk::SurfaceFormatKHR> formats;
-			std::vector<vk::PresentModeKHR> presentModes;
-		};
-
-		struct AllocatedImage {
-			VkImage image;
-			vk::ImageView imageView;
-			vk::Extent3D imageExtent;
-			vk::Format imageFormat;
-
-			VmaAllocation allocation;
-		};
-
-		struct PipelineStruct
-		{
-			const char* name;
-			vk::Pipeline pipeline;
-			vk::PipelineLayout pipelineLayout;
-		};
-
-		struct DescriptorLayoutBuilder
-		{
-			std::vector<vk::DescriptorSetLayoutBinding> bindings;
-			void AddBinding(const uint32_t binding, const vk::DescriptorType type);
-			void Clear() { bindings.clear(); }
-			vk::DescriptorSetLayout Build(const vk::ShaderStageFlags shaderStages, const vk::DescriptorSetLayoutCreateFlags flags,
-																		const void* pNext = nullptr);
-		};
-
-		struct DescriptorAllocator
-		{
-			struct PoolSizeRatio
-			{
-				vk::DescriptorType type;
-				float ratio = 1.0f;
-			};
-
-			vk::DescriptorPool pool;
-			void InitPool(const uint32_t maxSets, const std::span<PoolSizeRatio> poolRatios);
-			void ClearDescriptors();
-			void DestroyPool();
-
-			vk::DescriptorSet Allocate(const vk::DescriptorSetLayout layout);
-		};
-
 		const std::vector<const char*> validationLayers = {
 			"VK_LAYER_KHRONOS_validation"
 		};
@@ -113,15 +139,16 @@ namespace VoxelEngine
 			VK_KHR_PUSH_DESCRIPTOR_EXTENSION_NAME
 		};
 
-		bool m_Resized = false;
+		static VulkanContext* m_Context;
 
+		bool m_Resized = false;
 		bool m_Vsync = true;
 
 		VmaAllocator m_Allocator;
 
-		static vk::Instance m_Instance;
+		vk::Instance m_Instance;
 
-		static vk::Device m_Device;
+		vk::Device m_Device;
 
 		VkDebugUtilsMessengerEXT m_Callback;
 
@@ -140,7 +167,7 @@ namespace VoxelEngine
 
 		vk::Extent2D m_DrawExtent;
 		
-		std::vector<PipelineStruct> m_Pipelines;
+		PipelineData m_PipelineBuilder;
 
 		DescriptorAllocator m_DescriptorAllocator;
 		DescriptorAllocator m_ImGuiDescriptorAllocator;
@@ -156,6 +183,9 @@ namespace VoxelEngine
 		vk::Fence m_RenderFence;
 
 		AllocatedImage m_DrawImage;
+
+		vk::Pipeline m_Pipeline;
+		vk::PipelineLayout m_PipelineLayout;
 
 		vk::DescriptorPool m_ImGuiPool;
 

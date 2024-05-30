@@ -11,9 +11,7 @@
 
 namespace VoxelEngine
 {
-  vk::Instance VulkanContext::m_Instance;
-
-  vk::Device VulkanContext::m_Device;
+  VulkanContext* VulkanContext::m_Context = nullptr;
 
   static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(const VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
                                                       const VkDebugUtilsMessageTypeFlagsEXT messageType,
@@ -41,7 +39,7 @@ namespace VoxelEngine
                                                      pCallbackData->pMessage);
     }
     
-    return VK_FALSE;
+    return vk::False;
   }
 
   vk::ImageSubresourceRange image_subresource_range(const vk::ImageAspectFlags aspectMask)
@@ -202,7 +200,10 @@ namespace VoxelEngine
 	VulkanContext::VulkanContext(GLFWwindow* windowHandle)
 		: m_WindowHandle(windowHandle)
 	{
-		VE_CORE_ASSERT(windowHandle, "Window handle is null!")
+    VE_CORE_ASSERT(windowHandle, "Window handle is null!")
+
+    VE_CORE_ASSERT(!m_Context, "Context already exists!");
+    m_Context = this;
 	}
 
 	void VulkanContext::Init()
@@ -218,18 +219,20 @@ namespace VoxelEngine
     CreateCommands();
     CreateSyncObjects();
     CreateDescriptors();
-    CreatePipeline();
 	}
 
   void VulkanContext::Shutdown()
   {
     m_Device.waitIdle();
 
-    m_ImGuiDescriptorAllocator.DestroyPool();
+    m_ImGuiDescriptorAllocator.DestroyPool(m_Device);
+
+    m_Device.destroyPipelineLayout(m_PipelineLayout);
+    m_Device.destroyPipeline(m_Pipeline);
 
     m_Device.destroyDescriptorSetLayout(m_DrawImageDescriptorLayout);
 
-    m_DescriptorAllocator.DestroyPool();
+    m_DescriptorAllocator.DestroyPool(m_Device);
     
     m_Device.destroyFence(m_RenderFence);
 
@@ -386,7 +389,7 @@ namespace VoxelEngine
       { vk::DescriptorType::eInputAttachment, 1000 }
     };
 
-    m_ImGuiDescriptorAllocator.InitPool(1000, pool_sizes);
+    m_ImGuiDescriptorAllocator.InitPool(m_Device, 1000, pool_sizes);
 
     ImGui_ImplVulkan_InitInfo init_info = {};
     init_info.Instance = m_Instance;
@@ -619,7 +622,7 @@ namespace VoxelEngine
     createInfo.preTransform = swapChainSupport.capabilities.currentTransform;
     createInfo.compositeAlpha = vk::CompositeAlphaFlagBitsKHR::eOpaque;
     createInfo.presentMode = presentMode;
-    createInfo.clipped = VK_TRUE;
+    createInfo.clipped = vk::True;
 
     m_SwapChain = m_Device.createSwapchainKHR(createInfo);
 
@@ -691,6 +694,14 @@ namespace VoxelEngine
 
   void VulkanContext::CreatePipeline()
   {
+    m_PipelineBuilder.SetInputTopology(vk::PrimitiveTopology::eTriangleList);
+    m_PipelineBuilder.SetPolygonMode(vk::PolygonMode::eFill);
+    m_PipelineBuilder.SetCullMode(vk::CullModeFlagBits::eBack, vk::FrontFace::eCounterClockwise);
+    m_PipelineBuilder.SetMultisamplingNone();
+    m_PipelineBuilder.SetColorAttachmentFormat(m_DrawImage.imageFormat);
+    m_PipelineBuilder.SetDepthFormat(vk::Format::eUndefined);
+
+    m_PipelineBuilder.BuildPipeline(m_Device, m_PipelineLayout);
   }
 
   void VulkanContext::CreateDescriptors()
@@ -700,15 +711,16 @@ namespace VoxelEngine
 		  { vk::DescriptorType::eStorageImage, 1 }
 	  };
 
-    m_DescriptorAllocator.InitPool(10, sizes);
+    m_DescriptorAllocator.InitPool(m_Device, 10, sizes);
 
     {
       DescriptorLayoutBuilder builder;
       builder.AddBinding(0, vk::DescriptorType::eStorageImage);
-      m_DrawImageDescriptorLayout = builder.Build(vk::ShaderStageFlagBits::eCompute, vk::DescriptorSetLayoutCreateFlagBits(0));
+      m_DrawImageDescriptorLayout = builder.Build(m_Device, vk::ShaderStageFlagBits::eCompute,
+                                                            vk::DescriptorSetLayoutCreateFlagBits(0));
     }
     
-    m_DrawImageDescriptors = m_DescriptorAllocator.Allocate(m_DrawImageDescriptorLayout);
+    m_DrawImageDescriptors = m_DescriptorAllocator.Allocate(m_Device, m_DrawImageDescriptorLayout);
 
     vk::DescriptorImageInfo imgInfo;
     imgInfo.imageLayout = vk::ImageLayout::eGeneral;
@@ -882,7 +894,7 @@ namespace VoxelEngine
     return actualExtent;
   }
 
-  VulkanContext::SwapChainSupportDetails VulkanContext::QuerySwapChainSupport() const
+  SwapChainSupportDetails VulkanContext::QuerySwapChainSupport() const
   {
     SwapChainSupportDetails details;
     details.capabilities = m_PhysicalDevice.getSurfaceCapabilitiesKHR(m_Surface);
@@ -907,7 +919,7 @@ namespace VoxelEngine
     return indices.isComplete() && extensionsSupported && swapChainAdequate;
   }
 
-  VulkanContext::QueueFamilyIndices VulkanContext::FindQueueFamilies() const
+  QueueFamilyIndices VulkanContext::FindQueueFamilies() const
   {
     QueueFamilyIndices indices;
     auto queueFamilies = m_PhysicalDevice.getQueueFamilyProperties();
@@ -985,7 +997,7 @@ namespace VoxelEngine
     if (func != nullptr) { func(m_Instance, m_Callback, pAllocator); }
   }
 
-  void VulkanContext::DescriptorLayoutBuilder::AddBinding(const uint32_t binding, vk::DescriptorType type)
+  void DescriptorLayoutBuilder::AddBinding(const uint32_t binding, vk::DescriptorType type)
   {
     vk::DescriptorSetLayoutBinding newBind;
     newBind.binding = binding;
@@ -995,9 +1007,10 @@ namespace VoxelEngine
     bindings.push_back(newBind);
   }
 
-  vk::DescriptorSetLayout VulkanContext::DescriptorLayoutBuilder::Build(const vk::ShaderStageFlags shaderStages,
-                                                                        const vk::DescriptorSetLayoutCreateFlags flags,
-                                                                        const void* pNext)
+  vk::DescriptorSetLayout DescriptorLayoutBuilder::Build(const vk::Device device,
+                                                         const vk::ShaderStageFlags shaderStages,
+                                                         const vk::DescriptorSetLayoutCreateFlags flags,
+                                                         const void* pNext)
   {
     for (auto& bind : bindings) {
       bind.stageFlags |= shaderStages;
@@ -1011,12 +1024,13 @@ namespace VoxelEngine
     info.flags = flags;
 
     vk::DescriptorSetLayout set;
-    set = m_Device.createDescriptorSetLayout(info);
+    set = device.createDescriptorSetLayout(info);
 
     return set;
   }
 
-  void VulkanContext::DescriptorAllocator::InitPool(const uint32_t maxSets, const std::span<PoolSizeRatio> poolRatios)
+  void DescriptorAllocator::InitPool(const vk::Device device, const uint32_t maxSets,
+                                     const std::span<PoolSizeRatio> poolRatios)
   {
     std::vector<vk::DescriptorPoolSize> poolSizes;
     for (auto& poolRatio : poolRatios) {
@@ -1032,20 +1046,21 @@ namespace VoxelEngine
     info.poolSizeCount = (uint32_t)poolSizes.size();
     info.pPoolSizes = poolSizes.data();
 
-    pool = m_Device.createDescriptorPool(info);
+    pool = device.createDescriptorPool(info);
   }
 
-  void VulkanContext::DescriptorAllocator::ClearDescriptors()
+  void DescriptorAllocator::ClearDescriptors(const vk::Device device)
   {
-    m_Device.resetDescriptorPool(pool);
+    device.resetDescriptorPool(pool);
   }
 
-  void VulkanContext::DescriptorAllocator::DestroyPool()
+  void DescriptorAllocator::DestroyPool(const vk::Device device)
   {
-    m_Device.destroyDescriptorPool(pool);
+    device.destroyDescriptorPool(pool);
   }
 
-  vk::DescriptorSet VulkanContext::DescriptorAllocator::Allocate(const vk::DescriptorSetLayout layout)
+  vk::DescriptorSet DescriptorAllocator::Allocate(const vk::Device device,
+                                                  const vk::DescriptorSetLayout layout)
   {
     vk::DescriptorSetAllocateInfo info;
     info.sType = vk::StructureType::eDescriptorSetAllocateInfo;
@@ -1053,8 +1068,134 @@ namespace VoxelEngine
     info.descriptorSetCount = 1;
     info.pSetLayouts = &layout;
 
-    vk::DescriptorSet set = m_Device.allocateDescriptorSets(info).front();
+    vk::DescriptorSet set = device.allocateDescriptorSets(info).front();
 
     return set;
+  }
+
+  void PipelineData::Clear()
+  {
+    inputAssembly.sType = vk::StructureType::ePipelineInputAssemblyStateCreateInfo;
+
+    rasterizer.sType = vk::StructureType::ePipelineRasterizationStateCreateInfo;
+
+    //colorBlendAttachment = {};
+
+    multisampling.sType = vk::StructureType::ePipelineMultisampleStateCreateInfo;
+
+    //pipelineLayout = {};
+
+    depthStencil.sType = vk::StructureType::ePipelineDepthStencilStateCreateInfo;
+
+    renderInfo.sType = vk::StructureType::ePipelineRenderingCreateInfo;
+
+    shaderStages.clear();
+  }
+
+  void PipelineData::BuildPipeline(const vk::Device device, const vk::PipelineLayout layout)
+  {
+    vk::PipelineViewportStateCreateInfo viewportState;
+    viewportState.sType = vk::StructureType::ePipelineViewportStateCreateInfo;
+    viewportState.viewportCount = 1;
+    viewportState.scissorCount = 1;
+
+    // setup dummy color blending. We arent using transparent objects yet
+    // the blending is just "no blend", but we do write to the color attachment
+    vk::PipelineColorBlendStateCreateInfo colorBlending;
+    colorBlending.sType = vk::StructureType::ePipelineColorBlendStateCreateInfo;
+    colorBlending.logicOpEnable = vk::False;
+    colorBlending.logicOp = vk::LogicOp::eCopy;
+    colorBlending.attachmentCount = 1;
+    colorBlending.pAttachments = &colorBlendAttachment;
+
+    //completely clear VertexInputStateCreateInfo, as we have no need for it
+    vk::PipelineVertexInputStateCreateInfo vertexInputInfo;
+    vertexInputInfo.sType = vk::StructureType::ePipelineVertexInputStateCreateInfo;
+
+    vk::DynamicState state[] = { vk::DynamicState::eViewport, vk::DynamicState::eScissor };
+
+    vk::PipelineDynamicStateCreateInfo dynamicInfo;
+    dynamicInfo.sType = vk::StructureType::ePipelineDynamicStateCreateInfo;
+    dynamicInfo.pDynamicStates = &state[0];
+    dynamicInfo.dynamicStateCount = 2;
+
+    vk::GraphicsPipelineCreateInfo graphicsPipelineCreateInfo;
+    graphicsPipelineCreateInfo.pNext = &renderInfo;
+    graphicsPipelineCreateInfo.flags = vk::PipelineCreateFlags();
+    graphicsPipelineCreateInfo.pStages = shaderStages.data();
+    graphicsPipelineCreateInfo.stageCount = (uint32_t)shaderStages.size();
+    graphicsPipelineCreateInfo.pVertexInputState = &vertexInputInfo;
+    graphicsPipelineCreateInfo.pInputAssemblyState = &inputAssembly;
+    graphicsPipelineCreateInfo.pViewportState = &viewportState;
+    graphicsPipelineCreateInfo.pRasterizationState = &rasterizer;
+    graphicsPipelineCreateInfo.pMultisampleState = &multisampling;
+    graphicsPipelineCreateInfo.pColorBlendState = &colorBlending;
+    graphicsPipelineCreateInfo.pDepthStencilState = &depthStencil;
+    graphicsPipelineCreateInfo.pDynamicState = &dynamicInfo;
+    graphicsPipelineCreateInfo.layout = layout;
+
+    auto result = device.createGraphicsPipelines(nullptr, graphicsPipelineCreateInfo);
+
+    VE_ASSERT(result.result == vk::Result::eSuccess, "Failed to create pipelines!");
+  }
+
+  void PipelineData::SetInputTopology(const vk::PrimitiveTopology topology)
+  {
+    inputAssembly.topology = topology;
+    inputAssembly.primitiveRestartEnable = vk::False;
+  }
+
+  void PipelineData::SetPolygonMode(const vk::PolygonMode mode)
+  {
+    rasterizer.polygonMode = mode;
+    rasterizer.lineWidth = 1.0f;
+  }
+
+  void PipelineData::SetCullMode(const vk::CullModeFlags cullMode, const vk::FrontFace frontFace)
+  {
+    rasterizer.cullMode = cullMode;
+    rasterizer.frontFace = frontFace;
+  }
+
+  void PipelineData::SetMultisamplingNone()
+  {
+    multisampling.sampleShadingEnable = vk::False;
+    multisampling.rasterizationSamples = vk::SampleCountFlagBits::e1;
+    multisampling.minSampleShading = 1.0f;
+    multisampling.pSampleMask = nullptr;
+    multisampling.alphaToCoverageEnable = vk::False;
+    multisampling.alphaToOneEnable = vk::False;
+  }
+
+  void PipelineData::DisableBlending()
+  {
+    colorBlendAttachment.colorWriteMask = vk::ColorComponentFlagBits::eR |
+                                          vk::ColorComponentFlagBits::eG |
+                                          vk::ColorComponentFlagBits::eB |
+                                          vk::ColorComponentFlagBits::eA;
+    colorBlendAttachment.blendEnable = vk::False;
+  }
+
+  void PipelineData::SetColorAttachmentFormat(const vk::Format format)
+  {
+    colorAttachmentformat = format;
+    renderInfo.colorAttachmentCount = 1;
+    renderInfo.pColorAttachmentFormats = &colorAttachmentformat;
+  }
+
+  void PipelineData::SetDepthFormat(const vk::Format format)
+  {
+    renderInfo.depthAttachmentFormat = format;
+  }
+
+  void PipelineData::DisableDepthTest()
+  {
+    depthStencil.depthTestEnable = vk::False;
+    depthStencil.depthWriteEnable = vk::False;
+    depthStencil.depthCompareOp = vk::CompareOp::eNever;
+    depthStencil.depthBoundsTestEnable = vk::False;
+    depthStencil.stencilTestEnable = vk::False;
+    depthStencil.minDepthBounds = 0.0f;
+    depthStencil.maxDepthBounds = 1.0f;
   }
 }

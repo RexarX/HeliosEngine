@@ -30,7 +30,7 @@ namespace VoxelEngine
 
 		inline Timestep GetDeltaTime() { return m_DeltaTime; }
 
-		inline static Application& Get() { return *s_Instance; }
+		inline static Application& Get() { return *m_Instance; }
 
 		inline Window& GetWindow() { return *m_Window; }
 	
@@ -39,7 +39,7 @@ namespace VoxelEngine
 		bool OnWindowResize(WindowResizeEvent& e);
 
 	private:
-		static Application* s_Instance;
+		static Application* m_Instance;
 
 		std::unique_ptr<Window> m_Window;
 

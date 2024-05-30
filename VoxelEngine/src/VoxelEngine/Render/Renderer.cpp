@@ -4,6 +4,8 @@
 
 #include "VertexArray.h"
 
+#include "Platform/Vulkan/VulkanContext.h"
+
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -269,6 +271,10 @@ namespace VoxelEngine
 
     s_Skybox.SkyboxShader = Shader::Create(VOXELENGINE_DIR + "Assets/Shaders/Skybox.glsl");
     s_Skybox.SkyboxShader->Unbind();
+
+    if (GetAPI() == RendererAPI::API::Vulkan) {
+      VulkanContext::Get().BuildPipeline();
+    }
 	}
 
   void Renderer::Shutdown()

@@ -1,6 +1,8 @@
+#include "VulkanRendererAPI.h"
+
 #include "vepch.h"
 
-#include "VulkanRendererAPI.h"
+#include "VulkanContext.h"
 
 namespace VoxelEngine
 {
@@ -11,19 +13,17 @@ namespace VoxelEngine
 
 	void VulkanRendererAPI::SetClearColor(const glm::vec4& color)
 	{
-		
 	}
 
 	void VulkanRendererAPI::SetViewport(const uint32_t x, const uint32_t y,
 																			const uint32_t width, const uint32_t height)
 	{
-		
 	}
 
 	void VulkanRendererAPI::SetDepthMask(const bool mask)
 	{
 		if (mask) {  }
-		else {  }
+		else { /*VulkanContext::Get().GetPipelineData().DisableDepthTest();*/ }
 	}
 	
 	void VulkanRendererAPI::DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray,
