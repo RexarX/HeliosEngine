@@ -63,7 +63,7 @@ namespace VoxelEngine
 	{
 		ImGuiIO& io = ImGui::GetIO();
 		ImGui::GetIO().DisplaySize = ImVec2((float)Application::Get().GetWindow().GetWidth(),
-														(float)Application::Get().GetWindow().GetHeight());
+																				(float)Application::Get().GetWindow().GetHeight());
 
 		Application::Get().GetWindow().End();
 	}

@@ -94,7 +94,8 @@ void GameLayer::OnImGuiRender(ImGuiContext* context)
 
 void GameLayer::Draw()
 {
-	VoxelEngine::Renderer::BeginScene(m_CameraController.GetCamera());
+	/*VoxelEngine::Renderer::BeginScene(m_CameraController.GetCamera());
+
 	m_CameraController.GetFrustum().CreateFrustum(m_CameraController.GetCamera());
 	for (const auto& cube : m_Cube) {
 		if (m_CameraController.GetFrustum().IsParallelepipedInFrustrum(cube[0], cube[1])) {
@@ -108,5 +109,5 @@ void GameLayer::Draw()
 
 	m_ToDraw.clear();
 
-	VoxelEngine::Renderer::EndScene();
+	VoxelEngine::Renderer::EndScene();*/
 }

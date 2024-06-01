@@ -11,7 +11,8 @@ namespace VoxelEngine
 	static GLenum ShaderTypeFromString(const std::string& type)
 	{
 		if (type == "vertex") { return GL_VERTEX_SHADER; }
-		if (type == "fragment") { return GL_FRAGMENT_SHADER; }
+		else if (type == "fragment") { return GL_FRAGMENT_SHADER; }
+		else if (type == "compute") { return GL_COMPUTE_SHADER; }
 
 		VE_CORE_ASSERT(false, "Unknown shader type!");
 		return 0;
@@ -31,12 +32,16 @@ namespace VoxelEngine
 	}
 
 	OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertex,
-														 const std::string& fragment)
+																											const std::string& fragment)
 		: m_Name(name)
 	{
+		std::string vertexSrc = ReadFile(vertex);
+		std::string fragmentSrc = ReadFile(fragment);
+
 		std::unordered_map<GLenum, std::string> sources;
-		sources[GL_VERTEX_SHADER] = vertex;
-		sources[GL_FRAGMENT_SHADER] = fragment;
+		sources[GL_VERTEX_SHADER] = vertexSrc;
+		sources[GL_FRAGMENT_SHADER] = fragmentSrc;
+
 		Compile(sources);
 	}
 

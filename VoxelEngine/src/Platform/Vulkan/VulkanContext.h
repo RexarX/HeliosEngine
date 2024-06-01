@@ -24,7 +24,7 @@ namespace VoxelEngine
 		PipelineData() { Clear(); }
 
 		void Clear();
-		void BuildPipeline(const vk::Device device, vk::PipelineLayout layout);
+		void BuildPipeline(const vk::Device device, vk::PipelineLayout& layout, vk::Pipeline& pipeline);
 
 		void SetInputTopology(const vk::PrimitiveTopology topology);
 		void SetPolygonMode(const vk::PolygonMode mode);
@@ -34,6 +34,7 @@ namespace VoxelEngine
 		void SetColorAttachmentFormat(const vk::Format format);
 		void SetDepthFormat(const vk::Format format);
 		void DisableDepthTest();
+		void EnableDepthTest();
 
 		std::vector<vk::PipelineShaderStageCreateInfo> shaderStages;
 		vk::PipelineInputAssemblyStateCreateInfo inputAssembly;
@@ -41,7 +42,7 @@ namespace VoxelEngine
 		vk::PipelineColorBlendAttachmentState colorBlendAttachment;
 		vk::PipelineMultisampleStateCreateInfo multisampling;
 		vk::PipelineDepthStencilStateCreateInfo depthStencil;
-		vk::PipelineRenderingCreateInfo renderInfo;
+		vk::PipelineRenderingCreateInfoKHR renderInfo;
 		vk::Format colorAttachmentformat;
 	};
 
@@ -118,11 +119,13 @@ namespace VoxelEngine
 		virtual void SetVSync(const bool enabled) override;
 		virtual void SetResized(const bool resized) override { m_Resized = resized; }
 
-		void BuildPipeline() { m_PipelineBuilder.BuildPipeline(m_Device, m_PipelineLayout); }
+		virtual void SetImGuiState(const bool enabled) override { m_ImGuiEnabled = enabled; }
+
+		void BuildPipeline() { m_PipelineBuilder.BuildPipeline(m_Device, m_PipelineLayout, m_Pipeline); }
 
 		static inline VulkanContext& Get() { return *m_Context; }
 
-		inline vk::Device& GetDevice() { return m_Device; }
+		inline vk::Device GetDevice() { return m_Device; }
 
 		inline PipelineData& GetPipelineData() { return m_PipelineBuilder; }
 
@@ -143,6 +146,8 @@ namespace VoxelEngine
 
 		bool m_Resized = false;
 		bool m_Vsync = true;
+		bool m_RebuildPipeline = false;
+		bool m_ImGuiEnabled = false;
 
 		VmaAllocator m_Allocator;
 
@@ -187,8 +192,6 @@ namespace VoxelEngine
 		vk::Pipeline m_Pipeline;
 		vk::PipelineLayout m_PipelineLayout;
 
-		vk::DescriptorPool m_ImGuiPool;
-
 	private:
 		void CreateInstance();
 		void SetupDebugCallback();
@@ -204,7 +207,9 @@ namespace VoxelEngine
 		void CreatePipeline();
 		
 		void RecreateSwapChain();
+		void RebuildPipeline();
 
+		void DrawGeometry(const vk::CommandBuffer cmd);
 		void DrawImGui(const vk::ImageView view);
 
 		void transition_image(const vk::CommandBuffer cmd, const vk::Image image,

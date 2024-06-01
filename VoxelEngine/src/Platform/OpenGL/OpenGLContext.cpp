@@ -83,8 +83,10 @@ namespace VoxelEngine
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
 		GLFWwindow* backup_current_context = glfwGetCurrentContext();
-		ImGui::UpdatePlatformWindows();
-		ImGui::RenderPlatformWindowsDefault();
+		#ifdef VE_PLATFORM_WINDOWS
+				ImGui::UpdatePlatformWindows();
+				ImGui::RenderPlatformWindowsDefault();
+		#endif
 		glfwMakeContextCurrent(backup_current_context);
 	}
 
@@ -94,6 +96,10 @@ namespace VoxelEngine
 	}
 
 	void OpenGLContext::SetResized(const bool resized)
+	{
+	}
+
+	void OpenGLContext::SetImGuiState(const bool enabled)
 	{
 	}
 }

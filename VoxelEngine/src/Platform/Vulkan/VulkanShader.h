@@ -13,7 +13,7 @@ namespace VoxelEngine
 	public:
 		VulkanShader(const std::string& filepath);
 		VulkanShader(const std::string& name, const std::string& vertex,
-								 const std::string& fragment);
+																					const std::string& fragment);
 		virtual ~VulkanShader();
 
 		virtual void Bind() const override;
@@ -36,7 +36,12 @@ namespace VoxelEngine
 		std::unordered_map<vk::ShaderStageFlagBits, std::string> PreProcess(const std::string& source);
 		void Compile(std::unordered_map<vk::ShaderStageFlagBits, std::string>& shaderSources);
 
+		bool GLSLtoSPV(const vk::ShaderStageFlagBits shaderType, const std::string& glslShader,
+									 std::vector<uint32_t>& spvShader) const;
+
 	private:
 		std::string m_Name;
+
+		bool m_Compiled = false;
 	};
 }

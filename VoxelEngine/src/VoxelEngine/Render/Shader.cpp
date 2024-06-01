@@ -23,7 +23,7 @@ namespace VoxelEngine
 	}
 
 	std::shared_ptr<Shader> Shader::Create(const std::string& name, const std::string& vertex,
-																				 const std::string& fragment)
+																																	const std::string& fragment)
 	{
 		switch (Renderer::GetAPI())
 		{

@@ -22,8 +22,8 @@ namespace VoxelEngine
 
 	void VulkanRendererAPI::SetDepthMask(const bool mask)
 	{
-		if (mask) {  }
-		else { /*VulkanContext::Get().GetPipelineData().DisableDepthTest();*/ }
+		if (mask) { VulkanContext::Get().GetPipelineData().DisableDepthTest(); }
+		else { VulkanContext::Get().GetPipelineData().DisableDepthTest(); }
 	}
 	
 	void VulkanRendererAPI::DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray,

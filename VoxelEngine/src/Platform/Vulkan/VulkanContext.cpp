@@ -219,11 +219,14 @@ namespace VoxelEngine
     CreateCommands();
     CreateSyncObjects();
     CreateDescriptors();
+    CreatePipeline();
 	}
 
   void VulkanContext::Shutdown()
   {
     m_Device.waitIdle();
+
+    ShutdownImGui();
 
     m_ImGuiDescriptorAllocator.DestroyPool(m_Device);
 
@@ -282,6 +285,9 @@ namespace VoxelEngine
 
     VE_CORE_ASSERT(result == vk::Result::eSuccess, "Failed to acquire next swap chain image!");
 
+    m_DrawExtent.height = std::min(m_SwapChainExtent.height, m_DrawImage.imageExtent.height);
+    m_DrawExtent.width = std::min(m_SwapChainExtent.width, m_DrawImage.imageExtent.width);
+
     m_Device.resetFences(1, &m_RenderFence);
 
     vk::CommandBufferBeginInfo bufferBeginInfo;
@@ -302,6 +308,8 @@ namespace VoxelEngine
 
     m_CommandBuffers[0].clearColorImage(m_DrawImage.image, vk::ImageLayout::eGeneral, clearValue, clearRange);
 
+    DrawGeometry(m_CommandBuffers[0]);
+
     transition_image(m_CommandBuffers[0], m_DrawImage.image, vk::ImageLayout::eGeneral,
                      vk::ImageLayout::eTransferSrcOptimal);
 
@@ -314,7 +322,7 @@ namespace VoxelEngine
     transition_image(m_CommandBuffers[0], m_SwapChainImages[swapchainImageIndex],
                      vk::ImageLayout::eTransferDstOptimal, vk::ImageLayout::eColorAttachmentOptimal);
     
-    DrawImGui(m_SwapChainImageViews[swapchainImageIndex]);
+    if (m_ImGuiEnabled) { DrawImGui(m_SwapChainImageViews[swapchainImageIndex]); }
 
     transition_image(m_CommandBuffers[0], m_SwapChainImages[swapchainImageIndex],
                      vk::ImageLayout::eColorAttachmentOptimal, vk::ImageLayout::ePresentSrcKHR);
@@ -369,7 +377,6 @@ namespace VoxelEngine
 
 	void VulkanContext::SetViewport(const uint32_t width, const uint32_t height)
 	{
-
 	}
 
   void VulkanContext::InitImGui()
@@ -402,6 +409,10 @@ namespace VoxelEngine
     init_info.UseDynamicRendering = true;
     init_info.MSAASamples = VK_SAMPLE_COUNT_1_BIT;
 
+    init_info.PipelineRenderingCreateInfo = { .sType = VK_STRUCTURE_TYPE_PIPELINE_RENDERING_CREATE_INFO };
+    init_info.PipelineRenderingCreateInfo.colorAttachmentCount = 1;
+    init_info.PipelineRenderingCreateInfo.pColorAttachmentFormats = (const VkFormat*)&m_SwapChainImageFormat;
+
     ImGui_ImplGlfw_InitForVulkan(m_WindowHandle, true);
     ImGui_ImplVulkan_Init(&init_info);
 
@@ -424,6 +435,13 @@ namespace VoxelEngine
   void VulkanContext::End()
   {
     ImGui::Render();
+
+    GLFWwindow* backup_current_context = glfwGetCurrentContext();
+    #ifdef VE_PLATFORM_WINDOWS
+		  ImGui::UpdatePlatformWindows();
+		  ImGui::RenderPlatformWindowsDefault();
+    #endif
+		glfwMakeContextCurrent(backup_current_context);
   }
 
   void VulkanContext::SetVSync(const bool enabled)
@@ -700,8 +718,6 @@ namespace VoxelEngine
     m_PipelineBuilder.SetMultisamplingNone();
     m_PipelineBuilder.SetColorAttachmentFormat(m_DrawImage.imageFormat);
     m_PipelineBuilder.SetDepthFormat(vk::Format::eUndefined);
-
-    m_PipelineBuilder.BuildPipeline(m_Device, m_PipelineLayout);
   }
 
   void VulkanContext::CreateDescriptors()
@@ -827,18 +843,63 @@ namespace VoxelEngine
     m_Device.updateDescriptorSets(drawImageWrite, nullptr);
   }
 
-  void VulkanContext::DrawImGui(const vk::ImageView view)
+  void VulkanContext::DrawGeometry(const vk::CommandBuffer cmd)
   {
     vk::RenderingAttachmentInfo colorAttachment;
     colorAttachment.sType = vk::StructureType::eRenderingAttachmentInfo;
-    colorAttachment.imageView = view;
+    colorAttachment.imageView = m_DrawImage.imageView;
     colorAttachment.imageLayout = vk::ImageLayout::eGeneral;
     colorAttachment.loadOp = vk::AttachmentLoadOp::eLoad;
     colorAttachment.storeOp = vk::AttachmentStoreOp::eStore;
 
     vk::RenderingInfo renderInfo;
     renderInfo.sType = vk::StructureType::eRenderingInfo;
-    renderInfo.renderArea = VkRect2D{ VkOffset2D { 0, 0 }, m_DrawExtent };
+    renderInfo.renderArea = vk::Rect2D{ vk::Offset2D { 0, 0 }, m_DrawExtent };
+    renderInfo.layerCount = 1;
+    renderInfo.colorAttachmentCount = 1;
+    renderInfo.pColorAttachments = &colorAttachment;
+    renderInfo.pDepthAttachment = nullptr;
+    renderInfo.pStencilAttachment = nullptr;
+
+    cmd.beginRendering(&renderInfo);
+
+    cmd.bindPipeline(vk::PipelineBindPoint::eGraphics, m_Pipeline);
+
+    vk::Viewport viewport;
+    viewport.x = 0;
+    viewport.y = 0;
+    viewport.width = m_DrawExtent.width;
+    viewport.height = m_DrawExtent.height;
+    viewport.minDepth = 0.0f;
+    viewport.maxDepth = 1.0f;
+
+    cmd.setViewport(0, 1, &viewport);
+
+    vk::Rect2D scissor;
+    scissor.offset.x = 0;
+    scissor.offset.y = 0;
+    scissor.extent.width = m_DrawExtent.width;
+    scissor.extent.height = m_DrawExtent.height;
+
+    cmd.setScissor(0, 1, &scissor);
+
+    cmd.draw(3, 1, 0, 0);
+
+    cmd.endRendering();
+  }
+
+  void VulkanContext::DrawImGui(const vk::ImageView view)
+  {
+    vk::RenderingAttachmentInfo colorAttachment;
+    colorAttachment.sType = vk::StructureType::eRenderingAttachmentInfo;
+    colorAttachment.imageView = view;
+    colorAttachment.imageLayout = vk::ImageLayout::eColorAttachmentOptimal;
+    colorAttachment.loadOp = vk::AttachmentLoadOp::eLoad;
+    colorAttachment.storeOp = vk::AttachmentStoreOp::eStore;
+
+    vk::RenderingInfo renderInfo;
+    renderInfo.sType = vk::StructureType::eRenderingInfo;
+    renderInfo.renderArea = vk::Rect2D{ vk::Offset2D { 0, 0 }, m_SwapChainExtent };
     renderInfo.layerCount = 1;
     renderInfo.colorAttachmentCount = 1;
     renderInfo.pColorAttachments = &colorAttachment;
@@ -1092,8 +1153,19 @@ namespace VoxelEngine
     shaderStages.clear();
   }
 
-  void PipelineData::BuildPipeline(const vk::Device device, const vk::PipelineLayout layout)
+  void PipelineData::BuildPipeline(const vk::Device device, vk::PipelineLayout& layout,
+                                   vk::Pipeline& pipeline)
   {
+    vk::PipelineLayoutCreateInfo info;
+    info.sType = vk::StructureType::ePipelineLayoutCreateInfo;
+    info.flags = vk::PipelineLayoutCreateFlags();
+    info.setLayoutCount = 0;
+    info.pSetLayouts = nullptr;
+    info.pushConstantRangeCount = 0;
+    info.pPushConstantRanges = nullptr;
+
+    layout = device.createPipelineLayout(info);
+
     vk::PipelineViewportStateCreateInfo viewportState;
     viewportState.sType = vk::StructureType::ePipelineViewportStateCreateInfo;
     viewportState.viewportCount = 1;
@@ -1120,8 +1192,8 @@ namespace VoxelEngine
     dynamicInfo.dynamicStateCount = 2;
 
     vk::GraphicsPipelineCreateInfo graphicsPipelineCreateInfo;
+    graphicsPipelineCreateInfo.sType = vk::StructureType::eGraphicsPipelineCreateInfo;
     graphicsPipelineCreateInfo.pNext = &renderInfo;
-    graphicsPipelineCreateInfo.flags = vk::PipelineCreateFlags();
     graphicsPipelineCreateInfo.pStages = shaderStages.data();
     graphicsPipelineCreateInfo.stageCount = (uint32_t)shaderStages.size();
     graphicsPipelineCreateInfo.pVertexInputState = &vertexInputInfo;
@@ -1134,9 +1206,13 @@ namespace VoxelEngine
     graphicsPipelineCreateInfo.pDynamicState = &dynamicInfo;
     graphicsPipelineCreateInfo.layout = layout;
 
-    auto result = device.createGraphicsPipelines(nullptr, graphicsPipelineCreateInfo);
+    auto result = device.createGraphicsPipelines(nullptr, 1, &graphicsPipelineCreateInfo, nullptr, &pipeline);
 
-    VE_ASSERT(result.result == vk::Result::eSuccess, "Failed to create pipelines!");
+    for (auto& stage : shaderStages) {
+      device.destroyShaderModule(stage.module);
+    }
+
+    VE_ASSERT(result == vk::Result::eSuccess, "Failed to create pipelines!");
   }
 
   void PipelineData::SetInputTopology(const vk::PrimitiveTopology topology)
@@ -1191,6 +1267,17 @@ namespace VoxelEngine
   void PipelineData::DisableDepthTest()
   {
     depthStencil.depthTestEnable = vk::False;
+    depthStencil.depthWriteEnable = vk::False;
+    depthStencil.depthCompareOp = vk::CompareOp::eNever;
+    depthStencil.depthBoundsTestEnable = vk::False;
+    depthStencil.stencilTestEnable = vk::False;
+    depthStencil.minDepthBounds = 0.0f;
+    depthStencil.maxDepthBounds = 1.0f;
+  }
+
+  void PipelineData::EnableDepthTest()
+  {
+    depthStencil.depthTestEnable = vk::True;
     depthStencil.depthWriteEnable = vk::False;
     depthStencil.depthCompareOp = vk::CompareOp::eNever;
     depthStencil.depthBoundsTestEnable = vk::False;

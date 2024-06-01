@@ -261,6 +261,7 @@ namespace VoxelEngine
 
 	void WindowsWindow::SetImGuiState(const bool enabled)
 	{
+		m_Context->SetImGuiState(enabled);
     m_Data.ShowImGui = enabled;
 	}
 

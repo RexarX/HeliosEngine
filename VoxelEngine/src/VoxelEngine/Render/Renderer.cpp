@@ -239,8 +239,9 @@ namespace VoxelEngine
 
     s_Cube.CubeVertex->Unbind();
 
-    s_Cube.CubeShader = Shader::Create(VOXELENGINE_DIR + "Assets/Shaders/Cube.glsl");
-    s_Cube.CubeShader->Unbind();
+    //s_Cube.CubeShader = Shader::Create("Cube", VOXELENGINE_DIR + "Assets/Shaders/Cube.vert",
+    //                                           VOXELENGINE_DIR + "Assets/Shaders/Cube.frag");
+    //s_Cube.CubeShader->Unbind();
 
     s_Line.LineVertex = VertexArray::Create();
     s_Line.LineVertex->Bind();
@@ -254,8 +255,9 @@ namespace VoxelEngine
 
     s_Line.LineVertex->Unbind();
 
-    s_Line.LineShader = Shader::Create(VOXELENGINE_DIR + "Assets/Shaders/Line.glsl");
-    s_Line.LineShader->Unbind();
+    //s_Line.LineShader = Shader::Create("Line", VOXELENGINE_DIR + "Assets/Shaders/Line.vert",
+    //                                           VOXELENGINE_DIR + "Assets/Shaders/Line.frag");
+    //s_Line.LineShader->Unbind();
 
     s_Skybox.SkyboxVertex = VertexArray::Create();
     s_Skybox.SkyboxVertex->Bind();
@@ -269,12 +271,14 @@ namespace VoxelEngine
 
     s_Skybox.SkyboxVertex->Unbind();
 
-    s_Skybox.SkyboxShader = Shader::Create(VOXELENGINE_DIR + "Assets/Shaders/Skybox.glsl");
-    s_Skybox.SkyboxShader->Unbind();
+    //s_Skybox.SkyboxShader = Shader::Create("Skybox", VOXELENGINE_DIR + "Assets/Shaders/Skybox.vert",
+    //                                                 VOXELENGINE_DIR + "Assets/Shaders/Skybox.frag");
+    //s_Skybox.SkyboxShader->Unbind();
 
-    if (GetAPI() == RendererAPI::API::Vulkan) {
-      VulkanContext::Get().BuildPipeline();
-    }
+    Shader::Create("Triangle", VOXELENGINE_DIR + "Assets/Shaders/Triangle.vert",
+                               VOXELENGINE_DIR + "Assets/Shaders/Triangle.frag");
+
+    if (GetAPI() == RendererAPI::API::Vulkan) { VulkanContext::Get().BuildPipeline(); }
 	}
 
   void Renderer::Shutdown()

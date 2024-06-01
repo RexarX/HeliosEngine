@@ -26,7 +26,7 @@ namespace VoxelEngine
 
 		static std::shared_ptr<Shader> Create(const std::string& filepath);
 		static std::shared_ptr<Shader> Create(const std::string& name, const std::string& vertex,
-																					const std::string& fragment);
+																																	 const std::string& fragment);
 	};
 
 	class ShaderLibrary
