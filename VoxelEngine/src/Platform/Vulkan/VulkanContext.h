@@ -188,6 +188,7 @@ namespace VoxelEngine
 		vk::Fence m_RenderFence;
 
 		AllocatedImage m_DrawImage;
+		AllocatedImage m_DepthImage;
 
 		vk::Pipeline m_Pipeline;
 		vk::PipelineLayout m_PipelineLayout;
@@ -218,9 +219,10 @@ namespace VoxelEngine
 		vk::SemaphoreSubmitInfo& semaphore_submit_info(const vk::PipelineStageFlags2 stageMask,
 																									 const vk::Semaphore semaphore) const;
 
-		vk::ImageCreateInfo& image_create_info(const vk::ImageUsageFlags usageFlags,
+		vk::ImageCreateInfo& image_create_info(const vk::Format format, const vk::ImageUsageFlags usageFlags,
 																					 const vk::Extent3D extent) const;
-		vk::ImageViewCreateInfo imageview_create_info(const vk::ImageAspectFlags aspectFlags) const;
+		vk::ImageViewCreateInfo imageview_create_info(const vk::Image image, const vk::Format format,
+																									const vk::ImageAspectFlags aspectFlags) const;
 		void copy_image_to_image(const vk::CommandBuffer cmd, const vk::Image source, const vk::Image destination,
 														 const vk::Extent2D srcSize, const vk::Extent2D dstSize) const;
 

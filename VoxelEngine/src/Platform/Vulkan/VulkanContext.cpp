@@ -94,13 +94,13 @@ namespace VoxelEngine
     return submitInfo;
   }
 
-  vk::ImageCreateInfo& VulkanContext::image_create_info(const vk::ImageUsageFlags usageFlags,
+  vk::ImageCreateInfo& VulkanContext::image_create_info(const vk::Format format, const vk::ImageUsageFlags usageFlags,
                                                         const vk::Extent3D extent) const
   {
     vk::ImageCreateInfo info;
     info.sType = vk::StructureType::eImageCreateInfo;
     info.imageType = vk::ImageType::e2D;
-    info.format = m_DrawImage.imageFormat;
+    info.format = format;
     info.extent = extent;
     info.mipLevels = 1;
     info.arrayLayers = 1;
@@ -111,13 +111,14 @@ namespace VoxelEngine
     return info;
   }
 
-  vk::ImageViewCreateInfo VulkanContext::imageview_create_info(const vk::ImageAspectFlags aspectFlags) const
+  vk::ImageViewCreateInfo VulkanContext::imageview_create_info(const vk::Image image, const vk::Format format,
+                                                               const vk::ImageAspectFlags aspectFlags) const
   {
     vk::ImageViewCreateInfo info;
     info.sType = vk::StructureType::eImageViewCreateInfo;
     info.viewType = vk::ImageViewType::e2D;
-    info.image = m_DrawImage.image;
-    info.format = m_DrawImage.imageFormat;
+    info.image = image;
+    info.format = format;
     info.subresourceRange.baseMipLevel = 0;
     info.subresourceRange.levelCount = 1;
     info.subresourceRange.baseArrayLayer = 0;
@@ -244,6 +245,10 @@ namespace VoxelEngine
 
     m_Device.destroyCommandPool(m_CommandPool);
 
+    m_Device.destroyImageView(m_DepthImage.imageView);
+
+    vmaDestroyImage(m_Allocator, m_DepthImage.image, m_DepthImage.allocation);
+
     for (auto& imageView : m_SwapChainImageViews) {
       m_Device.destroyImageView(imageView);
     }
@@ -303,14 +308,19 @@ namespace VoxelEngine
     transition_image(m_CommandBuffers[0], m_DrawImage.image, vk::ImageLayout::eUndefined, vk::ImageLayout::eGeneral);
     
     vk::ClearColorValue clearValue = { 0.0f, 0.0f, 0.0f, 0.0f };
-
     vk::ImageSubresourceRange clearRange = image_subresource_range(vk::ImageAspectFlagBits::eColor);
 
     m_CommandBuffers[0].clearColorImage(m_DrawImage.image, vk::ImageLayout::eGeneral, clearValue, clearRange);
 
+    transition_image(m_CommandBuffers[0], m_DrawImage.image, vk::ImageLayout::eGeneral,
+                     vk::ImageLayout::eColorAttachmentOptimal);
+
+    transition_image(m_CommandBuffers[0], m_DepthImage.image, vk::ImageLayout::eUndefined,
+                     vk::ImageLayout::eDepthAttachmentOptimal);
+
     DrawGeometry(m_CommandBuffers[0]);
 
-    transition_image(m_CommandBuffers[0], m_DrawImage.image, vk::ImageLayout::eGeneral,
+    transition_image(m_CommandBuffers[0], m_DrawImage.image, vk::ImageLayout::eColorAttachmentOptimal,
                      vk::ImageLayout::eTransferSrcOptimal);
 
     transition_image(m_CommandBuffers[0], m_SwapChainImages[swapchainImageIndex], vk::ImageLayout::eUndefined,
@@ -695,7 +705,7 @@ namespace VoxelEngine
     drawImageUsages |= vk::ImageUsageFlagBits::eStorage;
     drawImageUsages |= vk::ImageUsageFlagBits::eColorAttachment;
 
-    VkImageCreateInfo rimg_info = image_create_info(drawImageUsages, drawImageExtent);
+    VkImageCreateInfo rimg_info = image_create_info(m_DrawImage.imageFormat, drawImageUsages, drawImageExtent);
 
     VmaAllocationCreateInfo rimg_allocinfo = {};
     rimg_allocinfo.usage = VMA_MEMORY_USAGE_GPU_ONLY;
@@ -703,9 +713,27 @@ namespace VoxelEngine
 
     vmaCreateImage(m_Allocator, &rimg_info, &rimg_allocinfo, &m_DrawImage.image, &m_DrawImage.allocation, nullptr);
 
-    vk::ImageViewCreateInfo rview_info = imageview_create_info(vk::ImageAspectFlagBits::eColor);
+    vk::ImageViewCreateInfo rview_info = imageview_create_info(m_DrawImage.image, m_DrawImage.imageFormat,
+                                                               vk::ImageAspectFlagBits::eColor);
 
     auto result = m_Device.createImageView(&rview_info, nullptr, &m_DrawImage.imageView);
+
+    VE_CORE_ASSERT(result == vk::Result::eSuccess, "Failed to create image view!");
+
+    m_DepthImage.imageFormat = vk::Format::eD32Sfloat;
+    m_DepthImage.imageExtent = drawImageExtent;
+
+    vk::ImageUsageFlags depthImageUsages;
+    depthImageUsages |= vk::ImageUsageFlagBits::eDepthStencilAttachment;
+
+    VkImageCreateInfo dimg_info = image_create_info(m_DepthImage.imageFormat, depthImageUsages, drawImageExtent);
+
+    vmaCreateImage(m_Allocator, &dimg_info, &rimg_allocinfo, &m_DepthImage.image, &m_DepthImage.allocation, nullptr);
+
+    vk::ImageViewCreateInfo dview_info = imageview_create_info(m_DepthImage.image, m_DepthImage.imageFormat,
+                                                               vk::ImageAspectFlagBits::eDepth);
+
+    result = m_Device.createImageView(&dview_info, nullptr, &m_DepthImage.imageView);
 
     VE_CORE_ASSERT(result == vk::Result::eSuccess, "Failed to create image view!");
   }
@@ -714,10 +742,12 @@ namespace VoxelEngine
   {
     m_PipelineBuilder.SetInputTopology(vk::PrimitiveTopology::eTriangleList);
     m_PipelineBuilder.SetPolygonMode(vk::PolygonMode::eFill);
-    m_PipelineBuilder.SetCullMode(vk::CullModeFlagBits::eBack, vk::FrontFace::eCounterClockwise);
+    m_PipelineBuilder.SetCullMode(vk::CullModeFlagBits::eBack, vk::FrontFace::eClockwise);
     m_PipelineBuilder.SetMultisamplingNone();
+    m_PipelineBuilder.DisableBlending(); //temp
+    m_PipelineBuilder.DisableDepthTest(); //temp
     m_PipelineBuilder.SetColorAttachmentFormat(m_DrawImage.imageFormat);
-    m_PipelineBuilder.SetDepthFormat(vk::Format::eUndefined);
+    m_PipelineBuilder.SetDepthFormat(m_DepthImage.imageFormat);
   }
 
   void VulkanContext::CreateDescriptors()
@@ -732,8 +762,8 @@ namespace VoxelEngine
     {
       DescriptorLayoutBuilder builder;
       builder.AddBinding(0, vk::DescriptorType::eStorageImage);
-      m_DrawImageDescriptorLayout = builder.Build(m_Device, vk::ShaderStageFlagBits::eCompute,
-                                                            vk::DescriptorSetLayoutCreateFlagBits(0));
+      m_DrawImageDescriptorLayout = builder.Build(m_Device, vk::ShaderStageFlagBits::eCompute, //temp
+                                                            vk::DescriptorSetLayoutCreateFlagBits());
     }
     
     m_DrawImageDescriptors = m_DescriptorAllocator.Allocate(m_Device, m_DrawImageDescriptorLayout);
@@ -814,6 +844,10 @@ namespace VoxelEngine
   {
     m_Device.waitIdle();
     
+    m_Device.destroyImageView(m_DepthImage.imageView);
+
+    vmaDestroyImage(m_Allocator, m_DepthImage.image, m_DepthImage.allocation);
+
     for (auto& imageView : m_SwapChainImageViews) {
       m_Device.destroyImageView(imageView);
     }
@@ -852,13 +886,21 @@ namespace VoxelEngine
     colorAttachment.loadOp = vk::AttachmentLoadOp::eLoad;
     colorAttachment.storeOp = vk::AttachmentStoreOp::eStore;
 
+    vk::RenderingAttachmentInfo depthAttachment;
+    depthAttachment.sType = vk::StructureType::eRenderingAttachmentInfo;
+    depthAttachment.imageView = m_DepthImage.imageView;
+    depthAttachment.imageLayout = vk::ImageLayout::eDepthAttachmentOptimal;
+    depthAttachment.loadOp = vk::AttachmentLoadOp::eClear;
+    depthAttachment.storeOp = vk::AttachmentStoreOp::eStore;
+    depthAttachment.clearValue.depthStencil.depth = 0.0f;
+
     vk::RenderingInfo renderInfo;
     renderInfo.sType = vk::StructureType::eRenderingInfo;
     renderInfo.renderArea = vk::Rect2D{ vk::Offset2D { 0, 0 }, m_DrawExtent };
     renderInfo.layerCount = 1;
     renderInfo.colorAttachmentCount = 1;
     renderInfo.pColorAttachments = &colorAttachment;
-    renderInfo.pDepthAttachment = nullptr;
+    renderInfo.pDepthAttachment = &depthAttachment;
     renderInfo.pStencilAttachment = nullptr;
 
     cmd.beginRendering(&renderInfo);
