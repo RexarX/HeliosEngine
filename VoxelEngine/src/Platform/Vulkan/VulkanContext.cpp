@@ -1,8 +1,7 @@
-#define VMA_IMPLEMENTATION
-
 #include "VulkanContext.h"
 
-#include "vepch.h"
+#define VMA_VULKAN_VERSION 1003000
+#include <vma/vk_mem_alloc.h>
 
 #include <glfw/glfw3.h>
 
@@ -39,7 +38,7 @@ namespace VoxelEngine
                                                      pCallbackData->pMessage);
     }
     
-    return vk::False;
+    return VK_FALSE;
   }
 
   vk::ImageSubresourceRange image_subresource_range(const vk::ImageAspectFlags aspectMask)
@@ -166,17 +165,22 @@ namespace VoxelEngine
     cmd.blitImage2(blitInfo);
   }
 
-  void VulkanContext::immediate_submit(const vk::CommandBuffer cmd)
+  void VulkanContext::ImmediateSubmit(std::function<void(vk::CommandBuffer cmd)>&& function)
   {
-    m_Device.resetFences(1, &m_RenderFence);
+    m_Device.resetFences(1, &m_ImFence);
+    m_ImCommandBuffer[0].reset();
 
-    vk::CommandBufferBeginInfo bufferBeginInfo;
-    bufferBeginInfo.sType = vk::StructureType::eCommandBufferBeginInfo;
-    bufferBeginInfo.pInheritanceInfo = nullptr;
-    bufferBeginInfo.flags = vk::CommandBufferUsageFlagBits::eOneTimeSubmit;
+    vk::CommandBuffer cmd = m_ImCommandBuffer[0];
 
-    cmd.reset(vk::CommandBufferResetFlagBits::eReleaseResources);
-    cmd.begin(bufferBeginInfo);
+    vk::CommandBufferBeginInfo cmdBeginInfo;
+    cmdBeginInfo.sType = vk::StructureType::eCommandBufferBeginInfo;
+    cmdBeginInfo.pInheritanceInfo = nullptr;
+    cmdBeginInfo.flags = vk::CommandBufferUsageFlagBits::eOneTimeSubmit;
+
+    cmd.begin(cmdBeginInfo);
+
+    function(cmd);
+
     cmd.end();
 
     vk::CommandBufferSubmitInfo commandBufferSubmitInfo;
@@ -193,9 +197,9 @@ namespace VoxelEngine
     submitInfo.commandBufferInfoCount = m_CommandBuffers.size();
     submitInfo.pCommandBufferInfos = &commandBufferSubmitInfo;
 
-    m_GraphicsQueue.submit2(submitInfo, m_RenderFence);
-       
-    m_Device.waitForFences(1, &m_RenderFence, true, 1000000000);
+    m_GraphicsQueue.submit2(submitInfo, m_ImFence);
+
+    m_Device.waitForFences(1, &m_ImFence, true, 9999999999);
   }
 
 	VulkanContext::VulkanContext(GLFWwindow* windowHandle)
@@ -231,43 +235,7 @@ namespace VoxelEngine
 
     m_ImGuiDescriptorAllocator.DestroyPool(m_Device);
 
-    m_Device.destroyPipelineLayout(m_PipelineLayout);
-    m_Device.destroyPipeline(m_Pipeline);
-
-    m_Device.destroyDescriptorSetLayout(m_DrawImageDescriptorLayout);
-
-    m_DescriptorAllocator.DestroyPool(m_Device);
-    
-    m_Device.destroyFence(m_RenderFence);
-
-    m_Device.destroySemaphore(m_SwapChainSemaphore);
-    m_Device.destroySemaphore(m_RenderSemaphore);
-
-    m_Device.destroyCommandPool(m_CommandPool);
-
-    m_Device.destroyImageView(m_DepthImage.imageView);
-
-    vmaDestroyImage(m_Allocator, m_DepthImage.image, m_DepthImage.allocation);
-
-    for (auto& imageView : m_SwapChainImageViews) {
-      m_Device.destroyImageView(imageView);
-    }
-
-    vmaDestroyImage(m_Allocator, m_DrawImage.image, m_DrawImage.allocation);
-
-    m_Device.destroyImageView(m_DrawImage.imageView);
-
-    vmaDestroyAllocator(m_Allocator);
-
-    m_Device.destroySwapchainKHR(m_SwapChain);
-
-    m_Instance.destroySurfaceKHR(m_Surface);
-
-    m_Device.destroy();
-
-    if (enableValidationLayers) { DestroyDebugUtilsMessengerEXT(nullptr); }
-
-    m_Instance.destroy();
+    m_DeletionQueue.flush();
   }
 
   void VulkanContext::Update()
@@ -426,8 +394,6 @@ namespace VoxelEngine
     ImGui_ImplGlfw_InitForVulkan(m_WindowHandle, true);
     ImGui_ImplVulkan_Init(&init_info);
 
-    immediate_submit(m_CommandBuffers[0]);
-
     ImGui_ImplVulkan_CreateFontsTexture();
   }
 
@@ -489,6 +455,10 @@ namespace VoxelEngine
 
     m_Instance = vk::createInstance(createInfo);
     VE_CORE_ASSERT(m_Instance, "Failed to create instance!");
+
+    m_DeletionQueue.push_function([&]() {
+      m_Instance.destroy();
+      });
   }
 
   void VulkanContext::SetupDebugCallback()
@@ -506,7 +476,12 @@ namespace VoxelEngine
 
     auto result = CreateDebugUtilsMessengerEXT(reinterpret_cast<const VkDebugUtilsMessengerCreateInfoEXT*>(&createInfo),
                                                nullptr);
+
     VE_CORE_ASSERT(result == VK_SUCCESS, "Failed to set up debug callback!");
+
+    m_DeletionQueue.push_function([&]() {
+      DestroyDebugUtilsMessengerEXT(nullptr);
+      });
   } 
 
   void VulkanContext::CreateSurface()
@@ -518,6 +493,10 @@ namespace VoxelEngine
     VE_CORE_ASSERT(result == VK_SUCCESS, "Failed to create window surface!");
     
     m_Surface = rawSurface;
+
+    m_DeletionQueue.push_function([&]() {
+      m_Instance.destroySurfaceKHR(m_Surface);
+      });
   }
 
   void VulkanContext::PickPhysicalDevice()
@@ -609,6 +588,10 @@ namespace VoxelEngine
 
     m_GraphicsQueue = m_Device.getQueue(indices.graphicsFamily.value(), 0);
     m_PresentQueue = m_Device.getQueue(indices.presentFamily.value(), 0);
+
+    m_DeletionQueue.push_function([&]() {
+      m_Device.destroy();
+      });
   }
 
   void VulkanContext::CreateSwapChain()
@@ -650,7 +633,7 @@ namespace VoxelEngine
     createInfo.preTransform = swapChainSupport.capabilities.currentTransform;
     createInfo.compositeAlpha = vk::CompositeAlphaFlagBitsKHR::eOpaque;
     createInfo.presentMode = presentMode;
-    createInfo.clipped = vk::True;
+    createInfo.clipped = VK_TRUE;
 
     m_SwapChain = m_Device.createSwapchainKHR(createInfo);
 
@@ -660,6 +643,10 @@ namespace VoxelEngine
 
     m_SwapChainImageFormat = surfaceFormat.format;
     m_SwapChainExtent = extent;
+
+    m_DeletionQueue.push_function([&]() {
+      m_Device.destroySwapchainKHR(m_SwapChain);
+      });
   }
 
   void VulkanContext::CreateImageViews()
@@ -736,18 +723,36 @@ namespace VoxelEngine
     result = m_Device.createImageView(&dview_info, nullptr, &m_DepthImage.imageView);
 
     VE_CORE_ASSERT(result == vk::Result::eSuccess, "Failed to create image view!");
+
+    m_DeletionQueue.push_function([&]() {
+      m_Device.destroyImageView(m_DrawImage.imageView);
+
+      vmaDestroyImage(m_Allocator, m_DrawImage.image, m_DrawImage.allocation);
+
+      for (auto& imageView : m_SwapChainImageViews) {
+        m_Device.destroyImageView(imageView);
+      }
+
+      m_Device.destroyImageView(m_DepthImage.imageView);
+
+      vmaDestroyImage(m_Allocator, m_DepthImage.image, m_DepthImage.allocation);
+      });
   }
 
   void VulkanContext::CreatePipeline()
   {
     m_PipelineBuilder.SetInputTopology(vk::PrimitiveTopology::eTriangleList);
     m_PipelineBuilder.SetPolygonMode(vk::PolygonMode::eFill);
-    m_PipelineBuilder.SetCullMode(vk::CullModeFlagBits::eBack, vk::FrontFace::eClockwise);
+    m_PipelineBuilder.SetCullMode(vk::CullModeFlagBits::eBack, vk::FrontFace::eClockwise); //vk::FrontFace::eCounterClockwise
     m_PipelineBuilder.SetMultisamplingNone();
     m_PipelineBuilder.DisableBlending(); //temp
-    m_PipelineBuilder.DisableDepthTest(); //temp
     m_PipelineBuilder.SetColorAttachmentFormat(m_DrawImage.imageFormat);
     m_PipelineBuilder.SetDepthFormat(m_DepthImage.imageFormat);
+
+    VulkanContext::Get().GetDeletionQueue().push_function([&]() {
+      m_Device.destroyPipelineLayout(m_PipelineLayout);
+      m_Device.destroyPipeline(m_Pipeline);
+      });
   }
 
   void VulkanContext::CreateDescriptors()
@@ -781,6 +786,12 @@ namespace VoxelEngine
     drawImageWrite.pImageInfo = &imgInfo;
 
     m_Device.updateDescriptorSets(drawImageWrite, nullptr);
+
+    m_DeletionQueue.push_function([&]() {
+      m_DescriptorAllocator.DestroyPool(m_Device);
+
+      m_Device.destroyDescriptorSetLayout(m_DrawImageDescriptorLayout);
+      });
   }
 
   void VulkanContext::CreateCommands()
@@ -793,8 +804,10 @@ namespace VoxelEngine
     commandPoolInfo.queueFamilyIndex = indices.graphicsFamily.value();
 
     m_CommandPool = m_Device.createCommandPool(commandPoolInfo);
-
     VE_CORE_ASSERT(m_CommandPool, "Failed to create command pool!");
+
+    m_ImCommandPool = m_Device.createCommandPool(commandPoolInfo);
+    VE_CORE_ASSERT(m_ImCommandPool, "Failed to create command pool!");
 
     vk::CommandBufferAllocateInfo cmdAllocInfo;
     cmdAllocInfo.sType = vk::StructureType::eCommandBufferAllocateInfo;
@@ -803,8 +816,17 @@ namespace VoxelEngine
     cmdAllocInfo.level = vk::CommandBufferLevel::ePrimary;
 
     m_CommandBuffers = m_Device.allocateCommandBuffers(cmdAllocInfo);
-
     VE_CORE_ASSERT(!m_CommandBuffers.empty(), "Failed to create command buffer!");
+
+    cmdAllocInfo.commandPool = m_ImCommandPool;
+
+    m_ImCommandBuffer = m_Device.allocateCommandBuffers(cmdAllocInfo);
+    VE_CORE_ASSERT(!m_ImCommandBuffer.empty(), "Failed to create command buffer!");
+
+    m_DeletionQueue.push_function([&]() {
+      m_Device.destroyCommandPool(m_ImCommandPool);
+      m_Device.destroyCommandPool(m_CommandPool);
+      });
   }
 
   void VulkanContext::CreateSyncObjects()
@@ -814,19 +836,27 @@ namespace VoxelEngine
     fenceInfo.flags = vk::FenceCreateFlagBits::eSignaled;
 
     m_RenderFence = m_Device.createFence(fenceInfo);
-
     VE_CORE_ASSERT(m_RenderFence, "Failed to create fence!");
 
     vk::SemaphoreCreateInfo semaphoreInfo;
     semaphoreInfo.sType = vk::StructureType::eSemaphoreCreateInfo;
 
     m_SwapChainSemaphore = m_Device.createSemaphore(semaphoreInfo);
-    
     VE_CORE_ASSERT(m_SwapChainSemaphore, "Failed to create semaphore!");
 
     m_RenderSemaphore = m_Device.createSemaphore(semaphoreInfo);
-
     VE_CORE_ASSERT(m_RenderSemaphore, "Failed to create semaphore!");
+
+    m_ImFence = m_Device.createFence(fenceInfo);
+    VE_CORE_ASSERT(m_ImFence, "Failed to create fence!");
+
+    m_DeletionQueue.push_function([&]() {
+      m_Device.destroyFence(m_ImFence);
+      m_Device.destroyFence(m_RenderFence);
+
+      m_Device.destroySemaphore(m_SwapChainSemaphore);
+      m_Device.destroySemaphore(m_RenderSemaphore);
+      });
   }
 
   void VulkanContext::CreateAllocator()
@@ -838,6 +868,10 @@ namespace VoxelEngine
     allocatorInfo.flags = VMA_ALLOCATOR_CREATE_BUFFER_DEVICE_ADDRESS_BIT;
 
     vmaCreateAllocator(&allocatorInfo, &m_Allocator);
+
+    m_DeletionQueue.push_function([&]() {
+      vmaDestroyAllocator(m_Allocator);
+      });
   }
 
   void VulkanContext::RecreateSwapChain()
@@ -1182,11 +1216,7 @@ namespace VoxelEngine
 
     rasterizer.sType = vk::StructureType::ePipelineRasterizationStateCreateInfo;
 
-    //colorBlendAttachment = {};
-
     multisampling.sType = vk::StructureType::ePipelineMultisampleStateCreateInfo;
-
-    //pipelineLayout = {};
 
     depthStencil.sType = vk::StructureType::ePipelineDepthStencilStateCreateInfo;
 
@@ -1217,27 +1247,30 @@ namespace VoxelEngine
     // the blending is just "no blend", but we do write to the color attachment
     vk::PipelineColorBlendStateCreateInfo colorBlending;
     colorBlending.sType = vk::StructureType::ePipelineColorBlendStateCreateInfo;
-    colorBlending.logicOpEnable = vk::False;
+    colorBlending.logicOpEnable = VK_FALSE;
     colorBlending.logicOp = vk::LogicOp::eCopy;
     colorBlending.attachmentCount = 1;
     colorBlending.pAttachments = &colorBlendAttachment;
 
-    //completely clear VertexInputStateCreateInfo, as we have no need for it
     vk::PipelineVertexInputStateCreateInfo vertexInputInfo;
     vertexInputInfo.sType = vk::StructureType::ePipelineVertexInputStateCreateInfo;
+    vertexInputInfo.vertexBindingDescriptionCount = vertexInputBindings.size();
+    vertexInputInfo.vertexAttributeDescriptionCount = vertexInputStates.size();
+    vertexInputInfo.pVertexBindingDescriptions = vertexInputBindings.data();
+    vertexInputInfo.pVertexAttributeDescriptions = vertexInputStates.data();
 
     vk::DynamicState state[] = { vk::DynamicState::eViewport, vk::DynamicState::eScissor };
 
     vk::PipelineDynamicStateCreateInfo dynamicInfo;
     dynamicInfo.sType = vk::StructureType::ePipelineDynamicStateCreateInfo;
-    dynamicInfo.pDynamicStates = &state[0];
+    dynamicInfo.pDynamicStates = state;
     dynamicInfo.dynamicStateCount = 2;
 
     vk::GraphicsPipelineCreateInfo graphicsPipelineCreateInfo;
     graphicsPipelineCreateInfo.sType = vk::StructureType::eGraphicsPipelineCreateInfo;
     graphicsPipelineCreateInfo.pNext = &renderInfo;
     graphicsPipelineCreateInfo.pStages = shaderStages.data();
-    graphicsPipelineCreateInfo.stageCount = (uint32_t)shaderStages.size();
+    graphicsPipelineCreateInfo.stageCount = shaderStages.size();
     graphicsPipelineCreateInfo.pVertexInputState = &vertexInputInfo;
     graphicsPipelineCreateInfo.pInputAssemblyState = &inputAssembly;
     graphicsPipelineCreateInfo.pViewportState = &viewportState;
@@ -1260,7 +1293,7 @@ namespace VoxelEngine
   void PipelineData::SetInputTopology(const vk::PrimitiveTopology topology)
   {
     inputAssembly.topology = topology;
-    inputAssembly.primitiveRestartEnable = vk::False;
+    inputAssembly.primitiveRestartEnable = VK_FALSE;
   }
 
   void PipelineData::SetPolygonMode(const vk::PolygonMode mode)
@@ -1277,12 +1310,12 @@ namespace VoxelEngine
 
   void PipelineData::SetMultisamplingNone()
   {
-    multisampling.sampleShadingEnable = vk::False;
+    multisampling.sampleShadingEnable = VK_FALSE;
     multisampling.rasterizationSamples = vk::SampleCountFlagBits::e1;
     multisampling.minSampleShading = 1.0f;
     multisampling.pSampleMask = nullptr;
-    multisampling.alphaToCoverageEnable = vk::False;
-    multisampling.alphaToOneEnable = vk::False;
+    multisampling.alphaToCoverageEnable = VK_FALSE;
+    multisampling.alphaToOneEnable = VK_FALSE;
   }
 
   void PipelineData::DisableBlending()
@@ -1291,7 +1324,7 @@ namespace VoxelEngine
                                           vk::ColorComponentFlagBits::eG |
                                           vk::ColorComponentFlagBits::eB |
                                           vk::ColorComponentFlagBits::eA;
-    colorBlendAttachment.blendEnable = vk::False;
+    colorBlendAttachment.blendEnable = VK_FALSE;
   }
 
   void PipelineData::SetColorAttachmentFormat(const vk::Format format)
@@ -1308,22 +1341,22 @@ namespace VoxelEngine
 
   void PipelineData::DisableDepthTest()
   {
-    depthStencil.depthTestEnable = vk::False;
-    depthStencil.depthWriteEnable = vk::False;
+    depthStencil.depthTestEnable = VK_FALSE;
+    depthStencil.depthWriteEnable = VK_FALSE;
     depthStencil.depthCompareOp = vk::CompareOp::eNever;
-    depthStencil.depthBoundsTestEnable = vk::False;
-    depthStencil.stencilTestEnable = vk::False;
+    depthStencil.depthBoundsTestEnable = VK_FALSE;
+    depthStencil.stencilTestEnable = VK_FALSE;
     depthStencil.minDepthBounds = 0.0f;
     depthStencil.maxDepthBounds = 1.0f;
   }
 
   void PipelineData::EnableDepthTest()
   {
-    depthStencil.depthTestEnable = vk::True;
-    depthStencil.depthWriteEnable = vk::False;
+    depthStencil.depthTestEnable = VK_TRUE;
+    depthStencil.depthWriteEnable = VK_FALSE;
     depthStencil.depthCompareOp = vk::CompareOp::eNever;
-    depthStencil.depthBoundsTestEnable = vk::False;
-    depthStencil.stencilTestEnable = vk::False;
+    depthStencil.depthBoundsTestEnable = VK_FALSE;
+    depthStencil.stencilTestEnable = VK_FALSE;
     depthStencil.minDepthBounds = 0.0f;
     depthStencil.maxDepthBounds = 1.0f;
   }

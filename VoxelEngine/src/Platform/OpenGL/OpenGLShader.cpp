@@ -59,7 +59,7 @@ namespace VoxelEngine
 			in.seekg(0, std::ios::end);
 			result.resize(in.tellg());
 			in.seekg(0, std::ios::beg);
-			in.read(&result[0], result.size());
+			in.read(result.data(), result.size());
 			in.close();
 		} 
 		else { VE_CORE_ERROR("Could not open file '{0}'", filepath); }

@@ -2,8 +2,19 @@
 
 #include "Render/Buffer.h"
 
+#define VMA_VULKAN_VERSION 1003000
+#include <vma/vk_mem_alloc.h>
+
 namespace VoxelEngine
 {
+	struct AllocatedBuffer
+	{
+		VkBuffer buffer;
+
+		VmaAllocation allocation;
+		VmaAllocationInfo info;
+	};
+
 	class VulkanVertexBuffer : public VertexBuffer
 	{
 	public:
@@ -19,9 +30,19 @@ namespace VoxelEngine
 		virtual const BufferLayout& GetLayout() const override { return m_Layout; }
 		virtual void SetLayout(const BufferLayout& layout) override { m_Layout = layout; }
 
+		std::vector<float>& GetVertices() { return m_Vertices; }
+
+		AllocatedBuffer& GetBuffer() { return m_Buffer; }
+		AllocatedBuffer& GetStagingBuffer() { return m_StagingBuffer; }
+
 	private:
 		uint32_t m_RendererID;
 		BufferLayout m_Layout;
+
+    std::vector<float> m_Vertices;
+
+		AllocatedBuffer m_Buffer;
+		AllocatedBuffer m_StagingBuffer;
 	};
 
 	class VulkanIndexBuffer : public IndexBuffer
@@ -38,8 +59,18 @@ namespace VoxelEngine
 
 		virtual void SetData(const void* data, const uint32_t size);
 
+		std::vector<uint32_t>& GetIndices() { return m_Indices; }
+
+		AllocatedBuffer& GetBuffer() { return m_Buffer; }
+		AllocatedBuffer& GetStagingBuffer() { return m_StagingBuffer; }
+
 	private:
 		uint32_t m_RendererID;
 		uint32_t m_Count;
+
+		std::vector<uint32_t> m_Indices;
+
+		AllocatedBuffer m_Buffer;
+		AllocatedBuffer m_StagingBuffer;
 	};
 }

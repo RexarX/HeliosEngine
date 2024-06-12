@@ -6,7 +6,7 @@
 
 namespace VoxelEngine
 {
-	static GLenum ShaderDataTypeToOpenGLBaseType(ShaderDataType type)
+	static GLenum ShaderDataTypeToOpenGLBaseType(const ShaderDataType type)
 	{
 		switch (type)
 		{
@@ -30,6 +30,7 @@ namespace VoxelEngine
 	OpenGLVertexArray::OpenGLVertexArray()
 	{
 		glGenVertexArrays(1, &m_RendererID);
+		Bind();
 	}
 
 	OpenGLVertexArray::~OpenGLVertexArray()
@@ -71,6 +72,7 @@ namespace VoxelEngine
 
 		m_IndexBuffer = indexBuffer;
 	}
+
 	void OpenGLVertexArray::AddVertexAttribDivisor(const uint32_t index, const uint32_t divisor)
 	{
     glVertexAttribDivisor(index, divisor);

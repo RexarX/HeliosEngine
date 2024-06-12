@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16.0 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.24.0)
 
 project(VoxelEngine)
 
@@ -54,14 +54,12 @@ include_directories(VoxelEngine/src)
 include_directories(VoxelEngine/src/VoxelEngine)
 include_directories(VoxelEngine/src/Platform)
 
-option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
-set(BUILD_SHARED_LIBS OFF)
+set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
+set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+set(GLFW_INSTALL OFF CACHE BOOL "" FORCE)
 
-option(GLM_ENABLE_FAST_MATH "Enable fast math optimizations" ON)
-set(GLM_ENABLE_FAST_MATH ON)
-
-option(SPDLOG_BUILD_SHARED "Build shared library" ON)
-set(SPDLOG_BUILD_SHARED ON)
+set(SPDLOG_BUILD_SHARED ON CACHE BOOL "" FORCE)
 
 add_subdirectory(VoxelCraft)
 add_subdirectory(VoxelEngine)

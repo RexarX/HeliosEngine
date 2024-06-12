@@ -6,19 +6,40 @@
 
 #include <vulkan/vulkan.hpp>
 
-#define VMA_VULKAN_VERSION 1003000
-#include <vma/vk_mem_alloc.h>
-
 #ifdef VE_DEBUG
 	const bool enableValidationLayers = true;
 #else
 	const bool enableValidationLayers = false;
 #endif
 
+VK_DEFINE_HANDLE(VmaAllocator)
+VK_DEFINE_HANDLE(VmaAllocation)
+
+struct VmaAllocationInfo;
+
 struct GLFWwindow;
 
 namespace VoxelEngine
 {
+	struct DeletionQueue
+	{
+		std::deque<std::function<void()>> deletors;
+
+		void push_function(std::function<void()>&& function)
+		{
+			deletors.push_back(function);
+		}
+
+		void flush()
+		{
+			for (auto it = deletors.rbegin(); it != deletors.rend(); it++) {
+				(*it)();
+			}
+
+			deletors.clear();
+		}
+	};
+
 	struct PipelineData
 	{
 		PipelineData() { Clear(); }
@@ -36,6 +57,10 @@ namespace VoxelEngine
 		void DisableDepthTest();
 		void EnableDepthTest();
 
+		
+		std::vector<vk::VertexInputAttributeDescription> vertexInputStates;
+		std::vector <vk::VertexInputBindingDescription> vertexInputBindings;
+
 		std::vector<vk::PipelineShaderStageCreateInfo> shaderStages;
 		vk::PipelineInputAssemblyStateCreateInfo inputAssembly;
 		vk::PipelineRasterizationStateCreateInfo rasterizer;
@@ -43,6 +68,7 @@ namespace VoxelEngine
 		vk::PipelineMultisampleStateCreateInfo multisampling;
 		vk::PipelineDepthStencilStateCreateInfo depthStencil;
 		vk::PipelineRenderingCreateInfoKHR renderInfo;
+
 		vk::Format colorAttachmentformat;
 	};
 
@@ -64,7 +90,8 @@ namespace VoxelEngine
 		std::vector<vk::PresentModeKHR> presentModes;
 	};
 
-	struct AllocatedImage {
+	struct AllocatedImage
+	{
 		VkImage image;
 		vk::ImageView imageView;
 		vk::Extent3D imageExtent;
@@ -125,9 +152,12 @@ namespace VoxelEngine
 
 		static inline VulkanContext& Get() { return *m_Context; }
 
-		inline vk::Device GetDevice() { return m_Device; }
+		void ImmediateSubmit(std::function<void(vk::CommandBuffer cmd)>&& function);
 
+		inline DeletionQueue& GetDeletionQueue() { return m_DeletionQueue; }
+		inline vk::Device GetDevice() { return m_Device; }
 		inline PipelineData& GetPipelineData() { return m_PipelineBuilder; }
+		inline VmaAllocator GetAllocator() { return m_Allocator; }
 
 	private:
 		const std::vector<const char*> validationLayers = {
@@ -142,12 +172,14 @@ namespace VoxelEngine
 			VK_KHR_PUSH_DESCRIPTOR_EXTENSION_NAME
 		};
 
-		static VulkanContext* m_Context;
-
 		bool m_Resized = false;
 		bool m_Vsync = true;
 		bool m_RebuildPipeline = false;
 		bool m_ImGuiEnabled = false;
+
+		DeletionQueue m_DeletionQueue;
+
+		static VulkanContext* m_Context;
 
 		VmaAllocator m_Allocator;
 
@@ -193,6 +225,10 @@ namespace VoxelEngine
 		vk::Pipeline m_Pipeline;
 		vk::PipelineLayout m_PipelineLayout;
 
+		vk::Fence m_ImFence;
+		std::vector<vk::CommandBuffer, std::allocator<vk::CommandBuffer>> m_ImCommandBuffer;
+		vk::CommandPool m_ImCommandPool;
+
 	private:
 		void CreateInstance();
 		void SetupDebugCallback();
@@ -225,8 +261,6 @@ namespace VoxelEngine
 																									const vk::ImageAspectFlags aspectFlags) const;
 		void copy_image_to_image(const vk::CommandBuffer cmd, const vk::Image source, const vk::Image destination,
 														 const vk::Extent2D srcSize, const vk::Extent2D dstSize) const;
-
-		void immediate_submit(const vk::CommandBuffer cmd);
 
 		bool IsDeviceSuitable() const;
 		QueueFamilyIndices FindQueueFamilies() const;

@@ -182,10 +182,10 @@ namespace VoxelEngine
       -1.0f, -1.0f,  1.0f,
        1.0f, -1.0f,  1.0f
     };
-    s_ChunkedData.ChunkVertex = VertexArray::Create();
-    s_ChunkedData.ChunkVertex->Bind();
 
-    s_ChunkedData.ChunkBuffer = VertexBuffer::Create(nullptr, sizeof(float) * MAX_VERTICES);
+    s_ChunkedData.ChunkVertex = VertexArray::Create();
+
+    s_ChunkedData.ChunkBuffer = VertexBuffer::Create(sizeof(float) * MAX_VERTICES);
 
     s_ChunkedData.ChunkBuffer->SetLayout({
       { ShaderDataType::Float3, "a_Pos" },
@@ -196,16 +196,9 @@ namespace VoxelEngine
 
     s_ChunkedData.ChunkBuffer->Unbind();
 
-    s_ChunkedData.ChunkIndex = IndexBuffer::Create(nullptr, sizeof(uint32_t) * MAX_VERTICES);
-
-    s_ChunkedData.ChunkVertex->SetIndexBuffer(s_ChunkedData.ChunkIndex);
-
-    s_ChunkedData.ChunkIndex->Unbind();
-
     s_Cube.CubeVertex = VertexArray::Create();
-    s_Cube.CubeVertex->Bind();
 
-    s_Cube.CubeBuffer = VertexBuffer::Create(vertices, sizeof(vertices));
+    s_Cube.CubeBuffer = VertexBuffer::Create(vertices, sizeof(vertices) * sizeof(float));
     s_Cube.CubeBuffer->SetLayout({
       { ShaderDataType::Float3, "a_Pos" },
       { ShaderDataType::Float2, "a_TexCoord" }
@@ -244,7 +237,6 @@ namespace VoxelEngine
     //s_Cube.CubeShader->Unbind();
 
     s_Line.LineVertex = VertexArray::Create();
-    s_Line.LineVertex->Bind();
 
     s_Line.LineBuffer = VertexBuffer::Create(lineVertices, sizeof(lineVertices));
     s_Line.LineBuffer->SetLayout({ { ShaderDataType::Float3, "a_Pos" } });
@@ -260,7 +252,6 @@ namespace VoxelEngine
     //s_Line.LineShader->Unbind();
 
     s_Skybox.SkyboxVertex = VertexArray::Create();
-    s_Skybox.SkyboxVertex->Bind();
 
     s_Skybox.SkyboxBuffer = VertexBuffer::Create(skyboxVertices, sizeof(skyboxVertices));
     s_Skybox.SkyboxBuffer->SetLayout({ { ShaderDataType::Float3, "a_Pos" } });

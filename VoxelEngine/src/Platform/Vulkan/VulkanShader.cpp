@@ -2,8 +2,6 @@
 
 #include "vepch.h"
 
-#include "VulkanContext.h"
-
 #include <shaderc/shaderc.hpp>
 
 namespace VoxelEngine 
@@ -115,7 +113,7 @@ namespace VoxelEngine
 			in.seekg(0, std::ios::end);
 			result.resize(in.tellg());
 			in.seekg(0, std::ios::beg);
-			in.read(&result[0], result.size());
+			in.read(result.data(), result.size());
 			in.close();
 		} 
 		else { VE_CORE_ERROR("Could not open file '{0}'", filepath); }
@@ -150,11 +148,12 @@ namespace VoxelEngine
 		std::vector<uint32_t> spirv;
 		for (const auto& src : shaderSources) {
 			if (m_Compiled) {
-				spirv.insert(spirv.begin(), src.second.begin(), src.second.end());
+				spirv.resize(src.second.size() / sizeof(uint32_t));
+				memcpy(spirv.data(), src.second.data(), src.second.size());
 			} else {
 				bool result = GLSLtoSPV(src.first, src.second, spirv);
-
-				VE_CORE_ASSERT(result, "Failed to compile vertex shader!");
+				
+				VE_CORE_ASSERT(result, "Failed to compile shader!");
 			}
 
 			vk::ShaderModuleCreateInfo info;

@@ -64,7 +64,7 @@ namespace VoxelEngine
 
 		glfwSetWindowUserPointer(m_Window, reinterpret_cast<void*>(this));
 
-		SetVSync(true);
+		//SetVSync(true);
 
 		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height) {
 			WindowsWindow& win = *(WindowsWindow*)glfwGetWindowUserPointer(window);

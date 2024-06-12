@@ -177,17 +177,20 @@ if(MSVC)
     )
 endif()
 
+find_package(Vulkan REQUIRED)
+
 target_link_libraries(${PROJECT_NAME} PRIVATE
 	glad
     glfw
     stb_image
     imgui
+    Vulkan::Vulkan
 )
 
 set(ADDITIONAL_LIBRARY_DEPENDENCIES
     "opengl32"
-	"$ENV{VULKAN_SDK}/Lib/vulkan-1.lib"
     "$ENV{VULKAN_SDK}/Lib/shaderc_shared.lib"
+
 )
 
 target_link_libraries(${PROJECT_NAME} PUBLIC ${ADDITIONAL_LIBRARY_DEPENDENCIES})

@@ -5,18 +5,18 @@ namespace VoxelEngine
 	class Timestep
 	{
 	public:
-		Timestep(const float time = 0.0f)
+		Timestep(const double time = 0.0f)
 			: m_Time(time)
 		{
 		}
 
-		operator float() const { return m_Time; }
+		operator double() const { return m_Time; }
 
-		float GetSeconds() const { return m_Time; }
-		float GetMilliseconds() const { return m_Time * 1000.0f; }
-		float GetFramerate() const { return 1000.0f / GetMilliseconds(); }
+		double GetSeconds() const { return m_Time; }
+		double GetMilliseconds() const { return m_Time * 1000.0f; }
+		double GetFramerate() const { return 1000.0f / GetMilliseconds(); }
 
 	private:
-		float m_Time;
+		double m_Time;
 	};
 }
