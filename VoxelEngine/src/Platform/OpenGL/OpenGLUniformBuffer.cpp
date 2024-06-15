@@ -4,7 +4,8 @@
 
 namespace VoxelEngine
 {
-	OpenGLUniformBuffer::OpenGLUniformBuffer(const uint32_t size, const uint32_t binding)
+	OpenGLUniformBuffer::OpenGLUniformBuffer(const char* name, const uint32_t size,
+																					 const uint32_t binding)
 	{
 		glCreateBuffers(1, &m_RendererID);
 		glNamedBufferData(m_RendererID, size, nullptr, GL_DYNAMIC_DRAW);

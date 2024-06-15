@@ -1,12 +1,8 @@
 #include "VulkanVertexArray.h"
+
 #include "VulkanContext.h"
 #include "VulkanBuffer.h"
-
-#include "vepch.h"
-
-#define VMA_IMPLEMENTATION
-#define VMA_VULKAN_VERSION 1003000
-#include <vma/vk_mem_alloc.h>
+#include "VulkanUniformBuffer.h"
 
 namespace VoxelEngine
 {
@@ -31,8 +27,10 @@ namespace VoxelEngine
 		return vk::Format::eUndefined;
 	}
 
-	VulkanVertexArray::VulkanVertexArray()
+	VulkanVertexArray::VulkanVertexArray(const char* name)
+		: m_Name(name)
 	{
+		VulkanContext::Get().SetCurrentComputeEffect(name);
 	}
 
 	VulkanVertexArray::~VulkanVertexArray()
@@ -41,6 +39,7 @@ namespace VoxelEngine
 
 	void VulkanVertexArray::Bind() const
 	{
+		VulkanContext::Get().SetCurrentComputeEffect(m_Name);
 	}
 
 	void VulkanVertexArray::Unbind() const
@@ -49,72 +48,88 @@ namespace VoxelEngine
 
 	void VulkanVertexArray::AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer)
 	{
-		std::shared_ptr<VulkanVertexBuffer> vulkanVertexBuffer = std::dynamic_pointer_cast<VulkanVertexBuffer>(vertexBuffer);
+		VulkanContext& context = VulkanContext::Get();
 
-		void* data = vulkanVertexBuffer->GetStagingBuffer().allocation->GetMappedData();
+		std::shared_ptr<VulkanVertexBuffer> vulkanVertexBuffer = std::static_pointer_cast<VulkanVertexBuffer>(vertexBuffer);
 
-		memcpy(data, vulkanVertexBuffer->GetVertices().data(),
-					 vulkanVertexBuffer->GetVertices().size() * sizeof(float));
+		VE_CORE_ASSERT(m_Name == vulkanVertexBuffer->GetName(), "Buffer name does not match vertex array name!");
+
+		void* data;
+		vmaMapMemory(context.GetAllocator(), vulkanVertexBuffer->GetStagingBuffer().allocation, &data);
+
+		context.GetDeletionQueue().push_function([&]() {
+			vmaUnmapMemory(context.GetAllocator(), vulkanVertexBuffer->GetStagingBuffer().allocation);
+			});
+
+		memcpy(data, vulkanVertexBuffer->GetVertices().data(), vulkanVertexBuffer->GetVertices().size() * sizeof(float));
 
 		VE_CORE_ASSERT(vertexBuffer->GetLayout().GetElements().size(), "Vertex Buffer has no layout!");
 		const BufferLayout& layout = vertexBuffer->GetLayout();
 
 		vk::VertexInputBindingDescription bindingDescription;
-		bindingDescription.binding = m_Binding;
+		bindingDescription.binding = 0;
 		bindingDescription.stride = layout.GetStride();
 		bindingDescription.inputRate = vk::VertexInputRate::eVertex;
 
-		VulkanContext::Get().GetPipelineData().vertexInputBindings.emplace_back(bindingDescription);
+		context.GetComputeEffect(m_Name).pipelineBuilder.vertexInputBindings.emplace_back(bindingDescription);
 
 		for (const auto& element : layout) {
 			vk::VertexInputAttributeDescription attributeDescription;
-			attributeDescription.binding = m_Binding;
+			attributeDescription.binding = 0;
 			attributeDescription.location = m_VertexBufferIndex;
 			attributeDescription.format = ShaderDataTypeToVulkanBaseType(element.type_);
 			attributeDescription.offset = element.offset_;
 
-			VulkanContext::Get().GetPipelineData().vertexInputStates.emplace_back(attributeDescription);
+			context.GetComputeEffect(m_Name).pipelineBuilder.vertexInputStates.emplace_back(attributeDescription);
 
       ++m_VertexBufferIndex;
 		}
 
 		if (vulkanVertexBuffer->GetVertices().size() != 0) {
-			VulkanContext::Get().ImmediateSubmit([&](vk::CommandBuffer cmd) {
+			context.ImmediateSubmit([&](const vk::CommandBuffer cmd) {
 				vk::BufferCopy vertexCopy;
 				vertexCopy.dstOffset = 0;
 				vertexCopy.srcOffset = 0;
 				vertexCopy.size = vulkanVertexBuffer->GetVertices().size() * sizeof(float);
 
 				cmd.copyBuffer(vulkanVertexBuffer->GetStagingBuffer().buffer, vulkanVertexBuffer->GetBuffer().buffer,
-					1, &vertexCopy);
+											 1, &vertexCopy);
 				});
 		}
 
-		m_VertexBuffers.push_back(vertexBuffer);
-		++m_Binding;
+		m_VertexBuffer = vertexBuffer;
 	}
 
 	void VulkanVertexArray::SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer)
 	{
-		std::shared_ptr<VulkanIndexBuffer> vulkanIndexBuffer = std::dynamic_pointer_cast<VulkanIndexBuffer>(indexBuffer);
-		std::shared_ptr<VulkanVertexBuffer> vulkanVertexBuffer = std::dynamic_pointer_cast<VulkanVertexBuffer>(m_VertexBuffers.back());
+		VulkanContext& context = VulkanContext::Get();
+
+		std::shared_ptr<VulkanIndexBuffer> vulkanIndexBuffer = std::static_pointer_cast<VulkanIndexBuffer>(indexBuffer);
+		std::shared_ptr<VulkanVertexBuffer> vulkanVertexBuffer = std::static_pointer_cast<VulkanVertexBuffer>(m_VertexBuffer);
+
+		VE_CORE_ASSERT(m_Name == vulkanIndexBuffer->GetName(), "Buffer name does not match index buffer name!");
 
 		if (indexBuffer != nullptr) {
-			void* data = vulkanVertexBuffer->GetStagingBuffer().allocation->GetMappedData();
+			void* data;
+			vmaMapMemory(context.GetAllocator(), vulkanVertexBuffer->GetStagingBuffer().allocation, &data);
+
+			context.GetDeletionQueue().push_function([&]() {
+				vmaUnmapMemory(context.GetAllocator(), vulkanVertexBuffer->GetStagingBuffer().allocation);
+				});
 
 			memcpy((int8_t*)data + vulkanVertexBuffer->GetVertices().size() * sizeof(float),
 						 vulkanIndexBuffer->GetIndices().data(), indexBuffer->GetCount() * sizeof(uint32_t));
 		}
 
 		if (indexBuffer->GetCount() != 0) {
-			VulkanContext::Get().ImmediateSubmit([&](vk::CommandBuffer cmd) {
+			context.ImmediateSubmit([&](const vk::CommandBuffer cmd) {
 				vk::BufferCopy indexCopy;
 				indexCopy.dstOffset = 0;
 				indexCopy.srcOffset = 0;
 				indexCopy.size = indexBuffer->GetCount() * sizeof(uint32_t);
 
 				cmd.copyBuffer(vulkanIndexBuffer->GetStagingBuffer().buffer, vulkanIndexBuffer->GetBuffer().buffer,
-					1, &indexCopy);
+											 1, &indexCopy);
 				});
 		}
 

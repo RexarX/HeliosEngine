@@ -27,7 +27,7 @@ namespace VoxelEngine
 		return 0;
 	}
 
-	OpenGLVertexArray::OpenGLVertexArray()
+	OpenGLVertexArray::OpenGLVertexArray(const char* name)
 	{
 		glGenVertexArrays(1, &m_RendererID);
 		Bind();
@@ -63,7 +63,7 @@ namespace VoxelEngine
 			++m_VertexBufferIndex;
 		}
 
-		m_VertexBuffers.push_back(vertexBuffer);
+		m_VertexBuffer = vertexBuffer;
 	}
 
 	void OpenGLVertexArray::SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer)

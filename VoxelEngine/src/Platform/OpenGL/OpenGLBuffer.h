@@ -7,8 +7,8 @@ namespace VoxelEngine
 	class OpenGLVertexBuffer : public VertexBuffer
 	{
 	public:
-		OpenGLVertexBuffer(const uint32_t size);
-		OpenGLVertexBuffer(const float* vertices, const uint32_t size);
+		OpenGLVertexBuffer(const char* name, const uint32_t size);
+		OpenGLVertexBuffer(const char* name, const float* vertices, const uint32_t size);
 		virtual ~OpenGLVertexBuffer();
 
 		virtual void Bind() const override;
@@ -27,8 +27,8 @@ namespace VoxelEngine
 	class OpenGLIndexBuffer : public IndexBuffer
 	{
 	public:
-		OpenGLIndexBuffer(const uint32_t* indices, const uint32_t count);
-		OpenGLIndexBuffer(const uint32_t size);
+		OpenGLIndexBuffer(const char* name, const uint32_t* indices, const uint32_t count);
+		OpenGLIndexBuffer(const char* name, const uint32_t size);
 		virtual ~OpenGLIndexBuffer();
 
 		virtual void Bind() const;

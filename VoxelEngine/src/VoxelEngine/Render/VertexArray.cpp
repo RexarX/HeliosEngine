@@ -9,13 +9,13 @@
 
 namespace VoxelEngine
 {
-	std::unique_ptr<VertexArray> VertexArray::Create()
+	std::unique_ptr<VertexArray> VertexArray::Create(const char* name)
 	{
 		switch (Renderer::GetAPI())
 		{
 		case RendererAPI::API::None:    VE_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-		case RendererAPI::API::OpenGL:  return std::make_unique<OpenGLVertexArray>();
-		case RendererAPI::API::Vulkan:  return std::make_unique<VulkanVertexArray>();
+		case RendererAPI::API::OpenGL:  return std::make_unique<OpenGLVertexArray>(name);
+		case RendererAPI::API::Vulkan:  return std::make_unique<VulkanVertexArray>(name);
 		}
 
 		VE_CORE_ASSERT(false, "Unknown RendererAPI!");

@@ -22,8 +22,8 @@ namespace VoxelEngine
 		return nullptr;
 	}
 
-	std::shared_ptr<Shader> Shader::Create(const std::string& name, const std::string& vertex,
-																																	const std::string& fragment)
+	std::shared_ptr<Shader> Shader::Create(const char* name, const std::string& vertex,
+																													 const std::string& fragment)
 	{
 		switch (Renderer::GetAPI())
 		{
@@ -36,7 +36,7 @@ namespace VoxelEngine
 		return nullptr;
 	}
 
-	void ShaderLibrary::Add(const std::string& name, const std::shared_ptr<Shader>& shader)
+	void ShaderLibrary::Add(const char* name, const std::shared_ptr<Shader>& shader)
 	{
 		VE_CORE_ASSERT(!Exists(name), "Shader already exists!");
 		m_Shaders[name] = shader;
@@ -44,18 +44,17 @@ namespace VoxelEngine
 
 	void ShaderLibrary::Add(const std::shared_ptr<Shader>& shader)
 	{
-		auto& name = shader->GetName();
-		Add(name, shader);
+		Add(shader->GetName(), shader);
 	}
 
 	std::shared_ptr<Shader> ShaderLibrary::Load(const std::string& filepath)
 	{
 		auto shader = Shader::Create(filepath);
-		Add(shader);
+		Add(Shader::Create(filepath));
 		return shader;
 	}
 
-	std::shared_ptr<Shader> ShaderLibrary::Load(const std::string& name,
+	std::shared_ptr<Shader> ShaderLibrary::Load(const char* name,
 																							const std::string& filepath)
 	{
 		auto shader = Shader::Create(filepath);
@@ -63,13 +62,13 @@ namespace VoxelEngine
 		return shader;
 	}
 
-	std::shared_ptr<Shader> ShaderLibrary::Get(const std::string& name)
+	std::shared_ptr<Shader> ShaderLibrary::Get(const char* name)
 	{
 		VE_CORE_ASSERT(Exists(name), "Shader not found!");
 		return m_Shaders[name];
 	}
 
-	bool ShaderLibrary::Exists(const std::string& name) const
+	bool ShaderLibrary::Exists(const char* name) const
 	{
 		return m_Shaders.find(name) != m_Shaders.end();
 	}

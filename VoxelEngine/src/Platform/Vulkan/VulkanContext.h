@@ -2,130 +2,18 @@
 
 #include "Render/GraphicsContext.h"
 
-#include "vepch.h"
-
-#include <vulkan/vulkan.hpp>
+#include "VulkanStructs.h"
 
 #ifdef VE_DEBUG
-	const bool enableValidationLayers = true;
+	constexpr bool enableValidationLayers = true;
 #else
-	const bool enableValidationLayers = false;
+	constexpr bool enableValidationLayers = false;
 #endif
-
-VK_DEFINE_HANDLE(VmaAllocator)
-VK_DEFINE_HANDLE(VmaAllocation)
-
-struct VmaAllocationInfo;
 
 struct GLFWwindow;
 
 namespace VoxelEngine
 {
-	struct DeletionQueue
-	{
-		std::deque<std::function<void()>> deletors;
-
-		void push_function(std::function<void()>&& function)
-		{
-			deletors.push_back(function);
-		}
-
-		void flush()
-		{
-			for (auto it = deletors.rbegin(); it != deletors.rend(); it++) {
-				(*it)();
-			}
-
-			deletors.clear();
-		}
-	};
-
-	struct PipelineData
-	{
-		PipelineData() { Clear(); }
-
-		void Clear();
-		void BuildPipeline(const vk::Device device, vk::PipelineLayout& layout, vk::Pipeline& pipeline);
-
-		void SetInputTopology(const vk::PrimitiveTopology topology);
-		void SetPolygonMode(const vk::PolygonMode mode);
-		void SetCullMode(const vk::CullModeFlags cullMode, const vk::FrontFace frontFace);
-		void SetMultisamplingNone();
-		void DisableBlending();
-		void SetColorAttachmentFormat(const vk::Format format);
-		void SetDepthFormat(const vk::Format format);
-		void DisableDepthTest();
-		void EnableDepthTest();
-
-		
-		std::vector<vk::VertexInputAttributeDescription> vertexInputStates;
-		std::vector <vk::VertexInputBindingDescription> vertexInputBindings;
-
-		std::vector<vk::PipelineShaderStageCreateInfo> shaderStages;
-		vk::PipelineInputAssemblyStateCreateInfo inputAssembly;
-		vk::PipelineRasterizationStateCreateInfo rasterizer;
-		vk::PipelineColorBlendAttachmentState colorBlendAttachment;
-		vk::PipelineMultisampleStateCreateInfo multisampling;
-		vk::PipelineDepthStencilStateCreateInfo depthStencil;
-		vk::PipelineRenderingCreateInfoKHR renderInfo;
-
-		vk::Format colorAttachmentformat;
-	};
-
-	struct QueueFamilyIndices
-	{
-		std::optional<uint32_t> graphicsFamily;
-		std::optional<uint32_t> presentFamily;
-
-		inline bool isComplete() const
-		{
-			return graphicsFamily.has_value() && presentFamily.has_value();
-		}
-	};
-
-	struct SwapChainSupportDetails
-	{
-		vk::SurfaceCapabilitiesKHR capabilities;
-		std::vector<vk::SurfaceFormatKHR> formats;
-		std::vector<vk::PresentModeKHR> presentModes;
-	};
-
-	struct AllocatedImage
-	{
-		VkImage image;
-		vk::ImageView imageView;
-		vk::Extent3D imageExtent;
-		vk::Format imageFormat;
-
-		VmaAllocation allocation;
-	};
-
-	struct DescriptorLayoutBuilder
-	{
-		std::vector<vk::DescriptorSetLayoutBinding> bindings;
-		void AddBinding(const uint32_t binding, const vk::DescriptorType type);
-		void Clear() { bindings.clear(); }
-		vk::DescriptorSetLayout Build(const vk::Device device, const vk::ShaderStageFlags shaderStages,
-																	const vk::DescriptorSetLayoutCreateFlags flags,
-																	const void* pNext = nullptr);
-	};
-
-	struct DescriptorAllocator
-	{
-		struct PoolSizeRatio
-		{
-			vk::DescriptorType type;
-			float ratio = 1.0f;
-		};
-
-		vk::DescriptorPool pool;
-		void InitPool(const vk::Device device, const uint32_t maxSets, const std::span<PoolSizeRatio> poolRatios);
-		void ClearDescriptors(const vk::Device device);
-		void DestroyPool(const vk::Device device);
-
-		vk::DescriptorSet Allocate(const vk::Device device, const vk::DescriptorSetLayout layout);
-	};
-
 	class VulkanContext : public GraphicsContext
 	{
 	public:
@@ -148,16 +36,22 @@ namespace VoxelEngine
 
 		virtual void SetImGuiState(const bool enabled) override { m_ImGuiEnabled = enabled; }
 
-		void BuildPipeline() { m_PipelineBuilder.BuildPipeline(m_Device, m_PipelineLayout, m_Pipeline); }
-
-		static inline VulkanContext& Get() { return *m_Context; }
+		void Build();
 
 		void ImmediateSubmit(std::function<void(vk::CommandBuffer cmd)>&& function);
 
+		void AddComputeEffect(const char* name) { m_ComputeEffects.insert(std::pair<const char*, ComputeEffect>(name, ComputeEffect())); }
+		void SetCurrentComputeEffect(const char* name) { m_CurrentComputeEffect = name; }
+
+		static inline VulkanContext& Get() { return *m_Context; }
 		inline DeletionQueue& GetDeletionQueue() { return m_DeletionQueue; }
 		inline vk::Device GetDevice() { return m_Device; }
-		inline PipelineData& GetPipelineData() { return m_PipelineBuilder; }
 		inline VmaAllocator GetAllocator() { return m_Allocator; }
+		inline AllocatedImage& GetDrawImage() { return m_DrawImage; }
+    inline AllocatedImage& GetDepthImage() { return m_DepthImage; }
+		inline PipelineBuilder& GetPipelineBuilder() { return m_PipelineBuilder; }
+		inline ComputeEffect& GetComputeEffect(const std::string& name) { return m_ComputeEffects[name]; }
+		inline const char* GetCurrentComputeEffect() const { return m_CurrentComputeEffect.c_str(); }
 
 	private:
 		const std::vector<const char*> validationLayers = {
@@ -171,11 +65,6 @@ namespace VoxelEngine
 			VK_KHR_BUFFER_DEVICE_ADDRESS_EXTENSION_NAME,
 			VK_KHR_PUSH_DESCRIPTOR_EXTENSION_NAME
 		};
-
-		bool m_Resized = false;
-		bool m_Vsync = true;
-		bool m_RebuildPipeline = false;
-		bool m_ImGuiEnabled = false;
 
 		DeletionQueue m_DeletionQueue;
 
@@ -204,30 +93,35 @@ namespace VoxelEngine
 
 		vk::Extent2D m_DrawExtent;
 		
-		PipelineData m_PipelineBuilder;
-
-		DescriptorAllocator m_DescriptorAllocator;
-		DescriptorAllocator m_ImGuiDescriptorAllocator;
-
-		vk::DescriptorSet m_DrawImageDescriptors;
-		vk::DescriptorSetLayout m_DrawImageDescriptorLayout;
-
 		vk::CommandPool m_CommandPool;
-		std::vector<vk::CommandBuffer, std::allocator<vk::CommandBuffer>> m_CommandBuffers;
+		vk::CommandBuffer m_CommandBuffer;
 
 		vk::Semaphore m_SwapChainSemaphore;
 		vk::Semaphore m_RenderSemaphore;
 		vk::Fence m_RenderFence;
 
+		PipelineBuilder m_PipelineBuilder;
+
+		
+		DescriptorAllocator m_ImGuiDescriptorAllocator;
+
+		DescriptorAllocatorGrowable m_DescriptorAllocator;
+
+		vk::DescriptorSet m_DrawImageDescriptors;
+		vk::DescriptorSetLayout m_DrawImageDescriptorLayout;
+
 		AllocatedImage m_DrawImage;
 		AllocatedImage m_DepthImage;
+
+		std::map<std::string, ComputeEffect> m_ComputeEffects;
+		std::string m_CurrentComputeEffect;
 
 		vk::Pipeline m_Pipeline;
 		vk::PipelineLayout m_PipelineLayout;
 
-		vk::Fence m_ImFence;
-		std::vector<vk::CommandBuffer, std::allocator<vk::CommandBuffer>> m_ImCommandBuffer;
 		vk::CommandPool m_ImCommandPool;
+		vk::CommandBuffer m_ImCommandBuffer;
+		vk::Fence m_ImFence;
 
 	private:
 		void CreateInstance();
@@ -244,7 +138,6 @@ namespace VoxelEngine
 		void CreatePipeline();
 		
 		void RecreateSwapChain();
-		void RebuildPipeline();
 
 		void DrawGeometry(const vk::CommandBuffer cmd);
 		void DrawImGui(const vk::ImageView view);
@@ -264,7 +157,7 @@ namespace VoxelEngine
 
 		bool IsDeviceSuitable() const;
 		QueueFamilyIndices FindQueueFamilies() const;
-		std::vector<const char*> GetRequiredExtensions() const;
+		const std::vector<const char*> GetRequiredExtensions() const;
 		bool CheckDeviceExtensionSupport() const;
 		bool CheckValidationLayerSupport() const;
 
@@ -278,6 +171,10 @@ namespace VoxelEngine
 		SwapChainSupportDetails QuerySwapChainSupport() const;
 
 	private:
+		bool m_Resized = false;
+		bool m_Vsync = true;
+		bool m_ImGuiEnabled = false;
+
 		GLFWwindow* m_WindowHandle;
 	};
 }

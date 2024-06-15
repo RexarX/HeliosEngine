@@ -26,6 +26,8 @@ namespace VoxelEngine
 		static void BeginScene(const Camera& camera);
 		static void EndScene();
 
+		static void DrawTriangle(const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& size);
+
 		static void DrawCube(const glm::vec3& position, const glm::vec3& rotation,
 												 const glm::vec3& size, const std::shared_ptr<Texture>& texture);
 
@@ -45,7 +47,7 @@ namespace VoxelEngine
 	private:
 		struct SceneData
 		{
-			glm::mat4 ViewProjectionMatrix;
+      glm::mat4 ProjectionViewMatrix;
 			glm::mat4 ProjectionMatrix;
 			glm::mat4 ViewMatrix;
 		};

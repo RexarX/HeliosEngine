@@ -1,12 +1,14 @@
 #include "VulkanShader.h"
 
+#include "VulkanUniformBuffer.h"
+
 #include "vepch.h"
 
 #include <shaderc/shaderc.hpp>
 
 namespace VoxelEngine 
 {
-	static vk::ShaderStageFlagBits ShaderTypeFromString(const std::string& type)
+	static vk::ShaderStageFlagBits ShaderTypeFromString(const std::string_view type)
 	{
 		if (type == "vertex") { return vk::ShaderStageFlagBits::eVertex; }
 		else if (type == "fragment") { return vk::ShaderStageFlagBits::eFragment; }
@@ -70,6 +72,8 @@ namespace VoxelEngine
 
 	VulkanShader::VulkanShader(const std::string& filepath)
 	{
+		VulkanContext::Get().SetCurrentComputeEffect(m_Name);
+
 		std::string source = ReadFile(filepath);
 		auto shaderSources = PreProcess(source);
 
@@ -79,13 +83,17 @@ namespace VoxelEngine
 		lastSlash = lastSlash == std::string::npos ? 0 : lastSlash + 1;
 		auto lastDot = filepath.rfind('.');
 		auto count = lastDot == std::string::npos ? filepath.size() - lastSlash : lastDot - lastSlash;
-		m_Name = filepath.substr(lastSlash, count);
+		std::string nameSubstring = filepath.substr(lastSlash, count);
+		m_Name = nameSubstring.c_str();
 	}
 
-	VulkanShader::VulkanShader(const std::string& name, const std::string& vertex,
-																											const std::string& fragment)
+	VulkanShader::VulkanShader(const char* name, const std::string& vertex,
+																							 const std::string& fragment)
 		: m_Name(name)
 	{
+		VulkanContext::Get().AddComputeEffect(name);
+		VulkanContext::Get().SetCurrentComputeEffect(m_Name);
+
 		if (vertex.rfind(".spv") != std::string::npos || fragment.rfind(".spv") != std::string::npos) {
 			m_Compiled = true;
 		}
@@ -164,6 +172,8 @@ namespace VoxelEngine
 
 			vk::ShaderModule shaderModule = VulkanContext::Get().GetDevice().createShaderModule(info);
 
+			VE_CORE_ASSERT(shaderModule, "Failed to create shader module!");
+
 			vk::PipelineShaderStageCreateInfo shaderStageCreateInfo;
 			shaderStageCreateInfo.sType = vk::StructureType::ePipelineShaderStageCreateInfo;
 			shaderStageCreateInfo.flags = vk::PipelineShaderStageCreateFlags();
@@ -171,47 +181,87 @@ namespace VoxelEngine
 			shaderStageCreateInfo.module = shaderModule;
 			shaderStageCreateInfo.pName = "main";
 			
-			VulkanContext::Get().GetPipelineData().shaderStages.emplace_back(shaderStageCreateInfo);
+			VulkanContext::Get().GetComputeEffect(m_Name).
+				pipelineBuilder.shaderStages.emplace_back(shaderStageCreateInfo);
 
 			spirv.clear();
-
-			VE_CORE_ASSERT(shaderModule, "Failed to create shader module!");
 		}
 	}
 
 	void VulkanShader::Bind() const
 	{
+		VulkanContext::Get().SetCurrentComputeEffect(m_Name);
 	}
 
 	void VulkanShader::Unbind() const
 	{
 	}
 
-	void VulkanShader::UploadUniformInt(const std::string& name, const int value)
+	void VulkanShader::AddUniformBuffer(const std::shared_ptr<UniformBuffer>& uniformBuffer)
+	{
+		VulkanContext& context = VulkanContext::Get();
+
+		context.GetComputeEffect(m_Name).descriptorLayoutBuilder.
+			AddBinding(m_Binding, vk::DescriptorType::eUniformBufferDynamic, vk::ShaderStageFlagBits::eVertex);
+
+		context.GetComputeEffect(m_Name).descriptorAllocator.AddRatios(
+			{ vk::DescriptorType::eUniformBufferDynamic, 1 }
+		);
+
+		std::shared_ptr<VulkanUniformBuffer> vulkanUniformBuffer = std::static_pointer_cast<VulkanUniformBuffer>(uniformBuffer);
+
+		void* data;
+		vmaMapMemory(context.GetAllocator(), vulkanUniformBuffer->GetStagingBuffer().allocation, &data);
+
+		context.ImmediateSubmit([&](const vk::CommandBuffer cmd) {
+			vk::BufferCopy vertexCopy;
+			vertexCopy.dstOffset = vulkanUniformBuffer->GetOffset();
+			vertexCopy.srcOffset = 0;
+			vertexCopy.size = vulkanUniformBuffer->GetSize();
+
+			cmd.copyBuffer(vulkanUniformBuffer->GetStagingBuffer().buffer, vulkanUniformBuffer->GetBuffer().buffer,
+										 1, &vertexCopy);
+			});
+
+		vmaUnmapMemory(context.GetAllocator(), vulkanUniformBuffer->GetStagingBuffer().allocation);
+
+		++m_Binding;
+	}
+
+	void VulkanShader::UploadUniformInt(const char* name, const int value)
 	{
 	}
 
-	void VulkanShader::UploadUniformFloat(const std::string& name, const float value)
+	void VulkanShader::UploadUniformFloat(const char* name, const float value)
 	{
 	}
 
-	void VulkanShader::UploadUniformFloat2(const std::string& name, const glm::vec2& value)
+	void VulkanShader::UploadUniformFloat2(const char* name, const glm::vec2& value)
 	{
 	}
 
-	void VulkanShader::UploadUniformFloat3(const std::string& name, const glm::vec3& value)
+	void VulkanShader::UploadUniformFloat3(const char* name, const glm::vec3& value)
 	{
 	}
 
-	void VulkanShader::UploadUniformFloat4(const std::string& name, const glm::vec4& value)
+	void VulkanShader::UploadUniformFloat4(const char* name, const glm::vec4& value)
 	{
 	}
 
-	void VulkanShader::UploadUniformMat3(const std::string& name, const glm::mat3& matrix)
+	void VulkanShader::UploadUniformMat3(const char* name, const glm::mat3& matrix)
 	{
 	}
 
-	void VulkanShader::UploadUniformMat4(const std::string& name, const glm::mat4& matrix)
+	void VulkanShader::UploadUniformMat4(const char* name, const glm::mat4& matrix)
 	{
+		vk::PushConstantRange range;
+		range.offset = m_Offset;
+		range.size = sizeof(glm::mat4);
+		range.stageFlags = vk::ShaderStageFlagBits::eVertex;
+
+		VulkanContext::Get().GetComputeEffect(m_Name).
+			pipelineBuilder.pushConstantRanges.emplace_back(range);
+
+		m_Offset += sizeof(glm::mat4);
 	}
 }

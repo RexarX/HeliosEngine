@@ -8,11 +8,24 @@
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 #define MAX_VERTICES 65536
 
 namespace VoxelEngine
 {
+  struct Triangle
+  {
+    const char* name = "Triangle";
+    std::shared_ptr<VertexArray> VertexArray;
+    std::shared_ptr<VertexBuffer> VertexBuffer;
+    std::shared_ptr<IndexBuffer> IndexBuffer;
+
+    std::shared_ptr<UniformBuffer> UniformBuffer;
+
+    std::shared_ptr<Shader> Shader;
+  };
+
   struct Cube
   {
     std::shared_ptr<VertexArray> CubeVertex;
@@ -48,6 +61,7 @@ namespace VoxelEngine
   
 	std::unique_ptr<Renderer::SceneData> Renderer::s_SceneData = std::make_unique<Renderer::SceneData>();
 
+  static Triangle s_Triangle;
   static Cube s_Cube;
   static Line s_Line;
   static Skybox s_Skybox;
@@ -183,7 +197,13 @@ namespace VoxelEngine
        1.0f, -1.0f,  1.0f
     };
 
-    s_ChunkedData.ChunkVertex = VertexArray::Create();
+    constexpr float triangle[] = {
+       0.0f, -1.0f, 0.0f,
+       1.0f,  1.0f, 0.0f,
+      -1.0f,  1.0f, 0.0f
+    };
+    
+    /*s_ChunkedData.ChunkVertex = VertexArray::Create();
 
     s_ChunkedData.ChunkBuffer = VertexBuffer::Create(sizeof(float) * MAX_VERTICES);
 
@@ -232,9 +252,9 @@ namespace VoxelEngine
 
     s_Cube.CubeVertex->Unbind();
 
-    //s_Cube.CubeShader = Shader::Create("Cube", VOXELENGINE_DIR + "Assets/Shaders/Cube.vert",
-    //                                           VOXELENGINE_DIR + "Assets/Shaders/Cube.frag");
-    //s_Cube.CubeShader->Unbind();
+    s_Cube.CubeShader = Shader::Create("Cube", VOXELENGINE_DIR + "Assets/Shaders/Cube.vert",
+                                               VOXELENGINE_DIR + "Assets/Shaders/Cube.frag");
+    s_Cube.CubeShader->Unbind();
 
     s_Line.LineVertex = VertexArray::Create();
 
@@ -247,9 +267,9 @@ namespace VoxelEngine
 
     s_Line.LineVertex->Unbind();
 
-    //s_Line.LineShader = Shader::Create("Line", VOXELENGINE_DIR + "Assets/Shaders/Line.vert",
-    //                                           VOXELENGINE_DIR + "Assets/Shaders/Line.frag");
-    //s_Line.LineShader->Unbind();
+    s_Line.LineShader = Shader::Create("Line", VOXELENGINE_DIR + "Assets/Shaders/Line.vert",
+                                               VOXELENGINE_DIR + "Assets/Shaders/Line.frag");
+    s_Line.LineShader->Unbind();
 
     s_Skybox.SkyboxVertex = VertexArray::Create();
 
@@ -262,14 +282,30 @@ namespace VoxelEngine
 
     s_Skybox.SkyboxVertex->Unbind();
 
-    //s_Skybox.SkyboxShader = Shader::Create("Skybox", VOXELENGINE_DIR + "Assets/Shaders/Skybox.vert",
-    //                                                 VOXELENGINE_DIR + "Assets/Shaders/Skybox.frag");
-    //s_Skybox.SkyboxShader->Unbind();
+    s_Skybox.SkyboxShader = Shader::Create("Skybox", VOXELENGINE_DIR + "Assets/Shaders/Skybox.vert",
+                                                     VOXELENGINE_DIR + "Assets/Shaders/Skybox.frag");
+    s_Skybox.SkyboxShader->Unbind();*/
+    
+    s_Triangle.Shader = Shader::Create(s_Triangle.name, VOXELENGINE_DIR + "Assets/Shaders/Triangle.vert",
+                                                        VOXELENGINE_DIR + "Assets/Shaders/Triangle.frag");
 
-    Shader::Create("Triangle", VOXELENGINE_DIR + "Assets/Shaders/Triangle.vert",
-                               VOXELENGINE_DIR + "Assets/Shaders/Triangle.frag");
+    s_Triangle.VertexArray = VertexArray::Create(s_Triangle.name);
 
-    if (GetAPI() == RendererAPI::API::Vulkan) { VulkanContext::Get().BuildPipeline(); }
+    s_Triangle.VertexBuffer = VertexBuffer::Create(s_Triangle.name, triangle, sizeof(triangle));
+    s_Triangle.VertexBuffer->SetLayout({ { ShaderDataType::Float3, "a_Pos" } });
+
+    s_Triangle.UniformBuffer = UniformBuffer::Create(s_Triangle.name, 10000);
+    s_Triangle.Shader->AddUniformBuffer(s_Triangle.UniformBuffer);
+
+    s_Triangle.VertexArray->AddVertexBuffer(s_Triangle.VertexBuffer);
+    
+    s_Triangle.VertexArray->Unbind();
+
+    s_Triangle.VertexBuffer->Unbind();
+
+    s_Triangle.Shader->Unbind();
+
+    if (GetAPI() == RendererAPI::API::Vulkan) { VulkanContext::Get().Build(); }
 	}
 
   void Renderer::Shutdown()
@@ -283,6 +319,7 @@ namespace VoxelEngine
 
   void Renderer::DrawChunk(const Chunk& chunk)
   {
+    
     //algorithm
 
     s_ChunkedData.ChunkBuffer->Bind();
@@ -296,25 +333,45 @@ namespace VoxelEngine
 
 	void Renderer::BeginScene(const Camera& camera)
 	{
-		s_SceneData->ViewProjectionMatrix = camera.GetProjectionViewMatrix();
+		s_SceneData->ProjectionViewMatrix = camera.GetProjectionViewMatrix();
     s_SceneData->ProjectionMatrix = camera.GetProjectionMatrix();
     s_SceneData->ViewMatrix = camera.GetViewMatrix();
 	}
 
 	void Renderer::EndScene()
 	{
-    s_Cube.CubeShader->Unbind();
+    s_Triangle.Shader->Unbind();
+    s_Triangle.VertexArray->Unbind();
+    s_Triangle.VertexBuffer->Unbind();
+
+    /*s_Cube.CubeShader->Unbind();
     s_Cube.CubeVertex->Unbind();
     s_Cube.CubeBuffer->Unbind();
     s_Cube.CubeMatrixBuffer->Unbind();
 
     s_Line.LineShader->Unbind();
     s_Line.LineVertex->Unbind();
-    s_Line.LineBuffer->Unbind();
+    s_Line.LineBuffer->Unbind();*/
 	}
 
+  void Renderer::DrawTriangle(const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& size)
+  {
+    glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), size);
+    transform = glm::rotate(transform, glm::radians(rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
+    transform = glm::rotate(transform, glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
+    transform = glm::rotate(transform, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
+
+    s_Triangle.Shader->Bind();
+    s_Triangle.VertexArray->Bind();
+    s_Triangle.VertexBuffer->Bind();
+
+    s_Triangle.UniformBuffer->SetData(glm::value_ptr(transform), sizeof(glm::mat4));
+    
+    RenderCommand::DrawArray(s_Triangle.VertexArray, 9);
+  }
+
   void Renderer::DrawCube(const glm::vec3& position, const glm::vec3& rotation,
-    const glm::vec3& size, const std::shared_ptr<Texture>& texture)
+                          const glm::vec3& size, const std::shared_ptr<Texture>& texture)
   {
     texture->Bind();
 
@@ -331,8 +388,8 @@ namespace VoxelEngine
     s_Cube.CubeBuffer->Bind();
     s_Cube.CubeIndex->Bind();
 
-    s_Cube.CubeShader->UploadUniformMat4("u_Projection", s_SceneData->ProjectionMatrix);
-    s_Cube.CubeShader->UploadUniformMat4("u_View", s_SceneData->ViewMatrix);
+    //s_Cube.CubeShader->UploadUniformMat4("u_Projection", s_SceneData->ProjectionViewMatrix);
+    s_Cube.CubeShader->UploadUniformMat4("u_Transform", transform);
 
     RenderCommand::DrawIndexed(s_Cube.CubeVertex, s_Cube.CubeIndex->GetCount());
   }
@@ -357,8 +414,7 @@ namespace VoxelEngine
     s_Cube.CubeMatrixBuffer->Bind();
     s_Cube.CubeMatrixBuffer->SetData(transform, cubes.size() * sizeof(glm::mat4));
 
-    s_Cube.CubeShader->UploadUniformMat4("u_Projection", s_SceneData->ProjectionMatrix);
-    s_Cube.CubeShader->UploadUniformMat4("u_View", s_SceneData->ViewMatrix);
+    s_Cube.CubeShader->UploadUniformMat4("u_Projection", s_SceneData->ProjectionViewMatrix);
 
     RenderCommand::DrawIndexedInstanced(s_Cube.CubeVertex, s_Cube.CubeIndex->GetCount(), cubes.size());
 
@@ -377,8 +433,7 @@ namespace VoxelEngine
     s_Line.LineVertex->Bind();
     s_Line.LineBuffer->Bind();
 
-    s_Line.LineShader->UploadUniformMat4("u_Projection", s_SceneData->ProjectionMatrix);
-    s_Line.LineShader->UploadUniformMat4("u_View", s_SceneData->ViewMatrix);
+    s_Line.LineShader->UploadUniformMat4("u_Projection", s_SceneData->ProjectionViewMatrix);
     s_Line.LineShader->UploadUniformMat4("u_Transform", transform);
 
     RenderCommand::DrawLine(s_Line.LineVertex, 2);

@@ -94,9 +94,9 @@ void GameLayer::OnImGuiRender(ImGuiContext* context)
 
 void GameLayer::Draw()
 {
-	/*VoxelEngine::Renderer::BeginScene(m_CameraController.GetCamera());
+	VoxelEngine::Renderer::BeginScene(m_CameraController.GetCamera());
 
-	m_CameraController.GetFrustum().CreateFrustum(m_CameraController.GetCamera());
+	/*m_CameraController.GetFrustum().CreateFrustum(m_CameraController.GetCamera());
 	for (const auto& cube : m_Cube) {
 		if (m_CameraController.GetFrustum().IsParallelepipedInFrustrum(cube[0], cube[1])) {
 			m_ToDraw.push_back(cube);
@@ -107,7 +107,8 @@ void GameLayer::Draw()
 	VoxelEngine::Renderer::DrawCubesInstanced(m_ToDraw, m_DirtTexture);
 	VoxelEngine::Renderer::DrawLine(glm::vec3(12.5f, 12.5f, 12.5f), glm::vec3(0.0f, 0.0f, 0.0f), 100.0f); // (ray origin, ray direction, ray lenght)
 
-	m_ToDraw.clear();
+	m_ToDraw.clear();*/
+	VoxelEngine::Renderer::DrawTriangle(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
 
-	VoxelEngine::Renderer::EndScene();*/
+	VoxelEngine::Renderer::EndScene();
 }

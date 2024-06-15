@@ -6,14 +6,14 @@
 
 namespace VoxelEngine
 {
-	OpenGLVertexBuffer::OpenGLVertexBuffer(const uint32_t size)
+	OpenGLVertexBuffer::OpenGLVertexBuffer(const char* name, const uint32_t size)
 	{
 		glGenBuffers(1, &m_RendererID);
 		glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
 		glBufferData(GL_ARRAY_BUFFER, size, nullptr, GL_STREAM_DRAW);
 	}
 
-	OpenGLVertexBuffer::OpenGLVertexBuffer(const float* vertices, const uint32_t size)
+	OpenGLVertexBuffer::OpenGLVertexBuffer(const char* name, const float* vertices, const uint32_t size)
 	{
 		glGenBuffers(1, &m_RendererID);
 		glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
@@ -40,7 +40,7 @@ namespace VoxelEngine
 		glBufferSubData(GL_ARRAY_BUFFER, 0, size, data);
 	}
 
-	OpenGLIndexBuffer::OpenGLIndexBuffer(const uint32_t* indices, const uint32_t count)
+	OpenGLIndexBuffer::OpenGLIndexBuffer(const char* name, const uint32_t* indices, const uint32_t count)
 		: m_Count(count)
 	{
 		glGenBuffers(1, &m_RendererID);
@@ -48,7 +48,7 @@ namespace VoxelEngine
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, count, indices, GL_STATIC_DRAW);
 	}
 
-	OpenGLIndexBuffer::OpenGLIndexBuffer(const uint32_t size)
+	OpenGLIndexBuffer::OpenGLIndexBuffer(const char* name, const uint32_t size)
 	{
 		glGenBuffers(1, &m_RendererID);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_RendererID);
