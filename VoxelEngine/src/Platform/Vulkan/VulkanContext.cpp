@@ -50,168 +50,6 @@ namespace VoxelEngine
     return subImage;
   }
 
-  void VulkanContext::transition_image(const vk::CommandBuffer cmd, const vk::Image image,
-                                       const vk::ImageLayout currentLayout, const vk::ImageLayout newLayout)
-  {
-    vk::ImageMemoryBarrier2 imageBarrier;
-    imageBarrier.sType = vk::StructureType::eImageMemoryBarrier2;
-    imageBarrier.srcStageMask = vk::PipelineStageFlagBits2::eAllCommands;
-    imageBarrier.srcAccessMask = vk::AccessFlagBits2::eMemoryWrite;
-    imageBarrier.dstStageMask = vk::PipelineStageFlagBits2::eAllCommands;
-    imageBarrier.dstAccessMask = vk::AccessFlagBits2::eMemoryWrite | vk::AccessFlagBits2::eMemoryRead;
-    imageBarrier.oldLayout = currentLayout;
-    imageBarrier.newLayout = newLayout;
-
-    vk::ImageAspectFlags aspectMask = (newLayout == vk::ImageLayout::eDepthAttachmentOptimal) ?
-                                                    vk::ImageAspectFlagBits::eDepth :
-                                                    vk::ImageAspectFlagBits::eColor;
-
-    imageBarrier.subresourceRange = image_subresource_range(aspectMask);
-    imageBarrier.image = image;
-
-    vk::DependencyInfo depInfo;
-    depInfo.sType = vk::StructureType::eDependencyInfo;
-    depInfo.imageMemoryBarrierCount = 1;
-    depInfo.pImageMemoryBarriers = &imageBarrier;
-
-    cmd.pipelineBarrier2(depInfo);
-  }
-
-  vk::SemaphoreSubmitInfo& VulkanContext::semaphore_submit_info(const vk::PipelineStageFlags2 stageMask,
-                                                                const vk::Semaphore semaphore) const
-  {
-    vk::SemaphoreSubmitInfo submitInfo;
-    submitInfo.sType = vk::StructureType::eSemaphoreSubmitInfo;
-    submitInfo.semaphore = semaphore;
-    submitInfo.stageMask = stageMask;
-    submitInfo.deviceIndex = 0;
-    submitInfo.value = 1;
-
-    return submitInfo;
-  }
-
-  vk::ImageCreateInfo& VulkanContext::image_create_info(const vk::Format format, const vk::ImageUsageFlags usageFlags,
-                                                        const vk::Extent3D extent) const
-  {
-    vk::ImageCreateInfo info;
-    info.sType = vk::StructureType::eImageCreateInfo;
-    info.imageType = vk::ImageType::e2D;
-    info.format = format;
-    info.extent = extent;
-    info.mipLevels = 1;
-    info.arrayLayers = 1;
-    info.samples = vk::SampleCountFlagBits::e1;
-    info.tiling = vk::ImageTiling::eOptimal;
-    info.usage = usageFlags;
-
-    return info;
-  }
-
-  vk::ImageViewCreateInfo VulkanContext::imageview_create_info(const vk::Image image, const vk::Format format,
-                                                               const vk::ImageAspectFlags aspectFlags) const
-  {
-    vk::ImageViewCreateInfo info;
-    info.sType = vk::StructureType::eImageViewCreateInfo;
-    info.viewType = vk::ImageViewType::e2D;
-    info.image = image;
-    info.format = format;
-    info.subresourceRange.baseMipLevel = 0;
-    info.subresourceRange.levelCount = 1;
-    info.subresourceRange.baseArrayLayer = 0;
-    info.subresourceRange.layerCount = 1;
-    info.subresourceRange.aspectMask = aspectFlags;
-
-    return info;
-  }
-
-  void VulkanContext::copy_image_to_image(const vk::CommandBuffer cmd, const vk::Image source,
-                                          const vk::Image destination, const vk::Extent2D srcSize,
-                                          const vk::Extent2D dstSize) const
-  {
-    vk::ImageBlit2 blitRegion;
-    blitRegion.sType = vk::StructureType::eImageBlit2KHR;;
-
-    blitRegion.srcOffsets[1].x = srcSize.width;
-    blitRegion.srcOffsets[1].y = srcSize.height;
-    blitRegion.srcOffsets[1].z = 1;
-
-    blitRegion.dstOffsets[1].x = dstSize.width;
-    blitRegion.dstOffsets[1].y = dstSize.height;
-    blitRegion.dstOffsets[1].z = 1;
-
-    blitRegion.srcSubresource.aspectMask = vk::ImageAspectFlagBits::eColor;
-    blitRegion.srcSubresource.baseArrayLayer = 0;
-    blitRegion.srcSubresource.layerCount = 1;
-    blitRegion.srcSubresource.mipLevel = 0;
-
-    blitRegion.dstSubresource.aspectMask = vk::ImageAspectFlagBits::eColor;
-    blitRegion.dstSubresource.baseArrayLayer = 0;
-    blitRegion.dstSubresource.layerCount = 1;
-    blitRegion.dstSubresource.mipLevel = 0;
-
-    vk::BlitImageInfo2 blitInfo;
-    blitInfo.sType = vk::StructureType::eBlitImageInfo2;
-    blitInfo.dstImage = destination;
-    blitInfo.dstImageLayout = vk::ImageLayout::eTransferDstOptimal;
-    blitInfo.srcImage = source;
-    blitInfo.srcImageLayout = vk::ImageLayout::eTransferSrcOptimal;
-    blitInfo.filter = vk::Filter::eLinear;
-    blitInfo.regionCount = 1;
-    blitInfo.pRegions = &blitRegion;
-
-    cmd.blitImage2(blitInfo);
-  }
-
-  void VulkanContext::Build()
-  {
-    for (auto&[name, effect] : m_ComputeEffects) {
-      effect.Build();
-    }
-
-    m_DeletionQueue.push_function([&]() {
-      for (auto&[name, effect] : m_ComputeEffects) {
-        effect.Destroy();
-      }
-    });
-  }
-
-  void VulkanContext::ImmediateSubmit(std::function<void(vk::CommandBuffer cmd)>&& function)
-  {
-    m_Device.resetFences(1, &m_ImFence);
-    m_ImCommandBuffer.reset();
-
-    vk::CommandBuffer cmd = m_ImCommandBuffer;
-
-    vk::CommandBufferBeginInfo cmdBeginInfo;
-    cmdBeginInfo.sType = vk::StructureType::eCommandBufferBeginInfo;
-    cmdBeginInfo.pInheritanceInfo = nullptr;
-    cmdBeginInfo.flags = vk::CommandBufferUsageFlagBits::eOneTimeSubmit;
-
-    cmd.begin(cmdBeginInfo);
-
-    function(cmd);
-
-    cmd.end();
-
-    vk::CommandBufferSubmitInfo commandBufferSubmitInfo;
-    commandBufferSubmitInfo.sType = vk::StructureType::eCommandBufferSubmitInfo;
-    commandBufferSubmitInfo.commandBuffer = cmd;
-    commandBufferSubmitInfo.deviceMask = 0;
-
-    vk::SubmitInfo2 submitInfo;
-    submitInfo.sType = vk::StructureType::eSubmitInfo2;
-    submitInfo.waitSemaphoreInfoCount = 0;
-    submitInfo.pWaitSemaphoreInfos = nullptr;
-    submitInfo.signalSemaphoreInfoCount = 0;
-    submitInfo.pSignalSemaphoreInfos = nullptr;
-    submitInfo.commandBufferInfoCount = 1;
-    submitInfo.pCommandBufferInfos = &commandBufferSubmitInfo;
-
-    m_GraphicsQueue.submit2(submitInfo, m_ImFence);
-
-    m_Device.waitForFences(1, &m_ImFence, true, 9999999999);
-  }
-
 	VulkanContext::VulkanContext(GLFWwindow* windowHandle)
 		: m_WindowHandle(windowHandle)
 	{
@@ -281,7 +119,8 @@ namespace VoxelEngine
     m_CommandBuffer.reset(vk::CommandBufferResetFlagBits::eReleaseResources);
     m_CommandBuffer.begin(bufferBeginInfo);
 
-    transition_image(m_CommandBuffer, m_DrawImage.image, vk::ImageLayout::eUndefined, vk::ImageLayout::eGeneral);
+    transition_image(m_CommandBuffer, m_DrawImage.image, vk::ImageLayout::eUndefined,
+                                                         vk::ImageLayout::eGeneral);
     
     vk::ClearColorValue clearValue = { 0.0f, 0.0f, 0.0f, 0.0f };
     vk::ImageSubresourceRange clearRange = image_subresource_range(vk::ImageAspectFlagBits::eColor);
@@ -289,29 +128,29 @@ namespace VoxelEngine
     m_CommandBuffer.clearColorImage(m_DrawImage.image, vk::ImageLayout::eGeneral, clearValue, clearRange);
 
     transition_image(m_CommandBuffer, m_DrawImage.image, vk::ImageLayout::eGeneral,
-                     vk::ImageLayout::eColorAttachmentOptimal);
+                                                         vk::ImageLayout::eColorAttachmentOptimal);
 
     transition_image(m_CommandBuffer, m_DepthImage.image, vk::ImageLayout::eUndefined,
-                     vk::ImageLayout::eDepthAttachmentOptimal);
+                                                          vk::ImageLayout::eDepthAttachmentOptimal);
 
     DrawGeometry(m_CommandBuffer);
 
     transition_image(m_CommandBuffer, m_DrawImage.image, vk::ImageLayout::eColorAttachmentOptimal,
-                     vk::ImageLayout::eTransferSrcOptimal);
+                                                         vk::ImageLayout::eTransferSrcOptimal);
 
     transition_image(m_CommandBuffer, m_SwapChainImages[swapchainImageIndex], vk::ImageLayout::eUndefined,
-                     vk::ImageLayout::eTransferDstOptimal);
+                                                                              vk::ImageLayout::eTransferDstOptimal);
 
     copy_image_to_image(m_CommandBuffer, m_DrawImage.image, m_SwapChainImages[swapchainImageIndex],
                         m_DrawExtent, m_SwapChainExtent);
 
-    transition_image(m_CommandBuffer, m_SwapChainImages[swapchainImageIndex],
-                     vk::ImageLayout::eTransferDstOptimal, vk::ImageLayout::eColorAttachmentOptimal);
+    transition_image(m_CommandBuffer, m_SwapChainImages[swapchainImageIndex], vk::ImageLayout::eTransferDstOptimal,
+                                                                              vk::ImageLayout::eColorAttachmentOptimal);
     
     if (m_ImGuiEnabled) { DrawImGui(m_SwapChainImageViews[swapchainImageIndex]); }
 
-    transition_image(m_CommandBuffer, m_SwapChainImages[swapchainImageIndex],
-                     vk::ImageLayout::eColorAttachmentOptimal, vk::ImageLayout::ePresentSrcKHR);
+    transition_image(m_CommandBuffer, m_SwapChainImages[swapchainImageIndex], vk::ImageLayout::eColorAttachmentOptimal,
+                                                                              vk::ImageLayout::ePresentSrcKHR);
 
     m_CommandBuffer.end();
 
@@ -432,6 +271,176 @@ namespace VoxelEngine
   {
     m_Vsync = enabled;
     RecreateSwapChain();
+  }
+
+  void VulkanContext::transition_image(const vk::CommandBuffer cmd, const vk::Image image,
+    const vk::ImageLayout currentLayout, const vk::ImageLayout newLayout)
+  {
+    vk::ImageMemoryBarrier2 imageBarrier;
+    imageBarrier.sType = vk::StructureType::eImageMemoryBarrier2;
+    imageBarrier.srcStageMask = vk::PipelineStageFlagBits2::eAllCommands;
+    imageBarrier.srcAccessMask = vk::AccessFlagBits2::eMemoryWrite;
+    imageBarrier.dstStageMask = vk::PipelineStageFlagBits2::eAllCommands;
+    imageBarrier.dstAccessMask = vk::AccessFlagBits2::eMemoryWrite | vk::AccessFlagBits2::eMemoryRead;
+    imageBarrier.oldLayout = currentLayout;
+    imageBarrier.newLayout = newLayout;
+
+    vk::ImageAspectFlags aspectMask = (newLayout == vk::ImageLayout::eDepthAttachmentOptimal) ?
+      vk::ImageAspectFlagBits::eDepth :
+      vk::ImageAspectFlagBits::eColor;
+
+    imageBarrier.subresourceRange = image_subresource_range(aspectMask);
+    imageBarrier.image = image;
+
+    vk::DependencyInfo depInfo;
+    depInfo.sType = vk::StructureType::eDependencyInfo;
+    depInfo.imageMemoryBarrierCount = 1;
+    depInfo.pImageMemoryBarriers = &imageBarrier;
+
+    cmd.pipelineBarrier2(depInfo);
+  }
+
+  vk::SemaphoreSubmitInfo& VulkanContext::semaphore_submit_info(const vk::PipelineStageFlags2 stageMask,
+    const vk::Semaphore semaphore) const
+  {
+    vk::SemaphoreSubmitInfo submitInfo;
+    submitInfo.sType = vk::StructureType::eSemaphoreSubmitInfo;
+    submitInfo.semaphore = semaphore;
+    submitInfo.stageMask = stageMask;
+    submitInfo.deviceIndex = 0;
+    submitInfo.value = 1;
+
+    return submitInfo;
+  }
+
+  vk::ImageCreateInfo& VulkanContext::image_create_info(const vk::Format format, const vk::ImageUsageFlags usageFlags,
+    const vk::Extent3D extent) const
+  {
+    vk::ImageCreateInfo info;
+    info.sType = vk::StructureType::eImageCreateInfo;
+    info.imageType = vk::ImageType::e2D;
+    info.format = format;
+    info.extent = extent;
+    info.mipLevels = 1;
+    info.arrayLayers = 1;
+    info.samples = vk::SampleCountFlagBits::e1;
+    info.tiling = vk::ImageTiling::eOptimal;
+    info.usage = usageFlags;
+
+    return info;
+  }
+
+  vk::ImageViewCreateInfo VulkanContext::imageview_create_info(const vk::Image image, const vk::Format format,
+    const vk::ImageAspectFlags aspectFlags) const
+  {
+    vk::ImageViewCreateInfo info;
+    info.sType = vk::StructureType::eImageViewCreateInfo;
+    info.viewType = vk::ImageViewType::e2D;
+    info.image = image;
+    info.format = format;
+    info.subresourceRange.baseMipLevel = 0;
+    info.subresourceRange.levelCount = 1;
+    info.subresourceRange.baseArrayLayer = 0;
+    info.subresourceRange.layerCount = 1;
+    info.subresourceRange.aspectMask = aspectFlags;
+
+    return info;
+  }
+
+  void VulkanContext::copy_image_to_image(const vk::CommandBuffer cmd, const vk::Image source,
+    const vk::Image destination, const vk::Extent2D srcSize,
+    const vk::Extent2D dstSize) const
+  {
+    vk::ImageBlit2 blitRegion;
+    blitRegion.sType = vk::StructureType::eImageBlit2KHR;;
+
+    blitRegion.srcOffsets[1].x = srcSize.width;
+    blitRegion.srcOffsets[1].y = srcSize.height;
+    blitRegion.srcOffsets[1].z = 1;
+
+    blitRegion.dstOffsets[1].x = dstSize.width;
+    blitRegion.dstOffsets[1].y = dstSize.height;
+    blitRegion.dstOffsets[1].z = 1;
+
+    blitRegion.srcSubresource.aspectMask = vk::ImageAspectFlagBits::eColor;
+    blitRegion.srcSubresource.baseArrayLayer = 0;
+    blitRegion.srcSubresource.layerCount = 1;
+    blitRegion.srcSubresource.mipLevel = 0;
+
+    blitRegion.dstSubresource.aspectMask = vk::ImageAspectFlagBits::eColor;
+    blitRegion.dstSubresource.baseArrayLayer = 0;
+    blitRegion.dstSubresource.layerCount = 1;
+    blitRegion.dstSubresource.mipLevel = 0;
+
+    vk::BlitImageInfo2 blitInfo;
+    blitInfo.sType = vk::StructureType::eBlitImageInfo2;
+    blitInfo.dstImage = destination;
+    blitInfo.dstImageLayout = vk::ImageLayout::eTransferDstOptimal;
+    blitInfo.srcImage = source;
+    blitInfo.srcImageLayout = vk::ImageLayout::eTransferSrcOptimal;
+    blitInfo.filter = vk::Filter::eLinear;
+    blitInfo.regionCount = 1;
+    blitInfo.pRegions = &blitRegion;
+
+    cmd.blitImage2(blitInfo);
+  }
+
+  void VulkanContext::Build()
+  {
+    for (auto& [name, effect] : m_ComputeEffects) {
+      effect.Build();
+    }
+
+    m_DeletionQueue.push_function([&]() {
+      for (auto& [name, effect] : m_ComputeEffects) {
+        effect.Destroy();
+      }
+      });
+  }
+
+  void VulkanContext::ImmediateSubmit(std::function<void(vk::CommandBuffer cmd)>&& function)
+  {
+    m_Device.resetFences(1, &m_ImFence);
+    m_ImCommandBuffer.reset();
+
+    vk::CommandBuffer cmd = m_ImCommandBuffer;
+
+    vk::CommandBufferBeginInfo cmdBeginInfo;
+    cmdBeginInfo.sType = vk::StructureType::eCommandBufferBeginInfo;
+    cmdBeginInfo.pInheritanceInfo = nullptr;
+    cmdBeginInfo.flags = vk::CommandBufferUsageFlagBits::eOneTimeSubmit;
+
+    cmd.begin(cmdBeginInfo);
+
+    function(cmd);
+
+    cmd.end();
+
+    vk::CommandBufferSubmitInfo commandBufferSubmitInfo;
+    commandBufferSubmitInfo.sType = vk::StructureType::eCommandBufferSubmitInfo;
+    commandBufferSubmitInfo.commandBuffer = cmd;
+    commandBufferSubmitInfo.deviceMask = 0;
+
+    vk::SubmitInfo2 submitInfo;
+    submitInfo.sType = vk::StructureType::eSubmitInfo2;
+    submitInfo.waitSemaphoreInfoCount = 0;
+    submitInfo.pWaitSemaphoreInfos = nullptr;
+    submitInfo.signalSemaphoreInfoCount = 0;
+    submitInfo.pSignalSemaphoreInfos = nullptr;
+    submitInfo.commandBufferInfoCount = 1;
+    submitInfo.pCommandBufferInfos = &commandBufferSubmitInfo;
+
+    m_GraphicsQueue.submit2(submitInfo, m_ImFence);
+
+    m_Device.waitForFences(1, &m_ImFence, true, 9999999999);
+  }
+
+  void VulkanContext::AddComputeEffect(const std::string& name)
+  {
+    ComputeEffect effect;
+
+    m_ComputeEffects.emplace(name, effect);
+    m_ComputeEffects[name].Init();
   }
 
   void VulkanContext::CreateInstance()
@@ -893,22 +902,8 @@ namespace VoxelEngine
     CreateSwapChain();
     CreateImageViews();
 
-    vk::DescriptorImageInfo imgInfo;
-    imgInfo.imageLayout = vk::ImageLayout::eGeneral;
-    imgInfo.imageView = m_DrawImage.imageView;
-
-    vk::WriteDescriptorSet drawImageWrite;
-    drawImageWrite.sType = vk::StructureType::eWriteDescriptorSet;
-
-    drawImageWrite.dstBinding = 0;
-    drawImageWrite.dstSet = m_DrawImageDescriptors;
-    drawImageWrite.descriptorCount = 1;
-    drawImageWrite.descriptorType = vk::DescriptorType::eStorageImage;
-    drawImageWrite.pImageInfo = &imgInfo;
-
-    DescriptorWriter writer;
     for (auto& [name, effect] : m_ComputeEffects) {
-      writer.UpdateSet(m_Device, effect.descriptorSet);
+      effect.descriptorWriter.UpdateSet(m_Device, effect.descriptorSet);
     }
   }
 
@@ -917,7 +912,7 @@ namespace VoxelEngine
     vk::RenderingAttachmentInfo colorAttachment;
     colorAttachment.sType = vk::StructureType::eRenderingAttachmentInfo;
     colorAttachment.imageView = m_DrawImage.imageView;
-    colorAttachment.imageLayout = vk::ImageLayout::eGeneral;
+    colorAttachment.imageLayout = vk::ImageLayout::eColorAttachmentOptimal;
     colorAttachment.loadOp = vk::AttachmentLoadOp::eLoad;
     colorAttachment.storeOp = vk::AttachmentStoreOp::eStore;
 
@@ -952,13 +947,16 @@ namespace VoxelEngine
     scissor.extent.width = m_DrawExtent.width;
     scissor.extent.height = m_DrawExtent.height;
 
+    ComputeEffect& effect = GetComputeEffect("Triangle");
+
     cmd.beginRendering(&renderInfo);
 
-    cmd.bindPipeline(vk::PipelineBindPoint::eGraphics, GetComputeEffect("Triangle").pipeline);
+    cmd.bindPipeline(vk::PipelineBindPoint::eGraphics, effect.pipeline);
 
     cmd.setViewport(0, 1, &viewport);
-
     cmd.setScissor(0, 1, &scissor);
+
+    cmd.bindVertexBuffers(0, effect.pipelineBuilder.vertexBuffer, { 0 });
 
     cmd.draw(3, 1, 0, 0);
 

@@ -40,7 +40,7 @@ namespace VoxelEngine
 
 		void ImmediateSubmit(std::function<void(vk::CommandBuffer cmd)>&& function);
 
-		void AddComputeEffect(const char* name) { m_ComputeEffects.insert(std::pair<const char*, ComputeEffect>(name, ComputeEffect())); }
+		void AddComputeEffect(const std::string& name);
 		void SetCurrentComputeEffect(const char* name) { m_CurrentComputeEffect = name; }
 
 		static inline VulkanContext& Get() { return *m_Context; }
@@ -49,7 +49,6 @@ namespace VoxelEngine
 		inline VmaAllocator GetAllocator() { return m_Allocator; }
 		inline AllocatedImage& GetDrawImage() { return m_DrawImage; }
     inline AllocatedImage& GetDepthImage() { return m_DepthImage; }
-		inline PipelineBuilder& GetPipelineBuilder() { return m_PipelineBuilder; }
 		inline ComputeEffect& GetComputeEffect(const std::string& name) { return m_ComputeEffects[name]; }
 		inline const char* GetCurrentComputeEffect() const { return m_CurrentComputeEffect.c_str(); }
 
@@ -100,24 +99,13 @@ namespace VoxelEngine
 		vk::Semaphore m_RenderSemaphore;
 		vk::Fence m_RenderFence;
 
-		PipelineBuilder m_PipelineBuilder;
-
-		
 		DescriptorAllocator m_ImGuiDescriptorAllocator;
-
-		DescriptorAllocatorGrowable m_DescriptorAllocator;
-
-		vk::DescriptorSet m_DrawImageDescriptors;
-		vk::DescriptorSetLayout m_DrawImageDescriptorLayout;
 
 		AllocatedImage m_DrawImage;
 		AllocatedImage m_DepthImage;
 
 		std::map<std::string, ComputeEffect> m_ComputeEffects;
 		std::string m_CurrentComputeEffect;
-
-		vk::Pipeline m_Pipeline;
-		vk::PipelineLayout m_PipelineLayout;
 
 		vk::CommandPool m_ImCommandPool;
 		vk::CommandBuffer m_ImCommandBuffer;

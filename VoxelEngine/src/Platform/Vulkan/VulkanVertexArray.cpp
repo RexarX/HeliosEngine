@@ -57,10 +57,6 @@ namespace VoxelEngine
 		void* data;
 		vmaMapMemory(context.GetAllocator(), vulkanVertexBuffer->GetStagingBuffer().allocation, &data);
 
-		context.GetDeletionQueue().push_function([&]() {
-			vmaUnmapMemory(context.GetAllocator(), vulkanVertexBuffer->GetStagingBuffer().allocation);
-			});
-
 		memcpy(data, vulkanVertexBuffer->GetVertices().data(), vulkanVertexBuffer->GetVertices().size() * sizeof(float));
 
 		VE_CORE_ASSERT(vertexBuffer->GetLayout().GetElements().size(), "Vertex Buffer has no layout!");
@@ -97,6 +93,10 @@ namespace VoxelEngine
 				});
 		}
 
+		vmaUnmapMemory(context.GetAllocator(), vulkanVertexBuffer->GetStagingBuffer().allocation);
+
+		context.GetComputeEffect(m_Name).pipelineBuilder.vertexBuffer = vulkanVertexBuffer->GetBuffer().buffer;
+
 		m_VertexBuffer = vertexBuffer;
 	}
 
@@ -113,10 +113,6 @@ namespace VoxelEngine
 			void* data;
 			vmaMapMemory(context.GetAllocator(), vulkanVertexBuffer->GetStagingBuffer().allocation, &data);
 
-			context.GetDeletionQueue().push_function([&]() {
-				vmaUnmapMemory(context.GetAllocator(), vulkanVertexBuffer->GetStagingBuffer().allocation);
-				});
-
 			memcpy((int8_t*)data + vulkanVertexBuffer->GetVertices().size() * sizeof(float),
 						 vulkanIndexBuffer->GetIndices().data(), indexBuffer->GetCount() * sizeof(uint32_t));
 		}
@@ -132,6 +128,8 @@ namespace VoxelEngine
 											 1, &indexCopy);
 				});
 		}
+
+		vmaUnmapMemory(context.GetAllocator(), vulkanVertexBuffer->GetStagingBuffer().allocation);
 
 		m_IndexBuffer = indexBuffer;
 	}

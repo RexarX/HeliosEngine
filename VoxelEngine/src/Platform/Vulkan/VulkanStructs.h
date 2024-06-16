@@ -19,11 +19,30 @@ namespace VoxelEngine
 
 		void flush()
 		{
-			for (auto it = deletors.rbegin(); it != deletors.rend(); it++) {
+			for (auto it = deletors.rbegin(); it != deletors.rend(); ++it) {
 				(*it)();
 			}
 
 			deletors.clear();
+		}
+	};
+
+	struct WritingQueue
+	{
+		std::deque<std::function<void()>> writings;
+
+		void Push(std::function<void()>&& function)
+		{
+			writings.push_back(function);
+		}
+
+		void Flush()
+		{
+			for (auto it = writings.begin(); it != writings.end(); ++it) {
+				(*it)();
+			}
+
+			writings.clear();
 		}
 	};
 
@@ -56,7 +75,9 @@ namespace VoxelEngine
 		vk::PipelineDepthStencilStateCreateInfo depthStencil;
 		vk::PipelineRenderingCreateInfoKHR renderInfo;
 
-		vk::Format colorAttachmentformat;
+		vk::Format colorAttachmentFormat;
+
+		vk::Buffer vertexBuffer;
 	};
 
 	struct QueueFamilyIndices
@@ -146,10 +167,6 @@ namespace VoxelEngine
 
 	struct DescriptorWriter
 	{
-		std::deque<vk::DescriptorImageInfo> imageInfos;
-		std::deque<vk::DescriptorBufferInfo> bufferInfos;
-		std::vector<vk::WriteDescriptorSet> writes;
-
 		void WriteImage(const uint32_t binding, const vk::ImageView image, const vk::Sampler sampler,
 										const vk::ImageLayout layout, const vk::DescriptorType type);
 		void WriteBuffer(const uint32_t binding, const vk::Buffer buffer, const uint64_t size,
@@ -157,22 +174,29 @@ namespace VoxelEngine
 
 		void Clear();
 		void UpdateSet(const vk::Device device, const vk::DescriptorSet set);
+
+		std::deque<vk::DescriptorImageInfo> imageInfos;
+		std::deque<vk::DescriptorBufferInfo> bufferInfos;
+		std::vector<vk::WriteDescriptorSet> writes;
 	};
 
 	struct ComputeEffect
 	{
-		ComputeEffect();
-
+		void Init();
 		void Build();
 		void Destroy();
 
 		PipelineBuilder pipelineBuilder;
+
 		vk::Pipeline pipeline;
 		vk::PipelineLayout pipelineLayout;
 
+    DescriptorWriter descriptorWriter;
+
 		DescriptorAllocatorGrowable descriptorAllocator;
 		DescriptorLayoutBuilder descriptorLayoutBuilder;
-		vk::DescriptorSetLayout descriptorSetLayout;
+
 		vk::DescriptorSet descriptorSet;
+		vk::DescriptorSetLayout descriptorSetLayout;
 	};
 }

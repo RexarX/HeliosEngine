@@ -103,7 +103,7 @@ namespace VoxelEngine
     info.pSetLayouts = &descriptorSetLayout;
     info.pushConstantRangeCount = pushConstantRanges.size();
     info.pPushConstantRanges = pushConstantRanges.data();
-
+    
     layout = device.createPipelineLayout(info);
 
     vk::PipelineViewportStateCreateInfo viewportState;
@@ -154,7 +154,7 @@ namespace VoxelEngine
     for (auto& stage : shaderStages) {
       device.destroyShaderModule(stage.module);
     }
-
+    
     VE_ASSERT(result == vk::Result::eSuccess, "Failed to create pipelines!");
   }
 
@@ -189,17 +189,18 @@ namespace VoxelEngine
   void PipelineBuilder::DisableBlending()
   {
     colorBlendAttachment.colorWriteMask = vk::ColorComponentFlagBits::eR |
-      vk::ColorComponentFlagBits::eG |
-      vk::ColorComponentFlagBits::eB |
-      vk::ColorComponentFlagBits::eA;
+                                          vk::ColorComponentFlagBits::eG |
+                                          vk::ColorComponentFlagBits::eB |
+                                          vk::ColorComponentFlagBits::eA;
     colorBlendAttachment.blendEnable = VK_FALSE;
   }
 
   void PipelineBuilder::SetColorAttachmentFormat(const vk::Format format)
   {
-    colorAttachmentformat = format;
+    colorAttachmentFormat = format;
+
     renderInfo.colorAttachmentCount = 1;
-    renderInfo.pColorAttachmentFormats = &colorAttachmentformat;
+    renderInfo.pColorAttachmentFormats = &colorAttachmentFormat;
   }
 
   void PipelineBuilder::SetDepthFormat(const vk::Format format)
@@ -229,15 +230,14 @@ namespace VoxelEngine
     depthStencil.maxDepthBounds = 1.0f;
   }
 
-  ComputeEffect::ComputeEffect()
+  void ComputeEffect::Init()
   {
     VulkanContext& context = VulkanContext::Get();
-
 
     pipelineBuilder.Clear();
     pipelineBuilder.SetInputTopology(vk::PrimitiveTopology::eTriangleList);
     pipelineBuilder.SetPolygonMode(vk::PolygonMode::eFill);
-    pipelineBuilder.SetCullMode(vk::CullModeFlagBits::eBack, vk::FrontFace::eCounterClockwise);
+    //pipelineBuilder.SetCullMode(vk::CullModeFlagBits::eBack, vk::FrontFace::eCounterClockwise);
     pipelineBuilder.SetMultisamplingNone();
     pipelineBuilder.DisableBlending(); //temp
     pipelineBuilder.SetColorAttachmentFormat(context.GetDrawImage().imageFormat);
@@ -255,8 +255,7 @@ namespace VoxelEngine
 
     descriptorSet = descriptorAllocator.Allocate(context.GetDevice(), descriptorSetLayout);
 
-    DescriptorWriter writer;
-    writer.UpdateSet(context.GetDevice(), descriptorSet);
+    descriptorWriter.UpdateSet(context.GetDevice(), descriptorSet);
 
     pipelineBuilder.BuildPipeline(context.GetDevice(), pipelineLayout, pipeline, descriptorSetLayout);
   }
@@ -264,6 +263,10 @@ namespace VoxelEngine
   void ComputeEffect::Destroy()
   {
     VulkanContext& context = VulkanContext::Get();
+
+    context.GetDevice().destroyPipelineLayout(pipelineLayout);
+
+    context.GetDevice().destroyPipeline(pipeline);
 
     descriptorAllocator.DestroyPools(context.GetDevice());
 
@@ -373,7 +376,7 @@ namespace VoxelEngine
 
     vk::DescriptorPoolCreateInfo pool_info;
     pool_info.sType = vk::StructureType::eDescriptorPoolCreateInfo;
-    pool_info.flags = vk::DescriptorPoolCreateFlagBits();
+    pool_info.flags = vk::DescriptorPoolCreateFlagBits::eFreeDescriptorSet;
     pool_info.maxSets = setCount;
     pool_info.poolSizeCount = (uint32_t)poolSizes.size();
     pool_info.pPoolSizes = poolSizes.data();

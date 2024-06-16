@@ -136,7 +136,6 @@ namespace VoxelEngine
     virtual void SetData(const void* data, const uint32_t size) = 0;
 
     static std::shared_ptr<IndexBuffer> Create(const char* name, const uint32_t* indices, const uint32_t size);
-
     static std::shared_ptr<IndexBuffer> Create(const char* name, const uint32_t size);
   };
 }

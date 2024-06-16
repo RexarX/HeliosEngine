@@ -91,8 +91,10 @@ namespace VoxelEngine
 																							 const std::string& fragment)
 		: m_Name(name)
 	{
-		VulkanContext::Get().AddComputeEffect(name);
-		VulkanContext::Get().SetCurrentComputeEffect(m_Name);
+		VulkanContext& context = VulkanContext::Get();
+
+		context.AddComputeEffect(name);
+		context.SetCurrentComputeEffect(name);
 
 		if (vertex.rfind(".spv") != std::string::npos || fragment.rfind(".spv") != std::string::npos) {
 			m_Compiled = true;
@@ -200,11 +202,12 @@ namespace VoxelEngine
 	void VulkanShader::AddUniformBuffer(const std::shared_ptr<UniformBuffer>& uniformBuffer)
 	{
 		VulkanContext& context = VulkanContext::Get();
+		ComputeEffect& effect = context.GetComputeEffect(m_Name);
 
-		context.GetComputeEffect(m_Name).descriptorLayoutBuilder.
-			AddBinding(m_Binding, vk::DescriptorType::eUniformBufferDynamic, vk::ShaderStageFlagBits::eVertex);
+		effect.descriptorLayoutBuilder.AddBinding(m_Binding, vk::DescriptorType::eUniformBufferDynamic,
+																												 vk::ShaderStageFlagBits::eVertex);
 
-		context.GetComputeEffect(m_Name).descriptorAllocator.AddRatios(
+		effect.descriptorAllocator.AddRatios(
 			{ vk::DescriptorType::eUniformBufferDynamic, 1 }
 		);
 
@@ -212,6 +215,10 @@ namespace VoxelEngine
 
 		void* data;
 		vmaMapMemory(context.GetAllocator(), vulkanUniformBuffer->GetStagingBuffer().allocation, &data);
+
+		context.GetDeletionQueue().push_function([&]() {
+			vmaUnmapMemory(context.GetAllocator(), vulkanUniformBuffer->GetStagingBuffer().allocation);
+			});
 
 		context.ImmediateSubmit([&](const vk::CommandBuffer cmd) {
 			vk::BufferCopy vertexCopy;
@@ -223,7 +230,8 @@ namespace VoxelEngine
 										 1, &vertexCopy);
 			});
 
-		vmaUnmapMemory(context.GetAllocator(), vulkanUniformBuffer->GetStagingBuffer().allocation);
+		effect.descriptorWriter.WriteBuffer(m_Binding, vulkanUniformBuffer->GetBuffer().buffer, vulkanUniformBuffer->GetSize(),
+																				0, vk::DescriptorType::eUniformBufferDynamic);
 
 		++m_Binding;
 	}
