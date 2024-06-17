@@ -36,6 +36,7 @@ namespace VoxelEngine
 														 &m_Buffer.buffer, &m_Buffer.allocation, &m_Buffer.info);
 
     context.GetDeletionQueue().push_function([&]() {
+			vmaDestroyBuffer(context.GetAllocator(), m_StagingBuffer.buffer, m_StagingBuffer.allocation);
       vmaDestroyBuffer(context.GetAllocator(), m_Buffer.buffer, m_Buffer.allocation);
 			});
 
@@ -78,6 +79,7 @@ namespace VoxelEngine
 														 &m_Buffer.buffer, &m_Buffer.allocation, &m_Buffer.info);
 
     context.GetDeletionQueue().push_function([&]() {
+			vmaDestroyBuffer(context.GetAllocator(), m_StagingBuffer.buffer, m_StagingBuffer.allocation);
       vmaDestroyBuffer(context.GetAllocator(), m_Buffer.buffer, m_Buffer.allocation);
 			});
 
@@ -136,6 +138,7 @@ namespace VoxelEngine
 														 &m_Buffer.buffer, &m_Buffer.allocation, &m_Buffer.info);
 
     context.GetDeletionQueue().push_function([&]() {
+			vmaDestroyBuffer(context.GetAllocator(), m_StagingBuffer.buffer, m_StagingBuffer.allocation);
       vmaDestroyBuffer(context.GetAllocator(), m_Buffer.buffer, m_Buffer.allocation);
 			});
 
@@ -174,6 +177,7 @@ namespace VoxelEngine
 														 &m_Buffer.buffer, &m_Buffer.allocation, &m_Buffer.info);
 
     context.GetDeletionQueue().push_function([&]() {
+			vmaDestroyBuffer(context.GetAllocator(), m_StagingBuffer.buffer, m_StagingBuffer.allocation);
       vmaDestroyBuffer(context.GetAllocator(), m_Buffer.buffer, m_Buffer.allocation);
 			});
 

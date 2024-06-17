@@ -1,5 +1,7 @@
 #pragma once
 
+#include "VulkanBuffer.h"
+
 #include "vepch.h"
 
 #include <vulkan/vulkan.hpp>
@@ -76,8 +78,6 @@ namespace VoxelEngine
 		vk::PipelineRenderingCreateInfoKHR renderInfo;
 
 		vk::Format colorAttachmentFormat;
-
-		vk::Buffer vertexBuffer;
 	};
 
 	struct QueueFamilyIndices
@@ -182,6 +182,8 @@ namespace VoxelEngine
 
 	struct ComputeEffect
 	{
+    ~ComputeEffect() = default;
+
 		void Init();
 		void Build();
 		void Destroy();
@@ -198,5 +200,11 @@ namespace VoxelEngine
 
 		vk::DescriptorSet descriptorSet;
 		vk::DescriptorSetLayout descriptorSetLayout;
+
+		std::shared_ptr<VulkanVertexBuffer> vertexBuffer;
+		std::shared_ptr<VulkanIndexBuffer> indexBuffer;
+
+		const void* pushConstant;
+		uint32_t pushConstantSize;
 	};
 }

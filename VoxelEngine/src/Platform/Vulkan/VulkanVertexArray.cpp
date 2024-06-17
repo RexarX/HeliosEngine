@@ -49,6 +49,7 @@ namespace VoxelEngine
 	void VulkanVertexArray::AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer)
 	{
 		VulkanContext& context = VulkanContext::Get();
+		ComputeEffect& effect = context.GetComputeEffect(m_Name);
 
 		std::shared_ptr<VulkanVertexBuffer> vulkanVertexBuffer = std::static_pointer_cast<VulkanVertexBuffer>(vertexBuffer);
 
@@ -67,7 +68,7 @@ namespace VoxelEngine
 		bindingDescription.stride = layout.GetStride();
 		bindingDescription.inputRate = vk::VertexInputRate::eVertex;
 
-		context.GetComputeEffect(m_Name).pipelineBuilder.vertexInputBindings.emplace_back(bindingDescription);
+		effect.pipelineBuilder.vertexInputBindings.emplace_back(bindingDescription);
 
 		for (const auto& element : layout) {
 			vk::VertexInputAttributeDescription attributeDescription;
@@ -76,7 +77,7 @@ namespace VoxelEngine
 			attributeDescription.format = ShaderDataTypeToVulkanBaseType(element.type_);
 			attributeDescription.offset = element.offset_;
 
-			context.GetComputeEffect(m_Name).pipelineBuilder.vertexInputStates.emplace_back(attributeDescription);
+			effect.pipelineBuilder.vertexInputStates.emplace_back(attributeDescription);
 
       ++m_VertexBufferIndex;
 		}
@@ -95,7 +96,7 @@ namespace VoxelEngine
 
 		vmaUnmapMemory(context.GetAllocator(), vulkanVertexBuffer->GetStagingBuffer().allocation);
 
-		context.GetComputeEffect(m_Name).pipelineBuilder.vertexBuffer = vulkanVertexBuffer->GetBuffer().buffer;
+		effect.vertexBuffer = vulkanVertexBuffer;
 
 		m_VertexBuffer = vertexBuffer;
 	}
@@ -130,6 +131,8 @@ namespace VoxelEngine
 		}
 
 		vmaUnmapMemory(context.GetAllocator(), vulkanVertexBuffer->GetStagingBuffer().allocation);
+
+		context.GetComputeEffect(m_Name).indexBuffer = vulkanIndexBuffer;
 
 		m_IndexBuffer = indexBuffer;
 	}

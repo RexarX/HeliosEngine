@@ -108,7 +108,7 @@ void GameLayer::Draw()
 	VoxelEngine::Renderer::DrawLine(glm::vec3(12.5f, 12.5f, 12.5f), glm::vec3(0.0f, 0.0f, 0.0f), 100.0f); // (ray origin, ray direction, ray lenght)
 
 	m_ToDraw.clear();*/
-	VoxelEngine::Renderer::DrawTriangle(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+	VoxelEngine::Renderer::DrawTriangle(glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
 
 	VoxelEngine::Renderer::EndScene();
 }

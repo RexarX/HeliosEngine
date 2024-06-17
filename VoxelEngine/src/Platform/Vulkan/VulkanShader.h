@@ -33,6 +33,8 @@ namespace VoxelEngine
 		virtual void UploadUniformMat3(const char* name, const glm::mat3& matrix) override;
 		virtual void UploadUniformMat4(const char* name, const glm::mat4& matrix) override;
 
+		virtual void UploadUniformData(const char* name, const void* data, const uint32_t size) override;
+
 	private:
 		std::string ReadFile(const std::string& filepath);
 		std::unordered_map<vk::ShaderStageFlagBits, std::string> PreProcess(const std::string& source);
@@ -45,7 +47,6 @@ namespace VoxelEngine
 		const char* m_Name;
 
 		uint32_t m_Binding = 0;
-		uint32_t m_Offset = 0;
 
 		bool m_Compiled = false;
 	};

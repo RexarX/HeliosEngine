@@ -48,8 +48,7 @@ namespace VoxelEngine
 		struct SceneData
 		{
       glm::mat4 ProjectionViewMatrix;
-			glm::mat4 ProjectionMatrix;
-			glm::mat4 ViewMatrix;
+			glm::mat4 TransformMatrix;
 		};
 
 		static std::unique_ptr<SceneData> s_SceneData;

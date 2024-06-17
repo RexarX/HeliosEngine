@@ -16,21 +16,27 @@ namespace VoxelEngine
 
 	void CameraController::OnUpdate(const Timestep ts)
 	{
+		if (Input::IsKeyPressed(Key::W) || Input::IsKeyPressed(Key::Up)) {
+			m_CameraPosition += m_Camera.GetCameraForward() * m_CameraTranslationSpeed * (float)ts;
+			VE_TRACE("W");
+		}
+
 		if (Input::IsKeyPressed(Key::A) || Input::IsKeyPressed(Key::Left)) {
 			m_CameraPosition += m_Camera.GetCameraLeft() * m_CameraTranslationSpeed * (float)ts;
 		}
-		if (Input::IsKeyPressed(Key::D) || Input::IsKeyPressed(Key::Right)) {
-			m_CameraPosition -= m_Camera.GetCameraLeft() * m_CameraTranslationSpeed * (float)ts;
-		}
-		if (Input::IsKeyPressed(Key::W) || Input::IsKeyPressed(Key::Up)) {
-			m_CameraPosition += m_Camera.GetCameraForward() * m_CameraTranslationSpeed * (float)ts;
-		}
+
 		if (Input::IsKeyPressed(Key::S) || Input::IsKeyPressed(Key::Down)) {
 			m_CameraPosition -= m_Camera.GetCameraForward() * m_CameraTranslationSpeed * (float)ts;
 		}
+
+		if (Input::IsKeyPressed(Key::D) || Input::IsKeyPressed(Key::Right)) {
+			m_CameraPosition -= m_Camera.GetCameraLeft() * m_CameraTranslationSpeed * (float)ts;
+		}
+
 		if (Input::IsKeyPressed(Key::Space)) {
 			m_CameraPosition += m_Camera.GetCameraUp() * m_CameraTranslationSpeed * (float)ts;
 		}
+
 		if (Input::IsKeyPressed(Key::LeftShift)) {
 			m_CameraPosition -= m_Camera.GetCameraUp() * m_CameraTranslationSpeed * (float)ts;
 		}

@@ -257,4 +257,10 @@ namespace VoxelEngine
 		GLint location = glGetUniformLocation(m_RendererID, name);
 		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 	}
+
+	void OpenGLShader::UploadUniformData(const char* name, const void* data, const uint32_t size)
+	{
+		GLint location = glGetUniformLocation(m_RendererID, name);
+		glUniform1i(location, static_cast<GLint>(*static_cast<const int*>(data)));
+	}
 }

@@ -83,10 +83,12 @@ namespace VoxelEngine
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
 		GLFWwindow* backup_current_context = glfwGetCurrentContext();
+
 		#ifdef VE_PLATFORM_WINDOWS
 				ImGui::UpdatePlatformWindows();
 				ImGui::RenderPlatformWindowsDefault();
 		#endif
+
 		glfwMakeContextCurrent(backup_current_context);
 	}
 

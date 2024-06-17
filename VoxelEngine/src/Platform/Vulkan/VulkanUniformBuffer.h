@@ -21,7 +21,6 @@ namespace VoxelEngine
 		const char* GetName() const { return m_Name; }
 
 		AllocatedBuffer& GetBuffer() { return m_Buffer; }
-		AllocatedBuffer& GetStagingBuffer() { return m_StagingBuffer; }
 
 	private:
 		const void* m_Data;
@@ -32,6 +31,5 @@ namespace VoxelEngine
 		uint32_t m_Offset = 0;
 
 		AllocatedBuffer m_Buffer;
-		AllocatedBuffer m_StagingBuffer;
 	};
 }

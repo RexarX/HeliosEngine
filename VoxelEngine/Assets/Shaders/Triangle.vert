@@ -2,6 +2,12 @@
 
 layout (location = 0) in vec3 a_Pos;
 
+layout (binding = 0) uniform SceneData
+{
+	mat4 u_ProjectionView;
+	mat4 u_Transform;
+};
+
 layout (location = 0) out vec3 outColor;
 
 void main() 
@@ -12,12 +18,6 @@ void main()
 		vec3(0.0f, 0.0f, 1.0f)
 	);
 
-	const vec3 positions[3] = vec3[3](
-		vec3(1.0f, 1.0f, 0.0f),
-		vec3(-1.0f, 1.0f, 0.0f),
-		vec3(0.0f, -1.0f, 0.0f)
-	);
-
-	gl_Position = vec4(a_Pos, 1.0f); //u_ProjectionView * u_Transform * vec4(a_Pos, 1.0);
+	gl_Position = u_ProjectionView * u_Transform * vec4(a_Pos, 1.0f);
 	outColor = colors[gl_VertexIndex];
 }

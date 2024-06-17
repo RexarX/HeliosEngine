@@ -237,7 +237,7 @@ namespace VoxelEngine
     pipelineBuilder.Clear();
     pipelineBuilder.SetInputTopology(vk::PrimitiveTopology::eTriangleList);
     pipelineBuilder.SetPolygonMode(vk::PolygonMode::eFill);
-    //pipelineBuilder.SetCullMode(vk::CullModeFlagBits::eBack, vk::FrontFace::eCounterClockwise);
+    pipelineBuilder.SetCullMode(vk::CullModeFlagBits::eBack, vk::FrontFace::eCounterClockwise);
     pipelineBuilder.SetMultisamplingNone();
     pipelineBuilder.DisableBlending(); //temp
     pipelineBuilder.SetColorAttachmentFormat(context.GetDrawImage().imageFormat);

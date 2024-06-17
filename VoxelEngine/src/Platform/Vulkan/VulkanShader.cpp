@@ -5,6 +5,7 @@
 #include "vepch.h"
 
 #include <shaderc/shaderc.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 namespace VoxelEngine 
 {
@@ -204,72 +205,144 @@ namespace VoxelEngine
 		VulkanContext& context = VulkanContext::Get();
 		ComputeEffect& effect = context.GetComputeEffect(m_Name);
 
-		effect.descriptorLayoutBuilder.AddBinding(m_Binding, vk::DescriptorType::eUniformBufferDynamic,
+		effect.descriptorLayoutBuilder.AddBinding(m_Binding, vk::DescriptorType::eUniformBuffer,
 																												 vk::ShaderStageFlagBits::eVertex);
 
 		effect.descriptorAllocator.AddRatios(
-			{ vk::DescriptorType::eUniformBufferDynamic, 1 }
+			{ vk::DescriptorType::eUniformBuffer, 1 }
 		);
 
 		std::shared_ptr<VulkanUniformBuffer> vulkanUniformBuffer = std::static_pointer_cast<VulkanUniformBuffer>(uniformBuffer);
 
 		void* data;
-		vmaMapMemory(context.GetAllocator(), vulkanUniformBuffer->GetStagingBuffer().allocation, &data);
+		vmaMapMemory(context.GetAllocator(), vulkanUniformBuffer->GetBuffer().allocation, &data);
 
 		context.GetDeletionQueue().push_function([&]() {
-			vmaUnmapMemory(context.GetAllocator(), vulkanUniformBuffer->GetStagingBuffer().allocation);
-			});
-
-		context.ImmediateSubmit([&](const vk::CommandBuffer cmd) {
-			vk::BufferCopy vertexCopy;
-			vertexCopy.dstOffset = vulkanUniformBuffer->GetOffset();
-			vertexCopy.srcOffset = 0;
-			vertexCopy.size = vulkanUniformBuffer->GetSize();
-
-			cmd.copyBuffer(vulkanUniformBuffer->GetStagingBuffer().buffer, vulkanUniformBuffer->GetBuffer().buffer,
-										 1, &vertexCopy);
+			vmaUnmapMemory(context.GetAllocator(), vulkanUniformBuffer->GetBuffer().allocation);
 			});
 
 		effect.descriptorWriter.WriteBuffer(m_Binding, vulkanUniformBuffer->GetBuffer().buffer, vulkanUniformBuffer->GetSize(),
-																				0, vk::DescriptorType::eUniformBufferDynamic);
+																				0, vk::DescriptorType::eUniformBuffer);
 
 		++m_Binding;
 	}
 
 	void VulkanShader::UploadUniformInt(const char* name, const int value)
 	{
+		ComputeEffect& effect = VulkanContext::Get().GetComputeEffect(m_Name);
+
+		vk::PushConstantRange range;
+		range.offset = 0;
+		range.size = sizeof(int);
+		range.stageFlags = vk::ShaderStageFlagBits::eVertex;
+
+		effect.pipelineBuilder.pushConstantRanges.emplace_back(range);
+
+		effect.pushConstant = &value;
+		effect.pushConstantSize = sizeof(int);
 	}
 
 	void VulkanShader::UploadUniformFloat(const char* name, const float value)
 	{
+		ComputeEffect& effect = VulkanContext::Get().GetComputeEffect(m_Name);
+
+		vk::PushConstantRange range;
+		range.offset = 0;
+		range.size = sizeof(float);
+		range.stageFlags = vk::ShaderStageFlagBits::eVertex;
+
+		effect.pipelineBuilder.pushConstantRanges.emplace_back(range);
+
+		effect.pushConstant = &value;
+		effect.pushConstantSize = sizeof(float);
 	}
 
 	void VulkanShader::UploadUniformFloat2(const char* name, const glm::vec2& value)
 	{
+		ComputeEffect& effect = VulkanContext::Get().GetComputeEffect(m_Name);
+
+		vk::PushConstantRange range;
+		range.offset = 0;
+		range.size = sizeof(glm::vec2);
+		range.stageFlags = vk::ShaderStageFlagBits::eVertex;
+
+		effect.pipelineBuilder.pushConstantRanges.emplace_back(range);
+
+		effect.pushConstant = glm::value_ptr(value);
+		effect.pushConstantSize = sizeof(glm::vec2);
 	}
 
 	void VulkanShader::UploadUniformFloat3(const char* name, const glm::vec3& value)
 	{
+		ComputeEffect& effect = VulkanContext::Get().GetComputeEffect(m_Name);
+
+		vk::PushConstantRange range;
+		range.offset = 0;
+		range.size = sizeof(glm::vec3);
+		range.stageFlags = vk::ShaderStageFlagBits::eVertex;
+
+		effect.pipelineBuilder.pushConstantRanges.emplace_back(range);
+
+		effect.pushConstant = glm::value_ptr(value);
+		effect.pushConstantSize = sizeof(glm::vec3);
 	}
 
 	void VulkanShader::UploadUniformFloat4(const char* name, const glm::vec4& value)
 	{
+		ComputeEffect& effect = VulkanContext::Get().GetComputeEffect(m_Name);
+
+		vk::PushConstantRange range;
+		range.offset = 0;
+		range.size = sizeof(glm::vec4);
+		range.stageFlags = vk::ShaderStageFlagBits::eVertex;
+
+		effect.pipelineBuilder.pushConstantRanges.emplace_back(range);
+
+		effect.pushConstant = glm::value_ptr(value);
+		effect.pushConstantSize = sizeof(glm::vec4);
 	}
 
 	void VulkanShader::UploadUniformMat3(const char* name, const glm::mat3& matrix)
 	{
+		ComputeEffect& effect = VulkanContext::Get().GetComputeEffect(m_Name);
+
+		vk::PushConstantRange range;
+		range.offset = 0;
+		range.size = sizeof(glm::mat3);
+		range.stageFlags = vk::ShaderStageFlagBits::eVertex;
+
+		effect.pipelineBuilder.pushConstantRanges.emplace_back(range);
+
+		effect.pushConstant = glm::value_ptr(matrix);
+		effect.pushConstantSize = sizeof(glm::mat3);
 	}
 
 	void VulkanShader::UploadUniformMat4(const char* name, const glm::mat4& matrix)
 	{
+		ComputeEffect& effect = VulkanContext::Get().GetComputeEffect(m_Name);
+
 		vk::PushConstantRange range;
-		range.offset = m_Offset;
+		range.offset = 0;
 		range.size = sizeof(glm::mat4);
 		range.stageFlags = vk::ShaderStageFlagBits::eVertex;
 
-		VulkanContext::Get().GetComputeEffect(m_Name).
-			pipelineBuilder.pushConstantRanges.emplace_back(range);
+		effect.pipelineBuilder.pushConstantRanges.emplace_back(range);
 
-		m_Offset += sizeof(glm::mat4);
+		effect.pushConstant = glm::value_ptr(matrix);
+		effect.pushConstantSize = sizeof(glm::mat4);
+	}
+
+	void VulkanShader::UploadUniformData(const char* name, const void* data, const uint32_t size)
+	{
+		ComputeEffect& effect = VulkanContext::Get().GetComputeEffect(m_Name);
+
+		vk::PushConstantRange range;
+		range.offset = 0;
+		range.size = size;
+		range.stageFlags = vk::ShaderStageFlagBits::eVertex;
+
+		effect.pipelineBuilder.pushConstantRanges.emplace_back(range);
+
+		effect.pushConstantSize = size;
 	}
 }

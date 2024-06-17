@@ -198,9 +198,9 @@ namespace VoxelEngine
     };
 
     constexpr float triangle[] = {
-       0.0f, -1.0f, 0.0f,
+      -1.0f,  1.0f, 0.0f,
        1.0f,  1.0f, 0.0f,
-      -1.0f,  1.0f, 0.0f
+       0.0f, -1.0f, 0.0f
     };
     
     /*s_ChunkedData.ChunkVertex = VertexArray::Create();
@@ -294,7 +294,7 @@ namespace VoxelEngine
     s_Triangle.VertexBuffer = VertexBuffer::Create(s_Triangle.name, triangle, sizeof(triangle));
     s_Triangle.VertexBuffer->SetLayout({ { ShaderDataType::Float3, "a_Pos" } });
 
-    s_Triangle.UniformBuffer = UniformBuffer::Create(s_Triangle.name, 10000);
+    s_Triangle.UniformBuffer = UniformBuffer::Create(s_Triangle.name, 10000, 0);
     s_Triangle.Shader->AddUniformBuffer(s_Triangle.UniformBuffer);
 
     s_Triangle.VertexArray->AddVertexBuffer(s_Triangle.VertexBuffer);
@@ -334,8 +334,6 @@ namespace VoxelEngine
 	void Renderer::BeginScene(const Camera& camera)
 	{
 		s_SceneData->ProjectionViewMatrix = camera.GetProjectionViewMatrix();
-    s_SceneData->ProjectionMatrix = camera.GetProjectionMatrix();
-    s_SceneData->ViewMatrix = camera.GetViewMatrix();
 	}
 
 	void Renderer::EndScene()
@@ -365,9 +363,11 @@ namespace VoxelEngine
     s_Triangle.VertexArray->Bind();
     s_Triangle.VertexBuffer->Bind();
 
-    s_Triangle.UniformBuffer->SetData(glm::value_ptr(transform), sizeof(glm::mat4));
+    s_SceneData->TransformMatrix = transform;
+
+    s_Triangle.UniformBuffer->SetData(s_SceneData.get(), sizeof(*s_SceneData));
     
-    RenderCommand::DrawArray(s_Triangle.VertexArray, 9);
+    RenderCommand::DrawArray(s_Triangle.VertexArray, 3);
   }
 
   void Renderer::DrawCube(const glm::vec3& position, const glm::vec3& rotation,
@@ -449,8 +449,7 @@ namespace VoxelEngine
     s_Skybox.SkyboxVertex->Bind();
     s_Skybox.SkyboxBuffer->Bind();
 
-    s_Skybox.SkyboxShader->UploadUniformMat4("u_Projection", s_SceneData->ProjectionMatrix);
-    s_Skybox.SkyboxShader->UploadUniformMat4("u_View", glm::mat4(glm::mat3(s_SceneData->ViewMatrix)));
+    s_Skybox.SkyboxShader->UploadUniformMat4("u_ViewProjection", s_SceneData->ProjectionViewMatrix);
 
     RenderCommand::DrawArray(s_Skybox.SkyboxVertex, 36);
 

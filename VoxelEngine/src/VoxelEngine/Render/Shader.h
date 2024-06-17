@@ -26,6 +26,8 @@ namespace VoxelEngine
 		virtual void UploadUniformMat3(const char* name, const glm::mat3& matrix) = 0;
 		virtual void UploadUniformMat4(const char* name, const glm::mat4& matrix) = 0;
 
+		virtual void UploadUniformData(const char* name, const void* data, const uint32_t size) = 0;
+
 		virtual const char* GetName() const = 0;
 
 		static std::shared_ptr<Shader> Create(const std::string& filepath);

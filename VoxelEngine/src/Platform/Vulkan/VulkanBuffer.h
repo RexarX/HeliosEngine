@@ -2,7 +2,17 @@
 
 #include "Render/Buffer.h"
 
-#include "VulkanStructs.h"
+#include <vulkan/vulkan.hpp>
+
+#include <vma/vk_mem_alloc.h>
+
+struct AllocatedBuffer
+{
+	VkBuffer buffer;
+
+	VmaAllocation allocation;
+	VmaAllocationInfo info;
+};
 
 namespace VoxelEngine
 {

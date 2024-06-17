@@ -4,6 +4,7 @@
 
 #include <backends/imgui_impl_vulkan.h>
 #include <backends/imgui_impl_glfw.h>
+#include "VulkanBuffer.h"
 
 namespace VoxelEngine
 {
@@ -947,18 +948,26 @@ namespace VoxelEngine
     scissor.extent.width = m_DrawExtent.width;
     scissor.extent.height = m_DrawExtent.height;
 
-    ComputeEffect& effect = GetComputeEffect("Triangle");
-
     cmd.beginRendering(&renderInfo);
-
-    cmd.bindPipeline(vk::PipelineBindPoint::eGraphics, effect.pipeline);
 
     cmd.setViewport(0, 1, &viewport);
     cmd.setScissor(0, 1, &scissor);
 
-    cmd.bindVertexBuffers(0, effect.pipelineBuilder.vertexBuffer, { 0 });
+    for (auto& [name, effect] : m_ComputeEffects) {
+      cmd.bindPipeline(vk::PipelineBindPoint::eGraphics, effect.pipeline);
 
-    cmd.draw(3, 1, 0, 0);
+      cmd.bindVertexBuffers(0, static_cast<vk::Buffer>(effect.vertexBuffer->GetBuffer().buffer), { 0 });
+
+      cmd.bindDescriptorSets(vk::PipelineBindPoint::eGraphics, effect.pipelineLayout, 0, 1,
+                             &effect.descriptorSet, 0, nullptr);
+
+      if (effect.pushConstant != nullptr) {
+        cmd.pushConstants(effect.pipelineLayout, effect.pipelineBuilder.pushConstantRanges[0].stageFlags,
+                          0, effect.pushConstantSize, effect.pushConstant);
+      }
+
+      cmd.draw(effect.vertexBuffer->GetVertices().size() / 3, 1, 0, 0);
+    }
 
     cmd.endRendering();
   }
