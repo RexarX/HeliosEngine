@@ -1,18 +1,14 @@
 #pragma once
 
 #include "RenderStart.h"
-
 #include "Camera.h"
-
 #include "Shader.h"
-
 #include "Texture.h"
-
 #include "Chunk.h"
 
 namespace VoxelEngine
 {
-	class Renderer
+	class VOXELENGINE_API Renderer
 	{
 	public:
 		static void Init();
@@ -47,6 +43,8 @@ namespace VoxelEngine
 	private:
 		struct SceneData
 		{
+			glm::mat4 ViewMatrix;
+			glm::mat4 ProjectionMatrix;
       glm::mat4 ProjectionViewMatrix;
 			glm::mat4 TransformMatrix;
 		};

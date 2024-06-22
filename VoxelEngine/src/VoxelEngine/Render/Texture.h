@@ -21,7 +21,7 @@ namespace VoxelEngine
 		bool GenerateMips = true;
 	};
 
-	class Texture
+	class VOXELENGINE_API Texture
 	{
 	public:
 		virtual ~Texture() = default;

@@ -60,7 +60,7 @@ if(MSVC)
             /Gy;
             ${DEFAULT_CXX_DEBUG_INFORMATION_FORMAT}
         >
-        /W1;
+        /w;
         ${DEFAULT_CXX_EXCEPTION_HANDLING};
         /Y-
     )

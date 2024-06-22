@@ -64,33 +64,18 @@ target_precompile_headers(${PROJECT_NAME} PRIVATE
     "$<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/src/vepch.h>"
 )
 
-use_props(${PROJECT_NAME} "${CMAKE_CONFIGURATION_TYPES}" "${DEFAULT_CXX_PROPS}")
+foreach(OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES})
+    string(TOUPPER ${OUTPUTCONFIG} UPOUTPUTCONFIG)
 
-set(ROOT_NAMESPACE VoxelEngine)
-
-set_target_properties(${PROJECT_NAME} PROPERTIES
-    TARGET_NAME_DEBUG   "VoxelEngine"
-    TARGET_NAME_RELEASE "VoxelEngine"
-    TARGET_NAME_DIST    "VoxelEngine"
-)
-
-set_target_properties(${PROJECT_NAME} PROPERTIES
-    OUTPUT_DIRECTORY_DEBUG   "${CMAKE_CURRENT_SOURCE_DIR}/../bin/Debug-windows-x86_64/"
-    OUTPUT_DIRECTORY_RELEASE "${CMAKE_CURRENT_SOURCE_DIR}/../bin/Release-windows-x86_64/"
-    OUTPUT_DIRECTORY_DIST    "${CMAKE_CURRENT_SOURCE_DIR}/../bin/Dist-windows-x86_64/"
-)
-
-set_target_properties(${PROJECT_NAME} PROPERTIES
-    ARCHIVE_OUTPUT_DIRECTORY_DEBUG   "${CMAKE_CURRENT_SOURCE_DIR}/../bin/Debug-windows-x86_64"
-    ARCHIVE_OUTPUT_DIRECTORY_RELEASE "${CMAKE_CURRENT_SOURCE_DIR}/../bin/Release-windows-x86_64"
-    ARCHIVE_OUTPUT_DIRECTORY_DIST    "${CMAKE_CURRENT_SOURCE_DIR}/../bin/Dist-windows-x86_64"
-)
-
-set_target_properties(${PROJECT_NAME} PROPERTIES
-    ARCHIVE_OUTPUT_NAME_DEBUG   "VoxelEngine"
-    ARCHIVE_OUTPUT_NAME_RELEASE "VoxelEngine"
-    ARCHIVE_OUTPUT_NAME_DIST    "VoxelEngine"
-)
+    set_target_properties(${PROJECT_NAME} PROPERTIES
+        TARGET_NAME_${UPOUTPUTCONFIG} "VoxelEngine"
+        ARCHIVE_OUTPUT_NAME_${UPOUTPUTCONFIG} "VoxelEngine"
+        RUNTIME_OUTPUT_DIRECTORY_${UPOUTPUTCONFIG}
+            "${CMAKE_CURRENT_SOURCE_DIR}/../bin/${OUTPUTCONFIG}-${PLATFORM}-${ARCHITECTURE}"
+        ARCHIVE_OUTPUT_DIRECTORY_${UPOUTPUTCONFIG}
+            "${CMAKE_CURRENT_SOURCE_DIR}/../bin/${OUTPUTCONFIG}-${PLATFORM}-${ARCHITECTURE}"
+    )
+endforeach(OUTPUTCONFIG CMAKE_CONFIGURATION_TYPES)
 
 get_property(MSVC_RUNTIME_LIBRARY_DEFAULT TARGET ${PROJECT_NAME} PROPERTY MSVC_RUNTIME_LIBRARY)
 
@@ -137,7 +122,7 @@ if(WIN32)
 	target_compile_definitions(${PROJECT_NAME} PRIVATE "VE_PLATFORM_WINDOWS;")
 endif()
 
-if(MSVC)
+if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     target_compile_options(${PROJECT_NAME} PRIVATE
         $<$<CONFIG:Debug>:
             /Od;
@@ -175,6 +160,20 @@ if(MSVC)
         >
         /SUBSYSTEM:WINDOWS
     )
+elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+	target_compile_options(${PROJECT_NAME} PRIVATE
+		$<$<CONFIG:Debug>:
+			-O0;
+			-g;
+		>
+		$<$<CONFIG:Release>:
+			-O3;
+		>
+		$<$<CONFIG:Dist>:
+			-O3;
+		>
+		-Wno-switch
+	)
 endif()
 
 find_package(Vulkan REQUIRED)

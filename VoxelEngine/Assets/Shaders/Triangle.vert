@@ -4,6 +4,8 @@ layout (location = 0) in vec3 a_Pos;
 
 layout (binding = 0) uniform SceneData
 {
+	mat4 u_View;
+	mat4 u_Projection;
 	mat4 u_ProjectionView;
 	mat4 u_Transform;
 };

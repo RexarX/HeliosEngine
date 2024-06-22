@@ -333,6 +333,8 @@ namespace VoxelEngine
 
 	void Renderer::BeginScene(const Camera& camera)
 	{
+    s_SceneData->ViewMatrix = camera.GetViewMatrix();
+    s_SceneData->ProjectionMatrix = camera.GetProjectionMatrix();
 		s_SceneData->ProjectionViewMatrix = camera.GetProjectionViewMatrix();
 	}
 

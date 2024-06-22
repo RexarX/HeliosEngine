@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Camera.h"
-
 #include "Frustum.h"
 
 #include "Timestep.h"
@@ -11,7 +10,7 @@
 
 namespace VoxelEngine
 {
-	class CameraController
+	class VOXELENGINE_API CameraController
 	{
 	public:
 		CameraController(const glm::vec3& position, const glm::vec3& rotation,

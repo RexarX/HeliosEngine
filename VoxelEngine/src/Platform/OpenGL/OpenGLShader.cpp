@@ -3,7 +3,6 @@
 #include "vepch.h"
 
 #include <glad/glad.h>
-#include <GL/glcorearb.h>
 
 #include <shaderc/shaderc.hpp>
 

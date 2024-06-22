@@ -2,12 +2,6 @@ cmake_minimum_required(VERSION 3.24.0)
 
 project(VoxelEngine)
 
-if(NOT CMAKE_VS_PLATFORM_NAME)
-    set(CMAKE_VS_PLATFORM_NAME "x64")
-endif()
-
-set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
-
 set(CMAKE_CONFIGURATION_TYPES
     "Debug"
     "Release"
@@ -15,44 +9,21 @@ set(CMAKE_CONFIGURATION_TYPES
     CACHE STRING "" FORCE
 )
 
-if(MSVC)
-    set(CMAKE_C_FLAGS "")
-    set(CMAKE_C_FLAGS_DEBUG "")
-    set(CMAKE_C_FLAGS_DIST "")
-    set(CMAKE_C_FLAGS_RELEASE "")
-    set(CMAKE_CXX_FLAGS "")
-    set(CMAKE_CXX_FLAGS_DEBUG "")
-    set(CMAKE_CXX_FLAGS_DIST "")
-    set(CMAKE_CXX_FLAGS_RELEASE "")
+if(WIN32)
+	set(PLATFORM "Windows")
+elseif(UNIX)
+	set(PLATFORM "Linux")
 endif()
 
-if(MSVC)
-    set(CMAKE_EXE_LINKER_FLAGS "")
-    set(CMAKE_MODULE_LINKER_FLAGS "")
-    set(CMAKE_SHARED_LINKER_FLAGS "")
-    set(CMAKE_STATIC_LINKER_FLAGS "")
-    set(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS}")
-    set(CMAKE_MODULE_LINKER_FLAGS_DEBUG "${CMAKE_MODULE_LINKER_FLAGS}")
-    set(CMAKE_SHARED_LINKER_FLAGS_DEBUG "${CMAKE_SHARED_LINKER_FLAGS}")
-    set(CMAKE_STATIC_LINKER_FLAGS_DEBUG "${CMAKE_STATIC_LINKER_FLAGS}")
-    set(CMAKE_EXE_LINKER_FLAGS_DIST "${CMAKE_EXE_LINKER_FLAGS}")
-    set(CMAKE_MODULE_LINKER_FLAGS_DIST "${CMAKE_MODULE_LINKER_FLAGS}")
-    set(CMAKE_SHARED_LINKER_FLAGS_DIST "${CMAKE_SHARED_LINKER_FLAGS}")
-    set(CMAKE_STATIC_LINKER_FLAGS_DIST "${CMAKE_STATIC_LINKER_FLAGS}")
-    set(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS}")
-    set(CMAKE_MODULE_LINKER_FLAGS_RELEASE "${CMAKE_MODULE_LINKER_FLAGS}")
-    set(CMAKE_SHARED_LINKER_FLAGS_RELEASE "${CMAKE_SHARED_LINKER_FLAGS}")
-    set(CMAKE_STATIC_LINKER_FLAGS_RELEASE "${CMAKE_STATIC_LINKER_FLAGS}")
+if (NOT DEFINED ARCHITECTURE)
+    if (CMAKE_SIZEOF_VOID_P EQUAL 8)
+        set(ARCHITECTURE "x86_64")
+    elseif(CMAKE_SIZEOF_VOID_P EQUAL 4)
+        set(ARCHITECTURE "x86")
+    endif()
 endif()
-
-include(CMake/Utils.cmake)
-include(CMake/GlobalSettingsInclude.cmake OPTIONAL)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-
-include_directories(VoxelEngine/src)
-include_directories(VoxelEngine/src/VoxelEngine)
-include_directories(VoxelEngine/src/Platform)
 
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
@@ -60,6 +31,10 @@ set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 set(GLFW_INSTALL OFF CACHE BOOL "" FORCE)
 
 set(SPDLOG_BUILD_SHARED ON CACHE BOOL "" FORCE)
+
+include_directories(VoxelEngine/src)
+include_directories(VoxelEngine/src/VoxelEngine)
+include_directories(VoxelEngine/src/Platform)
 
 add_subdirectory(VoxelCraft)
 add_subdirectory(VoxelEngine)

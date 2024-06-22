@@ -49,34 +49,29 @@ void GameLayer::OnEvent(VoxelEngine::Event& event)
 	m_CameraController.OnEvent(event);
 
 	if (event.GetEventType() == VoxelEngine::EventType::KeyPressed) {
+		VoxelEngine::Window& window = VoxelEngine::Application::Get().GetWindow();
+
 		VoxelEngine::KeyPressedEvent& e = (VoxelEngine::KeyPressedEvent&)event;
 		switch (e.GetKeyCode())
 		{
 		case VoxelEngine::Key::Escape:
-			if (VoxelEngine::Application::Get().GetWindow().IsFocused()) {
-				VoxelEngine::Application::Get().GetWindow().SetFocused(false);
+			if (window.IsFocused()) {
+				window.SetFocused(false);
 				m_CameraController.SetFirstInput();
-			} else {
-				VoxelEngine::Application::Get().GetWindow().SetFocused(true);
 			}
+			else { window.SetFocused(true); }
 			break;
 
 		case VoxelEngine::Key::F1:
-			VoxelEngine::Application::Get().GetWindow().SetVSync(
-				!VoxelEngine::Application::Get().GetWindow().IsVSync()
-			);
+			window.SetVSync(!window.IsVSync());
 			break;
 
 		case VoxelEngine::Key::F2:
-			VoxelEngine::Application::Get().GetWindow().SetFullscreen(
-				!VoxelEngine::Application::Get().GetWindow().IsFullscreen()
-			);
+			window.SetFullscreen(!window.IsFullscreen());
 			break;
 
 		case VoxelEngine::Key::F3:
-			VoxelEngine::Application::Get().GetWindow().SetImGuiState(
-				!VoxelEngine::Application::Get().GetWindow().IsImGuiEnabled()
-			);
+			window.SetImGuiState(!window.IsImGuiEnabled());
 			break;
 		}
 	}
@@ -84,11 +79,13 @@ void GameLayer::OnEvent(VoxelEngine::Event& event)
 
 void GameLayer::OnImGuiRender(ImGuiContext* context)
 {
+	VoxelEngine::Timestep ts = VoxelEngine::Application::Get().GetDeltaTime();
+
 	ImGui::SetCurrentContext(context);
 
 	ImGui::Begin("Debug menu");
-	ImGui::Text("FPS: %f", VoxelEngine::Application::Get().GetDeltaTime().GetFramerate());
-	ImGui::Text("Frametime: %f", VoxelEngine::Application::Get().GetDeltaTime().GetMilliseconds());
+	ImGui::Text("FPS: %f", ts.GetFramerate());
+	ImGui::Text("Frametime: %f", ts.GetMilliseconds());
 	ImGui::End();
 }
 
