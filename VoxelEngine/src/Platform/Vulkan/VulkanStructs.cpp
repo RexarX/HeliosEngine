@@ -53,18 +53,18 @@ namespace VoxelEngine
     pool = device.createDescriptorPool(info);
   }
 
-  void DescriptorAllocator::ClearDescriptors(const vk::Device device)
+  void DescriptorAllocator::ClearDescriptors(const vk::Device device) const
   {
     device.resetDescriptorPool(pool);
   }
 
-  void DescriptorAllocator::DestroyPool(const vk::Device device)
+  void DescriptorAllocator::DestroyPool(const vk::Device device) const
   {
     device.destroyDescriptorPool(pool);
   }
 
   vk::DescriptorSet DescriptorAllocator::Allocate(const vk::Device device,
-                                                  const vk::DescriptorSetLayout layout)
+                                                  const vk::DescriptorSetLayout layout) const
   {
     vk::DescriptorSetAllocateInfo info;
     info.sType = vk::StructureType::eDescriptorSetAllocateInfo;

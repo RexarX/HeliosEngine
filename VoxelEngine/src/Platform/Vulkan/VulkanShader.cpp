@@ -221,7 +221,7 @@ namespace VoxelEngine
 			vmaUnmapMemory(context.GetAllocator(), vulkanUniformBuffer->GetBuffer().allocation);
 			});
 
-		effect.descriptorWriter.WriteBuffer(m_Binding, vulkanUniformBuffer->GetBuffer().buffer, vulkanUniformBuffer->GetSize(),
+		effect.descriptorWriter.WriteBuffer(m_Binding, static_cast<vk::Buffer>(vulkanUniformBuffer->GetBuffer().buffer), vulkanUniformBuffer->GetSize(),
 																				0, vk::DescriptorType::eUniformBuffer);
 
 		++m_Binding;

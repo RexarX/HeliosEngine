@@ -89,7 +89,7 @@ namespace VoxelEngine
 				vertexCopy.srcOffset = 0;
 				vertexCopy.size = vulkanVertexBuffer->GetVertices().size() * sizeof(float);
 
-				cmd.copyBuffer(vulkanVertexBuffer->GetStagingBuffer().buffer, vulkanVertexBuffer->GetBuffer().buffer,
+				cmd.copyBuffer(static_cast<vk::Buffer>(vulkanVertexBuffer->GetStagingBuffer().buffer), static_cast<vk::Buffer>(vulkanVertexBuffer->GetBuffer().buffer),
 											 1, &vertexCopy);
 				});
 		}
@@ -125,7 +125,7 @@ namespace VoxelEngine
 				indexCopy.srcOffset = 0;
 				indexCopy.size = indexBuffer->GetCount() * sizeof(uint32_t);
 
-				cmd.copyBuffer(vulkanIndexBuffer->GetStagingBuffer().buffer, vulkanIndexBuffer->GetBuffer().buffer,
+				cmd.copyBuffer(static_cast<vk::Buffer>(vulkanIndexBuffer->GetStagingBuffer().buffer), static_cast<vk::Buffer>(vulkanIndexBuffer->GetBuffer().buffer),
 											 1, &indexCopy);
 				});
 		}

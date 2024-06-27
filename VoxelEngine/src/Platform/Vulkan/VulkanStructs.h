@@ -131,10 +131,10 @@ namespace VoxelEngine
 	{
 		vk::DescriptorPool pool;
 		void InitPool(const vk::Device device, const uint32_t maxSets, const std::span<PoolSizeRatio>& poolRatios);
-		void ClearDescriptors(const vk::Device device);
-		void DestroyPool(const vk::Device device);
+		void ClearDescriptors(const vk::Device device) const;
+		void DestroyPool(const vk::Device device) const;
 
-		vk::DescriptorSet Allocate(const vk::Device device, const vk::DescriptorSetLayout layout);
+		vk::DescriptorSet Allocate(const vk::Device device, const vk::DescriptorSetLayout layout) const;
 	};
 
 	struct AllocatedBuffer

@@ -42,47 +42,58 @@ string(CONCAT "MSVC_RUNTIME_LIBRARY_STR"
 )
 set_target_properties(imgui PROPERTIES MSVC_RUNTIME_LIBRARY ${MSVC_RUNTIME_LIBRARY_STR})
 
-if(MSVC)
+if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     target_compile_options(imgui PRIVATE
         $<$<CONFIG:Debug>:
             /Od;
             /Zi;
         >
-        $<$<CONFIG:Dist>:
-            /O2;
-            /Oi;
-            /Gy;
-            ${DEFAULT_CXX_DEBUG_INFORMATION_FORMAT}
-        >
         $<$<CONFIG:Release>:
             /O2;
             /Oi;
             /Gy;
-            ${DEFAULT_CXX_DEBUG_INFORMATION_FORMAT}
         >
-        /w;
-        ${DEFAULT_CXX_EXCEPTION_HANDLING};
-        /Y-
+        $<$<CONFIG:Dist>:
+            /O2;
+            /Oi;
+            /Gy;
+        >
+        /W3;
+        ${DEFAULT_CXX_EXCEPTION_HANDLING}
     )
     target_link_options(imgui PRIVATE
         $<$<CONFIG:Debug>:
             /DEBUG;
             /INCREMENTAL;
         >
+         $<$<CONFIG:Release>:
+            /DEBUG:NONE;
+            /OPT:REF;
+            /OPT:ICF;
+            /INCREMENTAL:NO;
+        >
         $<$<CONFIG:Dist>:
             /DEBUG:NONE;
             /OPT:REF;
             /OPT:ICF;
             /INCREMENTAL:NO;
         >
-        $<$<CONFIG:Release>:
-            /DEBUG:NONE;
-            /OPT:REF;
-            /OPT:ICF;
-            /INCREMENTAL:NO;
-        >
-        /SUBSYSTEM:CONSOLE
+        /SUBSYSTEM:WINDOWS
     )
+elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+	target_compile_options(imgui PRIVATE
+		$<$<CONFIG:Debug>:
+			-O0;
+			-g;
+		>
+		$<$<CONFIG:Release>:
+			-O3;
+		>
+		$<$<CONFIG:Dist>:
+			-O3;
+		>
+		-Wno-switch
+	)
 endif()
 
 target_link_libraries(imgui PRIVATE

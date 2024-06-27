@@ -189,7 +189,6 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 set(ADDITIONAL_LIBRARY_DEPENDENCIES
     "opengl32"
     "$ENV{VULKAN_SDK}/Lib/shaderc_shared.lib"
-
 )
 
 target_link_libraries(${PROJECT_NAME} PUBLIC ${ADDITIONAL_LIBRARY_DEPENDENCIES})

@@ -72,8 +72,6 @@ namespace VoxelEngine
     CreateImageViews();
     CreateCommands();
     CreateSyncObjects();
-    CreateDescriptors();
-    CreatePipeline();
 	}
 
   void VulkanContext::Shutdown()
@@ -120,29 +118,30 @@ namespace VoxelEngine
     m_CommandBuffer.reset(vk::CommandBufferResetFlagBits::eReleaseResources);
     m_CommandBuffer.begin(bufferBeginInfo);
 
-    transition_image(m_CommandBuffer, m_DrawImage.image, vk::ImageLayout::eUndefined,
-                                                         vk::ImageLayout::eGeneral);
+    transition_image(m_CommandBuffer, static_cast<vk::Image>(m_DrawImage.image),
+                     vk::ImageLayout::eUndefined, vk::ImageLayout::eGeneral);
     
     vk::ClearColorValue clearValue = { 0.0f, 0.0f, 0.0f, 0.0f };
     vk::ImageSubresourceRange clearRange = image_subresource_range(vk::ImageAspectFlagBits::eColor);
 
-    m_CommandBuffer.clearColorImage(m_DrawImage.image, vk::ImageLayout::eGeneral, clearValue, clearRange);
+    m_CommandBuffer.clearColorImage(static_cast<vk::Image>(m_DrawImage.image),
+                                    vk::ImageLayout::eGeneral, clearValue, clearRange);
 
-    transition_image(m_CommandBuffer, m_DrawImage.image, vk::ImageLayout::eGeneral,
-                                                         vk::ImageLayout::eColorAttachmentOptimal);
+    transition_image(m_CommandBuffer, static_cast<vk::Image>(m_DrawImage.image),
+                     vk::ImageLayout::eGeneral, vk::ImageLayout::eColorAttachmentOptimal);
 
-    transition_image(m_CommandBuffer, m_DepthImage.image, vk::ImageLayout::eUndefined,
-                                                          vk::ImageLayout::eDepthAttachmentOptimal);
+    transition_image(m_CommandBuffer, static_cast<vk::Image>(m_DepthImage.image),
+                     vk::ImageLayout::eUndefined, vk::ImageLayout::eDepthAttachmentOptimal);
 
     DrawGeometry(m_CommandBuffer);
 
-    transition_image(m_CommandBuffer, m_DrawImage.image, vk::ImageLayout::eColorAttachmentOptimal,
-                                                         vk::ImageLayout::eTransferSrcOptimal);
+    transition_image(m_CommandBuffer, static_cast<vk::Image>(m_DrawImage.image),
+                     vk::ImageLayout::eColorAttachmentOptimal, vk::ImageLayout::eTransferSrcOptimal);
 
     transition_image(m_CommandBuffer, m_SwapChainImages[swapchainImageIndex], vk::ImageLayout::eUndefined,
                                                                               vk::ImageLayout::eTransferDstOptimal);
 
-    copy_image_to_image(m_CommandBuffer, m_DrawImage.image, m_SwapChainImages[swapchainImageIndex],
+    copy_image_to_image(m_CommandBuffer, static_cast<vk::Image>(m_DrawImage.image), m_SwapChainImages[swapchainImageIndex],
                         m_DrawExtent, m_SwapChainExtent);
 
     transition_image(m_CommandBuffer, m_SwapChainImages[swapchainImageIndex], vk::ImageLayout::eTransferDstOptimal,
@@ -229,7 +228,7 @@ namespace VoxelEngine
     init_info.PhysicalDevice = m_PhysicalDevice;
     init_info.Device = m_Device;
     init_info.Queue = m_GraphicsQueue;
-    init_info.DescriptorPool = m_ImGuiDescriptorAllocator.pool;
+    init_info.DescriptorPool = static_cast<VkDescriptorPool>(m_ImGuiDescriptorAllocator.pool);
     init_info.MinImageCount = 3;
     init_info.ImageCount = 3;
     init_info.UseDynamicRendering = true;
@@ -301,7 +300,7 @@ namespace VoxelEngine
     cmd.pipelineBarrier2(depInfo);
   }
 
-  vk::SemaphoreSubmitInfo& VulkanContext::semaphore_submit_info(const vk::PipelineStageFlags2 stageMask,
+  vk::SemaphoreSubmitInfo VulkanContext::semaphore_submit_info(const vk::PipelineStageFlags2 stageMask,
     const vk::Semaphore semaphore) const
   {
     vk::SemaphoreSubmitInfo submitInfo;
@@ -314,7 +313,7 @@ namespace VoxelEngine
     return submitInfo;
   }
 
-  vk::ImageCreateInfo& VulkanContext::image_create_info(const vk::Format format, const vk::ImageUsageFlags usageFlags,
+  vk::ImageCreateInfo VulkanContext::image_create_info(const vk::Format format, const vk::ImageUsageFlags usageFlags,
     const vk::Extent3D extent) const
   {
     vk::ImageCreateInfo info;
@@ -510,7 +509,7 @@ namespace VoxelEngine
 
     VE_CORE_ASSERT(result == VK_SUCCESS, "Failed to create window surface!");
     
-    m_Surface = rawSurface;
+    m_Surface = static_cast<vk::SurfaceKHR>(rawSurface);
 
     m_DeletionQueue.push_function([&]() {
       m_Instance.destroySurfaceKHR(m_Surface);
@@ -718,7 +717,7 @@ namespace VoxelEngine
 
     vmaCreateImage(m_Allocator, &rimg_info, &rimg_allocinfo, &m_DrawImage.image, &m_DrawImage.allocation, nullptr);
 
-    vk::ImageViewCreateInfo rview_info = imageview_create_info(m_DrawImage.image, m_DrawImage.imageFormat,
+    vk::ImageViewCreateInfo rview_info = imageview_create_info(static_cast<vk::Image>(m_DrawImage.image), m_DrawImage.imageFormat,
                                                                vk::ImageAspectFlagBits::eColor);
 
     auto result = m_Device.createImageView(&rview_info, nullptr, &m_DrawImage.imageView);
@@ -735,7 +734,7 @@ namespace VoxelEngine
 
     vmaCreateImage(m_Allocator, &dimg_info, &rimg_allocinfo, &m_DepthImage.image, &m_DepthImage.allocation, nullptr);
 
-    vk::ImageViewCreateInfo dview_info = imageview_create_info(m_DepthImage.image, m_DepthImage.imageFormat,
+    vk::ImageViewCreateInfo dview_info = imageview_create_info(static_cast<vk::Image>(m_DepthImage.image), m_DepthImage.imageFormat,
                                                                vk::ImageAspectFlagBits::eDepth);
 
     result = m_Device.createImageView(&dview_info, nullptr, &m_DepthImage.imageView);
@@ -820,51 +819,6 @@ namespace VoxelEngine
       m_Device.destroySemaphore(m_SwapChainSemaphore);
       m_Device.destroySemaphore(m_RenderSemaphore);
       });
-  }
-
-  void VulkanContext::CreateDescriptors()
-  {
-    /*std::vector<PoolSizeRatio> sizes =
-	  {
-		  { vk::DescriptorType::eStorageImage, 1 }
-	  };
-
-    m_DescriptorAllocator.AddRatios(sizes[0]);
-    m_DescriptorAllocator.Init(m_Device, 10);
-
-    DescriptorLayoutBuilder builder;
-    builder.AddBinding(0, vk::DescriptorType::eStorageImage, vk::ShaderStageFlagBits::eCompute);
-    m_DrawImageDescriptorLayout = builder.Build(m_Device, vk::DescriptorSetLayoutCreateFlagBits());
-    
-    m_DrawImageDescriptors = m_DescriptorAllocator.Allocate(m_Device, m_DrawImageDescriptorLayout);
-
-    DescriptorWriter writer;
-    writer.WriteImage(0, m_DrawImage.imageView, nullptr, vk::ImageLayout::eGeneral,
-                                                         vk::DescriptorType::eStorageImage);
-
-    writer.UpdateSet(m_Device, m_DrawImageDescriptors);
-
-    m_DeletionQueue.push_function([&]() {
-      m_DescriptorAllocator.DestroyPools(m_Device);
-
-      m_Device.destroyDescriptorSetLayout(m_DrawImageDescriptorLayout);
-      });*/
-  }
-
-  void VulkanContext::CreatePipeline()
-  {
-    /*m_PipelineBuilder.SetInputTopology(vk::PrimitiveTopology::eTriangleList);
-    m_PipelineBuilder.SetPolygonMode(vk::PolygonMode::eFill);
-    m_PipelineBuilder.SetCullMode(vk::CullModeFlagBits::eBack, vk::FrontFace::eCounterClockwise);
-    m_PipelineBuilder.SetMultisamplingNone();
-    m_PipelineBuilder.DisableBlending(); //temp
-    m_PipelineBuilder.SetColorAttachmentFormat(m_DrawImage.imageFormat);
-    m_PipelineBuilder.SetDepthFormat(m_DepthImage.imageFormat);
-
-    VulkanContext::Get().GetDeletionQueue().push_function([&]() {
-      m_Device.destroyPipelineLayout(m_PipelineLayout);
-      m_Device.destroyPipeline(m_Pipeline);
-      });*/
   }
 
   void VulkanContext::CreateAllocator()

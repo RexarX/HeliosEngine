@@ -34,6 +34,8 @@
 #Files
 out/
 .vs/
+.vscode/
+build/
 bin/
 *.user
 *.json
@@ -42,6 +44,7 @@ bin/
 .sln
 .vcxproj
 .vs
+.vscode
 
 #CMake
 CMakeCache.txt

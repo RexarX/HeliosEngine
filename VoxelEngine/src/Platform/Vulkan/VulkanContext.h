@@ -45,10 +45,10 @@ namespace VoxelEngine
 
 		static inline VulkanContext& Get() { return *m_Context; }
 		inline DeletionQueue& GetDeletionQueue() { return m_DeletionQueue; }
-		inline vk::Device GetDevice() { return m_Device; }
-		inline VmaAllocator GetAllocator() { return m_Allocator; }
+		inline vk::Device& GetDevice() { return m_Device; }
+		inline VmaAllocator& GetAllocator() { return m_Allocator; }
 		inline AllocatedImage& GetDrawImage() { return m_DrawImage; }
-    inline AllocatedImage& GetDepthImage() { return m_DepthImage; }
+		inline AllocatedImage& GetDepthImage() { return m_DepthImage; }
 		inline ComputeEffect& GetComputeEffect(const std::string& name) { return m_ComputeEffects[name]; }
 		inline const char* GetCurrentComputeEffect() const { return m_CurrentComputeEffect.c_str(); }
 
@@ -88,7 +88,7 @@ namespace VoxelEngine
 		vk::Extent2D m_SwapChainExtent;
 		std::vector<vk::Image> m_SwapChainImages;
 		std::vector<vk::ImageView> m_SwapChainImageViews;
-    vk::Format m_SwapChainImageFormat;
+		vk::Format m_SwapChainImageFormat;
 
 		vk::Extent2D m_DrawExtent;
 		
@@ -114,7 +114,7 @@ namespace VoxelEngine
 	private:
 		void CreateInstance();
 		void SetupDebugCallback();
-    void CreateSurface();
+		void CreateSurface();
 		void PickPhysicalDevice();
 		void CreateLogicalDevice();
 		void CreateAllocator();
@@ -122,8 +122,6 @@ namespace VoxelEngine
 		void CreateImageViews();
 		void CreateCommands();
 		void CreateSyncObjects();
-		void CreateDescriptors();
-		void CreatePipeline();
 		
 		void RecreateSwapChain();
 
@@ -133,10 +131,10 @@ namespace VoxelEngine
 		void transition_image(const vk::CommandBuffer cmd, const vk::Image image,
 													const vk::ImageLayout currentLayout, const vk::ImageLayout newLayout);
 
-		vk::SemaphoreSubmitInfo& semaphore_submit_info(const vk::PipelineStageFlags2 stageMask,
+		vk::SemaphoreSubmitInfo semaphore_submit_info(const vk::PipelineStageFlags2 stageMask,
 																									 const vk::Semaphore semaphore) const;
 
-		vk::ImageCreateInfo& image_create_info(const vk::Format format, const vk::ImageUsageFlags usageFlags,
+		vk::ImageCreateInfo image_create_info(const vk::Format format, const vk::ImageUsageFlags usageFlags,
 																					 const vk::Extent3D extent) const;
 		vk::ImageViewCreateInfo imageview_create_info(const vk::Image image, const vk::Format format,
 																									const vk::ImageAspectFlags aspectFlags) const;
