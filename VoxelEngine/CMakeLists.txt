@@ -116,6 +116,7 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
     "GLFW_INCLUDE_NONE;"
     "UNICODE;"
     "_UNICODE;"
+    "GLM_FORCE_DEPTH_ZERO_TO_ONE;"
 )
 
 if(WIN32)

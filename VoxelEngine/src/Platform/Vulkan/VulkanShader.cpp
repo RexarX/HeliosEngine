@@ -127,7 +127,7 @@ namespace VoxelEngine
 			in.read(result.data(), result.size());
 			in.close();
 		} 
-		else { VE_CORE_ERROR("Could not open file '{0}'", filepath); }
+		else { VE_CORE_ERROR("Could not open file '{0}'!", filepath); }
 		return result;
 	}
 
@@ -140,7 +140,7 @@ namespace VoxelEngine
 		size_t pos = source.find(typeToken, 0);
 		while (pos != std::string::npos) {
 			size_t eol = source.find_first_of("\r\n", pos);
-			VE_CORE_ASSERT(eol != std::string::npos, "Syntax error");
+			VE_CORE_ASSERT(eol != std::string::npos, "Syntax error!");
 			size_t begin = pos + typeTokenLength + 1;
 			std::string type = source.substr(begin, eol - begin);
 			VE_CORE_ASSERT(ShaderTypeFromString(type) != vk::ShaderStageFlagBits::eAll, "Invalid shader type specified!");
@@ -163,7 +163,6 @@ namespace VoxelEngine
 				memcpy(spirv.data(), src.second.data(), src.second.size());
 			} else {
 				bool result = GLSLtoSPV(src.first, src.second, spirv);
-				
 				VE_CORE_ASSERT(result, "Failed to compile shader!");
 			}
 
@@ -174,7 +173,6 @@ namespace VoxelEngine
 			info.pCode = spirv.data();
 
 			vk::ShaderModule shaderModule = VulkanContext::Get().GetDevice().createShaderModule(info);
-
 			VE_CORE_ASSERT(shaderModule, "Failed to create shader module!");
 
 			vk::PipelineShaderStageCreateInfo shaderStageCreateInfo;
@@ -214,15 +212,8 @@ namespace VoxelEngine
 
 		std::shared_ptr<VulkanUniformBuffer> vulkanUniformBuffer = std::static_pointer_cast<VulkanUniformBuffer>(uniformBuffer);
 
-		void* data;
-		vmaMapMemory(context.GetAllocator(), vulkanUniformBuffer->GetBuffer().allocation, &data);
-
-		context.GetDeletionQueue().push_function([&]() {
-			vmaUnmapMemory(context.GetAllocator(), vulkanUniformBuffer->GetBuffer().allocation);
-			});
-
-		effect.descriptorWriter.WriteBuffer(m_Binding, static_cast<vk::Buffer>(vulkanUniformBuffer->GetBuffer().buffer), vulkanUniformBuffer->GetSize(),
-																				0, vk::DescriptorType::eUniformBuffer);
+		effect.descriptorWriter.WriteBuffer(m_Binding, static_cast<vk::Buffer>(vulkanUniformBuffer->GetBuffer().buffer),
+																				vulkanUniformBuffer->GetSize(), 0, vk::DescriptorType::eUniformBuffer);
 
 		++m_Binding;
 	}

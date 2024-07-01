@@ -1,6 +1,6 @@
-#include "vepch.h"
-
 #include "Camera.h"
+
+#include "vepch.h"
 
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -8,8 +8,7 @@ namespace VoxelEngine
 {
 	Camera::Camera(const glm::vec3& cameraPos, const glm::vec3& cameraRotation,
 								 const float aspectRatio, const float fov)
-		: m_Position(cameraPos), m_Rotation(cameraRotation),
-		m_ProjectionMatrix(glm::perspective(fov, aspectRatio, 0.1f, 1000.0f))
+		: m_Position(cameraPos), m_Rotation(cameraRotation)
 	{
 		NormalizeDirection();
 

@@ -73,52 +73,52 @@ namespace VoxelEngine
     
     constexpr float cubeVertices[] = {
       //front
-      -0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom left
-      0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, // bottom right
-      0.5f, 0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, // top right
-      0.5f, 0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, // top right
-      -0.5f, 0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, // top left
-      -0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom left
+      -0.5f, -0.5f, 0.5f,// 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom left
+      0.5f, -0.5f, 0.5f,// 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, // bottom right
+      0.5f, 0.5f, 0.5f,// 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, // top right
+      0.5f, 0.5f, 0.5f,// 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, // top right
+      -0.5f, 0.5f, 0.5f,// 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, // top left
+      -0.5f, -0.5f, 0.5f,// 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom left
 
       //back
-      -0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, // bottom left
-      0.5f, 0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 1.0f, 1.0f, // top right
-      0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 1.0f, 0.0f, // bottom right
-      0.5f, 0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 1.0f, 1.0f, // top right
-      -0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, // bottom left
-      -0.5f, 0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 0.0f, 1.0f, // top left
+      -0.5f, -0.5f, -0.5f,// 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, // bottom left
+      0.5f, 0.5f, -0.5f,// 0.0f, 0.0f, -1.0f, 1.0f, 1.0f, // top right
+      0.5f, -0.5f, -0.5f,// 0.0f, 0.0f, -1.0f, 1.0f, 0.0f, // bottom right
+      0.5f, 0.5f, -0.5f// 0.0f, 0.0f, -1.0f, 1.0f, 1.0f, // top right
+      -0.5f, -0.5f, -0.5f,// 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, // bottom left
+      -0.5f, 0.5f, -0.5f,// 0.0f, 0.0f, -1.0f, 0.0f, 1.0f, // top left
       
       //left
-      -0.5f, 0.5f, -0.5f, -1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // top right
-      -0.5f, -0.5f, 0.5f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, // bottom left
-      -0.5f, 0.5f, 0.5f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f, // top left
-      -0.5f, -0.5f, 0.5f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, // bottom left
-      -0.5f, 0.5f, -0.5f, -1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // top right
-      -0.5f, -0.5f, -0.5f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f, // bottom right
+      -0.5f, 0.5f, -0.5f,// -1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // top right
+      -0.5f, -0.5f, 0.5f,// -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, // bottom left
+      -0.5f, 0.5f, 0.5f,// -1.0f, 0.0f, 0.0f, 0.0f, 1.0f, // top left
+      -0.5f, -0.5f, 0.5f,// -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, // bottom left
+      -0.5f, 0.5f, -0.5f,// -1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // top right
+      -0.5f, -0.5f, -0.5f,// -1.0f, 0.0f, 0.0f, 1.0f, 0.0f, // bottom right
 
       //right
-      0.5f, 0.5f, 0.5f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, // top left
-      0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, // bottom right
-      0.5f, 0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, // top right
-      0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, // bottom right
-      0.5f, 0.5f, 0.5f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, // top left
-      0.5f, -0.5f, 0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // bottom left
+      0.5f, 0.5f, 0.5f,// 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, // top left
+      0.5f, -0.5f, -0.5f,// 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, // bottom right
+      0.5f, 0.5f, -0.5f,// 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, // top right
+      0.5f, -0.5f, -0.5f,// 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, // bottom right
+      0.5f, 0.5f, 0.5f,// 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, // top left
+      0.5f, -0.5f, 0.5f,// 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // bottom left
 
       //bottom
-      0.5f, -0.5f, -0.5f, 0.0f, -1.0f, 0.0f, 1.0f, 1.0f, // top right
-      -0.5f, -0.5f, 0.5f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f, // bottom left
-      -0.5f, -0.5f, -0.5f, 0.0f, -1.0f, 0.0f, 0.0f, 1.0f, // top left
-      -0.5f, -0.5f, 0.5f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f, // bottom left
-      0.5f, -0.5f, -0.5f, 0.0f, -1.0f, 0.0f, 1.0f, 1.0f, // top right
-      0.5f, -0.5f, 0.5f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f, // bottom right
+      0.5f, -0.5f, -0.5f,// 0.0f, -1.0f, 0.0f, 1.0f, 1.0f, // top right
+      -0.5f, -0.5f, 0.5f,// 0.0f, -1.0f, 0.0f, 0.0f, 0.0f, // bottom left
+      -0.5f, -0.5f, -0.5f,// 0.0f, -1.0f, 0.0f, 0.0f, 1.0f, // top left
+      -0.5f, -0.5f, 0.5f,// 0.0f, -1.0f, 0.0f, 0.0f, 0.0f, // bottom left
+      0.5f, -0.5f, -0.5f,// 0.0f, -1.0f, 0.0f, 1.0f, 1.0f, // top right
+      0.5f, -0.5f, 0.5f,// 0.0f, -1.0f, 0.0f, 1.0f, 0.0f, // bottom right
 
       //top
-      -0.5f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, // top left
-      0.5f, 0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, // bottom right
-      0.5f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, // top right
-      0.5f, 0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, // bottom right
-      -0.5f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, // top left
-      -0.5f, 0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, // bottom left
+      -0.5f, 0.5f, -0.5f,// 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, // top left
+      0.5f, 0.5f, 0.5f,// 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, // bottom right
+      0.5f, 0.5f, -0.5f,// 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, // top right
+      0.5f, 0.5f, 0.5f,// 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, // bottom right
+      -0.5f, 0.5f, -0.5f,// 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, // top left
+      -0.5f, 0.5f, 0.5f,// 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, // bottom left
     };
 
     constexpr float vertices[] = {
@@ -294,7 +294,7 @@ namespace VoxelEngine
     s_Triangle.VertexBuffer = VertexBuffer::Create(s_Triangle.name, triangle, sizeof(triangle));
     s_Triangle.VertexBuffer->SetLayout({ { ShaderDataType::Float3, "a_Pos" } });
 
-    s_Triangle.UniformBuffer = UniformBuffer::Create(s_Triangle.name, 10000, 0);
+    s_Triangle.UniformBuffer = UniformBuffer::Create(s_Triangle.name, sizeof(*s_SceneData));
     s_Triangle.Shader->AddUniformBuffer(s_Triangle.UniformBuffer);
 
     s_Triangle.VertexArray->AddVertexBuffer(s_Triangle.VertexBuffer);

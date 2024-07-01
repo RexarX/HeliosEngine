@@ -9,7 +9,9 @@ namespace VoxelEngine
 	{
 		glCreateBuffers(1, &m_RendererID);
 		glNamedBufferData(m_RendererID, size, nullptr, GL_DYNAMIC_DRAW);
-		glBindBufferBase(GL_UNIFORM_BUFFER, binding, m_RendererID);
+		glBindBufferBase(GL_UNIFORM_BUFFER, m_Binding, m_RendererID);
+
+		++m_Binding;
 	}
 
 	OpenGLUniformBuffer::~OpenGLUniformBuffer()

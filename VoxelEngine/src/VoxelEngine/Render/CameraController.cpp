@@ -18,7 +18,6 @@ namespace VoxelEngine
 	{
 		if (Input::IsKeyPressed(Key::W) || Input::IsKeyPressed(Key::Up)) {
 			m_CameraPosition += m_Camera.GetCameraForward() * m_CameraTranslationSpeed * (float)ts;
-			VE_TRACE("W");
 		}
 
 		if (Input::IsKeyPressed(Key::A) || Input::IsKeyPressed(Key::Left)) {

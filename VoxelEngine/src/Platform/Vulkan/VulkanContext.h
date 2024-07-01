@@ -12,6 +12,8 @@
 
 struct GLFWwindow;
 
+constexpr uint32_t FRAME_OVERLAP = 2;
+
 namespace VoxelEngine
 {
 	class VulkanContext : public GraphicsContext
@@ -45,6 +47,8 @@ namespace VoxelEngine
 
 		static inline VulkanContext& Get() { return *m_Context; }
 		inline DeletionQueue& GetDeletionQueue() { return m_DeletionQueue; }
+
+		inline FrameData& GetCurrentFrame() { return m_Frames[m_FrameNumber % FRAME_OVERLAP]; };
 		inline vk::Device& GetDevice() { return m_Device; }
 		inline VmaAllocator& GetAllocator() { return m_Allocator; }
 		inline AllocatedImage& GetDrawImage() { return m_DrawImage; }
@@ -66,6 +70,9 @@ namespace VoxelEngine
 		};
 
 		DeletionQueue m_DeletionQueue;
+
+		FrameData m_Frames[FRAME_OVERLAP];
+		uint32_t m_FrameNumber = 0;
 
 		static VulkanContext* m_Context;
 
@@ -91,13 +98,6 @@ namespace VoxelEngine
 		vk::Format m_SwapChainImageFormat;
 
 		vk::Extent2D m_DrawExtent;
-		
-		vk::CommandPool m_CommandPool;
-		vk::CommandBuffer m_CommandBuffer;
-
-		vk::Semaphore m_SwapChainSemaphore;
-		vk::Semaphore m_RenderSemaphore;
-		vk::Fence m_RenderFence;
 
 		DescriptorAllocator m_ImGuiDescriptorAllocator;
 
@@ -132,10 +132,10 @@ namespace VoxelEngine
 													const vk::ImageLayout currentLayout, const vk::ImageLayout newLayout);
 
 		vk::SemaphoreSubmitInfo semaphore_submit_info(const vk::PipelineStageFlags2 stageMask,
-																									 const vk::Semaphore semaphore) const;
+																									const vk::Semaphore semaphore) const;
 
 		vk::ImageCreateInfo image_create_info(const vk::Format format, const vk::ImageUsageFlags usageFlags,
-																					 const vk::Extent3D extent) const;
+																					const vk::Extent3D extent) const;
 		vk::ImageViewCreateInfo imageview_create_info(const vk::Image image, const vk::Format format,
 																									const vk::ImageAspectFlags aspectFlags) const;
 		void copy_image_to_image(const vk::CommandBuffer cmd, const vk::Image source, const vk::Image destination,

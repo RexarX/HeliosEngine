@@ -23,7 +23,7 @@ namespace VoxelEngine
 		AllocatedBuffer& GetBuffer() { return m_Buffer; }
 
 	private:
-		const void* m_Data;
+		void* m_Data;
 
 		const char* m_Name;
 

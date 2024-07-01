@@ -27,8 +27,7 @@ namespace VoxelEngine
     info.bindingCount = bindings.size();
     info.flags = flags;
 
-    vk::DescriptorSetLayout set;
-    set = device.createDescriptorSetLayout(info);
+     vk::DescriptorSetLayout set = device.createDescriptorSetLayout(info);
 
     return set;
   }
@@ -246,18 +245,17 @@ namespace VoxelEngine
 
   void ComputeEffect::Build()
   {
-    VulkanContext& context = VulkanContext::Get();
+    vk::Device& device = VulkanContext::Get().GetDevice();
 
-    descriptorAllocator.Init(context.GetDevice(), 10);
+    descriptorAllocator.Init(device, 10);
 
-    descriptorSetLayout = descriptorLayoutBuilder.Build(context.GetDevice(),
-                                                        vk::DescriptorSetLayoutCreateFlagBits());
+    descriptorSetLayout = descriptorLayoutBuilder.Build(device, vk::DescriptorSetLayoutCreateFlagBits());
 
-    descriptorSet = descriptorAllocator.Allocate(context.GetDevice(), descriptorSetLayout);
+    descriptorSet = descriptorAllocator.Allocate(device, descriptorSetLayout);
 
-    descriptorWriter.UpdateSet(context.GetDevice(), descriptorSet);
+    descriptorWriter.UpdateSet(device, descriptorSet);
 
-    pipelineBuilder.BuildPipeline(context.GetDevice(), pipelineLayout, pipeline, descriptorSetLayout);
+    pipelineBuilder.BuildPipeline(device, pipelineLayout, pipeline, descriptorSetLayout);
   }
 
   void ComputeEffect::Destroy()
@@ -328,8 +326,8 @@ namespace VoxelEngine
     allocInfo.descriptorSetCount = 1;
     allocInfo.pSetLayouts = &layout;
 
-    vk::DescriptorSet ds;
-    auto result = device.allocateDescriptorSets(&allocInfo, &ds);
+    vk::DescriptorSet set;
+    auto result = device.allocateDescriptorSets(&allocInfo, &set);
 
     if (result == vk::Result::eErrorOutOfPoolMemory || result == vk::Result::eErrorFragmentedPool) {
 
@@ -338,13 +336,13 @@ namespace VoxelEngine
       poolToUse = GetPool(device);
       allocInfo.descriptorPool = poolToUse;
 
-      result = device.allocateDescriptorSets(&allocInfo, &ds);
+      result = device.allocateDescriptorSets(&allocInfo, &set);
       VE_CORE_ASSERT(result == vk::Result::eSuccess, "Failed to allocate descriptor set!");
     }
 
     readyPools.emplace_back(poolToUse);
 
-    return ds;
+    return set;
   }
 
   vk::DescriptorPool DescriptorAllocatorGrowable::GetPool(const vk::Device device)

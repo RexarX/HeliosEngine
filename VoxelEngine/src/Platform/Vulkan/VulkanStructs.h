@@ -162,7 +162,7 @@ namespace VoxelEngine
 		std::vector<PoolSizeRatio> ratios;
 		std::vector<vk::DescriptorPool> fullPools;
 		std::vector<vk::DescriptorPool> readyPools;
-		uint32_t setsPerPool;
+		uint32_t setsPerPool = 0;
 	};
 
 	struct DescriptorWriter
@@ -204,7 +204,18 @@ namespace VoxelEngine
 		std::shared_ptr<VulkanVertexBuffer> vertexBuffer;
 		std::shared_ptr<VulkanIndexBuffer> indexBuffer;
 
-		const void* pushConstant;
-		uint32_t pushConstantSize;
+		const void* pushConstant = nullptr;
+		uint32_t pushConstantSize = 0;
+	};
+
+	struct FrameData
+	{
+		vk::Semaphore swapchainSemaphore, renderSemaphore;
+		vk::Fence renderFence;
+
+		vk::CommandPool commandPool;
+		vk::CommandBuffer commandBuffer;
+
+		DeletionQueue deletionQueue;
 	};
 }

@@ -1,10 +1,10 @@
 #include "VulkanContext.h"
+#include "VulkanBuffer.h"
 
 #include <glfw/glfw3.h>
 
 #include <backends/imgui_impl_vulkan.h>
 #include <backends/imgui_impl_glfw.h>
-#include "VulkanBuffer.h"
 
 namespace VoxelEngine
 {
@@ -82,20 +82,33 @@ namespace VoxelEngine
 
     m_ImGuiDescriptorAllocator.DestroyPool(m_Device);
 
+    for (auto& frame : m_Frames) {
+      m_Device.destroyCommandPool(frame.commandPool);
+
+      m_Device.destroyFence(frame.renderFence);
+
+      m_Device.destroySemaphore(frame.renderSemaphore);
+      m_Device.destroySemaphore(frame.swapchainSemaphore);
+
+      frame.deletionQueue.flush();
+    }
+
     m_DeletionQueue.flush();
   }
 
   void VulkanContext::Update()
   {
-    m_Device.waitForFences(1, &m_RenderFence, true, 1000000000);
+    m_Device.waitForFences(1, &GetCurrentFrame().renderFence, true, 1000000000);
 
     if (m_Resized) {
       m_Resized = false;
       RecreateSwapChain();
     }
 
+    GetCurrentFrame().deletionQueue.flush();
+
     uint32_t swapchainImageIndex;
-    auto result = m_Device.acquireNextImageKHR(m_SwapChain, 1000000000, m_SwapChainSemaphore, nullptr,
+    auto result = m_Device.acquireNextImageKHR(m_SwapChain, 1000000000, GetCurrentFrame().swapchainSemaphore, nullptr,
                                                &swapchainImageIndex);
 
     if (result == vk::Result::eErrorOutOfDateKHR || result == vk::Result::eSuboptimalKHR) {
@@ -108,61 +121,63 @@ namespace VoxelEngine
     m_DrawExtent.height = std::min(m_SwapChainExtent.height, m_DrawImage.imageExtent.height);
     m_DrawExtent.width = std::min(m_SwapChainExtent.width, m_DrawImage.imageExtent.width);
 
-    m_Device.resetFences(1, &m_RenderFence);
+    m_Device.resetFences(1, &GetCurrentFrame().renderFence);
 
     vk::CommandBufferBeginInfo bufferBeginInfo;
     bufferBeginInfo.sType = vk::StructureType::eCommandBufferBeginInfo;
     bufferBeginInfo.pInheritanceInfo = nullptr;
     bufferBeginInfo.flags = vk::CommandBufferUsageFlagBits::eOneTimeSubmit;
 
-    m_CommandBuffer.reset(vk::CommandBufferResetFlagBits::eReleaseResources);
-    m_CommandBuffer.begin(bufferBeginInfo);
+    vk::CommandBuffer cmd = GetCurrentFrame().commandBuffer;
 
-    transition_image(m_CommandBuffer, static_cast<vk::Image>(m_DrawImage.image),
+    cmd.reset(vk::CommandBufferResetFlagBits::eReleaseResources);
+    cmd.begin(bufferBeginInfo);
+
+    transition_image(cmd, static_cast<vk::Image>(m_DrawImage.image),
                      vk::ImageLayout::eUndefined, vk::ImageLayout::eGeneral);
     
     vk::ClearColorValue clearValue = { 0.0f, 0.0f, 0.0f, 0.0f };
     vk::ImageSubresourceRange clearRange = image_subresource_range(vk::ImageAspectFlagBits::eColor);
 
-    m_CommandBuffer.clearColorImage(static_cast<vk::Image>(m_DrawImage.image),
-                                    vk::ImageLayout::eGeneral, clearValue, clearRange);
+    cmd.clearColorImage(static_cast<vk::Image>(m_DrawImage.image),
+                                                      vk::ImageLayout::eGeneral, clearValue, clearRange);
 
-    transition_image(m_CommandBuffer, static_cast<vk::Image>(m_DrawImage.image),
+    transition_image(cmd, static_cast<vk::Image>(m_DrawImage.image),
                      vk::ImageLayout::eGeneral, vk::ImageLayout::eColorAttachmentOptimal);
 
-    transition_image(m_CommandBuffer, static_cast<vk::Image>(m_DepthImage.image),
+    transition_image(cmd, static_cast<vk::Image>(m_DepthImage.image),
                      vk::ImageLayout::eUndefined, vk::ImageLayout::eDepthAttachmentOptimal);
 
-    DrawGeometry(m_CommandBuffer);
+    DrawGeometry(cmd);
 
-    transition_image(m_CommandBuffer, static_cast<vk::Image>(m_DrawImage.image),
+    transition_image(cmd, static_cast<vk::Image>(m_DrawImage.image),
                      vk::ImageLayout::eColorAttachmentOptimal, vk::ImageLayout::eTransferSrcOptimal);
 
-    transition_image(m_CommandBuffer, m_SwapChainImages[swapchainImageIndex], vk::ImageLayout::eUndefined,
-                                                                              vk::ImageLayout::eTransferDstOptimal);
+    transition_image(cmd, m_SwapChainImages[swapchainImageIndex],
+                     vk::ImageLayout::eUndefined, vk::ImageLayout::eTransferDstOptimal);
 
-    copy_image_to_image(m_CommandBuffer, static_cast<vk::Image>(m_DrawImage.image), m_SwapChainImages[swapchainImageIndex],
-                        m_DrawExtent, m_SwapChainExtent);
+    copy_image_to_image(cmd, static_cast<vk::Image>(m_DrawImage.image),
+                        m_SwapChainImages[swapchainImageIndex], m_DrawExtent, m_SwapChainExtent);
 
-    transition_image(m_CommandBuffer, m_SwapChainImages[swapchainImageIndex], vk::ImageLayout::eTransferDstOptimal,
-                                                                              vk::ImageLayout::eColorAttachmentOptimal);
+    transition_image(cmd, m_SwapChainImages[swapchainImageIndex],
+                     vk::ImageLayout::eTransferDstOptimal, vk::ImageLayout::eColorAttachmentOptimal);
     
     if (m_ImGuiEnabled) { DrawImGui(m_SwapChainImageViews[swapchainImageIndex]); }
 
-    transition_image(m_CommandBuffer, m_SwapChainImages[swapchainImageIndex], vk::ImageLayout::eColorAttachmentOptimal,
-                                                                              vk::ImageLayout::ePresentSrcKHR);
+    transition_image(cmd, m_SwapChainImages[swapchainImageIndex],
+                     vk::ImageLayout::eColorAttachmentOptimal, vk::ImageLayout::ePresentSrcKHR);
 
-    m_CommandBuffer.end();
+    cmd.end();
 
     vk::CommandBufferSubmitInfo commandBufferSubmitInfo;
     commandBufferSubmitInfo.sType = vk::StructureType::eCommandBufferSubmitInfo;
-    commandBufferSubmitInfo.commandBuffer = m_CommandBuffer;
+    commandBufferSubmitInfo.commandBuffer = cmd;
     commandBufferSubmitInfo.deviceMask = 0;
 
     vk::SemaphoreSubmitInfo waitInfo = semaphore_submit_info(vk::PipelineStageFlagBits2::eColorAttachmentOutput,
-                                                             m_SwapChainSemaphore);
+                                                             GetCurrentFrame().swapchainSemaphore);
     vk::SemaphoreSubmitInfo signalInfo = semaphore_submit_info(vk::PipelineStageFlagBits2::eAllCommands,
-                                                               m_RenderSemaphore);
+                                                               GetCurrentFrame().renderSemaphore);
 
     vk::SubmitInfo2 submitInfo;
     submitInfo.sType = vk::StructureType::eSubmitInfo2;
@@ -173,21 +188,21 @@ namespace VoxelEngine
     submitInfo.commandBufferInfoCount = 1;
     submitInfo.pCommandBufferInfos = &commandBufferSubmitInfo;
 
-    m_GraphicsQueue.submit2(submitInfo, m_RenderFence);
-
+    m_GraphicsQueue.submit2(submitInfo, GetCurrentFrame().renderFence);
     VE_CORE_ASSERT(m_GraphicsQueue, "Failed to submit RenderFence!");
 
     vk::PresentInfoKHR presentInfo;
     presentInfo.sType = vk::StructureType::ePresentInfoKHR;
     presentInfo.pSwapchains = &m_SwapChain;
     presentInfo.swapchainCount = 1;
-    presentInfo.pWaitSemaphores = &m_RenderSemaphore;
+    presentInfo.pWaitSemaphores = &GetCurrentFrame().renderSemaphore;
     presentInfo.waitSemaphoreCount = 1;
     presentInfo.pImageIndices = &swapchainImageIndex;
 
     result = m_PresentQueue.presentKHR(presentInfo);
-
     VE_CORE_ASSERT(result == vk::Result::eSuccess, "Failed to set presentKHR in GraphicsQueue!");
+
+    ++m_FrameNumber;
   }
 
   void VulkanContext::SwapBuffers()
@@ -260,10 +275,12 @@ namespace VoxelEngine
     ImGui::Render();
 
     GLFWwindow* backup_current_context = glfwGetCurrentContext();
+
     #ifdef VE_PLATFORM_WINDOWS
 		  ImGui::UpdatePlatformWindows();
 		  ImGui::RenderPlatformWindowsDefault();
     #endif
+
 		glfwMakeContextCurrent(backup_current_context);
   }
 
@@ -765,20 +782,23 @@ namespace VoxelEngine
     commandPoolInfo.flags = vk::CommandPoolCreateFlagBits::eResetCommandBuffer;
     commandPoolInfo.queueFamilyIndex = indices.graphicsFamily.value();
 
-    m_CommandPool = m_Device.createCommandPool(commandPoolInfo);
-    VE_CORE_ASSERT(m_CommandPool, "Failed to create command pool!");
-
-    m_ImCommandPool = m_Device.createCommandPool(commandPoolInfo);
-    VE_CORE_ASSERT(m_ImCommandPool, "Failed to create command pool!");
-
     vk::CommandBufferAllocateInfo cmdAllocInfo;
     cmdAllocInfo.sType = vk::StructureType::eCommandBufferAllocateInfo;
-    cmdAllocInfo.commandPool = m_CommandPool;
     cmdAllocInfo.commandBufferCount = 1;
     cmdAllocInfo.level = vk::CommandBufferLevel::ePrimary;
 
-    m_CommandBuffer = m_Device.allocateCommandBuffers(cmdAllocInfo).front();
-    VE_CORE_ASSERT(m_CommandBuffer, "Failed to create command buffer!");
+    for (auto& frame : m_Frames) {
+      frame.commandPool = m_Device.createCommandPool(commandPoolInfo);
+      VE_CORE_ASSERT(frame.commandPool, "Failed to create command pool!");
+      
+      cmdAllocInfo.commandPool = frame.commandPool;
+
+      frame.commandBuffer = m_Device.allocateCommandBuffers(cmdAllocInfo).front();
+      VE_CORE_ASSERT(frame.commandBuffer, "Failed to create command buffer!");
+    }
+
+    m_ImCommandPool = m_Device.createCommandPool(commandPoolInfo);
+    VE_CORE_ASSERT(m_ImCommandPool, "Failed to create command pool!");
 
     cmdAllocInfo.commandPool = m_ImCommandPool;
 
@@ -787,7 +807,6 @@ namespace VoxelEngine
 
     m_DeletionQueue.push_function([&]() {
       m_Device.destroyCommandPool(m_ImCommandPool);
-      m_Device.destroyCommandPool(m_CommandPool);
       });
   }
 
@@ -797,27 +816,25 @@ namespace VoxelEngine
     fenceInfo.sType = vk::StructureType::eFenceCreateInfo;
     fenceInfo.flags = vk::FenceCreateFlagBits::eSignaled;
 
-    m_RenderFence = m_Device.createFence(fenceInfo);
-    VE_CORE_ASSERT(m_RenderFence, "Failed to create fence!");
-
     vk::SemaphoreCreateInfo semaphoreInfo;
     semaphoreInfo.sType = vk::StructureType::eSemaphoreCreateInfo;
 
-    m_SwapChainSemaphore = m_Device.createSemaphore(semaphoreInfo);
-    VE_CORE_ASSERT(m_SwapChainSemaphore, "Failed to create semaphore!");
+    for (auto& frame : m_Frames) {
+      frame.renderFence = m_Device.createFence(fenceInfo);
+      VE_CORE_ASSERT(frame.renderFence, "Failed to create fence!");
 
-    m_RenderSemaphore = m_Device.createSemaphore(semaphoreInfo);
-    VE_CORE_ASSERT(m_RenderSemaphore, "Failed to create semaphore!");
+      frame.swapchainSemaphore = m_Device.createSemaphore(semaphoreInfo);
+      VE_CORE_ASSERT(frame.swapchainSemaphore, "Failed to create semaphore!");
+
+      frame.renderSemaphore = m_Device.createSemaphore(semaphoreInfo);
+      VE_CORE_ASSERT(frame.renderSemaphore, "Failed to create semaphore!");
+    }
 
     m_ImFence = m_Device.createFence(fenceInfo);
     VE_CORE_ASSERT(m_ImFence, "Failed to create fence!");
 
     m_DeletionQueue.push_function([&]() {
       m_Device.destroyFence(m_ImFence);
-      m_Device.destroyFence(m_RenderFence);
-
-      m_Device.destroySemaphore(m_SwapChainSemaphore);
-      m_Device.destroySemaphore(m_RenderSemaphore);
       });
   }
 
@@ -920,7 +937,7 @@ namespace VoxelEngine
                           0, effect.pushConstantSize, effect.pushConstant);
       }
 
-      cmd.draw(effect.vertexBuffer->GetVertices().size() / 3, 1, 0, 0);
+      cmd.draw(effect.vertexBuffer->GetVertices().size(), 1, 0, 0);
     }
 
     cmd.endRendering();
@@ -944,11 +961,11 @@ namespace VoxelEngine
     renderInfo.pDepthAttachment = nullptr;
     renderInfo.pStencilAttachment = nullptr;
 
-    m_CommandBuffer.beginRendering(renderInfo);
+    GetCurrentFrame().commandBuffer.beginRendering(renderInfo);
 
-    ImGui_ImplVulkan_RenderDrawData(ImGui::GetDrawData(), m_CommandBuffer);
+    ImGui_ImplVulkan_RenderDrawData(ImGui::GetDrawData(), GetCurrentFrame().commandBuffer);
 
-    m_CommandBuffer.endRendering();
+    GetCurrentFrame().commandBuffer.endRendering();
   }
 
   vk::SurfaceFormatKHR VulkanContext::ChooseSwapSurfaceFormat(const std::vector<vk::SurfaceFormatKHR>& availableFormats) const
