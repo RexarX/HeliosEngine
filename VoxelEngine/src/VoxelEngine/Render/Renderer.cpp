@@ -1,8 +1,7 @@
-#include "vepch.h"
-
 #include "Renderer.h"
-
 #include "VertexArray.h"
+
+#include "vepch.h"
 
 #include "Platform/Vulkan/VulkanContext.h"
 
@@ -291,7 +290,7 @@ namespace VoxelEngine
 
     s_Triangle.VertexArray = VertexArray::Create(s_Triangle.name);
 
-    s_Triangle.VertexBuffer = VertexBuffer::Create(s_Triangle.name, triangle, sizeof(triangle));
+    s_Triangle.VertexBuffer = VertexBuffer::Create(s_Triangle.name, cubeVertices, sizeof(cubeVertices));
     s_Triangle.VertexBuffer->SetLayout({ { ShaderDataType::Float3, "a_Pos" } });
 
     s_Triangle.UniformBuffer = UniformBuffer::Create(s_Triangle.name, sizeof(*s_SceneData));
@@ -369,7 +368,7 @@ namespace VoxelEngine
 
     s_Triangle.UniformBuffer->SetData(s_SceneData.get(), sizeof(*s_SceneData));
     
-    RenderCommand::DrawArray(s_Triangle.VertexArray, 3);
+    RenderCommand::DrawArray(s_Triangle.VertexArray, 36);
   }
 
   void Renderer::DrawCube(const glm::vec3& position, const glm::vec3& rotation,

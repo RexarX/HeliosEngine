@@ -1,8 +1,7 @@
-#include "vepch.h"
-
 #include "Texture.h"
-
 #include "Renderer.h"
+
+#include "vepch.h"
 
 #include "Platform/OpenGL/OpenGLTexture.h"
 #include "Platform/Vulkan/VulkanTexture.h"

@@ -1,9 +1,9 @@
 #pragma once
 
-#include "vepch.h"
-
-#include "Core.h"
 #include "Layer.h"
+#include "Core.h"
+
+#include "vepch.h"
 
 namespace VoxelEngine 
 {

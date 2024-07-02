@@ -907,9 +907,9 @@ namespace VoxelEngine
 
     vk::Viewport viewport;
     viewport.x = 0;
-    viewport.y = 0;
+    viewport.y = m_DrawExtent.height;
     viewport.width = m_DrawExtent.width;
-    viewport.height = m_DrawExtent.height;
+    viewport.height = -static_cast<float>(m_DrawExtent.height);
     viewport.minDepth = 0.0f;
     viewport.maxDepth = 1.0f;
 

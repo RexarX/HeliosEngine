@@ -98,7 +98,7 @@ namespace VoxelEngine
 			}
 
 			glTexImage2D(GL_TEXTURE_2D, 0, m_InternalFormat, m_Width, m_Height, 0, m_DataFormat,
-				GL_UNSIGNED_BYTE, data);
+									 GL_UNSIGNED_BYTE, data);
 
 			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY, m_AnisoLevel);
 

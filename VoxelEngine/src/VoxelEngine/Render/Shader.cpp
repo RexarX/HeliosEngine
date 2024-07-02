@@ -1,8 +1,7 @@
-#include "vepch.h"
-
 #include "Shader.h"
-
 #include "Renderer.h"
+
+#include "vepch.h"
 
 #include "Platform/OpenGL/OpenGLShader.h"
 #include "Platform/Vulkan/VulkanShader.h"

@@ -1,5 +1,4 @@
 #include "VulkanStructs.h"
-
 #include "VulkanContext.h"
 
 namespace VoxelEngine
@@ -149,12 +148,11 @@ namespace VoxelEngine
     graphicsPipelineCreateInfo.layout = layout;
 
     auto result = device.createGraphicsPipelines(nullptr, 1, &graphicsPipelineCreateInfo, nullptr, &pipeline);
+    VE_ASSERT(result == vk::Result::eSuccess, "Failed to create pipelines!");
 
     for (auto& stage : shaderStages) {
       device.destroyShaderModule(stage.module);
     }
-    
-    VE_ASSERT(result == vk::Result::eSuccess, "Failed to create pipelines!");
   }
 
   void PipelineBuilder::SetInputTopology(const vk::PrimitiveTopology topology)

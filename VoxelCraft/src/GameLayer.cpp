@@ -14,16 +14,16 @@ void GameLayer::OnAttach()
 	VoxelEngine::Renderer::SetAnisoLevel(16.0f);
 	VoxelEngine::Renderer::SetGenerateMipmaps(true);
 
-	m_Skybox = VoxelEngine::Texture::Create(VOXELCRAFT_DIR + "Assets/Textures/Skybox/right.png",
+	/*m_Skybox = VoxelEngine::Texture::Create(VOXELCRAFT_DIR + "Assets/Textures/Skybox/right.png",
 																					VOXELCRAFT_DIR + "Assets/Textures/Skybox/left.png",
 																					VOXELCRAFT_DIR + "Assets/Textures/Skybox/top.png",
 																					VOXELCRAFT_DIR + "Assets/Textures/Skybox/bottom.png",
 																					VOXELCRAFT_DIR + "Assets/Textures/Skybox/front.png",
 																					VOXELCRAFT_DIR + "Assets/Textures/Skybox/back.png"
-	);
+	);*/
 
-	m_CheckerboardTexture = VoxelEngine::Texture::Create(VOXELCRAFT_DIR + "Assets/Textures/Checkerboard.png");
-	m_DirtTexture = VoxelEngine::Texture::Create(VOXELCRAFT_DIR + "Assets/Textures/dirt(14vert).png");
+	//m_CheckerboardTexture = VoxelEngine::Texture::Create(VOXELCRAFT_DIR + "Assets/Textures/Checkerboard.png");
+	//m_DirtTexture = VoxelEngine::Texture::Create(VOXELCRAFT_DIR + "Assets/Textures/dirt(14vert).png");
 
 	for (float i = 0; i < 100; ++i) {
 		for (float j = 0; j < 100; ++j) {

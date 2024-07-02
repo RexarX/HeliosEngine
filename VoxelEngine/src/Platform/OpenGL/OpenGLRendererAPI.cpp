@@ -14,7 +14,7 @@ namespace VoxelEngine
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_LINE_SMOOTH);
 
-		glEnable(GL_FRONT_FACE);
+		glEnable(GL_CULL_FACE);
 
 		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 

@@ -1,11 +1,10 @@
 #include "GraphicsContext.h"
+#include "Renderer.h"
 
 #include "vepch.h"
 
 #include "Platform/OpenGL/OpenGLContext.h"
 #include "Platform/Vulkan/VulkanContext.h"
-
-#include "Renderer.h"
 
 namespace VoxelEngine
 {

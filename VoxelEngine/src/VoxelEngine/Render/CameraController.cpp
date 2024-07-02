@@ -1,6 +1,6 @@
-#include "vepch.h"
-
 #include "CameraController.h"
+
+#include "vepch.h"
 
 #include "Input.h"
 #include "KeyCodes.h"

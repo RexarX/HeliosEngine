@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Render/GraphicsContext.h"
-
 #include "VulkanStructs.h"
+
+#include "Render/GraphicsContext.h"
 
 #ifdef VE_DEBUG
 	constexpr bool enableValidationLayers = true;

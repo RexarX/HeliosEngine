@@ -1,5 +1,4 @@
 #include "VulkanUniformBuffer.h"
-
 #include "VulkanContext.h"
 
 namespace VoxelEngine
@@ -28,7 +27,7 @@ namespace VoxelEngine
 			vmaDestroyBuffer(context.GetAllocator(), m_Buffer.buffer, m_Buffer.allocation);
 			});
 
-		vmaMapMemory(context.GetAllocator(), m_Buffer.allocation, &m_Data);
+		vmaMapMemory(context.GetAllocator(), m_Buffer.allocation, &m_Buffer.info.pMappedData);
 
 		context.GetDeletionQueue().push_function([&]() {
 			vmaUnmapMemory(context.GetAllocator(), m_Buffer.allocation);
@@ -41,9 +40,8 @@ namespace VoxelEngine
 
 	void VulkanUniformBuffer::SetData(const void* data, const uint32_t size, const uint32_t offset)
 	{
-		memcpy(m_Data, data, size);
+		memcpy((char*)m_Buffer.info.pMappedData + offset, data, size);
 
 		m_Size = size;
-		m_Offset = offset;
 	}
 }

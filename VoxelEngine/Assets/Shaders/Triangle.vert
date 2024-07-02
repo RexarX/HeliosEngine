@@ -20,6 +20,6 @@ void main()
 		vec3(0.0f, 0.0f, 1.0f)
 	);
 
-	gl_Position = vec4(a_Pos, 1.0f); // u_ProjectionView * u_Transform * vec4(a_Pos, 1.0f);
-	outColor = colors[gl_VertexIndex];
+	gl_Position = u_ProjectionView * u_Transform * vec4(a_Pos, 1.0f);
+	outColor = colors[gl_VertexIndex % 3];
 }

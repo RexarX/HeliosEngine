@@ -1,8 +1,7 @@
 #include "VulkanRendererAPI.h"
+#include "VulkanContext.h"
 
 #include "vepch.h"
-
-#include "VulkanContext.h"
 
 namespace VoxelEngine
 {

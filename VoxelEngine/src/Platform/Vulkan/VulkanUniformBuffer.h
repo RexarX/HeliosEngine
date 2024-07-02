@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Render/UniformBuffer.h"
-
 #include "VulkanStructs.h"
+
+#include "Render/UniformBuffer.h"
 
 namespace VoxelEngine
 {
@@ -14,21 +14,17 @@ namespace VoxelEngine
 
 		virtual void SetData(const void* data, const uint32_t size, const uint32_t offset) override;
 
-		const void* GetData() const { return m_Data; }
+		const void* GetData() const { return m_Buffer.info.pMappedData; }
 		uint32_t GetSize() const { return m_Size; }
-		uint32_t GetOffset() const { return m_Offset; }
 
 		const char* GetName() const { return m_Name; }
 
 		AllocatedBuffer& GetBuffer() { return m_Buffer; }
 
 	private:
-		void* m_Data;
-
 		const char* m_Name;
 
 		uint32_t m_Size = 0;
-		uint32_t m_Offset = 0;
 
 		AllocatedBuffer m_Buffer;
 	};

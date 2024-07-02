@@ -1,6 +1,6 @@
-#include "vepch.h"
-
 #include "WindowsInput.h"
+
+#include "vepch.h"
 
 #include "VoxelEngine/Application.h"
 

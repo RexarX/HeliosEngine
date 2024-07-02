@@ -1,5 +1,4 @@
 #include "VulkanBuffer.h"
-
 #include "VulkanContext.h"
 
 namespace VoxelEngine
