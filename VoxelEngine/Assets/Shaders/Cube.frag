@@ -1,12 +1,10 @@
-#version 460 core
+#version 460
 
-out vec4 FragColor;
+layout (location = 0) in vec3 inColor;
 
-in vec2 TexCoord;
+layout (location = 0) out vec4 outFragColor;
 
-uniform sampler2D texture1;
-
-void main()
+void main() 
 {
-  FragColor = texture(texture1, TexCoord);
+	outFragColor = vec4(inColor, 1.0f);
 }

@@ -34,12 +34,12 @@ namespace VoxelEngine
 		result = vmaCreateBuffer(context.GetAllocator(), &bufferInfo, &vmaallocInfo,
 														 &m_Buffer.buffer, &m_Buffer.allocation, &m_Buffer.info);
 
+		VE_CORE_ASSERT(result == VK_SUCCESS, "Failed to create vertex buffer!");
+
     context.GetDeletionQueue().push_function([&]() {
 			vmaDestroyBuffer(context.GetAllocator(), m_StagingBuffer.buffer, m_StagingBuffer.allocation);
       vmaDestroyBuffer(context.GetAllocator(), m_Buffer.buffer, m_Buffer.allocation);
 			});
-
-		VE_CORE_ASSERT(result == VK_SUCCESS, "Failed to create vertex buffer!");
 	}
 
 	VulkanVertexBuffer::VulkanVertexBuffer(const char* name, const float* vertices, const uint32_t size)
@@ -77,12 +77,12 @@ namespace VoxelEngine
 		result = vmaCreateBuffer(context.GetAllocator(), &bufferInfo, &vmaallocInfo,
 														 &m_Buffer.buffer, &m_Buffer.allocation, &m_Buffer.info);
 
+		VE_CORE_ASSERT(result == VK_SUCCESS, "Failed to create vertex buffer!");
+
     context.GetDeletionQueue().push_function([&]() {
 			vmaDestroyBuffer(context.GetAllocator(), m_StagingBuffer.buffer, m_StagingBuffer.allocation);
       vmaDestroyBuffer(context.GetAllocator(), m_Buffer.buffer, m_Buffer.allocation);
 			});
-
-		VE_CORE_ASSERT(result == VK_SUCCESS, "Failed to create vertex buffer!");
 	}
 
 	VulkanVertexBuffer::~VulkanVertexBuffer()
@@ -136,12 +136,12 @@ namespace VoxelEngine
 		result = vmaCreateBuffer(context.GetAllocator(), &bufferInfo, &vmaallocInfo,
 														 &m_Buffer.buffer, &m_Buffer.allocation, &m_Buffer.info);
 
+		VE_CORE_ASSERT(result == VK_SUCCESS, "Failed to create index buffer!");
+
     context.GetDeletionQueue().push_function([&]() {
 			vmaDestroyBuffer(context.GetAllocator(), m_StagingBuffer.buffer, m_StagingBuffer.allocation);
       vmaDestroyBuffer(context.GetAllocator(), m_Buffer.buffer, m_Buffer.allocation);
 			});
-
-		VE_CORE_ASSERT(result == VK_SUCCESS, "Failed to create index buffer!");
 	}
 
 	VulkanIndexBuffer::VulkanIndexBuffer(const char* name, const uint32_t size)
@@ -175,12 +175,12 @@ namespace VoxelEngine
 		result = vmaCreateBuffer(context.GetAllocator(), &bufferInfo, &vmaallocInfo,
 														 &m_Buffer.buffer, &m_Buffer.allocation, &m_Buffer.info);
 
+		VE_CORE_ASSERT(result == VK_SUCCESS, "Failed to create index buffer!");
+
     context.GetDeletionQueue().push_function([&]() {
 			vmaDestroyBuffer(context.GetAllocator(), m_StagingBuffer.buffer, m_StagingBuffer.allocation);
       vmaDestroyBuffer(context.GetAllocator(), m_Buffer.buffer, m_Buffer.allocation);
 			});
-
-		VE_CORE_ASSERT(result == VK_SUCCESS, "Failed to create index buffer!");
 	}
 
 	VulkanIndexBuffer::~VulkanIndexBuffer()

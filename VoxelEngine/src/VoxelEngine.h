@@ -21,6 +21,5 @@
 #include "VoxelEngine/Render/VertexArray.h"
 #include "VoxelEngine/Render/Camera.h"
 #include "VoxelEngine/Render/CameraController.h"
-#include "VoxelEngine/Render/Chunk.h"
 
 #include "VoxelEngine/ImGui/ImGuiLayer.h"

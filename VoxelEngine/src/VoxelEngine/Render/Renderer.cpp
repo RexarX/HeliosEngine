@@ -13,23 +13,12 @@
 
 namespace VoxelEngine
 {
-  struct Triangle
-  {
-    const char* name = "Triangle";
-    std::shared_ptr<VertexArray> VertexArray;
-    std::shared_ptr<VertexBuffer> VertexBuffer;
-    std::shared_ptr<IndexBuffer> IndexBuffer;
-
-    std::shared_ptr<UniformBuffer> UniformBuffer;
-
-    std::shared_ptr<Shader> Shader;
-  };
-
   struct Cube
   {
+    const char* name = "Cube";
     std::shared_ptr<VertexArray> CubeVertex;
     std::shared_ptr<VertexBuffer> CubeBuffer;
-    std::shared_ptr<VertexBuffer> CubeMatrixBuffer;
+    std::shared_ptr<UniformBuffer> CubeUniformBuffer;
     std::shared_ptr<IndexBuffer> CubeIndex;
 
     std::shared_ptr<Shader> CubeShader;
@@ -60,7 +49,6 @@ namespace VoxelEngine
   
 	std::unique_ptr<Renderer::SceneData> Renderer::s_SceneData = std::make_unique<Renderer::SceneData>();
 
-  static Triangle s_Triangle;
   static Cube s_Cube;
   static Line s_Line;
   static Skybox s_Skybox;
@@ -195,29 +183,18 @@ namespace VoxelEngine
       -1.0f, -1.0f,  1.0f,
        1.0f, -1.0f,  1.0f
     };
-
-    constexpr float triangle[] = {
-      -1.0f,  1.0f, 0.0f,
-       1.0f,  1.0f, 0.0f,
-       0.0f, -1.0f, 0.0f
-    };
     
-    /*s_ChunkedData.ChunkVertex = VertexArray::Create();
+    s_Cube.CubeShader = Shader::Create(s_Cube.name, VOXELENGINE_DIR + "Assets/Shaders/Cube.vert",
+                                                    VOXELENGINE_DIR + "Assets/Shaders/Cube.frag");
 
-    s_ChunkedData.ChunkBuffer = VertexBuffer::Create(sizeof(float) * MAX_VERTICES);
+    s_Cube.CubeUniformBuffer = UniformBuffer::Create(s_Cube.name, sizeof(*s_SceneData));
 
-    s_ChunkedData.ChunkBuffer->SetLayout({
-      { ShaderDataType::Float3, "a_Pos" },
-      { ShaderDataType::Float2, "a_TexCoord" }
-      });
+    s_Cube.CubeShader->AddUniformBuffer(s_Cube.CubeUniformBuffer);
+    s_Cube.CubeShader->Unbind();
 
-    s_ChunkedData.ChunkVertex->AddVertexBuffer(s_ChunkedData.ChunkBuffer);
+    s_Cube.CubeVertex = VertexArray::Create(s_Cube.name);
 
-    s_ChunkedData.ChunkBuffer->Unbind();
-
-    s_Cube.CubeVertex = VertexArray::Create();
-
-    s_Cube.CubeBuffer = VertexBuffer::Create(vertices, sizeof(vertices) * sizeof(float));
+    s_Cube.CubeBuffer = VertexBuffer::Create(s_Cube.name, vertices, sizeof(vertices));
     s_Cube.CubeBuffer->SetLayout({
       { ShaderDataType::Float3, "a_Pos" },
       { ShaderDataType::Float2, "a_TexCoord" }
@@ -227,35 +204,15 @@ namespace VoxelEngine
 
     s_Cube.CubeBuffer->Unbind();
 
-    s_Cube.CubeIndex = IndexBuffer::Create(cubeIndices, sizeof(cubeIndices));
+    s_Cube.CubeIndex = IndexBuffer::Create(s_Cube.name, cubeIndices, sizeof(cubeIndices));
 
     s_Cube.CubeVertex->SetIndexBuffer(s_Cube.CubeIndex);
 
     s_Cube.CubeIndex->Unbind();
-    
-    s_Cube.CubeMatrixBuffer = VertexBuffer::Create(sizeof(glm::mat4) * 100000);
-    s_Cube.CubeMatrixBuffer->SetLayout({
-      { ShaderDataType::Float4, "a_Transform" },
-      { ShaderDataType::Float4, "a_Transform" },
-      { ShaderDataType::Float4, "a_Transform" },
-      { ShaderDataType::Float4, "a_Transform" },
-      });
-
-    s_Cube.CubeVertex->AddVertexBuffer(s_Cube.CubeMatrixBuffer);
-    s_Cube.CubeVertex->AddVertexAttribDivisor(2, 1);
-    s_Cube.CubeVertex->AddVertexAttribDivisor(3, 1);
-    s_Cube.CubeVertex->AddVertexAttribDivisor(4, 1);
-    s_Cube.CubeVertex->AddVertexAttribDivisor(5, 1);
-
-    s_Cube.CubeMatrixBuffer->Unbind();
 
     s_Cube.CubeVertex->Unbind();
 
-    s_Cube.CubeShader = Shader::Create("Cube", VOXELENGINE_DIR + "Assets/Shaders/Cube.vert",
-                                               VOXELENGINE_DIR + "Assets/Shaders/Cube.frag");
-    s_Cube.CubeShader->Unbind();
-
-    s_Line.LineVertex = VertexArray::Create();
+    /*s_Line.LineVertex = VertexArray::Create();
 
     s_Line.LineBuffer = VertexBuffer::Create(lineVertices, sizeof(lineVertices));
     s_Line.LineBuffer->SetLayout({ { ShaderDataType::Float3, "a_Pos" } });
@@ -284,25 +241,6 @@ namespace VoxelEngine
     s_Skybox.SkyboxShader = Shader::Create("Skybox", VOXELENGINE_DIR + "Assets/Shaders/Skybox.vert",
                                                      VOXELENGINE_DIR + "Assets/Shaders/Skybox.frag");
     s_Skybox.SkyboxShader->Unbind();*/
-    
-    s_Triangle.Shader = Shader::Create(s_Triangle.name, VOXELENGINE_DIR + "Assets/Shaders/Triangle.vert",
-                                                        VOXELENGINE_DIR + "Assets/Shaders/Triangle.frag");
-
-    s_Triangle.VertexArray = VertexArray::Create(s_Triangle.name);
-
-    s_Triangle.VertexBuffer = VertexBuffer::Create(s_Triangle.name, cubeVertices, sizeof(cubeVertices));
-    s_Triangle.VertexBuffer->SetLayout({ { ShaderDataType::Float3, "a_Pos" } });
-
-    s_Triangle.UniformBuffer = UniformBuffer::Create(s_Triangle.name, sizeof(*s_SceneData));
-    s_Triangle.Shader->AddUniformBuffer(s_Triangle.UniformBuffer);
-
-    s_Triangle.VertexArray->AddVertexBuffer(s_Triangle.VertexBuffer);
-    
-    s_Triangle.VertexArray->Unbind();
-
-    s_Triangle.VertexBuffer->Unbind();
-
-    s_Triangle.Shader->Unbind();
 
     if (GetAPI() == RendererAPI::API::Vulkan) { VulkanContext::Get().Build(); }
 	}
@@ -316,20 +254,6 @@ namespace VoxelEngine
     RenderCommand::SetViewport(0, 0, width, height);
   }
 
-  void Renderer::DrawChunk(const Chunk& chunk)
-  {
-    
-    //algorithm
-
-    s_ChunkedData.ChunkBuffer->Bind();
-    s_ChunkedData.ChunkBuffer->SetData(chunk.GetVertices(),
-                                       chunk.GetVerticesCount() * sizeof(float));
-
-    s_ChunkedData.ChunkIndex->Bind();
-    s_ChunkedData.ChunkIndex->SetData(chunk.GetIndices(),
-                                      chunk.GetIndicesCount() * sizeof(uint32_t));
-  }
-
 	void Renderer::BeginScene(const Camera& camera)
 	{
     s_SceneData->ViewMatrix = camera.GetViewMatrix();
@@ -339,37 +263,14 @@ namespace VoxelEngine
 
 	void Renderer::EndScene()
 	{
-    s_Triangle.Shader->Unbind();
-    s_Triangle.VertexArray->Unbind();
-    s_Triangle.VertexBuffer->Unbind();
-
-    /*s_Cube.CubeShader->Unbind();
+    s_Cube.CubeShader->Unbind();
     s_Cube.CubeVertex->Unbind();
     s_Cube.CubeBuffer->Unbind();
-    s_Cube.CubeMatrixBuffer->Unbind();
 
-    s_Line.LineShader->Unbind();
-    s_Line.LineVertex->Unbind();
-    s_Line.LineBuffer->Unbind();*/
+    //s_Line.LineShader->Unbind();
+    //s_Line.LineVertex->Unbind();
+    //s_Line.LineBuffer->Unbind();
 	}
-
-  void Renderer::DrawTriangle(const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& size)
-  {
-    glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), size);
-    transform = glm::rotate(transform, glm::radians(rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
-    transform = glm::rotate(transform, glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
-    transform = glm::rotate(transform, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
-
-    s_Triangle.Shader->Bind();
-    s_Triangle.VertexArray->Bind();
-    s_Triangle.VertexBuffer->Bind();
-
-    s_SceneData->TransformMatrix = transform;
-
-    s_Triangle.UniformBuffer->SetData(s_SceneData.get(), sizeof(*s_SceneData));
-    
-    RenderCommand::DrawArray(s_Triangle.VertexArray, 36);
-  }
 
   void Renderer::DrawCube(const glm::vec3& position, const glm::vec3& rotation,
                           const glm::vec3& size, const std::shared_ptr<Texture>& texture)
@@ -381,45 +282,16 @@ namespace VoxelEngine
     transform = glm::rotate(transform, glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
     transform = glm::rotate(transform, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
 
-    s_Cube.CubeMatrixBuffer->Bind();
-    s_Cube.CubeMatrixBuffer->SetData(&transform, sizeof(transform));
-
     s_Cube.CubeShader->Bind();
     s_Cube.CubeVertex->Bind();
     s_Cube.CubeBuffer->Bind();
     s_Cube.CubeIndex->Bind();
 
-    //s_Cube.CubeShader->UploadUniformMat4("u_Projection", s_SceneData->ProjectionViewMatrix);
-    s_Cube.CubeShader->UploadUniformMat4("u_Transform", transform);
+    s_SceneData->TransformMatrix = transform;
+
+    s_Cube.CubeUniformBuffer->SetData(s_SceneData.get(), sizeof(*s_SceneData));
 
     RenderCommand::DrawIndexed(s_Cube.CubeVertex, s_Cube.CubeIndex->GetCount());
-  }
-
-  void Renderer::DrawCubesInstanced(const std::vector<glm::mat3>& cubes, const std::shared_ptr<Texture>& texture)
-  {
-    texture->Bind();
-
-    glm::mat4* transform = new glm::mat4[cubes.size()];
-    for (int32_t i = 0; i < cubes.size(); ++i) {
-      transform[i] = glm::translate(glm::mat4(1.0f), cubes[i][0]) * glm::scale(glm::mat4(1.0f), cubes[i][1]);
-      transform[i] = glm::rotate(transform[i], glm::radians(cubes[i][2].x), glm::vec3(1.0f, 0.0f, 0.0f));
-      transform[i] = glm::rotate(transform[i], glm::radians(cubes[i][2].y), glm::vec3(0.0f, 1.0f, 0.0f));
-      transform[i] = glm::rotate(transform[i], glm::radians(cubes[i][2].z), glm::vec3(0.0f, 0.0f, 1.0f));
-    }
-
-    s_Cube.CubeShader->Bind();
-    s_Cube.CubeVertex->Bind();
-    s_Cube.CubeBuffer->Bind();
-    s_Cube.CubeIndex->Bind();
-
-    s_Cube.CubeMatrixBuffer->Bind();
-    s_Cube.CubeMatrixBuffer->SetData(transform, cubes.size() * sizeof(glm::mat4));
-
-    s_Cube.CubeShader->UploadUniformMat4("u_Projection", s_SceneData->ProjectionViewMatrix);
-
-    RenderCommand::DrawIndexedInstanced(s_Cube.CubeVertex, s_Cube.CubeIndex->GetCount(), cubes.size());
-
-    delete[] transform;
   }
 
   void Renderer::DrawLine(const glm::vec3& position, const glm::vec3& rotation,

@@ -937,7 +937,12 @@ namespace VoxelEngine
                           0, effect.pushConstantSize, effect.pushConstant);
       }
 
-      cmd.draw(effect.vertexBuffer->GetVertices().size(), 1, 0, 0);
+      if (effect.indexBuffer != nullptr) {
+        cmd.bindIndexBuffer(effect.indexBuffer->GetBuffer().buffer, 0, vk::IndexType::eUint32);
+        cmd.drawIndexed(effect.indexBuffer->GetCount(), 1, 0, 0, 0);
+      } else {
+        cmd.draw(effect.vertexBuffer->GetVertices().size(), 1, 0, 0);
+      }
     }
 
     cmd.endRendering();

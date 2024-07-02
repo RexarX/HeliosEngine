@@ -40,7 +40,7 @@ namespace VoxelEngine
 
 	void VulkanUniformBuffer::SetData(const void* data, const uint32_t size, const uint32_t offset)
 	{
-		memcpy((char*)m_Buffer.info.pMappedData + offset, data, size);
+		memcpy((int8_t*)m_Buffer.info.pMappedData + offset, data, size);
 
 		m_Size = size;
 	}

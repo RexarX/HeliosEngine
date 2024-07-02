@@ -4,7 +4,6 @@
 #include "Camera.h"
 #include "Shader.h"
 #include "Texture.h"
-#include "Chunk.h"
 
 namespace VoxelEngine
 {
@@ -27,8 +26,6 @@ namespace VoxelEngine
 		static void DrawCube(const glm::vec3& position, const glm::vec3& rotation,
 												 const glm::vec3& size, const std::shared_ptr<Texture>& texture);
 
-		static void DrawCubesInstanced(const std::vector<glm::mat3>& cubes, const std::shared_ptr<Texture>& texture);
-
 		static void DrawLine(const glm::vec3& position, const glm::vec3& rotation,
 												 const float lenght);
 
@@ -36,9 +33,6 @@ namespace VoxelEngine
 
 		static void SetGenerateMipmaps(const bool value) { Texture::SetGenerateMipmaps(value); }
 		static void SetAnisoLevel(const float value) { Texture::SetAnisoLevel(value); }
-
-	private:
-		static void DrawChunk(const Chunk& chunk);
 
 	private:
 		struct SceneData
