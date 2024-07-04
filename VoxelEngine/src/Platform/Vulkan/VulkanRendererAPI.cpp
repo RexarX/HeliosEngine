@@ -21,12 +21,11 @@ namespace VoxelEngine
 
 	void VulkanRendererAPI::SetDepthMask(const bool mask)
 	{
-		if (mask) { VulkanContext::Get().GetComputeEffect(VulkanContext::Get().
-			GetCurrentComputeEffect()).pipelineBuilder.EnableDepthTest();
-		}
-		else {
-			VulkanContext::Get().GetComputeEffect(VulkanContext::Get().
-				GetCurrentComputeEffect()).pipelineBuilder.DisableDepthTest();
+		VulkanContext& context = VulkanContext::Get();
+		if (mask) {
+			context.GetComputeEffect(context.GetCurrentComputeEffect()).pipelineBuilder.EnableDepthTest();
+		} else {
+			context.GetComputeEffect(context.GetCurrentComputeEffect()).pipelineBuilder.DisableDepthTest();
 		}
 	}
 	

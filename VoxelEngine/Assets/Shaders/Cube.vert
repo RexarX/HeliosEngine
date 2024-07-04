@@ -5,16 +5,14 @@ layout (location = 1) in vec2 a_TexCoord;
 
 layout (binding = 0) uniform SceneData
 {
-	mat4 u_View;
-	mat4 u_Projection;
-	mat4 u_ProjectionView;
-	mat4 u_Transform;
-};
+	mat4 projectionView;
+	mat4 transform;
+} u_SceneData;
 
 layout (location = 0) out vec3 outColor;
 
 void main() 
 {
-	gl_Position = u_ProjectionView * u_Transform * vec4(a_Pos, 1.0f);
+	gl_Position = u_SceneData.projectionView * u_SceneData.transform * vec4(a_Pos, 1.0f);
 	outColor = vec3(a_TexCoord, 1.0f);
 }

@@ -94,24 +94,27 @@ string(CONCAT "MSVC_RUNTIME_LIBRARY_STR"
 set_target_properties(${PROJECT_NAME} PROPERTIES MSVC_RUNTIME_LIBRARY ${MSVC_RUNTIME_LIBRARY_STR})
 
 target_include_directories(${PROJECT_NAME} PUBLIC
-    "${CMAKE_CURRENT_SOURCE_DIR}/src;"
-    "${CMAKE_CURRENT_SOURCE_DIR}/vendor/spdlog/include;"
-    "${CMAKE_CURRENT_SOURCE_DIR}/vendor/imgui;"
+	"${CMAKE_CURRENT_SOURCE_DIR}/vendor/spdlog/include;"
     "${CMAKE_CURRENT_SOURCE_DIR}/vendor/glm;"
-    "${CMAKE_CURRENT_SOURCE_DIR}/vendor/stb_image;"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/VoxelEngine;"
+)
+
+target_include_directories(${PROJECT_NAME} PRIVATE
+    "${CMAKE_CURRENT_SOURCE_DIR}/src;"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/Platform;"
     "$ENV{VULKAN_SDK}/Include;"
 )
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE
-    "$<$<CONFIG:Debug>:"
-        "VE_DEBUG"
-    ">"
-    "$<$<CONFIG:Release>:"
-        "VE_RELEASE"
-    ">"
-    "$<$<CONFIG:Dist>:"
-        "VE_DIST"
-    ">"
+    $<$<CONFIG:Debug>:
+        "VE_DEBUG;"
+    >
+    $<$<CONFIG:Release>:
+        "VE_RELEASE;"
+    >
+    $<$<CONFIG:Dist>:
+        "VE_DIST;"
+    >
     "VE_BUILD_DLL;"
     "GLFW_INCLUDE_NONE;"
     "UNICODE;"
@@ -182,8 +185,9 @@ find_package(Vulkan REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE
 	glad
     glfw
-    stb_image
     imgui
+    stb_image
+    objloader
     Vulkan::Vulkan
 )
 

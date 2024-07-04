@@ -7,7 +7,7 @@ namespace VoxelEngine
 	class VulkanVertexArray : public VertexArray
 	{
 	public:
-		VulkanVertexArray(const char* name);
+		VulkanVertexArray(const std::string& name);
 		virtual ~VulkanVertexArray();
 
 		virtual void Bind() const override;
@@ -21,7 +21,7 @@ namespace VoxelEngine
 		virtual const std::shared_ptr<IndexBuffer>& GetIndexBuffer() const override { return m_IndexBuffer; }
 
 	private:
-		const char* m_Name;
+		std::string m_Name;
 
 		uint32_t m_VertexBufferIndex = 0;
 

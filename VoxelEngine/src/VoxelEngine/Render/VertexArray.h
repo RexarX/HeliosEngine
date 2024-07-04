@@ -18,6 +18,6 @@ namespace VoxelEngine
 		virtual const std::shared_ptr<VertexBuffer>& GetVertexBuffer() const = 0;
 		virtual const std::shared_ptr<IndexBuffer>& GetIndexBuffer() const = 0;
 
-		static std::unique_ptr<VertexArray> Create(const char* name = nullptr);
+		static std::unique_ptr<VertexArray> Create(const std::string& name = "");
 	};
 }

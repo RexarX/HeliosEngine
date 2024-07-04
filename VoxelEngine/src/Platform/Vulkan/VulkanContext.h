@@ -43,7 +43,7 @@ namespace VoxelEngine
 		void ImmediateSubmit(std::function<void(vk::CommandBuffer cmd)>&& function);
 
 		void AddComputeEffect(const std::string& name);
-		void SetCurrentComputeEffect(const char* name) { m_CurrentComputeEffect = name; }
+		void SetCurrentComputeEffect(const std::string& name) { m_CurrentComputeEffect = name; }
 
 		static inline VulkanContext& Get() { return *m_Context; }
 		inline DeletionQueue& GetDeletionQueue() { return m_DeletionQueue; }
@@ -54,7 +54,7 @@ namespace VoxelEngine
 		inline AllocatedImage& GetDrawImage() { return m_DrawImage; }
 		inline AllocatedImage& GetDepthImage() { return m_DepthImage; }
 		inline ComputeEffect& GetComputeEffect(const std::string& name) { return m_ComputeEffects[name]; }
-		inline const char* GetCurrentComputeEffect() const { return m_CurrentComputeEffect.c_str(); }
+		inline const std::string& GetCurrentComputeEffect() const { return m_CurrentComputeEffect.c_str(); }
 
 	private:
 		const std::vector<const char*> validationLayers = {

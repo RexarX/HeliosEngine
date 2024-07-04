@@ -28,7 +28,7 @@ namespace VoxelEngine
     case ShaderDataType::Bool: return 1;
     }
 
-    VE_CORE_ASSERT(false, "Unknown ShaderDataType!");
+    CORE_ASSERT(false, "Unknown ShaderDataType!");
     return 0;
   }
 
@@ -59,7 +59,7 @@ namespace VoxelEngine
       case ShaderDataType::Bool:    return 1;
       }
 
-      VE_CORE_ASSERT(false, "Unknown ShaderDataType!");
+      CORE_ASSERT(false, "Unknown ShaderDataType!");
       return 0;
     }
 
@@ -119,8 +119,8 @@ namespace VoxelEngine
     virtual const BufferLayout& GetLayout() const = 0;
     virtual void SetLayout(const BufferLayout& layout) = 0;
 
-    static std::shared_ptr<VertexBuffer> Create(const char* name, const uint32_t size);
-    static std::shared_ptr<VertexBuffer> Create(const char* name, const float* vertices, const uint32_t size);
+    static std::shared_ptr<VertexBuffer> Create(const std::string& name, const uint32_t size);
+    static std::shared_ptr<VertexBuffer> Create(const std::string& name, const float* vertices, const uint32_t size);
   };
 
   class IndexBuffer
@@ -135,7 +135,7 @@ namespace VoxelEngine
 
     virtual void SetData(const void* data, const uint32_t size) = 0;
 
-    static std::shared_ptr<IndexBuffer> Create(const char* name, const uint32_t* indices, const uint32_t size);
-    static std::shared_ptr<IndexBuffer> Create(const char* name, const uint32_t size);
+    static std::shared_ptr<IndexBuffer> Create(const std::string& name, const uint32_t* indices, const uint32_t count);
+    static std::shared_ptr<IndexBuffer> Create(const std::string& name, const uint32_t size);
   };
 }

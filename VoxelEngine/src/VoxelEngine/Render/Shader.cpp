@@ -12,32 +12,32 @@ namespace VoxelEngine
 	{
 		switch (Renderer::GetAPI())
 		{
-		case RendererAPI::API::None:    VE_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
+		case RendererAPI::API::None:    CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
 		case RendererAPI::API::OpenGL:  return std::make_shared<OpenGLShader>(filepath);
 		case RendererAPI::API::Vulkan:  return std::make_shared<VulkanShader>(filepath);
 		}
 
-		VE_CORE_ASSERT(false, "Unknown RendererAPI!");
+		CORE_ASSERT(false, "Unknown RendererAPI!");
 		return nullptr;
 	}
 
-	std::shared_ptr<Shader> Shader::Create(const char* name, const std::string& vertex,
-																													 const std::string& fragment)
+	std::shared_ptr<Shader> Shader::Create(const std::string& name, const std::string& vertex,
+																																	const std::string& fragment)
 	{
 		switch (Renderer::GetAPI())
 		{
-		case RendererAPI::API::None:    VE_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
+		case RendererAPI::API::None:    CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
 		case RendererAPI::API::OpenGL:  return std::make_shared<OpenGLShader>(name, vertex, fragment);
     case RendererAPI::API::Vulkan:  return std::make_shared<VulkanShader>(name, vertex, fragment);
 		}
 
-		VE_CORE_ASSERT(false, "Unknown RendererAPI!");
+		CORE_ASSERT(false, "Unknown RendererAPI!");
 		return nullptr;
 	}
 
-	void ShaderLibrary::Add(const char* name, const std::shared_ptr<Shader>& shader)
+	void ShaderLibrary::Add(const std::string& name, const std::shared_ptr<Shader>& shader)
 	{
-		VE_CORE_ASSERT(!Exists(name), "Shader already exists!");
+		CORE_ASSERT(!Exists(name), "Shader already exists!");
 		m_Shaders[name] = shader;
 	}
 
@@ -53,21 +53,20 @@ namespace VoxelEngine
 		return shader;
 	}
 
-	std::shared_ptr<Shader> ShaderLibrary::Load(const char* name,
-																							const std::string& filepath)
+	std::shared_ptr<Shader> ShaderLibrary::Load(const std::string& name, const std::string& filepath)
 	{
 		auto shader = Shader::Create(filepath);
 		Add(name, shader);
 		return shader;
 	}
 
-	std::shared_ptr<Shader> ShaderLibrary::Get(const char* name)
+	std::shared_ptr<Shader> ShaderLibrary::Get(const std::string& name)
 	{
-		VE_CORE_ASSERT(Exists(name), "Shader not found!");
+		CORE_ASSERT(Exists(name), "Shader not found!");
 		return m_Shaders[name];
 	}
 
-	bool ShaderLibrary::Exists(const char* name) const
+	bool ShaderLibrary::Exists(const std::string& name) const
 	{
 		return m_Shaders.find(name) != m_Shaders.end();
 	}

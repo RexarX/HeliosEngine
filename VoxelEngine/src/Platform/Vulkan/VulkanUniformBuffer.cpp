@@ -3,7 +3,7 @@
 
 namespace VoxelEngine
 {
-	VulkanUniformBuffer::VulkanUniformBuffer(const char* name, const uint32_t size, const uint32_t binding)
+	VulkanUniformBuffer::VulkanUniformBuffer(const std::string& name, const uint32_t size, const uint32_t binding)
     : m_Name(name), m_Size(size)
 	{
     VulkanContext& context = VulkanContext::Get();
@@ -21,7 +21,7 @@ namespace VoxelEngine
 		auto result = vmaCreateBuffer(context.GetAllocator(), &bufferInfo, &vmaallocInfo,
 																	&m_Buffer.buffer, &m_Buffer.allocation, &m_Buffer.info);
 
-		VE_CORE_ASSERT(result == VK_SUCCESS, "Failed to create staging uniform buffer!");
+		CORE_ASSERT(result == VK_SUCCESS, "Failed to create staging uniform buffer!");
 
 		context.GetDeletionQueue().push_function([&]() {
 			vmaDestroyBuffer(context.GetAllocator(), m_Buffer.buffer, m_Buffer.allocation);

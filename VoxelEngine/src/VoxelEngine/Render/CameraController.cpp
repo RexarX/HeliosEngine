@@ -78,8 +78,8 @@ namespace VoxelEngine
 	void CameraController::OnEvent(Event& event)
 	{
 		EventDispatcher dispatcher(event);
-		dispatcher.Dispatch<MouseScrolledEvent>(VE_BIND_EVENT_FN(CameraController::OnMouseScrolled));
-		dispatcher.Dispatch<WindowResizeEvent>(VE_BIND_EVENT_FN(CameraController::OnWindowResized));
+		dispatcher.Dispatch<MouseScrolledEvent>(BIND_EVENT_FN(CameraController::OnMouseScrolled));
+		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(CameraController::OnWindowResized));
 	}
 
 	void CameraController::OnResize(const float width, const float height)

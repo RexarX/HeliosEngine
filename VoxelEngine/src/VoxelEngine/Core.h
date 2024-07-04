@@ -9,7 +9,7 @@
 #endif
 
 #ifdef VE_DEBUG
-	#define VE_ENABLE_ASSERTS
+	#define ENABLE_ASSERTS
 #endif
 
 #ifdef VE_RELEASE
@@ -24,14 +24,14 @@
 	#define VOXELCRAFT_DIR std::filesystem::current_path().parent_path().parent_path().string() + "/VoxelCraft/"
 #endif
 
-#ifdef VE_ENABLE_ASSERTS
-	#define VE_ASSERT(x, ...) { if(!(x)) { VE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
-	#define VE_CORE_ASSERT(x, ...) { if(!(x)) { VE_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
+#ifdef ENABLE_ASSERTS
+	#define ASSERT(x, ...) { if(!(x)) { ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
+	#define CORE_ASSERT(x, ...) { if(!(x)) { CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
 #else
-	#define VE_ASSERT(x, ...)
-	#define VE_CORE_ASSERT(x, ...)
+	#define ASSERT(x, ...)
+	#define CORE_ASSERT(x, ...)
 #endif
 
 #define BIT(x) (1 << x)
 
-#define VE_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
+#define BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)

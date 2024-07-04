@@ -148,7 +148,7 @@ namespace VoxelEngine
     graphicsPipelineCreateInfo.layout = layout;
 
     auto result = device.createGraphicsPipelines(nullptr, 1, &graphicsPipelineCreateInfo, nullptr, &pipeline);
-    VE_ASSERT(result == vk::Result::eSuccess, "Failed to create pipelines!");
+    CORE_ASSERT(result == vk::Result::eSuccess, "Failed to create pipelines!");
 
     for (auto& stage : shaderStages) {
       device.destroyShaderModule(stage.module);
@@ -189,6 +189,7 @@ namespace VoxelEngine
                                           vk::ColorComponentFlagBits::eG |
                                           vk::ColorComponentFlagBits::eB |
                                           vk::ColorComponentFlagBits::eA;
+
     colorBlendAttachment.blendEnable = VK_FALSE;
   }
 
@@ -219,8 +220,8 @@ namespace VoxelEngine
   void PipelineBuilder::EnableDepthTest()
   {
     depthStencil.depthTestEnable = VK_TRUE;
-    depthStencil.depthWriteEnable = VK_FALSE;
-    depthStencil.depthCompareOp = vk::CompareOp::eNever;
+    depthStencil.depthWriteEnable = VK_TRUE;
+    depthStencil.depthCompareOp = vk::CompareOp::eGreaterOrEqual;
     depthStencil.depthBoundsTestEnable = VK_FALSE;
     depthStencil.stencilTestEnable = VK_FALSE;
     depthStencil.minDepthBounds = 0.0f;
@@ -236,7 +237,8 @@ namespace VoxelEngine
     pipelineBuilder.SetPolygonMode(vk::PolygonMode::eFill);
     pipelineBuilder.SetCullMode(vk::CullModeFlagBits::eBack, vk::FrontFace::eCounterClockwise);
     pipelineBuilder.SetMultisamplingNone();
-    pipelineBuilder.DisableBlending(); //temp
+    pipelineBuilder.DisableBlending(); // temp
+    pipelineBuilder.EnableDepthTest();
     pipelineBuilder.SetColorAttachmentFormat(context.GetDrawImage().imageFormat);
     pipelineBuilder.SetDepthFormat(context.GetDepthImage().imageFormat);
   }
@@ -335,7 +337,7 @@ namespace VoxelEngine
       allocInfo.descriptorPool = poolToUse;
 
       result = device.allocateDescriptorSets(&allocInfo, &set);
-      VE_CORE_ASSERT(result == vk::Result::eSuccess, "Failed to allocate descriptor set!");
+      CORE_ASSERT(result == vk::Result::eSuccess, "Failed to allocate descriptor set!");
     }
 
     readyPools.emplace_back(poolToUse);

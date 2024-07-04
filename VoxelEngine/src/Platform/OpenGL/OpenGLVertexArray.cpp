@@ -23,11 +23,11 @@ namespace VoxelEngine
 		case VoxelEngine::ShaderDataType::Bool:     return GL_BOOL;
 		}
 
-		VE_CORE_ASSERT(false, "Unknown ShaderDataType!");
+		CORE_ASSERT(false, "Unknown ShaderDataType!");
 		return 0;
 	}
 
-	OpenGLVertexArray::OpenGLVertexArray(const char* name)
+	OpenGLVertexArray::OpenGLVertexArray(const std::string& name)
 	{
 		glGenVertexArrays(1, &m_RendererID);
 		Bind();
@@ -50,7 +50,7 @@ namespace VoxelEngine
 
 	void OpenGLVertexArray::AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer)
 	{
-		VE_CORE_ASSERT(vertexBuffer->GetLayout().GetElements().size(), "Vertex Buffer has no layout!");
+		CORE_ASSERT(vertexBuffer->GetLayout().GetElements().size(), "Vertex Buffer has no layout!");
 		const auto& layout = vertexBuffer->GetLayout();
 		for (const auto& element : layout) {
 			glVertexAttribPointer(m_VertexBufferIndex,

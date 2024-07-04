@@ -19,8 +19,8 @@ namespace VoxelEngine
 	class VulkanVertexBuffer : public VertexBuffer
 	{
 	public:
-		VulkanVertexBuffer(const char* name, const uint32_t size);
-		VulkanVertexBuffer(const char* name, const float* vertices, const uint32_t size);
+		VulkanVertexBuffer(const std::string& name, const uint32_t size);
+		VulkanVertexBuffer(const std::string& name, const float* vertices, const uint32_t size);
 		virtual ~VulkanVertexBuffer();
 
 		virtual void Bind() const override;
@@ -31,7 +31,7 @@ namespace VoxelEngine
 		virtual const BufferLayout& GetLayout() const override { return m_Layout; }
 		virtual void SetLayout(const BufferLayout& layout) override { m_Layout = layout; }
 
-		const char* GetName() const { return m_Name; }
+		const std::string& GetName() const { return m_Name; }
 
 		std::vector<float>& GetVertices() { return m_Vertices; }
 
@@ -39,7 +39,7 @@ namespace VoxelEngine
 		AllocatedBuffer& GetStagingBuffer() { return m_StagingBuffer; }
 
 	private:
-		const char* m_Name;
+		std::string m_Name;
 		BufferLayout m_Layout;
 
     std::vector<float> m_Vertices;
@@ -51,8 +51,8 @@ namespace VoxelEngine
 	class VulkanIndexBuffer : public IndexBuffer
 	{
 	public:
-		VulkanIndexBuffer(const char* name, const uint32_t* indices, const uint32_t count);
-		VulkanIndexBuffer(const char* name, const uint32_t size);
+		VulkanIndexBuffer(const std::string& name, const uint32_t* indices, const uint32_t count);
+		VulkanIndexBuffer(const std::string& name, const uint32_t size);
 		virtual ~VulkanIndexBuffer();
 
 		virtual void Bind() const;
@@ -62,7 +62,7 @@ namespace VoxelEngine
 
 		virtual void SetData(const void* data, const uint32_t size);
 
-		const char* GetName() const { return m_Name; }
+		const std::string& GetName() const { return m_Name; }
 
 		const std::vector<uint32_t>& GetIndices() const { return m_Indices; }
 
@@ -70,7 +70,7 @@ namespace VoxelEngine
 		AllocatedBuffer& GetStagingBuffer() { return m_StagingBuffer; }
 
 	private:
-		const char* m_Name;
+		std::string m_Name;
 		uint32_t m_Count = 0;
 
 		std::vector<uint32_t> m_Indices;

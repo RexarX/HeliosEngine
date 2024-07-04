@@ -7,7 +7,7 @@ namespace VoxelEngine
 	class OpenGLVertexArray : public VertexArray
 	{
 	public:
-		OpenGLVertexArray(const char* name);
+		OpenGLVertexArray(const std::string& name);
 		virtual ~OpenGLVertexArray();
 
 		virtual void Bind() const override;

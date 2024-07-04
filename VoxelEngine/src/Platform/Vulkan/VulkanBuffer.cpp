@@ -3,12 +3,12 @@
 
 namespace VoxelEngine
 {
-	VulkanVertexBuffer::VulkanVertexBuffer(const char* name, const uint32_t size)
+	VulkanVertexBuffer::VulkanVertexBuffer(const std::string& name, const uint32_t size)
     : m_Name(name)
 	{
 		VulkanContext& context = VulkanContext::Get();
 
-		context.SetCurrentComputeEffect(m_Name);
+		context.SetCurrentComputeEffect(name);
 
 		m_Vertices.reserve(size / sizeof(float));
 
@@ -25,7 +25,7 @@ namespace VoxelEngine
 		auto result = vmaCreateBuffer(context.GetAllocator(), &bufferInfo, &vmaallocInfo,
 																	&m_StagingBuffer.buffer, &m_StagingBuffer.allocation, &m_StagingBuffer.info);
 		
-		VE_CORE_ASSERT(result == VK_SUCCESS, "Failed to create staging vertex buffer!");
+		CORE_ASSERT(result == VK_SUCCESS, "Failed to create staging vertex buffer!");
 
 		bufferInfo.usage = VK_BUFFER_USAGE_VERTEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT;
 
@@ -34,7 +34,7 @@ namespace VoxelEngine
 		result = vmaCreateBuffer(context.GetAllocator(), &bufferInfo, &vmaallocInfo,
 														 &m_Buffer.buffer, &m_Buffer.allocation, &m_Buffer.info);
 
-		VE_CORE_ASSERT(result == VK_SUCCESS, "Failed to create vertex buffer!");
+		CORE_ASSERT(result == VK_SUCCESS, "Failed to create vertex buffer!");
 
     context.GetDeletionQueue().push_function([&]() {
 			vmaDestroyBuffer(context.GetAllocator(), m_StagingBuffer.buffer, m_StagingBuffer.allocation);
@@ -42,12 +42,12 @@ namespace VoxelEngine
 			});
 	}
 
-	VulkanVertexBuffer::VulkanVertexBuffer(const char* name, const float* vertices, const uint32_t size)
+	VulkanVertexBuffer::VulkanVertexBuffer(const std::string& name, const float* vertices, const uint32_t size)
     : m_Name(name)
 	{
 		VulkanContext& context = VulkanContext::Get();
 
-		context.SetCurrentComputeEffect(m_Name);
+		context.SetCurrentComputeEffect(name);
 
     m_Vertices.reserve(size / sizeof(float));
 
@@ -68,7 +68,7 @@ namespace VoxelEngine
 		auto result = vmaCreateBuffer(context.GetAllocator(), &bufferInfo, &vmaallocInfo,
 																	&m_StagingBuffer.buffer, &m_StagingBuffer.allocation, &m_StagingBuffer.info);
 
-		VE_CORE_ASSERT(result == VK_SUCCESS, "Failed to create staging vertex buffer!");
+		CORE_ASSERT(result == VK_SUCCESS, "Failed to create staging vertex buffer!");
 
 		bufferInfo.usage = VK_BUFFER_USAGE_VERTEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT;
 
@@ -77,7 +77,7 @@ namespace VoxelEngine
 		result = vmaCreateBuffer(context.GetAllocator(), &bufferInfo, &vmaallocInfo,
 														 &m_Buffer.buffer, &m_Buffer.allocation, &m_Buffer.info);
 
-		VE_CORE_ASSERT(result == VK_SUCCESS, "Failed to create vertex buffer!");
+		CORE_ASSERT(result == VK_SUCCESS, "Failed to create vertex buffer!");
 
     context.GetDeletionQueue().push_function([&]() {
 			vmaDestroyBuffer(context.GetAllocator(), m_StagingBuffer.buffer, m_StagingBuffer.allocation);
@@ -102,12 +102,12 @@ namespace VoxelEngine
 	{
 	}
 
-	VulkanIndexBuffer::VulkanIndexBuffer(const char* name, const uint32_t* indices, const uint32_t count)
+	VulkanIndexBuffer::VulkanIndexBuffer(const std::string& name, const uint32_t* indices, const uint32_t count)
 		: m_Name(name), m_Count(count)
 	{
 		VulkanContext& context = VulkanContext::Get();
 
-		context.SetCurrentComputeEffect(m_Name);
+		context.SetCurrentComputeEffect(name);
 
 		m_Indices.reserve(count);
 		if (indices != nullptr) {
@@ -127,7 +127,7 @@ namespace VoxelEngine
 		auto result = vmaCreateBuffer(context.GetAllocator(), &bufferInfo, &vmaallocInfo,
 																	&m_StagingBuffer.buffer, &m_StagingBuffer.allocation, &m_StagingBuffer.info);
 
-		VE_CORE_ASSERT(result == VK_SUCCESS, "Failed to create staging index buffer!");
+		CORE_ASSERT(result == VK_SUCCESS, "Failed to create staging index buffer!");
 
 		bufferInfo.usage = VK_BUFFER_USAGE_INDEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT;
 
@@ -136,7 +136,7 @@ namespace VoxelEngine
 		result = vmaCreateBuffer(context.GetAllocator(), &bufferInfo, &vmaallocInfo,
 														 &m_Buffer.buffer, &m_Buffer.allocation, &m_Buffer.info);
 
-		VE_CORE_ASSERT(result == VK_SUCCESS, "Failed to create index buffer!");
+		CORE_ASSERT(result == VK_SUCCESS, "Failed to create index buffer!");
 
     context.GetDeletionQueue().push_function([&]() {
 			vmaDestroyBuffer(context.GetAllocator(), m_StagingBuffer.buffer, m_StagingBuffer.allocation);
@@ -144,12 +144,12 @@ namespace VoxelEngine
 			});
 	}
 
-	VulkanIndexBuffer::VulkanIndexBuffer(const char* name, const uint32_t size)
+	VulkanIndexBuffer::VulkanIndexBuffer(const std::string& name, const uint32_t size)
     : m_Name(name)
 	{
 		VulkanContext& context = VulkanContext::Get();
 
-		context.SetCurrentComputeEffect(m_Name);
+		context.SetCurrentComputeEffect(name);
 
 		m_Indices.reserve(size / sizeof(uint32_t));
 
@@ -166,7 +166,7 @@ namespace VoxelEngine
 		auto result = vmaCreateBuffer(context.GetAllocator(), &bufferInfo, &vmaallocInfo,
 																	&m_StagingBuffer.buffer, &m_StagingBuffer.allocation, &m_StagingBuffer.info);
 
-		VE_CORE_ASSERT(result == VK_SUCCESS, "Failed to create staging index buffer!");
+		CORE_ASSERT(result == VK_SUCCESS, "Failed to create staging index buffer!");
 
 		bufferInfo.usage = VK_BUFFER_USAGE_INDEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT;
 
@@ -175,7 +175,7 @@ namespace VoxelEngine
 		result = vmaCreateBuffer(context.GetAllocator(), &bufferInfo, &vmaallocInfo,
 														 &m_Buffer.buffer, &m_Buffer.allocation, &m_Buffer.info);
 
-		VE_CORE_ASSERT(result == VK_SUCCESS, "Failed to create index buffer!");
+		CORE_ASSERT(result == VK_SUCCESS, "Failed to create index buffer!");
 
     context.GetDeletionQueue().push_function([&]() {
 			vmaDestroyBuffer(context.GetAllocator(), m_StagingBuffer.buffer, m_StagingBuffer.allocation);

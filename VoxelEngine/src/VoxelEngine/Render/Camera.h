@@ -8,7 +8,7 @@ namespace VoxelEngine
 	{
 	public:
 		Camera(const glm::vec3& cameraPos, const glm::vec3& cameraRotation,
-			const float aspectRatio, const float fov);
+					 const float aspectRatio, const float fov);
 
 		void SetProjection(const float aspectRatio, const float fov);
 
@@ -44,5 +44,8 @@ namespace VoxelEngine
 		glm::vec3 m_Position;
 		glm::vec3 m_Rotation;
 		glm::vec3 m_Direction;
+
+		float m_NearPlane = 0.1f;
+    float m_FarPlane = 1000.0f;
 	};
 }

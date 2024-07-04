@@ -10,8 +10,8 @@ namespace VoxelEngine
 		VulkanTexture(const TextureSpecification& specification);
 		VulkanTexture(const std::string& path);
 		VulkanTexture(const std::string& right, const std::string& left,
-			const std::string& top, const std::string& bottom,
-			const std::string& front, const std::string& back);
+									const std::string& top, const std::string& bottom,
+									const std::string& front, const std::string& back);
 		virtual ~VulkanTexture();
 
 		virtual const TextureSpecification& GetSpecification() const override { return m_Specification; }

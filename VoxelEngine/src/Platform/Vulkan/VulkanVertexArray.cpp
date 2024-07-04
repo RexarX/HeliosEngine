@@ -22,11 +22,11 @@ namespace VoxelEngine
 		case VoxelEngine::ShaderDataType::Bool:     return vk::Format::eR8Sint;
 		}
 
-		VE_CORE_ASSERT(false, "Unknown ShaderDataType!");
+		CORE_ASSERT(false, "Unknown ShaderDataType!");
 		return vk::Format::eUndefined;
 	}
 
-	VulkanVertexArray::VulkanVertexArray(const char* name)
+	VulkanVertexArray::VulkanVertexArray(const std::string& name)
 		: m_Name(name)
 	{
 		VulkanContext::Get().SetCurrentComputeEffect(name);
@@ -51,14 +51,14 @@ namespace VoxelEngine
 		ComputeEffect& effect = context.GetComputeEffect(m_Name);
 
 		std::shared_ptr<VulkanVertexBuffer> vulkanVertexBuffer = std::static_pointer_cast<VulkanVertexBuffer>(vertexBuffer);
-		VE_CORE_ASSERT(m_Name == vulkanVertexBuffer->GetName(), "Buffer name does not match vertex array name!");
+		CORE_ASSERT(m_Name == vulkanVertexBuffer->GetName(), "Buffer name does not match vertex array name!");
 
 		void* data;
 		vmaMapMemory(context.GetAllocator(), vulkanVertexBuffer->GetStagingBuffer().allocation, &data);
 
 		memcpy(data, vulkanVertexBuffer->GetVertices().data(), vulkanVertexBuffer->GetVertices().size() * sizeof(float));
 
-		VE_CORE_ASSERT(vertexBuffer->GetLayout().GetElements().size(), "Vertex Buffer has no layout!");
+		CORE_ASSERT(vertexBuffer->GetLayout().GetElements().size(), "Vertex Buffer has no layout!");
 		const BufferLayout& layout = vertexBuffer->GetLayout();
 
 		vk::VertexInputBindingDescription bindingDescription;
@@ -107,7 +107,7 @@ namespace VoxelEngine
 		std::shared_ptr<VulkanIndexBuffer> vulkanIndexBuffer = std::static_pointer_cast<VulkanIndexBuffer>(indexBuffer);
 		std::shared_ptr<VulkanVertexBuffer> vulkanVertexBuffer = std::static_pointer_cast<VulkanVertexBuffer>(m_VertexBuffer);
 
-		VE_CORE_ASSERT(m_Name == vulkanIndexBuffer->GetName(), "Buffer name does not match index buffer name!");
+		CORE_ASSERT(m_Name == vulkanIndexBuffer->GetName(), "Buffer name does not match index buffer name!");
 
 		if (indexBuffer != nullptr) {
 			void* data;

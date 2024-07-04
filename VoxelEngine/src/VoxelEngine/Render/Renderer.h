@@ -4,9 +4,27 @@
 #include "Camera.h"
 #include "Shader.h"
 #include "Texture.h"
+#include "Mesh.h"
 
 namespace VoxelEngine
 {
+	struct MeshData
+	{
+		std::string name;
+
+		std::shared_ptr<VertexArray> vertexArray;
+		std::shared_ptr<VertexBuffer> vertexBuffer;
+		std::shared_ptr<IndexBuffer> indexBuffer;
+		std::shared_ptr<UniformBuffer> uniformBuffer;
+		std::shared_ptr<Shader> shader;
+	};
+
+	struct SceneData
+	{
+		glm::mat4 projectionViewMatrix;
+		glm::mat4 transformMatrix;
+	};
+
 	class VOXELENGINE_API Renderer
 	{
 	public:
@@ -17,6 +35,11 @@ namespace VoxelEngine
 		inline static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
 
 		static void OnWindowResize(const uint32_t width, const uint32_t height);
+
+		static void SetGenerateMipmaps(const bool value) { Texture::SetGenerateMipmaps(value); }
+		static void SetAnisoLevel(const float value) { Texture::SetAnisoLevel(value); }
+
+		static const std::shared_ptr<Mesh>& LoadModel(const std::string& path);
 
 		static void BeginScene(const Camera& camera);
 		static void EndScene();
@@ -31,18 +54,15 @@ namespace VoxelEngine
 
 		static void DrawSkybox(const std::shared_ptr<Texture>& texture);
 
-		static void SetGenerateMipmaps(const bool value) { Texture::SetGenerateMipmaps(value); }
-		static void SetAnisoLevel(const float value) { Texture::SetAnisoLevel(value); }
+		static void DrawMesh(const std::shared_ptr<Mesh>& mesh, const glm::vec3& position = glm::vec3(0.0f),
+												 const glm::vec3& scale = glm::vec3(1.0f), const glm::vec3& rotation = glm::vec3(0.0f));
 
 	private:
-		struct SceneData
-		{
-			glm::mat4 ViewMatrix;
-			glm::mat4 ProjectionMatrix;
-      glm::mat4 ProjectionViewMatrix;
-			glm::mat4 TransformMatrix;
-		};
+		static inline MeshData& GetMeshData(const std::shared_ptr<Mesh>& mesh) { return m_Meshes[mesh]; }
 
+	private:
 		static std::unique_ptr<SceneData> s_SceneData;
+
+		static std::unordered_map<std::shared_ptr<Mesh>, MeshData> m_Meshes;
 	};
 }

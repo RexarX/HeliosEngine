@@ -4,8 +4,8 @@
 
 namespace VoxelEngine 
 {
-	Layer::Layer(const std::string& name)
-		: m_Name(name)
+	Layer::Layer(const std::string& m_Name)
+		: m_Name(m_Name)
 	{
 	}
 }

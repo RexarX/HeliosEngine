@@ -1,9 +1,9 @@
 #include "Renderer.h"
 #include "VertexArray.h"
 
-#include "vepch.h"
-
 #include "Platform/Vulkan/VulkanContext.h"
+
+#include "vepch.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -15,20 +15,18 @@ namespace VoxelEngine
 {
   struct Cube
   {
-    const char* name = "Cube";
-    std::shared_ptr<VertexArray> CubeVertex;
-    std::shared_ptr<VertexBuffer> CubeBuffer;
-    std::shared_ptr<UniformBuffer> CubeUniformBuffer;
-    std::shared_ptr<IndexBuffer> CubeIndex;
-
-    std::shared_ptr<Shader> CubeShader;
+    const std::string name = "Cube";
+    std::shared_ptr<VertexArray> vertexArray;
+    std::shared_ptr<VertexBuffer> vertexBuffer;
+    std::shared_ptr<IndexBuffer> indexBuffer;
+    std::shared_ptr<UniformBuffer> uniformBuffer;
+    std::shared_ptr<Shader> shader;
   };
 
   struct Line
   {
     std::shared_ptr<VertexArray> LineVertex;
     std::shared_ptr<VertexBuffer> LineBuffer;
-
     std::shared_ptr<Shader> LineShader;
   };
 
@@ -36,23 +34,15 @@ namespace VoxelEngine
   {
     std::shared_ptr<VertexArray> SkyboxVertex;
     std::shared_ptr<VertexBuffer> SkyboxBuffer;
-
     std::shared_ptr<Shader> SkyboxShader;
   };
-
-  struct ChunkedData
-  {
-    std::shared_ptr<VertexArray> ChunkVertex;
-    std::shared_ptr<VertexBuffer> ChunkBuffer;
-    std::shared_ptr<IndexBuffer> ChunkIndex;
-  };
   
-	std::unique_ptr<Renderer::SceneData> Renderer::s_SceneData = std::make_unique<Renderer::SceneData>();
+	std::unique_ptr<SceneData> Renderer::s_SceneData = std::make_unique<SceneData>();
+  std::unordered_map<std::shared_ptr<Mesh>, MeshData> Renderer::m_Meshes;
 
   static Cube s_Cube;
   static Line s_Line;
   static Skybox s_Skybox;
-  static ChunkedData s_ChunkedData;
 
 	void Renderer::Init()
 	{
@@ -108,7 +98,7 @@ namespace VoxelEngine
       -0.5f, 0.5f, 0.5f,// 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, // bottom left
     };
 
-    constexpr float vertices[] = {
+    constexpr std::array<float, 70> vertices = {
       0.5f, 0.5f, -0.5f, 0.0f, 2.0f / 3, // 1
       0.5f, -0.5f, -0.5f, 0.0f, 1.0f / 3, // 2
       -0.5f, -0.5f, -0.5f, 0.25f, 1.0f / 3, // 3
@@ -125,7 +115,7 @@ namespace VoxelEngine
       -0.5f, -0.5f, -0.5f, 0.5f, 0.0f, // 14
     };
 
-    uint32_t cubeIndices[] = {
+    constexpr std::array<uint32_t, 36> cubeIndices = {
       0, 1, 2, 0, 2, 3, // back
       3, 2, 4, 3, 4, 5, // left
       6, 5, 7, 6, 7, 8, // top
@@ -184,33 +174,33 @@ namespace VoxelEngine
        1.0f, -1.0f,  1.0f
     };
     
-    s_Cube.CubeShader = Shader::Create(s_Cube.name, VOXELENGINE_DIR + "Assets/Shaders/Cube.vert",
-                                                    VOXELENGINE_DIR + "Assets/Shaders/Cube.frag");
+    s_Cube.shader = Shader::Create(s_Cube.name, VOXELENGINE_DIR + "Assets/Shaders/Cube.vert",
+                                                VOXELENGINE_DIR + "Assets/Shaders/Cube.frag");
 
-    s_Cube.CubeUniformBuffer = UniformBuffer::Create(s_Cube.name, sizeof(*s_SceneData));
+    s_Cube.uniformBuffer = UniformBuffer::Create(s_Cube.name, sizeof(*s_SceneData));
 
-    s_Cube.CubeShader->AddUniformBuffer(s_Cube.CubeUniformBuffer);
-    s_Cube.CubeShader->Unbind();
+    s_Cube.shader->AddUniformBuffer(s_Cube.uniformBuffer);
+    s_Cube.shader->Unbind();
 
-    s_Cube.CubeVertex = VertexArray::Create(s_Cube.name);
+    s_Cube.vertexArray = VertexArray::Create(s_Cube.name);
 
-    s_Cube.CubeBuffer = VertexBuffer::Create(s_Cube.name, vertices, sizeof(vertices));
-    s_Cube.CubeBuffer->SetLayout({
+    s_Cube.vertexBuffer = VertexBuffer::Create(s_Cube.name, vertices.data(), vertices.size() * sizeof(float));
+    s_Cube.vertexBuffer->SetLayout({
       { ShaderDataType::Float3, "a_Pos" },
       { ShaderDataType::Float2, "a_TexCoord" }
       });
 
-    s_Cube.CubeVertex->AddVertexBuffer(s_Cube.CubeBuffer);
+    s_Cube.vertexArray->AddVertexBuffer(s_Cube.vertexBuffer);
 
-    s_Cube.CubeBuffer->Unbind();
+    s_Cube.vertexBuffer->Unbind();
 
-    s_Cube.CubeIndex = IndexBuffer::Create(s_Cube.name, cubeIndices, sizeof(cubeIndices));
+    s_Cube.indexBuffer = IndexBuffer::Create(s_Cube.name, cubeIndices.data(), cubeIndices.size());
 
-    s_Cube.CubeVertex->SetIndexBuffer(s_Cube.CubeIndex);
+    s_Cube.vertexArray->SetIndexBuffer(s_Cube.indexBuffer);
 
-    s_Cube.CubeIndex->Unbind();
+    s_Cube.indexBuffer->Unbind();
 
-    s_Cube.CubeVertex->Unbind();
+    s_Cube.vertexBuffer->Unbind();
 
     /*s_Line.LineVertex = VertexArray::Create();
 
@@ -241,8 +231,6 @@ namespace VoxelEngine
     s_Skybox.SkyboxShader = Shader::Create("Skybox", VOXELENGINE_DIR + "Assets/Shaders/Skybox.vert",
                                                      VOXELENGINE_DIR + "Assets/Shaders/Skybox.frag");
     s_Skybox.SkyboxShader->Unbind();*/
-
-    if (GetAPI() == RendererAPI::API::Vulkan) { VulkanContext::Get().Build(); }
 	}
 
   void Renderer::Shutdown()
@@ -254,18 +242,71 @@ namespace VoxelEngine
     RenderCommand::SetViewport(0, 0, width, height);
   }
 
+  const std::shared_ptr<Mesh>& Renderer::LoadModel(const std::string& path)
+  {
+    Mesh mesh;
+    MeshData data;
+
+    if (!mesh.LoadObj(path)) { CORE_ERROR("Failed to load model!"); return nullptr; }
+
+    std::filesystem::path pathToFile(path);
+    data.name = pathToFile.filename().replace_extension("").string();
+
+    std::vector<float>& vertices = mesh.GetVertices();
+    std::vector<uint32_t>& indices = mesh.GetIndices();
+
+    data.shader = Shader::Create(data.name, VOXELENGINE_DIR + "Assets/Shaders/Mesh.vert",
+                                            VOXELENGINE_DIR + "Assets/Shaders/Mesh.frag");
+
+    data.uniformBuffer = UniformBuffer::Create(data.name, sizeof(*s_SceneData));
+
+    data.shader->AddUniformBuffer(data.uniformBuffer);
+
+    data.vertexArray = VertexArray::Create(data.name);
+
+    data.vertexBuffer = VertexBuffer::Create(data.name, vertices.data(), vertices.size() * sizeof(float));
+    data.vertexBuffer->SetLayout({
+      { ShaderDataType::Float3, "a_Position" },
+      { ShaderDataType::Float3, "a_Normal" },
+      { ShaderDataType::Float2, "a_TexCoord" }
+      });
+
+    data.vertexArray->AddVertexBuffer(data.vertexBuffer);
+
+    data.indexBuffer = IndexBuffer::Create(data.name.c_str(), indices.data(), indices.size());
+
+    data.vertexArray->SetIndexBuffer(data.indexBuffer);
+
+    data.shader->Unbind();
+    data.vertexArray->Unbind();
+    data.vertexBuffer->Unbind();
+    data.indexBuffer->Unbind();
+
+    std::shared_ptr<Mesh> meshPtr = std::make_shared<Mesh>(mesh);
+
+    m_Meshes.emplace(std::make_pair(meshPtr, data));
+
+    return meshPtr;
+  }
+
 	void Renderer::BeginScene(const Camera& camera)
 	{
-    s_SceneData->ViewMatrix = camera.GetViewMatrix();
-    s_SceneData->ProjectionMatrix = camera.GetProjectionMatrix();
-		s_SceneData->ProjectionViewMatrix = camera.GetProjectionViewMatrix();
+		s_SceneData->projectionViewMatrix = camera.GetProjectionViewMatrix();
 	}
 
 	void Renderer::EndScene()
 	{
-    s_Cube.CubeShader->Unbind();
-    s_Cube.CubeVertex->Unbind();
-    s_Cube.CubeBuffer->Unbind();
+    s_Cube.shader->Unbind();
+    s_Cube.vertexArray->Unbind();
+    s_Cube.vertexBuffer->Unbind();
+    s_Cube.indexBuffer->Unbind();
+
+    for (auto& [mesh, meshData] : m_Meshes) {
+      meshData.shader->Unbind();
+      meshData.vertexArray->Unbind();
+      meshData.vertexBuffer->Unbind();
+      meshData.indexBuffer->Unbind();
+    }
 
     //s_Line.LineShader->Unbind();
     //s_Line.LineVertex->Unbind();
@@ -277,21 +318,22 @@ namespace VoxelEngine
   {
     texture->Bind();
 
+
     glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), size);
     transform = glm::rotate(transform, glm::radians(rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
     transform = glm::rotate(transform, glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
     transform = glm::rotate(transform, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
 
-    s_Cube.CubeShader->Bind();
-    s_Cube.CubeVertex->Bind();
-    s_Cube.CubeBuffer->Bind();
-    s_Cube.CubeIndex->Bind();
+    s_Cube.shader->Bind();
+    s_Cube.vertexArray->Bind();
+    s_Cube.vertexBuffer->Bind();
+    s_Cube.indexBuffer->Bind();
 
-    s_SceneData->TransformMatrix = transform;
+    s_SceneData->transformMatrix = transform;
 
-    s_Cube.CubeUniformBuffer->SetData(s_SceneData.get(), sizeof(*s_SceneData));
+    s_Cube.uniformBuffer->SetData(s_SceneData.get(), sizeof(*s_SceneData));
 
-    RenderCommand::DrawIndexed(s_Cube.CubeVertex, s_Cube.CubeIndex->GetCount());
+    RenderCommand::DrawIndexed(s_Cube.vertexArray, s_Cube.indexBuffer->GetCount());
   }
 
   void Renderer::DrawLine(const glm::vec3& position, const glm::vec3& rotation,
@@ -306,9 +348,9 @@ namespace VoxelEngine
     s_Line.LineVertex->Bind();
     s_Line.LineBuffer->Bind();
 
-    s_Line.LineShader->UploadUniformMat4("u_Projection", s_SceneData->ProjectionViewMatrix);
+    s_Line.LineShader->UploadUniformMat4("u_Projection", s_SceneData->projectionViewMatrix);
     s_Line.LineShader->UploadUniformMat4("u_Transform", transform);
-
+    
     RenderCommand::DrawLine(s_Line.LineVertex, 2);
   }
 
@@ -322,10 +364,32 @@ namespace VoxelEngine
     s_Skybox.SkyboxVertex->Bind();
     s_Skybox.SkyboxBuffer->Bind();
 
-    s_Skybox.SkyboxShader->UploadUniformMat4("u_ViewProjection", s_SceneData->ProjectionViewMatrix);
+    s_Skybox.SkyboxShader->UploadUniformMat4("u_ViewProjection", s_SceneData->projectionViewMatrix);
 
     RenderCommand::DrawArray(s_Skybox.SkyboxVertex, 36);
 
     RenderCommand::SetDepthMask(true);
+  }
+
+  void Renderer::DrawMesh(const std::shared_ptr<Mesh>& mesh, const glm::vec3& position,
+                          const glm::vec3& scale, const glm::vec3& rotation)
+  {
+    glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), scale);
+    transform = glm::rotate(transform, glm::radians(rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
+    transform = glm::rotate(transform, glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
+    transform = glm::rotate(transform, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
+
+    MeshData& data = GetMeshData(mesh);
+
+    data.shader->Bind();
+    data.vertexArray->Bind();
+    data.vertexBuffer->Bind();
+    data.indexBuffer->Bind();
+
+    s_SceneData->transformMatrix = transform;
+
+    data.uniformBuffer->SetData(s_SceneData.get(), sizeof(*s_SceneData));
+
+    RenderCommand::DrawIndexed(data.vertexArray, data.indexBuffer->GetCount());
   }
 }

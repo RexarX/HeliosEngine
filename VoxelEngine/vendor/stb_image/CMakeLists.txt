@@ -4,6 +4,13 @@ set(STB_IMAGE "stb_image.h" "stb_image.cpp")
 
 add_library(stb_image STATIC ${STB_IMAGE})
 
+target_include_directories(stb_image PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..>
+    $<INSTALL_INTERFACE:include>
+)
+
+install(TARGETS stb_image)
+
 string(CONCAT "MSVC_RUNTIME_LIBRARY_STR"
     $<$<CONFIG:Debug>:
         MultiThreadedDebugDLL

@@ -24,9 +24,12 @@ set(IMGUI
 add_library(imgui STATIC ${IMGUI})
 
 target_include_directories(imgui PUBLIC
-    "${CMAKE_CURRENT_SOURCE_DIR};"
-    "$ENV{VULKAN_SDK}/Include;"
+    "${CMAKE_INCLUDE_CURRENT_DIR};"
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..>
+    $<INSTALL_INTERFACE:include>
 )
+
+install(TARGETS imgui)
 
 string(CONCAT "MSVC_RUNTIME_LIBRARY_STR"
     $<$<CONFIG:Debug>:
@@ -96,8 +99,10 @@ elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
 	)
 endif()
 
+find_package(Vulkan REQUIRED)
+
 target_link_libraries(imgui PRIVATE
     glad
     glfw
-    "$ENV{VULKAN_SDK}/Lib/vulkan-1.lib"
+    Vulkan::Vulkan
 )

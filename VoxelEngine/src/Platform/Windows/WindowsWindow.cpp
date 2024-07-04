@@ -17,7 +17,7 @@ namespace VoxelEngine
 
 	static void GLFWErrorCallback(const int error, const char* description)
 	{
-		VE_CORE_ERROR("GLFW Error ({0}): {1}", error, description);
+		CORE_ERROR("GLFW Error ({0}): {1}", error, description);
 	}
 
   std::unique_ptr<Window> Window::Create(const WindowProps& props)
@@ -41,11 +41,11 @@ namespace VoxelEngine
 		m_Data.Width = props.Width;
 		m_Data.Height = props.Height;
 
-		VE_CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
+		CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
 		
     if (!s_GLFWInitialized) {
 			auto result = glfwInit();
-			VE_CORE_ASSERT(result, "Could not initialize GLFW!");
+			CORE_ASSERT(result, "Could not initialize GLFW!");
       glfwSetErrorCallback(GLFWErrorCallback);
       s_GLFWInitialized = true;
     }

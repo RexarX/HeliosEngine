@@ -3,6 +3,8 @@
 #include "vepch.h"
 
 #include "Render/Renderer.h"
+#include "Render/RendererAPI.h"
+#include "Vulkan/VulkanContext.h"
 
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
 
@@ -12,7 +14,7 @@ namespace VoxelEngine
 
 	Application::Application()
 	{
-		VE_CORE_ASSERT(!m_Instance, "Application already exists!");
+		CORE_ASSERT(!m_Instance, "Application already exists!");
 		m_Instance = this;
 
 		m_Window = std::unique_ptr<Window>(Window::Create());
@@ -73,6 +75,8 @@ namespace VoxelEngine
 
 	void Application::Run()
 	{
+		if (RendererAPI::GetAPI() == RendererAPI::API::Vulkan) { VulkanContext::Get().Build(); }
+
 		double LastFrameUpdate(0.0), LastFrameTime(0.0);
 
 		m_FramerateLimit = 1 / m_Window->GetFramerate();

@@ -6,8 +6,8 @@
 #include <algorithm>
 #include <functional>
 #include <thread>
+#include <filesystem>
 #include <optional>
-
 #include <cstdint>
 #include <string>
 #include <sstream>
@@ -19,15 +19,13 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#include <filesystem>
-
+#include "VoxelEngine/Core.h"
 #include "VoxelEngine/Log.h"
-
-#include "VoxelEngine/Utils/Timer.h"
-
 #include "VoxelEngine/Input.h"
 #include "VoxelEngine/KeyCodes.h"
 #include "VoxelEngine/MouseButtonCodes.h"
+
+#include "VoxelEngine/Utils/Timer.h"
 
 #ifdef VE_PLATFORM_WINDOWS
   #include <Windows.h>

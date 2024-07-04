@@ -2,7 +2,7 @@
 
 #include "vepch.h"
 
-#include <stb_image.h>
+#include <stb_image/stb_image.h>
 
 namespace VoxelEngine
 {
@@ -17,7 +17,7 @@ namespace VoxelEngine
 		case ImageFormat::RGBA8: return GL_RGBA;
 		}
 
-		VE_CORE_ASSERT(false, "Unknown ImageFormat!");
+		CORE_ASSERT(false, "Unknown ImageFormat!");
 		return 0; 
 	}
 
@@ -29,7 +29,7 @@ namespace VoxelEngine
 		case ImageFormat::RGBA8: return GL_RGBA8;
 		}
 
-		VE_CORE_ASSERT(false, "Unknown ImageFormat!");
+		CORE_ASSERT(false, "Unknown ImageFormat!");
 		return 0;
 	}
 
@@ -80,7 +80,7 @@ namespace VoxelEngine
 			m_InternalFormat = internalFormat;
 			m_DataFormat = dataFormat;
 
-			VE_CORE_ASSERT(m_InternalFormat & m_DataFormat, "Format not supported!");
+			CORE_ASSERT(m_InternalFormat & m_DataFormat, "Format not supported!");
 
 			glGenTextures(1, &m_RendererID);
 			glBindTexture(GL_TEXTURE_2D, m_RendererID);
@@ -137,10 +137,10 @@ namespace VoxelEngine
 				m_InternalFormat = internalFormat;
 				m_DataFormat = dataFormat;
 
-				VE_CORE_ASSERT(internalFormat & dataFormat, "Format not supported!");
+				CORE_ASSERT(internalFormat & dataFormat, "Format not supported!");
 			}
 			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, m_InternalFormat, m_Width, m_Height, 0,
-				m_DataFormat, GL_UNSIGNED_BYTE, data);
+									 m_DataFormat, GL_UNSIGNED_BYTE, data);
 
 			if (m_LoadedCnt == 6) { m_IsLoaded = true; }
 
@@ -162,7 +162,7 @@ namespace VoxelEngine
 	void OpenGLTexture::SetData(const void* data, const uint32_t size)
 	{
 		uint32_t bpp = m_DataFormat == GL_RGBA ? 4 : 3;
-		VE_CORE_ASSERT(size == m_Width * m_Height * bpp, "Data must be entire texture!");
+		CORE_ASSERT(size == m_Width * m_Height * bpp, "Data must be entire texture!");
 		glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Width, m_Height, m_DataFormat,
 												GL_UNSIGNED_BYTE, data);
 	}

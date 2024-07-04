@@ -10,9 +10,12 @@ namespace VoxelEngine
 {
 	Camera::Camera(const glm::vec3& cameraPos, const glm::vec3& cameraRotation,
 								 const float aspectRatio, const float fov)
-		: m_Position(cameraPos), m_Rotation(cameraRotation),
-		m_ProjectionMatrix(glm::perspective(fov, aspectRatio, 0.1f, 1000.0f))
+		: m_Position(cameraPos), m_Rotation(cameraRotation)
 	{
+		if (RendererAPI::GetAPI() == RendererAPI::API::Vulkan) { std::swap(m_NearPlane, m_FarPlane); }
+
+		m_ProjectionMatrix = glm::perspective(fov, aspectRatio, m_NearPlane, m_FarPlane);
+
 		NormalizeDirection();
 
 		m_CameraLeft = glm::cross(m_Direction, glm::vec3(0.0f, 1.0f, 0.0f));
@@ -30,7 +33,7 @@ namespace VoxelEngine
 
 	void Camera::SetProjection(const float aspectRatio, const float fov)
 	{
-		m_ProjectionMatrix = glm::perspective(fov, aspectRatio, 0.1f, 1000.0f);
+		m_ProjectionMatrix = glm::perspective(fov, aspectRatio, m_NearPlane, m_FarPlane);
 
 		m_ProjectionViewMatrix = m_ProjectionMatrix * m_ViewMatrix;
 
