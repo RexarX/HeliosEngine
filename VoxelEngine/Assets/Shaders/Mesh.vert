@@ -10,10 +10,16 @@ layout (binding = 0) uniform SceneData
 	mat4 transform;
 } u_SceneData;
 
-layout (location = 0) out vec3 outColor;
+layout (location = 0) out vec2 TexCoord;
 
 void main() 
 {
+	vec3 colors[3] = {
+		vec3(1.0f, 0.0f, 0.0f),
+		vec3(0.0f, 1.0f, 0.0f),
+		vec3(0.0f, 0.0f, 1.0f)
+	};
+
 	gl_Position = u_SceneData.projectionView * u_SceneData.transform * vec4(a_Position, 1.0f);
-	outColor = vec3(a_TexCoord, 1.0f);
+	TexCoord = a_TexCoord;
 }

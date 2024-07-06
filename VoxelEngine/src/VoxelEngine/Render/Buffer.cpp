@@ -8,7 +8,7 @@
 
 namespace VoxelEngine
 {
-	std::shared_ptr<VertexBuffer> VertexBuffer::Create(const std::string& name, const float* vertices, const uint32_t size)
+	std::shared_ptr<VertexBuffer> VertexBuffer::Create(const std::string& name, const float* vertices, const uint64_t size)
 	{
 		switch (Renderer::GetAPI())
 		{
@@ -21,7 +21,7 @@ namespace VoxelEngine
 		return nullptr;
 	}
 
-	std::shared_ptr<VertexBuffer> VertexBuffer::Create(const std::string& name, const uint32_t size)
+	std::shared_ptr<VertexBuffer> VertexBuffer::Create(const std::string& name, const uint64_t size)
 	{
 		switch (Renderer::GetAPI())
 		{
@@ -34,7 +34,7 @@ namespace VoxelEngine
 		return nullptr;
 	}
 
-	std::shared_ptr<IndexBuffer> IndexBuffer::Create(const std::string& name, const uint32_t* indices, const uint32_t count)
+	std::shared_ptr<IndexBuffer> IndexBuffer::Create(const std::string& name, const uint32_t* indices, const uint64_t count)
 	{
 		switch (Renderer::GetAPI())
 		{
@@ -47,7 +47,7 @@ namespace VoxelEngine
 		return nullptr;
 	}
 
-	std::shared_ptr<IndexBuffer> IndexBuffer::Create(const std::string& name, const uint32_t size)
+	std::shared_ptr<IndexBuffer> IndexBuffer::Create(const std::string& name, const uint64_t size)
 	{
 		switch (Renderer::GetAPI())
 		{

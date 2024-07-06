@@ -280,7 +280,7 @@ namespace VoxelEngine
     readyPools.emplace_back(newPool);
   }
 
-  void DescriptorAllocatorGrowable::AddRatios(PoolSizeRatio poolRatios)
+  void DescriptorAllocatorGrowable::AddRatios(const PoolSizeRatio poolRatios)
   {
     ratios.emplace_back(poolRatios);
   }

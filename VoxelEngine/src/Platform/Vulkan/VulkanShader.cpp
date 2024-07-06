@@ -191,19 +191,19 @@ namespace VoxelEngine
 		VulkanContext& context = VulkanContext::Get();
 		ComputeEffect& effect = context.GetComputeEffect(m_Name);
 
-		effect.descriptorLayoutBuilder.AddBinding(m_Binding, vk::DescriptorType::eUniformBuffer,
-																												 vk::ShaderStageFlagBits::eVertex);
-
 		effect.descriptorAllocator.AddRatios(
 			{ vk::DescriptorType::eUniformBuffer, 1 }
 		);
 
 		std::shared_ptr<VulkanUniformBuffer> vulkanUniformBuffer = std::static_pointer_cast<VulkanUniformBuffer>(uniformBuffer);
 
-		effect.descriptorWriter.WriteBuffer(m_Binding, static_cast<vk::Buffer>(vulkanUniformBuffer->GetBuffer().buffer),
+		effect.descriptorLayoutBuilder.AddBinding(effect.binding, vk::DescriptorType::eUniformBuffer,
+																							vk::ShaderStageFlagBits::eVertex);
+
+		effect.descriptorWriter.WriteBuffer(effect.binding, static_cast<vk::Buffer>(vulkanUniformBuffer->GetBuffer().buffer),
 																				vulkanUniformBuffer->GetSize(), 0, vk::DescriptorType::eUniformBuffer);
 
-		++m_Binding;
+		++effect.binding;
 	}
 
 	void VulkanShader::AddUniform(const void* data, const uint32_t size)

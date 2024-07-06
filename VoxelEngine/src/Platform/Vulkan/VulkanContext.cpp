@@ -296,7 +296,7 @@ namespace VoxelEngine
   }
 
   void VulkanContext::transition_image(const vk::CommandBuffer cmd, const vk::Image image,
-    const vk::ImageLayout currentLayout, const vk::ImageLayout newLayout)
+                                       const vk::ImageLayout currentLayout, const vk::ImageLayout newLayout)
   {
     vk::ImageMemoryBarrier2 imageBarrier;
     imageBarrier.sType = vk::StructureType::eImageMemoryBarrier2;
@@ -308,8 +308,8 @@ namespace VoxelEngine
     imageBarrier.newLayout = newLayout;
 
     vk::ImageAspectFlags aspectMask = (newLayout == vk::ImageLayout::eDepthAttachmentOptimal) ?
-      vk::ImageAspectFlagBits::eDepth :
-      vk::ImageAspectFlagBits::eColor;
+                                                    vk::ImageAspectFlagBits::eDepth :
+                                                    vk::ImageAspectFlagBits::eColor;
 
     imageBarrier.subresourceRange = image_subresource_range(aspectMask);
     imageBarrier.image = image;
@@ -323,7 +323,7 @@ namespace VoxelEngine
   }
 
   vk::SemaphoreSubmitInfo VulkanContext::semaphore_submit_info(const vk::PipelineStageFlags2 stageMask,
-    const vk::Semaphore semaphore) const
+                                                               const vk::Semaphore semaphore) const
   {
     vk::SemaphoreSubmitInfo submitInfo;
     submitInfo.sType = vk::StructureType::eSemaphoreSubmitInfo;
@@ -371,8 +371,8 @@ namespace VoxelEngine
   }
 
   void VulkanContext::copy_image_to_image(const vk::CommandBuffer cmd, const vk::Image source,
-    const vk::Image destination, const vk::Extent2D srcSize,
-    const vk::Extent2D dstSize) const
+                                          const vk::Image destination, const vk::Extent2D srcSize,
+                                          const vk::Extent2D dstSize) const
   {
     vk::ImageBlit2 blitRegion;
     blitRegion.sType = vk::StructureType::eImageBlit2KHR;;
@@ -740,11 +740,10 @@ namespace VoxelEngine
 
     vmaCreateImage(m_Allocator, &rimg_info, &rimg_allocinfo, &m_DrawImage.image, &m_DrawImage.allocation, nullptr);
 
-    vk::ImageViewCreateInfo rview_info = imageview_create_info(static_cast<vk::Image>(m_DrawImage.image), m_DrawImage.imageFormat,
-                                                               vk::ImageAspectFlagBits::eColor);
+    vk::ImageViewCreateInfo rview_info = imageview_create_info(static_cast<vk::Image>(m_DrawImage.image),
+                                                               m_DrawImage.imageFormat, vk::ImageAspectFlagBits::eColor);
 
     auto result = m_Device.createImageView(&rview_info, nullptr, &m_DrawImage.imageView);
-
     CORE_ASSERT(result == vk::Result::eSuccess, "Failed to create image view!");
 
     m_DepthImage.imageFormat = vk::Format::eD32Sfloat;
@@ -757,20 +756,19 @@ namespace VoxelEngine
 
     vmaCreateImage(m_Allocator, &dimg_info, &rimg_allocinfo, &m_DepthImage.image, &m_DepthImage.allocation, nullptr);
 
-    vk::ImageViewCreateInfo dview_info = imageview_create_info(static_cast<vk::Image>(m_DepthImage.image), m_DepthImage.imageFormat,
-                                                               vk::ImageAspectFlagBits::eDepth);
+    vk::ImageViewCreateInfo dview_info = imageview_create_info(static_cast<vk::Image>(m_DepthImage.image),
+                                                               m_DepthImage.imageFormat, vk::ImageAspectFlagBits::eDepth);
 
     result = m_Device.createImageView(&dview_info, nullptr, &m_DepthImage.imageView);
-
     CORE_ASSERT(result == vk::Result::eSuccess, "Failed to create image view!");
 
     m_DeletionQueue.push_function([&]() {
-      m_Device.destroyImageView(m_DrawImage.imageView);
-      vmaDestroyImage(m_Allocator, m_DrawImage.image, m_DrawImage.allocation);
-
       for (auto& imageView : m_SwapChainImageViews) {
         m_Device.destroyImageView(imageView);
       }
+
+      m_Device.destroyImageView(m_DrawImage.imageView);
+      vmaDestroyImage(m_Allocator, m_DrawImage.image, m_DrawImage.allocation);
 
       m_Device.destroyImageView(m_DepthImage.imageView);
       vmaDestroyImage(m_Allocator, m_DepthImage.image, m_DepthImage.allocation);

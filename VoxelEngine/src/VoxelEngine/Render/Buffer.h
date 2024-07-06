@@ -81,7 +81,7 @@ namespace VoxelEngine
       CalculateOffsetsAndStride();
     }
 
-    inline uint32_t GetStride() const { return m_Stride; }
+    inline uint64_t GetStride() const { return m_Stride; }
     inline const std::vector<BufferElement>& GetElements() const { return m_Elements; }
 
     std::vector<BufferElement>::iterator begin() { return m_Elements.begin(); }
@@ -92,7 +92,7 @@ namespace VoxelEngine
   private:
     void CalculateOffsetsAndStride()
     {
-      uint32_t offset = 0;
+      uint64_t offset = 0;
       m_Stride = 0;
       for (auto& element : m_Elements) {
         element.offset_ = offset;
@@ -103,7 +103,7 @@ namespace VoxelEngine
 
   private:
     std::vector<BufferElement> m_Elements;
-    uint32_t m_Stride = 0;
+    uint64_t m_Stride = 0;
   };
 
   class VertexBuffer
@@ -114,13 +114,13 @@ namespace VoxelEngine
     virtual void Bind() const = 0;
     virtual void Unbind() const = 0;
 
-    virtual void SetData(const void* data, const uint32_t size) = 0;
+    virtual void SetData(const void* data, const uint64_t size) = 0;
 
     virtual const BufferLayout& GetLayout() const = 0;
     virtual void SetLayout(const BufferLayout& layout) = 0;
 
-    static std::shared_ptr<VertexBuffer> Create(const std::string& name, const uint32_t size);
-    static std::shared_ptr<VertexBuffer> Create(const std::string& name, const float* vertices, const uint32_t size);
+    static std::shared_ptr<VertexBuffer> Create(const std::string& name, const uint64_t size);
+    static std::shared_ptr<VertexBuffer> Create(const std::string& name, const float* vertices, const uint64_t size);
   };
 
   class IndexBuffer
@@ -131,11 +131,11 @@ namespace VoxelEngine
     virtual void Bind() const = 0;
     virtual void Unbind() const = 0;
 
-    virtual uint32_t GetCount() const = 0;
+    virtual uint64_t GetCount() const = 0;
 
-    virtual void SetData(const void* data, const uint32_t size) = 0;
+    virtual void SetData(const void* data, const uint64_t size) = 0;
 
-    static std::shared_ptr<IndexBuffer> Create(const std::string& name, const uint32_t* indices, const uint32_t count);
-    static std::shared_ptr<IndexBuffer> Create(const std::string& name, const uint32_t size);
+    static std::shared_ptr<IndexBuffer> Create(const std::string& name, const uint32_t* indices, const uint64_t count);
+    static std::shared_ptr<IndexBuffer> Create(const std::string& name, const uint64_t size);
   };
 }

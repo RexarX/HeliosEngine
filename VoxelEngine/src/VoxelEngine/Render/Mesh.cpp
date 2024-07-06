@@ -1,9 +1,10 @@
 #include "Mesh.h"
 
+#include "RendererAPI.h"
+
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/glm.hpp>
 #include <glm/gtx/hash.hpp>
-
 
 #include <tiny_obj_loader/tiny_obj_loader.h>
 
@@ -15,7 +16,7 @@ struct Vertex
 
   const bool operator==(const Vertex& other) const
   {
-    return pos == other.pos && texCoord == other.texCoord;
+    return pos == other.pos && texCoord == other.texCoord && normal == other.normal;
   }
 };
 
@@ -25,7 +26,7 @@ namespace std
   {
     uint64_t operator()(const Vertex& vertex) const
     {
-      return hash<glm::vec3>()(vertex.pos) ^ hash<glm::vec2>()(vertex.texCoord) << 1;
+      return hash<glm::vec3>()(vertex.pos) ^ hash<glm::vec3>()(vertex.normal) ^ hash<glm::vec2>()(vertex.texCoord);
     }
   };
 }
@@ -46,7 +47,7 @@ namespace VoxelEngine
 
     Vertex vertex;
     std::unordered_map<Vertex, uint32_t> uniqueVertices;
-    
+
     for (const auto& shape : shapes) {
       for (const auto& index : shape.mesh.indices) {
         vertex.pos = {
@@ -68,18 +69,15 @@ namespace VoxelEngine
 
         if (uniqueVertices.count(vertex) == 0) {
           uniqueVertices[vertex] = static_cast<uint32_t>(m_Vertices.size() / 8);
-          m_Vertices.push_back(vertex.pos.x);
-          m_Vertices.push_back(vertex.pos.y);
-          m_Vertices.push_back(vertex.pos.z);
-          m_Vertices.push_back(vertex.normal.x);
-          m_Vertices.push_back(vertex.normal.y);
-          m_Vertices.push_back(vertex.normal.z);
-          m_Vertices.push_back(vertex.texCoord.x);
-          m_Vertices.push_back(vertex.texCoord.y);
+          m_Vertices.insert(m_Vertices.end(), { vertex.pos.x, vertex.pos.y, vertex.pos.z,
+                                                vertex.normal.x, vertex.normal.y, vertex.normal.z,
+                                                vertex.texCoord.x, vertex.texCoord.y });
         }
 
         m_Indices.push_back(uniqueVertices[vertex]);
       }
+
+      CORE_TRACE("Mesh loaded: {0} vertices, {1} indices", m_Vertices.size() / 8, m_Indices.size());
     }
 
     return true;

@@ -19,14 +19,14 @@ namespace VoxelEngine
 	class VulkanVertexBuffer : public VertexBuffer
 	{
 	public:
-		VulkanVertexBuffer(const std::string& name, const uint32_t size);
-		VulkanVertexBuffer(const std::string& name, const float* vertices, const uint32_t size);
+		VulkanVertexBuffer(const std::string& name, const uint64_t size);
+		VulkanVertexBuffer(const std::string& name, const float* vertices, const uint64_t size);
 		virtual ~VulkanVertexBuffer();
 
 		virtual void Bind() const override;
 		virtual void Unbind() const override;
 
-		virtual void SetData(const void* data, const uint32_t size) override;
+		virtual void SetData(const void* data, const uint64_t size) override;
 
 		virtual const BufferLayout& GetLayout() const override { return m_Layout; }
 		virtual void SetLayout(const BufferLayout& layout) override { m_Layout = layout; }
@@ -51,16 +51,16 @@ namespace VoxelEngine
 	class VulkanIndexBuffer : public IndexBuffer
 	{
 	public:
-		VulkanIndexBuffer(const std::string& name, const uint32_t* indices, const uint32_t count);
-		VulkanIndexBuffer(const std::string& name, const uint32_t size);
+		VulkanIndexBuffer(const std::string& name, const uint32_t* indices, const uint64_t count);
+		VulkanIndexBuffer(const std::string& name, const uint64_t size);
 		virtual ~VulkanIndexBuffer();
 
 		virtual void Bind() const;
 		virtual void Unbind() const;
 
-		virtual uint32_t GetCount() const { return m_Count; }
+		virtual uint64_t GetCount() const { return m_Count; }
 
-		virtual void SetData(const void* data, const uint32_t size);
+		virtual void SetData(const void* data, const uint64_t size);
 
 		const std::string& GetName() const { return m_Name; }
 
@@ -71,7 +71,7 @@ namespace VoxelEngine
 
 	private:
 		std::string m_Name;
-		uint32_t m_Count = 0;
+		uint64_t m_Count = 0;
 
 		std::vector<uint32_t> m_Indices;
 

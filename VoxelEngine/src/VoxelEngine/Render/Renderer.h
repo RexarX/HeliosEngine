@@ -12,11 +12,14 @@ namespace VoxelEngine
 	{
 		std::string name;
 
+		std::shared_ptr<Shader> shader;
+
 		std::shared_ptr<VertexArray> vertexArray;
 		std::shared_ptr<VertexBuffer> vertexBuffer;
 		std::shared_ptr<IndexBuffer> indexBuffer;
 		std::shared_ptr<UniformBuffer> uniformBuffer;
-		std::shared_ptr<Shader> shader;
+
+		std::vector<std::shared_ptr<Texture>> textures;
 	};
 
 	struct SceneData
@@ -46,11 +49,11 @@ namespace VoxelEngine
 
 		static void DrawTriangle(const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& size);
 
-		static void DrawCube(const glm::vec3& position, const glm::vec3& rotation,
-												 const glm::vec3& size, const std::shared_ptr<Texture>& texture);
+		static void DrawCube(const glm::vec3& position, const glm::vec3& size = glm::vec3(1.0f),
+												 const glm::vec3& rotation = glm::vec3(0.0f),
+												 const std::shared_ptr<Texture>& texture = nullptr);
 
-		static void DrawLine(const glm::vec3& position, const glm::vec3& rotation,
-												 const float lenght);
+		static void DrawLine(const glm::vec3& position, const glm::vec3& rotation, const float lenght);
 
 		static void DrawSkybox(const std::shared_ptr<Texture>& texture);
 

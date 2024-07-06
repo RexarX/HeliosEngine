@@ -48,8 +48,6 @@ namespace VoxelEngine
 	private:
 		std::string m_Name;
 
-		uint32_t m_Binding = 0;
-
 		bool m_Compiled = false;
 	};
 }

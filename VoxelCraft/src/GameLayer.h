@@ -25,6 +25,4 @@ private:
 	std::shared_ptr<VoxelEngine::Mesh> m_Mesh;
 
 	std::shared_ptr<VoxelEngine::Texture> m_Skybox;
-	std::shared_ptr<VoxelEngine::Texture> m_CheckerboardTexture;
-	std::shared_ptr<VoxelEngine::Texture> m_DirtTexture;
 };

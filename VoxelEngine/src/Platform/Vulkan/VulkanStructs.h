@@ -149,7 +149,7 @@ namespace VoxelEngine
 	{
 	public:
 		void Init(const vk::Device device, const uint32_t maxSets);
-		void AddRatios(PoolSizeRatio poolRatios);
+		void AddRatios(const PoolSizeRatio poolRatios);
 		void ClearPools(const vk::Device device);
 		void DestroyPools(const vk::Device device);
 
@@ -193,7 +193,7 @@ namespace VoxelEngine
 		vk::Pipeline pipeline;
 		vk::PipelineLayout pipelineLayout;
 
-    DescriptorWriter descriptorWriter;
+		DescriptorWriter descriptorWriter;
 
 		DescriptorAllocatorGrowable descriptorAllocator;
 		DescriptorLayoutBuilder descriptorLayoutBuilder;
@@ -206,6 +206,8 @@ namespace VoxelEngine
 
 		const void* pushConstant = nullptr;
 		uint32_t pushConstantSize = 0;
+
+		uint32_t binding = 0;
 	};
 
 	struct FrameData

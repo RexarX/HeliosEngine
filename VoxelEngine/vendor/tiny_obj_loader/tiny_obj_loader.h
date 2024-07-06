@@ -133,7 +133,7 @@ typedef struct {
 } texture_option_t;
 
 typedef struct {
-  std::string m_Name;
+  std::string name;
 
   real_t ambient[3];
   real_t diffuse[3];
@@ -193,7 +193,7 @@ typedef struct {
 } material_t;
 
 typedef struct {
-  std::string m_Name;
+  std::string name;
 
   std::vector<int> intValues;
   std::vector<real_t> floatValues;
@@ -218,7 +218,7 @@ typedef struct {
 } mesh_t;
 
 typedef struct {
-  std::string m_Name;
+  std::string name;
   mesh_t mesh;
 } shape_t;
 
@@ -242,16 +242,16 @@ typedef struct callback_t_ {
   // triangle, 4 for quad)
   // 0 will be passed for undefined index in index_t members.
   void (*index_cb)(void *user_data, index_t *indices, int num_indices);
-  // `m_Name` material m_Name, `material_id` = the array index of material_t[]. -1
+  // `name` material name, `material_id` = the array index of material_t[]. -1
   // if
   // a material not found in .mtl
-  void (*usemtl_cb)(void *user_data, const char *m_Name, int material_id);
+  void (*usemtl_cb)(void *user_data, const char *name, int material_id);
   // `materials` = parsed material data.
   void (*mtllib_cb)(void *user_data, const material_t *materials,
                     int num_materials);
   // There may be multiple group names
-  void (*group_cb)(void *user_data, const char **names, int num_names);
-  void (*object_cb)(void *user_data, const char *m_Name);
+  void (*group_cb)(void *user_data, const char **names, int nunames);
+  void (*object_cb)(void *user_data, const char *name);
 
   callback_t_()
       : vertex_cb(NULL),
@@ -851,7 +851,7 @@ static bool ParseTextureNameAndOption(std::string *texname,
 }
 
 static void InitMaterial(material_t *material) {
-  material->m_Name = "";
+  material->name = "";
   material->ambient_texname = "";
   material->diffuse_texname = "";
   material->specular_texname = "";
@@ -890,7 +890,7 @@ static void InitMaterial(material_t *material) {
 static bool exportFaceGroupToShape(
     shape_t *shape, const std::vector<std::vector<vertex_index> > &faceGroup,
     const std::vector<tag_t> &tags, const int material_id,
-    const std::string &m_Name, bool triangulate) {
+    const std::string &name, bool triangulate) {
   if (faceGroup.empty()) {
     return false;
   }
@@ -944,7 +944,7 @@ static bool exportFaceGroupToShape(
     }
   }
 
-  shape->m_Name = m_Name;
+  shape->name = name;
   shape->mesh.tags = tags;
 
   return true;
@@ -1011,9 +1011,9 @@ void LoadMtl(std::map<std::string, int> *material_map,
     // new mtl
     if ((0 == strncmp(token, "newmtl", 6)) && IS_SPACE((token[6]))) {
       // flush previous material.
-      if (!material.m_Name.empty()) {
+      if (!material.name.empty()) {
         material_map->insert(std::pair<std::string, int>(
-            material.m_Name, static_cast<int>(materials->size())));
+            material.name, static_cast<int>(materials->size())));
         materials->push_back(material);
       }
 
@@ -1023,7 +1023,7 @@ void LoadMtl(std::map<std::string, int> *material_map,
       has_d = false;
       has_tr = false;
 
-      // set new mtl m_Name
+      // set new mtl name
       char namebuf[TINYOBJ_SSCANF_BUFFER_SIZE];
       token += 7;
 #ifdef _MSC_VER
@@ -1031,7 +1031,7 @@ void LoadMtl(std::map<std::string, int> *material_map,
 #else
       std::sscanf(token, "%s", namebuf);
 #endif
-      material.m_Name = namebuf;
+      material.name = namebuf;
       continue;
     }
 
@@ -1119,7 +1119,7 @@ void LoadMtl(std::map<std::string, int> *material_map,
 
       if (has_tr) {
         ss << "WARN: Both `d` and `Tr` parameters defined for \""
-           << material.m_Name << "\". Use the value of `d` for dissolve."
+           << material.name << "\". Use the value of `d` for dissolve."
            << std::endl;
       }
       has_d = true;
@@ -1130,7 +1130,7 @@ void LoadMtl(std::map<std::string, int> *material_map,
       if (has_d) {
         // `d` wins. Ignore `Tr` value.
         ss << "WARN: Both `d` and `Tr` parameters defined for \""
-           << material.m_Name << "\". Use the value of `d` for dissolve."
+           << material.name << "\". Use the value of `d` for dissolve."
            << std::endl;
       } else {
         // We invert value of Tr(assume Tr is in range [0, 1])
@@ -1324,7 +1324,7 @@ void LoadMtl(std::map<std::string, int> *material_map,
   }
   // flush last material.
   material_map->insert(std::pair<std::string, int>(
-      material.m_Name, static_cast<int>(materials->size())));
+      material.name, static_cast<int>(materials->size())));
   materials->push_back(material);
 
   if (warning) {
@@ -1432,7 +1432,7 @@ bool LoadObj(attrib_t *attrib, std::vector<shape_t> *shapes,
   std::vector<real_t> vt;
   std::vector<tag_t> tags;
   std::vector<std::vector<vertex_index> > faceGroup;
-  std::string m_Name;
+  std::string name;
 
   // material
   std::map<std::string, int> material_map;
@@ -1545,7 +1545,7 @@ bool LoadObj(attrib_t *attrib, std::vector<shape_t> *shapes,
         // Create per-face material. Thus we don't add `shape` to `shapes` at
         // this time.
         // just clear `faceGroup` after `exportFaceGroupToShape()` call.
-        exportFaceGroupToShape(&shape, faceGroup, tags, material, m_Name,
+        exportFaceGroupToShape(&shape, faceGroup, tags, material, name,
                                triangulate);
         faceGroup.clear();
         material = newMaterialId;
@@ -1597,10 +1597,10 @@ bool LoadObj(attrib_t *attrib, std::vector<shape_t> *shapes,
       continue;
     }
 
-    // group m_Name
+    // group name
     if (token[0] == 'g' && IS_SPACE((token[1]))) {
       // flush previous face group.
-      bool ret = exportFaceGroupToShape(&shape, faceGroup, tags, material, m_Name,
+      bool ret = exportFaceGroupToShape(&shape, faceGroup, tags, material, name,
                                         triangulate);
       if (ret) {
         shapes->push_back(shape);
@@ -1624,18 +1624,18 @@ bool LoadObj(attrib_t *attrib, std::vector<shape_t> *shapes,
 
       // names[0] must be 'g', so skip the 0th element.
       if (names.size() > 1) {
-        m_Name = names[1];
+        name = names[1];
       } else {
-        m_Name = "";
+        name = "";
       }
 
       continue;
     }
 
-    // object m_Name
+    // object name
     if (token[0] == 'o' && IS_SPACE((token[1]))) {
       // flush previous face group.
-      bool ret = exportFaceGroupToShape(&shape, faceGroup, tags, material, m_Name,
+      bool ret = exportFaceGroupToShape(&shape, faceGroup, tags, material, name,
                                         triangulate);
       if (ret) {
         shapes->push_back(shape);
@@ -1645,7 +1645,7 @@ bool LoadObj(attrib_t *attrib, std::vector<shape_t> *shapes,
       faceGroup.clear();
       shape = shape_t();
 
-      // @todo { multiple object m_Name? }
+      // @todo { multiple object name? }
       char namebuf[TINYOBJ_SSCANF_BUFFER_SIZE];
       token += 2;
 #ifdef _MSC_VER
@@ -1653,7 +1653,7 @@ bool LoadObj(attrib_t *attrib, std::vector<shape_t> *shapes,
 #else
       std::sscanf(token, "%s", namebuf);
 #endif
-      m_Name = std::string(namebuf);
+      name = std::string(namebuf);
 
       continue;
     }
@@ -1668,9 +1668,9 @@ bool LoadObj(attrib_t *attrib, std::vector<shape_t> *shapes,
 #else
       std::sscanf(token, "%s", namebuf);
 #endif
-      tag.m_Name = std::string(namebuf);
+      tag.name = std::string(namebuf);
 
-      token += tag.m_Name.size() + 1;
+      token += tag.name.size() + 1;
 
       tag_sizes ts = parseTagTriple(&token);
 
@@ -1707,7 +1707,7 @@ bool LoadObj(attrib_t *attrib, std::vector<shape_t> *shapes,
     // Ignore unknown command.
   }
 
-  bool ret = exportFaceGroupToShape(&shape, faceGroup, tags, material, m_Name,
+  bool ret = exportFaceGroupToShape(&shape, faceGroup, tags, material, name,
                                     triangulate);
   // exportFaceGroupToShape return false when `usemtl` is called in the last
   // line.
@@ -1743,7 +1743,7 @@ bool LoadObjWithCallback(std::istream &inStream, const callback_t &callback,
   std::vector<material_t> materials;
   std::vector<std::string> names;
   names.reserve(2);
-  std::string m_Name;
+  std::string name;
   std::vector<const char *> names_out;
 
   std::string linebuf;
@@ -1911,7 +1911,7 @@ bool LoadObjWithCallback(std::istream &inStream, const callback_t &callback,
       continue;
     }
 
-    // group m_Name
+    // group name
     if (token[0] == 'g' && IS_SPACE((token[1]))) {
       names.clear();
 
@@ -1925,9 +1925,9 @@ bool LoadObjWithCallback(std::istream &inStream, const callback_t &callback,
 
       // names[0] must be 'g', so skip the 0th element.
       if (names.size() > 1) {
-        m_Name = names[1];
+        name = names[1];
       } else {
-        m_Name.clear();
+        name.clear();
       }
 
       if (callback.group_cb) {
@@ -1948,9 +1948,9 @@ bool LoadObjWithCallback(std::istream &inStream, const callback_t &callback,
       continue;
     }
 
-    // object m_Name
+    // object name
     if (token[0] == 'o' && IS_SPACE((token[1]))) {
-      // @todo { multiple object m_Name? }
+      // @todo { multiple object name? }
       char namebuf[TINYOBJ_SSCANF_BUFFER_SIZE];
       token += 2;
 #ifdef _MSC_VER
@@ -1978,9 +1978,9 @@ bool LoadObjWithCallback(std::istream &inStream, const callback_t &callback,
 #else
       std::sscanf(token, "%s", namebuf);
 #endif
-      tag.m_Name = std::string(namebuf);
+      tag.name = std::string(namebuf);
 
-      token += tag.m_Name.size() + 1;
+      token += tag.name.size() + 1;
 
       tag_sizes ts = parseTagTriple(&token);
 

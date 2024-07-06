@@ -247,7 +247,16 @@ namespace VoxelEngine
     Mesh mesh;
     MeshData data;
 
-    if (!mesh.LoadObj(path)) { CORE_ERROR("Failed to load model!"); return nullptr; }
+    for (const auto& entry : std::filesystem::directory_iterator(path)) {
+      std::filesystem::path extension = entry.path().extension();
+      if (entry.is_regular_file()) {
+        if (extension == ".obj") {
+          CORE_INFO("Loading model: " + entry.path().string() + '!');
+          if (!mesh.LoadObj(entry.path().string())) { CORE_ERROR("Failed to load model!"); return nullptr; }
+          break;
+        }
+      }
+    }
 
     std::filesystem::path pathToFile(path);
     data.name = pathToFile.filename().replace_extension("").string();
@@ -273,7 +282,7 @@ namespace VoxelEngine
 
     data.vertexArray->AddVertexBuffer(data.vertexBuffer);
 
-    data.indexBuffer = IndexBuffer::Create(data.name.c_str(), indices.data(), indices.size());
+    data.indexBuffer = IndexBuffer::Create(data.name, indices.data(), indices.size());
 
     data.vertexArray->SetIndexBuffer(data.indexBuffer);
 
@@ -286,6 +295,16 @@ namespace VoxelEngine
 
     m_Meshes.emplace(std::make_pair(meshPtr, data));
 
+    for (const auto& entry : std::filesystem::directory_iterator(path + "/Textures")) {
+      if (entry.is_regular_file()) {
+        std::filesystem::path extension = entry.path().extension();
+        if (extension == ".png" || extension == ".jpg") {
+          CORE_INFO("Loading texture: " + entry.path().string() + '!');
+          m_Meshes[meshPtr].textures.emplace_back(Texture::Create(data.name, entry.path().string()));
+        }
+      }
+    }
+
     return meshPtr;
   }
 
@@ -296,16 +315,16 @@ namespace VoxelEngine
 
 	void Renderer::EndScene()
 	{
-    s_Cube.shader->Unbind();
-    s_Cube.vertexArray->Unbind();
-    s_Cube.vertexBuffer->Unbind();
-    s_Cube.indexBuffer->Unbind();
+    if (s_Cube.shader != nullptr) { s_Cube.shader->Unbind(); }
+    if (s_Cube.vertexArray != nullptr) { s_Cube.vertexArray->Unbind(); }
+    if (s_Cube.vertexBuffer != nullptr) { s_Cube.vertexBuffer->Unbind(); }
+    if (s_Cube.indexBuffer != nullptr) { s_Cube.indexBuffer->Unbind(); }
 
     for (auto& [mesh, meshData] : m_Meshes) {
-      meshData.shader->Unbind();
-      meshData.vertexArray->Unbind();
-      meshData.vertexBuffer->Unbind();
-      meshData.indexBuffer->Unbind();
+      if (meshData.shader != nullptr) { meshData.shader->Unbind(); }
+      if (meshData.vertexArray != nullptr) { meshData.vertexArray->Unbind(); }
+      if (meshData.vertexBuffer != nullptr) { meshData.vertexBuffer->Unbind(); }
+      if (meshData.indexBuffer != nullptr) { meshData.indexBuffer->Unbind(); }
     }
 
     //s_Line.LineShader->Unbind();
@@ -313,11 +332,10 @@ namespace VoxelEngine
     //s_Line.LineBuffer->Unbind();
 	}
 
-  void Renderer::DrawCube(const glm::vec3& position, const glm::vec3& rotation,
-                          const glm::vec3& size, const std::shared_ptr<Texture>& texture)
+  void Renderer::DrawCube(const glm::vec3& position, const glm::vec3& size,
+                          const glm::vec3& rotation, const std::shared_ptr<Texture>& texture)
   {
-    texture->Bind();
-
+    if (texture != nullptr) { texture->Bind(); }
 
     glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), size);
     transform = glm::rotate(transform, glm::radians(rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
@@ -380,6 +398,10 @@ namespace VoxelEngine
     transform = glm::rotate(transform, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
 
     MeshData& data = GetMeshData(mesh);
+
+    for (auto& texture : data.textures) {
+      texture->Bind();
+    }
 
     data.shader->Bind();
     data.vertexArray->Bind();

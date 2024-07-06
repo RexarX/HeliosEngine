@@ -15,18 +15,16 @@ void GameLayer::OnAttach()
 	VoxelEngine::Renderer::SetAnisoLevel(16.0f);
 	VoxelEngine::Renderer::SetGenerateMipmaps(true);
 
-	m_Skybox = VoxelEngine::Texture::Create(VOXELCRAFT_DIR + "Assets/Textures/Skybox/right.png",
+	/*m_Skybox = VoxelEngine::Texture::Create("Skybox",
+																					VOXELCRAFT_DIR + "Assets/Textures/Skybox/right.png",
 																					VOXELCRAFT_DIR + "Assets/Textures/Skybox/left.png",
 																					VOXELCRAFT_DIR + "Assets/Textures/Skybox/top.png",
 																					VOXELCRAFT_DIR + "Assets/Textures/Skybox/bottom.png",
 																					VOXELCRAFT_DIR + "Assets/Textures/Skybox/front.png",
 																					VOXELCRAFT_DIR + "Assets/Textures/Skybox/back.png"
-	);
+	);*/
 
-	m_Mesh = VoxelEngine::Renderer::LoadModel(VOXELCRAFT_DIR + "Assets/Models/untitled.obj");
-
-	m_CheckerboardTexture = VoxelEngine::Texture::Create(VOXELCRAFT_DIR + "Assets/Textures/Checkerboard.png");
-	m_DirtTexture = VoxelEngine::Texture::Create(VOXELCRAFT_DIR + "Assets/Textures/dirt(14vert).png");
+	m_Mesh = VoxelEngine::Renderer::LoadModel(VOXELCRAFT_DIR + "Assets/Models/untitled");
 
 	for (float i = 0; i < 100; ++i) {
 		for (float j = 0; j < 100; ++j) {
@@ -106,7 +104,7 @@ void GameLayer::Draw()
 	//VoxelEngine::Renderer::DrawSkybox(m_Skybox);
 	
 	VoxelEngine::Renderer::DrawMesh(m_Mesh);
-	VoxelEngine::Renderer::DrawCube(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f), glm::vec3(1.0f), m_DirtTexture);
+	VoxelEngine::Renderer::DrawCube(glm::vec3(0.0f, 0.0f, 3.0f));
 	//VoxelEngine::Renderer::DrawLine(glm::vec3(12.5f, 12.5f, 12.5f), glm::vec3(0.0f, 0.0f, 0.0f), 100.0f); // (ray origin, ray direction, ray lenght)
 
 	m_ToDraw.clear();

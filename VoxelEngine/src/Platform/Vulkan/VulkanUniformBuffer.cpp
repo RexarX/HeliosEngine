@@ -26,12 +26,6 @@ namespace VoxelEngine
 		context.GetDeletionQueue().push_function([&]() {
 			vmaDestroyBuffer(context.GetAllocator(), m_Buffer.buffer, m_Buffer.allocation);
 			});
-
-		vmaMapMemory(context.GetAllocator(), m_Buffer.allocation, &m_Buffer.info.pMappedData);
-
-		context.GetDeletionQueue().push_function([&]() {
-			vmaUnmapMemory(context.GetAllocator(), m_Buffer.allocation);
-			});
 	}
 
 	VulkanUniformBuffer::~VulkanUniformBuffer()
