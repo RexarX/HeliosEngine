@@ -1,10 +1,10 @@
 #pragma once
 
-#include "vepch.h"
-
 #include "Core.h"
 
 #include "Events/Event.h"
+
+#include "vepch.h"
 
 namespace VoxelEngine
 {

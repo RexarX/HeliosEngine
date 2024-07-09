@@ -6,9 +6,9 @@ namespace VoxelEngine
 {
 	class VulkanVertexArray : public VertexArray
 	{
-	public:
-		VulkanVertexArray(const std::string& name);
-		virtual ~VulkanVertexArray();
+	public:	
+		VulkanVertexArray() = default;
+		virtual ~VulkanVertexArray() = default;
 
 		virtual void Bind() const override;
 		virtual void Unbind() const override;
@@ -17,13 +17,15 @@ namespace VoxelEngine
 		virtual void SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer) override;
 		virtual void AddVertexAttribDivisor(const uint32_t index, const uint32_t divisor) override;
 
-		virtual const std::shared_ptr<VertexBuffer>& GetVertexBuffer() const override { return m_VertexBuffer; }
-		virtual const std::shared_ptr<IndexBuffer>& GetIndexBuffer() const override { return m_IndexBuffer; }
+		virtual inline const std::shared_ptr<VertexBuffer>& GetVertexBuffer() const override { return m_VertexBuffer; }
+		virtual inline const std::shared_ptr<IndexBuffer>& GetIndexBuffer() const override { return m_IndexBuffer; }
+
+		void IncreaseVertexBufferIndex() { m_VertexBufferIndex++; }
+
+    inline const uint32_t GetVertexBufferIndex() const { return m_VertexBufferIndex; }
 
 	private:
-		std::string m_Name;
-
-		uint32_t m_VertexBufferIndex = 0;
+    uint32_t m_VertexBufferIndex = 0;
 
 		std::shared_ptr<VertexBuffer> m_VertexBuffer;
 		std::shared_ptr<IndexBuffer> m_IndexBuffer;

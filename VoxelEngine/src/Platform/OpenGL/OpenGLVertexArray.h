@@ -7,7 +7,7 @@ namespace VoxelEngine
 	class OpenGLVertexArray : public VertexArray
 	{
 	public:
-		OpenGLVertexArray(const std::string& name);
+		OpenGLVertexArray();
 		virtual ~OpenGLVertexArray();
 
 		virtual void Bind() const override;
@@ -17,8 +17,8 @@ namespace VoxelEngine
 		virtual void SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer) override;
 		virtual void AddVertexAttribDivisor(const uint32_t index, const uint32_t divisor) override;
 
-		virtual const std::shared_ptr<VertexBuffer>& GetVertexBuffer() const override { return m_VertexBuffer; }
-		virtual const std::shared_ptr<IndexBuffer>& GetIndexBuffer() const override { return m_IndexBuffer; }
+		virtual inline const std::shared_ptr<VertexBuffer>& GetVertexBuffer() const override { return m_VertexBuffer; }
+		virtual inline const std::shared_ptr<IndexBuffer>& GetIndexBuffer() const override { return m_IndexBuffer; }
 
 	private:
 		uint32_t m_RendererID;

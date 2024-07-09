@@ -94,7 +94,6 @@ namespace VoxelEngine
 
 				for (Layer* layer : m_LayerStack) {
 					layer->OnUpdate(m_DeltaTime);
-					layer->Draw();
 				}
 
 				if (m_Window->IsImGuiEnabled()) {

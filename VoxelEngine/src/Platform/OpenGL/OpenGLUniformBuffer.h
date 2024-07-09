@@ -7,7 +7,7 @@ namespace VoxelEngine
 	class OpenGLUniformBuffer : public UniformBuffer
 	{
 	public:
-		OpenGLUniformBuffer(const std::string& name, const uint32_t size, const uint32_t binding);
+		OpenGLUniformBuffer(const uint32_t size, const uint32_t binding);
 		virtual ~OpenGLUniformBuffer();
 
 		virtual void SetData(const void* data, const uint32_t size, const uint32_t offset) override;

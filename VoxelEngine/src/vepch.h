@@ -26,7 +26,3 @@
 #include "VoxelEngine/MouseButtonCodes.h"
 
 #include "VoxelEngine/Utils/Timer.h"
-
-#ifdef VE_PLATFORM_WINDOWS
-  #include <Windows.h>
-#endif

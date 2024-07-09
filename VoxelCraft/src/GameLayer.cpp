@@ -1,8 +1,7 @@
 #include "GameLayer.h"
 
 GameLayer::GameLayer()
-	: Layer("VoxelCraft"), m_CameraController(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, -90.0f, 0.0f),
-		VoxelEngine::Application::Get().GetWindow().GetWidth() / (float)VoxelEngine::Application::Get().GetWindow().GetHeight())
+	: Layer("VoxelCraft")
 {
 }
 
@@ -15,21 +14,18 @@ void GameLayer::OnAttach()
 	VoxelEngine::Renderer::SetAnisoLevel(16.0f);
 	VoxelEngine::Renderer::SetGenerateMipmaps(true);
 
-	/*m_Skybox = VoxelEngine::Texture::Create("Skybox",
-																					VOXELCRAFT_DIR + "Assets/Textures/Skybox/right.png",
-																					VOXELCRAFT_DIR + "Assets/Textures/Skybox/left.png",
-																					VOXELCRAFT_DIR + "Assets/Textures/Skybox/top.png",
-																					VOXELCRAFT_DIR + "Assets/Textures/Skybox/bottom.png",
-																					VOXELCRAFT_DIR + "Assets/Textures/Skybox/front.png",
-																					VOXELCRAFT_DIR + "Assets/Textures/Skybox/back.png"
-	);*/
+	VoxelEngine::ModelLoader::LoadModel(VOXELCRAFT_DIR + "Assets/Models/untitled");
+	
+	VoxelEngine::SceneManager::AddScene("default");
+  VoxelEngine::SceneManager::SetActiveScene("default");
 
-	m_Mesh = VoxelEngine::Renderer::LoadModel(VOXELCRAFT_DIR + "Assets/Models/untitled");
+	VoxelEngine::Scene& scene = VoxelEngine::SceneManager::GetActiveScene();
+	VoxelEngine::Object& obj = VoxelEngine::ModelLoader::GetObj();
 
-	for (float i = 0; i < 100; ++i) {
-		for (float j = 0; j < 100; ++j) {
-			m_Cube.push_back({ glm::vec3(i, -1.0f, j), glm::vec3(1.0f, 1.0f, 1.0f),
-				glm::vec3(0.0f, 0.0f, 0.0f) });
+	for (uint32_t i = 0; i < 1; ++i) {
+		for (uint32_t j = 0; j < 1; ++j) {
+			obj.SetPosition(glm::vec3(i, 0, j));
+			scene.AddObject(obj);
 		}
 	}
 }
@@ -40,14 +36,18 @@ void GameLayer::OnDetach()
 
 void GameLayer::OnUpdate(const VoxelEngine::Timestep ts)
 {
+	VoxelEngine::Scene& scene = VoxelEngine::SceneManager::GetActiveScene();
+
 	if (VoxelEngine::Application::Get().GetWindow().IsFocused()) {
-		m_CameraController.OnUpdate(ts);
+		VoxelEngine::SceneManager::GetActiveScene().OnUpdate(ts);
 	}
+
+  VoxelEngine::SceneManager::GetActiveScene().Render();
 }
 
 void GameLayer::OnEvent(VoxelEngine::Event& event)
 {
-	m_CameraController.OnEvent(event);
+	VoxelEngine::Scene& scene = VoxelEngine::SceneManager::GetActiveScene();
 
 	if (event.GetEventType() == VoxelEngine::EventType::KeyPressed) {
 		VoxelEngine::Window& window = VoxelEngine::Application::Get().GetWindow();
@@ -58,7 +58,7 @@ void GameLayer::OnEvent(VoxelEngine::Event& event)
 		case VoxelEngine::Key::Escape:
 			if (window.IsFocused()) {
 				window.SetFocused(false);
-				m_CameraController.SetFirstInput();
+				scene.GetCameraController().SetFirstInput();
 			}
 			else { window.SetFocused(true); }
 			break;
@@ -88,26 +88,4 @@ void GameLayer::OnImGuiRender(ImGuiContext* context)
 	ImGui::Text("FPS: %f", ts.GetFramerate());
 	ImGui::Text("Frametime: %f", ts.GetMilliseconds());
 	ImGui::End();
-}
-
-void GameLayer::Draw()
-{
-	VoxelEngine::Renderer::BeginScene(m_CameraController.GetCamera());
-
-	/*m_CameraController.GetFrustum().CreateFrustum(m_CameraController.GetCamera());
-	for (const auto& cube : m_Cube) {
-		if (m_CameraController.GetFrustum().IsParallelepipedInFrustrum(cube[0], cube[1])) {
-			m_ToDraw.push_back(cube);
-		}
-	}*/
-
-	//VoxelEngine::Renderer::DrawSkybox(m_Skybox);
-	
-	VoxelEngine::Renderer::DrawMesh(m_Mesh);
-	VoxelEngine::Renderer::DrawCube(glm::vec3(0.0f, 0.0f, 3.0f));
-	//VoxelEngine::Renderer::DrawLine(glm::vec3(12.5f, 12.5f, 12.5f), glm::vec3(0.0f, 0.0f, 0.0f), 100.0f); // (ray origin, ray direction, ray lenght)
-
-	m_ToDraw.clear();
-
-	VoxelEngine::Renderer::EndScene();
 }

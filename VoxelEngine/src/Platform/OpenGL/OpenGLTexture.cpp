@@ -35,7 +35,7 @@ namespace VoxelEngine
 		return 0;
 	}
 
-	OpenGLTexture::OpenGLTexture(const std::string& name, const TextureSpecification& specification)
+	OpenGLTexture::OpenGLTexture(const TextureSpecification& specification)
 		: m_Specification(specification), m_Width(m_Specification.Width),
 			m_Height(m_Specification.Height), m_TextureSlot(m_TextureSlotCounter++)
 	{
@@ -59,7 +59,7 @@ namespace VoxelEngine
 		++m_TextureSlotCounter;
 	}
 
-	OpenGLTexture::OpenGLTexture(const std::string& name, const std::string& path)
+	OpenGLTexture::OpenGLTexture(const std::string& path)
 		: m_Path(path), m_TextureSlot(m_TextureSlotCounter++)
 	{
 		int32_t width, height, channels;
@@ -115,12 +115,11 @@ namespace VoxelEngine
 		if (!m_IsLoaded) { CORE_ERROR("Failed to load texture!"); }
 	}
 
-	OpenGLTexture::OpenGLTexture(const std::string& name, const std::vector<std::string>& paths)
+	OpenGLTexture::OpenGLTexture(const std::vector<std::string>& paths)
 	{
 	}
 
-	OpenGLTexture::OpenGLTexture(const std::string& name,
-															 const std::string& right, const std::string& left, const std::string& top,
+	OpenGLTexture::OpenGLTexture(const std::string& right, const std::string& left, const std::string& top,
 															 const std::string& bottom, const std::string& front, const std::string& back)
 		: m_Paths({ right, left, top, bottom, front, back }), m_TextureSlot(m_TextureSlotCounter++)
 	{

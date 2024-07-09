@@ -23,9 +23,7 @@ namespace VoxelEngine
 	{
 		VulkanContext& context = VulkanContext::Get();
 		if (mask) {
-			context.GetComputeEffect(context.GetCurrentComputeEffect()).pipelineBuilder.EnableDepthTest();
 		} else {
-			context.GetComputeEffect(context.GetCurrentComputeEffect()).pipelineBuilder.DisableDepthTest();
 		}
 	}
 	

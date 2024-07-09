@@ -27,7 +27,7 @@ namespace VoxelEngine
 		return 0;
 	}
 
-	OpenGLVertexArray::OpenGLVertexArray(const std::string& name)
+	OpenGLVertexArray::OpenGLVertexArray()
 	{
 		glGenVertexArrays(1, &m_RendererID);
 		Bind();

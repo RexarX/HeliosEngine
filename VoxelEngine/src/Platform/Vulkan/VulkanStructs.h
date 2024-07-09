@@ -2,11 +2,10 @@
 
 #include "VulkanBuffer.h"
 
-#include "vepch.h"
-
-#include <vulkan/vulkan.hpp>
-
-#include <vma/vk_mem_alloc.h>
+#include "Render/VertexArray.h"
+#include "Render/Shader.h"
+#include "Render/UniformBuffer.h"
+#include "Render/Texture.h"
 
 namespace VoxelEngine
 {
@@ -29,22 +28,22 @@ namespace VoxelEngine
 		}
 	};
 
-	struct WritingQueue
+	struct DrawQueue
 	{
-		std::deque<std::function<void()>> writings;
+		std::deque<std::function<void()>> draws;
 
 		void Push(std::function<void()>&& function)
 		{
-			writings.push_back(function);
+			draws.push_back(function);
 		}
 
 		void Flush()
 		{
-			for (auto it = writings.begin(); it != writings.end(); ++it) {
+			for (auto it = draws.begin(); it != draws.end(); ++it) {
 				(*it)();
 			}
 
-			writings.clear();
+			draws.clear();
 		}
 	};
 
@@ -180,13 +179,18 @@ namespace VoxelEngine
 		std::vector<vk::WriteDescriptorSet> writes;
 	};
 
-	struct ComputeEffect
+	struct Pipeline
 	{
-    ~ComputeEffect() = default;
+    ~Pipeline() = default;
 
 		void Init();
 		void Build();
 		void Destroy();
+
+		void AddShader(const std::shared_ptr<Shader>& shader);
+		void AddVertexArray(const std::shared_ptr<VertexArray>& vertexArray);
+		void AddUniformBuffer(const std::shared_ptr<UniformBuffer>& uniformBuffer);
+		void AddTexture(const std::shared_ptr<Texture>& texture);
 
 		PipelineBuilder pipelineBuilder;
 
@@ -217,6 +221,8 @@ namespace VoxelEngine
 
 		vk::CommandPool commandPool;
 		vk::CommandBuffer commandBuffer;
+
+		vk::DescriptorSet descriptorSet;
 
 		DeletionQueue deletionQueue;
 	};

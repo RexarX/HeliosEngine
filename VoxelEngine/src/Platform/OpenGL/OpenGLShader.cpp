@@ -66,12 +66,9 @@ namespace VoxelEngine
 		lastSlash = lastSlash == std::string::npos ? 0 : lastSlash + 1;
 		auto lastDot = filepath.rfind('.');
 		auto count = lastDot == std::string::npos ? filepath.size() - lastSlash : lastDot - lastSlash;
-		m_Name = filepath.substr(lastSlash, count);
 	}
 
-	OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertex,
-																											const std::string& fragment)
-		: m_Name(name)
+	OpenGLShader::OpenGLShader(const std::string& vertex, const std::string& fragment)
 	{
 		std::string vertexelement = ReadFile(vertex);
 		std::string fragmentelement = ReadFile(fragment);
@@ -253,9 +250,5 @@ namespace VoxelEngine
 	{
 		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniform1i(location, *static_cast<const GLint*>(data));
-	}
-
-	void OpenGLShader::AddUniformBuffer(const std::shared_ptr<UniformBuffer>& uniformBuffer)
-	{
 	}
 }

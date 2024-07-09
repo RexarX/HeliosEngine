@@ -15,9 +15,9 @@ namespace VoxelEngine
 		virtual void AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer) = 0;
 		virtual void SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer) = 0;
 		virtual void AddVertexAttribDivisor(const uint32_t index, const uint32_t divisor) = 0;
-		virtual const std::shared_ptr<VertexBuffer>& GetVertexBuffer() const = 0;
-		virtual const std::shared_ptr<IndexBuffer>& GetIndexBuffer() const = 0;
+		virtual inline const std::shared_ptr<VertexBuffer>& GetVertexBuffer() const = 0;
+		virtual inline const std::shared_ptr<IndexBuffer>& GetIndexBuffer() const = 0;
 
-		static std::unique_ptr<VertexArray> Create(const std::string& name = "");
+		static std::shared_ptr<VertexArray> Create();
 	};
 }

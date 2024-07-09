@@ -21,8 +21,6 @@ namespace VoxelEngine
 		virtual void OnEvent(Event& event) {}
     virtual void OnImGuiRender(ImGuiContext* context) {}
 
-		virtual void Draw() {}
-
 		inline const std::string& GetName() const { return m_Name; }
 
 	protected:

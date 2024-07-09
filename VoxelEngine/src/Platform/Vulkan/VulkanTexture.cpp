@@ -1,6 +1,6 @@
 #include "VulkanTexture.h"
 
-#include "vepch.h"
+#include "VulkanContext.h"
 
 #include <stb_image/stb_image.h>
 
@@ -9,19 +9,16 @@ namespace VoxelEngine
 	bool VulkanTexture::m_GenerateMipmaps = false;
 	float VulkanTexture::m_AnisoLevel = 0.0f;
 
-	VulkanTexture::VulkanTexture(const std::string& name, const TextureSpecification& specification)
-		: m_Name(name), m_Specification(specification), m_Width(m_Specification.Width),
+	VulkanTexture::VulkanTexture(const TextureSpecification& specification)
+		: m_Specification(specification), m_Width(m_Specification.Width),
 			m_Height(m_Specification.Height)
 	{
 		if (!m_IsLoaded) { CORE_ERROR("Failed to load texture!"); return; }
 	}
 
-	VulkanTexture::VulkanTexture(const std::string& name, const std::string& path)
-		: m_Name(name), m_Path(path)
+	VulkanTexture::VulkanTexture(const std::string& path)
+		: m_Path(path)
 	{
-		VulkanContext& context = VulkanContext::Get();
-		ComputeEffect& effect = context.GetComputeEffect(name);
-
 		int32_t width, height, channels;
 		stbi_set_flip_vertically_on_load(1);
 		stbi_uc* imData = nullptr;
@@ -39,48 +36,17 @@ namespace VoxelEngine
 			m_DataFormat = vk::Format::eR8G8B8Srgb;
 		}
 
-		AllocatedImage image = create_image(imData, vk::Extent3D{ static_cast<uint32_t>(width), static_cast<uint32_t>(height), 1 },
-																				vk::Format::eR8G8B8A8Unorm, vk::ImageUsageFlagBits::eSampled);
-
-		vk::SamplerCreateInfo sampl;
-		sampl.sType = vk::StructureType::eSamplerCreateInfo;
-		sampl.magFilter = vk::Filter::eNearest;
-		sampl.minFilter = vk::Filter::eNearest;
-
-		samplerNearest = context.GetDevice().createSampler(sampl);
-
-		sampl.magFilter = vk::Filter::eLinear;
-		sampl.minFilter = vk::Filter::eLinear;
-
-		samplerLinear = context.GetDevice().createSampler(sampl);
-
-		context.GetDeletionQueue().push_function([&]() {
-			context.GetDevice().destroySampler(samplerNearest);
-      context.GetDevice().destroySampler(samplerLinear);
-			});
-
-		effect.descriptorAllocator.AddRatios(
-			{ vk::DescriptorType::eCombinedImageSampler, 1 }
-		);
-
-		effect.descriptorLayoutBuilder.AddBinding(effect.binding, vk::DescriptorType::eCombinedImageSampler,
-																							vk::ShaderStageFlagBits::eFragment);
-
-		effect.descriptorWriter.WriteImage(effect.binding, image.imageView, samplerLinear,
-																			 vk::ImageLayout::eShaderReadOnlyOptimal,
-																			 vk::DescriptorType::eCombinedImageSampler);
-
-		++effect.binding;
+		m_Image = create_image(imData, vk::Extent3D(static_cast<uint32_t>(width), static_cast<uint32_t>(height), 1),
+													 vk::Format::eR8G8B8A8Unorm, vk::ImageUsageFlagBits::eSampled);
 	}
 
-	VulkanTexture::VulkanTexture(const std::string& name, const std::vector<std::string>& paths)
+	VulkanTexture::VulkanTexture(const std::vector<std::string>& paths)
 	{
 	}
 
-	VulkanTexture::VulkanTexture(const std::string& name,
-															 const std::string& right, const std::string& left, const std::string& top,
+	VulkanTexture::VulkanTexture(const std::string& right, const std::string& left, const std::string& top,
 															 const std::string& bottom, const std::string& front, const std::string& back)
-		: m_Name(name), m_Paths({ right, left, top, bottom, front, back })
+		: m_Paths({ right, left, top, bottom, front, back })
 	{
 		if (!m_IsLoaded) { CORE_ERROR("Failed to load cubemap!"); }
 	}
@@ -97,7 +63,8 @@ namespace VoxelEngine
 	{
 	}
 
-	AllocatedImage VulkanTexture::create_image(const vk::Extent3D size, const vk::Format format, const vk::ImageUsageFlags usage) const
+	AllocatedImage VulkanTexture::create_image(const vk::Extent3D size, const vk::Format format,
+																						 const vk::ImageUsageFlags usage) const
 	{
 		VulkanContext& context = VulkanContext::Get();
 

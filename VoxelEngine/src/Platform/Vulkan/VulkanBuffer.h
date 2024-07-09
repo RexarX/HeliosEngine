@@ -19,8 +19,8 @@ namespace VoxelEngine
 	class VulkanVertexBuffer : public VertexBuffer
 	{
 	public:
-		VulkanVertexBuffer(const std::string& name, const uint64_t size);
-		VulkanVertexBuffer(const std::string& name, const float* vertices, const uint64_t size);
+		VulkanVertexBuffer(const uint64_t size);
+		VulkanVertexBuffer(const float* vertices, const uint64_t size);
 		virtual ~VulkanVertexBuffer();
 
 		virtual void Bind() const override;
@@ -28,18 +28,15 @@ namespace VoxelEngine
 
 		virtual void SetData(const void* data, const uint64_t size) override;
 
-		virtual const BufferLayout& GetLayout() const override { return m_Layout; }
+		virtual inline const BufferLayout& GetLayout() const override { return m_Layout; }
 		virtual void SetLayout(const BufferLayout& layout) override { m_Layout = layout; }
 
-		const std::string& GetName() const { return m_Name; }
+		inline const std::vector<float>& GetVertices() const { return m_Vertices; }
 
-		std::vector<float>& GetVertices() { return m_Vertices; }
-
-		AllocatedBuffer& GetBuffer() { return m_Buffer; }
-		AllocatedBuffer& GetStagingBuffer() { return m_StagingBuffer; }
+		inline AllocatedBuffer& GetBuffer() { return m_Buffer; }
+		inline AllocatedBuffer& GetStagingBuffer() { return m_StagingBuffer; }
 
 	private:
-		std::string m_Name;
 		BufferLayout m_Layout;
 
     std::vector<float> m_Vertices;
@@ -51,27 +48,24 @@ namespace VoxelEngine
 	class VulkanIndexBuffer : public IndexBuffer
 	{
 	public:
-		VulkanIndexBuffer(const std::string& name, const uint32_t* indices, const uint64_t count);
-		VulkanIndexBuffer(const std::string& name, const uint64_t size);
+		VulkanIndexBuffer(const uint32_t* indices, const uint32_t count);
+		VulkanIndexBuffer(const uint64_t size);
 		virtual ~VulkanIndexBuffer();
 
 		virtual void Bind() const;
 		virtual void Unbind() const;
 
-		virtual uint64_t GetCount() const { return m_Count; }
+		virtual inline const uint32_t GetCount() const { return m_Count; }
 
 		virtual void SetData(const void* data, const uint64_t size);
 
-		const std::string& GetName() const { return m_Name; }
+		const inline std::vector<uint32_t>& GetIndices() const { return m_Indices; }
 
-		const std::vector<uint32_t>& GetIndices() const { return m_Indices; }
-
-		AllocatedBuffer& GetBuffer() { return m_Buffer; }
-		AllocatedBuffer& GetStagingBuffer() { return m_StagingBuffer; }
+		inline AllocatedBuffer& GetBuffer() { return m_Buffer; }
+		inline AllocatedBuffer& GetStagingBuffer() { return m_StagingBuffer; }
 
 	private:
-		std::string m_Name;
-		uint64_t m_Count = 0;
+		uint32_t m_Count = 0;
 
 		std::vector<uint32_t> m_Indices;
 

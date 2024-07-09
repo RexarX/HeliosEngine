@@ -36,13 +36,11 @@ namespace VoxelEngine
     std::shared_ptr<VertexBuffer> SkyboxBuffer;
     std::shared_ptr<Shader> SkyboxShader;
   };
-  
-	std::unique_ptr<SceneData> Renderer::s_SceneData = std::make_unique<SceneData>();
-  std::unordered_map<std::shared_ptr<Mesh>, MeshData> Renderer::m_Meshes;
 
   static Cube s_Cube;
   static Line s_Line;
   static Skybox s_Skybox;
+  static UploadData data;
 
 	void Renderer::Init()
 	{
@@ -174,10 +172,11 @@ namespace VoxelEngine
        1.0f, -1.0f,  1.0f
     };
     
+    /*
     s_Cube.shader = Shader::Create(s_Cube.name, VOXELENGINE_DIR + "Assets/Shaders/Cube.vert",
                                                 VOXELENGINE_DIR + "Assets/Shaders/Cube.frag");
 
-    s_Cube.uniformBuffer = UniformBuffer::Create(s_Cube.name, sizeof(*s_SceneData));
+    s_Cube.uniformBuffer = UniformBuffer::Create(s_Cube.name, sizeof(s_SceneData));
 
     s_Cube.shader->AddUniformBuffer(s_Cube.uniformBuffer);
     s_Cube.shader->Unbind();
@@ -200,7 +199,7 @@ namespace VoxelEngine
 
     s_Cube.indexBuffer->Unbind();
 
-    s_Cube.vertexBuffer->Unbind();
+    s_Cube.vertexBuffer->Unbind();*/
 
     /*s_Line.LineVertex = VertexArray::Create();
 
@@ -242,96 +241,6 @@ namespace VoxelEngine
     RenderCommand::SetViewport(0, 0, width, height);
   }
 
-  const std::shared_ptr<Mesh>& Renderer::LoadModel(const std::string& path)
-  {
-    Mesh mesh;
-    MeshData data;
-
-    for (const auto& entry : std::filesystem::directory_iterator(path)) {
-      std::filesystem::path extension = entry.path().extension();
-      if (entry.is_regular_file()) {
-        if (extension == ".obj") {
-          CORE_INFO("Loading model: " + entry.path().string() + '!');
-          if (!mesh.LoadObj(entry.path().string())) { CORE_ERROR("Failed to load model!"); return nullptr; }
-          break;
-        }
-      }
-    }
-
-    std::filesystem::path pathToFile(path);
-    data.name = pathToFile.filename().replace_extension("").string();
-
-    std::vector<float>& vertices = mesh.GetVertices();
-    std::vector<uint32_t>& indices = mesh.GetIndices();
-
-    data.shader = Shader::Create(data.name, VOXELENGINE_DIR + "Assets/Shaders/Mesh.vert",
-                                            VOXELENGINE_DIR + "Assets/Shaders/Mesh.frag");
-
-    data.uniformBuffer = UniformBuffer::Create(data.name, sizeof(*s_SceneData));
-
-    data.shader->AddUniformBuffer(data.uniformBuffer);
-
-    data.vertexArray = VertexArray::Create(data.name);
-
-    data.vertexBuffer = VertexBuffer::Create(data.name, vertices.data(), vertices.size() * sizeof(float));
-    data.vertexBuffer->SetLayout({
-      { ShaderDataType::Float3, "a_Position" },
-      { ShaderDataType::Float3, "a_Normal" },
-      { ShaderDataType::Float2, "a_TexCoord" }
-      });
-
-    data.vertexArray->AddVertexBuffer(data.vertexBuffer);
-
-    data.indexBuffer = IndexBuffer::Create(data.name, indices.data(), indices.size());
-
-    data.vertexArray->SetIndexBuffer(data.indexBuffer);
-
-    data.shader->Unbind();
-    data.vertexArray->Unbind();
-    data.vertexBuffer->Unbind();
-    data.indexBuffer->Unbind();
-
-    std::shared_ptr<Mesh> meshPtr = std::make_shared<Mesh>(mesh);
-
-    m_Meshes.emplace(std::make_pair(meshPtr, data));
-
-    for (const auto& entry : std::filesystem::directory_iterator(path + "/Textures")) {
-      if (entry.is_regular_file()) {
-        std::filesystem::path extension = entry.path().extension();
-        if (extension == ".png" || extension == ".jpg") {
-          CORE_INFO("Loading texture: " + entry.path().string() + '!');
-          m_Meshes[meshPtr].textures.emplace_back(Texture::Create(data.name, entry.path().string()));
-        }
-      }
-    }
-
-    return meshPtr;
-  }
-
-	void Renderer::BeginScene(const Camera& camera)
-	{
-		s_SceneData->projectionViewMatrix = camera.GetProjectionViewMatrix();
-	}
-
-	void Renderer::EndScene()
-	{
-    if (s_Cube.shader != nullptr) { s_Cube.shader->Unbind(); }
-    if (s_Cube.vertexArray != nullptr) { s_Cube.vertexArray->Unbind(); }
-    if (s_Cube.vertexBuffer != nullptr) { s_Cube.vertexBuffer->Unbind(); }
-    if (s_Cube.indexBuffer != nullptr) { s_Cube.indexBuffer->Unbind(); }
-
-    for (auto& [mesh, meshData] : m_Meshes) {
-      if (meshData.shader != nullptr) { meshData.shader->Unbind(); }
-      if (meshData.vertexArray != nullptr) { meshData.vertexArray->Unbind(); }
-      if (meshData.vertexBuffer != nullptr) { meshData.vertexBuffer->Unbind(); }
-      if (meshData.indexBuffer != nullptr) { meshData.indexBuffer->Unbind(); }
-    }
-
-    //s_Line.LineShader->Unbind();
-    //s_Line.LineVertex->Unbind();
-    //s_Line.LineBuffer->Unbind();
-	}
-
   void Renderer::DrawCube(const glm::vec3& position, const glm::vec3& size,
                           const glm::vec3& rotation, const std::shared_ptr<Texture>& texture)
   {
@@ -347,9 +256,9 @@ namespace VoxelEngine
     s_Cube.vertexBuffer->Bind();
     s_Cube.indexBuffer->Bind();
 
-    s_SceneData->transformMatrix = transform;
+    //s_SceneData.transformMatrix = transform;
 
-    s_Cube.uniformBuffer->SetData(s_SceneData.get(), sizeof(*s_SceneData));
+    //s_Cube.uniformBuffer->SetData(&s_SceneData, sizeof(s_SceneData));
 
     RenderCommand::DrawIndexed(s_Cube.vertexArray, s_Cube.indexBuffer->GetCount());
   }
@@ -366,7 +275,7 @@ namespace VoxelEngine
     s_Line.LineVertex->Bind();
     s_Line.LineBuffer->Bind();
 
-    s_Line.LineShader->UploadUniformMat4("u_Projection", s_SceneData->projectionViewMatrix);
+    //s_Line.LineShader->UploadUniformMat4("u_Projection", s_SceneData.projectionViewMatrix);
     s_Line.LineShader->UploadUniformMat4("u_Transform", transform);
     
     RenderCommand::DrawLine(s_Line.LineVertex, 2);
@@ -382,7 +291,7 @@ namespace VoxelEngine
     s_Skybox.SkyboxVertex->Bind();
     s_Skybox.SkyboxBuffer->Bind();
 
-    s_Skybox.SkyboxShader->UploadUniformMat4("u_ViewProjection", s_SceneData->projectionViewMatrix);
+    //s_Skybox.SkyboxShader->UploadUniformMat4("u_ViewProjection", s_SceneData.projectionViewMatrix);
 
     RenderCommand::DrawArray(s_Skybox.SkyboxVertex, 36);
 
@@ -392,26 +301,29 @@ namespace VoxelEngine
   void Renderer::DrawMesh(const std::shared_ptr<Mesh>& mesh, const glm::vec3& position,
                           const glm::vec3& scale, const glm::vec3& rotation)
   {
-    glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), scale);
-    transform = glm::rotate(transform, glm::radians(rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
-    transform = glm::rotate(transform, glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
-    transform = glm::rotate(transform, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
+  }
 
-    MeshData& data = GetMeshData(mesh);
+  void Renderer::DrawObject(const SceneData& sceneData, const Object& object)
+  {
+    data.projectionViewMatrix = sceneData.projectionViewMatrix;
+    data.transformMatrix = object.GetTransform().transformMatrix;
 
-    for (auto& texture : data.textures) {
-      texture->Bind();
+    if (object.GetMaterial() != nullptr) {
+      object.GetMaterial()->GetDiffuseMap()->Bind();
     }
 
-    data.shader->Bind();
-    data.vertexArray->Bind();
-    data.vertexBuffer->Bind();
-    data.indexBuffer->Bind();
+    object.GetShader()->Bind();
+    object.GetVertexArray()->Bind();
+    object.GetVertexBuffer()->Bind();
+    object.GetIndexBuffer()->Bind();
 
-    s_SceneData->transformMatrix = transform;
+    object.GetUniformBuffers()[0]->SetData(&data, sizeof(data));
 
-    data.uniformBuffer->SetData(s_SceneData.get(), sizeof(*s_SceneData));
+    RenderCommand::DrawIndexed(object.GetVertexArray(), object.GetIndexBuffer()->GetCount());
 
-    RenderCommand::DrawIndexed(data.vertexArray, data.indexBuffer->GetCount());
+    object.GetShader()->Unbind();
+    object.GetVertexArray()->Unbind();
+    object.GetVertexBuffer()->Unbind();
+    object.GetIndexBuffer()->Unbind();
   }
 }

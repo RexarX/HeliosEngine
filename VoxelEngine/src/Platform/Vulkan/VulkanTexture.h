@@ -1,50 +1,55 @@
 #pragma once
 
-#include "VulkanContext.h"
-
 #include "Render/Texture.h"
+
+#include "VulkanStructs.h"
+
+#include <vulkan/vulkan.hpp>
+
+#include <vma/vk_mem_alloc.h>
 
 namespace VoxelEngine
 {
 	class VulkanTexture : public Texture
 	{
 	public:
-		VulkanTexture(const std::string& name, const TextureSpecification& specification);
-		VulkanTexture(const std::string& name, const std::string& path);
-		VulkanTexture(const std::string& name, const std::vector<std::string>& paths);
-		VulkanTexture(const std::string& name,
-									const std::string& right, const std::string& left,
+		VulkanTexture(const TextureSpecification& specification);
+		VulkanTexture(const std::string& path);
+		VulkanTexture(const std::vector<std::string>& paths);
+		VulkanTexture(const std::string& right, const std::string& left,
 									const std::string& top, const std::string& bottom,
 									const std::string& front, const std::string& back);
 		virtual ~VulkanTexture();
 
 		virtual const TextureSpecification& GetSpecification() const override { return m_Specification; }
 
-		virtual uint32_t GetWidth() const override { return m_Width; }
-		virtual uint32_t GetHeight() const override { return m_Height; }
+		virtual inline const uint32_t GetWidth() const override { return m_Width; }
+		virtual inline const uint32_t GetHeight() const override { return m_Height; }
 
-		virtual const std::string& GetPath() const override { return m_Path; }
+		virtual inline const std::string& GetPath() const override { return m_Path; }
 
-		virtual const uint32_t GetSlot() const override { return m_TextureSlot; }
+		virtual inline const uint32_t GetSlot() const override { return m_TextureSlot; }
 
-		virtual bool IsLoaded() const override { return m_IsLoaded; }
+		virtual inline const bool IsLoaded() const override { return m_IsLoaded; }
 
 		virtual void SetData(const void* data, const uint32_t size) override;
 
 		virtual void Bind(const uint32_t slot = 0) const override;
 
-		virtual bool operator==(const Texture& other) const override { return true; }
+		virtual inline const bool operator==(const Texture& other) const override { return true; }
+
+		inline const AllocatedImage& GetImage() const { return m_Image; }
 
 		static void SetGenerateMipmaps(const bool value) { m_GenerateMipmaps = value; }
 		static void SetAnisoLevel(const float value) { m_AnisoLevel = value; }
 
 	private:
-		AllocatedImage create_image(const vk::Extent3D size, const vk::Format format, const vk::ImageUsageFlags usage) const;
-		AllocatedImage create_image(const void* data, const vk::Extent3D size, const vk::Format format, const vk::ImageUsageFlags usage) const;
+		AllocatedImage create_image(const vk::Extent3D size, const vk::Format format,
+																const vk::ImageUsageFlags usage) const;
+		AllocatedImage create_image(const void* data, const vk::Extent3D size, const vk::Format format,
+																const vk::ImageUsageFlags usage) const;
 
 	private:
-		std::string m_Name;
-
 		TextureSpecification m_Specification;
 
 		uint32_t m_Width, m_Height;
@@ -57,10 +62,9 @@ namespace VoxelEngine
 
 		bool m_IsLoaded = false;
 
-		vk::Sampler samplerNearest;
-		vk::Sampler samplerLinear;
-
 		std::string m_Path;
 		std::array<std::string, 6> m_Paths;
+
+		AllocatedImage m_Image;
 	};
 }

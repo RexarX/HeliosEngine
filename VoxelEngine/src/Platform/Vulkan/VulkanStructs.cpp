@@ -1,8 +1,33 @@
 #include "VulkanStructs.h"
 #include "VulkanContext.h"
+#include "VulkanShader.h"
+#include "VulkanVertexArray.h"
+#include "VulkanUniformBuffer.h"
+#include "VulkanTexture.h"
 
 namespace VoxelEngine
 {
+  const vk::Format ShaderDataTypeToVulkanBaseType(const ShaderDataType type)
+  {
+    switch (type)
+    {
+    case VoxelEngine::ShaderDataType::Float:    return vk::Format::eR32Sfloat;
+    case VoxelEngine::ShaderDataType::Float2:   return vk::Format::eR32G32Sfloat;
+    case VoxelEngine::ShaderDataType::Float3:   return vk::Format::eR32G32B32Sfloat;
+    case VoxelEngine::ShaderDataType::Float4:   return vk::Format::eR32G32B32A32Sfloat;
+    case VoxelEngine::ShaderDataType::Mat3:     return vk::Format::eR32G32B32Sfloat;
+    case VoxelEngine::ShaderDataType::Mat4:     return vk::Format::eR32G32B32A32Sfloat;
+    case VoxelEngine::ShaderDataType::Int:      return vk::Format::eR32Sint;
+    case VoxelEngine::ShaderDataType::Int2:     return vk::Format::eR32G32Sint;
+    case VoxelEngine::ShaderDataType::Int3:     return vk::Format::eR32G32B32Sint;
+    case VoxelEngine::ShaderDataType::Int4:     return vk::Format::eR32G32B32A32Sint;
+    case VoxelEngine::ShaderDataType::Bool:     return vk::Format::eR8Sint;
+    }
+
+    CORE_ASSERT(false, "Unknown ShaderDataType!");
+    return vk::Format::eUndefined;
+  }
+
   void DescriptorLayoutBuilder::AddBinding(const uint32_t binding, const vk::DescriptorType type,
                                            const vk::ShaderStageFlags shaderStage)
   {
@@ -37,8 +62,8 @@ namespace VoxelEngine
     std::vector<vk::DescriptorPoolSize> poolSizes;
     for (auto& poolRatio : poolRatios) {
       poolSizes.push_back(vk::DescriptorPoolSize{
-            poolRatio.type,
-            uint32_t(poolRatio.ratio * maxSets)
+        poolRatio.type,
+        uint32_t(poolRatio.ratio * maxSets)
         });
     }
 
@@ -228,7 +253,7 @@ namespace VoxelEngine
     depthStencil.maxDepthBounds = 1.0f;
   }
 
-  void ComputeEffect::Init()
+  void Pipeline::Init()
   {
     VulkanContext& context = VulkanContext::Get();
 
@@ -243,7 +268,7 @@ namespace VoxelEngine
     pipelineBuilder.SetDepthFormat(context.GetDepthImage().imageFormat);
   }
 
-  void ComputeEffect::Build()
+  void Pipeline::Build()
   {
     vk::Device& device = VulkanContext::Get().GetDevice();
 
@@ -258,7 +283,7 @@ namespace VoxelEngine
     pipelineBuilder.BuildPipeline(device, pipelineLayout, pipeline, descriptorSetLayout);
   }
 
-  void ComputeEffect::Destroy()
+  void Pipeline::Destroy()
   {
     VulkanContext& context = VulkanContext::Get();
 
@@ -269,6 +294,76 @@ namespace VoxelEngine
     descriptorAllocator.DestroyPools(context.GetDevice());
 
     context.GetDevice().destroyDescriptorSetLayout(descriptorSetLayout);
+  }
+
+  void Pipeline::AddShader(const std::shared_ptr<Shader>& shader)
+  {
+    std::shared_ptr<VulkanShader> vulkanShader = std::static_pointer_cast<VulkanShader>(shader);
+    pipelineBuilder.shaderStages = vulkanShader->GetShaderStageCreateInfo();
+  }
+
+  void Pipeline::AddVertexArray(const std::shared_ptr<VertexArray>& vertexArray)
+  {
+    std::shared_ptr<VulkanVertexArray> vulkanVertexArray = std::static_pointer_cast<VulkanVertexArray>(vertexArray);
+
+    vertexBuffer = std::static_pointer_cast<VulkanVertexBuffer>(vulkanVertexArray->GetVertexBuffer());
+    indexBuffer = std::static_pointer_cast<VulkanIndexBuffer>(vulkanVertexArray->GetIndexBuffer());
+
+    const BufferLayout& layout = vertexBuffer->GetLayout();
+
+    vk::VertexInputBindingDescription bindingDescription;
+    bindingDescription.binding = 0;
+    bindingDescription.stride = layout.GetStride();
+    bindingDescription.inputRate = vk::VertexInputRate::eVertex;
+
+    pipelineBuilder.vertexInputBindings.emplace_back(bindingDescription);
+
+    for (const auto& element : layout) {
+      vk::VertexInputAttributeDescription attributeDescription;
+      attributeDescription.binding = 0;
+      attributeDescription.location = vulkanVertexArray->GetVertexBufferIndex();
+      attributeDescription.format = ShaderDataTypeToVulkanBaseType(element.type_);
+      attributeDescription.offset = element.offset_;
+
+      pipelineBuilder.vertexInputStates.emplace_back(attributeDescription);
+
+      vulkanVertexArray->IncreaseVertexBufferIndex();
+    }
+  }
+
+  void Pipeline::AddUniformBuffer(const std::shared_ptr<UniformBuffer>& uniformBuffer)
+  {
+    std::shared_ptr<VulkanUniformBuffer> vulkanUniformBuffer = std::static_pointer_cast<VulkanUniformBuffer>(uniformBuffer);
+
+    descriptorAllocator.AddRatios(
+      { vk::DescriptorType::eUniformBuffer, 1 }
+    );
+
+    descriptorLayoutBuilder.AddBinding(binding, vk::DescriptorType::eUniformBuffer,
+                                       vk::ShaderStageFlagBits::eVertex);
+
+    descriptorWriter.WriteBuffer(binding, static_cast<vk::Buffer>(vulkanUniformBuffer->GetBuffer().buffer),
+                                 vulkanUniformBuffer->GetSize(), 0, vk::DescriptorType::eUniformBuffer);
+
+    ++binding;
+  }
+
+  void Pipeline::AddTexture(const std::shared_ptr<Texture>& texture)
+  {
+    std::shared_ptr<VulkanTexture> vulkanTexture = std::static_pointer_cast<VulkanTexture>(texture);
+
+    descriptorAllocator.AddRatios(
+      { vk::DescriptorType::eCombinedImageSampler, 1 }
+    );
+
+    descriptorLayoutBuilder.AddBinding(binding, vk::DescriptorType::eCombinedImageSampler,
+                                       vk::ShaderStageFlagBits::eFragment);
+
+    descriptorWriter.WriteImage(binding, vulkanTexture->GetImage().imageView, VulkanContext::Get().GetSamplerLinear(),
+                                vk::ImageLayout::eShaderReadOnlyOptimal,
+                                vk::DescriptorType::eCombinedImageSampler);
+
+    ++binding;
   }
 
   void DescriptorAllocatorGrowable::Init(const vk::Device device, const uint32_t maxSets)

@@ -3,12 +3,9 @@
 
 namespace VoxelEngine
 {
-	VulkanVertexBuffer::VulkanVertexBuffer(const std::string& name, const uint64_t size)
-    : m_Name(name)
+	VulkanVertexBuffer::VulkanVertexBuffer(const uint64_t size)
 	{
 		VulkanContext& context = VulkanContext::Get();
-
-		context.SetCurrentComputeEffect(name);
 
 		m_Vertices.reserve(size / sizeof(float));
 
@@ -42,12 +39,9 @@ namespace VoxelEngine
 			});
 	}
 
-	VulkanVertexBuffer::VulkanVertexBuffer(const std::string& name, const float* vertices, const uint64_t size)
-    : m_Name(name)
+	VulkanVertexBuffer::VulkanVertexBuffer(const float* vertices, const uint64_t size)
 	{
 		VulkanContext& context = VulkanContext::Get();
-
-		context.SetCurrentComputeEffect(name);
 
     m_Vertices.reserve(size / sizeof(float));
 
@@ -91,7 +85,6 @@ namespace VoxelEngine
 
 	void VulkanVertexBuffer::Bind() const
 	{
-		VulkanContext::Get().SetCurrentComputeEffect(m_Name);
 	}
 
 	void VulkanVertexBuffer::Unbind() const
@@ -102,12 +95,10 @@ namespace VoxelEngine
 	{
 	}
 
-	VulkanIndexBuffer::VulkanIndexBuffer(const std::string& name, const uint32_t* indices, const uint64_t count)
-		: m_Name(name), m_Count(count)
+	VulkanIndexBuffer::VulkanIndexBuffer(const uint32_t* indices, const uint32_t count)
+		: m_Count(count)
 	{
 		VulkanContext& context = VulkanContext::Get();
-
-		context.SetCurrentComputeEffect(name);
 
 		m_Indices.reserve(count);
 		if (indices != nullptr) {
@@ -144,12 +135,9 @@ namespace VoxelEngine
 			});
 	}
 
-	VulkanIndexBuffer::VulkanIndexBuffer(const std::string& name, const uint64_t size)
-    : m_Name(name)
+	VulkanIndexBuffer::VulkanIndexBuffer(const uint64_t size)
 	{
 		VulkanContext& context = VulkanContext::Get();
-
-		context.SetCurrentComputeEffect(name);
 
 		m_Indices.reserve(size / sizeof(uint64_t));
 
@@ -189,7 +177,6 @@ namespace VoxelEngine
 
 	void VulkanIndexBuffer::Bind() const
 	{
-		VulkanContext::Get().SetCurrentComputeEffect(m_Name);
 	}
 
 	void VulkanIndexBuffer::Unbind() const

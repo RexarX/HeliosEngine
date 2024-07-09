@@ -8,54 +8,53 @@
 
 namespace VoxelEngine
 {
-	std::shared_ptr<Texture> Texture::Create(const std::string& name, const TextureSpecification& specification)
+	std::shared_ptr<Texture> Texture::Create(const TextureSpecification& specification)
 	{
 		switch (Renderer::GetAPI())
 		{
 		case RendererAPI::API::None:    CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-		case RendererAPI::API::OpenGL:  return std::make_shared<OpenGLTexture>(name, specification);
-		case RendererAPI::API::Vulkan:  return std::make_shared<VulkanTexture>(name, specification);
+		case RendererAPI::API::OpenGL:  return std::make_shared<OpenGLTexture>(specification);
+		case RendererAPI::API::Vulkan:  return std::make_shared<VulkanTexture>(specification);
 		}
 
 		CORE_ASSERT(false, "Unknown RendererAPI!");
 		return nullptr;
 	}
 
-	std::shared_ptr<Texture> Texture::Create(const std::string& name, const std::string& path)
+	std::shared_ptr<Texture> Texture::Create(const std::string& path)
 	{
 		switch (Renderer::GetAPI())
 		{
 		case RendererAPI::API::None:    CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-		case RendererAPI::API::OpenGL:  return std::make_shared<OpenGLTexture>(name, path);
-		case RendererAPI::API::Vulkan:  return std::make_shared<VulkanTexture>(name, path);
+		case RendererAPI::API::OpenGL:  return std::make_shared<OpenGLTexture>(path);
+		case RendererAPI::API::Vulkan:  return std::make_shared<VulkanTexture>(path);
 		}
 
 		CORE_ASSERT(false, "Unknown RendererAPI!");
 		return nullptr;
 	}
 
-	std::shared_ptr<Texture> Texture::CreateArray(const std::string& name, const std::vector<std::string>& paths)
+	std::shared_ptr<Texture> Texture::CreateArray(const std::vector<std::string>& paths)
 	{
 		switch (Renderer::GetAPI())
 		{
 		case RendererAPI::API::None:    CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-		case RendererAPI::API::OpenGL:  return std::make_shared<OpenGLTexture>(name, paths);
-		case RendererAPI::API::Vulkan:  return std::make_shared<VulkanTexture>(name, paths);
+		case RendererAPI::API::OpenGL:  return std::make_shared<OpenGLTexture>(paths);
+		case RendererAPI::API::Vulkan:  return std::make_shared<VulkanTexture>(paths);
 		}
 		CORE_ASSERT(false, "Unknown RendererAPI!");
 		return nullptr;
 	}
 
-	std::shared_ptr<Texture> Texture::Create(const std::string& name,
-																					 const std::string& right, const std::string& left,
+	std::shared_ptr<Texture> Texture::Create(const std::string& right, const std::string& left,
 																					 const std::string& top, const std::string& bottom,
 																					 const std::string& back, const std::string& front)
 	{
 		switch (Renderer::GetAPI())
 		{
 		case RendererAPI::API::None:    CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-		case RendererAPI::API::OpenGL:  return std::make_shared<OpenGLTexture>(name, right, left, top, bottom, back, front);
-		case RendererAPI::API::Vulkan:  return std::make_shared<VulkanTexture>(name, right, left, top, bottom, back, front);
+		case RendererAPI::API::OpenGL:  return std::make_shared<OpenGLTexture>(right, left, top, bottom, back, front);
+		case RendererAPI::API::Vulkan:  return std::make_shared<VulkanTexture>(right, left, top, bottom, back, front);
 		}
 		CORE_ASSERT(false, "Unknown RendererAPI!");
 		return nullptr;

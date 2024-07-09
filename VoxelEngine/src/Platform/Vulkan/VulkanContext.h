@@ -42,19 +42,23 @@ namespace VoxelEngine
 
 		void ImmediateSubmit(std::function<void(vk::CommandBuffer cmd)>&& function);
 
-		void AddComputeEffect(const std::string& name);
-		void SetCurrentComputeEffect(const std::string& name) { m_CurrentComputeEffect = name; }
+		void AddPipeline(const uint32_t id);
 
 		static inline VulkanContext& Get() { return *m_Context; }
 		inline DeletionQueue& GetDeletionQueue() { return m_DeletionQueue; }
+
+		inline DrawQueue& GetDrawQueue() { return m_DrawQueue; }
 
 		inline FrameData& GetCurrentFrame() { return m_Frames[m_FrameNumber % FRAME_OVERLAP]; };
 		inline vk::Device& GetDevice() { return m_Device; }
 		inline VmaAllocator& GetAllocator() { return m_Allocator; }
 		inline AllocatedImage& GetDrawImage() { return m_DrawImage; }
 		inline AllocatedImage& GetDepthImage() { return m_DepthImage; }
-		inline ComputeEffect& GetComputeEffect(const std::string& name) { return m_ComputeEffects[name]; }
-		inline const std::string& GetCurrentComputeEffect() const { return m_CurrentComputeEffect.c_str(); }
+
+		inline Pipeline& GetPipeline(const uint32_t id) { return m_Pipelines[id]; }
+
+		inline const vk::Sampler GetSamplerNearest() { return m_SamplerNearest; }
+		inline const vk::Sampler GetSamplerLinear() { return m_SamplerLinear; }
 
 	private:
 		const std::vector<const char*> validationLayers = {
@@ -70,6 +74,8 @@ namespace VoxelEngine
 		};
 
 		DeletionQueue m_DeletionQueue;
+
+		DrawQueue m_DrawQueue;
 
 		FrameData m_Frames[FRAME_OVERLAP];
 		uint32_t m_FrameNumber = 0;
@@ -104,12 +110,14 @@ namespace VoxelEngine
 		AllocatedImage m_DrawImage;
 		AllocatedImage m_DepthImage;
 
-		std::map<std::string, ComputeEffect> m_ComputeEffects;
-		std::string m_CurrentComputeEffect;
+		std::unordered_map<uint32_t, Pipeline> m_Pipelines;
 
 		vk::CommandPool m_ImCommandPool;
 		vk::CommandBuffer m_ImCommandBuffer;
 		vk::Fence m_ImFence;
+
+		vk::Sampler m_SamplerNearest;
+		vk::Sampler m_SamplerLinear;
 
 	private:
 		void CreateInstance();
@@ -122,6 +130,8 @@ namespace VoxelEngine
 		void CreateImageViews();
 		void CreateCommands();
 		void CreateSyncObjects();
+
+		void CreateSamplers();
 		
 		void RecreateSwapChain();
 

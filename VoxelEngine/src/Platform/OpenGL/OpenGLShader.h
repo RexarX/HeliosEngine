@@ -12,14 +12,13 @@ namespace VoxelEngine
 	{
 	public:
 		OpenGLShader(const std::string& filepath);
-		OpenGLShader(const std::string& name, const std::string& vertex,
-																					const std::string& fragment);
+		OpenGLShader(const std::string& vertex, const std::string& fragment);
 		virtual ~OpenGLShader();
+
+		virtual inline const uint32_t GetID() const override { return m_ID; }
 
 		virtual void Bind() const override;
 		virtual void Unbind() const override;
-
-		virtual const std::string& GetName() const override { return m_Name; }
 
 		virtual void AddUniform(const void* data = nullptr, const uint32_t size = 128) override;
 
@@ -35,8 +34,6 @@ namespace VoxelEngine
 
 		virtual void UploadUniformData(const std::string& name, const void* data, const uint32_t size) override;
 
-		virtual void AddUniformBuffer(const std::shared_ptr<UniformBuffer>& uniformBuffer) override;
-
 	private:
 		std::string ReadFile(const std::string& filepath);
 		std::unordered_map<GLenum, std::pair<std::string, std::string>> PreProcess(const std::string& source);
@@ -46,8 +43,9 @@ namespace VoxelEngine
 									 const std::string& fileName, std::vector<uint32_t>& spvShader) const;
 
 	private:
+		uint32_t m_ID = 0;
+
 		uint32_t m_RendererID;
-		std::string m_Name;
 
 		bool m_Compiled = false;
 	};

@@ -94,6 +94,18 @@ namespace VoxelEngine
       frame.deletionQueue.flush();
     }
 
+    m_Device.destroyImageView(m_DepthImage.imageView);
+    vmaDestroyImage(m_Allocator, m_DepthImage.image, m_DepthImage.allocation);
+
+    m_Device.destroyImageView(m_DrawImage.imageView);
+    vmaDestroyImage(m_Allocator, m_DrawImage.image, m_DrawImage.allocation);
+
+    for (auto& imageView : m_SwapChainImageViews) {
+      m_Device.destroyImageView(imageView);
+    }
+
+    m_Device.destroySwapchainKHR(m_SwapChain);
+
     m_DeletionQueue.flush();
   }
 
@@ -410,15 +422,15 @@ namespace VoxelEngine
 
   void VulkanContext::Build()
   {
-    for (auto& [name, effect] : m_ComputeEffects) {
+    for (auto& [id, effect] : m_Pipelines) {
       effect.Build();
     }
 
     m_DeletionQueue.push_function([&]() {
-      for (auto& [name, effect] : m_ComputeEffects) {
+      for (auto& [id, effect] : m_Pipelines) {
         effect.Destroy();
       }
-      });
+    });
   }
 
   void VulkanContext::ImmediateSubmit(std::function<void(vk::CommandBuffer cmd)>&& function)
@@ -458,12 +470,10 @@ namespace VoxelEngine
     m_Device.waitForFences(1, &m_ImFence, true, 9999999999);
   }
 
-  void VulkanContext::AddComputeEffect(const std::string& name)
+  void VulkanContext::AddPipeline(const uint32_t id)
   {
-    ComputeEffect effect;
-
-    m_ComputeEffects.emplace(name, effect);
-    m_ComputeEffects[name].Init();
+    m_Pipelines.insert(std::make_pair(id, Pipeline()));
+    m_Pipelines[id].Init();
   }
 
   void VulkanContext::CreateInstance()
@@ -683,10 +693,6 @@ namespace VoxelEngine
 
     m_SwapChainImageFormat = surfaceFormat.format;
     m_SwapChainExtent = extent;
-
-    m_DeletionQueue.push_function([&]() {
-      m_Device.destroySwapchainKHR(m_SwapChain);
-      });
   }
 
   void VulkanContext::CreateImageViews()
@@ -761,18 +767,6 @@ namespace VoxelEngine
 
     result = m_Device.createImageView(&dview_info, nullptr, &m_DepthImage.imageView);
     CORE_ASSERT(result == vk::Result::eSuccess, "Failed to create image view!");
-
-    m_DeletionQueue.push_function([&]() {
-      for (auto& imageView : m_SwapChainImageViews) {
-        m_Device.destroyImageView(imageView);
-      }
-
-      m_Device.destroyImageView(m_DrawImage.imageView);
-      vmaDestroyImage(m_Allocator, m_DrawImage.image, m_DrawImage.allocation);
-
-      m_Device.destroyImageView(m_DepthImage.imageView);
-      vmaDestroyImage(m_Allocator, m_DepthImage.image, m_DepthImage.allocation);
-      });
   }
 
   void VulkanContext::CreateCommands()
@@ -840,6 +834,26 @@ namespace VoxelEngine
       });
   }
 
+  void VulkanContext::CreateSamplers()
+  {
+    vk::SamplerCreateInfo sampl;
+    sampl.sType = vk::StructureType::eSamplerCreateInfo;
+    sampl.magFilter = vk::Filter::eNearest;
+    sampl.minFilter = vk::Filter::eNearest;
+
+    m_SamplerNearest = m_Device.createSampler(sampl);
+
+    sampl.magFilter = vk::Filter::eLinear;
+    sampl.minFilter = vk::Filter::eLinear;
+
+    m_SamplerLinear = m_Device.createSampler(sampl);
+
+    m_DeletionQueue.push_function([&]() {
+      m_Device.destroySampler(m_SamplerNearest);
+      m_Device.destroySampler(m_SamplerLinear);
+      });
+  }
+
   void VulkanContext::CreateAllocator()
   {
     VmaAllocatorCreateInfo allocatorInfo = {};
@@ -860,23 +874,21 @@ namespace VoxelEngine
     m_Device.waitIdle();
     
     m_Device.destroyImageView(m_DepthImage.imageView);
-
     vmaDestroyImage(m_Allocator, m_DepthImage.image, m_DepthImage.allocation);
+
+    m_Device.destroyImageView(m_DrawImage.imageView);
+    vmaDestroyImage(m_Allocator, m_DrawImage.image, m_DrawImage.allocation);
 
     for (auto& imageView : m_SwapChainImageViews) {
       m_Device.destroyImageView(imageView);
     }
-
-    vmaDestroyImage(m_Allocator, m_DrawImage.image, m_DrawImage.allocation);
-
-    m_Device.destroyImageView(m_DrawImage.imageView);
     
     m_Device.destroySwapchainKHR(m_SwapChain);  
     
     CreateSwapChain();
     CreateImageViews();
 
-    for (auto& [name, effect] : m_ComputeEffects) {
+    for (auto& [id, effect] : m_Pipelines) {
       effect.descriptorWriter.UpdateSet(m_Device, effect.descriptorSet);
     }
   }
@@ -926,7 +938,7 @@ namespace VoxelEngine
     cmd.setViewport(0, 1, &viewport);
     cmd.setScissor(0, 1, &scissor);
 
-    for (auto& [name, effect] : m_ComputeEffects) {
+    for (auto& [id, effect] : m_Pipelines) {
       cmd.bindPipeline(vk::PipelineBindPoint::eGraphics, effect.pipeline);
 
       cmd.bindVertexBuffers(0, static_cast<vk::Buffer>(effect.vertexBuffer->GetBuffer().buffer), { 0 });

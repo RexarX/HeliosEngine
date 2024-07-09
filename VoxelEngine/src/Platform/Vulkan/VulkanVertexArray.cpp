@@ -5,40 +5,8 @@
 
 namespace VoxelEngine
 {
-	static vk::Format ShaderDataTypeToVulkanBaseType(const ShaderDataType type)
-	{
-		switch (type)
-		{
-		case VoxelEngine::ShaderDataType::Float:    return vk::Format::eR32Sfloat;
-		case VoxelEngine::ShaderDataType::Float2:   return vk::Format::eR32G32Sfloat;
-		case VoxelEngine::ShaderDataType::Float3:   return vk::Format::eR32G32B32Sfloat;
-		case VoxelEngine::ShaderDataType::Float4:   return vk::Format::eR32G32B32A32Sfloat;
-		case VoxelEngine::ShaderDataType::Mat3:     return vk::Format::eR32G32B32Sfloat;
-		case VoxelEngine::ShaderDataType::Mat4:     return vk::Format::eR32G32B32A32Sfloat;
-		case VoxelEngine::ShaderDataType::Int:      return vk::Format::eR32Sint;
-		case VoxelEngine::ShaderDataType::Int2:     return vk::Format::eR32G32Sint;
-		case VoxelEngine::ShaderDataType::Int3:     return vk::Format::eR32G32B32Sint;
-		case VoxelEngine::ShaderDataType::Int4:     return vk::Format::eR32G32B32A32Sint;
-		case VoxelEngine::ShaderDataType::Bool:     return vk::Format::eR8Sint;
-		}
-
-		CORE_ASSERT(false, "Unknown ShaderDataType!");
-		return vk::Format::eUndefined;
-	}
-
-	VulkanVertexArray::VulkanVertexArray(const std::string& name)
-		: m_Name(name)
-	{
-		VulkanContext::Get().SetCurrentComputeEffect(name);
-	}
-
-	VulkanVertexArray::~VulkanVertexArray()
-	{
-	}
-
 	void VulkanVertexArray::Bind() const
 	{
-		VulkanContext::Get().SetCurrentComputeEffect(m_Name);
 	}
 
 	void VulkanVertexArray::Unbind() const
@@ -48,10 +16,8 @@ namespace VoxelEngine
 	void VulkanVertexArray::AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer)
 	{
 		VulkanContext& context = VulkanContext::Get();
-		ComputeEffect& effect = context.GetComputeEffect(m_Name);
 
 		std::shared_ptr<VulkanVertexBuffer> vulkanVertexBuffer = std::static_pointer_cast<VulkanVertexBuffer>(vertexBuffer);
-		CORE_ASSERT(m_Name == vulkanVertexBuffer->GetName(), "Buffer name does not match vertex array name!");
 
 		void* data;
 		vmaMapMemory(context.GetAllocator(), vulkanVertexBuffer->GetStagingBuffer().allocation, &data);
@@ -59,26 +25,6 @@ namespace VoxelEngine
 		memcpy(data, vulkanVertexBuffer->GetVertices().data(), vulkanVertexBuffer->GetVertices().size() * sizeof(float));
 
 		CORE_ASSERT(vertexBuffer->GetLayout().GetElements().size(), "Vertex Buffer has no layout!");
-		const BufferLayout& layout = vertexBuffer->GetLayout();
-
-		vk::VertexInputBindingDescription bindingDescription;
-		bindingDescription.binding = 0;
-		bindingDescription.stride = layout.GetStride();
-		bindingDescription.inputRate = vk::VertexInputRate::eVertex;
-
-		effect.pipelineBuilder.vertexInputBindings.emplace_back(bindingDescription);
-
-		for (const auto& element : layout) {
-			vk::VertexInputAttributeDescription attributeDescription;
-			attributeDescription.binding = 0;
-			attributeDescription.location = m_VertexBufferIndex;
-			attributeDescription.format = ShaderDataTypeToVulkanBaseType(element.type_);
-			attributeDescription.offset = element.offset_;
-
-			effect.pipelineBuilder.vertexInputStates.emplace_back(attributeDescription);
-
-      ++m_VertexBufferIndex;
-		}
 
 		if (vulkanVertexBuffer->GetVertices().size() != 0) {
 			context.ImmediateSubmit([&](const vk::CommandBuffer cmd) {
@@ -93,11 +39,11 @@ namespace VoxelEngine
 				});
 		}
 
-		vmaUnmapMemory(context.GetAllocator(), vulkanVertexBuffer->GetStagingBuffer().allocation);
+		context.GetDeletionQueue().push_function([&]() {
+			vmaUnmapMemory(context.GetAllocator(), vulkanVertexBuffer->GetStagingBuffer().allocation);
+			});
 
-		effect.vertexBuffer = vulkanVertexBuffer;
-
-		m_VertexBuffer = vertexBuffer;
+		m_VertexBuffer = vulkanVertexBuffer;
 	}
 
 	void VulkanVertexArray::SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer)
@@ -106,8 +52,6 @@ namespace VoxelEngine
 
 		std::shared_ptr<VulkanIndexBuffer> vulkanIndexBuffer = std::static_pointer_cast<VulkanIndexBuffer>(indexBuffer);
 		std::shared_ptr<VulkanVertexBuffer> vulkanVertexBuffer = std::static_pointer_cast<VulkanVertexBuffer>(m_VertexBuffer);
-
-		CORE_ASSERT(m_Name == vulkanIndexBuffer->GetName(), "Buffer name does not match index buffer name!");
 
 		if (indexBuffer != nullptr) {
 			void* data;
@@ -130,11 +74,11 @@ namespace VoxelEngine
 				});
 		}
 
-		vmaUnmapMemory(context.GetAllocator(), vulkanVertexBuffer->GetStagingBuffer().allocation);
+		context.GetDeletionQueue().push_function([&]() {
+			vmaUnmapMemory(context.GetAllocator(), vulkanVertexBuffer->GetStagingBuffer().allocation);
+    });
 
-		context.GetComputeEffect(m_Name).indexBuffer = vulkanIndexBuffer;
-
-		m_IndexBuffer = indexBuffer;
+		m_IndexBuffer = vulkanIndexBuffer;
 	}
 
 	void VulkanVertexArray::AddVertexAttribDivisor(const uint32_t index, const uint32_t divisor)

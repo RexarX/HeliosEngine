@@ -14,20 +14,19 @@ namespace VoxelEngine
 	{
 	public:
 		CameraController(const glm::vec3& position, const glm::vec3& rotation,
-			const float aspectRatio, const float fov = 45.0f);
+										 const float aspectRatio, const float fov = 45.0f);
 
 		void OnUpdate(const Timestep ts);
 		void OnEvent(Event& event);
 
 		void OnResize(const float width, const float height);
 
-		Camera& GetCamera() { return m_Camera; }
-		const Camera& GetCamera() const { return m_Camera; }
+		inline Camera& GetCamera() { return m_Camera; }
+		inline const Camera& GetCamera() const { return m_Camera; }
 
-		Frustum& GetFrustum() { return m_Frustum; }
-		const Frustum& GetFrustum() const { return m_Frustum; }
+		inline const Frustum& GetFrustum() const { return m_Frustum; }
 
-		float GetFov() const { return m_Fov; }
+		inline const float GetFov() const { return m_Fov; }
 		void SetFov(const float fov) { m_Fov = fov; }
 
 		void SetFirstInput() { m_FirstInput = true; }

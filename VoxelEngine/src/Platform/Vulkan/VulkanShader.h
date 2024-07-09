@@ -2,7 +2,7 @@
 
 #include "Render/Shader.h"
 
-#include "VulkanContext.h"
+#include <vulkan/vulkan.hpp>
 
 #include <glm/glm.hpp>
 
@@ -12,16 +12,17 @@ namespace VoxelEngine
 	{
 	public:
 		VulkanShader(const std::string& filepath);
-		VulkanShader(const std::string& name, const std::string& vertex,
-																					const std::string& fragment);
+		VulkanShader(const std::string& vertex, const std::string& fragment);
 		virtual ~VulkanShader();
+
+		virtual inline const uint32_t GetID() const override { return m_ID; }
 
 		virtual void Bind() const override;
 		virtual void Unbind() const override;
 
-		virtual const std::string& GetName() const override { return m_Name; }
-
 		virtual void AddUniform(const void* data = nullptr, const uint32_t size = 128) override;
+
+		virtual void UploadUniformData(const std::string& name, const void* data, const uint32_t size) override;
 
 		virtual void UploadUniformInt(const std::string& name, const int value) override;
 
@@ -33,9 +34,7 @@ namespace VoxelEngine
 		virtual void UploadUniformMat3(const std::string& name, const glm::mat3& matrix) override;
 		virtual void UploadUniformMat4(const std::string& name, const glm::mat4& matrix) override;
 
-		virtual void UploadUniformData(const std::string& name, const void* data, const uint32_t size) override;
-
-		virtual void AddUniformBuffer(const std::shared_ptr<UniformBuffer>& uniformBuffer) override;
+		inline const std::vector<vk::PipelineShaderStageCreateInfo>& GetShaderStageCreateInfo() const { return m_ShaderStageCreateInfo; }
 
 	private:
 		std::string ReadFile(const std::string& filepath);
@@ -46,8 +45,10 @@ namespace VoxelEngine
 									 const std::string& fileName, std::vector<uint32_t>& spvShader) const;
 
 	private:
-		std::string m_Name;
+		uint32_t m_ID = 0;
 
 		bool m_Compiled = false;
+
+		std::vector<vk::PipelineShaderStageCreateInfo> m_ShaderStageCreateInfo;
 	};
 }

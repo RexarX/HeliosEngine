@@ -3,8 +3,8 @@
 
 namespace VoxelEngine
 {
-	VulkanUniformBuffer::VulkanUniformBuffer(const std::string& name, const uint32_t size, const uint32_t binding)
-    : m_Name(name), m_Size(size)
+	VulkanUniformBuffer::VulkanUniformBuffer(const uint32_t size, const uint32_t binding)
+    : m_Size(size)
 	{
     VulkanContext& context = VulkanContext::Get();
 
