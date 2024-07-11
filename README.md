@@ -45,7 +45,7 @@ An attempt to create a game engine
 
 2. Clone the repo
   ```sh
-  git clone https://github.com/RexarX/VoxelCraft.git
+  git clone https://github.com/RexarX/VoxelEngine.git
   cd VoxelEngine
   git submodule update --init --recursive
   ```
