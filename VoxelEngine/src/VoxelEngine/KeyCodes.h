@@ -1,6 +1,6 @@
 #pragma once
 
-namespace VoxelEngine
+namespace Engine
 {
 	using KeyCode = uint32_t;
 

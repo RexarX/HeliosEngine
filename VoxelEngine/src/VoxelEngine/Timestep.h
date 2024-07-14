@@ -1,6 +1,6 @@
 #pragma once
 
-namespace VoxelEngine
+namespace Engine
 {
 	class Timestep
 	{

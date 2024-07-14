@@ -102,7 +102,6 @@ endif()
 find_package(Vulkan REQUIRED)
 
 target_link_libraries(imgui PRIVATE
-    glad
     glfw
     Vulkan::Vulkan
 )

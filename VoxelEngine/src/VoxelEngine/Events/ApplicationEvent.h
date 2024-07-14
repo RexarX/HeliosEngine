@@ -2,7 +2,7 @@
 
 #include "Event.h"
 
-namespace VoxelEngine 
+namespace Engine 
 {
 	class VOXELENGINE_API WindowResizeEvent : public Event
 	{
@@ -12,10 +12,10 @@ namespace VoxelEngine
 		{
 		}
 
-		inline uint32_t GetWidth() const { return m_Width; }
-		inline uint32_t GetHeight() const { return m_Height; }
+		inline const uint32_t GetWidth() const { return m_Width; }
+		inline const uint32_t GetHeight() const { return m_Height; }
 
-		std::string ToString() const override
+		const std::string ToString() const override
 		{
 			std::stringstream ss;
 			ss << "WindowResizeEvent: " << m_Width << ", " << m_Height;

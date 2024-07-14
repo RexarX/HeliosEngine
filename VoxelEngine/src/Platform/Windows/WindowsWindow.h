@@ -2,7 +2,7 @@
 
 #include "Window.h"
 
-#include "Render/GraphicsContext.h"
+#include "Renderer/GraphicsContext.h"
 
 #include "Events/KeyEvent.h"
 
@@ -10,7 +10,7 @@ struct GLFWwindow;
 struct GLFWmonitor;
 struct GLFWvidmode;
 
-namespace VoxelEngine
+namespace Engine
 {
 	class WindowsWindow : public Window
 	{
@@ -18,8 +18,6 @@ namespace VoxelEngine
 		WindowsWindow(const WindowProps& props);
 		virtual ~WindowsWindow();
 
-		void SwapBuffers() override;
-		void ClearBuffer() override;
 		void PoolEvents() override;
 		void OnUpdate() override;
 
@@ -28,7 +26,7 @@ namespace VoxelEngine
 		void Begin() override;
 		void End() override;
 
-		inline void SetEventCallback(const EventCallbackFn& callback) override { m_Data.EventCallback = callback; }
+		void SetEventCallback(const EventCallbackFn& callback) override { m_Data.EventCallback = callback; }
 
 		void SetVSync(const bool enabled) override;
 		void SetMinimized(const bool enabled) override;
@@ -37,18 +35,18 @@ namespace VoxelEngine
 		void SetFramerate(const double framerate) override;
 		void SetImGuiState(const bool enabled) override;
 
-		inline uint32_t GetWidth() const override { return m_Data.Width; }
-		inline uint32_t GetHeight() const override { return m_Data.Height; }
+		inline const uint32_t GetWidth() const override { return m_Data.Width; }
+		inline const uint32_t GetHeight() const override { return m_Data.Height; }
 
-		double GetFramerate() const override;
+		inline const double GetFramerate() const override;
 
-		bool IsVSync() const override;
-		bool IsMinimized() const override;
-		bool IsFocused() const override;
-		bool IsFullscreen() const override;
-		bool IsImGuiEnabled() const override;
+		inline const bool IsVSync() const override;
+		inline const bool IsMinimized() const override;
+		inline const bool IsFocused() const override;
+		inline const bool IsFullscreen() const override;
+		inline const bool IsImGuiEnabled() const override;
 
-		inline virtual void* GetNativeWindow() const { return m_Window; }
+		virtual inline void* GetNativeWindow() const { return m_Window; }
 
 	private:
 		virtual void Init(const WindowProps& props);

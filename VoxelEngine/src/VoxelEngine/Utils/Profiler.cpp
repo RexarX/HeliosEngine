@@ -1,5 +1,5 @@
 #include "Profiler.h"
 
-namespace VoxelEngine
+namespace Engine
 {
 }

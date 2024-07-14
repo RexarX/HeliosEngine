@@ -2,7 +2,7 @@
 
 #include "VoxelEngine/Application.h"
 
-namespace VoxelEngine
+namespace Engine
 {
   ImGuiLayer::ImGuiLayer()
     : Layer("ImGuiLayer")

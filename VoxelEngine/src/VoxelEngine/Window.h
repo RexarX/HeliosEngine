@@ -4,9 +4,9 @@
 
 #include "Events/Event.h"
 
-#include "vepch.h"
+#include "pch.h"
 
-namespace VoxelEngine
+namespace Engine
 {
 	struct WindowProps
 	{
@@ -29,8 +29,6 @@ namespace VoxelEngine
 
 		virtual ~Window() = default;
 
-		virtual void SwapBuffers() = 0;
-		virtual void ClearBuffer() = 0;
 		virtual void PoolEvents() = 0;
 		virtual void OnUpdate() = 0;
 
@@ -47,16 +45,16 @@ namespace VoxelEngine
 		virtual void SetFramerate(const double framerate) = 0;
 		virtual void SetImGuiState(const bool enabled) = 0;
 
-		virtual uint32_t GetWidth() const = 0;
-		virtual uint32_t GetHeight() const = 0;
+		virtual inline const uint32_t GetWidth() const = 0;
+		virtual inline const uint32_t GetHeight() const = 0;
 
-		virtual double GetFramerate() const = 0;
+		virtual inline const double GetFramerate() const = 0;
 
-		virtual bool IsVSync() const = 0;
-		virtual bool IsMinimized() const = 0;
-		virtual bool IsFocused() const = 0;
-    virtual bool IsFullscreen() const = 0;
-		virtual bool IsImGuiEnabled() const = 0;
+		virtual inline const bool IsVSync() const = 0;
+		virtual inline const bool IsMinimized() const = 0;
+		virtual inline const bool IsFocused() const = 0;
+    virtual inline const bool IsFullscreen() const = 0;
+		virtual inline const bool IsImGuiEnabled() const = 0;
 
 		virtual void* GetNativeWindow() const = 0;
 

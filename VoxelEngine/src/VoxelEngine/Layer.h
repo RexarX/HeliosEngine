@@ -7,7 +7,7 @@
 
 struct ImGuiContext;
 
-namespace VoxelEngine
+namespace Engine
 {
 	class VOXELENGINE_API Layer
 	{

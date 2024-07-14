@@ -1,6 +1,6 @@
 #include "Timer.h"
 
-namespace VoxelEngine
+namespace Engine
 {
 	void Timer::Start()
 	{

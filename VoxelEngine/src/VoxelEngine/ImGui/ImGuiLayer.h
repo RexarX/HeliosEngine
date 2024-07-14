@@ -2,14 +2,14 @@
 
 #include "VoxelEngine/Layer.h"
 
-#include "VoxelEngine/Events/ApplicationEvent.h"
-#include "VoxelEngine/Events/KeyEvent.h"
-#include "VoxelEngine/Events/MouseEvent.h"
+#include "Events/ApplicationEvent.h"
+#include "Events/KeyEvent.h"
+#include "Events/MouseEvent.h"
 
 #include <imgui/imgui.h>
 #include <imgui/imgui_internal.h>
 
-namespace VoxelEngine
+namespace Engine
 {
 	class ImGuiLayer : public Layer
 	{

@@ -1,17 +1,12 @@
-#include "WindowsWindow.h"
-
-#include "vepch.h"
+#include "WindowsWindow.h"	
 
 #include "Events/ApplicationEvent.h"
 #include "Events/MouseEvent.h"
 #include "Events/KeyEvent.h"
 
-#include "Render/RendererAPI.h"
-
 #include <GLFW/glfw3.h>
-#include <Vulkan/VulkanContext.h>
 
-namespace VoxelEngine
+namespace Engine
 {
   static bool s_GLFWInitialized = false;
 
@@ -50,7 +45,7 @@ namespace VoxelEngine
       s_GLFWInitialized = true;
     }
 
-		if (RendererAPI::GetAPI() == RendererAPI::API::Vulkan) { glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API); }
+		glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 		
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(),
 																nullptr, nullptr);
@@ -59,12 +54,9 @@ namespace VoxelEngine
 		m_Mode = glfwGetVideoMode(m_Monitor);
 
 		m_Context = GraphicsContext::Create(m_Window);
-		m_Context->Init();
 		m_Context->SetViewport(props.Width, props.Height);
 
 		glfwSetWindowUserPointer(m_Window, reinterpret_cast<void*>(this));
-
-		//SetVSync(true);
 
 		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height) {
 			WindowsWindow& win = *(WindowsWindow*)glfwGetWindowUserPointer(window);
@@ -90,26 +82,26 @@ namespace VoxelEngine
 
 				switch (action)
 				{
-				case GLFW_PRESS:
-				{
-					KeyPressedEvent event(key, 0);
-					win.m_Data.EventCallback(event);
-					break;
-				}
+					case GLFW_PRESS:
+					{
+						KeyPressedEvent event(key, 0);
+						win.m_Data.EventCallback(event);
+						break;
+					}
 
-				case GLFW_RELEASE:
-				{
-					KeyReleasedEvent event(key);
-					win.m_Data.EventCallback(event);
-					break;
-				}
+					case GLFW_RELEASE:
+					{
+						KeyReleasedEvent event(key);
+						win.m_Data.EventCallback(event);
+						break;
+					}
 
-				case GLFW_REPEAT:
-				{
-					KeyPressedEvent event(key, 1);
-					win.m_Data.EventCallback(event);
-					break;
-				}
+					case GLFW_REPEAT:
+					{
+						KeyPressedEvent event(key, 1);
+						win.m_Data.EventCallback(event);
+						break;
+					}
 				}
 			});
 
@@ -120,26 +112,26 @@ namespace VoxelEngine
 
 				switch (action)
 				{
-				case GLFW_PRESS:
-				{
-					MouseButtonPressedEvent event(button);
-					win.m_Data.EventCallback(event);
-					break;
-				}
+					case GLFW_PRESS:
+					{
+						MouseButtonPressedEvent event(button);
+						win.m_Data.EventCallback(event);
+						break;
+					}
 
-				case GLFW_RELEASE:
-				{
-					MouseButtonReleasedEvent event(button);
-					win.m_Data.EventCallback(event);
-					break;
-				}
+					case GLFW_RELEASE:
+					{
+						MouseButtonReleasedEvent event(button);
+						win.m_Data.EventCallback(event);
+						break;
+					}
 
-				case GLFW_REPEAT:
-				{
-					MouseButtonPressedEvent event(button);
-					win.m_Data.EventCallback(event);
-					break;
-				}
+					case GLFW_REPEAT:
+					{
+						MouseButtonPressedEvent event(button);
+						win.m_Data.EventCallback(event);
+						break;
+					}
 				}
 			});
 
@@ -167,17 +159,6 @@ namespace VoxelEngine
 		m_Context->Shutdown();
 		glfwDestroyWindow(m_Window);
   }
-
-	void WindowsWindow::SwapBuffers()
-	{
-		m_Context->SwapBuffers();
-	}
-
-	void WindowsWindow::ClearBuffer()
-	{
-		m_Context->ClearBuffer();
-	}
-
 	void WindowsWindow::PoolEvents()
 	{
 		glfwPollEvents();
@@ -265,32 +246,32 @@ namespace VoxelEngine
     m_Data.ShowImGui = enabled;
 	}
 
-	double WindowsWindow::GetFramerate() const
+	inline const double WindowsWindow::GetFramerate() const
 	{
 		return m_Data.Framerate;
 	}
 
-  bool WindowsWindow::IsVSync() const
+	inline const bool WindowsWindow::IsVSync() const
   {
 		return m_Data.VSync;
   }
 
-	bool WindowsWindow::IsMinimized() const
+	inline const bool WindowsWindow::IsMinimized() const
 	{
 		return m_Data.Minimized;
 	}
 
-	bool WindowsWindow::IsFocused() const
+	inline const bool WindowsWindow::IsFocused() const
 	{
 		return m_Data.Focus;
 	}
 
-	bool WindowsWindow::IsFullscreen() const
+	inline const bool WindowsWindow::IsFullscreen() const
 	{
 		return m_Data.Fullscreen;
 	}
 
-	bool WindowsWindow::IsImGuiEnabled() const
+	inline const bool WindowsWindow::IsImGuiEnabled() const
 	{
 		return m_Data.ShowImGui;
 	}

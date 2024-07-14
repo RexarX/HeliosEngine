@@ -32,7 +32,6 @@ set(GLFW_INSTALL OFF CACHE BOOL "" FORCE)
 
 add_subdirectory(VoxelCraft)
 add_subdirectory(VoxelEngine)
-add_subdirectory(VoxelEngine/vendor/glad)
 add_subdirectory(VoxelEngine/vendor/glfw)
 add_subdirectory(VoxelEngine/vendor/glm)
 add_subdirectory(VoxelEngine/vendor/imgui)

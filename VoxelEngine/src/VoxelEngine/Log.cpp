@@ -1,10 +1,10 @@
 #include "Log.h"
 
-#include "vepch.h"
+#include "pch.h"
 
 #include <spdlog/sinks/stdout_color_sinks.h>
 
-namespace VoxelEngine
+namespace Engine
 {
 	std::shared_ptr<spdlog::logger> Log::s_CoreLogger;
 	std::shared_ptr<spdlog::logger> Log::s_ClientLogger;

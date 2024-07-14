@@ -5,38 +5,35 @@ file(GLOB_RECURSE src
     "src/*.h"
 )
 
-file(GLOB_RECURSE src__Platform__OpenGL
-    "src/Platform/OpenGL/*.cpp"
-    "src/Platform/OpenGL/*.h"
-)
-
-file(GLOB_RECURSE src__Platform__Vulkan
-    "src/Platform/Vulkan/*.cpp"
-    "src/Platform/Vulkan/*.h"
-)
-
-file(GLOB_RECURSE src__Platform__Windows
-    "src/Platform/Windows/*.cpp"
-    "src/Platform/Windows/*.h"
-)
-
 file(GLOB_RECURSE src__VoxelEngine
     "src/VoxelEngine/*.cpp"
     "src/VoxelEngine/*.h"
 )
 
 file(GLOB_RECURSE src__VoxelEngine__Events
-    "src/VoxelEngine/Events/*.h"
+    "src/VoxelEngine/Events*.cpp"
+    "src/VoxelEngine/Events*.h"
 )
 
-file(GLOB_RECURSE src__VoxelEngine__Render
-    "src/VoxelEngine/Render/*.cpp"
-    "src/VoxelEngine/Render/*.h"
+file(GLOB_RECURSE src__EntityComponentSystem
+    "src/VoxelEngine/EntityComponentSystem/*.h"
+
+    "src/VoxelEngine/EntityComponentSystem/Components/*.cpp"
+    "src/VoxelEngine/EntityComponentSystem/Components/*.h"
+
+    "src/VoxelEngine/EntityComponentSystem/Entity/*.cpp"
+    "src/VoxelEngine/EntityComponentSystem/Entity/*.h"
+
+    "src/VoxelEngine/EntityComponentSystem/Manager/*.cpp"
+    "src/VoxelEngine/EntityComponentSystem/Manager/*.h"
+
+    "src/VoxelEngine/EntityComponentSystem/Systems/*.cpp"
+    "src/VoxelEngine/EntityComponentSystem/Systems/*.h"
 )
 
-file(GLOB_RECURSE src__VoxelEngine__ImGui
-    "src/VoxelEngine/ImGui/*.cpp"
-    "src/VoxelEngine/ImGui/*.h"
+file(GLOB_RECURSE src__VoxelEngine__Scene
+    "src/VoxelEngine/Scene/*.cpp"
+    "src/VoxelEngine/Scene/*.h"
 )
 
 file(GLOB_RECURSE src__VoxelEngine__Utils
@@ -44,16 +41,31 @@ file(GLOB_RECURSE src__VoxelEngine__Utils
     "src/VoxelEngine/Utils/*.h"
 )
 
+file(GLOB_RECURSE src__VoxelEngine__Renderer__Vulkan
+    "src/VoxelEngine/Renderer/Vulkan/*.cpp"
+    "src/VoxelEngine/Renderer/Vulkan/*.h"
+)
+
+file(GLOB_RECURSE src__Platform__Windows
+    "src/Platform/Windows/*.cpp"
+    "src/Platform/Windows/*.h"
+)
+
+file(GLOB_RECURSE src__VoxelEngine__ImGui
+    "src/VoxelEngine/ImGui/*.cpp"
+    "src/VoxelEngine/ImGui/*.h"
+)
+
 set(ALL_FILES
     ${src}
-    ${src__Platform__OpenGL}
-    ${src__Platform__Vulkan}
-    ${src__Platform__Windows}
     ${src__VoxelEngine}
     ${src__VoxelEngine__Events}
-    ${src__VoxelEngine__Render}
-    ${src__VoxelEngine__ImGui}
+    ${src__EntityComponentSystem}
+	${src__VoxelEngine__Scene}
     ${src__VoxelEngine__Utils}
+    ${src__VoxelEngine__Renderer__Vulkan}
+    ${src__Platform__Windows}
+    ${src__VoxelEngine__ImGui}
 )
 
 add_library(${PROJECT_NAME} SHARED ${ALL_FILES})
@@ -61,7 +73,7 @@ add_library(${PROJECT_NAME} SHARED ${ALL_FILES})
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 20)
 
 target_precompile_headers(${PROJECT_NAME} PRIVATE
-    "$<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/src/vepch.h>"
+    "$<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/src/pch.h>"
 )
 
 foreach(OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES})
@@ -101,21 +113,20 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 
 target_include_directories(${PROJECT_NAME} PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/src;"
-    "${CMAKE_CURRENT_SOURCE_DIR}/src/Platform;"
     "$ENV{VULKAN_SDK}/Include;"
 )
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE
     $<$<CONFIG:Debug>:
-        "VE_DEBUG;"
+        "DEBUG_MODE;"
     >
     $<$<CONFIG:Release>:
-        "VE_RELEASE;"
+        "RELEASE_MODE;"
     >
     $<$<CONFIG:Dist>:
-        "VE_DIST;"
+        "DIST_MODE;"
     >
-    "VE_BUILD_DLL;"
+    "BUILD_DLL;"
     "GLFW_INCLUDE_NONE;"
     "UNICODE;"
     "_UNICODE;"
@@ -123,7 +134,7 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 )
 
 if(WIN32)
-	target_compile_definitions(${PROJECT_NAME} PRIVATE "VE_PLATFORM_WINDOWS;")
+	target_compile_definitions(${PROJECT_NAME} PRIVATE "PLATFORM_WINDOWS;")
 endif()
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
@@ -164,7 +175,7 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
         >
         /SUBSYSTEM:WINDOWS
     )
-elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR "GNU")
 	target_compile_options(${PROJECT_NAME} PRIVATE
 		$<$<CONFIG:Debug>:
 			-O0;
@@ -183,7 +194,6 @@ endif()
 find_package(Vulkan REQUIRED)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
-	glad
     glfw
     imgui
     stb_image
@@ -192,7 +202,6 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 )
 
 set(ADDITIONAL_LIBRARY_DEPENDENCIES
-    "opengl32"
     "$ENV{VULKAN_SDK}/Lib/shaderc_shared.lib"
 )
 

@@ -1,22 +1,22 @@
 #pragma once
 
-#ifdef VE_PLATFORM_WINDOWS
-	#ifdef VE_BUILD_DLL
+#ifdef PLATFORM_WINDOWS
+	#ifdef BUILD_DLL
 		#define VOXELENGINE_API __declspec(dllexport)
 	#else
 		#define VOXELENGINE_API __declspec(dllimport)
 	#endif
 #endif
 
-#ifdef VE_DEBUG
+#ifdef DEBUG_MODE
 	#define ENABLE_ASSERTS
 #endif
 
-#ifdef VE_RELEASE
-	#define VE_ENABLE_ASSERTS
+#ifdef RELEASE_MODE
+	#define ENABLE_ASSERTS
 #endif
 
-#ifdef VE_DIST
+#ifdef DIST_MODE
 	#define VOXELENGINE_DIR std::string("")
 	#define VOXELCRAFT_DIR std::string("")
 #else

@@ -43,15 +43,15 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE
     "$<$<CONFIG:Debug>:"
-        "VE_DEBUG"
+        "DEBUG_MODE"
     ">"
     "$<$<CONFIG:Release>:"
-        "VE_RELEASE"
+        "RELEASE_MODE"
     ">"
     "$<$<CONFIG:Dist>:"
-        "VE_DIST"
+        "DIST_MODE"
     ">"
-    "VE_PLATFORM_WINDOWS;"
+    "PLATFORM_WINDOWS;"
     "UNICODE;"
     "_UNICODE"
 )

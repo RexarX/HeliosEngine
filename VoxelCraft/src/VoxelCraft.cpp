@@ -3,11 +3,10 @@
 
 #include "GameLayer.h"
 
-class VoxelCraft : public VoxelEngine::Application
+class VoxelCraft : public Engine::Application
 {
 public:
-	VoxelCraft()
-		: VoxelEngine::Application()
+	VoxelCraft() : Engine::Application()
 	{
 		PushLayer(new GameLayer());
 	}
@@ -17,7 +16,7 @@ public:
 	}
 };
 
-VoxelEngine::Application* VoxelEngine::CreateApplication()
+Engine::Application* Engine::CreateApplication()
 {
 	return new VoxelCraft();
 }

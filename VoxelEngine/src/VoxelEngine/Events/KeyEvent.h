@@ -4,12 +4,12 @@
 
 #include "VoxelEngine/KeyCodes.h"
 
-namespace VoxelEngine 
+namespace Engine 
 {
 	class VOXELENGINE_API KeyEvent : public Event
 	{
 	public:
-		inline KeyCode GetKeyCode() const { return m_KeyCode; }
+		inline const KeyCode GetKeyCode() const { return m_KeyCode; }
 
 		EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput);
 
@@ -30,9 +30,9 @@ namespace VoxelEngine
 		{
 		}
 
-		inline KeyCode GetRepeatCount() const { return m_RepeatCount; }
+		inline const KeyCode GetRepeatCount() const { return m_RepeatCount; }
 
-		std::string ToString() const override
+		const std::string ToString() const override
 		{
 			std::stringstream ss;
 			ss << "KeyPressedEvent: " << m_KeyCode << " (" << m_RepeatCount << " repeats)";
@@ -53,7 +53,7 @@ namespace VoxelEngine
 		{
 		}
 
-		std::string ToString() const override
+		const std::string ToString() const override
 		{
 			std::stringstream ss;
 			ss << "KeyReleasedEvent: " << m_KeyCode;

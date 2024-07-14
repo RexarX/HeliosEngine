@@ -2,7 +2,7 @@
 
 #include <chrono>
 
-namespace VoxelEngine
+namespace Engine
 {
 	class Timer
 	{

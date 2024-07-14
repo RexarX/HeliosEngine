@@ -4,7 +4,7 @@
 
 #include "VoxelEngine/MouseButtonCodes.h"
 
-namespace VoxelEngine 
+namespace Engine 
 {
 	class VOXELENGINE_API MouseMovedEvent : public Event
 	{
@@ -14,10 +14,10 @@ namespace VoxelEngine
 		{
 		}
 
-		inline float GetX() const { return m_MouseX; }
-		inline float GetY() const { return m_MouseY; }
+		inline const float GetX() const { return m_MouseX; }
+		inline const float GetY() const { return m_MouseY; }
 
-		std::string ToString() const override
+		const std::string ToString() const override
 		{
 			std::stringstream ss;
 			ss << "MouseMovedEvent: " << m_MouseX << ", " << m_MouseY;
@@ -39,10 +39,10 @@ namespace VoxelEngine
 		{
 		}
 
-		inline float GetXOffset() const { return m_XOffset; }
-		inline float GetYOffset() const { return m_YOffset; }
+		inline const float GetXOffset() const { return m_XOffset; }
+		inline const float GetYOffset() const { return m_YOffset; }
 
-		std::string ToString() const override
+		const std::string ToString() const override
 		{
 			std::stringstream ss;
 			ss << "MouseScrolledEvent: " << GetXOffset() << ", " << GetYOffset();
@@ -59,7 +59,7 @@ namespace VoxelEngine
 	class VOXELENGINE_API MouseButtonEvent : public Event
 	{
 	public:
-		inline MouseCode GetMouseButton() const { return m_Button; }
+		inline const MouseCode GetMouseButton() const { return m_Button; }
 
 		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
 
@@ -80,7 +80,7 @@ namespace VoxelEngine
 		{
 		}
 
-		std::string ToString() const override
+		const std::string ToString() const override
 		{
 			std::stringstream ss;
 			ss << "MouseButtonPressedEvent: " << m_Button;
@@ -98,7 +98,7 @@ namespace VoxelEngine
 		{
 		}
 
-		std::string ToString() const override
+		const std::string ToString() const override
 		{
 			std::stringstream ss;
 			ss << "MouseButtonReleasedEvent: " << m_Button;

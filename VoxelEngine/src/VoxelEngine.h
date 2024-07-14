@@ -9,13 +9,8 @@
 #include "VoxelEngine/Log.h"
 #include "VoxelEngine/Timestep.h"
 
-#include "VoxelEngine/Events/ApplicationEvent.h"
-#include "VoxelEngine/Events/KeyEvent.h"
-#include "VoxelEngine/Events/MouseEvent.h"
+#include "VoxelEngine/Scene/SceneManager.h"
 
-#include "VoxelEngine/Render/Renderer.h"
-#include "VoxelEngine/Render/RenderStart.h"
-#include "VoxelEngine/Render/SceneManager.h"
 #include "VoxelEngine/ImGui/ImGuiLayer.h"
 
-#include "Utils/ModelLoader.h"
+#include "VoxelEngine/Events/Event.h"

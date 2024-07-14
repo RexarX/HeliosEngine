@@ -1,6 +1,6 @@
 #pragma once
 
-namespace VoxelEngine
+namespace Engine
 {
 	using MouseCode = uint32_t;
 

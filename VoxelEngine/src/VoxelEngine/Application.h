@@ -13,7 +13,7 @@
 
 #include "Utils/Timer.h"
 
-namespace VoxelEngine
+namespace Engine
 {
 	class VOXELENGINE_API Application
 	{
@@ -28,15 +28,16 @@ namespace VoxelEngine
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* layer);
 
-		inline Timestep GetDeltaTime() { return m_DeltaTime; }
+		static inline Application& Get() { return *m_Instance; }
 
-		inline static Application& Get() { return *m_Instance; }
+		inline const Timestep GetDeltaTime() const { return m_DeltaTime; }
 
+		inline const Window& GetWindow() const { return *m_Window; }
 		inline Window& GetWindow() { return *m_Window; }
 	
 	private:
-		bool OnWindowClose(WindowCloseEvent& e);
-		bool OnWindowResize(WindowResizeEvent& e);
+		const bool OnWindowClose(WindowCloseEvent& e);
+		const bool OnWindowResize(WindowResizeEvent& e);
 
 	private:
 		static Application* m_Instance;
@@ -49,8 +50,8 @@ namespace VoxelEngine
 
 		bool m_Running = true;
 
-		Timestep m_DeltaTime;
 		Timer m_Timer;
+		Timestep m_DeltaTime;
 		double m_FramerateLimit = 0.0;
 	};
 
