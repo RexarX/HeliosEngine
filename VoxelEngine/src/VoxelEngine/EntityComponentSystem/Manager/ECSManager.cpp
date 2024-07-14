@@ -10,7 +10,7 @@ namespace Engine
     m_ComponentCounter(other.m_ComponentCounter)
   {
     for (const auto& [type_index, system] : other.m_Systems) {
-      m_Systems[type_index] = system->Clone();
+      m_Systems[type_index] = std::move(system->Clone());
     }
   }
 
@@ -39,7 +39,7 @@ namespace Engine
 
     if (m_FreeEntities.empty()) {
       id = static_cast<EntityID>(m_Entities.size());
-      m_Entities.emplace_back(Entity{ id, ComponentMask() });
+      m_Entities.insert(m_Entities.end(), Entity{ id, ComponentMask() });
     }
     else {
       id = m_FreeEntities.back();
@@ -72,16 +72,30 @@ namespace Engine
     return result;
   }
 
+  const std::vector<EntityID>& ECSManager::GetEntitiesWithAnyOfComponents(const ComponentMask mask) const
+  {
+    static std::vector<EntityID> result;
+    result.clear();
+
+    for (const auto& entity : m_Entities) {
+      if ((entity.mask & mask).any()) {
+        result.push_back(entity.id);
+      }
+    }
+
+    return result;
+  }
+
   void ECSManager::OnUpdateSystems(const Timestep deltaTime)
   {
-    for (auto& [_, system] : m_Systems) {
+    for (auto& [type_index, system] : m_Systems) {
       system->OnUpdate(*this, deltaTime);
     }
   }
 
   void ECSManager::OnEventSystems(Event& event)
   {
-    for (auto& [_, system] : m_Systems) {
+    for (auto& [type_index, system] : m_Systems) {
       system->OnEvent(*this, event);
     }
   }
@@ -95,7 +109,7 @@ namespace Engine
     m_ComponentCounter = other.m_ComponentCounter;
 
     for (const auto& [type_index, system] : other.m_Systems) {
-      m_Systems[type_index] = system->Clone();
+      m_Systems[type_index] = std::move(system->Clone());
     }
 
     return *this;
@@ -119,7 +133,7 @@ namespace Engine
     other.m_ComponentCounter = 0;
 
     for (auto& [type_index, system] : other.m_Systems) {
-      m_Systems[std::type_index(typeid(*system))] = std::move(system);
+      m_Systems[type_index] = std::move(system);
     }
 
     return *this;

@@ -23,7 +23,6 @@ namespace Engine
     template<typename T>
     const ComponentID RegisterComponent()
     {
-      static_assert(std::is_standard_layout_v<T> && std::is_trivial_v<T>, "Component must be a POD type!");
       CORE_ASSERT(m_ComponentCounter < MAX_COMPONENTS, "Too many components!");
 
       ComponentID id = GetComponentID<T>();
@@ -37,9 +36,10 @@ namespace Engine
     template<typename T>
     void AddComponent(const EntityID entity, const T& component)
     {
+      CORE_ASSERT(entity < m_Entities.size(), "Entity does not exist!");
+
       ComponentID componentID = GetComponentID<T>();
 
-      CORE_ASSERT(entity < m_Entities.size(), "Entity does not exist!");
       CORE_ASSERT(componentID < m_ComponentCounter, "Component does not exist!");
 
       std::memcpy(&m_ComponentArrays[componentID][entity * m_ComponentSizes[componentID]], &component, sizeof(T));
@@ -50,9 +50,10 @@ namespace Engine
     template<typename T>
     void RemoveComponent(const EntityID entity)
     {
+      CORE_ASSERT(entity < m_Entities.size(), "Entity does not exist!");
+
       ComponentID componentID = GetComponentID<T>();
 
-      CORE_ASSERT(entity < m_Entities.size(), "Entity does not exist!");
       CORE_ASSERT(componentID < m_ComponentCounter, "Component does not exist!");
 
       m_Entities[entity].mask.reset(componentID);
@@ -61,9 +62,10 @@ namespace Engine
     template<typename T>
     T* GetComponent(const EntityID entity)
     {
+      CORE_ASSERT(entity < m_Entities.size(), "Entity does not exist!");
+
       ComponentID componentID = GetComponentID<T>();
 
-      CORE_ASSERT(entity < m_Entities.size(), "Entity does not exist!");
       CORE_ASSERT(componentID < m_ComponentCounter, "Component does not exist!");
 
       if (!m_Entities[entity].mask.test(componentID)) { return nullptr; }
@@ -89,6 +91,7 @@ namespace Engine
     }
 
     const std::vector<EntityID>& GetEntitiesWithComponents(const ComponentMask mask) const;
+    const std::vector<EntityID>& GetEntitiesWithAnyOfComponents(const ComponentMask mask) const;
 
     template<typename T>
     T* RegisterSystem()
@@ -123,7 +126,7 @@ namespace Engine
     std::vector<Entity> m_Entities;
     std::vector<EntityID> m_FreeEntities;
 
-    std::array<std::vector<uint32_t>, MAX_COMPONENTS> m_ComponentArrays;
+    std::array<std::vector<std::byte>, MAX_COMPONENTS> m_ComponentArrays;
     std::array<uint64_t, MAX_COMPONENTS> m_ComponentSizes;
 
     uint32_t m_ComponentCounter = 0;

@@ -7,6 +7,8 @@
 
 #include "Events/Event.h"
 
+#define BIND_EVENT_FN_WITH_REF(fn, reference) std::bind(&fn, this, std::ref(reference), std::placeholders::_1)
+
 namespace Engine
 {
   class VOXELENGINE_API System
@@ -19,6 +21,7 @@ namespace Engine
     virtual void OnUpdate(ECSManager& ecs, const Timestep deltaTime) = 0;
     virtual void OnEvent(ECSManager& ecs, Event& event) = 0;
 
-    virtual const ComponentMask GetRequiredComponents(ECSManager& ecs) const = 0;
+    template <typename... Args>
+    const ComponentMask GetRequiredComponents(ECSManager& ecs) const;
   };
 }

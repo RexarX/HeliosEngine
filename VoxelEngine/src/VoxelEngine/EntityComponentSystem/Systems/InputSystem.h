@@ -1,7 +1,8 @@
 #pragma once
 
 #include "EntityComponentSystem/Systems/System.h"
-#include "EntityComponentSystem/Components/InputComponent.h"
+#include "EntityComponentSystem/Components/MouseInputComponent.h"
+#include "EntityComponentSystem/Components/KeyboardInputComponent.h"
 #include "EntityComponentSystem/Components/CameraComponent.h"
 #include "EntityComponentSystem/Components/CameraControllerComponent.h"
 
@@ -22,7 +23,6 @@ namespace Engine
 
     void OnUpdate(ECSManager& ecs, const Timestep deltaTime) override;
     void OnEvent(ECSManager& ecs, Event& event) override;
-    const ComponentMask GetRequiredComponents(ECSManager& ecs) const override;
 
   private:
     const bool OnMouseMoved(ECSManager& ecs, MouseMovedEvent& event);
