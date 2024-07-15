@@ -7,10 +7,10 @@ namespace Engine
   ECSManager::ECSManager(const ECSManager& other)
     : m_Entities(other.m_Entities), m_FreeEntities(other.m_FreeEntities),
     m_ComponentArrays(other.m_ComponentArrays), m_ComponentSizes(other.m_ComponentSizes),
-    m_ComponentCounter(other.m_ComponentCounter)
+    m_ComponentCounter(other.m_ComponentCounter), m_SortedSystems(other.m_SortedSystems)
   {
-    for (const auto& [type_index, system] : other.m_Systems) {
-      m_Systems[type_index] = std::move(system->Clone());
+    for (const auto& [type_index, system] : other.m_SystemMap) {
+      m_SystemMap[type_index] = std::move(system->Clone());
     }
   }
 
@@ -28,9 +28,16 @@ namespace Engine
 
     other.m_ComponentCounter = 0;
 
-    for (auto& [type_index, system] : other.m_Systems) {
-      m_Systems[type_index] = std::move(system);
+    for (auto& [type_index, system] : other.m_SystemMap) {
+      m_SystemMap[type_index] = std::move(system);
     }
+
+    other.m_SystemMap.clear();
+
+    m_SortedSystems.insert(m_SortedSystems.begin(), std::make_move_iterator(other.m_SortedSystems.begin()),
+                                                    std::make_move_iterator(other.m_SortedSystems.end()));
+
+    other.m_SortedSystems.clear();
   }
 
   const EntityID ECSManager::CreateEntity()
@@ -88,15 +95,15 @@ namespace Engine
 
   void ECSManager::OnUpdateSystems(const Timestep deltaTime)
   {
-    for (auto& [type_index, system] : m_Systems) {
-      system->OnUpdate(*this, deltaTime);
+    for (auto& entry : m_SortedSystems) {
+      entry.system->OnUpdate(*this, deltaTime);
     }
   }
 
   void ECSManager::OnEventSystems(Event& event)
   {
-    for (auto& [type_index, system] : m_Systems) {
-      system->OnEvent(*this, event);
+    for (auto& entry : m_SortedSystems) {
+      entry.system->OnEvent(*this, event);
     }
   }
 
@@ -108,9 +115,11 @@ namespace Engine
     m_ComponentSizes = other.m_ComponentSizes;
     m_ComponentCounter = other.m_ComponentCounter;
 
-    for (const auto& [type_index, system] : other.m_Systems) {
-      m_Systems[type_index] = std::move(system->Clone());
+    for (const auto& [type_index, system] : other.m_SystemMap) {
+      m_SystemMap[type_index] = std::move(system->Clone());
     }
+
+    m_SortedSystems = other.m_SortedSystems;
 
     return *this;
   }
@@ -132,9 +141,16 @@ namespace Engine
 
     other.m_ComponentCounter = 0;
 
-    for (auto& [type_index, system] : other.m_Systems) {
-      m_Systems[type_index] = std::move(system);
+    for (auto& [type_index, system] : other.m_SystemMap) {
+      m_SystemMap[type_index] = std::move(system);
     }
+
+    other.m_SystemMap.clear();
+
+    m_SortedSystems.insert(m_SortedSystems.begin(), std::make_move_iterator(other.m_SortedSystems.begin()),
+                                                    std::make_move_iterator(other.m_SortedSystems.end()));
+
+    other.m_SortedSystems.clear();
 
     return *this;
   }

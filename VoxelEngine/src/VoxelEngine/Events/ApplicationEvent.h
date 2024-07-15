@@ -38,6 +38,24 @@ namespace Engine
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
 
+	class VOXELENGINE_API WindowFocusedEvent : public Event
+	{
+	public:
+		WindowFocusedEvent() = default;
+
+		EVENT_CLASS_TYPE(WindowFocus)
+		EVENT_CLASS_CATEGORY(EventCategoryApplication)
+	};
+
+	class VOXELENGINE_API WindowLostFocusEvent : public Event
+	{
+	public:
+		WindowLostFocusEvent() = default;
+
+		EVENT_CLASS_TYPE(WindowLostFocus)
+		EVENT_CLASS_CATEGORY(EventCategoryApplication)
+	};
+
 	class VOXELENGINE_API AppTickEvent : public Event
 	{
 	public:

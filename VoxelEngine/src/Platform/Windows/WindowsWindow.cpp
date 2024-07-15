@@ -204,9 +204,15 @@ namespace Engine
 	{
 		if (enabled) {
 			glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-		} else {
+			WindowFocusedEvent event;
+			m_Data.EventCallback(event);
+		} 
+		else {
 			glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+			WindowLostFocusEvent event;
+			m_Data.EventCallback(event);
 		}
+		
 		m_Data.Focus = enabled;
 	}
 
@@ -228,7 +234,8 @@ namespace Engine
 			m_Data.Width = width;
       m_Data.Height = height;
 			m_Data.Fullscreen = enabled;
-		} else {
+		} 
+		else {
 			glfwSetWindowMonitor(m_Window, nullptr, m_Data.posX, m_Data.posX, m_Data.Width, m_Data.Height, GLFW_DONT_CARE);
 		}
 

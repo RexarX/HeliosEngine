@@ -26,7 +26,11 @@ namespace Engine
 		void OnUpdate(const Timestep ts, ECSManager& manager, const EntityID entity);
 
 		void OnMouseMoved(const glm::vec2 mousePos, const glm::vec2 mouseOffset);
+		void OnMouseButtonPressed(const MouseCode button);
+		void OnMouseButtonReleased(const MouseCode button);
+
 		void OnKeyPressed(const KeyCode key);
+		void OnKeyReleased(const KeyCode key);
 
 		void SetCameraTranslationSpeed(const float speed) { m_CameraTranslationSpeed = speed; }
 		void SetCameraRotationSpeed(const float speed) { m_CameraRotationSpeed = speed; }

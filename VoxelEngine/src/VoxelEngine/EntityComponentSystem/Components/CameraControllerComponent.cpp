@@ -30,7 +30,19 @@ namespace Engine
     else if (m_Pitch < -89.0f) { m_Pitch = -89.0f; }
   }
 
+  void CameraControllerComponent::OnMouseButtonPressed(const MouseCode button)
+  {
+  }
+
+  void CameraControllerComponent::OnMouseButtonReleased(const MouseCode button)
+  {
+  }
+
   void CameraControllerComponent::OnKeyPressed(const KeyCode key)
+  {
+  }
+
+  void CameraControllerComponent::OnKeyReleased(const KeyCode key)
   {
   }
 

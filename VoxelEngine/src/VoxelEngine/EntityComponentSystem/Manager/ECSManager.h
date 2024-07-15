@@ -94,27 +94,47 @@ namespace Engine
     const std::vector<EntityID>& GetEntitiesWithAnyOfComponents(const ComponentMask mask) const;
 
     template<typename T>
-    T* RegisterSystem()
+    T* RegisterSystem(const uint32_t priority = 0)
     {
       static_assert(std::is_base_of<System, T>::value, "T must inherit from System!");
 
-      m_Systems[std::type_index(typeid(T))] = std::make_unique<T>();
+      auto system = std::make_shared<T>();
 
-      return m_Systems[std::type_index(typeid(T))].get();
+      auto it = std::lower_bound(m_SortedSystems.begin(), m_SortedSystems.end(), priority,
+                                 [](const auto& a, const uint32_t p) { return a.priority > p; });
+
+      m_SortedSystems.insert(it, SystemEntry{ priority, system });
+      m_SystemMap[std::type_index(typeid(T))] = system;
+
+      return system.get();
     }
 
     template<typename T>
     T* GetSystem()
     {
-      auto it = m_Systems.find(std::type_index(typeid(T)));
-
-      CORE_ASSERT(it != m_Systems.end(), "System not registered!");
-
-      return static_cast<T*>(it->second.get());
+      auto it = m_SystemMap.find(std::type_index(typeid(T)));
+      if (it != m_SystemMap.end()) {
+        return std::static_pointer_cast<T>(it->second).get();
+      }
+      CORE_ASSERT(false, "System not registered!");
+      return nullptr;
     }
 
     template<typename T>
-    void RemoveSystem() { m_Systems.erase(std::type_index(typeid(T))); }
+    void RemoveSystem()
+    {
+      auto typeIndex = std::type_index(typeid(T));
+      auto mapIt = m_SystemMap.find(typeIndex);
+      if (mapIt != m_SystemMap.end()) {
+        auto vectorIt = std::find_if(m_SortedSystems.begin(), m_SortedSystems.end(),
+          [&](const auto& entry) { return entry.system == mapIt->second; });
+
+        if (vectorIt != m_SortedSystems.end()) {
+          m_SortedSystems.erase(vectorIt);
+        }
+        m_SystemMap.erase(mapIt);
+      }
+    }
 
     void OnUpdateSystems(const Timestep deltaTime);
     void OnEventSystems(Event& event);
@@ -131,6 +151,13 @@ namespace Engine
 
     uint32_t m_ComponentCounter = 0;
 
-    std::unordered_map<std::type_index, std::unique_ptr<System>> m_Systems;
+    struct SystemEntry
+    {
+      uint32_t priority;
+      std::shared_ptr<System> system;
+    };
+
+    std::vector<SystemEntry> m_SortedSystems;
+    std::unordered_map<std::type_index, std::shared_ptr<System>> m_SystemMap;
   };
 }

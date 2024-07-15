@@ -16,7 +16,7 @@ namespace Engine
   public:
     virtual ~System() = default;
 
-    virtual std::unique_ptr<System> Clone() const = 0;
+    virtual std::shared_ptr<System> Clone() const = 0;
 
     virtual void OnUpdate(ECSManager& ecs, const Timestep deltaTime) = 0;
     virtual void OnEvent(ECSManager& ecs, Event& event) = 0;
