@@ -1,5 +1,7 @@
 #include "Application.h"
 
+#include "Renderer/GraphicsContext.h"
+
 namespace Engine
 {
 	Application* Application::m_Instance = nullptr;

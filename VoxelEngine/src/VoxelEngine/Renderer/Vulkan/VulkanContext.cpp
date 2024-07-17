@@ -25,7 +25,15 @@ namespace Engine
   {
   }
 
-  void VulkanContext::SetViewport(const uint32_t width, const uint32_t height)
+  void VulkanContext::BeginFrame()
+  {
+  }
+
+  void VulkanContext::EndFrame()
+  {
+  }
+
+  void VulkanContext::SetViewport(const uint32_t width, const uint32_t height, const uint32_t x, const uint32_t y)
   {
   }
 
@@ -37,11 +45,11 @@ namespace Engine
   {
   }
 
-  void VulkanContext::Begin()
+  void VulkanContext::BeginFrameImGui()
   {
   }
 
-  void VulkanContext::End()
+  void VulkanContext::EndFrameImGui()
   {
   }
 

@@ -1,27 +1,41 @@
 #pragma once
 
+#include "Renderer/RendererAPI.h"
+
+#include "pch.h"
+
 namespace Engine
 {
-	class GraphicsContext
-	{
-	public:
-		virtual ~GraphicsContext() = default;
+  class GraphicsContext
+  {
+  public:
+    GraphicsContext(void* window);
+    ~GraphicsContext();
 
-		virtual void Init() = 0;
-		virtual void Shutdown() = 0;
-		virtual void Update() = 0;
-		virtual void SetViewport(const uint32_t width, const uint32_t height) = 0;
+    void Init();
+    void Shutdown();
+    void Update();
+    void BeginFrame();
+    void EndFrame();
+    void SetViewport(const uint32_t width, const uint32_t height,
+                     const uint32_t x = 0, const uint32_t y = 0);
 
-		virtual void InitImGui() = 0;
-		virtual void ShutdownImGui() = 0;
-		virtual void Begin() = 0;
-		virtual void End() = 0;
+    void InitImGui();
+    void ShutdownImGui();
+    void BeginFrameImGui();
+    void EndFrameImGui();
 
-		virtual void SetVSync(const bool enabled) = 0;
-		virtual void SetResized(const bool resized) = 0;
+    void SetVSync(const bool enabled);
+    void SetResized(const bool resized);
+    void SetImGuiState(const bool enabled);
 
-		virtual void SetImGuiState(const bool enabled) = 0;
+    static std::shared_ptr<GraphicsContext>& Create(void* window);
+    static std::shared_ptr<GraphicsContext>& Get();
 
-		static std::unique_ptr<GraphicsContext> Create(void* window);
-	};
+  private:
+    static std::shared_ptr<GraphicsContext> m_Instance;
+
+    void* m_Window;
+    std::unique_ptr<RendererAPI> m_RendererAPI;
+  };
 }

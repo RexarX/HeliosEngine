@@ -23,8 +23,8 @@ namespace Engine
 
 		void InitImGui() override;
 		void ShutdownImGui() override;
-		void Begin() override;
-		void End() override;
+		void BeginFrameImGui() override;
+		void EndFrameImGui() override;
 
 		void SetEventCallback(const EventCallbackFn& callback) override { m_Data.EventCallback = callback; }
 
@@ -56,7 +56,8 @@ namespace Engine
 		GLFWwindow* m_Window;
 		GLFWmonitor* m_Monitor;
 		const GLFWvidmode* m_Mode;
-		std::unique_ptr<GraphicsContext> m_Context;
+
+		std::shared_ptr<GraphicsContext> m_Context;
 
 		struct WindowData
 		{

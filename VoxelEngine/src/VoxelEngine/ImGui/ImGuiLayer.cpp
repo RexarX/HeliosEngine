@@ -52,7 +52,7 @@ namespace Engine
 
 	void ImGuiLayer::Begin()
 	{
-		Application::Get().GetWindow().Begin();
+		Application::Get().GetWindow().BeginFrameImGui();
 
 		ImGui::NewFrame();
 		ImGui::DockSpaceOverViewport(ImGui::GetMainViewport(),
@@ -61,14 +61,15 @@ namespace Engine
 
 	void ImGuiLayer::End()
 	{
-		ImGuiIO& io = ImGui::GetIO();
-		ImGui::GetIO().DisplaySize = ImVec2((float)Application::Get().GetWindow().GetWidth(),
-																				(float)Application::Get().GetWindow().GetHeight());
+		Window& window = Application::Get().GetWindow();
 
-		Application::Get().GetWindow().End();
+		ImGuiIO& io = ImGui::GetIO();
+		ImGui::GetIO().DisplaySize = ImVec2((float)window.GetWidth(), (float)window.GetHeight());
+
+		window.EndFrameImGui();
 	}
 
-	uint32_t ImGuiLayer::GetActiveWidgetID() const noexcept
+	inline const uint32_t ImGuiLayer::GetActiveWidgetID() const noexcept
 	{
     return ImGui::GetActiveID();
 	}

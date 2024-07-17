@@ -25,7 +25,7 @@ namespace Engine
 		void End();
 		void BlockEvents(const bool block) noexcept { m_BlockEvents = block; }
 
-		uint32_t GetActiveWidgetID() const noexcept;
+		inline const uint32_t GetActiveWidgetID() const noexcept;
 
 	private:
 		bool m_BlockEvents = true;

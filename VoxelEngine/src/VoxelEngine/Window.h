@@ -34,8 +34,8 @@ namespace Engine
 
 		virtual void InitImGui() = 0;
 		virtual void ShutdownImGui() = 0;
-		virtual void Begin() = 0;
-		virtual void End() = 0;
+		virtual void BeginFrameImGui() = 0;
+		virtual void EndFrameImGui() = 0;
 
 		virtual void SetEventCallback(const EventCallbackFn& callback) = 0;
 		virtual void SetVSync(const bool enabled) = 0;

@@ -76,7 +76,7 @@ namespace Engine
 			});
 
 		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, const int key, const int scancode,
-											 const int action, const int mods)
+																												const int action, const int mods)
 			{
         WindowsWindow& win = *(WindowsWindow*)glfwGetWindowUserPointer(window);
 
@@ -106,7 +106,7 @@ namespace Engine
 			});
 
 		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, const int button,
-															 const int action, const int mods)
+																						const int action, const int mods)
 			{
 				WindowsWindow& win = *(WindowsWindow*)glfwGetWindowUserPointer(window);
 
@@ -136,7 +136,7 @@ namespace Engine
 			});
 
 		glfwSetScrollCallback(m_Window, [](GLFWwindow* window, const double xOffset,
-													const double yOffset)
+																			 const double yOffset)
 			{
 				WindowsWindow& win = *(WindowsWindow*)glfwGetWindowUserPointer(window);
 
@@ -145,7 +145,7 @@ namespace Engine
 			});
 
 		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, const double xPos,
-														 const double yPos)
+																					const double yPos)
 			{
 				WindowsWindow& win = *(WindowsWindow*)glfwGetWindowUserPointer(window);
 
@@ -179,14 +179,14 @@ namespace Engine
 		m_Context->ShutdownImGui();
 	}
 
-	void WindowsWindow::Begin()
+	void WindowsWindow::BeginFrameImGui()
 	{
-		m_Context->Begin();
+		m_Context->BeginFrameImGui();
 	}
 
-	void WindowsWindow::End()
+	void WindowsWindow::EndFrameImGui()
 	{
-    m_Context->End();
+    m_Context->EndFrameImGui();
 	}
 
   void WindowsWindow::SetVSync(const bool enabled)
