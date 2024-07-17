@@ -6,7 +6,7 @@ namespace Engine
 {
   void InputSystem::OnUpdate(ECSManager& ecs, const Timestep deltaTime)
   {
-    auto& entities = ecs.GetEntitiesWithAnyOfComponents(
+    /*auto& entities = ecs.GetEntitiesWithAnyOfComponents(
       GetRequiredComponents<MouseInputComponent, KeyboardInputComponent,
                             CameraControllerComponent>(ecs)
     );
@@ -26,117 +26,88 @@ namespace Engine
           camera->SetRotation(cameraController->GetRotation());
         }
       }
-    }
+    }*/
   }
 
   void InputSystem::OnEvent(ECSManager& ecs, Event& event)
   {
     EventDispatcher dispatcher(event);
-    dispatcher.Dispatch<WindowFocusedEvent>(BIND_EVENT_FN_WITH_REF(InputSystem::OnWindowFocused, ecs));
-    dispatcher.Dispatch<WindowLostFocusEvent>(BIND_EVENT_FN_WITH_REF(InputSystem::OnWindowLostFocus, ecs));
-    dispatcher.Dispatch<MouseMovedEvent>(BIND_EVENT_FN_WITH_REF(InputSystem::OnMouseMoved, ecs));
-    dispatcher.Dispatch<MouseButtonPressedEvent>(BIND_EVENT_FN_WITH_REF(InputSystem::OnMouseButtonPressed, ecs));
-    dispatcher.Dispatch<MouseButtonReleasedEvent>(BIND_EVENT_FN_WITH_REF(InputSystem::OnMouseButtonReleased, ecs));
-    dispatcher.Dispatch<KeyPressedEvent>(BIND_EVENT_FN_WITH_REF(InputSystem::OnKeyPressed, ecs));
-    dispatcher.Dispatch<KeyReleasedEvent>(BIND_EVENT_FN_WITH_REF(InputSystem::OnKeyReleased, ecs));
+    dispatcher.Dispatch<WindowFocusedEvent>(BIND_EVENT_FN(InputSystem::OnWindowFocused));
+    dispatcher.Dispatch<WindowLostFocusEvent>(BIND_EVENT_FN(InputSystem::OnWindowLostFocus));
+    dispatcher.Dispatch<MouseMovedEvent>(BIND_EVENT_FN(InputSystem::OnMouseMoved));
+    dispatcher.Dispatch<MouseButtonPressedEvent>(BIND_EVENT_FN(InputSystem::OnMouseButtonPressed));
+    dispatcher.Dispatch<MouseButtonReleasedEvent>(BIND_EVENT_FN(InputSystem::OnMouseButtonReleased));
+    dispatcher.Dispatch<KeyPressedEvent>(BIND_EVENT_FN(InputSystem::OnKeyPressed));
+    dispatcher.Dispatch<KeyReleasedEvent>(BIND_EVENT_FN(InputSystem::OnKeyReleased));
   }
 
-  const bool InputSystem::OnWindowFocused(ECSManager& ecs, WindowFocusedEvent& event)
+  const bool InputSystem::OnWindowFocused(WindowFocusedEvent& event)
   {
-    auto& entities = ecs.GetEntitiesWithComponents(GetRequiredComponents<MouseInputComponent>(ecs));
-
-    for (const auto entity : entities) {
-      auto* mouse = ecs.GetComponent<MouseInputComponent>(entity);
-      if (mouse != nullptr) { mouse->firstInput = true; }
-    }
+    m_MouseInput.firstInput = true;
     return true;
   }
 
-  const bool InputSystem::OnWindowLostFocus(ECSManager& ecs, WindowLostFocusEvent& event)
+  const bool InputSystem::OnWindowLostFocus(WindowLostFocusEvent& event)
   {
-    auto& entities = ecs.GetEntitiesWithComponents(GetRequiredComponents<MouseInputComponent>(ecs));
-
-    for (const auto entity : entities) {
-      auto* mouse = ecs.GetComponent<MouseInputComponent>(entity);
-      if (mouse != nullptr) { mouse->firstInput = true; }
-    }
+    m_MouseInput.firstInput = true;
     return true;
   }
 
-  const bool InputSystem::OnMouseMoved(ECSManager& ecs, MouseMovedEvent& event)
+  const bool InputSystem::OnMouseMoved(MouseMovedEvent& event)
   {
-    auto& entities = ecs.GetEntitiesWithComponents(GetRequiredComponents<MouseInputComponent>(ecs));
-
-    for (const auto entity : entities) {
-      auto* mouse = ecs.GetComponent<MouseInputComponent>(entity);
-      auto* camera = ecs.GetComponent<CameraComponent>(entity);
-      auto* cameraController = ecs.GetComponent<CameraControllerComponent>(entity);
-
-      if (mouse != nullptr) {
-        if (mouse->firstInput) {
-          mouse->mousePosition = { event.GetX(), event.GetY() };
-          mouse->firstInput = false;
-        }
-        else {
-          mouse->mouseDelta = { event.GetX() - mouse->mousePosition.x,
-                                event.GetY() - mouse->mousePosition.y };
-
-          mouse->mousePosition = { event.GetX(), event.GetY() };
-        }
-
-        if (cameraController != nullptr) {
-          cameraController->OnMouseMoved(mouse->mousePosition, mouse->mouseDelta);
-          if (camera != nullptr) {
-            camera->SetRotation(cameraController->GetRotation());
-          }
-        }
-      }
+    if (m_MouseInput.firstInput) {
+      m_MouseInput.firstInput = false;
+    } 
+    else {
+      m_MouseInput.mouseDelta = { event.GetX() - m_MouseInput.mousePosition.x,
+                                  event.GetY() - m_MouseInput.mousePosition.y };
     }
+    m_MouseInput.mousePosition = { event.GetX(), event.GetY() };
+
+    MouseMovedAction action(m_MouseInput.mousePosition.x, m_MouseInput.mousePosition.y,
+                            m_MouseInput.mouseDelta.x, m_MouseInput.mouseDelta.y);
+
+    m_EventCallback(action);
     return true;
   }
 
-  const bool InputSystem::OnMouseButtonPressed(ECSManager& ecs, MouseButtonPressedEvent& event)
+  const bool InputSystem::OnMouseButtonPressed(MouseButtonPressedEvent& event)
   {
-    auto& entities = ecs.GetEntitiesWithComponents(GetRequiredComponents<MouseInputComponent>(ecs));
+    m_MouseInput.mouseButtonStates[event.GetMouseButton()] = true;
 
-    for (const auto entity : entities) {
-      auto* mouse = ecs.GetComponent<MouseInputComponent>(entity);
-      if (mouse != nullptr) { mouse->mouseButtonStates[event.GetMouseButton()] = true; }
-    }
+    MouseButtonPressedAction action(event.GetMouseButton());
+
+    m_EventCallback(action);
     return true;
   }
 
-  const bool InputSystem::OnMouseButtonReleased(ECSManager& ecs, MouseButtonReleasedEvent& event)
+  const bool InputSystem::OnMouseButtonReleased(MouseButtonReleasedEvent& event)
   {
-    auto& entities = ecs.GetEntitiesWithComponents(GetRequiredComponents< MouseInputComponent>(ecs));
+    m_MouseInput.mouseButtonStates[event.GetMouseButton()] = false;
 
-    for (const auto entity : entities) {
-      auto* mouse = ecs.GetComponent<MouseInputComponent>(entity);
-      if (mouse != nullptr) { mouse->mouseButtonStates[event.GetMouseButton()] = false; }
-    }
+    MouseButtonReleasedAction action(event.GetMouseButton());
+
+    m_EventCallback(action);
     return true;
   }
 
-  const bool InputSystem::OnKeyPressed(ECSManager& ecs, KeyPressedEvent& event)
+  const bool InputSystem::OnKeyPressed(KeyPressedEvent& event)
   {
-    auto& entities = ecs.GetEntitiesWithComponents(GetRequiredComponents<KeyboardInputComponent>(ecs));
-    for (const auto entity : entities) {
-      auto* keyboard = ecs.GetComponent<KeyboardInputComponent>(entity);
-      auto* cameraController = ecs.GetComponent<CameraControllerComponent>(entity);
-      if (keyboard != nullptr) { keyboard->keyStates[event.GetKeyCode()] = true; }
-      if (cameraController != nullptr) { cameraController->OnKeyPressed(event.GetKeyCode()); }
-    }
+    m_KeyboardInput.keyStates[event.GetKeyCode()] = true;
+
+    KeyPressedAction action(event.GetKeyCode(), event.GetRepeatCount());
+
+    m_EventCallback(action);
     return true;
   }
 
-  const bool InputSystem::OnKeyReleased(ECSManager& ecs, KeyReleasedEvent& event)
+  const bool InputSystem::OnKeyReleased(KeyReleasedEvent& event)
   {
-    auto& entities = ecs.GetEntitiesWithComponents(GetRequiredComponents<KeyboardInputComponent>(ecs));
+    m_KeyboardInput.keyStates[event.GetKeyCode()] = false;
 
-    for (const auto entity : entities) {
-      auto* keyboard = ecs.GetComponent<KeyboardInputComponent>(entity);
-      if (keyboard != nullptr) { keyboard->keyStates[event.GetKeyCode()] = false; }
-    }
+    KeyReleasedAction action(event.GetKeyCode());
+
+    m_EventCallback(action);
     return true;
   }
 }

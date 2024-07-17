@@ -3,7 +3,6 @@
 
 #include "EntityComponentSystem/Manager/ECSManager.h"
 
-#include "Input.h"
 #include "KeyCodes.h"
 
 #include <glm/gtc/matrix_transform.hpp>
@@ -21,28 +20,28 @@ namespace Engine
     else { UpdateFollowEntity(ts, manager, entity); }
   }
 
-  void CameraControllerComponent::OnMouseMoved(const glm::vec2 mousePos, const glm::vec2 mouseOffset)
+  void CameraControllerComponent::OnMouseMoved(MouseMovedAction& action)
   {
-    m_Yaw += mouseOffset.x * m_CameraRotationSpeed;
-    m_Pitch += mouseOffset.y * m_CameraRotationSpeed;
+    m_Yaw += action.GetDeltaX() * m_CameraRotationSpeed;
+    m_Pitch += action.GetDeltaY() * m_CameraRotationSpeed;
 
     if (m_Pitch > 89.0f) { m_Pitch = 89.0f; }
     else if (m_Pitch < -89.0f) { m_Pitch = -89.0f; }
   }
 
-  void CameraControllerComponent::OnMouseButtonPressed(const MouseCode button)
+  void CameraControllerComponent::OnMouseButtonPressed(MouseButtonPressedAction& action)
   {
   }
 
-  void CameraControllerComponent::OnMouseButtonReleased(const MouseCode button)
+  void CameraControllerComponent::OnMouseButtonReleased(MouseButtonReleasedAction& action)
   {
   }
 
-  void CameraControllerComponent::OnKeyPressed(const KeyCode key)
+  void CameraControllerComponent::OnKeyPressed(KeyPressedAction& action)
   {
   }
 
-  void CameraControllerComponent::OnKeyReleased(const KeyCode key)
+  void CameraControllerComponent::OnKeyReleased(KeyReleasedAction& action)
   {
   }
 

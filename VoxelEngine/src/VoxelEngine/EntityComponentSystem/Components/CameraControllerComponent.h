@@ -5,8 +5,7 @@
 
 #include "VoxelEngine/Timestep.h"
 
-#include "Events/MouseEvent.h"
-#include "Events/KeyEvent.h"
+#include "Events/InputEvent.h"
 
 #include <glm/glm.hpp>
 
@@ -25,12 +24,12 @@ namespace Engine
 
 		void OnUpdate(const Timestep ts, ECSManager& manager, const EntityID entity);
 
-		void OnMouseMoved(const glm::vec2 mousePos, const glm::vec2 mouseOffset);
-		void OnMouseButtonPressed(const MouseCode button);
-		void OnMouseButtonReleased(const MouseCode button);
+		void OnMouseMoved(MouseMovedAction& action);
+		void OnMouseButtonPressed(MouseButtonPressedAction& action);
+		void OnMouseButtonReleased(MouseButtonReleasedAction& action);
 
-		void OnKeyPressed(const KeyCode key);
-		void OnKeyReleased(const KeyCode key);
+		void OnKeyPressed(KeyPressedAction& action);
+		void OnKeyReleased(KeyReleasedAction& action);
 
 		void SetCameraTranslationSpeed(const float speed) { m_CameraTranslationSpeed = speed; }
 		void SetCameraRotationSpeed(const float speed) { m_CameraRotationSpeed = speed; }

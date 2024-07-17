@@ -25,12 +25,12 @@ namespace Engine
 	class VOXELENGINE_API KeyPressedEvent : public KeyEvent
 	{
 	public:
-		KeyPressedEvent(const KeyCode keycode, const int repeatCount)
+		KeyPressedEvent(const KeyCode keycode, const uint32_t repeatCount)
 			: KeyEvent(keycode), m_RepeatCount(repeatCount) 
 		{
 		}
 
-		inline const KeyCode GetRepeatCount() const { return m_RepeatCount; }
+		inline const uint32_t GetRepeatCount() const { return m_RepeatCount; }
 
 		const std::string ToString() const override
 		{
@@ -42,7 +42,7 @@ namespace Engine
 		EVENT_CLASS_TYPE(KeyPressed)
 
 	private:
-		int m_RepeatCount;
+		uint32_t m_RepeatCount;
 	};
 
 	class VOXELENGINE_API KeyReleasedEvent : public KeyEvent
