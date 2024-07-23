@@ -6,6 +6,10 @@
 #include <algorithm>
 #include <functional>
 #include <thread>
+#include <mutex>
+#include <shared_mutex>
+#include <condition_variable>
+#include <future>
 #include <filesystem>
 #include <optional>
 #include <typeindex>
@@ -15,6 +19,7 @@
 #include <array>
 #include <vector>
 #include <deque>
+#include <queue>
 #include <set>
 #include <bitset>
 #include <map>

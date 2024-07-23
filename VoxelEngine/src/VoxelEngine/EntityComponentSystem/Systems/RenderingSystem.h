@@ -11,7 +11,7 @@ namespace Engine
   public:
     virtual ~RenderingSystem() = default;
 
-    std::shared_ptr<System> Clone() const override
+    inline std::shared_ptr<System> Clone() const override
     {
       return std::make_shared<RenderingSystem>(*this);
     }

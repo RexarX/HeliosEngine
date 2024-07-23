@@ -42,19 +42,22 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 )
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE
-    "$<$<CONFIG:Debug>:"
-        "DEBUG_MODE"
-    ">"
-    "$<$<CONFIG:Release>:"
-        "RELEASE_MODE"
-    ">"
-    "$<$<CONFIG:Dist>:"
-        "DIST_MODE"
-    ">"
-    "PLATFORM_WINDOWS;"
+    $<$<CONFIG:Debug>:
+        "DEBUG_MODE;"
+    >
+    $<$<CONFIG:Release>:
+        "RELEASE_MODE;"
+    >
+    $<$<CONFIG:Dist>:
+        "DIST_MODE;"
+    >
     "UNICODE;"
-    "_UNICODE"
+    "_UNICODE;"
 )
+
+if(WIN32)
+	target_compile_definitions(${PROJECT_NAME} PRIVATE "PLATFORM_WINDOWS;")
+endif()
 
 if(MSVC)
     target_compile_options(${PROJECT_NAME} PRIVATE

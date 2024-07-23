@@ -11,6 +11,15 @@
 
 #include "VoxelEngine/Scene/SceneManager.h"
 
+#include "VoxelEngine/EntityComponentSystem/Systems/EventSystem.h"
+#include "VoxelEngine/EntityComponentSystem/Systems/InputSystem.h"
+#include "VoxelEngine/EntityComponentSystem/Systems/RenderingSystem.h"
+
+#include "VoxelEngine/EntityComponentSystem/Components/Camera.h"
+#include "VoxelEngine/EntityComponentSystem/Components/CameraController.h"
+#include "VoxelEngine/EntityComponentSystem/Components/Renderable.h"
+#include "VoxelEngine/EntityComponentSystem/Components/Transform.h"
+
 #include "VoxelEngine/ImGui/ImGuiLayer.h"
 
 #include "VoxelEngine/Events/Event.h"

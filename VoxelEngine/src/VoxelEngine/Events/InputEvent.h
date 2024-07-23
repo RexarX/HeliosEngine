@@ -10,6 +10,7 @@ namespace Engine
   class VOXELENGINE_API MouseMovedAction : public Event
   {
   public:
+    MouseMovedAction() = default;
     MouseMovedAction(const float mouseX, const float mouseY, const float deltaX, const float deltaY)
       : m_MouseX(mouseX), m_MouseY(mouseY), m_DeltaX(deltaX), m_DeltaY(deltaY) {
     }
@@ -29,6 +30,7 @@ namespace Engine
 
     EVENT_CLASS_TYPE(MouseMoved)
     EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
+
   private:
     float m_MouseX, m_MouseY;
     float m_DeltaX, m_DeltaY;
@@ -37,6 +39,7 @@ namespace Engine
   class VOXELENGINE_API MouseButtonPressedAction : public Event
   {
   public:
+    MouseButtonPressedAction() = default;
     MouseButtonPressedAction(const MouseCode button)
       : m_Button(button) {
     }
@@ -52,6 +55,7 @@ namespace Engine
 
     EVENT_CLASS_TYPE(MouseButtonPressed)
     EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
+
   private:
     MouseCode m_Button;
   };
@@ -59,6 +63,7 @@ namespace Engine
   class VOXELENGINE_API MouseButtonReleasedAction : public Event
   {
   public:
+    MouseButtonReleasedAction() = default;
     MouseButtonReleasedAction(const MouseCode button)
       : m_Button(button) {
     }
@@ -74,6 +79,7 @@ namespace Engine
 
     EVENT_CLASS_TYPE(MouseButtonReleased)
     EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
+
   private:
     MouseCode m_Button;
   };
@@ -81,6 +87,7 @@ namespace Engine
   class VOXELENGINE_API KeyPressedAction : public Event
   {
   public:
+    KeyPressedAction() = default;
     KeyPressedAction(const KeyCode keycode, const uint32_t repeatCount)
       : m_KeyCode(keycode), m_RepeatCount(repeatCount) {
     }
@@ -107,6 +114,7 @@ namespace Engine
   class VOXELENGINE_API KeyReleasedAction : public Event
   {
   public:
+    KeyReleasedAction() = default;
     KeyReleasedAction(const KeyCode keycode)
       : m_KeyCode(keycode) {
     }

@@ -1,11 +1,11 @@
-#include "EntityComponentSystem/Components/CameraComponent.h"
+#include "EntityComponentSystem/Components/Camera.h"
 
 #include <glm/gtc/matrix_transform.hpp>
 
 namespace Engine
 {
-	CameraComponent::CameraComponent(const glm::vec3& cameraPos, const glm::vec3& cameraRotation,
-																	 const float aspectRatio, const float fov)
+	Camera::Camera(const glm::vec3& cameraPos, const glm::vec3& cameraRotation,
+								 const float aspectRatio, const float fov)
 		: m_Position(cameraPos), m_Rotation(cameraRotation), m_AspectRatio(aspectRatio), m_Fov(fov),
 		m_ProjectionMatrix(glm::perspective(fov, aspectRatio, 1000.0f, 0.1f))
 	{
@@ -18,25 +18,25 @@ namespace Engine
 		m_ViewMatrix = glm::lookAt(m_Position, m_Position - m_Direction, m_CameraUp);
 	}
 
-	void CameraComponent::OnEvent(Event& event)
+	void Camera::OnEvent(Event& event)
 	{
 		EventDispatcher dispatcher(event);
-		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(CameraComponent::OnWindowResize));
+		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(Camera::OnWindowResize));
 	}
 
-	void CameraComponent::SetProjection(const float aspectRatio, const float fov)
+	void Camera::SetProjection(const float aspectRatio, const float fov)
 	{
 		m_ProjectionMatrix = glm::perspective(fov, aspectRatio, 1000.0f, 0.1f);
 	}
 
-	void CameraComponent::SetPosition(const glm::vec3& position)
+	void Camera::SetPosition(const glm::vec3& position)
 	{
 		m_Position = position;
 
 		m_ViewMatrix = glm::lookAt(m_Position, m_Position - m_Direction, m_CameraUp);
 	}
 
-	void CameraComponent::SetRotation(const glm::vec3& rotation)
+	void Camera::SetRotation(const glm::vec3& rotation)
 	{
 		m_Rotation = rotation;
 
@@ -49,7 +49,7 @@ namespace Engine
 		m_ViewMatrix = glm::lookAt(m_Position, m_Position - m_Direction, m_CameraUp);
 	}
 
-	void CameraComponent::OnResize(const float width, const float height)
+	void Camera::OnResize(const float width, const float height)
 	{
 		if (width != 0.0f && height != 0.0f) {
 			m_AspectRatio = width / height;
@@ -57,14 +57,14 @@ namespace Engine
 		}
 	}
 
-	void CameraComponent::NormalizeDirection() 
+	void Camera::NormalizeDirection()
 	{
 		m_Direction.x = cos(glm::radians(m_Rotation.y)) * cos(glm::radians(m_Rotation.x));
 		m_Direction.y = sin(glm::radians(m_Rotation.x));
 		m_Direction.z = sin(glm::radians(m_Rotation.y)) * cos(glm::radians(m_Rotation.x));
 	}
 
-	const bool CameraComponent::OnWindowResize(WindowResizeEvent& event)
+	const bool Camera::OnWindowResize(WindowResizeEvent& event)
 	{
 		OnResize((float)event.GetWidth(), (float)event.GetHeight());
 		return true;

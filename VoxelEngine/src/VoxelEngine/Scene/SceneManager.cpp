@@ -12,10 +12,10 @@ namespace Engine
       return;
     }
 
-    m_Scenes.insert(std::make_pair(name, Scene(name)));
+    m_Scenes.emplace(name, Scene(name));
   }
 
-  void SceneManager::AddScene(const Scene& scene, const std::string& name)
+  void SceneManager::EmplaceScene(Scene&& scene, const std::string& name)
   {
     if (name.empty()) {
       if (m_Scenes.contains(scene.GetName())) {
@@ -23,7 +23,7 @@ namespace Engine
         return;
       }
 
-      m_Scenes.insert(std::make_pair(scene.GetName(), scene));
+      m_Scenes[scene.GetName()] = std::move(scene);
     } 
     else {
       if (m_Scenes.contains(name)) {
@@ -31,7 +31,7 @@ namespace Engine
         return;
       }
 
-      m_Scenes.insert(std::make_pair(name, scene));
+      m_Scenes[name] = std::move(scene);
     }
   }
 
@@ -55,7 +55,7 @@ namespace Engine
     m_ActiveScene = name;
   }
 
-  const Scene& SceneManager::GetScene(const std::string& name)
+  Scene& SceneManager::GetScene(const std::string& name)
   {
     if (!m_Scenes.contains(name)) {
       CORE_ASSERT(false, "Scene not found!");

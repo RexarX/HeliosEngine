@@ -36,7 +36,7 @@ namespace Engine
     static void SetAPI(const API api) { m_API = api; }
     static inline const API GetAPI() { return m_API; }
 
-    static std::unique_ptr<RendererAPI> Create();
+    static std::unique_ptr<RendererAPI> Create(void* window);
 
   private:
     static API m_API;

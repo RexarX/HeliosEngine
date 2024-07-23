@@ -1,19 +1,17 @@
 #pragma once
 
 #include "EntityComponentSystem/Systems/System.h"
-#include "EntityComponentSystem/Components/CameraComponent.h"
-#include "EntityComponentSystem/Components/CameraControllerComponent.h"
+#include "EntityComponentSystem/Systems/EventSystem.h"
 
-#include "Events/Event.h"
 #include "Events/ApplicationEvent.h"
 #include "Events/MouseEvent.h"
 #include "Events/KeyEvent.h"
 #include "Events/InputEvent.h"
 
+#include <glm/glm.hpp>
+
 namespace Engine
 {
-  using EventCallbackFn = std::function<void(Event&)>;
-
   static constexpr uint32_t MAX_MOUSE_BUTTONS = 8;
 
   struct VOXELENGINE_API MouseInput
@@ -38,7 +36,7 @@ namespace Engine
   public:
     virtual ~InputSystem() = default;
 
-    std::shared_ptr<System> Clone() const override
+    inline std::shared_ptr<System> Clone() const override
     {
       return std::make_shared<InputSystem>(*this);
     }
@@ -47,20 +45,18 @@ namespace Engine
     void OnEvent(ECSManager& ecs, Event& event) override;
 
   private:
-    const bool OnWindowFocused(WindowFocusedEvent& event);
-    const bool OnWindowLostFocus(WindowLostFocusEvent& event);
+    const bool OnWindowFocused(EventSystem& eventSystem, WindowFocusedEvent& event);
+    const bool OnWindowLostFocus(EventSystem& eventSystem, WindowLostFocusEvent& event);
 
-    const bool OnMouseMoved(MouseMovedEvent& event);
-    const bool OnMouseButtonPressed(MouseButtonPressedEvent& event); // todo
-    const bool OnMouseButtonReleased(MouseButtonReleasedEvent& event); // todo
+    const bool OnMouseMoved(EventSystem& eventSystem, MouseMovedEvent& event);
+    const bool OnMouseButtonPressed(EventSystem& eventSystem, MouseButtonPressedEvent& event); // todo
+    const bool OnMouseButtonReleased(EventSystem& eventSystem, MouseButtonReleasedEvent& event); // todo
 
-    const bool OnKeyPressed(KeyPressedEvent& event); // todo
-    const bool OnKeyReleased(KeyReleasedEvent& event); // todo
+    const bool OnKeyPressed(EventSystem& eventSystem, KeyPressedEvent& event); // todo
+    const bool OnKeyReleased(EventSystem& eventSystem, KeyReleasedEvent& event); // todo
   
   private:
     MouseInput m_MouseInput;
     KeyboardInput m_KeyboardInput;
-
-    EventCallbackFn m_EventCallback;
   };
 }

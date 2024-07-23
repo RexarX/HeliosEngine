@@ -4,7 +4,7 @@ namespace Engine
 {
   std::shared_ptr<GraphicsContext> GraphicsContext::m_Instance = nullptr;
   GraphicsContext::GraphicsContext(void* window)
-    : m_Window(window), m_RendererAPI(RendererAPI::Create())
+    : m_Window(window), m_RendererAPI(RendererAPI::Create(window))
   {
   }
 

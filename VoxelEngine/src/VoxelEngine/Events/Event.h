@@ -2,8 +2,6 @@
 
 #include "pch.h"
 
-#include "VoxelEngine/Core.h"
-
 namespace Engine
 {
 	enum class EventType
@@ -39,7 +37,7 @@ namespace Engine
 		virtual const EventType GetEventType() const = 0;
 		virtual const char* GetName() const = 0;
 		virtual const int GetCategoryFlags() const = 0;
-		virtual const std::string ToString() const { return GetName(); }
+		virtual inline const std::string ToString() const { return GetName(); }
 
 		inline const bool IsInCategory(EventCategory category)
 		{
@@ -50,7 +48,7 @@ namespace Engine
 	class EventDispatcher
 	{
 		template<typename T>
-		using EventFn = std::function<bool(T&)>;
+		using EventFn = std::function<const bool(T&)>;
 
 	public:
 		EventDispatcher(Event& event)
@@ -72,7 +70,7 @@ namespace Engine
 		Event& m_Event;
 	};
 
-	inline std::ostream& operator<<(std::ostream& os, const Event& e)
+	inline std::ostream& operator<<(std::ostream& os, Event& e)
 	{
 		return os << e.ToString();
 	}

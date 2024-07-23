@@ -1,5 +1,6 @@
 #include "EntityComponentSystem/Systems/InputSystem.h"
 #include "EntityComponentSystem/Systems/SystemImpl.h"
+
 #include "EntityComponentSystem/Manager/ECSManager.h"
 
 namespace Engine
@@ -31,29 +32,31 @@ namespace Engine
 
   void InputSystem::OnEvent(ECSManager& ecs, Event& event)
   {
+    EventSystem& eventSystem = ecs.GetSystem<EventSystem>();
+
     EventDispatcher dispatcher(event);
-    dispatcher.Dispatch<WindowFocusedEvent>(BIND_EVENT_FN(InputSystem::OnWindowFocused));
-    dispatcher.Dispatch<WindowLostFocusEvent>(BIND_EVENT_FN(InputSystem::OnWindowLostFocus));
-    dispatcher.Dispatch<MouseMovedEvent>(BIND_EVENT_FN(InputSystem::OnMouseMoved));
-    dispatcher.Dispatch<MouseButtonPressedEvent>(BIND_EVENT_FN(InputSystem::OnMouseButtonPressed));
-    dispatcher.Dispatch<MouseButtonReleasedEvent>(BIND_EVENT_FN(InputSystem::OnMouseButtonReleased));
-    dispatcher.Dispatch<KeyPressedEvent>(BIND_EVENT_FN(InputSystem::OnKeyPressed));
-    dispatcher.Dispatch<KeyReleasedEvent>(BIND_EVENT_FN(InputSystem::OnKeyReleased));
+    dispatcher.Dispatch<WindowFocusedEvent>(BIND_EVENT_FN_WITH_REF(InputSystem::OnWindowFocused, eventSystem));
+    dispatcher.Dispatch<WindowLostFocusEvent>(BIND_EVENT_FN_WITH_REF(InputSystem::OnWindowLostFocus, eventSystem));
+    dispatcher.Dispatch<MouseMovedEvent>(BIND_EVENT_FN_WITH_REF(InputSystem::OnMouseMoved, eventSystem));
+    dispatcher.Dispatch<MouseButtonPressedEvent>(BIND_EVENT_FN_WITH_REF(InputSystem::OnMouseButtonPressed, eventSystem));
+    dispatcher.Dispatch<MouseButtonReleasedEvent>(BIND_EVENT_FN_WITH_REF(InputSystem::OnMouseButtonReleased, eventSystem));
+    dispatcher.Dispatch<KeyPressedEvent>(BIND_EVENT_FN_WITH_REF(InputSystem::OnKeyPressed, eventSystem));
+    dispatcher.Dispatch<KeyReleasedEvent>(BIND_EVENT_FN_WITH_REF(InputSystem::OnKeyReleased, eventSystem));
   }
 
-  const bool InputSystem::OnWindowFocused(WindowFocusedEvent& event)
+  const bool InputSystem::OnWindowFocused(EventSystem& eventSystem, WindowFocusedEvent& event)
   {
     m_MouseInput.firstInput = true;
     return true;
   }
 
-  const bool InputSystem::OnWindowLostFocus(WindowLostFocusEvent& event)
+  const bool InputSystem::OnWindowLostFocus(EventSystem& eventSystem, WindowLostFocusEvent& event)
   {
     m_MouseInput.firstInput = true;
     return true;
   }
 
-  const bool InputSystem::OnMouseMoved(MouseMovedEvent& event)
+  const bool InputSystem::OnMouseMoved(EventSystem& eventSystem, MouseMovedEvent& event)
   {
     if (m_MouseInput.firstInput) {
       m_MouseInput.firstInput = false;
@@ -67,47 +70,51 @@ namespace Engine
     MouseMovedAction action(m_MouseInput.mousePosition.x, m_MouseInput.mousePosition.y,
                             m_MouseInput.mouseDelta.x, m_MouseInput.mouseDelta.y);
 
-    m_EventCallback(action);
+    eventSystem.PushEvent(action);
+
     return true;
   }
 
-  const bool InputSystem::OnMouseButtonPressed(MouseButtonPressedEvent& event)
+  const bool InputSystem::OnMouseButtonPressed(EventSystem& eventSystem, MouseButtonPressedEvent& event)
   {
     m_MouseInput.mouseButtonStates[event.GetMouseButton()] = true;
 
     MouseButtonPressedAction action(event.GetMouseButton());
 
-    m_EventCallback(action);
+    eventSystem.PushEvent(action);
+
     return true;
   }
 
-  const bool InputSystem::OnMouseButtonReleased(MouseButtonReleasedEvent& event)
+  const bool InputSystem::OnMouseButtonReleased(EventSystem& eventSystem, MouseButtonReleasedEvent& event)
   {
     m_MouseInput.mouseButtonStates[event.GetMouseButton()] = false;
 
     MouseButtonReleasedAction action(event.GetMouseButton());
 
-    m_EventCallback(action);
+    eventSystem.PushEvent(action);
+
     return true;
   }
 
-  const bool InputSystem::OnKeyPressed(KeyPressedEvent& event)
+  const bool InputSystem::OnKeyPressed(EventSystem& eventSystem, KeyPressedEvent& event)
   {
     m_KeyboardInput.keyStates[event.GetKeyCode()] = true;
 
     KeyPressedAction action(event.GetKeyCode(), event.GetRepeatCount());
 
-    m_EventCallback(action);
+    eventSystem.PushEvent(action);
+
     return true;
   }
 
-  const bool InputSystem::OnKeyReleased(KeyReleasedEvent& event)
+  const bool InputSystem::OnKeyReleased(EventSystem& eventSystem, KeyReleasedEvent& event)
   {
     m_KeyboardInput.keyStates[event.GetKeyCode()] = false;
 
     KeyReleasedAction action(event.GetKeyCode());
 
-    m_EventCallback(action);
+    eventSystem.PushEvent(action);
     return true;
   }
 }

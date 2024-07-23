@@ -4,7 +4,7 @@
 
 namespace Engine
 {
-  struct VOXELENGINE_API TransformComponent
+  struct VOXELENGINE_API Transform
   {
     glm::vec3 position;
     glm::vec3 rotation;

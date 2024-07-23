@@ -64,7 +64,7 @@ namespace Engine
 
 	void Application::Run()
 	{
-		double LastFrameUpdate(0.0), LastFrameTime(0.0);
+		double LastFrameUpdate(0.0);
 
 		m_FramerateLimit = m_Window->GetFramerate() == 0.0 ? 0.0 : 1.0 / m_Window->GetFramerate();
 
@@ -77,6 +77,7 @@ namespace Engine
 			m_Window->PoolEvents();
 
 			if (!m_Window->IsMinimized() && (m_FramerateLimit == 0.0 || m_DeltaTime >= m_FramerateLimit)) {
+				//TRACE("Delta time: {0}", m_DeltaTime.GetMilliseconds());
 				for (Layer* layer : m_LayerStack) {
 					layer->OnUpdate(m_DeltaTime);
 				}
@@ -92,7 +93,6 @@ namespace Engine
 				}
 
 				m_Window->OnUpdate();
-
 				LastFrameUpdate = m_Timer.GetElapsedSec();
 			}
 		}

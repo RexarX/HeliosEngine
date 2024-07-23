@@ -69,9 +69,15 @@ namespace Engine
 	{
 	public:
 		AppUpdateEvent() = default;
+    AppUpdateEvent(const double deltaTime) : m_DeltaTime(deltaTime) {}
+
+    inline const double GetDeltaTime() const { return m_DeltaTime; }
 
 		EVENT_CLASS_TYPE(AppUpdate)
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
+
+	private:
+		double m_DeltaTime;
 	};
 
 	class VOXELENGINE_API AppRenderEvent : public Event

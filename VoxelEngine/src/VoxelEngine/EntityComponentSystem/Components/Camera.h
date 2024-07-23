@@ -6,12 +6,12 @@
 
 namespace Engine
 {
-	class VOXELENGINE_API CameraComponent
+	class VOXELENGINE_API Camera
 	{
 	public:
-		CameraComponent(const glm::vec3& cameraPos = { 0.0f, 0.0f, 0.0f },
-										const glm::vec3& cameraRotation = { 0.0f, 0.0f, 0.0f },
-										const float aspectRatio = 16.0f / 9.0f, const float fov = 45.0f);
+		Camera(const glm::vec3& cameraPos = glm::vec3(0.0f),
+					 const glm::vec3& cameraRotation = glm::vec3(0.0f),
+					 const float aspectRatio = 16.0f / 9.0f, const float fov = 45.0f);
 
 		void OnEvent(Event& event);
 		void SetPosition(const glm::vec3& position);
@@ -45,15 +45,15 @@ namespace Engine
 		float m_AspectRatio = 16.0f / 9.0f;
 		float m_Fov = 45.0f;
 
-		glm::vec3 m_Position;
-		glm::vec3 m_Rotation;
-		glm::vec3 m_Direction;
+		glm::vec3 m_Position = glm::vec3(0.0f);
+		glm::vec3 m_Rotation = glm::vec3(0.0f);
+		glm::vec3 m_Direction = glm::vec3(0.0f);
 
-		glm::vec3 m_CameraUp;
-		glm::vec3 m_CameraLeft;
-		glm::vec3 m_CameraForward;
+		glm::vec3 m_CameraUp = glm::vec3(0.0f);
+		glm::vec3 m_CameraLeft = glm::vec3(0.0f);
+		glm::vec3 m_CameraForward = glm::vec3(0.0f);
 
-		glm::mat4 m_ProjectionMatrix;
-		glm::mat4 m_ViewMatrix;
+		glm::mat4 m_ProjectionMatrix = glm::mat4(1.0f);
+		glm::mat4 m_ViewMatrix = glm::mat4(1.0f);
 	};
 }

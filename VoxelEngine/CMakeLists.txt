@@ -126,7 +126,6 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
     $<$<CONFIG:Dist>:
         "DIST_MODE;"
     >
-    "BUILD_DLL;"
     "GLFW_INCLUDE_NONE;"
     "UNICODE;"
     "_UNICODE;"
@@ -134,7 +133,7 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 )
 
 if(WIN32)
-	target_compile_definitions(${PROJECT_NAME} PRIVATE "PLATFORM_WINDOWS;")
+	target_compile_definitions(${PROJECT_NAME} PRIVATE "PLATFORM_WINDOWS;" PRIVATE "BUILD_DLL;")
 endif()
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
