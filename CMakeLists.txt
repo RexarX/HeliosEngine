@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.24.0)
 
-project(VoxelEngine)
+project(HeliosEngine)
 
 set(CMAKE_CONFIGURATION_TYPES
     "Debug"
@@ -30,11 +30,11 @@ set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 set(GLFW_INSTALL OFF CACHE BOOL "" FORCE)
 
-add_subdirectory(VoxelCraft)
-add_subdirectory(VoxelEngine)
-add_subdirectory(VoxelEngine/vendor/glfw)
-add_subdirectory(VoxelEngine/vendor/glm)
-add_subdirectory(VoxelEngine/vendor/imgui)
-add_subdirectory(VoxelEngine/vendor/spdlog)
-add_subdirectory(VoxelEngine/vendor/stb_image)
-add_subdirectory(VoxelEngine/vendor/tiny_obj_loader)
+add_subdirectory(Game)
+add_subdirectory(HeliosEngine)
+add_subdirectory(HeliosEngine/vendor/glfw)
+add_subdirectory(HeliosEngine/vendor/glm)
+add_subdirectory(HeliosEngine/vendor/imgui)
+add_subdirectory(HeliosEngine/vendor/spdlog)
+add_subdirectory(HeliosEngine/vendor/stb_image)
+add_subdirectory(HeliosEngine/vendor/tiny_obj_loader)
