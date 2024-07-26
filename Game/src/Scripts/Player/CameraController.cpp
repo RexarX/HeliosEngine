@@ -7,7 +7,6 @@ CameraController::CameraController(Helios::Camera& camera)
 
 CameraController::~CameraController()
 {
-  OnDetach();
 }
 
 void CameraController::OnAttach()

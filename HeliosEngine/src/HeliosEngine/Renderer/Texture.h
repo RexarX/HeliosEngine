@@ -37,7 +37,7 @@ namespace Helios
     inline const uint32_t GetAnisoLevel() const { return m_AnisoLevel; }
 
   private:
-    std::unique_ptr<uint8_t[]> m_ImageData = nullptr;
+    std::unique_ptr<std::byte[]> m_ImageData = nullptr;
 
     ImageFormat m_Format = ImageFormat::None;
 

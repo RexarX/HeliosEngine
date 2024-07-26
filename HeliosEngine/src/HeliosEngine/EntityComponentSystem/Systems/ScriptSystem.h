@@ -7,6 +7,7 @@ namespace Helios
   class HELIOSENGINE_API ScriptSystem : public System
   {
   public:
+    ScriptSystem() = default;
     virtual ~ScriptSystem() = default;
 
     inline std::unique_ptr<System> Clone() const override {

@@ -10,7 +10,7 @@ GameLayer::GameLayer()
 void GameLayer::OnAttach()
 {
 	Helios::Window& window = Helios::Application::Get().GetWindow();
-	//window.SetVSync(false);
+	//window.SetVSync(true);
 	//window.SetFramerate(30.0);
 
 	Helios::SceneManager::AddScene("GameScene");
@@ -18,8 +18,9 @@ void GameLayer::OnAttach()
 
 	Helios::Scene& gameScene = Helios::SceneManager::GetScene("GameScene");
 
-	gameScene.RegisterSystem<Helios::EventSystem>(0);
+	gameScene.RegisterSystem<Helios::RenderingSystem>(0);
 	gameScene.RegisterSystem<Helios::ScriptSystem>(1);
+	gameScene.RegisterSystem<Helios::EventSystem>(2);
 
 	Helios::SceneNode* player = gameScene.AddNode("Player");
 

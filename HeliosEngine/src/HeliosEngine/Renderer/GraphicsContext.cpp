@@ -35,6 +35,11 @@ namespace Helios
     m_RendererAPI->EndFrame();
   }
 
+  void GraphicsContext::Record(const RenderQueue& queue)
+  {
+    m_RendererAPI->Record(queue);
+  }
+
   void GraphicsContext::SetViewport(const uint32_t width, const uint32_t height,
                                     const uint32_t x, const uint32_t y)
   {

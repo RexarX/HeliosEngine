@@ -34,6 +34,7 @@ namespace Helios
   class HELIOSENGINE_API InputSystem : public System
   {
   public:
+    InputSystem() = default;
     virtual ~InputSystem() = default;
 
     inline std::unique_ptr<System> Clone() const override {

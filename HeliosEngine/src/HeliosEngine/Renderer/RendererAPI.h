@@ -1,6 +1,6 @@
 #pragma once
 
-#include "pch.h"
+#include "Renderer/RenderQueue.h"
 
 namespace Helios
 {
@@ -20,6 +20,7 @@ namespace Helios
     virtual void Update() = 0;
     virtual void BeginFrame() = 0;
     virtual void EndFrame() = 0;
+    virtual void Record(const RenderQueue& queue) = 0;
 
     virtual void SetViewport(const uint32_t width, const uint32_t height,
                              const uint32_t x = 0, const uint32_t y = 0) = 0;

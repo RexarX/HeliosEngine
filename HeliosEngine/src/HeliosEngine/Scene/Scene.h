@@ -49,7 +49,7 @@ namespace Helios
     void EmplaceScript(const SceneNode* node, Args&&... args);
 
     template<typename T>
-    void DetachScript(SceneNode* node);
+    void DetachScript(const SceneNode* node);
 
     template<typename T>
     inline T& RegisterSystem(const uint32_t priority = 0) {
@@ -146,7 +146,7 @@ namespace Helios
   }
 
   template<typename T>
-  void Scene::DetachScript(SceneNode* node)
+  void Scene::DetachScript(const SceneNode* node)
   {
     if (node == nullptr) { return; }
 
@@ -156,9 +156,7 @@ namespace Helios
       auto& scriptComponent = m_ECSManager->GetComponent<Script>(entityId);
       scriptComponent.OnDetach();
 
-      if (scriptComponent.IsEmpty()) {
-        m_ECSManager->RemoveComponent<Script>(entityId);
-      }
+      m_ECSManager->RemoveComponent<Script>(entityId);
     }
   }
 }

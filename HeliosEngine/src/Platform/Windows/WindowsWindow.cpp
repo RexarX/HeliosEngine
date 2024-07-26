@@ -54,6 +54,7 @@ namespace Helios
 		m_Mode = glfwGetVideoMode(m_Monitor);
 
 		m_Context = GraphicsContext::Create(m_Window);
+		m_Context->Init();
 		m_Context->SetViewport(props.Width, props.Height);
 
 		glfwSetWindowUserPointer(m_Window, reinterpret_cast<void*>(this));

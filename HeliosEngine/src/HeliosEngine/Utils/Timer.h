@@ -20,6 +20,7 @@ namespace Helios
 		inline const double GetElapsedSec() const {
 			return GetElapsed<std::chrono::duration<double>>();
 		}
+
 		inline const double GetElapsedMillisec() const {
 			return GetElapsed<std::chrono::duration<double, std::milli>>();
 		}

@@ -14,7 +14,7 @@ namespace Helios
 		imData = stbi_load(path.c_str(), &width, &height, &channels, 4);
 
 		if (imData == nullptr) { CORE_ERROR("Failed to load texture!"); }
-		else { m_ImageData = std::make_unique<uint8_t[]>(*imData); }
+		else { m_ImageData = std::make_unique<std::byte[]>(*imData); }
 
 		m_Width = width;
 		m_Height = height;
