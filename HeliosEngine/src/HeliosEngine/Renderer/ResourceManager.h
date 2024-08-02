@@ -12,6 +12,7 @@ namespace Helios
 
     virtual void InitializeResources(const std::vector<Renderable>& renderables) = 0;
     virtual void UpdateResources(const RenderQueue& renderQueue) = 0;
+    virtual void ClearResources() = 0;
 
     virtual inline std::unique_ptr<ResourceManager> Clone() const = 0;
 

@@ -25,6 +25,7 @@ namespace Helios
     void Init() override;
     void Shutdown() override;
     void Update() override;
+
     void BeginFrame() override;
     void EndFrame() override;
     void Record(const RenderQueue& queue) override;
@@ -42,7 +43,15 @@ namespace Helios
 
     void SetImGuiState(const bool enabled) override { m_ImGuiEnabled = enabled; }
 
+    void ImmediateSubmit(std::function<void(const VkCommandBuffer cmd)>&& function);
+
     static inline VulkanContext& Get() { return *m_Instance; }
+
+    inline VkDevice GetDevice() const { return m_Device; }
+    inline const VkPhysicalDeviceLimits& GetPhysicalDeviceLimits();
+    inline VmaAllocator GetAllocator() const { return m_Allocator; }
+
+    inline DeletionQueue& GetDeletionQueue() { return m_MainDeletionQueue; }
 
   private:
     void CreateInstance();
@@ -61,6 +70,8 @@ namespace Helios
 
     void CleanupSwapchain();
     void RecreateSwapchain();
+
+    void Submit();
 
     const bool CheckValidationLayerSupport() const;
 
@@ -122,11 +133,16 @@ namespace Helios
     std::vector<VkFramebuffer> m_SwapchainFramebuffers;
     VkFormat m_SwapchainImageFormat;
     VkExtent2D m_SwapchainExtent;
-    std::vector<VkCommandBuffer> m_CommandBuffers;
     VkRenderPass m_RenderPass;
     AllocatedImage m_DepthImage;
     VkViewport m_Viewport;
     VkRect2D m_Scissor;
+
+    VkCommandPool m_ImCommandPool;
+    VkCommandBuffer m_ImCommandBuffer;
+    VkFence m_ImFence;
+
+    VkDescriptorPool m_ImGuiPool;
 
     VmaAllocator m_Allocator;
     

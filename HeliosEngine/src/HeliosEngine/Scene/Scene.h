@@ -18,6 +18,9 @@ namespace Helios
     void OnUpdate(const Timestep deltaTime) { m_ECSManager->OnUpdateSystems(deltaTime); }
     void OnEvent(Event& event) { m_ECSManager->OnEventSystems(event); }
 
+    void Load();
+    void Unload();
+
     void SetName(const std::string& name) { m_Name = name; }
     void SetActive(const bool active) { m_Active = active; }
 

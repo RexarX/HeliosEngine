@@ -19,7 +19,6 @@ namespace Helios
 		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
 		io.ConfigFlags |= ImGuiConfigFlags_DpiEnableScaleFonts;
 		io.ConfigFlags |= ImGuiConfigFlags_DpiEnableScaleViewports;
-
 		float fontSize = 16.0f;
 		io.Fonts->AddFontFromFileTTF((HELIOSENGINE_DIR + "Assets/Fonts/DroidSans.ttf").c_str(), fontSize);
 		io.FontDefault = io.Fonts->AddFontFromFileTTF((HELIOSENGINE_DIR + "Assets/Fonts/Cousine-Regular.ttf").c_str(), fontSize);
@@ -55,8 +54,7 @@ namespace Helios
 		Application::Get().GetWindow().BeginFrameImGui();
 
 		ImGui::NewFrame();
-		ImGui::DockSpaceOverViewport(ImGui::GetMainViewport(),
-																 ImGuiDockNodeFlags_PassthruCentralNode);
+		ImGui::DockSpaceOverViewport(ImGui::GetMainViewport(), ImGuiDockNodeFlags_PassthruCentralNode);
 	}
 
 	void ImGuiLayer::End()

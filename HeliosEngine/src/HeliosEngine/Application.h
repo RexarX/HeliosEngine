@@ -50,7 +50,7 @@ namespace Helios
 
 		bool m_Running = true;
 
-		Timer m_Timer;
+		Utils::Timer m_Timer;
 		Timestep m_DeltaTime;
 		double m_FramerateLimit = 0.0;
 	};

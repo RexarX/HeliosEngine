@@ -31,4 +31,7 @@
 #include "HeliosEngine/KeyCodes.h"
 #include "HeliosEngine/MouseButtonCodes.h"
 
+#include "HeliosEngine/Utils/Filesystem.h"
+#include "HeliosEngine/Utils/Profiler.h"
+#include "HeliosEngine/Utils/ThreadPool.h"
 #include "HeliosEngine/Utils/Timer.h"

@@ -4,8 +4,8 @@
 
 namespace Helios
 {
-  const AllocatedImage CreateImage(const uint32_t width, const uint32_t height, const VkFormat format, const VkImageTiling tiling,
-                                   const VkImageUsageFlags usage, const VmaMemoryUsage memoryUsage, const VmaAllocator allocator)
+  AllocatedImage CreateImage(const uint32_t width, const uint32_t height, const VkFormat format, const VkImageTiling tiling,
+                             const VkImageUsageFlags usage, const VmaMemoryUsage memoryUsage, const VmaAllocator allocator)
   {
     VkImageCreateInfo imageInfo{};
     imageInfo.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
@@ -33,8 +33,8 @@ namespace Helios
     return allocatedImage;
   }
 
-  const VkImageView CreateImageView(const VkImage image, const VkFormat format, const VkImageAspectFlags aspectFlags,
-                                    const VkDevice device)
+  VkImageView CreateImageView(const VkImage image, const VkFormat format, const VkImageAspectFlags aspectFlags,
+                              const VkDevice device)
   {
     VkImageViewCreateInfo viewInfo{};
     viewInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
@@ -52,5 +52,10 @@ namespace Helios
     CORE_ASSERT(result == VK_SUCCESS, "Failed to create image view!");
 
     return imageView;
+  }
+
+  const AllocatedBuffer CreateBuffer(const VkDeviceSize size, const VkBufferUsageFlags usage, const VmaMemoryUsage memoryUsage, const VmaAllocator allocator)
+  {
+    return AllocatedBuffer();
   }
 }

@@ -2,7 +2,7 @@
 
 #include <chrono>
 
-namespace Helios
+namespace Helios::Utils
 {
 	using steady_clock = std::chrono::steady_clock;
 

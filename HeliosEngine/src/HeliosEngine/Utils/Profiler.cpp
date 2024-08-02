@@ -1,5 +1,5 @@
 #include "Profiler.h"
 
-namespace Helios
+namespace Helios::Utils
 {
 }

@@ -7,6 +7,7 @@ namespace Helios
     : m_GraphicsContext(GraphicsContext::Get()), m_ResourceManager(std::move(ResourceManager::Create()))
   {
   }
+
   RenderingSystem::RenderingSystem(const RenderingSystem& other)
     : m_GraphicsContext(other.m_GraphicsContext)
   {

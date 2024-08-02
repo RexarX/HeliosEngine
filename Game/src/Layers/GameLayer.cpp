@@ -12,6 +12,7 @@ void GameLayer::OnAttach()
 	Helios::Window& window = Helios::Application::Get().GetWindow();
 	//window.SetVSync(true);
 	//window.SetFramerate(30.0);
+	window.SetImGuiState(true);
 
 	Helios::SceneManager::AddScene("GameScene");
 	Helios::SceneManager::SetActiveScene("GameScene");
@@ -20,7 +21,6 @@ void GameLayer::OnAttach()
 
 	gameScene.RegisterSystem<Helios::RenderingSystem>(0);
 	gameScene.RegisterSystem<Helios::ScriptSystem>(1);
-	gameScene.RegisterSystem<Helios::EventSystem>(2);
 
 	Helios::SceneNode* player = gameScene.AddNode("Player");
 
@@ -57,6 +57,6 @@ void GameLayer::OnImGuiRender(ImGuiContext* context)
 
 	ImGui::Begin("Debug menu");
 	ImGui::Text("FPS: %f", ts.GetFramerate());
-	ImGui::Text("Frametime: %f", ts.GetMilliseconds());
+	ImGui::Text("Frametime: %f ms", ts.GetMilliseconds());
 	ImGui::End();
 }

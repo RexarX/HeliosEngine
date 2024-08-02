@@ -13,37 +13,32 @@ namespace Helios
     RGBA32F
   };
 
-  class Texture
+  class HELIOSENGINE_API Texture
   {
   public:
-    Texture(const std::string& path, const uint32_t mipLevel = 0, const uint32_t anisoLevel = 0,
-            const ImageFormat format = ImageFormat::RGBA8);
+    virtual ~Texture() = default;
 
-    ~Texture() = default;
+    virtual void Load() = 0;
+    virtual void Unload() = 0;
 
-    void SetFormat(const ImageFormat format) { m_Format = format; }
+    virtual void SetSlot(const uint32_t slot) = 0;
 
-    void SetMipLevel(const uint32_t mipLevel) { m_MipLevel = mipLevel; }
-    void SetAnisoLevel(const uint32_t anisoLevel) { m_AnisoLevel = anisoLevel; }
+    virtual void SetFormat(const ImageFormat format) = 0;
 
-    inline const void* GetImageData() const { return m_ImageData.get(); }
+    virtual void SetMipLevel(const uint32_t mipLevel) = 0;
+    virtual void SetAnisoLevel(const uint32_t anisoLevel) = 0;
 
-    inline const ImageFormat GetFormat() const { return m_Format; }
+    virtual inline const uint32_t GetWidth() const = 0;
+    virtual inline const uint32_t GetHeight() const = 0;
 
-    inline const uint32_t GetWidth() const { return m_Width; }
-    inline const uint32_t GetHeight() const { return m_Height; }
+    virtual inline const uint32_t GetSlot() const = 0;
 
-    inline const uint32_t GetMipLevel() const { return m_MipLevel; }
-    inline const uint32_t GetAnisoLevel() const { return m_AnisoLevel; }
+    virtual inline const ImageFormat GetFormat() const = 0;
 
-  private:
-    std::unique_ptr<std::byte[]> m_ImageData = nullptr;
+    virtual inline const uint32_t GetMipLevel() const = 0;
+    virtual inline const uint32_t GetAnisoLevel() const = 0;
 
-    ImageFormat m_Format = ImageFormat::None;
-
-    uint32_t m_Width = 0, m_Height = 0;
-
-    uint32_t m_MipLevel = 0;
-    uint32_t m_AnisoLevel = 0;
+    static std::shared_ptr<Texture> Create(const std::string& path, const uint32_t mipLevel = 0,
+                                           const uint32_t anisoLevel = 0, const ImageFormat format = ImageFormat::None);
   };
 }

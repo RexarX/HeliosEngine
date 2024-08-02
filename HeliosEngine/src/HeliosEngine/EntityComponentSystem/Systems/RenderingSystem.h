@@ -21,12 +21,14 @@ namespace Helios
     void OnUpdate(ECSManager& ecs, const Timestep deltaTime) override;
     void OnEvent(ECSManager& ecs, Event& event) override;
 
+    inline std::unique_ptr<ResourceManager>& GetResourceManager() { return m_ResourceManager; }
+
   private:
     void CollectRenderables(ECSManager& ecs);
 
   private:
     std::shared_ptr<GraphicsContext> m_GraphicsContext = nullptr;
-
+    
     std::unique_ptr<ResourceManager> m_ResourceManager = nullptr;
     RenderQueue m_RenderQueue;
   };

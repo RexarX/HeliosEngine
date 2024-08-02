@@ -29,6 +29,14 @@ namespace Helios
     }
   }
 
+  void Scene::Load()
+  {
+  }
+
+  void Scene::Unload()
+  {
+  }
+
   SceneNode* Scene::AddNode(const std::string& name) const
   {
     EntityID id = m_ECSManager->CreateEntity();

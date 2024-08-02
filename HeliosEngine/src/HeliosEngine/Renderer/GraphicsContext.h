@@ -15,9 +15,11 @@ namespace Helios
     void Init();
     void Shutdown();
     void Update();
+
     void BeginFrame();
     void EndFrame();
     void Record(const RenderQueue& queue);
+
     void SetViewport(const uint32_t width, const uint32_t height,
                      const uint32_t x = 0, const uint32_t y = 0);
 

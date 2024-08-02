@@ -1,6 +1,6 @@
 #include "Utils/ThreadPool.h"
 
-namespace Helios
+namespace Helios::Utils
 {
   ThreadPool::ThreadPool(const uint32_t numThreads)
   {

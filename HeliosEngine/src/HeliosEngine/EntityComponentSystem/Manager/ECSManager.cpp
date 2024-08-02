@@ -149,7 +149,6 @@ namespace Helios
 
   void ECSManager::OnUpdateSystems(const Timestep deltaTime)
   {
-    auto& eventSystem = GetSystem<EventSystem>();
     for (auto& entry : m_SortedSystems) {
       entry.system->OnUpdate(*this, deltaTime);
     }

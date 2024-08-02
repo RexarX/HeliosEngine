@@ -62,9 +62,16 @@ namespace Helios
     VmaAllocation allocation;
   };
 
-  const AllocatedImage CreateImage(const uint32_t width, const uint32_t height, const VkFormat format, const VkImageTiling tiling,
-                                   const VkImageUsageFlags usage, const VmaMemoryUsage memoryUsage, const VmaAllocator allocator);
+  struct AllocatedBuffer
+  {
+    VkBuffer buffer;
+    VmaAllocation allocation;
+    VmaAllocationInfo info;
+  };
 
-  const VkImageView CreateImageView(const VkImage image, const VkFormat format, const VkImageAspectFlags aspectFlags,
-                                    const VkDevice device);
+  AllocatedImage CreateImage(const uint32_t width, const uint32_t height, const VkFormat format, const VkImageTiling tiling,
+                             const VkImageUsageFlags usage, const VmaMemoryUsage memoryUsage, const VmaAllocator allocator);
+
+  VkImageView CreateImageView(const VkImage image, const VkFormat format, const VkImageAspectFlags aspectFlags,
+                              const VkDevice device);
 }
