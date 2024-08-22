@@ -2,7 +2,7 @@
 
 #include "Renderer/GraphicsContext.h"
 
-#include "Renderer/Vulkan/VulkanUtils.h"
+#include "VulkanUtils.h"
 
 #ifdef DEBUG_MODE
   constexpr bool enableValidationLayers = true;
@@ -28,28 +28,30 @@ namespace Helios
 
     void BeginFrame() override;
     void EndFrame() override;
-    void Record(const RenderQueue& queue) override;
+    void Record(const RenderQueue& queue, const ResourceManager& manager) override;
 
-    void SetViewport(const uint32_t width, const uint32_t height,
-                     const uint32_t x = 0, const uint32_t y = 0) override;
+    void SetViewport(uint32_t width, uint32_t height, uint32_t x = 0, uint32_t y = 0) override;
 
     void InitImGui() override;
     void ShutdownImGui() override;
     void BeginFrameImGui() override;
     void EndFrameImGui() override;
 
-    void SetVSync(const bool enabled) override;
-    void SetResized(const bool resized) override { m_SwapchainRecreated = resized; }
+    void SetVSync(bool enabled) override;
+    void SetResized(bool resized) override { m_SwapchainRecreated = resized; }
 
-    void SetImGuiState(const bool enabled) override { m_ImGuiEnabled = enabled; }
+    void SetImGuiState(bool enabled) override { m_ImGuiEnabled = enabled; }
 
     void ImmediateSubmit(std::function<void(const VkCommandBuffer cmd)>&& function);
 
     static inline VulkanContext& Get() { return *m_Instance; }
 
     inline VkDevice GetDevice() const { return m_Device; }
-    inline const VkPhysicalDeviceLimits& GetPhysicalDeviceLimits();
-    inline VmaAllocator GetAllocator() const { return m_Allocator; }
+    inline const VkRenderPass GetRenderPass() const { return m_RenderPass; }
+
+    inline const VkPhysicalDeviceLimits& GetPhysicalDeviceLimits() const;
+
+    inline const VmaAllocator GetAllocator() const { return m_Allocator; }
 
     inline DeletionQueue& GetDeletionQueue() { return m_MainDeletionQueue; }
 
@@ -73,35 +75,35 @@ namespace Helios
 
     void Submit();
 
-    const bool CheckValidationLayerSupport() const;
+    bool CheckValidationLayerSupport() const;
 
-    const std::vector<const char*> GetRequiredExtensions() const;
+    std::vector<const char*> GetRequiredExtensions() const;
 
     void PopulateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
-    const VkResult CreateDebugUtilsMessengerEXT(const VkInstance instance,
-                                                const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo,
-                                                const VkAllocationCallbacks* pAllocator,
-                                                VkDebugUtilsMessengerEXT* pDebugMessenger);
+    VkResult CreateDebugUtilsMessengerEXT(const VkInstance instance,
+                                          const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo,
+                                          const VkAllocationCallbacks* pAllocator,
+                                          VkDebugUtilsMessengerEXT* pDebugMessenger);
 
     void DestroyDebugUtilsMessengerEXT(const VkInstance instance, const VkDebugUtilsMessengerEXT debugMessenger,
                                        const VkAllocationCallbacks* pAllocator);
 
-    const bool CheckDeviceExtensionSupport(const VkPhysicalDevice device) const;
+    bool CheckDeviceExtensionSupport(const VkPhysicalDevice device) const;
 
-    const QueueFamilyIndices FindQueueFamilies(const VkPhysicalDevice device) const;
-    const SwapChainSupportDetails QuerySwapChainSupport(const VkPhysicalDevice device) const;
+    QueueFamilyIndices FindQueueFamilies(const VkPhysicalDevice device) const;
+    SwapChainSupportDetails QuerySwapChainSupport(const VkPhysicalDevice device) const;
 
-    const bool IsDeviceSuitable(const VkPhysicalDevice device) const;
+    bool IsDeviceSuitable(const VkPhysicalDevice device) const;
 
-    const VkSurfaceFormatKHR ChooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats) const;
-    const VkPresentModeKHR ChooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes) const;
-    const VkExtent2D ChooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities) const;
-    const uint32_t ChooseImageCount(const VkSurfaceCapabilitiesKHR& capabilities) const;
+    VkSurfaceFormatKHR ChooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats) const;
+    VkPresentModeKHR ChooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes) const;
+    VkExtent2D ChooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities) const;
+    uint32_t ChooseImageCount(const VkSurfaceCapabilitiesKHR& capabilities) const;
 
-    const VkFormat FindSupportedFormat(const std::vector<VkFormat>& candidates, const VkImageTiling tiling,
-                                       const VkFormatFeatureFlags features) const;
+    VkFormat FindSupportedFormat(const std::vector<VkFormat>& candidates, VkImageTiling tiling,
+                                 VkFormatFeatureFlags features) const;
 
-    const VkFormat FindDepthFormat() const;
+    VkFormat FindDepthFormat() const;
 
   private:
     const std::vector<const char*> m_ValidationLayers = {

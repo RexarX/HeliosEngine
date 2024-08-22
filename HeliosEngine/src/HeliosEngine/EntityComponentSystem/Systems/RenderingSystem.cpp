@@ -1,42 +1,39 @@
-#include "EntityComponentSystem/Systems/RenderingSystem.h"
-#include "EntityComponentSystem/Systems/SystemImpl.h"
+#include "RenderingSystem.h"
 
 namespace Helios
 {
   RenderingSystem::RenderingSystem()
-    : m_GraphicsContext(GraphicsContext::Get()), m_ResourceManager(std::move(ResourceManager::Create()))
+    : m_GraphicsContext(GraphicsContext::Get()), m_ResourceManager(ResourceManager::Create())
   {
   }
 
   RenderingSystem::RenderingSystem(const RenderingSystem& other)
-    : m_GraphicsContext(other.m_GraphicsContext)
+    : m_GraphicsContext(other.m_GraphicsContext),
+    m_ResourceManager(other.m_ResourceManager->Clone()), m_RenderQueue(other.m_RenderQueue)
   {
   }
 
-  void RenderingSystem::OnUpdate(ECSManager& ecs, const Timestep deltaTime)
+  void RenderingSystem::OnUpdate(entt::registry& registry)
   {
     m_RenderQueue.Clear();
-    CollectRenderables(ecs);
+    FillRenderQueue(registry);
 
-    m_ResourceManager->UpdateResources(m_RenderQueue);
-
-    m_GraphicsContext->BeginFrame();
-    m_GraphicsContext->Record(m_RenderQueue);
-    m_GraphicsContext->EndFrame();
+    m_ResourceManager->UpdateResources(registry, m_RenderQueue);
+    m_GraphicsContext->Record(m_RenderQueue, *m_ResourceManager);
   }
 
-  void RenderingSystem::OnEvent(ECSManager& ecs, Event& event)
+  RenderingSystem& RenderingSystem::operator=(const RenderingSystem& other)
   {
-  }
-
-  void RenderingSystem::CollectRenderables(ECSManager& ecs)
-  {
-    auto& entities = ecs.GetEntitiesWithComponents(
-      GetRequiredComponents<Renderable>(ecs)
-    );
-
-    for (const auto entity : entities) {
-      m_RenderQueue.AddRenderable(ecs.GetComponent<Renderable>(entity));
+    if (this != &other) {
+      m_GraphicsContext = other.m_GraphicsContext;
+      m_ResourceManager = other.m_ResourceManager->Clone();
+      m_RenderQueue = other.m_RenderQueue;
     }
+
+    return *this;
+  }
+
+  void RenderingSystem::FillRenderQueue(entt::registry& registry)
+  {
   }
 }

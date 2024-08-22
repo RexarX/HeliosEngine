@@ -1,74 +1,62 @@
 #pragma once
 
-#include "EntityComponentSystem/Systems/System.h"
+#include "Events/Event.h"
+
+#include "HeliosEngine/Timestep.h"
+
+#include <entt/entt.hpp>
 
 namespace Helios
 {
   struct Listener
   {
-    void* instance;
+    std::weak_ptr<void> instance;
     std::function<void(Event&)> callback;
-    uint32_t id;
   };
 
-  template<typename T>
-  struct EventQueue
-  {
-    std::queue<T> events;
-  };
-
-  class HELIOSENGINE_API EventSystem : public System
+  class HELIOSENGINE_API EventSystem
   {
   public:
     EventSystem() = default;
-    virtual ~EventSystem() = default;
+    ~EventSystem() = default;
 
-    std::unique_ptr<System> Clone() const override {
-      return std::make_unique<EventSystem>(*this);
-    }
+    void OnUpdate(entt::registry& registry);
 
-    void OnUpdate(ECSManager& ecs, const Timestep deltaTime) override;
-    void OnEvent(ECSManager& ecs, Event& event) override;
-
-    template<typename T>
+    template <typename T>
     void Emit(T& event);
 
-    template<typename T>
-    void AddListener(void* instance, const std::function<void(T&)>& callback);
+    template <typename T>
+    void AddListener(const std::shared_ptr<void>& instance, const std::function<void(T&)>& callback);
 
-    template<typename T>
-    void RemoveListener(void* instance);
+    template <typename T>
+    void RemoveListener(const std::shared_ptr<void>& instance);
 
-    template<typename T>
+    template <typename T>
     void PushEvent(T& event);
 
+  private:
     void ProcessQueuedEvents();
 
   private:
-    template<typename T>
-    EventQueue<T>& GetEventQueue();
-
-  private:
-    std::unordered_map<std::type_index, std::vector<std::byte>> m_EventQueues;
-    std::unordered_map<std::type_index, std::vector<Listener>> m_EventListeners;
-    uint32_t m_NextListenerId = 0;
+    std::map<std::type_index, std::queue<std::reference_wrapper<Event>>> m_EventQueues;
+    std::map<std::type_index, std::vector<Listener>> m_EventListeners;
   };
 
-  template<typename T>
+  template <typename T>
   void EventSystem::Emit(T& event)
   {
     static_assert(std::is_base_of<Event, T>::value, "T must inherit from Event!");
 
     auto it = m_EventListeners.find(typeid(T));
     if (it != m_EventListeners.end()) {
-      for (const auto& listener : it->second) {
+      for (const Listener& listener : it->second) {
         listener.callback(event);
       }
     }
   }
 
-  template<typename T>
-  void EventSystem::AddListener(void* instance, const std::function<void(T&)>& callback)
+  template <typename T>
+  void EventSystem::AddListener(const std::shared_ptr<void>& instance, const std::function<void(T&)>& callback)
   {
     static_assert(std::is_base_of<Event, T>::value, "T must inherit from Event!");
 
@@ -76,13 +64,12 @@ namespace Helios
       Listener{
         .instance = instance,
         .callback = [callback](Event& e) { callback(static_cast<T&>(e)); },
-        .id = m_NextListenerId++
       }
     );
   }
 
-  template<typename T>
-  void EventSystem::RemoveListener(void* instance)
+  template <typename T>
+  void EventSystem::RemoveListener(const std::shared_ptr<void>& instance)
   {
     static_assert(std::is_base_of<Event, T>::value, "T must inherit from Event!");
 
@@ -100,27 +87,10 @@ namespace Helios
     }
   }
 
-  template<typename T>
+  template <typename T>
   void EventSystem::PushEvent(T& event)
   {
     static_assert(std::is_base_of<Event, T>::value, "T must inherit from Event!");
-
-    auto& queue = GetEventQueue<T>();
-    queue.events.push(event);
-  }
-
-  template<typename T>
-  EventQueue<T>& EventSystem::GetEventQueue()
-  {
-    auto it = m_EventQueues.find(typeid(T));
-    if (it == m_EventQueues.end()) {
-      auto [insertedIt, success] = m_EventQueues.emplace(
-        typeid(T),
-        std::vector<std::byte>(sizeof(EventQueue<T>))
-      );
-      it = insertedIt;
-      new (it->second.data()) EventQueue<T>();
-    }
-    return *reinterpret_cast<EventQueue<T>*>(it->second.data());
+    m_EventQueues[typeid(T)].push(event);
   }
 }

@@ -1,20 +1,20 @@
 #pragma once
 
-#include "EntityComponentSystem/Systems/System.h"
+#include "HeliosEngine/Timestep.h"
+
+#include "Events/Event.h"
+
+#include <entt/entt.hpp>
 
 namespace Helios
 {
-  class HELIOSENGINE_API ScriptSystem : public System
+  class ScriptSystem
   {
   public:
     ScriptSystem() = default;
-    virtual ~ScriptSystem() = default;
+    ~ScriptSystem() = default;
 
-    inline std::unique_ptr<System> Clone() const override {
-      return std::make_unique<ScriptSystem>(*this);
-    }
-
-    void OnUpdate(ECSManager& ecs, const Timestep deltaTime) override;
-    void OnEvent(ECSManager& ecs, Event& event) override;
+    void OnUpdate(entt::registry& registry, Timestep deltaTime);
+    void OnEvent(entt::registry& registry, Event& event);
   };
 }

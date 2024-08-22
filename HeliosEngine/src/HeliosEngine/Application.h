@@ -30,14 +30,16 @@ namespace Helios
 
 		static inline Application& Get() { return *m_Instance; }
 
-		inline const Timestep GetDeltaTime() const { return m_DeltaTime; }
+		inline Timestep GetDeltaTime() const { return m_DeltaTime; }
 
 		inline const Window& GetWindow() const { return *m_Window; }
 		inline Window& GetWindow() { return *m_Window; }
 	
 	private:
-		const bool OnWindowClose(WindowCloseEvent& e);
-		const bool OnWindowResize(WindowResizeEvent& e);
+		bool OnWindowClose(WindowCloseEvent& e);
+		bool OnWindowResize(WindowResizeEvent& e);
+
+		bool OnKeyPressed(KeyPressedEvent& e);
 
 	private:
 		static Application* m_Instance;

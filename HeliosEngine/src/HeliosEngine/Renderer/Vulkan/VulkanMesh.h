@@ -2,40 +2,41 @@
 
 #include "Renderer/Mesh.h"
 
-#include "Renderer/Vulkan/VulkanUtils.h"
+#include "VulkanUtils.h"
 
 namespace Helios
 {
   class VulkanMesh : public Mesh
   {
   public:
-    VulkanMesh(const MeshType type, const std::vector<std::byte>& vertices,
-               const uint32_t vertexCount, const std::vector<uint32_t>& indices = {});
+    VulkanMesh(MeshType type, const std::vector<std::byte>& vertices,
+               uint32_t vertexCount, const std::vector<uint32_t>& indices = {});
 
-    VulkanMesh(const MeshType type, const uint32_t vertexCount, const uint32_t indexCount);
+    VulkanMesh(MeshType type, uint32_t vertexCount, uint32_t indexCount);
+    VulkanMesh(const VulkanMesh&);
 
-    virtual ~VulkanMesh() = default;
+    virtual ~VulkanMesh();
 
     void Load() override;
     void Unload() override;
 
-    void SetData(const std::vector<std::byte>& vertices, const uint32_t vertexCount,
+    void SetData(const std::vector<std::byte>& vertices, uint32_t vertexCount,
                  const std::vector<uint32_t>& indices = {}) override;
 
     void SetVertexLayout(const VertexLayout& layout) override { m_VertexLayout = layout; }
 
-    inline const MeshType GetType() const override { return m_Type; }
+    inline MeshType GetType() const override { return m_Type; }
 
-    inline const bool IsLoaded() const override { return m_Loaded; }
+    inline bool IsLoaded() const override { return m_Loaded; }
 
     inline const std::vector<std::byte>& GetVertices() const override { return m_VertexData; }
     inline const std::vector<uint32_t>& GetIndices() const override { return m_Indices; }
 
-    inline const uint32_t GetVertexCount() const override { return m_VertexCount; }
-    inline const uint32_t GetIndexCount() const override { return m_Indices.size(); }
+    inline uint32_t GetVertexCount() const override { return m_VertexCount; }
+    inline uint32_t GetIndexCount() const override { return m_Indices.size(); }
 
-    inline const uint64_t GetVertexSize() const override { return m_VertexData.size(); }
-    inline const uint64_t GetIndexSize() const override { return m_Indices.size() * sizeof(uint32_t); }
+    inline uint64_t GetVertexSize() const override { return m_VertexData.size(); }
+    inline uint64_t GetIndexSize() const override { return m_Indices.size() * sizeof(uint32_t); }
 
     inline const VertexLayout& GetVertexLayout() const override { return m_VertexLayout; }
 
@@ -55,10 +56,8 @@ namespace Helios
     void CreateStaticIndexBuffer();
     void CreateDynamicIndexBuffer();
 
-    void Resize();
-
   private:
-    MeshType m_Type = MeshType::None;
+    MeshType m_Type;
 
     bool m_Loaded = false;
 

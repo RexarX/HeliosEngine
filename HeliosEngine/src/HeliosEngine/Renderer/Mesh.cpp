@@ -1,7 +1,7 @@
-#include "Renderer/Mesh.h"
-#include "Renderer/RendererAPI.h"
+#include "Mesh.h"
+#include "RendererAPI.h"
 
-#include "Renderer/Vulkan/VulkanMesh.h"
+#include "Vulkan/VulkanMesh.h"
 
 namespace Helios
 {
@@ -11,8 +11,8 @@ namespace Helios
     m_Data.resize(layout.GetStride());
   }
 
-  std::shared_ptr<Mesh> Mesh::Create(const MeshType type, const std::vector<std::byte>& vertices,
-                                     const uint32_t vertexCount, const std::vector<uint32_t>& indices)
+  std::shared_ptr<Mesh> Mesh::Create(MeshType type, const std::vector<std::byte>& vertices,
+                                     uint32_t vertexCount, const std::vector<uint32_t>& indices)
   {
 		switch (RendererAPI::GetAPI())
 		{
@@ -24,7 +24,7 @@ namespace Helios
 		return nullptr;
   }
 
-  std::shared_ptr<Mesh> Mesh::Create(const MeshType type, const uint32_t vertexCount, const uint32_t indexCount)
+  std::shared_ptr<Mesh> Mesh::Create(MeshType type, uint32_t vertexCount, uint32_t indexCount)
   {
     switch (RendererAPI::GetAPI())
     {

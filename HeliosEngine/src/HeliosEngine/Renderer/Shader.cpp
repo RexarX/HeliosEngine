@@ -1,7 +1,7 @@
-#include "Renderer/Shader.h"
-#include "Renderer/RendererAPI.h"
+#include "Shader.h"
+#include "RendererAPI.h"
 
-#include "Renderer/Vulkan/VulkanShader.h"
+#include "Vulkan/VulkanShader.h"
 
 namespace Helios
 {

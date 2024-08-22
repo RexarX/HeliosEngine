@@ -6,10 +6,9 @@ namespace Helios
 {
   enum class ShaderStage
   {
-    None = 0,
-    Vertex = 1,
-    Fragment = 2,
-    Compute = 3
+    Vertex,
+    Fragment,
+    Compute
   };
 
   struct ShaderInfo
@@ -22,9 +21,6 @@ namespace Helios
   {
   public:
     virtual ~Shader() = default;
-
-    virtual void Load() = 0;
-    virtual void Unload() = 0;
 
     static std::shared_ptr<Shader> Create(const std::initializer_list<ShaderInfo>& shaderInfos);
   };

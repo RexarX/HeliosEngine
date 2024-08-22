@@ -1,6 +1,7 @@
-#include "Renderer/ResourceManager.h"
-#include "Renderer/RendererAPI.h"
-#include "Renderer/Vulkan/VulkanResourceManager.h"
+#include "ResourceManager.h"
+#include "RendererAPI.h"
+
+#include "Vulkan/VulkanResourceManager.h"
 
 namespace Helios
 {

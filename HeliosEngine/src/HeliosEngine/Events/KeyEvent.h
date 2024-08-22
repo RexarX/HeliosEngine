@@ -9,15 +9,12 @@ namespace Helios
 	class HELIOSENGINE_API KeyEvent : public Event
 	{
 	public:
-		inline const KeyCode GetKeyCode() const { return m_KeyCode; }
+		inline KeyCode GetKeyCode() const { return m_KeyCode; }
 
 		EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput);
 
 	protected:
-		KeyEvent(const KeyCode keycode)
-			: m_KeyCode(keycode) 
-		{
-		}
+		KeyEvent(KeyCode keycode) : m_KeyCode(keycode) {}
 
 		KeyCode m_KeyCode;
 	};
@@ -25,14 +22,14 @@ namespace Helios
 	class HELIOSENGINE_API KeyPressedEvent : public KeyEvent
 	{
 	public:
-		KeyPressedEvent(const KeyCode keycode, const uint32_t repeatCount)
+		KeyPressedEvent(KeyCode keycode, uint32_t repeatCount)
 			: KeyEvent(keycode), m_RepeatCount(repeatCount) 
 		{
 		}
 
-		inline const uint32_t GetRepeatCount() const { return m_RepeatCount; }
+		inline uint32_t GetRepeatCount() const { return m_RepeatCount; }
 
-		const std::string ToString() const override
+	  std::string ToString() const override
 		{
 			std::stringstream ss;
 			ss << "KeyPressedEvent: " << m_KeyCode << " (" << m_RepeatCount << " repeats)";
@@ -48,12 +45,9 @@ namespace Helios
 	class HELIOSENGINE_API KeyReleasedEvent : public KeyEvent
 	{
 	public:
-		KeyReleasedEvent(const KeyCode keycode)
-			: KeyEvent(keycode) 
-		{
-		}
+		KeyReleasedEvent(KeyCode keycode) : KeyEvent(keycode) {}
 
-		const std::string ToString() const override
+		std::string ToString() const override
 		{
 			std::stringstream ss;
 			ss << "KeyReleasedEvent: " << m_KeyCode;

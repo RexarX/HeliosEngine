@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Scene/Scene.h"
+#include "Scene.h"
 
 namespace Helios
 {
@@ -10,8 +10,9 @@ namespace Helios
     SceneManager() = default;
     ~SceneManager() = default;
 
-    static void AddScene(const std::string& name);
-    static void EmplaceScene(Scene&& scene, const std::string& name = std::string());
+    static Scene& AddScene(const std::string& name);
+    static void RemoveScene(const std::string& name);
+
     static void SetActiveScene(const std::string& name);
 
     static Scene& GetScene(const std::string& name);

@@ -4,10 +4,7 @@
 
 namespace Helios
 {
-  ImGuiLayer::ImGuiLayer()
-    : Layer("ImGuiLayer")
-  {
-  }
+  ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer") {}
 
 	void ImGuiLayer::OnAttach()
 	{
@@ -49,25 +46,7 @@ namespace Helios
 		}
 	}
 
-	void ImGuiLayer::Begin()
-	{
-		Application::Get().GetWindow().BeginFrameImGui();
-
-		ImGui::NewFrame();
-		ImGui::DockSpaceOverViewport(ImGui::GetMainViewport(), ImGuiDockNodeFlags_PassthruCentralNode);
-	}
-
-	void ImGuiLayer::End()
-	{
-		Window& window = Application::Get().GetWindow();
-
-		ImGuiIO& io = ImGui::GetIO();
-		ImGui::GetIO().DisplaySize = ImVec2((float)window.GetWidth(), (float)window.GetHeight());
-
-		window.EndFrameImGui();
-	}
-
-	inline const uint32_t ImGuiLayer::GetActiveWidgetID() const noexcept
+	inline uint32_t ImGuiLayer::GetActiveWidgetID() const noexcept
 	{
     return ImGui::GetActiveID();
 	}

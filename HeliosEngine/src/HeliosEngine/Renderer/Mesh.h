@@ -1,14 +1,12 @@
 #pragma once
 
-#include "Renderer/VertexLayout.h"
+#include "ShaderGraph/VertexLayout.h"
 
 namespace Helios
 {
   enum class MeshType
   {
-    None = 0,
-    Static = 1,
-    Dynamic = 2
+    Static, Dynamic
   };
 
   class DynamicVertex
@@ -38,25 +36,25 @@ namespace Helios
                          const std::vector<uint32_t>& indices = {}) = 0;
     virtual void SetVertexLayout(const VertexLayout& layout) = 0;
 
-    virtual inline const MeshType GetType() const = 0;
+    virtual inline MeshType GetType() const = 0;
 
-    virtual inline const bool IsLoaded() const = 0;
+    virtual inline bool IsLoaded() const = 0;
 
     virtual inline const std::vector<std::byte>& GetVertices() const = 0;
     virtual inline const std::vector<uint32_t>& GetIndices() const = 0;
 
-    virtual inline const uint32_t GetVertexCount() const = 0;
-    virtual inline const uint32_t GetIndexCount() const = 0;
+    virtual inline uint32_t GetVertexCount() const = 0;
+    virtual inline uint32_t GetIndexCount() const = 0;
 
-    virtual inline const uint64_t GetVertexSize() const = 0;
-    virtual inline const uint64_t GetIndexSize() const = 0;
+    virtual inline uint64_t GetVertexSize() const = 0;
+    virtual inline uint64_t GetIndexSize() const = 0;
 
     virtual inline const VertexLayout& GetVertexLayout() const = 0;
 
-    static std::shared_ptr<Mesh> Create(const MeshType type, const std::vector<std::byte>& vertices,
-                                        const uint32_t vertexCount, const std::vector<uint32_t>& indices = {});
+    static std::shared_ptr<Mesh> Create(MeshType type, const std::vector<std::byte>& vertices,
+                                        uint32_t vertexCount, const std::vector<uint32_t>& indices = {});
 
-    static std::shared_ptr<Mesh> Create(const MeshType type, const uint32_t vertexCount, const uint32_t indexCount);
+    static std::shared_ptr<Mesh> Create(MeshType type, uint32_t vertexCount, uint32_t indexCount);
   };
 
   template<typename T>

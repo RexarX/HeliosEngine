@@ -1,22 +1,26 @@
-#include "Renderer/Vulkan/VulkanMesh.h"
-#include "Renderer/Vulkan/VulkanContext.h"
+#include "VulkanMesh.h"
+#include "VulkanContext.h"
 
 namespace Helios
 {
-  VulkanMesh::VulkanMesh(const MeshType type, const std::vector<std::byte>& vertices,
-                         const uint32_t vertexCount, const std::vector<uint32_t>& indices)
+  VulkanMesh::VulkanMesh(MeshType type, const std::vector<std::byte>& vertices,
+                         uint32_t vertexCount, const std::vector<uint32_t>& indices)
     : m_Type(type), m_VertexData(vertices), m_VertexCount(vertexCount), m_Indices(indices)
   {
-    VulkanContext& context = VulkanContext::Get();
-
-    Load();
-
-    context.GetDeletionQueue().PushFunction([this]() { Unload(); });
   }
 
-  VulkanMesh::VulkanMesh(const MeshType type, const uint32_t vertexCount, const uint32_t indexCount)
+  VulkanMesh::VulkanMesh(MeshType type, uint32_t vertexCount, uint32_t indexCount)
     : m_Type(type), m_VertexCount(vertexCount), m_Indices(indexCount)
   {
+  }
+
+  VulkanMesh::VulkanMesh(const VulkanMesh& other)
+  {
+  }
+
+  VulkanMesh::~VulkanMesh()
+  {
+    Unload();
   }
 
   void VulkanMesh::Load()
@@ -39,7 +43,7 @@ namespace Helios
     m_Loaded = false;
   }
 
-  void VulkanMesh::SetData(const std::vector<std::byte>& vertices, const uint32_t vertexCount,
+  void VulkanMesh::SetData(const std::vector<std::byte>& vertices, uint32_t vertexCount,
                            const std::vector<uint32_t>& indices)
   {
     if (m_Type == MeshType::Static) { CORE_ASSERT(false, "Cannot modify static mesh!"); return; }
@@ -51,8 +55,7 @@ namespace Helios
 
       m_VertexData = vertices;
       m_VertexCount = vertexCount;
-    }
-    else {
+    } else {
       VulkanContext& context = VulkanContext::Get();
       VmaAllocator allocator = context.GetAllocator();
 
@@ -91,8 +94,7 @@ namespace Helios
                0, (m_Indices.size() - indices.size()) * sizeof(uint32_t));
 
         m_Indices = indices;
-      }
-      else {
+      } else {
         VulkanContext& context = VulkanContext::Get();
         VmaAllocator allocator = context.GetAllocator();
 
@@ -129,8 +131,8 @@ namespace Helios
   {
     switch (m_Type)
     {
-    case MeshType::Static: CreateStaticVertexBuffer(); break;
-    case MeshType::Dynamic: CreateDynamicVertexBuffer(); break;
+    case MeshType::Static: CreateStaticVertexBuffer(); return;
+    case MeshType::Dynamic: CreateDynamicVertexBuffer(); return;
     }
   }
 
@@ -146,8 +148,8 @@ namespace Helios
   {
     switch (m_Type)
     {
-    case MeshType::Static: CreateStaticIndexBuffer(); break;
-    case MeshType::Dynamic: CreateDynamicIndexBuffer(); break;
+    case MeshType::Static: CreateStaticIndexBuffer(); return;
+    case MeshType::Dynamic: CreateDynamicIndexBuffer(); return;
     }
   }
 
@@ -215,7 +217,7 @@ namespace Helios
 
     VkBufferCreateInfo bufferInfo{};
     bufferInfo.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
-    bufferInfo.size = static_cast<uint64_t>(m_VertexData.size() * 1.25);
+    bufferInfo.size = static_cast<uint64_t>(m_VertexData.size() * 1.5);
     bufferInfo.usage = VK_BUFFER_USAGE_VERTEX_BUFFER_BIT;
     bufferInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
 
@@ -297,10 +299,5 @@ namespace Helios
     CORE_ASSERT(result == VK_SUCCESS, "Failed to create index buffer!");
 
     memcpy(m_IndexBuffer.info.pMappedData, m_Indices.data(), m_Indices.size() * sizeof(uint32_t));
-  }
-
-  void VulkanMesh::Resize()
-  {
-
   }
 }

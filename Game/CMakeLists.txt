@@ -1,13 +1,11 @@
 set(PROJECT_NAME Game)
 
 file(GLOB_RECURSE src
-    "src/*.h"
-    "src/*.cpp"
+    "src/*.h" "src/*.cpp"
 )
 
 file(GLOB_RECURSE src__Layers
-    "src/Layers/*.h"
-    "src/Layers/*.cpp"
+    "src/Layers/*.h" "src/Layers/*.cpp"
 )
 
 file(GLOB V_GLOB LIST_DIRECTORIES true "src/Scripts/*")
@@ -21,8 +19,8 @@ foreach(item ${V_GLOB})
 endforeach()
 
 file(GLOB_RECURSE src__Scripts
-	"src/Scripts/*.h"
-	"src/Scripts/*.cpp"
+	"src/Scripts/*.h" "src/Scripts/*.cpp"
+	
 	${Scripts}
 )
 
@@ -84,48 +82,20 @@ if(WIN32)
 	target_compile_definitions(${PROJECT_NAME} PRIVATE "PLATFORM_WINDOWS;")
 endif()
 
-if(MSVC)
-    target_compile_options(${PROJECT_NAME} PRIVATE
-        $<$<CONFIG:Debug>:
-            /Od;
-            /Zi;
-        >
-        $<$<CONFIG:Release>:
-            /O2;
-            /Oi;
-            /Gy;
-            ${DEFAULT_CXX_DEBUG_INFORMATION_FORMAT}
-        >
-        $<$<CONFIG:Dist>:
-            /O2;
-            /Oi;
-            /Gy;
-            ${DEFAULT_CXX_DEBUG_INFORMATION_FORMAT}
-        >
-        /W3;
-        ${DEFAULT_CXX_EXCEPTION_HANDLING};
-        /Y-
-    )
-    target_link_options(${PROJECT_NAME} PRIVATE
-        $<$<CONFIG:Debug>:
-            /DEBUG;
-            /INCREMENTAL;
-        >
-        $<$<CONFIG:Release>:
-            /DEBUG:NONE;
-            /OPT:REF;
-            /OPT:ICF;
-            /INCREMENTAL:NO;
-        >
-        $<$<CONFIG:Dist>:
-            /DEBUG:NONE;
-            /OPT:REF;
-            /OPT:ICF;
-            /INCREMENTAL:NO;
-        >
-        /SUBSYSTEM:CONSOLE
-    )
-endif()
+target_compile_options(${PROJECT_NAME} PRIVATE
+    $<$<CXX_COMPILER_ID:MSVC>:
+        $<$<CONFIG:Debug>:/Od /Zi>
+        $<$<CONFIG:Release>:/O2 /Oi /Gy>
+        $<$<CONFIG:Dist>:/O2 /Oi /Gy>
+        /W3
+    >
+    $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>:
+        $<$<CONFIG:Debug>:-O0 -g>
+        $<$<CONFIG:Release>:-O3>
+        $<$<CONFIG:Dist>:-O3>
+        -Wno-switch
+    >
+)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
 	HeliosEngine

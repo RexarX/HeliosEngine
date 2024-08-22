@@ -23,44 +23,38 @@ namespace Helios
 		EventCategoryMouseButton = BIT(4)
 	};
 
-#define EVENT_CLASS_TYPE(type) static const EventType GetStaticType() { return EventType::type; }\
-								virtual const EventType GetEventType() const override { return GetStaticType(); }\
-								virtual const char* GetName() const override { return #type; }
+	#define EVENT_CLASS_TYPE(type) static inline EventType GetStaticType() { return EventType::type; }\
+																 virtual inline EventType GetEventType() const override { return GetStaticType(); }\
+																 virtual inline const char* GetName() const override { return #type; }
 
-#define EVENT_CLASS_CATEGORY(category) virtual const int GetCategoryFlags() const override { return category; }
+	#define EVENT_CLASS_CATEGORY(category) virtual inline uint32_t GetCategoryFlags() const override { return category; }
 
 	class HELIOSENGINE_API Event
 	{
 	public:
 		bool Handled = false;
 
-		virtual const EventType GetEventType() const = 0;
+		virtual EventType GetEventType() const = 0;
 		virtual const char* GetName() const = 0;
-		virtual const int GetCategoryFlags() const = 0;
-		virtual inline const std::string ToString() const { return GetName(); }
+		virtual uint32_t GetCategoryFlags() const = 0;
+		virtual inline std::string ToString() const { return GetName(); }
 
-		inline const bool IsInCategory(EventCategory category)
-		{
-			return GetCategoryFlags() & category;
-		}
+		inline bool IsInCategory(EventCategory category) { return GetCategoryFlags() & category; }
 	};
 
 	class EventDispatcher
 	{
 		template<typename T>
-		using EventFn = std::function<const bool(T&)>;
+		using EventFn = std::function<bool(T&)>;
 
 	public:
-		EventDispatcher(Event& event)
-			: m_Event(event)
-		{
-		}
+		EventDispatcher(Event& event) : m_Event(event) {}
 
 		template<typename T>
-		const bool Dispatch(EventFn<T> func)
+		bool Dispatch(EventFn<T> func)
 		{
 			if (m_Event.GetEventType() == T::GetStaticType()) {
-				m_Event.Handled = func(*(T*)&m_Event);
+				m_Event.Handled = func(static_cast<T&>(m_Event));
 				return true;
 			}
 			return false;
@@ -70,8 +64,5 @@ namespace Helios
 		Event& m_Event;
 	};
 
-	inline std::ostream& operator<<(std::ostream& os, Event& e)
-	{
-		return os << e.ToString();
-	}
+	inline std::ostream& operator<<(std::ostream& os, Event& e) { return os << e.ToString(); }
 }

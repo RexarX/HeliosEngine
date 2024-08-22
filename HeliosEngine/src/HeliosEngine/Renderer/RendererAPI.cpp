@@ -1,5 +1,5 @@
-#include "Renderer/RendererAPI.h"
-#include "Renderer/Vulkan/VulkanContext.h"
+#include "RendererAPI.h"
+#include "Vulkan/VulkanContext.h"
 
 namespace Helios
 {

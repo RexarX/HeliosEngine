@@ -1,5 +1,5 @@
-#include "Renderer/Vulkan/VulkanShader.h"
-#include "Renderer/Vulkan/VulkanContext.h"
+#include "VulkanShader.h"
+#include "VulkanContext.h"
 
 #include "Utils/Filesystem.h"
 
@@ -7,11 +7,10 @@
 
 namespace Helios
 {
-	const VkShaderStageFlagBits translateStageToVulkan(const ShaderStage stage)
+	static VkShaderStageFlagBits translateStageToVulkan(ShaderStage stage)
 	{
 		switch (stage)
 		{
-		case ShaderStage::None: break;
 		case ShaderStage::Vertex: return VK_SHADER_STAGE_VERTEX_BIT;
 		case ShaderStage::Fragment: return VK_SHADER_STAGE_FRAGMENT_BIT;
 		case ShaderStage::Compute: return VK_SHADER_STAGE_COMPUTE_BIT;
@@ -20,7 +19,7 @@ namespace Helios
 		CORE_ASSERT(false, "Unknown shader stage!");
 	}
 
-	const shaderc_shader_kind translateStageToShaderc(const VkShaderStageFlagBits stage)
+	static shaderc_shader_kind translateStageToShaderc(VkShaderStageFlagBits stage)
 	{
 		switch (stage)
 		{
@@ -35,8 +34,8 @@ namespace Helios
 		CORE_ASSERT(false, "Unknown shader stage!");
 	}
 
-	const bool GLSLtoSPV(const VkShaderStageFlagBits shaderType, const std::string& glslShader,
-											 const std::string& fileName, std::vector<uint32_t>& spvShader)
+	static bool GLSLtoSPV(VkShaderStageFlagBits shaderType, const std::string& glslShader,
+												const std::string& fileName, std::vector<uint32_t>& spvShader)
 	{
 		shaderc::Compiler compiler;
 		shaderc::CompileOptions options;
@@ -60,8 +59,6 @@ namespace Helios
 
 	VulkanShader::VulkanShader(const std::initializer_list<ShaderInfo>& infos)
 	{
-		VulkanContext::Get().GetDeletionQueue().PushFunction([this]() { Unload(); });
-
 		for (const auto& info : infos) {
 			VulkanShaderInfo newInfo{};
 			newInfo.path = info.path;
@@ -70,16 +67,25 @@ namespace Helios
 
 			m_ShaderInfos.push_back(newInfo);
 		}
+
+		Load();
+	}
+
+	VulkanShader::~VulkanShader()
+	{
+		VkDevice device = VulkanContext::Get().GetDevice();
+
+		for (auto& info : m_ShaderInfos) {
+			vkDestroyShaderModule(device, info.shaderModule, nullptr);
+		}
 	}
 
 	void VulkanShader::Load()
 	{
-		if (m_Loaded) { return; }
-
 		VkDevice device = VulkanContext::Get().GetDevice();
 
 		for (auto& info : m_ShaderInfos) {
-			if (!info.code.empty()) { continue; }
+			std::vector<uint32_t> spvCode;
 
 			std::filesystem::path path(info.path);
 			std::string code = Utils::ReadFileToString(info.path);
@@ -94,36 +100,23 @@ namespace Helios
 				if (index != std::string::npos) {
 					name = name.substr(0, index + 1);
 				}
-				if (!GLSLtoSPV(info.stage, code, name, info.code)) {
+				if (!GLSLtoSPV(info.stage, code, name, spvCode)) {
 					CORE_ERROR("Failed to compile shader: {0}!", info.path);
 					continue;
-				}
-				else {
-					info.code.resize(code.size() / sizeof(uint32_t));
-					memcpy(info.code.data(), code.data(), code.size());
+				} else {
+					spvCode.resize(code.size() / sizeof(uint32_t));
+					memcpy(spvCode.data(), code.data(), code.size());
 				}
 			}
 
 			VkShaderModuleCreateInfo shaderModuleInfo{};
 			shaderModuleInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
 			shaderModuleInfo.flags = 0;
-			shaderModuleInfo.codeSize = info.code.size() * sizeof(uint32_t);
-			shaderModuleInfo.pCode = info.code.data();
+			shaderModuleInfo.codeSize = spvCode.size() * sizeof(uint32_t);
+			shaderModuleInfo.pCode = spvCode.data();
 
-			VkShaderModule shaderModule;
-			vkCreateShaderModule(device, &shaderModuleInfo, nullptr, &shaderModule);
-			CORE_ASSERT(shaderModule, "Failed to create shader module: {0}!", info.path);
-		}
-	}
-
-	void VulkanShader::Unload()
-	{
-		if (!m_Loaded) { return; }
-
-		VkDevice device = VulkanContext::Get().GetDevice();
-
-		for (auto& info : m_ShaderInfos) {
-			vkDestroyShaderModule(device, info.shaderModule, nullptr);
+			auto result = vkCreateShaderModule(device, &shaderModuleInfo, nullptr, &info.shaderModule);
+			CORE_ASSERT(result == VK_SUCCESS, "Failed to create shader module: {0}!", info.path);
 		}
 	}
 }

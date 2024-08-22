@@ -8,21 +8,21 @@ namespace Helios
 {
 	std::unique_ptr<Input> Input::m_Instance = std::make_unique<WindowsInput>();
 
-	const bool WindowsInput::IsKeyPressedImpl(const KeyCode keycode)
+	bool WindowsInput::IsKeyPressedImpl(const KeyCode keycode)
 	{
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 		auto state = glfwGetKey(window, keycode);
 		return state == GLFW_PRESS || state == GLFW_REPEAT;
 	}
 
-	const bool WindowsInput::IsMouseButtonPressedImpl(const MouseCode button)
+	bool WindowsInput::IsMouseButtonPressedImpl(const MouseCode button)
 	{
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 		auto state = glfwGetKey(window, button);
 		return state == GLFW_PRESS;
 	}
 
-	const std::pair<float, float> WindowsInput::GetMousePositionImpl()
+	std::pair<float, float> WindowsInput::GetMousePositionImpl()
 	{
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 		double xpos, ypos;
@@ -31,12 +31,12 @@ namespace Helios
 		return { (float)xpos, (float)ypos };
 	}
 
-	const float WindowsInput::GetMouseXImpl()
+	float WindowsInput::GetMouseXImpl()
 	{
 		auto [x, y] = GetMousePositionImpl();
 		return x;
 	}
-	const float WindowsInput::GetMouseYImpl()
+	float WindowsInput::GetMouseYImpl()
 	{
 		auto [x, y] = GetMousePositionImpl();
 		return y;

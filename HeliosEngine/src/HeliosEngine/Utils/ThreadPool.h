@@ -13,7 +13,7 @@ namespace Helios::Utils
   class ThreadPool
   {
   public:
-    ThreadPool(const uint32_t numThreads);
+    ThreadPool(uint32_t numThreads);
     ~ThreadPool();
 
     template<class F, class... Args>

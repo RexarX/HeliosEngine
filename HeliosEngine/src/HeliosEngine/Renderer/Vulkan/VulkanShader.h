@@ -9,7 +9,6 @@ namespace Helios
   struct VulkanShaderInfo
   {
     std::string path;
-    std::vector<uint32_t> code;
     VkShaderStageFlagBits stage;
     VkShaderModule shaderModule;
   };
@@ -18,14 +17,14 @@ namespace Helios
   {
   public:
     VulkanShader(const std::initializer_list<ShaderInfo>& infos);
-    virtual ~VulkanShader() = default;
+    virtual ~VulkanShader();
 
-    void Load() override;
-    void Unload() override;
+    inline const std::vector<VulkanShaderInfo>& GetShaderInfos() const { return m_ShaderInfos; }
 
   private:
-    bool m_Loaded = false;
+    void Load();
 
+  private:
     std::vector<VulkanShaderInfo> m_ShaderInfos;
   };
 }

@@ -2,7 +2,7 @@
 
 namespace Helios::Utils
 {
-  ThreadPool::ThreadPool(const uint32_t numThreads)
+  ThreadPool::ThreadPool(uint32_t numThreads)
   {
     for (uint32_t i = 0; i < numThreads; ++i) {
       m_Workers.emplace_back([this] {

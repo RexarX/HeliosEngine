@@ -66,9 +66,8 @@ namespace Helios
 				win.m_Data.Height = height;
 
 				WindowResizeEvent event(width, height);
+				win.m_Context->SetViewport(width, height);
 				win.m_Data.EventCallback(event);
-
-				win.m_Context->SetResized(true);
 			});
 
 		glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window)
@@ -78,8 +77,7 @@ namespace Helios
 				win.m_Data.EventCallback(event);
 			});
 
-		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, const int key, const int scancode,
-																		const int action, const int mods)
+		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
 			{
         WindowsWindow& win = *(WindowsWindow*)glfwGetWindowUserPointer(window);
 
@@ -108,8 +106,7 @@ namespace Helios
 				}
 			});
 
-		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, const int button,
-																						const int action, const int mods)
+		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods)
 			{
 				WindowsWindow& win = *(WindowsWindow*)glfwGetWindowUserPointer(window);
 
@@ -138,8 +135,7 @@ namespace Helios
 				}
 			});
 
-		glfwSetScrollCallback(m_Window, [](GLFWwindow* window, const double xOffset,
-																			 const double yOffset)
+		glfwSetScrollCallback(m_Window, [](GLFWwindow* window, double xOffset, double yOffset)
 			{
 				WindowsWindow& win = *(WindowsWindow*)glfwGetWindowUserPointer(window);
 
@@ -147,8 +143,7 @@ namespace Helios
 				win.m_Data.EventCallback(event);
 			});
 
-		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, const double xPos,
-																					const double yPos)
+		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, double xPos, double yPos)
 			{
 				WindowsWindow& win = *(WindowsWindow*)glfwGetWindowUserPointer(window);
 
@@ -172,6 +167,16 @@ namespace Helios
 		m_Context->Update();
   }
 
+  void WindowsWindow::BeginFrame()
+  {
+		m_Context->BeginFrame();
+  }
+
+	void WindowsWindow::EndFrame()
+	{
+    m_Context->EndFrame();
+	}
+
   void WindowsWindow::InitImGui()
   {
     m_Context->InitImGui();
@@ -192,25 +197,24 @@ namespace Helios
     m_Context->EndFrameImGui();
 	}
 
-  void WindowsWindow::SetVSync(const bool enabled)
+  void WindowsWindow::SetVSync(bool enabled)
   {
 		m_Context->SetVSync(enabled);
 		m_Data.VSync = enabled;
   }
 
-  void WindowsWindow::SetMinimized(const bool enabled)
+  void WindowsWindow::SetMinimized(bool enabled)
   {
 		m_Data.Minimized = enabled;
   }
 
-	void WindowsWindow::SetFocused(const double enabled)
+	void WindowsWindow::SetFocused(double enabled)
 	{
 		if (enabled) {
 			glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 			WindowFocusedEvent event;
 			m_Data.EventCallback(event);
-		}
-		else {
+		} else {
 			glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 			WindowLostFocusEvent event;
 			m_Data.EventCallback(event);
@@ -219,7 +223,7 @@ namespace Helios
 		m_Data.Focus = enabled;
 	}
 
-	void WindowsWindow::SetFullscreen(const bool enabled)
+	void WindowsWindow::SetFullscreen(bool enabled)
 	{
 		if (enabled) {
 			uint32_t width, height;
@@ -245,43 +249,43 @@ namespace Helios
 		m_Data.Fullscreen = enabled;
 	}
 
-  void WindowsWindow::SetFramerate(const double framerate)
+  void WindowsWindow::SetFramerate(double framerate)
   {
     m_Data.Framerate = framerate;
   }
 
-	void WindowsWindow::SetImGuiState(const bool enabled)
+	void WindowsWindow::SetImGuiState(bool enabled)
 	{
 		m_Context->SetImGuiState(enabled);
     m_Data.ShowImGui = enabled;
 	}
 
-	inline const double WindowsWindow::GetFramerate() const
+	inline double WindowsWindow::GetFramerate() const
 	{
 		return m_Data.Framerate;
 	}
 
-	inline const bool WindowsWindow::IsVSync() const
+	inline bool WindowsWindow::IsVSync() const
   {
 		return m_Data.VSync;
   }
 
-	inline const bool WindowsWindow::IsMinimized() const
+	inline bool WindowsWindow::IsMinimized() const
 	{
 		return m_Data.Minimized;
 	}
 
-	inline const bool WindowsWindow::IsFocused() const
+	inline bool WindowsWindow::IsFocused() const
 	{
 		return m_Data.Focus;
 	}
 
-	inline const bool WindowsWindow::IsFullscreen() const
+	inline bool WindowsWindow::IsFullscreen() const
 	{
 		return m_Data.Fullscreen;
 	}
 
-	inline const bool WindowsWindow::IsImGuiEnabled() const
+	inline bool WindowsWindow::IsImGuiEnabled() const
 	{
 		return m_Data.ShowImGui;
 	}

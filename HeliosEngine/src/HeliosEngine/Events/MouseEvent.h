@@ -9,15 +9,12 @@ namespace Helios
 	class HELIOSENGINE_API MouseMovedEvent : public Event
 	{
 	public:
-		MouseMovedEvent(const float x, const float y)
-			: m_MouseX(x), m_MouseY(y)
-		{
-		}
+		MouseMovedEvent(float x, float y) : m_MouseX(x), m_MouseY(y) {}
 
-		inline const float GetX() const { return m_MouseX; }
-		inline const float GetY() const { return m_MouseY; }
+		inline float GetX() const { return m_MouseX; }
+		inline float GetY() const { return m_MouseY; }
 
-		const std::string ToString() const override
+		std::string ToString() const override
 		{
 			std::stringstream ss;
 			ss << "MouseMovedEvent: " << m_MouseX << ", " << m_MouseY;
@@ -34,15 +31,15 @@ namespace Helios
 	class HELIOSENGINE_API MouseScrolledEvent : public Event
 	{
 	public:
-		MouseScrolledEvent(const float xOffset, const float yOffset)
+		MouseScrolledEvent(float xOffset, float yOffset)
 			: m_XOffset(xOffset), m_YOffset(yOffset) 
 		{
 		}
 
-		inline const float GetXOffset() const { return m_XOffset; }
-		inline const float GetYOffset() const { return m_YOffset; }
+		inline float GetXOffset() const { return m_XOffset; }
+		inline float GetYOffset() const { return m_YOffset; }
 
-		const std::string ToString() const override
+		std::string ToString() const override
 		{
 			std::stringstream ss;
 			ss << "MouseScrolledEvent: " << GetXOffset() << ", " << GetYOffset();
@@ -59,15 +56,12 @@ namespace Helios
 	class HELIOSENGINE_API MouseButtonEvent : public Event
 	{
 	public:
-		inline const MouseCode GetMouseButton() const { return m_Button; }
+		inline MouseCode GetMouseButton() const { return m_Button; }
 
 		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
 
 	protected:
-		MouseButtonEvent(const MouseCode button)
-			: m_Button(button) 
-		{
-		}
+		MouseButtonEvent(MouseCode button) : m_Button(button) {}
 
 		MouseCode m_Button;
 	};
@@ -75,12 +69,9 @@ namespace Helios
 	class HELIOSENGINE_API MouseButtonPressedEvent : public MouseButtonEvent
 	{
 	public:
-		MouseButtonPressedEvent(const MouseCode button)
-			: MouseButtonEvent(button) 
-		{
-		}
+		MouseButtonPressedEvent(MouseCode button) : MouseButtonEvent(button) {}
 
-		const std::string ToString() const override
+		std::string ToString() const override
 		{
 			std::stringstream ss;
 			ss << "MouseButtonPressedEvent: " << m_Button;
@@ -93,12 +84,9 @@ namespace Helios
 	class HELIOSENGINE_API MouseButtonReleasedEvent : public MouseButtonEvent
 	{
 	public:
-		MouseButtonReleasedEvent(MouseCode button)
-			: MouseButtonEvent(button) 
-		{
-		}
+		MouseButtonReleasedEvent(MouseCode button) : MouseButtonEvent(button) {}
 
-		const std::string ToString() const override
+		std::string ToString() const override
 		{
 			std::stringstream ss;
 			ss << "MouseButtonReleasedEvent: " << m_Button;

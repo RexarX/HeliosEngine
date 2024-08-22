@@ -20,6 +20,8 @@ namespace Helios
 
 		void PoolEvents() override;
 		void OnUpdate() override;
+		void BeginFrame() override;
+		void EndFrame() override;
 
 		void InitImGui() override;
 		void ShutdownImGui() override;
@@ -35,16 +37,16 @@ namespace Helios
 		void SetFramerate(const double framerate) override;
 		void SetImGuiState(const bool enabled) override;
 
-		inline const uint32_t GetWidth() const override { return m_Data.Width; }
-		inline const uint32_t GetHeight() const override { return m_Data.Height; }
+		inline uint32_t GetWidth() const override { return m_Data.Width; }
+		inline uint32_t GetHeight() const override { return m_Data.Height; }
 
-		inline const double GetFramerate() const override;
+		inline double GetFramerate() const override;
 
-		inline const bool IsVSync() const override;
-		inline const bool IsMinimized() const override;
-		inline const bool IsFocused() const override;
-		inline const bool IsFullscreen() const override;
-		inline const bool IsImGuiEnabled() const override;
+		inline bool IsVSync() const override;
+		inline bool IsMinimized() const override;
+		inline bool IsFocused() const override;
+		inline bool IsFullscreen() const override;
+		inline bool IsImGuiEnabled() const override;
 
 		virtual inline void* GetNativeWindow() const { return m_Window; }
 

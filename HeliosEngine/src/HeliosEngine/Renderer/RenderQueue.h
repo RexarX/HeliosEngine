@@ -1,21 +1,49 @@
 #pragma once
 
-#include "EntityComponentSystem/Components/Renderable.h"
+#include "EntityComponentSystem/Components.h"
+
+#include <glm/glm.hpp>
 
 namespace Helios
 {
+  struct SceneData
+  {
+    glm::mat4 projectionViewMatrix = glm::mat4(1.0f);
+  };
+
+  struct RenderObject
+  {
+    Renderable renderable;
+    Transform transform;
+  };
+
   class RenderQueue
   {
   public:
     RenderQueue() = default;
     ~RenderQueue() = default;
 
-    void Clear() { m_Renderables.clear(); }
-    void AddRenderable(const Renderable& renderable) { m_Renderables.push_back(renderable); }
+    void Clear() { m_RenderObjects.clear(); }
 
-    inline const std::vector<Renderable>& GetRenderables() const { return m_Renderables; }
+    void AddRenderObject(const RenderObject& renderObject) {
+      m_RenderObjects.push_back(renderObject);
+    }
+
+    void AddRenderObject(const Renderable& renderable, const Transform& transform) {
+      m_RenderObjects.push_back(RenderObject{ renderable, transform });
+    }
+
+    void SetSceneData(const SceneData& sceneData) { m_SceneData = sceneData; }
+    void SetSceneData(const glm::mat4& projectionViewMatrix) {
+      m_SceneData.projectionViewMatrix = projectionViewMatrix;
+    }
+
+    inline const std::vector<RenderObject>& GetRenderObjects() const { return m_RenderObjects; }
+    inline const SceneData& GetSceneData() const { return m_SceneData; }
 
   private:
-    std::vector<Renderable> m_Renderables;
+    std::vector<RenderObject> m_RenderObjects;
+
+    SceneData m_SceneData;
   };
 }

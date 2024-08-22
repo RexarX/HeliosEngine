@@ -7,15 +7,15 @@ namespace Helios
 	class HELIOSENGINE_API WindowResizeEvent : public Event
 	{
 	public:
-		WindowResizeEvent(const uint32_t width, const uint32_t height)
+		WindowResizeEvent(uint32_t width, uint32_t height)
 			: m_Width(width), m_Height(height)
 		{
 		}
 
-		inline const uint32_t GetWidth() const { return m_Width; }
-		inline const uint32_t GetHeight() const { return m_Height; }
+		inline uint32_t GetWidth() const { return m_Width; }
+		inline uint32_t GetHeight() const { return m_Height; }
 
-		const std::string ToString() const override
+		std::string ToString() const override
 		{
 			std::stringstream ss;
 			ss << "WindowResizeEvent: " << m_Width << ", " << m_Height;
@@ -69,9 +69,9 @@ namespace Helios
 	{
 	public:
 		AppUpdateEvent() = default;
-    AppUpdateEvent(const double deltaTime) : m_DeltaTime(deltaTime) {}
+    AppUpdateEvent(double deltaTime) : m_DeltaTime(deltaTime) {}
 
-    inline const double GetDeltaTime() const { return m_DeltaTime; }
+    inline double GetDeltaTime() const { return m_DeltaTime; }
 
 		EVENT_CLASS_TYPE(AppUpdate)
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)

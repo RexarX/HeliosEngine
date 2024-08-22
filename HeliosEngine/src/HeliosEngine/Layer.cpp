@@ -4,8 +4,5 @@
 
 namespace Helios 
 {
-	Layer::Layer(const std::string& m_Name)
-		: m_Name(m_Name)
-	{
-	}
+	Layer::Layer(const std::string& m_Name) : m_Name(m_Name) {}
 }

@@ -4,6 +4,7 @@
 #include <memory>
 #include <utility>
 #include <algorithm>
+#include <random>
 #include <functional>
 #include <thread>
 #include <mutex>
@@ -33,5 +34,6 @@
 
 #include "HeliosEngine/Utils/Filesystem.h"
 #include "HeliosEngine/Utils/Profiler.h"
+#include "HeliosEngine/Utils/Random.h"
 #include "HeliosEngine/Utils/ThreadPool.h"
 #include "HeliosEngine/Utils/Timer.h"

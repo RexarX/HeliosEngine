@@ -1,12 +1,11 @@
-#include "Renderer/Vulkan/VulkanTexture.h"
-#include "Renderer/Vulkan/VulkanContext.h"
+#include "VulkanTexture.h"
+#include "VulkanContext.h"
 
 #include <stb_image/stb_image.h>
 
 namespace Helios
 {
-  VulkanTexture::VulkanTexture(const std::string& path, const uint32_t mipLevel,
-                               const uint32_t anisoLevel, const ImageFormat format)
+  VulkanTexture::VulkanTexture(const std::string& path, uint32_t mipLevel, uint32_t anisoLevel, ImageFormat format)
     : m_MipLevel(mipLevel), m_AnisoLevel(anisoLevel), m_Format(format)
   {
   }

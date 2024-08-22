@@ -21,11 +21,9 @@ namespace Helios
 		virtual void OnDetach() override;
 		virtual void OnEvent(Event& e) override;
 
-		void Begin();
-		void End();
-		void BlockEvents(const bool block) noexcept { m_BlockEvents = block; }
+		void BlockEvents(bool block) noexcept { m_BlockEvents = block; }
 
-		inline const uint32_t GetActiveWidgetID() const noexcept;
+		inline uint32_t GetActiveWidgetID() const noexcept;
 
 	private:
 		bool m_BlockEvents = true;

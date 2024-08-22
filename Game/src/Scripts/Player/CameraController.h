@@ -5,29 +5,23 @@
 class CameraController : public Helios::Script
 {
 public:
-	CameraController(Helios::Camera& camera);
+	CameraController(Helios::Entity& camera);
 	virtual ~CameraController();
 
 	void OnAttach() override;
-	void OnDetach() override;
-	void OnUpdate(const Helios::Timestep deltaTime) override;
+	void OnUpdate(Helios::Timestep deltaTime) override;
 	void OnEvent(Helios::Event& event) override;
 
-	void SetCameraTranslationSpeed(const float speed) { m_CameraTranslationSpeed = speed; }
-	void SetCameraRotationSpeed(const float speed) { m_CameraRotationSpeed = speed; }
-
-	inline const glm::vec3& GetPosition() const { return m_Position; }
-	inline const glm::vec3& GetRotation() const { return glm::vec3(m_Pitch, m_Yaw, 0.0f); }
+	void SetCameraTranslationSpeed(float speed) { m_CameraTranslationSpeed = speed; }
+	void SetCameraRotationSpeed(float speed) { m_CameraRotationSpeed = speed; }
 
 private:
-	const bool OnMouseMovedEvent(Helios::MouseMovedEvent& event);
-	const bool OnWindowFocusedEvent(Helios::WindowFocusedEvent& event);
-	const bool OnWindowLostFocusEvent(Helios::WindowLostFocusEvent& event);
+	bool OnMouseMovedEvent(Helios::MouseMovedEvent& event);
+	bool OnWindowFocusedEvent(Helios::WindowFocusedEvent& event);
+	bool OnWindowLostFocusEvent(Helios::WindowLostFocusEvent& event);
 
 private:
-	Helios::Camera& m_Camera;
-
-	glm::vec3 m_Position = glm::vec3(0.0f);
+	Helios::Entity& m_Camera;
 
 	float m_CameraTranslationSpeed = 5.0f;
 	float m_CameraRotationSpeed = 0.1f;

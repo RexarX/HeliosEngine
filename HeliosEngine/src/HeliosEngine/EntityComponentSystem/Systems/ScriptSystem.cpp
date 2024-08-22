@@ -1,31 +1,22 @@
-#include "EntityComponentSystem/Systems/ScriptSystem.h"
-#include "EntityComponentSystem/Systems/SystemImpl.h"
+#include "ScriptSystem.h"
 
-#include "EntityComponentSystem/Components/Script.h"
+#include "EntityComponentSystem/Components.h"
 
 namespace Helios
 {
-  void ScriptSystem::OnUpdate(ECSManager& ecs, const Timestep deltaTime)
+  void ScriptSystem::OnUpdate(entt::registry& registry, Timestep deltaTime)
   {
-    auto& entities = ecs.GetEntitiesWithComponents(
-      GetRequiredComponents<Script>(ecs)
-    );
-
-    for (const auto entity : entities) {
-      auto& scriptComponent = ecs.GetComponent<Script>(entity);
-      scriptComponent.OnUpdate(deltaTime);
+    const auto& view = registry.view<Script>();
+    for (entt::entity entity : view) {
+      registry.get<Script>(entity).OnUpdate(deltaTime);
     }
   }
 
-  void ScriptSystem::OnEvent(ECSManager& ecs, Event& event)
+  void ScriptSystem::OnEvent(entt::registry& registry, Event& event)
   {
-    auto& entities = ecs.GetEntitiesWithComponents(
-      GetRequiredComponents<Script>(ecs)
-    );
-
-    for (const auto entity : entities) {
-      auto& scriptComponent = ecs.GetComponent<Script>(entity);
-      scriptComponent.OnEvent(event);
+    const auto& view = registry.view<Script>();
+    for (entt::entity entity : view) {
+      registry.get<Script>(entity).OnEvent(event);
     }
   }
 }

@@ -1,10 +1,13 @@
-#include "Renderer/Vulkan/VulkanContext.h"
+#include "VulkanContext.h"
+#include "VulkanResourceManager.h"
+#include "VulkanMesh.h"
 
 #include <GLFW/glfw3.h>
 
 #include <imgui/imgui.h>
 #include <backends/imgui_impl_glfw.h>
 #include <backends/imgui_impl_vulkan.h>
+
 
 namespace Helios
 {
@@ -90,14 +93,13 @@ namespace Helios
 
   void VulkanContext::Update()
   {
+    if (m_SwapchainRecreated) { m_SwapchainRecreated = false; return; }
+    Submit();
   }
 
   void VulkanContext::BeginFrame()
   {
-    if (m_SwapchainRecreated) {
-      RecreateSwapchain();
-      return;
-    }
+    if (m_SwapchainRecreated) { RecreateSwapchain(); return; }
 
     auto result = vkWaitForFences(m_Device, 1, &m_Frames[m_CurrentFrame].renderFence, VK_TRUE,
                                   std::numeric_limits<uint64_t>::max());
@@ -110,11 +112,7 @@ namespace Helios
     result = vkAcquireNextImageKHR(m_Device, m_Swapchain, std::numeric_limits<uint64_t>::max(),
                                    m_Frames[m_CurrentFrame].presentSemaphore, VK_NULL_HANDLE, &m_ImageIndex);
 
-    if (result == VK_ERROR_OUT_OF_DATE_KHR) {
-      RecreateSwapchain();
-      m_SwapchainRecreated = true;
-      return;
-    }
+    if (result == VK_ERROR_OUT_OF_DATE_KHR) { RecreateSwapchain(); return; }
     else if (result != VK_SUCCESS && result != VK_SUBOPTIMAL_KHR) {
       CORE_ASSERT(false, "Failed to acquire next image!");
     }
@@ -152,25 +150,56 @@ namespace Helios
 
   void VulkanContext::EndFrame()
   {
-    if (m_SwapchainRecreated) {
-      m_SwapchainRecreated = false;
-      return;
-    }
-
-    if (!m_ImGuiEnabled) { Submit(); }
+    if (m_SwapchainRecreated) { return; }
   }
 
-  void VulkanContext::Record(const RenderQueue& queue)
+  void VulkanContext::Record(const RenderQueue& queue, const ResourceManager& manager)
   {
     if (m_SwapchainRecreated) { return; }
 
+    const VulkanResourceManager& resourceManager = static_cast<const VulkanResourceManager&>(manager);
     VkCommandBuffer commandBuffer = m_Frames[m_CurrentFrame].commandBuffer;
+    std::unordered_map<const Effect*, std::vector<const Renderable*>> pipelineGroups;
 
-    // Record commands
+    for (const auto& [renderable, transform] : queue.GetRenderObjects()) {
+      const Effect& effect = resourceManager.GetEffect(renderable, PipelineType::Regular);
+      pipelineGroups[&effect].push_back(&renderable);
+    }
+
+    for (const auto& [effect, renderables] : pipelineGroups) {
+      vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, effect->pipeline);
+
+      vkCmdBindDescriptorSets(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, effect->pipelineLayout, 0,
+                              effect->descriptorSets.size(), effect->descriptorSets.data(), 0, nullptr);
+
+      for (const Renderable* renderable : renderables) {
+        std::shared_ptr<VulkanMesh> mesh = std::static_pointer_cast<VulkanMesh>(renderable->mesh);
+
+        struct PushConstantData
+        {
+          glm::mat4 projectionViewMatrix;
+        };
+
+        const SceneData& pushConstantData = queue.GetSceneData();
+        vkCmdPushConstants(commandBuffer, effect->pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, 0,
+                           sizeof(pushConstantData), &pushConstantData);
+
+        vkCmdBindVertexBuffers(commandBuffer, 0, 1, &mesh->GetVertexBuffer().buffer, { 0 });
+
+        if (renderable->mesh->GetIndexCount() > 0) {
+          vkCmdBindIndexBuffer(commandBuffer, mesh->GetIndexBuffer().buffer, 0, VK_INDEX_TYPE_UINT32);
+          vkCmdDrawIndexed(commandBuffer, renderable->mesh->GetIndexCount(), 1, 0, 0, 0);
+        } else {
+          vkCmdDraw(commandBuffer, renderable->mesh->GetVertexCount(), 1, 0, 0);
+        }
+      }
+    }
   }
 
   void VulkanContext::SetViewport(const uint32_t width, const uint32_t height, const uint32_t x, const uint32_t y)
   {
+    m_SwapchainRecreated = true;
+
     m_Viewport.x = static_cast<float>(x);
     m_Viewport.y = static_cast<float>(y + height);
     m_Viewport.width = static_cast<float>(width);
@@ -236,12 +265,32 @@ namespace Helios
 
   void VulkanContext::BeginFrameImGui()
   {
+    if (m_SwapchainRecreated) {
+      ImGui::NewFrame();
+      ImGui::DockSpaceOverViewport(ImGui::GetMainViewport(), ImGuiDockNodeFlags_PassthruCentralNode);
+      return;
+    }
+
     ImGui_ImplVulkan_NewFrame();
     ImGui_ImplGlfw_NewFrame();
+
+    ImGui::NewFrame();
+    ImGui::DockSpaceOverViewport(ImGui::GetMainViewport(), ImGuiDockNodeFlags_PassthruCentralNode);
   }
 
   void VulkanContext::EndFrameImGui()
   {
+    if (m_SwapchainRecreated) {
+      ImGui::Render();
+
+      #ifdef PLATFORM_WINDOWS
+        ImGui::UpdatePlatformWindows();
+        ImGui::RenderPlatformWindowsDefault();
+      #endif
+
+      return;
+    }
+
     ImGui::Render();
     ImGui_ImplVulkan_RenderDrawData(ImGui::GetDrawData(), m_Frames[m_CurrentFrame].commandBuffer);
 
@@ -253,8 +302,6 @@ namespace Helios
     #endif
 
     glfwMakeContextCurrent(backupContext);
-
-    Submit();
   }
 
   void VulkanContext::SetVSync(const bool enabled)
@@ -292,7 +339,7 @@ namespace Helios
     vkWaitForFences(m_Device, 1, &m_ImFence, true, std::numeric_limits<uint64_t>::max());
   }
 
-  inline const VkPhysicalDeviceLimits& VulkanContext::GetPhysicalDeviceLimits()
+  inline const VkPhysicalDeviceLimits& VulkanContext::GetPhysicalDeviceLimits() const
   {
     static VkPhysicalDeviceProperties properties;
     vkGetPhysicalDeviceProperties(m_PhysicalDevice, &properties);
@@ -370,7 +417,7 @@ namespace Helios
 
     std::multimap<uint32_t, VkPhysicalDevice> candidates;
     uint32_t score = 0;
-    for (const auto& device : devices) {
+    for (const auto device : devices) {
       if (IsDeviceSuitable(device)) {
         VkPhysicalDeviceProperties deviceProperties;
         vkGetPhysicalDeviceProperties(device, &deviceProperties);
@@ -435,9 +482,8 @@ namespace Helios
       createInfo.enabledLayerCount = 0;
     }
 
-    if (vkCreateDevice(m_PhysicalDevice, &createInfo, nullptr, &m_Device) != VK_SUCCESS) {
-      throw std::runtime_error("Failed to create logical device!");
-    }
+    auto result = vkCreateDevice(m_PhysicalDevice, &createInfo, nullptr, &m_Device);
+    CORE_ASSERT(result == VK_SUCCESS, "Failed to create logical device!");
 
     vkGetDeviceQueue(m_Device, indices.graphicsFamily.value(), 0, &m_GraphicsQueue);
     vkGetDeviceQueue(m_Device, indices.presentFamily.value(), 0, &m_PresentQueue);
@@ -470,8 +516,7 @@ namespace Helios
       createInfo.imageSharingMode = VK_SHARING_MODE_CONCURRENT;
       createInfo.queueFamilyIndexCount = 2;
       createInfo.pQueueFamilyIndices = queueFamilyIndices;
-    }
-    else {
+    } else {
       createInfo.imageSharingMode = VK_SHARING_MODE_EXCLUSIVE;
     }
 
@@ -642,19 +687,29 @@ namespace Helios
     dependency.srcSubpass = VK_SUBPASS_EXTERNAL;
     dependency.dstSubpass = 0;
     dependency.srcStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT | VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT;
-    dependency.srcAccessMask = VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT;
+    dependency.srcAccessMask = 0;
     dependency.dstStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT | VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT;
     dependency.dstAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT | VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT;
 
-    std::array<VkAttachmentDescription, 2> attachments = { colorAttachment, depthAttachment };
+    VkSubpassDependency depthDependency{};
+    depthDependency.srcSubpass = VK_SUBPASS_EXTERNAL;
+    depthDependency.dstSubpass = 0;
+    depthDependency.srcStageMask = VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT | VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT;
+    depthDependency.srcAccessMask = 0;
+    depthDependency.dstStageMask = VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT | VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT;
+    depthDependency.dstAccessMask = VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT;
+
+    VkSubpassDependency dependencies[] = { dependency, depthDependency };
+    VkAttachmentDescription attachments[] = { colorAttachment, depthAttachment };
+
     VkRenderPassCreateInfo renderPassInfo{};
     renderPassInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO;
-    renderPassInfo.attachmentCount = static_cast<uint32_t>(attachments.size());
-    renderPassInfo.pAttachments = attachments.data();
+    renderPassInfo.attachmentCount = static_cast<uint32_t>(std::size(attachments));
+    renderPassInfo.pAttachments = attachments;
     renderPassInfo.subpassCount = 1;
     renderPassInfo.pSubpasses = &subpass;
-    renderPassInfo.dependencyCount = 1;
-    renderPassInfo.pDependencies = &dependency;
+    renderPassInfo.dependencyCount = static_cast<uint32_t>(std::size(dependencies));
+    renderPassInfo.pDependencies = dependencies;
 
     auto result = vkCreateRenderPass(m_Device, &renderPassInfo, nullptr, &m_RenderPass);
     CORE_ASSERT(result == VK_SUCCESS, "Failed to create render pass!");
@@ -722,6 +777,8 @@ namespace Helios
     CreateSwapchain();
     CreateDepthResources();
     CreateFramebuffers();
+
+    m_SwapchainRecreated = true;
   }
 
   void VulkanContext::Submit()
@@ -767,7 +824,7 @@ namespace Helios
     m_CurrentFrame = (m_CurrentFrame + 1) % MAX_FRAMES_IN_FLIGHT;
   }
 
-  const bool VulkanContext::CheckValidationLayerSupport() const
+  bool VulkanContext::CheckValidationLayerSupport() const
   {
     uint32_t layerCount;
     auto result = vkEnumerateInstanceLayerProperties(&layerCount, nullptr);
@@ -793,7 +850,7 @@ namespace Helios
     return true;
   }
 
-  const std::vector<const char*> VulkanContext::GetRequiredExtensions() const
+  std::vector<const char*> VulkanContext::GetRequiredExtensions() const
   {
     uint32_t glfwExtensionCount = 0;
     const char** glfwExtensions;
@@ -823,9 +880,8 @@ namespace Helios
     createInfo.pfnUserCallback = DebugCallback;
   }
 
-  const VkResult VulkanContext::CreateDebugUtilsMessengerEXT(const VkInstance instance,
-    const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo, const VkAllocationCallbacks* pAllocator,
-    VkDebugUtilsMessengerEXT* pDebugMessenger)
+  VkResult VulkanContext::CreateDebugUtilsMessengerEXT(const VkInstance instance, const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo,
+                                                       const VkAllocationCallbacks* pAllocator, VkDebugUtilsMessengerEXT* pDebugMessenger)
   {
     auto func = (PFN_vkCreateDebugUtilsMessengerEXT)vkGetInstanceProcAddr(instance, "vkCreateDebugUtilsMessengerEXT");
     if (func != nullptr) {
@@ -843,7 +899,7 @@ namespace Helios
     }
   }
 
-  const bool VulkanContext::CheckDeviceExtensionSupport(const VkPhysicalDevice device) const
+  bool VulkanContext::CheckDeviceExtensionSupport(const VkPhysicalDevice device) const
   {
     uint32_t extensionCount;
     auto result = vkEnumerateDeviceExtensionProperties(device, nullptr, &extensionCount, nullptr);
@@ -862,7 +918,7 @@ namespace Helios
     return requiredExtensions.empty();
   }
 
-  const QueueFamilyIndices VulkanContext::FindQueueFamilies(const VkPhysicalDevice device) const
+  QueueFamilyIndices VulkanContext::FindQueueFamilies(const VkPhysicalDevice device) const
   {
     QueueFamilyIndices indices;
 
@@ -890,7 +946,7 @@ namespace Helios
     return indices;
   }
 
-  const SwapChainSupportDetails VulkanContext::QuerySwapChainSupport(const VkPhysicalDevice device) const
+  SwapChainSupportDetails VulkanContext::QuerySwapChainSupport(const VkPhysicalDevice device) const
   {
     SwapChainSupportDetails details;
 
@@ -920,7 +976,7 @@ namespace Helios
     return details;
   }
 
-  const bool VulkanContext::IsDeviceSuitable(const VkPhysicalDevice device) const
+  bool VulkanContext::IsDeviceSuitable(const VkPhysicalDevice device) const
   {
     QueueFamilyIndices indices = FindQueueFamilies(device);
 
@@ -939,7 +995,7 @@ namespace Helios
            supportedFeatures.samplerAnisotropy;
   }
 
-  const VkSurfaceFormatKHR VulkanContext::ChooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats) const
+  VkSurfaceFormatKHR VulkanContext::ChooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats) const
   {
     for (const auto& availableFormat : availableFormats) {
       if (availableFormat.format == VK_FORMAT_B8G8R8A8_UNORM && availableFormat.colorSpace == VK_COLOR_SPACE_SRGB_NONLINEAR_KHR) {
@@ -949,7 +1005,7 @@ namespace Helios
     return availableFormats[0];
   }
 
-  const VkPresentModeKHR VulkanContext::ChooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes) const
+  VkPresentModeKHR VulkanContext::ChooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes) const
   {
     VkPresentModeKHR bestMode = VK_PRESENT_MODE_FIFO_KHR;
 
@@ -963,12 +1019,11 @@ namespace Helios
     return bestMode;
   }
 
-  const VkExtent2D VulkanContext::ChooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities) const
+  VkExtent2D VulkanContext::ChooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities) const
   {
     if (capabilities.currentExtent.width != std::numeric_limits<uint32_t>::max()) {
       return capabilities.currentExtent;
-    }
-    else {
+    } else {
       int width, height;
       glfwGetFramebufferSize(m_WindowHandle, &width, &height);
 
@@ -984,7 +1039,7 @@ namespace Helios
     }
   }
 
-  const uint32_t VulkanContext::ChooseImageCount(const VkSurfaceCapabilitiesKHR& capabilities) const
+  uint32_t VulkanContext::ChooseImageCount(const VkSurfaceCapabilitiesKHR& capabilities) const
   {
     uint32_t imageCount = capabilities.minImageCount + 1;
     if (capabilities.maxImageCount > 0 && imageCount > capabilities.maxImageCount) {
@@ -993,17 +1048,16 @@ namespace Helios
     return std::max(imageCount, MAX_FRAMES_IN_FLIGHT);
   }
 
-  const VkFormat VulkanContext::FindSupportedFormat(const std::vector<VkFormat>& candidates, const VkImageTiling tiling,
-                                                    const VkFormatFeatureFlags features) const
+  VkFormat VulkanContext::FindSupportedFormat(const std::vector<VkFormat>& candidates, VkImageTiling tiling,
+                                              VkFormatFeatureFlags features) const
   {
-    for (const VkFormat format : candidates) {
+    for (VkFormat format : candidates) {
       VkFormatProperties props;
       vkGetPhysicalDeviceFormatProperties(m_PhysicalDevice, format, &props);
 
       if (tiling == VK_IMAGE_TILING_LINEAR && (props.linearTilingFeatures & features) == features) {
         return format;
-      }
-      else if (tiling == VK_IMAGE_TILING_OPTIMAL && (props.optimalTilingFeatures & features) == features) {
+      } else if (tiling == VK_IMAGE_TILING_OPTIMAL && (props.optimalTilingFeatures & features) == features) {
         return format;
       }
     }
@@ -1011,7 +1065,7 @@ namespace Helios
     CORE_ASSERT(false, "Failed to find supported format!");
   }
 
-  const VkFormat VulkanContext::FindDepthFormat() const
+  VkFormat VulkanContext::FindDepthFormat() const
   {
     return FindSupportedFormat(
       { VK_FORMAT_D32_SFLOAT, VK_FORMAT_D32_SFLOAT_S8_UINT, VK_FORMAT_D24_UNORM_S8_UINT },

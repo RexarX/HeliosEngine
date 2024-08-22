@@ -1,59 +1,50 @@
 set(PROJECT_NAME HeliosEngine)
 
 file(GLOB_RECURSE src
-    "src/*.cpp"
-    "src/*.h"
+    "src/*.h" "src/*.cpp"
 )
 
 file(GLOB_RECURSE src__Engine
-    "src/HeliosEngine/*.cpp"
-    "src/HeliosEngine/*.h"
+    "src/HeliosEngine/*.h" "src/HeliosEngine/*.cpp"
 )
 
 file(GLOB_RECURSE src__Engine__Events
-    "src/HeliosEngine/Events*.cpp"
-    "src/HeliosEngine/Events*.h"
+    "src/HeliosEngine/Events/*.h" "src/HeliosEngine/Events/*.cpp"
 )
 
 file(GLOB_RECURSE src__EntityComponentSystem
     "src/HeliosEngine/EntityComponentSystem/*.h"
-
-    "src/HeliosEngine/EntityComponentSystem/Components/*.cpp"
-    "src/HeliosEngine/EntityComponentSystem/Components/*.h"
-
-    "src/HeliosEngine/EntityComponentSystem/Entity/*.cpp"
-    "src/HeliosEngine/EntityComponentSystem/Entity/*.h"
-
-    "src/HeliosEngine/EntityComponentSystem/Manager/*.cpp"
-    "src/HeliosEngine/EntityComponentSystem/Manager/*.h"
-
-    "src/HeliosEngine/EntityComponentSystem/Systems/*.cpp"
+    "src/HeliosEngine/EntityComponentSystem/*.inl"
+    "src/HeliosEngine/EntityComponentSystem/*.cpp"
+    
     "src/HeliosEngine/EntityComponentSystem/Systems/*.h"
+    "src/HeliosEngine/EntityComponentSystem/Systems/*.cpp"
 )
 
 file(GLOB_RECURSE src__Engine__Scene
-    "src/HeliosEngine/Scene/*.cpp"
-    "src/HeliosEngine/Scene/*.h"
+    "src/HeliosEngine/Scene/*.h" "src/HeliosEngine/Scene/*.cpp"
 )
 
 file(GLOB_RECURSE src__Engine__Utils
-    "src/HeliosEngine/Utils/*.cpp"
-    "src/HeliosEngine/Utils/*.h"
+    "src/HeliosEngine/Utils/*.h" "src/HeliosEngine/Utils/*.cpp"
 )
 
-file(GLOB_RECURSE src__Engine__Renderer__Vulkan
-    "src/HeliosEngine/Renderer/Vulkan/*.cpp"
-    "src/HeliosEngine/Renderer/Vulkan/*.h"
+file(GLOB_RECURSE src__Engine__Renderer
+    "src/HeliosEngine/Renderer/*.h" "src/HeliosEngine/Renderer/*.cpp"
+
+    "src/HeliosEngine/Renderer/Vulkan/*.h" "src/HeliosEngine/Renderer/Vulkan/*.cpp"
+)
+
+file(GLOB_RECURSE src__Engine__ShaderGraph
+    "src/HeliosEngine/ShaderGraph/*.h" "src/HeliosEngine/ShaderGraph/*.cpp"
 )
 
 file(GLOB_RECURSE src__Platform__Windows
-    "src/Platform/Windows/*.cpp"
-    "src/Platform/Windows/*.h"
+    "src/Platform/Windows/*.h" "src/Platform/Windows/*.cpp"
 )
 
 file(GLOB_RECURSE src__Engine__ImGui
-    "src/HeliosEngine/ImGui/*.cpp"
-    "src/HeliosEngine/ImGui/*.h"
+    "src/HeliosEngine/ImGui/*.h" "src/HeliosEngine/ImGui/*.cpp"
 )
 
 set(ALL_FILES
@@ -63,7 +54,8 @@ set(ALL_FILES
     ${src__EntityComponentSystem}
     ${src__Engine__Scene}
     ${src__Engine__Utils}
-    ${src__Engine__Renderer__Vulkan}
+    ${src__Engine__Renderer}
+    ${src__Engine__ShaderGraph}
     ${src__Platform__Windows}
     ${src__Engine__ImGui}
 )
@@ -108,6 +100,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES MSVC_RUNTIME_LIBRARY ${MSVC_RUN
 target_include_directories(${PROJECT_NAME} PUBLIC
 	"${CMAKE_CURRENT_SOURCE_DIR}/vendor/spdlog/include;"
     "${CMAKE_CURRENT_SOURCE_DIR}/vendor/glm;"
+    "${CMAKE_CURRENT_SOURCE_DIR}/vendor/entt/single_include;"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/HeliosEngine;"
 )
 
@@ -136,59 +129,20 @@ if(WIN32)
 	target_compile_definitions(${PROJECT_NAME} PRIVATE "PLATFORM_WINDOWS;" PRIVATE "BUILD_DLL;")
 endif()
 
-if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    target_compile_options(${PROJECT_NAME} PRIVATE
-        $<$<CONFIG:Debug>:
-            /Od;
-            /Zi;
-        >
-        $<$<CONFIG:Release>:
-            /O2;
-            /Oi;
-            /Gy;
-        >
-        $<$<CONFIG:Dist>:
-            /O2;
-            /Oi;
-            /Gy;
-        >
-        /W3;
-        ${DEFAULT_CXX_EXCEPTION_HANDLING}
-    )
-    target_link_options(${PROJECT_NAME} PRIVATE
-        $<$<CONFIG:Debug>:
-            /DEBUG;
-            /INCREMENTAL;
-        >
-         $<$<CONFIG:Release>:
-            /DEBUG:NONE;
-            /OPT:REF;
-            /OPT:ICF;
-            /INCREMENTAL:NO;
-        >
-        $<$<CONFIG:Dist>:
-            /DEBUG:NONE;
-            /OPT:REF;
-            /OPT:ICF;
-            /INCREMENTAL:NO;
-        >
-        /SUBSYSTEM:WINDOWS
-    )
-elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR "GNU")
-	target_compile_options(${PROJECT_NAME} PRIVATE
-		$<$<CONFIG:Debug>:
-			-O0;
-			-g;
-		>
-		$<$<CONFIG:Release>:
-			-O3;
-		>
-		$<$<CONFIG:Dist>:
-			-O3;
-		>
-		-Wno-switch
-	)
-endif()
+target_compile_options(${PROJECT_NAME} PRIVATE
+    $<$<CXX_COMPILER_ID:MSVC>:
+        $<$<CONFIG:Debug>:/Od /Zi>
+        $<$<CONFIG:Release>:/O2 /Oi /Gy>
+        $<$<CONFIG:Dist>:/O2 /Oi /Gy>
+        /W3
+    >
+    $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>:
+        $<$<CONFIG:Debug>:-O0 -g>
+        $<$<CONFIG:Release>:-O3>
+        $<$<CONFIG:Dist>:-O3>
+        -Wno-switch
+    >
+)
 
 find_package(Vulkan REQUIRED)
 
@@ -197,6 +151,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     imgui
     stb_image
     objloader
+    EnTT::EnTT
     Vulkan::Vulkan
 )
 

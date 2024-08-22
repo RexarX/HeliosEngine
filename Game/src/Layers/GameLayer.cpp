@@ -2,42 +2,27 @@
 
 #include "Scripts/Player/CameraController.h"
 
-GameLayer::GameLayer()
-	: Layer("VoxelCraft")
-{
-}
-
 void GameLayer::OnAttach()
 {
 	Helios::Window& window = Helios::Application::Get().GetWindow();
 	//window.SetVSync(true);
 	//window.SetFramerate(30.0);
-	window.SetImGuiState(true);
 
-	Helios::SceneManager::AddScene("GameScene");
+	Helios::Scene& gameScene = Helios::SceneManager::AddScene("GameScene");
 	Helios::SceneManager::SetActiveScene("GameScene");
 
-	Helios::Scene& gameScene = Helios::SceneManager::GetScene("GameScene");
+	Helios::Entity& root = gameScene.GetRootEntity();
+	Helios::Entity camera = gameScene.CreateEntity("Camera");
+	camera.EmplaceComponent<Helios::Camera>();
 
-	gameScene.RegisterSystem<Helios::RenderingSystem>(0);
-	gameScene.RegisterSystem<Helios::ScriptSystem>(1);
-
-	Helios::SceneNode* player = gameScene.AddNode("Player");
-
-	Helios::Camera& camera = gameScene.EmplaceNodeComponent<Helios::Camera>(
-		player, glm::vec3(0.0f), glm::vec3(0.0f),
-		static_cast<float>(window.GetWidth()) / window.GetHeight()
-	);
-
-	CameraController cameraController(camera);
-	gameScene.AttachScript(player, cameraController);
+	root.AddChild(camera);
 }
 
 void GameLayer::OnDetach()
 {
 }
 
-void GameLayer::OnUpdate(const Helios::Timestep ts)
+void GameLayer::OnUpdate(Helios::Timestep ts)
 {
 	Helios::Scene& scene = Helios::SceneManager::GetScene("GameScene");
 	scene.OnUpdate(ts);
@@ -47,6 +32,12 @@ void GameLayer::OnEvent(Helios::Event& event)
 {
 	Helios::Scene& scene = Helios::SceneManager::GetScene("GameScene");
 	scene.OnEvent(event);
+}
+
+void GameLayer::Draw()
+{
+	Helios::Scene& scene = Helios::SceneManager::GetScene("GameScene");
+	scene.Draw();
 }
 
 void GameLayer::OnImGuiRender(ImGuiContext* context)

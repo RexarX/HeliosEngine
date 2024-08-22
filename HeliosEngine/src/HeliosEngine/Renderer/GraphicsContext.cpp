@@ -1,4 +1,4 @@
-#include "Renderer/GraphicsContext.h"
+#include "GraphicsContext.h"
 
 namespace Helios
 {
@@ -35,28 +35,27 @@ namespace Helios
     m_RendererAPI->EndFrame();
   }
 
-  void GraphicsContext::Record(const RenderQueue& queue)
+  void GraphicsContext::Record(const RenderQueue& queue, const ResourceManager& manager)
   {
-    m_RendererAPI->Record(queue);
+    m_RendererAPI->Record(queue, manager);
   }
 
-  void GraphicsContext::SetViewport(const uint32_t width, const uint32_t height,
-                                    const uint32_t x, const uint32_t y)
+  void GraphicsContext::SetViewport(uint32_t width, uint32_t height, uint32_t x, uint32_t y)
   {
     m_RendererAPI->SetViewport(width, height, x, y);
   }
 
-  void GraphicsContext::SetVSync(const bool enabled)
+  void GraphicsContext::SetVSync(bool enabled)
   {
     m_RendererAPI->SetVSync(enabled);
   }
 
-  void GraphicsContext::SetResized(const bool resized)
+  void GraphicsContext::SetResized(bool resized)
   {
     m_RendererAPI->SetResized(resized);
   }
 
-  void GraphicsContext::SetImGuiState(const bool enabled)
+  void GraphicsContext::SetImGuiState(bool enabled)
   {
     m_RendererAPI->SetImGuiState(enabled);
   }

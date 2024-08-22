@@ -1,12 +1,12 @@
-#include "Renderer/Texture.h"
-#include "Renderer/RendererAPI.h"
+#include "Texture.h"
+#include "RendererAPI.h"
 
-#include "Renderer/Vulkan/VulkanTexture.h"
+#include "Vulkan/VulkanTexture.h"
 
 namespace Helios
 {
-	std::shared_ptr<Texture> Texture::Create(const std::string& path, const uint32_t mipLevel,
-																					 const uint32_t anisoLevel, const ImageFormat format)
+	std::shared_ptr<Texture> Texture::Create(const std::string& path, uint32_t mipLevel,
+																					 uint32_t anisoLevel, ImageFormat format)
 	{
 		switch (RendererAPI::GetAPI())
 		{

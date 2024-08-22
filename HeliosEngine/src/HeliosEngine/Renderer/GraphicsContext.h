@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Renderer/RendererAPI.h"
+#include "RendererAPI.h"
 
 #include "pch.h"
 
@@ -18,19 +18,18 @@ namespace Helios
 
     void BeginFrame();
     void EndFrame();
-    void Record(const RenderQueue& queue);
+    void Record(const RenderQueue& queue, const ResourceManager& manager);
 
-    void SetViewport(const uint32_t width, const uint32_t height,
-                     const uint32_t x = 0, const uint32_t y = 0);
+    void SetViewport(uint32_t width, uint32_t height, uint32_t x = 0, uint32_t y = 0);
 
     void InitImGui();
     void ShutdownImGui();
     void BeginFrameImGui();
     void EndFrameImGui();
 
-    void SetVSync(const bool enabled);
-    void SetResized(const bool resized);
-    void SetImGuiState(const bool enabled);
+    void SetVSync(bool enabled);
+    void SetResized(bool resized);
+    void SetImGuiState(bool enabled);
 
     static std::shared_ptr<GraphicsContext>& Create(void* window);
     static std::shared_ptr<GraphicsContext>& Get();

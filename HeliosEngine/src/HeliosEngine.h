@@ -9,19 +9,16 @@
 #include "HeliosEngine/Log.h"
 #include "HeliosEngine/Timestep.h"
 
+#include "HeliosEngine/Scene/Scene.h"
 #include "HeliosEngine/Scene/SceneManager.h"
 
-#include "HeliosEngine/EntityComponentSystem/Systems/EventSystem.h"
-#include "HeliosEngine/EntityComponentSystem/Systems/InputSystem.h"
-#include "HeliosEngine/EntityComponentSystem/Systems/RenderingSystem.h"
 #include "HeliosEngine/EntityComponentSystem/Systems/ScriptSystem.h"
 
-#include "HeliosEngine/EntityComponentSystem/Components/Camera.h"
-#include "HeliosEngine/EntityComponentSystem/Components/Renderable.h"
-#include "HeliosEngine/EntityComponentSystem/Components/Transform.h"
-#include "HeliosEngine/EntityComponentSystem/Components/Script.h"
-
 #include "HeliosEngine/ImGui/ImGuiLayer.h"
+
+#include "EntityComponentSystem/Entity.h"
+#include "EntityComponentSystem/Entity.inl" // Workaround
+#include "EntityComponentSystem/Components.h"
 
 #include "HeliosEngine/Events/Event.h"
 #include "HeliosEngine/Events/ApplicationEvent.h"
