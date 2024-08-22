@@ -7,3 +7,6 @@
 [submodule "HeliosEngine/vendor/glm"]
 	path = HeliosEngine/vendor/glm
 	url = https://github.com/g-truc/glm.git
+[submodule "HeliosEngine/vendor/entt"]
+	path = HeliosEngine/vendor/entt
+	url = https://github.com/skypjack/entt
