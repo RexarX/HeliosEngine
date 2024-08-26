@@ -30,7 +30,7 @@ namespace Helios
     }
 
     void AddRenderObject(const Renderable& renderable, const Transform& transform) {
-      m_RenderObjects.push_back(RenderObject{ renderable, transform });
+      m_RenderObjects.emplace_back(renderable, transform);
     }
 
     void SetSceneData(const SceneData& sceneData) { m_SceneData = sceneData; }

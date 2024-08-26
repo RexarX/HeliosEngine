@@ -5,10 +5,11 @@
 class CameraController : public Helios::Script
 {
 public:
-	CameraController(Helios::Entity& camera);
-	virtual ~CameraController();
+	CameraController() = default;
+	virtual ~CameraController() = default;
 
 	void OnAttach() override;
+	void OnDetach() override;
 	void OnUpdate(Helios::Timestep deltaTime) override;
 	void OnEvent(Helios::Event& event) override;
 
@@ -21,8 +22,6 @@ private:
 	bool OnWindowLostFocusEvent(Helios::WindowLostFocusEvent& event);
 
 private:
-	Helios::Entity& m_Camera;
-
 	float m_CameraTranslationSpeed = 5.0f;
 	float m_CameraRotationSpeed = 0.1f;
 

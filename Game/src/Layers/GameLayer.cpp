@@ -9,13 +9,17 @@ void GameLayer::OnAttach()
 	//window.SetFramerate(30.0);
 
 	Helios::Scene& gameScene = Helios::SceneManager::AddScene("GameScene");
-	Helios::SceneManager::SetActiveScene("GameScene");
 
 	Helios::Entity& root = gameScene.GetRootEntity();
+
 	Helios::Entity camera = gameScene.CreateEntity("Camera");
 	camera.EmplaceComponent<Helios::Camera>();
+	camera.EmplaceScriptComponent<CameraController>();
 
 	root.AddChild(camera);
+
+	gameScene.SetActive(true);
+	gameScene.Load();
 }
 
 void GameLayer::OnDetach()

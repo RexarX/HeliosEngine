@@ -5,7 +5,7 @@
 class GameLayer : public Helios::Layer
 {
 public:
-	GameLayer() : Layer("VoxelCraft") {}
+	GameLayer() : Layer("Game") {}
 
 	virtual ~GameLayer() = default;
 

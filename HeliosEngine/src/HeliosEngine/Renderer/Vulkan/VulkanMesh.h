@@ -13,8 +13,6 @@ namespace Helios
                uint32_t vertexCount, const std::vector<uint32_t>& indices = {});
 
     VulkanMesh(MeshType type, uint32_t vertexCount, uint32_t indexCount);
-    VulkanMesh(const VulkanMesh&);
-
     virtual ~VulkanMesh();
 
     void Load() override;

@@ -3,20 +3,20 @@
 
 #include "Layers/GameLayer.h"
 
-class VoxelCraft : public Helios::Application
+class Game : public Helios::Application
 {
 public:
-	VoxelCraft() : Helios::Application()
+	Game() : Helios::Application()
 	{
 		PushLayer(new GameLayer());
 	}
 
-	~VoxelCraft()
+	~Game()
 	{
 	}
 };
 
 Helios::Application* Helios::CreateApplication()
 {
-	return new VoxelCraft();
+	return new Game();
 }

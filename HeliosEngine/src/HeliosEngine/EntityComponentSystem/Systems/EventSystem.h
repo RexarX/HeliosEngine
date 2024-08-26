@@ -8,11 +8,7 @@
 
 namespace Helios
 {
-  struct Listener
-  {
-    std::weak_ptr<void> instance;
-    std::function<void(Event&)> callback;
-  };
+  using EventQueue = std::queue<std::reference_wrapper<Event>>;  
 
   class HELIOSENGINE_API EventSystem
   {
@@ -26,10 +22,10 @@ namespace Helios
     void Emit(T& event);
 
     template <typename T>
-    void AddListener(const std::shared_ptr<void>& instance, const std::function<void(T&)>& callback);
+    void AddListener(const void* instance, const std::function<void(T&)>& callback);
 
     template <typename T>
-    void RemoveListener(const std::shared_ptr<void>& instance);
+    void RemoveListener(const void* instance);
 
     template <typename T>
     void PushEvent(T& event);
@@ -38,7 +34,13 @@ namespace Helios
     void ProcessQueuedEvents();
 
   private:
-    std::map<std::type_index, std::queue<std::reference_wrapper<Event>>> m_EventQueues;
+    struct Listener
+    {
+      const void* instance = nullptr;
+      std::function<void(Event&)> callback;
+    };
+
+    std::map<std::type_index, EventQueue> m_EventQueues;
     std::map<std::type_index, std::vector<Listener>> m_EventListeners;
   };
 
@@ -56,35 +58,23 @@ namespace Helios
   }
 
   template <typename T>
-  void EventSystem::AddListener(const std::shared_ptr<void>& instance, const std::function<void(T&)>& callback)
+  void EventSystem::AddListener(const void* instance, const std::function<void(T&)>& callback)
   {
     static_assert(std::is_base_of<Event, T>::value, "T must inherit from Event!");
 
-    m_EventListeners[typeid(T)].push_back(
-      Listener{
-        .instance = instance,
-        .callback = [callback](Event& e) { callback(static_cast<T&>(e)); },
-      }
+    m_EventListeners[typeid(T)].emplace_back(instance,
+      [callback](Event& event) { callback(static_cast<T&>(event)); }
     );
   }
 
   template <typename T>
-  void EventSystem::RemoveListener(const std::shared_ptr<void>& instance)
+  void EventSystem::RemoveListener(const void* instance)
   {
     static_assert(std::is_base_of<Event, T>::value, "T must inherit from Event!");
 
-    auto it = m_EventListeners.find(typeid(T));
-    if (it != m_EventListeners.end()) {
-      it->second.erase(
-        std::remove_if(
-          it->second.begin(), it->second.end(),
-          [instance](const auto& listener) {
-            return listener.instance == instance;
-          }
-        ),
-        it->second.end()
-      );
-    }
+    std::erase_if(m_EventListeners[typeid(T)], [instance](const Listener& listener) {
+      return listener.instance == instance;
+      });
   }
 
   template <typename T>

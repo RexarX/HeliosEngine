@@ -6,17 +6,15 @@ namespace Helios
 {
   void ScriptSystem::OnUpdate(entt::registry& registry, Timestep deltaTime)
   {
-    const auto& view = registry.view<Script>();
-    for (entt::entity entity : view) {
-      registry.get<Script>(entity).OnUpdate(deltaTime);
-    }
+    registry.view<Script>().each([deltaTime](entt::entity entity, Script& script) {
+      script.OnUpdate(deltaTime);
+    });
   }
 
   void ScriptSystem::OnEvent(entt::registry& registry, Event& event)
   {
-    const auto& view = registry.view<Script>();
-    for (entt::entity entity : view) {
-      registry.get<Script>(entity).OnEvent(event);
-    }
+    registry.view<Script>().each([&event](entt::entity entity, Script& script) {
+      script.OnEvent(event);
+    });
   }
 }

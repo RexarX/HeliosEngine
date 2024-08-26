@@ -14,14 +14,10 @@ namespace Helios
 		m_Window = std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
 
-		#if defined(DEBUG_MODE) || defined(RELEASE_MODE)
+#if defined(DEBUG_MODE) || defined(RELEASE_MODE)
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
-		#endif
-	}
-	
-	Application::~Application()
-	{
+#endif
 	}
 
 	void Application::PushLayer(Layer* layer)
@@ -62,13 +58,13 @@ namespace Helios
 
  bool Application::OnKeyPressed(KeyPressedEvent& e)
 	{
-		#if defined(DEBUG_MODE) || defined(RELEASE_MODE)
+#if defined(DEBUG_MODE) || defined(RELEASE_MODE)
     if (e.GetKeyCode() == Key::Insert) {
 			bool currentState = m_Window->IsImGuiEnabled();
 			m_ImGuiLayer->BlockEvents(!currentState);
       m_Window->SetImGuiState(!currentState);
     }
-		#endif
+#endif
 
 		return true;
 	}
@@ -87,7 +83,7 @@ namespace Helios
 			m_Window->PoolEvents();
 
 			if (!m_Window->IsMinimized() && (m_FramerateLimit == 0.0 || (double)m_DeltaTime >= m_FramerateLimit)) {
-				//TRACE("Delta time: {0}", m_DeltaTime.GetMilliseconds());
+				//CORE_TRACE("Delta time: {0}", m_DeltaTime.GetMilliseconds());
 				
 				for (Layer* layer : m_LayerStack) {
 					layer->OnUpdate(m_DeltaTime);
@@ -99,7 +95,7 @@ namespace Helios
 				}
 				m_Window->EndFrame();
 
-				#if defined(DEBUG_MODE) || defined(RELEASE_MODE)
+#if defined(DEBUG_MODE) || defined(RELEASE_MODE)
 				if (m_Window->IsImGuiEnabled()) {
 					m_Window->BeginFrameImGui();
 					for (Layer* layer : m_LayerStack) {
@@ -107,7 +103,7 @@ namespace Helios
 					}
 					m_Window->EndFrameImGui();
 				}
-				#endif
+#endif
 
 				m_Window->OnUpdate();
 				LastFrameUpdate = m_Timer.GetElapsedSec();

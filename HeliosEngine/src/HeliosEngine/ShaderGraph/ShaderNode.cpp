@@ -9,9 +9,9 @@ namespace Helios
 
   void ShaderNode::AddInputPort(const std::string& name, DataType type)
   {
-    if (std::find_if(m_InputPorts.begin(), m_InputPorts.end(), [&name](const NodePort& port) {
-      return port.name == name;
-      }) != m_InputPorts.end())
+    if (std::find_if(m_InputPorts.begin(), m_InputPorts.end(),
+      [&name](const NodePort& port) { return port.name == name; })
+      != m_InputPorts.end())
     {
       CORE_ERROR("Input port with this name already exists!");
       return;
@@ -22,9 +22,9 @@ namespace Helios
 
   void ShaderNode::AddOutputPort(const std::string& name, DataType type)
   {
-    if (std::find_if(m_OutputPorts.begin(), m_OutputPorts.end(), [&name](const NodePort& port) {
-      return port.name == name;
-      }) != m_OutputPorts.end())
+    if (std::find_if(m_OutputPorts.begin(), m_OutputPorts.end(),
+      [&name](const NodePort& port) { return port.name == name; })
+      != m_OutputPorts.end())
     {
       CORE_ERROR("Output port with this name already exists!");
       return;
@@ -43,16 +43,16 @@ namespace Helios
       return;
     }
 
-    m_InputPorts.erase(std::remove_if(m_InputPorts.begin(), m_InputPorts.end(), [&name](const NodePort& port) {
+    std::erase_if(m_InputPorts, [&name](const NodePort& port) {
       return port.name == name;
-    }));
+      });
   }
 
   void ShaderNode::RemoveOutputPort(const std::string& name)
   {
-    m_InputPorts.erase(std::remove_if(m_OutputPorts.begin(), m_OutputPorts.end(), [&name](const NodePort& port) {
+    std::erase_if(m_OutputPorts, [&name](const NodePort& port) {
       return port.name == name;
-    }));
+      });
   }
 
   MathNode::MathNode(const std::string& name, Operation op)

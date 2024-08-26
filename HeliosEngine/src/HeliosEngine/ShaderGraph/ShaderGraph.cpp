@@ -30,11 +30,9 @@ namespace Helios
 
     m_Connections.erase(node);
     for (auto& [outputNode, connections] : m_Connections) {
-      connections.erase(
-        std::remove_if(connections.begin(), connections.end(),
-          [&node](const Connection& conn) { return conn.inputNode == node; }
-        )
-      );
+      std::erase_if(connections, [&node](const Connection& conn) {
+        return conn.inputNode == node;
+        });
     }
 
     for (auto it = m_Connections.begin(); it != m_Connections.end();) {
@@ -100,15 +98,11 @@ namespace Helios
     if (it == m_Connections.end()) { return; }
 
     auto& connections = it->second;
-    connections.erase(
-      std::remove_if(connections.begin(), connections.end(),
-        [&outputPortName, &inputNode, &inputPortName](const Connection& conn) {
-          return conn.outputPortName == outputPortName &&
-                 conn.inputNode == inputNode &&
-                 conn.inputPortName == inputPortName;
-        }
-      )
-    );
+    std::erase_if(connections, [&outputPortName, &inputNode, &inputPortName](const Connection& conn) {
+      return conn.outputPortName == outputPortName &&
+             conn.inputNode == inputNode &&
+             conn.inputPortName == inputPortName;
+      });
 
     if (connections.empty()) { m_Connections.erase(it); }
   }

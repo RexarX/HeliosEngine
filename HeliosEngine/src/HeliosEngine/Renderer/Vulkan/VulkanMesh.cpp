@@ -14,10 +14,6 @@ namespace Helios
   {
   }
 
-  VulkanMesh::VulkanMesh(const VulkanMesh& other)
-  {
-  }
-
   VulkanMesh::~VulkanMesh()
   {
     Unload();

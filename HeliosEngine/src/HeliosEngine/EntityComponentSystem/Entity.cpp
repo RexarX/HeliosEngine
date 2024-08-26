@@ -17,14 +17,14 @@ namespace Helios
 
   void Entity::SetParent(Entity& parent) const
   {
-    if (m_Scene == nullptr) { CORE_ASSERT(false, "Scene is null!"); return; }
-    if (!m_Scene->m_Registry.valid(m_Entity)) { CORE_ASSERT(false, "Entity is not valid!"); return; }
     if (this == &parent) { CORE_ASSERT(false, "Entity cannot be its own parent!"); return; }
-    entt::entity entity = parent.GetEntity();
-    if (!m_Scene->m_Registry.valid(entity)) { CORE_ASSERT(false, "Entity is not valid!"); return; }
+    if (m_Scene == nullptr) { CORE_ASSERT(false, "Scene is null!"); return; }
+    if (parent.m_Scene == nullptr) { CORE_ASSERT(false, "Parent scene is null!"); return; }
+    if (!m_Scene->m_Registry.valid(m_Entity)) { CORE_ASSERT(false, "Entity is not valid!"); return; }
+    if (!m_Scene->m_Registry.valid(parent.m_Entity)) { CORE_ASSERT(false, "Parent entity is not valid!"); return; }
 
-    m_Scene->m_Registry.get<Relationship>(m_Entity).parent = entity;
-    m_Scene->m_Registry.get<Relationship>(entity).children.push_back(m_Entity);
+    m_Scene->m_Registry.get<Relationship>(m_Entity).parent = parent;
+    m_Scene->m_Registry.get<Relationship>(parent.m_Entity).children.push_back(*this);
   }
 
   void Entity::RemoveParent() const
@@ -32,49 +32,42 @@ namespace Helios
     if (m_Scene == nullptr) { CORE_ASSERT(false, "Scene is null!"); return; }
     if (!m_Scene->m_Registry.valid(m_Entity)) { CORE_ASSERT(false, "Entity is not valid!"); return; }
 
-    m_Scene->m_Registry.get<Relationship>(m_Entity).parent = entt::null;
+    m_Scene->m_Registry.get<Relationship>(m_Entity).parent = Entity();
   }
 
   void Entity::AddChild(Entity& child) const
   {
-    if (m_Scene == nullptr) { CORE_ASSERT(false, "Scene is null!"); return; }
-    if (!m_Scene->m_Registry.valid(m_Entity)) { CORE_ASSERT(false, "Entity is not valid!"); return; }
-    entt::entity entity = child.GetEntity();
-    if (!m_Scene->m_Registry.valid(entity)) { CORE_ASSERT(false, "Entity is not valid!"); return; }
     if (this == &child) { CORE_ASSERT(false, "Entity cannot be its own child!"); return; }
+    if (m_Scene == nullptr) { CORE_ASSERT(false, "Scene is null!"); return; }
+    if (child.m_Scene == nullptr) { CORE_ASSERT(false, "Child scene is null!"); return; }
+    if (!m_Scene->m_Registry.valid(m_Entity)) { CORE_ASSERT(false, "Entity is not valid!"); return; }
+    if (!m_Scene->m_Registry.valid(child.m_Entity)) { CORE_ASSERT(false, "Child entity is not valid!"); return; }
 
-    m_Scene->m_Registry.get<Relationship>(m_Entity).children.push_back(entity);
-    m_Scene->m_Registry.get<Relationship>(entity).parent = m_Entity;
+    m_Scene->m_Registry.get<Relationship>(m_Entity).children.push_back(child);
+    m_Scene->m_Registry.get<Relationship>(child.m_Entity).parent = child;
   }
 
-  Entity Entity::GetParent() const
+  Entity& Entity::GetParent() const
   {
-    if (!m_Scene->m_Registry.valid(m_Entity)) { CORE_ASSERT(false, "Entity is not valid!"); return Entity(); }
+    CORE_ASSERT(m_Scene != nullptr, "Scene is null!");
+    CORE_ASSERT(m_Scene->m_Registry.valid(m_Entity), "Entity is not valid!");
 
-    return Entity(m_Scene->m_Registry.get<Relationship>(m_Entity).parent, m_Scene);
+    return m_Scene->m_Registry.get<Relationship>(m_Entity).parent;
   }
 
   const std::vector<Entity>& Entity::GetChildren() const
   {
-    static std::vector<Entity> children;
-
     if (m_Scene == nullptr) {
       CORE_ASSERT(false, "Scene is null!");
-      children.clear();
-      return children;
+      return {};
     }
 
     if (!m_Scene->m_Registry.valid(m_Entity)) {
       CORE_ASSERT(false, "Entity is not valid!");
-      children.clear();
-      return children;
-    }
-    
-    for (entt::entity child : m_Scene->m_Registry.get<Relationship>(m_Entity).children) {
-      children.push_back(Entity(child, m_Scene));
+      return {};
     }
 
-    return children;
+    return m_Scene->m_Registry.get<Relationship>(m_Entity).children;
   }
 
   inline bool Entity::IsValid() const {

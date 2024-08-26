@@ -34,8 +34,8 @@
 	#define ASSERT(x, ...) if(!(x)) { ERROR("Assertion Failed: {0}", __VA_ARGS__); DEBUG_BREAK; }
 	#define CORE_ASSERT(x, ...) if(!(x)) { CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); DEBUG_BREAK; }
 #else
-	#define ASSERT(x, ...)
-	#define CORE_ASSERT(x, ...)
+	#define ASSERT(x, ...) if(!(x)) { ERROR("Assertion Failed: {0}", __VA_ARGS__);
+	#define CORE_ASSERT(x, ...) if(!(x)) { CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); }
 #endif
 
 #define BIT(x) (1 << x)

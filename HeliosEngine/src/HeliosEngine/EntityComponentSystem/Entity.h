@@ -30,17 +30,14 @@ namespace Helios
     T& GetComponent() const;
 
     template <typename T, typename... Args>
-    void EmplaceScript(Args&&... args) const;
-
-    template <typename T>
-    void DetachScript() const;
+    void EmplaceScriptComponent(Args&&... args) const;
 
     void SetParent(Entity& parent) const;
     void RemoveParent() const;
 
     void AddChild(Entity& child) const;
 
-    Entity GetParent() const;
+    Entity& GetParent() const;
     const std::vector<Entity>& GetChildren() const;
 
     inline bool IsValid() const;

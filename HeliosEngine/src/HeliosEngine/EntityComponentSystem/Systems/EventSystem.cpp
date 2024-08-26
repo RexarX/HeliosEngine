@@ -15,34 +15,20 @@ namespace Helios
     //timer.Start();
     for (auto& [type, queue] : m_EventQueues) {
       auto it = m_EventListeners.find(type);
+      //timerEvent.Start();
+      //CORE_TRACE("{0} event count: {1}", type.name(), queue.size());
       if (it != m_EventListeners.end() && !it->second.empty()) {
-        // Remove expired listeners
-        it->second.erase(
-          std::remove_if(
-            it->second.begin(), it->second.end(),
-            [](const Listener& listener) {
-              return listener.instance.expired();
-            }
-          ),
-          it->second.end()
-        );
-
-        //timerEvent.Start();
-        //TRACE("{0} event count: {1}", type.name(), queue.size());
-        // Process events
         while (!queue.empty()) {
           for (const Listener& listener : it->second) {
-            if (auto instance = listener.instance.lock()) {
-              listener.callback(queue.front().get());
-            }
+            listener.callback(queue.front().get());
           }
           queue.pop();
         }
       }
       //timerEvent.Stop();
-      //TRACE("{0} took: {1} ms", type.name(), timerEvent.GetElapsedMillisec());
+      //CORE_TRACE("{0} took: {1} ms", type.name(), timerEvent.GetElapsedMillisec());
     }
     //timer.Stop();
-    //TRACE("Total event processing took: {0} ms", timer.GetElapsedMillisec());
+    //CORE_TRACE("Total event processing took: {0} ms", timer.GetElapsedMillisec());
   }
 }

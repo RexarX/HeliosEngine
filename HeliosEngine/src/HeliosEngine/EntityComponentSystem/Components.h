@@ -2,12 +2,15 @@
 
 #include "UUID.h"
 
+#include "Entity.h"
+
 #include "Scene/SceneCamera.h"
 
 #include "Renderer/Mesh.h"
 #include "Renderer/Material.h"
 
 #include "Systems/EventSystem.h"
+#include "Systems/ScriptSystem.h"
 
 #include <glm/glm.hpp>
 
@@ -15,21 +18,21 @@ namespace Helios
 {
 	class Scene;
 
-	struct HELIOSENGINE_API ID // Every entity must have an ID
+	struct HELIOSENGINE_API ID // Every entity has an ID
 	{
 		UUID id;
 	};
 
-	struct HELIOSENGINE_API Tag // Every entity must have a Tag
+	struct HELIOSENGINE_API Tag // Every entity has a Tag
 	{
 		std::string tag;
 	};
 
-	struct HELIOSENGINE_API Relationship // Every entity must have a Relationship
+	struct HELIOSENGINE_API Relationship // Every entity has a Relationship
 	{
+		Entity parent = Entity();
+    std::vector<Entity> children;
 		bool isRoot = false;
-		entt::entity parent = entt::null;
-    std::vector<entt::entity> children;
 	};
 
 	struct HELIOSENGINE_API Transform
@@ -62,24 +65,32 @@ namespace Helios
 		glm::mat4 matrix;
 	};
 
-	class HELIOSENGINE_API Script : public std::enable_shared_from_this<Script>
+	class HELIOSENGINE_API Script
 	{
 	public:
-		virtual ~Script() = default;
+		virtual ~Script() { OnDetach(); }
 
-		virtual void OnAttach() = 0;
-		virtual void OnUpdate(Timestep deltaTime) = 0;
-		virtual void OnEvent(Event& event) = 0;
+		virtual void OnAttach() {}
+		virtual void OnDetach() {}
+		virtual void OnUpdate(Timestep deltaTime) {}
+		virtual void OnEvent(Event& event) {}
 
 		friend class Entity;
 
 	protected:
 		template <typename T>
-		void AddListener(const std::function<void(T&)>& callback) {
-			m_EventSystem->AddListener<T>(shared_from_this(), callback);
+		void AddListener(const std::function<void(T&)>& callback) const {
+			m_EventSystem->AddListener<T>(this, callback);
 		}
 
-	protected:
+		template <typename T>
+		void RemoveListener() const { m_EventSystem->RemoveListener<T>(this); }
+
+		template <typename T>
+		inline T& GetComponent() const { return m_Entity->GetComponent<T>(); }
+
+	private:
+		const Entity* m_Entity = nullptr;
 		EventSystem* m_EventSystem = nullptr;
 	};
 }

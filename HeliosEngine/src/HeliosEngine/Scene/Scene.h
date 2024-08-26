@@ -42,12 +42,12 @@ namespace Helios
     void SetName(const std::string& name) { m_Name = name; }
     void SetActive(bool active) { m_Active = active; }
 
-    Entity CreateEntity(const std::string& name = std::string());
+    Entity& CreateEntity(const std::string& name = std::string());
     void DestroyEntity(Entity& entity);
 
-    Entity FindEntityByUUID(UUID uuid);
+    Entity& FindEntityByUUID(UUID uuid);
 
-    Entity GetActiveCameraEntity();
+    Entity& GetActiveCameraEntity();
 
     template <typename T>
     void PushEvent(T& event) { m_EventSystem.PushEvent(event); }
@@ -64,14 +64,12 @@ namespace Helios
     friend class Entity;
 
   private:
-    void DestroyEntityRecursively(entt::entity entity);
-
-  private:
     std::string m_Name = "default";
     bool m_Active = false;
+    bool m_Loaded = false;
 
     entt::registry m_Registry;
-    std::unordered_map<UUID, entt::entity> m_EntityMap;
+    std::unordered_map<UUID, Entity> m_EntityMap;
 
     Entity m_RootEntity;
     

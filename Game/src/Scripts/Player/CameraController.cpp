@@ -1,23 +1,18 @@
 #include "CameraController.h"
 
-CameraController::CameraController(Helios::Entity& camera)
-  : m_Camera(camera)
-{
-}
-
-CameraController::~CameraController()
-{
-}
-
 void CameraController::OnAttach()
+{
+}
+
+void CameraController::OnDetach()
 {
 }
 
 void CameraController::OnUpdate(Helios::Timestep deltaTime)
 {
-  if (!m_Camera.GetComponent<Helios::Camera>().currect) { return; }
+  if (!GetComponent<Helios::Camera>().currect) { return; }
 
-  Helios::Transform& transform = m_Camera.GetComponent<Helios::Transform>();
+  Helios::Transform& transform = GetComponent<Helios::Transform>();
 
   glm::vec3 front;
   front.x = cos(glm::radians(m_Yaw)) * cos(glm::radians(m_Pitch));

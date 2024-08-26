@@ -46,27 +46,15 @@ namespace Helios
   }
 
   template <typename T, typename... Args>
-  void Entity::EmplaceScript(Args&&... args) const
+  void Entity::EmplaceScriptComponent(Args&&... args) const
   {
     static_assert(std::is_base_of<Script, T>::value, "T must inherit from Script!");
     if (m_Scene == nullptr) { CORE_ASSERT(false, "Scene is null!"); return; }
     if (!m_Scene->m_Registry.valid(m_Entity)) { CORE_ASSERT(false, "Entity is not valid!"); return; }
-    if (m_Scene->m_Registry.try_get<T>(m_Entity) == nullptr) { CORE_ASSERT(false, "Entity does not have component!"); return; }
 
     auto& script = m_Scene->m_Registry.emplace<T>(m_Entity, std::forward<Args>(args)...);
     script.m_EventSystem = &m_Scene->m_EventSystem;
+    script.m_Entity = this;
     script.OnAttach();
-  }
-
-  template <typename T>
-  void Entity::DetachScript() const
-  {
-    static_assert(std::is_base_of<Script, T>::value, "T must inherit from Script!");
-    if (m_Scene == nullptr) { CORE_ASSERT(false, "Scene is null!"); return; }
-    if (!m_Scene->m_Registry.valid(m_Entity)) { CORE_ASSERT(false, "Entity is not valid!"); return; }
-    T* ptr = m_Scene->m_Registry.try_get<T>(m_Entity);
-    if (ptr == nullptr) { CORE_ASSERT(false, "Entity does not have script!"); return; }
-
-    m_Scene->m_Registry.remove<T>(m_Entity);
   }
 }

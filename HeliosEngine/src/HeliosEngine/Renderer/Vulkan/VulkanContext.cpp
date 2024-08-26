@@ -427,7 +427,7 @@ namespace Helios
         }
 
         score += deviceProperties.limits.maxImageDimension2D;
-        candidates.insert(std::make_pair(score, device));
+        candidates.emplace(score, device);
         score = 0;
       }
     }
