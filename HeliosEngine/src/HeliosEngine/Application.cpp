@@ -58,7 +58,7 @@ namespace Helios
 
  bool Application::OnKeyPressed(KeyPressedEvent& e)
 	{
-#if defined(DEBUG_MODE) || defined(RELEASE_MODE)
+#ifndef DIST_MODE
     if (e.GetKeyCode() == Key::Insert) {
 			bool currentState = m_Window->IsImGuiEnabled();
 			m_ImGuiLayer->BlockEvents(!currentState);
@@ -95,7 +95,7 @@ namespace Helios
 				}
 				m_Window->EndFrame();
 
-#if defined(DEBUG_MODE) || defined(RELEASE_MODE)
+#ifndef DIST_MODE
 				if (m_Window->IsImGuiEnabled()) {
 					m_Window->BeginFrameImGui();
 					for (Layer* layer : m_LayerStack) {

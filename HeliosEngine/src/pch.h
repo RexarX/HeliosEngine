@@ -31,6 +31,8 @@
 #include "HeliosEngine/Input.h"
 #include "HeliosEngine/KeyCodes.h"
 #include "HeliosEngine/MouseButtonCodes.h"
+#include "HeliosEngine/Timestep.h"
+#include "HeliosEngine/UUID.h"
 
 #include "HeliosEngine/Utils/Filesystem.h"
 #include "HeliosEngine/Utils/Profiler.h"

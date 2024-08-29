@@ -12,6 +12,8 @@ namespace Helios
 		{
 		}
 
+		virtual ~WindowResizeEvent() = default;
+
 		inline uint32_t GetWidth() const { return m_Width; }
 		inline uint32_t GetHeight() const { return m_Height; }
 
@@ -33,6 +35,7 @@ namespace Helios
 	{
 	public:
 		WindowCloseEvent() = default;
+		virtual ~WindowCloseEvent() = default;
 
 		EVENT_CLASS_TYPE(WindowClose)
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
@@ -42,6 +45,7 @@ namespace Helios
 	{
 	public:
 		WindowFocusedEvent() = default;
+    virtual ~WindowFocusedEvent() = default;
 
 		EVENT_CLASS_TYPE(WindowFocus)
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
@@ -51,6 +55,7 @@ namespace Helios
 	{
 	public:
 		WindowLostFocusEvent() = default;
+    virtual ~WindowLostFocusEvent() = default;
 
 		EVENT_CLASS_TYPE(WindowLostFocus)
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
@@ -60,6 +65,7 @@ namespace Helios
 	{
 	public:
 		AppTickEvent() = default;
+    virtual ~AppTickEvent() = default;
 
 		EVENT_CLASS_TYPE(AppTick)
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
@@ -70,6 +76,7 @@ namespace Helios
 	public:
 		AppUpdateEvent() = default;
     AppUpdateEvent(double deltaTime) : m_DeltaTime(deltaTime) {}
+    virtual ~AppUpdateEvent() = default;
 
     inline double GetDeltaTime() const { return m_DeltaTime; }
 
@@ -84,6 +91,7 @@ namespace Helios
 	{
 	public:
 		AppRenderEvent() = default;
+    virtual ~AppRenderEvent() = default;
 
 		EVENT_CLASS_TYPE(AppRender)
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)

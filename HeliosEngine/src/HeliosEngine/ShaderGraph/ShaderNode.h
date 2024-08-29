@@ -7,16 +7,16 @@ namespace Helios
   class HELIOSENGINE_API ShaderNode
   {
   public:
-    ShaderNode(const std::string& name, NodeType type);
+    ShaderNode(std::string_view name, NodeType type);
     virtual ~ShaderNode() = default;
 
-    void AddInputPort(const std::string& name, DataType type);
-    void AddOutputPort(const std::string& name, DataType type);
+    void AddInputPort(std::string_view name, DataType type);
+    void AddOutputPort(std::string_view name, DataType type);
 
-    void RemoveInputPort(const std::string& name);
-    void RemoveOutputPort(const std::string& name);
+    void RemoveInputPort(std::string_view name);
+    void RemoveOutputPort(std::string_view name);
 
-    inline const std::string& GetName() const { return m_Name; }
+    inline std::string_view GetName() const { return m_Name; }
     inline NodeType GetType() const { return m_Type; }
 
     inline const std::vector<NodePort>& GetInputPorts() const { return m_InputPorts; }
@@ -34,7 +34,7 @@ namespace Helios
   public:
     enum class Operation { Add, Subtract, Multiply, Divide };
 
-    MathNode(const std::string& name, Operation op);
+    MathNode(std::string_view name, Operation op);
     virtual ~MathNode() = default;
   
   protected:

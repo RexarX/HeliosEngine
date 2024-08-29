@@ -25,6 +25,14 @@ endif()
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
+option(ENABLE_SIMD_SSE2 "Enable SSE2 optimizations" OFF)
+option(ENABLE_SIMD_SSE3 "Enable SSE3 optimizations" OFF)
+option(ENABLE_SIMD_SSSE3 "Enable SSSE3 optimizations" OFF)
+option(ENABLE_SIMD_SSE4_1 "Enable SSE 4.1 optimizations" OFF)
+option(ENABLE_SIMD_SSE4_2 "Enable SSE 4.2 optimizations" OFF)
+option(ENABLE_SIMD_AVX "Enable AVX optimizations" OFF)
+option(ENABLE_SIMD_AVX2 "Enable AVX2 optimizations" OFF)
+
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)

@@ -32,13 +32,13 @@ namespace Helios
     template <typename T, typename... Args>
     void EmplaceScriptComponent(Args&&... args) const;
 
-    void SetParent(Entity& parent) const;
+    void SetParent(Entity& parent);
     void RemoveParent() const;
 
-    void AddChild(Entity& child) const;
+    void AddChild(Entity& child);
 
     Entity& GetParent() const;
-    const std::vector<Entity>& GetChildren() const;
+    const std::vector<Entity*>& GetChildren() const;
 
     inline bool IsValid() const;
 

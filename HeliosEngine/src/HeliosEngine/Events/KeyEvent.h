@@ -9,6 +9,8 @@ namespace Helios
 	class HELIOSENGINE_API KeyEvent : public Event
 	{
 	public:
+		virtual ~KeyEvent() = default;
+
 		inline KeyCode GetKeyCode() const { return m_KeyCode; }
 
 		EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput);
@@ -26,6 +28,8 @@ namespace Helios
 			: KeyEvent(keycode), m_RepeatCount(repeatCount) 
 		{
 		}
+
+		virtual ~KeyPressedEvent() = default;
 
 		inline uint32_t GetRepeatCount() const { return m_RepeatCount; }
 
@@ -46,6 +50,7 @@ namespace Helios
 	{
 	public:
 		KeyReleasedEvent(KeyCode keycode) : KeyEvent(keycode) {}
+    virtual ~KeyReleasedEvent() = default;
 
 		std::string ToString() const override
 		{

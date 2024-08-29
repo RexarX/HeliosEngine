@@ -30,8 +30,8 @@ namespace Helios
 
 	struct HELIOSENGINE_API Relationship // Every entity has a Relationship
 	{
-		Entity parent = Entity();
-    std::vector<Entity> children;
+		Entity* parent = nullptr;
+    std::vector<Entity*> children;
 		bool isRoot = false;
 	};
 
@@ -65,15 +65,15 @@ namespace Helios
 		glm::mat4 matrix;
 	};
 
-	class HELIOSENGINE_API Script
+	class HELIOSENGINE_API Scriptable
 	{
 	public:
-		virtual ~Script() { OnDetach(); }
+		virtual ~Scriptable() = default;
 
-		virtual void OnAttach() {}
-		virtual void OnDetach() {}
-		virtual void OnUpdate(Timestep deltaTime) {}
-		virtual void OnEvent(Event& event) {}
+		virtual void OnAttach() = 0;
+		virtual void OnDetach() = 0;
+		virtual void OnUpdate(Timestep deltaTime) = 0;
+		virtual void OnEvent(Event& event) = 0;
 
 		friend class Entity;
 
@@ -87,10 +87,18 @@ namespace Helios
 		void RemoveListener() const { m_EventSystem->RemoveListener<T>(this); }
 
 		template <typename T>
+		void PushEvent(T& event) const { m_EventSystem->PushEvent(event); }
+
+		template <typename T>
 		inline T& GetComponent() const { return m_Entity->GetComponent<T>(); }
 
 	private:
 		const Entity* m_Entity = nullptr;
 		EventSystem* m_EventSystem = nullptr;
 	};
+
+	struct HELIOSENGINE_API Script
+  {
+		std::unique_ptr<Scriptable> scriptable = nullptr;
+  };
 }

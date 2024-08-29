@@ -27,7 +27,7 @@ namespace Helios
   {
   public:
     Scene();
-    Scene(const std::string& name);
+    Scene(std::string_view name);
     Scene(const Scene&) = delete;
     Scene(Scene&&) noexcept;
     ~Scene() = default;
@@ -39,10 +39,10 @@ namespace Helios
     void Load();
     void Unload();
 
-    void SetName(const std::string& name) { m_Name = name; }
+    void SetName(std::string_view name) { m_Name = name; }
     void SetActive(bool active) { m_Active = active; }
 
-    Entity& CreateEntity(const std::string& name = std::string());
+    Entity& CreateEntity(std::string_view name);
     void DestroyEntity(Entity& entity);
 
     Entity& FindEntityByUUID(UUID uuid);
@@ -52,7 +52,7 @@ namespace Helios
     template <typename T>
     void PushEvent(T& event) { m_EventSystem.PushEvent(event); }
 
-    inline const std::string& GetName() const { return m_Name; }
+    inline std::string_view GetName() const { return m_Name; }
     inline bool IsActive() const { return m_Active; }
 
     inline Entity& GetRootEntity() { return m_RootEntity; }

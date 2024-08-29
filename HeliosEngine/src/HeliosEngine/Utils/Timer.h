@@ -1,16 +1,18 @@
 #pragma once
 
+#include "Core.h"
+
 #include <chrono>
 
 namespace Helios::Utils
 {
-	using steady_clock = std::chrono::steady_clock;
-
 	class HELIOSENGINE_API Timer
 	{
 	public:
+		using steady_clock = std::chrono::steady_clock;
+
 		void Start() {
-      m_TimeStamp = steady_clock::now();
+			m_TimeStamp = steady_clock::now();
 		}
 
 		void Stop() {
@@ -34,7 +36,7 @@ namespace Helios::Utils
 		}
 
 	private:
-		template<typename Duration = std::chrono::milliseconds>
+		template<typename Duration>
 		inline auto GetElapsed() const {
 			return std::chrono::duration_cast<Duration>(m_Elapsed).count();
 		}

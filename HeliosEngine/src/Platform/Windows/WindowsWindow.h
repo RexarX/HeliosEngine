@@ -30,12 +30,12 @@ namespace Helios
 
 		void SetEventCallback(const EventCallbackFn& callback) override { m_Data.EventCallback = callback; }
 
-		void SetVSync(const bool enabled) override;
-		void SetMinimized(const bool enabled) override;
-		void SetFocused(const double enabled) override;
-		void SetFullscreen(const bool enabled) override;
-		void SetFramerate(const double framerate) override;
-		void SetImGuiState(const bool enabled) override;
+		void SetVSync(bool enabled) override;
+		void SetMinimized(bool enabled) override;
+		void SetFocused(double enabled) override;
+		void SetFullscreen(bool enabled) override;
+		void SetFramerate(double framerate) override;
+		void SetImGuiState(bool enabled) override;
 
 		inline uint32_t GetWidth() const override { return m_Data.Width; }
 		inline uint32_t GetHeight() const override { return m_Data.Height; }

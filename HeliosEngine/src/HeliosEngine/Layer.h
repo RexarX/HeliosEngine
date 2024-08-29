@@ -12,7 +12,7 @@ namespace Helios
 	class HELIOSENGINE_API Layer
 	{
 	public:
-		Layer(const std::string& name = "Layer");
+		Layer(std::string_view name = "Layer");
 		virtual ~Layer() = default;
 
 		virtual void OnAttach() {}

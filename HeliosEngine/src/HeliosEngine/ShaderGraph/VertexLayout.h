@@ -8,7 +8,7 @@ namespace Helios
   {
     VertexElement() = default;
 
-    VertexElement(DataType type, const std::string& name, bool normalized = false)
+    VertexElement(DataType type, std::string_view name, bool normalized = false)
       : name(name), type(type), normalized(normalized), size(DataTypeSize(type))
     {
     }

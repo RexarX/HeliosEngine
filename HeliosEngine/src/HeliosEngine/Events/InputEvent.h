@@ -12,8 +12,11 @@ namespace Helios
   public:
     MouseMovedAction() = default;
     MouseMovedAction(float mouseX, float mouseY, float deltaX, float deltaY)
-      : m_MouseX(mouseX), m_MouseY(mouseY), m_DeltaX(deltaX), m_DeltaY(deltaY) {
+      : m_MouseX(mouseX), m_MouseY(mouseY), m_DeltaX(deltaX), m_DeltaY(deltaY)
+    {
     }
+
+    virtual ~MouseMovedAction() = default;
 
     inline float GetX() const { return m_MouseX; }
     inline float GetY() const { return m_MouseY; }
@@ -40,9 +43,8 @@ namespace Helios
   {
   public:
     MouseButtonPressedAction() = default;
-    MouseButtonPressedAction(MouseCode button)
-      : m_Button(button) {
-    }
+    MouseButtonPressedAction(MouseCode button) : m_Button(button) {}
+    virtual ~MouseButtonPressedAction() = default;
 
     inline float GetMouseButton() const { return m_Button; }
 
@@ -64,9 +66,8 @@ namespace Helios
   {
   public:
     MouseButtonReleasedAction() = default;
-    MouseButtonReleasedAction(MouseCode button)
-      : m_Button(button) {
-    }
+    MouseButtonReleasedAction(MouseCode button) : m_Button(button) {}
+    virtual ~MouseButtonReleasedAction() = default;
 
     inline float GetMouseButton() const { return m_Button; }
 
@@ -89,8 +90,11 @@ namespace Helios
   public:
     KeyPressedAction() = default;
     KeyPressedAction(KeyCode keycode, uint32_t repeatCount)
-      : m_KeyCode(keycode), m_RepeatCount(repeatCount) {
+      : m_KeyCode(keycode), m_RepeatCount(repeatCount)
+    {
     }
+
+    virtual ~KeyPressedAction() = default;
 
     inline KeyCode GetKeyCode() const { return m_KeyCode; }
 
@@ -116,6 +120,7 @@ namespace Helios
   public:
     KeyReleasedAction() = default;
     KeyReleasedAction(KeyCode keycode) : m_KeyCode(keycode) {}
+    virtual ~KeyReleasedAction() = default;
 
     inline KeyCode GetKeyCode() const { return m_KeyCode; }
 

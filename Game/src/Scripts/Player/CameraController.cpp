@@ -11,7 +11,6 @@ void CameraController::OnDetach()
 void CameraController::OnUpdate(Helios::Timestep deltaTime)
 {
   if (!GetComponent<Helios::Camera>().currect) { return; }
-
   Helios::Transform& transform = GetComponent<Helios::Transform>();
 
   glm::vec3 front;

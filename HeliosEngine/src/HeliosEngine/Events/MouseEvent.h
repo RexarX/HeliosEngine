@@ -10,6 +10,7 @@ namespace Helios
 	{
 	public:
 		MouseMovedEvent(float x, float y) : m_MouseX(x), m_MouseY(y) {}
+		virtual ~MouseMovedEvent() = default;
 
 		inline float GetX() const { return m_MouseX; }
 		inline float GetY() const { return m_MouseY; }
@@ -36,6 +37,8 @@ namespace Helios
 		{
 		}
 
+    virtual ~MouseScrolledEvent() = default;
+
 		inline float GetXOffset() const { return m_XOffset; }
 		inline float GetYOffset() const { return m_YOffset; }
 
@@ -56,6 +59,8 @@ namespace Helios
 	class HELIOSENGINE_API MouseButtonEvent : public Event
 	{
 	public:
+		virtual ~MouseButtonEvent() = default;
+
 		inline MouseCode GetMouseButton() const { return m_Button; }
 
 		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
@@ -70,6 +75,7 @@ namespace Helios
 	{
 	public:
 		MouseButtonPressedEvent(MouseCode button) : MouseButtonEvent(button) {}
+		virtual ~MouseButtonPressedEvent() = default;
 
 		std::string ToString() const override
 		{
@@ -85,6 +91,7 @@ namespace Helios
 	{
 	public:
 		MouseButtonReleasedEvent(MouseCode button) : MouseButtonEvent(button) {}
+    virtual ~MouseButtonReleasedEvent() = default;
 
 		std::string ToString() const override
 		{

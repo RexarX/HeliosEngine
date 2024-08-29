@@ -38,7 +38,7 @@ namespace Helios
     virtual inline uint32_t GetMipLevel() const = 0;
     virtual inline uint32_t GetAnisoLevel() const = 0;
 
-    static std::shared_ptr<Texture> Create(const std::string& path, uint32_t mipLevel = 0,
+    static std::shared_ptr<Texture> Create(std::string_view path, uint32_t mipLevel = 0,
                                            uint32_t anisoLevel = 0, ImageFormat format = ImageFormat::None);
   };
 }

@@ -8,7 +8,7 @@ namespace Helios
     m_Registry.get<Relationship>(m_RootEntity.GetEntity()).isRoot = true;
   }
 
-  Scene::Scene(const std::string& name)
+  Scene::Scene(std::string_view name)
     : m_Name(name), m_RootEntity(CreateEntity(name))
   {
     m_Registry.get<Relationship>(m_RootEntity.GetEntity()).isRoot = true;
@@ -32,7 +32,7 @@ namespace Helios
   void Scene::OnUpdate(Timestep deltaTime)
   {
     if (!m_Active) { return; }
-    if (!m_Loaded) {CORE_ASSERT(false, "Scene is not loaded!"); return;}
+    if (!m_Loaded) { CORE_ASSERT(false, "Scene is not loaded!"); return; }
 
     m_EventSystem.OnUpdate(m_Registry);
     m_ScriptSystem.OnUpdate(m_Registry, deltaTime);
@@ -53,7 +53,7 @@ namespace Helios
     if (!m_Active) { return; }
     if (!m_Loaded) { CORE_ASSERT(false, "Scene is not loaded!"); return; }
 
-    m_RenderingSystem.OnUpdate(m_Registry);
+    m_RenderingSystem.Draw();
   }
   
   void Scene::Load()
@@ -75,13 +75,13 @@ namespace Helios
     m_Loaded = false;
   }
 
-  Entity& Scene::CreateEntity(const std::string& name)
+  Entity& Scene::CreateEntity(std::string_view name)
   {
     entt::entity entity = m_Registry.create();
     UUID id;
 
     m_Registry.emplace<ID>(entity, id);
-    m_Registry.emplace<Tag>(entity, name.empty() ? "Entity" : name);
+    m_Registry.emplace<Tag>(entity, name.empty() ? "Entity" : name.data());
     m_Registry.emplace<Relationship>(entity);
 
     return m_EntityMap.emplace(id, Entity(entity, this)).first->second;
@@ -92,10 +92,10 @@ namespace Helios
     if (!entity.IsValid()) { CORE_ASSERT(false, "Invalid entity!"); return; }
     entt::entity entt = entity.GetEntity();
     auto& relationship = m_Registry.get<Relationship>(entt);
-    for (Entity& child : relationship.children) {
-      DestroyEntity(child);
+    for (Entity* child : relationship.children) {
+      DestroyEntity(*child);
     }
-    relationship.parent = Entity();
+    relationship.parent = nullptr;
     relationship.children.clear();
     m_EntityMap.erase(m_Registry.get<ID>(entt).id);
     m_Registry.destroy(entt);

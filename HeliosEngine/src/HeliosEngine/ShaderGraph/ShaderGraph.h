@@ -21,17 +21,17 @@ namespace Helios
   class HELIOSENGINE_API ShaderGraph
   {
   public:
-    ShaderGraph(const std::string& name);
+    ShaderGraph(std::string_view name);
     ~ShaderGraph() = default;
 
     void AddNode(const std::shared_ptr<ShaderNode>& node);
     void RemoveNode(const std::shared_ptr<ShaderNode>& node);
 
-    void Connect(const std::shared_ptr<ShaderNode>& outputNode, const std::string& outputPortName,
-                 const std::shared_ptr<ShaderNode>& inputNode, const std::string& inputPortName);
+    void Connect(const std::shared_ptr<ShaderNode>& outputNode, std::string_view outputPortName,
+                 const std::shared_ptr<ShaderNode>& inputNode, std::string_view inputPortName);
 
-    void Disconnect(const std::shared_ptr<ShaderNode>& outputNode, const std::string& outputPortName,
-                    const std::shared_ptr<ShaderNode>& inputNode, const std::string& inputPortName);
+    void Disconnect(const std::shared_ptr<ShaderNode>& outputNode, std::string_view outputPortName,
+                    const std::shared_ptr<ShaderNode>& inputNode, std::string_view inputPortName);
 
     std::string GenerateShader() const;
 

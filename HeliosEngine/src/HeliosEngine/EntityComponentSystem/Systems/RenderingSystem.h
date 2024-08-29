@@ -15,6 +15,7 @@ namespace Helios
     ~RenderingSystem() = default;
 
     void OnUpdate(entt::registry& registry);
+    void Draw();
 
     RenderingSystem& operator=(const RenderingSystem&);
 

@@ -19,6 +19,10 @@ namespace Helios
     FillRenderQueue(registry);
 
     m_ResourceManager->UpdateResources(registry, m_RenderQueue);
+  }
+
+  void RenderingSystem::Draw()
+  {
     m_GraphicsContext->Record(m_RenderQueue, *m_ResourceManager);
   }
 

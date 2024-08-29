@@ -14,8 +14,7 @@ namespace Helios
 		uint32_t Width;
 		uint32_t Height;
 
-		WindowProps(const std::string& title = "Game",
-								uint32_t width = 1280, uint32_t height = 720)
+		WindowProps(std::string_view title = "Game", uint32_t width = 1280, uint32_t height = 720)
 			: Title(title), Width(width), Height(height)
 		{
 		}

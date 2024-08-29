@@ -32,7 +32,7 @@ namespace Helios
 	class HELIOSENGINE_API Event
 	{
 	public:
-		bool Handled = false;
+		virtual ~Event() = default;
 
 		virtual EventType GetEventType() const = 0;
 		virtual const char* GetName() const = 0;
@@ -40,6 +40,9 @@ namespace Helios
 		virtual inline std::string ToString() const { return GetName(); }
 
 		inline bool IsInCategory(EventCategory category) { return GetCategoryFlags() & category; }
+
+    public:
+			bool Handled = false;
 	};
 
 	class EventDispatcher

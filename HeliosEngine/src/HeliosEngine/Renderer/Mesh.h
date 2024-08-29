@@ -15,7 +15,7 @@ namespace Helios
     DynamicVertex(const VertexLayout& layout);
 
     template<typename T>
-    void SetAttribute(const std::string& name, const T& value);
+    void SetAttribute(std::string_view name, const T& value);
 
     inline const std::vector<std::byte>& GetData() const { return m_Data; }
 
@@ -58,7 +58,7 @@ namespace Helios
   };
 
   template<typename T>
-  void DynamicVertex::SetAttribute(const std::string& name, const T& value)
+  void DynamicVertex::SetAttribute(std::string_view name, const T& value)
   {
     for (const auto& element : m_Layout.GetElements()) {
       if (element.m_Name == name) {

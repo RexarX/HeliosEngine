@@ -29,6 +29,7 @@ namespace Helios
   void VulkanResourceManager::ClearResources()
   { 
     if (m_Effects.empty()) { return; }
+
     VkDevice device = m_Context.GetDevice();
 
     // Clear

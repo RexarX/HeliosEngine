@@ -12,8 +12,9 @@ void GameLayer::OnAttach()
 
 	Helios::Entity& root = gameScene.GetRootEntity();
 
-	Helios::Entity camera = gameScene.CreateEntity("Camera");
-	camera.EmplaceComponent<Helios::Camera>();
+	Helios::Entity& camera = gameScene.CreateEntity("Camera");
+	camera.EmplaceComponent<Helios::Camera>().currect = true;
+	camera.EmplaceComponent<Helios::Transform>();
 	camera.EmplaceScriptComponent<CameraController>();
 
 	root.AddChild(camera);
@@ -51,7 +52,7 @@ void GameLayer::OnImGuiRender(ImGuiContext* context)
 	ImGui::SetCurrentContext(context);
 
 	ImGui::Begin("Debug menu");
-	ImGui::Text("FPS: %f", ts.GetFramerate());
+	ImGui::Text("FPS: %i", static_cast<int32_t>(ts.GetFramerate()));
 	ImGui::Text("Frametime: %f ms", ts.GetMilliseconds());
 	ImGui::End();
 }

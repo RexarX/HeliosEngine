@@ -10,7 +10,7 @@ namespace Helios
 {
   static bool s_GLFWInitialized = false;
 
-	static void GLFWErrorCallback(const int error, const char* description)
+	static void GLFWErrorCallback(int error, const char* description)
 	{
 		CORE_ERROR("GLFW Error ({0}): {1}", error, description);
 	}

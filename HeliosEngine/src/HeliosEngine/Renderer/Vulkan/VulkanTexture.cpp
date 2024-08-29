@@ -5,7 +5,7 @@
 
 namespace Helios
 {
-  VulkanTexture::VulkanTexture(const std::string& path, uint32_t mipLevel, uint32_t anisoLevel, ImageFormat format)
+  VulkanTexture::VulkanTexture(std::string_view path, uint32_t mipLevel, uint32_t anisoLevel, ImageFormat format)
     : m_MipLevel(mipLevel), m_AnisoLevel(anisoLevel), m_Format(format)
   {
   }
@@ -18,11 +18,11 @@ namespace Helios
   {
   }
 
-  void VulkanTexture::LoadFromFile(const std::string& path)
+  void VulkanTexture::LoadFromFile(std::string_view path)
   {
     int32_t width, height, channels;
     stbi_set_flip_vertically_on_load(1);
-    m_Data = stbi_load(path.c_str(), &width, &height, &channels, 4);
+    m_Data = stbi_load(path.data(), &width, &height, &channels, 4);
 
     if (m_Data == nullptr) { CORE_ERROR("Failed to load texture!"); }
 

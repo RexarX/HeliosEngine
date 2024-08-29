@@ -14,9 +14,9 @@ namespace Helios
   VulkanContext* VulkanContext::m_Instance = nullptr;
 
   static VKAPI_ATTR VkBool32 VKAPI_CALL DebugCallback(const VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
-    const VkDebugUtilsMessageTypeFlagsEXT messageType,
-    const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData,
-    void* pUserData)
+                                                      const VkDebugUtilsMessageTypeFlagsEXT messageType,
+                                                      const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData,
+                                                      void* pUserData)
   {
     if (messageSeverity & VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT) {
       CORE_ERROR("{0} Validation Layer: {1}: {2}", pCallbackData->messageIdNumber,
@@ -358,7 +358,7 @@ namespace Helios
     appInfo.applicationVersion = VK_MAKE_API_VERSION(1, 0, 0, 0);
     appInfo.pEngineName = "Helios";
     appInfo.engineVersion = VK_MAKE_API_VERSION(1, 0, 0, 0);
-    appInfo.apiVersion = VK_API_VERSION_1_0;
+    appInfo.apiVersion = VK_API_VERSION_1_1;
 
     VkInstanceCreateInfo createInfo{};
     createInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;

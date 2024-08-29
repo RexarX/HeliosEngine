@@ -9,7 +9,7 @@ namespace Helios
   class VulkanTexture : public Texture
   {
   public:
-    VulkanTexture(const std::string& path, uint32_t mipLevel = 0,
+    VulkanTexture(std::string_view path, uint32_t mipLevel = 0,
                   uint32_t anisoLevel = 0, ImageFormat format = ImageFormat::None);
 
     ~VulkanTexture() = default;
@@ -35,7 +35,7 @@ namespace Helios
     inline uint32_t GetAnisoLevel() const override { return m_AnisoLevel; }
 
   private:
-    void LoadFromFile(const std::string& path);
+    void LoadFromFile(std::string_view path);
 
   private:
     void* m_Data = nullptr;

@@ -1,7 +1,6 @@
 #pragma once
 
 #include <random>
-#include <glm/glm.hpp>
 
 namespace Helios::Utils
 {
@@ -9,7 +8,7 @@ namespace Helios::Utils
   {
   public:
     template<typename T>
-    static T Value() {
+    static T GetValue() {
       if constexpr (std::is_integral<T>::value) {
         std::uniform_int_distribution<T> distribution(std::numeric_limits<T>::min(), std::numeric_limits<T>::max());
         return distribution(m_Engine);
@@ -20,7 +19,7 @@ namespace Helios::Utils
     }
 
     template<typename T>
-    static T Range(T min, T max) {
+    static T GetValueFromRange(T min, T max) {
       if constexpr (std::is_integral<T>::value) {
         std::uniform_int_distribution<T> distribution(min, max);
         return distribution(m_Engine);

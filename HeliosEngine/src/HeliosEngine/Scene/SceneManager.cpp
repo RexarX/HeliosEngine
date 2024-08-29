@@ -18,7 +18,7 @@ namespace Helios
 
   void SceneManager::RemoveScene(const Scene& scene)
   {
-    const std::string& name = scene.GetName();
+    std::string name(scene.GetName());
     if (!m_Scenes.contains(name)) { CORE_ASSERT(false, "Scene not found!"); return; }
     m_Scenes.erase(name);
   }

@@ -8,12 +8,14 @@
 
 namespace Helios
 {
-  using EventQueue = std::queue<std::reference_wrapper<Event>>;  
+  using EventQueue = std::queue<std::unique_ptr<Event>>;
 
   class HELIOSENGINE_API EventSystem
   {
   public:
     EventSystem() = default;
+    EventSystem(const EventSystem&) = delete;
+    EventSystem(EventSystem&&) noexcept = default;
     ~EventSystem() = default;
 
     void OnUpdate(entt::registry& registry);
@@ -29,6 +31,9 @@ namespace Helios
 
     template <typename T>
     void PushEvent(T& event);
+
+    EventSystem& operator=(const EventSystem&) = delete;
+    EventSystem& operator=(EventSystem&&) noexcept = default;
 
   private:
     void ProcessQueuedEvents();
@@ -74,13 +79,13 @@ namespace Helios
 
     std::erase_if(m_EventListeners[typeid(T)], [instance](const Listener& listener) {
       return listener.instance == instance;
-      });
+    });
   }
 
   template <typename T>
   void EventSystem::PushEvent(T& event)
   {
     static_assert(std::is_base_of<Event, T>::value, "T must inherit from Event!");
-    m_EventQueues[typeid(T)].push(event);
+    m_EventQueues[typeid(T)].push(std::make_unique<T>(event));
   }
 }

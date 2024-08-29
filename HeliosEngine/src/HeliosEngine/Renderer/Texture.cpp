@@ -5,7 +5,7 @@
 
 namespace Helios
 {
-	std::shared_ptr<Texture> Texture::Create(const std::string& path, uint32_t mipLevel,
+	std::shared_ptr<Texture> Texture::Create(std::string_view path, uint32_t mipLevel,
 																					 uint32_t anisoLevel, ImageFormat format)
 	{
 		switch (RendererAPI::GetAPI())

@@ -2,11 +2,11 @@
 
 #include <HeliosEngine.h>
 
-class CameraController : public Helios::Script
+class CameraController : public Helios::Scriptable
 {
 public:
 	CameraController() = default;
-	virtual ~CameraController() = default;
+	virtual ~CameraController() { OnDetach(); }
 
 	void OnAttach() override;
 	void OnDetach() override;

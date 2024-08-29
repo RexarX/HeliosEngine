@@ -2,7 +2,8 @@
 
 namespace Helios
 {
-  ShaderGraph::ShaderGraph(const std::string& name)
+  ShaderGraph::ShaderGraph(std::string_view name)
+    : m_Name(name)
   {
   }
 
@@ -32,7 +33,7 @@ namespace Helios
     for (auto& [outputNode, connections] : m_Connections) {
       std::erase_if(connections, [&node](const Connection& conn) {
         return conn.inputNode == node;
-        });
+      });
     }
 
     for (auto it = m_Connections.begin(); it != m_Connections.end();) {
@@ -43,8 +44,8 @@ namespace Helios
     m_Nodes.erase(nodeIt);
   }
 
-  void ShaderGraph::Connect(const std::shared_ptr<ShaderNode>& outputNode, const std::string& outputPortName,
-                            const std::shared_ptr<ShaderNode>& inputNode, const std::string& inputPortName)
+  void ShaderGraph::Connect(const std::shared_ptr<ShaderNode>& outputNode, std::string_view outputPortName,
+                            const std::shared_ptr<ShaderNode>& inputNode, std::string_view inputPortName)
   {
     if (outputNode == nullptr || inputNode == nullptr) {
       CORE_ERROR("Attempting to connect null nodes!");
@@ -76,7 +77,7 @@ namespace Helios
       return;
     }
 
-    Connection newConnection{ outputPortName, inputNode, inputPortName };
+    Connection newConnection{ outputPortName.data(), inputNode, inputPortName.data() };
 
     auto& connections = m_Connections[outputNode];
     if (std::find(connections.begin(), connections.end(), newConnection) != connections.end()) {
@@ -86,8 +87,8 @@ namespace Helios
     connections.push_back(newConnection);
   }
 
-  void ShaderGraph::Disconnect(const std::shared_ptr<ShaderNode>& outputNode, const std::string& outputPortName,
-                               const std::shared_ptr<ShaderNode>& inputNode, const std::string& inputPortName)
+  void ShaderGraph::Disconnect(const std::shared_ptr<ShaderNode>& outputNode, std::string_view outputPortName,
+                               const std::shared_ptr<ShaderNode>& inputNode, std::string_view inputPortName)
   {
     if (outputNode == nullptr || inputNode == nullptr) {
       CORE_ERROR("Attempting to disconnect null nodes!");
@@ -102,7 +103,7 @@ namespace Helios
       return conn.outputPortName == outputPortName &&
              conn.inputNode == inputNode &&
              conn.inputPortName == inputPortName;
-      });
+    });
 
     if (connections.empty()) { m_Connections.erase(it); }
   }

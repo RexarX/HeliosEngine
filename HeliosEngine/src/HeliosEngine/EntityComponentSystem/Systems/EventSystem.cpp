@@ -20,7 +20,7 @@ namespace Helios
       if (it != m_EventListeners.end() && !it->second.empty()) {
         while (!queue.empty()) {
           for (const Listener& listener : it->second) {
-            listener.callback(queue.front().get());
+            listener.callback(*queue.front());
           }
           queue.pop();
         }

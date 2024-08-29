@@ -48,13 +48,13 @@ namespace Helios
   template <typename T, typename... Args>
   void Entity::EmplaceScriptComponent(Args&&... args) const
   {
-    static_assert(std::is_base_of<Script, T>::value, "T must inherit from Script!");
+    static_assert(std::is_base_of<Scriptable, T>::value, "T must inherit from Script!");
     if (m_Scene == nullptr) { CORE_ASSERT(false, "Scene is null!"); return; }
     if (!m_Scene->m_Registry.valid(m_Entity)) { CORE_ASSERT(false, "Entity is not valid!"); return; }
 
-    auto& script = m_Scene->m_Registry.emplace<T>(m_Entity, std::forward<Args>(args)...);
-    script.m_EventSystem = &m_Scene->m_EventSystem;
-    script.m_Entity = this;
-    script.OnAttach();
+    auto& script = m_Scene->m_Registry.emplace<Script>(m_Entity, std::make_unique<T>(std::forward<Args>(args)...));
+    script.scriptable->m_EventSystem = &m_Scene->m_EventSystem;
+    script.scriptable->m_Entity = this;
+    script.scriptable->OnAttach();
   }
 }
