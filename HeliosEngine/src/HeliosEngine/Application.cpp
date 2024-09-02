@@ -71,19 +71,19 @@ namespace Helios
 
 	void Application::Run()
 	{
-		double LastFrameUpdate(0.0);
+		double lastFrameUpdate(0.0);
 
 		m_FramerateLimit = m_Window->GetFramerate() == 0.0 ? 0.0 : 1.0 / m_Window->GetFramerate();
-
 		m_Timer.Start();
 		while (m_Running) {
 			m_Timer.Stop();
-			m_DeltaTime = m_Timer.GetElapsedSec() - LastFrameUpdate;
+			m_DeltaTime = m_Timer.GetElapsedSec() - lastFrameUpdate;
 
 			m_Window->PoolEvents();
 
-			if (!m_Window->IsMinimized() && (m_FramerateLimit == 0.0 || (double)m_DeltaTime >= m_FramerateLimit)) {
-				//CORE_TRACE("Delta time: {0}", m_DeltaTime.GetMilliseconds());
+			if (!m_Window->IsMinimized() && (m_FramerateLimit == 0.0 || (double)m_DeltaTime >= m_FramerateLimit))
+			{
+				//CORE_TRACE("Delta time: {0}ms", m_DeltaTime.GetMilliseconds());
 				
 				for (Layer* layer : m_LayerStack) {
 					layer->OnUpdate(m_DeltaTime);
@@ -106,7 +106,7 @@ namespace Helios
 #endif
 
 				m_Window->OnUpdate();
-				LastFrameUpdate = m_Timer.GetElapsedSec();
+				lastFrameUpdate = m_Timer.GetElapsedSec();
 			}
 		}
 	}

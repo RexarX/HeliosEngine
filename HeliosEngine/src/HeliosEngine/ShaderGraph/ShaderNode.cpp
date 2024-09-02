@@ -7,7 +7,7 @@ namespace Helios
   {
   }
 
-  void ShaderNode::AddInputPort(std::string_view name, DataType type)
+  void ShaderNode::AddInputPort(const std::string& name, DataType type)
   {
     if (std::find_if(m_InputPorts.begin(), m_InputPorts.end(),
       [&name](const NodePort& port) { return port.name == name; })
@@ -17,10 +17,10 @@ namespace Helios
       return;
     }
 
-    m_InputPorts.emplace_back(name.data(), type);
+    m_InputPorts.emplace_back(name, type);
   }
 
-  void ShaderNode::AddOutputPort(std::string_view name, DataType type)
+  void ShaderNode::AddOutputPort(const std::string& name, DataType type)
   {
     if (std::find_if(m_OutputPorts.begin(), m_OutputPorts.end(),
       [&name](const NodePort& port) { return port.name == name; })
@@ -30,10 +30,10 @@ namespace Helios
       return;
     }
 
-    m_OutputPorts.emplace_back(name.data(), type);
+    m_OutputPorts.emplace_back(name, type);
   }
 
-  void ShaderNode::RemoveInputPort(std::string_view name)
+  void ShaderNode::RemoveInputPort(const std::string& name)
   {
     if (std::find_if(m_InputPorts.begin(), m_InputPorts.end(), [&name](const NodePort& port) {
       return port.name == name;
@@ -48,7 +48,7 @@ namespace Helios
     });
   }
 
-  void ShaderNode::RemoveOutputPort(std::string_view name)
+  void ShaderNode::RemoveOutputPort(const std::string& name)
   {
     std::erase_if(m_OutputPorts, [&name](const NodePort& port) {
       return port.name == name;

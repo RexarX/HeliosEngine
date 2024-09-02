@@ -6,7 +6,7 @@
 
 namespace Helios
 {
-  class VulkanMesh : public Mesh
+  class VulkanMesh final : public Mesh
   {
   public:
     VulkanMesh(MeshType type, const std::vector<std::byte>& vertices,

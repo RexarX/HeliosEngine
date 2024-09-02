@@ -26,9 +26,9 @@ namespace Helios
         }
       }
       //timerEvent.Stop();
-      //CORE_TRACE("{0} took: {1} ms", type.name(), timerEvent.GetElapsedMillisec());
+      //CORE_TRACE("{0} took: {1} us", type.name(), timerEvent.GetElapsedMicroSec());
     }
     //timer.Stop();
-    //CORE_TRACE("Total event processing took: {0} ms", timer.GetElapsedMillisec());
+    //CORE_TRACE("Total event processing took: {0} us", timer.GetElapsedMicroSec());
   }
 }

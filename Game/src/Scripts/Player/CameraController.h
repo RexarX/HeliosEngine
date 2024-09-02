@@ -2,7 +2,7 @@
 
 #include <HeliosEngine.h>
 
-class CameraController : public Helios::Scriptable
+class CameraController final : public Helios::Scriptable
 {
 public:
 	CameraController() = default;

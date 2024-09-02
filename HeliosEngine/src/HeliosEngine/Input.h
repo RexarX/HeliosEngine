@@ -10,12 +10,12 @@ namespace Helios
 	class HELIOSENGINE_API Input
 	{
 	public:
-		inline static bool IsKeyPressed(KeyCode keycode) { return m_Instance->IsKeyPressedImpl(keycode); }
+		static inline bool IsKeyPressed(KeyCode keycode) { return m_Instance->IsKeyPressedImpl(keycode); }
 
-		inline static bool IsMouseButtonPressed(KeyCode button) { return m_Instance->IsMouseButtonPressedImpl(button); }
-		inline static std::pair<float, float> GetMousePosition() { return m_Instance->GetMousePositionImpl(); }
-		inline static float GetMouseX() { return m_Instance->GetMouseXImpl(); }
-		inline static float GetMouseY() { return m_Instance->GetMouseYImpl(); }
+		static inline bool IsMouseButtonPressed(KeyCode button) { return m_Instance->IsMouseButtonPressedImpl(button); }
+		static inline std::pair<float, float> GetMousePosition() { return m_Instance->GetMousePositionImpl(); }
+		static inline float GetMouseX() { return m_Instance->GetMouseXImpl(); }
+		static inline float GetMouseY() { return m_Instance->GetMouseYImpl(); }
 
 	protected:
 		virtual bool IsKeyPressedImpl(KeyCode keycode) = 0;

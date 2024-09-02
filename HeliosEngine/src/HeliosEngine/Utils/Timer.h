@@ -11,38 +11,43 @@ namespace Helios::Utils
 	public:
 		using steady_clock = std::chrono::steady_clock;
 
-		void Start() {
+		Timer() noexcept = default;
+
+		void Start() noexcept {
 			m_TimeStamp = steady_clock::now();
+			m_IsRunning = true;
 		}
 
-		void Stop() {
+		void Stop() noexcept {
+			if (!m_IsRunning) { CORE_ASSERT(false, "Timer is not running!"); return; }
 			m_Elapsed = steady_clock::now() - m_TimeStamp;
 		}
 
-		inline double GetElapsedSec() const {
-			return GetElapsed<std::chrono::duration<double>>();
+		template <typename Type = steady_clock::duration::rep, typename Units = std::chrono::nanoseconds,
+							std::enable_if_t<std::is_arithmetic<Type>::value && std::chrono::_Is_duration_v<Units>, bool> = true>
+		inline Type GetElapsed() const noexcept {
+			return static_cast<Type>(std::chrono::duration_cast<Units>(m_Elapsed).count());
 		}
 
-		inline double GetElapsedMillisec() const {
-			return GetElapsed<std::chrono::duration<double, std::milli>>();
+		inline double GetElapsedSec() const noexcept {
+			return GetElapsed<double, std::chrono::duration<double>>();
 		}
 
-		inline uint64_t GetElapsedMicrosec() const {
-			return GetElapsed<std::chrono::microseconds>();
-		}
+    inline double GetElapsedMilliSec() const noexcept {
+      return GetElapsed<double, std::chrono::duration<double, std::milli>>();
+    }
 
-		inline uint64_t GetElapsedNanosec() const {
-			return GetElapsed<std::chrono::nanoseconds>();
-		}
+    inline uint64_t GetElapsedMicroSec() const noexcept {
+      return GetElapsed<uint64_t, std::chrono::microseconds>();
+    }
 
-	private:
-		template<typename Duration>
-		inline auto GetElapsed() const {
-			return std::chrono::duration_cast<Duration>(m_Elapsed).count();
-		}
+    inline uint64_t GetElapsedNanoSec() const noexcept {
+      return GetElapsed<uint64_t, std::chrono::nanoseconds>();
+    }
 
 	private:
 		steady_clock::time_point m_TimeStamp;
 		steady_clock::duration m_Elapsed = steady_clock::duration::zero();
+		bool m_IsRunning = false;
 	};
 }

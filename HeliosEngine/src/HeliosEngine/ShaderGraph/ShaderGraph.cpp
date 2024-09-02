@@ -44,8 +44,8 @@ namespace Helios
     m_Nodes.erase(nodeIt);
   }
 
-  void ShaderGraph::Connect(const std::shared_ptr<ShaderNode>& outputNode, std::string_view outputPortName,
-                            const std::shared_ptr<ShaderNode>& inputNode, std::string_view inputPortName)
+  void ShaderGraph::Connect(const std::shared_ptr<ShaderNode>& outputNode, const std::string& outputPortName,
+                            const std::shared_ptr<ShaderNode>& inputNode, const std::string& inputPortName)
   {
     if (outputNode == nullptr || inputNode == nullptr) {
       CORE_ERROR("Attempting to connect null nodes!");
@@ -77,7 +77,7 @@ namespace Helios
       return;
     }
 
-    Connection newConnection{ outputPortName.data(), inputNode, inputPortName.data() };
+    Connection newConnection{ outputPortName, inputNode, inputPortName };
 
     auto& connections = m_Connections[outputNode];
     if (std::find(connections.begin(), connections.end(), newConnection) != connections.end()) {
@@ -87,8 +87,8 @@ namespace Helios
     connections.push_back(newConnection);
   }
 
-  void ShaderGraph::Disconnect(const std::shared_ptr<ShaderNode>& outputNode, std::string_view outputPortName,
-                               const std::shared_ptr<ShaderNode>& inputNode, std::string_view inputPortName)
+  void ShaderGraph::Disconnect(const std::shared_ptr<ShaderNode>& outputNode, const std::string& outputPortName,
+                               const std::shared_ptr<ShaderNode>& inputNode, const std::string& inputPortName)
   {
     if (outputNode == nullptr || inputNode == nullptr) {
       CORE_ERROR("Attempting to disconnect null nodes!");

@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <random>
 #include <functional>
+#include <format>
 #include <thread>
 #include <mutex>
 #include <shared_mutex>

@@ -1,7 +1,4 @@
-#pragma once
-
 #include "VulkanUtils.h"
-#include <span>
 
 namespace Helios
 {

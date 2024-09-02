@@ -48,7 +48,7 @@ namespace Helios
   template <typename T, typename... Args>
   void Entity::EmplaceScriptComponent(Args&&... args) const
   {
-    static_assert(std::is_base_of<Scriptable, T>::value, "T must inherit from Script!");
+    static_assert(std::is_base_of<Scriptable, T>::value, "T must be derived from Scriptable!");
     if (m_Scene == nullptr) { CORE_ASSERT(false, "Scene is null!"); return; }
     if (!m_Scene->m_Registry.valid(m_Entity)) { CORE_ASSERT(false, "Entity is not valid!"); return; }
 

@@ -2,7 +2,7 @@
 
 #include <HeliosEngine.h>
 
-class GameLayer : public Helios::Layer
+class GameLayer final : public Helios::Layer
 {
 public:
 	GameLayer() : Layer("Game") {}

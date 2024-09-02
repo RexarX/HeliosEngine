@@ -13,7 +13,7 @@ namespace Helios
     VkShaderModule shaderModule;
   };
 
-  class VulkanShader : public Shader
+  class VulkanShader final : public Shader
   {
   public:
     VulkanShader(const std::initializer_list<ShaderInfo>& infos);

@@ -11,15 +11,15 @@
 
 namespace Helios
 {
-	class ImGuiLayer : public Layer
+	class ImGuiLayer final : public Layer
 	{
 	public:
 		ImGuiLayer();
 		~ImGuiLayer() = default;
 
-		virtual void OnAttach() override;
-		virtual void OnDetach() override;
-		virtual void OnEvent(Event& e) override;
+		void OnAttach() override;
+		void OnDetach() override;
+		void OnEvent(Event& e) override;
 
 		void BlockEvents(bool block) noexcept { m_BlockEvents = block; }
 

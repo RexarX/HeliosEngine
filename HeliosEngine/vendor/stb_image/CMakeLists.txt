@@ -30,13 +30,13 @@ target_compile_options(stb_image PRIVATE
         $<$<CONFIG:Debug>:/Od /Zi /fsanitize=address>
         $<$<CONFIG:Release>:/O2 /Oi /Gy>
         $<$<CONFIG:Dist>:/O2 /Oi /Gy>
-        /W3
+        /w
     >
     $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>:
-        $<$<CONFIG:Debug>:-O0 -g -fsanitize=address>
+        $<$<CONFIG:Debug>:-O0 -g>
         $<$<CONFIG:Release>:-O3>
         $<$<CONFIG:Dist>:-O3>
-        -Wno-switch
+		-w
     >
 )
 

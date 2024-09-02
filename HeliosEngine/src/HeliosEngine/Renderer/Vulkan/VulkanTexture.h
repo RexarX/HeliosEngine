@@ -6,7 +6,7 @@
 
 namespace Helios
 {
-  class VulkanTexture : public Texture
+  class VulkanTexture final : public Texture
   {
   public:
     VulkanTexture(std::string_view path, uint32_t mipLevel = 0,

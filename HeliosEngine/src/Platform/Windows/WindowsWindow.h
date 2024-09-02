@@ -12,7 +12,7 @@ struct GLFWvidmode;
 
 namespace Helios
 {
-	class WindowsWindow : public Window
+	class WindowsWindow final : public Window
 	{
 	public:
 		WindowsWindow(const WindowProps& props);
@@ -48,11 +48,11 @@ namespace Helios
 		inline bool IsFullscreen() const override;
 		inline bool IsImGuiEnabled() const override;
 
-		virtual inline void* GetNativeWindow() const { return m_Window; }
+		inline void* GetNativeWindow() const override { return m_Window; }
 
 	private:
-		virtual void Init(const WindowProps& props);
-		virtual void Shutdown();
+		void Init(const WindowProps& props);
+		void Shutdown();
 
 	private:
 		GLFWwindow* m_Window;

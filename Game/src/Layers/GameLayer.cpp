@@ -6,7 +6,7 @@ void GameLayer::OnAttach()
 {
 	Helios::Window& window = Helios::Application::Get().GetWindow();
 	//window.SetVSync(true);
-	//window.SetFramerate(30.0);
+	//window.SetFramerate(60.0);
 
 	Helios::Scene& gameScene = Helios::SceneManager::AddScene("GameScene");
 

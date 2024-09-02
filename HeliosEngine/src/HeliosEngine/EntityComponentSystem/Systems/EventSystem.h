@@ -29,8 +29,10 @@ namespace Helios
     template <typename T>
     void RemoveListener(const void* instance);
 
-    template <typename T>
-    void PushEvent(T& event);
+    template <typename T, std::enable_if_t<std::is_base_of<Event, T>::value, bool>>
+    void PushEvent(T& event) {
+      m_EventQueues[typeid(T)].push(std::make_unique<T>(event));
+    }
 
     EventSystem& operator=(const EventSystem&) = delete;
     EventSystem& operator=(EventSystem&&) noexcept = default;
@@ -80,12 +82,5 @@ namespace Helios
     std::erase_if(m_EventListeners[typeid(T)], [instance](const Listener& listener) {
       return listener.instance == instance;
     });
-  }
-
-  template <typename T>
-  void EventSystem::PushEvent(T& event)
-  {
-    static_assert(std::is_base_of<Event, T>::value, "T must inherit from Event!");
-    m_EventQueues[typeid(T)].push(std::make_unique<T>(event));
   }
 }

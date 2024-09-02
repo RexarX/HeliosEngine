@@ -90,10 +90,9 @@ target_compile_options(${PROJECT_NAME} PRIVATE
         /W3
     >
     $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>:
-        $<$<CONFIG:Debug>:-O0 -g -fsanitize=address>
+        $<$<CONFIG:Debug>:-O0 -g>
         $<$<CONFIG:Release>:-O3>
         $<$<CONFIG:Dist>:-O3>
-        -Wno-switch
     >
 )
 

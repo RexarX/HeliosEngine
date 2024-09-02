@@ -16,7 +16,7 @@ struct GLFWwindow;
 
 namespace Helios
 {
-  class VulkanContext : public RendererAPI
+  class VulkanContext final : public RendererAPI
   {
   public:
     VulkanContext(GLFWwindow* windowHandle);

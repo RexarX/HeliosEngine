@@ -6,7 +6,7 @@
 
 namespace Helios 
 {
-	class HELIOSENGINE_API MouseMovedEvent : public Event
+	class HELIOSENGINE_API MouseMovedEvent final : public Event
 	{
 	public:
 		MouseMovedEvent(float x, float y) : m_MouseX(x), m_MouseY(y) {}
@@ -29,7 +29,7 @@ namespace Helios
 		float m_MouseX, m_MouseY;
 	};
 
-	class HELIOSENGINE_API MouseScrolledEvent : public Event
+	class HELIOSENGINE_API MouseScrolledEvent final : public Event
 	{
 	public:
 		MouseScrolledEvent(float xOffset, float yOffset)
@@ -71,7 +71,7 @@ namespace Helios
 		MouseCode m_Button;
 	};
 
-	class HELIOSENGINE_API MouseButtonPressedEvent : public MouseButtonEvent
+	class HELIOSENGINE_API MouseButtonPressedEvent final : public MouseButtonEvent
 	{
 	public:
 		MouseButtonPressedEvent(MouseCode button) : MouseButtonEvent(button) {}
@@ -87,7 +87,7 @@ namespace Helios
 		EVENT_CLASS_TYPE(MouseButtonPressed)
 	};
 
-	class HELIOSENGINE_API MouseButtonReleasedEvent : public MouseButtonEvent
+	class HELIOSENGINE_API MouseButtonReleasedEvent final : public MouseButtonEvent
 	{
 	public:
 		MouseButtonReleasedEvent(MouseCode button) : MouseButtonEvent(button) {}

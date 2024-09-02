@@ -40,7 +40,7 @@ namespace Helios
 		
     if (!s_GLFWInitialized) {
 			auto result = glfwInit();
-			CORE_ASSERT(result, "Could not initialize GLFW!");
+			CORE_ASSERT_CRITICAL(result, "Failed to initialize GLFW!");
       glfwSetErrorCallback(GLFWErrorCallback);
       s_GLFWInitialized = true;
     }

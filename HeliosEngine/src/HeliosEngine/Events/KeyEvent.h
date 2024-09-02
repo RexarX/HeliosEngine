@@ -21,7 +21,7 @@ namespace Helios
 		KeyCode m_KeyCode;
 	};
 
-	class HELIOSENGINE_API KeyPressedEvent : public KeyEvent
+	class HELIOSENGINE_API KeyPressedEvent final : public KeyEvent
 	{
 	public:
 		KeyPressedEvent(KeyCode keycode, uint32_t repeatCount)
@@ -46,7 +46,7 @@ namespace Helios
 		uint32_t m_RepeatCount;
 	};
 
-	class HELIOSENGINE_API KeyReleasedEvent : public KeyEvent
+	class HELIOSENGINE_API KeyReleasedEvent final : public KeyEvent
 	{
 	public:
 		KeyReleasedEvent(KeyCode keycode) : KeyEvent(keycode) {}

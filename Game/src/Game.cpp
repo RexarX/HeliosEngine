@@ -3,7 +3,7 @@
 
 #include "Layers/GameLayer.h"
 
-class Game : public Helios::Application
+class Game final : public Helios::Application
 {
 public:
 	Game() : Helios::Application()

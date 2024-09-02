@@ -64,7 +64,7 @@ namespace Helios
     }
   };
 
-  class VulkanResourceManager : public ResourceManager
+  class VulkanResourceManager final : public ResourceManager
   {
   public:
     VulkanResourceManager();

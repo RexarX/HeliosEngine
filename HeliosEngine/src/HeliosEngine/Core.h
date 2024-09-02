@@ -20,8 +20,8 @@
 	#define HELIOSENGINE_DIR std::string("")
 	#define GAME_DIR std::string("")
 #else
-	#define HELIOSENGINE_DIR std::filesystem::current_path().parent_path().parent_path().string() + "/HeliosEngine/"
-	#define GAME_DIR std::filesystem::current_path().parent_path().parent_path().string() + "/Game/"
+	#define HELIOSENGINE_DIR std::format("{}/HeliosEngine/", std::filesystem::current_path().parent_path().parent_path().string())
+	#define GAME_DIR std::format("{}/Game/", std::filesystem::current_path().parent_path().parent_path().string())
 #endif
 
 #ifdef ENABLE_ASSERTS
@@ -31,11 +31,15 @@
 		#define DEBUG_BREAK __builtin_trap()
 	#endif
 
-	#define ASSERT(x, ...) if(!(x)) { ERROR("Assertion Failed: {0}", __VA_ARGS__); DEBUG_BREAK; }
+	#define APP_ASSERT(x, ...) if(!(x)) { APP_ERROR("Assertion Failed: {0}", __VA_ARGS__); DEBUG_BREAK; }
+	#define APP_ASSERT_CRITICAL(x, ...) if(!(x)) { APP_CRITICAL("Assertion Failed: {0}", __VA_ARGS__); DEBUG_BREAK; }
 	#define CORE_ASSERT(x, ...) if(!(x)) { CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); DEBUG_BREAK; }
+	#define CORE_ASSERT_CRITICAL(x, ...) if(!(x)) { CORE_CRITICAL("Assertion Failed: {0}", __VA_ARGS__); DEBUG_BREAK; }
 #else
-	#define ASSERT(x, ...) if(!(x)) { ERROR("Assertion Failed: {0}", __VA_ARGS__);
+	#define APP_ASSERT(x, ...) if(!(x)) { APP_ERROR("Assertion Failed: {0}", __VA_ARGS__);
+	#define APP_ASSERT_CRITICAL(...) if(!(x)) { APP_CRITICAL("Assertion Failed: {0}", __VA_ARGS__); }
 	#define CORE_ASSERT(x, ...) if(!(x)) { CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); }
+	#define CORE_ASSERT_CRITICAL(...) if(!(x)) { CORE_CRITICAL("Assertion Failed: {0}", __VA_ARGS__); DEBUG_BREAK; }
 #endif
 
 #define BIT(x) (1 << x)

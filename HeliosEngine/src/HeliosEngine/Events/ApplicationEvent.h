@@ -4,7 +4,7 @@
 
 namespace Helios 
 {
-	class HELIOSENGINE_API WindowResizeEvent : public Event
+	class HELIOSENGINE_API WindowResizeEvent final : public Event
 	{
 	public:
 		WindowResizeEvent(uint32_t width, uint32_t height)
@@ -31,7 +31,7 @@ namespace Helios
 		uint32_t m_Width, m_Height;
 	};
 
-	class HELIOSENGINE_API WindowCloseEvent : public Event
+	class HELIOSENGINE_API WindowCloseEvent final : public Event
 	{
 	public:
 		WindowCloseEvent() = default;
@@ -41,7 +41,7 @@ namespace Helios
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
 
-	class HELIOSENGINE_API WindowFocusedEvent : public Event
+	class HELIOSENGINE_API WindowFocusedEvent final : public Event
 	{
 	public:
 		WindowFocusedEvent() = default;
@@ -51,7 +51,7 @@ namespace Helios
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
 
-	class HELIOSENGINE_API WindowLostFocusEvent : public Event
+	class HELIOSENGINE_API WindowLostFocusEvent final : public Event
 	{
 	public:
 		WindowLostFocusEvent() = default;
@@ -61,7 +61,7 @@ namespace Helios
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
 
-	class HELIOSENGINE_API AppTickEvent : public Event
+	class HELIOSENGINE_API AppTickEvent final : public Event
 	{
 	public:
 		AppTickEvent() = default;
@@ -71,7 +71,7 @@ namespace Helios
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
 
-	class HELIOSENGINE_API AppUpdateEvent : public Event
+	class HELIOSENGINE_API AppUpdateEvent final : public Event
 	{
 	public:
 		AppUpdateEvent() = default;
@@ -87,7 +87,7 @@ namespace Helios
 		double m_DeltaTime;
 	};
 
-	class HELIOSENGINE_API AppRenderEvent : public Event
+	class HELIOSENGINE_API AppRenderEvent final : public Event
 	{
 	public:
 		AppRenderEvent() = default;

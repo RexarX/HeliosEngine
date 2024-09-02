@@ -7,7 +7,7 @@
 
 namespace Helios
 {
-  class HELIOSENGINE_API MouseMovedAction : public Event
+  class HELIOSENGINE_API MouseMovedAction final : public Event
   {
   public:
     MouseMovedAction() = default;
@@ -39,7 +39,7 @@ namespace Helios
     float m_DeltaX, m_DeltaY;
   };
 
-  class HELIOSENGINE_API MouseButtonPressedAction : public Event
+  class HELIOSENGINE_API MouseButtonPressedAction final : public Event
   {
   public:
     MouseButtonPressedAction() = default;
@@ -62,7 +62,7 @@ namespace Helios
     MouseCode m_Button;
   };
 
-  class HELIOSENGINE_API MouseButtonReleasedAction : public Event
+  class HELIOSENGINE_API MouseButtonReleasedAction final : public Event
   {
   public:
     MouseButtonReleasedAction() = default;
@@ -85,7 +85,7 @@ namespace Helios
     MouseCode m_Button;
   };
 
-  class HELIOSENGINE_API KeyPressedAction : public Event
+  class HELIOSENGINE_API KeyPressedAction final : public Event
   {
   public:
     KeyPressedAction() = default;
@@ -115,7 +115,7 @@ namespace Helios
     uint32_t m_RepeatCount;
   };
 
-  class HELIOSENGINE_API KeyReleasedAction : public Event
+  class HELIOSENGINE_API KeyReleasedAction final : public Event
   {
   public:
     KeyReleasedAction() = default;
