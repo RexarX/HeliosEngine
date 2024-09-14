@@ -2,16 +2,14 @@
 
 #include "Window.h"
 
-#include "Renderer/GraphicsContext.h"
-
-#include "Events/KeyEvent.h"
-
 struct GLFWwindow;
 struct GLFWmonitor;
 struct GLFWvidmode;
 
 namespace Helios
 {
+	class GraphicsContext;
+
 	class WindowsWindow final : public Window
 	{
 	public:
@@ -55,11 +53,11 @@ namespace Helios
 		void Shutdown();
 
 	private:
-		GLFWwindow* m_Window;
-		GLFWmonitor* m_Monitor;
-		const GLFWvidmode* m_Mode;
+		GLFWwindow* m_Window = nullptr;
+		GLFWmonitor* m_Monitor = nullptr;
+		const GLFWvidmode* m_Mode = nullptr;
 
-		std::shared_ptr<GraphicsContext> m_Context;
+		std::shared_ptr<GraphicsContext> m_Context = nullptr;
 
 		struct WindowData
 		{

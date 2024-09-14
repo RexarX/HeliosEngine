@@ -2,12 +2,12 @@
 
 #include "HeliosEngine/Timestep.h"
 
-#include "Events/Event.h"
-
 #include <entt/entt.hpp>
 
 namespace Helios
 {
+  class Event;
+
   class ScriptSystem
   {
   public:

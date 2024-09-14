@@ -2,8 +2,6 @@
 
 #include "Events/Event.h"
 
-#include "HeliosEngine/Timestep.h"
-
 #include <entt/entt.hpp>
 
 namespace Helios
@@ -20,16 +18,16 @@ namespace Helios
 
     void OnUpdate(entt::registry& registry);
 
-    template <typename T>
+    template <typename T> requires std::is_base_of<Event, T>::value
     void Emit(T& event);
 
-    template <typename T>
+    template <typename T> requires std::is_base_of<Event, T>::value
     void AddListener(const void* instance, const std::function<void(T&)>& callback);
 
-    template <typename T>
+    template <typename T> requires std::is_base_of<Event, T>::value
     void RemoveListener(const void* instance);
 
-    template <typename T, std::enable_if_t<std::is_base_of<Event, T>::value, bool>>
+    template <typename T> requires std::is_base_of<Event, T>::value
     void PushEvent(T& event) {
       m_EventQueues[typeid(T)].push(std::make_unique<T>(event));
     }
@@ -51,11 +49,9 @@ namespace Helios
     std::map<std::type_index, std::vector<Listener>> m_EventListeners;
   };
 
-  template <typename T>
+  template <typename T> requires std::is_base_of<Event, T>::value
   void EventSystem::Emit(T& event)
   {
-    static_assert(std::is_base_of<Event, T>::value, "T must inherit from Event!");
-
     auto it = m_EventListeners.find(typeid(T));
     if (it != m_EventListeners.end()) {
       for (const Listener& listener : it->second) {
@@ -64,21 +60,17 @@ namespace Helios
     }
   }
 
-  template <typename T>
+  template <typename T> requires std::is_base_of<Event, T>::value
   void EventSystem::AddListener(const void* instance, const std::function<void(T&)>& callback)
   {
-    static_assert(std::is_base_of<Event, T>::value, "T must inherit from Event!");
-
     m_EventListeners[typeid(T)].emplace_back(instance,
       [callback](Event& event) { callback(static_cast<T&>(event)); }
     );
   }
 
-  template <typename T>
+  template <typename T> requires std::is_base_of<Event, T>::value
   void EventSystem::RemoveListener(const void* instance)
   {
-    static_assert(std::is_base_of<Event, T>::value, "T must inherit from Event!");
-
     std::erase_if(m_EventListeners[typeid(T)], [instance](const Listener& listener) {
       return listener.instance == instance;
     });

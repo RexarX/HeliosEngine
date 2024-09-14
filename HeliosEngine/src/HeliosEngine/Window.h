@@ -2,12 +2,12 @@
 
 #include "Core.h"
 
-#include "Events/Event.h"
-
 #include "pch.h"
 
 namespace Helios
 {
+	class Event;
+
 	struct WindowProps
 	{
 		std::string Title;

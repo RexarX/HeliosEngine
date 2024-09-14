@@ -1,5 +1,7 @@
 #include "SceneManager.h"
 
+#include "Scene.h"
+
 namespace Helios
 {
   std::map<std::string, Scene> SceneManager::m_Scenes;

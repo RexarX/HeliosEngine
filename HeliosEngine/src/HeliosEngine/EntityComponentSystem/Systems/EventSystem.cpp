@@ -1,7 +1,5 @@
 #include "EventSystem.h"
 
-#include "Events/ApplicationEvent.h"
-
 namespace Helios
 {
   void EventSystem::OnUpdate(entt::registry& registry)

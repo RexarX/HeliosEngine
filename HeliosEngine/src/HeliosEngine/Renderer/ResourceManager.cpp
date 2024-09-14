@@ -1,5 +1,6 @@
 #include "ResourceManager.h"
 #include "RendererAPI.h"
+#include "RenderQueue.h"
 
 #include "Vulkan/VulkanResourceManager.h"
 

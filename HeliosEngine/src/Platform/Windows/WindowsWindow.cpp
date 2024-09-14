@@ -1,5 +1,7 @@
 #include "WindowsWindow.h"	
 
+#include "Renderer/GraphicsContext.h"
+
 #include "Events/ApplicationEvent.h"
 #include "Events/MouseEvent.h"
 #include "Events/KeyEvent.h"
@@ -61,7 +63,7 @@ namespace Helios
 
 		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height)
 			{
-				WindowsWindow& win = *(WindowsWindow*)glfwGetWindowUserPointer(window);
+				WindowsWindow& win = *static_cast<WindowsWindow*>(glfwGetWindowUserPointer(window));
 				win.m_Data.Width = width;
 				win.m_Data.Height = height;
 
@@ -72,14 +74,14 @@ namespace Helios
 
 		glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window)
 			{
-        WindowsWindow& win = *(WindowsWindow*)glfwGetWindowUserPointer(window);
+				WindowsWindow& win = *static_cast<WindowsWindow*>(glfwGetWindowUserPointer(window));
 				WindowCloseEvent event;
 				win.m_Data.EventCallback(event);
 			});
 
 		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
 			{
-        WindowsWindow& win = *(WindowsWindow*)glfwGetWindowUserPointer(window);
+				WindowsWindow& win = *static_cast<WindowsWindow*>(glfwGetWindowUserPointer(window));
 
 				switch (action)
 				{
@@ -108,7 +110,7 @@ namespace Helios
 
 		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods)
 			{
-				WindowsWindow& win = *(WindowsWindow*)glfwGetWindowUserPointer(window);
+				WindowsWindow& win = *static_cast<WindowsWindow*>(glfwGetWindowUserPointer(window));
 
 				switch (action)
 				{
@@ -137,7 +139,7 @@ namespace Helios
 
 		glfwSetScrollCallback(m_Window, [](GLFWwindow* window, double xOffset, double yOffset)
 			{
-				WindowsWindow& win = *(WindowsWindow*)glfwGetWindowUserPointer(window);
+				WindowsWindow& win = *static_cast<WindowsWindow*>(glfwGetWindowUserPointer(window));
 
 				MouseScrolledEvent event((float)xOffset, (float)yOffset);
 				win.m_Data.EventCallback(event);
@@ -145,7 +147,7 @@ namespace Helios
 
 		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, double xPos, double yPos)
 			{
-				WindowsWindow& win = *(WindowsWindow*)glfwGetWindowUserPointer(window);
+				WindowsWindow& win = *static_cast<WindowsWindow*>(glfwGetWindowUserPointer(window));
 
 				MouseMovedEvent event((float)xPos, (float)yPos);
 				win.m_Data.EventCallback(event);
@@ -241,8 +243,7 @@ namespace Helios
 			m_Data.Width = width;
       m_Data.Height = height;
 			m_Data.Fullscreen = enabled;
-		} 
-		else {
+		} else {
 			glfwSetWindowMonitor(m_Window, nullptr, m_Data.posX, m_Data.posX, m_Data.Width, m_Data.Height, GLFW_DONT_CARE);
 		}
 

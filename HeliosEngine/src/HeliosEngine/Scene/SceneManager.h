@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Scene.h"
-
 namespace Helios
 {
+  class Scene;
+
   class HELIOSENGINE_API SceneManager
   {
   public:

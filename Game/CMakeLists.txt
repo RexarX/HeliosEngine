@@ -28,7 +28,7 @@ set(ALL_FILES ${src} ${src__Layers} ${src__Scripts})
 
 add_executable(${PROJECT_NAME} ${ALL_FILES})
 
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 20)
+set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 20 UNITY_BUILD ON)
 
 foreach(OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES})
     string(TOUPPER ${OUTPUTCONFIG} UPOUTPUTCONFIG)
@@ -88,11 +88,13 @@ target_compile_options(${PROJECT_NAME} PRIVATE
         $<$<CONFIG:Release>:/O2 /Oi /Gy>
         $<$<CONFIG:Dist>:/O2 /Oi /Gy>
         /W3
+		/GL
     >
     $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>:
         $<$<CONFIG:Debug>:-O0 -g>
         $<$<CONFIG:Release>:-O3>
         $<$<CONFIG:Dist>:-O3>
+		-flto
     >
 )
 

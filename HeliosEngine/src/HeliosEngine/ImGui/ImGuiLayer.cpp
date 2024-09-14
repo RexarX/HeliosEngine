@@ -2,6 +2,8 @@
 
 #include "HeliosEngine/Application.h"
 
+#include "Events/Event.h"
+
 namespace Helios
 {
   ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer") {}

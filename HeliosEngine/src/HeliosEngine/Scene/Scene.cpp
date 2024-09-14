@@ -53,7 +53,7 @@ namespace Helios
     if (!m_Active) { return; }
     if (!m_Loaded) { CORE_ASSERT(false, "Scene is not loaded!"); return; }
 
-    m_RenderingSystem.Draw();
+    m_RenderingSystem.OnUpdate(m_Registry);
   }
   
   void Scene::Load()

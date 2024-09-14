@@ -2,11 +2,11 @@
 
 #include "Renderer/ResourceManager.h"
 
-#include "VulkanContext.h"
-#include "VulkanShader.h"
-
 namespace Helios
 {
+  class VulkanContext;
+  class VulkanShader;
+
   enum class PipelineType
   {
     Regular,
@@ -15,7 +15,7 @@ namespace Helios
 
   struct Effect
   {
-    std::shared_ptr<VulkanShader> shader;
+    std::shared_ptr<VulkanShader> shader = nullptr;
 
     VkPipeline pipeline;
     VkPipelineLayout pipelineLayout;
@@ -27,33 +27,7 @@ namespace Helios
 
   struct RenderableHash
   {
-    size_t operator()(const Renderable& renderable) const
-    {
-      size_t seed = 0;
-
-      if (renderable.mesh != nullptr) {
-        const auto& layout = renderable.mesh->GetVertexLayout();
-        for (const auto& element : layout.GetElements()) {
-          CombineHash(seed, static_cast<uint32_t>(element.type));
-        }
-      }
-
-      if (renderable.material != nullptr) {
-        CombineHash(seed, renderable.material->albedo != nullptr);
-        CombineHash(seed, renderable.material->normalMap != nullptr);
-        CombineHash(seed, renderable.material->specularMap != nullptr);
-        CombineHash(seed, renderable.material->roughnessMap != nullptr);
-        CombineHash(seed, renderable.material->metallicMap != nullptr);
-        CombineHash(seed, renderable.material->aoMap != nullptr);
-
-        CombineHash(seed, renderable.material->color.x >= 0.0f);
-        CombineHash(seed, renderable.material->specular >= 0.0f ||
-                          renderable.material->metallic >= 0.0f ||
-                          renderable.material->roughness >= 0.0f);
-      }
-
-      return seed;
-    }
+    size_t operator()(const Renderable& renderable) const;
 
   private:
     template <class T>
@@ -71,14 +45,14 @@ namespace Helios
     virtual ~VulkanResourceManager();
 
     void InitializeResources(const std::vector<Renderable>& renderables) override;
-    void UpdateResources(entt::registry& ecs, const RenderQueue& renderQueue) override;
+    void UpdateResources(entt::registry& registry, const RenderQueue& renderQueue) override;
     void ClearResources() override;
 
     inline std::unique_ptr<ResourceManager> Clone() const override {
       return std::make_unique<VulkanResourceManager>(*this);
     }
 
-    inline const Effect& GetEffect(const Renderable& renderable, PipelineType type) const {
+    inline const Effect& GetEffect(const Renderable& renderable, PipelineType type = PipelineType::Regular) const {
       return m_Effects.at(renderable).at(type);
     }
 

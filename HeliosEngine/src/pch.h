@@ -15,6 +15,7 @@
 #include <filesystem>
 #include <optional>
 #include <typeindex>
+#include <type_traits>
 #include <cstdint>
 #include <sstream>
 #include <string>

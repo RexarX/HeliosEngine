@@ -59,8 +59,8 @@ namespace Helios
 
   const std::vector<Entity*>& Entity::GetChildren() const
   {
-    if (m_Scene == nullptr) { CORE_ASSERT(false, "Scene is null!"); return {}; }
-    if (!m_Scene->m_Registry.valid(m_Entity)) { CORE_ASSERT(false, "Entity is not valid!"); return {}; }
+    if (m_Scene == nullptr) { CORE_ASSERT(false, "Scene is null!"); }
+    if (!m_Scene->m_Registry.valid(m_Entity)) { CORE_ASSERT(false, "Entity is not valid!"); }
 
     return m_Scene->m_Registry.get<Relationship>(m_Entity).children;
   }

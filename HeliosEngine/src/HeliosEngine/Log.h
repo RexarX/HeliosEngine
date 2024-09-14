@@ -27,7 +27,7 @@ namespace Helios
 #define CORE_ERROR(...)		 ::Helios::Log::GetCoreLogger()->error(__VA_ARGS__)
 #define CORE_CRITICAL(...) ::Helios::Log::GetCoreLogger()->critical(__VA_ARGS__);
 
-#define APP_TRACE(...)		:Helios::Log::GetClientLogger()->trace(__VA_ARGS__)
+#define APP_TRACE(...)		::Helios::Log::GetClientLogger()->trace(__VA_ARGS__)
 #define APP_INFO(...)			::Helios::Log::GetClientLogger()->info(__VA_ARGS__)
 #define APP_WARN(...)			::Helios::Log::GetClientLogger()->warn(__VA_ARGS__)
 #define APP_ERROR(...)		::Helios::Log::GetClientLogger()->error(__VA_ARGS__)

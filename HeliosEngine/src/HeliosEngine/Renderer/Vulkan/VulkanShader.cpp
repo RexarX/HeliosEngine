@@ -97,9 +97,7 @@ namespace Helios
 			if (path.extension() != ".spv") {
 				std::string name = path.filename().string();
 				uint64_t index = name.find_last_of('.');
-				if (index != std::string::npos) {
-					name = name.substr(0, index + 1);
-				}
+				if (index != std::string::npos) { name.resize(index); }
 				if (!GLSLtoSPV(info.stage, code, name, spvCode)) {
 					CORE_ERROR("Failed to compile shader: {0}!", info.path);
 					continue;

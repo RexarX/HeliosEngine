@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Events/Event.h"
-#include "Events/ApplicationEvent.h"
-
 #include <entt/entt.hpp>
 
 namespace Helios
 {
+  class Event;
+  class WindowResizeEvent;
+
   class CameraSystem
   {
   public:

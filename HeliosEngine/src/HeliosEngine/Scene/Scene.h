@@ -49,7 +49,7 @@ namespace Helios
 
     Entity& GetActiveCameraEntity();
 
-    template <typename T, std::enable_if_t<std::is_base_of<Event, T>::value, bool>>
+    template <typename T> requires std::is_base_of<Event, T>::value
     void PushEvent(T& event) { m_EventSystem.PushEvent(event); }
 
     inline const std::string& GetName() const { return m_Name; }

@@ -1,9 +1,9 @@
 #pragma once
 
-#include "ShaderNode.h"
-
 namespace Helios
 {
+  class ShaderNode;
+
   struct Connection
   {
     std::string outputPortName;

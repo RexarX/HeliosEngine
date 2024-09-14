@@ -113,9 +113,7 @@ namespace Helios
                                    m_Frames[m_CurrentFrame].presentSemaphore, VK_NULL_HANDLE, &m_ImageIndex);
 
     if (result == VK_ERROR_OUT_OF_DATE_KHR) { RecreateSwapchain(); return; }
-    else if (result != VK_SUCCESS && result != VK_SUBOPTIMAL_KHR) {
-      CORE_ASSERT(false, "Failed to acquire next image!");
-    }
+    CORE_ASSERT(result == VK_SUCCESS || result == VK_SUBOPTIMAL_KHR, "Failed to acquire next image!");
 
     VkCommandBuffer commandBuffer = m_Frames[m_CurrentFrame].commandBuffer;
 
@@ -166,23 +164,19 @@ namespace Helios
       pipelineGroups[&effect].push_back(&object.renderable);
     }
 
+    const SceneData& sceneData = queue.GetSceneData();
+
     for (const auto& [effect, renderables] : pipelineGroups) {
       vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, effect->pipeline);
+      
+      vkCmdPushConstants(commandBuffer, effect->pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, 0,
+                         sizeof(sceneData), &sceneData);
 
       vkCmdBindDescriptorSets(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, effect->pipelineLayout, 0,
                               effect->descriptorSets.size(), effect->descriptorSets.data(), 0, nullptr);
 
       for (const Renderable* renderable : renderables) {
-        std::shared_ptr<VulkanMesh> mesh = std::static_pointer_cast<VulkanMesh>(renderable->mesh);
-
-        struct PushConstantData
-        {
-          glm::mat4 projectionViewMatrix;
-        };
-
-        const SceneData& pushConstantData = queue.GetSceneData();
-        vkCmdPushConstants(commandBuffer, effect->pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, 0,
-                           sizeof(pushConstantData), &pushConstantData);
+        VulkanMesh* mesh = static_cast<VulkanMesh*>(renderable->mesh.get());
 
         VkDeviceSize offsets[] = { 0 };
         vkCmdBindVertexBuffers(commandBuffer, 0, 1, &mesh->GetVertexBuffer().buffer, offsets);

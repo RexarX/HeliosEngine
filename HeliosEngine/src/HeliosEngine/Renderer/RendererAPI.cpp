@@ -1,4 +1,6 @@
 #include "RendererAPI.h"
+#include "RenderQueue.h"
+
 #include "Vulkan/VulkanContext.h"
 
 namespace Helios

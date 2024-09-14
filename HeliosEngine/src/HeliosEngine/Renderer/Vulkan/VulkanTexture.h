@@ -40,15 +40,15 @@ namespace Helios
   private:
     void* m_Data = nullptr;
 
-    uint32_t m_Width;
-    uint32_t m_Height;
+    uint32_t m_Width = 0;
+    uint32_t m_Height = 0;
 
-    uint32_t m_Slot;
+    uint32_t m_Slot = 0;
 
-    ImageFormat m_Format;
+    ImageFormat m_Format = ImageFormat::None;
 
-    uint32_t m_MipLevel;
-    uint32_t m_AnisoLevel;
+    uint32_t m_MipLevel = 0;
+    uint32_t m_AnisoLevel = 0;
 
     AllocatedImage m_Image;
     AllocatedImage m_ImageStaging;

@@ -2,6 +2,9 @@
 
 #include "EntityComponentSystem/Components.h"
 
+#include "Events/Event.h"
+#include "Events/ApplicationEvent.h"
+
 #include <glm/gtc/matrix_transform.hpp>
 
 namespace Helios
@@ -48,7 +51,7 @@ namespace Helios
   void CameraSystem::OnEvent(entt::registry& registry, Event& event)
   {
     EventDispatcher dispatcher(event);
-    dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN_WITH_REF(CameraSystem::OnWindowResize, registry));
+    dispatcher.Dispatch<WindowResizeEvent>(BIND_FN_WITH_REF(CameraSystem::OnWindowResize, registry));
   }
 
   bool CameraSystem::OnWindowResize(entt::registry& registry, WindowResizeEvent& event)

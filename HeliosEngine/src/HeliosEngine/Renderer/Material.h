@@ -1,11 +1,11 @@
 #pragma once
 
-#include "Texture.h"
-
 #include <glm/glm.hpp>
 
 namespace Helios
 {
+  class Texture;
+
   struct HELIOSENGINE_API Material
   {
     void Load()

@@ -1,5 +1,7 @@
 #include "ShaderGraph.h"
 
+#include "ShaderNode.h"
+
 namespace Helios
 {
   ShaderGraph::ShaderGraph(std::string_view name)

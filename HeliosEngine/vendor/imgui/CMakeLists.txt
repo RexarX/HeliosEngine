@@ -51,12 +51,14 @@ target_compile_options(imgui PRIVATE
         $<$<CONFIG:Release>:/O2 /Oi /Gy>
         $<$<CONFIG:Dist>:/O2 /Oi /Gy>
         /w
+		/GL
     >
     $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>:
         $<$<CONFIG:Debug>:-O0 -g>
         $<$<CONFIG:Release>:-O3>
         $<$<CONFIG:Dist>:-O3>
 		-w
+		-flto
     >
 )
 

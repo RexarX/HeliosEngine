@@ -4,10 +4,9 @@
 
 #include "Entity.h"
 
-#include "Scene/SceneCamera.h"
+#include "Events/Event.h"
 
-#include "Renderer/Mesh.h"
-#include "Renderer/Material.h"
+#include "Scene/SceneCamera.h"
 
 #include "Systems/EventSystem.h"
 #include "Systems/ScriptSystem.h"
@@ -16,7 +15,8 @@
 
 namespace Helios
 {
-	class Scene;
+	class Mesh;
+  class Material;
 
 	struct HELIOSENGINE_API ID // Every entity has an ID
 	{
@@ -78,15 +78,15 @@ namespace Helios
 		friend class Entity;
 
 	protected:
-		template <typename T>
+		template <typename T> requires std::is_base_of<Event, T>::value
 		void AddListener(const std::function<void(T&)>& callback) const {
 			m_EventSystem->AddListener<T>(this, callback);
 		}
 
-		template <typename T>
+		template <typename T> requires std::is_base_of<Event, T>::value
 		void RemoveListener() const { m_EventSystem->RemoveListener<T>(this); }
 
-		template <typename T>
+		template <typename T> requires std::is_base_of<Event, T>::value
 		void PushEvent(T& event) const { m_EventSystem->PushEvent(event); }
 
 		template <typename T>

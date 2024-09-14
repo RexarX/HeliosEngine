@@ -2,15 +2,13 @@
 
 #include "HeliosEngine/Layer.h"
 
-#include "Events/ApplicationEvent.h"
-#include "Events/KeyEvent.h"
-#include "Events/MouseEvent.h"
-
 #include <imgui/imgui.h>
 #include <imgui/imgui_internal.h>
 
 namespace Helios
 {
+	class Event;
+
 	class ImGuiLayer final : public Layer
 	{
 	public:

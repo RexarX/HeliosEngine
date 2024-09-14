@@ -2,10 +2,12 @@
 
 #include "RenderQueue.h"
 
-#include "EntityComponentSystem/Entity.h"
+#include "EntityComponentSystem/Components.h"
 
 namespace Helios
 {
+  class RenderQueue;
+
   class ResourceManager
   {
   public:

@@ -5,16 +5,18 @@
 #include "LayerStack.h"
 #include "Timestep.h"
 
-#include "Events/Event.h"
-#include "Events/ApplicationEvent.h"
-#include "Events/KeyEvent.h"
-
-#include "ImGui/ImGuiLayer.h"
+#include "LayerStack.h"
 
 #include "Utils/Timer.h"
 
 namespace Helios
 {
+	class Event;
+	class WindowCloseEvent;
+	class WindowResizeEvent;
+  class KeyPressedEvent;
+	class ImGuiLayer;
+
 	class HELIOSENGINE_API Application
 	{
 	public:
@@ -25,8 +27,9 @@ namespace Helios
 
 		void OnEvent(Event& e);
 
-		void PushLayer(Layer* layer);
-		void PushOverlay(Layer* layer);
+		void PushLayer(Layer* layer) { m_LayerStack.PushLayer(layer); }
+
+		void PushOverlay(Layer* layer) { m_LayerStack.PushOverlay(layer); }
 
 		static inline Application& Get() { return *m_Instance; }
 
@@ -48,9 +51,9 @@ namespace Helios
 
 		LayerStack m_LayerStack;
 
-		ImGuiLayer* m_ImGuiLayer;
+		ImGuiLayer* m_ImGuiLayer = nullptr;
 
-		bool m_Running = true;
+		bool m_Running = false;
 
 		Utils::Timer m_Timer;
 		Timestep m_DeltaTime;

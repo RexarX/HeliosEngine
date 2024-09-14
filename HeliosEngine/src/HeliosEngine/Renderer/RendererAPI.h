@@ -1,10 +1,9 @@
 #pragma once
 
-#include "RenderQueue.h"
-
 namespace Helios
 {
   class ResourceManager;
+  class RenderQueue;
 
   class RendererAPI
   {

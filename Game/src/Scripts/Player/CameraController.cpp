@@ -52,9 +52,9 @@ void CameraController::OnUpdate(Helios::Timestep deltaTime)
 void CameraController::OnEvent(Helios::Event& event)
 {
   Helios::EventDispatcher dispatcher(event);
-  dispatcher.Dispatch<Helios::MouseMovedEvent>(BIND_EVENT_FN(CameraController::OnMouseMovedEvent));
-  dispatcher.Dispatch<Helios::WindowFocusedEvent>(BIND_EVENT_FN(CameraController::OnWindowFocusedEvent));
-  dispatcher.Dispatch<Helios::WindowLostFocusEvent>(BIND_EVENT_FN(CameraController::OnWindowLostFocusEvent));
+  dispatcher.Dispatch<Helios::MouseMovedEvent>(BIND_FN(CameraController::OnMouseMovedEvent));
+  dispatcher.Dispatch<Helios::WindowFocusedEvent>(BIND_FN(CameraController::OnWindowFocusedEvent));
+  dispatcher.Dispatch<Helios::WindowLostFocusEvent>(BIND_FN(CameraController::OnWindowLostFocusEvent));
 }
 
 bool CameraController::OnMouseMovedEvent(Helios::MouseMovedEvent& event)

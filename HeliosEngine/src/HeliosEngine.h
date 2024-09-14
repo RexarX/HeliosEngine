@@ -12,13 +12,13 @@
 #include "HeliosEngine/Scene/Scene.h"
 #include "HeliosEngine/Scene/SceneManager.h"
 
-#include "HeliosEngine/EntityComponentSystem/Systems/ScriptSystem.h"
-
 #include "HeliosEngine/ImGui/ImGuiLayer.h"
 
 #include "EntityComponentSystem/Entity.h"
 #include "EntityComponentSystem/Entity.inl" // Workaround
 #include "EntityComponentSystem/Components.h"
+
+#include "HeliosEngine/EntityComponentSystem/Systems/ScriptSystem.h"
 
 #include "HeliosEngine/Events/Event.h"
 #include "HeliosEngine/Events/ApplicationEvent.h"

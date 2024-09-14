@@ -12,10 +12,6 @@
 	#define ENABLE_ASSERTS
 #endif
 
-#ifdef RELEASE_MODE
-	#define ENABLE_ASSERTS
-#endif
-
 #ifdef DIST_MODE
 	#define HELIOSENGINE_DIR std::string("")
 	#define GAME_DIR std::string("")
@@ -36,13 +32,13 @@
 	#define CORE_ASSERT(x, ...) if(!(x)) { CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); DEBUG_BREAK; }
 	#define CORE_ASSERT_CRITICAL(x, ...) if(!(x)) { CORE_CRITICAL("Assertion Failed: {0}", __VA_ARGS__); DEBUG_BREAK; }
 #else
-	#define APP_ASSERT(x, ...) if(!(x)) { APP_ERROR("Assertion Failed: {0}", __VA_ARGS__);
-	#define APP_ASSERT_CRITICAL(...) if(!(x)) { APP_CRITICAL("Assertion Failed: {0}", __VA_ARGS__); }
+	#define APP_ASSERT(x, ...) if(!(x)) { APP_ERROR("Assertion Failed: {0}", __VA_ARGS__); }
+	#define APP_ASSERT_CRITICAL(x, ...) if(!(x)) { APP_CRITICAL("Assertion Failed: {0}", __VA_ARGS__); }
 	#define CORE_ASSERT(x, ...) if(!(x)) { CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); }
-	#define CORE_ASSERT_CRITICAL(...) if(!(x)) { CORE_CRITICAL("Assertion Failed: {0}", __VA_ARGS__); DEBUG_BREAK; }
+	#define CORE_ASSERT_CRITICAL(x, ...) if(!(x)) { CORE_CRITICAL("Assertion Failed: {0}", __VA_ARGS__); }
 #endif
 
 #define BIT(x) (1 << x)
 
-#define BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
-#define BIND_EVENT_FN_WITH_REF(fn, reference) std::bind(&fn, this, std::ref(reference), std::placeholders::_1)
+#define BIND_FN(fn) std::bind(&fn, this, std::placeholders::_1)
+#define BIND_FN_WITH_REF(fn, reference) std::bind(&fn, this, std::ref(reference), std::placeholders::_1)

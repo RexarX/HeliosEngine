@@ -29,7 +29,7 @@ namespace Helios
       m_RenderObjects.push_back(renderObject);
     }
 
-    void AddRenderObject(const Renderable& renderable, const Transform& transform) {
+    void EmplaceRenderObject(const Renderable& renderable, const Transform& transform) {
       m_RenderObjects.emplace_back(renderable, transform);
     }
 

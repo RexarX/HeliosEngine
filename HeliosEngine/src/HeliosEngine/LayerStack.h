@@ -1,12 +1,13 @@
 #pragma once
 
-#include "Layer.h"
 #include "Core.h"
 
 #include "pch.h"
 
 namespace Helios 
 {
+	class Layer;
+
 	class HELIOSENGINE_API LayerStack
 	{
 	public:
