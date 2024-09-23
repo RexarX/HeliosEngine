@@ -29,7 +29,7 @@ An attempt to create a game engine
 ## Getting Started
 
 ### Requirements
-* Vulkan 1.3
+* Vulkan 1.1
 
 
 
