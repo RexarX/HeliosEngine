@@ -11,15 +11,15 @@ public:
 	void OnAttach() override;
 	void OnDetach() override;
 	void OnUpdate(Helios::Timestep deltaTime) override;
-	void OnEvent(Helios::Event& event) override;
+	void OnEvent(const Helios::Event& event) override;
 
 	void SetCameraTranslationSpeed(float speed) { m_CameraTranslationSpeed = speed; }
 	void SetCameraRotationSpeed(float speed) { m_CameraRotationSpeed = speed; }
 
 private:
-	bool OnMouseMovedEvent(Helios::MouseMovedEvent& event);
-	bool OnWindowFocusedEvent(Helios::WindowFocusedEvent& event);
-	bool OnWindowLostFocusEvent(Helios::WindowLostFocusEvent& event);
+	bool OnMouseMovedEvent(const Helios::MouseMovedEvent& event);
+	bool OnWindowFocusedEvent(const Helios::WindowFocusedEvent& event);
+	bool OnWindowLostFocusEvent(const Helios::WindowLostFocusEvent& event);
 
 private:
 	float m_CameraTranslationSpeed = 5.0f;

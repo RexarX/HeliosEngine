@@ -73,8 +73,6 @@ namespace Helios
     void CleanupSwapchain();
     void RecreateSwapchain();
 
-    void Submit();
-
     bool CheckValidationLayerSupport() const;
 
     std::vector<const char*> GetRequiredExtensions() const;

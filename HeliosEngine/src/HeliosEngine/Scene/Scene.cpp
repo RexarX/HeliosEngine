@@ -5,13 +5,13 @@ namespace Helios
   Scene::Scene()
     : m_RootEntity(CreateEntity("Root"))
   {
-    m_Registry.get<Relationship>(m_RootEntity.GetEntity()).isRoot = true;
+    m_EntityMap[0] = Entity();
   }
 
   Scene::Scene(std::string_view name)
     : m_Name(name), m_RootEntity(CreateEntity(name))
   {
-    m_Registry.get<Relationship>(m_RootEntity.GetEntity()).isRoot = true;
+    m_EntityMap[0] = Entity();
   }
 
   Scene::Scene(Scene&& other) noexcept
@@ -34,12 +34,12 @@ namespace Helios
     if (!m_Active) { return; }
     if (!m_Loaded) { CORE_ASSERT(false, "Scene is not loaded!"); return; }
 
-    m_EventSystem.OnUpdate(m_Registry);
+    m_EventSystem.OnUpdate();
     m_ScriptSystem.OnUpdate(m_Registry, deltaTime);
     m_CameraSystem.OnUpdate(m_Registry);
   }
 
-  void Scene::OnEvent(Event& event)
+  void Scene::OnEvent(const Event& event)
   {
     if (!m_Active) { return; }
     if (!m_Loaded) { CORE_ASSERT(false, "Scene is not loaded!"); return; }
@@ -103,19 +103,24 @@ namespace Helios
 
   Entity& Scene::FindEntityByUUID(UUID uuid)
   {
-    CORE_ASSERT(m_EntityMap.contains(uuid), "Entity does not exist!");
-    return m_EntityMap.at(uuid);
+    if (!m_EntityMap.contains(uuid)) {
+      CORE_ASSERT(false, "Entity does not exist!");
+      return m_EntityMap[0];
+    }
+
+    return m_EntityMap[uuid];
   }
 
   Entity& Scene::GetActiveCameraEntity()
   {
     for (entt::entity entity : m_Registry.view<Camera>()) {
       if (m_Registry.get<Camera>(entity).currect) {
-        return m_EntityMap.at(m_Registry.get<ID>(entity).id);
+        return m_EntityMap[m_Registry.get<ID>(entity).id];
       }
     }
 
     CORE_ASSERT(false, "No active camera found!");
+    return m_EntityMap[0];
   }
 
   Scene& Scene::operator=(Scene&& other) noexcept

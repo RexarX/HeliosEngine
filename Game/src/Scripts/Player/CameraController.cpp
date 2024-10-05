@@ -49,7 +49,7 @@ void CameraController::OnUpdate(Helios::Timestep deltaTime)
   transform.rotation = glm::vec3(m_Pitch, m_Yaw, 0.0f);
 }
 
-void CameraController::OnEvent(Helios::Event& event)
+void CameraController::OnEvent(const Helios::Event& event)
 {
   Helios::EventDispatcher dispatcher(event);
   dispatcher.Dispatch<Helios::MouseMovedEvent>(BIND_FN(CameraController::OnMouseMovedEvent));
@@ -57,7 +57,7 @@ void CameraController::OnEvent(Helios::Event& event)
   dispatcher.Dispatch<Helios::WindowLostFocusEvent>(BIND_FN(CameraController::OnWindowLostFocusEvent));
 }
 
-bool CameraController::OnMouseMovedEvent(Helios::MouseMovedEvent& event)
+bool CameraController::OnMouseMovedEvent(const Helios::MouseMovedEvent& event)
 {
   if (m_FirstInput) {
     m_LastX = event.GetX();
@@ -85,13 +85,13 @@ bool CameraController::OnMouseMovedEvent(Helios::MouseMovedEvent& event)
   return true;
 }
 
-bool CameraController::OnWindowFocusedEvent(Helios::WindowFocusedEvent& event)
+bool CameraController::OnWindowFocusedEvent(const Helios::WindowFocusedEvent& event)
 {
   m_FirstInput = true;
   return true;
 }
 
-bool CameraController::OnWindowLostFocusEvent(Helios::WindowLostFocusEvent& event)
+bool CameraController::OnWindowLostFocusEvent(const Helios::WindowLostFocusEvent& event)
 {
   m_FirstInput = true;
   return true;

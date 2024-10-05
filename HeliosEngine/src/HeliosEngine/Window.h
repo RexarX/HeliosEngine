@@ -10,20 +10,20 @@ namespace Helios
 
 	struct WindowProps
 	{
-		std::string Title;
-		uint32_t Width;
-		uint32_t Height;
-
 		WindowProps(std::string_view title = "Game", uint32_t width = 1280, uint32_t height = 720)
-			: Title(title), Width(width), Height(height)
+			: title(title), width(width), height(height)
 		{
 		}
+
+		std::string title;
+		uint32_t width;
+		uint32_t height;
 	};
 
 	class Window
 	{
 	public:
-		using EventCallbackFn = std::function<void(Event&)>;
+		using EventCallbackFn = std::function<void(const Event&)>;
 
 		virtual ~Window() = default;
 

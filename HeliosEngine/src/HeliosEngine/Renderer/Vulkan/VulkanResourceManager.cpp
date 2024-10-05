@@ -14,8 +14,8 @@ namespace Helios
     size_t seed = 0;
 
     if (renderable.mesh != nullptr) {
-      const auto& layout = renderable.mesh->GetVertexLayout();
-      for (const auto& element : layout.GetElements()) {
+      const VertexLayout& layout = renderable.mesh->GetVertexLayout();
+      for (const VertexElement& element : layout.GetElements()) {
         CombineHash(seed, static_cast<uint32_t>(element.type));
       }
     }
@@ -49,7 +49,7 @@ namespace Helios
 
   void VulkanResourceManager::InitializeResources(const std::vector<Renderable>& renderables)
   {
-    for (const auto& renderable : renderables) {
+    for (const Renderable& renderable : renderables) {
       CreatePipeline(renderable);
     }
   }

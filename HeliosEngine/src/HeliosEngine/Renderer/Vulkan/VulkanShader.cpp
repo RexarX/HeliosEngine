@@ -59,7 +59,7 @@ namespace Helios
 
 	VulkanShader::VulkanShader(const std::initializer_list<ShaderInfo>& infos)
 	{
-		for (const auto& info : infos) {
+		for (const ShaderInfo& info : infos) {
 			VulkanShaderInfo newInfo{};
 			newInfo.path = info.path;
 			newInfo.stage = translateStageToVulkan(info.stage);
@@ -75,7 +75,7 @@ namespace Helios
 	{
 		VkDevice device = VulkanContext::Get().GetDevice();
 
-		for (auto& info : m_ShaderInfos) {
+		for (VulkanShaderInfo& info : m_ShaderInfos) {
 			vkDestroyShaderModule(device, info.shaderModule, nullptr);
 		}
 	}
@@ -84,7 +84,7 @@ namespace Helios
 	{
 		VkDevice device = VulkanContext::Get().GetDevice();
 
-		for (auto& info : m_ShaderInfos) {
+		for (VulkanShaderInfo& info : m_ShaderInfos) {
 			std::vector<uint32_t> spvCode;
 
 			std::filesystem::path path(info.path);
@@ -113,7 +113,7 @@ namespace Helios
 			shaderModuleInfo.codeSize = spvCode.size() * sizeof(uint32_t);
 			shaderModuleInfo.pCode = spvCode.data();
 
-			auto result = vkCreateShaderModule(device, &shaderModuleInfo, nullptr, &info.shaderModule);
+			VkResult result = vkCreateShaderModule(device, &shaderModuleInfo, nullptr, &info.shaderModule);
 			CORE_ASSERT(result == VK_SUCCESS, "Failed to create shader module: {0}!", info.path);
 		}
 	}

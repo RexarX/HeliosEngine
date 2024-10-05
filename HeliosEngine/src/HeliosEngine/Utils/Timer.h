@@ -23,8 +23,8 @@ namespace Helios::Utils
 			m_Elapsed = steady_clock::now() - m_TimeStamp;
 		}
 
-		template <typename Type = steady_clock::duration::rep, typename Units = std::chrono::nanoseconds,
-							std::enable_if_t<std::is_arithmetic<Type>::value && std::chrono::_Is_duration_v<Units>, bool> = true>
+		template <typename Type = steady_clock::duration::rep, typename Units = std::chrono::nanoseconds>
+		requires std::is_arithmetic<Type>::value && std::chrono::_Is_duration_v<Units>
 		inline Type GetElapsed() const noexcept {
 			return static_cast<Type>(std::chrono::duration_cast<Units>(m_Elapsed).count());
 		}

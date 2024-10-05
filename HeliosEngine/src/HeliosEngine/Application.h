@@ -25,7 +25,7 @@ namespace Helios
 
 		void Run();
 
-		void OnEvent(Event& e);
+		void OnEvent(const Event& e);
 
 		void PushLayer(Layer* layer) { m_LayerStack.PushLayer(layer); }
 
@@ -39,10 +39,10 @@ namespace Helios
 		inline Window& GetWindow() { return *m_Window; }
 	
 	private:
-		bool OnWindowClose(WindowCloseEvent& e);
-		bool OnWindowResize(WindowResizeEvent& e);
+		bool OnWindowClose(const WindowCloseEvent& e);
+		bool OnWindowResize(const WindowResizeEvent& e);
 
-		bool OnKeyPressed(KeyPressedEvent& e);
+		bool OnKeyPressed(const KeyPressedEvent& e);
 
 	private:
 		static Application* m_Instance;

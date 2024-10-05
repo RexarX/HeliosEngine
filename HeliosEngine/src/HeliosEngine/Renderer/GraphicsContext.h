@@ -10,7 +10,7 @@ namespace Helios
   {
   public:
     GraphicsContext(void* window);
-    ~GraphicsContext();
+    ~GraphicsContext() = default;
 
     void Init();
     void Shutdown();
@@ -37,7 +37,7 @@ namespace Helios
   private:
     static std::shared_ptr<GraphicsContext> m_Instance;
 
-    void* m_Window;
-    std::unique_ptr<RendererAPI> m_RendererAPI;
+    void* m_Window = nullptr;
+    std::unique_ptr<RendererAPI> m_RendererAPI = nullptr;
   };
 }

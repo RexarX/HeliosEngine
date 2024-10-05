@@ -15,6 +15,6 @@ namespace Helios
     ~ScriptSystem() = default;
 
     void OnUpdate(entt::registry& registry, Timestep deltaTime);
-    void OnEvent(entt::registry& registry, Event& event);
+    void OnEvent(entt::registry& registry, const Event& event);
   };
 }

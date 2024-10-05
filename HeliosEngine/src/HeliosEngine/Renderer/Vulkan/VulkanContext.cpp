@@ -8,7 +8,6 @@
 #include <backends/imgui_impl_glfw.h>
 #include <backends/imgui_impl_vulkan.h>
 
-
 namespace Helios
 {
   VulkanContext* VulkanContext::m_Instance = nullptr;
@@ -94,37 +93,76 @@ namespace Helios
   void VulkanContext::Update()
   {
     if (m_SwapchainRecreated) { m_SwapchainRecreated = false; return; }
-    Submit();
+    
+    FrameData& frameData = m_Frames[m_CurrentFrame];
+
+    vkCmdEndRenderPass(frameData.commandBuffer);
+
+    VkResult result = vkEndCommandBuffer(frameData.commandBuffer);
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to record command buffer!");
+
+    VkSemaphore waitSemaphores[] = { frameData.presentSemaphore };
+    VkSemaphore signalSemaphores[] = { frameData.renderSemaphore };
+
+    VkPipelineStageFlags waitStages[] = { VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT };
+
+    VkSubmitInfo submitInfo{};
+    submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
+    submitInfo.waitSemaphoreCount = 1;
+    submitInfo.pWaitSemaphores = waitSemaphores;
+    submitInfo.pWaitDstStageMask = waitStages;
+    submitInfo.commandBufferCount = 1;
+    submitInfo.pCommandBuffers = &frameData.commandBuffer;
+    submitInfo.signalSemaphoreCount = 1;
+    submitInfo.pSignalSemaphores = signalSemaphores;
+
+    result = vkQueueSubmit(m_GraphicsQueue, 1, &submitInfo, frameData.renderFence);
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to submit graphics queue!");
+
+    VkSwapchainKHR swapChains[] = { m_Swapchain };
+
+    VkPresentInfoKHR presentInfo{};
+    presentInfo.sType = VK_STRUCTURE_TYPE_PRESENT_INFO_KHR;
+    presentInfo.waitSemaphoreCount = 1;
+    presentInfo.pWaitSemaphores = signalSemaphores;
+    presentInfo.swapchainCount = 1;
+    presentInfo.pSwapchains = swapChains;
+    presentInfo.pImageIndices = &m_ImageIndex;
+
+    result = vkQueuePresentKHR(m_GraphicsQueue, &presentInfo);
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to present graphics queue!");
+
+    m_CurrentFrame = (m_CurrentFrame + 1) % MAX_FRAMES_IN_FLIGHT;
   }
 
   void VulkanContext::BeginFrame()
   {
     if (m_SwapchainRecreated) { RecreateSwapchain(); return; }
 
-    auto result = vkWaitForFences(m_Device, 1, &m_Frames[m_CurrentFrame].renderFence, VK_TRUE,
-                                  std::numeric_limits<uint64_t>::max());
+    FrameData& frameData = m_Frames[m_CurrentFrame];
+
+    VkResult result = vkWaitForFences(m_Device, 1, &frameData.renderFence, VK_TRUE,
+                                      std::numeric_limits<uint64_t>::max());
 
     CORE_ASSERT(result == VK_SUCCESS, "Failed to wait for fence!");
 
-    result = vkResetFences(m_Device, 1, &m_Frames[m_CurrentFrame].renderFence);
+    result = vkResetFences(m_Device, 1, &frameData.renderFence);
     CORE_ASSERT(result == VK_SUCCESS, "Failed to reset fence!");
 
     result = vkAcquireNextImageKHR(m_Device, m_Swapchain, std::numeric_limits<uint64_t>::max(),
-                                   m_Frames[m_CurrentFrame].presentSemaphore, VK_NULL_HANDLE, &m_ImageIndex);
+                                   frameData.presentSemaphore, VK_NULL_HANDLE, &m_ImageIndex);
 
     if (result == VK_ERROR_OUT_OF_DATE_KHR) { RecreateSwapchain(); return; }
     CORE_ASSERT(result == VK_SUCCESS || result == VK_SUBOPTIMAL_KHR, "Failed to acquire next image!");
 
-    VkCommandBuffer commandBuffer = m_Frames[m_CurrentFrame].commandBuffer;
-
-    result = vkResetCommandBuffer(commandBuffer, 0);
+    result = vkResetCommandBuffer(frameData.commandBuffer, 0);
     CORE_ASSERT(result == VK_SUCCESS, "Failed to reset command buffer!");
 
     VkCommandBufferBeginInfo beginInfo{};
     beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
     beginInfo.flags |= VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
 
-    result = vkBeginCommandBuffer(commandBuffer, &beginInfo);
+    result = vkBeginCommandBuffer(frameData.commandBuffer, &beginInfo);
     CORE_ASSERT(result == VK_SUCCESS, "Failed to begin recording command buffer!");
 
     std::array<VkClearValue, 2> clearValues{};
@@ -140,10 +178,10 @@ namespace Helios
     renderPassInfo.clearValueCount = static_cast<uint32_t>(clearValues.size());
     renderPassInfo.pClearValues = clearValues.data();
 
-    vkCmdSetViewport(commandBuffer, 0, 1, &m_Viewport);
-    vkCmdSetScissor(commandBuffer, 0, 1, &m_Scissor);
+    vkCmdSetViewport(frameData.commandBuffer, 0, 1, &m_Viewport);
+    vkCmdSetScissor(frameData.commandBuffer, 0, 1, &m_Scissor);
 
-    vkCmdBeginRenderPass(commandBuffer, &renderPassInfo, VK_SUBPASS_CONTENTS_INLINE);
+    vkCmdBeginRenderPass(frameData.commandBuffer, &renderPassInfo, VK_SUBPASS_CONTENTS_INLINE);
   }
 
   void VulkanContext::EndFrame()
@@ -159,7 +197,7 @@ namespace Helios
     VkCommandBuffer commandBuffer = m_Frames[m_CurrentFrame].commandBuffer;
     std::unordered_map<const Effect*, std::vector<const Renderable*>> pipelineGroups;
 
-    for (const auto& object : queue.GetRenderObjects()) {
+    for (const RenderObject& object : queue.GetRenderObjects()) {
       const Effect& effect = resourceManager.GetEffect(object.renderable, PipelineType::Regular);
       pipelineGroups[&effect].push_back(&object.renderable);
     }
@@ -278,10 +316,10 @@ namespace Helios
     if (m_SwapchainRecreated) {
       ImGui::Render();
 
-      #ifdef PLATFORM_WINDOWS
-        ImGui::UpdatePlatformWindows();
-        ImGui::RenderPlatformWindowsDefault();
-      #endif
+#ifdef PLATFORM_WINDOWS
+      ImGui::UpdatePlatformWindows();
+      ImGui::RenderPlatformWindowsDefault();
+#endif
 
       return;
     }
@@ -291,10 +329,10 @@ namespace Helios
 
     GLFWwindow* backupContext = glfwGetCurrentContext();
 
-    #ifdef PLATFORM_WINDOWS
-      ImGui::UpdatePlatformWindows();
-      ImGui::RenderPlatformWindowsDefault();
-    #endif
+#ifdef PLATFORM_WINDOWS
+    ImGui::UpdatePlatformWindows();
+    ImGui::RenderPlatformWindowsDefault();
+#endif
 
     glfwMakeContextCurrent(backupContext);
   }
@@ -374,8 +412,11 @@ namespace Helios
       createInfo.pNext = nullptr;
     }
 
-    auto result = vkCreateInstance(&createInfo, nullptr, &m_VkInstance);
+    VkResult result = vkCreateInstance(&createInfo, nullptr, &m_VkInstance);
     CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create Vulkan instance!");
+
+    CORE_INFO("Initializing Vulkan {0}.{1}.{2}!", appInfo.apiVersion >> 22, (appInfo.apiVersion >> 12) &
+                                                  0x3FF, appInfo.apiVersion & 0xFFF);
   }
 
   void VulkanContext::SetupDebugMessenger()
@@ -385,20 +426,20 @@ namespace Helios
     VkDebugUtilsMessengerCreateInfoEXT createInfo{};
     PopulateDebugMessengerCreateInfo(createInfo);
 
-    auto result = CreateDebugUtilsMessengerEXT(m_VkInstance, &createInfo, nullptr, &m_DebugMessenger);
+    VkResult result = CreateDebugUtilsMessengerEXT(m_VkInstance, &createInfo, nullptr, &m_DebugMessenger);
     CORE_ASSERT(result == VK_SUCCESS, "Failed to set up debug messenger!");
   }
 
   void VulkanContext::CreateSurface()
   {
-    auto result = glfwCreateWindowSurface(m_VkInstance, m_WindowHandle, nullptr, &m_Surface);
+    VkResult result = glfwCreateWindowSurface(m_VkInstance, m_WindowHandle, nullptr, &m_Surface);
     CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create window surface!");
   }
 
   void VulkanContext::PickPhysicalDevice()
   {
     uint32_t deviceCount = 0;
-    auto result = vkEnumeratePhysicalDevices(m_VkInstance, &deviceCount, nullptr);
+    VkResult result = vkEnumeratePhysicalDevices(m_VkInstance, &deviceCount, nullptr);
     CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to enumerate physical devices!");
 
     CORE_ASSERT_CRITICAL(deviceCount != 0, "Failed to find GPUs with Vulkan support!");
@@ -409,7 +450,7 @@ namespace Helios
 
     std::multimap<uint32_t, VkPhysicalDevice> candidates;
     
-    for (const auto device : devices) {
+    for (const VkPhysicalDevice device : devices) {
       uint32_t score = 0;
 
       if (IsDeviceSuitable(device)) {
@@ -431,11 +472,11 @@ namespace Helios
 
       VkPhysicalDeviceProperties deviceProperties;
       vkGetPhysicalDeviceProperties(m_PhysicalDevice, &deviceProperties);
-      CORE_INFO("Vulkan Info:");
+      CORE_INFO("Device Info:");
       CORE_INFO("  GPU: {0}", deviceProperties.deviceName);
       CORE_INFO("  Version: {0}", deviceProperties.driverVersion);
     } else {
-      CORE_ASSERT_CRITICAL(false, "Failed to find a suitable GPU!");
+      CORE_ASSERT_CRITICAL(false, "Failed to find a suitable device!");
     }
   }
 
@@ -473,7 +514,7 @@ namespace Helios
     }
     else { createInfo.enabledLayerCount = 0; }
 
-    auto result = vkCreateDevice(m_PhysicalDevice, &createInfo, nullptr, &m_Device);
+    VkResult result = vkCreateDevice(m_PhysicalDevice, &createInfo, nullptr, &m_Device);
     CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create logical device!");
 
     vkGetDeviceQueue(m_Device, indices.graphicsFamily.value(), 0, &m_GraphicsQueue);
@@ -517,7 +558,7 @@ namespace Helios
     createInfo.clipped = VK_TRUE;
     createInfo.oldSwapchain = VK_NULL_HANDLE;
 
-    auto result = vkCreateSwapchainKHR(m_Device, &createInfo, nullptr, &m_Swapchain);
+    VkResult result = vkCreateSwapchainKHR(m_Device, &createInfo, nullptr, &m_Swapchain);
     CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create swapchain!");
 
     result = vkGetSwapchainImagesKHR(m_Device, m_Swapchain, &imageCount, nullptr);
@@ -556,7 +597,7 @@ namespace Helios
     allocatorInfo.device = m_Device;
     allocatorInfo.instance = m_VkInstance;
 
-    auto result = vmaCreateAllocator(&allocatorInfo, &m_Allocator);
+    VkResult result = vmaCreateAllocator(&allocatorInfo, &m_Allocator);
     CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create allocator!");
   }
 
@@ -569,8 +610,8 @@ namespace Helios
     poolInfo.queueFamilyIndex = indices.graphicsFamily.value();
     poolInfo.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
 
-    for (auto& frame : m_Frames) {
-      auto result = vkCreateCommandPool(m_Device, &poolInfo, nullptr, &frame.commandPool);
+    for (FrameData& frame : m_Frames) {
+      VkResult result = vkCreateCommandPool(m_Device, &poolInfo, nullptr, &frame.commandPool);
       CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create command pool!");
 
       m_MainDeletionQueue.PushFunction([this, &frame]() {
@@ -578,7 +619,7 @@ namespace Helios
       });
     }
 
-    auto result = vkCreateCommandPool(m_Device, &poolInfo, nullptr, &m_ImCommandPool);
+    VkResult result = vkCreateCommandPool(m_Device, &poolInfo, nullptr, &m_ImCommandPool);
     CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create command pool!");
 
     m_MainDeletionQueue.PushFunction([this]() {
@@ -593,16 +634,16 @@ namespace Helios
     allocInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
     allocInfo.commandBufferCount = 1;
 
-    for (auto& frame : m_Frames) {
+    for (FrameData& frame : m_Frames) {
       allocInfo.commandPool = frame.commandPool;
 
-      auto result = vkAllocateCommandBuffers(m_Device, &allocInfo, &frame.commandBuffer);
+      VkResult result = vkAllocateCommandBuffers(m_Device, &allocInfo, &frame.commandBuffer);
       CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to allocate command buffer!");
     }
 
     allocInfo.commandPool = m_ImCommandPool;
 
-    auto result = vkAllocateCommandBuffers(m_Device, &allocInfo, &m_ImCommandBuffer);
+    VkResult result = vkAllocateCommandBuffers(m_Device, &allocInfo, &m_ImCommandBuffer);
     CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to allocate command buffer!");
   }
 
@@ -615,8 +656,8 @@ namespace Helios
     fenceInfo.sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
     fenceInfo.flags = VK_FENCE_CREATE_SIGNALED_BIT;
 
-    for (auto& frame : m_Frames) {
-      auto result = vkCreateSemaphore(m_Device, &semaphoreInfo, nullptr, &frame.presentSemaphore) == VK_SUCCESS &&
+    for (FrameData& frame : m_Frames) {
+      bool result = vkCreateSemaphore(m_Device, &semaphoreInfo, nullptr, &frame.presentSemaphore) == VK_SUCCESS &&
                     vkCreateSemaphore(m_Device, &semaphoreInfo, nullptr, &frame.renderSemaphore) == VK_SUCCESS &&
                     vkCreateFence(m_Device, &fenceInfo, nullptr, &frame.renderFence) == VK_SUCCESS;
 
@@ -629,7 +670,7 @@ namespace Helios
       });
     }
 
-    auto result = vkCreateFence(m_Device, &fenceInfo, nullptr, &m_ImFence);
+    VkResult result = vkCreateFence(m_Device, &fenceInfo, nullptr, &m_ImFence);
     CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create synchronization objects!");
 
     m_MainDeletionQueue.PushFunction([this]() {
@@ -701,7 +742,7 @@ namespace Helios
     renderPassInfo.dependencyCount = static_cast<uint32_t>(std::size(dependencies));
     renderPassInfo.pDependencies = dependencies;
 
-    auto result = vkCreateRenderPass(m_Device, &renderPassInfo, nullptr, &m_RenderPass);
+    VkResult result = vkCreateRenderPass(m_Device, &renderPassInfo, nullptr, &m_RenderPass);
     CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create render pass!");
 
     m_MainDeletionQueue.PushFunction([this]() {
@@ -738,7 +779,7 @@ namespace Helios
       framebufferInfo.height = m_SwapchainExtent.height;
       framebufferInfo.layers = 1;
 
-      auto result = vkCreateFramebuffer(m_Device, &framebufferInfo, nullptr, &m_SwapchainFramebuffers[i]);
+      VkResult result = vkCreateFramebuffer(m_Device, &framebufferInfo, nullptr, &m_SwapchainFramebuffers[i]);
       CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create framebuffer!");
     }
   }
@@ -748,11 +789,11 @@ namespace Helios
     vkDestroyImageView(m_Device, m_DepthImage.imageView, nullptr);
     vmaDestroyImage(m_Allocator, m_DepthImage.image, m_DepthImage.allocation);
 
-    for (auto framebuffer : m_SwapchainFramebuffers) {
+    for (VkFramebuffer framebuffer : m_SwapchainFramebuffers) {
       vkDestroyFramebuffer(m_Device, framebuffer, nullptr);
     }
 
-    for (auto imageView : m_SwapchainImageViews) {
+    for (VkImageView imageView : m_SwapchainImageViews) {
       vkDestroyImageView(m_Device, imageView, nullptr);
     }
 
@@ -771,53 +812,10 @@ namespace Helios
     m_SwapchainRecreated = true;
   }
 
-  void VulkanContext::Submit()
-  {
-    VkCommandBuffer commandBuffer = m_Frames[m_CurrentFrame].commandBuffer;
-
-    vkCmdEndRenderPass(commandBuffer);
-
-    auto result = vkEndCommandBuffer(commandBuffer);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to record command buffer!");
-
-    VkSemaphore waitSemaphores[] = { m_Frames[m_CurrentFrame].presentSemaphore };
-    VkSemaphore signalSemaphores[] = { m_Frames[m_CurrentFrame].renderSemaphore };
-
-    VkPipelineStageFlags waitStages[] = { VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT };
-
-    VkSubmitInfo submitInfo{};
-    submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
-    submitInfo.waitSemaphoreCount = 1;
-    submitInfo.pWaitSemaphores = waitSemaphores;
-    submitInfo.pWaitDstStageMask = waitStages;
-    submitInfo.commandBufferCount = 1;
-    submitInfo.pCommandBuffers = &commandBuffer;
-    submitInfo.signalSemaphoreCount = 1;
-    submitInfo.pSignalSemaphores = signalSemaphores;
-
-    result = vkQueueSubmit(m_GraphicsQueue, 1, &submitInfo, m_Frames[m_CurrentFrame].renderFence);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to submit graphics queue!");
-
-    VkSwapchainKHR swapChains[] = { m_Swapchain };
-
-    VkPresentInfoKHR presentInfo{};
-    presentInfo.sType = VK_STRUCTURE_TYPE_PRESENT_INFO_KHR;
-    presentInfo.waitSemaphoreCount = 1;
-    presentInfo.pWaitSemaphores = signalSemaphores;
-    presentInfo.swapchainCount = 1;
-    presentInfo.pSwapchains = swapChains;
-    presentInfo.pImageIndices = &m_ImageIndex;
-
-    result = vkQueuePresentKHR(m_GraphicsQueue, &presentInfo);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to present graphics queue!");
-
-    m_CurrentFrame = (m_CurrentFrame + 1) % MAX_FRAMES_IN_FLIGHT;
-  }
-
   bool VulkanContext::CheckValidationLayerSupport() const
   {
     uint32_t layerCount;
-    auto result = vkEnumerateInstanceLayerProperties(&layerCount, nullptr);
+    VkResult result = vkEnumerateInstanceLayerProperties(&layerCount, nullptr);
     CORE_ASSERT(result == VK_SUCCESS, "Failed to enumerate instance layer properties!");
 
     std::vector<VkLayerProperties> availableLayers(layerCount);
@@ -827,7 +825,7 @@ namespace Helios
     for (const char* layerName : m_ValidationLayers) {
       bool layerFound = false;
 
-      for (const auto& layerProperties : availableLayers) {
+      for (const VkLayerProperties& layerProperties : availableLayers) {
         if (strcmp(layerName, layerProperties.layerName) == 0) {
           layerFound = true;
           break;
@@ -892,7 +890,7 @@ namespace Helios
   bool VulkanContext::CheckDeviceExtensionSupport(const VkPhysicalDevice device) const
   {
     uint32_t extensionCount;
-    auto result = vkEnumerateDeviceExtensionProperties(device, nullptr, &extensionCount, nullptr);
+    VkResult result = vkEnumerateDeviceExtensionProperties(device, nullptr, &extensionCount, nullptr);
     CORE_ASSERT(result == VK_SUCCESS, "Failed to enumerate device extension properties!");
 
     std::vector<VkExtensionProperties> availableExtensions(extensionCount);
@@ -901,8 +899,8 @@ namespace Helios
 
     std::set<std::string> requiredExtensions(m_DeviceExtensions.begin(), m_DeviceExtensions.end());
 
-    for (const auto& extension : availableExtensions) {
-      requiredExtensions.erase(extension.extensionName);
+    for (const VkExtensionProperties& extensionProperties : availableExtensions) {
+      requiredExtensions.erase(extensionProperties.extensionName);
     }
 
     return requiredExtensions.empty();
@@ -919,13 +917,13 @@ namespace Helios
     vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, queueFamilies.data());
 
     uint32_t i = 0;
-    for (const auto& queueFamily : queueFamilies) {
-      if (queueFamily.queueFlags & VK_QUEUE_GRAPHICS_BIT) {
+    for (const VkQueueFamilyProperties& queueFamilyProperties : queueFamilies) {
+      if (queueFamilyProperties.queueFlags & VK_QUEUE_GRAPHICS_BIT) {
         indices.graphicsFamily = i;
       }
 
       VkBool32 presentSupport = false;
-      auto result = vkGetPhysicalDeviceSurfaceSupportKHR(device, i, m_Surface, &presentSupport);
+      VkResult result = vkGetPhysicalDeviceSurfaceSupportKHR(device, i, m_Surface, &presentSupport);
       CORE_ASSERT(result == VK_SUCCESS, "Failed to get physical device surface support!");
 
       if (presentSupport) { indices.presentFamily = i; }
@@ -940,7 +938,7 @@ namespace Helios
   {
     SwapChainSupportDetails details;
 
-    auto result = vkGetPhysicalDeviceSurfaceCapabilitiesKHR(device, m_Surface, &details.capabilities);
+    VkResult result = vkGetPhysicalDeviceSurfaceCapabilitiesKHR(device, m_Surface, &details.capabilities);
     CORE_ASSERT(result == VK_SUCCESS, "Failed to get physical device surface capabilities!");
 
     uint32_t formatCount;
@@ -987,7 +985,7 @@ namespace Helios
 
   VkSurfaceFormatKHR VulkanContext::ChooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats) const
   {
-    for (const auto& availableFormat : availableFormats) {
+    for (const VkSurfaceFormatKHR& availableFormat : availableFormats) {
       if (availableFormat.format == VK_FORMAT_B8G8R8A8_UNORM && availableFormat.colorSpace == VK_COLOR_SPACE_SRGB_NONLINEAR_KHR) {
         return availableFormat;
       }
@@ -1001,7 +999,7 @@ namespace Helios
 
     if (m_Vsync) { return bestMode; }
 
-    for (const auto& availablePresentMode : availablePresentModes) {
+    for (const VkPresentModeKHR& availablePresentMode : availablePresentModes) {
       if (availablePresentMode == VK_PRESENT_MODE_MAILBOX_KHR) { return availablePresentMode; }
       else if (availablePresentMode == VK_PRESENT_MODE_IMMEDIATE_KHR) { bestMode = availablePresentMode; }
     }

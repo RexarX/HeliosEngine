@@ -60,12 +60,14 @@ namespace Helios
   template<typename T>
   void DynamicVertex::SetAttribute(std::string_view name, const T& value)
   {
-    for (const auto& element : m_Layout.GetElements()) {
-      if (element.m_Name == name) {
-        memcpy(m_Data.data() + element.m_Offset, &value, element.m_Size);
-        return;
-      }
-    }
+    const auto& elements = m_Layout.GetElements();
+    auto it = std::find_if(elements.begin(), elements.end(), [&name](const VertexElement& element) -> bool {
+      return name == element.name;
+    });
+
+    memcpy(m_Data.data() + (*it).offset, &value, (*it).size);
+    return;
+
     CORE_ASSERT(false, "Attribute not found in layout!");
   }
 }

@@ -16,19 +16,19 @@ namespace Helios
     EventSystem(EventSystem&&) noexcept = default;
     ~EventSystem() = default;
 
-    void OnUpdate(entt::registry& registry);
+    void OnUpdate() { ProcessQueuedEvents(); }
 
     template <typename T> requires std::is_base_of<Event, T>::value
-    void Emit(T& event);
+    void Emit(const T& event);
 
     template <typename T> requires std::is_base_of<Event, T>::value
-    void AddListener(const void* instance, const std::function<void(T&)>& callback);
+    void AddListener(const void* instance, const std::function<void(const T&)>& callback);
 
     template <typename T> requires std::is_base_of<Event, T>::value
     void RemoveListener(const void* instance);
 
     template <typename T> requires std::is_base_of<Event, T>::value
-    void PushEvent(T& event) {
+    void PushEvent(const T& event) {
       m_EventQueues[typeid(T)].push(std::make_unique<T>(event));
     }
 
@@ -42,7 +42,7 @@ namespace Helios
     struct Listener
     {
       const void* instance = nullptr;
-      std::function<void(Event&)> callback;
+      std::function<void(const Event&)> callback;
     };
 
     std::map<std::type_index, EventQueue> m_EventQueues;
@@ -50,7 +50,7 @@ namespace Helios
   };
 
   template <typename T> requires std::is_base_of<Event, T>::value
-  void EventSystem::Emit(T& event)
+  void EventSystem::Emit(const T& event)
   {
     auto it = m_EventListeners.find(typeid(T));
     if (it != m_EventListeners.end()) {
@@ -61,7 +61,7 @@ namespace Helios
   }
 
   template <typename T> requires std::is_base_of<Event, T>::value
-  void EventSystem::AddListener(const void* instance, const std::function<void(T&)>& callback)
+  void EventSystem::AddListener(const void* instance, const std::function<void(const T&)>& callback)
   {
     m_EventListeners[typeid(T)].emplace_back(instance,
       [callback](Event& event) { callback(static_cast<T&>(event)); }

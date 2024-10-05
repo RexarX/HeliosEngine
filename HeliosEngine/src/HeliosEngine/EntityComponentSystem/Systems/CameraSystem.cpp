@@ -48,17 +48,17 @@ namespace Helios
     );
   }
 
-  void CameraSystem::OnEvent(entt::registry& registry, Event& event)
+  void CameraSystem::OnEvent(entt::registry& registry, const Event& event)
   {
     EventDispatcher dispatcher(event);
     dispatcher.Dispatch<WindowResizeEvent>(BIND_FN_WITH_REF(CameraSystem::OnWindowResize, registry));
   }
 
-  bool CameraSystem::OnWindowResize(entt::registry& registry, WindowResizeEvent& event)
+  bool CameraSystem::OnWindowResize(entt::registry& registry, const WindowResizeEvent& event)
   {
     if (event.GetWidth() == 0 || event.GetHeight() == 0) { return true; }
 
-    for (auto entity : registry.view<Camera>()) {
+    for (entt::entity entity : registry.view<Camera>()) {
       registry.get<Camera>(entity).camera.SetAspectRatio(static_cast<float>(event.GetWidth()) /
                                                          static_cast<float>(event.GetHeight()));
     }

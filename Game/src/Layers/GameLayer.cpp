@@ -33,7 +33,7 @@ void GameLayer::OnUpdate(Helios::Timestep ts)
 	scene.OnUpdate(ts);
 }
 
-void GameLayer::OnEvent(Helios::Event& event)
+void GameLayer::OnEvent(const Helios::Event& event)
 {
 	Helios::Scene& scene = Helios::SceneManager::GetScene("GameScene");
 	scene.OnEvent(event);
@@ -50,9 +50,8 @@ void GameLayer::OnImGuiRender(ImGuiContext* context)
 	Helios::Timestep ts = Helios::Application::Get().GetDeltaTime();
 
 	ImGui::SetCurrentContext(context);
-
 	ImGui::Begin("Debug menu");
-	ImGui::Text("FPS: %i", static_cast<int32_t>(ts.GetFramerate()));
+	ImGui::Text("FPS: %u", static_cast<uint32_t>(ts.GetFramerate()));
 	ImGui::Text("Frametime: %f ms", ts.GetMilliseconds());
 	ImGui::End();
 }

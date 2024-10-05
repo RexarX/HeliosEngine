@@ -14,9 +14,9 @@ namespace Helios
     ~CameraSystem() = default;
 
     void OnUpdate(entt::registry& registry);
-    void OnEvent(entt::registry& registry, Event& event);
+    void OnEvent(entt::registry& registry, const Event& event);
 
   private:
-    bool OnWindowResize(entt::registry& registry, WindowResizeEvent& event);
+    bool OnWindowResize(entt::registry& registry, const WindowResizeEvent& event);
   };
 }

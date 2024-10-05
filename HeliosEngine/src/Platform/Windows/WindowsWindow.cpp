@@ -34,14 +34,14 @@ namespace Helios
 
   void WindowsWindow::Init(const WindowProps& props)
   {
-		m_Data.Title = props.Title;
-		m_Data.Width = props.Width;
-		m_Data.Height = props.Height;
+		m_Data.Title = props.title;
+		m_Data.Width = props.width;
+		m_Data.Height = props.height;
 
-		CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
+		CORE_INFO("Creating window {0} ({1}, {2})", props.title, props.width, props.height);
 		
     if (!s_GLFWInitialized) {
-			auto result = glfwInit();
+			int result = glfwInit();
 			CORE_ASSERT_CRITICAL(result, "Failed to initialize GLFW!");
       glfwSetErrorCallback(GLFWErrorCallback);
       s_GLFWInitialized = true;
@@ -49,7 +49,7 @@ namespace Helios
 
 		glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 		
-		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(),
+		m_Window = glfwCreateWindow((int)props.width, (int)props.height, m_Data.Title.c_str(),
 																nullptr, nullptr);
 
 		m_Monitor = glfwGetPrimaryMonitor();
@@ -57,7 +57,7 @@ namespace Helios
 
 		m_Context = GraphicsContext::Create(m_Window);
 		m_Context->Init();
-		m_Context->SetViewport(props.Width, props.Height);
+		m_Context->SetViewport(props.width, props.height);
 
 		glfwSetWindowUserPointer(m_Window, reinterpret_cast<void*>(this));
 
@@ -159,6 +159,7 @@ namespace Helios
 		m_Context->Shutdown();
 		glfwDestroyWindow(m_Window);
   }
+
 	void WindowsWindow::PoolEvents()
 	{
 		glfwPollEvents();
@@ -242,7 +243,6 @@ namespace Helios
 
 			m_Data.Width = width;
       m_Data.Height = height;
-			m_Data.Fullscreen = enabled;
 		} else {
 			glfwSetWindowMonitor(m_Window, nullptr, m_Data.posX, m_Data.posX, m_Data.Width, m_Data.Height, GLFW_DONT_CARE);
 		}

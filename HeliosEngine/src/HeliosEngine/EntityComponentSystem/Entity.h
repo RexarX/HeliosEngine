@@ -33,9 +33,10 @@ namespace Helios
     void EmplaceScriptComponent(Args&&... args) const;
 
     void SetParent(Entity& parent);
-    void RemoveParent() const;
+    void RemoveParent();
 
     void AddChild(Entity& child);
+    void RemoveChild(Entity& child) const;
 
     Entity& GetParent() const;
     const std::vector<Entity*>& GetChildren() const;

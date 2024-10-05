@@ -3,8 +3,7 @@
 #include "Core.h"
 #include "Timestep.h"
 
-#include "Events/Event.h"
-
+class Event;
 struct ImGuiContext;
 
 namespace Helios
@@ -12,14 +11,14 @@ namespace Helios
 	class HELIOSENGINE_API Layer
 	{
 	public:
-		Layer(std::string_view name = "Layer");
+		Layer(std::string_view name) : m_Name(name) {}
 		virtual ~Layer() = default;
 
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}
 
 		virtual void OnUpdate(Timestep ts) {}
-		virtual void OnEvent(Event& event) {}
+		virtual void OnEvent(const Event& event) {}
 
 		virtual void Draw() {}
 
@@ -28,6 +27,6 @@ namespace Helios
 		inline const std::string& GetName() const { return m_Name; }
 
 	protected:
-		std::string m_Name;
+		std::string m_Name = std::string();
 	};
 }

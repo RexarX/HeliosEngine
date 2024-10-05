@@ -6,21 +6,21 @@
 
 namespace Helios
 {
-  ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer") {}
-
 	void ImGuiLayer::OnAttach()
 	{
 		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
+
 		ImGuiIO& io = ImGui::GetIO(); (void)io;
 		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
     io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
 		io.ConfigFlags |= ImGuiConfigFlags_DpiEnableScaleFonts;
 		io.ConfigFlags |= ImGuiConfigFlags_DpiEnableScaleViewports;
+
 		float fontSize = 16.0f;
-		io.Fonts->AddFontFromFileTTF((HELIOSENGINE_DIR + "Assets/Fonts/DroidSans.ttf").c_str(), fontSize);
-		io.FontDefault = io.Fonts->AddFontFromFileTTF((HELIOSENGINE_DIR + "Assets/Fonts/Cousine-Regular.ttf").c_str(), fontSize);
+		io.Fonts->AddFontFromFileTTF(std::format("{}Assets/Fonts/DroidSans.ttf", HELIOSENGINE_DIR).c_str(), fontSize);
+		io.FontDefault = io.Fonts->AddFontFromFileTTF(std::format("{}Assets/Fonts/Cousine-Regular.ttf", HELIOSENGINE_DIR).c_str(), fontSize);
 		
 		ImGui::StyleColorsDark();
 		
@@ -39,17 +39,13 @@ namespace Helios
 		ImGui::DestroyContext();
 	}
 
-	void ImGuiLayer::OnEvent(Event& e)
+	void ImGuiLayer::OnEvent(const Event& e)
 	{
 		if (m_BlockEvents) {
 			ImGuiIO& io = ImGui::GetIO();
-			e.Handled |= e.IsInCategory(EventCategoryMouse) & io.WantCaptureMouse;
-			e.Handled |= e.IsInCategory(EventCategoryKeyboard) & io.WantCaptureKeyboard;
+			Event& event = const_cast<Event&>(e);
+			event.Handled |= e.IsInCategory(EventCategoryMouse) & io.WantCaptureMouse;
+			event.Handled |= e.IsInCategory(EventCategoryKeyboard) & io.WantCaptureKeyboard;
 		}
-	}
-
-	inline uint32_t ImGuiLayer::GetActiveWidgetID() const noexcept
-	{
-    return ImGui::GetActiveID();
 	}
 }

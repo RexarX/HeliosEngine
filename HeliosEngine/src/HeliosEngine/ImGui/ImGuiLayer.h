@@ -12,16 +12,16 @@ namespace Helios
 	class ImGuiLayer final : public Layer
 	{
 	public:
-		ImGuiLayer();
+		ImGuiLayer() : Layer("ImGuiLayer") {}
 		~ImGuiLayer() = default;
 
 		void OnAttach() override;
 		void OnDetach() override;
-		void OnEvent(Event& e) override;
+		void OnEvent(const Event& e) override;
 
 		void BlockEvents(bool block) noexcept { m_BlockEvents = block; }
 
-		inline uint32_t GetActiveWidgetID() const noexcept;
+		inline uint32_t GetActiveWidgetID() const noexcept { return ImGui::GetActiveID(); }
 
 	private:
 		bool m_BlockEvents = true;

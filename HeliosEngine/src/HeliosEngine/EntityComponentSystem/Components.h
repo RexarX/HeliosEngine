@@ -32,7 +32,6 @@ namespace Helios
 	{
 		Entity* parent = nullptr;
     std::vector<Entity*> children;
-		bool isRoot = false;
 	};
 
 	struct HELIOSENGINE_API Transform
@@ -73,13 +72,13 @@ namespace Helios
 		virtual void OnAttach() = 0;
 		virtual void OnDetach() = 0;
 		virtual void OnUpdate(Timestep deltaTime) = 0;
-		virtual void OnEvent(Event& event) = 0;
+		virtual void OnEvent(const Event& event) = 0;
 
 		friend class Entity;
 
 	protected:
 		template <typename T> requires std::is_base_of<Event, T>::value
-		void AddListener(const std::function<void(T&)>& callback) const {
+		void AddListener(const std::function<void(const T&)>& callback) const {
 			m_EventSystem->AddListener<T>(this, callback);
 		}
 
@@ -87,7 +86,7 @@ namespace Helios
 		void RemoveListener() const { m_EventSystem->RemoveListener<T>(this); }
 
 		template <typename T> requires std::is_base_of<Event, T>::value
-		void PushEvent(T& event) const { m_EventSystem->PushEvent(event); }
+		void PushEvent(const T& event) const { m_EventSystem->PushEvent(event); }
 
 		template <typename T>
 		inline T& GetComponent() const { return m_Entity->GetComponent<T>(); }

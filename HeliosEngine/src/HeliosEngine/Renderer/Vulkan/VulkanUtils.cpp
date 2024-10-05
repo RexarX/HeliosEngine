@@ -30,7 +30,7 @@ namespace Helios
     info.pushConstantRangeCount = 1;
     info.pPushConstantRanges = &pushConstantRange;
 
-    auto result = vkCreatePipelineLayout(device, &info, nullptr, &layout);
+    VkResult result = vkCreatePipelineLayout(device, &info, nullptr, &layout);
     CORE_ASSERT(result == VK_SUCCESS, "Failed to create pipeline layout!");
 
     VkPipelineViewportStateCreateInfo viewportState{};
@@ -66,7 +66,7 @@ namespace Helios
     shaderStageInfo.pName = "main";
 
     std::vector<VkPipelineShaderStageCreateInfo> shaderStages(shaderInfos.size());
-    for (auto& shaderInfo : shaderInfos) {
+    for (const VulkanShaderInfo& shaderInfo : shaderInfos) {
       shaderStageInfo.stage = shaderInfo.stage;
       shaderStageInfo.module = shaderInfo.shaderModule;
       shaderStages.push_back(shaderStageInfo);

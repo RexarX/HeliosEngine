@@ -2,11 +2,6 @@
 
 namespace Helios
 {
-  void EventSystem::OnUpdate(entt::registry& registry)
-  {
-    ProcessQueuedEvents();
-  }
-
   void EventSystem::ProcessQueuedEvents()
   {
     //Timer timer, timerEvent;

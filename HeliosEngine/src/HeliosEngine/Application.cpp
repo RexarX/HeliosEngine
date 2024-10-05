@@ -24,43 +24,43 @@ namespace Helios
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
 #endif
-
+		
 		m_Running = true;
 	}
 
-	void Application::OnEvent(Event& e)
+	void Application::OnEvent(const Event& e)
 	{
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_FN(Application::OnWindowClose));
 		dispatcher.Dispatch<WindowResizeEvent>(BIND_FN(Application::OnWindowResize));
 		dispatcher.Dispatch<KeyPressedEvent>(BIND_FN(Application::OnKeyPressed));
 
-		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();) {
-			(*--it)->OnEvent(e);
+		for (auto it = m_LayerStack.rbegin(); it != m_LayerStack.rend(); ++it) {
+			(*it)->OnEvent(e);
 			if (e.Handled) { break; }
 		}
 	}
 
-	bool Application::OnWindowClose(WindowCloseEvent& e)
+	bool Application::OnWindowClose(const WindowCloseEvent& e)
 	{
 		m_Running = false;
 		return true;
 	}
 
-	bool Application::OnWindowResize(WindowResizeEvent& e)
+	bool Application::OnWindowResize(const WindowResizeEvent& e)
 	{
 		if (e.GetWidth() == 0 || e.GetHeight() == 0) { m_Window->SetMinimized(true); }
 		else if (m_Window->IsMinimized()) { m_Window->SetMinimized(false); }
 		return true;
 	}
 
- bool Application::OnKeyPressed(KeyPressedEvent& e)
+ bool Application::OnKeyPressed(const KeyPressedEvent& e)
 	{
 #ifndef DIST_MODE
-    if (e.GetKeyCode() == Key::Insert) {
-			bool currentState = m_Window->IsImGuiEnabled();
-			m_ImGuiLayer->BlockEvents(!currentState);
-      m_Window->SetImGuiState(!currentState);
+    if (e.GetKeyCode() == Key::Home) {
+			bool newState = !m_Window->IsImGuiEnabled();
+			m_ImGuiLayer->BlockEvents(newState);
+      m_Window->SetImGuiState(newState);
     }
 #endif
 
@@ -71,6 +71,7 @@ namespace Helios
 	{
 		double lastFrameUpdateTime = 0.0;
 		m_FramerateLimit = m_Window->GetFramerate() == 0.0 ? 0.0 : 1.0 / m_Window->GetFramerate();
+
 		m_Timer.Start();
 		while (m_Running) {
 			m_Timer.Stop();

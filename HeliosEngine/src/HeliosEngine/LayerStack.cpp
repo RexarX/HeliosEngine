@@ -1,13 +1,8 @@
 #include "LayerStack.h"
-
 #include "Layer.h"
 
 namespace Helios 
 {
-	LayerStack::LayerStack()
-	{
-	}
-
 	LayerStack::~LayerStack()
 	{
 		for (Layer* layer : m_Layers) {

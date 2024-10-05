@@ -12,7 +12,7 @@ public:
 	void OnAttach() override;
 	void OnDetach() override;
 	void OnUpdate(Helios::Timestep ts) override;
-	void OnEvent(Helios::Event& event) override;
+	void OnEvent(const Helios::Event& event) override;
 	void Draw() override;
 	void OnImGuiRender(ImGuiContext* context) override;
 };

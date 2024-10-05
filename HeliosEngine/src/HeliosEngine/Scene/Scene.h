@@ -33,7 +33,7 @@ namespace Helios
     ~Scene() = default;
 
     void OnUpdate(Timestep deltaTime);
-    void OnEvent(Event& event);
+    void OnEvent(const Event& event);
     void Draw();
 
     void Load();

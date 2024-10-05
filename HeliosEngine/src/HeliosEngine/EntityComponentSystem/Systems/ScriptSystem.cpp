@@ -11,7 +11,7 @@ namespace Helios
     });
   }
 
-  void ScriptSystem::OnEvent(entt::registry& registry, Event& event)
+  void ScriptSystem::OnEvent(entt::registry& registry, const Event& event)
   {
     registry.view<Script>().each([&event](entt::entity entity, Script& script) {
       script.scriptable->OnEvent(event);

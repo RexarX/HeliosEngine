@@ -28,7 +28,7 @@ namespace Helios
   Scene& SceneManager::GetScene(const std::string& name)
   {
     if (!m_Scenes.contains(name)) { CORE_ASSERT(false, "Scene not found!"); }
-    return m_Scenes.at(name);
+    return m_Scenes[name];
   }
 
   Scene& SceneManager::GetActiveScene()

@@ -71,7 +71,7 @@ namespace Helios
       vmaallocInfo.usage = VMA_MEMORY_USAGE_CPU_TO_GPU;
       vmaallocInfo.flags = VMA_ALLOCATION_CREATE_MAPPED_BIT;
 
-      auto result = vmaCreateBuffer(allocator, &bufferInfo, &vmaallocInfo, &m_VertexBuffer.buffer,
+      VkResult result = vmaCreateBuffer(allocator, &bufferInfo, &vmaallocInfo, &m_VertexBuffer.buffer,
                                     &m_VertexBuffer.allocation, &m_VertexBuffer.info);
 
       CORE_ASSERT(result == VK_SUCCESS, "Failed to create vertex buffer!");
@@ -110,7 +110,7 @@ namespace Helios
         vmaallocInfo.usage = VMA_MEMORY_USAGE_CPU_TO_GPU;
         vmaallocInfo.flags = VMA_ALLOCATION_CREATE_MAPPED_BIT;
 
-        auto result = vmaCreateBuffer(allocator, &bufferInfo, &vmaallocInfo, &m_IndexBuffer.buffer,
+        VkResult result = vmaCreateBuffer(allocator, &bufferInfo, &vmaallocInfo, &m_IndexBuffer.buffer,
                                       &m_IndexBuffer.allocation, &m_IndexBuffer.info);
 
         CORE_ASSERT(result == VK_SUCCESS, "Failed to create index buffer!");
@@ -176,7 +176,7 @@ namespace Helios
     vmaallocInfo.usage = VMA_MEMORY_USAGE_CPU_ONLY;
     vmaallocInfo.flags = VMA_ALLOCATION_CREATE_MAPPED_BIT;
 
-    auto result = vmaCreateBuffer(allocator, &bufferInfo, &vmaallocInfo, &stagingVertexBuffer.buffer,
+    VkResult result = vmaCreateBuffer(allocator, &bufferInfo, &vmaallocInfo, &stagingVertexBuffer.buffer,
                                   &stagingVertexBuffer.allocation, &stagingVertexBuffer.info);
 
     CORE_ASSERT(result == VK_SUCCESS, "Failed to create staging vertex buffer!");
@@ -221,7 +221,7 @@ namespace Helios
     vmaallocInfo.usage = VMA_MEMORY_USAGE_CPU_TO_GPU;
     vmaallocInfo.flags = VMA_ALLOCATION_CREATE_MAPPED_BIT;
 
-    auto result = vmaCreateBuffer(allocator, &bufferInfo, &vmaallocInfo, &m_VertexBuffer.buffer,
+    VkResult result = vmaCreateBuffer(allocator, &bufferInfo, &vmaallocInfo, &m_VertexBuffer.buffer,
                                   &m_VertexBuffer.allocation, &m_VertexBuffer.info);
 
     CORE_ASSERT(result == VK_SUCCESS, "Failed to create vertex buffer!");
@@ -246,7 +246,7 @@ namespace Helios
     vmaallocInfo.usage = VMA_MEMORY_USAGE_CPU_ONLY;
     vmaallocInfo.flags = VMA_ALLOCATION_CREATE_MAPPED_BIT;
 
-    auto result = vmaCreateBuffer(allocator, &bufferInfo, &vmaallocInfo, &stagingIndexBuffer.buffer,
+    VkResult result = vmaCreateBuffer(allocator, &bufferInfo, &vmaallocInfo, &stagingIndexBuffer.buffer,
                                   &stagingIndexBuffer.allocation, &stagingIndexBuffer.info);
 
     CORE_ASSERT(result == VK_SUCCESS, "Failed to create staging index buffer!");
@@ -289,7 +289,7 @@ namespace Helios
     vmaallocInfo.usage = VMA_MEMORY_USAGE_CPU_TO_GPU;
     vmaallocInfo.flags = VMA_ALLOCATION_CREATE_MAPPED_BIT;
 
-    auto result = vmaCreateBuffer(allocator, &bufferInfo, &vmaallocInfo, &m_IndexBuffer.buffer,
+    VkResult result = vmaCreateBuffer(allocator, &bufferInfo, &vmaallocInfo, &m_IndexBuffer.buffer,
                                   &m_IndexBuffer.allocation, &m_IndexBuffer.info);
 
     CORE_ASSERT(result == VK_SUCCESS, "Failed to create index buffer!");
