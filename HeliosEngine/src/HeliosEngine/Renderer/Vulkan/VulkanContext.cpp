@@ -291,9 +291,11 @@ namespace Helios
 
   void VulkanContext::ShutdownImGui()
   {
+#ifndef RELEASE_MODE
     ImGui_ImplVulkan_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     vkDestroyDescriptorPool(m_Device, m_ImGuiPool, nullptr);
+#endif
   }
 
   void VulkanContext::BeginFrameImGui()
@@ -320,7 +322,6 @@ namespace Helios
       ImGui::UpdatePlatformWindows();
       ImGui::RenderPlatformWindowsDefault();
 #endif
-
       return;
     }
 

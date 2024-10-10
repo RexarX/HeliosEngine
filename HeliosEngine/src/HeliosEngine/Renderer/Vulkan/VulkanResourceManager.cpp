@@ -47,11 +47,15 @@ namespace Helios
     ClearResources();
   }
 
-  void VulkanResourceManager::InitializeResources(const std::vector<Renderable>& renderables)
+  void VulkanResourceManager::InitializeResources(const std::vector<const Renderable*>& renderables)
   {
-    for (const Renderable& renderable : renderables) {
-      CreatePipeline(renderable);
+    for (const Renderable* renderable : renderables) {
+      CreatePipeline(*renderable);
     }
+  }
+
+  void VulkanResourceManager::FreeResources(const std::vector<const Renderable*>& renderables)
+  {
   }
 
   void VulkanResourceManager::UpdateResources(entt::registry& registry, const RenderQueue& renderQueue)
@@ -71,6 +75,6 @@ namespace Helios
   {
     VkDevice device = m_Context.GetDevice();
     VkRenderPass renderPass = m_Context.GetRenderPass();
-
+    
   }
 }

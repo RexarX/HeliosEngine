@@ -44,7 +44,8 @@ namespace Helios
     VulkanResourceManager();
     virtual ~VulkanResourceManager();
 
-    void InitializeResources(const std::vector<Renderable>& renderables) override;
+    void InitializeResources(const std::vector<const Renderable*>& renderables) override;
+    void FreeResources(const std::vector<const Renderable*>& renderables) override;
     void UpdateResources(entt::registry& registry, const RenderQueue& renderQueue) override;
     void ClearResources() override;
 

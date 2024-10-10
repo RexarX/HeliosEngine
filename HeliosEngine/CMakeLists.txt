@@ -16,7 +16,6 @@ file(GLOB_RECURSE src__EntityComponentSystem
     "src/HeliosEngine/EntityComponentSystem/*.h"
     "src/HeliosEngine/EntityComponentSystem/*.inl"
     "src/HeliosEngine/EntityComponentSystem/*.cpp"
-    
     "src/HeliosEngine/EntityComponentSystem/Systems/*.h"
     "src/HeliosEngine/EntityComponentSystem/Systems/*.cpp"
 )
@@ -31,7 +30,6 @@ file(GLOB_RECURSE src__Engine__Utils
 
 file(GLOB_RECURSE src__Engine__Renderer
     "src/HeliosEngine/Renderer/*.h" "src/HeliosEngine/Renderer/*.cpp"
-
     "src/HeliosEngine/Renderer/Vulkan/*.h" "src/HeliosEngine/Renderer/Vulkan/*.cpp"
 )
 
@@ -70,7 +68,6 @@ target_precompile_headers(${PROJECT_NAME} PRIVATE
 
 foreach(OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES})
     string(TOUPPER ${OUTPUTCONFIG} UPOUTPUTCONFIG)
-
     set_target_properties(${PROJECT_NAME} PROPERTIES
         TARGET_NAME_${UPOUTPUTCONFIG} "HeliosEngine"
         ARCHIVE_OUTPUT_NAME_${UPOUTPUTCONFIG} "HeliosEngine"
@@ -87,13 +84,13 @@ string(CONCAT "MSVC_RUNTIME_LIBRARY_STR"
     $<$<CONFIG:Debug>:
         MultiThreadedDebugDLL
     >
+    $<$<CONFIG:RelWithDebInfo>:
+        MultiThreadedDLL
+    >
     $<$<CONFIG:Release>:
         MultiThreadedDLL
     >
-    $<$<CONFIG:Dist>:
-        MultiThreadedDLL
-    >
-    $<$<NOT:$<OR:$<CONFIG:Debug>,$<CONFIG:Release>,$<CONFIG:Dist>>>:${MSVC_RUNTIME_LIBRARY_DEFAULT}>
+    $<$<NOT:$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>,$<CONFIG:Release>>>:${MSVC_RUNTIME_LIBRARY_DEFAULT}>
 )
 set_target_properties(${PROJECT_NAME} PROPERTIES MSVC_RUNTIME_LIBRARY ${MSVC_RUNTIME_LIBRARY_STR})
 
@@ -113,11 +110,11 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
     $<$<CONFIG:Debug>:
         "DEBUG_MODE;"
     >
+    $<$<CONFIG:RelWithDebInfo>:
+        "RELEASE_WITH_BEDUG_INFO_MODE;"
+    >
     $<$<CONFIG:Release>:
         "RELEASE_MODE;"
-    >
-    $<$<CONFIG:Dist>:
-        "DIST_MODE;"
     >
     "GLFW_INCLUDE_NONE;"
     "UNICODE;"
@@ -126,21 +123,23 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 )
 
 if(WIN32)
-	target_compile_definitions(${PROJECT_NAME} PRIVATE "PLATFORM_WINDOWS;" PRIVATE "BUILD_DLL;")
+	target_compile_definitions(${PROJECT_NAME} PRIVATE "PLATFORM_WINDOWS;" PRIVATE "BUILD_SHARED;")
+elseif(UNIX)
+	target_compile_definitions(${PROJECT_NAME} PRIVATE "PLATFORM_LINUX;" PRIVATE "BUILD_SHARED;")
 endif()
 
 target_compile_options(${PROJECT_NAME} PRIVATE
     $<$<CXX_COMPILER_ID:MSVC>:
         $<$<CONFIG:Debug>:/Od /Zi /fsanitize=address>
+        $<$<CONFIG:RelWithDebInfo>:/O2 /Oi /Gy>
         $<$<CONFIG:Release>:/O2 /Oi /Gy>
-        $<$<CONFIG:Dist>:/O2 /Oi /Gy>
         /GL
         /W3
     >
     $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>:
         $<$<CONFIG:Debug>:-O0 -g>
+        $<$<CONFIG:RelWithDebInfo>:-O3>
         $<$<CONFIG:Release>:-O3>
-        $<$<CONFIG:Dist>:-O3>
         -flto
     >
 )
@@ -148,78 +147,79 @@ target_compile_options(${PROJECT_NAME} PRIVATE
 if (ENABLE_SIMD_SSE2)
     target_compile_options(${PROJECT_NAME} PRIVATE
         $<$<CXX_COMPILER_ID:MSVC>:
+            $<$<CONFIG:RelWithDebInfo>:/arch:SSE2>
 		    $<$<CONFIG:Release>:/arch:SSE2>
-		    $<$<CONFIG:Dist>:/arch:SSE2>
 	    >
 	    $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>:
-		    $<$<CONFIG:Release>:-msse2>
-		    $<$<CONFIG:Dist>:-msse2>
+            $<$<CONFIG:RelWithDebInfo>:-msse2>
+		    $<$<CONFIG:Release>:-msse2>   
 	    >
     )
 elseif (ENABLE_SIMD_SSE3)
     target_compile_options(${PROJECT_NAME} PRIVATE
         $<$<CXX_COMPILER_ID:MSVC>: # VC doesn't support SSE3
-		    $<$<CONFIG:Release>:/arch:SSE2>
-		    $<$<CONFIG:Dist>:/arch:SSE2>
+            $<$<CONFIG:RelWithDebInfo>:/arch:SSE2>
+		    $<$<CONFIG:Release>:/arch:SSE2>   
 	    >
 	    $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>:
-		    $<$<CONFIG:Release>:-msse3>
-		    $<$<CONFIG:Dist>:-msse3>
+            $<$<CONFIG:RelWithDebInfo>:-msse3>
+		    $<$<CONFIG:Release>:-msse3> 
 	    >
     )
 elseif (ENABLE_SIMD_SSSE3)
 	target_compile_options(${PROJECT_NAME} PRIVATE
 		$<$<CXX_COMPILER_ID:MSVC>: # VC doesn't support SSSE3
+            $<$<CONFIG:RelWithDebInfo>:/arch:SSSE3>
 			$<$<CONFIG:Release>:/arch:SSSE3>
-			$<$<CONFIG:Dist>:/arch:SSSE3>
 		>
 		$<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>:
+            $<$<CONFIG:RelWithDebInfo>:-mssse3>
 			$<$<CONFIG:Release>:-mssse3>
-			$<$<CONFIG:Dist>:-mssse3>
 		>
 	)
 elseif (ENABLE_SIMD_SSE4_1)
 	target_compile_options(${PROJECT_NAME} PRIVATE
 		$<$<CXX_COMPILER_ID:MSVC>: # VC doesn't support SSE4.1
+            $<$<CONFIG:RelWithDebInfo>:/arch:SSE4.1>
 			$<$<CONFIG:Release>:/arch:SSE4.1>
-			$<$<CONFIG:Dist>:/arch:SSE4.1>
 		>
 		$<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>:
-			$<$<CONFIG:Release>:-msse4.1>
-			$<$<CONFIG:Dist>:-msse4.1>
+            $<$<CONFIG:RelWithDebInfo>:-msse4.1>
+			$<$<CONFIG:Release>:-msse4.1>	
 		>
 	)
 elseif (ENABLE_SIMD_SSE4_2)
 	target_compile_options(${PROJECT_NAME} PRIVATE
 		$<$<CXX_COMPILER_ID:MSVC>: # VC doesn't support SSE4.2
+            $<$<CONFIG:RelWithDebInfo>:/arch:SSE4.2>
 			$<$<CONFIG:Release>:/arch:SSE4.2>
-			$<$<CONFIG:Dist>:/arch:SSE4.2>
 		>
 		$<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>:
 			$<$<CONFIG:Release>:-msse4.2>
-			$<$<CONFIG:Dist>:-msse4.2>
+			$<$<CONFIG:RelWithDebInfo>:-msse4.2>
 		>
 	)
 elseif (ENABLE_SIMD_AVX)
     target_compile_options(${PROJECT_NAME} PRIVATE
         $<$<CXX_COMPILER_ID:MSVC>:
+            $<$<CONFIG:RelWithDebInfo>:/arch:AVX>
 			$<$<CONFIG:Release>:/arch:AVX>
-			$<$<CONFIG:Dist>:/arch:AVX>
 		>
 		$<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>:
+            $<$<CONFIG:RelWithDebInfo>:-mavx>
 			$<$<CONFIG:Release>:-mavx>
-			$<$<CONFIG:Dist>:-mavx>
+			
 		>
     )
 elseif (ENABLE_SIMD_AVX2)
     target_compile_options(${PROJECT_NAME} PRIVATE
         $<$<CXX_COMPILER_ID:MSVC>:
+            $<$<CONFIG:RelWithDebInfo>:/arch:AVX2>
 			$<$<CONFIG:Release>:/arch:AVX2>
-			$<$<CONFIG:Dist>:/arch:AVX2>
 		>
 		$<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>:
+            $<$<CONFIG:RelWithDebInfo>:-mavx2>
 			$<$<CONFIG:Release>:-mavx2>
-			$<$<CONFIG:Dist>:-mavx2>
 		>
     )
 endif()

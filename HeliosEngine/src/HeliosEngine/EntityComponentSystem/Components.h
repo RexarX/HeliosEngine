@@ -59,11 +59,6 @@ namespace Helios
 		}
 	};
 
-	struct HELIOSENGINE_API Quaternion
-	{
-		glm::mat4 matrix;
-	};
-
 	class HELIOSENGINE_API Scriptable
 	{
 	public:

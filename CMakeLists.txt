@@ -4,16 +4,10 @@ project(HeliosEngine)
 
 set(CMAKE_CONFIGURATION_TYPES
     "Debug"
+    "RelWithDebInfo"
     "Release"
-    "Dist"
     CACHE STRING "" FORCE
 )
-
-if(WIN32)
-	set(PLATFORM "Windows")
-elseif(UNIX)
-	set(PLATFORM "Linux")
-endif()
 
 if (NOT DEFINED ARCHITECTURE)
     if (CMAKE_SIZEOF_VOID_P EQUAL 8)
@@ -21,6 +15,12 @@ if (NOT DEFINED ARCHITECTURE)
     elseif(CMAKE_SIZEOF_VOID_P EQUAL 4)
         set(ARCHITECTURE "x86")
     endif()
+endif()
+
+if (WIN32)
+    set(PLATFORM "Windows")
+elseif (UNIX)
+    set(PLATFORM "Linux")
 endif()
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)

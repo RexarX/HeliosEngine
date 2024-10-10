@@ -34,9 +34,9 @@ namespace Helios
 	public:
 		virtual ~Event() = default;
 
-		virtual EventType GetEventType() const = 0;
-		virtual const char* GetName() const = 0;
-		virtual uint32_t GetCategoryFlags() const = 0;
+		virtual inline EventType GetEventType() const = 0;
+		virtual inline const char* GetName() const = 0;
+		virtual inline uint32_t GetCategoryFlags() const = 0;
 		virtual inline std::string ToString() const { return GetName(); }
 
 		inline bool IsInCategory(EventCategory category) const { return GetCategoryFlags() & category; }

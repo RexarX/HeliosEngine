@@ -27,6 +27,7 @@
 #include <bitset>
 #include <map>
 #include <unordered_map>
+#include <span>
 
 #include "HeliosEngine/Core.h"
 #include "HeliosEngine/Log.h"

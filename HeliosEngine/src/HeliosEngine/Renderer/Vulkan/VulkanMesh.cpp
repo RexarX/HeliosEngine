@@ -111,7 +111,7 @@ namespace Helios
         vmaallocInfo.flags = VMA_ALLOCATION_CREATE_MAPPED_BIT;
 
         VkResult result = vmaCreateBuffer(allocator, &bufferInfo, &vmaallocInfo, &m_IndexBuffer.buffer,
-                                      &m_IndexBuffer.allocation, &m_IndexBuffer.info);
+                                          &m_IndexBuffer.allocation, &m_IndexBuffer.info);
 
         CORE_ASSERT(result == VK_SUCCESS, "Failed to create index buffer!");
 

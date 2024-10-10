@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Renderer/GraphicsContext.h"
+#include "Renderer/RendererAPI.h"
 
 #include "VulkanUtils.h"
 
@@ -46,7 +46,7 @@ namespace Helios
 
     static inline VulkanContext& Get() { return *m_Instance; }
 
-    inline VkDevice GetDevice() const { return m_Device; }
+    inline const VkDevice GetDevice() const { return m_Device; }
     inline const VkRenderPass GetRenderPass() const { return m_RenderPass; }
 
     inline const VkPhysicalDeviceLimits& GetPhysicalDeviceLimits() const;
@@ -114,7 +114,7 @@ namespace Helios
 
     static VulkanContext* m_Instance;
 
-    GLFWwindow* m_WindowHandle;
+    GLFWwindow* m_WindowHandle = nullptr;
 
     bool m_SwapchainRecreated = false;
     bool m_ImGuiEnabled = false;

@@ -1,18 +1,24 @@
 #pragma once
 
 #ifdef PLATFORM_WINDOWS
-	#ifdef BUILD_DLL
-		#define HELIOSENGINE_API __declspec(dllexport)
+	#ifdef BUILD_SHARED
+			#define HELIOSENGINE_API __declspec(dllexport)
+		#else
+			#define HELIOSENGINE_API __declspec(dllimport)
+	#endif
+#elif defined(PLATFORM_LINUX)
+	#ifdef BUILD_SHARED
+		#define HELIOSENGINE_API __attribute__((visibility("default")))
 	#else
-		#define HELIOSENGINE_API __declspec(dllimport)
+    	#define HELIOSENGINE_API
 	#endif
 #endif
 
-#ifdef DEBUG_MODE
+#ifndef RELEASE_MODE
 	#define ENABLE_ASSERTS
 #endif
 
-#ifdef DIST_MODE
+#ifdef RELEASE_MODE
 	#define HELIOSENGINE_DIR std::string("")
 	#define GAME_DIR std::string("")
 #else

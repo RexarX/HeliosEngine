@@ -18,7 +18,7 @@ namespace Helios
     : m_Name(std::move(other.m_Name)), m_Active(other.m_Active), m_Loaded(other.m_Loaded),
     m_Registry(std::move(other.m_Registry)), m_EntityMap(std::move(other.m_EntityMap)),
     m_RootEntity(std::move(other.m_RootEntity)), m_EventSystem(std::move(other.m_EventSystem)),
-    m_CameraSystem(std::move(other.m_CameraSystem)), m_ScriptSystem(std::move(other.m_ScriptSystem)),
+    m_ScriptSystem(std::move(other.m_ScriptSystem)), m_CameraSystem(std::move(other.m_CameraSystem)),
     m_RenderingSystem(std::move(other.m_RenderingSystem))
   {
     other.m_Active = false;
@@ -60,7 +60,15 @@ namespace Helios
   {
     if (m_Loaded) { return; }
 
-    // Load
+    std::vector<const Renderable*> renderables;
+    const auto& view = m_Registry.view<Renderable>();
+    renderables.reserve(view.size());
+
+    for (entt::entity entity : view) {
+      renderables.push_back(&m_Registry.get<Renderable>(entity));
+    }
+
+    m_RenderingSystem.GetResourceManager().InitializeResources(renderables);
 
     m_Loaded = true;
   }
@@ -69,7 +77,15 @@ namespace Helios
   {
     if (!m_Loaded) { return; }
 
-    // Unload
+    const auto& view = m_Registry.view<Renderable>();
+    std::vector<const Renderable*> renderables;
+    renderables.reserve(view.size());
+
+    for (entt::entity entity : view) {
+      renderables.push_back(&m_Registry.get<Renderable>(entity));
+    }
+
+    m_RenderingSystem.GetResourceManager().FreeResources(renderables);
 
     m_Active = false;
     m_Loaded = false;
