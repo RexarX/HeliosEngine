@@ -5,21 +5,21 @@ namespace Helios
 {
   void Material::Load()
   {
-    if (albedo != nullptr) { albedo->Load(); }
-    if (normalMap != nullptr) { normalMap->Load(); }
-    if (specularMap != nullptr) { specularMap->Load(); }
-    if (roughnessMap != nullptr) { roughnessMap->Load(); }
-    if (metallicMap != nullptr) { metallicMap->Load(); }
-    if (aoMap != nullptr) { aoMap->Load(); }
+    if (m_Albedo != nullptr) { m_Albedo->Load(); }
+    if (m_NormalMap != nullptr) { m_NormalMap->Load(); }
+    if (m_SpecularMap != nullptr) { m_SpecularMap->Load(); }
+    if (m_RoughnessMap != nullptr) { m_RoughnessMap->Load(); }
+    if (m_MetallicMap != nullptr) { m_MetallicMap->Load(); }
+    if (m_AoMap != nullptr) { m_AoMap->Load(); }
   }
 
   void Material::Unload()
   {
-    if (albedo != nullptr) { albedo->Unload(); }
-    if (normalMap != nullptr) { normalMap->Unload(); }
-    if (specularMap != nullptr) { specularMap->Unload(); }
-    if (roughnessMap != nullptr) { roughnessMap->Unload(); }
-    if (metallicMap != nullptr) { metallicMap->Unload(); }
-    if (aoMap != nullptr) { aoMap->Unload(); }
+    if (m_Albedo != nullptr) { m_Albedo->Unload(); }
+    if (m_NormalMap != nullptr) { m_NormalMap->Unload(); }
+    if (m_SpecularMap != nullptr) { m_SpecularMap->Unload(); }
+    if (m_RoughnessMap != nullptr) { m_RoughnessMap->Unload(); }
+    if (m_MetallicMap != nullptr) { m_MetallicMap->Unload(); }
+    if (m_AoMap != nullptr) { m_AoMap->Unload(); }
   }
 }

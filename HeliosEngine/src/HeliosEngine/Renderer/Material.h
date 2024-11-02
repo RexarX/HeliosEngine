@@ -31,7 +31,7 @@ namespace Helios
     void SetRoughness(float roughness) { m_Roughness = roughness; }
     void SetMetallic(float metallic) { m_Metallic = metallic; }
 
-    inline const std::string& GetName() { return m_Name; }
+    inline const std::string& GetName() const { return m_Name; }
 
     inline const std::shared_ptr<Texture>& GetAlbedo() const { return m_Albedo; }
     inline const std::shared_ptr<Texture>& GetNormalMap() const { return m_NormalMap; }
