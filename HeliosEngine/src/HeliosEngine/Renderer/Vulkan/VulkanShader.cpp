@@ -16,7 +16,7 @@ namespace Helios
 		case ShaderStage::Compute: return VK_SHADER_STAGE_COMPUTE_BIT;
 		}
 
-		CORE_ASSERT(false, "Unknown shader stage!");
+		CORE_ASSERT(false, "Unknown shader stage!")
 	}
 
 	static shaderc_shader_kind translateStageToShaderc(VkShaderStageFlagBits stage)
@@ -31,7 +31,7 @@ namespace Helios
 		case VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT: return shaderc_tess_evaluation_shader;
 		}
 
-		CORE_ASSERT(false, "Unknown shader stage!");
+		CORE_ASSERT(false, "Unknown shader stage!")
 	}
 
 	static bool GLSLtoSPV(VkShaderStageFlagBits shaderType, const std::string& glslShader,
@@ -48,7 +48,7 @@ namespace Helios
 		);
 
 		if (module.GetCompilationStatus() != shaderc_compilation_status_success) {
-			CORE_ERROR(module.GetErrorMessage());
+			CORE_ERROR(module.GetErrorMessage())
 			return false;
 		}
 
@@ -90,7 +90,7 @@ namespace Helios
 			std::filesystem::path path(info.path);
 			std::string code = Utils::ReadFileToString(info.path);
 			if (code.empty()) {
-				CORE_ERROR("Failed to load shader code: {0}!", info.path);
+				CORE_ERROR("Failed to load shader code: {0}!", info.path)
 				continue;
 			}
 
@@ -99,7 +99,7 @@ namespace Helios
 				uint64_t index = name.find_last_of('.');
 				if (index != std::string::npos) { name.resize(index); }
 				if (!GLSLtoSPV(info.stage, code, name, spvCode)) {
-					CORE_ERROR("Failed to compile shader: {0}!", info.path);
+					CORE_ERROR("Failed to compile shader: {0}!", info.path)
 					continue;
 				} else {
 					spvCode.resize(code.size() / sizeof(uint32_t));
@@ -114,7 +114,7 @@ namespace Helios
 			shaderModuleInfo.pCode = spvCode.data();
 
 			VkResult result = vkCreateShaderModule(device, &shaderModuleInfo, nullptr, &info.shaderModule);
-			CORE_ASSERT(result == VK_SUCCESS, "Failed to create shader module: {0}!", info.path);
+			CORE_ASSERT(result == VK_SUCCESS, "Failed to create shader module: {0}!", info.path)
 		}
 	}
 }

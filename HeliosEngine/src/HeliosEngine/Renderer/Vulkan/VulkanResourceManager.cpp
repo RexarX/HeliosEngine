@@ -21,17 +21,17 @@ namespace Helios
     }
 
     if (renderable.material != nullptr) {
-      CombineHash(seed, renderable.material->albedo != nullptr);
-      CombineHash(seed, renderable.material->normalMap != nullptr ||
-                        renderable.material->specularMap != nullptr ||
-                        renderable.material->roughnessMap != nullptr ||
-                        renderable.material->metallicMap != nullptr ||
-                        renderable.material->aoMap != nullptr);
+      CombineHash(seed, renderable.material->GetAlbedo() != nullptr);
+      CombineHash(seed, renderable.material->GetNormalMap() != nullptr ||
+                        renderable.material->GetSpecularMap() != nullptr ||
+                        renderable.material->GetRoughnessMap() != nullptr ||
+                        renderable.material->GetMetallicMap() != nullptr ||
+                        renderable.material->GetAoMap() != nullptr);
 
-      CombineHash(seed, renderable.material->color.x >= 0.0f);
-      CombineHash(seed, renderable.material->specular >= 0.0f ||
-                        renderable.material->metallic >= 0.0f ||
-                        renderable.material->roughness >= 0.0f);
+      CombineHash(seed, renderable.material->GetColor().x >= 0.0f);
+      CombineHash(seed, renderable.material->GetSpecular() >= 0.0f ||
+                        renderable.material->GetMetallic() >= 0.0f ||
+                        renderable.material->GetRoughness() >= 0.0f);
     }
 
     return seed;
@@ -47,18 +47,20 @@ namespace Helios
     ClearResources();
   }
 
-  void VulkanResourceManager::InitializeResources(const std::vector<const Renderable*>& renderables)
+  void VulkanResourceManager::InitializeResources(const entt::registry& registry,
+                                                  const std::vector<entt::entity>& renderables)
   {
-    for (const Renderable* renderable : renderables) {
-      CreatePipeline(*renderable);
-    }
+    std::for_each(renderables.begin(), renderables.end(), [this, &registry](entt::entity entity) {
+      CreatePipeline(registry.get<Renderable>(entity));
+    });
   }
 
-  void VulkanResourceManager::FreeResources(const std::vector<const Renderable*>& renderables)
+  void VulkanResourceManager::FreeResources(const entt::registry& registry,
+                                            const std::vector<entt::entity>& renderables)
   {
   }
 
-  void VulkanResourceManager::UpdateResources(entt::registry& registry, const RenderQueue& renderQueue)
+  void VulkanResourceManager::UpdateResources(const RenderQueue& renderables)
   {
   }
 

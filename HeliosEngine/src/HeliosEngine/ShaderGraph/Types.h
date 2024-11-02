@@ -44,7 +44,7 @@ namespace Helios
     case DataType::Bool: return 1;
     }
 
-    CORE_ASSERT(false, "Unknown DataType!");
+    CORE_ASSERT(false, "Unknown DataType!")
     return 0;
   }
 }

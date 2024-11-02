@@ -5,8 +5,7 @@
 class GameLayer final : public Helios::Layer
 {
 public:
-	GameLayer() : Layer("Game") {}
-
+	GameLayer() : Helios::Layer("Game") {}
 	virtual ~GameLayer() = default;
 
 	void OnAttach() override;

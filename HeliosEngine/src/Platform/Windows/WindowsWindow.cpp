@@ -14,7 +14,7 @@ namespace Helios
 
 	static void GLFWErrorCallback(int error, const char* description)
 	{
-		CORE_ERROR("GLFW Error ({0}): {1}", error, description);
+		CORE_ERROR("GLFW Error ({0}): {1}", error, description)
 	}
 
   std::unique_ptr<Window> Window::Create(const WindowProps& props)
@@ -38,11 +38,11 @@ namespace Helios
 		m_Data.Width = props.width;
 		m_Data.Height = props.height;
 
-		CORE_INFO("Creating window {0} ({1}, {2})", props.title, props.width, props.height);
+		CORE_INFO("Creating window {0} ({1}, {2})", props.title, props.width, props.height)
 		
     if (!s_GLFWInitialized) {
 			int result = glfwInit();
-			CORE_ASSERT_CRITICAL(result, "Failed to initialize GLFW!");
+			CORE_ASSERT_CRITICAL(result, "Failed to initialize GLFW!")
       glfwSetErrorCallback(GLFWErrorCallback);
       s_GLFWInitialized = true;
     }

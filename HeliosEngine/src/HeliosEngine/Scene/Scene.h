@@ -15,8 +15,8 @@ namespace std
   template<>
   struct hash<Helios::UUID>
   {
-    inline std::size_t operator()(const Helios::UUID& uuid) const {
-      return (uint64_t)uuid;
+    inline size_t operator()(Helios::UUID uuid) const {
+      return static_cast<size_t>(uuid);
     }
   };
 }

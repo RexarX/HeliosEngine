@@ -13,8 +13,8 @@ namespace Helios
 
   struct RenderObject
   {
-    Renderable renderable;
-    Transform transform;
+    const Renderable& renderable;
+    const Transform& transform;
   };
 
   class RenderQueue

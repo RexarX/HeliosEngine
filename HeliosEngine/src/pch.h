@@ -7,6 +7,8 @@
 #include <random>
 #include <functional>
 #include <format>
+#include <source_location>
+#include <ranges>
 #include <thread>
 #include <mutex>
 #include <shared_mutex>
@@ -19,6 +21,7 @@
 #include <cstdint>
 #include <sstream>
 #include <string>
+#include <string_view>
 #include <array>
 #include <vector>
 #include <deque>
@@ -42,3 +45,9 @@
 #include "HeliosEngine/Utils/Random.h"
 #include "HeliosEngine/Utils/ThreadPool.h"
 #include "HeliosEngine/Utils/Timer.h"
+
+#include "Events/Event.h"
+#include "Events/ApplicationEvent.h"
+#include "Events/KeyEvent.h"
+#include "Events/InputEvent.h"
+#include "Events/MouseEvent.h"

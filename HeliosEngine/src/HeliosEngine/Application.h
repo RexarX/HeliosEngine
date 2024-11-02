@@ -1,17 +1,10 @@
 #pragma once
 
-#include "Core.h"
 #include "Window.h"
 #include "LayerStack.h"
-#include "Timestep.h"
-
-#include "LayerStack.h"
-
-#include "Utils/Timer.h"
 
 namespace Helios
 {
-	class Event;
 	class WindowCloseEvent;
 	class WindowResizeEvent;
   class KeyPressedEvent;

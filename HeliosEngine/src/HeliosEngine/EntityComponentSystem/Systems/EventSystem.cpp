@@ -2,6 +2,15 @@
 
 namespace Helios
 {
+  EventSystem::~EventSystem()
+  {
+    for (auto& [type, queue] : m_EventQueues) {
+      for (const Event* event : queue) {
+        delete event;
+      }
+    }
+  }
+
   void EventSystem::ProcessQueuedEvents()
   {
     //Timer timer, timerEvent;
@@ -11,13 +20,15 @@ namespace Helios
       //timerEvent.Start();
       //CORE_TRACE("{0} event count: {1}", type.name(), queue.size());
       if (it != m_EventListeners.end() && !it->second.empty()) {
-        while (!queue.empty()) {
+        for (const Event* event : queue) {
           for (const Listener& listener : it->second) {
-            listener.callback(*queue.front());
+            listener.callback(*event);
           }
-          queue.pop();
+          delete event;
         }
       }
+
+      queue.clear();
       //timerEvent.Stop();
       //CORE_TRACE("{0} took: {1} us", type.name(), timerEvent.GetElapsedMicroSec());
     }

@@ -8,8 +8,8 @@ namespace Helios
   {
     VertexElement() = default;
 
-    VertexElement(DataType type, std::string_view name, bool normalized = false)
-      : name(name), type(type), normalized(normalized), size(DataTypeSize(type))
+    VertexElement(std::string_view name, DataType type, bool normalized = false)
+      : name(name), type(type), size(DataTypeSize(type)), normalized(normalized)
     {
     }
 
@@ -30,7 +30,7 @@ namespace Helios
       case DataType::Bool: return 1;
       }
 
-      CORE_ASSERT(false, "Unknown DataType!");
+      CORE_ASSERT(false, "Unknown DataType!")
       return 0;
     }
 
@@ -42,7 +42,7 @@ namespace Helios
 
     bool normalized = false;
   };
-
+  
   class VertexLayout
   {
   public:

@@ -4,11 +4,30 @@
 
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include <spdlog/sinks/basic_file_sink.h>
+#include <spdlog/pattern_formatter.h>
+
+class star_formatter_flag final : public spdlog::custom_flag_formatter
+{
+public:
+    void format(const spdlog::details::log_msg& msg, const std::tm&, spdlog::memory_buf_t& dest) override
+    {
+      if (msg.level == spdlog::level::err || msg.level == spdlog::level::critical) {
+        std::source_location location = std::source_location::current();
+        std::string some_txt = std::format("{}:{}", Helios::Utils::getFilename(location.file_name()),
+                                           location.line());
+        dest.append(some_txt.c_str(), some_txt.c_str() + some_txt.size());
+      }
+    }
+
+    inline std::unique_ptr<custom_flag_formatter> clone() const override {
+      return spdlog::details::make_unique<star_formatter_flag>();
+    }
+};
 
 namespace Helios
 {
-  std::shared_ptr<spdlog::logger> Log::s_CoreLogger;
-  std::shared_ptr<spdlog::logger> Log::s_ClientLogger;
+  std::shared_ptr<spdlog::logger> Log::s_CoreLogger = nullptr;
+  std::shared_ptr<spdlog::logger> Log::s_ClientLogger = nullptr;
 
   void Log::Init()
   {
@@ -24,14 +43,20 @@ namespace Helios
     // Create the Logs directory if it doesn't exist
     std::filesystem::create_directories("Logs");
 
+    auto file_formatter = std::make_unique<spdlog::pattern_formatter>();
+    file_formatter->add_flag<star_formatter_flag>('*').set_pattern("[%T] [%l] %n: %v %*");
+
+    auto formatter = std::make_unique<spdlog::pattern_formatter>();
+    formatter->add_flag<star_formatter_flag>('*').set_pattern("[%T] [%^%l%$] %n: %v %*");
+
     logSinks.emplace_back(
       std::make_shared<spdlog::sinks::basic_file_sink_mt>(logFilePath, true)
-    )->set_pattern("[%T] [%l] %n: %v");
+    )->set_formatter(std::move(file_formatter));
 
 #ifdef ENABLE_ASSERTS
     logSinks.emplace_back(
       std::make_shared<spdlog::sinks::stdout_color_sink_mt>()
-    )->set_pattern("[%T] [%^%l%$] %n: %v");
+    )->set_formatter(std::move(formatter));
 #endif
 
     s_CoreLogger = std::make_shared<spdlog::logger>("HELIOSENGINE", logSinks.begin(), logSinks.end());

@@ -1,13 +1,9 @@
 #pragma once
 
-#include "Core.h"
-
 #include "pch.h"
 
 namespace Helios
 {
-	class Event;
-
 	struct WindowProps
 	{
 		WindowProps(std::string_view title = "Game", uint32_t width = 1280, uint32_t height = 720)

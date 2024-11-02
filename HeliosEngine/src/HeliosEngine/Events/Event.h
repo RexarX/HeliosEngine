@@ -1,6 +1,10 @@
 #pragma once
 
-#include "pch.h"
+#include "Core.h"
+
+#include <functional>
+#include <string>
+#include <sstream>
 
 namespace Helios
 {
@@ -57,6 +61,7 @@ namespace Helios
 				m_Event.Handled = func(static_cast<const T&>(m_Event));
 				return true;
 			}
+
 			return false;
 		}
 

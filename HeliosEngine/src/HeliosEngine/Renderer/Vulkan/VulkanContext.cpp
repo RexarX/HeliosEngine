@@ -20,22 +20,22 @@ namespace Helios
     if (messageSeverity & VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT) {
       CORE_ERROR("{0} Validation Layer: {1}: {2}", pCallbackData->messageIdNumber,
                                                    pCallbackData->pMessageIdName,
-                                                   pCallbackData->pMessage);
+                                                   pCallbackData->pMessage)
     }
     else if (messageSeverity & VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT) {
       CORE_WARN("{0} Validation Layer: {1}: {2}", pCallbackData->messageIdNumber,
                                                   pCallbackData->pMessageIdName,
-                                                  pCallbackData->pMessage);
+                                                  pCallbackData->pMessage)
     }
     else if (messageType & VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT) {
       CORE_WARN("{0} Validation Layer: Performance warning: {1}: {2}", pCallbackData->messageIdNumber,
                                                                        pCallbackData->pMessageIdName,
-                                                                       pCallbackData->pMessage);
+                                                                       pCallbackData->pMessage)
     }
     else {
       CORE_INFO("{0} Validation Layer: {1}: {2}", pCallbackData->messageIdNumber,
                                                   pCallbackData->pMessageIdName,
-                                                  pCallbackData->pMessage);
+                                                  pCallbackData->pMessage)
     }
 
     return VK_FALSE;
@@ -44,8 +44,8 @@ namespace Helios
   VulkanContext::VulkanContext(GLFWwindow* windowHandle)
     : m_WindowHandle(windowHandle)
   {
-    CORE_ASSERT(m_Instance == nullptr, "Context already exists!");
-    CORE_ASSERT_CRITICAL(windowHandle != nullptr, "Window handle is null!");
+    CORE_ASSERT(m_Instance == nullptr, "Context already exists!")
+    CORE_ASSERT_CRITICAL(windowHandle != nullptr, "Window handle is null!")
 
     m_Instance = this;
   }
@@ -99,7 +99,7 @@ namespace Helios
     vkCmdEndRenderPass(frameData.commandBuffer);
 
     VkResult result = vkEndCommandBuffer(frameData.commandBuffer);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to record command buffer!");
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to record command buffer!")
 
     VkSemaphore waitSemaphores[] = { frameData.presentSemaphore };
     VkSemaphore signalSemaphores[] = { frameData.renderSemaphore };
@@ -117,7 +117,7 @@ namespace Helios
     submitInfo.pSignalSemaphores = signalSemaphores;
 
     result = vkQueueSubmit(m_GraphicsQueue, 1, &submitInfo, frameData.renderFence);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to submit graphics queue!");
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to submit graphics queue!")
 
     VkSwapchainKHR swapChains[] = { m_Swapchain };
 
@@ -130,7 +130,7 @@ namespace Helios
     presentInfo.pImageIndices = &m_ImageIndex;
 
     result = vkQueuePresentKHR(m_GraphicsQueue, &presentInfo);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to present graphics queue!");
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to present graphics queue!")
 
     m_CurrentFrame = (m_CurrentFrame + 1) % MAX_FRAMES_IN_FLIGHT;
   }
@@ -144,26 +144,26 @@ namespace Helios
     VkResult result = vkWaitForFences(m_Device, 1, &frameData.renderFence, VK_TRUE,
                                       std::numeric_limits<uint64_t>::max());
 
-    CORE_ASSERT(result == VK_SUCCESS, "Failed to wait for fence!");
+    CORE_ASSERT(result == VK_SUCCESS, "Failed to wait for fence!")
 
     result = vkResetFences(m_Device, 1, &frameData.renderFence);
-    CORE_ASSERT(result == VK_SUCCESS, "Failed to reset fence!");
+    CORE_ASSERT(result == VK_SUCCESS, "Failed to reset fence!")
 
     result = vkAcquireNextImageKHR(m_Device, m_Swapchain, std::numeric_limits<uint64_t>::max(),
                                    frameData.presentSemaphore, VK_NULL_HANDLE, &m_ImageIndex);
 
     if (result == VK_ERROR_OUT_OF_DATE_KHR) { RecreateSwapchain(); return; }
-    CORE_ASSERT(result == VK_SUCCESS || result == VK_SUBOPTIMAL_KHR, "Failed to acquire next image!");
+    CORE_ASSERT(result == VK_SUCCESS || result == VK_SUBOPTIMAL_KHR, "Failed to acquire next image!")
 
     result = vkResetCommandBuffer(frameData.commandBuffer, 0);
-    CORE_ASSERT(result == VK_SUCCESS, "Failed to reset command buffer!");
+    CORE_ASSERT(result == VK_SUCCESS, "Failed to reset command buffer!")
 
     VkCommandBufferBeginInfo beginInfo{};
     beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
     beginInfo.flags |= VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
 
     result = vkBeginCommandBuffer(frameData.commandBuffer, &beginInfo);
-    CORE_ASSERT(result == VK_SUCCESS, "Failed to begin recording command buffer!");
+    CORE_ASSERT(result == VK_SUCCESS, "Failed to begin recording command buffer!")
 
     std::array<VkClearValue, 2> clearValues{};
     clearValues[0].color = { { 0.0f, 0.0f, 0.0f, 1.0f } };
@@ -195,41 +195,41 @@ namespace Helios
 
     const VulkanResourceManager& resourceManager = static_cast<const VulkanResourceManager&>(manager);
     VkCommandBuffer commandBuffer = m_Frames[m_CurrentFrame].commandBuffer;
-    std::unordered_map<const Effect*, std::vector<const Renderable*>> pipelineGroups;
+    std::unordered_map<const Effect*, std::vector<const RenderObject*>> pipelineGroups;
 
     for (const RenderObject& object : queue.GetRenderObjects()) {
       const Effect& effect = resourceManager.GetEffect(object.renderable, PipelineType::Regular);
-      pipelineGroups[&effect].push_back(&object.renderable);
+      pipelineGroups[&effect].push_back(&object);
     }
 
     const SceneData& sceneData = queue.GetSceneData();
 
-    for (const auto& [effect, renderables] : pipelineGroups) {
+    for (const auto& [effect, renderObjects] : pipelineGroups) {
       vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, effect->pipeline);
-      
-      vkCmdPushConstants(commandBuffer, effect->pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, 0,
+
+      vkCmdPushConstants(commandBuffer, effect->pipelineLayout, VK_PIPELINE_STAGE_VERTEX_SHADER_BIT, 0,
                          sizeof(sceneData), &sceneData);
 
       vkCmdBindDescriptorSets(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, effect->pipelineLayout, 0,
                               effect->descriptorSets.size(), effect->descriptorSets.data(), 0, nullptr);
 
-      for (const Renderable* renderable : renderables) {
-        VulkanMesh* mesh = static_cast<VulkanMesh*>(renderable->mesh.get());
+      for (const RenderObject* renderObject : renderObjects) {
+        VulkanMesh* mesh = static_cast<VulkanMesh*>(renderObject->renderable.mesh.get());
 
         VkDeviceSize offsets[] = { 0 };
         vkCmdBindVertexBuffers(commandBuffer, 0, 1, &mesh->GetVertexBuffer().buffer, offsets);
 
-        if (renderable->mesh->GetIndexCount() > 0) {
+        if (mesh->GetIndexCount() > 0) {
           vkCmdBindIndexBuffer(commandBuffer, mesh->GetIndexBuffer().buffer, 0, VK_INDEX_TYPE_UINT32);
-          vkCmdDrawIndexed(commandBuffer, renderable->mesh->GetIndexCount(), 1, 0, 0, 0);
+          vkCmdDrawIndexed(commandBuffer, mesh->GetIndexCount(), 1, 0, 0, 0);
         } else {
-          vkCmdDraw(commandBuffer, renderable->mesh->GetVertexCount(), 1, 0, 0);
+          vkCmdDraw(commandBuffer, mesh->GetVertexCount(), 1, 0, 0);
         }
       }
     }
   }
 
-  void VulkanContext::SetViewport(const uint32_t width, const uint32_t height, const uint32_t x, const uint32_t y)
+  void VulkanContext::SetViewport(uint32_t width, uint32_t height, uint32_t x, uint32_t y)
   {
     m_SwapchainRecreated = true;
 
@@ -383,7 +383,7 @@ namespace Helios
   void VulkanContext::CreateInstance()
   {
     CORE_ASSERT(!enableValidationLayers || CheckValidationLayerSupport(),
-                "Validation layers requested, but not available!");
+                "Validation layers requested, but not available!")
 
     VkApplicationInfo appInfo{};
     appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
@@ -414,10 +414,10 @@ namespace Helios
     }
 
     VkResult result = vkCreateInstance(&createInfo, nullptr, &m_VkInstance);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create Vulkan instance!");
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create Vulkan instance!")
 
     CORE_INFO("Initializing Vulkan {0}.{1}.{2}!", appInfo.apiVersion >> 22, (appInfo.apiVersion >> 12) &
-                                                  0x3FF, appInfo.apiVersion & 0xFFF);
+                                                  0x3FF, appInfo.apiVersion & 0xFFF)
   }
 
   void VulkanContext::SetupDebugMessenger()
@@ -428,26 +428,26 @@ namespace Helios
     PopulateDebugMessengerCreateInfo(createInfo);
 
     VkResult result = CreateDebugUtilsMessengerEXT(m_VkInstance, &createInfo, nullptr, &m_DebugMessenger);
-    CORE_ASSERT(result == VK_SUCCESS, "Failed to set up debug messenger!");
+    CORE_ASSERT(result == VK_SUCCESS, "Failed to set up debug messenger!")
   }
 
   void VulkanContext::CreateSurface()
   {
     VkResult result = glfwCreateWindowSurface(m_VkInstance, m_WindowHandle, nullptr, &m_Surface);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create window surface!");
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create window surface!")
   }
 
   void VulkanContext::PickPhysicalDevice()
   {
     uint32_t deviceCount = 0;
     VkResult result = vkEnumeratePhysicalDevices(m_VkInstance, &deviceCount, nullptr);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to enumerate physical devices!");
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to enumerate physical devices!")
 
-    CORE_ASSERT_CRITICAL(deviceCount != 0, "Failed to find GPUs with Vulkan support!");
+    CORE_ASSERT_CRITICAL(deviceCount != 0, "Failed to find GPUs with Vulkan support!")
 
     std::vector<VkPhysicalDevice> devices(deviceCount);
     result = vkEnumeratePhysicalDevices(m_VkInstance, &deviceCount, devices.data());
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to enumerate physical devices!");
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to enumerate physical devices!")
 
     std::multimap<uint32_t, VkPhysicalDevice> candidates;
     
@@ -473,11 +473,11 @@ namespace Helios
 
       VkPhysicalDeviceProperties deviceProperties;
       vkGetPhysicalDeviceProperties(m_PhysicalDevice, &deviceProperties);
-      CORE_INFO("Device Info:");
-      CORE_INFO("  GPU: {0}", deviceProperties.deviceName);
-      CORE_INFO("  Version: {0}", deviceProperties.driverVersion);
+      CORE_INFO("Device Info:")
+      CORE_INFO("  GPU: {0}", deviceProperties.deviceName)
+      CORE_INFO("  Version: {0}", deviceProperties.driverVersion)
     } else {
-      CORE_ASSERT_CRITICAL(false, "Failed to find a suitable device!");
+      CORE_ASSERT_CRITICAL(false, "Failed to find a suitable device!")
     }
   }
 
@@ -516,7 +516,7 @@ namespace Helios
     else { createInfo.enabledLayerCount = 0; }
 
     VkResult result = vkCreateDevice(m_PhysicalDevice, &createInfo, nullptr, &m_Device);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create logical device!");
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create logical device!")
 
     vkGetDeviceQueue(m_Device, indices.graphicsFamily.value(), 0, &m_GraphicsQueue);
     vkGetDeviceQueue(m_Device, indices.presentFamily.value(), 0, &m_PresentQueue);
@@ -560,15 +560,15 @@ namespace Helios
     createInfo.oldSwapchain = VK_NULL_HANDLE;
 
     VkResult result = vkCreateSwapchainKHR(m_Device, &createInfo, nullptr, &m_Swapchain);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create swapchain!");
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create swapchain!")
 
     result = vkGetSwapchainImagesKHR(m_Device, m_Swapchain, &imageCount, nullptr);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to get swapchain images!");
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to get swapchain images!")
 
     m_SwapchainImages.resize(imageCount);
 
     result = vkGetSwapchainImagesKHR(m_Device, m_Swapchain, &imageCount, m_SwapchainImages.data());
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to get swapchain images!");
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to get swapchain images!")
 
     m_SwapchainImageFormat = surfaceFormat.format;
     m_SwapchainExtent = extent;
@@ -587,7 +587,7 @@ namespace Helios
       viewInfo.subresourceRange.layerCount = 1;
 
       result = vkCreateImageView(m_Device, &viewInfo, nullptr, &m_SwapchainImageViews[i]);
-      CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create image views!");
+      CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create image view ({})!", i)
     }
   }
 
@@ -599,7 +599,7 @@ namespace Helios
     allocatorInfo.instance = m_VkInstance;
 
     VkResult result = vmaCreateAllocator(&allocatorInfo, &m_Allocator);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create allocator!");
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create allocator!")
   }
 
   void VulkanContext::CreateCommandPool()
@@ -613,7 +613,7 @@ namespace Helios
 
     for (FrameData& frame : m_Frames) {
       VkResult result = vkCreateCommandPool(m_Device, &poolInfo, nullptr, &frame.commandPool);
-      CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create command pool!");
+      CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create command pool!")
 
       m_MainDeletionQueue.PushFunction([this, &frame]() {
         vkDestroyCommandPool(m_Device, frame.commandPool, nullptr);
@@ -621,7 +621,7 @@ namespace Helios
     }
 
     VkResult result = vkCreateCommandPool(m_Device, &poolInfo, nullptr, &m_ImCommandPool);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create command pool!");
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create command pool!")
 
     m_MainDeletionQueue.PushFunction([this]() {
       vkDestroyCommandPool(m_Device, m_ImCommandPool, nullptr);
@@ -639,13 +639,13 @@ namespace Helios
       allocInfo.commandPool = frame.commandPool;
 
       VkResult result = vkAllocateCommandBuffers(m_Device, &allocInfo, &frame.commandBuffer);
-      CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to allocate command buffer!");
+      CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to allocate command buffer!")
     }
 
     allocInfo.commandPool = m_ImCommandPool;
 
     VkResult result = vkAllocateCommandBuffers(m_Device, &allocInfo, &m_ImCommandBuffer);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to allocate command buffer!");
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to allocate command buffer!")
   }
 
   void VulkanContext::CreateSyncObjects()
@@ -662,7 +662,7 @@ namespace Helios
                     vkCreateSemaphore(m_Device, &semaphoreInfo, nullptr, &frame.renderSemaphore) == VK_SUCCESS &&
                     vkCreateFence(m_Device, &fenceInfo, nullptr, &frame.renderFence) == VK_SUCCESS;
 
-      CORE_ASSERT_CRITICAL(result, "Failed to create synchronization objects!");
+      CORE_ASSERT_CRITICAL(result, "Failed to create synchronization objects!")
 
       m_MainDeletionQueue.PushFunction([this, &frame]() {
         vkDestroySemaphore(m_Device, frame.presentSemaphore, nullptr);
@@ -672,7 +672,7 @@ namespace Helios
     }
 
     VkResult result = vkCreateFence(m_Device, &fenceInfo, nullptr, &m_ImFence);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create synchronization objects!");
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create synchronization objects!")
 
     m_MainDeletionQueue.PushFunction([this]() {
       vkDestroyFence(m_Device, m_ImFence, nullptr);
@@ -744,7 +744,7 @@ namespace Helios
     renderPassInfo.pDependencies = dependencies;
 
     VkResult result = vkCreateRenderPass(m_Device, &renderPassInfo, nullptr, &m_RenderPass);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create render pass!");
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create render pass!")
 
     m_MainDeletionQueue.PushFunction([this]() {
       vkDestroyRenderPass(m_Device, m_RenderPass, nullptr);
@@ -781,7 +781,7 @@ namespace Helios
       framebufferInfo.layers = 1;
 
       VkResult result = vkCreateFramebuffer(m_Device, &framebufferInfo, nullptr, &m_SwapchainFramebuffers[i]);
-      CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create framebuffer!");
+      CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create framebuffer!")
     }
   }
 
@@ -817,11 +817,11 @@ namespace Helios
   {
     uint32_t layerCount;
     VkResult result = vkEnumerateInstanceLayerProperties(&layerCount, nullptr);
-    CORE_ASSERT(result == VK_SUCCESS, "Failed to enumerate instance layer properties!");
+    CORE_ASSERT(result == VK_SUCCESS, "Failed to enumerate instance layer properties!")
 
     std::vector<VkLayerProperties> availableLayers(layerCount);
     result = vkEnumerateInstanceLayerProperties(&layerCount, availableLayers.data());
-    CORE_ASSERT(result == VK_SUCCESS, "Failed to enumerate instance layer properties!");
+    CORE_ASSERT(result == VK_SUCCESS, "Failed to enumerate instance layer properties!")
 
     for (const char* layerName : m_ValidationLayers) {
       bool layerFound = false;
@@ -892,11 +892,11 @@ namespace Helios
   {
     uint32_t extensionCount;
     VkResult result = vkEnumerateDeviceExtensionProperties(device, nullptr, &extensionCount, nullptr);
-    CORE_ASSERT(result == VK_SUCCESS, "Failed to enumerate device extension properties!");
+    CORE_ASSERT(result == VK_SUCCESS, "Failed to enumerate device extension properties!")
 
     std::vector<VkExtensionProperties> availableExtensions(extensionCount);
     result = vkEnumerateDeviceExtensionProperties(device, nullptr, &extensionCount, availableExtensions.data());
-    CORE_ASSERT(result == VK_SUCCESS, "Failed to enumerate device extension properties!");
+    CORE_ASSERT(result == VK_SUCCESS, "Failed to enumerate device extension properties!")
 
     std::set<std::string> requiredExtensions(m_DeviceExtensions.begin(), m_DeviceExtensions.end());
 
@@ -925,7 +925,7 @@ namespace Helios
 
       VkBool32 presentSupport = false;
       VkResult result = vkGetPhysicalDeviceSurfaceSupportKHR(device, i, m_Surface, &presentSupport);
-      CORE_ASSERT(result == VK_SUCCESS, "Failed to get physical device surface support!");
+      CORE_ASSERT(result == VK_SUCCESS, "Failed to get physical device surface support!")
 
       if (presentSupport) { indices.presentFamily = i; }
       if (indices.IsComplete()) { break; }
@@ -940,26 +940,26 @@ namespace Helios
     SwapChainSupportDetails details;
 
     VkResult result = vkGetPhysicalDeviceSurfaceCapabilitiesKHR(device, m_Surface, &details.capabilities);
-    CORE_ASSERT(result == VK_SUCCESS, "Failed to get physical device surface capabilities!");
+    CORE_ASSERT(result == VK_SUCCESS, "Failed to get physical device surface capabilities!")
 
     uint32_t formatCount;
     result = vkGetPhysicalDeviceSurfaceFormatsKHR(device, m_Surface, &formatCount, nullptr);
-    CORE_ASSERT(result == VK_SUCCESS, "Failed to get physical device surface formats!");
+    CORE_ASSERT(result == VK_SUCCESS, "Failed to get physical device surface formats!")
 
     if (formatCount != 0) {
       details.formats.resize(formatCount);
       result = vkGetPhysicalDeviceSurfaceFormatsKHR(device, m_Surface, &formatCount, details.formats.data());
-      CORE_ASSERT(result == VK_SUCCESS, "Failed to get physical device surface formats!");
+      CORE_ASSERT(result == VK_SUCCESS, "Failed to get physical device surface formats!")
     }
 
     uint32_t presentModeCount;
     result = vkGetPhysicalDeviceSurfacePresentModesKHR(device, m_Surface, &presentModeCount, nullptr);
-    CORE_ASSERT(result == VK_SUCCESS, "Failed to get physical device surface present modes!");
+    CORE_ASSERT(result == VK_SUCCESS, "Failed to get physical device surface present modes!")
 
     if (presentModeCount != 0) {
       details.presentModes.resize(presentModeCount);
       result = vkGetPhysicalDeviceSurfacePresentModesKHR(device, m_Surface, &presentModeCount, details.presentModes.data());
-      CORE_ASSERT(result == VK_SUCCESS, "Failed to get physical device surface present modes!");
+      CORE_ASSERT(result == VK_SUCCESS, "Failed to get physical device surface present modes!")
     }
 
     return details;
@@ -1051,7 +1051,7 @@ namespace Helios
       }
     }
 
-    CORE_ASSERT(false, "Failed to find supported format!");
+    CORE_ASSERT(false, "Failed to find supported format!")
     return VK_FORMAT_UNDEFINED;
   }
 

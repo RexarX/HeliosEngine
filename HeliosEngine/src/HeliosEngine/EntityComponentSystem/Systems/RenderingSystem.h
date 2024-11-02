@@ -16,14 +16,14 @@ namespace Helios
     RenderingSystem(const RenderingSystem&);
     ~RenderingSystem() = default;
 
-    void OnUpdate(entt::registry& registry);
+    void OnUpdate(const entt::registry& registry);
 
     RenderingSystem& operator=(const RenderingSystem&);
 
     inline ResourceManager& GetResourceManager() { return *m_ResourceManager.get(); }
 
   private:
-    void FillRenderQueue(entt::registry& registry, RenderQueue& renderQueue);
+    void FillRenderQueue(const entt::registry& registry, RenderQueue& renderQueue);
 
   private:
     std::shared_ptr<GraphicsContext> m_GraphicsContext = nullptr;

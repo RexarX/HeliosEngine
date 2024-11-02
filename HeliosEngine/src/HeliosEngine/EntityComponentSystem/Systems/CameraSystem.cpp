@@ -2,9 +2,6 @@
 
 #include "EntityComponentSystem/Components.h"
 
-#include "Events/Event.h"
-#include "Events/ApplicationEvent.h"
-
 #include <glm/gtc/matrix_transform.hpp>
 
 namespace Helios
@@ -24,9 +21,9 @@ namespace Helios
     Transform& cameraTransform = registry.get<Transform>(cameraEntity);
 
     glm::vec3 direction = {
-      cos(glm::radians(cameraTransform.rotation.y)) * cos(glm::radians(cameraTransform.rotation.x)),
-      sin(glm::radians(cameraTransform.rotation.x)),
-      sin(glm::radians(cameraTransform.rotation.y)) * cos(glm::radians(cameraTransform.rotation.x))
+      std::cos(glm::radians(cameraTransform.rotation.y)) * std::cos(glm::radians(cameraTransform.rotation.x)),
+      std::sin(glm::radians(cameraTransform.rotation.x)),
+      std::sin(glm::radians(cameraTransform.rotation.y)) * std::cos(glm::radians(cameraTransform.rotation.x))
     };
 
     glm::vec3 cameraLeft = glm::cross(direction, glm::vec3(0.0f, 1.0f, 0.0f));

@@ -34,6 +34,7 @@ namespace Helios
 
     virtual void SetData(const std::vector<std::byte>& vertexData, uint32_t vertexCount,
                          const std::vector<uint32_t>& indices = {}) = 0;
+                         
     virtual void SetVertexLayout(const VertexLayout& layout) = 0;
 
     virtual inline MeshType GetType() const = 0;
@@ -68,6 +69,6 @@ namespace Helios
     memcpy(m_Data.data() + (*it).offset, &value, (*it).size);
     return;
 
-    CORE_ASSERT(false, "Attribute not found in layout!");
+    CORE_ASSERT(false, "Attribute not found in layout!")
   }
 }

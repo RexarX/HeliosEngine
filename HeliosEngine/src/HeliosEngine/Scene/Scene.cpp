@@ -32,7 +32,7 @@ namespace Helios
   void Scene::OnUpdate(Timestep deltaTime)
   {
     if (!m_Active) { return; }
-    if (!m_Loaded) { CORE_ASSERT(false, "Scene is not loaded!"); return; }
+    if (!m_Loaded) { CORE_ASSERT(false, "Scene is not loaded!") return; }
 
     m_EventSystem.OnUpdate();
     m_ScriptSystem.OnUpdate(m_Registry, deltaTime);
@@ -42,7 +42,7 @@ namespace Helios
   void Scene::OnEvent(const Event& event)
   {
     if (!m_Active) { return; }
-    if (!m_Loaded) { CORE_ASSERT(false, "Scene is not loaded!"); return; }
+    if (!m_Loaded) { CORE_ASSERT(false, "Scene is not loaded!") return; }
 
     m_ScriptSystem.OnEvent(m_Registry, event);
     m_CameraSystem.OnEvent(m_Registry, event);
@@ -51,7 +51,7 @@ namespace Helios
   void Scene::Draw()
   {
     if (!m_Active) { return; }
-    if (!m_Loaded) { CORE_ASSERT(false, "Scene is not loaded!"); return; }
+    if (!m_Loaded) { CORE_ASSERT(false, "Scene is not loaded!") return; }
 
     m_RenderingSystem.OnUpdate(m_Registry);
   }
@@ -60,15 +60,9 @@ namespace Helios
   {
     if (m_Loaded) { return; }
 
-    std::vector<const Renderable*> renderables;
     const auto& view = m_Registry.view<Renderable>();
-    renderables.reserve(view.size());
 
-    for (entt::entity entity : view) {
-      renderables.push_back(&m_Registry.get<Renderable>(entity));
-    }
-
-    m_RenderingSystem.GetResourceManager().InitializeResources(renderables);
+    m_RenderingSystem.GetResourceManager().InitializeResources(m_Registry, { view.begin(), view.end() });
 
     m_Loaded = true;
   }
@@ -78,14 +72,8 @@ namespace Helios
     if (!m_Loaded) { return; }
 
     const auto& view = m_Registry.view<Renderable>();
-    std::vector<const Renderable*> renderables;
-    renderables.reserve(view.size());
 
-    for (entt::entity entity : view) {
-      renderables.push_back(&m_Registry.get<Renderable>(entity));
-    }
-
-    m_RenderingSystem.GetResourceManager().FreeResources(renderables);
+    m_RenderingSystem.GetResourceManager().FreeResources(m_Registry, { view.begin(), view.end() });
 
     m_Active = false;
     m_Loaded = false;
@@ -105,12 +93,13 @@ namespace Helios
 
   void Scene::DestroyEntity(Entity& entity)
   {
-    if (!entity.IsValid()) { CORE_ASSERT(false, "Invalid entity!"); return; }
+    if (!entity.IsValid()) { CORE_ASSERT(false, "Invalid entity!") return; }
     entt::entity entt = entity.GetEntity();
     auto& relationship = m_Registry.get<Relationship>(entt);
     for (Entity* child : relationship.children) {
       DestroyEntity(*child);
     }
+    
     relationship.parent = nullptr;
     relationship.children.clear();
     m_EntityMap.erase(m_Registry.get<ID>(entt).id);
@@ -120,7 +109,7 @@ namespace Helios
   Entity& Scene::FindEntityByUUID(UUID uuid)
   {
     if (!m_EntityMap.contains(uuid)) {
-      CORE_ASSERT(false, "Entity does not exist!");
+      CORE_ASSERT(false, "Entity does not exist!")
       return m_EntityMap[0];
     }
 
@@ -135,7 +124,7 @@ namespace Helios
       }
     }
 
-    CORE_ASSERT(false, "No active camera found!");
+    CORE_ASSERT(false, "No active camera found!")
     return m_EntityMap[0];
   }
 

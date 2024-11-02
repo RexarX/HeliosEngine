@@ -1,12 +1,13 @@
 #pragma once
 
-#include "Events/Event.h"
+#include "pch.h"
 
 #include <entt/entt.hpp>
+#include <stack>
 
 namespace Helios
 {
-  using EventQueue = std::queue<std::unique_ptr<Event>>;
+  using EventQueue = std::vector<const Event*>;
 
   class HELIOSENGINE_API EventSystem
   {
@@ -14,7 +15,7 @@ namespace Helios
     EventSystem() = default;
     EventSystem(const EventSystem&) = delete;
     EventSystem(EventSystem&&) noexcept = default;
-    ~EventSystem() = default;
+    ~EventSystem();
 
     void OnUpdate() { ProcessQueuedEvents(); }
 
@@ -28,9 +29,7 @@ namespace Helios
     void RemoveListener(const void* instance);
 
     template <typename T> requires std::is_base_of<Event, T>::value
-    void PushEvent(const T& event) {
-      m_EventQueues[typeid(T)].push(std::make_unique<T>(event));
-    }
+    void PushEvent(const T& event) { m_EventQueues[typeid(T)].push_back(new T(event)); }
 
     EventSystem& operator=(const EventSystem&) = delete;
     EventSystem& operator=(EventSystem&&) noexcept = default;
@@ -64,7 +63,7 @@ namespace Helios
   void EventSystem::AddListener(const void* instance, const std::function<void(const T&)>& callback)
   {
     m_EventListeners[typeid(T)].emplace_back(instance,
-      [callback](Event& event) { callback(static_cast<T&>(event)); }
+      [callback](const Event& event) { callback(static_cast<const T&>(event)); }
     );
   }
 

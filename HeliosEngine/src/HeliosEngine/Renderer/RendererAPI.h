@@ -13,7 +13,7 @@ namespace Helios
     enum class API
     {
       None = 0,
-      Vulkan = 1
+      Vulkan
     };
 
     virtual ~RendererAPI() = default;

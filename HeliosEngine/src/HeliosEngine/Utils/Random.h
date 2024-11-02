@@ -9,8 +9,7 @@ namespace Helios::Utils
   class HELIOSENGINE_API Random
   {
   public:
-    template<typename T, std::enable_if_t<std::is_integral<T>::value || 
-             std::is_floating_point<T>::value, bool> = true>
+    template<typename T> requires std::is_integral<T>::value || std::is_floating_point<T>::value
     static T GetValue() {
       if constexpr (std::is_integral<T>::value) {
         std::uniform_int_distribution<T> distribution(std::numeric_limits<T>::min(), std::numeric_limits<T>::max());
@@ -21,8 +20,7 @@ namespace Helios::Utils
       }
     }
     
-    template<typename T, std::enable_if_t<std::is_integral<T>::value ||
-             std::is_floating_point<T>::value, bool> = true>
+    template<typename T> requires std::is_integral<T>::value || std::is_floating_point<T>::value
     static T GetValueFromRange(T min, T max) {
       if constexpr (std::is_integral<T>::value) {
         std::uniform_int_distribution<T> distribution(min, max);

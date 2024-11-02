@@ -1,13 +1,11 @@
 #pragma once
 
-#include "HeliosEngine/Timestep.h"
+#include "pch.h"
 
 #include <entt/entt.hpp>
 
 namespace Helios
 {
-  class Event;
-
   class ScriptSystem
   {
   public:

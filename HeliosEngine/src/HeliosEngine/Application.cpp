@@ -1,9 +1,5 @@
 #include "Application.h"
 
-#include "Events/Event.h"
-#include "Events/ApplicationEvent.h"
-#include "Events/KeyEvent.h"
-
 #include "ImGui/ImGuiLayer.h"
 
 #include "Renderer/GraphicsContext.h"
@@ -24,7 +20,7 @@ namespace Helios
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
 #endif
-		
+
 		m_Running = true;
 	}
 
@@ -71,7 +67,7 @@ namespace Helios
 	{
 		double lastFrameUpdateTime = 0.0;
 		m_FramerateLimit = m_Window->GetFramerate() == 0.0 ? 0.0 : 1.0 / m_Window->GetFramerate();
-
+		
 		m_Timer.Start();
 		while (m_Running) {
 			m_Timer.Stop();

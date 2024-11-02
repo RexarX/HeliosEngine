@@ -11,7 +11,7 @@ namespace Helios
 
   std::shared_ptr<GraphicsContext>& GraphicsContext::Create(void* window)
   {
-    CORE_ASSERT(m_Instance == nullptr, "GraphicsContext is already created!");
+    CORE_ASSERT(m_Instance == nullptr, "GraphicsContext is already created!")
 
     m_Instance = std::make_shared<GraphicsContext>(window);
     return m_Instance;
@@ -19,7 +19,7 @@ namespace Helios
 
   std::shared_ptr<GraphicsContext>& GraphicsContext::Get()
   {
-    CORE_ASSERT(m_Instance != nullptr, "GraphicsContext is not created!");
+    CORE_ASSERT(m_Instance != nullptr, "GraphicsContext is not created!")
     return m_Instance;
   }
 }
