@@ -60,7 +60,7 @@ set(ALL_FILES
 
 add_library(${PROJECT_NAME} SHARED ${ALL_FILES})
 
-set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 20 UNITY_BUILD ON)
+set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 23 UNITY_BUILD ON)
 
 target_precompile_headers(${PROJECT_NAME} PRIVATE
     "$<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/src/pch.h>"
@@ -116,6 +116,7 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
     $<$<CONFIG:Release>:
         "RELEASE_MODE;"
     >
+    "BUILD_SHARED;"
     "GLFW_INCLUDE_NONE;"
     "UNICODE;"
     "_UNICODE;"
@@ -123,9 +124,9 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 )
 
 if(WIN32)
-	target_compile_definitions(${PROJECT_NAME} PRIVATE "PLATFORM_WINDOWS;" PRIVATE "BUILD_SHARED;")
+	target_compile_definitions(${PROJECT_NAME} PRIVATE "PLATFORM_WINDOWS;")
 elseif(UNIX)
-	target_compile_definitions(${PROJECT_NAME} PRIVATE "PLATFORM_LINUX;" PRIVATE "BUILD_SHARED;")
+	target_compile_definitions(${PROJECT_NAME} PRIVATE "PLATFORM_LINUX;")
 endif()
 
 target_compile_options(${PROJECT_NAME} PRIVATE
@@ -224,6 +225,11 @@ elseif (ENABLE_SIMD_AVX2)
     )
 endif()
 
+target_compile_definitions(${PROJECT_NAME} PRIVATE
+    $<$<BOOL:ENABLE_PROFILING>:"ENABLE_PROFILING">
+)
+
+find_package(Boost REQUIRED COMPONENTS uuid)
 find_package(Vulkan REQUIRED)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
@@ -233,6 +239,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     objloader
     EnTT::EnTT
     Vulkan::Vulkan
+    Boost::uuid
 )
 
 set(ADDITIONAL_LIBRARY_DEPENDENCIES

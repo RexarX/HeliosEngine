@@ -1,15 +1,10 @@
 #include "CameraController.h"
 
-void CameraController::OnAttach()
-{
-}
+void CameraController::OnAttach() {}
 
-void CameraController::OnDetach()
-{
-}
+void CameraController::OnDetach() {}
 
-void CameraController::OnUpdate(Helios::Timestep deltaTime)
-{
+void CameraController::OnUpdate(Helios::Timestep deltaTime) {
   if (!GetComponent<Helios::Camera>().currect) { return; }
   Helios::Transform& transform = GetComponent<Helios::Transform>();
 
@@ -49,16 +44,14 @@ void CameraController::OnUpdate(Helios::Timestep deltaTime)
   transform.rotation = glm::vec3(m_Pitch, m_Yaw, 0.0f);
 }
 
-void CameraController::OnEvent(const Helios::Event& event)
-{
+void CameraController::OnEvent(Helios::Event& event) {
   Helios::EventDispatcher dispatcher(event);
-  dispatcher.Dispatch<Helios::MouseMovedEvent>(BIND_FN(CameraController::OnMouseMovedEvent));
-  dispatcher.Dispatch<Helios::WindowFocusedEvent>(BIND_FN(CameraController::OnWindowFocusedEvent));
+  dispatcher.Dispatch<Helios::MouseMoveEvent>(BIND_FN(CameraController::OnMouseMoveEvent));
+  dispatcher.Dispatch<Helios::WindowFocusEvent>(BIND_FN(CameraController::OnWindowFocusEvent));
   dispatcher.Dispatch<Helios::WindowLostFocusEvent>(BIND_FN(CameraController::OnWindowLostFocusEvent));
 }
 
-bool CameraController::OnMouseMovedEvent(const Helios::MouseMovedEvent& event)
-{
+bool CameraController::OnMouseMoveEvent(Helios::MouseMoveEvent& event) {
   if (m_FirstInput) {
     m_LastX = event.GetX();
     m_LastY = event.GetY();
@@ -85,14 +78,12 @@ bool CameraController::OnMouseMovedEvent(const Helios::MouseMovedEvent& event)
   return true;
 }
 
-bool CameraController::OnWindowFocusedEvent(const Helios::WindowFocusedEvent& event)
-{
+bool CameraController::OnWindowFocusEvent(Helios::WindowFocusEvent& event) {
   m_FirstInput = true;
   return true;
 }
 
-bool CameraController::OnWindowLostFocusEvent(const Helios::WindowLostFocusEvent& event)
-{
+bool CameraController::OnWindowLostFocusEvent(Helios::WindowLostFocusEvent& event) {
   m_FirstInput = true;
   return true;
 }

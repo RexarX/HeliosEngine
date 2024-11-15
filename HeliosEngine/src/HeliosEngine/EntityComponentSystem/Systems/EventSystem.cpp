@@ -1,38 +1,34 @@
 #include "EventSystem.h"
 
-namespace Helios
-{
-  EventSystem::~EventSystem()
-  {
-    for (auto& [type, queue] : m_EventQueues) {
-      for (const Event* event : queue) {
+namespace Helios {
+  EventSystem::~EventSystem() {
+    for (const auto& [type, events] : m_Events) {
+      for (const Event* event : events) {
         delete event;
       }
     }
   }
 
-  void EventSystem::ProcessQueuedEvents()
-  {
-    //Timer timer, timerEvent;
-    //timer.Start();
-    for (auto& [type, queue] : m_EventQueues) {
-      auto it = m_EventListeners.find(type);
-      //timerEvent.Start();
-      //CORE_TRACE("{0} event count: {1}", type.name(), queue.size());
-      if (it != m_EventListeners.end() && !it->second.empty()) {
-        for (const Event* event : queue) {
-          for (const Listener& listener : it->second) {
-            listener.callback(*event);
-          }
-          delete event;
-        }
-      }
+  void EventSystem::OnUpdate() {
+    PROFILE_FUNCTION();
+    ProcessEvents();
+  }
 
-      queue.clear();
-      //timerEvent.Stop();
-      //CORE_TRACE("{0} took: {1} us", type.name(), timerEvent.GetElapsedMicroSec());
-    }
-    //timer.Stop();
-    //CORE_TRACE("Total event processing took: {0} us", timer.GetElapsedMicroSec());
+  void EventSystem::ProcessEvents() {
+    std::for_each(std::execution::par, m_Events.begin(), m_Events.end(),
+      [this](auto& pair) {
+        std::vector<Event*>& events = pair.second;
+        EventType type = pair.first;
+        auto it = m_EventListeners.find(type);
+        if (it != m_EventListeners.end() && !it->second.empty()) {
+          for (Event* event : events) {
+            for (const Listener& listener : it->second) {
+              listener.callback(*event);
+            }
+            delete event;
+          }
+        }
+        events.clear();
+      });
   }
 }

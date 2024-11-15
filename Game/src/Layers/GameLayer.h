@@ -2,8 +2,7 @@
 
 #include <HeliosEngine.h>
 
-class GameLayer final : public Helios::Layer
-{
+class GameLayer final : public Helios::Layer {
 public:
 	GameLayer() : Helios::Layer("Game") {}
 	virtual ~GameLayer() = default;
@@ -11,7 +10,8 @@ public:
 	void OnAttach() override;
 	void OnDetach() override;
 	void OnUpdate(Helios::Timestep ts) override;
-	void OnEvent(const Helios::Event& event) override;
+	void OnEvent(Helios::Event& event) override;
+
 	void Draw() override;
 	void OnImGuiRender(ImGuiContext* context) override;
 };

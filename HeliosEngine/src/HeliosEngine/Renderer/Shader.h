@@ -2,26 +2,22 @@
 
 #include "pch.h"
 
-namespace Helios
-{
-  enum class ShaderStage
-  {
-    Vertex,
-    Fragment,
-    Compute
-  };
-
-  struct ShaderInfo
-  {
-    ShaderStage stage;
-    std::string path;
-  };
-
-  class HELIOSENGINE_API Shader
-  {
+namespace Helios {
+  class HELIOSENGINE_API Shader {
   public:
+    enum class Stage {
+      Vertex,
+      Fragment,
+      Compute
+    };
+
+    struct Info {
+      Stage stage;
+      std::string path;
+    };
+
     virtual ~Shader() = default;
 
-    static std::shared_ptr<Shader> Create(const std::initializer_list<ShaderInfo>& shaderInfos);
+    static std::shared_ptr<Shader> Create(const std::initializer_list<Info>& shaderInfos);
   };
 }

@@ -1,17 +1,14 @@
 #include "Scene.h"
 
-namespace Helios
-{
+namespace Helios {
   Scene::Scene()
-    : m_RootEntity(CreateEntity("Root"))
-  {
-    m_EntityMap[0] = Entity();
+    : m_RootEntity(CreateEntity("Root")) {
+    m_InvalidEntity = Entity();
   }
 
   Scene::Scene(std::string_view name)
-    : m_Name(name), m_RootEntity(CreateEntity(name))
-  {
-    m_EntityMap[0] = Entity();
+    : m_Name(name), m_RootEntity(CreateEntity("Root")) {
+    m_InvalidEntity = Entity();
   }
 
   Scene::Scene(Scene&& other) noexcept
@@ -19,8 +16,9 @@ namespace Helios
     m_Registry(std::move(other.m_Registry)), m_EntityMap(std::move(other.m_EntityMap)),
     m_RootEntity(std::move(other.m_RootEntity)), m_EventSystem(std::move(other.m_EventSystem)),
     m_ScriptSystem(std::move(other.m_ScriptSystem)), m_CameraSystem(std::move(other.m_CameraSystem)),
-    m_RenderingSystem(std::move(other.m_RenderingSystem))
-  {
+    m_RenderingSystem(std::move(other.m_RenderingSystem)) {
+    m_InvalidEntity = Entity();
+
     other.m_Active = false;
     other.m_Loaded = false;
     other.m_Name.clear();
@@ -29,58 +27,50 @@ namespace Helios
     other.m_RootEntity = Entity();
   }
 
-  void Scene::OnUpdate(Timestep deltaTime)
-  {
+  void Scene::OnUpdate(Timestep deltaTime) {
     if (!m_Active) { return; }
-    if (!m_Loaded) { CORE_ASSERT(false, "Scene is not loaded!") return; }
+    if (!m_Loaded) { CORE_ASSERT(false, "Scene is not loaded!"); return; }
 
     m_EventSystem.OnUpdate();
     m_ScriptSystem.OnUpdate(m_Registry, deltaTime);
     m_CameraSystem.OnUpdate(m_Registry);
   }
 
-  void Scene::OnEvent(const Event& event)
-  {
+  void Scene::OnEvent(Event& event) {
     if (!m_Active) { return; }
-    if (!m_Loaded) { CORE_ASSERT(false, "Scene is not loaded!") return; }
+    if (!m_Loaded) { CORE_ASSERT(false, "Scene is not loaded!"); return; }
 
     m_ScriptSystem.OnEvent(m_Registry, event);
     m_CameraSystem.OnEvent(m_Registry, event);
   }
 
-  void Scene::Draw()
-  {
+  void Scene::Draw() {
     if (!m_Active) { return; }
-    if (!m_Loaded) { CORE_ASSERT(false, "Scene is not loaded!") return; }
+    if (!m_Loaded) { CORE_ASSERT(false, "Scene is not loaded!"); return; }
 
     m_RenderingSystem.OnUpdate(m_Registry);
   }
   
-  void Scene::Load()
-  {
+  void Scene::Load() {
     if (m_Loaded) { return; }
 
     const auto& view = m_Registry.view<Renderable>();
-
     m_RenderingSystem.GetResourceManager().InitializeResources(m_Registry, { view.begin(), view.end() });
 
     m_Loaded = true;
   }
 
-  void Scene::Unload()
-  {
+  void Scene::Unload() {
     if (!m_Loaded) { return; }
 
     const auto& view = m_Registry.view<Renderable>();
-
     m_RenderingSystem.GetResourceManager().FreeResources(m_Registry, { view.begin(), view.end() });
 
     m_Active = false;
     m_Loaded = false;
   }
 
-  Entity& Scene::CreateEntity(std::string_view name)
-  {
+  Entity& Scene::CreateEntity(std::string_view name) {
     entt::entity entity = m_Registry.create();
     UUID id;
 
@@ -91,9 +81,8 @@ namespace Helios
     return m_EntityMap.emplace(id, Entity(entity, this)).first->second;
   }
 
-  void Scene::DestroyEntity(Entity& entity)
-  {
-    if (!entity.IsValid()) { CORE_ASSERT(false, "Invalid entity!") return; }
+  void Scene::DestroyEntity(Entity& entity) {
+    if (!entity.IsValid()) { CORE_ASSERT(false, "Invalid entity!"); return; }
     entt::entity entt = entity.GetEntity();
     auto& relationship = m_Registry.get<Relationship>(entt);
     for (Entity* child : relationship.children) {
@@ -106,30 +95,27 @@ namespace Helios
     m_Registry.destroy(entt);
   }
 
-  Entity& Scene::FindEntityByUUID(UUID uuid)
-  {
+  Entity& Scene::FindEntityByUUID(UUID uuid) {
     if (!m_EntityMap.contains(uuid)) {
-      CORE_ASSERT(false, "Entity does not exist!")
-      return m_EntityMap[0];
+      CORE_ASSERT(false, "Entity does not exist!");
+      return m_InvalidEntity;
     }
 
     return m_EntityMap[uuid];
   }
 
-  Entity& Scene::GetActiveCameraEntity()
-  {
+  Entity& Scene::GetActiveCameraEntity() {
     for (entt::entity entity : m_Registry.view<Camera>()) {
       if (m_Registry.get<Camera>(entity).currect) {
         return m_EntityMap[m_Registry.get<ID>(entity).id];
       }
     }
 
-    CORE_ASSERT(false, "No active camera found!")
-    return m_EntityMap[0];
+    CORE_ASSERT(false, "No active camera found!");
+    return m_InvalidEntity;
   }
 
-  Scene& Scene::operator=(Scene&& other) noexcept
-  {
+  Scene& Scene::operator=(Scene&& other) noexcept {
     if (this != &other) {
       m_Name = std::move(other.m_Name);
       m_Active = other.m_Active;

@@ -1,9 +1,9 @@
 #pragma once
 
-namespace Helios
-{
-	class Timestep
-	{
+#include "Core.h"
+
+namespace Helios {
+	class HELIOSENGINE_API Timestep {
 	public:
 		Timestep(double time = 0.0) : m_Time(time) {}
 

@@ -2,20 +2,17 @@
 
 #include "pch.h"
 
-namespace Helios
-{
-  enum class ImageFormat
-  {
-    None = 0,
-    R8,
-    RGB8,
-    RGBA8,
-    RGBA32F
-  };
-
-  class HELIOSENGINE_API Texture
-  {
+namespace Helios {
+  class HELIOSENGINE_API Texture {
   public:
+    enum class ImageFormat {
+      None = 0,
+      R8,
+      RGB8,
+      RGBA8,
+      RGBA32F
+    };
+
     virtual ~Texture() = default;
 
     virtual void Load() = 0;

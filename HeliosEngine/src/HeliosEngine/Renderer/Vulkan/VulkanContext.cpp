@@ -8,50 +8,18 @@
 #include <backends/imgui_impl_glfw.h>
 #include <backends/imgui_impl_vulkan.h>
 
-namespace Helios
-{
-  VulkanContext* VulkanContext::m_Instance = nullptr;
-
-  static VKAPI_ATTR VkBool32 VKAPI_CALL DebugCallback(const VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
-                                                      const VkDebugUtilsMessageTypeFlagsEXT messageType,
-                                                      const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData,
-                                                      void* pUserData)
-  {
-    if (messageSeverity & VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT) {
-      CORE_ERROR("{0} Validation Layer: {1}: {2}", pCallbackData->messageIdNumber,
-                                                   pCallbackData->pMessageIdName,
-                                                   pCallbackData->pMessage)
-    }
-    else if (messageSeverity & VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT) {
-      CORE_WARN("{0} Validation Layer: {1}: {2}", pCallbackData->messageIdNumber,
-                                                  pCallbackData->pMessageIdName,
-                                                  pCallbackData->pMessage)
-    }
-    else if (messageType & VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT) {
-      CORE_WARN("{0} Validation Layer: Performance warning: {1}: {2}", pCallbackData->messageIdNumber,
-                                                                       pCallbackData->pMessageIdName,
-                                                                       pCallbackData->pMessage)
-    }
-    else {
-      CORE_INFO("{0} Validation Layer: {1}: {2}", pCallbackData->messageIdNumber,
-                                                  pCallbackData->pMessageIdName,
-                                                  pCallbackData->pMessage)
-    }
-
-    return VK_FALSE;
-  }
-
+namespace Helios {
   VulkanContext::VulkanContext(GLFWwindow* windowHandle)
-    : m_WindowHandle(windowHandle)
-  {
-    CORE_ASSERT(m_Instance == nullptr, "Context already exists!")
-    CORE_ASSERT_CRITICAL(windowHandle != nullptr, "Window handle is null!")
+    : m_WindowHandle(windowHandle) {
+    CORE_ASSERT(m_Instance == nullptr, "Context already exists!");
+    CORE_ASSERT_CRITICAL(windowHandle != nullptr, "Window handle is null!");
 
     m_Instance = this;
   }
 
-  void VulkanContext::Init()
-  {
+  void VulkanContext::Init() {
+    PROFILE_FUNCTION();
+
     CreateInstance();
     SetupDebugMessenger();
     CreateSurface();
@@ -67,20 +35,17 @@ namespace Helios
     CreateFramebuffers();
   }
 
-  void VulkanContext::Shutdown()
-  {
+  void VulkanContext::Shutdown() {
+    PROFILE_FUNCTION();
+
     vkDeviceWaitIdle(m_Device);
 
     ShutdownImGui();
-
     m_MainDeletionQueue.Flush();
-
     CleanupSwapchain();
 
     vmaDestroyAllocator(m_Allocator);
-
     vkDestroyDevice(m_Device, nullptr);
-
     vkDestroySurfaceKHR(m_VkInstance, m_Surface, nullptr);
 
     if (enableValidationLayers) {
@@ -90,8 +55,9 @@ namespace Helios
     vkDestroyInstance(m_VkInstance, nullptr);
   }
 
-  void VulkanContext::Update()
-  {
+  void VulkanContext::Update() {
+    PROFILE_FUNCTION();
+
     if (m_SwapchainRecreated) { m_SwapchainRecreated = false; return; }
     
     FrameData& frameData = m_Frames[m_CurrentFrame];
@@ -99,7 +65,7 @@ namespace Helios
     vkCmdEndRenderPass(frameData.commandBuffer);
 
     VkResult result = vkEndCommandBuffer(frameData.commandBuffer);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to record command buffer!")
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to record command buffer!");
 
     VkSemaphore waitSemaphores[] = { frameData.presentSemaphore };
     VkSemaphore signalSemaphores[] = { frameData.renderSemaphore };
@@ -117,7 +83,7 @@ namespace Helios
     submitInfo.pSignalSemaphores = signalSemaphores;
 
     result = vkQueueSubmit(m_GraphicsQueue, 1, &submitInfo, frameData.renderFence);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to submit graphics queue!")
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to submit graphics queue!");
 
     VkSwapchainKHR swapChains[] = { m_Swapchain };
 
@@ -130,13 +96,14 @@ namespace Helios
     presentInfo.pImageIndices = &m_ImageIndex;
 
     result = vkQueuePresentKHR(m_GraphicsQueue, &presentInfo);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to present graphics queue!")
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to present graphics queue!");
 
     m_CurrentFrame = (m_CurrentFrame + 1) % MAX_FRAMES_IN_FLIGHT;
   }
 
-  void VulkanContext::BeginFrame()
-  {
+  void VulkanContext::BeginFrame() {
+    PROFILE_FUNCTION();
+
     if (m_SwapchainRecreated) { RecreateSwapchain(); return; }
 
     FrameData& frameData = m_Frames[m_CurrentFrame];
@@ -144,26 +111,26 @@ namespace Helios
     VkResult result = vkWaitForFences(m_Device, 1, &frameData.renderFence, VK_TRUE,
                                       std::numeric_limits<uint64_t>::max());
 
-    CORE_ASSERT(result == VK_SUCCESS, "Failed to wait for fence!")
+    CORE_ASSERT(result == VK_SUCCESS, "Failed to wait for fence!");
 
     result = vkResetFences(m_Device, 1, &frameData.renderFence);
-    CORE_ASSERT(result == VK_SUCCESS, "Failed to reset fence!")
+    CORE_ASSERT(result == VK_SUCCESS, "Failed to reset fence!");
 
     result = vkAcquireNextImageKHR(m_Device, m_Swapchain, std::numeric_limits<uint64_t>::max(),
                                    frameData.presentSemaphore, VK_NULL_HANDLE, &m_ImageIndex);
 
     if (result == VK_ERROR_OUT_OF_DATE_KHR) { RecreateSwapchain(); return; }
-    CORE_ASSERT(result == VK_SUCCESS || result == VK_SUBOPTIMAL_KHR, "Failed to acquire next image!")
+    CORE_ASSERT(result == VK_SUCCESS || result == VK_SUBOPTIMAL_KHR, "Failed to acquire next image!");
 
     result = vkResetCommandBuffer(frameData.commandBuffer, 0);
-    CORE_ASSERT(result == VK_SUCCESS, "Failed to reset command buffer!")
+    CORE_ASSERT(result == VK_SUCCESS, "Failed to reset command buffer!");
 
     VkCommandBufferBeginInfo beginInfo{};
     beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
     beginInfo.flags |= VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
 
     result = vkBeginCommandBuffer(frameData.commandBuffer, &beginInfo);
-    CORE_ASSERT(result == VK_SUCCESS, "Failed to begin recording command buffer!")
+    CORE_ASSERT(result == VK_SUCCESS, "Failed to begin recording command buffer!");
 
     std::array<VkClearValue, 2> clearValues{};
     clearValues[0].color = { { 0.0f, 0.0f, 0.0f, 1.0f } };
@@ -184,25 +151,27 @@ namespace Helios
     vkCmdBeginRenderPass(frameData.commandBuffer, &renderPassInfo, VK_SUBPASS_CONTENTS_INLINE);
   }
 
-  void VulkanContext::EndFrame()
-  {
+  void VulkanContext::EndFrame() {
+    PROFILE_FUNCTION();
+
     if (m_SwapchainRecreated) { return; }
   }
 
-  void VulkanContext::Record(const RenderQueue& queue, const ResourceManager& manager)
-  {
+  void VulkanContext::Record(const RenderQueue& queue, const ResourceManager& manager) {
+    PROFILE_FUNCTION();
+
     if (m_SwapchainRecreated) { return; }
 
     const VulkanResourceManager& resourceManager = static_cast<const VulkanResourceManager&>(manager);
     VkCommandBuffer commandBuffer = m_Frames[m_CurrentFrame].commandBuffer;
-    std::unordered_map<const Effect*, std::vector<const RenderObject*>> pipelineGroups;
+    std::unordered_map<const VulkanResourceManager::VulkanEffect*, std::vector<const RenderQueue::RenderObject*>> pipelineGroups;
 
-    for (const RenderObject& object : queue.GetRenderObjects()) {
-      const Effect& effect = resourceManager.GetEffect(object.renderable, PipelineType::Regular);
+    for (const RenderQueue::RenderQueue::RenderObject& object : queue.GetRenderObjects()) {
+      const VulkanResourceManager::VulkanEffect& effect = resourceManager.GetEffect(object.renderable, ResourceManager::PipelineType::Regular);
       pipelineGroups[&effect].push_back(&object);
     }
 
-    const SceneData& sceneData = queue.GetSceneData();
+    const RenderQueue::SceneData& sceneData = queue.GetSceneData();
 
     for (const auto& [effect, renderObjects] : pipelineGroups) {
       vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, effect->pipeline);
@@ -213,7 +182,7 @@ namespace Helios
       vkCmdBindDescriptorSets(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, effect->pipelineLayout, 0,
                               effect->descriptorSets.size(), effect->descriptorSets.data(), 0, nullptr);
 
-      for (const RenderObject* renderObject : renderObjects) {
+      for (const RenderQueue::RenderObject* renderObject : renderObjects) {
         VulkanMesh* mesh = static_cast<VulkanMesh*>(renderObject->renderable.mesh.get());
 
         VkDeviceSize offsets[] = { 0 };
@@ -229,8 +198,7 @@ namespace Helios
     }
   }
 
-  void VulkanContext::SetViewport(uint32_t width, uint32_t height, uint32_t x, uint32_t y)
-  {
+  void VulkanContext::SetViewport(uint32_t width, uint32_t height, uint32_t x, uint32_t y) {
     m_SwapchainRecreated = true;
 
     m_Viewport.x = static_cast<float>(x);
@@ -244,10 +212,10 @@ namespace Helios
     m_Scissor.extent = { width, height };
   }
 
-  void VulkanContext::InitImGui()
-  {
-    VkDescriptorPoolSize pool_sizes[] =
-    {
+  void VulkanContext::InitImGui() {
+    PROFILE_FUNCTION();
+
+    VkDescriptorPoolSize pool_sizes[] = {
       { VK_DESCRIPTOR_TYPE_SAMPLER, 1000 },
       { VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1000 },
       { VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE, 1000 },
@@ -289,17 +257,19 @@ namespace Helios
     ImGui_ImplVulkan_CreateFontsTexture();
   }
 
-  void VulkanContext::ShutdownImGui()
-  {
+  void VulkanContext::ShutdownImGui() {
 #ifndef RELEASE_MODE
+    PROFILE_FUNCTION();
+
     ImGui_ImplVulkan_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     vkDestroyDescriptorPool(m_Device, m_ImGuiPool, nullptr);
 #endif
   }
 
-  void VulkanContext::BeginFrameImGui()
-  {
+  void VulkanContext::BeginFrameImGui() { 
+    PROFILE_FUNCTION();
+
     if (m_SwapchainRecreated) {
       ImGui::NewFrame();
       ImGui::DockSpaceOverViewport(ImGui::GetMainViewport(), ImGuiDockNodeFlags_PassthruCentralNode);
@@ -313,8 +283,9 @@ namespace Helios
     ImGui::DockSpaceOverViewport(ImGui::GetMainViewport(), ImGuiDockNodeFlags_PassthruCentralNode);
   }
 
-  void VulkanContext::EndFrameImGui()
-  {
+  void VulkanContext::EndFrameImGui() {
+    PROFILE_FUNCTION();
+
     if (m_SwapchainRecreated) {
       ImGui::Render();
 
@@ -322,6 +293,7 @@ namespace Helios
       ImGui::UpdatePlatformWindows();
       ImGui::RenderPlatformWindowsDefault();
 #endif
+
       return;
     }
 
@@ -338,14 +310,14 @@ namespace Helios
     glfwMakeContextCurrent(backupContext);
   }
 
-  void VulkanContext::SetVSync(const bool enabled)
-  {
+  void VulkanContext::SetVSync(const bool enabled) {
     m_Vsync = enabled;
     RecreateSwapchain();
   }
 
-  void VulkanContext::ImmediateSubmit(std::function<void(VkCommandBuffer cmd)>&& function)
-  {
+  void VulkanContext::ImmediateSubmit(std::function<void(const VkCommandBuffer cmd)>&& function) {
+    PROFILE_FUNCTION();
+
     vkResetFences(m_Device, 1, &m_ImFence);
     vkResetCommandBuffer(m_ImCommandBuffer, 0);
 
@@ -373,23 +345,23 @@ namespace Helios
     vkWaitForFences(m_Device, 1, &m_ImFence, true, std::numeric_limits<uint64_t>::max());
   }
 
-  inline const VkPhysicalDeviceLimits& VulkanContext::GetPhysicalDeviceLimits() const
-  {
+  inline const VkPhysicalDeviceLimits& VulkanContext::GetPhysicalDeviceLimits() const {
     static VkPhysicalDeviceProperties properties;
     vkGetPhysicalDeviceProperties(m_PhysicalDevice, &properties);
     return properties.limits;
   }
 
-  void VulkanContext::CreateInstance()
-  {
+  void VulkanContext::CreateInstance() {
+    PROFILE_FUNCTION();
+
     CORE_ASSERT(!enableValidationLayers || CheckValidationLayerSupport(),
-                "Validation layers requested, but not available!")
+                "Validation layers requested, but not available!");
 
     VkApplicationInfo appInfo{};
     appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
     appInfo.pApplicationName = "Helios Engine";
     appInfo.applicationVersion = VK_MAKE_API_VERSION(1, 0, 0, 0);
-    appInfo.pEngineName = "Helios";
+    appInfo.pEngineName = "Helios Engine";
     appInfo.engineVersion = VK_MAKE_API_VERSION(1, 0, 0, 0);
     appInfo.apiVersion = VK_API_VERSION_1_1;
 
@@ -414,14 +386,15 @@ namespace Helios
     }
 
     VkResult result = vkCreateInstance(&createInfo, nullptr, &m_VkInstance);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create Vulkan instance!")
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create Vulkan instance!");
 
-    CORE_INFO("Initializing Vulkan {0}.{1}.{2}!", appInfo.apiVersion >> 22, (appInfo.apiVersion >> 12) &
-                                                  0x3FF, appInfo.apiVersion & 0xFFF)
+    CORE_INFO("Initializing Vulkan {}.{}.{}!", appInfo.apiVersion >> 22, (appInfo.apiVersion >> 12)
+                                               & 0x3FF, appInfo.apiVersion & 0xFFF);
   }
 
-  void VulkanContext::SetupDebugMessenger()
-  {
+  void VulkanContext::SetupDebugMessenger() {
+    PROFILE_FUNCTION();
+
     if (!enableValidationLayers) { return; }
 
     VkDebugUtilsMessengerCreateInfoEXT createInfo{};
@@ -431,23 +404,25 @@ namespace Helios
     CORE_ASSERT(result == VK_SUCCESS, "Failed to set up debug messenger!")
   }
 
-  void VulkanContext::CreateSurface()
-  {
+  void VulkanContext::CreateSurface() {
+    PROFILE_FUNCTION();
+
     VkResult result = glfwCreateWindowSurface(m_VkInstance, m_WindowHandle, nullptr, &m_Surface);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create window surface!")
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create window surface!");
   }
 
-  void VulkanContext::PickPhysicalDevice()
-  {
+  void VulkanContext::PickPhysicalDevice() {
+    PROFILE_FUNCTION();
+
     uint32_t deviceCount = 0;
     VkResult result = vkEnumeratePhysicalDevices(m_VkInstance, &deviceCount, nullptr);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to enumerate physical devices!")
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to enumerate physical devices!");
 
-    CORE_ASSERT_CRITICAL(deviceCount != 0, "Failed to find GPUs with Vulkan support!")
+    CORE_ASSERT_CRITICAL(deviceCount != 0, "Failed to find GPUs with Vulkan support!");
 
     std::vector<VkPhysicalDevice> devices(deviceCount);
     result = vkEnumeratePhysicalDevices(m_VkInstance, &deviceCount, devices.data());
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to enumerate physical devices!")
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to enumerate physical devices!");
 
     std::multimap<uint32_t, VkPhysicalDevice> candidates;
     
@@ -473,16 +448,17 @@ namespace Helios
 
       VkPhysicalDeviceProperties deviceProperties;
       vkGetPhysicalDeviceProperties(m_PhysicalDevice, &deviceProperties);
-      CORE_INFO("Device Info:")
-      CORE_INFO("  GPU: {0}", deviceProperties.deviceName)
-      CORE_INFO("  Version: {0}", deviceProperties.driverVersion)
+      CORE_INFO("Device Info:");
+      CORE_INFO("  GPU: {0}", deviceProperties.deviceName);
+      CORE_INFO("  Version: {0}", deviceProperties.driverVersion);
     } else {
-      CORE_ASSERT_CRITICAL(false, "Failed to find a suitable device!")
+      CORE_ASSERT_CRITICAL(false, "Failed to find a suitable device!");
     }
   }
 
-  void VulkanContext::CreateLogicalDevice()
-  {
+  void VulkanContext::CreateLogicalDevice() {
+    PROFILE_FUNCTION();
+
     QueueFamilyIndices indices = FindQueueFamilies(m_PhysicalDevice);
 
     std::vector<VkDeviceQueueCreateInfo> queueCreateInfos;
@@ -516,14 +492,15 @@ namespace Helios
     else { createInfo.enabledLayerCount = 0; }
 
     VkResult result = vkCreateDevice(m_PhysicalDevice, &createInfo, nullptr, &m_Device);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create logical device!")
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create logical device!");
 
     vkGetDeviceQueue(m_Device, indices.graphicsFamily.value(), 0, &m_GraphicsQueue);
     vkGetDeviceQueue(m_Device, indices.presentFamily.value(), 0, &m_PresentQueue);
   }
 
-  void VulkanContext::CreateSwapchain()
-  {
+  void VulkanContext::CreateSwapchain() {
+    PROFILE_FUNCTION();
+
     SwapChainSupportDetails swapChainSupport = QuerySwapChainSupport(m_PhysicalDevice);
 
     VkSurfaceFormatKHR surfaceFormat = ChooseSwapSurfaceFormat(swapChainSupport.formats);
@@ -560,15 +537,15 @@ namespace Helios
     createInfo.oldSwapchain = VK_NULL_HANDLE;
 
     VkResult result = vkCreateSwapchainKHR(m_Device, &createInfo, nullptr, &m_Swapchain);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create swapchain!")
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create swapchain!");
 
     result = vkGetSwapchainImagesKHR(m_Device, m_Swapchain, &imageCount, nullptr);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to get swapchain images!")
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to get swapchain images!");
 
     m_SwapchainImages.resize(imageCount);
 
     result = vkGetSwapchainImagesKHR(m_Device, m_Swapchain, &imageCount, m_SwapchainImages.data());
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to get swapchain images!")
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to get swapchain images!");
 
     m_SwapchainImageFormat = surfaceFormat.format;
     m_SwapchainExtent = extent;
@@ -587,23 +564,25 @@ namespace Helios
       viewInfo.subresourceRange.layerCount = 1;
 
       result = vkCreateImageView(m_Device, &viewInfo, nullptr, &m_SwapchainImageViews[i]);
-      CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create image view ({})!", i)
+      CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create image view ({})!", i);
     }
   }
 
-  void VulkanContext::CreateAllocator()
-  {
+  void VulkanContext::CreateAllocator() {
+    PROFILE_FUNCTION();
+
     VmaAllocatorCreateInfo allocatorInfo{};
     allocatorInfo.physicalDevice = m_PhysicalDevice;
     allocatorInfo.device = m_Device;
     allocatorInfo.instance = m_VkInstance;
 
     VkResult result = vmaCreateAllocator(&allocatorInfo, &m_Allocator);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create allocator!")
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create allocator!");
   }
 
-  void VulkanContext::CreateCommandPool()
-  {
+  void VulkanContext::CreateCommandPool() {
+    PROFILE_FUNCTION();
+
     QueueFamilyIndices indices = FindQueueFamilies(m_PhysicalDevice);
 
     VkCommandPoolCreateInfo poolInfo{};
@@ -613,7 +592,7 @@ namespace Helios
 
     for (FrameData& frame : m_Frames) {
       VkResult result = vkCreateCommandPool(m_Device, &poolInfo, nullptr, &frame.commandPool);
-      CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create command pool!")
+      CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create command pool!");
 
       m_MainDeletionQueue.PushFunction([this, &frame]() {
         vkDestroyCommandPool(m_Device, frame.commandPool, nullptr);
@@ -621,15 +600,16 @@ namespace Helios
     }
 
     VkResult result = vkCreateCommandPool(m_Device, &poolInfo, nullptr, &m_ImCommandPool);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create command pool!")
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create command pool!");
 
     m_MainDeletionQueue.PushFunction([this]() {
       vkDestroyCommandPool(m_Device, m_ImCommandPool, nullptr);
     });
   }
 
-  void VulkanContext::CreateCommandBuffers()
-  {
+  void VulkanContext::CreateCommandBuffers() {
+    PROFILE_FUNCTION();
+
     VkCommandBufferAllocateInfo allocInfo{};
     allocInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
     allocInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
@@ -639,17 +619,18 @@ namespace Helios
       allocInfo.commandPool = frame.commandPool;
 
       VkResult result = vkAllocateCommandBuffers(m_Device, &allocInfo, &frame.commandBuffer);
-      CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to allocate command buffer!")
+      CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to allocate command buffer!");
     }
 
     allocInfo.commandPool = m_ImCommandPool;
 
     VkResult result = vkAllocateCommandBuffers(m_Device, &allocInfo, &m_ImCommandBuffer);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to allocate command buffer!")
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to allocate command buffer!");
   }
 
-  void VulkanContext::CreateSyncObjects()
-  {
+  void VulkanContext::CreateSyncObjects() {
+    PROFILE_FUNCTION();
+
     VkSemaphoreCreateInfo semaphoreInfo{};
     semaphoreInfo.sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
 
@@ -658,11 +639,11 @@ namespace Helios
     fenceInfo.flags = VK_FENCE_CREATE_SIGNALED_BIT;
 
     for (FrameData& frame : m_Frames) {
-      bool result = vkCreateSemaphore(m_Device, &semaphoreInfo, nullptr, &frame.presentSemaphore) == VK_SUCCESS &&
-                    vkCreateSemaphore(m_Device, &semaphoreInfo, nullptr, &frame.renderSemaphore) == VK_SUCCESS &&
-                    vkCreateFence(m_Device, &fenceInfo, nullptr, &frame.renderFence) == VK_SUCCESS;
+      bool result = vkCreateSemaphore(m_Device, &semaphoreInfo, nullptr, &frame.presentSemaphore) == VK_SUCCESS
+                    && vkCreateSemaphore(m_Device, &semaphoreInfo, nullptr, &frame.renderSemaphore) == VK_SUCCESS
+                    && vkCreateFence(m_Device, &fenceInfo, nullptr, &frame.renderFence) == VK_SUCCESS;
 
-      CORE_ASSERT_CRITICAL(result, "Failed to create synchronization objects!")
+      CORE_ASSERT_CRITICAL(result, "Failed to create synchronization objects!");
 
       m_MainDeletionQueue.PushFunction([this, &frame]() {
         vkDestroySemaphore(m_Device, frame.presentSemaphore, nullptr);
@@ -672,15 +653,16 @@ namespace Helios
     }
 
     VkResult result = vkCreateFence(m_Device, &fenceInfo, nullptr, &m_ImFence);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create synchronization objects!")
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create synchronization objects!");
 
     m_MainDeletionQueue.PushFunction([this]() {
       vkDestroyFence(m_Device, m_ImFence, nullptr);
     });
   }
 
-  void VulkanContext::CreateRenderPass()
-  {
+  void VulkanContext::CreateRenderPass() {
+    PROFILE_FUNCTION();
+
     VkAttachmentDescription colorAttachment{};
     colorAttachment.format = m_SwapchainImageFormat;
     colorAttachment.samples = VK_SAMPLE_COUNT_1_BIT;
@@ -744,15 +726,16 @@ namespace Helios
     renderPassInfo.pDependencies = dependencies;
 
     VkResult result = vkCreateRenderPass(m_Device, &renderPassInfo, nullptr, &m_RenderPass);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create render pass!")
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create render pass!");
 
     m_MainDeletionQueue.PushFunction([this]() {
       vkDestroyRenderPass(m_Device, m_RenderPass, nullptr);
     });
   }
 
-  void VulkanContext::CreateDepthResources()
-  {
+  void VulkanContext::CreateDepthResources() {
+    PROFILE_FUNCTION();
+
     VkFormat depthFormat = FindDepthFormat();
 
     m_DepthImage = CreateImage(m_SwapchainExtent.width, m_SwapchainExtent.height, depthFormat, VK_IMAGE_TILING_OPTIMAL,
@@ -761,8 +744,9 @@ namespace Helios
     m_DepthImage.imageView = CreateImageView(m_DepthImage.image, depthFormat, VK_IMAGE_ASPECT_DEPTH_BIT, m_Device);
   }
 
-  void VulkanContext::CreateFramebuffers()
-  {
+  void VulkanContext::CreateFramebuffers() {
+    PROFILE_FUNCTION();
+
     m_SwapchainFramebuffers.resize(m_SwapchainImageViews.size());
 
     for (uint32_t i = 0; i < m_SwapchainImageViews.size(); ++i) {
@@ -781,12 +765,13 @@ namespace Helios
       framebufferInfo.layers = 1;
 
       VkResult result = vkCreateFramebuffer(m_Device, &framebufferInfo, nullptr, &m_SwapchainFramebuffers[i]);
-      CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create framebuffer!")
+      CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create framebuffer!");
     }
   }
 
-  void VulkanContext::CleanupSwapchain()
-  {
+  void VulkanContext::CleanupSwapchain() {
+    PROFILE_FUNCTION();
+
     vkDestroyImageView(m_Device, m_DepthImage.imageView, nullptr);
     vmaDestroyImage(m_Allocator, m_DepthImage.image, m_DepthImage.allocation);
 
@@ -801,8 +786,7 @@ namespace Helios
     vkDestroySwapchainKHR(m_Device, m_Swapchain, nullptr);
   }
 
-  void VulkanContext::RecreateSwapchain()
-  {
+  void VulkanContext::RecreateSwapchain() {
     vkDeviceWaitIdle(m_Device);
 
     CleanupSwapchain();
@@ -813,15 +797,14 @@ namespace Helios
     m_SwapchainRecreated = true;
   }
 
-  bool VulkanContext::CheckValidationLayerSupport() const
-  {
+  bool VulkanContext::CheckValidationLayerSupport() const {
     uint32_t layerCount;
     VkResult result = vkEnumerateInstanceLayerProperties(&layerCount, nullptr);
-    CORE_ASSERT(result == VK_SUCCESS, "Failed to enumerate instance layer properties!")
+    CORE_ASSERT(result == VK_SUCCESS, "Failed to enumerate instance layer properties!");
 
     std::vector<VkLayerProperties> availableLayers(layerCount);
     result = vkEnumerateInstanceLayerProperties(&layerCount, availableLayers.data());
-    CORE_ASSERT(result == VK_SUCCESS, "Failed to enumerate instance layer properties!")
+    CORE_ASSERT(result == VK_SUCCESS, "Failed to enumerate instance layer properties!");
 
     for (const char* layerName : m_ValidationLayers) {
       bool layerFound = false;
@@ -839,8 +822,28 @@ namespace Helios
     return true;
   }
 
-  std::vector<const char*> VulkanContext::GetRequiredExtensions() const
-  {
+  VKAPI_ATTR VkBool32 VKAPI_CALL VulkanContext::DebugCallback(VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
+                                                              VkDebugUtilsMessageTypeFlagsEXT messageType,
+                                                              const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData,
+                                                              void* pUserData) {
+    if (messageSeverity & VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT) {
+      CORE_ERROR("Vulkan validation layer: {}: {}", pCallbackData->pMessageIdName,
+                                                    pCallbackData->pMessage);
+    } else if (messageSeverity & VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT) {
+      CORE_WARN("Vulkan validation layer: {}: {}", pCallbackData->pMessageIdName,
+                                                   pCallbackData->pMessage);
+    } else if (messageType & VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT) {
+      CORE_WARN("Vulkan validation layer: Performance warning: {}: {}", pCallbackData->pMessageIdName,
+                                                                        pCallbackData->pMessage);
+    } else {
+      CORE_INFO("Vulkan validation layer: {}: {}", pCallbackData->pMessageIdName,
+                                                   pCallbackData->pMessage);
+    }
+
+    return VK_FALSE;
+  }
+
+  std::vector<const char*> VulkanContext::GetRequiredExtensions() const {
     uint32_t glfwExtensionCount = 0;
     const char** glfwExtensions;
     glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
@@ -854,24 +857,22 @@ namespace Helios
     return extensions;
   }
 
-  void VulkanContext::PopulateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo)
-  {
+  void VulkanContext::PopulateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo) {
     createInfo = {};
     createInfo.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
-    createInfo.messageSeverity = VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT |
-                                 VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT |
-                                 VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;
+    createInfo.messageSeverity = VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT
+                                 | VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT
+                                 | VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;
 
-    createInfo.messageType = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT |
-                             VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT |
-                             VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT;
+    createInfo.messageType = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT
+                             | VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT
+                             | VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT;
 
     createInfo.pfnUserCallback = DebugCallback;
   }
 
   VkResult VulkanContext::CreateDebugUtilsMessengerEXT(const VkInstance instance, const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo,
-                                                       const VkAllocationCallbacks* pAllocator, VkDebugUtilsMessengerEXT* pDebugMessenger)
-  {
+                                                       const VkAllocationCallbacks* pAllocator, VkDebugUtilsMessengerEXT* pDebugMessenger) {
     auto func = (PFN_vkCreateDebugUtilsMessengerEXT)vkGetInstanceProcAddr(instance, "vkCreateDebugUtilsMessengerEXT");
     if (func != nullptr) {
       return func(instance, pCreateInfo, pAllocator, pDebugMessenger);
@@ -880,23 +881,21 @@ namespace Helios
   }
 
   void VulkanContext::DestroyDebugUtilsMessengerEXT(const VkInstance instance, const VkDebugUtilsMessengerEXT debugMessenger,
-                                                    const VkAllocationCallbacks* pAllocator)
-  {
+                                                    const VkAllocationCallbacks* pAllocator) {
     auto func = (PFN_vkDestroyDebugUtilsMessengerEXT)vkGetInstanceProcAddr(instance, "vkDestroyDebugUtilsMessengerEXT");
     if (func != nullptr) {
       func(instance, debugMessenger, pAllocator);
     }
   }
 
-  bool VulkanContext::CheckDeviceExtensionSupport(const VkPhysicalDevice device) const
-  {
-    uint32_t extensionCount;
+  bool VulkanContext::CheckDeviceExtensionSupport(const VkPhysicalDevice device) const {
+    uint32_t extensionCount = 0;
     VkResult result = vkEnumerateDeviceExtensionProperties(device, nullptr, &extensionCount, nullptr);
-    CORE_ASSERT(result == VK_SUCCESS, "Failed to enumerate device extension properties!")
+    CORE_ASSERT(result == VK_SUCCESS, "Failed to enumerate device extension properties!");
 
     std::vector<VkExtensionProperties> availableExtensions(extensionCount);
     result = vkEnumerateDeviceExtensionProperties(device, nullptr, &extensionCount, availableExtensions.data());
-    CORE_ASSERT(result == VK_SUCCESS, "Failed to enumerate device extension properties!")
+    CORE_ASSERT(result == VK_SUCCESS, "Failed to enumerate device extension properties!");
 
     std::set<std::string> requiredExtensions(m_DeviceExtensions.begin(), m_DeviceExtensions.end());
 
@@ -907,9 +906,8 @@ namespace Helios
     return requiredExtensions.empty();
   }
 
-  QueueFamilyIndices VulkanContext::FindQueueFamilies(const VkPhysicalDevice device) const
-  {
-    QueueFamilyIndices indices;
+  QueueFamilyIndices VulkanContext::FindQueueFamilies(const VkPhysicalDevice device) const {
+    QueueFamilyIndices indices{};
 
     uint32_t queueFamilyCount = 0;
     vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, nullptr);
@@ -925,7 +923,7 @@ namespace Helios
 
       VkBool32 presentSupport = false;
       VkResult result = vkGetPhysicalDeviceSurfaceSupportKHR(device, i, m_Surface, &presentSupport);
-      CORE_ASSERT(result == VK_SUCCESS, "Failed to get physical device surface support!")
+      CORE_ASSERT(result == VK_SUCCESS, "Failed to get physical device surface support!");
 
       if (presentSupport) { indices.presentFamily = i; }
       if (indices.IsComplete()) { break; }
@@ -935,38 +933,36 @@ namespace Helios
     return indices;
   }
 
-  SwapChainSupportDetails VulkanContext::QuerySwapChainSupport(const VkPhysicalDevice device) const
-  {
-    SwapChainSupportDetails details;
+  SwapChainSupportDetails VulkanContext::QuerySwapChainSupport(const VkPhysicalDevice device) const {
+    SwapChainSupportDetails details{};
 
     VkResult result = vkGetPhysicalDeviceSurfaceCapabilitiesKHR(device, m_Surface, &details.capabilities);
-    CORE_ASSERT(result == VK_SUCCESS, "Failed to get physical device surface capabilities!")
+    CORE_ASSERT(result == VK_SUCCESS, "Failed to get physical device surface capabilities!");
 
-    uint32_t formatCount;
+    uint32_t formatCount = 0;
     result = vkGetPhysicalDeviceSurfaceFormatsKHR(device, m_Surface, &formatCount, nullptr);
-    CORE_ASSERT(result == VK_SUCCESS, "Failed to get physical device surface formats!")
+    CORE_ASSERT(result == VK_SUCCESS, "Failed to get physical device surface formats!");
 
     if (formatCount != 0) {
       details.formats.resize(formatCount);
       result = vkGetPhysicalDeviceSurfaceFormatsKHR(device, m_Surface, &formatCount, details.formats.data());
-      CORE_ASSERT(result == VK_SUCCESS, "Failed to get physical device surface formats!")
+      CORE_ASSERT(result == VK_SUCCESS, "Failed to get physical device surface formats!");
     }
 
-    uint32_t presentModeCount;
+    uint32_t presentModeCount = 0;
     result = vkGetPhysicalDeviceSurfacePresentModesKHR(device, m_Surface, &presentModeCount, nullptr);
-    CORE_ASSERT(result == VK_SUCCESS, "Failed to get physical device surface present modes!")
+    CORE_ASSERT(result == VK_SUCCESS, "Failed to get physical device surface present modes!");
 
     if (presentModeCount != 0) {
       details.presentModes.resize(presentModeCount);
       result = vkGetPhysicalDeviceSurfacePresentModesKHR(device, m_Surface, &presentModeCount, details.presentModes.data());
-      CORE_ASSERT(result == VK_SUCCESS, "Failed to get physical device surface present modes!")
+      CORE_ASSERT(result == VK_SUCCESS, "Failed to get physical device surface present modes!");
     }
 
     return details;
   }
 
-  bool VulkanContext::IsDeviceSuitable(const VkPhysicalDevice device) const
-  {
+  bool VulkanContext::IsDeviceSuitable(const VkPhysicalDevice device) const {
     QueueFamilyIndices indices = FindQueueFamilies(device);
 
     bool extensionsSupported = CheckDeviceExtensionSupport(device);
@@ -980,12 +976,10 @@ namespace Helios
     VkPhysicalDeviceFeatures supportedFeatures{};
     vkGetPhysicalDeviceFeatures(device, &supportedFeatures);
 
-    return indices.IsComplete() && extensionsSupported && swapChainAdequate &&
-           supportedFeatures.samplerAnisotropy;
+    return indices.IsComplete() && extensionsSupported && swapChainAdequate && supportedFeatures.samplerAnisotropy;
   }
 
-  VkSurfaceFormatKHR VulkanContext::ChooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats) const
-  {
+  VkSurfaceFormatKHR VulkanContext::ChooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats) const {
     for (const VkSurfaceFormatKHR& availableFormat : availableFormats) {
       if (availableFormat.format == VK_FORMAT_B8G8R8A8_UNORM && availableFormat.colorSpace == VK_COLOR_SPACE_SRGB_NONLINEAR_KHR) {
         return availableFormat;
@@ -994,8 +988,7 @@ namespace Helios
     return availableFormats[0];
   }
 
-  VkPresentModeKHR VulkanContext::ChooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes) const
-  {
+  VkPresentModeKHR VulkanContext::ChooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes) const {
     VkPresentModeKHR bestMode = VK_PRESENT_MODE_FIFO_KHR;
 
     if (m_Vsync) { return bestMode; }
@@ -1008,17 +1001,16 @@ namespace Helios
     return bestMode;
   }
 
-  VkExtent2D VulkanContext::ChooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities) const
-  {
+  VkExtent2D VulkanContext::ChooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities) const {
     if (capabilities.currentExtent.width != std::numeric_limits<uint32_t>::max()) {
       return capabilities.currentExtent;
     } else {
-      int width, height;
+      int width(0), height(0);
       glfwGetFramebufferSize(m_WindowHandle, &width, &height);
 
       VkExtent2D actualExtent = {
-          static_cast<uint32_t>(width),
-          static_cast<uint32_t>(height)
+        static_cast<uint32_t>(width),
+        static_cast<uint32_t>(height)
       };
 
       actualExtent.width = std::clamp(actualExtent.width, capabilities.minImageExtent.width, capabilities.maxImageExtent.width);
@@ -1028,8 +1020,7 @@ namespace Helios
     }
   }
 
-  uint32_t VulkanContext::ChooseImageCount(const VkSurfaceCapabilitiesKHR& capabilities) const
-  {
+  uint32_t VulkanContext::ChooseImageCount(const VkSurfaceCapabilitiesKHR& capabilities) const {
     uint32_t imageCount = capabilities.minImageCount + 1;
     if (capabilities.maxImageCount > 0 && imageCount > capabilities.maxImageCount) {
       imageCount = capabilities.maxImageCount;
@@ -1038,8 +1029,7 @@ namespace Helios
   }
 
   VkFormat VulkanContext::FindSupportedFormat(const std::vector<VkFormat>& candidates, VkImageTiling tiling,
-                                              VkFormatFeatureFlags features) const
-  {
+                                              VkFormatFeatureFlags features) const {
     for (VkFormat format : candidates) {
       VkFormatProperties props;
       vkGetPhysicalDeviceFormatProperties(m_PhysicalDevice, format, &props);
@@ -1051,12 +1041,11 @@ namespace Helios
       }
     }
 
-    CORE_ASSERT(false, "Failed to find supported format!")
+    CORE_ASSERT(false, "Failed to find supported format!");
     return VK_FORMAT_UNDEFINED;
   }
 
-  VkFormat VulkanContext::FindDepthFormat() const
-  {
+  VkFormat VulkanContext::FindDepthFormat() const {
     return FindSupportedFormat(
       { VK_FORMAT_D32_SFLOAT, VK_FORMAT_D32_SFLOAT_S8_UINT, VK_FORMAT_D24_UNORM_S8_UINT },
       VK_IMAGE_TILING_OPTIMAL,

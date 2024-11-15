@@ -2,10 +2,8 @@
 
 #include "Event.h"
 
-namespace Helios 
-{
-	class HELIOSENGINE_API WindowResizeEvent final : public Event
-	{
+namespace Helios  {
+	class HELIOSENGINE_API WindowResizeEvent final : public Event {
 	public:
 		WindowResizeEvent(uint32_t width, uint32_t height)
 			: m_Width(width), m_Height(height)
@@ -17,8 +15,7 @@ namespace Helios
 		inline uint32_t GetWidth() const { return m_Width; }
 		inline uint32_t GetHeight() const { return m_Height; }
 
-		std::string ToString() const override
-		{
+		std::string ToString() const override {
 			std::stringstream ss;
 			ss << "WindowResizeEvent: " << m_Width << ", " << m_Height;
 			return ss.str();
@@ -31,8 +28,7 @@ namespace Helios
 		uint32_t m_Width, m_Height;
 	};
 
-	class HELIOSENGINE_API WindowCloseEvent final : public Event
-	{
+	class HELIOSENGINE_API WindowCloseEvent final : public Event {
 	public:
 		WindowCloseEvent() = default;
 		virtual ~WindowCloseEvent() = default;
@@ -41,18 +37,16 @@ namespace Helios
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
 
-	class HELIOSENGINE_API WindowFocusedEvent final : public Event
-	{
+	class HELIOSENGINE_API WindowFocusEvent final : public Event {
 	public:
-		WindowFocusedEvent() = default;
-    virtual ~WindowFocusedEvent() = default;
+		WindowFocusEvent() = default;
+    virtual ~WindowFocusEvent() = default;
 
 		EVENT_CLASS_TYPE(WindowFocus)
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
 
-	class HELIOSENGINE_API WindowLostFocusEvent final : public Event
-	{
+	class HELIOSENGINE_API WindowLostFocusEvent final : public Event {
 	public:
 		WindowLostFocusEvent() = default;
     virtual ~WindowLostFocusEvent() = default;
@@ -61,8 +55,7 @@ namespace Helios
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
 
-	class HELIOSENGINE_API AppTickEvent final : public Event
-	{
+	class HELIOSENGINE_API AppTickEvent final : public Event {
 	public:
 		AppTickEvent() = default;
     virtual ~AppTickEvent() = default;
@@ -71,8 +64,7 @@ namespace Helios
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
 
-	class HELIOSENGINE_API AppUpdateEvent final : public Event
-	{
+	class HELIOSENGINE_API AppUpdateEvent final : public Event {
 	public:
 		AppUpdateEvent() = default;
     AppUpdateEvent(double deltaTime) : m_DeltaTime(deltaTime) {}
@@ -87,8 +79,7 @@ namespace Helios
 		double m_DeltaTime;
 	};
 
-	class HELIOSENGINE_API AppRenderEvent final : public Event
-	{
+	class HELIOSENGINE_API AppRenderEvent final : public Event {
 	public:
 		AppRenderEvent() = default;
     virtual ~AppRenderEvent() = default;

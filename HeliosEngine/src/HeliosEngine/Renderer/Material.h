@@ -4,12 +4,10 @@
 
 #include <glm/glm.hpp>
 
-namespace Helios
-{
+namespace Helios {
   class Texture;
 
-  class HELIOSENGINE_API Material
-  {
+  class HELIOSENGINE_API Material {
   public:
     Material() = default;
     ~Material() = default;

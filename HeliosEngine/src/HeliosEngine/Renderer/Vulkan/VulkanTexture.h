@@ -4,10 +4,8 @@
 
 #include "VulkanUtils.h"
 
-namespace Helios
-{
-  class VulkanTexture final : public Texture
-  {
+namespace Helios {
+  class VulkanTexture final : public Texture {
   public:
     VulkanTexture(std::string_view path, uint32_t mipLevel = 0,
                   uint32_t anisoLevel = 0, ImageFormat format = ImageFormat::None);

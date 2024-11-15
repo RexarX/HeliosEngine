@@ -22,6 +22,5 @@
 
 #include "HeliosEngine/Events/Event.h"
 #include "HeliosEngine/Events/ApplicationEvent.h"
-#include "HeliosEngine/Events/InputEvent.h"
 #include "HeliosEngine/Events/KeyEvent.h"
 #include "HeliosEngine/Events/MouseEvent.h"

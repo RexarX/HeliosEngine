@@ -4,10 +4,8 @@
 
 #include "HeliosEngine/KeyCodes.h"
 
-namespace Helios 
-{
-	class HELIOSENGINE_API KeyEvent : public Event
-	{
+namespace Helios  {
+	class HELIOSENGINE_API KeyEvent : public Event {
 	public:
 		virtual ~KeyEvent() = default;
 
@@ -21,44 +19,40 @@ namespace Helios
 		KeyCode m_KeyCode;
 	};
 
-	class HELIOSENGINE_API KeyPressedEvent final : public KeyEvent
-	{
+	class HELIOSENGINE_API KeyPressEvent final : public KeyEvent {
 	public:
-		KeyPressedEvent(KeyCode keycode, uint32_t repeatCount)
+		KeyPressEvent(KeyCode keycode, uint32_t repeatCount)
 			: KeyEvent(keycode), m_RepeatCount(repeatCount) 
 		{
 		}
 
-		virtual ~KeyPressedEvent() = default;
+		virtual ~KeyPressEvent() = default;
 
 		inline uint32_t GetRepeatCount() const { return m_RepeatCount; }
 
-	  std::string ToString() const override
-		{
+	  std::string ToString() const override {
 			std::stringstream ss;
-			ss << "KeyPressedEvent: " << m_KeyCode << " (" << m_RepeatCount << " repeats)";
+			ss << "KeyPressEvent: " << m_KeyCode << " (" << m_RepeatCount << " repeats)";
 			return ss.str();
 		}
 
-		EVENT_CLASS_TYPE(KeyPressed)
+		EVENT_CLASS_TYPE(KeyPress)
 
 	private:
 		uint32_t m_RepeatCount;
 	};
 
-	class HELIOSENGINE_API KeyReleasedEvent final : public KeyEvent
-	{
+	class HELIOSENGINE_API KeyReleaseEvent final : public KeyEvent {
 	public:
-		KeyReleasedEvent(KeyCode keycode) : KeyEvent(keycode) {}
-    virtual ~KeyReleasedEvent() = default;
+		KeyReleaseEvent(KeyCode keycode) : KeyEvent(keycode) {}
+    virtual ~KeyReleaseEvent() = default;
 
-		std::string ToString() const override
-		{
+		std::string ToString() const override {
 			std::stringstream ss;
-			ss << "KeyReleasedEvent: " << m_KeyCode;
+			ss << "KeyReleaseEvent: " << m_KeyCode;
 			return ss.str();
 		}
 
-		EVENT_CLASS_TYPE(KeyReleased)
+		EVENT_CLASS_TYPE(KeyRelease)
 	};
 }

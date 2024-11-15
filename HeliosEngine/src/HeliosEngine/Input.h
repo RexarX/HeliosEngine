@@ -5,10 +5,8 @@
 #include "MouseButtonCodes.h"
 #include "KeyCodes.h"
 
-namespace Helios
-{
-	class HELIOSENGINE_API Input
-	{
+namespace Helios {
+	class HELIOSENGINE_API Input {
 	public:
 		static inline bool IsKeyPressed(KeyCode keycode) { return m_Instance->IsKeyPressedImpl(keycode); }
 

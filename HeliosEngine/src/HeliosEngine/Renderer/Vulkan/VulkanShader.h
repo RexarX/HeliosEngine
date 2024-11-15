@@ -3,28 +3,32 @@
 #include "Renderer/Shader.h"
 
 #include <vulkan/vulkan.h>
+#include <shaderc/shaderc.hpp>
 
-namespace Helios
-{
-  struct VulkanShaderInfo
-  {
-    std::string path;
-    VkShaderStageFlagBits stage;
-    VkShaderModule shaderModule;
-  };
-
-  class VulkanShader final : public Shader
-  {
+namespace Helios {
+  class VulkanShader final : public Shader {
   public:
-    VulkanShader(const std::initializer_list<ShaderInfo>& infos);
+    struct ShaderInfo {
+      std::string path;
+      VkShaderStageFlagBits stage;
+      VkShaderModule shaderModule;
+    };
+
+    VulkanShader(const std::initializer_list<Info>& infos);
     virtual ~VulkanShader();
 
-    inline const std::vector<VulkanShaderInfo>& GetShaderInfos() const { return m_ShaderInfos; }
+    inline const std::vector<ShaderInfo>& GetShaderInfos() const { return m_ShaderInfos; }
 
   private:
     void Load();
 
+    VkShaderStageFlagBits TranslateStageToVulkan(Stage stage) const;
+    shaderc_shader_kind TranslateStageToShaderc(VkShaderStageFlagBits stage) const;
+
+	  bool GLSLtoSPV(VkShaderStageFlagBits shaderType, const std::string& glslShader,
+									 const std::string& fileName, std::vector<uint32_t>& spvShader) const;
+
   private:
-    std::vector<VulkanShaderInfo> m_ShaderInfos;
+    std::vector<ShaderInfo> m_ShaderInfos;
   };
 }

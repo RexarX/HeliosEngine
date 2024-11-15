@@ -1,11 +1,9 @@
 #pragma once
 
-namespace Helios
-{
+namespace Helios {
 	using KeyCode = uint32_t;
 
-	namespace Key
-	{
+	namespace Key {
 		enum : KeyCode
 		{
 			Space = 32,

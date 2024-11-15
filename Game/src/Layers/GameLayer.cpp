@@ -2,8 +2,7 @@
 
 #include "Scripts/Player/CameraController.h"
 
-void GameLayer::OnAttach()
-{
+void GameLayer::OnAttach() {
 	Helios::Window& window = Helios::Application::Get().GetWindow();
 	//window.SetVSync(true);
 	//window.SetFramerate(60.0);
@@ -23,35 +22,33 @@ void GameLayer::OnAttach()
 	gameScene.Load();
 }
 
-void GameLayer::OnDetach()
-{
-}
+void GameLayer::OnDetach() {}
 
-void GameLayer::OnUpdate(Helios::Timestep ts)
-{
+void GameLayer::OnUpdate(Helios::Timestep ts) {
 	Helios::Scene& scene = Helios::SceneManager::GetScene("GameScene");
 	scene.OnUpdate(ts);
 }
 
-void GameLayer::OnEvent(const Helios::Event& event)
-{
+void GameLayer::OnEvent(Helios::Event& event) {
 	Helios::Scene& scene = Helios::SceneManager::GetScene("GameScene");
 	scene.OnEvent(event);
 }
 
-void GameLayer::Draw()
-{
+void GameLayer::Draw() {
 	Helios::Scene& scene = Helios::SceneManager::GetScene("GameScene");
 	scene.Draw();
 }
 
-void GameLayer::OnImGuiRender(ImGuiContext* context)
-{
-	Helios::Timestep ts = Helios::Application::Get().GetDeltaTime();
+void GameLayer::OnImGuiRender(ImGuiContext* context) {
+	PROFILE_FUNCTION();
+
+	const Helios::Application& app = Helios::Application::Get();
+	Helios::Timestep ts = app.GetDeltaTime();
 
 	ImGui::SetCurrentContext(context);
 	ImGui::Begin("Debug menu");
 	ImGui::Text("FPS: %u", static_cast<uint32_t>(ts.GetFramerate()));
 	ImGui::Text("Frametime: %f ms", ts.GetMilliseconds());
+	ImGui::Text("Frames rendered: %u", app.GetFrameNumber());
 	ImGui::End();
 }

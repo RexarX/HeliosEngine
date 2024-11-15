@@ -2,12 +2,10 @@
 
 #include "pch.h"
 
-namespace Helios
-{
+namespace Helios {
   class Scene;
 
-  class HELIOSENGINE_API SceneManager
-  {
+  class HELIOSENGINE_API SceneManager {
   public:
     SceneManager() = default;
     ~SceneManager() = default;
@@ -20,6 +18,6 @@ namespace Helios
     static Scene& GetActiveScene();
 
   private:
-    static std::map<std::string, Scene> m_Scenes;
+    static inline std::map<std::string, Scene> m_Scenes;
   };
 }

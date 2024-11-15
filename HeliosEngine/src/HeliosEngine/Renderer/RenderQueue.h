@@ -4,22 +4,26 @@
 
 #include <glm/glm.hpp>
 
-namespace Helios
-{
-  struct SceneData
-  {
-    glm::mat4 projectionViewMatrix = glm::mat4(1.0f);
-  };
+namespace Helios {
+  
 
-  struct RenderObject
-  {
-    const Renderable& renderable;
-    const Transform& transform;
-  };
-
-  class RenderQueue
-  {
+  class RenderQueue {
   public:
+    struct SceneData {
+      glm::mat4 projectionViewMatrix = glm::mat4(1.0f);
+    };
+
+    struct RenderObject {
+      Renderable renderable;
+      Transform transform;
+
+      bool visible = true;
+
+      inline bool operator==(const RenderObject& renderObject) const {
+        return renderable == renderObject.renderable && transform == renderObject.transform;
+      }
+    };
+
     RenderQueue() = default;
     ~RenderQueue() = default;
 
@@ -34,9 +38,6 @@ namespace Helios
     }
 
     void SetSceneData(const SceneData& sceneData) { m_SceneData = sceneData; }
-    void SetSceneData(const glm::mat4& projectionViewMatrix) {
-      m_SceneData.projectionViewMatrix = projectionViewMatrix;
-    }
 
     inline const std::vector<RenderObject>& GetRenderObjects() const { return m_RenderObjects; }
     inline const SceneData& GetSceneData() const { return m_SceneData; }

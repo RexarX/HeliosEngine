@@ -8,12 +8,9 @@
 #include <future>
 #include <functional>
 
-namespace Helios::Utils
-{
-  class ThreadPool
-  {
-    ThreadPool(uint32_t numThreads)
-    {
+namespace Helios::Utils {
+  class ThreadPool {
+    ThreadPool(uint32_t numThreads) {
       for (uint32_t i = 0; i < numThreads; ++i) {
         m_Workers.emplace_back([this] {
           while (true) {
@@ -29,8 +26,7 @@ namespace Helios::Utils
       }
     }
 
-    ~ThreadPool() noexcept
-    {
+    ~ThreadPool() noexcept {
       std::unique_lock<std::mutex> lock(m_QueueMutex);
       m_Stop = true;
       m_Condition.notify_all();
@@ -40,8 +36,7 @@ namespace Helios::Utils
     }
 
     template<class F, class... Args>
-    auto Enqueue(F&& f, Args&&... args) -> std::future<typename std::invoke_result<F, Args...>::type>
-    {
+    auto Enqueue(F&& f, Args&&... args) -> std::future<typename std::invoke_result<F, Args...>::type> {
       using return_type = typename std::invoke_result<F, Args...>::type;
 
       auto task = std::make_shared<std::packaged_task<return_type()>>(

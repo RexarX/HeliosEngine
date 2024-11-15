@@ -2,24 +2,10 @@
 
 #include "pch.h"
 
-namespace Helios
-{
-	struct WindowProps
-	{
-		WindowProps(std::string_view title = "Game", uint32_t width = 1280, uint32_t height = 720)
-			: title(title), width(width), height(height)
-		{
-		}
-
-		std::string title;
-		uint32_t width;
-		uint32_t height;
-	};
-
-	class Window
-	{
+namespace Helios {
+	class Window {
 	public:
-		using EventCallbackFn = std::function<void(const Event&)>;
+		using EventCallbackFn = std::function<void(Event&)>;
 
 		virtual ~Window() = default;
 
@@ -54,6 +40,7 @@ namespace Helios
 
 		virtual void* GetNativeWindow() const = 0;
 
-		static std::unique_ptr<Window> Create(const WindowProps& props = WindowProps());
+		static std::unique_ptr<Window> Create(std::string_view title = "App", uint32_t width = 1280,
+																					uint32_t height = 720);
 	};
 }

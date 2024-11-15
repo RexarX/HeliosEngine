@@ -2,220 +2,177 @@
 
 #include "Renderer/GraphicsContext.h"
 
-#include "Events/ApplicationEvent.h"
-#include "Events/MouseEvent.h"
-#include "Events/KeyEvent.h"
-
 #include <GLFW/glfw3.h>
 
-namespace Helios
-{
+namespace Helios {
   static bool s_GLFWInitialized = false;
 
-	static void GLFWErrorCallback(int error, const char* description)
-	{
-		CORE_ERROR("GLFW Error ({0}): {1}", error, description)
+	static void GLFWErrorCallback(int error, const char* description) {
+		CORE_ERROR("GLFW Error ({}): {}", error, description);
 	}
 
-  std::unique_ptr<Window> Window::Create(const WindowProps& props)
-  {
-    return std::make_unique<WindowsWindow>(props);
+  WindowsWindow::WindowsWindow(std::string_view title, uint32_t width, uint32_t height) {
+		Init(title, width, height);
   }
 
-  WindowsWindow::WindowsWindow(const WindowProps& props)
-  {
-		Init(props);
-  }
-
-  WindowsWindow::~WindowsWindow()
-  {
+  WindowsWindow::~WindowsWindow() {
     Shutdown();
   }
 
-  void WindowsWindow::Init(const WindowProps& props)
-  {
-		m_Data.Title = props.title;
-		m_Data.Width = props.width;
-		m_Data.Height = props.height;
+  void WindowsWindow::Init(std::string_view title, uint32_t width, uint32_t height) {
+		PROFILE_FUNCTION();
 
-		CORE_INFO("Creating window {0} ({1}, {2})", props.title, props.width, props.height)
-		
-    if (!s_GLFWInitialized) {
+		m_Data.title = title;
+		m_Data.width = width;
+		m_Data.height = height;
+
+		CORE_INFO("Creating window {} ({}, {})", title, width, height);
+
+		if (!s_GLFWInitialized) {
 			int result = glfwInit();
-			CORE_ASSERT_CRITICAL(result, "Failed to initialize GLFW!")
-      glfwSetErrorCallback(GLFWErrorCallback);
-      s_GLFWInitialized = true;
-    }
+			CORE_ASSERT_CRITICAL(result, "Failed to initialize GLFW!");
+			glfwSetErrorCallback(GLFWErrorCallback);
+			s_GLFWInitialized = true;
+		}
 
 		glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-		
-		m_Window = glfwCreateWindow((int)props.width, (int)props.height, m_Data.Title.c_str(),
-																nullptr, nullptr);
 
+		m_Window = glfwCreateWindow((int)width, (int)height, m_Data.title.c_str(), nullptr, nullptr);
 		m_Monitor = glfwGetPrimaryMonitor();
-		m_Mode = glfwGetVideoMode(m_Monitor);
 
 		m_Context = GraphicsContext::Create(m_Window);
 		m_Context->Init();
-		m_Context->SetViewport(props.width, props.height);
+		m_Context->SetViewport(width, height);
 
 		glfwSetWindowUserPointer(m_Window, reinterpret_cast<void*>(this));
 
-		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height)
-			{
+		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height) {
 				WindowsWindow& win = *static_cast<WindowsWindow*>(glfwGetWindowUserPointer(window));
-				win.m_Data.Width = width;
-				win.m_Data.Height = height;
+				win.m_Data.width = width;
+				win.m_Data.height = height;
 
 				WindowResizeEvent event(width, height);
 				win.m_Context->SetViewport(width, height);
 				win.m_Data.EventCallback(event);
 			});
 
-		glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window)
-			{
+		glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window) {
 				WindowsWindow& win = *static_cast<WindowsWindow*>(glfwGetWindowUserPointer(window));
 				WindowCloseEvent event;
 				win.m_Data.EventCallback(event);
 			});
 
-		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
-			{
+		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods) {
 				WindowsWindow& win = *static_cast<WindowsWindow*>(glfwGetWindowUserPointer(window));
 
-				switch (action)
-				{
-					case GLFW_PRESS:
-					{
-						KeyPressedEvent event(key, 0);
+				switch (action) {
+					case GLFW_PRESS: {
+						KeyPressEvent event(key, 0);
 						win.m_Data.EventCallback(event);
 						break;
 					}
 
-					case GLFW_RELEASE:
-					{
-						KeyReleasedEvent event(key);
+					case GLFW_RELEASE: {
+						KeyReleaseEvent event(key);
 						win.m_Data.EventCallback(event);
 						break;
 					}
 
-					case GLFW_REPEAT:
-					{
-						KeyPressedEvent event(key, 1);
+					case GLFW_REPEAT: {
+							KeyPressEvent event(key, 1);
+							win.m_Data.EventCallback(event);
+							break;
+					}
+				}
+			});
+
+		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods) {
+				WindowsWindow& win = *static_cast<WindowsWindow*>(glfwGetWindowUserPointer(window));
+
+				switch (action) {
+					case GLFW_PRESS: {
+						MouseButtonPressEvent event(button);
+						win.m_Data.EventCallback(event);
+						break;
+					}
+
+					case GLFW_RELEASE: {
+						MouseButtonReleaseEvent event(button);
+						win.m_Data.EventCallback(event);
+						break;
+					}
+
+					case GLFW_REPEAT: {
+						MouseButtonPressEvent event(button);
 						win.m_Data.EventCallback(event);
 						break;
 					}
 				}
 			});
 
-		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods)
-			{
+		glfwSetScrollCallback(m_Window, [](GLFWwindow* window, double xOffset, double yOffset) {
 				WindowsWindow& win = *static_cast<WindowsWindow*>(glfwGetWindowUserPointer(window));
 
-				switch (action)
-				{
-					case GLFW_PRESS:
-					{
-						MouseButtonPressedEvent event(button);
-						win.m_Data.EventCallback(event);
-						break;
-					}
-
-					case GLFW_RELEASE:
-					{
-						MouseButtonReleasedEvent event(button);
-						win.m_Data.EventCallback(event);
-						break;
-					}
-
-					case GLFW_REPEAT:
-					{
-						MouseButtonPressedEvent event(button);
-						win.m_Data.EventCallback(event);
-						break;
-					}
-				}
-			});
-
-		glfwSetScrollCallback(m_Window, [](GLFWwindow* window, double xOffset, double yOffset)
-			{
-				WindowsWindow& win = *static_cast<WindowsWindow*>(glfwGetWindowUserPointer(window));
-
-				MouseScrolledEvent event((float)xOffset, (float)yOffset);
+				MouseScrollEvent event((float)xOffset, (float)yOffset);
 				win.m_Data.EventCallback(event);
 			});
 
-		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, double xPos, double yPos)
-			{
+		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, double xPos, double yPos) {
 				WindowsWindow& win = *static_cast<WindowsWindow*>(glfwGetWindowUserPointer(window));
 
-				MouseMovedEvent event((float)xPos, (float)yPos);
+				MouseMoveEvent event((float)xPos, (float)yPos);
 				win.m_Data.EventCallback(event);
 			});
   }
 
-  void WindowsWindow::Shutdown()
-  {
+  void WindowsWindow::Shutdown() {
+		PROFILE_FUNCTION();
 		m_Context->Shutdown();
 		glfwDestroyWindow(m_Window);
   }
 
-	void WindowsWindow::PoolEvents()
-	{
+	void WindowsWindow::PoolEvents() {
+		PROFILE_FUNCTION();
 		glfwPollEvents();
 	}
 
-  void WindowsWindow::OnUpdate()
-  {
+	void WindowsWindow::OnUpdate() {
 		m_Context->Update();
-  }
-
-  void WindowsWindow::BeginFrame()
-  {
-		m_Context->BeginFrame();
-  }
-
-	void WindowsWindow::EndFrame()
-	{
-    m_Context->EndFrame();
 	}
 
-  void WindowsWindow::InitImGui()
-  {
-    m_Context->InitImGui();
-  }
+	void WindowsWindow::BeginFrame() {
+		m_Context->BeginFrame();
+	}
 
-	void WindowsWindow::ShutdownImGui()
-	{
+	void WindowsWindow::EndFrame() {
+		m_Context->EndFrame();
+	}
+
+	void WindowsWindow::InitImGui() {
+		m_Context->InitImGui();
+	}
+
+	void WindowsWindow::ShutdownImGui() {
 		m_Context->ShutdownImGui();
 	}
 
-	void WindowsWindow::BeginFrameImGui()
-	{
+	void WindowsWindow::BeginFrameImGui() {
 		m_Context->BeginFrameImGui();
 	}
 
-	void WindowsWindow::EndFrameImGui()
-	{
-    m_Context->EndFrameImGui();
+	void WindowsWindow::EndFrameImGui() {
+		m_Context->EndFrameImGui();
 	}
 
-  void WindowsWindow::SetVSync(bool enabled)
-  {
+  void WindowsWindow::SetVSync(bool enabled) {
 		m_Context->SetVSync(enabled);
-		m_Data.VSync = enabled;
+		m_Data.vsync = enabled;
   }
 
-  void WindowsWindow::SetMinimized(bool enabled)
-  {
-		m_Data.Minimized = enabled;
-  }
-
-	void WindowsWindow::SetFocused(double enabled)
-	{
+	void WindowsWindow::SetFocused(double enabled) {
 		if (enabled) {
 			glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-			WindowFocusedEvent event;
+			WindowFocusEvent event;
 			m_Data.EventCallback(event);
 		} else {
 			glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
@@ -223,15 +180,14 @@ namespace Helios
 			m_Data.EventCallback(event);
 		}
 		
-		m_Data.Focus = enabled;
+		m_Data.focused = enabled;
 	}
 
-	void WindowsWindow::SetFullscreen(bool enabled)
-	{
+	void WindowsWindow::SetFullscreen(bool enabled) {
 		if (enabled) {
 			uint32_t width, height;
-			width = m_Data.Width;
-      height = m_Data.Height;
+			width = m_Data.width;
+      height = m_Data.height;
 
 			int xpos, ypos;
 			glfwGetWindowPos(m_Window, &xpos, &ypos);
@@ -241,53 +197,17 @@ namespace Helios
 
 			glfwSetWindowMonitor(m_Window, m_Monitor, 0, 0, m_Mode->width, m_Mode->height, m_Mode->refreshRate);
 
-			m_Data.Width = width;
-      m_Data.Height = height;
+			m_Data.width = width;
+      m_Data.height = height;
 		} else {
-			glfwSetWindowMonitor(m_Window, nullptr, m_Data.posX, m_Data.posX, m_Data.Width, m_Data.Height, GLFW_DONT_CARE);
+			glfwSetWindowMonitor(m_Window, nullptr, m_Data.posX, m_Data.posX, m_Data.width, m_Data.height, GLFW_DONT_CARE);
 		}
 
-		m_Data.Fullscreen = enabled;
+		m_Data.fullscreen = enabled;
 	}
 
-  void WindowsWindow::SetFramerate(double framerate)
-  {
-    m_Data.Framerate = framerate;
-  }
-
-	void WindowsWindow::SetImGuiState(bool enabled)
-	{
+	void WindowsWindow::SetImGuiState(bool enabled) {
 		m_Context->SetImGuiState(enabled);
-    m_Data.ShowImGui = enabled;
-	}
-
-	inline double WindowsWindow::GetFramerate() const
-	{
-		return m_Data.Framerate;
-	}
-
-	inline bool WindowsWindow::IsVSync() const
-  {
-		return m_Data.VSync;
-  }
-
-	inline bool WindowsWindow::IsMinimized() const
-	{
-		return m_Data.Minimized;
-	}
-
-	inline bool WindowsWindow::IsFocused() const
-	{
-		return m_Data.Focus;
-	}
-
-	inline bool WindowsWindow::IsFullscreen() const
-	{
-		return m_Data.Fullscreen;
-	}
-
-	inline bool WindowsWindow::IsImGuiEnabled() const
-	{
-		return m_Data.ShowImGui;
+    m_Data.showImGui = enabled;
 	}
 }

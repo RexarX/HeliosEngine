@@ -4,10 +4,8 @@
 
 struct ImGuiContext;
 
-namespace Helios
-{
-	class HELIOSENGINE_API Layer
-	{
+namespace Helios {
+	class HELIOSENGINE_API Layer {
 	public:
 		Layer(std::string_view name) : m_Name(name) {}
 		virtual ~Layer() = default;
@@ -16,7 +14,7 @@ namespace Helios
 		virtual void OnDetach() {}
 
 		virtual void OnUpdate(Timestep ts) {}
-		virtual void OnEvent(const Event& event) {}
+		virtual void OnEvent(Event& event) {}
 
 		virtual void Draw() {}
 
@@ -25,6 +23,6 @@ namespace Helios
 		inline const std::string& GetName() const { return m_Name; }
 
 	protected:
-		std::string m_Name = std::string();
+		std::string m_Name;
 	};
 }

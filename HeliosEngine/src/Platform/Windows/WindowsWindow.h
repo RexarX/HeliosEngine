@@ -6,14 +6,12 @@ struct GLFWwindow;
 struct GLFWmonitor;
 struct GLFWvidmode;
 
-namespace Helios
-{
+namespace Helios {
 	class GraphicsContext;
 
-	class WindowsWindow final : public Window
-	{
+	class WindowsWindow final : public Window {
 	public:
-		WindowsWindow(const WindowProps& props);
+		WindowsWindow(std::string_view title, uint32_t width, uint32_t height);
 		virtual ~WindowsWindow();
 
 		void PoolEvents() override;
@@ -29,27 +27,27 @@ namespace Helios
 		void SetEventCallback(const EventCallbackFn& callback) override { m_Data.EventCallback = callback; }
 
 		void SetVSync(bool enabled) override;
-		void SetMinimized(bool enabled) override;
+		void SetMinimized(bool enabled) override { m_Data.minimized = enabled; }
 		void SetFocused(double enabled) override;
 		void SetFullscreen(bool enabled) override;
-		void SetFramerate(double framerate) override;
+		void SetFramerate(double framerate) override { m_Data.framerate = framerate; }
 		void SetImGuiState(bool enabled) override;
 
-		inline uint32_t GetWidth() const override { return m_Data.Width; }
-		inline uint32_t GetHeight() const override { return m_Data.Height; }
+		inline uint32_t GetWidth() const override { return m_Data.width; }
+		inline uint32_t GetHeight() const override { return m_Data.height; }
 
-		inline double GetFramerate() const override;
+		inline double GetFramerate() const override { return m_Data.framerate; }
 
-		inline bool IsVSync() const override;
-		inline bool IsMinimized() const override;
-		inline bool IsFocused() const override;
-		inline bool IsFullscreen() const override;
-		inline bool IsImGuiEnabled() const override;
+		inline bool IsVSync() const override { return m_Data.vsync; }
+		inline bool IsMinimized() const override { return m_Data.minimized; }
+		inline bool IsFocused() const override { return m_Data.focused; }
+		inline bool IsFullscreen() const override { return m_Data.fullscreen; }
+		inline bool IsImGuiEnabled() const override { return m_Data.showImGui; }
 
 		inline void* GetNativeWindow() const override { return m_Window; }
 
 	private:
-		void Init(const WindowProps& props);
+		void Init(std::string_view title, uint32_t width, uint32_t heigh);
 		void Shutdown();
 
 	private:
@@ -59,17 +57,16 @@ namespace Helios
 
 		std::shared_ptr<GraphicsContext> m_Context = nullptr;
 
-		struct WindowData
-		{
-			std::string Title;
-			uint32_t Width, Height;
+		struct WindowData {
+			std::string title;
+			uint32_t width, height;
 			uint32_t posX, posY;
-			double Framerate = 0.0;
-			bool VSync = true;
-			bool Minimized = false;
-			bool Focus = false;
-			bool Fullscreen = false;
-			bool ShowImGui = false;
+			double framerate = 0.0;
+			bool vsync = true;
+			bool minimized = false;
+			bool focused = false;
+			bool fullscreen = false;
+			bool showImGui = false;
 
 			EventCallbackFn EventCallback;
 		};

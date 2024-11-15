@@ -4,10 +4,8 @@
 
 #include "Events/Event.h"
 
-namespace Helios
-{
-	void ImGuiLayer::OnAttach()
-	{
+namespace Helios {
+	void ImGuiLayer::OnAttach() {
 		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
 
@@ -33,19 +31,16 @@ namespace Helios
 		Application::Get().GetWindow().InitImGui();
 	}
 
-	void ImGuiLayer::OnDetach()
-	{
+	void ImGuiLayer::OnDetach() {
 		Application::Get().GetWindow().ShutdownImGui();
 		ImGui::DestroyContext();
 	}
 
-	void ImGuiLayer::OnEvent(const Event& e)
-	{
+	void ImGuiLayer::OnEvent(Event& event) {
 		if (m_BlockEvents) {
 			ImGuiIO& io = ImGui::GetIO();
-			Event& event = const_cast<Event&>(e);
-			event.Handled |= e.IsInCategory(EventCategoryMouse) & io.WantCaptureMouse;
-			event.Handled |= e.IsInCategory(EventCategoryKeyboard) & io.WantCaptureKeyboard;
+			event.Handled |= event.IsInCategory(EventCategoryMouse) & io.WantCaptureMouse;
+			event.Handled |= event.IsInCategory(EventCategoryKeyboard) & io.WantCaptureKeyboard;
 		}
 	}
 }

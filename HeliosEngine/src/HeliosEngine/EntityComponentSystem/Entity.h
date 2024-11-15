@@ -4,12 +4,10 @@
 
 #include <entt/entt.hpp>
 
-namespace Helios
-{
+namespace Helios {
   class Scene;
 
-  class HELIOSENGINE_API Entity
-  {
+  class HELIOSENGINE_API Entity {
   public:
     Entity() = default;
     Entity(entt::entity entity, Scene* scene);

@@ -27,7 +27,7 @@ set(ALL_FILES ${src} ${src__Layers} ${src__Scripts})
 
 add_executable(${PROJECT_NAME} ${ALL_FILES})
 
-set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 20 UNITY_BUILD ON)
+set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 23 UNITY_BUILD ON)
 
 foreach(OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES})
     string(TOUPPER ${OUTPUTCONFIG} UPOUTPUTCONFIG)
@@ -178,7 +178,14 @@ elseif (ENABLE_SIMD_AVX2)
     )
 endif()
 
+target_compile_definitions(${PROJECT_NAME} PRIVATE
+    $<$<BOOL:ENABLE_PROFILING>:"ENABLE_PROFILING">
+)
+
+find_package(Boost REQUIRED COMPONENTS uuid)
+
 target_link_libraries(${PROJECT_NAME} PRIVATE
 	HeliosEngine
     imgui
+    Boost::uuid
 )

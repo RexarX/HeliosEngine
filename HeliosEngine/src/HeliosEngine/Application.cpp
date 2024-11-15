@@ -4,12 +4,11 @@
 
 #include "Renderer/GraphicsContext.h"
 
-namespace Helios
-{
-	Application* Application::m_Instance = nullptr;
+namespace Helios {
+	Application::Application() {
+		PROFILE_BEGIN_SESSION("Initialization");
+		PROFILE_FUNCTION();
 
-	Application::Application()
-	{
 		CORE_ASSERT(m_Instance == nullptr, "Application already exists!");
 		m_Instance = this;
 
@@ -17,19 +16,27 @@ namespace Helios
 		m_Window->SetEventCallback(BIND_FN(Application::OnEvent));
 		
 #ifndef RELEASE_MODE
-		m_ImGuiLayer = new ImGuiLayer();
-		PushOverlay(m_ImGuiLayer);
+		{
+			PROFILE_SCOPE("ImGui initialization");
+
+			m_ImGuiLayer = new ImGuiLayer();
+			PushOverlay(m_ImGuiLayer);
+		}
 #endif
 
 		m_Running = true;
 	}
 
-	void Application::OnEvent(const Event& event)
-	{
+	Application::~Application() {
+		PROFILE_END_SESSION();
+		PROFILE_BEGIN_SESSION("Shutdown");
+	}
+	
+	void Application::OnEvent(Event& event) {
 		EventDispatcher dispatcher(event);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_FN(Application::OnWindowClose));
 		dispatcher.Dispatch<WindowResizeEvent>(BIND_FN(Application::OnWindowResize));
-		dispatcher.Dispatch<KeyPressedEvent>(BIND_FN(Application::OnKeyPressed));
+		dispatcher.Dispatch<KeyPressEvent>(BIND_FN(Application::OnKeyPress));
 
 		for (auto it = m_LayerStack.rbegin(); it != m_LayerStack.rend(); ++it) {
 			(*it)->OnEvent(event);
@@ -37,21 +44,18 @@ namespace Helios
 		}
 	}
 
-	bool Application::OnWindowClose(const WindowCloseEvent& event)
-	{
+	bool Application::OnWindowClose(WindowCloseEvent& event) {
 		m_Running = false;
 		return true;
 	}
 
-	bool Application::OnWindowResize(const WindowResizeEvent& event)
-	{
+	bool Application::OnWindowResize(WindowResizeEvent& event) {
 		if (event.GetWidth() == 0 || event.GetHeight() == 0) { m_Window->SetMinimized(true); }
 		else if (m_Window->IsMinimized()) { m_Window->SetMinimized(false); }
 		return true;
 	}
 
- bool Application::OnKeyPressed(const KeyPressedEvent& event)
-	{
+  bool Application::OnKeyPress(KeyPressEvent& event) {
 #ifndef RELEASE_MODE
     if (event.GetKeyCode() == Key::Home) {
 			bool newState = !m_Window->IsImGuiEnabled();
@@ -60,25 +64,42 @@ namespace Helios
     }
 #endif
 
+#ifdef ENABLE_PROFILING
+		if (event.GetKeyCode() == Key::F9) {
+			m_Profile = true;
+		}
+#endif
 		return true;
 	}
 
-	void Application::Run()
-	{
+	void Application::Run() {
+		PROFILE_END_SESSION();
+		PROFILE_BEGIN_SESSION("Frame");
+#ifdef ENABLE_PROFILING
+		bool profiling = false;
+#endif
 		double lastFrameUpdateTime = 0.0;
 		m_FramerateLimit = m_Window->GetFramerate() == 0.0 ? 0.0 : 1.0 / m_Window->GetFramerate();
 		
-		m_Timer.Start();
+		Utils::Timer timer;
+		timer.Start();
 		while (m_Running) {
-			m_Timer.Stop();
-			m_DeltaTime = m_Timer.GetElapsedSec() - lastFrameUpdateTime;
+#ifdef ENABLE_PROFILING
+			if (m_Profile) {
+				ACTIVATE_PROFILER();
+				profiling = true;
+			}
+#endif
+			PROFILE_SCOPE_ONCE("Frame");
+
+			timer.Stop();
+			m_DeltaTime = timer.GetElapsedSec() - lastFrameUpdateTime;
 
 			m_Window->PoolEvents();
 
-			if (!m_Window->IsMinimized() && (m_FramerateLimit == 0.0 || (double)m_DeltaTime >= m_FramerateLimit))
-			{
-				//CORE_TRACE("Delta time: {0}ms", m_DeltaTime.GetMilliseconds());
-				
+			if (!m_Window->IsMinimized() && (m_FramerateLimit == 0.0 || (double)m_DeltaTime >= m_FramerateLimit)) {
+				//CORE_TRACE("Delta time: {}ms", m_DeltaTime.GetMilliseconds());
+
 				for (Layer* layer : m_LayerStack) {
 					layer->OnUpdate(m_DeltaTime);
 				}
@@ -98,10 +119,16 @@ namespace Helios
 					m_Window->EndFrameImGui();
 				}
 #endif
-
 				m_Window->OnUpdate();
-				lastFrameUpdateTime = m_Timer.GetElapsedSec();
+				lastFrameUpdateTime = timer.GetElapsedSec();
+				++m_FrameCounter;
 			}
+#ifdef ENABLE_PROFILING
+			if (profiling) {
+				m_Profile = false;
+				profiling = false;
+			}
+#endif
 		}
 	}
 }

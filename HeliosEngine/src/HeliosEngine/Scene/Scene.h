@@ -8,23 +8,8 @@
 #include "EntityComponentSystem/Systems/EventSystem.h"
 #include "EntityComponentSystem/Systems/ScriptSystem.h"
 
-namespace std
-{
-  template <typename T> struct hash;
-
-  template<>
-  struct hash<Helios::UUID>
-  {
-    inline size_t operator()(Helios::UUID uuid) const {
-      return static_cast<size_t>(uuid);
-    }
-  };
-}
-
-namespace Helios
-{
-  class HELIOSENGINE_API Scene
-  {
+namespace Helios {
+  class HELIOSENGINE_API Scene {
   public:
     Scene();
     Scene(std::string_view name);
@@ -33,7 +18,7 @@ namespace Helios
     ~Scene() = default;
 
     void OnUpdate(Timestep deltaTime);
-    void OnEvent(const Event& event);
+    void OnEvent(Event& event);
     void Draw();
 
     void Load();
@@ -49,7 +34,7 @@ namespace Helios
 
     Entity& GetActiveCameraEntity();
 
-    template <typename T> requires std::is_base_of<Event, T>::value
+    template <typename T> requires std::is_base_of_v<Event, T>
     void PushEvent(T& event) { m_EventSystem.PushEvent(event); }
 
     inline const std::string& GetName() const { return m_Name; }
@@ -72,6 +57,7 @@ namespace Helios
     std::unordered_map<UUID, Entity> m_EntityMap;
 
     Entity m_RootEntity;
+    Entity m_InvalidEntity;
     
     EventSystem m_EventSystem;
     ScriptSystem m_ScriptSystem;

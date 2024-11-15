@@ -1,11 +1,9 @@
 #pragma once
 
-namespace Helios
-{
+namespace Helios {
 	using MouseCode = uint32_t;
 
-	namespace Mouse
-	{
+	namespace Mouse {
 		enum : MouseCode
 		{
 			Button0 = 0,

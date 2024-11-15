@@ -2,32 +2,28 @@
 
 #include "ShaderNode.h"
 
-namespace Helios
-{
+namespace Helios {
   ShaderGraph::ShaderGraph(std::string_view name)
-    : m_Name(name)
-  {
+    : m_Name(name) {
   }
 
-  void ShaderGraph::AddNode(const std::shared_ptr<ShaderNode>& node)
-  {
-    if (node == nullptr) { CORE_ERROR("Attempting to add null node!") return; }
+  void ShaderGraph::AddNode(const std::shared_ptr<ShaderNode>& node) {
+    if (node == nullptr) { CORE_ERROR("Attempting to add null node!"); return; }
 
     if (std::find(m_Nodes.begin(), m_Nodes.end(), node) != m_Nodes.end()) {
-      CORE_ERROR("Node already exists in the graph ('{}')!", node->GetName())
+      CORE_ERROR("Node already exists in the graph ('{}')!", node->GetName());
       return;
     }
 
     m_Nodes.push_back(node);
   }
 
-  void ShaderGraph::RemoveNode(const std::shared_ptr<ShaderNode>& node)
-  {
+  void ShaderGraph::RemoveNode(const std::shared_ptr<ShaderNode>& node) {
     if (node == nullptr) { CORE_ERROR("Attempting to remove null node!"); return; }
 
     auto nodeIt = std::find(m_Nodes.begin(), m_Nodes.end(), node);
     if (nodeIt == m_Nodes.end()) {
-      CORE_ERROR("Attempting to remove a node that not presented in the graph ('{}')!", node->GetName())
+      CORE_ERROR("Attempting to remove a node that not presented in the graph ('{}')!", node->GetName());
       return;
     }
 
@@ -46,18 +42,17 @@ namespace Helios
     m_Nodes.erase(nodeIt);
   }
 
-  void ShaderGraph::Connect(const std::shared_ptr<ShaderNode>& outputNode, const std::string& outputPortName,
-                            const std::shared_ptr<ShaderNode>& inputNode, const std::string& inputPortName)
-  {
+  void ShaderGraph::Connect(const std::shared_ptr<ShaderNode>& outputNode, std::string_view outputPortName,
+                            const std::shared_ptr<ShaderNode>& inputNode, std::string_view inputPortName) {
     if (outputNode == nullptr || inputNode == nullptr) {
-      CORE_ERROR("Attempting to connect null nodes!")
+      CORE_ERROR("Attempting to connect null nodes!");
       return;
     }
 
     if (std::find(m_Nodes.begin(), m_Nodes.end(), outputNode) == m_Nodes.end() ||
         std::find(m_Nodes.begin(), m_Nodes.end(), inputNode) == m_Nodes.end()) {
       CORE_ERROR("Attempting to connect nodes not present in the graph ('{}' and '{}')!",
-                 outputNode->GetName(), inputNode->GetName())
+                 outputNode->GetName(), inputNode->GetName());
       return;
     }
 
@@ -65,18 +60,18 @@ namespace Helios
     auto& outputPorts = outputNode->GetOutputPorts();
 
     auto outputPortIt = std::find_if(inputPorts.begin(), inputPorts.end(),
-      [&outputPortName](const NodePort& port) { return port.name == outputPortName; });
+      [&outputPortName](const ShaderNode::Port& port) { return port.name == outputPortName; });
 
     auto inputPortIt = std::find_if(outputPorts.begin(), outputPorts.end(),
-      [&inputPortName](const NodePort& port) { return port.name == inputPortName; });
+      [&inputPortName](const ShaderNode::Port& port) { return port.name == inputPortName; });
 
     if (outputPortIt == outputPorts.end() || inputPortIt == inputPorts.end()) {
-      CORE_ERROR("Invalid port name!")
+      CORE_ERROR("Invalid port name!");
       return;
     }
 
     if (outputPortIt->type != inputPortIt->type) {
-      CORE_ERROR("Incompatible port types!")
+      CORE_ERROR("Incompatible port types!");
       return;
     }
 
@@ -90,11 +85,10 @@ namespace Helios
     connections.push_back(newConnection);
   }
 
-  void ShaderGraph::Disconnect(const std::shared_ptr<ShaderNode>& outputNode, const std::string& outputPortName,
-                               const std::shared_ptr<ShaderNode>& inputNode, const std::string& inputPortName)
-  {
+  void ShaderGraph::Disconnect(const std::shared_ptr<ShaderNode>& outputNode, std::string_view outputPortName,
+                               const std::shared_ptr<ShaderNode>& inputNode, std::string_view inputPortName) {
     if (outputNode == nullptr || inputNode == nullptr) {
-      CORE_ERROR("Attempting to disconnect null nodes!")
+      CORE_ERROR("Attempting to disconnect null nodes!");
       return;
     }
 
@@ -111,8 +105,7 @@ namespace Helios
     if (connections.empty()) { m_Connections.erase(it); }
   }
 
-  std::string ShaderGraph::GenerateShader() const
-  {
+  std::string ShaderGraph::GenerateShader() const {
     std::string code;
     
 

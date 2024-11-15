@@ -4,15 +4,13 @@
 
 #include "VulkanUtils.h"
 
-namespace Helios
-{
-  class VulkanMesh final : public Mesh
-  {
+namespace Helios {
+  class VulkanMesh final : public Mesh {
   public:
-    VulkanMesh(MeshType type, const std::vector<std::byte>& vertices,
+    VulkanMesh(Type type, const std::vector<std::byte>& vertices,
                uint32_t vertexCount, const std::vector<uint32_t>& indices = {});
 
-    VulkanMesh(MeshType type, uint32_t vertexCount, uint32_t indexCount);
+    VulkanMesh(Type type, uint32_t vertexCount, uint32_t indexCount);
     virtual ~VulkanMesh();
 
     void Load() override;
@@ -23,7 +21,7 @@ namespace Helios
 
     void SetVertexLayout(const VertexLayout& layout) override { m_VertexLayout = layout; }
 
-    inline MeshType GetType() const override { return m_Type; }
+    inline Type GetType() const override { return m_Type; }
 
     inline bool IsLoaded() const override { return m_Loaded; }
 
@@ -55,7 +53,7 @@ namespace Helios
     void CreateDynamicIndexBuffer();
 
   private:
-    MeshType m_Type;
+    Type m_Type;
 
     bool m_Loaded = false;
 

@@ -2,13 +2,11 @@
 
 namespace Helios
 {
-  PipelineBuilder::PipelineBuilder()
-  {
+  PipelineBuilder::PipelineBuilder() {
     Clear();
   }
 
-  void PipelineBuilder::Clear()
-  {
+  void PipelineBuilder::Clear() {
     inputAssembly.sType = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;
     rasterizer.sType = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO;
     multisampling.sType = VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO;
@@ -20,8 +18,7 @@ namespace Helios
 
   void PipelineBuilder::BuildPipeline(const VkDevice device, VkPipelineLayout& layout, VkPipeline& pipeline,
                                       const VkRenderPass renderPass, const VkDescriptorSetLayout* descriptorSetLayouts,
-                                      uint32_t descriptorSetLayoutCount)
-  {
+                                      uint32_t descriptorSetLayoutCount) {
     VkPipelineLayoutCreateInfo info{};
     info.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
     info.flags = 0;
@@ -66,7 +63,7 @@ namespace Helios
     shaderStageInfo.pName = "main";
 
     std::vector<VkPipelineShaderStageCreateInfo> shaderStages(shaderInfos.size());
-    for (const VulkanShaderInfo& shaderInfo : shaderInfos) {
+    for (const VulkanShader::ShaderInfo& shaderInfo : shaderInfos) {
       shaderStageInfo.stage = shaderInfo.stage;
       shaderStageInfo.module = shaderInfo.shaderModule;
       shaderStages.push_back(shaderStageInfo);
@@ -93,26 +90,22 @@ namespace Helios
     CORE_ASSERT(result == VK_SUCCESS, "Failed to create pipeline!");
   }
 
-  void PipelineBuilder::SetInputTopology(VkPrimitiveTopology topology)
-  {
+  void PipelineBuilder::SetInputTopology(VkPrimitiveTopology topology) {
     inputAssembly.topology = topology;
     inputAssembly.primitiveRestartEnable = VK_FALSE;
   }
 
-  void PipelineBuilder::SetPolygonMode(VkPolygonMode mode)
-  {
+  void PipelineBuilder::SetPolygonMode(VkPolygonMode mode) {
     rasterizer.polygonMode = mode;
     rasterizer.lineWidth = 1.0f;
   }
 
-  void PipelineBuilder::SetCullMode(VkCullModeFlags cullMode, VkFrontFace frontFace)
-  {
+  void PipelineBuilder::SetCullMode(VkCullModeFlags cullMode, VkFrontFace frontFace) {
     rasterizer.cullMode = cullMode;
     rasterizer.frontFace = frontFace;
   }
 
-  void PipelineBuilder::SetMultisamplingNone()
-  {
+  void PipelineBuilder::SetMultisamplingNone() {
     multisampling.sampleShadingEnable = VK_FALSE;
     multisampling.rasterizationSamples = VK_SAMPLE_COUNT_1_BIT;
     multisampling.minSampleShading = 1.0f;
@@ -121,29 +114,25 @@ namespace Helios
     multisampling.alphaToOneEnable = VK_FALSE;
   }
 
-  void PipelineBuilder::DisableBlending()
-  {
-    colorBlendAttachment.colorWriteMask = VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT |
-                                          VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
+  void PipelineBuilder::DisableBlending() {
+    colorBlendAttachment.colorWriteMask = VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT
+                                          | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
 
     colorBlendAttachment.blendEnable = VK_FALSE;
   }
 
-  void PipelineBuilder::SetColorAttachmentFormat(VkFormat format)
-  {
+  void PipelineBuilder::SetColorAttachmentFormat(VkFormat format) {
     colorAttachmentFormat = format;
 
     renderInfo.colorAttachmentCount = 1;
     renderInfo.pColorAttachmentFormats = &colorAttachmentFormat;
   }
 
-  void PipelineBuilder::SetDepthFormat(VkFormat format)
-  {
+  void PipelineBuilder::SetDepthFormat(VkFormat format) {
     renderInfo.depthAttachmentFormat = format;
   }
 
-  void PipelineBuilder::DisableDepthTest()
-  {
+  void PipelineBuilder::DisableDepthTest() {
     depthStencil.depthTestEnable = VK_FALSE;
     depthStencil.depthWriteEnable = VK_FALSE;
     depthStencil.depthCompareOp = VK_COMPARE_OP_NEVER;
@@ -153,8 +142,7 @@ namespace Helios
     depthStencil.maxDepthBounds = 1.0f;
   }
 
-  void PipelineBuilder::EnableDepthTest()
-  {
+  void PipelineBuilder::EnableDepthTest() {
     depthStencil.depthTestEnable = VK_TRUE;
     depthStencil.depthWriteEnable = VK_TRUE;
     depthStencil.depthCompareOp = VK_COMPARE_OP_GREATER_OR_EQUAL;

@@ -2,12 +2,10 @@
 
 #include "pch.h"
 
-namespace Helios 
-{
+namespace Helios  {
 	class Layer;
 
-	class HELIOSENGINE_API LayerStack
-	{
+	class HELIOSENGINE_API LayerStack {
 	public:
 		LayerStack() = default;
 		~LayerStack();

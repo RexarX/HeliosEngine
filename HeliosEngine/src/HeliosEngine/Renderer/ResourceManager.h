@@ -2,11 +2,14 @@
 
 #include "RenderQueue.h"
 
-namespace Helios
-{
-  class ResourceManager
-  {
+namespace Helios {
+  class ResourceManager {
   public:
+    enum class PipelineType {
+      Regular,
+      Wireframe
+    };
+
     virtual ~ResourceManager() = default;
 
     virtual void InitializeResources(const entt::registry& registry, const std::vector<entt::entity>& renderables) = 0;

@@ -2,10 +2,8 @@
 
 #include "HeliosEngine/Input.h"
 
-namespace Helios
-{
-	class WindowsInput final : public Input
-	{
+namespace Helios {
+	class WindowsInput final : public Input {
 	protected:
 		bool IsKeyPressedImpl(KeyCode keycode) override;
 

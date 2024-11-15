@@ -1,36 +1,37 @@
 #pragma once
 
-#include "Types.h"
+#include "pch.h"
 
-namespace Helios
-{
-  struct VertexElement
-  {
+namespace Helios {
+  struct VertexElement {
+    enum class DataType {
+      Int, Int2, Int3, Int4,
+      Float, Vec2, Vec3, Vec4,
+      Mat3, Mat4,
+      Bool
+    };
+
     VertexElement() = default;
-
     VertexElement(std::string_view name, DataType type, bool normalized = false)
-      : name(name), type(type), size(DataTypeSize(type)), normalized(normalized)
-    {
+      : name(name), type(type), size(DataTypeSize(type)), normalized(normalized) {
     }
 
-    uint32_t GetComponentCount() const
-    {
-      switch (type)
-      {
-      case DataType::Float: return 1;
-      case DataType::Vec2: return 2;
-      case DataType::Vec3: return 3;
-      case DataType::Vec4: return 4;
-      case DataType::Mat3: return 3 * 3;
-      case DataType::Mat4: return 4 * 4;
-      case DataType::Int: return 1;
-      case DataType::Int2: return 2;
-      case DataType::Int3: return 3;
-      case DataType::Int4: return 4;
-      case DataType::Bool: return 1;
+    uint32_t DataTypeSize(DataType type) const {
+      switch (type) {
+        case DataType::Int: return 4;
+        case DataType::Int2: return 4 * 2;
+        case DataType::Int3: return 4 * 3;
+        case DataType::Int4: return 4 * 4;
+        case DataType::Float: return 4;
+        case DataType::Vec2: return 4 * 2;
+        case DataType::Vec3: return 4 * 3;
+        case DataType::Vec4: return 4 * 4;
+        case DataType::Mat3: return 4 * 3 * 3;
+        case DataType::Mat4: return 4 * 4 * 4;
+        case DataType::Bool: return 1;
       }
 
-      CORE_ASSERT(false, "Unknown DataType!")
+      CORE_ASSERT(false, "Unknown DataType!");
       return 0;
     }
 
@@ -43,14 +44,11 @@ namespace Helios
     bool normalized = false;
   };
   
-  class VertexLayout
-  {
+  class VertexLayout {
   public:
     VertexLayout() = default;
-
     VertexLayout(const std::initializer_list<VertexElement>& elements)
-      : m_Elements(elements)
-    {
+      : m_Elements(elements) {
       CalculateOffsetsAndStride();
     }
 
@@ -63,8 +61,7 @@ namespace Helios
     inline std::vector<VertexElement>::const_iterator end() const { return m_Elements.end(); }
 
   private:
-    void CalculateOffsetsAndStride()
-    {
+    void CalculateOffsetsAndStride() {
       uint64_t offset = 0;
       m_Stride = 0;
       for (auto& element : m_Elements) {

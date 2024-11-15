@@ -6,19 +6,17 @@
 #include <string>
 #include <sstream>
 
-namespace Helios
-{
-	enum class EventType
-	{
+namespace Helios {
+	enum class EventType : uint32_t {
 		None = 0,
-		WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowMoved,
+		WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowMov,
 		AppTick, AppUpdate, AppRender,
-		KeyPressed, KeyReleased,
-		MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled
+		KeyPress, KeyRelease,
+		MouseButtonPress, MouseButtonRelease, MouseMove, MouseScroll,
+		CustomEvent
 	};
 
-	enum EventCategory
-	{
+	enum EventCategory {
 		None = 0,
 		EventCategoryApplication = BIT(0),
 		EventCategoryInput = BIT(1),
@@ -27,14 +25,32 @@ namespace Helios
 		EventCategoryMouseButton = BIT(4)
 	};
 
-	#define EVENT_CLASS_TYPE(type) static inline EventType GetStaticType() { return EventType::type; }\
-																 virtual inline EventType GetEventType() const override { return GetStaticType(); }\
+	namespace detail {
+		static inline EventType getNextCustomEventType() {
+			static uint32_t nextId = static_cast<uint32_t>(EventType::CustomEvent);
+			return static_cast<EventType>(++nextId);
+		}
+
+		template <typename T>
+		static inline EventType registerEventType() {
+			static EventType type = getNextCustomEventType();
+			return type;
+		}
+	}
+
+	#define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { \
+																   if constexpr (std::is_enum_v<decltype(EventType::type)>) { \
+																	   return EventType::type; \
+																	 } else { \
+																	   return detail::registerEventType<type##Event>(); \
+																	 } \
+																 } \
+																 virtual inline EventType GetEventType() const override { return GetStaticType(); } \
 																 virtual inline const char* GetName() const override { return #type; }
 
 	#define EVENT_CLASS_CATEGORY(category) virtual inline uint32_t GetCategoryFlags() const override { return category; }
 
-	class HELIOSENGINE_API Event
-	{
+	class HELIOSENGINE_API Event {
 	public:
 		virtual ~Event() = default;
 
@@ -49,16 +65,14 @@ namespace Helios
 			bool Handled = false;
 	};
 
-	class EventDispatcher
-	{
+	class EventDispatcher {
 	public:
-		EventDispatcher(const Event& event) : m_Event(const_cast<Event&>(event)) {}
+		EventDispatcher(Event& event) : m_Event(event) {}
 
-		template<typename T>
-		bool Dispatch(const std::function<bool(const T&)>& func)
-		{
+		template <typename T> requires std::is_base_of_v<Event, T> 
+		bool Dispatch(const std::function<bool(T&)>& func) const {
 			if (m_Event.GetEventType() == T::GetStaticType()) {
-				m_Event.Handled = func(static_cast<const T&>(m_Event));
+				m_Event.Handled = func(static_cast<T&>(m_Event));
 				return true;
 			}
 
@@ -69,5 +83,5 @@ namespace Helios
 		Event& m_Event;
 	};
 
-	inline std::ostream& operator<<(std::ostream& os, const Event& e) { return os << e.ToString(); }
+	inline std::ostream& operator<<(std::ostream& os, Event& e) { return os << e.ToString(); }
 }

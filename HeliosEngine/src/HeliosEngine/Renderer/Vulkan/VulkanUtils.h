@@ -5,13 +5,10 @@
 #include "pch.h"
 
 #include <vulkan/vulkan.h>
-
 #include <vma/vk_mem_alloc.h>
 
-namespace Helios
-{
-  class DeletionQueue
-  {
+namespace Helios {
+  class DeletionQueue {
   public:
     void PushFunction(std::function<void()>&& function) {
       deletors.push_back(function);
@@ -28,8 +25,7 @@ namespace Helios
     std::vector<std::function<void()>> deletors;
   };
 
-  struct QueueFamilyIndices
-  {
+  struct QueueFamilyIndices {
     std::optional<uint32_t> graphicsFamily;
     std::optional<uint32_t> presentFamily;
 
@@ -38,15 +34,13 @@ namespace Helios
     }
   };
 
-  struct SwapChainSupportDetails
-  {
+  struct SwapChainSupportDetails {
     VkSurfaceCapabilitiesKHR capabilities;
     std::vector<VkSurfaceFormatKHR> formats;
     std::vector<VkPresentModeKHR> presentModes;
   };
 
-  struct FrameData
-  {
+  struct FrameData {
     VkCommandPool commandPool;
     VkCommandBuffer commandBuffer;
     VkSemaphore presentSemaphore;
@@ -54,8 +48,7 @@ namespace Helios
     VkFence renderFence;
   };
 
-  struct AllocatedImage
-  {
+  struct AllocatedImage {
     VkImage image;
     VkImageView imageView;
     VkExtent3D imageExtent;
@@ -64,15 +57,13 @@ namespace Helios
     VmaAllocation allocation;
   };
 
-  struct AllocatedBuffer
-  {
+  struct AllocatedBuffer {
     VkBuffer buffer;
     VmaAllocation allocation;
     VmaAllocationInfo info;
   };
 
-  struct PipelineBuilder
-  {
+  struct PipelineBuilder {
     PipelineBuilder();
 
     void Clear();
@@ -95,7 +86,7 @@ namespace Helios
     std::vector<VkVertexInputAttributeDescription> vertexInputStates;
     std::vector<VkVertexInputBindingDescription> vertexInputBindings;
 
-    std::vector<VulkanShaderInfo> shaderInfos;
+    std::vector<VulkanShader::ShaderInfo> shaderInfos;
 
     VkPipelineInputAssemblyStateCreateInfo inputAssembly{};
     VkPipelineRasterizationStateCreateInfo rasterizer{};
@@ -108,8 +99,7 @@ namespace Helios
   };
 
   static AllocatedImage CreateImage(uint32_t width, uint32_t height, VkFormat format, VkImageTiling tiling,
-                                    VkImageUsageFlags usage, VmaMemoryUsage memoryUsage, const VmaAllocator allocator)
-  {
+                                    VkImageUsageFlags usage, VmaMemoryUsage memoryUsage, const VmaAllocator allocator) {
     VkImageCreateInfo imageInfo{};
     imageInfo.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
     imageInfo.imageType = VK_IMAGE_TYPE_2D;
@@ -129,7 +119,7 @@ namespace Helios
     allocInfo.usage = memoryUsage;
     allocInfo.requiredFlags = VkMemoryPropertyFlags(VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
 
-    AllocatedImage allocatedImage;
+    AllocatedImage allocatedImage{};
     auto result = vmaCreateImage(allocator, &imageInfo, &allocInfo, &allocatedImage.image, &allocatedImage.allocation, nullptr);
     CORE_ASSERT(result == VK_SUCCESS, "Failed to create image!");
 
@@ -137,8 +127,7 @@ namespace Helios
   }
 
   static VkImageView CreateImageView(const VkImage image, VkFormat format, VkImageAspectFlags aspectFlags,
-                                     const VkDevice device)
-  {
+                                     const VkDevice device) {
     VkImageViewCreateInfo viewInfo{};
     viewInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
     viewInfo.image = image;

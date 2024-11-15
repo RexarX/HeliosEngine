@@ -4,10 +4,10 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
-namespace Helios
-{
-  void CameraSystem::OnUpdate(entt::registry& registry)
-  {
+namespace Helios {
+  void CameraSystem::OnUpdate(entt::registry& registry) {
+    PROFILE_FUNCTION();
+
     const auto& view = registry.view<Camera>();
     entt::entity cameraEntity = entt::null;
 
@@ -45,19 +45,19 @@ namespace Helios
     );
   }
 
-  void CameraSystem::OnEvent(entt::registry& registry, const Event& event)
-  {
+  void CameraSystem::OnEvent(entt::registry& registry, Event& event) {
+    PROFILE_FUNCTION();
+
     EventDispatcher dispatcher(event);
     dispatcher.Dispatch<WindowResizeEvent>(BIND_FN_WITH_REF(CameraSystem::OnWindowResize, registry));
   }
 
-  bool CameraSystem::OnWindowResize(entt::registry& registry, const WindowResizeEvent& event)
-  {
+  bool CameraSystem::OnWindowResize(entt::registry& registry, WindowResizeEvent& event) {
     if (event.GetWidth() == 0 || event.GetHeight() == 0) { return true; }
 
     for (entt::entity entity : registry.view<Camera>()) {
-      registry.get<Camera>(entity).camera.SetAspectRatio(static_cast<float>(event.GetWidth()) /
-                                                         static_cast<float>(event.GetHeight()));
+      registry.get<Camera>(entity).camera.SetAspectRatio(static_cast<float>(event.GetWidth())
+                                                         / static_cast<float>(event.GetHeight()));
     }
 
     return true;

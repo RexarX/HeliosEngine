@@ -2,10 +2,8 @@
 
 #include "RendererAPI.h"
 
-namespace Helios
-{
-  class GraphicsContext
-  {
+namespace Helios {
+  class GraphicsContext {
   public:
     GraphicsContext(void* window);
     ~GraphicsContext() = default;

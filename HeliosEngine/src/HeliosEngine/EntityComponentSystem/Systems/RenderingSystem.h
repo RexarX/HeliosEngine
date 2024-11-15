@@ -4,29 +4,29 @@
 
 #include <entt/entt.hpp>
 
-namespace Helios
-{
+namespace Helios {
   class GraphicsContext;
   class RenderQueue;
 
-  class RenderingSystem
-  {
+  class RenderingSystem {
   public:
     RenderingSystem();
     RenderingSystem(const RenderingSystem&);
     ~RenderingSystem() = default;
 
-    void OnUpdate(const entt::registry& registry);
+    void OnUpdate(entt::registry& registry);
 
     RenderingSystem& operator=(const RenderingSystem&);
 
     inline ResourceManager& GetResourceManager() { return *m_ResourceManager.get(); }
 
   private:
-    void FillRenderQueue(const entt::registry& registry, RenderQueue& renderQueue);
+    void FillRenderQueue(entt::registry& registry, RenderQueue& renderQueue);
 
   private:
     std::shared_ptr<GraphicsContext> m_GraphicsContext = nullptr;
     std::unique_ptr<ResourceManager> m_ResourceManager = nullptr;
+
+    RenderQueue m_RenderQueue;
   };
 }

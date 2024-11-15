@@ -2,30 +2,27 @@
 
 #include "Renderer/GraphicsContext.h"
 
-namespace Helios
-{
+namespace Helios {
   RenderingSystem::RenderingSystem()
-    : m_GraphicsContext(GraphicsContext::Get()), m_ResourceManager(ResourceManager::Create())
-  {
+    : m_GraphicsContext(GraphicsContext::Get()), m_ResourceManager(ResourceManager::Create()) {
   }
 
   RenderingSystem::RenderingSystem(const RenderingSystem& other)
-    : m_GraphicsContext(other.m_GraphicsContext),
-    m_ResourceManager(other.m_ResourceManager->Clone())
-  {
+    : m_GraphicsContext(other.m_GraphicsContext), m_ResourceManager(other.m_ResourceManager->Clone()) {
   }
 
-  void RenderingSystem::OnUpdate(const entt::registry& registry)
-  {
-    RenderQueue renderQueue;
-    FillRenderQueue(registry, renderQueue);
+  void RenderingSystem::OnUpdate(entt::registry& registry) {
+    PROFILE_FUNCTION();
 
-    m_ResourceManager->UpdateResources(renderQueue);
-    m_GraphicsContext->Record(renderQueue, *m_ResourceManager);
+    FillRenderQueue(registry, m_RenderQueue);
+
+    m_ResourceManager->UpdateResources(m_RenderQueue);
+    m_GraphicsContext->Record(m_RenderQueue, *m_ResourceManager);
+
+    m_RenderQueue.Clear();
   }
 
-  RenderingSystem& RenderingSystem::operator=(const RenderingSystem& other)
-  {
+  RenderingSystem& RenderingSystem::operator=(const RenderingSystem& other) {
     if (this != &other) {
       m_GraphicsContext = other.m_GraphicsContext;
       m_ResourceManager = other.m_ResourceManager->Clone();
@@ -34,7 +31,5 @@ namespace Helios
     return *this;
   }
 
-  void RenderingSystem::FillRenderQueue(const entt::registry& registry, RenderQueue& renderQueue)
-  {
-  }
+  void RenderingSystem::FillRenderQueue(entt::registry& registry, RenderQueue& renderQueue) {}
 }

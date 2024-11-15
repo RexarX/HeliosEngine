@@ -4,27 +4,25 @@
 
 #include <chrono>
 
-namespace Helios::Utils
-{
-	class HELIOSENGINE_API Timer
-	{
+namespace Helios::Utils {
+	class HELIOSENGINE_API Timer {
 	public:
-		using steady_clock = std::chrono::steady_clock;
+		using clock = std::chrono::steady_clock;
 
 		Timer() noexcept = default;
 
 		void Start() noexcept {
-			m_TimeStamp = steady_clock::now();
+			m_TimeStamp = clock::now();
 			m_IsRunning = true;
 		}
 
 		void Stop() noexcept {
 			if (!m_IsRunning) { CORE_ASSERT(false, "Timer is not running!"); return; }
-			m_Elapsed = steady_clock::now() - m_TimeStamp;
+			m_Elapsed = clock::now() - m_TimeStamp;
 		}
 
-		template <typename Type = steady_clock::duration::rep, typename Units = std::chrono::nanoseconds>
-		requires std::is_arithmetic<Type>::value && std::chrono::_Is_duration_v<Units>
+		template <typename Type = clock::duration::rep, typename Units = std::chrono::nanoseconds>
+		requires std::is_arithmetic_v<Type> && std::chrono::_Is_duration_v<Units>
 		inline Type GetElapsed() const noexcept {
 			return static_cast<Type>(std::chrono::duration_cast<Units>(m_Elapsed).count());
 		}
@@ -46,8 +44,8 @@ namespace Helios::Utils
     }
 
 	private:
-		steady_clock::time_point m_TimeStamp;
-		steady_clock::duration m_Elapsed = steady_clock::duration::zero();
+		clock::time_point m_TimeStamp;
+		clock::duration m_Elapsed = clock::duration::zero();
 		bool m_IsRunning = false;
 	};
 }

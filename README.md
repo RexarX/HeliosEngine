@@ -35,7 +35,7 @@ An attempt to create a game engine
 
 ### Dependencies
 * VulkanSDK with VMA (https://vulkan.lunarg.com/sdk/home)
-
+* Boost Uuid
 
 
 ### How to build

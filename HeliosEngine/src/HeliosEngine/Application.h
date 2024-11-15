@@ -3,55 +3,56 @@
 #include "Window.h"
 #include "LayerStack.h"
 
-namespace Helios
-{
-	class WindowCloseEvent;
-	class WindowResizeEvent;
-  class KeyPressedEvent;
+namespace Helios {
 	class ImGuiLayer;
 
-	class HELIOSENGINE_API Application
-	{
+	class HELIOSENGINE_API Application {
 	public:
 		Application();
-		virtual ~Application() = default;
+		virtual ~Application();
 
 		void Run();
 
-		void OnEvent(const Event& event);
+		void OnEvent(Event& event);
 
 		void PushLayer(Layer* layer) { m_LayerStack.PushLayer(layer); }
-
 		void PushOverlay(Layer* layer) { m_LayerStack.PushOverlay(layer); }
-
-		static inline Application& Get() { return *m_Instance; }
-
-		inline Timestep GetDeltaTime() const { return m_DeltaTime; }
 
 		inline const Window& GetWindow() const { return *m_Window; }
 		inline Window& GetWindow() { return *m_Window; }
+
+		inline Timestep GetDeltaTime() const { return m_DeltaTime; }
+		inline uint64_t GetFrameNumber() const { return m_FrameCounter; }
+
+		static inline Application& Get() { return *m_Instance; }
 	
 	private:
-		bool OnWindowClose(const WindowCloseEvent& event);
-		bool OnWindowResize(const WindowResizeEvent& event);
+		bool OnWindowClose(WindowCloseEvent& event);
+		bool OnWindowResize(WindowResizeEvent& event);
 
-		bool OnKeyPressed(const KeyPressedEvent& event);
+		bool OnKeyPress(KeyPressEvent& event);
 
 	private:
-		static Application* m_Instance;
+		static inline Application* m_Instance = nullptr;
 
 		std::unique_ptr<Window> m_Window = nullptr;
 
 		LayerStack m_LayerStack;
 
+#ifndef RELEASE_MODE
 		ImGuiLayer* m_ImGuiLayer = nullptr;
+#endif
 
 		bool m_Running = false;
 
-		Utils::Timer m_Timer;
 		Timestep m_DeltaTime;
 		double m_FramerateLimit = 0.0;
+		uint64_t m_FrameCounter = 0;
+
+#ifdef ENABLE_PROFILING
+		bool m_Profile = false;
+#endif
 	};
 
-	Application* CreateApplication();
+	inline Application* CreateApplication();
 }

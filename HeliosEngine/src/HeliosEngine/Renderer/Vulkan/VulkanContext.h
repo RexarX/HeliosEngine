@@ -14,10 +14,8 @@ static constexpr uint32_t MAX_FRAMES_IN_FLIGHT = 2;
 
 struct GLFWwindow;
 
-namespace Helios
-{
-  class VulkanContext final : public RendererAPI
-  {
+namespace Helios {
+  class VulkanContext final : public RendererAPI {
   public:
     VulkanContext(GLFWwindow* windowHandle);
     virtual ~VulkanContext() = default;
@@ -74,6 +72,10 @@ namespace Helios
     void RecreateSwapchain();
 
     bool CheckValidationLayerSupport() const;
+    static VKAPI_ATTR VkBool32 VKAPI_CALL DebugCallback(VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
+                                                        VkDebugUtilsMessageTypeFlagsEXT messageType,
+                                                        const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData,
+                                                        void* pUserData);
 
     std::vector<const char*> GetRequiredExtensions() const;
 
@@ -112,7 +114,7 @@ namespace Helios
       VK_KHR_SWAPCHAIN_EXTENSION_NAME
     };
 
-    static VulkanContext* m_Instance;
+    static inline VulkanContext* m_Instance = nullptr;
 
     GLFWwindow* m_WindowHandle = nullptr;
 

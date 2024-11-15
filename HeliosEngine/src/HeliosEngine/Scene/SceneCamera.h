@@ -4,12 +4,13 @@
 
 #include <glm/glm.hpp>
 
-namespace Helios
-{
-  class HELIOSENGINE_API SceneCamera
-  {
+namespace Helios {
+  class HELIOSENGINE_API SceneCamera {
   public:
-    enum class Projection { Perspective, Orthographic };
+    enum class Projection {
+      Perspective,
+      Orthographic
+    };
 
     SceneCamera() = default;
     ~SceneCamera() = default;
