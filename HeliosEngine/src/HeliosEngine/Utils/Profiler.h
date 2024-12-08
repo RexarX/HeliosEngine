@@ -5,6 +5,7 @@
 #include <string_view>
 #include <chrono>
 #include <fstream>
+#include <thread>
 #include <mutex>
 
 namespace Helios::Utils {
@@ -17,7 +18,8 @@ namespace Helios::Utils {
       std::thread::id threadID;
     };
 
-    Profiler() = default;
+    Profiler(const Profiler&) = delete;
+    Profiler(Profiler&&) = delete;
     ~Profiler();
 
     void Clear();
@@ -36,6 +38,8 @@ namespace Helios::Utils {
     }
 
   private:
+    Profiler() = default;
+
     void WriteHeader();
     void WriteFooter();
     void InternalEndSession();

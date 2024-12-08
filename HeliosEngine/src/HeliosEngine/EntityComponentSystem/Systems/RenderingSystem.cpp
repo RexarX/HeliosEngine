@@ -4,11 +4,11 @@
 
 namespace Helios {
   RenderingSystem::RenderingSystem()
-    : m_GraphicsContext(GraphicsContext::Get()), m_ResourceManager(ResourceManager::Create()) {
+    : m_GraphicsContext(GraphicsContext::Get()), m_PipelineManager(PipelineManager::Create()) {
   }
 
   RenderingSystem::RenderingSystem(const RenderingSystem& other)
-    : m_GraphicsContext(other.m_GraphicsContext), m_ResourceManager(other.m_ResourceManager->Clone()) {
+    : m_GraphicsContext(other.m_GraphicsContext), m_PipelineManager(other.m_PipelineManager->Clone()) {
   }
 
   void RenderingSystem::OnUpdate(entt::registry& registry) {
@@ -16,8 +16,8 @@ namespace Helios {
 
     FillRenderQueue(registry, m_RenderQueue);
 
-    m_ResourceManager->UpdateResources(m_RenderQueue);
-    m_GraphicsContext->Record(m_RenderQueue, *m_ResourceManager);
+    m_PipelineManager->UpdateResources(m_RenderQueue);
+    m_GraphicsContext->Record(m_RenderQueue, *m_PipelineManager);
 
     m_RenderQueue.Clear();
   }
@@ -25,7 +25,7 @@ namespace Helios {
   RenderingSystem& RenderingSystem::operator=(const RenderingSystem& other) {
     if (this != &other) {
       m_GraphicsContext = other.m_GraphicsContext;
-      m_ResourceManager = other.m_ResourceManager->Clone();
+      m_PipelineManager = other.m_PipelineManager->Clone();
     }
 
     return *this;

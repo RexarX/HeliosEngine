@@ -9,7 +9,7 @@ namespace Helios {
 		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
 
-		ImGuiIO& io = ImGui::GetIO(); (void)io;
+		ImGuiIO& io = ImGui::GetIO();
 		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
     io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
@@ -17,8 +17,14 @@ namespace Helios {
 		io.ConfigFlags |= ImGuiConfigFlags_DpiEnableScaleViewports;
 
 		float fontSize = 16.0f;
-		io.Fonts->AddFontFromFileTTF(std::format("{}Assets/Fonts/DroidSans.ttf", HELIOSENGINE_DIR).c_str(), fontSize);
-		io.FontDefault = io.Fonts->AddFontFromFileTTF(std::format("{}Assets/Fonts/Cousine-Regular.ttf", HELIOSENGINE_DIR).c_str(), fontSize);
+
+		const char* file = "Assets/Fonts/Cousine-Regular.ttf";
+		CORE_ASSERT(std::filesystem::exists(file), "'{}' does not exists!", file);
+		io.Fonts->AddFontFromFileTTF(file, fontSize);
+		
+		file = "Assets/Fonts/DroidSans.ttf";
+		CORE_ASSERT(std::filesystem::exists(file), "'{}' does not exists!", file);
+		io.FontDefault = io.Fonts->AddFontFromFileTTF(file, fontSize);
 		
 		ImGui::StyleColorsDark();
 		
@@ -37,10 +43,6 @@ namespace Helios {
 	}
 
 	void ImGuiLayer::OnEvent(Event& event) {
-		if (m_BlockEvents) {
-			ImGuiIO& io = ImGui::GetIO();
-			event.Handled |= event.IsInCategory(EventCategoryMouse) & io.WantCaptureMouse;
-			event.Handled |= event.IsInCategory(EventCategoryKeyboard) & io.WantCaptureKeyboard;
-		}
+		if (m_BlockEvents) { return; }
 	}
 }

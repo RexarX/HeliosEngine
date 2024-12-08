@@ -7,10 +7,10 @@
 namespace Helios {
   class VulkanMesh final : public Mesh {
   public:
-    VulkanMesh(Type type, const std::vector<std::byte>& vertices,
+    VulkanMesh(Type type, const VertexLayout& layout, const std::vector<std::byte>& vertices,
                uint32_t vertexCount, const std::vector<uint32_t>& indices = {});
 
-    VulkanMesh(Type type, uint32_t vertexCount, uint32_t indexCount);
+    VulkanMesh(Type type, const VertexLayout& layout, uint32_t vertexCount, uint32_t indexCount);
     virtual ~VulkanMesh();
 
     void Load() override;
@@ -18,8 +18,6 @@ namespace Helios {
 
     void SetData(const std::vector<std::byte>& vertices, uint32_t vertexCount,
                  const std::vector<uint32_t>& indices = {}) override;
-
-    void SetVertexLayout(const VertexLayout& layout) override { m_VertexLayout = layout; }
 
     inline Type GetType() const override { return m_Type; }
 
@@ -57,8 +55,8 @@ namespace Helios {
 
     bool m_Loaded = false;
 
-    std::vector<std::byte> m_VertexData;
     uint32_t m_VertexCount = 0;
+    std::vector<std::byte> m_VertexData;
 
     std::vector<uint32_t> m_Indices;
 

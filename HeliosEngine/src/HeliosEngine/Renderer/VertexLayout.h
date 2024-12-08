@@ -16,7 +16,9 @@ namespace Helios {
       : name(name), type(type), size(DataTypeSize(type)), normalized(normalized) {
     }
 
-    uint32_t DataTypeSize(DataType type) const {
+    ~VertexElement() = default;
+
+    static constexpr uint32_t DataTypeSize(DataType type) {
       switch (type) {
         case DataType::Int: return 4;
         case DataType::Int2: return 4 * 2;
@@ -64,7 +66,7 @@ namespace Helios {
     void CalculateOffsetsAndStride() {
       uint64_t offset = 0;
       m_Stride = 0;
-      for (auto& element : m_Elements) {
+      for (VertexElement& element : m_Elements) {
         element.offset = offset;
         offset += element.size;
         m_Stride += element.size;

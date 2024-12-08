@@ -5,8 +5,6 @@
 #include <glm/glm.hpp>
 
 namespace Helios {
-  
-
   class RenderQueue {
   public:
     struct SceneData {

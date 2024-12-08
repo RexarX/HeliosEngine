@@ -4,9 +4,10 @@
 
 namespace Helios {
   Scene& SceneManager::AddScene(const std::string& name) {
-    if (m_Scenes.contains(name)) {
+    auto it = m_Scenes.find(name);
+    if (it != m_Scenes.end()) {
       CORE_ASSERT(false, "Scene already exists ('{}')!", name);
-      return m_Scenes[name];
+      return it->second;
     }
 
     return m_Scenes.emplace(name, name).first->second;
@@ -32,13 +33,14 @@ namespace Helios {
   }
 
   Scene& SceneManager::GetScene(const std::string& name) {
-    if (!m_Scenes.contains(name)) { CORE_ASSERT(false, "Scene not found ('{}')!", name); }
+    auto it = m_Scenes.find(name);
+    if (it == m_Scenes.end()) { CORE_ASSERT(false, "Scene not found ('{}')!", name); }
     return m_Scenes[name];
   }
 
   Scene& SceneManager::GetActiveScene() {
-    for (auto& scene : m_Scenes) {
-      if (scene.second.IsActive()) { return scene.second; }
+    for (auto& [name, scene] : m_Scenes) {
+      if (scene.IsActive()) { return scene; }
     }
 
     CORE_ASSERT(false, "No active scene found!");

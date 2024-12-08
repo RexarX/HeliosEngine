@@ -9,7 +9,7 @@
 namespace Helios::Utils {
   class HELIOSENGINE_API Random {
   public:
-    template<typename T> requires std::is_arithmetic_v<T>
+    template <typename T> requires std::is_arithmetic_v<T>
     static T GetValue() {
       if constexpr (std::is_integral_v<T>) {
         if constexpr (std::is_same_v<T, bool>) {
@@ -31,7 +31,7 @@ namespace Helios::Utils {
       }
     }
     
-    template<typename T, typename U> requires std::is_arithmetic_v<T> && std::is_arithmetic_v<U>
+    template <typename T, typename U> requires std::is_arithmetic_v<T> && std::is_arithmetic_v<U>
     static auto GetValueFromRange(T min, U max) {
       using CommonType = std::common_type_t<T, U>;
 

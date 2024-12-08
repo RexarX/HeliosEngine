@@ -1,16 +1,15 @@
 #include "GraphicsContext.h"
 
 namespace Helios {
-  std::shared_ptr<GraphicsContext> GraphicsContext::m_Instance = nullptr;
-
-  GraphicsContext::GraphicsContext(void* window)
-    : m_Window(window), m_RendererAPI(RendererAPI::Create(window)) {
+  GraphicsContext::GraphicsContext(RendererAPI::API api, void* window)
+    : m_Window(window), m_RendererAPI(RendererAPI::Create(api, window)) {
   }
 
-  std::shared_ptr<GraphicsContext>& GraphicsContext::Create(void* window) {
-    CORE_ASSERT(m_Instance == nullptr, "GraphicsContext is already created!");
-
-    m_Instance = std::make_shared<GraphicsContext>(window);
+  std::shared_ptr<GraphicsContext>& GraphicsContext::Create(RendererAPI::API api, void* window) {
+    if (m_Instance == nullptr) {
+      m_Instance = std::make_shared<GraphicsContext>(api, window);
+    }
+    
     return m_Instance;
   }
 

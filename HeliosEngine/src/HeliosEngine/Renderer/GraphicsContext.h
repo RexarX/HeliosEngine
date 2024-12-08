@@ -5,7 +5,7 @@
 namespace Helios {
   class GraphicsContext {
   public:
-    GraphicsContext(void* window);
+    GraphicsContext(RendererAPI::API api, void* window);
     ~GraphicsContext() = default;
 
     void Init() { m_RendererAPI->Init(); }
@@ -14,7 +14,7 @@ namespace Helios {
 
     void BeginFrame() { m_RendererAPI->BeginFrame(); }
     void EndFrame() { m_RendererAPI->EndFrame(); }
-    void Record(const RenderQueue& queue, const ResourceManager& manager) {
+    void Record(const RenderQueue& queue, const PipelineManager& manager) {
       m_RendererAPI->Record(queue, manager);
     }
 
@@ -29,13 +29,12 @@ namespace Helios {
 
     void SetVSync(bool enabled) { m_RendererAPI->SetVSync(enabled); }
     void SetResized(bool resized) { m_RendererAPI->SetResized(resized); }
-    void SetImGuiState(bool enabled) { m_RendererAPI->SetImGuiState(enabled); }
 
-    static std::shared_ptr<GraphicsContext>& Create(void* window);
+    static std::shared_ptr<GraphicsContext>& Create(RendererAPI::API api, void* window);
     static std::shared_ptr<GraphicsContext>& Get();
 
   private:
-    static std::shared_ptr<GraphicsContext> m_Instance;
+    static inline std::shared_ptr<GraphicsContext> m_Instance = nullptr;
 
     void* m_Window = nullptr;
     std::unique_ptr<RendererAPI> m_RendererAPI = nullptr;

@@ -2,13 +2,14 @@
 #include "VulkanContext.h"
 
 namespace Helios {
-  VulkanMesh::VulkanMesh(Type type, const std::vector<std::byte>& vertices,
+  VulkanMesh::VulkanMesh(Type type, const VertexLayout& layout, const std::vector<std::byte>& vertices,
                          uint32_t vertexCount, const std::vector<uint32_t>& indices)
-    : m_Type(type), m_VertexData(vertices), m_VertexCount(vertexCount), m_Indices(indices) {
+    : m_Type(type), m_VertexData(vertices), m_VertexCount(vertexCount),
+    m_Indices(indices), m_VertexLayout(layout) {
   }
 
-  VulkanMesh::VulkanMesh(Type type, uint32_t vertexCount, uint32_t indexCount)
-    : m_Type(type), m_VertexCount(vertexCount), m_Indices(indexCount) {
+  VulkanMesh::VulkanMesh(Type type, const VertexLayout& layout, uint32_t vertexCount, uint32_t indexCount)
+    : m_Type(type), m_VertexCount(vertexCount), m_Indices(indexCount), m_VertexLayout(layout) {
   }
 
   VulkanMesh::~VulkanMesh() {
@@ -16,7 +17,10 @@ namespace Helios {
   }
 
   void VulkanMesh::Load() {
-    if (m_Loaded) { return; }
+    if (m_Loaded) {
+      CORE_ASSERT(false, "Mesh is alredy loaded!");
+      return;
+    }
 
     LoadVertexData();
     LoadIndexData();
@@ -25,7 +29,10 @@ namespace Helios {
   }
 
   void VulkanMesh::Unload() {
-    if (!m_Loaded) { return; }
+    if (!m_Loaded) {
+      CORE_ASSERT(false, "Mesh is already unloaded!");
+      return;
+    }
 
     UnloadVertexData();
     UnloadIndexData();
@@ -35,12 +42,15 @@ namespace Helios {
 
   void VulkanMesh::SetData(const std::vector<std::byte>& vertices, uint32_t vertexCount,
                            const std::vector<uint32_t>& indices) {
-    if (m_Type == Type::Static) { CORE_ASSERT(false, "Cannot modify static mesh!"); return; }
+    if (m_Type == Type::Static) {
+      CORE_ASSERT(false, "Cannot modify static mesh!");
+      return;
+    }
 
     if (vertexCount <= m_VertexCount) {
-      memcpy(m_VertexBuffer.info.pMappedData, vertices.data(), vertices.size());
-      memset(static_cast<std::byte*>(m_VertexBuffer.info.pMappedData) + vertices.size(), 0,
-             m_VertexData.size() - vertices.size());
+      std::memcpy(m_VertexBuffer.info.pMappedData, vertices.data(), vertices.size());
+      std::memset(static_cast<std::byte*>(m_VertexBuffer.info.pMappedData) + vertices.size(), 0,
+                  m_VertexData.size() - vertices.size());
 
       m_VertexData = vertices;
       m_VertexCount = vertexCount;
@@ -65,10 +75,9 @@ namespace Helios {
 
       VkResult result = vmaCreateBuffer(allocator, &bufferInfo, &vmaallocInfo, &m_VertexBuffer.buffer,
                                         &m_VertexBuffer.allocation, &m_VertexBuffer.info);
-
       CORE_ASSERT(result == VK_SUCCESS, "Failed to create vertex buffer!");
 
-      memcpy(m_VertexBuffer.info.pMappedData, vertices.data(), vertices.size());
+      std::memcpy(m_VertexBuffer.info.pMappedData, vertices.data(), vertices.size());
 
       m_Loaded = true;
       m_VertexData = vertices;
@@ -77,9 +86,9 @@ namespace Helios {
 
     if (!indices.empty()) {
       if (indices.size() <= m_Indices.size()) {
-        memcpy(m_IndexBuffer.info.pMappedData, indices.data(), indices.size() * sizeof(uint32_t));
-        memset(static_cast<std::byte*>(m_IndexBuffer.info.pMappedData) + indices.size() * sizeof(uint32_t),
-               0, (m_Indices.size() - indices.size()) * sizeof(uint32_t));
+        std::memcpy(m_IndexBuffer.info.pMappedData, indices.data(), indices.size() * sizeof(uint32_t));
+        std::memset(static_cast<std::byte*>(m_IndexBuffer.info.pMappedData) + indices.size() * sizeof(uint32_t),
+                    0, (m_Indices.size() - indices.size()) * sizeof(uint32_t));
 
         m_Indices = indices;
       } else {
@@ -103,10 +112,9 @@ namespace Helios {
 
         VkResult result = vmaCreateBuffer(allocator, &bufferInfo, &vmaallocInfo, &m_IndexBuffer.buffer,
                                           &m_IndexBuffer.allocation, &m_IndexBuffer.info);
-
         CORE_ASSERT(result == VK_SUCCESS, "Failed to create index buffer!");
 
-        memcpy(m_IndexBuffer.info.pMappedData, indices.data(), indices.size() * sizeof(uint32_t));
+        std::memcpy(m_IndexBuffer.info.pMappedData, indices.data(), indices.size() * sizeof(uint32_t));
 
         m_Loaded = true;
         m_Indices = indices;
@@ -118,7 +126,7 @@ namespace Helios {
     switch (m_Type) {
       case Type::Static: CreateStaticVertexBuffer(); return;
       case Type::Dynamic: CreateDynamicVertexBuffer(); return;
-      default: std::unreachable();
+      default: CORE_ASSERT(false, "Unknown mesh type!"); return;
     } 
   }
 
@@ -133,7 +141,7 @@ namespace Helios {
     switch (m_Type) {
       case Type::Static: CreateStaticIndexBuffer(); return;
       case Type::Dynamic: CreateDynamicIndexBuffer(); return;
-      default: std::unreachable();
+      default: CORE_ASSERT(false, "Unknown mesh type!"); return;
     }
   }
 
@@ -145,7 +153,10 @@ namespace Helios {
   }
 
   void VulkanMesh::CreateStaticVertexBuffer() {
-    CORE_ASSERT(m_VertexLayout.GetElements().size() != 0, "Vertex Buffer has no layout!");
+    if (m_VertexLayout.GetElements().empty()) {
+      CORE_ASSERT(false, "Vertex Buffer has no layout!");
+      return;
+    }
 
     VulkanContext& context = VulkanContext::Get();
     VmaAllocator allocator = context.GetAllocator();
@@ -164,7 +175,6 @@ namespace Helios {
 
     VkResult result = vmaCreateBuffer(allocator, &bufferInfo, &vmaallocInfo, &stagingVertexBuffer.buffer,
                                       &stagingVertexBuffer.allocation, &stagingVertexBuffer.info);
-
     CORE_ASSERT(result == VK_SUCCESS, "Failed to create staging vertex buffer!");
 
     bufferInfo.usage = VK_BUFFER_USAGE_VERTEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT;
@@ -172,12 +182,11 @@ namespace Helios {
 
     result = vmaCreateBuffer(allocator, &bufferInfo, &vmaallocInfo, &m_VertexBuffer.buffer,
                              &m_VertexBuffer.allocation, &m_VertexBuffer.info);
-
     CORE_ASSERT(result == VK_SUCCESS, "Failed to create vertex buffer!");
 
-    memcpy(stagingVertexBuffer.info.pMappedData, m_VertexData.data(), m_VertexData.size());
+    std::memcpy(stagingVertexBuffer.info.pMappedData, m_VertexData.data(), m_VertexData.size());
 
-    context.ImmediateSubmit([&](const VkCommandBuffer cmd) {
+    context.ImmediateSubmit([this, &stagingVertexBuffer](const VkCommandBuffer cmd) {
       VkBufferCopy vertexCopy;
       vertexCopy.dstOffset = 0;
       vertexCopy.srcOffset = 0;
@@ -191,7 +200,10 @@ namespace Helios {
   }
 
   void VulkanMesh::CreateDynamicVertexBuffer() {
-    CORE_ASSERT(m_VertexLayout.GetElements().size() != 0, "Vertex Buffer has no layout!");
+    if (m_VertexLayout.GetElements().empty()) {
+      CORE_ASSERT(false, "Vertex Buffer has no layout!");
+      return;
+    }
 
     VulkanContext& context = VulkanContext::Get();
     VmaAllocator allocator = context.GetAllocator();
@@ -208,10 +220,9 @@ namespace Helios {
 
     VkResult result = vmaCreateBuffer(allocator, &bufferInfo, &vmaallocInfo, &m_VertexBuffer.buffer,
                                       &m_VertexBuffer.allocation, &m_VertexBuffer.info);
-
     CORE_ASSERT(result == VK_SUCCESS, "Failed to create vertex buffer!");
 
-    memcpy(m_VertexBuffer.info.pMappedData, m_VertexData.data(), m_VertexData.size()); 
+    std::memcpy(m_VertexBuffer.info.pMappedData, m_VertexData.data(), m_VertexData.size());
   }
 
   void VulkanMesh::CreateStaticIndexBuffer() {
@@ -232,7 +243,6 @@ namespace Helios {
 
     VkResult result = vmaCreateBuffer(allocator, &bufferInfo, &vmaallocInfo, &stagingIndexBuffer.buffer,
                                       &stagingIndexBuffer.allocation, &stagingIndexBuffer.info);
-
     CORE_ASSERT(result == VK_SUCCESS, "Failed to create staging index buffer!");
 
     bufferInfo.usage = VK_BUFFER_USAGE_INDEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT;
@@ -240,12 +250,11 @@ namespace Helios {
 
     result = vmaCreateBuffer(allocator, &bufferInfo, &vmaallocInfo, &m_IndexBuffer.buffer,
                              &m_IndexBuffer.allocation, &m_IndexBuffer.info);
-
     CORE_ASSERT(result == VK_SUCCESS, "Failed to create index buffer!");
 
-    memcpy(stagingIndexBuffer.info.pMappedData, m_Indices.data(), m_Indices.size() * sizeof(uint32_t));
+    std::memcpy(stagingIndexBuffer.info.pMappedData, m_Indices.data(), m_Indices.size() * sizeof(uint32_t));
 
-    context.ImmediateSubmit([&](const VkCommandBuffer cmd) {
+    context.ImmediateSubmit([this, &stagingIndexBuffer](const VkCommandBuffer cmd) {
       VkBufferCopy vertexCopy;
       vertexCopy.dstOffset = 0;
       vertexCopy.srcOffset = 0;
@@ -277,6 +286,6 @@ namespace Helios {
 
     CORE_ASSERT(result == VK_SUCCESS, "Failed to create index buffer!");
 
-    memcpy(m_IndexBuffer.info.pMappedData, m_Indices.data(), m_Indices.size() * sizeof(uint32_t));
+    std::memcpy(m_IndexBuffer.info.pMappedData, m_Indices.data(), m_Indices.size() * sizeof(uint32_t));
   }
 }

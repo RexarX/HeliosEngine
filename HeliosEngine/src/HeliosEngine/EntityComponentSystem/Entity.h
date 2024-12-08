@@ -39,7 +39,7 @@ namespace Helios {
     Entity& GetParent() const;
     const std::vector<Entity*>& GetChildren() const;
 
-    inline bool IsValid() const;
+    bool IsValid() const;
 
     inline entt::entity GetEntity() const { return m_Entity; }
 

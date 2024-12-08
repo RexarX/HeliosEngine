@@ -10,12 +10,12 @@ namespace Helios {
         CORE_ASSERT_CRITICAL(false, "RendererAPI::None is not supported!");
         return nullptr;
       }
+
       case RendererAPI::API::Vulkan: {
         return std::make_shared<VulkanShader>(shaderInfos);
       }
-    }
 
-    CORE_ASSERT_CRITICAL(false, "Unknown RendererAPI!");
-    return nullptr;
+      default: CORE_ASSERT_CRITICAL(false, "Unknown RendererAPI!"); return nullptr;
+    }
   }
 }

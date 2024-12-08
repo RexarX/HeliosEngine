@@ -1,12 +1,14 @@
 #include "VulkanContext.h"
-#include "VulkanResourceManager.h"
+#include "VulkanPipelineManager.h"
 #include "VulkanMesh.h"
+
+#include "Window.h"
 
 #include <GLFW/glfw3.h>
 
-#include <imgui/imgui.h>
-#include <backends/imgui_impl_glfw.h>
-#include <backends/imgui_impl_vulkan.h>
+#include <imgui.h>
+#include <imgui_impl_glfw.h>
+#include <imgui_impl_vulkan.h>
 
 namespace Helios {
   VulkanContext::VulkanContext(GLFWwindow* windowHandle)
@@ -19,7 +21,6 @@ namespace Helios {
 
   void VulkanContext::Init() {
     PROFILE_FUNCTION();
-
     CreateInstance();
     SetupDebugMessenger();
     CreateSurface();
@@ -40,7 +41,6 @@ namespace Helios {
 
     vkDeviceWaitIdle(m_Device);
 
-    ShutdownImGui();
     m_MainDeletionQueue.Flush();
     CleanupSwapchain();
 
@@ -157,17 +157,17 @@ namespace Helios {
     if (m_SwapchainRecreated) { return; }
   }
 
-  void VulkanContext::Record(const RenderQueue& queue, const ResourceManager& manager) {
+  void VulkanContext::Record(const RenderQueue& queue, const PipelineManager& manager) {
     PROFILE_FUNCTION();
 
     if (m_SwapchainRecreated) { return; }
 
-    const VulkanResourceManager& resourceManager = static_cast<const VulkanResourceManager&>(manager);
+    const VulkanPipelineManager& pipelineManager = static_cast<const VulkanPipelineManager&>(manager);
     VkCommandBuffer commandBuffer = m_Frames[m_CurrentFrame].commandBuffer;
-    std::unordered_map<const VulkanResourceManager::VulkanEffect*, std::vector<const RenderQueue::RenderObject*>> pipelineGroups;
+    std::unordered_map<const VulkanPipelineManager::VulkanEffect*, std::vector<const RenderQueue::RenderObject*>> pipelineGroups;
 
     for (const RenderQueue::RenderQueue::RenderObject& object : queue.GetRenderObjects()) {
-      const VulkanResourceManager::VulkanEffect& effect = resourceManager.GetEffect(object.renderable, ResourceManager::PipelineType::Regular);
+      const VulkanPipelineManager::VulkanEffect& effect = pipelineManager.GetPipeline(object.renderable, PipelineManager::PipelineType::Regular);
       pipelineGroups[&effect].push_back(&object);
     }
 
@@ -199,8 +199,6 @@ namespace Helios {
   }
 
   void VulkanContext::SetViewport(uint32_t width, uint32_t height, uint32_t x, uint32_t y) {
-    m_SwapchainRecreated = true;
-
     m_Viewport.x = static_cast<float>(x);
     m_Viewport.y = static_cast<float>(y + height);
     m_Viewport.width = static_cast<float>(width);
@@ -210,6 +208,8 @@ namespace Helios {
 
     m_Scissor.offset = { static_cast<int32_t>(x), static_cast<int32_t>(y) };
     m_Scissor.extent = { width, height };
+
+    if (!m_SwapchainImages.empty()) { RecreateSwapchain(); }
   }
 
   void VulkanContext::InitImGui() {
@@ -261,6 +261,8 @@ namespace Helios {
 #ifndef RELEASE_MODE
     PROFILE_FUNCTION();
 
+    vkDeviceWaitIdle(m_Device);
+
     ImGui_ImplVulkan_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     vkDestroyDescriptorPool(m_Device, m_ImGuiPool, nullptr);
@@ -270,9 +272,10 @@ namespace Helios {
   void VulkanContext::BeginFrameImGui() { 
     PROFILE_FUNCTION();
 
+    ImGuiViewport* viewPort = ImGui::GetMainViewport();
     if (m_SwapchainRecreated) {
       ImGui::NewFrame();
-      ImGui::DockSpaceOverViewport(ImGui::GetMainViewport(), ImGuiDockNodeFlags_PassthruCentralNode);
+      ImGui::DockSpaceOverViewport(viewPort->ID, viewPort, ImGuiDockNodeFlags_PassthruCentralNode);
       return;
     }
 
@@ -280,7 +283,7 @@ namespace Helios {
     ImGui_ImplGlfw_NewFrame();
 
     ImGui::NewFrame();
-    ImGui::DockSpaceOverViewport(ImGui::GetMainViewport(), ImGuiDockNodeFlags_PassthruCentralNode);
+    ImGui::DockSpaceOverViewport(viewPort->ID, viewPort, ImGuiDockNodeFlags_PassthruCentralNode);
   }
 
   void VulkanContext::EndFrameImGui() {
@@ -310,9 +313,11 @@ namespace Helios {
     glfwMakeContextCurrent(backupContext);
   }
 
-  void VulkanContext::SetVSync(const bool enabled) {
-    m_Vsync = enabled;
-    RecreateSwapchain();
+  void VulkanContext::SetVSync(bool enabled) {
+    if (m_Vsync != enabled) {
+      m_Vsync = enabled;
+      if (!m_SwapchainImages.empty()) { RecreateSwapchain(); }
+    }
   }
 
   void VulkanContext::ImmediateSubmit(std::function<void(const VkCommandBuffer cmd)>&& function) {
@@ -345,17 +350,20 @@ namespace Helios {
     vkWaitForFences(m_Device, 1, &m_ImFence, true, std::numeric_limits<uint64_t>::max());
   }
 
-  inline const VkPhysicalDeviceLimits& VulkanContext::GetPhysicalDeviceLimits() const {
-    static VkPhysicalDeviceProperties properties;
-    vkGetPhysicalDeviceProperties(m_PhysicalDevice, &properties);
-    return properties.limits;
-  }
-
   void VulkanContext::CreateInstance() {
     PROFILE_FUNCTION();
 
-    CORE_ASSERT(!enableValidationLayers || CheckValidationLayerSupport(),
-                "Validation layers requested, but not available!");
+	  bool validationLayersAvaliable = !enableValidationLayers || CheckValidationLayerSupport();
+    CORE_ASSERT(validationLayersAvaliable, "Validation layers requested, but not available!");
+
+    uint32_t apiVersion = VK_API_VERSION_1_0;
+    if (vkEnumerateInstanceVersion) {
+      vkEnumerateInstanceVersion(&apiVersion);
+    }
+
+    if (apiVersion == VK_API_VERSION_1_0) {
+      m_DeviceExtensions.push_back(VK_KHR_MAINTENANCE1_EXTENSION_NAME);
+    }
 
     VkApplicationInfo appInfo{};
     appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
@@ -363,7 +371,7 @@ namespace Helios {
     appInfo.applicationVersion = VK_MAKE_API_VERSION(1, 0, 0, 0);
     appInfo.pEngineName = "Helios Engine";
     appInfo.engineVersion = VK_MAKE_API_VERSION(1, 0, 0, 0);
-    appInfo.apiVersion = VK_API_VERSION_1_1;
+    appInfo.apiVersion = apiVersion;
 
     VkInstanceCreateInfo createInfo{};
     createInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
@@ -374,7 +382,7 @@ namespace Helios {
     createInfo.ppEnabledExtensionNames = extensions.data();
 
     VkDebugUtilsMessengerCreateInfoEXT debugCreateInfo{};
-    if (enableValidationLayers) {
+    if (validationLayersAvaliable) {
       createInfo.enabledLayerCount = static_cast<uint32_t>(m_ValidationLayers.size());
       createInfo.ppEnabledLayerNames = m_ValidationLayers.data();
 
@@ -738,10 +746,10 @@ namespace Helios {
 
     VkFormat depthFormat = FindDepthFormat();
 
-    m_DepthImage = CreateImage(m_SwapchainExtent.width, m_SwapchainExtent.height, depthFormat, VK_IMAGE_TILING_OPTIMAL,
-                               VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT, VMA_MEMORY_USAGE_GPU_ONLY, m_Allocator);
+    m_DepthImage = CreateImage(m_Allocator, VMA_MEMORY_USAGE_GPU_ONLY, m_SwapchainExtent.width, m_SwapchainExtent.height,
+                               depthFormat, VK_IMAGE_TILING_OPTIMAL, VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT);
 
-    m_DepthImage.imageView = CreateImageView(m_DepthImage.image, depthFormat, VK_IMAGE_ASPECT_DEPTH_BIT, m_Device);
+    m_DepthImage.imageView = CreateImageView(m_Device, m_DepthImage.image, depthFormat, VK_IMAGE_ASPECT_DEPTH_BIT);
   }
 
   void VulkanContext::CreateFramebuffers() {
@@ -857,7 +865,7 @@ namespace Helios {
     return extensions;
   }
 
-  void VulkanContext::PopulateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo) {
+  void VulkanContext::PopulateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo) const {
     createInfo = {};
     createInfo.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
     createInfo.messageSeverity = VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT
@@ -979,9 +987,10 @@ namespace Helios {
     return indices.IsComplete() && extensionsSupported && swapChainAdequate && supportedFeatures.samplerAnisotropy;
   }
 
-  VkSurfaceFormatKHR VulkanContext::ChooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats) const {
+  VkSurfaceFormatKHR VulkanContext::ChooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats) {
     for (const VkSurfaceFormatKHR& availableFormat : availableFormats) {
-      if (availableFormat.format == VK_FORMAT_B8G8R8A8_UNORM && availableFormat.colorSpace == VK_COLOR_SPACE_SRGB_NONLINEAR_KHR) {
+      if (availableFormat.format == VK_FORMAT_B8G8R8A8_UNORM
+          && availableFormat.colorSpace == VK_COLOR_SPACE_SRGB_NONLINEAR_KHR) {
         return availableFormat;
       }
     }
@@ -992,7 +1001,6 @@ namespace Helios {
     VkPresentModeKHR bestMode = VK_PRESENT_MODE_FIFO_KHR;
 
     if (m_Vsync) { return bestMode; }
-
     for (const VkPresentModeKHR& availablePresentMode : availablePresentModes) {
       if (availablePresentMode == VK_PRESENT_MODE_MAILBOX_KHR) { return availablePresentMode; }
       else if (availablePresentMode == VK_PRESENT_MODE_IMMEDIATE_KHR) { bestMode = availablePresentMode; }
@@ -1020,7 +1028,7 @@ namespace Helios {
     }
   }
 
-  uint32_t VulkanContext::ChooseImageCount(const VkSurfaceCapabilitiesKHR& capabilities) const {
+  uint32_t VulkanContext::ChooseImageCount(const VkSurfaceCapabilitiesKHR& capabilities) {
     uint32_t imageCount = capabilities.minImageCount + 1;
     if (capabilities.maxImageCount > 0 && imageCount > capabilities.maxImageCount) {
       imageCount = capabilities.maxImageCount;
@@ -1043,13 +1051,5 @@ namespace Helios {
 
     CORE_ASSERT(false, "Failed to find supported format!");
     return VK_FORMAT_UNDEFINED;
-  }
-
-  VkFormat VulkanContext::FindDepthFormat() const {
-    return FindSupportedFormat(
-      { VK_FORMAT_D32_SFLOAT, VK_FORMAT_D32_SFLOAT_S8_UINT, VK_FORMAT_D24_UNORM_S8_UINT },
-      VK_IMAGE_TILING_OPTIMAL,
-      VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT
-    );
   }
 }

@@ -72,15 +72,15 @@ namespace Helios {
 
 				CombineHash(seed, renderable.material->GetColor().x >= 0.0f);
 				CombineHash(seed, renderable.material->GetSpecular() >= 0.0f
-													|| renderable.material->GetMetallic() >= 0.0f
-													|| renderable.material->GetRoughness() >= 0.0f);
+													|| renderable.material->GetRoughness() >= 0.0f
+													|| renderable.material->GetMetallic() >= 0.0f);
 			}
 
 			return seed;
 		}
 
 	private:
-		template <class T>
+		template <typename T>
 		void CombineHash(size_t& seed, const T& v) const {
 			std::hash<T> hasher;
 			seed ^= hasher(v) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
@@ -99,16 +99,16 @@ namespace Helios {
 		friend class Entity;
 
 	protected:
-		template <typename T> requires std::is_base_of_v<Event, T>
-		void AddListener(const std::function<void(const T&)>& callback) const {
-			m_EventSystem->AddListener<T>(this, callback);
+		template <EventTrait T>
+		void AddListener(std::function<void(T&)> callback) {
+			m_EventSystem->AddListener<T>(this, std::move(callback));
 		}
 
-		template <typename T> requires std::is_base_of_v<Event, T>
+		template <EventTrait T>
 		void RemoveListener() const { m_EventSystem->RemoveListener<T>(this); }
 
-		template <typename T> requires std::is_base_of_v<Event, T>
-		void PushEvent(T& event) const { m_EventSystem->PushEvent(event); }
+		template <EventTrait T>
+		void PushEvent(const T& event) const { m_EventSystem->PushEvent(event); }
 
 		template <typename T>
 		inline T& GetComponent() const { return m_Entity->GetComponent<T>(); }

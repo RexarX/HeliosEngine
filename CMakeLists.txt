@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.24.0)
+cmake_minimum_required(VERSION 3.25.0)
 
 project(HeliosEngine)
 
@@ -50,10 +50,4 @@ set(GLFW_INSTALL OFF CACHE BOOL "" FORCE)
 
 add_subdirectory(Game)
 add_subdirectory(HeliosEngine)
-add_subdirectory(HeliosEngine/vendor/glfw)
-add_subdirectory(HeliosEngine/vendor/glm)
-add_subdirectory(HeliosEngine/vendor/imgui)
-add_subdirectory(HeliosEngine/vendor/spdlog)
 add_subdirectory(HeliosEngine/vendor/stb_image)
-add_subdirectory(HeliosEngine/vendor/tiny_obj_loader)
-add_subdirectory(HeliosEngine/vendor/entt)

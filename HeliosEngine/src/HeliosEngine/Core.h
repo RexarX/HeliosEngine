@@ -18,14 +18,6 @@
 	#define ENABLE_ASSERTS
 #endif
 
-#ifdef RELEASE_MODE
-	#define HELIOSENGINE_DIR std::string("")
-	#define GAME_DIR std::string("")
-#else
-	#define HELIOSENGINE_DIR std::format("{}/HeliosEngine/", std::filesystem::current_path().parent_path().parent_path().string())
-	#define GAME_DIR std::format("{}/Game/", std::filesystem::current_path().parent_path().parent_path().string())
-#endif
-
 #ifdef ENABLE_ASSERTS
 	#ifdef _MSC_VER
 		#define DEBUG_BREAK __debugbreak()

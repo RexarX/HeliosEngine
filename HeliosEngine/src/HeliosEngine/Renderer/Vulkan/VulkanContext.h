@@ -5,9 +5,9 @@
 #include "VulkanUtils.h"
 
 #ifdef DEBUG_MODE
-  constexpr bool enableValidationLayers = true;
+static constexpr bool enableValidationLayers = true;
 #else
-  constexpr bool enableValidationLayers = false;
+static constexpr bool enableValidationLayers = false;
 #endif
 
 static constexpr uint32_t MAX_FRAMES_IN_FLIGHT = 2;
@@ -26,7 +26,7 @@ namespace Helios {
 
     void BeginFrame() override;
     void EndFrame() override;
-    void Record(const RenderQueue& queue, const ResourceManager& manager) override;
+    void Record(const RenderQueue& queue, const PipelineManager& manager) override;
 
     void SetViewport(uint32_t width, uint32_t height, uint32_t x = 0, uint32_t y = 0) override;
 
@@ -38,8 +38,6 @@ namespace Helios {
     void SetVSync(bool enabled) override;
     void SetResized(bool resized) override { m_SwapchainRecreated = resized; }
 
-    void SetImGuiState(bool enabled) override { m_ImGuiEnabled = enabled; }
-
     void ImmediateSubmit(std::function<void(const VkCommandBuffer cmd)>&& function);
 
     static inline VulkanContext& Get() { return *m_Instance; }
@@ -47,7 +45,11 @@ namespace Helios {
     inline const VkDevice GetDevice() const { return m_Device; }
     inline const VkRenderPass GetRenderPass() const { return m_RenderPass; }
 
-    inline const VkPhysicalDeviceLimits& GetPhysicalDeviceLimits() const;
+    inline VkPhysicalDeviceProperties GetPhysicalDeviceProperties() const {
+      VkPhysicalDeviceProperties properties;
+      vkGetPhysicalDeviceProperties(m_PhysicalDevice, &properties);
+      return properties;
+    }
 
     inline const VmaAllocator GetAllocator() const { return m_Allocator; }
 
@@ -79,14 +81,14 @@ namespace Helios {
 
     std::vector<const char*> GetRequiredExtensions() const;
 
-    void PopulateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
-    VkResult CreateDebugUtilsMessengerEXT(const VkInstance instance,
-                                          const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo,
-                                          const VkAllocationCallbacks* pAllocator,
-                                          VkDebugUtilsMessengerEXT* pDebugMessenger);
+    void PopulateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo) const;
+    static VkResult CreateDebugUtilsMessengerEXT(const VkInstance instance,
+                                                 const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo,
+                                                 const VkAllocationCallbacks* pAllocator,
+                                                 VkDebugUtilsMessengerEXT* pDebugMessenger);
 
-    void DestroyDebugUtilsMessengerEXT(const VkInstance instance, const VkDebugUtilsMessengerEXT debugMessenger,
-                                       const VkAllocationCallbacks* pAllocator);
+    static void DestroyDebugUtilsMessengerEXT(const VkInstance instance, const VkDebugUtilsMessengerEXT debugMessenger,
+                                              const VkAllocationCallbacks* pAllocator);
 
     bool CheckDeviceExtensionSupport(const VkPhysicalDevice device) const;
 
@@ -95,22 +97,28 @@ namespace Helios {
 
     bool IsDeviceSuitable(const VkPhysicalDevice device) const;
 
-    VkSurfaceFormatKHR ChooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats) const;
+    static VkSurfaceFormatKHR ChooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats);
     VkPresentModeKHR ChooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes) const;
     VkExtent2D ChooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities) const;
-    uint32_t ChooseImageCount(const VkSurfaceCapabilitiesKHR& capabilities) const;
+    static uint32_t ChooseImageCount(const VkSurfaceCapabilitiesKHR& capabilities);
 
     VkFormat FindSupportedFormat(const std::vector<VkFormat>& candidates, VkImageTiling tiling,
                                  VkFormatFeatureFlags features) const;
 
-    VkFormat FindDepthFormat() const;
+    inline VkFormat FindDepthFormat() {
+      return FindSupportedFormat(
+        { VK_FORMAT_D32_SFLOAT, VK_FORMAT_D32_SFLOAT_S8_UINT, VK_FORMAT_D24_UNORM_S8_UINT },
+        VK_IMAGE_TILING_OPTIMAL,
+        VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT
+      );
+    }
 
   private:
     const std::vector<const char*> m_ValidationLayers = {
       "VK_LAYER_KHRONOS_validation"
     };
 
-    const std::vector<const char*> m_DeviceExtensions = {
+    std::vector<const char*> m_DeviceExtensions = {
       VK_KHR_SWAPCHAIN_EXTENSION_NAME
     };
 
@@ -122,31 +130,31 @@ namespace Helios {
     bool m_ImGuiEnabled = false;
     bool m_Vsync = false;
 
-    VkInstance m_VkInstance;
+    VkInstance m_VkInstance = VK_NULL_HANDLE;
     VkDebugUtilsMessengerEXT m_DebugMessenger;
-    VkSurfaceKHR m_Surface;
-    VkPhysicalDevice m_PhysicalDevice;
-    VkDevice m_Device;
-    VkQueue m_GraphicsQueue;
-    VkQueue m_PresentQueue;
-    VkSwapchainKHR m_Swapchain;
+    VkSurfaceKHR m_Surface = VK_NULL_HANDLE;
+    VkPhysicalDevice m_PhysicalDevice = VK_NULL_HANDLE;
+    VkDevice m_Device = VK_NULL_HANDLE;
+    VkQueue m_GraphicsQueue = VK_NULL_HANDLE;
+    VkQueue m_PresentQueue = VK_NULL_HANDLE;
+    VkSwapchainKHR m_Swapchain = VK_NULL_HANDLE;
     std::vector<VkImage> m_SwapchainImages;
     std::vector<VkImageView> m_SwapchainImageViews;
     std::vector<VkFramebuffer> m_SwapchainFramebuffers;
-    VkFormat m_SwapchainImageFormat;
-    VkExtent2D m_SwapchainExtent;
-    VkRenderPass m_RenderPass;
+    VkFormat m_SwapchainImageFormat = VK_FORMAT_UNDEFINED;
+    VkExtent2D m_SwapchainExtent{ 0, 0 };
+    VkRenderPass m_RenderPass = VK_NULL_HANDLE;
     AllocatedImage m_DepthImage;
     VkViewport m_Viewport;
-    VkRect2D m_Scissor;
+    VkRect2D m_Scissor{ 0, 0 };
 
-    VkCommandPool m_ImCommandPool;
-    VkCommandBuffer m_ImCommandBuffer;
-    VkFence m_ImFence;
+    VkCommandPool m_ImCommandPool = VK_NULL_HANDLE;
+    VkCommandBuffer m_ImCommandBuffer = VK_NULL_HANDLE;
+    VkFence m_ImFence = VK_NULL_HANDLE;
 
-    VkDescriptorPool m_ImGuiPool;
+    VkDescriptorPool m_ImGuiPool = VK_NULL_HANDLE;
 
-    VmaAllocator m_Allocator;
+    VmaAllocator m_Allocator = VK_NULL_HANDLE;
     
     uint32_t m_ImageIndex = 0;
 

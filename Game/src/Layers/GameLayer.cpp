@@ -3,10 +3,6 @@
 #include "Scripts/Player/CameraController.h"
 
 void GameLayer::OnAttach() {
-	Helios::Window& window = Helios::Application::Get().GetWindow();
-	//window.SetVSync(true);
-	//window.SetFramerate(60.0);
-
 	Helios::Scene& gameScene = Helios::SceneManager::AddScene("GameScene");
 
 	Helios::Entity& root = gameScene.GetRootEntity();
@@ -49,6 +45,6 @@ void GameLayer::OnImGuiRender(ImGuiContext* context) {
 	ImGui::Begin("Debug menu");
 	ImGui::Text("FPS: %u", static_cast<uint32_t>(ts.GetFramerate()));
 	ImGui::Text("Frametime: %f ms", ts.GetMilliseconds());
-	ImGui::Text("Frames rendered: %u", app.GetFrameNumber());
+	ImGui::Text("Frames rendered: %llu", app.GetFrameNumber());
 	ImGui::End();
 }

@@ -10,21 +10,21 @@ namespace Helios {
     EventSystem() = default;
     EventSystem(const EventSystem&) = delete;
     EventSystem(EventSystem&&) noexcept = default;
-    ~EventSystem();
+    ~EventSystem() = default;
 
     void OnUpdate();
 
-    template <typename T> requires std::is_base_of_v<Event, T>
+    template <EventTrait T>
     void Emit(const T& event);
 
-    template <typename T> requires std::is_base_of_v<Event, T>
-    void AddListener(const void* instance, const std::function<void(T&)>& callback);
+    template <EventTrait T>
+    void AddListener(const void* instance, std::function<void(T&)>&& callback);
 
-    template <typename T> requires std::is_base_of_v<Event, T>
+    template <EventTrait T>
     void RemoveListener(const void* instance);
 
-    template <typename T> requires std::is_base_of_v<Event, T>
-    void PushEvent(const T& event) { m_Events[typeid(T)].push_back(new T(event)); }
+    template <EventTrait T>
+    void PushEvent(const T& event);
 
     EventSystem& operator=(const EventSystem&) = delete;
     EventSystem& operator=(EventSystem&&) noexcept = default;
@@ -38,13 +38,14 @@ namespace Helios {
       std::function<void(Event&)> callback;
     };
 
-    std::map<EventType, std::vector<Event*>> m_Events;
+    std::map<EventType, std::vector<std::byte>> m_Events;
+    std::map<EventType, uint64_t> m_EventSizes;
     std::map<EventType, std::vector<Listener>> m_EventListeners;
   };
 
-  template <typename T> requires std::is_base_of_v<Event, T>
+  template <EventTrait T>
   void EventSystem::Emit(const T& event) {
-    auto it = m_EventListeners.find(typeid(T));
+    auto it = m_EventListeners.find(T::GetStaticType());
     if (it != m_EventListeners.end()) {
       for (const Listener& listener : it->second) {
         listener.callback(event);
@@ -52,17 +53,32 @@ namespace Helios {
     }
   }
 
-  template <typename T> requires std::is_base_of_v<Event, T>
-  void EventSystem::AddListener(const void* instance, const std::function<void(T&)>& callback) {
-    m_EventListeners[typeid(T)].emplace_back(instance,
-      [&callback](Event& event) { callback(static_cast<T&>(event)); }
+  template <EventTrait T>
+  void EventSystem::AddListener(const void* instance, std::function<void(T&)>&& callback) {
+    m_EventListeners[T::GetStaticType()].emplace_back(
+      instance,
+      [callback = std::forward<std::function<void(T&)>>(callback)](Event& event) {
+        callback(static_cast<T&>(event));
+      }
     );
   }
 
-  template <typename T> requires std::is_base_of_v<Event, T>
+  template <EventTrait T>
   void EventSystem::RemoveListener(const void* instance) {
-    std::erase_if(m_EventListeners[typeid(T)], [instance](const Listener& listener) {
+    std::erase_if(m_EventListeners[T::GetStaticType()], [instance](const Listener& listener) {
       return listener.instance == instance;
     });
+  }
+
+  template <EventTrait T>
+  void EventSystem::PushEvent(const T& event) {
+    EventType type = T::GetStaticType();
+    m_EventSizes[type] = sizeof(T);
+
+    const std::byte* begin = reinterpret_cast<const std::byte*>(std::addressof(event));
+    const std::byte* end = begin + sizeof(T);
+
+    std::vector<std::byte>& events = m_Events[type];
+    events.insert(events.cend(), begin, end);
   }
 }

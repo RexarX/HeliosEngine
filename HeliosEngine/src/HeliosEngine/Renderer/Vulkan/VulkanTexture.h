@@ -7,35 +7,45 @@
 namespace Helios {
   class VulkanTexture final : public Texture {
   public:
-    VulkanTexture(std::string_view path, uint32_t mipLevel = 0,
-                  uint32_t anisoLevel = 0, ImageFormat format = ImageFormat::None);
+    VulkanTexture(Type type, std::string_view path, const Info& info);
 
-    ~VulkanTexture() = default;
+    virtual ~VulkanTexture() = default;
 
-    virtual void Load() override;
-    virtual void Unload() override;
+    void Load() override;
+    void Unload() override;
+
+    void SetData() override;
 
     void SetSlot(uint32_t slot) override { m_Slot = slot; }
 
-    void SetFormat(ImageFormat format) override { m_Format = format; }
+    void SetMipLevel(uint32_t mipLevel) override;
+    void SetAnisoLevel(uint32_t anisoLevel) override;
 
-    void SetMipLevel(uint32_t mipLevel) override { m_MipLevel = mipLevel; }
-    void SetAnisoLevel(uint32_t anisoLevel) override { m_AnisoLevel = anisoLevel; }
+    inline Type GetType() const override { return m_Type; }
 
     inline uint32_t GetWidth() const override { return m_Width; }
     inline uint32_t GetHeight() const override { return m_Height; }
 
     inline uint32_t GetSlot() const override { return m_Slot; }
 
-    inline ImageFormat GetFormat() const override { return m_Format; }
+    inline ImageFormat GetFormat() const override { return m_Info.format; }
 
-    inline uint32_t GetMipLevel() const override { return m_MipLevel; }
-    inline uint32_t GetAnisoLevel() const override { return m_AnisoLevel; }
+    inline uint32_t GetMipLevel() const override { return m_Info.mipLevel; }
+    inline uint32_t GetAnisoLevel() const override { return m_Info.anisoLevel; }
+
+    inline AllocatedImage& GetImageBuffer() { return m_ImageBuffer; }
 
   private:
     void LoadFromFile(std::string_view path);
 
+    void CreateStaticImage();
+    void CreateDynamicImage();
+
+    static VkFormat GetVulkanFormat(ImageFormat format);
+
   private:
+    Type m_Type;
+
     void* m_Data = nullptr;
 
     uint32_t m_Width = 0;
@@ -43,12 +53,8 @@ namespace Helios {
 
     uint32_t m_Slot = 0;
 
-    ImageFormat m_Format = ImageFormat::None;
+    Info m_Info;
 
-    uint32_t m_MipLevel = 0;
-    uint32_t m_AnisoLevel = 0;
-
-    AllocatedImage m_Image;
-    AllocatedImage m_ImageStaging;
+    AllocatedImage m_ImageBuffer;
   };
 }

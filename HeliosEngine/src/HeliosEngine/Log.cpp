@@ -38,6 +38,8 @@ public:
 
 namespace Helios {
   void Log::Init() {
+    PROFILE_FUNCTION();
+
     std::vector<spdlog::sink_ptr> logSinks;
 
     auto now = std::chrono::system_clock::now();
@@ -65,14 +67,14 @@ namespace Helios {
     )->set_formatter(std::move(formatter));
 #endif
 
-    s_CoreLogger = std::make_shared<spdlog::logger>("HELIOSENGINE", logSinks.begin(), logSinks.end());
-    spdlog::register_logger(s_CoreLogger);
-    s_CoreLogger->set_level(spdlog::level::trace);
-    s_CoreLogger->flush_on(spdlog::level::trace);
+    m_CoreLogger = std::make_shared<spdlog::logger>("HELIOSENGINE", logSinks.begin(), logSinks.end());
+    spdlog::register_logger(m_CoreLogger);
+    m_CoreLogger->set_level(spdlog::level::trace);
+    m_CoreLogger->flush_on(spdlog::level::trace);
 
-    s_ClientLogger = std::make_shared<spdlog::logger>("APP", logSinks.begin(), logSinks.end());
-    spdlog::register_logger(s_ClientLogger);
-    s_ClientLogger->set_level(spdlog::level::trace);
-    s_ClientLogger->flush_on(spdlog::level::trace);
+    m_ClientLogger = std::make_shared<spdlog::logger>("APP", logSinks.begin(), logSinks.end());
+    spdlog::register_logger(m_ClientLogger);
+    m_ClientLogger->set_level(spdlog::level::trace);
+    m_ClientLogger->flush_on(spdlog::level::trace);
   }
 }

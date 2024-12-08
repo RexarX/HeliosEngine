@@ -19,7 +19,7 @@ void CameraController::OnUpdate(Helios::Timestep deltaTime) {
 
   if (Helios::Input::IsKeyPressed(Helios::Key::W)) {
     transform.position += front * m_CameraTranslationSpeed * (float)deltaTime;
-  } 
+  }
 
   if (Helios::Input::IsKeyPressed(Helios::Key::A)) {
     transform.position -= right * m_CameraTranslationSpeed * (float)deltaTime;
@@ -47,43 +47,16 @@ void CameraController::OnUpdate(Helios::Timestep deltaTime) {
 void CameraController::OnEvent(Helios::Event& event) {
   Helios::EventDispatcher dispatcher(event);
   dispatcher.Dispatch<Helios::MouseMoveEvent>(BIND_FN(CameraController::OnMouseMoveEvent));
-  dispatcher.Dispatch<Helios::WindowFocusEvent>(BIND_FN(CameraController::OnWindowFocusEvent));
-  dispatcher.Dispatch<Helios::WindowLostFocusEvent>(BIND_FN(CameraController::OnWindowLostFocusEvent));
 }
 
 bool CameraController::OnMouseMoveEvent(Helios::MouseMoveEvent& event) {
-  if (m_FirstInput) {
-    m_LastX = event.GetX();
-    m_LastY = event.GetY();
-    m_FirstInput = false;
+  auto [deltaX, deltaY] = event.GetDelta();
 
-    return true;
-  }
-
-  float x = event.GetX();
-  float y = event.GetY();
-
-  float deltaX = x - m_LastX;
-  float deltaY = y - m_LastY;
-
-  m_LastX = x;
-  m_LastY = y;
-
-  m_Yaw += deltaX * m_CameraRotationSpeed;
-  m_Pitch += deltaY * m_CameraRotationSpeed;
+  m_Yaw += static_cast<float>(deltaX) * m_CameraRotationSpeed;
+  m_Pitch += static_cast<float>(deltaY) * m_CameraRotationSpeed;
 
   if (m_Pitch > 89.0f) { m_Pitch = 89.0f; }
   else if (m_Pitch < -89.0f) { m_Pitch = -89.0f; }
 
-  return true;
-}
-
-bool CameraController::OnWindowFocusEvent(Helios::WindowFocusEvent& event) {
-  m_FirstInput = true;
-  return true;
-}
-
-bool CameraController::OnWindowLostFocusEvent(Helios::WindowLostFocusEvent& event) {
-  m_FirstInput = true;
   return true;
 }

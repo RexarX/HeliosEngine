@@ -34,7 +34,7 @@ namespace Helios {
 
     Entity& GetActiveCameraEntity();
 
-    template <typename T> requires std::is_base_of_v<Event, T>
+    template <EventTrait T>
     void PushEvent(T& event) { m_EventSystem.PushEvent(event); }
 
     inline const std::string& GetName() const { return m_Name; }
@@ -45,8 +45,6 @@ namespace Helios {
 
     Scene& operator=(const Scene&) = delete;
     Scene& operator=(Scene&&) noexcept;
-
-    friend class Entity;
 
   private:
     std::string m_Name = "default";
@@ -63,5 +61,7 @@ namespace Helios {
     ScriptSystem m_ScriptSystem;
     CameraSystem m_CameraSystem;
     RenderingSystem m_RenderingSystem;
+
+    friend class Entity;
   };
 }

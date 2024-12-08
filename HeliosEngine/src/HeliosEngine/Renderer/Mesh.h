@@ -1,13 +1,13 @@
 #pragma once
 
-#include "ShaderGraph/VertexLayout.h"
+#include "VertexLayout.h"
 
 namespace Helios {
 class DynamicVertex {
   public:
     DynamicVertex(const VertexLayout& layout);
 
-    template<typename T>
+    template <typename T>
     void SetAttribute(std::string_view name, const T& value);
 
     inline const std::vector<std::byte>& GetData() const { return m_Data; }
@@ -21,7 +21,8 @@ class DynamicVertex {
   {
   public:
     enum class Type {
-      Static, Dynamic
+      Static,
+      Dynamic
     };
 
     virtual ~Mesh() = default;
@@ -31,8 +32,6 @@ class DynamicVertex {
 
     virtual void SetData(const std::vector<std::byte>& vertexData, uint32_t vertexCount,
                          const std::vector<uint32_t>& indices = {}) = 0;
-                         
-    virtual void SetVertexLayout(const VertexLayout& layout) = 0;
 
     virtual inline Type GetType() const = 0;
 
@@ -49,10 +48,10 @@ class DynamicVertex {
 
     virtual inline const VertexLayout& GetVertexLayout() const = 0;
 
-    static std::shared_ptr<Mesh> Create(Type type, const std::vector<std::byte>& vertices,
+    static std::shared_ptr<Mesh> Create(Type type, const VertexLayout& layout, const std::vector<std::byte>& vertices,
                                         uint32_t vertexCount, const std::vector<uint32_t>& indices = {});
 
-    static std::shared_ptr<Mesh> Create(Type type, uint32_t vertexCount, uint32_t indexCount);
+    static std::shared_ptr<Mesh> Create(Type type, const VertexLayout& layout, uint32_t vertexCount, uint32_t indexCount);
   };
 
   template <typename T>

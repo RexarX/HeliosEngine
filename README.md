@@ -18,30 +18,32 @@
   </ol>
 </details>
 
-
-
 ## About The Project
-
-An attempt to create a game engine
-
-
+An attempt to create a game engine.
 
 ## Getting Started
 
 ### Requirements
-* Vulkan 1.1
-
-
+* Vulkan 1.0 and higher
+* OpenGL ES 3.2
 
 ### Dependencies
-* VulkanSDK with VMA (https://vulkan.lunarg.com/sdk/home)
-* Boost Uuid
-
+* spdlog (https://github.com/gabime/spdlog)
+* argparse (https://github.com/p-ranav/argparse)
+* tomlplusplus (https://github.com/marzer/tomlplusplus)
+* stduuid (https://github.com/mariusbancila/stduuid)
+* glfw3 (https://github.com/glfw/glfw)
+* glm (https://github.com/g-truc/glm)
+* entt (https://github.com/skypjack/entt)
+* imgui with docking support and glfw, opengl3, vulkan bindings (https://github.com/ocornut/imgui)
+* shaderc (https://github.com/google/shaderc)
+* Vulkan headers (https://github.com/KhronosGroup/Vulkan-Headers)
+* Vulkan validation layers (https://github.com/KhronosGroup/Vulkan-ValidationLayers)
+* Vulkan memory allocator (https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator)
+* glad with OpenGL ES 3.2 extensions (https://github.com/Dav1dde/glad)
 
 ### How to build
-
 1. Install dependencies
-
 2. Clone the repo
   ```sh
   git clone https://github.com/RexarX/HeliosEngine.git
@@ -55,18 +57,11 @@ An attempt to create a game engine
   cmake ..
   ```
 
-
-
 ## License
-
 Distributed under the Unlicense license. See `LICENSE` for more information.
 
-
-
 ## Contact
-
 RexarX - who727cares@gmail.com
-
 PlatonFPS - platonfps@yandex.ru
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

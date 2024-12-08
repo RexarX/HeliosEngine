@@ -55,7 +55,7 @@ namespace Helios {
     if (m_Loaded) { return; }
 
     const auto& view = m_Registry.view<Renderable>();
-    m_RenderingSystem.GetResourceManager().InitializeResources(m_Registry, { view.begin(), view.end() });
+    m_RenderingSystem.GetPipelineManager().InitializeResources(m_Registry, { view.begin(), view.end() });
 
     m_Loaded = true;
   }
@@ -64,7 +64,7 @@ namespace Helios {
     if (!m_Loaded) { return; }
 
     const auto& view = m_Registry.view<Renderable>();
-    m_RenderingSystem.GetResourceManager().FreeResources(m_Registry, { view.begin(), view.end() });
+    m_RenderingSystem.GetPipelineManager().FreeResources(m_Registry, { view.begin(), view.end() });
 
     m_Active = false;
     m_Loaded = false;

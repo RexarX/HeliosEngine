@@ -37,12 +37,12 @@ namespace Helios {
 									level, string);
 		}
 
-		static inline std::shared_ptr<spdlog::logger>& GetCoreLogger() { return s_CoreLogger; }
-		static inline std::shared_ptr<spdlog::logger>& GetClientLogger() { return s_ClientLogger; }
+		static inline std::shared_ptr<spdlog::logger>& GetCoreLogger() { return m_CoreLogger; }
+		static inline std::shared_ptr<spdlog::logger>& GetClientLogger() { return m_ClientLogger; }
 
 	private:
-		static inline std::shared_ptr<spdlog::logger> s_CoreLogger = nullptr;
-		static inline std::shared_ptr<spdlog::logger> s_ClientLogger = nullptr;
+		static inline std::shared_ptr<spdlog::logger> m_CoreLogger = nullptr;
+		static inline std::shared_ptr<spdlog::logger> m_ClientLogger = nullptr;
 	};
 }
 

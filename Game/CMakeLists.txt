@@ -27,7 +27,7 @@ set(ALL_FILES ${src} ${src__Layers} ${src__Scripts})
 
 add_executable(${PROJECT_NAME} ${ALL_FILES})
 
-set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 23 UNITY_BUILD ON)
+set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 23 CXX_STANDARD_REQUIRED ON CXX_EXTENSIONS OFF)
 
 foreach(OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES})
     string(TOUPPER ${OUTPUTCONFIG} UPOUTPUTCONFIG)
@@ -36,65 +36,56 @@ foreach(OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES})
         ARCHIVE_OUTPUT_NAME_${UPOUTPUTCONFIG} "Game"
         RUNTIME_OUTPUT_DIRECTORY_${UPOUTPUTCONFIG}
             "${CMAKE_CURRENT_SOURCE_DIR}/../bin/${OUTPUTCONFIG}-${PLATFORM}-${ARCHITECTURE}"
+        LIBRARY_OUTPUT_DIRECTORY_${UPOUTPUTCONFIG}
+            "${CMAKE_CURRENT_SOURCE_DIR}/../bin/${OUTPUTCONFIG}-${PLATFORM}-${ARCHITECTURE}"
         ARCHIVE_OUTPUT_DIRECTORY_${UPOUTPUTCONFIG}
             "${CMAKE_CURRENT_SOURCE_DIR}/../bin/${OUTPUTCONFIG}-${PLATFORM}-${ARCHITECTURE}"
     )
-endforeach(OUTPUTCONFIG CMAKE_CONFIGURATION_TYPES)
+endforeach(OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES})
 
-get_property(MSVC_RUNTIME_LIBRARY_DEFAULT TARGET ${PROJECT_NAME} PROPERTY MSVC_RUNTIME_LIBRARY)
-
-string(CONCAT "MSVC_RUNTIME_LIBRARY_STR"
-    $<$<CONFIG:Debug>:
-        MultiThreadedDebugDLL
-    >
-    $<$<CONFIG:Release>:
-        MultiThreadedDLL
-    >
-    $<$<CONFIG:RelWithDebInfo>:
-        MultiThreadedDLL
-    >
-    $<$<NOT:$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>,$<CONFIG:Release>>>:${MSVC_RUNTIME_LIBRARY_DEFAULT}>
-)
-set_target_properties(${PROJECT_NAME} PROPERTIES MSVC_RUNTIME_LIBRARY ${MSVC_RUNTIME_LIBRARY_STR})
+if (CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
+    set_target_properties(${PROJECT_NAME} PROPERTIES MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
+endif()
 
 target_include_directories(${PROJECT_NAME} PRIVATE
-    "${CMAKE_CURRENT_SOURCE_DIR}/src;"
-    "${CMAKE_CURRENT_SOURCE_DIR}/../HeliosEngine/src;"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../HeliosEngine/src"
 )
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE
     $<$<CONFIG:Debug>:
-        "DEBUG_MODE;"
+        "DEBUG_MODE"
     >
     $<$<CONFIG:RelWithDebInfo>:
-        "RELEASE_WITH_DEBUG_INFO_MODE;"
+        "RELEASE_WITH_DEBUG_INFO_MODE"
     >
     $<$<CONFIG:Release>:
-        "RELEASE_MODE;"
+        "RELEASE_MODE"
     >
-    "UNICODE;"
-    "_UNICODE;"
+)
+
+target_compile_definitions(${PROJECT_NAME} PRIVATE
+    $<$<BOOL:ENABLE_PROFILING>:ENABLE_PROFILING>
 )
 
 if(WIN32)
-	target_compile_definitions(${PROJECT_NAME} PRIVATE "PLATFORM_WINDOWS;")
+	target_compile_definitions(${PROJECT_NAME} PRIVATE "PLATFORM_WINDOWS" "UNICODE" "_UNICODE")
 elseif(UNIX)
-	target_compile_definitions(${PROJECT_NAME} PRIVATE "PLATFORM_LINUX;")
+	target_compile_definitions(${PROJECT_NAME} PRIVATE "PLATFORM_LINUX")
+    target_compile_options(${PROJECT_NAME} PRIVATE $<$<CXX_COMPILER_ID:Clang>:-stdlib=libc++>)
 endif()
 
 target_compile_options(${PROJECT_NAME} PRIVATE
     $<$<CXX_COMPILER_ID:MSVC>:
-        $<$<CONFIG:Debug>:/Od /Zi /fsanitize=address>
-        $<$<CONFIG:RelWithDebInfo>:/O2 /Oi /Gy>
-        $<$<CONFIG:Release>:/O2 /Oi /Gy>
-        /GL
+        $<$<CONFIG:Debug>:/Od /Zi>
+        $<$<CONFIG:RelWithDebInfo>:/O2 /Oi /Gy /GL>
+        $<$<CONFIG:Release>:/O2 /Oi /Gy /GL>
         /W3
     >
-    $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>:
+    $<$<CXX_COMPILER_ID:Clang,GNU>:
         $<$<CONFIG:Debug>:-O0 -g>
-        $<$<CONFIG:RelWithDebInfo>:-O3>
-        $<$<CONFIG:Release>:-O3>
-        -flto
+        $<$<CONFIG:RelWithDebInfo>:-O3 -flto>
+        $<$<CONFIG:Release>:-O3 -flto>
     >
 )
 
@@ -104,7 +95,7 @@ if (ENABLE_SIMD_SSE2)
             $<$<CONFIG:RelWithDebInfo>:/arch:SSE2>
 		    $<$<CONFIG:Release>:/arch:SSE2>
 	    >
-	    $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>:
+	    $<$<CXX_COMPILER_ID:Clang,GNU>:
             $<$<CONFIG:RelWithDebInfo>:-msse2>
 		    $<$<CONFIG:Release>:-msse2>   
 	    >
@@ -115,7 +106,7 @@ elseif (ENABLE_SIMD_SSE3)
             $<$<CONFIG:RelWithDebInfo>:/arch:SSE2>
 		    $<$<CONFIG:Release>:/arch:SSE2>   
 	    >
-	    $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>:
+	    $<$<CXX_COMPILER_ID:Clang,GNU>:
             $<$<CONFIG:RelWithDebInfo>:-msse3>
 		    $<$<CONFIG:Release>:-msse3> 
 	    >
@@ -126,7 +117,7 @@ elseif (ENABLE_SIMD_SSSE3)
             $<$<CONFIG:RelWithDebInfo>:/arch:SSSE3>
 			$<$<CONFIG:Release>:/arch:SSSE3>
 		>
-		$<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>:
+		$<$<CXX_COMPILER_ID:Clang,GNU>:
             $<$<CONFIG:RelWithDebInfo>:-mssse3>
 			$<$<CONFIG:Release>:-mssse3>
 		>
@@ -137,7 +128,7 @@ elseif (ENABLE_SIMD_SSE4_1)
             $<$<CONFIG:RelWithDebInfo>:/arch:SSE4.1>
 			$<$<CONFIG:Release>:/arch:SSE4.1>
 		>
-		$<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>:
+		$<$<CXX_COMPILER_ID:Clang,GNU>:
             $<$<CONFIG:RelWithDebInfo>:-msse4.1>
 			$<$<CONFIG:Release>:-msse4.1>	
 		>
@@ -148,7 +139,7 @@ elseif (ENABLE_SIMD_SSE4_2)
             $<$<CONFIG:RelWithDebInfo>:/arch:SSE4.2>
 			$<$<CONFIG:Release>:/arch:SSE4.2>
 		>
-		$<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>:
+		$<$<CXX_COMPILER_ID:Clang,GNU>:
 			$<$<CONFIG:Release>:-msse4.2>
 			$<$<CONFIG:RelWithDebInfo>:-msse4.2>
 		>
@@ -159,7 +150,7 @@ elseif (ENABLE_SIMD_AVX)
             $<$<CONFIG:RelWithDebInfo>:/arch:AVX>
 			$<$<CONFIG:Release>:/arch:AVX>
 		>
-		$<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>:
+		$<$<CXX_COMPILER_ID:Clang,GNU>:
             $<$<CONFIG:RelWithDebInfo>:-mavx>
 			$<$<CONFIG:Release>:-mavx>
 			
@@ -171,21 +162,35 @@ elseif (ENABLE_SIMD_AVX2)
             $<$<CONFIG:RelWithDebInfo>:/arch:AVX2>
 			$<$<CONFIG:Release>:/arch:AVX2>
 		>
-		$<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>:
+		$<$<CXX_COMPILER_ID:Clang,GNU>:
             $<$<CONFIG:RelWithDebInfo>:-mavx2>
 			$<$<CONFIG:Release>:-mavx2>
 		>
     )
 endif()
 
-target_compile_definitions(${PROJECT_NAME} PRIVATE
-    $<$<BOOL:ENABLE_PROFILING>:"ENABLE_PROFILING">
-)
-
-find_package(Boost REQUIRED COMPONENTS uuid)
+find_package(spdlog CONFIG REQUIRED)
+find_package(imgui CONFIG REQUIRED)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
 	HeliosEngine
-    imgui
-    Boost::uuid
+    spdlog::spdlog_header_only
+    imgui::imgui
 )
+
+add_custom_target(CopyAssets ALL
+    COMMAND ${CMAKE_COMMAND} -E make_directory 
+        "${CMAKE_CURRENT_SOURCE_DIR}/../bin/${CMAKE_BUILD_TYPE}-${PLATFORM}-${ARCHITECTURE}/Assets"
+
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${CMAKE_CURRENT_SOURCE_DIR}/../HeliosEngine/Assets"
+        "${CMAKE_CURRENT_SOURCE_DIR}/../bin/${CMAKE_BUILD_TYPE}-${PLATFORM}-${ARCHITECTURE}/Assets"
+
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${CMAKE_CURRENT_SOURCE_DIR}/Assets"
+        "${CMAKE_CURRENT_SOURCE_DIR}/../bin/${CMAKE_BUILD_TYPE}-${PLATFORM}-${ARCHITECTURE}/Assets"
+    
+    COMMENT "Copying Assets to output directory"
+)
+
+add_dependencies(Game CopyAssets)

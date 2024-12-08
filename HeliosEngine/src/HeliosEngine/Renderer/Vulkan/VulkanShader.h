@@ -11,7 +11,7 @@ namespace Helios {
     struct ShaderInfo {
       std::string path;
       VkShaderStageFlagBits stage;
-      VkShaderModule shaderModule;
+      VkShaderModule shaderModule = VK_NULL_HANDLE;
     };
 
     VulkanShader(const std::initializer_list<Info>& infos);
@@ -22,11 +22,11 @@ namespace Helios {
   private:
     void Load();
 
-    VkShaderStageFlagBits TranslateStageToVulkan(Stage stage) const;
-    shaderc_shader_kind TranslateStageToShaderc(VkShaderStageFlagBits stage) const;
+    static VkShaderStageFlagBits TranslateStageToVulkan(Stage stage);
+    static shaderc_shader_kind TranslateStageToShaderc(VkShaderStageFlagBits stage);
 
-	  bool GLSLtoSPV(VkShaderStageFlagBits shaderType, const std::string& glslShader,
-									 const std::string& fileName, std::vector<uint32_t>& spvShader) const;
+	  static std::expected<void, std::string> GLSLtoSPV(VkShaderStageFlagBits shaderType, const std::string& glslShader,
+									                                    std::string_view fileName, std::vector<uint32_t>& spvShader);
 
   private:
     std::vector<ShaderInfo> m_ShaderInfos;

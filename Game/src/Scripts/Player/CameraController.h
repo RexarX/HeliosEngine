@@ -17,8 +17,6 @@ public:
 
 private:
 	bool OnMouseMoveEvent(Helios::MouseMoveEvent& event);
-	bool OnWindowFocusEvent(Helios::WindowFocusEvent& event);
-	bool OnWindowLostFocusEvent(Helios::WindowLostFocusEvent& event);
 
 private:
 	float m_CameraTranslationSpeed = 5.0f;
@@ -26,8 +24,4 @@ private:
 
 	float m_Yaw = 0.0f;
 	float m_Pitch = 0.0f;
-
-	bool m_FirstInput = true;
-	float m_LastX = 0.0f;
-  float m_LastY = 0.0f;
 };

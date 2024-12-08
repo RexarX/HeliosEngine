@@ -1,11 +1,12 @@
 #pragma once
 
+#include <cstdint>
+
 namespace Helios {
 	using MouseCode = uint32_t;
 
 	namespace Mouse {
-		enum : MouseCode
-		{
+		enum : MouseCode {
 			Button0 = 0,
 			Button1 = 1,
 			Button2 = 2,

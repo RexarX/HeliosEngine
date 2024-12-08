@@ -11,31 +11,23 @@ target_include_directories(stb_image PUBLIC
 
 install(TARGETS stb_image)
 
-string(CONCAT "MSVC_RUNTIME_LIBRARY_STR"
-    $<$<CONFIG:Debug>:
-        MultiThreadedDebugDLL
-    >
-    $<$<CONFIG:RelWithDebInfo>:
-        MultiThreadedDLL
-    >
-    $<$<CONFIG:Release>:
-        MultiThreadedDLL
-    >
-    $<$<NOT:$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>,$<CONFIG:Release>>>:${MSVC_RUNTIME_LIBRARY_DEFAULT}>
-)
-set_target_properties(stb_image PROPERTIES MSVC_RUNTIME_LIBRARY ${MSVC_RUNTIME_LIBRARY_STR})
+set_target_properties(stb_image PROPERTIES CXX_STANDARD 23 CXX_STANDARD_REQUIRED ON CXX_EXTENSIONS OFF)
+
+if (UNIX)
+	target_compile_options(stb_image PRIVATE -fPIC)
+endif()
 
 target_compile_options(stb_image PRIVATE
     $<$<CXX_COMPILER_ID:MSVC>:
-        $<$<CONFIG:Debug>:/Od /Zi /fsanitize=address>
-		$<$<CONFIG:RelWithDebInfo>:/O2 /Oi /Gy>
-        $<$<CONFIG:Release>:/O2 /Oi /Gy>
+        $<$<CONFIG:Debug>:/Od /Zi>
+		$<$<CONFIG:RelWithDebInfo>:/O2 /Oi /Gy /GL>
+        $<$<CONFIG:Release>:/O2 /Oi /Gy /GL>
         /w
     >
-    $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>:
+    $<$<CXX_COMPILER_ID:Clang,GNU>:
         $<$<CONFIG:Debug>:-O0 -g>
-		$<$<CONFIG:RelWithDebInfo>:-O3>
-        $<$<CONFIG:Release>:-O3>
+		$<$<CONFIG:RelWithDebInfo>:-O3 -flto>
+        $<$<CONFIG:Release>:-O3 -flto>
 		-w
     >
 )
@@ -46,7 +38,7 @@ if (ENABLE_SIMD_SSE2)
             $<$<CONFIG:RelWithDebInfo>:/arch:SSE2>
 		    $<$<CONFIG:Release>:/arch:SSE2>
 	    >
-	    $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>:
+	    $<$<CXX_COMPILER_ID:Clang,GNU>:
             $<$<CONFIG:RelWithDebInfo>:-msse2>
 		    $<$<CONFIG:Release>:-msse2>   
 	    >
@@ -57,7 +49,7 @@ elseif (ENABLE_SIMD_SSE3)
             $<$<CONFIG:RelWithDebInfo>:/arch:SSE2>
 		    $<$<CONFIG:Release>:/arch:SSE2>   
 	    >
-	    $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>:
+	    $<$<CXX_COMPILER_ID:Clang,GNU>:
             $<$<CONFIG:RelWithDebInfo>:-msse3>
 		    $<$<CONFIG:Release>:-msse3> 
 	    >
@@ -68,7 +60,7 @@ elseif (ENABLE_SIMD_SSSE3)
             $<$<CONFIG:RelWithDebInfo>:/arch:SSSE3>
 			$<$<CONFIG:Release>:/arch:SSSE3>
 		>
-		$<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>:
+		$<$<CXX_COMPILER_ID:Clang,GNU>:
             $<$<CONFIG:RelWithDebInfo>:-mssse3>
 			$<$<CONFIG:Release>:-mssse3>
 		>
@@ -79,7 +71,7 @@ elseif (ENABLE_SIMD_SSE4_1)
             $<$<CONFIG:RelWithDebInfo>:/arch:SSE4.1>
 			$<$<CONFIG:Release>:/arch:SSE4.1>
 		>
-		$<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>:
+		$<$<CXX_COMPILER_ID:Clang,GNU>:
             $<$<CONFIG:RelWithDebInfo>:-msse4.1>
 			$<$<CONFIG:Release>:-msse4.1>	
 		>
@@ -90,7 +82,7 @@ elseif (ENABLE_SIMD_SSE4_2)
             $<$<CONFIG:RelWithDebInfo>:/arch:SSE4.2>
 			$<$<CONFIG:Release>:/arch:SSE4.2>
 		>
-		$<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>:
+		$<$<CXX_COMPILER_ID:Clang,GNU>:
 			$<$<CONFIG:RelWithDebInfo>:-msse4.2>
 			$<$<CONFIG:Release>:-msse4.2>
 		>
@@ -101,7 +93,7 @@ elseif (ENABLE_SIMD_AVX)
             $<$<CONFIG:RelWithDebInfo>:/arch:AVX>
 			$<$<CONFIG:Release>:/arch:AVX>
 		>
-		$<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>:
+		$<$<CXX_COMPILER_ID:Clang,GNU>:
             $<$<CONFIG:RelWithDebInfo>:-mavx>
 			$<$<CONFIG:Release>:-mavx>
 			
@@ -113,7 +105,7 @@ elseif (ENABLE_SIMD_AVX2)
             $<$<CONFIG:RelWithDebInfo>:/arch:AVX2>
 			$<$<CONFIG:Release>:/arch:AVX2>
 		>
-		$<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>:
+		$<$<CXX_COMPILER_ID:Clang,GNU>:
             $<$<CONFIG:RelWithDebInfo>:-mavx2>
 			$<$<CONFIG:Release>:-mavx2>
 		>

@@ -1,11 +1,12 @@
 #pragma once
 
+#include <cstdint>
+
 namespace Helios {
 	using KeyCode = uint32_t;
 
 	namespace Key {
-		enum : KeyCode
-		{
+		enum : KeyCode {
 			Space = 32,
 			Apostrophe = 39, /* ' */
 			Comma = 44, /* , */

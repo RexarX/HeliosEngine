@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Renderer/ResourceManager.h"
+#include "Renderer/PipelineManager.h"
 
 #include <vulkan/vulkan.h>
 
@@ -8,7 +8,7 @@ namespace Helios {
   class VulkanContext;
   class VulkanShader;
 
-  class VulkanResourceManager final : public ResourceManager {
+  class VulkanPipelineManager final : public PipelineManager {
   public:
     struct VulkanEffect {
       std::shared_ptr<VulkanShader> shader = nullptr;
@@ -21,20 +21,20 @@ namespace Helios {
       VkDescriptorPool descriptorPool;
     };
 
-    VulkanResourceManager();
-    virtual ~VulkanResourceManager();
+    VulkanPipelineManager();
+    virtual ~VulkanPipelineManager();
 
     void InitializeResources(const entt::registry& registry, const std::vector<entt::entity>& renderables) override;
     void FreeResources(const entt::registry& registry, const std::vector<entt::entity>& renderables) override;
     void UpdateResources(const RenderQueue& renderables) override;
     void ClearResources() override;
 
-    inline std::unique_ptr<ResourceManager> Clone() const override {
-      return std::make_unique<VulkanResourceManager>(*this);
+    inline std::unique_ptr<PipelineManager> Clone() const override {
+      return std::make_unique<VulkanPipelineManager>(*this);
     }
 
-    inline const VulkanEffect& GetEffect(const Renderable& renderable, PipelineType type = PipelineType::Regular) const {
-      return m_Effects.at(renderable).at(type);
+    inline const VulkanEffect& GetPipeline(const Renderable& renderable, PipelineType type = PipelineType::Regular) const {
+      return m_Pipelines.at(renderable).at(type);
     }
 
   private:
@@ -43,6 +43,6 @@ namespace Helios {
   private:
     VulkanContext& m_Context;
 
-    std::unordered_map<Renderable, std::map<PipelineType, VulkanEffect>, RenderableHash> m_Effects;
+    std::unordered_map<Renderable, std::map<PipelineType, VulkanEffect>, RenderableHash> m_Pipelines;
   };
 }

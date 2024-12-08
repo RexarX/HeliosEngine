@@ -5,7 +5,7 @@
 namespace Helios  {
 	class Layer;
 
-	class HELIOSENGINE_API LayerStack {
+	class LayerStack {
 	public:
 		LayerStack() = default;
 		~LayerStack();

@@ -5,7 +5,7 @@
 #include "pch.h"
 
 #include <vulkan/vulkan.h>
-#include <vma/vk_mem_alloc.h>
+#include <vk_mem_alloc.h>
 
 namespace Helios {
   class DeletionQueue {
@@ -35,32 +35,32 @@ namespace Helios {
   };
 
   struct SwapChainSupportDetails {
-    VkSurfaceCapabilitiesKHR capabilities;
+    VkSurfaceCapabilitiesKHR capabilities{};
     std::vector<VkSurfaceFormatKHR> formats;
     std::vector<VkPresentModeKHR> presentModes;
   };
 
   struct FrameData {
-    VkCommandPool commandPool;
-    VkCommandBuffer commandBuffer;
-    VkSemaphore presentSemaphore;
-    VkSemaphore renderSemaphore;
-    VkFence renderFence;
+    VkCommandPool commandPool = VK_NULL_HANDLE;
+    VkCommandBuffer commandBuffer = VK_NULL_HANDLE;
+    VkSemaphore presentSemaphore = VK_NULL_HANDLE;
+    VkSemaphore renderSemaphore = VK_NULL_HANDLE;
+    VkFence renderFence = VK_NULL_HANDLE;
   };
 
   struct AllocatedImage {
-    VkImage image;
-    VkImageView imageView;
-    VkExtent3D imageExtent;
-    VkFormat imageFormat;
+    VkImage image = VK_NULL_HANDLE;
+    VkImageView imageView = VK_NULL_HANDLE;
+    VkExtent3D imageExtent{};
+    VkFormat imageFormat = VK_FORMAT_UNDEFINED;
 
-    VmaAllocation allocation;
+    VmaAllocation allocation = VK_NULL_HANDLE;
   };
 
   struct AllocatedBuffer {
-    VkBuffer buffer;
-    VmaAllocation allocation;
-    VmaAllocationInfo info;
+    VkBuffer buffer = VK_NULL_HANDLE;
+    VmaAllocation allocation = VK_NULL_HANDLE;
+    VmaAllocationInfo info{};
   };
 
   struct PipelineBuilder {
@@ -95,17 +95,16 @@ namespace Helios {
     VkPipelineDepthStencilStateCreateInfo depthStencil{};
     VkPipelineRenderingCreateInfoKHR renderInfo{};
 
-    VkFormat colorAttachmentFormat;
+    VkFormat colorAttachmentFormat = VK_FORMAT_UNDEFINED;
   };
 
-  static AllocatedImage CreateImage(uint32_t width, uint32_t height, VkFormat format, VkImageTiling tiling,
-                                    VkImageUsageFlags usage, VmaMemoryUsage memoryUsage, const VmaAllocator allocator) {
+  static AllocatedImage CreateImage(const VmaAllocator allocator, VmaMemoryUsage memoryUsage,
+                                    uint32_t width, uint32_t height, VkFormat format,
+                                    VkImageTiling tiling, VkImageUsageFlags usage) {
     VkImageCreateInfo imageInfo{};
     imageInfo.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
     imageInfo.imageType = VK_IMAGE_TYPE_2D;
-    imageInfo.extent.width = width;
-    imageInfo.extent.height = height;
-    imageInfo.extent.depth = 1;
+    imageInfo.extent = VkExtent3D(width, height, 1);
     imageInfo.mipLevels = 1;
     imageInfo.arrayLayers = 1;
     imageInfo.format = format;
@@ -117,30 +116,61 @@ namespace Helios {
 
     VmaAllocationCreateInfo allocInfo{};
     allocInfo.usage = memoryUsage;
-    allocInfo.requiredFlags = VkMemoryPropertyFlags(VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
+    allocInfo.requiredFlags = VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT;
 
     AllocatedImage allocatedImage{};
-    auto result = vmaCreateImage(allocator, &imageInfo, &allocInfo, &allocatedImage.image, &allocatedImage.allocation, nullptr);
+    VkResult result = vmaCreateImage(allocator, &imageInfo, &allocInfo, &allocatedImage.image,
+                                     &allocatedImage.allocation, nullptr);
     CORE_ASSERT(result == VK_SUCCESS, "Failed to create image!");
 
     return allocatedImage;
   }
 
-  static VkImageView CreateImageView(const VkImage image, VkFormat format, VkImageAspectFlags aspectFlags,
-                                     const VkDevice device) {
+  static AllocatedImage CreateImage(const VmaAllocator allocator, VmaMemoryUsage memoryUsage, VmaAllocationCreateFlags flags,
+                                    uint32_t width, uint32_t height, uint32_t mipLevels, VkFormat format, VkImageTiling tiling,
+                                    VkImageUsageFlags usage) {
+    VkImageCreateInfo imageInfo{};
+    imageInfo.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
+    imageInfo.imageType = VK_IMAGE_TYPE_2D;
+    imageInfo.extent = VkExtent3D(width, height, 1);
+    imageInfo.mipLevels = mipLevels;
+    imageInfo.arrayLayers = 1;
+    imageInfo.format = format;
+    imageInfo.tiling = tiling;
+    imageInfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
+    imageInfo.usage = usage;
+    imageInfo.samples = VK_SAMPLE_COUNT_1_BIT;
+    imageInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
+
+    VmaAllocationCreateInfo allocInfo{};
+    allocInfo.usage = memoryUsage;
+    allocInfo.flags = flags;
+
+    AllocatedImage allocatedImage{};
+    VkResult result = vmaCreateImage(allocator, &imageInfo, &allocInfo, &allocatedImage.image,
+                                     &allocatedImage.allocation, nullptr);
+    CORE_ASSERT(result == VK_SUCCESS, "Failed to create image!");
+
+    return allocatedImage;
+  }
+
+  static VkImageView CreateImageView(const VkDevice device, const VkImage image, VkFormat format,
+                                     VkImageAspectFlags aspectFlags) {
     VkImageViewCreateInfo viewInfo{};
     viewInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
     viewInfo.image = image;
     viewInfo.viewType = VK_IMAGE_VIEW_TYPE_2D;
     viewInfo.format = format;
-    viewInfo.subresourceRange.aspectMask = aspectFlags;
-    viewInfo.subresourceRange.baseMipLevel = 0;
-    viewInfo.subresourceRange.levelCount = 1;
-    viewInfo.subresourceRange.baseArrayLayer = 0;
-    viewInfo.subresourceRange.layerCount = 1;
+    viewInfo.subresourceRange = {
+      .aspectMask = aspectFlags,
+      .baseMipLevel = 0,
+      .levelCount = 1,
+      .baseArrayLayer = 0,
+      .layerCount = 1
+    };
 
     VkImageView imageView;
-    auto result = vkCreateImageView(device, &viewInfo, nullptr, &imageView);
+    VkResult result = vkCreateImageView(device, &viewInfo, nullptr, &imageView);
     CORE_ASSERT(result == VK_SUCCESS, "Failed to create image view!");
 
     return imageView;

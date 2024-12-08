@@ -20,7 +20,13 @@
 
 #include "HeliosEngine/EntityComponentSystem/Systems/ScriptSystem.h"
 
+#include "HeliosEngine/Config/ConfigManager.h"
+
 #include "HeliosEngine/Events/Event.h"
 #include "HeliosEngine/Events/ApplicationEvent.h"
 #include "HeliosEngine/Events/KeyEvent.h"
 #include "HeliosEngine/Events/MouseEvent.h"
+
+#include "HeliosEngine/Utils/Filesystem.h"
+#include "HeliosEngine/Utils/Random.h"
+#include "HeliosEngine/Utils/Timer.h"

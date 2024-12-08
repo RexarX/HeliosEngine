@@ -5,7 +5,7 @@
 
 class Game final : public Helios::Application {
 public:
-	Game() : Helios::Application() {
+	Game() : Helios::Application("Game") {
 		PushLayer(new GameLayer());
 	}
 

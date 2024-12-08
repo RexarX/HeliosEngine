@@ -14,43 +14,42 @@ namespace Helios  {
 		EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput);
 
 	protected:
-		KeyEvent(KeyCode keycode) : m_KeyCode(keycode) {}
+		explicit KeyEvent(KeyCode keycode) : m_KeyCode(keycode) {}
 
+	protected:
 		KeyCode m_KeyCode;
 	};
 
 	class HELIOSENGINE_API KeyPressEvent final : public KeyEvent {
 	public:
-		KeyPressEvent(KeyCode keycode, uint32_t repeatCount)
-			: KeyEvent(keycode), m_RepeatCount(repeatCount) 
-		{
-		}
+		explicit KeyPressEvent(KeyCode keycode, uint32_t repeatCount)
+			: KeyEvent(keycode), m_RepeatCount(repeatCount)  {}
 
+		explicit KeyPressEvent(const KeyPressEvent&) = default;
+		KeyPressEvent(KeyPressEvent&&) = default;
 		virtual ~KeyPressEvent() = default;
 
 		inline uint32_t GetRepeatCount() const { return m_RepeatCount; }
 
-	  std::string ToString() const override {
-			std::stringstream ss;
-			ss << "KeyPressEvent: " << m_KeyCode << " (" << m_RepeatCount << " repeats)";
-			return ss.str();
+		inline std::string ToString() const override {
+			return std::format("KeyPressEvent: {} ({} repeats)", m_KeyCode, m_RepeatCount);
 		}
 
 		EVENT_CLASS_TYPE(KeyPress)
 
 	private:
-		uint32_t m_RepeatCount;
+		uint32_t m_RepeatCount = 0;
 	};
 
 	class HELIOSENGINE_API KeyReleaseEvent final : public KeyEvent {
 	public:
-		KeyReleaseEvent(KeyCode keycode) : KeyEvent(keycode) {}
+		explicit KeyReleaseEvent(KeyCode keycode) : KeyEvent(keycode) {}
+		explicit KeyReleaseEvent(const KeyReleaseEvent&) = default;
+		KeyReleaseEvent(KeyReleaseEvent&&) = default;
     virtual ~KeyReleaseEvent() = default;
 
-		std::string ToString() const override {
-			std::stringstream ss;
-			ss << "KeyReleaseEvent: " << m_KeyCode;
-			return ss.str();
+		inline std::string ToString() const override {
+			return std::format("KeyReleaseEvent: {}", m_KeyCode);
 		}
 
 		EVENT_CLASS_TYPE(KeyRelease)

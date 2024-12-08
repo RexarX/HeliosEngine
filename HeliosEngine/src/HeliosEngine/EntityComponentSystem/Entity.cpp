@@ -75,7 +75,7 @@ namespace Helios {
     return m_Scene->m_Registry.get<Relationship>(m_Entity).children;
   }
 
-  inline bool Entity::IsValid() const {
+  bool Entity::IsValid() const {
     return m_Scene != nullptr && m_Entity != entt::null && m_Scene->m_Registry.valid(m_Entity);
   }
 }

@@ -12,7 +12,7 @@ namespace Helios {
 
 		inline double GetSeconds() const { return m_Time; }
 		inline double GetMilliseconds() const { return m_Time * 1000.0; }
-		inline double GetFramerate() const { return 1000.0 / GetMilliseconds(); }
+		inline double GetFramerate() const { return 1.0 / m_Time; }
 
 	private:
 		double m_Time = 0.0;
