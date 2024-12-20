@@ -30,13 +30,12 @@ namespace Helios {
     void SetVSync(bool enabled) { m_RendererAPI->SetVSync(enabled); }
     void SetResized(bool resized) { m_RendererAPI->SetResized(resized); }
 
-    static std::shared_ptr<GraphicsContext>& Create(RendererAPI::API api, void* window);
-    static std::shared_ptr<GraphicsContext>& Get();
+    static std::shared_ptr<GraphicsContext> Create(RendererAPI::API api, void* window);
+    static std::shared_ptr<GraphicsContext> Get();
 
   private:
     static inline std::shared_ptr<GraphicsContext> m_Instance = nullptr;
 
-    void* m_Window = nullptr;
     std::unique_ptr<RendererAPI> m_RendererAPI = nullptr;
   };
 }

@@ -7,13 +7,12 @@
 #include <fstream>
 #include <filesystem>
 #include <expected>
-#include <format>
 
 namespace Helios::Utils {
-	static std::expected<std::string, std::string> readFileToString(const std::string& filepath) {
-		std::ifstream in(filepath, std::ios::in | std::ios::binary);
+	static std::expected<std::string, const char*> readFileToString(std::string_view filepath) {
+		std::ifstream in(filepath.data(), std::ios::in | std::ios::binary);
 		if (!in) {
-			return std::unexpected(std::format("Could not open file '{}'!", filepath));
+			return std::unexpected("Could not open file");
 		}
 
 		std::string result;
@@ -26,10 +25,10 @@ namespace Helios::Utils {
 		return result;
 	}
 
-	static std::expected<std::string, std::string> readFileToString(const std::filesystem::path& filepath) {
+	static std::expected<std::string, const char*> readFileToString(std::filesystem::path& filepath) {
 		std::ifstream in(filepath, std::ios::in | std::ios::binary);
 		if (!in) {
-			return std::unexpected(std::format("Could not open file '{}'!", filepath.string()));
+			return std::unexpected("Could not open file");
 		}
 
 		std::string result;
@@ -44,7 +43,7 @@ namespace Helios::Utils {
 
 	static inline std::string_view getFileName(std::string_view path) {
 		uint64_t lastSlash = path.find_last_of("/\\");
-		return (lastSlash != std::string_view::npos) ? path.substr(lastSlash + 1) : path;
+		return (lastSlash != std::string_view::npos) ? path.substr(++lastSlash) : path;
 	}
 
 	/* Returns ".extension" */

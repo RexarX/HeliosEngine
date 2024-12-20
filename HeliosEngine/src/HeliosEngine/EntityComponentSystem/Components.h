@@ -58,7 +58,7 @@ namespace Helios {
 			if (renderable.mesh != nullptr) {
 				const VertexLayout& layout = renderable.mesh->GetVertexLayout();
 				for (const VertexElement& element : layout.GetElements()) {
-					CombineHash(seed, static_cast<uint32_t>(element.type));
+					CombineHash(seed, static_cast<uint32_t>(element.GetType()));
 				}
 			}
 
@@ -82,7 +82,7 @@ namespace Helios {
 	private:
 		template <typename T>
 		void CombineHash(size_t& seed, const T& v) const {
-			std::hash<T> hasher;
+			std::hash<T> hasher{};
 			seed ^= hasher(v) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 		}
 	};

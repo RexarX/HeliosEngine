@@ -9,12 +9,12 @@ namespace Helios {
   public:
     VulkanTexture(Type type, std::string_view path, const Info& info);
 
-    virtual ~VulkanTexture() = default;
+    virtual ~VulkanTexture();
 
     void Load() override;
     void Unload() override;
 
-    void SetData() override;
+    void SetData(const void* data) override;
 
     void SetSlot(uint32_t slot) override { m_Slot = slot; }
 
@@ -33,7 +33,7 @@ namespace Helios {
     inline uint32_t GetMipLevel() const override { return m_Info.mipLevel; }
     inline uint32_t GetAnisoLevel() const override { return m_Info.anisoLevel; }
 
-    inline AllocatedImage& GetImageBuffer() { return m_ImageBuffer; }
+    inline const AllocatedImage& GetImageBuffer() const { return m_ImageBuffer; }
 
   private:
     void LoadFromFile(std::string_view path);
@@ -44,6 +44,8 @@ namespace Helios {
     static VkFormat GetVulkanFormat(ImageFormat format);
 
   private:
+    bool m_Loaded = false;
+
     Type m_Type;
 
     void* m_Data = nullptr;

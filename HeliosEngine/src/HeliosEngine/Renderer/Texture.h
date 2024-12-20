@@ -29,7 +29,7 @@ namespace Helios {
     virtual void Load() = 0;
     virtual void Unload() = 0;
 
-    virtual void SetData() = 0;
+    virtual void SetData(const void* data) = 0;
 
     virtual void SetSlot(uint32_t slot) = 0;
 

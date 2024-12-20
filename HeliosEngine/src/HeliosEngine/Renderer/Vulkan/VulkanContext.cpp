@@ -13,8 +13,8 @@
 namespace Helios {
   VulkanContext::VulkanContext(GLFWwindow* windowHandle)
     : m_WindowHandle(windowHandle) {
-    CORE_ASSERT(m_Instance == nullptr, "Context already exists!");
-    CORE_ASSERT_CRITICAL(windowHandle != nullptr, "Window handle is null!");
+    CORE_ASSERT(m_Instance == nullptr, "Failed to create VulkanContext: Context already exists!");
+    CORE_ASSERT_CRITICAL(windowHandle != nullptr, "Failed to create VulkanContext: Window handle is null!");
 
     m_Instance = this;
   }
@@ -48,7 +48,7 @@ namespace Helios {
     vkDestroyDevice(m_Device, nullptr);
     vkDestroySurfaceKHR(m_VkInstance, m_Surface, nullptr);
 
-    if (enableValidationLayers) {
+    if (ENABLE_VALIDATION_LAYERS) {
       DestroyDebugUtilsMessengerEXT(m_VkInstance, m_DebugMessenger, nullptr);
     }
 
@@ -65,7 +65,7 @@ namespace Helios {
     vkCmdEndRenderPass(frameData.commandBuffer);
 
     VkResult result = vkEndCommandBuffer(frameData.commandBuffer);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to record command buffer!");
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to update Vulkan: Failed to record command buffer!");
 
     VkSemaphore waitSemaphores[] = { frameData.presentSemaphore };
     VkSemaphore signalSemaphores[] = { frameData.renderSemaphore };
@@ -83,7 +83,7 @@ namespace Helios {
     submitInfo.pSignalSemaphores = signalSemaphores;
 
     result = vkQueueSubmit(m_GraphicsQueue, 1, &submitInfo, frameData.renderFence);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to submit graphics queue!");
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to update Vulkan: Failed to submit graphics queue!");
 
     VkSwapchainKHR swapChains[] = { m_Swapchain };
 
@@ -96,7 +96,7 @@ namespace Helios {
     presentInfo.pImageIndices = &m_ImageIndex;
 
     result = vkQueuePresentKHR(m_GraphicsQueue, &presentInfo);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to present graphics queue!");
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to update Vulkan: Failed to present graphics queue!");
 
     m_CurrentFrame = (m_CurrentFrame + 1) % MAX_FRAMES_IN_FLIGHT;
   }
@@ -111,26 +111,27 @@ namespace Helios {
     VkResult result = vkWaitForFences(m_Device, 1, &frameData.renderFence, VK_TRUE,
                                       std::numeric_limits<uint64_t>::max());
 
-    CORE_ASSERT(result == VK_SUCCESS, "Failed to wait for fence!");
+    CORE_ASSERT(result == VK_SUCCESS, "Failed to begin frame Vulkan: Failed to wait for fence!");
 
     result = vkResetFences(m_Device, 1, &frameData.renderFence);
-    CORE_ASSERT(result == VK_SUCCESS, "Failed to reset fence!");
+    CORE_ASSERT(result == VK_SUCCESS, "Failed to begin frame Vulkan: Failed to reset fence!");
 
     result = vkAcquireNextImageKHR(m_Device, m_Swapchain, std::numeric_limits<uint64_t>::max(),
                                    frameData.presentSemaphore, VK_NULL_HANDLE, &m_ImageIndex);
 
     if (result == VK_ERROR_OUT_OF_DATE_KHR) { RecreateSwapchain(); return; }
-    CORE_ASSERT(result == VK_SUCCESS || result == VK_SUBOPTIMAL_KHR, "Failed to acquire next image!");
+    CORE_ASSERT(result == VK_SUCCESS || result == VK_SUBOPTIMAL_KHR,
+                "Failed to begin frame Vulkan: Failed to acquire next image!");
 
     result = vkResetCommandBuffer(frameData.commandBuffer, 0);
-    CORE_ASSERT(result == VK_SUCCESS, "Failed to reset command buffer!");
+    CORE_ASSERT(result == VK_SUCCESS, "Failed to begin frame Vulkan: Failed to reset command buffer!");
 
     VkCommandBufferBeginInfo beginInfo{};
     beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
     beginInfo.flags |= VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
 
     result = vkBeginCommandBuffer(frameData.commandBuffer, &beginInfo);
-    CORE_ASSERT(result == VK_SUCCESS, "Failed to begin recording command buffer!");
+    CORE_ASSERT(result == VK_SUCCESS, "Failed to begin frame Vulkan: Failed to begin recording command buffer!");
 
     std::array<VkClearValue, 2> clearValues{};
     clearValues[0].color = { { 0.0f, 0.0f, 0.0f, 1.0f } };
@@ -167,7 +168,10 @@ namespace Helios {
     std::unordered_map<const VulkanPipelineManager::VulkanEffect*, std::vector<const RenderQueue::RenderObject*>> pipelineGroups;
 
     for (const RenderQueue::RenderQueue::RenderObject& object : queue.GetRenderObjects()) {
-      const VulkanPipelineManager::VulkanEffect& effect = pipelineManager.GetPipeline(object.renderable, PipelineManager::PipelineType::Regular);
+      const VulkanPipelineManager::VulkanEffect& effect = pipelineManager.GetPipeline(
+        object.renderable,
+        PipelineManager::PipelineType::Regular
+      );
       pipelineGroups[&effect].push_back(&object);
     }
 
@@ -213,6 +217,7 @@ namespace Helios {
   }
 
   void VulkanContext::InitImGui() {
+#ifndef RELEASE_MODE
     PROFILE_FUNCTION();
 
     VkDescriptorPoolSize pool_sizes[] = {
@@ -255,6 +260,7 @@ namespace Helios {
     ImGui_ImplVulkan_Init(&init_info);
 
     ImGui_ImplVulkan_CreateFontsTexture();
+#endif
   }
 
   void VulkanContext::ShutdownImGui() {
@@ -269,7 +275,8 @@ namespace Helios {
 #endif
   }
 
-  void VulkanContext::BeginFrameImGui() { 
+  void VulkanContext::BeginFrameImGui() {
+#ifndef RELEASE_MODE
     PROFILE_FUNCTION();
 
     ImGuiViewport* viewPort = ImGui::GetMainViewport();
@@ -284,9 +291,11 @@ namespace Helios {
 
     ImGui::NewFrame();
     ImGui::DockSpaceOverViewport(viewPort->ID, viewPort, ImGuiDockNodeFlags_PassthruCentralNode);
+#endif
   }
 
   void VulkanContext::EndFrameImGui() {
+#ifndef RELEASE_MODE
     PROFILE_FUNCTION();
 
     if (m_SwapchainRecreated) {
@@ -311,6 +320,7 @@ namespace Helios {
 #endif
 
     glfwMakeContextCurrent(backupContext);
+#endif
   }
 
   void VulkanContext::SetVSync(bool enabled) {
@@ -353,8 +363,10 @@ namespace Helios {
   void VulkanContext::CreateInstance() {
     PROFILE_FUNCTION();
 
-	  bool validationLayersAvaliable = !enableValidationLayers || CheckValidationLayerSupport();
-    CORE_ASSERT(validationLayersAvaliable, "Validation layers requested, but not available!");
+	  bool validationLayersAvaliable = CheckValidationLayerSupport();
+    if (ENABLE_VALIDATION_LAYERS && !validationLayersAvaliable) {
+      CORE_ERROR("Error while creating Vulkan instance: Validation layers requested, but not available!");
+    }
 
     uint32_t apiVersion = VK_API_VERSION_1_0;
     if (vkEnumerateInstanceVersion) {
@@ -382,7 +394,7 @@ namespace Helios {
     createInfo.ppEnabledExtensionNames = extensions.data();
 
     VkDebugUtilsMessengerCreateInfoEXT debugCreateInfo{};
-    if (validationLayersAvaliable) {
+    if (ENABLE_VALIDATION_LAYERS && validationLayersAvaliable) {
       createInfo.enabledLayerCount = static_cast<uint32_t>(m_ValidationLayers.size());
       createInfo.ppEnabledLayerNames = m_ValidationLayers.data();
 
@@ -403,20 +415,20 @@ namespace Helios {
   void VulkanContext::SetupDebugMessenger() {
     PROFILE_FUNCTION();
 
-    if (!enableValidationLayers) { return; }
+    if (!ENABLE_VALIDATION_LAYERS) { return; }
 
     VkDebugUtilsMessengerCreateInfoEXT createInfo{};
     PopulateDebugMessengerCreateInfo(createInfo);
 
     VkResult result = CreateDebugUtilsMessengerEXT(m_VkInstance, &createInfo, nullptr, &m_DebugMessenger);
-    CORE_ASSERT(result == VK_SUCCESS, "Failed to set up debug messenger!")
+    CORE_ASSERT(result == VK_SUCCESS, "Failed to set up Vulkan debug messenger!")
   }
 
   void VulkanContext::CreateSurface() {
     PROFILE_FUNCTION();
 
     VkResult result = glfwCreateWindowSurface(m_VkInstance, m_WindowHandle, nullptr, &m_Surface);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create window surface!");
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create Vulkan window surface!");
   }
 
   void VulkanContext::PickPhysicalDevice() {
@@ -424,17 +436,19 @@ namespace Helios {
 
     uint32_t deviceCount = 0;
     VkResult result = vkEnumeratePhysicalDevices(m_VkInstance, &deviceCount, nullptr);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to enumerate physical devices!");
-
-    CORE_ASSERT_CRITICAL(deviceCount != 0, "Failed to find GPUs with Vulkan support!");
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS,
+                         "Failed to pick Vulkan physical device: Failed to enumerate physical devices!");
+    CORE_ASSERT_CRITICAL(deviceCount != 0,
+                         "Failed to pick Vulkan physical device: Failed to find GPUs with Vulkan support!");
 
     std::vector<VkPhysicalDevice> devices(deviceCount);
     result = vkEnumeratePhysicalDevices(m_VkInstance, &deviceCount, devices.data());
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to enumerate physical devices!");
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS,
+                         "Failed to pick Vulkan physical device: Failed to enumerate physical devices!");
 
     std::multimap<uint32_t, VkPhysicalDevice> candidates;
     
-    for (const VkPhysicalDevice device : devices) {
+    for (VkPhysicalDevice device : devices) {
       uint32_t score = 0;
 
       if (IsDeviceSuitable(device)) {
@@ -451,16 +465,19 @@ namespace Helios {
       }
     }
 
+    CORE_ASSERT_CRITICAL(!candidates.empty(),
+                         "Failed to pick Vulkan physical device: Failed to find a suitable GPU!");
+
     if (candidates.rbegin()->first != 0) {
       m_PhysicalDevice = candidates.rbegin()->second;
 
-      VkPhysicalDeviceProperties deviceProperties;
+      VkPhysicalDeviceProperties deviceProperties{};
       vkGetPhysicalDeviceProperties(m_PhysicalDevice, &deviceProperties);
       CORE_INFO("Device Info:");
-      CORE_INFO("  GPU: {0}", deviceProperties.deviceName);
-      CORE_INFO("  Version: {0}", deviceProperties.driverVersion);
+      CORE_INFO("  GPU: {}", deviceProperties.deviceName);
+      CORE_INFO("  Version: {}", deviceProperties.driverVersion);
     } else {
-      CORE_ASSERT_CRITICAL(false, "Failed to find a suitable device!");
+      CORE_ASSERT_CRITICAL(false, "Failed to pick Vulkan physical device: Failed to find a suitable GPU!");
     }
   }
 
@@ -493,14 +510,14 @@ namespace Helios {
     createInfo.enabledExtensionCount = static_cast<uint32_t>(m_DeviceExtensions.size());
     createInfo.ppEnabledExtensionNames = m_DeviceExtensions.data();
 
-    if (enableValidationLayers) {
+    if (ENABLE_VALIDATION_LAYERS) {
       createInfo.enabledLayerCount = static_cast<uint32_t>(m_ValidationLayers.size());
       createInfo.ppEnabledLayerNames = m_ValidationLayers.data();
     }
     else { createInfo.enabledLayerCount = 0; }
 
     VkResult result = vkCreateDevice(m_PhysicalDevice, &createInfo, nullptr, &m_Device);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create logical device!");
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed create Vulkan logical device!");
 
     vkGetDeviceQueue(m_Device, indices.graphicsFamily.value(), 0, &m_GraphicsQueue);
     vkGetDeviceQueue(m_Device, indices.presentFamily.value(), 0, &m_PresentQueue);
@@ -545,34 +562,32 @@ namespace Helios {
     createInfo.oldSwapchain = VK_NULL_HANDLE;
 
     VkResult result = vkCreateSwapchainKHR(m_Device, &createInfo, nullptr, &m_Swapchain);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create swapchain!");
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create Vulkan swapchain!");
 
     result = vkGetSwapchainImagesKHR(m_Device, m_Swapchain, &imageCount, nullptr);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to get swapchain images!");
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS,
+                         "Failed to create Vulkan swapchain: Failed to get swapchain images!");
 
     m_SwapchainImages.resize(imageCount);
 
     result = vkGetSwapchainImagesKHR(m_Device, m_Swapchain, &imageCount, m_SwapchainImages.data());
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to get swapchain images!");
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS,
+                         "Failed to create Vulkan swapchain: Failed to get swapchain images!");
 
     m_SwapchainImageFormat = surfaceFormat.format;
     m_SwapchainExtent = extent;
 
     m_SwapchainImageViews.resize(m_SwapchainImages.size());
     for (uint32_t i = 0; i < m_SwapchainImages.size(); ++i) {
-      VkImageViewCreateInfo viewInfo{};
-      viewInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
-      viewInfo.image = m_SwapchainImages[i];
-      viewInfo.viewType = VK_IMAGE_VIEW_TYPE_2D;
-      viewInfo.format = m_SwapchainImageFormat;
-      viewInfo.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
-      viewInfo.subresourceRange.baseMipLevel = 0;
-      viewInfo.subresourceRange.levelCount = 1;
-      viewInfo.subresourceRange.baseArrayLayer = 0;
-      viewInfo.subresourceRange.layerCount = 1;
+      auto imageViewResult = CreateImageView(m_Device, m_SwapchainImages[i], m_SwapchainImageFormat,
+                                             VK_IMAGE_ASPECT_COLOR_BIT);
+      if (!imageViewResult) {
+        CORE_ASSERT_CRITICAL(false, "Failed to create Vulkan swapchain: Failed to create image view '{}': {}!",
+                             i, imageViewResult.error());
+        return;
+      }
 
-      result = vkCreateImageView(m_Device, &viewInfo, nullptr, &m_SwapchainImageViews[i]);
-      CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create image view ({})!", i);
+      m_SwapchainImageViews[i] = *imageViewResult;
     }
   }
 
@@ -585,7 +600,7 @@ namespace Helios {
     allocatorInfo.instance = m_VkInstance;
 
     VkResult result = vmaCreateAllocator(&allocatorInfo, &m_Allocator);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create allocator!");
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create Vulkan memory allocator!");
   }
 
   void VulkanContext::CreateCommandPool() {
@@ -600,7 +615,7 @@ namespace Helios {
 
     for (FrameData& frame : m_Frames) {
       VkResult result = vkCreateCommandPool(m_Device, &poolInfo, nullptr, &frame.commandPool);
-      CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create command pool!");
+      CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create Vulkan command pool!");
 
       m_MainDeletionQueue.PushFunction([this, &frame]() {
         vkDestroyCommandPool(m_Device, frame.commandPool, nullptr);
@@ -608,7 +623,7 @@ namespace Helios {
     }
 
     VkResult result = vkCreateCommandPool(m_Device, &poolInfo, nullptr, &m_ImCommandPool);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create command pool!");
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create Vulkan command pool!");
 
     m_MainDeletionQueue.PushFunction([this]() {
       vkDestroyCommandPool(m_Device, m_ImCommandPool, nullptr);
@@ -627,13 +642,15 @@ namespace Helios {
       allocInfo.commandPool = frame.commandPool;
 
       VkResult result = vkAllocateCommandBuffers(m_Device, &allocInfo, &frame.commandBuffer);
-      CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to allocate command buffer!");
+      CORE_ASSERT_CRITICAL(result == VK_SUCCESS,
+                           "Failed to create Vulkan command buffers: Failed to allocate command buffer!");
     }
 
     allocInfo.commandPool = m_ImCommandPool;
 
     VkResult result = vkAllocateCommandBuffers(m_Device, &allocInfo, &m_ImCommandBuffer);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to allocate command buffer!");
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS,
+                         "Failed to create Vulkan command buffers: Failed to allocate command buffer!");
   }
 
   void VulkanContext::CreateSyncObjects() {
@@ -650,8 +667,7 @@ namespace Helios {
       bool result = vkCreateSemaphore(m_Device, &semaphoreInfo, nullptr, &frame.presentSemaphore) == VK_SUCCESS
                     && vkCreateSemaphore(m_Device, &semaphoreInfo, nullptr, &frame.renderSemaphore) == VK_SUCCESS
                     && vkCreateFence(m_Device, &fenceInfo, nullptr, &frame.renderFence) == VK_SUCCESS;
-
-      CORE_ASSERT_CRITICAL(result, "Failed to create synchronization objects!");
+      CORE_ASSERT_CRITICAL(result, "Failed to create Vulkan synchronization objects!");
 
       m_MainDeletionQueue.PushFunction([this, &frame]() {
         vkDestroySemaphore(m_Device, frame.presentSemaphore, nullptr);
@@ -661,7 +677,8 @@ namespace Helios {
     }
 
     VkResult result = vkCreateFence(m_Device, &fenceInfo, nullptr, &m_ImFence);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create synchronization objects!");
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS,
+                         "Failed to create Vulkan synchronization objects: Failed to create fence!");
 
     m_MainDeletionQueue.PushFunction([this]() {
       vkDestroyFence(m_Device, m_ImFence, nullptr);
@@ -708,17 +725,22 @@ namespace Helios {
     VkSubpassDependency dependency{};
     dependency.srcSubpass = VK_SUBPASS_EXTERNAL;
     dependency.dstSubpass = 0;
-    dependency.srcStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT | VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT;
+    dependency.srcStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT
+                              | VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT;
     dependency.srcAccessMask = 0;
-    dependency.dstStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT | VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT;
-    dependency.dstAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT | VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT;
+    dependency.dstStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT
+                              | VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT;
+    dependency.dstAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT
+                               | VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT;
 
     VkSubpassDependency depthDependency{};
     depthDependency.srcSubpass = VK_SUBPASS_EXTERNAL;
     depthDependency.dstSubpass = 0;
-    depthDependency.srcStageMask = VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT | VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT;
+    depthDependency.srcStageMask = VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT
+                                   | VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT;
     depthDependency.srcAccessMask = 0;
-    depthDependency.dstStageMask = VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT | VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT;
+    depthDependency.dstStageMask = VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT
+                                   | VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT;
     depthDependency.dstAccessMask = VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT;
 
     VkSubpassDependency dependencies[] = { dependency, depthDependency };
@@ -734,7 +756,7 @@ namespace Helios {
     renderPassInfo.pDependencies = dependencies;
 
     VkResult result = vkCreateRenderPass(m_Device, &renderPassInfo, nullptr, &m_RenderPass);
-    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create render pass!");
+    CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create Vulkan render pass!");
 
     m_MainDeletionQueue.PushFunction([this]() {
       vkDestroyRenderPass(m_Device, m_RenderPass, nullptr);
@@ -746,10 +768,26 @@ namespace Helios {
 
     VkFormat depthFormat = FindDepthFormat();
 
-    m_DepthImage = CreateImage(m_Allocator, VMA_MEMORY_USAGE_GPU_ONLY, m_SwapchainExtent.width, m_SwapchainExtent.height,
-                               depthFormat, VK_IMAGE_TILING_OPTIMAL, VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT);
+    auto imageResult = CreateImage(m_Allocator, VMA_MEMORY_USAGE_GPU_ONLY, m_SwapchainExtent.width,
+                                   m_SwapchainExtent.height, 1, depthFormat, VK_IMAGE_TILING_OPTIMAL,
+                                   VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT);
+    if (!imageResult) {
+      CORE_ASSERT_CRITICAL(false, "Failed to create Vulkan depth resources: Failed to create depth image: {}!",
+                           imageResult.error());
+      return;
+    }
 
-    m_DepthImage.imageView = CreateImageView(m_Device, m_DepthImage.image, depthFormat, VK_IMAGE_ASPECT_DEPTH_BIT);
+    m_DepthImage = std::move(*imageResult);
+
+    auto imageViewResult = CreateImageView(m_Device, m_DepthImage.image, depthFormat,
+                                           VK_IMAGE_ASPECT_DEPTH_BIT);
+    if (!imageViewResult) {
+      CORE_ASSERT_CRITICAL(false, "Failed to create Vulkan depth resources: Failed to create depth image view: {}!",
+                           imageViewResult.error());
+      return;
+    }
+    
+    m_DepthImage.imageView = *imageViewResult;
   }
 
   void VulkanContext::CreateFramebuffers() {
@@ -773,13 +811,14 @@ namespace Helios {
       framebufferInfo.layers = 1;
 
       VkResult result = vkCreateFramebuffer(m_Device, &framebufferInfo, nullptr, &m_SwapchainFramebuffers[i]);
-      CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create framebuffer!");
+      CORE_ASSERT_CRITICAL(result == VK_SUCCESS, "Failed to create Vulkan framebuffers!");
     }
   }
 
   void VulkanContext::CleanupSwapchain() {
     PROFILE_FUNCTION();
 
+    m_DepthImage.Destroy(m_Device, m_Allocator);
     vkDestroyImageView(m_Device, m_DepthImage.imageView, nullptr);
     vmaDestroyImage(m_Allocator, m_DepthImage.image, m_DepthImage.allocation);
 
@@ -806,19 +845,20 @@ namespace Helios {
   }
 
   bool VulkanContext::CheckValidationLayerSupport() const {
-    uint32_t layerCount;
+    uint32_t layerCount = 0;
     VkResult result = vkEnumerateInstanceLayerProperties(&layerCount, nullptr);
-    CORE_ASSERT(result == VK_SUCCESS, "Failed to enumerate instance layer properties!");
+    CORE_ASSERT(result == VK_SUCCESS,
+                "Failed to check Vulkan validation layer support: Failed to enumerate instance layer properties!");
 
     std::vector<VkLayerProperties> availableLayers(layerCount);
     result = vkEnumerateInstanceLayerProperties(&layerCount, availableLayers.data());
-    CORE_ASSERT(result == VK_SUCCESS, "Failed to enumerate instance layer properties!");
+    CORE_ASSERT(result == VK_SUCCESS,
+                "Failed to check Vulkan validation layer support: Failed to enumerate instance layer properties!");
 
     for (const char* layerName : m_ValidationLayers) {
       bool layerFound = false;
-
       for (const VkLayerProperties& layerProperties : availableLayers) {
-        if (strcmp(layerName, layerProperties.layerName) == 0) {
+        if (std::strcmp(layerName, layerProperties.layerName) == 0) {
           layerFound = true;
           break;
         }
@@ -858,7 +898,7 @@ namespace Helios {
 
     std::vector<const char*> extensions(glfwExtensions, glfwExtensions + glfwExtensionCount);
 
-    if (enableValidationLayers) {
+    if (ENABLE_VALIDATION_LAYERS) {
       extensions.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
     }
 
@@ -866,55 +906,68 @@ namespace Helios {
   }
 
   void VulkanContext::PopulateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo) const {
-    createInfo = {};
-    createInfo.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
-    createInfo.messageSeverity = VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT
-                                 | VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT
-                                 | VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;
-
-    createInfo.messageType = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT
-                             | VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT
-                             | VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT;
-
-    createInfo.pfnUserCallback = DebugCallback;
+    createInfo = {
+      .sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT,
+      .messageSeverity = VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT
+                         | VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT
+                         | VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT,
+      .messageType = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT
+                     | VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT
+                     | VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT,
+      .pfnUserCallback = DebugCallback
+    };
   }
 
-  VkResult VulkanContext::CreateDebugUtilsMessengerEXT(const VkInstance instance, const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo,
-                                                       const VkAllocationCallbacks* pAllocator, VkDebugUtilsMessengerEXT* pDebugMessenger) {
-    auto func = (PFN_vkCreateDebugUtilsMessengerEXT)vkGetInstanceProcAddr(instance, "vkCreateDebugUtilsMessengerEXT");
+  VkResult VulkanContext::CreateDebugUtilsMessengerEXT(VkInstance instance,
+                                                       const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo,
+                                                       const VkAllocationCallbacks* pAllocator,
+                                                       VkDebugUtilsMessengerEXT* pDebugMessenger) {
+    auto func = (PFN_vkCreateDebugUtilsMessengerEXT)vkGetInstanceProcAddr(instance,
+                                                                          "vkCreateDebugUtilsMessengerEXT");
     if (func != nullptr) {
       return func(instance, pCreateInfo, pAllocator, pDebugMessenger);
     }
     else { return VK_ERROR_EXTENSION_NOT_PRESENT; }
   }
 
-  void VulkanContext::DestroyDebugUtilsMessengerEXT(const VkInstance instance, const VkDebugUtilsMessengerEXT debugMessenger,
+  void VulkanContext::DestroyDebugUtilsMessengerEXT(VkInstance instance,
+                                                    const VkDebugUtilsMessengerEXT debugMessenger,
                                                     const VkAllocationCallbacks* pAllocator) {
-    auto func = (PFN_vkDestroyDebugUtilsMessengerEXT)vkGetInstanceProcAddr(instance, "vkDestroyDebugUtilsMessengerEXT");
+    auto func = (PFN_vkDestroyDebugUtilsMessengerEXT)vkGetInstanceProcAddr(instance,
+                                                                           "vkDestroyDebugUtilsMessengerEXT");
     if (func != nullptr) {
       func(instance, debugMessenger, pAllocator);
     }
   }
 
-  bool VulkanContext::CheckDeviceExtensionSupport(const VkPhysicalDevice device) const {
+  bool VulkanContext::CheckDeviceExtensionSupport(VkPhysicalDevice device) const {
     uint32_t extensionCount = 0;
     VkResult result = vkEnumerateDeviceExtensionProperties(device, nullptr, &extensionCount, nullptr);
-    CORE_ASSERT(result == VK_SUCCESS, "Failed to enumerate device extension properties!");
+    CORE_ASSERT(result == VK_SUCCESS,
+                "Failed to check Vulkan device extension support: Failed to enumerate device extension properties!");
 
     std::vector<VkExtensionProperties> availableExtensions(extensionCount);
     result = vkEnumerateDeviceExtensionProperties(device, nullptr, &extensionCount, availableExtensions.data());
-    CORE_ASSERT(result == VK_SUCCESS, "Failed to enumerate device extension properties!");
+    CORE_ASSERT(result == VK_SUCCESS,
+                "Failed to check Vulkan device extension support: Failed to enumerate device extension properties!");
 
-    std::set<std::string> requiredExtensions(m_DeviceExtensions.begin(), m_DeviceExtensions.end());
-
+    std::set<std::string_view> requiredExtensions(m_DeviceExtensions.begin(), m_DeviceExtensions.end());
+    
     for (const VkExtensionProperties& extensionProperties : availableExtensions) {
       requiredExtensions.erase(extensionProperties.extensionName);
     }
 
-    return requiredExtensions.empty();
+    if (!requiredExtensions.empty()) {
+      for (const std::string_view& extension : requiredExtensions) {
+        CORE_WARN("Missing required device extension: {}!", extension);
+      }
+      return false;
+    }
+
+    return true;
   }
 
-  QueueFamilyIndices VulkanContext::FindQueueFamilies(const VkPhysicalDevice device) const {
+  QueueFamilyIndices VulkanContext::FindQueueFamilies(VkPhysicalDevice device) const {
     QueueFamilyIndices indices{};
 
     uint32_t queueFamilyCount = 0;
@@ -931,7 +984,8 @@ namespace Helios {
 
       VkBool32 presentSupport = false;
       VkResult result = vkGetPhysicalDeviceSurfaceSupportKHR(device, i, m_Surface, &presentSupport);
-      CORE_ASSERT(result == VK_SUCCESS, "Failed to get physical device surface support!");
+      CORE_ASSERT(result == VK_SUCCESS,
+                  "Failed to find Vulkan queue families: Failed to get physical device surface support!");
 
       if (presentSupport) { indices.presentFamily = i; }
       if (indices.IsComplete()) { break; }
@@ -941,36 +995,42 @@ namespace Helios {
     return indices;
   }
 
-  SwapChainSupportDetails VulkanContext::QuerySwapChainSupport(const VkPhysicalDevice device) const {
+  SwapChainSupportDetails VulkanContext::QuerySwapChainSupport(VkPhysicalDevice device) const {
     SwapChainSupportDetails details{};
 
     VkResult result = vkGetPhysicalDeviceSurfaceCapabilitiesKHR(device, m_Surface, &details.capabilities);
-    CORE_ASSERT(result == VK_SUCCESS, "Failed to get physical device surface capabilities!");
+    CORE_ASSERT(result == VK_SUCCESS,
+                "Failed to query Vulkan swapchain support: Failed to get physical device surface capabilities!");
 
     uint32_t formatCount = 0;
     result = vkGetPhysicalDeviceSurfaceFormatsKHR(device, m_Surface, &formatCount, nullptr);
-    CORE_ASSERT(result == VK_SUCCESS, "Failed to get physical device surface formats!");
+    CORE_ASSERT(result == VK_SUCCESS,
+                "Failed to query Vulkan swapchain support: Failed to get physical device surface formats!");
 
     if (formatCount != 0) {
       details.formats.resize(formatCount);
       result = vkGetPhysicalDeviceSurfaceFormatsKHR(device, m_Surface, &formatCount, details.formats.data());
-      CORE_ASSERT(result == VK_SUCCESS, "Failed to get physical device surface formats!");
+      CORE_ASSERT(result == VK_SUCCESS,
+                  "Failed to query Vulkan swapchain support: Failed to get physical device surface formats!");
     }
 
     uint32_t presentModeCount = 0;
     result = vkGetPhysicalDeviceSurfacePresentModesKHR(device, m_Surface, &presentModeCount, nullptr);
-    CORE_ASSERT(result == VK_SUCCESS, "Failed to get physical device surface present modes!");
+    CORE_ASSERT(result == VK_SUCCESS,
+                "Failed to query Vulkan swapchain support: Failed to get physical device surface present modes!");
 
     if (presentModeCount != 0) {
       details.presentModes.resize(presentModeCount);
-      result = vkGetPhysicalDeviceSurfacePresentModesKHR(device, m_Surface, &presentModeCount, details.presentModes.data());
-      CORE_ASSERT(result == VK_SUCCESS, "Failed to get physical device surface present modes!");
+      result = vkGetPhysicalDeviceSurfacePresentModesKHR(device, m_Surface, &presentModeCount,
+                                                         details.presentModes.data());
+      CORE_ASSERT(result == VK_SUCCESS,
+                  "Failed to query Vulkan swapchain support: Failed to get physical device surface present modes!");
     }
 
     return details;
   }
 
-  bool VulkanContext::IsDeviceSuitable(const VkPhysicalDevice device) const {
+  bool VulkanContext::IsDeviceSuitable(VkPhysicalDevice device) const {
     QueueFamilyIndices indices = FindQueueFamilies(device);
 
     bool extensionsSupported = CheckDeviceExtensionSupport(device);
@@ -983,8 +1043,8 @@ namespace Helios {
 
     VkPhysicalDeviceFeatures supportedFeatures{};
     vkGetPhysicalDeviceFeatures(device, &supportedFeatures);
-
-    return indices.IsComplete() && extensionsSupported && swapChainAdequate && supportedFeatures.samplerAnisotropy;
+    return indices.IsComplete() && extensionsSupported && swapChainAdequate
+           && supportedFeatures.samplerAnisotropy;
   }
 
   VkSurfaceFormatKHR VulkanContext::ChooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats) {
@@ -1021,8 +1081,10 @@ namespace Helios {
         static_cast<uint32_t>(height)
       };
 
-      actualExtent.width = std::clamp(actualExtent.width, capabilities.minImageExtent.width, capabilities.maxImageExtent.width);
-      actualExtent.height = std::clamp(actualExtent.height, capabilities.minImageExtent.height, capabilities.maxImageExtent.height);
+      actualExtent.width = std::clamp(actualExtent.width, capabilities.minImageExtent.width,
+                                      capabilities.maxImageExtent.width);
+      actualExtent.height = std::clamp(actualExtent.height, capabilities.minImageExtent.height,
+                                       capabilities.maxImageExtent.height);
 
       return actualExtent;
     }
@@ -1049,7 +1111,7 @@ namespace Helios {
       }
     }
 
-    CORE_ASSERT(false, "Failed to find supported format!");
+    CORE_ASSERT(false, "Failed to find Vulkan supported format!");
     return VK_FORMAT_UNDEFINED;
   }
 }

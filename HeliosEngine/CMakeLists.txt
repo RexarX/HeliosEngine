@@ -1,3 +1,4 @@
+project(HeliosEngine)
 set(PROJECT_NAME HeliosEngine)
 
 file(GLOB_RECURSE src
@@ -8,15 +9,11 @@ file(GLOB_RECURSE src__Engine
     "src/HeliosEngine/*.h" "src/HeliosEngine/*.cpp"
 )
 
-file(GLOB_RECURSE src__Engine__Events
-    "src/HeliosEngine/Events/*.h" "src/HeliosEngine/Events/*.cpp"
-)
-
 file(GLOB_RECURSE src__Engine__Config
     "src/HeliosEngine/Config/*.h" "src/HeliosEngine/Config/*.cpp"
 )
 
-file(GLOB_RECURSE src__EntityComponentSystem
+file(GLOB_RECURSE src__Engine__EntityComponentSystem
     "src/HeliosEngine/EntityComponentSystem/*.h"
     "src/HeliosEngine/EntityComponentSystem/*.inl"
     "src/HeliosEngine/EntityComponentSystem/*.cpp"
@@ -24,53 +21,89 @@ file(GLOB_RECURSE src__EntityComponentSystem
     "src/HeliosEngine/EntityComponentSystem/Systems/*.cpp"
 )
 
-file(GLOB_RECURSE src__Engine__Scene
-    "src/HeliosEngine/Scene/*.h" "src/HeliosEngine/Scene/*.cpp"
-)
-
-file(GLOB_RECURSE src__Engine__Utils
-    "src/HeliosEngine/Utils/*.h" "src/HeliosEngine/Utils/*.cpp"
-)
-
-file(GLOB_RECURSE src__Engine__Renderer
-    "src/HeliosEngine/Renderer/*.h" "src/HeliosEngine/Renderer/*.cpp"
-    "src/HeliosEngine/Renderer/Vulkan/*.h" "src/HeliosEngine/Renderer/Vulkan/*.cpp"
-)
-
-file(GLOB_RECURSE src__Engine__ShaderGraph
-    "src/HeliosEngine/ShaderGraph/*.h" "src/HeliosEngine/ShaderGraph/*.cpp"
-)
-
-file(GLOB_RECURSE src__Platform__Windows
-    "src/Platform/Windows/*.h" "src/Platform/Windows/*.cpp"
-)
-
-file(GLOB_RECURSE src__Platform__Linux
-    "src/Platform/Linux/*.h" "src/Platform/Linux/*.cpp"
+file(GLOB_RECURSE src__Engine__Events
+    "src/HeliosEngine/Events/*.h" "src/HeliosEngine/Events/*.cpp"
 )
 
 file(GLOB_RECURSE src__Engine__ImGui
     "src/HeliosEngine/ImGui/*.h" "src/HeliosEngine/ImGui/*.cpp"
 )
 
+file(GLOB_RECURSE src__Engine__Renderer
+    "src/HeliosEngine/Renderer/*.h" "src/HeliosEngine/Renderer/*.cpp"
+    "src/HeliosEngine/Renderer/Vertex/*.h" "src/HeliosEngine/Renderer/Vertex/*.cpp"
+    "src/HeliosEngine/Renderer/Vulkan/*.h" "src/HeliosEngine/Renderer/Vulkan/*.cpp"
+    "src/HeliosEngine/Renderer/OpenGL/*.h" "src/HeliosEngine/Renderer/OpenGL/*.cpp"
+)
+
+file(GLOB_RECURSE src__Engine__Scene
+    "src/HeliosEngine/Scene/*.h" "src/HeliosEngine/Scene/*.cpp"
+)
+
+file(GLOB_RECURSE src__Engine__ShaderGraph
+    "src/HeliosEngine/ShaderGraph/*.h" "src/HeliosEngine/ShaderGraph/*.cpp"
+)
+
+file(GLOB_RECURSE src__Engine__Utils
+    "src/HeliosEngine/Utils/*.h" "src/HeliosEngine/Utils/*.cpp"
+)
+
+file(GLOB_RECURSE src__Platform__Linux
+    "src/Platform/Linux/*.h" "src/Platform/Linux/*.cpp"
+)
+
+file(GLOB_RECURSE src__Platform__Windows
+    "src/Platform/Windows/*.h" "src/Platform/Windows/*.cpp"
+)
+
 set(ALL_FILES
     ${src}
     ${src__Engine}
-    ${src__Engine__Events}
     ${src__Engine__Config}
-    ${src__EntityComponentSystem}
-    ${src__Engine__Scene}
-    ${src__Engine__Utils}
-    ${src__Engine__Renderer}
-    ${src__Engine__ShaderGraph}
-    ${src__Platform__Windows}
-    ${src__Platform__Linux}
+    ${src__Engine__EntityComponentSystem}
+    ${src__Engine__Events}
     ${src__Engine__ImGui}
+    ${src__Engine__Renderer}
+    ${src__Engine__Scene}
+    ${src__Engine__ShaderGraph}
+    ${src__Engine__Utils}
+    ${src__Platform__Linux} 
+    ${src__Platform__Windows}
 )
+
+if(ENABLE_UNITY_BUILD)
+    set_source_files_properties(${src__Engine} PROPERTIES UNITY_GROUP "engine")
+    set_source_files_properties(${src__Engine__Config} PROPERTIES UNITY_GROUP "config")  
+    set_source_files_properties(${src__Engine__EntityComponentSystem} PROPERTIES UNITY_GROUP "ecs")    
+    set_source_files_properties(${src__Engine__Events} PROPERTIES UNITY_GROUP "events")
+    set_source_files_properties(${src__Engine__ImGui} PROPERTIES UNITY_GROUP "imgui")
+    set_source_files_properties(${src__Engine__Renderer} PROPERTIES UNITY_GROUP "renderer")
+    set_source_files_properties(${src__Engine__Scene} PROPERTIES UNITY_GROUP "scene")
+    set_source_files_properties(${src__Engine__ShaderGraph} PROPERTIES UNITY_GROUP "shader_graph")
+    set_source_files_properties(${src__Engine__Utils} PROPERTIES UNITY_GROUP "utils")
+    set_source_files_properties(${src__Platform__Linux} PROPERTIES UNITY_GROUP "platform_linux")
+    set_source_files_properties(${src__Platform__Windows} PROPERTIES UNITY_GROUP "platform_windows")
+
+    if(CMAKE_PCH_ENABLED)
+        set_source_files_properties("src/pch.h" PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON)
+    endif()
+endif()
 
 add_library(${PROJECT_NAME} SHARED ${ALL_FILES})
 
-set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 23 CXX_STANDARD_REQUIRED ON CXX_EXTENSIONS OFF)
+set_target_properties(${PROJECT_NAME} PROPERTIES
+    CXX_STANDARD 23
+    CXX_STANDARD_REQUIRED ON
+    CXX_EXTENSIONS OFF
+)
+
+if(ENABLE_UNITY_BUILD)
+    set_target_properties(${PROJECT_NAME} PROPERTIES
+        UNITY_BUILD ON
+        UNITY_BUILD_MODE BATCH
+        CMAKE_UNITY_BUILD_BATCH_SIZE ${UNITY_BUILD_BATCH_SIZE}
+    )
+endif()
 
 target_precompile_headers(${PROJECT_NAME} PRIVATE
     "$<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/src/pch.h>"
@@ -79,8 +112,8 @@ target_precompile_headers(${PROJECT_NAME} PRIVATE
 foreach(OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES})
     string(TOUPPER ${OUTPUTCONFIG} UPOUTPUTCONFIG)
     set_target_properties(${PROJECT_NAME} PROPERTIES
-        TARGET_NAME_${UPOUTPUTCONFIG} "HeliosEngine"
-        ARCHIVE_OUTPUT_NAME_${UPOUTPUTCONFIG} "HeliosEngine"
+        TARGET_NAME_${UPOUTPUTCONFIG} ${PROJECT_NAME}
+        ARCHIVE_OUTPUT_NAME_${UPOUTPUTCONFIG} ${PROJECT_NAME}
         RUNTIME_OUTPUT_DIRECTORY_${UPOUTPUTCONFIG}
             "${CMAKE_CURRENT_SOURCE_DIR}/../bin/${OUTPUTCONFIG}-${PLATFORM}-${ARCHITECTURE}"
         LIBRARY_OUTPUT_DIRECTORY_${UPOUTPUTCONFIG}
@@ -90,7 +123,7 @@ foreach(OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES})
     )
 endforeach(OUTPUTCONFIG CMAKE_CONFIGURATION_TYPES)
 
-if (CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
+if(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
     set_target_properties(${PROJECT_NAME} PROPERTIES MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
 endif()
 
@@ -142,7 +175,7 @@ target_compile_options(${PROJECT_NAME} PRIVATE
     >
 )
 
-if (ENABLE_SIMD_SSE2)
+if(ENABLE_SIMD_SSE2)
     target_compile_options(${PROJECT_NAME} PRIVATE
         $<$<CXX_COMPILER_ID:MSVC>:
             $<$<CONFIG:RelWithDebInfo>:/arch:SSE2>
@@ -153,7 +186,7 @@ if (ENABLE_SIMD_SSE2)
 		    $<$<CONFIG:Release>:-msse2>   
 	    >
     )
-elseif (ENABLE_SIMD_SSE3)
+elseif(ENABLE_SIMD_SSE3)
     target_compile_options(${PROJECT_NAME} PRIVATE
         $<$<CXX_COMPILER_ID:MSVC>: # VC doesn't support SSE3
             $<$<CONFIG:RelWithDebInfo>:/arch:SSE2>
@@ -164,7 +197,7 @@ elseif (ENABLE_SIMD_SSE3)
 		    $<$<CONFIG:Release>:-msse3> 
 	    >
     )
-elseif (ENABLE_SIMD_SSSE3)
+elseif(ENABLE_SIMD_SSSE3)
 	target_compile_options(${PROJECT_NAME} PRIVATE
 		$<$<CXX_COMPILER_ID:MSVC>: # VC doesn't support SSSE3
             $<$<CONFIG:RelWithDebInfo>:/arch:SSSE3>
@@ -175,7 +208,7 @@ elseif (ENABLE_SIMD_SSSE3)
 			$<$<CONFIG:Release>:-mssse3>
 		>
 	)
-elseif (ENABLE_SIMD_SSE4_1)
+elseif(ENABLE_SIMD_SSE4_1)
 	target_compile_options(${PROJECT_NAME} PRIVATE
 		$<$<CXX_COMPILER_ID:MSVC>: # VC doesn't support SSE4.1
             $<$<CONFIG:RelWithDebInfo>:/arch:SSE4.1>
@@ -186,7 +219,7 @@ elseif (ENABLE_SIMD_SSE4_1)
 			$<$<CONFIG:Release>:-msse4.1>	
 		>
 	)
-elseif (ENABLE_SIMD_SSE4_2)
+elseif(ENABLE_SIMD_SSE4_2)
 	target_compile_options(${PROJECT_NAME} PRIVATE
 		$<$<CXX_COMPILER_ID:MSVC>: # VC doesn't support SSE4.2
             $<$<CONFIG:RelWithDebInfo>:/arch:SSE4.2>
@@ -197,7 +230,7 @@ elseif (ENABLE_SIMD_SSE4_2)
 			$<$<CONFIG:RelWithDebInfo>:-msse4.2>
 		>
 	)
-elseif (ENABLE_SIMD_AVX)
+elseif(ENABLE_SIMD_AVX)
     target_compile_options(${PROJECT_NAME} PRIVATE
         $<$<CXX_COMPILER_ID:MSVC>:
             $<$<CONFIG:RelWithDebInfo>:/arch:AVX>
@@ -209,7 +242,7 @@ elseif (ENABLE_SIMD_AVX)
 			
 		>
     )
-elseif (ENABLE_SIMD_AVX2)
+elseif(ENABLE_SIMD_AVX2)
     target_compile_options(${PROJECT_NAME} PRIVATE
         $<$<CXX_COMPILER_ID:MSVC>:
             $<$<CONFIG:RelWithDebInfo>:/arch:AVX2>
@@ -222,6 +255,19 @@ elseif (ENABLE_SIMD_AVX2)
     )
 endif()
 
+set(GLM_ENABLE_SIMD_SSE2 ENABLE_SIMD_SSE2)
+set(GLM_ENABLE_SIMD_SSE3 ENABLE_SIMD_SSE3)
+set(GLM_ENABLE_SIMD_SSSE3 ENABLE_SIMD_SSSE3)
+set(GLM_ENABLE_SIMD_SSE4_1 ENABLE_SIMD_SSE4_1)
+set(GLM_ENABLE_SIMD_SSE4_2 ENABLE_SIMD_SSE4_2)
+set(GLM_ENABLE_SIMD_AVX ENABLE_SIMD_AVX)
+set(GLM_ENABLE_SIMD_AVX2 ENABLE_SIMD_AVX2)
+
+set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
+set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+set(GLFW_INSTALL OFF CACHE BOOL "" FORCE)
+
 find_package(spdlog CONFIG REQUIRED)
 find_package(argparse CONFIG REQUIRED)
 find_package(PkgConfig REQUIRED)
@@ -231,18 +277,10 @@ find_package(glfw3 CONFIG REQUIRED)
 find_package(glm CONFIG REQUIRED)
 find_package(EnTT CONFIG REQUIRED)
 find_package(imgui CONFIG REQUIRED)
-
-find_package(shaderc CONFIG)
-find_package(unofficial-shaderc CONFIG)
-add_library(universal_shaderc INTERFACE)
-if(TARGET shaderc::shaderc)
-    target_link_libraries(universal_shaderc INTERFACE shaderc::shaderc)
-elseif(TARGET unofficial::shaderc::shaderc)
-    target_link_libraries(universal_shaderc INTERFACE unofficial::shaderc::shaderc)
-else()
-    message(FATAL_ERROR "shaderc library not found!")
-endif()
-
+find_package(unofficial-shaderc CONFIG REQUIRED)
+find_package(spirv_cross_core CONFIG REQUIRED)
+find_package(spirv_cross_glsl CONFIG REQUIRED)
+find_package(spirv_cross_reflect CONFIG REQUIRED)
 find_package(VulkanHeaders CONFIG REQUIRED)
 find_package(VulkanMemoryAllocator CONFIG REQUIRED)
 find_package(glad CONFIG REQUIRED)
@@ -257,7 +295,10 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     EnTT::EnTT
     stb_image
     imgui::imgui
-    universal_shaderc
+    unofficial::shaderc::shaderc
+    spirv-cross-core
+    spirv-cross-glsl
+    spirv-cross-reflect
     Vulkan::Headers
     GPUOpen::VulkanMemoryAllocator
     glad::glad

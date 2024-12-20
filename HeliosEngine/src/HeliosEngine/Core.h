@@ -20,15 +20,15 @@
 
 #ifdef ENABLE_ASSERTS
 	#ifdef _MSC_VER
-		#define DEBUG_BREAK __debugbreak()
+		#define DEBUG_BREAK() __debugbreak()
 	#else
-		#define DEBUG_BREAK __builtin_trap()
+		#define DEBUG_BREAK() __builtin_trap()
 	#endif
 
-	#define CORE_ASSERT(x, ...) if(!(x)) { CORE_ERROR(__VA_ARGS__); DEBUG_BREAK; }
-	#define CORE_ASSERT_CRITICAL(x, ...) if(!(x)) { CORE_CRITICAL("Assertion Failed: {}", __VA_ARGS__); DEBUG_BREAK; }
-	#define APP_ASSERT(x, ...) if(!(x)) { APP_ERROR("Assertion Failed: {}", __VA_ARGS__) DEBUG_BREAK; }
-	#define APP_ASSERT_CRITICAL(x, ...) if(!(x)) { APP_CRITICAL("Assertion Failed: {}", __VA_ARGS__); DEBUG_BREAK; }
+	#define CORE_ASSERT(x, ...) if(!(x)) { CORE_ERROR(__VA_ARGS__); DEBUG_BREAK(); }
+	#define CORE_ASSERT_CRITICAL(x, ...) if(!(x)) { CORE_CRITICAL("Assertion Failed: {}", __VA_ARGS__); DEBUG_BREAK(); }
+	#define APP_ASSERT(x, ...) if(!(x)) { APP_ERROR("Assertion Failed: {}", __VA_ARGS__) DEBUG_BREAK(); }
+	#define APP_ASSERT_CRITICAL(x, ...) if(!(x)) { APP_CRITICAL("Assertion Failed: {}", __VA_ARGS__); DEBUG_BREAK(); }
 #else
 	#define CORE_ASSERT(x, ...) if(!(x)) { CORE_ERROR("Assertion Failed: {}", __VA_ARGS__); }
 	#define CORE_ASSERT_CRITICAL(x, ...) if(!(x)) { CORE_CRITICAL("Assertion Failed: {}", __VA_ARGS__); }

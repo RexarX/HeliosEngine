@@ -75,7 +75,7 @@ namespace Helios {
     EventType type = T::GetStaticType();
     m_EventSizes[type] = sizeof(T);
 
-    const std::byte* begin = reinterpret_cast<const std::byte*>(std::addressof(event));
+    const std::byte* begin = reinterpret_cast<const std::byte*>(&event);
     const std::byte* end = begin + sizeof(T);
 
     std::vector<std::byte>& events = m_Events[type];

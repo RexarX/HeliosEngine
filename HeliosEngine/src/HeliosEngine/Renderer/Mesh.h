@@ -1,24 +1,9 @@
 #pragma once
 
-#include "VertexLayout.h"
+#include "Vertex/MeshData.h"
 
-namespace Helios {
-class DynamicVertex {
-  public:
-    DynamicVertex(const VertexLayout& layout);
-
-    template <typename T>
-    void SetAttribute(std::string_view name, const T& value);
-
-    inline const std::vector<std::byte>& GetData() const { return m_Data; }
-
-  private:
-    VertexLayout m_Layout;
-    std::vector<std::byte> m_Data;
-  };
-  
-  class HELIOSENGINE_API Mesh
-  {
+namespace Helios {  
+  class HELIOSENGINE_API Mesh {
   public:
     enum class Type {
       Static,
@@ -30,8 +15,7 @@ class DynamicVertex {
     virtual void Load() = 0;
     virtual void Unload() = 0;
 
-    virtual void SetData(const std::vector<std::byte>& vertexData, uint32_t vertexCount,
-                         const std::vector<uint32_t>& indices = {}) = 0;
+    virtual void SetMeshData(const MeshData& meshData) = 0;
 
     virtual inline Type GetType() const = 0;
 
@@ -48,24 +32,7 @@ class DynamicVertex {
 
     virtual inline const VertexLayout& GetVertexLayout() const = 0;
 
-    static std::shared_ptr<Mesh> Create(Type type, const VertexLayout& layout, const std::vector<std::byte>& vertices,
-                                        uint32_t vertexCount, const std::vector<uint32_t>& indices = {});
-
-    static std::shared_ptr<Mesh> Create(Type type, const VertexLayout& layout, uint32_t vertexCount, uint32_t indexCount);
+    static std::shared_ptr<Mesh> Create(Type type, const MeshData& vertexData);
+    static std::shared_ptr<Mesh> Create(Type type, MeshData&& vertexData);
   };
-
-  template <typename T>
-  void DynamicVertex::SetAttribute(std::string_view name, const T& value) {
-    const auto& elements = m_Layout.GetElements();
-    auto it = std::find_if(elements.begin(), elements.end(), [&name](const VertexElement& element) -> bool {
-      return name == element.name;
-    });
-
-    if (it == elements.end()) {
-      CORE_ASSERT(false, "Attribute not found in layout!")
-      return;
-    }
-
-    memcpy(m_Data.data() + (*it).offset, &value, (*it).size);
-  }
 }

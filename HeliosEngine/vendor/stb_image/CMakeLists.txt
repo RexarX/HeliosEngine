@@ -13,7 +13,7 @@ install(TARGETS stb_image)
 
 set_target_properties(stb_image PROPERTIES CXX_STANDARD 23 CXX_STANDARD_REQUIRED ON CXX_EXTENSIONS OFF)
 
-if (UNIX)
+if(UNIX)
 	target_compile_options(stb_image PRIVATE -fPIC)
 endif()
 
@@ -32,7 +32,7 @@ target_compile_options(stb_image PRIVATE
     >
 )
 
-if (ENABLE_SIMD_SSE2)
+if(ENABLE_SIMD_SSE2)
     target_compile_options(stb_image PRIVATE
         $<$<CXX_COMPILER_ID:MSVC>:
             $<$<CONFIG:RelWithDebInfo>:/arch:SSE2>
@@ -43,7 +43,7 @@ if (ENABLE_SIMD_SSE2)
 		    $<$<CONFIG:Release>:-msse2>   
 	    >
     )
-elseif (ENABLE_SIMD_SSE3)
+elseif(ENABLE_SIMD_SSE3)
     target_compile_options(stb_image PRIVATE
         $<$<CXX_COMPILER_ID:MSVC>: # VC doesn't support SSE3
             $<$<CONFIG:RelWithDebInfo>:/arch:SSE2>
@@ -54,7 +54,7 @@ elseif (ENABLE_SIMD_SSE3)
 		    $<$<CONFIG:Release>:-msse3> 
 	    >
     )
-elseif (ENABLE_SIMD_SSSE3)
+elseif(ENABLE_SIMD_SSSE3)
 	target_compile_options(stb_image PRIVATE
 		$<$<CXX_COMPILER_ID:MSVC>: # VC doesn't support SSSE3
             $<$<CONFIG:RelWithDebInfo>:/arch:SSSE3>
@@ -65,7 +65,7 @@ elseif (ENABLE_SIMD_SSSE3)
 			$<$<CONFIG:Release>:-mssse3>
 		>
 	)
-elseif (ENABLE_SIMD_SSE4_1)
+elseif(ENABLE_SIMD_SSE4_1)
 	target_compile_options(stb_image PRIVATE
 		$<$<CXX_COMPILER_ID:MSVC>: # VC doesn't support SSE4.1
             $<$<CONFIG:RelWithDebInfo>:/arch:SSE4.1>
@@ -76,7 +76,7 @@ elseif (ENABLE_SIMD_SSE4_1)
 			$<$<CONFIG:Release>:-msse4.1>	
 		>
 	)
-elseif (ENABLE_SIMD_SSE4_2)
+elseif(ENABLE_SIMD_SSE4_2)
 	target_compile_options(stb_image PRIVATE
 		$<$<CXX_COMPILER_ID:MSVC>: # VC doesn't support SSE4.2
             $<$<CONFIG:RelWithDebInfo>:/arch:SSE4.2>
@@ -87,7 +87,7 @@ elseif (ENABLE_SIMD_SSE4_2)
 			$<$<CONFIG:Release>:-msse4.2>
 		>
 	)
-elseif (ENABLE_SIMD_AVX)
+elseif(ENABLE_SIMD_AVX)
     target_compile_options(stb_image PRIVATE
         $<$<CXX_COMPILER_ID:MSVC>:
             $<$<CONFIG:RelWithDebInfo>:/arch:AVX>
@@ -99,7 +99,7 @@ elseif (ENABLE_SIMD_AVX)
 			
 		>
     )
-elseif (ENABLE_SIMD_AVX2)
+elseif(ENABLE_SIMD_AVX2)
     target_compile_options(stb_image PRIVATE
         $<$<CXX_COMPILER_ID:MSVC>:
             $<$<CONFIG:RelWithDebInfo>:/arch:AVX2>

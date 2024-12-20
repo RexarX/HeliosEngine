@@ -8,16 +8,24 @@
 namespace Helios {
   class VulkanShader final : public Shader {
   public:
-    struct ShaderInfo {
+    struct ReflectionData {
+      std::vector<VkDescriptorSetLayoutBinding> bindings;
+      std::vector<VkVertexInputAttributeDescription> attributes;
+      std::vector<VkVertexInputBindingDescription> inputBindings;
+      VkPushConstantRange pushConstantRange;
+    };
+
+    struct VulkanInfo {
       std::string path;
       VkShaderStageFlagBits stage;
       VkShaderModule shaderModule = VK_NULL_HANDLE;
+      ReflectionData reflectionData;
     };
 
     VulkanShader(const std::initializer_list<Info>& infos);
     virtual ~VulkanShader();
 
-    inline const std::vector<ShaderInfo>& GetShaderInfos() const { return m_ShaderInfos; }
+    inline const std::vector<VulkanInfo>& GetVulkanInfos() const { return m_VulkanInfos; }
 
   private:
     void Load();
@@ -25,10 +33,11 @@ namespace Helios {
     static VkShaderStageFlagBits TranslateStageToVulkan(Stage stage);
     static shaderc_shader_kind TranslateStageToShaderc(VkShaderStageFlagBits stage);
 
-	  static std::expected<void, std::string> GLSLtoSPV(VkShaderStageFlagBits shaderType, const std::string& glslShader,
-									                                    std::string_view fileName, std::vector<uint32_t>& spvShader);
+	  static std::expected<std::vector<uint32_t>, std::string> GLSLtoSPV(VkShaderStageFlagBits shaderType,
+                                                                       const std::string& glslShader,
+                                                                       std::string_view fileName);
 
   private:
-    std::vector<ShaderInfo> m_ShaderInfos;
+    std::vector<VulkanInfo> m_VulkanInfos;
   };
 }

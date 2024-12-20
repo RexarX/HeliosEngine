@@ -10,7 +10,7 @@ namespace Helios {
   class HELIOSENGINE_API Entity {
   public:
     Entity() = default;
-    Entity(entt::entity entity, Scene* scene);
+    Entity(const Entity&) = default;
     ~Entity() = default;
 
     void Destroy();
@@ -43,8 +43,18 @@ namespace Helios {
 
     inline entt::entity GetEntity() const { return m_Entity; }
 
+    Entity& operator=(const Entity&) = default;
+
+  private:
+    Entity(entt::entity entity, Scene* scene);
+    Entity(Entity&&) noexcept = default;
+
+    Entity& operator=(Entity&&) noexcept = default;
+
   private:
     entt::entity m_Entity = entt::null;
     Scene* m_Scene = nullptr;
+
+    friend class Scene;
   };
 }

@@ -24,23 +24,24 @@ An attempt to create a game engine.
 ## Getting Started
 
 ### Requirements
-* Vulkan 1.0 and higher
+* Vulkan 1.0 or higher
 * OpenGL ES 3.2
 
 ### Dependencies
-* spdlog (https://github.com/gabime/spdlog)
-* argparse (https://github.com/p-ranav/argparse)
-* tomlplusplus (https://github.com/marzer/tomlplusplus)
-* stduuid (https://github.com/mariusbancila/stduuid)
-* glfw3 (https://github.com/glfw/glfw)
-* glm (https://github.com/g-truc/glm)
-* entt (https://github.com/skypjack/entt)
-* imgui with docking support and glfw, opengl3, vulkan bindings (https://github.com/ocornut/imgui)
-* shaderc (https://github.com/google/shaderc)
-* Vulkan headers (https://github.com/KhronosGroup/Vulkan-Headers)
-* Vulkan validation layers (https://github.com/KhronosGroup/Vulkan-ValidationLayers)
-* Vulkan memory allocator (https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator)
-* glad with OpenGL ES 3.2 extensions (https://github.com/Dav1dde/glad)
+* [spdlog](https://github.com/gabime/spdlog)
+* [argparse](https://github.com/p-ranav/argparse)
+* [tomlplusplus](https://github.com/marzer/tomlplusplus)
+* [stduuid](https://github.com/mariusbancila/stduuid)
+* [glfw3](https://github.com/glfw/glfw)
+* [glm](https://github.com/g-truc/glm)
+* [entt](https://github.com/skypjack/entt)
+* [imgui](https://github.com/ocornut/imgui) with docking support and glfw, opengl3, vulkan bindings 
+* [shaderc](https://github.com/google/shaderc)
+* [SPIRV-Cross](https://github.com/KhronosGroup/SPIRV-Cross)
+* [Vulkan-headers](https://github.com/KhronosGroup/Vulkan-Headers)
+* [Vulkan-ValidationLayers](https://github.com/KhronosGroup/Vulkan-ValidationLayers) (optional)
+* [VulkanMemoryAllocator](https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator)
+* [glad](https://github.com/Dav1dde/glad) with OpenGL ES 3.2 extensions
 
 ### How to build
 1. Install dependencies

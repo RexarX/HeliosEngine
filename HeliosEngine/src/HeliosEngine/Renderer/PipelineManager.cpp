@@ -7,7 +7,7 @@ namespace Helios {
   std::unique_ptr<PipelineManager> PipelineManager::Create() {
     switch (RendererAPI::GetAPI()) {
       case RendererAPI::API::None: {
-        CORE_ASSERT_CRITICAL(false, "RendererAPI::None is not supported!");
+        CORE_ASSERT_CRITICAL(false, "Failed to get PipelineManager: RendererAPI::None is not supported!");
         return nullptr;
       }
 
@@ -15,7 +15,7 @@ namespace Helios {
         return std::make_unique<VulkanPipelineManager>();
       }
 
-      default: CORE_ASSERT_CRITICAL(false, "Unknown RendererAPI!"); return nullptr;
+      default: CORE_ASSERT_CRITICAL(false, "Failed to get PipelineManager: Unknown RendererAPI!"); return nullptr;
     }
   }
 }

@@ -5,12 +5,12 @@
 #include "VulkanUtils.h"
 
 #ifdef DEBUG_MODE
-static constexpr bool enableValidationLayers = true;
+constexpr inline bool ENABLE_VALIDATION_LAYERS = true;
 #else
-static constexpr bool enableValidationLayers = false;
+constexpr inline bool ENABLE_VALIDATION_LAYERS = false;
 #endif
 
-static constexpr uint32_t MAX_FRAMES_IN_FLIGHT = 2;
+constexpr inline uint32_t MAX_FRAMES_IN_FLIGHT = 2;
 
 struct GLFWwindow;
 
@@ -42,16 +42,16 @@ namespace Helios {
 
     static inline VulkanContext& Get() { return *m_Instance; }
 
-    inline const VkDevice GetDevice() const { return m_Device; }
-    inline const VkRenderPass GetRenderPass() const { return m_RenderPass; }
+    inline VkDevice GetDevice() const { return m_Device; }
+    inline VkRenderPass GetRenderPass() const { return m_RenderPass; }
 
     inline VkPhysicalDeviceProperties GetPhysicalDeviceProperties() const {
-      VkPhysicalDeviceProperties properties;
+      VkPhysicalDeviceProperties properties{};
       vkGetPhysicalDeviceProperties(m_PhysicalDevice, &properties);
       return properties;
     }
 
-    inline const VmaAllocator GetAllocator() const { return m_Allocator; }
+    inline VmaAllocator GetAllocator() const { return m_Allocator; }
 
     inline DeletionQueue& GetDeletionQueue() { return m_MainDeletionQueue; }
 
@@ -82,20 +82,21 @@ namespace Helios {
     std::vector<const char*> GetRequiredExtensions() const;
 
     void PopulateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo) const;
-    static VkResult CreateDebugUtilsMessengerEXT(const VkInstance instance,
+    static VkResult CreateDebugUtilsMessengerEXT(VkInstance instance,
                                                  const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo,
                                                  const VkAllocationCallbacks* pAllocator,
                                                  VkDebugUtilsMessengerEXT* pDebugMessenger);
 
-    static void DestroyDebugUtilsMessengerEXT(const VkInstance instance, const VkDebugUtilsMessengerEXT debugMessenger,
+    static void DestroyDebugUtilsMessengerEXT(VkInstance instance,
+                                              const VkDebugUtilsMessengerEXT debugMessenger,
                                               const VkAllocationCallbacks* pAllocator);
 
-    bool CheckDeviceExtensionSupport(const VkPhysicalDevice device) const;
+    bool CheckDeviceExtensionSupport(VkPhysicalDevice device) const;
 
-    QueueFamilyIndices FindQueueFamilies(const VkPhysicalDevice device) const;
-    SwapChainSupportDetails QuerySwapChainSupport(const VkPhysicalDevice device) const;
+    QueueFamilyIndices FindQueueFamilies(VkPhysicalDevice device) const;
+    SwapChainSupportDetails QuerySwapChainSupport(VkPhysicalDevice device) const;
 
-    bool IsDeviceSuitable(const VkPhysicalDevice device) const;
+    bool IsDeviceSuitable(VkPhysicalDevice device) const;
 
     static VkSurfaceFormatKHR ChooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats);
     VkPresentModeKHR ChooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes) const;
@@ -105,7 +106,7 @@ namespace Helios {
     VkFormat FindSupportedFormat(const std::vector<VkFormat>& candidates, VkImageTiling tiling,
                                  VkFormatFeatureFlags features) const;
 
-    inline VkFormat FindDepthFormat() {
+    inline VkFormat FindDepthFormat() const {
       return FindSupportedFormat(
         { VK_FORMAT_D32_SFLOAT, VK_FORMAT_D32_SFLOAT_S8_UINT, VK_FORMAT_D24_UNORM_S8_UINT },
         VK_IMAGE_TILING_OPTIMAL,
@@ -114,7 +115,7 @@ namespace Helios {
     }
 
   private:
-    const std::vector<const char*> m_ValidationLayers = {
+    const std::array<const char*, 1> m_ValidationLayers = {
       "VK_LAYER_KHRONOS_validation"
     };
 

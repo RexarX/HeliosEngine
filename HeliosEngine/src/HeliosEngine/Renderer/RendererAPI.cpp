@@ -5,22 +5,23 @@
 
 namespace Helios {
 	std::unique_ptr<RendererAPI> RendererAPI::Create(API api, void* window) {
-    m_API = api;
     switch (api) {
       case API::None: {
-        CORE_ASSERT_CRITICAL(false, "RendererAPI::None is not supported!");
+        CORE_ASSERT_CRITICAL(false, "Failed to create RendererAPI: RendererAPI::None is not supported!");
         return nullptr;
       }
 
       case API::Vulkan: {
+        m_API = api;
         return std::make_unique<VulkanContext>(static_cast<GLFWwindow*>(window));
       }
 
       case API::OpenGL: {
+        m_API = api;
         return nullptr;
       }
 
-      default: CORE_ASSERT_CRITICAL(false, "Unknown RendererAPI!"); return nullptr;
+      default: CORE_ASSERT_CRITICAL(false, "Failed to create RendererAPI: Unknown RendererAPI!"); return nullptr;
     }
   }
 }

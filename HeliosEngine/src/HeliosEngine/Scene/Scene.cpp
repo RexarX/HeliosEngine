@@ -2,29 +2,27 @@
 
 namespace Helios {
   Scene::Scene()
-    : m_RootEntity(CreateEntity("Root")) {
-    m_InvalidEntity = Entity();
+    : m_RootEntity(CreateEntity("Root")),
+    m_InvalidEntity(entt::null, nullptr) {
   }
 
   Scene::Scene(std::string_view name)
-    : m_Name(name), m_RootEntity(CreateEntity("Root")) {
-    m_InvalidEntity = Entity();
+    : m_Name(name), m_RootEntity(CreateEntity("Root")),
+    m_InvalidEntity(entt::null, nullptr) {
   }
 
   Scene::Scene(Scene&& other) noexcept
     : m_Name(std::move(other.m_Name)), m_Active(other.m_Active), m_Loaded(other.m_Loaded),
     m_Registry(std::move(other.m_Registry)), m_EntityMap(std::move(other.m_EntityMap)),
-    m_RootEntity(std::move(other.m_RootEntity)), m_EventSystem(std::move(other.m_EventSystem)),
-    m_ScriptSystem(std::move(other.m_ScriptSystem)), m_CameraSystem(std::move(other.m_CameraSystem)),
-    m_RenderingSystem(std::move(other.m_RenderingSystem)) {
-    m_InvalidEntity = Entity();
-
+    m_RootEntity(std::move(other.m_RootEntity)), m_InvalidEntity(std::move(other.m_InvalidEntity)),
+    m_EventSystem(std::move(other.m_EventSystem)),m_ScriptSystem(std::move(other.m_ScriptSystem)),
+    m_CameraSystem(std::move(other.m_CameraSystem)), m_RenderingSystem(std::move(other.m_RenderingSystem)) {
     other.m_Active = false;
     other.m_Loaded = false;
     other.m_Name.clear();
     other.m_Registry.clear();
     other.m_EntityMap.clear();
-    other.m_RootEntity = Entity();
+    other.m_RootEntity = Entity(entt::null, nullptr);
   }
 
   void Scene::OnUpdate(Timestep deltaTime) {
@@ -133,7 +131,7 @@ namespace Helios {
       other.m_Loaded = false;
       other.m_Registry.clear();
       other.m_EntityMap.clear();
-      other.m_RootEntity = Entity();
+      other.m_RootEntity = Entity(entt::null, nullptr);
     }
 
     return *this;

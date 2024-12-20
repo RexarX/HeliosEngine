@@ -1,4 +1,6 @@
-set(PROJECT_NAME Game)
+cmake_path(GET CMAKE_CURRENT_SOURCE_DIR FILENAME PROJECT_NAME)   
+string(REPLACE " " "_" ProjectId ${PROJECT_NAME})
+project(${PROJECT_NAME})
 
 file(GLOB_RECURSE src
     "src/*.h" "src/*.cpp"
@@ -9,31 +11,44 @@ file(GLOB_RECURSE src__Layers
 )
 
 file(GLOB V_GLOB LIST_DIRECTORIES true "src/Scripts/*")
-foreach(item ${V_GLOB})
-	if(IS_DIRECTORY ${item})
-        string(CONCAT header_files ${item} "/*.h")
-        string(CONCAT cpp_files ${item} "/*.cpp")
-		list(APPEND Scripts ${header_files} " " ${cpp_files})
-        message("Found scripts: " ${Scripts})
+foreach(ITEM ${V_GLOB})
+	if(IS_DIRECTORY ${ITEM})
+        string(CONCAT HEADER_FILES ${ITEM} "/*.h")
+        string(CONCAT CPP_FILES ${ITEM} "/*.cpp")
+		list(APPEND SCRIPTS ${HEADER_FILES} " " ${CPP_FILES})
+        message("Found scripts: " ${SCRIPTS})
 	endif()
 endforeach()
 
 file(GLOB_RECURSE src__Scripts
 	"src/Scripts/*.h" "src/Scripts/*.cpp"
-	${Scripts}
+	${SCRIPTS}
 )
 
 set(ALL_FILES ${src} ${src__Layers} ${src__Scripts})
+
+if(ENABLE_UNITY_BUILD)
+    set_source_files_properties(${src__Layers} PROPERTIES UNITY_GROUP "layers")
+    set_source_files_properties(${src__Scripts} PROPERTIES UNITY_GROUP "scripts")
+endif()
 
 add_executable(${PROJECT_NAME} ${ALL_FILES})
 
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 23 CXX_STANDARD_REQUIRED ON CXX_EXTENSIONS OFF)
 
+if(ENABLE_UNITY_BUILD)
+    set_target_properties(${PROJECT_NAME} PROPERTIES
+        UNITY_BUILD ON
+        UNITY_BUILD_MODE BATCH
+        CMAKE_UNITY_BUILD_BATCH_SIZE ${UNITY_BUILD_BATCH_SIZE}
+    )
+endif()
+
 foreach(OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES})
     string(TOUPPER ${OUTPUTCONFIG} UPOUTPUTCONFIG)
     set_target_properties(${PROJECT_NAME} PROPERTIES
-        TARGET_NAME_${UPOUTPUTCONFIG} "Game"
-        ARCHIVE_OUTPUT_NAME_${UPOUTPUTCONFIG} "Game"
+        TARGET_NAME_${UPOUTPUTCONFIG} ${PROJECT_NAME}
+        ARCHIVE_OUTPUT_NAME_${UPOUTPUTCONFIG} ${PROJECT_NAME}
         RUNTIME_OUTPUT_DIRECTORY_${UPOUTPUTCONFIG}
             "${CMAKE_CURRENT_SOURCE_DIR}/../bin/${OUTPUTCONFIG}-${PLATFORM}-${ARCHITECTURE}"
         LIBRARY_OUTPUT_DIRECTORY_${UPOUTPUTCONFIG}
@@ -43,7 +58,7 @@ foreach(OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES})
     )
 endforeach(OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES})
 
-if (CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
+if(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
     set_target_properties(${PROJECT_NAME} PROPERTIES MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
 endif()
 
@@ -89,7 +104,7 @@ target_compile_options(${PROJECT_NAME} PRIVATE
     >
 )
 
-if (ENABLE_SIMD_SSE2)
+if(ENABLE_SIMD_SSE2)
     target_compile_options(${PROJECT_NAME} PRIVATE
         $<$<CXX_COMPILER_ID:MSVC>:
             $<$<CONFIG:RelWithDebInfo>:/arch:SSE2>
@@ -100,7 +115,7 @@ if (ENABLE_SIMD_SSE2)
 		    $<$<CONFIG:Release>:-msse2>   
 	    >
     )
-elseif (ENABLE_SIMD_SSE3)
+elseif(ENABLE_SIMD_SSE3)
     target_compile_options(${PROJECT_NAME} PRIVATE
         $<$<CXX_COMPILER_ID:MSVC>: # VC doesn't support SSE3
             $<$<CONFIG:RelWithDebInfo>:/arch:SSE2>
@@ -111,7 +126,7 @@ elseif (ENABLE_SIMD_SSE3)
 		    $<$<CONFIG:Release>:-msse3> 
 	    >
     )
-elseif (ENABLE_SIMD_SSSE3)
+elseif(ENABLE_SIMD_SSSE3)
 	target_compile_options(${PROJECT_NAME} PRIVATE
 		$<$<CXX_COMPILER_ID:MSVC>: # VC doesn't support SSSE3
             $<$<CONFIG:RelWithDebInfo>:/arch:SSSE3>
@@ -122,7 +137,7 @@ elseif (ENABLE_SIMD_SSSE3)
 			$<$<CONFIG:Release>:-mssse3>
 		>
 	)
-elseif (ENABLE_SIMD_SSE4_1)
+elseif(ENABLE_SIMD_SSE4_1)
 	target_compile_options(${PROJECT_NAME} PRIVATE
 		$<$<CXX_COMPILER_ID:MSVC>: # VC doesn't support SSE4.1
             $<$<CONFIG:RelWithDebInfo>:/arch:SSE4.1>
@@ -133,7 +148,7 @@ elseif (ENABLE_SIMD_SSE4_1)
 			$<$<CONFIG:Release>:-msse4.1>	
 		>
 	)
-elseif (ENABLE_SIMD_SSE4_2)
+elseif(ENABLE_SIMD_SSE4_2)
 	target_compile_options(${PROJECT_NAME} PRIVATE
 		$<$<CXX_COMPILER_ID:MSVC>: # VC doesn't support SSE4.2
             $<$<CONFIG:RelWithDebInfo>:/arch:SSE4.2>
@@ -144,7 +159,7 @@ elseif (ENABLE_SIMD_SSE4_2)
 			$<$<CONFIG:RelWithDebInfo>:-msse4.2>
 		>
 	)
-elseif (ENABLE_SIMD_AVX)
+elseif(ENABLE_SIMD_AVX)
     target_compile_options(${PROJECT_NAME} PRIVATE
         $<$<CXX_COMPILER_ID:MSVC>:
             $<$<CONFIG:RelWithDebInfo>:/arch:AVX>
@@ -156,7 +171,7 @@ elseif (ENABLE_SIMD_AVX)
 			
 		>
     )
-elseif (ENABLE_SIMD_AVX2)
+elseif(ENABLE_SIMD_AVX2)
     target_compile_options(${PROJECT_NAME} PRIVATE
         $<$<CXX_COMPILER_ID:MSVC>:
             $<$<CONFIG:RelWithDebInfo>:/arch:AVX2>
@@ -178,19 +193,15 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     imgui::imgui
 )
 
-add_custom_target(CopyAssets ALL
+add_custom_command(TARGET ${PROJECT_NAME}
+    POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E make_directory 
         "${CMAKE_CURRENT_SOURCE_DIR}/../bin/${CMAKE_BUILD_TYPE}-${PLATFORM}-${ARCHITECTURE}/Assets"
-
     COMMAND ${CMAKE_COMMAND} -E copy_directory
         "${CMAKE_CURRENT_SOURCE_DIR}/../HeliosEngine/Assets"
         "${CMAKE_CURRENT_SOURCE_DIR}/../bin/${CMAKE_BUILD_TYPE}-${PLATFORM}-${ARCHITECTURE}/Assets"
-
     COMMAND ${CMAKE_COMMAND} -E copy_directory
         "${CMAKE_CURRENT_SOURCE_DIR}/Assets"
         "${CMAKE_CURRENT_SOURCE_DIR}/../bin/${CMAKE_BUILD_TYPE}-${PLATFORM}-${ARCHITECTURE}/Assets"
-    
     COMMENT "Copying Assets to output directory"
 )
-
-add_dependencies(Game CopyAssets)

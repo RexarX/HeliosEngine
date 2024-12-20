@@ -17,7 +17,7 @@ namespace Helios::Utils {
 		}
 
 		void Stop() noexcept {
-			if (!m_IsRunning) { CORE_ASSERT(false, "Timer is not running!"); return; }
+			if (!m_IsRunning) { return; }
 			m_Elapsed = std::chrono::steady_clock::now() - m_TimeStamp;
 		}
 

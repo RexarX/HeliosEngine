@@ -4,39 +4,33 @@
 #include "Vulkan/VulkanMesh.h"
 
 namespace Helios {
-  DynamicVertex::DynamicVertex(const VertexLayout& layout)
-    : m_Layout(layout) {
-    m_Data.resize(layout.GetStride());
-  }
-
-  std::shared_ptr<Mesh> Mesh::Create(Type type, const VertexLayout& layout, const std::vector<std::byte>& vertices,
-                                     uint32_t vertexCount, const std::vector<uint32_t>& indices) {
+  std::shared_ptr<Mesh> Mesh::Create(Type type, const MeshData& vertexData) {
 		switch (RendererAPI::GetAPI()) {
       case RendererAPI::API::None: {
-        CORE_ASSERT_CRITICAL(false, "RendererAPI::None is not supported!");
+        CORE_ASSERT_CRITICAL(false, "Failed to create Mesh: RendererAPI::None is not supported!");
         return nullptr;
       }
 
       case RendererAPI::API::Vulkan: {
-        return std::make_shared<VulkanMesh>(type, layout, vertices, vertexCount, indices);
+        return std::make_shared<VulkanMesh>(type, vertexData);
       }
 
-      default: CORE_ASSERT_CRITICAL(false, "Unknown RendererAPI!"); return nullptr;
+      default: CORE_ASSERT_CRITICAL(false, "Failed to create Mesh: Unknown RendererAPI!"); return nullptr;
 		}
   }
 
-  std::shared_ptr<Mesh> Mesh::Create(Type type, const VertexLayout& layout, uint32_t vertexCount, uint32_t indexCount) {
-    switch (RendererAPI::GetAPI()) {
+  std::shared_ptr<Mesh> Mesh::Create(Type type, MeshData&& vertexData) {
+		switch (RendererAPI::GetAPI()) {
       case RendererAPI::API::None: {
-        CORE_ASSERT_CRITICAL(false, "RendererAPI::None is not supported!");
+        CORE_ASSERT_CRITICAL(false, "Failed to create Mesh: RendererAPI::None is not supported!");
         return nullptr;
       }
 
       case RendererAPI::API::Vulkan: {
-        return std::make_shared<VulkanMesh>(type, layout, vertexCount, indexCount);
+        return std::make_shared<VulkanMesh>(type, std::forward<MeshData>(vertexData));
       }
 
-      default: CORE_ASSERT_CRITICAL(false, "Unknown RendererAPI!"); return nullptr;
-    }
+      default: CORE_ASSERT_CRITICAL(false, "Failed to create Mesh: Unknown RendererAPI!"); return nullptr;
+		}
   }
 }

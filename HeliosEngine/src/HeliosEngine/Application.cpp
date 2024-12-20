@@ -17,7 +17,8 @@ namespace Helios {
 		ConfigManager& configManager = ConfigManager::Get();
 		UserConfig& userConfig = configManager.GetConfig<UserConfig>();
 		userConfig.LoadFromWindow(*m_Window);
-		configManager.SaveConfiguration<UserConfig>(PathManager::GetUserConfigDirectory() / "config.toml");
+		configManager.SaveConfiguration<UserConfig>(PathManager::GetPath(PathManager::Directory::UserConfig)
+																																		 / "config.toml");
 	}
 
 	void Application::Run() {
@@ -106,9 +107,11 @@ namespace Helios {
 			return;
 		}
 
+		PathManager::LoadDefaults();
 		ConfigManager& configManager = ConfigManager::Get();
 		UserConfig& userConfig = configManager.GetConfig<UserConfig>();
-		configManager.LoadConfiguration<UserConfig>(PathManager::GetUserConfigDirectory() / "config.toml");
+		configManager.LoadConfiguration<UserConfig>(PathManager::GetPath(PathManager::Directory::UserConfig)
+																																		 / "config.toml");
 
 		SetFramerateLimit(userConfig.GetFramerateLimit());
 

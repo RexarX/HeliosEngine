@@ -13,12 +13,12 @@ namespace Helios {
     struct VulkanEffect {
       std::shared_ptr<VulkanShader> shader = nullptr;
 
-      VkPipeline pipeline;
-      VkPipelineLayout pipelineLayout;
+      VkPipeline pipeline = VK_NULL_HANDLE;
+      VkPipelineLayout pipelineLayout = VK_NULL_HANDLE;
       VkPushConstantRange pushConstant;
       std::vector<VkDescriptorSetLayout> descriptorSetLayouts;
       std::vector<VkDescriptorSet> descriptorSets;
-      VkDescriptorPool descriptorPool;
+      VkDescriptorPool descriptorPool = VK_NULL_HANDLE;
     };
 
     VulkanPipelineManager();
@@ -26,7 +26,7 @@ namespace Helios {
 
     void InitializeResources(const entt::registry& registry, const std::vector<entt::entity>& renderables) override;
     void FreeResources(const entt::registry& registry, const std::vector<entt::entity>& renderables) override;
-    void UpdateResources(const RenderQueue& renderables) override;
+    void UpdateResources(const RenderQueue& renderQueue) override;
     void ClearResources() override;
 
     inline std::unique_ptr<PipelineManager> Clone() const override {
@@ -38,6 +38,7 @@ namespace Helios {
     }
 
   private:
+    // helper functions, to be implemented
     void CreatePipeline(const Renderable& renderable);
 
   private:

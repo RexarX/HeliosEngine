@@ -7,7 +7,7 @@ namespace Helios {
 	std::shared_ptr<Texture> Texture::Create(Type type, std::string_view path, const Info& info) {
 		switch (RendererAPI::GetAPI()) {
 			case RendererAPI::API::None: {
-				CORE_ASSERT_CRITICAL(false, "RendererAPI::None is not supported!");
+				CORE_ASSERT_CRITICAL(false, "Failed to create Texture: RendererAPI::None is not supported!");
 				return nullptr;
 			}
 
@@ -15,7 +15,7 @@ namespace Helios {
 				return std::make_shared<VulkanTexture>(type, path, info);
 			}
 
-			default: CORE_ASSERT_CRITICAL(false, "Unknown RendererAPI!"); return nullptr;
+			default: CORE_ASSERT_CRITICAL(false, "Failed to create Texture: Unknown RendererAPI!"); return nullptr;
 		}
 	}
 }
