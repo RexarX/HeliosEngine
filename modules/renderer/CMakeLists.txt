@@ -27,6 +27,15 @@ file(GLOB_RECURSE RENDERER_SOURCES
     "src/**/*.cpp"
 )
 
+file(GLOB_RECURSE EXAMPLE_SOURCES
+    "examples/*.cpp"
+    "examples/*.h"
+)
+
+file(GLOB_RECURSE TEST_SOURCES
+    "tests/*.cpp"
+)
+
 # Create the renderer library
 add_library(HeliosRenderer STATIC
     ${RENDERER_HEADERS}
@@ -106,6 +115,33 @@ endif()
 # Source groups for IDE organization
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/include PREFIX "Header Files" FILES ${RENDERER_HEADERS})
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/src PREFIX "Source Files" FILES ${RENDERER_SOURCES})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/examples PREFIX "Examples" FILES ${EXAMPLE_SOURCES})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/tests PREFIX "Tests" FILES ${TEST_SOURCES})
+
+# Optionally build examples and tests
+option(HELIOS_RENDERER_BUILD_EXAMPLES "Build renderer examples" ON)
+option(HELIOS_RENDERER_BUILD_TESTS "Build renderer tests" ON)
+
+if(HELIOS_RENDERER_BUILD_EXAMPLES AND EXAMPLE_SOURCES)
+    add_library(HeliosRendererExamples STATIC ${EXAMPLE_SOURCES})
+    target_link_libraries(HeliosRendererExamples PUBLIC HeliosRenderer)
+    target_include_directories(HeliosRendererExamples PRIVATE 
+        ${CMAKE_CURRENT_SOURCE_DIR}/examples
+    )
+endif()
+
+if(HELIOS_RENDERER_BUILD_TESTS AND TEST_SOURCES)
+    add_executable(HeliosRendererTests ${TEST_SOURCES})
+    target_link_libraries(HeliosRendererTests PRIVATE HeliosRenderer)
+    target_include_directories(HeliosRendererTests PRIVATE 
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests
+    )
+    
+    # Set output directory for tests
+    set_target_properties(HeliosRendererTests PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/tests
+    )
+endif()
 
 # Installation rules (optional)
 install(TARGETS HeliosRenderer
