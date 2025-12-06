@@ -8,7 +8,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <img src="https://github.com/RexarX/HeliosEngine/docs/img/logo.png" alt="Helios Engine Logo" width="100" height="100">
+  <img src="https://github.com/RexarX/HeliosEngine/blob/main/docs/img/logo.png" alt="Helios Engine Logo" width="100" height="100">
   <h1 align="center">Helios Engine</h1>
   <p align="center">
     A modern, ECS based modular game engine framework built with C++23
