@@ -5,6 +5,9 @@ on:
     branches:
       - main # Add or remove branches as needed
 
+permissions:
+  contents: write
+
 jobs:
   doxygen-docs:
     runs-on: ubuntu-latest
