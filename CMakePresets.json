@@ -1,0 +1,1171 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 25,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "description": "Base configuration for all presets",
+      "binaryDir": "${sourceDir}/build",
+      "installDir": "${sourceDir}/install",
+      "cacheVariables": {
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+      }
+    },
+    {
+      "name": "windows-base",
+      "hidden": true,
+      "inherits": "base",
+      "description": "Base configuration for Windows builds",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      },
+      "vendor": {
+        "microsoft.com/VisualStudioSettings/CMake/1.0": {
+          "hostOS": ["Windows"]
+        }
+      }
+    },
+    {
+      "name": "linux-base",
+      "hidden": true,
+      "inherits": "base",
+      "description": "Base configuration for Linux builds",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      }
+    },
+    {
+      "name": "macos-base",
+      "hidden": true,
+      "inherits": "base",
+      "description": "Base configuration for macOS builds",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Darwin"
+      }
+    },
+    {
+      "name": "ninja",
+      "hidden": true,
+      "description": "Use Ninja generator",
+      "generator": "Ninja"
+    },
+    {
+      "name": "make",
+      "hidden": true,
+      "description": "Use Unix Makefiles generator",
+      "generator": "Unix Makefiles"
+    },
+    {
+      "name": "msbuild",
+      "hidden": true,
+      "description": "Use Visual Studio generator (MSBuild)",
+      "generator": "Visual Studio 17 2022",
+      "architecture": "x64"
+    },
+    {
+      "name": "msvc",
+      "hidden": true,
+      "description": "MSVC compiler configuration",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "cl",
+        "CMAKE_CXX_COMPILER": "cl"
+      }
+    },
+    {
+      "name": "clang",
+      "hidden": true,
+      "description": "Clang compiler configuration",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "clang",
+        "CMAKE_CXX_COMPILER": "clang++"
+      }
+    },
+    {
+      "name": "gcc",
+      "hidden": true,
+      "description": "GCC compiler configuration",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "gcc",
+        "CMAKE_CXX_COMPILER": "g++"
+      }
+    },
+
+    {
+      "name": "debug-config",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "HELIOS_ENABLE_ASSERTS": "ON",
+        "HELIOS_ENABLE_PROFILING": "OFF"
+      }
+    },
+    {
+      "name": "release-config",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "HELIOS_ENABLE_LTO": "ON",
+        "HELIOS_ENABLE_ASSERTS": "OFF"
+      }
+    },
+    {
+      "name": "relwithdebinfo-config",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "HELIOS_ENABLE_ASSERTS": "ON",
+        "HELIOS_ENABLE_PROFILING": "ON"
+      }
+    },
+    {
+      "name": "all-modules",
+      "hidden": true,
+      "cacheVariables": {
+        "HELIOS_BUILD_CORE_ONLY": "OFF"
+      }
+    },
+    {
+      "name": "core-only",
+      "hidden": true,
+      "cacheVariables": {
+        "HELIOS_BUILD_CORE_ONLY": "ON"
+      }
+    },
+    {
+      "name": "with-tests",
+      "hidden": true,
+      "cacheVariables": {
+        "HELIOS_BUILD_TESTS": "ON"
+      }
+    },
+    {
+      "name": "with-examples",
+      "hidden": true,
+      "cacheVariables": {
+        "HELIOS_BUILD_EXAMPLES": "ON"
+      }
+    },
+
+    {
+      "name": "windows-msvc-debug",
+      "displayName": "Windows MSVC Debug (Ninja)",
+      "description": "Debug build with MSVC on Windows using Ninja",
+      "inherits": [
+        "windows-base",
+        "ninja",
+        "msvc",
+        "debug-config",
+        "all-modules"
+      ]
+    },
+    {
+      "name": "windows-msvc-release",
+      "displayName": "Windows MSVC Release (Ninja)",
+      "description": "Release build with MSVC on Windows using Ninja",
+      "inherits": [
+        "windows-base",
+        "ninja",
+        "msvc",
+        "release-config",
+        "all-modules"
+      ]
+    },
+    {
+      "name": "windows-msvc-relwithdebinfo",
+      "displayName": "Windows MSVC RelWithDebInfo (Ninja)",
+      "description": "RelWithDebInfo build with MSVC on Windows using Ninja",
+      "inherits": [
+        "windows-base",
+        "ninja",
+        "msvc",
+        "relwithdebinfo-config",
+        "all-modules"
+      ]
+    },
+    {
+      "name": "windows-msvc-debug-core",
+      "displayName": "Windows MSVC Debug Core (Ninja)",
+      "description": "Debug build with MSVC on Windows using Ninja - core library only",
+      "inherits": ["windows-base", "ninja", "msvc", "debug-config", "core-only"]
+    },
+    {
+      "name": "windows-msvc-release-core",
+      "displayName": "Windows MSVC Release Core (Ninja)",
+      "description": "Release build with MSVC on Windows using Ninja - core library only",
+      "inherits": [
+        "windows-base",
+        "ninja",
+        "msvc",
+        "release-config",
+        "core-only"
+      ]
+    },
+    {
+      "name": "windows-msvc-relwithdebinfo-core",
+      "displayName": "Windows MSVC RelWithDebInfo Core (Ninja)",
+      "description": "RelWithDebInfo build with MSVC on Windows using Ninja - core library only",
+      "inherits": [
+        "windows-base",
+        "ninja",
+        "msvc",
+        "relwithdebinfo-config",
+        "core-only"
+      ]
+    },
+    {
+      "name": "windows-msbuild-debug",
+      "displayName": "Windows MSBuild Debug",
+      "description": "Debug build with MSVC on Windows using MSBuild",
+      "inherits": [
+        "windows-base",
+        "msbuild",
+        "msvc",
+        "debug-config",
+        "all-modules"
+      ]
+    },
+    {
+      "name": "windows-msbuild-release",
+      "displayName": "Windows MSBuild Release",
+      "description": "Release build with MSVC on Windows using MSBuild",
+      "inherits": [
+        "windows-base",
+        "msbuild",
+        "msvc",
+        "release-config",
+        "all-modules"
+      ]
+    },
+    {
+      "name": "windows-msbuild-relwithdebinfo",
+      "displayName": "Windows MSBuild RelWithDebInfo",
+      "description": "RelWithDebInfo build with MSVC on Windows using MSBuild",
+      "inherits": [
+        "windows-base",
+        "msbuild",
+        "msvc",
+        "relwithdebinfo-config",
+        "all-modules"
+      ]
+    },
+    {
+      "name": "windows-msbuild-debug-core",
+      "displayName": "Windows MSBuild Debug Core",
+      "description": "Debug build with MSVC on Windows using MSBuild - core library only",
+      "inherits": [
+        "windows-base",
+        "msbuild",
+        "msvc",
+        "debug-config",
+        "core-only"
+      ]
+    },
+    {
+      "name": "windows-msbuild-release-core",
+      "displayName": "Windows MSBuild Release Core",
+      "description": "Release build with MSVC on Windows using MSBuild - core library only",
+      "inherits": [
+        "windows-base",
+        "msbuild",
+        "msvc",
+        "release-config",
+        "core-only"
+      ]
+    },
+    {
+      "name": "windows-msbuild-relwithdebinfo-core",
+      "displayName": "Windows MSBuild RelWithDebInfo Core",
+      "description": "RelWithDebInfo build with MSVC on Windows using MSBuild - core library only",
+      "inherits": [
+        "windows-base",
+        "msbuild",
+        "msvc",
+        "relwithdebinfo-config",
+        "core-only"
+      ]
+    },
+    {
+      "name": "windows-clang-debug",
+      "displayName": "Windows Clang Debug",
+      "description": "Debug build with Clang on Windows using Ninja",
+      "inherits": [
+        "windows-base",
+        "ninja",
+        "clang",
+        "debug-config",
+        "all-modules"
+      ]
+    },
+    {
+      "name": "windows-clang-release",
+      "displayName": "Windows Clang Release",
+      "description": "Release build with Clang on Windows using Ninja",
+      "inherits": [
+        "windows-base",
+        "ninja",
+        "clang",
+        "release-config",
+        "all-modules"
+      ]
+    },
+    {
+      "name": "windows-clang-relwithdebinfo",
+      "displayName": "Windows Clang RelWithDebInfo",
+      "description": "RelWithDebInfo build with Clang on Windows using Ninja",
+      "inherits": [
+        "windows-base",
+        "ninja",
+        "clang",
+        "relwithdebinfo-config",
+        "all-modules"
+      ]
+    },
+    {
+      "name": "windows-clang-debug-core",
+      "displayName": "Windows Clang Debug (Core Only)",
+      "description": "Debug build with Clang on Windows - core library only",
+      "inherits": [
+        "windows-base",
+        "ninja",
+        "clang",
+        "debug-config",
+        "core-only"
+      ]
+    },
+    {
+      "name": "windows-clang-release-core",
+      "displayName": "Windows Clang Release (Core Only)",
+      "description": "Release build with Clang on Windows - core library only",
+      "inherits": [
+        "windows-base",
+        "ninja",
+        "clang",
+        "release-config",
+        "core-only"
+      ]
+    },
+    {
+      "name": "windows-clang-relwithdebinfo-core",
+      "displayName": "Windows Clang RelWithDebInfo (Core Only)",
+      "description": "RelWithDebInfo build with Clang on Windows - core library only",
+      "inherits": [
+        "windows-base",
+        "ninja",
+        "clang",
+        "relwithdebinfo-config",
+        "core-only"
+      ]
+    },
+
+    {
+      "name": "linux-gcc-debug",
+      "displayName": "Linux GCC Debug (Ninja)",
+      "description": "Debug build with GCC on Linux using Ninja",
+      "inherits": ["linux-base", "ninja", "gcc", "debug-config", "all-modules"]
+    },
+    {
+      "name": "linux-gcc-release",
+      "displayName": "Linux GCC Release (Ninja)",
+      "description": "Release build with GCC on Linux using Ninja",
+      "inherits": [
+        "linux-base",
+        "ninja",
+        "gcc",
+        "release-config",
+        "all-modules"
+      ]
+    },
+    {
+      "name": "linux-gcc-relwithdebinfo",
+      "displayName": "Linux GCC RelWithDebInfo (Ninja)",
+      "description": "RelWithDebInfo build with GCC on Linux using Ninja",
+      "inherits": [
+        "linux-base",
+        "ninja",
+        "gcc",
+        "relwithdebinfo-config",
+        "all-modules"
+      ]
+    },
+    {
+      "name": "linux-gcc-debug-core",
+      "displayName": "Linux GCC Debug Core (Ninja)",
+      "description": "Debug build with GCC on Linux using Ninja - core library only",
+      "inherits": ["linux-base", "ninja", "gcc", "debug-config", "core-only"]
+    },
+    {
+      "name": "linux-gcc-release-core",
+      "displayName": "Linux GCC Release Core (Ninja)",
+      "description": "Release build with GCC on Linux using Ninja - core library only",
+      "inherits": ["linux-base", "ninja", "gcc", "release-config", "core-only"]
+    },
+    {
+      "name": "linux-gcc-relwithdebinfo-core",
+      "displayName": "Linux GCC RelWithDebInfo Core (Ninja)",
+      "description": "RelWithDebInfo build with GCC on Linux using Ninja - core library only",
+      "inherits": [
+        "linux-base",
+        "ninja",
+        "gcc",
+        "relwithdebinfo-config",
+        "core-only"
+      ]
+    },
+    {
+      "name": "linux-make-gcc-debug",
+      "displayName": "Linux GCC Debug (Make)",
+      "description": "Debug build with GCC on Linux using Make",
+      "inherits": ["linux-base", "make", "gcc", "debug-config", "all-modules"]
+    },
+    {
+      "name": "linux-make-gcc-release",
+      "displayName": "Linux GCC Release (Make)",
+      "description": "Release build with GCC on Linux using Make",
+      "inherits": ["linux-base", "make", "gcc", "release-config", "all-modules"]
+    },
+    {
+      "name": "linux-make-gcc-relwithdebinfo",
+      "displayName": "Linux GCC RelWithDebInfo (Make)",
+      "description": "RelWithDebInfo build with GCC on Linux using Make",
+      "inherits": [
+        "linux-base",
+        "make",
+        "gcc",
+        "relwithdebinfo-config",
+        "all-modules"
+      ]
+    },
+    {
+      "name": "linux-make-gcc-debug-core",
+      "displayName": "Linux GCC Debug Core (Make)",
+      "description": "Debug build with GCC on Linux using Make - core library only",
+      "inherits": ["linux-base", "make", "gcc", "debug-config", "core-only"]
+    },
+    {
+      "name": "linux-make-gcc-release-core",
+      "displayName": "Linux GCC Release Core (Make)",
+      "description": "Release build with GCC on Linux using Make - core library only",
+      "inherits": ["linux-base", "make", "gcc", "release-config", "core-only"]
+    },
+    {
+      "name": "linux-make-gcc-relwithdebinfo-core",
+      "displayName": "Linux GCC RelWithDebInfo Core (Make)",
+      "description": "RelWithDebInfo build with GCC on Linux using Make - core library only",
+      "inherits": [
+        "linux-base",
+        "make",
+        "gcc",
+        "relwithdebinfo-config",
+        "core-only"
+      ]
+    },
+    {
+      "name": "linux-clang-debug",
+      "displayName": "Linux Clang Debug (Ninja)",
+      "description": "Debug build with Clang on Linux using Ninja",
+      "inherits": [
+        "linux-base",
+        "ninja",
+        "clang",
+        "debug-config",
+        "all-modules"
+      ]
+    },
+    {
+      "name": "linux-clang-release",
+      "displayName": "Linux Clang Release (Ninja)",
+      "description": "Release build with Clang on Linux using Ninja",
+      "inherits": [
+        "linux-base",
+        "ninja",
+        "clang",
+        "release-config",
+        "all-modules"
+      ]
+    },
+    {
+      "name": "linux-clang-relwithdebinfo",
+      "displayName": "Linux Clang RelWithDebInfo (Ninja)",
+      "description": "RelWithDebInfo build with Clang on Linux using Ninja",
+      "inherits": [
+        "linux-base",
+        "ninja",
+        "clang",
+        "relwithdebinfo-config",
+        "all-modules"
+      ]
+    },
+    {
+      "name": "linux-clang-debug-core",
+      "displayName": "Linux Clang Debug Core (Ninja)",
+      "description": "Debug build with Clang on Linux using Ninja - core library only",
+      "inherits": ["linux-base", "ninja", "clang", "debug-config", "core-only"]
+    },
+    {
+      "name": "linux-clang-release-core",
+      "displayName": "Linux Clang Release Core (Ninja)",
+      "description": "Release build with Clang on Linux using Ninja - core library only",
+      "inherits": [
+        "linux-base",
+        "ninja",
+        "clang",
+        "release-config",
+        "core-only"
+      ]
+    },
+    {
+      "name": "linux-clang-relwithdebinfo-core",
+      "displayName": "Linux Clang RelWithDebInfo Core (Ninja)",
+      "description": "RelWithDebInfo build with Clang on Linux using Ninja - core library only",
+      "inherits": [
+        "linux-base",
+        "ninja",
+        "clang",
+        "relwithdebinfo-config",
+        "core-only"
+      ]
+    },
+    {
+      "name": "linux-make-clang-debug",
+      "displayName": "Linux Clang Debug (Make)",
+      "description": "Debug build with Clang on Linux using Make",
+      "inherits": ["linux-base", "make", "clang", "debug-config", "all-modules"]
+    },
+    {
+      "name": "linux-make-clang-release",
+      "displayName": "Linux Clang Release (Make)",
+      "description": "Release build with Clang on Linux using Make",
+      "inherits": [
+        "linux-base",
+        "make",
+        "clang",
+        "release-config",
+        "all-modules"
+      ]
+    },
+    {
+      "name": "linux-make-clang-relwithdebinfo",
+      "displayName": "Linux Clang RelWithDebInfo (Make)",
+      "description": "RelWithDebInfo build with Clang on Linux using Make",
+      "inherits": [
+        "linux-base",
+        "make",
+        "clang",
+        "relwithdebinfo-config",
+        "all-modules"
+      ]
+    },
+    {
+      "name": "linux-make-clang-debug-core",
+      "displayName": "Linux Clang Debug Core (Make)",
+      "description": "Debug build with Clang on Linux using Make - core library only",
+      "inherits": ["linux-base", "make", "clang", "debug-config", "core-only"]
+    },
+    {
+      "name": "linux-make-clang-release-core",
+      "displayName": "Linux Clang Release Core (Make)",
+      "description": "Release build with Clang on Linux using Make - core library only",
+      "inherits": ["linux-base", "make", "clang", "release-config", "core-only"]
+    },
+    {
+      "name": "linux-make-clang-relwithdebinfo-core",
+      "displayName": "Linux Clang RelWithDebInfo Core (Make)",
+      "description": "RelWithDebInfo build with Clang on Linux using Make - core library only",
+      "inherits": [
+        "linux-base",
+        "make",
+        "clang",
+        "relwithdebinfo-config",
+        "core-only"
+      ]
+    },
+    {
+      "name": "macos-clang-debug",
+      "displayName": "macOS Clang Debug",
+      "description": "Debug build with Clang on macOS using Ninja",
+      "inherits": [
+        "macos-base",
+        "ninja",
+        "clang",
+        "debug-config",
+        "all-modules"
+      ]
+    },
+    {
+      "name": "macos-clang-release",
+      "displayName": "macOS Clang Release",
+      "description": "Release build with Clang on macOS using Ninja",
+      "inherits": [
+        "macos-base",
+        "ninja",
+        "clang",
+        "release-config",
+        "all-modules"
+      ]
+    },
+    {
+      "name": "macos-clang-relwithdebinfo",
+      "displayName": "macOS Clang RelWithDebInfo",
+      "description": "RelWithDebInfo build with Clang on macOS using Ninja",
+      "inherits": [
+        "macos-base",
+        "ninja",
+        "clang",
+        "relwithdebinfo-config",
+        "all-modules"
+      ]
+    },
+    {
+      "name": "macos-clang-debug-core",
+      "displayName": "macOS Clang Debug (Core Only)",
+      "description": "Debug build with Clang on macOS - core library only",
+      "inherits": ["macos-base", "ninja", "clang", "debug-config", "core-only"]
+    },
+    {
+      "name": "macos-clang-release-core",
+      "displayName": "macOS Clang Release (Core Only)",
+      "description": "Release build with Clang on macOS - core library only",
+      "inherits": [
+        "macos-base",
+        "ninja",
+        "clang",
+        "release-config",
+        "core-only"
+      ]
+    },
+    {
+      "name": "macos-clang-relwithdebinfo-core",
+      "displayName": "macOS Clang RelWithDebInfo (Core Only)",
+      "description": "RelWithDebInfo build with Clang on macOS - core library only",
+      "inherits": [
+        "macos-base",
+        "ninja",
+        "clang",
+        "relwithdebinfo-config",
+        "core-only"
+      ]
+    },
+    {
+      "name": "dev",
+      "displayName": "Development Build",
+      "description": "Development preset with tests and examples",
+      "inherits": [
+        "base",
+        "ninja",
+        "debug-config",
+        "all-modules",
+        "with-tests",
+        "with-examples"
+      ]
+    },
+    {
+      "name": "ci-linux",
+      "displayName": "CI Linux Build",
+      "description": "CI preset for Linux builds",
+      "inherits": [
+        "linux-base",
+        "ninja",
+        "gcc",
+        "release-config",
+        "all-modules",
+        "with-tests"
+      ],
+      "cacheVariables": {
+        "HELIOS_ENABLE_WARNINGS_AS_ERRORS": "ON"
+      }
+    },
+    {
+      "name": "ci-windows",
+      "displayName": "CI Windows Build",
+      "description": "CI preset for Windows builds",
+      "inherits": [
+        "windows-base",
+        "ninja",
+        "msvc",
+        "release-config",
+        "all-modules",
+        "with-tests"
+      ],
+      "cacheVariables": {
+        "HELIOS_ENABLE_WARNINGS_AS_ERRORS": "ON"
+      }
+    },
+    {
+      "name": "ci-macos",
+      "displayName": "CI macOS Build",
+      "description": "CI preset for macOS builds",
+      "inherits": [
+        "macos-base",
+        "ninja",
+        "clang",
+        "release-config",
+        "all-modules",
+        "with-tests"
+      ],
+      "cacheVariables": {
+        "HELIOS_ENABLE_WARNINGS_AS_ERRORS": "ON"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "windows-msvc-debug",
+      "configurePreset": "windows-msvc-debug",
+      "displayName": "Build Windows MSVC Debug (Ninja)",
+      "description": "Build using windows-msvc-debug configuration"
+    },
+    {
+      "name": "windows-msvc-release",
+      "configurePreset": "windows-msvc-release",
+      "displayName": "Build Windows MSVC Release (Ninja)",
+      "description": "Build using windows-msvc-release configuration"
+    },
+    {
+      "name": "windows-msvc-relwithdebinfo",
+      "configurePreset": "windows-msvc-relwithdebinfo",
+      "displayName": "Build Windows MSVC RelWithDebInfo (Ninja)",
+      "description": "Build using windows-msvc-relwithdebinfo configuration"
+    },
+    {
+      "name": "windows-msvc-debug-core",
+      "configurePreset": "windows-msvc-debug-core",
+      "displayName": "Build Windows MSVC Debug Core (Ninja)",
+      "description": "Build using windows-msvc-debug-core configuration"
+    },
+    {
+      "name": "windows-msvc-release-core",
+      "configurePreset": "windows-msvc-release-core",
+      "displayName": "Build Windows MSVC Release Core (Ninja)",
+      "description": "Build using windows-msvc-release-core configuration"
+    },
+    {
+      "name": "windows-msvc-relwithdebinfo-core",
+      "configurePreset": "windows-msvc-relwithdebinfo-core",
+      "displayName": "Build Windows MSVC RelWithDebInfo Core (Ninja)",
+      "description": "Build using windows-msvc-relwithdebinfo-core configuration"
+    },
+    {
+      "name": "windows-msbuild-debug",
+      "configurePreset": "windows-msbuild-debug",
+      "displayName": "Build Windows MSBuild Debug",
+      "description": "Build using windows-msbuild-debug configuration",
+      "configuration": "Debug"
+    },
+    {
+      "name": "windows-msbuild-release",
+      "configurePreset": "windows-msbuild-release",
+      "displayName": "Build Windows MSBuild Release",
+      "description": "Build using windows-msbuild-release configuration",
+      "configuration": "Release"
+    },
+    {
+      "name": "windows-msbuild-relwithdebinfo",
+      "configurePreset": "windows-msbuild-relwithdebinfo",
+      "displayName": "Build Windows MSBuild RelWithDebInfo",
+      "description": "Build using windows-msbuild-relwithdebinfo configuration",
+      "configuration": "RelWithDebInfo"
+    },
+    {
+      "name": "windows-msbuild-debug-core",
+      "configurePreset": "windows-msbuild-debug-core",
+      "displayName": "Build Windows MSBuild Debug Core",
+      "description": "Build using windows-msbuild-debug-core configuration",
+      "configuration": "Debug"
+    },
+    {
+      "name": "windows-msbuild-release-core",
+      "configurePreset": "windows-msbuild-release-core",
+      "displayName": "Build Windows MSBuild Release Core",
+      "description": "Build using windows-msbuild-release-core configuration",
+      "configuration": "Release"
+    },
+    {
+      "name": "windows-msbuild-relwithdebinfo-core",
+      "configurePreset": "windows-msbuild-relwithdebinfo-core",
+      "displayName": "Build Windows MSBuild RelWithDebInfo Core",
+      "description": "Build using windows-msbuild-relwithdebinfo-core configuration",
+      "configuration": "RelWithDebInfo"
+    },
+    {
+      "name": "windows-clang-debug",
+      "configurePreset": "windows-clang-debug",
+      "displayName": "Build Windows Clang Debug (Ninja)",
+      "description": "Build using windows-clang-debug configuration"
+    },
+    {
+      "name": "windows-clang-release",
+      "configurePreset": "windows-clang-release",
+      "displayName": "Build Windows Clang Release (Ninja)",
+      "description": "Build using windows-clang-release configuration"
+    },
+    {
+      "name": "windows-clang-relwithdebinfo",
+      "configurePreset": "windows-clang-relwithdebinfo",
+      "displayName": "Build Windows Clang RelWithDebInfo (Ninja)",
+      "description": "Build using windows-clang-relwithdebinfo configuration"
+    },
+    {
+      "name": "windows-clang-debug-core",
+      "configurePreset": "windows-clang-debug-core",
+      "displayName": "Build Windows Clang Debug Core (Ninja)",
+      "description": "Build using windows-clang-debug-core configuration"
+    },
+    {
+      "name": "windows-clang-release-core",
+      "configurePreset": "windows-clang-release-core",
+      "displayName": "Build Windows Clang Release Core (Ninja)",
+      "description": "Build using windows-clang-release-core configuration"
+    },
+    {
+      "name": "windows-clang-relwithdebinfo-core",
+      "configurePreset": "windows-clang-relwithdebinfo-core",
+      "displayName": "Build Windows Clang RelWithDebInfo Core (Ninja)",
+      "description": "Build using windows-clang-relwithdebinfo-core configuration"
+    },
+    {
+      "name": "linux-gcc-debug",
+      "configurePreset": "linux-gcc-debug",
+      "displayName": "Build Linux GCC Debug (Ninja)",
+      "description": "Build using linux-gcc-debug configuration"
+    },
+    {
+      "name": "linux-gcc-release",
+      "configurePreset": "linux-gcc-release",
+      "displayName": "Build Linux GCC Release (Ninja)",
+      "description": "Build using linux-gcc-release configuration"
+    },
+    {
+      "name": "linux-gcc-relwithdebinfo",
+      "configurePreset": "linux-gcc-relwithdebinfo",
+      "displayName": "Build Linux GCC RelWithDebInfo (Ninja)",
+      "description": "Build using linux-gcc-relwithdebinfo configuration"
+    },
+    {
+      "name": "linux-gcc-debug-core",
+      "configurePreset": "linux-gcc-debug-core",
+      "displayName": "Build Linux GCC Debug Core (Ninja)",
+      "description": "Build using linux-gcc-debug-core configuration"
+    },
+    {
+      "name": "linux-gcc-release-core",
+      "configurePreset": "linux-gcc-release-core",
+      "displayName": "Build Linux GCC Release Core (Ninja)",
+      "description": "Build using linux-gcc-release-core configuration"
+    },
+    {
+      "name": "linux-gcc-relwithdebinfo-core",
+      "configurePreset": "linux-gcc-relwithdebinfo-core",
+      "displayName": "Build Linux GCC RelWithDebInfo Core (Ninja)",
+      "description": "Build using linux-gcc-relwithdebinfo-core configuration"
+    },
+    {
+      "name": "linux-make-gcc-debug",
+      "configurePreset": "linux-make-gcc-debug",
+      "displayName": "Build Linux GCC Debug (Make)",
+      "description": "Build using linux-make-gcc-debug configuration"
+    },
+    {
+      "name": "linux-make-gcc-release",
+      "configurePreset": "linux-make-gcc-release",
+      "displayName": "Build Linux GCC Release (Make)",
+      "description": "Build using linux-make-gcc-release configuration"
+    },
+    {
+      "name": "linux-make-gcc-relwithdebinfo",
+      "configurePreset": "linux-make-gcc-relwithdebinfo",
+      "displayName": "Build Linux GCC RelWithDebInfo (Make)",
+      "description": "Build using linux-make-gcc-relwithdebinfo configuration"
+    },
+    {
+      "name": "linux-make-gcc-debug-core",
+      "configurePreset": "linux-make-gcc-debug-core",
+      "displayName": "Build Linux GCC Debug Core (Make)",
+      "description": "Build using linux-make-gcc-debug-core configuration"
+    },
+    {
+      "name": "linux-make-gcc-release-core",
+      "configurePreset": "linux-make-gcc-release-core",
+      "displayName": "Build Linux GCC Release Core (Make)",
+      "description": "Build using linux-make-gcc-release-core configuration"
+    },
+    {
+      "name": "linux-make-gcc-relwithdebinfo-core",
+      "configurePreset": "linux-make-gcc-relwithdebinfo-core",
+      "displayName": "Build Linux GCC RelWithDebInfo Core (Make)",
+      "description": "Build using linux-make-gcc-relwithdebinfo-core configuration"
+    },
+    {
+      "name": "linux-clang-debug",
+      "configurePreset": "linux-clang-debug",
+      "displayName": "Build Linux Clang Debug (Ninja)",
+      "description": "Build using linux-clang-debug configuration"
+    },
+    {
+      "name": "linux-clang-release",
+      "configurePreset": "linux-clang-release",
+      "displayName": "Build Linux Clang Release (Ninja)",
+      "description": "Build using linux-clang-release configuration"
+    },
+    {
+      "name": "linux-clang-relwithdebinfo",
+      "configurePreset": "linux-clang-relwithdebinfo",
+      "displayName": "Build Linux Clang RelWithDebInfo (Ninja)",
+      "description": "Build using linux-clang-relwithdebinfo configuration"
+    },
+    {
+      "name": "linux-clang-debug-core",
+      "configurePreset": "linux-clang-debug-core",
+      "displayName": "Build Linux Clang Debug Core (Ninja)",
+      "description": "Build using linux-clang-debug-core configuration"
+    },
+    {
+      "name": "linux-clang-release-core",
+      "configurePreset": "linux-clang-release-core",
+      "displayName": "Build Linux Clang Release Core (Ninja)",
+      "description": "Build using linux-clang-release-core configuration"
+    },
+    {
+      "name": "linux-clang-relwithdebinfo-core",
+      "configurePreset": "linux-clang-relwithdebinfo-core",
+      "displayName": "Build Linux Clang RelWithDebInfo Core (Ninja)",
+      "description": "Build using linux-clang-relwithdebinfo-core configuration"
+    },
+    {
+      "name": "linux-make-clang-debug",
+      "configurePreset": "linux-make-clang-debug",
+      "displayName": "Build Linux Clang Debug (Make)",
+      "description": "Build using linux-make-clang-debug configuration"
+    },
+    {
+      "name": "linux-make-clang-release",
+      "configurePreset": "linux-make-clang-release",
+      "displayName": "Build Linux Clang Release (Make)",
+      "description": "Build using linux-make-clang-release configuration"
+    },
+    {
+      "name": "linux-make-clang-relwithdebinfo",
+      "configurePreset": "linux-make-clang-relwithdebinfo",
+      "displayName": "Build Linux Clang RelWithDebInfo (Make)",
+      "description": "Build using linux-make-clang-relwithdebinfo configuration"
+    },
+    {
+      "name": "linux-make-clang-debug-core",
+      "configurePreset": "linux-make-clang-debug-core",
+      "displayName": "Build Linux Clang Debug Core (Make)",
+      "description": "Build using linux-make-clang-debug-core configuration"
+    },
+    {
+      "name": "linux-make-clang-release-core",
+      "configurePreset": "linux-make-clang-release-core",
+      "displayName": "Build Linux Clang Release Core (Make)",
+      "description": "Build using linux-make-clang-release-core configuration"
+    },
+    {
+      "name": "linux-make-clang-relwithdebinfo-core",
+      "configurePreset": "linux-make-clang-relwithdebinfo-core",
+      "displayName": "Build Linux Clang RelWithDebInfo Core (Make)",
+      "description": "Build using linux-make-clang-relwithdebinfo-core configuration"
+    },
+    {
+      "name": "macos-clang-debug",
+      "configurePreset": "macos-clang-debug",
+      "displayName": "Build macOS Clang Debug",
+      "description": "Build using macos-clang-debug configuration"
+    },
+    {
+      "name": "macos-clang-release",
+      "configurePreset": "macos-clang-release",
+      "displayName": "Build macOS Clang Release",
+      "description": "Build using macos-clang-release configuration"
+    },
+    {
+      "name": "macos-clang-relwithdebinfo",
+      "configurePreset": "macos-clang-relwithdebinfo",
+      "displayName": "Build macOS Clang RelWithDebInfo",
+      "description": "Build using macos-clang-relwithdebinfo configuration"
+    },
+    {
+      "name": "macos-clang-debug-core",
+      "configurePreset": "macos-clang-debug-core",
+      "displayName": "Build macOS Clang Debug (Core Only)",
+      "description": "Build using macos-clang-debug-core configuration"
+    },
+    {
+      "name": "macos-clang-release-core",
+      "configurePreset": "macos-clang-release-core",
+      "displayName": "Build macOS Clang Release (Core Only)",
+      "description": "Build using macos-clang-release-core configuration"
+    },
+    {
+      "name": "macos-clang-relwithdebinfo-core",
+      "configurePreset": "macos-clang-relwithdebinfo-core",
+      "displayName": "Build macOS Clang RelWithDebInfo (Core Only)",
+      "description": "Build using macos-clang-relwithdebinfo-core configuration"
+    },
+    {
+      "name": "dev",
+      "configurePreset": "dev",
+      "displayName": "Build Development",
+      "description": "Build using dev configuration"
+    },
+    {
+      "name": "ci-linux",
+      "configurePreset": "ci-linux",
+      "displayName": "Build CI Linux",
+      "description": "Build using ci-linux configuration",
+      "jobs": 4
+    },
+    {
+      "name": "ci-windows",
+      "configurePreset": "ci-windows",
+      "displayName": "Build CI Windows",
+      "description": "Build using ci-windows configuration",
+      "jobs": 4
+    },
+    {
+      "name": "ci-macos",
+      "configurePreset": "ci-macos",
+      "displayName": "Build CI macOS",
+      "description": "Build using ci-macos configuration",
+      "jobs": 4
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "test-base",
+      "hidden": true,
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error",
+        "stopOnFailure": false
+      }
+    },
+    {
+      "name": "test-windows-msvc-debug",
+      "configurePreset": "windows-msvc-debug",
+      "inherits": "test-base",
+      "displayName": "Test Windows MSVC Debug"
+    },
+    {
+      "name": "test-windows-msvc-release",
+      "configurePreset": "windows-msvc-release",
+      "inherits": "test-base",
+      "displayName": "Test Windows MSVC Release"
+    },
+    {
+      "name": "test-windows-msvc-relwithdebinfo",
+      "configurePreset": "windows-msvc-relwithdebinfo",
+      "inherits": "test-base",
+      "displayName": "Test Windows MSVC RelWithDebInfo"
+    },
+    {
+      "name": "test-windows-clang-debug",
+      "configurePreset": "windows-clang-debug",
+      "inherits": "test-base",
+      "displayName": "Test Windows Clang Debug"
+    },
+    {
+      "name": "test-windows-clang-release",
+      "configurePreset": "windows-clang-release",
+      "inherits": "test-base",
+      "displayName": "Test Windows Clang Release"
+    },
+    {
+      "name": "test-windows-clang-relwithdebinfo",
+      "configurePreset": "windows-clang-relwithdebinfo",
+      "inherits": "test-base",
+      "displayName": "Test Windows Clang RelWithDebInfo"
+    },
+    {
+      "name": "test-linux-gcc-debug",
+      "configurePreset": "linux-gcc-debug",
+      "inherits": "test-base",
+      "displayName": "Test Linux GCC Debug"
+    },
+    {
+      "name": "test-linux-gcc-release",
+      "configurePreset": "linux-gcc-release",
+      "inherits": "test-base",
+      "displayName": "Test Linux GCC Release"
+    },
+    {
+      "name": "test-linux-gcc-relwithdebinfo",
+      "configurePreset": "linux-gcc-relwithdebinfo",
+      "inherits": "test-base",
+      "displayName": "Test Linux GCC RelWithDebInfo"
+    },
+    {
+      "name": "test-linux-clang-debug",
+      "configurePreset": "linux-clang-debug",
+      "inherits": "test-base",
+      "displayName": "Test Linux Clang Debug"
+    },
+    {
+      "name": "test-linux-clang-release",
+      "configurePreset": "linux-clang-release",
+      "inherits": "test-base",
+      "displayName": "Test Linux Clang Release"
+    },
+    {
+      "name": "test-linux-clang-relwithdebinfo",
+      "configurePreset": "linux-clang-relwithdebinfo",
+      "inherits": "test-base",
+      "displayName": "Test Linux Clang RelWithDebInfo"
+    },
+    {
+      "name": "test-macos-clang-debug",
+      "configurePreset": "macos-clang-debug",
+      "inherits": "test-base",
+      "displayName": "Test macOS Clang Debug"
+    },
+    {
+      "name": "test-macos-clang-release",
+      "configurePreset": "macos-clang-release",
+      "inherits": "test-base",
+      "displayName": "Test macOS Clang Release"
+    },
+    {
+      "name": "test-macos-clang-relwithdebinfo",
+      "configurePreset": "macos-clang-relwithdebinfo",
+      "inherits": "test-base",
+      "displayName": "Test macOS Clang RelWithDebInfo"
+    },
+    {
+      "name": "test-dev",
+      "configurePreset": "dev",
+      "inherits": "test-base",
+      "displayName": "Test Development"
+    },
+    {
+      "name": "test-ci-linux",
+      "configurePreset": "ci-linux",
+      "inherits": "test-base",
+      "displayName": "Test CI Linux"
+    },
+    {
+      "name": "test-ci-windows",
+      "configurePreset": "ci-windows",
+      "inherits": "test-base",
+      "displayName": "Test CI Windows"
+    },
+    {
+      "name": "test-ci-macos",
+      "configurePreset": "ci-macos",
+      "inherits": "test-base",
+      "displayName": "Test CI macOS"
+    }
+  ]
+}

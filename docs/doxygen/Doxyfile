@@ -1,0 +1,178 @@
+#---------------------------------------------------------------------------
+# Project related configuration options
+#---------------------------------------------------------------------------
+
+PROJECT_NAME           = "Helios Engine"
+PROJECT_BRIEF          = "A modular ECS based data-oriented C++23 game engine"
+PROJECT_LOGO           = ../img/logo.png
+PROJECT_NUMBER         = 0.1.0
+
+OUTPUT_DIRECTORY       =
+CREATE_SUBDIRS         = NO
+
+#---------------------------------------------------------------------------
+# Configuration options related to the input files
+#---------------------------------------------------------------------------
+
+# Use relative paths so Doxygen works from docs/ or project root
+INPUT                  = ../../src ../../README.md ../../src/core/README.md
+FILE_PATTERNS          = *.hpp *.inl *.h *.cpp *.cxx *.c *.md
+RECURSIVE              = YES
+EXCLUDE                = ../../build ../../tests ../../third-party
+
+#---------------------------------------------------------------------------
+# Configuration options related to source browsing
+#---------------------------------------------------------------------------
+
+SOURCE_BROWSER         = YES
+INLINE_SOURCES         = YES
+STRIP_CODE_COMMENTS    = NO
+SHOW_USED_FILES        = NO
+SHOW_FILE_NAMES        = NO
+FULL_PATH_NAMES        = YES
+STRIP_FROM_PATH        = ../../
+
+
+#---------------------------------------------------------------------------
+# Configuration options related to the alphabetical class index
+#---------------------------------------------------------------------------
+
+ALPHABETICAL_INDEX     = YES
+
+#---------------------------------------------------------------------------
+# Configuration options related to the HTML output
+#---------------------------------------------------------------------------
+
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+
+# Sidebar-only theme with doxygen-awesome-css
+HTML_EXTRA_STYLESHEET  = ../../third-party/doxygen-awesome-css/doxygen-awesome.css \
+                         ../../third-party/doxygen-awesome-css/doxygen-awesome-sidebar-only.css \
+                         custom.css
+
+HTML_EXTRA_FILES       = ../img/logo.png \
+                         ../img/favicon.ico \
+                         ../../third-party/doxygen-awesome-css/doxygen-awesome-fragment-copy-button.js \
+                         ../../third-party/doxygen-awesome-css/doxygen-awesome-paragraph-link.js \
+                         ../../third-party/doxygen-awesome-css/doxygen-awesome-interactive-toc.js \
+                         ../../third-party/doxygen-awesome-css/doxygen-awesome-tabs.js
+
+
+# Required for sidebar-only theme
+GENERATE_TREEVIEW      = YES
+DISABLE_INDEX          = YES
+FULL_SIDEBAR           = NO
+HTML_COLORSTYLE        = DARK
+
+# Custom header and footer
+HTML_HEADER            = header.html
+HTML_FOOTER            = footer.html
+
+# Disable Doxygen's built-in copy clipboard (we use the extension)
+HTML_COPY_CLIPBOARD    = NO
+
+# Disable page outline panel (we use interactive TOC extension)
+PAGE_OUTLINE_PANEL     = NO
+
+TREEVIEW_WIDTH         = 335
+
+IMAGE_PATH             = ../img
+
+#---------------------------------------------------------------------------
+# Configuration options related to LaTeX/PDF output
+#---------------------------------------------------------------------------
+
+GENERATE_LATEX         = NO
+
+#---------------------------------------------------------------------------
+# Configuration options related to the RTF output
+#---------------------------------------------------------------------------
+
+GENERATE_RTF           = NO
+
+#---------------------------------------------------------------------------
+# Configuration options related to the man page output
+#---------------------------------------------------------------------------
+
+GENERATE_MAN           = NO
+
+#---------------------------------------------------------------------------
+# Configuration options related to the XML output
+#---------------------------------------------------------------------------
+
+GENERATE_XML           = NO
+
+#---------------------------------------------------------------------------
+# Configuration options related to the preprocessor
+#---------------------------------------------------------------------------
+
+# Preprocessor
+ENABLE_PREPROCESSING   = YES
+MACRO_EXPANSION        = YES
+EXPAND_ONLY_PREDEF     = YES
+PREDEFINED             = HELIOS_API= \
+                         HELIOS_FORCE_INLINE=inline \
+                         HELIOS_NO_INLINE= \
+
+# STL support
+BUILTIN_STL_SUPPORT    = YES
+
+#---------------------------------------------------------------------------
+# Configuration options related to external references
+#---------------------------------------------------------------------------
+
+TAGFILES               =
+
+#---------------------------------------------------------------------------
+# Configuration options related to the dot tool
+#---------------------------------------------------------------------------
+
+HAVE_DOT               = NO
+DOT_IMAGE_FORMAT       = svg
+CALL_GRAPH             = YES
+CALLER_GRAPH           = YES
+COLLABORATION_GRAPH    = YES
+UML_LOOK               = YES
+DOT_MULTI_TARGETS      = YES
+
+#---------------------------------------------------------------------------
+# Configuration options related to the extraction process
+#---------------------------------------------------------------------------
+
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = NO
+EXTRACT_STATIC         = YES
+EXTRACT_LOCAL_CLASSES  = YES
+EXTRACT_ANON_NSPACES   = YES
+
+#---------------------------------------------------------------------------
+# Configuration options related to warnings and progress
+#---------------------------------------------------------------------------
+
+QUIET                  = NO
+WARN_IF_UNDOCUMENTED   = YES
+WARN_IF_DOC_ERROR      = YES
+
+#---------------------------------------------------------------------------
+# Configuration options related to grouping and main page
+#---------------------------------------------------------------------------
+
+USE_MDFILE_AS_MAINPAGE = ../../README.md
+MARKDOWN_SUPPORT       = YES
+AUTOLINK_SUPPORT       = YES
+
+#---------------------------------------------------------------------------
+# Configuration options related to search
+#---------------------------------------------------------------------------
+
+SEARCHENGINE           = YES
+
+#---------------------------------------------------------------------------
+# Miscellaneous
+#---------------------------------------------------------------------------
+
+GENERATE_TODOLIST      = YES
+GENERATE_TESTLIST      = YES
+GENERATE_BUGLIST       = YES
+GENERATE_DEPRECATEDLIST= YES

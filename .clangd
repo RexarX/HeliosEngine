@@ -1,0 +1,5 @@
+CompileFlags:
+    Add: /clang:-std=c++23
+    CompilationDatabase: build/debug/linux/
+    # For nested build structure, clangd will search subdirectories
+    # Alternatively, create a symlink: cd build && ln -s debug/linux/compile_commands.json

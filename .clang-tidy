@@ -1,0 +1,43 @@
+---
+Checks: '
+  *,
+  -abseil-*,
+  -altera-*,
+  -android-*,
+  -fuchsia-*,
+  -google-*,
+  -llvm*,
+  -modernize-use-trailing-return-type,
+  -zircon-*,
+  -readability-else-after-return,
+  -readability-static-accessed-through-instance,
+  -readability-avoid-const-params-in-decls,
+  -cppcoreguidelines-non-private-member-variables-in-classes,
+  -misc-non-private-member-variables-in-classes,
+'
+
+WarningsAsErrors: ''
+HeaderFilterRegex: ''
+FormatStyle: none
+
+CheckOptions:
+  - key: readability-identifier-length.MinimumVariableNameLength
+    value: 2
+  - key: readability-identifier-length.MinimumParameterNameLength
+    value: 2
+  - key: readability-function-cognitive-complexity.Threshold
+    value: 25
+  - key: readability-magic-numbers.IgnoredIntegerValues
+    value: 0;1;2;3;4;10;100
+  - key: cppcoreguidelines-explicit-virtual-functions.IgnoreDestructors
+    value: true
+  - key: readability-braces-around-statements.ShortStatementLines
+    value: 2
+  - key: performance-move-const-arg.CheckTriviallyCopyableMove
+    value: false
+  - key: bugprone-argument-comment.StrictMode
+    value: true
+  - key: bugprone-easily-swappable-parameters.MinimumLength
+    value: 4
+  - key: bugprone-unused-return-value.CheckedFunctions
+    value: '::std::.*'

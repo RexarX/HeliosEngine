@@ -30,31 +30,45 @@
 *.out
 *.app
 
-#Files
-out/
-.vs/
-.vscode/
-build/
-bin/
-*.user
-*.json
+# Build files
+out
+build
+bin
 
-#VS
+# Editors
 .sln
 .vcxproj
 .vs
 .vscode
+.zed
+.cache
 
-#CMake
+# CMake
 CMakeCache.txt
 CMakeFiles
 CMakeScripts
 Testing
-Makefile
 cmake_install.cmake
 install_manifest.txt
 CTestTestfile.cmake
 _deps
+CMakeSettings.json
+CMakeUserPresets.json
 
-#SPIR-V
+# CPM
+.cpm_cache
+
+# Python
+*.pyc
+__pycache__
+
+# Docs
+docs/doxygen/html
+
+# Logs
+Logs
+logs
+*.log
+
+# SPIR-V
 *.spv

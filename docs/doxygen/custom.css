@@ -1,0 +1,340 @@
+/* Hide the Doxygen-generated header title that appears before README content */
+div.header div.headertitle {
+    display: none !important;
+}
+
+/* Reduce excessive white space between sidebar and content */
+html.dark-mode div.contents,
+html.light-mode div.contents,
+div.contents {
+    margin-left: 2%;
+    padding-left: 2%;
+}
+
+/* Adjust content width when sidebar is present */
+@media screen and (min-width: 768px) {
+    div.contents {
+        margin-left: 3%;
+        padding-right: 3%;
+    }
+}
+
+/* Fix double scrollbar issue in sidebar */
+#nav-tree {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    height: 100% !important;
+}
+
+/* Ensure side nav doesn't create extra scrollbar */
+#side-nav {
+    overflow: hidden !important;
+}
+
+/* Make nav-tree-contents fill properly without creating scrollbar */
+#nav-tree {
+    margin-top: 1rem;
+}
+
+/* Make nav-tree-contents fill properly without creating scrollbar */
+#nav-tree .children_ul {
+    overflow: visible !important;
+}
+
+/* Fix navigation sync panel scrolling */
+#nav-sync {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+
+/* Ensure proper height calculation for sidebar */
+.ui-resizable {
+    height: 100vh !important;
+    overflow: hidden !important;
+}
+
+/* Additional spacing adjustments */
+#doc-content {
+    padding-left: 1%;
+    padding-right: 1%;
+}
+
+/* Fix logo size to be fully visible - use relative units */
+#projectlogo img {
+    max-height: 4rem;
+    height: auto;
+    width: auto;
+    margin-right: 0.8rem;
+    vertical-align: middle;
+}
+
+/* Fix project name and brief text size to fit in sidebar */
+#projectname {
+    font-size: 1.3em;
+    margin-top: 0;
+    line-height: 1.2;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+#projectbrief {
+    font-size: 0.85em;
+    margin-top: 0.3rem;
+    line-height: 1.3;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Ensure title area fits within sidebar width */
+#titlearea {
+    position: relative;
+    padding: 0.8rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#titlearea table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+#projectlogo {
+    width: 20%;
+    min-width: 4rem;
+}
+
+#projectalign {
+    width: 80%;
+}
+
+/* Search box styling - make it fit in sidebar width */
+#MSearchBox {
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+#MSearchField {
+    width: calc(100% - 3rem) !important;
+    max-width: 100%;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85em;
+    box-sizing: border-box;
+}
+
+/* Search box container row styling */
+#titlearea tr td[colspan="2"] {
+    padding-top: 0.5rem;
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
+}
+
+/* Hide the top anchor link */
+a#top.anchor {
+    display: none;
+}
+
+/* Make sure search box doesn't overflow sidebar */
+@media screen and (min-width: 768px) {
+    #titlearea {
+        max-width: var(--side-nav-fixed-width, 335px);
+    }
+}
+
+/* Improve table spacing in content */
+div.contents table {
+    margin-left: 0;
+}
+
+/* Use responsive width for content - no fixed pixel max-width */
+body.no-sidebar div.contents {
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    max-width: none;
+}
+
+/* For larger screens, use more of the available space */
+@media screen and (min-width: 1920px) {
+    body.no-sidebar div.contents {
+        width: 85%;
+    }
+
+    div.contents {
+        margin-left: 2%;
+        padding-right: 2%;
+    }
+}
+
+@media screen and (min-width: 2560px) {
+    body.no-sidebar div.contents {
+        width: 80%;
+    }
+
+    div.contents {
+        margin-left: 1.5%;
+        padding-right: 1.5%;
+    }
+}
+
+/* README logo and title - keep them visible as part of content */
+div.contents div[align="center"] > img[src="logo.png"] {
+    max-width: min(15rem, 80%);
+    height: auto;
+    margin-top: 1.5rem;
+}
+
+div.contents div[align="center"] > h1 {
+    margin-top: 1rem;
+    font-size: 2em;
+}
+
+/* Responsive adjustments for smaller screens */
+@media screen and (max-width: 767px) {
+    #projectlogo img {
+        max-height: 3rem;
+    }
+
+    #projectname {
+        font-size: 1.1em;
+    }
+
+    #projectbrief {
+        font-size: 0.8em;
+    }
+
+    #MSearchField {
+        font-size: 0.8em;
+        padding: 0.3rem 0.5rem;
+    }
+
+    div.contents div[align="center"] > img[src="logo.png"] {
+        max-width: 60%;
+    }
+
+    div.contents div[align="center"] > h1 {
+        font-size: 1.5em;
+    }
+
+    div.contents {
+        margin-left: 1%;
+        padding-left: 1%;
+        padding-right: 1%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    div.contents {
+        margin-left: 0.5%;
+        padding-left: 0.5%;
+        padding-right: 0.5%;
+    }
+
+    div.contents div[align="center"] > img[src="logo.png"] {
+        max-width: 80%;
+    }
+}
+
+/* Additional fix for sidebar-only mode */
+@media screen and (min-width: 768px) {
+    /* Ensure sidebar content doesn't get cut off */
+    #side-nav {
+        overflow: visible !important;
+    }
+
+    /* Make sure top area (titlearea) is fully visible within sidebar */
+    #top {
+        overflow: visible !important;
+        height: auto !important;
+        min-height: 8rem;
+    }
+}
+
+/* Content width adjustments based on viewport */
+@media screen and (min-width: 768px) and (max-width: 1366px) {
+    div.contents {
+        margin-left: 2.5%;
+        padding-right: 2.5%;
+    }
+}
+
+@media screen and (min-width: 1367px) and (max-width: 1919px) {
+    div.contents {
+        margin-left: 3%;
+        padding-right: 3%;
+    }
+}
+
+/* Tables and code blocks should use available space efficiently */
+div.contents table {
+    max-width: 100%;
+}
+
+div.contents pre.fragment {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+/* Ensure images in content scale properly */
+div.contents img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Search results window positioning */
+#MSearchResultsWindow {
+    max-width: min(40rem, 90vw);
+}
+
+/* Adjust font sizes based on viewport for better readability */
+@media screen and (min-width: 1920px) {
+    body {
+        font-size: 1.05em;
+    }
+
+    #projectname {
+        font-size: 1.4em;
+    }
+
+    #projectbrief {
+        font-size: 0.9em;
+    }
+}
+
+@media screen and (min-width: 2560px) {
+    body {
+        font-size: 1.1em;
+    }
+
+    #projectname {
+        font-size: 1.5em;
+    }
+
+    #projectbrief {
+        font-size: 0.95em;
+    }
+}
+
+/* Ensure navigation items are readable on all screen sizes */
+#nav-tree {
+    font-size: 0.9em;
+}
+
+@media screen and (min-width: 1920px) {
+    #nav-tree {
+        font-size: 0.95em;
+    }
+}
+
+@media screen and (min-width: 2560px) {
+    #nav-tree {
+        font-size: 1em;
+    }
+}
+
+/* Override doxygen-awesome.css content max-width */
+div.contents,
+div.header .title,
+div.header .summary {
+    max-width: none !important;
+    width: 90%;
+}
