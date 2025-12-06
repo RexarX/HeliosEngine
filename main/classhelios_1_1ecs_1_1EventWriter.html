@@ -1,0 +1,572 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: helios::ecs::EventWriter&lt; T &gt; Class Template Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classhelios_1_1ecs_1_1EventWriter.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classhelios_1_1ecs_1_1EventWriter-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">helios::ecs::EventWriter&lt; T &gt; Class Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Type-safe writer for events.  
+ <a href="classhelios_1_1ecs_1_1EventWriter.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="event__writer_8hpp_source.html">event_writer.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a8195cadfc45fbdb80e60ea6ad157ce94" id="r_a8195cadfc45fbdb80e60ea6ad157ce94"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1EventWriter.html#a8195cadfc45fbdb80e60ea6ad157ce94">EventWriter</a> (<a class="el" href="classhelios_1_1ecs_1_1details_1_1EventManager.html">details::EventManager</a> &amp;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">manager</a>) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:a8195cadfc45fbdb80e60ea6ad157ce94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs an <a class="el" href="classhelios_1_1ecs_1_1EventWriter.html" title="Type-safe writer for events.">EventWriter</a>.  <br /></td></tr>
+<tr class="separator:a8195cadfc45fbdb80e60ea6ad157ce94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6551df1d6e6ddaef076d82c60d6c44b2" id="r_a6551df1d6e6ddaef076d82c60d6c44b2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1EventWriter.html#a6551df1d6e6ddaef076d82c60d6c44b2">EventWriter</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1EventWriter.html">EventWriter</a> &amp;)=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">delete</a></td></tr>
+<tr class="separator:a6551df1d6e6ddaef076d82c60d6c44b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d30c5ac25bc116d99de50b4afdddc03" id="r_a5d30c5ac25bc116d99de50b4afdddc03"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1EventWriter.html#a5d30c5ac25bc116d99de50b4afdddc03">EventWriter</a> (<a class="el" href="classhelios_1_1ecs_1_1EventWriter.html">EventWriter</a> &amp;&amp;) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:a5d30c5ac25bc116d99de50b4afdddc03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a292eaf3ff898906e6c3c5752851cf52b" id="r_a292eaf3ff898906e6c3c5752851cf52b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1EventWriter.html#a292eaf3ff898906e6c3c5752851cf52b">~EventWriter</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:a292eaf3ff898906e6c3c5752851cf52b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5b918ab3cce380a9ac25115b9d615b1" id="r_aa5b918ab3cce380a9ac25115b9d615b1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1ecs_1_1EventWriter.html">EventWriter</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1EventWriter.html#aa5b918ab3cce380a9ac25115b9d615b1">operator=</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1EventWriter.html">EventWriter</a> &amp;)=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">delete</a></td></tr>
+<tr class="separator:aa5b918ab3cce380a9ac25115b9d615b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac38529461f5dc16452b264241288222a" id="r_ac38529461f5dc16452b264241288222a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="classhelios_1_1ecs_1_1EventWriter.html">EventWriter</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1EventWriter.html#ac38529461f5dc16452b264241288222a">operator=</a> (<a class="el" href="classhelios_1_1ecs_1_1EventWriter.html">EventWriter</a> &amp;&amp;) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:ac38529461f5dc16452b264241288222a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49800624c2338552dc91e8f5db3025e4" id="r_a49800624c2338552dc91e8f5db3025e4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1EventWriter.html#a49800624c2338552dc91e8f5db3025e4">Write</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> T &amp;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a>)</td></tr>
+<tr class="memdesc:a49800624c2338552dc91e8f5db3025e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes a single event (copy).  <br /></td></tr>
+<tr class="separator:a49800624c2338552dc91e8f5db3025e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a087e6e17f3279ed85bf7157b72f0c9f6" id="r_a087e6e17f3279ed85bf7157b72f0c9f6"><td class="memTemplParams" colspan="2">template&lt;std::ranges::sized_range R&gt; <br />
+requires std::same_as&lt;std::ranges::range_value_t&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">R</a>&gt;, T&gt;</td></tr>
+<tr class="memitem:a087e6e17f3279ed85bf7157b72f0c9f6"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1EventWriter.html#a087e6e17f3279ed85bf7157b72f0c9f6">WriteBulk</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">R</a> &amp;events)</td></tr>
+<tr class="memdesc:a087e6e17f3279ed85bf7157b72f0c9f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes multiple events to the queue in bulk.  <br /></td></tr>
+<tr class="separator:a087e6e17f3279ed85bf7157b72f0c9f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9e0e5c914c1bdfed28f3ba6df258615" id="r_ad9e0e5c914c1bdfed28f3ba6df258615"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; <br />
+requires std::constructible_from&lt;T, Args...&gt;</td></tr>
+<tr class="memitem:ad9e0e5c914c1bdfed28f3ba6df258615"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1EventWriter.html#ad9e0e5c914c1bdfed28f3ba6df258615">Emplace</a> (Args &amp;&amp;... <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">args</a>)</td></tr>
+<tr class="memdesc:ad9e0e5c914c1bdfed28f3ba6df258615"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emplaces an event in-place.  <br /></td></tr>
+<tr class="separator:ad9e0e5c914c1bdfed28f3ba6df258615"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;EventTrait T&gt;<br />
+class helios::ecs::EventWriter&lt; T &gt;</div><p>Type-safe writer for events. </p>
+<p>Provides a clean, ergonomic API for writing events to the event system. <a class="el" href="classhelios_1_1ecs_1_1EventWriter.html" title="Type-safe writer for events.">EventWriter</a> is a lightweight wrapper around EventManager that enforces type safety and provides convenient methods for bulk operations and in-place construction. </p><dl class="section note"><dt>Note</dt><dd><a class="el" href="classhelios_1_1ecs_1_1EventWriter.html" title="Type-safe writer for events.">EventWriter</a> holds a non-const reference to EventManager and is not thread-safe. <a class="el" href="classhelios_1_1ecs_1_1EventWriter.html" title="Type-safe writer for events.">EventWriter</a> is intended to be short-lived (function-scoped). </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Event type</td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">writer</a> = <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">world</a>.WriteEvents&lt;<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">MyEvent</a>&gt;();</div>
+<div class="line"><a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">writer</a>.Write(<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">MyEvent</a>{42});</div>
+<div class="line"><a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">writer</a>.Emplace(42);  <span class="comment">// Construct in-place</span></div>
+<div class="line"><a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">writer</a>.WriteBulk(<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">event_span</a>);</div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1BasicQuery_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicQuery.html">helios::ecs::BasicQuery</a></div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l01107">query.hpp:1107</a></div></div>
+</div><!-- fragment --> 
+<p class="definition">Definition at line <a class="el" href="event__writer_8hpp_source.html#l00028">28</a> of file <a class="el" href="event__writer_8hpp_source.html">event_writer.hpp</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a8195cadfc45fbdb80e60ea6ad157ce94" name="a8195cadfc45fbdb80e60ea6ad157ce94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8195cadfc45fbdb80e60ea6ad157ce94">&#9670;&#160;</a></span>EventWriter() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;EventTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="classhelios_1_1ecs_1_1EventWriter.html">helios::ecs::EventWriter</a>&lt; T &gt;::EventWriter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1details_1_1EventManager.html">details::EventManager</a> &amp;&#160;</td>
+          <td class="paramname"><em>manager</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructs an <a class="el" href="classhelios_1_1ecs_1_1EventWriter.html" title="Type-safe writer for events.">EventWriter</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">manager</td><td>Reference to the event manager </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="event__writer_8hpp_source.html#l00034">34</a> of file <a class="el" href="event__writer_8hpp_source.html">event_writer.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   34</span>: manager_(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">manager</a>) {}</div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_af0384de48d847585fcb340c71c231e5e"><div class="ttname"><a href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, Allocator, Components... &gt; Query</div><div class="ttdoc">Type alias for query with mutable world access.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02515">query.hpp:2515</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a6551df1d6e6ddaef076d82c60d6c44b2" name="a6551df1d6e6ddaef076d82c60d6c44b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6551df1d6e6ddaef076d82c60d6c44b2">&#9670;&#160;</a></span>EventWriter() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;EventTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1EventWriter.html">helios::ecs::EventWriter</a>&lt; T &gt;::EventWriter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1EventWriter.html">EventWriter</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5d30c5ac25bc116d99de50b4afdddc03" name="a5d30c5ac25bc116d99de50b4afdddc03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d30c5ac25bc116d99de50b4afdddc03">&#9670;&#160;</a></span>EventWriter() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;EventTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="classhelios_1_1ecs_1_1EventWriter.html">helios::ecs::EventWriter</a>&lt; T &gt;::EventWriter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1EventWriter.html">EventWriter</a>&lt; T &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a292eaf3ff898906e6c3c5752851cf52b" name="a292eaf3ff898906e6c3c5752851cf52b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a292eaf3ff898906e6c3c5752851cf52b">&#9670;&#160;</a></span>~EventWriter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;EventTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="classhelios_1_1ecs_1_1EventWriter.html">helios::ecs::EventWriter</a>&lt; T &gt;::~<a class="el" href="classhelios_1_1ecs_1_1EventWriter.html">EventWriter</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ad9e0e5c914c1bdfed28f3ba6df258615" name="ad9e0e5c914c1bdfed28f3ba6df258615"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9e0e5c914c1bdfed28f3ba6df258615">&#9670;&#160;</a></span>Emplace()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;EventTrait T&gt; </div>
+<div class="memtemplate">
+template&lt;typename... Args&gt; <br />
+requires std::constructible_from&lt;T, Args...&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a> <a class="el" href="classhelios_1_1ecs_1_1EventWriter.html">helios::ecs::EventWriter</a>&lt; T &gt;::Emplace </td>
+          <td>(</td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Emplaces an event in-place. </p>
+<p>Constructs the event directly in the event queue, avoiding unnecessary copies or moves. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Args</td><td>Constructor argument types </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">args</td><td>Arguments to forward to event constructor </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="event__writer_8hpp_source.html#l00069">69</a> of file <a class="el" href="event__writer_8hpp_source.html">event_writer.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   69</span>                               {</div>
+<div class="line"><span class="lineno">   70</span>    manager_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a90e1c064310c6c6b5f603dfe5dbd8b06">Write</a>(T{std::forward&lt;Args&gt;(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">args</a>)...});</div>
+<div class="line"><span class="lineno">   71</span>  }</div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventManager_html_a90e1c064310c6c6b5f603dfe5dbd8b06"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a90e1c064310c6c6b5f603dfe5dbd8b06">helios::ecs::details::EventManager::Write</a></div><div class="ttdeci">void Write(const T &amp;event)</div><div class="ttdoc">Writes a single event to the current queue.</div><div class="ttdef"><b>Definition</b> <a href="event__manager_8hpp_source.html#l00288">event_manager.hpp:288</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aa5b918ab3cce380a9ac25115b9d615b1" name="aa5b918ab3cce380a9ac25115b9d615b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5b918ab3cce380a9ac25115b9d615b1">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;EventTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1EventWriter.html">EventWriter</a> &amp; <a class="el" href="classhelios_1_1ecs_1_1EventWriter.html">helios::ecs::EventWriter</a>&lt; T &gt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">::operator</a>= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1EventWriter.html">EventWriter</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac38529461f5dc16452b264241288222a" name="ac38529461f5dc16452b264241288222a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac38529461f5dc16452b264241288222a">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;EventTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="classhelios_1_1ecs_1_1EventWriter.html">EventWriter</a> &amp; <a class="el" href="classhelios_1_1ecs_1_1EventWriter.html">helios::ecs::EventWriter</a>&lt; T &gt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">::operator</a>= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1EventWriter.html">EventWriter</a>&lt; T &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a49800624c2338552dc91e8f5db3025e4" name="a49800624c2338552dc91e8f5db3025e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49800624c2338552dc91e8f5db3025e4">&#9670;&#160;</a></span>Write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;EventTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a> <a class="el" href="classhelios_1_1ecs_1_1EventWriter.html">helios::ecs::EventWriter</a>&lt; T &gt;::Write </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> T &amp;&#160;</td>
+          <td class="paramname"><em>event</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Writes a single event (copy). </p>
+<p>Copies the event into the current event queue. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">event</td><td>Event to write </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="event__writer_8hpp_source.html#l00047">47</a> of file <a class="el" href="event__writer_8hpp_source.html">event_writer.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   47</span>{ manager_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a90e1c064310c6c6b5f603dfe5dbd8b06">Write</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a>); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a087e6e17f3279ed85bf7157b72f0c9f6" name="a087e6e17f3279ed85bf7157b72f0c9f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a087e6e17f3279ed85bf7157b72f0c9f6">&#9670;&#160;</a></span>WriteBulk()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;EventTrait T&gt; </div>
+<div class="memtemplate">
+template&lt;std::ranges::sized_range R&gt; <br />
+requires std::same_as&lt;std::ranges::range_value_t&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">R</a>&gt;, T&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a> <a class="el" href="classhelios_1_1ecs_1_1EventWriter.html">helios::ecs::EventWriter</a>&lt; T &gt;::WriteBulk </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">R</a> &amp;&#160;</td>
+          <td class="paramname"><em>events</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Writes multiple events to the queue in bulk. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">R</td><td>Range of events </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">events</td><td>Range of events to store </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="event__writer_8hpp_source.html#l00056">56</a> of file <a class="el" href="event__writer_8hpp_source.html">event_writer.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   56</span>                                  {</div>
+<div class="line"><span class="lineno">   57</span>    manager_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#aef70988c5b8c409cb8e3e4989551814e">WriteBulk</a>(events);</div>
+<div class="line"><span class="lineno">   58</span>  }</div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventManager_html_aef70988c5b8c409cb8e3e4989551814e"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventManager.html#aef70988c5b8c409cb8e3e4989551814e">helios::ecs::details::EventManager::WriteBulk</a></div><div class="ttdeci">void WriteBulk(const R &amp;events)</div><div class="ttdoc">Writes multiple events to the queue in bulk.</div><div class="ttdef"><b>Definition</b> <a href="event__manager_8hpp_source.html#l00297">event_manager.hpp:297</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehelios.html">helios</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1ecs.html">ecs</a></li><li class="navelem"><a class="el" href="classhelios_1_1ecs_1_1EventWriter.html">EventWriter</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

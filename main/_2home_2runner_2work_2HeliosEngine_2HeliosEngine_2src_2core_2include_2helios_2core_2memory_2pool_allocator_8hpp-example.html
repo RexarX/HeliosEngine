@@ -1,0 +1,684 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: /home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/pool_allocator.hpp</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2pool_allocator_8hpp-example.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/pool_allocator.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<p>Creates a pool allocator sized for type T.</p>
+<p>Creates a pool allocator sized for type T. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Type to allocate </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">block_count</td><td>Number of blocks to allocate </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>PoolAllocator configured for type T</dd></dl>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> pool = PoolAllocator::ForType&lt;Entity&gt;(1000);</div>
+</div><!-- fragment --><div class="fragment"><div class="line"><span class="preprocessor">#pragma once</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="core__pch_8hpp.html">helios/core_pch.hpp</a>&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="assert_8hpp.html">helios/core/assert.hpp</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="logger_8hpp.html">helios/core/logger.hpp</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="allocator__traits_8hpp.html">helios/core/memory/allocator_traits.hpp</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="memory_2common_8hpp.html">helios/core/memory/common.hpp</a>&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;algorithm&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;atomic&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;concepts&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;cstddef&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;cstring&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1memory.html">helios::memory</a> {</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief Pool allocator for fixed-size allocations.</span></div>
+<div class="line"><span class="comment"> * @details Allocates objects of a fixed size from a pre-allocated pool.</span></div>
+<div class="line"><span class="comment"> * Extremely efficient for scenarios where many objects of the same size</span></div>
+<div class="line"><span class="comment"> * are allocated and deallocated frequently.</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * Uses a lock-free free list to track available slots. Each free slot stores</span></div>
+<div class="line"><span class="comment"> * a pointer to the next free slot, forming a linked list through the free blocks.</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * Supports proper deallocation and reuse of freed blocks.</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * Uses lock-free atomic operations for allocation/deallocation, providing</span></div>
+<div class="line"><span class="comment"> * excellent performance in multi-threaded scenarios.</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * @note Thread-safe with lock-free operations.</span></div>
+<div class="line"><span class="comment"> * All allocations must be the same size (or smaller than block_size).</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">class </span>PoolAllocator final {</div>
+<div class="line"><span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Creates a pool allocator sized for type T.</span></div>
+<div class="line"><span class="comment">   * @tparam T Type to allocate</span></div>
+<div class="line"><span class="comment">   * @param block_count Number of blocks to allocate</span></div>
+<div class="line"><span class="comment">   * @return PoolAllocator configured for type T</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * @example</span></div>
+<div class="line"><span class="comment">   * @code</span></div>
+<div class="line"><span class="comment">   * auto pool = PoolAllocator::ForType&lt;Entity&gt;(1000);</span></div>
+<div class="line"><span class="comment">   * @endcode</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line">  [[nodiscard]] <span class="keyword">static</span> PoolAllocator <a id="a0" name="a0"></a><a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#a415c374f724c6f7585eee94b120a248e">ForType</a>(<span class="keywordtype">size_t</span> block_count) {</div>
+<div class="line">    <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> min_alignment = <span class="keyword">alignof</span>(<span class="keywordtype">void</span>*);</div>
+<div class="line">    <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> type_alignment = <span class="keyword">alignof</span>(T);</div>
+<div class="line">    <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> alignment = type_alignment &gt; min_alignment ? type_alignment : min_alignment;</div>
+<div class="line">    <span class="keywordflow">return</span> {<span class="keyword">sizeof</span>(T), block_count, alignment};</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Constructs a pool allocator.</span></div>
+<div class="line"><span class="comment">   * @warning Triggers assertion in next cases:</span></div>
+<div class="line"><span class="comment">   * - Block count is 0.</span></div>
+<div class="line"><span class="comment">   * - Alignment is not a power of 2.</span></div>
+<div class="line"><span class="comment">   * - Alignment is less than alignof(void*).</span></div>
+<div class="line"><span class="comment">   * @param block_size Size of each block in bytes (minimum 8 bytes for free list pointer)</span></div>
+<div class="line"><span class="comment">   * @param block_count Number of blocks to allocate</span></div>
+<div class="line"><span class="comment">   * @param alignment Alignment for each block (must be power of 2)</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  PoolAllocator(<span class="keywordtype">size_t</span> block_size, <span class="keywordtype">size_t</span> block_count, <span class="keywordtype">size_t</span> alignment = <a id="a1" name="a1"></a><a class="code hl_variable" href="namespacehelios_1_1memory.html#a14c84d27b0af2a3d13d38b2d9f6225c4">kDefaultAlignment</a>);</div>
+<div class="line">  PoolAllocator(<span class="keyword">const</span> PoolAllocator&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line">  PoolAllocator(PoolAllocator&amp;&amp; other) <span class="keyword">noexcept</span>;</div>
+<div class="line">  <a id="a2" name="a2"></a><a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#a717e39b4d077411f9f9ad4f21c4a9268">~PoolAllocator</a>() <span class="keyword">noexcept</span>;</div>
+<div class="line"> </div>
+<div class="line">  PoolAllocator&amp; <a id="a3" name="a3"></a><a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#a99d47963147f6a66fd3729e90b34a1e4">operator=</a>(<span class="keyword">const</span> PoolAllocator&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line">  PoolAllocator&amp; <a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#a99d47963147f6a66fd3729e90b34a1e4">operator=</a>(PoolAllocator&amp;&amp; other) <span class="keyword">noexcept</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Allocates a block from the pool.</span></div>
+<div class="line"><span class="comment">   * @note Size is ignored but kept for interface compatibility.</span></div>
+<div class="line"><span class="comment">   * @warning Triggers assertion if size exceeds block_size.</span></div>
+<div class="line"><span class="comment">   * @param size Number of bytes to allocate (must be &lt;= block_size)</span></div>
+<div class="line"><span class="comment">   * @return AllocationResult with pointer and actual allocated size, or {nullptr, 0} on failure</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] AllocationResult <a id="a4" name="a4"></a><a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#a0cc575ad01b3ff6e9ee6f826a7108026">Allocate</a>(<span class="keywordtype">size_t</span> size) <span class="keyword">noexcept</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Allocates memory for a single object of type T.</span></div>
+<div class="line"><span class="comment">   * @details Convenience function that allocates a single block for type T.</span></div>
+<div class="line"><span class="comment">   * The returned memory is uninitialized - use placement new to construct the object.</span></div>
+<div class="line"><span class="comment">   * @warning Triggers assertion if sizeof(T) exceeds block_size.</span></div>
+<div class="line"><span class="comment">   * @tparam T Type to allocate memory for</span></div>
+<div class="line"><span class="comment">   * @return Pointer to allocated memory, or nullptr on failure</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * @example</span></div>
+<div class="line"><span class="comment">   * @code</span></div>
+<div class="line"><span class="comment">   * auto pool = PoolAllocator::ForType&lt;Entity&gt;(100);</span></div>
+<div class="line"><span class="comment">   * Entity* ptr = pool.Allocate&lt;Entity&gt;();</span></div>
+<div class="line"><span class="comment">   * if (ptr != nullptr) {</span></div>
+<div class="line"><span class="comment">   *   new (ptr) Entity(42);</span></div>
+<div class="line"><span class="comment">   * }</span></div>
+<div class="line"><span class="comment">   * @endcode</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line">  [[nodiscard]] T* <a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#a0cc575ad01b3ff6e9ee6f826a7108026">Allocate</a>() <span class="keyword">noexcept</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Allocates and constructs a single object of type T.</span></div>
+<div class="line"><span class="comment">   * @details Convenience function that allocates memory and constructs the object in-place.</span></div>
+<div class="line"><span class="comment">   * @warning Triggers assertion if sizeof(T) exceeds block_size.</span></div>
+<div class="line"><span class="comment">   * @tparam T Type to allocate and construct</span></div>
+<div class="line"><span class="comment">   * @tparam Args Constructor argument types</span></div>
+<div class="line"><span class="comment">   * @param args Arguments to forward to T&#39;s constructor</span></div>
+<div class="line"><span class="comment">   * @return Pointer to constructed object, or nullptr on allocation failure</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * @example</span></div>
+<div class="line"><span class="comment">   * @code</span></div>
+<div class="line"><span class="comment">   * auto pool = PoolAllocator::ForType&lt;MyVec3&gt;(100);</span></div>
+<div class="line"><span class="comment">   * auto* vec = pool.AllocateAndConstruct&lt;MyVec3&gt;(1.0f, 2.0f, 3.0f);</span></div>
+<div class="line"><span class="comment">   * @endcode</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... Args&gt;</div>
+<div class="line">    <span class="keyword">requires</span> std::constructible_from&lt;T, Args...&gt;</div>
+<div class="line">  [[nodiscard]] T* <a id="a5" name="a5"></a><a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#ac3c9fb7ec26db14c697c01d7c78eb4ac">AllocateAndConstruct</a>(Args&amp;&amp;... args) <span class="keyword">noexcept</span>(std::is_nothrow_constructible_v&lt;T, Args...&gt;);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Deallocates a block back to the pool.</span></div>
+<div class="line"><span class="comment">   * @note Returns the block to the free list for reuse.</span></div>
+<div class="line"><span class="comment">   * @warning Triggers assertion if pointer does not belong to this pool.</span></div>
+<div class="line"><span class="comment">   * @param ptr Pointer to deallocate (must have been allocated from this pool)</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a6" name="a6"></a><a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#aac9e6ccf85099b0e27eafaa0212e783c">Deallocate</a>(<span class="keywordtype">void</span>* ptr) <span class="keyword">noexcept</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Resets the pool, making all blocks available.</span></div>
+<div class="line"><span class="comment">   * @details Rebuilds the free list, invalidating all current allocations.</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a7" name="a7"></a><a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#adcc416a19e8fa0f0c684ad298251dc18">Reset</a>() <span class="keyword">noexcept</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Checks if the allocator is full.</span></div>
+<div class="line"><span class="comment">   * @return True if all blocks are allocated</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">bool</span> <a id="a8" name="a8"></a><a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#a27640a2c03a23943a55efd7d4defa615">Full</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> free_block_count_.load(std::memory_order_acquire) == 0; }</div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">bool</span> <a id="a9" name="a9"></a><a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#a0660899f3aa78e517550ddec2a3d4a3a">Empty</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line">    <span class="keywordflow">return</span> free_block_count_.load(std::memory_order_acquire) == block_count_;</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Checks if a pointer belongs to this pool.</span></div>
+<div class="line"><span class="comment">   * @param ptr Pointer to check</span></div>
+<div class="line"><span class="comment">   * @return True if pointer is within pool&#39;s memory range</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">bool</span> <a id="a10" name="a10"></a><a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#a85684fc965513e7398cf3c64446ae1da">Owns</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* ptr) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Gets current allocator statistics.</span></div>
+<div class="line"><span class="comment">   * @return AllocatorStats with current usage information</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] AllocatorStats <a id="a11" name="a11"></a><a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#af9ad781edde29cd984366d7ca359844e">Stats</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Gets the block size.</span></div>
+<div class="line"><span class="comment">   * @return Block size in bytes</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">size_t</span> <a id="a12" name="a12"></a><a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#aea4151dd96443577b939cda699045ff0">BlockSize</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> block_size_; }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Gets the block count.</span></div>
+<div class="line"><span class="comment">   * @return Total number of blocks</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">size_t</span> <a id="a13" name="a13"></a><a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#aee9af9d909447a9d5ee2f4103adc4ebf">BlockCount</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> block_count_; }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Gets the total capacity of the pool.</span></div>
+<div class="line"><span class="comment">   * @return Capacity in bytes</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">size_t</span> <a id="a14" name="a14"></a><a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#a0d2c991272a39ff3b0d2ccfd5e2f068d">Capacity</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> capacity_; }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Gets the number of free blocks.</span></div>
+<div class="line"><span class="comment">   * @return Number of blocks available for allocation</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">size_t</span> <a id="a15" name="a15"></a><a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#ae5392ee13ff651d35b0a6c5d3170d6bc">FreeBlockCount</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> free_block_count_.load(std::memory_order_acquire); }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Gets the number of used blocks.</span></div>
+<div class="line"><span class="comment">   * @return Number of blocks currently allocated</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">size_t</span> <a id="a16" name="a16"></a><a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#ac20939d3ca3e86706eeb45269162d8b5">UsedBlockCount</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line">    <span class="keywordflow">return</span> block_count_ - free_block_count_.load(std::memory_order_acquire);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:<span class="comment"></span></div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Initializes the free list.</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keywordtype">void</span> InitializeFreeList() <span class="keyword">noexcept</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordtype">void</span>* buffer_ = <span class="keyword">nullptr</span>;                             <span class="comment">///&lt; Underlying memory buffer</span></div>
+<div class="line">  <span class="keywordtype">void</span>* free_list_head_ = <span class="keyword">nullptr</span>;                     <span class="comment">///&lt; Head of free list</span></div>
+<div class="line">  <span class="keywordtype">size_t</span> block_size_ = 0;                              <span class="comment">///&lt; Size of each block</span></div>
+<div class="line">  <span class="keywordtype">size_t</span> block_count_ = 0;                             <span class="comment">///&lt; Total number of blocks</span></div>
+<div class="line">  <span class="keywordtype">size_t</span> capacity_ = 0;                                <span class="comment">///&lt; Total capacity in bytes</span></div>
+<div class="line">  <span class="keywordtype">size_t</span> alignment_ = 0;                               <span class="comment">///&lt; Alignment of blocks</span></div>
+<div class="line">  std::atomic&lt;void*&gt; free_list_head_atomic_{<span class="keyword">nullptr</span>};  <span class="comment">///&lt; Atomic head of free list for lock-free operations</span></div>
+<div class="line">  std::atomic&lt;size_t&gt; free_block_count_{0};            <span class="comment">///&lt; Number of free blocks</span></div>
+<div class="line">  std::atomic&lt;size_t&gt; peak_used_blocks_{0};            <span class="comment">///&lt; Peak number of used blocks</span></div>
+<div class="line">  std::atomic&lt;size_t&gt; total_allocations_{0};           <span class="comment">///&lt; Total allocations made</span></div>
+<div class="line">  std::atomic&lt;size_t&gt; total_deallocations_{0};         <span class="comment">///&lt; Total deallocations made</span></div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">inline</span> <a id="a17" name="a17"></a><a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#a7a39c9b3d8f2333fb7712ddbc0e2f7aa">PoolAllocator::PoolAllocator</a>(<span class="keywordtype">size_t</span> block_size, <span class="keywordtype">size_t</span> block_count, <span class="keywordtype">size_t</span> alignment)</div>
+<div class="line">    : block_size_(std::max(block_size, <span class="keyword">sizeof</span>(<span class="keywordtype">void</span>*))),  <span class="comment">// Minimum size for free list pointer</span></div>
+<div class="line">      block_count_(block_count),</div>
+<div class="line">      alignment_(alignment),</div>
+<div class="line">      free_block_count_{block_count} {</div>
+<div class="line">  <a id="a18" name="a18"></a><a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(block_count_ &gt; 0, <span class="stringliteral">&quot;Failed to construct PoolAllocator: block_count must be greater than 0!, got &#39;{}&#39;&quot;</span>,</div>
+<div class="line">                block_count_);</div>
+<div class="line">  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a id="a19" name="a19"></a><a class="code hl_function" href="namespacehelios_1_1memory.html#a443dc78a3e9ae9f92bba519395020b3e">IsPowerOfTwo</a>(alignment), <span class="stringliteral">&quot;Failed to construct PoolAllocator: alignment must be power of 2, got &#39;{}&#39;!&quot;</span>,</div>
+<div class="line">                alignment);</div>
+<div class="line">  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(alignment &gt;= <span class="keyword">alignof</span>(<span class="keywordtype">void</span>*),</div>
+<div class="line">                <span class="stringliteral">&quot;Failed to construct PoolAllocator: alignment must be at least &#39;{}&#39;, got &#39;{}&#39;!&quot;</span>, <span class="keyword">alignof</span>(<span class="keywordtype">void</span>*),</div>
+<div class="line">                alignment);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Align block size to alignment</span></div>
+<div class="line">  block_size_ = <a id="a20" name="a20"></a><a class="code hl_function" href="namespacehelios_1_1memory.html#a2d894713b466844926e8b24892da0877">AlignUp</a>(block_size_, alignment_);</div>
+<div class="line">  capacity_ = block_size_ * block_count_;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Allocate aligned buffer</span></div>
+<div class="line">  buffer_ = <a id="a21" name="a21"></a><a class="code hl_function" href="namespacehelios_1_1memory.html#a175355e873ce053598f865a5a0241f94">AlignedAlloc</a>(alignment_, capacity_);</div>
+<div class="line">  <a id="a22" name="a22"></a><a class="code hl_define" href="assert_8hpp.html#a8b8608656bafeab9911c16dce4827a04">HELIOS_VERIFY</a>(buffer_ != <span class="keyword">nullptr</span>, <span class="stringliteral">&quot;Failed to construct PoolAllocator: Allocation of buffer failed!&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">  InitializeFreeList();</div>
+<div class="line">  free_list_head_atomic_.store(free_list_head_, std::memory_order_release);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">inline</span> <a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#a7a39c9b3d8f2333fb7712ddbc0e2f7aa">PoolAllocator::PoolAllocator</a>(PoolAllocator&amp;&amp; other) noexcept</div>
+<div class="line">    : buffer_(other.buffer_),</div>
+<div class="line">      free_list_head_(other.free_list_head_),</div>
+<div class="line">      block_size_(other.block_size_),</div>
+<div class="line">      block_count_(other.block_count_),</div>
+<div class="line">      capacity_(other.capacity_),</div>
+<div class="line">      alignment_(other.alignment_),</div>
+<div class="line">      free_list_head_atomic_{other.free_list_head_atomic_.load(std::memory_order_acquire)},</div>
+<div class="line">      free_block_count_{other.free_block_count_.load(std::memory_order_acquire)},</div>
+<div class="line">      peak_used_blocks_{other.peak_used_blocks_.load(std::memory_order_acquire)},</div>
+<div class="line">      total_allocations_{other.total_allocations_.load(std::memory_order_acquire)},</div>
+<div class="line">      total_deallocations_{other.total_deallocations_.load(std::memory_order_acquire)} {</div>
+<div class="line">  other.buffer_ = <span class="keyword">nullptr</span>;</div>
+<div class="line">  other.free_list_head_ = <span class="keyword">nullptr</span>;</div>
+<div class="line">  other.block_size_ = 0;</div>
+<div class="line">  other.block_count_ = 0;</div>
+<div class="line">  other.capacity_ = 0;</div>
+<div class="line">  other.alignment_ = 0;</div>
+<div class="line">  other.free_list_head_atomic_.store(<span class="keyword">nullptr</span>, std::memory_order_release);</div>
+<div class="line">  other.free_block_count_.store(0, std::memory_order_release);</div>
+<div class="line">  other.peak_used_blocks_.store(0, std::memory_order_release);</div>
+<div class="line">  other.total_allocations_.store(0, std::memory_order_release);</div>
+<div class="line">  other.total_deallocations_.store(0, std::memory_order_release);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">inline</span> <a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#a717e39b4d077411f9f9ad4f21c4a9268">PoolAllocator::~PoolAllocator</a>() <span class="keyword">noexcept</span> {</div>
+<div class="line">  <span class="keywordflow">if</span> (buffer_ != <span class="keyword">nullptr</span>) {</div>
+<div class="line">    <a id="a23" name="a23"></a><a class="code hl_function" href="namespacehelios_1_1memory.html#abbe59f6529258733707c209398f9a30f">AlignedFree</a>(buffer_);</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">inline</span> PoolAllocator&amp; <a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#a99d47963147f6a66fd3729e90b34a1e4">PoolAllocator::operator=</a>(PoolAllocator&amp;&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line">  <span class="keywordflow">if</span> (<span class="keyword">this</span> == &amp;other) [[unlikely]] {</div>
+<div class="line">    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Free current buffer</span></div>
+<div class="line">  <span class="keywordflow">if</span> (buffer_ != <span class="keyword">nullptr</span>) {</div>
+<div class="line">    <a class="code hl_function" href="namespacehelios_1_1memory.html#abbe59f6529258733707c209398f9a30f">AlignedFree</a>(buffer_);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Move from other</span></div>
+<div class="line">  buffer_ = other.buffer_;</div>
+<div class="line">  free_list_head_ = other.free_list_head_;</div>
+<div class="line">  block_size_ = other.block_size_;</div>
+<div class="line">  block_count_ = other.block_count_;</div>
+<div class="line">  capacity_ = other.capacity_;</div>
+<div class="line">  alignment_ = other.alignment_;</div>
+<div class="line">  free_list_head_atomic_.store(other.free_list_head_atomic_.load(std::memory_order_acquire), std::memory_order_release);</div>
+<div class="line">  free_block_count_.store(other.free_block_count_.load(std::memory_order_acquire), std::memory_order_release);</div>
+<div class="line">  peak_used_blocks_.store(other.peak_used_blocks_.load(std::memory_order_acquire), std::memory_order_release);</div>
+<div class="line">  total_allocations_.store(other.total_allocations_.load(std::memory_order_acquire), std::memory_order_release);</div>
+<div class="line">  total_deallocations_.store(other.total_deallocations_.load(std::memory_order_acquire), std::memory_order_release);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Reset other</span></div>
+<div class="line">  other.buffer_ = <span class="keyword">nullptr</span>;</div>
+<div class="line">  other.free_list_head_ = <span class="keyword">nullptr</span>;</div>
+<div class="line">  other.block_size_ = 0;</div>
+<div class="line">  other.block_count_ = 0;</div>
+<div class="line">  other.capacity_ = 0;</div>
+<div class="line">  other.alignment_ = 0;</div>
+<div class="line">  other.free_list_head_atomic_.store(<span class="keyword">nullptr</span>, std::memory_order_release);</div>
+<div class="line">  other.free_block_count_.store(0, std::memory_order_release);</div>
+<div class="line">  other.peak_used_blocks_.store(0, std::memory_order_release);</div>
+<div class="line">  other.total_allocations_.store(0, std::memory_order_release);</div>
+<div class="line">  other.total_deallocations_.store(0, std::memory_order_release);</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">inline</span> AllocationResult <a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#a0cc575ad01b3ff6e9ee6f826a7108026">PoolAllocator::Allocate</a>(<span class="keywordtype">size_t</span> size) <span class="keyword">noexcept</span> {</div>
+<div class="line">  <span class="keywordflow">if</span> (size == 0) [[unlikely]] {</div>
+<div class="line">    <span class="keywordflow">return</span> {.ptr = <span class="keyword">nullptr</span>, .allocated_size = 0};</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(size &lt;= block_size_, <span class="stringliteral">&quot;Failed to allocate memory: size &#39;{}&#39; exceeds block size &#39;{}&#39;!&quot;</span>, size,</div>
+<div class="line">                block_size_);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Lock-free allocation using compare-and-swap</span></div>
+<div class="line">  <span class="keywordtype">void</span>* old_head = free_list_head_atomic_.load(std::memory_order_acquire);</div>
+<div class="line">  <span class="keywordtype">void</span>* new_head = <span class="keyword">nullptr</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">do</span> {</div>
+<div class="line">    <span class="comment">// Check if we have free blocks</span></div>
+<div class="line">    <span class="keywordflow">if</span> (old_head == <span class="keyword">nullptr</span>) {</div>
+<div class="line">      <span class="keywordflow">return</span> {.ptr = <span class="keyword">nullptr</span>, .allocated_size = 0};</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Read the next pointer from the old head</span></div>
+<div class="line">    new_head = *<span class="keyword">reinterpret_cast&lt;</span><span class="keywordtype">void</span>**<span class="keyword">&gt;</span>(old_head);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Try to atomically update the head pointer</span></div>
+<div class="line">  } <span class="keywordflow">while</span> (!free_list_head_atomic_.compare_exchange_weak(old_head, new_head, std::memory_order_release,</div>
+<div class="line">                                                         std::memory_order_acquire));</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Successfully allocated - update counters</span></div>
+<div class="line">  free_block_count_.fetch_sub(1, std::memory_order_relaxed);</div>
+<div class="line">  total_allocations_.fetch_add(1, std::memory_order_relaxed);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Update peak usage</span></div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">size_t</span> used_blocks = block_count_ - free_block_count_.load(std::memory_order_relaxed);</div>
+<div class="line">  <span class="keywordtype">size_t</span> current_peak = peak_used_blocks_.load(std::memory_order_acquire);</div>
+<div class="line">  <span class="keywordflow">while</span> (used_blocks &gt; current_peak) {</div>
+<div class="line">    <span class="keywordflow">if</span> (peak_used_blocks_.compare_exchange_weak(current_peak, used_blocks, std::memory_order_release,</div>
+<div class="line">                                                std::memory_order_acquire)) {</div>
+<div class="line">      <span class="keywordflow">break</span>;</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">return</span> {old_head, block_size_};</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#aac9e6ccf85099b0e27eafaa0212e783c">PoolAllocator::Deallocate</a>(<span class="keywordtype">void</span>* ptr) <span class="keyword">noexcept</span> {</div>
+<div class="line">  <span class="keywordflow">if</span> (ptr == <span class="keyword">nullptr</span>) [[unlikely]] {</div>
+<div class="line">    <span class="keywordflow">return</span>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(Owns(ptr), <span class="stringliteral">&quot;Failed to deallocate memory: ptr does not belong to this pool!&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Lock-free deallocation using compare-and-swap</span></div>
+<div class="line">  <span class="keywordtype">void</span>* old_head = free_list_head_atomic_.load(std::memory_order_acquire);</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">do</span> {</div>
+<div class="line">    <span class="comment">// Set the next pointer of the block to the current head</span></div>
+<div class="line">    *<span class="keyword">reinterpret_cast&lt;</span><span class="keywordtype">void</span>**<span class="keyword">&gt;</span>(ptr) = old_head;</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Try to atomically update the head pointer</span></div>
+<div class="line">  } <span class="keywordflow">while</span> (!free_list_head_atomic_.compare_exchange_weak(old_head, ptr, std::memory_order_release,</div>
+<div class="line">                                                         std::memory_order_acquire));</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Successfully deallocated - update counters</span></div>
+<div class="line">  free_block_count_.fetch_add(1, std::memory_order_relaxed);</div>
+<div class="line">  total_deallocations_.fetch_add(1, std::memory_order_relaxed);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#adcc416a19e8fa0f0c684ad298251dc18">PoolAllocator::Reset</a>() <span class="keyword">noexcept</span> {</div>
+<div class="line">  InitializeFreeList();</div>
+<div class="line">  free_list_head_atomic_.store(free_list_head_, std::memory_order_release);</div>
+<div class="line">  free_block_count_.store(block_count_, std::memory_order_release);</div>
+<div class="line">  <span class="comment">// Don&#39;t reset peak stats</span></div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#a85684fc965513e7398cf3c64446ae1da">PoolAllocator::Owns</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* ptr) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line">  <span class="keywordflow">if</span> (ptr == <span class="keyword">nullptr</span> || buffer_ == <span class="keyword">nullptr</span>) {</div>
+<div class="line">    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">const</span> <span class="keyword">auto</span> addr = <span class="keyword">reinterpret_cast&lt;</span>uintptr_t<span class="keyword">&gt;</span>(ptr);</div>
+<div class="line">  <span class="keyword">const</span> <span class="keyword">auto</span> start = <span class="keyword">reinterpret_cast&lt;</span>uintptr_t<span class="keyword">&gt;</span>(buffer_);</div>
+<div class="line">  <span class="keyword">const</span> <span class="keyword">auto</span> end = start + capacity_;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">return</span> addr &gt;= start &amp;&amp; addr &lt; end;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">inline</span> AllocatorStats <a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#af9ad781edde29cd984366d7ca359844e">PoolAllocator::Stats</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">size_t</span> free_blocks = free_block_count_.load(std::memory_order_acquire);</div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">size_t</span> used_blocks = block_count_ - free_blocks;</div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">size_t</span> used_bytes = used_blocks * block_size_;</div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">size_t</span> peak_blocks = peak_used_blocks_.load(std::memory_order_acquire);</div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">size_t</span> peak_bytes = peak_blocks * block_size_;</div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">size_t</span> total_allocs = total_allocations_.load(std::memory_order_acquire);</div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">size_t</span> total_deallocs = total_deallocations_.load(std::memory_order_acquire);</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">return</span> {</div>
+<div class="line">      .<a id="a24" name="a24"></a><a class="code hl_variable" href="structhelios_1_1memory_1_1AllocatorStats.html#abf57f1d0bc4c9cc61f83276735e27a1e">total_allocated</a> = used_bytes,</div>
+<div class="line">      .total_freed = 0,</div>
+<div class="line">      .peak_usage = peak_bytes,</div>
+<div class="line">      .allocation_count = used_blocks,</div>
+<div class="line">      .total_allocations = total_allocs,</div>
+<div class="line">      .total_deallocations = total_deallocs,</div>
+<div class="line">      .alignment_waste = 0,</div>
+<div class="line">  };</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">void</span> PoolAllocator::InitializeFreeList() <span class="keyword">noexcept</span> {</div>
+<div class="line">  <span class="comment">// Build free list by linking all blocks</span></div>
+<div class="line">  <span class="keyword">auto</span>* current = <span class="keyword">static_cast&lt;</span>uint8_t*<span class="keyword">&gt;</span>(buffer_);</div>
+<div class="line">  free_list_head_ = current;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; block_count_ - 1; ++i) {</div>
+<div class="line">    uint8_t* next = current + block_size_;</div>
+<div class="line">    *<span class="keyword">reinterpret_cast&lt;</span><span class="keywordtype">void</span>**<span class="keyword">&gt;</span>(current) = next;</div>
+<div class="line">    current = next;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Last block points to nullptr</span></div>
+<div class="line">  *<span class="keyword">reinterpret_cast&lt;</span><span class="keywordtype">void</span>**<span class="keyword">&gt;</span>(current) = <span class="keyword">nullptr</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Initialize atomic free list head</span></div>
+<div class="line">  free_list_head_atomic_.store(free_list_head_, std::memory_order_release);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><span class="keyword">inline</span> T* <a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#a0cc575ad01b3ff6e9ee6f826a7108026">PoolAllocator::Allocate</a>() <span class="keyword">noexcept</span> {</div>
+<div class="line">  <span class="keyword">auto</span> result = <a id="a25" name="a25"></a><a class="code hl_function" href="namespacehelios_1_1memory.html#ace74b72484caaa07fedc5e4f67e6282a">Allocate</a>(<span class="keyword">sizeof</span>(T));</div>
+<div class="line">  <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(result.ptr);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... Args&gt;</div>
+<div class="line">  <span class="keyword">requires</span> std::constructible_from&lt;T, Args...&gt;</div>
+<div class="line"><span class="keyword">inline</span> T* <a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#ac3c9fb7ec26db14c697c01d7c78eb4ac">PoolAllocator::AllocateAndConstruct</a>(Args&amp;&amp;... args) <span class="keyword">noexcept</span>(std::is_nothrow_constructible_v&lt;T, Args...&gt;) {</div>
+<div class="line">  T* ptr = Allocate&lt;T&gt;();</div>
+<div class="line">  <span class="keywordflow">if</span> (ptr != <span class="keyword">nullptr</span>) {</div>
+<div class="line">    ::new (<span class="keyword">static_cast&lt;</span><span class="keywordtype">void</span>*<span class="keyword">&gt;</span>(ptr)) T(std::forward&lt;Args&gt;(args)...);</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">return</span> ptr;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">}  <span class="comment">// namespace helios::memory</span></div>
+<div class="ttc" id="aallocator__traits_8hpp_html"><div class="ttname"><a href="allocator__traits_8hpp.html">allocator_traits.hpp</a></div></div>
+<div class="ttc" id="aassert_8hpp_html"><div class="ttname"><a href="assert_8hpp.html">assert.hpp</a></div></div>
+<div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00149">assert.hpp:149</a></div></div>
+<div class="ttc" id="aassert_8hpp_html_a8b8608656bafeab9911c16dce4827a04"><div class="ttname"><a href="assert_8hpp.html#a8b8608656bafeab9911c16dce4827a04">HELIOS_VERIFY</a></div><div class="ttdeci">#define HELIOS_VERIFY(condition,...)</div><div class="ttdoc">Verify macro that always checks the condition.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00205">assert.hpp:205</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1PoolAllocator_html_a0660899f3aa78e517550ddec2a3d4a3a"><div class="ttname"><a href="classhelios_1_1memory_1_1PoolAllocator.html#a0660899f3aa78e517550ddec2a3d4a3a">helios::memory::PoolAllocator::Empty</a></div><div class="ttdeci">bool Empty() const noexcept</div><div class="ttdef"><b>Definition</b> <a href="pool__allocator_8hpp_source.html#l00142">pool_allocator.hpp:142</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1PoolAllocator_html_a0cc575ad01b3ff6e9ee6f826a7108026"><div class="ttname"><a href="classhelios_1_1memory_1_1PoolAllocator.html#a0cc575ad01b3ff6e9ee6f826a7108026">helios::memory::PoolAllocator::Allocate</a></div><div class="ttdeci">T * Allocate() noexcept</div><div class="ttdef"><b>Definition</b> <a href="pool__allocator_8hpp_source.html#l00428">pool_allocator.hpp:428</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1PoolAllocator_html_a0d2c991272a39ff3b0d2ccfd5e2f068d"><div class="ttname"><a href="classhelios_1_1memory_1_1PoolAllocator.html#a0d2c991272a39ff3b0d2ccfd5e2f068d">helios::memory::PoolAllocator::Capacity</a></div><div class="ttdeci">size_t Capacity() const noexcept</div><div class="ttdoc">Gets the total capacity of the pool.</div><div class="ttdef"><b>Definition</b> <a href="pool__allocator_8hpp_source.html#l00175">pool_allocator.hpp:175</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1PoolAllocator_html_a27640a2c03a23943a55efd7d4defa615"><div class="ttname"><a href="classhelios_1_1memory_1_1PoolAllocator.html#a27640a2c03a23943a55efd7d4defa615">helios::memory::PoolAllocator::Full</a></div><div class="ttdeci">bool Full() const noexcept</div><div class="ttdoc">Checks if the allocator is full.</div><div class="ttdef"><b>Definition</b> <a href="pool__allocator_8hpp_source.html#l00141">pool_allocator.hpp:141</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1PoolAllocator_html_a415c374f724c6f7585eee94b120a248e"><div class="ttname"><a href="classhelios_1_1memory_1_1PoolAllocator.html#a415c374f724c6f7585eee94b120a248e">helios::memory::PoolAllocator::ForType</a></div><div class="ttdeci">static PoolAllocator ForType(size_t block_count)</div><div class="ttdef"><b>Definition</b> <a href="pool__allocator_8hpp_source.html#l00050">pool_allocator.hpp:50</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1PoolAllocator_html_a717e39b4d077411f9f9ad4f21c4a9268"><div class="ttname"><a href="classhelios_1_1memory_1_1PoolAllocator.html#a717e39b4d077411f9f9ad4f21c4a9268">helios::memory::PoolAllocator::~PoolAllocator</a></div><div class="ttdeci">~PoolAllocator() noexcept</div><div class="ttdef"><b>Definition</b> <a href="pool__allocator_8hpp_source.html#l00260">pool_allocator.hpp:260</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1PoolAllocator_html_a7a39c9b3d8f2333fb7712ddbc0e2f7aa"><div class="ttname"><a href="classhelios_1_1memory_1_1PoolAllocator.html#a7a39c9b3d8f2333fb7712ddbc0e2f7aa">helios::memory::PoolAllocator::PoolAllocator</a></div><div class="ttdeci">PoolAllocator(size_t block_size, size_t block_count, size_t alignment=kDefaultAlignment)</div><div class="ttdoc">Constructs a pool allocator.</div><div class="ttdef"><b>Definition</b> <a href="pool__allocator_8hpp_source.html#l00210">pool_allocator.hpp:210</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1PoolAllocator_html_a85684fc965513e7398cf3c64446ae1da"><div class="ttname"><a href="classhelios_1_1memory_1_1PoolAllocator.html#a85684fc965513e7398cf3c64446ae1da">helios::memory::PoolAllocator::Owns</a></div><div class="ttdeci">bool Owns(const void *ptr) const noexcept</div><div class="ttdoc">Checks if a pointer belongs to this pool.</div><div class="ttdef"><b>Definition</b> <a href="pool__allocator_8hpp_source.html#l00377">pool_allocator.hpp:377</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1PoolAllocator_html_a99d47963147f6a66fd3729e90b34a1e4"><div class="ttname"><a href="classhelios_1_1memory_1_1PoolAllocator.html#a99d47963147f6a66fd3729e90b34a1e4">helios::memory::PoolAllocator::operator=</a></div><div class="ttdeci">PoolAllocator &amp; operator=(const PoolAllocator &amp;)=delete</div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1PoolAllocator_html_aac9e6ccf85099b0e27eafaa0212e783c"><div class="ttname"><a href="classhelios_1_1memory_1_1PoolAllocator.html#aac9e6ccf85099b0e27eafaa0212e783c">helios::memory::PoolAllocator::Deallocate</a></div><div class="ttdeci">void Deallocate(void *ptr) noexcept</div><div class="ttdoc">Deallocates a block back to the pool.</div><div class="ttdef"><b>Definition</b> <a href="pool__allocator_8hpp_source.html#l00347">pool_allocator.hpp:347</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1PoolAllocator_html_ac20939d3ca3e86706eeb45269162d8b5"><div class="ttname"><a href="classhelios_1_1memory_1_1PoolAllocator.html#ac20939d3ca3e86706eeb45269162d8b5">helios::memory::PoolAllocator::UsedBlockCount</a></div><div class="ttdeci">size_t UsedBlockCount() const noexcept</div><div class="ttdoc">Gets the number of used blocks.</div><div class="ttdef"><b>Definition</b> <a href="pool__allocator_8hpp_source.html#l00187">pool_allocator.hpp:187</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1PoolAllocator_html_ac3c9fb7ec26db14c697c01d7c78eb4ac"><div class="ttname"><a href="classhelios_1_1memory_1_1PoolAllocator.html#ac3c9fb7ec26db14c697c01d7c78eb4ac">helios::memory::PoolAllocator::AllocateAndConstruct</a></div><div class="ttdeci">T * AllocateAndConstruct(Args &amp;&amp;... args) noexcept(std::is_nothrow_constructible_v&lt; T, Args... &gt;)</div><div class="ttdef"><b>Definition</b> <a href="pool__allocator_8hpp_source.html#l00435">pool_allocator.hpp:435</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1PoolAllocator_html_adcc416a19e8fa0f0c684ad298251dc18"><div class="ttname"><a href="classhelios_1_1memory_1_1PoolAllocator.html#adcc416a19e8fa0f0c684ad298251dc18">helios::memory::PoolAllocator::Reset</a></div><div class="ttdeci">void Reset() noexcept</div><div class="ttdoc">Resets the pool, making all blocks available.</div><div class="ttdef"><b>Definition</b> <a href="pool__allocator_8hpp_source.html#l00370">pool_allocator.hpp:370</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1PoolAllocator_html_ae5392ee13ff651d35b0a6c5d3170d6bc"><div class="ttname"><a href="classhelios_1_1memory_1_1PoolAllocator.html#ae5392ee13ff651d35b0a6c5d3170d6bc">helios::memory::PoolAllocator::FreeBlockCount</a></div><div class="ttdeci">size_t FreeBlockCount() const noexcept</div><div class="ttdoc">Gets the number of free blocks.</div><div class="ttdef"><b>Definition</b> <a href="pool__allocator_8hpp_source.html#l00181">pool_allocator.hpp:181</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1PoolAllocator_html_aea4151dd96443577b939cda699045ff0"><div class="ttname"><a href="classhelios_1_1memory_1_1PoolAllocator.html#aea4151dd96443577b939cda699045ff0">helios::memory::PoolAllocator::BlockSize</a></div><div class="ttdeci">size_t BlockSize() const noexcept</div><div class="ttdoc">Gets the block size.</div><div class="ttdef"><b>Definition</b> <a href="pool__allocator_8hpp_source.html#l00163">pool_allocator.hpp:163</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1PoolAllocator_html_aee9af9d909447a9d5ee2f4103adc4ebf"><div class="ttname"><a href="classhelios_1_1memory_1_1PoolAllocator.html#aee9af9d909447a9d5ee2f4103adc4ebf">helios::memory::PoolAllocator::BlockCount</a></div><div class="ttdeci">size_t BlockCount() const noexcept</div><div class="ttdoc">Gets the block count.</div><div class="ttdef"><b>Definition</b> <a href="pool__allocator_8hpp_source.html#l00169">pool_allocator.hpp:169</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1PoolAllocator_html_af9ad781edde29cd984366d7ca359844e"><div class="ttname"><a href="classhelios_1_1memory_1_1PoolAllocator.html#af9ad781edde29cd984366d7ca359844e">helios::memory::PoolAllocator::Stats</a></div><div class="ttdeci">AllocatorStats Stats() const noexcept</div><div class="ttdoc">Gets current allocator statistics.</div><div class="ttdef"><b>Definition</b> <a href="pool__allocator_8hpp_source.html#l00389">pool_allocator.hpp:389</a></div></div>
+<div class="ttc" id="acore__pch_8hpp_html"><div class="ttname"><a href="core__pch_8hpp.html">core_pch.hpp</a></div></div>
+<div class="ttc" id="alogger_8hpp_html"><div class="ttname"><a href="logger_8hpp.html">logger.hpp</a></div></div>
+<div class="ttc" id="amemory_2common_8hpp_html"><div class="ttname"><a href="memory_2common_8hpp.html">common.hpp</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html"><div class="ttname"><a href="namespacehelios_1_1memory.html">helios::memory</a></div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00011">allocator_traits.hpp:11</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_a14c84d27b0af2a3d13d38b2d9f6225c4"><div class="ttname"><a href="namespacehelios_1_1memory.html#a14c84d27b0af2a3d13d38b2d9f6225c4">helios::memory::kDefaultAlignment</a></div><div class="ttdeci">constexpr size_t kDefaultAlignment</div><div class="ttdoc">Default alignment for allocations (cache line size for most modern CPUs).</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00077">allocator_traits.hpp:77</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_a175355e873ce053598f865a5a0241f94"><div class="ttname"><a href="namespacehelios_1_1memory.html#a175355e873ce053598f865a5a0241f94">helios::memory::AlignedAlloc</a></div><div class="ttdeci">void * AlignedAlloc(size_t alignment, size_t size)</div><div class="ttdoc">Allocate memory with the specified alignment.</div><div class="ttdef"><b>Definition</b> <a href="memory_2common_8hpp_source.html#l00029">common.hpp:29</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_a2d894713b466844926e8b24892da0877"><div class="ttname"><a href="namespacehelios_1_1memory.html#a2d894713b466844926e8b24892da0877">helios::memory::AlignUp</a></div><div class="ttdeci">constexpr size_t AlignUp(size_t size, size_t alignment) noexcept</div><div class="ttdoc">Helper function to align a size up to the given alignment.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00090">allocator_traits.hpp:90</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_a443dc78a3e9ae9f92bba519395020b3e"><div class="ttname"><a href="namespacehelios_1_1memory.html#a443dc78a3e9ae9f92bba519395020b3e">helios::memory::IsPowerOfTwo</a></div><div class="ttdeci">constexpr bool IsPowerOfTwo(size_t size) noexcept</div><div class="ttdoc">Helper function to check if a size is a power of 2.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00121">allocator_traits.hpp:121</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_abbe59f6529258733707c209398f9a30f"><div class="ttname"><a href="namespacehelios_1_1memory.html#abbe59f6529258733707c209398f9a30f">helios::memory::AlignedFree</a></div><div class="ttdeci">void AlignedFree(void *ptr)</div><div class="ttdoc">Free memory allocated with AlignedAlloc.</div><div class="ttdef"><b>Definition</b> <a href="memory_2common_8hpp_source.html#l00050">common.hpp:50</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_ace74b72484caaa07fedc5e4f67e6282a"><div class="ttname"><a href="namespacehelios_1_1memory.html#ace74b72484caaa07fedc5e4f67e6282a">helios::memory::Allocate</a></div><div class="ttdeci">constexpr T * Allocate(Alloc &amp;allocator) noexcept</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00182">allocator_traits.hpp:182</a></div></div>
+<div class="ttc" id="astructhelios_1_1memory_1_1AllocatorStats_html_abf57f1d0bc4c9cc61f83276735e27a1e"><div class="ttname"><a href="structhelios_1_1memory_1_1AllocatorStats.html#abf57f1d0bc4c9cc61f83276735e27a1e">helios::memory::AllocatorStats::total_allocated</a></div><div class="ttdeci">size_t total_allocated</div><div class="ttdoc">Total bytes currently allocated.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00018">allocator_traits.hpp:18</a></div></div>
+</div><!-- fragment --> </div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

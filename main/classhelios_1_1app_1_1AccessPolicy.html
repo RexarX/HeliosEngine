@@ -1,0 +1,1188 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: helios::app::AccessPolicy Class Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classhelios_1_1app_1_1AccessPolicy.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classhelios_1_1app_1_1AccessPolicy-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">helios::app::AccessPolicy Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ac0898cf263c827dd1daf1f11c9ef4f64" id="r_ac0898cf263c827dd1daf1f11c9ef4f64"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">constexpr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#ac0898cf263c827dd1daf1f11c9ef4f64">AccessPolicy</a> () <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">noexcept</a>=<a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">default</a></td></tr>
+<tr class="separator:ac0898cf263c827dd1daf1f11c9ef4f64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a847eec16867046675f76db803f6881fa" id="r_a847eec16867046675f76db803f6881fa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">constexpr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#a847eec16867046675f76db803f6881fa">AccessPolicy</a> (<a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">const</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html">AccessPolicy</a> &amp;)=<a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">default</a></td></tr>
+<tr class="separator:a847eec16867046675f76db803f6881fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8cd37821004abf03fdaf43b680f56a48" id="r_a8cd37821004abf03fdaf43b680f56a48"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">constexpr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#a8cd37821004abf03fdaf43b680f56a48">AccessPolicy</a> (<a class="el" href="classhelios_1_1app_1_1AccessPolicy.html">AccessPolicy</a> &amp;&amp;) <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">noexcept</a>=<a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">default</a></td></tr>
+<tr class="separator:a8cd37821004abf03fdaf43b680f56a48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e5a83ad774709a139ddafa7838feed3" id="r_a6e5a83ad774709a139ddafa7838feed3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">constexpr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#a6e5a83ad774709a139ddafa7838feed3">~AccessPolicy</a> ()=<a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">default</a></td></tr>
+<tr class="separator:a6e5a83ad774709a139ddafa7838feed3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa04f5632f2600803637ca68317e00612" id="r_aa04f5632f2600803637ca68317e00612"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">constexpr</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html">AccessPolicy</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#aa04f5632f2600803637ca68317e00612">operator=</a> (<a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">const</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html">AccessPolicy</a> &amp;)=<a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">default</a></td></tr>
+<tr class="separator:aa04f5632f2600803637ca68317e00612"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c106aa68581399e341366f58c6b642a" id="r_a3c106aa68581399e341366f58c6b642a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">constexpr</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html">AccessPolicy</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#a3c106aa68581399e341366f58c6b642a">operator=</a> (<a class="el" href="classhelios_1_1app_1_1AccessPolicy.html">AccessPolicy</a> &amp;&amp;) <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">noexcept</a>=<a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">default</a></td></tr>
+<tr class="separator:a3c106aa68581399e341366f58c6b642a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abdd672af7021702de8d0e043b4be252b" id="r_abdd672af7021702de8d0e043b4be252b"><td class="memTemplParams" colspan="2">template&lt;ecs::ComponentTrait... Components&gt; <br />
+requires ((ecs::ComponentTrait&lt;Components&gt; &amp;&amp; ...) &amp;&amp; utils::UniqueTypes&lt;Components...&gt;)</td></tr>
+<tr class="memitem:abdd672af7021702de8d0e043b4be252b"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">Query</a> (this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
+<tr class="memdesc:abdd672af7021702de8d0e043b4be252b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Declares a query over component types.  <br /></td></tr>
+<tr class="separator:abdd672af7021702de8d0e043b4be252b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5570f42569362cd07d2aad9cdc7339b" id="r_ac5570f42569362cd07d2aad9cdc7339b"><td class="memTemplParams" colspan="2">template&lt;ecs::ResourceTrait... Resources&gt; <br />
+requires utils::UniqueTypes&lt;Resources...&gt;</td></tr>
+<tr class="memitem:ac5570f42569362cd07d2aad9cdc7339b"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">constexpr</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">auto</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#ac5570f42569362cd07d2aad9cdc7339b">ReadResources</a> (<a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">this</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">auto</a> &amp;&amp;<a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">self</a>) -&gt; <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">decltype</a>(std::forward&lt; <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">decltype</a>(<a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">self</a>)&gt;(<a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">self</a>))</td></tr>
+<tr class="memdesc:ac5570f42569362cd07d2aad9cdc7339b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Declares read-only access to resource types.  <br /></td></tr>
+<tr class="separator:ac5570f42569362cd07d2aad9cdc7339b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb90df674f57b9b2d0a35a54c42fa58f" id="r_aeb90df674f57b9b2d0a35a54c42fa58f"><td class="memTemplParams" colspan="2">template&lt;ecs::ResourceTrait... Resources&gt; <br />
+requires utils::UniqueTypes&lt;Resources...&gt;</td></tr>
+<tr class="memitem:aeb90df674f57b9b2d0a35a54c42fa58f"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">constexpr</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">auto</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#aeb90df674f57b9b2d0a35a54c42fa58f">WriteResources</a> (<a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">this</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">auto</a> &amp;&amp;<a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">self</a>) -&gt; <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">decltype</a>(std::forward&lt; <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">decltype</a>(<a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">self</a>)&gt;(<a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">self</a>))</td></tr>
+<tr class="memdesc:aeb90df674f57b9b2d0a35a54c42fa58f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Declares write access to resource types.  <br /></td></tr>
+<tr class="separator:aeb90df674f57b9b2d0a35a54c42fa58f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fcc79296fc17cf2529412474e56d814" id="r_a9fcc79296fc17cf2529412474e56d814"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">constexpr</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#a9fcc79296fc17cf2529412474e56d814">HasQueryConflict</a> (<a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">const</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html">AccessPolicy</a> &amp;other) <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">const</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">noexcept</a></td></tr>
+<tr class="memdesc:a9fcc79296fc17cf2529412474e56d814"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if this policy has query conflict with another policy.  <br /></td></tr>
+<tr class="separator:a9fcc79296fc17cf2529412474e56d814"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe5adf44adf01eba18fddff227ebe35d" id="r_abe5adf44adf01eba18fddff227ebe35d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">constexpr</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abe5adf44adf01eba18fddff227ebe35d">HasResourceConflict</a> (<a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">const</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html">AccessPolicy</a> &amp;other) <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">const</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">noexcept</a></td></tr>
+<tr class="memdesc:abe5adf44adf01eba18fddff227ebe35d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if this policy has resource conflict with another policy.  <br /></td></tr>
+<tr class="separator:abe5adf44adf01eba18fddff227ebe35d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38d760fb0cb21d5e930e53befcfe58ce" id="r_a38d760fb0cb21d5e930e53befcfe58ce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">constexpr</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#a38d760fb0cb21d5e930e53befcfe58ce">ConflictsWith</a> (<a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">const</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html">AccessPolicy</a> &amp;other) <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">const</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">noexcept</a></td></tr>
+<tr class="memdesc:a38d760fb0cb21d5e930e53befcfe58ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if this policy conflicts with another policy.  <br /></td></tr>
+<tr class="separator:a38d760fb0cb21d5e930e53befcfe58ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a471fc44d55608e318731bcc8484436d5" id="r_a471fc44d55608e318731bcc8484436d5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">constexpr</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#a471fc44d55608e318731bcc8484436d5">HasQueries</a> () <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">const</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">noexcept</a></td></tr>
+<tr class="memdesc:a471fc44d55608e318731bcc8484436d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if this policy has any queries.  <br /></td></tr>
+<tr class="separator:a471fc44d55608e318731bcc8484436d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96b7a923964affed1e663d9cfbba8f83" id="r_a96b7a923964affed1e663d9cfbba8f83"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">constexpr</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#a96b7a923964affed1e663d9cfbba8f83">HasResources</a> () <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">const</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">noexcept</a></td></tr>
+<tr class="memdesc:a96b7a923964affed1e663d9cfbba8f83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if this policy has any resource access.  <br /></td></tr>
+<tr class="separator:a96b7a923964affed1e663d9cfbba8f83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4011b6f7107f9014c50e8311d0a2bc8" id="r_aa4011b6f7107f9014c50e8311d0a2bc8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">constexpr</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">auto</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#aa4011b6f7107f9014c50e8311d0a2bc8">GetQueries</a> () <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">const</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">noexcept</a> -&gt; std::span&lt; <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">const</a> <a class="el" href="structhelios_1_1app_1_1details_1_1QueryDescriptor.html">details::QueryDescriptor</a> &gt;</td></tr>
+<tr class="memdesc:aa4011b6f7107f9014c50e8311d0a2bc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets all declared query descriptors.  <br /></td></tr>
+<tr class="separator:aa4011b6f7107f9014c50e8311d0a2bc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfbfc0b4b1cefa279902bd05fbd08834" id="r_acfbfc0b4b1cefa279902bd05fbd08834"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">constexpr</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">auto</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#acfbfc0b4b1cefa279902bd05fbd08834">GetReadResources</a> () <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">const</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">noexcept</a> -&gt; std::span&lt; <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">const</a> <a class="el" href="structhelios_1_1app_1_1details_1_1ResourceTypeInfo.html">details::ResourceTypeInfo</a> &gt;</td></tr>
+<tr class="memdesc:acfbfc0b4b1cefa279902bd05fbd08834"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets all resource types declared for reading.  <br /></td></tr>
+<tr class="separator:acfbfc0b4b1cefa279902bd05fbd08834"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a7f2d8d9868468adae730328b76ce49" id="r_a4a7f2d8d9868468adae730328b76ce49"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">constexpr</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">auto</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#a4a7f2d8d9868468adae730328b76ce49">GetWriteResources</a> () <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">const</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">noexcept</a> -&gt; std::span&lt; <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">const</a> <a class="el" href="structhelios_1_1app_1_1details_1_1ResourceTypeInfo.html">details::ResourceTypeInfo</a> &gt;</td></tr>
+<tr class="memdesc:a4a7f2d8d9868468adae730328b76ce49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets all resource types declared for writing.  <br /></td></tr>
+<tr class="separator:a4a7f2d8d9868468adae730328b76ce49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae444556646c5eb7d2f606c6393cde35d" id="r_ae444556646c5eb7d2f606c6393cde35d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">constexpr</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#ae444556646c5eb7d2f606c6393cde35d">HasReadComponent</a> (<a class="el" href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">ecs::ComponentTypeId</a> type_id) <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">const</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">noexcept</a></td></tr>
+<tr class="memdesc:ae444556646c5eb7d2f606c6393cde35d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if this policy has the specified component type for reading.  <br /></td></tr>
+<tr class="separator:ae444556646c5eb7d2f606c6393cde35d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33794497636aadc556c7316048750031" id="r_a33794497636aadc556c7316048750031"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">constexpr</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#a33794497636aadc556c7316048750031">HasWriteComponent</a> (<a class="el" href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">ecs::ComponentTypeId</a> type_id) <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">const</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">noexcept</a></td></tr>
+<tr class="memdesc:a33794497636aadc556c7316048750031"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if this policy has the specified component type for writing.  <br /></td></tr>
+<tr class="separator:a33794497636aadc556c7316048750031"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3d0c65cc52d4fe8954424fa1ac1f430" id="r_ab3d0c65cc52d4fe8954424fa1ac1f430"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">constexpr</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#ab3d0c65cc52d4fe8954424fa1ac1f430">HasReadResource</a> (<a class="el" href="namespacehelios_1_1ecs.html#a38437d4d9f600b65f850d797f98ad6a0">ecs::ResourceTypeId</a> type_id) <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">const</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">noexcept</a></td></tr>
+<tr class="memdesc:ab3d0c65cc52d4fe8954424fa1ac1f430"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if this policy has the specified resource type for reading.  <br /></td></tr>
+<tr class="separator:ab3d0c65cc52d4fe8954424fa1ac1f430"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0300bd597b529d8b6b6867d6e9512270" id="r_a0300bd597b529d8b6b6867d6e9512270"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">constexpr</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#a0300bd597b529d8b6b6867d6e9512270">HasWriteResource</a> (<a class="el" href="namespacehelios_1_1ecs.html#a38437d4d9f600b65f850d797f98ad6a0">ecs::ResourceTypeId</a> type_id) <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">const</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">noexcept</a></td></tr>
+<tr class="memdesc:a0300bd597b529d8b6b6867d6e9512270"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if this policy has the specified resource type for writing.  <br /></td></tr>
+<tr class="separator:a0300bd597b529d8b6b6867d6e9512270"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2system_8hpp-example.html#_a3">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/system.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00116">116</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ac0898cf263c827dd1daf1f11c9ef4f64" name="ac0898cf263c827dd1daf1f11c9ef4f64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0898cf263c827dd1daf1f11c9ef4f64">&#9670;&#160;</a></span>AccessPolicy() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">constexpr</a> helios::app::AccessPolicy::AccessPolicy </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2access_policy_8hpp-example.html#a14">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/access_policy.hpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<a id="a847eec16867046675f76db803f6881fa" name="a847eec16867046675f76db803f6881fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a847eec16867046675f76db803f6881fa">&#9670;&#160;</a></span>AccessPolicy() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">constexpr</a> helios::app::AccessPolicy::AccessPolicy </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">const</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html">AccessPolicy</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8cd37821004abf03fdaf43b680f56a48" name="a8cd37821004abf03fdaf43b680f56a48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8cd37821004abf03fdaf43b680f56a48">&#9670;&#160;</a></span>AccessPolicy() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">constexpr</a> helios::app::AccessPolicy::AccessPolicy </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html">AccessPolicy</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6e5a83ad774709a139ddafa7838feed3" name="a6e5a83ad774709a139ddafa7838feed3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e5a83ad774709a139ddafa7838feed3">&#9670;&#160;</a></span>~AccessPolicy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">constexpr</a> helios::app::AccessPolicy::~AccessPolicy </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2access_policy_8hpp-example.html#a15">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/access_policy.hpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a38d760fb0cb21d5e930e53befcfe58ce" name="a38d760fb0cb21d5e930e53befcfe58ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38d760fb0cb21d5e930e53befcfe58ce">&#9670;&#160;</a></span>ConflictsWith()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">constexpr</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">bool</a> helios::app::AccessPolicy::ConflictsWith </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">const</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html">AccessPolicy</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if this policy conflicts with another policy. </p>
+<p>Checks for query and resource conflict. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Other access policy to check against </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if policies conflict, false otherwise </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2access_policy_8hpp-example.html#a23">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/access_policy.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00187">187</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  187</span>                                                                                       {</div>
+<div class="line"><span class="lineno">  188</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#a9fcc79296fc17cf2529412474e56d814">HasQueryConflict</a>(other) || <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abe5adf44adf01eba18fddff227ebe35d">HasResourceConflict</a>(other);</div>
+<div class="line"><span class="lineno">  189</span>  }</div>
+<div class="ttc" id="aclasshelios_1_1app_1_1AccessPolicy_html_a9fcc79296fc17cf2529412474e56d814"><div class="ttname"><a href="classhelios_1_1app_1_1AccessPolicy.html#a9fcc79296fc17cf2529412474e56d814">helios::app::AccessPolicy::HasQueryConflict</a></div><div class="ttdeci">constexpr bool HasQueryConflict(const AccessPolicy &amp;other) const noexcept</div><div class="ttdoc">Checks if this policy has query conflict with another policy.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00380">access_policy.hpp:380</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1AccessPolicy_html_abe5adf44adf01eba18fddff227ebe35d"><div class="ttname"><a href="classhelios_1_1app_1_1AccessPolicy.html#abe5adf44adf01eba18fddff227ebe35d">helios::app::AccessPolicy::HasResourceConflict</a></div><div class="ttdeci">constexpr bool HasResourceConflict(const AccessPolicy &amp;other) const noexcept</div><div class="ttdoc">Checks if this policy has resource conflict with another policy.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00411">access_policy.hpp:411</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aa4011b6f7107f9014c50e8311d0a2bc8" name="aa4011b6f7107f9014c50e8311d0a2bc8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4011b6f7107f9014c50e8311d0a2bc8">&#9670;&#160;</a></span>GetQueries()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">constexpr</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">auto</a> helios::app::AccessPolicy::GetQueries </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const -&gt; std::span&lt;<a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">const</a> <a class="el" href="structhelios_1_1app_1_1details_1_1QueryDescriptor.html">details::QueryDescriptor</a>&gt; </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets all declared query descriptors. </p>
+<dl class="section return"><dt>Returns</dt><dd>Span of query descriptors </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2access_policy_8hpp-example.html#a26">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/access_policy.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00209">209</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  209</span>                                                                                                    {</div>
+<div class="line"><span class="lineno">  210</span>    <span class="keywordflow">return</span> queries_;</div>
+<div class="line"><span class="lineno">  211</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="acfbfc0b4b1cefa279902bd05fbd08834" name="acfbfc0b4b1cefa279902bd05fbd08834"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acfbfc0b4b1cefa279902bd05fbd08834">&#9670;&#160;</a></span>GetReadResources()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">constexpr</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">auto</a> helios::app::AccessPolicy::GetReadResources </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const -&gt; std::span&lt;<a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">const</a> <a class="el" href="structhelios_1_1app_1_1details_1_1ResourceTypeInfo.html">details::ResourceTypeInfo</a>&gt; </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets all resource types declared for reading. </p>
+<dl class="section return"><dt>Returns</dt><dd>Span of resource type info (sorted) </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2access_policy_8hpp-example.html#a27">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/access_policy.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00217">217</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  217</span>                                                                                                           {</div>
+<div class="line"><span class="lineno">  218</span>    <span class="keywordflow">return</span> read_resources_;</div>
+<div class="line"><span class="lineno">  219</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a4a7f2d8d9868468adae730328b76ce49" name="a4a7f2d8d9868468adae730328b76ce49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a7f2d8d9868468adae730328b76ce49">&#9670;&#160;</a></span>GetWriteResources()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">constexpr</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">auto</a> helios::app::AccessPolicy::GetWriteResources </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const -&gt; std::span&lt;<a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">const</a> <a class="el" href="structhelios_1_1app_1_1details_1_1ResourceTypeInfo.html">details::ResourceTypeInfo</a>&gt; </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets all resource types declared for writing. </p>
+<dl class="section return"><dt>Returns</dt><dd>Span of resource type info (sorted) </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2access_policy_8hpp-example.html#a28">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/access_policy.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00225">225</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  225</span>                                                                                                            {</div>
+<div class="line"><span class="lineno">  226</span>    <span class="keywordflow">return</span> write_resources_;</div>
+<div class="line"><span class="lineno">  227</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a471fc44d55608e318731bcc8484436d5" name="a471fc44d55608e318731bcc8484436d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a471fc44d55608e318731bcc8484436d5">&#9670;&#160;</a></span>HasQueries()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">constexpr</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">bool</a> helios::app::AccessPolicy::HasQueries </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if this policy has any queries. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if any queries are declared, false otherwise </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2access_policy_8hpp-example.html#a24">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/access_policy.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00195">195</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  195</span>{ <span class="keywordflow">return</span> !queries_.empty(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a9fcc79296fc17cf2529412474e56d814" name="a9fcc79296fc17cf2529412474e56d814"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fcc79296fc17cf2529412474e56d814">&#9670;&#160;</a></span>HasQueryConflict()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">constexpr</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">bool</a> helios::app::AccessPolicy::HasQueryConflict </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">const</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html">AccessPolicy</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if this policy has query conflict with another policy. </p>
+<p>Two policies conflict if:</p><ul>
+<li>One reads from a component that the other writes to</li>
+<li>Both write to the same component</li>
+<li>Both access the same resource with at least one write access <dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Other access policy to check against </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if policies have a conflict, false otherwise </dd></dl>
+</li>
+</ul>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2access_policy_8hpp-example.html#a21">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/access_policy.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00380">380</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  380</span>                                                                                      {</div>
+<div class="line"><span class="lineno">  381</span>  <span class="keywordflow">if</span> (!<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#a471fc44d55608e318731bcc8484436d5">HasQueries</a>() || !other.HasQueries()) {</div>
+<div class="line"><span class="lineno">  382</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  383</span>  }</div>
+<div class="line"><span class="lineno">  384</span> </div>
+<div class="line"><span class="lineno">  385</span>  <span class="comment">// Check component conflicts using sorted-range intersection: O(n + m)</span></div>
+<div class="line"><span class="lineno">  386</span>  <span class="comment">// Conflict cases:</span></div>
+<div class="line"><span class="lineno">  387</span>  <span class="comment">// - my.write intersects other.write (write-write)</span></div>
+<div class="line"><span class="lineno">  388</span>  <span class="comment">// - my.write intersects other.read  (write-read)</span></div>
+<div class="line"><span class="lineno">  389</span>  <span class="comment">// - my.read intersects other.write  (read-write)</span></div>
+<div class="line"><span class="lineno">  390</span>  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">my_query</a> : queries_) {</div>
+<div class="line"><span class="lineno">  391</span>    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">other_query</a> : other.queries_) {</div>
+<div class="line"><span class="lineno">  392</span>      <span class="comment">// write-write</span></div>
+<div class="line"><span class="lineno">  393</span>      <span class="keywordflow">if</span> (<a class="code hl_function" href="namespacehelios_1_1app_1_1details.html#af142e3dcec33be4b067d1c193a2e29d2">details::HasIntersection</a>(<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">my_query</a>.write_components, <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">other_query</a>.write_components)) {</div>
+<div class="line"><span class="lineno">  394</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  395</span>      }</div>
+<div class="line"><span class="lineno">  396</span> </div>
+<div class="line"><span class="lineno">  397</span>      <span class="comment">// my write vs other read</span></div>
+<div class="line"><span class="lineno">  398</span>      <span class="keywordflow">if</span> (<a class="code hl_function" href="namespacehelios_1_1app_1_1details.html#af142e3dcec33be4b067d1c193a2e29d2">details::HasIntersection</a>(<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">my_query</a>.write_components, <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">other_query</a>.read_components)) {</div>
+<div class="line"><span class="lineno">  399</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  400</span>      }</div>
+<div class="line"><span class="lineno">  401</span> </div>
+<div class="line"><span class="lineno">  402</span>      <span class="comment">// my read vs other write</span></div>
+<div class="line"><span class="lineno">  403</span>      <span class="keywordflow">if</span> (<a class="code hl_function" href="namespacehelios_1_1app_1_1details.html#af142e3dcec33be4b067d1c193a2e29d2">details::HasIntersection</a>(<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">my_query</a>.read_components, <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">other_query</a>.write_components)) {</div>
+<div class="line"><span class="lineno">  404</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  405</span>      }</div>
+<div class="line"><span class="lineno">  406</span>    }</div>
+<div class="line"><span class="lineno">  407</span>  }</div>
+<div class="line"><span class="lineno">  408</span> </div>
+<div class="line"><span class="lineno">  409</span>  <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  410</span>}</div>
+<div class="ttc" id="aclasshelios_1_1app_1_1AccessPolicy_html_a471fc44d55608e318731bcc8484436d5"><div class="ttname"><a href="classhelios_1_1app_1_1AccessPolicy.html#a471fc44d55608e318731bcc8484436d5">helios::app::AccessPolicy::HasQueries</a></div><div class="ttdeci">constexpr bool HasQueries() const noexcept</div><div class="ttdoc">Checks if this policy has any queries.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00195">access_policy.hpp:195</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1AccessPolicy_html_abdd672af7021702de8d0e043b4be252b"><div class="ttname"><a href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">helios::app::AccessPolicy::Query</a></div><div class="ttdeci">constexpr auto Query(this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Declares a query over component types.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00293">access_policy.hpp:293</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1app_1_1details_html_af142e3dcec33be4b067d1c193a2e29d2"><div class="ttname"><a href="namespacehelios_1_1app_1_1details.html#af142e3dcec33be4b067d1c193a2e29d2">helios::app::details::HasIntersection</a></div><div class="ttdeci">constexpr bool HasIntersection(std::span&lt; const ComponentTypeInfo &gt; lhs, std::span&lt; const ComponentTypeInfo &gt; rhs) noexcept</div><div class="ttdoc">Checks if two sorted ranges have any common elements.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00059">access_policy.hpp:59</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ae444556646c5eb7d2f606c6393cde35d" name="ae444556646c5eb7d2f606c6393cde35d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae444556646c5eb7d2f606c6393cde35d">&#9670;&#160;</a></span>HasReadComponent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">constexpr</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">bool</a> helios::app::AccessPolicy::HasReadComponent </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">ecs::ComponentTypeId</a>&#160;</td>
+          <td class="paramname"><em>type_id</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if this policy has the specified component type for reading. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type_id</td><td>Component type ID to check </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if component is declared for reading in any query </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2access_policy_8hpp-example.html#a29">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/access_policy.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00234">234</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  234</span>                                                                                           {</div>
+<div class="line"><span class="lineno">  235</span>    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">query</a> : queries_) {</div>
+<div class="line"><span class="lineno">  236</span>      <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">matches_id</a> = [type_id](<span class="keyword">const</span> details::ComponentTypeInfo&amp; info) { <span class="keywordflow">return</span> info.type_id == type_id; };</div>
+<div class="line"><span class="lineno">  237</span>      <span class="keywordflow">if</span> (std::ranges::any_of(<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">query</a>.read_components, <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">matches_id</a>)) {</div>
+<div class="line"><span class="lineno">  238</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  239</span>      }</div>
+<div class="line"><span class="lineno">  240</span>    }</div>
+<div class="line"><span class="lineno">  241</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  242</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ab3d0c65cc52d4fe8954424fa1ac1f430" name="ab3d0c65cc52d4fe8954424fa1ac1f430"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3d0c65cc52d4fe8954424fa1ac1f430">&#9670;&#160;</a></span>HasReadResource()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">constexpr</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">bool</a> helios::app::AccessPolicy::HasReadResource </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#a38437d4d9f600b65f850d797f98ad6a0">ecs::ResourceTypeId</a>&#160;</td>
+          <td class="paramname"><em>type_id</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if this policy has the specified resource type for reading. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type_id</td><td>Resource type ID to check </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if resource is declared for reading </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2access_policy_8hpp-example.html#a31">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/access_policy.hpp</a>, and <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a50">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00264">264</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  264</span>                                                                                         {</div>
+<div class="line"><span class="lineno">  265</span>    <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">matches_id</a> = [type_id](<span class="keyword">const</span> details::ResourceTypeInfo&amp; info) { <span class="keywordflow">return</span> info.type_id == type_id; };</div>
+<div class="line"><span class="lineno">  266</span>    <span class="keywordflow">return</span> std::ranges::any_of(read_resources_, <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">matches_id</a>);</div>
+<div class="line"><span class="lineno">  267</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="abe5adf44adf01eba18fddff227ebe35d" name="abe5adf44adf01eba18fddff227ebe35d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe5adf44adf01eba18fddff227ebe35d">&#9670;&#160;</a></span>HasResourceConflict()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">constexpr</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">bool</a> helios::app::AccessPolicy::HasResourceConflict </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">const</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html">AccessPolicy</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if this policy has resource conflict with another policy. </p>
+<p>Two policies conflict if both access the same resource with at least one write access. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Other access policy to check against </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if policies have a conflict, false otherwise </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2access_policy_8hpp-example.html#a22">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/access_policy.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00411">411</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  411</span>                                                                                         {</div>
+<div class="line"><span class="lineno">  412</span>  <span class="keywordflow">if</span> (!<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#a96b7a923964affed1e663d9cfbba8f83">HasResources</a>() || !other.HasResources()) {</div>
+<div class="line"><span class="lineno">  413</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  414</span>  }</div>
+<div class="line"><span class="lineno">  415</span> </div>
+<div class="line"><span class="lineno">  416</span>  <span class="comment">// Write-write conflicts</span></div>
+<div class="line"><span class="lineno">  417</span>  <span class="keywordflow">if</span> (!write_resources_.empty() &amp;&amp; !other.write_resources_.empty() &amp;&amp;</div>
+<div class="line"><span class="lineno">  418</span>      <a class="code hl_function" href="namespacehelios_1_1app_1_1details.html#a47eecc4227e95699543b526df38335e5">details::HasIntersectionBinarySearch</a>(write_resources_, other.write_resources_)) {</div>
+<div class="line"><span class="lineno">  419</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  420</span>  }</div>
+<div class="line"><span class="lineno">  421</span> </div>
+<div class="line"><span class="lineno">  422</span>  <span class="comment">// Write-read conflicts (my write vs other read)</span></div>
+<div class="line"><span class="lineno">  423</span>  <span class="keywordflow">if</span> (!write_resources_.empty() &amp;&amp; !other.read_resources_.empty() &amp;&amp;</div>
+<div class="line"><span class="lineno">  424</span>      <a class="code hl_function" href="namespacehelios_1_1app_1_1details.html#a47eecc4227e95699543b526df38335e5">details::HasIntersectionBinarySearch</a>(write_resources_, other.read_resources_)) {</div>
+<div class="line"><span class="lineno">  425</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  426</span>  }</div>
+<div class="line"><span class="lineno">  427</span> </div>
+<div class="line"><span class="lineno">  428</span>  <span class="comment">// Read-write conflicts (my read vs other write)</span></div>
+<div class="line"><span class="lineno">  429</span>  <span class="keywordflow">if</span> (!read_resources_.empty() &amp;&amp; !other.write_resources_.empty() &amp;&amp;</div>
+<div class="line"><span class="lineno">  430</span>      <a class="code hl_function" href="namespacehelios_1_1app_1_1details.html#a47eecc4227e95699543b526df38335e5">details::HasIntersectionBinarySearch</a>(read_resources_, other.write_resources_)) {</div>
+<div class="line"><span class="lineno">  431</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  432</span>  }</div>
+<div class="line"><span class="lineno">  433</span> </div>
+<div class="line"><span class="lineno">  434</span>  <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  435</span>}</div>
+<div class="ttc" id="aclasshelios_1_1app_1_1AccessPolicy_html_a96b7a923964affed1e663d9cfbba8f83"><div class="ttname"><a href="classhelios_1_1app_1_1AccessPolicy.html#a96b7a923964affed1e663d9cfbba8f83">helios::app::AccessPolicy::HasResources</a></div><div class="ttdeci">constexpr bool HasResources() const noexcept</div><div class="ttdoc">Checks if this policy has any resource access.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00201">access_policy.hpp:201</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1app_1_1details_html_a47eecc4227e95699543b526df38335e5"><div class="ttname"><a href="namespacehelios_1_1app_1_1details.html#a47eecc4227e95699543b526df38335e5">helios::app::details::HasIntersectionBinarySearch</a></div><div class="ttdeci">constexpr bool HasIntersectionBinarySearch(std::span&lt; const ResourceTypeInfo &gt; lhs, std::span&lt; const ResourceTypeInfo &gt; rhs) noexcept</div><div class="ttdoc">Checks if any element from one range exists in another sorted range.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00081">access_policy.hpp:81</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a96b7a923964affed1e663d9cfbba8f83" name="a96b7a923964affed1e663d9cfbba8f83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96b7a923964affed1e663d9cfbba8f83">&#9670;&#160;</a></span>HasResources()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">constexpr</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">bool</a> helios::app::AccessPolicy::HasResources </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if this policy has any resource access. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if any resources are declared, false otherwise </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2access_policy_8hpp-example.html#a25">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/access_policy.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00201">201</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  201</span>                                                             {</div>
+<div class="line"><span class="lineno">  202</span>    <span class="keywordflow">return</span> !read_resources_.empty() || !write_resources_.empty();</div>
+<div class="line"><span class="lineno">  203</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a33794497636aadc556c7316048750031" name="a33794497636aadc556c7316048750031"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33794497636aadc556c7316048750031">&#9670;&#160;</a></span>HasWriteComponent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">constexpr</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">bool</a> helios::app::AccessPolicy::HasWriteComponent </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">ecs::ComponentTypeId</a>&#160;</td>
+          <td class="paramname"><em>type_id</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if this policy has the specified component type for writing. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type_id</td><td>Component type ID to check </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if component is declared for writing in any query </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2access_policy_8hpp-example.html#a30">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/access_policy.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00249">249</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  249</span>                                                                                            {</div>
+<div class="line"><span class="lineno">  250</span>    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">query</a> : queries_) {</div>
+<div class="line"><span class="lineno">  251</span>      <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">matches_id</a> = [type_id](<span class="keyword">const</span> details::ComponentTypeInfo&amp; info) { <span class="keywordflow">return</span> info.type_id == type_id; };</div>
+<div class="line"><span class="lineno">  252</span>      <span class="keywordflow">if</span> (std::ranges::any_of(<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">query</a>.write_components, <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">matches_id</a>)) {</div>
+<div class="line"><span class="lineno">  253</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  254</span>      }</div>
+<div class="line"><span class="lineno">  255</span>    }</div>
+<div class="line"><span class="lineno">  256</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  257</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a0300bd597b529d8b6b6867d6e9512270" name="a0300bd597b529d8b6b6867d6e9512270"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0300bd597b529d8b6b6867d6e9512270">&#9670;&#160;</a></span>HasWriteResource()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">constexpr</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">bool</a> helios::app::AccessPolicy::HasWriteResource </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#a38437d4d9f600b65f850d797f98ad6a0">ecs::ResourceTypeId</a>&#160;</td>
+          <td class="paramname"><em>type_id</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if this policy has the specified resource type for writing. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type_id</td><td>Resource type ID to check </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if resource is declared for writing </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2access_policy_8hpp-example.html#a32">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/access_policy.hpp</a>, and <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a51">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00274">274</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  274</span>                                                                                          {</div>
+<div class="line"><span class="lineno">  275</span>    <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">matches_id</a> = [type_id](<span class="keyword">const</span> details::ResourceTypeInfo&amp; info) { <span class="keywordflow">return</span> info.type_id == type_id; };</div>
+<div class="line"><span class="lineno">  276</span>    <span class="keywordflow">return</span> std::ranges::any_of(write_resources_, <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">matches_id</a>);</div>
+<div class="line"><span class="lineno">  277</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a3c106aa68581399e341366f58c6b642a" name="a3c106aa68581399e341366f58c6b642a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c106aa68581399e341366f58c6b642a">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">constexpr</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html">AccessPolicy</a> &amp; <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">helios::app::AccessPolicy::operator</a>= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html">AccessPolicy</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa04f5632f2600803637ca68317e00612" name="aa04f5632f2600803637ca68317e00612"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa04f5632f2600803637ca68317e00612">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">constexpr</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html">AccessPolicy</a> &amp; <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">helios::app::AccessPolicy::operator</a>= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">const</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html">AccessPolicy</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2access_policy_8hpp-example.html#a16">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/access_policy.hpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<a id="abdd672af7021702de8d0e043b4be252b" name="abdd672af7021702de8d0e043b4be252b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abdd672af7021702de8d0e043b4be252b">&#9670;&#160;</a></span>Query()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ecs::ComponentTrait... Components&gt; <br />
+requires ((ecs::ComponentTrait&lt;Components&gt; &amp;&amp; ...) &amp;&amp; utils::UniqueTypes&lt;Components...&gt;)</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto helios::app::AccessPolicy::Query </td>
+          <td>(</td>
+          <td class="paramtype">this auto &amp;&amp;&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td> -&gt; decltype(std::forward&lt;decltype(self)&gt;(self))</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Declares a query over component types. </p>
+<p>Adds a query specification to the policy. Multiple queries can be declared. Component access is classified per-type into read-only or writable sets. Component types are automatically sorted for efficient conflict detection. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Components</td><td>Component access types (e.g., const Position&amp;, Velocity&amp;) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Updated <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html">AccessPolicy</a> for method chaining </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2access_policy_8hpp-example.html#a18">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/access_policy.hpp</a>, and <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2system_8hpp-example.html#a4">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/system.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00293">293</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  293</span>                                                                                                 {</div>
+<div class="line"><span class="lineno">  294</span>  details::QueryDescriptor <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">query</a>;</div>
+<div class="line"><span class="lineno">  295</span> </div>
+<div class="line"><span class="lineno">  296</span>  <span class="comment">// Populate read vs write component lists based on constness of the parameter type.</span></div>
+<div class="line"><span class="lineno">  297</span>  <span class="comment">// For component parameter T:</span></div>
+<div class="line"><span class="lineno">  298</span>  <span class="comment">// - If T is const (after removing reference), treat as read-only.</span></div>
+<div class="line"><span class="lineno">  299</span>  <span class="comment">// - Otherwise treat as writable.</span></div>
+<div class="line"><span class="lineno">  300</span>  (</div>
+<div class="line"><span class="lineno">  301</span>      [&amp;<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">query</a>]() {</div>
+<div class="line"><span class="lineno">  302</span>        <span class="keyword">using </span><a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">Component</a> = std::remove_cvref_t&lt;Components&gt;;</div>
+<div class="line"><span class="lineno">  303</span>        <span class="keyword">constexpr</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">ecs::ComponentTypeId</a> <span class="keywordtype">id</span> = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ecs::ComponentTypeIdOf&lt;Component&gt;</a>();</div>
+<div class="line"><span class="lineno">  304</span>        <span class="keyword">constexpr</span> std::string_view name = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ecs::ComponentNameOf&lt;Component&gt;</a>();</div>
+<div class="line"><span class="lineno">  305</span>        <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ecs::TagComponentTrait&lt;Component&gt;</a>) {</div>
+<div class="line"><span class="lineno">  306</span>          <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  307</span>        }</div>
+<div class="line"><span class="lineno">  308</span>        <span class="comment">// Check if the original Components type (before removing cvref) is const</span></div>
+<div class="line"><span class="lineno">  309</span>        <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_const_v&lt;std::remove_reference_t&lt;Components&gt;&gt;) {</div>
+<div class="line"><span class="lineno">  310</span>          <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">query</a>.read_components.push_back({id, name});</div>
+<div class="line"><span class="lineno">  311</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  312</span>          <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">query</a>.write_components.push_back({id, name});</div>
+<div class="line"><span class="lineno">  313</span>        }</div>
+<div class="line"><span class="lineno">  314</span>      }(),</div>
+<div class="line"><span class="lineno">  315</span>      ...);</div>
+<div class="line"><span class="lineno">  316</span> </div>
+<div class="line"><span class="lineno">  317</span>  <span class="comment">// Sort component type lists for efficient conflict detection</span></div>
+<div class="line"><span class="lineno">  318</span>  <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">cmp</a> = [](<span class="keyword">const</span> details::ComponentTypeInfo&amp; <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">lhs</a>, <span class="keyword">const</span> details::ComponentTypeInfo&amp; <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">rhs</a>) {</div>
+<div class="line"><span class="lineno">  319</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">lhs</a>.type_id &lt; <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">rhs</a>.type_id;</div>
+<div class="line"><span class="lineno">  320</span>  };</div>
+<div class="line"><span class="lineno">  321</span>  std::ranges::sort(<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">query</a>.read_components, <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">cmp</a>);</div>
+<div class="line"><span class="lineno">  322</span>  std::ranges::sort(<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">query</a>.write_components, <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">cmp</a>);</div>
+<div class="line"><span class="lineno">  323</span> </div>
+<div class="line"><span class="lineno">  324</span>  <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">self</a>.queries_.push_back(std::move(<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">query</a>));</div>
+<div class="line"><span class="lineno">  325</span>  <span class="keywordflow">return</span> std::forward&lt;decltype(self)&gt;(<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">self</a>);</div>
+<div class="line"><span class="lineno">  326</span>}</div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_a9ede7913aa71f830d7181d280b3848a1"><div class="ttname"><a href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">helios::ecs::ComponentTypeId</a></div><div class="ttdeci">size_t ComponentTypeId</div><div class="ttdoc">Type ID for components.</div><div class="ttdef"><b>Definition</b> <a href="component_8hpp_source.html#l00104">component.hpp:104</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_af0384de48d847585fcb340c71c231e5e"><div class="ttname"><a href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, Allocator, Components... &gt; Query</div><div class="ttdoc">Type alias for query with mutable world access.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02515">query.hpp:2515</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ac5570f42569362cd07d2aad9cdc7339b" name="ac5570f42569362cd07d2aad9cdc7339b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5570f42569362cd07d2aad9cdc7339b">&#9670;&#160;</a></span>ReadResources()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ecs::ResourceTrait... Resources&gt; <br />
+requires utils::UniqueTypes&lt;Resources...&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">constexpr</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">auto</a> helios::app::AccessPolicy::ReadResources </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">this</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">auto</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td> -&gt; <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">decltype</a>(std::forward&lt;<a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">decltype</a>(<a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">self</a>)&gt;(<a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">self</a>))</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Declares read-only access to resource types. </p>
+<p>Adds resource types that the system will read but not modify. Resources are kept sorted for efficient conflict detection. </p><dl class="section note"><dt>Note</dt><dd>If resource is thread-safe it will be ignored. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Resources</td><td>Resource types to read </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Updated <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html">AccessPolicy</a> for method chaining </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2access_policy_8hpp-example.html#a19">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/access_policy.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00330">330</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  330</span>                                                                                                         {</div>
+<div class="line"><span class="lineno">  331</span>  <span class="comment">// Insert each resource that is not thread-safe while maintaining sorted order</span></div>
+<div class="line"><span class="lineno">  332</span>  (</div>
+<div class="line"><span class="lineno">  333</span>      [&amp;<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">self</a>]() {</div>
+<div class="line"><span class="lineno">  334</span>        <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ecs::ResourceWithThreadSafetyTrait&lt;Resources&gt;</a>) {</div>
+<div class="line"><span class="lineno">  335</span>          <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (Resources::ThreadSafe()) {</div>
+<div class="line"><span class="lineno">  336</span>            <a class="code hl_define" href="logger_8hpp.html#aed26636d1bb7300df2a5f8522a93b0d6">HELIOS_INFO</a>(</div>
+<div class="line"><span class="lineno">  337</span>                <span class="stringliteral">&quot;&#39;{}&#39; resource was declared in AccessPolicy::ReadResources, but will be ignored since it is &quot;</span></div>
+<div class="line"><span class="lineno">  338</span>                <span class="stringliteral">&quot;thread-safe.&quot;</span>,</div>
+<div class="line"><span class="lineno">  339</span>                <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ecs::ResourceNameOf&lt;Resources&gt;</a>());</div>
+<div class="line"><span class="lineno">  340</span>          } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  341</span>            <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">self</a>.InsertSorted(<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">self</a>.read_resources_,</div>
+<div class="line"><span class="lineno">  342</span>                              {ecs::ResourceTypeIdOf&lt;Resources&gt;(), ecs::ResourceNameOf&lt;Resources&gt;()});</div>
+<div class="line"><span class="lineno">  343</span>          }</div>
+<div class="line"><span class="lineno">  344</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  345</span>          <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">self</a>.InsertSorted(<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">self</a>.read_resources_,</div>
+<div class="line"><span class="lineno">  346</span>                            {ecs::ResourceTypeIdOf&lt;Resources&gt;(), ecs::ResourceNameOf&lt;Resources&gt;()});</div>
+<div class="line"><span class="lineno">  347</span>        }</div>
+<div class="line"><span class="lineno">  348</span>      }(),</div>
+<div class="line"><span class="lineno">  349</span>      ...);</div>
+<div class="line"><span class="lineno">  350</span> </div>
+<div class="line"><span class="lineno">  351</span>  <span class="keywordflow">return</span> std::forward&lt;decltype(self)&gt;(<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">self</a>);</div>
+<div class="line"><span class="lineno">  352</span>}</div>
+<div class="ttc" id="alogger_8hpp_html_aed26636d1bb7300df2a5f8522a93b0d6"><div class="ttname"><a href="logger_8hpp.html#aed26636d1bb7300df2a5f8522a93b0d6">HELIOS_INFO</a></div><div class="ttdeci">#define HELIOS_INFO(...)</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00685">logger.hpp:685</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aeb90df674f57b9b2d0a35a54c42fa58f" name="aeb90df674f57b9b2d0a35a54c42fa58f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb90df674f57b9b2d0a35a54c42fa58f">&#9670;&#160;</a></span>WriteResources()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ecs::ResourceTrait... Resources&gt; <br />
+requires utils::UniqueTypes&lt;Resources...&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">constexpr</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">auto</a> helios::app::AccessPolicy::WriteResources </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">this</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">auto</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td> -&gt; <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">decltype</a>(std::forward&lt;<a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">decltype</a>(<a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">self</a>)&gt;(<a class="el" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">self</a>))</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Declares write access to resource types. </p>
+<p>Adds resource types that the system will modify. Resources are kept sorted for efficient conflict detection. </p><dl class="section note"><dt>Note</dt><dd>If resource is thread-safe it will be ignored. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Resources</td><td>Resource types to write </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Updated <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html">AccessPolicy</a> for method chaining </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2access_policy_8hpp-example.html#a20">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/access_policy.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="access__policy_8hpp_source.html#l00356">356</a> of file <a class="el" href="access__policy_8hpp_source.html">access_policy.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  356</span>                                                                                                          {</div>
+<div class="line"><span class="lineno">  357</span>  <span class="comment">// Insert each resource that is not thread-safe while maintaining sorted order</span></div>
+<div class="line"><span class="lineno">  358</span>  (</div>
+<div class="line"><span class="lineno">  359</span>      [&amp;<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">self</a>]() {</div>
+<div class="line"><span class="lineno">  360</span>        <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ecs::ResourceWithThreadSafetyTrait&lt;Resources&gt;</a>) {</div>
+<div class="line"><span class="lineno">  361</span>          <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (Resources::ThreadSafe()) {</div>
+<div class="line"><span class="lineno">  362</span>            <a class="code hl_define" href="logger_8hpp.html#aed26636d1bb7300df2a5f8522a93b0d6">HELIOS_INFO</a>(</div>
+<div class="line"><span class="lineno">  363</span>                <span class="stringliteral">&quot;&#39;{}&#39; resource was declared in AccessPolicy::WriteResources, but will be ignored since it is &quot;</span></div>
+<div class="line"><span class="lineno">  364</span>                <span class="stringliteral">&quot;thread-safe.&quot;</span>,</div>
+<div class="line"><span class="lineno">  365</span>                <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ecs::ResourceNameOf&lt;Resources&gt;</a>());</div>
+<div class="line"><span class="lineno">  366</span>          } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  367</span>            <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">self</a>.InsertSorted(<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">self</a>.write_resources_,</div>
+<div class="line"><span class="lineno">  368</span>                              {ecs::ResourceTypeIdOf&lt;Resources&gt;(), ecs::ResourceNameOf&lt;Resources&gt;()});</div>
+<div class="line"><span class="lineno">  369</span>          }</div>
+<div class="line"><span class="lineno">  370</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  371</span>          <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">self</a>.InsertSorted(<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">self</a>.write_resources_,</div>
+<div class="line"><span class="lineno">  372</span>                            {ecs::ResourceTypeIdOf&lt;Resources&gt;(), ecs::ResourceNameOf&lt;Resources&gt;()});</div>
+<div class="line"><span class="lineno">  373</span>        }</div>
+<div class="line"><span class="lineno">  374</span>      }(),</div>
+<div class="line"><span class="lineno">  375</span>      ...);</div>
+<div class="line"><span class="lineno">  376</span> </div>
+<div class="line"><span class="lineno">  377</span>  <span class="keywordflow">return</span> std::forward&lt;decltype(self)&gt;(<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">self</a>);</div>
+<div class="line"><span class="lineno">  378</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehelios.html">helios</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1app.html">app</a></li><li class="navelem"><a class="el" href="classhelios_1_1app_1_1AccessPolicy.html">AccessPolicy</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

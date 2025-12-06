@@ -1,0 +1,545 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: helios::details Namespace Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('namespacehelios_1_1details.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#concepts">Concepts</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">helios::details Namespace Reference</div></div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1details_1_1FreeFunctionTraits.html">FreeFunctionTraits</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Traits for free function pointers.  <a href="structhelios_1_1details_1_1FreeFunctionTraits.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1details_1_1FreeFunctionTraits_3_01R_07_5_08_07Args_8_8_8_08_4.html">FreeFunctionTraits&lt; R(*)(Args...)&gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1details_1_1MemberFunctionTraits.html">MemberFunctionTraits</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Traits for member function pointers (non-const and const).  <a href="structhelios_1_1details_1_1MemberFunctionTraits.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1details_1_1MemberFunctionTraits_3_01R_07C_1_1_5_08_07Args_8_8_8_08_01const_01_4.html">MemberFunctionTraits&lt; R(C::*)(Args...) const &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1details_1_1MemberFunctionTraits_3_01R_07C_1_1_5_08_07Args_8_8_8_08_4.html">MemberFunctionTraits&lt; R(C::*)(Args...)&gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1details_1_1TupleToFunctionSignature.html">TupleToFunctionSignature</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1details_1_1TupleToFunctionSignature_3_01std_1_1tuple_3_01R_00_01Args_8_8_8_01_4_01_4.html">TupleToFunctionSignature&lt; std::tuple&lt; R, Args... &gt; &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="concepts" name="concepts"></a>
+Concepts</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1details_1_1PolymorphicConvertible.html">PolymorphicConvertible</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept to allow argument conversion with polymorphic relationships. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1details_1_1ClockTrait.html">ClockTrait</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for clock types compatible with std::chrono clocks. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1details_1_1DurationTrait.html">DurationTrait</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for duration types based on std::chrono::duration. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a388dcc93998ea442b516d5c9c2373a4c" id="r_a388dcc93998ea442b516d5c9c2373a4c"><td class="memTemplParams" colspan="2">template&lt;typename Rep , typename Period &gt; </td></tr>
+<tr class="memitem:a388dcc93998ea442b516d5c9c2373a4c"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1details.html#a388dcc93998ea442b516d5c9c2373a4c">NormalizedDuration</a> = std::chrono::duration&lt; Rep, Period &gt;</td></tr>
+<tr class="memdesc:a388dcc93998ea442b516d5c9c2373a4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper alias to normalize a duration to its canonical std::chrono::duration form.  <br /></td></tr>
+<tr class="separator:a388dcc93998ea442b516d5c9c2373a4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae5f3b43c4d0c5d035e9c77aaf289b0c" id="r_aae5f3b43c4d0c5d035e9c77aaf289b0c"><td class="memTemplParams" colspan="2">template&lt;typename Clock , typename Rep , typename Period &gt; </td></tr>
+<tr class="memitem:aae5f3b43c4d0c5d035e9c77aaf289b0c"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1details.html#aae5f3b43c4d0c5d035e9c77aaf289b0c">NormalizedClockDuration</a> = std::chrono::duration&lt; Rep, Period &gt;</td></tr>
+<tr class="memdesc:aae5f3b43c4d0c5d035e9c77aaf289b0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper alias to normalize a clock's duration to a specific rep/period.  <br /></td></tr>
+<tr class="separator:aae5f3b43c4d0c5d035e9c77aaf289b0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:acb85fa0b1f6ed26db0e078ace12921c8" id="r_acb85fa0b1f6ed26db0e078ace12921c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1details.html#acb85fa0b1f6ed26db0e078ace12921c8">LogAssertionFailureViaLogger</a> (std::string_view condition, const std::source_location &amp;loc, std::string_view message) noexcept</td></tr>
+<tr class="memdesc:acb85fa0b1f6ed26db0e078ace12921c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bridge to logger-provided assertion logging.  <br /></td></tr>
+<tr class="separator:acb85fa0b1f6ed26db0e078ace12921c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab945b18265153dab5ad54924fd8569cc" id="r_ab945b18265153dab5ad54924fd8569cc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1details.html#ab945b18265153dab5ad54924fd8569cc">LogAssertionFailure</a> (std::string_view condition, const std::source_location &amp;loc, std::string_view message) noexcept</td></tr>
+<tr class="memdesc:ab945b18265153dab5ad54924fd8569cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unified assertion logging function used by macros below.  <br /></td></tr>
+<tr class="separator:ab945b18265153dab5ad54924fd8569cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fdca5c67165f03b0548fb2970d6ccad" id="r_a1fdca5c67165f03b0548fb2970d6ccad"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1details.html#a1fdca5c67165f03b0548fb2970d6ccad">AssertionFailed</a> (std::string_view condition, const std::source_location &amp;loc, std::string_view message) noexcept</td></tr>
+<tr class="memdesc:a1fdca5c67165f03b0548fb2970d6ccad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fallback assertion handler when logger is not available.  <br /></td></tr>
+<tr class="separator:a1fdca5c67165f03b0548fb2970d6ccad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:af52cb2961ca77df7f242657ef0d3d13d" id="r_af52cb2961ca77df7f242657ef0d3d13d"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1details.html#af52cb2961ca77df7f242657ef0d3d13d">kEnableAssert</a> = false</td></tr>
+<tr class="separator:af52cb2961ca77df7f242657ef0d3d13d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="aae5f3b43c4d0c5d035e9c77aaf289b0c" name="aae5f3b43c4d0c5d035e9c77aaf289b0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae5f3b43c4d0c5d035e9c77aaf289b0c">&#9670;&#160;</a></span>NormalizedClockDuration</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Clock , typename Rep , typename Period &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespacehelios_1_1details.html#aae5f3b43c4d0c5d035e9c77aaf289b0c">helios::details::NormalizedClockDuration</a> = typedef std::chrono::duration&lt;Rep, Period&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper alias to normalize a clock's duration to a specific rep/period. </p>
+
+<p class="definition">Definition at line <a class="el" href="timer_8hpp_source.html#l00045">45</a> of file <a class="el" href="timer_8hpp_source.html">timer.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a388dcc93998ea442b516d5c9c2373a4c" name="a388dcc93998ea442b516d5c9c2373a4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a388dcc93998ea442b516d5c9c2373a4c">&#9670;&#160;</a></span>NormalizedDuration</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Rep , typename Period &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespacehelios_1_1details.html#a388dcc93998ea442b516d5c9c2373a4c">helios::details::NormalizedDuration</a> = typedef std::chrono::duration&lt;Rep, Period&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper alias to normalize a duration to its canonical std::chrono::duration form. </p>
+
+<p class="definition">Definition at line <a class="el" href="timer_8hpp_source.html#l00039">39</a> of file <a class="el" href="timer_8hpp_source.html">timer.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a1fdca5c67165f03b0548fb2970d6ccad" name="a1fdca5c67165f03b0548fb2970d6ccad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1fdca5c67165f03b0548fb2970d6ccad">&#9670;&#160;</a></span>AssertionFailed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::details::AssertionFailed </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>condition</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::source_location &amp;&#160;</td>
+          <td class="paramname"><em>loc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>message</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Fallback assertion handler when logger is not available. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">condition</td><td>The failed condition as a string </td></tr>
+    <tr><td class="paramname">loc</td><td>Source location of the assertion </td></tr>
+    <tr><td class="paramname">message</td><td>Additional message to log</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>This function will first attempt to use the logger via <code>LogAssertionFailure</code>. If that doesn't produce visible output, it will print a formatted message using <code>std::println</code> and abort.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">condition</td><td>The failed condition as a string </td></tr>
+    <tr><td class="paramname">loc</td><td>Source location of the assertion </td></tr>
+    <tr><td class="paramname">message</td><td>Additional message to log </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="assert_8hpp_source.html#l00071">71</a> of file <a class="el" href="assert_8hpp_source.html">assert.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   72</span>                                                             {</div>
+<div class="line"><span class="lineno">   73</span>  <span class="comment">// Try to use logger if available (best-effort)</span></div>
+<div class="line"><span class="lineno">   74</span>  <span class="keywordflow">try</span> {</div>
+<div class="line"><span class="lineno">   75</span>    <a class="code hl_function" href="namespacehelios_1_1details.html#ab945b18265153dab5ad54924fd8569cc">LogAssertionFailure</a>(condition, loc, message);</div>
+<div class="line"><span class="lineno">   76</span>  } <span class="keywordflow">catch</span> (...) {</div>
+<div class="line"><span class="lineno">   77</span>    <span class="comment">// Swallow exceptions from logger attempts</span></div>
+<div class="line"><span class="lineno">   78</span>  }</div>
+<div class="line"><span class="lineno">   79</span> </div>
+<div class="line"><span class="lineno">   80</span>  <span class="comment">// Fallback printing using std::println (C++23)</span></div>
+<div class="line"><span class="lineno">   81</span><span class="preprocessor">#if defined(__cpp_lib_print) &amp;&amp; (__cpp_lib_print &gt;= 202302L)</span></div>
+<div class="line"><span class="lineno">   82</span>  <span class="keywordflow">if</span> (!message.empty()) {</div>
+<div class="line"><span class="lineno">   83</span>    std::println(<span class="stringliteral">&quot;Assertion failed: {} | {} [{}:{}]&quot;</span>, condition, message, loc.file_name(), loc.line());</div>
+<div class="line"><span class="lineno">   84</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">   85</span>    std::println(<span class="stringliteral">&quot;Assertion failed: {}\nFile: {}\nLine: {}\nFunction: {}&quot;</span>, condition, loc.file_name(), loc.line(),</div>
+<div class="line"><span class="lineno">   86</span>                 loc.function_name());</div>
+<div class="line"><span class="lineno">   87</span>  }</div>
+<div class="line"><span class="lineno">   88</span><span class="preprocessor">#else</span></div>
+<div class="line"><span class="lineno">   89</span>  <span class="keywordflow">if</span> (!message.empty()) {</div>
+<div class="line"><span class="lineno">   90</span>    std::fprintf(stderr, <span class="stringliteral">&quot;Assertion failed: %.*s | %.*s [%s:%u]\n&quot;</span>, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(condition.size()),</div>
+<div class="line"><span class="lineno">   91</span>                 condition.data(), <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(message.size()), message.data(), loc.file_name(), loc.line());</div>
+<div class="line"><span class="lineno">   92</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">   93</span>    std::fprintf(stderr, <span class="stringliteral">&quot;Assertion failed: %.*s\nFile: %s\nLine: %u\nFunction: %s\n&quot;</span>,</div>
+<div class="line"><span class="lineno">   94</span>                 <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(condition.size()), condition.data(), loc.file_name(), loc.line(),</div>
+<div class="line"><span class="lineno">   95</span>                 loc.function_name());</div>
+<div class="line"><span class="lineno">   96</span>  }</div>
+<div class="line"><span class="lineno">   97</span><span class="preprocessor">#endif</span></div>
+<div class="line"><span class="lineno">   98</span>}</div>
+<div class="ttc" id="anamespacehelios_1_1details_html_ab945b18265153dab5ad54924fd8569cc"><div class="ttname"><a href="namespacehelios_1_1details.html#ab945b18265153dab5ad54924fd8569cc">helios::details::LogAssertionFailure</a></div><div class="ttdeci">void LogAssertionFailure(std::string_view condition, const std::source_location &amp;loc, std::string_view message) noexcept</div><div class="ttdoc">Unified assertion logging function used by macros below.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00048">assert.hpp:48</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ab945b18265153dab5ad54924fd8569cc" name="ab945b18265153dab5ad54924fd8569cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab945b18265153dab5ad54924fd8569cc">&#9670;&#160;</a></span>LogAssertionFailure()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::details::LogAssertionFailure </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>condition</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::source_location &amp;&#160;</td>
+          <td class="paramname"><em>loc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>message</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Unified assertion logging function used by macros below. </p>
+<p>Tries to forward the assertion to the logger integration function above.</p>
+<p>If the logger isn't available (or calling it throws), this function simply returns so the caller may perform a fallback print-and-abort.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">condition</td><td>The failed condition as a string </td></tr>
+    <tr><td class="paramname">loc</td><td>Source location of the assertion </td></tr>
+    <tr><td class="paramname">message</td><td>Additional message to log </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="assert_8hpp_source.html#l00048">48</a> of file <a class="el" href="assert_8hpp_source.html">assert.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   49</span>                                                                 {</div>
+<div class="line"><span class="lineno">   50</span>  <span class="keywordflow">try</span> {</div>
+<div class="line"><span class="lineno">   51</span>    <span class="comment">// Attempt to forward to the logger integration.</span></div>
+<div class="line"><span class="lineno">   52</span>    <a class="code hl_function" href="namespacehelios_1_1details.html#acb85fa0b1f6ed26db0e078ace12921c8">LogAssertionFailureViaLogger</a>(condition, loc, message);</div>
+<div class="line"><span class="lineno">   53</span>  } <span class="keywordflow">catch</span> (...) {</div>
+<div class="line"><span class="lineno">   54</span>    <span class="comment">// Ignore any exception and allow caller to fallback to printing.</span></div>
+<div class="line"><span class="lineno">   55</span>  }</div>
+<div class="line"><span class="lineno">   56</span>}</div>
+<div class="ttc" id="anamespacehelios_1_1details_html_acb85fa0b1f6ed26db0e078ace12921c8"><div class="ttname"><a href="namespacehelios_1_1details.html#acb85fa0b1f6ed26db0e078ace12921c8">helios::details::LogAssertionFailureViaLogger</a></div><div class="ttdeci">void LogAssertionFailureViaLogger(std::string_view condition, const std::source_location &amp;loc, std::string_view message) noexcept</div><div class="ttdoc">Bridge to logger-provided assertion logging.</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00649">logger.hpp:649</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="acb85fa0b1f6ed26db0e078ace12921c8" name="acb85fa0b1f6ed26db0e078ace12921c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb85fa0b1f6ed26db0e078ace12921c8">&#9670;&#160;</a></span>LogAssertionFailureViaLogger()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::details::LogAssertionFailureViaLogger </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>condition</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::source_location &amp;&#160;</td>
+          <td class="paramname"><em>loc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>message</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Bridge to logger-provided assertion logging. </p>
+<p>The logger implementation provides an inline function named <code>LogAssertionFailureViaLogger</code> in <code><a class="el" href="namespacehelios_1_1details.html">helios::details</a></code>. We forward-declare it here so <code><a class="el" href="assert_8hpp.html">assert.hpp</a></code> can use logger integration when available.</p>
+<p>If the logger is present in the build, that inline function will be used. If not, calls to <code>LogAssertionFailure</code> below will safely fall back to printing to stderr (via std::println) and aborting.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">condition</td><td>The failed condition as a string </td></tr>
+    <tr><td class="paramname">loc</td><td>Source location of the assertion </td></tr>
+    <tr><td class="paramname">message</td><td>Additional message to log </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2logger_8hpp-example.html#a46">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/logger.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00649">649</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  650</span>                                                                          {</div>
+<div class="line"><span class="lineno">  651</span>  Logger::GetInstance().LogAssertionFailure(condition, loc, message);</div>
+<div class="line"><span class="lineno">  652</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="af52cb2961ca77df7f242657ef0d3d13d" name="af52cb2961ca77df7f242657ef0d3d13d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af52cb2961ca77df7f242657ef0d3d13d">&#9670;&#160;</a></span>kEnableAssert</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool helios::details::kEnableAssert = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="assert_8hpp_source.html#l00103">103</a> of file <a class="el" href="assert_8hpp_source.html">assert.hpp</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehelios.html">helios</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1details.html">details</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,965 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: /home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/logger.hpp</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2logger_8hpp-example.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/logger.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<p>Trait to identify valid logger types.</p>
+<p>Trait to identify valid logger types. A valid logger type must be an empty struct or class with a Name() function.</p>
+<div class="fragment"><div class="line"><span class="keyword">struct </span>MyLogger {</div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view Name() <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> <span class="stringliteral">&quot;MyLogger&quot;</span>; }</div>
+<div class="line">};</div>
+<div class="line"><span class="keyword">static_assert</span>(LoggerTrait&lt;MyLogger&gt;);</div>
+</div><!-- fragment --> <dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Type to check</td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><span class="preprocessor">#pragma once</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="core__pch_8hpp.html">helios/core_pch.hpp</a>&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;ctti/type_id.hpp&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;concepts&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;cstddef&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;filesystem&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;format&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;mutex&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;shared_mutex&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;source_location&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;string_view&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;utility&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacespdlog.html">spdlog</a> {</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Forward declaration for spdlog::logger</span></div>
+<div class="line"><span class="keyword">class </span>logger;</div>
+<div class="line"> </div>
+<div class="line">}  <span class="comment">// namespace spdlog</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios.html">helios</a> {</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief Log severity levels.</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">enum class</span> <a id="a0" name="a0"></a><a class="code hl_enumeration" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a> : uint8_t { <a id="a1" name="a1"></a><a class="code hl_enumvalue" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71afa21506cd249f400de4a974b5a0c8e0e">kTrace</a> = 0, <a id="a2" name="a2"></a><a class="code hl_enumvalue" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71abb53ce21b7c0b7c8a8f7860a41901d29">kDebug</a> = 1, <a id="a3" name="a3"></a><a class="code hl_enumvalue" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71a176a473e63c17ccdac91640c67f149bf">kInfo</a> = 2, <a id="a4" name="a4"></a><a class="code hl_enumvalue" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71a61a920eb4a24199ec6a36dd90f2a30b7">kWarn</a> = 3, <a id="a5" name="a5"></a><a class="code hl_enumvalue" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71ae3587c730cc1aa530fa4ddc9c4204e97">kError</a> = 4, <a id="a6" name="a6"></a><a class="code hl_enumvalue" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71a5a20548c220f372fc701cae6de94040b">kCritical</a> = 5 };</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief Configuration for logger behavior and output.</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">struct </span>LoggerConfig {</div>
+<div class="line">  std::filesystem::path <a id="a7" name="a7"></a><a class="code hl_variable" href="structhelios_1_1LoggerConfig.html#a2c0ee7de5f4558f3bb0d570fbe0e3b61">log_directory</a> = <span class="stringliteral">&quot;logs&quot;</span>;  <span class="comment">///&lt; Log output directory path.</span></div>
+<div class="line">  std::string <a id="a8" name="a8"></a><a class="code hl_variable" href="structhelios_1_1LoggerConfig.html#a6e402cb9b48565a504e9fea2fe96c2e2">file_name_pattern</a> =</div>
+<div class="line">      <span class="stringliteral">&quot;{name}_{timestamp}.log&quot;</span>;  <span class="comment">///&lt; Pattern for log file names (supports format placeholders: {name}, {timestamp}).</span></div>
+<div class="line"><span class="preprocessor">#ifdef HELIOS_ENABLE_STACKTRACE</span></div>
+<div class="line">  std::string <a id="a9" name="a9"></a><a class="code hl_variable" href="structhelios_1_1LoggerConfig.html#abd1bb70cf6deddd148964c18e7952c7e">console_pattern</a> = <span class="stringliteral">&quot;[%H:%M:%S.%e] [%t] [%^%l%$] %n: %v%*%#&quot;</span>;    <span class="comment">///&lt; Console log pattern.</span></div>
+<div class="line">  std::string <a id="a10" name="a10"></a><a class="code hl_variable" href="structhelios_1_1LoggerConfig.html#abbf91a5c6c06181588b6384ca17d0d92">file_pattern</a> = <span class="stringliteral">&quot;[%Y-%m-%d %H:%M:%S.%e] [%t] [%l] %n: %v%*%#&quot;</span>;  <span class="comment">///&lt; File log pattern.</span></div>
+<div class="line"><span class="preprocessor">#else</span></div>
+<div class="line">  std::string <a class="code hl_variable" href="structhelios_1_1LoggerConfig.html#abd1bb70cf6deddd148964c18e7952c7e">console_pattern</a> = <span class="stringliteral">&quot;[%H:%M:%S.%e] [%t] [%^%l%$] %n: %v%*&quot;</span>;    <span class="comment">///&lt; Console log pattern.</span></div>
+<div class="line">  std::string <a class="code hl_variable" href="structhelios_1_1LoggerConfig.html#abbf91a5c6c06181588b6384ca17d0d92">file_pattern</a> = <span class="stringliteral">&quot;[%Y-%m-%d %H:%M:%S.%e] [%t] [%l] %n: %v%*&quot;</span>;  <span class="comment">///&lt; File log pattern.</span></div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordtype">size_t</span> <a id="a11" name="a11"></a><a class="code hl_variable" href="structhelios_1_1LoggerConfig.html#a7b7a86ebaf76ce6f5e5494af33d3e4df">max_file_size</a> = 0;                     <span class="comment">///&lt; Maximum size of a single log file in bytes (0 = no limit).</span></div>
+<div class="line">  <span class="keywordtype">size_t</span> <a id="a12" name="a12"></a><a class="code hl_variable" href="structhelios_1_1LoggerConfig.html#af58028dadf76230d4c1c5228a0b494f3">max_files</a> = 0;                         <span class="comment">///&lt; Maximum number of log files to keep (0 = no limit).</span></div>
+<div class="line">  <a class="code hl_enumeration" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a> <a id="a13" name="a13"></a><a class="code hl_variable" href="structhelios_1_1LoggerConfig.html#a7a9095b67e68dcab0cbf6ac5ab647d72">auto_flush_level</a> = <a class="code hl_enumvalue" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71a61a920eb4a24199ec6a36dd90f2a30b7">LogLevel::kWarn</a>;  <span class="comment">///&lt; Minimum log level to flush automatically.</span></div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordtype">bool</span> <a id="a14" name="a14"></a><a class="code hl_variable" href="structhelios_1_1LoggerConfig.html#aea3d4341896549135f507d37dad911bc">enable_console</a> = <span class="keyword">true</span>;  <span class="comment">///&lt; Enable console output.</span></div>
+<div class="line">  <span class="keywordtype">bool</span> <a id="a15" name="a15"></a><a class="code hl_variable" href="structhelios_1_1LoggerConfig.html#a28c156ba61f4d12cabe731103628e5bb">enable_file</a> = <span class="keyword">true</span>;     <span class="comment">///&lt; Enable file output.</span></div>
+<div class="line">  <span class="keywordtype">bool</span> <a id="a16" name="a16"></a><a class="code hl_variable" href="structhelios_1_1LoggerConfig.html#aba7aa257aed39cf89a340dda1e487034">truncate_files</a> = <span class="keyword">true</span>;  <span class="comment">///&lt; Enable truncation of existing log files.</span></div>
+<div class="line">  <span class="keywordtype">bool</span> <a id="a17" name="a17"></a><a class="code hl_variable" href="structhelios_1_1LoggerConfig.html#aa98fe93efdcdd36fd878d4d61da46cb3">async_logging</a> = <span class="keyword">false</span>;  <span class="comment">///&lt; Enable async logging (better performance but may lose last logs on crash).</span></div>
+<div class="line"> </div>
+<div class="line">  <a class="code hl_enumeration" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a> <a id="a18" name="a18"></a><a class="code hl_variable" href="structhelios_1_1LoggerConfig.html#a1f3131b03b446c6731760ae68378ae02">source_location_level</a> = <a class="code hl_enumvalue" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71ae3587c730cc1aa530fa4ddc9c4204e97">LogLevel::kError</a>;  <span class="comment">///&lt; Minimum level to include source location.</span></div>
+<div class="line">  <a class="code hl_enumeration" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a> <a id="a19" name="a19"></a><a class="code hl_variable" href="structhelios_1_1LoggerConfig.html#a0819edca53d9999b4657e6f11d328e8b">stack_trace_level</a> = <a class="code hl_enumvalue" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71a5a20548c220f372fc701cae6de94040b">LogLevel::kCritical</a>;   <span class="comment">///&lt; Minimum level to include stack trace.</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Creates default configuration.</span></div>
+<div class="line"><span class="comment">   * @return Default LoggerConfig instance</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] <span class="keyword">static</span> LoggerConfig <a id="a20" name="a20"></a><a class="code hl_function" href="structhelios_1_1LoggerConfig.html#ad38f42095fd2d451e7aad6d41defb534">Default</a>() noexcept { <span class="keywordflow">return</span> {}; }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Creates configuration for console-only output.</span></div>
+<div class="line"><span class="comment">   * @return LoggerConfig instance for console-only logging</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] <span class="keyword">static</span> LoggerConfig <a id="a21" name="a21"></a><a class="code hl_function" href="structhelios_1_1LoggerConfig.html#aa7213506612e6d92a54d378d6403b438">ConsoleOnly</a>() noexcept {</div>
+<div class="line">    <span class="keywordflow">return</span> LoggerConfig{.<a class="code hl_variable" href="structhelios_1_1LoggerConfig.html#aea3d4341896549135f507d37dad911bc">enable_console</a> = <span class="keyword">true</span>, .enable_file = <span class="keyword">false</span>};</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Creates configuration for file-only output.</span></div>
+<div class="line"><span class="comment">   * @return LoggerConfig instance for file-only logging</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] <span class="keyword">static</span> LoggerConfig <a id="a22" name="a22"></a><a class="code hl_function" href="structhelios_1_1LoggerConfig.html#a66e1ecc8a568848030ae9fb03b4a3735">FileOnly</a>() noexcept {</div>
+<div class="line">    <span class="keywordflow">return</span> LoggerConfig{.<a class="code hl_variable" href="structhelios_1_1LoggerConfig.html#aea3d4341896549135f507d37dad911bc">enable_console</a> = <span class="keyword">false</span>, .enable_file = <span class="keyword">true</span>};</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Creates configuration optimized for debug builds.</span></div>
+<div class="line"><span class="comment">   * @return LoggerConfig instance for debug logging</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] <span class="keyword">static</span> LoggerConfig <a id="a23" name="a23"></a><a class="code hl_function" href="structhelios_1_1LoggerConfig.html#a6c0d4e1a8bbc91fca1830d7410c8fd77">Debug</a>() noexcept {</div>
+<div class="line">    <span class="keywordflow">return</span> LoggerConfig{.<a class="code hl_variable" href="structhelios_1_1LoggerConfig.html#aea3d4341896549135f507d37dad911bc">enable_console</a> = <span class="keyword">true</span>, .enable_file = <span class="keyword">true</span>, .async_logging = <span class="keyword">false</span>};</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Creates configuration optimized for release builds.</span></div>
+<div class="line"><span class="comment">   * @return LoggerConfig instance for release logging</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] <span class="keyword">static</span> LoggerConfig <a id="a24" name="a24"></a><a class="code hl_function" href="structhelios_1_1LoggerConfig.html#a2272fc0925d88bda4995bee147d44676">Release</a>() noexcept {</div>
+<div class="line">    <span class="keywordflow">return</span> LoggerConfig{.<a class="code hl_variable" href="structhelios_1_1LoggerConfig.html#aea3d4341896549135f507d37dad911bc">enable_console</a> = <span class="keyword">false</span>, .enable_file = <span class="keyword">true</span>, .async_logging = <span class="keyword">true</span>};</div>
+<div class="line">  }</div>
+<div class="line">};</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief Type alias for logger type IDs.</span></div>
+<div class="line"><span class="comment"> * @details Used to uniquely identify logger types at runtime.</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">using </span><a id="a25" name="a25"></a><a class="code hl_typedef" href="namespacehelios.html#a897d19e901838feb790a28ec9fcb9d7d">LoggerId</a> = size_t;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief Trait to identify valid logger types.</span></div>
+<div class="line"><span class="comment"> * @details A valid logger type must be an empty struct or class with a Name() function.</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * @example</span></div>
+<div class="line"><span class="comment"> * @code</span></div>
+<div class="line"><span class="comment"> * struct MyLogger {</span></div>
+<div class="line"><span class="comment"> *   static constexpr std::string_view Name() noexcept { return &quot;MyLogger&quot;; }</span></div>
+<div class="line"><span class="comment"> * };</span></div>
+<div class="line"><span class="comment"> * static_assert(LoggerTrait&lt;MyLogger&gt;);</span></div>
+<div class="line"><span class="comment"> * @endcode</span></div>
+<div class="line"><span class="comment"> * @tparam T Type to check</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><span class="keyword">concept </span>LoggerTrait = std::is_empty_v&lt;std::remove_cvref_t&lt;T&gt;&gt; &amp;&amp; <span class="keyword">requires</span> {</div>
+<div class="line">  { T::Name() } -&gt; std::same_as&lt;std::string_view&gt;;</div>
+<div class="line">};</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief Trait to identify loggers with custom configuration.</span></div>
+<div class="line"><span class="comment"> * @details A logger with config trait must satisfy LoggerTrait and provide:</span></div>
+<div class="line"><span class="comment"> * - `static constexpr LoggerConfig Config() noexcept`</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * @example</span></div>
+<div class="line"><span class="comment"> * @code</span></div>
+<div class="line"><span class="comment"> * struct MyLogger {</span></div>
+<div class="line"><span class="comment"> *   static constexpr std::string_view Name() noexcept { return &quot;MyLogger&quot;; }</span></div>
+<div class="line"><span class="comment"> *   static constexpr LoggerConfig Config() noexcept { return LoggerConfig::Default(); }</span></div>
+<div class="line"><span class="comment"> * };</span></div>
+<div class="line"><span class="comment"> * static_assert(LoggerWithConfigTrait&lt;MyLogger&gt;);</span></div>
+<div class="line"><span class="comment"> * @endcode</span></div>
+<div class="line"><span class="comment"> * @tparam T Type to check</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><span class="keyword">concept </span>LoggerWithConfigTrait = LoggerTrait&lt;T&gt; &amp;&amp; <span class="keyword">requires</span> {</div>
+<div class="line">  { T::Config() } -&gt; std::same_as&lt;LoggerConfig&gt;;</div>
+<div class="line">};</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief Gets unique type ID for a logger type.</span></div>
+<div class="line"><span class="comment"> * @details Uses CTTI to generate a unique hash for the logger type.</span></div>
+<div class="line"><span class="comment"> * The ID is consistent across compilation units.</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * @example</span></div>
+<div class="line"><span class="comment"> * @code</span></div>
+<div class="line"><span class="comment"> * struct MyLogger { static constexpr std::string_view Name() noexcept { return &quot;MyLogger&quot;; } };</span></div>
+<div class="line"><span class="comment"> * constexpr LoggerId id = LoggerIdOf&lt;MyLogger&gt;();</span></div>
+<div class="line"><span class="comment"> * @endcode</span></div>
+<div class="line"><span class="comment"> * @tparam T Logger type</span></div>
+<div class="line"><span class="comment"> * @return Unique type ID for the logger</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">template</span> &lt;LoggerTrait T&gt;</div>
+<div class="line"><span class="keyword">constexpr</span> <a class="code hl_typedef" href="namespacehelios.html#a897d19e901838feb790a28ec9fcb9d7d">LoggerId</a> <a id="a26" name="a26"></a><a class="code hl_function" href="namespacehelios.html#a2e16aa56fd39d217978e91ef73646947">LoggerIdOf</a>() noexcept {</div>
+<div class="line">  <span class="keywordflow">return</span> ctti::type_index_of&lt;T&gt;().hash();</div>
+<div class="line">}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief Gets the name of a logger type.</span></div>
+<div class="line"><span class="comment"> * @details Returns the name provided by Name() function.</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * @example</span></div>
+<div class="line"><span class="comment"> * @code</span></div>
+<div class="line"><span class="comment"> * struct MyLogger {</span></div>
+<div class="line"><span class="comment"> *   static constexpr std::string_view Name() noexcept { return &quot;MyLogger&quot;; }</span></div>
+<div class="line"><span class="comment"> * };</span></div>
+<div class="line"><span class="comment"> * constexpr auto name = LoggerNameOf&lt;MyLogger&gt;();  // &quot;MyLogger&quot;</span></div>
+<div class="line"><span class="comment"> * @endcode</span></div>
+<div class="line"><span class="comment"> * @tparam T Logger type</span></div>
+<div class="line"><span class="comment"> * @return Name of the logger</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">template</span> &lt;LoggerTrait T&gt;</div>
+<div class="line"><span class="keyword">constexpr</span> std::string_view <a id="a27" name="a27"></a><a class="code hl_function" href="namespacehelios.html#a38e803d9d033acbe72b0a4d7250c104e">LoggerNameOf</a>() noexcept {</div>
+<div class="line">  <span class="keywordflow">return</span> T::Name();</div>
+<div class="line">}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief Gets the configuration for a logger type.</span></div>
+<div class="line"><span class="comment"> * @details Returns the config provided by Config() if available,</span></div>
+<div class="line"><span class="comment"> * otherwise returns the default configuration.</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * @example</span></div>
+<div class="line"><span class="comment"> * @code</span></div>
+<div class="line"><span class="comment"> * struct MyLogger {</span></div>
+<div class="line"><span class="comment"> *   static constexpr std::string_view Name() noexcept { return &quot;MyLogger&quot;; }</span></div>
+<div class="line"><span class="comment"> *   static constexpr LoggerConfig Config() noexcept { return LoggerConfig::ConsoleOnly(); }</span></div>
+<div class="line"><span class="comment"> * };</span></div>
+<div class="line"><span class="comment"> * constexpr auto config = LoggerConfigOf&lt;MyLogger&gt;();</span></div>
+<div class="line"><span class="comment"> * @endcode</span></div>
+<div class="line"><span class="comment"> * @tparam T Logger type</span></div>
+<div class="line"><span class="comment"> * @return Configuration for the logger</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">template</span> &lt;LoggerTrait T&gt;</div>
+<div class="line"><span class="keyword">inline</span> LoggerConfig <a id="a28" name="a28"></a><a class="code hl_function" href="namespacehelios.html#a108806acf89b89e91b9f73f36c8e154d">LoggerConfigOf</a>() noexcept {</div>
+<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (LoggerWithConfigTrait&lt;T&gt;) {</div>
+<div class="line">    <span class="keywordflow">return</span> T::Config();</div>
+<div class="line">  } <span class="keywordflow">else</span> {</div>
+<div class="line">    <span class="keywordflow">return</span> <a class="code hl_function" href="structhelios_1_1LoggerConfig.html#ad38f42095fd2d451e7aad6d41defb534">LoggerConfig::Default</a>();</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief Default logger type.</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">struct </span>DefaultLogger {</div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view <a id="a29" name="a29"></a><a class="code hl_function" href="structhelios_1_1DefaultLogger.html#ad432d644aa717fe8f764788bdce18fc1">Name</a>() noexcept { <span class="keywordflow">return</span> <span class="stringliteral">&quot;HELIOS&quot;</span>; }</div>
+<div class="line">  <span class="keyword">static</span> LoggerConfig <a id="a30" name="a30"></a><a class="code hl_function" href="structhelios_1_1DefaultLogger.html#a2ca37233b06351ff647340076c0bcaa2">Config</a>() noexcept {</div>
+<div class="line"><span class="preprocessor">#if defined(HELIOS_RELEASE_MODE)</span></div>
+<div class="line">    <span class="keywordflow">return</span> <a class="code hl_function" href="structhelios_1_1LoggerConfig.html#a2272fc0925d88bda4995bee147d44676">LoggerConfig::Release</a>();</div>
+<div class="line"><span class="preprocessor">#else</span></div>
+<div class="line">    <span class="keywordflow">return</span> <a class="code hl_function" href="structhelios_1_1LoggerConfig.html#a6c0d4e1a8bbc91fca1830d7410c8fd77">LoggerConfig::Debug</a>();</div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+<div class="line">  }</div>
+<div class="line">};</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief Constexpr instance of the default logger for easier user interface.</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">inline</span> <span class="keyword">constexpr</span> DefaultLogger <a id="a31" name="a31"></a><a class="code hl_variable" href="namespacehelios.html#a3adf145c13509e0e25874cf768acbdf8">kDefaultLogger</a>{};</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief Centralized logging system with configurable output and formatting.</span></div>
+<div class="line"><span class="comment"> * @note Thread-safe.</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">class </span>Logger {</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">  <a class="code hl_function" href="classhelios_1_1Logger.html#ac7de5ff321565b6c30909ccbcbb5503f">Logger</a>(<span class="keyword">const</span> Logger&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line">  <a class="code hl_function" href="classhelios_1_1Logger.html#ac7de5ff321565b6c30909ccbcbb5503f">Logger</a>(Logger&amp;&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line">  <a id="a32" name="a32"></a><a class="code hl_function" href="classhelios_1_1Logger.html#a9dbe1efcd55f0306632881153ed2f4d2">~Logger</a>() noexcept = default;</div>
+<div class="line"> </div>
+<div class="line">  Logger&amp; operator=(const Logger&amp;) = delete;</div>
+<div class="line">  Logger&amp; operator=(Logger&amp;&amp;) = delete;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Adds a logger with the specified type and configuration.</span></div>
+<div class="line"><span class="comment">   * @tparam T Logger type</span></div>
+<div class="line"><span class="comment">   * @param logger Logger type instance</span></div>
+<div class="line"><span class="comment">   * @param config Configuration for the logger</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  template &lt;LoggerTrait T&gt;</div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a33" name="a33"></a><a class="code hl_function" href="classhelios_1_1Logger.html#a7f7ce3e5192e79e003e068fad3dadd8d">AddLogger</a>(T logger, LoggerConfig config = <a class="code hl_function" href="namespacehelios.html#a108806acf89b89e91b9f73f36c8e154d">LoggerConfigOf</a>&lt;T&gt;()) noexcept;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Removes a logger with the given type.</span></div>
+<div class="line"><span class="comment">   * @note Cannot remove the default logger</span></div>
+<div class="line"><span class="comment">   * @tparam T Logger type</span></div>
+<div class="line"><span class="comment">   * @param logger Logger type instance</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  template &lt;LoggerTrait T&gt;</div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a34" name="a34"></a><a class="code hl_function" href="classhelios_1_1Logger.html#ae8217cc2410acd4f89ac762c457bad8f">RemoveLogger</a>(T logger = {}) <span class="keyword">noexcept</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Flushes all registered loggers.</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a35" name="a35"></a><a class="code hl_function" href="classhelios_1_1Logger.html#a3535c760b83e2e52e38d0d49a7edecab">FlushAll</a>() noexcept;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Flushes a specific logger.</span></div>
+<div class="line"><span class="comment">   * @tparam T Logger type</span></div>
+<div class="line"><span class="comment">   * @param logger Logger type instance</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  template &lt;LoggerTrait T&gt;</div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a36" name="a36"></a><a class="code hl_function" href="classhelios_1_1Logger.html#ab9c17ca826531504e5d8f750c99524ec">Flush</a>([[maybe_unused]] T logger = {}) <span class="keyword">noexcept</span> {</div>
+<div class="line">    FlushImpl(LoggerIdOf&lt;T&gt;());</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Logs a string message with typed logger.</span></div>
+<div class="line"><span class="comment">   * @tparam T Logger type</span></div>
+<div class="line"><span class="comment">   * @param logger Logger type instance</span></div>
+<div class="line"><span class="comment">   * @param level Log severity level</span></div>
+<div class="line"><span class="comment">   * @param loc Source location where the log was triggered</span></div>
+<div class="line"><span class="comment">   * @param message Message to log</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;LoggerTrait T&gt;</div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a37" name="a37"></a><a class="code hl_function" href="classhelios_1_1Logger.html#a8114dd095687df9af2b3401da9007ebf">LogMessage</a>(T logger, <a class="code hl_enumeration" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a> level, <span class="keyword">const</span> std::source_location&amp; loc, std::string_view message) <span class="keyword">noexcept</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Logs a formatted message with typed logger.</span></div>
+<div class="line"><span class="comment">   * @tparam T Logger type</span></div>
+<div class="line"><span class="comment">   * @tparam Args Types of the format arguments</span></div>
+<div class="line"><span class="comment">   * @param logger Logger type instance</span></div>
+<div class="line"><span class="comment">   * @param level Log severity level</span></div>
+<div class="line"><span class="comment">   * @param loc Source location where the log was triggered</span></div>
+<div class="line"><span class="comment">   * @param fmt Format string</span></div>
+<div class="line"><span class="comment">   * @param args Arguments for the format string</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;LoggerTrait T, <span class="keyword">typename</span>... Args&gt;</div>
+<div class="line">    <span class="keyword">requires</span>(<span class="keyword">sizeof</span>...(Args) &gt; 0)</div>
+<div class="line">  void <a class="code hl_function" href="classhelios_1_1Logger.html#a8114dd095687df9af2b3401da9007ebf">LogMessage</a>(T logger, <a class="code hl_enumeration" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a> level, const std::source_location&amp; loc, std::format_string&lt;Args...&gt; fmt,</div>
+<div class="line">                  Args&amp;&amp;... args) noexcept;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Logs a string message with default logger.</span></div>
+<div class="line"><span class="comment">   * @param level Log severity level</span></div>
+<div class="line"><span class="comment">   * @param loc Source location where the log was triggered</span></div>
+<div class="line"><span class="comment">   * @param message Message to log</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1Logger.html#a8114dd095687df9af2b3401da9007ebf">LogMessage</a>(<a class="code hl_enumeration" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a> level, const std::source_location&amp; loc, std::string_view message) noexcept;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Logs a formatted message with default logger.</span></div>
+<div class="line"><span class="comment">   * @tparam Args Types of the format arguments</span></div>
+<div class="line"><span class="comment">   * @param level Log severity level</span></div>
+<div class="line"><span class="comment">   * @param loc Source location where the log was triggered</span></div>
+<div class="line"><span class="comment">   * @param fmt Format string</span></div>
+<div class="line"><span class="comment">   * @param args Arguments for the format string</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  template &lt;typename... Args&gt;</div>
+<div class="line">    requires(sizeof...(Args) &gt; 0)</div>
+<div class="line">  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1Logger.html#a8114dd095687df9af2b3401da9007ebf">LogMessage</a>(<a class="code hl_enumeration" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a> level, const std::source_location&amp; loc, std::format_string&lt;Args...&gt; fmt,</div>
+<div class="line">                  Args&amp;&amp;... args) noexcept;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Logs assertion failure with typed logger.</span></div>
+<div class="line"><span class="comment">   * @tparam T Logger type</span></div>
+<div class="line"><span class="comment">   * @param logger Logger type instance</span></div>
+<div class="line"><span class="comment">   * @param condition The failed condition as a string</span></div>
+<div class="line"><span class="comment">   * @param loc Source location where the assertion failed</span></div>
+<div class="line"><span class="comment">   * @param message Additional message describing the failure</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  template &lt;LoggerTrait T&gt;</div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a38" name="a38"></a><a class="code hl_function" href="classhelios_1_1Logger.html#a6d32dc172f4a7736ca4fe71140d19a84">LogAssertionFailure</a>(T logger, std::string_view condition, const std::source_location&amp; loc,</div>
+<div class="line">                           std::string_view message) noexcept;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Logs assertion failure with typed logger (formatted).</span></div>
+<div class="line"><span class="comment">   * @tparam T Logger type</span></div>
+<div class="line"><span class="comment">   * @tparam Args Types of the format arguments</span></div>
+<div class="line"><span class="comment">   * @param logger Logger type instance</span></div>
+<div class="line"><span class="comment">   * @param condition The failed condition as a string</span></div>
+<div class="line"><span class="comment">   * @param loc Source location where the assertion failed</span></div>
+<div class="line"><span class="comment">   * @param fmt Format string for the failure message</span></div>
+<div class="line"><span class="comment">   * @param args Arguments for the format string</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  template &lt;LoggerTrait T, typename... Args&gt;</div>
+<div class="line">    requires(sizeof...(Args) &gt; 0)</div>
+<div class="line">  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1Logger.html#a6d32dc172f4a7736ca4fe71140d19a84">LogAssertionFailure</a>(T logger, std::string_view condition, const std::source_location&amp; loc,</div>
+<div class="line">                           std::format_string&lt;Args...&gt; fmt, Args&amp;&amp;... args) noexcept;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Logs assertion failure with default logger.</span></div>
+<div class="line"><span class="comment">   * @param condition The failed condition as a string</span></div>
+<div class="line"><span class="comment">   * @param loc Source location where the assertion failed</span></div>
+<div class="line"><span class="comment">   * @param message Additional message describing the failure</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1Logger.html#a6d32dc172f4a7736ca4fe71140d19a84">LogAssertionFailure</a>(std::string_view condition, const std::source_location&amp; loc,</div>
+<div class="line">                           std::string_view message) noexcept;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Logs assertion failure with default logger (formatted).</span></div>
+<div class="line"><span class="comment">   * @tparam Args Types of the format arguments</span></div>
+<div class="line"><span class="comment">   * @param condition The failed condition as a string</span></div>
+<div class="line"><span class="comment">   * @param loc Source location where the assertion failed</span></div>
+<div class="line"><span class="comment">   * @param fmt Format string for the failure message</span></div>
+<div class="line"><span class="comment">   * @param args Arguments for the format string</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  template &lt;typename... Args&gt;</div>
+<div class="line">    requires(sizeof...(Args) &gt; 0)</div>
+<div class="line">  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1Logger.html#a6d32dc172f4a7736ca4fe71140d19a84">LogAssertionFailure</a>(std::string_view condition, const std::source_location&amp; loc, std::format_string&lt;Args...&gt; fmt,</div>
+<div class="line">                           Args&amp;&amp;... args) noexcept;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Sets the global default configuration for new loggers.</span></div>
+<div class="line"><span class="comment">   * @param config The configuration to use as default</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a39" name="a39"></a><a class="code hl_function" href="classhelios_1_1Logger.html#ab6999bf2bbeb130e386cd181e648cf09">SetDefaultConfig</a>(const LoggerConfig&amp; config) noexcept { default_config_ = config; }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Sets the minimum log level for a typed logger.</span></div>
+<div class="line"><span class="comment">   * @tparam T Logger type</span></div>
+<div class="line"><span class="comment">   * @param logger Logger type instance</span></div>
+<div class="line"><span class="comment">   * @param level Minimum log level to set</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;LoggerTrait T&gt;</div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a40" name="a40"></a><a class="code hl_function" href="classhelios_1_1Logger.html#a0390d8c22bfc97ed5de24c1c6ffb847c">SetLevel</a>([[maybe_unused]] T logger, <a class="code hl_enumeration" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a> level) <span class="keyword">noexcept</span> {</div>
+<div class="line">    SetLevelImpl(LoggerIdOf&lt;T&gt;(), level);</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Sets the minimum log level for the default logger.</span></div>
+<div class="line"><span class="comment">   * @param level Minimum log level to set</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1Logger.html#a0390d8c22bfc97ed5de24c1c6ffb847c">SetLevel</a>(<a class="code hl_enumeration" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a> level) <span class="keyword">noexcept</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Checks if a logger with the given type exists.</span></div>
+<div class="line"><span class="comment">   * @tparam T Logger type</span></div>
+<div class="line"><span class="comment">   * @param logger Logger type instance</span></div>
+<div class="line"><span class="comment">   * @return True if the logger exists, false otherwise</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;LoggerTrait T&gt;</div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">bool</span> <a id="a41" name="a41"></a><a class="code hl_function" href="classhelios_1_1Logger.html#a70aeef93be2358dec8ffcc656e3cd597">HasLogger</a>(T logger = {}) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Checks if the default logger should log messages at the given level.</span></div>
+<div class="line"><span class="comment">   * @param level The log level to check</span></div>
+<div class="line"><span class="comment">   * @return True if messages at this level should be logged</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">bool</span> <a id="a42" name="a42"></a><a class="code hl_function" href="classhelios_1_1Logger.html#a733924350efe854cc51936d0cd674811">ShouldLog</a>(<a class="code hl_enumeration" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a> level) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Checks if a typed logger should log messages at the given level.</span></div>
+<div class="line"><span class="comment">   * @tparam T Logger type</span></div>
+<div class="line"><span class="comment">   * @param logger Logger type instance</span></div>
+<div class="line"><span class="comment">   * @param level The log level to check</span></div>
+<div class="line"><span class="comment">   * @return True if messages at this level should be logged</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;LoggerTrait T&gt;</div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1Logger.html#a733924350efe854cc51936d0cd674811">ShouldLog</a>([[maybe_unused]] T logger, <a class="code hl_enumeration" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a> level) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line">    <span class="keywordflow">return</span> ShouldLogImpl(LoggerIdOf&lt;T&gt;(), level);</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Gets the current log level for a typed logger.</span></div>
+<div class="line"><span class="comment">   * @tparam T Logger type</span></div>
+<div class="line"><span class="comment">   * @param logger Logger type instance</span></div>
+<div class="line"><span class="comment">   * @return The current log level, or LogLevel::kTrace if logger doesn&#39;t exist</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;LoggerTrait T&gt;</div>
+<div class="line">  [[nodiscard]] <a class="code hl_enumeration" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a> <a id="a43" name="a43"></a><a class="code hl_function" href="classhelios_1_1Logger.html#a7b7c70e161a97f50e81ae5d5df4ba525">GetLevel</a>([[maybe_unused]] T logger = {}) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line">    <span class="keywordflow">return</span> GetLevelImpl(LoggerIdOf&lt;T&gt;());</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Gets the current log level for the default logger.</span></div>
+<div class="line"><span class="comment">   * @return The current log level</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] <a class="code hl_enumeration" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a> <a class="code hl_function" href="classhelios_1_1Logger.html#a7b7c70e161a97f50e81ae5d5df4ba525">GetLevel</a>() const noexcept;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Gets the current default configuration.</span></div>
+<div class="line"><span class="comment">   * @return The default logger configuration</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] const LoggerConfig&amp; <a id="a44" name="a44"></a><a class="code hl_function" href="classhelios_1_1Logger.html#aa0728b97cc52f74964604d705392e0c4">GetDefaultConfig</a>() const noexcept { <span class="keywordflow">return</span> default_config_; }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Gets the singleton instance.</span></div>
+<div class="line"><span class="comment">   * @return Reference to the Logger instance</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] <span class="keyword">static</span> <a class="code hl_function" href="classhelios_1_1Logger.html#ac7de5ff321565b6c30909ccbcbb5503f">Logger</a>&amp; <a id="a45" name="a45"></a><a class="code hl_function" href="classhelios_1_1Logger.html#a0a1fdb516e345015a8de7c179bb4db99">GetInstance</a>() noexcept {</div>
+<div class="line">    <span class="keyword">static</span> <a class="code hl_function" href="classhelios_1_1Logger.html#ac7de5ff321565b6c30909ccbcbb5503f">Logger</a> instance;</div>
+<div class="line">    <span class="keywordflow">return</span> instance;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">  <a class="code hl_function" href="classhelios_1_1Logger.html#ac7de5ff321565b6c30909ccbcbb5503f">Logger</a>() noexcept;</div>
+<div class="line"> </div>
+<div class="line">  [[nodiscard]] auto GetLogger(<a class="code hl_typedef" href="namespacehelios.html#a897d19e901838feb790a28ec9fcb9d7d">LoggerId</a> logger_id) const noexcept -&gt; std::shared_ptr&lt;<a class="code hl_namespace" href="namespacespdlog.html">spdlog</a>::logger&gt;;</div>
+<div class="line">  [[nodiscard]] auto GetDefaultLogger() const noexcept -&gt; std::shared_ptr&lt;<a class="code hl_namespace" href="namespacespdlog.html">spdlog</a>::logger&gt; {</div>
+<div class="line">    <span class="keywordflow">return</span> GetLogger(LoggerIdOf&lt;DefaultLogger&gt;());</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Flushes a specific logger by ID (internal).</span></div>
+<div class="line"><span class="comment">   * @param logger_id Logger ID</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keywordtype">void</span> FlushImpl(<a class="code hl_typedef" href="namespacehelios.html#a897d19e901838feb790a28ec9fcb9d7d">LoggerId</a> logger_id) <span class="keyword">noexcept</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Sets the minimum log level for a logger by ID (internal).</span></div>
+<div class="line"><span class="comment">   * @param logger_id Logger ID</span></div>
+<div class="line"><span class="comment">   * @param level Minimum log level to set</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keywordtype">void</span> SetLevelImpl(<a class="code hl_typedef" href="namespacehelios.html#a897d19e901838feb790a28ec9fcb9d7d">LoggerId</a> logger_id, <a class="code hl_enumeration" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a> level) <span class="keyword">noexcept</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Checks if a logger by ID should log messages at the given level (internal).</span></div>
+<div class="line"><span class="comment">   * @param logger_id Logger ID</span></div>
+<div class="line"><span class="comment">   * @param level The log level to check</span></div>
+<div class="line"><span class="comment">   * @return True if messages at this level should be logged</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">bool</span> ShouldLogImpl(<a class="code hl_typedef" href="namespacehelios.html#a897d19e901838feb790a28ec9fcb9d7d">LoggerId</a> logger_id, <a class="code hl_enumeration" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a> level) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Gets the current log level for a logger by ID (internal).</span></div>
+<div class="line"><span class="comment">   * @param logger_id Logger ID</span></div>
+<div class="line"><span class="comment">   * @return The current log level, or LogLevel::kTrace if logger doesn&#39;t exist</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] <a class="code hl_enumeration" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a> GetLevelImpl(<a class="code hl_typedef" href="namespacehelios.html#a897d19e901838feb790a28ec9fcb9d7d">LoggerId</a> logger_id) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">static</span> <span class="keywordtype">void</span> LogMessageImpl(<span class="keyword">const</span> std::shared_ptr&lt;spdlog::logger&gt;&amp; logger, <a class="code hl_enumeration" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a> level,</div>
+<div class="line">                             <span class="keyword">const</span> std::source_location&amp; loc, std::string_view message) <span class="keyword">noexcept</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">static</span> <span class="keywordtype">void</span> LogAssertionFailureImpl(<span class="keyword">const</span> std::shared_ptr&lt;spdlog::logger&gt;&amp; logger, std::string_view condition,</div>
+<div class="line">                                      <span class="keyword">const</span> std::source_location&amp; loc, std::string_view message) <span class="keyword">noexcept</span>;</div>
+<div class="line"> </div>
+<div class="line">  [[nodiscard]] <span class="keyword">static</span> <span class="keyword">auto</span> CreateLogger(std::string_view logger_name, <span class="keyword">const</span> LoggerConfig&amp; config) <span class="keyword">noexcept</span></div>
+<div class="line">      -&gt; std::shared_ptr&lt;spdlog::logger&gt;;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">static</span> <span class="keywordtype">void</span> DropLoggerFromSpdlog(<span class="keyword">const</span> std::shared_ptr&lt;spdlog::logger&gt;&amp; logger) <span class="keyword">noexcept</span>;</div>
+<div class="line"> </div>
+<div class="line">  std::unordered_map&lt;LoggerId, std::shared_ptr&lt;spdlog::logger&gt;&gt; loggers_;</div>
+<div class="line">  std::unordered_map&lt;LoggerId, LoggerConfig&gt; logger_configs_;</div>
+<div class="line">  std::unordered_map&lt;LoggerId, LogLevel&gt; logger_levels_;</div>
+<div class="line">  <span class="keyword">mutable</span> std::shared_mutex loggers_mutex_;</div>
+<div class="line"> </div>
+<div class="line">  LoggerConfig default_config_;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">inline</span> Logger::Logger() noexcept {</div>
+<div class="line">  default_config_ = LoggerConfigOf&lt;DefaultLogger&gt;();</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">constexpr</span> <a class="code hl_typedef" href="namespacehelios.html#a897d19e901838feb790a28ec9fcb9d7d">LoggerId</a> default_id = LoggerIdOf&lt;DefaultLogger&gt;();</div>
+<div class="line">  <span class="keyword">constexpr</span> std::string_view default_name = LoggerNameOf&lt;DefaultLogger&gt;();</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">if</span> (<span class="keyword">auto</span> logger = CreateLogger(default_name, default_config_)) [[likely]] {</div>
+<div class="line">    loggers_.emplace(default_id, std::move(logger));</div>
+<div class="line">    logger_configs_.emplace(default_id, default_config_);</div>
+<div class="line">    logger_levels_.emplace(default_id, <a class="code hl_enumvalue" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71afa21506cd249f400de4a974b5a0c8e0e">LogLevel::kTrace</a>);</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;LoggerTrait T&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1Logger.html#a7f7ce3e5192e79e003e068fad3dadd8d">Logger::AddLogger</a>(T <span class="comment">/*logger*/</span>, LoggerConfig config) <span class="keyword">noexcept</span> {</div>
+<div class="line">  <span class="keyword">constexpr</span> <a class="code hl_typedef" href="namespacehelios.html#a897d19e901838feb790a28ec9fcb9d7d">LoggerId</a> logger_id = LoggerIdOf&lt;T&gt;();</div>
+<div class="line">  <span class="keyword">constexpr</span> std::string_view logger_name = LoggerNameOf&lt;T&gt;();</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">const</span> std::scoped_lock lock(loggers_mutex_);</div>
+<div class="line">  <span class="keywordflow">if</span> (loggers_.contains(logger_id)) [[unlikely]] {</div>
+<div class="line">    <span class="keywordflow">return</span>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">if</span> (<span class="keyword">auto</span> spdlog_logger = CreateLogger(logger_name, config)) [[likely]] {</div>
+<div class="line">    loggers_.emplace(logger_id, std::move(spdlog_logger));</div>
+<div class="line">    logger_configs_.emplace(logger_id, std::move(config));</div>
+<div class="line">    logger_levels_.emplace(logger_id, <a class="code hl_enumvalue" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71afa21506cd249f400de4a974b5a0c8e0e">LogLevel::kTrace</a>);</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;LoggerTrait T&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1Logger.html#ae8217cc2410acd4f89ac762c457bad8f">Logger::RemoveLogger</a>(T <span class="comment">/*logger*/</span>) <span class="keyword">noexcept</span> {</div>
+<div class="line">  <span class="keyword">constexpr</span> <a class="code hl_typedef" href="namespacehelios.html#a897d19e901838feb790a28ec9fcb9d7d">LoggerId</a> logger_id = LoggerIdOf&lt;T&gt;();</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Cannot remove the default logger</span></div>
+<div class="line">  <span class="keywordflow">if</span> (logger_id == LoggerIdOf&lt;DefaultLogger&gt;()) [[unlikely]] {</div>
+<div class="line">    <span class="keywordflow">return</span>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">const</span> std::scoped_lock lock(loggers_mutex_);</div>
+<div class="line">  <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> it = loggers_.find(logger_id); it != loggers_.end()) {</div>
+<div class="line">    <span class="comment">// Unregister from spdlog before erasing</span></div>
+<div class="line">    DropLoggerFromSpdlog(it-&gt;second);</div>
+<div class="line">    loggers_.erase(it);</div>
+<div class="line">    logger_configs_.erase(logger_id);</div>
+<div class="line">    logger_levels_.erase(logger_id);</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;LoggerTrait T&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1Logger.html#a8114dd095687df9af2b3401da9007ebf">Logger::LogMessage</a>(T <span class="comment">/*logger*/</span>, <a class="code hl_enumeration" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a> level, <span class="keyword">const</span> std::source_location&amp; loc,</div>
+<div class="line">                               std::string_view message) <span class="keyword">noexcept</span> {</div>
+<div class="line">  <span class="keywordflow">if</span> (<span class="keyword">auto</span> spdlog_logger = GetLogger(LoggerIdOf&lt;T&gt;())) [[likely]] {</div>
+<div class="line">    LogMessageImpl(spdlog_logger, level, loc, message);</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;LoggerTrait T, <span class="keyword">typename</span>... Args&gt;</div>
+<div class="line">  <span class="keyword">requires</span>(<span class="keyword">sizeof</span>...(Args) &gt; 0)</div>
+<div class="line">inline <span class="keywordtype">void</span> Logger::LogMessage(T logger, <a class="code hl_enumeration" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a> level, const std::source_location&amp; loc,</div>
+<div class="line">                               std::format_string&lt;Args...&gt; fmt, Args&amp;&amp;... args) noexcept {</div>
+<div class="line">  <span class="keywordflow">try</span> {</div>
+<div class="line">    <span class="keyword">const</span> std::string message = std::format(fmt, std::forward&lt;Args&gt;(args)...);</div>
+<div class="line">    LogMessage(logger, level, loc, message);</div>
+<div class="line">  } <span class="keywordflow">catch</span> (...) {</div>
+<div class="line">    <span class="comment">// Silently ignore formatting errors</span></div>
+<div class="line">  }</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1Logger.html#a8114dd095687df9af2b3401da9007ebf">Logger::LogMessage</a>(<a class="code hl_enumeration" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a> level, <span class="keyword">const</span> std::source_location&amp; loc, std::string_view message) <span class="keyword">noexcept</span> {</div>
+<div class="line">  <span class="keywordflow">if</span> (<span class="keyword">auto</span> logger = GetDefaultLogger()) [[likely]] {</div>
+<div class="line">    LogMessageImpl(logger, level, loc, message);</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Args&gt;</div>
+<div class="line">  <span class="keyword">requires</span>(<span class="keyword">sizeof</span>...(Args) &gt; 0)</div>
+<div class="line">inline <span class="keywordtype">void</span> Logger::LogMessage(<a class="code hl_enumeration" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a> level, const std::source_location&amp; loc, std::format_string&lt;Args...&gt; fmt,</div>
+<div class="line">                               Args&amp;&amp;... args) noexcept {</div>
+<div class="line">  <span class="keywordflow">try</span> {</div>
+<div class="line">    <span class="keyword">const</span> std::string message = std::format(fmt, std::forward&lt;Args&gt;(args)...);</div>
+<div class="line">    LogMessage(level, loc, message);</div>
+<div class="line">  } <span class="keywordflow">catch</span> (...) {</div>
+<div class="line">    <span class="comment">// Silently ignore formatting errors</span></div>
+<div class="line">  }</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;LoggerTrait T&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1Logger.html#a6d32dc172f4a7736ca4fe71140d19a84">Logger::LogAssertionFailure</a>(T <span class="comment">/*logger*/</span>, std::string_view condition, <span class="keyword">const</span> std::source_location&amp; loc,</div>
+<div class="line">                                        std::string_view message) <span class="keyword">noexcept</span> {</div>
+<div class="line">  <span class="keywordflow">if</span> (<span class="keyword">auto</span> spdlog_logger = GetLogger(LoggerIdOf&lt;T&gt;())) [[likely]] {</div>
+<div class="line">    LogAssertionFailureImpl(spdlog_logger, condition, loc, message);</div>
+<div class="line">  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<span class="keyword">auto</span> default_logger = GetDefaultLogger()) [[likely]] {</div>
+<div class="line">    LogAssertionFailureImpl(default_logger, condition, loc, message);</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;LoggerTrait T, <span class="keyword">typename</span>... Args&gt;</div>
+<div class="line">  <span class="keyword">requires</span>(<span class="keyword">sizeof</span>...(Args) &gt; 0)</div>
+<div class="line">inline <span class="keywordtype">void</span> Logger::LogAssertionFailure(T logger, std::string_view condition, const std::source_location&amp; loc,</div>
+<div class="line">                                        std::format_string&lt;Args...&gt; fmt, Args&amp;&amp;... args) noexcept {</div>
+<div class="line">  <span class="keywordflow">try</span> {</div>
+<div class="line">    <span class="keyword">const</span> std::string message = std::format(fmt, std::forward&lt;Args&gt;(args)...);</div>
+<div class="line">    <a class="code hl_function" href="namespacehelios_1_1details.html#ab945b18265153dab5ad54924fd8569cc">LogAssertionFailure</a>(logger, condition, loc, message);</div>
+<div class="line">  } <span class="keywordflow">catch</span> (...) {</div>
+<div class="line">    <a class="code hl_function" href="namespacehelios_1_1details.html#ab945b18265153dab5ad54924fd8569cc">LogAssertionFailure</a>(logger, condition, loc, <span class="stringliteral">&quot;Formatting error in assertion message&quot;</span>);</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1Logger.html#a6d32dc172f4a7736ca4fe71140d19a84">Logger::LogAssertionFailure</a>(std::string_view condition, <span class="keyword">const</span> std::source_location&amp; loc,</div>
+<div class="line">                                        std::string_view message) <span class="keyword">noexcept</span> {</div>
+<div class="line">  <span class="keywordflow">if</span> (<span class="keyword">auto</span> logger = GetDefaultLogger()) [[likely]] {</div>
+<div class="line">    LogAssertionFailureImpl(logger, condition, loc, message);</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Args&gt;</div>
+<div class="line">  <span class="keyword">requires</span>(<span class="keyword">sizeof</span>...(Args) &gt; 0)</div>
+<div class="line">inline <span class="keywordtype">void</span> Logger::LogAssertionFailure(std::string_view condition, const std::source_location&amp; loc,</div>
+<div class="line">                                        std::format_string&lt;Args...&gt; fmt, Args&amp;&amp;... args) noexcept {</div>
+<div class="line">  <span class="keywordflow">try</span> {</div>
+<div class="line">    <span class="keyword">const</span> std::string message = std::format(fmt, std::forward&lt;Args&gt;(args)...);</div>
+<div class="line">    <a class="code hl_function" href="namespacehelios_1_1details.html#ab945b18265153dab5ad54924fd8569cc">LogAssertionFailure</a>(condition, loc, message);</div>
+<div class="line">  } <span class="keywordflow">catch</span> (...) {</div>
+<div class="line">    <a class="code hl_function" href="namespacehelios_1_1details.html#ab945b18265153dab5ad54924fd8569cc">LogAssertionFailure</a>(condition, loc, <span class="stringliteral">&quot;Formatting error in assertion message&quot;</span>);</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;LoggerTrait T&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1Logger.html#a70aeef93be2358dec8ffcc656e3cd597">Logger::HasLogger</a>(T <span class="comment">/*logger*/</span>) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line">  <span class="keyword">const</span> std::shared_lock lock(loggers_mutex_);</div>
+<div class="line">  <span class="keywordflow">return</span> loggers_.contains(LoggerIdOf&lt;T&gt;());</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">}  <span class="comment">// namespace helios</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Provide logger integration for assert.hpp</span></div>
+<div class="line"><span class="comment">// On MSVC, we define this in logger.cpp to avoid multiple definition errors</span></div>
+<div class="line"><span class="comment">// On GCC/Clang, the inline definition here takes precedence over the weak symbol in assert.cpp</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1details.html">helios::details</a> {</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#if !defined(_MSC_VER)</span></div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">void</span> <a id="a46" name="a46"></a><a class="code hl_function" href="namespacehelios_1_1details.html#acb85fa0b1f6ed26db0e078ace12921c8">LogAssertionFailureViaLogger</a>(std::string_view condition, <span class="keyword">const</span> std::source_location&amp; loc,</div>
+<div class="line">                                         std::string_view message) <span class="keyword">noexcept</span> {</div>
+<div class="line">  <a class="code hl_function" href="classhelios_1_1Logger.html#a0a1fdb516e345015a8de7c179bb4db99">Logger::GetInstance</a>().<a class="code hl_function" href="classhelios_1_1Logger.html#a6d32dc172f4a7736ca4fe71140d19a84">LogAssertionFailure</a>(condition, loc, message);</div>
+<div class="line">}</div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+<div class="line"> </div>
+<div class="line">}  <span class="comment">// namespace helios::details</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Log level macros</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#ifdef HELIOS_DEBUG_MODE</span></div>
+<div class="line"><span class="preprocessor">#define HELIOS_DEBUG(...) \</span></div>
+<div class="line"><span class="preprocessor">  ::helios::Logger::GetInstance().LogMessage(::helios::LogLevel::kDebug, std::source_location::current(), __VA_ARGS__)</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#define HELIOS_DEBUG_LOGGER(logger, ...)                                                                          \</span></div>
+<div class="line"><span class="preprocessor">  ::helios::Logger::GetInstance().LogMessage(logger, ::helios::LogLevel::kDebug, std::source_location::current(), \</span></div>
+<div class="line"><span class="preprocessor">                                             __VA_ARGS__)</span></div>
+<div class="line"><span class="preprocessor">#else</span></div>
+<div class="line"><span class="preprocessor">#define HELIOS_DEBUG(...) [[maybe_unused]] static constexpr auto HELIOS_ANONYMOUS_VAR(unused_debug) = 0</span></div>
+<div class="line"><span class="preprocessor">#define HELIOS_DEBUG_LOGGER(logger, ...) \</span></div>
+<div class="line"><span class="preprocessor">  [[maybe_unused]] static constexpr auto HELIOS_ANONYMOUS_VAR(unused_debug_logger) = 0</span></div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#if defined(HELIOS_DEBUG_MODE) || defined(HELIOS_RELEASE_WITH_DEBUG_INFO_MODE)</span></div>
+<div class="line"><span class="preprocessor">#define HELIOS_TRACE(...) \</span></div>
+<div class="line"><span class="preprocessor">  ::helios::Logger::GetInstance().LogMessage(::helios::LogLevel::kTrace, std::source_location::current(), __VA_ARGS__)</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#define HELIOS_TRACE_LOGGER(logger, ...)                                                                          \</span></div>
+<div class="line"><span class="preprocessor">  ::helios::Logger::GetInstance().LogMessage(logger, ::helios::LogLevel::kTrace, std::source_location::current(), \</span></div>
+<div class="line"><span class="preprocessor">                                             __VA_ARGS__)</span></div>
+<div class="line"><span class="preprocessor">#else</span></div>
+<div class="line"><span class="preprocessor">#define HELIOS_TRACE(...) [[maybe_unused]] static constexpr auto HELIOS_ANONYMOUS_VAR(unused_trace) = 0</span></div>
+<div class="line"><span class="preprocessor">#define HELIOS_TRACE_LOGGER(logger, ...) \</span></div>
+<div class="line"><span class="preprocessor">  [[maybe_unused]] static constexpr auto HELIOS_ANONYMOUS_VAR(unused_trace_logger) = 0</span></div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#define HELIOS_INFO(...) \</span></div>
+<div class="line"><span class="preprocessor">  ::helios::Logger::GetInstance().LogMessage(::helios::LogLevel::kInfo, std::source_location::current(), __VA_ARGS__)</span></div>
+<div class="line"><span class="preprocessor">#define HELIOS_WARN(...) \</span></div>
+<div class="line"><span class="preprocessor">  ::helios::Logger::GetInstance().LogMessage(::helios::LogLevel::kWarn, std::source_location::current(), __VA_ARGS__)</span></div>
+<div class="line"><span class="preprocessor">#define HELIOS_ERROR(...) \</span></div>
+<div class="line"><span class="preprocessor">  ::helios::Logger::GetInstance().LogMessage(::helios::LogLevel::kError, std::source_location::current(), __VA_ARGS__)</span></div>
+<div class="line"><span class="preprocessor">#define HELIOS_CRITICAL(...)                                                                                 \</span></div>
+<div class="line"><span class="preprocessor">  ::helios::Logger::GetInstance().LogMessage(::helios::LogLevel::kCritical, std::source_location::current(), \</span></div>
+<div class="line"><span class="preprocessor">                                             __VA_ARGS__)</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#define HELIOS_INFO_LOGGER(logger, ...)                                                                          \</span></div>
+<div class="line"><span class="preprocessor">  ::helios::Logger::GetInstance().LogMessage(logger, ::helios::LogLevel::kInfo, std::source_location::current(), \</span></div>
+<div class="line"><span class="preprocessor">                                             __VA_ARGS__)</span></div>
+<div class="line"><span class="preprocessor">#define HELIOS_WARN_LOGGER(logger, ...)                                                                          \</span></div>
+<div class="line"><span class="preprocessor">  ::helios::Logger::GetInstance().LogMessage(logger, ::helios::LogLevel::kWarn, std::source_location::current(), \</span></div>
+<div class="line"><span class="preprocessor">                                             __VA_ARGS__)</span></div>
+<div class="line"><span class="preprocessor">#define HELIOS_ERROR_LOGGER(logger, ...)                                                                          \</span></div>
+<div class="line"><span class="preprocessor">  ::helios::Logger::GetInstance().LogMessage(logger, ::helios::LogLevel::kError, std::source_location::current(), \</span></div>
+<div class="line"><span class="preprocessor">                                             __VA_ARGS__)</span></div>
+<div class="line"><span class="preprocessor">#define HELIOS_CRITICAL_LOGGER(logger, ...)                                                                          \</span></div>
+<div class="line"><span class="preprocessor">  ::helios::Logger::GetInstance().LogMessage(logger, ::helios::LogLevel::kCritical, std::source_location::current(), \</span></div>
+<div class="line"><span class="preprocessor">                                             __VA_ARGS__)</span></div>
+<div class="ttc" id="aclasshelios_1_1Logger_html_a0390d8c22bfc97ed5de24c1c6ffb847c"><div class="ttname"><a href="classhelios_1_1Logger.html#a0390d8c22bfc97ed5de24c1c6ffb847c">helios::Logger::SetLevel</a></div><div class="ttdeci">void SetLevel(T logger, LogLevel level) noexcept</div><div class="ttdoc">Sets the minimum log level for a typed logger.</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00382">logger.hpp:382</a></div></div>
+<div class="ttc" id="aclasshelios_1_1Logger_html_a0a1fdb516e345015a8de7c179bb4db99"><div class="ttname"><a href="classhelios_1_1Logger.html#a0a1fdb516e345015a8de7c179bb4db99">helios::Logger::GetInstance</a></div><div class="ttdeci">static Logger &amp; GetInstance() noexcept</div><div class="ttdoc">Gets the singleton instance.</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00447">logger.hpp:447</a></div></div>
+<div class="ttc" id="aclasshelios_1_1Logger_html_a3535c760b83e2e52e38d0d49a7edecab"><div class="ttname"><a href="classhelios_1_1Logger.html#a3535c760b83e2e52e38d0d49a7edecab">helios::Logger::FlushAll</a></div><div class="ttdeci">void FlushAll() noexcept</div><div class="ttdoc">Flushes all registered loggers.</div><div class="ttdef"><b>Definition</b> <a href="logger_8cpp_source.html#l00278">logger.cpp:278</a></div></div>
+<div class="ttc" id="aclasshelios_1_1Logger_html_a6d32dc172f4a7736ca4fe71140d19a84"><div class="ttname"><a href="classhelios_1_1Logger.html#a6d32dc172f4a7736ca4fe71140d19a84">helios::Logger::LogAssertionFailure</a></div><div class="ttdeci">void LogAssertionFailure(T logger, std::string_view condition, const std::source_location &amp;loc, std::string_view message) noexcept</div><div class="ttdoc">Logs assertion failure with typed logger.</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00595">logger.hpp:595</a></div></div>
+<div class="ttc" id="aclasshelios_1_1Logger_html_a70aeef93be2358dec8ffcc656e3cd597"><div class="ttname"><a href="classhelios_1_1Logger.html#a70aeef93be2358dec8ffcc656e3cd597">helios::Logger::HasLogger</a></div><div class="ttdeci">bool HasLogger(T logger={}) const noexcept</div><div class="ttdoc">Checks if a logger with the given type exists.</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00636">logger.hpp:636</a></div></div>
+<div class="ttc" id="aclasshelios_1_1Logger_html_a733924350efe854cc51936d0cd674811"><div class="ttname"><a href="classhelios_1_1Logger.html#a733924350efe854cc51936d0cd674811">helios::Logger::ShouldLog</a></div><div class="ttdeci">bool ShouldLog(LogLevel level) const noexcept</div><div class="ttdoc">Checks if the default logger should log messages at the given level.</div><div class="ttdef"><b>Definition</b> <a href="logger_8cpp_source.html#l00307">logger.cpp:307</a></div></div>
+<div class="ttc" id="aclasshelios_1_1Logger_html_a7b7c70e161a97f50e81ae5d5df4ba525"><div class="ttname"><a href="classhelios_1_1Logger.html#a7b7c70e161a97f50e81ae5d5df4ba525">helios::Logger::GetLevel</a></div><div class="ttdeci">LogLevel GetLevel() const noexcept</div><div class="ttdoc">Gets the current log level for the default logger.</div><div class="ttdef"><b>Definition</b> <a href="logger_8cpp_source.html#l00314">logger.cpp:314</a></div></div>
+<div class="ttc" id="aclasshelios_1_1Logger_html_a7f7ce3e5192e79e003e068fad3dadd8d"><div class="ttname"><a href="classhelios_1_1Logger.html#a7f7ce3e5192e79e003e068fad3dadd8d">helios::Logger::AddLogger</a></div><div class="ttdeci">void AddLogger(T logger, LoggerConfig config=LoggerConfigOf&lt; T &gt;()) noexcept</div><div class="ttdoc">Adds a logger with the specified type and configuration.</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00521">logger.hpp:521</a></div></div>
+<div class="ttc" id="aclasshelios_1_1Logger_html_a8114dd095687df9af2b3401da9007ebf"><div class="ttname"><a href="classhelios_1_1Logger.html#a8114dd095687df9af2b3401da9007ebf">helios::Logger::LogMessage</a></div><div class="ttdeci">void LogMessage(T logger, LogLevel level, const std::source_location &amp;loc, std::string_view message) noexcept</div><div class="ttdoc">Logs a string message with typed logger.</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00557">logger.hpp:557</a></div></div>
+<div class="ttc" id="aclasshelios_1_1Logger_html_a9dbe1efcd55f0306632881153ed2f4d2"><div class="ttname"><a href="classhelios_1_1Logger.html#a9dbe1efcd55f0306632881153ed2f4d2">helios::Logger::~Logger</a></div><div class="ttdeci">~Logger() noexcept=default</div></div>
+<div class="ttc" id="aclasshelios_1_1Logger_html_aa0728b97cc52f74964604d705392e0c4"><div class="ttname"><a href="classhelios_1_1Logger.html#aa0728b97cc52f74964604d705392e0c4">helios::Logger::GetDefaultConfig</a></div><div class="ttdeci">const LoggerConfig &amp; GetDefaultConfig() const noexcept</div><div class="ttdoc">Gets the current default configuration.</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00441">logger.hpp:441</a></div></div>
+<div class="ttc" id="aclasshelios_1_1Logger_html_ab6999bf2bbeb130e386cd181e648cf09"><div class="ttname"><a href="classhelios_1_1Logger.html#ab6999bf2bbeb130e386cd181e648cf09">helios::Logger::SetDefaultConfig</a></div><div class="ttdeci">void SetDefaultConfig(const LoggerConfig &amp;config) noexcept</div><div class="ttdoc">Sets the global default configuration for new loggers.</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00373">logger.hpp:373</a></div></div>
+<div class="ttc" id="aclasshelios_1_1Logger_html_ab9c17ca826531504e5d8f750c99524ec"><div class="ttname"><a href="classhelios_1_1Logger.html#ab9c17ca826531504e5d8f750c99524ec">helios::Logger::Flush</a></div><div class="ttdeci">void Flush(T logger={}) noexcept</div><div class="ttdoc">Flushes a specific logger.</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00269">logger.hpp:269</a></div></div>
+<div class="ttc" id="aclasshelios_1_1Logger_html_ac7de5ff321565b6c30909ccbcbb5503f"><div class="ttname"><a href="classhelios_1_1Logger.html#ac7de5ff321565b6c30909ccbcbb5503f">helios::Logger::Logger</a></div><div class="ttdeci">Logger(const Logger &amp;)=delete</div></div>
+<div class="ttc" id="aclasshelios_1_1Logger_html_ae8217cc2410acd4f89ac762c457bad8f"><div class="ttname"><a href="classhelios_1_1Logger.html#ae8217cc2410acd4f89ac762c457bad8f">helios::Logger::RemoveLogger</a></div><div class="ttdeci">void RemoveLogger(T logger={}) noexcept</div><div class="ttdoc">Removes a logger with the given type.</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00538">logger.hpp:538</a></div></div>
+<div class="ttc" id="acore__pch_8hpp_html"><div class="ttname"><a href="core__pch_8hpp.html">core_pch.hpp</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1details_html"><div class="ttname"><a href="namespacehelios_1_1details.html">helios::details</a></div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00018">assert.hpp:18</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1details_html_ab945b18265153dab5ad54924fd8569cc"><div class="ttname"><a href="namespacehelios_1_1details.html#ab945b18265153dab5ad54924fd8569cc">helios::details::LogAssertionFailure</a></div><div class="ttdeci">void LogAssertionFailure(std::string_view condition, const std::source_location &amp;loc, std::string_view message) noexcept</div><div class="ttdoc">Unified assertion logging function used by macros below.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00048">assert.hpp:48</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1details_html_acb85fa0b1f6ed26db0e078ace12921c8"><div class="ttname"><a href="namespacehelios_1_1details.html#acb85fa0b1f6ed26db0e078ace12921c8">helios::details::LogAssertionFailureViaLogger</a></div><div class="ttdeci">void LogAssertionFailureViaLogger(std::string_view condition, const std::source_location &amp;loc, std::string_view message) noexcept</div><div class="ttdoc">Bridge to logger-provided assertion logging.</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00649">logger.hpp:649</a></div></div>
+<div class="ttc" id="anamespacehelios_html"><div class="ttname"><a href="namespacehelios.html">helios</a></div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00017">access_policy.hpp:17</a></div></div>
+<div class="ttc" id="anamespacehelios_html_a108806acf89b89e91b9f73f36c8e154d"><div class="ttname"><a href="namespacehelios.html#a108806acf89b89e91b9f73f36c8e154d">helios::LoggerConfigOf</a></div><div class="ttdeci">LoggerConfig LoggerConfigOf() noexcept</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00200">logger.hpp:200</a></div></div>
+<div class="ttc" id="anamespacehelios_html_a22a572a5b6a1313de5eaf69115bbad71"><div class="ttname"><a href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">helios::LogLevel</a></div><div class="ttdeci">LogLevel</div><div class="ttdoc">Log severity levels.</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00034">logger.hpp:34</a></div></div>
+<div class="ttc" id="anamespacehelios_html_a22a572a5b6a1313de5eaf69115bbad71a176a473e63c17ccdac91640c67f149bf"><div class="ttname"><a href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71a176a473e63c17ccdac91640c67f149bf">helios::LogLevel::kInfo</a></div><div class="ttdeci">@ kInfo</div></div>
+<div class="ttc" id="anamespacehelios_html_a22a572a5b6a1313de5eaf69115bbad71a5a20548c220f372fc701cae6de94040b"><div class="ttname"><a href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71a5a20548c220f372fc701cae6de94040b">helios::LogLevel::kCritical</a></div><div class="ttdeci">@ kCritical</div></div>
+<div class="ttc" id="anamespacehelios_html_a22a572a5b6a1313de5eaf69115bbad71a61a920eb4a24199ec6a36dd90f2a30b7"><div class="ttname"><a href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71a61a920eb4a24199ec6a36dd90f2a30b7">helios::LogLevel::kWarn</a></div><div class="ttdeci">@ kWarn</div></div>
+<div class="ttc" id="anamespacehelios_html_a22a572a5b6a1313de5eaf69115bbad71abb53ce21b7c0b7c8a8f7860a41901d29"><div class="ttname"><a href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71abb53ce21b7c0b7c8a8f7860a41901d29">helios::LogLevel::kDebug</a></div><div class="ttdeci">@ kDebug</div></div>
+<div class="ttc" id="anamespacehelios_html_a22a572a5b6a1313de5eaf69115bbad71ae3587c730cc1aa530fa4ddc9c4204e97"><div class="ttname"><a href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71ae3587c730cc1aa530fa4ddc9c4204e97">helios::LogLevel::kError</a></div><div class="ttdeci">@ kError</div></div>
+<div class="ttc" id="anamespacehelios_html_a22a572a5b6a1313de5eaf69115bbad71afa21506cd249f400de4a974b5a0c8e0e"><div class="ttname"><a href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71afa21506cd249f400de4a974b5a0c8e0e">helios::LogLevel::kTrace</a></div><div class="ttdeci">@ kTrace</div></div>
+<div class="ttc" id="anamespacehelios_html_a2e16aa56fd39d217978e91ef73646947"><div class="ttname"><a href="namespacehelios.html#a2e16aa56fd39d217978e91ef73646947">helios::LoggerIdOf</a></div><div class="ttdeci">constexpr LoggerId LoggerIdOf() noexcept</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00160">logger.hpp:160</a></div></div>
+<div class="ttc" id="anamespacehelios_html_a38e803d9d033acbe72b0a4d7250c104e"><div class="ttname"><a href="namespacehelios.html#a38e803d9d033acbe72b0a4d7250c104e">helios::LoggerNameOf</a></div><div class="ttdeci">constexpr std::string_view LoggerNameOf() noexcept</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00179">logger.hpp:179</a></div></div>
+<div class="ttc" id="anamespacehelios_html_a3adf145c13509e0e25874cf768acbdf8"><div class="ttname"><a href="namespacehelios.html#a3adf145c13509e0e25874cf768acbdf8">helios::kDefaultLogger</a></div><div class="ttdeci">constexpr DefaultLogger kDefaultLogger</div><div class="ttdoc">Constexpr instance of the default logger for easier user interface.</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00225">logger.hpp:225</a></div></div>
+<div class="ttc" id="anamespacehelios_html_a897d19e901838feb790a28ec9fcb9d7d"><div class="ttname"><a href="namespacehelios.html#a897d19e901838feb790a28ec9fcb9d7d">helios::LoggerId</a></div><div class="ttdeci">size_t LoggerId</div><div class="ttdoc">Type alias for logger type IDs.</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00106">logger.hpp:106</a></div></div>
+<div class="ttc" id="anamespacespdlog_html"><div class="ttname"><a href="namespacespdlog.html">spdlog</a></div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00022">logger.hpp:22</a></div></div>
+<div class="ttc" id="astructhelios_1_1DefaultLogger_html_a2ca37233b06351ff647340076c0bcaa2"><div class="ttname"><a href="structhelios_1_1DefaultLogger.html#a2ca37233b06351ff647340076c0bcaa2">helios::DefaultLogger::Config</a></div><div class="ttdeci">static LoggerConfig Config() noexcept</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00213">logger.hpp:213</a></div></div>
+<div class="ttc" id="astructhelios_1_1DefaultLogger_html_ad432d644aa717fe8f764788bdce18fc1"><div class="ttname"><a href="structhelios_1_1DefaultLogger.html#ad432d644aa717fe8f764788bdce18fc1">helios::DefaultLogger::Name</a></div><div class="ttdeci">static constexpr std::string_view Name() noexcept</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00212">logger.hpp:212</a></div></div>
+<div class="ttc" id="astructhelios_1_1LoggerConfig_html_a0819edca53d9999b4657e6f11d328e8b"><div class="ttname"><a href="structhelios_1_1LoggerConfig.html#a0819edca53d9999b4657e6f11d328e8b">helios::LoggerConfig::stack_trace_level</a></div><div class="ttdeci">LogLevel stack_trace_level</div><div class="ttdoc">Minimum level to include stack trace.</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00061">logger.hpp:61</a></div></div>
+<div class="ttc" id="astructhelios_1_1LoggerConfig_html_a1f3131b03b446c6731760ae68378ae02"><div class="ttname"><a href="structhelios_1_1LoggerConfig.html#a1f3131b03b446c6731760ae68378ae02">helios::LoggerConfig::source_location_level</a></div><div class="ttdeci">LogLevel source_location_level</div><div class="ttdoc">Minimum level to include source location.</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00060">logger.hpp:60</a></div></div>
+<div class="ttc" id="astructhelios_1_1LoggerConfig_html_a2272fc0925d88bda4995bee147d44676"><div class="ttname"><a href="structhelios_1_1LoggerConfig.html#a2272fc0925d88bda4995bee147d44676">helios::LoggerConfig::Release</a></div><div class="ttdeci">static LoggerConfig Release() noexcept</div><div class="ttdoc">Creates configuration optimized for release builds.</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00097">logger.hpp:97</a></div></div>
+<div class="ttc" id="astructhelios_1_1LoggerConfig_html_a28c156ba61f4d12cabe731103628e5bb"><div class="ttname"><a href="structhelios_1_1LoggerConfig.html#a28c156ba61f4d12cabe731103628e5bb">helios::LoggerConfig::enable_file</a></div><div class="ttdeci">bool enable_file</div><div class="ttdoc">Enable file output.</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00056">logger.hpp:56</a></div></div>
+<div class="ttc" id="astructhelios_1_1LoggerConfig_html_a2c0ee7de5f4558f3bb0d570fbe0e3b61"><div class="ttname"><a href="structhelios_1_1LoggerConfig.html#a2c0ee7de5f4558f3bb0d570fbe0e3b61">helios::LoggerConfig::log_directory</a></div><div class="ttdeci">std::filesystem::path log_directory</div><div class="ttdoc">Log output directory path.</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00040">logger.hpp:40</a></div></div>
+<div class="ttc" id="astructhelios_1_1LoggerConfig_html_a66e1ecc8a568848030ae9fb03b4a3735"><div class="ttname"><a href="structhelios_1_1LoggerConfig.html#a66e1ecc8a568848030ae9fb03b4a3735">helios::LoggerConfig::FileOnly</a></div><div class="ttdeci">static LoggerConfig FileOnly() noexcept</div><div class="ttdoc">Creates configuration for file-only output.</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00081">logger.hpp:81</a></div></div>
+<div class="ttc" id="astructhelios_1_1LoggerConfig_html_a6c0d4e1a8bbc91fca1830d7410c8fd77"><div class="ttname"><a href="structhelios_1_1LoggerConfig.html#a6c0d4e1a8bbc91fca1830d7410c8fd77">helios::LoggerConfig::Debug</a></div><div class="ttdeci">static LoggerConfig Debug() noexcept</div><div class="ttdoc">Creates configuration optimized for debug builds.</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00089">logger.hpp:89</a></div></div>
+<div class="ttc" id="astructhelios_1_1LoggerConfig_html_a6e402cb9b48565a504e9fea2fe96c2e2"><div class="ttname"><a href="structhelios_1_1LoggerConfig.html#a6e402cb9b48565a504e9fea2fe96c2e2">helios::LoggerConfig::file_name_pattern</a></div><div class="ttdeci">std::string file_name_pattern</div><div class="ttdoc">Pattern for log file names (supports format placeholders: {name}, {timestamp}).</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00041">logger.hpp:41</a></div></div>
+<div class="ttc" id="astructhelios_1_1LoggerConfig_html_a7a9095b67e68dcab0cbf6ac5ab647d72"><div class="ttname"><a href="structhelios_1_1LoggerConfig.html#a7a9095b67e68dcab0cbf6ac5ab647d72">helios::LoggerConfig::auto_flush_level</a></div><div class="ttdeci">LogLevel auto_flush_level</div><div class="ttdoc">Minimum log level to flush automatically.</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00053">logger.hpp:53</a></div></div>
+<div class="ttc" id="astructhelios_1_1LoggerConfig_html_a7b7a86ebaf76ce6f5e5494af33d3e4df"><div class="ttname"><a href="structhelios_1_1LoggerConfig.html#a7b7a86ebaf76ce6f5e5494af33d3e4df">helios::LoggerConfig::max_file_size</a></div><div class="ttdeci">size_t max_file_size</div><div class="ttdoc">Maximum size of a single log file in bytes (0 = no limit).</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00051">logger.hpp:51</a></div></div>
+<div class="ttc" id="astructhelios_1_1LoggerConfig_html_aa7213506612e6d92a54d378d6403b438"><div class="ttname"><a href="structhelios_1_1LoggerConfig.html#aa7213506612e6d92a54d378d6403b438">helios::LoggerConfig::ConsoleOnly</a></div><div class="ttdeci">static LoggerConfig ConsoleOnly() noexcept</div><div class="ttdoc">Creates configuration for console-only output.</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00073">logger.hpp:73</a></div></div>
+<div class="ttc" id="astructhelios_1_1LoggerConfig_html_aa98fe93efdcdd36fd878d4d61da46cb3"><div class="ttname"><a href="structhelios_1_1LoggerConfig.html#aa98fe93efdcdd36fd878d4d61da46cb3">helios::LoggerConfig::async_logging</a></div><div class="ttdeci">bool async_logging</div><div class="ttdoc">Enable async logging (better performance but may lose last logs on crash).</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00058">logger.hpp:58</a></div></div>
+<div class="ttc" id="astructhelios_1_1LoggerConfig_html_aba7aa257aed39cf89a340dda1e487034"><div class="ttname"><a href="structhelios_1_1LoggerConfig.html#aba7aa257aed39cf89a340dda1e487034">helios::LoggerConfig::truncate_files</a></div><div class="ttdeci">bool truncate_files</div><div class="ttdoc">Enable truncation of existing log files.</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00057">logger.hpp:57</a></div></div>
+<div class="ttc" id="astructhelios_1_1LoggerConfig_html_abbf91a5c6c06181588b6384ca17d0d92"><div class="ttname"><a href="structhelios_1_1LoggerConfig.html#abbf91a5c6c06181588b6384ca17d0d92">helios::LoggerConfig::file_pattern</a></div><div class="ttdeci">std::string file_pattern</div><div class="ttdoc">File log pattern.</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00048">logger.hpp:48</a></div></div>
+<div class="ttc" id="astructhelios_1_1LoggerConfig_html_abd1bb70cf6deddd148964c18e7952c7e"><div class="ttname"><a href="structhelios_1_1LoggerConfig.html#abd1bb70cf6deddd148964c18e7952c7e">helios::LoggerConfig::console_pattern</a></div><div class="ttdeci">std::string console_pattern</div><div class="ttdoc">Console log pattern.</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00047">logger.hpp:47</a></div></div>
+<div class="ttc" id="astructhelios_1_1LoggerConfig_html_ad38f42095fd2d451e7aad6d41defb534"><div class="ttname"><a href="structhelios_1_1LoggerConfig.html#ad38f42095fd2d451e7aad6d41defb534">helios::LoggerConfig::Default</a></div><div class="ttdeci">static LoggerConfig Default() noexcept</div><div class="ttdoc">Creates default configuration.</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00067">logger.hpp:67</a></div></div>
+<div class="ttc" id="astructhelios_1_1LoggerConfig_html_aea3d4341896549135f507d37dad911bc"><div class="ttname"><a href="structhelios_1_1LoggerConfig.html#aea3d4341896549135f507d37dad911bc">helios::LoggerConfig::enable_console</a></div><div class="ttdeci">bool enable_console</div><div class="ttdoc">Enable console output.</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00055">logger.hpp:55</a></div></div>
+<div class="ttc" id="astructhelios_1_1LoggerConfig_html_af58028dadf76230d4c1c5228a0b494f3"><div class="ttname"><a href="structhelios_1_1LoggerConfig.html#af58028dadf76230d4c1c5228a0b494f3">helios::LoggerConfig::max_files</a></div><div class="ttdeci">size_t max_files</div><div class="ttdoc">Maximum number of log files to keep (0 = no limit).</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00052">logger.hpp:52</a></div></div>
+</div><!-- fragment --> </div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

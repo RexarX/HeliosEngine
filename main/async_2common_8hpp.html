@@ -1,0 +1,271 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: src/core/include/helios/core/async/common.hpp File Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('async_2common_8hpp.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#concepts">Concepts</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#func-members">Functions</a>  </div>
+  <div class="headertitle"><div class="title">common.hpp File Reference</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;<a class="el" href="core__pch_8hpp_source.html">helios/core_pch.hpp</a>&gt;</code><br />
+<code>#include &lt;taskflow/core/task.hpp&gt;</code><br />
+<code>#include &lt;concepts&gt;</code><br />
+<code>#include &lt;cstdint&gt;</code><br />
+<code>#include &lt;expected&gt;</code><br />
+<code>#include &lt;string_view&gt;</code><br />
+<code>#include &lt;type_traits&gt;</code><br />
+</div>
+<p><a href="async_2common_8hpp_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespacehelios" id="r_namespacehelios"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios.html">helios</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespacehelios_1_1async" id="r_namespacehelios_1_1async"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1async.html">helios::async</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespacehelios_1_1async_1_1details" id="r_namespacehelios_1_1async_1_1details"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1async_1_1details.html">helios::async::details</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="concepts" name="concepts"></a>
+Concepts</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1async_1_1StaticTask.html">helios::async::StaticTask</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for static task callables. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1async_1_1SubTask.html">helios::async::SubTask</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for sub-task callables that receive a SubTaskGraph reference. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1async_1_1AnyTask.html">helios::async::AnyTask</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for any valid task callable. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:abdb9bb21bd2dff542f5374f6e057ee76" id="r_abdb9bb21bd2dff542f5374f6e057ee76"><td class="memTemplParams" colspan="2">template&lt;typename T  = void&gt; </td></tr>
+<tr class="memitem:abdb9bb21bd2dff542f5374f6e057ee76"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1async.html#abdb9bb21bd2dff542f5374f6e057ee76">helios::async::AsyncResult</a> = std::expected&lt; T, <a class="el" href="namespacehelios_1_1async.html#a09e08269962c2b0f4513d8f58a31db0a">AsyncError</a> &gt;</td></tr>
+<tr class="memdesc:abdb9bb21bd2dff542f5374f6e057ee76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Result type for async operations.  <br /></td></tr>
+<tr class="separator:abdb9bb21bd2dff542f5374f6e057ee76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a09f164e8eba5bc20e0d6176fe9804ccd" id="r_a09f164e8eba5bc20e0d6176fe9804ccd"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1async.html#a09f164e8eba5bc20e0d6176fe9804ccd">helios::async::TaskType</a> : uint8_t { <a class="el" href="namespacehelios_1_1async.html#a09f164e8eba5bc20e0d6176fe9804ccdaec0fc0100c4fc1ce4eea230c3dc10360">helios::async::Undefined</a>
+, <a class="el" href="namespacehelios_1_1async.html#a09f164e8eba5bc20e0d6176fe9804ccda84a8921b25f505d0d2077aeb5db4bc16">helios::async::Static</a>
+, <a class="el" href="namespacehelios_1_1async.html#a09f164e8eba5bc20e0d6176fe9804ccdadd8f1e76a5041e6952528098522b28ae">helios::async::SubTask</a>
+, <a class="el" href="namespacehelios_1_1async.html#a09f164e8eba5bc20e0d6176fe9804ccda24aa4117da86c41684ad25742832dfa6">helios::async::Async</a>
+ }</td></tr>
+<tr class="memdesc:a09f164e8eba5bc20e0d6176fe9804ccd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Types of tasks in the async system.  <a href="namespacehelios_1_1async.html#a09f164e8eba5bc20e0d6176fe9804ccd">More...</a><br /></td></tr>
+<tr class="separator:a09f164e8eba5bc20e0d6176fe9804ccd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09e08269962c2b0f4513d8f58a31db0a" id="r_a09e08269962c2b0f4513d8f58a31db0a"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1async.html#a09e08269962c2b0f4513d8f58a31db0a">helios::async::AsyncError</a> : uint8_t { <br />
+&#160;&#160;<a class="el" href="namespacehelios_1_1async.html#a09e08269962c2b0f4513d8f58a31db0aad0b4ab5393aa59643bcb6fca74d9b28d">helios::async::InvalidTask</a>
+, <a class="el" href="namespacehelios_1_1async.html#a09e08269962c2b0f4513d8f58a31db0aacb62d991713e6846fc35d22ea2a90fac">helios::async::ExecutorShutdown</a>
+, <a class="el" href="namespacehelios_1_1async.html#a09e08269962c2b0f4513d8f58a31db0aaa9570c20394b496974b8393df437605c">helios::async::TaskNotFound</a>
+, <a class="el" href="namespacehelios_1_1async.html#a09e08269962c2b0f4513d8f58a31db0aacce733a321fc57f71d4a4c83eb83a019">helios::async::InvalidDependency</a>
+, <br />
+&#160;&#160;<a class="el" href="namespacehelios_1_1async.html#a09e08269962c2b0f4513d8f58a31db0aaa7322e5a4431c87bdf7cce02f764d4a4">helios::async::CircularDependency</a>
+, <a class="el" href="namespacehelios_1_1async.html#a09e08269962c2b0f4513d8f58a31db0aa7f480b617754abffc59fa6d5169b1141">helios::async::SchedulingFailed</a>
+, <a class="el" href="namespacehelios_1_1async.html#a09e08269962c2b0f4513d8f58a31db0aa534c948bfc1e99ad05e0236100d8d946">helios::async::ThreadNotAvailable</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:a09e08269962c2b0f4513d8f58a31db0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Error codes for async operations.  <a href="namespacehelios_1_1async.html#a09e08269962c2b0f4513d8f58a31db0a">More...</a><br /></td></tr>
+<tr class="separator:a09e08269962c2b0f4513d8f58a31db0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a39d83d17a98cd197bd3f3167bf38d32f" id="r_a39d83d17a98cd197bd3f3167bf38d32f"><td class="memItemLeft" align="right" valign="top">constexpr std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1async.html#a39d83d17a98cd197bd3f3167bf38d32f">helios::async::ToString</a> (<a class="el" href="namespacehelios_1_1async.html#a09e08269962c2b0f4513d8f58a31db0a">AsyncError</a> error) noexcept</td></tr>
+<tr class="memdesc:a39d83d17a98cd197bd3f3167bf38d32f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts AsyncError to string representation.  <br /></td></tr>
+<tr class="separator:a39d83d17a98cd197bd3f3167bf38d32f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4bf6f03c0dfef8c6e6fb7938bd57d55" id="r_ae4bf6f03c0dfef8c6e6fb7938bd57d55"><td class="memItemLeft" align="right" valign="top">static constexpr <a class="el" href="namespacehelios_1_1async.html#a09f164e8eba5bc20e0d6176fe9804ccd">TaskType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1async_1_1details.html#ae4bf6f03c0dfef8c6e6fb7938bd57d55">helios::async::details::ConvertTaskType</a> (tf::TaskType type) noexcept</td></tr>
+<tr class="memdesc:ae4bf6f03c0dfef8c6e6fb7938bd57d55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts Taskflow task type to Helios task type.  <br /></td></tr>
+<tr class="separator:ae4bf6f03c0dfef8c6e6fb7938bd57d55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_aebb8dcc11953d78e620bbef0b9e2183.html">core</a></li><li class="navelem"><a class="el" href="dir_8f49dd062eda24395df599c5385a3cb1.html">include</a></li><li class="navelem"><a class="el" href="dir_23069df5183a130785923908e80258ad.html">helios</a></li><li class="navelem"><a class="el" href="dir_2da2d982aeea650f7dd0b34d7b8d0119.html">core</a></li><li class="navelem"><a class="el" href="dir_fc062457b39c39fb8ec6aaf8468afab9.html">async</a></li><li class="navelem"><a class="el" href="async_2common_8hpp.html">common.hpp</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

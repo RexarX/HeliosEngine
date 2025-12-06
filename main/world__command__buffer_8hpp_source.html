@@ -1,0 +1,456 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: src/core/include/helios/core/ecs/world_command_buffer.hpp Source File</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('world__command__buffer_8hpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">world_command_buffer.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="world__command__buffer_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;<a class="code" href="core__pch_8hpp.html">helios/core_pch.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;<a class="code" href="assert_8hpp.html">helios/core/assert.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;<a class="code" href="commands_8hpp.html">helios/core/ecs/details/commands.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;<a class="code" href="system__local__storage_8hpp.html">helios/core/ecs/details/system_local_storage.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;<a class="code" href="entity_8hpp.html">helios/core/ecs/entity.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;<a class="code" href="event_8hpp.html">helios/core/ecs/event.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;<a class="code" href="world_8hpp.html">helios/core/ecs/world.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;<a class="code" href="logger_8hpp.html">helios/core/logger.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;algorithm&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;concepts&gt;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &lt;ranges&gt;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &lt;utility&gt;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1ecs.html">helios::ecs</a> {</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"></span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"> * @brief Command buffer to record world operations for deferred execution.</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"> * @details Provides a convenient interface for recording operations that will be executed</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment"> * during World::Update(). All operations are queued locally and flushed to SystemLocalStorage</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment"> * on destruction or explicit Flush() call.</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment"> * Supports custom allocators for internal storage, enabling use of frame allocators</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment"> * for zero-overhead temporary allocations within systems.</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment"> * @note Not thread-safe. Created per system.</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment"> * @tparam Allocator Allocator type for internal command pointer storage</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment"> * @example</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment"> * @code</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment"> * void MySystem(app::SystemContext&amp; ctx) {</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment"> *   auto cmd = ctx.Commands();  // Uses frame allocator by default</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment"> *   cmd.Destroy(entity);</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment"> *   cmd.ClearEvents&lt;MyEvent&gt;();</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment"> *   // Commands are flushed automatically when cmd goes out of scope</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment"> * }</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment"> * @endcode</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Allocator = std::allocator&lt;std::unique_ptr&lt;Command&gt;&gt;&gt;</div>
+<div class="foldopen" id="foldopen00045" data-start="{" data-end="};">
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html">   45</a></span><span class="keyword">class </span><a class="code hl_class" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html">WorldCmdBuffer</a> {</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#afc7ecbb5b5e63d5f1679f3f0d751ad56">   47</a></span>  <span class="keyword">using </span><a class="code hl_typedef" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#afc7ecbb5b5e63d5f1679f3f0d751ad56">allocator_type</a> = Allocator;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment"></span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">   * @brief Constructs a WorldCmdBuffer for recording commands.</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">   * @param local_storage Reference to system local storage for command execution</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">   * @param alloc Allocator instance for internal storage</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">   */</span></div>
+<div class="foldopen" id="foldopen00054" data-start="{" data-end="}">
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#a7b5987d599813040d6114345381e982b">   54</a></span>  <span class="keyword">explicit</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#a7b5987d599813040d6114345381e982b">WorldCmdBuffer</a>(<a class="code hl_class" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html">details::SystemLocalStorage</a>&amp; local_storage, Allocator <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">alloc</a> = Allocator{}) <span class="keyword">noexcept</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>      : local_storage_(local_storage), commands_(<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">alloc</a>), alloc_(<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">alloc</a>) {}</div>
+</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#a712e5770defe7e12e843c7ea7ce06ef4">   57</a></span>  <a class="code hl_function" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#a712e5770defe7e12e843c7ea7ce06ef4">WorldCmdBuffer</a>(<span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html">WorldCmdBuffer</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#a61221987d9d480e40a61603fe7e24d82">   58</a></span>  <a class="code hl_function" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#a61221987d9d480e40a61603fe7e24d82">WorldCmdBuffer</a>(<a class="code hl_class" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html">WorldCmdBuffer</a>&amp;&amp;) <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a> = <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">default</a>;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment"></span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">   * @brief Destructor that automatically flushes pending commands.</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#ac39997a16339480dd96d5bd6fb0cfff5">   63</a></span>  ~<a class="code hl_class" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html">WorldCmdBuffer</a>() <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a> { <a class="code hl_function" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#ae432e8ae5ec78e57822d5a403385fe18">Flush</a>(); }</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#a418798085115d7026a991cddba20f696">   65</a></span>  <a class="code hl_class" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html">WorldCmdBuffer</a>&amp; <a class="code hl_function" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#a418798085115d7026a991cddba20f696">operator=</a>(<span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html">WorldCmdBuffer</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#aaa524945aa2025bf5daad659525240fb">   66</a></span>  <a class="code hl_class" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html">WorldCmdBuffer</a>&amp; <a class="code hl_function" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#aaa524945aa2025bf5daad659525240fb">operator=</a>(<a class="code hl_class" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html">WorldCmdBuffer</a>&amp;&amp;) <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a> = <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">default</a>;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment"></span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment">   * @brief Flushes all pending commands to the system local storage.</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">   * @details Moves all locally buffered commands to SystemLocalStorage for later execution.</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">   * Called automatically by destructor. Safe to call multiple times.</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#ae432e8ae5ec78e57822d5a403385fe18">Flush</a>() <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a>;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment"></span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">   * @brief Pushes a custom command function to be executed on the world.</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">   * @tparam F Callable type that accepts World&amp;</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">   * @param func Function to execute on the world</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">template</a> &lt;<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">typename</a> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">F</a>&gt;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">requires</a> std::<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">invocable</a>&lt;<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">F</a>, <a class="code hl_class" href="classhelios_1_1ecs_1_1World.html">World</a>&amp;&gt;</div>
+<div class="foldopen" id="foldopen00082" data-start="{" data-end="}">
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#a48a9e1455731c6723a81aa11c3539f61">   82</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#a48a9e1455731c6723a81aa11c3539f61">Push</a>(<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">F</a>&amp;&amp; <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">func</a>) {</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    commands_.push_back(std::make_unique&lt;<a class="code hl_class" href="classhelios_1_1ecs_1_1details_1_1FunctionCmd.html">details::FunctionCmd&lt;F&gt;</a>&gt;(std::forward&lt;F&gt;(<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">func</a>)));</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  }</div>
+</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment"></span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment">   * @brief Enqueues destruction of a single entity.</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment">   * @warning Triggers assertion in next cases:</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment">   * - Entity is invalid.</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">   * - Entity is not owned by world during command execution.</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">   * @param entity Entity to destroy</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#ad5210475d25a416a44353b422c5b34ec">Destroy</a>(<a class="code hl_class" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> entity);</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment"></span> </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment">   * @brief Enqueues destruction of entities.</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment">   * @warning Triggers assertion in next cases:</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment">   * - Any entity is invalid.</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment">   * - Any entity is not owned by world during command execution.</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="comment">   * @tparam R Range type containing Entity elements</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="comment">   * @param entities Entities to destroy</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>  <span class="keyword">template</span> &lt;std::ranges::range R&gt;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <span class="keyword">requires</span> std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="code hl_class" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>&gt;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#ad5210475d25a416a44353b422c5b34ec">Destroy</a>(<span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">R</a>&amp; <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">entities</a>);</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="comment"></span> </div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="comment">   * @brief Enqueues try-destruction of a single entity.</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="comment">   * @details Skips non-existing entity.</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="comment">   * @warning Triggers assertion in next cases:</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="comment">   * - Entity is invalid.</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="comment">   * - Entity is not owned by world during command execution.</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="comment">   * @param entity Entity to try destroy</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#a90d37c86eaee7c34026084d00633416c">TryDestroy</a>(<a class="code hl_class" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> entity);</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="comment"></span> </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="comment">   * @brief Enqueues try-destruction of entities.</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="comment">   * @details Skips non-existing entities.</span></div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="comment">   * @warning Triggers assertion in next cases:</span></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="comment">   * - Any entity is invalid.</span></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="comment">   * - Any entity is not owned by world during command execution.</span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="comment">   * @tparam R Range type containing Entity elements</span></div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="comment">   * @param entities Entities to try destroy</span></div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>  <span class="keyword">template</span> &lt;std::ranges::range R&gt;</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    <span class="keyword">requires</span> std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="code hl_class" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>&gt;</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#a90d37c86eaee7c34026084d00633416c">TryDestroy</a>(<span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">R</a>&amp; <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">entities</a>);</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="comment"></span> </div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span><span class="comment">   * @brief Queues a command to clear all events of a specific type.</span></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="comment">   * @tparam T Event type to clear</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>  <span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="foldopen" id="foldopen00135" data-start="{" data-end="}">
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#aab92e0e1deaa5803c5adec14d9bf8ea6">  135</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#aab92e0e1deaa5803c5adec14d9bf8ea6">ClearEvents</a>() {</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    commands_.push_back(std::make_unique&lt;<a class="code hl_class" href="classhelios_1_1ecs_1_1details_1_1ClearEventsCmd.html">details::ClearEventsCmd&lt;T&gt;</a>&gt;());</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>  }</div>
+</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span><span class="comment"></span> </div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span><span class="comment">   * @brief Queues a command to clear all event queues without removing registration.</span></div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span><span class="comment">   * @details Events can still be written/read after this command executes.</span></div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#a18abd7c7f125eed356e54963bf7d0030">  143</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#a18abd7c7f125eed356e54963bf7d0030">ClearEvents</a>() { commands_.push_back(std::make_unique&lt;details::ClearAllEventsCmd&gt;()); }</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span><span class="comment"></span> </div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span><span class="comment">   * @brief Checks if there are no pending commands.</span></div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span><span class="comment">   * @return True if no commands are buffered, false otherwise</span></div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#a1ab42e101a8c7b7929061b9dac05e800">  149</a></span>  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#a1ab42e101a8c7b7929061b9dac05e800">Empty</a>() <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">const</a> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a> { <span class="keywordflow">return</span> commands_.empty(); }</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span><span class="comment"></span> </div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span><span class="comment">   * @brief Gets the number of pending commands.</span></div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span><span class="comment">   * @return Number of commands in the buffer</span></div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#abf04c00c0bbab9ab679dc244ac3a55cb">  155</a></span>  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <span class="keywordtype">size_t</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#abf04c00c0bbab9ab679dc244ac3a55cb">Size</a>() <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">const</a> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a> { <span class="keywordflow">return</span> commands_.size(); }</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span><span class="comment"></span> </div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span><span class="comment">   * @brief Gets the allocator used by this buffer.</span></div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span><span class="comment">   * @return Copy of the allocator</span></div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#a1da7ce1175d0769895c4ece8002bc5c5">  161</a></span>  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <a class="code hl_typedef" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#afc7ecbb5b5e63d5f1679f3f0d751ad56">allocator_type</a> <a class="code hl_function" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#a1da7ce1175d0769895c4ece8002bc5c5">get_allocator</a>() <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">const</a> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a> { <span class="keywordflow">return</span> alloc_; }</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>  <a class="code hl_class" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html">details::SystemLocalStorage</a>&amp; local_storage_;                 <span class="comment">///&lt; Reference to system local storage</span></div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>  std::vector&lt;std::unique_ptr&lt;Command&gt;, Allocator&gt; commands_;  <span class="comment">///&lt; Local command buffer</span></div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">no_unique_address</a>]] Allocator alloc_;                      <span class="comment">///&lt; Allocator instance</span></div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>};</div>
+</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span> </div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Allocator&gt;</div>
+<div class="foldopen" id="foldopen00170" data-start="{" data-end="}">
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#ae432e8ae5ec78e57822d5a403385fe18">  170</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#ae432e8ae5ec78e57822d5a403385fe18">WorldCmdBuffer&lt;Allocator&gt;::Flush</a>() <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a> {</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">cmd</a> : commands_) {</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    <span class="keywordflow">if</span> (<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">cmd</a> != <span class="keyword">nullptr</span>) [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">likely</a>]] {</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>      local_storage_.AddCommand(std::move(<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">cmd</a>));</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    }</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>  }</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>  commands_.clear();</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>}</div>
+</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span> </div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Allocator&gt;</div>
+<div class="foldopen" id="foldopen00180" data-start="{" data-end="}">
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#ad5210475d25a416a44353b422c5b34ec">  180</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#ad5210475d25a416a44353b422c5b34ec">WorldCmdBuffer&lt;Allocator&gt;::Destroy</a>(<a class="code hl_class" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> entity) {</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(entity.<a class="code hl_function" href="classhelios_1_1ecs_1_1Entity.html#a27290ea2728bdbc0c87bf03baae31fd7">Valid</a>(), <span class="stringliteral">&quot;Failed to destroy entity: Entity is not valid!&quot;</span>);</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>  commands_.push_back(std::make_unique&lt;details::DestroyEntityCmd&gt;(entity));</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>}</div>
+</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span> </div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Allocator&gt;</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span><span class="keyword">template</span> &lt;std::ranges::range R&gt;</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>  <span class="keyword">requires</span> std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="code hl_class" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>&gt;</div>
+<div class="foldopen" id="foldopen00188" data-start="{" data-end="}">
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#acb9336ddf4b519212442344bca379294">  188</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#ad5210475d25a416a44353b422c5b34ec">WorldCmdBuffer&lt;Allocator&gt;::Destroy</a>(<span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">R</a>&amp; <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">entities</a>) {</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(std::ranges::all_of(<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">entities</a>, [](<span class="keyword">const</span> <span class="keyword">auto</span>&amp; entity) { <span class="keywordflow">return</span> entity.Valid(); }),</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>                <span class="stringliteral">&quot;Failed to destroy entities: All entities must be valid!&quot;</span>);</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>  commands_.push_back(std::make_unique&lt;details::DestroyEntitiesCmd&gt;(<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">entities</a>));</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>}</div>
+</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span> </div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Allocator&gt;</div>
+<div class="foldopen" id="foldopen00195" data-start="{" data-end="}">
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#a90d37c86eaee7c34026084d00633416c">  195</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#a90d37c86eaee7c34026084d00633416c">WorldCmdBuffer&lt;Allocator&gt;::TryDestroy</a>(<a class="code hl_class" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> entity) {</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(entity.<a class="code hl_function" href="classhelios_1_1ecs_1_1Entity.html#a27290ea2728bdbc0c87bf03baae31fd7">Valid</a>(), <span class="stringliteral">&quot;Failed to try destroy entity: Entity is not valid!&quot;</span>);</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>  commands_.push_back(std::make_unique&lt;details::TryDestroyEntityCmd&gt;(entity));</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>}</div>
+</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span> </div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Allocator&gt;</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span><span class="keyword">template</span> &lt;std::ranges::range R&gt;</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>  <span class="keyword">requires</span> std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="code hl_class" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>&gt;</div>
+<div class="foldopen" id="foldopen00203" data-start="{" data-end="}">
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#a19ce080d0adee1fda0b8435b4c0e4b73">  203</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#a90d37c86eaee7c34026084d00633416c">WorldCmdBuffer&lt;Allocator&gt;::TryDestroy</a>(<span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">R</a>&amp; <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">entities</a>) {</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(std::ranges::all_of(<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">entities</a>, [](<span class="keyword">const</span> <span class="keyword">auto</span>&amp; entity) { <span class="keywordflow">return</span> entity.Valid(); }),</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>                <span class="stringliteral">&quot;Failed to destroy entities: All entities must be valid!&quot;</span>);</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>  commands_.push_back(std::make_unique&lt;details::TryDestroyEntitiesCmd&gt;(<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">entities</a>));</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>}</div>
+</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span> </div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>}  <span class="comment">// namespace helios::ecs</span></div>
+<div class="ttc" id="aassert_8hpp_html"><div class="ttname"><a href="assert_8hpp.html">assert.hpp</a></div></div>
+<div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00149">assert.hpp:149</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1BasicQuery_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicQuery.html">helios::ecs::BasicQuery</a></div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l01107">query.hpp:1107</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1Entity_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1Entity.html">helios::ecs::Entity</a></div><div class="ttdoc">Unique identifier for entities with generation counter to handle recycling.</div><div class="ttdef"><b>Definition</b> <a href="entity_8hpp_source.html#l00021">entity.hpp:21</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1Entity_html_a27290ea2728bdbc0c87bf03baae31fd7"><div class="ttname"><a href="classhelios_1_1ecs_1_1Entity.html#a27290ea2728bdbc0c87bf03baae31fd7">helios::ecs::Entity::Valid</a></div><div class="ttdeci">constexpr bool Valid() const noexcept</div><div class="ttdoc">Checks if the entity is valid.</div><div class="ttdef"><b>Definition</b> <a href="entity_8hpp_source.html#l00058">entity.hpp:58</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1WorldCmdBuffer_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1WorldCmdBuffer.html">helios::ecs::WorldCmdBuffer</a></div><div class="ttdef"><b>Definition</b> <a href="world__command__buffer_8hpp_source.html#l00045">world_command_buffer.hpp:45</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1WorldCmdBuffer_html_a18abd7c7f125eed356e54963bf7d0030"><div class="ttname"><a href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#a18abd7c7f125eed356e54963bf7d0030">helios::ecs::WorldCmdBuffer::ClearEvents</a></div><div class="ttdeci">void ClearEvents()</div><div class="ttdoc">Queues a command to clear all event queues without removing registration.</div><div class="ttdef"><b>Definition</b> <a href="world__command__buffer_8hpp_source.html#l00143">world_command_buffer.hpp:143</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1WorldCmdBuffer_html_a1ab42e101a8c7b7929061b9dac05e800"><div class="ttname"><a href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#a1ab42e101a8c7b7929061b9dac05e800">helios::ecs::WorldCmdBuffer::Empty</a></div><div class="ttdeci">bool Empty() const noexcept</div><div class="ttdoc">Checks if there are no pending commands.</div><div class="ttdef"><b>Definition</b> <a href="world__command__buffer_8hpp_source.html#l00149">world_command_buffer.hpp:149</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1WorldCmdBuffer_html_a1da7ce1175d0769895c4ece8002bc5c5"><div class="ttname"><a href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#a1da7ce1175d0769895c4ece8002bc5c5">helios::ecs::WorldCmdBuffer::get_allocator</a></div><div class="ttdeci">allocator_type get_allocator() const noexcept</div><div class="ttdoc">Gets the allocator used by this buffer.</div><div class="ttdef"><b>Definition</b> <a href="world__command__buffer_8hpp_source.html#l00161">world_command_buffer.hpp:161</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1WorldCmdBuffer_html_a418798085115d7026a991cddba20f696"><div class="ttname"><a href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#a418798085115d7026a991cddba20f696">helios::ecs::WorldCmdBuffer::operator=</a></div><div class="ttdeci">WorldCmdBuffer &amp; operator=(const WorldCmdBuffer &amp;)=delete</div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1WorldCmdBuffer_html_a48a9e1455731c6723a81aa11c3539f61"><div class="ttname"><a href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#a48a9e1455731c6723a81aa11c3539f61">helios::ecs::WorldCmdBuffer::Push</a></div><div class="ttdeci">void Push(F &amp;&amp;func)</div><div class="ttdoc">Pushes a custom command function to be executed on the world.</div><div class="ttdef"><b>Definition</b> <a href="world__command__buffer_8hpp_source.html#l00082">world_command_buffer.hpp:82</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1WorldCmdBuffer_html_a61221987d9d480e40a61603fe7e24d82"><div class="ttname"><a href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#a61221987d9d480e40a61603fe7e24d82">helios::ecs::WorldCmdBuffer::WorldCmdBuffer</a></div><div class="ttdeci">WorldCmdBuffer(WorldCmdBuffer &amp;&amp;) noexcept=default</div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1WorldCmdBuffer_html_a712e5770defe7e12e843c7ea7ce06ef4"><div class="ttname"><a href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#a712e5770defe7e12e843c7ea7ce06ef4">helios::ecs::WorldCmdBuffer::WorldCmdBuffer</a></div><div class="ttdeci">WorldCmdBuffer(const WorldCmdBuffer &amp;)=delete</div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1WorldCmdBuffer_html_a7b5987d599813040d6114345381e982b"><div class="ttname"><a href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#a7b5987d599813040d6114345381e982b">helios::ecs::WorldCmdBuffer::WorldCmdBuffer</a></div><div class="ttdeci">WorldCmdBuffer(details::SystemLocalStorage &amp;local_storage, Allocator alloc=Allocator{}) noexcept</div><div class="ttdoc">Constructs a WorldCmdBuffer for recording commands.</div><div class="ttdef"><b>Definition</b> <a href="world__command__buffer_8hpp_source.html#l00054">world_command_buffer.hpp:54</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1WorldCmdBuffer_html_a90d37c86eaee7c34026084d00633416c"><div class="ttname"><a href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#a90d37c86eaee7c34026084d00633416c">helios::ecs::WorldCmdBuffer::TryDestroy</a></div><div class="ttdeci">void TryDestroy(Entity entity)</div><div class="ttdoc">Enqueues try-destruction of a single entity.</div><div class="ttdef"><b>Definition</b> <a href="world__command__buffer_8hpp_source.html#l00195">world_command_buffer.hpp:195</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1WorldCmdBuffer_html_aaa524945aa2025bf5daad659525240fb"><div class="ttname"><a href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#aaa524945aa2025bf5daad659525240fb">helios::ecs::WorldCmdBuffer::operator=</a></div><div class="ttdeci">WorldCmdBuffer &amp; operator=(WorldCmdBuffer &amp;&amp;) noexcept=default</div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1WorldCmdBuffer_html_aab92e0e1deaa5803c5adec14d9bf8ea6"><div class="ttname"><a href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#aab92e0e1deaa5803c5adec14d9bf8ea6">helios::ecs::WorldCmdBuffer::ClearEvents</a></div><div class="ttdeci">void ClearEvents()</div><div class="ttdoc">Queues a command to clear all events of a specific type.</div><div class="ttdef"><b>Definition</b> <a href="world__command__buffer_8hpp_source.html#l00135">world_command_buffer.hpp:135</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1WorldCmdBuffer_html_abf04c00c0bbab9ab679dc244ac3a55cb"><div class="ttname"><a href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#abf04c00c0bbab9ab679dc244ac3a55cb">helios::ecs::WorldCmdBuffer::Size</a></div><div class="ttdeci">size_t Size() const noexcept</div><div class="ttdoc">Gets the number of pending commands.</div><div class="ttdef"><b>Definition</b> <a href="world__command__buffer_8hpp_source.html#l00155">world_command_buffer.hpp:155</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1WorldCmdBuffer_html_ad5210475d25a416a44353b422c5b34ec"><div class="ttname"><a href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#ad5210475d25a416a44353b422c5b34ec">helios::ecs::WorldCmdBuffer::Destroy</a></div><div class="ttdeci">void Destroy(Entity entity)</div><div class="ttdoc">Enqueues destruction of a single entity.</div><div class="ttdef"><b>Definition</b> <a href="world__command__buffer_8hpp_source.html#l00180">world_command_buffer.hpp:180</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1WorldCmdBuffer_html_ae432e8ae5ec78e57822d5a403385fe18"><div class="ttname"><a href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#ae432e8ae5ec78e57822d5a403385fe18">helios::ecs::WorldCmdBuffer::Flush</a></div><div class="ttdeci">void Flush() noexcept</div><div class="ttdoc">Flushes all pending commands to the system local storage.</div><div class="ttdef"><b>Definition</b> <a href="world__command__buffer_8hpp_source.html#l00170">world_command_buffer.hpp:170</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1WorldCmdBuffer_html_afc7ecbb5b5e63d5f1679f3f0d751ad56"><div class="ttname"><a href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#afc7ecbb5b5e63d5f1679f3f0d751ad56">helios::ecs::WorldCmdBuffer::allocator_type</a></div><div class="ttdeci">Allocator allocator_type</div><div class="ttdef"><b>Definition</b> <a href="world__command__buffer_8hpp_source.html#l00047">world_command_buffer.hpp:47</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html">helios::ecs::World</a></div><div class="ttdoc">The World class manages entities with their components and systems.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00053">world.hpp:53</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1ClearEventsCmd_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1ClearEventsCmd.html">helios::ecs::details::ClearEventsCmd</a></div><div class="ttdoc">Command to clear all events of a specific type from the queue.</div><div class="ttdef"><b>Definition</b> <a href="commands_8hpp_source.html#l00751">commands.hpp:751</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1FunctionCmd_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1FunctionCmd.html">helios::ecs::details::FunctionCmd</a></div><div class="ttdoc">Command that executes a function with World reference.</div><div class="ttdef"><b>Definition</b> <a href="commands_8hpp_source.html#l00032">commands.hpp:32</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1SystemLocalStorage_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html">helios::ecs::details::SystemLocalStorage</a></div><div class="ttdoc">Local storage for system-specific data (commands, events, and temporary allocations).</div><div class="ttdef"><b>Definition</b> <a href="system__local__storage_8hpp_source.html#l00039">system_local_storage.hpp:39</a></div></div>
+<div class="ttc" id="acommands_8hpp_html"><div class="ttname"><a href="commands_8hpp.html">commands.hpp</a></div></div>
+<div class="ttc" id="acore__pch_8hpp_html"><div class="ttname"><a href="core__pch_8hpp.html">core_pch.hpp</a></div></div>
+<div class="ttc" id="aentity_8hpp_html"><div class="ttname"><a href="entity_8hpp.html">entity.hpp</a></div></div>
+<div class="ttc" id="aevent_8hpp_html"><div class="ttname"><a href="event_8hpp.html">event.hpp</a></div></div>
+<div class="ttc" id="alogger_8hpp_html"><div class="ttname"><a href="logger_8hpp.html">logger.hpp</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html"><div class="ttname"><a href="namespacehelios_1_1ecs.html">helios::ecs</a></div><div class="ttdef"><b>Definition</b> <a href="command_8hpp_source.html#l00005">command.hpp:5</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_af0384de48d847585fcb340c71c231e5e"><div class="ttname"><a href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, Allocator, Components... &gt; Query</div><div class="ttdoc">Type alias for query with mutable world access.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02515">query.hpp:2515</a></div></div>
+<div class="ttc" id="asystem__local__storage_8hpp_html"><div class="ttname"><a href="system__local__storage_8hpp.html">system_local_storage.hpp</a></div></div>
+<div class="ttc" id="aworld_8hpp_html"><div class="ttname"><a href="world_8hpp.html">world.hpp</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_aebb8dcc11953d78e620bbef0b9e2183.html">core</a></li><li class="navelem"><a class="el" href="dir_8f49dd062eda24395df599c5385a3cb1.html">include</a></li><li class="navelem"><a class="el" href="dir_23069df5183a130785923908e80258ad.html">helios</a></li><li class="navelem"><a class="el" href="dir_2da2d982aeea650f7dd0b34d7b8d0119.html">core</a></li><li class="navelem"><a class="el" href="dir_7abf737f7a2a9df44affdc8a191b0056.html">ecs</a></li><li class="navelem"><a class="el" href="world__command__buffer_8hpp.html">world_command_buffer.hpp</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

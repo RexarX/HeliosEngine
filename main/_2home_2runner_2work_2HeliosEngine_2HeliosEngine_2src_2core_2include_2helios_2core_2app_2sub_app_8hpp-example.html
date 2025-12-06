@@ -1,0 +1,917 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: /home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<p>Trait to identify sub-apps that support async/overlapping updates.</p>
+<p>Trait to identify sub-apps that support async/overlapping updates. A sub-app with async trait must satisfy SubAppTrait and provide:</p><ul>
+<li><code>static constexpr bool AllowOverlappingUpdates() noexcept</code></li>
+</ul>
+<p>When true, the sub-app can be updated concurrently with other sub-apps. When false (default), sub-app updates are serialized. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Sub-app type</td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><span class="keyword">struct </span>RenderSubApp {</div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> AllowOverlappingUpdates() <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> <span class="keyword">true</span>; }</div>
+<div class="line">};</div>
+</div><!-- fragment --><div class="fragment"><div class="line"><span class="preprocessor">#pragma once</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="core__pch_8hpp.html">helios/core_pch.hpp</a>&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="scheduler_8hpp.html">helios/core/app/details/scheduler.hpp</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="module_8hpp.html">helios/core/app/module.hpp</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="schedule_8hpp.html">helios/core/app/schedule.hpp</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="schedules_8hpp.html">helios/core/app/schedules.hpp</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="system__set_8hpp.html">helios/core/app/system_set.hpp</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="assert_8hpp.html">helios/core/assert.hpp</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="executor_8hpp.html">helios/core/async/executor.hpp</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="event_8hpp.html">helios/core/ecs/event.hpp</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="resource_8hpp.html">helios/core/ecs/resource.hpp</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="system_8hpp.html">helios/core/ecs/system.hpp</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="world_8hpp.html">helios/core/ecs/world.hpp</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="logger_8hpp.html">helios/core/logger.hpp</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="common__traits_8hpp.html">helios/core/utils/common_traits.hpp</a>&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;atomic&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;concepts&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;cstddef&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;functional&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;string_view&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;utility&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1app.html">helios::app</a> {</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Forward declarations</span></div>
+<div class="line"><span class="keyword">template</span> &lt;ScheduleTrait Schedule, ecs::SystemTrait... Systems&gt;</div>
+<div class="line">  <span class="keyword">requires</span>(<span class="keyword">sizeof</span>...(Systems) &gt; 0 &amp;&amp; utils::UniqueTypes&lt;Systems...&gt;)</div>
+<div class="line"><span class="keyword">class </span>SystemConfig;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;ScheduleTrait Schedule, SystemSetTrait Set&gt;</div>
+<div class="line"><span class="keyword">class </span>SystemSetConfig;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief Trait to identify valid sub-app types.</span></div>
+<div class="line"><span class="comment"> * @details A valid sub-app type must be an empty struct or class.</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><span class="keyword">concept </span>SubAppTrait = std::is_empty_v&lt;std::remove_cvref_t&lt;T&gt;&gt;;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief Trait to identify sub-apps with custom names.</span></div>
+<div class="line"><span class="comment"> * @details A sub-app with name trait must satisfy SubAppTrait and provide:</span></div>
+<div class="line"><span class="comment"> * - `static constexpr std::string_view GetName() noexcept`</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><span class="keyword">concept </span>SubAppWithNameTrait = SubAppTrait&lt;T&gt; &amp;&amp; <span class="keyword">requires</span> {</div>
+<div class="line">  { T::GetName() } -&gt; std::same_as&lt;std::string_view&gt;;</div>
+<div class="line">};</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief Trait to identify sub-apps that support async/overlapping updates.</span></div>
+<div class="line"><span class="comment"> * @details A sub-app with async trait must satisfy SubAppTrait and provide:</span></div>
+<div class="line"><span class="comment"> * - `static constexpr bool AllowOverlappingUpdates() noexcept`</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * When true, the sub-app can be updated concurrently with other sub-apps.</span></div>
+<div class="line"><span class="comment"> * When false (default), sub-app updates are serialized.</span></div>
+<div class="line"><span class="comment"> * @tparam T Sub-app type</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * @example</span></div>
+<div class="line"><span class="comment"> * @code</span></div>
+<div class="line"><span class="comment"> * struct RenderSubApp {</span></div>
+<div class="line"><span class="comment"> *   static constexpr bool AllowOverlappingUpdates() noexcept { return true; }</span></div>
+<div class="line"><span class="comment"> * };</span></div>
+<div class="line"><span class="comment"> * @endcode</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><span class="keyword">concept </span>SubAppWithAsyncTrait = SubAppTrait&lt;T&gt; &amp;&amp; <span class="keyword">requires</span> {</div>
+<div class="line">  { T::AllowOverlappingUpdates() } -&gt; std::same_as&lt;bool&gt;;</div>
+<div class="line">};</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief Trait to identify sub-apps with maximum overlapping updates.</span></div>
+<div class="line"><span class="comment"> * @details A sub-app with max overlapping updates trait must satisfy SubAppTrait and provide:</span></div>
+<div class="line"><span class="comment"> * - `static constexpr size_t GetMaxOverlappingUpdates() noexcept`</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * This is useful for sub-apps like renderers that need to limit concurrent updates</span></div>
+<div class="line"><span class="comment"> * (e.g., max frames in flight).</span></div>
+<div class="line"><span class="comment"> * @tparam T Sub-app type</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * @example</span></div>
+<div class="line"><span class="comment"> * @code</span></div>
+<div class="line"><span class="comment"> * struct RenderSubApp {</span></div>
+<div class="line"><span class="comment"> *   static constexpr size_t GetMaxOverlappingUpdates() noexcept { return 3; }</span></div>
+<div class="line"><span class="comment"> * };</span></div>
+<div class="line"><span class="comment"> * @endcode</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><span class="keyword">concept </span>SubAppWithMaxOverlappingUpdatesTrait = SubAppTrait&lt;T&gt; &amp;&amp; <span class="keyword">requires</span> {</div>
+<div class="line">  { T::GetMaxOverlappingUpdates() } -&gt; std::same_as&lt;size_t&gt;;</div>
+<div class="line">};</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief Gets whether a sub-app allows overlapping updates.</span></div>
+<div class="line"><span class="comment"> * @tparam T Sub-app type</span></div>
+<div class="line"><span class="comment"> * @return True if overlapping updates are allowed, false otherwise</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">template</span> &lt;SubAppTrait T&gt;</div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a id="a0" name="a0"></a><a class="code hl_function" href="namespacehelios_1_1app.html#adc265a79417b7d69c34c3e92fd61fab1">SubAppAllowsOverlappingUpdates</a>() <span class="keyword">noexcept</span> {</div>
+<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (SubAppWithAsyncTrait&lt;T&gt;) {</div>
+<div class="line">    <span class="keywordflow">return</span> T::AllowOverlappingUpdates();</div>
+<div class="line">  } <span class="keywordflow">else</span> {</div>
+<div class="line">    <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// Default: no overlapping updates</span></div>
+<div class="line">  }</div>
+<div class="line">}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief Gets the maximum number of overlapping updates for a sub-app.</span></div>
+<div class="line"><span class="comment"> * @tparam T Sub-app type</span></div>
+<div class="line"><span class="comment"> * @return Maximum overlapping updates, or 0 if not specified</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">template</span> &lt;SubAppTrait T&gt;</div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> <a id="a1" name="a1"></a><a class="code hl_function" href="namespacehelios_1_1app.html#ac2703229da87efec89a2ed4f585a4add">SubAppMaxOverlappingUpdates</a>() <span class="keyword">noexcept</span> {</div>
+<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (SubAppWithMaxOverlappingUpdatesTrait&lt;T&gt;) {</div>
+<div class="line">    <span class="keywordflow">return</span> T::GetMaxOverlappingUpdates();</div>
+<div class="line">  } <span class="keywordflow">else</span> {</div>
+<div class="line">    <span class="keywordflow">return</span> 0;  <span class="comment">// Default: no limit</span></div>
+<div class="line">  }</div>
+<div class="line">}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief Type alias for sub-app type IDs.</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">using </span><a id="a2" name="a2"></a><a class="code hl_typedef" href="namespacehelios_1_1app.html#a1c78747b4cc5ca72b3811b26772c9057">SubAppTypeId</a> = size_t;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief Type alias for module type IDs.</span></div>
+<div class="line"><span class="comment"> * @tparam T Module type</span></div>
+<div class="line"><span class="comment"> * @return Unique type ID for the module</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">template</span> &lt;SubAppTrait T&gt;</div>
+<div class="line"><span class="keyword">constexpr</span> <a class="code hl_typedef" href="namespacehelios_1_1app.html#a1c78747b4cc5ca72b3811b26772c9057">SubAppTypeId</a> <a id="a3" name="a3"></a><a class="code hl_function" href="namespacehelios_1_1app.html#a41c465faf00845ccd64c85f9dc95b665">SubAppTypeIdOf</a>() <span class="keyword">noexcept</span> {</div>
+<div class="line">  <span class="keywordflow">return</span> ctti::type_index_of&lt;T&gt;().hash();</div>
+<div class="line">}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief Gets the name of a sub-app type.</span></div>
+<div class="line"><span class="comment"> * @tparam T Sub-app type</span></div>
+<div class="line"><span class="comment"> * @return Name of the sub-app</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">template</span> &lt;SubAppTrait T&gt;</div>
+<div class="line"><span class="keyword">constexpr</span> std::string_view <a id="a4" name="a4"></a><a class="code hl_function" href="namespacehelios_1_1app.html#a0e0e3c138fd402c831f5523af396e57b">SubAppNameOf</a>() <span class="keyword">noexcept</span> {</div>
+<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (SubAppWithNameTrait&lt;T&gt;) {</div>
+<div class="line">    <span class="keywordflow">return</span> T::GetName();</div>
+<div class="line">  } <span class="keywordflow">else</span> {</div>
+<div class="line">    <span class="keywordflow">return</span> ctti::name_of&lt;T&gt;();</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief A sub-application with its own ECS world, systems, and resources.</span></div>
+<div class="line"><span class="comment"> * @details SubApp encapsulates an ECS world and manages its own systems and resources.</span></div>
+<div class="line"><span class="comment"> * It allows for modular separation of functionality within an application,</span></div>
+<div class="line"><span class="comment"> * such as having distinct simulation and rendering sub-apps.</span></div>
+<div class="line"><span class="comment"> * Each SubApp can have its own execution schedules and can extract data from a main world if needed.</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * SubApps can be added to the main App instance and can be updated independently.</span></div>
+<div class="line"><span class="comment"> * They support adding modules that can register their own systems and resources.</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * @note Not thread-safe.</span></div>
+<div class="line"><span class="comment"> * Use AllowOverlappingUpdates() trait for controlled concurrent access.</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">class </span>SubApp {</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">  <span class="keyword">using </span><a id="a5" name="a5"></a><a class="code hl_typedef" href="classhelios_1_1app_1_1SubApp.html#a8f7f06ffb86bd69104b976d86d78be70">ExtractFn</a> = std::move_only_function&lt;void(<span class="keyword">const</span> ecs::World&amp;, ecs::World&amp;)&gt;;</div>
+<div class="line"> </div>
+<div class="line">  <a id="a6" name="a6"></a><a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#af34c92ca8902efdf3c48359bd77c5564">SubApp</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line">  <a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#af34c92ca8902efdf3c48359bd77c5564">SubApp</a>(<span class="keyword">const</span> <a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#af34c92ca8902efdf3c48359bd77c5564">SubApp</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line">  <a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#af34c92ca8902efdf3c48359bd77c5564">SubApp</a>(<a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#af34c92ca8902efdf3c48359bd77c5564">SubApp</a>&amp;&amp; other) <span class="keyword">noexcept</span>;</div>
+<div class="line">  <a id="a7" name="a7"></a><a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a6b63984ca3a70b53fd5f9f3a80bce94c">~SubApp</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"> </div>
+<div class="line">  <a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#af34c92ca8902efdf3c48359bd77c5564">SubApp</a>&amp; <a id="a8" name="a8"></a><a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a5c480be3b750f30315116d9869e25eed">operator=</a>(<span class="keyword">const</span> <a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#af34c92ca8902efdf3c48359bd77c5564">SubApp</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line">  <a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#af34c92ca8902efdf3c48359bd77c5564">SubApp</a>&amp; <a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a5c480be3b750f30315116d9869e25eed">operator=</a>(<a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#af34c92ca8902efdf3c48359bd77c5564">SubApp</a>&amp;&amp; other) <span class="keyword">noexcept</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Clears the sub-app, removing all data.</span></div>
+<div class="line"><span class="comment">   * @warning Triggers assertion if sub app is updating.</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a9" name="a9"></a><a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a025e14a168fd6d551bcb97612eb30a8b">Clear</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Updates this sub-app by executing all scheduled systems.</span></div>
+<div class="line"><span class="comment">   * @details This method checks the updating flag to prevent concurrent updates when overlapping</span></div>
+<div class="line"><span class="comment">   * updates are not allowed. SubApps with AllowOverlappingUpdates() can bypass this check.</span></div>
+<div class="line"><span class="comment">   * @warning Triggers assertion if scheduler was not built.</span></div>
+<div class="line"><span class="comment">   * @param executor Async executor for parallel execution</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keywordtype">void</span> Update(async::Executor&amp; executor);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Extracts data from the main world into this sub-app.</span></div>
+<div class="line"><span class="comment">   * @warning Triggers assertion if sub app is updating.</span></div>
+<div class="line"><span class="comment">   * @param main_world Const reference to the main world to extract data from</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a10" name="a10"></a><a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a6a492a98348b7e7fa15f3b2a21d97bd4">Extract</a>(<span class="keyword">const</span> ecs::World&amp; main_world);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Builds execution graphs for all schedules.</span></div>
+<div class="line"><span class="comment">   * @details Should be called after all systems are added and before first execution.</span></div>
+<div class="line"><span class="comment">   * @warning Triggers assertion if sub app is updating.</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a11" name="a11"></a><a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a3bfacc59ee772d08b4467eaf44407d91">BuildScheduler</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Executes a specific schedule.</span></div>
+<div class="line"><span class="comment">   * @warning Triggers assertion if scheduler was not built.</span></div>
+<div class="line"><span class="comment">   * @tparam S Schedule type</span></div>
+<div class="line"><span class="comment">   * @param executor Async executor for parallel execution</span></div>
+<div class="line"><span class="comment">   * @param schedule Schedule to execute</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;ScheduleTrait S&gt;</div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a12" name="a12"></a><a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#aa8ccc9179adbfc1a53cdf99e3486e2a7">ExecuteSchedule</a>(async::Executor&amp; executor, S schedule = {});</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Executes all schedules in a specific stage.</span></div>
+<div class="line"><span class="comment">   * @warning Triggers assertion if scheduler was not built.</span></div>
+<div class="line"><span class="comment">   * @tparam S Stage type (must satisfy StageTrait)</span></div>
+<div class="line"><span class="comment">   * @param executor Async executor for parallel execution</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;StageTrait S&gt;</div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a13" name="a13"></a><a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a9b72bbe2ffa2c7b5c2ad2abe4e002c65">ExecuteStage</a>(async::Executor&amp; executor);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Adds a system to the specified schedule in the sub-app.</span></div>
+<div class="line"><span class="comment">   * @warning Triggers assertion if sub app is updating.</span></div>
+<div class="line"><span class="comment">   * @tparam T System type</span></div>
+<div class="line"><span class="comment">   * @tparam S Schedule type</span></div>
+<div class="line"><span class="comment">   * @param schedule Schedule to add system to</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;ecs::SystemTrait T, ScheduleTrait S&gt;</div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a14" name="a14"></a><a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a1ee8bf566a65f6d7212a8c2e34fc5d8a">AddSystem</a>(S schedule = {});</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Adds multiple systems to the specified schedule in the sub-app.</span></div>
+<div class="line"><span class="comment">   * @warning Triggers assertion if sub app is updating.</span></div>
+<div class="line"><span class="comment">   * @tparam Systems System types</span></div>
+<div class="line"><span class="comment">   * @tparam S Schedule type</span></div>
+<div class="line"><span class="comment">   * @param schedule Schedule to add systems to</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;ecs::SystemTrait... Systems, ScheduleTrait S&gt;</div>
+<div class="line">    <span class="keyword">requires</span>(<span class="keyword">sizeof</span>...(Systems) &gt; 1 &amp;&amp; utils::UniqueTypes&lt;Systems...&gt;)</div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a15" name="a15"></a><a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a2f6a2470fcd801394f2f271847c96e73">AddSystems</a>(S schedule = {});</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Adds systems with fluent configuration builder.</span></div>
+<div class="line"><span class="comment">   * @details Returns a builder that allows chaining configuration methods like</span></div>
+<div class="line"><span class="comment">   * .After(), .Before(), .InSet(), and .Sequence().</span></div>
+<div class="line"><span class="comment">   * @warning Triggers assertion if sub app is updating.</span></div>
+<div class="line"><span class="comment">   * @tparam Systems System types to add</span></div>
+<div class="line"><span class="comment">   * @tparam S Schedule type</span></div>
+<div class="line"><span class="comment">   * @param schedule Schedule to add systems to</span></div>
+<div class="line"><span class="comment">   * @return SystemConfig builder for fluent configuration</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * @example</span></div>
+<div class="line"><span class="comment">   * @code</span></div>
+<div class="line"><span class="comment">   * sub_app.AddSystemsBuilder&lt;MovementSystem, CollisionSystem&gt;(kUpdate)</span></div>
+<div class="line"><span class="comment">   *     .After&lt;InputSystem&gt;()</span></div>
+<div class="line"><span class="comment">   *     .Before&lt;RenderSystem&gt;()</span></div>
+<div class="line"><span class="comment">   *     .InSet&lt;PhysicsSet&gt;()</span></div>
+<div class="line"><span class="comment">   *     .Sequence();</span></div>
+<div class="line"><span class="comment">   * @endcode</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;ecs::SystemTrait... Systems, ScheduleTrait S&gt;</div>
+<div class="line">    <span class="keyword">requires</span>(<span class="keyword">sizeof</span>...(Systems) &gt; 0 &amp;&amp; utils::UniqueTypes&lt;Systems...&gt;)</div>
+<div class="line">  <span class="keyword">auto</span> <a id="a16" name="a16"></a><a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#aba4e0931d272a67e4ab82e9b89747070">AddSystemsBuilder</a>(S schedule = {}) -&gt; SystemConfig&lt;S, Systems...&gt;;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Adds a single system with fluent configuration builder.</span></div>
+<div class="line"><span class="comment">   * @details Returns a builder that allows chaining configuration methods.</span></div>
+<div class="line"><span class="comment">   * @warning Triggers assertion if sub app is updating.</span></div>
+<div class="line"><span class="comment">   * @tparam T System type to add</span></div>
+<div class="line"><span class="comment">   * @tparam S Schedule type</span></div>
+<div class="line"><span class="comment">   * @param schedule Schedule to add system to</span></div>
+<div class="line"><span class="comment">   * @return SystemConfig builder for fluent configuration</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;ecs::SystemTrait T, ScheduleTrait S&gt;</div>
+<div class="line">  <span class="keyword">auto</span> <a id="a17" name="a17"></a><a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#aa76b8b43b9d1266dcec6085a795d6151">AddSystemBuilder</a>(S schedule = {}) -&gt; SystemConfig&lt;S, T&gt;;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Configures a system set with fluent builder.</span></div>
+<div class="line"><span class="comment">   * @details Returns a builder that allows configuring set ordering.</span></div>
+<div class="line"><span class="comment">   * @warning Triggers assertion if sub app is updating.</span></div>
+<div class="line"><span class="comment">   * @tparam Set System set type to configure</span></div>
+<div class="line"><span class="comment">   * @tparam S Schedule type</span></div>
+<div class="line"><span class="comment">   * @param schedule Schedule where the set is configured</span></div>
+<div class="line"><span class="comment">   * @return SystemSetConfig builder for fluent configuration</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * @example</span></div>
+<div class="line"><span class="comment">   * @code</span></div>
+<div class="line"><span class="comment">   * sub_app.ConfigureSet&lt;PhysicsSet&gt;(kUpdate)</span></div>
+<div class="line"><span class="comment">   *     .After&lt;InputSet&gt;()</span></div>
+<div class="line"><span class="comment">   *     .Before&lt;RenderSet&gt;();</span></div>
+<div class="line"><span class="comment">   * @endcode</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;SystemSetTrait Set, ScheduleTrait S&gt;</div>
+<div class="line">  <span class="keyword">auto</span> <a id="a18" name="a18"></a><a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a5edba91c2595bfb399e93a83395a0b3c">ConfigureSet</a>(S schedule = {}) -&gt; SystemSetConfig&lt;S, Set&gt;;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Inserts a resource into the sub-app&#39;s world.</span></div>
+<div class="line"><span class="comment">   * @warning Triggers assertion if sub app is updating.</span></div>
+<div class="line"><span class="comment">   * @tparam T Resource type</span></div>
+<div class="line"><span class="comment">   * @param resource Resource to insert</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;ecs::ResourceTrait T&gt;</div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a19" name="a19"></a><a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ad4cb961f9069f51f3af81311794816af">InsertResource</a>(T&amp;&amp; resource) {</div>
+<div class="line">    world_.<a id="a20" name="a20"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#a5f966712c2bbcfb2d037e82106b55bf9">InsertResource</a>(std::forward&lt;T&gt;(resource));</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Emplaces a resource into the sub-app&#39;s world.</span></div>
+<div class="line"><span class="comment">   * @warning Triggers assertion if sub app is updating.</span></div>
+<div class="line"><span class="comment">   * @tparam T Resource type</span></div>
+<div class="line"><span class="comment">   * @tparam Args Constructor argument types</span></div>
+<div class="line"><span class="comment">   * @param args Arguments to forward to resource constructor</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;ecs::ResourceTrait T, <span class="keyword">typename</span>... Args&gt;</div>
+<div class="line">    <span class="keyword">requires</span> std::constructible_from&lt;T, Args...&gt;</div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a21" name="a21"></a><a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#aff197636c67071536cf78e6c2a8321a5">EmplaceResource</a>(Args&amp;&amp;... args) {</div>
+<div class="line">    world_.<a id="a22" name="a22"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#a2f993d9701beec843b3925befc340356">EmplaceResource</a>&lt;T&gt;(std::forward&lt;Args&gt;(args)...);</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Registers an event type for use in this sub-app.</span></div>
+<div class="line"><span class="comment">   * @details Events must be registered before they can be written or read.</span></div>
+<div class="line"><span class="comment">   * @warning Triggers assertion if sub app is updating.</span></div>
+<div class="line"><span class="comment">   * @tparam T Event type</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;ecs::EventTrait T&gt;</div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a23" name="a23"></a><a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ad164b16e44905604ac6ac9d12f81c9cc">AddEvent</a>() {</div>
+<div class="line">    world_.<a id="a24" name="a24"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#aec4ef048e20d0d51e907617d997d6e12">AddEvent</a>&lt;T&gt;();</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Registers multiple event types for use in this sub-app.</span></div>
+<div class="line"><span class="comment">   * @warning Triggers assertion if sub app is updating.</span></div>
+<div class="line"><span class="comment">   * @tparam Events Event types to register</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;ecs::EventTrait... Events&gt;</div>
+<div class="line">    <span class="keyword">requires</span>(<span class="keyword">sizeof</span>...(Events) &gt; 1)</div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a25" name="a25"></a><a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a95c9361adc75fe8893e473c53ab17020">AddEvents</a>() {</div>
+<div class="line">    world_.<a id="a26" name="a26"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#a1522c30fb211a9bca6fa64ffa9331ed9">AddEvents</a>&lt;Events...&gt;();</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Sets custom extraction function for this sub-app.</span></div>
+<div class="line"><span class="comment">   * @details The extraction function is called before the sub-app&#39;s Update to copy</span></div>
+<div class="line"><span class="comment">   * data from the main world.</span></div>
+<div class="line"><span class="comment">   * This is useful for example for  render sub-app that need to extract transform, mesh,</span></div>
+<div class="line"><span class="comment">   * and camera data from the main simulation world.</span></div>
+<div class="line"><span class="comment">   * @param extract_fn Function that takes main world and sub-app world references</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a27" name="a27"></a><a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a347b80bbfd7f8dbff669ec58aebede85">SetExtractFunction</a>(<a class="code hl_typedef" href="classhelios_1_1app_1_1SubApp.html#a8f7f06ffb86bd69104b976d86d78be70">ExtractFn</a> extract_fn) <span class="keyword">noexcept</span> { extract_fn_ = std::move(extract_fn); }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Sets whether this sub-app allows overlapping updates.</span></div>
+<div class="line"><span class="comment">   * @param allow True to allow concurrent updates, false otherwise</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a28" name="a28"></a><a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a1420267640572362b84bdbfeac733e53">SetAllowOverlappingUpdates</a>(<span class="keywordtype">bool</span> allow) <span class="keyword">noexcept</span> { allow_overlapping_updates_ = allow; }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Sets the maximum number of overlapping updates.</span></div>
+<div class="line"><span class="comment">   * @param max Maximum number of concurrent updates (0 = unlimited)</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a29" name="a29"></a><a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ae0d03b1930977cb8c89557f3e89c5cbd">SetMaxOverlappingUpdates</a>(<span class="keywordtype">size_t</span> max) <span class="keyword">noexcept</span> { max_overlapping_updates_ = max; }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Checks if a system of type T is in any schedule.</span></div>
+<div class="line"><span class="comment">   * @tparam T System type</span></div>
+<div class="line"><span class="comment">   * @return True if system is present, false otherwise</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;ecs::SystemTrait T&gt;</div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">bool</span> <a id="a30" name="a30"></a><a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a467a8144c1510e02d2d41a49212449c9">ContainsSystem</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line">    <span class="keywordflow">return</span> scheduler_.<a id="a31" name="a31"></a><a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#a1b18d24f232e7f455eb401aec2b4956e">ContainsSystem</a>&lt;T&gt;();</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Checks if a system of type T is in the specified schedule.</span></div>
+<div class="line"><span class="comment">   * @tparam T System type</span></div>
+<div class="line"><span class="comment">   * @tparam S Schedule type</span></div>
+<div class="line"><span class="comment">   * @param schedule Schedule to check</span></div>
+<div class="line"><span class="comment">   * @return True if system is present, false otherwise</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;ecs::SystemTrait T, ScheduleTrait S&gt;</div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a467a8144c1510e02d2d41a49212449c9">ContainsSystem</a>(S schedule = {}) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line">    <span class="keywordflow">return</span> scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#a1b18d24f232e7f455eb401aec2b4956e">ContainsSystem</a>&lt;T&gt;(schedule);</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Checks if a resource of type T exists in this sub-app.</span></div>
+<div class="line"><span class="comment">   * @tparam T Resource type</span></div>
+<div class="line"><span class="comment">   * @return True if resource exists, false otherwise</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;ecs::ResourceTrait T&gt;</div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">bool</span> <a id="a32" name="a32"></a><a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#adef2bc054c090aab68496520cec63717">HasResource</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line">    <span class="keywordflow">return</span> world_.<a id="a33" name="a33"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#a36499296d4e35d0784b402f6ca500d73">HasResource</a>&lt;T&gt;();</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Checks if an event type is registered in this sub-app.</span></div>
+<div class="line"><span class="comment">   * @tparam T Event type</span></div>
+<div class="line"><span class="comment">   * @return True if event type is registered, false otherwise</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;ecs::EventTrait T&gt;</div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">bool</span> <a id="a34" name="a34"></a><a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ad6681df779359dab3f63c0f7db7f99bf">HasEvent</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line">    <span class="keywordflow">return</span> world_.<a id="a35" name="a35"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#a1631e7cf7bfb4533997958cc08fa7ef3">HasEvent</a>&lt;T&gt;();</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Checks if the sub-app is currently updating.</span></div>
+<div class="line"><span class="comment">   * @return True if update is in progress, false otherwise</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">bool</span> <a id="a36" name="a36"></a><a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">IsUpdating</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> is_updating_.load(std::memory_order_acquire); }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Checks if this sub-app allows overlapping updates.</span></div>
+<div class="line"><span class="comment">   * @return True if overlapping updates are allowed, false otherwise</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">bool</span> <a id="a37" name="a37"></a><a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a725248d88c8364a55ca5f136c1082b21">AllowsOverlappingUpdates</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> allow_overlapping_updates_; }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Gets the total number of systems across all schedules.</span></div>
+<div class="line"><span class="comment">   * @return Total number of systems</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">size_t</span> <a id="a38" name="a38"></a><a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a3e3e52d2fceddcb2b9907f41512ed5fa">SystemCount</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> scheduler_.<a id="a39" name="a39"></a><a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#ae064d1c0777b4f80d1db19f2647384df">SystemCount</a>(); }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Gets the number of systems in the specified schedule of this sub-app.</span></div>
+<div class="line"><span class="comment">   * @tparam S Schedule type</span></div>
+<div class="line"><span class="comment">   * @param schedule Schedule to query</span></div>
+<div class="line"><span class="comment">   * @return Number of systems in the schedule</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;ScheduleTrait S&gt;</div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">size_t</span> <a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a3e3e52d2fceddcb2b9907f41512ed5fa">SystemCount</a>(S schedule = {}) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line">    <span class="keywordflow">return</span> scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#ae064d1c0777b4f80d1db19f2647384df">SystemCount</a>(schedule);</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Gets const reference to this sub-app&#39;s world.</span></div>
+<div class="line"><span class="comment">   * @return Const reference to the ECS world</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] <span class="keyword">const</span> ecs::World&amp; <a id="a40" name="a40"></a><a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a0719550ca7a5d19e8c37950591aae8b6">GetWorld</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> world_; }</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:<span class="comment"></span></div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Gets mutable reference to this sub-app&#39;s world.</span></div>
+<div class="line"><span class="comment">   * @return Reference to the ECS world</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] ecs::World&amp; <a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a0719550ca7a5d19e8c37950591aae8b6">GetWorld</a>() <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> world_; }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Gets mutable reference to the scheduler.</span></div>
+<div class="line"><span class="comment">   * @return Reference to the scheduler</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] details::Scheduler&amp; GetScheduler() <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> scheduler_; }</div>
+<div class="line"> </div>
+<div class="line">  ecs::World world_;              <span class="comment">///&lt; The ECS world for this sub-app</span></div>
+<div class="line">  details::Scheduler scheduler_;  <span class="comment">///&lt; Scheduler managing system execution</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /// Optional extraction function for data transfer from main world</span></div>
+<div class="line"><span class="comment"></span>  <a class="code hl_typedef" href="classhelios_1_1app_1_1SubApp.html#a8f7f06ffb86bd69104b976d86d78be70">ExtractFn</a> extract_fn_;</div>
+<div class="line"> </div>
+<div class="line">  std::atomic&lt;bool&gt; is_updating_{<span class="keyword">false</span>};  <span class="comment">///&lt; Flag to track if update is in progress</span></div>
+<div class="line">  <span class="keywordtype">bool</span> graphs_built_ = <span class="keyword">false</span>;             <span class="comment">///&lt; Flag to track if execution graphs are built</span></div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordtype">bool</span> allow_overlapping_updates_ = <span class="keyword">false</span>;              <span class="comment">///&lt; Whether concurrent updates are allowed</span></div>
+<div class="line">  <span class="keywordtype">size_t</span> max_overlapping_updates_ = 0;                  <span class="comment">///&lt; Maximum concurrent updates (0 = unlimited)</span></div>
+<div class="line">  std::atomic&lt;size_t&gt; current_overlapping_updates_{0};  <span class="comment">///&lt; Current number of overlapping updates</span></div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">friend</span> <span class="keyword">class </span><a id="a41" name="a41"></a><a class="code hl_friend" href="classhelios_1_1app_1_1SubApp.html#a4097b3e04a4f8ece21f5abe1b10e6323">App</a>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">template</span> &lt;ScheduleTrait Schedule, ecs::SystemTrait... Systems&gt;</div>
+<div class="line">    <span class="keyword">requires</span>(<span class="keyword">sizeof</span>...(Systems) &gt; 0 &amp;&amp; utils::UniqueTypes&lt;Systems...&gt;)</div>
+<div class="line">  <span class="keyword">friend</span> <span class="keyword">class </span><a id="a42" name="a42"></a><a class="code hl_friend" href="classhelios_1_1app_1_1SubApp.html#ad4bf528779d9dd74c8c5cba3b2b434ca">SystemConfig</a>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">template</span> &lt;ScheduleTrait Schedule, SystemSetTrait Set&gt;</div>
+<div class="line">  <span class="keyword">friend</span> <span class="keyword">class </span><a id="a43" name="a43"></a><a class="code hl_friend" href="classhelios_1_1app_1_1SubApp.html#a9e15c7dc905300f48ee7422061dcc726">SystemSetConfig</a>;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">inline</span> <a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#af34c92ca8902efdf3c48359bd77c5564">SubApp::SubApp</a>(SubApp&amp;&amp; other) noexcept</div>
+<div class="line">    : world_(std::move(other.world_)),</div>
+<div class="line">      scheduler_(std::move(other.scheduler_)),</div>
+<div class="line">      extract_fn_(std::move(other.extract_fn_)),</div>
+<div class="line">      is_updating_(other.is_updating_.load(std::memory_order_acquire)),</div>
+<div class="line">      graphs_built_(other.graphs_built_),</div>
+<div class="line">      allow_overlapping_updates_(other.allow_overlapping_updates_),</div>
+<div class="line">      max_overlapping_updates_(other.max_overlapping_updates_),</div>
+<div class="line">      current_overlapping_updates_(other.current_overlapping_updates_.load(std::memory_order_acquire)) {}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">inline</span> SubApp&amp; <a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a5c480be3b750f30315116d9869e25eed">SubApp::operator=</a>(SubApp&amp;&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line">  <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;other) {</div>
+<div class="line">    world_ = std::move(other.world_);</div>
+<div class="line">    scheduler_ = std::move(other.scheduler_);</div>
+<div class="line">    extract_fn_ = std::move(other.extract_fn_);</div>
+<div class="line">    is_updating_.store(other.is_updating_.load(std::memory_order_acquire), std::memory_order_release);</div>
+<div class="line">    graphs_built_ = other.graphs_built_;</div>
+<div class="line">    allow_overlapping_updates_ = other.allow_overlapping_updates_;</div>
+<div class="line">    max_overlapping_updates_ = other.max_overlapping_updates_;</div>
+<div class="line">    current_overlapping_updates_.store(other.current_overlapping_updates_.load(std::memory_order_acquire),</div>
+<div class="line">                                       std::memory_order_release);</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a025e14a168fd6d551bcb97612eb30a8b">SubApp::Clear</a>() {</div>
+<div class="line">  <a id="a44" name="a44"></a><a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!<a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">IsUpdating</a>(), <span class="stringliteral">&quot;Failed to clear sub app: Cannot clear while app is running!&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">  world_.<a id="a45" name="a45"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#ae59ec4dcf9819c1dcfdca9e4de4c8cbc">Clear</a>();</div>
+<div class="line">  scheduler_.<a id="a46" name="a46"></a><a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#a4b7893fedb3bcbef1716e364afc902cc">Clear</a>();</div>
+<div class="line">  extract_fn_ = <span class="keyword">nullptr</span>;</div>
+<div class="line">  graphs_built_ = <span class="keyword">false</span>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">void</span> <a id="a47" name="a47"></a><a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a191f625d927932ab72b7b28dd5412665">SubApp::Update</a>(async::Executor&amp; executor) {</div>
+<div class="line">  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(graphs_built_, <span class="stringliteral">&quot;Failed to update sub app: Scheduler must be built before update!&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">if</span> (!allow_overlapping_updates_) {</div>
+<div class="line">    <span class="comment">// Enforce single update at a time</span></div>
+<div class="line">    <span class="keywordtype">bool</span> expected = <span class="keyword">false</span>;</div>
+<div class="line">    <span class="keywordflow">if</span> (!is_updating_.compare_exchange_strong(expected, <span class="keyword">true</span>, std::memory_order_acq_rel)) {</div>
+<div class="line">      <a id="a48" name="a48"></a><a class="code hl_define" href="logger_8hpp.html#a5ee2b388c5e1155f8aa9f680e3b8cf3b">HELIOS_ERROR</a>(<span class="stringliteral">&quot;Failed to update sub app: Overlapping updates not allowed!&quot;</span>);</div>
+<div class="line">      <span class="keywordflow">return</span>;</div>
+<div class="line">    }</div>
+<div class="line">  } <span class="keywordflow">else</span> {</div>
+<div class="line">    <span class="comment">// Track overlapping updates if limit is set</span></div>
+<div class="line">    <span class="keywordflow">if</span> (max_overlapping_updates_ &gt; 0) {</div>
+<div class="line">      <span class="keywordtype">size_t</span> current = current_overlapping_updates_.fetch_add(1, std::memory_order_acq_rel);</div>
+<div class="line">      <span class="keywordflow">if</span> (current &gt;= max_overlapping_updates_) {</div>
+<div class="line">        current_overlapping_updates_.fetch_sub(1, std::memory_order_acq_rel);</div>
+<div class="line">        <a id="a49" name="a49"></a><a class="code hl_define" href="logger_8hpp.html#abee1a45a543b16109f05136a9771e86c">HELIOS_WARN</a>(<span class="stringliteral">&quot;Failed to update sub app: Max overlapping updates ({}) reached!&quot;</span>, max_overlapping_updates_);</div>
+<div class="line">        <span class="keywordflow">return</span>;</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    is_updating_.store(<span class="keyword">true</span>, std::memory_order_release);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Execute all stages in order (StartUpStage only runs during Initialize, not Update)</span></div>
+<div class="line">  scheduler_.<a id="a50" name="a50"></a><a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#acc68bc227ef3255668e285bb0efcc62d">ExecuteStage</a>&lt;MainStage&gt;(world_, executor);</div>
+<div class="line">  scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#acc68bc227ef3255668e285bb0efcc62d">ExecuteStage</a>&lt;UpdateStage&gt;(world_, executor);</div>
+<div class="line">  scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#acc68bc227ef3255668e285bb0efcc62d">ExecuteStage</a>&lt;CleanUpStage&gt;(world_, executor);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Merge all deferred commands into world after execution</span></div>
+<div class="line">  scheduler_.<a id="a51" name="a51"></a><a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#a75a24d4f384fa24c487684f608e5d647">MergeCommandsToWorld</a>(world_);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Execute all commands (create entities, add/remove components, etc.)</span></div>
+<div class="line">  world_.Update();</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Reset all per-system frame allocators to reclaim temporary memory</span></div>
+<div class="line">  scheduler_.<a id="a52" name="a52"></a><a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#ae4b1ac6c638ac3de40c15057aa67c556">ResetFrameAllocators</a>();</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Clear update flags</span></div>
+<div class="line">  <span class="keywordflow">if</span> (allow_overlapping_updates_ &amp;&amp; max_overlapping_updates_ &gt; 0) {</div>
+<div class="line">    current_overlapping_updates_.fetch_sub(1, std::memory_order_acq_rel);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  is_updating_.store(<span class="keyword">false</span>, std::memory_order_release);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a6a492a98348b7e7fa15f3b2a21d97bd4">SubApp::Extract</a>(<span class="keyword">const</span> ecs::World&amp; main_world) {</div>
+<div class="line">  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!<a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">IsUpdating</a>(), <span class="stringliteral">&quot;Failed to extract: Cannot extract while app is running!&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">if</span> (extract_fn_) {</div>
+<div class="line">    extract_fn_(main_world, world_);</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a3bfacc59ee772d08b4467eaf44407d91">SubApp::BuildScheduler</a>() {</div>
+<div class="line">  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!<a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">IsUpdating</a>(), <span class="stringliteral">&quot;Failed to build scheduler: Cannot build while app is running!&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">  scheduler_.<a id="a53" name="a53"></a><a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#ab5db06cba2f0d7a47c8503417ac55116">BuildAllGraphs</a>(world_);</div>
+<div class="line">  graphs_built_ = <span class="keyword">true</span>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;ScheduleTrait S&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#aa8ccc9179adbfc1a53cdf99e3486e2a7">SubApp::ExecuteSchedule</a>(async::Executor&amp; executor, S <span class="comment">/*schedule*/</span>) {</div>
+<div class="line">  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(graphs_built_, <span class="stringliteral">&quot;Failed to execute schedule: Scheduler must be built before update!&quot;</span>);</div>
+<div class="line">  scheduler_.<a id="a54" name="a54"></a><a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#a14e8ff4d0b8752dc89c76929fa416179">ExecuteSchedule</a>&lt;S&gt;(world_, executor);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;StageTrait S&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a9b72bbe2ffa2c7b5c2ad2abe4e002c65">SubApp::ExecuteStage</a>(async::Executor&amp; executor) {</div>
+<div class="line">  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(graphs_built_, <span class="stringliteral">&quot;Failed to execute stage: Scheduler must be built before update!&quot;</span>);</div>
+<div class="line">  scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#acc68bc227ef3255668e285bb0efcc62d">ExecuteStage</a>&lt;S&gt;(world_, executor);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;ecs::SystemTrait T, ScheduleTrait S&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a1ee8bf566a65f6d7212a8c2e34fc5d8a">SubApp::AddSystem</a>(S schedule) {</div>
+<div class="line">  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!<a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">IsUpdating</a>(), <span class="stringliteral">&quot;Failed to add system &#39;{}&#39;: Cannot add systems while app is running!&quot;</span>,</div>
+<div class="line">                <a id="a55" name="a55"></a><a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ecs::SystemNameOf&lt;T&gt;</a>());</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">if</span> (ContainsSystem&lt;T&gt;(schedule)) [[unlikely]] {</div>
+<div class="line">    <a class="code hl_define" href="logger_8hpp.html#abee1a45a543b16109f05136a9771e86c">HELIOS_WARN</a>(<span class="stringliteral">&quot;System &#39;{}&#39; is already exist in app schedule &#39;{}&#39;!&quot;</span>, <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ecs::SystemNameOf&lt;T&gt;</a>(), ScheduleNameOf&lt;S&gt;());</div>
+<div class="line">    <span class="keywordflow">return</span>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  scheduler_.<a id="a56" name="a56"></a><a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#a6c5e6be3d5fbf6d7a7c215470a3a820e">AddSystem</a>&lt;T&gt;(schedule);</div>
+<div class="line">  graphs_built_ = <span class="keyword">false</span>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;ecs::SystemTrait... Systems, ScheduleTrait S&gt;</div>
+<div class="line">  <span class="keyword">requires</span>(<span class="keyword">sizeof</span>...(Systems) &gt; 1 &amp;&amp; utils::UniqueTypes&lt;Systems...&gt;)</div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a2f6a2470fcd801394f2f271847c96e73">SubApp::AddSystems</a>(S schedule) {</div>
+<div class="line">  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!<a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">IsUpdating</a>(), <span class="stringliteral">&quot;Failed to add systems: Cannot add systems while app is running!&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">  (scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#a6c5e6be3d5fbf6d7a7c215470a3a820e">AddSystem</a>&lt;Systems&gt;(schedule), ...);</div>
+<div class="line">  graphs_built_ = <span class="keyword">false</span>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;ecs::SystemTrait... Systems, ScheduleTrait S&gt;</div>
+<div class="line">  <span class="keyword">requires</span>(<span class="keyword">sizeof</span>...(Systems) &gt; 0 &amp;&amp; utils::UniqueTypes&lt;Systems...&gt;)</div>
+<div class="line"><span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#aba4e0931d272a67e4ab82e9b89747070">SubApp::AddSystemsBuilder</a>(S schedule) -&gt; SystemConfig&lt;S, Systems...&gt; {</div>
+<div class="line">  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!IsUpdating(), <span class="stringliteral">&quot;Failed to add systems: Cannot add systems while app is running!&quot;</span>);</div>
+<div class="line">  <span class="keywordflow">return</span> SystemConfig&lt;S, Systems...&gt;(*<span class="keyword">this</span>, schedule);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;ecs::SystemTrait T, ScheduleTrait S&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#aa76b8b43b9d1266dcec6085a795d6151">SubApp::AddSystemBuilder</a>(S schedule) -&gt; SystemConfig&lt;S, T&gt; {</div>
+<div class="line">  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!IsUpdating(), <span class="stringliteral">&quot;Failed to add system &#39;{}&#39;: Cannot add systems while app is running!&quot;</span>,</div>
+<div class="line">                <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ecs::SystemNameOf&lt;T&gt;</a>());</div>
+<div class="line">  <span class="keywordflow">return</span> SystemConfig&lt;S, T&gt;(*<span class="keyword">this</span>, schedule);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;SystemSetTrait Set, ScheduleTrait S&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a5edba91c2595bfb399e93a83395a0b3c">SubApp::ConfigureSet</a>(S schedule) -&gt; SystemSetConfig&lt;S, Set&gt; {</div>
+<div class="line">  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!IsUpdating(), <span class="stringliteral">&quot;Failed to configure set &#39;{}&#39;: Cannot configure sets while app is running!&quot;</span>,</div>
+<div class="line">                SystemSetNameOf&lt;Set&gt;());</div>
+<div class="line">  <span class="keywordflow">return</span> SystemSetConfig&lt;S, Set&gt;(*<span class="keyword">this</span>, schedule);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">}  <span class="comment">// namespace helios::app</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="system__config_8hpp.html">helios/core/app/system_config.hpp</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="system__set__config_8hpp.html">helios/core/app/system_set_config.hpp</a>&gt;</span></div>
+<div class="ttc" id="aassert_8hpp_html"><div class="ttname"><a href="assert_8hpp.html">assert.hpp</a></div></div>
+<div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00149">assert.hpp:149</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_a025e14a168fd6d551bcb97612eb30a8b"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#a025e14a168fd6d551bcb97612eb30a8b">helios::app::SubApp::Clear</a></div><div class="ttdeci">void Clear()</div><div class="ttdoc">Clears the sub-app, removing all data.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00507">sub_app.hpp:507</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_a0719550ca7a5d19e8c37950591aae8b6"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#a0719550ca7a5d19e8c37950591aae8b6">helios::app::SubApp::GetWorld</a></div><div class="ttdeci">const ecs::World &amp; GetWorld() const noexcept</div><div class="ttdoc">Gets const reference to this sub-app's world.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00444">sub_app.hpp:444</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_a1420267640572362b84bdbfeac733e53"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#a1420267640572362b84bdbfeac733e53">helios::app::SubApp::SetAllowOverlappingUpdates</a></div><div class="ttdeci">void SetAllowOverlappingUpdates(bool allow) noexcept</div><div class="ttdoc">Sets whether this sub-app allows overlapping updates.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00361">sub_app.hpp:361</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_a191f625d927932ab72b7b28dd5412665"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#a191f625d927932ab72b7b28dd5412665">helios::app::SubApp::Update</a></div><div class="ttdeci">void Update(async::Executor &amp;executor)</div><div class="ttdoc">Updates this sub-app by executing all scheduled systems.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00516">sub_app.hpp:516</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_a1ee8bf566a65f6d7212a8c2e34fc5d8a"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#a1ee8bf566a65f6d7212a8c2e34fc5d8a">helios::app::SubApp::AddSystem</a></div><div class="ttdeci">void AddSystem(S schedule={})</div><div class="ttdoc">Adds a system to the specified schedule in the sub-app.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00590">sub_app.hpp:590</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_a2f6a2470fcd801394f2f271847c96e73"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#a2f6a2470fcd801394f2f271847c96e73">helios::app::SubApp::AddSystems</a></div><div class="ttdeci">void AddSystems(S schedule={})</div><div class="ttdoc">Adds multiple systems to the specified schedule in the sub-app.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00605">sub_app.hpp:605</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_a347b80bbfd7f8dbff669ec58aebede85"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#a347b80bbfd7f8dbff669ec58aebede85">helios::app::SubApp::SetExtractFunction</a></div><div class="ttdeci">void SetExtractFunction(ExtractFn extract_fn) noexcept</div><div class="ttdoc">Sets custom extraction function for this sub-app.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00355">sub_app.hpp:355</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_a3bfacc59ee772d08b4467eaf44407d91"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#a3bfacc59ee772d08b4467eaf44407d91">helios::app::SubApp::BuildScheduler</a></div><div class="ttdeci">void BuildScheduler()</div><div class="ttdoc">Builds execution graphs for all schedules.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00570">sub_app.hpp:570</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_a3e3e52d2fceddcb2b9907f41512ed5fa"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#a3e3e52d2fceddcb2b9907f41512ed5fa">helios::app::SubApp::SystemCount</a></div><div class="ttdeci">size_t SystemCount() const noexcept</div><div class="ttdoc">Gets the total number of systems across all schedules.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00427">sub_app.hpp:427</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_a4097b3e04a4f8ece21f5abe1b10e6323"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#a4097b3e04a4f8ece21f5abe1b10e6323">helios::app::SubApp::App</a></div><div class="ttdeci">friend class App</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00472">sub_app.hpp:472</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_a467a8144c1510e02d2d41a49212449c9"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#a467a8144c1510e02d2d41a49212449c9">helios::app::SubApp::ContainsSystem</a></div><div class="ttdeci">bool ContainsSystem() const noexcept</div><div class="ttdoc">Checks if a system of type T is in any schedule.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00375">sub_app.hpp:375</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_a5c480be3b750f30315116d9869e25eed"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#a5c480be3b750f30315116d9869e25eed">helios::app::SubApp::operator=</a></div><div class="ttdeci">SubApp &amp; operator=(const SubApp &amp;)=delete</div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_a5edba91c2595bfb399e93a83395a0b3c"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#a5edba91c2595bfb399e93a83395a0b3c">helios::app::SubApp::ConfigureSet</a></div><div class="ttdeci">auto ConfigureSet(S schedule={}) -&gt; SystemSetConfig&lt; S, Set &gt;</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00627">sub_app.hpp:627</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_a6a492a98348b7e7fa15f3b2a21d97bd4"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#a6a492a98348b7e7fa15f3b2a21d97bd4">helios::app::SubApp::Extract</a></div><div class="ttdeci">void Extract(const ecs::World &amp;main_world)</div><div class="ttdoc">Extracts data from the main world into this sub-app.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00562">sub_app.hpp:562</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_a6b63984ca3a70b53fd5f9f3a80bce94c"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#a6b63984ca3a70b53fd5f9f3a80bce94c">helios::app::SubApp::~SubApp</a></div><div class="ttdeci">~SubApp()=default</div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_a725248d88c8364a55ca5f136c1082b21"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#a725248d88c8364a55ca5f136c1082b21">helios::app::SubApp::AllowsOverlappingUpdates</a></div><div class="ttdeci">bool AllowsOverlappingUpdates() const noexcept</div><div class="ttdoc">Checks if this sub-app allows overlapping updates.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00421">sub_app.hpp:421</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_a8f7f06ffb86bd69104b976d86d78be70"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#a8f7f06ffb86bd69104b976d86d78be70">helios::app::SubApp::ExtractFn</a></div><div class="ttdeci">std::move_only_function&lt; void(const ecs::World &amp;, ecs::World &amp;)&gt; ExtractFn</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00168">sub_app.hpp:168</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_a95c9361adc75fe8893e473c53ab17020"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#a95c9361adc75fe8893e473c53ab17020">helios::app::SubApp::AddEvents</a></div><div class="ttdeci">void AddEvents()</div><div class="ttdoc">Registers multiple event types for use in this sub-app.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00343">sub_app.hpp:343</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_a9b72bbe2ffa2c7b5c2ad2abe4e002c65"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#a9b72bbe2ffa2c7b5c2ad2abe4e002c65">helios::app::SubApp::ExecuteStage</a></div><div class="ttdeci">void ExecuteStage(async::Executor &amp;executor)</div><div class="ttdoc">Executes all schedules in a specific stage.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00584">sub_app.hpp:584</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_a9e15c7dc905300f48ee7422061dcc726"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#a9e15c7dc905300f48ee7422061dcc726">helios::app::SubApp::SystemSetConfig</a></div><div class="ttdeci">friend class SystemSetConfig</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00479">sub_app.hpp:479</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_aa76b8b43b9d1266dcec6085a795d6151"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#aa76b8b43b9d1266dcec6085a795d6151">helios::app::SubApp::AddSystemBuilder</a></div><div class="ttdeci">auto AddSystemBuilder(S schedule={}) -&gt; SystemConfig&lt; S, T &gt;</div><div class="ttdoc">Adds a single system with fluent configuration builder.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00620">sub_app.hpp:620</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_aa8ccc9179adbfc1a53cdf99e3486e2a7"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#aa8ccc9179adbfc1a53cdf99e3486e2a7">helios::app::SubApp::ExecuteSchedule</a></div><div class="ttdeci">void ExecuteSchedule(async::Executor &amp;executor, S schedule={})</div><div class="ttdoc">Executes a specific schedule.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00578">sub_app.hpp:578</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_aba4e0931d272a67e4ab82e9b89747070"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#aba4e0931d272a67e4ab82e9b89747070">helios::app::SubApp::AddSystemsBuilder</a></div><div class="ttdeci">auto AddSystemsBuilder(S schedule={}) -&gt; SystemConfig&lt; S, Systems... &gt;</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00614">sub_app.hpp:614</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_ad164b16e44905604ac6ac9d12f81c9cc"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#ad164b16e44905604ac6ac9d12f81c9cc">helios::app::SubApp::AddEvent</a></div><div class="ttdeci">void AddEvent()</div><div class="ttdoc">Registers an event type for use in this sub-app.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00332">sub_app.hpp:332</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_ad4bf528779d9dd74c8c5cba3b2b434ca"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#ad4bf528779d9dd74c8c5cba3b2b434ca">helios::app::SubApp::SystemConfig</a></div><div class="ttdeci">friend class SystemConfig</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00476">sub_app.hpp:476</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_ad4cb961f9069f51f3af81311794816af"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#ad4cb961f9069f51f3af81311794816af">helios::app::SubApp::InsertResource</a></div><div class="ttdeci">void InsertResource(T &amp;&amp;resource)</div><div class="ttdoc">Inserts a resource into the sub-app's world.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00308">sub_app.hpp:308</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_ad6681df779359dab3f63c0f7db7f99bf"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#ad6681df779359dab3f63c0f7db7f99bf">helios::app::SubApp::HasEvent</a></div><div class="ttdeci">bool HasEvent() const noexcept</div><div class="ttdoc">Checks if an event type is registered in this sub-app.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00407">sub_app.hpp:407</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_adef2bc054c090aab68496520cec63717"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#adef2bc054c090aab68496520cec63717">helios::app::SubApp::HasResource</a></div><div class="ttdeci">bool HasResource() const noexcept</div><div class="ttdoc">Checks if a resource of type T exists in this sub-app.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00397">sub_app.hpp:397</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_ae0d03b1930977cb8c89557f3e89c5cbd"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#ae0d03b1930977cb8c89557f3e89c5cbd">helios::app::SubApp::SetMaxOverlappingUpdates</a></div><div class="ttdeci">void SetMaxOverlappingUpdates(size_t max) noexcept</div><div class="ttdoc">Sets the maximum number of overlapping updates.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00367">sub_app.hpp:367</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_ae4f1c424bf407b7f63a7558d9b7e734a"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">helios::app::SubApp::IsUpdating</a></div><div class="ttdeci">bool IsUpdating() const noexcept</div><div class="ttdoc">Checks if the sub-app is currently updating.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00415">sub_app.hpp:415</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_af34c92ca8902efdf3c48359bd77c5564"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#af34c92ca8902efdf3c48359bd77c5564">helios::app::SubApp::SubApp</a></div><div class="ttdeci">SubApp()=default</div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_aff197636c67071536cf78e6c2a8321a5"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#aff197636c67071536cf78e6c2a8321a5">helios::app::SubApp::EmplaceResource</a></div><div class="ttdeci">void EmplaceResource(Args &amp;&amp;... args)</div><div class="ttdoc">Emplaces a resource into the sub-app's world.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00321">sub_app.hpp:321</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1details_1_1Scheduler_html_a14e8ff4d0b8752dc89c76929fa416179"><div class="ttname"><a href="classhelios_1_1app_1_1details_1_1Scheduler.html#a14e8ff4d0b8752dc89c76929fa416179">helios::app::details::Scheduler::ExecuteSchedule</a></div><div class="ttdeci">void ExecuteSchedule(ecs::World &amp;world, async::Executor &amp;executor)</div><div class="ttdoc">Executes all systems in the specified schedule.</div><div class="ttdef"><b>Definition</b> <a href="scheduler_8hpp_source.html#l00545">scheduler.hpp:545</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1details_1_1Scheduler_html_a1b18d24f232e7f455eb401aec2b4956e"><div class="ttname"><a href="classhelios_1_1app_1_1details_1_1Scheduler.html#a1b18d24f232e7f455eb401aec2b4956e">helios::app::details::Scheduler::ContainsSystem</a></div><div class="ttdeci">bool ContainsSystem() const noexcept</div><div class="ttdoc">Checks if a system of type T is in any schedule.</div><div class="ttdef"><b>Definition</b> <a href="scheduler_8hpp_source.html#l00730">scheduler.hpp:730</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1details_1_1Scheduler_html_a4b7893fedb3bcbef1716e364afc902cc"><div class="ttname"><a href="classhelios_1_1app_1_1details_1_1Scheduler.html#a4b7893fedb3bcbef1716e364afc902cc">helios::app::details::Scheduler::Clear</a></div><div class="ttdeci">void Clear()</div><div class="ttdoc">Clears all schedules and systems.</div><div class="ttdef"><b>Definition</b> <a href="scheduler_8hpp_source.html#l00465">scheduler.hpp:465</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1details_1_1Scheduler_html_a6c5e6be3d5fbf6d7a7c215470a3a820e"><div class="ttname"><a href="classhelios_1_1app_1_1details_1_1Scheduler.html#a6c5e6be3d5fbf6d7a7c215470a3a820e">helios::app::details::Scheduler::AddSystem</a></div><div class="ttdeci">void AddSystem(S schedule={})</div><div class="ttdoc">Adds a system to the specified schedule.</div><div class="ttdef"><b>Definition</b> <a href="scheduler_8hpp_source.html#l00522">scheduler.hpp:522</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1details_1_1Scheduler_html_a75a24d4f384fa24c487684f608e5d647"><div class="ttname"><a href="classhelios_1_1app_1_1details_1_1Scheduler.html#a75a24d4f384fa24c487684f608e5d647">helios::app::details::Scheduler::MergeCommandsToWorld</a></div><div class="ttdeci">void MergeCommandsToWorld(ecs::World &amp;world)</div><div class="ttdoc">Merges all system local commands into the world's main command queue.</div><div class="ttdef"><b>Definition</b> <a href="scheduler_8hpp_source.html#l00562">scheduler.hpp:562</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1details_1_1Scheduler_html_ab5db06cba2f0d7a47c8503417ac55116"><div class="ttname"><a href="classhelios_1_1app_1_1details_1_1Scheduler.html#ab5db06cba2f0d7a47c8503417ac55116">helios::app::details::Scheduler::BuildAllGraphs</a></div><div class="ttdeci">void BuildAllGraphs(ecs::World &amp;world)</div><div class="ttdoc">Builds execution graphs for all schedules.</div><div class="ttdef"><b>Definition</b> <a href="scheduler_8cpp_source.html#l00060">scheduler.cpp:60</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1details_1_1Scheduler_html_acc68bc227ef3255668e285bb0efcc62d"><div class="ttname"><a href="classhelios_1_1app_1_1details_1_1Scheduler.html#acc68bc227ef3255668e285bb0efcc62d">helios::app::details::Scheduler::ExecuteStage</a></div><div class="ttdeci">void ExecuteStage(ecs::World &amp;world, async::Executor &amp;executor)</div><div class="ttdoc">Executes all schedules in the specified stage.</div><div class="ttdef"><b>Definition</b> <a href="scheduler_8hpp_source.html#l00578">scheduler.hpp:578</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1details_1_1Scheduler_html_ae064d1c0777b4f80d1db19f2647384df"><div class="ttname"><a href="classhelios_1_1app_1_1details_1_1Scheduler.html#ae064d1c0777b4f80d1db19f2647384df">helios::app::details::Scheduler::SystemCount</a></div><div class="ttdeci">size_t SystemCount() const noexcept</div><div class="ttdoc">Gets the total number of systems across all schedules.</div><div class="ttdef"><b>Definition</b> <a href="scheduler_8hpp_source.html#l00333">scheduler.hpp:333</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1details_1_1Scheduler_html_ae4b1ac6c638ac3de40c15057aa67c556"><div class="ttname"><a href="classhelios_1_1app_1_1details_1_1Scheduler.html#ae4b1ac6c638ac3de40c15057aa67c556">helios::app::details::Scheduler::ResetFrameAllocators</a></div><div class="ttdeci">void ResetFrameAllocators() noexcept</div><div class="ttdoc">Resets all system frame allocators.</div><div class="ttdef"><b>Definition</b> <a href="scheduler_8hpp_source.html#l00571">scheduler.hpp:571</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_a1522c30fb211a9bca6fa64ffa9331ed9"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#a1522c30fb211a9bca6fa64ffa9331ed9">helios::ecs::World::AddEvents</a></div><div class="ttdeci">void AddEvents()</div><div class="ttdoc">Registers multiple event types for use.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00451">world.hpp:451</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_a1631e7cf7bfb4533997958cc08fa7ef3"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#a1631e7cf7bfb4533997958cc08fa7ef3">helios::ecs::World::HasEvent</a></div><div class="ttdeci">bool HasEvent() const</div><div class="ttdoc">Checks if a event registered.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00545">world.hpp:545</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_a2f993d9701beec843b3925befc340356"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#a2f993d9701beec843b3925befc340356">helios::ecs::World::EmplaceResource</a></div><div class="ttdeci">void EmplaceResource(Args &amp;&amp;... args)</div><div class="ttdoc">Emplaces a resource in-place.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00352">world.hpp:352</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_a36499296d4e35d0784b402f6ca500d73"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#a36499296d4e35d0784b402f6ca500d73">helios::ecs::World::HasResource</a></div><div class="ttdeci">bool HasResource() const</div><div class="ttdoc">Checks if a resource exists.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00534">world.hpp:534</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_a5f966712c2bbcfb2d037e82106b55bf9"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#a5f966712c2bbcfb2d037e82106b55bf9">helios::ecs::World::InsertResource</a></div><div class="ttdeci">void InsertResource(T &amp;&amp;resource)</div><div class="ttdoc">Inserts a resource into the world.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00327">world.hpp:327</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_ae59ec4dcf9819c1dcfdca9e4de4c8cbc"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#ae59ec4dcf9819c1dcfdca9e4de4c8cbc">helios::ecs::World::Clear</a></div><div class="ttdeci">void Clear()</div><div class="ttdoc">Clears the world, removing all data.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00645">world.hpp:645</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_aec4ef048e20d0d51e907617d997d6e12"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#aec4ef048e20d0d51e907617d997d6e12">helios::ecs::World::AddEvent</a></div><div class="ttdeci">void AddEvent()</div><div class="ttdoc">Registers an event type for use.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00967">world.hpp:967</a></div></div>
+<div class="ttc" id="acommon__traits_8hpp_html"><div class="ttname"><a href="common__traits_8hpp.html">common_traits.hpp</a></div></div>
+<div class="ttc" id="acore__pch_8hpp_html"><div class="ttname"><a href="core__pch_8hpp.html">core_pch.hpp</a></div></div>
+<div class="ttc" id="aevent_8hpp_html"><div class="ttname"><a href="event_8hpp.html">event.hpp</a></div></div>
+<div class="ttc" id="aexecutor_8hpp_html"><div class="ttname"><a href="executor_8hpp.html">executor.hpp</a></div></div>
+<div class="ttc" id="alogger_8hpp_html"><div class="ttname"><a href="logger_8hpp.html">logger.hpp</a></div></div>
+<div class="ttc" id="alogger_8hpp_html_a5ee2b388c5e1155f8aa9f680e3b8cf3b"><div class="ttname"><a href="logger_8hpp.html#a5ee2b388c5e1155f8aa9f680e3b8cf3b">HELIOS_ERROR</a></div><div class="ttdeci">#define HELIOS_ERROR(...)</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00689">logger.hpp:689</a></div></div>
+<div class="ttc" id="alogger_8hpp_html_abee1a45a543b16109f05136a9771e86c"><div class="ttname"><a href="logger_8hpp.html#abee1a45a543b16109f05136a9771e86c">HELIOS_WARN</a></div><div class="ttdeci">#define HELIOS_WARN(...)</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00687">logger.hpp:687</a></div></div>
+<div class="ttc" id="amodule_8hpp_html"><div class="ttname"><a href="module_8hpp.html">module.hpp</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1app_html"><div class="ttname"><a href="namespacehelios_1_1app.html">helios::app</a></div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00017">access_policy.hpp:17</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1app_html_a0e0e3c138fd402c831f5523af396e57b"><div class="ttname"><a href="namespacehelios_1_1app.html#a0e0e3c138fd402c831f5523af396e57b">helios::app::SubAppNameOf</a></div><div class="ttdeci">constexpr std::string_view SubAppNameOf() noexcept</div><div class="ttdoc">Gets the name of a sub-app type.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00145">sub_app.hpp:145</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1app_html_a1c78747b4cc5ca72b3811b26772c9057"><div class="ttname"><a href="namespacehelios_1_1app.html#a1c78747b4cc5ca72b3811b26772c9057">helios::app::SubAppTypeId</a></div><div class="ttdeci">size_t SubAppTypeId</div><div class="ttdoc">Type alias for sub-app type IDs.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00127">sub_app.hpp:127</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1app_html_a41c465faf00845ccd64c85f9dc95b665"><div class="ttname"><a href="namespacehelios_1_1app.html#a41c465faf00845ccd64c85f9dc95b665">helios::app::SubAppTypeIdOf</a></div><div class="ttdeci">constexpr SubAppTypeId SubAppTypeIdOf() noexcept</div><div class="ttdoc">Type alias for module type IDs.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00135">sub_app.hpp:135</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1app_html_ac2703229da87efec89a2ed4f585a4add"><div class="ttname"><a href="namespacehelios_1_1app.html#ac2703229da87efec89a2ed4f585a4add">helios::app::SubAppMaxOverlappingUpdates</a></div><div class="ttdeci">constexpr size_t SubAppMaxOverlappingUpdates() noexcept</div><div class="ttdoc">Gets the maximum number of overlapping updates for a sub-app.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00116">sub_app.hpp:116</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1app_html_adc265a79417b7d69c34c3e92fd61fab1"><div class="ttname"><a href="namespacehelios_1_1app.html#adc265a79417b7d69c34c3e92fd61fab1">helios::app::SubAppAllowsOverlappingUpdates</a></div><div class="ttdeci">constexpr bool SubAppAllowsOverlappingUpdates() noexcept</div><div class="ttdoc">Gets whether a sub-app allows overlapping updates.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00102">sub_app.hpp:102</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_af0384de48d847585fcb340c71c231e5e"><div class="ttname"><a href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, Allocator, Components... &gt; Query</div><div class="ttdoc">Type alias for query with mutable world access.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02515">query.hpp:2515</a></div></div>
+<div class="ttc" id="aresource_8hpp_html"><div class="ttname"><a href="resource_8hpp.html">resource.hpp</a></div></div>
+<div class="ttc" id="aschedule_8hpp_html"><div class="ttname"><a href="schedule_8hpp.html">schedule.hpp</a></div></div>
+<div class="ttc" id="ascheduler_8hpp_html"><div class="ttname"><a href="scheduler_8hpp.html">scheduler.hpp</a></div></div>
+<div class="ttc" id="aschedules_8hpp_html"><div class="ttname"><a href="schedules_8hpp.html">schedules.hpp</a></div></div>
+<div class="ttc" id="asystem_8hpp_html"><div class="ttname"><a href="system_8hpp.html">system.hpp</a></div></div>
+<div class="ttc" id="asystem__config_8hpp_html"><div class="ttname"><a href="system__config_8hpp.html">system_config.hpp</a></div></div>
+<div class="ttc" id="asystem__set_8hpp_html"><div class="ttname"><a href="system__set_8hpp.html">system_set.hpp</a></div></div>
+<div class="ttc" id="asystem__set__config_8hpp_html"><div class="ttname"><a href="system__set__config_8hpp.html">system_set_config.hpp</a></div></div>
+<div class="ttc" id="aworld_8hpp_html"><div class="ttname"><a href="world_8hpp.html">world.hpp</a></div></div>
+</div><!-- fragment --> </div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

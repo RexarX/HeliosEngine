@@ -1,0 +1,281 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: src/core/include/helios/core/app/schedules.hpp File Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('schedules_8hpp.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">schedules.hpp File Reference</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;<a class="el" href="core__pch_8hpp_source.html">helios/core_pch.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="schedule_8hpp_source.html">helios/core/app/schedule.hpp</a>&gt;</code><br />
+<code>#include &lt;array&gt;</code><br />
+<code>#include &lt;string_view&gt;</code><br />
+</div>
+<p><a href="schedules_8hpp_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1app_1_1StartUpStage.html">helios::app::StartUpStage</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structhelios_1_1app_1_1StartUpStage.html" title="StartUpStage - application initialization phase.">StartUpStage</a> - application initialization phase.  <a href="structhelios_1_1app_1_1StartUpStage.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1app_1_1MainStage.html">helios::app::MainStage</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structhelios_1_1app_1_1MainStage.html" title="MainStage - main thread execution phase.">MainStage</a> - main thread execution phase.  <a href="structhelios_1_1app_1_1MainStage.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1app_1_1UpdateStage.html">helios::app::UpdateStage</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structhelios_1_1app_1_1UpdateStage.html" title="UpdateStage - main update logic phase.">UpdateStage</a> - main update logic phase.  <a href="structhelios_1_1app_1_1UpdateStage.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1app_1_1CleanUpStage.html">helios::app::CleanUpStage</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structhelios_1_1app_1_1CleanUpStage.html" title="CleanUpStage - cleanup/shutdown phase.">CleanUpStage</a> - cleanup/shutdown phase.  <a href="structhelios_1_1app_1_1CleanUpStage.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1app_1_1PreStartup.html">helios::app::PreStartup</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structhelios_1_1app_1_1PreStartup.html" title="PreStartup schedule - runs before startup initialization.">PreStartup</a> schedule - runs before startup initialization.  <a href="structhelios_1_1app_1_1PreStartup.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1app_1_1Startup.html">helios::app::Startup</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structhelios_1_1app_1_1Startup.html" title="Startup schedule - main initialization.">Startup</a> schedule - main initialization.  <a href="structhelios_1_1app_1_1Startup.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1app_1_1PostStartup.html">helios::app::PostStartup</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structhelios_1_1app_1_1PostStartup.html" title="PostStartup schedule - runs after startup initialization.">PostStartup</a> schedule - runs after startup initialization.  <a href="structhelios_1_1app_1_1PostStartup.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1app_1_1Main.html">helios::app::Main</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structhelios_1_1app_1_1Main.html" title="Main schedule - main thread execution.">Main</a> schedule - main thread execution.  <a href="structhelios_1_1app_1_1Main.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1app_1_1Update.html">helios::app::Update</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structhelios_1_1app_1_1Update.html" title="Update schedule - main update logic.">Update</a> schedule - main update logic.  <a href="structhelios_1_1app_1_1Update.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1app_1_1PreUpdate.html">helios::app::PreUpdate</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structhelios_1_1app_1_1PreUpdate.html" title="PreUpdate schedule - runs before the main update.">PreUpdate</a> schedule - runs before the main update.  <a href="structhelios_1_1app_1_1PreUpdate.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1app_1_1PostUpdate.html">helios::app::PostUpdate</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structhelios_1_1app_1_1PostUpdate.html" title="PostUpdate schedule - runs after the main update.">PostUpdate</a> schedule - runs after the main update.  <a href="structhelios_1_1app_1_1PostUpdate.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1app_1_1CleanUp.html">helios::app::CleanUp</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structhelios_1_1app_1_1CleanUp.html" title="CleanUp schedule - main cleanup.">CleanUp</a> schedule - main cleanup.  <a href="structhelios_1_1app_1_1CleanUp.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1app_1_1PreCleanUp.html">helios::app::PreCleanUp</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structhelios_1_1app_1_1PreCleanUp.html" title="PreCleanUp schedule - runs before cleanup/shutdown.">PreCleanUp</a> schedule - runs before cleanup/shutdown.  <a href="structhelios_1_1app_1_1PreCleanUp.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1app_1_1PostCleanUp.html">helios::app::PostCleanUp</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structhelios_1_1app_1_1PostCleanUp.html" title="PostCleanUp schedule - runs after cleanup/shutdown.">PostCleanUp</a> schedule - runs after cleanup/shutdown.  <a href="structhelios_1_1app_1_1PostCleanUp.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespacehelios" id="r_namespacehelios"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios.html">helios</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespacehelios_1_1app" id="r_namespacehelios_1_1app"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1app.html">helios::app</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:af7f921cb3d1fee929da2b7083b169d76" id="r_af7f921cb3d1fee929da2b7083b169d76"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="structhelios_1_1app_1_1Main.html">Main</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1app.html#af7f921cb3d1fee929da2b7083b169d76">helios::app::kMain</a> {}</td></tr>
+<tr class="separator:af7f921cb3d1fee929da2b7083b169d76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e91d4926f9941d0c671dea3179838a5" id="r_a6e91d4926f9941d0c671dea3179838a5"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="structhelios_1_1app_1_1PreStartup.html">PreStartup</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1app.html#a6e91d4926f9941d0c671dea3179838a5">helios::app::kPreStartup</a> {}</td></tr>
+<tr class="separator:a6e91d4926f9941d0c671dea3179838a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a444d560262c7a913cb6571fda3e74804" id="r_a444d560262c7a913cb6571fda3e74804"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="structhelios_1_1app_1_1Startup.html">Startup</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1app.html#a444d560262c7a913cb6571fda3e74804">helios::app::kStartup</a> {}</td></tr>
+<tr class="separator:a444d560262c7a913cb6571fda3e74804"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae77d1b481d31f652d78a60cc09860711" id="r_ae77d1b481d31f652d78a60cc09860711"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="structhelios_1_1app_1_1PostStartup.html">PostStartup</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1app.html#ae77d1b481d31f652d78a60cc09860711">helios::app::kPostStartup</a> {}</td></tr>
+<tr class="separator:ae77d1b481d31f652d78a60cc09860711"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ae6423443d7b91d02971971253e2e1c" id="r_a9ae6423443d7b91d02971971253e2e1c"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="structhelios_1_1app_1_1PreUpdate.html">PreUpdate</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1app.html#a9ae6423443d7b91d02971971253e2e1c">helios::app::kPreUpdate</a> {}</td></tr>
+<tr class="separator:a9ae6423443d7b91d02971971253e2e1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6336fe1dd31d2537c02c2571437ab93f" id="r_a6336fe1dd31d2537c02c2571437ab93f"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="structhelios_1_1app_1_1Update.html">Update</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1app.html#a6336fe1dd31d2537c02c2571437ab93f">helios::app::kUpdate</a> {}</td></tr>
+<tr class="separator:a6336fe1dd31d2537c02c2571437ab93f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12383482410e87f279ccb7f69e4381af" id="r_a12383482410e87f279ccb7f69e4381af"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="structhelios_1_1app_1_1PostUpdate.html">PostUpdate</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1app.html#a12383482410e87f279ccb7f69e4381af">helios::app::kPostUpdate</a> {}</td></tr>
+<tr class="separator:a12383482410e87f279ccb7f69e4381af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f5cf116d709ab7b8e115bbd6929ad5b" id="r_a6f5cf116d709ab7b8e115bbd6929ad5b"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="structhelios_1_1app_1_1PreCleanUp.html">PreCleanUp</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1app.html#a6f5cf116d709ab7b8e115bbd6929ad5b">helios::app::kPreCleanUp</a> {}</td></tr>
+<tr class="separator:a6f5cf116d709ab7b8e115bbd6929ad5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a685648f90b4fb882696aa0a82cca5af6" id="r_a685648f90b4fb882696aa0a82cca5af6"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="structhelios_1_1app_1_1CleanUp.html">CleanUp</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1app.html#a685648f90b4fb882696aa0a82cca5af6">helios::app::kCleanUp</a> {}</td></tr>
+<tr class="separator:a685648f90b4fb882696aa0a82cca5af6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26ac5713c9bd02d3a6306713827226ef" id="r_a26ac5713c9bd02d3a6306713827226ef"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="structhelios_1_1app_1_1PostCleanUp.html">PostCleanUp</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1app.html#a26ac5713c9bd02d3a6306713827226ef">helios::app::kPostCleanUp</a> {}</td></tr>
+<tr class="separator:a26ac5713c9bd02d3a6306713827226ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_aebb8dcc11953d78e620bbef0b9e2183.html">core</a></li><li class="navelem"><a class="el" href="dir_8f49dd062eda24395df599c5385a3cb1.html">include</a></li><li class="navelem"><a class="el" href="dir_23069df5183a130785923908e80258ad.html">helios</a></li><li class="navelem"><a class="el" href="dir_2da2d982aeea650f7dd0b34d7b8d0119.html">core</a></li><li class="navelem"><a class="el" href="dir_50e8c7c9eb757b6bf1187ddcee6bc483.html">app</a></li><li class="navelem"><a class="el" href="schedules_8hpp.html">schedules.hpp</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

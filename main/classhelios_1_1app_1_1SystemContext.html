@@ -1,0 +1,1805 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: helios::app::SystemContext Class Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classhelios_1_1app_1_1SystemContext.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classhelios_1_1app_1_1SystemContext-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">helios::app::SystemContext Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Per-system execution context with validated access.  
+ <a href="classhelios_1_1app_1_1SystemContext.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="system__context_8hpp_source.html">system_context.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:af4f8594c2929e003350ccd4c47fd9d48" id="r_af4f8594c2929e003350ccd4c47fd9d48"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#af4f8594c2929e003350ccd4c47fd9d48">QueryAllocator</a> = <a class="el" href="namespacehelios_1_1memory.html#ab1eecdf8e5369e7088871d5000ed769a">memory::STLGrowableAllocator</a>&lt; <a class="el" href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">ecs::ComponentTypeId</a>, <a class="el" href="classhelios_1_1memory_1_1FrameAllocator.html">memory::FrameAllocator</a> &gt;</td></tr>
+<tr class="memdesc:af4f8594c2929e003350ccd4c47fd9d48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocator type for component type IDs in queries.  <br /></td></tr>
+<tr class="separator:af4f8594c2929e003350ccd4c47fd9d48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a967d5c9416daf6ba484b3b06991eee2d" id="r_a967d5c9416daf6ba484b3b06991eee2d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a967d5c9416daf6ba484b3b06991eee2d">CommandAllocator</a> = <a class="el" href="namespacehelios_1_1memory.html#ab1eecdf8e5369e7088871d5000ed769a">memory::STLGrowableAllocator</a>&lt; std::unique_ptr&lt; <a class="el" href="classhelios_1_1ecs_1_1Command.html">ecs::Command</a> &gt;, <a class="el" href="classhelios_1_1memory_1_1FrameAllocator.html">memory::FrameAllocator</a> &gt;</td></tr>
+<tr class="memdesc:a967d5c9416daf6ba484b3b06991eee2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocator type for command pointers in command buffers.  <br /></td></tr>
+<tr class="separator:a967d5c9416daf6ba484b3b06991eee2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:aa9a78521c18953e9d246442fdc249bc3" id="r_aa9a78521c18953e9d246442fdc249bc3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#aa9a78521c18953e9d246442fdc249bc3">SystemContext</a> (<a class="el" href="classhelios_1_1ecs_1_1World.html">ecs::World</a> &amp;<a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">world</a>, <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">const</a> <a class="el" href="structhelios_1_1app_1_1details_1_1SystemInfo.html">details::SystemInfo</a> &amp;<a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">system_info</a>, <a class="el" href="classhelios_1_1async_1_1Executor.html">async::Executor</a> &amp;<a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">executor</a>, <a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html">ecs::details::SystemLocalStorage</a> &amp;local_storage) <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">noexcept</a></td></tr>
+<tr class="memdesc:aa9a78521c18953e9d246442fdc249bc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a system context with Executor for main schedule systems.  <br /></td></tr>
+<tr class="separator:aa9a78521c18953e9d246442fdc249bc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb12e171e6ad0f752624e3db2fcefb44" id="r_adb12e171e6ad0f752624e3db2fcefb44"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#adb12e171e6ad0f752624e3db2fcefb44">SystemContext</a> (<a class="el" href="classhelios_1_1ecs_1_1World.html">ecs::World</a> &amp;<a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">world</a>, <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">const</a> <a class="el" href="structhelios_1_1app_1_1details_1_1SystemInfo.html">details::SystemInfo</a> &amp;<a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">system_info</a>, <a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html">async::SubTaskGraph</a> &amp;<a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">sub_graph</a>, <a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html">ecs::details::SystemLocalStorage</a> &amp;local_storage) <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">noexcept</a></td></tr>
+<tr class="memdesc:adb12e171e6ad0f752624e3db2fcefb44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a system context with SubTaskGraph for parallel schedule systems.  <br /></td></tr>
+<tr class="separator:adb12e171e6ad0f752624e3db2fcefb44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaab9cf6ffeb1a6412f29ba50bb496464" id="r_aaab9cf6ffeb1a6412f29ba50bb496464"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#aaab9cf6ffeb1a6412f29ba50bb496464">SystemContext</a> (<a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">const</a> <a class="el" href="classhelios_1_1app_1_1SystemContext.html">SystemContext</a> &amp;)=<a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">delete</a></td></tr>
+<tr class="separator:aaab9cf6ffeb1a6412f29ba50bb496464"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a796306d806cd723b86fd15f80223ce45" id="r_a796306d806cd723b86fd15f80223ce45"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a796306d806cd723b86fd15f80223ce45">SystemContext</a> (<a class="el" href="classhelios_1_1app_1_1SystemContext.html">SystemContext</a> &amp;&amp;)=<a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">delete</a></td></tr>
+<tr class="separator:a796306d806cd723b86fd15f80223ce45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6bcbe27386bfa5c13552c0b568f2d9da" id="r_a6bcbe27386bfa5c13552c0b568f2d9da"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a6bcbe27386bfa5c13552c0b568f2d9da">~SystemContext</a> () <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">noexcept</a>=<a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">default</a></td></tr>
+<tr class="separator:a6bcbe27386bfa5c13552c0b568f2d9da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a609651177779c89fd6ab36cf790c28dc" id="r_a609651177779c89fd6ab36cf790c28dc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1SystemContext.html">SystemContext</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a609651177779c89fd6ab36cf790c28dc">operator=</a> (<a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">const</a> <a class="el" href="classhelios_1_1app_1_1SystemContext.html">SystemContext</a> &amp;)=<a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">delete</a></td></tr>
+<tr class="separator:a609651177779c89fd6ab36cf790c28dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a013e4625cb51a463b907c740f82b11d9" id="r_a013e4625cb51a463b907c740f82b11d9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1SystemContext.html">SystemContext</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a013e4625cb51a463b907c740f82b11d9">operator=</a> (<a class="el" href="classhelios_1_1app_1_1SystemContext.html">SystemContext</a> &amp;&amp;)=<a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">delete</a></td></tr>
+<tr class="separator:a013e4625cb51a463b907c740f82b11d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a656516d7f50fe94f0eac441d23b301fb" id="r_a656516d7f50fe94f0eac441d23b301fb"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">Query</a> () noexcept -&gt; <a class="el" href="namespacehelios_1_1ecs.html#a83d597eaa8fb1e270bfe8d4bc7245ced">ecs::QueryBuilder</a>&lt; <a class="el" href="classhelios_1_1app_1_1SystemContext.html#af4f8594c2929e003350ccd4c47fd9d48">QueryAllocator</a> &gt;</td></tr>
+<tr class="separator:a656516d7f50fe94f0eac441d23b301fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2781ca846ccbafe313ff647cb1163a0a" id="r_a2781ca846ccbafe313ff647cb1163a0a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">auto</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a2781ca846ccbafe313ff647cb1163a0a">ReadOnlyQuery</a> () <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">const</a> <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">noexcept</a> -&gt; <a class="el" href="namespacehelios_1_1ecs.html#a4755541af4fd6360392ff763a9ac514b">ecs::ReadOnlyQueryBuilder</a>&lt; <a class="el" href="classhelios_1_1app_1_1SystemContext.html#af4f8594c2929e003350ccd4c47fd9d48">QueryAllocator</a> &gt;</td></tr>
+<tr class="separator:a2781ca846ccbafe313ff647cb1163a0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a447fed89578ca65a81ba05d1e9c60bae" id="r_a447fed89578ca65a81ba05d1e9c60bae"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">auto</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a447fed89578ca65a81ba05d1e9c60bae">Commands</a> () <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">noexcept</a> -&gt; <a class="el" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html">ecs::WorldCmdBuffer</a>&lt; <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a967d5c9416daf6ba484b3b06991eee2d">CommandAllocator</a> &gt;</td></tr>
+<tr class="memdesc:a447fed89578ca65a81ba05d1e9c60bae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a command buffer for deferred world operations.  <br /></td></tr>
+<tr class="separator:a447fed89578ca65a81ba05d1e9c60bae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e4a4983559672c1fc6c755f29600cc6" id="r_a9e4a4983559672c1fc6c755f29600cc6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">auto</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a9e4a4983559672c1fc6c755f29600cc6">EntityCommands</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">ecs::Entity</a> entity) -&gt; <a class="el" href="classhelios_1_1ecs_1_1EntityCmdBuffer.html">ecs::EntityCmdBuffer</a>&lt; <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a967d5c9416daf6ba484b3b06991eee2d">CommandAllocator</a> &gt;</td></tr>
+<tr class="memdesc:a9e4a4983559672c1fc6c755f29600cc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an entity command buffer for a specific entity.  <br /></td></tr>
+<tr class="separator:a9e4a4983559672c1fc6c755f29600cc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5b0d1a42ba781e6f393b3536906374b" id="r_ac5b0d1a42ba781e6f393b3536906374b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">ecs::Entity</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#ac5b0d1a42ba781e6f393b3536906374b">ReserveEntity</a> ()</td></tr>
+<tr class="memdesc:ac5b0d1a42ba781e6f393b3536906374b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reserves an entity ID for deferred creation.  <br /></td></tr>
+<tr class="separator:ac5b0d1a42ba781e6f393b3536906374b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0495693e9a11bad63f7b9185f4e0d9e1" id="r_a0495693e9a11bad63f7b9185f4e0d9e1"><td class="memTemplParams" colspan="2">template&lt;ecs::ResourceTrait T&gt; </td></tr>
+<tr class="memitem:a0495693e9a11bad63f7b9185f4e0d9e1"><td class="memTemplItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a0495693e9a11bad63f7b9185f4e0d9e1">WriteResource</a> ()</td></tr>
+<tr class="memdesc:a0495693e9a11bad63f7b9185f4e0d9e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets mutable reference to a resource.  <br /></td></tr>
+<tr class="separator:a0495693e9a11bad63f7b9185f4e0d9e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a9bd7fbd36af2288f1d376bc20dfe7e" id="r_a2a9bd7fbd36af2288f1d376bc20dfe7e"><td class="memTemplParams" colspan="2">template&lt;ecs::ResourceTrait T&gt; </td></tr>
+<tr class="memitem:a2a9bd7fbd36af2288f1d376bc20dfe7e"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">const</a> T &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a2a9bd7fbd36af2288f1d376bc20dfe7e">ReadResource</a> () <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">const</a></td></tr>
+<tr class="memdesc:a2a9bd7fbd36af2288f1d376bc20dfe7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets const reference to a resource.  <br /></td></tr>
+<tr class="separator:a2a9bd7fbd36af2288f1d376bc20dfe7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed6a4c720a1c655dcd70a4cdbfa46409" id="r_aed6a4c720a1c655dcd70a4cdbfa46409"><td class="memTemplParams" colspan="2">template&lt;ecs::ResourceTrait T&gt; </td></tr>
+<tr class="memitem:aed6a4c720a1c655dcd70a4cdbfa46409"><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#aed6a4c720a1c655dcd70a4cdbfa46409">TryWriteResource</a> ()</td></tr>
+<tr class="memdesc:aed6a4c720a1c655dcd70a4cdbfa46409"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to get mutable pointer to a resource.  <br /></td></tr>
+<tr class="separator:aed6a4c720a1c655dcd70a4cdbfa46409"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4901bc790a3dfde9eaacc07fb855e451" id="r_a4901bc790a3dfde9eaacc07fb855e451"><td class="memTemplParams" colspan="2">template&lt;ecs::ResourceTrait T&gt; </td></tr>
+<tr class="memitem:a4901bc790a3dfde9eaacc07fb855e451"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">const</a> T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a4901bc790a3dfde9eaacc07fb855e451">TryReadResource</a> () <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">const</a></td></tr>
+<tr class="memdesc:a4901bc790a3dfde9eaacc07fb855e451"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to get const pointer to a resource.  <br /></td></tr>
+<tr class="separator:a4901bc790a3dfde9eaacc07fb855e451"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a241cc6fef263ae898604b3508e4981ae" id="r_a241cc6fef263ae898604b3508e4981ae"><td class="memTemplParams" colspan="2">template&lt;ecs::EventTrait T&gt; </td></tr>
+<tr class="memitem:a241cc6fef263ae898604b3508e4981ae"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a241cc6fef263ae898604b3508e4981ae">EmitEvent</a> (<a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">const</a> T &amp;<a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">event</a>)</td></tr>
+<tr class="memdesc:a241cc6fef263ae898604b3508e4981ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emits an event to the local event queue.  <br /></td></tr>
+<tr class="separator:a241cc6fef263ae898604b3508e4981ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3367d0bd31eb11354a48e8f386157fce" id="r_a3367d0bd31eb11354a48e8f386157fce"><td class="memTemplParams" colspan="2">template&lt;std::ranges::sized_range R&gt; <br />
+requires ecs::EventTrait&lt;std::ranges::range_value_t&lt;<a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">R</a>&gt;&gt;</td></tr>
+<tr class="memitem:a3367d0bd31eb11354a48e8f386157fce"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a3367d0bd31eb11354a48e8f386157fce">EmitEventBulk</a> (<a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">const</a> <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">R</a> &amp;events)</td></tr>
+<tr class="memdesc:a3367d0bd31eb11354a48e8f386157fce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emits multiple events in bulk.  <br /></td></tr>
+<tr class="separator:a3367d0bd31eb11354a48e8f386157fce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9367516dde407414b6b4c35ca834a6dc" id="r_a9367516dde407414b6b4c35ca834a6dc"><td class="memTemplParams" colspan="2">template&lt;ecs::EventTrait T&gt; </td></tr>
+<tr class="memitem:a9367516dde407414b6b4c35ca834a6dc"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">auto</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a9367516dde407414b6b4c35ca834a6dc">ReadEvents</a> () <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">const</a> <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">noexcept</a> -&gt; <a class="el" href="classhelios_1_1ecs_1_1EventReader.html">ecs::EventReader</a>&lt; T &gt;</td></tr>
+<tr class="memdesc:a9367516dde407414b6b4c35ca834a6dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets an event reader for type T.  <br /></td></tr>
+<tr class="separator:a9367516dde407414b6b4c35ca834a6dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c9f4a18202fc94b0590c530a3b52ad7" id="r_a3c9f4a18202fc94b0590c530a3b52ad7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a3c9f4a18202fc94b0590c530a3b52ad7">EntityExists</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">ecs::Entity</a> entity) <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">const</a></td></tr>
+<tr class="memdesc:a3c9f4a18202fc94b0590c530a3b52ad7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if entity exists in the world.  <br /></td></tr>
+<tr class="separator:a3c9f4a18202fc94b0590c530a3b52ad7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80c3eeb05388407b9c2f2713704141a0" id="r_a80c3eeb05388407b9c2f2713704141a0"><td class="memTemplParams" colspan="2">template&lt;ecs::ComponentTrait T&gt; </td></tr>
+<tr class="memitem:a80c3eeb05388407b9c2f2713704141a0"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">bool</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a80c3eeb05388407b9c2f2713704141a0">HasComponent</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">ecs::Entity</a> entity) <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">const</a></td></tr>
+<tr class="memdesc:a80c3eeb05388407b9c2f2713704141a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if entity has component.  <br /></td></tr>
+<tr class="separator:a80c3eeb05388407b9c2f2713704141a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4910601a8c662b68631d9bffbc2473a2" id="r_a4910601a8c662b68631d9bffbc2473a2"><td class="memTemplParams" colspan="2">template&lt;ecs::ComponentTrait... Ts&gt; <br />
+requires utils::UniqueTypes&lt;Ts...&gt;</td></tr>
+<tr class="memitem:a4910601a8c662b68631d9bffbc2473a2"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">auto</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a4910601a8c662b68631d9bffbc2473a2">HasComponents</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">ecs::Entity</a> entity) <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">const</a> -&gt; std::array&lt; <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">bool</a>, sizeof...(<a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">Ts</a>)&gt;</td></tr>
+<tr class="memdesc:a4910601a8c662b68631d9bffbc2473a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if entity has components.  <br /></td></tr>
+<tr class="separator:a4910601a8c662b68631d9bffbc2473a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaec9cb18fa6eb3a59139ff95d6fa42fb" id="r_aaec9cb18fa6eb3a59139ff95d6fa42fb"><td class="memTemplParams" colspan="2">template&lt;ecs::ResourceTrait T&gt; </td></tr>
+<tr class="memitem:aaec9cb18fa6eb3a59139ff95d6fa42fb"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">bool</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#aaec9cb18fa6eb3a59139ff95d6fa42fb">HasResource</a> () <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">const</a></td></tr>
+<tr class="memdesc:aaec9cb18fa6eb3a59139ff95d6fa42fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a resource exists.  <br /></td></tr>
+<tr class="separator:aaec9cb18fa6eb3a59139ff95d6fa42fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af739dd7f156692af8e92f9df44b116f7" id="r_af739dd7f156692af8e92f9df44b116f7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#af739dd7f156692af8e92f9df44b116f7">HasSubTaskGraph</a> () <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">const</a> <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">noexcept</a></td></tr>
+<tr class="memdesc:af739dd7f156692af8e92f9df44b116f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if SubTaskGraph is available in this context.  <br /></td></tr>
+<tr class="separator:af739dd7f156692af8e92f9df44b116f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82711df763774720afe4a6f7622b5f5e" id="r_a82711df763774720afe4a6f7622b5f5e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a82711df763774720afe4a6f7622b5f5e">HasExecutor</a> () <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">const</a> <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">noexcept</a></td></tr>
+<tr class="memdesc:a82711df763774720afe4a6f7622b5f5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if Executor is available in this context.  <br /></td></tr>
+<tr class="separator:a82711df763774720afe4a6f7622b5f5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaabc7b8e29d760ac4bbcb698561c2efe" id="r_aaabc7b8e29d760ac4bbcb698561c2efe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#aaabc7b8e29d760ac4bbcb698561c2efe">EntityCount</a> () <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">const</a> <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">noexcept</a></td></tr>
+<tr class="memdesc:aaabc7b8e29d760ac4bbcb698561c2efe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of entities in the world.  <br /></td></tr>
+<tr class="separator:aaabc7b8e29d760ac4bbcb698561c2efe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6fc0268228c2ef20c166d553968c9a5" id="r_ae6fc0268228c2ef20c166d553968c9a5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structhelios_1_1memory_1_1AllocatorStats.html">memory::AllocatorStats</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#ae6fc0268228c2ef20c166d553968c9a5">FrameAllocatorStats</a> () <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">const</a> <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">noexcept</a></td></tr>
+<tr class="memdesc:ae6fc0268228c2ef20c166d553968c9a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets frame allocator statistics.  <br /></td></tr>
+<tr class="separator:ae6fc0268228c2ef20c166d553968c9a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c4d87c64730e56679fc77773735b336" id="r_a9c4d87c64730e56679fc77773735b336"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a803609b8b736c6f321a8344c5ce0d7de">ecs::details::SystemLocalStorage::FrameAllocatorType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a9c4d87c64730e56679fc77773735b336">FrameAllocator</a> () <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">noexcept</a></td></tr>
+<tr class="memdesc:a9c4d87c64730e56679fc77773735b336"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets reference to the per-system frame allocator.  <br /></td></tr>
+<tr class="separator:a9c4d87c64730e56679fc77773735b336"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91c5b58e77fb3b2cf64bb57db2e8e80c" id="r_a91c5b58e77fb3b2cf64bb57db2e8e80c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a803609b8b736c6f321a8344c5ce0d7de">ecs::details::SystemLocalStorage::FrameAllocatorType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a91c5b58e77fb3b2cf64bb57db2e8e80c">FrameAllocator</a> () <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">const</a> <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">noexcept</a></td></tr>
+<tr class="memdesc:a91c5b58e77fb3b2cf64bb57db2e8e80c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets const reference to the per-system frame allocator.  <br /></td></tr>
+<tr class="separator:a91c5b58e77fb3b2cf64bb57db2e8e80c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a439e1e7ce0ce05c6df824e9163b2ca3e" id="r_a439e1e7ce0ce05c6df824e9163b2ca3e"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">typename</a> T &gt; </td></tr>
+<tr class="memitem:a439e1e7ce0ce05c6df824e9163b2ca3e"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">auto</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a439e1e7ce0ce05c6df824e9163b2ca3e">MakeFrameAllocator</a> () <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">noexcept</a> -&gt; <a class="el" href="namespacehelios_1_1memory.html#ab1eecdf8e5369e7088871d5000ed769a">memory::STLGrowableAllocator</a>&lt; T, <a class="el" href="classhelios_1_1memory_1_1FrameAllocator.html">memory::FrameAllocator</a> &gt;</td></tr>
+<tr class="separator:a439e1e7ce0ce05c6df824e9163b2ca3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a1c906c163c8d7b610c7485b9a1fb0f" id="r_a3a1c906c163c8d7b610c7485b9a1fb0f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html">async::SubTaskGraph</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a3a1c906c163c8d7b610c7485b9a1fb0f">SubTaskGraph</a> () <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">noexcept</a></td></tr>
+<tr class="memdesc:a3a1c906c163c8d7b610c7485b9a1fb0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets reference to the sub task graph for parallel work.  <br /></td></tr>
+<tr class="separator:a3a1c906c163c8d7b610c7485b9a1fb0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98456da7ba855d5e6e8445d079d774fe" id="r_a98456da7ba855d5e6e8445d079d774fe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1async_1_1Executor.html">async::Executor</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a98456da7ba855d5e6e8445d079d774fe">Executor</a> () <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">noexcept</a></td></tr>
+<tr class="memdesc:a98456da7ba855d5e6e8445d079d774fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets reference to the executor for async work.  <br /></td></tr>
+<tr class="separator:a98456da7ba855d5e6e8445d079d774fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9c6a1c3da5861b0c2e8c02d267c6e41" id="r_ad9c6a1c3da5861b0c2e8c02d267c6e41"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">const</a> <a class="el" href="structhelios_1_1app_1_1details_1_1SystemInfo.html">details::SystemInfo</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#ad9c6a1c3da5861b0c2e8c02d267c6e41">GetSystemInfo</a> () <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">const</a> <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">noexcept</a></td></tr>
+<tr class="memdesc:ad9c6a1c3da5861b0c2e8c02d267c6e41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the system information.  <br /></td></tr>
+<tr class="separator:ad9c6a1c3da5861b0c2e8c02d267c6e41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e046f22802d2de6da3fe6a9e7252e29" id="r_a7e046f22802d2de6da3fe6a9e7252e29"><td class="memItemLeft" align="right" valign="top">std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a7e046f22802d2de6da3fe6a9e7252e29">GetSystemName</a> () <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">const</a> <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">noexcept</a></td></tr>
+<tr class="memdesc:a7e046f22802d2de6da3fe6a9e7252e29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the system name.  <br /></td></tr>
+<tr class="separator:a7e046f22802d2de6da3fe6a9e7252e29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Per-system execution context with validated access. </p>
+<p><a class="el" href="classhelios_1_1app_1_1SystemContext.html" title="Per-system execution context with validated access.">SystemContext</a> wraps <a class="el" href="classhelios_1_1ecs_1_1World.html" title="The World class manages entities with their components and systems.">ecs::World</a> to provide:</p><ul>
+<li>Validated access to components and resources based on <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html">AccessPolicy</a></li>
+<li>Thread-safe query creation</li>
+<li>Local command buffer access for deferred operations</li>
+<li>Event emission capabilities</li>
+<li>Async execution support (Executor or SubTaskGraph)</li>
+<li>Frame allocator access for temporary allocations</li>
+</ul>
+<p><a class="el" href="classhelios_1_1app_1_1SystemContext.html" title="Per-system execution context with validated access.">SystemContext</a> is created once per system per update and holds only references. All access is validated against the system's declared <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html">AccessPolicy</a>.</p>
+<p>Query and command buffer methods use the frame allocator by default for efficient temporary storage within systems.</p>
+<dl class="section note"><dt>Note</dt><dd>Pratially thread-safe. </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2system_8hpp-example.html#_a6">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/system.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__context_8hpp_source.html#l00053">53</a> of file <a class="el" href="system__context_8hpp_source.html">system_context.hpp</a>.</p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a967d5c9416daf6ba484b3b06991eee2d" name="a967d5c9416daf6ba484b3b06991eee2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a967d5c9416daf6ba484b3b06991eee2d">&#9670;&#160;</a></span>CommandAllocator</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">using</a> <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a967d5c9416daf6ba484b3b06991eee2d">helios::app::SystemContext::CommandAllocator</a> =  <a class="el" href="namespacehelios_1_1memory.html#ab1eecdf8e5369e7088871d5000ed769a">memory::STLGrowableAllocator</a>&lt;std::unique_ptr&lt;<a class="el" href="classhelios_1_1ecs_1_1Command.html">ecs::Command</a>&gt;, <a class="el" href="classhelios_1_1memory_1_1FrameAllocator.html">memory::FrameAllocator</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Allocator type for command pointers in command buffers. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a1">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__context_8hpp_source.html#l00059">59</a> of file <a class="el" href="system__context_8hpp_source.html">system_context.hpp</a>.</p>
+
+</div>
+</div>
+<a id="af4f8594c2929e003350ccd4c47fd9d48" name="af4f8594c2929e003350ccd4c47fd9d48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4f8594c2929e003350ccd4c47fd9d48">&#9670;&#160;</a></span>QueryAllocator</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">using</a> <a class="el" href="classhelios_1_1app_1_1SystemContext.html#af4f8594c2929e003350ccd4c47fd9d48">helios::app::SystemContext::QueryAllocator</a> =  <a class="el" href="namespacehelios_1_1memory.html#ab1eecdf8e5369e7088871d5000ed769a">memory::STLGrowableAllocator</a>&lt;<a class="el" href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">ecs::ComponentTypeId</a>, <a class="el" href="classhelios_1_1memory_1_1FrameAllocator.html">memory::FrameAllocator</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Allocator type for component type IDs in queries. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a0">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__context_8hpp_source.html#l00056">56</a> of file <a class="el" href="system__context_8hpp_source.html">system_context.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aa9a78521c18953e9d246442fdc249bc3" name="aa9a78521c18953e9d246442fdc249bc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9a78521c18953e9d246442fdc249bc3">&#9670;&#160;</a></span>SystemContext() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::app::SystemContext::SystemContext </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1World.html">ecs::World</a> &amp;&#160;</td>
+          <td class="paramname"><em>world</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">const</a> <a class="el" href="structhelios_1_1app_1_1details_1_1SystemInfo.html">details::SystemInfo</a> &amp;&#160;</td>
+          <td class="paramname"><em>system_info</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1async_1_1Executor.html">async::Executor</a> &amp;&#160;</td>
+          <td class="paramname"><em>executor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html">ecs::details::SystemLocalStorage</a> &amp;&#160;</td>
+          <td class="paramname"><em>local_storage</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructs a system context with Executor for main schedule systems. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">world</td><td>Reference to the ECS world </td></tr>
+    <tr><td class="paramname">system_info</td><td>Reference to system information </td></tr>
+    <tr><td class="paramname">executor</td><td>Reference to async executor </td></tr>
+    <tr><td class="paramname">local_storage</td><td>Reference to system local storage </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__context_8hpp_source.html#l00068">68</a> of file <a class="el" href="system__context_8hpp_source.html">system_context.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   70</span>      : world_(<a class="code hl_function" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">world</a>), system_info_(<a class="code hl_function" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">system_info</a>), async_context_(std::ref(<a class="code hl_function" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">executor</a>)), local_storage_(local_storage) {}</div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SystemContext_html_a656516d7f50fe94f0eac441d23b301fb"><div class="ttname"><a href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">helios::app::SystemContext::Query</a></div><div class="ttdeci">auto Query() noexcept -&gt; ecs::QueryBuilder&lt; QueryAllocator &gt;</div><div class="ttdef"><b>Definition</b> <a href="system__context_8hpp_source.html#l00109">system_context.hpp:109</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="adb12e171e6ad0f752624e3db2fcefb44" name="adb12e171e6ad0f752624e3db2fcefb44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb12e171e6ad0f752624e3db2fcefb44">&#9670;&#160;</a></span>SystemContext() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::app::SystemContext::SystemContext </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1World.html">ecs::World</a> &amp;&#160;</td>
+          <td class="paramname"><em>world</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">const</a> <a class="el" href="structhelios_1_1app_1_1details_1_1SystemInfo.html">details::SystemInfo</a> &amp;&#160;</td>
+          <td class="paramname"><em>system_info</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html">async::SubTaskGraph</a> &amp;&#160;</td>
+          <td class="paramname"><em>sub_graph</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html">ecs::details::SystemLocalStorage</a> &amp;&#160;</td>
+          <td class="paramname"><em>local_storage</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructs a system context with SubTaskGraph for parallel schedule systems. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">world</td><td>Reference to the ECS world </td></tr>
+    <tr><td class="paramname">system_info</td><td>Reference to system information </td></tr>
+    <tr><td class="paramname">sub_graph</td><td>Reference to async sub task graph </td></tr>
+    <tr><td class="paramname">local_storage</td><td>Reference to system local storage </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__context_8hpp_source.html#l00079">79</a> of file <a class="el" href="system__context_8hpp_source.html">system_context.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   81</span>      : world_(<a class="code hl_function" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">world</a>), system_info_(<a class="code hl_function" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">system_info</a>), async_context_(std::ref(<a class="code hl_function" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">sub_graph</a>)), local_storage_(local_storage) {}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aaab9cf6ffeb1a6412f29ba50bb496464" name="aaab9cf6ffeb1a6412f29ba50bb496464"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaab9cf6ffeb1a6412f29ba50bb496464">&#9670;&#160;</a></span>SystemContext() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::app::SystemContext::SystemContext </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">const</a> <a class="el" href="classhelios_1_1app_1_1SystemContext.html">SystemContext</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a796306d806cd723b86fd15f80223ce45" name="a796306d806cd723b86fd15f80223ce45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a796306d806cd723b86fd15f80223ce45">&#9670;&#160;</a></span>SystemContext() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::app::SystemContext::SystemContext </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1SystemContext.html">SystemContext</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6bcbe27386bfa5c13552c0b568f2d9da" name="a6bcbe27386bfa5c13552c0b568f2d9da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6bcbe27386bfa5c13552c0b568f2d9da">&#9670;&#160;</a></span>~SystemContext()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::app::SystemContext::~SystemContext </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a3">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a447fed89578ca65a81ba05d1e9c60bae" name="a447fed89578ca65a81ba05d1e9c60bae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a447fed89578ca65a81ba05d1e9c60bae">&#9670;&#160;</a></span>Commands()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">auto</a> helios::app::SystemContext::Commands </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt; <a class="el" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html">ecs::WorldCmdBuffer</a>&lt;<a class="el" href="classhelios_1_1app_1_1SystemContext.html#a967d5c9416daf6ba484b3b06991eee2d">CommandAllocator</a>&gt; </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a command buffer for deferred world operations. </p>
+<p>Command buffer allows queuing operations that will be executed during <a class="el" href="classhelios_1_1ecs_1_1World.html#a8c135f24991d9a3e3cc57cacfee0d01c" title="Flushes buffer of pending operations.">ecs::World::Update()</a>. This is the thread-safe way to modify the world. Uses the frame allocator for internal storage. </p><dl class="section note"><dt>Note</dt><dd>Thread-safe, but keep in mind that world command buffer is not, avoid sharing between threads. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>WorldCmdBuffer for queuing commands using frame allocator </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a9">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__context_8hpp_source.html#l00142">142</a> of file <a class="el" href="system__context_8hpp_source.html">system_context.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  142</span>                                                                                {</div>
+<div class="line"><span class="lineno">  143</span>    <span class="keywordflow">return</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ecs::WorldCmdBuffer&lt;CommandAllocator&gt;</a>(local_storage_, <a class="code hl_typedef" href="classhelios_1_1app_1_1SystemContext.html#a967d5c9416daf6ba484b3b06991eee2d">CommandAllocator</a>(local_storage_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a6d50a6f16446b9157d0876f79611e60d">FrameAllocator</a>()));</div>
+<div class="line"><span class="lineno">  144</span>  }</div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SystemContext_html_a967d5c9416daf6ba484b3b06991eee2d"><div class="ttname"><a href="classhelios_1_1app_1_1SystemContext.html#a967d5c9416daf6ba484b3b06991eee2d">helios::app::SystemContext::CommandAllocator</a></div><div class="ttdeci">memory::STLGrowableAllocator&lt; std::unique_ptr&lt; ecs::Command &gt;, memory::FrameAllocator &gt; CommandAllocator</div><div class="ttdoc">Allocator type for command pointers in command buffers.</div><div class="ttdef"><b>Definition</b> <a href="system__context_8hpp_source.html#l00059">system_context.hpp:59</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1SystemLocalStorage_html_a6d50a6f16446b9157d0876f79611e60d"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a6d50a6f16446b9157d0876f79611e60d">helios::ecs::details::SystemLocalStorage::FrameAllocator</a></div><div class="ttdeci">FrameAllocatorType &amp; FrameAllocator() noexcept</div><div class="ttdoc">Gets reference to the frame allocator.</div><div class="ttdef"><b>Definition</b> <a href="system__local__storage_8hpp_source.html#l00175">system_local_storage.hpp:175</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_af0384de48d847585fcb340c71c231e5e"><div class="ttname"><a href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, Allocator, Components... &gt; Query</div><div class="ttdoc">Type alias for query with mutable world access.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02515">query.hpp:2515</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a241cc6fef263ae898604b3508e4981ae" name="a241cc6fef263ae898604b3508e4981ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a241cc6fef263ae898604b3508e4981ae">&#9670;&#160;</a></span>EmitEvent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ecs::EventTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">void</a> helios::app::SystemContext::EmitEvent </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">const</a> T &amp;&#160;</td>
+          <td class="paramname"><em>event</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Emits an event to the local event queue. </p>
+<p>Events are stored in system-local storage and flushed after schedule execution. </p><dl class="section note"><dt>Note</dt><dd>Not thread-safe, only one thread should emit events for a system at a time. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if event type is not registered. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Event type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">event</td><td>Event to emit </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a17">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__context_8hpp_source.html#l00475">475</a> of file <a class="el" href="system__context_8hpp_source.html">system_context.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  475</span>                                                   {</div>
+<div class="line"><span class="lineno">  476</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(world_.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#a1631e7cf7bfb4533997958cc08fa7ef3">HasEvent</a>&lt;T&gt;(),</div>
+<div class="line"><span class="lineno">  477</span>                <span class="stringliteral">&quot;Failed to emit event of type &#39;{}&#39;: Event type not registered in world! &quot;</span></div>
+<div class="line"><span class="lineno">  478</span>                <span class="stringliteral">&quot;Add World::AddEvent&lt;{}&gt;() during initialization.&quot;</span>,</div>
+<div class="line"><span class="lineno">  479</span>                <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ecs::EventNameOf&lt;T&gt;</a>(), <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ecs::EventNameOf&lt;T&gt;</a>());</div>
+<div class="line"><span class="lineno">  480</span>  local_storage_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a2051d079e315ec42be1dab7ab6439ebf">WriteEvent</a>(<a class="code hl_function" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">event</a>);</div>
+<div class="line"><span class="lineno">  481</span>}</div>
+<div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00149">assert.hpp:149</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_a1631e7cf7bfb4533997958cc08fa7ef3"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#a1631e7cf7bfb4533997958cc08fa7ef3">helios::ecs::World::HasEvent</a></div><div class="ttdeci">bool HasEvent() const</div><div class="ttdoc">Checks if a event registered.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00545">world.hpp:545</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1SystemLocalStorage_html_a2051d079e315ec42be1dab7ab6439ebf"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a2051d079e315ec42be1dab7ab6439ebf">helios::ecs::details::SystemLocalStorage::WriteEvent</a></div><div class="ttdeci">void WriteEvent(const T &amp;event)</div><div class="ttdoc">Writes an event to the local event queue.</div><div class="ttdef"><b>Definition</b> <a href="system__local__storage_8hpp_source.html#l00206">system_local_storage.hpp:206</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a3367d0bd31eb11354a48e8f386157fce" name="a3367d0bd31eb11354a48e8f386157fce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3367d0bd31eb11354a48e8f386157fce">&#9670;&#160;</a></span>EmitEventBulk()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::ranges::sized_range R&gt; <br />
+requires ecs::EventTrait&lt;std::ranges::range_value_t&lt;<a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">R</a>&gt;&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">void</a> helios::app::SystemContext::EmitEventBulk </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">const</a> <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">R</a> &amp;&#160;</td>
+          <td class="paramname"><em>events</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Emits multiple events in bulk. </p>
+<p>More efficient than calling EmitEvent multiple times. </p><dl class="section note"><dt>Note</dt><dd>Not thread-safe, only one thread should emit events for a system at a time. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if event type is not registered. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">R</td><td>Range of events </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">events</td><td>Range of events to emit </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a18">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__context_8hpp_source.html#l00485">485</a> of file <a class="el" href="system__context_8hpp_source.html">system_context.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  485</span>                                                        {</div>
+<div class="line"><span class="lineno">  486</span>  <span class="keyword">using </span><a class="code hl_function" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">EventType</a> = std::ranges::range_value_t&lt;R&gt;;</div>
+<div class="line"><span class="lineno">  487</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(world_.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#a1631e7cf7bfb4533997958cc08fa7ef3">HasEvent</a>&lt;<a class="code hl_function" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">EventType</a>&gt;(),</div>
+<div class="line"><span class="lineno">  488</span>                <span class="stringliteral">&quot;Failed to emit events of type &#39;{}&#39;: Event type not registered in world! &quot;</span></div>
+<div class="line"><span class="lineno">  489</span>                <span class="stringliteral">&quot;Add World::AddEvent&lt;{}&gt;() during initialization.&quot;</span>,</div>
+<div class="line"><span class="lineno">  490</span>                <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ecs::EventNameOf&lt;EventType&gt;</a>(), <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ecs::EventNameOf&lt;EventType&gt;</a>());</div>
+<div class="line"><span class="lineno">  491</span>  local_storage_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a2112be2db3f3b8fec023efa98c9bafec">WriteEventBulk</a>(events);</div>
+<div class="line"><span class="lineno">  492</span>}</div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1SystemLocalStorage_html_a2112be2db3f3b8fec023efa98c9bafec"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a2112be2db3f3b8fec023efa98c9bafec">helios::ecs::details::SystemLocalStorage::WriteEventBulk</a></div><div class="ttdeci">void WriteEventBulk(const R &amp;events)</div><div class="ttdoc">Writes multiple events to the local event queue in bulk.</div><div class="ttdef"><b>Definition</b> <a href="system__local__storage_8hpp_source.html#l00215">system_local_storage.hpp:215</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a9e4a4983559672c1fc6c755f29600cc6" name="a9e4a4983559672c1fc6c755f29600cc6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e4a4983559672c1fc6c755f29600cc6">&#9670;&#160;</a></span>EntityCommands()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">auto</a> helios::app::SystemContext::EntityCommands </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">ecs::Entity</a>&#160;</td>
+          <td class="paramname"><em>entity</em></td><td>)</td>
+          <td> -&gt; <a class="el" href="classhelios_1_1ecs_1_1EntityCmdBuffer.html">ecs::EntityCmdBuffer</a>&lt;<a class="el" href="classhelios_1_1app_1_1SystemContext.html#a967d5c9416daf6ba484b3b06991eee2d">CommandAllocator</a>&gt; </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates an entity command buffer for a specific entity. </p>
+<p>Provides convenient interface for entity-specific operations. Uses the frame allocator for internal storage. </p><dl class="section note"><dt>Note</dt><dd>Thread-safe, but keep in mind that entity command buffer is not, avoid sharing between threads. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entity</td><td>Entity to operate on </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>EntityCmdBuffer for the entity using frame allocator </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a10">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__context_8hpp_source.html#l00154">154</a> of file <a class="el" href="system__context_8hpp_source.html">system_context.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  154</span>                                                                                              {</div>
+<div class="line"><span class="lineno">  155</span>    <span class="keywordflow">return</span> {entity, local_storage_, <a class="code hl_typedef" href="classhelios_1_1app_1_1SystemContext.html#a967d5c9416daf6ba484b3b06991eee2d">CommandAllocator</a>(local_storage_.FrameAllocator())};</div>
+<div class="line"><span class="lineno">  156</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aaabc7b8e29d760ac4bbcb698561c2efe" name="aaabc7b8e29d760ac4bbcb698561c2efe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaabc7b8e29d760ac4bbcb698561c2efe">&#9670;&#160;</a></span>EntityCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">size_t</a> helios::app::SystemContext::EntityCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the number of entities in the world. </p>
+<dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Number of entities in the world. </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a27">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__context_8hpp_source.html#l00315">315</a> of file <a class="el" href="system__context_8hpp_source.html">system_context.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  315</span>{ <span class="keywordflow">return</span> world_.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#ac6d3a71859afc4ab44fb710928681ca7">EntityCount</a>(); }</div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_ac6d3a71859afc4ab44fb710928681ca7"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#ac6d3a71859afc4ab44fb710928681ca7">helios::ecs::World::EntityCount</a></div><div class="ttdeci">size_t EntityCount() const noexcept</div><div class="ttdoc">Gets the number of entities in the world.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00565">world.hpp:565</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a3c9f4a18202fc94b0590c530a3b52ad7" name="a3c9f4a18202fc94b0590c530a3b52ad7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c9f4a18202fc94b0590c530a3b52ad7">&#9670;&#160;</a></span>EntityExists()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">bool</a> helios::app::SystemContext::EntityExists </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">ecs::Entity</a>&#160;</td>
+          <td class="paramname"><em>entity</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if entity exists in the world. </p>
+<dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if entity is invalid. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entity</td><td>Entity to check. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if entity exists, false otherwise. </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a20">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__context_8hpp_source.html#l00503">503</a> of file <a class="el" href="system__context_8hpp_source.html">system_context.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  503</span>                                                              {</div>
+<div class="line"><span class="lineno">  504</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(entity.Valid(), <span class="stringliteral">&quot;Failed to check if entity exists: Entity is invalid!&quot;</span>);</div>
+<div class="line"><span class="lineno">  505</span>  <span class="keywordflow">return</span> world_.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#a71d3863b142580968ff8cbf91aac3e92">Exists</a>(entity);</div>
+<div class="line"><span class="lineno">  506</span>}</div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_a71d3863b142580968ff8cbf91aac3e92"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#a71d3863b142580968ff8cbf91aac3e92">helios::ecs::World::Exists</a></div><div class="ttdeci">bool Exists(Entity entity) const</div><div class="ttdoc">Checks if entity exists in the world.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00944">world.hpp:944</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a98456da7ba855d5e6e8445d079d774fe" name="a98456da7ba855d5e6e8445d079d774fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98456da7ba855d5e6e8445d079d774fe">&#9670;&#160;</a></span>Executor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1async_1_1Executor.html">async::Executor</a> &amp; helios::app::SystemContext::Executor </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets reference to the executor for async work. </p>
+<dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if executor is not available. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to the executor </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a35">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__context_8hpp_source.html#l00533">533</a> of file <a class="el" href="system__context_8hpp_source.html">system_context.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  533</span>                                                       {</div>
+<div class="line"><span class="lineno">  534</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1app_1_1SystemContext.html#a82711df763774720afe4a6f7622b5f5e">HasExecutor</a>(),</div>
+<div class="line"><span class="lineno">  535</span>                <span class="stringliteral">&quot;Failed to get executor: Executor not available in this context! &quot;</span></div>
+<div class="line"><span class="lineno">  536</span>                <span class="stringliteral">&quot;System &#39;{}&#39; is likely running on a parallel schedule.&quot;</span>,</div>
+<div class="line"><span class="lineno">  537</span>                system_info_.<a class="code hl_variable" href="structhelios_1_1app_1_1details_1_1SystemInfo.html#ac3f015752756a1fa2b23dc59d82f085a">name</a>);</div>
+<div class="line"><span class="lineno">  538</span>  <span class="keywordflow">return</span> std::get&lt;std::reference_wrapper&lt;async::Executor&gt;&gt;(async_context_).<a class="code hl_function" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">get</a>();</div>
+<div class="line"><span class="lineno">  539</span>}</div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SystemContext_html_a82711df763774720afe4a6f7622b5f5e"><div class="ttname"><a href="classhelios_1_1app_1_1SystemContext.html#a82711df763774720afe4a6f7622b5f5e">helios::app::SystemContext::HasExecutor</a></div><div class="ttdeci">bool HasExecutor() const noexcept</div><div class="ttdoc">Checks if Executor is available in this context.</div><div class="ttdef"><b>Definition</b> <a href="system__context_8hpp_source.html#l00306">system_context.hpp:306</a></div></div>
+<div class="ttc" id="astructhelios_1_1app_1_1details_1_1SystemInfo_html_ac3f015752756a1fa2b23dc59d82f085a"><div class="ttname"><a href="structhelios_1_1app_1_1details_1_1SystemInfo.html#ac3f015752756a1fa2b23dc59d82f085a">helios::app::details::SystemInfo::name</a></div><div class="ttdeci">std::string name</div><div class="ttdoc">System name (for debugging/profiling)</div><div class="ttdef"><b>Definition</b> <a href="system__info_8hpp_source.html#l00021">system_info.hpp:21</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a91c5b58e77fb3b2cf64bb57db2e8e80c" name="a91c5b58e77fb3b2cf64bb57db2e8e80c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91c5b58e77fb3b2cf64bb57db2e8e80c">&#9670;&#160;</a></span>FrameAllocator() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a803609b8b736c6f321a8344c5ce0d7de">ecs::details::SystemLocalStorage::FrameAllocatorType</a> &amp; helios::app::SystemContext::FrameAllocator </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets const reference to the per-system frame allocator. </p>
+<dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Data allocated with the frame allocator is only valid for the current frame. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Const reference to the growable frame allocator </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="system__context_8hpp_source.html#l00353">353</a> of file <a class="el" href="system__context_8hpp_source.html">system_context.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  353</span>                                                                                                      {</div>
+<div class="line"><span class="lineno">  354</span>    <span class="keywordflow">return</span> local_storage_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a6d50a6f16446b9157d0876f79611e60d">FrameAllocator</a>();</div>
+<div class="line"><span class="lineno">  355</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a9c4d87c64730e56679fc77773735b336" name="a9c4d87c64730e56679fc77773735b336"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c4d87c64730e56679fc77773735b336">&#9670;&#160;</a></span>FrameAllocator() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a803609b8b736c6f321a8344c5ce0d7de">ecs::details::SystemLocalStorage::FrameAllocatorType</a> &amp; helios::app::SystemContext::FrameAllocator </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets reference to the per-system frame allocator. </p>
+<p>Use this allocator for temporary per-frame allocations that don't need individual deallocation. The allocator is reset at frame boundaries.</p>
+<p>Ideal for:</p><ul>
+<li>Temporary containers used within a single system execution</li>
+<li>Scratch buffers for algorithms</li>
+<li>Short-lived data structures</li>
+</ul>
+<dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Data allocated with the frame allocator is only valid for the current frame. All pointers and references to frame-allocated data become invalid after the frame ends. Do not store frame-allocated data in components, resources, or any persistent storage. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to the growable frame allocator </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a32">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__context_8hpp_source.html#l00343">343</a> of file <a class="el" href="system__context_8hpp_source.html">system_context.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  343</span>                                                                                          {</div>
+<div class="line"><span class="lineno">  344</span>    <span class="keywordflow">return</span> local_storage_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a6d50a6f16446b9157d0876f79611e60d">FrameAllocator</a>();</div>
+<div class="line"><span class="lineno">  345</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ae6fc0268228c2ef20c166d553968c9a5" name="ae6fc0268228c2ef20c166d553968c9a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6fc0268228c2ef20c166d553968c9a5">&#9670;&#160;</a></span>FrameAllocatorStats()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structhelios_1_1memory_1_1AllocatorStats.html">memory::AllocatorStats</a> helios::app::SystemContext::FrameAllocatorStats </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets frame allocator statistics. </p>
+<p>Useful for debugging and profiling memory usage within systems. </p><dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Allocator statistics with current usage information </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a29">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__context_8hpp_source.html#l00323">323</a> of file <a class="el" href="system__context_8hpp_source.html">system_context.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  323</span>                                                                          {</div>
+<div class="line"><span class="lineno">  324</span>    <span class="keywordflow">return</span> local_storage_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a5a9c78ebb9961f20de1d0aef052175b5">FrameAllocatorStats</a>();</div>
+<div class="line"><span class="lineno">  325</span>  }</div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1SystemLocalStorage_html_a5a9c78ebb9961f20de1d0aef052175b5"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a5a9c78ebb9961f20de1d0aef052175b5">helios::ecs::details::SystemLocalStorage::FrameAllocatorStats</a></div><div class="ttdeci">memory::AllocatorStats FrameAllocatorStats() const noexcept</div><div class="ttdoc">Gets frame allocator statistics.</div><div class="ttdef"><b>Definition</b> <a href="system__local__storage_8hpp_source.html#l00137">system_local_storage.hpp:137</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ad9c6a1c3da5861b0c2e8c02d267c6e41" name="ad9c6a1c3da5861b0c2e8c02d267c6e41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9c6a1c3da5861b0c2e8c02d267c6e41">&#9670;&#160;</a></span>GetSystemInfo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">const</a> <a class="el" href="structhelios_1_1app_1_1details_1_1SystemInfo.html">details::SystemInfo</a> &amp; helios::app::SystemContext::GetSystemInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the system information. </p>
+<dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Const reference to system info </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a36">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__context_8hpp_source.html#l00419">419</a> of file <a class="el" href="system__context_8hpp_source.html">system_context.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  419</span>{ <span class="keywordflow">return</span> system_info_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a7e046f22802d2de6da3fe6a9e7252e29" name="a7e046f22802d2de6da3fe6a9e7252e29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e046f22802d2de6da3fe6a9e7252e29">&#9670;&#160;</a></span>GetSystemName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string_view helios::app::SystemContext::GetSystemName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the system name. </p>
+<dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>System name </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a37">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__context_8hpp_source.html#l00426">426</a> of file <a class="el" href="system__context_8hpp_source.html">system_context.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  426</span>{ <span class="keywordflow">return</span> system_info_.<a class="code hl_variable" href="structhelios_1_1app_1_1details_1_1SystemInfo.html#ac3f015752756a1fa2b23dc59d82f085a">name</a>; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a80c3eeb05388407b9c2f2713704141a0" name="a80c3eeb05388407b9c2f2713704141a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80c3eeb05388407b9c2f2713704141a0">&#9670;&#160;</a></span>HasComponent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ecs::ComponentTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">bool</a> helios::app::SystemContext::HasComponent </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">ecs::Entity</a>&#160;</td>
+          <td class="paramname"><em>entity</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if entity has component. </p>
+<dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion in next cases:<ol type="1">
+<li>Entity is invalid.</li>
+<li>World does not own entity. </li>
+</ol>
+</dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Component type. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entity</td><td>Entity to check. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if entity has component, false otherwise. </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a21">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__context_8hpp_source.html#l00509">509</a> of file <a class="el" href="system__context_8hpp_source.html">system_context.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  509</span>                                                              {</div>
+<div class="line"><span class="lineno">  510</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(entity.Valid(), <span class="stringliteral">&quot;Failed to check if entity has component: Entity is invalid!&quot;</span>);</div>
+<div class="line"><span class="lineno">  511</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1app_1_1SystemContext.html#a3c9f4a18202fc94b0590c530a3b52ad7">EntityExists</a>(entity),</div>
+<div class="line"><span class="lineno">  512</span>                <span class="stringliteral">&quot;Failed to check if entity has component: World does not own entity with index &#39;{}&#39;!&quot;</span>, entity.Index());</div>
+<div class="line"><span class="lineno">  513</span>  <span class="keywordflow">return</span> world_.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#abb68309ee08af79dc1645e2d3d469fd7">HasComponent</a>&lt;T&gt;(entity);</div>
+<div class="line"><span class="lineno">  514</span>}</div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SystemContext_html_a3c9f4a18202fc94b0590c530a3b52ad7"><div class="ttname"><a href="classhelios_1_1app_1_1SystemContext.html#a3c9f4a18202fc94b0590c530a3b52ad7">helios::app::SystemContext::EntityExists</a></div><div class="ttdeci">bool EntityExists(ecs::Entity entity) const</div><div class="ttdoc">Checks if entity exists in the world.</div><div class="ttdef"><b>Definition</b> <a href="system__context_8hpp_source.html#l00503">system_context.hpp:503</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_abb68309ee08af79dc1645e2d3d469fd7"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#abb68309ee08af79dc1645e2d3d469fd7">helios::ecs::World::HasComponent</a></div><div class="ttdeci">bool HasComponent(Entity entity) const</div><div class="ttdoc">Checks if entity has component.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00950">world.hpp:950</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a4910601a8c662b68631d9bffbc2473a2" name="a4910601a8c662b68631d9bffbc2473a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4910601a8c662b68631d9bffbc2473a2">&#9670;&#160;</a></span>HasComponents()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ecs::ComponentTrait... Ts&gt; <br />
+requires utils::UniqueTypes&lt;Ts...&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">auto</a> helios::app::SystemContext::HasComponents </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">ecs::Entity</a>&#160;</td>
+          <td class="paramname"><em>entity</em></td><td>)</td>
+          <td> const -&gt; std::array&lt;<a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">bool</a>, sizeof...(<a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">Ts</a>)&gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if entity has components. </p>
+<dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if entity is invalid. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Ts</td><td>Components types. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entity</td><td>Entity to check. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Array of bools indicating whether entity has each component (true if entity has component, false otherwise). </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a22">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__context_8hpp_source.html#l00518">518</a> of file <a class="el" href="system__context_8hpp_source.html">system_context.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  518</span>                                                                                                {</div>
+<div class="line"><span class="lineno">  519</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(entity.Valid(), <span class="stringliteral">&quot;Failed to check if entity has components: Entity is invalid!&quot;</span>);</div>
+<div class="line"><span class="lineno">  520</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1app_1_1SystemContext.html#a3c9f4a18202fc94b0590c530a3b52ad7">EntityExists</a>(entity),</div>
+<div class="line"><span class="lineno">  521</span>                <span class="stringliteral">&quot;Failed to check if entity has components: World does not own entity with index &#39;{}&#39;!&quot;</span>, entity.Index());</div>
+<div class="line"><span class="lineno">  522</span>  <span class="keywordflow">return</span> world_.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#a408c23fec91d5a9a12e1591e5a8c347e">HasComponents</a>&lt;<a class="code hl_function" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">Ts</a>...&gt;(entity);</div>
+<div class="line"><span class="lineno">  523</span>}</div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_a408c23fec91d5a9a12e1591e5a8c347e"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#a408c23fec91d5a9a12e1591e5a8c347e">helios::ecs::World::HasComponents</a></div><div class="ttdeci">auto HasComponents(Entity entity) const -&gt; std::array&lt; bool, sizeof...(Ts)&gt;</div><div class="ttdoc">Checks if entity has components.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00959">world.hpp:959</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a82711df763774720afe4a6f7622b5f5e" name="a82711df763774720afe4a6f7622b5f5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82711df763774720afe4a6f7622b5f5e">&#9670;&#160;</a></span>HasExecutor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">bool</a> helios::app::SystemContext::HasExecutor </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if Executor is available in this context. </p>
+<dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>True if executor is available, false otherwise </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a26">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__context_8hpp_source.html#l00306">306</a> of file <a class="el" href="system__context_8hpp_source.html">system_context.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  306</span>                                                  {</div>
+<div class="line"><span class="lineno">  307</span>    <span class="keywordflow">return</span> std::holds_alternative&lt;std::reference_wrapper&lt;async::Executor&gt;&gt;(async_context_);</div>
+<div class="line"><span class="lineno">  308</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aaec9cb18fa6eb3a59139ff95d6fa42fb" name="aaec9cb18fa6eb3a59139ff95d6fa42fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaec9cb18fa6eb3a59139ff95d6fa42fb">&#9670;&#160;</a></span>HasResource()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ecs::ResourceTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">bool</a> helios::app::SystemContext::HasResource </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if a resource exists. </p>
+<dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Resource type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if resource exists, false otherwise </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a23">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__context_8hpp_source.html#l00288">288</a> of file <a class="el" href="system__context_8hpp_source.html">system_context.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  288</span>                                         {</div>
+<div class="line"><span class="lineno">  289</span>    <span class="keywordflow">return</span> world_.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#a36499296d4e35d0784b402f6ca500d73">HasResource</a>&lt;T&gt;();</div>
+<div class="line"><span class="lineno">  290</span>  }</div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_a36499296d4e35d0784b402f6ca500d73"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#a36499296d4e35d0784b402f6ca500d73">helios::ecs::World::HasResource</a></div><div class="ttdeci">bool HasResource() const</div><div class="ttdoc">Checks if a resource exists.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00534">world.hpp:534</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="af739dd7f156692af8e92f9df44b116f7" name="af739dd7f156692af8e92f9df44b116f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af739dd7f156692af8e92f9df44b116f7">&#9670;&#160;</a></span>HasSubTaskGraph()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">bool</a> helios::app::SystemContext::HasSubTaskGraph </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if SubTaskGraph is available in this context. </p>
+<dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>True if sub task graph is available, false otherwise </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a25">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__context_8hpp_source.html#l00297">297</a> of file <a class="el" href="system__context_8hpp_source.html">system_context.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  297</span>                                                      {</div>
+<div class="line"><span class="lineno">  298</span>    <span class="keywordflow">return</span> std::holds_alternative&lt;std::reference_wrapper&lt;async::SubTaskGraph&gt;&gt;(async_context_);</div>
+<div class="line"><span class="lineno">  299</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a439e1e7ce0ce05c6df824e9163b2ca3e" name="a439e1e7ce0ce05c6df824e9163b2ca3e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a439e1e7ce0ce05c6df824e9163b2ca3e">&#9670;&#160;</a></span>MakeFrameAllocator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">typename</a> T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">auto</a> helios::app::SystemContext::MakeFrameAllocator </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt; <a class="el" href="namespacehelios_1_1memory.html#ab1eecdf8e5369e7088871d5000ed769a">memory::STLGrowableAllocator</a>&lt;T, <a class="el" href="classhelios_1_1memory_1_1FrameAllocator.html">memory::FrameAllocator</a>&gt; </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a33">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__context_8hpp_source.html#l00394">394</a> of file <a class="el" href="system__context_8hpp_source.html">system_context.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  394</span>                                                                                                          {</div>
+<div class="line"><span class="lineno">  395</span>    <span class="keywordflow">return</span> memory::STLGrowableAllocator&lt;T, memory::FrameAllocator&gt;(local_storage_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a6d50a6f16446b9157d0876f79611e60d">FrameAllocator</a>());</div>
+<div class="line"><span class="lineno">  396</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a609651177779c89fd6ab36cf790c28dc" name="a609651177779c89fd6ab36cf790c28dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a609651177779c89fd6ab36cf790c28dc">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1SystemContext.html">SystemContext</a> &amp; <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">helios::app::SystemContext::operator</a>= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">const</a> <a class="el" href="classhelios_1_1app_1_1SystemContext.html">SystemContext</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a4">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<a id="a013e4625cb51a463b907c740f82b11d9" name="a013e4625cb51a463b907c740f82b11d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a013e4625cb51a463b907c740f82b11d9">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1SystemContext.html">SystemContext</a> &amp; <a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">helios::app::SystemContext::operator</a>= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1SystemContext.html">SystemContext</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a656516d7f50fe94f0eac441d23b301fb" name="a656516d7f50fe94f0eac441d23b301fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a656516d7f50fe94f0eac441d23b301fb">&#9670;&#160;</a></span>Query()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::app::SystemContext::Query </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt; <a class="el" href="namespacehelios_1_1ecs.html#a83d597eaa8fb1e270bfe8d4bc7245ced">ecs::QueryBuilder</a>&lt;<a class="el" href="classhelios_1_1app_1_1SystemContext.html#af4f8594c2929e003350ccd4c47fd9d48">QueryAllocator</a>&gt; </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a2">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>, and <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2system_8hpp-example.html#a8">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/system.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__context_8hpp_source.html#l00109">109</a> of file <a class="el" href="system__context_8hpp_source.html">system_context.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  109</span>                                                                         {</div>
+<div class="line"><span class="lineno">  110</span>    <span class="keywordflow">return</span> {world_, system_info_.<a class="code hl_variable" href="structhelios_1_1app_1_1details_1_1SystemInfo.html#a3aaf32899ee38649e4b9f696dd689bac">access_policy</a>, <a class="code hl_typedef" href="classhelios_1_1app_1_1SystemContext.html#af4f8594c2929e003350ccd4c47fd9d48">QueryAllocator</a>(local_storage_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a6d50a6f16446b9157d0876f79611e60d">FrameAllocator</a>())};</div>
+<div class="line"><span class="lineno">  111</span>  }</div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SystemContext_html_af4f8594c2929e003350ccd4c47fd9d48"><div class="ttname"><a href="classhelios_1_1app_1_1SystemContext.html#af4f8594c2929e003350ccd4c47fd9d48">helios::app::SystemContext::QueryAllocator</a></div><div class="ttdeci">memory::STLGrowableAllocator&lt; ecs::ComponentTypeId, memory::FrameAllocator &gt; QueryAllocator</div><div class="ttdoc">Allocator type for component type IDs in queries.</div><div class="ttdef"><b>Definition</b> <a href="system__context_8hpp_source.html#l00056">system_context.hpp:56</a></div></div>
+<div class="ttc" id="astructhelios_1_1app_1_1details_1_1SystemInfo_html_a3aaf32899ee38649e4b9f696dd689bac"><div class="ttname"><a href="structhelios_1_1app_1_1details_1_1SystemInfo.html#a3aaf32899ee38649e4b9f696dd689bac">helios::app::details::SystemInfo::access_policy</a></div><div class="ttdeci">app::AccessPolicy access_policy</div><div class="ttdoc">Access policy for validation.</div><div class="ttdef"><b>Definition</b> <a href="system__info_8hpp_source.html#l00023">system_info.hpp:23</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a9367516dde407414b6b4c35ca834a6dc" name="a9367516dde407414b6b4c35ca834a6dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9367516dde407414b6b4c35ca834a6dc">&#9670;&#160;</a></span>ReadEvents()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ecs::EventTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">auto</a> helios::app::SystemContext::ReadEvents </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const -&gt; <a class="el" href="classhelios_1_1ecs_1_1EventReader.html">ecs::EventReader</a>&lt;T&gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets an event reader for type T. </p>
+<p>Provides a type-safe, ergonomic API for reading events with support for iteration, filtering, and searching. Event must be registered via World::AddEvent&lt;T&gt;() first. </p><dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if event type is not registered. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Event type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>EventReader for type T </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a19">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__context_8hpp_source.html#l00495">495</a> of file <a class="el" href="system__context_8hpp_source.html">system_context.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  495</span>                                                                          {</div>
+<div class="line"><span class="lineno">  496</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(world_.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#a1631e7cf7bfb4533997958cc08fa7ef3">HasEvent</a>&lt;T&gt;(),</div>
+<div class="line"><span class="lineno">  497</span>                <span class="stringliteral">&quot;Failed to get event reader for type &#39;{}&#39;: Event type not registered in world! &quot;</span></div>
+<div class="line"><span class="lineno">  498</span>                <span class="stringliteral">&quot;Add World::AddEvent&lt;{}&gt;() during initialization.&quot;</span>,</div>
+<div class="line"><span class="lineno">  499</span>                <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ecs::EventNameOf&lt;T&gt;</a>(), <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ecs::EventNameOf&lt;T&gt;</a>());</div>
+<div class="line"><span class="lineno">  500</span>  <span class="keywordflow">return</span> world_.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#a630b9ee4cbf6304d4290f8a278010634">ReadEvents</a>&lt;T&gt;();</div>
+<div class="line"><span class="lineno">  501</span>}</div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_a630b9ee4cbf6304d4290f8a278010634"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#a630b9ee4cbf6304d4290f8a278010634">helios::ecs::World::ReadEvents</a></div><div class="ttdeci">auto ReadEvents() const noexcept -&gt; EventReader&lt; T &gt;</div><div class="ttdoc">Gets an event reader for type T.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00985">world.hpp:985</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a2781ca846ccbafe313ff647cb1163a0a" name="a2781ca846ccbafe313ff647cb1163a0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2781ca846ccbafe313ff647cb1163a0a">&#9670;&#160;</a></span>ReadOnlyQuery()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">auto</a> helios::app::SystemContext::ReadOnlyQuery </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const -&gt; <a class="el" href="namespacehelios_1_1ecs.html#a4755541af4fd6360392ff763a9ac514b">ecs::ReadOnlyQueryBuilder</a>&lt;<a class="el" href="classhelios_1_1app_1_1SystemContext.html#af4f8594c2929e003350ccd4c47fd9d48">QueryAllocator</a>&gt; </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a8">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__context_8hpp_source.html#l00130">130</a> of file <a class="el" href="system__context_8hpp_source.html">system_context.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  130</span>                                                                                               {</div>
+<div class="line"><span class="lineno">  131</span>    <span class="keywordflow">return</span> {world_, system_info_.<a class="code hl_variable" href="structhelios_1_1app_1_1details_1_1SystemInfo.html#a3aaf32899ee38649e4b9f696dd689bac">access_policy</a>, <a class="code hl_typedef" href="classhelios_1_1app_1_1SystemContext.html#af4f8594c2929e003350ccd4c47fd9d48">QueryAllocator</a>(local_storage_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a6d50a6f16446b9157d0876f79611e60d">FrameAllocator</a>())};</div>
+<div class="line"><span class="lineno">  132</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a2a9bd7fbd36af2288f1d376bc20dfe7e" name="a2a9bd7fbd36af2288f1d376bc20dfe7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a9bd7fbd36af2288f1d376bc20dfe7e">&#9670;&#160;</a></span>ReadResource()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ecs::ResourceTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">const</a> T &amp; helios::app::SystemContext::ReadResource </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets const reference to a resource. </p>
+<dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion in next cases:<ul>
+<li>Resource not declared for read access.</li>
+<li>Resource doesn't exist. </li>
+</ul>
+</dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Resource type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Const reference to resource </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a14">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>, and <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2system_8hpp-example.html#a7">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/system.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__context_8hpp_source.html#l00457">457</a> of file <a class="el" href="system__context_8hpp_source.html">system_context.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  457</span>                                                  {</div>
+<div class="line"><span class="lineno">  458</span>  <a class="code hl_function" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">ValidateReadResource&lt;T&gt;</a>();</div>
+<div class="line"><span class="lineno">  459</span>  <span class="keywordflow">return</span> world_.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#a230ad7d0bf9b854d27a05e89a151420b">ReadResource</a>&lt;T&gt;();</div>
+<div class="line"><span class="lineno">  460</span>}</div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_a230ad7d0bf9b854d27a05e89a151420b"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#a230ad7d0bf9b854d27a05e89a151420b">helios::ecs::World::ReadResource</a></div><div class="ttdeci">const T &amp; ReadResource() const</div><div class="ttdoc">Gets const reference to a resource.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00939">world.hpp:939</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ac5b0d1a42ba781e6f393b3536906374b" name="ac5b0d1a42ba781e6f393b3536906374b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5b0d1a42ba781e6f393b3536906374b">&#9670;&#160;</a></span>ReserveEntity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">ecs::Entity</a> helios::app::SystemContext::ReserveEntity </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reserves an entity ID for deferred creation. </p>
+<p>The actual entity creation is deferred until <a class="el" href="classhelios_1_1ecs_1_1World.html#a8c135f24991d9a3e3cc57cacfee0d01c" title="Flushes buffer of pending operations.">ecs::World::Update()</a>. </p><dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Reserved entity ID </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a11">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__context_8hpp_source.html#l00164">164</a> of file <a class="el" href="system__context_8hpp_source.html">system_context.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  164</span>{ <span class="keywordflow">return</span> world_.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#a53dda20f903273f1af3f8fe762f380c6">ReserveEntity</a>(); }</div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_a53dda20f903273f1af3f8fe762f380c6"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#a53dda20f903273f1af3f8fe762f380c6">helios::ecs::World::ReserveEntity</a></div><div class="ttdeci">Entity ReserveEntity()</div><div class="ttdoc">Reserves an entity ID for deferred creation.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00121">world.hpp:121</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a3a1c906c163c8d7b610c7485b9a1fb0f" name="a3a1c906c163c8d7b610c7485b9a1fb0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a1c906c163c8d7b610c7485b9a1fb0f">&#9670;&#160;</a></span>SubTaskGraph()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html">async::SubTaskGraph</a> &amp; helios::app::SystemContext::SubTaskGraph </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets reference to the sub task graph for parallel work. </p>
+<dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if sub task graph is not available. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to the async sub task graph </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a34">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__context_8hpp_source.html#l00525">525</a> of file <a class="el" href="system__context_8hpp_source.html">system_context.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  525</span>                                                               {</div>
+<div class="line"><span class="lineno">  526</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1app_1_1SystemContext.html#af739dd7f156692af8e92f9df44b116f7">HasSubTaskGraph</a>(),</div>
+<div class="line"><span class="lineno">  527</span>                <span class="stringliteral">&quot;Failed to get sub task graph: SubTaskGraph not available in this context! &quot;</span></div>
+<div class="line"><span class="lineno">  528</span>                <span class="stringliteral">&quot;System &#39;{}&#39; is likely running on main schedule.&quot;</span>,</div>
+<div class="line"><span class="lineno">  529</span>                system_info_.<a class="code hl_variable" href="structhelios_1_1app_1_1details_1_1SystemInfo.html#ac3f015752756a1fa2b23dc59d82f085a">name</a>);</div>
+<div class="line"><span class="lineno">  530</span>  <span class="keywordflow">return</span> std::get&lt;std::reference_wrapper&lt;async::SubTaskGraph&gt;&gt;(async_context_).<a class="code hl_function" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">get</a>();</div>
+<div class="line"><span class="lineno">  531</span>}</div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SystemContext_html_af739dd7f156692af8e92f9df44b116f7"><div class="ttname"><a href="classhelios_1_1app_1_1SystemContext.html#af739dd7f156692af8e92f9df44b116f7">helios::app::SystemContext::HasSubTaskGraph</a></div><div class="ttdeci">bool HasSubTaskGraph() const noexcept</div><div class="ttdoc">Checks if SubTaskGraph is available in this context.</div><div class="ttdef"><b>Definition</b> <a href="system__context_8hpp_source.html#l00297">system_context.hpp:297</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a4901bc790a3dfde9eaacc07fb855e451" name="a4901bc790a3dfde9eaacc07fb855e451"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4901bc790a3dfde9eaacc07fb855e451">&#9670;&#160;</a></span>TryReadResource()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ecs::ResourceTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">const</a> T * helios::app::SystemContext::TryReadResource </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Tries to get const pointer to a resource. </p>
+<dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if resource not declared for read access. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Resource type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Const pointer to resource, or nullptr if not found </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a16">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__context_8hpp_source.html#l00469">469</a> of file <a class="el" href="system__context_8hpp_source.html">system_context.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  469</span>                                                     {</div>
+<div class="line"><span class="lineno">  470</span>  <a class="code hl_function" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">ValidateReadResource&lt;T&gt;</a>();</div>
+<div class="line"><span class="lineno">  471</span>  <span class="keywordflow">return</span> world_.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#abbaca44ba968d14893732ade429284d5">TryReadResource</a>&lt;T&gt;();</div>
+<div class="line"><span class="lineno">  472</span>}</div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_abbaca44ba968d14893732ade429284d5"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#abbaca44ba968d14893732ade429284d5">helios::ecs::World::TryReadResource</a></div><div class="ttdeci">const T * TryReadResource() const</div><div class="ttdoc">Tries to get const pointer to a resource.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00428">world.hpp:428</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aed6a4c720a1c655dcd70a4cdbfa46409" name="aed6a4c720a1c655dcd70a4cdbfa46409"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed6a4c720a1c655dcd70a4cdbfa46409">&#9670;&#160;</a></span>TryWriteResource()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ecs::ResourceTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T * helios::app::SystemContext::TryWriteResource </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Tries to get mutable pointer to a resource. </p>
+<dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if resource not declared for write access. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Resource type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to resource, or nullptr if not found </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a15">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__context_8hpp_source.html#l00463">463</a> of file <a class="el" href="system__context_8hpp_source.html">system_context.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  463</span>                                          {</div>
+<div class="line"><span class="lineno">  464</span>  <a class="code hl_function" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">ValidateWriteResource&lt;T&gt;</a>();</div>
+<div class="line"><span class="lineno">  465</span>  <span class="keywordflow">return</span> world_.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#aa8c25e448d10128d367648c397ba7e22">TryWriteResource</a>&lt;T&gt;();</div>
+<div class="line"><span class="lineno">  466</span>}</div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_aa8c25e448d10128d367648c397ba7e22"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#aa8c25e448d10128d367648c397ba7e22">helios::ecs::World::TryWriteResource</a></div><div class="ttdeci">T * TryWriteResource()</div><div class="ttdoc">Tries to get mutable pointer to a resource.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00417">world.hpp:417</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a0495693e9a11bad63f7b9185f4e0d9e1" name="a0495693e9a11bad63f7b9185f4e0d9e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0495693e9a11bad63f7b9185f4e0d9e1">&#9670;&#160;</a></span>WriteResource()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ecs::ResourceTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T &amp; helios::app::SystemContext::WriteResource </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets mutable reference to a resource. </p>
+<dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion in next cases:<ul>
+<li>Resource not declared for write access.</li>
+<li>Resource doesn't exist. </li>
+</ul>
+</dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Resource type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Mutable reference to resource </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a13">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__context_8hpp_source.html#l00451">451</a> of file <a class="el" href="system__context_8hpp_source.html">system_context.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  451</span>                                       {</div>
+<div class="line"><span class="lineno">  452</span>  <a class="code hl_function" href="classhelios_1_1app_1_1SystemContext.html#a656516d7f50fe94f0eac441d23b301fb">ValidateWriteResource&lt;T&gt;</a>();</div>
+<div class="line"><span class="lineno">  453</span>  <span class="keywordflow">return</span> world_.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#a5bd53cba28329796136aacdbcca7e7b2">WriteResource</a>&lt;T&gt;();</div>
+<div class="line"><span class="lineno">  454</span>}</div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_a5bd53cba28329796136aacdbcca7e7b2"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#a5bd53cba28329796136aacdbcca7e7b2">helios::ecs::World::WriteResource</a></div><div class="ttdeci">T &amp; WriteResource()</div><div class="ttdoc">Gets reference to a resource.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00933">world.hpp:933</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehelios.html">helios</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1app.html">app</a></li><li class="navelem"><a class="el" href="classhelios_1_1app_1_1SystemContext.html">SystemContext</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

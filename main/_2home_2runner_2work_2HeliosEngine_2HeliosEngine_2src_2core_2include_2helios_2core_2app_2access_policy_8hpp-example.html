@@ -1,0 +1,697 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: /home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/access_policy.hpp</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2access_policy_8hpp-example.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/access_policy.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<p>Declares data access requirements for a system at compile time.</p>
+<p>Declares data access requirements for a system at compile time. AccessPolicy is used to:</p><ul>
+<li>Declare which components a system will query</li>
+<li>Declare which resources a system will read/write</li>
+<li>Enable automatic scheduling and conflict detection</li>
+<li>Validate runtime access through SystemContext <dl class="section note"><dt>Note</dt><dd>All methods are constexpr to enable compile-time policy construction.</dd></dl>
+<div class="fragment"><div class="line"><span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> GetAccessPolicy() {</div>
+<div class="line">  <span class="keywordflow">return</span> AccessPolicy()</div>
+<div class="line">      .Query&lt;<span class="keyword">const</span> Transform&amp;, <span class="keyword">const</span> MeshRenderer&amp;&gt;()</div>
+<div class="line">      .Query&lt;Transform&amp;, const SpriteRenderer&amp;&gt;()</div>
+<div class="line">      .ReadResources&lt;Camera, RenderSettings&gt;()</div>
+<div class="line">      .WriteResources&lt;RenderQueue&gt;();  <span class="comment">// Write implies read access</span></div>
+<div class="line">}</div>
+</div><!-- fragment --></li>
+</ul>
+<div class="fragment"><div class="line"><span class="preprocessor">#pragma once</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="core__pch_8hpp.html">helios/core_pch.hpp</a>&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="component_8hpp.html">helios/core/ecs/component.hpp</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="resource_8hpp.html">helios/core/ecs/resource.hpp</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="logger_8hpp.html">helios/core/logger.hpp</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="common__traits_8hpp.html">helios/core/utils/common_traits.hpp</a>&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;algorithm&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;span&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;string_view&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;utility&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1app.html">helios::app</a> {</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">namespace </span>details {</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief Component type information with ID and name.</span></div>
+<div class="line"><span class="comment"> * @details Stores both type ID and name for diagnostics.</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">struct </span>ComponentTypeInfo {</div>
+<div class="line">  <a id="a0" name="a0"></a><a class="code hl_typedef" href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">ecs::ComponentTypeId</a> <a id="a1" name="a1"></a><a class="code hl_variable" href="structhelios_1_1app_1_1details_1_1ComponentTypeInfo.html#a10847ea3a76cfb92429a7bfd5cffd366">type_id</a> = 0;</div>
+<div class="line">  std::string_view <a id="a2" name="a2"></a><a class="code hl_variable" href="structhelios_1_1app_1_1details_1_1ComponentTypeInfo.html#a98081710c657504f7b61eb61d1fbc50b">name</a>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a id="a3" name="a3"></a><a class="code hl_function" href="structhelios_1_1app_1_1details_1_1ComponentTypeInfo.html#a100f453f8561165f5f9c733025c57c4f">operator&lt;</a>(<span class="keyword">const</span> ComponentTypeInfo&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> <a class="code hl_variable" href="structhelios_1_1app_1_1details_1_1ComponentTypeInfo.html#a10847ea3a76cfb92429a7bfd5cffd366">type_id</a> &lt; other.type_id; }</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a id="a4" name="a4"></a><a class="code hl_function" href="structhelios_1_1app_1_1details_1_1ComponentTypeInfo.html#a93425f49bc6e9779309c1a00f09d096d">operator==</a>(<span class="keyword">const</span> ComponentTypeInfo&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> <a class="code hl_variable" href="structhelios_1_1app_1_1details_1_1ComponentTypeInfo.html#a10847ea3a76cfb92429a7bfd5cffd366">type_id</a> == other.type_id; }</div>
+<div class="line">};</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief Resource type information with ID and name.</span></div>
+<div class="line"><span class="comment"> * @details Stores both type ID and name for diagnostics.</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">struct </span>ResourceTypeInfo {</div>
+<div class="line">  <a id="a5" name="a5"></a><a class="code hl_typedef" href="namespacehelios_1_1ecs.html#a38437d4d9f600b65f850d797f98ad6a0">ecs::ResourceTypeId</a> <a id="a6" name="a6"></a><a class="code hl_variable" href="structhelios_1_1app_1_1details_1_1ResourceTypeInfo.html#a5a937fb0968055b016f4e410887f68dd">type_id</a> = 0;</div>
+<div class="line">  std::string_view <a id="a7" name="a7"></a><a class="code hl_variable" href="structhelios_1_1app_1_1details_1_1ResourceTypeInfo.html#a0b3a21cdb6e78ea1b52e28d31eee1726">name</a>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a id="a8" name="a8"></a><a class="code hl_function" href="structhelios_1_1app_1_1details_1_1ResourceTypeInfo.html#a67a2fb07fc10ffccc3b49c620d1b1551">operator&lt;</a>(<span class="keyword">const</span> ResourceTypeInfo&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> <a class="code hl_variable" href="structhelios_1_1app_1_1details_1_1ResourceTypeInfo.html#a5a937fb0968055b016f4e410887f68dd">type_id</a> &lt; other.type_id; }</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a id="a9" name="a9"></a><a class="code hl_function" href="structhelios_1_1app_1_1details_1_1ResourceTypeInfo.html#af2b972a18f1a8cc95bd587d8b53cda07">operator==</a>(<span class="keyword">const</span> ResourceTypeInfo&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> <a class="code hl_variable" href="structhelios_1_1app_1_1details_1_1ResourceTypeInfo.html#a5a937fb0968055b016f4e410887f68dd">type_id</a> == other.type_id; }</div>
+<div class="line">};</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief Query descriptor for AccessPolicy.</span></div>
+<div class="line"><span class="comment"> * @details Stores component type IDs and names for a single query specification.</span></div>
+<div class="line"><span class="comment"> * Component types are kept sorted for efficient conflict detection.</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">struct </span>QueryDescriptor {</div>
+<div class="line">  std::vector&lt;ComponentTypeInfo&gt; <a id="a10" name="a10"></a><a class="code hl_variable" href="structhelios_1_1app_1_1details_1_1QueryDescriptor.html#a5aeeb903a697c4cccf8c3c4ff2322cb2">read_components</a>;   <span class="comment">// Kept sorted by type_id</span></div>
+<div class="line">  std::vector&lt;ComponentTypeInfo&gt; <a id="a11" name="a11"></a><a class="code hl_variable" href="structhelios_1_1app_1_1details_1_1QueryDescriptor.html#ab36409165e399bbf9ef56a8fb538d2cd">write_components</a>;  <span class="comment">// Kept sorted by type_id</span></div>
+<div class="line">};</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief Checks if two sorted ranges have any common elements.</span></div>
+<div class="line"><span class="comment"> * @details Uses a merge-like algorithm for O(n + m) complexity.</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line">[[nodiscard]] <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a id="a12" name="a12"></a><a class="code hl_function" href="namespacehelios_1_1app_1_1details.html#af142e3dcec33be4b067d1c193a2e29d2">HasIntersection</a>(std::span&lt;const ComponentTypeInfo&gt; lhs,</div>
+<div class="line">                                             std::span&lt;const ComponentTypeInfo&gt; rhs) <span class="keyword">noexcept</span> {</div>
+<div class="line">  <span class="keyword">auto</span> it1 = lhs.begin();</div>
+<div class="line">  <span class="keyword">auto</span> it2 = rhs.begin();</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">while</span> (it1 != lhs.end() &amp;&amp; it2 != rhs.end()) {</div>
+<div class="line">    <span class="keywordflow">if</span> (it1-&gt;type_id &lt; it2-&gt;type_id) {</div>
+<div class="line">      ++it1;</div>
+<div class="line">    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (it2-&gt;type_id &lt; it1-&gt;type_id) {</div>
+<div class="line">      ++it2;</div>
+<div class="line">    } <span class="keywordflow">else</span> {</div>
+<div class="line">      <span class="keywordflow">return</span> <span class="keyword">true</span>;  <span class="comment">// Found common element</span></div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief Checks if any element from one range exists in another sorted range.</span></div>
+<div class="line"><span class="comment"> * @details For each element in lhs, performs binary search in rhs.</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line">[[nodiscard]] <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a id="a13" name="a13"></a><a class="code hl_function" href="namespacehelios_1_1app_1_1details.html#a47eecc4227e95699543b526df38335e5">HasIntersectionBinarySearch</a>(std::span&lt;const ResourceTypeInfo&gt; lhs,</div>
+<div class="line">                                                         std::span&lt;const ResourceTypeInfo&gt; rhs) <span class="keyword">noexcept</span> {</div>
+<div class="line">  <span class="comment">// Optimize by iterating over smaller range</span></div>
+<div class="line">  <span class="keywordflow">if</span> (lhs.size() &gt; rhs.size()) {</div>
+<div class="line">    std::swap(lhs, rhs);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">return</span> std::ranges::any_of(lhs, [rhs](<span class="keyword">const</span> <span class="keyword">auto</span>&amp; item) {</div>
+<div class="line">    <span class="keywordflow">return</span> std::ranges::binary_search(</div>
+<div class="line">        rhs, item, [](<span class="keyword">const</span> <span class="keyword">auto</span>&amp; info1, <span class="keyword">const</span> <span class="keyword">auto</span>&amp; info2) { <span class="keywordflow">return</span> info1.type_id &lt; info2.type_id; });</div>
+<div class="line">  });</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">}  <span class="comment">// namespace details</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief Declares data access requirements for a system at compile time.</span></div>
+<div class="line"><span class="comment"> * @details AccessPolicy is used to:</span></div>
+<div class="line"><span class="comment"> * - Declare which components a system will query</span></div>
+<div class="line"><span class="comment"> * - Declare which resources a system will read/write</span></div>
+<div class="line"><span class="comment"> * - Enable automatic scheduling and conflict detection</span></div>
+<div class="line"><span class="comment"> * - Validate runtime access through SystemContext</span></div>
+<div class="line"><span class="comment"> * @note All methods are constexpr to enable compile-time policy construction.</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * @example</span></div>
+<div class="line"><span class="comment"> * @code</span></div>
+<div class="line"><span class="comment"> * static constexpr auto GetAccessPolicy() {</span></div>
+<div class="line"><span class="comment"> *   return AccessPolicy()</span></div>
+<div class="line"><span class="comment"> *       .Query&lt;const Transform&amp;, const MeshRenderer&amp;&gt;()</span></div>
+<div class="line"><span class="comment"> *       .Query&lt;Transform&amp;, const SpriteRenderer&amp;&gt;()</span></div>
+<div class="line"><span class="comment"> *       .ReadResources&lt;Camera, RenderSettings&gt;()</span></div>
+<div class="line"><span class="comment"> *       .WriteResources&lt;RenderQueue&gt;();  // Write implies read access</span></div>
+<div class="line"><span class="comment"> * }</span></div>
+<div class="line"><span class="comment"> * @endcode</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">class </span>AccessPolicy {</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">  <span class="keyword">constexpr</span> <a id="a14" name="a14"></a><a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#ac0898cf263c827dd1daf1f11c9ef4f64">AccessPolicy</a>() <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line">  <span class="keyword">constexpr</span> <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#ac0898cf263c827dd1daf1f11c9ef4f64">AccessPolicy</a>(<span class="keyword">const</span> <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#ac0898cf263c827dd1daf1f11c9ef4f64">AccessPolicy</a>&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line">  <span class="keyword">constexpr</span> <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#ac0898cf263c827dd1daf1f11c9ef4f64">AccessPolicy</a>(<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#ac0898cf263c827dd1daf1f11c9ef4f64">AccessPolicy</a>&amp;&amp;) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line">  <span class="keyword">constexpr</span> <a id="a15" name="a15"></a><a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#a6e5a83ad774709a139ddafa7838feed3">~AccessPolicy</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">constexpr</span> <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#ac0898cf263c827dd1daf1f11c9ef4f64">AccessPolicy</a>&amp; <a id="a16" name="a16"></a><a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#aa04f5632f2600803637ca68317e00612">operator=</a>(<span class="keyword">const</span> <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#ac0898cf263c827dd1daf1f11c9ef4f64">AccessPolicy</a>&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line">  <span class="keyword">constexpr</span> <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#ac0898cf263c827dd1daf1f11c9ef4f64">AccessPolicy</a>&amp; <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#aa04f5632f2600803637ca68317e00612">operator=</a>(<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#ac0898cf263c827dd1daf1f11c9ef4f64">AccessPolicy</a>&amp;&amp;) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Declares a query over component types.</span></div>
+<div class="line"><span class="comment">   * @details Adds a query specification to the policy. Multiple queries can be declared.</span></div>
+<div class="line"><span class="comment">   * Component access is classified per-type into read-only or writable sets.</span></div>
+<div class="line"><span class="comment">   * Component types are automatically sorted for efficient conflict detection.</span></div>
+<div class="line"><span class="comment">   * @tparam Components Component access types (e.g., const Position&amp;, Velocity&amp;)</span></div>
+<div class="line"><span class="comment">   * @return Updated AccessPolicy for method chaining</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;ecs::ComponentTrait... Components&gt;</div>
+<div class="line">    <span class="keyword">requires</span>((<a id="a17" name="a17"></a><a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ecs::ComponentTrait&lt;Components&gt;</a> &amp;&amp; ...) &amp;&amp; utils::UniqueTypes&lt;Components...&gt;)</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a id="a18" name="a18"></a><a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">Query</a>(<span class="keyword">this</span> <span class="keyword">auto</span>&amp;&amp; <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">self</a>) -&gt; <span class="keyword">decltype</span>(std::forward&lt;decltype(self)&gt;(<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">self</a>));</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Declares read-only access to resource types.</span></div>
+<div class="line"><span class="comment">   * @details Adds resource types that the system will read but not modify.</span></div>
+<div class="line"><span class="comment">   * Resources are kept sorted for efficient conflict detection.</span></div>
+<div class="line"><span class="comment">   * @note If resource is thread-safe it will be ignored.</span></div>
+<div class="line"><span class="comment">   * @tparam Resources Resource types to read</span></div>
+<div class="line"><span class="comment">   * @return Updated AccessPolicy for method chaining</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;ecs::ResourceTrait... Resources&gt;</div>
+<div class="line">    <span class="keyword">requires</span> utils::UniqueTypes&lt;Resources...&gt;</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a id="a19" name="a19"></a><a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#ac5570f42569362cd07d2aad9cdc7339b">ReadResources</a>(<span class="keyword">this</span> <span class="keyword">auto</span>&amp;&amp; <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">self</a>) -&gt; <span class="keyword">decltype</span>(std::forward&lt;decltype(self)&gt;(<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">self</a>));</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Declares write access to resource types.</span></div>
+<div class="line"><span class="comment">   * @details Adds resource types that the system will modify.</span></div>
+<div class="line"><span class="comment">   * Resources are kept sorted for efficient conflict detection.</span></div>
+<div class="line"><span class="comment">   * @note If resource is thread-safe it will be ignored.</span></div>
+<div class="line"><span class="comment">   * @tparam Resources Resource types to write</span></div>
+<div class="line"><span class="comment">   * @return Updated AccessPolicy for method chaining</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;ecs::ResourceTrait... Resources&gt;</div>
+<div class="line">    <span class="keyword">requires</span> utils::UniqueTypes&lt;Resources...&gt;</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a id="a20" name="a20"></a><a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#aeb90df674f57b9b2d0a35a54c42fa58f">WriteResources</a>(<span class="keyword">this</span> <span class="keyword">auto</span>&amp;&amp; <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">self</a>) -&gt; <span class="keyword">decltype</span>(std::forward&lt;decltype(self)&gt;(<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">self</a>));</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Checks if this policy has query conflict with another policy.</span></div>
+<div class="line"><span class="comment">   * @details Two policies conflict if:</span></div>
+<div class="line"><span class="comment">   * - One reads from a component that the other writes to</span></div>
+<div class="line"><span class="comment">   * - Both write to the same component</span></div>
+<div class="line"><span class="comment">   * - Both access the same resource with at least one write access</span></div>
+<div class="line"><span class="comment">   * @param other Other access policy to check against</span></div>
+<div class="line"><span class="comment">   * @return True if policies have a conflict, false otherwise</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">nodiscard</a>]] <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a id="a21" name="a21"></a><a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#a9fcc79296fc17cf2529412474e56d814">HasQueryConflict</a>(<span class="keyword">const</span> <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#ac0898cf263c827dd1daf1f11c9ef4f64">AccessPolicy</a>&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Checks if this policy has resource conflict with another policy.</span></div>
+<div class="line"><span class="comment">   * @details Two policies conflict if both access the same resource with at least one write access.</span></div>
+<div class="line"><span class="comment">   * @param other Other access policy to check against</span></div>
+<div class="line"><span class="comment">   * @return True if policies have a conflict, false otherwise</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">nodiscard</a>]] <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a id="a22" name="a22"></a><a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abe5adf44adf01eba18fddff227ebe35d">HasResourceConflict</a>(<span class="keyword">const</span> <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#ac0898cf263c827dd1daf1f11c9ef4f64">AccessPolicy</a>&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Checks if this policy conflicts with another policy.</span></div>
+<div class="line"><span class="comment">   * @details Checks for query and resource conflict.</span></div>
+<div class="line"><span class="comment">   * @param other Other access policy to check against</span></div>
+<div class="line"><span class="comment">   * @return True if policies conflict, false otherwise</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">nodiscard</a>]] <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a id="a23" name="a23"></a><a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#a38d760fb0cb21d5e930e53befcfe58ce">ConflictsWith</a>(<span class="keyword">const</span> <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#ac0898cf263c827dd1daf1f11c9ef4f64">AccessPolicy</a>&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line">    <span class="keywordflow">return</span> <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#a9fcc79296fc17cf2529412474e56d814">HasQueryConflict</a>(other) || <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abe5adf44adf01eba18fddff227ebe35d">HasResourceConflict</a>(other);</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Checks if this policy has any queries.</span></div>
+<div class="line"><span class="comment">   * @return True if any queries are declared, false otherwise</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">nodiscard</a>]] <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a id="a24" name="a24"></a><a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#a471fc44d55608e318731bcc8484436d5">HasQueries</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> !queries_.empty(); }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Checks if this policy has any resource access.</span></div>
+<div class="line"><span class="comment">   * @return True if any resources are declared, false otherwise</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">nodiscard</a>]] <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a id="a25" name="a25"></a><a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#a96b7a923964affed1e663d9cfbba8f83">HasResources</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line">    <span class="keywordflow">return</span> !read_resources_.empty() || !write_resources_.empty();</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Gets all declared query descriptors.</span></div>
+<div class="line"><span class="comment">   * @return Span of query descriptors</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">nodiscard</a>]] <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a id="a26" name="a26"></a><a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#aa4011b6f7107f9014c50e8311d0a2bc8">GetQueries</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> -&gt; std::span&lt;const details::QueryDescriptor&gt; {</div>
+<div class="line">    <span class="keywordflow">return</span> queries_;</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Gets all resource types declared for reading.</span></div>
+<div class="line"><span class="comment">   * @return Span of resource type info (sorted)</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">nodiscard</a>]] <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a id="a27" name="a27"></a><a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#acfbfc0b4b1cefa279902bd05fbd08834">GetReadResources</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> -&gt; std::span&lt;const details::ResourceTypeInfo&gt; {</div>
+<div class="line">    <span class="keywordflow">return</span> read_resources_;</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Gets all resource types declared for writing.</span></div>
+<div class="line"><span class="comment">   * @return Span of resource type info (sorted)</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">nodiscard</a>]] <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a id="a28" name="a28"></a><a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#a4a7f2d8d9868468adae730328b76ce49">GetWriteResources</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> -&gt; std::span&lt;const details::ResourceTypeInfo&gt; {</div>
+<div class="line">    <span class="keywordflow">return</span> write_resources_;</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Checks if this policy has the specified component type for reading.</span></div>
+<div class="line"><span class="comment">   * @param type_id Component type ID to check</span></div>
+<div class="line"><span class="comment">   * @return True if component is declared for reading in any query</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">nodiscard</a>]] <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a id="a29" name="a29"></a><a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#ae444556646c5eb7d2f606c6393cde35d">HasReadComponent</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">ecs::ComponentTypeId</a> type_id) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">query</a> : queries_) {</div>
+<div class="line">      <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">matches_id</a> = [type_id](<span class="keyword">const</span> details::ComponentTypeInfo&amp; info) { <span class="keywordflow">return</span> info.type_id == type_id; };</div>
+<div class="line">      <span class="keywordflow">if</span> (std::ranges::any_of(<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">query</a>.read_components, <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">matches_id</a>)) {</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Checks if this policy has the specified component type for writing.</span></div>
+<div class="line"><span class="comment">   * @param type_id Component type ID to check</span></div>
+<div class="line"><span class="comment">   * @return True if component is declared for writing in any query</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">nodiscard</a>]] <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a id="a30" name="a30"></a><a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#a33794497636aadc556c7316048750031">HasWriteComponent</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">ecs::ComponentTypeId</a> type_id) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">query</a> : queries_) {</div>
+<div class="line">      <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">matches_id</a> = [type_id](<span class="keyword">const</span> details::ComponentTypeInfo&amp; info) { <span class="keywordflow">return</span> info.type_id == type_id; };</div>
+<div class="line">      <span class="keywordflow">if</span> (std::ranges::any_of(<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">query</a>.write_components, <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">matches_id</a>)) {</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Checks if this policy has the specified resource type for reading.</span></div>
+<div class="line"><span class="comment">   * @param type_id Resource type ID to check</span></div>
+<div class="line"><span class="comment">   * @return True if resource is declared for reading</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">nodiscard</a>]] <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a id="a31" name="a31"></a><a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#ab3d0c65cc52d4fe8954424fa1ac1f430">HasReadResource</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#a38437d4d9f600b65f850d797f98ad6a0">ecs::ResourceTypeId</a> type_id) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line">    <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">matches_id</a> = [type_id](<span class="keyword">const</span> details::ResourceTypeInfo&amp; info) { <span class="keywordflow">return</span> info.type_id == type_id; };</div>
+<div class="line">    <span class="keywordflow">return</span> std::ranges::any_of(read_resources_, <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">matches_id</a>);</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Checks if this policy has the specified resource type for writing.</span></div>
+<div class="line"><span class="comment">   * @param type_id Resource type ID to check</span></div>
+<div class="line"><span class="comment">   * @return True if resource is declared for writing</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">nodiscard</a>]] <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a id="a32" name="a32"></a><a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#a0300bd597b529d8b6b6867d6e9512270">HasWriteResource</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#a38437d4d9f600b65f850d797f98ad6a0">ecs::ResourceTypeId</a> type_id) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line">    <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">matches_id</a> = [type_id](<span class="keyword">const</span> details::ResourceTypeInfo&amp; info) { <span class="keywordflow">return</span> info.type_id == type_id; };</div>
+<div class="line">    <span class="keywordflow">return</span> std::ranges::any_of(write_resources_, <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">matches_id</a>);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:<span class="comment"></span></div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Helper to insert a resource while maintaining sorted order.</span></div>
+<div class="line"><span class="comment">   * @details Checks for duplicates before inserting.</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keywordtype">void</span> InsertSorted(std::vector&lt;details::ResourceTypeInfo&gt;&amp; <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">vec</a>, details::ResourceTypeInfo info);</div>
+<div class="line"> </div>
+<div class="line">  std::vector&lt;details::QueryDescriptor&gt; queries_;</div>
+<div class="line">  std::vector&lt;details::ResourceTypeInfo&gt; read_resources_;   <span class="comment">// Kept sorted</span></div>
+<div class="line">  std::vector&lt;details::ResourceTypeInfo&gt; write_resources_;  <span class="comment">// Kept sorted</span></div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;ecs::ComponentTrait... Components&gt;</div>
+<div class="line">  <span class="keyword">requires</span>((<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ecs::ComponentTrait&lt;Components&gt;</a> &amp;&amp; ...) &amp;&amp; utils::UniqueTypes&lt;Components...&gt;)</div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">AccessPolicy::Query</a>(<span class="keyword">this</span> <span class="keyword">auto</span>&amp;&amp; self) -&gt; <span class="keyword">decltype</span>(std::forward&lt;decltype(self)&gt;(self)) {</div>
+<div class="line">  details::QueryDescriptor query;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Populate read vs write component lists based on constness of the parameter type.</span></div>
+<div class="line">  <span class="comment">// For component parameter T:</span></div>
+<div class="line">  <span class="comment">// - If T is const (after removing reference), treat as read-only.</span></div>
+<div class="line">  <span class="comment">// - Otherwise treat as writable.</span></div>
+<div class="line">  (</div>
+<div class="line">      [&amp;query]() {</div>
+<div class="line">        <span class="keyword">using </span>Component = std::remove_cvref_t&lt;Components&gt;;</div>
+<div class="line">        <span class="keyword">constexpr</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">ecs::ComponentTypeId</a> <span class="keywordtype">id</span> = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ecs::ComponentTypeIdOf&lt;Component&gt;</a>();</div>
+<div class="line">        <span class="keyword">constexpr</span> std::string_view name = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ecs::ComponentNameOf&lt;Component&gt;</a>();</div>
+<div class="line">        <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ecs::TagComponentTrait&lt;Component&gt;</a>) {</div>
+<div class="line">          <span class="keywordflow">return</span>;</div>
+<div class="line">        }</div>
+<div class="line">        <span class="comment">// Check if the original Components type (before removing cvref) is const</span></div>
+<div class="line">        <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_const_v&lt;std::remove_reference_t&lt;Components&gt;&gt;) {</div>
+<div class="line">          query.read_components.push_back({id, name});</div>
+<div class="line">        } <span class="keywordflow">else</span> {</div>
+<div class="line">          query.write_components.push_back({id, name});</div>
+<div class="line">        }</div>
+<div class="line">      }(),</div>
+<div class="line">      ...);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Sort component type lists for efficient conflict detection</span></div>
+<div class="line">  <span class="keyword">auto</span> cmp = [](<span class="keyword">const</span> details::ComponentTypeInfo&amp; lhs, <span class="keyword">const</span> details::ComponentTypeInfo&amp; rhs) {</div>
+<div class="line">    <span class="keywordflow">return</span> lhs.type_id &lt; rhs.type_id;</div>
+<div class="line">  };</div>
+<div class="line">  std::ranges::sort(query.read_components, cmp);</div>
+<div class="line">  std::ranges::sort(query.write_components, cmp);</div>
+<div class="line"> </div>
+<div class="line">  self.queries_.push_back(std::move(query));</div>
+<div class="line">  <span class="keywordflow">return</span> std::forward&lt;decltype(self)&gt;(self);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;ecs::ResourceTrait... Resources&gt;</div>
+<div class="line">  <span class="keyword">requires</span> utils::UniqueTypes&lt;Resources...&gt;</div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#ac5570f42569362cd07d2aad9cdc7339b">AccessPolicy::ReadResources</a>(<span class="keyword">this</span> <span class="keyword">auto</span>&amp;&amp; self) -&gt; <span class="keyword">decltype</span>(std::forward&lt;decltype(self)&gt;(self)) {</div>
+<div class="line">  <span class="comment">// Insert each resource that is not thread-safe while maintaining sorted order</span></div>
+<div class="line">  (</div>
+<div class="line">      [&amp;self]() {</div>
+<div class="line">        <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ecs::ResourceWithThreadSafetyTrait&lt;Resources&gt;</a>) {</div>
+<div class="line">          <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (Resources::ThreadSafe()) {</div>
+<div class="line">            <a id="a33" name="a33"></a><a class="code hl_define" href="logger_8hpp.html#aed26636d1bb7300df2a5f8522a93b0d6">HELIOS_INFO</a>(</div>
+<div class="line">                <span class="stringliteral">&quot;&#39;{}&#39; resource was declared in AccessPolicy::ReadResources, but will be ignored since it is &quot;</span></div>
+<div class="line">                <span class="stringliteral">&quot;thread-safe.&quot;</span>,</div>
+<div class="line">                <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ecs::ResourceNameOf&lt;Resources&gt;</a>());</div>
+<div class="line">          } <span class="keywordflow">else</span> {</div>
+<div class="line">            self.InsertSorted(self.read_resources_,</div>
+<div class="line">                              {ecs::ResourceTypeIdOf&lt;Resources&gt;(), ecs::ResourceNameOf&lt;Resources&gt;()});</div>
+<div class="line">          }</div>
+<div class="line">        } <span class="keywordflow">else</span> {</div>
+<div class="line">          self.InsertSorted(self.read_resources_,</div>
+<div class="line">                            {ecs::ResourceTypeIdOf&lt;Resources&gt;(), ecs::ResourceNameOf&lt;Resources&gt;()});</div>
+<div class="line">        }</div>
+<div class="line">      }(),</div>
+<div class="line">      ...);</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">return</span> std::forward&lt;decltype(self)&gt;(self);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;ecs::ResourceTrait... Resources&gt;</div>
+<div class="line">  <span class="keyword">requires</span> utils::UniqueTypes&lt;Resources...&gt;</div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#aeb90df674f57b9b2d0a35a54c42fa58f">AccessPolicy::WriteResources</a>(<span class="keyword">this</span> <span class="keyword">auto</span>&amp;&amp; self) -&gt; <span class="keyword">decltype</span>(std::forward&lt;decltype(self)&gt;(self)) {</div>
+<div class="line">  <span class="comment">// Insert each resource that is not thread-safe while maintaining sorted order</span></div>
+<div class="line">  (</div>
+<div class="line">      [&amp;self]() {</div>
+<div class="line">        <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ecs::ResourceWithThreadSafetyTrait&lt;Resources&gt;</a>) {</div>
+<div class="line">          <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (Resources::ThreadSafe()) {</div>
+<div class="line">            <a class="code hl_define" href="logger_8hpp.html#aed26636d1bb7300df2a5f8522a93b0d6">HELIOS_INFO</a>(</div>
+<div class="line">                <span class="stringliteral">&quot;&#39;{}&#39; resource was declared in AccessPolicy::WriteResources, but will be ignored since it is &quot;</span></div>
+<div class="line">                <span class="stringliteral">&quot;thread-safe.&quot;</span>,</div>
+<div class="line">                <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ecs::ResourceNameOf&lt;Resources&gt;</a>());</div>
+<div class="line">          } <span class="keywordflow">else</span> {</div>
+<div class="line">            self.InsertSorted(self.write_resources_,</div>
+<div class="line">                              {ecs::ResourceTypeIdOf&lt;Resources&gt;(), ecs::ResourceNameOf&lt;Resources&gt;()});</div>
+<div class="line">          }</div>
+<div class="line">        } <span class="keywordflow">else</span> {</div>
+<div class="line">          self.InsertSorted(self.write_resources_,</div>
+<div class="line">                            {ecs::ResourceTypeIdOf&lt;Resources&gt;(), ecs::ResourceNameOf&lt;Resources&gt;()});</div>
+<div class="line">        }</div>
+<div class="line">      }(),</div>
+<div class="line">      ...);</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">return</span> std::forward&lt;decltype(self)&gt;(self);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#a9fcc79296fc17cf2529412474e56d814">AccessPolicy::HasQueryConflict</a>(<span class="keyword">const</span> AccessPolicy&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line">  <span class="keywordflow">if</span> (!HasQueries() || !other.HasQueries()) {</div>
+<div class="line">    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Check component conflicts using sorted-range intersection: O(n + m)</span></div>
+<div class="line">  <span class="comment">// Conflict cases:</span></div>
+<div class="line">  <span class="comment">// - my.write intersects other.write (write-write)</span></div>
+<div class="line">  <span class="comment">// - my.write intersects other.read  (write-read)</span></div>
+<div class="line">  <span class="comment">// - my.read intersects other.write  (read-write)</span></div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; my_query : queries_) {</div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; other_query : other.queries_) {</div>
+<div class="line">      <span class="comment">// write-write</span></div>
+<div class="line">      <span class="keywordflow">if</span> (<a class="code hl_function" href="namespacehelios_1_1app_1_1details.html#af142e3dcec33be4b067d1c193a2e29d2">details::HasIntersection</a>(my_query.write_components, other_query.write_components)) {</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">      }</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// my write vs other read</span></div>
+<div class="line">      <span class="keywordflow">if</span> (<a class="code hl_function" href="namespacehelios_1_1app_1_1details.html#af142e3dcec33be4b067d1c193a2e29d2">details::HasIntersection</a>(my_query.write_components, other_query.read_components)) {</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">      }</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// my read vs other write</span></div>
+<div class="line">      <span class="keywordflow">if</span> (<a class="code hl_function" href="namespacehelios_1_1app_1_1details.html#af142e3dcec33be4b067d1c193a2e29d2">details::HasIntersection</a>(my_query.read_components, other_query.write_components)) {</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">}</div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abe5adf44adf01eba18fddff227ebe35d">AccessPolicy::HasResourceConflict</a>(<span class="keyword">const</span> AccessPolicy&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line">  <span class="keywordflow">if</span> (!HasResources() || !other.HasResources()) {</div>
+<div class="line">    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Write-write conflicts</span></div>
+<div class="line">  <span class="keywordflow">if</span> (!write_resources_.empty() &amp;&amp; !other.write_resources_.empty() &amp;&amp;</div>
+<div class="line">      <a class="code hl_function" href="namespacehelios_1_1app_1_1details.html#a47eecc4227e95699543b526df38335e5">details::HasIntersectionBinarySearch</a>(write_resources_, other.write_resources_)) {</div>
+<div class="line">    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Write-read conflicts (my write vs other read)</span></div>
+<div class="line">  <span class="keywordflow">if</span> (!write_resources_.empty() &amp;&amp; !other.read_resources_.empty() &amp;&amp;</div>
+<div class="line">      <a class="code hl_function" href="namespacehelios_1_1app_1_1details.html#a47eecc4227e95699543b526df38335e5">details::HasIntersectionBinarySearch</a>(write_resources_, other.read_resources_)) {</div>
+<div class="line">    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Read-write conflicts (my read vs other write)</span></div>
+<div class="line">  <span class="keywordflow">if</span> (!read_resources_.empty() &amp;&amp; !other.write_resources_.empty() &amp;&amp;</div>
+<div class="line">      <a class="code hl_function" href="namespacehelios_1_1app_1_1details.html#a47eecc4227e95699543b526df38335e5">details::HasIntersectionBinarySearch</a>(read_resources_, other.write_resources_)) {</div>
+<div class="line">    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keywordtype">void</span> AccessPolicy::InsertSorted(std::vector&lt;details::ResourceTypeInfo&gt;&amp; vec, details::ResourceTypeInfo info) {</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">cmp</a> = [](<span class="keyword">const</span> details::ResourceTypeInfo&amp; <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">lhs</a>, <span class="keyword">const</span> details::ResourceTypeInfo&amp; <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">rhs</a>) {</div>
+<div class="line">    <span class="keywordflow">return</span> <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">lhs</a>.type_id &lt; <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">rhs</a>.type_id;</div>
+<div class="line">  };</div>
+<div class="line">  <span class="keyword">const</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">pos</a> = std::ranges::lower_bound(<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">vec</a>, info, <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">cmp</a>);</div>
+<div class="line">  <span class="comment">// Avoid duplicates</span></div>
+<div class="line">  <span class="keywordflow">if</span> (<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">pos</a> == <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">vec</a>.end() || <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">pos</a>-&gt;type_id != info.type_id) {</div>
+<div class="line">    <a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">vec</a>.insert(<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">pos</a>, info);</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">}  <span class="comment">// namespace helios::app</span></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1AccessPolicy_html_a0300bd597b529d8b6b6867d6e9512270"><div class="ttname"><a href="classhelios_1_1app_1_1AccessPolicy.html#a0300bd597b529d8b6b6867d6e9512270">helios::app::AccessPolicy::HasWriteResource</a></div><div class="ttdeci">constexpr bool HasWriteResource(ecs::ResourceTypeId type_id) const noexcept</div><div class="ttdoc">Checks if this policy has the specified resource type for writing.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00274">access_policy.hpp:274</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1AccessPolicy_html_a33794497636aadc556c7316048750031"><div class="ttname"><a href="classhelios_1_1app_1_1AccessPolicy.html#a33794497636aadc556c7316048750031">helios::app::AccessPolicy::HasWriteComponent</a></div><div class="ttdeci">constexpr bool HasWriteComponent(ecs::ComponentTypeId type_id) const noexcept</div><div class="ttdoc">Checks if this policy has the specified component type for writing.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00249">access_policy.hpp:249</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1AccessPolicy_html_a38d760fb0cb21d5e930e53befcfe58ce"><div class="ttname"><a href="classhelios_1_1app_1_1AccessPolicy.html#a38d760fb0cb21d5e930e53befcfe58ce">helios::app::AccessPolicy::ConflictsWith</a></div><div class="ttdeci">constexpr bool ConflictsWith(const AccessPolicy &amp;other) const noexcept</div><div class="ttdoc">Checks if this policy conflicts with another policy.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00187">access_policy.hpp:187</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1AccessPolicy_html_a471fc44d55608e318731bcc8484436d5"><div class="ttname"><a href="classhelios_1_1app_1_1AccessPolicy.html#a471fc44d55608e318731bcc8484436d5">helios::app::AccessPolicy::HasQueries</a></div><div class="ttdeci">constexpr bool HasQueries() const noexcept</div><div class="ttdoc">Checks if this policy has any queries.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00195">access_policy.hpp:195</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1AccessPolicy_html_a4a7f2d8d9868468adae730328b76ce49"><div class="ttname"><a href="classhelios_1_1app_1_1AccessPolicy.html#a4a7f2d8d9868468adae730328b76ce49">helios::app::AccessPolicy::GetWriteResources</a></div><div class="ttdeci">constexpr auto GetWriteResources() const noexcept -&gt; std::span&lt; const details::ResourceTypeInfo &gt;</div><div class="ttdoc">Gets all resource types declared for writing.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00225">access_policy.hpp:225</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1AccessPolicy_html_a6e5a83ad774709a139ddafa7838feed3"><div class="ttname"><a href="classhelios_1_1app_1_1AccessPolicy.html#a6e5a83ad774709a139ddafa7838feed3">helios::app::AccessPolicy::~AccessPolicy</a></div><div class="ttdeci">constexpr ~AccessPolicy()=default</div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1AccessPolicy_html_a96b7a923964affed1e663d9cfbba8f83"><div class="ttname"><a href="classhelios_1_1app_1_1AccessPolicy.html#a96b7a923964affed1e663d9cfbba8f83">helios::app::AccessPolicy::HasResources</a></div><div class="ttdeci">constexpr bool HasResources() const noexcept</div><div class="ttdoc">Checks if this policy has any resource access.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00201">access_policy.hpp:201</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1AccessPolicy_html_a9fcc79296fc17cf2529412474e56d814"><div class="ttname"><a href="classhelios_1_1app_1_1AccessPolicy.html#a9fcc79296fc17cf2529412474e56d814">helios::app::AccessPolicy::HasQueryConflict</a></div><div class="ttdeci">constexpr bool HasQueryConflict(const AccessPolicy &amp;other) const noexcept</div><div class="ttdoc">Checks if this policy has query conflict with another policy.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00380">access_policy.hpp:380</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1AccessPolicy_html_aa04f5632f2600803637ca68317e00612"><div class="ttname"><a href="classhelios_1_1app_1_1AccessPolicy.html#aa04f5632f2600803637ca68317e00612">helios::app::AccessPolicy::operator=</a></div><div class="ttdeci">constexpr AccessPolicy &amp; operator=(const AccessPolicy &amp;)=default</div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1AccessPolicy_html_aa4011b6f7107f9014c50e8311d0a2bc8"><div class="ttname"><a href="classhelios_1_1app_1_1AccessPolicy.html#aa4011b6f7107f9014c50e8311d0a2bc8">helios::app::AccessPolicy::GetQueries</a></div><div class="ttdeci">constexpr auto GetQueries() const noexcept -&gt; std::span&lt; const details::QueryDescriptor &gt;</div><div class="ttdoc">Gets all declared query descriptors.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00209">access_policy.hpp:209</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1AccessPolicy_html_ab3d0c65cc52d4fe8954424fa1ac1f430"><div class="ttname"><a href="classhelios_1_1app_1_1AccessPolicy.html#ab3d0c65cc52d4fe8954424fa1ac1f430">helios::app::AccessPolicy::HasReadResource</a></div><div class="ttdeci">constexpr bool HasReadResource(ecs::ResourceTypeId type_id) const noexcept</div><div class="ttdoc">Checks if this policy has the specified resource type for reading.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00264">access_policy.hpp:264</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1AccessPolicy_html_abdd672af7021702de8d0e043b4be252b"><div class="ttname"><a href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">helios::app::AccessPolicy::Query</a></div><div class="ttdeci">constexpr auto Query(this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Declares a query over component types.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00293">access_policy.hpp:293</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1AccessPolicy_html_abe5adf44adf01eba18fddff227ebe35d"><div class="ttname"><a href="classhelios_1_1app_1_1AccessPolicy.html#abe5adf44adf01eba18fddff227ebe35d">helios::app::AccessPolicy::HasResourceConflict</a></div><div class="ttdeci">constexpr bool HasResourceConflict(const AccessPolicy &amp;other) const noexcept</div><div class="ttdoc">Checks if this policy has resource conflict with another policy.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00411">access_policy.hpp:411</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1AccessPolicy_html_ac0898cf263c827dd1daf1f11c9ef4f64"><div class="ttname"><a href="classhelios_1_1app_1_1AccessPolicy.html#ac0898cf263c827dd1daf1f11c9ef4f64">helios::app::AccessPolicy::AccessPolicy</a></div><div class="ttdeci">constexpr AccessPolicy() noexcept=default</div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1AccessPolicy_html_ac5570f42569362cd07d2aad9cdc7339b"><div class="ttname"><a href="classhelios_1_1app_1_1AccessPolicy.html#ac5570f42569362cd07d2aad9cdc7339b">helios::app::AccessPolicy::ReadResources</a></div><div class="ttdeci">constexpr auto ReadResources(this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Declares read-only access to resource types.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00330">access_policy.hpp:330</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1AccessPolicy_html_acfbfc0b4b1cefa279902bd05fbd08834"><div class="ttname"><a href="classhelios_1_1app_1_1AccessPolicy.html#acfbfc0b4b1cefa279902bd05fbd08834">helios::app::AccessPolicy::GetReadResources</a></div><div class="ttdeci">constexpr auto GetReadResources() const noexcept -&gt; std::span&lt; const details::ResourceTypeInfo &gt;</div><div class="ttdoc">Gets all resource types declared for reading.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00217">access_policy.hpp:217</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1AccessPolicy_html_ae444556646c5eb7d2f606c6393cde35d"><div class="ttname"><a href="classhelios_1_1app_1_1AccessPolicy.html#ae444556646c5eb7d2f606c6393cde35d">helios::app::AccessPolicy::HasReadComponent</a></div><div class="ttdeci">constexpr bool HasReadComponent(ecs::ComponentTypeId type_id) const noexcept</div><div class="ttdoc">Checks if this policy has the specified component type for reading.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00234">access_policy.hpp:234</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1AccessPolicy_html_aeb90df674f57b9b2d0a35a54c42fa58f"><div class="ttname"><a href="classhelios_1_1app_1_1AccessPolicy.html#aeb90df674f57b9b2d0a35a54c42fa58f">helios::app::AccessPolicy::WriteResources</a></div><div class="ttdeci">constexpr auto WriteResources(this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Declares write access to resource types.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00356">access_policy.hpp:356</a></div></div>
+<div class="ttc" id="acommon__traits_8hpp_html"><div class="ttname"><a href="common__traits_8hpp.html">common_traits.hpp</a></div></div>
+<div class="ttc" id="acomponent_8hpp_html"><div class="ttname"><a href="component_8hpp.html">component.hpp</a></div></div>
+<div class="ttc" id="acore__pch_8hpp_html"><div class="ttname"><a href="core__pch_8hpp.html">core_pch.hpp</a></div></div>
+<div class="ttc" id="alogger_8hpp_html"><div class="ttname"><a href="logger_8hpp.html">logger.hpp</a></div></div>
+<div class="ttc" id="alogger_8hpp_html_aed26636d1bb7300df2a5f8522a93b0d6"><div class="ttname"><a href="logger_8hpp.html#aed26636d1bb7300df2a5f8522a93b0d6">HELIOS_INFO</a></div><div class="ttdeci">#define HELIOS_INFO(...)</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00685">logger.hpp:685</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1app_1_1details_html_a47eecc4227e95699543b526df38335e5"><div class="ttname"><a href="namespacehelios_1_1app_1_1details.html#a47eecc4227e95699543b526df38335e5">helios::app::details::HasIntersectionBinarySearch</a></div><div class="ttdeci">constexpr bool HasIntersectionBinarySearch(std::span&lt; const ResourceTypeInfo &gt; lhs, std::span&lt; const ResourceTypeInfo &gt; rhs) noexcept</div><div class="ttdoc">Checks if any element from one range exists in another sorted range.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00081">access_policy.hpp:81</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1app_1_1details_html_af142e3dcec33be4b067d1c193a2e29d2"><div class="ttname"><a href="namespacehelios_1_1app_1_1details.html#af142e3dcec33be4b067d1c193a2e29d2">helios::app::details::HasIntersection</a></div><div class="ttdeci">constexpr bool HasIntersection(std::span&lt; const ComponentTypeInfo &gt; lhs, std::span&lt; const ComponentTypeInfo &gt; rhs) noexcept</div><div class="ttdoc">Checks if two sorted ranges have any common elements.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00059">access_policy.hpp:59</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1app_html"><div class="ttname"><a href="namespacehelios_1_1app.html">helios::app</a></div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00017">access_policy.hpp:17</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_a38437d4d9f600b65f850d797f98ad6a0"><div class="ttname"><a href="namespacehelios_1_1ecs.html#a38437d4d9f600b65f850d797f98ad6a0">helios::ecs::ResourceTypeId</a></div><div class="ttdeci">size_t ResourceTypeId</div><div class="ttdoc">Type ID for resources.</div><div class="ttdef"><b>Definition</b> <a href="resource_8hpp_source.html#l00053">resource.hpp:53</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_a9ede7913aa71f830d7181d280b3848a1"><div class="ttname"><a href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">helios::ecs::ComponentTypeId</a></div><div class="ttdeci">size_t ComponentTypeId</div><div class="ttdoc">Type ID for components.</div><div class="ttdef"><b>Definition</b> <a href="component_8hpp_source.html#l00104">component.hpp:104</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_af0384de48d847585fcb340c71c231e5e"><div class="ttname"><a href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, Allocator, Components... &gt; Query</div><div class="ttdoc">Type alias for query with mutable world access.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02515">query.hpp:2515</a></div></div>
+<div class="ttc" id="aresource_8hpp_html"><div class="ttname"><a href="resource_8hpp.html">resource.hpp</a></div></div>
+<div class="ttc" id="astructhelios_1_1app_1_1details_1_1ComponentTypeInfo_html_a100f453f8561165f5f9c733025c57c4f"><div class="ttname"><a href="structhelios_1_1app_1_1details_1_1ComponentTypeInfo.html#a100f453f8561165f5f9c733025c57c4f">helios::app::details::ComponentTypeInfo::operator&lt;</a></div><div class="ttdeci">constexpr bool operator&lt;(const ComponentTypeInfo &amp;other) const noexcept</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00029">access_policy.hpp:29</a></div></div>
+<div class="ttc" id="astructhelios_1_1app_1_1details_1_1ComponentTypeInfo_html_a10847ea3a76cfb92429a7bfd5cffd366"><div class="ttname"><a href="structhelios_1_1app_1_1details_1_1ComponentTypeInfo.html#a10847ea3a76cfb92429a7bfd5cffd366">helios::app::details::ComponentTypeInfo::type_id</a></div><div class="ttdeci">ecs::ComponentTypeId type_id</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00026">access_policy.hpp:26</a></div></div>
+<div class="ttc" id="astructhelios_1_1app_1_1details_1_1ComponentTypeInfo_html_a93425f49bc6e9779309c1a00f09d096d"><div class="ttname"><a href="structhelios_1_1app_1_1details_1_1ComponentTypeInfo.html#a93425f49bc6e9779309c1a00f09d096d">helios::app::details::ComponentTypeInfo::operator==</a></div><div class="ttdeci">constexpr bool operator==(const ComponentTypeInfo &amp;other) const noexcept</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00030">access_policy.hpp:30</a></div></div>
+<div class="ttc" id="astructhelios_1_1app_1_1details_1_1ComponentTypeInfo_html_a98081710c657504f7b61eb61d1fbc50b"><div class="ttname"><a href="structhelios_1_1app_1_1details_1_1ComponentTypeInfo.html#a98081710c657504f7b61eb61d1fbc50b">helios::app::details::ComponentTypeInfo::name</a></div><div class="ttdeci">std::string_view name</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00027">access_policy.hpp:27</a></div></div>
+<div class="ttc" id="astructhelios_1_1app_1_1details_1_1QueryDescriptor_html_a5aeeb903a697c4cccf8c3c4ff2322cb2"><div class="ttname"><a href="structhelios_1_1app_1_1details_1_1QueryDescriptor.html#a5aeeb903a697c4cccf8c3c4ff2322cb2">helios::app::details::QueryDescriptor::read_components</a></div><div class="ttdeci">std::vector&lt; ComponentTypeInfo &gt; read_components</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00051">access_policy.hpp:51</a></div></div>
+<div class="ttc" id="astructhelios_1_1app_1_1details_1_1QueryDescriptor_html_ab36409165e399bbf9ef56a8fb538d2cd"><div class="ttname"><a href="structhelios_1_1app_1_1details_1_1QueryDescriptor.html#ab36409165e399bbf9ef56a8fb538d2cd">helios::app::details::QueryDescriptor::write_components</a></div><div class="ttdeci">std::vector&lt; ComponentTypeInfo &gt; write_components</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00052">access_policy.hpp:52</a></div></div>
+<div class="ttc" id="astructhelios_1_1app_1_1details_1_1ResourceTypeInfo_html_a0b3a21cdb6e78ea1b52e28d31eee1726"><div class="ttname"><a href="structhelios_1_1app_1_1details_1_1ResourceTypeInfo.html#a0b3a21cdb6e78ea1b52e28d31eee1726">helios::app::details::ResourceTypeInfo::name</a></div><div class="ttdeci">std::string_view name</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00039">access_policy.hpp:39</a></div></div>
+<div class="ttc" id="astructhelios_1_1app_1_1details_1_1ResourceTypeInfo_html_a5a937fb0968055b016f4e410887f68dd"><div class="ttname"><a href="structhelios_1_1app_1_1details_1_1ResourceTypeInfo.html#a5a937fb0968055b016f4e410887f68dd">helios::app::details::ResourceTypeInfo::type_id</a></div><div class="ttdeci">ecs::ResourceTypeId type_id</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00038">access_policy.hpp:38</a></div></div>
+<div class="ttc" id="astructhelios_1_1app_1_1details_1_1ResourceTypeInfo_html_a67a2fb07fc10ffccc3b49c620d1b1551"><div class="ttname"><a href="structhelios_1_1app_1_1details_1_1ResourceTypeInfo.html#a67a2fb07fc10ffccc3b49c620d1b1551">helios::app::details::ResourceTypeInfo::operator&lt;</a></div><div class="ttdeci">constexpr bool operator&lt;(const ResourceTypeInfo &amp;other) const noexcept</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00041">access_policy.hpp:41</a></div></div>
+<div class="ttc" id="astructhelios_1_1app_1_1details_1_1ResourceTypeInfo_html_af2b972a18f1a8cc95bd587d8b53cda07"><div class="ttname"><a href="structhelios_1_1app_1_1details_1_1ResourceTypeInfo.html#af2b972a18f1a8cc95bd587d8b53cda07">helios::app::details::ResourceTypeInfo::operator==</a></div><div class="ttdeci">constexpr bool operator==(const ResourceTypeInfo &amp;other) const noexcept</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00042">access_policy.hpp:42</a></div></div>
+</div><!-- fragment --> </div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

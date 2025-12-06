@@ -1,0 +1,657 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: helios::utils::StringEqual Struct Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('structhelios_1_1utils_1_1StringEqual.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="structhelios_1_1utils_1_1StringEqual-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">helios::utils::StringEqual Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Transparent equality comparator for string types.  
+ <a href="structhelios_1_1utils_1_1StringEqual.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="string__hash_8hpp_source.html">string_hash.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a404319ad52e8baa39a0a26b71c388cf3" id="r_a404319ad52e8baa39a0a26b71c388cf3"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1utils_1_1StringEqual.html#a404319ad52e8baa39a0a26b71c388cf3">is_transparent</a> = void</td></tr>
+<tr class="memdesc:a404319ad52e8baa39a0a26b71c388cf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables heterogeneous lookup.  <br /></td></tr>
+<tr class="separator:a404319ad52e8baa39a0a26b71c388cf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:aa9e2c3c0db13bb18c76fbc0bf02f06d6" id="r_aa9e2c3c0db13bb18c76fbc0bf02f06d6"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1utils_1_1StringEqual.html#aa9e2c3c0db13bb18c76fbc0bf02f06d6">operator()</a> (std::string_view lhs, std::string_view rhs) const noexcept</td></tr>
+<tr class="memdesc:aa9e2c3c0db13bb18c76fbc0bf02f06d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares two string-like objects for equality.  <br /></td></tr>
+<tr class="separator:aa9e2c3c0db13bb18c76fbc0bf02f06d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8923b645d0ede14338003c002836caf" id="r_ac8923b645d0ede14338003c002836caf"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1utils_1_1StringEqual.html#ac8923b645d0ede14338003c002836caf">operator()</a> (const std::string &amp;lhs, std::string_view rhs) const noexcept</td></tr>
+<tr class="memdesc:ac8923b645d0ede14338003c002836caf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares std::string with std::string_view.  <br /></td></tr>
+<tr class="separator:ac8923b645d0ede14338003c002836caf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adac1114486081973accd4b6b6a3b7b74" id="r_adac1114486081973accd4b6b6a3b7b74"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1utils_1_1StringEqual.html#adac1114486081973accd4b6b6a3b7b74">operator()</a> (std::string_view lhs, const std::string &amp;rhs) const noexcept</td></tr>
+<tr class="memdesc:adac1114486081973accd4b6b6a3b7b74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares std::string_view with std::string.  <br /></td></tr>
+<tr class="separator:adac1114486081973accd4b6b6a3b7b74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9131af5f45c5d6621ffa0caee449df48" id="r_a9131af5f45c5d6621ffa0caee449df48"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1utils_1_1StringEqual.html#a9131af5f45c5d6621ffa0caee449df48">operator()</a> (const std::string &amp;lhs, const std::string &amp;rhs) const noexcept</td></tr>
+<tr class="memdesc:a9131af5f45c5d6621ffa0caee449df48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares two std::string objects.  <br /></td></tr>
+<tr class="separator:a9131af5f45c5d6621ffa0caee449df48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa682f54eb3f2bda220f1bb6a18e07ef5" id="r_aa682f54eb3f2bda220f1bb6a18e07ef5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1utils_1_1StringEqual.html#aa682f54eb3f2bda220f1bb6a18e07ef5">operator()</a> (const std::string &amp;lhs, const char *rhs) const noexcept</td></tr>
+<tr class="memdesc:aa682f54eb3f2bda220f1bb6a18e07ef5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares std::string with C-style string.  <br /></td></tr>
+<tr class="separator:aa682f54eb3f2bda220f1bb6a18e07ef5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac446450844bdfc7180c4b3a2af5d8501" id="r_ac446450844bdfc7180c4b3a2af5d8501"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1utils_1_1StringEqual.html#ac446450844bdfc7180c4b3a2af5d8501">operator()</a> (const char *lhs, std::string_view rhs) const noexcept</td></tr>
+<tr class="memdesc:ac446450844bdfc7180c4b3a2af5d8501"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares C-style string with std::string_view.  <br /></td></tr>
+<tr class="separator:ac446450844bdfc7180c4b3a2af5d8501"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf142c260ebeffae35a5cb2617dc0eef" id="r_abf142c260ebeffae35a5cb2617dc0eef"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1utils_1_1StringEqual.html#abf142c260ebeffae35a5cb2617dc0eef">operator()</a> (const char *lhs, const std::string &amp;rhs) const noexcept</td></tr>
+<tr class="memdesc:abf142c260ebeffae35a5cb2617dc0eef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares C-style string with std::string.  <br /></td></tr>
+<tr class="separator:abf142c260ebeffae35a5cb2617dc0eef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7a9892328f673d036396882d4b66222" id="r_ab7a9892328f673d036396882d4b66222"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1utils_1_1StringEqual.html#ab7a9892328f673d036396882d4b66222">operator()</a> (std::string_view lhs, const char *rhs) const noexcept</td></tr>
+<tr class="memdesc:ab7a9892328f673d036396882d4b66222"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares std::string_view with C-style string.  <br /></td></tr>
+<tr class="separator:ab7a9892328f673d036396882d4b66222"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Transparent equality comparator for string types. </p>
+<p>Enables heterogeneous lookup in unordered containers, allowing comparisons between different string types without temporary allocations. Supports std::string, std::string_view, and const char*. </p>
+
+<p class="definition">Definition at line <a class="el" href="string__hash_8hpp_source.html#l00048">48</a> of file <a class="el" href="string__hash_8hpp_source.html">string_hash.hpp</a>.</p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a404319ad52e8baa39a0a26b71c388cf3" name="a404319ad52e8baa39a0a26b71c388cf3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a404319ad52e8baa39a0a26b71c388cf3">&#9670;&#160;</a></span>is_transparent</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structhelios_1_1utils_1_1StringEqual.html#a404319ad52e8baa39a0a26b71c388cf3">helios::utils::StringEqual::is_transparent</a> =  void</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enables heterogeneous lookup. </p>
+
+<p class="definition">Definition at line <a class="el" href="string__hash_8hpp_source.html#l00049">49</a> of file <a class="el" href="string__hash_8hpp_source.html">string_hash.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="abf142c260ebeffae35a5cb2617dc0eef" name="abf142c260ebeffae35a5cb2617dc0eef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf142c260ebeffae35a5cb2617dc0eef">&#9670;&#160;</a></span>operator()() <span class="overload">[1/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::utils::StringEqual::operator() </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>lhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compares C-style string with std::string. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lhs</td><td>Left-hand side C-style string </td></tr>
+    <tr><td class="paramname">rhs</td><td>Right-hand side string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if strings are equal, false otherwise </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="string__hash_8hpp_source.html#l00107">107</a> of file <a class="el" href="string__hash_8hpp_source.html">string_hash.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  107</span>{ <span class="keywordflow">return</span> lhs == rhs; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ac446450844bdfc7180c4b3a2af5d8501" name="ac446450844bdfc7180c4b3a2af5d8501"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac446450844bdfc7180c4b3a2af5d8501">&#9670;&#160;</a></span>operator()() <span class="overload">[2/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool helios::utils::StringEqual::operator() </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>lhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compares C-style string with std::string_view. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lhs</td><td>Left-hand side C-style string </td></tr>
+    <tr><td class="paramname">rhs</td><td>Right-hand side string view </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if strings are equal, false otherwise </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="string__hash_8hpp_source.html#l00099">99</a> of file <a class="el" href="string__hash_8hpp_source.html">string_hash.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   99</span>{ <span class="keywordflow">return</span> lhs == rhs; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aa682f54eb3f2bda220f1bb6a18e07ef5" name="aa682f54eb3f2bda220f1bb6a18e07ef5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa682f54eb3f2bda220f1bb6a18e07ef5">&#9670;&#160;</a></span>operator()() <span class="overload">[3/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::utils::StringEqual::operator() </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>lhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compares std::string with C-style string. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lhs</td><td>Left-hand side string </td></tr>
+    <tr><td class="paramname">rhs</td><td>Right-hand side C-style string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if strings are equal, false otherwise </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="string__hash_8hpp_source.html#l00091">91</a> of file <a class="el" href="string__hash_8hpp_source.html">string_hash.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   91</span>{ <span class="keywordflow">return</span> lhs == rhs; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a9131af5f45c5d6621ffa0caee449df48" name="a9131af5f45c5d6621ffa0caee449df48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9131af5f45c5d6621ffa0caee449df48">&#9670;&#160;</a></span>operator()() <span class="overload">[4/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::utils::StringEqual::operator() </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>lhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compares two std::string objects. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lhs</td><td>Left-hand side string </td></tr>
+    <tr><td class="paramname">rhs</td><td>Right-hand side string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if strings are equal, false otherwise </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="string__hash_8hpp_source.html#l00083">83</a> of file <a class="el" href="string__hash_8hpp_source.html">string_hash.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   83</span>{ <span class="keywordflow">return</span> lhs == rhs; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ac8923b645d0ede14338003c002836caf" name="ac8923b645d0ede14338003c002836caf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8923b645d0ede14338003c002836caf">&#9670;&#160;</a></span>operator()() <span class="overload">[5/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::utils::StringEqual::operator() </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>lhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compares std::string with std::string_view. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lhs</td><td>Left-hand side string </td></tr>
+    <tr><td class="paramname">rhs</td><td>Right-hand side string view </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if strings are equal, false otherwise </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="string__hash_8hpp_source.html#l00067">67</a> of file <a class="el" href="string__hash_8hpp_source.html">string_hash.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   67</span>{ <span class="keywordflow">return</span> lhs == rhs; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ab7a9892328f673d036396882d4b66222" name="ab7a9892328f673d036396882d4b66222"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7a9892328f673d036396882d4b66222">&#9670;&#160;</a></span>operator()() <span class="overload">[6/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool helios::utils::StringEqual::operator() </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>lhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compares std::string_view with C-style string. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lhs</td><td>Left-hand side string view </td></tr>
+    <tr><td class="paramname">rhs</td><td>Right-hand side C-style string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if strings are equal, false otherwise </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="string__hash_8hpp_source.html#l00115">115</a> of file <a class="el" href="string__hash_8hpp_source.html">string_hash.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  115</span>{ <span class="keywordflow">return</span> lhs == rhs; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="adac1114486081973accd4b6b6a3b7b74" name="adac1114486081973accd4b6b6a3b7b74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adac1114486081973accd4b6b6a3b7b74">&#9670;&#160;</a></span>operator()() <span class="overload">[7/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::utils::StringEqual::operator() </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>lhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compares std::string_view with std::string. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lhs</td><td>Left-hand side string view </td></tr>
+    <tr><td class="paramname">rhs</td><td>Right-hand side string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if strings are equal, false otherwise </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="string__hash_8hpp_source.html#l00075">75</a> of file <a class="el" href="string__hash_8hpp_source.html">string_hash.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   75</span>{ <span class="keywordflow">return</span> lhs == rhs; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aa9e2c3c0db13bb18c76fbc0bf02f06d6" name="aa9e2c3c0db13bb18c76fbc0bf02f06d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9e2c3c0db13bb18c76fbc0bf02f06d6">&#9670;&#160;</a></span>operator()() <span class="overload">[8/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool helios::utils::StringEqual::operator() </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>lhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compares two string-like objects for equality. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lhs</td><td>Left-hand side string </td></tr>
+    <tr><td class="paramname">rhs</td><td>Right-hand side string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if strings are equal, false otherwise </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="string__hash_8hpp_source.html#l00057">57</a> of file <a class="el" href="string__hash_8hpp_source.html">string_hash.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   57</span>                                                                                                 {</div>
+<div class="line"><span class="lineno">   58</span>    <span class="keywordflow">return</span> lhs == rhs;</div>
+<div class="line"><span class="lineno">   59</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehelios.html">helios</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1utils.html">utils</a></li><li class="navelem"><a class="el" href="structhelios_1_1utils_1_1StringEqual.html">StringEqual</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

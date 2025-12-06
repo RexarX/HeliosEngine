@@ -1,0 +1,2630 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: helios::container::SparseSet&lt; T, IndexType, Allocator &gt; Class Template Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classhelios_1_1container_1_1SparseSet.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="classhelios_1_1container_1_1SparseSet-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">helios::container::SparseSet&lt; T, IndexType, Allocator &gt; Class Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>A sparse set data structure for efficient mapping of sparse indices to dense storage of values.  
+ <a href="classhelios_1_1container_1_1SparseSet.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a0226a00cc2585a12d2549a0a61f20baa" id="r_a0226a00cc2585a12d2549a0a61f20baa"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a0226a00cc2585a12d2549a0a61f20baa">value_type</a> = T</td></tr>
+<tr class="separator:a0226a00cc2585a12d2549a0a61f20baa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3474fe545c8f474eaffd66f69e8afca8" id="r_a3474fe545c8f474eaffd66f69e8afca8"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a3474fe545c8f474eaffd66f69e8afca8">index_type</a> = IndexType</td></tr>
+<tr class="separator:a3474fe545c8f474eaffd66f69e8afca8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fb12448a7c80c2865d6be58dbc4f757" id="r_a5fb12448a7c80c2865d6be58dbc4f757"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a5fb12448a7c80c2865d6be58dbc4f757">dense_index_type</a> = DenseIndexType</td></tr>
+<tr class="separator:a5fb12448a7c80c2865d6be58dbc4f757"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5a9371c12d52bd6706a67b3fbb46c68" id="r_aa5a9371c12d52bd6706a67b3fbb46c68"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#aa5a9371c12d52bd6706a67b3fbb46c68">size_type</a> = size_t</td></tr>
+<tr class="separator:aa5a9371c12d52bd6706a67b3fbb46c68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ca80aad1a1954d0d0c3093e9314453f" id="r_a8ca80aad1a1954d0d0c3093e9314453f"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a8ca80aad1a1954d0d0c3093e9314453f">reference</a> = T &amp;</td></tr>
+<tr class="separator:a8ca80aad1a1954d0d0c3093e9314453f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d4303a7fea99001ca99f7687072503c" id="r_a0d4303a7fea99001ca99f7687072503c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a0d4303a7fea99001ca99f7687072503c">const_reference</a> = const T &amp;</td></tr>
+<tr class="separator:a0d4303a7fea99001ca99f7687072503c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b5c4e92274e0c7e91767777e512c3a7" id="r_a7b5c4e92274e0c7e91767777e512c3a7"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a7b5c4e92274e0c7e91767777e512c3a7">pointer</a> = T *</td></tr>
+<tr class="separator:a7b5c4e92274e0c7e91767777e512c3a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54c952c18d2ba014cee04f552426bed1" id="r_a54c952c18d2ba014cee04f552426bed1"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a54c952c18d2ba014cee04f552426bed1">const_pointer</a> = const T *</td></tr>
+<tr class="separator:a54c952c18d2ba014cee04f552426bed1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9db485b05778e11749dd3c0ed9cc23f" id="r_ab9db485b05778e11749dd3c0ed9cc23f"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#ab9db485b05778e11749dd3c0ed9cc23f">allocator_type</a> = Allocator</td></tr>
+<tr class="separator:ab9db485b05778e11749dd3c0ed9cc23f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7576763f28bd88882b37844a8adc4281" id="r_a7576763f28bd88882b37844a8adc4281"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a7576763f28bd88882b37844a8adc4281">sparse_container_type</a> = std::vector&lt; DenseIndexType, SparseAllocator &gt;</td></tr>
+<tr class="separator:a7576763f28bd88882b37844a8adc4281"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace79393a32a93757170f8b318eb13b99" id="r_ace79393a32a93757170f8b318eb13b99"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#ace79393a32a93757170f8b318eb13b99">dense_container_type</a> = std::vector&lt; T, DenseAllocator &gt;</td></tr>
+<tr class="separator:ace79393a32a93757170f8b318eb13b99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b8bf4e7a3848acb11b7e5fe2dbafd0e" id="r_a7b8bf4e7a3848acb11b7e5fe2dbafd0e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a7b8bf4e7a3848acb11b7e5fe2dbafd0e">iterator</a> = typename dense_container_type::iterator</td></tr>
+<tr class="separator:a7b8bf4e7a3848acb11b7e5fe2dbafd0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb8374bafff14807860cb46e2c818c94" id="r_abb8374bafff14807860cb46e2c818c94"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#abb8374bafff14807860cb46e2c818c94">const_iterator</a> = typename dense_container_type::const_iterator</td></tr>
+<tr class="separator:abb8374bafff14807860cb46e2c818c94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9ae267e265195efbd356861ba31662d" id="r_ac9ae267e265195efbd356861ba31662d"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#ac9ae267e265195efbd356861ba31662d">reverse_iterator</a> = typename dense_container_type::reverse_iterator</td></tr>
+<tr class="separator:ac9ae267e265195efbd356861ba31662d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2750eebeb4127982c35b0c6a07eb1528" id="r_a2750eebeb4127982c35b0c6a07eb1528"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a2750eebeb4127982c35b0c6a07eb1528">const_reverse_iterator</a> = typename dense_container_type::const_reverse_iterator</td></tr>
+<tr class="separator:a2750eebeb4127982c35b0c6a07eb1528"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a4be14393449e1f246c157ca342a9cacc" id="r_a4be14393449e1f246c157ca342a9cacc"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a4be14393449e1f246c157ca342a9cacc">SparseSet</a> () noexcept(std::is_nothrow_default_constructible_v&lt; Allocator &gt;)=default</td></tr>
+<tr class="memdesc:a4be14393449e1f246c157ca342a9cacc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <br /></td></tr>
+<tr class="separator:a4be14393449e1f246c157ca342a9cacc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2484b08f06f60021d2d5efa8a38b3bbd" id="r_a2484b08f06f60021d2d5efa8a38b3bbd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a2484b08f06f60021d2d5efa8a38b3bbd">SparseSet</a> (const Allocator &amp;alloc) noexcept(noexcept(SparseAllocator(alloc)))</td></tr>
+<tr class="memdesc:a2484b08f06f60021d2d5efa8a38b3bbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor with custom allocator.  <br /></td></tr>
+<tr class="separator:a2484b08f06f60021d2d5efa8a38b3bbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a344561306ae277b5dd9b0e9e34abf265" id="r_a344561306ae277b5dd9b0e9e34abf265"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a344561306ae277b5dd9b0e9e34abf265">SparseSet</a> (const <a class="el" href="classhelios_1_1container_1_1SparseSet.html">SparseSet</a> &amp;other)=default</td></tr>
+<tr class="memdesc:a344561306ae277b5dd9b0e9e34abf265"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor.  <br /></td></tr>
+<tr class="separator:a344561306ae277b5dd9b0e9e34abf265"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a319b6e1db875126cdc0452282ac1c384" id="r_a319b6e1db875126cdc0452282ac1c384"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a319b6e1db875126cdc0452282ac1c384">SparseSet</a> (<a class="el" href="classhelios_1_1container_1_1SparseSet.html">SparseSet</a> &amp;&amp;) noexcept=default</td></tr>
+<tr class="memdesc:a319b6e1db875126cdc0452282ac1c384"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move constructor.  <br /></td></tr>
+<tr class="separator:a319b6e1db875126cdc0452282ac1c384"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4817a46586164a22c9eab87d0ba2e42b" id="r_a4817a46586164a22c9eab87d0ba2e42b"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a4817a46586164a22c9eab87d0ba2e42b">~SparseSet</a> ()=default</td></tr>
+<tr class="memdesc:a4817a46586164a22c9eab87d0ba2e42b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <br /></td></tr>
+<tr class="separator:a4817a46586164a22c9eab87d0ba2e42b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e2695eee456c9f992a78808ad516edd" id="r_a9e2695eee456c9f992a78808ad516edd"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html">SparseSet</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a9e2695eee456c9f992a78808ad516edd">operator=</a> (const <a class="el" href="classhelios_1_1container_1_1SparseSet.html">SparseSet</a> &amp;other)=default</td></tr>
+<tr class="memdesc:a9e2695eee456c9f992a78808ad516edd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy assignment operator.  <br /></td></tr>
+<tr class="separator:a9e2695eee456c9f992a78808ad516edd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9257cb87a47ee28145eac28b1696fbcc" id="r_a9257cb87a47ee28145eac28b1696fbcc"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html">SparseSet</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a9257cb87a47ee28145eac28b1696fbcc">operator=</a> (<a class="el" href="classhelios_1_1container_1_1SparseSet.html">SparseSet</a> &amp;&amp;) noexcept=default</td></tr>
+<tr class="memdesc:a9257cb87a47ee28145eac28b1696fbcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move assignment operator.  <br /></td></tr>
+<tr class="separator:a9257cb87a47ee28145eac28b1696fbcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05904744bd2cd54af22795ddc0d5339d" id="r_a05904744bd2cd54af22795ddc0d5339d"><td class="memItemLeft" align="right" valign="top">constexpr void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a05904744bd2cd54af22795ddc0d5339d">Clear</a> () noexcept</td></tr>
+<tr class="memdesc:a05904744bd2cd54af22795ddc0d5339d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the set, removing all elements.  <br /></td></tr>
+<tr class="separator:a05904744bd2cd54af22795ddc0d5339d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d74d74a4b7b0ee85985ae2967f53f25" id="r_a9d74d74a4b7b0ee85985ae2967f53f25"><td class="memItemLeft" align="right" valign="top">DenseIndexType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a9d74d74a4b7b0ee85985ae2967f53f25">Insert</a> (IndexType index, const T &amp;value)</td></tr>
+<tr class="memdesc:a9d74d74a4b7b0ee85985ae2967f53f25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts a value at the specified index (copy version).  <br /></td></tr>
+<tr class="separator:a9d74d74a4b7b0ee85985ae2967f53f25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7d0f0959f52ae6c7337be10faa88c8d" id="r_ab7d0f0959f52ae6c7337be10faa88c8d"><td class="memItemLeft" align="right" valign="top">DenseIndexType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#ab7d0f0959f52ae6c7337be10faa88c8d">Insert</a> (IndexType index, T &amp;&amp;value)</td></tr>
+<tr class="memdesc:ab7d0f0959f52ae6c7337be10faa88c8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts a value at the specified index (move version).  <br /></td></tr>
+<tr class="separator:ab7d0f0959f52ae6c7337be10faa88c8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6556d40648aabd22e4fa6373719cee3" id="r_aa6556d40648aabd22e4fa6373719cee3"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:aa6556d40648aabd22e4fa6373719cee3"><td class="memTemplItemLeft" align="right" valign="top">DenseIndexType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#aa6556d40648aabd22e4fa6373719cee3">Emplace</a> (IndexType index, Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:aa6556d40648aabd22e4fa6373719cee3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a value in-place at the specified index.  <br /></td></tr>
+<tr class="separator:aa6556d40648aabd22e4fa6373719cee3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1350dfa4e66883ca80a97ac64e6fbd1" id="r_ad1350dfa4e66883ca80a97ac64e6fbd1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#ad1350dfa4e66883ca80a97ac64e6fbd1">Remove</a> (IndexType index) noexcept</td></tr>
+<tr class="memdesc:ad1350dfa4e66883ca80a97ac64e6fbd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes an index from the set.  <br /></td></tr>
+<tr class="separator:ad1350dfa4e66883ca80a97ac64e6fbd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4082fe5c7e5a7f11b569a99f03ab22c7" id="r_a4082fe5c7e5a7f11b569a99f03ab22c7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a4082fe5c7e5a7f11b569a99f03ab22c7">Reserve</a> (<a class="el" href="classhelios_1_1container_1_1SparseSet.html#aa5a9371c12d52bd6706a67b3fbb46c68">size_type</a> n)</td></tr>
+<tr class="memdesc:a4082fe5c7e5a7f11b569a99f03ab22c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reserves space for at least n elements in the dense array.  <br /></td></tr>
+<tr class="separator:a4082fe5c7e5a7f11b569a99f03ab22c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28d554f653bc1b2b4f5936c0cd76067e" id="r_a28d554f653bc1b2b4f5936c0cd76067e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a28d554f653bc1b2b4f5936c0cd76067e">ReserveSparse</a> (IndexType max_index)</td></tr>
+<tr class="memdesc:a28d554f653bc1b2b4f5936c0cd76067e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reserves space for indices up to max_index in the sparse array.  <br /></td></tr>
+<tr class="separator:a28d554f653bc1b2b4f5936c0cd76067e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32e4442e60c8589833245d3f791da54b" id="r_a32e4442e60c8589833245d3f791da54b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a32e4442e60c8589833245d3f791da54b">ShrinkToFit</a> ()</td></tr>
+<tr class="memdesc:a32e4442e60c8589833245d3f791da54b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shrinks the capacity of both arrays to fit their current size.  <br /></td></tr>
+<tr class="separator:a32e4442e60c8589833245d3f791da54b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74346075ca174f07b3ba96f325701d7f" id="r_a74346075ca174f07b3ba96f325701d7f"><td class="memItemLeft" align="right" valign="top">constexpr T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a74346075ca174f07b3ba96f325701d7f">Get</a> (IndexType index) noexcept</td></tr>
+<tr class="memdesc:a74346075ca174f07b3ba96f325701d7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the value at the specified index.  <br /></td></tr>
+<tr class="separator:a74346075ca174f07b3ba96f325701d7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0790134b8d0cd169edee7210c68f921e" id="r_a0790134b8d0cd169edee7210c68f921e"><td class="memItemLeft" align="right" valign="top">constexpr const T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a0790134b8d0cd169edee7210c68f921e">Get</a> (IndexType index) const noexcept</td></tr>
+<tr class="memdesc:a0790134b8d0cd169edee7210c68f921e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the value at the specified index (const version).  <br /></td></tr>
+<tr class="separator:a0790134b8d0cd169edee7210c68f921e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0408d9ca52a743f48bb5f1b9cfdb3d39" id="r_a0408d9ca52a743f48bb5f1b9cfdb3d39"><td class="memItemLeft" align="right" valign="top">constexpr T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a0408d9ca52a743f48bb5f1b9cfdb3d39">GetByDenseIndex</a> (DenseIndexType dense_index) noexcept</td></tr>
+<tr class="memdesc:a0408d9ca52a743f48bb5f1b9cfdb3d39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the value at the specified dense index.  <br /></td></tr>
+<tr class="separator:a0408d9ca52a743f48bb5f1b9cfdb3d39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f27b6face55f29fa3f694e03f755ecd" id="r_a2f27b6face55f29fa3f694e03f755ecd"><td class="memItemLeft" align="right" valign="top">constexpr const T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a2f27b6face55f29fa3f694e03f755ecd">GetByDenseIndex</a> (DenseIndexType dense_index) const noexcept</td></tr>
+<tr class="memdesc:a2f27b6face55f29fa3f694e03f755ecd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the value at the specified dense index (const version).  <br /></td></tr>
+<tr class="separator:a2f27b6face55f29fa3f694e03f755ecd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cd56cfd03117e8d085843c006121cb7" id="r_a6cd56cfd03117e8d085843c006121cb7"><td class="memItemLeft" align="right" valign="top">constexpr T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a6cd56cfd03117e8d085843c006121cb7">TryGet</a> (IndexType index) noexcept</td></tr>
+<tr class="memdesc:a6cd56cfd03117e8d085843c006121cb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to get the value at the specified index.  <br /></td></tr>
+<tr class="separator:a6cd56cfd03117e8d085843c006121cb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49685e2fe3817d53731597c311b381f1" id="r_a49685e2fe3817d53731597c311b381f1"><td class="memItemLeft" align="right" valign="top">constexpr const T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a49685e2fe3817d53731597c311b381f1">TryGet</a> (IndexType index) const noexcept</td></tr>
+<tr class="memdesc:a49685e2fe3817d53731597c311b381f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to get the value at the specified index (const version).  <br /></td></tr>
+<tr class="separator:a49685e2fe3817d53731597c311b381f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a403c9d5319288cbcade346a815b4c7a0" id="r_a403c9d5319288cbcade346a815b4c7a0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a403c9d5319288cbcade346a815b4c7a0">Swap</a> (<a class="el" href="classhelios_1_1container_1_1SparseSet.html">SparseSet</a> &amp;other) noexcept</td></tr>
+<tr class="memdesc:a403c9d5319288cbcade346a815b4c7a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Swaps the contents of this sparse set with another.  <br /></td></tr>
+<tr class="separator:a403c9d5319288cbcade346a815b4c7a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc5c56bcaa1031cdf34be813db776a21" id="r_adc5c56bcaa1031cdf34be813db776a21"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#adc5c56bcaa1031cdf34be813db776a21">operator==</a> (const <a class="el" href="classhelios_1_1container_1_1SparseSet.html">SparseSet</a> &amp;other) const noexcept</td></tr>
+<tr class="memdesc:adc5c56bcaa1031cdf34be813db776a21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if two sparse sets are equal.  <br /></td></tr>
+<tr class="separator:adc5c56bcaa1031cdf34be813db776a21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a3091c506374dbd5a3e40f7a240d438" id="r_a7a3091c506374dbd5a3e40f7a240d438"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a7a3091c506374dbd5a3e40f7a240d438">Empty</a> () const noexcept</td></tr>
+<tr class="memdesc:a7a3091c506374dbd5a3e40f7a240d438"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the set is empty.  <br /></td></tr>
+<tr class="separator:a7a3091c506374dbd5a3e40f7a240d438"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3889d6f69f2ce7fb7532fbf40c0d9047" id="r_a3889d6f69f2ce7fb7532fbf40c0d9047"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a3889d6f69f2ce7fb7532fbf40c0d9047">Contains</a> (IndexType index) const noexcept</td></tr>
+<tr class="memdesc:a3889d6f69f2ce7fb7532fbf40c0d9047"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if an index exists in the set.  <br /></td></tr>
+<tr class="separator:a3889d6f69f2ce7fb7532fbf40c0d9047"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73173209ca75d834188a9084017ef7cd" id="r_a73173209ca75d834188a9084017ef7cd"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html#ab9db485b05778e11749dd3c0ed9cc23f">allocator_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a73173209ca75d834188a9084017ef7cd">GetAllocator</a> () const noexcept</td></tr>
+<tr class="memdesc:a73173209ca75d834188a9084017ef7cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the allocator associated with the container.  <br /></td></tr>
+<tr class="separator:a73173209ca75d834188a9084017ef7cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a654d237d02c5c4977cbb909f6b69f199" id="r_a654d237d02c5c4977cbb909f6b69f199"><td class="memItemLeft" align="right" valign="top">constexpr DenseIndexType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a654d237d02c5c4977cbb909f6b69f199">GetDenseIndex</a> (IndexType index) const noexcept</td></tr>
+<tr class="memdesc:a654d237d02c5c4977cbb909f6b69f199"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the dense index for a given index.  <br /></td></tr>
+<tr class="separator:a654d237d02c5c4977cbb909f6b69f199"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae13bc023c7ed9b19eaf7ecff5e479219" id="r_ae13bc023c7ed9b19eaf7ecff5e479219"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html#aa5a9371c12d52bd6706a67b3fbb46c68">size_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#ae13bc023c7ed9b19eaf7ecff5e479219">Size</a> () const noexcept</td></tr>
+<tr class="memdesc:ae13bc023c7ed9b19eaf7ecff5e479219"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of values in the set.  <br /></td></tr>
+<tr class="separator:ae13bc023c7ed9b19eaf7ecff5e479219"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ce5a254ed84812239d7f908fbc26e24" id="r_a4ce5a254ed84812239d7f908fbc26e24"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html#aa5a9371c12d52bd6706a67b3fbb46c68">size_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a4ce5a254ed84812239d7f908fbc26e24">MaxSize</a> () const noexcept</td></tr>
+<tr class="memdesc:a4ce5a254ed84812239d7f908fbc26e24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the maximum possible size of the set.  <br /></td></tr>
+<tr class="separator:a4ce5a254ed84812239d7f908fbc26e24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91c2b9a6f5fa8b4f864cdf4050a3b41b" id="r_a91c2b9a6f5fa8b4f864cdf4050a3b41b"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html#aa5a9371c12d52bd6706a67b3fbb46c68">size_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a91c2b9a6f5fa8b4f864cdf4050a3b41b">Capacity</a> () const noexcept</td></tr>
+<tr class="memdesc:a91c2b9a6f5fa8b4f864cdf4050a3b41b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the capacity of the dense array.  <br /></td></tr>
+<tr class="separator:a91c2b9a6f5fa8b4f864cdf4050a3b41b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab217f9afae5fa24ef6e98cec5460b68c" id="r_ab217f9afae5fa24ef6e98cec5460b68c"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html#aa5a9371c12d52bd6706a67b3fbb46c68">size_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#ab217f9afae5fa24ef6e98cec5460b68c">SparseCapacity</a> () const noexcept</td></tr>
+<tr class="memdesc:ab217f9afae5fa24ef6e98cec5460b68c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the capacity of the sparse array.  <br /></td></tr>
+<tr class="separator:ab217f9afae5fa24ef6e98cec5460b68c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1ef7fef843e1c8218aebd5d35164beb" id="r_af1ef7fef843e1c8218aebd5d35164beb"><td class="memItemLeft" align="right" valign="top">constexpr std::span&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#af1ef7fef843e1c8218aebd5d35164beb">Data</a> () noexcept</td></tr>
+<tr class="memdesc:af1ef7fef843e1c8218aebd5d35164beb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a writable span of the packed values.  <br /></td></tr>
+<tr class="separator:af1ef7fef843e1c8218aebd5d35164beb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58c39e4175eab327ad14e2bd141ce5b1" id="r_a58c39e4175eab327ad14e2bd141ce5b1"><td class="memItemLeft" align="right" valign="top">constexpr std::span&lt; const T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a58c39e4175eab327ad14e2bd141ce5b1">Data</a> () const noexcept</td></tr>
+<tr class="memdesc:a58c39e4175eab327ad14e2bd141ce5b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a read-only span of the packed values.  <br /></td></tr>
+<tr class="separator:a58c39e4175eab327ad14e2bd141ce5b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1438ab4b165d962dcc980b75e4c55d4" id="r_af1438ab4b165d962dcc980b75e4c55d4"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html#a7b8bf4e7a3848acb11b7e5fe2dbafd0e">iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#af1438ab4b165d962dcc980b75e4c55d4">begin</a> () noexcept</td></tr>
+<tr class="separator:af1438ab4b165d962dcc980b75e4c55d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c3f4d3e6e80ca6c9bd86512e5995ce6" id="r_a3c3f4d3e6e80ca6c9bd86512e5995ce6"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html#abb8374bafff14807860cb46e2c818c94">const_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a3c3f4d3e6e80ca6c9bd86512e5995ce6">begin</a> () const noexcept</td></tr>
+<tr class="separator:a3c3f4d3e6e80ca6c9bd86512e5995ce6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23640e0d12dc15e447266f0464b3158f" id="r_a23640e0d12dc15e447266f0464b3158f"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html#abb8374bafff14807860cb46e2c818c94">const_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a23640e0d12dc15e447266f0464b3158f">cbegin</a> () const noexcept</td></tr>
+<tr class="separator:a23640e0d12dc15e447266f0464b3158f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e3cc1494e6024e4970da2769c6eee9c" id="r_a3e3cc1494e6024e4970da2769c6eee9c"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html#a7b8bf4e7a3848acb11b7e5fe2dbafd0e">iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a3e3cc1494e6024e4970da2769c6eee9c">end</a> () noexcept</td></tr>
+<tr class="separator:a3e3cc1494e6024e4970da2769c6eee9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bdc0a02014b34e48853b57f43f6cbbb" id="r_a7bdc0a02014b34e48853b57f43f6cbbb"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html#abb8374bafff14807860cb46e2c818c94">const_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a7bdc0a02014b34e48853b57f43f6cbbb">end</a> () const noexcept</td></tr>
+<tr class="separator:a7bdc0a02014b34e48853b57f43f6cbbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50b791eacf3b18d2ed897045cc60172e" id="r_a50b791eacf3b18d2ed897045cc60172e"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html#abb8374bafff14807860cb46e2c818c94">const_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a50b791eacf3b18d2ed897045cc60172e">cend</a> () const noexcept</td></tr>
+<tr class="separator:a50b791eacf3b18d2ed897045cc60172e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f4a8e6eadd41c7f995a996ba8c55ca8" id="r_a9f4a8e6eadd41c7f995a996ba8c55ca8"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html#ac9ae267e265195efbd356861ba31662d">reverse_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a9f4a8e6eadd41c7f995a996ba8c55ca8">rbegin</a> () noexcept</td></tr>
+<tr class="separator:a9f4a8e6eadd41c7f995a996ba8c55ca8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d5d9dd3e5a55acf1ee1c852bf97d489" id="r_a5d5d9dd3e5a55acf1ee1c852bf97d489"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html#a2750eebeb4127982c35b0c6a07eb1528">const_reverse_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a5d5d9dd3e5a55acf1ee1c852bf97d489">rbegin</a> () const noexcept</td></tr>
+<tr class="separator:a5d5d9dd3e5a55acf1ee1c852bf97d489"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87f36e81e7dafe5d833a2af348a7dde4" id="r_a87f36e81e7dafe5d833a2af348a7dde4"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html#a2750eebeb4127982c35b0c6a07eb1528">const_reverse_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a87f36e81e7dafe5d833a2af348a7dde4">crbegin</a> () const noexcept</td></tr>
+<tr class="separator:a87f36e81e7dafe5d833a2af348a7dde4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6693459ab011de70d678513d5b8c838b" id="r_a6693459ab011de70d678513d5b8c838b"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html#ac9ae267e265195efbd356861ba31662d">reverse_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a6693459ab011de70d678513d5b8c838b">rend</a> () noexcept</td></tr>
+<tr class="separator:a6693459ab011de70d678513d5b8c838b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86adb83f1627e670a3fb4ae17ea3a35d" id="r_a86adb83f1627e670a3fb4ae17ea3a35d"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html#a2750eebeb4127982c35b0c6a07eb1528">const_reverse_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a86adb83f1627e670a3fb4ae17ea3a35d">rend</a> () const noexcept</td></tr>
+<tr class="separator:a86adb83f1627e670a3fb4ae17ea3a35d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c4b6c40caa9fbe41e3a0b5d3e7e1897" id="r_a4c4b6c40caa9fbe41e3a0b5d3e7e1897"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html#a2750eebeb4127982c35b0c6a07eb1528">const_reverse_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a4c4b6c40caa9fbe41e3a0b5d3e7e1897">crend</a> () const noexcept</td></tr>
+<tr class="separator:a4c4b6c40caa9fbe41e3a0b5d3e7e1897"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a69d2b10608013be84eecbade33131201" id="r_a69d2b10608013be84eecbade33131201"><td class="memItemLeft" align="right" valign="top">static constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#a69d2b10608013be84eecbade33131201">IsValidIndex</a> (IndexType index) noexcept</td></tr>
+<tr class="memdesc:a69d2b10608013be84eecbade33131201"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if an index value is valid for this sparse set.  <br /></td></tr>
+<tr class="separator:a69d2b10608013be84eecbade33131201"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:aeb51474b7e5fcd4bf0949f10b0005c99" id="r_aeb51474b7e5fcd4bf0949f10b0005c99"><td class="memItemLeft" align="right" valign="top">static constexpr IndexType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#aeb51474b7e5fcd4bf0949f10b0005c99">kInvalidIndex</a> = std::numeric_limits&lt;IndexType&gt;::max()</td></tr>
+<tr class="separator:aeb51474b7e5fcd4bf0949f10b0005c99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeecfef743d8112ef3e11d8c68ae1ec75" id="r_aeecfef743d8112ef3e11d8c68ae1ec75"><td class="memItemLeft" align="right" valign="top">static constexpr DenseIndexType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#aeecfef743d8112ef3e11d8c68ae1ec75">kInvalidDenseIndex</a> = std::numeric_limits&lt;DenseIndexType&gt;::max()</td></tr>
+<tr class="separator:aeecfef743d8112ef3e11d8c68ae1ec75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T, typename IndexType = size_t, typename Allocator = std::allocator&lt;T&gt;&gt;<br />
+class helios::container::SparseSet&lt; T, IndexType, Allocator &gt;</div><p>A sparse set data structure for efficient mapping of sparse indices to dense storage of values. </p>
+<p><a class="el" href="classhelios_1_1container_1_1SparseSet.html" title="A sparse set data structure for efficient mapping of sparse indices to dense storage of values.">SparseSet</a> provides O(1) insertion, deletion, and lookup operations using two arrays:</p><ul>
+<li>sparse: maps element indices to dense indices</li>
+<li>dense: stores packed values of type T in contiguous memory</li>
+</ul>
+<p>The data structure is particularly useful for managing sparse collections where indices may have large gaps but you want cache-friendly iteration over existing values.</p>
+<p>Memory complexity: O(max_index + num_elements) Time complexity: O(1) for all operations (amortized for insertions)</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Type of values stored in the dense array </td></tr>
+    <tr><td class="paramname">IndexType</td><td>Type used for element indices (default: size_t) </td></tr>
+    <tr><td class="paramname">Allocator</td><td>Allocator type for memory management (default: std::allocator&lt;T&gt;) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00037">37</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="ab9db485b05778e11749dd3c0ed9cc23f" name="ab9db485b05778e11749dd3c0ed9cc23f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9db485b05778e11749dd3c0ed9cc23f">&#9670;&#160;</a></span>allocator_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::allocator_type =  Allocator</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00052">52</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+
+</div>
+</div>
+<a id="abb8374bafff14807860cb46e2c818c94" name="abb8374bafff14807860cb46e2c818c94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb8374bafff14807860cb46e2c818c94">&#9670;&#160;</a></span>const_iterator</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::const_iterator =  typename dense_container_type::const_iterator</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00058">58</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a54c952c18d2ba014cee04f552426bed1" name="a54c952c18d2ba014cee04f552426bed1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54c952c18d2ba014cee04f552426bed1">&#9670;&#160;</a></span>const_pointer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::const_pointer =  const T*</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00051">51</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a0d4303a7fea99001ca99f7687072503c" name="a0d4303a7fea99001ca99f7687072503c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d4303a7fea99001ca99f7687072503c">&#9670;&#160;</a></span>const_reference</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::const_reference =  const T&amp;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00049">49</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a2750eebeb4127982c35b0c6a07eb1528" name="a2750eebeb4127982c35b0c6a07eb1528"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2750eebeb4127982c35b0c6a07eb1528">&#9670;&#160;</a></span>const_reverse_iterator</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::const_reverse_iterator =  typename dense_container_type::const_reverse_iterator</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00060">60</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ace79393a32a93757170f8b318eb13b99" name="ace79393a32a93757170f8b318eb13b99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace79393a32a93757170f8b318eb13b99">&#9670;&#160;</a></span>dense_container_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::dense_container_type =  std::vector&lt;T, DenseAllocator&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00055">55</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a5fb12448a7c80c2865d6be58dbc4f757" name="a5fb12448a7c80c2865d6be58dbc4f757"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5fb12448a7c80c2865d6be58dbc4f757">&#9670;&#160;</a></span>dense_index_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::dense_index_type =  DenseIndexType</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00046">46</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a3474fe545c8f474eaffd66f69e8afca8" name="a3474fe545c8f474eaffd66f69e8afca8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3474fe545c8f474eaffd66f69e8afca8">&#9670;&#160;</a></span>index_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::index_type =  IndexType</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00045">45</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a7b8bf4e7a3848acb11b7e5fe2dbafd0e" name="a7b8bf4e7a3848acb11b7e5fe2dbafd0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b8bf4e7a3848acb11b7e5fe2dbafd0e">&#9670;&#160;</a></span>iterator</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::iterator =  typename dense_container_type::iterator</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00057">57</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a7b5c4e92274e0c7e91767777e512c3a7" name="a7b5c4e92274e0c7e91767777e512c3a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b5c4e92274e0c7e91767777e512c3a7">&#9670;&#160;</a></span>pointer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::pointer =  T*</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00050">50</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a8ca80aad1a1954d0d0c3093e9314453f" name="a8ca80aad1a1954d0d0c3093e9314453f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ca80aad1a1954d0d0c3093e9314453f">&#9670;&#160;</a></span>reference</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::reference =  T&amp;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00048">48</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ac9ae267e265195efbd356861ba31662d" name="ac9ae267e265195efbd356861ba31662d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9ae267e265195efbd356861ba31662d">&#9670;&#160;</a></span>reverse_iterator</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::reverse_iterator =  typename dense_container_type::reverse_iterator</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00059">59</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aa5a9371c12d52bd6706a67b3fbb46c68" name="aa5a9371c12d52bd6706a67b3fbb46c68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5a9371c12d52bd6706a67b3fbb46c68">&#9670;&#160;</a></span>size_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::size_type =  size_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00047">47</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a7576763f28bd88882b37844a8adc4281" name="a7576763f28bd88882b37844a8adc4281"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7576763f28bd88882b37844a8adc4281">&#9670;&#160;</a></span>sparse_container_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::sparse_container_type =  std::vector&lt;DenseIndexType, SparseAllocator&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00054">54</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a0226a00cc2585a12d2549a0a61f20baa" name="a0226a00cc2585a12d2549a0a61f20baa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0226a00cc2585a12d2549a0a61f20baa">&#9670;&#160;</a></span>value_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::value_type =  T</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00044">44</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a4be14393449e1f246c157ca342a9cacc" name="a4be14393449e1f246c157ca342a9cacc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4be14393449e1f246c157ca342a9cacc">&#9670;&#160;</a></span>SparseSet() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::SparseSet </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default constructor. </p>
+<p>Creates an empty sparse set. Exception safety: No-throw guarantee if T and Allocator are nothrow default constructible. </p>
+
+</div>
+</div>
+<a id="a2484b08f06f60021d2d5efa8a38b3bbd" name="a2484b08f06f60021d2d5efa8a38b3bbd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2484b08f06f60021d2d5efa8a38b3bbd">&#9670;&#160;</a></span>SparseSet() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::SparseSet </td>
+          <td>(</td>
+          <td class="paramtype">const Allocator &amp;&#160;</td>
+          <td class="paramname"><em>alloc</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor with custom allocator. </p>
+<p>Creates an empty sparse set with the specified allocator. Exception safety: Basic guarantee. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">alloc</td><td>The allocator to use for memory management </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">May</td><td>throw if allocator copy constructor throws </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00079">79</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   80</span>      : sparse_(SparseAllocator(alloc)), dense_(alloc) {}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a344561306ae277b5dd9b0e9e34abf265" name="a344561306ae277b5dd9b0e9e34abf265"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a344561306ae277b5dd9b0e9e34abf265">&#9670;&#160;</a></span>SparseSet() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::SparseSet </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1container_1_1SparseSet.html">SparseSet</a>&lt; T, IndexType, Allocator &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Copy constructor. </p>
+<p>Creates a copy of another sparse set. Exception safety: Strong guarantee. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>The sparse set to copy from </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">May</td><td>throw if T copy constructor or memory allocation fails </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a319b6e1db875126cdc0452282ac1c384" name="a319b6e1db875126cdc0452282ac1c384"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a319b6e1db875126cdc0452282ac1c384">&#9670;&#160;</a></span>SparseSet() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::SparseSet </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1container_1_1SparseSet.html">SparseSet</a>&lt; T, IndexType, Allocator &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Move constructor. </p>
+<p>Transfers ownership of resources from other sparse set. Exception safety: No-throw guarantee. </p>
+
+</div>
+</div>
+<a id="a4817a46586164a22c9eab87d0ba2e42b" name="a4817a46586164a22c9eab87d0ba2e42b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4817a46586164a22c9eab87d0ba2e42b">&#9670;&#160;</a></span>~SparseSet()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::~<a class="el" href="classhelios_1_1container_1_1SparseSet.html">SparseSet</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor. </p>
+<p>Destroys the sparse set and releases all memory. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a3c3f4d3e6e80ca6c9bd86512e5995ce6" name="a3c3f4d3e6e80ca6c9bd86512e5995ce6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c3f4d3e6e80ca6c9bd86512e5995ce6">&#9670;&#160;</a></span>begin() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html#abb8374bafff14807860cb46e2c818c94">const_iterator</a> <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::begin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00410">410</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  410</span>{ <span class="keywordflow">return</span> dense_.begin(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="af1438ab4b165d962dcc980b75e4c55d4" name="af1438ab4b165d962dcc980b75e4c55d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1438ab4b165d962dcc980b75e4c55d4">&#9670;&#160;</a></span>begin() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html#a7b8bf4e7a3848acb11b7e5fe2dbafd0e">iterator</a> <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::begin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00409">409</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  409</span>{ <span class="keywordflow">return</span> dense_.begin(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a91c2b9a6f5fa8b4f864cdf4050a3b41b" name="a91c2b9a6f5fa8b4f864cdf4050a3b41b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91c2b9a6f5fa8b4f864cdf4050a3b41b">&#9670;&#160;</a></span>Capacity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html#aa5a9371c12d52bd6706a67b3fbb46c68">size_type</a> <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::Capacity </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the capacity of the dense array. </p>
+<p>Returns the number of elements that can be stored in the dense array without triggering a reallocation. Time complexity: O(1). Exception safety: No-throw guarantee. </p><dl class="section return"><dt>Returns</dt><dd>The capacity of the dense array </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00378">378</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  378</span>{ <span class="keywordflow">return</span> dense_.capacity(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a23640e0d12dc15e447266f0464b3158f" name="a23640e0d12dc15e447266f0464b3158f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23640e0d12dc15e447266f0464b3158f">&#9670;&#160;</a></span>cbegin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html#abb8374bafff14807860cb46e2c818c94">const_iterator</a> <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::cbegin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00411">411</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  411</span>{ <span class="keywordflow">return</span> dense_.cbegin(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a50b791eacf3b18d2ed897045cc60172e" name="a50b791eacf3b18d2ed897045cc60172e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50b791eacf3b18d2ed897045cc60172e">&#9670;&#160;</a></span>cend()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html#abb8374bafff14807860cb46e2c818c94">const_iterator</a> <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::cend </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00415">415</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  415</span>{ <span class="keywordflow">return</span> dense_.cend(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a05904744bd2cd54af22795ddc0d5339d" name="a05904744bd2cd54af22795ddc0d5339d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05904744bd2cd54af22795ddc0d5339d">&#9670;&#160;</a></span>Clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType , typename Allocator &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr void <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::Clear </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Clears the set, removing all elements. </p>
+<p>Removes all values from the set. The sparse array is reset to invalid indices but its capacity is preserved for performance. Time complexity: O(sparse_capacity). Exception safety: No-throw guarantee. </p>
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00432">432</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  432</span>                                                                  {</div>
+<div class="line"><span class="lineno">  433</span>  dense_.clear();</div>
+<div class="line"><span class="lineno">  434</span>  reverse_map_.clear();</div>
+<div class="line"><span class="lineno">  435</span>  std::ranges::fill(sparse_, <a class="code hl_variable" href="classhelios_1_1container_1_1SparseSet.html#aeecfef743d8112ef3e11d8c68ae1ec75">kInvalidDenseIndex</a>);</div>
+<div class="line"><span class="lineno">  436</span>}</div>
+<div class="ttc" id="aclasshelios_1_1container_1_1SparseSet_html_aeecfef743d8112ef3e11d8c68ae1ec75"><div class="ttname"><a href="classhelios_1_1container_1_1SparseSet.html#aeecfef743d8112ef3e11d8c68ae1ec75">helios::container::SparseSet::kInvalidDenseIndex</a></div><div class="ttdeci">static constexpr DenseIndexType kInvalidDenseIndex</div><div class="ttdef"><b>Definition</b> <a href="sparse__set_8hpp_source.html#l00063">sparse_set.hpp:63</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a3889d6f69f2ce7fb7532fbf40c0d9047" name="a3889d6f69f2ce7fb7532fbf40c0d9047"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3889d6f69f2ce7fb7532fbf40c0d9047">&#9670;&#160;</a></span>Contains()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType , typename Allocator &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::Contains </td>
+          <td>(</td>
+          <td class="paramtype">IndexType&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if an index exists in the set. </p>
+<p>Performs a comprehensive check to ensure the index is valid and exists in the set. Time complexity: O(1). Exception safety: No-throw guarantee. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if index is invalid or negative. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>The index to check </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the index exists in the set, false otherwise </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00665">665</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  665</span>                                                                                          {</div>
+<div class="line"><span class="lineno">  666</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a69d2b10608013be84eecbade33131201">IsValidIndex</a>(index), <span class="stringliteral">&quot;Failed to check if set contains index: index is invalid!&quot;</span>);</div>
+<div class="line"><span class="lineno">  667</span>  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_signed_v&lt;IndexType&gt;) {</div>
+<div class="line"><span class="lineno">  668</span>    <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(index &gt;= 0, <span class="stringliteral">&quot;Failed to check if set contains index: index cannot be negative!&quot;</span>);</div>
+<div class="line"><span class="lineno">  669</span>  }</div>
+<div class="line"><span class="lineno">  670</span>  <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="classhelios_1_1container_1_1SparseSet.html#aa5a9371c12d52bd6706a67b3fbb46c68">size_type</a><span class="keyword">&gt;</span>(index) &lt; sparse_.size() &amp;&amp; sparse_[index] != <a class="code hl_variable" href="classhelios_1_1container_1_1SparseSet.html#aeecfef743d8112ef3e11d8c68ae1ec75">kInvalidDenseIndex</a> &amp;&amp;</div>
+<div class="line"><span class="lineno">  671</span>         <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="classhelios_1_1container_1_1SparseSet.html#aa5a9371c12d52bd6706a67b3fbb46c68">size_type</a><span class="keyword">&gt;</span>(sparse_[index]) &lt; dense_.size() &amp;&amp;</div>
+<div class="line"><span class="lineno">  672</span>         <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="classhelios_1_1container_1_1SparseSet.html#aa5a9371c12d52bd6706a67b3fbb46c68">size_type</a><span class="keyword">&gt;</span>(sparse_[index]) &lt; reverse_map_.size() &amp;&amp; reverse_map_[sparse_[index]] == index;</div>
+<div class="line"><span class="lineno">  673</span>}</div>
+<div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00149">assert.hpp:149</a></div></div>
+<div class="ttc" id="aclasshelios_1_1container_1_1SparseSet_html_a69d2b10608013be84eecbade33131201"><div class="ttname"><a href="classhelios_1_1container_1_1SparseSet.html#a69d2b10608013be84eecbade33131201">helios::container::SparseSet::IsValidIndex</a></div><div class="ttdeci">static constexpr bool IsValidIndex(IndexType index) noexcept</div><div class="ttdoc">Checks if an index value is valid for this sparse set.</div><div class="ttdef"><b>Definition</b> <a href="sparse__set_8hpp_source.html#l00320">sparse_set.hpp:320</a></div></div>
+<div class="ttc" id="aclasshelios_1_1container_1_1SparseSet_html_aa5a9371c12d52bd6706a67b3fbb46c68"><div class="ttname"><a href="classhelios_1_1container_1_1SparseSet.html#aa5a9371c12d52bd6706a67b3fbb46c68">helios::container::SparseSet::size_type</a></div><div class="ttdeci">size_t size_type</div><div class="ttdef"><b>Definition</b> <a href="sparse__set_8hpp_source.html#l00047">sparse_set.hpp:47</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a87f36e81e7dafe5d833a2af348a7dde4" name="a87f36e81e7dafe5d833a2af348a7dde4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87f36e81e7dafe5d833a2af348a7dde4">&#9670;&#160;</a></span>crbegin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html#a2750eebeb4127982c35b0c6a07eb1528">const_reverse_iterator</a> <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::crbegin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00419">419</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  419</span>{ <span class="keywordflow">return</span> dense_.crbegin(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a4c4b6c40caa9fbe41e3a0b5d3e7e1897" name="a4c4b6c40caa9fbe41e3a0b5d3e7e1897"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c4b6c40caa9fbe41e3a0b5d3e7e1897">&#9670;&#160;</a></span>crend()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html#a2750eebeb4127982c35b0c6a07eb1528">const_reverse_iterator</a> <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::crend </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00423">423</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  423</span>{ <span class="keywordflow">return</span> dense_.crend(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a58c39e4175eab327ad14e2bd141ce5b1" name="a58c39e4175eab327ad14e2bd141ce5b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58c39e4175eab327ad14e2bd141ce5b1">&#9670;&#160;</a></span>Data() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr std::span&lt; const T &gt; <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::Data </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns a read-only span of the packed values. </p>
+<p>Provides direct access to the densely packed values in the order they were inserted (with removal gaps filled by later insertions). Time complexity: O(1). Exception safety: No-throw guarantee. </p><dl class="section return"><dt>Returns</dt><dd>A span containing all values in the set </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00407">407</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  407</span>{ <span class="keywordflow">return</span> dense_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="af1ef7fef843e1c8218aebd5d35164beb" name="af1ef7fef843e1c8218aebd5d35164beb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1ef7fef843e1c8218aebd5d35164beb">&#9670;&#160;</a></span>Data() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr std::span&lt; T &gt; <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::Data </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns a writable span of the packed values. </p>
+<p>Provides direct access to the densely packed values in the order they were inserted (with removal gaps filled by later insertions). Time complexity: O(1). Exception safety: No-throw guarantee. </p><dl class="section return"><dt>Returns</dt><dd>A span containing all values in the set </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00397">397</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  397</span>{ <span class="keywordflow">return</span> dense_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aa6556d40648aabd22e4fa6373719cee3" name="aa6556d40648aabd22e4fa6373719cee3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6556d40648aabd22e4fa6373719cee3">&#9670;&#160;</a></span>Emplace()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType , typename Allocator &gt; </div>
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1container_1_1SparseSet.html">SparseSet</a>&lt; T, IndexType, Allocator &gt;::DenseIndexType <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::Emplace </td>
+          <td>(</td>
+          <td class="paramtype">IndexType&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructs a value in-place at the specified index. </p>
+<p>Constructs a value directly in the dense array at the given index. If the index already exists, the existing value is replaced. The sparse array will be resized if necessary to accommodate the index. Time complexity: O(1) amortized (O(index) worst case if sparse array needs resizing). Exception safety: Strong guarantee. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if index is invalid or negative. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>The index to insert at </td></tr>
+    <tr><td class="paramname">args</td><td>Arguments to forward to T's constructor </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The dense index where the value was stored </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::bad_alloc</td><td>If memory allocation fails during sparse array resize or dense array growth </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00496">496</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  497</span>                                     {</div>
+<div class="line"><span class="lineno">  498</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a69d2b10608013be84eecbade33131201">IsValidIndex</a>(index), <span class="stringliteral">&quot;Failed to emplace value: index is invalid!&quot;</span>);</div>
+<div class="line"><span class="lineno">  499</span>  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_signed_v&lt;IndexType&gt;) {</div>
+<div class="line"><span class="lineno">  500</span>    <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(index &gt;= 0, <span class="stringliteral">&quot;Failed to emplace value: index cannot be negative!&quot;</span>);</div>
+<div class="line"><span class="lineno">  501</span>  }</div>
+<div class="line"><span class="lineno">  502</span> </div>
+<div class="line"><span class="lineno">  503</span>  <span class="comment">// Check if index already exists and replace the value</span></div>
+<div class="line"><span class="lineno">  504</span>  <span class="keywordflow">if</span> (<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a3889d6f69f2ce7fb7532fbf40c0d9047">Contains</a>(index)) {</div>
+<div class="line"><span class="lineno">  505</span>    <span class="keyword">const</span> DenseIndexType dense_index = sparse_[index];</div>
+<div class="line"><span class="lineno">  506</span>    dense_[dense_index] = T(std::forward&lt;Args&gt;(args)...);</div>
+<div class="line"><span class="lineno">  507</span>    <span class="keywordflow">return</span> dense_index;</div>
+<div class="line"><span class="lineno">  508</span>  }</div>
+<div class="line"><span class="lineno">  509</span> </div>
+<div class="line"><span class="lineno">  510</span>  <span class="comment">// Ensure sparse array is large enough</span></div>
+<div class="line"><span class="lineno">  511</span>  <span class="keywordflow">if</span> (<span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="classhelios_1_1container_1_1SparseSet.html#aa5a9371c12d52bd6706a67b3fbb46c68">size_type</a><span class="keyword">&gt;</span>(index) &gt;= sparse_.size()) {</div>
+<div class="line"><span class="lineno">  512</span>    sparse_.resize(<span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="classhelios_1_1container_1_1SparseSet.html#aa5a9371c12d52bd6706a67b3fbb46c68">size_type</a><span class="keyword">&gt;</span>(index) + 1, <a class="code hl_variable" href="classhelios_1_1container_1_1SparseSet.html#aeecfef743d8112ef3e11d8c68ae1ec75">kInvalidDenseIndex</a>);</div>
+<div class="line"><span class="lineno">  513</span>  }</div>
+<div class="line"><span class="lineno">  514</span> </div>
+<div class="line"><span class="lineno">  515</span>  <span class="keyword">const</span> <span class="keyword">auto</span> dense_index = <span class="keyword">static_cast&lt;</span>DenseIndexType<span class="keyword">&gt;</span>(dense_.size());</div>
+<div class="line"><span class="lineno">  516</span>  sparse_[index] = dense_index;</div>
+<div class="line"><span class="lineno">  517</span>  dense_.emplace_back(std::forward&lt;Args&gt;(args)...);</div>
+<div class="line"><span class="lineno">  518</span>  reverse_map_.push_back(index);</div>
+<div class="line"><span class="lineno">  519</span> </div>
+<div class="line"><span class="lineno">  520</span>  <span class="keywordflow">return</span> dense_index;</div>
+<div class="line"><span class="lineno">  521</span>}</div>
+<div class="ttc" id="aclasshelios_1_1container_1_1SparseSet_html_a3889d6f69f2ce7fb7532fbf40c0d9047"><div class="ttname"><a href="classhelios_1_1container_1_1SparseSet.html#a3889d6f69f2ce7fb7532fbf40c0d9047">helios::container::SparseSet::Contains</a></div><div class="ttdeci">constexpr bool Contains(IndexType index) const noexcept</div><div class="ttdoc">Checks if an index exists in the set.</div><div class="ttdef"><b>Definition</b> <a href="sparse__set_8hpp_source.html#l00665">sparse_set.hpp:665</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a7a3091c506374dbd5a3e40f7a240d438" name="a7a3091c506374dbd5a3e40f7a240d438"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a3091c506374dbd5a3e40f7a240d438">&#9670;&#160;</a></span>Empty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::Empty </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if the set is empty. </p>
+<p>Returns true if no values are stored in the set. Time complexity: O(1). Exception safety: No-throw guarantee. </p><dl class="section return"><dt>Returns</dt><dd>True if the set contains no elements, false otherwise </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00310">310</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  310</span>{ <span class="keywordflow">return</span> dense_.empty(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a7bdc0a02014b34e48853b57f43f6cbbb" name="a7bdc0a02014b34e48853b57f43f6cbbb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7bdc0a02014b34e48853b57f43f6cbbb">&#9670;&#160;</a></span>end() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html#abb8374bafff14807860cb46e2c818c94">const_iterator</a> <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::end </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00414">414</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  414</span>{ <span class="keywordflow">return</span> dense_.end(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a3e3cc1494e6024e4970da2769c6eee9c" name="a3e3cc1494e6024e4970da2769c6eee9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e3cc1494e6024e4970da2769c6eee9c">&#9670;&#160;</a></span>end() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html#a7b8bf4e7a3848acb11b7e5fe2dbafd0e">iterator</a> <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::end </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00413">413</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  413</span>{ <span class="keywordflow">return</span> dense_.end(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a0790134b8d0cd169edee7210c68f921e" name="a0790134b8d0cd169edee7210c68f921e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0790134b8d0cd169edee7210c68f921e">&#9670;&#160;</a></span>Get() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType , typename Allocator &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr const T &amp; <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::Get </td>
+          <td>(</td>
+          <td class="paramtype">IndexType&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the value at the specified index (const version). </p>
+<p>Returns a const reference to the value stored at the given index. Time complexity: O(1). Exception safety: No-throw guarantee. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if index is invalid, negative, or doesn't exist. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>The index to access </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Const reference to the value at the specified index </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00584">584</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  584</span>                                                                                         {</div>
+<div class="line"><span class="lineno">  585</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a69d2b10608013be84eecbade33131201">IsValidIndex</a>(index), <span class="stringliteral">&quot;Failed to get value: index is invalid!&quot;</span>);</div>
+<div class="line"><span class="lineno">  586</span>  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_signed_v&lt;IndexType&gt;) {</div>
+<div class="line"><span class="lineno">  587</span>    <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(index &gt;= 0, <span class="stringliteral">&quot;Failed to get value: index cannot be negative!&quot;</span>);</div>
+<div class="line"><span class="lineno">  588</span>  }</div>
+<div class="line"><span class="lineno">  589</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a3889d6f69f2ce7fb7532fbf40c0d9047">Contains</a>(index), <span class="stringliteral">&quot;Failed to get value: index does not exist!&quot;</span>);</div>
+<div class="line"><span class="lineno">  590</span>  <span class="keywordflow">return</span> dense_[sparse_[index]];</div>
+<div class="line"><span class="lineno">  591</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a74346075ca174f07b3ba96f325701d7f" name="a74346075ca174f07b3ba96f325701d7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74346075ca174f07b3ba96f325701d7f">&#9670;&#160;</a></span>Get() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType , typename Allocator &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr T &amp; <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::Get </td>
+          <td>(</td>
+          <td class="paramtype">IndexType&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the value at the specified index. </p>
+<p>Returns a reference to the value stored at the given index. Time complexity: O(1). Exception safety: No-throw guarantee. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if index is invalid, negative, or doesn't exist. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>The index to access </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to the value at the specified index </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00574">574</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  574</span>                                                                             {</div>
+<div class="line"><span class="lineno">  575</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a69d2b10608013be84eecbade33131201">IsValidIndex</a>(index), <span class="stringliteral">&quot;Failed to get value: index is invalid!&quot;</span>);</div>
+<div class="line"><span class="lineno">  576</span>  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_signed_v&lt;IndexType&gt;) {</div>
+<div class="line"><span class="lineno">  577</span>    <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(index &gt;= 0, <span class="stringliteral">&quot;Failed to get value: index cannot be negative!&quot;</span>);</div>
+<div class="line"><span class="lineno">  578</span>  }</div>
+<div class="line"><span class="lineno">  579</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a3889d6f69f2ce7fb7532fbf40c0d9047">Contains</a>(index), <span class="stringliteral">&quot;Failed to get value: index does not exist!&quot;</span>);</div>
+<div class="line"><span class="lineno">  580</span>  <span class="keywordflow">return</span> dense_[sparse_[index]];</div>
+<div class="line"><span class="lineno">  581</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a73173209ca75d834188a9084017ef7cd" name="a73173209ca75d834188a9084017ef7cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73173209ca75d834188a9084017ef7cd">&#9670;&#160;</a></span>GetAllocator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html#ab9db485b05778e11749dd3c0ed9cc23f">allocator_type</a> <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::GetAllocator </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the allocator associated with the container. </p>
+<p>Gets the allocator used for the dense array. Time complexity: O(1). Exception safety: No-throw guarantee. </p><dl class="section return"><dt>Returns</dt><dd>Copy of the allocator </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00340">340</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  340</span>{ <span class="keywordflow">return</span> dense_.get_allocator(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a2f27b6face55f29fa3f694e03f755ecd" name="a2f27b6face55f29fa3f694e03f755ecd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f27b6face55f29fa3f694e03f755ecd">&#9670;&#160;</a></span>GetByDenseIndex() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType , typename Allocator &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr const T &amp; <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::GetByDenseIndex </td>
+          <td>(</td>
+          <td class="paramtype">DenseIndexType&#160;</td>
+          <td class="paramname"><em>dense_index</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the value at the specified dense index (const version). </p>
+<p>Returns a const reference to the value stored at the given dense position. Time complexity: O(1). Exception safety: No-throw guarantee. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if dense_index is invalid, negative, or out of bounds. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dense_index</td><td>The dense position to access </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Const reference to the value at the specified dense position </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00604">604</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  604</span>                                                                                                                {</div>
+<div class="line"><span class="lineno">  605</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(dense_index != <a class="code hl_variable" href="classhelios_1_1container_1_1SparseSet.html#aeecfef743d8112ef3e11d8c68ae1ec75">kInvalidDenseIndex</a>, <span class="stringliteral">&quot;Failed to get value: dense_index is invalid!&quot;</span>);</div>
+<div class="line"><span class="lineno">  606</span>  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_signed_v&lt;DenseIndexType&gt;) {</div>
+<div class="line"><span class="lineno">  607</span>    <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(dense_index &gt;= 0, <span class="stringliteral">&quot;Failed to get value: dense_index cannot be negative!&quot;</span>);</div>
+<div class="line"><span class="lineno">  608</span>  }</div>
+<div class="line"><span class="lineno">  609</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(dense_index &lt; dense_.size(), <span class="stringliteral">&quot;Failed to get value: dense_index is out of bounds!&quot;</span>);</div>
+<div class="line"><span class="lineno">  610</span>  <span class="keywordflow">return</span> dense_[dense_index];</div>
+<div class="line"><span class="lineno">  611</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a0408d9ca52a743f48bb5f1b9cfdb3d39" name="a0408d9ca52a743f48bb5f1b9cfdb3d39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0408d9ca52a743f48bb5f1b9cfdb3d39">&#9670;&#160;</a></span>GetByDenseIndex() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType , typename Allocator &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr T &amp; <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::GetByDenseIndex </td>
+          <td>(</td>
+          <td class="paramtype">DenseIndexType&#160;</td>
+          <td class="paramname"><em>dense_index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the value at the specified dense index. </p>
+<p>Returns a reference to the value stored at the given dense position. Time complexity: O(1). Exception safety: No-throw guarantee. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if dense_index is invalid, negative, or out of bounds. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dense_index</td><td>The dense position to access </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to the value at the specified dense position </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00594">594</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  594</span>                                                                                                    {</div>
+<div class="line"><span class="lineno">  595</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(dense_index != <a class="code hl_variable" href="classhelios_1_1container_1_1SparseSet.html#aeecfef743d8112ef3e11d8c68ae1ec75">kInvalidDenseIndex</a>, <span class="stringliteral">&quot;Failed to get value: dense_index is invalid!&quot;</span>);</div>
+<div class="line"><span class="lineno">  596</span>  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_signed_v&lt;DenseIndexType&gt;) {</div>
+<div class="line"><span class="lineno">  597</span>    <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(dense_index &gt;= 0, <span class="stringliteral">&quot;Failed to get value: dense_index cannot be negative!&quot;</span>);</div>
+<div class="line"><span class="lineno">  598</span>  }</div>
+<div class="line"><span class="lineno">  599</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(dense_index &lt; dense_.size(), <span class="stringliteral">&quot;Failed to get value: dense_index is out of bounds!&quot;</span>);</div>
+<div class="line"><span class="lineno">  600</span>  <span class="keywordflow">return</span> dense_[dense_index];</div>
+<div class="line"><span class="lineno">  601</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a654d237d02c5c4977cbb909f6b69f199" name="a654d237d02c5c4977cbb909f6b69f199"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a654d237d02c5c4977cbb909f6b69f199">&#9670;&#160;</a></span>GetDenseIndex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType , typename Allocator &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html">SparseSet</a>&lt; T, IndexType, Allocator &gt;::DenseIndexType <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::GetDenseIndex </td>
+          <td>(</td>
+          <td class="paramtype">IndexType&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the dense index for a given index. </p>
+<p>Returns the position of the value in the dense array for the specified index. Time complexity: O(1). Exception safety: No-throw guarantee. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if index is invalid, negative, or doesn't exist. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>The index to look up </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The dense index </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00676">676</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  677</span>                                    {</div>
+<div class="line"><span class="lineno">  678</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a69d2b10608013be84eecbade33131201">IsValidIndex</a>(index), <span class="stringliteral">&quot;Failed to get dense index: index is invalid!&quot;</span>);</div>
+<div class="line"><span class="lineno">  679</span>  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_signed_v&lt;IndexType&gt;) {</div>
+<div class="line"><span class="lineno">  680</span>    <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(index &gt;= 0, <span class="stringliteral">&quot;Failed to get dense index: index cannot be negative!&quot;</span>);</div>
+<div class="line"><span class="lineno">  681</span>  }</div>
+<div class="line"><span class="lineno">  682</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a3889d6f69f2ce7fb7532fbf40c0d9047">Contains</a>(index), <span class="stringliteral">&quot;Failed to get dense index: index does not exist!&quot;</span>);</div>
+<div class="line"><span class="lineno">  683</span>  <span class="keywordflow">return</span> sparse_[index];</div>
+<div class="line"><span class="lineno">  684</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a9d74d74a4b7b0ee85985ae2967f53f25" name="a9d74d74a4b7b0ee85985ae2967f53f25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d74d74a4b7b0ee85985ae2967f53f25">&#9670;&#160;</a></span>Insert() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType , typename Allocator &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1container_1_1SparseSet.html">SparseSet</a>&lt; T, IndexType, Allocator &gt;::DenseIndexType <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::Insert </td>
+          <td>(</td>
+          <td class="paramtype">IndexType&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Inserts a value at the specified index (copy version). </p>
+<p>Adds the specified value to the set at the given index if it's not already present. If the index already exists, the existing value is replaced. The sparse array will be resized if necessary to accommodate the index. Time complexity: O(1) amortized (O(index) worst case if sparse array needs resizing). Exception safety: Strong guarantee. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if index is invalid or negative </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>The index to insert at </td></tr>
+    <tr><td class="paramname">value</td><td>The value to move insert </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The dense index where the value was stored </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::bad_alloc</td><td>If memory allocation fails during sparse array resize or dense array growth </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00439">439</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  440</span>                                     {</div>
+<div class="line"><span class="lineno">  441</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a69d2b10608013be84eecbade33131201">IsValidIndex</a>(index), <span class="stringliteral">&quot;Failed to insert value: index is invalid!&quot;</span>);</div>
+<div class="line"><span class="lineno">  442</span>  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_signed_v&lt;IndexType&gt;) {</div>
+<div class="line"><span class="lineno">  443</span>    <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(index &gt;= 0, <span class="stringliteral">&quot;Failed to insert value: index cannot be negative!&quot;</span>);</div>
+<div class="line"><span class="lineno">  444</span>  }</div>
+<div class="line"><span class="lineno">  445</span> </div>
+<div class="line"><span class="lineno">  446</span>  <span class="comment">// Check if index already exists and replace the value</span></div>
+<div class="line"><span class="lineno">  447</span>  <span class="keywordflow">if</span> (<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a3889d6f69f2ce7fb7532fbf40c0d9047">Contains</a>(index)) {</div>
+<div class="line"><span class="lineno">  448</span>    <span class="keyword">const</span> DenseIndexType dense_index = sparse_[index];</div>
+<div class="line"><span class="lineno">  449</span>    dense_[dense_index] = value;</div>
+<div class="line"><span class="lineno">  450</span>    <span class="keywordflow">return</span> dense_index;</div>
+<div class="line"><span class="lineno">  451</span>  }</div>
+<div class="line"><span class="lineno">  452</span> </div>
+<div class="line"><span class="lineno">  453</span>  <span class="comment">// Ensure sparse array can accommodate this index</span></div>
+<div class="line"><span class="lineno">  454</span>  <span class="keywordflow">if</span> (index &gt;= sparse_.size()) {</div>
+<div class="line"><span class="lineno">  455</span>    sparse_.resize(index + 1, <a class="code hl_variable" href="classhelios_1_1container_1_1SparseSet.html#aeecfef743d8112ef3e11d8c68ae1ec75">kInvalidDenseIndex</a>);</div>
+<div class="line"><span class="lineno">  456</span>  }</div>
+<div class="line"><span class="lineno">  457</span> </div>
+<div class="line"><span class="lineno">  458</span>  <span class="keyword">const</span> <span class="keyword">auto</span> dense_index = <span class="keyword">static_cast&lt;</span>DenseIndexType<span class="keyword">&gt;</span>(dense_.size());</div>
+<div class="line"><span class="lineno">  459</span>  dense_.push_back(value);</div>
+<div class="line"><span class="lineno">  460</span>  reverse_map_.push_back(index);</div>
+<div class="line"><span class="lineno">  461</span>  sparse_[index] = dense_index;</div>
+<div class="line"><span class="lineno">  462</span> </div>
+<div class="line"><span class="lineno">  463</span>  <span class="keywordflow">return</span> dense_index;</div>
+<div class="line"><span class="lineno">  464</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ab7d0f0959f52ae6c7337be10faa88c8d" name="ab7d0f0959f52ae6c7337be10faa88c8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7d0f0959f52ae6c7337be10faa88c8d">&#9670;&#160;</a></span>Insert() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType , typename Allocator &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1container_1_1SparseSet.html">SparseSet</a>&lt; T, IndexType, Allocator &gt;::DenseIndexType <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::Insert </td>
+          <td>(</td>
+          <td class="paramtype">IndexType&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T &amp;&amp;&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Inserts a value at the specified index (move version). </p>
+<p>Adds the specified value to the set at the given index if it's not already present. If the index already exists, the existing value is replaced. The sparse array will be resized if necessary to accommodate the index. Time complexity: O(1) amortized (O(index) worst case if sparse array needs resizing). Exception safety: Strong guarantee. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if index is invalid or negative </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>The index to insert at </td></tr>
+    <tr><td class="paramname">value</td><td>The value to copy insert </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The dense index where the value was stored </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::bad_alloc</td><td>If memory allocation fails during sparse array resize or dense array growth </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00467">467</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  468</span>                                {</div>
+<div class="line"><span class="lineno">  469</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a69d2b10608013be84eecbade33131201">IsValidIndex</a>(index), <span class="stringliteral">&quot;Failed to insert value: index is invalid!&quot;</span>);</div>
+<div class="line"><span class="lineno">  470</span>  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_signed_v&lt;IndexType&gt;) {</div>
+<div class="line"><span class="lineno">  471</span>    <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(index &gt;= 0, <span class="stringliteral">&quot;Failed to insert value: index cannot be negative!&quot;</span>);</div>
+<div class="line"><span class="lineno">  472</span>  }</div>
+<div class="line"><span class="lineno">  473</span> </div>
+<div class="line"><span class="lineno">  474</span>  <span class="comment">// Check if index already exists and replace the value</span></div>
+<div class="line"><span class="lineno">  475</span>  <span class="keywordflow">if</span> (<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a3889d6f69f2ce7fb7532fbf40c0d9047">Contains</a>(index)) {</div>
+<div class="line"><span class="lineno">  476</span>    <span class="keyword">const</span> DenseIndexType dense_index = sparse_[index];</div>
+<div class="line"><span class="lineno">  477</span>    dense_[dense_index] = std::move(value);</div>
+<div class="line"><span class="lineno">  478</span>    <span class="keywordflow">return</span> dense_index;</div>
+<div class="line"><span class="lineno">  479</span>  }</div>
+<div class="line"><span class="lineno">  480</span> </div>
+<div class="line"><span class="lineno">  481</span>  <span class="comment">// Ensure sparse array is large enough</span></div>
+<div class="line"><span class="lineno">  482</span>  <span class="keywordflow">if</span> (<span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="classhelios_1_1container_1_1SparseSet.html#aa5a9371c12d52bd6706a67b3fbb46c68">size_type</a><span class="keyword">&gt;</span>(index) &gt;= sparse_.size()) {</div>
+<div class="line"><span class="lineno">  483</span>    sparse_.resize(<span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="classhelios_1_1container_1_1SparseSet.html#aa5a9371c12d52bd6706a67b3fbb46c68">size_type</a><span class="keyword">&gt;</span>(index) + 1, <a class="code hl_variable" href="classhelios_1_1container_1_1SparseSet.html#aeecfef743d8112ef3e11d8c68ae1ec75">kInvalidDenseIndex</a>);</div>
+<div class="line"><span class="lineno">  484</span>  }</div>
+<div class="line"><span class="lineno">  485</span> </div>
+<div class="line"><span class="lineno">  486</span>  <span class="keyword">const</span> <span class="keyword">auto</span> dense_index = <span class="keyword">static_cast&lt;</span>DenseIndexType<span class="keyword">&gt;</span>(dense_.size());</div>
+<div class="line"><span class="lineno">  487</span>  sparse_[index] = dense_index;</div>
+<div class="line"><span class="lineno">  488</span>  dense_.push_back(std::move(value));</div>
+<div class="line"><span class="lineno">  489</span>  reverse_map_.push_back(index);</div>
+<div class="line"><span class="lineno">  490</span> </div>
+<div class="line"><span class="lineno">  491</span>  <span class="keywordflow">return</span> dense_index;</div>
+<div class="line"><span class="lineno">  492</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a69d2b10608013be84eecbade33131201" name="a69d2b10608013be84eecbade33131201"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69d2b10608013be84eecbade33131201">&#9670;&#160;</a></span>IsValidIndex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static constexpr bool <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::IsValidIndex </td>
+          <td>(</td>
+          <td class="paramtype">IndexType&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if an index value is valid for this sparse set. </p>
+<p>Returns true if the index is not the reserved invalid value. Time complexity: O(1). Exception safety: No-throw guarantee. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>The index to validate </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the index is valid, false if it's the reserved invalid value </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00320">320</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  320</span>{ <span class="keywordflow">return</span> index != <a class="code hl_variable" href="classhelios_1_1container_1_1SparseSet.html#aeb51474b7e5fcd4bf0949f10b0005c99">kInvalidIndex</a>; }</div>
+<div class="ttc" id="aclasshelios_1_1container_1_1SparseSet_html_aeb51474b7e5fcd4bf0949f10b0005c99"><div class="ttname"><a href="classhelios_1_1container_1_1SparseSet.html#aeb51474b7e5fcd4bf0949f10b0005c99">helios::container::SparseSet::kInvalidIndex</a></div><div class="ttdeci">static constexpr IndexType kInvalidIndex</div><div class="ttdef"><b>Definition</b> <a href="sparse__set_8hpp_source.html#l00062">sparse_set.hpp:62</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a4ce5a254ed84812239d7f908fbc26e24" name="a4ce5a254ed84812239d7f908fbc26e24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ce5a254ed84812239d7f908fbc26e24">&#9670;&#160;</a></span>MaxSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html#aa5a9371c12d52bd6706a67b3fbb46c68">size_type</a> <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::MaxSize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the maximum possible size of the set. </p>
+<p>Returns the theoretical maximum number of elements the set can hold. Time complexity: O(1). Exception safety: No-throw guarantee. </p><dl class="section return"><dt>Returns</dt><dd>The maximum possible size </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00369">369</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  369</span>{ <span class="keywordflow">return</span> dense_.max_size(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a9e2695eee456c9f992a78808ad516edd" name="a9e2695eee456c9f992a78808ad516edd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e2695eee456c9f992a78808ad516edd">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html">SparseSet</a> &amp; <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1container_1_1SparseSet.html">SparseSet</a>&lt; T, IndexType, Allocator &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Copy assignment operator. </p>
+<p>Assigns the contents of another sparse set to this one. Exception safety: Strong guarantee. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>The sparse set to copy from </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to this sparse set </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">May</td><td>throw if T copy assignment or memory allocation fails </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a9257cb87a47ee28145eac28b1696fbcc" name="a9257cb87a47ee28145eac28b1696fbcc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9257cb87a47ee28145eac28b1696fbcc">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html">SparseSet</a> &amp; <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1container_1_1SparseSet.html">SparseSet</a>&lt; T, IndexType, Allocator &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Move assignment operator. </p>
+<p>Transfers ownership of resources from other sparse set. Exception safety: No-throw guarantee. </p><dl class="section return"><dt>Returns</dt><dd>Reference to this sparse set </dd></dl>
+
+</div>
+</div>
+<a id="adc5c56bcaa1031cdf34be813db776a21" name="adc5c56bcaa1031cdf34be813db776a21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc5c56bcaa1031cdf34be813db776a21">&#9670;&#160;</a></span>operator==()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType , typename Allocator &gt; <br />
+requires std::equality_comparable&lt;T&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::operator== </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1container_1_1SparseSet.html">SparseSet</a>&lt; T, IndexType, Allocator &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if two sparse sets are equal. </p>
+<p>Two sparse sets are equal if they contain the same index-value pairs. Time complexity: O(<a class="el" href="classhelios_1_1container_1_1SparseSet.html#ae13bc023c7ed9b19eaf7ecff5e479219" title="Returns the number of values in the set.">Size()</a> + other.Size()). Exception safety: No-throw guarantee. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>The sparse set to compare with </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if both sets contain the same index-value pairs </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00647">647</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  649</span>{</div>
+<div class="line"><span class="lineno">  650</span>  <span class="keywordflow">if</span> (<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#ae13bc023c7ed9b19eaf7ecff5e479219">Size</a>() != other.Size()) {</div>
+<div class="line"><span class="lineno">  651</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  652</span>  }</div>
+<div class="line"><span class="lineno">  653</span> </div>
+<div class="line"><span class="lineno">  654</span>  <span class="keywordflow">for</span> (<a class="code hl_typedef" href="classhelios_1_1container_1_1SparseSet.html#aa5a9371c12d52bd6706a67b3fbb46c68">size_type</a> i = 0; i &lt; dense_.size(); ++i) {</div>
+<div class="line"><span class="lineno">  655</span>    <span class="keyword">const</span> IndexType index = reverse_map_[i];</div>
+<div class="line"><span class="lineno">  656</span>    <span class="keywordflow">if</span> (!other.Contains(index) || dense_[i] != other.Get(index)) {</div>
+<div class="line"><span class="lineno">  657</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  658</span>    }</div>
+<div class="line"><span class="lineno">  659</span>  }</div>
+<div class="line"><span class="lineno">  660</span> </div>
+<div class="line"><span class="lineno">  661</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  662</span>}</div>
+<div class="ttc" id="aclasshelios_1_1container_1_1SparseSet_html_ae13bc023c7ed9b19eaf7ecff5e479219"><div class="ttname"><a href="classhelios_1_1container_1_1SparseSet.html#ae13bc023c7ed9b19eaf7ecff5e479219">helios::container::SparseSet::Size</a></div><div class="ttdeci">constexpr size_type Size() const noexcept</div><div class="ttdoc">Returns the number of values in the set.</div><div class="ttdef"><b>Definition</b> <a href="sparse__set_8hpp_source.html#l00360">sparse_set.hpp:360</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a5d5d9dd3e5a55acf1ee1c852bf97d489" name="a5d5d9dd3e5a55acf1ee1c852bf97d489"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d5d9dd3e5a55acf1ee1c852bf97d489">&#9670;&#160;</a></span>rbegin() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html#a2750eebeb4127982c35b0c6a07eb1528">const_reverse_iterator</a> <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::rbegin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00418">418</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  418</span>{ <span class="keywordflow">return</span> dense_.rbegin(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a9f4a8e6eadd41c7f995a996ba8c55ca8" name="a9f4a8e6eadd41c7f995a996ba8c55ca8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f4a8e6eadd41c7f995a996ba8c55ca8">&#9670;&#160;</a></span>rbegin() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html#ac9ae267e265195efbd356861ba31662d">reverse_iterator</a> <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::rbegin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00417">417</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  417</span>{ <span class="keywordflow">return</span> dense_.rbegin(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ad1350dfa4e66883ca80a97ac64e6fbd1" name="ad1350dfa4e66883ca80a97ac64e6fbd1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1350dfa4e66883ca80a97ac64e6fbd1">&#9670;&#160;</a></span>Remove()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType , typename Allocator &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::Remove </td>
+          <td>(</td>
+          <td class="paramtype">IndexType&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Removes an index from the set. </p>
+<p>Removes the specified index from the set using swap-and-pop technique to maintain dense packing. The last element in the dense array is moved to fill the gap left by the removed element. Time complexity: O(1). Exception safety: No-throw guarantee. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if index is invalid, negative, or doesn't exist. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>The index to remove </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00524">524</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  524</span>                                                                               {</div>
+<div class="line"><span class="lineno">  525</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a69d2b10608013be84eecbade33131201">IsValidIndex</a>(index), <span class="stringliteral">&quot;Failed to remove value: index is invalid!&quot;</span>);</div>
+<div class="line"><span class="lineno">  526</span>  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_signed_v&lt;IndexType&gt;) {</div>
+<div class="line"><span class="lineno">  527</span>    <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(index &gt;= 0, <span class="stringliteral">&quot;Failed to remove value: index cannot be negative!&quot;</span>);</div>
+<div class="line"><span class="lineno">  528</span>  }</div>
+<div class="line"><span class="lineno">  529</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a3889d6f69f2ce7fb7532fbf40c0d9047">Contains</a>(index), <span class="stringliteral">&quot;Failed to remove value: index does not exist!&quot;</span>);</div>
+<div class="line"><span class="lineno">  530</span> </div>
+<div class="line"><span class="lineno">  531</span>  <span class="keyword">const</span> DenseIndexType dense_index = sparse_[index];</div>
+<div class="line"><span class="lineno">  532</span>  <span class="keyword">const</span> <span class="keyword">auto</span> last_dense_index = <span class="keyword">static_cast&lt;</span>DenseIndexType<span class="keyword">&gt;</span>(dense_.size() - 1);</div>
+<div class="line"><span class="lineno">  533</span> </div>
+<div class="line"><span class="lineno">  534</span>  <span class="keywordflow">if</span> (dense_index != last_dense_index) {</div>
+<div class="line"><span class="lineno">  535</span>    <span class="comment">// Swap with last element to maintain dense packing</span></div>
+<div class="line"><span class="lineno">  536</span>    <span class="keyword">const</span> IndexType last_index = reverse_map_[last_dense_index];</div>
+<div class="line"><span class="lineno">  537</span>    dense_[dense_index] = std::move(dense_[last_dense_index]);</div>
+<div class="line"><span class="lineno">  538</span>    reverse_map_[dense_index] = last_index;</div>
+<div class="line"><span class="lineno">  539</span>    sparse_[last_index] = dense_index;</div>
+<div class="line"><span class="lineno">  540</span>  }</div>
+<div class="line"><span class="lineno">  541</span> </div>
+<div class="line"><span class="lineno">  542</span>  dense_.pop_back();</div>
+<div class="line"><span class="lineno">  543</span>  reverse_map_.pop_back();</div>
+<div class="line"><span class="lineno">  544</span>  sparse_[index] = <a class="code hl_variable" href="classhelios_1_1container_1_1SparseSet.html#aeecfef743d8112ef3e11d8c68ae1ec75">kInvalidDenseIndex</a>;</div>
+<div class="line"><span class="lineno">  545</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a86adb83f1627e670a3fb4ae17ea3a35d" name="a86adb83f1627e670a3fb4ae17ea3a35d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86adb83f1627e670a3fb4ae17ea3a35d">&#9670;&#160;</a></span>rend() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html#a2750eebeb4127982c35b0c6a07eb1528">const_reverse_iterator</a> <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::rend </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00422">422</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  422</span>{ <span class="keywordflow">return</span> dense_.rend(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a6693459ab011de70d678513d5b8c838b" name="a6693459ab011de70d678513d5b8c838b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6693459ab011de70d678513d5b8c838b">&#9670;&#160;</a></span>rend() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html#ac9ae267e265195efbd356861ba31662d">reverse_iterator</a> <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::rend </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00421">421</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  421</span>{ <span class="keywordflow">return</span> dense_.rend(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a4082fe5c7e5a7f11b569a99f03ab22c7" name="a4082fe5c7e5a7f11b569a99f03ab22c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4082fe5c7e5a7f11b569a99f03ab22c7">&#9670;&#160;</a></span>Reserve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::Reserve </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1container_1_1SparseSet.html#aa5a9371c12d52bd6706a67b3fbb46c68">size_type</a>&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reserves space for at least n elements in the dense array. </p>
+<p>Ensures that the dense array can hold at least n elements without triggering a reallocation. Does not affect the sparse array capacity. Time complexity: O(1) if no reallocation, O(Size()) if reallocation occurs. Exception safety: Strong guarantee. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if n is negative. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>The minimum capacity to reserve </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::bad_alloc</td><td>If memory allocation fails </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00197">197</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  197</span>{ dense_.reserve(n); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a28d554f653bc1b2b4f5936c0cd76067e" name="a28d554f653bc1b2b4f5936c0cd76067e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28d554f653bc1b2b4f5936c0cd76067e">&#9670;&#160;</a></span>ReserveSparse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType , typename Allocator &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::ReserveSparse </td>
+          <td>(</td>
+          <td class="paramtype">IndexType&#160;</td>
+          <td class="paramname"><em>max_index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reserves space for indices up to max_index in the sparse array. </p>
+<p>Ensures that the sparse array can accommodate indices up to max_index without triggering a reallocation. Time complexity: O(1) if no reallocation, O(max_index) if reallocation occurs. Exception safety: Strong guarantee. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if max_index is invalid or negative. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">max_index</td><td>The maximum index to accommodate </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::bad_alloc</td><td>If memory allocation fails </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00548">548</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  548</span>                                                                                 {</div>
+<div class="line"><span class="lineno">  549</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a69d2b10608013be84eecbade33131201">IsValidIndex</a>(max_index), <span class="stringliteral">&quot;Failed to reserve sparse: max_index is invalid!&quot;</span>);</div>
+<div class="line"><span class="lineno">  550</span>  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_signed_v&lt;IndexType&gt;) {</div>
+<div class="line"><span class="lineno">  551</span>    <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(max_index &gt;= 0, <span class="stringliteral">&quot;Failed to reserve sparse: max_index cannot be negative!&quot;</span>);</div>
+<div class="line"><span class="lineno">  552</span>  }</div>
+<div class="line"><span class="lineno">  553</span>  <span class="keywordflow">if</span> (<span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="classhelios_1_1container_1_1SparseSet.html#aa5a9371c12d52bd6706a67b3fbb46c68">size_type</a><span class="keyword">&gt;</span>(max_index) + 1 &gt; sparse_.size()) {</div>
+<div class="line"><span class="lineno">  554</span>    sparse_.resize(<span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="classhelios_1_1container_1_1SparseSet.html#aa5a9371c12d52bd6706a67b3fbb46c68">size_type</a><span class="keyword">&gt;</span>(max_index) + 1, <a class="code hl_variable" href="classhelios_1_1container_1_1SparseSet.html#aeecfef743d8112ef3e11d8c68ae1ec75">kInvalidDenseIndex</a>);</div>
+<div class="line"><span class="lineno">  555</span>  }</div>
+<div class="line"><span class="lineno">  556</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a32e4442e60c8589833245d3f791da54b" name="a32e4442e60c8589833245d3f791da54b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32e4442e60c8589833245d3f791da54b">&#9670;&#160;</a></span>ShrinkToFit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType , typename Allocator &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::ShrinkToFit </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Shrinks the capacity of both arrays to fit their current size. </p>
+<p>Reduces memory usage by shrinking both the dense and sparse arrays to their minimum required size. Time complexity: O(<a class="el" href="classhelios_1_1container_1_1SparseSet.html#ae13bc023c7ed9b19eaf7ecff5e479219" title="Returns the number of values in the set.">Size()</a> + SparseSize()). Exception safety: Strong guarantee. </p><dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::bad_alloc</td><td>If memory allocation fails during shrinking </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00559">559</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  559</span>                                                            {</div>
+<div class="line"><span class="lineno">  560</span>  dense_.shrink_to_fit();</div>
+<div class="line"><span class="lineno">  561</span>  reverse_map_.shrink_to_fit();</div>
+<div class="line"><span class="lineno">  562</span> </div>
+<div class="line"><span class="lineno">  563</span>  <span class="comment">// Find the maximum index in use to determine minimum sparse size needed</span></div>
+<div class="line"><span class="lineno">  564</span>  <span class="keywordflow">if</span> (reverse_map_.empty()) {</div>
+<div class="line"><span class="lineno">  565</span>    sparse_.clear();</div>
+<div class="line"><span class="lineno">  566</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  567</span>    <span class="keyword">const</span> IndexType max_index = *std::ranges::max_element(reverse_map_);</div>
+<div class="line"><span class="lineno">  568</span>    sparse_.resize(<span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="classhelios_1_1container_1_1SparseSet.html#aa5a9371c12d52bd6706a67b3fbb46c68">size_type</a><span class="keyword">&gt;</span>(max_index) + 1);</div>
+<div class="line"><span class="lineno">  569</span>  }</div>
+<div class="line"><span class="lineno">  570</span>  sparse_.shrink_to_fit();</div>
+<div class="line"><span class="lineno">  571</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ae13bc023c7ed9b19eaf7ecff5e479219" name="ae13bc023c7ed9b19eaf7ecff5e479219"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae13bc023c7ed9b19eaf7ecff5e479219">&#9670;&#160;</a></span>Size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html#aa5a9371c12d52bd6706a67b3fbb46c68">size_type</a> <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::Size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the number of values in the set. </p>
+<p>Returns the count of values currently stored in the set. Time complexity: O(1). Exception safety: No-throw guarantee. </p><dl class="section return"><dt>Returns</dt><dd>The number of values in the set </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00360">360</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  360</span>{ <span class="keywordflow">return</span> dense_.size(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ab217f9afae5fa24ef6e98cec5460b68c" name="ab217f9afae5fa24ef6e98cec5460b68c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab217f9afae5fa24ef6e98cec5460b68c">&#9670;&#160;</a></span>SparseCapacity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1container_1_1SparseSet.html#aa5a9371c12d52bd6706a67b3fbb46c68">size_type</a> <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::SparseCapacity </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the capacity of the sparse array. </p>
+<p>Returns the maximum index that can be stored without triggering a sparse array reallocation. Time complexity: O(1). Exception safety: No-throw guarantee. </p><dl class="section return"><dt>Returns</dt><dd>The capacity of the sparse array </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00387">387</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  387</span>{ <span class="keywordflow">return</span> sparse_.capacity(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a403c9d5319288cbcade346a815b4c7a0" name="a403c9d5319288cbcade346a815b4c7a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a403c9d5319288cbcade346a815b4c7a0">&#9670;&#160;</a></span>Swap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType , typename Allocator &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::Swap </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1container_1_1SparseSet.html">SparseSet</a>&lt; T, IndexType, Allocator &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Swaps the contents of this sparse set with another. </p>
+<p>Efficiently swaps all data between two sparse sets. Time complexity: O(1). Exception safety: No-throw guarantee. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>The sparse set to swap with </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00640">640</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  640</span>                                                                              {</div>
+<div class="line"><span class="lineno">  641</span>  std::swap(sparse_, other.sparse_);</div>
+<div class="line"><span class="lineno">  642</span>  std::swap(dense_, other.dense_);</div>
+<div class="line"><span class="lineno">  643</span>  std::swap(reverse_map_, other.reverse_map_);</div>
+<div class="line"><span class="lineno">  644</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a49685e2fe3817d53731597c311b381f1" name="a49685e2fe3817d53731597c311b381f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49685e2fe3817d53731597c311b381f1">&#9670;&#160;</a></span>TryGet() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType , typename Allocator &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr const T * <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::TryGet </td>
+          <td>(</td>
+          <td class="paramtype">IndexType&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Tries to get the value at the specified index (const version). </p>
+<p>Returns a pointer to the value stored at the given index, or nullptr if the index doesn't exist. Time complexity: O(1). Exception safety: No-throw guarantee. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>The index to access </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to the value at the specified index, or nullptr if index doesn't exist </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00627">627</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  627</span>                                                                                            {</div>
+<div class="line"><span class="lineno">  628</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(index != <a class="code hl_variable" href="classhelios_1_1container_1_1SparseSet.html#aeb51474b7e5fcd4bf0949f10b0005c99">kInvalidIndex</a>, <span class="stringliteral">&quot;Failed to get value: index is invalid!&quot;</span>);</div>
+<div class="line"><span class="lineno">  629</span>  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_signed_v&lt;IndexType&gt;) {</div>
+<div class="line"><span class="lineno">  630</span>    <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(index &gt;= 0, <span class="stringliteral">&quot;Failed to try get value: index cannot be negative!&quot;</span>);</div>
+<div class="line"><span class="lineno">  631</span>  }</div>
+<div class="line"><span class="lineno">  632</span> </div>
+<div class="line"><span class="lineno">  633</span>  <span class="keywordflow">if</span> (!<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a3889d6f69f2ce7fb7532fbf40c0d9047">Contains</a>(index)) {</div>
+<div class="line"><span class="lineno">  634</span>    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  635</span>  }</div>
+<div class="line"><span class="lineno">  636</span>  <span class="keywordflow">return</span> &amp;dense_[sparse_[index]];</div>
+<div class="line"><span class="lineno">  637</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a6cd56cfd03117e8d085843c006121cb7" name="a6cd56cfd03117e8d085843c006121cb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6cd56cfd03117e8d085843c006121cb7">&#9670;&#160;</a></span>TryGet() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType , typename Allocator &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr T * <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::TryGet </td>
+          <td>(</td>
+          <td class="paramtype">IndexType&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Tries to get the value at the specified index. </p>
+<p>Returns a pointer to the value stored at the given index, or nullptr if the index doesn't exist. Time complexity: O(1). Exception safety: No-throw guarantee. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>The index to access </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to the value at the specified index, or nullptr if index doesn't exist </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00614">614</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  614</span>                                                                                {</div>
+<div class="line"><span class="lineno">  615</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(index != <a class="code hl_variable" href="classhelios_1_1container_1_1SparseSet.html#aeb51474b7e5fcd4bf0949f10b0005c99">kInvalidIndex</a>, <span class="stringliteral">&quot;Failed to try get value: index is invalid!&quot;</span>);</div>
+<div class="line"><span class="lineno">  616</span>  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_signed_v&lt;IndexType&gt;) {</div>
+<div class="line"><span class="lineno">  617</span>    <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(index &gt;= 0, <span class="stringliteral">&quot;Failed to try get value: index cannot be negative!&quot;</span>);</div>
+<div class="line"><span class="lineno">  618</span>  }</div>
+<div class="line"><span class="lineno">  619</span> </div>
+<div class="line"><span class="lineno">  620</span>  <span class="keywordflow">if</span> (!<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a3889d6f69f2ce7fb7532fbf40c0d9047">Contains</a>(index)) {</div>
+<div class="line"><span class="lineno">  621</span>    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  622</span>  }</div>
+<div class="line"><span class="lineno">  623</span>  <span class="keywordflow">return</span> &amp;dense_[sparse_[index]];</div>
+<div class="line"><span class="lineno">  624</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="aeecfef743d8112ef3e11d8c68ae1ec75" name="aeecfef743d8112ef3e11d8c68ae1ec75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeecfef743d8112ef3e11d8c68ae1ec75">&#9670;&#160;</a></span>kInvalidDenseIndex</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr DenseIndexType <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::kInvalidDenseIndex = std::numeric_limits&lt;DenseIndexType&gt;::max()</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00063">63</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aeb51474b7e5fcd4bf0949f10b0005c99" name="aeb51474b7e5fcd4bf0949f10b0005c99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb51474b7e5fcd4bf0949f10b0005c99">&#9670;&#160;</a></span>kInvalidIndex</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename IndexType  = size_t, typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr IndexType <a class="el" href="classhelios_1_1container_1_1SparseSet.html">helios::container::SparseSet</a>&lt; T, IndexType, Allocator &gt;::kInvalidIndex = std::numeric_limits&lt;IndexType&gt;::max()</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sparse__set_8hpp_source.html#l00062">62</a> of file <a class="el" href="sparse__set_8hpp_source.html">sparse_set.hpp</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehelios.html">helios</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1container.html">container</a></li><li class="navelem"><a class="el" href="classhelios_1_1container_1_1SparseSet.html">SparseSet</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

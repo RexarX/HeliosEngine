@@ -1,0 +1,1212 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: helios::ecs::details::Archetype Class Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classhelios_1_1ecs_1_1details_1_1Archetype.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classhelios_1_1ecs_1_1details_1_1Archetype-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">helios::ecs::details::Archetype Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Represents a unique combination of component types.  
+ <a href="classhelios_1_1ecs_1_1details_1_1Archetype.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="archetype_8hpp_source.html">archetype.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a907bf55ce968fc19d4628281a0f33891" id="r_a907bf55ce968fc19d4628281a0f33891"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html#a907bf55ce968fc19d4628281a0f33891">ComponentTypeSet</a> = std::vector&lt; <a class="el" href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">ComponentTypeId</a> &gt;</td></tr>
+<tr class="separator:a907bf55ce968fc19d4628281a0f33891"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8bc3a1a6dff53f91ee2a2b094140aef" id="r_ad8bc3a1a6dff53f91ee2a2b094140aef"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html#ad8bc3a1a6dff53f91ee2a2b094140aef">EntityList</a> = std::vector&lt; <a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> &gt;</td></tr>
+<tr class="separator:ad8bc3a1a6dff53f91ee2a2b094140aef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69650c915fd1ef5b42e7601eef23c5e3" id="r_a69650c915fd1ef5b42e7601eef23c5e3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html#a69650c915fd1ef5b42e7601eef23c5e3">EdgeMap</a> = std::unordered_map&lt; <a class="el" href="structhelios_1_1ecs_1_1details_1_1ArchetypeEdgeKey.html">ArchetypeEdgeKey</a>, <a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html">Archetype</a> *, <a class="el" href="structhelios_1_1ecs_1_1details_1_1ArchetypeEdgeKeyHash.html">ArchetypeEdgeKeyHash</a> &gt;</td></tr>
+<tr class="separator:a69650c915fd1ef5b42e7601eef23c5e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a2d5bc11c08dc0c4842711f048b1656f8" id="r_a2d5bc11c08dc0c4842711f048b1656f8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html#a2d5bc11c08dc0c4842711f048b1656f8">Archetype</a> (<a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html#a907bf55ce968fc19d4628281a0f33891">ComponentTypeSet</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">component_types</a>)</td></tr>
+<tr class="memdesc:a2d5bc11c08dc0c4842711f048b1656f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs an archetype with the specified component types.  <br /></td></tr>
+<tr class="separator:a2d5bc11c08dc0c4842711f048b1656f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a786fc92cd50bfe05a77b7c52e07bc971" id="r_a786fc92cd50bfe05a77b7c52e07bc971"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html#a786fc92cd50bfe05a77b7c52e07bc971">Archetype</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html">Archetype</a> &amp;)=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">delete</a></td></tr>
+<tr class="separator:a786fc92cd50bfe05a77b7c52e07bc971"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6af7e28ac9011f2b898b913171e6678" id="r_af6af7e28ac9011f2b898b913171e6678"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html#af6af7e28ac9011f2b898b913171e6678">Archetype</a> (<a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html">Archetype</a> &amp;&amp;) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:af6af7e28ac9011f2b898b913171e6678"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5f9245ea7704c3fa6a37ea1a933c4e2" id="r_ab5f9245ea7704c3fa6a37ea1a933c4e2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html#ab5f9245ea7704c3fa6a37ea1a933c4e2">~Archetype</a> ()=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:ab5f9245ea7704c3fa6a37ea1a933c4e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01e174a5d29798f412d522ad7d84efa7" id="r_a01e174a5d29798f412d522ad7d84efa7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html">Archetype</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html#a01e174a5d29798f412d522ad7d84efa7">operator=</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html">Archetype</a> &amp;)=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">delete</a></td></tr>
+<tr class="separator:a01e174a5d29798f412d522ad7d84efa7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a6fd3c1bc4fb3eec34a047618fad95b" id="r_a2a6fd3c1bc4fb3eec34a047618fad95b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html">Archetype</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html#a2a6fd3c1bc4fb3eec34a047618fad95b">operator=</a> (<a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html">Archetype</a> &amp;&amp;) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:a2a6fd3c1bc4fb3eec34a047618fad95b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad22c1077886c6eb74e4453cc55132629" id="r_ad22c1077886c6eb74e4453cc55132629"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html#ad22c1077886c6eb74e4453cc55132629">AddEntity</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> entity)</td></tr>
+<tr class="memdesc:ad22c1077886c6eb74e4453cc55132629"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds an entity to this archetype.  <br /></td></tr>
+<tr class="separator:ad22c1077886c6eb74e4453cc55132629"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc0a83688d24f761175c4a8b67492f36" id="r_afc0a83688d24f761175c4a8b67492f36"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html#afc0a83688d24f761175c4a8b67492f36">RemoveEntity</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> entity)</td></tr>
+<tr class="memdesc:afc0a83688d24f761175c4a8b67492f36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes an entity from this archetype.  <br /></td></tr>
+<tr class="separator:afc0a83688d24f761175c4a8b67492f36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb59f303e51492898dc5d9266f07cf07" id="r_abb59f303e51492898dc5d9266f07cf07"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html">Archetype</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html#abb59f303e51492898dc5d9266f07cf07">GetAddEdge</a> (<a class="el" href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">ComponentTypeId</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">component_type</a>) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:abb59f303e51492898dc5d9266f07cf07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the cached edge for adding a component type.  <br /></td></tr>
+<tr class="separator:abb59f303e51492898dc5d9266f07cf07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8680d6604a8334dd87f509fdc64ae03f" id="r_a8680d6604a8334dd87f509fdc64ae03f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html">Archetype</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html#a8680d6604a8334dd87f509fdc64ae03f">GetRemoveEdge</a> (<a class="el" href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">ComponentTypeId</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">component_type</a>) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:a8680d6604a8334dd87f509fdc64ae03f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the cached edge for removing a component type.  <br /></td></tr>
+<tr class="separator:a8680d6604a8334dd87f509fdc64ae03f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a9fb96d2cbfa7b3a67f191fc8d733b5" id="r_a6a9fb96d2cbfa7b3a67f191fc8d733b5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html#a6a9fb96d2cbfa7b3a67f191fc8d733b5">SetAddEdge</a> (<a class="el" href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">ComponentTypeId</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">component_type</a>, <a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html">Archetype</a> *<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">target</a>) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:a6a9fb96d2cbfa7b3a67f191fc8d733b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the cached edge for adding a component type.  <br /></td></tr>
+<tr class="separator:a6a9fb96d2cbfa7b3a67f191fc8d733b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a660832e8d4350fb18858df25dce6550f" id="r_a660832e8d4350fb18858df25dce6550f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html#a660832e8d4350fb18858df25dce6550f">SetRemoveEdge</a> (<a class="el" href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">ComponentTypeId</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">component_type</a>, <a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html">Archetype</a> *<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">target</a>) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:a660832e8d4350fb18858df25dce6550f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the cached edge for removing a component type.  <br /></td></tr>
+<tr class="separator:a660832e8d4350fb18858df25dce6550f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe97bec56546a060962de69d5c5227f4" id="r_afe97bec56546a060962de69d5c5227f4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html#afe97bec56546a060962de69d5c5227f4">Contains</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> entity) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a></td></tr>
+<tr class="memdesc:afe97bec56546a060962de69d5c5227f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if this archetype contains the specified entity.  <br /></td></tr>
+<tr class="separator:afe97bec56546a060962de69d5c5227f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5232bebb04d7807ee53b6a0eee0db605" id="r_a5232bebb04d7807ee53b6a0eee0db605"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html#a5232bebb04d7807ee53b6a0eee0db605">HasComponents</a> (std::span&lt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">ComponentTypeId</a> &gt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">component_types</a>) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a></td></tr>
+<tr class="memdesc:a5232bebb04d7807ee53b6a0eee0db605"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if this archetype has all specified component types.  <br /></td></tr>
+<tr class="separator:a5232bebb04d7807ee53b6a0eee0db605"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5586f430838be3c0463d4d0f563b2b7e" id="r_a5586f430838be3c0463d4d0f563b2b7e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html#a5586f430838be3c0463d4d0f563b2b7e">HasAnyComponents</a> (std::span&lt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">ComponentTypeId</a> &gt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">component_types</a>) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a></td></tr>
+<tr class="memdesc:a5586f430838be3c0463d4d0f563b2b7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if this archetype has any of the specified component types.  <br /></td></tr>
+<tr class="separator:a5586f430838be3c0463d4d0f563b2b7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9998ce7d914a49bf8a6417a84fa22de0" id="r_a9998ce7d914a49bf8a6417a84fa22de0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html#a9998ce7d914a49bf8a6417a84fa22de0">HasComponent</a> (<a class="el" href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">ComponentTypeId</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">component_type</a>) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:a9998ce7d914a49bf8a6417a84fa22de0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if this archetype has a specific component type.  <br /></td></tr>
+<tr class="separator:a9998ce7d914a49bf8a6417a84fa22de0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28e9ef69d492b1a37310acda1ae8da5a" id="r_a28e9ef69d492b1a37310acda1ae8da5a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html#a28e9ef69d492b1a37310acda1ae8da5a">Empty</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:a28e9ef69d492b1a37310acda1ae8da5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if archetype contains no entities.  <br /></td></tr>
+<tr class="separator:a28e9ef69d492b1a37310acda1ae8da5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f27995a5b68dc49269fb13c48756660" id="r_a4f27995a5b68dc49269fb13c48756660"><td class="memItemLeft" align="right" valign="top">std::span&lt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html#a4f27995a5b68dc49269fb13c48756660">Entities</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:a4f27995a5b68dc49269fb13c48756660"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets all entities in this archetype.  <br /></td></tr>
+<tr class="separator:a4f27995a5b68dc49269fb13c48756660"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4377952db8eeeb4ac630d6e13203dc6" id="r_ad4377952db8eeeb4ac630d6e13203dc6"><td class="memItemLeft" align="right" valign="top">std::span&lt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">ComponentTypeId</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html#ad4377952db8eeeb4ac630d6e13203dc6">ComponentTypes</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:ad4377952db8eeeb4ac630d6e13203dc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the component types for this archetype.  <br /></td></tr>
+<tr class="separator:ad4377952db8eeeb4ac630d6e13203dc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0cea39d4dbd491c77a1faa8c66ba016d" id="r_a0cea39d4dbd491c77a1faa8c66ba016d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html#a0cea39d4dbd491c77a1faa8c66ba016d">EntityCount</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:a0cea39d4dbd491c77a1faa8c66ba016d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of entities in this archetype.  <br /></td></tr>
+<tr class="separator:a0cea39d4dbd491c77a1faa8c66ba016d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5e835cc1f929de2b768c0f1af89333d" id="r_ae5e835cc1f929de2b768c0f1af89333d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html#ae5e835cc1f929de2b768c0f1af89333d">ComponentCount</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:ae5e835cc1f929de2b768c0f1af89333d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of component types in this archetype.  <br /></td></tr>
+<tr class="separator:ae5e835cc1f929de2b768c0f1af89333d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bde9941e86287bb2ce61eb8f1795f77" id="r_a3bde9941e86287bb2ce61eb8f1795f77"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html#a3bde9941e86287bb2ce61eb8f1795f77">Hash</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:a3bde9941e86287bb2ce61eb8f1795f77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the cached hash value for this archetype.  <br /></td></tr>
+<tr class="separator:a3bde9941e86287bb2ce61eb8f1795f77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76183d5a27b9c39f39d4cbada8bb505c" id="r_a76183d5a27b9c39f39d4cbada8bb505c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html#a76183d5a27b9c39f39d4cbada8bb505c">GetGeneration</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:a76183d5a27b9c39f39d4cbada8bb505c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the generation counter for this archetype.  <br /></td></tr>
+<tr class="separator:a76183d5a27b9c39f39d4cbada8bb505c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed817d171dcca359f87deebce9458af5" id="r_aed817d171dcca359f87deebce9458af5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html#aed817d171dcca359f87deebce9458af5">EdgeCount</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:aed817d171dcca359f87deebce9458af5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of cached edges.  <br /></td></tr>
+<tr class="separator:aed817d171dcca359f87deebce9458af5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Represents a unique combination of component types. </p>
+<p><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetypes.html" title="Manages archetypes and entity-archetype relationships.">Archetypes</a> group entities that have the exact same set of components, enabling efficient queries and batch operations. All entities in an archetype have identical component signatures, allowing for optimized memory layout and iteration patterns.</p>
+<p>The archetype maintains:</p><ul>
+<li>A sorted list of component type IDs for the signature</li>
+<li>A list of entities belonging to this archetype</li>
+<li>Fast lookup structures for entity containment checks</li>
+<li>A cached hash value for efficient archetype lookups</li>
+<li>Edge graph for fast archetype transitions when adding/removing components</li>
+</ul>
+<dl class="section note"><dt>Note</dt><dd>Not thread-safe. All operations should be performed from the main thread. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="archetype_8hpp_source.html#l00064">64</a> of file <a class="el" href="archetype_8hpp_source.html">archetype.hpp</a>.</p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a907bf55ce968fc19d4628281a0f33891" name="a907bf55ce968fc19d4628281a0f33891"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a907bf55ce968fc19d4628281a0f33891">&#9670;&#160;</a></span>ComponentTypeSet</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html#a907bf55ce968fc19d4628281a0f33891">helios::ecs::details::Archetype::ComponentTypeSet</a> =  std::vector&lt;<a class="el" href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">ComponentTypeId</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="archetype_8hpp_source.html#l00066">66</a> of file <a class="el" href="archetype_8hpp_source.html">archetype.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a69650c915fd1ef5b42e7601eef23c5e3" name="a69650c915fd1ef5b42e7601eef23c5e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69650c915fd1ef5b42e7601eef23c5e3">&#9670;&#160;</a></span>EdgeMap</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html#a69650c915fd1ef5b42e7601eef23c5e3">helios::ecs::details::Archetype::EdgeMap</a> =  std::unordered_map&lt;<a class="el" href="structhelios_1_1ecs_1_1details_1_1ArchetypeEdgeKey.html">ArchetypeEdgeKey</a>, <a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html">Archetype</a>*, <a class="el" href="structhelios_1_1ecs_1_1details_1_1ArchetypeEdgeKeyHash.html">ArchetypeEdgeKeyHash</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="archetype_8hpp_source.html#l00068">68</a> of file <a class="el" href="archetype_8hpp_source.html">archetype.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ad8bc3a1a6dff53f91ee2a2b094140aef" name="ad8bc3a1a6dff53f91ee2a2b094140aef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8bc3a1a6dff53f91ee2a2b094140aef">&#9670;&#160;</a></span>EntityList</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html#ad8bc3a1a6dff53f91ee2a2b094140aef">helios::ecs::details::Archetype::EntityList</a> =  std::vector&lt;<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="archetype_8hpp_source.html#l00067">67</a> of file <a class="el" href="archetype_8hpp_source.html">archetype.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a2d5bc11c08dc0c4842711f048b1656f8" name="a2d5bc11c08dc0c4842711f048b1656f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d5bc11c08dc0c4842711f048b1656f8">&#9670;&#160;</a></span>Archetype() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::ecs::details::Archetype::Archetype </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html#a907bf55ce968fc19d4628281a0f33891">ComponentTypeSet</a>&#160;</td>
+          <td class="paramname"><em>component_types</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructs an archetype with the specified component types. </p>
+<p>Component types will be sorted internally for consistent ordering. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">component_types</td><td>Vector of component type IDs that define this archetype </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="archetype_8hpp_source.html#l00266">266</a> of file <a class="el" href="archetype_8hpp_source.html">archetype.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  266</span>                                                            : component_types_(std::move(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">component_types</a>)) {</div>
+<div class="line"><span class="lineno">  267</span>  std::ranges::sort(component_types_);</div>
+<div class="line"><span class="lineno">  268</span>  hash_ = ComputeHash();</div>
+<div class="line"><span class="lineno">  269</span>}</div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_af0384de48d847585fcb340c71c231e5e"><div class="ttname"><a href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, Allocator, Components... &gt; Query</div><div class="ttdoc">Type alias for query with mutable world access.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02515">query.hpp:2515</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a786fc92cd50bfe05a77b7c52e07bc971" name="a786fc92cd50bfe05a77b7c52e07bc971"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a786fc92cd50bfe05a77b7c52e07bc971">&#9670;&#160;</a></span>Archetype() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::ecs::details::Archetype::Archetype </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html">Archetype</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af6af7e28ac9011f2b898b913171e6678" name="af6af7e28ac9011f2b898b913171e6678"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6af7e28ac9011f2b898b913171e6678">&#9670;&#160;</a></span>Archetype() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::ecs::details::Archetype::Archetype </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html">Archetype</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab5f9245ea7704c3fa6a37ea1a933c4e2" name="ab5f9245ea7704c3fa6a37ea1a933c4e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5f9245ea7704c3fa6a37ea1a933c4e2">&#9670;&#160;</a></span>~Archetype()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::ecs::details::Archetype::~Archetype </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ad22c1077886c6eb74e4453cc55132629" name="ad22c1077886c6eb74e4453cc55132629"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad22c1077886c6eb74e4453cc55132629">&#9670;&#160;</a></span>AddEntity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a> helios::ecs::details::Archetype::AddEntity </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>&#160;</td>
+          <td class="paramname"><em>entity</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Adds an entity to this archetype. </p>
+<p>If the entity is already in this archetype, the operation is ignored. Time complexity: <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e" title="Type alias for query with mutable world access.">O(1)</a> average case. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if entity is invalid. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entity</td><td><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> to add </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="archetype_8hpp_source.html#l00271">271</a> of file <a class="el" href="archetype_8hpp_source.html">archetype.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  271</span>                                              {</div>
+<div class="line"><span class="lineno">  272</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(entity.Valid(), <span class="stringliteral">&quot;Failed to add entity to archetype: Entity with index &#39;{}&#39; is invalid!&quot;</span>,</div>
+<div class="line"><span class="lineno">  273</span>                entity.Index());</div>
+<div class="line"><span class="lineno">  274</span> </div>
+<div class="line"><span class="lineno">  275</span>  <span class="keywordflow">if</span> (!entity_indices_.contains(entity.Index())) {</div>
+<div class="line"><span class="lineno">  276</span>    entities_.push_back(entity);</div>
+<div class="line"><span class="lineno">  277</span>    entity_indices_.insert(entity.Index());</div>
+<div class="line"><span class="lineno">  278</span>  }</div>
+<div class="line"><span class="lineno">  279</span>}</div>
+<div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00149">assert.hpp:149</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ae5e835cc1f929de2b768c0f1af89333d" name="ae5e835cc1f929de2b768c0f1af89333d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5e835cc1f929de2b768c0f1af89333d">&#9670;&#160;</a></span>ComponentCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a> helios::ecs::details::Archetype::ComponentCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the number of component types in this archetype. </p>
+<p>Simple count of component types defining this archetype. Time complexity: <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e" title="Type alias for query with mutable world access.">O(1)</a>. </p><dl class="section return"><dt>Returns</dt><dd>Component type count </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="archetype_8hpp_source.html#l00222">222</a> of file <a class="el" href="archetype_8hpp_source.html">archetype.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  222</span>{ <span class="keywordflow">return</span> component_types_.size(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ad4377952db8eeeb4ac630d6e13203dc6" name="ad4377952db8eeeb4ac630d6e13203dc6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4377952db8eeeb4ac630d6e13203dc6">&#9670;&#160;</a></span>ComponentTypes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::span&lt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">ComponentTypeId</a> &gt; helios::ecs::details::Archetype::ComponentTypes </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the component types for this archetype. </p>
+<p>Returns the sorted component type IDs that define this archetype's signature. Time complexity: <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e" title="Type alias for query with mutable world access.">O(1)</a>. </p><dl class="section return"><dt>Returns</dt><dd>Span of component type IDs in sorted order </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="archetype_8hpp_source.html#l00206">206</a> of file <a class="el" href="archetype_8hpp_source.html">archetype.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  206</span>{ <span class="keywordflow">return</span> component_types_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="afe97bec56546a060962de69d5c5227f4" name="afe97bec56546a060962de69d5c5227f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe97bec56546a060962de69d5c5227f4">&#9670;&#160;</a></span>Contains()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a> helios::ecs::details::Archetype::Contains </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>&#160;</td>
+          <td class="paramname"><em>entity</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if this archetype contains the specified entity. </p>
+<p>Performs fast hash-based lookup. Time complexity: <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e" title="Type alias for query with mutable world access.">O(1)</a> average case. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if entity is invalid. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entity</td><td><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> to check </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if entity is in this archetype, false otherwise </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="archetype_8hpp_source.html#l00312">312</a> of file <a class="el" href="archetype_8hpp_source.html">archetype.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  312</span>                                                   {</div>
+<div class="line"><span class="lineno">  313</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(entity.Valid(), <span class="stringliteral">&quot;Failed to check if archetype contains entity: Entity with index &#39;{}&#39; is invalid!&quot;</span>,</div>
+<div class="line"><span class="lineno">  314</span>                entity.Index());</div>
+<div class="line"><span class="lineno">  315</span>  <span class="keywordflow">return</span> entity_indices_.contains(entity.Index());</div>
+<div class="line"><span class="lineno">  316</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aed817d171dcca359f87deebce9458af5" name="aed817d171dcca359f87deebce9458af5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed817d171dcca359f87deebce9458af5">&#9670;&#160;</a></span>EdgeCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a> helios::ecs::details::Archetype::EdgeCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the number of cached edges. </p>
+<p>Returns count of cached archetype transitions. Time complexity: <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e" title="Type alias for query with mutable world access.">O(1)</a>. </p><dl class="section return"><dt>Returns</dt><dd>Number of cached edges </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="archetype_8hpp_source.html#l00248">248</a> of file <a class="el" href="archetype_8hpp_source.html">archetype.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  248</span>{ <span class="keywordflow">return</span> edges_.size(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a28e9ef69d492b1a37310acda1ae8da5a" name="a28e9ef69d492b1a37310acda1ae8da5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28e9ef69d492b1a37310acda1ae8da5a">&#9670;&#160;</a></span>Empty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a> helios::ecs::details::Archetype::Empty </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if archetype contains no entities. </p>
+<p>Simple check of the entity list size. Time complexity: <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e" title="Type alias for query with mutable world access.">O(1)</a>. </p><dl class="section return"><dt>Returns</dt><dd>True if no entities are in this archetype, false otherwise </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="archetype_8hpp_source.html#l00189">189</a> of file <a class="el" href="archetype_8hpp_source.html">archetype.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  189</span>{ <span class="keywordflow">return</span> entities_.empty(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a4f27995a5b68dc49269fb13c48756660" name="a4f27995a5b68dc49269fb13c48756660"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f27995a5b68dc49269fb13c48756660">&#9670;&#160;</a></span>Entities()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::span&lt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> &gt; helios::ecs::details::Archetype::Entities </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets all entities in this archetype. </p>
+<p>Returns a read-only view of entities for safe iteration. The order of entities may change when entities are removed due to swap-and-pop. Time complexity: <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e" title="Type alias for query with mutable world access.">O(1)</a>. </p><dl class="section return"><dt>Returns</dt><dd>Span of entities belonging to this archetype </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="archetype_8hpp_source.html#l00198">198</a> of file <a class="el" href="archetype_8hpp_source.html">archetype.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  198</span>{ <span class="keywordflow">return</span> entities_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a0cea39d4dbd491c77a1faa8c66ba016d" name="a0cea39d4dbd491c77a1faa8c66ba016d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0cea39d4dbd491c77a1faa8c66ba016d">&#9670;&#160;</a></span>EntityCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a> helios::ecs::details::Archetype::EntityCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the number of entities in this archetype. </p>
+<p>Simple count of entities currently in this archetype. Time complexity: <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e" title="Type alias for query with mutable world access.">O(1)</a>. </p><dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> count </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="archetype_8hpp_source.html#l00214">214</a> of file <a class="el" href="archetype_8hpp_source.html">archetype.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  214</span>{ <span class="keywordflow">return</span> entities_.size(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="abb59f303e51492898dc5d9266f07cf07" name="abb59f303e51492898dc5d9266f07cf07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb59f303e51492898dc5d9266f07cf07">&#9670;&#160;</a></span>GetAddEdge()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html">Archetype</a> * helios::ecs::details::Archetype::GetAddEdge </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">ComponentTypeId</a>&#160;</td>
+          <td class="paramname"><em>component_type</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the cached edge for adding a component type. </p>
+<p>Returns the target archetype for this component addition, if cached. Time complexity: <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e" title="Type alias for query with mutable world access.">O(1)</a> average case. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">component_type</td><td>Component type being added </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to target archetype, or nullptr if edge not cached </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="archetype_8hpp_source.html#l00294">294</a> of file <a class="el" href="archetype_8hpp_source.html">archetype.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  294</span>                                                                                     {</div>
+<div class="line"><span class="lineno">  295</span>  <span class="keyword">const</span> <span class="keyword">auto</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">it</a> = edges_.find({<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">component_type</a>, <span class="keyword">true</span>});</div>
+<div class="line"><span class="lineno">  296</span>  <span class="keywordflow">return</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">it</a> != edges_.end() ? <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">it</a>-&gt;second : <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  297</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a76183d5a27b9c39f39d4cbada8bb505c" name="a76183d5a27b9c39f39d4cbada8bb505c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76183d5a27b9c39f39d4cbada8bb505c">&#9670;&#160;</a></span>GetGeneration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a> helios::ecs::details::Archetype::GetGeneration </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the generation counter for this archetype. </p>
+<p>Generation is incremented on structural changes to the archetype. Used for query cache validation. Time complexity: <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e" title="Type alias for query with mutable world access.">O(1)</a>. </p><dl class="section return"><dt>Returns</dt><dd>Current generation value </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="archetype_8hpp_source.html#l00240">240</a> of file <a class="el" href="archetype_8hpp_source.html">archetype.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  240</span>{ <span class="keywordflow">return</span> generation_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a8680d6604a8334dd87f509fdc64ae03f" name="a8680d6604a8334dd87f509fdc64ae03f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8680d6604a8334dd87f509fdc64ae03f">&#9670;&#160;</a></span>GetRemoveEdge()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html">Archetype</a> * helios::ecs::details::Archetype::GetRemoveEdge </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">ComponentTypeId</a>&#160;</td>
+          <td class="paramname"><em>component_type</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the cached edge for removing a component type. </p>
+<p>Returns the target archetype for this component removal, if cached. Time complexity: <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e" title="Type alias for query with mutable world access.">O(1)</a> average case. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">component_type</td><td>Component type being removed </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to target archetype, or nullptr if edge not cached </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="archetype_8hpp_source.html#l00299">299</a> of file <a class="el" href="archetype_8hpp_source.html">archetype.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  299</span>                                                                                        {</div>
+<div class="line"><span class="lineno">  300</span>  <span class="keyword">const</span> <span class="keyword">auto</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">it</a> = edges_.find({<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">component_type</a>, <span class="keyword">false</span>});</div>
+<div class="line"><span class="lineno">  301</span>  <span class="keywordflow">return</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">it</a> != edges_.end() ? <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">it</a>-&gt;second : <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  302</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a5586f430838be3c0463d4d0f563b2b7e" name="a5586f430838be3c0463d4d0f563b2b7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5586f430838be3c0463d4d0f563b2b7e">&#9670;&#160;</a></span>HasAnyComponents()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a> helios::ecs::details::Archetype::HasAnyComponents </td>
+          <td>(</td>
+          <td class="paramtype">std::span&lt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">ComponentTypeId</a> &gt;&#160;</td>
+          <td class="paramname"><em>component_types</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if this archetype has any of the specified component types. </p>
+<p>Uses binary search on the sorted component type array. Time complexity: <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e" title="Type alias for query with mutable world access.">O(k * log(n))</a> where k is number of types to check, n is archetype component count. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">component_types</td><td>Component types to check </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if archetype has any of the specified components, false otherwise </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="archetype_8hpp_source.html#l00166">166</a> of file <a class="el" href="archetype_8hpp_source.html">archetype.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  166</span>                                                                                            {</div>
+<div class="line"><span class="lineno">  167</span>    <span class="keywordflow">return</span> std::ranges::any_of(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">component_types</a>, [<span class="keyword">this</span>](<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">ComponentTypeId</a> type_id) {</div>
+<div class="line"><span class="lineno">  168</span>      <span class="keywordflow">return</span> std::ranges::binary_search(component_types_, type_id);</div>
+<div class="line"><span class="lineno">  169</span>    });</div>
+<div class="line"><span class="lineno">  170</span>  }</div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_a9ede7913aa71f830d7181d280b3848a1"><div class="ttname"><a href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">helios::ecs::ComponentTypeId</a></div><div class="ttdeci">size_t ComponentTypeId</div><div class="ttdoc">Type ID for components.</div><div class="ttdef"><b>Definition</b> <a href="component_8hpp_source.html#l00104">component.hpp:104</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a9998ce7d914a49bf8a6417a84fa22de0" name="a9998ce7d914a49bf8a6417a84fa22de0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9998ce7d914a49bf8a6417a84fa22de0">&#9670;&#160;</a></span>HasComponent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a> helios::ecs::details::Archetype::HasComponent </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">ComponentTypeId</a>&#160;</td>
+          <td class="paramname"><em>component_type</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if this archetype has a specific component type. </p>
+<p>Uses binary search on the sorted component type array. Time complexity: <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e" title="Type alias for query with mutable world access.">O(log(n))</a> where n is archetype component count. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">component_type</td><td>Component type to check </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if archetype has the specified component, false otherwise </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="archetype_8hpp_source.html#l00179">179</a> of file <a class="el" href="archetype_8hpp_source.html">archetype.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  179</span>                                                                                 {</div>
+<div class="line"><span class="lineno">  180</span>    <span class="keywordflow">return</span> std::ranges::binary_search(component_types_, <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">component_type</a>);</div>
+<div class="line"><span class="lineno">  181</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a5232bebb04d7807ee53b6a0eee0db605" name="a5232bebb04d7807ee53b6a0eee0db605"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5232bebb04d7807ee53b6a0eee0db605">&#9670;&#160;</a></span>HasComponents()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a> helios::ecs::details::Archetype::HasComponents </td>
+          <td>(</td>
+          <td class="paramtype">std::span&lt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">ComponentTypeId</a> &gt;&#160;</td>
+          <td class="paramname"><em>component_types</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if this archetype has all specified component types. </p>
+<p>Uses binary search on the sorted component type array. Time complexity: <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e" title="Type alias for query with mutable world access.">O(k * log(n))</a> where k is number of types to check, n is archetype component count. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">component_types</td><td>Component types to check </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if archetype has all specified components, false otherwise </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="archetype_8hpp_source.html#l00153">153</a> of file <a class="el" href="archetype_8hpp_source.html">archetype.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  153</span>                                                                                         {</div>
+<div class="line"><span class="lineno">  154</span>    <span class="keywordflow">return</span> std::ranges::all_of(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">component_types</a>, [<span class="keyword">this</span>](<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">ComponentTypeId</a> type_id) {</div>
+<div class="line"><span class="lineno">  155</span>      <span class="keywordflow">return</span> std::ranges::binary_search(component_types_, type_id);</div>
+<div class="line"><span class="lineno">  156</span>    });</div>
+<div class="line"><span class="lineno">  157</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a3bde9941e86287bb2ce61eb8f1795f77" name="a3bde9941e86287bb2ce61eb8f1795f77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3bde9941e86287bb2ce61eb8f1795f77">&#9670;&#160;</a></span>Hash()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a> helios::ecs::details::Archetype::Hash </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the cached hash value for this archetype. </p>
+<p>Hash is computed once during construction based on component types. Used for efficient archetype lookups in hash-based containers. Time complexity: <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e" title="Type alias for query with mutable world access.">O(1)</a>. </p><dl class="section return"><dt>Returns</dt><dd>Hash value based on component type combination </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="archetype_8hpp_source.html#l00231">231</a> of file <a class="el" href="archetype_8hpp_source.html">archetype.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  231</span>{ <span class="keywordflow">return</span> hash_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a2a6fd3c1bc4fb3eec34a047618fad95b" name="a2a6fd3c1bc4fb3eec34a047618fad95b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a6fd3c1bc4fb3eec34a047618fad95b">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html">Archetype</a> &amp; helios::ecs::details::Archetype::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html">Archetype</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a01e174a5d29798f412d522ad7d84efa7" name="a01e174a5d29798f412d522ad7d84efa7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01e174a5d29798f412d522ad7d84efa7">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html">Archetype</a> &amp; helios::ecs::details::Archetype::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html">Archetype</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afc0a83688d24f761175c4a8b67492f36" name="afc0a83688d24f761175c4a8b67492f36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc0a83688d24f761175c4a8b67492f36">&#9670;&#160;</a></span>RemoveEntity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a> helios::ecs::details::Archetype::RemoveEntity </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>&#160;</td>
+          <td class="paramname"><em>entity</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Removes an entity from this archetype. </p>
+<p>Uses swap-and-pop technique to maintain dense packing. If the entity is not in this archetype, the operation is ignored. Time complexity: <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e" title="Type alias for query with mutable world access.">O(n)</a> worst case due to linear search, but typically fast. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if entity is invalid. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entity</td><td><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> to remove </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="archetype_8hpp_source.html#l00281">281</a> of file <a class="el" href="archetype_8hpp_source.html">archetype.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  281</span>                                                 {</div>
+<div class="line"><span class="lineno">  282</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(entity.Valid(), <span class="stringliteral">&quot;Failed to remove entity from archetype: Entity with index &#39;{}&#39; is invalid!&quot;</span>,</div>
+<div class="line"><span class="lineno">  283</span>                entity.Index());</div>
+<div class="line"><span class="lineno">  284</span> </div>
+<div class="line"><span class="lineno">  285</span>  <span class="keyword">const</span> <span class="keyword">auto</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">idx_it</a> = entity_indices_.find(entity.Index());</div>
+<div class="line"><span class="lineno">  286</span>  <span class="keywordflow">if</span> (<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">idx_it</a> == entity_indices_.end()) {</div>
+<div class="line"><span class="lineno">  287</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  288</span>  }</div>
+<div class="line"><span class="lineno">  289</span> </div>
+<div class="line"><span class="lineno">  290</span>  std::erase_if(entities_, [entity](<span class="keyword">const</span> Entity&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">entt</a>) { <span class="keywordflow">return</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">entt</a> == entity; });</div>
+<div class="line"><span class="lineno">  291</span>  entity_indices_.erase(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">idx_it</a>);</div>
+<div class="line"><span class="lineno">  292</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a6a9fb96d2cbfa7b3a67f191fc8d733b5" name="a6a9fb96d2cbfa7b3a67f191fc8d733b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a9fb96d2cbfa7b3a67f191fc8d733b5">&#9670;&#160;</a></span>SetAddEdge()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a> helios::ecs::details::Archetype::SetAddEdge </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">ComponentTypeId</a>&#160;</td>
+          <td class="paramname"><em>component_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html">Archetype</a> *&#160;</td>
+          <td class="paramname"><em>target</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the cached edge for adding a component type. </p>
+<p>Caches the target archetype for fast future lookups. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">component_type</td><td>Component type being added </td></tr>
+    <tr><td class="paramname">target</td><td>Target archetype after adding the component </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="archetype_8hpp_source.html#l00304">304</a> of file <a class="el" href="archetype_8hpp_source.html">archetype.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  304</span>                                                                                            {</div>
+<div class="line"><span class="lineno">  305</span>  edges_[{<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">component_type</a>, <span class="keyword">true</span>}] = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">target</a>;</div>
+<div class="line"><span class="lineno">  306</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a660832e8d4350fb18858df25dce6550f" name="a660832e8d4350fb18858df25dce6550f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a660832e8d4350fb18858df25dce6550f">&#9670;&#160;</a></span>SetRemoveEdge()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a> helios::ecs::details::Archetype::SetRemoveEdge </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">ComponentTypeId</a>&#160;</td>
+          <td class="paramname"><em>component_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html">Archetype</a> *&#160;</td>
+          <td class="paramname"><em>target</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the cached edge for removing a component type. </p>
+<p>Caches the target archetype for fast future lookups. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">component_type</td><td>Component type being removed </td></tr>
+    <tr><td class="paramname">target</td><td>Target archetype after removing the component (nullptr if no components remain) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="archetype_8hpp_source.html#l00308">308</a> of file <a class="el" href="archetype_8hpp_source.html">archetype.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  308</span>                                                                                               {</div>
+<div class="line"><span class="lineno">  309</span>  edges_[{<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">component_type</a>, <span class="keyword">false</span>}] = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">target</a>;</div>
+<div class="line"><span class="lineno">  310</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehelios.html">helios</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1ecs.html">ecs</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1ecs_1_1details.html">details</a></li><li class="navelem"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html">Archetype</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

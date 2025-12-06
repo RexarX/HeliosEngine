@@ -1,0 +1,647 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: helios::ecs::details::QueryCacheStats Struct Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">helios::ecs::details::QueryCacheStats Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Statistics for query cache performance.  
+ <a href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="query__cache_8hpp_source.html">query_cache.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a859258ba436b8346ead617996f62e624" id="r_a859258ba436b8346ead617996f62e624"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#a859258ba436b8346ead617996f62e624">QueryCacheStats</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:a859258ba436b8346ead617996f62e624"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d2396346e171546031857bf5179eff7" id="r_a0d2396346e171546031857bf5179eff7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#a0d2396346e171546031857bf5179eff7">QueryCacheStats</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html">QueryCacheStats</a> &amp;other)</td></tr>
+<tr class="separator:a0d2396346e171546031857bf5179eff7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeac2cc9e36dc492539dd5a09a3df831e" id="r_aeac2cc9e36dc492539dd5a09a3df831e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#aeac2cc9e36dc492539dd5a09a3df831e">QueryCacheStats</a> (<a class="el" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html">QueryCacheStats</a> &amp;&amp;other) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="separator:aeac2cc9e36dc492539dd5a09a3df831e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27bea450e903e6d48cd900f9f05c1cce" id="r_a27bea450e903e6d48cd900f9f05c1cce"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#a27bea450e903e6d48cd900f9f05c1cce">~QueryCacheStats</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:a27bea450e903e6d48cd900f9f05c1cce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90bbdd96adee12c86d8b60ad02ec5411" id="r_a90bbdd96adee12c86d8b60ad02ec5411"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html">QueryCacheStats</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#a90bbdd96adee12c86d8b60ad02ec5411">operator=</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html">QueryCacheStats</a> &amp;other)</td></tr>
+<tr class="separator:a90bbdd96adee12c86d8b60ad02ec5411"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50278a0746ff99f1d2e4cf064770fe62" id="r_a50278a0746ff99f1d2e4cf064770fe62"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html">QueryCacheStats</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#a50278a0746ff99f1d2e4cf064770fe62">operator=</a> (<a class="el" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html">QueryCacheStats</a> &amp;&amp;other) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="separator:a50278a0746ff99f1d2e4cf064770fe62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad818a7b770fb2713aaa0d50f9ff6cee2" id="r_ad818a7b770fb2713aaa0d50f9ff6cee2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#ad818a7b770fb2713aaa0d50f9ff6cee2">Reset</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="separator:ad818a7b770fb2713aaa0d50f9ff6cee2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a374153355e0a0eab2a1cc3ff39e9da75" id="r_a374153355e0a0eab2a1cc3ff39e9da75"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#a374153355e0a0eab2a1cc3ff39e9da75">HitRate</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="separator:a374153355e0a0eab2a1cc3ff39e9da75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:adc18746c875077576a95e7033b3080fb" id="r_adc18746c875077576a95e7033b3080fb"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#adc18746c875077576a95e7033b3080fb">hit_count</a> {0}</td></tr>
+<tr class="memdesc:adc18746c875077576a95e7033b3080fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of cache hits.  <br /></td></tr>
+<tr class="separator:adc18746c875077576a95e7033b3080fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56900874a1e57b2920c4be60bda64d30" id="r_a56900874a1e57b2920c4be60bda64d30"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#a56900874a1e57b2920c4be60bda64d30">miss_count</a> {0}</td></tr>
+<tr class="memdesc:a56900874a1e57b2920c4be60bda64d30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of cache misses.  <br /></td></tr>
+<tr class="separator:a56900874a1e57b2920c4be60bda64d30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e19b198603cbbc1b80cd55528ed080a" id="r_a9e19b198603cbbc1b80cd55528ed080a"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#a9e19b198603cbbc1b80cd55528ed080a">invalidation_count</a> {0}</td></tr>
+<tr class="memdesc:a9e19b198603cbbc1b80cd55528ed080a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of cache invalidations.  <br /></td></tr>
+<tr class="separator:a9e19b198603cbbc1b80cd55528ed080a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97dfd42568911a7c4ce1d55a0bc7f86c" id="r_a97dfd42568911a7c4ce1d55a0bc7f86c"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#a97dfd42568911a7c4ce1d55a0bc7f86c">total_queries</a> {0}</td></tr>
+<tr class="memdesc:a97dfd42568911a7c4ce1d55a0bc7f86c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Total number of queries executed.  <br /></td></tr>
+<tr class="separator:a97dfd42568911a7c4ce1d55a0bc7f86c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24dcdb7a6b76fc444f07d61ec809ea94" id="r_a24dcdb7a6b76fc444f07d61ec809ea94"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#a24dcdb7a6b76fc444f07d61ec809ea94">archetype_changes</a> {0}</td></tr>
+<tr class="memdesc:a24dcdb7a6b76fc444f07d61ec809ea94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of archetype structural changes.  <br /></td></tr>
+<tr class="separator:a24dcdb7a6b76fc444f07d61ec809ea94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8b61f1b4ec3e404943576c78e0eefbe" id="r_aa8b61f1b4ec3e404943576c78e0eefbe"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#aa8b61f1b4ec3e404943576c78e0eefbe">partial_invalidations</a> {0}</td></tr>
+<tr class="memdesc:aa8b61f1b4ec3e404943576c78e0eefbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of partial (component-specific) invalidations.  <br /></td></tr>
+<tr class="separator:aa8b61f1b4ec3e404943576c78e0eefbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Statistics for query cache performance. </p>
+<p>Tracks cache effectiveness metrics including hits, misses, and invalidations. </p><dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="query__cache_8hpp_source.html#l00104">104</a> of file <a class="el" href="query__cache_8hpp_source.html">query_cache.hpp</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a859258ba436b8346ead617996f62e624" name="a859258ba436b8346ead617996f62e624"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a859258ba436b8346ead617996f62e624">&#9670;&#160;</a></span>QueryCacheStats() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::ecs::details::QueryCacheStats::QueryCacheStats </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0d2396346e171546031857bf5179eff7" name="a0d2396346e171546031857bf5179eff7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d2396346e171546031857bf5179eff7">&#9670;&#160;</a></span>QueryCacheStats() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::ecs::details::QueryCacheStats::QueryCacheStats </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html">QueryCacheStats</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="query__cache_8hpp_source.html#l00125">125</a> of file <a class="el" href="query__cache_8hpp_source.html">query_cache.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  126</span>    : <a class="code hl_variable" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#adc18746c875077576a95e7033b3080fb">hit_count</a>(other.hit_count.load(std::memory_order_relaxed)),</div>
+<div class="line"><span class="lineno">  127</span>      <a class="code hl_variable" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#a56900874a1e57b2920c4be60bda64d30">miss_count</a>(other.miss_count.load(std::memory_order_relaxed)),</div>
+<div class="line"><span class="lineno">  128</span>      <a class="code hl_variable" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#a9e19b198603cbbc1b80cd55528ed080a">invalidation_count</a>(other.invalidation_count.load(std::memory_order_relaxed)),</div>
+<div class="line"><span class="lineno">  129</span>      <a class="code hl_variable" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#a97dfd42568911a7c4ce1d55a0bc7f86c">total_queries</a>(other.total_queries.load(std::memory_order_relaxed)),</div>
+<div class="line"><span class="lineno">  130</span>      <a class="code hl_variable" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#a24dcdb7a6b76fc444f07d61ec809ea94">archetype_changes</a>(other.archetype_changes.load(std::memory_order_relaxed)),</div>
+<div class="line"><span class="lineno">  131</span>      <a class="code hl_variable" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#aa8b61f1b4ec3e404943576c78e0eefbe">partial_invalidations</a>(other.partial_invalidations.load(std::memory_order_relaxed)) {}</div>
+<div class="ttc" id="astructhelios_1_1ecs_1_1details_1_1QueryCacheStats_html_a24dcdb7a6b76fc444f07d61ec809ea94"><div class="ttname"><a href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#a24dcdb7a6b76fc444f07d61ec809ea94">helios::ecs::details::QueryCacheStats::archetype_changes</a></div><div class="ttdeci">std::atomic&lt; size_t &gt; archetype_changes</div><div class="ttdoc">Number of archetype structural changes.</div><div class="ttdef"><b>Definition</b> <a href="query__cache_8hpp_source.html#l00109">query_cache.hpp:109</a></div></div>
+<div class="ttc" id="astructhelios_1_1ecs_1_1details_1_1QueryCacheStats_html_a56900874a1e57b2920c4be60bda64d30"><div class="ttname"><a href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#a56900874a1e57b2920c4be60bda64d30">helios::ecs::details::QueryCacheStats::miss_count</a></div><div class="ttdeci">std::atomic&lt; size_t &gt; miss_count</div><div class="ttdoc">Number of cache misses.</div><div class="ttdef"><b>Definition</b> <a href="query__cache_8hpp_source.html#l00106">query_cache.hpp:106</a></div></div>
+<div class="ttc" id="astructhelios_1_1ecs_1_1details_1_1QueryCacheStats_html_a97dfd42568911a7c4ce1d55a0bc7f86c"><div class="ttname"><a href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#a97dfd42568911a7c4ce1d55a0bc7f86c">helios::ecs::details::QueryCacheStats::total_queries</a></div><div class="ttdeci">std::atomic&lt; size_t &gt; total_queries</div><div class="ttdoc">Total number of queries executed.</div><div class="ttdef"><b>Definition</b> <a href="query__cache_8hpp_source.html#l00108">query_cache.hpp:108</a></div></div>
+<div class="ttc" id="astructhelios_1_1ecs_1_1details_1_1QueryCacheStats_html_a9e19b198603cbbc1b80cd55528ed080a"><div class="ttname"><a href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#a9e19b198603cbbc1b80cd55528ed080a">helios::ecs::details::QueryCacheStats::invalidation_count</a></div><div class="ttdeci">std::atomic&lt; size_t &gt; invalidation_count</div><div class="ttdoc">Number of cache invalidations.</div><div class="ttdef"><b>Definition</b> <a href="query__cache_8hpp_source.html#l00107">query_cache.hpp:107</a></div></div>
+<div class="ttc" id="astructhelios_1_1ecs_1_1details_1_1QueryCacheStats_html_aa8b61f1b4ec3e404943576c78e0eefbe"><div class="ttname"><a href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#aa8b61f1b4ec3e404943576c78e0eefbe">helios::ecs::details::QueryCacheStats::partial_invalidations</a></div><div class="ttdeci">std::atomic&lt; size_t &gt; partial_invalidations</div><div class="ttdoc">Number of partial (component-specific) invalidations.</div><div class="ttdef"><b>Definition</b> <a href="query__cache_8hpp_source.html#l00110">query_cache.hpp:110</a></div></div>
+<div class="ttc" id="astructhelios_1_1ecs_1_1details_1_1QueryCacheStats_html_adc18746c875077576a95e7033b3080fb"><div class="ttname"><a href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#adc18746c875077576a95e7033b3080fb">helios::ecs::details::QueryCacheStats::hit_count</a></div><div class="ttdeci">std::atomic&lt; size_t &gt; hit_count</div><div class="ttdoc">Number of cache hits.</div><div class="ttdef"><b>Definition</b> <a href="query__cache_8hpp_source.html#l00105">query_cache.hpp:105</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aeac2cc9e36dc492539dd5a09a3df831e" name="aeac2cc9e36dc492539dd5a09a3df831e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeac2cc9e36dc492539dd5a09a3df831e">&#9670;&#160;</a></span>QueryCacheStats() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::ecs::details::QueryCacheStats::QueryCacheStats </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html">QueryCacheStats</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="query__cache_8hpp_source.html#l00133">133</a> of file <a class="el" href="query__cache_8hpp_source.html">query_cache.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  134</span>    : <a class="code hl_variable" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#adc18746c875077576a95e7033b3080fb">hit_count</a>(other.hit_count.load(std::memory_order_relaxed)),</div>
+<div class="line"><span class="lineno">  135</span>      <a class="code hl_variable" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#a56900874a1e57b2920c4be60bda64d30">miss_count</a>(other.miss_count.load(std::memory_order_relaxed)),</div>
+<div class="line"><span class="lineno">  136</span>      <a class="code hl_variable" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#a9e19b198603cbbc1b80cd55528ed080a">invalidation_count</a>(other.invalidation_count.load(std::memory_order_relaxed)),</div>
+<div class="line"><span class="lineno">  137</span>      <a class="code hl_variable" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#a97dfd42568911a7c4ce1d55a0bc7f86c">total_queries</a>(other.total_queries.load(std::memory_order_relaxed)),</div>
+<div class="line"><span class="lineno">  138</span>      <a class="code hl_variable" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#a24dcdb7a6b76fc444f07d61ec809ea94">archetype_changes</a>(other.archetype_changes.load(std::memory_order_relaxed)),</div>
+<div class="line"><span class="lineno">  139</span>      <a class="code hl_variable" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#aa8b61f1b4ec3e404943576c78e0eefbe">partial_invalidations</a>(other.partial_invalidations.load(std::memory_order_relaxed)) {}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a27bea450e903e6d48cd900f9f05c1cce" name="a27bea450e903e6d48cd900f9f05c1cce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27bea450e903e6d48cd900f9f05c1cce">&#9670;&#160;</a></span>~QueryCacheStats()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::ecs::details::QueryCacheStats::~QueryCacheStats </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a374153355e0a0eab2a1cc3ff39e9da75" name="a374153355e0a0eab2a1cc3ff39e9da75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a374153355e0a0eab2a1cc3ff39e9da75">&#9670;&#160;</a></span>HitRate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">double</a> helios::ecs::details::QueryCacheStats::HitRate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="query__cache_8hpp_source.html#l00180">180</a> of file <a class="el" href="query__cache_8hpp_source.html">query_cache.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  180</span>                                                      {</div>
+<div class="line"><span class="lineno">  181</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">total</a> = <a class="code hl_variable" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#a97dfd42568911a7c4ce1d55a0bc7f86c">total_queries</a>.load(std::memory_order_relaxed);</div>
+<div class="line"><span class="lineno">  182</span>  <span class="keywordflow">if</span> (<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">total</a> == 0) [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">unlikely</a>]] {</div>
+<div class="line"><span class="lineno">  183</span>    <span class="keywordflow">return</span> 0.0;</div>
+<div class="line"><span class="lineno">  184</span>  }</div>
+<div class="line"><span class="lineno">  185</span> </div>
+<div class="line"><span class="lineno">  186</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">hits</a> = <a class="code hl_variable" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#adc18746c875077576a95e7033b3080fb">hit_count</a>.load(std::memory_order_relaxed);</div>
+<div class="line"><span class="lineno">  187</span>  <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">hits</a>) / <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">total</a>);</div>
+<div class="line"><span class="lineno">  188</span>}</div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_af0384de48d847585fcb340c71c231e5e"><div class="ttname"><a href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, Allocator, Components... &gt; Query</div><div class="ttdoc">Type alias for query with mutable world access.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02515">query.hpp:2515</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a90bbdd96adee12c86d8b60ad02ec5411" name="a90bbdd96adee12c86d8b60ad02ec5411"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90bbdd96adee12c86d8b60ad02ec5411">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html">QueryCacheStats</a> &amp; helios::ecs::details::QueryCacheStats::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html">QueryCacheStats</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="query__cache_8hpp_source.html#l00141">141</a> of file <a class="el" href="query__cache_8hpp_source.html">query_cache.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  141</span>                                                                               {</div>
+<div class="line"><span class="lineno">  142</span>  <span class="keywordflow">if</span> (<span class="keyword">this</span> == &amp;other) [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">unlikely</a>]] {</div>
+<div class="line"><span class="lineno">  143</span>    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><span class="lineno">  144</span>  }</div>
+<div class="line"><span class="lineno">  145</span> </div>
+<div class="line"><span class="lineno">  146</span>  <a class="code hl_variable" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#adc18746c875077576a95e7033b3080fb">hit_count</a>.store(other.hit_count.load(std::memory_order_relaxed), std::memory_order_relaxed);</div>
+<div class="line"><span class="lineno">  147</span>  <a class="code hl_variable" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#a56900874a1e57b2920c4be60bda64d30">miss_count</a>.store(other.miss_count.load(std::memory_order_relaxed), std::memory_order_relaxed);</div>
+<div class="line"><span class="lineno">  148</span>  <a class="code hl_variable" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#a9e19b198603cbbc1b80cd55528ed080a">invalidation_count</a>.store(other.invalidation_count.load(std::memory_order_relaxed), std::memory_order_relaxed);</div>
+<div class="line"><span class="lineno">  149</span>  <a class="code hl_variable" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#a97dfd42568911a7c4ce1d55a0bc7f86c">total_queries</a>.store(other.total_queries.load(std::memory_order_relaxed), std::memory_order_relaxed);</div>
+<div class="line"><span class="lineno">  150</span>  <a class="code hl_variable" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#a24dcdb7a6b76fc444f07d61ec809ea94">archetype_changes</a>.store(other.archetype_changes.load(std::memory_order_relaxed), std::memory_order_relaxed);</div>
+<div class="line"><span class="lineno">  151</span>  <a class="code hl_variable" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#aa8b61f1b4ec3e404943576c78e0eefbe">partial_invalidations</a>.store(other.partial_invalidations.load(std::memory_order_relaxed), std::memory_order_relaxed);</div>
+<div class="line"><span class="lineno">  152</span> </div>
+<div class="line"><span class="lineno">  153</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><span class="lineno">  154</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a50278a0746ff99f1d2e4cf064770fe62" name="a50278a0746ff99f1d2e4cf064770fe62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50278a0746ff99f1d2e4cf064770fe62">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html">QueryCacheStats</a> &amp; helios::ecs::details::QueryCacheStats::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html">QueryCacheStats</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="query__cache_8hpp_source.html#l00156">156</a> of file <a class="el" href="query__cache_8hpp_source.html">query_cache.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  156</span>                                                                                   {</div>
+<div class="line"><span class="lineno">  157</span>  <span class="keywordflow">if</span> (<span class="keyword">this</span> == &amp;other) [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">unlikely</a>]] {</div>
+<div class="line"><span class="lineno">  158</span>    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><span class="lineno">  159</span>  }</div>
+<div class="line"><span class="lineno">  160</span> </div>
+<div class="line"><span class="lineno">  161</span>  <a class="code hl_variable" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#adc18746c875077576a95e7033b3080fb">hit_count</a>.store(other.hit_count.load(std::memory_order_relaxed), std::memory_order_relaxed);</div>
+<div class="line"><span class="lineno">  162</span>  <a class="code hl_variable" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#a56900874a1e57b2920c4be60bda64d30">miss_count</a>.store(other.miss_count.load(std::memory_order_relaxed), std::memory_order_relaxed);</div>
+<div class="line"><span class="lineno">  163</span>  <a class="code hl_variable" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#a9e19b198603cbbc1b80cd55528ed080a">invalidation_count</a>.store(other.invalidation_count.load(std::memory_order_relaxed), std::memory_order_relaxed);</div>
+<div class="line"><span class="lineno">  164</span>  <a class="code hl_variable" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#a97dfd42568911a7c4ce1d55a0bc7f86c">total_queries</a>.store(other.total_queries.load(std::memory_order_relaxed), std::memory_order_relaxed);</div>
+<div class="line"><span class="lineno">  165</span>  <a class="code hl_variable" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#a24dcdb7a6b76fc444f07d61ec809ea94">archetype_changes</a>.store(other.archetype_changes.load(std::memory_order_relaxed), std::memory_order_relaxed);</div>
+<div class="line"><span class="lineno">  166</span>  <a class="code hl_variable" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#aa8b61f1b4ec3e404943576c78e0eefbe">partial_invalidations</a>.store(other.partial_invalidations.load(std::memory_order_relaxed), std::memory_order_relaxed);</div>
+<div class="line"><span class="lineno">  167</span> </div>
+<div class="line"><span class="lineno">  168</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><span class="lineno">  169</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ad818a7b770fb2713aaa0d50f9ff6cee2" name="ad818a7b770fb2713aaa0d50f9ff6cee2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad818a7b770fb2713aaa0d50f9ff6cee2">&#9670;&#160;</a></span>Reset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a> helios::ecs::details::QueryCacheStats::Reset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="query__cache_8hpp_source.html#l00171">171</a> of file <a class="el" href="query__cache_8hpp_source.html">query_cache.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  171</span>                                            {</div>
+<div class="line"><span class="lineno">  172</span>  <a class="code hl_variable" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#adc18746c875077576a95e7033b3080fb">hit_count</a>.store(0, std::memory_order_relaxed);</div>
+<div class="line"><span class="lineno">  173</span>  <a class="code hl_variable" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#a56900874a1e57b2920c4be60bda64d30">miss_count</a>.store(0, std::memory_order_relaxed);</div>
+<div class="line"><span class="lineno">  174</span>  <a class="code hl_variable" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#a9e19b198603cbbc1b80cd55528ed080a">invalidation_count</a>.store(0, std::memory_order_relaxed);</div>
+<div class="line"><span class="lineno">  175</span>  <a class="code hl_variable" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#a97dfd42568911a7c4ce1d55a0bc7f86c">total_queries</a>.store(0, std::memory_order_relaxed);</div>
+<div class="line"><span class="lineno">  176</span>  <a class="code hl_variable" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#a24dcdb7a6b76fc444f07d61ec809ea94">archetype_changes</a>.store(0, std::memory_order_relaxed);</div>
+<div class="line"><span class="lineno">  177</span>  <a class="code hl_variable" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#aa8b61f1b4ec3e404943576c78e0eefbe">partial_invalidations</a>.store(0, std::memory_order_relaxed);</div>
+<div class="line"><span class="lineno">  178</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a24dcdb7a6b76fc444f07d61ec809ea94" name="a24dcdb7a6b76fc444f07d61ec809ea94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24dcdb7a6b76fc444f07d61ec809ea94">&#9670;&#160;</a></span>archetype_changes</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::atomic&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a>&gt; helios::ecs::details::QueryCacheStats::archetype_changes {0}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Number of archetype structural changes. </p>
+
+<p class="definition">Definition at line <a class="el" href="query__cache_8hpp_source.html#l00109">109</a> of file <a class="el" href="query__cache_8hpp_source.html">query_cache.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  109</span>{0};      <span class="comment">///&lt; Number of archetype structural changes</span></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="adc18746c875077576a95e7033b3080fb" name="adc18746c875077576a95e7033b3080fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc18746c875077576a95e7033b3080fb">&#9670;&#160;</a></span>hit_count</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::atomic&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a>&gt; helios::ecs::details::QueryCacheStats::hit_count {0}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Number of cache hits. </p>
+
+<p class="definition">Definition at line <a class="el" href="query__cache_8hpp_source.html#l00105">105</a> of file <a class="el" href="query__cache_8hpp_source.html">query_cache.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  105</span>{0};              <span class="comment">///&lt; Number of cache hits</span></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a9e19b198603cbbc1b80cd55528ed080a" name="a9e19b198603cbbc1b80cd55528ed080a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e19b198603cbbc1b80cd55528ed080a">&#9670;&#160;</a></span>invalidation_count</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::atomic&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a>&gt; helios::ecs::details::QueryCacheStats::invalidation_count {0}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Number of cache invalidations. </p>
+
+<p class="definition">Definition at line <a class="el" href="query__cache_8hpp_source.html#l00107">107</a> of file <a class="el" href="query__cache_8hpp_source.html">query_cache.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  107</span>{0};     <span class="comment">///&lt; Number of cache invalidations</span></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a56900874a1e57b2920c4be60bda64d30" name="a56900874a1e57b2920c4be60bda64d30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56900874a1e57b2920c4be60bda64d30">&#9670;&#160;</a></span>miss_count</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::atomic&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a>&gt; helios::ecs::details::QueryCacheStats::miss_count {0}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Number of cache misses. </p>
+
+<p class="definition">Definition at line <a class="el" href="query__cache_8hpp_source.html#l00106">106</a> of file <a class="el" href="query__cache_8hpp_source.html">query_cache.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  106</span>{0};             <span class="comment">///&lt; Number of cache misses</span></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aa8b61f1b4ec3e404943576c78e0eefbe" name="aa8b61f1b4ec3e404943576c78e0eefbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8b61f1b4ec3e404943576c78e0eefbe">&#9670;&#160;</a></span>partial_invalidations</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::atomic&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a>&gt; helios::ecs::details::QueryCacheStats::partial_invalidations {0}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Number of partial (component-specific) invalidations. </p>
+
+<p class="definition">Definition at line <a class="el" href="query__cache_8hpp_source.html#l00110">110</a> of file <a class="el" href="query__cache_8hpp_source.html">query_cache.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  110</span>{0};  <span class="comment">///&lt; Number of partial (component-specific) invalidations</span></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a97dfd42568911a7c4ce1d55a0bc7f86c" name="a97dfd42568911a7c4ce1d55a0bc7f86c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97dfd42568911a7c4ce1d55a0bc7f86c">&#9670;&#160;</a></span>total_queries</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::atomic&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a>&gt; helios::ecs::details::QueryCacheStats::total_queries {0}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Total number of queries executed. </p>
+
+<p class="definition">Definition at line <a class="el" href="query__cache_8hpp_source.html#l00108">108</a> of file <a class="el" href="query__cache_8hpp_source.html">query_cache.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  108</span>{0};          <span class="comment">///&lt; Total number of queries executed</span></div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehelios.html">helios</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1ecs.html">ecs</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1ecs_1_1details.html">details</a></li><li class="navelem"><a class="el" href="structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html">QueryCacheStats</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

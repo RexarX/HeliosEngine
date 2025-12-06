@@ -1,0 +1,469 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: helios::UuidGenerator Class Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classhelios_1_1UuidGenerator.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classhelios_1_1UuidGenerator-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">helios::UuidGenerator Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>A class for generating random UUIDs using a specified random number generator.  
+ <a href="classhelios_1_1UuidGenerator.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="uuid_8hpp_source.html">uuid.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a8a93ef4294d9c81a0a2286b2cb6282d3" id="r_a8a93ef4294d9c81a0a2286b2cb6282d3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1UuidGenerator.html#a8a93ef4294d9c81a0a2286b2cb6282d3">UuidGenerator</a> ()</td></tr>
+<tr class="memdesc:a8a93ef4294d9c81a0a2286b2cb6282d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor initializes the generator with a random seed.  <br /></td></tr>
+<tr class="separator:a8a93ef4294d9c81a0a2286b2cb6282d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac64c2aff898556e0caf771fae1a93f78" id="r_ac64c2aff898556e0caf771fae1a93f78"><td class="memTemplParams" colspan="2">template&lt;typename RandomEngine &gt; <br />
+requires (!std::same_as&lt;std::decay_t&lt;RandomEngine&gt;, <a class="el" href="classhelios_1_1UuidGenerator.html">UuidGenerator</a>&gt;)</td></tr>
+<tr class="memitem:ac64c2aff898556e0caf771fae1a93f78"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1UuidGenerator.html#ac64c2aff898556e0caf771fae1a93f78">UuidGenerator</a> (RandomEngine &amp;&amp;engine)</td></tr>
+<tr class="memdesc:ac64c2aff898556e0caf771fae1a93f78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a <a class="el" href="classhelios_1_1UuidGenerator.html" title="A class for generating random UUIDs using a specified random number generator.">UuidGenerator</a> with a custom random engine.  <br /></td></tr>
+<tr class="separator:ac64c2aff898556e0caf771fae1a93f78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cf8e00e5ca7d02c5e5515971da071c5" id="r_a3cf8e00e5ca7d02c5e5515971da071c5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1UuidGenerator.html#a3cf8e00e5ca7d02c5e5515971da071c5">UuidGenerator</a> (const <a class="el" href="classhelios_1_1UuidGenerator.html">UuidGenerator</a> &amp;)=delete</td></tr>
+<tr class="separator:a3cf8e00e5ca7d02c5e5515971da071c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace1bf5e4fca54c5580330dda1abfaf28" id="r_ace1bf5e4fca54c5580330dda1abfaf28"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1UuidGenerator.html#ace1bf5e4fca54c5580330dda1abfaf28">UuidGenerator</a> (<a class="el" href="classhelios_1_1UuidGenerator.html">UuidGenerator</a> &amp;&amp;) noexcept=default</td></tr>
+<tr class="separator:ace1bf5e4fca54c5580330dda1abfaf28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0928f9d86aaa3f23028ddadffdcaf49" id="r_ae0928f9d86aaa3f23028ddadffdcaf49"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1UuidGenerator.html#ae0928f9d86aaa3f23028ddadffdcaf49">~UuidGenerator</a> ()=default</td></tr>
+<tr class="separator:ae0928f9d86aaa3f23028ddadffdcaf49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31a6d43fef8d884050936fccbe97c2f5" id="r_a31a6d43fef8d884050936fccbe97c2f5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1UuidGenerator.html">UuidGenerator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1UuidGenerator.html#a31a6d43fef8d884050936fccbe97c2f5">operator=</a> (const <a class="el" href="classhelios_1_1UuidGenerator.html">UuidGenerator</a> &amp;)=delete</td></tr>
+<tr class="separator:a31a6d43fef8d884050936fccbe97c2f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28f6583834c346e408b0277ac093cd1e" id="r_a28f6583834c346e408b0277ac093cd1e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1UuidGenerator.html">UuidGenerator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1UuidGenerator.html#a28f6583834c346e408b0277ac093cd1e">operator=</a> (<a class="el" href="classhelios_1_1UuidGenerator.html">UuidGenerator</a> &amp;&amp;) noexcept=default</td></tr>
+<tr class="separator:a28f6583834c346e408b0277ac093cd1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfdd10ef0f5a5c06c36882a25586a763" id="r_acfdd10ef0f5a5c06c36882a25586a763"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1Uuid.html">Uuid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1UuidGenerator.html#acfdd10ef0f5a5c06c36882a25586a763">Generate</a> ()</td></tr>
+<tr class="separator:acfdd10ef0f5a5c06c36882a25586a763"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A class for generating random UUIDs using a specified random number generator. </p>
+
+<p class="definition">Definition at line <a class="el" href="uuid_8hpp_source.html#l00160">160</a> of file <a class="el" href="uuid_8hpp_source.html">uuid.hpp</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a8a93ef4294d9c81a0a2286b2cb6282d3" name="a8a93ef4294d9c81a0a2286b2cb6282d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a93ef4294d9c81a0a2286b2cb6282d3">&#9670;&#160;</a></span>UuidGenerator() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::UuidGenerator::UuidGenerator </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default constructor initializes the generator with a random seed. </p>
+
+<p class="definition">Definition at line <a class="el" href="uuid_8hpp_source.html#l00165">165</a> of file <a class="el" href="uuid_8hpp_source.html">uuid.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  165</span>: generator_(std::random_device{}()) {}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ac64c2aff898556e0caf771fae1a93f78" name="ac64c2aff898556e0caf771fae1a93f78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac64c2aff898556e0caf771fae1a93f78">&#9670;&#160;</a></span>UuidGenerator() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename RandomEngine &gt; <br />
+requires (!std::same_as&lt;std::decay_t&lt;RandomEngine&gt;, <a class="el" href="classhelios_1_1UuidGenerator.html">UuidGenerator</a>&gt;)</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::UuidGenerator::UuidGenerator </td>
+          <td>(</td>
+          <td class="paramtype">RandomEngine &amp;&amp;&#160;</td>
+          <td class="paramname"><em>engine</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct a <a class="el" href="classhelios_1_1UuidGenerator.html" title="A class for generating random UUIDs using a specified random number generator.">UuidGenerator</a> with a custom random engine. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">RandomEngine</td><td>The type of the random engine. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">engine</td><td>An instance of the random engine. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="uuid_8hpp_source.html#l00174">174</a> of file <a class="el" href="uuid_8hpp_source.html">uuid.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  174</span>: generator_(std::forward&lt;RandomEngine&gt;(engine)) {}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a3cf8e00e5ca7d02c5e5515971da071c5" name="a3cf8e00e5ca7d02c5e5515971da071c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cf8e00e5ca7d02c5e5515971da071c5">&#9670;&#160;</a></span>UuidGenerator() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::UuidGenerator::UuidGenerator </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1UuidGenerator.html">UuidGenerator</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ace1bf5e4fca54c5580330dda1abfaf28" name="ace1bf5e4fca54c5580330dda1abfaf28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace1bf5e4fca54c5580330dda1abfaf28">&#9670;&#160;</a></span>UuidGenerator() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::UuidGenerator::UuidGenerator </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1UuidGenerator.html">UuidGenerator</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae0928f9d86aaa3f23028ddadffdcaf49" name="ae0928f9d86aaa3f23028ddadffdcaf49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0928f9d86aaa3f23028ddadffdcaf49">&#9670;&#160;</a></span>~UuidGenerator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::UuidGenerator::~UuidGenerator </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="acfdd10ef0f5a5c06c36882a25586a763" name="acfdd10ef0f5a5c06c36882a25586a763"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acfdd10ef0f5a5c06c36882a25586a763">&#9670;&#160;</a></span>Generate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1Uuid.html">Uuid</a> helios::UuidGenerator::Generate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="uuid_8hpp_source.html#l00188">188</a> of file <a class="el" href="uuid_8hpp_source.html">uuid.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  188</span>                                    {</div>
+<div class="line"><span class="lineno">  189</span>  uuids::basic_uuid_random_generator&lt;std::mt19937_64&gt; gen(&amp;generator_);</div>
+<div class="line"><span class="lineno">  190</span>  <span class="keywordflow">return</span> Uuid(gen());</div>
+<div class="line"><span class="lineno">  191</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a31a6d43fef8d884050936fccbe97c2f5" name="a31a6d43fef8d884050936fccbe97c2f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31a6d43fef8d884050936fccbe97c2f5">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1UuidGenerator.html">UuidGenerator</a> &amp; helios::UuidGenerator::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1UuidGenerator.html">UuidGenerator</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a28f6583834c346e408b0277ac093cd1e" name="a28f6583834c346e408b0277ac093cd1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28f6583834c346e408b0277ac093cd1e">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1UuidGenerator.html">UuidGenerator</a> &amp; helios::UuidGenerator::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1UuidGenerator.html">UuidGenerator</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehelios.html">helios</a></li><li class="navelem"><a class="el" href="classhelios_1_1UuidGenerator.html">UuidGenerator</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

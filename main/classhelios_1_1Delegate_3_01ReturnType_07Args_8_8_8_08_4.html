@@ -1,0 +1,1326 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: helios::Delegate&lt; ReturnType(Args...)&gt; Class Template Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">helios::Delegate&lt; ReturnType(Args...)&gt; Class Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a62a3c606a6398c5cd9d7cfcaf3518a29" id="r_a62a3c606a6398c5cd9d7cfcaf3518a29"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#a62a3c606a6398c5cd9d7cfcaf3518a29">FunctionType</a> = ReturnType(*)(void *, Args...)</td></tr>
+<tr class="separator:a62a3c606a6398c5cd9d7cfcaf3518a29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ad1e859c401e9f28289143db4ff14cbef" id="r_ad1e859c401e9f28289143db4ff14cbef"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#ad1e859c401e9f28289143db4ff14cbef">Delegate</a> () noexcept=default</td></tr>
+<tr class="memdesc:ad1e859c401e9f28289143db4ff14cbef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructs an empty delegate.  <br /></td></tr>
+<tr class="separator:ad1e859c401e9f28289143db4ff14cbef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af59d832a9cce005f5670e90316001a26" id="r_af59d832a9cce005f5670e90316001a26"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#af59d832a9cce005f5670e90316001a26">Delegate</a> (const <a class="el" href="classhelios_1_1Delegate.html">Delegate</a> &amp;) noexcept=default</td></tr>
+<tr class="separator:af59d832a9cce005f5670e90316001a26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2224ca207a1711e9ba5942169e94eef" id="r_af2224ca207a1711e9ba5942169e94eef"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#af2224ca207a1711e9ba5942169e94eef">Delegate</a> (<a class="el" href="classhelios_1_1Delegate.html">Delegate</a> &amp;&amp;) noexcept=default</td></tr>
+<tr class="separator:af2224ca207a1711e9ba5942169e94eef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a363f2ab4a28f26b771b6a03e3b3cbf35" id="r_a363f2ab4a28f26b771b6a03e3b3cbf35"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#a363f2ab4a28f26b771b6a03e3b3cbf35">~Delegate</a> () noexcept=default</td></tr>
+<tr class="separator:a363f2ab4a28f26b771b6a03e3b3cbf35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac081b36e541314ac443e4b79f6f2da41" id="r_ac081b36e541314ac443e4b79f6f2da41"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1Delegate.html">Delegate</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#ac081b36e541314ac443e4b79f6f2da41">operator=</a> (const <a class="el" href="classhelios_1_1Delegate.html">Delegate</a> &amp;) noexcept=default</td></tr>
+<tr class="separator:ac081b36e541314ac443e4b79f6f2da41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee1aa9b86818b17ff6393d8257458c21" id="r_aee1aa9b86818b17ff6393d8257458c21"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1Delegate.html">Delegate</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#aee1aa9b86818b17ff6393d8257458c21">operator=</a> (<a class="el" href="classhelios_1_1Delegate.html">Delegate</a> &amp;&amp;) noexcept=default</td></tr>
+<tr class="separator:aee1aa9b86818b17ff6393d8257458c21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a79277a2475d59e80ee04de076cc535" id="r_a2a79277a2475d59e80ee04de076cc535"><td class="memItemLeft" align="right" valign="top">constexpr void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#a2a79277a2475d59e80ee04de076cc535">Reset</a> () noexcept</td></tr>
+<tr class="memdesc:a2a79277a2475d59e80ee04de076cc535"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset delegate to empty state.  <br /></td></tr>
+<tr class="separator:a2a79277a2475d59e80ee04de076cc535"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5712bc43d01f21b9f4042a0abfcdba24" id="r_a5712bc43d01f21b9f4042a0abfcdba24"><td class="memItemLeft" align="right" valign="top">constexpr ReturnType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#a5712bc43d01f21b9f4042a0abfcdba24">Invoke</a> (Args &amp;&amp;... args) const noexcept(std::is_nothrow_invocable_v&lt; <a class="el" href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#a62a3c606a6398c5cd9d7cfcaf3518a29">FunctionType</a>, void *, Args &amp;&amp;... &gt;)</td></tr>
+<tr class="memdesc:a5712bc43d01f21b9f4042a0abfcdba24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invoke delegate with exact argument types.  <br /></td></tr>
+<tr class="separator:a5712bc43d01f21b9f4042a0abfcdba24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20e23aa26b6d3beb6c3f7813b2dd6cfe" id="r_a20e23aa26b6d3beb6c3f7813b2dd6cfe"><td class="memTemplParams" colspan="2">template&lt;typename... UArgs&gt; <br />
+requires (sizeof...(UArgs) == sizeof...(Args)) &amp;&amp; (... &amp;&amp; details::PolymorphicConvertible&lt;UArgs, Args&gt;)</td></tr>
+<tr class="memitem:a20e23aa26b6d3beb6c3f7813b2dd6cfe"><td class="memTemplItemLeft" align="right" valign="top">constexpr ReturnType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#a20e23aa26b6d3beb6c3f7813b2dd6cfe">Invoke</a> (UArgs &amp;&amp;... args) const noexcept(std::is_nothrow_invocable_v&lt; <a class="el" href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#a62a3c606a6398c5cd9d7cfcaf3518a29">FunctionType</a>, void *, UArgs... &gt;)</td></tr>
+<tr class="memdesc:a20e23aa26b6d3beb6c3f7813b2dd6cfe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invoke delegate with polymorphically convertible argument types.  <br /></td></tr>
+<tr class="separator:a20e23aa26b6d3beb6c3f7813b2dd6cfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a093ee3b0b8ece6ba50235f9c7e3fa0b8" id="r_a093ee3b0b8ece6ba50235f9c7e3fa0b8"><td class="memItemLeft" align="right" valign="top">constexpr ReturnType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#a093ee3b0b8ece6ba50235f9c7e3fa0b8">operator()</a> (Args &amp;&amp;... args) const noexcept(std::is_nothrow_invocable_v&lt; <a class="el" href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#a62a3c606a6398c5cd9d7cfcaf3518a29">FunctionType</a>, void *, Args... &gt;)</td></tr>
+<tr class="memdesc:a093ee3b0b8ece6ba50235f9c7e3fa0b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invoke delegate with exact argument types.  <br /></td></tr>
+<tr class="separator:a093ee3b0b8ece6ba50235f9c7e3fa0b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a493515b3d5a7ce48c9ccfe8a75848811" id="r_a493515b3d5a7ce48c9ccfe8a75848811"><td class="memTemplParams" colspan="2">template&lt;typename... UArgs&gt; <br />
+requires (sizeof...(UArgs) == sizeof...(Args)) &amp;&amp; (... &amp;&amp; details::PolymorphicConvertible&lt;UArgs, Args&gt;)</td></tr>
+<tr class="memitem:a493515b3d5a7ce48c9ccfe8a75848811"><td class="memTemplItemLeft" align="right" valign="top">constexpr ReturnType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#a493515b3d5a7ce48c9ccfe8a75848811">operator()</a> (UArgs &amp;&amp;... args) const noexcept(std::is_nothrow_invocable_v&lt; <a class="el" href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#a62a3c606a6398c5cd9d7cfcaf3518a29">FunctionType</a>, void *, UArgs... &gt;)</td></tr>
+<tr class="memdesc:a493515b3d5a7ce48c9ccfe8a75848811"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invoke delegate with polymorphically convertible argument types.  <br /></td></tr>
+<tr class="separator:a493515b3d5a7ce48c9ccfe8a75848811"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17a42975e81232f8f52b1f19768f8527" id="r_a17a42975e81232f8f52b1f19768f8527"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#a17a42975e81232f8f52b1f19768f8527">operator==</a> (const <a class="el" href="classhelios_1_1Delegate.html">Delegate</a> &amp;other) const noexcept</td></tr>
+<tr class="memdesc:a17a42975e81232f8f52b1f19768f8527"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare two delegates for equality.  <br /></td></tr>
+<tr class="separator:a17a42975e81232f8f52b1f19768f8527"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7eb677265ad023c56dd50192f8dbca15" id="r_a7eb677265ad023c56dd50192f8dbca15"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#a7eb677265ad023c56dd50192f8dbca15">operator!=</a> (const <a class="el" href="classhelios_1_1Delegate.html">Delegate</a> &amp;other) const noexcept</td></tr>
+<tr class="memdesc:a7eb677265ad023c56dd50192f8dbca15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare two delegates for inequality.  <br /></td></tr>
+<tr class="separator:a7eb677265ad023c56dd50192f8dbca15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a330d2db3c43fc525bfdaf5e18f5cc4af" id="r_a330d2db3c43fc525bfdaf5e18f5cc4af"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#a330d2db3c43fc525bfdaf5e18f5cc4af">Valid</a> () const noexcept</td></tr>
+<tr class="memdesc:a330d2db3c43fc525bfdaf5e18f5cc4af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if delegate is bound to a callable.  <br /></td></tr>
+<tr class="separator:a330d2db3c43fc525bfdaf5e18f5cc4af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ffd51bc5d6de517d4377b4e3cb856a2" id="r_a7ffd51bc5d6de517d4377b4e3cb856a2"><td class="memItemLeft" align="right" valign="top">constexpr void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#a7ffd51bc5d6de517d4377b4e3cb856a2">InstancePtr</a> () const noexcept</td></tr>
+<tr class="memdesc:a7ffd51bc5d6de517d4377b4e3cb856a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get raw instance pointer stored inside delegate.  <br /></td></tr>
+<tr class="separator:a7ffd51bc5d6de517d4377b4e3cb856a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49c94c3c097ec92567a2a1af838be538" id="r_a49c94c3c097ec92567a2a1af838be538"><td class="memTemplParams" colspan="2">template&lt;typename... UArgs&gt; <br />
+requires (sizeof...(UArgs) == sizeof...(Args)) &amp;&amp; (... &amp;&amp; details::PolymorphicConvertible&lt;UArgs, Args&gt;)</td></tr>
+<tr class="memitem:a49c94c3c097ec92567a2a1af838be538"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#a49c94c3c097ec92567a2a1af838be538">Invoke</a> (UArgs &amp;&amp;... args) const noexcept(std::is_nothrow_invocable_v&lt; <a class="el" href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#a62a3c606a6398c5cd9d7cfcaf3518a29">FunctionType</a>, void *, UArgs... &gt;) -&gt; ReturnType</td></tr>
+<tr class="separator:a49c94c3c097ec92567a2a1af838be538"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adace3d99e75d7fd7e3a312a3d0b1023f" id="r_adace3d99e75d7fd7e3a312a3d0b1023f"><td class="memTemplParams" colspan="2">template&lt;auto Func&gt; <br />
+requires (!std::is_member_function_pointer_v&lt;decltype(Func)&gt; &amp;&amp; std::same_as&lt;ReturnType, typename <a class="el" href="structhelios_1_1details_1_1FreeFunctionTraits.html">details::FreeFunctionTraits</a>&lt;decltype(Func)&gt;::ReturnType&gt; &amp;&amp; (sizeof...(Args) == std::tuple_size_v&lt;typename <a class="el" href="structhelios_1_1details_1_1FreeFunctionTraits.html">details::FreeFunctionTraits</a>&lt;decltype(Func)&gt;::Arguments&gt;))</td></tr>
+<tr class="memitem:adace3d99e75d7fd7e3a312a3d0b1023f"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#adace3d99e75d7fd7e3a312a3d0b1023f">FromFunction</a> () noexcept -&gt; <a class="el" href="classhelios_1_1Delegate.html">Delegate</a></td></tr>
+<tr class="separator:adace3d99e75d7fd7e3a312a3d0b1023f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51494a2cf67fc2f3d90955bad7bfcc6a" id="r_a51494a2cf67fc2f3d90955bad7bfcc6a"><td class="memTemplParams" colspan="2">template&lt;typename Signature , Signature Func&gt; <br />
+requires (!std::is_member_function_pointer_v&lt;decltype(Func)&gt; &amp;&amp; std::same_as&lt;ReturnType, typename <a class="el" href="structhelios_1_1details_1_1FreeFunctionTraits.html">details::FreeFunctionTraits</a>&lt;Signature&gt;::ReturnType&gt; &amp;&amp; (sizeof...(Args) == std::tuple_size_v&lt;typename <a class="el" href="structhelios_1_1details_1_1FreeFunctionTraits.html">details::FreeFunctionTraits</a>&lt;Signature&gt;::Arguments&gt;))</td></tr>
+<tr class="memitem:a51494a2cf67fc2f3d90955bad7bfcc6a"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#a51494a2cf67fc2f3d90955bad7bfcc6a">FromFunction</a> () noexcept -&gt; <a class="el" href="classhelios_1_1Delegate.html">Delegate</a></td></tr>
+<tr class="separator:a51494a2cf67fc2f3d90955bad7bfcc6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2aa3b9aecba03084ef2402a02ae9dc44" id="r_a2aa3b9aecba03084ef2402a02ae9dc44"><td class="memTemplParams" colspan="2">template&lt;auto Func&gt; <br />
+requires std::is_member_function_pointer_v&lt;decltype(Func)&gt; &amp;&amp; std::same_as&lt;ReturnType, typename <a class="el" href="structhelios_1_1details_1_1MemberFunctionTraits.html">details::MemberFunctionTraits</a>&lt;decltype(Func)&gt;::ReturnType&gt; &amp;&amp; (sizeof...(Args) == std::tuple_size_v&lt;typename <a class="el" href="structhelios_1_1details_1_1MemberFunctionTraits.html">details::MemberFunctionTraits</a>&lt;decltype(Func)&gt;::Arguments&gt;)</td></tr>
+<tr class="memitem:a2aa3b9aecba03084ef2402a02ae9dc44"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#a2aa3b9aecba03084ef2402a02ae9dc44">FromFunction</a> (typename <a class="el" href="structhelios_1_1details_1_1MemberFunctionTraits.html">details::MemberFunctionTraits</a>&lt; decltype(Func)&gt;::Class &amp;instance) noexcept -&gt; <a class="el" href="classhelios_1_1Delegate.html">Delegate</a></td></tr>
+<tr class="separator:a2aa3b9aecba03084ef2402a02ae9dc44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac50a39963f46cde8b3d27a07d75e02ec" id="r_ac50a39963f46cde8b3d27a07d75e02ec"><td class="memTemplParams" colspan="2">template&lt;typename Signature , Signature Func&gt; <br />
+requires std::is_member_function_pointer_v&lt;decltype(Func)&gt; &amp;&amp; std::same_as&lt;ReturnType, typename <a class="el" href="structhelios_1_1details_1_1MemberFunctionTraits.html">details::MemberFunctionTraits</a>&lt;Signature&gt;::ReturnType&gt; &amp;&amp; (sizeof...(Args) == std::tuple_size_v&lt;typename <a class="el" href="structhelios_1_1details_1_1MemberFunctionTraits.html">details::MemberFunctionTraits</a>&lt;Signature&gt;::Arguments&gt;)</td></tr>
+<tr class="memitem:ac50a39963f46cde8b3d27a07d75e02ec"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#ac50a39963f46cde8b3d27a07d75e02ec">FromFunction</a> (typename <a class="el" href="structhelios_1_1details_1_1MemberFunctionTraits.html">details::MemberFunctionTraits</a>&lt; Signature &gt;::Class &amp;instance) noexcept -&gt; <a class="el" href="classhelios_1_1Delegate.html">Delegate</a></td></tr>
+<tr class="separator:ac50a39963f46cde8b3d27a07d75e02ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:aa83d4b6f2a939d21ec0e15f9292e15f3" id="r_aa83d4b6f2a939d21ec0e15f9292e15f3"><td class="memTemplParams" colspan="2">template&lt;auto Func&gt; <br />
+requires (!std::is_member_function_pointer_v&lt;decltype(Func)&gt; &amp;&amp; std::same_as&lt;ReturnType, typename <a class="el" href="structhelios_1_1details_1_1FreeFunctionTraits.html">details::FreeFunctionTraits</a>&lt;decltype(Func)&gt;::ReturnType&gt; &amp;&amp; (sizeof...(Args) == std::tuple_size_v&lt;typename <a class="el" href="structhelios_1_1details_1_1FreeFunctionTraits.html">details::FreeFunctionTraits</a>&lt;decltype(Func)&gt;::Arguments&gt;))</td></tr>
+<tr class="memitem:aa83d4b6f2a939d21ec0e15f9292e15f3"><td class="memTemplItemLeft" align="right" valign="top">static constexpr <a class="el" href="classhelios_1_1Delegate.html">Delegate</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#aa83d4b6f2a939d21ec0e15f9292e15f3">FromFunction</a> () noexcept</td></tr>
+<tr class="memdesc:aa83d4b6f2a939d21ec0e15f9292e15f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create delegate from a free function pointer.  <br /></td></tr>
+<tr class="separator:aa83d4b6f2a939d21ec0e15f9292e15f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae148770221ad0d6b154bf5858f3a26f6" id="r_ae148770221ad0d6b154bf5858f3a26f6"><td class="memTemplParams" colspan="2">template&lt;typename Signature , Signature Func&gt; <br />
+requires (!std::is_member_function_pointer_v&lt;decltype(Func)&gt; &amp;&amp; std::same_as&lt;ReturnType, typename <a class="el" href="structhelios_1_1details_1_1FreeFunctionTraits.html">details::FreeFunctionTraits</a>&lt;Signature&gt;::ReturnType&gt; &amp;&amp; (sizeof...(Args) == std::tuple_size_v&lt;typename <a class="el" href="structhelios_1_1details_1_1FreeFunctionTraits.html">details::FreeFunctionTraits</a>&lt;Signature&gt;::Arguments&gt;))</td></tr>
+<tr class="memitem:ae148770221ad0d6b154bf5858f3a26f6"><td class="memTemplItemLeft" align="right" valign="top">static constexpr <a class="el" href="classhelios_1_1Delegate.html">Delegate</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#ae148770221ad0d6b154bf5858f3a26f6">FromFunction</a> () noexcept</td></tr>
+<tr class="memdesc:ae148770221ad0d6b154bf5858f3a26f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create delegate from a free function pointer with explicit signature type.  <br /></td></tr>
+<tr class="separator:ae148770221ad0d6b154bf5858f3a26f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7dae8ebed16e06775525beda2c8a6dfa" id="r_a7dae8ebed16e06775525beda2c8a6dfa"><td class="memTemplParams" colspan="2">template&lt;auto Func&gt; <br />
+requires std::is_member_function_pointer_v&lt;decltype(Func)&gt; &amp;&amp; std::same_as&lt;ReturnType, typename <a class="el" href="structhelios_1_1details_1_1MemberFunctionTraits.html">details::MemberFunctionTraits</a>&lt;decltype(Func)&gt;::ReturnType&gt; &amp;&amp; (sizeof...(Args) == std::tuple_size_v&lt;typename <a class="el" href="structhelios_1_1details_1_1MemberFunctionTraits.html">details::MemberFunctionTraits</a>&lt;decltype(Func)&gt;::Arguments&gt;)</td></tr>
+<tr class="memitem:a7dae8ebed16e06775525beda2c8a6dfa"><td class="memTemplItemLeft" align="right" valign="top">static constexpr <a class="el" href="classhelios_1_1Delegate.html">Delegate</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#a7dae8ebed16e06775525beda2c8a6dfa">FromFunction</a> (typename <a class="el" href="structhelios_1_1details_1_1MemberFunctionTraits.html">details::MemberFunctionTraits</a>&lt; decltype(Func)&gt;::Class &amp;instance) noexcept</td></tr>
+<tr class="memdesc:a7dae8ebed16e06775525beda2c8a6dfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create delegate from a member function pointer.  <br /></td></tr>
+<tr class="separator:a7dae8ebed16e06775525beda2c8a6dfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1548ab276b5c8a443faf69c4954288c" id="r_aa1548ab276b5c8a443faf69c4954288c"><td class="memTemplParams" colspan="2">template&lt;typename Signature , Signature Func&gt; <br />
+requires std::is_member_function_pointer_v&lt;decltype(Func)&gt; &amp;&amp; std::same_as&lt;ReturnType, typename <a class="el" href="structhelios_1_1details_1_1MemberFunctionTraits.html">details::MemberFunctionTraits</a>&lt;Signature&gt;::ReturnType&gt; &amp;&amp; (sizeof...(Args) == std::tuple_size_v&lt;typename <a class="el" href="structhelios_1_1details_1_1MemberFunctionTraits.html">details::MemberFunctionTraits</a>&lt;Signature&gt;::Arguments&gt;)</td></tr>
+<tr class="memitem:aa1548ab276b5c8a443faf69c4954288c"><td class="memTemplItemLeft" align="right" valign="top">static constexpr <a class="el" href="classhelios_1_1Delegate.html">Delegate</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#aa1548ab276b5c8a443faf69c4954288c">FromFunction</a> (typename <a class="el" href="structhelios_1_1details_1_1MemberFunctionTraits.html">details::MemberFunctionTraits</a>&lt; Signature &gt;::Class &amp;instance) noexcept</td></tr>
+<tr class="memdesc:aa1548ab276b5c8a443faf69c4954288c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create delegate from a member function pointer with explicit signature type.  <br /></td></tr>
+<tr class="separator:aa1548ab276b5c8a443faf69c4954288c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename ReturnType, typename... Args&gt;<br />
+class helios::Delegate&lt; ReturnType(Args...)&gt;</div>
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00088">88</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a62a3c606a6398c5cd9d7cfcaf3518a29" name="a62a3c606a6398c5cd9d7cfcaf3518a29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62a3c606a6398c5cd9d7cfcaf3518a29">&#9670;&#160;</a></span>FunctionType</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ReturnType , typename... Args&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classhelios_1_1Delegate.html">helios::Delegate</a>&lt; ReturnType(Args...)&gt;::FunctionType =  ReturnType (*)(void*, Args...)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00090">90</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ad1e859c401e9f28289143db4ff14cbef" name="ad1e859c401e9f28289143db4ff14cbef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1e859c401e9f28289143db4ff14cbef">&#9670;&#160;</a></span>Delegate() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ReturnType , typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1Delegate.html">helios::Delegate</a>&lt; ReturnType(Args...)&gt;::Delegate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default constructs an empty delegate. </p>
+
+</div>
+</div>
+<a id="af59d832a9cce005f5670e90316001a26" name="af59d832a9cce005f5670e90316001a26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af59d832a9cce005f5670e90316001a26">&#9670;&#160;</a></span>Delegate() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ReturnType , typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1Delegate.html">helios::Delegate</a>&lt; ReturnType(Args...)&gt;::Delegate </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1Delegate.html">Delegate</a>&lt; ReturnType(Args...)&gt; &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af2224ca207a1711e9ba5942169e94eef" name="af2224ca207a1711e9ba5942169e94eef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2224ca207a1711e9ba5942169e94eef">&#9670;&#160;</a></span>Delegate() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ReturnType , typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1Delegate.html">helios::Delegate</a>&lt; ReturnType(Args...)&gt;::Delegate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1Delegate.html">Delegate</a>&lt; ReturnType(Args...)&gt; &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a363f2ab4a28f26b771b6a03e3b3cbf35" name="a363f2ab4a28f26b771b6a03e3b3cbf35"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a363f2ab4a28f26b771b6a03e3b3cbf35">&#9670;&#160;</a></span>~Delegate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ReturnType , typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1Delegate.html">helios::Delegate</a>&lt; ReturnType(Args...)&gt;::~<a class="el" href="classhelios_1_1Delegate.html">Delegate</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aa83d4b6f2a939d21ec0e15f9292e15f3" name="aa83d4b6f2a939d21ec0e15f9292e15f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa83d4b6f2a939d21ec0e15f9292e15f3">&#9670;&#160;</a></span>FromFunction() <span class="overload">[1/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ReturnType , typename... Args&gt; </div>
+<div class="memtemplate">
+template&lt;auto Func&gt; <br />
+requires (!std::is_member_function_pointer_v&lt;decltype(Func)&gt; &amp;&amp; std::same_as&lt;ReturnType, typename <a class="el" href="structhelios_1_1details_1_1FreeFunctionTraits.html">details::FreeFunctionTraits</a>&lt;decltype(Func)&gt;::ReturnType&gt; &amp;&amp; (sizeof...(Args) == std::tuple_size_v&lt;typename <a class="el" href="structhelios_1_1details_1_1FreeFunctionTraits.html">details::FreeFunctionTraits</a>&lt;decltype(Func)&gt;::Arguments&gt;))</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static constexpr <a class="el" href="classhelios_1_1Delegate.html">Delegate</a> <a class="el" href="classhelios_1_1Delegate.html">helios::Delegate</a>&lt; ReturnType(Args...)&gt;::FromFunction </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create delegate from a free function pointer. </p>
+<p>Binds a free function with no instance pointer required. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Func</td><td>Free function pointer value. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1Delegate.html" title="Type-erased callable wrapper for free and member functions.">Delegate</a> bound to the given free function. </dd></dl>
+
+</div>
+</div>
+<a id="ae148770221ad0d6b154bf5858f3a26f6" name="ae148770221ad0d6b154bf5858f3a26f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae148770221ad0d6b154bf5858f3a26f6">&#9670;&#160;</a></span>FromFunction() <span class="overload">[2/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ReturnType , typename... Args&gt; </div>
+<div class="memtemplate">
+template&lt;typename Signature , Signature Func&gt; <br />
+requires (!std::is_member_function_pointer_v&lt;decltype(Func)&gt; &amp;&amp; std::same_as&lt;ReturnType, typename <a class="el" href="structhelios_1_1details_1_1FreeFunctionTraits.html">details::FreeFunctionTraits</a>&lt;Signature&gt;::ReturnType&gt; &amp;&amp; (sizeof...(Args) == std::tuple_size_v&lt;typename <a class="el" href="structhelios_1_1details_1_1FreeFunctionTraits.html">details::FreeFunctionTraits</a>&lt;Signature&gt;::Arguments&gt;))</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static constexpr <a class="el" href="classhelios_1_1Delegate.html">Delegate</a> <a class="el" href="classhelios_1_1Delegate.html">helios::Delegate</a>&lt; ReturnType(Args...)&gt;::FromFunction </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create delegate from a free function pointer with explicit signature type. </p>
+<p>Variant that uses an explicit signature type instead of auto non-type template. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Signature</td><td>Free function pointer type. </td></tr>
+    <tr><td class="paramname">Func</td><td>Free function pointer value. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1Delegate.html" title="Type-erased callable wrapper for free and member functions.">Delegate</a> bound to the given free function. </dd></dl>
+
+</div>
+</div>
+<a id="adace3d99e75d7fd7e3a312a3d0b1023f" name="adace3d99e75d7fd7e3a312a3d0b1023f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adace3d99e75d7fd7e3a312a3d0b1023f">&#9670;&#160;</a></span>FromFunction() <span class="overload">[3/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ReturnType , typename... Args&gt; </div>
+<div class="memtemplate">
+template&lt;auto Func&gt; <br />
+requires (!std::is_member_function_pointer_v&lt;decltype(Func)&gt; &amp;&amp; std::same_as&lt;ReturnType, typename <a class="el" href="structhelios_1_1details_1_1FreeFunctionTraits.html">details::FreeFunctionTraits</a>&lt;decltype(Func)&gt;::ReturnType&gt; &amp;&amp; (sizeof...(Args) == std::tuple_size_v&lt;typename <a class="el" href="structhelios_1_1details_1_1FreeFunctionTraits.html">details::FreeFunctionTraits</a>&lt;decltype(Func)&gt;::Arguments&gt;))</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classhelios_1_1Delegate.html">helios::Delegate</a>&lt; ReturnType(Args...)&gt;::FromFunction </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt; <a class="el" href="classhelios_1_1Delegate.html">Delegate</a> </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00302">302</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  302</span>                                                                                {</div>
+<div class="line"><span class="lineno">  303</span>  <span class="keyword">using </span>Traits = details::FreeFunctionTraits&lt;<span class="keyword">decltype</span>(Func)&gt;;</div>
+<div class="line"><span class="lineno">  304</span>  <span class="keyword">using </span>Arguments = <span class="keyword">typename</span> Traits::Arguments;</div>
+<div class="line"><span class="lineno">  305</span> </div>
+<div class="line"><span class="lineno">  306</span>  <span class="keyword">static_assert</span>(</div>
+<div class="line"><span class="lineno">  307</span>      []&lt;std::size_t... I&gt;(std::index_sequence&lt;I...&gt;) {</div>
+<div class="line"><span class="lineno">  308</span>        <span class="keywordflow">return</span> (... &amp;&amp; details::PolymorphicConvertible&lt;Args, std::tuple_element_t&lt;I, Arguments&gt;&gt;);</div>
+<div class="line"><span class="lineno">  309</span>      }(std::make_index_sequence&lt;<span class="keyword">sizeof</span>...(Args)&gt;{}),</div>
+<div class="line"><span class="lineno">  310</span>      <span class="stringliteral">&quot;Arguments must be convertible or have base-derived relationship&quot;</span>);</div>
+<div class="line"><span class="lineno">  311</span> </div>
+<div class="line"><span class="lineno">  312</span>  <a class="code hl_function" href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#ad1e859c401e9f28289143db4ff14cbef">Delegate</a> delegate;</div>
+<div class="line"><span class="lineno">  313</span>  delegate.function_ptr_ = [](<span class="keywordtype">void</span>* <span class="comment">/*instance*/</span>, Args... call_args) <span class="keyword">noexcept</span>(</div>
+<div class="line"><span class="lineno">  314</span>                               std::is_nothrow_invocable_v&lt;FunctionType, void*, Args...&gt;) -&gt; ReturnType {</div>
+<div class="line"><span class="lineno">  315</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_void_v&lt;ReturnType&gt;) {</div>
+<div class="line"><span class="lineno">  316</span>      std::invoke(Func, <span class="keyword">static_cast&lt;</span>typename std::tuple_element_t&lt;0, Arguments&gt;<span class="keyword">&gt;</span>(call_args)...);</div>
+<div class="line"><span class="lineno">  317</span>      <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  318</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  319</span>      <span class="keywordflow">return</span> std::invoke(Func, <span class="keyword">static_cast&lt;</span>typename std::tuple_element_t&lt;0, Arguments&gt;<span class="keyword">&gt;</span>(call_args)...);</div>
+<div class="line"><span class="lineno">  320</span>    }</div>
+<div class="line"><span class="lineno">  321</span>  };</div>
+<div class="line"><span class="lineno">  322</span> </div>
+<div class="line"><span class="lineno">  323</span>  <span class="keywordflow">return</span> delegate;</div>
+<div class="line"><span class="lineno">  324</span>}</div>
+<div class="ttc" id="aclasshelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4_html_ad1e859c401e9f28289143db4ff14cbef"><div class="ttname"><a href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#ad1e859c401e9f28289143db4ff14cbef">helios::Delegate&lt; ReturnType(Args...)&gt;::Delegate</a></div><div class="ttdeci">constexpr Delegate() noexcept=default</div><div class="ttdoc">Default constructs an empty delegate.</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a51494a2cf67fc2f3d90955bad7bfcc6a" name="a51494a2cf67fc2f3d90955bad7bfcc6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51494a2cf67fc2f3d90955bad7bfcc6a">&#9670;&#160;</a></span>FromFunction() <span class="overload">[4/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ReturnType , typename... Args&gt; </div>
+<div class="memtemplate">
+template&lt;typename Signature , Signature Func&gt; <br />
+requires (!std::is_member_function_pointer_v&lt;decltype(Func)&gt; &amp;&amp; std::same_as&lt;ReturnType, typename <a class="el" href="structhelios_1_1details_1_1FreeFunctionTraits.html">details::FreeFunctionTraits</a>&lt;Signature&gt;::ReturnType&gt; &amp;&amp; (sizeof...(Args) == std::tuple_size_v&lt;typename <a class="el" href="structhelios_1_1details_1_1FreeFunctionTraits.html">details::FreeFunctionTraits</a>&lt;Signature&gt;::Arguments&gt;))</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classhelios_1_1Delegate.html">helios::Delegate</a>&lt; ReturnType(Args...)&gt;::FromFunction </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt; <a class="el" href="classhelios_1_1Delegate.html">Delegate</a> </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00331">331</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  331</span>                                                                                {</div>
+<div class="line"><span class="lineno">  332</span>  <span class="keyword">using </span>Traits = details::FreeFunctionTraits&lt;Signature&gt;;</div>
+<div class="line"><span class="lineno">  333</span>  <span class="keyword">using </span>Arguments = <span class="keyword">typename</span> Traits::Arguments;</div>
+<div class="line"><span class="lineno">  334</span> </div>
+<div class="line"><span class="lineno">  335</span>  <span class="keyword">static_assert</span>(</div>
+<div class="line"><span class="lineno">  336</span>      []&lt;std::size_t... I&gt;(std::index_sequence&lt;I...&gt;) {</div>
+<div class="line"><span class="lineno">  337</span>        <span class="keywordflow">return</span> (... &amp;&amp; details::PolymorphicConvertible&lt;Args, std::tuple_element_t&lt;I, Arguments&gt;&gt;);</div>
+<div class="line"><span class="lineno">  338</span>      }(std::make_index_sequence&lt;<span class="keyword">sizeof</span>...(Args)&gt;{}),</div>
+<div class="line"><span class="lineno">  339</span>      <span class="stringliteral">&quot;Arguments must be convertible or have base-derived relationship&quot;</span>);</div>
+<div class="line"><span class="lineno">  340</span> </div>
+<div class="line"><span class="lineno">  341</span>  <a class="code hl_function" href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#ad1e859c401e9f28289143db4ff14cbef">Delegate</a> delegate;</div>
+<div class="line"><span class="lineno">  342</span>  delegate.function_ptr_ = [](<span class="keywordtype">void</span>* <span class="comment">/*instance*/</span>, Args... call_args) <span class="keyword">noexcept</span>(</div>
+<div class="line"><span class="lineno">  343</span>                               std::is_nothrow_invocable_v&lt;FunctionType, void*, Args...&gt;) -&gt; ReturnType {</div>
+<div class="line"><span class="lineno">  344</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_void_v&lt;ReturnType&gt;) {</div>
+<div class="line"><span class="lineno">  345</span>      std::invoke(Func, <span class="keyword">static_cast&lt;</span>typename std::tuple_element_t&lt;0, Arguments&gt;<span class="keyword">&gt;</span>(call_args)...);</div>
+<div class="line"><span class="lineno">  346</span>      <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  347</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  348</span>      <span class="keywordflow">return</span> std::invoke(Func, <span class="keyword">static_cast&lt;</span>typename std::tuple_element_t&lt;0, Arguments&gt;<span class="keyword">&gt;</span>(call_args)...);</div>
+<div class="line"><span class="lineno">  349</span>    }</div>
+<div class="line"><span class="lineno">  350</span>  };</div>
+<div class="line"><span class="lineno">  351</span> </div>
+<div class="line"><span class="lineno">  352</span>  <span class="keywordflow">return</span> delegate;</div>
+<div class="line"><span class="lineno">  353</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a7dae8ebed16e06775525beda2c8a6dfa" name="a7dae8ebed16e06775525beda2c8a6dfa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7dae8ebed16e06775525beda2c8a6dfa">&#9670;&#160;</a></span>FromFunction() <span class="overload">[5/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ReturnType , typename... Args&gt; </div>
+<div class="memtemplate">
+template&lt;auto Func&gt; <br />
+requires std::is_member_function_pointer_v&lt;decltype(Func)&gt; &amp;&amp; std::same_as&lt;ReturnType, typename <a class="el" href="structhelios_1_1details_1_1MemberFunctionTraits.html">details::MemberFunctionTraits</a>&lt;decltype(Func)&gt;::ReturnType&gt; &amp;&amp; (sizeof...(Args) == std::tuple_size_v&lt;typename <a class="el" href="structhelios_1_1details_1_1MemberFunctionTraits.html">details::MemberFunctionTraits</a>&lt;decltype(Func)&gt;::Arguments&gt;)</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static constexpr <a class="el" href="classhelios_1_1Delegate.html">Delegate</a> <a class="el" href="classhelios_1_1Delegate.html">helios::Delegate</a>&lt; ReturnType(Args...)&gt;::FromFunction </td>
+          <td>(</td>
+          <td class="paramtype">typename <a class="el" href="structhelios_1_1details_1_1MemberFunctionTraits.html">details::MemberFunctionTraits</a>&lt; decltype(Func)&gt;::Class &amp;&#160;</td>
+          <td class="paramname"><em>instance</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create delegate from a member function pointer. </p>
+<p>Binds a non-const or const member function pointer to a specific instance. </p><dl class="section warning"><dt>Warning</dt><dd>Instance reference must remain valid for the lifetime of the delegate. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Func</td><td>Member function pointer. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">instance</td><td>Reference to the object instance used for invocation. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1Delegate.html" title="Type-erased callable wrapper for free and member functions.">Delegate</a> bound to the given member function and instance. </dd></dl>
+
+</div>
+</div>
+<a id="a2aa3b9aecba03084ef2402a02ae9dc44" name="a2aa3b9aecba03084ef2402a02ae9dc44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2aa3b9aecba03084ef2402a02ae9dc44">&#9670;&#160;</a></span>FromFunction() <span class="overload">[6/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ReturnType , typename... Args&gt; </div>
+<div class="memtemplate">
+template&lt;auto Func&gt; <br />
+requires std::is_member_function_pointer_v&lt;decltype(Func)&gt; &amp;&amp; std::same_as&lt;ReturnType, typename <a class="el" href="structhelios_1_1details_1_1MemberFunctionTraits.html">details::MemberFunctionTraits</a>&lt;decltype(Func)&gt;::ReturnType&gt; &amp;&amp; (sizeof...(Args) == std::tuple_size_v&lt;typename <a class="el" href="structhelios_1_1details_1_1MemberFunctionTraits.html">details::MemberFunctionTraits</a>&lt;decltype(Func)&gt;::Arguments&gt;)</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classhelios_1_1Delegate.html">helios::Delegate</a>&lt; ReturnType(Args...)&gt;::FromFunction </td>
+          <td>(</td>
+          <td class="paramtype">typename <a class="el" href="structhelios_1_1details_1_1MemberFunctionTraits.html">details::MemberFunctionTraits</a>&lt; decltype(Func)&gt;::Class &amp;&#160;</td>
+          <td class="paramname"><em>instance</em></td><td>)</td>
+          <td> -&gt; <a class="el" href="classhelios_1_1Delegate.html">Delegate</a> </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00360">360</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  361</span>                                                                                              {</div>
+<div class="line"><span class="lineno">  362</span>  <span class="keyword">using </span>Traits = details::MemberFunctionTraits&lt;<span class="keyword">decltype</span>(Func)&gt;;</div>
+<div class="line"><span class="lineno">  363</span>  <span class="keyword">using </span>Class = <span class="keyword">typename</span> Traits::Class;</div>
+<div class="line"><span class="lineno">  364</span>  <span class="keyword">using </span>Arguments = <span class="keyword">typename</span> Traits::Arguments;</div>
+<div class="line"><span class="lineno">  365</span> </div>
+<div class="line"><span class="lineno">  366</span>  <span class="keyword">static_assert</span>(</div>
+<div class="line"><span class="lineno">  367</span>      []&lt;std::size_t... I&gt;(std::index_sequence&lt;I...&gt;) {</div>
+<div class="line"><span class="lineno">  368</span>        <span class="keywordflow">return</span> (... &amp;&amp; details::PolymorphicConvertible&lt;Args, std::tuple_element_t&lt;I, Arguments&gt;&gt;);</div>
+<div class="line"><span class="lineno">  369</span>      }(std::make_index_sequence&lt;<span class="keyword">sizeof</span>...(Args)&gt;{}),</div>
+<div class="line"><span class="lineno">  370</span>      <span class="stringliteral">&quot;Arguments must be convertible or have base-derived relationship&quot;</span>);</div>
+<div class="line"><span class="lineno">  371</span> </div>
+<div class="line"><span class="lineno">  372</span>  <a class="code hl_function" href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#ad1e859c401e9f28289143db4ff14cbef">Delegate</a> delegate;</div>
+<div class="line"><span class="lineno">  373</span>  delegate.instance_ptr_ = &amp;<span class="keyword">const_cast&lt;</span>std::remove_const_t&lt;Class&gt;&amp;<span class="keyword">&gt;</span>(instance);</div>
+<div class="line"><span class="lineno">  374</span>  delegate.function_ptr_ = [](<span class="keywordtype">void</span>* instance_ptr, Args... call_args) <span class="keyword">noexcept</span>(</div>
+<div class="line"><span class="lineno">  375</span>                               std::is_nothrow_invocable_v&lt;FunctionType, void*, Args...&gt;) -&gt; ReturnType {</div>
+<div class="line"><span class="lineno">  376</span>    <span class="keyword">auto</span>* typed_instance = <span class="keyword">static_cast&lt;</span>Class*<span class="keyword">&gt;</span>(instance_ptr);</div>
+<div class="line"><span class="lineno">  377</span> </div>
+<div class="line"><span class="lineno">  378</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_void_v&lt;ReturnType&gt;) {</div>
+<div class="line"><span class="lineno">  379</span>      std::invoke(Func, typed_instance, <span class="keyword">static_cast&lt;</span>typename std::tuple_element_t&lt;0, Arguments&gt;<span class="keyword">&gt;</span>(call_args)...);</div>
+<div class="line"><span class="lineno">  380</span>      <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  381</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  382</span>      <span class="keywordflow">return</span> std::invoke(Func, typed_instance, <span class="keyword">static_cast&lt;</span>typename std::tuple_element_t&lt;0, Arguments&gt;<span class="keyword">&gt;</span>(call_args)...);</div>
+<div class="line"><span class="lineno">  383</span>    }</div>
+<div class="line"><span class="lineno">  384</span>  };</div>
+<div class="line"><span class="lineno">  385</span> </div>
+<div class="line"><span class="lineno">  386</span>  <span class="keywordflow">return</span> delegate;</div>
+<div class="line"><span class="lineno">  387</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aa1548ab276b5c8a443faf69c4954288c" name="aa1548ab276b5c8a443faf69c4954288c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1548ab276b5c8a443faf69c4954288c">&#9670;&#160;</a></span>FromFunction() <span class="overload">[7/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ReturnType , typename... Args&gt; </div>
+<div class="memtemplate">
+template&lt;typename Signature , Signature Func&gt; <br />
+requires std::is_member_function_pointer_v&lt;decltype(Func)&gt; &amp;&amp; std::same_as&lt;ReturnType, typename <a class="el" href="structhelios_1_1details_1_1MemberFunctionTraits.html">details::MemberFunctionTraits</a>&lt;Signature&gt;::ReturnType&gt; &amp;&amp; (sizeof...(Args) == std::tuple_size_v&lt;typename <a class="el" href="structhelios_1_1details_1_1MemberFunctionTraits.html">details::MemberFunctionTraits</a>&lt;Signature&gt;::Arguments&gt;)</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static constexpr <a class="el" href="classhelios_1_1Delegate.html">Delegate</a> <a class="el" href="classhelios_1_1Delegate.html">helios::Delegate</a>&lt; ReturnType(Args...)&gt;::FromFunction </td>
+          <td>(</td>
+          <td class="paramtype">typename <a class="el" href="structhelios_1_1details_1_1MemberFunctionTraits.html">details::MemberFunctionTraits</a>&lt; Signature &gt;::Class &amp;&#160;</td>
+          <td class="paramname"><em>instance</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create delegate from a member function pointer with explicit signature type. </p>
+<p>Variant that uses an explicit signature type instead of auto non-type template. </p><dl class="section warning"><dt>Warning</dt><dd>Instance reference must remain valid for the lifetime of the delegate. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Signature</td><td>Member function pointer type. </td></tr>
+    <tr><td class="paramname">Func</td><td>Member function pointer value. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">instance</td><td>Reference to the object instance used for invocation. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1Delegate.html" title="Type-erased callable wrapper for free and member functions.">Delegate</a> bound to the given member function and instance. </dd></dl>
+
+</div>
+</div>
+<a id="ac50a39963f46cde8b3d27a07d75e02ec" name="ac50a39963f46cde8b3d27a07d75e02ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac50a39963f46cde8b3d27a07d75e02ec">&#9670;&#160;</a></span>FromFunction() <span class="overload">[8/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ReturnType , typename... Args&gt; </div>
+<div class="memtemplate">
+template&lt;typename Signature , Signature Func&gt; <br />
+requires std::is_member_function_pointer_v&lt;decltype(Func)&gt; &amp;&amp; std::same_as&lt;ReturnType, typename <a class="el" href="structhelios_1_1details_1_1MemberFunctionTraits.html">details::MemberFunctionTraits</a>&lt;Signature&gt;::ReturnType&gt; &amp;&amp; (sizeof...(Args) == std::tuple_size_v&lt;typename <a class="el" href="structhelios_1_1details_1_1MemberFunctionTraits.html">details::MemberFunctionTraits</a>&lt;Signature&gt;::Arguments&gt;)</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classhelios_1_1Delegate.html">helios::Delegate</a>&lt; ReturnType(Args...)&gt;::FromFunction </td>
+          <td>(</td>
+          <td class="paramtype">typename <a class="el" href="structhelios_1_1details_1_1MemberFunctionTraits.html">details::MemberFunctionTraits</a>&lt; Signature &gt;::Class &amp;&#160;</td>
+          <td class="paramname"><em>instance</em></td><td>)</td>
+          <td> -&gt; <a class="el" href="classhelios_1_1Delegate.html">Delegate</a> </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00394">394</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  395</span>                                                                                         {</div>
+<div class="line"><span class="lineno">  396</span>  <span class="keyword">using </span>Traits = details::MemberFunctionTraits&lt;Signature&gt;;</div>
+<div class="line"><span class="lineno">  397</span>  <span class="keyword">using </span>Class = <span class="keyword">typename</span> Traits::Class;</div>
+<div class="line"><span class="lineno">  398</span>  <span class="keyword">using </span>Arguments = <span class="keyword">typename</span> Traits::Arguments;</div>
+<div class="line"><span class="lineno">  399</span> </div>
+<div class="line"><span class="lineno">  400</span>  <span class="keyword">static_assert</span>(</div>
+<div class="line"><span class="lineno">  401</span>      []&lt;std::size_t... I&gt;(std::index_sequence&lt;I...&gt;) {</div>
+<div class="line"><span class="lineno">  402</span>        <span class="keywordflow">return</span> (... &amp;&amp; details::PolymorphicConvertible&lt;Args, std::tuple_element_t&lt;I, Arguments&gt;&gt;);</div>
+<div class="line"><span class="lineno">  403</span>      }(std::make_index_sequence&lt;<span class="keyword">sizeof</span>...(Args)&gt;{}),</div>
+<div class="line"><span class="lineno">  404</span>      <span class="stringliteral">&quot;Arguments must be convertible or have base-derived relationship&quot;</span>);</div>
+<div class="line"><span class="lineno">  405</span> </div>
+<div class="line"><span class="lineno">  406</span>  <a class="code hl_function" href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#ad1e859c401e9f28289143db4ff14cbef">Delegate</a> delegate;</div>
+<div class="line"><span class="lineno">  407</span>  delegate.instance_ptr_ = &amp;<span class="keyword">const_cast&lt;</span>std::remove_const_t&lt;Class&gt;&amp;<span class="keyword">&gt;</span>(instance);</div>
+<div class="line"><span class="lineno">  408</span>  delegate.function_ptr_ = [](<span class="keywordtype">void</span>* instance_ptr, Args... call_args) <span class="keyword">noexcept</span>(</div>
+<div class="line"><span class="lineno">  409</span>                               std::is_nothrow_invocable_v&lt;FunctionType, void*, Args...&gt;) -&gt; ReturnType {</div>
+<div class="line"><span class="lineno">  410</span>    <span class="keyword">auto</span>* typed_instance = <span class="keyword">static_cast&lt;</span>Class*<span class="keyword">&gt;</span>(instance_ptr);</div>
+<div class="line"><span class="lineno">  411</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_void_v&lt;ReturnType&gt;) {</div>
+<div class="line"><span class="lineno">  412</span>      std::invoke(Func, typed_instance, <span class="keyword">static_cast&lt;</span>typename std::tuple_element_t&lt;0, Arguments&gt;<span class="keyword">&gt;</span>(call_args)...);</div>
+<div class="line"><span class="lineno">  413</span>      <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  414</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  415</span>      <span class="keywordflow">return</span> std::invoke(Func, typed_instance, <span class="keyword">static_cast&lt;</span>typename std::tuple_element_t&lt;0, Arguments&gt;<span class="keyword">&gt;</span>(call_args)...);</div>
+<div class="line"><span class="lineno">  416</span>    }</div>
+<div class="line"><span class="lineno">  417</span>  };</div>
+<div class="line"><span class="lineno">  418</span> </div>
+<div class="line"><span class="lineno">  419</span>  <span class="keywordflow">return</span> delegate;</div>
+<div class="line"><span class="lineno">  420</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a7ffd51bc5d6de517d4377b4e3cb856a2" name="a7ffd51bc5d6de517d4377b4e3cb856a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ffd51bc5d6de517d4377b4e3cb856a2">&#9670;&#160;</a></span>InstancePtr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ReturnType , typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr void * <a class="el" href="classhelios_1_1Delegate.html">helios::Delegate</a>&lt; ReturnType(Args...)&gt;::InstancePtr </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get raw instance pointer stored inside delegate. </p>
+<p>For free functions this will be nullptr. For member functions this points to the bound object instance. </p><dl class="section return"><dt>Returns</dt><dd>Raw instance pointer. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00244">244</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  244</span>{ <span class="keywordflow">return</span> instance_ptr_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a5712bc43d01f21b9f4042a0abfcdba24" name="a5712bc43d01f21b9f4042a0abfcdba24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5712bc43d01f21b9f4042a0abfcdba24">&#9670;&#160;</a></span>Invoke() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ReturnType , typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classhelios_1_1Delegate.html">helios::Delegate</a>&lt; ReturnType(Args...)&gt;::Invoke </td>
+          <td>(</td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Invoke delegate with exact argument types. </p>
+<p>If delegate is empty, returns default constructed ReturnType for non-void return types and does nothing for void return type. </p><dl class="section warning"><dt>Warning</dt><dd>If delegate is empty and ReturnType is not default constructible then using the returned value is UB. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">args</td><td>Arguments to forward to the bound callable. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Result of the invocation or default constructed value for empty delegate. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00258">258</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  259</span>                                                                                      {</div>
+<div class="line"><span class="lineno">  260</span>  <span class="keywordflow">if</span> (function_ptr_ == <span class="keyword">nullptr</span>) [[unlikely]] {</div>
+<div class="line"><span class="lineno">  261</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_void_v&lt;ReturnType&gt;) {</div>
+<div class="line"><span class="lineno">  262</span>      <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  263</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  264</span>      <span class="keywordflow">return</span> {};</div>
+<div class="line"><span class="lineno">  265</span>    }</div>
+<div class="line"><span class="lineno">  266</span>  }</div>
+<div class="line"><span class="lineno">  267</span> </div>
+<div class="line"><span class="lineno">  268</span>  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_void_v&lt;ReturnType&gt;) {</div>
+<div class="line"><span class="lineno">  269</span>    std::invoke(function_ptr_, instance_ptr_, std::forward&lt;Args&gt;(args)...);</div>
+<div class="line"><span class="lineno">  270</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  271</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  272</span>    <span class="keywordflow">return</span> std::invoke(function_ptr_, instance_ptr_, std::forward&lt;Args&gt;(args)...);</div>
+<div class="line"><span class="lineno">  273</span>  }</div>
+<div class="line"><span class="lineno">  274</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a20e23aa26b6d3beb6c3f7813b2dd6cfe" name="a20e23aa26b6d3beb6c3f7813b2dd6cfe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20e23aa26b6d3beb6c3f7813b2dd6cfe">&#9670;&#160;</a></span>Invoke() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ReturnType , typename... Args&gt; </div>
+<div class="memtemplate">
+template&lt;typename... UArgs&gt; <br />
+requires (sizeof...(UArgs) == sizeof...(Args)) &amp;&amp; (... &amp;&amp; details::PolymorphicConvertible&lt;UArgs, Args&gt;)</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr ReturnType <a class="el" href="classhelios_1_1Delegate.html">helios::Delegate</a>&lt; ReturnType(Args...)&gt;::Invoke </td>
+          <td>(</td>
+          <td class="paramtype">UArgs &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Invoke delegate with polymorphically convertible argument types. </p>
+<p>This overload allows passing arguments that are convertible or have base/derived relationship with the delegate's arguments. </p><dl class="section warning"><dt>Warning</dt><dd>If delegate is empty and ReturnType is not default constructible then using the returned value is UB. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">UArgs</td><td>Parameter pack of actual argument types. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">args</td><td>Arguments to forward to the bound callable. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Result of the invocation or default constructed value for empty delegate. </dd></dl>
+
+</div>
+</div>
+<a id="a49c94c3c097ec92567a2a1af838be538" name="a49c94c3c097ec92567a2a1af838be538"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49c94c3c097ec92567a2a1af838be538">&#9670;&#160;</a></span>Invoke() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ReturnType , typename... Args&gt; </div>
+<div class="memtemplate">
+template&lt;typename... UArgs&gt; <br />
+requires (sizeof...(UArgs) == sizeof...(Args)) &amp;&amp; (... &amp;&amp; details::PolymorphicConvertible&lt;UArgs, Args&gt;)</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classhelios_1_1Delegate.html">helios::Delegate</a>&lt; ReturnType(Args...)&gt;::Invoke </td>
+          <td>(</td>
+          <td class="paramtype">UArgs &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em></td><td>)</td>
+          <td> const -&gt; ReturnType </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00279">279</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  280</span>                                                                                     {</div>
+<div class="line"><span class="lineno">  281</span>  <span class="keywordflow">if</span> (function_ptr_ == <span class="keyword">nullptr</span>) [[unlikely]] {</div>
+<div class="line"><span class="lineno">  282</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_void_v&lt;ReturnType&gt;) {</div>
+<div class="line"><span class="lineno">  283</span>      <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  284</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  285</span>      <span class="keywordflow">return</span> {};</div>
+<div class="line"><span class="lineno">  286</span>    }</div>
+<div class="line"><span class="lineno">  287</span>  }</div>
+<div class="line"><span class="lineno">  288</span> </div>
+<div class="line"><span class="lineno">  289</span>  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_void_v&lt;ReturnType&gt;) {</div>
+<div class="line"><span class="lineno">  290</span>    std::invoke(function_ptr_, instance_ptr_, std::forward&lt;UArgs&gt;(args)...);</div>
+<div class="line"><span class="lineno">  291</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  292</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  293</span>    <span class="keywordflow">return</span> std::invoke(function_ptr_, instance_ptr_, std::forward&lt;UArgs&gt;(args)...);</div>
+<div class="line"><span class="lineno">  294</span>  }</div>
+<div class="line"><span class="lineno">  295</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a7eb677265ad023c56dd50192f8dbca15" name="a7eb677265ad023c56dd50192f8dbca15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7eb677265ad023c56dd50192f8dbca15">&#9670;&#160;</a></span>operator!=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ReturnType , typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool <a class="el" href="classhelios_1_1Delegate.html">helios::Delegate</a>&lt; ReturnType(Args...)&gt;::operator!= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1Delegate.html">Delegate</a>&lt; ReturnType(Args...)&gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compare two delegates for inequality. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td><a class="el" href="classhelios_1_1Delegate.html" title="Type-erased callable wrapper for free and member functions.">Delegate</a> to compare with. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if not equal, false otherwise. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00230">230</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  230</span>{ <span class="keywordflow">return</span> !(*<span class="keyword">this</span> == other); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a093ee3b0b8ece6ba50235f9c7e3fa0b8" name="a093ee3b0b8ece6ba50235f9c7e3fa0b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a093ee3b0b8ece6ba50235f9c7e3fa0b8">&#9670;&#160;</a></span>operator()() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ReturnType , typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr ReturnType <a class="el" href="classhelios_1_1Delegate.html">helios::Delegate</a>&lt; ReturnType(Args...)&gt;::operator() </td>
+          <td>(</td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Invoke delegate with exact argument types. </p>
+<p>Forwarding operator to Invoke. </p><dl class="section warning"><dt>Warning</dt><dd>Same as for Invoke: empty delegate returns default constructed value for non-void return type. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">args</td><td>Arguments to forward to the bound callable. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Result of the invocation or default constructed value for empty delegate. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00195">195</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  196</span>                                                                        {</div>
+<div class="line"><span class="lineno">  197</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#a5712bc43d01f21b9f4042a0abfcdba24">Invoke</a>(std::forward&lt;Args&gt;(args)...);</div>
+<div class="line"><span class="lineno">  198</span>  }</div>
+<div class="ttc" id="aclasshelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4_html_a5712bc43d01f21b9f4042a0abfcdba24"><div class="ttname"><a href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#a5712bc43d01f21b9f4042a0abfcdba24">helios::Delegate&lt; ReturnType(Args...)&gt;::Invoke</a></div><div class="ttdeci">constexpr ReturnType Invoke(Args &amp;&amp;... args) const noexcept(std::is_nothrow_invocable_v&lt; FunctionType, void *, Args &amp;&amp;... &gt;)</div><div class="ttdoc">Invoke delegate with exact argument types.</div><div class="ttdef"><b>Definition</b> <a href="delegate_8hpp_source.html#l00258">delegate.hpp:258</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a493515b3d5a7ce48c9ccfe8a75848811" name="a493515b3d5a7ce48c9ccfe8a75848811"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a493515b3d5a7ce48c9ccfe8a75848811">&#9670;&#160;</a></span>operator()() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ReturnType , typename... Args&gt; </div>
+<div class="memtemplate">
+template&lt;typename... UArgs&gt; <br />
+requires (sizeof...(UArgs) == sizeof...(Args)) &amp;&amp; (... &amp;&amp; details::PolymorphicConvertible&lt;UArgs, Args&gt;)</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr ReturnType <a class="el" href="classhelios_1_1Delegate.html">helios::Delegate</a>&lt; ReturnType(Args...)&gt;::operator() </td>
+          <td>(</td>
+          <td class="paramtype">UArgs &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Invoke delegate with polymorphically convertible argument types. </p>
+<p>Forwarding operator to Invoke for flexible argument passing. </p><dl class="section warning"><dt>Warning</dt><dd>Same as for Invoke: empty delegate returns default constructed value for non-void return type. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">UArgs</td><td>Parameter pack of actual argument types. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">args</td><td>Arguments to forward to the bound callable. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Result of the invocation or default constructed value for empty delegate. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00210">210</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  211</span>                                                                         {</div>
+<div class="line"><span class="lineno">  212</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#a5712bc43d01f21b9f4042a0abfcdba24">Invoke</a>(std::forward&lt;UArgs&gt;(args)...);</div>
+<div class="line"><span class="lineno">  213</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ac081b36e541314ac443e4b79f6f2da41" name="ac081b36e541314ac443e4b79f6f2da41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac081b36e541314ac443e4b79f6f2da41">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ReturnType , typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1Delegate.html">Delegate</a> &amp; <a class="el" href="classhelios_1_1Delegate.html">helios::Delegate</a>&lt; ReturnType(Args...)&gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1Delegate.html">Delegate</a>&lt; ReturnType(Args...)&gt; &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aee1aa9b86818b17ff6393d8257458c21" name="aee1aa9b86818b17ff6393d8257458c21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee1aa9b86818b17ff6393d8257458c21">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ReturnType , typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1Delegate.html">Delegate</a> &amp; <a class="el" href="classhelios_1_1Delegate.html">helios::Delegate</a>&lt; ReturnType(Args...)&gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1Delegate.html">Delegate</a>&lt; ReturnType(Args...)&gt; &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a17a42975e81232f8f52b1f19768f8527" name="a17a42975e81232f8f52b1f19768f8527"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17a42975e81232f8f52b1f19768f8527">&#9670;&#160;</a></span>operator==()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ReturnType , typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool <a class="el" href="classhelios_1_1Delegate.html">helios::Delegate</a>&lt; ReturnType(Args...)&gt;::operator== </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1Delegate.html">Delegate</a>&lt; ReturnType(Args...)&gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compare two delegates for equality. </p>
+<p>Delegates are equal if they have the same instance and thunk pointer. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td><a class="el" href="classhelios_1_1Delegate.html" title="Type-erased callable wrapper for free and member functions.">Delegate</a> to compare with. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if equal, false otherwise. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00221">221</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  221</span>                                                                  {</div>
+<div class="line"><span class="lineno">  222</span>    <span class="keywordflow">return</span> instance_ptr_ == other.instance_ptr_ &amp;&amp; function_ptr_ == other.function_ptr_;</div>
+<div class="line"><span class="lineno">  223</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a2a79277a2475d59e80ee04de076cc535" name="a2a79277a2475d59e80ee04de076cc535"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a79277a2475d59e80ee04de076cc535">&#9670;&#160;</a></span>Reset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ReturnType , typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr void <a class="el" href="classhelios_1_1Delegate.html">helios::Delegate</a>&lt; ReturnType(Args...)&gt;::Reset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reset delegate to empty state. </p>
+
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00252">252</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  252</span>                                                             {</div>
+<div class="line"><span class="lineno">  253</span>  instance_ptr_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  254</span>  function_ptr_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  255</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a330d2db3c43fc525bfdaf5e18f5cc4af" name="a330d2db3c43fc525bfdaf5e18f5cc4af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a330d2db3c43fc525bfdaf5e18f5cc4af">&#9670;&#160;</a></span>Valid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ReturnType , typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool <a class="el" href="classhelios_1_1Delegate.html">helios::Delegate</a>&lt; ReturnType(Args...)&gt;::Valid </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check if delegate is bound to a callable. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if delegate is non-empty, false otherwise. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00236">236</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  236</span>{ <span class="keywordflow">return</span> function_ptr_ != <span class="keyword">nullptr</span>; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehelios.html">helios</a></li><li class="navelem"><a class="el" href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html">Delegate&lt; ReturnType(Args...)&gt;</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

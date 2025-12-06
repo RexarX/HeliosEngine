@@ -1,0 +1,713 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: helios::utils Namespace Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('namespacehelios_1_1utils.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#concepts">Concepts</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#func-members">Functions</a>  </div>
+  <div class="headertitle"><div class="title">helios::utils Namespace Reference</div></div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespacehelios_1_1utils_1_1details" id="r_namespacehelios_1_1utils_1_1details"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils_1_1details.html">details</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1ChainAdapter.html">ChainAdapter</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1EnumerateAdapter.html">EnumerateAdapter</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">FastPimpl</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implements pimpl idiom without dynamic memory allocation.  <a href="classhelios_1_1utils_1_1FastPimpl.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FilterAdapter.html">FilterAdapter</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">FunctionalAdapterBase</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1InspectAdapter.html">InspectAdapter</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1JoinAdapter.html">JoinAdapter</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1MapAdapter.html">MapAdapter</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1ReverseAdapter.html">ReverseAdapter</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1SkipAdapter.html">SkipAdapter</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1SkipWhileAdapter.html">SkipWhileAdapter</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1SlideAdapter.html">SlideAdapter</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1StepByAdapter.html">StepByAdapter</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1utils_1_1StringEqual.html">StringEqual</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transparent equality comparator for string types.  <a href="structhelios_1_1utils_1_1StringEqual.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1utils_1_1StringHash.html">StringHash</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transparent hash functor for string types.  <a href="structhelios_1_1utils_1_1StringHash.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1TakeAdapter.html">TakeAdapter</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1TakeWhileAdapter.html">TakeWhileAdapter</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1ZipAdapter.html">ZipAdapter</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="concepts" name="concepts"></a>
+Concepts</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1utils_1_1ArithmeticTrait.html">ArithmeticTrait</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1utils_1_1UniqueTypes.html">UniqueTypes</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1utils_1_1IteratorLike.html">IteratorLike</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for types that can be used as base iterators in adapters. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1utils_1_1BidirectionalIteratorLike.html">BidirectionalIteratorLike</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for bidirectional iterators that support decrement operations. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1utils_1_1PredicateFor.html">PredicateFor</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for predicate functions that can be applied to iterator values. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1utils_1_1TransformFor.html">TransformFor</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for transformation functions that can be applied to iterator values. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1utils_1_1InspectorFor.html">InspectorFor</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for inspection functions that observe but don't modify values. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1utils_1_1ActionFor.html">ActionFor</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for action functions that process values. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1utils_1_1FolderFor.html">FolderFor</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for folder functions that accumulate values. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1utils_1_1FilterAdapterRequirements.html">FilterAdapterRequirements</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept to validate FilterAdapter requirements. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1utils_1_1MapAdapterRequirements.html">MapAdapterRequirements</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept to validate MapAdapter requirements. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1utils_1_1TakeAdapterRequirements.html">TakeAdapterRequirements</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept to validate TakeAdapter requirements. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1utils_1_1SkipAdapterRequirements.html">SkipAdapterRequirements</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept to validate SkipAdapter requirements. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1utils_1_1TakeWhileAdapterRequirements.html">TakeWhileAdapterRequirements</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept to validate TakeWhileAdapter requirements. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1utils_1_1SkipWhileAdapterRequirements.html">SkipWhileAdapterRequirements</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept to validate SkipWhileAdapter requirements. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1utils_1_1EnumerateAdapterRequirements.html">EnumerateAdapterRequirements</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept to validate EnumerateAdapter requirements. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1utils_1_1InspectAdapterRequirements.html">InspectAdapterRequirements</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept to validate InspectAdapter requirements. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1utils_1_1StepByAdapterRequirements.html">StepByAdapterRequirements</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept to validate StepByAdapter requirements. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1utils_1_1ChainAdapterRequirements.html">ChainAdapterRequirements</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept to validate ChainAdapter requirements. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1utils_1_1ReverseAdapterRequirements.html">ReverseAdapterRequirements</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept to validate ReverseAdapter requirements. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1utils_1_1JoinAdapterRequirements.html">JoinAdapterRequirements</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept to validate JoinAdapter requirements. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1utils_1_1SlideAdapterRequirements.html">SlideAdapterRequirements</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept to validate SlideAdapter requirements. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1utils_1_1StrideAdapterRequirements.html">StrideAdapterRequirements</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept to validate StrideAdapter requirements. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1utils_1_1ZipAdapterRequirements.html">ZipAdapterRequirements</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept to validate ZipAdapter requirements. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:aa8f8d89ee8389efd92330df687025d68" id="r_aa8f8d89ee8389efd92330df687025d68"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#aa8f8d89ee8389efd92330df687025d68">FileError</a> : uint8_t { <a class="el" href="namespacehelios_1_1utils.html#aa8f8d89ee8389efd92330df687025d68a84f032166061bfc754d13eb5fde4a3f7">kCouldNotOpen</a>
+, <a class="el" href="namespacehelios_1_1utils.html#aa8f8d89ee8389efd92330df687025d68a58d3b11e0fadcadf0990c58e19a8be7e">kReadError</a>
+ }</td></tr>
+<tr class="separator:aa8f8d89ee8389efd92330df687025d68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a8456f8516be4dd86cc838b2e928b7239" id="r_a8456f8516be4dd86cc838b2e928b7239"><td class="memItemLeft" align="right" valign="top">constexpr std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#a8456f8516be4dd86cc838b2e928b7239">FileErrorToString</a> (<a class="el" href="namespacehelios_1_1utils.html#aa8f8d89ee8389efd92330df687025d68">FileError</a> error) noexcept</td></tr>
+<tr class="memdesc:a8456f8516be4dd86cc838b2e928b7239"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts FileError to a human-readable string.  <br /></td></tr>
+<tr class="separator:a8456f8516be4dd86cc838b2e928b7239"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ace996a7219fcf7730cf5d767278420" id="r_a0ace996a7219fcf7730cf5d767278420"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#a0ace996a7219fcf7730cf5d767278420">ReadFileToString</a> (std::string_view filepath) -&gt; std::expected&lt; std::string, <a class="el" href="namespacehelios_1_1utils.html#aa8f8d89ee8389efd92330df687025d68">FileError</a> &gt;</td></tr>
+<tr class="memdesc:a0ace996a7219fcf7730cf5d767278420"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads the entire contents of a file into a string.  <br /></td></tr>
+<tr class="separator:a0ace996a7219fcf7730cf5d767278420"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16f2deb86c747a978225f21607e135da" id="r_a16f2deb86c747a978225f21607e135da"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#a16f2deb86c747a978225f21607e135da">ReadFileToString</a> (const std::filesystem::path &amp;filepath) -&gt; std::expected&lt; std::string, <a class="el" href="namespacehelios_1_1utils.html#aa8f8d89ee8389efd92330df687025d68">FileError</a> &gt;</td></tr>
+<tr class="memdesc:a16f2deb86c747a978225f21607e135da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads the entire contents of a file into a string.  <br /></td></tr>
+<tr class="separator:a16f2deb86c747a978225f21607e135da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ac5167111686abbfdf1126b47034746" id="r_a7ac5167111686abbfdf1126b47034746"><td class="memItemLeft" align="right" valign="top">constexpr std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#a7ac5167111686abbfdf1126b47034746">GetFileName</a> (std::string_view path)</td></tr>
+<tr class="memdesc:a7ac5167111686abbfdf1126b47034746"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the file name from a given path.  <br /></td></tr>
+<tr class="separator:a7ac5167111686abbfdf1126b47034746"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e85990bc74f7ba9ae1a47fdf4720dc9" id="r_a1e85990bc74f7ba9ae1a47fdf4720dc9"><td class="memItemLeft" align="right" valign="top">static constexpr std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#a1e85990bc74f7ba9ae1a47fdf4720dc9">GetFileExtension</a> (std::string_view path)</td></tr>
+<tr class="memdesc:a1e85990bc74f7ba9ae1a47fdf4720dc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the file extension from a given path.  <br /></td></tr>
+<tr class="separator:a1e85990bc74f7ba9ae1a47fdf4720dc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc9a7a7bb1cbdcdf23e717f41fa763be" id="r_afc9a7a7bb1cbdcdf23e717f41fa763be"><td class="memTemplParams" colspan="2">template&lt;typename OutIt &gt; </td></tr>
+<tr class="memitem:afc9a7a7bb1cbdcdf23e717f41fa763be"><td class="memTemplItemLeft" align="right" valign="top">constexpr void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#afc9a7a7bb1cbdcdf23e717f41fa763be">Into</a> (OutIt out) const</td></tr>
+<tr class="separator:afc9a7a7bb1cbdcdf23e717f41fa763be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0f9ee0135bae7b098c5f83d04a272bb" id="r_ab0f9ee0135bae7b098c5f83d04a272bb"><td class="memItemLeft" align="right" valign="top">constexpr Derived &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#ab0f9ee0135bae7b098c5f83d04a272bb">GetDerived</a> () noexcept</td></tr>
+<tr class="memdesc:ab0f9ee0135bae7b098c5f83d04a272bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets reference to derived class instance.  <br /></td></tr>
+<tr class="separator:ab0f9ee0135bae7b098c5f83d04a272bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="aa8f8d89ee8389efd92330df687025d68" name="aa8f8d89ee8389efd92330df687025d68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8f8d89ee8389efd92330df687025d68">&#9670;&#160;</a></span>FileError</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="namespacehelios_1_1utils.html#aa8f8d89ee8389efd92330df687025d68">helios::utils::FileError</a> : uint8_t</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aa8f8d89ee8389efd92330df687025d68a84f032166061bfc754d13eb5fde4a3f7" name="aa8f8d89ee8389efd92330df687025d68a84f032166061bfc754d13eb5fde4a3f7"></a>kCouldNotOpen&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aa8f8d89ee8389efd92330df687025d68a58d3b11e0fadcadf0990c58e19a8be7e" name="aa8f8d89ee8389efd92330df687025d68a58d3b11e0fadcadf0990c58e19a8be7e"></a>kReadError&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="filesystem_8hpp_source.html#l00016">16</a> of file <a class="el" href="filesystem_8hpp_source.html">filesystem.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   16</span>: uint8_t { <a class="code hl_enumvalue" href="namespacehelios_1_1utils.html#aa8f8d89ee8389efd92330df687025d68a84f032166061bfc754d13eb5fde4a3f7">kCouldNotOpen</a>, <a class="code hl_enumvalue" href="namespacehelios_1_1utils.html#aa8f8d89ee8389efd92330df687025d68a58d3b11e0fadcadf0990c58e19a8be7e">kReadError</a> };</div>
+<div class="ttc" id="anamespacehelios_1_1utils_html_aa8f8d89ee8389efd92330df687025d68a58d3b11e0fadcadf0990c58e19a8be7e"><div class="ttname"><a href="namespacehelios_1_1utils.html#aa8f8d89ee8389efd92330df687025d68a58d3b11e0fadcadf0990c58e19a8be7e">helios::utils::FileError::kReadError</a></div><div class="ttdeci">@ kReadError</div></div>
+<div class="ttc" id="anamespacehelios_1_1utils_html_aa8f8d89ee8389efd92330df687025d68a84f032166061bfc754d13eb5fde4a3f7"><div class="ttname"><a href="namespacehelios_1_1utils.html#aa8f8d89ee8389efd92330df687025d68a84f032166061bfc754d13eb5fde4a3f7">helios::utils::FileError::kCouldNotOpen</a></div><div class="ttdeci">@ kCouldNotOpen</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a8456f8516be4dd86cc838b2e928b7239" name="a8456f8516be4dd86cc838b2e928b7239"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8456f8516be4dd86cc838b2e928b7239">&#9670;&#160;</a></span>FileErrorToString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr std::string_view helios::utils::FileErrorToString </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1utils.html#aa8f8d89ee8389efd92330df687025d68">FileError</a>&#160;</td>
+          <td class="paramname"><em>error</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Converts FileError to a human-readable string. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">error</td><td>The FileError to convert </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A string view representing the error </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="filesystem_8hpp_source.html#l00023">23</a> of file <a class="el" href="filesystem_8hpp_source.html">filesystem.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   23</span>                                                                                   {</div>
+<div class="line"><span class="lineno">   24</span>  <span class="keywordflow">switch</span> (error) {</div>
+<div class="line"><span class="lineno">   25</span>    <span class="keywordflow">case</span> FileError::kCouldNotOpen:</div>
+<div class="line"><span class="lineno">   26</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;Could not open file&quot;</span>;</div>
+<div class="line"><span class="lineno">   27</span>    <span class="keywordflow">case</span> FileError::kReadError:</div>
+<div class="line"><span class="lineno">   28</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;Could not read file&quot;</span>;</div>
+<div class="line"><span class="lineno">   29</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">   30</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;Unknown file error&quot;</span>;</div>
+<div class="line"><span class="lineno">   31</span>  }</div>
+<div class="line"><span class="lineno">   32</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ab0f9ee0135bae7b098c5f83d04a272bb" name="ab0f9ee0135bae7b098c5f83d04a272bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0f9ee0135bae7b098c5f83d04a272bb">&#9670;&#160;</a></span>GetDerived()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr const Derived &amp; helios::utils::GetDerived </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets reference to derived class instance. </p>
+<p>Gets const reference to derived class instance.</p>
+<dl class="section return"><dt>Returns</dt><dd>Reference to derived class</dd>
+<dd>
+Const reference to derived class </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a157">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02625">2625</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 2625</span>{ <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>Derived&amp;<span class="keyword">&gt;</span>(*this); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a1e85990bc74f7ba9ae1a47fdf4720dc9" name="a1e85990bc74f7ba9ae1a47fdf4720dc9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e85990bc74f7ba9ae1a47fdf4720dc9">&#9670;&#160;</a></span>GetFileExtension()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static constexpr std::string_view helios::utils::GetFileExtension </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>path</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Extracts the file extension from a given path. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>The full file path </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The file extension, including the dot (e.g., ".txt"), or an empty string if none exists </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="filesystem_8hpp_source.html#l00118">118</a> of file <a class="el" href="filesystem_8hpp_source.html">filesystem.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  118</span>                                                                                    {</div>
+<div class="line"><span class="lineno">  119</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> last_dot = path.find_last_of(<span class="charliteral">&#39;.&#39;</span>);</div>
+<div class="line"><span class="lineno">  120</span>  <span class="keywordflow">return</span> (last_dot != std::string_view::npos) ? path.substr(last_dot) : <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><span class="lineno">  121</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a7ac5167111686abbfdf1126b47034746" name="a7ac5167111686abbfdf1126b47034746"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ac5167111686abbfdf1126b47034746">&#9670;&#160;</a></span>GetFileName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr std::string_view helios::utils::GetFileName </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>path</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Extracts the file name from a given path. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>The full file path </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The file name </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="filesystem_8hpp_source.html#l00108">108</a> of file <a class="el" href="filesystem_8hpp_source.html">filesystem.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  108</span>                                                                        {</div>
+<div class="line"><span class="lineno">  109</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> last_slash = path.find_last_of(<span class="stringliteral">&quot;/\\&quot;</span>);</div>
+<div class="line"><span class="lineno">  110</span>  <span class="keywordflow">return</span> (last_slash != std::string_view::npos) ? path.substr(last_slash + 1) : path;</div>
+<div class="line"><span class="lineno">  111</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="afc9a7a7bb1cbdcdf23e717f41fa763be" name="afc9a7a7bb1cbdcdf23e717f41fa763be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc9a7a7bb1cbdcdf23e717f41fa763be">&#9670;&#160;</a></span>Into()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename OutIt &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr void helios::utils::Into </td>
+          <td>(</td>
+          <td class="paramtype">OutIt&#160;</td>
+          <td class="paramname"><em>out</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a160">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<a id="a16f2deb86c747a978225f21607e135da" name="a16f2deb86c747a978225f21607e135da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16f2deb86c747a978225f21607e135da">&#9670;&#160;</a></span>ReadFileToString() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::utils::ReadFileToString </td>
+          <td>(</td>
+          <td class="paramtype">const std::filesystem::path &amp;&#160;</td>
+          <td class="paramname"><em>filepath</em></td><td>)</td>
+          <td> -&gt; std::expected&lt;std::string, <a class="el" href="namespacehelios_1_1utils.html#aa8f8d89ee8389efd92330df687025d68">FileError</a>&gt; </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reads the entire contents of a file into a string. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filepath</td><td>The path to the file </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>An expected containing the file contents or a FileError </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="filesystem_8hpp_source.html#l00073">73</a> of file <a class="el" href="filesystem_8hpp_source.html">filesystem.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   74</span>                                         {</div>
+<div class="line"><span class="lineno">   75</span>  <span class="keywordflow">if</span> (filepath.empty()) {</div>
+<div class="line"><span class="lineno">   76</span>    <span class="keywordflow">return</span> std::unexpected(FileError::kCouldNotOpen);</div>
+<div class="line"><span class="lineno">   77</span>  }</div>
+<div class="line"><span class="lineno">   78</span> </div>
+<div class="line"><span class="lineno">   79</span>  std::ifstream in(filepath, std::ios::in | std::ios::binary);</div>
+<div class="line"><span class="lineno">   80</span>  <span class="keywordflow">if</span> (!in) {</div>
+<div class="line"><span class="lineno">   81</span>    <span class="keywordflow">return</span> std::unexpected(FileError::kCouldNotOpen);</div>
+<div class="line"><span class="lineno">   82</span>  }</div>
+<div class="line"><span class="lineno">   83</span> </div>
+<div class="line"><span class="lineno">   84</span>  std::string result;</div>
+<div class="line"><span class="lineno">   85</span>  in.seekg(0, std::ios::end);</div>
+<div class="line"><span class="lineno">   86</span>  <span class="keyword">const</span> <span class="keyword">auto</span> pos = in.tellg();</div>
+<div class="line"><span class="lineno">   87</span>  <span class="keywordflow">if</span> (pos == std::ifstream::pos_type(-1)) {</div>
+<div class="line"><span class="lineno">   88</span>    <span class="keywordflow">return</span> std::unexpected(FileError::kReadError);</div>
+<div class="line"><span class="lineno">   89</span>  }</div>
+<div class="line"><span class="lineno">   90</span> </div>
+<div class="line"><span class="lineno">   91</span>  <span class="keyword">const</span> <span class="keyword">auto</span> size = <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(pos);</div>
+<div class="line"><span class="lineno">   92</span>  result.resize(size);</div>
+<div class="line"><span class="lineno">   93</span>  in.seekg(0, std::ios::beg);</div>
+<div class="line"><span class="lineno">   94</span>  in.read(result.data(), <span class="keyword">static_cast&lt;</span>std::streamsize<span class="keyword">&gt;</span>(result.size()));</div>
+<div class="line"><span class="lineno">   95</span>  <span class="keywordflow">if</span> (!in) {</div>
+<div class="line"><span class="lineno">   96</span>    <span class="keywordflow">return</span> std::unexpected(FileError::kReadError);</div>
+<div class="line"><span class="lineno">   97</span>  }</div>
+<div class="line"><span class="lineno">   98</span>  in.close();</div>
+<div class="line"><span class="lineno">   99</span> </div>
+<div class="line"><span class="lineno">  100</span>  <span class="keywordflow">return</span> result;</div>
+<div class="line"><span class="lineno">  101</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a0ace996a7219fcf7730cf5d767278420" name="a0ace996a7219fcf7730cf5d767278420"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ace996a7219fcf7730cf5d767278420">&#9670;&#160;</a></span>ReadFileToString() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::utils::ReadFileToString </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>filepath</em></td><td>)</td>
+          <td> -&gt; std::expected&lt;std::string, <a class="el" href="namespacehelios_1_1utils.html#aa8f8d89ee8389efd92330df687025d68">FileError</a>&gt; </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reads the entire contents of a file into a string. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filepath</td><td>The path to the file </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>An expected containing the file contents or a FileError </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="filesystem_8hpp_source.html#l00039">39</a> of file <a class="el" href="filesystem_8hpp_source.html">filesystem.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   39</span>                                                                                                         {</div>
+<div class="line"><span class="lineno">   40</span>  <span class="keywordflow">if</span> (filepath.empty()) {</div>
+<div class="line"><span class="lineno">   41</span>    <span class="keywordflow">return</span> std::unexpected(FileError::kCouldNotOpen);</div>
+<div class="line"><span class="lineno">   42</span>  }</div>
+<div class="line"><span class="lineno">   43</span> </div>
+<div class="line"><span class="lineno">   44</span>  std::ifstream in(filepath.data(), std::ios::in | std::ios::binary);</div>
+<div class="line"><span class="lineno">   45</span>  <span class="keywordflow">if</span> (!in) {</div>
+<div class="line"><span class="lineno">   46</span>    <span class="keywordflow">return</span> std::unexpected(FileError::kCouldNotOpen);</div>
+<div class="line"><span class="lineno">   47</span>  }</div>
+<div class="line"><span class="lineno">   48</span> </div>
+<div class="line"><span class="lineno">   49</span>  std::string result;</div>
+<div class="line"><span class="lineno">   50</span>  in.seekg(0, std::ios::end);</div>
+<div class="line"><span class="lineno">   51</span>  <span class="keyword">const</span> <span class="keyword">auto</span> pos = in.tellg();</div>
+<div class="line"><span class="lineno">   52</span>  <span class="keywordflow">if</span> (pos == std::ifstream::pos_type(-1)) {</div>
+<div class="line"><span class="lineno">   53</span>    <span class="keywordflow">return</span> std::unexpected(FileError::kReadError);</div>
+<div class="line"><span class="lineno">   54</span>  }</div>
+<div class="line"><span class="lineno">   55</span> </div>
+<div class="line"><span class="lineno">   56</span>  <span class="keyword">const</span> <span class="keyword">auto</span> size = <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(pos);</div>
+<div class="line"><span class="lineno">   57</span>  result.resize(size);</div>
+<div class="line"><span class="lineno">   58</span>  in.seekg(0, std::ios::beg);</div>
+<div class="line"><span class="lineno">   59</span>  in.read(result.data(), <span class="keyword">static_cast&lt;</span>std::streamsize<span class="keyword">&gt;</span>(result.size()));</div>
+<div class="line"><span class="lineno">   60</span>  <span class="keywordflow">if</span> (!in) {</div>
+<div class="line"><span class="lineno">   61</span>    <span class="keywordflow">return</span> std::unexpected(FileError::kReadError);</div>
+<div class="line"><span class="lineno">   62</span>  }</div>
+<div class="line"><span class="lineno">   63</span>  in.close();</div>
+<div class="line"><span class="lineno">   64</span> </div>
+<div class="line"><span class="lineno">   65</span>  <span class="keywordflow">return</span> result;</div>
+<div class="line"><span class="lineno">   66</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehelios.html">helios</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1utils.html">utils</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

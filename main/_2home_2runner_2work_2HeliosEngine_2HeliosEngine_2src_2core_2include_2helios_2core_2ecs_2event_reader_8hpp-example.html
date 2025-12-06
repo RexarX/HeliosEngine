@@ -1,0 +1,1339 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: /home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/event_reader.hpp</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2event_reader_8hpp-example.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/event_reader.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<p>Type-safe reader for events with filtering and query support.</p>
+<p>Type-safe reader for events with filtering and query support. Provides a clean, ergonomic API for reading events from the event system. EventReader supports iteration, filtering, searching, and collection operations. It uses lazy evaluation with caching to avoid multiple reads from EventManager. </p><dl class="section note"><dt>Note</dt><dd>EventReader is read-only and uses lazy evaluation with internal caching. EventReader is intended to be short-lived (function-scoped). Thread-safe for const operations if EventManager is thread-safe. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Event type</td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> reader = world.ReadEvents&lt;MyEvent&gt;();</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Iterate over events (efficient - no copy)</span></div>
+<div class="line"><span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; event : reader) {</div>
+<div class="line">  ProcessEvent(event);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Get events as span (efficient - no copy)</span></div>
+<div class="line"><span class="keyword">auto</span> events = reader.Read();</div>
+<div class="line"><span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; event : events) {</div>
+<div class="line">  ProcessEvent(event);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Collect events into vector (when you need ownership)</span></div>
+<div class="line"><span class="keyword">auto</span> owned = reader.Collect();</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Functional operations</span></div>
+<div class="line"><span class="keyword">auto</span> high_priority = reader.Filter([](<span class="keyword">auto</span>&amp; e) { <span class="keywordflow">return</span> e.priority &gt; 5; });</div>
+<div class="line"><span class="keyword">auto</span> ids = reader.Map([](<span class="keyword">auto</span>&amp; e) { <span class="keywordflow">return</span> e.id; });</div>
+<div class="line"><span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; [idx, event] : reader.Enumerate()) {</div>
+<div class="line">  <span class="comment">// Process with index</span></div>
+<div class="line">}</div>
+</div><!-- fragment --><div class="fragment"><div class="line"><span class="preprocessor">#pragma once</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="event__manager_8hpp.html">helios/core/ecs/details/event_manager.hpp</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="event_8hpp.html">helios/core/ecs/event.hpp</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="functional__adapters_8hpp.html">helios/core/utils/functional_adapters.hpp</a>&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;concepts&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;cstddef&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iterator&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;optional&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;span&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;tuple&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;utility&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1ecs.html">helios::ecs</a> {</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief Simple iterator for EventReader that returns plain events.</span></div>
+<div class="line"><span class="comment"> * @tparam T Event type</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="line"><span class="keyword">class </span>EventSimpleIterator {</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">  <span class="keyword">using </span><a id="a0" name="a0"></a><a class="code hl_typedef" href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a0710cdc40c11b894537ff2e25e5c39c7">value_type</a> = std::remove_cvref_t&lt;T&gt;;</div>
+<div class="line">  <span class="keyword">using </span><a id="a1" name="a1"></a><a class="code hl_typedef" href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a31530f8cf0b16c8eaca9df94d9e14d18">iterator_category</a> = std::forward_iterator_tag;</div>
+<div class="line">  <span class="keyword">using </span><a id="a2" name="a2"></a><a class="code hl_typedef" href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a1cb936d411090e458e0c2f6f5121973c">difference_type</a> = <a id="a3" name="a3"></a><a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ptrdiff_t</a>;</div>
+<div class="line">  <span class="keyword">using </span><a id="a4" name="a4"></a><a class="code hl_typedef" href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a518e910384154e24251dc84640a79e35">pointer</a> = <span class="keyword">const</span> <a class="code hl_typedef" href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a0710cdc40c11b894537ff2e25e5c39c7">value_type</a>*;</div>
+<div class="line">  <span class="keyword">using </span><a id="a5" name="a5"></a><a class="code hl_typedef" href="classhelios_1_1ecs_1_1EventSimpleIterator.html#ab89faab369d24fc20811f3b0196b934b">reference</a> = <span class="keyword">const</span> <a class="code hl_typedef" href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a0710cdc40c11b894537ff2e25e5c39c7">value_type</a>&amp;;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">constexpr</span> <a id="a6" name="a6"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a853964ce765e5bcf11f41e081797fcd6">EventSimpleIterator</a>() <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">explicit</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a853964ce765e5bcf11f41e081797fcd6">EventSimpleIterator</a>(<span class="keyword">typename</span> std::vector&lt;T&gt;::const_iterator <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">iter</a>) <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a> : iter_(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">iter</a>) {}</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">constexpr</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a853964ce765e5bcf11f41e081797fcd6">EventSimpleIterator</a>(<span class="keyword">const</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a853964ce765e5bcf11f41e081797fcd6">EventSimpleIterator</a>&amp;) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line">  <span class="keyword">constexpr</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a853964ce765e5bcf11f41e081797fcd6">EventSimpleIterator</a>(<a class="code hl_function" href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a853964ce765e5bcf11f41e081797fcd6">EventSimpleIterator</a>&amp;&amp;) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line">  <span class="keyword">constexpr</span> <a id="a7" name="a7"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a50bd46160559b99f8ef897caee6cd5ce">~EventSimpleIterator</a>() <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">constexpr</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a853964ce765e5bcf11f41e081797fcd6">EventSimpleIterator</a>&amp; <a id="a8" name="a8"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a05f7ca665b4a2f5a81bf6f6903a613e9">operator=</a>(<span class="keyword">const</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a853964ce765e5bcf11f41e081797fcd6">EventSimpleIterator</a>&amp;) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line">  <span class="keyword">constexpr</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a853964ce765e5bcf11f41e081797fcd6">EventSimpleIterator</a>&amp; <a class="code hl_function" href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a05f7ca665b4a2f5a81bf6f6903a613e9">operator=</a>(<a class="code hl_function" href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a853964ce765e5bcf11f41e081797fcd6">EventSimpleIterator</a>&amp;&amp;) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">constexpr</span> <a class="code hl_typedef" href="classhelios_1_1ecs_1_1EventSimpleIterator.html#ab89faab369d24fc20811f3b0196b934b">reference</a> <a id="a9" name="a9"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventSimpleIterator.html#af0f1d882c58ae9d551a99564257334e4">operator*</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> *iter_; }</div>
+<div class="line">  <span class="keyword">constexpr</span> <a class="code hl_typedef" href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a518e910384154e24251dc84640a79e35">pointer</a> <a id="a10" name="a10"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventSimpleIterator.html#aa5df7b47aefb41ea827369d6bc78783f">operator-&gt;</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> &amp;(*iter_); }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">constexpr</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a853964ce765e5bcf11f41e081797fcd6">EventSimpleIterator</a>&amp; <a id="a11" name="a11"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a2428e8599bd1139b1b939426f2f679fa">operator++</a>() <span class="keyword">noexcept</span>;</div>
+<div class="line">  <span class="keyword">constexpr</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a853964ce765e5bcf11f41e081797fcd6">EventSimpleIterator</a> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a2428e8599bd1139b1b939426f2f679fa">operator++</a>(<span class="keywordtype">int</span>) <span class="keyword">noexcept</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">constexpr</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a853964ce765e5bcf11f41e081797fcd6">EventSimpleIterator</a>&amp; <a id="a12" name="a12"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a452cf367db543f9064baa98374c95660">operator--</a>() <span class="keyword">noexcept</span>;</div>
+<div class="line">  <span class="keyword">constexpr</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a853964ce765e5bcf11f41e081797fcd6">EventSimpleIterator</a> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a452cf367db543f9064baa98374c95660">operator--</a>(<span class="keywordtype">int</span>) <span class="keyword">noexcept</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a id="a13" name="a13"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a6068a775d5fcda78b401838afb3519a9">operator==</a>(<span class="keyword">const</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a853964ce765e5bcf11f41e081797fcd6">EventSimpleIterator</a>&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> iter_ == other.iter_; }</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a id="a14" name="a14"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a451fd77a900daf84e408f64cdd93c812">operator!=</a>(<span class="keyword">const</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a853964ce765e5bcf11f41e081797fcd6">EventSimpleIterator</a>&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> iter_ != other.iter_; }</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">  <span class="keyword">typename</span> std::vector&lt;value_type&gt;::const_iterator iter_;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a2428e8599bd1139b1b939426f2f679fa">EventSimpleIterator&lt;T&gt;::operator++</a>() <span class="keyword">noexcept</span> -&gt; EventSimpleIterator&amp; {</div>
+<div class="line">  ++iter_;</div>
+<div class="line">  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a2428e8599bd1139b1b939426f2f679fa">EventSimpleIterator&lt;T&gt;::operator++</a>(<span class="keywordtype">int</span>) <span class="keyword">noexcept</span> -&gt; EventSimpleIterator {</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">temp</a> = *<span class="keyword">this</span>;</div>
+<div class="line">  ++iter_;</div>
+<div class="line">  <span class="keywordflow">return</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">temp</a>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a452cf367db543f9064baa98374c95660">EventSimpleIterator&lt;T&gt;::operator--</a>() <span class="keyword">noexcept</span> -&gt; EventSimpleIterator&amp; {</div>
+<div class="line">  --iter_;</div>
+<div class="line">  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a452cf367db543f9064baa98374c95660">EventSimpleIterator&lt;T&gt;::operator--</a>(<span class="keywordtype">int</span>) <span class="keyword">noexcept</span> -&gt; EventSimpleIterator {</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">temp</a> = *<span class="keyword">this</span>;</div>
+<div class="line">  --iter_;</div>
+<div class="line">  <span class="keywordflow">return</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">temp</a>;</div>
+<div class="line">}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief Iterator wrapper for EventReader.</span></div>
+<div class="line"><span class="comment"> * @tparam T Event type</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="line"><span class="keyword">class </span>EventIterator {</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">  <span class="keyword">using </span><a id="a15" name="a15"></a><a class="code hl_typedef" href="classhelios_1_1ecs_1_1EventIterator.html#a2cffbd2953819f2f3b80e5c1048a19eb">value_type</a> = std::tuple&lt;std::remove_cvref_t&lt;T&gt;&gt;;</div>
+<div class="line">  <span class="keyword">using </span><a id="a16" name="a16"></a><a class="code hl_typedef" href="classhelios_1_1ecs_1_1EventIterator.html#a624d2b62f29f48ea460be7807b3195aa">iterator_category</a> = std::forward_iterator_tag;</div>
+<div class="line">  <span class="keyword">using </span><a id="a17" name="a17"></a><a class="code hl_typedef" href="classhelios_1_1ecs_1_1EventIterator.html#a11ac600c50f7dcb79e0cf4c24b2827ea">difference_type</a> = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ptrdiff_t</a>;</div>
+<div class="line">  <span class="keyword">using </span><a id="a18" name="a18"></a><a class="code hl_typedef" href="classhelios_1_1ecs_1_1EventIterator.html#a94cd0545d391005dd068200949a56bd9">pointer</a> = <span class="keyword">const</span> std::tuple&lt;std::remove_cvref_t&lt;T&gt;&gt;*;</div>
+<div class="line">  <span class="keyword">using </span><a id="a19" name="a19"></a><a class="code hl_typedef" href="classhelios_1_1ecs_1_1EventIterator.html#a3fd5a99360cfd8e94cf50af49bef6012">reference</a> = std::tuple&lt;std::remove_cvref_t&lt;T&gt;&gt;;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">constexpr</span> <a id="a20" name="a20"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventIterator.html#a1ab9393dc0b0dcd49b233840e40820a5">EventIterator</a>() <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">explicit</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventIterator.html#a1ab9393dc0b0dcd49b233840e40820a5">EventIterator</a>(<span class="keyword">typename</span> std::vector&lt;std::remove_cvref_t&lt;T&gt;&gt;::const_iterator <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">iter</a>) <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></div>
+<div class="line">      : iter_(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">iter</a>) {}</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">constexpr</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventIterator.html#a1ab9393dc0b0dcd49b233840e40820a5">EventIterator</a>(<span class="keyword">const</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventIterator.html#a1ab9393dc0b0dcd49b233840e40820a5">EventIterator</a>&amp;) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line">  <span class="keyword">constexpr</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventIterator.html#a1ab9393dc0b0dcd49b233840e40820a5">EventIterator</a>(<a class="code hl_function" href="classhelios_1_1ecs_1_1EventIterator.html#a1ab9393dc0b0dcd49b233840e40820a5">EventIterator</a>&amp;&amp;) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line">  <span class="keyword">constexpr</span> <a id="a21" name="a21"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventIterator.html#a6ed43aa319afd930974d33cbdcdef860">~EventIterator</a>() <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">constexpr</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventIterator.html#a1ab9393dc0b0dcd49b233840e40820a5">EventIterator</a>&amp; <a id="a22" name="a22"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventIterator.html#a9bda1e4c119e370b7ddf26114b9ff594">operator=</a>(<span class="keyword">const</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventIterator.html#a1ab9393dc0b0dcd49b233840e40820a5">EventIterator</a>&amp;) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line">  <span class="keyword">constexpr</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventIterator.html#a1ab9393dc0b0dcd49b233840e40820a5">EventIterator</a>&amp; <a class="code hl_function" href="classhelios_1_1ecs_1_1EventIterator.html#a9bda1e4c119e370b7ddf26114b9ff594">operator=</a>(<a class="code hl_function" href="classhelios_1_1ecs_1_1EventIterator.html#a1ab9393dc0b0dcd49b233840e40820a5">EventIterator</a>&amp;&amp;) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">constexpr</span> <a class="code hl_typedef" href="classhelios_1_1ecs_1_1EventIterator.html#a3fd5a99360cfd8e94cf50af49bef6012">reference</a> <a id="a23" name="a23"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventIterator.html#a7c41599fa7dae1dbf46fdd219048f9b1">operator*</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> *iter_; }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">constexpr</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventIterator.html#a1ab9393dc0b0dcd49b233840e40820a5">EventIterator</a>&amp; <a id="a24" name="a24"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventIterator.html#ad0e9ad0098a0f0b18fdc48b802dc02e2">operator++</a>() <span class="keyword">noexcept</span>;</div>
+<div class="line">  <span class="keyword">constexpr</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventIterator.html#a1ab9393dc0b0dcd49b233840e40820a5">EventIterator</a> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventIterator.html#ad0e9ad0098a0f0b18fdc48b802dc02e2">operator++</a>(<span class="keywordtype">int</span>) <span class="keyword">noexcept</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">constexpr</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventIterator.html#a1ab9393dc0b0dcd49b233840e40820a5">EventIterator</a>&amp; <a id="a25" name="a25"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventIterator.html#a4280b3d15f66160367872bd8c8317b0c">operator--</a>() <span class="keyword">noexcept</span>;</div>
+<div class="line">  <span class="keyword">constexpr</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventIterator.html#a1ab9393dc0b0dcd49b233840e40820a5">EventIterator</a> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventIterator.html#a4280b3d15f66160367872bd8c8317b0c">operator--</a>(<span class="keywordtype">int</span>) <span class="keyword">noexcept</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a id="a26" name="a26"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventIterator.html#a1ea5e8f7182f782b08e16817a2e726f4">operator==</a>(<span class="keyword">const</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventIterator.html#a1ab9393dc0b0dcd49b233840e40820a5">EventIterator</a>&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> iter_ == other.iter_; }</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a id="a27" name="a27"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventIterator.html#a9a15f3da07bb519cd7f7192d30602721">operator!=</a>(<span class="keyword">const</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventIterator.html#a1ab9393dc0b0dcd49b233840e40820a5">EventIterator</a>&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> iter_ != other.iter_; }</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">  <span class="keyword">typename</span> std::vector&lt;std::remove_cvref_t&lt;T&gt;&gt;::const_iterator iter_;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventIterator.html#ad0e9ad0098a0f0b18fdc48b802dc02e2">EventIterator&lt;T&gt;::operator++</a>() <span class="keyword">noexcept</span> -&gt; EventIterator&amp; {</div>
+<div class="line">  ++iter_;</div>
+<div class="line">  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventIterator.html#ad0e9ad0098a0f0b18fdc48b802dc02e2">EventIterator&lt;T&gt;::operator++</a>(<span class="keywordtype">int</span>) <span class="keyword">noexcept</span> -&gt; EventIterator {</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">temp</a> = *<span class="keyword">this</span>;</div>
+<div class="line">  ++iter_;</div>
+<div class="line">  <span class="keywordflow">return</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">temp</a>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventIterator.html#a4280b3d15f66160367872bd8c8317b0c">EventIterator&lt;T&gt;::operator--</a>() <span class="keyword">noexcept</span> -&gt; EventIterator&amp; {</div>
+<div class="line">  --iter_;</div>
+<div class="line">  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventIterator.html#a4280b3d15f66160367872bd8c8317b0c">EventIterator&lt;T&gt;::operator--</a>(<span class="keywordtype">int</span>) <span class="keyword">noexcept</span> -&gt; EventIterator {</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">temp</a> = *<span class="keyword">this</span>;</div>
+<div class="line">  --iter_;</div>
+<div class="line">  <span class="keywordflow">return</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">temp</a>;</div>
+<div class="line">}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief Type-safe reader for events with filtering and query support.</span></div>
+<div class="line"><span class="comment"> * @details Provides a clean, ergonomic API for reading events from the event system.</span></div>
+<div class="line"><span class="comment"> * EventReader supports iteration, filtering, searching, and collection operations.</span></div>
+<div class="line"><span class="comment"> * It uses lazy evaluation with caching to avoid multiple reads from EventManager.</span></div>
+<div class="line"><span class="comment"> * @note EventReader is read-only and uses lazy evaluation with internal caching.</span></div>
+<div class="line"><span class="comment"> * EventReader is intended to be short-lived (function-scoped).</span></div>
+<div class="line"><span class="comment"> * Thread-safe for const operations if EventManager is thread-safe.</span></div>
+<div class="line"><span class="comment"> * @tparam T Event type</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * @example</span></div>
+<div class="line"><span class="comment"> * @code</span></div>
+<div class="line"><span class="comment"> * auto reader = world.ReadEvents&lt;MyEvent&gt;();</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * // Iterate over events (efficient - no copy)</span></div>
+<div class="line"><span class="comment"> * for (const auto&amp; event : reader) {</span></div>
+<div class="line"><span class="comment"> *   ProcessEvent(event);</span></div>
+<div class="line"><span class="comment"> * }</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * // Get events as span (efficient - no copy)</span></div>
+<div class="line"><span class="comment"> * auto events = reader.Read();</span></div>
+<div class="line"><span class="comment"> * for (const auto&amp; event : events) {</span></div>
+<div class="line"><span class="comment"> *   ProcessEvent(event);</span></div>
+<div class="line"><span class="comment"> * }</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * // Collect events into vector (when you need ownership)</span></div>
+<div class="line"><span class="comment"> * auto owned = reader.Collect();</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * // Functional operations</span></div>
+<div class="line"><span class="comment"> * auto high_priority = reader.Filter([](auto&amp; e) { return e.priority &gt; 5; });</span></div>
+<div class="line"><span class="comment"> * auto ids = reader.Map([](auto&amp; e) { return e.id; });</span></div>
+<div class="line"><span class="comment"> * for (const auto&amp; [idx, event] : reader.Enumerate()) {</span></div>
+<div class="line"><span class="comment"> *   // Process with index</span></div>
+<div class="line"><span class="comment"> * }</span></div>
+<div class="line"><span class="comment"> * @endcode</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="line"><span class="keyword">class </span>EventReader {</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">  <span class="keyword">using </span><a id="a28" name="a28"></a><a class="code hl_typedef" href="classhelios_1_1ecs_1_1EventReader.html#a877068c4eafce5231660a5606ced9724">AdaptorIterator</a> = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">EventIterator&lt;T&gt;</a>;  <span class="comment">// For adapters - returns tuples</span></div>
+<div class="line">  <span class="keyword">using </span><a id="a29" name="a29"></a><a class="code hl_typedef" href="classhelios_1_1ecs_1_1EventReader.html#a25be430f7a994fb5e9060b44245450c1">AdaptorConstIterator</a> = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">EventSimpleIterator&lt;T&gt;</a>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">using </span><a id="a30" name="a30"></a><a class="code hl_typedef" href="classhelios_1_1ecs_1_1EventReader.html#aa4c3e53ee7121f983dd3aceb10f1486b">value_type</a> = std::remove_cvref_t&lt;T&gt;;</div>
+<div class="line">  <span class="keyword">using </span><a id="a31" name="a31"></a><a class="code hl_typedef" href="classhelios_1_1ecs_1_1EventReader.html#a1f2b5e94c3653a8d7e7beb1fecf4e79f">const_iterator</a> = <a class="code hl_typedef" href="classhelios_1_1ecs_1_1EventReader.html#a25be430f7a994fb5e9060b44245450c1">AdaptorConstIterator</a>;</div>
+<div class="line">  <span class="keyword">using </span><a id="a32" name="a32"></a><a class="code hl_typedef" href="classhelios_1_1ecs_1_1EventReader.html#a8fa2249a264d6def6cc1c2ee9a9ea4a0">iterator</a> = <a class="code hl_typedef" href="classhelios_1_1ecs_1_1EventReader.html#a1f2b5e94c3653a8d7e7beb1fecf4e79f">const_iterator</a>;  <span class="comment">// Read-only access</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Constructs an EventReader.</span></div>
+<div class="line"><span class="comment">   * @param manager Reference to the event manager</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">explicit</span> <span class="keyword">constexpr</span> EventReader(<span class="keyword">const</span> details::EventManager&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">manager</a>) <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a> : manager_(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">manager</a>) {}</div>
+<div class="line">  EventReader(<span class="keyword">const</span> EventReader&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line">  EventReader(EventReader&amp;&amp;) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line">  <a id="a33" name="a33"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a606adc8b809c5b54de8ed9b494825a8e">~EventReader</a>() <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"> </div>
+<div class="line">  EventReader&amp; <a id="a34" name="a34"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a7b5e5b3379509712b113a2c316a3b44c">operator=</a>(<span class="keyword">const</span> EventReader&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line">  EventReader&amp; <a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a7b5e5b3379509712b113a2c316a3b44c">operator=</a>(EventReader&amp;&amp;) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Returns events as a read-only span.</span></div>
+<div class="line"><span class="comment">   * @details This is the primary interface for accessing events.</span></div>
+<div class="line"><span class="comment">   * The span remains valid as long as the EventReader is alive and no non-const operations are performed.</span></div>
+<div class="line"><span class="comment">   * @return Span of const events</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * @example</span></div>
+<div class="line"><span class="comment">   * @code</span></div>
+<div class="line"><span class="comment">   * auto reader = world.ReadEvents&lt;MyEvent&gt;();</span></div>
+<div class="line"><span class="comment">   * auto events = reader.Read();</span></div>
+<div class="line"><span class="comment">   * for (const auto&amp; event : events) {</span></div>
+<div class="line"><span class="comment">   *   ProcessEvent(event);</span></div>
+<div class="line"><span class="comment">   * }</span></div>
+<div class="line"><span class="comment">   * @endcode</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <span class="keyword">auto</span> <a id="a35" name="a35"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#aca590049c48b49bb7ebeb6d657b94160">Read</a>() <span class="keyword">const</span> -&gt; std::span&lt;const value_type&gt; {</div>
+<div class="line">    EnsureCached();</div>
+<div class="line">    <span class="keywordflow">return</span> {cached_events_-&gt;data(), cached_events_-&gt;size()};</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Collects all events into a vector.</span></div>
+<div class="line"><span class="comment">   * @details Returns a copy of the events. Use this when you need ownership</span></div>
+<div class="line"><span class="comment">   * or when the events need to outlive the EventReader.</span></div>
+<div class="line"><span class="comment">   * For most cases, prefer using Read() or range-based for loops.</span></div>
+<div class="line"><span class="comment">   * @return Vector containing all events</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * @example</span></div>
+<div class="line"><span class="comment">   * @code</span></div>
+<div class="line"><span class="comment">   * // Use when you need a copy</span></div>
+<div class="line"><span class="comment">   * auto events = reader.Collect();</span></div>
+<div class="line"><span class="comment">   * ProcessLater(std::move(events));</span></div>
+<div class="line"><span class="comment">   * @endcode</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <span class="keyword">auto</span> <a id="a36" name="a36"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#aa77edc2940797ab92e6aa5d54de61d64">Collect</a>() <span class="keyword">const</span> -&gt; std::vector&lt;value_type&gt; {</div>
+<div class="line">    EnsureCached();</div>
+<div class="line">    <span class="keywordflow">return</span> *cached_events_;</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Collects all events into a vector using a custom allocator.</span></div>
+<div class="line"><span class="comment">   * @details Returns a copy of the events using the provided allocator.</span></div>
+<div class="line"><span class="comment">   * Useful for temporary allocations with frame allocators.</span></div>
+<div class="line"><span class="comment">   * @warning When using a frame allocator (via SystemContext::MakeFrameAllocator()),</span></div>
+<div class="line"><span class="comment">   * the returned data is only valid for the current frame. All pointers and references</span></div>
+<div class="line"><span class="comment">   * to frame-allocated data become invalid after the frame ends. Do not store</span></div>
+<div class="line"><span class="comment">   * frame-allocated data in components, resources, or any persistent storage.</span></div>
+<div class="line"><span class="comment">   * @tparam Alloc STL-compatible allocator type for value_type</span></div>
+<div class="line"><span class="comment">   * @param alloc Allocator instance to use for the result vector</span></div>
+<div class="line"><span class="comment">   * @return Vector containing all events, using the provided allocator</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * @example</span></div>
+<div class="line"><span class="comment">   * @code</span></div>
+<div class="line"><span class="comment">   * void MySystem::Update(app::SystemContext&amp; ctx) {</span></div>
+<div class="line"><span class="comment">   *   auto alloc = ctx.MakeFrameAllocator&lt;MyEvent&gt;();</span></div>
+<div class="line"><span class="comment">   *   auto reader = ctx.ReadEvents&lt;MyEvent&gt;();</span></div>
+<div class="line"><span class="comment">   *   auto events = reader.CollectWith(alloc);</span></div>
+<div class="line"><span class="comment">   *   // events uses frame allocator, automatically reclaimed at frame end</span></div>
+<div class="line"><span class="comment">   *   // WARNING: Do not store &#39;events&#39; or pointers to its contents beyond this frame!</span></div>
+<div class="line"><span class="comment">   * }</span></div>
+<div class="line"><span class="comment">   * @endcode</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Alloc&gt;</div>
+<div class="line">    <span class="keyword">requires</span> std::same_as&lt;typename Alloc::value_type, std::remove_cvref_t&lt;T&gt;&gt;</div>
+<div class="line">  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <span class="keyword">auto</span> <a id="a37" name="a37"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#afddc2e125e8f371841b2254ce95cddfb">CollectWith</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">Alloc</a> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">alloc</a>) <span class="keyword">const</span> -&gt; std::vector&lt;value_type, Alloc&gt;;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Reads events into an output iterator.</span></div>
+<div class="line"><span class="comment">   * @details Efficiently writes events to an output iterator without materialization.</span></div>
+<div class="line"><span class="comment">   * This method bypasses the cache and reads directly from EventManager for optimal performance.</span></div>
+<div class="line"><span class="comment">   * @tparam OutIt Output iterator type</span></div>
+<div class="line"><span class="comment">   * @param out Output iterator</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * @example</span></div>
+<div class="line"><span class="comment">   * @code</span></div>
+<div class="line"><span class="comment">   * std::vector&lt;MyEvent&gt; events;</span></div>
+<div class="line"><span class="comment">   * reader.ReadInto(std::back_inserter(events));</span></div>
+<div class="line"><span class="comment">   * @endcode</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> OutIt&gt;</div>
+<div class="line">    <span class="keyword">requires</span> std::output_iterator&lt;OutIt, value_type&gt;</div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a38" name="a38"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a505aac5587e67ca8ec496fd8f98c4b48">ReadInto</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">OutIt</a> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">out</a>)<span class="keyword"> const </span>{</div>
+<div class="line">    manager_.<a id="a39" name="a39"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a0bcfb807b1be7c463168e6a663bd8df1">ReadInto</a>&lt;<a class="code hl_typedef" href="classhelios_1_1ecs_1_1EventReader.html#aa4c3e53ee7121f983dd3aceb10f1486b">value_type</a>&gt;(std::move(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">out</a>));</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Consumes adapter/iterator and writes events into an output iterator.</span></div>
+<div class="line"><span class="comment">   * @details Terminal operation that writes all events to the provided output iterator.</span></div>
+<div class="line"><span class="comment">   * More efficient than Collect() when you have a destination container.</span></div>
+<div class="line"><span class="comment">   * @tparam OutIt Output iterator type</span></div>
+<div class="line"><span class="comment">   * @param out Output iterator</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * @example</span></div>
+<div class="line"><span class="comment">   * @code</span></div>
+<div class="line"><span class="comment">   * std::vector&lt;MyEvent&gt; filtered_events;</span></div>
+<div class="line"><span class="comment">   * reader.Filter([](auto&amp; e) { return e.priority &gt; 5; })</span></div>
+<div class="line"><span class="comment">   *       .Into(std::back_inserter(filtered_events));</span></div>
+<div class="line"><span class="comment">   * @endcode</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> OutIt&gt;</div>
+<div class="line">    <span class="keyword">requires</span> std::output_iterator&lt;OutIt, std::remove_cvref_t&lt;T&gt;&gt;</div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a40" name="a40"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a8ff55f6a45505a2b1388ab1ddb470ef6">Into</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">OutIt</a> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">out</a>) <span class="keyword">const</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Returns the first event that matches a predicate.</span></div>
+<div class="line"><span class="comment">   * @details The returned pointer is valid only while EventReader is alive.</span></div>
+<div class="line"><span class="comment">   * @tparam Pred Predicate type</span></div>
+<div class="line"><span class="comment">   * @param predicate Predicate function</span></div>
+<div class="line"><span class="comment">   * @return Pointer to first matching event or nullptr if not found</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * @example</span></div>
+<div class="line"><span class="comment">   * @code</span></div>
+<div class="line"><span class="comment">   * if (auto* event = reader.FindFirst([](auto&amp; e) { return e.priority &gt; 5; })) {</span></div>
+<div class="line"><span class="comment">   *   ProcessHighPriority(*event);</span></div>
+<div class="line"><span class="comment">   * }</span></div>
+<div class="line"><span class="comment">   * @endcode</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Pred&gt;</div>
+<div class="line">    <span class="keyword">requires</span> utils::PredicateFor&lt;Pred, const std::remove_cvref_t&lt;T&gt;&amp;&gt;</div>
+<div class="line">  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <span class="keyword">const</span> <a class="code hl_typedef" href="classhelios_1_1ecs_1_1EventReader.html#aa4c3e53ee7121f983dd3aceb10f1486b">value_type</a>* <a id="a41" name="a41"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a1502713ed3787e8ea10368bf70279d21">FindFirst</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">Pred</a>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">predicate</a>) <span class="keyword">const</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Counts events that match a predicate.</span></div>
+<div class="line"><span class="comment">   * @tparam Pred Predicate type</span></div>
+<div class="line"><span class="comment">   * @param predicate Predicate function</span></div>
+<div class="line"><span class="comment">   * @return Number of matching events</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * @example</span></div>
+<div class="line"><span class="comment">   * @code</span></div>
+<div class="line"><span class="comment">   * size_t critical_count = reader.CountIf([](auto&amp; e) { return e.is_critical; });</span></div>
+<div class="line"><span class="comment">   * @endcode</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Pred&gt;</div>
+<div class="line">    <span class="keyword">requires</span> utils::PredicateFor&lt;Pred, const std::remove_cvref_t&lt;T&gt;&amp;&gt;</div>
+<div class="line">  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <span class="keywordtype">size_t</span> <a id="a42" name="a42"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a3ca5434f90c58ef8b6ee33173f912332">CountIf</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">Pred</a>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">predicate</a>) <span class="keyword">const</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Filters events based on a predicate.</span></div>
+<div class="line"><span class="comment">   * @details Lazily filters the event results, only yielding elements that satisfy the predicate.</span></div>
+<div class="line"><span class="comment">   * @tparam Pred Predicate function type (const T&amp;) -&gt; bool</span></div>
+<div class="line"><span class="comment">   * @param predicate Function to test each event</span></div>
+<div class="line"><span class="comment">   * @return View that yields only matching events</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * @example</span></div>
+<div class="line"><span class="comment">   * @code</span></div>
+<div class="line"><span class="comment">   * auto critical = reader.Filter([](const MyEvent&amp; e) { return e.is_critical; });</span></div>
+<div class="line"><span class="comment">   * for (const auto&amp; event : critical) {</span></div>
+<div class="line"><span class="comment">   *   HandleCritical(event);</span></div>
+<div class="line"><span class="comment">   * }</span></div>
+<div class="line"><span class="comment">   * @endcode</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Pred&gt;</div>
+<div class="line">    <span class="keyword">requires</span> utils::PredicateFor&lt;Pred, const std::remove_cvref_t&lt;T&gt;&amp;&gt;</div>
+<div class="line">  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <span class="keyword">auto</span> <a id="a43" name="a43"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a24b9bd4622ba12817e34fbb4108f7fd9">Filter</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">Pred</a> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">predicate</a>) <span class="keyword">const</span> -&gt; utils::FilterAdapter&lt;AdaptorIterator, Pred&gt;;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Transforms each event using a mapping function.</span></div>
+<div class="line"><span class="comment">   * @details Lazily transforms event results by applying a function to each element.</span></div>
+<div class="line"><span class="comment">   * @tparam Func Transformation function type (const T&amp;) -&gt; U</span></div>
+<div class="line"><span class="comment">   * @param transform Function to transform each event</span></div>
+<div class="line"><span class="comment">   * @return View that yields transformed elements</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * @example</span></div>
+<div class="line"><span class="comment">   * @code</span></div>
+<div class="line"><span class="comment">   * auto ids = reader.Map([](const MyEvent&amp; e) { return e.id; });</span></div>
+<div class="line"><span class="comment">   * for (auto id : ids) {</span></div>
+<div class="line"><span class="comment">   *   ProcessId(id);</span></div>
+<div class="line"><span class="comment">   * }</span></div>
+<div class="line"><span class="comment">   * @endcode</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Func&gt;</div>
+<div class="line">    <span class="keyword">requires</span> utils::TransformFor&lt;Func, const std::remove_cvref_t&lt;T&gt;&amp;&gt;</div>
+<div class="line">  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <span class="keyword">auto</span> <a id="a44" name="a44"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a96162443bdd9159bd5d929cdc290b7a1">Map</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">Func</a> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">transform</a>) <span class="keyword">const</span> -&gt; utils::MapAdapter&lt;AdaptorIterator, Func&gt;;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Takes only the first N events.</span></div>
+<div class="line"><span class="comment">   * @details Lazily yields at most N elements from the event results.</span></div>
+<div class="line"><span class="comment">   * @param count Maximum number of elements to take</span></div>
+<div class="line"><span class="comment">   * @return View that yields at most count elements</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * @example</span></div>
+<div class="line"><span class="comment">   * @code</span></div>
+<div class="line"><span class="comment">   * auto first_five = reader.Take(5);</span></div>
+<div class="line"><span class="comment">   * @endcode</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <span class="keyword">auto</span> <a id="a45" name="a45"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#aefefb582436ddc97a656ca51565e1ab9">Take</a>(<span class="keywordtype">size_t</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">count</a>) <span class="keyword">const</span> -&gt; utils::TakeAdapter&lt;AdaptorIterator&gt;;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Skips the first N events.</span></div>
+<div class="line"><span class="comment">   * @details Lazily skips the first N elements and yields the rest.</span></div>
+<div class="line"><span class="comment">   * @param count Number of elements to skip</span></div>
+<div class="line"><span class="comment">   * @return View that yields elements after skipping count elements</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * @code</span></div>
+<div class="line"><span class="comment">   * auto after_ten = reader.Skip(10);</span></div>
+<div class="line"><span class="comment">   * @endcode</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <span class="keyword">auto</span> <a id="a46" name="a46"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a4b91638ebd9ea380056eab0b3ecd0c59">Skip</a>(<span class="keywordtype">size_t</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">count</a>) <span class="keyword">const</span> -&gt; utils::SkipAdapter&lt;AdaptorIterator&gt;;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Takes events while a predicate is true.</span></div>
+<div class="line"><span class="comment">   * @details Lazily yields elements until the predicate returns false.</span></div>
+<div class="line"><span class="comment">   * @tparam Pred Predicate function type (const T&amp;) -&gt; bool</span></div>
+<div class="line"><span class="comment">   * @param predicate Function to test each event</span></div>
+<div class="line"><span class="comment">   * @return View that yields elements while predicate is true</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * @example</span></div>
+<div class="line"><span class="comment">   * @code</span></div>
+<div class="line"><span class="comment">   * auto while_valid = reader.TakeWhile([](const MyEvent&amp; e) { return e.is_valid; });</span></div>
+<div class="line"><span class="comment">   * @endcode</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Pred&gt;</div>
+<div class="line">    <span class="keyword">requires</span> utils::PredicateFor&lt;Pred, const std::remove_cvref_t&lt;T&gt;&amp;&gt;</div>
+<div class="line">  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <span class="keyword">auto</span> <a id="a47" name="a47"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a53d08c1612bb36eb859354fb20f13b12">TakeWhile</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">Pred</a> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">predicate</a>) <span class="keyword">const</span> -&gt; utils::TakeWhileAdapter&lt;AdaptorIterator, Pred&gt;;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Skips events while a predicate is true.</span></div>
+<div class="line"><span class="comment">   * @details Lazily skips elements until the predicate returns false, then yields the rest.</span></div>
+<div class="line"><span class="comment">   * @tparam Pred Predicate function type (const T&amp;) -&gt; bool</span></div>
+<div class="line"><span class="comment">   * @param predicate Function to test each event</span></div>
+<div class="line"><span class="comment">   * @return View that yields elements after predicate becomes false</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * @example</span></div>
+<div class="line"><span class="comment">   * @code</span></div>
+<div class="line"><span class="comment">   * auto after_invalid = reader.SkipWhile([](const MyEvent&amp; e) { return !e.is_valid; });</span></div>
+<div class="line"><span class="comment">   * @endcode</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Pred&gt;</div>
+<div class="line">    <span class="keyword">requires</span> utils::PredicateFor&lt;Pred, const std::remove_cvref_t&lt;T&gt;&amp;&gt;</div>
+<div class="line">  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <span class="keyword">auto</span> <a id="a48" name="a48"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a1ae3f48c09fba8bd9aea323d2ccff717">SkipWhile</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">Pred</a> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">predicate</a>) <span class="keyword">const</span> -&gt; utils::SkipWhileAdapter&lt;AdaptorIterator, Pred&gt;;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Adds an index to each event.</span></div>
+<div class="line"><span class="comment">   * @details Lazily yields tuples with an index followed by the event.</span></div>
+<div class="line"><span class="comment">   * @return View that yields (index, event) tuples</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * @example</span></div>
+<div class="line"><span class="comment">   * @code</span></div>
+<div class="line"><span class="comment">   * for (auto [idx, event] : reader.Enumerate()) {</span></div>
+<div class="line"><span class="comment">   *   // idx is 0, 1, 2, ...</span></div>
+<div class="line"><span class="comment">   *   ProcessWithIndex(idx, event);</span></div>
+<div class="line"><span class="comment">   * }</span></div>
+<div class="line"><span class="comment">   * @endcode</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <span class="keyword">auto</span> <a id="a49" name="a49"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#ad665d31f099755985304aec596fde09e">Enumerate</a>() <span class="keyword">const</span> -&gt; utils::EnumerateAdapter&lt;AdaptorIterator&gt;;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Inspects each event without consuming it.</span></div>
+<div class="line"><span class="comment">   * @details Calls a function on each element for side effects, then passes it through.</span></div>
+<div class="line"><span class="comment">   * @tparam Func Inspection function type (const T&amp;) -&gt; void</span></div>
+<div class="line"><span class="comment">   * @param inspector Function to call on each event</span></div>
+<div class="line"><span class="comment">   * @return View that yields the same elements after inspection</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * @example</span></div>
+<div class="line"><span class="comment">   * @code</span></div>
+<div class="line"><span class="comment">   * auto result = reader.Inspect([](const MyEvent&amp; e) {</span></div>
+<div class="line"><span class="comment">   *     std::cout &lt;&lt; &quot;Event: &quot; &lt;&lt; e.id &lt;&lt; &quot;\n&quot;;</span></div>
+<div class="line"><span class="comment">   *   })</span></div>
+<div class="line"><span class="comment">   *   .Collect();</span></div>
+<div class="line"><span class="comment">   * @endcode</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Func&gt;</div>
+<div class="line">    <span class="keyword">requires</span> utils::InspectorFor&lt;Func, const std::remove_cvref_t&lt;T&gt;&amp;&gt;</div>
+<div class="line">  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <span class="keyword">auto</span> <a id="a50" name="a50"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a14d3c2ca948cdd6f27c2957cb23421f3">Inspect</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">Func</a> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">inspector</a>) <span class="keyword">const</span> -&gt; utils::InspectAdapter&lt;AdaptorIterator, Func&gt;;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Yields every Nth event.</span></div>
+<div class="line"><span class="comment">   * @details Lazily yields elements at regular intervals.</span></div>
+<div class="line"><span class="comment">   * @param step Interval between yielded elements (must be &gt; 0)</span></div>
+<div class="line"><span class="comment">   * @return View that yields every step-th element</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * @example</span></div>
+<div class="line"><span class="comment">   * @code</span></div>
+<div class="line"><span class="comment">   * auto every_third = reader.StepBy(3);</span></div>
+<div class="line"><span class="comment">   * @endcode</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <span class="keyword">auto</span> <a id="a51" name="a51"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#ac540c70e5fc123a4b5b0f3a42e85e1c0">StepBy</a>(<span class="keywordtype">size_t</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">step</a>) <span class="keyword">const</span> -&gt; utils::StepByAdapter&lt;AdaptorIterator&gt;;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Reverses the order of events.</span></div>
+<div class="line"><span class="comment">   * @details Iterates through events in reverse order.</span></div>
+<div class="line"><span class="comment">   * @return View that yields events in reverse order</span></div>
+<div class="line"><span class="comment">   * @note Requires bidirectional iterator support</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * @example</span></div>
+<div class="line"><span class="comment">   * @code</span></div>
+<div class="line"><span class="comment">   * auto reversed = reader.Reverse();</span></div>
+<div class="line"><span class="comment">   * @endcode</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <span class="keyword">auto</span> <a id="a52" name="a52"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#aec58cf72127574a3f60eafcae1619106">Reverse</a>() <span class="keyword">const</span> -&gt; utils::ReverseAdapter&lt;AdaptorIterator&gt; { <span class="keywordflow">return</span> {<a id="a53" name="a53"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a130c33e8964567ff51c9f099537a5b8d">begin</a>(), <a id="a54" name="a54"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a0f766fa89559a5e9247fa344ba04474a">end</a>()}; }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Creates sliding windows over events.</span></div>
+<div class="line"><span class="comment">   * @details Yields overlapping windows of a fixed size.</span></div>
+<div class="line"><span class="comment">   * @param window_size Size of the sliding window</span></div>
+<div class="line"><span class="comment">   * @return View that yields windows of events</span></div>
+<div class="line"><span class="comment">   * @warning window_size must be greater than 0</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * @example</span></div>
+<div class="line"><span class="comment">   * @code</span></div>
+<div class="line"><span class="comment">   * auto windows = reader.Slide(3);</span></div>
+<div class="line"><span class="comment">   * @endcode</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <span class="keyword">auto</span> <a id="a55" name="a55"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a5f3cedaabe69f18b2aa3fd415e76c0e7">Slide</a>(<span class="keywordtype">size_t</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">window_size</a>) <span class="keyword">const</span> -&gt; utils::SlideAdapter&lt;AdaptorIterator&gt; {</div>
+<div class="line">    <span class="keywordflow">return</span> {<a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a130c33e8964567ff51c9f099537a5b8d">begin</a>(), <a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a0f766fa89559a5e9247fa344ba04474a">end</a>(), <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">window_size</a>};</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Takes every Nth event.</span></div>
+<div class="line"><span class="comment">   * @details Yields events at regular stride intervals.</span></div>
+<div class="line"><span class="comment">   * @param stride Number of events to skip between yields</span></div>
+<div class="line"><span class="comment">   * @return View that yields every Nth event</span></div>
+<div class="line"><span class="comment">   * @warning stride must be greater than 0</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * @example</span></div>
+<div class="line"><span class="comment">   * @code</span></div>
+<div class="line"><span class="comment">   * auto every_third = reader.Stride(3);</span></div>
+<div class="line"><span class="comment">   * @endcode</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <span class="keyword">auto</span> <a id="a56" name="a56"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a827fd852ac23c8335ccd503e92c6ec32">Stride</a>(<span class="keywordtype">size_t</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">stride</a>) <span class="keyword">const</span> -&gt; utils::StrideAdapter&lt;AdaptorIterator&gt; {</div>
+<div class="line">    <span class="keywordflow">return</span> {<a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a130c33e8964567ff51c9f099537a5b8d">begin</a>(), <a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a0f766fa89559a5e9247fa344ba04474a">end</a>(), <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">stride</a>};</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Zips events with another iterator.</span></div>
+<div class="line"><span class="comment">   * @details Combines events with another range into tuples.</span></div>
+<div class="line"><span class="comment">   * @tparam OtherIter Iterator type to zip with</span></div>
+<div class="line"><span class="comment">   * @param other_begin Beginning of the other range</span></div>
+<div class="line"><span class="comment">   * @param other_end End of the other range</span></div>
+<div class="line"><span class="comment">   * @return View that yields tuples of corresponding elements</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * @example</span></div>
+<div class="line"><span class="comment">   * @code</span></div>
+<div class="line"><span class="comment">   * std::vector&lt;int&gt; ids = {1, 2, 3};</span></div>
+<div class="line"><span class="comment">   * auto zipped = reader.Zip(ids.begin(), ids.end());</span></div>
+<div class="line"><span class="comment">   * @endcode</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> OtherIter&gt;</div>
+<div class="line">    <span class="keyword">requires</span> utils::IteratorLike&lt;OtherIter&gt;</div>
+<div class="line">  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <span class="keyword">auto</span> <a id="a57" name="a57"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a551d64323ecde1262c1a50e11f84f067">Zip</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">OtherIter</a> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">other_begin</a>, <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">OtherIter</a> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">other_end</a>) <span class="keyword">const</span></div>
+<div class="line">      -&gt; utils::ZipAdapter&lt;AdaptorIterator, OtherIter&gt; {</div>
+<div class="line">    <span class="keywordflow">return</span> {<a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a130c33e8964567ff51c9f099537a5b8d">begin</a>(), <a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a0f766fa89559a5e9247fa344ba04474a">end</a>(), std::move(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">other_begin</a>), std::move(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">other_end</a>)};</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Executes a function for each event.</span></div>
+<div class="line"><span class="comment">   * @details Calls the provided function with each event for side effects.</span></div>
+<div class="line"><span class="comment">   * @tparam Action Function type (const T&amp;) -&gt; void</span></div>
+<div class="line"><span class="comment">   * @param action Function to execute for each event</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * @example</span></div>
+<div class="line"><span class="comment">   * @code</span></div>
+<div class="line"><span class="comment">   * reader.ForEach([](const MyEvent&amp; e) {</span></div>
+<div class="line"><span class="comment">   *   ProcessEvent(e);</span></div>
+<div class="line"><span class="comment">   * });</span></div>
+<div class="line"><span class="comment">   * @endcode</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Action&gt;</div>
+<div class="line">    <span class="keyword">requires</span> utils::ActionFor&lt;Action, const std::remove_cvref_t&lt;T&gt;&amp;&gt;</div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a58" name="a58"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#aace6b4de8e1e41d8330118ce534adead">ForEach</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">Action</a>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">action</a>) <span class="keyword">const</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Folds the events into a single value.</span></div>
+<div class="line"><span class="comment">   * @details Applies a binary function to an initial value and each event.</span></div>
+<div class="line"><span class="comment">   * @tparam Acc Accumulator type</span></div>
+<div class="line"><span class="comment">   * @tparam Folder Function type (Acc, const T&amp;) -&gt; Acc</span></div>
+<div class="line"><span class="comment">   * @param init Initial value</span></div>
+<div class="line"><span class="comment">   * @param folder Function that combines accumulator with each event</span></div>
+<div class="line"><span class="comment">   * @return Final folded value</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * @example</span></div>
+<div class="line"><span class="comment">   * @code</span></div>
+<div class="line"><span class="comment">   * int total = reader.Fold(0, [](int acc, const MyEvent&amp; e) { return acc + e.value; });</span></div>
+<div class="line"><span class="comment">   * @endcode</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Acc, <span class="keyword">typename</span> Folder&gt;</div>
+<div class="line">    <span class="keyword">requires</span> utils::FolderFor&lt;Folder, Acc, const std::remove_cvref_t&lt;T&gt;&amp;&gt;</div>
+<div class="line">  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">Acc</a> <a id="a59" name="a59"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a3dc7361b893a11996eeaf081e372d6cc">Fold</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">Acc</a> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">init</a>, <span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">Folder</a>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">folder</a>) <span class="keyword">const</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Checks if any event matches the predicate.</span></div>
+<div class="line"><span class="comment">   * @details Short-circuits on first match for efficiency.</span></div>
+<div class="line"><span class="comment">   * @tparam Pred Predicate function type (const T&amp;) -&gt; bool</span></div>
+<div class="line"><span class="comment">   * @param predicate Function to test each event</span></div>
+<div class="line"><span class="comment">   * @return True if at least one event matches, false otherwise</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * @code</span></div>
+<div class="line"><span class="comment">   * bool has_critical = reader.Any([](const MyEvent&amp; e) { return e.is_critical; });</span></div>
+<div class="line"><span class="comment">   * @endcode</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Pred&gt;</div>
+<div class="line">    <span class="keyword">requires</span> utils::PredicateFor&lt;Pred, const std::remove_cvref_t&lt;T&gt;&amp;&gt;</div>
+<div class="line">  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <span class="keywordtype">bool</span> <a id="a60" name="a60"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#af65c7442701daef42710eb5018222d30">Any</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">Pred</a>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">predicate</a>) <span class="keyword">const</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Checks if all events match the predicate.</span></div>
+<div class="line"><span class="comment">   * @details Short-circuits on first non-match for efficiency.</span></div>
+<div class="line"><span class="comment">   * @tparam Pred Predicate function type (const T&amp;) -&gt; bool</span></div>
+<div class="line"><span class="comment">   * @param predicate Function to test each event</span></div>
+<div class="line"><span class="comment">   * @return True if all events match, false otherwise</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * @example</span></div>
+<div class="line"><span class="comment">   * @code</span></div>
+<div class="line"><span class="comment">   * bool all_valid = reader.All([](const MyEvent&amp; e) { return e.is_valid; });</span></div>
+<div class="line"><span class="comment">   * @endcode</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Pred&gt;</div>
+<div class="line">    <span class="keyword">requires</span> utils::PredicateFor&lt;Pred, const std::remove_cvref_t&lt;T&gt;&amp;&gt;</div>
+<div class="line">  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <span class="keywordtype">bool</span> <a id="a61" name="a61"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a0f51242c976663f9de272cb821e5e057">All</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">Pred</a>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">predicate</a>) <span class="keyword">const</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Finds the first event matching the predicate.</span></div>
+<div class="line"><span class="comment">   * @details Returns an optional containing the first matching event.</span></div>
+<div class="line"><span class="comment">   * @tparam Pred Predicate function type (const T&amp;) -&gt; bool</span></div>
+<div class="line"><span class="comment">   * @param predicate Function to test each event</span></div>
+<div class="line"><span class="comment">   * @return Optional containing the first matching event, or empty if not found</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * @example</span></div>
+<div class="line"><span class="comment">   * @code</span></div>
+<div class="line"><span class="comment">   * if (auto event = reader.Find([](const MyEvent&amp; e) { return e.id == 42; })) {</span></div>
+<div class="line"><span class="comment">   *   Process(*event);</span></div>
+<div class="line"><span class="comment">   * }</span></div>
+<div class="line"><span class="comment">   * @endcode</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Pred&gt;</div>
+<div class="line">    <span class="keyword">requires</span> utils::PredicateFor&lt;Pred, const std::remove_cvref_t&lt;T&gt;&amp;&gt;</div>
+<div class="line">  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <span class="keyword">auto</span> <a id="a62" name="a62"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a5d12216e1ec532ce04283ad6538f49e8">Find</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">Pred</a>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">predicate</a>) <span class="keyword">const</span> -&gt; std::optional&lt;value_type&gt;;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Checks if no events match the predicate.</span></div>
+<div class="line"><span class="comment">   * @details Short-circuits on first match for efficiency.</span></div>
+<div class="line"><span class="comment">   * @tparam Pred Predicate function type (const T&amp;) -&gt; bool</span></div>
+<div class="line"><span class="comment">   * @param predicate Function to test each event</span></div>
+<div class="line"><span class="comment">   * @return True if no events match, false otherwise</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * @example</span></div>
+<div class="line"><span class="comment">   * @code</span></div>
+<div class="line"><span class="comment">   * bool none_critical = reader.None([](const MyEvent&amp; e) { return e.is_critical; });</span></div>
+<div class="line"><span class="comment">   * @endcode</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Pred&gt;</div>
+<div class="line">    <span class="keyword">requires</span> utils::PredicateFor&lt;Pred, const std::remove_cvref_t&lt;T&gt;&amp;&gt;</div>
+<div class="line">  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a id="a63" name="a63"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a37ba9ca7f18fa8bff5f7cc40f8ef666f">None</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">Pred</a>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">predicate</a>)<span class="keyword"> const </span>{</div>
+<div class="line">    <span class="keywordflow">return</span> !<a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#af65c7442701daef42710eb5018222d30">Any</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">predicate</a>);</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Partitions events into two groups based on a predicate.</span></div>
+<div class="line"><span class="comment">   * @tparam Pred Predicate function type (const T&amp;) -&gt; bool</span></div>
+<div class="line"><span class="comment">   * @param predicate Function to test each event</span></div>
+<div class="line"><span class="comment">   * @return Pair of vectors: first contains events matching predicate, second contains non-matching</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * @example</span></div>
+<div class="line"><span class="comment">   * @code</span></div>
+<div class="line"><span class="comment">   * auto [critical, normal] = reader.Partition([](const MyEvent&amp; e) { return e.is_critical; });</span></div>
+<div class="line"><span class="comment">   * @endcode</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Pred&gt;</div>
+<div class="line">    <span class="keyword">requires</span> utils::PredicateFor&lt;Pred, const std::remove_cvref_t&lt;T&gt;&amp;&gt;</div>
+<div class="line">  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <span class="keyword">auto</span> <a id="a64" name="a64"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#afacc191804a421d2b4ecc3eb0138fc7d">Partition</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">Pred</a>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">predicate</a>) <span class="keyword">const</span></div>
+<div class="line">      -&gt; std::pair&lt;std::vector&lt;value_type&gt;, std::vector&lt;value_type&gt;&gt;;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Finds the event with the maximum value using a key function.</span></div>
+<div class="line"><span class="comment">   * @details Finds the event that produces the maximum value when passed to the key function.</span></div>
+<div class="line"><span class="comment">   * @tparam KeyFunc Function type (const T&amp;) -&gt; Comparable</span></div>
+<div class="line"><span class="comment">   * @param key_func Function to extract the comparison value</span></div>
+<div class="line"><span class="comment">   * @return Optional containing the event with maximum key, or empty if no events exist</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * @example</span></div>
+<div class="line"><span class="comment">   * @code</span></div>
+<div class="line"><span class="comment">   * auto highest_priority = reader.MaxBy([](const MyEvent&amp; e) { return e.priority; });</span></div>
+<div class="line"><span class="comment">   * @endcode</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> KeyFunc&gt;</div>
+<div class="line">    <span class="keyword">requires</span> std::invocable&lt;KeyFunc, const std::remove_cvref_t&lt;T&gt;&amp;&gt;</div>
+<div class="line">  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <span class="keyword">auto</span> <a id="a65" name="a65"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a5b52e602065d812156ea5eb04921f456">MaxBy</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">KeyFunc</a>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">key_func</a>) <span class="keyword">const</span> -&gt; std::optional&lt;value_type&gt;;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Finds the event with the minimum value using a key function.</span></div>
+<div class="line"><span class="comment">   * @details Finds the event that produces the minimum value when passed to the key function.</span></div>
+<div class="line"><span class="comment">   * @tparam KeyFunc Function type (const T&amp;) -&gt; Comparable</span></div>
+<div class="line"><span class="comment">   * @param key_func Function to extract the comparison value</span></div>
+<div class="line"><span class="comment">   * @return Optional containing the event with minimum key, or empty if no events exist</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * @example</span></div>
+<div class="line"><span class="comment">   * @code</span></div>
+<div class="line"><span class="comment">   * auto lowest_priority = reader.MinBy([](const MyEvent&amp; e) { return e.priority; });</span></div>
+<div class="line"><span class="comment">   * @endcode</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> KeyFunc&gt;</div>
+<div class="line">    <span class="keyword">requires</span> std::invocable&lt;KeyFunc, const std::remove_cvref_t&lt;T&gt;&amp;&gt;</div>
+<div class="line">  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <span class="keyword">auto</span> <a id="a66" name="a66"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a4bae24a92b52171609c0ec4abcc2f3bd">MinBy</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">KeyFunc</a>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">key_func</a>) <span class="keyword">const</span> -&gt; std::optional&lt;value_type&gt;;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Groups events by a key function.</span></div>
+<div class="line"><span class="comment">   * @details Groups events into a map where keys are produced by the key function.</span></div>
+<div class="line"><span class="comment">   * @tparam KeyFunc Function type (const T&amp;) -&gt; Key</span></div>
+<div class="line"><span class="comment">   * @param key_func Function to extract the grouping key</span></div>
+<div class="line"><span class="comment">   * @return Map from keys to vectors of events with that key</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * @example</span></div>
+<div class="line"><span class="comment">   * @code</span></div>
+<div class="line"><span class="comment">   * auto by_type = reader.GroupBy([](const MyEvent&amp; e) { return e.type; });</span></div>
+<div class="line"><span class="comment">   * @endcode</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> KeyFunc&gt;</div>
+<div class="line">    <span class="keyword">requires</span> std::invocable&lt;KeyFunc, const std::remove_cvref_t&lt;T&gt;&amp;&gt;</div>
+<div class="line">  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <span class="keyword">auto</span> <a id="a67" name="a67"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#ab67f9dbdbb03043464e46656c7dbfb9d">GroupBy</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">KeyFunc</a>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">key_func</a>) <span class="keyword">const</span></div>
+<div class="line">      -&gt; std::unordered_map&lt;std::invoke_result_t&lt;KeyFunc, const value_type&amp;&gt;, std::vector&lt;value_type&gt;&gt;;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Checks if there are any events.</span></div>
+<div class="line"><span class="comment">   * @return true if no events exist, false otherwise</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <span class="keywordtype">bool</span> <a id="a68" name="a68"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a4f037e23dceec14360342d71473816e0">Empty</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> !manager_.<a id="a69" name="a69"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a5d48b16e7814cf6dc96d883b94c9bbd2">HasEvents</a>&lt;<a class="code hl_typedef" href="classhelios_1_1ecs_1_1EventReader.html#aa4c3e53ee7121f983dd3aceb10f1486b">value_type</a>&gt;(); }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Returns the number of events.</span></div>
+<div class="line"><span class="comment">   * @return Number of events in current and previous queues</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <span class="keywordtype">size_t</span> <a id="a70" name="a70"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a873d6eaeb8fd648876b751b553af9b67">Count</a>() <span class="keyword">const</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Returns an iterator to the beginning of events.</span></div>
+<div class="line"><span class="comment">   * @details Triggers lazy initialization of event cache on first call.</span></div>
+<div class="line"><span class="comment">   * @return Const iterator to first event (returns plain T for range-based for loops)</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <a class="code hl_typedef" href="classhelios_1_1ecs_1_1EventReader.html#a1f2b5e94c3653a8d7e7beb1fecf4e79f">const_iterator</a> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a130c33e8964567ff51c9f099537a5b8d">begin</a>() <span class="keyword">const</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Returns an iterator to the end of events.</span></div>
+<div class="line"><span class="comment">   * @details Triggers lazy initialization of event cache on first call.</span></div>
+<div class="line"><span class="comment">   * @return Const iterator to end</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <a class="code hl_typedef" href="classhelios_1_1ecs_1_1EventReader.html#a1f2b5e94c3653a8d7e7beb1fecf4e79f">const_iterator</a> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a0f766fa89559a5e9247fa344ba04474a">end</a>() <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:<span class="comment"></span></div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Ensures events are cached.</span></div>
+<div class="line"><span class="comment">   * @details Lazily initializes the event cache on first access.</span></div>
+<div class="line"><span class="comment">   * Subsequent calls are no-ops since the cache persists.</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keywordtype">void</span> EnsureCached() <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">const</span> details::EventManager&amp; manager_;                          <span class="comment">///&lt; Reference to the event manager</span></div>
+<div class="line">  <span class="keyword">mutable</span> std::optional&lt;std::vector&lt;value_type&gt;&gt; cached_events_;  <span class="comment">///&lt; Lazy-initialized event cache</span></div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> OutIt&gt;</div>
+<div class="line">  <span class="keyword">requires</span> std::output_iterator&lt;OutIt, std::remove_cvref_t&lt;T&gt;&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a8ff55f6a45505a2b1388ab1ddb470ef6">EventReader&lt;T&gt;::Into</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">OutIt</a> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">out</a>)<span class="keyword"> const </span>{</div>
+<div class="line">  EnsureCached();</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a> : *cached_events_) {</div>
+<div class="line">    *<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">out</a>++ = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a>;</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Pred&gt;</div>
+<div class="line">  <span class="keyword">requires</span> utils::PredicateFor&lt;Pred, const std::remove_cvref_t&lt;T&gt;&amp;&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a1502713ed3787e8ea10368bf70279d21">EventReader&lt;T&gt;::FindFirst</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">Pred</a>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">predicate</a>) <span class="keyword">const</span> -&gt; <span class="keyword">const</span> value_type* {</div>
+<div class="line">  EnsureCached();</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a> : *cached_events_) {</div>
+<div class="line">    <span class="keywordflow">if</span> (<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">predicate</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a>)) {</div>
+<div class="line">      <span class="keywordflow">return</span> &amp;<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a>;</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Pred&gt;</div>
+<div class="line">  <span class="keyword">requires</span> utils::PredicateFor&lt;Pred, const std::remove_cvref_t&lt;T&gt;&amp;&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">size_t</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a3ca5434f90c58ef8b6ee33173f912332">EventReader&lt;T&gt;::CountIf</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">Pred</a>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">predicate</a>)<span class="keyword"> const </span>{</div>
+<div class="line">  EnsureCached();</div>
+<div class="line">  <span class="keywordtype">size_t</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">count</a> = 0;</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a> : *cached_events_) {</div>
+<div class="line">    <span class="keywordflow">if</span> (<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">predicate</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a>)) {</div>
+<div class="line">      ++<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">count</a>;</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">return</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">count</a>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">size_t</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a873d6eaeb8fd648876b751b553af9b67">EventReader&lt;T&gt;::Count</a>()<span class="keyword"> const </span>{</div>
+<div class="line">  EnsureCached();</div>
+<div class="line">  <span class="keywordflow">return</span> cached_events_-&gt;size();</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Alloc&gt;</div>
+<div class="line">  <span class="keyword">requires</span> std::same_as&lt;typename Alloc::value_type, std::remove_cvref_t&lt;T&gt;&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#afddc2e125e8f371841b2254ce95cddfb">EventReader&lt;T&gt;::CollectWith</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">Alloc</a> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">alloc</a>) <span class="keyword">const</span> -&gt; std::vector&lt;value_type, Alloc&gt; {</div>
+<div class="line">  EnsureCached();</div>
+<div class="line">  std::vector&lt;value_type, Alloc&gt; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">result</a>{std::move(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">alloc</a>)};</div>
+<div class="line">  <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">result</a>.reserve(cached_events_-&gt;size());</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a> : *cached_events_) {</div>
+<div class="line">    <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">result</a>.push_back(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a>);</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">return</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">result</a>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Pred&gt;</div>
+<div class="line">  <span class="keyword">requires</span> utils::PredicateFor&lt;Pred, const std::remove_cvref_t&lt;T&gt;&amp;&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a24b9bd4622ba12817e34fbb4108f7fd9">EventReader&lt;T&gt;::Filter</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">Pred</a> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">predicate</a>) <span class="keyword">const</span> -&gt; utils::FilterAdapter&lt;AdaptorIterator, Pred&gt; {</div>
+<div class="line">  EnsureCached();</div>
+<div class="line">  <span class="keywordflow">return</span> {AdaptorIterator(cached_events_-&gt;begin()), AdaptorIterator(cached_events_-&gt;end()), std::move(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">predicate</a>)};</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Func&gt;</div>
+<div class="line">  <span class="keyword">requires</span> utils::TransformFor&lt;Func, const std::remove_cvref_t&lt;T&gt;&amp;&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a96162443bdd9159bd5d929cdc290b7a1">EventReader&lt;T&gt;::Map</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">Func</a> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">transform</a>) <span class="keyword">const</span> -&gt; utils::MapAdapter&lt;AdaptorIterator, Func&gt; {</div>
+<div class="line">  EnsureCached();</div>
+<div class="line">  <span class="keywordflow">return</span> {AdaptorIterator(cached_events_-&gt;begin()), AdaptorIterator(cached_events_-&gt;end()), std::move(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">transform</a>)};</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#aefefb582436ddc97a656ca51565e1ab9">EventReader&lt;T&gt;::Take</a>(<span class="keywordtype">size_t</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">count</a>) <span class="keyword">const</span> -&gt; utils::TakeAdapter&lt;AdaptorIterator&gt; {</div>
+<div class="line">  EnsureCached();</div>
+<div class="line">  <span class="keywordflow">return</span> {AdaptorIterator(cached_events_-&gt;begin()), AdaptorIterator(cached_events_-&gt;end()), <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">count</a>};</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a4b91638ebd9ea380056eab0b3ecd0c59">EventReader&lt;T&gt;::Skip</a>(<span class="keywordtype">size_t</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">count</a>) <span class="keyword">const</span> -&gt; utils::SkipAdapter&lt;AdaptorIterator&gt; {</div>
+<div class="line">  EnsureCached();</div>
+<div class="line">  <span class="keywordflow">return</span> {AdaptorIterator(cached_events_-&gt;begin()), AdaptorIterator(cached_events_-&gt;end()), <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">count</a>};</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Pred&gt;</div>
+<div class="line">  <span class="keyword">requires</span> utils::PredicateFor&lt;Pred, const std::remove_cvref_t&lt;T&gt;&amp;&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a53d08c1612bb36eb859354fb20f13b12">EventReader&lt;T&gt;::TakeWhile</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">Pred</a> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">predicate</a>) <span class="keyword">const</span> -&gt; utils::TakeWhileAdapter&lt;AdaptorIterator, Pred&gt; {</div>
+<div class="line">  EnsureCached();</div>
+<div class="line">  <span class="keywordflow">return</span> {AdaptorIterator(cached_events_-&gt;begin()), AdaptorIterator(cached_events_-&gt;end()), std::move(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">predicate</a>)};</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Pred&gt;</div>
+<div class="line">  <span class="keyword">requires</span> utils::PredicateFor&lt;Pred, const std::remove_cvref_t&lt;T&gt;&amp;&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a1ae3f48c09fba8bd9aea323d2ccff717">EventReader&lt;T&gt;::SkipWhile</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">Pred</a> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">predicate</a>) <span class="keyword">const</span> -&gt; utils::SkipWhileAdapter&lt;AdaptorIterator, Pred&gt; {</div>
+<div class="line">  EnsureCached();</div>
+<div class="line">  <span class="keywordflow">return</span> {AdaptorIterator(cached_events_-&gt;begin()), AdaptorIterator(cached_events_-&gt;end()), std::move(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">predicate</a>)};</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#ad665d31f099755985304aec596fde09e">EventReader&lt;T&gt;::Enumerate</a>() <span class="keyword">const</span> -&gt; utils::EnumerateAdapter&lt;AdaptorIterator&gt; {</div>
+<div class="line">  EnsureCached();</div>
+<div class="line">  <span class="keywordflow">return</span> {AdaptorIterator(cached_events_-&gt;begin()), AdaptorIterator(cached_events_-&gt;end())};</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Func&gt;</div>
+<div class="line">  <span class="keyword">requires</span> utils::InspectorFor&lt;Func, const std::remove_cvref_t&lt;T&gt;&amp;&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a14d3c2ca948cdd6f27c2957cb23421f3">EventReader&lt;T&gt;::Inspect</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">Func</a> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">inspector</a>) <span class="keyword">const</span> -&gt; utils::InspectAdapter&lt;AdaptorIterator, Func&gt; {</div>
+<div class="line">  EnsureCached();</div>
+<div class="line">  <span class="keywordflow">return</span> {AdaptorIterator(cached_events_-&gt;begin()), AdaptorIterator(cached_events_-&gt;end()), std::move(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">inspector</a>)};</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#ac540c70e5fc123a4b5b0f3a42e85e1c0">EventReader&lt;T&gt;::StepBy</a>(<span class="keywordtype">size_t</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">step</a>) <span class="keyword">const</span> -&gt; utils::StepByAdapter&lt;AdaptorIterator&gt; {</div>
+<div class="line">  EnsureCached();</div>
+<div class="line">  <span class="keywordflow">return</span> {AdaptorIterator(cached_events_-&gt;begin()), AdaptorIterator(cached_events_-&gt;end()), <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">step</a>};</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Pred&gt;</div>
+<div class="line">  <span class="keyword">requires</span> utils::PredicateFor&lt;Pred, const std::remove_cvref_t&lt;T&gt;&amp;&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#af65c7442701daef42710eb5018222d30">EventReader&lt;T&gt;::Any</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">Pred</a>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">predicate</a>)<span class="keyword"> const </span>{</div>
+<div class="line">  EnsureCached();</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a> : *cached_events_) {</div>
+<div class="line">    <span class="keywordflow">if</span> (<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">predicate</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a>)) {</div>
+<div class="line">      <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Pred&gt;</div>
+<div class="line">  <span class="keyword">requires</span> utils::PredicateFor&lt;Pred, const std::remove_cvref_t&lt;T&gt;&amp;&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a0f51242c976663f9de272cb821e5e057">EventReader&lt;T&gt;::All</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">Pred</a>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">predicate</a>)<span class="keyword"> const </span>{</div>
+<div class="line">  EnsureCached();</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a> : *cached_events_) {</div>
+<div class="line">    <span class="keywordflow">if</span> (!<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">predicate</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a>)) {</div>
+<div class="line">      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Pred&gt;</div>
+<div class="line">  <span class="keyword">requires</span> utils::PredicateFor&lt;Pred, const std::remove_cvref_t&lt;T&gt;&amp;&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a5d12216e1ec532ce04283ad6538f49e8">EventReader&lt;T&gt;::Find</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">Pred</a>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">predicate</a>) <span class="keyword">const</span> -&gt; std::optional&lt;value_type&gt; {</div>
+<div class="line">  EnsureCached();</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a> : *cached_events_) {</div>
+<div class="line">    <span class="keywordflow">if</span> (<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">predicate</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a>)) {</div>
+<div class="line">      <span class="keywordflow">return</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a>;</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">return</span> std::nullopt;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Action&gt;</div>
+<div class="line">  <span class="keyword">requires</span> utils::ActionFor&lt;Action, const std::remove_cvref_t&lt;T&gt;&amp;&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#aace6b4de8e1e41d8330118ce534adead">EventReader&lt;T&gt;::ForEach</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">Action</a>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">action</a>)<span class="keyword"> const </span>{</div>
+<div class="line">  EnsureCached();</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a> : *cached_events_) {</div>
+<div class="line">    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::invocable&lt;Action, const value_type&amp;&gt;) {</div>
+<div class="line">      <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">action</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a>);</div>
+<div class="line">    } <span class="keywordflow">else</span> {</div>
+<div class="line">      std::apply(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">action</a>, <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a>);</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Acc, <span class="keyword">typename</span> Folder&gt;</div>
+<div class="line">  <span class="keyword">requires</span> utils::FolderFor&lt;Folder, Acc, const std::remove_cvref_t&lt;T&gt;&amp;&gt;</div>
+<div class="line"><span class="keyword">inline</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">Acc</a> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a3dc7361b893a11996eeaf081e372d6cc">EventReader&lt;T&gt;::Fold</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">Acc</a> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">init</a>, <span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">Folder</a>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">folder</a>)<span class="keyword"> const </span>{</div>
+<div class="line">  EnsureCached();</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a> : *cached_events_) {</div>
+<div class="line">    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::invocable&lt;Folder, Acc, const value_type&amp;&gt;) {</div>
+<div class="line">      <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">init</a> = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">folder</a>(std::move(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">init</a>), <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a>);</div>
+<div class="line">    } <span class="keywordflow">else</span> {</div>
+<div class="line">      <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">init</a> = std::apply([&amp;<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">folder</a>, &amp;<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">init</a>](<span class="keyword">const</span> <span class="keyword">auto</span>&amp;... <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">args</a>) { <span class="keywordflow">return</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">folder</a>(std::move(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">init</a>), <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">args</a>...); }, <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a>);</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">return</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">init</a>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Pred&gt;</div>
+<div class="line">  <span class="keyword">requires</span> utils::PredicateFor&lt;Pred, const std::remove_cvref_t&lt;T&gt;&amp;&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#afacc191804a421d2b4ecc3eb0138fc7d">EventReader&lt;T&gt;::Partition</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">Pred</a>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">predicate</a>) <span class="keyword">const</span></div>
+<div class="line">    -&gt; std::pair&lt;std::vector&lt;value_type&gt;, std::vector&lt;value_type&gt;&gt; {</div>
+<div class="line">  EnsureCached();</div>
+<div class="line">  std::pair&lt;std::vector&lt;value_type&gt;, std::vector&lt;value_type&gt;&gt; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">result</a>;</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a> : *cached_events_) {</div>
+<div class="line">    <span class="keywordflow">if</span> (<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">predicate</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a>)) {</div>
+<div class="line">      <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">result</a>.first.push_back(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a>);</div>
+<div class="line">    } <span class="keywordflow">else</span> {</div>
+<div class="line">      <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">result</a>.second.push_back(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a>);</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">return</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">result</a>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> KeyFunc&gt;</div>
+<div class="line">  <span class="keyword">requires</span> std::invocable&lt;KeyFunc, const std::remove_cvref_t&lt;T&gt;&amp;&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a5b52e602065d812156ea5eb04921f456">EventReader&lt;T&gt;::MaxBy</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">KeyFunc</a>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">key_func</a>) <span class="keyword">const</span> -&gt; std::optional&lt;value_type&gt; {</div>
+<div class="line">  EnsureCached();</div>
+<div class="line">  <span class="keywordflow">if</span> (cached_events_-&gt;empty()) {</div>
+<div class="line">    <span class="keywordflow">return</span> std::nullopt;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">max_iter</a> = cached_events_-&gt;begin();</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">max_key</a> = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">key_func</a>(*<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">max_iter</a>);</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keyword">auto</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">iter</a> = cached_events_-&gt;begin() + 1; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">iter</a> != cached_events_-&gt;end(); ++<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">iter</a>) {</div>
+<div class="line">    <span class="keyword">auto</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">current_key</a> = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">key_func</a>(*<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">iter</a>);</div>
+<div class="line">    <span class="keywordflow">if</span> (<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">current_key</a> &gt; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">max_key</a>) {</div>
+<div class="line">      <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">max_key</a> = std::move(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">current_key</a>);</div>
+<div class="line">      <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">max_iter</a> = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">iter</a>;</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">return</span> *<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">max_iter</a>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> KeyFunc&gt;</div>
+<div class="line">  <span class="keyword">requires</span> std::invocable&lt;KeyFunc, const std::remove_cvref_t&lt;T&gt;&amp;&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a4bae24a92b52171609c0ec4abcc2f3bd">EventReader&lt;T&gt;::MinBy</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">KeyFunc</a>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">key_func</a>) <span class="keyword">const</span> -&gt; std::optional&lt;value_type&gt; {</div>
+<div class="line">  EnsureCached();</div>
+<div class="line">  <span class="keywordflow">if</span> (cached_events_-&gt;empty()) {</div>
+<div class="line">    <span class="keywordflow">return</span> std::nullopt;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">min_iter</a> = cached_events_-&gt;begin();</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">min_key</a> = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">key_func</a>(*<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">min_iter</a>);</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keyword">auto</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">iter</a> = cached_events_-&gt;begin() + 1; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">iter</a> != cached_events_-&gt;end(); ++<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">iter</a>) {</div>
+<div class="line">    <span class="keyword">auto</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">current_key</a> = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">key_func</a>(*<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">iter</a>);</div>
+<div class="line">    <span class="keywordflow">if</span> (<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">current_key</a> &lt; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">min_key</a>) {</div>
+<div class="line">      <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">min_key</a> = std::move(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">current_key</a>);</div>
+<div class="line">      <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">min_iter</a> = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">iter</a>;</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">return</span> *<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">min_iter</a>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> KeyFunc&gt;</div>
+<div class="line">  <span class="keyword">requires</span> std::invocable&lt;KeyFunc, const std::remove_cvref_t&lt;T&gt;&amp;&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#ab67f9dbdbb03043464e46656c7dbfb9d">EventReader&lt;T&gt;::GroupBy</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">KeyFunc</a>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">key_func</a>) <span class="keyword">const</span></div>
+<div class="line">    -&gt; std::unordered_map&lt;std::invoke_result_t&lt;KeyFunc, const value_type&amp;&gt;, std::vector&lt;value_type&gt;&gt; {</div>
+<div class="line">  EnsureCached();</div>
+<div class="line">  std::unordered_map&lt;std::invoke_result_t&lt;KeyFunc, const value_type&amp;&gt;, std::vector&lt;value_type&gt;&gt; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">result</a>;</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a> : *cached_events_) {</div>
+<div class="line">    <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">result</a>[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">key_func</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a>)].push_back(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a>);</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">return</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">result</a>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a130c33e8964567ff51c9f099537a5b8d">EventReader&lt;T&gt;::begin</a>() <span class="keyword">const</span> -&gt; const_iterator {</div>
+<div class="line">  EnsureCached();</div>
+<div class="line">  <span class="keywordflow">return</span> const_iterator(cached_events_-&gt;begin());</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1EventReader.html#a0f766fa89559a5e9247fa344ba04474a">EventReader&lt;T&gt;::end</a>() <span class="keyword">const</span> -&gt; const_iterator {</div>
+<div class="line">  EnsureCached();</div>
+<div class="line">  <span class="keywordflow">return</span> const_iterator(cached_events_-&gt;end());</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">void</span> EventReader&lt;T&gt;::EnsureCached()<span class="keyword"> const </span>{</div>
+<div class="line">  <span class="keywordflow">if</span> (!cached_events_.has_value()) {</div>
+<div class="line">    cached_events_ = manager_.Read&lt;value_type&gt;();</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">}  <span class="comment">// namespace helios::ecs</span></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventIterator_html_a11ac600c50f7dcb79e0cf4c24b2827ea"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventIterator.html#a11ac600c50f7dcb79e0cf4c24b2827ea">helios::ecs::EventIterator::difference_type</a></div><div class="ttdeci">ptrdiff_t difference_type</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00094">event_reader.hpp:94</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventIterator_html_a1ab9393dc0b0dcd49b233840e40820a5"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventIterator.html#a1ab9393dc0b0dcd49b233840e40820a5">helios::ecs::EventIterator::EventIterator</a></div><div class="ttdeci">constexpr EventIterator() noexcept=default</div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventIterator_html_a1ea5e8f7182f782b08e16817a2e726f4"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventIterator.html#a1ea5e8f7182f782b08e16817a2e726f4">helios::ecs::EventIterator::operator==</a></div><div class="ttdeci">constexpr bool operator==(const EventIterator &amp;other) const noexcept</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00117">event_reader.hpp:117</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventIterator_html_a2cffbd2953819f2f3b80e5c1048a19eb"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventIterator.html#a2cffbd2953819f2f3b80e5c1048a19eb">helios::ecs::EventIterator::value_type</a></div><div class="ttdeci">std::tuple&lt; std::remove_cvref_t&lt; T &gt; &gt; value_type</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00092">event_reader.hpp:92</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventIterator_html_a3fd5a99360cfd8e94cf50af49bef6012"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventIterator.html#a3fd5a99360cfd8e94cf50af49bef6012">helios::ecs::EventIterator::reference</a></div><div class="ttdeci">std::tuple&lt; std::remove_cvref_t&lt; T &gt; &gt; reference</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00096">event_reader.hpp:96</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventIterator_html_a4280b3d15f66160367872bd8c8317b0c"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventIterator.html#a4280b3d15f66160367872bd8c8317b0c">helios::ecs::EventIterator::operator--</a></div><div class="ttdeci">constexpr EventIterator &amp; operator--() noexcept</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00138">event_reader.hpp:138</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventIterator_html_a624d2b62f29f48ea460be7807b3195aa"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventIterator.html#a624d2b62f29f48ea460be7807b3195aa">helios::ecs::EventIterator::iterator_category</a></div><div class="ttdeci">std::forward_iterator_tag iterator_category</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00093">event_reader.hpp:93</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventIterator_html_a6ed43aa319afd930974d33cbdcdef860"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventIterator.html#a6ed43aa319afd930974d33cbdcdef860">helios::ecs::EventIterator::~EventIterator</a></div><div class="ttdeci">constexpr ~EventIterator() noexcept=default</div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventIterator_html_a7c41599fa7dae1dbf46fdd219048f9b1"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventIterator.html#a7c41599fa7dae1dbf46fdd219048f9b1">helios::ecs::EventIterator::operator*</a></div><div class="ttdeci">constexpr reference operator*() const noexcept</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00109">event_reader.hpp:109</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventIterator_html_a94cd0545d391005dd068200949a56bd9"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventIterator.html#a94cd0545d391005dd068200949a56bd9">helios::ecs::EventIterator::pointer</a></div><div class="ttdeci">const std::tuple&lt; std::remove_cvref_t&lt; T &gt; &gt; * pointer</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00095">event_reader.hpp:95</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventIterator_html_a9a15f3da07bb519cd7f7192d30602721"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventIterator.html#a9a15f3da07bb519cd7f7192d30602721">helios::ecs::EventIterator::operator!=</a></div><div class="ttdeci">constexpr bool operator!=(const EventIterator &amp;other) const noexcept</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00118">event_reader.hpp:118</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventIterator_html_a9bda1e4c119e370b7ddf26114b9ff594"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventIterator.html#a9bda1e4c119e370b7ddf26114b9ff594">helios::ecs::EventIterator::operator=</a></div><div class="ttdeci">constexpr EventIterator &amp; operator=(const EventIterator &amp;) noexcept=default</div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventIterator_html_ad0e9ad0098a0f0b18fdc48b802dc02e2"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventIterator.html#ad0e9ad0098a0f0b18fdc48b802dc02e2">helios::ecs::EventIterator::operator++</a></div><div class="ttdeci">constexpr EventIterator &amp; operator++() noexcept</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00125">event_reader.hpp:125</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_a0f51242c976663f9de272cb821e5e057"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#a0f51242c976663f9de272cb821e5e057">helios::ecs::EventReader::All</a></div><div class="ttdeci">bool All(const Pred &amp;predicate) const</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00893">event_reader.hpp:893</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_a0f766fa89559a5e9247fa344ba04474a"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#a0f766fa89559a5e9247fa344ba04474a">helios::ecs::EventReader::end</a></div><div class="ttdeci">const_iterator end() const</div><div class="ttdoc">Returns an iterator to the end of events.</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l01028">event_reader.hpp:1028</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_a130c33e8964567ff51c9f099537a5b8d"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#a130c33e8964567ff51c9f099537a5b8d">helios::ecs::EventReader::begin</a></div><div class="ttdeci">const_iterator begin() const</div><div class="ttdoc">Returns an iterator to the beginning of events.</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l01022">event_reader.hpp:1022</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_a14d3c2ca948cdd6f27c2957cb23421f3"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#a14d3c2ca948cdd6f27c2957cb23421f3">helios::ecs::EventReader::Inspect</a></div><div class="ttdeci">auto Inspect(Func inspector) const -&gt; utils::InspectAdapter&lt; AdaptorIterator, Func &gt;</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00866">event_reader.hpp:866</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_a1502713ed3787e8ea10368bf70279d21"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#a1502713ed3787e8ea10368bf70279d21">helios::ecs::EventReader::FindFirst</a></div><div class="ttdeci">const value_type * FindFirst(const Pred &amp;predicate) const</div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_a1ae3f48c09fba8bd9aea323d2ccff717"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#a1ae3f48c09fba8bd9aea323d2ccff717">helios::ecs::EventReader::SkipWhile</a></div><div class="ttdeci">auto SkipWhile(Pred predicate) const -&gt; utils::SkipWhileAdapter&lt; AdaptorIterator, Pred &gt;</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00852">event_reader.hpp:852</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_a1f2b5e94c3653a8d7e7beb1fecf4e79f"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#a1f2b5e94c3653a8d7e7beb1fecf4e79f">helios::ecs::EventReader::const_iterator</a></div><div class="ttdeci">AdaptorConstIterator const_iterator</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00193">event_reader.hpp:193</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_a24b9bd4622ba12817e34fbb4108f7fd9"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#a24b9bd4622ba12817e34fbb4108f7fd9">helios::ecs::EventReader::Filter</a></div><div class="ttdeci">auto Filter(Pred predicate) const -&gt; utils::FilterAdapter&lt; AdaptorIterator, Pred &gt;</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00816">event_reader.hpp:816</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_a25be430f7a994fb5e9060b44245450c1"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#a25be430f7a994fb5e9060b44245450c1">helios::ecs::EventReader::AdaptorConstIterator</a></div><div class="ttdeci">EventSimpleIterator&lt; T &gt; AdaptorConstIterator</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00190">event_reader.hpp:190</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_a37ba9ca7f18fa8bff5f7cc40f8ef666f"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#a37ba9ca7f18fa8bff5f7cc40f8ef666f">helios::ecs::EventReader::None</a></div><div class="ttdeci">constexpr bool None(const Pred &amp;predicate) const</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00650">event_reader.hpp:650</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_a3ca5434f90c58ef8b6ee33173f912332"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#a3ca5434f90c58ef8b6ee33173f912332">helios::ecs::EventReader::CountIf</a></div><div class="ttdeci">size_t CountIf(const Pred &amp;predicate) const</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00783">event_reader.hpp:783</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_a3dc7361b893a11996eeaf081e372d6cc"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#a3dc7361b893a11996eeaf081e372d6cc">helios::ecs::EventReader::Fold</a></div><div class="ttdeci">Acc Fold(Acc init, const Folder &amp;folder) const</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00933">event_reader.hpp:933</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_a4b91638ebd9ea380056eab0b3ecd0c59"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#a4b91638ebd9ea380056eab0b3ecd0c59">helios::ecs::EventReader::Skip</a></div><div class="ttdeci">auto Skip(size_t count) const -&gt; utils::SkipAdapter&lt; AdaptorIterator &gt;</div><div class="ttdoc">Skips the first N events.</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00836">event_reader.hpp:836</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_a4bae24a92b52171609c0ec4abcc2f3bd"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#a4bae24a92b52171609c0ec4abcc2f3bd">helios::ecs::EventReader::MinBy</a></div><div class="ttdeci">auto MinBy(const KeyFunc &amp;key_func) const -&gt; std::optional&lt; value_type &gt;</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00988">event_reader.hpp:988</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_a4f037e23dceec14360342d71473816e0"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#a4f037e23dceec14360342d71473816e0">helios::ecs::EventReader::Empty</a></div><div class="ttdeci">bool Empty() const</div><div class="ttdoc">Checks if there are any events.</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00723">event_reader.hpp:723</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_a505aac5587e67ca8ec496fd8f98c4b48"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#a505aac5587e67ca8ec496fd8f98c4b48">helios::ecs::EventReader::ReadInto</a></div><div class="ttdeci">void ReadInto(OutIt out) const</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00289">event_reader.hpp:289</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_a53d08c1612bb36eb859354fb20f13b12"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#a53d08c1612bb36eb859354fb20f13b12">helios::ecs::EventReader::TakeWhile</a></div><div class="ttdeci">auto TakeWhile(Pred predicate) const -&gt; utils::TakeWhileAdapter&lt; AdaptorIterator, Pred &gt;</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00844">event_reader.hpp:844</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_a551d64323ecde1262c1a50e11f84f067"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#a551d64323ecde1262c1a50e11f84f067">helios::ecs::EventReader::Zip</a></div><div class="ttdeci">auto Zip(OtherIter other_begin, OtherIter other_end) const -&gt; utils::ZipAdapter&lt; AdaptorIterator, OtherIter &gt;</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00547">event_reader.hpp:547</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_a5b52e602065d812156ea5eb04921f456"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#a5b52e602065d812156ea5eb04921f456">helios::ecs::EventReader::MaxBy</a></div><div class="ttdeci">auto MaxBy(const KeyFunc &amp;key_func) const -&gt; std::optional&lt; value_type &gt;</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00965">event_reader.hpp:965</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_a5d12216e1ec532ce04283ad6538f49e8"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#a5d12216e1ec532ce04283ad6538f49e8">helios::ecs::EventReader::Find</a></div><div class="ttdeci">auto Find(const Pred &amp;predicate) const -&gt; std::optional&lt; value_type &gt;</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00906">event_reader.hpp:906</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_a5f3cedaabe69f18b2aa3fd415e76c0e7"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#a5f3cedaabe69f18b2aa3fd415e76c0e7">helios::ecs::EventReader::Slide</a></div><div class="ttdeci">auto Slide(size_t window_size) const -&gt; utils::SlideAdapter&lt; AdaptorIterator &gt;</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00511">event_reader.hpp:511</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_a606adc8b809c5b54de8ed9b494825a8e"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#a606adc8b809c5b54de8ed9b494825a8e">helios::ecs::EventReader::~EventReader</a></div><div class="ttdeci">~EventReader() noexcept=default</div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_a7b5e5b3379509712b113a2c316a3b44c"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#a7b5e5b3379509712b113a2c316a3b44c">helios::ecs::EventReader::operator=</a></div><div class="ttdeci">EventReader &amp; operator=(const EventReader &amp;)=delete</div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_a827fd852ac23c8335ccd503e92c6ec32"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#a827fd852ac23c8335ccd503e92c6ec32">helios::ecs::EventReader::Stride</a></div><div class="ttdeci">auto Stride(size_t stride) const -&gt; utils::StrideAdapter&lt; AdaptorIterator &gt;</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00527">event_reader.hpp:527</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_a873d6eaeb8fd648876b751b553af9b67"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#a873d6eaeb8fd648876b751b553af9b67">helios::ecs::EventReader::Count</a></div><div class="ttdeci">size_t Count() const</div><div class="ttdoc">Returns the number of events.</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00795">event_reader.hpp:795</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_a877068c4eafce5231660a5606ced9724"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#a877068c4eafce5231660a5606ced9724">helios::ecs::EventReader::AdaptorIterator</a></div><div class="ttdeci">EventIterator&lt; T &gt; AdaptorIterator</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00189">event_reader.hpp:189</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_a8fa2249a264d6def6cc1c2ee9a9ea4a0"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#a8fa2249a264d6def6cc1c2ee9a9ea4a0">helios::ecs::EventReader::iterator</a></div><div class="ttdeci">const_iterator iterator</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00194">event_reader.hpp:194</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_a8ff55f6a45505a2b1388ab1ddb470ef6"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#a8ff55f6a45505a2b1388ab1ddb470ef6">helios::ecs::EventReader::Into</a></div><div class="ttdeci">void Into(OutIt out) const</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00760">event_reader.hpp:760</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_a96162443bdd9159bd5d929cdc290b7a1"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#a96162443bdd9159bd5d929cdc290b7a1">helios::ecs::EventReader::Map</a></div><div class="ttdeci">auto Map(Func transform) const -&gt; utils::MapAdapter&lt; AdaptorIterator, Func &gt;</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00824">event_reader.hpp:824</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_aa4c3e53ee7121f983dd3aceb10f1486b"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#aa4c3e53ee7121f983dd3aceb10f1486b">helios::ecs::EventReader::value_type</a></div><div class="ttdeci">std::remove_cvref_t&lt; T &gt; value_type</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00192">event_reader.hpp:192</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_aa77edc2940797ab92e6aa5d54de61d64"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#aa77edc2940797ab92e6aa5d54de61d64">helios::ecs::EventReader::Collect</a></div><div class="ttdeci">auto Collect() const -&gt; std::vector&lt; value_type &gt;</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00242">event_reader.hpp:242</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_aace6b4de8e1e41d8330118ce534adead"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#aace6b4de8e1e41d8330118ce534adead">helios::ecs::EventReader::ForEach</a></div><div class="ttdeci">void ForEach(const Action &amp;action) const</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00919">event_reader.hpp:919</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_ab67f9dbdbb03043464e46656c7dbfb9d"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#ab67f9dbdbb03043464e46656c7dbfb9d">helios::ecs::EventReader::GroupBy</a></div><div class="ttdeci">auto GroupBy(const KeyFunc &amp;key_func) const -&gt; std::unordered_map&lt; std::invoke_result_t&lt; KeyFunc, const value_type &amp; &gt;, std::vector&lt; value_type &gt; &gt;</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l01011">event_reader.hpp:1011</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_ac540c70e5fc123a4b5b0f3a42e85e1c0"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#ac540c70e5fc123a4b5b0f3a42e85e1c0">helios::ecs::EventReader::StepBy</a></div><div class="ttdeci">auto StepBy(size_t step) const -&gt; utils::StepByAdapter&lt; AdaptorIterator &gt;</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00872">event_reader.hpp:872</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_aca590049c48b49bb7ebeb6d657b94160"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#aca590049c48b49bb7ebeb6d657b94160">helios::ecs::EventReader::Read</a></div><div class="ttdeci">auto Read() const -&gt; std::span&lt; const value_type &gt;</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00223">event_reader.hpp:223</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_ad665d31f099755985304aec596fde09e"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#ad665d31f099755985304aec596fde09e">helios::ecs::EventReader::Enumerate</a></div><div class="ttdeci">auto Enumerate() const -&gt; utils::EnumerateAdapter&lt; AdaptorIterator &gt;</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00858">event_reader.hpp:858</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_aec58cf72127574a3f60eafcae1619106"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#aec58cf72127574a3f60eafcae1619106">helios::ecs::EventReader::Reverse</a></div><div class="ttdeci">auto Reverse() const -&gt; utils::ReverseAdapter&lt; AdaptorIterator &gt;</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00497">event_reader.hpp:497</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_aefefb582436ddc97a656ca51565e1ab9"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#aefefb582436ddc97a656ca51565e1ab9">helios::ecs::EventReader::Take</a></div><div class="ttdeci">auto Take(size_t count) const -&gt; utils::TakeAdapter&lt; AdaptorIterator &gt;</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00830">event_reader.hpp:830</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_af65c7442701daef42710eb5018222d30"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#af65c7442701daef42710eb5018222d30">helios::ecs::EventReader::Any</a></div><div class="ttdeci">bool Any(const Pred &amp;predicate) const</div><div class="ttdoc">Checks if any event matches the predicate.</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00880">event_reader.hpp:880</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_afacc191804a421d2b4ecc3eb0138fc7d"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#afacc191804a421d2b4ecc3eb0138fc7d">helios::ecs::EventReader::Partition</a></div><div class="ttdeci">auto Partition(const Pred &amp;predicate) const -&gt; std::pair&lt; std::vector&lt; value_type &gt;, std::vector&lt; value_type &gt; &gt;</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00948">event_reader.hpp:948</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventReader_html_afddc2e125e8f371841b2254ce95cddfb"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventReader.html#afddc2e125e8f371841b2254ce95cddfb">helios::ecs::EventReader::CollectWith</a></div><div class="ttdeci">auto CollectWith(Alloc alloc) const -&gt; std::vector&lt; value_type, Alloc &gt;</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00803">event_reader.hpp:803</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventSimpleIterator_html_a05f7ca665b4a2f5a81bf6f6903a613e9"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a05f7ca665b4a2f5a81bf6f6903a613e9">helios::ecs::EventSimpleIterator::operator=</a></div><div class="ttdeci">constexpr EventSimpleIterator &amp; operator=(const EventSimpleIterator &amp;) noexcept=default</div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventSimpleIterator_html_a0710cdc40c11b894537ff2e25e5c39c7"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a0710cdc40c11b894537ff2e25e5c39c7">helios::ecs::EventSimpleIterator::value_type</a></div><div class="ttdeci">std::remove_cvref_t&lt; T &gt; value_type</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00027">event_reader.hpp:27</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventSimpleIterator_html_a1cb936d411090e458e0c2f6f5121973c"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a1cb936d411090e458e0c2f6f5121973c">helios::ecs::EventSimpleIterator::difference_type</a></div><div class="ttdeci">ptrdiff_t difference_type</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00029">event_reader.hpp:29</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventSimpleIterator_html_a2428e8599bd1139b1b939426f2f679fa"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a2428e8599bd1139b1b939426f2f679fa">helios::ecs::EventSimpleIterator::operator++</a></div><div class="ttdeci">constexpr EventSimpleIterator &amp; operator++() noexcept</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00060">event_reader.hpp:60</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventSimpleIterator_html_a31530f8cf0b16c8eaca9df94d9e14d18"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a31530f8cf0b16c8eaca9df94d9e14d18">helios::ecs::EventSimpleIterator::iterator_category</a></div><div class="ttdeci">std::forward_iterator_tag iterator_category</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00028">event_reader.hpp:28</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventSimpleIterator_html_a451fd77a900daf84e408f64cdd93c812"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a451fd77a900daf84e408f64cdd93c812">helios::ecs::EventSimpleIterator::operator!=</a></div><div class="ttdeci">constexpr bool operator!=(const EventSimpleIterator &amp;other) const noexcept</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00053">event_reader.hpp:53</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventSimpleIterator_html_a452cf367db543f9064baa98374c95660"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a452cf367db543f9064baa98374c95660">helios::ecs::EventSimpleIterator::operator--</a></div><div class="ttdeci">constexpr EventSimpleIterator &amp; operator--() noexcept</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00073">event_reader.hpp:73</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventSimpleIterator_html_a50bd46160559b99f8ef897caee6cd5ce"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a50bd46160559b99f8ef897caee6cd5ce">helios::ecs::EventSimpleIterator::~EventSimpleIterator</a></div><div class="ttdeci">constexpr ~EventSimpleIterator() noexcept=default</div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventSimpleIterator_html_a518e910384154e24251dc84640a79e35"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a518e910384154e24251dc84640a79e35">helios::ecs::EventSimpleIterator::pointer</a></div><div class="ttdeci">const value_type * pointer</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00030">event_reader.hpp:30</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventSimpleIterator_html_a6068a775d5fcda78b401838afb3519a9"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a6068a775d5fcda78b401838afb3519a9">helios::ecs::EventSimpleIterator::operator==</a></div><div class="ttdeci">constexpr bool operator==(const EventSimpleIterator &amp;other) const noexcept</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00052">event_reader.hpp:52</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventSimpleIterator_html_a853964ce765e5bcf11f41e081797fcd6"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventSimpleIterator.html#a853964ce765e5bcf11f41e081797fcd6">helios::ecs::EventSimpleIterator::EventSimpleIterator</a></div><div class="ttdeci">constexpr EventSimpleIterator() noexcept=default</div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventSimpleIterator_html_aa5df7b47aefb41ea827369d6bc78783f"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventSimpleIterator.html#aa5df7b47aefb41ea827369d6bc78783f">helios::ecs::EventSimpleIterator::operator-&gt;</a></div><div class="ttdeci">constexpr pointer operator-&gt;() const noexcept</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00044">event_reader.hpp:44</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventSimpleIterator_html_ab89faab369d24fc20811f3b0196b934b"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventSimpleIterator.html#ab89faab369d24fc20811f3b0196b934b">helios::ecs::EventSimpleIterator::reference</a></div><div class="ttdeci">const value_type &amp; reference</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00031">event_reader.hpp:31</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EventSimpleIterator_html_af0f1d882c58ae9d551a99564257334e4"><div class="ttname"><a href="classhelios_1_1ecs_1_1EventSimpleIterator.html#af0f1d882c58ae9d551a99564257334e4">helios::ecs::EventSimpleIterator::operator*</a></div><div class="ttdeci">constexpr reference operator*() const noexcept</div><div class="ttdef"><b>Definition</b> <a href="event__reader_8hpp_source.html#l00043">event_reader.hpp:43</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventManager_html_a0bcfb807b1be7c463168e6a663bd8df1"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a0bcfb807b1be7c463168e6a663bd8df1">helios::ecs::details::EventManager::ReadInto</a></div><div class="ttdeci">void ReadInto(OutIt out) const</div><div class="ttdoc">Reads events of a specific type into a provided output iterator.</div><div class="ttdef"><b>Definition</b> <a href="event__manager_8hpp_source.html#l00324">event_manager.hpp:324</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventManager_html_a5d48b16e7814cf6dc96d883b94c9bbd2"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a5d48b16e7814cf6dc96d883b94c9bbd2">helios::ecs::details::EventManager::HasEvents</a></div><div class="ttdeci">bool HasEvents() const</div><div class="ttdoc">Checks if events of a specific type exist in either queue.</div><div class="ttdef"><b>Definition</b> <a href="event__manager_8hpp_source.html#l00176">event_manager.hpp:176</a></div></div>
+<div class="ttc" id="aevent_8hpp_html"><div class="ttname"><a href="event_8hpp.html">event.hpp</a></div></div>
+<div class="ttc" id="aevent__manager_8hpp_html"><div class="ttname"><a href="event__manager_8hpp.html">event_manager.hpp</a></div></div>
+<div class="ttc" id="afunctional__adapters_8hpp_html"><div class="ttname"><a href="functional__adapters_8hpp.html">functional_adapters.hpp</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html"><div class="ttname"><a href="namespacehelios_1_1ecs.html">helios::ecs</a></div><div class="ttdef"><b>Definition</b> <a href="command_8hpp_source.html#l00005">command.hpp:5</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_af0384de48d847585fcb340c71c231e5e"><div class="ttname"><a href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, Allocator, Components... &gt; Query</div><div class="ttdoc">Type alias for query with mutable world access.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02515">query.hpp:2515</a></div></div>
+</div><!-- fragment --> </div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

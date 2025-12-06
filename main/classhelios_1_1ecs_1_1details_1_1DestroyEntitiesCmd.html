@@ -1,0 +1,466 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: helios::ecs::details::DestroyEntitiesCmd Class Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classhelios_1_1ecs_1_1details_1_1DestroyEntitiesCmd.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classhelios_1_1ecs_1_1details_1_1DestroyEntitiesCmd-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">helios::ecs::details::DestroyEntitiesCmd Class Reference<span class="mlabels"><span class="mlabel">final</span></span></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><a class="el" href="classhelios_1_1ecs_1_1Command.html" title="Base class for all commands to be executed in the world.">Command</a> to destroy multiple entities.  
+ <a href="classhelios_1_1ecs_1_1details_1_1DestroyEntitiesCmd.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="commands_8hpp_source.html">commands.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for helios::ecs::details::DestroyEntitiesCmd:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classhelios_1_1ecs_1_1details_1_1DestroyEntitiesCmd.png" usemap="#helios::ecs::details::DestroyEntitiesCmd_map" alt=""/>
+  <map id="helios::ecs::details::DestroyEntitiesCmd_map" name="helios::ecs::details::DestroyEntitiesCmd_map">
+<area href="classhelios_1_1ecs_1_1Command.html" title="Base class for all commands to be executed in the world." alt="helios::ecs::Command" shape="rect" coords="0,0,228,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:aae8efc75eae94f89a97f0a0a602723b0" id="r_aae8efc75eae94f89a97f0a0a602723b0"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
+requires std::same_as&lt;std::ranges::range_value_t&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">R</a>&gt;, <a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>&gt;</td></tr>
+<tr class="memitem:aae8efc75eae94f89a97f0a0a602723b0"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1DestroyEntitiesCmd.html#aae8efc75eae94f89a97f0a0a602723b0">DestroyEntitiesCmd</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">R</a> &amp;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">entities</a>)</td></tr>
+<tr class="memdesc:aae8efc75eae94f89a97f0a0a602723b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs destroy entities command from range.  <br /></td></tr>
+<tr class="separator:aae8efc75eae94f89a97f0a0a602723b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a969fc670db8405542f8028221298e007" id="r_a969fc670db8405542f8028221298e007"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1DestroyEntitiesCmd.html#a969fc670db8405542f8028221298e007">DestroyEntitiesCmd</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1DestroyEntitiesCmd.html">DestroyEntitiesCmd</a> &amp;) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:a969fc670db8405542f8028221298e007"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a164c4be07773b0ec3e65562e9671b2c0" id="r_a164c4be07773b0ec3e65562e9671b2c0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1DestroyEntitiesCmd.html#a164c4be07773b0ec3e65562e9671b2c0">DestroyEntitiesCmd</a> (<a class="el" href="classhelios_1_1ecs_1_1details_1_1DestroyEntitiesCmd.html">DestroyEntitiesCmd</a> &amp;&amp;) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:a164c4be07773b0ec3e65562e9671b2c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a268c6fe5178d4dfed71b2c1e9921943c" id="r_a268c6fe5178d4dfed71b2c1e9921943c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1DestroyEntitiesCmd.html#a268c6fe5178d4dfed71b2c1e9921943c">~DestroyEntitiesCmd</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">override</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:a268c6fe5178d4dfed71b2c1e9921943c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade4cdd1ccaf1761aa709ec9d7adb29d4" id="r_ade4cdd1ccaf1761aa709ec9d7adb29d4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1DestroyEntitiesCmd.html">DestroyEntitiesCmd</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1DestroyEntitiesCmd.html#ade4cdd1ccaf1761aa709ec9d7adb29d4">operator=</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1DestroyEntitiesCmd.html">DestroyEntitiesCmd</a> &amp;) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:ade4cdd1ccaf1761aa709ec9d7adb29d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2abd26e072639ac870ef6b5c2757a8c5" id="r_a2abd26e072639ac870ef6b5c2757a8c5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1DestroyEntitiesCmd.html">DestroyEntitiesCmd</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1DestroyEntitiesCmd.html#a2abd26e072639ac870ef6b5c2757a8c5">operator=</a> (<a class="el" href="classhelios_1_1ecs_1_1details_1_1DestroyEntitiesCmd.html">DestroyEntitiesCmd</a> &amp;&amp;) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:a2abd26e072639ac870ef6b5c2757a8c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf57163248f49f6f04fce59a09adcd2b" id="r_acf57163248f49f6f04fce59a09adcd2b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1DestroyEntitiesCmd.html#acf57163248f49f6f04fce59a09adcd2b">Execute</a> (<a class="el" href="classhelios_1_1ecs_1_1World.html">World</a> &amp;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">world</a>) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">override</a></td></tr>
+<tr class="memdesc:acf57163248f49f6f04fce59a09adcd2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes entities destruction.  <br /></td></tr>
+<tr class="separator:acf57163248f49f6f04fce59a09adcd2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classhelios_1_1ecs_1_1Command"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classhelios_1_1ecs_1_1Command')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classhelios_1_1ecs_1_1Command.html">helios::ecs::Command</a></td></tr>
+<tr class="memitem:a2dd8b37c138f7d242ff860b071248162 inherit pub_methods_classhelios_1_1ecs_1_1Command" id="r_a2dd8b37c138f7d242ff860b071248162"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">virtual</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1Command.html#a2dd8b37c138f7d242ff860b071248162">~Command</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:a2dd8b37c138f7d242ff860b071248162 inherit pub_methods_classhelios_1_1ecs_1_1Command"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="classhelios_1_1ecs_1_1Command.html" title="Base class for all commands to be executed in the world.">Command</a> to destroy multiple entities. </p>
+<p>Efficiently destroys multiple entities in a single operation. Will assert if any of the entities do not exist in the world (when world implementation updated). </p>
+
+<p class="definition">Definition at line <a class="el" href="commands_8hpp_source.html#l00103">103</a> of file <a class="el" href="commands_8hpp_source.html">commands.hpp</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aae8efc75eae94f89a97f0a0a602723b0" name="aae8efc75eae94f89a97f0a0a602723b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae8efc75eae94f89a97f0a0a602723b0">&#9670;&#160;</a></span>DestroyEntitiesCmd() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::ranges::range R&gt; <br />
+requires std::same_as&lt;std::ranges::range_value_t&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">R</a>&gt;, <a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> helios::ecs::details::DestroyEntitiesCmd::DestroyEntitiesCmd </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">R</a> &amp;&#160;</td>
+          <td class="paramname"><em>entities</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructs destroy entities command from range. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if any entity is invalid. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">R</td><td>Range type containing <a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> elements </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entities</td><td>Range of entities to destroy </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="commands_8hpp_source.html#l00133">133</a> of file <a class="el" href="commands_8hpp_source.html">commands.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  134</span>    : entities_(std::ranges::begin(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">entities</a>), std::ranges::end(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">entities</a>)) {</div>
+<div class="line"><span class="lineno">  135</span>  <span class="keywordflow">for</span> (<span class="keyword">const</span> Entity&amp; entity : entities_) {</div>
+<div class="line"><span class="lineno">  136</span>    <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(entity.Valid(), <span class="stringliteral">&quot;Failed to construct destroy entities command: Entity with index &#39;{}&#39; is invalid!&quot;</span>,</div>
+<div class="line"><span class="lineno">  137</span>                  entity.Index());</div>
+<div class="line"><span class="lineno">  138</span>  }</div>
+<div class="line"><span class="lineno">  139</span>}</div>
+<div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00149">assert.hpp:149</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_af0384de48d847585fcb340c71c231e5e"><div class="ttname"><a href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, Allocator, Components... &gt; Query</div><div class="ttdoc">Type alias for query with mutable world access.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02515">query.hpp:2515</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a969fc670db8405542f8028221298e007" name="a969fc670db8405542f8028221298e007"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a969fc670db8405542f8028221298e007">&#9670;&#160;</a></span>DestroyEntitiesCmd() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> helios::ecs::details::DestroyEntitiesCmd::DestroyEntitiesCmd </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1DestroyEntitiesCmd.html">DestroyEntitiesCmd</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a164c4be07773b0ec3e65562e9671b2c0" name="a164c4be07773b0ec3e65562e9671b2c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a164c4be07773b0ec3e65562e9671b2c0">&#9670;&#160;</a></span>DestroyEntitiesCmd() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> helios::ecs::details::DestroyEntitiesCmd::DestroyEntitiesCmd </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1details_1_1DestroyEntitiesCmd.html">DestroyEntitiesCmd</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a268c6fe5178d4dfed71b2c1e9921943c" name="a268c6fe5178d4dfed71b2c1e9921943c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a268c6fe5178d4dfed71b2c1e9921943c">&#9670;&#160;</a></span>~DestroyEntitiesCmd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> helios::ecs::details::DestroyEntitiesCmd::~DestroyEntitiesCmd </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">override</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="acf57163248f49f6f04fce59a09adcd2b" name="acf57163248f49f6f04fce59a09adcd2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf57163248f49f6f04fce59a09adcd2b">&#9670;&#160;</a></span>Execute()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a> helios::ecs::details::DestroyEntitiesCmd::Execute </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1World.html">World</a> &amp;&#160;</td>
+          <td class="paramname"><em>world</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Executes entities destruction. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">world</td><td><a class="el" href="classhelios_1_1ecs_1_1World.html" title="The World class manages entities with their components and systems.">World</a> to remove entities from </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classhelios_1_1ecs_1_1Command.html#acef7d10fc46b6c17ca8100bdbadfc198">helios::ecs::Command</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="commands_8hpp_source.html#l00125">125</a> of file <a class="el" href="commands_8hpp_source.html">commands.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  125</span>{ <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">world</a>.DestroyEntities(entities_); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ade4cdd1ccaf1761aa709ec9d7adb29d4" name="ade4cdd1ccaf1761aa709ec9d7adb29d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade4cdd1ccaf1761aa709ec9d7adb29d4">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1DestroyEntitiesCmd.html">DestroyEntitiesCmd</a> &amp; helios::ecs::details::DestroyEntitiesCmd::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1DestroyEntitiesCmd.html">DestroyEntitiesCmd</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2abd26e072639ac870ef6b5c2757a8c5" name="a2abd26e072639ac870ef6b5c2757a8c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2abd26e072639ac870ef6b5c2757a8c5">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1DestroyEntitiesCmd.html">DestroyEntitiesCmd</a> &amp; helios::ecs::details::DestroyEntitiesCmd::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1details_1_1DestroyEntitiesCmd.html">DestroyEntitiesCmd</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehelios.html">helios</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1ecs.html">ecs</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1ecs_1_1details.html">details</a></li><li class="navelem"><a class="el" href="classhelios_1_1ecs_1_1details_1_1DestroyEntitiesCmd.html">DestroyEntitiesCmd</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

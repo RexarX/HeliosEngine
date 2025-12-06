@@ -1,0 +1,455 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: helios::ecs::details::RemoveResourceCmd&lt; T &gt; Class Template Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classhelios_1_1ecs_1_1details_1_1RemoveResourceCmd.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classhelios_1_1ecs_1_1details_1_1RemoveResourceCmd-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">helios::ecs::details::RemoveResourceCmd&lt; T &gt; Class Template Reference<span class="mlabels"><span class="mlabel">final</span></span></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><a class="el" href="classhelios_1_1ecs_1_1Command.html" title="Base class for all commands to be executed in the world.">Command</a> to remove a resource from the world.  
+ <a href="classhelios_1_1ecs_1_1details_1_1RemoveResourceCmd.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="commands_8hpp_source.html">commands.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for helios::ecs::details::RemoveResourceCmd&lt; T &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classhelios_1_1ecs_1_1details_1_1RemoveResourceCmd.png" usemap="#helios::ecs::details::RemoveResourceCmd_3C_20T_20_3E_map" alt=""/>
+  <map id="helios::ecs::details::RemoveResourceCmd_3C_20T_20_3E_map" name="helios::ecs::details::RemoveResourceCmd_3C_20T_20_3E_map">
+<area href="classhelios_1_1ecs_1_1Command.html" title="Base class for all commands to be executed in the world." alt="helios::ecs::Command" shape="rect" coords="0,0,274,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:abf06bfd5b290e7af8133b6295854f719" id="r_abf06bfd5b290e7af8133b6295854f719"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1RemoveResourceCmd.html#abf06bfd5b290e7af8133b6295854f719">RemoveResourceCmd</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:abf06bfd5b290e7af8133b6295854f719"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f9991c7db5ba1db84edfcff75cf0e57" id="r_a2f9991c7db5ba1db84edfcff75cf0e57"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1RemoveResourceCmd.html#a2f9991c7db5ba1db84edfcff75cf0e57">RemoveResourceCmd</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1RemoveResourceCmd.html">RemoveResourceCmd</a> &amp;) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:a2f9991c7db5ba1db84edfcff75cf0e57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada1e45b711840dcaf4f40118346f2b8e" id="r_ada1e45b711840dcaf4f40118346f2b8e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1RemoveResourceCmd.html#ada1e45b711840dcaf4f40118346f2b8e">RemoveResourceCmd</a> (<a class="el" href="classhelios_1_1ecs_1_1details_1_1RemoveResourceCmd.html">RemoveResourceCmd</a> &amp;&amp;) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:ada1e45b711840dcaf4f40118346f2b8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6816c9044d3e9fc1e7c31f2ead63c2d4" id="r_a6816c9044d3e9fc1e7c31f2ead63c2d4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1RemoveResourceCmd.html#a6816c9044d3e9fc1e7c31f2ead63c2d4">~RemoveResourceCmd</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">override</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:a6816c9044d3e9fc1e7c31f2ead63c2d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53a4a1f3c5dfb280d082eca0ae053d5f" id="r_a53a4a1f3c5dfb280d082eca0ae053d5f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1RemoveResourceCmd.html">RemoveResourceCmd</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1RemoveResourceCmd.html#a53a4a1f3c5dfb280d082eca0ae053d5f">operator=</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1RemoveResourceCmd.html">RemoveResourceCmd</a> &amp;) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:a53a4a1f3c5dfb280d082eca0ae053d5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a9a58d3244443915810ce4c58b63ee2" id="r_a8a9a58d3244443915810ce4c58b63ee2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1RemoveResourceCmd.html">RemoveResourceCmd</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1RemoveResourceCmd.html#a8a9a58d3244443915810ce4c58b63ee2">operator=</a> (<a class="el" href="classhelios_1_1ecs_1_1details_1_1RemoveResourceCmd.html">RemoveResourceCmd</a> &amp;&amp;) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:a8a9a58d3244443915810ce4c58b63ee2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b3d1b4fbbe6cf5d530214a7e16bb75c" id="r_a5b3d1b4fbbe6cf5d530214a7e16bb75c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1RemoveResourceCmd.html#a5b3d1b4fbbe6cf5d530214a7e16bb75c">Execute</a> (<a class="el" href="classhelios_1_1ecs_1_1World.html">World</a> &amp;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">world</a>) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">override</a></td></tr>
+<tr class="memdesc:a5b3d1b4fbbe6cf5d530214a7e16bb75c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes resource removal.  <br /></td></tr>
+<tr class="separator:a5b3d1b4fbbe6cf5d530214a7e16bb75c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classhelios_1_1ecs_1_1Command"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classhelios_1_1ecs_1_1Command')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classhelios_1_1ecs_1_1Command.html">helios::ecs::Command</a></td></tr>
+<tr class="memitem:a2dd8b37c138f7d242ff860b071248162 inherit pub_methods_classhelios_1_1ecs_1_1Command" id="r_a2dd8b37c138f7d242ff860b071248162"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">virtual</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1Command.html#a2dd8b37c138f7d242ff860b071248162">~Command</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:a2dd8b37c138f7d242ff860b071248162 inherit pub_methods_classhelios_1_1ecs_1_1Command"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;ResourceTrait T&gt;<br />
+class helios::ecs::details::RemoveResourceCmd&lt; T &gt;</div><p><a class="el" href="classhelios_1_1ecs_1_1Command.html" title="Base class for all commands to be executed in the world.">Command</a> to remove a resource from the world. </p>
+<p>Removes resource of type T from the world during execution. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Resource type to remove </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="commands_8hpp_source.html#l00707">707</a> of file <a class="el" href="commands_8hpp_source.html">commands.hpp</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="abf06bfd5b290e7af8133b6295854f719" name="abf06bfd5b290e7af8133b6295854f719"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf06bfd5b290e7af8133b6295854f719">&#9670;&#160;</a></span>RemoveResourceCmd() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ResourceTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1RemoveResourceCmd.html">helios::ecs::details::RemoveResourceCmd</a>&lt; T &gt;::RemoveResourceCmd </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2f9991c7db5ba1db84edfcff75cf0e57" name="a2f9991c7db5ba1db84edfcff75cf0e57"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f9991c7db5ba1db84edfcff75cf0e57">&#9670;&#160;</a></span>RemoveResourceCmd() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ResourceTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1RemoveResourceCmd.html">helios::ecs::details::RemoveResourceCmd</a>&lt; T &gt;::RemoveResourceCmd </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1RemoveResourceCmd.html">RemoveResourceCmd</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ada1e45b711840dcaf4f40118346f2b8e" name="ada1e45b711840dcaf4f40118346f2b8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada1e45b711840dcaf4f40118346f2b8e">&#9670;&#160;</a></span>RemoveResourceCmd() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ResourceTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1RemoveResourceCmd.html">helios::ecs::details::RemoveResourceCmd</a>&lt; T &gt;::RemoveResourceCmd </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1details_1_1RemoveResourceCmd.html">RemoveResourceCmd</a>&lt; T &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6816c9044d3e9fc1e7c31f2ead63c2d4" name="a6816c9044d3e9fc1e7c31f2ead63c2d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6816c9044d3e9fc1e7c31f2ead63c2d4">&#9670;&#160;</a></span>~RemoveResourceCmd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ResourceTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1RemoveResourceCmd.html">helios::ecs::details::RemoveResourceCmd</a>&lt; T &gt;::~<a class="el" href="classhelios_1_1ecs_1_1details_1_1RemoveResourceCmd.html">RemoveResourceCmd</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">override</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a5b3d1b4fbbe6cf5d530214a7e16bb75c" name="a5b3d1b4fbbe6cf5d530214a7e16bb75c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b3d1b4fbbe6cf5d530214a7e16bb75c">&#9670;&#160;</a></span>Execute()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ResourceTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1RemoveResourceCmd.html">helios::ecs::details::RemoveResourceCmd</a>&lt; T &gt;::Execute </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1World.html">World</a> &amp;&#160;</td>
+          <td class="paramname"><em>world</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Executes resource removal. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">world</td><td><a class="el" href="classhelios_1_1ecs_1_1World.html" title="The World class manages entities with their components and systems.">World</a> to remove resource from </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classhelios_1_1ecs_1_1Command.html#acef7d10fc46b6c17ca8100bdbadfc198">helios::ecs::Command</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="commands_8hpp_source.html#l00721">721</a> of file <a class="el" href="commands_8hpp_source.html">commands.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  721</span>{ <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">world</a>.RemoveResource&lt;T&gt;(); }</div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_af0384de48d847585fcb340c71c231e5e"><div class="ttname"><a href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, Allocator, Components... &gt; Query</div><div class="ttdoc">Type alias for query with mutable world access.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02515">query.hpp:2515</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a53a4a1f3c5dfb280d082eca0ae053d5f" name="a53a4a1f3c5dfb280d082eca0ae053d5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53a4a1f3c5dfb280d082eca0ae053d5f">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ResourceTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1RemoveResourceCmd.html">RemoveResourceCmd</a> &amp; <a class="el" href="classhelios_1_1ecs_1_1details_1_1RemoveResourceCmd.html">helios::ecs::details::RemoveResourceCmd</a>&lt; T &gt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">::operator</a>= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1RemoveResourceCmd.html">RemoveResourceCmd</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8a9a58d3244443915810ce4c58b63ee2" name="a8a9a58d3244443915810ce4c58b63ee2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a9a58d3244443915810ce4c58b63ee2">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ResourceTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1RemoveResourceCmd.html">RemoveResourceCmd</a> &amp; <a class="el" href="classhelios_1_1ecs_1_1details_1_1RemoveResourceCmd.html">helios::ecs::details::RemoveResourceCmd</a>&lt; T &gt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">::operator</a>= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1details_1_1RemoveResourceCmd.html">RemoveResourceCmd</a>&lt; T &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehelios.html">helios</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1ecs.html">ecs</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1ecs_1_1details.html">details</a></li><li class="navelem"><a class="el" href="classhelios_1_1ecs_1_1details_1_1RemoveResourceCmd.html">RemoveResourceCmd</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

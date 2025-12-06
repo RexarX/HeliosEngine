@@ -1,0 +1,852 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: helios::Uuid Class Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classhelios_1_1Uuid.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#friends">Friends</a> &#124;
+<a href="classhelios_1_1Uuid-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">helios::Uuid Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>A class representing a universally unique identifier (UUID).  
+ <a href="classhelios_1_1Uuid.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="uuid_8hpp_source.html">uuid.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a3d6656a8831b8e753f4b5f47b26f5913" id="r_a3d6656a8831b8e753f4b5f47b26f5913"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Uuid.html#a3d6656a8831b8e753f4b5f47b26f5913">Uuid</a> () noexcept=default</td></tr>
+<tr class="memdesc:a3d6656a8831b8e753f4b5f47b26f5913"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor creates an invalid UUID (all zeros).  <br /></td></tr>
+<tr class="separator:a3d6656a8831b8e753f4b5f47b26f5913"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add891414818a6519bef7c985756aa6ce" id="r_add891414818a6519bef7c985756aa6ce"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Uuid.html#add891414818a6519bef7c985756aa6ce">Uuid</a> (std::string_view str)</td></tr>
+<tr class="memdesc:add891414818a6519bef7c985756aa6ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a UUID from a string representation.  <br /></td></tr>
+<tr class="separator:add891414818a6519bef7c985756aa6ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ed9f4d935e978dbcb0146dda90b6240" id="r_a9ed9f4d935e978dbcb0146dda90b6240"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Uuid.html#a9ed9f4d935e978dbcb0146dda90b6240">Uuid</a> (std::span&lt; const std::byte &gt; bytes)</td></tr>
+<tr class="memdesc:a9ed9f4d935e978dbcb0146dda90b6240"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a UUID from a span of bytes.  <br /></td></tr>
+<tr class="separator:a9ed9f4d935e978dbcb0146dda90b6240"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a221881b2a259b40d80566cb7b218343b" id="r_a221881b2a259b40d80566cb7b218343b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Uuid.html#a221881b2a259b40d80566cb7b218343b">Uuid</a> (const <a class="el" href="classhelios_1_1Uuid.html">Uuid</a> &amp;)=default</td></tr>
+<tr class="separator:a221881b2a259b40d80566cb7b218343b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a528d667fd63dc33531bbad4b925205eb" id="r_a528d667fd63dc33531bbad4b925205eb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Uuid.html#a528d667fd63dc33531bbad4b925205eb">Uuid</a> (<a class="el" href="classhelios_1_1Uuid.html">Uuid</a> &amp;&amp;) noexcept=default</td></tr>
+<tr class="separator:a528d667fd63dc33531bbad4b925205eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d71362b0785d3f0d1ca5126dfa7aa43" id="r_a2d71362b0785d3f0d1ca5126dfa7aa43"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Uuid.html#a2d71362b0785d3f0d1ca5126dfa7aa43">~Uuid</a> ()=default</td></tr>
+<tr class="separator:a2d71362b0785d3f0d1ca5126dfa7aa43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc5f3aef89da493cd7dab842880308be" id="r_adc5f3aef89da493cd7dab842880308be"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1Uuid.html">Uuid</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Uuid.html#adc5f3aef89da493cd7dab842880308be">operator=</a> (const <a class="el" href="classhelios_1_1Uuid.html">Uuid</a> &amp;)=default</td></tr>
+<tr class="separator:adc5f3aef89da493cd7dab842880308be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a883c76712336c72f2cb52814055092a3" id="r_a883c76712336c72f2cb52814055092a3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1Uuid.html">Uuid</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Uuid.html#a883c76712336c72f2cb52814055092a3">operator=</a> (<a class="el" href="classhelios_1_1Uuid.html">Uuid</a> &amp;&amp;) noexcept=default</td></tr>
+<tr class="separator:a883c76712336c72f2cb52814055092a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63c5c1a87aceecb2cb4a52f216be18fc" id="r_a63c5c1a87aceecb2cb4a52f216be18fc"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Uuid.html#a63c5c1a87aceecb2cb4a52f216be18fc">ToString</a> () const</td></tr>
+<tr class="memdesc:a63c5c1a87aceecb2cb4a52f216be18fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert the UUID to its string representation.  <br /></td></tr>
+<tr class="separator:a63c5c1a87aceecb2cb4a52f216be18fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a029ac887e3b0ccd318c2a1ed4b9d92ad" id="r_a029ac887e3b0ccd318c2a1ed4b9d92ad"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Uuid.html#a029ac887e3b0ccd318c2a1ed4b9d92ad">AsBytes</a> () const -&gt; std::span&lt; const std::byte &gt;</td></tr>
+<tr class="memdesc:a029ac887e3b0ccd318c2a1ed4b9d92ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the UUID as a span of bytes.  <br /></td></tr>
+<tr class="separator:a029ac887e3b0ccd318c2a1ed4b9d92ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ee05777475cf647130c9f45e2415919" id="r_a9ee05777475cf647130c9f45e2415919"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Uuid.html#a9ee05777475cf647130c9f45e2415919">operator==</a> (const <a class="el" href="classhelios_1_1Uuid.html">Uuid</a> &amp;other) const noexcept</td></tr>
+<tr class="separator:a9ee05777475cf647130c9f45e2415919"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a948ce81fb6998221a90046a48738ab2c" id="r_a948ce81fb6998221a90046a48738ab2c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Uuid.html#a948ce81fb6998221a90046a48738ab2c">operator!=</a> (const <a class="el" href="classhelios_1_1Uuid.html">Uuid</a> &amp;other) const noexcept</td></tr>
+<tr class="separator:a948ce81fb6998221a90046a48738ab2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33c033c75ad3811f09c1b21884efcca6" id="r_a33c033c75ad3811f09c1b21884efcca6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Uuid.html#a33c033c75ad3811f09c1b21884efcca6">operator&lt;</a> (const <a class="el" href="classhelios_1_1Uuid.html">Uuid</a> &amp;other) const noexcept</td></tr>
+<tr class="separator:a33c033c75ad3811f09c1b21884efcca6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfb3a7d9213d6db2f3b6d3bdb44a3dae" id="r_abfb3a7d9213d6db2f3b6d3bdb44a3dae"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Uuid.html#abfb3a7d9213d6db2f3b6d3bdb44a3dae">Valid</a> () const noexcept</td></tr>
+<tr class="memdesc:abfb3a7d9213d6db2f3b6d3bdb44a3dae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the UUID is valid (not all zeros).  <br /></td></tr>
+<tr class="separator:abfb3a7d9213d6db2f3b6d3bdb44a3dae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62b925a337e1ab96b73dc2d79452d2c9" id="r_a62b925a337e1ab96b73dc2d79452d2c9"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Uuid.html#a62b925a337e1ab96b73dc2d79452d2c9">Hash</a> () const noexcept</td></tr>
+<tr class="memdesc:a62b925a337e1ab96b73dc2d79452d2c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute a hash value for the UUID.  <br /></td></tr>
+<tr class="separator:a62b925a337e1ab96b73dc2d79452d2c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a84560f17c2874de68e408ac5704347ae" id="r_a84560f17c2874de68e408ac5704347ae"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classhelios_1_1Uuid.html">Uuid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Uuid.html#a84560f17c2874de68e408ac5704347ae">Generate</a> ()</td></tr>
+<tr class="memdesc:a84560f17c2874de68e408ac5704347ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a new random UUID.  <br /></td></tr>
+<tr class="separator:a84560f17c2874de68e408ac5704347ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:a62fab7af377e8f5cc7e8a61efdb960b9" id="r_a62fab7af377e8f5cc7e8a61efdb960b9"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Uuid.html#a62fab7af377e8f5cc7e8a61efdb960b9">UuidGenerator</a></td></tr>
+<tr class="separator:a62fab7af377e8f5cc7e8a61efdb960b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a740e6842a841839edb8bb78e2c40bbff" id="r_a740e6842a841839edb8bb78e2c40bbff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Uuid.html#a740e6842a841839edb8bb78e2c40bbff">swap</a> (<a class="el" href="classhelios_1_1Uuid.html">Uuid</a> &amp;lhs, <a class="el" href="classhelios_1_1Uuid.html">Uuid</a> &amp;rhs) noexcept</td></tr>
+<tr class="memdesc:a740e6842a841839edb8bb78e2c40bbff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Swap two UUIDs.  <br /></td></tr>
+<tr class="separator:a740e6842a841839edb8bb78e2c40bbff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A class representing a universally unique identifier (UUID). </p>
+
+<p class="definition">Definition at line <a class="el" href="uuid_8hpp_source.html#l00025">25</a> of file <a class="el" href="uuid_8hpp_source.html">uuid.hpp</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a3d6656a8831b8e753f4b5f47b26f5913" name="a3d6656a8831b8e753f4b5f47b26f5913"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d6656a8831b8e753f4b5f47b26f5913">&#9670;&#160;</a></span>Uuid() <span class="overload">[1/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr helios::Uuid::Uuid </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default constructor creates an invalid UUID (all zeros). </p>
+
+</div>
+</div>
+<a id="add891414818a6519bef7c985756aa6ce" name="add891414818a6519bef7c985756aa6ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add891414818a6519bef7c985756aa6ce">&#9670;&#160;</a></span>Uuid() <span class="overload">[2/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::Uuid::Uuid </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>str</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct a UUID from a string representation. </p>
+<p>If the string is not a valid UUID, the resulting UUID will be invalid. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td>The string representation of the UUID. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="uuid_8hpp_source.html#l00108">108</a> of file <a class="el" href="uuid_8hpp_source.html">uuid.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  108</span>                                    {</div>
+<div class="line"><span class="lineno">  109</span>  <span class="keywordflow">if</span> (str.empty()) [[unlikely]] {</div>
+<div class="line"><span class="lineno">  110</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  111</span>  }</div>
+<div class="line"><span class="lineno">  112</span> </div>
+<div class="line"><span class="lineno">  113</span>  <span class="keyword">auto</span> result = uuids::uuid::from_string(str.data());</div>
+<div class="line"><span class="lineno">  114</span>  <span class="keywordflow">if</span> (result.has_value()) {</div>
+<div class="line"><span class="lineno">  115</span>    uuid_ = result.value();</div>
+<div class="line"><span class="lineno">  116</span>  }</div>
+<div class="line"><span class="lineno">  117</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a9ed9f4d935e978dbcb0146dda90b6240" name="a9ed9f4d935e978dbcb0146dda90b6240"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ed9f4d935e978dbcb0146dda90b6240">&#9670;&#160;</a></span>Uuid() <span class="overload">[3/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::Uuid::Uuid </td>
+          <td>(</td>
+          <td class="paramtype">std::span&lt; const std::byte &gt;&#160;</td>
+          <td class="paramname"><em>bytes</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct a UUID from a span of bytes. </p>
+<p>The span must be exactly 16 bytes long; otherwise, the resulting UUID will be invalid. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bytes</td><td>A span of bytes representing the UUID. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="uuid_8hpp_source.html#l00119">119</a> of file <a class="el" href="uuid_8hpp_source.html">uuid.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  119</span>                                              {</div>
+<div class="line"><span class="lineno">  120</span>  <span class="keywordflow">if</span> (bytes.size() == 16) {</div>
+<div class="line"><span class="lineno">  121</span>    <span class="keyword">const</span> <span class="keyword">auto</span>* begin = std::bit_cast&lt;const uint8_t*&gt;(bytes.data());</div>
+<div class="line"><span class="lineno">  122</span>    <span class="keyword">const</span> uint8_t* end = begin + bytes.size();</div>
+<div class="line"><span class="lineno">  123</span>    uuid_ = uuids::uuid(begin, end);</div>
+<div class="line"><span class="lineno">  124</span>  }</div>
+<div class="line"><span class="lineno">  125</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a221881b2a259b40d80566cb7b218343b" name="a221881b2a259b40d80566cb7b218343b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a221881b2a259b40d80566cb7b218343b">&#9670;&#160;</a></span>Uuid() <span class="overload">[4/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::Uuid::Uuid </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1Uuid.html">Uuid</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a528d667fd63dc33531bbad4b925205eb" name="a528d667fd63dc33531bbad4b925205eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a528d667fd63dc33531bbad4b925205eb">&#9670;&#160;</a></span>Uuid() <span class="overload">[5/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::Uuid::Uuid </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1Uuid.html">Uuid</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2d71362b0785d3f0d1ca5126dfa7aa43" name="a2d71362b0785d3f0d1ca5126dfa7aa43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d71362b0785d3f0d1ca5126dfa7aa43">&#9670;&#160;</a></span>~Uuid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::Uuid::~Uuid </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a029ac887e3b0ccd318c2a1ed4b9d92ad" name="a029ac887e3b0ccd318c2a1ed4b9d92ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a029ac887e3b0ccd318c2a1ed4b9d92ad">&#9670;&#160;</a></span>AsBytes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::Uuid::AsBytes </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const -&gt; std::span&lt;const std::byte&gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the UUID as a span of bytes. </p>
+<dl class="section return"><dt>Returns</dt><dd>A span of bytes representing the UUID, or an empty span if the UUID is invalid. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="uuid_8hpp_source.html#l00149">149</a> of file <a class="el" href="uuid_8hpp_source.html">uuid.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  149</span>                                                          {</div>
+<div class="line"><span class="lineno">  150</span>  <span class="keywordflow">if</span> (!<a class="code hl_function" href="classhelios_1_1Uuid.html#abfb3a7d9213d6db2f3b6d3bdb44a3dae">Valid</a>()) {</div>
+<div class="line"><span class="lineno">  151</span>    <span class="keywordflow">return</span> {};</div>
+<div class="line"><span class="lineno">  152</span>  }</div>
+<div class="line"><span class="lineno">  153</span>  <span class="keyword">const</span> <span class="keyword">auto</span> bytes = uuid_.as_bytes();</div>
+<div class="line"><span class="lineno">  154</span>  <span class="keywordflow">return</span> {bytes.data(), bytes.size()};</div>
+<div class="line"><span class="lineno">  155</span>}</div>
+<div class="ttc" id="aclasshelios_1_1Uuid_html_abfb3a7d9213d6db2f3b6d3bdb44a3dae"><div class="ttname"><a href="classhelios_1_1Uuid.html#abfb3a7d9213d6db2f3b6d3bdb44a3dae">helios::Uuid::Valid</a></div><div class="ttdeci">constexpr bool Valid() const noexcept</div><div class="ttdoc">Check if the UUID is valid (not all zeros).</div><div class="ttdef"><b>Definition</b> <a href="uuid_8hpp_source.html#l00081">uuid.hpp:81</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a84560f17c2874de68e408ac5704347ae" name="a84560f17c2874de68e408ac5704347ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84560f17c2874de68e408ac5704347ae">&#9670;&#160;</a></span>Generate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1Uuid.html">Uuid</a> helios::Uuid::Generate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Generate a new random UUID. </p>
+<p>Uses a thread_local generator for thread-safety without locks. Each thread maintains its own generator state for optimal performance. </p><dl class="section return"><dt>Returns</dt><dd>A new random UUID. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="uuid_8hpp_source.html#l00127">127</a> of file <a class="el" href="uuid_8hpp_source.html">uuid.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  127</span>                           {</div>
+<div class="line"><span class="lineno">  128</span>  <span class="comment">// Create a thread-local engine and pass it (as an lvalue) to the generator.</span></div>
+<div class="line"><span class="lineno">  129</span>  <span class="comment">// This avoids binding a temporary to a non-const reference.</span></div>
+<div class="line"><span class="lineno">  130</span>  <span class="keyword">static</span> <span class="keyword">thread_local</span> std::random_device rd;</div>
+<div class="line"><span class="lineno">  131</span>  <span class="keyword">static</span> <span class="keyword">thread_local</span> std::array&lt;std::random_device::result_type, std::mt19937::state_size&gt; seed_data = []() {</div>
+<div class="line"><span class="lineno">  132</span>    std::array&lt;std::random_device::result_type, std::mt19937::state_size&gt; data = {};</div>
+<div class="line"><span class="lineno">  133</span>    std::ranges::generate(data, std::ref(rd));</div>
+<div class="line"><span class="lineno">  134</span>    <span class="keywordflow">return</span> data;</div>
+<div class="line"><span class="lineno">  135</span>  }();</div>
+<div class="line"><span class="lineno">  136</span>  <span class="keyword">static</span> <span class="keyword">thread_local</span> std::seed_seq seq(seed_data.begin(), seed_data.end());</div>
+<div class="line"><span class="lineno">  137</span>  <span class="keyword">static</span> <span class="keyword">thread_local</span> std::mt19937 engine(seq);</div>
+<div class="line"><span class="lineno">  138</span>  <span class="keyword">static</span> <span class="keyword">thread_local</span> uuids::uuid_random_generator gen(engine);</div>
+<div class="line"><span class="lineno">  139</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="classhelios_1_1Uuid.html#a3d6656a8831b8e753f4b5f47b26f5913">Uuid</a>(gen());</div>
+<div class="line"><span class="lineno">  140</span>}</div>
+<div class="ttc" id="aclasshelios_1_1Uuid_html_a3d6656a8831b8e753f4b5f47b26f5913"><div class="ttname"><a href="classhelios_1_1Uuid.html#a3d6656a8831b8e753f4b5f47b26f5913">helios::Uuid::Uuid</a></div><div class="ttdeci">constexpr Uuid() noexcept=default</div><div class="ttdoc">Default constructor creates an invalid UUID (all zeros).</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a62b925a337e1ab96b73dc2d79452d2c9" name="a62b925a337e1ab96b73dc2d79452d2c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62b925a337e1ab96b73dc2d79452d2c9">&#9670;&#160;</a></span>Hash()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t helios::Uuid::Hash </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute a hash value for the UUID. </p>
+<dl class="section return"><dt>Returns</dt><dd>A hash value for the UUID. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="uuid_8hpp_source.html#l00087">87</a> of file <a class="el" href="uuid_8hpp_source.html">uuid.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   87</span>{ <span class="keywordflow">return</span> std::hash&lt;uuids::uuid&gt;{}(uuid_); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a948ce81fb6998221a90046a48738ab2c" name="a948ce81fb6998221a90046a48738ab2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a948ce81fb6998221a90046a48738ab2c">&#9670;&#160;</a></span>operator!=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::Uuid::operator!= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1Uuid.html">Uuid</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="uuid_8hpp_source.html#l00073">73</a> of file <a class="el" href="uuid_8hpp_source.html">uuid.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   73</span>{ <span class="keywordflow">return</span> !(*<span class="keyword">this</span> == other); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a33c033c75ad3811f09c1b21884efcca6" name="a33c033c75ad3811f09c1b21884efcca6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33c033c75ad3811f09c1b21884efcca6">&#9670;&#160;</a></span>operator&lt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::Uuid::operator&lt; </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1Uuid.html">Uuid</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="uuid_8hpp_source.html#l00075">75</a> of file <a class="el" href="uuid_8hpp_source.html">uuid.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   75</span>{ <span class="keywordflow">return</span> uuid_ &lt; other.uuid_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="adc5f3aef89da493cd7dab842880308be" name="adc5f3aef89da493cd7dab842880308be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc5f3aef89da493cd7dab842880308be">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1Uuid.html">Uuid</a> &amp; helios::Uuid::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1Uuid.html">Uuid</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a883c76712336c72f2cb52814055092a3" name="a883c76712336c72f2cb52814055092a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a883c76712336c72f2cb52814055092a3">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1Uuid.html">Uuid</a> &amp; helios::Uuid::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1Uuid.html">Uuid</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9ee05777475cf647130c9f45e2415919" name="a9ee05777475cf647130c9f45e2415919"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ee05777475cf647130c9f45e2415919">&#9670;&#160;</a></span>operator==()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::Uuid::operator== </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1Uuid.html">Uuid</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="uuid_8hpp_source.html#l00072">72</a> of file <a class="el" href="uuid_8hpp_source.html">uuid.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   72</span>{ <span class="keywordflow">return</span> uuid_ == other.uuid_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a63c5c1a87aceecb2cb4a52f216be18fc" name="a63c5c1a87aceecb2cb4a52f216be18fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63c5c1a87aceecb2cb4a52f216be18fc">&#9670;&#160;</a></span>ToString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string helios::Uuid::ToString </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convert the UUID to its string representation. </p>
+<dl class="section return"><dt>Returns</dt><dd>The string representation of the UUID, or an empty string if the UUID is invalid. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="uuid_8hpp_source.html#l00142">142</a> of file <a class="el" href="uuid_8hpp_source.html">uuid.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  142</span>                                      {</div>
+<div class="line"><span class="lineno">  143</span>  <span class="keywordflow">if</span> (!<a class="code hl_function" href="classhelios_1_1Uuid.html#abfb3a7d9213d6db2f3b6d3bdb44a3dae">Valid</a>()) {</div>
+<div class="line"><span class="lineno">  144</span>    <span class="keywordflow">return</span> {};</div>
+<div class="line"><span class="lineno">  145</span>  }</div>
+<div class="line"><span class="lineno">  146</span>  <span class="keywordflow">return</span> uuids::to_string(uuid_);</div>
+<div class="line"><span class="lineno">  147</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="abfb3a7d9213d6db2f3b6d3bdb44a3dae" name="abfb3a7d9213d6db2f3b6d3bdb44a3dae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abfb3a7d9213d6db2f3b6d3bdb44a3dae">&#9670;&#160;</a></span>Valid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool helios::Uuid::Valid </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check if the UUID is valid (not all zeros). </p>
+<dl class="section return"><dt>Returns</dt><dd>True if the UUID is valid, false otherwise. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="uuid_8hpp_source.html#l00081">81</a> of file <a class="el" href="uuid_8hpp_source.html">uuid.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   81</span>{ <span class="keywordflow">return</span> !uuid_.is_nil(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Symbol Documentation</h2>
+<a id="a740e6842a841839edb8bb78e2c40bbff" name="a740e6842a841839edb8bb78e2c40bbff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a740e6842a841839edb8bb78e2c40bbff">&#9670;&#160;</a></span>swap</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void swap </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1Uuid.html">Uuid</a> &amp;&#160;</td>
+          <td class="paramname"><em>lhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1Uuid.html">Uuid</a> &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Swap two UUIDs. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lhs</td><td>The first UUID. </td></tr>
+    <tr><td class="paramname">rhs</td><td>The second UUID. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="uuid_8hpp_source.html#l00094">94</a> of file <a class="el" href="uuid_8hpp_source.html">uuid.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   94</span>{ lhs.uuid_.swap(rhs.uuid_); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a62fab7af377e8f5cc7e8a61efdb960b9" name="a62fab7af377e8f5cc7e8a61efdb960b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62fab7af377e8f5cc7e8a61efdb960b9">&#9670;&#160;</a></span>UuidGenerator</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend class <a class="el" href="classhelios_1_1UuidGenerator.html">UuidGenerator</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="uuid_8hpp_source.html#l00105">105</a> of file <a class="el" href="uuid_8hpp_source.html">uuid.hpp</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehelios.html">helios</a></li><li class="navelem"><a class="el" href="classhelios_1_1Uuid.html">Uuid</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

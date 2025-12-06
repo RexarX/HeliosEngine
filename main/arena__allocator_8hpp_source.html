@@ -1,0 +1,641 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: src/core/include/helios/core/memory/arena_allocator.hpp Source File</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('arena__allocator_8hpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">arena_allocator.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="arena__allocator_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;<a class="code" href="core__pch_8hpp.html">helios/core_pch.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;<a class="code" href="assert_8hpp.html">helios/core/assert.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;<a class="code" href="logger_8hpp.html">helios/core/logger.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;<a class="code" href="allocator__traits_8hpp.html">helios/core/memory/allocator_traits.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;algorithm&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;atomic&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;concepts&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;cstddef&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1memory.html">helios::memory</a> {</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"></span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"> * @brief Lock-free, thread-safe arena allocator.</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"> * @details Arena allocator that allocates from a pre-allocated buffer using a bump-pointer strategy.</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"> * All allocations are performed with lock-free atomic operations on an internal offset.</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment"> * Memory is released only when the arena is reset, which is an O(1) operation.</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"> * Individual deallocations are not supported.</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment"> * This allocator is suitable for use as a backing allocator for higher level systems that require fast,</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment"> * thread-safe allocation with predictable lifetime.</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment"> * All operations that modify the arena state (`Allocate`, `Reset`) use atomic operations.</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment"> * `Reset` is not safe to call concurrently with `Allocate` and must be externally synchronized when used in that way.</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment"> * @note Thread-safe.</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment"> * @warning `Reset` must not be used concurrently with active allocations.</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment"> * The caller is responsible for enforcing this invariant.</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment"> */</span></div>
+<div class="foldopen" id="foldopen00035" data-start="{" data-end="};">
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="classhelios_1_1memory_1_1ArenaAllocator.html">   35</a></span><span class="keyword">class </span><a class="code hl_class" href="classhelios_1_1memory_1_1ArenaAllocator.html">ArenaAllocator</a> final {</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">   * @brief Constructs an arena allocator over an existing buffer.</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">   * @details The caller provides a raw buffer and its size.</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">   * The buffer must remain valid for the entire lifetime of the allocator.</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">   * Alignment guarantees are provided up to `kDefaultAlignment` (or higher alignment if the</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">   * buffer itself is appropriately aligned).</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">   *</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">   * The allocator does not take ownership of the buffer and will not free it.</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">   *</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">   * @warning Triggers assertion if:</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">   * - buffer is nullptr but size is non-zero.</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">   * - size is 0.</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">   * - buffer is not aligned to `kMinAlignment`.</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">   *</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">   * @param buffer Pointer to the backing memory buffer.</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">   * @param size Size of the buffer in bytes.</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  <a class="code hl_class" href="classhelios_1_1memory_1_1ArenaAllocator.html">ArenaAllocator</a>(<span class="keywordtype">void</span>* buffer, <span class="keywordtype">size_t</span> size) <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="classhelios_1_1memory_1_1ArenaAllocator.html#a25a34f5187f1d199b0571e4d1c49e400">   55</a></span>  <a class="code hl_function" href="classhelios_1_1memory_1_1ArenaAllocator.html#a25a34f5187f1d199b0571e4d1c49e400">ArenaAllocator</a>(<span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1memory_1_1ArenaAllocator.html">ArenaAllocator</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  <a class="code hl_class" href="classhelios_1_1memory_1_1ArenaAllocator.html">ArenaAllocator</a>(<a class="code hl_class" href="classhelios_1_1memory_1_1ArenaAllocator.html">ArenaAllocator</a>&amp;&amp; other) <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="classhelios_1_1memory_1_1ArenaAllocator.html#a0fa759e4c7a15a75da1b4af21d498d39">   57</a></span>  <a class="code hl_function" href="classhelios_1_1memory_1_1ArenaAllocator.html#a0fa759e4c7a15a75da1b4af21d498d39">~ArenaAllocator</a>() noexcept = default;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="classhelios_1_1memory_1_1ArenaAllocator.html#a75915b3798191dd116c62369fcac4afb">   59</a></span>  <a class="code hl_class" href="classhelios_1_1memory_1_1ArenaAllocator.html">ArenaAllocator</a>&amp; operator=(const <a class="code hl_class" href="classhelios_1_1memory_1_1ArenaAllocator.html">ArenaAllocator</a>&amp;) = delete;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  <a class="code hl_class" href="classhelios_1_1memory_1_1ArenaAllocator.html">ArenaAllocator</a>&amp; operator=(<a class="code hl_class" href="classhelios_1_1memory_1_1ArenaAllocator.html">ArenaAllocator</a>&amp;&amp; other) noexcept;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment"></span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">   * @brief Allocates a block of memory from the arena.</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">   * @details Uses a lock-free bump-pointer with `compare_exchange_weak` to reserve space from the backing buffer.</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">   * The returned memory is not initialized.</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">   *</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">   * @warning Triggers assertion in next cases:</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">   * - Alignment is not a power of 2.</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment">   * - Alignment is less than `kMinAlignment`.</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">   *</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">   * @param size Number of bytes to allocate.</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">   * @param alignment Alignment requirement (must be power of 2).</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">   * @return AllocationResult with pointer and size, or `{nullptr, 0}` on failure.</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  [[nodiscard]] <a class="code hl_struct" href="structhelios_1_1memory_1_1AllocationResult.html">AllocationResult</a> <a class="code hl_function" href="classhelios_1_1memory_1_1ArenaAllocator.html#a1ee0e3149c4499e1fbd2f47628053b15">Allocate</a>(<span class="keywordtype">size_t</span> size, <span class="keywordtype">size_t</span> alignment = <a class="code hl_variable" href="namespacehelios_1_1memory.html#a14c84d27b0af2a3d13d38b2d9f6225c4">kDefaultAlignment</a>) noexcept;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment"></span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">   * @brief Allocates memory for a single object of type T.</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">   * @details Convenience function that calculates size and alignment from the type.</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">   * The returned memory is uninitialized - use placement new to construct the object.</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">   * @tparam T Type to allocate memory for</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment">   * @return Pointer to allocated memory, or nullptr on failure</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">   *</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment">   * @example</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment">   * @code</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment">   * ArenaAllocator alloc(buffer, size);</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment">   * int* ptr = alloc.Allocate&lt;int&gt;();</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment">   * if (ptr != nullptr) {</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment">   *   new (ptr) int(42);</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">   * }</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">   * @endcode</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  template &lt;typename T&gt;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  [[nodiscard]] T* <a class="code hl_function" href="classhelios_1_1memory_1_1ArenaAllocator.html#a1ee0e3149c4499e1fbd2f47628053b15">Allocate</a>() noexcept;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="comment"></span> </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment">   * @brief Allocates memory for an array of objects of type T.</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment">   * @details Convenience function that calculates size and alignment from the type.</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment">   * The returned memory is uninitialized - use placement new to construct objects.</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="comment">   * @tparam T Type to allocate memory for</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="comment">   * @param count Number of objects to allocate space for</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="comment">   * @return Pointer to allocated memory, or nullptr on failure</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="comment">   *</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="comment">   * @example</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="comment">   * @code</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="comment">   * ArenaAllocator alloc(buffer, size);</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="comment">   * int* arr = alloc.Allocate&lt;int&gt;(10);</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="comment">   * @endcode</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>  template &lt;typename T&gt;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>  [[nodiscard]] T* <a class="code hl_function" href="classhelios_1_1memory_1_1ArenaAllocator.html#a1ee0e3149c4499e1fbd2f47628053b15">Allocate</a>(<span class="keywordtype">size_t</span> count) noexcept;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="comment"></span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="comment">   * @brief Allocates and constructs a single object of type T.</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="comment">   * @details Convenience function that allocates memory and constructs the object in-place.</span></div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="comment">   * @tparam T Type to allocate and construct</span></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="comment">   * @tparam Args Constructor argument types</span></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="comment">   * @param args Arguments to forward to T&#39;s constructor</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="comment">   * @return Pointer to constructed object, or nullptr on allocation failure</span></div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="comment">   *</span></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="comment">   * @example</span></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="comment">   * @code</span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="comment">   * ArenaAllocator alloc(buffer, size);</span></div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="comment">   * auto* vec = alloc.AllocateAndConstruct&lt;MyVec3&gt;(1.0f, 2.0f, 3.0f);</span></div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="comment">   * @endcode</span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>  template &lt;typename T, typename... Args&gt;</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    requires std::constructible_from&lt;T, Args...&gt;</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>  [[nodiscard]] T* <a class="code hl_function" href="classhelios_1_1memory_1_1ArenaAllocator.html#a80b07abb68fa116395a53120275a59ea">AllocateAndConstruct</a>(Args&amp;&amp;... args) noexcept(std::is_nothrow_constructible_v&lt;T, Args...&gt;);</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="comment"></span> </div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="comment">   * @brief Allocates and default-constructs an array of objects of type T.</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span><span class="comment">   * @details Convenience function that allocates memory and default-constructs objects in-place.</span></div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="comment">   * @tparam T Type to allocate and construct (must be default constructible)</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span><span class="comment">   * @param count Number of objects to allocate and construct</span></div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span><span class="comment">   * @return Pointer to first constructed object, or nullptr on allocation failure</span></div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span><span class="comment">   *</span></div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span><span class="comment">   * @example</span></div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span><span class="comment">   * @code</span></div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span><span class="comment">   * ArenaAllocator alloc(buffer, size);</span></div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span><span class="comment">   * auto* arr = alloc.AllocateAndConstructArray&lt;MyType&gt;(10);</span></div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span><span class="comment">   * @endcode</span></div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>  template &lt;typename T&gt;</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    requires std::default_initializable&lt;T&gt;</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>  [[nodiscard]] T* <a class="code hl_function" href="classhelios_1_1memory_1_1ArenaAllocator.html#a794480395a3b0003243f23aa148d4149">AllocateAndConstructArray</a>(<span class="keywordtype">size_t</span> count) noexcept(std::is_nothrow_default_constructible_v&lt;T&gt;);</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span><span class="comment"></span> </div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span><span class="comment">   * @brief Deallocation is a no-op.</span></div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span><span class="comment">   * @details Arena allocators do not support individual deallocation.</span></div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span><span class="comment">   * Memory is released only via `Reset`.</span></div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span><span class="comment">   * This function exists to satisfy generic allocator interfaces.</span></div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span><span class="comment">   * @param ptr Pointer previously returned by `Allocate` (may be nullptr).</span></div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno"><a class="line" href="classhelios_1_1memory_1_1ArenaAllocator.html#af881a06ca47b627626ba66974ea22e0a">  155</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1memory_1_1ArenaAllocator.html#af881a06ca47b627626ba66974ea22e0a">Deallocate</a>(const <span class="keywordtype">void</span>* <span class="comment">/*ptr*/</span>) noexcept {}</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span><span class="comment"></span> </div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span><span class="comment">   * @brief Resets the arena, freeing all allocations.</span></div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span><span class="comment">   * @details Sets the internal offset to zero and clears accounting statistics.</span></div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span><span class="comment">   * This does not modify the contents of the underlying buffer.</span></div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span><span class="comment">   * @warning Must not be called concurrently with `Allocate`.</span></div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span><span class="comment">   * The caller must ensure there are no ongoing or future allocations that expect previous pointers to remain valid.</span></div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1memory_1_1ArenaAllocator.html#a080fc7f9b087557b8d2128dedb482eed">Reset</a>() noexcept;</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span><span class="comment"></span> </div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span><span class="comment">   * @brief Checks if the arena is empty.</span></div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span><span class="comment">   * @return True if no allocations have been made since the last reset.</span></div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno"><a class="line" href="classhelios_1_1memory_1_1ArenaAllocator.html#a3915081bfcc9f3213bd56c865e48fef7">  170</a></span>  [[nodiscard]] <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1memory_1_1ArenaAllocator.html#a3915081bfcc9f3213bd56c865e48fef7">Empty</a>() const noexcept { <span class="keywordflow">return</span> offset_.load(std::memory_order_acquire) == 0; }</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span><span class="comment"></span> </div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span><span class="comment">   * @brief Checks if the arena is full.</span></div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span><span class="comment">   * @return True if no more allocations can be made without reset.</span></div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno"><a class="line" href="classhelios_1_1memory_1_1ArenaAllocator.html#a1f3ba3b3372096543c83fac0070c3f1c">  176</a></span>  [[nodiscard]] <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1memory_1_1ArenaAllocator.html#a1f3ba3b3372096543c83fac0070c3f1c">Full</a>() const noexcept { <span class="keywordflow">return</span> offset_.load(std::memory_order_acquire) &gt;= capacity_; }</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span><span class="comment"></span> </div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span><span class="comment">   * @brief Gets current allocator statistics.</span></div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span><span class="comment">   * @details Statistics are updated in a relaxed manner and are not guaranteed to be</span></div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span><span class="comment">   * perfectly precise under heavy contention, but are sufficient for profiling and diagnostics.</span></div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span><span class="comment">   * @return AllocatorStats with current usage information.</span></div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>  [[nodiscard]] <a class="code hl_struct" href="structhelios_1_1memory_1_1AllocatorStats.html">AllocatorStats</a> <a class="code hl_function" href="classhelios_1_1memory_1_1ArenaAllocator.html#a3475785b001f0793c15dbbbe2bbcac7d">Stats</a>() const noexcept;</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span><span class="comment"></span> </div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span><span class="comment">   * @brief Gets the total capacity of the arena.</span></div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span><span class="comment">   * @return Capacity in bytes.</span></div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno"><a class="line" href="classhelios_1_1memory_1_1ArenaAllocator.html#a96e2a4447321bc24c946d4eb64121763">  190</a></span>  [[nodiscard]] <span class="keywordtype">size_t</span> <a class="code hl_function" href="classhelios_1_1memory_1_1ArenaAllocator.html#a96e2a4447321bc24c946d4eb64121763">Capacity</a>() const noexcept { <span class="keywordflow">return</span> capacity_; }</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span><span class="comment"></span> </div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span><span class="comment">   * @brief Gets the current offset (amount of memory used).</span></div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span><span class="comment">   * @return Current offset in bytes.</span></div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno"><a class="line" href="classhelios_1_1memory_1_1ArenaAllocator.html#a9fdd1308e0fee8e139227a67c59d841a">  196</a></span>  [[nodiscard]] <span class="keywordtype">size_t</span> <a class="code hl_function" href="classhelios_1_1memory_1_1ArenaAllocator.html#a9fdd1308e0fee8e139227a67c59d841a">CurrentOffset</a>() const noexcept { <span class="keywordflow">return</span> offset_.load(std::memory_order_acquire); }</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span><span class="comment"></span> </div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span><span class="comment">   * @brief Gets the amount of free space remaining.</span></div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span><span class="comment">   * @return Free space in bytes.</span></div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>  [[nodiscard]] <span class="keywordtype">size_t</span> <a class="code hl_function" href="classhelios_1_1memory_1_1ArenaAllocator.html#a32ec85e7444b99ac4e19119c692bed0d">FreeSpace</a>() const noexcept;</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span><span class="comment"></span> </div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span><span class="comment">   * @brief Gets the raw backing buffer pointer.</span></div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span><span class="comment">   * @return Pointer to the beginning of the backing buffer.</span></div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno"><a class="line" href="classhelios_1_1memory_1_1ArenaAllocator.html#a9771b50add2e1abd60961654d94d0b37">  208</a></span>  [[nodiscard]] <span class="keywordtype">void</span>* <a class="code hl_function" href="classhelios_1_1memory_1_1ArenaAllocator.html#a9771b50add2e1abd60961654d94d0b37">Data</a>() noexcept { <span class="keywordflow">return</span> buffer_; }</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span><span class="comment"></span> </div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span><span class="comment">   * @brief Gets the raw backing buffer pointer (const).</span></div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span><span class="comment">   * @return Const pointer to the beginning of the backing buffer.</span></div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno"><a class="line" href="classhelios_1_1memory_1_1ArenaAllocator.html#a873e17f6c8bd9167ac6582fd63a2046a">  214</a></span>  [[nodiscard]] <span class="keyword">const</span> <span class="keywordtype">void</span>* <a class="code hl_function" href="classhelios_1_1memory_1_1ArenaAllocator.html#a873e17f6c8bd9167ac6582fd63a2046a">Data</a>() const noexcept { <span class="keywordflow">return</span> buffer_; }</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span> </div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>  <span class="keywordtype">void</span>* buffer_ = <span class="keyword">nullptr</span>;                   <span class="comment">///&lt; Backing memory buffer (non-owning).</span></div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>  <span class="keywordtype">size_t</span> capacity_ = 0;                      <span class="comment">///&lt; Total capacity in bytes.</span></div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>  std::atomic&lt;size_t&gt; offset_{0};            <span class="comment">///&lt; Current bump offset.</span></div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>  std::atomic&lt;size_t&gt; peak_offset_{0};       <span class="comment">///&lt; Peak offset reached.</span></div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>  std::atomic&lt;size_t&gt; allocation_count_{0};  <span class="comment">///&lt; Number of successful allocations.</span></div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>  std::atomic&lt;size_t&gt; alignment_waste_{0};   <span class="comment">///&lt; Total bytes wasted due to alignment.</span></div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>};</div>
+</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span> </div>
+<div class="foldopen" id="foldopen00225" data-start="{" data-end="}">
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno"><a class="line" href="classhelios_1_1memory_1_1ArenaAllocator.html#a2e04bfa7aa8c179e9e90bfb404df505a">  225</a></span><span class="keyword">inline</span> <a class="code hl_function" href="classhelios_1_1memory_1_1ArenaAllocator.html#a2e04bfa7aa8c179e9e90bfb404df505a">ArenaAllocator::ArenaAllocator</a>(<span class="keywordtype">void</span>* buffer, <span class="keywordtype">size_t</span> size) noexcept : buffer_(buffer), capacity_(size) {</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(size &gt; 0, <span class="stringliteral">&quot;Failed to construct ArenaAllocator: size must be greater than 0!&quot;</span>);</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(buffer != <span class="keyword">nullptr</span>, <span class="stringliteral">&quot;Failed to construct ArenaAllocator: buffer must not be nullptr!&quot;</span>);</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="namespacehelios_1_1memory.html#a02a3db47d40247d1a3769cd533ad6d3d">CalculatePadding</a>(buffer_, <a class="code hl_variable" href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">kMinAlignment</a>) == 0,</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>                <span class="stringliteral">&quot;Failed to construct ArenaAllocator: buffer must be at least {}-byte aligned!&quot;</span>, <a class="code hl_variable" href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">kMinAlignment</a>);</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span> </div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>  offset_.store(0, std::memory_order_release);</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>  peak_offset_.store(0, std::memory_order_release);</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>  allocation_count_.store(0, std::memory_order_release);</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>  alignment_waste_.store(0, std::memory_order_release);</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>}</div>
+</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span> </div>
+<div class="foldopen" id="foldopen00237" data-start="{" data-end="}">
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno"><a class="line" href="classhelios_1_1memory_1_1ArenaAllocator.html#a8908e981d32f11a05fb15da62b681256">  237</a></span><span class="keyword">inline</span> <a class="code hl_function" href="classhelios_1_1memory_1_1ArenaAllocator.html#a2e04bfa7aa8c179e9e90bfb404df505a">ArenaAllocator::ArenaAllocator</a>(<a class="code hl_class" href="classhelios_1_1memory_1_1ArenaAllocator.html">ArenaAllocator</a>&amp;&amp; other) noexcept</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    : buffer_(other.buffer_),</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>      capacity_(other.capacity_),</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>      offset_(other.offset_.load(std::memory_order_acquire)),</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>      peak_offset_(other.peak_offset_.load(std::memory_order_acquire)),</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>      allocation_count_(other.allocation_count_.load(std::memory_order_acquire)),</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>      alignment_waste_(other.alignment_waste_.load(std::memory_order_acquire)) {</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>  other.buffer_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>  other.capacity_ = 0;</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>  other.offset_.store(0, std::memory_order_release);</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>  other.peak_offset_.store(0, std::memory_order_release);</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>  other.allocation_count_.store(0, std::memory_order_release);</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>  other.alignment_waste_.store(0, std::memory_order_release);</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>}</div>
+</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span> </div>
+<div class="foldopen" id="foldopen00252" data-start="{" data-end="}">
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno"><a class="line" href="classhelios_1_1memory_1_1ArenaAllocator.html#a862de8de10b4e4b4ef80a42cb75df0ae">  252</a></span><span class="keyword">inline</span> <a class="code hl_class" href="classhelios_1_1memory_1_1ArenaAllocator.html">ArenaAllocator</a>&amp; <a class="code hl_function" href="classhelios_1_1memory_1_1ArenaAllocator.html#a75915b3798191dd116c62369fcac4afb">ArenaAllocator::operator=</a>(<a class="code hl_class" href="classhelios_1_1memory_1_1ArenaAllocator.html">ArenaAllocator</a>&amp;&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>  <span class="keywordflow">if</span> (<span class="keyword">this</span> == &amp;other) [[unlikely]] {</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>  }</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span> </div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>  buffer_ = other.buffer_;</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>  capacity_ = other.capacity_;</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>  offset_.store(other.offset_.load(std::memory_order_acquire), std::memory_order_release);</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>  peak_offset_.store(other.peak_offset_.load(std::memory_order_acquire), std::memory_order_release);</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>  allocation_count_.store(other.allocation_count_.load(std::memory_order_acquire), std::memory_order_release);</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>  alignment_waste_.store(other.alignment_waste_.load(std::memory_order_acquire), std::memory_order_release);</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span> </div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>  other.buffer_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>  other.capacity_ = 0;</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>  other.offset_.store(0, std::memory_order_release);</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>  other.peak_offset_.store(0, std::memory_order_release);</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>  other.allocation_count_.store(0, std::memory_order_release);</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>  other.alignment_waste_.store(0, std::memory_order_release);</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span> </div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>}</div>
+</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span> </div>
+<div class="foldopen" id="foldopen00274" data-start="{" data-end="}">
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno"><a class="line" href="classhelios_1_1memory_1_1ArenaAllocator.html#a7f0b7e9b7737ab7ec0df639826773420">  274</a></span><span class="keyword">inline</span> <a class="code hl_struct" href="structhelios_1_1memory_1_1AllocationResult.html">AllocationResult</a> <a class="code hl_function" href="classhelios_1_1memory_1_1ArenaAllocator.html#a1ee0e3149c4499e1fbd2f47628053b15">ArenaAllocator::Allocate</a>(<span class="keywordtype">size_t</span> size, <span class="keywordtype">size_t</span> alignment) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="namespacehelios_1_1memory.html#a443dc78a3e9ae9f92bba519395020b3e">IsPowerOfTwo</a>(alignment), <span class="stringliteral">&quot;ArenaAllocator::Allocate failed: alignment must be power of 2, got &#39;{}&#39;!&quot;</span>,</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>                alignment);</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(alignment &gt;= <a class="code hl_variable" href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">kMinAlignment</a>,</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>                <span class="stringliteral">&quot;ArenaAllocator::Allocate failed: alignment must be at least &#39;{}&#39;, got &#39;{}&#39;!&quot;</span>, <a class="code hl_variable" href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">kMinAlignment</a>,</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>                alignment);</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span> </div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>  <span class="keywordflow">if</span> (size == 0) [[unlikely]] {</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>    <span class="keywordflow">return</span> {.ptr = <span class="keyword">nullptr</span>, .allocated_size = 0};</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>  }</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span> </div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>  <span class="comment">// Lock-free bump-pointer allocation.</span></div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>  <span class="keywordtype">size_t</span> current_offset = offset_.load(std::memory_order_acquire);</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>  <span class="keywordtype">size_t</span> aligned_offset = 0;</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>  <span class="keywordtype">size_t</span> new_offset = 0;</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>  <span class="keywordtype">size_t</span> padding = 0;</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span> </div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>  <span class="keywordflow">do</span> {</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>    <span class="keyword">auto</span>* current_ptr = <span class="keyword">static_cast&lt;</span>uint8_t*<span class="keyword">&gt;</span>(buffer_) + current_offset;</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>    padding = <a class="code hl_function" href="namespacehelios_1_1memory.html#a02a3db47d40247d1a3769cd533ad6d3d">CalculatePadding</a>(current_ptr, alignment);</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>    aligned_offset = current_offset + padding;</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span> </div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>    <span class="keywordflow">if</span> (aligned_offset + size &gt; capacity_) {</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>      <span class="keywordflow">return</span> {.ptr = <span class="keyword">nullptr</span>, .allocated_size = 0};</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>    }</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span> </div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>    new_offset = aligned_offset + size;</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>  } <span class="keywordflow">while</span> (</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>      !offset_.compare_exchange_weak(current_offset, new_offset, std::memory_order_release, std::memory_order_acquire));</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span> </div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>  allocation_count_.fetch_add(1, std::memory_order_relaxed);</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>  alignment_waste_.fetch_add(padding, std::memory_order_relaxed);</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span> </div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>  <span class="keywordtype">size_t</span> current_peak = peak_offset_.load(std::memory_order_acquire);</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>  <span class="keywordflow">while</span> (new_offset &gt; current_peak) {</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>    <span class="keywordflow">if</span> (peak_offset_.compare_exchange_weak(current_peak, new_offset, std::memory_order_release,</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>                                           std::memory_order_acquire)) {</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>      <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>    }</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>  }</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span> </div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>  <span class="keyword">auto</span>* result = <span class="keyword">static_cast&lt;</span>uint8_t*<span class="keyword">&gt;</span>(buffer_) + aligned_offset;</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>  <span class="keywordflow">return</span> {.ptr = result, .allocated_size = size};</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>}</div>
+</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span> </div>
+<div class="foldopen" id="foldopen00319" data-start="{" data-end="}">
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno"><a class="line" href="classhelios_1_1memory_1_1ArenaAllocator.html#a080fc7f9b087557b8d2128dedb482eed">  319</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1memory_1_1ArenaAllocator.html#a080fc7f9b087557b8d2128dedb482eed">ArenaAllocator::Reset</a>() noexcept {</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>  offset_.store(0, std::memory_order_release);</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>  alignment_waste_.store(0, std::memory_order_release);</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>  allocation_count_.store(0, std::memory_order_release);</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>  <span class="comment">// We intentionally keep peak_offset_ to track high-water mark over lifetime.</span></div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>}</div>
+</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span> </div>
+<div class="foldopen" id="foldopen00326" data-start="{" data-end="}">
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno"><a class="line" href="classhelios_1_1memory_1_1ArenaAllocator.html#a3475785b001f0793c15dbbbe2bbcac7d">  326</a></span><span class="keyword">inline</span> <a class="code hl_struct" href="structhelios_1_1memory_1_1AllocatorStats.html">AllocatorStats</a> <a class="code hl_function" href="classhelios_1_1memory_1_1ArenaAllocator.html#a3475785b001f0793c15dbbbe2bbcac7d">ArenaAllocator::Stats</a>() const noexcept {</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>  <span class="keyword">const</span> <span class="keyword">auto</span> current_offset = offset_.load(std::memory_order_acquire);</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>  <span class="keyword">const</span> <span class="keyword">auto</span> peak = peak_offset_.load(std::memory_order_acquire);</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>  <span class="keyword">const</span> <span class="keyword">auto</span> alloc_count = allocation_count_.load(std::memory_order_acquire);</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>  <span class="keyword">const</span> <span class="keyword">auto</span> waste = alignment_waste_.load(std::memory_order_acquire);</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span> </div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>  <span class="comment">// In an arena, we conceptually &quot;free&quot; everything on reset, but we do not track per-block frees.</span></div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>  <span class="comment">// total_freed is modeled as 0; deallocations count remains 0 because `Deallocate` is a no-op.</span></div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>  <span class="keywordflow">return</span> {</div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>      .total_allocated = current_offset,</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>      .total_freed = 0,</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>      .peak_usage = peak,</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>      .allocation_count = alloc_count,</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>      .total_allocations = alloc_count,</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>      .total_deallocations = 0,</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>      .alignment_waste = waste,</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>  };</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>}</div>
+</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span> </div>
+<div class="foldopen" id="foldopen00345" data-start="{" data-end="}">
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno"><a class="line" href="classhelios_1_1memory_1_1ArenaAllocator.html#a32ec85e7444b99ac4e19119c692bed0d">  345</a></span><span class="keyword">inline</span> <span class="keywordtype">size_t</span> <a class="code hl_function" href="classhelios_1_1memory_1_1ArenaAllocator.html#a32ec85e7444b99ac4e19119c692bed0d">ArenaAllocator::FreeSpace</a>() const noexcept {</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>  <span class="keyword">const</span> <span class="keyword">auto</span> current = offset_.load(std::memory_order_acquire);</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>  <span class="keywordflow">return</span> current &lt; capacity_ ? capacity_ - current : 0;</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>}</div>
+</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span> </div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00351" data-start="{" data-end="}">
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno"><a class="line" href="classhelios_1_1memory_1_1ArenaAllocator.html#a1ee0e3149c4499e1fbd2f47628053b15">  351</a></span><span class="keyword">inline</span> T* <a class="code hl_function" href="classhelios_1_1memory_1_1ArenaAllocator.html#a1ee0e3149c4499e1fbd2f47628053b15">ArenaAllocator::Allocate</a>() noexcept {</div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>  <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> size = <span class="keyword">sizeof</span>(T);</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>  <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> alignment = std::max(<span class="keyword">alignof</span>(T), <a class="code hl_variable" href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">kMinAlignment</a>);</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>  <span class="keyword">auto</span> result = <a class="code hl_function" href="classhelios_1_1memory_1_1ArenaAllocator.html#a1ee0e3149c4499e1fbd2f47628053b15">Allocate</a>(size, alignment);</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>  <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(result.ptr);</div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>}</div>
+</div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span> </div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00359" data-start="{" data-end="}">
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno"><a class="line" href="classhelios_1_1memory_1_1ArenaAllocator.html#a0ae1bb3f11fb623257dab7ad145c3eef">  359</a></span><span class="keyword">inline</span> T* <a class="code hl_function" href="classhelios_1_1memory_1_1ArenaAllocator.html#a1ee0e3149c4499e1fbd2f47628053b15">ArenaAllocator::Allocate</a>(<span class="keywordtype">size_t</span> count) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>  <span class="keywordflow">if</span> (count == 0) [[unlikely]] {</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>  }</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>  <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> alignment = std::max(<span class="keyword">alignof</span>(T), <a class="code hl_variable" href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">kMinAlignment</a>);</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> size = <span class="keyword">sizeof</span>(T) * count;</div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>  <span class="keyword">auto</span> result = <a class="code hl_function" href="namespacehelios_1_1memory.html#ace74b72484caaa07fedc5e4f67e6282a">Allocate</a>(size, alignment);</div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>  <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(result.ptr);</div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>}</div>
+</div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span> </div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... Args&gt;</div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>  <span class="keyword">requires</span> std::constructible_from&lt;T, Args...&gt;</div>
+<div class="foldopen" id="foldopen00371" data-start="{" data-end="}">
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno"><a class="line" href="classhelios_1_1memory_1_1ArenaAllocator.html#a80b07abb68fa116395a53120275a59ea">  371</a></span><span class="keyword">inline</span> T* <a class="code hl_function" href="classhelios_1_1memory_1_1ArenaAllocator.html#a80b07abb68fa116395a53120275a59ea">ArenaAllocator::AllocateAndConstruct</a>(Args&amp;&amp;... args) <span class="keyword">noexcept</span>(std::is_nothrow_constructible_v&lt;T, Args...&gt;) {</div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>  T* ptr = Allocate&lt;T&gt;();</div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>  <span class="keywordflow">if</span> (ptr != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>    ::new (<span class="keyword">static_cast&lt;</span><span class="keywordtype">void</span>*<span class="keyword">&gt;</span>(ptr)) T(std::forward&lt;Args&gt;(args)...);</div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>  }</div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>  <span class="keywordflow">return</span> ptr;</div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>}</div>
+</div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span> </div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>  <span class="keyword">requires</span> std::default_initializable&lt;T&gt;</div>
+<div class="foldopen" id="foldopen00381" data-start="{" data-end="}">
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno"><a class="line" href="classhelios_1_1memory_1_1ArenaAllocator.html#a794480395a3b0003243f23aa148d4149">  381</a></span><span class="keyword">inline</span> T* <a class="code hl_function" href="classhelios_1_1memory_1_1ArenaAllocator.html#a794480395a3b0003243f23aa148d4149">ArenaAllocator::AllocateAndConstructArray</a>(<span class="keywordtype">size_t</span> count) <span class="keyword">noexcept</span>(std::is_nothrow_default_constructible_v&lt;T&gt;) {</div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>  T* ptr = Allocate&lt;T&gt;(count);</div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>  <span class="keywordflow">if</span> (ptr != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; count; ++i) {</div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>      ::new (<span class="keyword">static_cast&lt;</span><span class="keywordtype">void</span>*<span class="keyword">&gt;</span>(ptr + i)) T{};</div>
+<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>    }</div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>  }</div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>  <span class="keywordflow">return</span> ptr;</div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>}</div>
+</div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span> </div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>}  <span class="comment">// namespace helios::memory</span></div>
+<div class="ttc" id="aallocator__traits_8hpp_html"><div class="ttname"><a href="allocator__traits_8hpp.html">allocator_traits.hpp</a></div></div>
+<div class="ttc" id="aassert_8hpp_html"><div class="ttname"><a href="assert_8hpp.html">assert.hpp</a></div></div>
+<div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00149">assert.hpp:149</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1ArenaAllocator_html"><div class="ttname"><a href="classhelios_1_1memory_1_1ArenaAllocator.html">helios::memory::ArenaAllocator</a></div><div class="ttdoc">Lock-free, thread-safe arena allocator.</div><div class="ttdef"><b>Definition</b> <a href="arena__allocator_8hpp_source.html#l00035">arena_allocator.hpp:35</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1ArenaAllocator_html_a080fc7f9b087557b8d2128dedb482eed"><div class="ttname"><a href="classhelios_1_1memory_1_1ArenaAllocator.html#a080fc7f9b087557b8d2128dedb482eed">helios::memory::ArenaAllocator::Reset</a></div><div class="ttdeci">void Reset() noexcept</div><div class="ttdoc">Resets the arena, freeing all allocations.</div><div class="ttdef"><b>Definition</b> <a href="arena__allocator_8hpp_source.html#l00319">arena_allocator.hpp:319</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1ArenaAllocator_html_a0fa759e4c7a15a75da1b4af21d498d39"><div class="ttname"><a href="classhelios_1_1memory_1_1ArenaAllocator.html#a0fa759e4c7a15a75da1b4af21d498d39">helios::memory::ArenaAllocator::~ArenaAllocator</a></div><div class="ttdeci">~ArenaAllocator() noexcept=default</div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1ArenaAllocator_html_a1ee0e3149c4499e1fbd2f47628053b15"><div class="ttname"><a href="classhelios_1_1memory_1_1ArenaAllocator.html#a1ee0e3149c4499e1fbd2f47628053b15">helios::memory::ArenaAllocator::Allocate</a></div><div class="ttdeci">T * Allocate() noexcept</div><div class="ttdef"><b>Definition</b> <a href="arena__allocator_8hpp_source.html#l00351">arena_allocator.hpp:351</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1ArenaAllocator_html_a1f3ba3b3372096543c83fac0070c3f1c"><div class="ttname"><a href="classhelios_1_1memory_1_1ArenaAllocator.html#a1f3ba3b3372096543c83fac0070c3f1c">helios::memory::ArenaAllocator::Full</a></div><div class="ttdeci">bool Full() const noexcept</div><div class="ttdoc">Checks if the arena is full.</div><div class="ttdef"><b>Definition</b> <a href="arena__allocator_8hpp_source.html#l00176">arena_allocator.hpp:176</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1ArenaAllocator_html_a25a34f5187f1d199b0571e4d1c49e400"><div class="ttname"><a href="classhelios_1_1memory_1_1ArenaAllocator.html#a25a34f5187f1d199b0571e4d1c49e400">helios::memory::ArenaAllocator::ArenaAllocator</a></div><div class="ttdeci">ArenaAllocator(const ArenaAllocator &amp;)=delete</div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1ArenaAllocator_html_a2e04bfa7aa8c179e9e90bfb404df505a"><div class="ttname"><a href="classhelios_1_1memory_1_1ArenaAllocator.html#a2e04bfa7aa8c179e9e90bfb404df505a">helios::memory::ArenaAllocator::ArenaAllocator</a></div><div class="ttdeci">ArenaAllocator(void *buffer, size_t size) noexcept</div><div class="ttdoc">Constructs an arena allocator over an existing buffer.</div><div class="ttdef"><b>Definition</b> <a href="arena__allocator_8hpp_source.html#l00225">arena_allocator.hpp:225</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1ArenaAllocator_html_a32ec85e7444b99ac4e19119c692bed0d"><div class="ttname"><a href="classhelios_1_1memory_1_1ArenaAllocator.html#a32ec85e7444b99ac4e19119c692bed0d">helios::memory::ArenaAllocator::FreeSpace</a></div><div class="ttdeci">size_t FreeSpace() const noexcept</div><div class="ttdoc">Gets the amount of free space remaining.</div><div class="ttdef"><b>Definition</b> <a href="arena__allocator_8hpp_source.html#l00345">arena_allocator.hpp:345</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1ArenaAllocator_html_a3475785b001f0793c15dbbbe2bbcac7d"><div class="ttname"><a href="classhelios_1_1memory_1_1ArenaAllocator.html#a3475785b001f0793c15dbbbe2bbcac7d">helios::memory::ArenaAllocator::Stats</a></div><div class="ttdeci">AllocatorStats Stats() const noexcept</div><div class="ttdoc">Gets current allocator statistics.</div><div class="ttdef"><b>Definition</b> <a href="arena__allocator_8hpp_source.html#l00326">arena_allocator.hpp:326</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1ArenaAllocator_html_a3915081bfcc9f3213bd56c865e48fef7"><div class="ttname"><a href="classhelios_1_1memory_1_1ArenaAllocator.html#a3915081bfcc9f3213bd56c865e48fef7">helios::memory::ArenaAllocator::Empty</a></div><div class="ttdeci">bool Empty() const noexcept</div><div class="ttdoc">Checks if the arena is empty.</div><div class="ttdef"><b>Definition</b> <a href="arena__allocator_8hpp_source.html#l00170">arena_allocator.hpp:170</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1ArenaAllocator_html_a75915b3798191dd116c62369fcac4afb"><div class="ttname"><a href="classhelios_1_1memory_1_1ArenaAllocator.html#a75915b3798191dd116c62369fcac4afb">helios::memory::ArenaAllocator::operator=</a></div><div class="ttdeci">ArenaAllocator &amp; operator=(const ArenaAllocator &amp;)=delete</div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1ArenaAllocator_html_a794480395a3b0003243f23aa148d4149"><div class="ttname"><a href="classhelios_1_1memory_1_1ArenaAllocator.html#a794480395a3b0003243f23aa148d4149">helios::memory::ArenaAllocator::AllocateAndConstructArray</a></div><div class="ttdeci">T * AllocateAndConstructArray(size_t count) noexcept(std::is_nothrow_default_constructible_v&lt; T &gt;)</div><div class="ttdef"><b>Definition</b> <a href="arena__allocator_8hpp_source.html#l00381">arena_allocator.hpp:381</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1ArenaAllocator_html_a80b07abb68fa116395a53120275a59ea"><div class="ttname"><a href="classhelios_1_1memory_1_1ArenaAllocator.html#a80b07abb68fa116395a53120275a59ea">helios::memory::ArenaAllocator::AllocateAndConstruct</a></div><div class="ttdeci">T * AllocateAndConstruct(Args &amp;&amp;... args) noexcept(std::is_nothrow_constructible_v&lt; T, Args... &gt;)</div><div class="ttdef"><b>Definition</b> <a href="arena__allocator_8hpp_source.html#l00371">arena_allocator.hpp:371</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1ArenaAllocator_html_a873e17f6c8bd9167ac6582fd63a2046a"><div class="ttname"><a href="classhelios_1_1memory_1_1ArenaAllocator.html#a873e17f6c8bd9167ac6582fd63a2046a">helios::memory::ArenaAllocator::Data</a></div><div class="ttdeci">const void * Data() const noexcept</div><div class="ttdoc">Gets the raw backing buffer pointer (const).</div><div class="ttdef"><b>Definition</b> <a href="arena__allocator_8hpp_source.html#l00214">arena_allocator.hpp:214</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1ArenaAllocator_html_a96e2a4447321bc24c946d4eb64121763"><div class="ttname"><a href="classhelios_1_1memory_1_1ArenaAllocator.html#a96e2a4447321bc24c946d4eb64121763">helios::memory::ArenaAllocator::Capacity</a></div><div class="ttdeci">size_t Capacity() const noexcept</div><div class="ttdoc">Gets the total capacity of the arena.</div><div class="ttdef"><b>Definition</b> <a href="arena__allocator_8hpp_source.html#l00190">arena_allocator.hpp:190</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1ArenaAllocator_html_a9771b50add2e1abd60961654d94d0b37"><div class="ttname"><a href="classhelios_1_1memory_1_1ArenaAllocator.html#a9771b50add2e1abd60961654d94d0b37">helios::memory::ArenaAllocator::Data</a></div><div class="ttdeci">void * Data() noexcept</div><div class="ttdoc">Gets the raw backing buffer pointer.</div><div class="ttdef"><b>Definition</b> <a href="arena__allocator_8hpp_source.html#l00208">arena_allocator.hpp:208</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1ArenaAllocator_html_a9fdd1308e0fee8e139227a67c59d841a"><div class="ttname"><a href="classhelios_1_1memory_1_1ArenaAllocator.html#a9fdd1308e0fee8e139227a67c59d841a">helios::memory::ArenaAllocator::CurrentOffset</a></div><div class="ttdeci">size_t CurrentOffset() const noexcept</div><div class="ttdoc">Gets the current offset (amount of memory used).</div><div class="ttdef"><b>Definition</b> <a href="arena__allocator_8hpp_source.html#l00196">arena_allocator.hpp:196</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1ArenaAllocator_html_af881a06ca47b627626ba66974ea22e0a"><div class="ttname"><a href="classhelios_1_1memory_1_1ArenaAllocator.html#af881a06ca47b627626ba66974ea22e0a">helios::memory::ArenaAllocator::Deallocate</a></div><div class="ttdeci">void Deallocate(const void *) noexcept</div><div class="ttdoc">Deallocation is a no-op.</div><div class="ttdef"><b>Definition</b> <a href="arena__allocator_8hpp_source.html#l00155">arena_allocator.hpp:155</a></div></div>
+<div class="ttc" id="acore__pch_8hpp_html"><div class="ttname"><a href="core__pch_8hpp.html">core_pch.hpp</a></div></div>
+<div class="ttc" id="alogger_8hpp_html"><div class="ttname"><a href="logger_8hpp.html">logger.hpp</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html"><div class="ttname"><a href="namespacehelios_1_1memory.html">helios::memory</a></div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00011">allocator_traits.hpp:11</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_a02a3db47d40247d1a3769cd533ad6d3d"><div class="ttname"><a href="namespacehelios_1_1memory.html#a02a3db47d40247d1a3769cd533ad6d3d">helios::memory::CalculatePadding</a></div><div class="ttdeci">size_t CalculatePadding(const void *ptr, size_t alignment) noexcept</div><div class="ttdoc">Calculate padding needed for alignment.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00131">allocator_traits.hpp:131</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_a14c84d27b0af2a3d13d38b2d9f6225c4"><div class="ttname"><a href="namespacehelios_1_1memory.html#a14c84d27b0af2a3d13d38b2d9f6225c4">helios::memory::kDefaultAlignment</a></div><div class="ttdeci">constexpr size_t kDefaultAlignment</div><div class="ttdoc">Default alignment for allocations (cache line size for most modern CPUs).</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00077">allocator_traits.hpp:77</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_a443dc78a3e9ae9f92bba519395020b3e"><div class="ttname"><a href="namespacehelios_1_1memory.html#a443dc78a3e9ae9f92bba519395020b3e">helios::memory::IsPowerOfTwo</a></div><div class="ttdeci">constexpr bool IsPowerOfTwo(size_t size) noexcept</div><div class="ttdoc">Helper function to check if a size is a power of 2.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00121">allocator_traits.hpp:121</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_a4b4f9ed5e1cf5fe81a0ccbdb6991395a"><div class="ttname"><a href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">helios::memory::kMinAlignment</a></div><div class="ttdeci">constexpr size_t kMinAlignment</div><div class="ttdoc">Minimum alignment for any allocation.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00082">allocator_traits.hpp:82</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_ace74b72484caaa07fedc5e4f67e6282a"><div class="ttname"><a href="namespacehelios_1_1memory.html#ace74b72484caaa07fedc5e4f67e6282a">helios::memory::Allocate</a></div><div class="ttdeci">constexpr T * Allocate(Alloc &amp;allocator) noexcept</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00182">allocator_traits.hpp:182</a></div></div>
+<div class="ttc" id="astructhelios_1_1memory_1_1AllocationResult_html"><div class="ttname"><a href="structhelios_1_1memory_1_1AllocationResult.html">helios::memory::AllocationResult</a></div><div class="ttdoc">Result type for allocation operations.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00031">allocator_traits.hpp:31</a></div></div>
+<div class="ttc" id="astructhelios_1_1memory_1_1AllocatorStats_html"><div class="ttname"><a href="structhelios_1_1memory_1_1AllocatorStats.html">helios::memory::AllocatorStats</a></div><div class="ttdoc">Statistics for tracking allocator usage.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00017">allocator_traits.hpp:17</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_aebb8dcc11953d78e620bbef0b9e2183.html">core</a></li><li class="navelem"><a class="el" href="dir_8f49dd062eda24395df599c5385a3cb1.html">include</a></li><li class="navelem"><a class="el" href="dir_23069df5183a130785923908e80258ad.html">helios</a></li><li class="navelem"><a class="el" href="dir_2da2d982aeea650f7dd0b34d7b8d0119.html">core</a></li><li class="navelem"><a class="el" href="dir_a1e73eee4396f8349b1f1b11651172a8.html">memory</a></li><li class="navelem"><a class="el" href="arena__allocator_8hpp.html">arena_allocator.hpp</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,642 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: src/core/include/helios/core/ecs/details/event_manager.hpp Source File</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('event__manager_8hpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">event_manager.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="event__manager_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;<a class="code" href="core__pch_8hpp.html">helios/core_pch.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;<a class="code" href="assert_8hpp.html">helios/core/assert.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;<a class="code" href="event__queue_8hpp.html">helios/core/ecs/details/event_queue.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;<a class="code" href="event_8hpp.html">helios/core/ecs/event.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;<a class="code" href="logger_8hpp.html">helios/core/logger.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;cstddef&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;iterator&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;ranges&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;string_view&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &lt;utility&gt;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1ecs_1_1details.html">helios::ecs::details</a> {</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"></span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment"> * @brief Metadata for registered events.</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"> * @details Stores information about event lifecycle management and registration.</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"> */</span></div>
+<div class="foldopen" id="foldopen00025" data-start="{" data-end="};">
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="structhelios_1_1ecs_1_1details_1_1EventMetadata.html">   25</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structhelios_1_1ecs_1_1details_1_1EventMetadata.html">EventMetadata</a> {</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="structhelios_1_1ecs_1_1details_1_1EventMetadata.html#acea8b31afcbc723e2260618299c6831e">   26</a></span>  <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">EventTypeId</a> <a class="code hl_variable" href="structhelios_1_1ecs_1_1details_1_1EventMetadata.html#acea8b31afcbc723e2260618299c6831e">type_id</a> = 0;                                       <span class="comment">///&lt; Unique type identifier for the event</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="structhelios_1_1ecs_1_1details_1_1EventMetadata.html#ae368241aeccc28f1eceec3fd7c6cdc22">   27</a></span>  std::string_view <a class="code hl_variable" href="structhelios_1_1ecs_1_1details_1_1EventMetadata.html#ae368241aeccc28f1eceec3fd7c6cdc22">name</a>;                                         <span class="comment">///&lt; Human-readable name of the event</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="structhelios_1_1ecs_1_1details_1_1EventMetadata.html#a55d43e256a43d74c2965f761ce834e58">   28</a></span>  <a class="code hl_enumeration" href="namespacehelios_1_1ecs.html#ab48aaed34af66c40a97690ad39f727f4">EventClearPolicy</a> <a class="code hl_variable" href="structhelios_1_1ecs_1_1details_1_1EventMetadata.html#a55d43e256a43d74c2965f761ce834e58">clear_policy</a> = <a class="code hl_enumvalue" href="namespacehelios_1_1ecs.html#ab48aaed34af66c40a97690ad39f727f4a0edd03ba1f5a73f26d1fd764255ddaa1">EventClearPolicy::kAutomatic</a>;  <span class="comment">///&lt; Event clearing policy</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="structhelios_1_1ecs_1_1details_1_1EventMetadata.html#a5cfa77ceb56e0ddccc6581921272ca8c">   29</a></span>  <span class="keywordtype">size_t</span> <a class="code hl_variable" href="structhelios_1_1ecs_1_1details_1_1EventMetadata.html#a5cfa77ceb56e0ddccc6581921272ca8c">frame_registered</a> = 0;                                   <span class="comment">///&lt; Frame number when event was registered</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>};</div>
+</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment"></span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment"> * @brief Manages event lifecycle with double buffering and registration tracking.</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment"> * @details Implements Bevy-style event management with:</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment"> * - Double buffering: events persist for one full update cycle</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment"> * - Explicit registration: events must be registered before use</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment"> * - Automatic clearing: events are cleared after their lifecycle expires</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment"> * - Manual control: users can opt-out of auto-clearing for custom events</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment"> * Event Lifecycle:</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment"> * - Frame N: Events written to current queue</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment"> * - Frame N+1: Events readable from previous queue (after swap)</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment"> * - Frame N+2: Events cleared from previous queue</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment"> * @note Not thread-safe.</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment"> */</span></div>
+<div class="foldopen" id="foldopen00047" data-start="{" data-end="};">
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1details_1_1EventManager.html">   47</a></span><span class="keyword">class </span><a class="code hl_class" href="classhelios_1_1ecs_1_1details_1_1EventManager.html">EventManager</a> {</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a361da8d462864344b90c133f5459301f">   49</a></span>  <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a361da8d462864344b90c133f5459301f">EventManager</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a8e1c14caaa2190d8eb0cb8287a7d41e6">   50</a></span>  <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a8e1c14caaa2190d8eb0cb8287a7d41e6">EventManager</a>(<span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1ecs_1_1details_1_1EventManager.html">EventManager</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#ae9bd4f7796d7a3e415d4b706cb2671b9">   51</a></span>  <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#ae9bd4f7796d7a3e415d4b706cb2671b9">EventManager</a>(<a class="code hl_class" href="classhelios_1_1ecs_1_1details_1_1EventManager.html">EventManager</a>&amp;&amp;) <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a> = <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">default</a>;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a06c22d723172b6c1073cc8da83edcbed">   52</a></span>  ~<a class="code hl_class" href="classhelios_1_1ecs_1_1details_1_1EventManager.html">EventManager</a>() = <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">default</a>;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a4cbe38a88f1c43c759650ef94fb7bcac">   54</a></span>  <a class="code hl_class" href="classhelios_1_1ecs_1_1details_1_1EventManager.html">EventManager</a>&amp; <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">operator</a>=(<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">const</a> <a class="code hl_class" href="classhelios_1_1ecs_1_1details_1_1EventManager.html">EventManager</a>&amp;) = <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">delete</a>;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#af4d85b554acc0e4763319ea02662e0bf">   55</a></span>  <a class="code hl_class" href="classhelios_1_1ecs_1_1details_1_1EventManager.html">EventManager</a>&amp; <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">operator</a>=(<a class="code hl_class" href="classhelios_1_1ecs_1_1details_1_1EventManager.html">EventManager</a>&amp;&amp;) <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a> = <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">default</a>;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment"></span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">   * @brief Clears all events and registration data.</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a2105a6a9ef67736626167afd4105a5a4">Clear</a>() <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a>;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment"></span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">   * @brief Clears all event queues without removing registration data.</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">   * @details Useful for manually clearing events while preserving event types.</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">   * Events can still be written/read after calling this method.</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">   * Registration metadata and frame counter are preserved.</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a3063acaae530d7c5caed19a57f5cb42e">ClearAllQueues</a>() <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a>;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment"></span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">   * @brief Manually clears events of a specific type from current and previous queues.</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">   * @details Should be used for manually-managed events (clear_policy = kManual).</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">   * Can also be used as an override for automatic events if needed.</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">   * @warning Triggers assertion if event is not registered.</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment">   * @tparam T Event type</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">template</a> &lt;<a class="code hl_concept" href="concepthelios_1_1ecs_1_1EventTrait.html">EventTrait</a> T&gt;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a0236ab384efd81379ee511e97d113c67">ManualClear</a>();</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment"></span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">   * @brief Updates event lifecycle - swaps buffers and clears old events.</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment">   * @details Should be called at the end of each update cycle.</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">   * Clears previous queue, moves current to previous, creates new current queue.</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a44ff23cc148aad2ac4cb2cc10ae509d3">Update</a>();</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment"></span> </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment">   * @brief Registers an event type for use.</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment">   * @details Uses the event&#39;s GetClearPolicy() if available, otherwise defaults to kAutomatic.</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">   * @warning Triggers assertion if event is already registered.</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">   * @tparam T Event type</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">template</a> &lt;<a class="code hl_concept" href="concepthelios_1_1ecs_1_1EventTrait.html">EventTrait</a> T&gt;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#af744c6366585ab4f90fd6b987df342f6">RegisterEvent</a>();</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="comment"></span> </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment">   * @brief Registers multiple event types for use.</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment">   * @details Each event uses its own GetClearPolicy() if available.</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment">   * @warning Triggers assertion if any event is already registered.</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="comment">   * @tparam Events Event types to register</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>  <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">template</a> &lt;<a class="code hl_concept" href="concepthelios_1_1ecs_1_1EventTrait.html">EventTrait</a>... <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">Events</a>&gt;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">requires</a>(<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">sizeof</a>...(<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">Events</a>) &gt; 1)</div>
+<div class="foldopen" id="foldopen00104" data-start="{" data-end="}">
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a6b01803139a2ff9714730b05f302e1b4">  104</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a6b01803139a2ff9714730b05f302e1b4">RegisterEvents</a>() {</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    (<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">RegisterEvent&lt;Events&gt;</a>(), ...);</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>  }</div>
+</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="comment"></span> </div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="comment">   * @brief Writes a single event to the current queue.</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="comment">   * @warning Triggers assertion if event is not registered.</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="comment">   * @tparam T Event type</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="comment">   * @param event Event to write</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>  <span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a90e1c064310c6c6b5f603dfe5dbd8b06">Write</a>(<span class="keyword">const</span> T&amp; <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">event</a>);</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="comment"></span> </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="comment">   * @brief Writes multiple events to the queue in bulk.</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="comment">   * @warning Triggers assertion if event type does not exist.</span></div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="comment">   * @tparam R Range of events</span></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="comment">   * @param events Range of events to store</span></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>  <span class="keyword">template</span> &lt;std::ranges::sized_range R&gt;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <span class="keyword">requires</span> <a class="code hl_concept" href="concepthelios_1_1ecs_1_1EventTrait.html">EventTrait&lt;std::ranges::range_value_t&lt;R&gt;</a>&gt;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#aef70988c5b8c409cb8e3e4989551814e">WriteBulk</a>(<span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">R</a>&amp; events);</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="comment"></span> </div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="comment">   * @brief Reads all events of a specific type from current and previous queues.</span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="comment">   * @details Events from the current frame and previous frame are returned,</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="comment">   * implementing double buffering for reliable event delivery.</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span><span class="comment">   * @warning Triggers assertion if event is not registered.</span></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="comment">   * @tparam T Event type</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span><span class="comment">   * @return Vector containing all events of type T from both buffers</span></div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>  <span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a37d898888f2c627118f251102097c055">Read</a>() <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">const</a> -&gt; std::vector&lt;T&gt;;</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span><span class="comment"></span> </div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span><span class="comment">   * @brief Reads events of a specific type into a provided output iterator.</span></div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span><span class="comment">   * @details Reads from current and previous queues without intermediate allocations.</span></div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span><span class="comment">   * @warning Triggers assertion if event is not registered.</span></div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span><span class="comment">   * @tparam T Event type</span></div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span><span class="comment">   * @tparam OutIt Output iterator type</span></div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span><span class="comment">   * @param out Output iterator to write events into</span></div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>  <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">template</a> &lt;<a class="code hl_concept" href="concepthelios_1_1ecs_1_1EventTrait.html">EventTrait</a> T, <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typename</a> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">OutIt</a>&gt;</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">requires</a> std::<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">output_iterator</a>&lt;std::<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">remove_reference_t</a>&lt;<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">OutIt</a>&gt;, T&gt;</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a0bcfb807b1be7c463168e6a663bd8df1">ReadInto</a>(<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">OutIt</a> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">out</a>) <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">const</a>;</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span><span class="comment"></span> </div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span><span class="comment">   * @brief Merges events from another EventQueue into the current queue.</span></div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span><span class="comment">   * @param other Event queue to merge from (typically from SystemLocalStorage)</span></div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#af991ff44b2e6efe33f3884be2f7b2bc2">Merge</a>(<a class="code hl_class" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html">EventQueue</a>&amp; other);</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span><span class="comment"></span> </div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span><span class="comment">   * @brief Checks if an event type is registered.</span></div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span><span class="comment">   * @tparam T Event type</span></div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span><span class="comment">   * @return True if event is registered, false otherwise</span></div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>  <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">template</a> &lt;<a class="code hl_concept" href="concepthelios_1_1ecs_1_1EventTrait.html">EventTrait</a> T&gt;</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>  [[<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">nodiscard</a>]] <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a71e6b2ee7dc8541bfd760fb4d5fe4097">IsRegistered</a>() <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">const</a> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a>;</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span><span class="comment"></span> </div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span><span class="comment">   * @brief Checks if both queues are empty.</span></div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span><span class="comment">   * @return True if no events exist in either queue, false otherwise</span></div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a83e9d661c1abc60406ecd4e06411f703">  168</a></span>  [[<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">nodiscard</a>]] <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a83e9d661c1abc60406ecd4e06411f703">Empty</a>() <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">const</a> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a> { <span class="keywordflow">return</span> current_queue_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#a7dc029411a47caec19d06f13446527ad">Empty</a>() &amp;&amp; previous_queue_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#a7dc029411a47caec19d06f13446527ad">Empty</a>(); }</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="comment"></span> </div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span><span class="comment">   * @brief Checks if events of a specific type exist in either queue.</span></div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span><span class="comment">   * @tparam T Event type</span></div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span><span class="comment">   * @return True if events of type T exist, false otherwise</span></div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>  <span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="foldopen" id="foldopen00176" data-start="{" data-end="}">
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a5d48b16e7814cf6dc96d883b94c9bbd2">  176</a></span>  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a5d48b16e7814cf6dc96d883b94c9bbd2">HasEvents</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    <span class="keywordflow">return</span> current_queue_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#ad276882e9155f5b722c3b6c137f39d27">HasEvents</a>&lt;T&gt;() || previous_queue_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#ad276882e9155f5b722c3b6c137f39d27">HasEvents</a>&lt;T&gt;();</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>  }</div>
+</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span><span class="comment"></span> </div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span><span class="comment">   * @brief Gets metadata for a registered event.</span></div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span><span class="comment">   * @tparam T Event type</span></div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span><span class="comment">   * @return Pointer to metadata, or nullptr if not registered</span></div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>  <span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <span class="keyword">const</span> <a class="code hl_struct" href="structhelios_1_1ecs_1_1details_1_1EventMetadata.html">EventMetadata</a>* <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#ab672360b4ecef9141860435236932fd2">GetMetadata</a>() <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">const</a> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a>;</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span><span class="comment"></span> </div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span><span class="comment">   * @brief Gets the current frame number.</span></div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span><span class="comment">   * @return Current frame counter value</span></div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a88c883256893d9deb823a9ed6b0a5a1c">  192</a></span>  [[<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">nodiscard</a>]] <span class="keywordtype">size_t</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a88c883256893d9deb823a9ed6b0a5a1c">GetCurrentFrame</a>() <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">const</a> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a> { <span class="keywordflow">return</span> current_frame_; }</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span><span class="comment"></span> </div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span><span class="comment">   * @brief Gets the number of registered event types.</span></div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span><span class="comment">   * @return Count of registered events</span></div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#aff5cf5d395eeb2a3fd7aa0405843ef0f">  198</a></span>  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <span class="keywordtype">size_t</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#aff5cf5d395eeb2a3fd7aa0405843ef0f">RegisteredEventCount</a>() <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">const</a> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a> { <span class="keywordflow">return</span> registered_events_.size(); }</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span><span class="comment"></span> </div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span><span class="comment">   * @brief Gets reference to current event queue (for testing/debugging).</span></div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span><span class="comment">   * @return Const reference to current queue</span></div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a6f97b63ecf22b6f078d0dc19e67b5a7e">  204</a></span>  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html">EventQueue</a>&amp; <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a6f97b63ecf22b6f078d0dc19e67b5a7e">GetCurrentQueue</a>() <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">const</a> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a> { <span class="keywordflow">return</span> current_queue_; }</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span><span class="comment"></span> </div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span><span class="comment">   * @brief Gets reference to previous event queue (for testing/debugging).</span></div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span><span class="comment">   * @return Const reference to previous queue</span></div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a689e85df1e3776f6f1745e89d80ab044">  210</a></span>  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html">EventQueue</a>&amp; <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a689e85df1e3776f6f1745e89d80ab044">GetPreviousQueue</a>() <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">const</a> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a> { <span class="keywordflow">return</span> previous_queue_; }</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span> </div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>  std::unordered_map&lt;EventTypeId, EventMetadata&gt; registered_events_;  <span class="comment">///&lt; Metadata for registered events</span></div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span> </div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>  <a class="code hl_class" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html">EventQueue</a> current_queue_;   <span class="comment">///&lt; Events written in current frame</span></div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>  <a class="code hl_class" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html">EventQueue</a> previous_queue_;  <span class="comment">///&lt; Events from previous frame (readable for double buffering)</span></div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span> </div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>  <span class="keywordtype">size_t</span> current_frame_ = 0;  <span class="comment">///&lt; Current frame counter for lifecycle tracking</span></div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>};</div>
+</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span> </div>
+<div class="foldopen" id="foldopen00221" data-start="{" data-end="}">
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a2105a6a9ef67736626167afd4105a5a4">  221</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a2105a6a9ef67736626167afd4105a5a4">EventManager::Clear</a>() <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a> {</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>  registered_events_.clear();</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>  current_queue_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#a86288a1af0a4110d136cb75eca7ee89a">Clear</a>();</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>  previous_queue_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#a86288a1af0a4110d136cb75eca7ee89a">Clear</a>();</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>  current_frame_ = 0;</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>}</div>
+</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span> </div>
+<div class="foldopen" id="foldopen00228" data-start="{" data-end="}">
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a3063acaae530d7c5caed19a57f5cb42e">  228</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a3063acaae530d7c5caed19a57f5cb42e">EventManager::ClearAllQueues</a>() <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a> {</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>  current_queue_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#a86288a1af0a4110d136cb75eca7ee89a">Clear</a>();</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>  previous_queue_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#a86288a1af0a4110d136cb75eca7ee89a">Clear</a>();</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>}</div>
+</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span> </div>
+<div class="foldopen" id="foldopen00233" data-start="{" data-end="}">
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a44ff23cc148aad2ac4cb2cc10ae509d3">  233</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a44ff23cc148aad2ac4cb2cc10ae509d3">EventManager::Update</a>() {</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>  <span class="comment">// Double-queue double buffering implementation with selective clearing:</span></div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>  <span class="comment">// 1. Selectively clear auto_clear events from previous_queue_ (events that are now 2 frames old)</span></div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>  <span class="comment">// 2. Merge current queue into previous queue (preserving non-auto_clear events)</span></div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>  <span class="comment">// 3. Create new empty current queue for next frame</span></div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>  <span class="comment">//</span></div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>  <span class="comment">// This ensures:</span></div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>  <span class="comment">// - auto_clear=true events persist for exactly 1 full update cycle</span></div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>  <span class="comment">// - auto_clear=false events persist indefinitely until manually cleared</span></div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>  <span class="comment">//</span></div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>  <span class="comment">// Frame lifecycle:</span></div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>  <span class="comment">// - Frame N: Event written to current_queue_</span></div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>  <span class="comment">// - Frame N+1: Event readable from previous_queue_ (after merge)</span></div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>  <span class="comment">// - Frame N+2: auto_clear=true events cleared, auto_clear=false events remain</span></div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span> </div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>  <span class="comment">// Step 1: Clear automatic events from previous queue (events that are 2+ frames old)</span></div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; [type_id, <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">metadata</a>] : registered_events_) {</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>    <span class="keywordflow">if</span> (<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">metadata</a>.clear_policy == <a class="code hl_enumvalue" href="namespacehelios_1_1ecs.html#ab48aaed34af66c40a97690ad39f727f4a0edd03ba1f5a73f26d1fd764255ddaa1">EventClearPolicy::kAutomatic</a>) {</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>      previous_queue_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#a21d9bfb7e25dbf5460626b3a5766db32">ClearByTypeId</a>(type_id);</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>    }</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>  }</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span> </div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>  <span class="comment">// Step 2: Merge current queue into previous queue</span></div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>  <span class="comment">// This preserves non-auto_clear events from previous queue while adding current frame&#39;s events</span></div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>  previous_queue_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#a0e978a40317de88b9a43306c35b8c6e1">Merge</a>(current_queue_);</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span> </div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>  <span class="comment">// Step 3: Clear current queue for next frame (clear each registered type individually)</span></div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; [type_id, <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">metadata</a>] : registered_events_) {</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>    current_queue_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#a21d9bfb7e25dbf5460626b3a5766db32">ClearByTypeId</a>(type_id);</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>  }</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span> </div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>  ++current_frame_;</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>}</div>
+</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span> </div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="foldopen" id="foldopen00268" data-start="{" data-end="}">
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#af744c6366585ab4f90fd6b987df342f6">  268</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#af744c6366585ab4f90fd6b987df342f6">EventManager::RegisterEvent</a>() {</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>  <span class="keyword">constexpr</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#a4af13cbfd2a10acdc094b4e4eab2cb74">EventTypeId</a> type_id = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">EventTypeIdOf&lt;T&gt;</a>();</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>  <span class="keyword">constexpr</span> std::string_view name = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">EventNameOf&lt;T&gt;</a>();</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>  <span class="keyword">constexpr</span> <a class="code hl_enumeration" href="namespacehelios_1_1ecs.html#ab48aaed34af66c40a97690ad39f727f4">EventClearPolicy</a> clear_policy = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">EventClearPolicyOf&lt;T&gt;</a>();</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span> </div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!registered_events_.contains(type_id), <span class="stringliteral">&quot;Failed to register event &#39;{}&#39;: Event already registered!&quot;</span>,</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>                name);</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span> </div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>  registered_events_.emplace(</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>      type_id, <a class="code hl_struct" href="structhelios_1_1ecs_1_1details_1_1EventMetadata.html">EventMetadata</a>{</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>                   .<a class="code hl_variable" href="structhelios_1_1ecs_1_1details_1_1EventMetadata.html#acea8b31afcbc723e2260618299c6831e">type_id</a> = type_id, .name = name, .clear_policy = clear_policy, .frame_registered = current_frame_});</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span> </div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>  current_queue_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#ac6d4a5cf2eb57b6a965c7182b1a396a0">Register</a>&lt;T&gt;();</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>  previous_queue_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#ac6d4a5cf2eb57b6a965c7182b1a396a0">Register</a>&lt;T&gt;();</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span> </div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>  <span class="keyword">constexpr</span> std::string_view <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">policy_str</a> = (clear_policy == <a class="code hl_enumvalue" href="namespacehelios_1_1ecs.html#ab48aaed34af66c40a97690ad39f727f4a0edd03ba1f5a73f26d1fd764255ddaa1">EventClearPolicy::kAutomatic</a>) ? <span class="stringliteral">&quot;automatic&quot;</span> : <span class="stringliteral">&quot;manual&quot;</span>;</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>  <a class="code hl_define" href="logger_8hpp.html#a19dfad10d07cd557a99345e3d51cba95">HELIOS_DEBUG</a>(<span class="stringliteral">&quot;Registered event &#39;{}&#39; (clear_policy: {})&quot;</span>, name, <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">policy_str</a>);</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>}</div>
+</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span> </div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="foldopen" id="foldopen00288" data-start="{" data-end="}">
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a90e1c064310c6c6b5f603dfe5dbd8b06">  288</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a90e1c064310c6c6b5f603dfe5dbd8b06">EventManager::Write</a>(<span class="keyword">const</span> T&amp; <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">event</a>) {</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(registered_events_.contains(<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">EventTypeIdOf&lt;T&gt;</a>()), <span class="stringliteral">&quot;Failed to write event &#39;{}&#39;: Event is not registered!&quot;</span>,</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>                <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">EventNameOf&lt;T&gt;</a>());</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span> </div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>  current_queue_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#ae77c15357c3a18795761941351988539">Write</a>(<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">event</a>);</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>}</div>
+</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span> </div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span><span class="keyword">template</span> &lt;std::ranges::sized_range R&gt;</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>  <span class="keyword">requires</span> <a class="code hl_concept" href="concepthelios_1_1ecs_1_1EventTrait.html">EventTrait&lt;std::ranges::range_value_t&lt;R&gt;</a>&gt;</div>
+<div class="foldopen" id="foldopen00297" data-start="{" data-end="}">
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#aef70988c5b8c409cb8e3e4989551814e">  297</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#aef70988c5b8c409cb8e3e4989551814e">EventManager::WriteBulk</a>(<span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">R</a>&amp; events) {</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>  <span class="keyword">using </span><a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">EventType</a> = std::ranges::range_value_t&lt;R&gt;;</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(registered_events_.contains(<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">EventTypeIdOf&lt;EventType&gt;</a>()),</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>                <span class="stringliteral">&quot;Failed to write bulk event &#39;{}&#39;: Event is not registered!&quot;</span>, <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">EventNameOf&lt;EventType&gt;</a>());</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span> </div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>  current_queue_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#a0ee465b6d6ce2718593cb0aa851804fb">WriteBulk</a>(events);</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>}</div>
+</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span> </div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="foldopen" id="foldopen00306" data-start="{" data-end="}">
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a37d898888f2c627118f251102097c055">  306</a></span><span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a37d898888f2c627118f251102097c055">EventManager::Read</a>() <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">const</a> -&gt; std::vector&lt;T&gt; {</div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(registered_events_.contains(<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">EventTypeIdOf&lt;T&gt;</a>()), <span class="stringliteral">&quot;Failed to read events &#39;{}&#39;: Event is not registered!&quot;</span>,</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>                <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">EventNameOf&lt;T&gt;</a>());</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span> </div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>  std::vector&lt;T&gt; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">result</a>;</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>  <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">result</a>.reserve(previous_queue_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#af8eb8855a10cc64dd87df034047217b7">TypeCount</a>() + current_queue_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#af8eb8855a10cc64dd87df034047217b7">TypeCount</a>());</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span> </div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>  <span class="comment">// Read from previous queue (events from last frame)</span></div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>  previous_queue_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#ad907a28c65f7c28c04b690f55f3098ac">ReadInto</a>&lt;T&gt;(std::back_inserter(<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">result</a>));</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span> </div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>  <span class="comment">// Read from current queue (events from this frame)</span></div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>  current_queue_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#ad907a28c65f7c28c04b690f55f3098ac">ReadInto</a>&lt;T&gt;(std::back_inserter(<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">result</a>));</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span> </div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>  <span class="keywordflow">return</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">result</a>;</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>}</div>
+</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span> </div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span><span class="keyword">template</span> &lt;EventTrait T, <span class="keyword">typename</span> OutIt&gt;</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>  <span class="keyword">requires</span> std::output_iterator&lt;std::remove_reference_t&lt;OutIt&gt;, T&gt;</div>
+<div class="foldopen" id="foldopen00324" data-start="{" data-end="}">
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a0bcfb807b1be7c463168e6a663bd8df1">  324</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a0bcfb807b1be7c463168e6a663bd8df1">EventManager::ReadInto</a>(<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">OutIt</a> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">out</a>)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(registered_events_.contains(<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">EventTypeIdOf&lt;T&gt;</a>()),</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>                <span class="stringliteral">&quot;Failed to read events &#39;{}&#39; into: Event is not registered!&quot;</span>, <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">EventNameOf&lt;T&gt;</a>());</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span> </div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>  previous_queue_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#ad907a28c65f7c28c04b690f55f3098ac">ReadInto</a>&lt;T&gt;(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">out</a>);</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>  current_queue_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#ad907a28c65f7c28c04b690f55f3098ac">ReadInto</a>&lt;T&gt;(std::move(<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">out</a>));</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>}</div>
+</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span> </div>
+<div class="foldopen" id="foldopen00332" data-start="{" data-end="}">
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#af991ff44b2e6efe33f3884be2f7b2bc2">  332</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#af991ff44b2e6efe33f3884be2f7b2bc2">EventManager::Merge</a>(<a class="code hl_class" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html">EventQueue</a>&amp; other) {</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>  current_queue_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#a0e978a40317de88b9a43306c35b8c6e1">Merge</a>(other);</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>  other.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#a86288a1af0a4110d136cb75eca7ee89a">Clear</a>();</div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>}</div>
+</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span> </div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="foldopen" id="foldopen00338" data-start="{" data-end="}">
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a0236ab384efd81379ee511e97d113c67">  338</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a0236ab384efd81379ee511e97d113c67">EventManager::ManualClear</a>() {</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(registered_events_.contains(<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">EventTypeIdOf&lt;T&gt;</a>()),</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>                <span class="stringliteral">&quot;Failed to manual clear events &#39;{}&#39;: Event is not registered!&quot;</span>, <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">EventNameOf&lt;T&gt;</a>());</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span> </div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>  <span class="comment">// Note: We allow manual clearing for all events (automatic or manual) as an override</span></div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>  <span class="comment">// This can be useful for debugging or special cases</span></div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span> </div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>  current_queue_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#a86288a1af0a4110d136cb75eca7ee89a">Clear</a>&lt;T&gt;();</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>  previous_queue_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#a86288a1af0a4110d136cb75eca7ee89a">Clear</a>&lt;T&gt;();</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>}</div>
+</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span> </div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="foldopen" id="foldopen00350" data-start="{" data-end="}">
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#ab672360b4ecef9141860435236932fd2">  350</a></span><span class="keyword">inline</span> <span class="keyword">const</span> <a class="code hl_struct" href="structhelios_1_1ecs_1_1details_1_1EventMetadata.html">EventMetadata</a>* <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#ab672360b4ecef9141860435236932fd2">EventManager::GetMetadata</a>() <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">const</a> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a> {</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>  <span class="keyword">constexpr</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#a4af13cbfd2a10acdc094b4e4eab2cb74">EventTypeId</a> type_id = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">EventTypeIdOf&lt;T&gt;</a>();</div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>  <span class="keyword">const</span> <span class="keyword">auto</span> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">it</a> = registered_events_.find(type_id);</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>  <span class="keywordflow">return</span> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">it</a> != registered_events_.end() ? &amp;<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">it</a>-&gt;second : <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>}</div>
+</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span> </div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span><span class="keyword">template</span> &lt;EventTrait T&gt;</div>
+<div class="foldopen" id="foldopen00357" data-start="{" data-end="}">
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a71e6b2ee7dc8541bfd760fb4d5fe4097">  357</a></span><span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a71e6b2ee7dc8541bfd760fb4d5fe4097">EventManager::IsRegistered</a>() <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">const</a> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a> {</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>  <span class="keyword">constexpr</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#a4af13cbfd2a10acdc094b4e4eab2cb74">EventTypeId</a> type_id = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">EventTypeIdOf&lt;T&gt;</a>();</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>  <span class="keywordflow">return</span> registered_events_.contains(type_id);</div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>}</div>
+</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span> </div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>}  <span class="comment">// namespace helios::ecs::details</span></div>
+<div class="ttc" id="aassert_8hpp_html"><div class="ttname"><a href="assert_8hpp.html">assert.hpp</a></div></div>
+<div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00149">assert.hpp:149</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1BasicQuery_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicQuery.html">helios::ecs::BasicQuery</a></div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l01107">query.hpp:1107</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventManager_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventManager.html">helios::ecs::details::EventManager</a></div><div class="ttdoc">Manages event lifecycle with double buffering and registration tracking.</div><div class="ttdef"><b>Definition</b> <a href="event__manager_8hpp_source.html#l00047">event_manager.hpp:47</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventManager_html_a0236ab384efd81379ee511e97d113c67"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a0236ab384efd81379ee511e97d113c67">helios::ecs::details::EventManager::ManualClear</a></div><div class="ttdeci">void ManualClear()</div><div class="ttdoc">Manually clears events of a specific type from current and previous queues.</div><div class="ttdef"><b>Definition</b> <a href="event__manager_8hpp_source.html#l00338">event_manager.hpp:338</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventManager_html_a0bcfb807b1be7c463168e6a663bd8df1"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a0bcfb807b1be7c463168e6a663bd8df1">helios::ecs::details::EventManager::ReadInto</a></div><div class="ttdeci">void ReadInto(OutIt out) const</div><div class="ttdoc">Reads events of a specific type into a provided output iterator.</div><div class="ttdef"><b>Definition</b> <a href="event__manager_8hpp_source.html#l00324">event_manager.hpp:324</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventManager_html_a2105a6a9ef67736626167afd4105a5a4"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a2105a6a9ef67736626167afd4105a5a4">helios::ecs::details::EventManager::Clear</a></div><div class="ttdeci">void Clear() noexcept</div><div class="ttdoc">Clears all events and registration data.</div><div class="ttdef"><b>Definition</b> <a href="event__manager_8hpp_source.html#l00221">event_manager.hpp:221</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventManager_html_a3063acaae530d7c5caed19a57f5cb42e"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a3063acaae530d7c5caed19a57f5cb42e">helios::ecs::details::EventManager::ClearAllQueues</a></div><div class="ttdeci">void ClearAllQueues() noexcept</div><div class="ttdoc">Clears all event queues without removing registration data.</div><div class="ttdef"><b>Definition</b> <a href="event__manager_8hpp_source.html#l00228">event_manager.hpp:228</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventManager_html_a361da8d462864344b90c133f5459301f"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a361da8d462864344b90c133f5459301f">helios::ecs::details::EventManager::EventManager</a></div><div class="ttdeci">EventManager()=default</div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventManager_html_a37d898888f2c627118f251102097c055"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a37d898888f2c627118f251102097c055">helios::ecs::details::EventManager::Read</a></div><div class="ttdeci">auto Read() const -&gt; std::vector&lt; T &gt;</div><div class="ttdoc">Reads all events of a specific type from current and previous queues.</div><div class="ttdef"><b>Definition</b> <a href="event__manager_8hpp_source.html#l00306">event_manager.hpp:306</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventManager_html_a44ff23cc148aad2ac4cb2cc10ae509d3"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a44ff23cc148aad2ac4cb2cc10ae509d3">helios::ecs::details::EventManager::Update</a></div><div class="ttdeci">void Update()</div><div class="ttdoc">Updates event lifecycle - swaps buffers and clears old events.</div><div class="ttdef"><b>Definition</b> <a href="event__manager_8hpp_source.html#l00233">event_manager.hpp:233</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventManager_html_a5d48b16e7814cf6dc96d883b94c9bbd2"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a5d48b16e7814cf6dc96d883b94c9bbd2">helios::ecs::details::EventManager::HasEvents</a></div><div class="ttdeci">bool HasEvents() const</div><div class="ttdoc">Checks if events of a specific type exist in either queue.</div><div class="ttdef"><b>Definition</b> <a href="event__manager_8hpp_source.html#l00176">event_manager.hpp:176</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventManager_html_a689e85df1e3776f6f1745e89d80ab044"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a689e85df1e3776f6f1745e89d80ab044">helios::ecs::details::EventManager::GetPreviousQueue</a></div><div class="ttdeci">const EventQueue &amp; GetPreviousQueue() const noexcept</div><div class="ttdoc">Gets reference to previous event queue (for testing/debugging).</div><div class="ttdef"><b>Definition</b> <a href="event__manager_8hpp_source.html#l00210">event_manager.hpp:210</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventManager_html_a6b01803139a2ff9714730b05f302e1b4"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a6b01803139a2ff9714730b05f302e1b4">helios::ecs::details::EventManager::RegisterEvents</a></div><div class="ttdeci">void RegisterEvents()</div><div class="ttdoc">Registers multiple event types for use.</div><div class="ttdef"><b>Definition</b> <a href="event__manager_8hpp_source.html#l00104">event_manager.hpp:104</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventManager_html_a6f97b63ecf22b6f078d0dc19e67b5a7e"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a6f97b63ecf22b6f078d0dc19e67b5a7e">helios::ecs::details::EventManager::GetCurrentQueue</a></div><div class="ttdeci">const EventQueue &amp; GetCurrentQueue() const noexcept</div><div class="ttdoc">Gets reference to current event queue (for testing/debugging).</div><div class="ttdef"><b>Definition</b> <a href="event__manager_8hpp_source.html#l00204">event_manager.hpp:204</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventManager_html_a71e6b2ee7dc8541bfd760fb4d5fe4097"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a71e6b2ee7dc8541bfd760fb4d5fe4097">helios::ecs::details::EventManager::IsRegistered</a></div><div class="ttdeci">bool IsRegistered() const noexcept</div><div class="ttdoc">Checks if an event type is registered.</div><div class="ttdef"><b>Definition</b> <a href="event__manager_8hpp_source.html#l00357">event_manager.hpp:357</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventManager_html_a83e9d661c1abc60406ecd4e06411f703"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a83e9d661c1abc60406ecd4e06411f703">helios::ecs::details::EventManager::Empty</a></div><div class="ttdeci">bool Empty() const noexcept</div><div class="ttdoc">Checks if both queues are empty.</div><div class="ttdef"><b>Definition</b> <a href="event__manager_8hpp_source.html#l00168">event_manager.hpp:168</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventManager_html_a88c883256893d9deb823a9ed6b0a5a1c"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a88c883256893d9deb823a9ed6b0a5a1c">helios::ecs::details::EventManager::GetCurrentFrame</a></div><div class="ttdeci">size_t GetCurrentFrame() const noexcept</div><div class="ttdoc">Gets the current frame number.</div><div class="ttdef"><b>Definition</b> <a href="event__manager_8hpp_source.html#l00192">event_manager.hpp:192</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventManager_html_a8e1c14caaa2190d8eb0cb8287a7d41e6"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a8e1c14caaa2190d8eb0cb8287a7d41e6">helios::ecs::details::EventManager::EventManager</a></div><div class="ttdeci">EventManager(const EventManager &amp;)=delete</div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventManager_html_a90e1c064310c6c6b5f603dfe5dbd8b06"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventManager.html#a90e1c064310c6c6b5f603dfe5dbd8b06">helios::ecs::details::EventManager::Write</a></div><div class="ttdeci">void Write(const T &amp;event)</div><div class="ttdoc">Writes a single event to the current queue.</div><div class="ttdef"><b>Definition</b> <a href="event__manager_8hpp_source.html#l00288">event_manager.hpp:288</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventManager_html_ab672360b4ecef9141860435236932fd2"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventManager.html#ab672360b4ecef9141860435236932fd2">helios::ecs::details::EventManager::GetMetadata</a></div><div class="ttdeci">const EventMetadata * GetMetadata() const noexcept</div><div class="ttdoc">Gets metadata for a registered event.</div><div class="ttdef"><b>Definition</b> <a href="event__manager_8hpp_source.html#l00350">event_manager.hpp:350</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventManager_html_ae9bd4f7796d7a3e415d4b706cb2671b9"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventManager.html#ae9bd4f7796d7a3e415d4b706cb2671b9">helios::ecs::details::EventManager::EventManager</a></div><div class="ttdeci">EventManager(EventManager &amp;&amp;) noexcept=default</div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventManager_html_aef70988c5b8c409cb8e3e4989551814e"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventManager.html#aef70988c5b8c409cb8e3e4989551814e">helios::ecs::details::EventManager::WriteBulk</a></div><div class="ttdeci">void WriteBulk(const R &amp;events)</div><div class="ttdoc">Writes multiple events to the queue in bulk.</div><div class="ttdef"><b>Definition</b> <a href="event__manager_8hpp_source.html#l00297">event_manager.hpp:297</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventManager_html_af744c6366585ab4f90fd6b987df342f6"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventManager.html#af744c6366585ab4f90fd6b987df342f6">helios::ecs::details::EventManager::RegisterEvent</a></div><div class="ttdeci">void RegisterEvent()</div><div class="ttdoc">Registers an event type for use.</div><div class="ttdef"><b>Definition</b> <a href="event__manager_8hpp_source.html#l00268">event_manager.hpp:268</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventManager_html_af991ff44b2e6efe33f3884be2f7b2bc2"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventManager.html#af991ff44b2e6efe33f3884be2f7b2bc2">helios::ecs::details::EventManager::Merge</a></div><div class="ttdeci">void Merge(EventQueue &amp;other)</div><div class="ttdoc">Merges events from another EventQueue into the current queue.</div><div class="ttdef"><b>Definition</b> <a href="event__manager_8hpp_source.html#l00332">event_manager.hpp:332</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventManager_html_aff5cf5d395eeb2a3fd7aa0405843ef0f"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventManager.html#aff5cf5d395eeb2a3fd7aa0405843ef0f">helios::ecs::details::EventManager::RegisteredEventCount</a></div><div class="ttdeci">size_t RegisteredEventCount() const noexcept</div><div class="ttdoc">Gets the number of registered event types.</div><div class="ttdef"><b>Definition</b> <a href="event__manager_8hpp_source.html#l00198">event_manager.hpp:198</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventQueue_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventQueue.html">helios::ecs::details::EventQueue</a></div><div class="ttdoc">Queue for managing multiple event types.</div><div class="ttdef"><b>Definition</b> <a href="event__queue_8hpp_source.html#l00027">event_queue.hpp:27</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventQueue_html_a0e978a40317de88b9a43306c35b8c6e1"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#a0e978a40317de88b9a43306c35b8c6e1">helios::ecs::details::EventQueue::Merge</a></div><div class="ttdeci">void Merge(EventQueue &amp;other)</div><div class="ttdoc">Merges events from another EventQueue into this one.</div><div class="ttdef"><b>Definition</b> <a href="event__queue_8hpp_source.html#l00197">event_queue.hpp:197</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventQueue_html_a0ee465b6d6ce2718593cb0aa851804fb"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#a0ee465b6d6ce2718593cb0aa851804fb">helios::ecs::details::EventQueue::WriteBulk</a></div><div class="ttdeci">void WriteBulk(const R &amp;events)</div><div class="ttdoc">Writes multiple events to the queue in bulk.</div><div class="ttdef"><b>Definition</b> <a href="event__queue_8hpp_source.html#l00166">event_queue.hpp:166</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventQueue_html_a21d9bfb7e25dbf5460626b3a5766db32"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#a21d9bfb7e25dbf5460626b3a5766db32">helios::ecs::details::EventQueue::ClearByTypeId</a></div><div class="ttdeci">void ClearByTypeId(EventTypeId type_id)</div><div class="ttdoc">Clears events of a specific type by type ID (runtime).</div><div class="ttdef"><b>Definition</b> <a href="event__queue_8hpp_source.html#l00247">event_queue.hpp:247</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventQueue_html_a7dc029411a47caec19d06f13446527ad"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#a7dc029411a47caec19d06f13446527ad">helios::ecs::details::EventQueue::Empty</a></div><div class="ttdeci">bool Empty() const noexcept</div><div class="ttdoc">Checks if the queue is empty.</div><div class="ttdef"><b>Definition</b> <a href="event__queue_8hpp_source.html#l00129">event_queue.hpp:129</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventQueue_html_a86288a1af0a4110d136cb75eca7ee89a"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#a86288a1af0a4110d136cb75eca7ee89a">helios::ecs::details::EventQueue::Clear</a></div><div class="ttdeci">void Clear() noexcept</div><div class="ttdoc">Clears all events from the queue.</div><div class="ttdef"><b>Definition</b> <a href="event__queue_8hpp_source.html#l00047">event_queue.hpp:47</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventQueue_html_ac6d4a5cf2eb57b6a965c7182b1a396a0"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#ac6d4a5cf2eb57b6a965c7182b1a396a0">helios::ecs::details::EventQueue::Register</a></div><div class="ttdeci">void Register()</div><div class="ttdoc">Registers an event type with the queue.</div><div class="ttdef"><b>Definition</b> <a href="event__queue_8hpp_source.html#l00150">event_queue.hpp:150</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventQueue_html_ad276882e9155f5b722c3b6c137f39d27"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#ad276882e9155f5b722c3b6c137f39d27">helios::ecs::details::EventQueue::HasEvents</a></div><div class="ttdeci">bool HasEvents() const</div><div class="ttdoc">Checks if events of a specific type exist in the queue.</div><div class="ttdef"><b>Definition</b> <a href="event__queue_8hpp_source.html#l00227">event_queue.hpp:227</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventQueue_html_ad907a28c65f7c28c04b690f55f3098ac"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#ad907a28c65f7c28c04b690f55f3098ac">helios::ecs::details::EventQueue::ReadInto</a></div><div class="ttdeci">void ReadInto(OutIt out) const</div><div class="ttdoc">Reads events of a specific type into a provided output iterator.</div><div class="ttdef"><b>Definition</b> <a href="event__queue_8hpp_source.html#l00187">event_queue.hpp:187</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventQueue_html_ae77c15357c3a18795761941351988539"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#ae77c15357c3a18795761941351988539">helios::ecs::details::EventQueue::Write</a></div><div class="ttdeci">void Write(const T &amp;event)</div><div class="ttdoc">Writes a single event to the queue.</div><div class="ttdef"><b>Definition</b> <a href="event__queue_8hpp_source.html#l00158">event_queue.hpp:158</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventQueue_html_af8eb8855a10cc64dd87df034047217b7"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#af8eb8855a10cc64dd87df034047217b7">helios::ecs::details::EventQueue::TypeCount</a></div><div class="ttdeci">size_t TypeCount() const noexcept</div><div class="ttdoc">Gets the number of event types stored.</div><div class="ttdef"><b>Definition</b> <a href="event__queue_8hpp_source.html#l00137">event_queue.hpp:137</a></div></div>
+<div class="ttc" id="aconcepthelios_1_1ecs_1_1EventTrait_html"><div class="ttname"><a href="concepthelios_1_1ecs_1_1EventTrait.html">helios::ecs::EventTrait</a></div><div class="ttdoc">Concept for valid event types.</div><div class="ttdef"><b>Definition</b> <a href="event_8hpp_source.html#l00044">event.hpp:44</a></div></div>
+<div class="ttc" id="acore__pch_8hpp_html"><div class="ttname"><a href="core__pch_8hpp.html">core_pch.hpp</a></div></div>
+<div class="ttc" id="aevent_8hpp_html"><div class="ttname"><a href="event_8hpp.html">event.hpp</a></div></div>
+<div class="ttc" id="aevent__queue_8hpp_html"><div class="ttname"><a href="event__queue_8hpp.html">event_queue.hpp</a></div></div>
+<div class="ttc" id="alogger_8hpp_html"><div class="ttname"><a href="logger_8hpp.html">logger.hpp</a></div></div>
+<div class="ttc" id="alogger_8hpp_html_a19dfad10d07cd557a99345e3d51cba95"><div class="ttname"><a href="logger_8hpp.html#a19dfad10d07cd557a99345e3d51cba95">HELIOS_DEBUG</a></div><div class="ttdeci">#define HELIOS_DEBUG(...)</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00667">logger.hpp:667</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_1_1details_html"><div class="ttname"><a href="namespacehelios_1_1ecs_1_1details.html">helios::ecs::details</a></div><div class="ttdef"><b>Definition</b> <a href="archetype_8hpp_source.html#l00020">archetype.hpp:20</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_a4af13cbfd2a10acdc094b4e4eab2cb74"><div class="ttname"><a href="namespacehelios_1_1ecs.html#a4af13cbfd2a10acdc094b4e4eab2cb74">helios::ecs::EventTypeId</a></div><div class="ttdeci">size_t EventTypeId</div><div class="ttdoc">Type ID for events.</div><div class="ttdef"><b>Definition</b> <a href="event_8hpp_source.html#l00018">event.hpp:18</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_ab48aaed34af66c40a97690ad39f727f4"><div class="ttname"><a href="namespacehelios_1_1ecs.html#ab48aaed34af66c40a97690ad39f727f4">helios::ecs::EventClearPolicy</a></div><div class="ttdeci">EventClearPolicy</div><div class="ttdoc">Policy for event clearing behavior.</div><div class="ttdef"><b>Definition</b> <a href="event_8hpp_source.html#l00023">event.hpp:23</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_ab48aaed34af66c40a97690ad39f727f4a0edd03ba1f5a73f26d1fd764255ddaa1"><div class="ttname"><a href="namespacehelios_1_1ecs.html#ab48aaed34af66c40a97690ad39f727f4a0edd03ba1f5a73f26d1fd764255ddaa1">helios::ecs::EventClearPolicy::kAutomatic</a></div><div class="ttdeci">@ kAutomatic</div><div class="ttdoc">Events are automatically cleared after double buffer cycle.</div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_af0384de48d847585fcb340c71c231e5e"><div class="ttname"><a href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, Allocator, Components... &gt; Query</div><div class="ttdoc">Type alias for query with mutable world access.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02515">query.hpp:2515</a></div></div>
+<div class="ttc" id="astructhelios_1_1ecs_1_1details_1_1EventMetadata_html"><div class="ttname"><a href="structhelios_1_1ecs_1_1details_1_1EventMetadata.html">helios::ecs::details::EventMetadata</a></div><div class="ttdoc">Metadata for registered events.</div><div class="ttdef"><b>Definition</b> <a href="event__manager_8hpp_source.html#l00025">event_manager.hpp:25</a></div></div>
+<div class="ttc" id="astructhelios_1_1ecs_1_1details_1_1EventMetadata_html_a55d43e256a43d74c2965f761ce834e58"><div class="ttname"><a href="structhelios_1_1ecs_1_1details_1_1EventMetadata.html#a55d43e256a43d74c2965f761ce834e58">helios::ecs::details::EventMetadata::clear_policy</a></div><div class="ttdeci">EventClearPolicy clear_policy</div><div class="ttdoc">Event clearing policy.</div><div class="ttdef"><b>Definition</b> <a href="event__manager_8hpp_source.html#l00028">event_manager.hpp:28</a></div></div>
+<div class="ttc" id="astructhelios_1_1ecs_1_1details_1_1EventMetadata_html_a5cfa77ceb56e0ddccc6581921272ca8c"><div class="ttname"><a href="structhelios_1_1ecs_1_1details_1_1EventMetadata.html#a5cfa77ceb56e0ddccc6581921272ca8c">helios::ecs::details::EventMetadata::frame_registered</a></div><div class="ttdeci">size_t frame_registered</div><div class="ttdoc">Frame number when event was registered.</div><div class="ttdef"><b>Definition</b> <a href="event__manager_8hpp_source.html#l00029">event_manager.hpp:29</a></div></div>
+<div class="ttc" id="astructhelios_1_1ecs_1_1details_1_1EventMetadata_html_acea8b31afcbc723e2260618299c6831e"><div class="ttname"><a href="structhelios_1_1ecs_1_1details_1_1EventMetadata.html#acea8b31afcbc723e2260618299c6831e">helios::ecs::details::EventMetadata::type_id</a></div><div class="ttdeci">EventTypeId type_id</div><div class="ttdoc">Unique type identifier for the event.</div><div class="ttdef"><b>Definition</b> <a href="event__manager_8hpp_source.html#l00026">event_manager.hpp:26</a></div></div>
+<div class="ttc" id="astructhelios_1_1ecs_1_1details_1_1EventMetadata_html_ae368241aeccc28f1eceec3fd7c6cdc22"><div class="ttname"><a href="structhelios_1_1ecs_1_1details_1_1EventMetadata.html#ae368241aeccc28f1eceec3fd7c6cdc22">helios::ecs::details::EventMetadata::name</a></div><div class="ttdeci">std::string_view name</div><div class="ttdoc">Human-readable name of the event.</div><div class="ttdef"><b>Definition</b> <a href="event__manager_8hpp_source.html#l00027">event_manager.hpp:27</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_aebb8dcc11953d78e620bbef0b9e2183.html">core</a></li><li class="navelem"><a class="el" href="dir_8f49dd062eda24395df599c5385a3cb1.html">include</a></li><li class="navelem"><a class="el" href="dir_23069df5183a130785923908e80258ad.html">helios</a></li><li class="navelem"><a class="el" href="dir_2da2d982aeea650f7dd0b34d7b8d0119.html">core</a></li><li class="navelem"><a class="el" href="dir_7abf737f7a2a9df44affdc8a191b0056.html">ecs</a></li><li class="navelem"><a class="el" href="dir_c355aaa2b9423eb3700f582de2286f68.html">details</a></li><li class="navelem"><a class="el" href="event__manager_8hpp.html">event_manager.hpp</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

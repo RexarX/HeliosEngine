@@ -1,0 +1,350 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: /home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_set_config.hpp</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_set_config_8hpp-example.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_set_config.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<p>Fluent builder for configuring system sets with ordering.</p>
+<p>Fluent builder for configuring system sets with ordering. Provides a chainable API for specifying system set dependencies. The configuration is applied when the builder is destroyed or when explicitly finalized. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Schedule</td><td>Schedule type where the set is configured </td></tr>
+    <tr><td class="paramname">Set</td><td>System set type being configured</td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line">app.ConfigureSet&lt;PhysicsSet&gt;(Update{}).After&lt;InputSet&gt;().Before&lt;RenderSet&gt;();</div>
+</div><!-- fragment --><div class="fragment"><div class="line"><span class="preprocessor">#pragma once</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="core__pch_8hpp.html">helios/core_pch.hpp</a>&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="schedule_8hpp.html">helios/core/app/schedule.hpp</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="system__set_8hpp.html">helios/core/app/system_set.hpp</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="common__traits_8hpp.html">helios/core/utils/common_traits.hpp</a>&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;functional&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1app.html">helios::app</a> {</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Forward declaration</span></div>
+<div class="line"><span class="keyword">class </span>SubApp;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief Fluent builder for configuring system sets with ordering.</span></div>
+<div class="line"><span class="comment"> * @details Provides a chainable API for specifying system set dependencies.</span></div>
+<div class="line"><span class="comment"> * The configuration is applied when the builder is destroyed or when explicitly finalized.</span></div>
+<div class="line"><span class="comment"> * @tparam Schedule Schedule type where the set is configured</span></div>
+<div class="line"><span class="comment"> * @tparam Set System set type being configured</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * @example</span></div>
+<div class="line"><span class="comment"> * @code</span></div>
+<div class="line"><span class="comment"> * app.ConfigureSet&lt;PhysicsSet&gt;(Update{}).After&lt;InputSet&gt;().Before&lt;RenderSet&gt;();</span></div>
+<div class="line"><span class="comment"> * @endcode</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">template</span> &lt;ScheduleTrait Schedule, SystemSetTrait Set&gt;</div>
+<div class="line"><span class="keyword">class </span>SystemSetConfig final {</div>
+<div class="line"><span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Constructs a system set configuration builder.</span></div>
+<div class="line"><span class="comment">   * @param sub_app Reference to the sub-app where the set is configured</span></div>
+<div class="line"><span class="comment">   * @param schedule Schedule instance where the set is configured</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">explicit</span> SystemSetConfig(SubApp&amp; sub_app, Schedule schedule = {}) <span class="keyword">noexcept</span> : sub_app_(sub_app), schedule_(schedule) {}</div>
+<div class="line">  SystemSetConfig(<span class="keyword">const</span> SystemSetConfig&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line">  SystemSetConfig(SystemSetConfig&amp;&amp;) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line">  <a id="a0" name="a0"></a><a class="code hl_function" href="classhelios_1_1app_1_1SystemSetConfig.html#a5381e820d0b8cdbd6de53042d4c3ebc8">~SystemSetConfig</a>();</div>
+<div class="line"> </div>
+<div class="line">  SystemSetConfig&amp; <a id="a1" name="a1"></a><a class="code hl_function" href="classhelios_1_1app_1_1SystemSetConfig.html#adb43e4f0d2155b2c377ebb970848c3f1">operator=</a>(<span class="keyword">const</span> SystemSetConfig&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line">  SystemSetConfig&amp; <a class="code hl_function" href="classhelios_1_1app_1_1SystemSetConfig.html#adb43e4f0d2155b2c377ebb970848c3f1">operator=</a>(SystemSetConfig&amp;&amp;) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Adds ordering constraint: this set runs after specified sets.</span></div>
+<div class="line"><span class="comment">   * @details Creates a dependency edge from each specified set to this set.</span></div>
+<div class="line"><span class="comment">   * All systems in the specified sets will run before systems in this set.</span></div>
+<div class="line"><span class="comment">   * @tparam AfterSets System set types that must run before this set</span></div>
+<div class="line"><span class="comment">   * @return Reference to this config for method chaining</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;SystemSetTrait... AfterSets&gt;</div>
+<div class="line">    <span class="keyword">requires</span>(<span class="keyword">sizeof</span>...(AfterSets) &gt; 0 &amp;&amp; utils::UniqueTypes&lt;AfterSets...&gt;)</div>
+<div class="line">  SystemSetConfig&amp; <a id="a2" name="a2"></a><a class="code hl_function" href="classhelios_1_1app_1_1SystemSetConfig.html#ae8a5f81caf52270096ce11e73eb33132">After</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Adds ordering constraint: this set runs before specified sets.</span></div>
+<div class="line"><span class="comment">   * @details Creates a dependency edge from this set to each specified set.</span></div>
+<div class="line"><span class="comment">   * All systems in this set will run before systems in the specified sets.</span></div>
+<div class="line"><span class="comment">   * @tparam BeforeSets System set types that must run after this set</span></div>
+<div class="line"><span class="comment">   * @return Reference to this config for method chaining</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;SystemSetTrait... BeforeSets&gt;</div>
+<div class="line">    <span class="keyword">requires</span>(<span class="keyword">sizeof</span>...(BeforeSets) &gt; 0 &amp;&amp; utils::UniqueTypes&lt;BeforeSets...&gt;)</div>
+<div class="line">  SystemSetConfig&amp; <a id="a3" name="a3"></a><a class="code hl_function" href="classhelios_1_1app_1_1SystemSetConfig.html#abe12c37ad0a3b60fd9664dd3021cd9bb">Before</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Explicitly applies the configuration.</span></div>
+<div class="line"><span class="comment">   * @details Called automatically by destructor if not already applied.</span></div>
+<div class="line"><span class="comment">   * Can be called explicitly to control when configuration is finalized.</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a4" name="a4"></a><a class="code hl_function" href="classhelios_1_1app_1_1SystemSetConfig.html#a09f35765d667a0309eccd05da667be3f">Apply</a>();</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">  std::reference_wrapper&lt;SubApp&gt; sub_app_;  <span class="comment">///&lt; Sub-app where set is configured</span></div>
+<div class="line">  Schedule schedule_;                       <span class="comment">///&lt; Schedule where set is configured</span></div>
+<div class="line">  <span class="keywordtype">bool</span> applied_ = <span class="keyword">false</span>;                    <span class="comment">///&lt; Whether configuration has been applied</span></div>
+<div class="line"> </div>
+<div class="line">  std::vector&lt;SystemSetId&gt; before_sets_;  <span class="comment">///&lt; System sets that run after this set</span></div>
+<div class="line">  std::vector&lt;SystemSetId&gt; after_sets_;   <span class="comment">///&lt; System sets that run before this set</span></div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;ScheduleTrait Schedule, SystemSetTrait Set&gt;</div>
+<div class="line"><span class="keyword">inline</span> <a class="code hl_function" href="classhelios_1_1app_1_1SystemSetConfig.html#a5381e820d0b8cdbd6de53042d4c3ebc8">SystemSetConfig&lt;Schedule, Set&gt;::~SystemSetConfig</a>() {</div>
+<div class="line">  <span class="keywordflow">if</span> (!applied_) {</div>
+<div class="line">    Apply();</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;ScheduleTrait Schedule, SystemSetTrait Set&gt;</div>
+<div class="line"><span class="keyword">template</span> &lt;SystemSetTrait... AfterSets&gt;</div>
+<div class="line">  <span class="keyword">requires</span>(<span class="keyword">sizeof</span>...(AfterSets) &gt; 0 &amp;&amp; utils::UniqueTypes&lt;AfterSets...&gt;)</div>
+<div class="line"><span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1app_1_1SystemSetConfig.html#ae8a5f81caf52270096ce11e73eb33132">SystemSetConfig&lt;Schedule, Set&gt;::After</a>() -&gt; SystemSetConfig&amp; {</div>
+<div class="line">  (after_sets_.push_back(SystemSetIdOf&lt;AfterSets&gt;()), ...);</div>
+<div class="line">  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;ScheduleTrait Schedule, SystemSetTrait Set&gt;</div>
+<div class="line"><span class="keyword">template</span> &lt;SystemSetTrait... BeforeSets&gt;</div>
+<div class="line">  <span class="keyword">requires</span>(<span class="keyword">sizeof</span>...(BeforeSets) &gt; 0 &amp;&amp; utils::UniqueTypes&lt;BeforeSets...&gt;)</div>
+<div class="line"><span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1app_1_1SystemSetConfig.html#abe12c37ad0a3b60fd9664dd3021cd9bb">SystemSetConfig&lt;Schedule, Set&gt;::Before</a>() -&gt; SystemSetConfig&amp; {</div>
+<div class="line">  (before_sets_.push_back(SystemSetIdOf&lt;BeforeSets&gt;()), ...);</div>
+<div class="line">  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;ScheduleTrait Schedule, SystemSetTrait Set&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1app_1_1SystemSetConfig.html#a09f35765d667a0309eccd05da667be3f">SystemSetConfig&lt;Schedule, Set&gt;::Apply</a>() {</div>
+<div class="line">  <span class="keywordflow">if</span> (applied_) {</div>
+<div class="line">    <span class="keywordflow">return</span>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  applied_ = <span class="keyword">true</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">auto</span>&amp; sub_app = sub_app_.get();</div>
+<div class="line">  <span class="keyword">auto</span>&amp; scheduler = sub_app.GetScheduler();</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Ensure this set exists in the registry</span></div>
+<div class="line">  <span class="keyword">const</span> <span class="keyword">auto</span>&amp; this_info = scheduler.template GetOrRegisterSystemSet&lt;Set&gt;();</div>
+<div class="line">  <span class="keyword">const</span> <a id="a5" name="a5"></a><a class="code hl_typedef" href="namespacehelios_1_1app.html#ac8d5585fdc5fe5dbb999827e9a2e2257">SystemSetId</a> this_id = this_info.id;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Register &quot;After&quot; relationships:</span></div>
+<div class="line">  <span class="comment">//   ConfigureSet&lt;Set&gt;().After&lt;A, B&gt;()</span></div>
+<div class="line">  <span class="comment">// means all systems in A and B must run before systems in Set.</span></div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1app.html#ac8d5585fdc5fe5dbb999827e9a2e2257">SystemSetId</a> after_id : after_sets_) {</div>
+<div class="line">    scheduler.AddSetRunsBefore(after_id, this_id);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Register &quot;Before&quot; relationships:</span></div>
+<div class="line">  <span class="comment">//   ConfigureSet&lt;Set&gt;().Before&lt;A, B&gt;()</span></div>
+<div class="line">  <span class="comment">// means all systems in Set must run before systems in A and B.</span></div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1app.html#ac8d5585fdc5fe5dbb999827e9a2e2257">SystemSetId</a> before_id : before_sets_) {</div>
+<div class="line">    scheduler.AddSetRunsBefore(this_id, before_id);</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">}  <span class="comment">// namespace helios::app</span></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SystemSetConfig_html_a09f35765d667a0309eccd05da667be3f"><div class="ttname"><a href="classhelios_1_1app_1_1SystemSetConfig.html#a09f35765d667a0309eccd05da667be3f">helios::app::SystemSetConfig::Apply</a></div><div class="ttdeci">void Apply()</div><div class="ttdoc">Explicitly applies the configuration.</div><div class="ttdef"><b>Definition</b> <a href="system__set__config_8hpp_source.html#l00107">system_set_config.hpp:107</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SystemSetConfig_html_a5381e820d0b8cdbd6de53042d4c3ebc8"><div class="ttname"><a href="classhelios_1_1app_1_1SystemSetConfig.html#a5381e820d0b8cdbd6de53042d4c3ebc8">helios::app::SystemSetConfig::~SystemSetConfig</a></div><div class="ttdeci">~SystemSetConfig()</div><div class="ttdef"><b>Definition</b> <a href="system__set__config_8hpp_source.html#l00084">system_set_config.hpp:84</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SystemSetConfig_html_abe12c37ad0a3b60fd9664dd3021cd9bb"><div class="ttname"><a href="classhelios_1_1app_1_1SystemSetConfig.html#abe12c37ad0a3b60fd9664dd3021cd9bb">helios::app::SystemSetConfig::Before</a></div><div class="ttdeci">SystemSetConfig &amp; Before()</div><div class="ttdoc">Adds ordering constraint: this set runs before specified sets.</div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SystemSetConfig_html_adb43e4f0d2155b2c377ebb970848c3f1"><div class="ttname"><a href="classhelios_1_1app_1_1SystemSetConfig.html#adb43e4f0d2155b2c377ebb970848c3f1">helios::app::SystemSetConfig::operator=</a></div><div class="ttdeci">SystemSetConfig &amp; operator=(const SystemSetConfig &amp;)=delete</div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SystemSetConfig_html_ae8a5f81caf52270096ce11e73eb33132"><div class="ttname"><a href="classhelios_1_1app_1_1SystemSetConfig.html#ae8a5f81caf52270096ce11e73eb33132">helios::app::SystemSetConfig::After</a></div><div class="ttdeci">SystemSetConfig &amp; After()</div><div class="ttdoc">Adds ordering constraint: this set runs after specified sets.</div></div>
+<div class="ttc" id="acommon__traits_8hpp_html"><div class="ttname"><a href="common__traits_8hpp.html">common_traits.hpp</a></div></div>
+<div class="ttc" id="acore__pch_8hpp_html"><div class="ttname"><a href="core__pch_8hpp.html">core_pch.hpp</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1app_html"><div class="ttname"><a href="namespacehelios_1_1app.html">helios::app</a></div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00017">access_policy.hpp:17</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1app_html_ac8d5585fdc5fe5dbb999827e9a2e2257"><div class="ttname"><a href="namespacehelios_1_1app.html#ac8d5585fdc5fe5dbb999827e9a2e2257">helios::app::SystemSetId</a></div><div class="ttdeci">size_t SystemSetId</div><div class="ttdoc">Type alias for system set type IDs.</div><div class="ttdef"><b>Definition</b> <a href="system__set_8hpp_source.html#l00019">system_set.hpp:19</a></div></div>
+<div class="ttc" id="aschedule_8hpp_html"><div class="ttname"><a href="schedule_8hpp.html">schedule.hpp</a></div></div>
+<div class="ttc" id="asystem__set_8hpp_html"><div class="ttname"><a href="system__set_8hpp.html">system_set.hpp</a></div></div>
+</div><!-- fragment --> </div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

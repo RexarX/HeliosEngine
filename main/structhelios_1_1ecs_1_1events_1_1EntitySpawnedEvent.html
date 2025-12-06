@@ -1,0 +1,308 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: helios::ecs::events::EntitySpawnedEvent Struct Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('structhelios_1_1ecs_1_1events_1_1EntitySpawnedEvent.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="structhelios_1_1ecs_1_1events_1_1EntitySpawnedEvent-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">helios::ecs::events::EntitySpawnedEvent Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Event emitted when an entity is spawned/created.  
+ <a href="structhelios_1_1ecs_1_1events_1_1EntitySpawnedEvent.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="builtin__events_8hpp_source.html">builtin_events.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:adce2fac20068a20d527046564d048324" id="r_adce2fac20068a20d527046564d048324"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">static</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1ecs_1_1events_1_1EntitySpawnedEvent.html#adce2fac20068a20d527046564d048324">GetName</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:adce2fac20068a20d527046564d048324"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the event name.  <br /></td></tr>
+<tr class="separator:adce2fac20068a20d527046564d048324"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45c9d517ab92a58b4a1fbf06a5a6fbad" id="r_a45c9d517ab92a58b4a1fbf06a5a6fbad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">static</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="namespacehelios_1_1ecs.html#ab48aaed34af66c40a97690ad39f727f4">EventClearPolicy</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1ecs_1_1events_1_1EntitySpawnedEvent.html#a45c9d517ab92a58b4a1fbf06a5a6fbad">GetClearPolicy</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:a45c9d517ab92a58b4a1fbf06a5a6fbad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the clear policy for this event.  <br /></td></tr>
+<tr class="separator:a45c9d517ab92a58b4a1fbf06a5a6fbad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a9fff2ca803c4b18ffd7709ba37f3244a" id="r_a9fff2ca803c4b18ffd7709ba37f3244a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1ecs_1_1events_1_1EntitySpawnedEvent.html#a9fff2ca803c4b18ffd7709ba37f3244a">entity</a></td></tr>
+<tr class="memdesc:a9fff2ca803c4b18ffd7709ba37f3244a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The spawned entity.  <br /></td></tr>
+<tr class="separator:a9fff2ca803c4b18ffd7709ba37f3244a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Event emitted when an entity is spawned/created. </p>
+<p>This event is automatically emitted by <a class="el" href="classhelios_1_1ecs_1_1World.html#aaf78a7e15fe124eb717de0adf235148e" title="Creates new entity.">World::CreateEntity()</a> and <a class="el" href="classhelios_1_1ecs_1_1World.html#a53dda20f903273f1af3f8fe762f380c6" title="Reserves an entity ID for deferred creation.">World::ReserveEntity()</a> if the event is registered via <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e" title="Type alias for query with mutable world access.">AddEvent&lt;EntitySpawnedEvent&gt;()</a>. </p><dl class="section note"><dt>Note</dt><dd>Must be trivially copyable for event storage requirements. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="builtin__events_8hpp_source.html#l00019">19</a> of file <a class="el" href="builtin__events_8hpp_source.html">builtin_events.hpp</a>.</p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a45c9d517ab92a58b4a1fbf06a5a6fbad" name="a45c9d517ab92a58b4a1fbf06a5a6fbad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45c9d517ab92a58b4a1fbf06a5a6fbad">&#9670;&#160;</a></span>GetClearPolicy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">static</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="namespacehelios_1_1ecs.html#ab48aaed34af66c40a97690ad39f727f4">EventClearPolicy</a> helios::ecs::events::EntitySpawnedEvent::GetClearPolicy </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the clear policy for this event. </p>
+<dl class="section return"><dt>Returns</dt><dd>Event clear policy (automatic) </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="builtin__events_8hpp_source.html#l00032">32</a> of file <a class="el" href="builtin__events_8hpp_source.html">builtin_events.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   32</span>{ <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="namespacehelios_1_1ecs.html#ab48aaed34af66c40a97690ad39f727f4a0edd03ba1f5a73f26d1fd764255ddaa1">EventClearPolicy::kAutomatic</a>; }</div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_ab48aaed34af66c40a97690ad39f727f4a0edd03ba1f5a73f26d1fd764255ddaa1"><div class="ttname"><a href="namespacehelios_1_1ecs.html#ab48aaed34af66c40a97690ad39f727f4a0edd03ba1f5a73f26d1fd764255ddaa1">helios::ecs::EventClearPolicy::kAutomatic</a></div><div class="ttdeci">@ kAutomatic</div><div class="ttdoc">Events are automatically cleared after double buffer cycle.</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="adce2fac20068a20d527046564d048324" name="adce2fac20068a20d527046564d048324"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adce2fac20068a20d527046564d048324">&#9670;&#160;</a></span>GetName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">static</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> std::string_view helios::ecs::events::EntitySpawnedEvent::GetName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the event name. </p>
+<dl class="section return"><dt>Returns</dt><dd>Event name string </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="builtin__events_8hpp_source.html#l00026">26</a> of file <a class="el" href="builtin__events_8hpp_source.html">builtin_events.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   26</span>{ <span class="keywordflow">return</span> <span class="stringliteral">&quot;EntitySpawnedEvent&quot;</span>; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a9fff2ca803c4b18ffd7709ba37f3244a" name="a9fff2ca803c4b18ffd7709ba37f3244a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fff2ca803c4b18ffd7709ba37f3244a">&#9670;&#160;</a></span>entity</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> helios::ecs::events::EntitySpawnedEvent::entity</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The spawned entity. </p>
+
+<p class="definition">Definition at line <a class="el" href="builtin__events_8hpp_source.html#l00020">20</a> of file <a class="el" href="builtin__events_8hpp_source.html">builtin_events.hpp</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehelios.html">helios</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1ecs.html">ecs</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1ecs_1_1events.html">events</a></li><li class="navelem"><a class="el" href="structhelios_1_1ecs_1_1events_1_1EntitySpawnedEvent.html">EntitySpawnedEvent</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

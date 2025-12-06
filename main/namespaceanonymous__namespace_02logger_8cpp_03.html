@@ -1,0 +1,401 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: anonymous_namespace{logger.cpp} Namespace Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('namespaceanonymous__namespace_02logger_8cpp_03.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">anonymous_namespace{logger.cpp} Namespace Reference</div></div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classanonymous__namespace_02logger_8cpp_03_1_1SourceLocationFormatterFlag.html">SourceLocationFormatterFlag</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a917e1b23a3ddf5e8bf602f1bd213de10" id="r_a917e1b23a3ddf5e8bf602f1bd213de10"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceanonymous__namespace_02logger_8cpp_03.html#a917e1b23a3ddf5e8bf602f1bd213de10">GenerateTimestamp</a> () noexcept -&gt; std::expected&lt; std::string, std::string_view &gt;</td></tr>
+<tr class="separator:a917e1b23a3ddf5e8bf602f1bd213de10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe6f99d90d512cc3306b81dc49a2130e" id="r_afe6f99d90d512cc3306b81dc49a2130e"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceanonymous__namespace_02logger_8cpp_03.html#afe6f99d90d512cc3306b81dc49a2130e">FormatLogFileName</a> (std::string_view logger_name, std::string_view pattern)</td></tr>
+<tr class="separator:afe6f99d90d512cc3306b81dc49a2130e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a2e849b565de9a82f49ccc995de8dda18" id="r_a2e849b565de9a82f49ccc995de8dda18"><td class="memItemLeft" align="right" valign="top">constexpr size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceanonymous__namespace_02logger_8cpp_03.html#a2e849b565de9a82f49ccc995de8dda18">kFormatBufferReserveSize</a> = 256</td></tr>
+<tr class="separator:a2e849b565de9a82f49ccc995de8dda18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70171f38f48ec225f8ee0c06baf02b21" id="r_a70171f38f48ec225f8ee0c06baf02b21"><td class="memItemLeft" align="right" valign="top">constexpr size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceanonymous__namespace_02logger_8cpp_03.html#a70171f38f48ec225f8ee0c06baf02b21">kMaxStackTraceFrames</a> = 10</td></tr>
+<tr class="separator:a70171f38f48ec225f8ee0c06baf02b21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae03a7be1d791bd78197eea63049c714f" id="r_ae03a7be1d791bd78197eea63049c714f"><td class="memItemLeft" align="right" valign="top">constexpr size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceanonymous__namespace_02logger_8cpp_03.html#ae03a7be1d791bd78197eea63049c714f">kStackTraceReserveSize</a> = 512</td></tr>
+<tr class="separator:ae03a7be1d791bd78197eea63049c714f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="afe6f99d90d512cc3306b81dc49a2130e" name="afe6f99d90d512cc3306b81dc49a2130e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe6f99d90d512cc3306b81dc49a2130e">&#9670;&#160;</a></span>FormatLogFileName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string anonymous_namespace{logger.cpp}::FormatLogFileName </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>logger_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>pattern</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00257">257</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  257</span>                                                                                              {</div>
+<div class="line"><span class="lineno">  258</span>  std::string result(pattern);</div>
+<div class="line"><span class="lineno">  259</span> </div>
+<div class="line"><span class="lineno">  260</span>  <span class="keywordtype">size_t</span> pos = result.find(<span class="stringliteral">&quot;{name}&quot;</span>);</div>
+<div class="line"><span class="lineno">  261</span>  <span class="keywordflow">if</span> (pos != std::string::npos) {</div>
+<div class="line"><span class="lineno">  262</span>    result.replace(pos, 6, logger_name);</div>
+<div class="line"><span class="lineno">  263</span>  }</div>
+<div class="line"><span class="lineno">  264</span> </div>
+<div class="line"><span class="lineno">  265</span>  pos = result.find(<span class="stringliteral">&quot;{timestamp}&quot;</span>);</div>
+<div class="line"><span class="lineno">  266</span>  <span class="keywordflow">if</span> (pos != std::string::npos) {</div>
+<div class="line"><span class="lineno">  267</span>    <span class="keyword">const</span> std::string timestamp = <a class="code hl_function" href="namespaceanonymous__namespace_02logger_8cpp_03.html#a917e1b23a3ddf5e8bf602f1bd213de10">GenerateTimestamp</a>().value_or(<span class="stringliteral">&quot;unknown_time&quot;</span>);</div>
+<div class="line"><span class="lineno">  268</span>    result.replace(pos, 11, timestamp);</div>
+<div class="line"><span class="lineno">  269</span>  }</div>
+<div class="line"><span class="lineno">  270</span> </div>
+<div class="line"><span class="lineno">  271</span>  <span class="keywordflow">return</span> result;</div>
+<div class="line"><span class="lineno">  272</span>}</div>
+<div class="ttc" id="anamespaceanonymous__namespace_02logger_8cpp_03_html_a917e1b23a3ddf5e8bf602f1bd213de10"><div class="ttname"><a href="namespaceanonymous__namespace_02logger_8cpp_03.html#a917e1b23a3ddf5e8bf602f1bd213de10">anonymous_namespace{logger.cpp}::GenerateTimestamp</a></div><div class="ttdeci">auto GenerateTimestamp() noexcept -&gt; std::expected&lt; std::string, std::string_view &gt;</div><div class="ttdef"><b>Definition</b> <a href="logger_8cpp_source.html#l00041">logger.cpp:41</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a917e1b23a3ddf5e8bf602f1bd213de10" name="a917e1b23a3ddf5e8bf602f1bd213de10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a917e1b23a3ddf5e8bf602f1bd213de10">&#9670;&#160;</a></span>GenerateTimestamp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto anonymous_namespace{logger.cpp}::GenerateTimestamp </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt; std::expected&lt;std::string, std::string_view&gt; </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00041">41</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   41</span>                                                                                          {</div>
+<div class="line"><span class="lineno">   42</span>  <span class="keywordflow">try</span> {</div>
+<div class="line"><span class="lineno">   43</span>    <span class="keyword">const</span> <span class="keyword">auto</span> now = std::chrono::system_clock::now();</div>
+<div class="line"><span class="lineno">   44</span>    <span class="keyword">const</span> <span class="keyword">auto</span> time_t_now = std::chrono::system_clock::to_time_t(now);</div>
+<div class="line"><span class="lineno">   45</span> </div>
+<div class="line"><span class="lineno">   46</span>    std::tm local_time{};</div>
+<div class="line"><span class="lineno">   47</span> </div>
+<div class="line"><span class="lineno">   48</span>    <span class="comment">// Needed because of compatibility issues on Windows</span></div>
+<div class="line"><span class="lineno">   49</span>    <span class="comment">// For more info: https://en.cppreference.com/w/c/chrono/localtime.html</span></div>
+<div class="line"><span class="lineno">   50</span><span class="preprocessor">#ifdef _WIN32</span></div>
+<div class="line"><span class="lineno">   51</span>    <span class="keyword">const</span> errno_t err = localtime_s(&amp;local_time, &amp;time_t_now);</div>
+<div class="line"><span class="lineno">   52</span>    <span class="keywordflow">if</span> (err != 0) [[unlikely]] {</div>
+<div class="line"><span class="lineno">   53</span>      <span class="keywordflow">return</span> std::unexpected(<span class="stringliteral">&quot;Failed to get local time&quot;</span>);</div>
+<div class="line"><span class="lineno">   54</span>    }</div>
+<div class="line"><span class="lineno">   55</span><span class="preprocessor">#else</span></div>
+<div class="line"><span class="lineno">   56</span>    <span class="keyword">const</span> std::tm* <span class="keyword">const</span> local_time_ptr = localtime_r(&amp;time_t_now, &amp;local_time);</div>
+<div class="line"><span class="lineno">   57</span>    <span class="keywordflow">if</span> (local_time_ptr == <span class="keyword">nullptr</span>) [[unlikely]] {</div>
+<div class="line"><span class="lineno">   58</span>      <span class="keywordflow">return</span> std::unexpected(<span class="stringliteral">&quot;Failed to get local time&quot;</span>);</div>
+<div class="line"><span class="lineno">   59</span>    }</div>
+<div class="line"><span class="lineno">   60</span><span class="preprocessor">#endif</span></div>
+<div class="line"><span class="lineno">   61</span> </div>
+<div class="line"><span class="lineno">   62</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> year = local_time.tm_year + 1900;</div>
+<div class="line"><span class="lineno">   63</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> month = local_time.tm_mon + 1;</div>
+<div class="line"><span class="lineno">   64</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> day = local_time.tm_mday;</div>
+<div class="line"><span class="lineno">   65</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> hour = local_time.tm_hour;</div>
+<div class="line"><span class="lineno">   66</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> min = local_time.tm_min;</div>
+<div class="line"><span class="lineno">   67</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> sec = local_time.tm_sec;</div>
+<div class="line"><span class="lineno">   68</span>    <span class="keywordflow">return</span> std::format(<span class="stringliteral">&quot;{:04d}-{:02d}-{:02d}_{:02d}-{:02d}-{:02d}&quot;</span>, year, month, day, hour, min, sec);</div>
+<div class="line"><span class="lineno">   69</span>  } <span class="keywordflow">catch</span> (...) {</div>
+<div class="line"><span class="lineno">   70</span>    <span class="keywordflow">return</span> std::unexpected(<span class="stringliteral">&quot;Exception during timestamp generation&quot;</span>);</div>
+<div class="line"><span class="lineno">   71</span>  }</div>
+<div class="line"><span class="lineno">   72</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a2e849b565de9a82f49ccc995de8dda18" name="a2e849b565de9a82f49ccc995de8dda18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e849b565de9a82f49ccc995de8dda18">&#9670;&#160;</a></span>kFormatBufferReserveSize</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr size_t anonymous_namespace{logger.cpp}::kFormatBufferReserveSize = 256</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00037">37</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a70171f38f48ec225f8ee0c06baf02b21" name="a70171f38f48ec225f8ee0c06baf02b21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70171f38f48ec225f8ee0c06baf02b21">&#9670;&#160;</a></span>kMaxStackTraceFrames</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr size_t anonymous_namespace{logger.cpp}::kMaxStackTraceFrames = 10</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00038">38</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ae03a7be1d791bd78197eea63049c714f" name="ae03a7be1d791bd78197eea63049c714f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae03a7be1d791bd78197eea63049c714f">&#9670;&#160;</a></span>kStackTraceReserveSize</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr size_t anonymous_namespace{logger.cpp}::kStackTraceReserveSize = 512</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00039">39</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespaceanonymous__namespace_02logger_8cpp_03.html">anonymous_namespace{logger.cpp}</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

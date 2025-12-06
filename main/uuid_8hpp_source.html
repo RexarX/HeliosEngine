@@ -1,0 +1,431 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: src/core/include/helios/core/uuid.hpp Source File</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('uuid_8hpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">uuid.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="uuid_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;<a class="code" href="core__pch_8hpp.html">helios/core_pch.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;uuid.h&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;algorithm&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;array&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;bit&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;concepts&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;cstddef&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;functional&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;random&gt;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &lt;span&gt;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &lt;string_view&gt;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios.html">helios</a> {</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"></span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"> * @brief A class representing a universally unique identifier (UUID).</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"> */</span></div>
+<div class="foldopen" id="foldopen00025" data-start="{" data-end="};">
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="classhelios_1_1Uuid.html">   25</a></span><span class="keyword">class </span><a class="code hl_class" href="classhelios_1_1Uuid.html">Uuid</a> {</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">   * @brief Default constructor creates an invalid UUID (all zeros).</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="classhelios_1_1Uuid.html#a3d6656a8831b8e753f4b5f47b26f5913">   30</a></span>  <span class="keyword">constexpr</span> <a class="code hl_function" href="classhelios_1_1Uuid.html#a3d6656a8831b8e753f4b5f47b26f5913">Uuid</a>() noexcept = default;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment"></span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">   * @brief Construct a UUID from a string representation.</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">   * @details If the string is not a valid UUID, the resulting UUID will be invalid.</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">   * @param str The string representation of the UUID.</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  explicit <a class="code hl_class" href="classhelios_1_1Uuid.html">Uuid</a>(std::string_view str);</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment"></span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">   * @brief Construct a UUID from a span of bytes.</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">   * @details The span must be exactly 16 bytes long; otherwise, the resulting UUID will be invalid.</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">   * @param bytes A span of bytes representing the UUID.</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  explicit <a class="code hl_class" href="classhelios_1_1Uuid.html">Uuid</a>(std::span&lt;const std::<span class="keywordtype">byte</span>&gt; bytes);</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="classhelios_1_1Uuid.html#a221881b2a259b40d80566cb7b218343b">   45</a></span>  <a class="code hl_class" href="classhelios_1_1Uuid.html">Uuid</a>(const <a class="code hl_class" href="classhelios_1_1Uuid.html">Uuid</a>&amp;) = default;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classhelios_1_1Uuid.html#a528d667fd63dc33531bbad4b925205eb">   46</a></span>  <a class="code hl_class" href="classhelios_1_1Uuid.html">Uuid</a>(<a class="code hl_class" href="classhelios_1_1Uuid.html">Uuid</a>&amp;&amp;) noexcept = default;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="classhelios_1_1Uuid.html#a2d71362b0785d3f0d1ca5126dfa7aa43">   47</a></span>  ~<a class="code hl_class" href="classhelios_1_1Uuid.html">Uuid</a>() = default;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="classhelios_1_1Uuid.html#adc5f3aef89da493cd7dab842880308be">   49</a></span>  <a class="code hl_class" href="classhelios_1_1Uuid.html">Uuid</a>&amp; operator=(const <a class="code hl_class" href="classhelios_1_1Uuid.html">Uuid</a>&amp;) = default;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="classhelios_1_1Uuid.html#a883c76712336c72f2cb52814055092a3">   50</a></span>  <a class="code hl_class" href="classhelios_1_1Uuid.html">Uuid</a>&amp; operator=(<a class="code hl_class" href="classhelios_1_1Uuid.html">Uuid</a>&amp;&amp;) noexcept = default;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment"></span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">   * @brief Generate a new random UUID.</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">   * @details Uses a thread_local generator for thread-safety without locks.</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">   * Each thread maintains its own generator state for optimal performance.</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">   * @return A new random UUID.</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  static <a class="code hl_class" href="classhelios_1_1Uuid.html">Uuid</a> <a class="code hl_function" href="classhelios_1_1Uuid.html#a84560f17c2874de68e408ac5704347ae">Generate</a>();</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment"></span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">   * @brief Convert the UUID to its string representation.</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">   * @return The string representation of the UUID, or an empty string if the UUID is invalid.</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  [[nodiscard]] std::<span class="keywordtype">string</span> <a class="code hl_function" href="classhelios_1_1Uuid.html#a63c5c1a87aceecb2cb4a52f216be18fc">ToString</a>() const;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment"></span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">   * @brief Get the UUID as a span of bytes.</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">   * @return A span of bytes representing the UUID, or an empty span if the UUID is invalid.</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  [[nodiscard]] auto <a class="code hl_function" href="classhelios_1_1Uuid.html#a029ac887e3b0ccd318c2a1ed4b9d92ad">AsBytes</a>() const -&gt; std::span&lt;const std::<span class="keywordtype">byte</span>&gt;;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="classhelios_1_1Uuid.html#a9ee05777475cf647130c9f45e2415919">   72</a></span>  [[nodiscard]] <span class="keywordtype">bool</span> operator==(const <a class="code hl_class" href="classhelios_1_1Uuid.html">Uuid</a>&amp; other) const noexcept { <span class="keywordflow">return</span> uuid_ == other.uuid_; }</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="classhelios_1_1Uuid.html#a948ce81fb6998221a90046a48738ab2c">   73</a></span>  [[nodiscard]] <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1Uuid.html#a948ce81fb6998221a90046a48738ab2c">operator!=</a>(<span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1Uuid.html">Uuid</a>&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> !(*<span class="keyword">this</span> == other); }</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="classhelios_1_1Uuid.html#a33c033c75ad3811f09c1b21884efcca6">   75</a></span>  [[nodiscard]] <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1Uuid.html#a33c033c75ad3811f09c1b21884efcca6">operator&lt;</a>(<span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1Uuid.html">Uuid</a>&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> uuid_ &lt; other.uuid_; }</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment"></span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">   * @brief Check if the UUID is valid (not all zeros).</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">   * @return True if the UUID is valid, false otherwise.</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="classhelios_1_1Uuid.html#abfb3a7d9213d6db2f3b6d3bdb44a3dae">   81</a></span>  [[nodiscard]] <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1Uuid.html#abfb3a7d9213d6db2f3b6d3bdb44a3dae">Valid</a>() const noexcept { <span class="keywordflow">return</span> !uuid_.is_nil(); }</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment"></span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment">   * @brief Compute a hash value for the UUID.</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment">   * @return A hash value for the UUID.</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="classhelios_1_1Uuid.html#a62b925a337e1ab96b73dc2d79452d2c9">   87</a></span>  [[nodiscard]] <span class="keywordtype">size_t</span> <a class="code hl_function" href="classhelios_1_1Uuid.html#a62b925a337e1ab96b73dc2d79452d2c9">Hash</a>() const noexcept { <span class="keywordflow">return</span> std::hash&lt;uuids::uuid&gt;{}(uuid_); }</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment"></span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">   * @brief Swap two UUIDs.</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">   * @param lhs The first UUID.</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment">   * @param rhs The second UUID.</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="classhelios_1_1Uuid.html#a740e6842a841839edb8bb78e2c40bbff">   94</a></span>  <span class="keyword">friend</span> <span class="keywordtype">void</span> <a class="code hl_friend" href="classhelios_1_1Uuid.html#a740e6842a841839edb8bb78e2c40bbff">swap</a>(<a class="code hl_class" href="classhelios_1_1Uuid.html">Uuid</a>&amp; lhs, <a class="code hl_class" href="classhelios_1_1Uuid.html">Uuid</a>&amp; rhs) <span class="keyword">noexcept</span> { lhs.uuid_.swap(rhs.uuid_); }</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="keyword">private</span>:<span class="comment"></span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment">   * @brief Private constructor from uuids::uuid for internal use.</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment">   * @param uuid The uuids::uuid to wrap.</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>  <span class="keyword">explicit</span> <span class="keyword">constexpr</span> <a class="code hl_function" href="classhelios_1_1Uuid.html#a3d6656a8831b8e753f4b5f47b26f5913">Uuid</a>(<span class="keyword">const</span> uuids::uuid&amp; uuid) noexcept : uuid_(uuid) {}</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>  uuids::uuid uuid_;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="classhelios_1_1Uuid.html#a62fab7af377e8f5cc7e8a61efdb960b9">  105</a></span>  <span class="keyword">friend</span> <span class="keyword">class </span><a class="code hl_class" href="classhelios_1_1UuidGenerator.html">UuidGenerator</a>;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>};</div>
+</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="foldopen" id="foldopen00108" data-start="{" data-end="}">
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno"><a class="line" href="classhelios_1_1Uuid.html#add891414818a6519bef7c985756aa6ce">  108</a></span><span class="keyword">inline</span> <a class="code hl_function" href="classhelios_1_1Uuid.html#a3d6656a8831b8e753f4b5f47b26f5913">Uuid::Uuid</a>(std::string_view str) {</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>  <span class="keywordflow">if</span> (str.empty()) [[unlikely]] {</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>  }</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>  <span class="keyword">auto</span> result = uuids::uuid::from_string(str.data());</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>  <span class="keywordflow">if</span> (result.has_value()) {</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    uuid_ = result.value();</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>  }</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>}</div>
+</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="foldopen" id="foldopen00119" data-start="{" data-end="}">
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno"><a class="line" href="classhelios_1_1Uuid.html#a9ed9f4d935e978dbcb0146dda90b6240">  119</a></span><span class="keyword">inline</span> <a class="code hl_function" href="classhelios_1_1Uuid.html#a3d6656a8831b8e753f4b5f47b26f5913">Uuid::Uuid</a>(std::span&lt;const std::byte&gt; bytes) {</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>  <span class="keywordflow">if</span> (bytes.size() == 16) {</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    <span class="keyword">const</span> <span class="keyword">auto</span>* begin = std::bit_cast&lt;const uint8_t*&gt;(bytes.data());</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <span class="keyword">const</span> uint8_t* end = begin + bytes.size();</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    uuid_ = uuids::uuid(begin, end);</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>  }</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>}</div>
+</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
+<div class="foldopen" id="foldopen00127" data-start="{" data-end="}">
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno"><a class="line" href="classhelios_1_1Uuid.html#a84560f17c2874de68e408ac5704347ae">  127</a></span><span class="keyword">inline</span> <a class="code hl_class" href="classhelios_1_1Uuid.html">Uuid</a> <a class="code hl_function" href="classhelios_1_1Uuid.html#a84560f17c2874de68e408ac5704347ae">Uuid::Generate</a>() {</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>  <span class="comment">// Create a thread-local engine and pass it (as an lvalue) to the generator.</span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>  <span class="comment">// This avoids binding a temporary to a non-const reference.</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>  <span class="keyword">static</span> <span class="keyword">thread_local</span> std::random_device rd;</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>  <span class="keyword">static</span> <span class="keyword">thread_local</span> std::array&lt;std::random_device::result_type, std::mt19937::state_size&gt; seed_data = []() {</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    std::array&lt;std::random_device::result_type, std::mt19937::state_size&gt; data = {};</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    std::ranges::generate(data, std::ref(rd));</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    <span class="keywordflow">return</span> data;</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>  }();</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>  <span class="keyword">static</span> <span class="keyword">thread_local</span> std::seed_seq seq(seed_data.begin(), seed_data.end());</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>  <span class="keyword">static</span> <span class="keyword">thread_local</span> std::mt19937 engine(seq);</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>  <span class="keyword">static</span> <span class="keyword">thread_local</span> uuids::uuid_random_generator gen(engine);</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="classhelios_1_1Uuid.html#a3d6656a8831b8e753f4b5f47b26f5913">Uuid</a>(gen());</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>}</div>
+</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span> </div>
+<div class="foldopen" id="foldopen00142" data-start="{" data-end="}">
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno"><a class="line" href="classhelios_1_1Uuid.html#a63c5c1a87aceecb2cb4a52f216be18fc">  142</a></span><span class="keyword">inline</span> std::string <a class="code hl_function" href="classhelios_1_1Uuid.html#a63c5c1a87aceecb2cb4a52f216be18fc">Uuid::ToString</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>  <span class="keywordflow">if</span> (!<a class="code hl_function" href="classhelios_1_1Uuid.html#abfb3a7d9213d6db2f3b6d3bdb44a3dae">Valid</a>()) {</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    <span class="keywordflow">return</span> {};</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>  }</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>  <span class="keywordflow">return</span> uuids::to_string(uuid_);</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>}</div>
+</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span> </div>
+<div class="foldopen" id="foldopen00149" data-start="{" data-end="}">
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno"><a class="line" href="classhelios_1_1Uuid.html#a029ac887e3b0ccd318c2a1ed4b9d92ad">  149</a></span><span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1Uuid.html#a029ac887e3b0ccd318c2a1ed4b9d92ad">Uuid::AsBytes</a>() const -&gt; std::span&lt;const std::<span class="keywordtype">byte</span>&gt; {</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>  <span class="keywordflow">if</span> (!<a class="code hl_function" href="classhelios_1_1Uuid.html#abfb3a7d9213d6db2f3b6d3bdb44a3dae">Valid</a>()) {</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    <span class="keywordflow">return</span> {};</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>  }</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>  <span class="keyword">const</span> <span class="keyword">auto</span> bytes = uuid_.as_bytes();</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>  <span class="keywordflow">return</span> {bytes.data(), bytes.size()};</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>}</div>
+</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span><span class="comment"></span> </div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span><span class="comment"> * @brief A class for generating random UUIDs using a specified random number generator.</span></div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span><span class="comment"> */</span></div>
+<div class="foldopen" id="foldopen00160" data-start="{" data-end="};">
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno"><a class="line" href="classhelios_1_1UuidGenerator.html">  160</a></span><span class="keyword">class </span><a class="code hl_class" href="classhelios_1_1UuidGenerator.html">UuidGenerator</a> {</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span><span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span><span class="comment">   * @brief Default constructor initializes the generator with a random seed.</span></div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno"><a class="line" href="classhelios_1_1UuidGenerator.html#a8a93ef4294d9c81a0a2286b2cb6282d3">  165</a></span>  <a class="code hl_function" href="classhelios_1_1UuidGenerator.html#a8a93ef4294d9c81a0a2286b2cb6282d3">UuidGenerator</a>() : generator_(std::random_device{}()) {}</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span><span class="comment"></span> </div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span><span class="comment">   * @brief Construct a UuidGenerator with a custom random engine.</span></div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="comment">   * @tparam RandomEngine The type of the random engine.</span></div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span><span class="comment">   * @param engine An instance of the random engine.</span></div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> RandomEngine&gt;</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    <span class="keyword">requires</span>(!std::same_as&lt;std::decay_t&lt;RandomEngine&gt;, <a class="code hl_class" href="classhelios_1_1UuidGenerator.html">UuidGenerator</a>&gt;)</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno"><a class="line" href="classhelios_1_1UuidGenerator.html#ac64c2aff898556e0caf771fae1a93f78">  174</a></span>  <span class="keyword">explicit</span> <a class="code hl_function" href="classhelios_1_1UuidGenerator.html#ac64c2aff898556e0caf771fae1a93f78">UuidGenerator</a>(<a class="code hl_concept" href="concepthelios_1_1RandomEngine.html">RandomEngine</a>&amp;&amp; engine) : generator_(std::forward&lt;RandomEngine&gt;(engine)) {}</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno"><a class="line" href="classhelios_1_1UuidGenerator.html#a3cf8e00e5ca7d02c5e5515971da071c5">  175</a></span>  <a class="code hl_function" href="classhelios_1_1UuidGenerator.html#a3cf8e00e5ca7d02c5e5515971da071c5">UuidGenerator</a>(<span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1UuidGenerator.html">UuidGenerator</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno"><a class="line" href="classhelios_1_1UuidGenerator.html#ace1bf5e4fca54c5580330dda1abfaf28">  176</a></span>  <a class="code hl_function" href="classhelios_1_1UuidGenerator.html#ace1bf5e4fca54c5580330dda1abfaf28">UuidGenerator</a>(<a class="code hl_class" href="classhelios_1_1UuidGenerator.html">UuidGenerator</a>&amp;&amp;) noexcept = default;</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno"><a class="line" href="classhelios_1_1UuidGenerator.html#ae0928f9d86aaa3f23028ddadffdcaf49">  177</a></span>  ~<a class="code hl_class" href="classhelios_1_1UuidGenerator.html">UuidGenerator</a>() = default;</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span> </div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno"><a class="line" href="classhelios_1_1UuidGenerator.html#a31a6d43fef8d884050936fccbe97c2f5">  179</a></span>  <a class="code hl_class" href="classhelios_1_1UuidGenerator.html">UuidGenerator</a>&amp; operator=(const <a class="code hl_class" href="classhelios_1_1UuidGenerator.html">UuidGenerator</a>&amp;) = delete;</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno"><a class="line" href="classhelios_1_1UuidGenerator.html#a28f6583834c346e408b0277ac093cd1e">  180</a></span>  <a class="code hl_class" href="classhelios_1_1UuidGenerator.html">UuidGenerator</a>&amp; operator=(<a class="code hl_class" href="classhelios_1_1UuidGenerator.html">UuidGenerator</a>&amp;&amp;) noexcept = default;</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span> </div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>  <a class="code hl_class" href="classhelios_1_1Uuid.html">Uuid</a> <a class="code hl_function" href="classhelios_1_1UuidGenerator.html#acfdd10ef0f5a5c06c36882a25586a763">Generate</a>();</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span> </div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>private:</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>  std::mt19937_64 generator_;</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>};</div>
+</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span> </div>
+<div class="foldopen" id="foldopen00188" data-start="{" data-end="}">
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno"><a class="line" href="classhelios_1_1UuidGenerator.html#acfdd10ef0f5a5c06c36882a25586a763">  188</a></span>inline <a class="code hl_class" href="classhelios_1_1Uuid.html">Uuid</a> <a class="code hl_class" href="classhelios_1_1UuidGenerator.html">UuidGenerator</a>::<a class="code hl_function" href="classhelios_1_1UuidGenerator.html#acfdd10ef0f5a5c06c36882a25586a763">Generate</a>() {</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>  uuids::basic_uuid_random_generator&lt;std::mt19937_64&gt; gen(&amp;generator_);</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>  <span class="keywordflow">return</span> <a class="code hl_class" href="classhelios_1_1Uuid.html">Uuid</a>(gen());</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>}</div>
+</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span> </div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>}  <span class="comment">// namespace helios</span></div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span> </div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span><span class="keyword">template</span> &lt;&gt;</div>
+<div class="foldopen" id="foldopen00196" data-start="{" data-end="};">
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno"><a class="line" href="structstd_1_1hash_3_01helios_1_1Uuid_01_4.html">  196</a></span><span class="keyword">struct </span>std::hash&lt;<a class="code hl_namespace" href="namespacehelios.html">helios</a>::Uuid&gt; {</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno"><a class="line" href="structstd_1_1hash_3_01helios_1_1Uuid_01_4.html#a9a9bc4a098547f6af001167ada8fd677">  197</a></span>  <span class="keywordtype">size_t</span> <a class="code hl_function" href="structstd_1_1hash_3_01helios_1_1Uuid_01_4.html#a9a9bc4a098547f6af001167ada8fd677">operator()</a>(<span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1Uuid.html">helios::Uuid</a>&amp; uuid) <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> uuid.Hash(); }</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>};</div>
+</div>
+<div class="ttc" id="aclasshelios_1_1UuidGenerator_html"><div class="ttname"><a href="classhelios_1_1UuidGenerator.html">helios::UuidGenerator</a></div><div class="ttdoc">A class for generating random UUIDs using a specified random number generator.</div><div class="ttdef"><b>Definition</b> <a href="uuid_8hpp_source.html#l00160">uuid.hpp:160</a></div></div>
+<div class="ttc" id="aclasshelios_1_1UuidGenerator_html_a3cf8e00e5ca7d02c5e5515971da071c5"><div class="ttname"><a href="classhelios_1_1UuidGenerator.html#a3cf8e00e5ca7d02c5e5515971da071c5">helios::UuidGenerator::UuidGenerator</a></div><div class="ttdeci">UuidGenerator(const UuidGenerator &amp;)=delete</div></div>
+<div class="ttc" id="aclasshelios_1_1UuidGenerator_html_a8a93ef4294d9c81a0a2286b2cb6282d3"><div class="ttname"><a href="classhelios_1_1UuidGenerator.html#a8a93ef4294d9c81a0a2286b2cb6282d3">helios::UuidGenerator::UuidGenerator</a></div><div class="ttdeci">UuidGenerator()</div><div class="ttdoc">Default constructor initializes the generator with a random seed.</div><div class="ttdef"><b>Definition</b> <a href="uuid_8hpp_source.html#l00165">uuid.hpp:165</a></div></div>
+<div class="ttc" id="aclasshelios_1_1UuidGenerator_html_ac64c2aff898556e0caf771fae1a93f78"><div class="ttname"><a href="classhelios_1_1UuidGenerator.html#ac64c2aff898556e0caf771fae1a93f78">helios::UuidGenerator::UuidGenerator</a></div><div class="ttdeci">UuidGenerator(RandomEngine &amp;&amp;engine)</div><div class="ttdoc">Construct a UuidGenerator with a custom random engine.</div><div class="ttdef"><b>Definition</b> <a href="uuid_8hpp_source.html#l00174">uuid.hpp:174</a></div></div>
+<div class="ttc" id="aclasshelios_1_1UuidGenerator_html_ace1bf5e4fca54c5580330dda1abfaf28"><div class="ttname"><a href="classhelios_1_1UuidGenerator.html#ace1bf5e4fca54c5580330dda1abfaf28">helios::UuidGenerator::UuidGenerator</a></div><div class="ttdeci">UuidGenerator(UuidGenerator &amp;&amp;) noexcept=default</div></div>
+<div class="ttc" id="aclasshelios_1_1UuidGenerator_html_acfdd10ef0f5a5c06c36882a25586a763"><div class="ttname"><a href="classhelios_1_1UuidGenerator.html#acfdd10ef0f5a5c06c36882a25586a763">helios::UuidGenerator::Generate</a></div><div class="ttdeci">Uuid Generate()</div><div class="ttdef"><b>Definition</b> <a href="uuid_8hpp_source.html#l00188">uuid.hpp:188</a></div></div>
+<div class="ttc" id="aclasshelios_1_1Uuid_html"><div class="ttname"><a href="classhelios_1_1Uuid.html">helios::Uuid</a></div><div class="ttdoc">A class representing a universally unique identifier (UUID).</div><div class="ttdef"><b>Definition</b> <a href="uuid_8hpp_source.html#l00025">uuid.hpp:25</a></div></div>
+<div class="ttc" id="aclasshelios_1_1Uuid_html_a029ac887e3b0ccd318c2a1ed4b9d92ad"><div class="ttname"><a href="classhelios_1_1Uuid.html#a029ac887e3b0ccd318c2a1ed4b9d92ad">helios::Uuid::AsBytes</a></div><div class="ttdeci">auto AsBytes() const -&gt; std::span&lt; const std::byte &gt;</div><div class="ttdoc">Get the UUID as a span of bytes.</div><div class="ttdef"><b>Definition</b> <a href="uuid_8hpp_source.html#l00149">uuid.hpp:149</a></div></div>
+<div class="ttc" id="aclasshelios_1_1Uuid_html_a33c033c75ad3811f09c1b21884efcca6"><div class="ttname"><a href="classhelios_1_1Uuid.html#a33c033c75ad3811f09c1b21884efcca6">helios::Uuid::operator&lt;</a></div><div class="ttdeci">bool operator&lt;(const Uuid &amp;other) const noexcept</div><div class="ttdef"><b>Definition</b> <a href="uuid_8hpp_source.html#l00075">uuid.hpp:75</a></div></div>
+<div class="ttc" id="aclasshelios_1_1Uuid_html_a3d6656a8831b8e753f4b5f47b26f5913"><div class="ttname"><a href="classhelios_1_1Uuid.html#a3d6656a8831b8e753f4b5f47b26f5913">helios::Uuid::Uuid</a></div><div class="ttdeci">constexpr Uuid() noexcept=default</div><div class="ttdoc">Default constructor creates an invalid UUID (all zeros).</div></div>
+<div class="ttc" id="aclasshelios_1_1Uuid_html_a62b925a337e1ab96b73dc2d79452d2c9"><div class="ttname"><a href="classhelios_1_1Uuid.html#a62b925a337e1ab96b73dc2d79452d2c9">helios::Uuid::Hash</a></div><div class="ttdeci">size_t Hash() const noexcept</div><div class="ttdoc">Compute a hash value for the UUID.</div><div class="ttdef"><b>Definition</b> <a href="uuid_8hpp_source.html#l00087">uuid.hpp:87</a></div></div>
+<div class="ttc" id="aclasshelios_1_1Uuid_html_a63c5c1a87aceecb2cb4a52f216be18fc"><div class="ttname"><a href="classhelios_1_1Uuid.html#a63c5c1a87aceecb2cb4a52f216be18fc">helios::Uuid::ToString</a></div><div class="ttdeci">std::string ToString() const</div><div class="ttdoc">Convert the UUID to its string representation.</div><div class="ttdef"><b>Definition</b> <a href="uuid_8hpp_source.html#l00142">uuid.hpp:142</a></div></div>
+<div class="ttc" id="aclasshelios_1_1Uuid_html_a740e6842a841839edb8bb78e2c40bbff"><div class="ttname"><a href="classhelios_1_1Uuid.html#a740e6842a841839edb8bb78e2c40bbff">helios::Uuid::swap</a></div><div class="ttdeci">friend void swap(Uuid &amp;lhs, Uuid &amp;rhs) noexcept</div><div class="ttdoc">Swap two UUIDs.</div><div class="ttdef"><b>Definition</b> <a href="uuid_8hpp_source.html#l00094">uuid.hpp:94</a></div></div>
+<div class="ttc" id="aclasshelios_1_1Uuid_html_a84560f17c2874de68e408ac5704347ae"><div class="ttname"><a href="classhelios_1_1Uuid.html#a84560f17c2874de68e408ac5704347ae">helios::Uuid::Generate</a></div><div class="ttdeci">static Uuid Generate()</div><div class="ttdoc">Generate a new random UUID.</div><div class="ttdef"><b>Definition</b> <a href="uuid_8hpp_source.html#l00127">uuid.hpp:127</a></div></div>
+<div class="ttc" id="aclasshelios_1_1Uuid_html_a948ce81fb6998221a90046a48738ab2c"><div class="ttname"><a href="classhelios_1_1Uuid.html#a948ce81fb6998221a90046a48738ab2c">helios::Uuid::operator!=</a></div><div class="ttdeci">bool operator!=(const Uuid &amp;other) const noexcept</div><div class="ttdef"><b>Definition</b> <a href="uuid_8hpp_source.html#l00073">uuid.hpp:73</a></div></div>
+<div class="ttc" id="aclasshelios_1_1Uuid_html_abfb3a7d9213d6db2f3b6d3bdb44a3dae"><div class="ttname"><a href="classhelios_1_1Uuid.html#abfb3a7d9213d6db2f3b6d3bdb44a3dae">helios::Uuid::Valid</a></div><div class="ttdeci">constexpr bool Valid() const noexcept</div><div class="ttdoc">Check if the UUID is valid (not all zeros).</div><div class="ttdef"><b>Definition</b> <a href="uuid_8hpp_source.html#l00081">uuid.hpp:81</a></div></div>
+<div class="ttc" id="aconcepthelios_1_1RandomEngine_html"><div class="ttname"><a href="concepthelios_1_1RandomEngine.html">helios::RandomEngine</a></div><div class="ttdoc">Concept for random number engines compatible with std distributions.</div><div class="ttdef"><b>Definition</b> <a href="random_8hpp_source.html#l00021">random.hpp:21</a></div></div>
+<div class="ttc" id="acore__pch_8hpp_html"><div class="ttname"><a href="core__pch_8hpp.html">core_pch.hpp</a></div></div>
+<div class="ttc" id="anamespacehelios_html"><div class="ttname"><a href="namespacehelios.html">helios</a></div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00017">access_policy.hpp:17</a></div></div>
+<div class="ttc" id="astructstd_1_1hash_3_01helios_1_1Uuid_01_4_html_a9a9bc4a098547f6af001167ada8fd677"><div class="ttname"><a href="structstd_1_1hash_3_01helios_1_1Uuid_01_4.html#a9a9bc4a098547f6af001167ada8fd677">std::hash&lt; helios::Uuid &gt;::operator()</a></div><div class="ttdeci">size_t operator()(const helios::Uuid &amp;uuid) const noexcept</div><div class="ttdef"><b>Definition</b> <a href="uuid_8hpp_source.html#l00197">uuid.hpp:197</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_aebb8dcc11953d78e620bbef0b9e2183.html">core</a></li><li class="navelem"><a class="el" href="dir_8f49dd062eda24395df599c5385a3cb1.html">include</a></li><li class="navelem"><a class="el" href="dir_23069df5183a130785923908e80258ad.html">helios</a></li><li class="navelem"><a class="el" href="dir_2da2d982aeea650f7dd0b34d7b8d0119.html">core</a></li><li class="navelem"><a class="el" href="uuid_8hpp.html">uuid.hpp</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

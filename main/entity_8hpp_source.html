@@ -1,0 +1,337 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: src/core/include/helios/core/ecs/entity.hpp Source File</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('entity_8hpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">entity.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="entity_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;<a class="code" href="core__pch_8hpp.html">helios/core_pch.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;cstddef&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;limits&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1ecs.html">helios::ecs</a> {</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment"></span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment"> * @brief Unique identifier for entities with generation counter to handle recycling.</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment"> * @details Entity uses a combination of index and generation to provide stable references</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"> * even when entities are destroyed and their indices are recycled. The generation counter</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment"> * ensures that old entity references become invalid when the index is reused.</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment"> * Memory layout: 32-bit index + 32-bit generation = 64-bit total</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"> * @note This class is thread-safe for all operations.</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"> */</span></div>
+<div class="foldopen" id="foldopen00021" data-start="{" data-end="};">
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1Entity.html">   21</a></span><span class="keyword">class </span><a class="code hl_class" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> {</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">   23</a></span>  <span class="keyword">using </span><a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">IndexType</a> = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">uint32_t</a>;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1Entity.html#a40d8cd0e93ef835aeb26252597b23b90">   24</a></span>  <span class="keyword">using </span><a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a40d8cd0e93ef835aeb26252597b23b90">GenerationType</a> = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">uint32_t</a>;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1Entity.html#addaed08012909076998b704c1fa3f9f4">   26</a></span>  <span class="keyword">static</span> <span class="keyword">constexpr</span> <a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">IndexType</a> <a class="code hl_variable" href="classhelios_1_1ecs_1_1Entity.html#addaed08012909076998b704c1fa3f9f4">kInvalidIndex</a> = std::numeric_limits&lt;IndexType&gt;::max();</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1Entity.html#a82ae778f12652ea05544ccb502a42876">   27</a></span>  <span class="keyword">static</span> <span class="keyword">constexpr</span> <a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a40d8cd0e93ef835aeb26252597b23b90">GenerationType</a> <a class="code hl_variable" href="classhelios_1_1ecs_1_1Entity.html#a82ae778f12652ea05544ccb502a42876">kInvalidGeneration</a> = 0;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment"></span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">   * @brief Constructs an invalid entity.</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">   * @details Creates an entity with invalid index and generation values.</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1Entity.html#a64a7de4778bc22544a6ecb129a89525f">   33</a></span>  <span class="keyword">constexpr</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1Entity.html#a64a7de4778bc22544a6ecb129a89525f">Entity</a>() <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a> = <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">default</a>;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment"></span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">   * @brief Constructs entity with specific index and generation.</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">   * @details Private constructor used by entity manager to create valid entities.</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">   * @param index The entity index</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">   * @param generation The entity generation</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1Entity.html#acd4e0a6e2f9ce4f1a00fdff531ac5087">   41</a></span>  <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="code hl_class" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>(<a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">IndexType</a> index, <a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a40d8cd0e93ef835aeb26252597b23b90">GenerationType</a> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">generation</a>) <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a> : index_(index), generation_(<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">generation</a>) {}</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1Entity.html#a6276b480befa59c9c6658563a5af645b">   42</a></span>  <span class="keyword">constexpr</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1Entity.html#a6276b480befa59c9c6658563a5af645b">Entity</a>(<span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>&amp;) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1Entity.html#aafd5e869849f148cbfe1ed65694fa727">   43</a></span>  <span class="keyword">constexpr</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1Entity.html#aafd5e869849f148cbfe1ed65694fa727">Entity</a>(<a class="code hl_class" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>&amp;&amp;) <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a> = <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">default</a>;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1Entity.html#a8b975ef913cac8b084c92ad9fed566e5">   44</a></span>  <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> ~<a class="code hl_class" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>() <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a> = <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">default</a>;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1Entity.html#aec3fe441b32207d13a58a909e86f9400">   46</a></span>  <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="code hl_class" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>&amp; <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">operator</a>=(<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">const</a> <a class="code hl_class" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>&amp;) <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a> = <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">default</a>;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1Entity.html#acfbbf9ac15c5625c85e4a42ac3b7b7f3">   47</a></span>  <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="code hl_class" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>&amp; <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">operator</a>=(<a class="code hl_class" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>&amp;&amp;) <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a> = <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">default</a>;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1Entity.html#a9003d6cbc86aa36b09ef5c31d69c58a7">   49</a></span>  <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <span class="keywordtype">bool</span> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">operator</a>==(<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">const</a> <a class="code hl_class" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>&amp;) <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">const</a> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a> = <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">default</a>;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1Entity.html#a4d9b99969be73d545b05ed6e75694705">   50</a></span>  <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <span class="keywordtype">bool</span> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">operator</a>!=(<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">const</a> <a class="code hl_class" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>&amp;) <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">const</a> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a> = <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">default</a>;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <span class="keywordtype">bool</span> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">operator</a>&lt;(<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">const</a> <a class="code hl_class" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>&amp; other) <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">const</a> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a>;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment"></span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">   * @brief Checks if the entity is valid.</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">   * @details An entity is valid if both its index and generation are not the reserved invalid values.</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">   * @return True if entity has valid index and generation, false otherwise</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">   */</span></div>
+<div class="foldopen" id="foldopen00058" data-start="{" data-end="}">
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1Entity.html#a27290ea2728bdbc0c87bf03baae31fd7">   58</a></span>  [[<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">nodiscard</a>]] <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1Entity.html#a27290ea2728bdbc0c87bf03baae31fd7">Valid</a>() <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">const</a> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a> {</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordflow">return</span> index_ != <a class="code hl_variable" href="classhelios_1_1ecs_1_1Entity.html#addaed08012909076998b704c1fa3f9f4">kInvalidIndex</a> &amp;&amp; generation_ != <a class="code hl_variable" href="classhelios_1_1ecs_1_1Entity.html#a82ae778f12652ea05544ccb502a42876">kInvalidGeneration</a>;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  }</div>
+</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment"></span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">   * @brief Generates a hash value for this entity.</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">   * @details Combines index and generation into a 64-bit hash value.</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">   * Invalid entities always return hash value of 0.</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">   * @return Hash combining generation (high bits) and index (low bits)</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1Entity.html#ac59cfce657aa8a901905f200a75790da">Hash</a>() <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">const</a> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a>;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment"></span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">   * @brief Gets the index component of the entity.</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">   * @details The index identifies the entity&#39;s storage location in sparse arrays.</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">   * @return Entity index, or kInvalidIndex if entity is invalid</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1Entity.html#aaae9de10e9476a94a23048d438c07e49">   75</a></span>  [[<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">nodiscard</a>]] <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">IndexType</a> <a class="code hl_function" href="classhelios_1_1ecs_1_1Entity.html#aaae9de10e9476a94a23048d438c07e49">Index</a>() <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">const</a> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a> { <span class="keywordflow">return</span> index_; }</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment"></span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">   * @brief Gets the generation component of the entity.</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">   * @details The generation counter prevents use of stale entity references after recycling.</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">   * @return Entity generation, or kInvalidGeneration if entity is invalid</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1Entity.html#a3db9ebedcce587f5a77365d3f95decad">   82</a></span>  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <span class="keyword">constexpr</span> <a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a40d8cd0e93ef835aeb26252597b23b90">GenerationType</a> <a class="code hl_function" href="classhelios_1_1ecs_1_1Entity.html#a3db9ebedcce587f5a77365d3f95decad">Generation</a>() <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">const</a> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a> { <span class="keywordflow">return</span> generation_; }</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  <a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">IndexType</a> index_ = <a class="code hl_variable" href="classhelios_1_1ecs_1_1Entity.html#addaed08012909076998b704c1fa3f9f4">kInvalidIndex</a>;                 <span class="comment">///&lt; Entity index for storage lookup</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  <a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a40d8cd0e93ef835aeb26252597b23b90">GenerationType</a> generation_ = <a class="code hl_variable" href="classhelios_1_1ecs_1_1Entity.html#a82ae778f12652ea05544ccb502a42876">kInvalidGeneration</a>;  <span class="comment">///&lt; Generation counter for recycling safety</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>};</div>
+</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="foldopen" id="foldopen00089" data-start="{" data-end="}">
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1Entity.html#a1d42d98daa0616a82fa489a9056ee928">   89</a></span><span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1Entity.html#a1d42d98daa0616a82fa489a9056ee928">Entity::operator&lt;</a>(<span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>  <span class="keywordflow">if</span> (index_ != other.index_) {</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="keywordflow">return</span> index_ &lt; other.index_;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  }</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  <span class="keywordflow">return</span> generation_ &lt; other.generation_;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>}</div>
+</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="foldopen" id="foldopen00096" data-start="{" data-end="}">
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1Entity.html#ac59cfce657aa8a901905f200a75790da">   96</a></span><span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1Entity.html#ac59cfce657aa8a901905f200a75790da">Entity::Hash</a>() <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">const</a> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a> {</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  <span class="keywordflow">if</span> (!<a class="code hl_function" href="classhelios_1_1ecs_1_1Entity.html#a27290ea2728bdbc0c87bf03baae31fd7">Valid</a>()) [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">unlikely</a>]] {</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  }</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>  <span class="keywordflow">return</span> (<span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(generation_) &lt;&lt; (<span class="keyword">sizeof</span>(<span class="keywordtype">size_t</span>) / 2)) | <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(index_);</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>}</div>
+</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>}  <span class="comment">// namespace helios::ecs</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="comment"></span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="comment"> * @brief Standard hash specialization for Entity.</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="comment"> * @details Enables use of Entity as key in standard hash-based containers.</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="keyword">template</span> &lt;&gt;</div>
+<div class="foldopen" id="foldopen00111" data-start="{" data-end="};">
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno"><a class="line" href="structstd_1_1hash_3_01helios_1_1ecs_1_1Entity_01_4.html">  111</a></span><span class="keyword">struct </span>std::hash&lt;<a class="code hl_namespace" href="namespacehelios.html">helios</a>::ecs::Entity&gt; {</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno"><a class="line" href="structstd_1_1hash_3_01helios_1_1ecs_1_1Entity_01_4.html#a10471a316d3e5f589f5034734238f050">  112</a></span>  <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> <a class="code hl_function" href="structstd_1_1hash_3_01helios_1_1ecs_1_1Entity_01_4.html#a10471a316d3e5f589f5034734238f050">operator()</a>(<span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1ecs_1_1Entity.html">helios::ecs::Entity</a>&amp; entity) <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> entity.Hash(); }</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>};</div>
+</div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1BasicQuery_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicQuery.html">helios::ecs::BasicQuery</a></div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l01107">query.hpp:1107</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1Entity_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1Entity.html">helios::ecs::Entity</a></div><div class="ttdoc">Unique identifier for entities with generation counter to handle recycling.</div><div class="ttdef"><b>Definition</b> <a href="entity_8hpp_source.html#l00021">entity.hpp:21</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1Entity_html_a1d42d98daa0616a82fa489a9056ee928"><div class="ttname"><a href="classhelios_1_1ecs_1_1Entity.html#a1d42d98daa0616a82fa489a9056ee928">helios::ecs::Entity::operator&lt;</a></div><div class="ttdeci">constexpr bool operator&lt;(const Entity &amp;other) const noexcept</div><div class="ttdef"><b>Definition</b> <a href="entity_8hpp_source.html#l00089">entity.hpp:89</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1Entity_html_a27290ea2728bdbc0c87bf03baae31fd7"><div class="ttname"><a href="classhelios_1_1ecs_1_1Entity.html#a27290ea2728bdbc0c87bf03baae31fd7">helios::ecs::Entity::Valid</a></div><div class="ttdeci">constexpr bool Valid() const noexcept</div><div class="ttdoc">Checks if the entity is valid.</div><div class="ttdef"><b>Definition</b> <a href="entity_8hpp_source.html#l00058">entity.hpp:58</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1Entity_html_a3a1347d7a9307abaaccc75279f8db2de"><div class="ttname"><a href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">helios::ecs::Entity::IndexType</a></div><div class="ttdeci">uint32_t IndexType</div><div class="ttdef"><b>Definition</b> <a href="entity_8hpp_source.html#l00023">entity.hpp:23</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1Entity_html_a3db9ebedcce587f5a77365d3f95decad"><div class="ttname"><a href="classhelios_1_1ecs_1_1Entity.html#a3db9ebedcce587f5a77365d3f95decad">helios::ecs::Entity::Generation</a></div><div class="ttdeci">constexpr GenerationType Generation() const noexcept</div><div class="ttdoc">Gets the generation component of the entity.</div><div class="ttdef"><b>Definition</b> <a href="entity_8hpp_source.html#l00082">entity.hpp:82</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1Entity_html_a40d8cd0e93ef835aeb26252597b23b90"><div class="ttname"><a href="classhelios_1_1ecs_1_1Entity.html#a40d8cd0e93ef835aeb26252597b23b90">helios::ecs::Entity::GenerationType</a></div><div class="ttdeci">uint32_t GenerationType</div><div class="ttdef"><b>Definition</b> <a href="entity_8hpp_source.html#l00024">entity.hpp:24</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1Entity_html_a6276b480befa59c9c6658563a5af645b"><div class="ttname"><a href="classhelios_1_1ecs_1_1Entity.html#a6276b480befa59c9c6658563a5af645b">helios::ecs::Entity::Entity</a></div><div class="ttdeci">constexpr Entity(const Entity &amp;) noexcept=default</div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1Entity_html_a64a7de4778bc22544a6ecb129a89525f"><div class="ttname"><a href="classhelios_1_1ecs_1_1Entity.html#a64a7de4778bc22544a6ecb129a89525f">helios::ecs::Entity::Entity</a></div><div class="ttdeci">constexpr Entity() noexcept=default</div><div class="ttdoc">Constructs an invalid entity.</div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1Entity_html_a82ae778f12652ea05544ccb502a42876"><div class="ttname"><a href="classhelios_1_1ecs_1_1Entity.html#a82ae778f12652ea05544ccb502a42876">helios::ecs::Entity::kInvalidGeneration</a></div><div class="ttdeci">static constexpr GenerationType kInvalidGeneration</div><div class="ttdef"><b>Definition</b> <a href="entity_8hpp_source.html#l00027">entity.hpp:27</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1Entity_html_aaae9de10e9476a94a23048d438c07e49"><div class="ttname"><a href="classhelios_1_1ecs_1_1Entity.html#aaae9de10e9476a94a23048d438c07e49">helios::ecs::Entity::Index</a></div><div class="ttdeci">constexpr IndexType Index() const noexcept</div><div class="ttdoc">Gets the index component of the entity.</div><div class="ttdef"><b>Definition</b> <a href="entity_8hpp_source.html#l00075">entity.hpp:75</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1Entity_html_aafd5e869849f148cbfe1ed65694fa727"><div class="ttname"><a href="classhelios_1_1ecs_1_1Entity.html#aafd5e869849f148cbfe1ed65694fa727">helios::ecs::Entity::Entity</a></div><div class="ttdeci">constexpr Entity(Entity &amp;&amp;) noexcept=default</div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1Entity_html_ac59cfce657aa8a901905f200a75790da"><div class="ttname"><a href="classhelios_1_1ecs_1_1Entity.html#ac59cfce657aa8a901905f200a75790da">helios::ecs::Entity::Hash</a></div><div class="ttdeci">constexpr size_t Hash() const noexcept</div><div class="ttdoc">Generates a hash value for this entity.</div><div class="ttdef"><b>Definition</b> <a href="entity_8hpp_source.html#l00096">entity.hpp:96</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1Entity_html_addaed08012909076998b704c1fa3f9f4"><div class="ttname"><a href="classhelios_1_1ecs_1_1Entity.html#addaed08012909076998b704c1fa3f9f4">helios::ecs::Entity::kInvalidIndex</a></div><div class="ttdeci">static constexpr IndexType kInvalidIndex</div><div class="ttdef"><b>Definition</b> <a href="entity_8hpp_source.html#l00026">entity.hpp:26</a></div></div>
+<div class="ttc" id="acore__pch_8hpp_html"><div class="ttname"><a href="core__pch_8hpp.html">core_pch.hpp</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html"><div class="ttname"><a href="namespacehelios_1_1ecs.html">helios::ecs</a></div><div class="ttdef"><b>Definition</b> <a href="command_8hpp_source.html#l00005">command.hpp:5</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_af0384de48d847585fcb340c71c231e5e"><div class="ttname"><a href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, Allocator, Components... &gt; Query</div><div class="ttdoc">Type alias for query with mutable world access.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02515">query.hpp:2515</a></div></div>
+<div class="ttc" id="anamespacehelios_html"><div class="ttname"><a href="namespacehelios.html">helios</a></div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00017">access_policy.hpp:17</a></div></div>
+<div class="ttc" id="astructstd_1_1hash_3_01helios_1_1ecs_1_1Entity_01_4_html_a10471a316d3e5f589f5034734238f050"><div class="ttname"><a href="structstd_1_1hash_3_01helios_1_1ecs_1_1Entity_01_4.html#a10471a316d3e5f589f5034734238f050">std::hash&lt; helios::ecs::Entity &gt;::operator()</a></div><div class="ttdeci">constexpr size_t operator()(const helios::ecs::Entity &amp;entity) const noexcept</div><div class="ttdef"><b>Definition</b> <a href="entity_8hpp_source.html#l00112">entity.hpp:112</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_aebb8dcc11953d78e620bbef0b9e2183.html">core</a></li><li class="navelem"><a class="el" href="dir_8f49dd062eda24395df599c5385a3cb1.html">include</a></li><li class="navelem"><a class="el" href="dir_23069df5183a130785923908e80258ad.html">helios</a></li><li class="navelem"><a class="el" href="dir_2da2d982aeea650f7dd0b34d7b8d0119.html">core</a></li><li class="navelem"><a class="el" href="dir_7abf737f7a2a9df44affdc8a191b0056.html">ecs</a></li><li class="navelem"><a class="el" href="entity_8hpp.html">entity.hpp</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

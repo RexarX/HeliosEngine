@@ -1,0 +1,723 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: helios::async::AsyncTask Class Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classhelios_1_1async_1_1AsyncTask.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#friends">Friends</a> &#124;
+<a href="classhelios_1_1async_1_1AsyncTask-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">helios::async::AsyncTask Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Handle to an asynchronous task managed by the <a class="el" href="classhelios_1_1async_1_1Executor.html" title="Manages worker threads and executes task graphs using work-stealing scheduling.">Executor</a>.  
+ <a href="classhelios_1_1async_1_1AsyncTask.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="async__task_8hpp_source.html">async_task.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a581090a1c0c97e364501eb08bae4498b" id="r_a581090a1c0c97e364501eb08bae4498b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1AsyncTask.html#a581090a1c0c97e364501eb08bae4498b">AsyncTask</a> ()=default</td></tr>
+<tr class="separator:a581090a1c0c97e364501eb08bae4498b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1e866c2cfd950be380cea89360ec3b0" id="r_ad1e866c2cfd950be380cea89360ec3b0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1AsyncTask.html#ad1e866c2cfd950be380cea89360ec3b0">AsyncTask</a> (const <a class="el" href="classhelios_1_1async_1_1AsyncTask.html">AsyncTask</a> &amp;)=default</td></tr>
+<tr class="separator:ad1e866c2cfd950be380cea89360ec3b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a250db9c0bbaaab080c7e656d2474d8ec" id="r_a250db9c0bbaaab080c7e656d2474d8ec"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1AsyncTask.html#a250db9c0bbaaab080c7e656d2474d8ec">AsyncTask</a> (<a class="el" href="classhelios_1_1async_1_1AsyncTask.html">AsyncTask</a> &amp;&amp;) noexcept=default</td></tr>
+<tr class="separator:a250db9c0bbaaab080c7e656d2474d8ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1907ced6b57c26f8e35770ce5eb00af1" id="r_a1907ced6b57c26f8e35770ce5eb00af1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1AsyncTask.html#a1907ced6b57c26f8e35770ce5eb00af1">~AsyncTask</a> ()=default</td></tr>
+<tr class="separator:a1907ced6b57c26f8e35770ce5eb00af1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21ebedf67ae716423bb70589885cca90" id="r_a21ebedf67ae716423bb70589885cca90"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1async_1_1AsyncTask.html">AsyncTask</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1AsyncTask.html#a21ebedf67ae716423bb70589885cca90">operator=</a> (const <a class="el" href="classhelios_1_1async_1_1AsyncTask.html">AsyncTask</a> &amp;)=default</td></tr>
+<tr class="separator:a21ebedf67ae716423bb70589885cca90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f71d4616b44809145eca6366961cb26" id="r_a3f71d4616b44809145eca6366961cb26"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1async_1_1AsyncTask.html">AsyncTask</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1AsyncTask.html#a3f71d4616b44809145eca6366961cb26">operator=</a> (<a class="el" href="classhelios_1_1async_1_1AsyncTask.html">AsyncTask</a> &amp;&amp;) noexcept=default</td></tr>
+<tr class="separator:a3f71d4616b44809145eca6366961cb26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f3abe643a838ab5d2c8140d8bfe0d0f" id="r_a4f3abe643a838ab5d2c8140d8bfe0d0f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1AsyncTask.html#a4f3abe643a838ab5d2c8140d8bfe0d0f">Reset</a> ()</td></tr>
+<tr class="memdesc:a4f3abe643a838ab5d2c8140d8bfe0d0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the underlying asynchronous task handle.  <br /></td></tr>
+<tr class="separator:a4f3abe643a838ab5d2c8140d8bfe0d0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9a8354c4a0a3408162000de8c623b9d" id="r_ab9a8354c4a0a3408162000de8c623b9d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1AsyncTask.html#ab9a8354c4a0a3408162000de8c623b9d">operator==</a> (const <a class="el" href="classhelios_1_1async_1_1AsyncTask.html">AsyncTask</a> &amp;other) const noexcept</td></tr>
+<tr class="separator:ab9a8354c4a0a3408162000de8c623b9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada3db838e43169ab32c1139495f54191" id="r_ada3db838e43169ab32c1139495f54191"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1AsyncTask.html#ada3db838e43169ab32c1139495f54191">operator!=</a> (const <a class="el" href="classhelios_1_1async_1_1AsyncTask.html">AsyncTask</a> &amp;other) const noexcept</td></tr>
+<tr class="separator:ada3db838e43169ab32c1139495f54191"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a4de057486227ca771800091e868c1a" id="r_a9a4de057486227ca771800091e868c1a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1AsyncTask.html#a9a4de057486227ca771800091e868c1a">Done</a> () const</td></tr>
+<tr class="memdesc:a9a4de057486227ca771800091e868c1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the asynchronous task has completed.  <br /></td></tr>
+<tr class="separator:a9a4de057486227ca771800091e868c1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa841ff7c861f7c08a72c07dcdee59763" id="r_aa841ff7c861f7c08a72c07dcdee59763"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1AsyncTask.html#aa841ff7c861f7c08a72c07dcdee59763">Empty</a> () const</td></tr>
+<tr class="memdesc:aa841ff7c861f7c08a72c07dcdee59763"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the task handle is empty (not associated with any task).  <br /></td></tr>
+<tr class="separator:aa841ff7c861f7c08a72c07dcdee59763"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e3ba2d680f6f8d8ceec82f151fbf038" id="r_a5e3ba2d680f6f8d8ceec82f151fbf038"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1AsyncTask.html#a5e3ba2d680f6f8d8ceec82f151fbf038">Hash</a> () const</td></tr>
+<tr class="memdesc:a5e3ba2d680f6f8d8ceec82f151fbf038"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a hash value for the task.  <br /></td></tr>
+<tr class="separator:a5e3ba2d680f6f8d8ceec82f151fbf038"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a312952686e8ead105cab3e051d3ad5ab" id="r_a312952686e8ead105cab3e051d3ad5ab"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1AsyncTask.html#a312952686e8ead105cab3e051d3ad5ab">UseCount</a> () const</td></tr>
+<tr class="memdesc:a312952686e8ead105cab3e051d3ad5ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of references to the underlying task.  <br /></td></tr>
+<tr class="separator:a312952686e8ead105cab3e051d3ad5ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:aed43e4c53834d0026e144e1f413e29a7" id="r_aed43e4c53834d0026e144e1f413e29a7"><td class="memItemLeft" align="right" valign="top">static constexpr <a class="el" href="namespacehelios_1_1async.html#a09f164e8eba5bc20e0d6176fe9804ccd">TaskType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1AsyncTask.html#aed43e4c53834d0026e144e1f413e29a7">GetTaskType</a> () noexcept</td></tr>
+<tr class="memdesc:aed43e4c53834d0026e144e1f413e29a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the type of the task.  <br /></td></tr>
+<tr class="separator:aed43e4c53834d0026e144e1f413e29a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:a763b2f90bc53f92d680a635fe28e858e" id="r_a763b2f90bc53f92d680a635fe28e858e"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1AsyncTask.html#a763b2f90bc53f92d680a635fe28e858e">Executor</a></td></tr>
+<tr class="separator:a763b2f90bc53f92d680a635fe28e858e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9345588c4199e1c37216585178a6e16" id="r_ae9345588c4199e1c37216585178a6e16"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1AsyncTask.html#ae9345588c4199e1c37216585178a6e16">SubTaskGraph</a></td></tr>
+<tr class="separator:ae9345588c4199e1c37216585178a6e16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Handle to an asynchronous task managed by the <a class="el" href="classhelios_1_1async_1_1Executor.html" title="Manages worker threads and executes task graphs using work-stealing scheduling.">Executor</a>. </p>
+<p>Wraps a tf::AsyncTask, providing methods to query task state and manage its lifecycle. Instances are typically returned by <a class="el" href="classhelios_1_1async_1_1Executor.html" title="Manages worker threads and executes task graphs using work-stealing scheduling.">Executor</a>'s asynchronous methods. </p><dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="async__task_8hpp_source.html#l00020">20</a> of file <a class="el" href="async__task_8hpp_source.html">async_task.hpp</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a581090a1c0c97e364501eb08bae4498b" name="a581090a1c0c97e364501eb08bae4498b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a581090a1c0c97e364501eb08bae4498b">&#9670;&#160;</a></span>AsyncTask() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::async::AsyncTask::AsyncTask </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad1e866c2cfd950be380cea89360ec3b0" name="ad1e866c2cfd950be380cea89360ec3b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1e866c2cfd950be380cea89360ec3b0">&#9670;&#160;</a></span>AsyncTask() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::async::AsyncTask::AsyncTask </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1async_1_1AsyncTask.html">AsyncTask</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a250db9c0bbaaab080c7e656d2474d8ec" name="a250db9c0bbaaab080c7e656d2474d8ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a250db9c0bbaaab080c7e656d2474d8ec">&#9670;&#160;</a></span>AsyncTask() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::async::AsyncTask::AsyncTask </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1async_1_1AsyncTask.html">AsyncTask</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1907ced6b57c26f8e35770ce5eb00af1" name="a1907ced6b57c26f8e35770ce5eb00af1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1907ced6b57c26f8e35770ce5eb00af1">&#9670;&#160;</a></span>~AsyncTask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::async::AsyncTask::~AsyncTask </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a9a4de057486227ca771800091e868c1a" name="a9a4de057486227ca771800091e868c1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a4de057486227ca771800091e868c1a">&#9670;&#160;</a></span>Done()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::async::AsyncTask::Done </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if the asynchronous task has completed. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if the task is done, false otherwise.</dd></dl>
+<p>Returns false if task is empty. </p>
+
+<p class="definition">Definition at line <a class="el" href="async__task_8hpp_source.html#l00083">83</a> of file <a class="el" href="async__task_8hpp_source.html">async_task.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   83</span>                                  {</div>
+<div class="line"><span class="lineno">   84</span>  <span class="keywordflow">if</span> (<a class="code hl_function" href="classhelios_1_1async_1_1AsyncTask.html#aa841ff7c861f7c08a72c07dcdee59763">Empty</a>()) [[unlikely]] {</div>
+<div class="line"><span class="lineno">   85</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">   86</span>  }</div>
+<div class="line"><span class="lineno">   87</span> </div>
+<div class="line"><span class="lineno">   88</span>  <span class="keywordflow">return</span> task_.is_done();</div>
+<div class="line"><span class="lineno">   89</span>}</div>
+<div class="ttc" id="aclasshelios_1_1async_1_1AsyncTask_html_aa841ff7c861f7c08a72c07dcdee59763"><div class="ttname"><a href="classhelios_1_1async_1_1AsyncTask.html#aa841ff7c861f7c08a72c07dcdee59763">helios::async::AsyncTask::Empty</a></div><div class="ttdeci">bool Empty() const</div><div class="ttdoc">Checks if the task handle is empty (not associated with any task).</div><div class="ttdef"><b>Definition</b> <a href="async__task_8hpp_source.html#l00049">async_task.hpp:49</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aa841ff7c861f7c08a72c07dcdee59763" name="aa841ff7c861f7c08a72c07dcdee59763"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa841ff7c861f7c08a72c07dcdee59763">&#9670;&#160;</a></span>Empty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::async::AsyncTask::Empty </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if the task handle is empty (not associated with any task). </p>
+<dl class="section return"><dt>Returns</dt><dd>True if empty, false otherwise. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="async__task_8hpp_source.html#l00049">49</a> of file <a class="el" href="async__task_8hpp_source.html">async_task.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   49</span>{ <span class="keywordflow">return</span> task_.empty(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aed43e4c53834d0026e144e1f413e29a7" name="aed43e4c53834d0026e144e1f413e29a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed43e4c53834d0026e144e1f413e29a7">&#9670;&#160;</a></span>GetTaskType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static constexpr <a class="el" href="namespacehelios_1_1async.html#a09f164e8eba5bc20e0d6176fe9804ccd">TaskType</a> helios::async::AsyncTask::GetTaskType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the type of the task. </p>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="namespacehelios_1_1async.html#a09f164e8eba5bc20e0d6176fe9804ccda24aa4117da86c41684ad25742832dfa6" title="Asynchronous task executed independently.">TaskType::Async</a> </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="async__task_8hpp_source.html#l00069">69</a> of file <a class="el" href="async__task_8hpp_source.html">async_task.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   69</span>{ <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="namespacehelios_1_1async.html#a09f164e8eba5bc20e0d6176fe9804ccda24aa4117da86c41684ad25742832dfa6">TaskType::Async</a>; }</div>
+<div class="ttc" id="anamespacehelios_1_1async_html_a09f164e8eba5bc20e0d6176fe9804ccda24aa4117da86c41684ad25742832dfa6"><div class="ttname"><a href="namespacehelios_1_1async.html#a09f164e8eba5bc20e0d6176fe9804ccda24aa4117da86c41684ad25742832dfa6">helios::async::TaskType::Async</a></div><div class="ttdeci">@ Async</div><div class="ttdoc">Asynchronous task executed independently.</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a5e3ba2d680f6f8d8ceec82f151fbf038" name="a5e3ba2d680f6f8d8ceec82f151fbf038"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e3ba2d680f6f8d8ceec82f151fbf038">&#9670;&#160;</a></span>Hash()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t helios::async::AsyncTask::Hash </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns a hash value for the task. </p>
+<dl class="section return"><dt>Returns</dt><dd>Hash value.</dd></dl>
+<p>Returns '0' if task is empty. </p>
+
+<p class="definition">Definition at line <a class="el" href="async__task_8hpp_source.html#l00091">91</a> of file <a class="el" href="async__task_8hpp_source.html">async_task.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   91</span>                                    {</div>
+<div class="line"><span class="lineno">   92</span>  <span class="keywordflow">if</span> (<a class="code hl_function" href="classhelios_1_1async_1_1AsyncTask.html#aa841ff7c861f7c08a72c07dcdee59763">Empty</a>()) [[unlikely]] {</div>
+<div class="line"><span class="lineno">   93</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">   94</span>  }</div>
+<div class="line"><span class="lineno">   95</span> </div>
+<div class="line"><span class="lineno">   96</span>  <span class="keywordflow">return</span> task_.hash_value();</div>
+<div class="line"><span class="lineno">   97</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ada3db838e43169ab32c1139495f54191" name="ada3db838e43169ab32c1139495f54191"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada3db838e43169ab32c1139495f54191">&#9670;&#160;</a></span>operator!=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::async::AsyncTask::operator!= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1async_1_1AsyncTask.html">AsyncTask</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="async__task_8hpp_source.html#l00036">36</a> of file <a class="el" href="async__task_8hpp_source.html">async_task.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   36</span>{ <span class="keywordflow">return</span> !(*<span class="keyword">this</span> == other); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a3f71d4616b44809145eca6366961cb26" name="a3f71d4616b44809145eca6366961cb26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f71d4616b44809145eca6366961cb26">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1async_1_1AsyncTask.html">AsyncTask</a> &amp; helios::async::AsyncTask::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1async_1_1AsyncTask.html">AsyncTask</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a21ebedf67ae716423bb70589885cca90" name="a21ebedf67ae716423bb70589885cca90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21ebedf67ae716423bb70589885cca90">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1async_1_1AsyncTask.html">AsyncTask</a> &amp; helios::async::AsyncTask::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1async_1_1AsyncTask.html">AsyncTask</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab9a8354c4a0a3408162000de8c623b9d" name="ab9a8354c4a0a3408162000de8c623b9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9a8354c4a0a3408162000de8c623b9d">&#9670;&#160;</a></span>operator==()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::async::AsyncTask::operator== </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1async_1_1AsyncTask.html">AsyncTask</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="async__task_8hpp_source.html#l00035">35</a> of file <a class="el" href="async__task_8hpp_source.html">async_task.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   35</span>{ <span class="keywordflow">return</span> task_.hash_value() == other.task_.hash_value(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a4f3abe643a838ab5d2c8140d8bfe0d0f" name="a4f3abe643a838ab5d2c8140d8bfe0d0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f3abe643a838ab5d2c8140d8bfe0d0f">&#9670;&#160;</a></span>Reset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::async::AsyncTask::Reset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Resets the underlying asynchronous task handle. </p>
+
+<p class="definition">Definition at line <a class="el" href="async__task_8hpp_source.html#l00033">33</a> of file <a class="el" href="async__task_8hpp_source.html">async_task.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   33</span>{ task_.reset(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a312952686e8ead105cab3e051d3ad5ab" name="a312952686e8ead105cab3e051d3ad5ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a312952686e8ead105cab3e051d3ad5ab">&#9670;&#160;</a></span>UseCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t helios::async::AsyncTask::UseCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the number of references to the underlying task. </p>
+<dl class="section return"><dt>Returns</dt><dd>Reference count.</dd></dl>
+<p>Returns '0' if task is empty. </p>
+
+<p class="definition">Definition at line <a class="el" href="async__task_8hpp_source.html#l00063">63</a> of file <a class="el" href="async__task_8hpp_source.html">async_task.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   63</span>{ <span class="keywordflow">return</span> task_.use_count(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Symbol Documentation</h2>
+<a id="a763b2f90bc53f92d680a635fe28e858e" name="a763b2f90bc53f92d680a635fe28e858e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a763b2f90bc53f92d680a635fe28e858e">&#9670;&#160;</a></span>Executor</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend class <a class="el" href="classhelios_1_1async_1_1Executor.html">Executor</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="async__task_8hpp_source.html#l00079">79</a> of file <a class="el" href="async__task_8hpp_source.html">async_task.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ae9345588c4199e1c37216585178a6e16" name="ae9345588c4199e1c37216585178a6e16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9345588c4199e1c37216585178a6e16">&#9670;&#160;</a></span>SubTaskGraph</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend class <a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html">SubTaskGraph</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="async__task_8hpp_source.html#l00080">80</a> of file <a class="el" href="async__task_8hpp_source.html">async_task.hpp</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehelios.html">helios</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1async.html">async</a></li><li class="navelem"><a class="el" href="classhelios_1_1async_1_1AsyncTask.html">AsyncTask</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

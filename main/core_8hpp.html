@@ -1,0 +1,518 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: src/core/include/helios/core/core.hpp File Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('core_8hpp.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#define-members">Macros</a>  </div>
+  <div class="headertitle"><div class="title">core.hpp File Reference</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;utility&gt;</code><br />
+</div>
+<p><a href="core_8hpp_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:af82a8ce6d0033191eafb5eff2173159c" id="r_af82a8ce6d0033191eafb5eff2173159c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="core_8hpp.html#af82a8ce6d0033191eafb5eff2173159c">HELIOS_API</a></td></tr>
+<tr class="separator:af82a8ce6d0033191eafb5eff2173159c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada983df2522c351b671d6943887b483e" id="r_ada983df2522c351b671d6943887b483e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="core_8hpp.html#ada983df2522c351b671d6943887b483e">HELIOS_DEBUG_BREAK</a>()</td></tr>
+<tr class="separator:ada983df2522c351b671d6943887b483e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97e756b8b0cf2000780f149894e07d0c" id="r_a97e756b8b0cf2000780f149894e07d0c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="core_8hpp.html#a97e756b8b0cf2000780f149894e07d0c">HELIOS_UNREACHABLE</a>()&#160;&#160;&#160;std::unreachable()</td></tr>
+<tr class="separator:a97e756b8b0cf2000780f149894e07d0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0baa94baca2a0f972f63b78d01a9034d" id="r_a0baa94baca2a0f972f63b78d01a9034d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="core_8hpp.html#a0baa94baca2a0f972f63b78d01a9034d">HELIOS_RELEASE_UNREACHABLE</a>()&#160;&#160;&#160;<a class="el" href="core_8hpp.html#a97e756b8b0cf2000780f149894e07d0c">HELIOS_UNREACHABLE</a>()</td></tr>
+<tr class="separator:a0baa94baca2a0f972f63b78d01a9034d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2f8c278b92c19e156146c758e906a9e" id="r_ac2f8c278b92c19e156146c758e906a9e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="core_8hpp.html#ac2f8c278b92c19e156146c758e906a9e">HELIOS_BIT</a>(x)&#160;&#160;&#160;(1 &lt;&lt; (x))</td></tr>
+<tr class="separator:ac2f8c278b92c19e156146c758e906a9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88543d6f718bdf82483fbcb4ee50f3ad" id="r_a88543d6f718bdf82483fbcb4ee50f3ad"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="core_8hpp.html#a88543d6f718bdf82483fbcb4ee50f3ad">HELIOS_STRINGIFY_IMPL</a>(x)&#160;&#160;&#160;#x</td></tr>
+<tr class="separator:a88543d6f718bdf82483fbcb4ee50f3ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48f3e62b87770c7794446ce3015653b5" id="r_a48f3e62b87770c7794446ce3015653b5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="core_8hpp.html#a48f3e62b87770c7794446ce3015653b5">HELIOS_STRINGIFY</a>(x)&#160;&#160;&#160;<a class="el" href="core_8hpp.html#a88543d6f718bdf82483fbcb4ee50f3ad">HELIOS_STRINGIFY_IMPL</a>(x)</td></tr>
+<tr class="separator:a48f3e62b87770c7794446ce3015653b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a285f4973c3550f0a19a20ebcb3c58186" id="r_a285f4973c3550f0a19a20ebcb3c58186"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="core_8hpp.html#a285f4973c3550f0a19a20ebcb3c58186">HELIOS_CONCAT_IMPL</a>(a,  b)&#160;&#160;&#160;a##b</td></tr>
+<tr class="separator:a285f4973c3550f0a19a20ebcb3c58186"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46e4d6cbf2452fa304c6d00871af9dfb" id="r_a46e4d6cbf2452fa304c6d00871af9dfb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="core_8hpp.html#a46e4d6cbf2452fa304c6d00871af9dfb">HELIOS_CONCAT</a>(a,  b)&#160;&#160;&#160;<a class="el" href="core_8hpp.html#a285f4973c3550f0a19a20ebcb3c58186">HELIOS_CONCAT_IMPL</a>(a, b)</td></tr>
+<tr class="separator:a46e4d6cbf2452fa304c6d00871af9dfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a970386823b90d92c77c4d3c19d619b7a" id="r_a970386823b90d92c77c4d3c19d619b7a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="core_8hpp.html#a970386823b90d92c77c4d3c19d619b7a">HELIOS_ANONYMOUS_VAR</a>(prefix)&#160;&#160;&#160;<a class="el" href="core_8hpp.html#a46e4d6cbf2452fa304c6d00871af9dfb">HELIOS_CONCAT</a>(prefix, __LINE__)</td></tr>
+<tr class="separator:a970386823b90d92c77c4d3c19d619b7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a754fba4b22744e64a97ad1afc9065bc1" id="r_a754fba4b22744e64a97ad1afc9065bc1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="core_8hpp.html#a754fba4b22744e64a97ad1afc9065bc1">HELIOS_FORCE_INLINE</a>&#160;&#160;&#160;inline</td></tr>
+<tr class="separator:a754fba4b22744e64a97ad1afc9065bc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95ef3dcee5d3dd81a75581aaa5a91b3a" id="r_a95ef3dcee5d3dd81a75581aaa5a91b3a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="core_8hpp.html#a95ef3dcee5d3dd81a75581aaa5a91b3a">HELIOS_NO_INLINE</a></td></tr>
+<tr class="separator:a95ef3dcee5d3dd81a75581aaa5a91b3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad21e58157e9f3c2d9c39f2ea5423d017" id="r_ad21e58157e9f3c2d9c39f2ea5423d017"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="core_8hpp.html#ad21e58157e9f3c2d9c39f2ea5423d017">HELIOS_EXPECT_TRUE</a>(x)&#160;&#160;&#160;(x)</td></tr>
+<tr class="separator:ad21e58157e9f3c2d9c39f2ea5423d017"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2f0a86a0f14c42148fbec11f27b4690" id="r_af2f0a86a0f14c42148fbec11f27b4690"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="core_8hpp.html#af2f0a86a0f14c42148fbec11f27b4690">HELIOS_EXPECT_FALSE</a>(x)&#160;&#160;&#160;(x)</td></tr>
+<tr class="separator:af2f0a86a0f14c42148fbec11f27b4690"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a970386823b90d92c77c4d3c19d619b7a" name="a970386823b90d92c77c4d3c19d619b7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a970386823b90d92c77c4d3c19d619b7a">&#9670;&#160;</a></span>HELIOS_ANONYMOUS_VAR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HELIOS_ANONYMOUS_VAR</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">prefix</td><td>)</td>
+          <td>&#160;&#160;&#160;<a class="el" href="core_8hpp.html#a46e4d6cbf2452fa304c6d00871af9dfb">HELIOS_CONCAT</a>(prefix, __LINE__)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="core_8hpp_source.html#l00106">106</a> of file <a class="el" href="core_8hpp_source.html">core.hpp</a>.</p>
+
+</div>
+</div>
+<a id="af82a8ce6d0033191eafb5eff2173159c" name="af82a8ce6d0033191eafb5eff2173159c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af82a8ce6d0033191eafb5eff2173159c">&#9670;&#160;</a></span>HELIOS_API</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HELIOS_API</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="core_8hpp_source.html#l00017">17</a> of file <a class="el" href="core_8hpp_source.html">core.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ac2f8c278b92c19e156146c758e906a9e" name="ac2f8c278b92c19e156146c758e906a9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2f8c278b92c19e156146c758e906a9e">&#9670;&#160;</a></span>HELIOS_BIT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HELIOS_BIT</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x</td><td>)</td>
+          <td>&#160;&#160;&#160;(1 &lt;&lt; (x))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="core_8hpp_source.html#l00095">95</a> of file <a class="el" href="core_8hpp_source.html">core.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a46e4d6cbf2452fa304c6d00871af9dfb" name="a46e4d6cbf2452fa304c6d00871af9dfb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46e4d6cbf2452fa304c6d00871af9dfb">&#9670;&#160;</a></span>HELIOS_CONCAT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HELIOS_CONCAT</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">b&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="core_8hpp.html#a285f4973c3550f0a19a20ebcb3c58186">HELIOS_CONCAT_IMPL</a>(a, b)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="core_8hpp_source.html#l00103">103</a> of file <a class="el" href="core_8hpp_source.html">core.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a285f4973c3550f0a19a20ebcb3c58186" name="a285f4973c3550f0a19a20ebcb3c58186"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a285f4973c3550f0a19a20ebcb3c58186">&#9670;&#160;</a></span>HELIOS_CONCAT_IMPL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HELIOS_CONCAT_IMPL</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">b&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;a##b</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="core_8hpp_source.html#l00102">102</a> of file <a class="el" href="core_8hpp_source.html">core.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ada983df2522c351b671d6943887b483e" name="ada983df2522c351b671d6943887b483e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada983df2522c351b671d6943887b483e">&#9670;&#160;</a></span>HELIOS_DEBUG_BREAK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HELIOS_DEBUG_BREAK</td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="core_8hpp_source.html#l00081">81</a> of file <a class="el" href="core_8hpp_source.html">core.hpp</a>.</p>
+
+</div>
+</div>
+<a id="af2f0a86a0f14c42148fbec11f27b4690" name="af2f0a86a0f14c42148fbec11f27b4690"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2f0a86a0f14c42148fbec11f27b4690">&#9670;&#160;</a></span>HELIOS_EXPECT_FALSE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HELIOS_EXPECT_FALSE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x</td><td>)</td>
+          <td>&#160;&#160;&#160;(x)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="core_8hpp_source.html#l00132">132</a> of file <a class="el" href="core_8hpp_source.html">core.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ad21e58157e9f3c2d9c39f2ea5423d017" name="ad21e58157e9f3c2d9c39f2ea5423d017"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad21e58157e9f3c2d9c39f2ea5423d017">&#9670;&#160;</a></span>HELIOS_EXPECT_TRUE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HELIOS_EXPECT_TRUE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x</td><td>)</td>
+          <td>&#160;&#160;&#160;(x)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="core_8hpp_source.html#l00131">131</a> of file <a class="el" href="core_8hpp_source.html">core.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a754fba4b22744e64a97ad1afc9065bc1" name="a754fba4b22744e64a97ad1afc9065bc1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a754fba4b22744e64a97ad1afc9065bc1">&#9670;&#160;</a></span>HELIOS_FORCE_INLINE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HELIOS_FORCE_INLINE&#160;&#160;&#160;inline</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="core_8hpp_source.html#l00114">114</a> of file <a class="el" href="core_8hpp_source.html">core.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a95ef3dcee5d3dd81a75581aaa5a91b3a" name="a95ef3dcee5d3dd81a75581aaa5a91b3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95ef3dcee5d3dd81a75581aaa5a91b3a">&#9670;&#160;</a></span>HELIOS_NO_INLINE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HELIOS_NO_INLINE</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="core_8hpp_source.html#l00123">123</a> of file <a class="el" href="core_8hpp_source.html">core.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a0baa94baca2a0f972f63b78d01a9034d" name="a0baa94baca2a0f972f63b78d01a9034d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0baa94baca2a0f972f63b78d01a9034d">&#9670;&#160;</a></span>HELIOS_RELEASE_UNREACHABLE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HELIOS_RELEASE_UNREACHABLE</td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>&#160;&#160;&#160;<a class="el" href="core_8hpp.html#a97e756b8b0cf2000780f149894e07d0c">HELIOS_UNREACHABLE</a>()</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="core_8hpp_source.html#l00089">89</a> of file <a class="el" href="core_8hpp_source.html">core.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a48f3e62b87770c7794446ce3015653b5" name="a48f3e62b87770c7794446ce3015653b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48f3e62b87770c7794446ce3015653b5">&#9670;&#160;</a></span>HELIOS_STRINGIFY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HELIOS_STRINGIFY</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x</td><td>)</td>
+          <td>&#160;&#160;&#160;<a class="el" href="core_8hpp.html#a88543d6f718bdf82483fbcb4ee50f3ad">HELIOS_STRINGIFY_IMPL</a>(x)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="core_8hpp_source.html#l00099">99</a> of file <a class="el" href="core_8hpp_source.html">core.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a88543d6f718bdf82483fbcb4ee50f3ad" name="a88543d6f718bdf82483fbcb4ee50f3ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88543d6f718bdf82483fbcb4ee50f3ad">&#9670;&#160;</a></span>HELIOS_STRINGIFY_IMPL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HELIOS_STRINGIFY_IMPL</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x</td><td>)</td>
+          <td>&#160;&#160;&#160;#x</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="core_8hpp_source.html#l00098">98</a> of file <a class="el" href="core_8hpp_source.html">core.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a97e756b8b0cf2000780f149894e07d0c" name="a97e756b8b0cf2000780f149894e07d0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97e756b8b0cf2000780f149894e07d0c">&#9670;&#160;</a></span>HELIOS_UNREACHABLE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HELIOS_UNREACHABLE</td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>&#160;&#160;&#160;std::unreachable()</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="core_8hpp_source.html#l00085">85</a> of file <a class="el" href="core_8hpp_source.html">core.hpp</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_aebb8dcc11953d78e620bbef0b9e2183.html">core</a></li><li class="navelem"><a class="el" href="dir_8f49dd062eda24395df599c5385a3cb1.html">include</a></li><li class="navelem"><a class="el" href="dir_23069df5183a130785923908e80258ad.html">helios</a></li><li class="navelem"><a class="el" href="dir_2da2d982aeea650f7dd0b34d7b8d0119.html">core</a></li><li class="navelem"><a class="el" href="core_8hpp.html">core.hpp</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

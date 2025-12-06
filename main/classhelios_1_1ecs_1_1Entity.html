@@ -1,0 +1,783 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: helios::ecs::Entity Class Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classhelios_1_1ecs_1_1Entity.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="classhelios_1_1ecs_1_1Entity-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">helios::ecs::Entity Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Unique identifier for entities with generation counter to handle recycling.  
+ <a href="classhelios_1_1ecs_1_1Entity.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="entity_8hpp_source.html">entity.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a3a1347d7a9307abaaccc75279f8db2de" id="r_a3a1347d7a9307abaaccc75279f8db2de"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">IndexType</a> = <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">uint32_t</a></td></tr>
+<tr class="separator:a3a1347d7a9307abaaccc75279f8db2de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40d8cd0e93ef835aeb26252597b23b90" id="r_a40d8cd0e93ef835aeb26252597b23b90"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1Entity.html#a40d8cd0e93ef835aeb26252597b23b90">GenerationType</a> = <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">uint32_t</a></td></tr>
+<tr class="separator:a40d8cd0e93ef835aeb26252597b23b90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a64a7de4778bc22544a6ecb129a89525f" id="r_a64a7de4778bc22544a6ecb129a89525f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1Entity.html#a64a7de4778bc22544a6ecb129a89525f">Entity</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="memdesc:a64a7de4778bc22544a6ecb129a89525f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs an invalid entity.  <br /></td></tr>
+<tr class="separator:a64a7de4778bc22544a6ecb129a89525f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd4e0a6e2f9ce4f1a00fdff531ac5087" id="r_acd4e0a6e2f9ce4f1a00fdff531ac5087"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1Entity.html#acd4e0a6e2f9ce4f1a00fdff531ac5087">Entity</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">IndexType</a> index, <a class="el" href="classhelios_1_1ecs_1_1Entity.html#a40d8cd0e93ef835aeb26252597b23b90">GenerationType</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">generation</a>) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:acd4e0a6e2f9ce4f1a00fdff531ac5087"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs entity with specific index and generation.  <br /></td></tr>
+<tr class="separator:acd4e0a6e2f9ce4f1a00fdff531ac5087"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6276b480befa59c9c6658563a5af645b" id="r_a6276b480befa59c9c6658563a5af645b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1Entity.html#a6276b480befa59c9c6658563a5af645b">Entity</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> &amp;) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:a6276b480befa59c9c6658563a5af645b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafd5e869849f148cbfe1ed65694fa727" id="r_aafd5e869849f148cbfe1ed65694fa727"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1Entity.html#aafd5e869849f148cbfe1ed65694fa727">Entity</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> &amp;&amp;) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:aafd5e869849f148cbfe1ed65694fa727"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b975ef913cac8b084c92ad9fed566e5" id="r_a8b975ef913cac8b084c92ad9fed566e5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1Entity.html#a8b975ef913cac8b084c92ad9fed566e5">~Entity</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:a8b975ef913cac8b084c92ad9fed566e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec3fe441b32207d13a58a909e86f9400" id="r_aec3fe441b32207d13a58a909e86f9400"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1Entity.html#aec3fe441b32207d13a58a909e86f9400">operator=</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> &amp;) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:aec3fe441b32207d13a58a909e86f9400"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfbbf9ac15c5625c85e4a42ac3b7b7f3" id="r_acfbbf9ac15c5625c85e4a42ac3b7b7f3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1Entity.html#acfbbf9ac15c5625c85e4a42ac3b7b7f3">operator=</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> &amp;&amp;) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:acfbbf9ac15c5625c85e4a42ac3b7b7f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9003d6cbc86aa36b09ef5c31d69c58a7" id="r_a9003d6cbc86aa36b09ef5c31d69c58a7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1Entity.html#a9003d6cbc86aa36b09ef5c31d69c58a7">operator==</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> &amp;) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:a9003d6cbc86aa36b09ef5c31d69c58a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d9b99969be73d545b05ed6e75694705" id="r_a4d9b99969be73d545b05ed6e75694705"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1Entity.html#a4d9b99969be73d545b05ed6e75694705">operator!=</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> &amp;) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:a4d9b99969be73d545b05ed6e75694705"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d42d98daa0616a82fa489a9056ee928" id="r_a1d42d98daa0616a82fa489a9056ee928"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1Entity.html#a1d42d98daa0616a82fa489a9056ee928">operator&lt;</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> &amp;other) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="separator:a1d42d98daa0616a82fa489a9056ee928"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27290ea2728bdbc0c87bf03baae31fd7" id="r_a27290ea2728bdbc0c87bf03baae31fd7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1Entity.html#a27290ea2728bdbc0c87bf03baae31fd7">Valid</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:a27290ea2728bdbc0c87bf03baae31fd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the entity is valid.  <br /></td></tr>
+<tr class="separator:a27290ea2728bdbc0c87bf03baae31fd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac59cfce657aa8a901905f200a75790da" id="r_ac59cfce657aa8a901905f200a75790da"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1Entity.html#ac59cfce657aa8a901905f200a75790da">Hash</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:ac59cfce657aa8a901905f200a75790da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a hash value for this entity.  <br /></td></tr>
+<tr class="separator:ac59cfce657aa8a901905f200a75790da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaae9de10e9476a94a23048d438c07e49" id="r_aaae9de10e9476a94a23048d438c07e49"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">IndexType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1Entity.html#aaae9de10e9476a94a23048d438c07e49">Index</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:aaae9de10e9476a94a23048d438c07e49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the index component of the entity.  <br /></td></tr>
+<tr class="separator:aaae9de10e9476a94a23048d438c07e49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3db9ebedcce587f5a77365d3f95decad" id="r_a3db9ebedcce587f5a77365d3f95decad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="classhelios_1_1ecs_1_1Entity.html#a40d8cd0e93ef835aeb26252597b23b90">GenerationType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1Entity.html#a3db9ebedcce587f5a77365d3f95decad">Generation</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:a3db9ebedcce587f5a77365d3f95decad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the generation component of the entity.  <br /></td></tr>
+<tr class="separator:a3db9ebedcce587f5a77365d3f95decad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:addaed08012909076998b704c1fa3f9f4" id="r_addaed08012909076998b704c1fa3f9f4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">static</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">IndexType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1Entity.html#addaed08012909076998b704c1fa3f9f4">kInvalidIndex</a> = std::numeric_limits&lt;<a class="el" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">IndexType</a>&gt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">::max</a>()</td></tr>
+<tr class="separator:addaed08012909076998b704c1fa3f9f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82ae778f12652ea05544ccb502a42876" id="r_a82ae778f12652ea05544ccb502a42876"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">static</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="classhelios_1_1ecs_1_1Entity.html#a40d8cd0e93ef835aeb26252597b23b90">GenerationType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1Entity.html#a82ae778f12652ea05544ccb502a42876">kInvalidGeneration</a> = 0</td></tr>
+<tr class="separator:a82ae778f12652ea05544ccb502a42876"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Unique identifier for entities with generation counter to handle recycling. </p>
+<p><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> uses a combination of index and generation to provide stable references even when entities are destroyed and their indices are recycled. The generation counter ensures that old entity references become invalid when the index is reused.</p>
+<p>Memory layout: 32-bit index + 32-bit generation = 64-bit total</p>
+<dl class="section note"><dt>Note</dt><dd>This class is thread-safe for all operations. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00021">21</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a40d8cd0e93ef835aeb26252597b23b90" name="a40d8cd0e93ef835aeb26252597b23b90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40d8cd0e93ef835aeb26252597b23b90">&#9670;&#160;</a></span>GenerationType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a> <a class="el" href="classhelios_1_1ecs_1_1Entity.html#a40d8cd0e93ef835aeb26252597b23b90">helios::ecs::Entity::GenerationType</a> =  <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">uint32_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2details_2entities_manager_8hpp-example.html#a13">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/details/entities_manager.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00024">24</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a3a1347d7a9307abaaccc75279f8db2de" name="a3a1347d7a9307abaaccc75279f8db2de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a1347d7a9307abaaccc75279f8db2de">&#9670;&#160;</a></span>IndexType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a> <a class="el" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">helios::ecs::Entity::IndexType</a> =  <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">uint32_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2details_2entities_manager_8hpp-example.html#a15">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/details/entities_manager.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00023">23</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a64a7de4778bc22544a6ecb129a89525f" name="a64a7de4778bc22544a6ecb129a89525f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64a7de4778bc22544a6ecb129a89525f">&#9670;&#160;</a></span>Entity() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> helios::ecs::Entity::Entity </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructs an invalid entity. </p>
+<p>Creates an entity with invalid index and generation values. </p>
+
+</div>
+</div>
+<a id="acd4e0a6e2f9ce4f1a00fdff531ac5087" name="acd4e0a6e2f9ce4f1a00fdff531ac5087"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd4e0a6e2f9ce4f1a00fdff531ac5087">&#9670;&#160;</a></span>Entity() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> helios::ecs::Entity::Entity </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">IndexType</a>&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1Entity.html#a40d8cd0e93ef835aeb26252597b23b90">GenerationType</a>&#160;</td>
+          <td class="paramname"><em>generation</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructs entity with specific index and generation. </p>
+<p>Private constructor used by entity manager to create valid entities. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>The entity index </td></tr>
+    <tr><td class="paramname">generation</td><td>The entity generation </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00041">41</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   41</span>: index_(index), generation_(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">generation</a>) {}</div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_af0384de48d847585fcb340c71c231e5e"><div class="ttname"><a href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, Allocator, Components... &gt; Query</div><div class="ttdoc">Type alias for query with mutable world access.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02515">query.hpp:2515</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a6276b480befa59c9c6658563a5af645b" name="a6276b480befa59c9c6658563a5af645b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6276b480befa59c9c6658563a5af645b">&#9670;&#160;</a></span>Entity() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> helios::ecs::Entity::Entity </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aafd5e869849f148cbfe1ed65694fa727" name="aafd5e869849f148cbfe1ed65694fa727"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafd5e869849f148cbfe1ed65694fa727">&#9670;&#160;</a></span>Entity() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> helios::ecs::Entity::Entity </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8b975ef913cac8b084c92ad9fed566e5" name="a8b975ef913cac8b084c92ad9fed566e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b975ef913cac8b084c92ad9fed566e5">&#9670;&#160;</a></span>~Entity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> helios::ecs::Entity::~Entity </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a3db9ebedcce587f5a77365d3f95decad" name="a3db9ebedcce587f5a77365d3f95decad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3db9ebedcce587f5a77365d3f95decad">&#9670;&#160;</a></span>Generation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="classhelios_1_1ecs_1_1Entity.html#a40d8cd0e93ef835aeb26252597b23b90">GenerationType</a> helios::ecs::Entity::Generation </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the generation component of the entity. </p>
+<p>The generation counter prevents use of stale entity references after recycling. </p><dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> generation, or kInvalidGeneration if entity is invalid </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00082">82</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   82</span>{ <span class="keywordflow">return</span> generation_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ac59cfce657aa8a901905f200a75790da" name="ac59cfce657aa8a901905f200a75790da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac59cfce657aa8a901905f200a75790da">&#9670;&#160;</a></span>Hash()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a> helios::ecs::Entity::Hash </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Generates a hash value for this entity. </p>
+<p>Combines index and generation into a 64-bit hash value. Invalid entities always return hash value of 0. </p><dl class="section return"><dt>Returns</dt><dd>Hash combining generation (high bits) and index (low bits) </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00096">96</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   96</span>                                             {</div>
+<div class="line"><span class="lineno">   97</span>  <span class="keywordflow">if</span> (!<a class="code hl_function" href="classhelios_1_1ecs_1_1Entity.html#a27290ea2728bdbc0c87bf03baae31fd7">Valid</a>()) [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">unlikely</a>]] {</div>
+<div class="line"><span class="lineno">   98</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">   99</span>  }</div>
+<div class="line"><span class="lineno">  100</span> </div>
+<div class="line"><span class="lineno">  101</span>  <span class="keywordflow">return</span> (<span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(generation_) &lt;&lt; (<span class="keyword">sizeof</span>(<span class="keywordtype">size_t</span>) / 2)) | <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(index_);</div>
+<div class="line"><span class="lineno">  102</span>}</div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1Entity_html_a27290ea2728bdbc0c87bf03baae31fd7"><div class="ttname"><a href="classhelios_1_1ecs_1_1Entity.html#a27290ea2728bdbc0c87bf03baae31fd7">helios::ecs::Entity::Valid</a></div><div class="ttdeci">constexpr bool Valid() const noexcept</div><div class="ttdoc">Checks if the entity is valid.</div><div class="ttdef"><b>Definition</b> <a href="entity_8hpp_source.html#l00058">entity.hpp:58</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aaae9de10e9476a94a23048d438c07e49" name="aaae9de10e9476a94a23048d438c07e49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaae9de10e9476a94a23048d438c07e49">&#9670;&#160;</a></span>Index()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">IndexType</a> helios::ecs::Entity::Index </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the index component of the entity. </p>
+<p>The index identifies the entity's storage location in sparse arrays. </p><dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> index, or kInvalidIndex if entity is invalid </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00075">75</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   75</span>{ <span class="keywordflow">return</span> index_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a4d9b99969be73d545b05ed6e75694705" name="a4d9b99969be73d545b05ed6e75694705"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d9b99969be73d545b05ed6e75694705">&#9670;&#160;</a></span>operator!=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a> helios::ecs::Entity::operator!= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1d42d98daa0616a82fa489a9056ee928" name="a1d42d98daa0616a82fa489a9056ee928"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d42d98daa0616a82fa489a9056ee928">&#9670;&#160;</a></span>operator&lt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a> helios::ecs::Entity::operator&lt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00089">89</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   89</span>                                                                   {</div>
+<div class="line"><span class="lineno">   90</span>  <span class="keywordflow">if</span> (index_ != other.index_) {</div>
+<div class="line"><span class="lineno">   91</span>    <span class="keywordflow">return</span> index_ &lt; other.index_;</div>
+<div class="line"><span class="lineno">   92</span>  }</div>
+<div class="line"><span class="lineno">   93</span>  <span class="keywordflow">return</span> generation_ &lt; other.generation_;</div>
+<div class="line"><span class="lineno">   94</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aec3fe441b32207d13a58a909e86f9400" name="aec3fe441b32207d13a58a909e86f9400"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec3fe441b32207d13a58a909e86f9400">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> &amp; helios::ecs::Entity::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acfbbf9ac15c5625c85e4a42ac3b7b7f3" name="acfbbf9ac15c5625c85e4a42ac3b7b7f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acfbbf9ac15c5625c85e4a42ac3b7b7f3">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> &amp; helios::ecs::Entity::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9003d6cbc86aa36b09ef5c31d69c58a7" name="a9003d6cbc86aa36b09ef5c31d69c58a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9003d6cbc86aa36b09ef5c31d69c58a7">&#9670;&#160;</a></span>operator==()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a> helios::ecs::Entity::operator== </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a27290ea2728bdbc0c87bf03baae31fd7" name="a27290ea2728bdbc0c87bf03baae31fd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27290ea2728bdbc0c87bf03baae31fd7">&#9670;&#160;</a></span>Valid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a> helios::ecs::Entity::Valid </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if the entity is valid. </p>
+<p>An entity is valid if both its index and generation are not the reserved invalid values. </p><dl class="section return"><dt>Returns</dt><dd>True if entity has valid index and generation, false otherwise </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00058">58</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   58</span>                                                      {</div>
+<div class="line"><span class="lineno">   59</span>    <span class="keywordflow">return</span> index_ != <a class="code hl_variable" href="classhelios_1_1ecs_1_1Entity.html#addaed08012909076998b704c1fa3f9f4">kInvalidIndex</a> &amp;&amp; generation_ != <a class="code hl_variable" href="classhelios_1_1ecs_1_1Entity.html#a82ae778f12652ea05544ccb502a42876">kInvalidGeneration</a>;</div>
+<div class="line"><span class="lineno">   60</span>  }</div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1Entity_html_a82ae778f12652ea05544ccb502a42876"><div class="ttname"><a href="classhelios_1_1ecs_1_1Entity.html#a82ae778f12652ea05544ccb502a42876">helios::ecs::Entity::kInvalidGeneration</a></div><div class="ttdeci">static constexpr GenerationType kInvalidGeneration</div><div class="ttdef"><b>Definition</b> <a href="entity_8hpp_source.html#l00027">entity.hpp:27</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1Entity_html_addaed08012909076998b704c1fa3f9f4"><div class="ttname"><a href="classhelios_1_1ecs_1_1Entity.html#addaed08012909076998b704c1fa3f9f4">helios::ecs::Entity::kInvalidIndex</a></div><div class="ttdeci">static constexpr IndexType kInvalidIndex</div><div class="ttdef"><b>Definition</b> <a href="entity_8hpp_source.html#l00026">entity.hpp:26</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a82ae778f12652ea05544ccb502a42876" name="a82ae778f12652ea05544ccb502a42876"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82ae778f12652ea05544ccb502a42876">&#9670;&#160;</a></span>kInvalidGeneration</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="classhelios_1_1ecs_1_1Entity.html#a40d8cd0e93ef835aeb26252597b23b90">GenerationType</a> helios::ecs::Entity::kInvalidGeneration = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2details_2entities_manager_8hpp-example.html#a16">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/details/entities_manager.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00027">27</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
+
+</div>
+</div>
+<a id="addaed08012909076998b704c1fa3f9f4" name="addaed08012909076998b704c1fa3f9f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#addaed08012909076998b704c1fa3f9f4">&#9670;&#160;</a></span>kInvalidIndex</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">IndexType</a> helios::ecs::Entity::kInvalidIndex = std::numeric_limits&lt;<a class="el" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">IndexType</a>&gt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">::max</a>()</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2details_2entities_manager_8hpp-example.html#a18">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/details/entities_manager.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00026">26</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehelios.html">helios</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1ecs.html">ecs</a></li><li class="navelem"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

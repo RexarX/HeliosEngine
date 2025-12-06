@@ -1,0 +1,732 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: helios::ecs::details::CmdQueue Class Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classhelios_1_1ecs_1_1details_1_1CmdQueue.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classhelios_1_1ecs_1_1details_1_1CmdQueue-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">helios::ecs::details::CmdQueue Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><a class="el" href="classhelios_1_1ecs_1_1Command.html" title="Base class for all commands to be executed in the world.">Command</a> queue for deferred ECS operations.  
+ <a href="classhelios_1_1ecs_1_1details_1_1CmdQueue.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="command__queue_8hpp_source.html">command_queue.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a1fe0abbfa1256fd43a84aafbd884f7e7" id="r_a1fe0abbfa1256fd43a84aafbd884f7e7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1CmdQueue.html#a1fe0abbfa1256fd43a84aafbd884f7e7">CmdQueue</a> ()=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:a1fe0abbfa1256fd43a84aafbd884f7e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1bc93a2ff5c808d067ef5c2528936e9" id="r_ad1bc93a2ff5c808d067ef5c2528936e9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1CmdQueue.html#ad1bc93a2ff5c808d067ef5c2528936e9">CmdQueue</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1CmdQueue.html">CmdQueue</a> &amp;)=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">delete</a></td></tr>
+<tr class="separator:ad1bc93a2ff5c808d067ef5c2528936e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5aaef368f9d5223c6b2d08237d4d1fcf" id="r_a5aaef368f9d5223c6b2d08237d4d1fcf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1CmdQueue.html#a5aaef368f9d5223c6b2d08237d4d1fcf">CmdQueue</a> (<a class="el" href="classhelios_1_1ecs_1_1details_1_1CmdQueue.html">CmdQueue</a> &amp;&amp;) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:a5aaef368f9d5223c6b2d08237d4d1fcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af818becff7d6b43f1a4eadc4a254fe9e" id="r_af818becff7d6b43f1a4eadc4a254fe9e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1CmdQueue.html#af818becff7d6b43f1a4eadc4a254fe9e">~CmdQueue</a> ()=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:af818becff7d6b43f1a4eadc4a254fe9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad38766c35a81ad1025b35b98b025e5d7" id="r_ad38766c35a81ad1025b35b98b025e5d7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1ecs_1_1details_1_1CmdQueue.html">CmdQueue</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1CmdQueue.html#ad38766c35a81ad1025b35b98b025e5d7">operator=</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1CmdQueue.html">CmdQueue</a> &amp;)=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">delete</a></td></tr>
+<tr class="separator:ad38766c35a81ad1025b35b98b025e5d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c7607604956cd2835cce19a80e0e531" id="r_a8c7607604956cd2835cce19a80e0e531"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1ecs_1_1details_1_1CmdQueue.html">CmdQueue</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1CmdQueue.html#a8c7607604956cd2835cce19a80e0e531">operator=</a> (<a class="el" href="classhelios_1_1ecs_1_1details_1_1CmdQueue.html">CmdQueue</a> &amp;&amp;) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:a8c7607604956cd2835cce19a80e0e531"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7d25e408244e3db617b5fa97fe07508" id="r_ae7d25e408244e3db617b5fa97fe07508"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1CmdQueue.html#ae7d25e408244e3db617b5fa97fe07508">Clear</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:ae7d25e408244e3db617b5fa97fe07508"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears all pending commands from the queue.  <br /></td></tr>
+<tr class="separator:ae7d25e408244e3db617b5fa97fe07508"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ae89d9fbad82f5d5c6df751e1c6f90f" id="r_a8ae89d9fbad82f5d5c6df751e1c6f90f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1CmdQueue.html#a8ae89d9fbad82f5d5c6df751e1c6f90f">Reserve</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">capacity</a>)</td></tr>
+<tr class="memdesc:a8ae89d9fbad82f5d5c6df751e1c6f90f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reserves capacity for commands.  <br /></td></tr>
+<tr class="separator:a8ae89d9fbad82f5d5c6df751e1c6f90f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b2272e76397767f34fe085e44e698f7" id="r_a6b2272e76397767f34fe085e44e698f7"><td class="memTemplParams" colspan="2">template&lt;CommandTrait T, typename... Args&gt; <br />
+requires std::constructible_from&lt;T, Args...&gt;</td></tr>
+<tr class="memitem:a6b2272e76397767f34fe085e44e698f7"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1CmdQueue.html#a6b2272e76397767f34fe085e44e698f7">Emplace</a> (Args &amp;&amp;... <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">args</a>)</td></tr>
+<tr class="memdesc:a6b2272e76397767f34fe085e44e698f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs and enqueues a command in-place.  <br /></td></tr>
+<tr class="separator:a6b2272e76397767f34fe085e44e698f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7b45db0c26a1a5d5de9d3bde5a3172a" id="r_aa7b45db0c26a1a5d5de9d3bde5a3172a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1CmdQueue.html#aa7b45db0c26a1a5d5de9d3bde5a3172a">Enqueue</a> (std::unique_ptr&lt; <a class="el" href="classhelios_1_1ecs_1_1Command.html">Command</a> &gt; &amp;&amp;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">command</a>)</td></tr>
+<tr class="memdesc:aa7b45db0c26a1a5d5de9d3bde5a3172a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a pre-constructed command.  <br /></td></tr>
+<tr class="separator:aa7b45db0c26a1a5d5de9d3bde5a3172a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d551608440321636171152632253ee0" id="r_a4d551608440321636171152632253ee0"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
+requires std::same_as&lt;std::ranges::range_value_t&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">R</a>&gt;, std::unique_ptr&lt;<a class="el" href="classhelios_1_1ecs_1_1Command.html">Command</a>&gt;&gt;</td></tr>
+<tr class="memitem:a4d551608440321636171152632253ee0"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1CmdQueue.html#a4d551608440321636171152632253ee0">EnqueueBulk</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">R</a> &amp;&amp;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">commands</a>)</td></tr>
+<tr class="memdesc:a4d551608440321636171152632253ee0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues multiple commands in bulk.  <br /></td></tr>
+<tr class="separator:a4d551608440321636171152632253ee0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbb0a0396cb0aad49040ea6b1bad7582" id="r_abbb0a0396cb0aad49040ea6b1bad7582"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">auto</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1CmdQueue.html#abbb0a0396cb0aad49040ea6b1bad7582">DequeueAll</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a> -&gt; std::vector&lt; std::unique_ptr&lt; <a class="el" href="classhelios_1_1ecs_1_1Command.html">Command</a> &gt; &gt;</td></tr>
+<tr class="memdesc:abbb0a0396cb0aad49040ea6b1bad7582"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets all commands and clears the queue.  <br /></td></tr>
+<tr class="separator:abbb0a0396cb0aad49040ea6b1bad7582"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6199636d465803301bb8ab338df7fd13" id="r_a6199636d465803301bb8ab338df7fd13"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1CmdQueue.html#a6199636d465803301bb8ab338df7fd13">Empty</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:a6199636d465803301bb8ab338df7fd13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the queue is empty.  <br /></td></tr>
+<tr class="separator:a6199636d465803301bb8ab338df7fd13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac72f68a72f9fb7838b7c059a7e490ba3" id="r_ac72f68a72f9fb7838b7c059a7e490ba3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1CmdQueue.html#ac72f68a72f9fb7838b7c059a7e490ba3">Size</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:ac72f68a72f9fb7838b7c059a7e490ba3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of commands in the queue.  <br /></td></tr>
+<tr class="separator:ac72f68a72f9fb7838b7c059a7e490ba3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="classhelios_1_1ecs_1_1Command.html" title="Base class for all commands to be executed in the world.">Command</a> queue for deferred ECS operations. </p>
+<p>Provides a queue for commands that will be executed during <a class="el" href="classhelios_1_1ecs_1_1World.html#a8c135f24991d9a3e3cc57cacfee0d01c" title="Flushes buffer of pending operations.">World::Update()</a>. Commands are executed in the order they were enqueued, ensuring predictable behavior.</p>
+<p>Features:</p><ul>
+<li>Simple vector-based implementation for main thread usage</li>
+<li>Bulk operations for better performance</li>
+<li>Type-safe command emplacement</li>
+</ul>
+<dl class="section note"><dt>Note</dt><dd>Not thread-safe. All operations must be performed on the main thread. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="command__queue_8hpp_source.html#l00032">32</a> of file <a class="el" href="command__queue_8hpp_source.html">command_queue.hpp</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a1fe0abbfa1256fd43a84aafbd884f7e7" name="a1fe0abbfa1256fd43a84aafbd884f7e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1fe0abbfa1256fd43a84aafbd884f7e7">&#9670;&#160;</a></span>CmdQueue() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::ecs::details::CmdQueue::CmdQueue </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad1bc93a2ff5c808d067ef5c2528936e9" name="ad1bc93a2ff5c808d067ef5c2528936e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1bc93a2ff5c808d067ef5c2528936e9">&#9670;&#160;</a></span>CmdQueue() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::ecs::details::CmdQueue::CmdQueue </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1CmdQueue.html">CmdQueue</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5aaef368f9d5223c6b2d08237d4d1fcf" name="a5aaef368f9d5223c6b2d08237d4d1fcf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5aaef368f9d5223c6b2d08237d4d1fcf">&#9670;&#160;</a></span>CmdQueue() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::ecs::details::CmdQueue::CmdQueue </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1details_1_1CmdQueue.html">CmdQueue</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af818becff7d6b43f1a4eadc4a254fe9e" name="af818becff7d6b43f1a4eadc4a254fe9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af818becff7d6b43f1a4eadc4a254fe9e">&#9670;&#160;</a></span>~CmdQueue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::ecs::details::CmdQueue::~CmdQueue </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ae7d25e408244e3db617b5fa97fe07508" name="ae7d25e408244e3db617b5fa97fe07508"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7d25e408244e3db617b5fa97fe07508">&#9670;&#160;</a></span>Clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a> helios::ecs::details::CmdQueue::Clear </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Clears all pending commands from the queue. </p>
+<p>Removes all commands currently in the queue. </p>
+
+<p class="definition">Definition at line <a class="el" href="command__queue_8hpp_source.html#l00046">46</a> of file <a class="el" href="command__queue_8hpp_source.html">command_queue.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   46</span>{ commands_.clear(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="abbb0a0396cb0aad49040ea6b1bad7582" name="abbb0a0396cb0aad49040ea6b1bad7582"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbb0a0396cb0aad49040ea6b1bad7582">&#9670;&#160;</a></span>DequeueAll()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">auto</a> helios::ecs::details::CmdQueue::DequeueAll </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt; std::vector&lt;std::unique_ptr&lt;<a class="el" href="classhelios_1_1ecs_1_1Command.html">Command</a>&gt;&gt; </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets all commands and clears the queue. </p>
+<p>Moves all commands out of the queue, leaving it empty. </p><dl class="section return"><dt>Returns</dt><dd>Vector containing all commands that were in the queue </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="command__queue_8hpp_source.html#l00093">93</a> of file <a class="el" href="command__queue_8hpp_source.html">command_queue.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   93</span>                                                                                {</div>
+<div class="line"><span class="lineno">   94</span>    <span class="keywordflow">return</span> std::exchange(commands_, {});</div>
+<div class="line"><span class="lineno">   95</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a6b2272e76397767f34fe085e44e698f7" name="a6b2272e76397767f34fe085e44e698f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b2272e76397767f34fe085e44e698f7">&#9670;&#160;</a></span>Emplace()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;CommandTrait T, typename... Args&gt; <br />
+requires std::constructible_from&lt;T, Args...&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a> helios::ecs::details::CmdQueue::Emplace </td>
+          <td>(</td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructs and enqueues a command in-place. </p>
+<p>Creates a command of type T by forwarding arguments to its constructor. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td><a class="el" href="classhelios_1_1ecs_1_1Command.html" title="Base class for all commands to be executed in the world.">Command</a> type that derives from <a class="el" href="classhelios_1_1ecs_1_1Command.html" title="Base class for all commands to be executed in the world.">Command</a> </td></tr>
+    <tr><td class="paramname">Args</td><td>Argument types for T's constructor </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">args</td><td>Arguments to forward to T's constructor </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="command__queue_8hpp_source.html#l00064">64</a> of file <a class="el" href="command__queue_8hpp_source.html">command_queue.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   64</span>                               {</div>
+<div class="line"><span class="lineno">   65</span>    commands_.push_back(std::make_unique&lt;T&gt;(std::forward&lt;Args&gt;(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">args</a>)...));</div>
+<div class="line"><span class="lineno">   66</span>  }</div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_af0384de48d847585fcb340c71c231e5e"><div class="ttname"><a href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, Allocator, Components... &gt; Query</div><div class="ttdoc">Type alias for query with mutable world access.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02515">query.hpp:2515</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a6199636d465803301bb8ab338df7fd13" name="a6199636d465803301bb8ab338df7fd13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6199636d465803301bb8ab338df7fd13">&#9670;&#160;</a></span>Empty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a> helios::ecs::details::CmdQueue::Empty </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if the queue is empty. </p>
+<p>Returns true if there are no commands in the queue. </p><dl class="section return"><dt>Returns</dt><dd>True if queue is empty, false otherwise </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="command__queue_8hpp_source.html#l00102">102</a> of file <a class="el" href="command__queue_8hpp_source.html">command_queue.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  102</span>{ <span class="keywordflow">return</span> commands_.empty(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aa7b45db0c26a1a5d5de9d3bde5a3172a" name="aa7b45db0c26a1a5d5de9d3bde5a3172a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7b45db0c26a1a5d5de9d3bde5a3172a">&#9670;&#160;</a></span>Enqueue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a> helios::ecs::details::CmdQueue::Enqueue </td>
+          <td>(</td>
+          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="classhelios_1_1ecs_1_1Command.html">Command</a> &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>command</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Enqueues a pre-constructed command. </p>
+<p>Adds an already constructed command to the queue. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if command is nullptr. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">command</td><td>Unique pointer to command to enqueue </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="command__queue_8hpp_source.html#l00115">115</a> of file <a class="el" href="command__queue_8hpp_source.html">command_queue.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  115</span>                                                              {</div>
+<div class="line"><span class="lineno">  116</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">command</a> != <span class="keyword">nullptr</span>, <span class="stringliteral">&quot;Failed to enqueue command: command is nullptr!&quot;</span>);</div>
+<div class="line"><span class="lineno">  117</span>  commands_.push_back(std::move(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">command</a>));</div>
+<div class="line"><span class="lineno">  118</span>}</div>
+<div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00149">assert.hpp:149</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a4d551608440321636171152632253ee0" name="a4d551608440321636171152632253ee0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d551608440321636171152632253ee0">&#9670;&#160;</a></span>EnqueueBulk()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::ranges::range R&gt; <br />
+requires std::same_as&lt;std::ranges::range_value_t&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">R</a>&gt;, std::unique_ptr&lt;<a class="el" href="classhelios_1_1ecs_1_1Command.html">Command</a>&gt;&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a> helios::ecs::details::CmdQueue::EnqueueBulk </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">R</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>commands</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Enqueues multiple commands in bulk. </p>
+<p>Efficiently enqueues a range of commands in a single operation. The range is consumed (moved from) during this operation. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if any command in range is nullptr. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">R</td><td>Range type containing unique_ptr&lt;Command&gt; elements </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">commands</td><td>Range of commands to enqueue (will be moved from) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="command__queue_8hpp_source.html#l00122">122</a> of file <a class="el" href="command__queue_8hpp_source.html">command_queue.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  122</span>                                              {</div>
+<div class="line"><span class="lineno">  123</span><span class="preprocessor">#ifdef HELIOS_ENABLE_ASSERTS</span></div>
+<div class="line"><span class="lineno">  124</span>  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">command</a> : <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">commands</a>) {</div>
+<div class="line"><span class="lineno">  125</span>    <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">command</a> != <span class="keyword">nullptr</span>, <span class="stringliteral">&quot;Failed to enqueue commands in bulk: one of the commands is nullptr!&quot;</span>);</div>
+<div class="line"><span class="lineno">  126</span>  }</div>
+<div class="line"><span class="lineno">  127</span><span class="preprocessor">#endif</span></div>
+<div class="line"><span class="lineno">  128</span> </div>
+<div class="line"><span class="lineno">  129</span>  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::ranges::sized_range&lt;R&gt;) {</div>
+<div class="line"><span class="lineno">  130</span>    <span class="comment">// Reserve space to avoid multiple reallocations</span></div>
+<div class="line"><span class="lineno">  131</span>    commands_.reserve(commands_.size() + std::ranges::size(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">commands</a>));</div>
+<div class="line"><span class="lineno">  132</span>  }</div>
+<div class="line"><span class="lineno">  133</span> </div>
+<div class="line"><span class="lineno">  134</span>  <span class="comment">// Move all commands into the queue</span></div>
+<div class="line"><span class="lineno">  135</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp;&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">command</a> : <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">commands</a>) {</div>
+<div class="line"><span class="lineno">  136</span>    commands_.push_back(std::move(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">command</a>));</div>
+<div class="line"><span class="lineno">  137</span>  }</div>
+<div class="line"><span class="lineno">  138</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a8c7607604956cd2835cce19a80e0e531" name="a8c7607604956cd2835cce19a80e0e531"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c7607604956cd2835cce19a80e0e531">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1details_1_1CmdQueue.html">CmdQueue</a> &amp; helios::ecs::details::CmdQueue::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1details_1_1CmdQueue.html">CmdQueue</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad38766c35a81ad1025b35b98b025e5d7" name="ad38766c35a81ad1025b35b98b025e5d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad38766c35a81ad1025b35b98b025e5d7">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1details_1_1CmdQueue.html">CmdQueue</a> &amp; helios::ecs::details::CmdQueue::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1CmdQueue.html">CmdQueue</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8ae89d9fbad82f5d5c6df751e1c6f90f" name="a8ae89d9fbad82f5d5c6df751e1c6f90f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ae89d9fbad82f5d5c6df751e1c6f90f">&#9670;&#160;</a></span>Reserve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a> helios::ecs::details::CmdQueue::Reserve </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a>&#160;</td>
+          <td class="paramname"><em>capacity</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reserves capacity for commands. </p>
+<p>Pre-allocates memory to avoid reallocations during enqueue operations. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">capacity</td><td>Number of commands to reserve space for </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="command__queue_8hpp_source.html#l00053">53</a> of file <a class="el" href="command__queue_8hpp_source.html">command_queue.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   53</span>{ commands_.reserve(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">capacity</a>); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ac72f68a72f9fb7838b7c059a7e490ba3" name="ac72f68a72f9fb7838b7c059a7e490ba3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac72f68a72f9fb7838b7c059a7e490ba3">&#9670;&#160;</a></span>Size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a> helios::ecs::details::CmdQueue::Size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the number of commands in the queue. </p>
+<p>Returns the exact size of the queue. </p><dl class="section return"><dt>Returns</dt><dd>Number of commands in queue </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="command__queue_8hpp_source.html#l00109">109</a> of file <a class="el" href="command__queue_8hpp_source.html">command_queue.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  109</span>{ <span class="keywordflow">return</span> commands_.size(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehelios.html">helios</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1ecs.html">ecs</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1ecs_1_1details.html">details</a></li><li class="navelem"><a class="el" href="classhelios_1_1ecs_1_1details_1_1CmdQueue.html">CmdQueue</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

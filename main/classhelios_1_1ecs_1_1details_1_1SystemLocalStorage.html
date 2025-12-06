@@ -1,0 +1,1172 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: helios::ecs::details::SystemLocalStorage Class Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">helios::ecs::details::SystemLocalStorage Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Local storage for system-specific data (commands, events, and temporary allocations).  
+ <a href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a803609b8b736c6f321a8344c5ce0d7de" id="r_a803609b8b736c6f321a8344c5ce0d7de"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a803609b8b736c6f321a8344c5ce0d7de">FrameAllocatorType</a> = <a class="el" href="classhelios_1_1memory_1_1GrowableAllocator.html">memory::GrowableAllocator</a>&lt; <a class="el" href="classhelios_1_1memory_1_1FrameAllocator.html">memory::FrameAllocator</a> &gt;</td></tr>
+<tr class="separator:a803609b8b736c6f321a8344c5ce0d7de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a02a9023d395bfbcc68bb0a880ea376e4" id="r_a02a9023d395bfbcc68bb0a880ea376e4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a02a9023d395bfbcc68bb0a880ea376e4">SystemLocalStorage</a> ()</td></tr>
+<tr class="memdesc:a02a9023d395bfbcc68bb0a880ea376e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs system local storage with default frame allocator capacity.  <br /></td></tr>
+<tr class="separator:a02a9023d395bfbcc68bb0a880ea376e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ff6bdded02028911fee721245dd1d17" id="r_a7ff6bdded02028911fee721245dd1d17"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a7ff6bdded02028911fee721245dd1d17">SystemLocalStorage</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">frame_allocator_capacity</a>)</td></tr>
+<tr class="memdesc:a7ff6bdded02028911fee721245dd1d17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs system local storage with specified frame allocator capacity.  <br /></td></tr>
+<tr class="separator:a7ff6bdded02028911fee721245dd1d17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2e37d7df15de5bf12a3c75889916a1f" id="r_aa2e37d7df15de5bf12a3c75889916a1f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#aa2e37d7df15de5bf12a3c75889916a1f">SystemLocalStorage</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html">SystemLocalStorage</a> &amp;)=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">delete</a></td></tr>
+<tr class="separator:aa2e37d7df15de5bf12a3c75889916a1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa8adb582e078274780e0afafbd4ffea" id="r_afa8adb582e078274780e0afafbd4ffea"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#afa8adb582e078274780e0afafbd4ffea">SystemLocalStorage</a> (<a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html">SystemLocalStorage</a> &amp;&amp;) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:afa8adb582e078274780e0afafbd4ffea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa128544b424f59c6f2ee5cb96a5a884" id="r_afa128544b424f59c6f2ee5cb96a5a884"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#afa128544b424f59c6f2ee5cb96a5a884">~SystemLocalStorage</a> ()=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:afa128544b424f59c6f2ee5cb96a5a884"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7805b235a4013ff94538c01a180a26e1" id="r_a7805b235a4013ff94538c01a180a26e1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html">SystemLocalStorage</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a7805b235a4013ff94538c01a180a26e1">operator=</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html">SystemLocalStorage</a> &amp;)=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">delete</a></td></tr>
+<tr class="separator:a7805b235a4013ff94538c01a180a26e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a998c8690de5944adc644f41f30a21791" id="r_a998c8690de5944adc644f41f30a21791"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html">SystemLocalStorage</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a998c8690de5944adc644f41f30a21791">operator=</a> (<a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html">SystemLocalStorage</a> &amp;&amp;) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:a998c8690de5944adc644f41f30a21791"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a3438361d24b7b076f71a4c35e56324" id="r_a1a3438361d24b7b076f71a4c35e56324"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a1a3438361d24b7b076f71a4c35e56324">Clear</a> ()</td></tr>
+<tr class="memdesc:a1a3438361d24b7b076f71a4c35e56324"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears all stored commands and events.  <br /></td></tr>
+<tr class="separator:a1a3438361d24b7b076f71a4c35e56324"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab97719685947e4d4b91247015137f66c" id="r_ab97719685947e4d4b91247015137f66c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#ab97719685947e4d4b91247015137f66c">ClearAll</a> ()</td></tr>
+<tr class="memdesc:ab97719685947e4d4b91247015137f66c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears commands, events, and resets the frame allocator.  <br /></td></tr>
+<tr class="separator:ab97719685947e4d4b91247015137f66c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fcd5cda672add3690a5808f0a4a2ff7" id="r_a2fcd5cda672add3690a5808f0a4a2ff7"><td class="memTemplParams" colspan="2">template&lt;CommandTrait T, typename... Args&gt; <br />
+requires std::constructible_from&lt;T, Args...&gt;</td></tr>
+<tr class="memitem:a2fcd5cda672add3690a5808f0a4a2ff7"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a2fcd5cda672add3690a5808f0a4a2ff7">EmplaceCommand</a> (Args &amp;&amp;... <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">args</a>)</td></tr>
+<tr class="memdesc:a2fcd5cda672add3690a5808f0a4a2ff7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a command to the local command buffer.  <br /></td></tr>
+<tr class="separator:a2fcd5cda672add3690a5808f0a4a2ff7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7479c1d618317b532c80614836dc41f" id="r_ac7479c1d618317b532c80614836dc41f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#ac7479c1d618317b532c80614836dc41f">AddCommand</a> (std::unique_ptr&lt; <a class="el" href="classhelios_1_1ecs_1_1Command.html">Command</a> &gt; &amp;&amp;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">command</a>)</td></tr>
+<tr class="memdesc:ac7479c1d618317b532c80614836dc41f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a pre-constructed command to the local buffer.  <br /></td></tr>
+<tr class="separator:ac7479c1d618317b532c80614836dc41f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a817e2192f2f44438c4960cfb709df025" id="r_a817e2192f2f44438c4960cfb709df025"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a817e2192f2f44438c4960cfb709df025">ReserveCommands</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">capacity</a>)</td></tr>
+<tr class="memdesc:a817e2192f2f44438c4960cfb709df025"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reserves space for commands.  <br /></td></tr>
+<tr class="separator:a817e2192f2f44438c4960cfb709df025"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2051d079e315ec42be1dab7ab6439ebf" id="r_a2051d079e315ec42be1dab7ab6439ebf"><td class="memTemplParams" colspan="2">template&lt;EventTrait T&gt; </td></tr>
+<tr class="memitem:a2051d079e315ec42be1dab7ab6439ebf"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a2051d079e315ec42be1dab7ab6439ebf">WriteEvent</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> T &amp;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a>)</td></tr>
+<tr class="memdesc:a2051d079e315ec42be1dab7ab6439ebf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes an event to the local event queue.  <br /></td></tr>
+<tr class="separator:a2051d079e315ec42be1dab7ab6439ebf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2112be2db3f3b8fec023efa98c9bafec" id="r_a2112be2db3f3b8fec023efa98c9bafec"><td class="memTemplParams" colspan="2">template&lt;std::ranges::sized_range R&gt; <br />
+requires EventTrait&lt;std::ranges::range_value_t&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">R</a>&gt;&gt;</td></tr>
+<tr class="memitem:a2112be2db3f3b8fec023efa98c9bafec"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a2112be2db3f3b8fec023efa98c9bafec">WriteEventBulk</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">R</a> &amp;events)</td></tr>
+<tr class="memdesc:a2112be2db3f3b8fec023efa98c9bafec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes multiple events to the local event queue in bulk.  <br /></td></tr>
+<tr class="separator:a2112be2db3f3b8fec023efa98c9bafec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaea164c77719a037db8d503ad7d274cb" id="r_aaea164c77719a037db8d503ad7d274cb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#aaea164c77719a037db8d503ad7d274cb">ResetFrameAllocator</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:aaea164c77719a037db8d503ad7d274cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the frame allocator, freeing all temporary allocations.  <br /></td></tr>
+<tr class="separator:aaea164c77719a037db8d503ad7d274cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3b3f7c35d6bcddf6c028182f7aa41c4" id="r_af3b3f7c35d6bcddf6c028182f7aa41c4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#af3b3f7c35d6bcddf6c028182f7aa41c4">Empty</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:af3b3f7c35d6bcddf6c028182f7aa41c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if both commands and events are empty.  <br /></td></tr>
+<tr class="separator:af3b3f7c35d6bcddf6c028182f7aa41c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fbaab77fd560fe79c9d10f5d7853754" id="r_a4fbaab77fd560fe79c9d10f5d7853754"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a4fbaab77fd560fe79c9d10f5d7853754">CommandCount</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:a4fbaab77fd560fe79c9d10f5d7853754"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of commands in the buffer.  <br /></td></tr>
+<tr class="separator:a4fbaab77fd560fe79c9d10f5d7853754"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a9c78ebb9961f20de1d0aef052175b5" id="r_a5a9c78ebb9961f20de1d0aef052175b5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structhelios_1_1memory_1_1AllocatorStats.html">memory::AllocatorStats</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a5a9c78ebb9961f20de1d0aef052175b5">FrameAllocatorStats</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:a5a9c78ebb9961f20de1d0aef052175b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets frame allocator statistics.  <br /></td></tr>
+<tr class="separator:a5a9c78ebb9961f20de1d0aef052175b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45b708d8b310a7b317c1c7d4a59783af" id="r_a45b708d8b310a7b317c1c7d4a59783af"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a45b708d8b310a7b317c1c7d4a59783af">FrameAllocatorCapacity</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:a45b708d8b310a7b317c1c7d4a59783af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets total capacity of the frame allocator across all internal allocators.  <br /></td></tr>
+<tr class="separator:a45b708d8b310a7b317c1c7d4a59783af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7b0d1fc4e4d66a451b85de19642d7e4" id="r_ab7b0d1fc4e4d66a451b85de19642d7e4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">auto</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#ab7b0d1fc4e4d66a451b85de19642d7e4">GetCommands</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a> -&gt; std::vector&lt; std::unique_ptr&lt; <a class="el" href="classhelios_1_1ecs_1_1Command.html">Command</a> &gt; &gt; &amp;</td></tr>
+<tr class="memdesc:ab7b0d1fc4e4d66a451b85de19642d7e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets reference to the command buffer.  <br /></td></tr>
+<tr class="separator:ab7b0d1fc4e4d66a451b85de19642d7e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a597c06c51d4b324c8e1203acb01de5cd" id="r_a597c06c51d4b324c8e1203acb01de5cd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">auto</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a597c06c51d4b324c8e1203acb01de5cd">GetCommands</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a> -&gt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> std::vector&lt; std::unique_ptr&lt; <a class="el" href="classhelios_1_1ecs_1_1Command.html">Command</a> &gt; &gt; &amp;</td></tr>
+<tr class="memdesc:a597c06c51d4b324c8e1203acb01de5cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets const reference to the command buffer.  <br /></td></tr>
+<tr class="separator:a597c06c51d4b324c8e1203acb01de5cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d182964373a885bbe77d8e1d61624b1" id="r_a7d182964373a885bbe77d8e1d61624b1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html">EventQueue</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a7d182964373a885bbe77d8e1d61624b1">GetEventQueue</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:a7d182964373a885bbe77d8e1d61624b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets reference to the event queue.  <br /></td></tr>
+<tr class="separator:a7d182964373a885bbe77d8e1d61624b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a330ad8ea6204fb8ced19b2a64ad7ad70" id="r_a330ad8ea6204fb8ced19b2a64ad7ad70"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html">EventQueue</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a330ad8ea6204fb8ced19b2a64ad7ad70">GetEventQueue</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:a330ad8ea6204fb8ced19b2a64ad7ad70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets const reference to the event queue.  <br /></td></tr>
+<tr class="separator:a330ad8ea6204fb8ced19b2a64ad7ad70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d50a6f16446b9157d0876f79611e60d" id="r_a6d50a6f16446b9157d0876f79611e60d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a803609b8b736c6f321a8344c5ce0d7de">FrameAllocatorType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a6d50a6f16446b9157d0876f79611e60d">FrameAllocator</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:a6d50a6f16446b9157d0876f79611e60d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets reference to the frame allocator.  <br /></td></tr>
+<tr class="separator:a6d50a6f16446b9157d0876f79611e60d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8dd2b728de449c83a04b373cf3307aa2" id="r_a8dd2b728de449c83a04b373cf3307aa2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a803609b8b736c6f321a8344c5ce0d7de">FrameAllocatorType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a8dd2b728de449c83a04b373cf3307aa2">FrameAllocator</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:a8dd2b728de449c83a04b373cf3307aa2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets const reference to the frame allocator.  <br /></td></tr>
+<tr class="separator:a8dd2b728de449c83a04b373cf3307aa2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Local storage for system-specific data (commands, events, and temporary allocations). </p>
+<p>Each system gets its own local storage during execution to avoid contention. After system execution, the local storage is flushed to the appropriate global queues.</p>
+<p>The frame allocator is designed for temporary per-frame allocations within a system. It uses a growable allocator internally to automatically expand if the initial capacity is exceeded. The allocator should be reset at frame boundaries or after each system execution.</p>
+<dl class="section note"><dt>Note</dt><dd>Not thread-safe - each system has its own instance. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00039">39</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a803609b8b736c6f321a8344c5ce0d7de" name="a803609b8b736c6f321a8344c5ce0d7de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a803609b8b736c6f321a8344c5ce0d7de">&#9670;&#160;</a></span>FrameAllocatorType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a803609b8b736c6f321a8344c5ce0d7de">helios::ecs::details::SystemLocalStorage::FrameAllocatorType</a> =  <a class="el" href="classhelios_1_1memory_1_1GrowableAllocator.html">memory::GrowableAllocator</a>&lt;<a class="el" href="classhelios_1_1memory_1_1FrameAllocator.html">memory::FrameAllocator</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a31">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00041">41</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a02a9023d395bfbcc68bb0a880ea376e4" name="a02a9023d395bfbcc68bb0a880ea376e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02a9023d395bfbcc68bb0a880ea376e4">&#9670;&#160;</a></span>SystemLocalStorage() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::ecs::details::SystemLocalStorage::SystemLocalStorage </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructs system local storage with default frame allocator capacity. </p>
+
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00046">46</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   46</span>: frame_allocator_(<a class="code hl_variable" href="namespacehelios_1_1ecs_1_1details.html#a92ad37d9567d73d7c7bd0bd1efe6c318">kDefaultFrameAllocatorCapacity</a>) {}</div>
+<div class="ttc" id="anamespacehelios_1_1ecs_1_1details_html_a92ad37d9567d73d7c7bd0bd1efe6c318"><div class="ttname"><a href="namespacehelios_1_1ecs_1_1details.html#a92ad37d9567d73d7c7bd0bd1efe6c318">helios::ecs::details::kDefaultFrameAllocatorCapacity</a></div><div class="ttdeci">constexpr size_t kDefaultFrameAllocatorCapacity</div><div class="ttdoc">Default initial capacity for the per-system frame allocator (64KB).</div><div class="ttdef"><b>Definition</b> <a href="system__local__storage_8hpp_source.html#l00026">system_local_storage.hpp:26</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a7ff6bdded02028911fee721245dd1d17" name="a7ff6bdded02028911fee721245dd1d17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ff6bdded02028911fee721245dd1d17">&#9670;&#160;</a></span>SystemLocalStorage() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::ecs::details::SystemLocalStorage::SystemLocalStorage </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a>&#160;</td>
+          <td class="paramname"><em>frame_allocator_capacity</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructs system local storage with specified frame allocator capacity. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">frame_allocator_capacity</td><td>Initial capacity for the frame allocator in bytes </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00052">52</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   52</span>: frame_allocator_(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">frame_allocator_capacity</a>) {}</div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_af0384de48d847585fcb340c71c231e5e"><div class="ttname"><a href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, Allocator, Components... &gt; Query</div><div class="ttdoc">Type alias for query with mutable world access.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02515">query.hpp:2515</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aa2e37d7df15de5bf12a3c75889916a1f" name="aa2e37d7df15de5bf12a3c75889916a1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2e37d7df15de5bf12a3c75889916a1f">&#9670;&#160;</a></span>SystemLocalStorage() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::ecs::details::SystemLocalStorage::SystemLocalStorage </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html">SystemLocalStorage</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afa8adb582e078274780e0afafbd4ffea" name="afa8adb582e078274780e0afafbd4ffea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa8adb582e078274780e0afafbd4ffea">&#9670;&#160;</a></span>SystemLocalStorage() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::ecs::details::SystemLocalStorage::SystemLocalStorage </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html">SystemLocalStorage</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afa128544b424f59c6f2ee5cb96a5a884" name="afa128544b424f59c6f2ee5cb96a5a884"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa128544b424f59c6f2ee5cb96a5a884">&#9670;&#160;</a></span>~SystemLocalStorage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::ecs::details::SystemLocalStorage::~SystemLocalStorage </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ac7479c1d618317b532c80614836dc41f" name="ac7479c1d618317b532c80614836dc41f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7479c1d618317b532c80614836dc41f">&#9670;&#160;</a></span>AddCommand()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a> helios::ecs::details::SystemLocalStorage::AddCommand </td>
+          <td>(</td>
+          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="classhelios_1_1ecs_1_1Command.html">Command</a> &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>command</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Adds a pre-constructed command to the local buffer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">command</td><td>Unique pointer to command </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00190">190</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  190</span>                                                                           {</div>
+<div class="line"><span class="lineno">  191</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">command</a> != <span class="keyword">nullptr</span>, <span class="stringliteral">&quot;Failed to add command: command is null!&quot;</span>);</div>
+<div class="line"><span class="lineno">  192</span>  commands_.push_back(std::move(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">command</a>));</div>
+<div class="line"><span class="lineno">  193</span>}</div>
+<div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00149">assert.hpp:149</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a1a3438361d24b7b076f71a4c35e56324" name="a1a3438361d24b7b076f71a4c35e56324"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a3438361d24b7b076f71a4c35e56324">&#9670;&#160;</a></span>Clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a> helios::ecs::details::SystemLocalStorage::Clear </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Clears all stored commands and events. </p>
+<dl class="section note"><dt>Note</dt><dd>Does not reset the frame allocator. Call <a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#aaea164c77719a037db8d503ad7d274cb" title="Resets the frame allocator, freeing all temporary allocations.">ResetFrameAllocator()</a> separately. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00195">195</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  195</span>                                      {</div>
+<div class="line"><span class="lineno">  196</span>  commands_.clear();</div>
+<div class="line"><span class="lineno">  197</span>  events_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#a86288a1af0a4110d136cb75eca7ee89a">Clear</a>();</div>
+<div class="line"><span class="lineno">  198</span>}</div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventQueue_html_a86288a1af0a4110d136cb75eca7ee89a"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#a86288a1af0a4110d136cb75eca7ee89a">helios::ecs::details::EventQueue::Clear</a></div><div class="ttdeci">void Clear() noexcept</div><div class="ttdoc">Clears all events from the queue.</div><div class="ttdef"><b>Definition</b> <a href="event__queue_8hpp_source.html#l00047">event_queue.hpp:47</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ab97719685947e4d4b91247015137f66c" name="ab97719685947e4d4b91247015137f66c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab97719685947e4d4b91247015137f66c">&#9670;&#160;</a></span>ClearAll()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a> helios::ecs::details::SystemLocalStorage::ClearAll </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Clears commands, events, and resets the frame allocator. </p>
+<p>Call this at frame boundaries to reclaim all temporary memory. </p>
+
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00200">200</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  200</span>                                         {</div>
+<div class="line"><span class="lineno">  201</span>  <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a1a3438361d24b7b076f71a4c35e56324">Clear</a>();</div>
+<div class="line"><span class="lineno">  202</span>  <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#aaea164c77719a037db8d503ad7d274cb">ResetFrameAllocator</a>();</div>
+<div class="line"><span class="lineno">  203</span>}</div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1SystemLocalStorage_html_a1a3438361d24b7b076f71a4c35e56324"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a1a3438361d24b7b076f71a4c35e56324">helios::ecs::details::SystemLocalStorage::Clear</a></div><div class="ttdeci">void Clear()</div><div class="ttdoc">Clears all stored commands and events.</div><div class="ttdef"><b>Definition</b> <a href="system__local__storage_8hpp_source.html#l00195">system_local_storage.hpp:195</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1SystemLocalStorage_html_aaea164c77719a037db8d503ad7d274cb"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#aaea164c77719a037db8d503ad7d274cb">helios::ecs::details::SystemLocalStorage::ResetFrameAllocator</a></div><div class="ttdeci">void ResetFrameAllocator() noexcept</div><div class="ttdoc">Resets the frame allocator, freeing all temporary allocations.</div><div class="ttdef"><b>Definition</b> <a href="system__local__storage_8hpp_source.html#l00119">system_local_storage.hpp:119</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a4fbaab77fd560fe79c9d10f5d7853754" name="a4fbaab77fd560fe79c9d10f5d7853754"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4fbaab77fd560fe79c9d10f5d7853754">&#9670;&#160;</a></span>CommandCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a> helios::ecs::details::SystemLocalStorage::CommandCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the number of commands in the buffer. </p>
+<dl class="section return"><dt>Returns</dt><dd>Count of commands </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00131">131</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  131</span>{ <span class="keywordflow">return</span> commands_.size(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a2fcd5cda672add3690a5808f0a4a2ff7" name="a2fcd5cda672add3690a5808f0a4a2ff7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fcd5cda672add3690a5808f0a4a2ff7">&#9670;&#160;</a></span>EmplaceCommand()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;CommandTrait T, typename... Args&gt; <br />
+requires std::constructible_from&lt;T, Args...&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a> helios::ecs::details::SystemLocalStorage::EmplaceCommand </td>
+          <td>(</td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Adds a command to the local command buffer. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td><a class="el" href="classhelios_1_1ecs_1_1Command.html" title="Base class for all commands to be executed in the world.">Command</a> type </td></tr>
+    <tr><td class="paramname">Args</td><td>Constructor argument types </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">args</td><td>Arguments to forward to command constructor </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00080">80</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   80</span>                                      {</div>
+<div class="line"><span class="lineno">   81</span>    commands_.push_back(std::make_unique&lt;T&gt;(std::forward&lt;Args&gt;(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">args</a>)...));</div>
+<div class="line"><span class="lineno">   82</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="af3b3f7c35d6bcddf6c028182f7aa41c4" name="af3b3f7c35d6bcddf6c028182f7aa41c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3b3f7c35d6bcddf6c028182f7aa41c4">&#9670;&#160;</a></span>Empty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a> helios::ecs::details::SystemLocalStorage::Empty </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if both commands and events are empty. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if no commands or events are stored, false otherwise </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00125">125</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  125</span>{ <span class="keywordflow">return</span> commands_.empty() &amp;&amp; events_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#a7dc029411a47caec19d06f13446527ad">Empty</a>(); }</div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventQueue_html_a7dc029411a47caec19d06f13446527ad"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#a7dc029411a47caec19d06f13446527ad">helios::ecs::details::EventQueue::Empty</a></div><div class="ttdeci">bool Empty() const noexcept</div><div class="ttdoc">Checks if the queue is empty.</div><div class="ttdef"><b>Definition</b> <a href="event__queue_8hpp_source.html#l00129">event_queue.hpp:129</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a8dd2b728de449c83a04b373cf3307aa2" name="a8dd2b728de449c83a04b373cf3307aa2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8dd2b728de449c83a04b373cf3307aa2">&#9670;&#160;</a></span>FrameAllocator() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a803609b8b736c6f321a8344c5ce0d7de">FrameAllocatorType</a> &amp; helios::ecs::details::SystemLocalStorage::FrameAllocator </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets const reference to the frame allocator. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Data allocated with the frame allocator is only valid for the current frame. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Const reference to the growable frame allocator </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00182">182</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  182</span>{ <span class="keywordflow">return</span> frame_allocator_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a6d50a6f16446b9157d0876f79611e60d" name="a6d50a6f16446b9157d0876f79611e60d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d50a6f16446b9157d0876f79611e60d">&#9670;&#160;</a></span>FrameAllocator() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a803609b8b736c6f321a8344c5ce0d7de">FrameAllocatorType</a> &amp; helios::ecs::details::SystemLocalStorage::FrameAllocator </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets reference to the frame allocator. </p>
+<p>Use this allocator for temporary per-frame allocations that don't need individual deallocation. Memory is reclaimed when <a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#aaea164c77719a037db8d503ad7d274cb" title="Resets the frame allocator, freeing all temporary allocations.">ResetFrameAllocator()</a> is called. </p><dl class="section return"><dt>Returns</dt><dd>Reference to the growable frame allocator </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a7">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00175">175</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  175</span>{ <span class="keywordflow">return</span> frame_allocator_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a45b708d8b310a7b317c1c7d4a59783af" name="a45b708d8b310a7b317c1c7d4a59783af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45b708d8b310a7b317c1c7d4a59783af">&#9670;&#160;</a></span>FrameAllocatorCapacity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a> helios::ecs::details::SystemLocalStorage::FrameAllocatorCapacity </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets total capacity of the frame allocator across all internal allocators. </p>
+<dl class="section return"><dt>Returns</dt><dd>Total capacity in bytes </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00143">143</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  143</span>{ <span class="keywordflow">return</span> frame_allocator_.<a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#a889031631ac9782835ab31d100fde0fe">TotalCapacity</a>(); }</div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1GrowableAllocator_html_a889031631ac9782835ab31d100fde0fe"><div class="ttname"><a href="classhelios_1_1memory_1_1GrowableAllocator.html#a889031631ac9782835ab31d100fde0fe">helios::memory::GrowableAllocator::TotalCapacity</a></div><div class="ttdeci">size_t TotalCapacity() const noexcept</div><div class="ttdoc">Gets the total capacity across all allocator instances.</div><div class="ttdef"><b>Definition</b> <a href="growable__allocator_8hpp_source.html#l00499">growable_allocator.hpp:499</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a5a9c78ebb9961f20de1d0aef052175b5" name="a5a9c78ebb9961f20de1d0aef052175b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a9c78ebb9961f20de1d0aef052175b5">&#9670;&#160;</a></span>FrameAllocatorStats()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structhelios_1_1memory_1_1AllocatorStats.html">memory::AllocatorStats</a> helios::ecs::details::SystemLocalStorage::FrameAllocatorStats </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets frame allocator statistics. </p>
+<dl class="section return"><dt>Returns</dt><dd>Allocator statistics with current usage information </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a30">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00137">137</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  137</span>{ <span class="keywordflow">return</span> frame_allocator_.<a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#a909bbae085c9b3deab0996f962299711">Stats</a>(); }</div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1GrowableAllocator_html_a909bbae085c9b3deab0996f962299711"><div class="ttname"><a href="classhelios_1_1memory_1_1GrowableAllocator.html#a909bbae085c9b3deab0996f962299711">helios::memory::GrowableAllocator::Stats</a></div><div class="ttdeci">AllocatorStats Stats() const noexcept</div><div class="ttdoc">Gets combined statistics for all allocator instances.</div><div class="ttdef"><b>Definition</b> <a href="growable__allocator_8hpp_source.html#l00479">growable_allocator.hpp:479</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a597c06c51d4b324c8e1203acb01de5cd" name="a597c06c51d4b324c8e1203acb01de5cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a597c06c51d4b324c8e1203acb01de5cd">&#9670;&#160;</a></span>GetCommands() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">auto</a> helios::ecs::details::SystemLocalStorage::GetCommands </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const -&gt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> std::vector&lt;std::unique_ptr&lt;<a class="el" href="classhelios_1_1ecs_1_1Command.html">Command</a>&gt;&gt;&amp; </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets const reference to the command buffer. </p>
+<dl class="section return"><dt>Returns</dt><dd>Const reference to command vector </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00155">155</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  155</span>{ <span class="keywordflow">return</span> commands_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ab7b0d1fc4e4d66a451b85de19642d7e4" name="ab7b0d1fc4e4d66a451b85de19642d7e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7b0d1fc4e4d66a451b85de19642d7e4">&#9670;&#160;</a></span>GetCommands() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">auto</a> helios::ecs::details::SystemLocalStorage::GetCommands </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt; std::vector&lt;std::unique_ptr&lt;<a class="el" href="classhelios_1_1ecs_1_1Command.html">Command</a>&gt;&gt;&amp; </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets reference to the command buffer. </p>
+<dl class="section return"><dt>Returns</dt><dd>Reference to command vector </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00149">149</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  149</span>{ <span class="keywordflow">return</span> commands_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a330ad8ea6204fb8ced19b2a64ad7ad70" name="a330ad8ea6204fb8ced19b2a64ad7ad70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a330ad8ea6204fb8ced19b2a64ad7ad70">&#9670;&#160;</a></span>GetEventQueue() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html">EventQueue</a> &amp; helios::ecs::details::SystemLocalStorage::GetEventQueue </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets const reference to the event queue. </p>
+<dl class="section return"><dt>Returns</dt><dd>Const reference to event queue </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00167">167</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  167</span>{ <span class="keywordflow">return</span> events_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a7d182964373a885bbe77d8e1d61624b1" name="a7d182964373a885bbe77d8e1d61624b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d182964373a885bbe77d8e1d61624b1">&#9670;&#160;</a></span>GetEventQueue() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html">EventQueue</a> &amp; helios::ecs::details::SystemLocalStorage::GetEventQueue </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets reference to the event queue. </p>
+<dl class="section return"><dt>Returns</dt><dd>Reference to event queue </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00161">161</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  161</span>{ <span class="keywordflow">return</span> events_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a7805b235a4013ff94538c01a180a26e1" name="a7805b235a4013ff94538c01a180a26e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7805b235a4013ff94538c01a180a26e1">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html">SystemLocalStorage</a> &amp; helios::ecs::details::SystemLocalStorage::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html">SystemLocalStorage</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a998c8690de5944adc644f41f30a21791" name="a998c8690de5944adc644f41f30a21791"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a998c8690de5944adc644f41f30a21791">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html">SystemLocalStorage</a> &amp; helios::ecs::details::SystemLocalStorage::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html">SystemLocalStorage</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a817e2192f2f44438c4960cfb709df025" name="a817e2192f2f44438c4960cfb709df025"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a817e2192f2f44438c4960cfb709df025">&#9670;&#160;</a></span>ReserveCommands()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a> helios::ecs::details::SystemLocalStorage::ReserveCommands </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a>&#160;</td>
+          <td class="paramname"><em>capacity</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reserves space for commands. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">capacity</td><td>Number of commands to reserve space for </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00094">94</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   94</span>{ commands_.reserve(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">capacity</a>); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aaea164c77719a037db8d503ad7d274cb" name="aaea164c77719a037db8d503ad7d274cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaea164c77719a037db8d503ad7d274cb">&#9670;&#160;</a></span>ResetFrameAllocator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a> helios::ecs::details::SystemLocalStorage::ResetFrameAllocator </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Resets the frame allocator, freeing all temporary allocations. </p>
+<p>Call this at frame boundaries or after system execution to reclaim memory. </p><dl class="section warning"><dt>Warning</dt><dd>All pointers obtained from the frame allocator become invalid after this call. Do not store references or pointers to frame-allocated data beyond the current frame. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00119">119</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  119</span>{ frame_allocator_.<a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#abea05c7e16c48144cdae48e46e47c3cc">Reset</a>(); }</div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1GrowableAllocator_html_abea05c7e16c48144cdae48e46e47c3cc"><div class="ttname"><a href="classhelios_1_1memory_1_1GrowableAllocator.html#abea05c7e16c48144cdae48e46e47c3cc">helios::memory::GrowableAllocator::Reset</a></div><div class="ttdeci">void Reset() noexcept</div><div class="ttdoc">Resets all allocator instances.</div><div class="ttdef"><b>Definition</b> <a href="growable__allocator_8hpp_source.html#l00448">growable_allocator.hpp:448</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a2051d079e315ec42be1dab7ab6439ebf" name="a2051d079e315ec42be1dab7ab6439ebf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2051d079e315ec42be1dab7ab6439ebf">&#9670;&#160;</a></span>WriteEvent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;EventTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a> helios::ecs::details::SystemLocalStorage::WriteEvent </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> T &amp;&#160;</td>
+          <td class="paramname"><em>event</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Writes an event to the local event queue. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Event type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">event</td><td>Event to store </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a45">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00206">206</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  206</span>                                                         {</div>
+<div class="line"><span class="lineno">  207</span>  <span class="keywordflow">if</span> (!events_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#af38bf78014d3593b7004d8ca42e9c39d">IsRegistered</a>&lt;T&gt;()) {</div>
+<div class="line"><span class="lineno">  208</span>    events_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#ac6d4a5cf2eb57b6a965c7182b1a396a0">Register</a>&lt;T&gt;();</div>
+<div class="line"><span class="lineno">  209</span>  }</div>
+<div class="line"><span class="lineno">  210</span>  events_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#ae77c15357c3a18795761941351988539">Write</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a>);</div>
+<div class="line"><span class="lineno">  211</span>}</div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventQueue_html_ac6d4a5cf2eb57b6a965c7182b1a396a0"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#ac6d4a5cf2eb57b6a965c7182b1a396a0">helios::ecs::details::EventQueue::Register</a></div><div class="ttdeci">void Register()</div><div class="ttdoc">Registers an event type with the queue.</div><div class="ttdef"><b>Definition</b> <a href="event__queue_8hpp_source.html#l00150">event_queue.hpp:150</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventQueue_html_ae77c15357c3a18795761941351988539"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#ae77c15357c3a18795761941351988539">helios::ecs::details::EventQueue::Write</a></div><div class="ttdeci">void Write(const T &amp;event)</div><div class="ttdoc">Writes a single event to the queue.</div><div class="ttdef"><b>Definition</b> <a href="event__queue_8hpp_source.html#l00158">event_queue.hpp:158</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventQueue_html_af38bf78014d3593b7004d8ca42e9c39d"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#af38bf78014d3593b7004d8ca42e9c39d">helios::ecs::details::EventQueue::IsRegistered</a></div><div class="ttdeci">bool IsRegistered() const</div><div class="ttdoc">Checks if an event type is registered.</div><div class="ttdef"><b>Definition</b> <a href="event__queue_8hpp_source.html#l00234">event_queue.hpp:234</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a2112be2db3f3b8fec023efa98c9bafec" name="a2112be2db3f3b8fec023efa98c9bafec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2112be2db3f3b8fec023efa98c9bafec">&#9670;&#160;</a></span>WriteEventBulk()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::ranges::sized_range R&gt; <br />
+requires EventTrait&lt;std::ranges::range_value_t&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">R</a>&gt;&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a> helios::ecs::details::SystemLocalStorage::WriteEventBulk </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">R</a> &amp;&#160;</td>
+          <td class="paramname"><em>events</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Writes multiple events to the local event queue in bulk. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">R</td><td>Range of events </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">events</td><td>Range of events to store </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a46">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00215">215</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  215</span>                                                              {</div>
+<div class="line"><span class="lineno">  216</span>  <span class="keyword">using </span><a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">EventType</a> = std::ranges::range_value_t&lt;R&gt;;</div>
+<div class="line"><span class="lineno">  217</span>  <span class="keywordflow">if</span> (!events_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#af38bf78014d3593b7004d8ca42e9c39d">IsRegistered</a>&lt;<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">EventType</a>&gt;()) {</div>
+<div class="line"><span class="lineno">  218</span>    events_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#ac6d4a5cf2eb57b6a965c7182b1a396a0">Register</a>&lt;<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">EventType</a>&gt;();</div>
+<div class="line"><span class="lineno">  219</span>  }</div>
+<div class="line"><span class="lineno">  220</span>  events_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#a0ee465b6d6ce2718593cb0aa851804fb">WriteBulk</a>(events);</div>
+<div class="line"><span class="lineno">  221</span>}</div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventQueue_html_a0ee465b6d6ce2718593cb0aa851804fb"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#a0ee465b6d6ce2718593cb0aa851804fb">helios::ecs::details::EventQueue::WriteBulk</a></div><div class="ttdeci">void WriteBulk(const R &amp;events)</div><div class="ttdoc">Writes multiple events to the queue in bulk.</div><div class="ttdef"><b>Definition</b> <a href="event__queue_8hpp_source.html#l00166">event_queue.hpp:166</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehelios.html">helios</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1ecs.html">ecs</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1ecs_1_1details.html">details</a></li><li class="navelem"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html">SystemLocalStorage</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

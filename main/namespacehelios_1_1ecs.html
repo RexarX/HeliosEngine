@@ -1,0 +1,1259 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: helios::ecs Namespace Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('namespacehelios_1_1ecs.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#concepts">Concepts</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">helios::ecs Namespace Reference</div></div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespacehelios_1_1ecs_1_1details" id="r_namespacehelios_1_1ecs_1_1details"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1ecs_1_1details.html">details</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespacehelios_1_1ecs_1_1events" id="r_namespacehelios_1_1ecs_1_1events"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1ecs_1_1events.html">events</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1BasicQuery.html">BasicQuery</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1BasicQueryBuilder.html">BasicQueryBuilder</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1BasicQueryWithEntity.html">BasicQueryWithEntity</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrapper for queries that include entity in iteration.  <a href="classhelios_1_1ecs_1_1BasicQueryWithEntity.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1Command.html">Command</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for all commands to be executed in the world.  <a href="classhelios_1_1ecs_1_1Command.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1ecs_1_1ComponentTraits.html">ComponentTraits</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Component traits for optimization decisions.  <a href="structhelios_1_1ecs_1_1ComponentTraits.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1ComponentTypeInfo.html">ComponentTypeInfo</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Component type info for runtime operations.  <a href="classhelios_1_1ecs_1_1ComponentTypeInfo.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unique identifier for entities with generation counter to handle recycling.  <a href="classhelios_1_1ecs_1_1Entity.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1EntityCmdBuffer.html">EntityCmdBuffer</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1EventIterator.html">EventIterator</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Iterator wrapper for <a class="el" href="classhelios_1_1ecs_1_1EventReader.html">EventReader</a>.  <a href="classhelios_1_1ecs_1_1EventIterator.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1EventReader.html">EventReader</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1EventSimpleIterator.html">EventSimpleIterator</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple iterator for <a class="el" href="classhelios_1_1ecs_1_1EventReader.html">EventReader</a> that returns plain events.  <a href="classhelios_1_1ecs_1_1EventSimpleIterator.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1EventWriter.html">EventWriter</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type-safe writer for events.  <a href="classhelios_1_1ecs_1_1EventWriter.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1ecs_1_1IsConstComponent.html">IsConstComponent</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper to detect const components.  <a href="structhelios_1_1ecs_1_1IsConstComponent.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1ecs_1_1IsConstComponent_3_01const_01T_01_4.html">IsConstComponent&lt; const T &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1System.html">System</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1World.html">World</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classhelios_1_1ecs_1_1World.html" title="The World class manages entities with their components and systems.">World</a> class manages entities with their components and systems.  <a href="classhelios_1_1ecs_1_1World.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html">WorldCmdBuffer</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="concepts" name="concepts"></a>
+Concepts</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1ecs_1_1CommandTrait.html">CommandTrait</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1ecs_1_1ConstComponentTrait.html">ConstComponentTrait</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for const-qualified component types. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1ecs_1_1ComponentTrait.html">ComponentTrait</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept to check if a type can be used as a component. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1ecs_1_1ComponentWithNameTrait.html">ComponentWithNameTrait</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for components that provide a static name method. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1ecs_1_1TagComponentTrait.html">TagComponentTrait</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for tag components (empty). <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1ecs_1_1TrivialComponentTrait.html">TrivialComponentTrait</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for trivially copyable components (POD-like). <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1ecs_1_1TinyComponentTrait.html">TinyComponentTrait</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for tiny components (single cache line portion), where sizeof(T) &lt;= 16. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1ecs_1_1SmallComponentTrait.html">SmallComponentTrait</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for small components that fit in cache line, where sizeof(T) &lt;= 64. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1ecs_1_1MediumComponentTrait.html">MediumComponentTrait</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for medium components (multiple cache line portions), where 64 &lt; sizeof(T) &lt;= 256. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1ecs_1_1LargeComponentTrait.html">LargeComponentTrait</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for large components that don't fit in cache line, where sizeof(T) &gt; 256. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1ecs_1_1EventTrait.html">EventTrait</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for valid event types. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1ecs_1_1EventWithNameTrait.html">EventWithNameTrait</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for events with custom names. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1ecs_1_1EventWithClearPolicy.html">EventWithClearPolicy</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for events with custom clear policy. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1ecs_1_1ResourceTrait.html">ResourceTrait</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for valid resource types. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1ecs_1_1ResourceWithNameTrait.html">ResourceWithNameTrait</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for resources that provide custom names. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1ecs_1_1ResourceWithThreadSafetyTrait.html">ResourceWithThreadSafetyTrait</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for resources that provide thread-safety trait. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1ecs_1_1AtomicResourceTrait.html">AtomicResourceTrait</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for atomic resources that can be accessed concurrently. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1ecs_1_1SystemTrait.html">SystemTrait</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for valid system types. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1ecs_1_1SystemWithNameTrait.html">SystemWithNameTrait</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for systems with custom names. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1ecs_1_1WorldType.html">WorldType</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept that constrains a type to be the World type (with any cv-qualifiers). <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a9ede7913aa71f830d7181d280b3848a1" id="r_a9ede7913aa71f830d7181d280b3848a1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">ComponentTypeId</a> = <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a></td></tr>
+<tr class="memdesc:a9ede7913aa71f830d7181d280b3848a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type ID for components.  <br /></td></tr>
+<tr class="separator:a9ede7913aa71f830d7181d280b3848a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4af13cbfd2a10acdc094b4e4eab2cb74" id="r_a4af13cbfd2a10acdc094b4e4eab2cb74"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1ecs.html#a4af13cbfd2a10acdc094b4e4eab2cb74">EventTypeId</a> = <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a></td></tr>
+<tr class="memdesc:a4af13cbfd2a10acdc094b4e4eab2cb74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type ID for events.  <br /></td></tr>
+<tr class="separator:a4af13cbfd2a10acdc094b4e4eab2cb74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83d597eaa8fb1e270bfe8d4bc7245ced" id="r_a83d597eaa8fb1e270bfe8d4bc7245ced"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typename</a> Allocator  = std::allocator&lt;ComponentTypeId&gt;&gt; </td></tr>
+<tr class="memitem:a83d597eaa8fb1e270bfe8d4bc7245ced"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1ecs.html#a83d597eaa8fb1e270bfe8d4bc7245ced">QueryBuilder</a> = <a class="el" href="classhelios_1_1ecs_1_1BasicQueryBuilder.html">BasicQueryBuilder</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1World.html">World</a>, Allocator &gt;</td></tr>
+<tr class="memdesc:a83d597eaa8fb1e270bfe8d4bc7245ced"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for query builder with mutable world access.  <br /></td></tr>
+<tr class="separator:a83d597eaa8fb1e270bfe8d4bc7245ced"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4755541af4fd6360392ff763a9ac514b" id="r_a4755541af4fd6360392ff763a9ac514b"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typename</a> Allocator  = std::allocator&lt;ComponentTypeId&gt;&gt; </td></tr>
+<tr class="memitem:a4755541af4fd6360392ff763a9ac514b"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1ecs.html#a4755541af4fd6360392ff763a9ac514b">ReadOnlyQueryBuilder</a> = <a class="el" href="classhelios_1_1ecs_1_1BasicQueryBuilder.html">BasicQueryBuilder</a>&lt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1World.html">World</a>, Allocator &gt;</td></tr>
+<tr class="memdesc:a4755541af4fd6360392ff763a9ac514b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for query builder with read-only world access.  <br /></td></tr>
+<tr class="separator:a4755541af4fd6360392ff763a9ac514b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0384de48d847585fcb340c71c231e5e" id="r_af0384de48d847585fcb340c71c231e5e"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typename</a> Allocator , ComponentTrait... Components&gt; </td></tr>
+<tr class="memitem:af0384de48d847585fcb340c71c231e5e"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">Query</a> = <a class="el" href="classhelios_1_1ecs_1_1BasicQuery.html">BasicQuery</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1World.html">World</a>, Allocator, Components... &gt;</td></tr>
+<tr class="memdesc:af0384de48d847585fcb340c71c231e5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for query with mutable world access.  <br /></td></tr>
+<tr class="separator:af0384de48d847585fcb340c71c231e5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab717249650b680f0d613245ac2f607be" id="r_ab717249650b680f0d613245ac2f607be"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typename</a> Allocator , ComponentTrait... Components&gt; </td></tr>
+<tr class="memitem:ab717249650b680f0d613245ac2f607be"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1ecs.html#ab717249650b680f0d613245ac2f607be">ReadOnlyQuery</a> = <a class="el" href="classhelios_1_1ecs_1_1BasicQuery.html">BasicQuery</a>&lt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1World.html">World</a>, Allocator, Components... &gt;</td></tr>
+<tr class="memdesc:ab717249650b680f0d613245ac2f607be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for query with read-only world access.  <br /></td></tr>
+<tr class="separator:ab717249650b680f0d613245ac2f607be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a766673fbd9b01884e7c038e8ea55d353" id="r_a766673fbd9b01884e7c038e8ea55d353"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typename</a> Allocator , ComponentTrait... Components&gt; </td></tr>
+<tr class="memitem:a766673fbd9b01884e7c038e8ea55d353"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1ecs.html#a766673fbd9b01884e7c038e8ea55d353">QueryWithEntity</a> = <a class="el" href="classhelios_1_1ecs_1_1BasicQueryWithEntity.html">BasicQueryWithEntity</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1World.html">World</a>, Allocator, Components... &gt;</td></tr>
+<tr class="memdesc:a766673fbd9b01884e7c038e8ea55d353"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for query with entity with mutable world access.  <br /></td></tr>
+<tr class="separator:a766673fbd9b01884e7c038e8ea55d353"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefed4ec5025ab3f103cd9a288981aed3" id="r_aefed4ec5025ab3f103cd9a288981aed3"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typename</a> Allocator , ComponentTrait... Components&gt; </td></tr>
+<tr class="memitem:aefed4ec5025ab3f103cd9a288981aed3"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1ecs.html#aefed4ec5025ab3f103cd9a288981aed3">ReadOnlyQueryWithEntity</a> = <a class="el" href="classhelios_1_1ecs_1_1BasicQueryWithEntity.html">BasicQueryWithEntity</a>&lt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1World.html">World</a>, Allocator, Components... &gt;</td></tr>
+<tr class="memdesc:aefed4ec5025ab3f103cd9a288981aed3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for query with entity with read-only world access.  <br /></td></tr>
+<tr class="separator:aefed4ec5025ab3f103cd9a288981aed3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38437d4d9f600b65f850d797f98ad6a0" id="r_a38437d4d9f600b65f850d797f98ad6a0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1ecs.html#a38437d4d9f600b65f850d797f98ad6a0">ResourceTypeId</a> = <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a></td></tr>
+<tr class="memdesc:a38437d4d9f600b65f850d797f98ad6a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type ID for resources.  <br /></td></tr>
+<tr class="separator:a38437d4d9f600b65f850d797f98ad6a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8ceaaec54a33b280ced09180db654df" id="r_ae8ceaaec54a33b280ced09180db654df"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1ecs.html#ae8ceaaec54a33b280ced09180db654df">SystemTypeId</a> = <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a></td></tr>
+<tr class="memdesc:ae8ceaaec54a33b280ced09180db654df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type ID for systems.  <br /></td></tr>
+<tr class="separator:ae8ceaaec54a33b280ced09180db654df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:ab48aaed34af66c40a97690ad39f727f4" id="r_ab48aaed34af66c40a97690ad39f727f4"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1ecs.html#ab48aaed34af66c40a97690ad39f727f4">EventClearPolicy</a> : uint8_t { <a class="el" href="namespacehelios_1_1ecs.html#ab48aaed34af66c40a97690ad39f727f4a0edd03ba1f5a73f26d1fd764255ddaa1">kAutomatic</a>
+, <a class="el" href="namespacehelios_1_1ecs.html#ab48aaed34af66c40a97690ad39f727f4a840f73673d401f2e539743e82e167a45">kManual</a>
+ }</td></tr>
+<tr class="memdesc:ab48aaed34af66c40a97690ad39f727f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Policy for event clearing behavior.  <a href="namespacehelios_1_1ecs.html#ab48aaed34af66c40a97690ad39f727f4">More...</a><br /></td></tr>
+<tr class="separator:ab48aaed34af66c40a97690ad39f727f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:aa400818859ffa5601e8f7cd5b7603d83" id="r_aa400818859ffa5601e8f7cd5b7603d83"><td class="memTemplParams" colspan="2">template&lt;ComponentTrait T&gt; </td></tr>
+<tr class="memitem:aa400818859ffa5601e8f7cd5b7603d83"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">ComponentTypeId</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1ecs.html#aa400818859ffa5601e8f7cd5b7603d83">ComponentTypeIdOf</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:aa400818859ffa5601e8f7cd5b7603d83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type ID for components using CTTI.  <br /></td></tr>
+<tr class="separator:aa400818859ffa5601e8f7cd5b7603d83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6bf80a403b2fc24bf08fdbf1a9d9917b" id="r_a6bf80a403b2fc24bf08fdbf1a9d9917b"><td class="memTemplParams" colspan="2">template&lt;ComponentTrait T&gt; </td></tr>
+<tr class="memitem:a6bf80a403b2fc24bf08fdbf1a9d9917b"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> std::string_view&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1ecs.html#a6bf80a403b2fc24bf08fdbf1a9d9917b">ComponentNameOf</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="separator:a6bf80a403b2fc24bf08fdbf1a9d9917b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67590d407ec8b537cc3520ce67a3f5e9" id="r_a67590d407ec8b537cc3520ce67a3f5e9"><td class="memTemplParams" colspan="2">template&lt;EventTrait T&gt; </td></tr>
+<tr class="memitem:a67590d407ec8b537cc3520ce67a3f5e9"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="namespacehelios_1_1ecs.html#a4af13cbfd2a10acdc094b4e4eab2cb74">EventTypeId</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1ecs.html#a67590d407ec8b537cc3520ce67a3f5e9">EventTypeIdOf</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:a67590d407ec8b537cc3520ce67a3f5e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets type ID for an event type.  <br /></td></tr>
+<tr class="separator:a67590d407ec8b537cc3520ce67a3f5e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abcd3369fdd5ea0f7176fcfad65175051" id="r_abcd3369fdd5ea0f7176fcfad65175051"><td class="memTemplParams" colspan="2">template&lt;EventTrait T&gt; </td></tr>
+<tr class="memitem:abcd3369fdd5ea0f7176fcfad65175051"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> std::string_view&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1ecs.html#abcd3369fdd5ea0f7176fcfad65175051">EventNameOf</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:abcd3369fdd5ea0f7176fcfad65175051"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the name of an event.  <br /></td></tr>
+<tr class="separator:abcd3369fdd5ea0f7176fcfad65175051"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d40e76c71371330f6a48a0eaec9a3aa" id="r_a7d40e76c71371330f6a48a0eaec9a3aa"><td class="memTemplParams" colspan="2">template&lt;EventTrait T&gt; </td></tr>
+<tr class="memitem:a7d40e76c71371330f6a48a0eaec9a3aa"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="namespacehelios_1_1ecs.html#ab48aaed34af66c40a97690ad39f727f4">EventClearPolicy</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1ecs.html#a7d40e76c71371330f6a48a0eaec9a3aa">EventClearPolicyOf</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:a7d40e76c71371330f6a48a0eaec9a3aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the clear policy of an event.  <br /></td></tr>
+<tr class="separator:a7d40e76c71371330f6a48a0eaec9a3aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad685b588a20af7553d7a0cf9d638eb0b" id="r_ad685b588a20af7553d7a0cf9d638eb0b"><td class="memTemplParams" colspan="2">template&lt;WorldType WorldT&gt; </td></tr>
+<tr class="memitem:ad685b588a20af7553d7a0cf9d638eb0b"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1ecs.html#ad685b588a20af7553d7a0cf9d638eb0b">BasicQueryBuilder</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">WorldT</a> &amp;) -&gt; <a class="el" href="classhelios_1_1ecs_1_1BasicQueryBuilder.html">BasicQueryBuilder</a>&lt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">WorldT</a>, std::allocator&lt; <a class="el" href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">ComponentTypeId</a> &gt; &gt;</td></tr>
+<tr class="separator:ad685b588a20af7553d7a0cf9d638eb0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99c82a9b2830813f0bea3913fcb2d319" id="r_a99c82a9b2830813f0bea3913fcb2d319"><td class="memTemplParams" colspan="2">template&lt;WorldType WorldT&gt; </td></tr>
+<tr class="memitem:a99c82a9b2830813f0bea3913fcb2d319"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1ecs.html#a99c82a9b2830813f0bea3913fcb2d319">BasicQueryBuilder</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">WorldT</a> &amp;, <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html">app::AccessPolicy</a> &amp;) -&gt; <a class="el" href="classhelios_1_1ecs_1_1BasicQueryBuilder.html">BasicQueryBuilder</a>&lt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">WorldT</a>, std::allocator&lt; <a class="el" href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">ComponentTypeId</a> &gt; &gt;</td></tr>
+<tr class="separator:a99c82a9b2830813f0bea3913fcb2d319"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5392b35b4d3dc2a8101e81462c8de0d" id="r_ab5392b35b4d3dc2a8101e81462c8de0d"><td class="memTemplParams" colspan="2">template&lt;WorldType WorldT, <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typename</a> Allocator &gt; </td></tr>
+<tr class="memitem:ab5392b35b4d3dc2a8101e81462c8de0d"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1ecs.html#ab5392b35b4d3dc2a8101e81462c8de0d">BasicQueryBuilder</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">WorldT</a> &amp;, Allocator) -&gt; <a class="el" href="classhelios_1_1ecs_1_1BasicQueryBuilder.html">BasicQueryBuilder</a>&lt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">WorldT</a>, Allocator &gt;</td></tr>
+<tr class="separator:ab5392b35b4d3dc2a8101e81462c8de0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a043191682d0825f0208066be5728efef" id="r_a043191682d0825f0208066be5728efef"><td class="memTemplParams" colspan="2">template&lt;WorldType WorldT, <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typename</a> Allocator &gt; </td></tr>
+<tr class="memitem:a043191682d0825f0208066be5728efef"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1ecs.html#a043191682d0825f0208066be5728efef">BasicQueryBuilder</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">WorldT</a> &amp;, <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html">app::AccessPolicy</a> &amp;, Allocator) -&gt; <a class="el" href="classhelios_1_1ecs_1_1BasicQueryBuilder.html">BasicQueryBuilder</a>&lt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">WorldT</a>, Allocator &gt;</td></tr>
+<tr class="separator:a043191682d0825f0208066be5728efef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63b6d9b4e547dc3779e4bd0f518c14d9" id="r_a63b6d9b4e547dc3779e4bd0f518c14d9"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait T&gt; </td></tr>
+<tr class="memitem:a63b6d9b4e547dc3779e4bd0f518c14d9"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="namespacehelios_1_1ecs.html#a38437d4d9f600b65f850d797f98ad6a0">ResourceTypeId</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1ecs.html#a63b6d9b4e547dc3779e4bd0f518c14d9">ResourceTypeIdOf</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:a63b6d9b4e547dc3779e4bd0f518c14d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets type ID for a resource type.  <br /></td></tr>
+<tr class="separator:a63b6d9b4e547dc3779e4bd0f518c14d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa156d33741937b2c039927f9c831105a" id="r_aa156d33741937b2c039927f9c831105a"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait T&gt; </td></tr>
+<tr class="memitem:aa156d33741937b2c039927f9c831105a"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> std::string_view&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1ecs.html#aa156d33741937b2c039927f9c831105a">ResourceNameOf</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:aa156d33741937b2c039927f9c831105a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets name for a resource type.  <br /></td></tr>
+<tr class="separator:aa156d33741937b2c039927f9c831105a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1b71669fd6ef59204b8c9104e32dd16" id="r_ab1b71669fd6ef59204b8c9104e32dd16"><td class="memTemplParams" colspan="2">template&lt;ResourceTrait T&gt; </td></tr>
+<tr class="memitem:ab1b71669fd6ef59204b8c9104e32dd16"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1ecs.html#ab1b71669fd6ef59204b8c9104e32dd16">IsResourceThreadSafe</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:ab1b71669fd6ef59204b8c9104e32dd16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a resource type is thread-safe.  <br /></td></tr>
+<tr class="separator:ab1b71669fd6ef59204b8c9104e32dd16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a99e33fbc5d1a550358b25800c42368" id="r_a8a99e33fbc5d1a550358b25800c42368"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typename</a> T &gt; </td></tr>
+<tr class="memitem:a8a99e33fbc5d1a550358b25800c42368"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="namespacehelios_1_1ecs.html#ae8ceaaec54a33b280ced09180db654df">SystemTypeId</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1ecs.html#a8a99e33fbc5d1a550358b25800c42368">SystemTypeIdOf</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:a8a99e33fbc5d1a550358b25800c42368"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets type ID for a system type.  <br /></td></tr>
+<tr class="separator:a8a99e33fbc5d1a550358b25800c42368"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38ee9f9ebeaca23b2114ecdf322852a4" id="r_a38ee9f9ebeaca23b2114ecdf322852a4"><td class="memTemplParams" colspan="2">template&lt;SystemTrait T&gt; </td></tr>
+<tr class="memitem:a38ee9f9ebeaca23b2114ecdf322852a4"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> std::string_view&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1ecs.html#a38ee9f9ebeaca23b2114ecdf322852a4">SystemNameOf</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:a38ee9f9ebeaca23b2114ecdf322852a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the name of a system.  <br /></td></tr>
+<tr class="separator:a38ee9f9ebeaca23b2114ecdf322852a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a0836b770983c38edfe9d9c6c6a242d86" id="r_a0836b770983c38edfe9d9c6c6a242d86"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typename</a> T &gt; </td></tr>
+<tr class="memitem:a0836b770983c38edfe9d9c6c6a242d86"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1ecs.html#a0836b770983c38edfe9d9c6c6a242d86">IsConstComponent_v</a> = <a class="el" href="structhelios_1_1ecs_1_1IsConstComponent.html">IsConstComponent</a>&lt;T&gt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">::value</a></td></tr>
+<tr class="separator:a0836b770983c38edfe9d9c6c6a242d86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="a9ede7913aa71f830d7181d280b3848a1" name="a9ede7913aa71f830d7181d280b3848a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ede7913aa71f830d7181d280b3848a1">&#9670;&#160;</a></span>ComponentTypeId</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a> <a class="el" href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">helios::ecs::ComponentTypeId</a> = <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typedef</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Type ID for components. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2access_policy_8hpp-example.html#a0">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/access_policy.hpp</a>, and <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2query_8hpp-example.html#a138">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/query.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="component_8hpp_source.html#l00104">104</a> of file <a class="el" href="component_8hpp_source.html">component.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a4af13cbfd2a10acdc094b4e4eab2cb74" name="a4af13cbfd2a10acdc094b4e4eab2cb74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4af13cbfd2a10acdc094b4e4eab2cb74">&#9670;&#160;</a></span>EventTypeId</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a> <a class="el" href="namespacehelios_1_1ecs.html#a4af13cbfd2a10acdc094b4e4eab2cb74">helios::ecs::EventTypeId</a> = <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typedef</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Type ID for events. </p>
+
+<p class="definition">Definition at line <a class="el" href="event_8hpp_source.html#l00018">18</a> of file <a class="el" href="event_8hpp_source.html">event.hpp</a>.</p>
+
+</div>
+</div>
+<a id="af0384de48d847585fcb340c71c231e5e" name="af0384de48d847585fcb340c71c231e5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0384de48d847585fcb340c71c231e5e">&#9670;&#160;</a></span>Query</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typename</a> Allocator , ComponentTrait... Components&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">helios::ecs::Query</a> = <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typedef</a> <a class="el" href="classhelios_1_1ecs_1_1BasicQuery.html">BasicQuery</a>&lt;<a class="el" href="classhelios_1_1ecs_1_1World.html">World</a>, Allocator, Components...&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Type alias for query with mutable world access. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2access_policy_8hpp-example.html#a17">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/access_policy.hpp</a>, <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2app_8hpp-example.html#a50">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/app.hpp</a>, <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a55">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>, <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_config_8hpp-example.html#a9">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_config.hpp</a>, <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a5">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>, <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2details_2entities_manager_8hpp-example.html#a6">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/details/entities_manager.hpp</a>, <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2entity_command_buffer_8hpp-example.html#a1">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/entity_command_buffer.hpp</a>, <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2event_reader_8hpp-example.html#a3">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/event_reader.hpp</a>, <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2query_8hpp-example.html#a4">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/query.hpp</a>, <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2system_8hpp-example.html#a2">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/system.hpp</a>, and <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2world_command_buffer_8hpp-example.html#a1">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/world_command_buffer.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02515">2515</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a83d597eaa8fb1e270bfe8d4bc7245ced" name="a83d597eaa8fb1e270bfe8d4bc7245ced"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83d597eaa8fb1e270bfe8d4bc7245ced">&#9670;&#160;</a></span>QueryBuilder</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typename</a> Allocator  = std::allocator&lt;ComponentTypeId&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a> <a class="el" href="namespacehelios_1_1ecs.html#a83d597eaa8fb1e270bfe8d4bc7245ced">helios::ecs::QueryBuilder</a> = <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typedef</a> <a class="el" href="classhelios_1_1ecs_1_1BasicQueryBuilder.html">BasicQueryBuilder</a>&lt;<a class="el" href="classhelios_1_1ecs_1_1World.html">World</a>, Allocator&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Type alias for query builder with mutable world access. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2query_8hpp-example.html#a133">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/query.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02507">2507</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a766673fbd9b01884e7c038e8ea55d353" name="a766673fbd9b01884e7c038e8ea55d353"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a766673fbd9b01884e7c038e8ea55d353">&#9670;&#160;</a></span>QueryWithEntity</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typename</a> Allocator , ComponentTrait... Components&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a> <a class="el" href="namespacehelios_1_1ecs.html#a766673fbd9b01884e7c038e8ea55d353">helios::ecs::QueryWithEntity</a> = <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typedef</a> <a class="el" href="classhelios_1_1ecs_1_1BasicQueryWithEntity.html">BasicQueryWithEntity</a>&lt;<a class="el" href="classhelios_1_1ecs_1_1World.html">World</a>, Allocator, Components...&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Type alias for query with entity with mutable world access. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2query_8hpp-example.html#a136">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/query.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02523">2523</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ab717249650b680f0d613245ac2f607be" name="ab717249650b680f0d613245ac2f607be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab717249650b680f0d613245ac2f607be">&#9670;&#160;</a></span>ReadOnlyQuery</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typename</a> Allocator , ComponentTrait... Components&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a> <a class="el" href="namespacehelios_1_1ecs.html#ab717249650b680f0d613245ac2f607be">helios::ecs::ReadOnlyQuery</a> = <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typedef</a> <a class="el" href="classhelios_1_1ecs_1_1BasicQuery.html">BasicQuery</a>&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1World.html">World</a>, Allocator, Components...&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Type alias for query with read-only world access. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2query_8hpp-example.html#a135">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/query.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02519">2519</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a4755541af4fd6360392ff763a9ac514b" name="a4755541af4fd6360392ff763a9ac514b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4755541af4fd6360392ff763a9ac514b">&#9670;&#160;</a></span>ReadOnlyQueryBuilder</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typename</a> Allocator  = std::allocator&lt;ComponentTypeId&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a> <a class="el" href="namespacehelios_1_1ecs.html#a4755541af4fd6360392ff763a9ac514b">helios::ecs::ReadOnlyQueryBuilder</a> = <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typedef</a> <a class="el" href="classhelios_1_1ecs_1_1BasicQueryBuilder.html">BasicQueryBuilder</a>&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1World.html">World</a>, Allocator&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Type alias for query builder with read-only world access. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2query_8hpp-example.html#a134">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/query.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02511">2511</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aefed4ec5025ab3f103cd9a288981aed3" name="aefed4ec5025ab3f103cd9a288981aed3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aefed4ec5025ab3f103cd9a288981aed3">&#9670;&#160;</a></span>ReadOnlyQueryWithEntity</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typename</a> Allocator , ComponentTrait... Components&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a> <a class="el" href="namespacehelios_1_1ecs.html#aefed4ec5025ab3f103cd9a288981aed3">helios::ecs::ReadOnlyQueryWithEntity</a> = <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typedef</a> <a class="el" href="classhelios_1_1ecs_1_1BasicQueryWithEntity.html">BasicQueryWithEntity</a>&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1World.html">World</a>, Allocator, Components...&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Type alias for query with entity with read-only world access. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2query_8hpp-example.html#a137">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/query.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02527">2527</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a38437d4d9f600b65f850d797f98ad6a0" name="a38437d4d9f600b65f850d797f98ad6a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38437d4d9f600b65f850d797f98ad6a0">&#9670;&#160;</a></span>ResourceTypeId</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a> <a class="el" href="namespacehelios_1_1ecs.html#a38437d4d9f600b65f850d797f98ad6a0">helios::ecs::ResourceTypeId</a> = <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typedef</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Type ID for resources. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2access_policy_8hpp-example.html#a5">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/access_policy.hpp</a>, and <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a49">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="resource_8hpp_source.html#l00053">53</a> of file <a class="el" href="resource_8hpp_source.html">resource.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ae8ceaaec54a33b280ced09180db654df" name="ae8ceaaec54a33b280ced09180db654df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8ceaaec54a33b280ced09180db654df">&#9670;&#160;</a></span>SystemTypeId</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a> <a class="el" href="namespacehelios_1_1ecs.html#ae8ceaaec54a33b280ced09180db654df">helios::ecs::SystemTypeId</a> = <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typedef</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Type ID for systems. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_config_8hpp-example.html#a10">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_config.hpp</a>, and <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2system_8hpp-example.html#a9">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/system.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system_8hpp_source.html#l00093">93</a> of file <a class="el" href="system_8hpp_source.html">system.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="ab48aaed34af66c40a97690ad39f727f4" name="ab48aaed34af66c40a97690ad39f727f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab48aaed34af66c40a97690ad39f727f4">&#9670;&#160;</a></span>EventClearPolicy</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">enum</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">class</a> <a class="el" href="namespacehelios_1_1ecs.html#ab48aaed34af66c40a97690ad39f727f4">helios::ecs::EventClearPolicy</a> : <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">uint8_t</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Policy for event clearing behavior. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ab48aaed34af66c40a97690ad39f727f4a0edd03ba1f5a73f26d1fd764255ddaa1" name="ab48aaed34af66c40a97690ad39f727f4a0edd03ba1f5a73f26d1fd764255ddaa1"></a>kAutomatic&#160;</td><td class="fielddoc"><p>Events are automatically cleared after double buffer cycle. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ab48aaed34af66c40a97690ad39f727f4a840f73673d401f2e539743e82e167a45" name="ab48aaed34af66c40a97690ad39f727f4a840f73673d401f2e539743e82e167a45"></a>kManual&#160;</td><td class="fielddoc"><p>Events persist until manually cleared via ManualClear() </p>
+</td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="event_8hpp_source.html#l00023">23</a> of file <a class="el" href="event_8hpp_source.html">event.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   23</span>                            : <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">uint8_t</a> {</div>
+<div class="line"><span class="lineno">   24</span>  <a class="code hl_enumvalue" href="namespacehelios_1_1ecs.html#ab48aaed34af66c40a97690ad39f727f4a0edd03ba1f5a73f26d1fd764255ddaa1">kAutomatic</a>,  <span class="comment">///&lt; Events are automatically cleared after double buffer cycle</span></div>
+<div class="line"><span class="lineno">   25</span>  <a class="code hl_enumvalue" href="namespacehelios_1_1ecs.html#ab48aaed34af66c40a97690ad39f727f4a840f73673d401f2e539743e82e167a45">kManual</a>      <span class="comment">///&lt; Events persist until manually cleared via ManualClear()</span></div>
+<div class="line"><span class="lineno">   26</span>};</div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1BasicQuery_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicQuery.html">helios::ecs::BasicQuery</a></div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l01107">query.hpp:1107</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_ab48aaed34af66c40a97690ad39f727f4a0edd03ba1f5a73f26d1fd764255ddaa1"><div class="ttname"><a href="namespacehelios_1_1ecs.html#ab48aaed34af66c40a97690ad39f727f4a0edd03ba1f5a73f26d1fd764255ddaa1">helios::ecs::EventClearPolicy::kAutomatic</a></div><div class="ttdeci">@ kAutomatic</div><div class="ttdoc">Events are automatically cleared after double buffer cycle.</div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_ab48aaed34af66c40a97690ad39f727f4a840f73673d401f2e539743e82e167a45"><div class="ttname"><a href="namespacehelios_1_1ecs.html#ab48aaed34af66c40a97690ad39f727f4a840f73673d401f2e539743e82e167a45">helios::ecs::EventClearPolicy::kManual</a></div><div class="ttdeci">@ kManual</div><div class="ttdoc">Events persist until manually cleared via ManualClear()</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="ad685b588a20af7553d7a0cf9d638eb0b" name="ad685b588a20af7553d7a0cf9d638eb0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad685b588a20af7553d7a0cf9d638eb0b">&#9670;&#160;</a></span>BasicQueryBuilder() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;WorldType WorldT&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1BasicQueryBuilder.html">helios::ecs::BasicQueryBuilder</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">WorldT</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  <a class="el" href="classhelios_1_1ecs_1_1BasicQueryBuilder.html">BasicQueryBuilder</a>&lt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">WorldT</a>, std::allocator&lt; <a class="el" href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">ComponentTypeId</a> &gt; &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab5392b35b4d3dc2a8101e81462c8de0d" name="ab5392b35b4d3dc2a8101e81462c8de0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5392b35b4d3dc2a8101e81462c8de0d">&#9670;&#160;</a></span>BasicQueryBuilder() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;WorldType WorldT, <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typename</a> Allocator &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1BasicQueryBuilder.html">helios::ecs::BasicQueryBuilder</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">WorldT</a> &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Allocator&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> -&gt;  <a class="el" href="classhelios_1_1ecs_1_1BasicQueryBuilder.html">BasicQueryBuilder</a>&lt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">WorldT</a>, Allocator &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a99c82a9b2830813f0bea3913fcb2d319" name="a99c82a9b2830813f0bea3913fcb2d319"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99c82a9b2830813f0bea3913fcb2d319">&#9670;&#160;</a></span>BasicQueryBuilder() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;WorldType WorldT&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1BasicQueryBuilder.html">helios::ecs::BasicQueryBuilder</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">WorldT</a> &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html">app::AccessPolicy</a> &amp;&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> -&gt;  <a class="el" href="classhelios_1_1ecs_1_1BasicQueryBuilder.html">BasicQueryBuilder</a>&lt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">WorldT</a>, std::allocator&lt; <a class="el" href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">ComponentTypeId</a> &gt; &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a043191682d0825f0208066be5728efef" name="a043191682d0825f0208066be5728efef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a043191682d0825f0208066be5728efef">&#9670;&#160;</a></span>BasicQueryBuilder() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;WorldType WorldT, <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typename</a> Allocator &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1BasicQueryBuilder.html">helios::ecs::BasicQueryBuilder</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">WorldT</a> &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1app_1_1AccessPolicy.html">app::AccessPolicy</a> &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Allocator&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> -&gt;  <a class="el" href="classhelios_1_1ecs_1_1BasicQueryBuilder.html">BasicQueryBuilder</a>&lt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">WorldT</a>, Allocator &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6bf80a403b2fc24bf08fdbf1a9d9917b" name="a6bf80a403b2fc24bf08fdbf1a9d9917b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6bf80a403b2fc24bf08fdbf1a9d9917b">&#9670;&#160;</a></span>ComponentNameOf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> std::string_view helios::ecs::ComponentNameOf </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="component_8hpp_source.html#l00117">117</a> of file <a class="el" href="component_8hpp_source.html">component.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  117</span>                                                                  {</div>
+<div class="line"><span class="lineno">  118</span>  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_concept" href="concepthelios_1_1ecs_1_1ComponentWithNameTrait.html">ComponentWithNameTrait&lt;T&gt;</a>) {</div>
+<div class="line"><span class="lineno">  119</span>    <span class="keywordflow">return</span> T::GetName();</div>
+<div class="line"><span class="lineno">  120</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  121</span>    <span class="keywordflow">return</span> ctti::name_of&lt;T&gt;();</div>
+<div class="line"><span class="lineno">  122</span>  }</div>
+<div class="line"><span class="lineno">  123</span>}</div>
+<div class="ttc" id="aconcepthelios_1_1ecs_1_1ComponentWithNameTrait_html"><div class="ttname"><a href="concepthelios_1_1ecs_1_1ComponentWithNameTrait.html">helios::ecs::ComponentWithNameTrait</a></div><div class="ttdoc">Concept for components that provide a static name method.</div><div class="ttdef"><b>Definition</b> <a href="component_8hpp_source.html#l00046">component.hpp:46</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aa400818859ffa5601e8f7cd5b7603d83" name="aa400818859ffa5601e8f7cd5b7603d83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa400818859ffa5601e8f7cd5b7603d83">&#9670;&#160;</a></span>ComponentTypeIdOf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="namespacehelios_1_1ecs.html#a9ede7913aa71f830d7181d280b3848a1">ComponentTypeId</a> helios::ecs::ComponentTypeIdOf </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Type ID for components using CTTI. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Component type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Unique type ID for the component </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2query_8hpp-example.html#a139">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/query.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="component_8hpp_source.html#l00112">112</a> of file <a class="el" href="component_8hpp_source.html">component.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  112</span>                                                       {</div>
+<div class="line"><span class="lineno">  113</span>  <span class="keywordflow">return</span> ctti::type_index_of&lt;T&gt;().hash();</div>
+<div class="line"><span class="lineno">  114</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a7d40e76c71371330f6a48a0eaec9a3aa" name="a7d40e76c71371330f6a48a0eaec9a3aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d40e76c71371330f6a48a0eaec9a3aa">&#9670;&#160;</a></span>EventClearPolicyOf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;EventTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="namespacehelios_1_1ecs.html#ab48aaed34af66c40a97690ad39f727f4">EventClearPolicy</a> helios::ecs::EventClearPolicyOf </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the clear policy of an event. </p>
+<p>Returns provided policy or kAutomatic as default. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Event type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Event clear policy </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="event_8hpp_source.html#l00098">98</a> of file <a class="el" href="event_8hpp_source.html">event.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   98</span>                                                                       {</div>
+<div class="line"><span class="lineno">   99</span>  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_concept" href="concepthelios_1_1ecs_1_1EventWithClearPolicy.html">EventWithClearPolicy&lt;T&gt;</a>) {</div>
+<div class="line"><span class="lineno">  100</span>    <span class="keywordflow">return</span> T::GetClearPolicy();</div>
+<div class="line"><span class="lineno">  101</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  102</span>    <span class="keywordflow">return</span> EventClearPolicy::kAutomatic;</div>
+<div class="line"><span class="lineno">  103</span>  }</div>
+<div class="line"><span class="lineno">  104</span>}</div>
+<div class="ttc" id="aconcepthelios_1_1ecs_1_1EventWithClearPolicy_html"><div class="ttname"><a href="concepthelios_1_1ecs_1_1EventWithClearPolicy.html">helios::ecs::EventWithClearPolicy</a></div><div class="ttdoc">Concept for events with custom clear policy.</div><div class="ttdef"><b>Definition</b> <a href="event_8hpp_source.html#l00062">event.hpp:62</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="abcd3369fdd5ea0f7176fcfad65175051" name="abcd3369fdd5ea0f7176fcfad65175051"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abcd3369fdd5ea0f7176fcfad65175051">&#9670;&#160;</a></span>EventNameOf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;EventTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> std::string_view helios::ecs::EventNameOf </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the name of an event. </p>
+<p>Returns provided name or type name as fallback. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Event type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Event name </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="event_8hpp_source.html#l00083">83</a> of file <a class="el" href="event_8hpp_source.html">event.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   83</span>                                                              {</div>
+<div class="line"><span class="lineno">   84</span>  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_concept" href="concepthelios_1_1ecs_1_1EventWithNameTrait.html">EventWithNameTrait&lt;T&gt;</a>) {</div>
+<div class="line"><span class="lineno">   85</span>    <span class="keywordflow">return</span> T::GetName();</div>
+<div class="line"><span class="lineno">   86</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">   87</span>    <span class="keywordflow">return</span> ctti::name_of&lt;T&gt;();</div>
+<div class="line"><span class="lineno">   88</span>  }</div>
+<div class="line"><span class="lineno">   89</span>}</div>
+<div class="ttc" id="aconcepthelios_1_1ecs_1_1EventWithNameTrait_html"><div class="ttname"><a href="concepthelios_1_1ecs_1_1EventWithNameTrait.html">helios::ecs::EventWithNameTrait</a></div><div class="ttdoc">Concept for events with custom names.</div><div class="ttdef"><b>Definition</b> <a href="event_8hpp_source.html#l00052">event.hpp:52</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a67590d407ec8b537cc3520ce67a3f5e9" name="a67590d407ec8b537cc3520ce67a3f5e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67590d407ec8b537cc3520ce67a3f5e9">&#9670;&#160;</a></span>EventTypeIdOf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;EventTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="namespacehelios_1_1ecs.html#a4af13cbfd2a10acdc094b4e4eab2cb74">EventTypeId</a> helios::ecs::EventTypeIdOf </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets type ID for an event type. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Event type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Unique type ID for the event </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="event_8hpp_source.html#l00072">72</a> of file <a class="el" href="event_8hpp_source.html">event.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   72</span>                                                             {</div>
+<div class="line"><span class="lineno">   73</span>  <span class="keywordflow">return</span> ctti::type_index_of&lt;T&gt;().hash();</div>
+<div class="line"><span class="lineno">   74</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ab1b71669fd6ef59204b8c9104e32dd16" name="ab1b71669fd6ef59204b8c9104e32dd16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1b71669fd6ef59204b8c9104e32dd16">&#9670;&#160;</a></span>IsResourceThreadSafe()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ResourceTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a> helios::ecs::IsResourceThreadSafe </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if a resource type is thread-safe. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Resource type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if resource is thread-safe, false otherwise </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="resource_8hpp_source.html#l00085">85</a> of file <a class="el" href="resource_8hpp_source.html">resource.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   85</span>                                                             {</div>
+<div class="line"><span class="lineno">   86</span>  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_concept" href="concepthelios_1_1ecs_1_1ResourceWithThreadSafetyTrait.html">ResourceWithThreadSafetyTrait&lt;T&gt;</a>) {</div>
+<div class="line"><span class="lineno">   87</span>    <span class="keywordflow">return</span> T::ThreadSafe();</div>
+<div class="line"><span class="lineno">   88</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">   89</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">   90</span>  }</div>
+<div class="line"><span class="lineno">   91</span>}</div>
+<div class="ttc" id="aconcepthelios_1_1ecs_1_1ResourceWithThreadSafetyTrait_html"><div class="ttname"><a href="concepthelios_1_1ecs_1_1ResourceWithThreadSafetyTrait.html">helios::ecs::ResourceWithThreadSafetyTrait</a></div><div class="ttdoc">Concept for resources that provide thread-safety trait.</div><div class="ttdef"><b>Definition</b> <a href="resource_8hpp_source.html#l00039">resource.hpp:39</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aa156d33741937b2c039927f9c831105a" name="aa156d33741937b2c039927f9c831105a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa156d33741937b2c039927f9c831105a">&#9670;&#160;</a></span>ResourceNameOf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ResourceTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> std::string_view helios::ecs::ResourceNameOf </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets name for a resource type. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Resource type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Name of the resource </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="resource_8hpp_source.html#l00071">71</a> of file <a class="el" href="resource_8hpp_source.html">resource.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   71</span>                                                                 {</div>
+<div class="line"><span class="lineno">   72</span>  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_concept" href="concepthelios_1_1ecs_1_1ResourceWithNameTrait.html">ResourceWithNameTrait&lt;T&gt;</a>) {</div>
+<div class="line"><span class="lineno">   73</span>    <span class="keywordflow">return</span> T::GetName();</div>
+<div class="line"><span class="lineno">   74</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">   75</span>    <span class="keywordflow">return</span> ctti::name_of&lt;T&gt;();</div>
+<div class="line"><span class="lineno">   76</span>  }</div>
+<div class="line"><span class="lineno">   77</span>}</div>
+<div class="ttc" id="aconcepthelios_1_1ecs_1_1ResourceWithNameTrait_html"><div class="ttname"><a href="concepthelios_1_1ecs_1_1ResourceWithNameTrait.html">helios::ecs::ResourceWithNameTrait</a></div><div class="ttdoc">Concept for resources that provide custom names.</div><div class="ttdef"><b>Definition</b> <a href="resource_8hpp_source.html#l00029">resource.hpp:29</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a63b6d9b4e547dc3779e4bd0f518c14d9" name="a63b6d9b4e547dc3779e4bd0f518c14d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63b6d9b4e547dc3779e4bd0f518c14d9">&#9670;&#160;</a></span>ResourceTypeIdOf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ResourceTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="namespacehelios_1_1ecs.html#a38437d4d9f600b65f850d797f98ad6a0">ResourceTypeId</a> helios::ecs::ResourceTypeIdOf </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets type ID for a resource type. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Resource type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Unique type ID for the resource </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="resource_8hpp_source.html#l00061">61</a> of file <a class="el" href="resource_8hpp_source.html">resource.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   61</span>                                                     {</div>
+<div class="line"><span class="lineno">   62</span>  <span class="keywordflow">return</span> ctti::type_index_of&lt;T&gt;().hash();</div>
+<div class="line"><span class="lineno">   63</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a38ee9f9ebeaca23b2114ecdf322852a4" name="a38ee9f9ebeaca23b2114ecdf322852a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38ee9f9ebeaca23b2114ecdf322852a4">&#9670;&#160;</a></span>SystemNameOf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;SystemTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> std::string_view helios::ecs::SystemNameOf </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the name of a system. </p>
+<p>Returns provided name or type name as fallback. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td><a class="el" href="classhelios_1_1ecs_1_1System.html">System</a> type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1ecs_1_1System.html">System</a> name </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2system_8hpp-example.html#a11">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/system.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system_8hpp_source.html#l00112">112</a> of file <a class="el" href="system_8hpp_source.html">system.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  112</span>                                                               {</div>
+<div class="line"><span class="lineno">  113</span>  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_concept" href="concepthelios_1_1ecs_1_1SystemWithNameTrait.html">SystemWithNameTrait&lt;T&gt;</a>) {</div>
+<div class="line"><span class="lineno">  114</span>    <span class="keywordflow">return</span> T::GetName();</div>
+<div class="line"><span class="lineno">  115</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  116</span>    <span class="keywordflow">return</span> ctti::name_of&lt;T&gt;();</div>
+<div class="line"><span class="lineno">  117</span>  }</div>
+<div class="line"><span class="lineno">  118</span>}</div>
+<div class="ttc" id="aconcepthelios_1_1ecs_1_1SystemWithNameTrait_html"><div class="ttname"><a href="concepthelios_1_1ecs_1_1SystemWithNameTrait.html">helios::ecs::SystemWithNameTrait</a></div><div class="ttdoc">Concept for systems with custom names.</div><div class="ttdef"><b>Definition</b> <a href="system_8hpp_source.html#l00086">system.hpp:86</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a8a99e33fbc5d1a550358b25800c42368" name="a8a99e33fbc5d1a550358b25800c42368"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a99e33fbc5d1a550358b25800c42368">&#9670;&#160;</a></span>SystemTypeIdOf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typename</a> T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="namespacehelios_1_1ecs.html#ae8ceaaec54a33b280ced09180db654df">SystemTypeId</a> helios::ecs::SystemTypeIdOf </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets type ID for a system type. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td><a class="el" href="classhelios_1_1ecs_1_1System.html">System</a> type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Unique type ID for the system </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2system_8hpp-example.html#a10">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/system.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system_8hpp_source.html#l00101">101</a> of file <a class="el" href="system_8hpp_source.html">system.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  101</span>                                                 {</div>
+<div class="line"><span class="lineno">  102</span>  <span class="keywordflow">return</span> ctti::type_index_of&lt;T&gt;().hash();</div>
+<div class="line"><span class="lineno">  103</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a0836b770983c38edfe9d9c6c6a242d86" name="a0836b770983c38edfe9d9c6c6a242d86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0836b770983c38edfe9d9c6c6a242d86">&#9670;&#160;</a></span>IsConstComponent_v</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typename</a> T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a> helios::ecs::IsConstComponent_v = <a class="el" href="structhelios_1_1ecs_1_1IsConstComponent.html">IsConstComponent</a>&lt;T&gt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">::value</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="component_8hpp_source.html#l00026">26</a> of file <a class="el" href="component_8hpp_source.html">component.hpp</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehelios.html">helios</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1ecs.html">ecs</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

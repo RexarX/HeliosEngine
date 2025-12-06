@@ -1,0 +1,646 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: helios::app::SystemSetConfig&lt; Schedule, Set &gt; Class Template Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classhelios_1_1app_1_1SystemSetConfig.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classhelios_1_1app_1_1SystemSetConfig-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">helios::app::SystemSetConfig&lt; Schedule, Set &gt; Class Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="system__set__config_8hpp_source.html">system_set_config.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a299e32cc2ff957fcd7d95b0a0be5df23" id="r_a299e32cc2ff957fcd7d95b0a0be5df23"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html#a299e32cc2ff957fcd7d95b0a0be5df23">SystemSetConfig</a> (<a class="el" href="classhelios_1_1app_1_1SubApp.html">SubApp</a> &amp;sub_app, Schedule schedule={}) noexcept</td></tr>
+<tr class="memdesc:a299e32cc2ff957fcd7d95b0a0be5df23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a system set configuration builder.  <br /></td></tr>
+<tr class="separator:a299e32cc2ff957fcd7d95b0a0be5df23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab99961c862b33df0947c93c095367798" id="r_ab99961c862b33df0947c93c095367798"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html#ab99961c862b33df0947c93c095367798">SystemSetConfig</a> (const <a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html">SystemSetConfig</a> &amp;)=delete</td></tr>
+<tr class="separator:ab99961c862b33df0947c93c095367798"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6b9b5d6107ed15dc76944dbfad4aa45" id="r_af6b9b5d6107ed15dc76944dbfad4aa45"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html#af6b9b5d6107ed15dc76944dbfad4aa45">SystemSetConfig</a> (<a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html">SystemSetConfig</a> &amp;&amp;) noexcept=default</td></tr>
+<tr class="separator:af6b9b5d6107ed15dc76944dbfad4aa45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5381e820d0b8cdbd6de53042d4c3ebc8" id="r_a5381e820d0b8cdbd6de53042d4c3ebc8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html#a5381e820d0b8cdbd6de53042d4c3ebc8">~SystemSetConfig</a> ()</td></tr>
+<tr class="separator:a5381e820d0b8cdbd6de53042d4c3ebc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb43e4f0d2155b2c377ebb970848c3f1" id="r_adb43e4f0d2155b2c377ebb970848c3f1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html">SystemSetConfig</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html#adb43e4f0d2155b2c377ebb970848c3f1">operator=</a> (const <a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html">SystemSetConfig</a> &amp;)=delete</td></tr>
+<tr class="separator:adb43e4f0d2155b2c377ebb970848c3f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea2f0bbf898b909ad17bde00913ae03f" id="r_aea2f0bbf898b909ad17bde00913ae03f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html">SystemSetConfig</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html#aea2f0bbf898b909ad17bde00913ae03f">operator=</a> (<a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html">SystemSetConfig</a> &amp;&amp;) noexcept=default</td></tr>
+<tr class="separator:aea2f0bbf898b909ad17bde00913ae03f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8a5f81caf52270096ce11e73eb33132" id="r_ae8a5f81caf52270096ce11e73eb33132"><td class="memTemplParams" colspan="2">template&lt;SystemSetTrait... AfterSets&gt; <br />
+requires (sizeof...(AfterSets) &gt; 0 &amp;&amp; utils::UniqueTypes&lt;AfterSets...&gt;)</td></tr>
+<tr class="memitem:ae8a5f81caf52270096ce11e73eb33132"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html">SystemSetConfig</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html#ae8a5f81caf52270096ce11e73eb33132">After</a> ()</td></tr>
+<tr class="memdesc:ae8a5f81caf52270096ce11e73eb33132"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds ordering constraint: this set runs after specified sets.  <br /></td></tr>
+<tr class="separator:ae8a5f81caf52270096ce11e73eb33132"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe12c37ad0a3b60fd9664dd3021cd9bb" id="r_abe12c37ad0a3b60fd9664dd3021cd9bb"><td class="memTemplParams" colspan="2">template&lt;SystemSetTrait... BeforeSets&gt; <br />
+requires (sizeof...(BeforeSets) &gt; 0 &amp;&amp; utils::UniqueTypes&lt;BeforeSets...&gt;)</td></tr>
+<tr class="memitem:abe12c37ad0a3b60fd9664dd3021cd9bb"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html">SystemSetConfig</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html#abe12c37ad0a3b60fd9664dd3021cd9bb">Before</a> ()</td></tr>
+<tr class="memdesc:abe12c37ad0a3b60fd9664dd3021cd9bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds ordering constraint: this set runs before specified sets.  <br /></td></tr>
+<tr class="separator:abe12c37ad0a3b60fd9664dd3021cd9bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09f35765d667a0309eccd05da667be3f" id="r_a09f35765d667a0309eccd05da667be3f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html#a09f35765d667a0309eccd05da667be3f">Apply</a> ()</td></tr>
+<tr class="memdesc:a09f35765d667a0309eccd05da667be3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Explicitly applies the configuration.  <br /></td></tr>
+<tr class="separator:a09f35765d667a0309eccd05da667be3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9e9d91ffb894b2e70353af7df7f4606" id="r_ad9e9d91ffb894b2e70353af7df7f4606"><td class="memTemplParams" colspan="2">template&lt;SystemSetTrait... AfterSets&gt; <br />
+requires (sizeof...(AfterSets) &gt; 0 &amp;&amp; utils::UniqueTypes&lt;AfterSets...&gt;)</td></tr>
+<tr class="memitem:ad9e9d91ffb894b2e70353af7df7f4606"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html#ad9e9d91ffb894b2e70353af7df7f4606">After</a> () -&gt; <a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html">SystemSetConfig</a> &amp;</td></tr>
+<tr class="separator:ad9e9d91ffb894b2e70353af7df7f4606"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20ae349519488d20750c64625f532db1" id="r_a20ae349519488d20750c64625f532db1"><td class="memTemplParams" colspan="2">template&lt;SystemSetTrait... BeforeSets&gt; <br />
+requires (sizeof...(BeforeSets) &gt; 0 &amp;&amp; utils::UniqueTypes&lt;BeforeSets...&gt;)</td></tr>
+<tr class="memitem:a20ae349519488d20750c64625f532db1"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html#a20ae349519488d20750c64625f532db1">Before</a> () -&gt; <a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html">SystemSetConfig</a> &amp;</td></tr>
+<tr class="separator:a20ae349519488d20750c64625f532db1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;ScheduleTrait Schedule, SystemSetTrait Set&gt;<br />
+class helios::app::SystemSetConfig&lt; Schedule, Set &gt;</div>
+<p class="definition">Definition at line <a class="el" href="system__set__config_8hpp_source.html#l00030">30</a> of file <a class="el" href="system__set__config_8hpp_source.html">system_set_config.hpp</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a299e32cc2ff957fcd7d95b0a0be5df23" name="a299e32cc2ff957fcd7d95b0a0be5df23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a299e32cc2ff957fcd7d95b0a0be5df23">&#9670;&#160;</a></span>SystemSetConfig() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ScheduleTrait Schedule, SystemSetTrait Set&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html">helios::app::SystemSetConfig</a>&lt; Schedule, Set &gt;::SystemSetConfig </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1SubApp.html">SubApp</a> &amp;&#160;</td>
+          <td class="paramname"><em>sub_app</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Schedule&#160;</td>
+          <td class="paramname"><em>schedule</em> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructs a system set configuration builder. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sub_app</td><td>Reference to the sub-app where the set is configured </td></tr>
+    <tr><td class="paramname">schedule</td><td>Schedule instance where the set is configured </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__set__config_8hpp_source.html#l00037">37</a> of file <a class="el" href="system__set__config_8hpp_source.html">system_set_config.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   37</span>{}) <span class="keyword">noexcept</span> : sub_app_(sub_app), schedule_(schedule) {}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ab99961c862b33df0947c93c095367798" name="ab99961c862b33df0947c93c095367798"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab99961c862b33df0947c93c095367798">&#9670;&#160;</a></span>SystemSetConfig() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ScheduleTrait Schedule, SystemSetTrait Set&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html">helios::app::SystemSetConfig</a>&lt; Schedule, Set &gt;::SystemSetConfig </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html">SystemSetConfig</a>&lt; Schedule, Set &gt; &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af6b9b5d6107ed15dc76944dbfad4aa45" name="af6b9b5d6107ed15dc76944dbfad4aa45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6b9b5d6107ed15dc76944dbfad4aa45">&#9670;&#160;</a></span>SystemSetConfig() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ScheduleTrait Schedule, SystemSetTrait Set&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html">helios::app::SystemSetConfig</a>&lt; Schedule, Set &gt;::SystemSetConfig </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html">SystemSetConfig</a>&lt; Schedule, Set &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5381e820d0b8cdbd6de53042d4c3ebc8" name="a5381e820d0b8cdbd6de53042d4c3ebc8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5381e820d0b8cdbd6de53042d4c3ebc8">&#9670;&#160;</a></span>~SystemSetConfig()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ScheduleTrait Schedule, SystemSetTrait Set&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html">helios::app::SystemSetConfig</a>&lt; Schedule, Set &gt;::~<a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html">SystemSetConfig</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_set_config_8hpp-example.html#a0">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_set_config.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__set__config_8hpp_source.html#l00084">84</a> of file <a class="el" href="system__set__config_8hpp_source.html">system_set_config.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   84</span>                                                        {</div>
+<div class="line"><span class="lineno">   85</span>  <span class="keywordflow">if</span> (!applied_) {</div>
+<div class="line"><span class="lineno">   86</span>    <a class="code hl_function" href="classhelios_1_1app_1_1SystemSetConfig.html#a09f35765d667a0309eccd05da667be3f">Apply</a>();</div>
+<div class="line"><span class="lineno">   87</span>  }</div>
+<div class="line"><span class="lineno">   88</span>}</div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SystemSetConfig_html_a09f35765d667a0309eccd05da667be3f"><div class="ttname"><a href="classhelios_1_1app_1_1SystemSetConfig.html#a09f35765d667a0309eccd05da667be3f">helios::app::SystemSetConfig::Apply</a></div><div class="ttdeci">void Apply()</div><div class="ttdoc">Explicitly applies the configuration.</div><div class="ttdef"><b>Definition</b> <a href="system__set__config_8hpp_source.html#l00107">system_set_config.hpp:107</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ae8a5f81caf52270096ce11e73eb33132" name="ae8a5f81caf52270096ce11e73eb33132"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8a5f81caf52270096ce11e73eb33132">&#9670;&#160;</a></span>After() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ScheduleTrait Schedule, SystemSetTrait Set&gt; </div>
+<div class="memtemplate">
+template&lt;SystemSetTrait... AfterSets&gt; <br />
+requires (sizeof...(AfterSets) &gt; 0 &amp;&amp; utils::UniqueTypes&lt;AfterSets...&gt;)</div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html">SystemSetConfig</a> &amp; <a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html">helios::app::SystemSetConfig</a>&lt; Schedule, Set &gt;::After </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Adds ordering constraint: this set runs after specified sets. </p>
+<p>Creates a dependency edge from each specified set to this set. All systems in the specified sets will run before systems in this set. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">AfterSets</td><td>System set types that must run before this set </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to this config for method chaining </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_set_config_8hpp-example.html#a2">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_set_config.hpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<a id="ad9e9d91ffb894b2e70353af7df7f4606" name="ad9e9d91ffb894b2e70353af7df7f4606"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9e9d91ffb894b2e70353af7df7f4606">&#9670;&#160;</a></span>After() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ScheduleTrait Schedule, SystemSetTrait Set&gt; </div>
+<div class="memtemplate">
+template&lt;SystemSetTrait... AfterSets&gt; <br />
+requires (sizeof...(AfterSets) &gt; 0 &amp;&amp; utils::UniqueTypes&lt;AfterSets...&gt;)</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto <a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html">helios::app::SystemSetConfig</a>&lt; Schedule, Set &gt;::After </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt; <a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html">SystemSetConfig</a>&amp; </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="system__set__config_8hpp_source.html#l00093">93</a> of file <a class="el" href="system__set__config_8hpp_source.html">system_set_config.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   93</span>                                                                      {</div>
+<div class="line"><span class="lineno">   94</span>  (after_sets_.push_back(SystemSetIdOf&lt;AfterSets&gt;()), ...);</div>
+<div class="line"><span class="lineno">   95</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><span class="lineno">   96</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a09f35765d667a0309eccd05da667be3f" name="a09f35765d667a0309eccd05da667be3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09f35765d667a0309eccd05da667be3f">&#9670;&#160;</a></span>Apply()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ScheduleTrait Schedule, SystemSetTrait Set&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html">helios::app::SystemSetConfig</a>&lt; Schedule, Set &gt;::Apply </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Explicitly applies the configuration. </p>
+<p>Called automatically by destructor if not already applied. Can be called explicitly to control when configuration is finalized. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_set_config_8hpp-example.html#a4">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_set_config.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system__set__config_8hpp_source.html#l00107">107</a> of file <a class="el" href="system__set__config_8hpp_source.html">system_set_config.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  107</span>                                                  {</div>
+<div class="line"><span class="lineno">  108</span>  <span class="keywordflow">if</span> (applied_) {</div>
+<div class="line"><span class="lineno">  109</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  110</span>  }</div>
+<div class="line"><span class="lineno">  111</span> </div>
+<div class="line"><span class="lineno">  112</span>  applied_ = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  113</span> </div>
+<div class="line"><span class="lineno">  114</span>  <span class="keyword">auto</span>&amp; sub_app = sub_app_.get();</div>
+<div class="line"><span class="lineno">  115</span>  <span class="keyword">auto</span>&amp; scheduler = sub_app.GetScheduler();</div>
+<div class="line"><span class="lineno">  116</span> </div>
+<div class="line"><span class="lineno">  117</span>  <span class="comment">// Ensure this set exists in the registry</span></div>
+<div class="line"><span class="lineno">  118</span>  <span class="keyword">const</span> <span class="keyword">auto</span>&amp; this_info = scheduler.template GetOrRegisterSystemSet&lt;Set&gt;();</div>
+<div class="line"><span class="lineno">  119</span>  <span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1app.html#ac8d5585fdc5fe5dbb999827e9a2e2257">SystemSetId</a> this_id = this_info.id;</div>
+<div class="line"><span class="lineno">  120</span> </div>
+<div class="line"><span class="lineno">  121</span>  <span class="comment">// Register &quot;After&quot; relationships:</span></div>
+<div class="line"><span class="lineno">  122</span>  <span class="comment">//   ConfigureSet&lt;Set&gt;().After&lt;A, B&gt;()</span></div>
+<div class="line"><span class="lineno">  123</span>  <span class="comment">// means all systems in A and B must run before systems in Set.</span></div>
+<div class="line"><span class="lineno">  124</span>  <span class="keywordflow">for</span> (<span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1app.html#ac8d5585fdc5fe5dbb999827e9a2e2257">SystemSetId</a> after_id : after_sets_) {</div>
+<div class="line"><span class="lineno">  125</span>    scheduler.AddSetRunsBefore(after_id, this_id);</div>
+<div class="line"><span class="lineno">  126</span>  }</div>
+<div class="line"><span class="lineno">  127</span> </div>
+<div class="line"><span class="lineno">  128</span>  <span class="comment">// Register &quot;Before&quot; relationships:</span></div>
+<div class="line"><span class="lineno">  129</span>  <span class="comment">//   ConfigureSet&lt;Set&gt;().Before&lt;A, B&gt;()</span></div>
+<div class="line"><span class="lineno">  130</span>  <span class="comment">// means all systems in Set must run before systems in A and B.</span></div>
+<div class="line"><span class="lineno">  131</span>  <span class="keywordflow">for</span> (<span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1app.html#ac8d5585fdc5fe5dbb999827e9a2e2257">SystemSetId</a> before_id : before_sets_) {</div>
+<div class="line"><span class="lineno">  132</span>    scheduler.AddSetRunsBefore(this_id, before_id);</div>
+<div class="line"><span class="lineno">  133</span>  }</div>
+<div class="line"><span class="lineno">  134</span>}</div>
+<div class="ttc" id="anamespacehelios_1_1app_html_ac8d5585fdc5fe5dbb999827e9a2e2257"><div class="ttname"><a href="namespacehelios_1_1app.html#ac8d5585fdc5fe5dbb999827e9a2e2257">helios::app::SystemSetId</a></div><div class="ttdeci">size_t SystemSetId</div><div class="ttdoc">Type alias for system set type IDs.</div><div class="ttdef"><b>Definition</b> <a href="system__set_8hpp_source.html#l00019">system_set.hpp:19</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="abe12c37ad0a3b60fd9664dd3021cd9bb" name="abe12c37ad0a3b60fd9664dd3021cd9bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe12c37ad0a3b60fd9664dd3021cd9bb">&#9670;&#160;</a></span>Before() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ScheduleTrait Schedule, SystemSetTrait Set&gt; </div>
+<div class="memtemplate">
+template&lt;SystemSetTrait... BeforeSets&gt; <br />
+requires (sizeof...(BeforeSets) &gt; 0 &amp;&amp; utils::UniqueTypes&lt;BeforeSets...&gt;)</div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html">SystemSetConfig</a> &amp; <a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html">helios::app::SystemSetConfig</a>&lt; Schedule, Set &gt;::Before </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Adds ordering constraint: this set runs before specified sets. </p>
+<p>Creates a dependency edge from this set to each specified set. All systems in this set will run before systems in the specified sets. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">BeforeSets</td><td>System set types that must run after this set </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to this config for method chaining </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_set_config_8hpp-example.html#a3">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_set_config.hpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<a id="a20ae349519488d20750c64625f532db1" name="a20ae349519488d20750c64625f532db1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20ae349519488d20750c64625f532db1">&#9670;&#160;</a></span>Before() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ScheduleTrait Schedule, SystemSetTrait Set&gt; </div>
+<div class="memtemplate">
+template&lt;SystemSetTrait... BeforeSets&gt; <br />
+requires (sizeof...(BeforeSets) &gt; 0 &amp;&amp; utils::UniqueTypes&lt;BeforeSets...&gt;)</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto <a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html">helios::app::SystemSetConfig</a>&lt; Schedule, Set &gt;::Before </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt; <a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html">SystemSetConfig</a>&amp; </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="system__set__config_8hpp_source.html#l00101">101</a> of file <a class="el" href="system__set__config_8hpp_source.html">system_set_config.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  101</span>                                                                       {</div>
+<div class="line"><span class="lineno">  102</span>  (before_sets_.push_back(SystemSetIdOf&lt;BeforeSets&gt;()), ...);</div>
+<div class="line"><span class="lineno">  103</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><span class="lineno">  104</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="adb43e4f0d2155b2c377ebb970848c3f1" name="adb43e4f0d2155b2c377ebb970848c3f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb43e4f0d2155b2c377ebb970848c3f1">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ScheduleTrait Schedule, SystemSetTrait Set&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html">SystemSetConfig</a> &amp; <a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html">helios::app::SystemSetConfig</a>&lt; Schedule, Set &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html">SystemSetConfig</a>&lt; Schedule, Set &gt; &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_set_config_8hpp-example.html#a1">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_set_config.hpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<a id="aea2f0bbf898b909ad17bde00913ae03f" name="aea2f0bbf898b909ad17bde00913ae03f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea2f0bbf898b909ad17bde00913ae03f">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ScheduleTrait Schedule, SystemSetTrait Set&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html">SystemSetConfig</a> &amp; <a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html">helios::app::SystemSetConfig</a>&lt; Schedule, Set &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html">SystemSetConfig</a>&lt; Schedule, Set &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehelios.html">helios</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1app.html">app</a></li><li class="navelem"><a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html">SystemSetConfig</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

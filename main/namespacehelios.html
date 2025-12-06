@@ -1,0 +1,1427 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: helios Namespace Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('namespacehelios.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#concepts">Concepts</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">helios Namespace Reference</div></div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespacehelios_1_1app" id="r_namespacehelios_1_1app"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1app.html">app</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespacehelios_1_1async" id="r_namespacehelios_1_1async"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1async.html">async</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespacehelios_1_1container" id="r_namespacehelios_1_1container"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1container.html">container</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespacehelios_1_1details" id="r_namespacehelios_1_1details"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1details.html">details</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespacehelios_1_1ecs" id="r_namespacehelios_1_1ecs"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1ecs.html">ecs</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespacehelios_1_1memory" id="r_namespacehelios_1_1memory"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1memory.html">memory</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespacehelios_1_1utils" id="r_namespacehelios_1_1utils"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html">utils</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1DefaultLogger.html">DefaultLogger</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default logger type.  <a href="structhelios_1_1DefaultLogger.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Delegate.html">Delegate</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type-erased callable wrapper for free and member functions.  <a href="classhelios_1_1Delegate.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html">Delegate&lt; ReturnType(Args...)&gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Logger.html">Logger</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Centralized logging system with configurable output and formatting.  <a href="classhelios_1_1Logger.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1LoggerConfig.html">LoggerConfig</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuration for logger behavior and output.  <a href="structhelios_1_1LoggerConfig.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1RandomGenerator.html">RandomGenerator</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Random number utilities with a user-provided engine.  <a href="classhelios_1_1RandomGenerator.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Timer.html">Timer</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">High–resolution timer with configurable clock and rich elapsed API.  <a href="classhelios_1_1Timer.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Timestep.html">Timestep</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a time step in seconds.  <a href="classhelios_1_1Timestep.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Uuid.html">Uuid</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A class representing a universally unique identifier (UUID).  <a href="classhelios_1_1Uuid.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1UuidGenerator.html">UuidGenerator</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A class for generating random UUIDs using a specified random number generator.  <a href="classhelios_1_1UuidGenerator.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="concepts" name="concepts"></a>
+Concepts</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1LoggerTrait.html">LoggerTrait</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1LoggerWithConfigTrait.html">LoggerWithConfigTrait</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1RandomEngine.html">RandomEngine</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for random number engines compatible with std distributions. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1Distribution.html">Distribution</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for standard-like distributions. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a897d19e901838feb790a28ec9fcb9d7d" id="r_a897d19e901838feb790a28ec9fcb9d7d"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios.html#a897d19e901838feb790a28ec9fcb9d7d">LoggerId</a> = size_t</td></tr>
+<tr class="memdesc:a897d19e901838feb790a28ec9fcb9d7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for logger type IDs.  <br /></td></tr>
+<tr class="separator:a897d19e901838feb790a28ec9fcb9d7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b54345745dcbd1ad53e1d47e02693af" id="r_a3b54345745dcbd1ad53e1d47e02693af"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios.html#a3b54345745dcbd1ad53e1d47e02693af">DefaultRandomEngine</a> = std::mt19937_64</td></tr>
+<tr class="memdesc:a3b54345745dcbd1ad53e1d47e02693af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default engine type used by random utilities.  <br /></td></tr>
+<tr class="separator:a3b54345745dcbd1ad53e1d47e02693af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb787ecf4958cf3e77687000fd3aa379" id="r_abb787ecf4958cf3e77687000fd3aa379"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios.html#abb787ecf4958cf3e77687000fd3aa379">FastRandomEngine</a> = std::minstd_rand</td></tr>
+<tr class="memdesc:abb787ecf4958cf3e77687000fd3aa379"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fast but lower-quality engine type used by random utilities.  <br /></td></tr>
+<tr class="separator:abb787ecf4958cf3e77687000fd3aa379"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9628890cafc6659f2e79ee7317475382" id="r_a9628890cafc6659f2e79ee7317475382"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios.html#a9628890cafc6659f2e79ee7317475382">DefaultRandomGenerator</a> = <a class="el" href="classhelios_1_1RandomGenerator.html">RandomGenerator</a>&lt; <a class="el" href="namespacehelios.html#a3b54345745dcbd1ad53e1d47e02693af">DefaultRandomEngine</a> &gt;</td></tr>
+<tr class="memdesc:a9628890cafc6659f2e79ee7317475382"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience alias for a generator using the default-quality engine.  <br /></td></tr>
+<tr class="separator:a9628890cafc6659f2e79ee7317475382"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5fc87b09f78f914a54250906fa46648" id="r_ab5fc87b09f78f914a54250906fa46648"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios.html#ab5fc87b09f78f914a54250906fa46648">FastRandomGeneratorType</a> = <a class="el" href="classhelios_1_1RandomGenerator.html">RandomGenerator</a>&lt; <a class="el" href="namespacehelios.html#abb787ecf4958cf3e77687000fd3aa379">FastRandomEngine</a> &gt;</td></tr>
+<tr class="memdesc:ab5fc87b09f78f914a54250906fa46648"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience alias for a generator using the fast engine.  <br /></td></tr>
+<tr class="separator:ab5fc87b09f78f914a54250906fa46648"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a22a572a5b6a1313de5eaf69115bbad71" id="r_a22a572a5b6a1313de5eaf69115bbad71"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a> : uint8_t { <br />
+&#160;&#160;<a class="el" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71afa21506cd249f400de4a974b5a0c8e0e">kTrace</a> = 0
+, <a class="el" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71abb53ce21b7c0b7c8a8f7860a41901d29">kDebug</a> = 1
+, <a class="el" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71a176a473e63c17ccdac91640c67f149bf">kInfo</a> = 2
+, <a class="el" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71a61a920eb4a24199ec6a36dd90f2a30b7">kWarn</a> = 3
+, <br />
+&#160;&#160;<a class="el" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71ae3587c730cc1aa530fa4ddc9c4204e97">kError</a> = 4
+, <a class="el" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71a5a20548c220f372fc701cae6de94040b">kCritical</a> = 5
+<br />
+ }</td></tr>
+<tr class="memdesc:a22a572a5b6a1313de5eaf69115bbad71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log severity levels.  <a href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">More...</a><br /></td></tr>
+<tr class="separator:a22a572a5b6a1313de5eaf69115bbad71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a353d3912bb7ad37d555a2d43f9fcd02f" id="r_a353d3912bb7ad37d555a2d43f9fcd02f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios.html#a353d3912bb7ad37d555a2d43f9fcd02f">AbortWithStacktrace</a> (std::string_view message) noexcept</td></tr>
+<tr class="memdesc:a353d3912bb7ad37d555a2d43f9fcd02f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints a message with stack trace and aborts the program execution.  <br /></td></tr>
+<tr class="separator:a353d3912bb7ad37d555a2d43f9fcd02f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a323ca125223c097cb5c91d60d6a660" id="r_a8a323ca125223c097cb5c91d60d6a660"><td class="memTemplParams" colspan="2">template&lt;auto Func&gt; <br />
+requires (!std::is_member_function_pointer_v&lt;decltype(Func)&gt;)</td></tr>
+<tr class="memitem:a8a323ca125223c097cb5c91d60d6a660"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios.html#a8a323ca125223c097cb5c91d60d6a660">DelegateFromFunction</a> () noexcept</td></tr>
+<tr class="memdesc:a8a323ca125223c097cb5c91d60d6a660"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper to create delegate from free function pointer.  <br /></td></tr>
+<tr class="separator:a8a323ca125223c097cb5c91d60d6a660"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89c0b90e0c87c18a0e1c4159eade272d" id="r_a89c0b90e0c87c18a0e1c4159eade272d"><td class="memTemplParams" colspan="2">template&lt;typename Signature , Signature Func&gt; <br />
+requires (!std::is_member_function_pointer_v&lt;decltype(Func)&gt;)</td></tr>
+<tr class="memitem:a89c0b90e0c87c18a0e1c4159eade272d"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios.html#a89c0b90e0c87c18a0e1c4159eade272d">DelegateFromFunction</a> () noexcept</td></tr>
+<tr class="memdesc:a89c0b90e0c87c18a0e1c4159eade272d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper to create delegate from free function pointer with explicit signature.  <br /></td></tr>
+<tr class="separator:a89c0b90e0c87c18a0e1c4159eade272d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60f22d2251db8a96a68c804bf6d5d84b" id="r_a60f22d2251db8a96a68c804bf6d5d84b"><td class="memTemplParams" colspan="2">template&lt;auto Func&gt; <br />
+requires std::is_member_function_pointer_v&lt;decltype(Func)&gt;</td></tr>
+<tr class="memitem:a60f22d2251db8a96a68c804bf6d5d84b"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios.html#a60f22d2251db8a96a68c804bf6d5d84b">DelegateFromFunction</a> (typename <a class="el" href="structhelios_1_1details_1_1MemberFunctionTraits.html">details::MemberFunctionTraits</a>&lt; decltype(Func)&gt;::Class &amp;instance) noexcept</td></tr>
+<tr class="memdesc:a60f22d2251db8a96a68c804bf6d5d84b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper to create delegate from member function pointer.  <br /></td></tr>
+<tr class="separator:a60f22d2251db8a96a68c804bf6d5d84b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad02c30fe5443a7df42113b496349b651" id="r_ad02c30fe5443a7df42113b496349b651"><td class="memTemplParams" colspan="2">template&lt;typename Signature , Signature Func&gt; <br />
+requires std::is_member_function_pointer_v&lt;decltype(Func)&gt;</td></tr>
+<tr class="memitem:ad02c30fe5443a7df42113b496349b651"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios.html#ad02c30fe5443a7df42113b496349b651">DelegateFromFunction</a> (typename <a class="el" href="structhelios_1_1details_1_1MemberFunctionTraits.html">details::MemberFunctionTraits</a>&lt; Signature &gt;::Class &amp;instance) noexcept</td></tr>
+<tr class="memdesc:ad02c30fe5443a7df42113b496349b651"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper to create delegate from member function pointer with explicit signature.  <br /></td></tr>
+<tr class="separator:ad02c30fe5443a7df42113b496349b651"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e16aa56fd39d217978e91ef73646947" id="r_a2e16aa56fd39d217978e91ef73646947"><td class="memTemplParams" colspan="2">template&lt;LoggerTrait T&gt; </td></tr>
+<tr class="memitem:a2e16aa56fd39d217978e91ef73646947"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="namespacehelios.html#a897d19e901838feb790a28ec9fcb9d7d">LoggerId</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios.html#a2e16aa56fd39d217978e91ef73646947">LoggerIdOf</a> () noexcept</td></tr>
+<tr class="separator:a2e16aa56fd39d217978e91ef73646947"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38e803d9d033acbe72b0a4d7250c104e" id="r_a38e803d9d033acbe72b0a4d7250c104e"><td class="memTemplParams" colspan="2">template&lt;LoggerTrait T&gt; </td></tr>
+<tr class="memitem:a38e803d9d033acbe72b0a4d7250c104e"><td class="memTemplItemLeft" align="right" valign="top">constexpr std::string_view&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios.html#a38e803d9d033acbe72b0a4d7250c104e">LoggerNameOf</a> () noexcept</td></tr>
+<tr class="separator:a38e803d9d033acbe72b0a4d7250c104e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a108806acf89b89e91b9f73f36c8e154d" id="r_a108806acf89b89e91b9f73f36c8e154d"><td class="memTemplParams" colspan="2">template&lt;LoggerTrait T&gt; </td></tr>
+<tr class="memitem:a108806acf89b89e91b9f73f36c8e154d"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="structhelios_1_1LoggerConfig.html">LoggerConfig</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios.html#a108806acf89b89e91b9f73f36c8e154d">LoggerConfigOf</a> () noexcept</td></tr>
+<tr class="separator:a108806acf89b89e91b9f73f36c8e154d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa497a242f610a623d62163d89d36e22" id="r_aaa497a242f610a623d62163d89d36e22"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios.html#aaa497a242f610a623d62163d89d36e22">RandomDeviceSeed</a> ()</td></tr>
+<tr class="memdesc:aaa497a242f610a623d62163d89d36e22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal helper to obtain seed from std::random_device.  <br /></td></tr>
+<tr class="separator:aaa497a242f610a623d62163d89d36e22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ec54c8a5c5da6a3de37b457da2729f3" id="r_a0ec54c8a5c5da6a3de37b457da2729f3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios.html#a3b54345745dcbd1ad53e1d47e02693af">DefaultRandomEngine</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios.html#a0ec54c8a5c5da6a3de37b457da2729f3">MakeDefaultEngine</a> ()</td></tr>
+<tr class="memdesc:a0ec54c8a5c5da6a3de37b457da2729f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a default-quality random engine seeded with std::random_device.  <br /></td></tr>
+<tr class="separator:a0ec54c8a5c5da6a3de37b457da2729f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a5f3ea987801f0b99fba70aa975ec66" id="r_a7a5f3ea987801f0b99fba70aa975ec66"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios.html#abb787ecf4958cf3e77687000fd3aa379">FastRandomEngine</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios.html#a7a5f3ea987801f0b99fba70aa975ec66">MakeFastEngine</a> ()</td></tr>
+<tr class="memdesc:a7a5f3ea987801f0b99fba70aa975ec66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a fast linear random engine seeded with std::random_device.  <br /></td></tr>
+<tr class="separator:a7a5f3ea987801f0b99fba70aa975ec66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abadc4ad0338eb86e49483e9e3e7b23a3" id="r_abadc4ad0338eb86e49483e9e3e7b23a3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios.html#a3b54345745dcbd1ad53e1d47e02693af">DefaultRandomEngine</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios.html#abadc4ad0338eb86e49483e9e3e7b23a3">DefaultEngine</a> ()</td></tr>
+<tr class="memdesc:abadc4ad0338eb86e49483e9e3e7b23a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Thread-local default-quality engine.  <br /></td></tr>
+<tr class="separator:abadc4ad0338eb86e49483e9e3e7b23a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a380a9d4e3f187563595e821aa7e8d663" id="r_a380a9d4e3f187563595e821aa7e8d663"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios.html#abb787ecf4958cf3e77687000fd3aa379">FastRandomEngine</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios.html#a380a9d4e3f187563595e821aa7e8d663">FastEngineInstance</a> ()</td></tr>
+<tr class="memdesc:a380a9d4e3f187563595e821aa7e8d663"><td class="mdescLeft">&#160;</td><td class="mdescRight">Thread-local fast engine.  <br /></td></tr>
+<tr class="separator:a380a9d4e3f187563595e821aa7e8d663"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34d912099fed7401df8c3089edc40fec" id="r_a34d912099fed7401df8c3089edc40fec"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios.html#a9628890cafc6659f2e79ee7317475382">DefaultRandomGenerator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios.html#a34d912099fed7401df8c3089edc40fec">RandomDefault</a> ()</td></tr>
+<tr class="memdesc:a34d912099fed7401df8c3089edc40fec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides access to a thread-local default-quality random generator.  <br /></td></tr>
+<tr class="separator:a34d912099fed7401df8c3089edc40fec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac22ce7ee207da9cc1cc5617348b192ba" id="r_ac22ce7ee207da9cc1cc5617348b192ba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios.html#ab5fc87b09f78f914a54250906fa46648">FastRandomGeneratorType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios.html#ac22ce7ee207da9cc1cc5617348b192ba">RandomFast</a> ()</td></tr>
+<tr class="memdesc:ac22ce7ee207da9cc1cc5617348b192ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides access to a thread-local fast random generator.  <br /></td></tr>
+<tr class="separator:ac22ce7ee207da9cc1cc5617348b192ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40f8f3f9b143782c4ed13bce109c06e1" id="r_a40f8f3f9b143782c4ed13bce109c06e1"><td class="memTemplParams" colspan="2">template&lt;utils::ArithmeticTrait T&gt; </td></tr>
+<tr class="memitem:a40f8f3f9b143782c4ed13bce109c06e1"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios.html#a40f8f3f9b143782c4ed13bce109c06e1">RandomValue</a> ()</td></tr>
+<tr class="memdesc:a40f8f3f9b143782c4ed13bce109c06e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience function to generate a default-distribution value using the default engine.  <br /></td></tr>
+<tr class="separator:a40f8f3f9b143782c4ed13bce109c06e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2efc91ecccbf4c252486d27300e79ea0" id="r_a2efc91ecccbf4c252486d27300e79ea0"><td class="memTemplParams" colspan="2">template&lt;utils::ArithmeticTrait T, utils::ArithmeticTrait U&gt; </td></tr>
+<tr class="memitem:a2efc91ecccbf4c252486d27300e79ea0"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios.html#a2efc91ecccbf4c252486d27300e79ea0">RandomValueFromRange</a> (T min, U max) -&gt; std::common_type_t&lt; T, U &gt;</td></tr>
+<tr class="memdesc:a2efc91ecccbf4c252486d27300e79ea0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience function to generate a value in range using the default engine.  <br /></td></tr>
+<tr class="separator:a2efc91ecccbf4c252486d27300e79ea0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f8133c73267300a345ed66b5b78bc4a" id="r_a5f8133c73267300a345ed66b5b78bc4a"><td class="memTemplParams" colspan="2">template&lt;utils::ArithmeticTrait T&gt; </td></tr>
+<tr class="memitem:a5f8133c73267300a345ed66b5b78bc4a"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios.html#a5f8133c73267300a345ed66b5b78bc4a">RandomFastValue</a> ()</td></tr>
+<tr class="memdesc:a5f8133c73267300a345ed66b5b78bc4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience function to generate a default-distribution value using the fast engine.  <br /></td></tr>
+<tr class="separator:a5f8133c73267300a345ed66b5b78bc4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85e1b1856219a6f075a15b7335e070e3" id="r_a85e1b1856219a6f075a15b7335e070e3"><td class="memTemplParams" colspan="2">template&lt;utils::ArithmeticTrait T, utils::ArithmeticTrait U&gt; </td></tr>
+<tr class="memitem:a85e1b1856219a6f075a15b7335e070e3"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios.html#a85e1b1856219a6f075a15b7335e070e3">RandomFastValueFromRange</a> (T min, U max) -&gt; std::common_type_t&lt; T, U &gt;</td></tr>
+<tr class="memdesc:a85e1b1856219a6f075a15b7335e070e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience function to generate a value in range using the fast engine.  <br /></td></tr>
+<tr class="separator:a85e1b1856219a6f075a15b7335e070e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a3adf145c13509e0e25874cf768acbdf8" id="r_a3adf145c13509e0e25874cf768acbdf8"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="structhelios_1_1DefaultLogger.html">DefaultLogger</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios.html#a3adf145c13509e0e25874cf768acbdf8">kDefaultLogger</a> {}</td></tr>
+<tr class="memdesc:a3adf145c13509e0e25874cf768acbdf8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constexpr instance of the default logger for easier user interface.  <br /></td></tr>
+<tr class="separator:a3adf145c13509e0e25874cf768acbdf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="a3b54345745dcbd1ad53e1d47e02693af" name="a3b54345745dcbd1ad53e1d47e02693af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b54345745dcbd1ad53e1d47e02693af">&#9670;&#160;</a></span>DefaultRandomEngine</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespacehelios.html#a3b54345745dcbd1ad53e1d47e02693af">helios::DefaultRandomEngine</a> = typedef std::mt19937_64</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Default engine type used by random utilities. </p>
+<p>Uses a 64-bit Mersenne Twister for quality pseudorandom numbers. </p>
+
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00042">42</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a9628890cafc6659f2e79ee7317475382" name="a9628890cafc6659f2e79ee7317475382"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9628890cafc6659f2e79ee7317475382">&#9670;&#160;</a></span>DefaultRandomGenerator</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespacehelios.html#a9628890cafc6659f2e79ee7317475382">helios::DefaultRandomGenerator</a> = typedef <a class="el" href="classhelios_1_1RandomGenerator.html">RandomGenerator</a>&lt;<a class="el" href="namespacehelios.html#a3b54345745dcbd1ad53e1d47e02693af">DefaultRandomEngine</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convenience alias for a generator using the default-quality engine. </p>
+<p>Uses thread-local <a class="el" href="namespacehelios.html#abadc4ad0338eb86e49483e9e3e7b23a3" title="Thread-local default-quality engine.">DefaultEngine()</a> as the underlying engine. </p>
+
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00228">228</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+
+</div>
+</div>
+<a id="abb787ecf4958cf3e77687000fd3aa379" name="abb787ecf4958cf3e77687000fd3aa379"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb787ecf4958cf3e77687000fd3aa379">&#9670;&#160;</a></span>FastRandomEngine</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespacehelios.html#abb787ecf4958cf3e77687000fd3aa379">helios::FastRandomEngine</a> = typedef std::minstd_rand</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fast but lower-quality engine type used by random utilities. </p>
+<p>Uses a 32-bit linear congruential engine suitable for non-cryptographic, performance-critical scenarios. </p>
+
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00048">48</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ab5fc87b09f78f914a54250906fa46648" name="ab5fc87b09f78f914a54250906fa46648"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5fc87b09f78f914a54250906fa46648">&#9670;&#160;</a></span>FastRandomGeneratorType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespacehelios.html#ab5fc87b09f78f914a54250906fa46648">helios::FastRandomGeneratorType</a> = typedef <a class="el" href="classhelios_1_1RandomGenerator.html">RandomGenerator</a>&lt;<a class="el" href="namespacehelios.html#abb787ecf4958cf3e77687000fd3aa379">FastRandomEngine</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convenience alias for a generator using the fast engine. </p>
+<p>Uses thread-local <a class="el" href="namespacehelios.html#a380a9d4e3f187563595e821aa7e8d663" title="Thread-local fast engine.">FastEngineInstance()</a> as the underlying engine. </p>
+
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00234">234</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a897d19e901838feb790a28ec9fcb9d7d" name="a897d19e901838feb790a28ec9fcb9d7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a897d19e901838feb790a28ec9fcb9d7d">&#9670;&#160;</a></span>LoggerId</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespacehelios.html#a897d19e901838feb790a28ec9fcb9d7d">helios::LoggerId</a> = typedef size_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Type alias for logger type IDs. </p>
+<p>Used to uniquely identify logger types at runtime. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2logger_8hpp-example.html#a25">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/logger.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00106">106</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="a22a572a5b6a1313de5eaf69115bbad71" name="a22a572a5b6a1313de5eaf69115bbad71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22a572a5b6a1313de5eaf69115bbad71">&#9670;&#160;</a></span>LogLevel</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">helios::LogLevel</a> : uint8_t</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Log severity levels. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a22a572a5b6a1313de5eaf69115bbad71afa21506cd249f400de4a974b5a0c8e0e" name="a22a572a5b6a1313de5eaf69115bbad71afa21506cd249f400de4a974b5a0c8e0e"></a>kTrace&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a22a572a5b6a1313de5eaf69115bbad71abb53ce21b7c0b7c8a8f7860a41901d29" name="a22a572a5b6a1313de5eaf69115bbad71abb53ce21b7c0b7c8a8f7860a41901d29"></a>kDebug&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a22a572a5b6a1313de5eaf69115bbad71a176a473e63c17ccdac91640c67f149bf" name="a22a572a5b6a1313de5eaf69115bbad71a176a473e63c17ccdac91640c67f149bf"></a>kInfo&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a22a572a5b6a1313de5eaf69115bbad71a61a920eb4a24199ec6a36dd90f2a30b7" name="a22a572a5b6a1313de5eaf69115bbad71a61a920eb4a24199ec6a36dd90f2a30b7"></a>kWarn&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a22a572a5b6a1313de5eaf69115bbad71ae3587c730cc1aa530fa4ddc9c4204e97" name="a22a572a5b6a1313de5eaf69115bbad71ae3587c730cc1aa530fa4ddc9c4204e97"></a>kError&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a22a572a5b6a1313de5eaf69115bbad71a5a20548c220f372fc701cae6de94040b" name="a22a572a5b6a1313de5eaf69115bbad71a5a20548c220f372fc701cae6de94040b"></a>kCritical&#160;</td><td class="fielddoc"></td></tr>
+</table>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2logger_8hpp-example.html#a0">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/logger.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00034">34</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   34</span>: uint8_t { <a class="code hl_enumvalue" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71afa21506cd249f400de4a974b5a0c8e0e">kTrace</a> = 0, <a class="code hl_enumvalue" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71abb53ce21b7c0b7c8a8f7860a41901d29">kDebug</a> = 1, <a class="code hl_enumvalue" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71a176a473e63c17ccdac91640c67f149bf">kInfo</a> = 2, <a class="code hl_enumvalue" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71a61a920eb4a24199ec6a36dd90f2a30b7">kWarn</a> = 3, <a class="code hl_enumvalue" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71ae3587c730cc1aa530fa4ddc9c4204e97">kError</a> = 4, <a class="code hl_enumvalue" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71a5a20548c220f372fc701cae6de94040b">kCritical</a> = 5 };</div>
+<div class="ttc" id="anamespacehelios_html_a22a572a5b6a1313de5eaf69115bbad71a176a473e63c17ccdac91640c67f149bf"><div class="ttname"><a href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71a176a473e63c17ccdac91640c67f149bf">helios::LogLevel::kInfo</a></div><div class="ttdeci">@ kInfo</div></div>
+<div class="ttc" id="anamespacehelios_html_a22a572a5b6a1313de5eaf69115bbad71a5a20548c220f372fc701cae6de94040b"><div class="ttname"><a href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71a5a20548c220f372fc701cae6de94040b">helios::LogLevel::kCritical</a></div><div class="ttdeci">@ kCritical</div></div>
+<div class="ttc" id="anamespacehelios_html_a22a572a5b6a1313de5eaf69115bbad71a61a920eb4a24199ec6a36dd90f2a30b7"><div class="ttname"><a href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71a61a920eb4a24199ec6a36dd90f2a30b7">helios::LogLevel::kWarn</a></div><div class="ttdeci">@ kWarn</div></div>
+<div class="ttc" id="anamespacehelios_html_a22a572a5b6a1313de5eaf69115bbad71abb53ce21b7c0b7c8a8f7860a41901d29"><div class="ttname"><a href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71abb53ce21b7c0b7c8a8f7860a41901d29">helios::LogLevel::kDebug</a></div><div class="ttdeci">@ kDebug</div></div>
+<div class="ttc" id="anamespacehelios_html_a22a572a5b6a1313de5eaf69115bbad71ae3587c730cc1aa530fa4ddc9c4204e97"><div class="ttname"><a href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71ae3587c730cc1aa530fa4ddc9c4204e97">helios::LogLevel::kError</a></div><div class="ttdeci">@ kError</div></div>
+<div class="ttc" id="anamespacehelios_html_a22a572a5b6a1313de5eaf69115bbad71afa21506cd249f400de4a974b5a0c8e0e"><div class="ttname"><a href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71afa21506cd249f400de4a974b5a0c8e0e">helios::LogLevel::kTrace</a></div><div class="ttdeci">@ kTrace</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a353d3912bb7ad37d555a2d43f9fcd02f" name="a353d3912bb7ad37d555a2d43f9fcd02f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a353d3912bb7ad37d555a2d43f9fcd02f">&#9670;&#160;</a></span>AbortWithStacktrace()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::AbortWithStacktrace </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>message</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Prints a message with stack trace and aborts the program execution. </p>
+<p>Useful for placing in dead code branches or unreachable states. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">message</td><td>The message to print before aborting </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="assert_8cpp_source.html#l00019">19</a> of file <a class="el" href="assert_8cpp_source.html">assert.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   19</span>                                                          {</div>
+<div class="line"><span class="lineno">   20</span><span class="preprocessor">#if defined(__cpp_lib_print) &amp;&amp; (__cpp_lib_print &gt;= 202302L)</span></div>
+<div class="line"><span class="lineno">   21</span>  <span class="comment">// Use std::println when available (C++23)</span></div>
+<div class="line"><span class="lineno">   22</span>  std::println(<span class="stringliteral">&quot;\n=== FATAL ERROR ===&quot;</span>);</div>
+<div class="line"><span class="lineno">   23</span>  std::println(<span class="stringliteral">&quot;Message: {}&quot;</span>, message);</div>
+<div class="line"><span class="lineno">   24</span> </div>
+<div class="line"><span class="lineno">   25</span><span class="preprocessor">#ifdef HELIOS_ENABLE_STACKTRACE</span></div>
+<div class="line"><span class="lineno">   26</span>  <span class="keywordflow">try</span> {</div>
+<div class="line"><span class="lineno">   27</span>    <span class="keyword">const</span> boost::stacktrace::stacktrace stack_trace;</div>
+<div class="line"><span class="lineno">   28</span>    <span class="keywordflow">if</span> (stack_trace.size() &gt; 1) {</div>
+<div class="line"><span class="lineno">   29</span>      std::println(<span class="stringliteral">&quot;\nStack trace:&quot;</span>);</div>
+<div class="line"><span class="lineno">   30</span>      <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 1; i &lt; stack_trace.size() &amp;&amp; i &lt; 32; ++i) {</div>
+<div class="line"><span class="lineno">   31</span>        std::string entry_str = boost::stacktrace::to_string(stack_trace[i]);</div>
+<div class="line"><span class="lineno">   32</span>        std::println(<span class="stringliteral">&quot;  {}: {}&quot;</span>, i, entry_str);</div>
+<div class="line"><span class="lineno">   33</span>      }</div>
+<div class="line"><span class="lineno">   34</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">   35</span>      std::println(<span class="stringliteral">&quot;\nStack trace: &lt;empty&gt;&quot;</span>);</div>
+<div class="line"><span class="lineno">   36</span>    }</div>
+<div class="line"><span class="lineno">   37</span>  } <span class="keywordflow">catch</span> (...) {</div>
+<div class="line"><span class="lineno">   38</span>    std::println(<span class="stringliteral">&quot;\nStack trace: &lt;error during capture&gt;&quot;</span>);</div>
+<div class="line"><span class="lineno">   39</span>  }</div>
+<div class="line"><span class="lineno">   40</span><span class="preprocessor">#else</span></div>
+<div class="line"><span class="lineno">   41</span>  std::println(<span class="stringliteral">&quot;\nStack trace: &lt;not available - build with HELIOS_ENABLE_STACKTRACE&gt;&quot;</span>);</div>
+<div class="line"><span class="lineno">   42</span><span class="preprocessor">#endif</span></div>
+<div class="line"><span class="lineno">   43</span> </div>
+<div class="line"><span class="lineno">   44</span>  std::println(<span class="stringliteral">&quot;===================\n&quot;</span>);</div>
+<div class="line"><span class="lineno">   45</span>  std::fflush(stdout);</div>
+<div class="line"><span class="lineno">   46</span><span class="preprocessor">#else</span></div>
+<div class="line"><span class="lineno">   47</span>  <span class="comment">// Fallback to fprintf to stderr when std::println is not available</span></div>
+<div class="line"><span class="lineno">   48</span>  std::fprintf(stderr, <span class="stringliteral">&quot;\n=== FATAL ERROR ===\n&quot;</span>);</div>
+<div class="line"><span class="lineno">   49</span>  std::fprintf(stderr, <span class="stringliteral">&quot;Message: %.*s\n&quot;</span>, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(message.size()), message.data());</div>
+<div class="line"><span class="lineno">   50</span> </div>
+<div class="line"><span class="lineno">   51</span><span class="preprocessor">#ifdef HELIOS_ENABLE_STACKTRACE</span></div>
+<div class="line"><span class="lineno">   52</span>  <span class="keywordflow">try</span> {</div>
+<div class="line"><span class="lineno">   53</span>    <span class="keyword">const</span> boost::stacktrace::stacktrace stack_trace;</div>
+<div class="line"><span class="lineno">   54</span>    <span class="keywordflow">if</span> (stack_trace.size() &gt; 1) {</div>
+<div class="line"><span class="lineno">   55</span>      std::fprintf(stderr, <span class="stringliteral">&quot;\nStack trace:\n&quot;</span>);</div>
+<div class="line"><span class="lineno">   56</span>      <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 1; i &lt; stack_trace.size() &amp;&amp; i &lt; 32; ++i) {</div>
+<div class="line"><span class="lineno">   57</span>        std::string entry_str = boost::stacktrace::to_string(stack_trace[i]);</div>
+<div class="line"><span class="lineno">   58</span>        std::fprintf(stderr, <span class="stringliteral">&quot;  %zu: %s\n&quot;</span>, i, entry_str.c_str());</div>
+<div class="line"><span class="lineno">   59</span>      }</div>
+<div class="line"><span class="lineno">   60</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">   61</span>      std::fprintf(stderr, <span class="stringliteral">&quot;\nStack trace: &lt;empty&gt;\n&quot;</span>);</div>
+<div class="line"><span class="lineno">   62</span>    }</div>
+<div class="line"><span class="lineno">   63</span>  } <span class="keywordflow">catch</span> (...) {</div>
+<div class="line"><span class="lineno">   64</span>    std::fprintf(stderr, <span class="stringliteral">&quot;\nStack trace: &lt;error during capture&gt;\n&quot;</span>);</div>
+<div class="line"><span class="lineno">   65</span>  }</div>
+<div class="line"><span class="lineno">   66</span><span class="preprocessor">#else</span></div>
+<div class="line"><span class="lineno">   67</span>  std::fprintf(stderr, <span class="stringliteral">&quot;\nStack trace: &lt;not available - build with HELIOS_ENABLE_STACKTRACE&gt;\n&quot;</span>);</div>
+<div class="line"><span class="lineno">   68</span><span class="preprocessor">#endif</span></div>
+<div class="line"><span class="lineno">   69</span> </div>
+<div class="line"><span class="lineno">   70</span>  std::fprintf(stderr, <span class="stringliteral">&quot;===================\n\n&quot;</span>);</div>
+<div class="line"><span class="lineno">   71</span>  std::fflush(stderr);</div>
+<div class="line"><span class="lineno">   72</span><span class="preprocessor">#endif</span></div>
+<div class="line"><span class="lineno">   73</span> </div>
+<div class="line"><span class="lineno">   74</span>  <a class="code hl_define" href="core_8hpp.html#ada983df2522c351b671d6943887b483e">HELIOS_DEBUG_BREAK</a>();</div>
+<div class="line"><span class="lineno">   75</span>  std::abort();</div>
+<div class="line"><span class="lineno">   76</span>}</div>
+<div class="ttc" id="acore_8hpp_html_ada983df2522c351b671d6943887b483e"><div class="ttname"><a href="core_8hpp.html#ada983df2522c351b671d6943887b483e">HELIOS_DEBUG_BREAK</a></div><div class="ttdeci">#define HELIOS_DEBUG_BREAK()</div><div class="ttdef"><b>Definition</b> <a href="core_8hpp_source.html#l00081">core.hpp:81</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="abadc4ad0338eb86e49483e9e3e7b23a3" name="abadc4ad0338eb86e49483e9e3e7b23a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abadc4ad0338eb86e49483e9e3e7b23a3">&#9670;&#160;</a></span>DefaultEngine()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios.html#a3b54345745dcbd1ad53e1d47e02693af">DefaultRandomEngine</a> &amp; helios::DefaultEngine </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Thread-local default-quality engine. </p>
+<p>Uses Meyer's singleton pattern per thread to avoid global static initialization order issues while providing a convenient default. </p><dl class="section return"><dt>Returns</dt><dd>Reference to thread-local DefaultRandomEngine instance. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00100">100</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  100</span>                                                          {</div>
+<div class="line"><span class="lineno">  101</span>  <span class="keyword">thread_local</span> <span class="keyword">auto</span> engine = <a class="code hl_function" href="namespacehelios.html#a0ec54c8a5c5da6a3de37b457da2729f3">MakeDefaultEngine</a>();</div>
+<div class="line"><span class="lineno">  102</span>  <span class="keywordflow">return</span> engine;</div>
+<div class="line"><span class="lineno">  103</span>}</div>
+<div class="ttc" id="anamespacehelios_html_a0ec54c8a5c5da6a3de37b457da2729f3"><div class="ttname"><a href="namespacehelios.html#a0ec54c8a5c5da6a3de37b457da2729f3">helios::MakeDefaultEngine</a></div><div class="ttdeci">DefaultRandomEngine MakeDefaultEngine()</div><div class="ttdoc">Creates a default-quality random engine seeded with std::random_device.</div><div class="ttdef"><b>Definition</b> <a href="random_8hpp_source.html#l00080">random.hpp:80</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a8a323ca125223c097cb5c91d60d6a660" name="a8a323ca125223c097cb5c91d60d6a660"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a323ca125223c097cb5c91d60d6a660">&#9670;&#160;</a></span>DelegateFromFunction() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;auto Func&gt; <br />
+requires (!std::is_member_function_pointer_v&lt;decltype(Func)&gt;)</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto helios::DelegateFromFunction </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper to create delegate from free function pointer. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Func</td><td>Free function pointer </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1Delegate.html" title="Type-erased callable wrapper for free and member functions.">Delegate</a> bound to the given free function </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00429">429</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  429</span>                                               {</div>
+<div class="line"><span class="lineno">  430</span>  <span class="keyword">using </span>Traits = <a class="code hl_struct" href="structhelios_1_1details_1_1FreeFunctionTraits.html">details::FreeFunctionTraits</a>&lt;<span class="keyword">decltype</span>(Func)&gt;;</div>
+<div class="line"><span class="lineno">  431</span>  <span class="keyword">using </span>ReturnType = <span class="keyword">typename</span> Traits::ReturnType;</div>
+<div class="line"><span class="lineno">  432</span>  <span class="keyword">using </span>Args = <span class="keyword">typename</span> Traits::Arguments;</div>
+<div class="line"><span class="lineno">  433</span> </div>
+<div class="line"><span class="lineno">  434</span>  <span class="keywordflow">return</span> []&lt;std::size_t... I&gt;(std::index_sequence&lt;I...&gt;) {</div>
+<div class="line"><span class="lineno">  435</span>    <span class="keywordflow">return</span> <a class="code hl_class" href="classhelios_1_1Delegate.html">Delegate</a>&lt;ReturnType(std::tuple_element_t&lt;I, Args&gt;...)&gt;::template FromFunction&lt;Func&gt;();</div>
+<div class="line"><span class="lineno">  436</span>  }(std::make_index_sequence&lt;std::tuple_size_v&lt;Args&gt;&gt;{});</div>
+<div class="line"><span class="lineno">  437</span>}</div>
+<div class="ttc" id="aclasshelios_1_1Delegate_html"><div class="ttname"><a href="classhelios_1_1Delegate.html">helios::Delegate</a></div><div class="ttdoc">Type-erased callable wrapper for free and member functions.</div><div class="ttdef"><b>Definition</b> <a href="delegate_8hpp_source.html#l00085">delegate.hpp:85</a></div></div>
+<div class="ttc" id="astructhelios_1_1details_1_1FreeFunctionTraits_html"><div class="ttname"><a href="structhelios_1_1details_1_1FreeFunctionTraits.html">helios::details::FreeFunctionTraits</a></div><div class="ttdoc">Traits for free function pointers.</div><div class="ttdef"><b>Definition</b> <a href="delegate_8hpp_source.html#l00028">delegate.hpp:28</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a89c0b90e0c87c18a0e1c4159eade272d" name="a89c0b90e0c87c18a0e1c4159eade272d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89c0b90e0c87c18a0e1c4159eade272d">&#9670;&#160;</a></span>DelegateFromFunction() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Signature , Signature Func&gt; <br />
+requires (!std::is_member_function_pointer_v&lt;decltype(Func)&gt;)</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto helios::DelegateFromFunction </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper to create delegate from free function pointer with explicit signature. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Signature</td><td>Free function pointer type </td></tr>
+    <tr><td class="paramname">Func</td><td>Free function pointer value </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1Delegate.html" title="Type-erased callable wrapper for free and member functions.">Delegate</a> bound to the given free function </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00447">447</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  447</span>                                               {</div>
+<div class="line"><span class="lineno">  448</span>  <span class="keyword">using </span>Traits = <a class="code hl_struct" href="structhelios_1_1details_1_1FreeFunctionTraits.html">details::FreeFunctionTraits&lt;Signature&gt;</a>;</div>
+<div class="line"><span class="lineno">  449</span>  <span class="keyword">using </span>ReturnType = <span class="keyword">typename</span> Traits::ReturnType;</div>
+<div class="line"><span class="lineno">  450</span>  <span class="keyword">using </span>Args = <span class="keyword">typename</span> Traits::Arguments;</div>
+<div class="line"><span class="lineno">  451</span> </div>
+<div class="line"><span class="lineno">  452</span>  <span class="keywordflow">return</span> []&lt;std::size_t... I&gt;(std::index_sequence&lt;I...&gt;) {</div>
+<div class="line"><span class="lineno">  453</span>    <span class="keywordflow">return</span> <a class="code hl_class" href="classhelios_1_1Delegate.html">Delegate</a>&lt;ReturnType(std::tuple_element_t&lt;I, Args&gt;...)&gt;::template FromFunction&lt;Signature, Func&gt;();</div>
+<div class="line"><span class="lineno">  454</span>  }(std::make_index_sequence&lt;std::tuple_size_v&lt;Args&gt;&gt;{});</div>
+<div class="line"><span class="lineno">  455</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a60f22d2251db8a96a68c804bf6d5d84b" name="a60f22d2251db8a96a68c804bf6d5d84b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60f22d2251db8a96a68c804bf6d5d84b">&#9670;&#160;</a></span>DelegateFromFunction() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;auto Func&gt; <br />
+requires std::is_member_function_pointer_v&lt;decltype(Func)&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto helios::DelegateFromFunction </td>
+          <td>(</td>
+          <td class="paramtype">typename <a class="el" href="structhelios_1_1details_1_1MemberFunctionTraits.html">details::MemberFunctionTraits</a>&lt; decltype(Func)&gt;::Class &amp;&#160;</td>
+          <td class="paramname"><em>instance</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper to create delegate from member function pointer. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Func</td><td>Member function pointer </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">instance</td><td>Reference to the object instance used for invocation </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1Delegate.html" title="Type-erased callable wrapper for free and member functions.">Delegate</a> bound to the given member function and instance </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00465">465</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  465</span>                                                                                                                  {</div>
+<div class="line"><span class="lineno">  466</span>  <span class="keyword">using </span>Traits = <a class="code hl_struct" href="structhelios_1_1details_1_1MemberFunctionTraits.html">details::MemberFunctionTraits</a>&lt;<span class="keyword">decltype</span>(Func)&gt;;</div>
+<div class="line"><span class="lineno">  467</span>  <span class="keyword">using </span>ReturnType = <span class="keyword">typename</span> Traits::ReturnType;</div>
+<div class="line"><span class="lineno">  468</span>  <span class="keyword">using </span>Args = <span class="keyword">typename</span> Traits::Arguments;</div>
+<div class="line"><span class="lineno">  469</span> </div>
+<div class="line"><span class="lineno">  470</span>  <span class="keywordflow">return</span> []&lt;std::size_t... I&gt;(std::index_sequence&lt;I...&gt;, <span class="keyword">auto</span>&amp; inst) {</div>
+<div class="line"><span class="lineno">  471</span>    <span class="keywordflow">return</span> <a class="code hl_class" href="classhelios_1_1Delegate.html">Delegate</a>&lt;ReturnType(std::tuple_element_t&lt;I, Args&gt;...)&gt;::template FromFunction&lt;Func&gt;(inst);</div>
+<div class="line"><span class="lineno">  472</span>  }(std::make_index_sequence&lt;std::tuple_size_v&lt;Args&gt;&gt;{}, instance);</div>
+<div class="line"><span class="lineno">  473</span>}</div>
+<div class="ttc" id="astructhelios_1_1details_1_1MemberFunctionTraits_html"><div class="ttname"><a href="structhelios_1_1details_1_1MemberFunctionTraits.html">helios::details::MemberFunctionTraits</a></div><div class="ttdoc">Traits for member function pointers (non-const and const).</div><div class="ttdef"><b>Definition</b> <a href="delegate_8hpp_source.html#l00040">delegate.hpp:40</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ad02c30fe5443a7df42113b496349b651" name="ad02c30fe5443a7df42113b496349b651"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad02c30fe5443a7df42113b496349b651">&#9670;&#160;</a></span>DelegateFromFunction() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Signature , Signature Func&gt; <br />
+requires std::is_member_function_pointer_v&lt;decltype(Func)&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto helios::DelegateFromFunction </td>
+          <td>(</td>
+          <td class="paramtype">typename <a class="el" href="structhelios_1_1details_1_1MemberFunctionTraits.html">details::MemberFunctionTraits</a>&lt; Signature &gt;::Class &amp;&#160;</td>
+          <td class="paramname"><em>instance</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper to create delegate from member function pointer with explicit signature. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Signature</td><td>Member function pointer type </td></tr>
+    <tr><td class="paramname">Func</td><td>Member function pointer value </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">instance</td><td>Reference to the object instance used for invocation </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1Delegate.html" title="Type-erased callable wrapper for free and member functions.">Delegate</a> bound to the given member function and instance </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="delegate_8hpp_source.html#l00484">484</a> of file <a class="el" href="delegate_8hpp_source.html">delegate.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  484</span>                                                                                                             {</div>
+<div class="line"><span class="lineno">  485</span>  <span class="keyword">using </span>Traits = <a class="code hl_struct" href="structhelios_1_1details_1_1MemberFunctionTraits.html">details::MemberFunctionTraits&lt;Signature&gt;</a>;</div>
+<div class="line"><span class="lineno">  486</span>  <span class="keyword">using </span>ReturnType = <span class="keyword">typename</span> Traits::ReturnType;</div>
+<div class="line"><span class="lineno">  487</span>  <span class="keyword">using </span>Args = <span class="keyword">typename</span> Traits::Arguments;</div>
+<div class="line"><span class="lineno">  488</span> </div>
+<div class="line"><span class="lineno">  489</span>  <span class="keywordflow">return</span> []&lt;std::size_t... I&gt;(std::index_sequence&lt;I...&gt;, <span class="keyword">auto</span>&amp; inst) {</div>
+<div class="line"><span class="lineno">  490</span>    <span class="keywordflow">return</span> <a class="code hl_class" href="classhelios_1_1Delegate.html">Delegate</a>&lt;ReturnType(std::tuple_element_t&lt;I, Args&gt;...)&gt;::template FromFunction&lt;Signature, Func&gt;(inst);</div>
+<div class="line"><span class="lineno">  491</span>  }(std::make_index_sequence&lt;std::tuple_size_v&lt;Args&gt;&gt;{}, instance);</div>
+<div class="line"><span class="lineno">  492</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a380a9d4e3f187563595e821aa7e8d663" name="a380a9d4e3f187563595e821aa7e8d663"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a380a9d4e3f187563595e821aa7e8d663">&#9670;&#160;</a></span>FastEngineInstance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios.html#abb787ecf4958cf3e77687000fd3aa379">FastRandomEngine</a> &amp; helios::FastEngineInstance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Thread-local fast engine. </p>
+<p>Uses Meyer's singleton pattern per thread to avoid global static initialization order issues while providing a fast default. </p><dl class="section return"><dt>Returns</dt><dd>Reference to thread-local FastRandomEngine instance. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00111">111</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  111</span>                                                            {</div>
+<div class="line"><span class="lineno">  112</span>  <span class="keyword">thread_local</span> <span class="keyword">auto</span> engine = <a class="code hl_function" href="namespacehelios.html#a7a5f3ea987801f0b99fba70aa975ec66">MakeFastEngine</a>();</div>
+<div class="line"><span class="lineno">  113</span>  <span class="keywordflow">return</span> engine;</div>
+<div class="line"><span class="lineno">  114</span>}</div>
+<div class="ttc" id="anamespacehelios_html_a7a5f3ea987801f0b99fba70aa975ec66"><div class="ttname"><a href="namespacehelios.html#a7a5f3ea987801f0b99fba70aa975ec66">helios::MakeFastEngine</a></div><div class="ttdeci">FastRandomEngine MakeFastEngine()</div><div class="ttdoc">Creates a fast linear random engine seeded with std::random_device.</div><div class="ttdef"><b>Definition</b> <a href="random_8hpp_source.html#l00090">random.hpp:90</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a108806acf89b89e91b9f73f36c8e154d" name="a108806acf89b89e91b9f73f36c8e154d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a108806acf89b89e91b9f73f36c8e154d">&#9670;&#160;</a></span>LoggerConfigOf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;LoggerTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structhelios_1_1LoggerConfig.html">LoggerConfig</a> helios::LoggerConfigOf </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2logger_8hpp-example.html#a28">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/logger.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00200">200</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  200</span>                                              {</div>
+<div class="line"><span class="lineno">  201</span>  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_concept" href="concepthelios_1_1LoggerWithConfigTrait.html">LoggerWithConfigTrait&lt;T&gt;</a>) {</div>
+<div class="line"><span class="lineno">  202</span>    <span class="keywordflow">return</span> T::Config();</div>
+<div class="line"><span class="lineno">  203</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  204</span>    <span class="keywordflow">return</span> LoggerConfig::Default();</div>
+<div class="line"><span class="lineno">  205</span>  }</div>
+<div class="line"><span class="lineno">  206</span>}</div>
+<div class="ttc" id="aconcepthelios_1_1LoggerWithConfigTrait_html"><div class="ttname"><a href="concepthelios_1_1LoggerWithConfigTrait.html">helios::LoggerWithConfigTrait</a></div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00142">logger.hpp:142</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a2e16aa56fd39d217978e91ef73646947" name="a2e16aa56fd39d217978e91ef73646947"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e16aa56fd39d217978e91ef73646947">&#9670;&#160;</a></span>LoggerIdOf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;LoggerTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="namespacehelios.html#a897d19e901838feb790a28ec9fcb9d7d">LoggerId</a> helios::LoggerIdOf </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2logger_8hpp-example.html#a26">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/logger.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00160">160</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  160</span>                                         {</div>
+<div class="line"><span class="lineno">  161</span>  <span class="keywordflow">return</span> ctti::type_index_of&lt;T&gt;().hash();</div>
+<div class="line"><span class="lineno">  162</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a38e803d9d033acbe72b0a4d7250c104e" name="a38e803d9d033acbe72b0a4d7250c104e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38e803d9d033acbe72b0a4d7250c104e">&#9670;&#160;</a></span>LoggerNameOf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;LoggerTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr std::string_view helios::LoggerNameOf </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2logger_8hpp-example.html#a27">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/logger.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00179">179</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  179</span>                                                 {</div>
+<div class="line"><span class="lineno">  180</span>  <span class="keywordflow">return</span> T::Name();</div>
+<div class="line"><span class="lineno">  181</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a0ec54c8a5c5da6a3de37b457da2729f3" name="a0ec54c8a5c5da6a3de37b457da2729f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ec54c8a5c5da6a3de37b457da2729f3">&#9670;&#160;</a></span>MakeDefaultEngine()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios.html#a3b54345745dcbd1ad53e1d47e02693af">DefaultRandomEngine</a> helios::MakeDefaultEngine </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a default-quality random engine seeded with std::random_device. </p>
+<p>Useful when the caller wants an engine instance but does not care a specific engine type beyond the default choice. </p><dl class="section return"><dt>Returns</dt><dd>DefaultRandomEngine instance seeded with random_device. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00080">80</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   80</span>                                                             {</div>
+<div class="line"><span class="lineno">   81</span>  <span class="keywordflow">return</span> <a class="code hl_typedef" href="namespacehelios.html#a3b54345745dcbd1ad53e1d47e02693af">DefaultRandomEngine</a>{<span class="keyword">static_cast&lt;</span>DefaultRandomEngine::result_type<span class="keyword">&gt;</span>(<a class="code hl_function" href="namespacehelios.html#aaa497a242f610a623d62163d89d36e22">RandomDeviceSeed</a>())};</div>
+<div class="line"><span class="lineno">   82</span>}</div>
+<div class="ttc" id="anamespacehelios_html_a3b54345745dcbd1ad53e1d47e02693af"><div class="ttname"><a href="namespacehelios.html#a3b54345745dcbd1ad53e1d47e02693af">helios::DefaultRandomEngine</a></div><div class="ttdeci">std::mt19937_64 DefaultRandomEngine</div><div class="ttdoc">Default engine type used by random utilities.</div><div class="ttdef"><b>Definition</b> <a href="random_8hpp_source.html#l00042">random.hpp:42</a></div></div>
+<div class="ttc" id="anamespacehelios_html_aaa497a242f610a623d62163d89d36e22"><div class="ttname"><a href="namespacehelios.html#aaa497a242f610a623d62163d89d36e22">helios::RandomDeviceSeed</a></div><div class="ttdeci">uint64_t RandomDeviceSeed()</div><div class="ttdoc">Internal helper to obtain seed from std::random_device.</div><div class="ttdef"><b>Definition</b> <a href="random_8hpp_source.html#l00055">random.hpp:55</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a7a5f3ea987801f0b99fba70aa975ec66" name="a7a5f3ea987801f0b99fba70aa975ec66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a5f3ea987801f0b99fba70aa975ec66">&#9670;&#160;</a></span>MakeFastEngine()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios.html#abb787ecf4958cf3e77687000fd3aa379">FastRandomEngine</a> helios::MakeFastEngine </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a fast linear random engine seeded with std::random_device. </p>
+<p>Intended for performance-critical code where statistical quality is less important. Not suitable for cryptographic purposes. </p><dl class="section return"><dt>Returns</dt><dd>FastRandomEngine instance seeded with random_device. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00090">90</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   90</span>                                                       {</div>
+<div class="line"><span class="lineno">   91</span>  <span class="keywordflow">return</span> <a class="code hl_typedef" href="namespacehelios.html#abb787ecf4958cf3e77687000fd3aa379">FastRandomEngine</a>{<span class="keyword">static_cast&lt;</span>FastRandomEngine::result_type<span class="keyword">&gt;</span>(<a class="code hl_function" href="namespacehelios.html#aaa497a242f610a623d62163d89d36e22">RandomDeviceSeed</a>())};</div>
+<div class="line"><span class="lineno">   92</span>}</div>
+<div class="ttc" id="anamespacehelios_html_abb787ecf4958cf3e77687000fd3aa379"><div class="ttname"><a href="namespacehelios.html#abb787ecf4958cf3e77687000fd3aa379">helios::FastRandomEngine</a></div><div class="ttdeci">std::minstd_rand FastRandomEngine</div><div class="ttdoc">Fast but lower-quality engine type used by random utilities.</div><div class="ttdef"><b>Definition</b> <a href="random_8hpp_source.html#l00048">random.hpp:48</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a34d912099fed7401df8c3089edc40fec" name="a34d912099fed7401df8c3089edc40fec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34d912099fed7401df8c3089edc40fec">&#9670;&#160;</a></span>RandomDefault()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios.html#a9628890cafc6659f2e79ee7317475382">DefaultRandomGenerator</a> &amp; helios::RandomDefault </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Provides access to a thread-local default-quality random generator. </p>
+<p>Uses Meyer's singleton pattern per thread and avoids any static engine objects other than thread-local instances that are lazily initialized on first use. </p><dl class="section return"><dt>Returns</dt><dd>Reference to DefaultRandomGenerator bound to <a class="el" href="namespacehelios.html#abadc4ad0338eb86e49483e9e3e7b23a3" title="Thread-local default-quality engine.">DefaultEngine()</a>. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00242">242</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  242</span>                                                             {</div>
+<div class="line"><span class="lineno">  243</span>  <span class="keyword">thread_local</span> <a class="code hl_class" href="classhelios_1_1RandomGenerator.html">DefaultRandomGenerator</a> generator{<a class="code hl_function" href="namespacehelios.html#abadc4ad0338eb86e49483e9e3e7b23a3">DefaultEngine</a>()};</div>
+<div class="line"><span class="lineno">  244</span>  <span class="keywordflow">return</span> generator;</div>
+<div class="line"><span class="lineno">  245</span>}</div>
+<div class="ttc" id="aclasshelios_1_1RandomGenerator_html"><div class="ttname"><a href="classhelios_1_1RandomGenerator.html">helios::RandomGenerator</a></div><div class="ttdoc">Random number utilities with a user-provided engine.</div><div class="ttdef"><b>Definition</b> <a href="random_8hpp_source.html#l00123">random.hpp:123</a></div></div>
+<div class="ttc" id="anamespacehelios_html_abadc4ad0338eb86e49483e9e3e7b23a3"><div class="ttname"><a href="namespacehelios.html#abadc4ad0338eb86e49483e9e3e7b23a3">helios::DefaultEngine</a></div><div class="ttdeci">DefaultRandomEngine &amp; DefaultEngine()</div><div class="ttdoc">Thread-local default-quality engine.</div><div class="ttdef"><b>Definition</b> <a href="random_8hpp_source.html#l00100">random.hpp:100</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aaa497a242f610a623d62163d89d36e22" name="aaa497a242f610a623d62163d89d36e22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa497a242f610a623d62163d89d36e22">&#9670;&#160;</a></span>RandomDeviceSeed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint64_t helios::RandomDeviceSeed </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Internal helper to obtain seed from std::random_device. </p>
+<p>This function is intentionally small and header-only to avoid static initialization of engines in user code. </p><dl class="section return"><dt>Returns</dt><dd>64-bit seed value from random_device. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00055">55</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   55</span>                                                 {</div>
+<div class="line"><span class="lineno">   56</span>  std::random_device rd{};</div>
+<div class="line"><span class="lineno">   57</span>  <span class="keyword">using </span>result_type = std::random_device::result_type;</div>
+<div class="line"><span class="lineno">   58</span>  <span class="keyword">constexpr</span> <span class="keyword">auto</span> result_bits = <span class="keyword">sizeof</span>(result_type) * 8U;</div>
+<div class="line"><span class="lineno">   59</span>  <span class="keyword">constexpr</span> <span class="keyword">auto</span> target_bits = <span class="keyword">sizeof</span>(uint64_t) * 8U;</div>
+<div class="line"><span class="lineno">   60</span> </div>
+<div class="line"><span class="lineno">   61</span>  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (result_bits &gt;= target_bits) {</div>
+<div class="line"><span class="lineno">   62</span>    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>uint64_t<span class="keyword">&gt;</span>(rd());</div>
+<div class="line"><span class="lineno">   63</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">   64</span>    uint64_t value = 0;</div>
+<div class="line"><span class="lineno">   65</span>    <span class="keyword">auto</span> shift = 0U;</div>
+<div class="line"><span class="lineno">   66</span>    <span class="keywordflow">while</span> (shift &lt; target_bits) {</div>
+<div class="line"><span class="lineno">   67</span>      value |= <span class="keyword">static_cast&lt;</span>uint64_t<span class="keyword">&gt;</span>(rd()) &lt;&lt; shift;</div>
+<div class="line"><span class="lineno">   68</span>      shift += result_bits;</div>
+<div class="line"><span class="lineno">   69</span>    }</div>
+<div class="line"><span class="lineno">   70</span>    <span class="keywordflow">return</span> value;</div>
+<div class="line"><span class="lineno">   71</span>  }</div>
+<div class="line"><span class="lineno">   72</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ac22ce7ee207da9cc1cc5617348b192ba" name="ac22ce7ee207da9cc1cc5617348b192ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac22ce7ee207da9cc1cc5617348b192ba">&#9670;&#160;</a></span>RandomFast()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios.html#ab5fc87b09f78f914a54250906fa46648">FastRandomGeneratorType</a> &amp; helios::RandomFast </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Provides access to a thread-local fast random generator. </p>
+<p>Uses Meyer's singleton pattern per thread and avoids any static engine objects other than thread-local instances that are lazily initialized on first use. </p><dl class="section return"><dt>Returns</dt><dd>Reference to FastRandomGeneratorType bound to <a class="el" href="namespacehelios.html#a380a9d4e3f187563595e821aa7e8d663" title="Thread-local fast engine.">FastEngineInstance()</a>. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00253">253</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  253</span>                                                           {</div>
+<div class="line"><span class="lineno">  254</span>  <span class="keyword">thread_local</span> <a class="code hl_class" href="classhelios_1_1RandomGenerator.html">FastRandomGeneratorType</a> generator{<a class="code hl_function" href="namespacehelios.html#a380a9d4e3f187563595e821aa7e8d663">FastEngineInstance</a>()};</div>
+<div class="line"><span class="lineno">  255</span>  <span class="keywordflow">return</span> generator;</div>
+<div class="line"><span class="lineno">  256</span>}</div>
+<div class="ttc" id="anamespacehelios_html_a380a9d4e3f187563595e821aa7e8d663"><div class="ttname"><a href="namespacehelios.html#a380a9d4e3f187563595e821aa7e8d663">helios::FastEngineInstance</a></div><div class="ttdeci">FastRandomEngine &amp; FastEngineInstance()</div><div class="ttdoc">Thread-local fast engine.</div><div class="ttdef"><b>Definition</b> <a href="random_8hpp_source.html#l00111">random.hpp:111</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a5f8133c73267300a345ed66b5b78bc4a" name="a5f8133c73267300a345ed66b5b78bc4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f8133c73267300a345ed66b5b78bc4a">&#9670;&#160;</a></span>RandomFastValue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;utils::ArithmeticTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T helios::RandomFastValue </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convenience function to generate a default-distribution value using the fast engine. </p>
+<p>Equivalent to <a class="el" href="namespacehelios.html#ac22ce7ee207da9cc1cc5617348b192ba" title="Provides access to a thread-local fast random generator.">RandomFast()</a>.Value&lt;T&gt;(), but shorter to call. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Arithmetic type to generate. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Randomly generated value of type T using the fast engine. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00290">290</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  290</span>                                         {</div>
+<div class="line"><span class="lineno">  291</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="namespacehelios.html#ac22ce7ee207da9cc1cc5617348b192ba">RandomFast</a>().<a class="code hl_function" href="classhelios_1_1RandomGenerator.html#a90c6f5709409e182009e271c7ac4bbba">Value</a>&lt;T&gt;();</div>
+<div class="line"><span class="lineno">  292</span>}</div>
+<div class="ttc" id="aclasshelios_1_1RandomGenerator_html_a90c6f5709409e182009e271c7ac4bbba"><div class="ttname"><a href="classhelios_1_1RandomGenerator.html#a90c6f5709409e182009e271c7ac4bbba">helios::RandomGenerator::Value</a></div><div class="ttdeci">T Value()</div><div class="ttdoc">Generates a random arithmetic value using a reasonable default distribution.</div><div class="ttdef"><b>Definition</b> <a href="random_8hpp_source.html#l00190">random.hpp:190</a></div></div>
+<div class="ttc" id="anamespacehelios_html_ac22ce7ee207da9cc1cc5617348b192ba"><div class="ttname"><a href="namespacehelios.html#ac22ce7ee207da9cc1cc5617348b192ba">helios::RandomFast</a></div><div class="ttdeci">FastRandomGeneratorType &amp; RandomFast()</div><div class="ttdoc">Provides access to a thread-local fast random generator.</div><div class="ttdef"><b>Definition</b> <a href="random_8hpp_source.html#l00253">random.hpp:253</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a85e1b1856219a6f075a15b7335e070e3" name="a85e1b1856219a6f075a15b7335e070e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85e1b1856219a6f075a15b7335e070e3">&#9670;&#160;</a></span>RandomFastValueFromRange()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;utils::ArithmeticTrait T, utils::ArithmeticTrait U&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::RandomFastValueFromRange </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>min</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">U&#160;</td>
+          <td class="paramname"><em>max</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> -&gt; std::common_type_t&lt;T, U&gt; </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convenience function to generate a value in range using the fast engine. </p>
+<p>Equivalent to <a class="el" href="namespacehelios.html#ac22ce7ee207da9cc1cc5617348b192ba" title="Provides access to a thread-local fast random generator.">RandomFast()</a>.ValueFromRange(min, max). </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Arithmetic type. </td></tr>
+    <tr><td class="paramname">U</td><td>Arithmetic type. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">min</td><td>Lower bound of the range. </td></tr>
+    <tr><td class="paramname">max</td><td>Upper bound of the range. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Random value of common_type_t&lt;T, U&gt; in [min, max] or [min, max). </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00304">304</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  304</span>                                                                                           {</div>
+<div class="line"><span class="lineno">  305</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="namespacehelios.html#ac22ce7ee207da9cc1cc5617348b192ba">RandomFast</a>().<a class="code hl_function" href="classhelios_1_1RandomGenerator.html#a847d27908ae408d28351687ad31a5944">ValueFromRange</a>(min, max);</div>
+<div class="line"><span class="lineno">  306</span>}</div>
+<div class="ttc" id="aclasshelios_1_1RandomGenerator_html_a847d27908ae408d28351687ad31a5944"><div class="ttname"><a href="classhelios_1_1RandomGenerator.html#a847d27908ae408d28351687ad31a5944">helios::RandomGenerator::ValueFromRange</a></div><div class="ttdeci">auto ValueFromRange(T min, U max) -&gt; std::common_type_t&lt; T, U &gt;</div><div class="ttdoc">Generates a random arithmetic value within the specified range.</div><div class="ttdef"><b>Definition</b> <a href="random_8hpp_source.html#l00208">random.hpp:208</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a40f8f3f9b143782c4ed13bce109c06e1" name="a40f8f3f9b143782c4ed13bce109c06e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40f8f3f9b143782c4ed13bce109c06e1">&#9670;&#160;</a></span>RandomValue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;utils::ArithmeticTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T helios::RandomValue </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convenience function to generate a default-distribution value using the default engine. </p>
+<p>Equivalent to <a class="el" href="namespacehelios.html#a34d912099fed7401df8c3089edc40fec" title="Provides access to a thread-local default-quality random generator.">RandomDefault()</a>.Value&lt;T&gt;(), but shorter to call. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Arithmetic type to generate. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Randomly generated value of type T. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00265">265</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  265</span>                                     {</div>
+<div class="line"><span class="lineno">  266</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="namespacehelios.html#a34d912099fed7401df8c3089edc40fec">RandomDefault</a>().<a class="code hl_function" href="classhelios_1_1RandomGenerator.html#a90c6f5709409e182009e271c7ac4bbba">Value</a>&lt;T&gt;();</div>
+<div class="line"><span class="lineno">  267</span>}</div>
+<div class="ttc" id="anamespacehelios_html_a34d912099fed7401df8c3089edc40fec"><div class="ttname"><a href="namespacehelios.html#a34d912099fed7401df8c3089edc40fec">helios::RandomDefault</a></div><div class="ttdeci">DefaultRandomGenerator &amp; RandomDefault()</div><div class="ttdoc">Provides access to a thread-local default-quality random generator.</div><div class="ttdef"><b>Definition</b> <a href="random_8hpp_source.html#l00242">random.hpp:242</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a2efc91ecccbf4c252486d27300e79ea0" name="a2efc91ecccbf4c252486d27300e79ea0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2efc91ecccbf4c252486d27300e79ea0">&#9670;&#160;</a></span>RandomValueFromRange()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;utils::ArithmeticTrait T, utils::ArithmeticTrait U&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::RandomValueFromRange </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>min</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">U&#160;</td>
+          <td class="paramname"><em>max</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> -&gt; std::common_type_t&lt;T, U&gt; </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convenience function to generate a value in range using the default engine. </p>
+<p>Equivalent to <a class="el" href="namespacehelios.html#a34d912099fed7401df8c3089edc40fec" title="Provides access to a thread-local default-quality random generator.">RandomDefault()</a>.ValueFromRange(min, max). </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Arithmetic type. </td></tr>
+    <tr><td class="paramname">U</td><td>Arithmetic type. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">min</td><td>Lower bound of the range. </td></tr>
+    <tr><td class="paramname">max</td><td>Upper bound of the range. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Random value of common_type_t&lt;T, U&gt; in [min, max] or [min, max). </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00279">279</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  279</span>                                                                                       {</div>
+<div class="line"><span class="lineno">  280</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="namespacehelios.html#a34d912099fed7401df8c3089edc40fec">RandomDefault</a>().<a class="code hl_function" href="classhelios_1_1RandomGenerator.html#a847d27908ae408d28351687ad31a5944">ValueFromRange</a>(min, max);</div>
+<div class="line"><span class="lineno">  281</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a3adf145c13509e0e25874cf768acbdf8" name="a3adf145c13509e0e25874cf768acbdf8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3adf145c13509e0e25874cf768acbdf8">&#9670;&#160;</a></span>kDefaultLogger</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="structhelios_1_1DefaultLogger.html">DefaultLogger</a> helios::kDefaultLogger {}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constexpr instance of the default logger for easier user interface. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2logger_8hpp-example.html#a31">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/logger.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00225">225</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  225</span>{};</div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehelios.html">helios</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

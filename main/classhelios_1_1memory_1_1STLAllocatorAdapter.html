@@ -1,0 +1,998 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: helios::memory::STLAllocatorAdapter&lt; T, UnderlyingAllocator &gt; Class Template Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classhelios_1_1memory_1_1STLAllocatorAdapter.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#friends">Friends</a> &#124;
+<a href="classhelios_1_1memory_1_1STLAllocatorAdapter-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">helios::memory::STLAllocatorAdapter&lt; T, UnderlyingAllocator &gt; Class Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>STL-compatible allocator adapter for custom allocators.  
+ <a href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="stl__allocator__adapter_8hpp_source.html">stl_allocator_adapter.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1memory_1_1STLAllocatorAdapter_1_1rebind.html">rebind</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rebind support for allocating different types.  <a href="structhelios_1_1memory_1_1STLAllocatorAdapter_1_1rebind.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a007879a9bc857709c05e515f78ca2a37" id="r_a007879a9bc857709c05e515f78ca2a37"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#a007879a9bc857709c05e515f78ca2a37">value_type</a> = T</td></tr>
+<tr class="separator:a007879a9bc857709c05e515f78ca2a37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8a66900ad35496f92d168ccdb846c66" id="r_ad8a66900ad35496f92d168ccdb846c66"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#ad8a66900ad35496f92d168ccdb846c66">size_type</a> = size_t</td></tr>
+<tr class="separator:ad8a66900ad35496f92d168ccdb846c66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42d4ee5b26ec9bce7d03f74caf7ec0e6" id="r_a42d4ee5b26ec9bce7d03f74caf7ec0e6"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#a42d4ee5b26ec9bce7d03f74caf7ec0e6">difference_type</a> = std::ptrdiff_t</td></tr>
+<tr class="separator:a42d4ee5b26ec9bce7d03f74caf7ec0e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f98892fb0c2dc6e080171e2fdd2e0a7" id="r_a6f98892fb0c2dc6e080171e2fdd2e0a7"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#a6f98892fb0c2dc6e080171e2fdd2e0a7">propagate_on_container_move_assignment</a> = std::true_type</td></tr>
+<tr class="separator:a6f98892fb0c2dc6e080171e2fdd2e0a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6dbd55e2e7fe47db03c407fe90fbc90a" id="r_a6dbd55e2e7fe47db03c407fe90fbc90a"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#a6dbd55e2e7fe47db03c407fe90fbc90a">is_always_equal</a> = std::false_type</td></tr>
+<tr class="separator:a6dbd55e2e7fe47db03c407fe90fbc90a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:abc3fe38376bbe4ee4d8f294d0676249e" id="r_abc3fe38376bbe4ee4d8f294d0676249e"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#abc3fe38376bbe4ee4d8f294d0676249e">STLAllocatorAdapter</a> (UnderlyingAllocator &amp;allocator) noexcept</td></tr>
+<tr class="memdesc:abc3fe38376bbe4ee4d8f294d0676249e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs adapter with reference to underlying allocator.  <br /></td></tr>
+<tr class="separator:abc3fe38376bbe4ee4d8f294d0676249e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f9129cd72ef33158dac4e69187fbfd9" id="r_a9f9129cd72ef33158dac4e69187fbfd9"><td class="memTemplParams" colspan="2">template&lt;typename U &gt; </td></tr>
+<tr class="memitem:a9f9129cd72ef33158dac4e69187fbfd9"><td class="memTemplItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#a9f9129cd72ef33158dac4e69187fbfd9">STLAllocatorAdapter</a> (const <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">STLAllocatorAdapter</a>&lt; U, UnderlyingAllocator &gt; &amp;other) noexcept</td></tr>
+<tr class="memdesc:a9f9129cd72ef33158dac4e69187fbfd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rebind copy constructor.  <br /></td></tr>
+<tr class="separator:a9f9129cd72ef33158dac4e69187fbfd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f4f55cd053048ef3ea6d2810542ac6a" id="r_a1f4f55cd053048ef3ea6d2810542ac6a"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#a1f4f55cd053048ef3ea6d2810542ac6a">STLAllocatorAdapter</a> (const <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">STLAllocatorAdapter</a> &amp;) noexcept=default</td></tr>
+<tr class="separator:a1f4f55cd053048ef3ea6d2810542ac6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3093d3454b158b3cdbb7053c41aa7b9" id="r_ab3093d3454b158b3cdbb7053c41aa7b9"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#ab3093d3454b158b3cdbb7053c41aa7b9">STLAllocatorAdapter</a> (<a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">STLAllocatorAdapter</a> &amp;&amp;) noexcept=default</td></tr>
+<tr class="separator:ab3093d3454b158b3cdbb7053c41aa7b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a250ef7836998627ba6b927092f32debb" id="r_a250ef7836998627ba6b927092f32debb"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#a250ef7836998627ba6b927092f32debb">~STLAllocatorAdapter</a> () noexcept=default</td></tr>
+<tr class="separator:a250ef7836998627ba6b927092f32debb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6902ded588e9bffbdb9b90a47140a455" id="r_a6902ded588e9bffbdb9b90a47140a455"><td class="memTemplParams" colspan="2">template&lt;typename U &gt; </td></tr>
+<tr class="memitem:a6902ded588e9bffbdb9b90a47140a455"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">STLAllocatorAdapter</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#a6902ded588e9bffbdb9b90a47140a455">operator=</a> (const <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">STLAllocatorAdapter</a>&lt; U, UnderlyingAllocator &gt; &amp;other) noexcept</td></tr>
+<tr class="separator:a6902ded588e9bffbdb9b90a47140a455"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecdd09ae5ff44e3956a03835d2454005" id="r_aecdd09ae5ff44e3956a03835d2454005"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">STLAllocatorAdapter</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#aecdd09ae5ff44e3956a03835d2454005">operator=</a> (const <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">STLAllocatorAdapter</a> &amp;) noexcept=default</td></tr>
+<tr class="separator:aecdd09ae5ff44e3956a03835d2454005"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbf6b5359b686f262ac4699260d0047c" id="r_acbf6b5359b686f262ac4699260d0047c"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">STLAllocatorAdapter</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#acbf6b5359b686f262ac4699260d0047c">operator=</a> (<a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">STLAllocatorAdapter</a> &amp;&amp;) noexcept=default</td></tr>
+<tr class="separator:acbf6b5359b686f262ac4699260d0047c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a8d8509879203d801b4127f664bac17" id="r_a6a8d8509879203d801b4127f664bac17"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#a6a8d8509879203d801b4127f664bac17">allocate</a> (<a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#ad8a66900ad35496f92d168ccdb846c66">size_type</a> count)</td></tr>
+<tr class="memdesc:a6a8d8509879203d801b4127f664bac17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocates memory for n objects of type T.  <br /></td></tr>
+<tr class="separator:a6a8d8509879203d801b4127f664bac17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae477a1a53503f14c3f527c46cb952663" id="r_ae477a1a53503f14c3f527c46cb952663"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#ae477a1a53503f14c3f527c46cb952663">deallocate</a> (T *ptr, <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#ad8a66900ad35496f92d168ccdb846c66">size_type</a> count) noexcept</td></tr>
+<tr class="memdesc:ae477a1a53503f14c3f527c46cb952663"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deallocates memory for n objects.  <br /></td></tr>
+<tr class="separator:ae477a1a53503f14c3f527c46cb952663"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f865be21caadebd5de627255fcdac05" id="r_a1f865be21caadebd5de627255fcdac05"><td class="memTemplParams" colspan="2">template&lt;typename U &gt; </td></tr>
+<tr class="memitem:a1f865be21caadebd5de627255fcdac05"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#a1f865be21caadebd5de627255fcdac05">operator==</a> (const <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">STLAllocatorAdapter</a>&lt; U, UnderlyingAllocator &gt; &amp;other) const noexcept</td></tr>
+<tr class="memdesc:a1f865be21caadebd5de627255fcdac05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Equality comparison.  <br /></td></tr>
+<tr class="separator:a1f865be21caadebd5de627255fcdac05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedcafad910ca217f365410073000534c" id="r_aedcafad910ca217f365410073000534c"><td class="memTemplParams" colspan="2">template&lt;typename U &gt; </td></tr>
+<tr class="memitem:aedcafad910ca217f365410073000534c"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#aedcafad910ca217f365410073000534c">operator!=</a> (const <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">STLAllocatorAdapter</a>&lt; U, UnderlyingAllocator &gt; &amp;other) const noexcept</td></tr>
+<tr class="memdesc:aedcafad910ca217f365410073000534c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inequality comparison.  <br /></td></tr>
+<tr class="separator:aedcafad910ca217f365410073000534c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a820611151e65b9c1152c74feed681999" id="r_a820611151e65b9c1152c74feed681999"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#ad8a66900ad35496f92d168ccdb846c66">size_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#a820611151e65b9c1152c74feed681999">max_size</a> () const noexcept</td></tr>
+<tr class="memdesc:a820611151e65b9c1152c74feed681999"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns maximum number of objects that can be allocated.  <br /></td></tr>
+<tr class="separator:a820611151e65b9c1152c74feed681999"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a971f5bcc5976a28b41287ebe9904c80f" id="r_a971f5bcc5976a28b41287ebe9904c80f"><td class="memItemLeft" align="right" valign="top">constexpr UnderlyingAllocator *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#a971f5bcc5976a28b41287ebe9904c80f">get_allocator</a> () const noexcept</td></tr>
+<tr class="memdesc:a971f5bcc5976a28b41287ebe9904c80f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets pointer to underlying allocator.  <br /></td></tr>
+<tr class="separator:a971f5bcc5976a28b41287ebe9904c80f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7408164dd03f37e963d3f8050102386a" id="r_a7408164dd03f37e963d3f8050102386a"><td class="memTemplParams" colspan="2">template&lt;typename U &gt; </td></tr>
+<tr class="memitem:a7408164dd03f37e963d3f8050102386a"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#a7408164dd03f37e963d3f8050102386a">operator=</a> (const <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">STLAllocatorAdapter</a>&lt; U, UnderlyingAllocator &gt; &amp;other) noexcept -&gt; <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">STLAllocatorAdapter</a> &amp;</td></tr>
+<tr class="separator:a7408164dd03f37e963d3f8050102386a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:ad440119a9be7188cc86af48a05688f4d" id="r_ad440119a9be7188cc86af48a05688f4d"><td class="memTemplParams" colspan="2">template&lt;typename U , typename A &gt; </td></tr>
+<tr class="memitem:ad440119a9be7188cc86af48a05688f4d"><td class="memTemplItemLeft" align="right" valign="top">class&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#ad440119a9be7188cc86af48a05688f4d">STLAllocatorAdapter</a></td></tr>
+<tr class="separator:ad440119a9be7188cc86af48a05688f4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T, typename UnderlyingAllocator&gt;<br />
+class helios::memory::STLAllocatorAdapter&lt; T, UnderlyingAllocator &gt;</div><p>STL-compatible allocator adapter for custom allocators. </p>
+<p>Wraps custom allocators to work with STL containers. The underlying allocator must remain alive for the lifetime of any containers using this adapter. </p><dl class="section note"><dt>Note</dt><dd>Thread-safety depends on the underlying allocator. </dd>
+<dd>
+The underlying allocator is held by reference - ensure it outlives all containers. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Type of objects to allocate </td></tr>
+    <tr><td class="paramname">UnderlyingAllocator</td><td>The custom allocator type </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="stl__allocator__adapter_8hpp_source.html#l00031">31</a> of file <a class="el" href="stl__allocator__adapter_8hpp_source.html">stl_allocator_adapter.hpp</a>.</p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a42d4ee5b26ec9bce7d03f74caf7ec0e6" name="a42d4ee5b26ec9bce7d03f74caf7ec0e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42d4ee5b26ec9bce7d03f74caf7ec0e6">&#9670;&#160;</a></span>difference_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename UnderlyingAllocator &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">helios::memory::STLAllocatorAdapter</a>&lt; T, UnderlyingAllocator &gt;::difference_type =  std::ptrdiff_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stl_allocator_adapter_8hpp-example.html#a2">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stl_allocator_adapter.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="stl__allocator__adapter_8hpp_source.html#l00036">36</a> of file <a class="el" href="stl__allocator__adapter_8hpp_source.html">stl_allocator_adapter.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a6dbd55e2e7fe47db03c407fe90fbc90a" name="a6dbd55e2e7fe47db03c407fe90fbc90a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6dbd55e2e7fe47db03c407fe90fbc90a">&#9670;&#160;</a></span>is_always_equal</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename UnderlyingAllocator &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">helios::memory::STLAllocatorAdapter</a>&lt; T, UnderlyingAllocator &gt;::is_always_equal =  std::false_type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stl_allocator_adapter_8hpp-example.html#a4">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stl_allocator_adapter.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="stl__allocator__adapter_8hpp_source.html#l00038">38</a> of file <a class="el" href="stl__allocator__adapter_8hpp_source.html">stl_allocator_adapter.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a6f98892fb0c2dc6e080171e2fdd2e0a7" name="a6f98892fb0c2dc6e080171e2fdd2e0a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f98892fb0c2dc6e080171e2fdd2e0a7">&#9670;&#160;</a></span>propagate_on_container_move_assignment</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename UnderlyingAllocator &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">helios::memory::STLAllocatorAdapter</a>&lt; T, UnderlyingAllocator &gt;::propagate_on_container_move_assignment =  std::true_type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stl_allocator_adapter_8hpp-example.html#a3">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stl_allocator_adapter.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="stl__allocator__adapter_8hpp_source.html#l00037">37</a> of file <a class="el" href="stl__allocator__adapter_8hpp_source.html">stl_allocator_adapter.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ad8a66900ad35496f92d168ccdb846c66" name="ad8a66900ad35496f92d168ccdb846c66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8a66900ad35496f92d168ccdb846c66">&#9670;&#160;</a></span>size_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename UnderlyingAllocator &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">helios::memory::STLAllocatorAdapter</a>&lt; T, UnderlyingAllocator &gt;::size_type =  size_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stl_allocator_adapter_8hpp-example.html#a1">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stl_allocator_adapter.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="stl__allocator__adapter_8hpp_source.html#l00035">35</a> of file <a class="el" href="stl__allocator__adapter_8hpp_source.html">stl_allocator_adapter.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a007879a9bc857709c05e515f78ca2a37" name="a007879a9bc857709c05e515f78ca2a37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a007879a9bc857709c05e515f78ca2a37">&#9670;&#160;</a></span>value_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename UnderlyingAllocator &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">helios::memory::STLAllocatorAdapter</a>&lt; T, UnderlyingAllocator &gt;::value_type =  T</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stl_allocator_adapter_8hpp-example.html#a0">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stl_allocator_adapter.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="stl__allocator__adapter_8hpp_source.html#l00034">34</a> of file <a class="el" href="stl__allocator__adapter_8hpp_source.html">stl_allocator_adapter.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="abc3fe38376bbe4ee4d8f294d0676249e" name="abc3fe38376bbe4ee4d8f294d0676249e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc3fe38376bbe4ee4d8f294d0676249e">&#9670;&#160;</a></span>STLAllocatorAdapter() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename UnderlyingAllocator &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">helios::memory::STLAllocatorAdapter</a>&lt; T, UnderlyingAllocator &gt;::STLAllocatorAdapter </td>
+          <td>(</td>
+          <td class="paramtype">UnderlyingAllocator &amp;&#160;</td>
+          <td class="paramname"><em>allocator</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructs adapter with reference to underlying allocator. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">allocator</td><td>Reference to the custom allocator to use </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="stl__allocator__adapter_8hpp_source.html#l00053">53</a> of file <a class="el" href="stl__allocator__adapter_8hpp_source.html">stl_allocator_adapter.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   53</span>: allocator_(&amp;allocator) {}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a9f9129cd72ef33158dac4e69187fbfd9" name="a9f9129cd72ef33158dac4e69187fbfd9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f9129cd72ef33158dac4e69187fbfd9">&#9670;&#160;</a></span>STLAllocatorAdapter() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename UnderlyingAllocator &gt; </div>
+<div class="memtemplate">
+template&lt;typename U &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">helios::memory::STLAllocatorAdapter</a>&lt; T, UnderlyingAllocator &gt;::STLAllocatorAdapter </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">STLAllocatorAdapter</a>&lt; U, UnderlyingAllocator &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Rebind copy constructor. </p>
+<p>Allows converting between allocators of different types. </p>
+
+<p class="definition">Definition at line <a class="el" href="stl__allocator__adapter_8hpp_source.html#l00060">60</a> of file <a class="el" href="stl__allocator__adapter_8hpp_source.html">stl_allocator_adapter.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   61</span>      : allocator_(other.allocator_) {}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a1f4f55cd053048ef3ea6d2810542ac6a" name="a1f4f55cd053048ef3ea6d2810542ac6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f4f55cd053048ef3ea6d2810542ac6a">&#9670;&#160;</a></span>STLAllocatorAdapter() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename UnderlyingAllocator &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">helios::memory::STLAllocatorAdapter</a>&lt; T, UnderlyingAllocator &gt;::STLAllocatorAdapter </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">STLAllocatorAdapter</a>&lt; T, UnderlyingAllocator &gt; &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab3093d3454b158b3cdbb7053c41aa7b9" name="ab3093d3454b158b3cdbb7053c41aa7b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3093d3454b158b3cdbb7053c41aa7b9">&#9670;&#160;</a></span>STLAllocatorAdapter() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename UnderlyingAllocator &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">helios::memory::STLAllocatorAdapter</a>&lt; T, UnderlyingAllocator &gt;::STLAllocatorAdapter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">STLAllocatorAdapter</a>&lt; T, UnderlyingAllocator &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a250ef7836998627ba6b927092f32debb" name="a250ef7836998627ba6b927092f32debb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a250ef7836998627ba6b927092f32debb">&#9670;&#160;</a></span>~STLAllocatorAdapter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename UnderlyingAllocator &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">helios::memory::STLAllocatorAdapter</a>&lt; T, UnderlyingAllocator &gt;::~<a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">STLAllocatorAdapter</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stl_allocator_adapter_8hpp-example.html#a7">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stl_allocator_adapter.hpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a6a8d8509879203d801b4127f664bac17" name="a6a8d8509879203d801b4127f664bac17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a8d8509879203d801b4127f664bac17">&#9670;&#160;</a></span>allocate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename UnderlyingAllocator &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T * <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">helios::memory::STLAllocatorAdapter</a>&lt; T, UnderlyingAllocator &gt;::allocate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#ad8a66900ad35496f92d168ccdb846c66">size_type</a>&#160;</td>
+          <td class="paramname"><em>count</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Allocates memory for n objects of type T. </p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::bad_alloc</td><td>if allocation fails </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">count</td><td>Count of objects to allocate space for </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to allocated memory </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stl_allocator_adapter_8hpp-example.html#a9">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stl_allocator_adapter.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="stl__allocator__adapter_8hpp_source.html#l00135">135</a> of file <a class="el" href="stl__allocator__adapter_8hpp_source.html">stl_allocator_adapter.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  135</span>                                                                               {</div>
+<div class="line"><span class="lineno">  136</span>  <span class="keywordflow">if</span> (count &gt; <a class="code hl_function" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#a820611151e65b9c1152c74feed681999">max_size</a>()) {</div>
+<div class="line"><span class="lineno">  137</span>    <span class="keywordflow">throw</span> std::bad_alloc();</div>
+<div class="line"><span class="lineno">  138</span>  }</div>
+<div class="line"><span class="lineno">  139</span> </div>
+<div class="line"><span class="lineno">  140</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> size = count * <span class="keyword">sizeof</span>(T);</div>
+<div class="line"><span class="lineno">  141</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> alignment = std::max(<span class="keyword">alignof</span>(T), <a class="code hl_variable" href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">kMinAlignment</a>);</div>
+<div class="line"><span class="lineno">  142</span> </div>
+<div class="line"><span class="lineno">  143</span>  <span class="keyword">auto</span> result = allocator_-&gt;Allocate(size, alignment);</div>
+<div class="line"><span class="lineno">  144</span> </div>
+<div class="line"><span class="lineno">  145</span>  <span class="keywordflow">if</span> (result.ptr == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><span class="lineno">  146</span>    <span class="keywordflow">throw</span> std::bad_alloc();</div>
+<div class="line"><span class="lineno">  147</span>  }</div>
+<div class="line"><span class="lineno">  148</span> </div>
+<div class="line"><span class="lineno">  149</span>  <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(result.ptr);</div>
+<div class="line"><span class="lineno">  150</span>}</div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1STLAllocatorAdapter_html_a820611151e65b9c1152c74feed681999"><div class="ttname"><a href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#a820611151e65b9c1152c74feed681999">helios::memory::STLAllocatorAdapter::max_size</a></div><div class="ttdeci">constexpr size_type max_size() const noexcept</div><div class="ttdoc">Returns maximum number of objects that can be allocated.</div><div class="ttdef"><b>Definition</b> <a href="stl__allocator__adapter_8hpp_source.html#l00109">stl_allocator_adapter.hpp:109</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_a4b4f9ed5e1cf5fe81a0ccbdb6991395a"><div class="ttname"><a href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">helios::memory::kMinAlignment</a></div><div class="ttdeci">constexpr size_t kMinAlignment</div><div class="ttdoc">Minimum alignment for any allocation.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00082">allocator_traits.hpp:82</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ae477a1a53503f14c3f527c46cb952663" name="ae477a1a53503f14c3f527c46cb952663"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae477a1a53503f14c3f527c46cb952663">&#9670;&#160;</a></span>deallocate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename UnderlyingAllocator &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">helios::memory::STLAllocatorAdapter</a>&lt; T, UnderlyingAllocator &gt;::deallocate </td>
+          <td>(</td>
+          <td class="paramtype">T *&#160;</td>
+          <td class="paramname"><em>ptr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#ad8a66900ad35496f92d168ccdb846c66">size_type</a>&#160;</td>
+          <td class="paramname"><em>count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Deallocates memory for n objects. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ptr</td><td>Pointer to deallocate </td></tr>
+    <tr><td class="paramname">count</td><td>Count of objects (may be ignored by some allocators) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stl_allocator_adapter_8hpp-example.html#a10">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stl_allocator_adapter.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="stl__allocator__adapter_8hpp_source.html#l00153">153</a> of file <a class="el" href="stl__allocator__adapter_8hpp_source.html">stl_allocator_adapter.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  153</span>                                                                                                    {</div>
+<div class="line"><span class="lineno">  154</span>  <span class="keywordflow">if</span> (ptr != <span class="keyword">nullptr</span>) [[unlikely]] {</div>
+<div class="line"><span class="lineno">  155</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  156</span>  }</div>
+<div class="line"><span class="lineno">  157</span> </div>
+<div class="line"><span class="lineno">  158</span>  <span class="comment">// FrameAllocator, DoubleFrameAllocator, and NFrameAllocator don&#39;t support individual deallocation</span></div>
+<div class="line"><span class="lineno">  159</span>  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::same_as&lt;UnderlyingAllocator, FrameAllocator&gt; ||</div>
+<div class="line"><span class="lineno">  160</span>                std::same_as&lt;UnderlyingAllocator, DoubleFrameAllocator&gt;) {</div>
+<div class="line"><span class="lineno">  161</span>    <span class="comment">// No-op: Frame allocators don&#39;t support individual deallocation</span></div>
+<div class="line"><span class="lineno">  162</span>  }</div>
+<div class="line"><span class="lineno">  163</span>  <span class="comment">// PoolAllocator and FreeListAllocator only need ptr</span></div>
+<div class="line"><span class="lineno">  164</span>  <span class="keywordflow">else</span> <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::same_as&lt;UnderlyingAllocator, PoolAllocator&gt; ||</div>
+<div class="line"><span class="lineno">  165</span>                     std::same_as&lt;UnderlyingAllocator, FreeListAllocator&gt;) {</div>
+<div class="line"><span class="lineno">  166</span>    allocator_-&gt;Deallocate(ptr);</div>
+<div class="line"><span class="lineno">  167</span>  }</div>
+<div class="line"><span class="lineno">  168</span>  <span class="comment">// StackAllocator needs ptr and size</span></div>
+<div class="line"><span class="lineno">  169</span>  <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  170</span>    allocator_-&gt;Deallocate(ptr, count * <span class="keyword">sizeof</span>(T));</div>
+<div class="line"><span class="lineno">  171</span>  }</div>
+<div class="line"><span class="lineno">  172</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a971f5bcc5976a28b41287ebe9904c80f" name="a971f5bcc5976a28b41287ebe9904c80f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a971f5bcc5976a28b41287ebe9904c80f">&#9670;&#160;</a></span>get_allocator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename UnderlyingAllocator &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr UnderlyingAllocator * <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">helios::memory::STLAllocatorAdapter</a>&lt; T, UnderlyingAllocator &gt;::get_allocator </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets pointer to underlying allocator. </p>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to underlying allocator </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stl_allocator_adapter_8hpp-example.html#a14">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stl_allocator_adapter.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="stl__allocator__adapter_8hpp_source.html#l00117">117</a> of file <a class="el" href="stl__allocator__adapter_8hpp_source.html">stl_allocator_adapter.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  117</span>{ <span class="keywordflow">return</span> allocator_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a820611151e65b9c1152c74feed681999" name="a820611151e65b9c1152c74feed681999"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a820611151e65b9c1152c74feed681999">&#9670;&#160;</a></span>max_size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename UnderlyingAllocator &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#ad8a66900ad35496f92d168ccdb846c66">size_type</a> <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">helios::memory::STLAllocatorAdapter</a>&lt; T, UnderlyingAllocator &gt;::max_size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns maximum number of objects that can be allocated. </p>
+<dl class="section return"><dt>Returns</dt><dd>Maximum size </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stl_allocator_adapter_8hpp-example.html#a13">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stl_allocator_adapter.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="stl__allocator__adapter_8hpp_source.html#l00109">109</a> of file <a class="el" href="stl__allocator__adapter_8hpp_source.html">stl_allocator_adapter.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  109</span>                                                              {</div>
+<div class="line"><span class="lineno">  110</span>    <span class="keywordflow">return</span> std::numeric_limits&lt;size_type&gt;::max() / <span class="keyword">sizeof</span>(T);</div>
+<div class="line"><span class="lineno">  111</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aedcafad910ca217f365410073000534c" name="aedcafad910ca217f365410073000534c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aedcafad910ca217f365410073000534c">&#9670;&#160;</a></span>operator!=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename UnderlyingAllocator &gt; </div>
+<div class="memtemplate">
+template&lt;typename U &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">helios::memory::STLAllocatorAdapter</a>&lt; T, UnderlyingAllocator &gt;::operator!= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">STLAllocatorAdapter</a>&lt; U, UnderlyingAllocator &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Inequality comparison. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stl_allocator_adapter_8hpp-example.html#a12">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stl_allocator_adapter.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="stl__allocator__adapter_8hpp_source.html#l00101">101</a> of file <a class="el" href="stl__allocator__adapter_8hpp_source.html">stl_allocator_adapter.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  101</span>                                                                                                     {</div>
+<div class="line"><span class="lineno">  102</span>    <span class="keywordflow">return</span> !(*<span class="keyword">this</span> == other);</div>
+<div class="line"><span class="lineno">  103</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aecdd09ae5ff44e3956a03835d2454005" name="aecdd09ae5ff44e3956a03835d2454005"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aecdd09ae5ff44e3956a03835d2454005">&#9670;&#160;</a></span>operator=() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename UnderlyingAllocator &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">STLAllocatorAdapter</a> &amp; <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">helios::memory::STLAllocatorAdapter</a>&lt; T, UnderlyingAllocator &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">STLAllocatorAdapter</a>&lt; T, UnderlyingAllocator &gt; &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6902ded588e9bffbdb9b90a47140a455" name="a6902ded588e9bffbdb9b90a47140a455"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6902ded588e9bffbdb9b90a47140a455">&#9670;&#160;</a></span>operator=() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename UnderlyingAllocator &gt; </div>
+<div class="memtemplate">
+template&lt;typename U &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">STLAllocatorAdapter</a> &amp; <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">helios::memory::STLAllocatorAdapter</a>&lt; T, UnderlyingAllocator &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">STLAllocatorAdapter</a>&lt; U, UnderlyingAllocator &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stl_allocator_adapter_8hpp-example.html#a8">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stl_allocator_adapter.hpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<a id="a7408164dd03f37e963d3f8050102386a" name="a7408164dd03f37e963d3f8050102386a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7408164dd03f37e963d3f8050102386a">&#9670;&#160;</a></span>operator=() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename UnderlyingAllocator &gt; </div>
+<div class="memtemplate">
+template&lt;typename U &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">helios::memory::STLAllocatorAdapter</a>&lt; T, UnderlyingAllocator &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">STLAllocatorAdapter</a>&lt; U, UnderlyingAllocator &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> -&gt; <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">STLAllocatorAdapter</a>&amp; </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="stl__allocator__adapter_8hpp_source.html#l00128">128</a> of file <a class="el" href="stl__allocator__adapter_8hpp_source.html">stl_allocator_adapter.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  129</span>                                                                                               {</div>
+<div class="line"><span class="lineno">  130</span>  allocator_ = other.allocator_;</div>
+<div class="line"><span class="lineno">  131</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><span class="lineno">  132</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="acbf6b5359b686f262ac4699260d0047c" name="acbf6b5359b686f262ac4699260d0047c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbf6b5359b686f262ac4699260d0047c">&#9670;&#160;</a></span>operator=() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename UnderlyingAllocator &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">STLAllocatorAdapter</a> &amp; <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">helios::memory::STLAllocatorAdapter</a>&lt; T, UnderlyingAllocator &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">STLAllocatorAdapter</a>&lt; T, UnderlyingAllocator &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1f865be21caadebd5de627255fcdac05" name="a1f865be21caadebd5de627255fcdac05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f865be21caadebd5de627255fcdac05">&#9670;&#160;</a></span>operator==()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename UnderlyingAllocator &gt; </div>
+<div class="memtemplate">
+template&lt;typename U &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">helios::memory::STLAllocatorAdapter</a>&lt; T, UnderlyingAllocator &gt;::operator== </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">STLAllocatorAdapter</a>&lt; U, UnderlyingAllocator &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Equality comparison. </p>
+<p>Two adapters are equal if they reference the same underlying allocator. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stl_allocator_adapter_8hpp-example.html#a11">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stl_allocator_adapter.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="stl__allocator__adapter_8hpp_source.html#l00093">93</a> of file <a class="el" href="stl__allocator__adapter_8hpp_source.html">stl_allocator_adapter.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   93</span>                                                                                                     {</div>
+<div class="line"><span class="lineno">   94</span>    <span class="keywordflow">return</span> allocator_ == other.allocator_;</div>
+<div class="line"><span class="lineno">   95</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Symbol Documentation</h2>
+<a id="ad440119a9be7188cc86af48a05688f4d" name="ad440119a9be7188cc86af48a05688f4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad440119a9be7188cc86af48a05688f4d">&#9670;&#160;</a></span>STLAllocatorAdapter</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename UnderlyingAllocator &gt; </div>
+<div class="memtemplate">
+template&lt;typename U , typename A &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend class <a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">STLAllocatorAdapter</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stl_allocator_adapter_8hpp-example.html#a6">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stl_allocator_adapter.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="stl__allocator__adapter_8hpp_source.html#l00121">121</a> of file <a class="el" href="stl__allocator__adapter_8hpp_source.html">stl_allocator_adapter.hpp</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehelios.html">helios</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1memory.html">memory</a></li><li class="navelem"><a class="el" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html">STLAllocatorAdapter</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

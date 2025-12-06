@@ -1,0 +1,488 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: /home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stl_allocator_adapter.hpp</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stl_allocator_adapter_8hpp-example.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stl_allocator_adapter.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<p>STL adapter for FrameAllocator.</p>
+<p>STL adapter for FrameAllocator. </p><dl class="section note"><dt>Note</dt><dd>Deallocation is a no-op. Use Reset() on the allocator to free all memory. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Do not use with containers that frequently deallocate individual elements. Best for temporary containers that live for one frame. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Type of objects to allocate</td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line">FrameAllocator frame_alloc(1024 * 1024);</div>
+<div class="line">std::vector&lt;int, STLFrameAllocator&lt;int&gt;&gt; vec{STLFrameAllocator&lt;int&gt;(frame_alloc)};</div>
+</div><!-- fragment --><div class="fragment"><div class="line"><span class="preprocessor">#pragma once</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="core__pch_8hpp.html">helios/core_pch.hpp</a>&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="allocator__traits_8hpp.html">helios/core/memory/allocator_traits.hpp</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="double__frame__allocator_8hpp.html">helios/core/memory/double_frame_allocator.hpp</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="frame__allocator_8hpp.html">helios/core/memory/frame_allocator.hpp</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="free__list__allocator_8hpp.html">helios/core/memory/free_list_allocator.hpp</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="growable__allocator_8hpp.html">helios/core/memory/growable_allocator.hpp</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="pool__allocator_8hpp.html">helios/core/memory/pool_allocator.hpp</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="stack__allocator_8hpp.html">helios/core/memory/stack_allocator.hpp</a>&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;algorithm&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;concepts&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;cstddef&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;limits&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1memory.html">helios::memory</a> {</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief STL-compatible allocator adapter for custom allocators.</span></div>
+<div class="line"><span class="comment"> * @details Wraps custom allocators to work with STL containers. The underlying</span></div>
+<div class="line"><span class="comment"> * allocator must remain alive for the lifetime of any containers using this adapter.</span></div>
+<div class="line"><span class="comment"> * @note Thread-safety depends on the underlying allocator.</span></div>
+<div class="line"><span class="comment"> * @note The underlying allocator is held by reference - ensure it outlives all containers.</span></div>
+<div class="line"><span class="comment"> * @tparam T Type of objects to allocate</span></div>
+<div class="line"><span class="comment"> * @tparam UnderlyingAllocator The custom allocator type</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> UnderlyingAllocator&gt;</div>
+<div class="line"><span class="keyword">class </span>STLAllocatorAdapter {</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">  <span class="comment">// Standard allocator type definitions</span></div>
+<div class="line">  <span class="keyword">using </span><a id="a0" name="a0"></a><a class="code hl_typedef" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#a007879a9bc857709c05e515f78ca2a37">value_type</a> = T;</div>
+<div class="line">  <span class="keyword">using </span><a id="a1" name="a1"></a><a class="code hl_typedef" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#ad8a66900ad35496f92d168ccdb846c66">size_type</a> = size_t;</div>
+<div class="line">  <span class="keyword">using </span><a id="a2" name="a2"></a><a class="code hl_typedef" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#a42d4ee5b26ec9bce7d03f74caf7ec0e6">difference_type</a> = std::ptrdiff_t;</div>
+<div class="line">  <span class="keyword">using </span><a id="a3" name="a3"></a><a class="code hl_typedef" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#a6f98892fb0c2dc6e080171e2fdd2e0a7">propagate_on_container_move_assignment</a> = std::true_type;</div>
+<div class="line">  <span class="keyword">using </span><a id="a4" name="a4"></a><a class="code hl_typedef" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#a6dbd55e2e7fe47db03c407fe90fbc90a">is_always_equal</a> = std::false_type;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Rebind support for allocating different types.</span></div>
+<div class="line"><span class="comment">   * @details Required by STL for internal allocations (e.g., node allocators).</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U&gt;</div>
+<div class="line">  <span class="keyword">struct </span>rebind {</div>
+<div class="line">    <span class="keyword">using </span><a id="a5" name="a5"></a><a class="code hl_typedef" href="structhelios_1_1memory_1_1STLAllocatorAdapter_1_1rebind.html#adf0ed4f1f6f4d6ccf42353703f6d209d">other</a> = STLAllocatorAdapter&lt;U, UnderlyingAllocator&gt;;</div>
+<div class="line">  };</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Constructs adapter with reference to underlying allocator.</span></div>
+<div class="line"><span class="comment">   * @param allocator Reference to the custom allocator to use</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">explicit</span> <span class="keyword">constexpr</span> <a id="a6" name="a6"></a><a class="code hl_friend" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#ad440119a9be7188cc86af48a05688f4d">STLAllocatorAdapter</a>(UnderlyingAllocator&amp; allocator) noexcept : allocator_(&amp;allocator) {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Rebind copy constructor.</span></div>
+<div class="line"><span class="comment">   * @details Allows converting between allocators of different types.</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U&gt;</div>
+<div class="line">  <span class="keyword">explicit</span> <span class="keyword">constexpr</span> <a class="code hl_friend" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#ad440119a9be7188cc86af48a05688f4d">STLAllocatorAdapter</a>(<span class="keyword">const</span> STLAllocatorAdapter&lt;U, UnderlyingAllocator&gt;&amp; other) noexcept</div>
+<div class="line">      : allocator_(other.allocator_) {}</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">constexpr</span> <a class="code hl_friend" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#ad440119a9be7188cc86af48a05688f4d">STLAllocatorAdapter</a>(<span class="keyword">const</span> <a class="code hl_friend" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#ad440119a9be7188cc86af48a05688f4d">STLAllocatorAdapter</a>&amp;) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line">  <span class="keyword">constexpr</span> <a class="code hl_friend" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#ad440119a9be7188cc86af48a05688f4d">STLAllocatorAdapter</a>(<a class="code hl_friend" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#ad440119a9be7188cc86af48a05688f4d">STLAllocatorAdapter</a>&amp;&amp;) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line">  <span class="keyword">constexpr</span> <a id="a7" name="a7"></a><a class="code hl_function" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#a250ef7836998627ba6b927092f32debb">~STLAllocatorAdapter</a>() <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U&gt;</div>
+<div class="line">  <span class="keyword">constexpr</span> <a class="code hl_friend" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#ad440119a9be7188cc86af48a05688f4d">STLAllocatorAdapter</a>&amp; <a id="a8" name="a8"></a><a class="code hl_function" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#a6902ded588e9bffbdb9b90a47140a455">operator=</a>(<span class="keyword">const</span> STLAllocatorAdapter&lt;U, UnderlyingAllocator&gt;&amp; other) <span class="keyword">noexcept</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">constexpr</span> <a class="code hl_friend" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#ad440119a9be7188cc86af48a05688f4d">STLAllocatorAdapter</a>&amp; <a class="code hl_function" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#a6902ded588e9bffbdb9b90a47140a455">operator=</a>(<span class="keyword">const</span> <a class="code hl_friend" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#ad440119a9be7188cc86af48a05688f4d">STLAllocatorAdapter</a>&amp;) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line">  <span class="keyword">constexpr</span> <a class="code hl_friend" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#ad440119a9be7188cc86af48a05688f4d">STLAllocatorAdapter</a>&amp; <a class="code hl_function" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#a6902ded588e9bffbdb9b90a47140a455">operator=</a>(<a class="code hl_friend" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#ad440119a9be7188cc86af48a05688f4d">STLAllocatorAdapter</a>&amp;&amp;) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Allocates memory for n objects of type T.</span></div>
+<div class="line"><span class="comment">   * @throws std::bad_alloc if allocation fails</span></div>
+<div class="line"><span class="comment">   * @param count Count of objects to allocate space for</span></div>
+<div class="line"><span class="comment">   * @return Pointer to allocated memory</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] T* <a id="a9" name="a9"></a><a class="code hl_function" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#a6a8d8509879203d801b4127f664bac17">allocate</a>(<a class="code hl_typedef" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#ad8a66900ad35496f92d168ccdb846c66">size_type</a> count);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Deallocates memory for n objects.</span></div>
+<div class="line"><span class="comment">   * @param ptr Pointer to deallocate</span></div>
+<div class="line"><span class="comment">   * @param count Count of objects (may be ignored by some allocators)</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a10" name="a10"></a><a class="code hl_function" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#ae477a1a53503f14c3f527c46cb952663">deallocate</a>(T* ptr, <a class="code hl_typedef" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#ad8a66900ad35496f92d168ccdb846c66">size_type</a> count) <span class="keyword">noexcept</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Equality comparison.</span></div>
+<div class="line"><span class="comment">   * @details Two adapters are equal if they reference the same underlying allocator.</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U&gt;</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a id="a11" name="a11"></a><a class="code hl_function" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#a1f865be21caadebd5de627255fcdac05">operator==</a>(<span class="keyword">const</span> STLAllocatorAdapter&lt;U, UnderlyingAllocator&gt;&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line">    <span class="keywordflow">return</span> allocator_ == other.allocator_;</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Inequality comparison.</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U&gt;</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a id="a12" name="a12"></a><a class="code hl_function" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#aedcafad910ca217f365410073000534c">operator!=</a>(<span class="keyword">const</span> STLAllocatorAdapter&lt;U, UnderlyingAllocator&gt;&amp; other) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line">    <span class="keywordflow">return</span> !(*<span class="keyword">this</span> == other);</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Returns maximum number of objects that can be allocated.</span></div>
+<div class="line"><span class="comment">   * @return Maximum size</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] <span class="keyword">constexpr</span> <a class="code hl_typedef" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#ad8a66900ad35496f92d168ccdb846c66">size_type</a> <a id="a13" name="a13"></a><a class="code hl_function" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#a820611151e65b9c1152c74feed681999">max_size</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line">    <span class="keywordflow">return</span> std::numeric_limits&lt;size_type&gt;::max() / <span class="keyword">sizeof</span>(T);</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Gets pointer to underlying allocator.</span></div>
+<div class="line"><span class="comment">   * @return Pointer to underlying allocator</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] <span class="keyword">constexpr</span> UnderlyingAllocator* <a id="a14" name="a14"></a><a class="code hl_function" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#a971f5bcc5976a28b41287ebe9904c80f">get_allocator</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> allocator_; }</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U, <span class="keyword">typename</span> A&gt;</div>
+<div class="line">  <span class="keyword">friend</span> <span class="keyword">class </span><a class="code hl_friend" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#ad440119a9be7188cc86af48a05688f4d">STLAllocatorAdapter</a>;</div>
+<div class="line"> </div>
+<div class="line">  UnderlyingAllocator* allocator_ = <span class="keyword">nullptr</span>;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> UnderlyingAllocator&gt;</div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> U&gt;</div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#a6902ded588e9bffbdb9b90a47140a455">STLAllocatorAdapter&lt;T, UnderlyingAllocator&gt;::operator=</a>(</div>
+<div class="line">    <span class="keyword">const</span> STLAllocatorAdapter&lt;U, UnderlyingAllocator&gt;&amp; other) <span class="keyword">noexcept</span> -&gt; STLAllocatorAdapter&amp; {</div>
+<div class="line">  allocator_ = other.allocator_;</div>
+<div class="line">  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> UnderlyingAllocator&gt;</div>
+<div class="line"><span class="keyword">inline</span> T* <a class="code hl_function" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#a6a8d8509879203d801b4127f664bac17">STLAllocatorAdapter&lt;T, UnderlyingAllocator&gt;::allocate</a>(size_type count) {</div>
+<div class="line">  <span class="keywordflow">if</span> (count &gt; max_size()) {</div>
+<div class="line">    <span class="keywordflow">throw</span> std::bad_alloc();</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">size_t</span> size = count * <span class="keyword">sizeof</span>(T);</div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">size_t</span> alignment = std::max(<span class="keyword">alignof</span>(T), <a id="a15" name="a15"></a><a class="code hl_variable" href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">kMinAlignment</a>);</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">auto</span> result = allocator_-&gt;Allocate(size, alignment);</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">if</span> (result.ptr == <span class="keyword">nullptr</span>) {</div>
+<div class="line">    <span class="keywordflow">throw</span> std::bad_alloc();</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(result.ptr);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> UnderlyingAllocator&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#ae477a1a53503f14c3f527c46cb952663">STLAllocatorAdapter&lt;T, UnderlyingAllocator&gt;::deallocate</a>(T* ptr, size_type count) <span class="keyword">noexcept</span> {</div>
+<div class="line">  <span class="keywordflow">if</span> (ptr != <span class="keyword">nullptr</span>) [[unlikely]] {</div>
+<div class="line">    <span class="keywordflow">return</span>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// FrameAllocator, DoubleFrameAllocator, and NFrameAllocator don&#39;t support individual deallocation</span></div>
+<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::same_as&lt;UnderlyingAllocator, FrameAllocator&gt; ||</div>
+<div class="line">                std::same_as&lt;UnderlyingAllocator, DoubleFrameAllocator&gt;) {</div>
+<div class="line">    <span class="comment">// No-op: Frame allocators don&#39;t support individual deallocation</span></div>
+<div class="line">  }</div>
+<div class="line">  <span class="comment">// PoolAllocator and FreeListAllocator only need ptr</span></div>
+<div class="line">  <span class="keywordflow">else</span> <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::same_as&lt;UnderlyingAllocator, PoolAllocator&gt; ||</div>
+<div class="line">                     std::same_as&lt;UnderlyingAllocator, FreeListAllocator&gt;) {</div>
+<div class="line">    allocator_-&gt;Deallocate(ptr);</div>
+<div class="line">  }</div>
+<div class="line">  <span class="comment">// StackAllocator needs ptr and size</span></div>
+<div class="line">  <span class="keywordflow">else</span> {</div>
+<div class="line">    allocator_-&gt;Deallocate(ptr, count * <span class="keyword">sizeof</span>(T));</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief STL adapter for FrameAllocator.</span></div>
+<div class="line"><span class="comment"> * @note Deallocation is a no-op. Use Reset() on the allocator to free all memory.</span></div>
+<div class="line"><span class="comment"> * @warning Do not use with containers that frequently deallocate individual elements.</span></div>
+<div class="line"><span class="comment"> * Best for temporary containers that live for one frame.</span></div>
+<div class="line"><span class="comment"> * @tparam T Type of objects to allocate</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * @example</span></div>
+<div class="line"><span class="comment"> * @code</span></div>
+<div class="line"><span class="comment"> * FrameAllocator frame_alloc(1024 * 1024);</span></div>
+<div class="line"><span class="comment"> * std::vector&lt;int, STLFrameAllocator&lt;int&gt;&gt; vec{STLFrameAllocator&lt;int&gt;(frame_alloc)};</span></div>
+<div class="line"><span class="comment"> * @endcode</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><span class="keyword">using </span><a id="a16" name="a16"></a><a class="code hl_typedef" href="namespacehelios_1_1memory.html#a20d8af5328419a418af393d8eeba2816">STLFrameAllocator</a> = STLAllocatorAdapter&lt;T, FrameAllocator&gt;;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief STL adapter for PoolAllocator.</span></div>
+<div class="line"><span class="comment"> * @note Only suitable if sizeof(T) &lt;= block_size of the pool.</span></div>
+<div class="line"><span class="comment"> * @warning May throw if T is larger than the pool&#39;s block size.</span></div>
+<div class="line"><span class="comment"> * @tparam T Type of objects to allocate</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * @example</span></div>
+<div class="line"><span class="comment"> * @code</span></div>
+<div class="line"><span class="comment"> * PoolAllocator pool_alloc(sizeof(int), 100);</span></div>
+<div class="line"><span class="comment"> * std::vector&lt;int, STLPoolAllocator&lt;int&gt;&gt; vec{STLPoolAllocator&lt;int&gt;(pool_alloc)};</span></div>
+<div class="line"><span class="comment"> * @endcode</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><span class="keyword">using </span><a id="a17" name="a17"></a><a class="code hl_typedef" href="namespacehelios_1_1memory.html#ae91189efbeff63513113486657489ebf">STLPoolAllocator</a> = STLAllocatorAdapter&lt;T, PoolAllocator&gt;;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief STL adapter for StackAllocator.</span></div>
+<div class="line"><span class="comment"> * @note Deallocations should follow LIFO order for optimal behavior.</span></div>
+<div class="line"><span class="comment"> * @warning Violating LIFO order will trigger assertions in debug builds.</span></div>
+<div class="line"><span class="comment"> * @tparam T Type of objects to allocate</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * @example</span></div>
+<div class="line"><span class="comment"> * @code</span></div>
+<div class="line"><span class="comment"> * StackAllocator stack_alloc(1024 * 1024);</span></div>
+<div class="line"><span class="comment"> * std::vector&lt;int, STLStackAllocator&lt;int&gt;&gt; vec{STLStackAllocator&lt;int&gt;(stack_alloc)};</span></div>
+<div class="line"><span class="comment"> * @endcode</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><span class="keyword">using </span><a id="a18" name="a18"></a><a class="code hl_typedef" href="namespacehelios_1_1memory.html#a88d5fa317250c9ec8e8eba71a39f51ba">STLStackAllocator</a> = STLAllocatorAdapter&lt;T, StackAllocator&gt;;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief STL adapter for FreeListAllocator.</span></div>
+<div class="line"><span class="comment"> * @details General-purpose adapter.</span></div>
+<div class="line"><span class="comment"> * @note Deallocations can occur in any order.</span></div>
+<div class="line"><span class="comment"> * @tparam T Type of objects to allocate</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * @example</span></div>
+<div class="line"><span class="comment"> * @code</span></div>
+<div class="line"><span class="comment"> * FreeListAllocator freelist_alloc(1024 * 1024);</span></div>
+<div class="line"><span class="comment"> * std::vector&lt;int, STLFreeListAllocator&lt;int&gt;&gt; vec{STLFreeListAllocator&lt;int&gt;(freelist_alloc)};</span></div>
+<div class="line"><span class="comment"> * @endcode</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><span class="keyword">using </span><a id="a19" name="a19"></a><a class="code hl_typedef" href="namespacehelios_1_1memory.html#a7d5be7cdf00e4b5ffa35b822c72704d1">STLFreeListAllocator</a> = STLAllocatorAdapter&lt;T, FreeListAllocator&gt;;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief STL adapter for GrowableAllocator.</span></div>
+<div class="line"><span class="comment"> * @details Provides automatic growth for STL containers. The wrapped allocator</span></div>
+<div class="line"><span class="comment"> * must be compatible with GrowableAllocator (FrameAllocator, StackAllocator, FreeListAllocator).</span></div>
+<div class="line"><span class="comment"> * @note Deallocations are supported depending on the underlying allocator.</span></div>
+<div class="line"><span class="comment"> * @tparam T Type of objects to allocate</span></div>
+<div class="line"><span class="comment"> * @tparam UnderlyingAlloc The base allocator type to wrap with GrowableAllocator</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * @example</span></div>
+<div class="line"><span class="comment"> * @code</span></div>
+<div class="line"><span class="comment"> * GrowableAllocator&lt;FrameAllocator&gt; growable_alloc(1024);</span></div>
+<div class="line"><span class="comment"> * std::vector&lt;int, STLGrowableAllocator&lt;int, FrameAllocator&gt;&gt; vec{</span></div>
+<div class="line"><span class="comment"> *     STLGrowableAllocator&lt;int, FrameAllocator&gt;(growable_alloc)};</span></div>
+<div class="line"><span class="comment"> * @endcode</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> UnderlyingAlloc&gt;</div>
+<div class="line"><span class="keyword">using </span><a id="a20" name="a20"></a><a class="code hl_typedef" href="namespacehelios_1_1memory.html#ab1eecdf8e5369e7088871d5000ed769a">STLGrowableAllocator</a> = STLAllocatorAdapter&lt;T, GrowableAllocator&lt;UnderlyingAlloc&gt;&gt;;</div>
+<div class="line"> </div>
+<div class="line">}  <span class="comment">// namespace helios::memory</span></div>
+<div class="ttc" id="aallocator__traits_8hpp_html"><div class="ttname"><a href="allocator__traits_8hpp.html">allocator_traits.hpp</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1STLAllocatorAdapter_html_a007879a9bc857709c05e515f78ca2a37"><div class="ttname"><a href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#a007879a9bc857709c05e515f78ca2a37">helios::memory::STLAllocatorAdapter::value_type</a></div><div class="ttdeci">T value_type</div><div class="ttdef"><b>Definition</b> <a href="stl__allocator__adapter_8hpp_source.html#l00034">stl_allocator_adapter.hpp:34</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1STLAllocatorAdapter_html_a1f865be21caadebd5de627255fcdac05"><div class="ttname"><a href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#a1f865be21caadebd5de627255fcdac05">helios::memory::STLAllocatorAdapter::operator==</a></div><div class="ttdeci">constexpr bool operator==(const STLAllocatorAdapter&lt; U, UnderlyingAllocator &gt; &amp;other) const noexcept</div><div class="ttdoc">Equality comparison.</div><div class="ttdef"><b>Definition</b> <a href="stl__allocator__adapter_8hpp_source.html#l00093">stl_allocator_adapter.hpp:93</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1STLAllocatorAdapter_html_a250ef7836998627ba6b927092f32debb"><div class="ttname"><a href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#a250ef7836998627ba6b927092f32debb">helios::memory::STLAllocatorAdapter::~STLAllocatorAdapter</a></div><div class="ttdeci">constexpr ~STLAllocatorAdapter() noexcept=default</div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1STLAllocatorAdapter_html_a42d4ee5b26ec9bce7d03f74caf7ec0e6"><div class="ttname"><a href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#a42d4ee5b26ec9bce7d03f74caf7ec0e6">helios::memory::STLAllocatorAdapter::difference_type</a></div><div class="ttdeci">std::ptrdiff_t difference_type</div><div class="ttdef"><b>Definition</b> <a href="stl__allocator__adapter_8hpp_source.html#l00036">stl_allocator_adapter.hpp:36</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1STLAllocatorAdapter_html_a6902ded588e9bffbdb9b90a47140a455"><div class="ttname"><a href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#a6902ded588e9bffbdb9b90a47140a455">helios::memory::STLAllocatorAdapter::operator=</a></div><div class="ttdeci">constexpr STLAllocatorAdapter &amp; operator=(const STLAllocatorAdapter&lt; U, UnderlyingAllocator &gt; &amp;other) noexcept</div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1STLAllocatorAdapter_html_a6a8d8509879203d801b4127f664bac17"><div class="ttname"><a href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#a6a8d8509879203d801b4127f664bac17">helios::memory::STLAllocatorAdapter::allocate</a></div><div class="ttdeci">T * allocate(size_type count)</div><div class="ttdoc">Allocates memory for n objects of type T.</div><div class="ttdef"><b>Definition</b> <a href="stl__allocator__adapter_8hpp_source.html#l00135">stl_allocator_adapter.hpp:135</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1STLAllocatorAdapter_html_a6dbd55e2e7fe47db03c407fe90fbc90a"><div class="ttname"><a href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#a6dbd55e2e7fe47db03c407fe90fbc90a">helios::memory::STLAllocatorAdapter::is_always_equal</a></div><div class="ttdeci">std::false_type is_always_equal</div><div class="ttdef"><b>Definition</b> <a href="stl__allocator__adapter_8hpp_source.html#l00038">stl_allocator_adapter.hpp:38</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1STLAllocatorAdapter_html_a6f98892fb0c2dc6e080171e2fdd2e0a7"><div class="ttname"><a href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#a6f98892fb0c2dc6e080171e2fdd2e0a7">helios::memory::STLAllocatorAdapter::propagate_on_container_move_assignment</a></div><div class="ttdeci">std::true_type propagate_on_container_move_assignment</div><div class="ttdef"><b>Definition</b> <a href="stl__allocator__adapter_8hpp_source.html#l00037">stl_allocator_adapter.hpp:37</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1STLAllocatorAdapter_html_a820611151e65b9c1152c74feed681999"><div class="ttname"><a href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#a820611151e65b9c1152c74feed681999">helios::memory::STLAllocatorAdapter::max_size</a></div><div class="ttdeci">constexpr size_type max_size() const noexcept</div><div class="ttdoc">Returns maximum number of objects that can be allocated.</div><div class="ttdef"><b>Definition</b> <a href="stl__allocator__adapter_8hpp_source.html#l00109">stl_allocator_adapter.hpp:109</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1STLAllocatorAdapter_html_a971f5bcc5976a28b41287ebe9904c80f"><div class="ttname"><a href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#a971f5bcc5976a28b41287ebe9904c80f">helios::memory::STLAllocatorAdapter::get_allocator</a></div><div class="ttdeci">constexpr UnderlyingAllocator * get_allocator() const noexcept</div><div class="ttdoc">Gets pointer to underlying allocator.</div><div class="ttdef"><b>Definition</b> <a href="stl__allocator__adapter_8hpp_source.html#l00117">stl_allocator_adapter.hpp:117</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1STLAllocatorAdapter_html_ad440119a9be7188cc86af48a05688f4d"><div class="ttname"><a href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#ad440119a9be7188cc86af48a05688f4d">helios::memory::STLAllocatorAdapter::STLAllocatorAdapter</a></div><div class="ttdeci">friend class STLAllocatorAdapter</div><div class="ttdef"><b>Definition</b> <a href="stl__allocator__adapter_8hpp_source.html#l00121">stl_allocator_adapter.hpp:121</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1STLAllocatorAdapter_html_ad8a66900ad35496f92d168ccdb846c66"><div class="ttname"><a href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#ad8a66900ad35496f92d168ccdb846c66">helios::memory::STLAllocatorAdapter::size_type</a></div><div class="ttdeci">size_t size_type</div><div class="ttdef"><b>Definition</b> <a href="stl__allocator__adapter_8hpp_source.html#l00035">stl_allocator_adapter.hpp:35</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1STLAllocatorAdapter_html_ae477a1a53503f14c3f527c46cb952663"><div class="ttname"><a href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#ae477a1a53503f14c3f527c46cb952663">helios::memory::STLAllocatorAdapter::deallocate</a></div><div class="ttdeci">void deallocate(T *ptr, size_type count) noexcept</div><div class="ttdoc">Deallocates memory for n objects.</div><div class="ttdef"><b>Definition</b> <a href="stl__allocator__adapter_8hpp_source.html#l00153">stl_allocator_adapter.hpp:153</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1STLAllocatorAdapter_html_aedcafad910ca217f365410073000534c"><div class="ttname"><a href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#aedcafad910ca217f365410073000534c">helios::memory::STLAllocatorAdapter::operator!=</a></div><div class="ttdeci">constexpr bool operator!=(const STLAllocatorAdapter&lt; U, UnderlyingAllocator &gt; &amp;other) const noexcept</div><div class="ttdoc">Inequality comparison.</div><div class="ttdef"><b>Definition</b> <a href="stl__allocator__adapter_8hpp_source.html#l00101">stl_allocator_adapter.hpp:101</a></div></div>
+<div class="ttc" id="acore__pch_8hpp_html"><div class="ttname"><a href="core__pch_8hpp.html">core_pch.hpp</a></div></div>
+<div class="ttc" id="adouble__frame__allocator_8hpp_html"><div class="ttname"><a href="double__frame__allocator_8hpp.html">double_frame_allocator.hpp</a></div></div>
+<div class="ttc" id="aframe__allocator_8hpp_html"><div class="ttname"><a href="frame__allocator_8hpp.html">frame_allocator.hpp</a></div></div>
+<div class="ttc" id="afree__list__allocator_8hpp_html"><div class="ttname"><a href="free__list__allocator_8hpp.html">free_list_allocator.hpp</a></div></div>
+<div class="ttc" id="agrowable__allocator_8hpp_html"><div class="ttname"><a href="growable__allocator_8hpp.html">growable_allocator.hpp</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html"><div class="ttname"><a href="namespacehelios_1_1memory.html">helios::memory</a></div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00011">allocator_traits.hpp:11</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_a20d8af5328419a418af393d8eeba2816"><div class="ttname"><a href="namespacehelios_1_1memory.html#a20d8af5328419a418af393d8eeba2816">helios::memory::STLFrameAllocator</a></div><div class="ttdeci">STLAllocatorAdapter&lt; T, FrameAllocator &gt; STLFrameAllocator</div><div class="ttdef"><b>Definition</b> <a href="stl__allocator__adapter_8hpp_source.html#l00188">stl_allocator_adapter.hpp:188</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_a4b4f9ed5e1cf5fe81a0ccbdb6991395a"><div class="ttname"><a href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">helios::memory::kMinAlignment</a></div><div class="ttdeci">constexpr size_t kMinAlignment</div><div class="ttdoc">Minimum alignment for any allocation.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00082">allocator_traits.hpp:82</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_a7d5be7cdf00e4b5ffa35b822c72704d1"><div class="ttname"><a href="namespacehelios_1_1memory.html#a7d5be7cdf00e4b5ffa35b822c72704d1">helios::memory::STLFreeListAllocator</a></div><div class="ttdeci">STLAllocatorAdapter&lt; T, FreeListAllocator &gt; STLFreeListAllocator</div><div class="ttdef"><b>Definition</b> <a href="stl__allocator__adapter_8hpp_source.html#l00233">stl_allocator_adapter.hpp:233</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_a88d5fa317250c9ec8e8eba71a39f51ba"><div class="ttname"><a href="namespacehelios_1_1memory.html#a88d5fa317250c9ec8e8eba71a39f51ba">helios::memory::STLStackAllocator</a></div><div class="ttdeci">STLAllocatorAdapter&lt; T, StackAllocator &gt; STLStackAllocator</div><div class="ttdef"><b>Definition</b> <a href="stl__allocator__adapter_8hpp_source.html#l00218">stl_allocator_adapter.hpp:218</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_ab1eecdf8e5369e7088871d5000ed769a"><div class="ttname"><a href="namespacehelios_1_1memory.html#ab1eecdf8e5369e7088871d5000ed769a">helios::memory::STLGrowableAllocator</a></div><div class="ttdeci">STLAllocatorAdapter&lt; T, GrowableAllocator&lt; UnderlyingAlloc &gt; &gt; STLGrowableAllocator</div><div class="ttdef"><b>Definition</b> <a href="stl__allocator__adapter_8hpp_source.html#l00251">stl_allocator_adapter.hpp:251</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_ae91189efbeff63513113486657489ebf"><div class="ttname"><a href="namespacehelios_1_1memory.html#ae91189efbeff63513113486657489ebf">helios::memory::STLPoolAllocator</a></div><div class="ttdeci">STLAllocatorAdapter&lt; T, PoolAllocator &gt; STLPoolAllocator</div><div class="ttdef"><b>Definition</b> <a href="stl__allocator__adapter_8hpp_source.html#l00203">stl_allocator_adapter.hpp:203</a></div></div>
+<div class="ttc" id="apool__allocator_8hpp_html"><div class="ttname"><a href="pool__allocator_8hpp.html">pool_allocator.hpp</a></div></div>
+<div class="ttc" id="astack__allocator_8hpp_html"><div class="ttname"><a href="stack__allocator_8hpp.html">stack_allocator.hpp</a></div></div>
+<div class="ttc" id="astructhelios_1_1memory_1_1STLAllocatorAdapter_1_1rebind_html_adf0ed4f1f6f4d6ccf42353703f6d209d"><div class="ttname"><a href="structhelios_1_1memory_1_1STLAllocatorAdapter_1_1rebind.html#adf0ed4f1f6f4d6ccf42353703f6d209d">helios::memory::STLAllocatorAdapter::rebind::other</a></div><div class="ttdeci">STLAllocatorAdapter&lt; U, UnderlyingAllocator &gt; other</div><div class="ttdef"><b>Definition</b> <a href="stl__allocator__adapter_8hpp_source.html#l00046">stl_allocator_adapter.hpp:46</a></div></div>
+</div><!-- fragment --> </div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

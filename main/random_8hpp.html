@@ -1,0 +1,287 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: src/core/include/helios/core/random.hpp File Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('random_8hpp.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#concepts">Concepts</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a>  </div>
+  <div class="headertitle"><div class="title">random.hpp File Reference</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;<a class="el" href="core__pch_8hpp_source.html">helios/core_pch.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="common__traits_8hpp_source.html">helios/core/utils/common_traits.hpp</a>&gt;</code><br />
+<code>#include &lt;concepts&gt;</code><br />
+<code>#include &lt;cstdint&gt;</code><br />
+<code>#include &lt;functional&gt;</code><br />
+<code>#include &lt;limits&gt;</code><br />
+<code>#include &lt;random&gt;</code><br />
+<code>#include &lt;type_traits&gt;</code><br />
+</div>
+<p><a href="random_8hpp_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1RandomGenerator.html">helios::RandomGenerator&lt; Engine &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Random number utilities with a user-provided engine.  <a href="classhelios_1_1RandomGenerator.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespacehelios" id="r_namespacehelios"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios.html">helios</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="concepts" name="concepts"></a>
+Concepts</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1RandomEngine.html">helios::RandomEngine</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for random number engines compatible with std distributions. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1Distribution.html">helios::Distribution</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for standard-like distributions. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a3b54345745dcbd1ad53e1d47e02693af" id="r_a3b54345745dcbd1ad53e1d47e02693af"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios.html#a3b54345745dcbd1ad53e1d47e02693af">helios::DefaultRandomEngine</a> = std::mt19937_64</td></tr>
+<tr class="memdesc:a3b54345745dcbd1ad53e1d47e02693af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default engine type used by random utilities.  <br /></td></tr>
+<tr class="separator:a3b54345745dcbd1ad53e1d47e02693af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb787ecf4958cf3e77687000fd3aa379" id="r_abb787ecf4958cf3e77687000fd3aa379"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios.html#abb787ecf4958cf3e77687000fd3aa379">helios::FastRandomEngine</a> = std::minstd_rand</td></tr>
+<tr class="memdesc:abb787ecf4958cf3e77687000fd3aa379"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fast but lower-quality engine type used by random utilities.  <br /></td></tr>
+<tr class="separator:abb787ecf4958cf3e77687000fd3aa379"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9628890cafc6659f2e79ee7317475382" id="r_a9628890cafc6659f2e79ee7317475382"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios.html#a9628890cafc6659f2e79ee7317475382">helios::DefaultRandomGenerator</a> = <a class="el" href="classhelios_1_1RandomGenerator.html">RandomGenerator</a>&lt; <a class="el" href="namespacehelios.html#a3b54345745dcbd1ad53e1d47e02693af">DefaultRandomEngine</a> &gt;</td></tr>
+<tr class="memdesc:a9628890cafc6659f2e79ee7317475382"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience alias for a generator using the default-quality engine.  <br /></td></tr>
+<tr class="separator:a9628890cafc6659f2e79ee7317475382"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5fc87b09f78f914a54250906fa46648" id="r_ab5fc87b09f78f914a54250906fa46648"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios.html#ab5fc87b09f78f914a54250906fa46648">helios::FastRandomGeneratorType</a> = <a class="el" href="classhelios_1_1RandomGenerator.html">RandomGenerator</a>&lt; <a class="el" href="namespacehelios.html#abb787ecf4958cf3e77687000fd3aa379">FastRandomEngine</a> &gt;</td></tr>
+<tr class="memdesc:ab5fc87b09f78f914a54250906fa46648"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience alias for a generator using the fast engine.  <br /></td></tr>
+<tr class="separator:ab5fc87b09f78f914a54250906fa46648"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:aaa497a242f610a623d62163d89d36e22" id="r_aaa497a242f610a623d62163d89d36e22"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios.html#aaa497a242f610a623d62163d89d36e22">helios::RandomDeviceSeed</a> ()</td></tr>
+<tr class="memdesc:aaa497a242f610a623d62163d89d36e22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal helper to obtain seed from std::random_device.  <br /></td></tr>
+<tr class="separator:aaa497a242f610a623d62163d89d36e22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ec54c8a5c5da6a3de37b457da2729f3" id="r_a0ec54c8a5c5da6a3de37b457da2729f3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios.html#a3b54345745dcbd1ad53e1d47e02693af">DefaultRandomEngine</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios.html#a0ec54c8a5c5da6a3de37b457da2729f3">helios::MakeDefaultEngine</a> ()</td></tr>
+<tr class="memdesc:a0ec54c8a5c5da6a3de37b457da2729f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a default-quality random engine seeded with std::random_device.  <br /></td></tr>
+<tr class="separator:a0ec54c8a5c5da6a3de37b457da2729f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a5f3ea987801f0b99fba70aa975ec66" id="r_a7a5f3ea987801f0b99fba70aa975ec66"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios.html#abb787ecf4958cf3e77687000fd3aa379">FastRandomEngine</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios.html#a7a5f3ea987801f0b99fba70aa975ec66">helios::MakeFastEngine</a> ()</td></tr>
+<tr class="memdesc:a7a5f3ea987801f0b99fba70aa975ec66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a fast linear random engine seeded with std::random_device.  <br /></td></tr>
+<tr class="separator:a7a5f3ea987801f0b99fba70aa975ec66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abadc4ad0338eb86e49483e9e3e7b23a3" id="r_abadc4ad0338eb86e49483e9e3e7b23a3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios.html#a3b54345745dcbd1ad53e1d47e02693af">DefaultRandomEngine</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios.html#abadc4ad0338eb86e49483e9e3e7b23a3">helios::DefaultEngine</a> ()</td></tr>
+<tr class="memdesc:abadc4ad0338eb86e49483e9e3e7b23a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Thread-local default-quality engine.  <br /></td></tr>
+<tr class="separator:abadc4ad0338eb86e49483e9e3e7b23a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a380a9d4e3f187563595e821aa7e8d663" id="r_a380a9d4e3f187563595e821aa7e8d663"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios.html#abb787ecf4958cf3e77687000fd3aa379">FastRandomEngine</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios.html#a380a9d4e3f187563595e821aa7e8d663">helios::FastEngineInstance</a> ()</td></tr>
+<tr class="memdesc:a380a9d4e3f187563595e821aa7e8d663"><td class="mdescLeft">&#160;</td><td class="mdescRight">Thread-local fast engine.  <br /></td></tr>
+<tr class="separator:a380a9d4e3f187563595e821aa7e8d663"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34d912099fed7401df8c3089edc40fec" id="r_a34d912099fed7401df8c3089edc40fec"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios.html#a9628890cafc6659f2e79ee7317475382">DefaultRandomGenerator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios.html#a34d912099fed7401df8c3089edc40fec">helios::RandomDefault</a> ()</td></tr>
+<tr class="memdesc:a34d912099fed7401df8c3089edc40fec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides access to a thread-local default-quality random generator.  <br /></td></tr>
+<tr class="separator:a34d912099fed7401df8c3089edc40fec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac22ce7ee207da9cc1cc5617348b192ba" id="r_ac22ce7ee207da9cc1cc5617348b192ba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios.html#ab5fc87b09f78f914a54250906fa46648">FastRandomGeneratorType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios.html#ac22ce7ee207da9cc1cc5617348b192ba">helios::RandomFast</a> ()</td></tr>
+<tr class="memdesc:ac22ce7ee207da9cc1cc5617348b192ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides access to a thread-local fast random generator.  <br /></td></tr>
+<tr class="separator:ac22ce7ee207da9cc1cc5617348b192ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40f8f3f9b143782c4ed13bce109c06e1" id="r_a40f8f3f9b143782c4ed13bce109c06e1"><td class="memTemplParams" colspan="2">template&lt;utils::ArithmeticTrait T&gt; </td></tr>
+<tr class="memitem:a40f8f3f9b143782c4ed13bce109c06e1"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios.html#a40f8f3f9b143782c4ed13bce109c06e1">helios::RandomValue</a> ()</td></tr>
+<tr class="memdesc:a40f8f3f9b143782c4ed13bce109c06e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience function to generate a default-distribution value using the default engine.  <br /></td></tr>
+<tr class="separator:a40f8f3f9b143782c4ed13bce109c06e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2efc91ecccbf4c252486d27300e79ea0" id="r_a2efc91ecccbf4c252486d27300e79ea0"><td class="memTemplParams" colspan="2">template&lt;utils::ArithmeticTrait T, utils::ArithmeticTrait U&gt; </td></tr>
+<tr class="memitem:a2efc91ecccbf4c252486d27300e79ea0"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios.html#a2efc91ecccbf4c252486d27300e79ea0">helios::RandomValueFromRange</a> (T min, U max) -&gt; std::common_type_t&lt; T, U &gt;</td></tr>
+<tr class="memdesc:a2efc91ecccbf4c252486d27300e79ea0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience function to generate a value in range using the default engine.  <br /></td></tr>
+<tr class="separator:a2efc91ecccbf4c252486d27300e79ea0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f8133c73267300a345ed66b5b78bc4a" id="r_a5f8133c73267300a345ed66b5b78bc4a"><td class="memTemplParams" colspan="2">template&lt;utils::ArithmeticTrait T&gt; </td></tr>
+<tr class="memitem:a5f8133c73267300a345ed66b5b78bc4a"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios.html#a5f8133c73267300a345ed66b5b78bc4a">helios::RandomFastValue</a> ()</td></tr>
+<tr class="memdesc:a5f8133c73267300a345ed66b5b78bc4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience function to generate a default-distribution value using the fast engine.  <br /></td></tr>
+<tr class="separator:a5f8133c73267300a345ed66b5b78bc4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85e1b1856219a6f075a15b7335e070e3" id="r_a85e1b1856219a6f075a15b7335e070e3"><td class="memTemplParams" colspan="2">template&lt;utils::ArithmeticTrait T, utils::ArithmeticTrait U&gt; </td></tr>
+<tr class="memitem:a85e1b1856219a6f075a15b7335e070e3"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios.html#a85e1b1856219a6f075a15b7335e070e3">helios::RandomFastValueFromRange</a> (T min, U max) -&gt; std::common_type_t&lt; T, U &gt;</td></tr>
+<tr class="memdesc:a85e1b1856219a6f075a15b7335e070e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience function to generate a value in range using the fast engine.  <br /></td></tr>
+<tr class="separator:a85e1b1856219a6f075a15b7335e070e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_aebb8dcc11953d78e620bbef0b9e2183.html">core</a></li><li class="navelem"><a class="el" href="dir_8f49dd062eda24395df599c5385a3cb1.html">include</a></li><li class="navelem"><a class="el" href="dir_23069df5183a130785923908e80258ad.html">helios</a></li><li class="navelem"><a class="el" href="dir_2da2d982aeea650f7dd0b34d7b8d0119.html">core</a></li><li class="navelem"><a class="el" href="random_8hpp.html">random.hpp</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

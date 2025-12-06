@@ -1,0 +1,1413 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: helios::ecs::details::ComponentStorage&lt; T &gt; Class Template Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classhelios_1_1ecs_1_1details_1_1ComponentStorage.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classhelios_1_1ecs_1_1details_1_1ComponentStorage-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">helios::ecs::details::ComponentStorage&lt; T &gt; Class Template Reference<span class="mlabels"><span class="mlabel">final</span></span></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Type-specific component storage using sparse set.  
+ <a href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="components__manager_8hpp_source.html">components_manager.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for helios::ecs::details::ComponentStorage&lt; T &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classhelios_1_1ecs_1_1details_1_1ComponentStorage.png" usemap="#helios::ecs::details::ComponentStorage_3C_20T_20_3E_map" alt=""/>
+  <map id="helios::ecs::details::ComponentStorage_3C_20T_20_3E_map" name="helios::ecs::details::ComponentStorage_3C_20T_20_3E_map">
+<area href="classhelios_1_1ecs_1_1details_1_1ComponentStorageBase.html" title="Base class for type-erased component storage." alt="helios::ecs::details::ComponentStorageBase" shape="rect" coords="0,0,257,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a8b39cb3317676d5ad330ea1bf9423f8b" id="r_a8b39cb3317676d5ad330ea1bf9423f8b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#a8b39cb3317676d5ad330ea1bf9423f8b">SparseSetType</a> = <a class="el" href="classhelios_1_1container_1_1SparseSet.html">container::SparseSet</a>&lt; T, <a class="el" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">Entity::IndexType</a> &gt;</td></tr>
+<tr class="separator:a8b39cb3317676d5ad330ea1bf9423f8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae28ca724956e6f9356d1f047d6329753" id="r_ae28ca724956e6f9356d1f047d6329753"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#ae28ca724956e6f9356d1f047d6329753">Iterator</a> = <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typename</a> <a class="el" href="classhelios_1_1container_1_1SparseSet.html#a7b8bf4e7a3848acb11b7e5fe2dbafd0e">SparseSetType::iterator</a></td></tr>
+<tr class="separator:ae28ca724956e6f9356d1f047d6329753"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29f2e44380d6ea874a2ef1971975cc83" id="r_a29f2e44380d6ea874a2ef1971975cc83"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#a29f2e44380d6ea874a2ef1971975cc83">ConstIterator</a> = <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typename</a> <a class="el" href="classhelios_1_1container_1_1SparseSet.html#abb8374bafff14807860cb46e2c818c94">SparseSetType::const_iterator</a></td></tr>
+<tr class="separator:a29f2e44380d6ea874a2ef1971975cc83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a253c22dbb2f3c48fa4ba5e3fa8564a72" id="r_a253c22dbb2f3c48fa4ba5e3fa8564a72"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#a253c22dbb2f3c48fa4ba5e3fa8564a72">ComponentStorage</a> ()=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:a253c22dbb2f3c48fa4ba5e3fa8564a72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3578c2d53dbdb9da2e2565132800b38b" id="r_a3578c2d53dbdb9da2e2565132800b38b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#a3578c2d53dbdb9da2e2565132800b38b">ComponentStorage</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">ComponentStorage</a> &amp;)=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:a3578c2d53dbdb9da2e2565132800b38b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b21ba08cfaf168525876f981f8ba736" id="r_a5b21ba08cfaf168525876f981f8ba736"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#a5b21ba08cfaf168525876f981f8ba736">ComponentStorage</a> (<a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">ComponentStorage</a> &amp;&amp;) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:a5b21ba08cfaf168525876f981f8ba736"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb2821706ec9a48521ab5c6fe96b554e" id="r_afb2821706ec9a48521ab5c6fe96b554e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#afb2821706ec9a48521ab5c6fe96b554e">~ComponentStorage</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">override</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:afb2821706ec9a48521ab5c6fe96b554e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd9207f7baa3dab58300948680e63526" id="r_acd9207f7baa3dab58300948680e63526"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">ComponentStorage</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#acd9207f7baa3dab58300948680e63526">operator=</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">ComponentStorage</a> &amp;)=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:acd9207f7baa3dab58300948680e63526"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2530e1940fc8cde88c4f33df76fee931" id="r_a2530e1940fc8cde88c4f33df76fee931"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">ComponentStorage</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#a2530e1940fc8cde88c4f33df76fee931">operator=</a> (<a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">ComponentStorage</a> &amp;&amp;) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:a2530e1940fc8cde88c4f33df76fee931"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa88d6d58fac40b6c7a75eede9565c687" id="r_aa88d6d58fac40b6c7a75eede9565c687"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#aa88d6d58fac40b6c7a75eede9565c687">Clear</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">override</a></td></tr>
+<tr class="memdesc:aa88d6d58fac40b6c7a75eede9565c687"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears all components from this storage.  <br /></td></tr>
+<tr class="separator:aa88d6d58fac40b6c7a75eede9565c687"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d790cb7082b82d958c85f4d4495d582" id="r_a6d790cb7082b82d958c85f4d4495d582"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; <br />
+requires std::constructible_from&lt;T, Args...&gt;</td></tr>
+<tr class="memitem:a6d790cb7082b82d958c85f4d4495d582"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#a6d790cb7082b82d958c85f4d4495d582">Emplace</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> entity, Args &amp;&amp;... <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">args</a>)</td></tr>
+<tr class="memdesc:a6d790cb7082b82d958c85f4d4495d582"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs component in-place for the specified entity.  <br /></td></tr>
+<tr class="separator:a6d790cb7082b82d958c85f4d4495d582"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd0b750e85ce6aec05b3d8025d2a2347" id="r_acd0b750e85ce6aec05b3d8025d2a2347"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#acd0b750e85ce6aec05b3d8025d2a2347">Insert</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> entity, <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> T &amp;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">component</a>)</td></tr>
+<tr class="memdesc:acd0b750e85ce6aec05b3d8025d2a2347"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts component for the specified entity (copy version).  <br /></td></tr>
+<tr class="separator:acd0b750e85ce6aec05b3d8025d2a2347"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae38d3308d10cb3788e5e85430be779d1" id="r_ae38d3308d10cb3788e5e85430be779d1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#ae38d3308d10cb3788e5e85430be779d1">Insert</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> entity, T &amp;&amp;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">component</a>)</td></tr>
+<tr class="memdesc:ae38d3308d10cb3788e5e85430be779d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts component for the specified entity (move version).  <br /></td></tr>
+<tr class="separator:ae38d3308d10cb3788e5e85430be779d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b21df2c686e7859de700c6b6f3abfad" id="r_a5b21df2c686e7859de700c6b6f3abfad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#a5b21df2c686e7859de700c6b6f3abfad">Remove</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> entity) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">override</a></td></tr>
+<tr class="memdesc:a5b21df2c686e7859de700c6b6f3abfad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes component from the specified entity.  <br /></td></tr>
+<tr class="separator:a5b21df2c686e7859de700c6b6f3abfad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af033c797e72b7faf69ffead9c9bb63a4" id="r_af033c797e72b7faf69ffead9c9bb63a4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#af033c797e72b7faf69ffead9c9bb63a4">TryRemove</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> entity) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">override</a></td></tr>
+<tr class="memdesc:af033c797e72b7faf69ffead9c9bb63a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to remove component from the specified entity.  <br /></td></tr>
+<tr class="separator:af033c797e72b7faf69ffead9c9bb63a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a430c87eff3dd1502f22be96ad4446e3f" id="r_a430c87eff3dd1502f22be96ad4446e3f"><td class="memItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#a430c87eff3dd1502f22be96ad4446e3f">Get</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> entity)</td></tr>
+<tr class="memdesc:a430c87eff3dd1502f22be96ad4446e3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets mutable reference to component for the specified entity.  <br /></td></tr>
+<tr class="separator:a430c87eff3dd1502f22be96ad4446e3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a383c84db5fa201cf8665b8c16d4c807d" id="r_a383c84db5fa201cf8665b8c16d4c807d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#a383c84db5fa201cf8665b8c16d4c807d">Get</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> entity) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a></td></tr>
+<tr class="memdesc:a383c84db5fa201cf8665b8c16d4c807d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets const reference to component for the specified entity.  <br /></td></tr>
+<tr class="separator:a383c84db5fa201cf8665b8c16d4c807d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a392578f970788720656ebf99101b05c1" id="r_a392578f970788720656ebf99101b05c1"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#a392578f970788720656ebf99101b05c1">TryGet</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> entity)</td></tr>
+<tr class="memdesc:a392578f970788720656ebf99101b05c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to get mutable pointer to component for the specified entity.  <br /></td></tr>
+<tr class="separator:a392578f970788720656ebf99101b05c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afaeb504610f87568b0c3c84852d177d3" id="r_afaeb504610f87568b0c3c84852d177d3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#afaeb504610f87568b0c3c84852d177d3">TryGet</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> entity) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a></td></tr>
+<tr class="memdesc:afaeb504610f87568b0c3c84852d177d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to get const pointer to component for the specified entity.  <br /></td></tr>
+<tr class="separator:afaeb504610f87568b0c3c84852d177d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae00d8de92b1fde83d906a0e0ffad8269" id="r_ae00d8de92b1fde83d906a0e0ffad8269"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#ae00d8de92b1fde83d906a0e0ffad8269">Contains</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> entity) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">override</a></td></tr>
+<tr class="memdesc:ae00d8de92b1fde83d906a0e0ffad8269"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if entity has a component in this storage.  <br /></td></tr>
+<tr class="separator:ae00d8de92b1fde83d906a0e0ffad8269"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a480e146202fb29317fd0bfd2ad11f818" id="r_a480e146202fb29317fd0bfd2ad11f818"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#a480e146202fb29317fd0bfd2ad11f818">Size</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">override</a></td></tr>
+<tr class="memdesc:a480e146202fb29317fd0bfd2ad11f818"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of components stored.  <br /></td></tr>
+<tr class="separator:a480e146202fb29317fd0bfd2ad11f818"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a710f5c65fd37d21e54e64eb83a0338b1" id="r_a710f5c65fd37d21e54e64eb83a0338b1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="classhelios_1_1ecs_1_1ComponentTypeInfo.html">ComponentTypeInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#a710f5c65fd37d21e54e64eb83a0338b1">GetTypeInfo</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">override</a></td></tr>
+<tr class="memdesc:a710f5c65fd37d21e54e64eb83a0338b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets compile-time type information for component T.  <br /></td></tr>
+<tr class="separator:a710f5c65fd37d21e54e64eb83a0338b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54ba61f6ab798d95d7020bed8134c08d" id="r_a54ba61f6ab798d95d7020bed8134c08d"><td class="memItemLeft" align="right" valign="top">std::span&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#a54ba61f6ab798d95d7020bed8134c08d">Data</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:a54ba61f6ab798d95d7020bed8134c08d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets mutable span over all stored components.  <br /></td></tr>
+<tr class="separator:a54ba61f6ab798d95d7020bed8134c08d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92ab867e26c252b5d8c1b717829a86ee" id="r_a92ab867e26c252b5d8c1b717829a86ee"><td class="memItemLeft" align="right" valign="top">std::span&lt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#a92ab867e26c252b5d8c1b717829a86ee">Data</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:a92ab867e26c252b5d8c1b717829a86ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets const span over all stored components.  <br /></td></tr>
+<tr class="separator:a92ab867e26c252b5d8c1b717829a86ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a46d17a902e3ad317d843f4dbeb5277" id="r_a8a46d17a902e3ad317d843f4dbeb5277"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#ae28ca724956e6f9356d1f047d6329753">Iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#a8a46d17a902e3ad317d843f4dbeb5277">begin</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="separator:a8a46d17a902e3ad317d843f4dbeb5277"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33d102dccb3de04bc93138afd59fcd93" id="r_a33d102dccb3de04bc93138afd59fcd93"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#a29f2e44380d6ea874a2ef1971975cc83">ConstIterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#a33d102dccb3de04bc93138afd59fcd93">begin</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="separator:a33d102dccb3de04bc93138afd59fcd93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a879731753a36449885e5611cfc1a50dd" id="r_a879731753a36449885e5611cfc1a50dd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#a29f2e44380d6ea874a2ef1971975cc83">ConstIterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#a879731753a36449885e5611cfc1a50dd">cbegin</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="separator:a879731753a36449885e5611cfc1a50dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf7b1db06e46dd96007fa61b29df91ad" id="r_adf7b1db06e46dd96007fa61b29df91ad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#ae28ca724956e6f9356d1f047d6329753">Iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#adf7b1db06e46dd96007fa61b29df91ad">end</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="separator:adf7b1db06e46dd96007fa61b29df91ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a154cf0ee5bdb5e882aa1f5a88e962b" id="r_a8a154cf0ee5bdb5e882aa1f5a88e962b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#a29f2e44380d6ea874a2ef1971975cc83">ConstIterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#a8a154cf0ee5bdb5e882aa1f5a88e962b">end</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="separator:a8a154cf0ee5bdb5e882aa1f5a88e962b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23c31009e063710bb4c3e616f97c2ebf" id="r_a23c31009e063710bb4c3e616f97c2ebf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#a29f2e44380d6ea874a2ef1971975cc83">ConstIterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#a23c31009e063710bb4c3e616f97c2ebf">cend</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="separator:a23c31009e063710bb4c3e616f97c2ebf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classhelios_1_1ecs_1_1details_1_1ComponentStorageBase"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classhelios_1_1ecs_1_1details_1_1ComponentStorageBase')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorageBase.html">helios::ecs::details::ComponentStorageBase</a></td></tr>
+<tr class="memitem:a6f7466b3a0b145daed656ff508441bde inherit pub_methods_classhelios_1_1ecs_1_1details_1_1ComponentStorageBase" id="r_a6f7466b3a0b145daed656ff508441bde"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorageBase.html#a6f7466b3a0b145daed656ff508441bde">~ComponentStorageBase</a> ()=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:a6f7466b3a0b145daed656ff508441bde inherit pub_methods_classhelios_1_1ecs_1_1details_1_1ComponentStorageBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;ComponentTrait T&gt;<br />
+class helios::ecs::details::ComponentStorage&lt; T &gt;</div><p>Type-specific component storage using sparse set. </p>
+<p>Manages components of type T using a sparse set data structure for <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e" title="Type alias for query with mutable world access.">O(1)</a> insertion, removal, and lookup operations. <a class="el" href="classhelios_1_1ecs_1_1details_1_1Components.html" title="Manager for all component storages in the ECS world.">Components</a> are stored in dense arrays for cache-friendly iteration.</p>
+<p>Memory layout:</p><ul>
+<li>Sparse array: <a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> index -&gt; Dense index mapping</li>
+<li>Dense array: Packed component instances</li>
+<li>Reverse mapping: Dense index -&gt; <a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> index</li>
+</ul>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Component type to store </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Not thread-safe. All operations should be performed from the main thread. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="components__manager_8hpp_source.html#l00095">95</a> of file <a class="el" href="components__manager_8hpp_source.html">components_manager.hpp</a>.</p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a29f2e44380d6ea874a2ef1971975cc83" name="a29f2e44380d6ea874a2ef1971975cc83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29f2e44380d6ea874a2ef1971975cc83">&#9670;&#160;</a></span>ConstIterator</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">helios::ecs::details::ComponentStorage</a>&lt; T &gt;::ConstIterator =  <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typename</a> <a class="el" href="classhelios_1_1container_1_1SparseSet.html#abb8374bafff14807860cb46e2c818c94">SparseSetType::const_iterator</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="components__manager_8hpp_source.html#l00099">99</a> of file <a class="el" href="components__manager_8hpp_source.html">components_manager.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ae28ca724956e6f9356d1f047d6329753" name="ae28ca724956e6f9356d1f047d6329753"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae28ca724956e6f9356d1f047d6329753">&#9670;&#160;</a></span>Iterator</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">helios::ecs::details::ComponentStorage</a>&lt; T &gt;::Iterator =  <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typename</a> <a class="el" href="classhelios_1_1container_1_1SparseSet.html#a7b8bf4e7a3848acb11b7e5fe2dbafd0e">SparseSetType::iterator</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="components__manager_8hpp_source.html#l00098">98</a> of file <a class="el" href="components__manager_8hpp_source.html">components_manager.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a8b39cb3317676d5ad330ea1bf9423f8b" name="a8b39cb3317676d5ad330ea1bf9423f8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b39cb3317676d5ad330ea1bf9423f8b">&#9670;&#160;</a></span>SparseSetType</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">helios::ecs::details::ComponentStorage</a>&lt; T &gt;::SparseSetType =  <a class="el" href="classhelios_1_1container_1_1SparseSet.html">container::SparseSet</a>&lt;T, <a class="el" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">Entity::IndexType</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="components__manager_8hpp_source.html#l00097">97</a> of file <a class="el" href="components__manager_8hpp_source.html">components_manager.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a253c22dbb2f3c48fa4ba5e3fa8564a72" name="a253c22dbb2f3c48fa4ba5e3fa8564a72"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a253c22dbb2f3c48fa4ba5e3fa8564a72">&#9670;&#160;</a></span>ComponentStorage() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">helios::ecs::details::ComponentStorage</a>&lt; T &gt;::ComponentStorage </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3578c2d53dbdb9da2e2565132800b38b" name="a3578c2d53dbdb9da2e2565132800b38b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3578c2d53dbdb9da2e2565132800b38b">&#9670;&#160;</a></span>ComponentStorage() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">helios::ecs::details::ComponentStorage</a>&lt; T &gt;::ComponentStorage </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">ComponentStorage</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5b21ba08cfaf168525876f981f8ba736" name="a5b21ba08cfaf168525876f981f8ba736"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b21ba08cfaf168525876f981f8ba736">&#9670;&#160;</a></span>ComponentStorage() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">helios::ecs::details::ComponentStorage</a>&lt; T &gt;::ComponentStorage </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">ComponentStorage</a>&lt; T &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afb2821706ec9a48521ab5c6fe96b554e" name="afb2821706ec9a48521ab5c6fe96b554e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb2821706ec9a48521ab5c6fe96b554e">&#9670;&#160;</a></span>~ComponentStorage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">helios::ecs::details::ComponentStorage</a>&lt; T &gt;::~<a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">ComponentStorage</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a33d102dccb3de04bc93138afd59fcd93" name="a33d102dccb3de04bc93138afd59fcd93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33d102dccb3de04bc93138afd59fcd93">&#9670;&#160;</a></span>begin() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#a29f2e44380d6ea874a2ef1971975cc83">ConstIterator</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">helios::ecs::details::ComponentStorage</a>&lt; T &gt;::begin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="components__manager_8hpp_source.html#l00255">255</a> of file <a class="el" href="components__manager_8hpp_source.html">components_manager.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  255</span>{ <span class="keywordflow">return</span> storage_.<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#af1438ab4b165d962dcc980b75e4c55d4">begin</a>(); }</div>
+<div class="ttc" id="aclasshelios_1_1container_1_1SparseSet_html_af1438ab4b165d962dcc980b75e4c55d4"><div class="ttname"><a href="classhelios_1_1container_1_1SparseSet.html#af1438ab4b165d962dcc980b75e4c55d4">helios::container::SparseSet::begin</a></div><div class="ttdeci">constexpr iterator begin() noexcept</div><div class="ttdef"><b>Definition</b> <a href="sparse__set_8hpp_source.html#l00409">sparse_set.hpp:409</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a8a46d17a902e3ad317d843f4dbeb5277" name="a8a46d17a902e3ad317d843f4dbeb5277"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a46d17a902e3ad317d843f4dbeb5277">&#9670;&#160;</a></span>begin() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#ae28ca724956e6f9356d1f047d6329753">Iterator</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">helios::ecs::details::ComponentStorage</a>&lt; T &gt;::begin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="components__manager_8hpp_source.html#l00254">254</a> of file <a class="el" href="components__manager_8hpp_source.html">components_manager.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  254</span>{ <span class="keywordflow">return</span> storage_.<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#af1438ab4b165d962dcc980b75e4c55d4">begin</a>(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a879731753a36449885e5611cfc1a50dd" name="a879731753a36449885e5611cfc1a50dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a879731753a36449885e5611cfc1a50dd">&#9670;&#160;</a></span>cbegin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#a29f2e44380d6ea874a2ef1971975cc83">ConstIterator</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">helios::ecs::details::ComponentStorage</a>&lt; T &gt;::cbegin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="components__manager_8hpp_source.html#l00256">256</a> of file <a class="el" href="components__manager_8hpp_source.html">components_manager.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  256</span>{ <span class="keywordflow">return</span> storage_.<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a23640e0d12dc15e447266f0464b3158f">cbegin</a>(); }</div>
+<div class="ttc" id="aclasshelios_1_1container_1_1SparseSet_html_a23640e0d12dc15e447266f0464b3158f"><div class="ttname"><a href="classhelios_1_1container_1_1SparseSet.html#a23640e0d12dc15e447266f0464b3158f">helios::container::SparseSet::cbegin</a></div><div class="ttdeci">constexpr const_iterator cbegin() const noexcept</div><div class="ttdef"><b>Definition</b> <a href="sparse__set_8hpp_source.html#l00411">sparse_set.hpp:411</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a23c31009e063710bb4c3e616f97c2ebf" name="a23c31009e063710bb4c3e616f97c2ebf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23c31009e063710bb4c3e616f97c2ebf">&#9670;&#160;</a></span>cend()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#a29f2e44380d6ea874a2ef1971975cc83">ConstIterator</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">helios::ecs::details::ComponentStorage</a>&lt; T &gt;::cend </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="components__manager_8hpp_source.html#l00260">260</a> of file <a class="el" href="components__manager_8hpp_source.html">components_manager.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  260</span>{ <span class="keywordflow">return</span> storage_.<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a50b791eacf3b18d2ed897045cc60172e">cend</a>(); }</div>
+<div class="ttc" id="aclasshelios_1_1container_1_1SparseSet_html_a50b791eacf3b18d2ed897045cc60172e"><div class="ttname"><a href="classhelios_1_1container_1_1SparseSet.html#a50b791eacf3b18d2ed897045cc60172e">helios::container::SparseSet::cend</a></div><div class="ttdeci">constexpr const_iterator cend() const noexcept</div><div class="ttdef"><b>Definition</b> <a href="sparse__set_8hpp_source.html#l00415">sparse_set.hpp:415</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aa88d6d58fac40b6c7a75eede9565c687" name="aa88d6d58fac40b6c7a75eede9565c687"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa88d6d58fac40b6c7a75eede9565c687">&#9670;&#160;</a></span>Clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">helios::ecs::details::ComponentStorage</a>&lt; T &gt;::Clear </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Clears all components from this storage. </p>
+<p>Removes all component instances and resets sparse set state. Time complexity: <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e" title="Type alias for query with mutable world access.">O(sparse_capacity)</a>. </p>
+
+<p>Implements <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorageBase.html#a30f2eb18c82b3b86bfa4fa3aa658ba67">helios::ecs::details::ComponentStorageBase</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="components__manager_8hpp_source.html#l00114">114</a> of file <a class="el" href="components__manager_8hpp_source.html">components_manager.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  114</span>{ storage_.<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a05904744bd2cd54af22795ddc0d5339d">Clear</a>(); }</div>
+<div class="ttc" id="aclasshelios_1_1container_1_1SparseSet_html_a05904744bd2cd54af22795ddc0d5339d"><div class="ttname"><a href="classhelios_1_1container_1_1SparseSet.html#a05904744bd2cd54af22795ddc0d5339d">helios::container::SparseSet::Clear</a></div><div class="ttdeci">constexpr void Clear() noexcept</div><div class="ttdoc">Clears the set, removing all elements.</div><div class="ttdef"><b>Definition</b> <a href="sparse__set_8hpp_source.html#l00432">sparse_set.hpp:432</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ae00d8de92b1fde83d906a0e0ffad8269" name="ae00d8de92b1fde83d906a0e0ffad8269"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae00d8de92b1fde83d906a0e0ffad8269">&#9670;&#160;</a></span>Contains()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">helios::ecs::details::ComponentStorage</a>&lt; T &gt;::Contains </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>&#160;</td>
+          <td class="paramname"><em>entity</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if entity has a component in this storage. </p>
+<p>Performs comprehensive validation including entity validity and component presence. Time complexity: <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e" title="Type alias for query with mutable world access.">O(1)</a>. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if entity is invalid. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entity</td><td><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> to check </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if entity has this component, false otherwise </dd></dl>
+
+<p>Implements <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorageBase.html#a531208c618af1e316c2ed931195ae7e9">helios::ecs::details::ComponentStorageBase</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="components__manager_8hpp_source.html#l00312">312</a> of file <a class="el" href="components__manager_8hpp_source.html">components_manager.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  312</span>                                                             {</div>
+<div class="line"><span class="lineno">  313</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(entity.Valid(),</div>
+<div class="line"><span class="lineno">  314</span>                <span class="stringliteral">&quot;Failed to check if &#39;{}&#39; component storage contains entity: Entity with index &#39;{}&#39; is invalid!&quot;</span>,</div>
+<div class="line"><span class="lineno">  315</span>                <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ComponentNameOf&lt;T&gt;</a>(), entity.Index());</div>
+<div class="line"><span class="lineno">  316</span>  <span class="keywordflow">return</span> storage_.<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a3889d6f69f2ce7fb7532fbf40c0d9047">Contains</a>(entity.Index());</div>
+<div class="line"><span class="lineno">  317</span>}</div>
+<div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00149">assert.hpp:149</a></div></div>
+<div class="ttc" id="aclasshelios_1_1container_1_1SparseSet_html_a3889d6f69f2ce7fb7532fbf40c0d9047"><div class="ttname"><a href="classhelios_1_1container_1_1SparseSet.html#a3889d6f69f2ce7fb7532fbf40c0d9047">helios::container::SparseSet::Contains</a></div><div class="ttdeci">constexpr bool Contains(IndexType index) const noexcept</div><div class="ttdoc">Checks if an index exists in the set.</div><div class="ttdef"><b>Definition</b> <a href="sparse__set_8hpp_source.html#l00665">sparse_set.hpp:665</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_af0384de48d847585fcb340c71c231e5e"><div class="ttname"><a href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, Allocator, Components... &gt; Query</div><div class="ttdoc">Type alias for query with mutable world access.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02515">query.hpp:2515</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a92ab867e26c252b5d8c1b717829a86ee" name="a92ab867e26c252b5d8c1b717829a86ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92ab867e26c252b5d8c1b717829a86ee">&#9670;&#160;</a></span>Data() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::span&lt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> T &gt; <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">helios::ecs::details::ComponentStorage</a>&lt; T &gt;::Data </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets const span over all stored components. </p>
+<p>Provides direct read-only access to densely packed component array. <a class="el" href="classhelios_1_1ecs_1_1details_1_1Components.html" title="Manager for all component storages in the ECS world.">Components</a> are stored in insertion order (with removal gaps filled by later insertions). Time complexity: <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e" title="Type alias for query with mutable world access.">O(1)</a>. </p><dl class="section return"><dt>Returns</dt><dd>Const span over all components in storage </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="components__manager_8hpp_source.html#l00252">252</a> of file <a class="el" href="components__manager_8hpp_source.html">components_manager.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  252</span>{ <span class="keywordflow">return</span> storage_.<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#af1ef7fef843e1c8218aebd5d35164beb">Data</a>(); }</div>
+<div class="ttc" id="aclasshelios_1_1container_1_1SparseSet_html_af1ef7fef843e1c8218aebd5d35164beb"><div class="ttname"><a href="classhelios_1_1container_1_1SparseSet.html#af1ef7fef843e1c8218aebd5d35164beb">helios::container::SparseSet::Data</a></div><div class="ttdeci">constexpr std::span&lt; T &gt; Data() noexcept</div><div class="ttdoc">Returns a writable span of the packed values.</div><div class="ttdef"><b>Definition</b> <a href="sparse__set_8hpp_source.html#l00397">sparse_set.hpp:397</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a54ba61f6ab798d95d7020bed8134c08d" name="a54ba61f6ab798d95d7020bed8134c08d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54ba61f6ab798d95d7020bed8134c08d">&#9670;&#160;</a></span>Data() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::span&lt; T &gt; <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">helios::ecs::details::ComponentStorage</a>&lt; T &gt;::Data </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets mutable span over all stored components. </p>
+<p>Provides direct access to densely packed component array for efficient iteration. <a class="el" href="classhelios_1_1ecs_1_1details_1_1Components.html" title="Manager for all component storages in the ECS world.">Components</a> are stored in insertion order (with removal gaps filled by later insertions). Time complexity: <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e" title="Type alias for query with mutable world access.">O(1)</a>. </p><dl class="section return"><dt>Returns</dt><dd>Span over all components in storage </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="components__manager_8hpp_source.html#l00243">243</a> of file <a class="el" href="components__manager_8hpp_source.html">components_manager.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  243</span>{ <span class="keywordflow">return</span> storage_.<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#af1ef7fef843e1c8218aebd5d35164beb">Data</a>(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a6d790cb7082b82d958c85f4d4495d582" name="a6d790cb7082b82d958c85f4d4495d582"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d790cb7082b82d958c85f4d4495d582">&#9670;&#160;</a></span>Emplace()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait T&gt; <br />
+requires std::constructible_from&lt;T, Args...&gt;</div>
+<div class="memtemplate">
+template&lt;typename... Args&gt; <br />
+requires std::constructible_from&lt;T, Args...&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">helios::ecs::details::ComponentStorage</a>&lt; T &gt;::Emplace </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>&#160;</td>
+          <td class="paramname"><em>entity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructs component in-place for the specified entity. </p>
+<p>Creates a new component by forwarding arguments to T's constructor. If entity already has this component, it will be replaced. Time complexity: <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e" title="Type alias for query with mutable world access.">O(1)</a> amortized. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if entity is invalid. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Args</td><td>Argument types to forward to T's constructor </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entity</td><td><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> to add component to </td></tr>
+    <tr><td class="paramname">args</td><td>Arguments to forward to component constructor </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="components__manager_8hpp_source.html#l00269">269</a> of file <a class="el" href="components__manager_8hpp_source.html">components_manager.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  269</span>                                                                      {</div>
+<div class="line"><span class="lineno">  270</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(entity.Valid(), <span class="stringliteral">&quot;Failed to emplace component &#39;{}&#39;: Entity with index &#39;{}&#39; is invalid!&quot;</span>,</div>
+<div class="line"><span class="lineno">  271</span>                <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ComponentNameOf&lt;T&gt;</a>(), entity.Index());</div>
+<div class="line"><span class="lineno">  272</span>  storage_.<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#aa6556d40648aabd22e4fa6373719cee3">Emplace</a>(entity.Index(), std::forward&lt;Args&gt;(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">args</a>)...);</div>
+<div class="line"><span class="lineno">  273</span>}</div>
+<div class="ttc" id="aclasshelios_1_1container_1_1SparseSet_html_aa6556d40648aabd22e4fa6373719cee3"><div class="ttname"><a href="classhelios_1_1container_1_1SparseSet.html#aa6556d40648aabd22e4fa6373719cee3">helios::container::SparseSet::Emplace</a></div><div class="ttdeci">DenseIndexType Emplace(IndexType index, Args &amp;&amp;... args)</div><div class="ttdoc">Constructs a value in-place at the specified index.</div><div class="ttdef"><b>Definition</b> <a href="sparse__set_8hpp_source.html#l00496">sparse_set.hpp:496</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a8a154cf0ee5bdb5e882aa1f5a88e962b" name="a8a154cf0ee5bdb5e882aa1f5a88e962b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a154cf0ee5bdb5e882aa1f5a88e962b">&#9670;&#160;</a></span>end() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#a29f2e44380d6ea874a2ef1971975cc83">ConstIterator</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">helios::ecs::details::ComponentStorage</a>&lt; T &gt;::end </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="components__manager_8hpp_source.html#l00259">259</a> of file <a class="el" href="components__manager_8hpp_source.html">components_manager.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  259</span>{ <span class="keywordflow">return</span> storage_.<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a3e3cc1494e6024e4970da2769c6eee9c">end</a>(); }</div>
+<div class="ttc" id="aclasshelios_1_1container_1_1SparseSet_html_a3e3cc1494e6024e4970da2769c6eee9c"><div class="ttname"><a href="classhelios_1_1container_1_1SparseSet.html#a3e3cc1494e6024e4970da2769c6eee9c">helios::container::SparseSet::end</a></div><div class="ttdeci">constexpr iterator end() noexcept</div><div class="ttdef"><b>Definition</b> <a href="sparse__set_8hpp_source.html#l00413">sparse_set.hpp:413</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="adf7b1db06e46dd96007fa61b29df91ad" name="adf7b1db06e46dd96007fa61b29df91ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf7b1db06e46dd96007fa61b29df91ad">&#9670;&#160;</a></span>end() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#ae28ca724956e6f9356d1f047d6329753">Iterator</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">helios::ecs::details::ComponentStorage</a>&lt; T &gt;::end </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="components__manager_8hpp_source.html#l00258">258</a> of file <a class="el" href="components__manager_8hpp_source.html">components_manager.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  258</span>{ <span class="keywordflow">return</span> storage_.<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a3e3cc1494e6024e4970da2769c6eee9c">end</a>(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a430c87eff3dd1502f22be96ad4446e3f" name="a430c87eff3dd1502f22be96ad4446e3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a430c87eff3dd1502f22be96ad4446e3f">&#9670;&#160;</a></span>Get() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T &amp; <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">helios::ecs::details::ComponentStorage</a>&lt; T &gt;::Get </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>&#160;</td>
+          <td class="paramname"><em>entity</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets mutable reference to component for the specified entity. </p>
+<p>Returns direct reference to the stored component. Time complexity: <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e" title="Type alias for query with mutable world access.">O(1)</a>. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if entity is invalid or doesn't have the component. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entity</td><td><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> to get component from </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Mutable reference to the component </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="components__manager_8hpp_source.html#l00320">320</a> of file <a class="el" href="components__manager_8hpp_source.html">components_manager.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  320</span>                                                {</div>
+<div class="line"><span class="lineno">  321</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(entity.Valid(), <span class="stringliteral">&quot;Failed to get component &#39;{}&#39;: Entity with index &#39;{}&#39; is invalid!&quot;</span>,</div>
+<div class="line"><span class="lineno">  322</span>                <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ComponentNameOf&lt;T&gt;</a>(), entity.Index());</div>
+<div class="line"><span class="lineno">  323</span>  <span class="keywordflow">return</span> storage_.<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a74346075ca174f07b3ba96f325701d7f">Get</a>(entity.Index());</div>
+<div class="line"><span class="lineno">  324</span>}</div>
+<div class="ttc" id="aclasshelios_1_1container_1_1SparseSet_html_a74346075ca174f07b3ba96f325701d7f"><div class="ttname"><a href="classhelios_1_1container_1_1SparseSet.html#a74346075ca174f07b3ba96f325701d7f">helios::container::SparseSet::Get</a></div><div class="ttdeci">constexpr T &amp; Get(IndexType index) noexcept</div><div class="ttdoc">Gets the value at the specified index.</div><div class="ttdef"><b>Definition</b> <a href="sparse__set_8hpp_source.html#l00574">sparse_set.hpp:574</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a383c84db5fa201cf8665b8c16d4c807d" name="a383c84db5fa201cf8665b8c16d4c807d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a383c84db5fa201cf8665b8c16d4c807d">&#9670;&#160;</a></span>Get() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> T &amp; <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">helios::ecs::details::ComponentStorage</a>&lt; T &gt;::Get </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>&#160;</td>
+          <td class="paramname"><em>entity</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets const reference to component for the specified entity. </p>
+<p>Returns direct const reference to the stored component. Time complexity: <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e" title="Type alias for query with mutable world access.">O(1)</a>. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if entity is invalid or doesn't have the component. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entity</td><td><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> to get component from </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Const reference to the component </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="components__manager_8hpp_source.html#l00327">327</a> of file <a class="el" href="components__manager_8hpp_source.html">components_manager.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  327</span>                                                            {</div>
+<div class="line"><span class="lineno">  328</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(entity.Valid(), <span class="stringliteral">&quot;Failed to get component &#39;{}&#39;: Entity with index &#39;{}&#39; is invalid!&quot;</span>,</div>
+<div class="line"><span class="lineno">  329</span>                <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ComponentNameOf&lt;T&gt;</a>(), entity.Index());</div>
+<div class="line"><span class="lineno">  330</span>  <span class="keywordflow">return</span> storage_.<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a74346075ca174f07b3ba96f325701d7f">Get</a>(entity.Index());</div>
+<div class="line"><span class="lineno">  331</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a710f5c65fd37d21e54e64eb83a0338b1" name="a710f5c65fd37d21e54e64eb83a0338b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a710f5c65fd37d21e54e64eb83a0338b1">&#9670;&#160;</a></span>GetTypeInfo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">constexpr</a> <a class="el" href="classhelios_1_1ecs_1_1ComponentTypeInfo.html">ComponentTypeInfo</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">helios::ecs::details::ComponentStorage</a>&lt; T &gt;::GetTypeInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets compile-time type information for component T. </p>
+<p>Returns metadata including type ID, size, alignment, and optimization flags. </p><dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1ecs_1_1ComponentTypeInfo.html" title="Component type info for runtime operations.">ComponentTypeInfo</a> for type T </dd></dl>
+
+<p>Implements <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorageBase.html#a2383bf2d2671cd3f4b7a67380b2a3b70">helios::ecs::details::ComponentStorageBase</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="components__manager_8hpp_source.html#l00232">232</a> of file <a class="el" href="components__manager_8hpp_source.html">components_manager.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  232</span>                                                                                  {</div>
+<div class="line"><span class="lineno">  233</span>    <span class="keywordflow">return</span> ComponentTypeInfo::Create&lt;T&gt;();</div>
+<div class="line"><span class="lineno">  234</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="acd0b750e85ce6aec05b3d8025d2a2347" name="acd0b750e85ce6aec05b3d8025d2a2347"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd0b750e85ce6aec05b3d8025d2a2347">&#9670;&#160;</a></span>Insert() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">helios::ecs::details::ComponentStorage</a>&lt; T &gt;::Insert </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>&#160;</td>
+          <td class="paramname"><em>entity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> T &amp;&#160;</td>
+          <td class="paramname"><em>component</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Inserts component for the specified entity (copy version). </p>
+<p>Adds a copy of the component to the entity. If entity already has this component, it will be replaced. Time complexity: <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e" title="Type alias for query with mutable world access.">O(1)</a> amortized. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if entity is invalid. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entity</td><td><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> to add component to </td></tr>
+    <tr><td class="paramname">component</td><td>Component to copy </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="components__manager_8hpp_source.html#l00276">276</a> of file <a class="el" href="components__manager_8hpp_source.html">components_manager.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  276</span>                                                                         {</div>
+<div class="line"><span class="lineno">  277</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(entity.Valid(), <span class="stringliteral">&quot;Failed to insert component &#39;{}&#39;: Entity with index &#39;{}&#39; is invalid!&quot;</span>,</div>
+<div class="line"><span class="lineno">  278</span>                <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ComponentNameOf&lt;T&gt;</a>(), entity.Index());</div>
+<div class="line"><span class="lineno">  279</span>  storage_.<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a9d74d74a4b7b0ee85985ae2967f53f25">Insert</a>(entity.Index(), <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">component</a>);</div>
+<div class="line"><span class="lineno">  280</span>}</div>
+<div class="ttc" id="aclasshelios_1_1container_1_1SparseSet_html_a9d74d74a4b7b0ee85985ae2967f53f25"><div class="ttname"><a href="classhelios_1_1container_1_1SparseSet.html#a9d74d74a4b7b0ee85985ae2967f53f25">helios::container::SparseSet::Insert</a></div><div class="ttdeci">DenseIndexType Insert(IndexType index, const T &amp;value)</div><div class="ttdoc">Inserts a value at the specified index (copy version).</div><div class="ttdef"><b>Definition</b> <a href="sparse__set_8hpp_source.html#l00439">sparse_set.hpp:439</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ae38d3308d10cb3788e5e85430be779d1" name="ae38d3308d10cb3788e5e85430be779d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae38d3308d10cb3788e5e85430be779d1">&#9670;&#160;</a></span>Insert() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">helios::ecs::details::ComponentStorage</a>&lt; T &gt;::Insert </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>&#160;</td>
+          <td class="paramname"><em>entity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T &amp;&amp;&#160;</td>
+          <td class="paramname"><em>component</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Inserts component for the specified entity (move version). </p>
+<p>Moves the component to the entity. If entity already has this component, it will be replaced. Time complexity: <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e" title="Type alias for query with mutable world access.">O(1)</a> amortized. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if entity is invalid. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entity</td><td><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> to add component to </td></tr>
+    <tr><td class="paramname">component</td><td>Component to move </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="components__manager_8hpp_source.html#l00283">283</a> of file <a class="el" href="components__manager_8hpp_source.html">components_manager.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  283</span>                                                                    {</div>
+<div class="line"><span class="lineno">  284</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(entity.Valid(), <span class="stringliteral">&quot;Failed to insert component &#39;{}&#39;: Entity with index &#39;{}&#39; is invalid!&quot;</span>,</div>
+<div class="line"><span class="lineno">  285</span>                <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ComponentNameOf&lt;T&gt;</a>(), entity.Index());</div>
+<div class="line"><span class="lineno">  286</span>  storage_.<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a9d74d74a4b7b0ee85985ae2967f53f25">Insert</a>(entity.Index(), std::move(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">component</a>));</div>
+<div class="line"><span class="lineno">  287</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a2530e1940fc8cde88c4f33df76fee931" name="a2530e1940fc8cde88c4f33df76fee931"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2530e1940fc8cde88c4f33df76fee931">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">ComponentStorage</a> &amp; <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">helios::ecs::details::ComponentStorage</a>&lt; T &gt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">::operator</a>= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">ComponentStorage</a>&lt; T &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acd9207f7baa3dab58300948680e63526" name="acd9207f7baa3dab58300948680e63526"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd9207f7baa3dab58300948680e63526">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">ComponentStorage</a> &amp; <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">helios::ecs::details::ComponentStorage</a>&lt; T &gt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">::operator</a>= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">ComponentStorage</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5b21df2c686e7859de700c6b6f3abfad" name="a5b21df2c686e7859de700c6b6f3abfad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b21df2c686e7859de700c6b6f3abfad">&#9670;&#160;</a></span>Remove()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">helios::ecs::details::ComponentStorage</a>&lt; T &gt;::Remove </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>&#160;</td>
+          <td class="paramname"><em>entity</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Removes component from the specified entity. </p>
+<p>Removes the component using swap-and-pop for dense packing. Time complexity: <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e" title="Type alias for query with mutable world access.">O(1)</a>. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if entity is invalid or doesn't have the component. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entity</td><td><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> to remove component from </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorageBase.html#a63510c77923fdf2dc199b6f2a587a894">helios::ecs::details::ComponentStorageBase</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="components__manager_8hpp_source.html#l00290">290</a> of file <a class="el" href="components__manager_8hpp_source.html">components_manager.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  290</span>                                                     {</div>
+<div class="line"><span class="lineno">  291</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(entity.Valid(), <span class="stringliteral">&quot;Failed to remove component &#39;{}&#39;: Entity with index &#39;{}&#39; is invalid!&quot;</span>,</div>
+<div class="line"><span class="lineno">  292</span>                <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ComponentNameOf&lt;T&gt;</a>(), entity.Index());</div>
+<div class="line"><span class="lineno">  293</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(storage_.<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a3889d6f69f2ce7fb7532fbf40c0d9047">Contains</a>(entity.Index()),</div>
+<div class="line"><span class="lineno">  294</span>                <span class="stringliteral">&quot;Failed to remove component &#39;{}&#39;: Entity with index &#39;{}&#39; does not have this component!&quot;</span>,</div>
+<div class="line"><span class="lineno">  295</span>                <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ComponentNameOf&lt;T&gt;</a>(), entity.Index());</div>
+<div class="line"><span class="lineno">  296</span>  storage_.<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#ad1350dfa4e66883ca80a97ac64e6fbd1">Remove</a>(entity.Index());</div>
+<div class="line"><span class="lineno">  297</span>}</div>
+<div class="ttc" id="aclasshelios_1_1container_1_1SparseSet_html_ad1350dfa4e66883ca80a97ac64e6fbd1"><div class="ttname"><a href="classhelios_1_1container_1_1SparseSet.html#ad1350dfa4e66883ca80a97ac64e6fbd1">helios::container::SparseSet::Remove</a></div><div class="ttdeci">void Remove(IndexType index) noexcept</div><div class="ttdoc">Removes an index from the set.</div><div class="ttdef"><b>Definition</b> <a href="sparse__set_8hpp_source.html#l00524">sparse_set.hpp:524</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a480e146202fb29317fd0bfd2ad11f818" name="a480e146202fb29317fd0bfd2ad11f818"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a480e146202fb29317fd0bfd2ad11f818">&#9670;&#160;</a></span>Size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">helios::ecs::details::ComponentStorage</a>&lt; T &gt;::Size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the number of components stored. </p>
+<p>Returns count of component instances currently in storage. Time complexity: <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e" title="Type alias for query with mutable world access.">O(1)</a>. </p><dl class="section return"><dt>Returns</dt><dd>Number of components in storage </dd></dl>
+
+<p>Implements <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorageBase.html#ae0ddd9f9c637590c783fa77fb9495a85">helios::ecs::details::ComponentStorageBase</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="components__manager_8hpp_source.html#l00225">225</a> of file <a class="el" href="components__manager_8hpp_source.html">components_manager.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  225</span>{ <span class="keywordflow">return</span> storage_.<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#ae13bc023c7ed9b19eaf7ecff5e479219">Size</a>(); }</div>
+<div class="ttc" id="aclasshelios_1_1container_1_1SparseSet_html_ae13bc023c7ed9b19eaf7ecff5e479219"><div class="ttname"><a href="classhelios_1_1container_1_1SparseSet.html#ae13bc023c7ed9b19eaf7ecff5e479219">helios::container::SparseSet::Size</a></div><div class="ttdeci">constexpr size_type Size() const noexcept</div><div class="ttdoc">Returns the number of values in the set.</div><div class="ttdef"><b>Definition</b> <a href="sparse__set_8hpp_source.html#l00360">sparse_set.hpp:360</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a392578f970788720656ebf99101b05c1" name="a392578f970788720656ebf99101b05c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a392578f970788720656ebf99101b05c1">&#9670;&#160;</a></span>TryGet() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T * <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">helios::ecs::details::ComponentStorage</a>&lt; T &gt;::TryGet </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>&#160;</td>
+          <td class="paramname"><em>entity</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Attempts to get mutable pointer to component for the specified entity. </p>
+<p>Returns pointer to component if it exists, nullptr otherwise. Time complexity: <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e" title="Type alias for query with mutable world access.">O(1)</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entity</td><td><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> to get component from </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to component, or nullptr if entity doesn't have the component </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="components__manager_8hpp_source.html#l00334">334</a> of file <a class="el" href="components__manager_8hpp_source.html">components_manager.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  334</span>                                                   {</div>
+<div class="line"><span class="lineno">  335</span>  <span class="keywordflow">if</span> (!entity.Valid()) {</div>
+<div class="line"><span class="lineno">  336</span>    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  337</span>  }</div>
+<div class="line"><span class="lineno">  338</span>  <span class="keywordflow">return</span> storage_.<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a6cd56cfd03117e8d085843c006121cb7">TryGet</a>(entity.Index());</div>
+<div class="line"><span class="lineno">  339</span>}</div>
+<div class="ttc" id="aclasshelios_1_1container_1_1SparseSet_html_a6cd56cfd03117e8d085843c006121cb7"><div class="ttname"><a href="classhelios_1_1container_1_1SparseSet.html#a6cd56cfd03117e8d085843c006121cb7">helios::container::SparseSet::TryGet</a></div><div class="ttdeci">constexpr T * TryGet(IndexType index) noexcept</div><div class="ttdoc">Tries to get the value at the specified index.</div><div class="ttdef"><b>Definition</b> <a href="sparse__set_8hpp_source.html#l00614">sparse_set.hpp:614</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="afaeb504610f87568b0c3c84852d177d3" name="afaeb504610f87568b0c3c84852d177d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afaeb504610f87568b0c3c84852d177d3">&#9670;&#160;</a></span>TryGet() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> T * <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">helios::ecs::details::ComponentStorage</a>&lt; T &gt;::TryGet </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>&#160;</td>
+          <td class="paramname"><em>entity</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Attempts to get const pointer to component for the specified entity. </p>
+<p>Returns const pointer to component if it exists, nullptr otherwise. Time complexity: <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e" title="Type alias for query with mutable world access.">O(1)</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entity</td><td><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> to get component from </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Const pointer to component, or nullptr if entity doesn't have the component </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="components__manager_8hpp_source.html#l00342">342</a> of file <a class="el" href="components__manager_8hpp_source.html">components_manager.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  342</span>                                                               {</div>
+<div class="line"><span class="lineno">  343</span>  <span class="keywordflow">if</span> (!entity.Valid()) {</div>
+<div class="line"><span class="lineno">  344</span>    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  345</span>  }</div>
+<div class="line"><span class="lineno">  346</span>  <span class="keywordflow">return</span> storage_.<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a6cd56cfd03117e8d085843c006121cb7">TryGet</a>(entity.Index());</div>
+<div class="line"><span class="lineno">  347</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="af033c797e72b7faf69ffead9c9bb63a4" name="af033c797e72b7faf69ffead9c9bb63a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af033c797e72b7faf69ffead9c9bb63a4">&#9670;&#160;</a></span>TryRemove()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">helios::ecs::details::ComponentStorage</a>&lt; T &gt;::TryRemove </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>&#160;</td>
+          <td class="paramname"><em>entity</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Attempts to remove component from the specified entity. </p>
+<p>Removes the component if it exists, otherwise does nothing. Time complexity: <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e" title="Type alias for query with mutable world access.">O(1)</a>. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if entity is invalid. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entity</td><td><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> to remove component from </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if component was removed, false if entity didn't have the component </dd></dl>
+
+<p>Implements <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorageBase.html#ab2193c91d0ddf58df8e98aa8875f72b4">helios::ecs::details::ComponentStorageBase</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="components__manager_8hpp_source.html#l00300">300</a> of file <a class="el" href="components__manager_8hpp_source.html">components_manager.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  300</span>                                                        {</div>
+<div class="line"><span class="lineno">  301</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(entity.Valid(), <span class="stringliteral">&quot;Failed to try remove component &#39;{}&#39;: Entity with index &#39;{}&#39; is invalid!&quot;</span>,</div>
+<div class="line"><span class="lineno">  302</span>                <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ComponentNameOf&lt;T&gt;</a>(), entity.Index());</div>
+<div class="line"><span class="lineno">  303</span>  <span class="keywordflow">if</span> (!storage_.<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a3889d6f69f2ce7fb7532fbf40c0d9047">Contains</a>(entity.Index())) {</div>
+<div class="line"><span class="lineno">  304</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  305</span>  }</div>
+<div class="line"><span class="lineno">  306</span> </div>
+<div class="line"><span class="lineno">  307</span>  storage_.<a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#ad1350dfa4e66883ca80a97ac64e6fbd1">Remove</a>(entity.Index());</div>
+<div class="line"><span class="lineno">  308</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  309</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehelios.html">helios</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1ecs.html">ecs</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1ecs_1_1details.html">details</a></li><li class="navelem"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html">ComponentStorage</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

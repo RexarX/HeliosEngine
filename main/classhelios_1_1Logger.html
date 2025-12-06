@@ -1,0 +1,1726 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: helios::Logger Class Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classhelios_1_1Logger.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="classhelios_1_1Logger-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">helios::Logger Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Centralized logging system with configurable output and formatting.  
+ <a href="classhelios_1_1Logger.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="logger_8hpp_source.html">logger.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ac7de5ff321565b6c30909ccbcbb5503f" id="r_ac7de5ff321565b6c30909ccbcbb5503f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Logger.html#ac7de5ff321565b6c30909ccbcbb5503f">Logger</a> (const <a class="el" href="classhelios_1_1Logger.html">Logger</a> &amp;)=delete</td></tr>
+<tr class="separator:ac7de5ff321565b6c30909ccbcbb5503f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88e102a8f270cfe6e035b99fb31e83ae" id="r_a88e102a8f270cfe6e035b99fb31e83ae"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Logger.html#a88e102a8f270cfe6e035b99fb31e83ae">Logger</a> (<a class="el" href="classhelios_1_1Logger.html">Logger</a> &amp;&amp;)=delete</td></tr>
+<tr class="separator:a88e102a8f270cfe6e035b99fb31e83ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9dbe1efcd55f0306632881153ed2f4d2" id="r_a9dbe1efcd55f0306632881153ed2f4d2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Logger.html#a9dbe1efcd55f0306632881153ed2f4d2">~Logger</a> () noexcept=default</td></tr>
+<tr class="separator:a9dbe1efcd55f0306632881153ed2f4d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6b2d8236d20566e3c4a6aca80789ec1" id="r_ae6b2d8236d20566e3c4a6aca80789ec1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1Logger.html">Logger</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Logger.html#ae6b2d8236d20566e3c4a6aca80789ec1">operator=</a> (const <a class="el" href="classhelios_1_1Logger.html">Logger</a> &amp;)=delete</td></tr>
+<tr class="separator:ae6b2d8236d20566e3c4a6aca80789ec1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fe41e1aaff0cc8010b90f80c8d9b8e5" id="r_a9fe41e1aaff0cc8010b90f80c8d9b8e5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1Logger.html">Logger</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Logger.html#a9fe41e1aaff0cc8010b90f80c8d9b8e5">operator=</a> (<a class="el" href="classhelios_1_1Logger.html">Logger</a> &amp;&amp;)=delete</td></tr>
+<tr class="separator:a9fe41e1aaff0cc8010b90f80c8d9b8e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f7ce3e5192e79e003e068fad3dadd8d" id="r_a7f7ce3e5192e79e003e068fad3dadd8d"><td class="memTemplParams" colspan="2">template&lt;LoggerTrait T&gt; </td></tr>
+<tr class="memitem:a7f7ce3e5192e79e003e068fad3dadd8d"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1Logger.html#a7f7ce3e5192e79e003e068fad3dadd8d">AddLogger</a> (T logger, <a class="el" href="structhelios_1_1LoggerConfig.html">LoggerConfig</a> config=<a class="el" href="namespacehelios.html#a108806acf89b89e91b9f73f36c8e154d">LoggerConfigOf</a>&lt; T &gt;()) noexcept</td></tr>
+<tr class="memdesc:a7f7ce3e5192e79e003e068fad3dadd8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a logger with the specified type and configuration.  <br /></td></tr>
+<tr class="separator:a7f7ce3e5192e79e003e068fad3dadd8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8217cc2410acd4f89ac762c457bad8f" id="r_ae8217cc2410acd4f89ac762c457bad8f"><td class="memTemplParams" colspan="2">template&lt;LoggerTrait T&gt; </td></tr>
+<tr class="memitem:ae8217cc2410acd4f89ac762c457bad8f"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1Logger.html#ae8217cc2410acd4f89ac762c457bad8f">RemoveLogger</a> (T logger={}) noexcept</td></tr>
+<tr class="memdesc:ae8217cc2410acd4f89ac762c457bad8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a logger with the given type.  <br /></td></tr>
+<tr class="separator:ae8217cc2410acd4f89ac762c457bad8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3535c760b83e2e52e38d0d49a7edecab" id="r_a3535c760b83e2e52e38d0d49a7edecab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Logger.html#a3535c760b83e2e52e38d0d49a7edecab">FlushAll</a> () noexcept</td></tr>
+<tr class="memdesc:a3535c760b83e2e52e38d0d49a7edecab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flushes all registered loggers.  <br /></td></tr>
+<tr class="separator:a3535c760b83e2e52e38d0d49a7edecab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9c17ca826531504e5d8f750c99524ec" id="r_ab9c17ca826531504e5d8f750c99524ec"><td class="memTemplParams" colspan="2">template&lt;LoggerTrait T&gt; </td></tr>
+<tr class="memitem:ab9c17ca826531504e5d8f750c99524ec"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1Logger.html#ab9c17ca826531504e5d8f750c99524ec">Flush</a> (T logger={}) noexcept</td></tr>
+<tr class="memdesc:ab9c17ca826531504e5d8f750c99524ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flushes a specific logger.  <br /></td></tr>
+<tr class="separator:ab9c17ca826531504e5d8f750c99524ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8114dd095687df9af2b3401da9007ebf" id="r_a8114dd095687df9af2b3401da9007ebf"><td class="memTemplParams" colspan="2">template&lt;LoggerTrait T&gt; </td></tr>
+<tr class="memitem:a8114dd095687df9af2b3401da9007ebf"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1Logger.html#a8114dd095687df9af2b3401da9007ebf">LogMessage</a> (T logger, <a class="el" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a> level, const std::source_location &amp;loc, std::string_view message) noexcept</td></tr>
+<tr class="memdesc:a8114dd095687df9af2b3401da9007ebf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logs a string message with typed logger.  <br /></td></tr>
+<tr class="separator:a8114dd095687df9af2b3401da9007ebf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8776565d0484ff95e30cd43418bb1147" id="r_a8776565d0484ff95e30cd43418bb1147"><td class="memTemplParams" colspan="2">template&lt;LoggerTrait T, typename... Args&gt; <br />
+requires (sizeof...(Args) &gt; 0)</td></tr>
+<tr class="memitem:a8776565d0484ff95e30cd43418bb1147"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1Logger.html#a8776565d0484ff95e30cd43418bb1147">LogMessage</a> (T logger, <a class="el" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a> level, const std::source_location &amp;loc, std::format_string&lt; Args... &gt; fmt, Args &amp;&amp;... args) noexcept</td></tr>
+<tr class="memdesc:a8776565d0484ff95e30cd43418bb1147"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logs a formatted message with typed logger.  <br /></td></tr>
+<tr class="separator:a8776565d0484ff95e30cd43418bb1147"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a641181b556bd1e4cf58d968713dc6f71" id="r_a641181b556bd1e4cf58d968713dc6f71"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Logger.html#a641181b556bd1e4cf58d968713dc6f71">LogMessage</a> (<a class="el" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a> level, const std::source_location &amp;loc, std::string_view message) noexcept</td></tr>
+<tr class="memdesc:a641181b556bd1e4cf58d968713dc6f71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logs a string message with default logger.  <br /></td></tr>
+<tr class="separator:a641181b556bd1e4cf58d968713dc6f71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d43b1da26cd8f59855a77dbc0b43bd0" id="r_a6d43b1da26cd8f59855a77dbc0b43bd0"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; <br />
+requires (sizeof...(Args) &gt; 0)</td></tr>
+<tr class="memitem:a6d43b1da26cd8f59855a77dbc0b43bd0"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1Logger.html#a6d43b1da26cd8f59855a77dbc0b43bd0">LogMessage</a> (<a class="el" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a> level, const std::source_location &amp;loc, std::format_string&lt; Args... &gt; fmt, Args &amp;&amp;... args) noexcept</td></tr>
+<tr class="memdesc:a6d43b1da26cd8f59855a77dbc0b43bd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logs a formatted message with default logger.  <br /></td></tr>
+<tr class="separator:a6d43b1da26cd8f59855a77dbc0b43bd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d32dc172f4a7736ca4fe71140d19a84" id="r_a6d32dc172f4a7736ca4fe71140d19a84"><td class="memTemplParams" colspan="2">template&lt;LoggerTrait T&gt; </td></tr>
+<tr class="memitem:a6d32dc172f4a7736ca4fe71140d19a84"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1Logger.html#a6d32dc172f4a7736ca4fe71140d19a84">LogAssertionFailure</a> (T logger, std::string_view condition, const std::source_location &amp;loc, std::string_view message) noexcept</td></tr>
+<tr class="memdesc:a6d32dc172f4a7736ca4fe71140d19a84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logs assertion failure with typed logger.  <br /></td></tr>
+<tr class="separator:a6d32dc172f4a7736ca4fe71140d19a84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3de5feaee494a40bbc1a5b8dafdf4abc" id="r_a3de5feaee494a40bbc1a5b8dafdf4abc"><td class="memTemplParams" colspan="2">template&lt;LoggerTrait T, typename... Args&gt; <br />
+requires (sizeof...(Args) &gt; 0)</td></tr>
+<tr class="memitem:a3de5feaee494a40bbc1a5b8dafdf4abc"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1Logger.html#a3de5feaee494a40bbc1a5b8dafdf4abc">LogAssertionFailure</a> (T logger, std::string_view condition, const std::source_location &amp;loc, std::format_string&lt; Args... &gt; fmt, Args &amp;&amp;... args) noexcept</td></tr>
+<tr class="memdesc:a3de5feaee494a40bbc1a5b8dafdf4abc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logs assertion failure with typed logger (formatted).  <br /></td></tr>
+<tr class="separator:a3de5feaee494a40bbc1a5b8dafdf4abc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0096c60bb7cd189da3dfe6d5bdd1e79" id="r_ab0096c60bb7cd189da3dfe6d5bdd1e79"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Logger.html#ab0096c60bb7cd189da3dfe6d5bdd1e79">LogAssertionFailure</a> (std::string_view condition, const std::source_location &amp;loc, std::string_view message) noexcept</td></tr>
+<tr class="memdesc:ab0096c60bb7cd189da3dfe6d5bdd1e79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logs assertion failure with default logger.  <br /></td></tr>
+<tr class="separator:ab0096c60bb7cd189da3dfe6d5bdd1e79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab24fef1175a2e78f8e4a027c1921e8c3" id="r_ab24fef1175a2e78f8e4a027c1921e8c3"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; <br />
+requires (sizeof...(Args) &gt; 0)</td></tr>
+<tr class="memitem:ab24fef1175a2e78f8e4a027c1921e8c3"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1Logger.html#ab24fef1175a2e78f8e4a027c1921e8c3">LogAssertionFailure</a> (std::string_view condition, const std::source_location &amp;loc, std::format_string&lt; Args... &gt; fmt, Args &amp;&amp;... args) noexcept</td></tr>
+<tr class="memdesc:ab24fef1175a2e78f8e4a027c1921e8c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logs assertion failure with default logger (formatted).  <br /></td></tr>
+<tr class="separator:ab24fef1175a2e78f8e4a027c1921e8c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6999bf2bbeb130e386cd181e648cf09" id="r_ab6999bf2bbeb130e386cd181e648cf09"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Logger.html#ab6999bf2bbeb130e386cd181e648cf09">SetDefaultConfig</a> (const <a class="el" href="structhelios_1_1LoggerConfig.html">LoggerConfig</a> &amp;config) noexcept</td></tr>
+<tr class="memdesc:ab6999bf2bbeb130e386cd181e648cf09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the global default configuration for new loggers.  <br /></td></tr>
+<tr class="separator:ab6999bf2bbeb130e386cd181e648cf09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0390d8c22bfc97ed5de24c1c6ffb847c" id="r_a0390d8c22bfc97ed5de24c1c6ffb847c"><td class="memTemplParams" colspan="2">template&lt;LoggerTrait T&gt; </td></tr>
+<tr class="memitem:a0390d8c22bfc97ed5de24c1c6ffb847c"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1Logger.html#a0390d8c22bfc97ed5de24c1c6ffb847c">SetLevel</a> (T logger, <a class="el" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a> level) noexcept</td></tr>
+<tr class="memdesc:a0390d8c22bfc97ed5de24c1c6ffb847c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the minimum log level for a typed logger.  <br /></td></tr>
+<tr class="separator:a0390d8c22bfc97ed5de24c1c6ffb847c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7eae3359fd658d4a94988357d8d14783" id="r_a7eae3359fd658d4a94988357d8d14783"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Logger.html#a7eae3359fd658d4a94988357d8d14783">SetLevel</a> (<a class="el" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a> level) noexcept</td></tr>
+<tr class="memdesc:a7eae3359fd658d4a94988357d8d14783"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the minimum log level for the default logger.  <br /></td></tr>
+<tr class="separator:a7eae3359fd658d4a94988357d8d14783"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70aeef93be2358dec8ffcc656e3cd597" id="r_a70aeef93be2358dec8ffcc656e3cd597"><td class="memTemplParams" colspan="2">template&lt;LoggerTrait T&gt; </td></tr>
+<tr class="memitem:a70aeef93be2358dec8ffcc656e3cd597"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1Logger.html#a70aeef93be2358dec8ffcc656e3cd597">HasLogger</a> (T logger={}) const noexcept</td></tr>
+<tr class="memdesc:a70aeef93be2358dec8ffcc656e3cd597"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a logger with the given type exists.  <br /></td></tr>
+<tr class="separator:a70aeef93be2358dec8ffcc656e3cd597"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a733924350efe854cc51936d0cd674811" id="r_a733924350efe854cc51936d0cd674811"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Logger.html#a733924350efe854cc51936d0cd674811">ShouldLog</a> (<a class="el" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a> level) const noexcept</td></tr>
+<tr class="memdesc:a733924350efe854cc51936d0cd674811"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the default logger should log messages at the given level.  <br /></td></tr>
+<tr class="separator:a733924350efe854cc51936d0cd674811"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad47c734642266e5d3454a5dcae2a1269" id="r_ad47c734642266e5d3454a5dcae2a1269"><td class="memTemplParams" colspan="2">template&lt;LoggerTrait T&gt; </td></tr>
+<tr class="memitem:ad47c734642266e5d3454a5dcae2a1269"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1Logger.html#ad47c734642266e5d3454a5dcae2a1269">ShouldLog</a> (T logger, <a class="el" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a> level) const noexcept</td></tr>
+<tr class="memdesc:ad47c734642266e5d3454a5dcae2a1269"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a typed logger should log messages at the given level.  <br /></td></tr>
+<tr class="separator:ad47c734642266e5d3454a5dcae2a1269"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afebf71518042c2d8423025861c02eae4" id="r_afebf71518042c2d8423025861c02eae4"><td class="memTemplParams" colspan="2">template&lt;LoggerTrait T&gt; </td></tr>
+<tr class="memitem:afebf71518042c2d8423025861c02eae4"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1Logger.html#afebf71518042c2d8423025861c02eae4">GetLevel</a> (T logger={}) const noexcept</td></tr>
+<tr class="memdesc:afebf71518042c2d8423025861c02eae4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the current log level for a typed logger.  <br /></td></tr>
+<tr class="separator:afebf71518042c2d8423025861c02eae4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b7c70e161a97f50e81ae5d5df4ba525" id="r_a7b7c70e161a97f50e81ae5d5df4ba525"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Logger.html#a7b7c70e161a97f50e81ae5d5df4ba525">GetLevel</a> () const noexcept</td></tr>
+<tr class="memdesc:a7b7c70e161a97f50e81ae5d5df4ba525"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the current log level for the default logger.  <br /></td></tr>
+<tr class="separator:a7b7c70e161a97f50e81ae5d5df4ba525"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0728b97cc52f74964604d705392e0c4" id="r_aa0728b97cc52f74964604d705392e0c4"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structhelios_1_1LoggerConfig.html">LoggerConfig</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Logger.html#aa0728b97cc52f74964604d705392e0c4">GetDefaultConfig</a> () const noexcept</td></tr>
+<tr class="memdesc:aa0728b97cc52f74964604d705392e0c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the current default configuration.  <br /></td></tr>
+<tr class="separator:aa0728b97cc52f74964604d705392e0c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a0a1fdb516e345015a8de7c179bb4db99" id="r_a0a1fdb516e345015a8de7c179bb4db99"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classhelios_1_1Logger.html">Logger</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1Logger.html#a0a1fdb516e345015a8de7c179bb4db99">GetInstance</a> () noexcept</td></tr>
+<tr class="memdesc:a0a1fdb516e345015a8de7c179bb4db99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the singleton instance.  <br /></td></tr>
+<tr class="separator:a0a1fdb516e345015a8de7c179bb4db99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Centralized logging system with configurable output and formatting. </p>
+<dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00231">231</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ac7de5ff321565b6c30909ccbcbb5503f" name="ac7de5ff321565b6c30909ccbcbb5503f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7de5ff321565b6c30909ccbcbb5503f">&#9670;&#160;</a></span>Logger() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::Logger::Logger </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1Logger.html">Logger</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a88e102a8f270cfe6e035b99fb31e83ae" name="a88e102a8f270cfe6e035b99fb31e83ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88e102a8f270cfe6e035b99fb31e83ae">&#9670;&#160;</a></span>Logger() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::Logger::Logger </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1Logger.html">Logger</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9dbe1efcd55f0306632881153ed2f4d2" name="a9dbe1efcd55f0306632881153ed2f4d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9dbe1efcd55f0306632881153ed2f4d2">&#9670;&#160;</a></span>~Logger()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::Logger::~Logger </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2logger_8hpp-example.html#a32">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/logger.hpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a7f7ce3e5192e79e003e068fad3dadd8d" name="a7f7ce3e5192e79e003e068fad3dadd8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f7ce3e5192e79e003e068fad3dadd8d">&#9670;&#160;</a></span>AddLogger()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;LoggerTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::Logger::AddLogger </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>logger</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structhelios_1_1LoggerConfig.html">LoggerConfig</a>&#160;</td>
+          <td class="paramname"><em>config</em> = <code><a class="el" href="namespacehelios.html#a108806acf89b89e91b9f73f36c8e154d">LoggerConfigOf</a>&lt;T&gt;()</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Adds a logger with the specified type and configuration. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td><a class="el" href="classhelios_1_1Logger.html" title="Centralized logging system with configurable output and formatting.">Logger</a> type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">logger</td><td><a class="el" href="classhelios_1_1Logger.html" title="Centralized logging system with configurable output and formatting.">Logger</a> type instance </td></tr>
+    <tr><td class="paramname">config</td><td>Configuration for the logger </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2logger_8hpp-example.html#a33">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/logger.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00521">521</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  521</span>                                                               {</div>
+<div class="line"><span class="lineno">  522</span>  <span class="keyword">constexpr</span> <a class="code hl_typedef" href="namespacehelios.html#a897d19e901838feb790a28ec9fcb9d7d">LoggerId</a> logger_id = LoggerIdOf&lt;T&gt;();</div>
+<div class="line"><span class="lineno">  523</span>  <span class="keyword">constexpr</span> std::string_view logger_name = LoggerNameOf&lt;T&gt;();</div>
+<div class="line"><span class="lineno">  524</span> </div>
+<div class="line"><span class="lineno">  525</span>  <span class="keyword">const</span> std::scoped_lock lock(loggers_mutex_);</div>
+<div class="line"><span class="lineno">  526</span>  <span class="keywordflow">if</span> (loggers_.contains(logger_id)) [[unlikely]] {</div>
+<div class="line"><span class="lineno">  527</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  528</span>  }</div>
+<div class="line"><span class="lineno">  529</span> </div>
+<div class="line"><span class="lineno">  530</span>  <span class="keywordflow">if</span> (<span class="keyword">auto</span> spdlog_logger = CreateLogger(logger_name, config)) [[likely]] {</div>
+<div class="line"><span class="lineno">  531</span>    loggers_.emplace(logger_id, std::move(spdlog_logger));</div>
+<div class="line"><span class="lineno">  532</span>    logger_configs_.emplace(logger_id, std::move(config));</div>
+<div class="line"><span class="lineno">  533</span>    logger_levels_.emplace(logger_id, <a class="code hl_enumvalue" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71afa21506cd249f400de4a974b5a0c8e0e">LogLevel::kTrace</a>);</div>
+<div class="line"><span class="lineno">  534</span>  }</div>
+<div class="line"><span class="lineno">  535</span>}</div>
+<div class="ttc" id="anamespacehelios_html_a22a572a5b6a1313de5eaf69115bbad71afa21506cd249f400de4a974b5a0c8e0e"><div class="ttname"><a href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71afa21506cd249f400de4a974b5a0c8e0e">helios::LogLevel::kTrace</a></div><div class="ttdeci">@ kTrace</div></div>
+<div class="ttc" id="anamespacehelios_html_a897d19e901838feb790a28ec9fcb9d7d"><div class="ttname"><a href="namespacehelios.html#a897d19e901838feb790a28ec9fcb9d7d">helios::LoggerId</a></div><div class="ttdeci">size_t LoggerId</div><div class="ttdoc">Type alias for logger type IDs.</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00106">logger.hpp:106</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ab9c17ca826531504e5d8f750c99524ec" name="ab9c17ca826531504e5d8f750c99524ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9c17ca826531504e5d8f750c99524ec">&#9670;&#160;</a></span>Flush()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;LoggerTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::Logger::Flush </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>logger</em> = <code>{}</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Flushes a specific logger. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td><a class="el" href="classhelios_1_1Logger.html" title="Centralized logging system with configurable output and formatting.">Logger</a> type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">logger</td><td><a class="el" href="classhelios_1_1Logger.html" title="Centralized logging system with configurable output and formatting.">Logger</a> type instance </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2logger_8hpp-example.html#a36">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/logger.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00269">269</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  269</span>                                         {}) <span class="keyword">noexcept</span> {</div>
+<div class="line"><span class="lineno">  270</span>    FlushImpl(LoggerIdOf&lt;T&gt;());</div>
+<div class="line"><span class="lineno">  271</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a3535c760b83e2e52e38d0d49a7edecab" name="a3535c760b83e2e52e38d0d49a7edecab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3535c760b83e2e52e38d0d49a7edecab">&#9670;&#160;</a></span>FlushAll()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::Logger::FlushAll </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Flushes all registered loggers. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2logger_8hpp-example.html#a35">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/logger.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00278">278</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  278</span>                               {</div>
+<div class="line"><span class="lineno">  279</span>  <span class="keyword">const</span> std::shared_lock lock(loggers_mutex_);</div>
+<div class="line"><span class="lineno">  280</span>  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; [_, logger] : loggers_) {</div>
+<div class="line"><span class="lineno">  281</span>    <span class="keywordflow">if</span> (logger) [[likely]] {</div>
+<div class="line"><span class="lineno">  282</span>      <span class="keywordflow">try</span> {</div>
+<div class="line"><span class="lineno">  283</span>        logger-&gt;flush();</div>
+<div class="line"><span class="lineno">  284</span>      } <span class="keywordflow">catch</span> (...) {</div>
+<div class="line"><span class="lineno">  285</span>        <span class="comment">// Silently ignore flush errors</span></div>
+<div class="line"><span class="lineno">  286</span>      }</div>
+<div class="line"><span class="lineno">  287</span>    }</div>
+<div class="line"><span class="lineno">  288</span>  }</div>
+<div class="line"><span class="lineno">  289</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aa0728b97cc52f74964604d705392e0c4" name="aa0728b97cc52f74964604d705392e0c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0728b97cc52f74964604d705392e0c4">&#9670;&#160;</a></span>GetDefaultConfig()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structhelios_1_1LoggerConfig.html">LoggerConfig</a> &amp; helios::Logger::GetDefaultConfig </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the current default configuration. </p>
+<dl class="section return"><dt>Returns</dt><dd>The default logger configuration </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2logger_8hpp-example.html#a44">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/logger.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00441">441</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  441</span>{ <span class="keywordflow">return</span> default_config_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a0a1fdb516e345015a8de7c179bb4db99" name="a0a1fdb516e345015a8de7c179bb4db99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a1fdb516e345015a8de7c179bb4db99">&#9670;&#160;</a></span>GetInstance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="classhelios_1_1Logger.html">Logger</a> &amp; helios::Logger::GetInstance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the singleton instance. </p>
+<dl class="section return"><dt>Returns</dt><dd>Reference to the <a class="el" href="classhelios_1_1Logger.html" title="Centralized logging system with configurable output and formatting.">Logger</a> instance </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2logger_8hpp-example.html#a45">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/logger.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00447">447</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  447</span>                                                      {</div>
+<div class="line"><span class="lineno">  448</span>    <span class="keyword">static</span> <a class="code hl_function" href="classhelios_1_1Logger.html#ac7de5ff321565b6c30909ccbcbb5503f">Logger</a> instance;</div>
+<div class="line"><span class="lineno">  449</span>    <span class="keywordflow">return</span> instance;</div>
+<div class="line"><span class="lineno">  450</span>  }</div>
+<div class="ttc" id="aclasshelios_1_1Logger_html_ac7de5ff321565b6c30909ccbcbb5503f"><div class="ttname"><a href="classhelios_1_1Logger.html#ac7de5ff321565b6c30909ccbcbb5503f">helios::Logger::Logger</a></div><div class="ttdeci">Logger(const Logger &amp;)=delete</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a7b7c70e161a97f50e81ae5d5df4ba525" name="a7b7c70e161a97f50e81ae5d5df4ba525"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b7c70e161a97f50e81ae5d5df4ba525">&#9670;&#160;</a></span>GetLevel() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a> helios::Logger::GetLevel </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the current log level for the default logger. </p>
+<dl class="section return"><dt>Returns</dt><dd>The current log level </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2logger_8hpp-example.html#a43">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/logger.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00314">314</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  314</span>                                         {</div>
+<div class="line"><span class="lineno">  315</span>  <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> logger = GetDefaultLogger()) [[likely]] {</div>
+<div class="line"><span class="lineno">  316</span>    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><a class="code hl_enumeration" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a><span class="keyword">&gt;</span>(logger-&gt;level());</div>
+<div class="line"><span class="lineno">  317</span>  }</div>
+<div class="line"><span class="lineno">  318</span>  <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71afa21506cd249f400de4a974b5a0c8e0e">LogLevel::kTrace</a>;</div>
+<div class="line"><span class="lineno">  319</span>}</div>
+<div class="ttc" id="anamespacehelios_html_a22a572a5b6a1313de5eaf69115bbad71"><div class="ttname"><a href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">helios::LogLevel</a></div><div class="ttdeci">LogLevel</div><div class="ttdoc">Log severity levels.</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00034">logger.hpp:34</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="afebf71518042c2d8423025861c02eae4" name="afebf71518042c2d8423025861c02eae4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afebf71518042c2d8423025861c02eae4">&#9670;&#160;</a></span>GetLevel() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;LoggerTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a> helios::Logger::GetLevel </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>logger</em> = <code>{}</code></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the current log level for a typed logger. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td><a class="el" href="classhelios_1_1Logger.html" title="Centralized logging system with configurable output and formatting.">Logger</a> type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">logger</td><td><a class="el" href="classhelios_1_1Logger.html" title="Centralized logging system with configurable output and formatting.">Logger</a> type instance </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The current log level, or <a class="el" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71afa21506cd249f400de4a974b5a0c8e0e">LogLevel::kTrace</a> if logger doesn't exist </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00427">427</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  427</span>                                                              {}) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><span class="lineno">  428</span>    <span class="keywordflow">return</span> GetLevelImpl(LoggerIdOf&lt;T&gt;());</div>
+<div class="line"><span class="lineno">  429</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a70aeef93be2358dec8ffcc656e3cd597" name="a70aeef93be2358dec8ffcc656e3cd597"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70aeef93be2358dec8ffcc656e3cd597">&#9670;&#160;</a></span>HasLogger()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;LoggerTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::Logger::HasLogger </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>logger</em> = <code>{}</code></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if a logger with the given type exists. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td><a class="el" href="classhelios_1_1Logger.html" title="Centralized logging system with configurable output and formatting.">Logger</a> type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">logger</td><td><a class="el" href="classhelios_1_1Logger.html" title="Centralized logging system with configurable output and formatting.">Logger</a> type instance </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the logger exists, false otherwise </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2logger_8hpp-example.html#a41">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/logger.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00636">636</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  636</span>                                                {</div>
+<div class="line"><span class="lineno">  637</span>  <span class="keyword">const</span> std::shared_lock lock(loggers_mutex_);</div>
+<div class="line"><span class="lineno">  638</span>  <span class="keywordflow">return</span> loggers_.contains(LoggerIdOf&lt;T&gt;());</div>
+<div class="line"><span class="lineno">  639</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ab24fef1175a2e78f8e4a027c1921e8c3" name="ab24fef1175a2e78f8e4a027c1921e8c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab24fef1175a2e78f8e4a027c1921e8c3">&#9670;&#160;</a></span>LogAssertionFailure() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Args&gt; <br />
+requires (sizeof...(Args) &gt; 0)</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::Logger::LogAssertionFailure </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>condition</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::source_location &amp;&#160;</td>
+          <td class="paramname"><em>loc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::format_string&lt; Args... &gt;&#160;</td>
+          <td class="paramname"><em>fmt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Logs assertion failure with default logger (formatted). </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Args</td><td>Types of the format arguments </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">condition</td><td>The failed condition as a string </td></tr>
+    <tr><td class="paramname">loc</td><td>Source location where the assertion failed </td></tr>
+    <tr><td class="paramname">fmt</td><td>Format string for the failure message </td></tr>
+    <tr><td class="paramname">args</td><td>Arguments for the format string </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00625">625</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  626</span>                                                                                                {</div>
+<div class="line"><span class="lineno">  627</span>  <span class="keywordflow">try</span> {</div>
+<div class="line"><span class="lineno">  628</span>    <span class="keyword">const</span> std::string message = std::format(fmt, std::forward&lt;Args&gt;(args)...);</div>
+<div class="line"><span class="lineno">  629</span>    <a class="code hl_function" href="classhelios_1_1Logger.html#a6d32dc172f4a7736ca4fe71140d19a84">LogAssertionFailure</a>(condition, loc, message);</div>
+<div class="line"><span class="lineno">  630</span>  } <span class="keywordflow">catch</span> (...) {</div>
+<div class="line"><span class="lineno">  631</span>    <a class="code hl_function" href="classhelios_1_1Logger.html#a6d32dc172f4a7736ca4fe71140d19a84">LogAssertionFailure</a>(condition, loc, <span class="stringliteral">&quot;Formatting error in assertion message&quot;</span>);</div>
+<div class="line"><span class="lineno">  632</span>  }</div>
+<div class="line"><span class="lineno">  633</span>}</div>
+<div class="ttc" id="aclasshelios_1_1Logger_html_a6d32dc172f4a7736ca4fe71140d19a84"><div class="ttname"><a href="classhelios_1_1Logger.html#a6d32dc172f4a7736ca4fe71140d19a84">helios::Logger::LogAssertionFailure</a></div><div class="ttdeci">void LogAssertionFailure(T logger, std::string_view condition, const std::source_location &amp;loc, std::string_view message) noexcept</div><div class="ttdoc">Logs assertion failure with typed logger.</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00595">logger.hpp:595</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ab0096c60bb7cd189da3dfe6d5bdd1e79" name="ab0096c60bb7cd189da3dfe6d5bdd1e79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0096c60bb7cd189da3dfe6d5bdd1e79">&#9670;&#160;</a></span>LogAssertionFailure() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::Logger::LogAssertionFailure </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>condition</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::source_location &amp;&#160;</td>
+          <td class="paramname"><em>loc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>message</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Logs assertion failure with default logger. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">condition</td><td>The failed condition as a string </td></tr>
+    <tr><td class="paramname">loc</td><td>Source location where the assertion failed </td></tr>
+    <tr><td class="paramname">message</td><td>Additional message describing the failure </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00616">616</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  617</span>                                                                         {</div>
+<div class="line"><span class="lineno">  618</span>  <span class="keywordflow">if</span> (<span class="keyword">auto</span> logger = GetDefaultLogger()) [[likely]] {</div>
+<div class="line"><span class="lineno">  619</span>    LogAssertionFailureImpl(logger, condition, loc, message);</div>
+<div class="line"><span class="lineno">  620</span>  }</div>
+<div class="line"><span class="lineno">  621</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a3de5feaee494a40bbc1a5b8dafdf4abc" name="a3de5feaee494a40bbc1a5b8dafdf4abc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3de5feaee494a40bbc1a5b8dafdf4abc">&#9670;&#160;</a></span>LogAssertionFailure() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;LoggerTrait T, typename... Args&gt; <br />
+requires (sizeof...(Args) &gt; 0)</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::Logger::LogAssertionFailure </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>logger</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>condition</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::source_location &amp;&#160;</td>
+          <td class="paramname"><em>loc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::format_string&lt; Args... &gt;&#160;</td>
+          <td class="paramname"><em>fmt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Logs assertion failure with typed logger (formatted). </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td><a class="el" href="classhelios_1_1Logger.html" title="Centralized logging system with configurable output and formatting.">Logger</a> type </td></tr>
+    <tr><td class="paramname">Args</td><td>Types of the format arguments </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">logger</td><td><a class="el" href="classhelios_1_1Logger.html" title="Centralized logging system with configurable output and formatting.">Logger</a> type instance </td></tr>
+    <tr><td class="paramname">condition</td><td>The failed condition as a string </td></tr>
+    <tr><td class="paramname">loc</td><td>Source location where the assertion failed </td></tr>
+    <tr><td class="paramname">fmt</td><td>Format string for the failure message </td></tr>
+    <tr><td class="paramname">args</td><td>Arguments for the format string </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00606">606</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  607</span>                                                                                                {</div>
+<div class="line"><span class="lineno">  608</span>  <span class="keywordflow">try</span> {</div>
+<div class="line"><span class="lineno">  609</span>    <span class="keyword">const</span> std::string message = std::format(fmt, std::forward&lt;Args&gt;(args)...);</div>
+<div class="line"><span class="lineno">  610</span>    <a class="code hl_function" href="classhelios_1_1Logger.html#a6d32dc172f4a7736ca4fe71140d19a84">LogAssertionFailure</a>(logger, condition, loc, message);</div>
+<div class="line"><span class="lineno">  611</span>  } <span class="keywordflow">catch</span> (...) {</div>
+<div class="line"><span class="lineno">  612</span>    <a class="code hl_function" href="classhelios_1_1Logger.html#a6d32dc172f4a7736ca4fe71140d19a84">LogAssertionFailure</a>(logger, condition, loc, <span class="stringliteral">&quot;Formatting error in assertion message&quot;</span>);</div>
+<div class="line"><span class="lineno">  613</span>  }</div>
+<div class="line"><span class="lineno">  614</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a6d32dc172f4a7736ca4fe71140d19a84" name="a6d32dc172f4a7736ca4fe71140d19a84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d32dc172f4a7736ca4fe71140d19a84">&#9670;&#160;</a></span>LogAssertionFailure() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;LoggerTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::Logger::LogAssertionFailure </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>logger</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>condition</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::source_location &amp;&#160;</td>
+          <td class="paramname"><em>loc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>message</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Logs assertion failure with typed logger. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td><a class="el" href="classhelios_1_1Logger.html" title="Centralized logging system with configurable output and formatting.">Logger</a> type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">logger</td><td><a class="el" href="classhelios_1_1Logger.html" title="Centralized logging system with configurable output and formatting.">Logger</a> type instance </td></tr>
+    <tr><td class="paramname">condition</td><td>The failed condition as a string </td></tr>
+    <tr><td class="paramname">loc</td><td>Source location where the assertion failed </td></tr>
+    <tr><td class="paramname">message</td><td>Additional message describing the failure </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2logger_8hpp-example.html#a38">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/logger.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00595">595</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  596</span>                                                                         {</div>
+<div class="line"><span class="lineno">  597</span>  <span class="keywordflow">if</span> (<span class="keyword">auto</span> spdlog_logger = GetLogger(LoggerIdOf&lt;T&gt;())) [[likely]] {</div>
+<div class="line"><span class="lineno">  598</span>    LogAssertionFailureImpl(spdlog_logger, condition, loc, message);</div>
+<div class="line"><span class="lineno">  599</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<span class="keyword">auto</span> default_logger = GetDefaultLogger()) [[likely]] {</div>
+<div class="line"><span class="lineno">  600</span>    LogAssertionFailureImpl(default_logger, condition, loc, message);</div>
+<div class="line"><span class="lineno">  601</span>  }</div>
+<div class="line"><span class="lineno">  602</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a6d43b1da26cd8f59855a77dbc0b43bd0" name="a6d43b1da26cd8f59855a77dbc0b43bd0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d43b1da26cd8f59855a77dbc0b43bd0">&#9670;&#160;</a></span>LogMessage() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Args&gt; <br />
+requires (sizeof...(Args) &gt; 0)</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::Logger::LogMessage </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a>&#160;</td>
+          <td class="paramname"><em>level</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::source_location &amp;&#160;</td>
+          <td class="paramname"><em>loc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::format_string&lt; Args... &gt;&#160;</td>
+          <td class="paramname"><em>fmt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Logs a formatted message with default logger. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Args</td><td>Types of the format arguments </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">level</td><td>Log severity level </td></tr>
+    <tr><td class="paramname">loc</td><td>Source location where the log was triggered </td></tr>
+    <tr><td class="paramname">fmt</td><td>Format string </td></tr>
+    <tr><td class="paramname">args</td><td>Arguments for the format string </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00584">584</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  585</span>                                                        {</div>
+<div class="line"><span class="lineno">  586</span>  <span class="keywordflow">try</span> {</div>
+<div class="line"><span class="lineno">  587</span>    <span class="keyword">const</span> std::string message = std::format(fmt, std::forward&lt;Args&gt;(args)...);</div>
+<div class="line"><span class="lineno">  588</span>    <a class="code hl_function" href="classhelios_1_1Logger.html#a8114dd095687df9af2b3401da9007ebf">LogMessage</a>(level, loc, message);</div>
+<div class="line"><span class="lineno">  589</span>  } <span class="keywordflow">catch</span> (...) {</div>
+<div class="line"><span class="lineno">  590</span>    <span class="comment">// Silently ignore formatting errors</span></div>
+<div class="line"><span class="lineno">  591</span>  }</div>
+<div class="line"><span class="lineno">  592</span>}</div>
+<div class="ttc" id="aclasshelios_1_1Logger_html_a8114dd095687df9af2b3401da9007ebf"><div class="ttname"><a href="classhelios_1_1Logger.html#a8114dd095687df9af2b3401da9007ebf">helios::Logger::LogMessage</a></div><div class="ttdeci">void LogMessage(T logger, LogLevel level, const std::source_location &amp;loc, std::string_view message) noexcept</div><div class="ttdoc">Logs a string message with typed logger.</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00557">logger.hpp:557</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a641181b556bd1e4cf58d968713dc6f71" name="a641181b556bd1e4cf58d968713dc6f71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a641181b556bd1e4cf58d968713dc6f71">&#9670;&#160;</a></span>LogMessage() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::Logger::LogMessage </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a>&#160;</td>
+          <td class="paramname"><em>level</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::source_location &amp;&#160;</td>
+          <td class="paramname"><em>loc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>message</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Logs a string message with default logger. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">level</td><td>Log severity level </td></tr>
+    <tr><td class="paramname">loc</td><td>Source location where the log was triggered </td></tr>
+    <tr><td class="paramname">message</td><td>Message to log </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00576">576</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  576</span>                                                                                                             {</div>
+<div class="line"><span class="lineno">  577</span>  <span class="keywordflow">if</span> (<span class="keyword">auto</span> logger = GetDefaultLogger()) [[likely]] {</div>
+<div class="line"><span class="lineno">  578</span>    LogMessageImpl(logger, level, loc, message);</div>
+<div class="line"><span class="lineno">  579</span>  }</div>
+<div class="line"><span class="lineno">  580</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a8776565d0484ff95e30cd43418bb1147" name="a8776565d0484ff95e30cd43418bb1147"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8776565d0484ff95e30cd43418bb1147">&#9670;&#160;</a></span>LogMessage() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;LoggerTrait T, typename... Args&gt; <br />
+requires (sizeof...(Args) &gt; 0)</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::Logger::LogMessage </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>logger</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a>&#160;</td>
+          <td class="paramname"><em>level</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::source_location &amp;&#160;</td>
+          <td class="paramname"><em>loc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::format_string&lt; Args... &gt;&#160;</td>
+          <td class="paramname"><em>fmt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Logs a formatted message with typed logger. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td><a class="el" href="classhelios_1_1Logger.html" title="Centralized logging system with configurable output and formatting.">Logger</a> type </td></tr>
+    <tr><td class="paramname">Args</td><td>Types of the format arguments </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">logger</td><td><a class="el" href="classhelios_1_1Logger.html" title="Centralized logging system with configurable output and formatting.">Logger</a> type instance </td></tr>
+    <tr><td class="paramname">level</td><td>Log severity level </td></tr>
+    <tr><td class="paramname">loc</td><td>Source location where the log was triggered </td></tr>
+    <tr><td class="paramname">fmt</td><td>Format string </td></tr>
+    <tr><td class="paramname">args</td><td>Arguments for the format string </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00566">566</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  567</span>                                                                                       {</div>
+<div class="line"><span class="lineno">  568</span>  <span class="keywordflow">try</span> {</div>
+<div class="line"><span class="lineno">  569</span>    <span class="keyword">const</span> std::string message = std::format(fmt, std::forward&lt;Args&gt;(args)...);</div>
+<div class="line"><span class="lineno">  570</span>    <a class="code hl_function" href="classhelios_1_1Logger.html#a8114dd095687df9af2b3401da9007ebf">LogMessage</a>(logger, level, loc, message);</div>
+<div class="line"><span class="lineno">  571</span>  } <span class="keywordflow">catch</span> (...) {</div>
+<div class="line"><span class="lineno">  572</span>    <span class="comment">// Silently ignore formatting errors</span></div>
+<div class="line"><span class="lineno">  573</span>  }</div>
+<div class="line"><span class="lineno">  574</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a8114dd095687df9af2b3401da9007ebf" name="a8114dd095687df9af2b3401da9007ebf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8114dd095687df9af2b3401da9007ebf">&#9670;&#160;</a></span>LogMessage() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;LoggerTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::Logger::LogMessage </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>logger</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a>&#160;</td>
+          <td class="paramname"><em>level</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::source_location &amp;&#160;</td>
+          <td class="paramname"><em>loc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>message</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Logs a string message with typed logger. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td><a class="el" href="classhelios_1_1Logger.html" title="Centralized logging system with configurable output and formatting.">Logger</a> type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">logger</td><td><a class="el" href="classhelios_1_1Logger.html" title="Centralized logging system with configurable output and formatting.">Logger</a> type instance </td></tr>
+    <tr><td class="paramname">level</td><td>Log severity level </td></tr>
+    <tr><td class="paramname">loc</td><td>Source location where the log was triggered </td></tr>
+    <tr><td class="paramname">message</td><td>Message to log </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2logger_8hpp-example.html#a37">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/logger.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00557">557</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  558</span>                                                                {</div>
+<div class="line"><span class="lineno">  559</span>  <span class="keywordflow">if</span> (<span class="keyword">auto</span> spdlog_logger = GetLogger(LoggerIdOf&lt;T&gt;())) [[likely]] {</div>
+<div class="line"><span class="lineno">  560</span>    LogMessageImpl(spdlog_logger, level, loc, message);</div>
+<div class="line"><span class="lineno">  561</span>  }</div>
+<div class="line"><span class="lineno">  562</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ae6b2d8236d20566e3c4a6aca80789ec1" name="ae6b2d8236d20566e3c4a6aca80789ec1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6b2d8236d20566e3c4a6aca80789ec1">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1Logger.html">Logger</a> &amp; helios::Logger::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1Logger.html">Logger</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9fe41e1aaff0cc8010b90f80c8d9b8e5" name="a9fe41e1aaff0cc8010b90f80c8d9b8e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fe41e1aaff0cc8010b90f80c8d9b8e5">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1Logger.html">Logger</a> &amp; helios::Logger::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1Logger.html">Logger</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae8217cc2410acd4f89ac762c457bad8f" name="ae8217cc2410acd4f89ac762c457bad8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8217cc2410acd4f89ac762c457bad8f">&#9670;&#160;</a></span>RemoveLogger()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;LoggerTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::Logger::RemoveLogger </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>logger</em> = <code>{}</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Removes a logger with the given type. </p>
+<dl class="section note"><dt>Note</dt><dd>Cannot remove the default logger </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td><a class="el" href="classhelios_1_1Logger.html" title="Centralized logging system with configurable output and formatting.">Logger</a> type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">logger</td><td><a class="el" href="classhelios_1_1Logger.html" title="Centralized logging system with configurable output and formatting.">Logger</a> type instance </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2logger_8hpp-example.html#a34">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/logger.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00538">538</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  538</span>                                             {</div>
+<div class="line"><span class="lineno">  539</span>  <span class="keyword">constexpr</span> <a class="code hl_typedef" href="namespacehelios.html#a897d19e901838feb790a28ec9fcb9d7d">LoggerId</a> logger_id = LoggerIdOf&lt;T&gt;();</div>
+<div class="line"><span class="lineno">  540</span> </div>
+<div class="line"><span class="lineno">  541</span>  <span class="comment">// Cannot remove the default logger</span></div>
+<div class="line"><span class="lineno">  542</span>  <span class="keywordflow">if</span> (logger_id == LoggerIdOf&lt;DefaultLogger&gt;()) [[unlikely]] {</div>
+<div class="line"><span class="lineno">  543</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  544</span>  }</div>
+<div class="line"><span class="lineno">  545</span> </div>
+<div class="line"><span class="lineno">  546</span>  <span class="keyword">const</span> std::scoped_lock lock(loggers_mutex_);</div>
+<div class="line"><span class="lineno">  547</span>  <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> it = loggers_.find(logger_id); it != loggers_.end()) {</div>
+<div class="line"><span class="lineno">  548</span>    <span class="comment">// Unregister from spdlog before erasing</span></div>
+<div class="line"><span class="lineno">  549</span>    DropLoggerFromSpdlog(it-&gt;second);</div>
+<div class="line"><span class="lineno">  550</span>    loggers_.erase(it);</div>
+<div class="line"><span class="lineno">  551</span>    logger_configs_.erase(logger_id);</div>
+<div class="line"><span class="lineno">  552</span>    logger_levels_.erase(logger_id);</div>
+<div class="line"><span class="lineno">  553</span>  }</div>
+<div class="line"><span class="lineno">  554</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ab6999bf2bbeb130e386cd181e648cf09" name="ab6999bf2bbeb130e386cd181e648cf09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6999bf2bbeb130e386cd181e648cf09">&#9670;&#160;</a></span>SetDefaultConfig()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::Logger::SetDefaultConfig </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structhelios_1_1LoggerConfig.html">LoggerConfig</a> &amp;&#160;</td>
+          <td class="paramname"><em>config</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the global default configuration for new loggers. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">config</td><td>The configuration to use as default </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2logger_8hpp-example.html#a39">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/logger.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00373">373</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  373</span>{ default_config_ = config; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a7eae3359fd658d4a94988357d8d14783" name="a7eae3359fd658d4a94988357d8d14783"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7eae3359fd658d4a94988357d8d14783">&#9670;&#160;</a></span>SetLevel() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::Logger::SetLevel </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a>&#160;</td>
+          <td class="paramname"><em>level</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the minimum log level for the default logger. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">level</td><td>Minimum log level to set </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00301">301</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  301</span>                                             {</div>
+<div class="line"><span class="lineno">  302</span>  <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> logger = GetDefaultLogger()) [[likely]] {</div>
+<div class="line"><span class="lineno">  303</span>    logger-&gt;set_level(<span class="keyword">static_cast&lt;</span>spdlog::level::level_enum<span class="keyword">&gt;</span>(std::to_underlying(level)));</div>
+<div class="line"><span class="lineno">  304</span>  }</div>
+<div class="line"><span class="lineno">  305</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a0390d8c22bfc97ed5de24c1c6ffb847c" name="a0390d8c22bfc97ed5de24c1c6ffb847c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0390d8c22bfc97ed5de24c1c6ffb847c">&#9670;&#160;</a></span>SetLevel() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;LoggerTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::Logger::SetLevel </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>logger</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a>&#160;</td>
+          <td class="paramname"><em>level</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the minimum log level for a typed logger. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td><a class="el" href="classhelios_1_1Logger.html" title="Centralized logging system with configurable output and formatting.">Logger</a> type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">logger</td><td><a class="el" href="classhelios_1_1Logger.html" title="Centralized logging system with configurable output and formatting.">Logger</a> type instance </td></tr>
+    <tr><td class="paramname">level</td><td>Minimum log level to set </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2logger_8hpp-example.html#a40">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/logger.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00382">382</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  382</span>                                                                    {</div>
+<div class="line"><span class="lineno">  383</span>    SetLevelImpl(LoggerIdOf&lt;T&gt;(), level);</div>
+<div class="line"><span class="lineno">  384</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a733924350efe854cc51936d0cd674811" name="a733924350efe854cc51936d0cd674811"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a733924350efe854cc51936d0cd674811">&#9670;&#160;</a></span>ShouldLog() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::Logger::ShouldLog </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a>&#160;</td>
+          <td class="paramname"><em>level</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if the default logger should log messages at the given level. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">level</td><td>The log level to check </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if messages at this level should be logged </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2logger_8hpp-example.html#a42">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/logger.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00307">307</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  307</span>                                                    {</div>
+<div class="line"><span class="lineno">  308</span>  <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> logger = GetDefaultLogger()) [[likely]] {</div>
+<div class="line"><span class="lineno">  309</span>    <span class="keywordflow">return</span> logger-&gt;should_log(<span class="keyword">static_cast&lt;</span>spdlog::level::level_enum<span class="keyword">&gt;</span>(std::to_underlying(level)));</div>
+<div class="line"><span class="lineno">  310</span>  }</div>
+<div class="line"><span class="lineno">  311</span>  <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  312</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ad47c734642266e5d3454a5dcae2a1269" name="ad47c734642266e5d3454a5dcae2a1269"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad47c734642266e5d3454a5dcae2a1269">&#9670;&#160;</a></span>ShouldLog() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;LoggerTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::Logger::ShouldLog </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>logger</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a>&#160;</td>
+          <td class="paramname"><em>level</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if a typed logger should log messages at the given level. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td><a class="el" href="classhelios_1_1Logger.html" title="Centralized logging system with configurable output and formatting.">Logger</a> type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">logger</td><td><a class="el" href="classhelios_1_1Logger.html" title="Centralized logging system with configurable output and formatting.">Logger</a> type instance </td></tr>
+    <tr><td class="paramname">level</td><td>The log level to check </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if messages at this level should be logged </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00416">416</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  416</span>                                                                                         {</div>
+<div class="line"><span class="lineno">  417</span>    <span class="keywordflow">return</span> ShouldLogImpl(LoggerIdOf&lt;T&gt;(), level);</div>
+<div class="line"><span class="lineno">  418</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehelios.html">helios</a></li><li class="navelem"><a class="el" href="classhelios_1_1Logger.html">Logger</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

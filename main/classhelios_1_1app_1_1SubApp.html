@@ -1,0 +1,1883 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: helios::app::SubApp Class Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classhelios_1_1app_1_1SubApp.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#friends">Friends</a> &#124;
+<a href="classhelios_1_1app_1_1SubApp-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">helios::app::SubApp Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>A sub-application with its own ECS world, systems, and resources.  
+ <a href="classhelios_1_1app_1_1SubApp.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a8f7f06ffb86bd69104b976d86d78be70" id="r_a8f7f06ffb86bd69104b976d86d78be70"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#a8f7f06ffb86bd69104b976d86d78be70">ExtractFn</a> = std::move_only_function&lt; void(const <a class="el" href="classhelios_1_1ecs_1_1World.html">ecs::World</a> &amp;, <a class="el" href="classhelios_1_1ecs_1_1World.html">ecs::World</a> &amp;)&gt;</td></tr>
+<tr class="separator:a8f7f06ffb86bd69104b976d86d78be70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:af34c92ca8902efdf3c48359bd77c5564" id="r_af34c92ca8902efdf3c48359bd77c5564"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#af34c92ca8902efdf3c48359bd77c5564">SubApp</a> ()=default</td></tr>
+<tr class="separator:af34c92ca8902efdf3c48359bd77c5564"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97e261a8fdad2b345bf2bb019ce96aa5" id="r_a97e261a8fdad2b345bf2bb019ce96aa5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#a97e261a8fdad2b345bf2bb019ce96aa5">SubApp</a> (const <a class="el" href="classhelios_1_1app_1_1SubApp.html">SubApp</a> &amp;)=delete</td></tr>
+<tr class="separator:a97e261a8fdad2b345bf2bb019ce96aa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad969682e451d9147341e81d14aa644bc" id="r_ad969682e451d9147341e81d14aa644bc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#ad969682e451d9147341e81d14aa644bc">SubApp</a> (<a class="el" href="classhelios_1_1app_1_1SubApp.html">SubApp</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="separator:ad969682e451d9147341e81d14aa644bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b63984ca3a70b53fd5f9f3a80bce94c" id="r_a6b63984ca3a70b53fd5f9f3a80bce94c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#a6b63984ca3a70b53fd5f9f3a80bce94c">~SubApp</a> ()=default</td></tr>
+<tr class="separator:a6b63984ca3a70b53fd5f9f3a80bce94c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c480be3b750f30315116d9869e25eed" id="r_a5c480be3b750f30315116d9869e25eed"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1SubApp.html">SubApp</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#a5c480be3b750f30315116d9869e25eed">operator=</a> (const <a class="el" href="classhelios_1_1app_1_1SubApp.html">SubApp</a> &amp;)=delete</td></tr>
+<tr class="separator:a5c480be3b750f30315116d9869e25eed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51a3dc5c6d822d277b9eab9cb0c567aa" id="r_a51a3dc5c6d822d277b9eab9cb0c567aa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1SubApp.html">SubApp</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#a51a3dc5c6d822d277b9eab9cb0c567aa">operator=</a> (<a class="el" href="classhelios_1_1app_1_1SubApp.html">SubApp</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="separator:a51a3dc5c6d822d277b9eab9cb0c567aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a025e14a168fd6d551bcb97612eb30a8b" id="r_a025e14a168fd6d551bcb97612eb30a8b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#a025e14a168fd6d551bcb97612eb30a8b">Clear</a> ()</td></tr>
+<tr class="memdesc:a025e14a168fd6d551bcb97612eb30a8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the sub-app, removing all data.  <br /></td></tr>
+<tr class="separator:a025e14a168fd6d551bcb97612eb30a8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a191f625d927932ab72b7b28dd5412665" id="r_a191f625d927932ab72b7b28dd5412665"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#a191f625d927932ab72b7b28dd5412665">Update</a> (<a class="el" href="classhelios_1_1async_1_1Executor.html">async::Executor</a> &amp;executor)</td></tr>
+<tr class="memdesc:a191f625d927932ab72b7b28dd5412665"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates this sub-app by executing all scheduled systems.  <br /></td></tr>
+<tr class="separator:a191f625d927932ab72b7b28dd5412665"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a492a98348b7e7fa15f3b2a21d97bd4" id="r_a6a492a98348b7e7fa15f3b2a21d97bd4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#a6a492a98348b7e7fa15f3b2a21d97bd4">Extract</a> (const <a class="el" href="classhelios_1_1ecs_1_1World.html">ecs::World</a> &amp;main_world)</td></tr>
+<tr class="memdesc:a6a492a98348b7e7fa15f3b2a21d97bd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts data from the main world into this sub-app.  <br /></td></tr>
+<tr class="separator:a6a492a98348b7e7fa15f3b2a21d97bd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bfacc59ee772d08b4467eaf44407d91" id="r_a3bfacc59ee772d08b4467eaf44407d91"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#a3bfacc59ee772d08b4467eaf44407d91">BuildScheduler</a> ()</td></tr>
+<tr class="memdesc:a3bfacc59ee772d08b4467eaf44407d91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Builds execution graphs for all schedules.  <br /></td></tr>
+<tr class="separator:a3bfacc59ee772d08b4467eaf44407d91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8ccc9179adbfc1a53cdf99e3486e2a7" id="r_aa8ccc9179adbfc1a53cdf99e3486e2a7"><td class="memTemplParams" colspan="2">template&lt;ScheduleTrait S&gt; </td></tr>
+<tr class="memitem:aa8ccc9179adbfc1a53cdf99e3486e2a7"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#aa8ccc9179adbfc1a53cdf99e3486e2a7">ExecuteSchedule</a> (<a class="el" href="classhelios_1_1async_1_1Executor.html">async::Executor</a> &amp;executor, S schedule={})</td></tr>
+<tr class="memdesc:aa8ccc9179adbfc1a53cdf99e3486e2a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes a specific schedule.  <br /></td></tr>
+<tr class="separator:aa8ccc9179adbfc1a53cdf99e3486e2a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b72bbe2ffa2c7b5c2ad2abe4e002c65" id="r_a9b72bbe2ffa2c7b5c2ad2abe4e002c65"><td class="memTemplParams" colspan="2">template&lt;StageTrait S&gt; </td></tr>
+<tr class="memitem:a9b72bbe2ffa2c7b5c2ad2abe4e002c65"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#a9b72bbe2ffa2c7b5c2ad2abe4e002c65">ExecuteStage</a> (<a class="el" href="classhelios_1_1async_1_1Executor.html">async::Executor</a> &amp;executor)</td></tr>
+<tr class="memdesc:a9b72bbe2ffa2c7b5c2ad2abe4e002c65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes all schedules in a specific stage.  <br /></td></tr>
+<tr class="separator:a9b72bbe2ffa2c7b5c2ad2abe4e002c65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ee8bf566a65f6d7212a8c2e34fc5d8a" id="r_a1ee8bf566a65f6d7212a8c2e34fc5d8a"><td class="memTemplParams" colspan="2">template&lt;ecs::SystemTrait T, ScheduleTrait S&gt; </td></tr>
+<tr class="memitem:a1ee8bf566a65f6d7212a8c2e34fc5d8a"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#a1ee8bf566a65f6d7212a8c2e34fc5d8a">AddSystem</a> (S schedule={})</td></tr>
+<tr class="memdesc:a1ee8bf566a65f6d7212a8c2e34fc5d8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a system to the specified schedule in the sub-app.  <br /></td></tr>
+<tr class="separator:a1ee8bf566a65f6d7212a8c2e34fc5d8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f6a2470fcd801394f2f271847c96e73" id="r_a2f6a2470fcd801394f2f271847c96e73"><td class="memTemplParams" colspan="2">template&lt;ecs::SystemTrait... Systems, ScheduleTrait S&gt; <br />
+requires (sizeof...(Systems) &gt; 1 &amp;&amp; utils::UniqueTypes&lt;Systems...&gt;)</td></tr>
+<tr class="memitem:a2f6a2470fcd801394f2f271847c96e73"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#a2f6a2470fcd801394f2f271847c96e73">AddSystems</a> (S schedule={})</td></tr>
+<tr class="memdesc:a2f6a2470fcd801394f2f271847c96e73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds multiple systems to the specified schedule in the sub-app.  <br /></td></tr>
+<tr class="separator:a2f6a2470fcd801394f2f271847c96e73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba4e0931d272a67e4ab82e9b89747070" id="r_aba4e0931d272a67e4ab82e9b89747070"><td class="memTemplParams" colspan="2">template&lt;ecs::SystemTrait... Systems, ScheduleTrait S&gt; <br />
+requires (sizeof...(Systems) &gt; 0 &amp;&amp; utils::UniqueTypes&lt;Systems...&gt;)</td></tr>
+<tr class="memitem:aba4e0931d272a67e4ab82e9b89747070"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#aba4e0931d272a67e4ab82e9b89747070">AddSystemsBuilder</a> (S schedule={}) -&gt; <a class="el" href="classhelios_1_1app_1_1SystemConfig.html">SystemConfig</a>&lt; S, Systems... &gt;</td></tr>
+<tr class="separator:aba4e0931d272a67e4ab82e9b89747070"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa76b8b43b9d1266dcec6085a795d6151" id="r_aa76b8b43b9d1266dcec6085a795d6151"><td class="memTemplParams" colspan="2">template&lt;ecs::SystemTrait T, ScheduleTrait S&gt; </td></tr>
+<tr class="memitem:aa76b8b43b9d1266dcec6085a795d6151"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#aa76b8b43b9d1266dcec6085a795d6151">AddSystemBuilder</a> (S schedule={}) -&gt; <a class="el" href="classhelios_1_1app_1_1SystemConfig.html">SystemConfig</a>&lt; S, T &gt;</td></tr>
+<tr class="memdesc:aa76b8b43b9d1266dcec6085a795d6151"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a single system with fluent configuration builder.  <br /></td></tr>
+<tr class="separator:aa76b8b43b9d1266dcec6085a795d6151"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5edba91c2595bfb399e93a83395a0b3c" id="r_a5edba91c2595bfb399e93a83395a0b3c"><td class="memTemplParams" colspan="2">template&lt;SystemSetTrait Set, ScheduleTrait S&gt; </td></tr>
+<tr class="memitem:a5edba91c2595bfb399e93a83395a0b3c"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#a5edba91c2595bfb399e93a83395a0b3c">ConfigureSet</a> (S schedule={}) -&gt; <a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html">SystemSetConfig</a>&lt; S, Set &gt;</td></tr>
+<tr class="separator:a5edba91c2595bfb399e93a83395a0b3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4cb961f9069f51f3af81311794816af" id="r_ad4cb961f9069f51f3af81311794816af"><td class="memTemplParams" colspan="2">template&lt;ecs::ResourceTrait T&gt; </td></tr>
+<tr class="memitem:ad4cb961f9069f51f3af81311794816af"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#ad4cb961f9069f51f3af81311794816af">InsertResource</a> (T &amp;&amp;resource)</td></tr>
+<tr class="memdesc:ad4cb961f9069f51f3af81311794816af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts a resource into the sub-app's world.  <br /></td></tr>
+<tr class="separator:ad4cb961f9069f51f3af81311794816af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff197636c67071536cf78e6c2a8321a5" id="r_aff197636c67071536cf78e6c2a8321a5"><td class="memTemplParams" colspan="2">template&lt;ecs::ResourceTrait T, typename... Args&gt; <br />
+requires std::constructible_from&lt;T, Args...&gt;</td></tr>
+<tr class="memitem:aff197636c67071536cf78e6c2a8321a5"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#aff197636c67071536cf78e6c2a8321a5">EmplaceResource</a> (Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:aff197636c67071536cf78e6c2a8321a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emplaces a resource into the sub-app's world.  <br /></td></tr>
+<tr class="separator:aff197636c67071536cf78e6c2a8321a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad164b16e44905604ac6ac9d12f81c9cc" id="r_ad164b16e44905604ac6ac9d12f81c9cc"><td class="memTemplParams" colspan="2">template&lt;ecs::EventTrait T&gt; </td></tr>
+<tr class="memitem:ad164b16e44905604ac6ac9d12f81c9cc"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#ad164b16e44905604ac6ac9d12f81c9cc">AddEvent</a> ()</td></tr>
+<tr class="memdesc:ad164b16e44905604ac6ac9d12f81c9cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers an event type for use in this sub-app.  <br /></td></tr>
+<tr class="separator:ad164b16e44905604ac6ac9d12f81c9cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95c9361adc75fe8893e473c53ab17020" id="r_a95c9361adc75fe8893e473c53ab17020"><td class="memTemplParams" colspan="2">template&lt;ecs::EventTrait... Events&gt; <br />
+requires (sizeof...(Events) &gt; 1)</td></tr>
+<tr class="memitem:a95c9361adc75fe8893e473c53ab17020"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#a95c9361adc75fe8893e473c53ab17020">AddEvents</a> ()</td></tr>
+<tr class="memdesc:a95c9361adc75fe8893e473c53ab17020"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers multiple event types for use in this sub-app.  <br /></td></tr>
+<tr class="separator:a95c9361adc75fe8893e473c53ab17020"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a347b80bbfd7f8dbff669ec58aebede85" id="r_a347b80bbfd7f8dbff669ec58aebede85"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#a347b80bbfd7f8dbff669ec58aebede85">SetExtractFunction</a> (<a class="el" href="classhelios_1_1app_1_1SubApp.html#a8f7f06ffb86bd69104b976d86d78be70">ExtractFn</a> extract_fn) noexcept</td></tr>
+<tr class="memdesc:a347b80bbfd7f8dbff669ec58aebede85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets custom extraction function for this sub-app.  <br /></td></tr>
+<tr class="separator:a347b80bbfd7f8dbff669ec58aebede85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1420267640572362b84bdbfeac733e53" id="r_a1420267640572362b84bdbfeac733e53"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#a1420267640572362b84bdbfeac733e53">SetAllowOverlappingUpdates</a> (bool allow) noexcept</td></tr>
+<tr class="memdesc:a1420267640572362b84bdbfeac733e53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets whether this sub-app allows overlapping updates.  <br /></td></tr>
+<tr class="separator:a1420267640572362b84bdbfeac733e53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0d03b1930977cb8c89557f3e89c5cbd" id="r_ae0d03b1930977cb8c89557f3e89c5cbd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#ae0d03b1930977cb8c89557f3e89c5cbd">SetMaxOverlappingUpdates</a> (size_t max) noexcept</td></tr>
+<tr class="memdesc:ae0d03b1930977cb8c89557f3e89c5cbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the maximum number of overlapping updates.  <br /></td></tr>
+<tr class="separator:ae0d03b1930977cb8c89557f3e89c5cbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a467a8144c1510e02d2d41a49212449c9" id="r_a467a8144c1510e02d2d41a49212449c9"><td class="memTemplParams" colspan="2">template&lt;ecs::SystemTrait T&gt; </td></tr>
+<tr class="memitem:a467a8144c1510e02d2d41a49212449c9"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#a467a8144c1510e02d2d41a49212449c9">ContainsSystem</a> () const noexcept</td></tr>
+<tr class="memdesc:a467a8144c1510e02d2d41a49212449c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a system of type T is in any schedule.  <br /></td></tr>
+<tr class="separator:a467a8144c1510e02d2d41a49212449c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2bfbe583cc6e53cc80fb46d7d770dee2" id="r_a2bfbe583cc6e53cc80fb46d7d770dee2"><td class="memTemplParams" colspan="2">template&lt;ecs::SystemTrait T, ScheduleTrait S&gt; </td></tr>
+<tr class="memitem:a2bfbe583cc6e53cc80fb46d7d770dee2"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#a2bfbe583cc6e53cc80fb46d7d770dee2">ContainsSystem</a> (S schedule={}) const noexcept</td></tr>
+<tr class="memdesc:a2bfbe583cc6e53cc80fb46d7d770dee2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a system of type T is in the specified schedule.  <br /></td></tr>
+<tr class="separator:a2bfbe583cc6e53cc80fb46d7d770dee2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adef2bc054c090aab68496520cec63717" id="r_adef2bc054c090aab68496520cec63717"><td class="memTemplParams" colspan="2">template&lt;ecs::ResourceTrait T&gt; </td></tr>
+<tr class="memitem:adef2bc054c090aab68496520cec63717"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#adef2bc054c090aab68496520cec63717">HasResource</a> () const noexcept</td></tr>
+<tr class="memdesc:adef2bc054c090aab68496520cec63717"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a resource of type T exists in this sub-app.  <br /></td></tr>
+<tr class="separator:adef2bc054c090aab68496520cec63717"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6681df779359dab3f63c0f7db7f99bf" id="r_ad6681df779359dab3f63c0f7db7f99bf"><td class="memTemplParams" colspan="2">template&lt;ecs::EventTrait T&gt; </td></tr>
+<tr class="memitem:ad6681df779359dab3f63c0f7db7f99bf"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#ad6681df779359dab3f63c0f7db7f99bf">HasEvent</a> () const noexcept</td></tr>
+<tr class="memdesc:ad6681df779359dab3f63c0f7db7f99bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if an event type is registered in this sub-app.  <br /></td></tr>
+<tr class="separator:ad6681df779359dab3f63c0f7db7f99bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4f1c424bf407b7f63a7558d9b7e734a" id="r_ae4f1c424bf407b7f63a7558d9b7e734a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">IsUpdating</a> () const noexcept</td></tr>
+<tr class="memdesc:ae4f1c424bf407b7f63a7558d9b7e734a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the sub-app is currently updating.  <br /></td></tr>
+<tr class="separator:ae4f1c424bf407b7f63a7558d9b7e734a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a725248d88c8364a55ca5f136c1082b21" id="r_a725248d88c8364a55ca5f136c1082b21"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#a725248d88c8364a55ca5f136c1082b21">AllowsOverlappingUpdates</a> () const noexcept</td></tr>
+<tr class="memdesc:a725248d88c8364a55ca5f136c1082b21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if this sub-app allows overlapping updates.  <br /></td></tr>
+<tr class="separator:a725248d88c8364a55ca5f136c1082b21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e3e52d2fceddcb2b9907f41512ed5fa" id="r_a3e3e52d2fceddcb2b9907f41512ed5fa"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#a3e3e52d2fceddcb2b9907f41512ed5fa">SystemCount</a> () const noexcept</td></tr>
+<tr class="memdesc:a3e3e52d2fceddcb2b9907f41512ed5fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the total number of systems across all schedules.  <br /></td></tr>
+<tr class="separator:a3e3e52d2fceddcb2b9907f41512ed5fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a683f8a89e8f4af710febc7853e4b38b2" id="r_a683f8a89e8f4af710febc7853e4b38b2"><td class="memTemplParams" colspan="2">template&lt;ScheduleTrait S&gt; </td></tr>
+<tr class="memitem:a683f8a89e8f4af710febc7853e4b38b2"><td class="memTemplItemLeft" align="right" valign="top">size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#a683f8a89e8f4af710febc7853e4b38b2">SystemCount</a> (S schedule={}) const noexcept</td></tr>
+<tr class="memdesc:a683f8a89e8f4af710febc7853e4b38b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of systems in the specified schedule of this sub-app.  <br /></td></tr>
+<tr class="separator:a683f8a89e8f4af710febc7853e4b38b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0719550ca7a5d19e8c37950591aae8b6" id="r_a0719550ca7a5d19e8c37950591aae8b6"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classhelios_1_1ecs_1_1World.html">ecs::World</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#a0719550ca7a5d19e8c37950591aae8b6">GetWorld</a> () const noexcept</td></tr>
+<tr class="memdesc:a0719550ca7a5d19e8c37950591aae8b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets const reference to this sub-app's world.  <br /></td></tr>
+<tr class="separator:a0719550ca7a5d19e8c37950591aae8b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:a4097b3e04a4f8ece21f5abe1b10e6323" id="r_a4097b3e04a4f8ece21f5abe1b10e6323"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#a4097b3e04a4f8ece21f5abe1b10e6323">App</a></td></tr>
+<tr class="separator:a4097b3e04a4f8ece21f5abe1b10e6323"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4bf528779d9dd74c8c5cba3b2b434ca" id="r_ad4bf528779d9dd74c8c5cba3b2b434ca"><td class="memTemplParams" colspan="2">template&lt;ScheduleTrait Schedule, ecs::SystemTrait... Systems&gt; </td></tr>
+<tr class="memitem:ad4bf528779d9dd74c8c5cba3b2b434ca"><td class="memTemplItemLeft" align="right" valign="top">class&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#ad4bf528779d9dd74c8c5cba3b2b434ca">SystemConfig</a></td></tr>
+<tr class="separator:ad4bf528779d9dd74c8c5cba3b2b434ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e15c7dc905300f48ee7422061dcc726" id="r_a9e15c7dc905300f48ee7422061dcc726"><td class="memTemplParams" colspan="2">template&lt;ScheduleTrait Schedule, SystemSetTrait Set&gt; </td></tr>
+<tr class="memitem:a9e15c7dc905300f48ee7422061dcc726"><td class="memTemplItemLeft" align="right" valign="top">class&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#a9e15c7dc905300f48ee7422061dcc726">SystemSetConfig</a></td></tr>
+<tr class="separator:a9e15c7dc905300f48ee7422061dcc726"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A sub-application with its own ECS world, systems, and resources. </p>
+<p><a class="el" href="classhelios_1_1app_1_1SubApp.html" title="A sub-application with its own ECS world, systems, and resources.">SubApp</a> encapsulates an ECS world and manages its own systems and resources. It allows for modular separation of functionality within an application, such as having distinct simulation and rendering sub-apps. Each <a class="el" href="classhelios_1_1app_1_1SubApp.html" title="A sub-application with its own ECS world, systems, and resources.">SubApp</a> can have its own execution schedules and can extract data from a main world if needed.</p>
+<p>SubApps can be added to the main <a class="el" href="classhelios_1_1app_1_1App.html" title="Application class.">App</a> instance and can be updated independently. They support adding modules that can register their own systems and resources.</p>
+<dl class="section note"><dt>Note</dt><dd>Not thread-safe. Use AllowOverlappingUpdates() trait for controlled concurrent access. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00166">166</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a8f7f06ffb86bd69104b976d86d78be70" name="a8f7f06ffb86bd69104b976d86d78be70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f7f06ffb86bd69104b976d86d78be70">&#9670;&#160;</a></span>ExtractFn</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classhelios_1_1app_1_1SubApp.html#a8f7f06ffb86bd69104b976d86d78be70">helios::app::SubApp::ExtractFn</a> =  std::move_only_function&lt;void(const <a class="el" href="classhelios_1_1ecs_1_1World.html">ecs::World</a>&amp;, <a class="el" href="classhelios_1_1ecs_1_1World.html">ecs::World</a>&amp;)&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a5">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00168">168</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="af34c92ca8902efdf3c48359bd77c5564" name="af34c92ca8902efdf3c48359bd77c5564"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af34c92ca8902efdf3c48359bd77c5564">&#9670;&#160;</a></span>SubApp() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::app::SubApp::SubApp </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a6">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<a id="a97e261a8fdad2b345bf2bb019ce96aa5" name="a97e261a8fdad2b345bf2bb019ce96aa5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97e261a8fdad2b345bf2bb019ce96aa5">&#9670;&#160;</a></span>SubApp() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::app::SubApp::SubApp </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1app_1_1SubApp.html">SubApp</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad969682e451d9147341e81d14aa644bc" name="ad969682e451d9147341e81d14aa644bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad969682e451d9147341e81d14aa644bc">&#9670;&#160;</a></span>SubApp() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::app::SubApp::SubApp </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1SubApp.html">SubApp</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00482">482</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  483</span>    : world_(std::move(other.world_)),</div>
+<div class="line"><span class="lineno">  484</span>      scheduler_(std::move(other.scheduler_)),</div>
+<div class="line"><span class="lineno">  485</span>      extract_fn_(std::move(other.extract_fn_)),</div>
+<div class="line"><span class="lineno">  486</span>      is_updating_(other.is_updating_.load(std::memory_order_acquire)),</div>
+<div class="line"><span class="lineno">  487</span>      graphs_built_(other.graphs_built_),</div>
+<div class="line"><span class="lineno">  488</span>      allow_overlapping_updates_(other.allow_overlapping_updates_),</div>
+<div class="line"><span class="lineno">  489</span>      max_overlapping_updates_(other.max_overlapping_updates_),</div>
+<div class="line"><span class="lineno">  490</span>      current_overlapping_updates_(other.current_overlapping_updates_.load(std::memory_order_acquire)) {}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a6b63984ca3a70b53fd5f9f3a80bce94c" name="a6b63984ca3a70b53fd5f9f3a80bce94c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b63984ca3a70b53fd5f9f3a80bce94c">&#9670;&#160;</a></span>~SubApp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::app::SubApp::~SubApp </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a7">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ad164b16e44905604ac6ac9d12f81c9cc" name="ad164b16e44905604ac6ac9d12f81c9cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad164b16e44905604ac6ac9d12f81c9cc">&#9670;&#160;</a></span>AddEvent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ecs::EventTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::app::SubApp::AddEvent </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Registers an event type for use in this sub-app. </p>
+<p>Events must be registered before they can be written or read. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if sub app is updating. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Event type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a23">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00332">332</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  332</span>                  {</div>
+<div class="line"><span class="lineno">  333</span>    world_.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#aec4ef048e20d0d51e907617d997d6e12">AddEvent</a>&lt;T&gt;();</div>
+<div class="line"><span class="lineno">  334</span>  }</div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_aec4ef048e20d0d51e907617d997d6e12"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#aec4ef048e20d0d51e907617d997d6e12">helios::ecs::World::AddEvent</a></div><div class="ttdeci">void AddEvent()</div><div class="ttdoc">Registers an event type for use.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00967">world.hpp:967</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a95c9361adc75fe8893e473c53ab17020" name="a95c9361adc75fe8893e473c53ab17020"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95c9361adc75fe8893e473c53ab17020">&#9670;&#160;</a></span>AddEvents()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ecs::EventTrait... Events&gt; <br />
+requires (sizeof...(Events) &gt; 1)</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::app::SubApp::AddEvents </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Registers multiple event types for use in this sub-app. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if sub app is updating. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Events</td><td>Event types to register </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a25">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00343">343</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  343</span>                   {</div>
+<div class="line"><span class="lineno">  344</span>    world_.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#a1522c30fb211a9bca6fa64ffa9331ed9">AddEvents</a>&lt;Events...&gt;();</div>
+<div class="line"><span class="lineno">  345</span>  }</div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_a1522c30fb211a9bca6fa64ffa9331ed9"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#a1522c30fb211a9bca6fa64ffa9331ed9">helios::ecs::World::AddEvents</a></div><div class="ttdeci">void AddEvents()</div><div class="ttdoc">Registers multiple event types for use.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00451">world.hpp:451</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a1ee8bf566a65f6d7212a8c2e34fc5d8a" name="a1ee8bf566a65f6d7212a8c2e34fc5d8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ee8bf566a65f6d7212a8c2e34fc5d8a">&#9670;&#160;</a></span>AddSystem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ecs::SystemTrait T, ScheduleTrait S&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::app::SubApp::AddSystem </td>
+          <td>(</td>
+          <td class="paramtype">S&#160;</td>
+          <td class="paramname"><em>schedule</em> = <code>{}</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Adds a system to the specified schedule in the sub-app. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if sub app is updating. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>System type </td></tr>
+    <tr><td class="paramname">S</td><td>Schedule type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">schedule</td><td>Schedule to add system to </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a14">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00590">590</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  590</span>                                        {</div>
+<div class="line"><span class="lineno">  591</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!<a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">IsUpdating</a>(), <span class="stringliteral">&quot;Failed to add system &#39;{}&#39;: Cannot add systems while app is running!&quot;</span>,</div>
+<div class="line"><span class="lineno">  592</span>                <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ecs::SystemNameOf&lt;T&gt;</a>());</div>
+<div class="line"><span class="lineno">  593</span> </div>
+<div class="line"><span class="lineno">  594</span>  <span class="keywordflow">if</span> (ContainsSystem&lt;T&gt;(schedule)) [[unlikely]] {</div>
+<div class="line"><span class="lineno">  595</span>    <a class="code hl_define" href="logger_8hpp.html#abee1a45a543b16109f05136a9771e86c">HELIOS_WARN</a>(<span class="stringliteral">&quot;System &#39;{}&#39; is already exist in app schedule &#39;{}&#39;!&quot;</span>, <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ecs::SystemNameOf&lt;T&gt;</a>(), ScheduleNameOf&lt;S&gt;());</div>
+<div class="line"><span class="lineno">  596</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  597</span>  }</div>
+<div class="line"><span class="lineno">  598</span> </div>
+<div class="line"><span class="lineno">  599</span>  scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#a6c5e6be3d5fbf6d7a7c215470a3a820e">AddSystem</a>&lt;T&gt;(schedule);</div>
+<div class="line"><span class="lineno">  600</span>  graphs_built_ = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  601</span>}</div>
+<div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00149">assert.hpp:149</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_ae4f1c424bf407b7f63a7558d9b7e734a"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">helios::app::SubApp::IsUpdating</a></div><div class="ttdeci">bool IsUpdating() const noexcept</div><div class="ttdoc">Checks if the sub-app is currently updating.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00415">sub_app.hpp:415</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1details_1_1Scheduler_html_a6c5e6be3d5fbf6d7a7c215470a3a820e"><div class="ttname"><a href="classhelios_1_1app_1_1details_1_1Scheduler.html#a6c5e6be3d5fbf6d7a7c215470a3a820e">helios::app::details::Scheduler::AddSystem</a></div><div class="ttdeci">void AddSystem(S schedule={})</div><div class="ttdoc">Adds a system to the specified schedule.</div><div class="ttdef"><b>Definition</b> <a href="scheduler_8hpp_source.html#l00522">scheduler.hpp:522</a></div></div>
+<div class="ttc" id="alogger_8hpp_html_abee1a45a543b16109f05136a9771e86c"><div class="ttname"><a href="logger_8hpp.html#abee1a45a543b16109f05136a9771e86c">HELIOS_WARN</a></div><div class="ttdeci">#define HELIOS_WARN(...)</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00687">logger.hpp:687</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_af0384de48d847585fcb340c71c231e5e"><div class="ttname"><a href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, Allocator, Components... &gt; Query</div><div class="ttdoc">Type alias for query with mutable world access.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02515">query.hpp:2515</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aa76b8b43b9d1266dcec6085a795d6151" name="aa76b8b43b9d1266dcec6085a795d6151"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa76b8b43b9d1266dcec6085a795d6151">&#9670;&#160;</a></span>AddSystemBuilder()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ecs::SystemTrait T, ScheduleTrait S&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::app::SubApp::AddSystemBuilder </td>
+          <td>(</td>
+          <td class="paramtype">S&#160;</td>
+          <td class="paramname"><em>schedule</em> = <code>{}</code></td><td>)</td>
+          <td> -&gt; <a class="el" href="classhelios_1_1app_1_1SystemConfig.html">SystemConfig</a>&lt;S, T&gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Adds a single system with fluent configuration builder. </p>
+<p>Returns a builder that allows chaining configuration methods. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if sub app is updating. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>System type to add </td></tr>
+    <tr><td class="paramname">S</td><td>Schedule type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">schedule</td><td>Schedule to add system to </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1app_1_1SystemConfig.html">SystemConfig</a> builder for fluent configuration </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a17">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00620">620</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  620</span>                                                                     {</div>
+<div class="line"><span class="lineno">  621</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!<a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">IsUpdating</a>(), <span class="stringliteral">&quot;Failed to add system &#39;{}&#39;: Cannot add systems while app is running!&quot;</span>,</div>
+<div class="line"><span class="lineno">  622</span>                <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ecs::SystemNameOf&lt;T&gt;</a>());</div>
+<div class="line"><span class="lineno">  623</span>  <span class="keywordflow">return</span> SystemConfig&lt;S, T&gt;(*<span class="keyword">this</span>, schedule);</div>
+<div class="line"><span class="lineno">  624</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a2f6a2470fcd801394f2f271847c96e73" name="a2f6a2470fcd801394f2f271847c96e73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f6a2470fcd801394f2f271847c96e73">&#9670;&#160;</a></span>AddSystems()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ecs::SystemTrait... Systems, ScheduleTrait S&gt; <br />
+requires (sizeof...(Systems) &gt; 1 &amp;&amp; utils::UniqueTypes&lt;Systems...&gt;)</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::app::SubApp::AddSystems </td>
+          <td>(</td>
+          <td class="paramtype">S&#160;</td>
+          <td class="paramname"><em>schedule</em> = <code>{}</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Adds multiple systems to the specified schedule in the sub-app. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if sub app is updating. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Systems</td><td>System types </td></tr>
+    <tr><td class="paramname">S</td><td>Schedule type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">schedule</td><td>Schedule to add systems to </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a15">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00605">605</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  605</span>                                         {</div>
+<div class="line"><span class="lineno">  606</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!<a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">IsUpdating</a>(), <span class="stringliteral">&quot;Failed to add systems: Cannot add systems while app is running!&quot;</span>);</div>
+<div class="line"><span class="lineno">  607</span> </div>
+<div class="line"><span class="lineno">  608</span>  (scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#a6c5e6be3d5fbf6d7a7c215470a3a820e">AddSystem</a>&lt;Systems&gt;(schedule), ...);</div>
+<div class="line"><span class="lineno">  609</span>  graphs_built_ = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  610</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aba4e0931d272a67e4ab82e9b89747070" name="aba4e0931d272a67e4ab82e9b89747070"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba4e0931d272a67e4ab82e9b89747070">&#9670;&#160;</a></span>AddSystemsBuilder()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ecs::SystemTrait... Systems, ScheduleTrait S&gt; <br />
+requires (sizeof...(Systems) &gt; 0 &amp;&amp; utils::UniqueTypes&lt;Systems...&gt;)</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::app::SubApp::AddSystemsBuilder </td>
+          <td>(</td>
+          <td class="paramtype">S&#160;</td>
+          <td class="paramname"><em>schedule</em> = <code>{}</code></td><td>)</td>
+          <td> -&gt; <a class="el" href="classhelios_1_1app_1_1SystemConfig.html">SystemConfig</a>&lt;S, Systems...&gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a16">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00614">614</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  614</span>                                                                               {</div>
+<div class="line"><span class="lineno">  615</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!<a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">IsUpdating</a>(), <span class="stringliteral">&quot;Failed to add systems: Cannot add systems while app is running!&quot;</span>);</div>
+<div class="line"><span class="lineno">  616</span>  <span class="keywordflow">return</span> <a class="code hl_friend" href="classhelios_1_1app_1_1SubApp.html#ad4bf528779d9dd74c8c5cba3b2b434ca">SystemConfig</a>&lt;S, Systems...&gt;(*<span class="keyword">this</span>, schedule);</div>
+<div class="line"><span class="lineno">  617</span>}</div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_ad4bf528779d9dd74c8c5cba3b2b434ca"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#ad4bf528779d9dd74c8c5cba3b2b434ca">helios::app::SubApp::SystemConfig</a></div><div class="ttdeci">friend class SystemConfig</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00476">sub_app.hpp:476</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a725248d88c8364a55ca5f136c1082b21" name="a725248d88c8364a55ca5f136c1082b21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a725248d88c8364a55ca5f136c1082b21">&#9670;&#160;</a></span>AllowsOverlappingUpdates()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::app::SubApp::AllowsOverlappingUpdates </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if this sub-app allows overlapping updates. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if overlapping updates are allowed, false otherwise </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a37">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00421">421</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  421</span>{ <span class="keywordflow">return</span> allow_overlapping_updates_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a3bfacc59ee772d08b4467eaf44407d91" name="a3bfacc59ee772d08b4467eaf44407d91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3bfacc59ee772d08b4467eaf44407d91">&#9670;&#160;</a></span>BuildScheduler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::app::SubApp::BuildScheduler </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Builds execution graphs for all schedules. </p>
+<p>Should be called after all systems are added and before first execution. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if sub app is updating. </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a11">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00570">570</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  570</span>                                   {</div>
+<div class="line"><span class="lineno">  571</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!<a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">IsUpdating</a>(), <span class="stringliteral">&quot;Failed to build scheduler: Cannot build while app is running!&quot;</span>);</div>
+<div class="line"><span class="lineno">  572</span> </div>
+<div class="line"><span class="lineno">  573</span>  scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#ab5db06cba2f0d7a47c8503417ac55116">BuildAllGraphs</a>(world_);</div>
+<div class="line"><span class="lineno">  574</span>  graphs_built_ = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  575</span>}</div>
+<div class="ttc" id="aclasshelios_1_1app_1_1details_1_1Scheduler_html_ab5db06cba2f0d7a47c8503417ac55116"><div class="ttname"><a href="classhelios_1_1app_1_1details_1_1Scheduler.html#ab5db06cba2f0d7a47c8503417ac55116">helios::app::details::Scheduler::BuildAllGraphs</a></div><div class="ttdeci">void BuildAllGraphs(ecs::World &amp;world)</div><div class="ttdoc">Builds execution graphs for all schedules.</div><div class="ttdef"><b>Definition</b> <a href="scheduler_8cpp_source.html#l00060">scheduler.cpp:60</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a025e14a168fd6d551bcb97612eb30a8b" name="a025e14a168fd6d551bcb97612eb30a8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a025e14a168fd6d551bcb97612eb30a8b">&#9670;&#160;</a></span>Clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::app::SubApp::Clear </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Clears the sub-app, removing all data. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if sub app is updating. </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2app_8hpp-example.html#a46">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/app.hpp</a>, and <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a9">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00507">507</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  507</span>                          {</div>
+<div class="line"><span class="lineno">  508</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!<a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">IsUpdating</a>(), <span class="stringliteral">&quot;Failed to clear sub app: Cannot clear while app is running!&quot;</span>);</div>
+<div class="line"><span class="lineno">  509</span> </div>
+<div class="line"><span class="lineno">  510</span>  world_.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#ae59ec4dcf9819c1dcfdca9e4de4c8cbc">Clear</a>();</div>
+<div class="line"><span class="lineno">  511</span>  scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#a4b7893fedb3bcbef1716e364afc902cc">Clear</a>();</div>
+<div class="line"><span class="lineno">  512</span>  extract_fn_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  513</span>  graphs_built_ = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  514</span>}</div>
+<div class="ttc" id="aclasshelios_1_1app_1_1details_1_1Scheduler_html_a4b7893fedb3bcbef1716e364afc902cc"><div class="ttname"><a href="classhelios_1_1app_1_1details_1_1Scheduler.html#a4b7893fedb3bcbef1716e364afc902cc">helios::app::details::Scheduler::Clear</a></div><div class="ttdeci">void Clear()</div><div class="ttdoc">Clears all schedules and systems.</div><div class="ttdef"><b>Definition</b> <a href="scheduler_8hpp_source.html#l00465">scheduler.hpp:465</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_ae59ec4dcf9819c1dcfdca9e4de4c8cbc"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#ae59ec4dcf9819c1dcfdca9e4de4c8cbc">helios::ecs::World::Clear</a></div><div class="ttdeci">void Clear()</div><div class="ttdoc">Clears the world, removing all data.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00645">world.hpp:645</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a5edba91c2595bfb399e93a83395a0b3c" name="a5edba91c2595bfb399e93a83395a0b3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5edba91c2595bfb399e93a83395a0b3c">&#9670;&#160;</a></span>ConfigureSet()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;SystemSetTrait Set, ScheduleTrait S&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::app::SubApp::ConfigureSet </td>
+          <td>(</td>
+          <td class="paramtype">S&#160;</td>
+          <td class="paramname"><em>schedule</em> = <code>{}</code></td><td>)</td>
+          <td> -&gt; <a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html">SystemSetConfig</a>&lt;S, Set&gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a18">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00627">627</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  627</span>                                                                      {</div>
+<div class="line"><span class="lineno">  628</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!<a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">IsUpdating</a>(), <span class="stringliteral">&quot;Failed to configure set &#39;{}&#39;: Cannot configure sets while app is running!&quot;</span>,</div>
+<div class="line"><span class="lineno">  629</span>                SystemSetNameOf&lt;Set&gt;());</div>
+<div class="line"><span class="lineno">  630</span>  <span class="keywordflow">return</span> SystemSetConfig&lt;S, Set&gt;(*<span class="keyword">this</span>, schedule);</div>
+<div class="line"><span class="lineno">  631</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a467a8144c1510e02d2d41a49212449c9" name="a467a8144c1510e02d2d41a49212449c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a467a8144c1510e02d2d41a49212449c9">&#9670;&#160;</a></span>ContainsSystem() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ecs::SystemTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::app::SubApp::ContainsSystem </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if a system of type T is in any schedule. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>System type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if system is present, false otherwise </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2app_8hpp-example.html#a30">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/app.hpp</a>, and <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a30">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00375">375</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  375</span>                                                     {</div>
+<div class="line"><span class="lineno">  376</span>    <span class="keywordflow">return</span> scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#a1b18d24f232e7f455eb401aec2b4956e">ContainsSystem</a>&lt;T&gt;();</div>
+<div class="line"><span class="lineno">  377</span>  }</div>
+<div class="ttc" id="aclasshelios_1_1app_1_1details_1_1Scheduler_html_a1b18d24f232e7f455eb401aec2b4956e"><div class="ttname"><a href="classhelios_1_1app_1_1details_1_1Scheduler.html#a1b18d24f232e7f455eb401aec2b4956e">helios::app::details::Scheduler::ContainsSystem</a></div><div class="ttdeci">bool ContainsSystem() const noexcept</div><div class="ttdoc">Checks if a system of type T is in any schedule.</div><div class="ttdef"><b>Definition</b> <a href="scheduler_8hpp_source.html#l00730">scheduler.hpp:730</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a2bfbe583cc6e53cc80fb46d7d770dee2" name="a2bfbe583cc6e53cc80fb46d7d770dee2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2bfbe583cc6e53cc80fb46d7d770dee2">&#9670;&#160;</a></span>ContainsSystem() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ecs::SystemTrait T, ScheduleTrait S&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::app::SubApp::ContainsSystem </td>
+          <td>(</td>
+          <td class="paramtype">S&#160;</td>
+          <td class="paramname"><em>schedule</em> = <code>{}</code></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if a system of type T is in the specified schedule. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>System type </td></tr>
+    <tr><td class="paramname">S</td><td>Schedule type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">schedule</td><td>Schedule to check </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if system is present, false otherwise </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00387">387</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  387</span>                                                 {}) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><span class="lineno">  388</span>    <span class="keywordflow">return</span> scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#a1b18d24f232e7f455eb401aec2b4956e">ContainsSystem</a>&lt;T&gt;(schedule);</div>
+<div class="line"><span class="lineno">  389</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aff197636c67071536cf78e6c2a8321a5" name="aff197636c67071536cf78e6c2a8321a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff197636c67071536cf78e6c2a8321a5">&#9670;&#160;</a></span>EmplaceResource()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ecs::ResourceTrait T, typename... Args&gt; <br />
+requires std::constructible_from&lt;T, Args...&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::app::SubApp::EmplaceResource </td>
+          <td>(</td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Emplaces a resource into the sub-app's world. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if sub app is updating. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Resource type </td></tr>
+    <tr><td class="paramname">Args</td><td>Constructor argument types </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">args</td><td>Arguments to forward to resource constructor </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a21">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00321">321</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  321</span>                                       {</div>
+<div class="line"><span class="lineno">  322</span>    world_.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#a2f993d9701beec843b3925befc340356">EmplaceResource</a>&lt;T&gt;(std::forward&lt;Args&gt;(args)...);</div>
+<div class="line"><span class="lineno">  323</span>  }</div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_a2f993d9701beec843b3925befc340356"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#a2f993d9701beec843b3925befc340356">helios::ecs::World::EmplaceResource</a></div><div class="ttdeci">void EmplaceResource(Args &amp;&amp;... args)</div><div class="ttdoc">Emplaces a resource in-place.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00352">world.hpp:352</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aa8ccc9179adbfc1a53cdf99e3486e2a7" name="aa8ccc9179adbfc1a53cdf99e3486e2a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8ccc9179adbfc1a53cdf99e3486e2a7">&#9670;&#160;</a></span>ExecuteSchedule()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ScheduleTrait S&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::app::SubApp::ExecuteSchedule </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1async_1_1Executor.html">async::Executor</a> &amp;&#160;</td>
+          <td class="paramname"><em>executor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">S&#160;</td>
+          <td class="paramname"><em>schedule</em> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Executes a specific schedule. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if scheduler was not built. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">S</td><td>Schedule type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">executor</td><td>Async executor for parallel execution </td></tr>
+    <tr><td class="paramname">schedule</td><td>Schedule to execute </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a12">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00578">578</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  578</span>                                                                {</div>
+<div class="line"><span class="lineno">  579</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(graphs_built_, <span class="stringliteral">&quot;Failed to execute schedule: Scheduler must be built before update!&quot;</span>);</div>
+<div class="line"><span class="lineno">  580</span>  scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#a14e8ff4d0b8752dc89c76929fa416179">ExecuteSchedule</a>&lt;S&gt;(world_, executor);</div>
+<div class="line"><span class="lineno">  581</span>}</div>
+<div class="ttc" id="aclasshelios_1_1app_1_1details_1_1Scheduler_html_a14e8ff4d0b8752dc89c76929fa416179"><div class="ttname"><a href="classhelios_1_1app_1_1details_1_1Scheduler.html#a14e8ff4d0b8752dc89c76929fa416179">helios::app::details::Scheduler::ExecuteSchedule</a></div><div class="ttdeci">void ExecuteSchedule(ecs::World &amp;world, async::Executor &amp;executor)</div><div class="ttdoc">Executes all systems in the specified schedule.</div><div class="ttdef"><b>Definition</b> <a href="scheduler_8hpp_source.html#l00545">scheduler.hpp:545</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a9b72bbe2ffa2c7b5c2ad2abe4e002c65" name="a9b72bbe2ffa2c7b5c2ad2abe4e002c65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b72bbe2ffa2c7b5c2ad2abe4e002c65">&#9670;&#160;</a></span>ExecuteStage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;StageTrait S&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::app::SubApp::ExecuteStage </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1async_1_1Executor.html">async::Executor</a> &amp;&#160;</td>
+          <td class="paramname"><em>executor</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Executes all schedules in a specific stage. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if scheduler was not built. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">S</td><td>Stage type (must satisfy StageTrait) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">executor</td><td>Async executor for parallel execution </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a13">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00584">584</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  584</span>                                                        {</div>
+<div class="line"><span class="lineno">  585</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(graphs_built_, <span class="stringliteral">&quot;Failed to execute stage: Scheduler must be built before update!&quot;</span>);</div>
+<div class="line"><span class="lineno">  586</span>  scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#acc68bc227ef3255668e285bb0efcc62d">ExecuteStage</a>&lt;S&gt;(world_, executor);</div>
+<div class="line"><span class="lineno">  587</span>}</div>
+<div class="ttc" id="aclasshelios_1_1app_1_1details_1_1Scheduler_html_acc68bc227ef3255668e285bb0efcc62d"><div class="ttname"><a href="classhelios_1_1app_1_1details_1_1Scheduler.html#acc68bc227ef3255668e285bb0efcc62d">helios::app::details::Scheduler::ExecuteStage</a></div><div class="ttdeci">void ExecuteStage(ecs::World &amp;world, async::Executor &amp;executor)</div><div class="ttdoc">Executes all schedules in the specified stage.</div><div class="ttdef"><b>Definition</b> <a href="scheduler_8hpp_source.html#l00578">scheduler.hpp:578</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a6a492a98348b7e7fa15f3b2a21d97bd4" name="a6a492a98348b7e7fa15f3b2a21d97bd4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a492a98348b7e7fa15f3b2a21d97bd4">&#9670;&#160;</a></span>Extract()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::app::SubApp::Extract </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1ecs_1_1World.html">ecs::World</a> &amp;&#160;</td>
+          <td class="paramname"><em>main_world</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Extracts data from the main world into this sub-app. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if sub app is updating. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">main_world</td><td>Const reference to the main world to extract data from </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a10">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00562">562</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  562</span>                                                      {</div>
+<div class="line"><span class="lineno">  563</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!<a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">IsUpdating</a>(), <span class="stringliteral">&quot;Failed to extract: Cannot extract while app is running!&quot;</span>);</div>
+<div class="line"><span class="lineno">  564</span> </div>
+<div class="line"><span class="lineno">  565</span>  <span class="keywordflow">if</span> (extract_fn_) {</div>
+<div class="line"><span class="lineno">  566</span>    extract_fn_(main_world, world_);</div>
+<div class="line"><span class="lineno">  567</span>  }</div>
+<div class="line"><span class="lineno">  568</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a0719550ca7a5d19e8c37950591aae8b6" name="a0719550ca7a5d19e8c37950591aae8b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0719550ca7a5d19e8c37950591aae8b6">&#9670;&#160;</a></span>GetWorld()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classhelios_1_1ecs_1_1World.html">ecs::World</a> &amp; helios::app::SubApp::GetWorld </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets const reference to this sub-app's world. </p>
+<dl class="section return"><dt>Returns</dt><dd>Const reference to the ECS world </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2app_8hpp-example.html#a43">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/app.hpp</a>, and <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a40">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00444">444</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  444</span>{ <span class="keywordflow">return</span> world_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ad6681df779359dab3f63c0f7db7f99bf" name="ad6681df779359dab3f63c0f7db7f99bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6681df779359dab3f63c0f7db7f99bf">&#9670;&#160;</a></span>HasEvent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ecs::EventTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::app::SubApp::HasEvent </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if an event type is registered in this sub-app. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Event type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if event type is registered, false otherwise </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2app_8hpp-example.html#a36">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/app.hpp</a>, and <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a34">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00407">407</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  407</span>                                               {</div>
+<div class="line"><span class="lineno">  408</span>    <span class="keywordflow">return</span> world_.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#a1631e7cf7bfb4533997958cc08fa7ef3">HasEvent</a>&lt;T&gt;();</div>
+<div class="line"><span class="lineno">  409</span>  }</div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_a1631e7cf7bfb4533997958cc08fa7ef3"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#a1631e7cf7bfb4533997958cc08fa7ef3">helios::ecs::World::HasEvent</a></div><div class="ttdeci">bool HasEvent() const</div><div class="ttdoc">Checks if a event registered.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00545">world.hpp:545</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="adef2bc054c090aab68496520cec63717" name="adef2bc054c090aab68496520cec63717"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adef2bc054c090aab68496520cec63717">&#9670;&#160;</a></span>HasResource()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ecs::ResourceTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::app::SubApp::HasResource </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if a resource of type T exists in this sub-app. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Resource type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if resource exists, false otherwise </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2app_8hpp-example.html#a34">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/app.hpp</a>, and <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a32">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00397">397</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  397</span>                                                  {</div>
+<div class="line"><span class="lineno">  398</span>    <span class="keywordflow">return</span> world_.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#a36499296d4e35d0784b402f6ca500d73">HasResource</a>&lt;T&gt;();</div>
+<div class="line"><span class="lineno">  399</span>  }</div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_a36499296d4e35d0784b402f6ca500d73"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#a36499296d4e35d0784b402f6ca500d73">helios::ecs::World::HasResource</a></div><div class="ttdeci">bool HasResource() const</div><div class="ttdoc">Checks if a resource exists.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00534">world.hpp:534</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ad4cb961f9069f51f3af81311794816af" name="ad4cb961f9069f51f3af81311794816af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4cb961f9069f51f3af81311794816af">&#9670;&#160;</a></span>InsertResource()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ecs::ResourceTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::app::SubApp::InsertResource </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&amp;&#160;</td>
+          <td class="paramname"><em>resource</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Inserts a resource into the sub-app's world. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if sub app is updating. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Resource type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">resource</td><td>Resource to insert </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a19">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00308">308</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  308</span>                                    {</div>
+<div class="line"><span class="lineno">  309</span>    world_.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#a5f966712c2bbcfb2d037e82106b55bf9">InsertResource</a>(std::forward&lt;T&gt;(resource));</div>
+<div class="line"><span class="lineno">  310</span>  }</div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_a5f966712c2bbcfb2d037e82106b55bf9"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#a5f966712c2bbcfb2d037e82106b55bf9">helios::ecs::World::InsertResource</a></div><div class="ttdeci">void InsertResource(T &amp;&amp;resource)</div><div class="ttdoc">Inserts a resource into the world.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00327">world.hpp:327</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ae4f1c424bf407b7f63a7558d9b7e734a" name="ae4f1c424bf407b7f63a7558d9b7e734a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4f1c424bf407b7f63a7558d9b7e734a">&#9670;&#160;</a></span>IsUpdating()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::app::SubApp::IsUpdating </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if the sub-app is currently updating. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if update is in progress, false otherwise </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a36">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00415">415</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  415</span>{ <span class="keywordflow">return</span> is_updating_.load(std::memory_order_acquire); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a5c480be3b750f30315116d9869e25eed" name="a5c480be3b750f30315116d9869e25eed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c480be3b750f30315116d9869e25eed">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1SubApp.html">SubApp</a> &amp; helios::app::SubApp::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1app_1_1SubApp.html">SubApp</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a8">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<a id="a51a3dc5c6d822d277b9eab9cb0c567aa" name="a51a3dc5c6d822d277b9eab9cb0c567aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51a3dc5c6d822d277b9eab9cb0c567aa">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1SubApp.html">SubApp</a> &amp; helios::app::SubApp::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1SubApp.html">SubApp</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00492">492</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  492</span>                                                        {</div>
+<div class="line"><span class="lineno">  493</span>  <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;other) {</div>
+<div class="line"><span class="lineno">  494</span>    world_ = std::move(other.world_);</div>
+<div class="line"><span class="lineno">  495</span>    scheduler_ = std::move(other.scheduler_);</div>
+<div class="line"><span class="lineno">  496</span>    extract_fn_ = std::move(other.extract_fn_);</div>
+<div class="line"><span class="lineno">  497</span>    is_updating_.store(other.is_updating_.load(std::memory_order_acquire), std::memory_order_release);</div>
+<div class="line"><span class="lineno">  498</span>    graphs_built_ = other.graphs_built_;</div>
+<div class="line"><span class="lineno">  499</span>    allow_overlapping_updates_ = other.allow_overlapping_updates_;</div>
+<div class="line"><span class="lineno">  500</span>    max_overlapping_updates_ = other.max_overlapping_updates_;</div>
+<div class="line"><span class="lineno">  501</span>    current_overlapping_updates_.store(other.current_overlapping_updates_.load(std::memory_order_acquire),</div>
+<div class="line"><span class="lineno">  502</span>                                       std::memory_order_release);</div>
+<div class="line"><span class="lineno">  503</span>  }</div>
+<div class="line"><span class="lineno">  504</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><span class="lineno">  505</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a1420267640572362b84bdbfeac733e53" name="a1420267640572362b84bdbfeac733e53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1420267640572362b84bdbfeac733e53">&#9670;&#160;</a></span>SetAllowOverlappingUpdates()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::app::SubApp::SetAllowOverlappingUpdates </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>allow</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets whether this sub-app allows overlapping updates. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">allow</td><td>True to allow concurrent updates, false otherwise </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a28">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00361">361</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  361</span>{ allow_overlapping_updates_ = allow; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a347b80bbfd7f8dbff669ec58aebede85" name="a347b80bbfd7f8dbff669ec58aebede85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a347b80bbfd7f8dbff669ec58aebede85">&#9670;&#160;</a></span>SetExtractFunction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::app::SubApp::SetExtractFunction </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1SubApp.html#a8f7f06ffb86bd69104b976d86d78be70">ExtractFn</a>&#160;</td>
+          <td class="paramname"><em>extract_fn</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets custom extraction function for this sub-app. </p>
+<p>The extraction function is called before the sub-app's <a class="el" href="structhelios_1_1app_1_1Update.html" title="Update schedule - main update logic.">Update</a> to copy data from the main world. This is useful for example for render sub-app that need to extract transform, mesh, and camera data from the main simulation world. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">extract_fn</td><td>Function that takes main world and sub-app world references </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a27">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00355">355</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  355</span>{ extract_fn_ = std::move(extract_fn); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ae0d03b1930977cb8c89557f3e89c5cbd" name="ae0d03b1930977cb8c89557f3e89c5cbd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0d03b1930977cb8c89557f3e89c5cbd">&#9670;&#160;</a></span>SetMaxOverlappingUpdates()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::app::SubApp::SetMaxOverlappingUpdates </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>max</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the maximum number of overlapping updates. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">max</td><td>Maximum number of concurrent updates (0 = unlimited) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a29">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00367">367</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  367</span>{ max_overlapping_updates_ = max; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a3e3e52d2fceddcb2b9907f41512ed5fa" name="a3e3e52d2fceddcb2b9907f41512ed5fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e3e52d2fceddcb2b9907f41512ed5fa">&#9670;&#160;</a></span>SystemCount() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t helios::app::SubApp::SystemCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the total number of systems across all schedules. </p>
+<dl class="section return"><dt>Returns</dt><dd>Total number of systems </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2app_8hpp-example.html#a39">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/app.hpp</a>, and <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a38">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00427">427</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  427</span>{ <span class="keywordflow">return</span> scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#ae064d1c0777b4f80d1db19f2647384df">SystemCount</a>(); }</div>
+<div class="ttc" id="aclasshelios_1_1app_1_1details_1_1Scheduler_html_ae064d1c0777b4f80d1db19f2647384df"><div class="ttname"><a href="classhelios_1_1app_1_1details_1_1Scheduler.html#ae064d1c0777b4f80d1db19f2647384df">helios::app::details::Scheduler::SystemCount</a></div><div class="ttdeci">size_t SystemCount() const noexcept</div><div class="ttdoc">Gets the total number of systems across all schedules.</div><div class="ttdef"><b>Definition</b> <a href="scheduler_8hpp_source.html#l00333">scheduler.hpp:333</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a683f8a89e8f4af710febc7853e4b38b2" name="a683f8a89e8f4af710febc7853e4b38b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a683f8a89e8f4af710febc7853e4b38b2">&#9670;&#160;</a></span>SystemCount() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ScheduleTrait S&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t helios::app::SubApp::SystemCount </td>
+          <td>(</td>
+          <td class="paramtype">S&#160;</td>
+          <td class="paramname"><em>schedule</em> = <code>{}</code></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the number of systems in the specified schedule of this sub-app. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">S</td><td>Schedule type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">schedule</td><td>Schedule to query </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Number of systems in the schedule </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00436">436</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  436</span>                                                {}) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><span class="lineno">  437</span>    <span class="keywordflow">return</span> scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#ae064d1c0777b4f80d1db19f2647384df">SystemCount</a>(schedule);</div>
+<div class="line"><span class="lineno">  438</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a191f625d927932ab72b7b28dd5412665" name="a191f625d927932ab72b7b28dd5412665"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a191f625d927932ab72b7b28dd5412665">&#9670;&#160;</a></span>Update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::app::SubApp::Update </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1async_1_1Executor.html">async::Executor</a> &amp;&#160;</td>
+          <td class="paramname"><em>executor</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Updates this sub-app by executing all scheduled systems. </p>
+<p>This method checks the updating flag to prevent concurrent updates when overlapping updates are not allowed. SubApps with AllowOverlappingUpdates() can bypass this check. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if scheduler was not built. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">executor</td><td>Async executor for parallel execution </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a47">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00516">516</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  516</span>                                                  {</div>
+<div class="line"><span class="lineno">  517</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(graphs_built_, <span class="stringliteral">&quot;Failed to update sub app: Scheduler must be built before update!&quot;</span>);</div>
+<div class="line"><span class="lineno">  518</span> </div>
+<div class="line"><span class="lineno">  519</span>  <span class="keywordflow">if</span> (!allow_overlapping_updates_) {</div>
+<div class="line"><span class="lineno">  520</span>    <span class="comment">// Enforce single update at a time</span></div>
+<div class="line"><span class="lineno">  521</span>    <span class="keywordtype">bool</span> expected = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  522</span>    <span class="keywordflow">if</span> (!is_updating_.compare_exchange_strong(expected, <span class="keyword">true</span>, std::memory_order_acq_rel)) {</div>
+<div class="line"><span class="lineno">  523</span>      <a class="code hl_define" href="logger_8hpp.html#a5ee2b388c5e1155f8aa9f680e3b8cf3b">HELIOS_ERROR</a>(<span class="stringliteral">&quot;Failed to update sub app: Overlapping updates not allowed!&quot;</span>);</div>
+<div class="line"><span class="lineno">  524</span>      <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  525</span>    }</div>
+<div class="line"><span class="lineno">  526</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  527</span>    <span class="comment">// Track overlapping updates if limit is set</span></div>
+<div class="line"><span class="lineno">  528</span>    <span class="keywordflow">if</span> (max_overlapping_updates_ &gt; 0) {</div>
+<div class="line"><span class="lineno">  529</span>      <span class="keywordtype">size_t</span> current = current_overlapping_updates_.fetch_add(1, std::memory_order_acq_rel);</div>
+<div class="line"><span class="lineno">  530</span>      <span class="keywordflow">if</span> (current &gt;= max_overlapping_updates_) {</div>
+<div class="line"><span class="lineno">  531</span>        current_overlapping_updates_.fetch_sub(1, std::memory_order_acq_rel);</div>
+<div class="line"><span class="lineno">  532</span>        <a class="code hl_define" href="logger_8hpp.html#abee1a45a543b16109f05136a9771e86c">HELIOS_WARN</a>(<span class="stringliteral">&quot;Failed to update sub app: Max overlapping updates ({}) reached!&quot;</span>, max_overlapping_updates_);</div>
+<div class="line"><span class="lineno">  533</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  534</span>      }</div>
+<div class="line"><span class="lineno">  535</span>    }</div>
+<div class="line"><span class="lineno">  536</span> </div>
+<div class="line"><span class="lineno">  537</span>    is_updating_.store(<span class="keyword">true</span>, std::memory_order_release);</div>
+<div class="line"><span class="lineno">  538</span>  }</div>
+<div class="line"><span class="lineno">  539</span> </div>
+<div class="line"><span class="lineno">  540</span>  <span class="comment">// Execute all stages in order (StartUpStage only runs during Initialize, not Update)</span></div>
+<div class="line"><span class="lineno">  541</span>  scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#acc68bc227ef3255668e285bb0efcc62d">ExecuteStage</a>&lt;MainStage&gt;(world_, executor);</div>
+<div class="line"><span class="lineno">  542</span>  scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#acc68bc227ef3255668e285bb0efcc62d">ExecuteStage</a>&lt;UpdateStage&gt;(world_, executor);</div>
+<div class="line"><span class="lineno">  543</span>  scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#acc68bc227ef3255668e285bb0efcc62d">ExecuteStage</a>&lt;CleanUpStage&gt;(world_, executor);</div>
+<div class="line"><span class="lineno">  544</span> </div>
+<div class="line"><span class="lineno">  545</span>  <span class="comment">// Merge all deferred commands into world after execution</span></div>
+<div class="line"><span class="lineno">  546</span>  scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#a75a24d4f384fa24c487684f608e5d647">MergeCommandsToWorld</a>(world_);</div>
+<div class="line"><span class="lineno">  547</span> </div>
+<div class="line"><span class="lineno">  548</span>  <span class="comment">// Execute all commands (create entities, add/remove components, etc.)</span></div>
+<div class="line"><span class="lineno">  549</span>  world_.Update();</div>
+<div class="line"><span class="lineno">  550</span> </div>
+<div class="line"><span class="lineno">  551</span>  <span class="comment">// Reset all per-system frame allocators to reclaim temporary memory</span></div>
+<div class="line"><span class="lineno">  552</span>  scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#ae4b1ac6c638ac3de40c15057aa67c556">ResetFrameAllocators</a>();</div>
+<div class="line"><span class="lineno">  553</span> </div>
+<div class="line"><span class="lineno">  554</span>  <span class="comment">// Clear update flags</span></div>
+<div class="line"><span class="lineno">  555</span>  <span class="keywordflow">if</span> (allow_overlapping_updates_ &amp;&amp; max_overlapping_updates_ &gt; 0) {</div>
+<div class="line"><span class="lineno">  556</span>    current_overlapping_updates_.fetch_sub(1, std::memory_order_acq_rel);</div>
+<div class="line"><span class="lineno">  557</span>  }</div>
+<div class="line"><span class="lineno">  558</span> </div>
+<div class="line"><span class="lineno">  559</span>  is_updating_.store(<span class="keyword">false</span>, std::memory_order_release);</div>
+<div class="line"><span class="lineno">  560</span>}</div>
+<div class="ttc" id="aclasshelios_1_1app_1_1details_1_1Scheduler_html_a75a24d4f384fa24c487684f608e5d647"><div class="ttname"><a href="classhelios_1_1app_1_1details_1_1Scheduler.html#a75a24d4f384fa24c487684f608e5d647">helios::app::details::Scheduler::MergeCommandsToWorld</a></div><div class="ttdeci">void MergeCommandsToWorld(ecs::World &amp;world)</div><div class="ttdoc">Merges all system local commands into the world's main command queue.</div><div class="ttdef"><b>Definition</b> <a href="scheduler_8hpp_source.html#l00562">scheduler.hpp:562</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1details_1_1Scheduler_html_ae4b1ac6c638ac3de40c15057aa67c556"><div class="ttname"><a href="classhelios_1_1app_1_1details_1_1Scheduler.html#ae4b1ac6c638ac3de40c15057aa67c556">helios::app::details::Scheduler::ResetFrameAllocators</a></div><div class="ttdeci">void ResetFrameAllocators() noexcept</div><div class="ttdoc">Resets all system frame allocators.</div><div class="ttdef"><b>Definition</b> <a href="scheduler_8hpp_source.html#l00571">scheduler.hpp:571</a></div></div>
+<div class="ttc" id="alogger_8hpp_html_a5ee2b388c5e1155f8aa9f680e3b8cf3b"><div class="ttname"><a href="logger_8hpp.html#a5ee2b388c5e1155f8aa9f680e3b8cf3b">HELIOS_ERROR</a></div><div class="ttdeci">#define HELIOS_ERROR(...)</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00689">logger.hpp:689</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Symbol Documentation</h2>
+<a id="a4097b3e04a4f8ece21f5abe1b10e6323" name="a4097b3e04a4f8ece21f5abe1b10e6323"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4097b3e04a4f8ece21f5abe1b10e6323">&#9670;&#160;</a></span>App</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend class <a class="el" href="classhelios_1_1app_1_1App.html">App</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a41">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00472">472</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ad4bf528779d9dd74c8c5cba3b2b434ca" name="ad4bf528779d9dd74c8c5cba3b2b434ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4bf528779d9dd74c8c5cba3b2b434ca">&#9670;&#160;</a></span>SystemConfig</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ScheduleTrait Schedule, ecs::SystemTrait... Systems&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend class <a class="el" href="classhelios_1_1app_1_1SystemConfig.html">SystemConfig</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a42">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00476">476</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a9e15c7dc905300f48ee7422061dcc726" name="a9e15c7dc905300f48ee7422061dcc726"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e15c7dc905300f48ee7422061dcc726">&#9670;&#160;</a></span>SystemSetConfig</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ScheduleTrait Schedule, SystemSetTrait Set&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend class <a class="el" href="classhelios_1_1app_1_1SystemSetConfig.html">SystemSetConfig</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a43">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00479">479</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehelios.html">helios</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1app.html">app</a></li><li class="navelem"><a class="el" href="classhelios_1_1app_1_1SubApp.html">SubApp</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

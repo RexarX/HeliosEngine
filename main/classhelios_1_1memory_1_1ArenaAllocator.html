@@ -1,0 +1,1138 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: helios::memory::ArenaAllocator Class Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classhelios_1_1memory_1_1ArenaAllocator.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classhelios_1_1memory_1_1ArenaAllocator-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">helios::memory::ArenaAllocator Class Reference<span class="mlabels"><span class="mlabel">final</span></span></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Lock-free, thread-safe arena allocator.  
+ <a href="classhelios_1_1memory_1_1ArenaAllocator.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a2e04bfa7aa8c179e9e90bfb404df505a" id="r_a2e04bfa7aa8c179e9e90bfb404df505a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1ArenaAllocator.html#a2e04bfa7aa8c179e9e90bfb404df505a">ArenaAllocator</a> (void *buffer, size_t size) noexcept</td></tr>
+<tr class="memdesc:a2e04bfa7aa8c179e9e90bfb404df505a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs an arena allocator over an existing buffer.  <br /></td></tr>
+<tr class="separator:a2e04bfa7aa8c179e9e90bfb404df505a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25a34f5187f1d199b0571e4d1c49e400" id="r_a25a34f5187f1d199b0571e4d1c49e400"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1ArenaAllocator.html#a25a34f5187f1d199b0571e4d1c49e400">ArenaAllocator</a> (const <a class="el" href="classhelios_1_1memory_1_1ArenaAllocator.html">ArenaAllocator</a> &amp;)=delete</td></tr>
+<tr class="separator:a25a34f5187f1d199b0571e4d1c49e400"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8908e981d32f11a05fb15da62b681256" id="r_a8908e981d32f11a05fb15da62b681256"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1ArenaAllocator.html#a8908e981d32f11a05fb15da62b681256">ArenaAllocator</a> (<a class="el" href="classhelios_1_1memory_1_1ArenaAllocator.html">ArenaAllocator</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="separator:a8908e981d32f11a05fb15da62b681256"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fa759e4c7a15a75da1b4af21d498d39" id="r_a0fa759e4c7a15a75da1b4af21d498d39"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1ArenaAllocator.html#a0fa759e4c7a15a75da1b4af21d498d39">~ArenaAllocator</a> () noexcept=default</td></tr>
+<tr class="separator:a0fa759e4c7a15a75da1b4af21d498d39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75915b3798191dd116c62369fcac4afb" id="r_a75915b3798191dd116c62369fcac4afb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1memory_1_1ArenaAllocator.html">ArenaAllocator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1ArenaAllocator.html#a75915b3798191dd116c62369fcac4afb">operator=</a> (const <a class="el" href="classhelios_1_1memory_1_1ArenaAllocator.html">ArenaAllocator</a> &amp;)=delete</td></tr>
+<tr class="separator:a75915b3798191dd116c62369fcac4afb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a862de8de10b4e4b4ef80a42cb75df0ae" id="r_a862de8de10b4e4b4ef80a42cb75df0ae"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1memory_1_1ArenaAllocator.html">ArenaAllocator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1ArenaAllocator.html#a862de8de10b4e4b4ef80a42cb75df0ae">operator=</a> (<a class="el" href="classhelios_1_1memory_1_1ArenaAllocator.html">ArenaAllocator</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="separator:a862de8de10b4e4b4ef80a42cb75df0ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f0b7e9b7737ab7ec0df639826773420" id="r_a7f0b7e9b7737ab7ec0df639826773420"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structhelios_1_1memory_1_1AllocationResult.html">AllocationResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1ArenaAllocator.html#a7f0b7e9b7737ab7ec0df639826773420">Allocate</a> (size_t size, size_t alignment=<a class="el" href="namespacehelios_1_1memory.html#a14c84d27b0af2a3d13d38b2d9f6225c4">kDefaultAlignment</a>) noexcept</td></tr>
+<tr class="memdesc:a7f0b7e9b7737ab7ec0df639826773420"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocates a block of memory from the arena.  <br /></td></tr>
+<tr class="separator:a7f0b7e9b7737ab7ec0df639826773420"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ee0e3149c4499e1fbd2f47628053b15" id="r_a1ee0e3149c4499e1fbd2f47628053b15"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a1ee0e3149c4499e1fbd2f47628053b15"><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1ArenaAllocator.html#a1ee0e3149c4499e1fbd2f47628053b15">Allocate</a> () noexcept</td></tr>
+<tr class="separator:a1ee0e3149c4499e1fbd2f47628053b15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ae1bb3f11fb623257dab7ad145c3eef" id="r_a0ae1bb3f11fb623257dab7ad145c3eef"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a0ae1bb3f11fb623257dab7ad145c3eef"><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1ArenaAllocator.html#a0ae1bb3f11fb623257dab7ad145c3eef">Allocate</a> (size_t count) noexcept</td></tr>
+<tr class="separator:a0ae1bb3f11fb623257dab7ad145c3eef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80b07abb68fa116395a53120275a59ea" id="r_a80b07abb68fa116395a53120275a59ea"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... Args&gt; <br />
+requires std::constructible_from&lt;T, Args...&gt;</td></tr>
+<tr class="memitem:a80b07abb68fa116395a53120275a59ea"><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1ArenaAllocator.html#a80b07abb68fa116395a53120275a59ea">AllocateAndConstruct</a> (Args &amp;&amp;... args) noexcept(std::is_nothrow_constructible_v&lt; T, Args... &gt;)</td></tr>
+<tr class="separator:a80b07abb68fa116395a53120275a59ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a794480395a3b0003243f23aa148d4149" id="r_a794480395a3b0003243f23aa148d4149"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; <br />
+requires std::default_initializable&lt;T&gt;</td></tr>
+<tr class="memitem:a794480395a3b0003243f23aa148d4149"><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1ArenaAllocator.html#a794480395a3b0003243f23aa148d4149">AllocateAndConstructArray</a> (size_t count) noexcept(std::is_nothrow_default_constructible_v&lt; T &gt;)</td></tr>
+<tr class="separator:a794480395a3b0003243f23aa148d4149"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af881a06ca47b627626ba66974ea22e0a" id="r_af881a06ca47b627626ba66974ea22e0a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1ArenaAllocator.html#af881a06ca47b627626ba66974ea22e0a">Deallocate</a> (const void *) noexcept</td></tr>
+<tr class="memdesc:af881a06ca47b627626ba66974ea22e0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deallocation is a no-op.  <br /></td></tr>
+<tr class="separator:af881a06ca47b627626ba66974ea22e0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a080fc7f9b087557b8d2128dedb482eed" id="r_a080fc7f9b087557b8d2128dedb482eed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1ArenaAllocator.html#a080fc7f9b087557b8d2128dedb482eed">Reset</a> () noexcept</td></tr>
+<tr class="memdesc:a080fc7f9b087557b8d2128dedb482eed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the arena, freeing all allocations.  <br /></td></tr>
+<tr class="separator:a080fc7f9b087557b8d2128dedb482eed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3915081bfcc9f3213bd56c865e48fef7" id="r_a3915081bfcc9f3213bd56c865e48fef7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1ArenaAllocator.html#a3915081bfcc9f3213bd56c865e48fef7">Empty</a> () const noexcept</td></tr>
+<tr class="memdesc:a3915081bfcc9f3213bd56c865e48fef7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the arena is empty.  <br /></td></tr>
+<tr class="separator:a3915081bfcc9f3213bd56c865e48fef7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f3ba3b3372096543c83fac0070c3f1c" id="r_a1f3ba3b3372096543c83fac0070c3f1c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1ArenaAllocator.html#a1f3ba3b3372096543c83fac0070c3f1c">Full</a> () const noexcept</td></tr>
+<tr class="memdesc:a1f3ba3b3372096543c83fac0070c3f1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the arena is full.  <br /></td></tr>
+<tr class="separator:a1f3ba3b3372096543c83fac0070c3f1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3475785b001f0793c15dbbbe2bbcac7d" id="r_a3475785b001f0793c15dbbbe2bbcac7d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structhelios_1_1memory_1_1AllocatorStats.html">AllocatorStats</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1ArenaAllocator.html#a3475785b001f0793c15dbbbe2bbcac7d">Stats</a> () const noexcept</td></tr>
+<tr class="memdesc:a3475785b001f0793c15dbbbe2bbcac7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets current allocator statistics.  <br /></td></tr>
+<tr class="separator:a3475785b001f0793c15dbbbe2bbcac7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96e2a4447321bc24c946d4eb64121763" id="r_a96e2a4447321bc24c946d4eb64121763"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1ArenaAllocator.html#a96e2a4447321bc24c946d4eb64121763">Capacity</a> () const noexcept</td></tr>
+<tr class="memdesc:a96e2a4447321bc24c946d4eb64121763"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the total capacity of the arena.  <br /></td></tr>
+<tr class="separator:a96e2a4447321bc24c946d4eb64121763"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fdd1308e0fee8e139227a67c59d841a" id="r_a9fdd1308e0fee8e139227a67c59d841a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1ArenaAllocator.html#a9fdd1308e0fee8e139227a67c59d841a">CurrentOffset</a> () const noexcept</td></tr>
+<tr class="memdesc:a9fdd1308e0fee8e139227a67c59d841a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the current offset (amount of memory used).  <br /></td></tr>
+<tr class="separator:a9fdd1308e0fee8e139227a67c59d841a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32ec85e7444b99ac4e19119c692bed0d" id="r_a32ec85e7444b99ac4e19119c692bed0d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1ArenaAllocator.html#a32ec85e7444b99ac4e19119c692bed0d">FreeSpace</a> () const noexcept</td></tr>
+<tr class="memdesc:a32ec85e7444b99ac4e19119c692bed0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the amount of free space remaining.  <br /></td></tr>
+<tr class="separator:a32ec85e7444b99ac4e19119c692bed0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9771b50add2e1abd60961654d94d0b37" id="r_a9771b50add2e1abd60961654d94d0b37"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1ArenaAllocator.html#a9771b50add2e1abd60961654d94d0b37">Data</a> () noexcept</td></tr>
+<tr class="memdesc:a9771b50add2e1abd60961654d94d0b37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the raw backing buffer pointer.  <br /></td></tr>
+<tr class="separator:a9771b50add2e1abd60961654d94d0b37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a873e17f6c8bd9167ac6582fd63a2046a" id="r_a873e17f6c8bd9167ac6582fd63a2046a"><td class="memItemLeft" align="right" valign="top">const void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1memory_1_1ArenaAllocator.html#a873e17f6c8bd9167ac6582fd63a2046a">Data</a> () const noexcept</td></tr>
+<tr class="memdesc:a873e17f6c8bd9167ac6582fd63a2046a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the raw backing buffer pointer (const).  <br /></td></tr>
+<tr class="separator:a873e17f6c8bd9167ac6582fd63a2046a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Lock-free, thread-safe arena allocator. </p>
+<p>Arena allocator that allocates from a pre-allocated buffer using a bump-pointer strategy. All allocations are performed with lock-free atomic operations on an internal offset.</p>
+<p>Memory is released only when the arena is reset, which is an O(1) operation. Individual deallocations are not supported.</p>
+<p>This allocator is suitable for use as a backing allocator for higher level systems that require fast, thread-safe allocation with predictable lifetime.</p>
+<p>All operations that modify the arena state (<code>Allocate</code>, <code>Reset</code>) use atomic operations. <code>Reset</code> is not safe to call concurrently with <code>Allocate</code> and must be externally synchronized when used in that way.</p>
+<dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd><code>Reset</code> must not be used concurrently with active allocations. The caller is responsible for enforcing this invariant. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00035">35</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a2e04bfa7aa8c179e9e90bfb404df505a" name="a2e04bfa7aa8c179e9e90bfb404df505a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e04bfa7aa8c179e9e90bfb404df505a">&#9670;&#160;</a></span>ArenaAllocator() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::memory::ArenaAllocator::ArenaAllocator </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructs an arena allocator over an existing buffer. </p>
+<p>The caller provides a raw buffer and its size. The buffer must remain valid for the entire lifetime of the allocator. Alignment guarantees are provided up to <code>kDefaultAlignment</code> (or higher alignment if the buffer itself is appropriately aligned).</p>
+<p>The allocator does not take ownership of the buffer and will not free it.</p>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if:<ul>
+<li>buffer is nullptr but size is non-zero.</li>
+<li>size is 0.</li>
+<li>buffer is not aligned to <code>kMinAlignment</code>.</li>
+</ul>
+</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buffer</td><td>Pointer to the backing memory buffer. </td></tr>
+    <tr><td class="paramname">size</td><td>Size of the buffer in bytes. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2arena_allocator_8hpp-example.html#a15">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/arena_allocator.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00225">225</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  225</span>                                                                        : buffer_(buffer), capacity_(size) {</div>
+<div class="line"><span class="lineno">  226</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(size &gt; 0, <span class="stringliteral">&quot;Failed to construct ArenaAllocator: size must be greater than 0!&quot;</span>);</div>
+<div class="line"><span class="lineno">  227</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(buffer != <span class="keyword">nullptr</span>, <span class="stringliteral">&quot;Failed to construct ArenaAllocator: buffer must not be nullptr!&quot;</span>);</div>
+<div class="line"><span class="lineno">  228</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="namespacehelios_1_1memory.html#a02a3db47d40247d1a3769cd533ad6d3d">CalculatePadding</a>(buffer_, <a class="code hl_variable" href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">kMinAlignment</a>) == 0,</div>
+<div class="line"><span class="lineno">  229</span>                <span class="stringliteral">&quot;Failed to construct ArenaAllocator: buffer must be at least {}-byte aligned!&quot;</span>, <a class="code hl_variable" href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">kMinAlignment</a>);</div>
+<div class="line"><span class="lineno">  230</span> </div>
+<div class="line"><span class="lineno">  231</span>  offset_.store(0, std::memory_order_release);</div>
+<div class="line"><span class="lineno">  232</span>  peak_offset_.store(0, std::memory_order_release);</div>
+<div class="line"><span class="lineno">  233</span>  allocation_count_.store(0, std::memory_order_release);</div>
+<div class="line"><span class="lineno">  234</span>  alignment_waste_.store(0, std::memory_order_release);</div>
+<div class="line"><span class="lineno">  235</span>}</div>
+<div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00149">assert.hpp:149</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_a02a3db47d40247d1a3769cd533ad6d3d"><div class="ttname"><a href="namespacehelios_1_1memory.html#a02a3db47d40247d1a3769cd533ad6d3d">helios::memory::CalculatePadding</a></div><div class="ttdeci">size_t CalculatePadding(const void *ptr, size_t alignment) noexcept</div><div class="ttdoc">Calculate padding needed for alignment.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00131">allocator_traits.hpp:131</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_a4b4f9ed5e1cf5fe81a0ccbdb6991395a"><div class="ttname"><a href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">helios::memory::kMinAlignment</a></div><div class="ttdeci">constexpr size_t kMinAlignment</div><div class="ttdoc">Minimum alignment for any allocation.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00082">allocator_traits.hpp:82</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a25a34f5187f1d199b0571e4d1c49e400" name="a25a34f5187f1d199b0571e4d1c49e400"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25a34f5187f1d199b0571e4d1c49e400">&#9670;&#160;</a></span>ArenaAllocator() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::memory::ArenaAllocator::ArenaAllocator </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1memory_1_1ArenaAllocator.html">ArenaAllocator</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8908e981d32f11a05fb15da62b681256" name="a8908e981d32f11a05fb15da62b681256"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8908e981d32f11a05fb15da62b681256">&#9670;&#160;</a></span>ArenaAllocator() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::memory::ArenaAllocator::ArenaAllocator </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1memory_1_1ArenaAllocator.html">ArenaAllocator</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00237">237</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  238</span>    : buffer_(other.buffer_),</div>
+<div class="line"><span class="lineno">  239</span>      capacity_(other.capacity_),</div>
+<div class="line"><span class="lineno">  240</span>      offset_(other.offset_.load(std::memory_order_acquire)),</div>
+<div class="line"><span class="lineno">  241</span>      peak_offset_(other.peak_offset_.load(std::memory_order_acquire)),</div>
+<div class="line"><span class="lineno">  242</span>      allocation_count_(other.allocation_count_.load(std::memory_order_acquire)),</div>
+<div class="line"><span class="lineno">  243</span>      alignment_waste_(other.alignment_waste_.load(std::memory_order_acquire)) {</div>
+<div class="line"><span class="lineno">  244</span>  other.buffer_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  245</span>  other.capacity_ = 0;</div>
+<div class="line"><span class="lineno">  246</span>  other.offset_.store(0, std::memory_order_release);</div>
+<div class="line"><span class="lineno">  247</span>  other.peak_offset_.store(0, std::memory_order_release);</div>
+<div class="line"><span class="lineno">  248</span>  other.allocation_count_.store(0, std::memory_order_release);</div>
+<div class="line"><span class="lineno">  249</span>  other.alignment_waste_.store(0, std::memory_order_release);</div>
+<div class="line"><span class="lineno">  250</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a0fa759e4c7a15a75da1b4af21d498d39" name="a0fa759e4c7a15a75da1b4af21d498d39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fa759e4c7a15a75da1b4af21d498d39">&#9670;&#160;</a></span>~ArenaAllocator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::memory::ArenaAllocator::~ArenaAllocator </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2arena_allocator_8hpp-example.html#a0">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/arena_allocator.hpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a1ee0e3149c4499e1fbd2f47628053b15" name="a1ee0e3149c4499e1fbd2f47628053b15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ee0e3149c4499e1fbd2f47628053b15">&#9670;&#160;</a></span>Allocate() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T * helios::memory::ArenaAllocator::Allocate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2arena_allocator_8hpp-example.html#a2">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/arena_allocator.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00351">351</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  351</span>                                            {</div>
+<div class="line"><span class="lineno">  352</span>  <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> size = <span class="keyword">sizeof</span>(T);</div>
+<div class="line"><span class="lineno">  353</span>  <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> alignment = std::max(<span class="keyword">alignof</span>(T), <a class="code hl_variable" href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">kMinAlignment</a>);</div>
+<div class="line"><span class="lineno">  354</span>  <span class="keyword">auto</span> result = <a class="code hl_function" href="classhelios_1_1memory_1_1ArenaAllocator.html#a1ee0e3149c4499e1fbd2f47628053b15">Allocate</a>(size, alignment);</div>
+<div class="line"><span class="lineno">  355</span>  <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(result.ptr);</div>
+<div class="line"><span class="lineno">  356</span>}</div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1ArenaAllocator_html_a1ee0e3149c4499e1fbd2f47628053b15"><div class="ttname"><a href="classhelios_1_1memory_1_1ArenaAllocator.html#a1ee0e3149c4499e1fbd2f47628053b15">helios::memory::ArenaAllocator::Allocate</a></div><div class="ttdeci">T * Allocate() noexcept</div><div class="ttdef"><b>Definition</b> <a href="arena__allocator_8hpp_source.html#l00351">arena_allocator.hpp:351</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a0ae1bb3f11fb623257dab7ad145c3eef" name="a0ae1bb3f11fb623257dab7ad145c3eef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ae1bb3f11fb623257dab7ad145c3eef">&#9670;&#160;</a></span>Allocate() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T * helios::memory::ArenaAllocator::Allocate </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>count</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00359">359</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  359</span>                                                        {</div>
+<div class="line"><span class="lineno">  360</span>  <span class="keywordflow">if</span> (count == 0) [[unlikely]] {</div>
+<div class="line"><span class="lineno">  361</span>    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  362</span>  }</div>
+<div class="line"><span class="lineno">  363</span>  <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> alignment = std::max(<span class="keyword">alignof</span>(T), <a class="code hl_variable" href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">kMinAlignment</a>);</div>
+<div class="line"><span class="lineno">  364</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> size = <span class="keyword">sizeof</span>(T) * count;</div>
+<div class="line"><span class="lineno">  365</span>  <span class="keyword">auto</span> result = <a class="code hl_function" href="classhelios_1_1memory_1_1ArenaAllocator.html#a1ee0e3149c4499e1fbd2f47628053b15">Allocate</a>(size, alignment);</div>
+<div class="line"><span class="lineno">  366</span>  <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(result.ptr);</div>
+<div class="line"><span class="lineno">  367</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a7f0b7e9b7737ab7ec0df639826773420" name="a7f0b7e9b7737ab7ec0df639826773420"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f0b7e9b7737ab7ec0df639826773420">&#9670;&#160;</a></span>Allocate() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structhelios_1_1memory_1_1AllocationResult.html">AllocationResult</a> helios::memory::ArenaAllocator::Allocate </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>alignment</em> = <code><a class="el" href="namespacehelios_1_1memory.html#a14c84d27b0af2a3d13d38b2d9f6225c4">kDefaultAlignment</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Allocates a block of memory from the arena. </p>
+<p>Uses a lock-free bump-pointer with <code>compare_exchange_weak</code> to reserve space from the backing buffer. The returned memory is not initialized.</p>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion in next cases:<ul>
+<li>Alignment is not a power of 2.</li>
+<li>Alignment is less than <code>kMinAlignment</code>.</li>
+</ul>
+</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">size</td><td>Number of bytes to allocate. </td></tr>
+    <tr><td class="paramname">alignment</td><td>Alignment requirement (must be power of 2). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="structhelios_1_1memory_1_1AllocationResult.html" title="Result type for allocation operations.">AllocationResult</a> with pointer and size, or <code>{nullptr, 0}</code> on failure. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00274">274</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  274</span>                                                                                       {</div>
+<div class="line"><span class="lineno">  275</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="namespacehelios_1_1memory.html#a443dc78a3e9ae9f92bba519395020b3e">IsPowerOfTwo</a>(alignment), <span class="stringliteral">&quot;ArenaAllocator::Allocate failed: alignment must be power of 2, got &#39;{}&#39;!&quot;</span>,</div>
+<div class="line"><span class="lineno">  276</span>                alignment);</div>
+<div class="line"><span class="lineno">  277</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(alignment &gt;= <a class="code hl_variable" href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">kMinAlignment</a>,</div>
+<div class="line"><span class="lineno">  278</span>                <span class="stringliteral">&quot;ArenaAllocator::Allocate failed: alignment must be at least &#39;{}&#39;, got &#39;{}&#39;!&quot;</span>, <a class="code hl_variable" href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">kMinAlignment</a>,</div>
+<div class="line"><span class="lineno">  279</span>                alignment);</div>
+<div class="line"><span class="lineno">  280</span> </div>
+<div class="line"><span class="lineno">  281</span>  <span class="keywordflow">if</span> (size == 0) [[unlikely]] {</div>
+<div class="line"><span class="lineno">  282</span>    <span class="keywordflow">return</span> {.ptr = <span class="keyword">nullptr</span>, .allocated_size = 0};</div>
+<div class="line"><span class="lineno">  283</span>  }</div>
+<div class="line"><span class="lineno">  284</span> </div>
+<div class="line"><span class="lineno">  285</span>  <span class="comment">// Lock-free bump-pointer allocation.</span></div>
+<div class="line"><span class="lineno">  286</span>  <span class="keywordtype">size_t</span> current_offset = offset_.load(std::memory_order_acquire);</div>
+<div class="line"><span class="lineno">  287</span>  <span class="keywordtype">size_t</span> aligned_offset = 0;</div>
+<div class="line"><span class="lineno">  288</span>  <span class="keywordtype">size_t</span> new_offset = 0;</div>
+<div class="line"><span class="lineno">  289</span>  <span class="keywordtype">size_t</span> padding = 0;</div>
+<div class="line"><span class="lineno">  290</span> </div>
+<div class="line"><span class="lineno">  291</span>  <span class="keywordflow">do</span> {</div>
+<div class="line"><span class="lineno">  292</span>    <span class="keyword">auto</span>* current_ptr = <span class="keyword">static_cast&lt;</span>uint8_t*<span class="keyword">&gt;</span>(buffer_) + current_offset;</div>
+<div class="line"><span class="lineno">  293</span>    padding = <a class="code hl_function" href="namespacehelios_1_1memory.html#a02a3db47d40247d1a3769cd533ad6d3d">CalculatePadding</a>(current_ptr, alignment);</div>
+<div class="line"><span class="lineno">  294</span>    aligned_offset = current_offset + padding;</div>
+<div class="line"><span class="lineno">  295</span> </div>
+<div class="line"><span class="lineno">  296</span>    <span class="keywordflow">if</span> (aligned_offset + size &gt; capacity_) {</div>
+<div class="line"><span class="lineno">  297</span>      <span class="keywordflow">return</span> {.ptr = <span class="keyword">nullptr</span>, .allocated_size = 0};</div>
+<div class="line"><span class="lineno">  298</span>    }</div>
+<div class="line"><span class="lineno">  299</span> </div>
+<div class="line"><span class="lineno">  300</span>    new_offset = aligned_offset + size;</div>
+<div class="line"><span class="lineno">  301</span>  } <span class="keywordflow">while</span> (</div>
+<div class="line"><span class="lineno">  302</span>      !offset_.compare_exchange_weak(current_offset, new_offset, std::memory_order_release, std::memory_order_acquire));</div>
+<div class="line"><span class="lineno">  303</span> </div>
+<div class="line"><span class="lineno">  304</span>  allocation_count_.fetch_add(1, std::memory_order_relaxed);</div>
+<div class="line"><span class="lineno">  305</span>  alignment_waste_.fetch_add(padding, std::memory_order_relaxed);</div>
+<div class="line"><span class="lineno">  306</span> </div>
+<div class="line"><span class="lineno">  307</span>  <span class="keywordtype">size_t</span> current_peak = peak_offset_.load(std::memory_order_acquire);</div>
+<div class="line"><span class="lineno">  308</span>  <span class="keywordflow">while</span> (new_offset &gt; current_peak) {</div>
+<div class="line"><span class="lineno">  309</span>    <span class="keywordflow">if</span> (peak_offset_.compare_exchange_weak(current_peak, new_offset, std::memory_order_release,</div>
+<div class="line"><span class="lineno">  310</span>                                           std::memory_order_acquire)) {</div>
+<div class="line"><span class="lineno">  311</span>      <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  312</span>    }</div>
+<div class="line"><span class="lineno">  313</span>  }</div>
+<div class="line"><span class="lineno">  314</span> </div>
+<div class="line"><span class="lineno">  315</span>  <span class="keyword">auto</span>* result = <span class="keyword">static_cast&lt;</span>uint8_t*<span class="keyword">&gt;</span>(buffer_) + aligned_offset;</div>
+<div class="line"><span class="lineno">  316</span>  <span class="keywordflow">return</span> {.ptr = result, .allocated_size = size};</div>
+<div class="line"><span class="lineno">  317</span>}</div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_a443dc78a3e9ae9f92bba519395020b3e"><div class="ttname"><a href="namespacehelios_1_1memory.html#a443dc78a3e9ae9f92bba519395020b3e">helios::memory::IsPowerOfTwo</a></div><div class="ttdeci">constexpr bool IsPowerOfTwo(size_t size) noexcept</div><div class="ttdoc">Helper function to check if a size is a power of 2.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00121">allocator_traits.hpp:121</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a80b07abb68fa116395a53120275a59ea" name="a80b07abb68fa116395a53120275a59ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80b07abb68fa116395a53120275a59ea">&#9670;&#160;</a></span>AllocateAndConstruct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename... Args&gt; <br />
+requires std::constructible_from&lt;T, Args...&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T * helios::memory::ArenaAllocator::AllocateAndConstruct </td>
+          <td>(</td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2arena_allocator_8hpp-example.html#a4">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/arena_allocator.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00371">371</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  371</span>                                                                                                                 {</div>
+<div class="line"><span class="lineno">  372</span>  T* ptr = Allocate&lt;T&gt;();</div>
+<div class="line"><span class="lineno">  373</span>  <span class="keywordflow">if</span> (ptr != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><span class="lineno">  374</span>    ::new (<span class="keyword">static_cast&lt;</span><span class="keywordtype">void</span>*<span class="keyword">&gt;</span>(ptr)) T(std::forward&lt;Args&gt;(args)...);</div>
+<div class="line"><span class="lineno">  375</span>  }</div>
+<div class="line"><span class="lineno">  376</span>  <span class="keywordflow">return</span> ptr;</div>
+<div class="line"><span class="lineno">  377</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a794480395a3b0003243f23aa148d4149" name="a794480395a3b0003243f23aa148d4149"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a794480395a3b0003243f23aa148d4149">&#9670;&#160;</a></span>AllocateAndConstructArray()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; <br />
+requires std::default_initializable&lt;T&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T * helios::memory::ArenaAllocator::AllocateAndConstructArray </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>count</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2arena_allocator_8hpp-example.html#a5">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/arena_allocator.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00381">381</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  381</span>                                                                                                                   {</div>
+<div class="line"><span class="lineno">  382</span>  T* ptr = Allocate&lt;T&gt;(count);</div>
+<div class="line"><span class="lineno">  383</span>  <span class="keywordflow">if</span> (ptr != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><span class="lineno">  384</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; count; ++i) {</div>
+<div class="line"><span class="lineno">  385</span>      ::new (<span class="keyword">static_cast&lt;</span><span class="keywordtype">void</span>*<span class="keyword">&gt;</span>(ptr + i)) T{};</div>
+<div class="line"><span class="lineno">  386</span>    }</div>
+<div class="line"><span class="lineno">  387</span>  }</div>
+<div class="line"><span class="lineno">  388</span>  <span class="keywordflow">return</span> ptr;</div>
+<div class="line"><span class="lineno">  389</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a96e2a4447321bc24c946d4eb64121763" name="a96e2a4447321bc24c946d4eb64121763"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96e2a4447321bc24c946d4eb64121763">&#9670;&#160;</a></span>Capacity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t helios::memory::ArenaAllocator::Capacity </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the total capacity of the arena. </p>
+<dl class="section return"><dt>Returns</dt><dd>Capacity in bytes. </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2arena_allocator_8hpp-example.html#a11">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/arena_allocator.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00190">190</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  190</span>{ <span class="keywordflow">return</span> capacity_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a9fdd1308e0fee8e139227a67c59d841a" name="a9fdd1308e0fee8e139227a67c59d841a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fdd1308e0fee8e139227a67c59d841a">&#9670;&#160;</a></span>CurrentOffset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t helios::memory::ArenaAllocator::CurrentOffset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the current offset (amount of memory used). </p>
+<dl class="section return"><dt>Returns</dt><dd>Current offset in bytes. </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2arena_allocator_8hpp-example.html#a12">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/arena_allocator.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00196">196</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  196</span>{ <span class="keywordflow">return</span> offset_.load(std::memory_order_acquire); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a873e17f6c8bd9167ac6582fd63a2046a" name="a873e17f6c8bd9167ac6582fd63a2046a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a873e17f6c8bd9167ac6582fd63a2046a">&#9670;&#160;</a></span>Data() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const void * helios::memory::ArenaAllocator::Data </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the raw backing buffer pointer (const). </p>
+<dl class="section return"><dt>Returns</dt><dd>Const pointer to the beginning of the backing buffer. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00214">214</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  214</span>{ <span class="keywordflow">return</span> buffer_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a9771b50add2e1abd60961654d94d0b37" name="a9771b50add2e1abd60961654d94d0b37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9771b50add2e1abd60961654d94d0b37">&#9670;&#160;</a></span>Data() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * helios::memory::ArenaAllocator::Data </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the raw backing buffer pointer. </p>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to the beginning of the backing buffer. </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2arena_allocator_8hpp-example.html#a14">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/arena_allocator.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00208">208</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  208</span>{ <span class="keywordflow">return</span> buffer_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="af881a06ca47b627626ba66974ea22e0a" name="af881a06ca47b627626ba66974ea22e0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af881a06ca47b627626ba66974ea22e0a">&#9670;&#160;</a></span>Deallocate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::memory::ArenaAllocator::Deallocate </td>
+          <td>(</td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Deallocation is a no-op. </p>
+<p>Arena allocators do not support individual deallocation. Memory is released only via <code>Reset</code>. This function exists to satisfy generic allocator interfaces. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ptr</td><td>Pointer previously returned by <code>Allocate</code> (may be nullptr). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2arena_allocator_8hpp-example.html#a6">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/arena_allocator.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00155">155</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  155</span>{}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a3915081bfcc9f3213bd56c865e48fef7" name="a3915081bfcc9f3213bd56c865e48fef7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3915081bfcc9f3213bd56c865e48fef7">&#9670;&#160;</a></span>Empty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::memory::ArenaAllocator::Empty </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if the arena is empty. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if no allocations have been made since the last reset. </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2arena_allocator_8hpp-example.html#a8">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/arena_allocator.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00170">170</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  170</span>{ <span class="keywordflow">return</span> offset_.load(std::memory_order_acquire) == 0; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a32ec85e7444b99ac4e19119c692bed0d" name="a32ec85e7444b99ac4e19119c692bed0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32ec85e7444b99ac4e19119c692bed0d">&#9670;&#160;</a></span>FreeSpace()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t helios::memory::ArenaAllocator::FreeSpace </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the amount of free space remaining. </p>
+<dl class="section return"><dt>Returns</dt><dd>Free space in bytes. </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2arena_allocator_8hpp-example.html#a13">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/arena_allocator.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00345">345</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  345</span>                                                       {</div>
+<div class="line"><span class="lineno">  346</span>  <span class="keyword">const</span> <span class="keyword">auto</span> current = offset_.load(std::memory_order_acquire);</div>
+<div class="line"><span class="lineno">  347</span>  <span class="keywordflow">return</span> current &lt; capacity_ ? capacity_ - current : 0;</div>
+<div class="line"><span class="lineno">  348</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a1f3ba3b3372096543c83fac0070c3f1c" name="a1f3ba3b3372096543c83fac0070c3f1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f3ba3b3372096543c83fac0070c3f1c">&#9670;&#160;</a></span>Full()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::memory::ArenaAllocator::Full </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if the arena is full. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if no more allocations can be made without reset. </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2arena_allocator_8hpp-example.html#a9">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/arena_allocator.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00176">176</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  176</span>{ <span class="keywordflow">return</span> offset_.load(std::memory_order_acquire) &gt;= capacity_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a862de8de10b4e4b4ef80a42cb75df0ae" name="a862de8de10b4e4b4ef80a42cb75df0ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a862de8de10b4e4b4ef80a42cb75df0ae">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1memory_1_1ArenaAllocator.html">ArenaAllocator</a> &amp; helios::memory::ArenaAllocator::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1memory_1_1ArenaAllocator.html">ArenaAllocator</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00252">252</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  252</span>                                                                                {</div>
+<div class="line"><span class="lineno">  253</span>  <span class="keywordflow">if</span> (<span class="keyword">this</span> == &amp;other) [[unlikely]] {</div>
+<div class="line"><span class="lineno">  254</span>    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><span class="lineno">  255</span>  }</div>
+<div class="line"><span class="lineno">  256</span> </div>
+<div class="line"><span class="lineno">  257</span>  buffer_ = other.buffer_;</div>
+<div class="line"><span class="lineno">  258</span>  capacity_ = other.capacity_;</div>
+<div class="line"><span class="lineno">  259</span>  offset_.store(other.offset_.load(std::memory_order_acquire), std::memory_order_release);</div>
+<div class="line"><span class="lineno">  260</span>  peak_offset_.store(other.peak_offset_.load(std::memory_order_acquire), std::memory_order_release);</div>
+<div class="line"><span class="lineno">  261</span>  allocation_count_.store(other.allocation_count_.load(std::memory_order_acquire), std::memory_order_release);</div>
+<div class="line"><span class="lineno">  262</span>  alignment_waste_.store(other.alignment_waste_.load(std::memory_order_acquire), std::memory_order_release);</div>
+<div class="line"><span class="lineno">  263</span> </div>
+<div class="line"><span class="lineno">  264</span>  other.buffer_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  265</span>  other.capacity_ = 0;</div>
+<div class="line"><span class="lineno">  266</span>  other.offset_.store(0, std::memory_order_release);</div>
+<div class="line"><span class="lineno">  267</span>  other.peak_offset_.store(0, std::memory_order_release);</div>
+<div class="line"><span class="lineno">  268</span>  other.allocation_count_.store(0, std::memory_order_release);</div>
+<div class="line"><span class="lineno">  269</span>  other.alignment_waste_.store(0, std::memory_order_release);</div>
+<div class="line"><span class="lineno">  270</span> </div>
+<div class="line"><span class="lineno">  271</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><span class="lineno">  272</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a75915b3798191dd116c62369fcac4afb" name="a75915b3798191dd116c62369fcac4afb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75915b3798191dd116c62369fcac4afb">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1memory_1_1ArenaAllocator.html">ArenaAllocator</a> &amp; helios::memory::ArenaAllocator::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1memory_1_1ArenaAllocator.html">ArenaAllocator</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2arena_allocator_8hpp-example.html#a1">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/arena_allocator.hpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<a id="a080fc7f9b087557b8d2128dedb482eed" name="a080fc7f9b087557b8d2128dedb482eed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a080fc7f9b087557b8d2128dedb482eed">&#9670;&#160;</a></span>Reset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::memory::ArenaAllocator::Reset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Resets the arena, freeing all allocations. </p>
+<p>Sets the internal offset to zero and clears accounting statistics. This does not modify the contents of the underlying buffer. </p><dl class="section warning"><dt>Warning</dt><dd>Must not be called concurrently with <code>Allocate</code>. The caller must ensure there are no ongoing or future allocations that expect previous pointers to remain valid. </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2arena_allocator_8hpp-example.html#a7">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/arena_allocator.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00319">319</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  319</span>                                           {</div>
+<div class="line"><span class="lineno">  320</span>  offset_.store(0, std::memory_order_release);</div>
+<div class="line"><span class="lineno">  321</span>  alignment_waste_.store(0, std::memory_order_release);</div>
+<div class="line"><span class="lineno">  322</span>  allocation_count_.store(0, std::memory_order_release);</div>
+<div class="line"><span class="lineno">  323</span>  <span class="comment">// We intentionally keep peak_offset_ to track high-water mark over lifetime.</span></div>
+<div class="line"><span class="lineno">  324</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a3475785b001f0793c15dbbbe2bbcac7d" name="a3475785b001f0793c15dbbbe2bbcac7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3475785b001f0793c15dbbbe2bbcac7d">&#9670;&#160;</a></span>Stats()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structhelios_1_1memory_1_1AllocatorStats.html">AllocatorStats</a> helios::memory::ArenaAllocator::Stats </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets current allocator statistics. </p>
+<p>Statistics are updated in a relaxed manner and are not guaranteed to be perfectly precise under heavy contention, but are sufficient for profiling and diagnostics. </p><dl class="section return"><dt>Returns</dt><dd><a class="el" href="structhelios_1_1memory_1_1AllocatorStats.html" title="Statistics for tracking allocator usage.">AllocatorStats</a> with current usage information. </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2arena_allocator_8hpp-example.html#a10">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/arena_allocator.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00326">326</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  326</span>                                                           {</div>
+<div class="line"><span class="lineno">  327</span>  <span class="keyword">const</span> <span class="keyword">auto</span> current_offset = offset_.load(std::memory_order_acquire);</div>
+<div class="line"><span class="lineno">  328</span>  <span class="keyword">const</span> <span class="keyword">auto</span> peak = peak_offset_.load(std::memory_order_acquire);</div>
+<div class="line"><span class="lineno">  329</span>  <span class="keyword">const</span> <span class="keyword">auto</span> alloc_count = allocation_count_.load(std::memory_order_acquire);</div>
+<div class="line"><span class="lineno">  330</span>  <span class="keyword">const</span> <span class="keyword">auto</span> waste = alignment_waste_.load(std::memory_order_acquire);</div>
+<div class="line"><span class="lineno">  331</span> </div>
+<div class="line"><span class="lineno">  332</span>  <span class="comment">// In an arena, we conceptually &quot;free&quot; everything on reset, but we do not track per-block frees.</span></div>
+<div class="line"><span class="lineno">  333</span>  <span class="comment">// total_freed is modeled as 0; deallocations count remains 0 because `Deallocate` is a no-op.</span></div>
+<div class="line"><span class="lineno">  334</span>  <span class="keywordflow">return</span> {</div>
+<div class="line"><span class="lineno">  335</span>      .total_allocated = current_offset,</div>
+<div class="line"><span class="lineno">  336</span>      .total_freed = 0,</div>
+<div class="line"><span class="lineno">  337</span>      .peak_usage = peak,</div>
+<div class="line"><span class="lineno">  338</span>      .allocation_count = alloc_count,</div>
+<div class="line"><span class="lineno">  339</span>      .total_allocations = alloc_count,</div>
+<div class="line"><span class="lineno">  340</span>      .total_deallocations = 0,</div>
+<div class="line"><span class="lineno">  341</span>      .alignment_waste = waste,</div>
+<div class="line"><span class="lineno">  342</span>  };</div>
+<div class="line"><span class="lineno">  343</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehelios.html">helios</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1memory.html">memory</a></li><li class="navelem"><a class="el" href="classhelios_1_1memory_1_1ArenaAllocator.html">ArenaAllocator</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

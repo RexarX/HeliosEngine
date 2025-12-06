@@ -1,0 +1,569 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: helios::utils::FastPimpl&lt; T, Size, Alignment, RequireStrictMatch &gt; Class Template Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classhelios_1_1utils_1_1FastPimpl.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classhelios_1_1utils_1_1FastPimpl-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">helios::utils::FastPimpl&lt; T, Size, Alignment, RequireStrictMatch &gt; Class Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Implements pimpl idiom without dynamic memory allocation.  
+ <a href="classhelios_1_1utils_1_1FastPimpl.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="fast__pimpl_8hpp_source.html">fast_pimpl.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a51ee60cffe35527a1037861cbfb98396" id="r_a51ee60cffe35527a1037861cbfb98396"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; <br />
+requires (sizeof...(Args) != 1 || (!std::same_as&lt;std::remove_cvref_t&lt;Args&gt;, <a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">FastPimpl</a>&gt; &amp;&amp; ...))</td></tr>
+<tr class="memitem:a51ee60cffe35527a1037861cbfb98396"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FastPimpl.html#a51ee60cffe35527a1037861cbfb98396">explicit</a> (sizeof...(Args)==1) const expr <a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">FastPimpl</a>(Args &amp;&amp;... args) noexcept(std::is_nothrow_constructible_v&lt; T, Args... &gt;)</td></tr>
+<tr class="separator:a51ee60cffe35527a1037861cbfb98396"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9df3738e78a82c2bdc8d607cd9b11ce" id="r_ad9df3738e78a82c2bdc8d607cd9b11ce"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FastPimpl.html#ad9df3738e78a82c2bdc8d607cd9b11ce">FastPimpl</a> (const <a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">FastPimpl</a> &amp;other) noexcept(std::is_nothrow_copy_constructible_v&lt; T &gt;)</td></tr>
+<tr class="separator:ad9df3738e78a82c2bdc8d607cd9b11ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd502b09a1a128ab3d009b5eab130fa1" id="r_acd502b09a1a128ab3d009b5eab130fa1"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FastPimpl.html#acd502b09a1a128ab3d009b5eab130fa1">FastPimpl</a> (<a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">FastPimpl</a> &amp;&amp;other) noexcept(std::is_nothrow_move_constructible_v&lt; T &gt;)</td></tr>
+<tr class="separator:acd502b09a1a128ab3d009b5eab130fa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f71c2646efeb5baf05b1881915eb0ab" id="r_a8f71c2646efeb5baf05b1881915eb0ab"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FastPimpl.html#a8f71c2646efeb5baf05b1881915eb0ab">~FastPimpl</a> () noexcept(std::is_nothrow_destructible_v&lt; T &gt;)</td></tr>
+<tr class="separator:a8f71c2646efeb5baf05b1881915eb0ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab50f3c858fc709a79bc6c94480ded1bc" id="r_ab50f3c858fc709a79bc6c94480ded1bc"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">FastPimpl</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FastPimpl.html#ab50f3c858fc709a79bc6c94480ded1bc">operator=</a> (const <a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">FastPimpl</a> &amp;rhs) noexcept(std::is_nothrow_copy_assignable_v&lt; T &gt;)</td></tr>
+<tr class="separator:ab50f3c858fc709a79bc6c94480ded1bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20355ba8cf07716efd6709c0880649d4" id="r_a20355ba8cf07716efd6709c0880649d4"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">FastPimpl</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FastPimpl.html#a20355ba8cf07716efd6709c0880649d4">operator=</a> (<a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">FastPimpl</a> &amp;&amp;rhs) noexcept(std::is_nothrow_move_assignable_v&lt; T &gt;)</td></tr>
+<tr class="separator:a20355ba8cf07716efd6709c0880649d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50a4edf2abbc8d167c7402b1d216a173" id="r_a50a4edf2abbc8d167c7402b1d216a173"><td class="memItemLeft" align="right" valign="top">constexpr T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FastPimpl.html#a50a4edf2abbc8d167c7402b1d216a173">operator-&gt;</a> () noexcept</td></tr>
+<tr class="separator:a50a4edf2abbc8d167c7402b1d216a173"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6da371a23738fadfd5c165eabba4b488" id="r_a6da371a23738fadfd5c165eabba4b488"><td class="memItemLeft" align="right" valign="top">constexpr const T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FastPimpl.html#a6da371a23738fadfd5c165eabba4b488">operator-&gt;</a> () const noexcept</td></tr>
+<tr class="separator:a6da371a23738fadfd5c165eabba4b488"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a338b7e5d7d9b6b18718fc63c560427" id="r_a3a338b7e5d7d9b6b18718fc63c560427"><td class="memItemLeft" align="right" valign="top">constexpr T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FastPimpl.html#a3a338b7e5d7d9b6b18718fc63c560427">operator*</a> () noexcept</td></tr>
+<tr class="separator:a3a338b7e5d7d9b6b18718fc63c560427"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a335d4d05df718f84cff52169ad988c0f" id="r_a335d4d05df718f84cff52169ad988c0f"><td class="memItemLeft" align="right" valign="top">constexpr const T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FastPimpl.html#a335d4d05df718f84cff52169ad988c0f">operator*</a> () const noexcept</td></tr>
+<tr class="separator:a335d4d05df718f84cff52169ad988c0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;class T, size_t Size, size_t Alignment, bool RequireStrictMatch = false&gt;<br />
+class helios::utils::FastPimpl&lt; T, Size, Alignment, RequireStrictMatch &gt;</div><p>Implements pimpl idiom without dynamic memory allocation. </p>
+<p><a class="el" href="classhelios_1_1utils_1_1FastPimpl.html" title="Implements pimpl idiom without dynamic memory allocation.">FastPimpl</a> doesn't require memory allocation or indirect memory access. You must manually set object size and alignment when instantiating <a class="el" href="classhelios_1_1utils_1_1FastPimpl.html" title="Implements pimpl idiom without dynamic memory allocation.">FastPimpl</a>. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The implementation type </td></tr>
+    <tr><td class="paramname">Size</td><td>The size in bytes to allocate for T </td></tr>
+    <tr><td class="paramname">Alignment</td><td>The alignment requirement for T </td></tr>
+    <tr><td class="paramname">RequireStrictMatch</td><td>If true, requires exact size/alignment match </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="fast__pimpl_8hpp_source.html#l00024">24</a> of file <a class="el" href="fast__pimpl_8hpp_source.html">fast_pimpl.hpp</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ad9df3738e78a82c2bdc8d607cd9b11ce" name="ad9df3738e78a82c2bdc8d607cd9b11ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9df3738e78a82c2bdc8d607cd9b11ce">&#9670;&#160;</a></span>FastPimpl() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T , size_t Size, size_t Alignment, bool RequireStrictMatch = false&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">helios::utils::FastPimpl</a>&lt; T, Size, Alignment, RequireStrictMatch &gt;::FastPimpl </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">FastPimpl</a>&lt; T, Size, Alignment, RequireStrictMatch &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fast__pimpl_8hpp_source.html#l00034">34</a> of file <a class="el" href="fast__pimpl_8hpp_source.html">fast_pimpl.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   34</span>: <a class="code hl_function" href="classhelios_1_1utils_1_1FastPimpl.html#ad9df3738e78a82c2bdc8d607cd9b11ce">FastPimpl</a>(*other) {}</div>
+<div class="ttc" id="aclasshelios_1_1utils_1_1FastPimpl_html_ad9df3738e78a82c2bdc8d607cd9b11ce"><div class="ttname"><a href="classhelios_1_1utils_1_1FastPimpl.html#ad9df3738e78a82c2bdc8d607cd9b11ce">helios::utils::FastPimpl::FastPimpl</a></div><div class="ttdeci">constexpr FastPimpl(const FastPimpl &amp;other) noexcept(std::is_nothrow_copy_constructible_v&lt; T &gt;)</div><div class="ttdef"><b>Definition</b> <a href="fast__pimpl_8hpp_source.html#l00034">fast_pimpl.hpp:34</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="acd502b09a1a128ab3d009b5eab130fa1" name="acd502b09a1a128ab3d009b5eab130fa1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd502b09a1a128ab3d009b5eab130fa1">&#9670;&#160;</a></span>FastPimpl() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T , size_t Size, size_t Alignment, bool RequireStrictMatch = false&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">helios::utils::FastPimpl</a>&lt; T, Size, Alignment, RequireStrictMatch &gt;::FastPimpl </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">FastPimpl</a>&lt; T, Size, Alignment, RequireStrictMatch &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fast__pimpl_8hpp_source.html#l00035">35</a> of file <a class="el" href="fast__pimpl_8hpp_source.html">fast_pimpl.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   36</span>      : <a class="code hl_function" href="classhelios_1_1utils_1_1FastPimpl.html#ad9df3738e78a82c2bdc8d607cd9b11ce">FastPimpl</a>(std::move(*other)) {}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a8f71c2646efeb5baf05b1881915eb0ab" name="a8f71c2646efeb5baf05b1881915eb0ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f71c2646efeb5baf05b1881915eb0ab">&#9670;&#160;</a></span>~FastPimpl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T , size_t Size, size_t Alignment, bool RequireStrictMatch&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">helios::utils::FastPimpl</a>&lt; T, Size, Alignment, RequireStrictMatch &gt;::~<a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">FastPimpl</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fast__pimpl_8hpp_source.html#l00058">58</a> of file <a class="el" href="fast__pimpl_8hpp_source.html">fast_pimpl.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   58</span>                                                                                                                  {</div>
+<div class="line"><span class="lineno">   59</span>  ValidateConstraints();</div>
+<div class="line"><span class="lineno">   60</span>  std::destroy_at(Impl());</div>
+<div class="line"><span class="lineno">   61</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a51ee60cffe35527a1037861cbfb98396" name="a51ee60cffe35527a1037861cbfb98396"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51ee60cffe35527a1037861cbfb98396">&#9670;&#160;</a></span>explicit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T , size_t Size, size_t Alignment, bool RequireStrictMatch = false&gt; </div>
+<div class="memtemplate">
+template&lt;typename... Args&gt; <br />
+requires (sizeof...(Args) != 1 || (!std::same_as&lt;std::remove_cvref_t&lt;Args&gt;, <a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">FastPimpl</a>&gt; &amp;&amp; ...))</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">helios::utils::FastPimpl</a>&lt; T, Size, Alignment, RequireStrictMatch &gt;::explicit </td>
+          <td>(</td>
+          <td class="paramtype">sizeof...&#160;</td>
+          <td class="paramname">Args = <code>=&#160;1</code></td><td>)</td>
+          <td> const &amp;&amp;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fast__pimpl_8hpp_source.html#l00027">27</a> of file <a class="el" href="fast__pimpl_8hpp_source.html">fast_pimpl.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   30</span>  {</div>
+<div class="line"><span class="lineno">   31</span>    std::construct_at(Impl(), std::forward&lt;Args&gt;(args)...);</div>
+<div class="line"><span class="lineno">   32</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a335d4d05df718f84cff52169ad988c0f" name="a335d4d05df718f84cff52169ad988c0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a335d4d05df718f84cff52169ad988c0f">&#9670;&#160;</a></span>operator*() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T , size_t Size, size_t Alignment, bool RequireStrictMatch = false&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr const T &amp; <a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">helios::utils::FastPimpl</a>&lt; T, Size, Alignment, RequireStrictMatch &gt;::operator* </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fast__pimpl_8hpp_source.html#l00046">46</a> of file <a class="el" href="fast__pimpl_8hpp_source.html">fast_pimpl.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   46</span>{ <span class="keywordflow">return</span> *Impl(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a3a338b7e5d7d9b6b18718fc63c560427" name="a3a338b7e5d7d9b6b18718fc63c560427"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a338b7e5d7d9b6b18718fc63c560427">&#9670;&#160;</a></span>operator*() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T , size_t Size, size_t Alignment, bool RequireStrictMatch = false&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr T &amp; <a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">helios::utils::FastPimpl</a>&lt; T, Size, Alignment, RequireStrictMatch &gt;::operator* </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fast__pimpl_8hpp_source.html#l00045">45</a> of file <a class="el" href="fast__pimpl_8hpp_source.html">fast_pimpl.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   45</span>{ <span class="keywordflow">return</span> *Impl(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a6da371a23738fadfd5c165eabba4b488" name="a6da371a23738fadfd5c165eabba4b488"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6da371a23738fadfd5c165eabba4b488">&#9670;&#160;</a></span>operator-&gt;() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T , size_t Size, size_t Alignment, bool RequireStrictMatch = false&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr const T * <a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">helios::utils::FastPimpl</a>&lt; T, Size, Alignment, RequireStrictMatch &gt;::operator-&gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fast__pimpl_8hpp_source.html#l00044">44</a> of file <a class="el" href="fast__pimpl_8hpp_source.html">fast_pimpl.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   44</span>{ <span class="keywordflow">return</span> Impl(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a50a4edf2abbc8d167c7402b1d216a173" name="a50a4edf2abbc8d167c7402b1d216a173"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50a4edf2abbc8d167c7402b1d216a173">&#9670;&#160;</a></span>operator-&gt;() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T , size_t Size, size_t Alignment, bool RequireStrictMatch = false&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr T * <a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">helios::utils::FastPimpl</a>&lt; T, Size, Alignment, RequireStrictMatch &gt;::operator-&gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fast__pimpl_8hpp_source.html#l00043">43</a> of file <a class="el" href="fast__pimpl_8hpp_source.html">fast_pimpl.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   43</span>{ <span class="keywordflow">return</span> Impl(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ab50f3c858fc709a79bc6c94480ded1bc" name="ab50f3c858fc709a79bc6c94480ded1bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab50f3c858fc709a79bc6c94480ded1bc">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T , size_t Size, size_t Alignment, bool RequireStrictMatch&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">helios::utils::FastPimpl</a>&lt; T, Size, Alignment, RequireStrictMatch &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">FastPimpl</a>&lt; T, Size, Alignment, RequireStrictMatch &gt; &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fast__pimpl_8hpp_source.html#l00064">64</a> of file <a class="el" href="fast__pimpl_8hpp_source.html">fast_pimpl.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   65</span>                                                      {</div>
+<div class="line"><span class="lineno">   66</span>  <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;rhs) [[likely]] {</div>
+<div class="line"><span class="lineno">   67</span>    *Impl() = *rhs;</div>
+<div class="line"><span class="lineno">   68</span>  }</div>
+<div class="line"><span class="lineno">   69</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><span class="lineno">   70</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a20355ba8cf07716efd6709c0880649d4" name="a20355ba8cf07716efd6709c0880649d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20355ba8cf07716efd6709c0880649d4">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T , size_t Size, size_t Alignment, bool RequireStrictMatch&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">helios::utils::FastPimpl</a>&lt; T, Size, Alignment, RequireStrictMatch &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">FastPimpl</a>&lt; T, Size, Alignment, RequireStrictMatch &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fast__pimpl_8hpp_source.html#l00073">73</a> of file <a class="el" href="fast__pimpl_8hpp_source.html">fast_pimpl.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   74</span>                                                      {</div>
+<div class="line"><span class="lineno">   75</span>  <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;rhs) [[likely]] {</div>
+<div class="line"><span class="lineno">   76</span>    *Impl() = std::move(*rhs);</div>
+<div class="line"><span class="lineno">   77</span>  }</div>
+<div class="line"><span class="lineno">   78</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><span class="lineno">   79</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehelios.html">helios</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1utils.html">utils</a></li><li class="navelem"><a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">FastPimpl</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,796 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: helios::app::PoolAllocatorResource Class Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classhelios_1_1app_1_1PoolAllocatorResource.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="classhelios_1_1app_1_1PoolAllocatorResource-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">helios::app::PoolAllocatorResource Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="allocator__resources_8hpp_source.html">allocator_resources.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a8ff9ccf46e65a4b8addf6aaf9d20fd91" id="r_a8ff9ccf46e65a4b8addf6aaf9d20fd91"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1PoolAllocatorResource.html#a8ff9ccf46e65a4b8addf6aaf9d20fd91">PoolAllocatorResource</a> (size_t block_size, size_t block_count, size_t alignment=<a class="el" href="namespacehelios_1_1memory.html#a14c84d27b0af2a3d13d38b2d9f6225c4">memory::kDefaultAlignment</a>)</td></tr>
+<tr class="memdesc:a8ff9ccf46e65a4b8addf6aaf9d20fd91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs resource with a pool allocator.  <br /></td></tr>
+<tr class="separator:a8ff9ccf46e65a4b8addf6aaf9d20fd91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fc6a514dcc05c13ce3b302d9bd9cf15" id="r_a4fc6a514dcc05c13ce3b302d9bd9cf15"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1PoolAllocatorResource.html#a4fc6a514dcc05c13ce3b302d9bd9cf15">PoolAllocatorResource</a> (const <a class="el" href="classhelios_1_1app_1_1PoolAllocatorResource.html">PoolAllocatorResource</a> &amp;)=delete</td></tr>
+<tr class="separator:a4fc6a514dcc05c13ce3b302d9bd9cf15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7574ff8a136ea1bda39e8e25254a6a5e" id="r_a7574ff8a136ea1bda39e8e25254a6a5e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1PoolAllocatorResource.html#a7574ff8a136ea1bda39e8e25254a6a5e">PoolAllocatorResource</a> (<a class="el" href="classhelios_1_1app_1_1PoolAllocatorResource.html">PoolAllocatorResource</a> &amp;&amp;) noexcept=default</td></tr>
+<tr class="separator:a7574ff8a136ea1bda39e8e25254a6a5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae045703d2bb24bd307cbf1f038544d20" id="r_ae045703d2bb24bd307cbf1f038544d20"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1PoolAllocatorResource.html#ae045703d2bb24bd307cbf1f038544d20">~PoolAllocatorResource</a> () noexcept=default</td></tr>
+<tr class="separator:ae045703d2bb24bd307cbf1f038544d20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8c2e8733c0ed6ba0676cd78f37df57c" id="r_ab8c2e8733c0ed6ba0676cd78f37df57c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1PoolAllocatorResource.html">PoolAllocatorResource</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1PoolAllocatorResource.html#ab8c2e8733c0ed6ba0676cd78f37df57c">operator=</a> (const <a class="el" href="classhelios_1_1app_1_1PoolAllocatorResource.html">PoolAllocatorResource</a> &amp;)=delete</td></tr>
+<tr class="separator:ab8c2e8733c0ed6ba0676cd78f37df57c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2353e6918a8d084b151792fc0941ff4d" id="r_a2353e6918a8d084b151792fc0941ff4d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1PoolAllocatorResource.html">PoolAllocatorResource</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1PoolAllocatorResource.html#a2353e6918a8d084b151792fc0941ff4d">operator=</a> (<a class="el" href="classhelios_1_1app_1_1PoolAllocatorResource.html">PoolAllocatorResource</a> &amp;&amp;) noexcept=default</td></tr>
+<tr class="separator:a2353e6918a8d084b151792fc0941ff4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22e7d6684c674e018c65ef7f208a0117" id="r_a22e7d6684c674e018c65ef7f208a0117"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1memory_1_1PoolAllocator.html">memory::PoolAllocator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1PoolAllocatorResource.html#a22e7d6684c674e018c65ef7f208a0117">Get</a> () noexcept</td></tr>
+<tr class="memdesc:a22e7d6684c674e018c65ef7f208a0117"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets reference to the pool allocator.  <br /></td></tr>
+<tr class="separator:a22e7d6684c674e018c65ef7f208a0117"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a004c99b04183e417dc85b5716bbd3aa3" id="r_a004c99b04183e417dc85b5716bbd3aa3"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classhelios_1_1memory_1_1PoolAllocator.html">memory::PoolAllocator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1PoolAllocatorResource.html#a004c99b04183e417dc85b5716bbd3aa3">Get</a> () const noexcept</td></tr>
+<tr class="memdesc:a004c99b04183e417dc85b5716bbd3aa3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets const reference to the pool allocator.  <br /></td></tr>
+<tr class="separator:a004c99b04183e417dc85b5716bbd3aa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c083370ce6d6861a3eb58ef1af688d7" id="r_a4c083370ce6d6861a3eb58ef1af688d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1PoolAllocatorResource.html#a4c083370ce6d6861a3eb58ef1af688d7">Reset</a> () noexcept</td></tr>
+<tr class="memdesc:a4c083370ce6d6861a3eb58ef1af688d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the pool, making all blocks available.  <br /></td></tr>
+<tr class="separator:a4c083370ce6d6861a3eb58ef1af688d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ea4e4f47b1fa7ed6b6f73a308846ae3" id="r_a4ea4e4f47b1fa7ed6b6f73a308846ae3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1PoolAllocatorResource.html#a4ea4e4f47b1fa7ed6b6f73a308846ae3">Empty</a> () const noexcept</td></tr>
+<tr class="memdesc:a4ea4e4f47b1fa7ed6b6f73a308846ae3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the pool allocator is empty.  <br /></td></tr>
+<tr class="separator:a4ea4e4f47b1fa7ed6b6f73a308846ae3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ec7c847ca1ce3279cc48084c94ef666" id="r_a8ec7c847ca1ce3279cc48084c94ef666"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1PoolAllocatorResource.html#a8ec7c847ca1ce3279cc48084c94ef666">Full</a> () const noexcept</td></tr>
+<tr class="memdesc:a8ec7c847ca1ce3279cc48084c94ef666"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the pool allocator is full.  <br /></td></tr>
+<tr class="separator:a8ec7c847ca1ce3279cc48084c94ef666"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a4f3e1ecfc2ae84742eb64de4364a8a" id="r_a1a4f3e1ecfc2ae84742eb64de4364a8a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structhelios_1_1memory_1_1AllocatorStats.html">memory::AllocatorStats</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1PoolAllocatorResource.html#a1a4f3e1ecfc2ae84742eb64de4364a8a">Stats</a> () const noexcept</td></tr>
+<tr class="memdesc:a1a4f3e1ecfc2ae84742eb64de4364a8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets pool allocator statistics.  <br /></td></tr>
+<tr class="separator:a1a4f3e1ecfc2ae84742eb64de4364a8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d8f03c9b44882006bbc33633e965df9" id="r_a9d8f03c9b44882006bbc33633e965df9"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1PoolAllocatorResource.html#a9d8f03c9b44882006bbc33633e965df9">BlockSize</a> () const noexcept</td></tr>
+<tr class="memdesc:a9d8f03c9b44882006bbc33633e965df9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the block size.  <br /></td></tr>
+<tr class="separator:a9d8f03c9b44882006bbc33633e965df9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a362ee8913aaa766cf9d23d0f32e2ef17" id="r_a362ee8913aaa766cf9d23d0f32e2ef17"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1PoolAllocatorResource.html#a362ee8913aaa766cf9d23d0f32e2ef17">BlockCount</a> () const noexcept</td></tr>
+<tr class="memdesc:a362ee8913aaa766cf9d23d0f32e2ef17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the block count.  <br /></td></tr>
+<tr class="separator:a362ee8913aaa766cf9d23d0f32e2ef17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a8be03e88d0dd540306811f8baf8cd9d0" id="r_a8be03e88d0dd540306811f8baf8cd9d0"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a8be03e88d0dd540306811f8baf8cd9d0"><td class="memTemplItemLeft" align="right" valign="top">static <a class="el" href="classhelios_1_1app_1_1PoolAllocatorResource.html">PoolAllocatorResource</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1PoolAllocatorResource.html#a8be03e88d0dd540306811f8baf8cd9d0">ForType</a> (size_t block_count)</td></tr>
+<tr class="memdesc:a8be03e88d0dd540306811f8baf8cd9d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a pool allocator resource sized for type T.  <br /></td></tr>
+<tr class="separator:a8be03e88d0dd540306811f8baf8cd9d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e637c47691c8dc7716612c27b5776d0" id="r_a9e637c47691c8dc7716612c27b5776d0"><td class="memItemLeft" align="right" valign="top">static constexpr std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1PoolAllocatorResource.html#a9e637c47691c8dc7716612c27b5776d0">Name</a> () noexcept</td></tr>
+<tr class="memdesc:a9e637c47691c8dc7716612c27b5776d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the resource name for registration.  <br /></td></tr>
+<tr class="separator:a9e637c47691c8dc7716612c27b5776d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="allocator__resources_8hpp_source.html#l00197">197</a> of file <a class="el" href="allocator__resources_8hpp_source.html">allocator_resources.hpp</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a8ff9ccf46e65a4b8addf6aaf9d20fd91" name="a8ff9ccf46e65a4b8addf6aaf9d20fd91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ff9ccf46e65a4b8addf6aaf9d20fd91">&#9670;&#160;</a></span>PoolAllocatorResource() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::app::PoolAllocatorResource::PoolAllocatorResource </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>block_size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>block_count</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>alignment</em> = <code><a class="el" href="namespacehelios_1_1memory.html#a14c84d27b0af2a3d13d38b2d9f6225c4">memory::kDefaultAlignment</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructs resource with a pool allocator. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">block_size</td><td>Size of each block in bytes </td></tr>
+    <tr><td class="paramname">block_count</td><td>Number of blocks to allocate </td></tr>
+    <tr><td class="paramname">alignment</td><td>Alignment for each block (must be power of 2) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="allocator__resources_8hpp_source.html#l00216">216</a> of file <a class="el" href="allocator__resources_8hpp_source.html">allocator_resources.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  217</span>      : allocator_(block_size, block_count, alignment) {}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a4fc6a514dcc05c13ce3b302d9bd9cf15" name="a4fc6a514dcc05c13ce3b302d9bd9cf15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4fc6a514dcc05c13ce3b302d9bd9cf15">&#9670;&#160;</a></span>PoolAllocatorResource() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::app::PoolAllocatorResource::PoolAllocatorResource </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1app_1_1PoolAllocatorResource.html">PoolAllocatorResource</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7574ff8a136ea1bda39e8e25254a6a5e" name="a7574ff8a136ea1bda39e8e25254a6a5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7574ff8a136ea1bda39e8e25254a6a5e">&#9670;&#160;</a></span>PoolAllocatorResource() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::app::PoolAllocatorResource::PoolAllocatorResource </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1PoolAllocatorResource.html">PoolAllocatorResource</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae045703d2bb24bd307cbf1f038544d20" name="ae045703d2bb24bd307cbf1f038544d20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae045703d2bb24bd307cbf1f038544d20">&#9670;&#160;</a></span>~PoolAllocatorResource()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::app::PoolAllocatorResource::~PoolAllocatorResource </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2allocator_resources_8hpp-example.html#a26">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/allocator_resources.hpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a362ee8913aaa766cf9d23d0f32e2ef17" name="a362ee8913aaa766cf9d23d0f32e2ef17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a362ee8913aaa766cf9d23d0f32e2ef17">&#9670;&#160;</a></span>BlockCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t helios::app::PoolAllocatorResource::BlockCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the block count. </p>
+<dl class="section return"><dt>Returns</dt><dd>Total number of blocks </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2allocator_resources_8hpp-example.html#a39">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/allocator_resources.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="allocator__resources_8hpp_source.html#l00271">271</a> of file <a class="el" href="allocator__resources_8hpp_source.html">allocator_resources.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  271</span>{ <span class="keywordflow">return</span> allocator_.<a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#aee9af9d909447a9d5ee2f4103adc4ebf">BlockCount</a>(); }</div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1PoolAllocator_html_aee9af9d909447a9d5ee2f4103adc4ebf"><div class="ttname"><a href="classhelios_1_1memory_1_1PoolAllocator.html#aee9af9d909447a9d5ee2f4103adc4ebf">helios::memory::PoolAllocator::BlockCount</a></div><div class="ttdeci">size_t BlockCount() const noexcept</div><div class="ttdoc">Gets the block count.</div><div class="ttdef"><b>Definition</b> <a href="pool__allocator_8hpp_source.html#l00169">pool_allocator.hpp:169</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a9d8f03c9b44882006bbc33633e965df9" name="a9d8f03c9b44882006bbc33633e965df9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d8f03c9b44882006bbc33633e965df9">&#9670;&#160;</a></span>BlockSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t helios::app::PoolAllocatorResource::BlockSize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the block size. </p>
+<dl class="section return"><dt>Returns</dt><dd>Block size in bytes </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2allocator_resources_8hpp-example.html#a37">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/allocator_resources.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="allocator__resources_8hpp_source.html#l00265">265</a> of file <a class="el" href="allocator__resources_8hpp_source.html">allocator_resources.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  265</span>{ <span class="keywordflow">return</span> allocator_.<a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#aea4151dd96443577b939cda699045ff0">BlockSize</a>(); }</div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1PoolAllocator_html_aea4151dd96443577b939cda699045ff0"><div class="ttname"><a href="classhelios_1_1memory_1_1PoolAllocator.html#aea4151dd96443577b939cda699045ff0">helios::memory::PoolAllocator::BlockSize</a></div><div class="ttdeci">size_t BlockSize() const noexcept</div><div class="ttdoc">Gets the block size.</div><div class="ttdef"><b>Definition</b> <a href="pool__allocator_8hpp_source.html#l00163">pool_allocator.hpp:163</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a4ea4e4f47b1fa7ed6b6f73a308846ae3" name="a4ea4e4f47b1fa7ed6b6f73a308846ae3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ea4e4f47b1fa7ed6b6f73a308846ae3">&#9670;&#160;</a></span>Empty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::app::PoolAllocatorResource::Empty </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if the pool allocator is empty. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if all blocks are free </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2allocator_resources_8hpp-example.html#a31">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/allocator_resources.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="allocator__resources_8hpp_source.html#l00247">247</a> of file <a class="el" href="allocator__resources_8hpp_source.html">allocator_resources.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  247</span>{ <span class="keywordflow">return</span> allocator_.<a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#a0660899f3aa78e517550ddec2a3d4a3a">Empty</a>(); }</div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1PoolAllocator_html_a0660899f3aa78e517550ddec2a3d4a3a"><div class="ttname"><a href="classhelios_1_1memory_1_1PoolAllocator.html#a0660899f3aa78e517550ddec2a3d4a3a">helios::memory::PoolAllocator::Empty</a></div><div class="ttdeci">bool Empty() const noexcept</div><div class="ttdef"><b>Definition</b> <a href="pool__allocator_8hpp_source.html#l00142">pool_allocator.hpp:142</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a8be03e88d0dd540306811f8baf8cd9d0" name="a8be03e88d0dd540306811f8baf8cd9d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8be03e88d0dd540306811f8baf8cd9d0">&#9670;&#160;</a></span>ForType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="classhelios_1_1app_1_1PoolAllocatorResource.html">PoolAllocatorResource</a> helios::app::PoolAllocatorResource::ForType </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>block_count</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a pool allocator resource sized for type T. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Type to allocate </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">block_count</td><td>Number of blocks to allocate </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1app_1_1PoolAllocatorResource.html">PoolAllocatorResource</a> configured for type T </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2allocator_resources_8hpp-example.html#a24">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/allocator_resources.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="allocator__resources_8hpp_source.html#l00206">206</a> of file <a class="el" href="allocator__resources_8hpp_source.html">allocator_resources.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  206</span>                                                                         {</div>
+<div class="line"><span class="lineno">  207</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="classhelios_1_1app_1_1PoolAllocatorResource.html#a8ff9ccf46e65a4b8addf6aaf9d20fd91">PoolAllocatorResource</a>(<span class="keyword">sizeof</span>(T), block_count, <span class="keyword">alignof</span>(T));</div>
+<div class="line"><span class="lineno">  208</span>  }</div>
+<div class="ttc" id="aclasshelios_1_1app_1_1PoolAllocatorResource_html_a8ff9ccf46e65a4b8addf6aaf9d20fd91"><div class="ttname"><a href="classhelios_1_1app_1_1PoolAllocatorResource.html#a8ff9ccf46e65a4b8addf6aaf9d20fd91">helios::app::PoolAllocatorResource::PoolAllocatorResource</a></div><div class="ttdeci">PoolAllocatorResource(size_t block_size, size_t block_count, size_t alignment=memory::kDefaultAlignment)</div><div class="ttdoc">Constructs resource with a pool allocator.</div><div class="ttdef"><b>Definition</b> <a href="allocator__resources_8hpp_source.html#l00216">allocator_resources.hpp:216</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a8ec7c847ca1ce3279cc48084c94ef666" name="a8ec7c847ca1ce3279cc48084c94ef666"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ec7c847ca1ce3279cc48084c94ef666">&#9670;&#160;</a></span>Full()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::app::PoolAllocatorResource::Full </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if the pool allocator is full. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if all blocks are allocated </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2allocator_resources_8hpp-example.html#a33">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/allocator_resources.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="allocator__resources_8hpp_source.html#l00253">253</a> of file <a class="el" href="allocator__resources_8hpp_source.html">allocator_resources.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  253</span>{ <span class="keywordflow">return</span> allocator_.<a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#a27640a2c03a23943a55efd7d4defa615">Full</a>(); }</div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1PoolAllocator_html_a27640a2c03a23943a55efd7d4defa615"><div class="ttname"><a href="classhelios_1_1memory_1_1PoolAllocator.html#a27640a2c03a23943a55efd7d4defa615">helios::memory::PoolAllocator::Full</a></div><div class="ttdeci">bool Full() const noexcept</div><div class="ttdoc">Checks if the allocator is full.</div><div class="ttdef"><b>Definition</b> <a href="pool__allocator_8hpp_source.html#l00141">pool_allocator.hpp:141</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a004c99b04183e417dc85b5716bbd3aa3" name="a004c99b04183e417dc85b5716bbd3aa3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a004c99b04183e417dc85b5716bbd3aa3">&#9670;&#160;</a></span>Get() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classhelios_1_1memory_1_1PoolAllocator.html">memory::PoolAllocator</a> &amp; helios::app::PoolAllocatorResource::Get </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets const reference to the pool allocator. </p>
+<dl class="section return"><dt>Returns</dt><dd>Const reference to PoolAllocator </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="allocator__resources_8hpp_source.html#l00236">236</a> of file <a class="el" href="allocator__resources_8hpp_source.html">allocator_resources.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  236</span>{ <span class="keywordflow">return</span> allocator_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a22e7d6684c674e018c65ef7f208a0117" name="a22e7d6684c674e018c65ef7f208a0117"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22e7d6684c674e018c65ef7f208a0117">&#9670;&#160;</a></span>Get() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1memory_1_1PoolAllocator.html">memory::PoolAllocator</a> &amp; helios::app::PoolAllocatorResource::Get </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets reference to the pool allocator. </p>
+<dl class="section return"><dt>Returns</dt><dd>Reference to PoolAllocator </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2allocator_resources_8hpp-example.html#a28">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/allocator_resources.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="allocator__resources_8hpp_source.html#l00230">230</a> of file <a class="el" href="allocator__resources_8hpp_source.html">allocator_resources.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  230</span>{ <span class="keywordflow">return</span> allocator_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a9e637c47691c8dc7716612c27b5776d0" name="a9e637c47691c8dc7716612c27b5776d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e637c47691c8dc7716612c27b5776d0">&#9670;&#160;</a></span>Name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static constexpr std::string_view helios::app::PoolAllocatorResource::Name </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the resource name for registration. </p>
+<dl class="section return"><dt>Returns</dt><dd>Resource name </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2allocator_resources_8hpp-example.html#a41">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/allocator_resources.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="allocator__resources_8hpp_source.html#l00277">277</a> of file <a class="el" href="allocator__resources_8hpp_source.html">allocator_resources.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  277</span>{ <span class="keywordflow">return</span> <span class="stringliteral">&quot;PoolAllocatorResource&quot;</span>; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ab8c2e8733c0ed6ba0676cd78f37df57c" name="ab8c2e8733c0ed6ba0676cd78f37df57c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8c2e8733c0ed6ba0676cd78f37df57c">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1PoolAllocatorResource.html">PoolAllocatorResource</a> &amp; helios::app::PoolAllocatorResource::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1app_1_1PoolAllocatorResource.html">PoolAllocatorResource</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2allocator_resources_8hpp-example.html#a27">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/allocator_resources.hpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<a id="a2353e6918a8d084b151792fc0941ff4d" name="a2353e6918a8d084b151792fc0941ff4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2353e6918a8d084b151792fc0941ff4d">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1PoolAllocatorResource.html">PoolAllocatorResource</a> &amp; helios::app::PoolAllocatorResource::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1PoolAllocatorResource.html">PoolAllocatorResource</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4c083370ce6d6861a3eb58ef1af688d7" name="a4c083370ce6d6861a3eb58ef1af688d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c083370ce6d6861a3eb58ef1af688d7">&#9670;&#160;</a></span>Reset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::app::PoolAllocatorResource::Reset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Resets the pool, making all blocks available. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2allocator_resources_8hpp-example.html#a29">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/allocator_resources.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="allocator__resources_8hpp_source.html#l00241">241</a> of file <a class="el" href="allocator__resources_8hpp_source.html">allocator_resources.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  241</span>{ allocator_.<a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#adcc416a19e8fa0f0c684ad298251dc18">Reset</a>(); }</div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1PoolAllocator_html_adcc416a19e8fa0f0c684ad298251dc18"><div class="ttname"><a href="classhelios_1_1memory_1_1PoolAllocator.html#adcc416a19e8fa0f0c684ad298251dc18">helios::memory::PoolAllocator::Reset</a></div><div class="ttdeci">void Reset() noexcept</div><div class="ttdoc">Resets the pool, making all blocks available.</div><div class="ttdef"><b>Definition</b> <a href="pool__allocator_8hpp_source.html#l00370">pool_allocator.hpp:370</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a1a4f3e1ecfc2ae84742eb64de4364a8a" name="a1a4f3e1ecfc2ae84742eb64de4364a8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a4f3e1ecfc2ae84742eb64de4364a8a">&#9670;&#160;</a></span>Stats()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structhelios_1_1memory_1_1AllocatorStats.html">memory::AllocatorStats</a> helios::app::PoolAllocatorResource::Stats </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets pool allocator statistics. </p>
+<dl class="section return"><dt>Returns</dt><dd>AllocatorStats with current usage </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2allocator_resources_8hpp-example.html#a35">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/allocator_resources.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="allocator__resources_8hpp_source.html#l00259">259</a> of file <a class="el" href="allocator__resources_8hpp_source.html">allocator_resources.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  259</span>{ <span class="keywordflow">return</span> allocator_.<a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#af9ad781edde29cd984366d7ca359844e">Stats</a>(); }</div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1PoolAllocator_html_af9ad781edde29cd984366d7ca359844e"><div class="ttname"><a href="classhelios_1_1memory_1_1PoolAllocator.html#af9ad781edde29cd984366d7ca359844e">helios::memory::PoolAllocator::Stats</a></div><div class="ttdeci">AllocatorStats Stats() const noexcept</div><div class="ttdoc">Gets current allocator statistics.</div><div class="ttdef"><b>Definition</b> <a href="pool__allocator_8hpp_source.html#l00389">pool_allocator.hpp:389</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehelios.html">helios</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1app.html">app</a></li><li class="navelem"><a class="el" href="classhelios_1_1app_1_1PoolAllocatorResource.html">PoolAllocatorResource</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

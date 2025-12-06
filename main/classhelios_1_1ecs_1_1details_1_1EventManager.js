@@ -1,0 +1,28 @@
+var classhelios_1_1ecs_1_1details_1_1EventManager =
+[
+    [ "EventManager", "classhelios_1_1ecs_1_1details_1_1EventManager.html#a361da8d462864344b90c133f5459301f", null ],
+    [ "EventManager", "classhelios_1_1ecs_1_1details_1_1EventManager.html#a8e1c14caaa2190d8eb0cb8287a7d41e6", null ],
+    [ "EventManager", "classhelios_1_1ecs_1_1details_1_1EventManager.html#ae9bd4f7796d7a3e415d4b706cb2671b9", null ],
+    [ "~EventManager", "classhelios_1_1ecs_1_1details_1_1EventManager.html#a06c22d723172b6c1073cc8da83edcbed", null ],
+    [ "Clear", "classhelios_1_1ecs_1_1details_1_1EventManager.html#a2105a6a9ef67736626167afd4105a5a4", null ],
+    [ "ClearAllQueues", "classhelios_1_1ecs_1_1details_1_1EventManager.html#a3063acaae530d7c5caed19a57f5cb42e", null ],
+    [ "Empty", "classhelios_1_1ecs_1_1details_1_1EventManager.html#a83e9d661c1abc60406ecd4e06411f703", null ],
+    [ "GetCurrentFrame", "classhelios_1_1ecs_1_1details_1_1EventManager.html#a88c883256893d9deb823a9ed6b0a5a1c", null ],
+    [ "GetCurrentQueue", "classhelios_1_1ecs_1_1details_1_1EventManager.html#a6f97b63ecf22b6f078d0dc19e67b5a7e", null ],
+    [ "GetMetadata", "classhelios_1_1ecs_1_1details_1_1EventManager.html#ab672360b4ecef9141860435236932fd2", null ],
+    [ "GetPreviousQueue", "classhelios_1_1ecs_1_1details_1_1EventManager.html#a689e85df1e3776f6f1745e89d80ab044", null ],
+    [ "HasEvents", "classhelios_1_1ecs_1_1details_1_1EventManager.html#a5d48b16e7814cf6dc96d883b94c9bbd2", null ],
+    [ "IsRegistered", "classhelios_1_1ecs_1_1details_1_1EventManager.html#a71e6b2ee7dc8541bfd760fb4d5fe4097", null ],
+    [ "ManualClear", "classhelios_1_1ecs_1_1details_1_1EventManager.html#a0236ab384efd81379ee511e97d113c67", null ],
+    [ "Merge", "classhelios_1_1ecs_1_1details_1_1EventManager.html#af991ff44b2e6efe33f3884be2f7b2bc2", null ],
+    [ "operator=", "classhelios_1_1ecs_1_1details_1_1EventManager.html#a4cbe38a88f1c43c759650ef94fb7bcac", null ],
+    [ "operator=", "classhelios_1_1ecs_1_1details_1_1EventManager.html#af4d85b554acc0e4763319ea02662e0bf", null ],
+    [ "Read", "classhelios_1_1ecs_1_1details_1_1EventManager.html#a37d898888f2c627118f251102097c055", null ],
+    [ "ReadInto", "classhelios_1_1ecs_1_1details_1_1EventManager.html#a0bcfb807b1be7c463168e6a663bd8df1", null ],
+    [ "RegisteredEventCount", "classhelios_1_1ecs_1_1details_1_1EventManager.html#aff5cf5d395eeb2a3fd7aa0405843ef0f", null ],
+    [ "RegisterEvent", "classhelios_1_1ecs_1_1details_1_1EventManager.html#af744c6366585ab4f90fd6b987df342f6", null ],
+    [ "RegisterEvents", "classhelios_1_1ecs_1_1details_1_1EventManager.html#a6b01803139a2ff9714730b05f302e1b4", null ],
+    [ "Update", "classhelios_1_1ecs_1_1details_1_1EventManager.html#a44ff23cc148aad2ac4cb2cc10ae509d3", null ],
+    [ "Write", "classhelios_1_1ecs_1_1details_1_1EventManager.html#a90e1c064310c6c6b5f603dfe5dbd8b06", null ],
+    [ "WriteBulk", "classhelios_1_1ecs_1_1details_1_1EventManager.html#aef70988c5b8c409cb8e3e4989551814e", null ]
+];

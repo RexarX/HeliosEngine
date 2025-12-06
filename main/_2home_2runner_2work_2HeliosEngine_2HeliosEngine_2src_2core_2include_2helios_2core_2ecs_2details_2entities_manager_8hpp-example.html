@@ -1,0 +1,595 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: /home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/details/entities_manager.hpp</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2details_2entities_manager_8hpp-example.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/details/entities_manager.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<p>Creates multiple entities at once and outputs them via an output iterator.</p>
+<p>Creates multiple entities at once and outputs them via an output iterator. Batch creation is more efficient than individual calls. Entities are written to the provided output iterator, avoiding internal allocations. </p><dl class="section note"><dt>Note</dt><dd>Not thread-safe, should be called from main thread only during World::Update(). </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">OutputIt</td><td>Output iterator type that accepts Entity values </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">count</td><td>Number of entities to create </td></tr>
+    <tr><td class="paramname">out</td><td>Output iterator to write created entities to </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Output iterator pointing past the last written entity</dd></dl>
+<div class="fragment"><div class="line">std::vector&lt;Entity&gt; entities;</div>
+<div class="line">entities.reserve(100);</div>
+<div class="line">manager.CreateEntities(100, std::back_inserter(entities));</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Or with pre-allocated array:</span></div>
+<div class="line">std::array&lt;Entity, 10&gt; arr;</div>
+<div class="line">manager.CreateEntities(10, arr.begin());</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Or with span output:</span></div>
+<div class="line">Entity buffer[50];</div>
+<div class="line">manager.CreateEntities(50, std::begin(buffer));</div>
+</div><!-- fragment --><div class="fragment"><div class="line"><span class="preprocessor">#pragma once</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="core__pch_8hpp.html">helios/core_pch.hpp</a>&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="assert_8hpp.html">helios/core/assert.hpp</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="entity_8hpp.html">helios/core/ecs/entity.hpp</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="logger_8hpp.html">helios/core/logger.hpp</a>&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;algorithm&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;atomic&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;concepts&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;cstddef&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iterator&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;ranges&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;utility&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1ecs_1_1details.html">helios::ecs::details</a> {</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief Entity manager responsible for entity creation, destruction, and validation.</span></div>
+<div class="line"><span class="comment"> * @details Manages entity lifecycle with generation counters to handle entity recycling safely.</span></div>
+<div class="line"><span class="comment"> * @note Thread-safe only for validation operations.</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">class </span>Entities {</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">  <a id="a0" name="a0"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1Entities.html#ac1afdf8a2dce44f612fa37258a0b92d5">Entities</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line">  <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1Entities.html#ac1afdf8a2dce44f612fa37258a0b92d5">Entities</a>(<span class="keyword">const</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1Entities.html#ac1afdf8a2dce44f612fa37258a0b92d5">Entities</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line">  <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1Entities.html#ac1afdf8a2dce44f612fa37258a0b92d5">Entities</a>(<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1Entities.html#ac1afdf8a2dce44f612fa37258a0b92d5">Entities</a>&amp;&amp; <span class="comment">/*other*/</span>) <span class="keyword">noexcept</span>;</div>
+<div class="line">  <a id="a1" name="a1"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1Entities.html#a31547d9aa3c56852b9dec40c86e17785">~Entities</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"> </div>
+<div class="line">  <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1Entities.html#ac1afdf8a2dce44f612fa37258a0b92d5">Entities</a>&amp; <a id="a2" name="a2"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1Entities.html#aafda01b5d834b1e019c9f7cdf8e63bd0">operator=</a>(<span class="keyword">const</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1Entities.html#ac1afdf8a2dce44f612fa37258a0b92d5">Entities</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line">  <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1Entities.html#ac1afdf8a2dce44f612fa37258a0b92d5">Entities</a>&amp; <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1Entities.html#aafda01b5d834b1e019c9f7cdf8e63bd0">operator=</a>(<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1Entities.html#ac1afdf8a2dce44f612fa37258a0b92d5">Entities</a>&amp;&amp; <span class="comment">/*other*/</span>) <span class="keyword">noexcept</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Creates reserved entities in the metadata.</span></div>
+<div class="line"><span class="comment">   * @details Processes all reserved entity IDs and creates their metadata.</span></div>
+<div class="line"><span class="comment">   * @note Not thread-safe, must be called from single thread only (typically during World::Update()).</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a3" name="a3"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1Entities.html#a2abe3cb39545f6844573afe4a8ce78a9">FlushReservedEntities</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Clears all entities.</span></div>
+<div class="line"><span class="comment">   * @details Destroys all entities and resets the manager state.</span></div>
+<div class="line"><span class="comment">   * @note Not thread-safe, should be called from main thread only.</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a4" name="a4"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1Entities.html#a135902b8ee619747537e084bf788e043">Clear</a>() <span class="keyword">noexcept</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Reserves space for entities to minimize allocations.</span></div>
+<div class="line"><span class="comment">   * @details Pre-allocates storage for the specified number of entities.</span></div>
+<div class="line"><span class="comment">   * @note Not thread-safe, should be called from main thread only.</span></div>
+<div class="line"><span class="comment">   * @param count Number of entities to reserve space for</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a5" name="a5"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1Entities.html#a415dcf67781ba438aaa2aa9528bf273f">Reserve</a>(<span class="keywordtype">size_t</span> <a id="a6" name="a6"></a><a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">count</a>);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Reserves an entity ID that can be used immediately.</span></div>
+<div class="line"><span class="comment">   * @details The actual entity creation is deferred until FlushReservedEntities() is called.</span></div>
+<div class="line"><span class="comment">   * @note Thread-safe.</span></div>
+<div class="line"><span class="comment">   * @return Reserved entity with valid index and generation</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] Entity <a id="a7" name="a7"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1Entities.html#a1ee6add6f1e6da4188872a2f450df43f">ReserveEntity</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Creates a new entity.</span></div>
+<div class="line"><span class="comment">   * @details Reuses dead entity slots when available, otherwise creates new ones.</span></div>
+<div class="line"><span class="comment">   * @note Not thread-safe, should be called from main thread only during World::Update().</span></div>
+<div class="line"><span class="comment">   * @return Newly created entity with valid index and generation</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] Entity <a id="a8" name="a8"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1Entities.html#a27f28c95bb3164b9615d2951b5d15fd0">CreateEntity</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Creates multiple entities at once and outputs them via an output iterator.</span></div>
+<div class="line"><span class="comment">   * @details Batch creation is more efficient than individual calls. Entities are written</span></div>
+<div class="line"><span class="comment">   * to the provided output iterator, avoiding internal allocations.</span></div>
+<div class="line"><span class="comment">   * @note Not thread-safe, should be called from main thread only during World::Update().</span></div>
+<div class="line"><span class="comment">   * @tparam OutputIt Output iterator type that accepts Entity values</span></div>
+<div class="line"><span class="comment">   * @param count Number of entities to create</span></div>
+<div class="line"><span class="comment">   * @param out Output iterator to write created entities to</span></div>
+<div class="line"><span class="comment">   * @return Output iterator pointing past the last written entity</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * @example</span></div>
+<div class="line"><span class="comment">   * @code</span></div>
+<div class="line"><span class="comment">   * std::vector&lt;Entity&gt; entities;</span></div>
+<div class="line"><span class="comment">   * entities.reserve(100);</span></div>
+<div class="line"><span class="comment">   * manager.CreateEntities(100, std::back_inserter(entities));</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * // Or with pre-allocated array:</span></div>
+<div class="line"><span class="comment">   * std::array&lt;Entity, 10&gt; arr;</span></div>
+<div class="line"><span class="comment">   * manager.CreateEntities(10, arr.begin());</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * // Or with span output:</span></div>
+<div class="line"><span class="comment">   * Entity buffer[50];</span></div>
+<div class="line"><span class="comment">   * manager.CreateEntities(50, std::begin(buffer));</span></div>
+<div class="line"><span class="comment">   * @endcode</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;std::output_iterator&lt;Entity&gt; OutputIt&gt;</div>
+<div class="line">  <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">OutputIt</a> <a id="a9" name="a9"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1Entities.html#a9f096a77f34d432b162d411318ce9e3b">CreateEntities</a>(<span class="keywordtype">size_t</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">count</a>, <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">OutputIt</a> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">out</a>);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Destroys an entity by incrementing its generation.</span></div>
+<div class="line"><span class="comment">   * @details Marks entity as dead and adds its index to the free list for reuse.</span></div>
+<div class="line"><span class="comment">   * @note Not thread-safe, should be called from main thread only during World::Update().</span></div>
+<div class="line"><span class="comment">   * Triggers assertion if entity is invalid.</span></div>
+<div class="line"><span class="comment">   * Ignored if entity do not exist.</span></div>
+<div class="line"><span class="comment">   * @param entity Entity to destroy</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a10" name="a10"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1Entities.html#a30d3f4bc41978ced8bcef042d7277ae2">Destroy</a>(Entity entity);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Destroys an entity by incrementing its generation.</span></div>
+<div class="line"><span class="comment">   * @details Marks entity as dead and adds its index to the free list for reuse.</span></div>
+<div class="line"><span class="comment">   * @note Not thread-safe, should be called from main thread only during World::Update().</span></div>
+<div class="line"><span class="comment">   * Triggers assertion if any entity is invalid.</span></div>
+<div class="line"><span class="comment">   * Entities that do not exist are ignored.</span></div>
+<div class="line"><span class="comment">   * @tparam R Range type containing Entity elements</span></div>
+<div class="line"><span class="comment">   * @param entities Entities to destroy</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;std::ranges::range R&gt;</div>
+<div class="line">    <span class="keyword">requires</span> std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, Entity&gt;</div>
+<div class="line">  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1Entities.html#a30d3f4bc41978ced8bcef042d7277ae2">Destroy</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">R</a>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">entities</a>);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Checks if an entity exists and is valid.</span></div>
+<div class="line"><span class="comment">   * @details Validates both the entity structure and its current generation.</span></div>
+<div class="line"><span class="comment">   * @note Thread-safe for read operations.</span></div>
+<div class="line"><span class="comment">   * @param entity Entity to validate</span></div>
+<div class="line"><span class="comment">   * @return True if entity exists and is valid, false otherwise</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <span class="keywordtype">bool</span> <a id="a11" name="a11"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1Entities.html#a450e55c0c165d2e0177e6a7accc0cbda">IsValid</a>(Entity entity) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Gets the current number of living entities.</span></div>
+<div class="line"><span class="comment">   * @details Returns count of entities that are currently alive.</span></div>
+<div class="line"><span class="comment">   * @note Thread-safe.</span></div>
+<div class="line"><span class="comment">   * @return Number of living entities</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <span class="keywordtype">size_t</span> <a id="a12" name="a12"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1Entities.html#af21f559f07e2122d9a79a3cedacfb34e">Count</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> entity_count_.load(std::memory_order_relaxed); }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Returns current generation value for a given index (or kInvalidGeneration if out of range).</span></div>
+<div class="line"><span class="comment">   * @warning Triggers assertion if index is invalid.</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] <a id="a13" name="a13"></a><a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a40d8cd0e93ef835aeb26252597b23b90">Entity::GenerationType</a> <a id="a14" name="a14"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1Entities.html#a476fb946ed0a4583f053c8149c4a121e">GetGeneration</a>(<a id="a15" name="a15"></a><a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">Entity::IndexType</a> index) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">  [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">nodiscard</a>]] Entity CreateEntityWithId(<a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">Entity::IndexType</a> index, <a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a40d8cd0e93ef835aeb26252597b23b90">Entity::GenerationType</a> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">generation</a>);</div>
+<div class="line"> </div>
+<div class="line">  std::vector&lt;Entity::GenerationType&gt; generations_;  <span class="comment">///&lt; Generation counter for each entity index</span></div>
+<div class="line">  std::vector&lt;Entity::IndexType&gt; free_indices_;      <span class="comment">///&lt; Recycled entity indices</span></div>
+<div class="line">  std::atomic&lt;size_t&gt; entity_count_{0};              <span class="comment">///&lt; Number of living entities</span></div>
+<div class="line">  std::atomic&lt;Entity::IndexType&gt; next_index_{0};     <span class="comment">///&lt; Next available index (thread-safe)</span></div>
+<div class="line">  std::atomic&lt;int64_t&gt; free_cursor_{0};              <span class="comment">///&lt; Cursor for free list (negative means reserved entities)</span></div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">inline</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1Entities.html#ac1afdf8a2dce44f612fa37258a0b92d5">Entities::Entities</a>(Entities&amp;&amp; other) <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></div>
+<div class="line">    : generations_(std::move(other.generations_)),</div>
+<div class="line">      free_indices_(std::move(other.free_indices_)),</div>
+<div class="line">      entity_count_(other.entity_count_.load(std::memory_order_relaxed)),</div>
+<div class="line">      next_index_(other.next_index_.load(std::memory_order_relaxed)),</div>
+<div class="line">      free_cursor_(other.free_cursor_.load(std::memory_order_relaxed)) {</div>
+<div class="line">  other.entity_count_.store(0, std::memory_order_relaxed);</div>
+<div class="line">  other.next_index_.store(0, std::memory_order_relaxed);</div>
+<div class="line">  other.free_cursor_.store(0, std::memory_order_relaxed);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">inline</span> Entities&amp; <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1Entities.html#aafda01b5d834b1e019c9f7cdf8e63bd0">Entities::operator=</a>(Entities&amp;&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line">  <span class="keywordflow">if</span> (<span class="keyword">this</span> == &amp;other) [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">unlikely</a>]] {</div>
+<div class="line">    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  generations_ = std::move(other.generations_);</div>
+<div class="line">  free_indices_ = std::move(other.free_indices_);</div>
+<div class="line">  entity_count_.store(other.entity_count_.load(std::memory_order_relaxed), std::memory_order_relaxed);</div>
+<div class="line">  next_index_.store(other.next_index_.load(std::memory_order_relaxed), std::memory_order_relaxed);</div>
+<div class="line">  free_cursor_.store(other.free_cursor_.load(std::memory_order_relaxed), std::memory_order_relaxed);</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1Entities.html#a135902b8ee619747537e084bf788e043">Entities::Clear</a>() <span class="keyword">noexcept</span> {</div>
+<div class="line">  std::ranges::fill(generations_, <a id="a16" name="a16"></a><a class="code hl_variable" href="classhelios_1_1ecs_1_1Entity.html#a82ae778f12652ea05544ccb502a42876">Entity::kInvalidGeneration</a>);</div>
+<div class="line">  free_indices_.clear();</div>
+<div class="line">  next_index_.store(0, std::memory_order_relaxed);</div>
+<div class="line">  free_cursor_.store(0, std::memory_order_relaxed);</div>
+<div class="line">  entity_count_.store(0, std::memory_order_relaxed);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1Entities.html#a415dcf67781ba438aaa2aa9528bf273f">Entities::Reserve</a>(<span class="keywordtype">size_t</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">count</a>) {</div>
+<div class="line">  <span class="keywordflow">if</span> (<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">count</a> &gt; generations_.size()) {</div>
+<div class="line">    generations_.resize(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">count</a>, <a class="code hl_variable" href="classhelios_1_1ecs_1_1Entity.html#a82ae778f12652ea05544ccb502a42876">Entity::kInvalidGeneration</a>);</div>
+<div class="line">  }</div>
+<div class="line">  free_indices_.reserve(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">count</a>);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">inline</span> Entity <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1Entities.html#a1ee6add6f1e6da4188872a2f450df43f">Entities::ReserveEntity</a>() {</div>
+<div class="line">  <span class="comment">// Atomically reserve an index by incrementing the next available index.</span></div>
+<div class="line">  <span class="comment">// NOTE: Do NOT mutate metadata (e.g. `generations_` or `entity_count_`) here because</span></div>
+<div class="line">  <span class="comment">// this function is thread-safe and may be called concurrently. The actual metadata</span></div>
+<div class="line">  <span class="comment">// initialization for reserved indices is performed in `FlushReservedEntities()` which</span></div>
+<div class="line">  <span class="comment">// must be called from the main thread.</span></div>
+<div class="line">  <span class="keyword">const</span> <a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">Entity::IndexType</a> index = next_index_.fetch_add(1, std::memory_order_relaxed);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Return a placeholder entity with generation 1. This is only a reservation handle;</span></div>
+<div class="line">  <span class="comment">// the real creation/metadata setup happens in FlushReservedEntities().</span></div>
+<div class="line">  <span class="keywordflow">return</span> {index, 1};</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1Entities.html#a30d3f4bc41978ced8bcef042d7277ae2">Entities::Destroy</a>(Entity entity) {</div>
+<div class="line">  <a id="a17" name="a17"></a><a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(entity.Valid(), <span class="stringliteral">&quot;Failed to destroy entity: Entity is invalid!&quot;</span>);</div>
+<div class="line">  <span class="keywordflow">if</span> (!<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1Entities.html#a450e55c0c165d2e0177e6a7accc0cbda">IsValid</a>(entity)) [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">unlikely</a>]] {</div>
+<div class="line">    <span class="keywordflow">return</span>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">const</span> <a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">Entity::IndexType</a> index = entity.Index();</div>
+<div class="line">  ++generations_[index];  <span class="comment">// Invalidate entity</span></div>
+<div class="line">  free_indices_.push_back(index);</div>
+<div class="line"> </div>
+<div class="line">  free_cursor_.store(<span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">int64_t</a><span class="keyword">&gt;</span>(free_indices_.size()), std::memory_order_relaxed);</div>
+<div class="line">  entity_count_.fetch_sub(1, std::memory_order_relaxed);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;std::ranges::range R&gt;</div>
+<div class="line">  <span class="keyword">requires</span> std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, Entity&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1Entities.html#a30d3f4bc41978ced8bcef042d7277ae2">Entities::Destroy</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">R</a>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">entities</a>) {</div>
+<div class="line">  <span class="comment">// If the incoming range is sized we can reserve capacity up front to avoid reallocations.</span></div>
+<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::ranges::sized_range&lt;R&gt;) {</div>
+<div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">incoming</a> = std::ranges::size(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">entities</a>);</div>
+<div class="line">    free_indices_.reserve(free_indices_.size() + <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">incoming</a>);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Small local buffer to collect indices we&#39;re going to free.</span></div>
+<div class="line">  <span class="comment">// We collect them locally so we can do a single insert into free_indices_,</span></div>
+<div class="line">  <span class="comment">// and do a single atomic update for free_cursor_ and entity_count_.</span></div>
+<div class="line">  std::vector&lt;Entity::IndexType&gt; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">batch</a>;</div>
+<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::ranges::sized_range&lt;R&gt;) {</div>
+<div class="line">    <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">batch</a>.reserve(std::ranges::size(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">entities</a>));</div>
+<div class="line">  } <span class="keywordflow">else</span> {</div>
+<div class="line">    <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">batch</a>.reserve(16);  <span class="comment">// small default to avoid too many reallocs for small ranges</span></div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Process each entity: validate, increment generation, collect index.</span></div>
+<div class="line">  <span class="comment">// We increment generation immediately so behaviour matches the single-entity Destroy</span></div>
+<div class="line">  <span class="comment">// (i.e. duplicates in the input will fail the second validation).</span></div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keyword">const</span> Entity&amp; entity : <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">entities</a>) {</div>
+<div class="line">    <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(entity.Valid(), <span class="stringliteral">&quot;Failed to destroy entities: Entity is invalid!&quot;</span>);</div>
+<div class="line">    <span class="keywordflow">if</span> (!<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1Entities.html#a450e55c0c165d2e0177e6a7accc0cbda">IsValid</a>(entity)) {</div>
+<div class="line">      <span class="comment">// Skip entities already destroyed / wrong generation</span></div>
+<div class="line">      <span class="keywordflow">continue</span>;</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">const</span> <a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">Entity::IndexType</a> index = entity.Index();</div>
+<div class="line">    ++generations_[index];  <span class="comment">// Invalidate entity</span></div>
+<div class="line">    <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">batch</a>.push_back(index);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">if</span> (!<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">batch</a>.empty()) {</div>
+<div class="line">    free_indices_.insert_range(free_indices_.end(), <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">batch</a>);</div>
+<div class="line">    free_cursor_.store(<span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">int64_t</a><span class="keyword">&gt;</span>(free_indices_.size()), std::memory_order_relaxed);</div>
+<div class="line">    entity_count_.fetch_sub(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">batch</a>.size(), std::memory_order_relaxed);</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;std::output_iterator&lt;Entity&gt; OutputIt&gt;</div>
+<div class="line"><span class="keyword">inline</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">OutputIt</a> <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1Entities.html#a9f096a77f34d432b162d411318ce9e3b">Entities::CreateEntities</a>(<span class="keywordtype">size_t</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">count</a>, <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">OutputIt</a> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">out</a>) {</div>
+<div class="line">  <span class="keywordflow">if</span> (<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">count</a> == 0) [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">unlikely</a>]] {</div>
+<div class="line">    <span class="keywordflow">return</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">out</a>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Try to satisfy as many as possible from the free list first</span></div>
+<div class="line">  <span class="keywordtype">size_t</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">remaining</a> = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">count</a>;</div>
+<div class="line">  <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">int64_t</a> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">cursor</a> = free_cursor_.load(std::memory_order_relaxed);</div>
+<div class="line">  <span class="comment">// Use std::max with explicit signed type to avoid non-standard integer literal suffix</span></div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">size_t</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">available_free</a> = <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(std::max&lt;int64_t&gt;(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">int64_t</a>{0}, <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">cursor</a>));</div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">size_t</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">from_free_list</a> = std::min(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">remaining</a>, <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">available_free</a>);</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">if</span> (<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">from_free_list</a> &gt; 0) {</div>
+<div class="line">    <span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">int64_t</a> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">new_cursor</a> = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">cursor</a> - <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">int64_t</a><span class="keyword">&gt;</span>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">from_free_list</a>);</div>
+<div class="line">    <span class="keywordflow">if</span> (free_cursor_.compare_exchange_strong(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">cursor</a>, <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">new_cursor</a>, std::memory_order_relaxed)) {</div>
+<div class="line">      <span class="comment">// Successfully claimed indices from free list</span></div>
+<div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">i</a> = 0; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">i</a> &lt; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">from_free_list</a>; ++<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">i</a>) {</div>
+<div class="line">        <span class="keyword">const</span> <span class="keywordtype">size_t</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">free_index</a> = <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">new_cursor</a>) + <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">i</a>;</div>
+<div class="line">        <span class="keywordflow">if</span> (<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">free_index</a> &gt;= free_indices_.size()) {</div>
+<div class="line">          <span class="keywordflow">continue</span>;</div>
+<div class="line">        }</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">const</span> <a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">Entity::IndexType</a> index = free_indices_[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">free_index</a>];</div>
+<div class="line">        <span class="keywordflow">if</span> (index &gt;= generations_.size()) {</div>
+<div class="line">          <span class="keywordflow">continue</span>;</div>
+<div class="line">        }</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">const</span> <a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a40d8cd0e93ef835aeb26252597b23b90">Entity::GenerationType</a> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">generation</a> = generations_[index];</div>
+<div class="line">        *<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">out</a> = CreateEntityWithId(index, <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">generation</a>);</div>
+<div class="line">        ++<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">out</a>;</div>
+<div class="line">      }</div>
+<div class="line">      <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">remaining</a> -= <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">from_free_list</a>;</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Create new entities for remaining count</span></div>
+<div class="line">  <span class="keywordflow">if</span> (<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">remaining</a> &gt; 0) {</div>
+<div class="line">    <span class="keyword">const</span> <a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">Entity::IndexType</a> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">start_index</a> =</div>
+<div class="line">        next_index_.fetch_add(<span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">Entity::IndexType</a><span class="keyword">&gt;</span>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">remaining</a>), std::memory_order_relaxed);</div>
+<div class="line">    <span class="keyword">const</span> <a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">Entity::IndexType</a> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">end_index</a> = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">start_index</a> + <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">Entity::IndexType</a><span class="keyword">&gt;</span>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">remaining</a>);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Ensure generations array is large enough</span></div>
+<div class="line">    <span class="keywordflow">if</span> (<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">end_index</a> &gt; generations_.size()) {</div>
+<div class="line">      generations_.resize(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">end_index</a>, <a class="code hl_variable" href="classhelios_1_1ecs_1_1Entity.html#a82ae778f12652ea05544ccb502a42876">Entity::kInvalidGeneration</a>);</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Create entities with generation 1</span></div>
+<div class="line">    <span class="keywordflow">for</span> (<a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">Entity::IndexType</a> index = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">start_index</a>; index &lt; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">end_index</a>; ++index) {</div>
+<div class="line">      generations_[index] = 1;</div>
+<div class="line">      *<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">out</a> = CreateEntityWithId(index, 1);</div>
+<div class="line">      ++<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">out</a>;</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">return</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">out</a>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1Entities.html#a450e55c0c165d2e0177e6a7accc0cbda">Entities::IsValid</a>(Entity entity) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line">  <span class="keywordflow">if</span> (!entity.Valid()) [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">unlikely</a>]] {</div>
+<div class="line">    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">const</span> <a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">Entity::IndexType</a> index = entity.Index();</div>
+<div class="line">  <span class="keywordflow">return</span> index &lt; generations_.size() &amp;&amp; generations_[index] == entity.Generation() &amp;&amp;</div>
+<div class="line">         generations_[index] != <a class="code hl_variable" href="classhelios_1_1ecs_1_1Entity.html#a82ae778f12652ea05544ccb502a42876">Entity::kInvalidGeneration</a>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">inline</span> <a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a40d8cd0e93ef835aeb26252597b23b90">Entity::GenerationType</a> <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1Entities.html#a476fb946ed0a4583f053c8149c4a121e">Entities::GetGeneration</a>(<a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">Entity::IndexType</a> index) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line">  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(index != <a id="a18" name="a18"></a><a class="code hl_variable" href="classhelios_1_1ecs_1_1Entity.html#addaed08012909076998b704c1fa3f9f4">Entity::kInvalidIndex</a>, <span class="stringliteral">&quot;Failed to get generation: index is invalid!&quot;</span>);</div>
+<div class="line">  <span class="keywordflow">return</span> index &lt; generations_.size() ? generations_[index] : <a class="code hl_variable" href="classhelios_1_1ecs_1_1Entity.html#a82ae778f12652ea05544ccb502a42876">Entity::kInvalidGeneration</a>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">inline</span> Entity Entities::CreateEntityWithId(<a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">Entity::IndexType</a> index, <a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a40d8cd0e93ef835aeb26252597b23b90">Entity::GenerationType</a> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">generation</a>) {</div>
+<div class="line">  <span class="keywordflow">if</span> (index &gt;= generations_.size()) {</div>
+<div class="line">    generations_.resize(index + 1, <a class="code hl_variable" href="classhelios_1_1ecs_1_1Entity.html#a82ae778f12652ea05544ccb502a42876">Entity::kInvalidGeneration</a>);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  generations_[index] = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">generation</a>;</div>
+<div class="line">  entity_count_.fetch_add(1, std::memory_order_relaxed);</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">return</span> {index, <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">generation</a>};</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">}  <span class="comment">// namespace helios::ecs::details</span></div>
+<div class="ttc" id="aassert_8hpp_html"><div class="ttname"><a href="assert_8hpp.html">assert.hpp</a></div></div>
+<div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00149">assert.hpp:149</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1Entity_html_a3a1347d7a9307abaaccc75279f8db2de"><div class="ttname"><a href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">helios::ecs::Entity::IndexType</a></div><div class="ttdeci">uint32_t IndexType</div><div class="ttdef"><b>Definition</b> <a href="entity_8hpp_source.html#l00023">entity.hpp:23</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1Entity_html_a40d8cd0e93ef835aeb26252597b23b90"><div class="ttname"><a href="classhelios_1_1ecs_1_1Entity.html#a40d8cd0e93ef835aeb26252597b23b90">helios::ecs::Entity::GenerationType</a></div><div class="ttdeci">uint32_t GenerationType</div><div class="ttdef"><b>Definition</b> <a href="entity_8hpp_source.html#l00024">entity.hpp:24</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1Entity_html_a82ae778f12652ea05544ccb502a42876"><div class="ttname"><a href="classhelios_1_1ecs_1_1Entity.html#a82ae778f12652ea05544ccb502a42876">helios::ecs::Entity::kInvalidGeneration</a></div><div class="ttdeci">static constexpr GenerationType kInvalidGeneration</div><div class="ttdef"><b>Definition</b> <a href="entity_8hpp_source.html#l00027">entity.hpp:27</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1Entity_html_addaed08012909076998b704c1fa3f9f4"><div class="ttname"><a href="classhelios_1_1ecs_1_1Entity.html#addaed08012909076998b704c1fa3f9f4">helios::ecs::Entity::kInvalidIndex</a></div><div class="ttdeci">static constexpr IndexType kInvalidIndex</div><div class="ttdef"><b>Definition</b> <a href="entity_8hpp_source.html#l00026">entity.hpp:26</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1Entities_html_a135902b8ee619747537e084bf788e043"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1Entities.html#a135902b8ee619747537e084bf788e043">helios::ecs::details::Entities::Clear</a></div><div class="ttdeci">void Clear() noexcept</div><div class="ttdoc">Clears all entities.</div><div class="ttdef"><b>Definition</b> <a href="entities__manager_8hpp_source.html#l00183">entities_manager.hpp:183</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1Entities_html_a1ee6add6f1e6da4188872a2f450df43f"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1Entities.html#a1ee6add6f1e6da4188872a2f450df43f">helios::ecs::details::Entities::ReserveEntity</a></div><div class="ttdeci">Entity ReserveEntity()</div><div class="ttdoc">Reserves an entity ID that can be used immediately.</div><div class="ttdef"><b>Definition</b> <a href="entities__manager_8hpp_source.html#l00198">entities_manager.hpp:198</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1Entities_html_a27f28c95bb3164b9615d2951b5d15fd0"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1Entities.html#a27f28c95bb3164b9615d2951b5d15fd0">helios::ecs::details::Entities::CreateEntity</a></div><div class="ttdeci">Entity CreateEntity()</div><div class="ttdoc">Creates a new entity.</div><div class="ttdef"><b>Definition</b> <a href="entities__manager_8cpp_source.html#l00035">entities_manager.cpp:35</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1Entities_html_a2abe3cb39545f6844573afe4a8ce78a9"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1Entities.html#a2abe3cb39545f6844573afe4a8ce78a9">helios::ecs::details::Entities::FlushReservedEntities</a></div><div class="ttdeci">void FlushReservedEntities()</div><div class="ttdoc">Creates reserved entities in the metadata.</div><div class="ttdef"><b>Definition</b> <a href="entities__manager_8cpp_source.html#l00012">entities_manager.cpp:12</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1Entities_html_a30d3f4bc41978ced8bcef042d7277ae2"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1Entities.html#a30d3f4bc41978ced8bcef042d7277ae2">helios::ecs::details::Entities::Destroy</a></div><div class="ttdeci">void Destroy(Entity entity)</div><div class="ttdoc">Destroys an entity by incrementing its generation.</div><div class="ttdef"><b>Definition</b> <a href="entities__manager_8hpp_source.html#l00211">entities_manager.hpp:211</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1Entities_html_a31547d9aa3c56852b9dec40c86e17785"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1Entities.html#a31547d9aa3c56852b9dec40c86e17785">helios::ecs::details::Entities::~Entities</a></div><div class="ttdeci">~Entities()=default</div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1Entities_html_a415dcf67781ba438aaa2aa9528bf273f"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1Entities.html#a415dcf67781ba438aaa2aa9528bf273f">helios::ecs::details::Entities::Reserve</a></div><div class="ttdeci">void Reserve(size_t count)</div><div class="ttdoc">Reserves space for entities to minimize allocations.</div><div class="ttdef"><b>Definition</b> <a href="entities__manager_8hpp_source.html#l00191">entities_manager.hpp:191</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1Entities_html_a450e55c0c165d2e0177e6a7accc0cbda"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1Entities.html#a450e55c0c165d2e0177e6a7accc0cbda">helios::ecs::details::Entities::IsValid</a></div><div class="ttdeci">bool IsValid(Entity entity) const noexcept</div><div class="ttdoc">Checks if an entity exists and is valid.</div><div class="ttdef"><b>Definition</b> <a href="entities__manager_8hpp_source.html#l00324">entities_manager.hpp:324</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1Entities_html_a476fb946ed0a4583f053c8149c4a121e"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1Entities.html#a476fb946ed0a4583f053c8149c4a121e">helios::ecs::details::Entities::GetGeneration</a></div><div class="ttdeci">Entity::GenerationType GetGeneration(Entity::IndexType index) const noexcept</div><div class="ttdoc">Returns current generation value for a given index (or kInvalidGeneration if out of range).</div><div class="ttdef"><b>Definition</b> <a href="entities__manager_8hpp_source.html#l00334">entities_manager.hpp:334</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1Entities_html_a9f096a77f34d432b162d411318ce9e3b"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1Entities.html#a9f096a77f34d432b162d411318ce9e3b">helios::ecs::details::Entities::CreateEntities</a></div><div class="ttdeci">OutputIt CreateEntities(size_t count, OutputIt out)</div><div class="ttdef"><b>Definition</b> <a href="entities__manager_8hpp_source.html#l00267">entities_manager.hpp:267</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1Entities_html_aafda01b5d834b1e019c9f7cdf8e63bd0"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1Entities.html#aafda01b5d834b1e019c9f7cdf8e63bd0">helios::ecs::details::Entities::operator=</a></div><div class="ttdeci">Entities &amp; operator=(const Entities &amp;)=delete</div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1Entities_html_ac1afdf8a2dce44f612fa37258a0b92d5"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1Entities.html#ac1afdf8a2dce44f612fa37258a0b92d5">helios::ecs::details::Entities::Entities</a></div><div class="ttdeci">Entities()=default</div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1Entities_html_af21f559f07e2122d9a79a3cedacfb34e"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1Entities.html#af21f559f07e2122d9a79a3cedacfb34e">helios::ecs::details::Entities::Count</a></div><div class="ttdeci">size_t Count() const noexcept</div><div class="ttdoc">Gets the current number of living entities.</div><div class="ttdef"><b>Definition</b> <a href="entities__manager_8hpp_source.html#l00140">entities_manager.hpp:140</a></div></div>
+<div class="ttc" id="acore__pch_8hpp_html"><div class="ttname"><a href="core__pch_8hpp.html">core_pch.hpp</a></div></div>
+<div class="ttc" id="aentity_8hpp_html"><div class="ttname"><a href="entity_8hpp.html">entity.hpp</a></div></div>
+<div class="ttc" id="alogger_8hpp_html"><div class="ttname"><a href="logger_8hpp.html">logger.hpp</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_1_1details_html"><div class="ttname"><a href="namespacehelios_1_1ecs_1_1details.html">helios::ecs::details</a></div><div class="ttdef"><b>Definition</b> <a href="archetype_8hpp_source.html#l00020">archetype.hpp:20</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_af0384de48d847585fcb340c71c231e5e"><div class="ttname"><a href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, Allocator, Components... &gt; Query</div><div class="ttdoc">Type alias for query with mutable world access.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02515">query.hpp:2515</a></div></div>
+</div><!-- fragment --> </div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

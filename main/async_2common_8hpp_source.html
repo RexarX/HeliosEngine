@@ -1,0 +1,336 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: src/core/include/helios/core/async/common.hpp Source File</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('async_2common_8hpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">common.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="async_2common_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;<a class="code" href="core__pch_8hpp.html">helios/core_pch.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;taskflow/core/task.hpp&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;concepts&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;expected&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;string_view&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1async.html">helios::async</a> {</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">class </span>SubTaskGraph;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"></span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"> * @brief Types of tasks in the async system.</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"> */</span></div>
+<div class="foldopen" id="foldopen00020" data-start="{" data-end="};">
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="namespacehelios_1_1async.html#a09f164e8eba5bc20e0d6176fe9804ccd">   20</a></span><span class="keyword">enum class</span> <a class="code hl_enumeration" href="namespacehelios_1_1async.html#a09f164e8eba5bc20e0d6176fe9804ccd">TaskType</a> : uint8_t {</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  <a class="code hl_enumvalue" href="namespacehelios_1_1async.html#a09f164e8eba5bc20e0d6176fe9804ccdaec0fc0100c4fc1ce4eea230c3dc10360">Undefined</a>,</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  <a class="code hl_enumvalue" href="namespacehelios_1_1async.html#a09f164e8eba5bc20e0d6176fe9804ccda84a8921b25f505d0d2077aeb5db4bc16">Static</a>,   <span class="comment">///&lt; Static task with fixed callable</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  <a class="code hl_enumvalue" href="namespacehelios_1_1async.html#a09f164e8eba5bc20e0d6176fe9804ccdadd8f1e76a5041e6952528098522b28ae">SubTask</a>,  <span class="comment">///&lt; Dynamic task that can spawn subtasks</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  <a class="code hl_enumvalue" href="namespacehelios_1_1async.html#a09f164e8eba5bc20e0d6176fe9804ccda24aa4117da86c41684ad25742832dfa6">Async</a>     <span class="comment">///&lt; Asynchronous task executed independently</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>};</div>
+</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment"></span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment"> * @brief Error codes for async operations.</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment"> */</span></div>
+<div class="foldopen" id="foldopen00030" data-start="{" data-end="};">
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="namespacehelios_1_1async.html#a09e08269962c2b0f4513d8f58a31db0a">   30</a></span><span class="keyword">enum class</span> <a class="code hl_enumeration" href="namespacehelios_1_1async.html#a09e08269962c2b0f4513d8f58a31db0a">AsyncError</a> : uint8_t {</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  <a class="code hl_enumvalue" href="namespacehelios_1_1async.html#a09e08269962c2b0f4513d8f58a31db0aad0b4ab5393aa59643bcb6fca74d9b28d">InvalidTask</a>,         <span class="comment">///&lt; Task handle is invalid or empty</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  <a class="code hl_enumvalue" href="namespacehelios_1_1async.html#a09e08269962c2b0f4513d8f58a31db0aacb62d991713e6846fc35d22ea2a90fac">ExecutorShutdown</a>,    <span class="comment">///&lt; Executor has been shut down</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  <a class="code hl_enumvalue" href="namespacehelios_1_1async.html#a09e08269962c2b0f4513d8f58a31db0aaa9570c20394b496974b8393df437605c">TaskNotFound</a>,        <span class="comment">///&lt; Specified task could not be found</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <a class="code hl_enumvalue" href="namespacehelios_1_1async.html#a09e08269962c2b0f4513d8f58a31db0aacce733a321fc57f71d4a4c83eb83a019">InvalidDependency</a>,   <span class="comment">///&lt; Dependency relationship is invalid</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  <a class="code hl_enumvalue" href="namespacehelios_1_1async.html#a09e08269962c2b0f4513d8f58a31db0aaa7322e5a4431c87bdf7cce02f764d4a4">CircularDependency</a>,  <span class="comment">///&lt; Circular dependency detected in task graph</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  <a class="code hl_enumvalue" href="namespacehelios_1_1async.html#a09e08269962c2b0f4513d8f58a31db0aa7f480b617754abffc59fa6d5169b1141">SchedulingFailed</a>,    <span class="comment">///&lt; Task could not be scheduled for execution</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  <a class="code hl_enumvalue" href="namespacehelios_1_1async.html#a09e08269962c2b0f4513d8f58a31db0aa534c948bfc1e99ad05e0236100d8d946">ThreadNotAvailable</a>   <span class="comment">///&lt; No worker thread available for execution</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>};</div>
+</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment"></span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment"> * @brief Converts AsyncError to string representation.</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment"> */</span></div>
+<div class="foldopen" id="foldopen00043" data-start="{" data-end="}">
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="namespacehelios_1_1async.html#a39d83d17a98cd197bd3f3167bf38d32f">   43</a></span>[[nodiscard]] <span class="keyword">constexpr</span> std::string_view <a class="code hl_function" href="namespacehelios_1_1async.html#a39d83d17a98cd197bd3f3167bf38d32f">ToString</a>(<a class="code hl_enumeration" href="namespacehelios_1_1async.html#a09e08269962c2b0f4513d8f58a31db0a">AsyncError</a> error) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  <span class="keywordflow">switch</span> (error) {</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacehelios_1_1async.html#a09e08269962c2b0f4513d8f58a31db0aad0b4ab5393aa59643bcb6fca74d9b28d">AsyncError::InvalidTask</a>:</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;Invalid task&quot;</span>;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacehelios_1_1async.html#a09e08269962c2b0f4513d8f58a31db0aacb62d991713e6846fc35d22ea2a90fac">AsyncError::ExecutorShutdown</a>:</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;Executor is shutdown&quot;</span>;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacehelios_1_1async.html#a09e08269962c2b0f4513d8f58a31db0aaa9570c20394b496974b8393df437605c">AsyncError::TaskNotFound</a>:</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;Task not found&quot;</span>;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacehelios_1_1async.html#a09e08269962c2b0f4513d8f58a31db0aacce733a321fc57f71d4a4c83eb83a019">AsyncError::InvalidDependency</a>:</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;Invalid dependency&quot;</span>;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacehelios_1_1async.html#a09e08269962c2b0f4513d8f58a31db0aaa7322e5a4431c87bdf7cce02f764d4a4">AsyncError::CircularDependency</a>:</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;Circular dependency detected&quot;</span>;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacehelios_1_1async.html#a09e08269962c2b0f4513d8f58a31db0aa7f480b617754abffc59fa6d5169b1141">AsyncError::SchedulingFailed</a>:</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;Task scheduling failed&quot;</span>;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacehelios_1_1async.html#a09e08269962c2b0f4513d8f58a31db0aa534c948bfc1e99ad05e0236100d8d946">AsyncError::ThreadNotAvailable</a>:</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;Thread not available&quot;</span>;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;Unknown async error&quot;</span>;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  }</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>}</div>
+</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment"></span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment"> * @brief Result type for async operations.</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T = <span class="keywordtype">void</span>&gt;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="namespacehelios_1_1async.html#abdb9bb21bd2dff542f5374f6e057ee76">   68</a></span><span class="keyword">using </span><a class="code hl_typedef" href="namespacehelios_1_1async.html#abdb9bb21bd2dff542f5374f6e057ee76">AsyncResult</a> = std::expected&lt;T, AsyncError&gt;;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment"></span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment"> * @brief Concept for static task callables.</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> C&gt;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="concepthelios_1_1async_1_1StaticTask.html">   74</a></span><span class="keyword">concept </span><a class="code hl_concept" href="concepthelios_1_1async_1_1StaticTask.html">StaticTask</a> = std::invocable&lt;C&gt; &amp;&amp; std::same_as&lt;std::invoke_result_t&lt;C&gt;, <span class="keywordtype">void</span>&gt;;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment"></span> </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment"> * @brief Concept for sub-task callables that receive a SubTaskGraph reference.</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> C&gt;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="concepthelios_1_1async_1_1SubTask.html">   80</a></span><span class="keyword">concept </span><a class="code hl_concept" href="concepthelios_1_1async_1_1SubTask.html">SubTask</a> = std::invocable&lt;C, SubTaskGraph&amp;&gt;;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment"></span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment"> * @brief Concept for any valid task callable.</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> C&gt;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="concepthelios_1_1async_1_1AnyTask.html">   86</a></span><span class="keyword">concept </span><a class="code hl_concept" href="concepthelios_1_1async_1_1AnyTask.html">AnyTask</a> = <a class="code hl_concept" href="concepthelios_1_1async_1_1StaticTask.html">StaticTask&lt;C&gt;</a> || <a class="code hl_concept" href="concepthelios_1_1async_1_1SubTask.html">SubTask&lt;C&gt;</a>;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="foldopen" id="foldopen00088" data-start="{" data-end="}">
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno"><a class="line" href="namespacehelios_1_1async_1_1details.html">   88</a></span><span class="keyword">namespace </span>details {</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment"></span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment"> * @brief Converts Taskflow task type to Helios task type.</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment"> * @param type Taskflow task type</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment"> * @return Corresponding Helios task type</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment"> */</span></div>
+<div class="foldopen" id="foldopen00095" data-start="{" data-end="}">
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno"><a class="line" href="namespacehelios_1_1async_1_1details.html#ae4bf6f03c0dfef8c6e6fb7938bd57d55">   95</a></span>[[nodiscard]] <span class="keyword">static</span> <span class="keyword">constexpr</span> <a class="code hl_enumeration" href="namespacehelios_1_1async.html#a09f164e8eba5bc20e0d6176fe9804ccd">TaskType</a> <a class="code hl_function" href="namespacehelios_1_1async_1_1details.html#ae4bf6f03c0dfef8c6e6fb7938bd57d55">ConvertTaskType</a>(tf::TaskType type) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>  <span class="keywordflow">switch</span> (type) {</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keywordflow">case</span> tf::TaskType::STATIC:</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>      <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="namespacehelios_1_1async.html#a09f164e8eba5bc20e0d6176fe9804ccda84a8921b25f505d0d2077aeb5db4bc16">TaskType::Static</a>;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <span class="keywordflow">case</span> tf::TaskType::SUBFLOW:</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>      <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="namespacehelios_1_1async.html#a09f164e8eba5bc20e0d6176fe9804ccdadd8f1e76a5041e6952528098522b28ae">TaskType::SubTask</a>;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <span class="keywordflow">case</span> tf::TaskType::ASYNC:</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>      <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="namespacehelios_1_1async.html#a09f164e8eba5bc20e0d6176fe9804ccda24aa4117da86c41684ad25742832dfa6">TaskType::Async</a>;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>      <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="namespacehelios_1_1async.html#a09f164e8eba5bc20e0d6176fe9804ccda84a8921b25f505d0d2077aeb5db4bc16">TaskType::Static</a>;  <span class="comment">// Fallback to Static if unknown</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>  }</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>}</div>
+</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>}  <span class="comment">// namespace details</span></div>
+</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>}  <span class="comment">// namespace helios::async</span></div>
+<div class="ttc" id="aconcepthelios_1_1async_1_1AnyTask_html"><div class="ttname"><a href="concepthelios_1_1async_1_1AnyTask.html">helios::async::AnyTask</a></div><div class="ttdoc">Concept for any valid task callable.</div><div class="ttdef"><b>Definition</b> <a href="async_2common_8hpp_source.html#l00086">common.hpp:86</a></div></div>
+<div class="ttc" id="aconcepthelios_1_1async_1_1StaticTask_html"><div class="ttname"><a href="concepthelios_1_1async_1_1StaticTask.html">helios::async::StaticTask</a></div><div class="ttdoc">Concept for static task callables.</div><div class="ttdef"><b>Definition</b> <a href="async_2common_8hpp_source.html#l00074">common.hpp:74</a></div></div>
+<div class="ttc" id="aconcepthelios_1_1async_1_1SubTask_html"><div class="ttname"><a href="concepthelios_1_1async_1_1SubTask.html">helios::async::SubTask</a></div><div class="ttdoc">Concept for sub-task callables that receive a SubTaskGraph reference.</div><div class="ttdef"><b>Definition</b> <a href="async_2common_8hpp_source.html#l00080">common.hpp:80</a></div></div>
+<div class="ttc" id="acore__pch_8hpp_html"><div class="ttname"><a href="core__pch_8hpp.html">core_pch.hpp</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1async_1_1details_html_ae4bf6f03c0dfef8c6e6fb7938bd57d55"><div class="ttname"><a href="namespacehelios_1_1async_1_1details.html#ae4bf6f03c0dfef8c6e6fb7938bd57d55">helios::async::details::ConvertTaskType</a></div><div class="ttdeci">static constexpr TaskType ConvertTaskType(tf::TaskType type) noexcept</div><div class="ttdoc">Converts Taskflow task type to Helios task type.</div><div class="ttdef"><b>Definition</b> <a href="async_2common_8hpp_source.html#l00095">common.hpp:95</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1async_html"><div class="ttname"><a href="namespacehelios_1_1async.html">helios::async</a></div><div class="ttdef"><b>Definition</b> <a href="async__task_8hpp_source.html#l00012">async_task.hpp:12</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1async_html_a09e08269962c2b0f4513d8f58a31db0a"><div class="ttname"><a href="namespacehelios_1_1async.html#a09e08269962c2b0f4513d8f58a31db0a">helios::async::AsyncError</a></div><div class="ttdeci">AsyncError</div><div class="ttdoc">Error codes for async operations.</div><div class="ttdef"><b>Definition</b> <a href="async_2common_8hpp_source.html#l00030">common.hpp:30</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1async_html_a09e08269962c2b0f4513d8f58a31db0aa534c948bfc1e99ad05e0236100d8d946"><div class="ttname"><a href="namespacehelios_1_1async.html#a09e08269962c2b0f4513d8f58a31db0aa534c948bfc1e99ad05e0236100d8d946">helios::async::AsyncError::ThreadNotAvailable</a></div><div class="ttdeci">@ ThreadNotAvailable</div><div class="ttdoc">No worker thread available for execution.</div></div>
+<div class="ttc" id="anamespacehelios_1_1async_html_a09e08269962c2b0f4513d8f58a31db0aa7f480b617754abffc59fa6d5169b1141"><div class="ttname"><a href="namespacehelios_1_1async.html#a09e08269962c2b0f4513d8f58a31db0aa7f480b617754abffc59fa6d5169b1141">helios::async::AsyncError::SchedulingFailed</a></div><div class="ttdeci">@ SchedulingFailed</div><div class="ttdoc">Task could not be scheduled for execution.</div></div>
+<div class="ttc" id="anamespacehelios_1_1async_html_a09e08269962c2b0f4513d8f58a31db0aaa7322e5a4431c87bdf7cce02f764d4a4"><div class="ttname"><a href="namespacehelios_1_1async.html#a09e08269962c2b0f4513d8f58a31db0aaa7322e5a4431c87bdf7cce02f764d4a4">helios::async::AsyncError::CircularDependency</a></div><div class="ttdeci">@ CircularDependency</div><div class="ttdoc">Circular dependency detected in task graph.</div></div>
+<div class="ttc" id="anamespacehelios_1_1async_html_a09e08269962c2b0f4513d8f58a31db0aaa9570c20394b496974b8393df437605c"><div class="ttname"><a href="namespacehelios_1_1async.html#a09e08269962c2b0f4513d8f58a31db0aaa9570c20394b496974b8393df437605c">helios::async::AsyncError::TaskNotFound</a></div><div class="ttdeci">@ TaskNotFound</div><div class="ttdoc">Specified task could not be found.</div></div>
+<div class="ttc" id="anamespacehelios_1_1async_html_a09e08269962c2b0f4513d8f58a31db0aacb62d991713e6846fc35d22ea2a90fac"><div class="ttname"><a href="namespacehelios_1_1async.html#a09e08269962c2b0f4513d8f58a31db0aacb62d991713e6846fc35d22ea2a90fac">helios::async::AsyncError::ExecutorShutdown</a></div><div class="ttdeci">@ ExecutorShutdown</div><div class="ttdoc">Executor has been shut down.</div></div>
+<div class="ttc" id="anamespacehelios_1_1async_html_a09e08269962c2b0f4513d8f58a31db0aacce733a321fc57f71d4a4c83eb83a019"><div class="ttname"><a href="namespacehelios_1_1async.html#a09e08269962c2b0f4513d8f58a31db0aacce733a321fc57f71d4a4c83eb83a019">helios::async::AsyncError::InvalidDependency</a></div><div class="ttdeci">@ InvalidDependency</div><div class="ttdoc">Dependency relationship is invalid.</div></div>
+<div class="ttc" id="anamespacehelios_1_1async_html_a09e08269962c2b0f4513d8f58a31db0aad0b4ab5393aa59643bcb6fca74d9b28d"><div class="ttname"><a href="namespacehelios_1_1async.html#a09e08269962c2b0f4513d8f58a31db0aad0b4ab5393aa59643bcb6fca74d9b28d">helios::async::AsyncError::InvalidTask</a></div><div class="ttdeci">@ InvalidTask</div><div class="ttdoc">Task handle is invalid or empty.</div></div>
+<div class="ttc" id="anamespacehelios_1_1async_html_a09f164e8eba5bc20e0d6176fe9804ccd"><div class="ttname"><a href="namespacehelios_1_1async.html#a09f164e8eba5bc20e0d6176fe9804ccd">helios::async::TaskType</a></div><div class="ttdeci">TaskType</div><div class="ttdoc">Types of tasks in the async system.</div><div class="ttdef"><b>Definition</b> <a href="async_2common_8hpp_source.html#l00020">common.hpp:20</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1async_html_a09f164e8eba5bc20e0d6176fe9804ccda24aa4117da86c41684ad25742832dfa6"><div class="ttname"><a href="namespacehelios_1_1async.html#a09f164e8eba5bc20e0d6176fe9804ccda24aa4117da86c41684ad25742832dfa6">helios::async::TaskType::Async</a></div><div class="ttdeci">@ Async</div><div class="ttdoc">Asynchronous task executed independently.</div></div>
+<div class="ttc" id="anamespacehelios_1_1async_html_a09f164e8eba5bc20e0d6176fe9804ccda84a8921b25f505d0d2077aeb5db4bc16"><div class="ttname"><a href="namespacehelios_1_1async.html#a09f164e8eba5bc20e0d6176fe9804ccda84a8921b25f505d0d2077aeb5db4bc16">helios::async::TaskType::Static</a></div><div class="ttdeci">@ Static</div><div class="ttdoc">Static task with fixed callable.</div></div>
+<div class="ttc" id="anamespacehelios_1_1async_html_a09f164e8eba5bc20e0d6176fe9804ccdadd8f1e76a5041e6952528098522b28ae"><div class="ttname"><a href="namespacehelios_1_1async.html#a09f164e8eba5bc20e0d6176fe9804ccdadd8f1e76a5041e6952528098522b28ae">helios::async::TaskType::SubTask</a></div><div class="ttdeci">@ SubTask</div><div class="ttdoc">Dynamic task that can spawn subtasks.</div></div>
+<div class="ttc" id="anamespacehelios_1_1async_html_a09f164e8eba5bc20e0d6176fe9804ccdaec0fc0100c4fc1ce4eea230c3dc10360"><div class="ttname"><a href="namespacehelios_1_1async.html#a09f164e8eba5bc20e0d6176fe9804ccdaec0fc0100c4fc1ce4eea230c3dc10360">helios::async::TaskType::Undefined</a></div><div class="ttdeci">@ Undefined</div></div>
+<div class="ttc" id="anamespacehelios_1_1async_html_a39d83d17a98cd197bd3f3167bf38d32f"><div class="ttname"><a href="namespacehelios_1_1async.html#a39d83d17a98cd197bd3f3167bf38d32f">helios::async::ToString</a></div><div class="ttdeci">constexpr std::string_view ToString(AsyncError error) noexcept</div><div class="ttdoc">Converts AsyncError to string representation.</div><div class="ttdef"><b>Definition</b> <a href="async_2common_8hpp_source.html#l00043">common.hpp:43</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1async_html_abdb9bb21bd2dff542f5374f6e057ee76"><div class="ttname"><a href="namespacehelios_1_1async.html#abdb9bb21bd2dff542f5374f6e057ee76">helios::async::AsyncResult</a></div><div class="ttdeci">std::expected&lt; T, AsyncError &gt; AsyncResult</div><div class="ttdoc">Result type for async operations.</div><div class="ttdef"><b>Definition</b> <a href="async_2common_8hpp_source.html#l00068">common.hpp:68</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_aebb8dcc11953d78e620bbef0b9e2183.html">core</a></li><li class="navelem"><a class="el" href="dir_8f49dd062eda24395df599c5385a3cb1.html">include</a></li><li class="navelem"><a class="el" href="dir_23069df5183a130785923908e80258ad.html">helios</a></li><li class="navelem"><a class="el" href="dir_2da2d982aeea650f7dd0b34d7b8d0119.html">core</a></li><li class="navelem"><a class="el" href="dir_fc062457b39c39fb8ec6aaf8468afab9.html">async</a></li><li class="navelem"><a class="el" href="async_2common_8hpp.html">common.hpp</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,302 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: helios::memory::AllocationResult Struct Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('structhelios_1_1memory_1_1AllocationResult.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="structhelios_1_1memory_1_1AllocationResult-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">helios::memory::AllocationResult Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Result type for allocation operations.  
+ <a href="structhelios_1_1memory_1_1AllocationResult.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="allocator__traits_8hpp_source.html">allocator_traits.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a24aec966ac4a26f8e1ad962ca352a9a7" id="r_a24aec966ac4a26f8e1ad962ca352a9a7"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1memory_1_1AllocationResult.html#a24aec966ac4a26f8e1ad962ca352a9a7">Valid</a> () const noexcept</td></tr>
+<tr class="memdesc:a24aec966ac4a26f8e1ad962ca352a9a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the allocation was successful.  <br /></td></tr>
+<tr class="separator:a24aec966ac4a26f8e1ad962ca352a9a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a2d363e5873a3d52488e9bc752398e4f1" id="r_a2d363e5873a3d52488e9bc752398e4f1"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1memory_1_1AllocationResult.html#a2d363e5873a3d52488e9bc752398e4f1">ptr</a> = nullptr</td></tr>
+<tr class="memdesc:a2d363e5873a3d52488e9bc752398e4f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to allocated memory, nullptr on failure.  <br /></td></tr>
+<tr class="separator:a2d363e5873a3d52488e9bc752398e4f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab8feae67968c928fb4ecbadd00c90dd" id="r_aab8feae67968c928fb4ecbadd00c90dd"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1memory_1_1AllocationResult.html#aab8feae67968c928fb4ecbadd00c90dd">allocated_size</a> = 0</td></tr>
+<tr class="memdesc:aab8feae67968c928fb4ecbadd00c90dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actual size allocated (may be larger than requested)  <br /></td></tr>
+<tr class="separator:aab8feae67968c928fb4ecbadd00c90dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Result type for allocation operations. </p>
+<p>Contains pointer and actual allocated size, or error code. </p>
+
+<p class="definition">Definition at line <a class="el" href="allocator__traits_8hpp_source.html#l00031">31</a> of file <a class="el" href="allocator__traits_8hpp_source.html">allocator_traits.hpp</a>.</p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a24aec966ac4a26f8e1ad962ca352a9a7" name="a24aec966ac4a26f8e1ad962ca352a9a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24aec966ac4a26f8e1ad962ca352a9a7">&#9670;&#160;</a></span>Valid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool helios::memory::AllocationResult::Valid </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if the allocation was successful. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if ptr is not nullptr, false otherwise </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2allocator_traits_8hpp-example.html#a9">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/allocator_traits.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="allocator__traits_8hpp_source.html#l00039">39</a> of file <a class="el" href="allocator__traits_8hpp_source.html">allocator_traits.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   39</span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="structhelios_1_1memory_1_1AllocationResult.html#a2d363e5873a3d52488e9bc752398e4f1">ptr</a> != <span class="keyword">nullptr</span> &amp;&amp; <a class="code hl_variable" href="structhelios_1_1memory_1_1AllocationResult.html#aab8feae67968c928fb4ecbadd00c90dd">allocated_size</a> &gt; 0; }</div>
+<div class="ttc" id="astructhelios_1_1memory_1_1AllocationResult_html_a2d363e5873a3d52488e9bc752398e4f1"><div class="ttname"><a href="structhelios_1_1memory_1_1AllocationResult.html#a2d363e5873a3d52488e9bc752398e4f1">helios::memory::AllocationResult::ptr</a></div><div class="ttdeci">void * ptr</div><div class="ttdoc">Pointer to allocated memory, nullptr on failure.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00032">allocator_traits.hpp:32</a></div></div>
+<div class="ttc" id="astructhelios_1_1memory_1_1AllocationResult_html_aab8feae67968c928fb4ecbadd00c90dd"><div class="ttname"><a href="structhelios_1_1memory_1_1AllocationResult.html#aab8feae67968c928fb4ecbadd00c90dd">helios::memory::AllocationResult::allocated_size</a></div><div class="ttdeci">size_t allocated_size</div><div class="ttdoc">Actual size allocated (may be larger than requested)</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00033">allocator_traits.hpp:33</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="aab8feae67968c928fb4ecbadd00c90dd" name="aab8feae67968c928fb4ecbadd00c90dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab8feae67968c928fb4ecbadd00c90dd">&#9670;&#160;</a></span>allocated_size</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t helios::memory::AllocationResult::allocated_size = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Actual size allocated (may be larger than requested) </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2allocator_traits_8hpp-example.html#a8">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/allocator_traits.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="allocator__traits_8hpp_source.html#l00033">33</a> of file <a class="el" href="allocator__traits_8hpp_source.html">allocator_traits.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a2d363e5873a3d52488e9bc752398e4f1" name="a2d363e5873a3d52488e9bc752398e4f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d363e5873a3d52488e9bc752398e4f1">&#9670;&#160;</a></span>ptr</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* helios::memory::AllocationResult::ptr = nullptr</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Pointer to allocated memory, nullptr on failure. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2allocator_traits_8hpp-example.html#a7">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/allocator_traits.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="allocator__traits_8hpp_source.html#l00032">32</a> of file <a class="el" href="allocator__traits_8hpp_source.html">allocator_traits.hpp</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehelios.html">helios</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1memory.html">memory</a></li><li class="navelem"><a class="el" href="structhelios_1_1memory_1_1AllocationResult.html">AllocationResult</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

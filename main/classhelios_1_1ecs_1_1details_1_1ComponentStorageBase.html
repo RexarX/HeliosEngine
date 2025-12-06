@@ -1,0 +1,470 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: helios::ecs::details::ComponentStorageBase Class Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classhelios_1_1ecs_1_1details_1_1ComponentStorageBase.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classhelios_1_1ecs_1_1details_1_1ComponentStorageBase-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">helios::ecs::details::ComponentStorageBase Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Base class for type-erased component storage.  
+ <a href="classhelios_1_1ecs_1_1details_1_1ComponentStorageBase.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="components__manager_8hpp_source.html">components_manager.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for helios::ecs::details::ComponentStorageBase:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classhelios_1_1ecs_1_1details_1_1ComponentStorageBase.png" usemap="#helios::ecs::details::ComponentStorageBase_map" alt=""/>
+  <map id="helios::ecs::details::ComponentStorageBase_map" name="helios::ecs::details::ComponentStorageBase_map">
+<area href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html" title="Type-specific component storage using sparse set." alt="helios::ecs::details::ComponentStorage&lt; T &gt;" shape="rect" coords="0,56,257,80"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a6f7466b3a0b145daed656ff508441bde" id="r_a6f7466b3a0b145daed656ff508441bde"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorageBase.html#a6f7466b3a0b145daed656ff508441bde">~ComponentStorageBase</a> ()=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:a6f7466b3a0b145daed656ff508441bde"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30f2eb18c82b3b86bfa4fa3aa658ba67" id="r_a30f2eb18c82b3b86bfa4fa3aa658ba67"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">virtual</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorageBase.html#a30f2eb18c82b3b86bfa4fa3aa658ba67">Clear</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=0</td></tr>
+<tr class="memdesc:a30f2eb18c82b3b86bfa4fa3aa658ba67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears all components from storage.  <br /></td></tr>
+<tr class="separator:a30f2eb18c82b3b86bfa4fa3aa658ba67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63510c77923fdf2dc199b6f2a587a894" id="r_a63510c77923fdf2dc199b6f2a587a894"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">virtual</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorageBase.html#a63510c77923fdf2dc199b6f2a587a894">Remove</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> entity)=0</td></tr>
+<tr class="memdesc:a63510c77923fdf2dc199b6f2a587a894"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes component for the specified entity.  <br /></td></tr>
+<tr class="separator:a63510c77923fdf2dc199b6f2a587a894"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2193c91d0ddf58df8e98aa8875f72b4" id="r_ab2193c91d0ddf58df8e98aa8875f72b4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">virtual</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorageBase.html#ab2193c91d0ddf58df8e98aa8875f72b4">TryRemove</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> entity)=0</td></tr>
+<tr class="memdesc:ab2193c91d0ddf58df8e98aa8875f72b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to remove component for the specified entity.  <br /></td></tr>
+<tr class="separator:ab2193c91d0ddf58df8e98aa8875f72b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a531208c618af1e316c2ed931195ae7e9" id="r_a531208c618af1e316c2ed931195ae7e9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">virtual</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorageBase.html#a531208c618af1e316c2ed931195ae7e9">Contains</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> entity) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> =0</td></tr>
+<tr class="memdesc:a531208c618af1e316c2ed931195ae7e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if entity has a component in this storage.  <br /></td></tr>
+<tr class="separator:a531208c618af1e316c2ed931195ae7e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0ddd9f9c637590c783fa77fb9495a85" id="r_ae0ddd9f9c637590c783fa77fb9495a85"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">virtual</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorageBase.html#ae0ddd9f9c637590c783fa77fb9495a85">Size</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=0</td></tr>
+<tr class="memdesc:ae0ddd9f9c637590c783fa77fb9495a85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of components in storage.  <br /></td></tr>
+<tr class="separator:ae0ddd9f9c637590c783fa77fb9495a85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2383bf2d2671cd3f4b7a67380b2a3b70" id="r_a2383bf2d2671cd3f4b7a67380b2a3b70"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">virtual</a> <a class="el" href="classhelios_1_1ecs_1_1ComponentTypeInfo.html">ComponentTypeInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorageBase.html#a2383bf2d2671cd3f4b7a67380b2a3b70">GetTypeInfo</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=0</td></tr>
+<tr class="memdesc:a2383bf2d2671cd3f4b7a67380b2a3b70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets type information for the component type stored.  <br /></td></tr>
+<tr class="separator:a2383bf2d2671cd3f4b7a67380b2a3b70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Base class for type-erased component storage. </p>
+<p>Provides a common interface for storing different component types in a heterogeneous container. Each derived ComponentStorage&lt;T&gt; manages components of a specific type T using a sparse set for efficient operations.</p>
+<dl class="section note"><dt>Note</dt><dd>Not thread-safe. All operations should be performed from the main thread. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="components__manager_8hpp_source.html#l00030">30</a> of file <a class="el" href="components__manager_8hpp_source.html">components_manager.hpp</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a6f7466b3a0b145daed656ff508441bde" name="a6f7466b3a0b145daed656ff508441bde"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f7466b3a0b145daed656ff508441bde">&#9670;&#160;</a></span>~ComponentStorageBase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">virtual</a> helios::ecs::details::ComponentStorageBase::~ComponentStorageBase </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a30f2eb18c82b3b86bfa4fa3aa658ba67" name="a30f2eb18c82b3b86bfa4fa3aa658ba67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30f2eb18c82b3b86bfa4fa3aa658ba67">&#9670;&#160;</a></span>Clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">virtual</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a> helios::ecs::details::ComponentStorageBase::Clear </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Clears all components from storage. </p>
+<p>Removes all component instances and resets internal state. </p>
+
+<p>Implemented in <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#aa88d6d58fac40b6c7a75eede9565c687">helios::ecs::details::ComponentStorage&lt; T &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a531208c618af1e316c2ed931195ae7e9" name="a531208c618af1e316c2ed931195ae7e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a531208c618af1e316c2ed931195ae7e9">&#9670;&#160;</a></span>Contains()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">virtual</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a> helios::ecs::details::ComponentStorageBase::Contains </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>&#160;</td>
+          <td class="paramname"><em>entity</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if entity has a component in this storage. </p>
+<p>Performs fast lookup to determine component presence. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entity</td><td><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> to check </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if entity has a component in this storage, false otherwise </dd></dl>
+
+<p>Implemented in <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#ae00d8de92b1fde83d906a0e0ffad8269">helios::ecs::details::ComponentStorage&lt; T &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a2383bf2d2671cd3f4b7a67380b2a3b70" name="a2383bf2d2671cd3f4b7a67380b2a3b70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2383bf2d2671cd3f4b7a67380b2a3b70">&#9670;&#160;</a></span>GetTypeInfo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">virtual</a> <a class="el" href="classhelios_1_1ecs_1_1ComponentTypeInfo.html">ComponentTypeInfo</a> helios::ecs::details::ComponentStorageBase::GetTypeInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets type information for the component type stored. </p>
+<p>Returns compile-time component metadata including size, alignment, etc. </p><dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1ecs_1_1ComponentTypeInfo.html" title="Component type info for runtime operations.">ComponentTypeInfo</a> for the stored component type </dd></dl>
+
+<p>Implemented in <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#a710f5c65fd37d21e54e64eb83a0338b1">helios::ecs::details::ComponentStorage&lt; T &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a63510c77923fdf2dc199b6f2a587a894" name="a63510c77923fdf2dc199b6f2a587a894"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63510c77923fdf2dc199b6f2a587a894">&#9670;&#160;</a></span>Remove()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">virtual</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a> helios::ecs::details::ComponentStorageBase::Remove </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>&#160;</td>
+          <td class="paramname"><em>entity</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Removes component for the specified entity. </p>
+<p>Removes the component associated with the entity. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if entity doesn't have the component. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entity</td><td><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> to remove component from </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#a5b21df2c686e7859de700c6b6f3abfad">helios::ecs::details::ComponentStorage&lt; T &gt;</a>.</p>
+
+</div>
+</div>
+<a id="ae0ddd9f9c637590c783fa77fb9495a85" name="ae0ddd9f9c637590c783fa77fb9495a85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0ddd9f9c637590c783fa77fb9495a85">&#9670;&#160;</a></span>Size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">virtual</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a> helios::ecs::details::ComponentStorageBase::Size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the number of components in storage. </p>
+<p>Returns count of component instances currently stored. </p><dl class="section return"><dt>Returns</dt><dd>Number of components in storage </dd></dl>
+
+<p>Implemented in <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#a480e146202fb29317fd0bfd2ad11f818">helios::ecs::details::ComponentStorage&lt; T &gt;</a>.</p>
+
+</div>
+</div>
+<a id="ab2193c91d0ddf58df8e98aa8875f72b4" name="ab2193c91d0ddf58df8e98aa8875f72b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2193c91d0ddf58df8e98aa8875f72b4">&#9670;&#160;</a></span>TryRemove()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">virtual</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a> helios::ecs::details::ComponentStorageBase::TryRemove </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>&#160;</td>
+          <td class="paramname"><em>entity</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Attempts to remove component for the specified entity. </p>
+<p>Removes the component if it exists, otherwise does nothing. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entity</td><td><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> to remove component from </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if component was removed, false if entity didn't have the component </dd></dl>
+
+<p>Implemented in <a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#af033c797e72b7faf69ffead9c9bb63a4">helios::ecs::details::ComponentStorage&lt; T &gt;</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehelios.html">helios</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1ecs.html">ecs</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1ecs_1_1details.html">details</a></li><li class="navelem"><a class="el" href="classhelios_1_1ecs_1_1details_1_1ComponentStorageBase.html">ComponentStorageBase</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

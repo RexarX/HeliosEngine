@@ -1,0 +1,810 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: /home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/growable_allocator.hpp</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2growable_allocator_8hpp-example.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/growable_allocator.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<p>Allocates memory for a single object of type T.</p>
+<p>Allocates memory for a single object of type T. Convenience function that calculates size and alignment from the type. The returned memory is uninitialized - use placement new to construct the object. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Type to allocate memory for </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to allocated memory, or nullptr on failure</dd></dl>
+<div class="fragment"><div class="line">GrowableAllocator&lt;FrameAllocator&gt; alloc(1024);</div>
+<div class="line"><span class="keywordtype">int</span>* ptr = alloc.Allocate&lt;<span class="keywordtype">int</span>&gt;();</div>
+<div class="line"><span class="keywordflow">if</span> (ptr != <span class="keyword">nullptr</span>) {</div>
+<div class="line">  <span class="keyword">new</span> (ptr) <span class="keywordtype">int</span>(42);</div>
+<div class="line">}</div>
+</div><!-- fragment --><div class="fragment"><div class="line"><span class="preprocessor">#pragma once</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="core__pch_8hpp.html">helios/core_pch.hpp</a>&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="assert_8hpp.html">helios/core/assert.hpp</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="logger_8hpp.html">helios/core/logger.hpp</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="allocator__traits_8hpp.html">helios/core/memory/allocator_traits.hpp</a>&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;algorithm&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;concepts&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;cstddef&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;mutex&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;shared_mutex&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1memory.html">helios::memory</a> {</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief Growable allocator adapter that automatically expands capacity.</span></div>
+<div class="line"><span class="comment"> * @details Wraps another allocator and automatically creates additional allocator</span></div>
+<div class="line"><span class="comment"> * instances when capacity is exceeded. Manages multiple allocator instances and</span></div>
+<div class="line"><span class="comment"> * delegates allocations to them.</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * When an allocation fails due to insufficient capacity, a new allocator instance</span></div>
+<div class="line"><span class="comment"> * is created with a configurable growth factor applied to the initial capacity.</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * Supports deallocation by tracking which allocator owns each pointer.</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * The GrowableAllocator itself is thread-safe, using shared_mutex for optimal</span></div>
+<div class="line"><span class="comment"> * concurrent access. Underlying allocators are already thread-safe.</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * @note Thread-safe with optimized locking.</span></div>
+<div class="line"><span class="comment"> * Growth occurs only when an allocation fails due to capacity constraints.</span></div>
+<div class="line"><span class="comment"> * Each growth creates a new allocator instance with expanded capacity.</span></div>
+<div class="line"><span class="comment"> * Read operations (Stats, queries) use shared locks for concurrent access.</span></div>
+<div class="line"><span class="comment"> * Write operations (Allocate with growth, Deallocate, Reset) use exclusive locks.</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * The wrapped allocator must be constructible with a single capacity argument.</span></div>
+<div class="line"><span class="comment"> * Compatible allocators: FrameAllocator, StackAllocator, FreeListAllocator.</span></div>
+<div class="line"><span class="comment"> * Not compatible with: PoolAllocator (requires additional construction parameters).</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * Copy operations are conditionally available based on the underlying allocator.</span></div>
+<div class="line"><span class="comment"> * If a custom copyable allocator is provided, GrowableAllocator will automatically support</span></div>
+<div class="line"><span class="comment"> * copy construction and copy assignment.</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * @tparam Allocator The underlying allocator type to wrap</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Allocator&gt;</div>
+<div class="line"><span class="keyword">class </span>GrowableAllocator final {</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keywordtype">double</span> <a id="a0" name="a0"></a><a class="code hl_variable" href="classhelios_1_1memory_1_1GrowableAllocator.html#aa7f2e4f2e06441444a531c7105387f28">kDefaultGrowthFactor</a> = 2.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Constructs a growable allocator with initial capacity.</span></div>
+<div class="line"><span class="comment">   * @warning Triggers assertion in next cases:</span></div>
+<div class="line"><span class="comment">   * - Initial capacity is 0.</span></div>
+<div class="line"><span class="comment">   * - Growth factor is less than or equal to 1.0.</span></div>
+<div class="line"><span class="comment">   * @param initial_capacity Initial capacity for the first allocator instance</span></div>
+<div class="line"><span class="comment">   * @param growth_factor Factor to multiply capacity by when growing (default: kDefaultGrowthFactor)</span></div>
+<div class="line"><span class="comment">   * @param max_allocators Maximum number of allocator instances to create (0 = unlimited)</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">explicit</span> GrowableAllocator(<span class="keywordtype">size_t</span> initial_capacity, <span class="keywordtype">double</span> growth_factor = <a class="code hl_variable" href="classhelios_1_1memory_1_1GrowableAllocator.html#aa7f2e4f2e06441444a531c7105387f28">kDefaultGrowthFactor</a>,</div>
+<div class="line">                             <span class="keywordtype">size_t</span> max_allocators = 0);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Copy constructor.</span></div>
+<div class="line"><span class="comment">   * @note Only available if Allocator is copy constructible.</span></div>
+<div class="line"><span class="comment">   * All built-in Helios allocators are non-copyable, so this will not be available</span></div>
+<div class="line"><span class="comment">   * for standard use cases. Provided for custom copyable allocator types.</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  GrowableAllocator(<span class="keyword">const</span> GrowableAllocator&amp; other)</div>
+<div class="line">    <span class="keyword">requires</span> std::is_copy_constructible_v&lt;Allocator&gt;;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Move constructor.</span></div>
+<div class="line"><span class="comment">   * @note Only available if Allocator is move constructible.</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  GrowableAllocator(GrowableAllocator&amp;&amp; other) <span class="keyword">noexcept</span></div>
+<div class="line">    <span class="keyword">requires</span> std::is_move_constructible_v&lt;Allocator&gt;;</div>
+<div class="line"> </div>
+<div class="line">  <a id="a1" name="a1"></a><a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#aca33f1129632bcc1c64450b5b5ed1422">~GrowableAllocator</a>() <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Copy assignment operator.</span></div>
+<div class="line"><span class="comment">   * @note Only available if Allocator is copy assignable.</span></div>
+<div class="line"><span class="comment">   * All built-in Helios allocators are non-copyable, so this will not be available</span></div>
+<div class="line"><span class="comment">   * for standard use cases. Provided for custom copyable allocator types.</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  GrowableAllocator&amp; <a id="a2" name="a2"></a><a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#a16f44681269b25523139a6b0a0774727">operator=</a>(<span class="keyword">const</span> GrowableAllocator&amp; other)</div>
+<div class="line">    <span class="keyword">requires</span> std::is_copy_assignable_v&lt;Allocator&gt;;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Move assignment operator.</span></div>
+<div class="line"><span class="comment">   * @note Only available if Allocator is move assignable.</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  GrowableAllocator&amp; <a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#a16f44681269b25523139a6b0a0774727">operator=</a>(GrowableAllocator&amp;&amp; other) <span class="keyword">noexcept</span></div>
+<div class="line">    <span class="keyword">requires</span> std::is_move_assignable_v&lt;Allocator&gt;;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Allocates memory with specified size and alignment.</span></div>
+<div class="line"><span class="comment">   * @details Attempts allocation from existing allocators. If all fail,</span></div>
+<div class="line"><span class="comment">   * creates a new allocator instance with expanded capacity.</span></div>
+<div class="line"><span class="comment">   * @warning Triggers assertion in next cases:</span></div>
+<div class="line"><span class="comment">   * - Alignment is not a power of 2.</span></div>
+<div class="line"><span class="comment">   * - Alignment is less than kMinAlignment.</span></div>
+<div class="line"><span class="comment">   * @param size Number of bytes to allocate</span></div>
+<div class="line"><span class="comment">   * @param alignment Alignment requirement (must be power of 2)</span></div>
+<div class="line"><span class="comment">   * @return AllocationResult with pointer and actual allocated size, or {nullptr, 0} on failure</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] AllocationResult <a id="a3" name="a3"></a><a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#ac6176d8676a6b9bfb6691b37aa90d6a9">Allocate</a>(<span class="keywordtype">size_t</span> size, <span class="keywordtype">size_t</span> alignment = <a id="a4" name="a4"></a><a class="code hl_variable" href="namespacehelios_1_1memory.html#a14c84d27b0af2a3d13d38b2d9f6225c4">kDefaultAlignment</a>) <span class="keyword">noexcept</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Allocates memory for a single object of type T.</span></div>
+<div class="line"><span class="comment">   * @details Convenience function that calculates size and alignment from the type.</span></div>
+<div class="line"><span class="comment">   * The returned memory is uninitialized - use placement new to construct the object.</span></div>
+<div class="line"><span class="comment">   * @tparam T Type to allocate memory for</span></div>
+<div class="line"><span class="comment">   * @return Pointer to allocated memory, or nullptr on failure</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * @example</span></div>
+<div class="line"><span class="comment">   * @code</span></div>
+<div class="line"><span class="comment">   * GrowableAllocator&lt;FrameAllocator&gt; alloc(1024);</span></div>
+<div class="line"><span class="comment">   * int* ptr = alloc.Allocate&lt;int&gt;();</span></div>
+<div class="line"><span class="comment">   * if (ptr != nullptr) {</span></div>
+<div class="line"><span class="comment">   *   new (ptr) int(42);</span></div>
+<div class="line"><span class="comment">   * }</span></div>
+<div class="line"><span class="comment">   * @endcode</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line">  [[nodiscard]] T* <a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#ac6176d8676a6b9bfb6691b37aa90d6a9">Allocate</a>() <span class="keyword">noexcept</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Allocates memory for an array of objects of type T.</span></div>
+<div class="line"><span class="comment">   * @details Convenience function that calculates size and alignment from the type.</span></div>
+<div class="line"><span class="comment">   * The returned memory is uninitialized - use placement new to construct objects.</span></div>
+<div class="line"><span class="comment">   * @tparam T Type to allocate memory for</span></div>
+<div class="line"><span class="comment">   * @param count Number of objects to allocate space for</span></div>
+<div class="line"><span class="comment">   * @return Pointer to allocated memory, or nullptr on failure</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * @example</span></div>
+<div class="line"><span class="comment">   * @code</span></div>
+<div class="line"><span class="comment">   * GrowableAllocator&lt;FrameAllocator&gt; alloc(1024);</span></div>
+<div class="line"><span class="comment">   * int* arr = alloc.Allocate&lt;int&gt;(10);</span></div>
+<div class="line"><span class="comment">   * @endcode</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line">  [[nodiscard]] T* <a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#ac6176d8676a6b9bfb6691b37aa90d6a9">Allocate</a>(<span class="keywordtype">size_t</span> count) <span class="keyword">noexcept</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Allocates and constructs a single object of type T.</span></div>
+<div class="line"><span class="comment">   * @details Convenience function that allocates memory and constructs the object in-place.</span></div>
+<div class="line"><span class="comment">   * @tparam T Type to allocate and construct</span></div>
+<div class="line"><span class="comment">   * @tparam Args Constructor argument types</span></div>
+<div class="line"><span class="comment">   * @param args Arguments to forward to T&#39;s constructor</span></div>
+<div class="line"><span class="comment">   * @return Pointer to constructed object, or nullptr on allocation failure</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * @example</span></div>
+<div class="line"><span class="comment">   * @code</span></div>
+<div class="line"><span class="comment">   * GrowableAllocator&lt;FrameAllocator&gt; alloc(1024);</span></div>
+<div class="line"><span class="comment">   * auto* vec = alloc.AllocateAndConstruct&lt;MyVec3&gt;(1.0f, 2.0f, 3.0f);</span></div>
+<div class="line"><span class="comment">   * @endcode</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... Args&gt;</div>
+<div class="line">    <span class="keyword">requires</span> std::constructible_from&lt;T, Args...&gt;</div>
+<div class="line">  [[nodiscard]] T* <a id="a5" name="a5"></a><a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#ac14723d311e3895c9108057ba8100467">AllocateAndConstruct</a>(Args&amp;&amp;... args) <span class="keyword">noexcept</span>(std::is_nothrow_constructible_v&lt;T, Args...&gt;);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Allocates and default-constructs an array of objects of type T.</span></div>
+<div class="line"><span class="comment">   * @details Convenience function that allocates memory and default-constructs objects in-place.</span></div>
+<div class="line"><span class="comment">   * @tparam T Type to allocate and construct (must be default constructible)</span></div>
+<div class="line"><span class="comment">   * @param count Number of objects to allocate and construct</span></div>
+<div class="line"><span class="comment">   * @return Pointer to first constructed object, or nullptr on allocation failure</span></div>
+<div class="line"><span class="comment">   *</span></div>
+<div class="line"><span class="comment">   * @example</span></div>
+<div class="line"><span class="comment">   * @code</span></div>
+<div class="line"><span class="comment">   * GrowableAllocator&lt;FrameAllocator&gt; alloc(1024);</span></div>
+<div class="line"><span class="comment">   * auto* arr = alloc.AllocateAndConstructArray&lt;MyType&gt;(10);</span></div>
+<div class="line"><span class="comment">   * @endcode</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line">    <span class="keyword">requires</span> std::default_initializable&lt;T&gt;</div>
+<div class="line">  [[nodiscard]] T* <a id="a6" name="a6"></a><a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#aadd5966584aed7405cb6636b60fd6bfe">AllocateAndConstructArray</a>(<span class="keywordtype">size_t</span> count) <span class="keyword">noexcept</span>(std::is_nothrow_default_constructible_v&lt;T&gt;);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Deallocates memory.</span></div>
+<div class="line"><span class="comment">   * @details Finds the allocator that owns the pointer and delegates deallocation.</span></div>
+<div class="line"><span class="comment">   * @warning Triggers assertion if pointer does not belong to any allocator instance.</span></div>
+<div class="line"><span class="comment">   * @param ptr Pointer to deallocate</span></div>
+<div class="line"><span class="comment">   * @param size Size of allocation (for allocators that require it)</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a7" name="a7"></a><a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#aa941857668e73d2e01234ef3ad2c58fb">Deallocate</a>(<span class="keywordtype">void</span>* ptr, <span class="keywordtype">size_t</span> size = 0) <span class="keyword">noexcept</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Resets all allocator instances.</span></div>
+<div class="line"><span class="comment">   * @details Resets all allocators and removes all but the first one.</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a8" name="a8"></a><a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#abea05c7e16c48144cdae48e46e47c3cc">Reset</a>() <span class="keyword">noexcept</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Checks if the allocator can grow.</span></div>
+<div class="line"><span class="comment">   * @return True if more allocator instances can be created</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">bool</span> <a id="a9" name="a9"></a><a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#acfd19268e1dd2290d85a4798cf2081e4">CanGrow</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Gets the number of allocator instances.</span></div>
+<div class="line"><span class="comment">   * @return Number of allocator instances</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">size_t</span> <a id="a10" name="a10"></a><a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#a67a304cf41818644d13fe79f1c25179f">AllocatorCount</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Gets combined statistics for all allocator instances.</span></div>
+<div class="line"><span class="comment">   * @return AllocatorStats with combined usage information</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] AllocatorStats <a id="a11" name="a11"></a><a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#a909bbae085c9b3deab0996f962299711">Stats</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Gets the total capacity across all allocator instances.</span></div>
+<div class="line"><span class="comment">   * @return Total capacity in bytes</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">size_t</span> <a id="a12" name="a12"></a><a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#a889031631ac9782835ab31d100fde0fe">TotalCapacity</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Gets the initial capacity.</span></div>
+<div class="line"><span class="comment">   * @return Initial capacity in bytes</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">size_t</span> <a id="a13" name="a13"></a><a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#af706647346f88b6d5fa1f40fc4183af1">InitialCapacity</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> initial_capacity_; }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Gets the growth factor.</span></div>
+<div class="line"><span class="comment">   * @return Growth factor</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">double</span> <a id="a14" name="a14"></a><a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#a3bfbe0b54ef38c7281e07b11bd534b8d">GrowthFactor</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> growth_factor_; }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Gets the maximum number of allocators.</span></div>
+<div class="line"><span class="comment">   * @return Maximum allocator count (0 = unlimited)</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">size_t</span> <a id="a15" name="a15"></a><a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#af52aae966470b09437c28cbc722adbbc">MaxAllocators</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> max_allocators_; }</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:<span class="comment"></span></div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Creates a new allocator instance with specified capacity.</span></div>
+<div class="line"><span class="comment">   * @param capacity Capacity for the new allocator</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keywordtype">void</span> CreateAllocator(<span class="keywordtype">size_t</span> capacity);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Finds which allocator owns a pointer.</span></div>
+<div class="line"><span class="comment">   * @param ptr Pointer to search for</span></div>
+<div class="line"><span class="comment">   * @return Pointer to the owning allocator or nullptr</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] Allocator* FindOwningAllocator(<span class="keyword">const</span> <span class="keywordtype">void</span>* ptr) <span class="keyword">noexcept</span>;</div>
+<div class="line"> </div>
+<div class="line">  std::vector&lt;Allocator&gt; allocators_;            <span class="comment">///&lt; Vector of allocator instances</span></div>
+<div class="line">  <span class="keywordtype">size_t</span> initial_capacity_ = 0;                  <span class="comment">///&lt; Initial capacity</span></div>
+<div class="line">  <span class="keywordtype">double</span> growth_factor_ = <a class="code hl_variable" href="classhelios_1_1memory_1_1GrowableAllocator.html#aa7f2e4f2e06441444a531c7105387f28">kDefaultGrowthFactor</a>;  <span class="comment">///&lt; Growth factor for new allocators</span></div>
+<div class="line">  <span class="keywordtype">size_t</span> max_allocators_ = 0;                    <span class="comment">///&lt; Maximum number of allocators (0 = unlimited)</span></div>
+<div class="line">  <span class="keywordtype">size_t</span> next_capacity_ = 0;                     <span class="comment">///&lt; Next capacity to use for growth</span></div>
+<div class="line">  <span class="keyword">mutable</span> std::shared_mutex mutex_;              <span class="comment">///&lt; Shared mutex for optimized thread-safety</span></div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Allocator&gt;</div>
+<div class="line"><span class="keyword">inline</span> <a id="a16" name="a16"></a><a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#acd018e6d232aa338f664689fd3d75d55">GrowableAllocator&lt;Allocator&gt;::GrowableAllocator</a>(<span class="keywordtype">size_t</span> initial_capacity, <span class="keywordtype">double</span> growth_factor,</div>
+<div class="line">                                                       <span class="keywordtype">size_t</span> max_allocators)</div>
+<div class="line">    : initial_capacity_(initial_capacity),</div>
+<div class="line">      growth_factor_(growth_factor),</div>
+<div class="line">      max_allocators_(max_allocators),</div>
+<div class="line">      next_capacity_(initial_capacity) {</div>
+<div class="line">  <a id="a17" name="a17"></a><a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(initial_capacity &gt; 0,</div>
+<div class="line">                <span class="stringliteral">&quot;Failed to construct GrowableAllocator: initial_capacity must be greater than 0!&quot;</span>);</div>
+<div class="line">  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(growth_factor &gt; 1.0,</div>
+<div class="line">                <span class="stringliteral">&quot;Failed to construct GrowableAllocator: growth_factor must be greater than 1.0, got &#39;{}&#39;!&quot;</span>,</div>
+<div class="line">                growth_factor);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Create the first allocator</span></div>
+<div class="line">  allocators_.reserve(max_allocators &gt; 0 ? max_allocators : 4);</div>
+<div class="line">  CreateAllocator(initial_capacity_);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Allocator&gt;</div>
+<div class="line"><span class="keyword">inline</span> <a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#acd018e6d232aa338f664689fd3d75d55">GrowableAllocator&lt;Allocator&gt;::GrowableAllocator</a>(<span class="keyword">const</span> GrowableAllocator&amp; other)</div>
+<div class="line">  <span class="keyword">requires</span> std::is_copy_constructible_v&lt;Allocator&gt;</div>
+<div class="line">    : initial_capacity_(other.initial_capacity_),</div>
+<div class="line">      growth_factor_(other.growth_factor_),</div>
+<div class="line">      max_allocators_(other.max_allocators_),</div>
+<div class="line">      next_capacity_(other.next_capacity_) {</div>
+<div class="line">  <span class="keyword">const</span> std::shared_lock lock(other.mutex_);</div>
+<div class="line">  allocators_ = other.allocators_;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Allocator&gt;</div>
+<div class="line"><span class="keyword">inline</span> <a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#acd018e6d232aa338f664689fd3d75d55">GrowableAllocator&lt;Allocator&gt;::GrowableAllocator</a>(GrowableAllocator&amp;&amp; other) <span class="keyword">noexcept</span></div>
+<div class="line">  <span class="keyword">requires</span> std::is_move_constructible_v&lt;Allocator&gt;</div>
+<div class="line">    : allocators_(std::move(other.allocators_)),</div>
+<div class="line">      initial_capacity_(other.initial_capacity_),</div>
+<div class="line">      growth_factor_(other.growth_factor_),</div>
+<div class="line">      max_allocators_(other.max_allocators_),</div>
+<div class="line">      next_capacity_(other.next_capacity_) {</div>
+<div class="line">  other.initial_capacity_ = 0;</div>
+<div class="line">  other.growth_factor_ = kDefaultGrowthFactor;</div>
+<div class="line">  other.max_allocators_ = 0;</div>
+<div class="line">  other.next_capacity_ = 0;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Allocator&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#a16f44681269b25523139a6b0a0774727">GrowableAllocator&lt;Allocator&gt;::operator=</a>(<span class="keyword">const</span> GrowableAllocator&amp; other) -&gt; GrowableAllocator&lt;Allocator&gt;&amp;</div>
+<div class="line">  <span class="keyword">requires</span> std::is_copy_assignable_v&lt;Allocator&gt;</div>
+<div class="line">{</div>
+<div class="line">  <span class="keywordflow">if</span> (<span class="keyword">this</span> == &amp;other) [[unlikely]] {</div>
+<div class="line">    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">const</span> std::scoped_lock lock(mutex_);</div>
+<div class="line">  <span class="keyword">const</span> std::shared_lock other_lock(other.mutex_);</div>
+<div class="line"> </div>
+<div class="line">  allocators_ = other.allocators_;</div>
+<div class="line">  initial_capacity_ = other.initial_capacity_;</div>
+<div class="line">  growth_factor_ = other.growth_factor_;</div>
+<div class="line">  max_allocators_ = other.max_allocators_;</div>
+<div class="line">  next_capacity_ = other.next_capacity_;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Allocator&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#a16f44681269b25523139a6b0a0774727">GrowableAllocator&lt;Allocator&gt;::operator=</a>(GrowableAllocator&amp;&amp; other) <span class="keyword">noexcept</span> -&gt; GrowableAllocator&lt;Allocator&gt;&amp;</div>
+<div class="line">  <span class="keyword">requires</span> std::is_move_assignable_v&lt;Allocator&gt;</div>
+<div class="line">{</div>
+<div class="line">  <span class="keywordflow">if</span> (<span class="keyword">this</span> == &amp;other) [[unlikely]] {</div>
+<div class="line">    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">const</span> std::scoped_lock lock(mutex_);</div>
+<div class="line">  <span class="keyword">const</span> std::scoped_lock other_lock(other.mutex_);</div>
+<div class="line"> </div>
+<div class="line">  allocators_ = std::move(other.allocators_);</div>
+<div class="line">  initial_capacity_ = other.initial_capacity_;</div>
+<div class="line">  growth_factor_ = other.growth_factor_;</div>
+<div class="line">  max_allocators_ = other.max_allocators_;</div>
+<div class="line">  next_capacity_ = other.next_capacity_;</div>
+<div class="line"> </div>
+<div class="line">  other.initial_capacity_ = 0;</div>
+<div class="line">  other.growth_factor_ = kDefaultGrowthFactor;</div>
+<div class="line">  other.max_allocators_ = 0;</div>
+<div class="line">  other.next_capacity_ = 0;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Allocator&gt;</div>
+<div class="line"><span class="keyword">inline</span> AllocationResult <a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#ac6176d8676a6b9bfb6691b37aa90d6a9">GrowableAllocator&lt;Allocator&gt;::Allocate</a>(<span class="keywordtype">size_t</span> size, <span class="keywordtype">size_t</span> alignment) <span class="keyword">noexcept</span> {</div>
+<div class="line">  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a id="a18" name="a18"></a><a class="code hl_function" href="namespacehelios_1_1memory.html#a443dc78a3e9ae9f92bba519395020b3e">IsPowerOfTwo</a>(alignment), <span class="stringliteral">&quot;Failed to allocate memory: alignment must be power of 2, got &#39;{}&#39;!&quot;</span>,</div>
+<div class="line">                alignment);</div>
+<div class="line">  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(alignment &gt;= <a id="a19" name="a19"></a><a class="code hl_variable" href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">kMinAlignment</a>, <span class="stringliteral">&quot;Failed to allocate memory: alignment must be at least &#39;{}&#39;, got &#39;{}&#39;!&quot;</span>,</div>
+<div class="line">                <a class="code hl_variable" href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">kMinAlignment</a>, alignment);</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">if</span> (size == 0) [[unlikely]] {</div>
+<div class="line">    <span class="keywordflow">return</span> {.ptr = <span class="keyword">nullptr</span>, .allocated_size = 0};</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// First, try to allocate from existing allocators with shared lock</span></div>
+<div class="line">  {</div>
+<div class="line">    <span class="keyword">const</span> std::shared_lock lock(mutex_);</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; allocator : allocators_) {</div>
+<div class="line">      AllocationResult result{};</div>
+<div class="line">      <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<span class="keyword">requires</span> { allocator.Allocate(size, alignment); }) {</div>
+<div class="line">        result = allocator.Allocate(size, alignment);</div>
+<div class="line">      } <span class="keywordflow">else</span> <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<span class="keyword">requires</span> { allocator.Allocate(size); }) {</div>
+<div class="line">        result = allocator.Allocate(size);</div>
+<div class="line">      }</div>
+<div class="line">      <span class="keywordflow">if</span> (result.ptr != <span class="keyword">nullptr</span>) {</div>
+<div class="line">        <span class="keywordflow">return</span> result;</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// All existing allocators are full, need exclusive lock for growth</span></div>
+<div class="line">  <span class="keyword">const</span> std::scoped_lock lock(mutex_);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Try again with exclusive lock (another thread might have grown while we waited)</span></div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; allocator : allocators_) {</div>
+<div class="line">    AllocationResult result{};</div>
+<div class="line">    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<span class="keyword">requires</span> { allocator.Allocate(size, alignment); }) {</div>
+<div class="line">      result = allocator.Allocate(size, alignment);</div>
+<div class="line">    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<span class="keyword">requires</span> { allocator.Allocate(size); }) {</div>
+<div class="line">      result = allocator.Allocate(size);</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordflow">if</span> (result.ptr != <span class="keyword">nullptr</span>) {</div>
+<div class="line">      <span class="keywordflow">return</span> result;</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Still need to grow, check if we can</span></div>
+<div class="line">  <span class="keywordflow">if</span> (max_allocators_ &gt; 0 &amp;&amp; allocators_.size() &gt;= max_allocators_) {</div>
+<div class="line">    <span class="keywordflow">return</span> {.ptr = <span class="keyword">nullptr</span>, .allocated_size = 0};</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Calculate next capacity</span></div>
+<div class="line">  <span class="keywordtype">size_t</span> new_capacity = <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(next_capacity_ * growth_factor_);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Ensure new capacity is at least large enough for the requested allocation</span></div>
+<div class="line">  <span class="keywordflow">if</span> (new_capacity &lt; size) {</div>
+<div class="line">    new_capacity = size + (size / 2);  <span class="comment">// Add 50% extra space</span></div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Create new allocator</span></div>
+<div class="line">  CreateAllocator(new_capacity);</div>
+<div class="line">  next_capacity_ = new_capacity;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Try to allocate from the new allocator</span></div>
+<div class="line">  <span class="keyword">auto</span>&amp; new_allocator = allocators_.back();</div>
+<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<span class="keyword">requires</span> { new_allocator.Allocate(size, alignment); }) {</div>
+<div class="line">    <span class="keywordflow">return</span> new_allocator.Allocate(size, alignment);</div>
+<div class="line">  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<span class="keyword">requires</span> { new_allocator.Allocate(size); }) {</div>
+<div class="line">    <span class="keywordflow">return</span> new_allocator.Allocate(size);</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">return</span> {.ptr = <span class="keyword">nullptr</span>, .allocated_size = 0};</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Allocator&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#aa941857668e73d2e01234ef3ad2c58fb">GrowableAllocator&lt;Allocator&gt;::Deallocate</a>(<span class="keywordtype">void</span>* ptr, <span class="keywordtype">size_t</span> size) <span class="keyword">noexcept</span> {</div>
+<div class="line">  <span class="keywordflow">if</span> (ptr == <span class="keyword">nullptr</span>) [[unlikely]] {</div>
+<div class="line">    <span class="keywordflow">return</span>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Check if allocator supports deallocation at compile time</span></div>
+<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (</div>
+<div class="line">      <span class="keyword">requires</span> { std::declval&lt;Allocator&gt;().Deallocate(ptr, size); } ||</div>
+<div class="line">      <span class="keyword">requires</span> { std::declval&lt;Allocator&gt;().Deallocate(ptr); }) {</div>
+<div class="line">    <span class="keyword">const</span> std::scoped_lock lock(mutex_);</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">auto</span>* allocator = FindOwningAllocator(ptr);</div>
+<div class="line">    <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(allocator != <span class="keyword">nullptr</span>, <span class="stringliteral">&quot;Failed to deallocate memory: pointer does not belong to any allocator!&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Delegate deallocation to the owning allocator</span></div>
+<div class="line">    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<span class="keyword">requires</span> { allocator-&gt;Deallocate(ptr, size); }) {</div>
+<div class="line">      allocator-&gt;Deallocate(ptr, size);</div>
+<div class="line">    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<span class="keyword">requires</span> { allocator-&gt;Deallocate(ptr); }) {</div>
+<div class="line">      allocator-&gt;Deallocate(ptr);</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">  <span class="comment">// else: No-op for allocators that don&#39;t support individual deallocation (e.g., FrameAllocator)</span></div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Allocator&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#abea05c7e16c48144cdae48e46e47c3cc">GrowableAllocator&lt;Allocator&gt;::Reset</a>() <span class="keyword">noexcept</span> {</div>
+<div class="line">  <span class="keyword">const</span> std::scoped_lock lock(mutex_);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Reset all allocators</span></div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; allocator : allocators_) {</div>
+<div class="line">    allocator.Reset();</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Keep only the first allocator</span></div>
+<div class="line">  <span class="keywordflow">if</span> (!allocators_.empty()) {</div>
+<div class="line">    <span class="keyword">auto</span> first = std::move(allocators_.front());</div>
+<div class="line">    allocators_.clear();</div>
+<div class="line">    allocators_.push_back(std::move(first));</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  next_capacity_ = initial_capacity_;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Allocator&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#acfd19268e1dd2290d85a4798cf2081e4">GrowableAllocator&lt;Allocator&gt;::CanGrow</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line">  <span class="keyword">const</span> std::shared_lock lock(mutex_);</div>
+<div class="line">  <span class="keywordflow">return</span> max_allocators_ == 0 || allocators_.size() &lt; max_allocators_;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Allocator&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">size_t</span> <a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#a67a304cf41818644d13fe79f1c25179f">GrowableAllocator&lt;Allocator&gt;::AllocatorCount</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line">  <span class="keyword">const</span> std::shared_lock lock(mutex_);</div>
+<div class="line">  <span class="keywordflow">return</span> allocators_.size();</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Allocator&gt;</div>
+<div class="line"><span class="keyword">inline</span> AllocatorStats <a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#a909bbae085c9b3deab0996f962299711">GrowableAllocator&lt;Allocator&gt;::Stats</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line">  <span class="keyword">const</span> std::shared_lock lock(mutex_);</div>
+<div class="line"> </div>
+<div class="line">  AllocatorStats combined{};</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; allocator : allocators_) {</div>
+<div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span> stats = allocator.Stats();</div>
+<div class="line">    combined.total_allocated += stats.total_allocated;</div>
+<div class="line">    combined.total_freed += stats.total_freed;</div>
+<div class="line">    combined.peak_usage = std::max(combined.peak_usage, stats.peak_usage);</div>
+<div class="line">    combined.allocation_count += stats.allocation_count;</div>
+<div class="line">    combined.total_allocations += stats.total_allocations;</div>
+<div class="line">    combined.total_deallocations += stats.total_deallocations;</div>
+<div class="line">    combined.alignment_waste += stats.alignment_waste;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">return</span> combined;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Allocator&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">size_t</span> <a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#a889031631ac9782835ab31d100fde0fe">GrowableAllocator&lt;Allocator&gt;::TotalCapacity</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line">  <span class="keyword">const</span> std::shared_lock lock(mutex_);</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordtype">size_t</span> total = 0;</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; allocator : allocators_) {</div>
+<div class="line">    total += allocator.Capacity();</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">return</span> total;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Allocator&gt;</div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">void</span> GrowableAllocator&lt;Allocator&gt;::CreateAllocator(<span class="keywordtype">size_t</span> capacity) {</div>
+<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<span class="keyword">requires</span> { Allocator(capacity); }) {</div>
+<div class="line">    allocators_.emplace_back(capacity);</div>
+<div class="line">  } <span class="keywordflow">else</span> {</div>
+<div class="line">    <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<span class="keyword">false</span>, <span class="stringliteral">&quot;Failed to create allocator: Allocator type does not support construction with capacity!&quot;</span>);</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Allocator&gt;</div>
+<div class="line"><span class="keyword">inline</span> Allocator* GrowableAllocator&lt;Allocator&gt;::FindOwningAllocator(<span class="keyword">const</span> <span class="keywordtype">void</span>* ptr) <span class="keyword">noexcept</span> {</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; allocator : allocators_) {</div>
+<div class="line">    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<span class="keyword">requires</span> { allocator.Owns(ptr); }) {</div>
+<div class="line">      <span class="keywordflow">if</span> (allocator.Owns(ptr)) {</div>
+<div class="line">        <span class="keywordflow">return</span> &amp;allocator;</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Allocator&gt;</div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><span class="keyword">inline</span> T* <a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#ac6176d8676a6b9bfb6691b37aa90d6a9">GrowableAllocator&lt;Allocator&gt;::Allocate</a>() <span class="keyword">noexcept</span> {</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> size = <span class="keyword">sizeof</span>(T);</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> alignment = std::max(<span class="keyword">alignof</span>(T), <a class="code hl_variable" href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">kMinAlignment</a>);</div>
+<div class="line">  <span class="keyword">auto</span> result = <a id="a20" name="a20"></a><a class="code hl_function" href="namespacehelios_1_1memory.html#ace74b72484caaa07fedc5e4f67e6282a">Allocate</a>(size, alignment);</div>
+<div class="line">  <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(result.ptr);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Allocator&gt;</div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><span class="keyword">inline</span> T* <a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#ac6176d8676a6b9bfb6691b37aa90d6a9">GrowableAllocator&lt;Allocator&gt;::Allocate</a>(<span class="keywordtype">size_t</span> count) <span class="keyword">noexcept</span> {</div>
+<div class="line">  <span class="keywordflow">if</span> (count == 0) [[unlikely]] {</div>
+<div class="line">    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> alignment = std::max(<span class="keyword">alignof</span>(T), <a class="code hl_variable" href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">kMinAlignment</a>);</div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">size_t</span> size = <span class="keyword">sizeof</span>(T) * count;</div>
+<div class="line">  <span class="keyword">auto</span> result = <a class="code hl_function" href="namespacehelios_1_1memory.html#ace74b72484caaa07fedc5e4f67e6282a">Allocate</a>(size, alignment);</div>
+<div class="line">  <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(result.ptr);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Allocator&gt;</div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... Args&gt;</div>
+<div class="line">  <span class="keyword">requires</span> std::constructible_from&lt;T, Args...&gt;</div>
+<div class="line"><span class="keyword">inline</span> T* <a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#ac14723d311e3895c9108057ba8100467">GrowableAllocator&lt;Allocator&gt;::AllocateAndConstruct</a>(Args&amp;&amp;... args) <span class="keyword">noexcept</span>(</div>
+<div class="line">    std::is_nothrow_constructible_v&lt;T, Args...&gt;) {</div>
+<div class="line">  T* ptr = Allocate&lt;T&gt;();</div>
+<div class="line">  <span class="keywordflow">if</span> (ptr != <span class="keyword">nullptr</span>) {</div>
+<div class="line">    ::new (<span class="keyword">static_cast&lt;</span><span class="keywordtype">void</span>*<span class="keyword">&gt;</span>(ptr)) T(std::forward&lt;Args&gt;(args)...);</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">return</span> ptr;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Allocator&gt;</div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line">  <span class="keyword">requires</span> std::default_initializable&lt;T&gt;</div>
+<div class="line"><span class="keyword">inline</span> T* <a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#aadd5966584aed7405cb6636b60fd6bfe">GrowableAllocator&lt;Allocator&gt;::AllocateAndConstructArray</a>(<span class="keywordtype">size_t</span> count) <span class="keyword">noexcept</span>(</div>
+<div class="line">    std::is_nothrow_default_constructible_v&lt;T&gt;) {</div>
+<div class="line">  T* ptr = Allocate&lt;T&gt;(count);</div>
+<div class="line">  <span class="keywordflow">if</span> (ptr != <span class="keyword">nullptr</span>) {</div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; count; ++i) {</div>
+<div class="line">      ::new (<span class="keyword">static_cast&lt;</span><span class="keywordtype">void</span>*<span class="keyword">&gt;</span>(ptr + i)) T{};</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">return</span> ptr;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">}  <span class="comment">// namespace helios::memory</span></div>
+<div class="ttc" id="aallocator__traits_8hpp_html"><div class="ttname"><a href="allocator__traits_8hpp.html">allocator_traits.hpp</a></div></div>
+<div class="ttc" id="aassert_8hpp_html"><div class="ttname"><a href="assert_8hpp.html">assert.hpp</a></div></div>
+<div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00149">assert.hpp:149</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1GrowableAllocator_html_a16f44681269b25523139a6b0a0774727"><div class="ttname"><a href="classhelios_1_1memory_1_1GrowableAllocator.html#a16f44681269b25523139a6b0a0774727">helios::memory::GrowableAllocator::operator=</a></div><div class="ttdeci">GrowableAllocator &amp; operator=(const GrowableAllocator &amp;other)</div><div class="ttdoc">Copy assignment operator.</div><div class="ttdef"><b>Definition</b> <a href="growable__allocator_8hpp_source.html#l00307">growable_allocator.hpp:307</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1GrowableAllocator_html_a3bfbe0b54ef38c7281e07b11bd534b8d"><div class="ttname"><a href="classhelios_1_1memory_1_1GrowableAllocator.html#a3bfbe0b54ef38c7281e07b11bd534b8d">helios::memory::GrowableAllocator::GrowthFactor</a></div><div class="ttdeci">double GrowthFactor() const noexcept</div><div class="ttdoc">Gets the growth factor.</div><div class="ttdef"><b>Definition</b> <a href="growable__allocator_8hpp_source.html#l00233">growable_allocator.hpp:233</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1GrowableAllocator_html_a67a304cf41818644d13fe79f1c25179f"><div class="ttname"><a href="classhelios_1_1memory_1_1GrowableAllocator.html#a67a304cf41818644d13fe79f1c25179f">helios::memory::GrowableAllocator::AllocatorCount</a></div><div class="ttdeci">size_t AllocatorCount() const noexcept</div><div class="ttdoc">Gets the number of allocator instances.</div><div class="ttdef"><b>Definition</b> <a href="growable__allocator_8hpp_source.html#l00473">growable_allocator.hpp:473</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1GrowableAllocator_html_a889031631ac9782835ab31d100fde0fe"><div class="ttname"><a href="classhelios_1_1memory_1_1GrowableAllocator.html#a889031631ac9782835ab31d100fde0fe">helios::memory::GrowableAllocator::TotalCapacity</a></div><div class="ttdeci">size_t TotalCapacity() const noexcept</div><div class="ttdoc">Gets the total capacity across all allocator instances.</div><div class="ttdef"><b>Definition</b> <a href="growable__allocator_8hpp_source.html#l00499">growable_allocator.hpp:499</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1GrowableAllocator_html_a909bbae085c9b3deab0996f962299711"><div class="ttname"><a href="classhelios_1_1memory_1_1GrowableAllocator.html#a909bbae085c9b3deab0996f962299711">helios::memory::GrowableAllocator::Stats</a></div><div class="ttdeci">AllocatorStats Stats() const noexcept</div><div class="ttdoc">Gets combined statistics for all allocator instances.</div><div class="ttdef"><b>Definition</b> <a href="growable__allocator_8hpp_source.html#l00479">growable_allocator.hpp:479</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1GrowableAllocator_html_aa7f2e4f2e06441444a531c7105387f28"><div class="ttname"><a href="classhelios_1_1memory_1_1GrowableAllocator.html#aa7f2e4f2e06441444a531c7105387f28">helios::memory::GrowableAllocator::kDefaultGrowthFactor</a></div><div class="ttdeci">static constexpr double kDefaultGrowthFactor</div><div class="ttdef"><b>Definition</b> <a href="growable__allocator_8hpp_source.html#l00052">growable_allocator.hpp:52</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1GrowableAllocator_html_aa941857668e73d2e01234ef3ad2c58fb"><div class="ttname"><a href="classhelios_1_1memory_1_1GrowableAllocator.html#aa941857668e73d2e01234ef3ad2c58fb">helios::memory::GrowableAllocator::Deallocate</a></div><div class="ttdeci">void Deallocate(void *ptr, size_t size=0) noexcept</div><div class="ttdoc">Deallocates memory.</div><div class="ttdef"><b>Definition</b> <a href="growable__allocator_8hpp_source.html#l00423">growable_allocator.hpp:423</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1GrowableAllocator_html_aadd5966584aed7405cb6636b60fd6bfe"><div class="ttname"><a href="classhelios_1_1memory_1_1GrowableAllocator.html#aadd5966584aed7405cb6636b60fd6bfe">helios::memory::GrowableAllocator::AllocateAndConstructArray</a></div><div class="ttdeci">T * AllocateAndConstructArray(size_t count) noexcept(std::is_nothrow_default_constructible_v&lt; T &gt;)</div><div class="ttdef"><b>Definition</b> <a href="growable__allocator_8hpp_source.html#l00566">growable_allocator.hpp:566</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1GrowableAllocator_html_abea05c7e16c48144cdae48e46e47c3cc"><div class="ttname"><a href="classhelios_1_1memory_1_1GrowableAllocator.html#abea05c7e16c48144cdae48e46e47c3cc">helios::memory::GrowableAllocator::Reset</a></div><div class="ttdeci">void Reset() noexcept</div><div class="ttdoc">Resets all allocator instances.</div><div class="ttdef"><b>Definition</b> <a href="growable__allocator_8hpp_source.html#l00448">growable_allocator.hpp:448</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1GrowableAllocator_html_ac14723d311e3895c9108057ba8100467"><div class="ttname"><a href="classhelios_1_1memory_1_1GrowableAllocator.html#ac14723d311e3895c9108057ba8100467">helios::memory::GrowableAllocator::AllocateAndConstruct</a></div><div class="ttdeci">T * AllocateAndConstruct(Args &amp;&amp;... args) noexcept(std::is_nothrow_constructible_v&lt; T, Args... &gt;)</div><div class="ttdef"><b>Definition</b> <a href="growable__allocator_8hpp_source.html#l00554">growable_allocator.hpp:554</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1GrowableAllocator_html_ac6176d8676a6b9bfb6691b37aa90d6a9"><div class="ttname"><a href="classhelios_1_1memory_1_1GrowableAllocator.html#ac6176d8676a6b9bfb6691b37aa90d6a9">helios::memory::GrowableAllocator::Allocate</a></div><div class="ttdeci">T * Allocate() noexcept</div><div class="ttdef"><b>Definition</b> <a href="growable__allocator_8hpp_source.html#l00532">growable_allocator.hpp:532</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1GrowableAllocator_html_aca33f1129632bcc1c64450b5b5ed1422"><div class="ttname"><a href="classhelios_1_1memory_1_1GrowableAllocator.html#aca33f1129632bcc1c64450b5b5ed1422">helios::memory::GrowableAllocator::~GrowableAllocator</a></div><div class="ttdeci">~GrowableAllocator() noexcept=default</div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1GrowableAllocator_html_acd018e6d232aa338f664689fd3d75d55"><div class="ttname"><a href="classhelios_1_1memory_1_1GrowableAllocator.html#acd018e6d232aa338f664689fd3d75d55">helios::memory::GrowableAllocator::GrowableAllocator</a></div><div class="ttdeci">GrowableAllocator(size_t initial_capacity, double growth_factor=kDefaultGrowthFactor, size_t max_allocators=0)</div><div class="ttdoc">Constructs a growable allocator with initial capacity.</div><div class="ttdef"><b>Definition</b> <a href="growable__allocator_8hpp_source.html#l00264">growable_allocator.hpp:264</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1GrowableAllocator_html_acfd19268e1dd2290d85a4798cf2081e4"><div class="ttname"><a href="classhelios_1_1memory_1_1GrowableAllocator.html#acfd19268e1dd2290d85a4798cf2081e4">helios::memory::GrowableAllocator::CanGrow</a></div><div class="ttdeci">bool CanGrow() const noexcept</div><div class="ttdoc">Checks if the allocator can grow.</div><div class="ttdef"><b>Definition</b> <a href="growable__allocator_8hpp_source.html#l00467">growable_allocator.hpp:467</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1GrowableAllocator_html_af52aae966470b09437c28cbc722adbbc"><div class="ttname"><a href="classhelios_1_1memory_1_1GrowableAllocator.html#af52aae966470b09437c28cbc722adbbc">helios::memory::GrowableAllocator::MaxAllocators</a></div><div class="ttdeci">size_t MaxAllocators() const noexcept</div><div class="ttdoc">Gets the maximum number of allocators.</div><div class="ttdef"><b>Definition</b> <a href="growable__allocator_8hpp_source.html#l00239">growable_allocator.hpp:239</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1GrowableAllocator_html_af706647346f88b6d5fa1f40fc4183af1"><div class="ttname"><a href="classhelios_1_1memory_1_1GrowableAllocator.html#af706647346f88b6d5fa1f40fc4183af1">helios::memory::GrowableAllocator::InitialCapacity</a></div><div class="ttdeci">size_t InitialCapacity() const noexcept</div><div class="ttdoc">Gets the initial capacity.</div><div class="ttdef"><b>Definition</b> <a href="growable__allocator_8hpp_source.html#l00227">growable_allocator.hpp:227</a></div></div>
+<div class="ttc" id="acore__pch_8hpp_html"><div class="ttname"><a href="core__pch_8hpp.html">core_pch.hpp</a></div></div>
+<div class="ttc" id="alogger_8hpp_html"><div class="ttname"><a href="logger_8hpp.html">logger.hpp</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html"><div class="ttname"><a href="namespacehelios_1_1memory.html">helios::memory</a></div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00011">allocator_traits.hpp:11</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_a14c84d27b0af2a3d13d38b2d9f6225c4"><div class="ttname"><a href="namespacehelios_1_1memory.html#a14c84d27b0af2a3d13d38b2d9f6225c4">helios::memory::kDefaultAlignment</a></div><div class="ttdeci">constexpr size_t kDefaultAlignment</div><div class="ttdoc">Default alignment for allocations (cache line size for most modern CPUs).</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00077">allocator_traits.hpp:77</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_a443dc78a3e9ae9f92bba519395020b3e"><div class="ttname"><a href="namespacehelios_1_1memory.html#a443dc78a3e9ae9f92bba519395020b3e">helios::memory::IsPowerOfTwo</a></div><div class="ttdeci">constexpr bool IsPowerOfTwo(size_t size) noexcept</div><div class="ttdoc">Helper function to check if a size is a power of 2.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00121">allocator_traits.hpp:121</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_a4b4f9ed5e1cf5fe81a0ccbdb6991395a"><div class="ttname"><a href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">helios::memory::kMinAlignment</a></div><div class="ttdeci">constexpr size_t kMinAlignment</div><div class="ttdoc">Minimum alignment for any allocation.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00082">allocator_traits.hpp:82</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_ace74b72484caaa07fedc5e4f67e6282a"><div class="ttname"><a href="namespacehelios_1_1memory.html#ace74b72484caaa07fedc5e4f67e6282a">helios::memory::Allocate</a></div><div class="ttdeci">constexpr T * Allocate(Alloc &amp;allocator) noexcept</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00182">allocator_traits.hpp:182</a></div></div>
+</div><!-- fragment --> </div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

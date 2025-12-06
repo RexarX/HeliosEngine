@@ -1,0 +1,949 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: helios::ecs::details::EventStorage Class Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classhelios_1_1ecs_1_1details_1_1EventStorage.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="classhelios_1_1ecs_1_1details_1_1EventStorage-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">helios::ecs::details::EventStorage Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Type-erased storage for events using a byte vector.  
+ <a href="classhelios_1_1ecs_1_1details_1_1EventStorage.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="event__storage_8hpp_source.html">event_storage.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a3f442804d98586b8418fb9aacc4bb5cf" id="r_a3f442804d98586b8418fb9aacc4bb5cf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html#a3f442804d98586b8418fb9aacc4bb5cf">EventStorage</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event_size</a>)</td></tr>
+<tr class="memdesc:a3f442804d98586b8418fb9aacc4bb5cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs an <a class="el" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html" title="Type-erased storage for events using a byte vector.">EventStorage</a>.  <br /></td></tr>
+<tr class="separator:a3f442804d98586b8418fb9aacc4bb5cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ec3be8fa270fcd160bff6c90e4b21d0" id="r_a6ec3be8fa270fcd160bff6c90e4b21d0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html#a6ec3be8fa270fcd160bff6c90e4b21d0">EventStorage</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html">EventStorage</a> &amp;)=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">delete</a></td></tr>
+<tr class="separator:a6ec3be8fa270fcd160bff6c90e4b21d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65cdd308e5bc2601d028f9acf0ee534e" id="r_a65cdd308e5bc2601d028f9acf0ee534e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html#a65cdd308e5bc2601d028f9acf0ee534e">EventStorage</a> (<a class="el" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html">EventStorage</a> &amp;&amp;) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:a65cdd308e5bc2601d028f9acf0ee534e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2302c3839a327ce764ba760002dd897" id="r_ac2302c3839a327ce764ba760002dd897"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html#ac2302c3839a327ce764ba760002dd897">~EventStorage</a> ()=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:ac2302c3839a327ce764ba760002dd897"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab288df684cc3a92b4083af5aaa20a36a" id="r_ab288df684cc3a92b4083af5aaa20a36a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html">EventStorage</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html#ab288df684cc3a92b4083af5aaa20a36a">operator=</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html">EventStorage</a> &amp;)=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">delete</a></td></tr>
+<tr class="separator:ab288df684cc3a92b4083af5aaa20a36a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a880b6920c42a232d5a8d6da1d594f3a0" id="r_a880b6920c42a232d5a8d6da1d594f3a0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html">EventStorage</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html#a880b6920c42a232d5a8d6da1d594f3a0">operator=</a> (<a class="el" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html">EventStorage</a> &amp;&amp;) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:a880b6920c42a232d5a8d6da1d594f3a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8b64696ed3da98c71b53a8a109917e9" id="r_ac8b64696ed3da98c71b53a8a109917e9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html#ac8b64696ed3da98c71b53a8a109917e9">Clear</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:ac8b64696ed3da98c71b53a8a109917e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears all stored events.  <br /></td></tr>
+<tr class="separator:ac8b64696ed3da98c71b53a8a109917e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a601781bfe62fdb112f0b04e83d0d91b5" id="r_a601781bfe62fdb112f0b04e83d0d91b5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html#a601781bfe62fdb112f0b04e83d0d91b5">Reserve</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">capacity_bytes</a>)</td></tr>
+<tr class="memdesc:a601781bfe62fdb112f0b04e83d0d91b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reserves space for events.  <br /></td></tr>
+<tr class="separator:a601781bfe62fdb112f0b04e83d0d91b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adeb4d74a388f2466d49a7fa5a29f3afa" id="r_adeb4d74a388f2466d49a7fa5a29f3afa"><td class="memTemplParams" colspan="2">template&lt;EventTrait T&gt; </td></tr>
+<tr class="memitem:adeb4d74a388f2466d49a7fa5a29f3afa"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html#adeb4d74a388f2466d49a7fa5a29f3afa">Write</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> T &amp;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a>)</td></tr>
+<tr class="memdesc:adeb4d74a388f2466d49a7fa5a29f3afa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes a single event to storage.  <br /></td></tr>
+<tr class="separator:adeb4d74a388f2466d49a7fa5a29f3afa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2418b880235e2054565851e7646abb6c" id="r_a2418b880235e2054565851e7646abb6c"><td class="memTemplParams" colspan="2">template&lt;std::ranges::sized_range R&gt; <br />
+requires EventTrait&lt;std::ranges::range_value_t&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">R</a>&gt;&gt;</td></tr>
+<tr class="memitem:a2418b880235e2054565851e7646abb6c"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html#a2418b880235e2054565851e7646abb6c">WriteBulk</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">R</a> &amp;events)</td></tr>
+<tr class="memdesc:a2418b880235e2054565851e7646abb6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes multiple events to storage in bulk.  <br /></td></tr>
+<tr class="separator:a2418b880235e2054565851e7646abb6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2a32d378f699a2671ecff812b20dc9f" id="r_ab2a32d378f699a2671ecff812b20dc9f"><td class="memTemplParams" colspan="2">template&lt;EventTrait T&gt; </td></tr>
+<tr class="memitem:ab2a32d378f699a2671ecff812b20dc9f"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">auto</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html#ab2a32d378f699a2671ecff812b20dc9f">ReadAll</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a> -&gt; std::span&lt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> T &gt;</td></tr>
+<tr class="memdesc:ab2a32d378f699a2671ecff812b20dc9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads all events from storage.  <br /></td></tr>
+<tr class="separator:ab2a32d378f699a2671ecff812b20dc9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44f157f68c2926e4cf6b0a1acb3bd3ee" id="r_a44f157f68c2926e4cf6b0a1acb3bd3ee"><td class="memTemplParams" colspan="2">template&lt;EventTrait T, <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typename</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">OutIt</a> &gt; <br />
+requires std::output_iterator&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">OutIt</a>, T&gt;</td></tr>
+<tr class="memitem:a44f157f68c2926e4cf6b0a1acb3bd3ee"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html#a44f157f68c2926e4cf6b0a1acb3bd3ee">ReadInto</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">OutIt</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">out</a>) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a></td></tr>
+<tr class="memdesc:a44f157f68c2926e4cf6b0a1acb3bd3ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads events of a specific type into a provided output iterator.  <br /></td></tr>
+<tr class="separator:a44f157f68c2926e4cf6b0a1acb3bd3ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab28d58211f045c802e66c2e7f5daffde" id="r_ab28d58211f045c802e66c2e7f5daffde"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html#ab28d58211f045c802e66c2e7f5daffde">AppendRawBytes</a> (std::span&lt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> std::byte &gt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">data</a>)</td></tr>
+<tr class="memdesc:ab28d58211f045c802e66c2e7f5daffde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Appends raw bytes from another <a class="el" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html" title="Type-erased storage for events using a byte vector.">EventStorage</a>.  <br /></td></tr>
+<tr class="separator:ab28d58211f045c802e66c2e7f5daffde"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20d5818ddef205732c03a503c323dc32" id="r_a20d5818ddef205732c03a503c323dc32"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html#a20d5818ddef205732c03a503c323dc32">Empty</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:a20d5818ddef205732c03a503c323dc32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if storage is empty.  <br /></td></tr>
+<tr class="separator:a20d5818ddef205732c03a503c323dc32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73d3a7ca4b3ca8333b8da6245066d328" id="r_a73d3a7ca4b3ca8333b8da6245066d328"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html#a73d3a7ca4b3ca8333b8da6245066d328">SizeBytes</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:a73d3a7ca4b3ca8333b8da6245066d328"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the size of stored data in bytes.  <br /></td></tr>
+<tr class="separator:a73d3a7ca4b3ca8333b8da6245066d328"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a181249a9b0d4de7eb2ebdac164b0cb" id="r_a4a181249a9b0d4de7eb2ebdac164b0cb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">auto</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html#a4a181249a9b0d4de7eb2ebdac164b0cb">Data</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a> -&gt; std::span&lt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> std::byte &gt;</td></tr>
+<tr class="memdesc:a4a181249a9b0d4de7eb2ebdac164b0cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets raw data (const).  <br /></td></tr>
+<tr class="separator:a4a181249a9b0d4de7eb2ebdac164b0cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c2cc6726eb498e0077a8c87e350c1b1" id="r_a2c2cc6726eb498e0077a8c87e350c1b1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html#a2c2cc6726eb498e0077a8c87e350c1b1">EventSize</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:a2c2cc6726eb498e0077a8c87e350c1b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the size of each event in bytes.  <br /></td></tr>
+<tr class="separator:a2c2cc6726eb498e0077a8c87e350c1b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a21c84118015dd088b2813e9353115272" id="r_a21c84118015dd088b2813e9353115272"><td class="memTemplParams" colspan="2">template&lt;EventTrait T&gt; </td></tr>
+<tr class="memitem:a21c84118015dd088b2813e9353115272"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">static</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html">EventStorage</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html#a21c84118015dd088b2813e9353115272">FromEvent</a> ()</td></tr>
+<tr class="memdesc:a21c84118015dd088b2813e9353115272"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an <a class="el" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html" title="Type-erased storage for events using a byte vector.">EventStorage</a> for a specific event type.  <br /></td></tr>
+<tr class="separator:a21c84118015dd088b2813e9353115272"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Type-erased storage for events using a byte vector. </p>
+<p>Stores events as raw bytes and provides methods to write/read events with proper type safety through. Events are stored sequentially with their size information for proper deserialization. </p><dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="event__storage_8hpp_source.html#l00025">25</a> of file <a class="el" href="event__storage_8hpp_source.html">event_storage.hpp</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a3f442804d98586b8418fb9aacc4bb5cf" name="a3f442804d98586b8418fb9aacc4bb5cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f442804d98586b8418fb9aacc4bb5cf">&#9670;&#160;</a></span>EventStorage() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::ecs::details::EventStorage::EventStorage </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a>&#160;</td>
+          <td class="paramname"><em>event_size</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructs an <a class="el" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html" title="Type-erased storage for events using a byte vector.">EventStorage</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">event_size</td><td>Size of each event in bytes </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="event__storage_8hpp_source.html#l00031">31</a> of file <a class="el" href="event__storage_8hpp_source.html">event_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   31</span>: event_size_(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event_size</a>) {};</div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_af0384de48d847585fcb340c71c231e5e"><div class="ttname"><a href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, Allocator, Components... &gt; Query</div><div class="ttdoc">Type alias for query with mutable world access.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02515">query.hpp:2515</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a6ec3be8fa270fcd160bff6c90e4b21d0" name="a6ec3be8fa270fcd160bff6c90e4b21d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ec3be8fa270fcd160bff6c90e4b21d0">&#9670;&#160;</a></span>EventStorage() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::ecs::details::EventStorage::EventStorage </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html">EventStorage</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a65cdd308e5bc2601d028f9acf0ee534e" name="a65cdd308e5bc2601d028f9acf0ee534e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65cdd308e5bc2601d028f9acf0ee534e">&#9670;&#160;</a></span>EventStorage() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::ecs::details::EventStorage::EventStorage </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html">EventStorage</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac2302c3839a327ce764ba760002dd897" name="ac2302c3839a327ce764ba760002dd897"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2302c3839a327ce764ba760002dd897">&#9670;&#160;</a></span>~EventStorage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::ecs::details::EventStorage::~EventStorage </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ab28d58211f045c802e66c2e7f5daffde" name="ab28d58211f045c802e66c2e7f5daffde"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab28d58211f045c802e66c2e7f5daffde">&#9670;&#160;</a></span>AppendRawBytes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a> helios::ecs::details::EventStorage::AppendRawBytes </td>
+          <td>(</td>
+          <td class="paramtype">std::span&lt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> std::byte &gt;&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Appends raw bytes from another <a class="el" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html" title="Type-erased storage for events using a byte vector.">EventStorage</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>Pointer to raw byte data </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="event__storage_8hpp_source.html#l00197">197</a> of file <a class="el" href="event__storage_8hpp_source.html">event_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  197</span>                                                                    {</div>
+<div class="line"><span class="lineno">  198</span>  <span class="keywordflow">if</span> (<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">data</a>.empty()) [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">unlikely</a>]] {</div>
+<div class="line"><span class="lineno">  199</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  200</span>  }</div>
+<div class="line"><span class="lineno">  201</span> </div>
+<div class="line"><span class="lineno">  202</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">old_size</a> = data_.size();</div>
+<div class="line"><span class="lineno">  203</span>  data_.resize(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">old_size</a> + <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">data</a>.size());</div>
+<div class="line"><span class="lineno">  204</span>  std::memcpy(data_.data() + <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">old_size</a>, <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">data</a>.data(), <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">data</a>.size());</div>
+<div class="line"><span class="lineno">  205</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ac8b64696ed3da98c71b53a8a109917e9" name="ac8b64696ed3da98c71b53a8a109917e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8b64696ed3da98c71b53a8a109917e9">&#9670;&#160;</a></span>Clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a> helios::ecs::details::EventStorage::Clear </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Clears all stored events. </p>
+
+<p class="definition">Definition at line <a class="el" href="event__storage_8hpp_source.html#l00052">52</a> of file <a class="el" href="event__storage_8hpp_source.html">event_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   52</span>{ data_.clear(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a4a181249a9b0d4de7eb2ebdac164b0cb" name="a4a181249a9b0d4de7eb2ebdac164b0cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a181249a9b0d4de7eb2ebdac164b0cb">&#9670;&#160;</a></span>Data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">auto</a> helios::ecs::details::EventStorage::Data </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const -&gt; std::span&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> std::byte&gt; </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets raw data (const). </p>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to raw byte data </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="event__storage_8hpp_source.html#l00123">123</a> of file <a class="el" href="event__storage_8hpp_source.html">event_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  123</span>{ <span class="keywordflow">return</span> {data_.data(), data_.size()}; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a20d5818ddef205732c03a503c323dc32" name="a20d5818ddef205732c03a503c323dc32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20d5818ddef205732c03a503c323dc32">&#9670;&#160;</a></span>Empty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a> helios::ecs::details::EventStorage::Empty </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if storage is empty. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if no events are stored, false otherwise </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="event__storage_8hpp_source.html#l00111">111</a> of file <a class="el" href="event__storage_8hpp_source.html">event_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  111</span>{ <span class="keywordflow">return</span> data_.empty(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a2c2cc6726eb498e0077a8c87e350c1b1" name="a2c2cc6726eb498e0077a8c87e350c1b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c2cc6726eb498e0077a8c87e350c1b1">&#9670;&#160;</a></span>EventSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a> helios::ecs::details::EventStorage::EventSize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the size of each event in bytes. </p>
+<dl class="section return"><dt>Returns</dt><dd>Event size in bytes </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="event__storage_8hpp_source.html#l00129">129</a> of file <a class="el" href="event__storage_8hpp_source.html">event_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  129</span>{ <span class="keywordflow">return</span> event_size_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a21c84118015dd088b2813e9353115272" name="a21c84118015dd088b2813e9353115272"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21c84118015dd088b2813e9353115272">&#9670;&#160;</a></span>FromEvent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;EventTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">static</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html">EventStorage</a> helios::ecs::details::EventStorage::FromEvent </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates an <a class="el" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html" title="Type-erased storage for events using a byte vector.">EventStorage</a> for a specific event type. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Event type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html" title="Type-erased storage for events using a byte vector.">EventStorage</a> configured for the event type </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="event__storage_8hpp_source.html#l00042">42</a> of file <a class="el" href="event__storage_8hpp_source.html">event_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   42</span>                                                {</div>
+<div class="line"><span class="lineno">   43</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html#a3f442804d98586b8418fb9aacc4bb5cf">EventStorage</a>(<span class="keyword">sizeof</span>(T));</div>
+<div class="line"><span class="lineno">   44</span>  }</div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventStorage_html_a3f442804d98586b8418fb9aacc4bb5cf"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventStorage.html#a3f442804d98586b8418fb9aacc4bb5cf">helios::ecs::details::EventStorage::EventStorage</a></div><div class="ttdeci">EventStorage(size_t event_size)</div><div class="ttdoc">Constructs an EventStorage.</div><div class="ttdef"><b>Definition</b> <a href="event__storage_8hpp_source.html#l00031">event_storage.hpp:31</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ab288df684cc3a92b4083af5aaa20a36a" name="ab288df684cc3a92b4083af5aaa20a36a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab288df684cc3a92b4083af5aaa20a36a">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html">EventStorage</a> &amp; helios::ecs::details::EventStorage::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html">EventStorage</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a880b6920c42a232d5a8d6da1d594f3a0" name="a880b6920c42a232d5a8d6da1d594f3a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a880b6920c42a232d5a8d6da1d594f3a0">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html">EventStorage</a> &amp; helios::ecs::details::EventStorage::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html">EventStorage</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab2a32d378f699a2671ecff812b20dc9f" name="ab2a32d378f699a2671ecff812b20dc9f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2a32d378f699a2671ecff812b20dc9f">&#9670;&#160;</a></span>ReadAll()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;EventTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">auto</a> helios::ecs::details::EventStorage::ReadAll </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const -&gt; std::span&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> T&gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reads all events from storage. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if event size doesn't match storage event size. Span gets invalidated if storage is modified. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Event type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Span containing all events </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="event__storage_8hpp_source.html#l00169">169</a> of file <a class="el" href="event__storage_8hpp_source.html">event_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  169</span>                                                                     {</div>
+<div class="line"><span class="lineno">  170</span>  <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event_size</a> = <span class="keyword">sizeof</span>(T);</div>
+<div class="line"><span class="lineno">  171</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event_size</a> == event_size_, <span class="stringliteral">&quot;Failed to write event: Event size misatch, expected &#39;{}&#39;, got &#39;{}&#39;!&quot;</span>,</div>
+<div class="line"><span class="lineno">  172</span>                event_size_, <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event_size</a>);</div>
+<div class="line"><span class="lineno">  173</span> </div>
+<div class="line"><span class="lineno">  174</span>  <span class="keyword">const</span> <span class="keyword">auto</span>* begin = std::bit_cast&lt;const T*&gt;(data_.data());</div>
+<div class="line"><span class="lineno">  175</span>  <span class="keyword">const</span> <span class="keyword">auto</span>* end = std::bit_cast&lt;const T*&gt;(data_.data() + data_.size());</div>
+<div class="line"><span class="lineno">  176</span>  <span class="keywordflow">return</span> {begin, end};</div>
+<div class="line"><span class="lineno">  177</span>}</div>
+<div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00149">assert.hpp:149</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a44f157f68c2926e4cf6b0a1acb3bd3ee" name="a44f157f68c2926e4cf6b0a1acb3bd3ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44f157f68c2926e4cf6b0a1acb3bd3ee">&#9670;&#160;</a></span>ReadInto()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;EventTrait T, <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typename</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">OutIt</a> &gt; <br />
+requires std::output_iterator&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">OutIt</a>, T&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a> helios::ecs::details::EventStorage::ReadInto </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">OutIt</a>&#160;</td>
+          <td class="paramname"><em>out</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reads events of a specific type into a provided output iterator. </p>
+<dl class="section note"><dt>Note</dt><dd>Thread-safe for read operations. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if event size doesn't match storage event size. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Event type </td></tr>
+    <tr><td class="paramname">OutIt</td><td>Output iterator type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">out</td><td>Output iterator to write events into </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="event__storage_8hpp_source.html#l00181">181</a> of file <a class="el" href="event__storage_8hpp_source.html">event_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  181</span>                                                  {</div>
+<div class="line"><span class="lineno">  182</span>  <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event_size</a> = <span class="keyword">sizeof</span>(T);</div>
+<div class="line"><span class="lineno">  183</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event_size</a> == event_size_, <span class="stringliteral">&quot;Failed to write event: Event size misatch, expected &#39;{}&#39;, got &#39;{}&#39;!&quot;</span>,</div>
+<div class="line"><span class="lineno">  184</span>                event_size_, <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event_size</a>);</div>
+<div class="line"><span class="lineno">  185</span> </div>
+<div class="line"><span class="lineno">  186</span>  <span class="keywordtype">size_t</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">offset</a> = 0;</div>
+<div class="line"><span class="lineno">  187</span>  <span class="keywordflow">while</span> (<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">offset</a> &lt; data_.size()) {</div>
+<div class="line"><span class="lineno">  188</span>    <span class="comment">// Read event data using memcpy (safe for trivially copyable types)</span></div>
+<div class="line"><span class="lineno">  189</span>    T <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a>;</div>
+<div class="line"><span class="lineno">  190</span>    std::memcpy(&amp;<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a>, data_.data() + <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">offset</a>, <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event_size</a>);</div>
+<div class="line"><span class="lineno">  191</span>    *<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">out</a>++ = std::move(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a>);</div>
+<div class="line"><span class="lineno">  192</span> </div>
+<div class="line"><span class="lineno">  193</span>    <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">offset</a> += <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event_size</a>;</div>
+<div class="line"><span class="lineno">  194</span>  }</div>
+<div class="line"><span class="lineno">  195</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a601781bfe62fdb112f0b04e83d0d91b5" name="a601781bfe62fdb112f0b04e83d0d91b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a601781bfe62fdb112f0b04e83d0d91b5">&#9670;&#160;</a></span>Reserve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a> helios::ecs::details::EventStorage::Reserve </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a>&#160;</td>
+          <td class="paramname"><em>capacity_bytes</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reserves space for events. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">capacity_bytes</td><td>Capacity to reserve in bytes </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="event__storage_8hpp_source.html#l00058">58</a> of file <a class="el" href="event__storage_8hpp_source.html">event_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   58</span>{ data_.reserve(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">capacity_bytes</a>); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a73d3a7ca4b3ca8333b8da6245066d328" name="a73d3a7ca4b3ca8333b8da6245066d328"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73d3a7ca4b3ca8333b8da6245066d328">&#9670;&#160;</a></span>SizeBytes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a> helios::ecs::details::EventStorage::SizeBytes </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the size of stored data in bytes. </p>
+<dl class="section return"><dt>Returns</dt><dd>Size in bytes </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="event__storage_8hpp_source.html#l00117">117</a> of file <a class="el" href="event__storage_8hpp_source.html">event_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  117</span>{ <span class="keywordflow">return</span> data_.size(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="adeb4d74a388f2466d49a7fa5a29f3afa" name="adeb4d74a388f2466d49a7fa5a29f3afa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adeb4d74a388f2466d49a7fa5a29f3afa">&#9670;&#160;</a></span>Write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;EventTrait T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a> helios::ecs::details::EventStorage::Write </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> T &amp;&#160;</td>
+          <td class="paramname"><em>event</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Writes a single event to storage. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if event size doesn't match storage event size. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Event type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">event</td><td>Event to store </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="event__storage_8hpp_source.html#l00137">137</a> of file <a class="el" href="event__storage_8hpp_source.html">event_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  137</span>                                              {</div>
+<div class="line"><span class="lineno">  138</span>  <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event_size</a> = <span class="keyword">sizeof</span>(T);</div>
+<div class="line"><span class="lineno">  139</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event_size</a> == event_size_, <span class="stringliteral">&quot;Failed to write event: Event size misatch, expected &#39;{}&#39;, got &#39;{}&#39;!&quot;</span>,</div>
+<div class="line"><span class="lineno">  140</span>                event_size_, <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event_size</a>);</div>
+<div class="line"><span class="lineno">  141</span> </div>
+<div class="line"><span class="lineno">  142</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">old_size</a> = data_.size();</div>
+<div class="line"><span class="lineno">  143</span>  data_.resize(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">old_size</a> + <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event_size</a>);</div>
+<div class="line"><span class="lineno">  144</span>  std::memcpy(data_.data() + <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">old_size</a>, &amp;<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a>, <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event_size</a>);</div>
+<div class="line"><span class="lineno">  145</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a2418b880235e2054565851e7646abb6c" name="a2418b880235e2054565851e7646abb6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2418b880235e2054565851e7646abb6c">&#9670;&#160;</a></span>WriteBulk()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::ranges::sized_range R&gt; <br />
+requires EventTrait&lt;std::ranges::range_value_t&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">R</a>&gt;&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a> helios::ecs::details::EventStorage::WriteBulk </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">R</a> &amp;&#160;</td>
+          <td class="paramname"><em>events</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Writes multiple events to storage in bulk. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if event size doesn't match storage event size. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">R</td><td>Range of events </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">events</td><td>Range of events to store </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="event__storage_8hpp_source.html#l00149">149</a> of file <a class="el" href="event__storage_8hpp_source.html">event_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  149</span>                                                   {</div>
+<div class="line"><span class="lineno">  150</span>  <span class="keyword">using </span><a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">EventType</a> = std::ranges::range_value_t&lt;R&gt;;</div>
+<div class="line"><span class="lineno">  151</span>  <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event_size</a> = <span class="keyword">sizeof</span>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">EventType</a>);</div>
+<div class="line"><span class="lineno">  152</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event_size</a> == event_size_, <span class="stringliteral">&quot;Failed to write events bulk: Event size misatch, expected &#39;{}&#39;, got &#39;{}&#39;!&quot;</span>,</div>
+<div class="line"><span class="lineno">  153</span>                event_size_, <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event_size</a>);</div>
+<div class="line"><span class="lineno">  154</span> </div>
+<div class="line"><span class="lineno">  155</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">old_size</a> = data_.size();</div>
+<div class="line"><span class="lineno">  156</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">total_bytes</a> = events.size() * <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event_size</a>;</div>
+<div class="line"><span class="lineno">  157</span> </div>
+<div class="line"><span class="lineno">  158</span>  data_.resize(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">old_size</a> + <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">total_bytes</a>);</div>
+<div class="line"><span class="lineno">  159</span> </div>
+<div class="line"><span class="lineno">  160</span>  <span class="keywordtype">size_t</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">offset</a> = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">old_size</a>;</div>
+<div class="line"><span class="lineno">  161</span>  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a> : events) {</div>
+<div class="line"><span class="lineno">  162</span>    <span class="comment">// Write event data using memcpy (safe for trivially copyable types)</span></div>
+<div class="line"><span class="lineno">  163</span>    std::memcpy(data_.data() + <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">offset</a>, &amp;<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a>, <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event_size</a>);</div>
+<div class="line"><span class="lineno">  164</span>    <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">offset</a> += <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event_size</a>;</div>
+<div class="line"><span class="lineno">  165</span>  }</div>
+<div class="line"><span class="lineno">  166</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehelios.html">helios</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1ecs.html">ecs</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1ecs_1_1details.html">details</a></li><li class="navelem"><a class="el" href="classhelios_1_1ecs_1_1details_1_1EventStorage.html">EventStorage</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

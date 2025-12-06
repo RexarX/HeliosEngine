@@ -1,0 +1,2727 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: helios::async::SubTaskGraph Class Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classhelios_1_1async_1_1SubTaskGraph.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#friends">Friends</a> &#124;
+<a href="classhelios_1_1async_1_1SubTaskGraph-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">helios::async::SubTaskGraph Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Dynamic task graph that can be created within the execution of a task.  
+ <a href="classhelios_1_1async_1_1SubTaskGraph.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a7bcedf6f69a7ac4e98f321277c919544" id="r_a7bcedf6f69a7ac4e98f321277c919544"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#a7bcedf6f69a7ac4e98f321277c919544">SubTaskGraph</a> (const <a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html">SubTaskGraph</a> &amp;)=delete</td></tr>
+<tr class="separator:a7bcedf6f69a7ac4e98f321277c919544"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22404d818bdc6d90b74aa4578fe02387" id="r_a22404d818bdc6d90b74aa4578fe02387"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#a22404d818bdc6d90b74aa4578fe02387">SubTaskGraph</a> (<a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html">SubTaskGraph</a> &amp;&amp;)=default</td></tr>
+<tr class="separator:a22404d818bdc6d90b74aa4578fe02387"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c69f085bd434edd2de0d3f34fa7b3c3" id="r_a5c69f085bd434edd2de0d3f34fa7b3c3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#a5c69f085bd434edd2de0d3f34fa7b3c3">~SubTaskGraph</a> ()=default</td></tr>
+<tr class="separator:a5c69f085bd434edd2de0d3f34fa7b3c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a687cb3722a44cf545d5b0ed0991863" id="r_a7a687cb3722a44cf545d5b0ed0991863"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html">SubTaskGraph</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#a7a687cb3722a44cf545d5b0ed0991863">operator=</a> (const <a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html">SubTaskGraph</a> &amp;)=delete</td></tr>
+<tr class="separator:a7a687cb3722a44cf545d5b0ed0991863"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d4373ca47875a87a55380bca49e0e12" id="r_a4d4373ca47875a87a55380bca49e0e12"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html">SubTaskGraph</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#a4d4373ca47875a87a55380bca49e0e12">operator=</a> (<a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html">SubTaskGraph</a> &amp;&amp;)=delete</td></tr>
+<tr class="separator:a4d4373ca47875a87a55380bca49e0e12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61b89f007aca8810fce649b351874b32" id="r_a61b89f007aca8810fce649b351874b32"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#a61b89f007aca8810fce649b351874b32">Join</a> ()</td></tr>
+<tr class="memdesc:a61b89f007aca8810fce649b351874b32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Joins the subflow with its parent task.  <br /></td></tr>
+<tr class="separator:a61b89f007aca8810fce649b351874b32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4228a6ca30d609daf35ee80862ffc95e" id="r_a4228a6ca30d609daf35ee80862ffc95e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#a4228a6ca30d609daf35ee80862ffc95e">Retain</a> (bool flag) noexcept</td></tr>
+<tr class="memdesc:a4228a6ca30d609daf35ee80862ffc95e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specifies whether to keep the sub task graph after it is joined.  <br /></td></tr>
+<tr class="separator:a4228a6ca30d609daf35ee80862ffc95e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e2416447642985c0e48f523089c30c4" id="r_a0e2416447642985c0e48f523089c30c4"><td class="memTemplParams" colspan="2">template&lt;StaticTask C&gt; </td></tr>
+<tr class="memitem:a0e2416447642985c0e48f523089c30c4"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1async_1_1Task.html">Task</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#a0e2416447642985c0e48f523089c30c4">EmplaceTask</a> (C &amp;&amp;callable)</td></tr>
+<tr class="memdesc:a0e2416447642985c0e48f523089c30c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a static task with the given callable.  <br /></td></tr>
+<tr class="separator:a0e2416447642985c0e48f523089c30c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e2416447642985c0e48f523089c30c4" id="r_a0e2416447642985c0e48f523089c30c4"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="namespacehelios_1_1async.html#a09f164e8eba5bc20e0d6176fe9804ccdadd8f1e76a5041e6952528098522b28ae">SubTask</a> C&gt; </td></tr>
+<tr class="memitem:a0e2416447642985c0e48f523089c30c4"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1async_1_1Task.html">Task</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#a0e2416447642985c0e48f523089c30c4">EmplaceTask</a> (C &amp;&amp;callable)</td></tr>
+<tr class="memdesc:a0e2416447642985c0e48f523089c30c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a dynamic task (nested subflow) with the given callable.  <br /></td></tr>
+<tr class="separator:a0e2416447642985c0e48f523089c30c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e86e6cb9ad5ceef3b91d517c062763e" id="r_a6e86e6cb9ad5ceef3b91d517c062763e"><td class="memTemplParams" colspan="2">template&lt;AnyTask... Cs&gt; <br />
+requires (sizeof...(Cs) &gt; 1)</td></tr>
+<tr class="memitem:a6e86e6cb9ad5ceef3b91d517c062763e"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#a6e86e6cb9ad5ceef3b91d517c062763e">EmplaceTasks</a> (Cs &amp;&amp;... callables) -&gt; std::array&lt; <a class="el" href="classhelios_1_1async_1_1Task.html">Task</a>, sizeof...(Cs)&gt;</td></tr>
+<tr class="memdesc:a6e86e6cb9ad5ceef3b91d517c062763e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates multiple tasks from a list of callables.  <br /></td></tr>
+<tr class="separator:a6e86e6cb9ad5ceef3b91d517c062763e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab492076deae14f6165d57a194589318c" id="r_ab492076deae14f6165d57a194589318c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1async_1_1Task.html">Task</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#ab492076deae14f6165d57a194589318c">CreatePlaceholder</a> ()</td></tr>
+<tr class="memdesc:ab492076deae14f6165d57a194589318c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a placeholder task with no assigned work.  <br /></td></tr>
+<tr class="separator:ab492076deae14f6165d57a194589318c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a878a2528e2b0290af2e765d974a37b78" id="r_a878a2528e2b0290af2e765d974a37b78"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
+requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="el" href="classhelios_1_1async_1_1Task.html">Task</a>&gt;</td></tr>
+<tr class="memitem:a878a2528e2b0290af2e765d974a37b78"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#a878a2528e2b0290af2e765d974a37b78">Linearize</a> (const R &amp;tasks)</td></tr>
+<tr class="memdesc:a878a2528e2b0290af2e765d974a37b78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates linear dependencies between tasks in the given range.  <br /></td></tr>
+<tr class="separator:a878a2528e2b0290af2e765d974a37b78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16c05f5969f9eea602fdf3dac1d8f778" id="r_a16c05f5969f9eea602fdf3dac1d8f778"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R, std::invocable&lt; std::ranges::range_reference_t&lt; R &gt; &gt; C&gt; </td></tr>
+<tr class="memitem:a16c05f5969f9eea602fdf3dac1d8f778"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1async_1_1Task.html">Task</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#a16c05f5969f9eea602fdf3dac1d8f778">ForEach</a> (const R &amp;range, C &amp;&amp;callable)</td></tr>
+<tr class="memdesc:a16c05f5969f9eea602fdf3dac1d8f778"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a parallel for-each task over the given range.  <br /></td></tr>
+<tr class="separator:a16c05f5969f9eea602fdf3dac1d8f778"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1fedb2e32dd91036fa294733dce72b6" id="r_ae1fedb2e32dd91036fa294733dce72b6"><td class="memTemplParams" colspan="2">template&lt;std::integral I, std::invocable&lt; I &gt; C&gt; </td></tr>
+<tr class="memitem:ae1fedb2e32dd91036fa294733dce72b6"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1async_1_1Task.html">Task</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#ae1fedb2e32dd91036fa294733dce72b6">ForEachIndex</a> (I start, I end, I step, C &amp;&amp;callable)</td></tr>
+<tr class="memdesc:ae1fedb2e32dd91036fa294733dce72b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a parallel for-each task over an index range.  <br /></td></tr>
+<tr class="separator:ae1fedb2e32dd91036fa294733dce72b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a845bc2898e98956b92ba6ee1d542c56a" id="r_a845bc2898e98956b92ba6ee1d542c56a"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range InputRange, std::ranges::range OutputRange, std::invocable&lt; std::ranges::range_reference_t&lt; InputRange &gt; &gt; TransformFunc&gt; </td></tr>
+<tr class="memitem:a845bc2898e98956b92ba6ee1d542c56a"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1async_1_1Task.html">Task</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#a845bc2898e98956b92ba6ee1d542c56a">Transform</a> (const InputRange &amp;input_range, OutputRange &amp;output_range, TransformFunc &amp;&amp;transform_func)</td></tr>
+<tr class="memdesc:a845bc2898e98956b92ba6ee1d542c56a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a parallel transform task that applies a function to each element.  <br /></td></tr>
+<tr class="separator:a845bc2898e98956b92ba6ee1d542c56a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab468eec58e8572d4395d42e77d2acf39" id="r_ab468eec58e8572d4395d42e77d2acf39"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R, typename T , typename BinaryOp &gt; <br />
+requires std::invocable&lt;BinaryOp, T, std::ranges::range_reference_t&lt;R&gt;&gt;</td></tr>
+<tr class="memitem:ab468eec58e8572d4395d42e77d2acf39"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1async_1_1Task.html">Task</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#ab468eec58e8572d4395d42e77d2acf39">Reduce</a> (const R &amp;range, T &amp;init, BinaryOp &amp;&amp;binary_op)</td></tr>
+<tr class="memdesc:ab468eec58e8572d4395d42e77d2acf39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a parallel reduction task that combines elements using a binary operation.  <br /></td></tr>
+<tr class="separator:ab468eec58e8572d4395d42e77d2acf39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e38ca806069aabfc2a8a558f2c9f0ba" id="r_a8e38ca806069aabfc2a8a558f2c9f0ba"><td class="memTemplParams" colspan="2">template&lt;std::ranges::random_access_range R, typename Compare  = std::less&lt;&gt;&gt; <br />
+requires std::predicate&lt;Compare, std::ranges::range_reference_t&lt;R&gt;, std::ranges::range_reference_t&lt;R&gt;&gt;</td></tr>
+<tr class="memitem:a8e38ca806069aabfc2a8a558f2c9f0ba"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1async_1_1Task.html">Task</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#a8e38ca806069aabfc2a8a558f2c9f0ba">Sort</a> (R &amp;range, Compare &amp;&amp;comparator=Compare())</td></tr>
+<tr class="memdesc:a8e38ca806069aabfc2a8a558f2c9f0ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a parallel sort task for the given range.  <br /></td></tr>
+<tr class="separator:a8e38ca806069aabfc2a8a558f2c9f0ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35c8fcf7adf3238c24b73eb493201072" id="r_a35c8fcf7adf3238c24b73eb493201072"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#a35c8fcf7adf3238c24b73eb493201072">RemoveTask</a> (const <a class="el" href="classhelios_1_1async_1_1Task.html">Task</a> &amp;task)</td></tr>
+<tr class="memdesc:a35c8fcf7adf3238c24b73eb493201072"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a task from this subflow.  <br /></td></tr>
+<tr class="separator:a35c8fcf7adf3238c24b73eb493201072"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a137695a5775d0faf6eed75a3c0efb4a9" id="r_a137695a5775d0faf6eed75a3c0efb4a9"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a137695a5775d0faf6eed75a3c0efb4a9"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1async_1_1Task.html">Task</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#a137695a5775d0faf6eed75a3c0efb4a9">ComposedOf</a> (T &amp;other_graph)</td></tr>
+<tr class="memdesc:a137695a5775d0faf6eed75a3c0efb4a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a module task that encapsulates another task graph.  <br /></td></tr>
+<tr class="separator:a137695a5775d0faf6eed75a3c0efb4a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46ee5f466cc8d9f6a2d5dbe8520b040e" id="r_a46ee5f466cc8d9f6a2d5dbe8520b040e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#a46ee5f466cc8d9f6a2d5dbe8520b040e">Joinable</a> () const noexcept</td></tr>
+<tr class="memdesc:a46ee5f466cc8d9f6a2d5dbe8520b040e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if this subflow can be joined.  <br /></td></tr>
+<tr class="separator:a46ee5f466cc8d9f6a2d5dbe8520b040e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affa63ac653761a18168fb68e5dd7b75c" id="r_affa63ac653761a18168fb68e5dd7b75c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#affa63ac653761a18168fb68e5dd7b75c">WillBeRetained</a> () const noexcept</td></tr>
+<tr class="memdesc:affa63ac653761a18168fb68e5dd7b75c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if this subflow will be retained.  <br /></td></tr>
+<tr class="separator:affa63ac653761a18168fb68e5dd7b75c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51a86c8b897b4dfcff01793c476ee6d3" id="r_a51a86c8b897b4dfcff01793c476ee6d3"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#a51a86c8b897b4dfcff01793c476ee6d3">Run</a> (<a class="el" href="classhelios_1_1async_1_1TaskGraph.html">TaskGraph</a> &amp;graph) -&gt; <a class="el" href="classhelios_1_1async_1_1Future.html">Future</a>&lt; void &gt;</td></tr>
+<tr class="memdesc:a51a86c8b897b4dfcff01793c476ee6d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs a task graph once.  <br /></td></tr>
+<tr class="separator:a51a86c8b897b4dfcff01793c476ee6d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d2b349257278a297db65efae703a841" id="r_a7d2b349257278a297db65efae703a841"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#a7d2b349257278a297db65efae703a841">Run</a> (<a class="el" href="classhelios_1_1async_1_1TaskGraph.html">TaskGraph</a> &amp;&amp;graph) -&gt; <a class="el" href="classhelios_1_1async_1_1Future.html">Future</a>&lt; void &gt;</td></tr>
+<tr class="memdesc:a7d2b349257278a297db65efae703a841"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs a task graph once.  <br /></td></tr>
+<tr class="separator:a7d2b349257278a297db65efae703a841"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad826ebcc56dfd6981a61a2caca2b07da" id="r_ad826ebcc56dfd6981a61a2caca2b07da"><td class="memTemplParams" colspan="2">template&lt;std::invocable C&gt; </td></tr>
+<tr class="memitem:ad826ebcc56dfd6981a61a2caca2b07da"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#ad826ebcc56dfd6981a61a2caca2b07da">Run</a> (<a class="el" href="classhelios_1_1async_1_1TaskGraph.html">TaskGraph</a> &amp;graph, C &amp;&amp;callable) -&gt; <a class="el" href="classhelios_1_1async_1_1Future.html">Future</a>&lt; void &gt;</td></tr>
+<tr class="memdesc:ad826ebcc56dfd6981a61a2caca2b07da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs a task graph once and invokes a callback upon completion.  <br /></td></tr>
+<tr class="separator:ad826ebcc56dfd6981a61a2caca2b07da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a055d08a8536abe2ab0cb923a6ef477b1" id="r_a055d08a8536abe2ab0cb923a6ef477b1"><td class="memTemplParams" colspan="2">template&lt;std::invocable C&gt; </td></tr>
+<tr class="memitem:a055d08a8536abe2ab0cb923a6ef477b1"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#a055d08a8536abe2ab0cb923a6ef477b1">Run</a> (<a class="el" href="classhelios_1_1async_1_1TaskGraph.html">TaskGraph</a> &amp;&amp;graph, C &amp;&amp;callable) -&gt; <a class="el" href="classhelios_1_1async_1_1Future.html">Future</a>&lt; void &gt;</td></tr>
+<tr class="memdesc:a055d08a8536abe2ab0cb923a6ef477b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs a moved task graph once and invokes a callback upon completion.  <br /></td></tr>
+<tr class="separator:a055d08a8536abe2ab0cb923a6ef477b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a6f083993c8d7a891bc87c44e178b1f" id="r_a6a6f083993c8d7a891bc87c44e178b1f"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#a6a6f083993c8d7a891bc87c44e178b1f">RunN</a> (<a class="el" href="classhelios_1_1async_1_1TaskGraph.html">TaskGraph</a> &amp;graph, size_t count) -&gt; <a class="el" href="classhelios_1_1async_1_1Future.html">Future</a>&lt; void &gt;</td></tr>
+<tr class="memdesc:a6a6f083993c8d7a891bc87c44e178b1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs a task graph for the specified number of times.  <br /></td></tr>
+<tr class="separator:a6a6f083993c8d7a891bc87c44e178b1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c33a32409321d60567cae3600bcd776" id="r_a8c33a32409321d60567cae3600bcd776"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#a8c33a32409321d60567cae3600bcd776">RunN</a> (<a class="el" href="classhelios_1_1async_1_1TaskGraph.html">TaskGraph</a> &amp;&amp;graph, size_t count) -&gt; <a class="el" href="classhelios_1_1async_1_1Future.html">Future</a>&lt; void &gt;</td></tr>
+<tr class="memdesc:a8c33a32409321d60567cae3600bcd776"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs a moved task graph for the specified number of times.  <br /></td></tr>
+<tr class="separator:a8c33a32409321d60567cae3600bcd776"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b8839e4be461ec25cabf7385e71ef1e" id="r_a5b8839e4be461ec25cabf7385e71ef1e"><td class="memTemplParams" colspan="2">template&lt;std::invocable C&gt; </td></tr>
+<tr class="memitem:a5b8839e4be461ec25cabf7385e71ef1e"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#a5b8839e4be461ec25cabf7385e71ef1e">RunN</a> (<a class="el" href="classhelios_1_1async_1_1TaskGraph.html">TaskGraph</a> &amp;graph, size_t count, C &amp;&amp;callable) -&gt; <a class="el" href="classhelios_1_1async_1_1Future.html">Future</a>&lt; void &gt;</td></tr>
+<tr class="memdesc:a5b8839e4be461ec25cabf7385e71ef1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs a task graph for the specified number of times and invokes a callback.  <br /></td></tr>
+<tr class="separator:a5b8839e4be461ec25cabf7385e71ef1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91665009e62432cc80da6bf09de4b143" id="r_a91665009e62432cc80da6bf09de4b143"><td class="memTemplParams" colspan="2">template&lt;std::invocable C&gt; </td></tr>
+<tr class="memitem:a91665009e62432cc80da6bf09de4b143"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#a91665009e62432cc80da6bf09de4b143">RunN</a> (<a class="el" href="classhelios_1_1async_1_1TaskGraph.html">TaskGraph</a> &amp;&amp;graph, size_t count, C &amp;&amp;callable) -&gt; <a class="el" href="classhelios_1_1async_1_1Future.html">Future</a>&lt; void &gt;</td></tr>
+<tr class="memdesc:a91665009e62432cc80da6bf09de4b143"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs a moved task graph for the specified number of times and invokes a callback.  <br /></td></tr>
+<tr class="separator:a91665009e62432cc80da6bf09de4b143"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0598bb80175561eb3e8c0b7f263158b" id="r_af0598bb80175561eb3e8c0b7f263158b"><td class="memTemplParams" colspan="2">template&lt;std::predicate Predicate&gt; </td></tr>
+<tr class="memitem:af0598bb80175561eb3e8c0b7f263158b"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#af0598bb80175561eb3e8c0b7f263158b">RunUntil</a> (<a class="el" href="classhelios_1_1async_1_1TaskGraph.html">TaskGraph</a> &amp;graph, Predicate &amp;&amp;predicate) -&gt; <a class="el" href="classhelios_1_1async_1_1Future.html">Future</a>&lt; void &gt;</td></tr>
+<tr class="memdesc:af0598bb80175561eb3e8c0b7f263158b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs a task graph repeatedly until the predicate returns true.  <br /></td></tr>
+<tr class="separator:af0598bb80175561eb3e8c0b7f263158b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6bf869917f24673827ac75c45ad0e0aa" id="r_a6bf869917f24673827ac75c45ad0e0aa"><td class="memTemplParams" colspan="2">template&lt;std::predicate Predicate&gt; </td></tr>
+<tr class="memitem:a6bf869917f24673827ac75c45ad0e0aa"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#a6bf869917f24673827ac75c45ad0e0aa">RunUntil</a> (<a class="el" href="classhelios_1_1async_1_1TaskGraph.html">TaskGraph</a> &amp;&amp;graph, Predicate &amp;&amp;predicate) -&gt; <a class="el" href="classhelios_1_1async_1_1Future.html">Future</a>&lt; void &gt;</td></tr>
+<tr class="memdesc:a6bf869917f24673827ac75c45ad0e0aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs a moved task graph repeatedly until the predicate returns true.  <br /></td></tr>
+<tr class="separator:a6bf869917f24673827ac75c45ad0e0aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a433aa5bd9865a725e249f14f7292c44c" id="r_a433aa5bd9865a725e249f14f7292c44c"><td class="memTemplParams" colspan="2">template&lt;std::predicate Predicate, std::invocable C&gt; </td></tr>
+<tr class="memitem:a433aa5bd9865a725e249f14f7292c44c"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#a433aa5bd9865a725e249f14f7292c44c">RunUntil</a> (<a class="el" href="classhelios_1_1async_1_1TaskGraph.html">TaskGraph</a> &amp;graph, Predicate &amp;&amp;predicate, C &amp;&amp;callable) -&gt; <a class="el" href="classhelios_1_1async_1_1Future.html">Future</a>&lt; void &gt;</td></tr>
+<tr class="memdesc:a433aa5bd9865a725e249f14f7292c44c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs a task graph repeatedly until the predicate returns true, then invokes a callback.  <br /></td></tr>
+<tr class="separator:a433aa5bd9865a725e249f14f7292c44c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebae892b41582e8a598c41a29a869ec7" id="r_aebae892b41582e8a598c41a29a869ec7"><td class="memTemplParams" colspan="2">template&lt;std::predicate Predicate, std::invocable C&gt; </td></tr>
+<tr class="memitem:aebae892b41582e8a598c41a29a869ec7"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#aebae892b41582e8a598c41a29a869ec7">RunUntil</a> (<a class="el" href="classhelios_1_1async_1_1TaskGraph.html">TaskGraph</a> &amp;&amp;graph, Predicate &amp;&amp;predicate, C &amp;&amp;callable) -&gt; <a class="el" href="classhelios_1_1async_1_1Future.html">Future</a>&lt; void &gt;</td></tr>
+<tr class="memdesc:aebae892b41582e8a598c41a29a869ec7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs a moved task graph repeatedly until the predicate returns true, then invokes a callback.  <br /></td></tr>
+<tr class="separator:aebae892b41582e8a598c41a29a869ec7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b9eb5e36f4dc25e03d10aca0a67b313" id="r_a3b9eb5e36f4dc25e03d10aca0a67b313"><td class="memTemplParams" colspan="2">template&lt;std::invocable C&gt; </td></tr>
+<tr class="memitem:a3b9eb5e36f4dc25e03d10aca0a67b313"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#a3b9eb5e36f4dc25e03d10aca0a67b313">Async</a> (C &amp;&amp;callable) -&gt; std::future&lt; std::invoke_result_t&lt; C &gt; &gt;</td></tr>
+<tr class="memdesc:a3b9eb5e36f4dc25e03d10aca0a67b313"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an asynchronous task that runs the given callable.  <br /></td></tr>
+<tr class="separator:a3b9eb5e36f4dc25e03d10aca0a67b313"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a835ba1d2451bc8889efdf48dc0d7a7b8" id="r_a835ba1d2451bc8889efdf48dc0d7a7b8"><td class="memTemplParams" colspan="2">template&lt;std::invocable C&gt; </td></tr>
+<tr class="memitem:a835ba1d2451bc8889efdf48dc0d7a7b8"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#a835ba1d2451bc8889efdf48dc0d7a7b8">Async</a> (std::string name, C &amp;&amp;callable) -&gt; std::future&lt; std::invoke_result_t&lt; C &gt; &gt;</td></tr>
+<tr class="memdesc:a835ba1d2451bc8889efdf48dc0d7a7b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a named asynchronous task that runs the given callable.  <br /></td></tr>
+<tr class="separator:a835ba1d2451bc8889efdf48dc0d7a7b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a852099096ec3947d954819aaa96d75e4" id="r_a852099096ec3947d954819aaa96d75e4"><td class="memTemplParams" colspan="2">template&lt;std::invocable C&gt; </td></tr>
+<tr class="memitem:a852099096ec3947d954819aaa96d75e4"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#a852099096ec3947d954819aaa96d75e4">SilentAsync</a> (C &amp;&amp;callable)</td></tr>
+<tr class="memdesc:a852099096ec3947d954819aaa96d75e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an asynchronous task without returning a future.  <br /></td></tr>
+<tr class="separator:a852099096ec3947d954819aaa96d75e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acffcf3da7c355faed4dcee9f44b191d5" id="r_acffcf3da7c355faed4dcee9f44b191d5"><td class="memTemplParams" colspan="2">template&lt;std::invocable C&gt; </td></tr>
+<tr class="memitem:acffcf3da7c355faed4dcee9f44b191d5"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#acffcf3da7c355faed4dcee9f44b191d5">SilentAsync</a> (std::string name, C &amp;&amp;callable)</td></tr>
+<tr class="memdesc:acffcf3da7c355faed4dcee9f44b191d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a named asynchronous task without returning a future.  <br /></td></tr>
+<tr class="separator:acffcf3da7c355faed4dcee9f44b191d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add77cf1c949e1d4a23df0a5b227ebcd8" id="r_add77cf1c949e1d4a23df0a5b227ebcd8"><td class="memTemplParams" colspan="2">template&lt;std::invocable C, std::ranges::range Dependencies&gt; <br />
+requires std::same_as&lt;std::ranges::range_value_t&lt;Dependencies&gt;, <a class="el" href="classhelios_1_1async_1_1AsyncTask.html">AsyncTask</a>&gt;</td></tr>
+<tr class="memitem:add77cf1c949e1d4a23df0a5b227ebcd8"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#add77cf1c949e1d4a23df0a5b227ebcd8">DependentAsync</a> (C &amp;&amp;callable, const Dependencies &amp;dependencies) -&gt; std::pair&lt; <a class="el" href="classhelios_1_1async_1_1AsyncTask.html">AsyncTask</a>, std::future&lt; std::invoke_result_t&lt; C &gt; &gt; &gt;</td></tr>
+<tr class="memdesc:add77cf1c949e1d4a23df0a5b227ebcd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an asynchronous task that runs after specified dependencies complete.  <br /></td></tr>
+<tr class="separator:add77cf1c949e1d4a23df0a5b227ebcd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7a980910241199a19e237fc090da24b" id="r_ae7a980910241199a19e237fc090da24b"><td class="memTemplParams" colspan="2">template&lt;std::invocable C, std::ranges::range Dependencies&gt; <br />
+requires std::same_as&lt;std::ranges::range_value_t&lt;Dependencies&gt;, <a class="el" href="classhelios_1_1async_1_1AsyncTask.html">AsyncTask</a>&gt;</td></tr>
+<tr class="memitem:ae7a980910241199a19e237fc090da24b"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1async_1_1AsyncTask.html">AsyncTask</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#ae7a980910241199a19e237fc090da24b">SilentDependentAsync</a> (C &amp;&amp;callable, const Dependencies &amp;dependencies)</td></tr>
+<tr class="memdesc:ae7a980910241199a19e237fc090da24b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an asynchronous task that runs after dependencies complete, without returning a future.  <br /></td></tr>
+<tr class="separator:ae7a980910241199a19e237fc090da24b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d4b7d3c01b077654e3fd6d0259f17a7" id="r_a9d4b7d3c01b077654e3fd6d0259f17a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#a9d4b7d3c01b077654e3fd6d0259f17a7">WaitForAll</a> ()</td></tr>
+<tr class="memdesc:a9d4b7d3c01b077654e3fd6d0259f17a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Blocks until all submitted tasks complete.  <br /></td></tr>
+<tr class="separator:a9d4b7d3c01b077654e3fd6d0259f17a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65ede9bd67bf85f00d08b660a3ee47de" id="r_a65ede9bd67bf85f00d08b660a3ee47de"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#a65ede9bd67bf85f00d08b660a3ee47de">CoRun</a> (<a class="el" href="classhelios_1_1async_1_1TaskGraph.html">TaskGraph</a> &amp;graph)</td></tr>
+<tr class="memdesc:a65ede9bd67bf85f00d08b660a3ee47de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs a task graph cooperatively and waits until it completes using the current worker thread.  <br /></td></tr>
+<tr class="separator:a65ede9bd67bf85f00d08b660a3ee47de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afecea249f4b5f914c06f7a0f1795f8b6" id="r_afecea249f4b5f914c06f7a0f1795f8b6"><td class="memTemplParams" colspan="2">template&lt;std::predicate Predicate&gt; </td></tr>
+<tr class="memitem:afecea249f4b5f914c06f7a0f1795f8b6"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#afecea249f4b5f914c06f7a0f1795f8b6">CoRunUntil</a> (Predicate &amp;&amp;predicate)</td></tr>
+<tr class="memdesc:afecea249f4b5f914c06f7a0f1795f8b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keeps the current worker thread running until the predicate returns true.  <br /></td></tr>
+<tr class="separator:afecea249f4b5f914c06f7a0f1795f8b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0618eb39608939dbd368c16f08c02340" id="r_a0618eb39608939dbd368c16f08c02340"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#a0618eb39608939dbd368c16f08c02340">IsWorkerThread</a> () const</td></tr>
+<tr class="memdesc:a0618eb39608939dbd368c16f08c02340"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the current thread is a worker thread of this executor.  <br /></td></tr>
+<tr class="separator:a0618eb39608939dbd368c16f08c02340"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a558919f6fa61de615a29d8fe4f79de58" id="r_a558919f6fa61de615a29d8fe4f79de58"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#a558919f6fa61de615a29d8fe4f79de58">CurrentWorkerId</a> () const</td></tr>
+<tr class="memdesc:a558919f6fa61de615a29d8fe4f79de58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the ID of the current worker thread.  <br /></td></tr>
+<tr class="separator:a558919f6fa61de615a29d8fe4f79de58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16d5fc02da8985c9559df9c1e38f5ad0" id="r_a16d5fc02da8985c9559df9c1e38f5ad0"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#a16d5fc02da8985c9559df9c1e38f5ad0">WorkerCount</a> () const noexcept</td></tr>
+<tr class="memdesc:a16d5fc02da8985c9559df9c1e38f5ad0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the total number of worker threads.  <br /></td></tr>
+<tr class="separator:a16d5fc02da8985c9559df9c1e38f5ad0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17fa8dc306fe7465dcbb9c320e9d5919" id="r_a17fa8dc306fe7465dcbb9c320e9d5919"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#a17fa8dc306fe7465dcbb9c320e9d5919">IdleWorkerCount</a> () const noexcept</td></tr>
+<tr class="memdesc:a17fa8dc306fe7465dcbb9c320e9d5919"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of worker threads currently waiting for work.  <br /></td></tr>
+<tr class="separator:a17fa8dc306fe7465dcbb9c320e9d5919"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f58950994b4353bd8837652c426f95f" id="r_a1f58950994b4353bd8837652c426f95f"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#a1f58950994b4353bd8837652c426f95f">QueueCount</a> () const noexcept</td></tr>
+<tr class="memdesc:a1f58950994b4353bd8837652c426f95f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of task queues in the work-stealing scheduler.  <br /></td></tr>
+<tr class="separator:a1f58950994b4353bd8837652c426f95f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd9d09040ead9ac20accc39521c3464f" id="r_abd9d09040ead9ac20accc39521c3464f"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#abd9d09040ead9ac20accc39521c3464f">RunningTopologyCount</a> () const</td></tr>
+<tr class="memdesc:abd9d09040ead9ac20accc39521c3464f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of task graphs currently being executed.  <br /></td></tr>
+<tr class="separator:abd9d09040ead9ac20accc39521c3464f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:a77eb4e04900b9ae67d00ef7a589cb623" id="r_a77eb4e04900b9ae67d00ef7a589cb623"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#a77eb4e04900b9ae67d00ef7a589cb623">TaskGraph</a></td></tr>
+<tr class="separator:a77eb4e04900b9ae67d00ef7a589cb623"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a763b2f90bc53f92d680a635fe28e858e" id="r_a763b2f90bc53f92d680a635fe28e858e"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#a763b2f90bc53f92d680a635fe28e858e">Executor</a></td></tr>
+<tr class="separator:a763b2f90bc53f92d680a635fe28e858e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Dynamic task graph that can be created within the execution of a task. </p>
+<p>Wraps tf::Subflow and provides methods to create tasks dynamically at runtime. SubTaskGraphs are spawned from the execution of a SubTask and allow for runtime-dependent task creation and dependency management. </p><dl class="section note"><dt>Note</dt><dd>Partially thread-safe. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Only the worker thread that spawned the subflow should modify it. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00041">41</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a7bcedf6f69a7ac4e98f321277c919544" name="a7bcedf6f69a7ac4e98f321277c919544"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7bcedf6f69a7ac4e98f321277c919544">&#9670;&#160;</a></span>SubTaskGraph() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::async::SubTaskGraph::SubTaskGraph </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html">SubTaskGraph</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a22404d818bdc6d90b74aa4578fe02387" name="a22404d818bdc6d90b74aa4578fe02387"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22404d818bdc6d90b74aa4578fe02387">&#9670;&#160;</a></span>SubTaskGraph() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::async::SubTaskGraph::SubTaskGraph </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html">SubTaskGraph</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5c69f085bd434edd2de0d3f34fa7b3c3" name="a5c69f085bd434edd2de0d3f34fa7b3c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c69f085bd434edd2de0d3f34fa7b3c3">&#9670;&#160;</a></span>~SubTaskGraph()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::async::SubTaskGraph::~SubTaskGraph </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a3b9eb5e36f4dc25e03d10aca0a67b313" name="a3b9eb5e36f4dc25e03d10aca0a67b313"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b9eb5e36f4dc25e03d10aca0a67b313">&#9670;&#160;</a></span>Async() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::invocable C&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::async::SubTaskGraph::Async </td>
+          <td>(</td>
+          <td class="paramtype">C &amp;&amp;&#160;</td>
+          <td class="paramname"><em>callable</em></td><td>)</td>
+          <td> -&gt; std::future&lt;std::invoke_result_t&lt;C&gt;&gt; </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates an asynchronous task that runs the given callable. </p>
+<p>The task is scheduled immediately and runs independently. </p><dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">C</td><td>Callable type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">callable</td><td>Function to execute asynchronously </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Future.html" title="Wrapper around tf::Future for handling asynchronous task results.">Future</a> that will hold the result of the execution </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00403">403</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  403</span>                                                               {</div>
+<div class="line"><span class="lineno">  404</span>    <span class="keywordflow">return</span> subflow_.executor().async(std::forward&lt;C&gt;(callable));</div>
+<div class="line"><span class="lineno">  405</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a835ba1d2451bc8889efdf48dc0d7a7b8" name="a835ba1d2451bc8889efdf48dc0d7a7b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a835ba1d2451bc8889efdf48dc0d7a7b8">&#9670;&#160;</a></span>Async() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::invocable C&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::async::SubTaskGraph::Async </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">C &amp;&amp;&#160;</td>
+          <td class="paramname"><em>callable</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> -&gt; std::future&lt;std::invoke_result_t&lt;C&gt;&gt; </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a named asynchronous task that runs the given callable. </p>
+<p>The task is scheduled immediately and runs independently. </p><dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">C</td><td>Callable type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>Name for the task (useful for debugging/profiling) </td></tr>
+    <tr><td class="paramname">callable</td><td>Function to execute asynchronously </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Future.html" title="Wrapper around tf::Future for handling asynchronous task results.">Future</a> that will hold the result of the execution </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00417">417</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  417</span>                                                                               {</div>
+<div class="line"><span class="lineno">  418</span>    <span class="keywordflow">return</span> subflow_.executor().async(std::move(name), std::forward&lt;C&gt;(callable));</div>
+<div class="line"><span class="lineno">  419</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a137695a5775d0faf6eed75a3c0efb4a9" name="a137695a5775d0faf6eed75a3c0efb4a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a137695a5775d0faf6eed75a3c0efb4a9">&#9670;&#160;</a></span>ComposedOf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1async_1_1Task.html">Task</a> helios::async::SubTaskGraph::ComposedOf </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>other_graph</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a module task that encapsulates another task graph. </p>
+<dl class="section note"><dt>Note</dt><dd>Not thread-safe </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other_graph</td><td><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> graph to compose into this subflow </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> handle representing the composed graph </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00211">211</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  211</span>                                  {</div>
+<div class="line"><span class="lineno">  212</span>    <span class="keywordflow">return</span> Task(subflow_.composed_of(other_graph.UnderlyingTaskflow()));</div>
+<div class="line"><span class="lineno">  213</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a65ede9bd67bf85f00d08b660a3ee47de" name="a65ede9bd67bf85f00d08b660a3ee47de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65ede9bd67bf85f00d08b660a3ee47de">&#9670;&#160;</a></span>CoRun()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::async::SubTaskGraph::CoRun </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1async_1_1TaskGraph.html">TaskGraph</a> &amp;&#160;</td>
+          <td class="paramname"><em>graph</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Runs a task graph cooperatively and waits until it completes using the current worker thread. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Must be called from within a worker thread of this executor. Triggers assertion if called from a non-worker thread. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">graph</td><td><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> graph to execute </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00626">626</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  626</span>                                                {</div>
+<div class="line"><span class="lineno">  627</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1async_1_1SubTaskGraph.html#a0618eb39608939dbd368c16f08c02340">IsWorkerThread</a>(), <span class="stringliteral">&quot;Failed to co-run: Must be called from a worker thread&quot;</span>);</div>
+<div class="line"><span class="lineno">  628</span>  subflow_.executor().corun(graph.UnderlyingTaskflow());</div>
+<div class="line"><span class="lineno">  629</span>}</div>
+<div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00149">assert.hpp:149</a></div></div>
+<div class="ttc" id="aclasshelios_1_1async_1_1SubTaskGraph_html_a0618eb39608939dbd368c16f08c02340"><div class="ttname"><a href="classhelios_1_1async_1_1SubTaskGraph.html#a0618eb39608939dbd368c16f08c02340">helios::async::SubTaskGraph::IsWorkerThread</a></div><div class="ttdeci">bool IsWorkerThread() const</div><div class="ttdoc">Checks if the current thread is a worker thread of this executor.</div><div class="ttdef"><b>Definition</b> <a href="sub__task__graph_8hpp_source.html#l00505">sub_task_graph.hpp:505</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="afecea249f4b5f914c06f7a0f1795f8b6" name="afecea249f4b5f914c06f7a0f1795f8b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afecea249f4b5f914c06f7a0f1795f8b6">&#9670;&#160;</a></span>CoRunUntil()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::predicate Predicate&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::async::SubTaskGraph::CoRunUntil </td>
+          <td>(</td>
+          <td class="paramtype">Predicate &amp;&amp;&#160;</td>
+          <td class="paramname"><em>predicate</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Keeps the current worker thread running until the predicate returns true. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Must be called from within a worker thread of this executor. Triggers assertion if called from a non-worker thread. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Predicate</td><td>Predicate type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">predicate</td><td>Boolean predicate to determine when to stop </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00632">632</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  632</span>                                                          {</div>
+<div class="line"><span class="lineno">  633</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1async_1_1SubTaskGraph.html#a0618eb39608939dbd368c16f08c02340">IsWorkerThread</a>(), <span class="stringliteral">&quot;Failed to co-run until: Must be called from a worker thread&quot;</span>);</div>
+<div class="line"><span class="lineno">  634</span>  subflow_.executor().corun_until(std::forward&lt;Predicate&gt;(predicate));</div>
+<div class="line"><span class="lineno">  635</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ab492076deae14f6165d57a194589318c" name="ab492076deae14f6165d57a194589318c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab492076deae14f6165d57a194589318c">&#9670;&#160;</a></span>CreatePlaceholder()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1async_1_1Task.html">Task</a> helios::async::SubTaskGraph::CreatePlaceholder </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a placeholder task with no assigned work. </p>
+<dl class="section note"><dt>Note</dt><dd>Not thread-safe </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> handle that can later be assigned work </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00106">106</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  106</span>{ <span class="keywordflow">return</span> Task(subflow_.placeholder()); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a558919f6fa61de615a29d8fe4f79de58" name="a558919f6fa61de615a29d8fe4f79de58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a558919f6fa61de615a29d8fe4f79de58">&#9670;&#160;</a></span>CurrentWorkerId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int helios::async::SubTaskGraph::CurrentWorkerId </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the ID of the current worker thread. </p>
+<dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Worker ID (0 to N-1) or -1 if not a worker thread </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00512">512</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  512</span>{ <span class="keywordflow">return</span> subflow_.executor().this_worker_id(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="add77cf1c949e1d4a23df0a5b227ebcd8" name="add77cf1c949e1d4a23df0a5b227ebcd8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add77cf1c949e1d4a23df0a5b227ebcd8">&#9670;&#160;</a></span>DependentAsync()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::invocable C, std::ranges::range Dependencies&gt; <br />
+requires std::same_as&lt;std::ranges::range_value_t&lt;Dependencies&gt;, <a class="el" href="classhelios_1_1async_1_1AsyncTask.html">AsyncTask</a>&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::async::SubTaskGraph::DependentAsync </td>
+          <td>(</td>
+          <td class="paramtype">C &amp;&amp;&#160;</td>
+          <td class="paramname"><em>callable</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Dependencies &amp;&#160;</td>
+          <td class="paramname"><em>dependencies</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> -&gt; std::pair&lt;<a class="el" href="classhelios_1_1async_1_1AsyncTask.html">AsyncTask</a>, std::future&lt;std::invoke_result_t&lt;C&gt;&gt;&gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates an asynchronous task that runs after specified dependencies complete. </p>
+<p>The task will only execute after all dependencies finish. </p><dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">C</td><td>Callable type </td></tr>
+    <tr><td class="paramname">Dependencies</td><td>Range type containing <a class="el" href="classhelios_1_1async_1_1AsyncTask.html" title="Handle to an asynchronous task managed by the Executor.">AsyncTask</a> dependencies </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">callable</td><td>Function to execute asynchronously </td></tr>
+    <tr><td class="paramname">dependencies</td><td>Tasks that must complete before this task runs </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Pair containing <a class="el" href="classhelios_1_1async_1_1AsyncTask.html" title="Handle to an asynchronous task managed by the Executor.">AsyncTask</a> handle and <a class="el" href="classhelios_1_1async_1_1Future.html" title="Wrapper around tf::Future for handling asynchronous task results.">Future</a> for the result </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00587">587</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  588</span>                                                            {</div>
+<div class="line"><span class="lineno">  589</span>  std::vector&lt;tf::AsyncTask&gt; tf_deps;</div>
+<div class="line"><span class="lineno">  590</span>  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::ranges::sized_range&lt;Dependencies&gt;) {</div>
+<div class="line"><span class="lineno">  591</span>    tf_deps.reserve(std::ranges::size(dependencies));</div>
+<div class="line"><span class="lineno">  592</span>  }</div>
+<div class="line"><span class="lineno">  593</span> </div>
+<div class="line"><span class="lineno">  594</span>  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; dep : dependencies) {</div>
+<div class="line"><span class="lineno">  595</span>    tf_deps.push_back(dep.UnderlyingTask());</div>
+<div class="line"><span class="lineno">  596</span>  }</div>
+<div class="line"><span class="lineno">  597</span> </div>
+<div class="line"><span class="lineno">  598</span>  <span class="keyword">auto</span> [task, future] = subflow_.executor().dependent_async(std::forward&lt;C&gt;(callable), tf_deps.begin(), tf_deps.end());</div>
+<div class="line"><span class="lineno">  599</span>  <span class="keywordflow">return</span> std::make_pair(AsyncTask(std::move(task)), std::move(future));</div>
+<div class="line"><span class="lineno">  600</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a0e2416447642985c0e48f523089c30c4" name="a0e2416447642985c0e48f523089c30c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e2416447642985c0e48f523089c30c4">&#9670;&#160;</a></span>EmplaceTask() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="namespacehelios_1_1async.html#a09f164e8eba5bc20e0d6176fe9804ccdadd8f1e76a5041e6952528098522b28ae">SubTask</a> C&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1async_1_1Task.html">Task</a> helios::async::SubTaskGraph::EmplaceTask </td>
+          <td>(</td>
+          <td class="paramtype">C &amp;&amp;&#160;</td>
+          <td class="paramname"><em>callable</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a static task with the given callable. </p>
+<dl class="section note"><dt>Note</dt><dd>Not thread-safe </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">C</td><td>Callable type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">callable</td><td>Function to execute when the task runs </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> handle for the created task </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00074">74</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   74</span>                                 {</div>
+<div class="line"><span class="lineno">   75</span>    <span class="keywordflow">return</span> Task(subflow_.emplace(std::forward&lt;C&gt;(callable)));</div>
+<div class="line"><span class="lineno">   76</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a0e2416447642985c0e48f523089c30c4" name="a0e2416447642985c0e48f523089c30c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e2416447642985c0e48f523089c30c4">&#9670;&#160;</a></span>EmplaceTask() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="namespacehelios_1_1async.html#a09f164e8eba5bc20e0d6176fe9804ccdadd8f1e76a5041e6952528098522b28ae">SubTask</a> C&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1async_1_1Task.html">Task</a> helios::async::SubTaskGraph::EmplaceTask </td>
+          <td>(</td>
+          <td class="paramtype">C &amp;&amp;&#160;</td>
+          <td class="paramname"><em>callable</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Creates a dynamic task (nested subflow) with the given callable. </p>
+<dl class="section note"><dt>Note</dt><dd>Not thread-safe </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">C</td><td>Callable type that accepts a <a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html" title="Dynamic task graph that can be created within the execution of a task.">SubTaskGraph</a> reference </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">callable</td><td>Function to execute when the task runs </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> handle for the created task </dd></dl>
+
+</div>
+</div>
+<a id="a6e86e6cb9ad5ceef3b91d517c062763e" name="a6e86e6cb9ad5ceef3b91d517c062763e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e86e6cb9ad5ceef3b91d517c062763e">&#9670;&#160;</a></span>EmplaceTasks()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;AnyTask... Cs&gt; <br />
+requires (sizeof...(Cs) &gt; 1)</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::async::SubTaskGraph::EmplaceTasks </td>
+          <td>(</td>
+          <td class="paramtype">Cs &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>callables</em></td><td>)</td>
+          <td> -&gt; std::array&lt;<a class="el" href="classhelios_1_1async_1_1Task.html">Task</a>, sizeof...(Cs)&gt; </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates multiple tasks from a list of callables. </p>
+<dl class="section note"><dt>Note</dt><dd>Not thread-safe </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Cs</td><td>Callable types </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">callables</td><td>Functions to execute when the tasks run </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Array of task handles for the created tasks </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00097">97</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   97</span>                                                                        {</div>
+<div class="line"><span class="lineno">   98</span>    <span class="keywordflow">return</span> {<a class="code hl_function" href="classhelios_1_1async_1_1SubTaskGraph.html#a0e2416447642985c0e48f523089c30c4">EmplaceTask</a>(std::forward&lt;Cs&gt;(callables))...};</div>
+<div class="line"><span class="lineno">   99</span>  }</div>
+<div class="ttc" id="aclasshelios_1_1async_1_1SubTaskGraph_html_a0e2416447642985c0e48f523089c30c4"><div class="ttname"><a href="classhelios_1_1async_1_1SubTaskGraph.html#a0e2416447642985c0e48f523089c30c4">helios::async::SubTaskGraph::EmplaceTask</a></div><div class="ttdeci">Task EmplaceTask(C &amp;&amp;callable)</div><div class="ttdoc">Creates a static task with the given callable.</div><div class="ttdef"><b>Definition</b> <a href="sub__task__graph_8hpp_source.html#l00074">sub_task_graph.hpp:74</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a16c05f5969f9eea602fdf3dac1d8f778" name="a16c05f5969f9eea602fdf3dac1d8f778"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16c05f5969f9eea602fdf3dac1d8f778">&#9670;&#160;</a></span>ForEach()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::ranges::range R, std::invocable&lt; std::ranges::range_reference_t&lt; R &gt; &gt; C&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1async_1_1Task.html">Task</a> helios::async::SubTaskGraph::ForEach </td>
+          <td>(</td>
+          <td class="paramtype">const R &amp;&#160;</td>
+          <td class="paramname"><em>range</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">C &amp;&amp;&#160;</td>
+          <td class="paramname"><em>callable</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a parallel for-each task over the given range. </p>
+<dl class="section note"><dt>Note</dt><dd>Not thread-safe </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">R</td><td>Range type </td></tr>
+    <tr><td class="paramname">C</td><td>Callable type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">range</td><td>Input range to iterate over </td></tr>
+    <tr><td class="paramname">callable</td><td>Function to apply to each element </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> handle for the parallel operation </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00128">128</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  128</span>                                             {</div>
+<div class="line"><span class="lineno">  129</span>    <span class="keywordflow">return</span> Task(subflow_.for_each(std::ranges::begin(range), std::ranges::end(range), std::forward&lt;C&gt;(callable)));</div>
+<div class="line"><span class="lineno">  130</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ae1fedb2e32dd91036fa294733dce72b6" name="ae1fedb2e32dd91036fa294733dce72b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1fedb2e32dd91036fa294733dce72b6">&#9670;&#160;</a></span>ForEachIndex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::integral I, std::invocable&lt; I &gt; C&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1async_1_1Task.html">Task</a> helios::async::SubTaskGraph::ForEachIndex </td>
+          <td>(</td>
+          <td class="paramtype">I&#160;</td>
+          <td class="paramname"><em>start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">I&#160;</td>
+          <td class="paramname"><em>end</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">I&#160;</td>
+          <td class="paramname"><em>step</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">C &amp;&amp;&#160;</td>
+          <td class="paramname"><em>callable</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a parallel for-each task over an index range. </p>
+<dl class="section note"><dt>Note</dt><dd>Not thread-safe </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">I</td><td>Integral type </td></tr>
+    <tr><td class="paramname">C</td><td>Callable type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">start</td><td>Starting index (inclusive) </td></tr>
+    <tr><td class="paramname">end</td><td>Ending index (exclusive) </td></tr>
+    <tr><td class="paramname">step</td><td>Step size </td></tr>
+    <tr><td class="paramname">callable</td><td>Function to apply to each index </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> handle for the parallel operation </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00144">144</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  144</span>                                                          {</div>
+<div class="line"><span class="lineno">  145</span>    <span class="keywordflow">return</span> Task(subflow_.for_each_index(start, end, step, std::forward&lt;C&gt;(callable)));</div>
+<div class="line"><span class="lineno">  146</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a17fa8dc306fe7465dcbb9c320e9d5919" name="a17fa8dc306fe7465dcbb9c320e9d5919"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17fa8dc306fe7465dcbb9c320e9d5919">&#9670;&#160;</a></span>IdleWorkerCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t helios::async::SubTaskGraph::IdleWorkerCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the number of worker threads currently waiting for work. </p>
+<dl class="section note"><dt>Note</dt><dd>Thread safe. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Count of idle workers. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00526">526</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  526</span>{ <span class="keywordflow">return</span> subflow_.executor().num_waiters(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a0618eb39608939dbd368c16f08c02340" name="a0618eb39608939dbd368c16f08c02340"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0618eb39608939dbd368c16f08c02340">&#9670;&#160;</a></span>IsWorkerThread()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::async::SubTaskGraph::IsWorkerThread </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if the current thread is a worker thread of this executor. </p>
+<dl class="section note"><dt>Note</dt><dd>Thread safe. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>True if current thread is a worker, false otherwise </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00505">505</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  505</span>{ <span class="keywordflow">return</span> <a class="code hl_function" href="classhelios_1_1async_1_1SubTaskGraph.html#a558919f6fa61de615a29d8fe4f79de58">CurrentWorkerId</a>() != -1; }</div>
+<div class="ttc" id="aclasshelios_1_1async_1_1SubTaskGraph_html_a558919f6fa61de615a29d8fe4f79de58"><div class="ttname"><a href="classhelios_1_1async_1_1SubTaskGraph.html#a558919f6fa61de615a29d8fe4f79de58">helios::async::SubTaskGraph::CurrentWorkerId</a></div><div class="ttdeci">int CurrentWorkerId() const</div><div class="ttdoc">Gets the ID of the current worker thread.</div><div class="ttdef"><b>Definition</b> <a href="sub__task__graph_8hpp_source.html#l00512">sub_task_graph.hpp:512</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a61b89f007aca8810fce649b351874b32" name="a61b89f007aca8810fce649b351874b32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61b89f007aca8810fce649b351874b32">&#9670;&#160;</a></span>Join()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::async::SubTaskGraph::Join </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Joins the subflow with its parent task. </p>
+<p>Called automatically when the <a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html" title="Dynamic task graph that can be created within the execution of a task.">SubTaskGraph</a> goes out of scope, unless <a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html#a61b89f007aca8810fce649b351874b32" title="Joins the subflow with its parent task.">Join()</a> has already been called. </p><dl class="section warning"><dt>Warning</dt><dd>Must be called by the same worker thread that created this subflow. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00055">55</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   55</span>{ subflow_.join(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a46ee5f466cc8d9f6a2d5dbe8520b040e" name="a46ee5f466cc8d9f6a2d5dbe8520b040e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46ee5f466cc8d9f6a2d5dbe8520b040e">&#9670;&#160;</a></span>Joinable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::async::SubTaskGraph::Joinable </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if this subflow can be joined. </p>
+<p>A subflow is joinable if it has not yet been joined with its parent task. </p><dl class="section return"><dt>Returns</dt><dd>True if the subflow is joinable, false otherwise </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00220">220</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  220</span>{ <span class="keywordflow">return</span> subflow_.joinable(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a878a2528e2b0290af2e765d974a37b78" name="a878a2528e2b0290af2e765d974a37b78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a878a2528e2b0290af2e765d974a37b78">&#9670;&#160;</a></span>Linearize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::ranges::range R&gt; <br />
+requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="el" href="classhelios_1_1async_1_1Task.html">Task</a>&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::async::SubTaskGraph::Linearize </td>
+          <td>(</td>
+          <td class="paramtype">const R &amp;&#160;</td>
+          <td class="paramname"><em>tasks</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates linear dependencies between tasks in the given range. </p>
+<dl class="section note"><dt>Note</dt><dd>Not thread-safe </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">R</td><td>Range type containing <a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> objects </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tasks</td><td>Range of tasks to linearize (first-&gt;second-&gt;third-&gt;...) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00564">564</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  564</span>                                                  {</div>
+<div class="line"><span class="lineno">  565</span>  std::vector&lt;tf::Task&gt; tf_tasks;</div>
+<div class="line"><span class="lineno">  566</span>  tf_tasks.reserve(std::ranges::size(tasks));</div>
+<div class="line"><span class="lineno">  567</span> </div>
+<div class="line"><span class="lineno">  568</span>  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; task : tasks) {</div>
+<div class="line"><span class="lineno">  569</span>    tf_tasks.push_back(task.UnderlyingTask());</div>
+<div class="line"><span class="lineno">  570</span>  }</div>
+<div class="line"><span class="lineno">  571</span> </div>
+<div class="line"><span class="lineno">  572</span>  subflow_.linearize(tf_tasks);</div>
+<div class="line"><span class="lineno">  573</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a7a687cb3722a44cf545d5b0ed0991863" name="a7a687cb3722a44cf545d5b0ed0991863"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a687cb3722a44cf545d5b0ed0991863">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html">SubTaskGraph</a> &amp; helios::async::SubTaskGraph::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html">SubTaskGraph</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4d4373ca47875a87a55380bca49e0e12" name="a4d4373ca47875a87a55380bca49e0e12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d4373ca47875a87a55380bca49e0e12">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html">SubTaskGraph</a> &amp; helios::async::SubTaskGraph::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html">SubTaskGraph</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1f58950994b4353bd8837652c426f95f" name="a1f58950994b4353bd8837652c426f95f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f58950994b4353bd8837652c426f95f">&#9670;&#160;</a></span>QueueCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t helios::async::SubTaskGraph::QueueCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the number of task queues in the work-stealing scheduler. </p>
+<dl class="section note"><dt>Note</dt><dd>Thread safe. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Count of queues. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00533">533</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  533</span>{ <span class="keywordflow">return</span> subflow_.executor().num_queues(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ab468eec58e8572d4395d42e77d2acf39" name="ab468eec58e8572d4395d42e77d2acf39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab468eec58e8572d4395d42e77d2acf39">&#9670;&#160;</a></span>Reduce()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::ranges::range R, typename T , typename BinaryOp &gt; <br />
+requires std::invocable&lt;BinaryOp, T, std::ranges::range_reference_t&lt;R&gt;&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1async_1_1Task.html">Task</a> helios::async::SubTaskGraph::Reduce </td>
+          <td>(</td>
+          <td class="paramtype">const R &amp;&#160;</td>
+          <td class="paramname"><em>range</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>init</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">BinaryOp &amp;&amp;&#160;</td>
+          <td class="paramname"><em>binary_op</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a parallel reduction task that combines elements using a binary operation. </p>
+<dl class="section note"><dt>Note</dt><dd>Not thread-safe </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">R</td><td>Range type </td></tr>
+    <tr><td class="paramname">T</td><td>Result type </td></tr>
+    <tr><td class="paramname">BinaryOp</td><td>Binary operation type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">range</td><td>Range of elements to reduce </td></tr>
+    <tr><td class="paramname">init</td><td>Initial value and storage for the result </td></tr>
+    <tr><td class="paramname">binary_op</td><td>Binary function to combine elements </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> handle for the parallel operation </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00179">179</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  179</span>                                                             {</div>
+<div class="line"><span class="lineno">  180</span>    <span class="keywordflow">return</span> Task(</div>
+<div class="line"><span class="lineno">  181</span>        subflow_.reduce(std::ranges::begin(range), std::ranges::end(range), init, std::forward&lt;BinaryOp&gt;(binary_op)));</div>
+<div class="line"><span class="lineno">  182</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a35c8fcf7adf3238c24b73eb493201072" name="a35c8fcf7adf3238c24b73eb493201072"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35c8fcf7adf3238c24b73eb493201072">&#9670;&#160;</a></span>RemoveTask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::async::SubTaskGraph::RemoveTask </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1async_1_1Task.html">Task</a> &amp;&#160;</td>
+          <td class="paramname"><em>task</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Removes a task from this subflow. </p>
+<dl class="section note"><dt>Note</dt><dd>Not thread-safe </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">task</td><td><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> to remove </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00202">202</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  202</span>{ subflow_.erase(task.UnderlyingTask()); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a4228a6ca30d609daf35ee80862ffc95e" name="a4228a6ca30d609daf35ee80862ffc95e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4228a6ca30d609daf35ee80862ffc95e">&#9670;&#160;</a></span>Retain()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::async::SubTaskGraph::Retain </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>flag</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Specifies whether to keep the sub task graph after it is joined. </p>
+<p>By default, a sub task graph is destroyed after being joined. Retaining it allows it to remain valid after being joined. </p><dl class="section warning"><dt>Warning</dt><dd>Must be called by the same worker thread that created this subflow. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">flag</td><td>True to retain, false otherwise </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00064">64</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   64</span>{ subflow_.retain(flag); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a7d2b349257278a297db65efae703a841" name="a7d2b349257278a297db65efae703a841"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d2b349257278a297db65efae703a841">&#9670;&#160;</a></span>Run() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::async::SubTaskGraph::Run </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1async_1_1TaskGraph.html">TaskGraph</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>graph</em></td><td>)</td>
+          <td> -&gt; <a class="el" href="classhelios_1_1async_1_1Future.html">Future</a>&lt;void&gt; </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Runs a task graph once. </p>
+<dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">graph</td><td><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> graph to execute (moved) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Future.html" title="Wrapper around tf::Future for handling asynchronous task results.">Future</a> that completes when execution finishes </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00248">248</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  248</span>                                              {</div>
+<div class="line"><span class="lineno">  249</span>    <span class="keywordflow">return</span> Future&lt;void&gt;(subflow_.executor().run(std::move(std::move(graph).UnderlyingTaskflow())));</div>
+<div class="line"><span class="lineno">  250</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a055d08a8536abe2ab0cb923a6ef477b1" name="a055d08a8536abe2ab0cb923a6ef477b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a055d08a8536abe2ab0cb923a6ef477b1">&#9670;&#160;</a></span>Run() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::invocable C&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::async::SubTaskGraph::Run </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1async_1_1TaskGraph.html">TaskGraph</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>graph</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">C &amp;&amp;&#160;</td>
+          <td class="paramname"><em>callable</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> -&gt; <a class="el" href="classhelios_1_1async_1_1Future.html">Future</a>&lt;void&gt; </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Runs a moved task graph once and invokes a callback upon completion. </p>
+<dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">C</td><td>Callable type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">graph</td><td><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> graph to execute (moved) </td></tr>
+    <tr><td class="paramname">callable</td><td>Callback to invoke after execution completes </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Future.html" title="Wrapper around tf::Future for handling asynchronous task results.">Future</a> that completes when execution finishes </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00275">275</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  275</span>                                                            {</div>
+<div class="line"><span class="lineno">  276</span>    <span class="keywordflow">return</span> Future&lt;void&gt;(</div>
+<div class="line"><span class="lineno">  277</span>        subflow_.executor().run(std::move(std::move(graph).UnderlyingTaskflow()), std::forward&lt;C&gt;(callable)));</div>
+<div class="line"><span class="lineno">  278</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a51a86c8b897b4dfcff01793c476ee6d3" name="a51a86c8b897b4dfcff01793c476ee6d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51a86c8b897b4dfcff01793c476ee6d3">&#9670;&#160;</a></span>Run() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::async::SubTaskGraph::Run </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1async_1_1TaskGraph.html">TaskGraph</a> &amp;&#160;</td>
+          <td class="paramname"><em>graph</em></td><td>)</td>
+          <td> -&gt; <a class="el" href="classhelios_1_1async_1_1Future.html">Future</a>&lt;void&gt; </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Runs a task graph once. </p>
+<p><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> graph is not owned - ensure it remains alive during execution. </p><dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">graph</td><td><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> graph to execute </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Future.html" title="Wrapper around tf::Future for handling asynchronous task results.">Future</a> that completes when execution finishes </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00238">238</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  238</span>                                             {</div>
+<div class="line"><span class="lineno">  239</span>    <span class="keywordflow">return</span> Future&lt;void&gt;(subflow_.executor().run(graph.UnderlyingTaskflow()));</div>
+<div class="line"><span class="lineno">  240</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ad826ebcc56dfd6981a61a2caca2b07da" name="ad826ebcc56dfd6981a61a2caca2b07da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad826ebcc56dfd6981a61a2caca2b07da">&#9670;&#160;</a></span>Run() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::invocable C&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::async::SubTaskGraph::Run </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1async_1_1TaskGraph.html">TaskGraph</a> &amp;&#160;</td>
+          <td class="paramname"><em>graph</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">C &amp;&amp;&#160;</td>
+          <td class="paramname"><em>callable</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> -&gt; <a class="el" href="classhelios_1_1async_1_1Future.html">Future</a>&lt;void&gt; </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Runs a task graph once and invokes a callback upon completion. </p>
+<p><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> graph is not owned - ensure it remains alive during execution. </p><dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">C</td><td>Callable type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">graph</td><td><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> graph to execute </td></tr>
+    <tr><td class="paramname">callable</td><td>Callback to invoke after execution completes </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Future.html" title="Wrapper around tf::Future for handling asynchronous task results.">Future</a> that completes when execution finishes </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00262">262</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  262</span>                                                           {</div>
+<div class="line"><span class="lineno">  263</span>    <span class="keywordflow">return</span> Future&lt;void&gt;(subflow_.executor().run(graph.UnderlyingTaskflow(), std::forward&lt;C&gt;(callable)));</div>
+<div class="line"><span class="lineno">  264</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a8c33a32409321d60567cae3600bcd776" name="a8c33a32409321d60567cae3600bcd776"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c33a32409321d60567cae3600bcd776">&#9670;&#160;</a></span>RunN() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::async::SubTaskGraph::RunN </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1async_1_1TaskGraph.html">TaskGraph</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>graph</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> -&gt; <a class="el" href="classhelios_1_1async_1_1Future.html">Future</a>&lt;void&gt; </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Runs a moved task graph for the specified number of times. </p>
+<dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">graph</td><td><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> graph to execute (moved) </td></tr>
+    <tr><td class="paramname">count</td><td>Number of times to run the graph </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Future.html" title="Wrapper around tf::Future for handling asynchronous task results.">Future</a> that completes when all executions finish </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00299">299</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  299</span>                                                             {</div>
+<div class="line"><span class="lineno">  300</span>    <span class="keywordflow">return</span> Future&lt;void&gt;(subflow_.executor().run_n(std::move(std::move(graph).UnderlyingTaskflow()), count));</div>
+<div class="line"><span class="lineno">  301</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a91665009e62432cc80da6bf09de4b143" name="a91665009e62432cc80da6bf09de4b143"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91665009e62432cc80da6bf09de4b143">&#9670;&#160;</a></span>RunN() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::invocable C&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::async::SubTaskGraph::RunN </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1async_1_1TaskGraph.html">TaskGraph</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>graph</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>count</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">C &amp;&amp;&#160;</td>
+          <td class="paramname"><em>callable</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> -&gt; <a class="el" href="classhelios_1_1async_1_1Future.html">Future</a>&lt;void&gt; </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Runs a moved task graph for the specified number of times and invokes a callback. </p>
+<dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">C</td><td>Callable type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">graph</td><td><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> graph to execute (moved) </td></tr>
+    <tr><td class="paramname">count</td><td>Number of times to run the graph </td></tr>
+    <tr><td class="paramname">callable</td><td>Callback to invoke after all executions complete </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Future.html" title="Wrapper around tf::Future for handling asynchronous task results.">Future</a> that completes when all executions finish </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00328">328</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  328</span>                                                                           {</div>
+<div class="line"><span class="lineno">  329</span>    <span class="keywordflow">return</span> Future&lt;void&gt;(</div>
+<div class="line"><span class="lineno">  330</span>        subflow_.executor().run_n(std::move(std::move(graph).UnderlyingTaskflow()), count, std::forward&lt;C&gt;(callable)));</div>
+<div class="line"><span class="lineno">  331</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a6a6f083993c8d7a891bc87c44e178b1f" name="a6a6f083993c8d7a891bc87c44e178b1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a6f083993c8d7a891bc87c44e178b1f">&#9670;&#160;</a></span>RunN() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::async::SubTaskGraph::RunN </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1async_1_1TaskGraph.html">TaskGraph</a> &amp;&#160;</td>
+          <td class="paramname"><em>graph</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> -&gt; <a class="el" href="classhelios_1_1async_1_1Future.html">Future</a>&lt;void&gt; </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Runs a task graph for the specified number of times. </p>
+<p><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> graph is not owned - ensure it remains alive during execution. </p><dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">graph</td><td><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> graph to execute </td></tr>
+    <tr><td class="paramname">count</td><td>Number of times to run the graph </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Future.html" title="Wrapper around tf::Future for handling asynchronous task results.">Future</a> that completes when all executions finish </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00288">288</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  288</span>                                                            {</div>
+<div class="line"><span class="lineno">  289</span>    <span class="keywordflow">return</span> Future&lt;void&gt;(subflow_.executor().run_n(graph.UnderlyingTaskflow(), count));</div>
+<div class="line"><span class="lineno">  290</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a5b8839e4be461ec25cabf7385e71ef1e" name="a5b8839e4be461ec25cabf7385e71ef1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b8839e4be461ec25cabf7385e71ef1e">&#9670;&#160;</a></span>RunN() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::invocable C&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::async::SubTaskGraph::RunN </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1async_1_1TaskGraph.html">TaskGraph</a> &amp;&#160;</td>
+          <td class="paramname"><em>graph</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>count</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">C &amp;&amp;&#160;</td>
+          <td class="paramname"><em>callable</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> -&gt; <a class="el" href="classhelios_1_1async_1_1Future.html">Future</a>&lt;void&gt; </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Runs a task graph for the specified number of times and invokes a callback. </p>
+<p><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> graph is not owned - ensure it remains alive during execution. </p><dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">C</td><td>Callable type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">graph</td><td><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> graph to execute </td></tr>
+    <tr><td class="paramname">count</td><td>Number of times to run the graph </td></tr>
+    <tr><td class="paramname">callable</td><td>Callback to invoke after all executions complete </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Future.html" title="Wrapper around tf::Future for handling asynchronous task results.">Future</a> that completes when all executions finish </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00314">314</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  314</span>                                                                          {</div>
+<div class="line"><span class="lineno">  315</span>    <span class="keywordflow">return</span> Future&lt;void&gt;(subflow_.executor().run_n(graph.UnderlyingTaskflow(), count, std::forward&lt;C&gt;(callable)));</div>
+<div class="line"><span class="lineno">  316</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="abd9d09040ead9ac20accc39521c3464f" name="abd9d09040ead9ac20accc39521c3464f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd9d09040ead9ac20accc39521c3464f">&#9670;&#160;</a></span>RunningTopologyCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t helios::async::SubTaskGraph::RunningTopologyCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the number of task graphs currently being executed. </p>
+<dl class="section note"><dt>Note</dt><dd>Thread safe. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Count of running topologies. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00540">540</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  540</span>{ <span class="keywordflow">return</span> subflow_.executor().num_topologies(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a6bf869917f24673827ac75c45ad0e0aa" name="a6bf869917f24673827ac75c45ad0e0aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6bf869917f24673827ac75c45ad0e0aa">&#9670;&#160;</a></span>RunUntil() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::predicate Predicate&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::async::SubTaskGraph::RunUntil </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1async_1_1TaskGraph.html">TaskGraph</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>graph</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Predicate &amp;&amp;&#160;</td>
+          <td class="paramname"><em>predicate</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> -&gt; <a class="el" href="classhelios_1_1async_1_1Future.html">Future</a>&lt;void&gt; </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Runs a moved task graph repeatedly until the predicate returns true. </p>
+<dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Predicate</td><td>Predicate type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">graph</td><td><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> graph to execute (moved) </td></tr>
+    <tr><td class="paramname">predicate</td><td>Boolean predicate to determine when to stop </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Future.html" title="Wrapper around tf::Future for handling asynchronous task results.">Future</a> that completes when predicate returns true </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00356">356</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  356</span>                                                                          {</div>
+<div class="line"><span class="lineno">  357</span>    <span class="keywordflow">return</span> Future&lt;void&gt;(subflow_.executor().run_until(std::move(std::move(graph).UnderlyingTaskflow()),</div>
+<div class="line"><span class="lineno">  358</span>                                                      std::forward&lt;Predicate&gt;(predicate)));</div>
+<div class="line"><span class="lineno">  359</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aebae892b41582e8a598c41a29a869ec7" name="aebae892b41582e8a598c41a29a869ec7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebae892b41582e8a598c41a29a869ec7">&#9670;&#160;</a></span>RunUntil() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::predicate Predicate, std::invocable C&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::async::SubTaskGraph::RunUntil </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1async_1_1TaskGraph.html">TaskGraph</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>graph</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Predicate &amp;&amp;&#160;</td>
+          <td class="paramname"><em>predicate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">C &amp;&amp;&#160;</td>
+          <td class="paramname"><em>callable</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> -&gt; <a class="el" href="classhelios_1_1async_1_1Future.html">Future</a>&lt;void&gt; </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Runs a moved task graph repeatedly until the predicate returns true, then invokes a callback. </p>
+<dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Predicate</td><td>Predicate type </td></tr>
+    <tr><td class="paramname">C</td><td>Callable type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">graph</td><td><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> graph to execute (moved) </td></tr>
+    <tr><td class="paramname">predicate</td><td>Boolean predicate to determine when to stop </td></tr>
+    <tr><td class="paramname">callable</td><td>Callback to invoke after execution completes </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Future.html" title="Wrapper around tf::Future for handling asynchronous task results.">Future</a> that completes when predicate returns true and callback finishes </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00389">389</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  389</span>                                                                                        {</div>
+<div class="line"><span class="lineno">  390</span>    <span class="keywordflow">return</span> Future&lt;void&gt;(subflow_.executor().run_until(std::move(std::move(graph).UnderlyingTaskflow()),</div>
+<div class="line"><span class="lineno">  391</span>                                                      std::forward&lt;Predicate&gt;(predicate), std::forward&lt;C&gt;(callable)));</div>
+<div class="line"><span class="lineno">  392</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="af0598bb80175561eb3e8c0b7f263158b" name="af0598bb80175561eb3e8c0b7f263158b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0598bb80175561eb3e8c0b7f263158b">&#9670;&#160;</a></span>RunUntil() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::predicate Predicate&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::async::SubTaskGraph::RunUntil </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1async_1_1TaskGraph.html">TaskGraph</a> &amp;&#160;</td>
+          <td class="paramname"><em>graph</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Predicate &amp;&amp;&#160;</td>
+          <td class="paramname"><em>predicate</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> -&gt; <a class="el" href="classhelios_1_1async_1_1Future.html">Future</a>&lt;void&gt; </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Runs a task graph repeatedly until the predicate returns true. </p>
+<p><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> graph is not owned - ensure it remains alive during execution. </p><dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Predicate</td><td>Predicate type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">graph</td><td><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> graph to execute </td></tr>
+    <tr><td class="paramname">predicate</td><td>Boolean predicate to determine when to stop </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Future.html" title="Wrapper around tf::Future for handling asynchronous task results.">Future</a> that completes when predicate returns true </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00343">343</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  343</span>                                                                         {</div>
+<div class="line"><span class="lineno">  344</span>    <span class="keywordflow">return</span> Future&lt;void&gt;(subflow_.executor().run_until(graph.UnderlyingTaskflow(), std::forward&lt;Predicate&gt;(predicate)));</div>
+<div class="line"><span class="lineno">  345</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a433aa5bd9865a725e249f14f7292c44c" name="a433aa5bd9865a725e249f14f7292c44c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a433aa5bd9865a725e249f14f7292c44c">&#9670;&#160;</a></span>RunUntil() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::predicate Predicate, std::invocable C&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::async::SubTaskGraph::RunUntil </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1async_1_1TaskGraph.html">TaskGraph</a> &amp;&#160;</td>
+          <td class="paramname"><em>graph</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Predicate &amp;&amp;&#160;</td>
+          <td class="paramname"><em>predicate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">C &amp;&amp;&#160;</td>
+          <td class="paramname"><em>callable</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> -&gt; <a class="el" href="classhelios_1_1async_1_1Future.html">Future</a>&lt;void&gt; </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Runs a task graph repeatedly until the predicate returns true, then invokes a callback. </p>
+<p><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> graph is not owned - ensure it remains alive during execution. </p><dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Predicate</td><td>Predicate type </td></tr>
+    <tr><td class="paramname">C</td><td>Callable type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">graph</td><td><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> graph to execute </td></tr>
+    <tr><td class="paramname">predicate</td><td>Boolean predicate to determine when to stop </td></tr>
+    <tr><td class="paramname">callable</td><td>Callback to invoke after execution completes </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Future.html" title="Wrapper around tf::Future for handling asynchronous task results.">Future</a> that completes when predicate returns true and callback finishes </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00373">373</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  373</span>                                                                                       {</div>
+<div class="line"><span class="lineno">  374</span>    <span class="keywordflow">return</span> Future&lt;void&gt;(subflow_.executor().run_until(graph.UnderlyingTaskflow(), std::forward&lt;Predicate&gt;(predicate),</div>
+<div class="line"><span class="lineno">  375</span>                                                      std::forward&lt;C&gt;(callable)));</div>
+<div class="line"><span class="lineno">  376</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a852099096ec3947d954819aaa96d75e4" name="a852099096ec3947d954819aaa96d75e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a852099096ec3947d954819aaa96d75e4">&#9670;&#160;</a></span>SilentAsync() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::invocable C&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::async::SubTaskGraph::SilentAsync </td>
+          <td>(</td>
+          <td class="paramtype">C &amp;&amp;&#160;</td>
+          <td class="paramname"><em>callable</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates an asynchronous task without returning a future. </p>
+<p>More efficient than Async when you don't need the result. </p><dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">C</td><td>Callable type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">callable</td><td>Function to execute asynchronously </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00429">429</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  429</span>                                 {</div>
+<div class="line"><span class="lineno">  430</span>    subflow_.executor().silent_async(std::forward&lt;C&gt;(callable));</div>
+<div class="line"><span class="lineno">  431</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="acffcf3da7c355faed4dcee9f44b191d5" name="acffcf3da7c355faed4dcee9f44b191d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acffcf3da7c355faed4dcee9f44b191d5">&#9670;&#160;</a></span>SilentAsync() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::invocable C&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::async::SubTaskGraph::SilentAsync </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">C &amp;&amp;&#160;</td>
+          <td class="paramname"><em>callable</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a named asynchronous task without returning a future. </p>
+<p>More efficient than Async when you don't need the result. </p><dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">C</td><td>Callable type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>Name for the task (useful for debugging/profiling) </td></tr>
+    <tr><td class="paramname">callable</td><td>Function to execute asynchronously </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00442">442</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  442</span>                                                 {</div>
+<div class="line"><span class="lineno">  443</span>    subflow_.executor().silent_async(std::move(name), std::forward&lt;C&gt;(callable));</div>
+<div class="line"><span class="lineno">  444</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ae7a980910241199a19e237fc090da24b" name="ae7a980910241199a19e237fc090da24b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7a980910241199a19e237fc090da24b">&#9670;&#160;</a></span>SilentDependentAsync()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::invocable C, std::ranges::range Dependencies&gt; <br />
+requires std::same_as&lt;std::ranges::range_value_t&lt;Dependencies&gt;, <a class="el" href="classhelios_1_1async_1_1AsyncTask.html">AsyncTask</a>&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1async_1_1AsyncTask.html">AsyncTask</a> helios::async::SubTaskGraph::SilentDependentAsync </td>
+          <td>(</td>
+          <td class="paramtype">C &amp;&amp;&#160;</td>
+          <td class="paramname"><em>callable</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Dependencies &amp;&#160;</td>
+          <td class="paramname"><em>dependencies</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates an asynchronous task that runs after dependencies complete, without returning a future. </p>
+<p>More efficient than DependentAsync when you don't need the result. </p><dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">C</td><td>Callable type </td></tr>
+    <tr><td class="paramname">Dependencies</td><td>Range type containing <a class="el" href="classhelios_1_1async_1_1AsyncTask.html" title="Handle to an asynchronous task managed by the Executor.">AsyncTask</a> dependencies </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">callable</td><td>Function to execute asynchronously </td></tr>
+    <tr><td class="paramname">dependencies</td><td>Tasks that must complete before this task runs </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1AsyncTask.html" title="Handle to an asynchronous task managed by the Executor.">AsyncTask</a> handle </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00604">604</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  604</span>                                                                                                  {</div>
+<div class="line"><span class="lineno">  605</span>  std::vector&lt;tf::AsyncTask&gt; tf_deps;</div>
+<div class="line"><span class="lineno">  606</span>  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::ranges::sized_range&lt;Dependencies&gt;) {</div>
+<div class="line"><span class="lineno">  607</span>    tf_deps.reserve(std::ranges::size(dependencies));</div>
+<div class="line"><span class="lineno">  608</span>  }</div>
+<div class="line"><span class="lineno">  609</span> </div>
+<div class="line"><span class="lineno">  610</span>  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; dep : dependencies) {</div>
+<div class="line"><span class="lineno">  611</span>    tf_deps.push_back(dep.UnderlyingTask());</div>
+<div class="line"><span class="lineno">  612</span>  }</div>
+<div class="line"><span class="lineno">  613</span> </div>
+<div class="line"><span class="lineno">  614</span>  <span class="keywordflow">return</span> AsyncTask(</div>
+<div class="line"><span class="lineno">  615</span>      subflow_.executor().silent_dependent_async(std::forward&lt;C&gt;(callable), tf_deps.begin(), tf_deps.end()));</div>
+<div class="line"><span class="lineno">  616</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a8e38ca806069aabfc2a8a558f2c9f0ba" name="a8e38ca806069aabfc2a8a558f2c9f0ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e38ca806069aabfc2a8a558f2c9f0ba">&#9670;&#160;</a></span>Sort()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::ranges::random_access_range R, typename Compare &gt; <br />
+requires std::predicate&lt;Compare, std::ranges::range_reference_t&lt;R&gt;, std::ranges::range_reference_t&lt;R&gt;&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1async_1_1Task.html">Task</a> helios::async::SubTaskGraph::Sort </td>
+          <td>(</td>
+          <td class="paramtype">R &amp;&#160;</td>
+          <td class="paramname"><em>range</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Compare &amp;&amp;&#160;</td>
+          <td class="paramname"><em>comparator</em> = <code>Compare()</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a parallel sort task for the given range. </p>
+<dl class="section note"><dt>Note</dt><dd>Not thread-safe </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">R</td><td>Random access range type </td></tr>
+    <tr><td class="paramname">Compare</td><td>Comparator type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">range</td><td>Range of elements to sort </td></tr>
+    <tr><td class="paramname">comparator</td><td>Comparison function (default: std::less&lt;&gt;) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> handle for the parallel operation </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00577">577</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  577</span>                                                             {</div>
+<div class="line"><span class="lineno">  578</span>  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::same_as&lt;std::remove_cvref_t&lt;Compare&gt;, std::less&lt;&gt;&gt;) {</div>
+<div class="line"><span class="lineno">  579</span>    <span class="keywordflow">return</span> Task(subflow_.sort(std::ranges::begin(range), std::ranges::end(range)));</div>
+<div class="line"><span class="lineno">  580</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  581</span>    <span class="keywordflow">return</span> Task(subflow_.sort(std::ranges::begin(range), std::ranges::end(range), std::forward&lt;Compare&gt;(comparator)));</div>
+<div class="line"><span class="lineno">  582</span>  }</div>
+<div class="line"><span class="lineno">  583</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a845bc2898e98956b92ba6ee1d542c56a" name="a845bc2898e98956b92ba6ee1d542c56a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a845bc2898e98956b92ba6ee1d542c56a">&#9670;&#160;</a></span>Transform()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::ranges::range InputRange, std::ranges::range OutputRange, std::invocable&lt; std::ranges::range_reference_t&lt; InputRange &gt; &gt; TransformFunc&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1async_1_1Task.html">Task</a> helios::async::SubTaskGraph::Transform </td>
+          <td>(</td>
+          <td class="paramtype">const InputRange &amp;&#160;</td>
+          <td class="paramname"><em>input_range</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">OutputRange &amp;&#160;</td>
+          <td class="paramname"><em>output_range</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TransformFunc &amp;&amp;&#160;</td>
+          <td class="paramname"><em>transform_func</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a parallel transform task that applies a function to each element. </p>
+<dl class="section note"><dt>Note</dt><dd>Not thread-safe </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">InputRange</td><td>Input range type </td></tr>
+    <tr><td class="paramname">OutputRange</td><td>Output range type </td></tr>
+    <tr><td class="paramname">TransformFunc</td><td>Transform function type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">input_range</td><td>Range of input elements </td></tr>
+    <tr><td class="paramname">output_range</td><td>Range to store transformed results </td></tr>
+    <tr><td class="paramname">transform_func</td><td>Function to apply to each input element </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> handle for the parallel operation </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00161">161</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  161</span>                                                                                                           {</div>
+<div class="line"><span class="lineno">  162</span>    <span class="keywordflow">return</span> Task(subflow_.transform(std::ranges::begin(input_range), std::ranges::end(input_range),</div>
+<div class="line"><span class="lineno">  163</span>                                   std::ranges::begin(output_range), std::forward&lt;TransformFunc&gt;(transform_func)));</div>
+<div class="line"><span class="lineno">  164</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a9d4b7d3c01b077654e3fd6d0259f17a7" name="a9d4b7d3c01b077654e3fd6d0259f17a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d4b7d3c01b077654e3fd6d0259f17a7">&#9670;&#160;</a></span>WaitForAll()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::async::SubTaskGraph::WaitForAll </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Blocks until all submitted tasks complete. </p>
+<p>Waits for all taskflows and async tasks to finish. </p><dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00480">480</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  480</span>{ subflow_.executor().wait_for_all(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="affa63ac653761a18168fb68e5dd7b75c" name="affa63ac653761a18168fb68e5dd7b75c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#affa63ac653761a18168fb68e5dd7b75c">&#9670;&#160;</a></span>WillBeRetained()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::async::SubTaskGraph::WillBeRetained </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if this subflow will be retained. </p>
+<p>A retained subflow remains valid after being joined. </p><dl class="section return"><dt>Returns</dt><dd>True if the subflow will be retained, false otherwise </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00227">227</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  227</span>{ <span class="keywordflow">return</span> subflow_.retain(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a16d5fc02da8985c9559df9c1e38f5ad0" name="a16d5fc02da8985c9559df9c1e38f5ad0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16d5fc02da8985c9559df9c1e38f5ad0">&#9670;&#160;</a></span>WorkerCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t helios::async::SubTaskGraph::WorkerCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the total number of worker threads. </p>
+<dl class="section note"><dt>Note</dt><dd>Thread safe. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Count of workers. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00519">519</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  519</span>{ <span class="keywordflow">return</span> subflow_.executor().num_workers(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Symbol Documentation</h2>
+<a id="a763b2f90bc53f92d680a635fe28e858e" name="a763b2f90bc53f92d680a635fe28e858e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a763b2f90bc53f92d680a635fe28e858e">&#9670;&#160;</a></span>Executor</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend class <a class="el" href="classhelios_1_1async_1_1Executor.html">Executor</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00551">551</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a77eb4e04900b9ae67d00ef7a589cb623" name="a77eb4e04900b9ae67d00ef7a589cb623"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77eb4e04900b9ae67d00ef7a589cb623">&#9670;&#160;</a></span>TaskGraph</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend class <a class="el" href="classhelios_1_1async_1_1TaskGraph.html">TaskGraph</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00550">550</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehelios.html">helios</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1async.html">async</a></li><li class="navelem"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html">SubTaskGraph</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

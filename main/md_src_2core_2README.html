@@ -1,0 +1,927 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: README</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('md_src_2core_2README.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">README</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p><a class="anchor" id="top"></a></p>
+<h1><a class="anchor" id="autotoc_md0"></a>
+Helios Engine - Core Module</h1>
+<p>The Core module is the foundation of Helios Engine, providing a high-performance Entity Component System (ECS), async runtime, event system, and essential utilities.</p>
+<hr  />
+<h2><a class="anchor" id="autotoc_md2"></a>
+Table of Contents</h2>
+<ul>
+<li><a class="el" href="md_src_2core_2README.html#overview">Overview</a></li>
+<li><a class="el" href="index.html#architecture">Architecture</a><ul>
+<li><a class="el" href="md_src_2core_2README.html#scheduling">Scheduling</a></li>
+<li><a class="el" href="md_src_2core_2README.html#entity-component-system-ecs">Entity Component System (ECS)</a><ul>
+<li><a class="el" href="md_src_2core_2README.html#entities">Entities</a></li>
+<li><a class="el" href="md_src_2core_2README.html#components">Components</a></li>
+<li><a class="el" href="md_src_2core_2README.html#systems">Systems</a></li>
+<li><a class="el" href="md_src_2core_2README.html#events">Events</a></li>
+<li><a class="el" href="md_src_2core_2README.html#resources">Resources</a></li>
+</ul>
+</li>
+<li><a class="el" href="md_src_2core_2README.html#systemcontext-api">SystemContext API</a><ul>
+<li><a class="el" href="md_src_2core_2README.html#key-methods">Key Methods</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="el" href="md_src_2core_2README.html#usage-examples">Usage Examples</a><ul>
+<li><a class="el" href="md_src_2core_2README.html#creating-systems">Creating Systems</a></li>
+<li><a class="el" href="md_src_2core_2README.html#working-with-queries">Working with Queries</a></li>
+<li><a class="el" href="md_src_2core_2README.html#entity-creation-and-modification">Entity Creation and Modification</a></li>
+<li><a class="el" href="md_src_2core_2README.html#event-system">Event System</a></li>
+<li><a class="el" href="md_src_2core_2README.html#resources-and-state-management">Resources and State Management</a></li>
+<li><a class="el" href="md_src_2core_2README.html#modules">Modules</a></li>
+<li><a class="el" href="md_src_2core_2README.html#subapps">SubApps</a></li>
+</ul>
+</li>
+<li><a class="el" href="md_src_2core_2README.html#api-reference">API Reference</a><ul>
+<li><a class="el" href="md_src_2core_2README.html#core-classes">Core Classes</a></li>
+<li><a class="el" href="md_src_2core_2README.html#system-context-methods">System Context Methods</a></li>
+<li><a class="el" href="md_src_2core_2README.html#query-builder">Query Builder</a></li>
+<li><a class="el" href="md_src_2core_2README.html#access-policy-builder">Access Policy Builder</a></li>
+</ul>
+</li>
+<li><a class="el" href="md_src_2core_2README.html#best-practices">Best Practices</a><ul>
+<li><a class="el" href="md_src_2core_2README.html#anti-patterns">Anti-patterns</a></li>
+</ul>
+</li>
+<li><a class="el" href="md_src_2core_2README.html#testing">Testing</a></li>
+</ul>
+<hr  />
+<p><a class="anchor" id="overview"></a></p>
+<h2><a class="anchor" id="autotoc_md4"></a>
+Overview</h2>
+<p>The Core module provides:</p>
+<ul>
+<li><b>Archetype-based ECS</b> - High-performance entity management with cache-friendly data layouts</li>
+<li><b>Parallel System Execution</b> - Automatic parallelization based on declared data access</li>
+<li><b>Type-safe Event System</b> - Efficient event propagation with compile-time type checking</li>
+<li><b>Resource Management</b> - Global state management with thread-safe access</li>
+<li><b>Query System</b> - Powerful component queries with filters and optional components</li>
+<li><b>Command Buffers</b> - Deferred entity/component operations for safe mutations</li>
+<li><b>Async Runtime</b> - Async task scheduling</li>
+<li><b>Modular Architecture</b> - App, Module, and SubApp abstractions for organizing code</li>
+</ul>
+<p><b>Key Files:</b></p>
+<ul>
+<li><code>include/helios/core/app/</code> - Application framework (App, Module, SystemContext)</li>
+<li><code>include/helios/core/ecs/</code> - ECS implementation (World, Entity, System, Query, Event)</li>
+<li><code>include/helios/core/async/</code> - Async runtime</li>
+<li><code>include/helios/core/utils/</code> - Utilities (random, timer, etc.)</li>
+</ul>
+<hr  />
+<p><a class="anchor" id="architecture"></a></p>
+<h2><a class="anchor" id="autotoc_md6"></a>
+Architecture</h2>
+<p><a class="anchor" id="scheduling"></a></p>
+<h3><a class="anchor" id="autotoc_md7"></a>
+Scheduling</h3>
+<p>Systems are organized into <b>schedules</b> that define execution order:</p>
+<p><b>Built-in Schedules:</b></p>
+<ul>
+<li><code>kPreStartup</code> - Runs once before startup</li>
+<li><code>kStartup</code> - Runs once at application start</li>
+<li><code>kPostStartup</code> - Runs once after startup</li>
+<li><code>kMain</code> - Runs every frame on the main thread</li>
+<li><code>kPreUpdate</code> - Runs before main update cycle</li>
+<li><code>kUpdate</code> - Main update cycle</li>
+<li><code>kPostUpdate</code> - Runs after main update cycle</li>
+<li><code>kPreCleanUp</code> - Runs before cleanup</li>
+<li><code>kCleanUp</code> - Resource cleanup</li>
+<li><code>kPostCleanUp</code> - Runs after cleanup</li>
+</ul>
+<p><b>Custom Schedules:</b></p>
+<div class="fragment"><div class="line"><span class="keyword">struct </span>PhysicsSchedule {</div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view GetName() noexcept {</div>
+<div class="line">    <span class="keywordflow">return</span> <span class="stringliteral">&quot;Physics&quot;</span>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> ScheduleId GetStage() noexcept {</div>
+<div class="line">    <span class="keywordflow">return</span> ScheduleIdOf&lt;Update&gt;();</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> After() noexcept {</div>
+<div class="line">    <span class="keywordflow">return</span> std::array{ScheduleIdOf&lt;Update&gt;()};</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> Before() noexcept {</div>
+<div class="line">    <span class="keywordflow">return</span> std::array{ScheduleIdOf&lt;PostUpdate&gt;()};</div>
+<div class="line">  }</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">inline</span> <span class="keyword">constexpr</span> PhysicsSchedule kPhysicsSchedule{};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Use custom schedule</span></div>
+<div class="line">app.AddSystem&lt;PhysicsSystem&gt;(kPhysicsSchedule);</div>
+</div><!-- fragment --><p><a class="anchor" id="entity-component-system-ecs"></a></p>
+<h3><a class="anchor" id="autotoc_md8"></a>
+Entity Component System (ECS)</h3>
+<p>Helios uses an <b>archetype-based ECS</b> where entities with the same component types are stored together in contiguous memory (archetypes). This provides:</p>
+<ul>
+<li><b>Cache-friendly iteration</b> - Components are stored in arrays for optimal CPU cache utilization</li>
+<li><b>Fast queries</b> - O(archetypes) instead of O(entities)</li>
+<li><b>Type safety</b> - Compile-time component type checking</li>
+<li><b>Parallel execution</b> - Systems declare data access patterns for automatic parallelization</li>
+</ul>
+<p><a class="anchor" id="entities"></a></p>
+<h4><a class="anchor" id="autotoc_md9"></a>
+Entities</h4>
+<p>Entities are unique identifiers (UUID-based) that serve as handles to component data:</p>
+<div class="fragment"><div class="line"><span class="comment">// Entity is a lightweight handle</span></div>
+<div class="line"><span class="keyword">struct </span>Entity {</div>
+<div class="line">  <span class="comment">// Internal UUID-based identifier</span></div>
+<div class="line">  <span class="comment">// Cheap to copy, pass by value</span></div>
+<div class="line">};</div>
+</div><!-- fragment --><p><a class="anchor" id="components"></a></p>
+<h4><a class="anchor" id="autotoc_md10"></a>
+Components</h4>
+<p>Components are plain data structures (POD types) with no behavior:</p>
+<div class="fragment"><div class="line"><span class="keyword">struct </span>Transform {</div>
+<div class="line">  <span class="keywordtype">float</span> x = 0.0F;</div>
+<div class="line">  <span class="keywordtype">float</span> y = 0.0F;</div>
+<div class="line">  <span class="keywordtype">float</span> z = 0.0F;</div>
+<div class="line">  <span class="keywordtype">float</span> rotation = 0.0F;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">struct </span>Velocity {</div>
+<div class="line">  <span class="keywordtype">float</span> dx = 0.0F;</div>
+<div class="line">  <span class="keywordtype">float</span> dy = 0.0F;</div>
+<div class="line">  <span class="keywordtype">float</span> dz = 0.0F;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">struct </span>Health {</div>
+<div class="line">  <span class="keywordtype">int</span> max_health = 100;</div>
+<div class="line">  <span class="keywordtype">int</span> current_health = 100;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordtype">bool</span> IsDead() const noexcept { <span class="keywordflow">return</span> current_health &lt;= 0; }</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Tag components (zero-size)</span></div>
+<div class="line"><span class="keyword">struct </span>Player {};</div>
+<div class="line"><span class="keyword">struct </span>Enemy {};</div>
+<div class="line"><span class="keyword">struct </span>Dead {};</div>
+</div><!-- fragment --><p><a class="anchor" id="systems"></a></p>
+<h4><a class="anchor" id="autotoc_md11"></a>
+Systems</h4>
+<p>Systems are classes that process entities with specific components. They derive from <code>System</code> and implement:</p>
+<ol type="1">
+<li><b>GetName()</b> - Returns system name for diagnostics</li>
+<li><b>GetAccessPolicy()</b> - Declares what data the system reads/writes</li>
+<li><b>Update(SystemContext&amp;)</b> - System logic, called each frame</li>
+</ol>
+<div class="fragment"><div class="line"><span class="keyword">struct </span>MovementSystem final : <span class="keyword">public</span> System {</div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view GetName() noexcept {</div>
+<div class="line">    <span class="keywordflow">return</span> <span class="stringliteral">&quot;MovementSystem&quot;</span>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> GetAccessPolicy() noexcept {</div>
+<div class="line">    <span class="keywordflow">return</span> AccessPolicy().Query&lt;Transform&amp;, <span class="keyword">const</span> Velocity&amp;&gt;().ReadResources&lt;GameTime&gt;();</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordtype">void</span> Update(SystemContext&amp; ctx)<span class="keyword"> override </span>{</div>
+<div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span>&amp; time = ctx.ReadResource&lt;GameTime&gt;();</div>
+<div class="line">    <span class="keyword">auto</span> query = ctx.Query().Get&lt;Transform&amp;, <span class="keyword">const</span> Velocity&amp;&gt;();</div>
+<div class="line"> </div>
+<div class="line">    query.ForEach([&amp;time](Transform&amp; transform, <span class="keyword">const</span> Velocity&amp; velocity) {</div>
+<div class="line">      transform.x += velocity.dx * time.delta_time;</div>
+<div class="line">      transform.y += velocity.dy * time.delta_time;</div>
+<div class="line">      transform.z += velocity.dz * time.delta_time;</div>
+<div class="line">    });</div>
+<div class="line">  }</div>
+<div class="line">};</div>
+</div><!-- fragment --><p><a class="anchor" id="events"></a></p>
+<h4><a class="anchor" id="autotoc_md12"></a>
+Events</h4>
+<p>Events provide decoupled communication between systems:</p>
+<div class="fragment"><div class="line"><span class="comment">// Define event</span></div>
+<div class="line"><span class="keyword">struct </span>CollisionEvent {</div>
+<div class="line">  Entity entity_a;</div>
+<div class="line">  Entity entity_b;</div>
+<div class="line">  <span class="keywordtype">float</span> impact_force = 0.0F;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view GetName() noexcept {</div>
+<div class="line">    <span class="keywordflow">return</span> <span class="stringliteral">&quot;CollisionEvent&quot;</span>;</div>
+<div class="line">  }</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Register event</span></div>
+<div class="line">app.AddEvent&lt;CollisionEvent&gt;();</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Emit event</span></div>
+<div class="line"><span class="keywordtype">void</span> Update(SystemContext&amp; ctx)<span class="keyword"> override </span>{</div>
+<div class="line">  ctx.EmitEvent(CollisionEvent{entity_a, entity_b, 10.0F});</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Read events</span></div>
+<div class="line"><span class="keywordtype">void</span> Update(SystemContext&amp; ctx)<span class="keyword"> override </span>{</div>
+<div class="line">  <span class="keyword">auto</span> reader = ctx.ReadEvents&lt;CollisionEvent&gt;();</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; event : reader) {</div>
+<div class="line">    <span class="comment">// Handle event</span></div>
+<div class="line">  }</div>
+<div class="line">}</div>
+</div><!-- fragment --><p><a class="anchor" id="resources"></a></p>
+<h4><a class="anchor" id="autotoc_md13"></a>
+Resources</h4>
+<p>Resources are global singletons accessible from any system:</p>
+<div class="fragment"><div class="line"><span class="comment">// Define resource</span></div>
+<div class="line"><span class="keyword">struct </span>GameTime {</div>
+<div class="line">  <span class="keywordtype">float</span> delta_time = 0.016F;</div>
+<div class="line">  <span class="keywordtype">float</span> total_time = 0.0F;</div>
+<div class="line">  <span class="keywordtype">int</span> frame_count = 0;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view GetName() noexcept {</div>
+<div class="line">    <span class="keywordflow">return</span> <span class="stringliteral">&quot;GameTime&quot;</span>;</div>
+<div class="line">  }</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Insert resource</span></div>
+<div class="line">app.InsertResource(GameTime{});</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Access in system</span></div>
+<div class="line"><span class="keywordtype">void</span> Update(SystemContext&amp; ctx)<span class="keyword"> override </span>{</div>
+<div class="line"><span class="keyword">auto</span>&amp; time = ctx.WriteResource&lt;GameTime&gt;(); <span class="comment">// Mutable access</span></div>
+<div class="line">++time.frame_count;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">const</span> <span class="keyword">auto</span>&amp; time_ref = ctx.ReadResource&lt;GameTime&gt;(); <span class="comment">// Immutable access</span></div>
+<div class="line">}</div>
+</div><!-- fragment --><p><a class="anchor" id="systemcontext-api"></a></p>
+<h3><a class="anchor" id="autotoc_md14"></a>
+SystemContext API</h3>
+<p><code>SystemContext</code> is the primary interface systems use to interact with the ECS. It provides access to:</p>
+<ul>
+<li><b>Resources</b> - Global state (read/write)</li>
+<li><b>Queries</b> - Entity component iteration</li>
+<li><b>Commands</b> - Deferred entity/component operations</li>
+<li><b>Events</b> - Event emission and reading</li>
+<li><b>World</b> - Direct world access (when needed)</li>
+</ul>
+<p><a class="anchor" id="key-methods"></a></p>
+<h4><a class="anchor" id="autotoc_md15"></a>
+Key Methods</h4>
+<div class="fragment"><div class="line"><span class="comment">// Resources</span></div>
+<div class="line"><span class="keyword">auto</span>&amp; resource = ctx.WriteResource&lt;T&gt;();</div>
+<div class="line"><span class="keyword">const</span> <span class="keyword">auto</span>&amp; resource = ctx.ReadResource&lt;T&gt;();</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Queries</span></div>
+<div class="line"><span class="keyword">auto</span> query = ctx.Query().Get&lt;Transform&amp;, <span class="keyword">const</span> Velocity&amp;&gt;();</div>
+<div class="line"><span class="keyword">auto</span> query = ctx.Query().With&lt;Player&gt;().Without&lt;Dead&gt;().Get&lt;Health&amp;&gt;();</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Commands</span></div>
+<div class="line"><span class="keyword">auto</span> world_cmd = ctx.Commands();  <span class="comment">// World-level commands</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">auto</span> entity_cmd = ctx.EntityCommands(entity); <span class="comment">// Entity-specific commands</span></div>
+<div class="line"><span class="keyword">auto</span> new_entity_cmd = ctx.EntityCommands(ctx.ReserveEntity()); <span class="comment">// Create new entity</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Events</span></div>
+<div class="line">ctx.EmitEvent(CollisionEvent{entity_a, entity_b});</div>
+<div class="line"><span class="keyword">auto</span> reader = ctx.ReadEvents&lt;CollisionEvent&gt;();</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// World access (advanced)</span></div>
+<div class="line">Entity entity = ctx.ReserveEntity();</div>
+</div><!-- fragment --><hr  />
+<p><a class="anchor" id="usage-examples"></a></p>
+<h2><a class="anchor" id="autotoc_md17"></a>
+Usage Examples</h2>
+<p><a class="anchor" id="creating-systems"></a></p>
+<h3><a class="anchor" id="autotoc_md18"></a>
+Creating Systems</h3>
+<p>Systems declare their data dependencies via <code>GetAccessPolicy()</code>:</p>
+<div class="fragment"><div class="line"><span class="keyword">struct </span>PhysicsSystem final : <span class="keyword">public</span> System {</div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view GetName() noexcept {</div>
+<div class="line">    <span class="keywordflow">return</span> <span class="stringliteral">&quot;PhysicsSystem&quot;</span>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> GetAccessPolicy() noexcept {</div>
+<div class="line">    <span class="keywordflow">return</span> AccessPolicy().Query&lt;Transform&amp;, Velocity&amp;&gt;().ReadResources&lt;GameTime, PhysicsSettings&gt;();</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordtype">void</span> Update(SystemContext&amp; ctx)<span class="keyword"> override </span>{</div>
+<div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span>&amp; time = ctx.ReadResource&lt;GameTime&gt;();</div>
+<div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span>&amp; settings = ctx.ReadResource&lt;PhysicsSettings&gt;();</div>
+<div class="line">    <span class="keyword">auto</span> query = ctx.Query().Get&lt;Transform&amp;, Velocity&amp;&gt;();</div>
+<div class="line"> </div>
+<div class="line">    query.ForEach([&amp;](Transform&amp; transform, Velocity&amp; velocity) {</div>
+<div class="line">      <span class="comment">// Apply gravity</span></div>
+<div class="line">      velocity.dy -= settings.gravity * time.delta_time;</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Apply friction</span></div>
+<div class="line">      velocity.dx *= (1.0F - settings.friction * time.delta_time);</div>
+<div class="line">      velocity.dz *= (1.0F - settings.friction * time.delta_time);</div>
+<div class="line">    });</div>
+<div class="line">  }</div>
+<div class="line">};</div>
+</div><!-- fragment --><p><a class="anchor" id="working-with-queries"></a></p>
+<h3><a class="anchor" id="autotoc_md19"></a>
+Working with Queries</h3>
+<p>Queries retrieve entities with specific component combinations:</p>
+<h4><a class="anchor" id="autotoc_md20"></a>
+Basic Query</h4>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> Update(SystemContext&amp; ctx)<span class="keyword"> override </span>{</div>
+<div class="line">  <span class="keyword">auto</span> query = ctx.Query().Get&lt;Transform&amp;, <span class="keyword">const</span> Velocity&amp;&gt;();</div>
+<div class="line"> </div>
+<div class="line">  query.ForEach([](Transform&amp; transform, <span class="keyword">const</span> Velocity&amp; velocity) {</div>
+<div class="line">    transform.x += velocity.dx;</div>
+<div class="line">  });</div>
+<div class="line">}</div>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md21"></a>
+Query with Entity Access</h4>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> Update(SystemContext&amp; ctx)<span class="keyword"> override </span>{</div>
+<div class="line">  <span class="keyword">auto</span> query = ctx.Query().Get&lt;<span class="keyword">const</span> Health&amp;&gt;();</div>
+<div class="line"> </div>
+<div class="line">  query.ForEachWithEntity([&amp;](Entity entity, <span class="keyword">const</span> Health&amp; health) {</div>
+<div class="line">    <span class="keywordflow">if</span> (health.IsDead()) {</div>
+<div class="line">      std::cout &lt;&lt; <span class="stringliteral">&quot;Entity &quot;</span> &lt;&lt; entity &lt;&lt; <span class="stringliteral">&quot; is dead\n&quot;</span>;</div>
+<div class="line">    }</div>
+<div class="line">  });</div>
+<div class="line">}</div>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md22"></a>
+Query with Filters</h4>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> Update(SystemContext&amp; ctx)<span class="keyword"> override </span>{</div>
+<div class="line">  <span class="comment">// Query entities with Player tag, without Dead tag</span></div>
+<div class="line">  <span class="keyword">auto</span> query = ctx.Query().With&lt;Player&gt;().Without&lt;Dead&gt;().Get&lt;Health&amp;, Transform&amp;&gt;();</div>
+<div class="line"> </div>
+<div class="line">  query.ForEach([](Health&amp; health, Transform&amp; transform) {</div>
+<div class="line">    <span class="comment">// Only processes alive players</span></div>
+<div class="line">  });</div>
+<div class="line">}</div>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md23"></a>
+Query with Manual Filtering</h4>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> Update(SystemContext&amp; ctx)<span class="keyword"> override </span>{</div>
+<div class="line">  <span class="keyword">auto</span> query = ctx.Query().Get&lt;Health&amp;&gt;();</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Filter during iteration</span></div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp;&amp; [health] : query.Filter([](const Health&amp; hp) { <span class="keywordflow">return</span> hp.current_health &lt; 50; })) {</div>
+<div class="line">    health.current_health += 10;  <span class="comment">// Heal low-health entities</span></div>
+<div class="line">  }</div>
+<div class="line">}</div>
+</div><!-- fragment --><p><a class="anchor" id="entity-creation-and-modification"></a></p>
+<h3><a class="anchor" id="autotoc_md24"></a>
+Entity Creation and Modification</h3>
+<p>Systems create and modify entities through command buffers:</p>
+<h4><a class="anchor" id="autotoc_md25"></a>
+Creating Entities</h4>
+<div class="fragment"><div class="line"><span class="keyword">struct </span>SpawnerSystem final : <span class="keyword">public</span> System {</div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view GetName() noexcept {</div>
+<div class="line">    <span class="keywordflow">return</span> <span class="stringliteral">&quot;SpawnerSystem&quot;</span>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> AccessPolicy GetAccessPolicy() noexcept {</div>
+<div class="line">    <span class="keywordflow">return</span> {};</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordtype">void</span> Update(SystemContext&amp; ctx)<span class="keyword"> override </span>{</div>
+<div class="line">    <span class="comment">// Reserve entity ID</span></div>
+<div class="line">    Entity new_entity = ctx.ReserveEntity();</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Get entity command buffer</span></div>
+<div class="line">    <span class="keyword">auto</span> entity_cmd = ctx.EntityCommands(new_entity);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Add components</span></div>
+<div class="line">    entity_cmd.AddComponents(</div>
+<div class="line">        Transform{0.0F, 0.0F, 0.0F},</div>
+<div class="line">        Velocity{1.0F, 0.0F, 0.0F},</div>
+<div class="line">        Health{100, 100},</div>
+<div class="line">        Enemy{});</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Emit spawn event</span></div>
+<div class="line">    ctx.EmitEvent(EntitySpawnedEvent{new_entity, <span class="stringliteral">&quot;Enemy&quot;</span>});</div>
+<div class="line">  }</div>
+<div class="line">};</div>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md26"></a>
+Modifying Entities</h4>
+<div class="fragment"><div class="line"><span class="keyword">struct </span>DamageSystem final : <span class="keyword">public</span> System {</div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view GetName() noexcept {</div>
+<div class="line">    <span class="keywordflow">return</span> <span class="stringliteral">&quot;DamageSystem&quot;</span>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> GetAccessPolicy() noexcept {</div>
+<div class="line">    <span class="keywordflow">return</span> AccessPolicy().Query&lt;Health&amp;&gt;();</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordtype">void</span> Update(SystemContext&amp; ctx)<span class="keyword"> override </span>{</div>
+<div class="line">    <span class="keyword">auto</span> query = ctx.Query().With&lt;Enemy&gt;().Get&lt;Health&amp;&gt;();</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp;&amp; [entity, health] : query.WithEntity()) {</div>
+<div class="line">      health.current_health -= 10;</div>
+<div class="line"> </div>
+<div class="line">      <span class="keywordflow">if</span> (health.IsDead()) {</div>
+<div class="line">        <span class="keyword">auto</span> entity_cmd = ctx.EntityCommands(entity);</div>
+<div class="line">        entity_cmd.AddComponent(Dead{});</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">};</div>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md27"></a>
+Destroying Entities</h4>
+<div class="fragment"><div class="line"><span class="keyword">struct </span>CleanupSystem final : <span class="keyword">public</span> System {</div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view GetName() noexcept {</div>
+<div class="line">    <span class="keywordflow">return</span> <span class="stringliteral">&quot;CleanupSystem&quot;</span>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> AccessPolicy GetAccessPolicy() noexcept {</div>
+<div class="line">    <span class="keywordflow">return</span> {};</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordtype">void</span> Update(SystemContext&amp; ctx)<span class="keyword"> override </span>{</div>
+<div class="line">    <span class="keyword">auto</span> query = ctx.Query().With&lt;Dead&gt;().Get();</div>
+<div class="line">    <span class="keyword">auto</span> world_cmd = ctx.Commands();</div>
+<div class="line"> </div>
+<div class="line">    query.ForEachWithEntity([&amp;world_cmd](Entity entity) {</div>
+<div class="line">      world_cmd.Destroy(entity);</div>
+<div class="line">    });</div>
+<div class="line">  }</div>
+<div class="line">};</div>
+</div><!-- fragment --><p><a class="anchor" id="event-system"></a></p>
+<h3><a class="anchor" id="autotoc_md28"></a>
+Event System</h3>
+<p>Events enable decoupled communication:</p>
+<div class="fragment"><div class="line"><span class="comment">// Event definition</span></div>
+<div class="line"><span class="keyword">struct </span>CombatEvent {</div>
+<div class="line">  Entity attacker;</div>
+<div class="line">  Entity target;</div>
+<div class="line">  <span class="keywordtype">int</span> damage = 0;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view GetName() noexcept {</div>
+<div class="line">    <span class="keywordflow">return</span> <span class="stringliteral">&quot;CombatEvent&quot;</span>;</div>
+<div class="line">  }</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Emitting events</span></div>
+<div class="line"><span class="keyword">struct </span>CombatSystem final : <span class="keyword">public</span> System {</div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view GetName() noexcept {</div>
+<div class="line">    <span class="keywordflow">return</span> <span class="stringliteral">&quot;CombatSystem&quot;</span>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> GetAccessPolicy() noexcept {</div>
+<div class="line">    <span class="keywordflow">return</span> AccessPolicy().Query&lt;Health&amp;&gt;();</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordtype">void</span> Update(SystemContext&amp; ctx)<span class="keyword"> override </span>{</div>
+<div class="line">    <span class="keyword">auto</span> query = ctx.Query().With&lt;Enemy&gt;().Get&lt;Health&amp;&gt;();</div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp;&amp; [entity, health] : query.WithEntity()) {</div>
+<div class="line">      <span class="keywordflow">if</span> (!health.IsDead()) {</div>
+<div class="line">        health.current_health -= 10;</div>
+<div class="line">        ctx.EmitEvent(CombatEvent{</div>
+<div class="line">            .attacker = Entity{},</div>
+<div class="line">            .target = entity,</div>
+<div class="line">            .damage = 10</div>
+<div class="line">        });</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Reading events</span></div>
+<div class="line"><span class="keyword">struct </span>EventLoggerSystem final : <span class="keyword">public</span> System {</div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view GetName() noexcept {</div>
+<div class="line">    <span class="keywordflow">return</span> <span class="stringliteral">&quot;EventLoggerSystem&quot;</span>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> AccessPolicy GetAccessPolicy() noexcept {</div>
+<div class="line">    <span class="keywordflow">return</span> {};</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordtype">void</span> Update(SystemContext&amp; ctx)<span class="keyword"> override </span>{</div>
+<div class="line">    <span class="keyword">auto</span> combat_reader = ctx.ReadEvents&lt;CombatEvent&gt;();</div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; event : combat_reader) {</div>
+<div class="line">      std::cout &lt;&lt; <span class="stringliteral">&quot;Combat: &quot;</span> &lt;&lt; <span class="keyword">event</span>.attacker</div>
+<div class="line">                &lt;&lt; <span class="stringliteral">&quot; dealt &quot;</span> &lt;&lt; <span class="keyword">event</span>.damage</div>
+<div class="line">                &lt;&lt; <span class="stringliteral">&quot; damage to &quot;</span> &lt;&lt; <span class="keyword">event</span>.target &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">};</div>
+</div><!-- fragment --><p><a class="anchor" id="resources-and-state-management"></a></p>
+<h3><a class="anchor" id="autotoc_md29"></a>
+Resources and State Management</h3>
+<p>Resources hold global state:</p>
+<div class="fragment"><div class="line"><span class="comment">// Time resource</span></div>
+<div class="line"><span class="keyword">struct </span>GameTime {</div>
+<div class="line">  <span class="keywordtype">float</span> delta_time = 0.016F;</div>
+<div class="line">  <span class="keywordtype">float</span> total_time = 0.0F;</div>
+<div class="line">  <span class="keywordtype">int</span> frame_count = 0;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view GetName() noexcept {</div>
+<div class="line">    <span class="keywordflow">return</span> <span class="stringliteral">&quot;GameTime&quot;</span>;</div>
+<div class="line">  }</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Statistics resource</span></div>
+<div class="line"><span class="keyword">struct </span>GameStats {</div>
+<div class="line">  <span class="keywordtype">int</span> entities_spawned = 0;</div>
+<div class="line">  <span class="keywordtype">int</span> entities_destroyed = 0;</div>
+<div class="line">  <span class="keywordtype">int</span> combat_events = 0;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view GetName() noexcept {</div>
+<div class="line">    <span class="keywordflow">return</span> <span class="stringliteral">&quot;GameStats&quot;</span>;</div>
+<div class="line">  }</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// System that updates time</span></div>
+<div class="line"><span class="keyword">struct </span>TimeUpdateSystem final : <span class="keyword">public</span> System {</div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view GetName() noexcept {</div>
+<div class="line">    <span class="keywordflow">return</span> <span class="stringliteral">&quot;TimeUpdateSystem&quot;</span>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> GetAccessPolicy() noexcept {</div>
+<div class="line">    <span class="keywordflow">return</span> AccessPolicy().WriteResources&lt;GameTime&gt;();</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordtype">void</span> Update(SystemContext&amp; ctx)<span class="keyword"> override </span>{</div>
+<div class="line">    <span class="keyword">auto</span>&amp; time = ctx.WriteResource&lt;GameTime&gt;();</div>
+<div class="line">    time.delta_time = 0.016F;</div>
+<div class="line">    time.total_time += time.delta_time;</div>
+<div class="line">    ++time.frame_count;</div>
+<div class="line">  }</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// System that reads multiple resources</span></div>
+<div class="line"><span class="keyword">struct </span>StatsDisplaySystem final : <span class="keyword">public</span> System {</div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view GetName() noexcept {</div>
+<div class="line">    <span class="keywordflow">return</span> <span class="stringliteral">&quot;StatsDisplaySystem&quot;</span>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> GetAccessPolicy() noexcept {</div>
+<div class="line">    <span class="keywordflow">return</span> AccessPolicy().ReadResources&lt;GameTime, GameStats&gt;();</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordtype">void</span> Update(SystemContext&amp; ctx)<span class="keyword"> override </span>{</div>
+<div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span>&amp; time = ctx.ReadResource&lt;GameTime&gt;();</div>
+<div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span>&amp; stats = ctx.ReadResource&lt;GameStats&gt;();</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">if</span> (time.frame_count % 60 == 0) {  <span class="comment">// Every 60 frames</span></div>
+<div class="line">      std::cout &lt;&lt; <span class="stringliteral">&quot;Frame: &quot;</span> &lt;&lt; time.frame_count</div>
+<div class="line">                &lt;&lt; <span class="stringliteral">&quot;, Spawned: &quot;</span> &lt;&lt; stats.entities_spawned</div>
+<div class="line">                &lt;&lt; <span class="stringliteral">&quot;, Destroyed: &quot;</span> &lt;&lt; stats.entities_destroyed &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">};</div>
+</div><!-- fragment --><p><a class="anchor" id="modules"></a></p>
+<h3><a class="anchor" id="autotoc_md30"></a>
+Modules</h3>
+<p>Modules organize systems and resources:</p>
+<div class="fragment"><div class="line"><span class="keyword">struct </span>GameplayModule final : <span class="keyword">public</span> Module {</div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view GetName() noexcept {</div>
+<div class="line">    <span class="keywordflow">return</span> <span class="stringliteral">&quot;GameplayModule&quot;</span>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordtype">void</span> Build(App&amp; app)<span class="keyword"> override </span>{</div>
+<div class="line">    <span class="comment">// Add resources</span></div>
+<div class="line">    app.InsertResource(GameStats{});</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Register events</span></div>
+<div class="line">    app.AddEvent&lt;CombatEvent&gt;();</div>
+<div class="line">    app.AddEvent&lt;EntitySpawnedEvent&gt;();</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Add systems to schedules</span></div>
+<div class="line">    app.AddSystems&lt;CombatSystem, DamageSystem, SpawnerSystem&gt;(<a class="code hl_variable" href="namespacehelios_1_1app.html#a6336fe1dd31d2537c02c2571437ab93f">kUpdate</a>);</div>
+<div class="line">    app.AddSystem&lt;CleanupSystem&gt;(<a class="code hl_variable" href="namespacehelios_1_1app.html#a12383482410e87f279ccb7f69e4381af">kPostUpdate</a>);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordtype">void</span> Destroy(App&amp; app)<span class="keyword"> override </span>{</div>
+<div class="line">    <span class="comment">// Cleanup if needed</span></div>
+<div class="line">  }</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Composite module</span></div>
+<div class="line"><span class="keyword">struct </span>GameModule final : <span class="keyword">public</span> Module {</div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view GetName() noexcept {</div>
+<div class="line">    <span class="keywordflow">return</span> <span class="stringliteral">&quot;GameModule&quot;</span>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordtype">void</span> Build(App&amp; app)<span class="keyword"> override </span>{</div>
+<div class="line">    <span class="comment">// Add sub-modules</span></div>
+<div class="line">    app.AddModule&lt;CoreModule&gt;();</div>
+<div class="line">    app.AddModule&lt;PhysicsModule&gt;();</div>
+<div class="line">    app.AddModule&lt;GameplayModule&gt;();</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordtype">void</span> Destroy(App&amp; app)<span class="keyword"> override </span>{}</div>
+<div class="line">};</div>
+<div class="ttc" id="anamespacehelios_1_1app_html_a12383482410e87f279ccb7f69e4381af"><div class="ttname"><a href="namespacehelios_1_1app.html#a12383482410e87f279ccb7f69e4381af">helios::app::kPostUpdate</a></div><div class="ttdeci">constexpr PostUpdate kPostUpdate</div><div class="ttdef"><b>Definition</b> <a href="schedules_8hpp_source.html#l00253">schedules.hpp:253</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1app_html_a6336fe1dd31d2537c02c2571437ab93f"><div class="ttname"><a href="namespacehelios_1_1app.html#a6336fe1dd31d2537c02c2571437ab93f">helios::app::kUpdate</a></div><div class="ttdeci">constexpr Update kUpdate</div><div class="ttdef"><b>Definition</b> <a href="schedules_8hpp_source.html#l00252">schedules.hpp:252</a></div></div>
+</div><!-- fragment --><p><a class="anchor" id="subapps"></a></p>
+<h3><a class="anchor" id="autotoc_md31"></a>
+SubApps</h3>
+<p>SubApps provide isolated worlds for subsystems (e.g., rendering, physics):</p>
+<div class="fragment"><div class="line"><span class="comment">// Define SubApp</span></div>
+<div class="line"><span class="keyword">struct </span>RenderSubApp {</div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view GetName() noexcept {</div>
+<div class="line">    <span class="keywordflow">return</span> <span class="stringliteral">&quot;RenderSubApp&quot;</span>;</div>
+<div class="line">  }</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Setup SubApp</span></div>
+<div class="line">app.AddSubApp&lt;RenderSubApp&gt;();</div>
+<div class="line"><span class="keyword">auto</span>&amp; render_sub_app = app.GetSubApp&lt;RenderSubApp&gt;();</div>
+<div class="line">render_sub_app.InsertResource(RenderData{});</div>
+<div class="line">render_sub_app.AddSystem&lt;RenderSystem&gt;(<a class="code hl_variable" href="namespacehelios_1_1app.html#a6336fe1dd31d2537c02c2571437ab93f">kUpdate</a>);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Extraction: copy data from main world to SubApp</span></div>
+<div class="line">app.SetSubAppExtraction&lt;RenderSubApp&gt;([](World&amp; main_world, World&amp; render_world) {</div>
+<div class="line">  <span class="keyword">auto</span>&amp; render_data = render_world.WriteResource&lt;RenderData&gt;();</div>
+<div class="line">  render_data.entities.clear();</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Extract entities with Transform and Name</span></div>
+<div class="line">  <span class="keyword">auto</span> query = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#a83d597eaa8fb1e270bfe8d4bc7245ced">QueryBuilder</a>(main_world).Get&lt;<span class="keyword">const</span> Transform&amp;, <span class="keyword">const</span> Name&amp;&gt;();</div>
+<div class="line">  query.<a class="code hl_function" href="classhelios_1_1ecs_1_1BasicQuery.html#a016dd9e4aac691afbdace775101908d8">ForEachWithEntity</a>([&amp;](Entity entity, <span class="keyword">const</span> Transform&amp; transform, <span class="keyword">const</span> Name&amp; name) {</div>
+<div class="line">    render_data.entities.push_back({entity, transform, name.value});</div>
+<div class="line">  });</div>
+<div class="line">});</div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1BasicQuery_html_a016dd9e4aac691afbdace775101908d8"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicQuery.html#a016dd9e4aac691afbdace775101908d8">helios::ecs::BasicQuery::ForEachWithEntity</a></div><div class="ttdeci">void ForEachWithEntity(const Action &amp;action) const</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02063">query.hpp:2063</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_a83d597eaa8fb1e270bfe8d4bc7245ced"><div class="ttname"><a href="namespacehelios_1_1ecs.html#a83d597eaa8fb1e270bfe8d4bc7245ced">helios::ecs::QueryBuilder</a></div><div class="ttdeci">BasicQueryBuilder&lt; World, Allocator &gt; QueryBuilder</div><div class="ttdoc">Type alias for query builder with mutable world access.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02507">query.hpp:2507</a></div></div>
+</div><!-- fragment --><hr  />
+<p><a class="anchor" id="api-reference"></a></p>
+<h2><a class="anchor" id="autotoc_md33"></a>
+API Reference</h2>
+<p><a class="anchor" id="core-classes"></a></p>
+<h3><a class="anchor" id="autotoc_md34"></a>
+Core Classes</h3>
+<ul>
+<li>**<code>App</code>** - Main application class, manages lifecycle and schedules</li>
+<li>**<code>Module</code>** - Interface for organizing systems and resources</li>
+<li>**<code>System</code>** - Base class for all systems</li>
+<li>**<code>SystemContext</code>** - Primary interface for systems to access ECS</li>
+<li>**<code>World</code>** - Central ECS container</li>
+<li>**<code>Entity</code>** - Unique entity identifier</li>
+<li>**<code>AccessPolicy</code>** - Declares system data access patterns</li>
+<li>**<code>Query</code>** / <code>QueryBuilder</code> - Entity component queries</li>
+</ul>
+<p><a class="anchor" id="system-context-methods"></a></p>
+<h3><a class="anchor" id="autotoc_md35"></a>
+System Context Methods</h3>
+<div class="fragment"><div class="line"><span class="comment">// Resources</span></div>
+<div class="line">T&amp; WriteResource&lt;T&gt;();</div>
+<div class="line"><span class="keyword">const</span> T&amp; ReadResource&lt;T&gt;();</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Queries</span></div>
+<div class="line">QueryBuilder Query();</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Commands</span></div>
+<div class="line">WorldCommandBuffer Commands();</div>
+<div class="line">EntityCommandBuffer EntityCommands(Entity entity);</div>
+<div class="line">Entity ReserveEntity();</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Events</span></div>
+<div class="line"><span class="keywordtype">void</span> EmitEvent(EventType event);</div>
+<div class="line">EventReader&lt;EventType&gt; ReadEvents&lt;EventType&gt;();</div>
+</div><!-- fragment --><p><a class="anchor" id="query-builder"></a></p>
+<h3><a class="anchor" id="autotoc_md36"></a>
+Query Builder</h3>
+<div class="fragment"><div class="line">QueryBuilder Query()</div>
+<div class="line">    .With&lt;Component&gt;()      <span class="comment">// Filter: must have component</span></div>
+<div class="line">    .Without&lt;Component&gt;()   <span class="comment">// Filter: must not have component</span></div>
+<div class="line">    .Get&lt;Components...&gt;();  <span class="comment">// Execute query</span></div>
+</div><!-- fragment --><p><a class="anchor" id="access-policy-builder"></a></p>
+<h3><a class="anchor" id="autotoc_md37"></a>
+Access Policy Builder</h3>
+<div class="fragment"><div class="line">AccessPolicy()</div>
+<div class="line">    .Query&lt;Components...&gt;()</div>
+<div class="line">    .ReadResources&lt;Resources...&gt;()</div>
+<div class="line">    .WriteResources&lt;Resources...&gt;();</div>
+</div><!-- fragment --><hr  />
+<p><a class="anchor" id="best-practices"></a></p>
+<h2><a class="anchor" id="autotoc_md39"></a>
+Best Practices</h2>
+<ol type="1">
+<li><b>Prefer read-only access</b> - Use <code>const</code> references when possible to enable parallelization</li>
+<li><b>Minimize archetype transitions</b> - Adding/removing components is expensive</li>
+<li><b>Batch operations</b> - Use command buffers to defer mutations</li>
+<li><b>Query efficiently</b> - More specific queries are faster</li>
+<li><b>Use tag components</b> - Zero-size components for filtering</li>
+<li><b>Declare access correctly</b> - Accurate <code>GetAccessPolicy()</code> enables better parallelization</li>
+</ol>
+<p><a class="anchor" id="anti-patterns"></a></p>
+<h3><a class="anchor" id="autotoc_md40"></a>
+Anti-patterns</h3>
+<p><b>Avoid Random entity access</b></p>
+<div class="fragment"><div class="line"><span class="keywordflow">for</span> (<span class="keyword">auto</span> entity : all_entities) {</div>
+<div class="line">  <span class="keyword">auto</span>* component = world.get&lt;Component&gt;(entity);  <span class="comment">// Slow!</span></div>
+<div class="line">}</div>
+</div><!-- fragment --><p><b>Use sequential iteration instead</b></p>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> query = ctx.Query().Get&lt;Component&amp;&gt;();</div>
+<div class="line">query.ForEach([](Component&amp; comp) {</div>
+<div class="line">  <span class="comment">// Fast!</span></div>
+<div class="line">});</div>
+</div><!-- fragment --><p><b>Avoid frequent component add/remove</b></p>
+<div class="fragment"><div class="line">entity_cmd.RemoveComponent&lt;A&gt;();</div>
+<div class="line">entity_cmd.AddComponent&lt;B&gt;();  <span class="comment">// Triggers archetype change</span></div>
+</div><!-- fragment --><p><b>Use flags/states instead</b></p>
+<div class="fragment"><div class="line"><span class="keyword">struct </span>State {</div>
+<div class="line">  <span class="keyword">enum class</span> Value { A, B, C };</div>
+<div class="line">  Value current = Value::A;</div>
+<div class="line">};</div>
+</div><!-- fragment --><hr  />
+<p><a class="anchor" id="testing"></a></p>
+<h2><a class="anchor" id="autotoc_md42"></a>
+Testing</h2>
+<p>The Core module has comprehensive test coverage:</p>
+<ul>
+<li><b>Unit tests</b>: <code>tests/core/unit/</code> - Test individual components</li>
+<li><b>Integration tests</b>: <code>tests/core/integration/app/app_integration.cpp</code> - Full application scenarios</li>
+</ul>
+<p>Run tests:</p>
+<div class="fragment"><div class="line">make build BUILD_TESTS=1</div>
+<div class="line">make test BUILD_TYPE=&lt;type&gt; PLATFORM=&lt;platform&gt;</div>
+</div><!-- fragment --><p>See <a href="../../tests/core/integration/app/app_integration.cpp">tests/core/integration/app/app_integration.cpp</a> for complete, working examples of all features.</p>
+<hr  />
+<p>For more information:</p>
+<ul>
+<li><b><a class="el" href="index.html#md_README">Main README</a></b> - Project overview</li>
+<li><b><a href="../../tests/core/integration/app/app_integration.cpp">Integration Tests</a></b> - Working examples </li>
+</ul>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

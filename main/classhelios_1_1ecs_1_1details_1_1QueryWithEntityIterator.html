@@ -1,0 +1,1003 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: helios::ecs::details::QueryWithEntityIterator&lt; Components &gt; Class Template Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">helios::ecs::details::QueryWithEntityIterator&lt; Components &gt; Class Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Iterator for query results with entity information.  
+ <a href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="query_8hpp_source.html">query.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for helios::ecs::details::QueryWithEntityIterator&lt; Components &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.png" usemap="#helios::ecs::details::QueryWithEntityIterator_3C_20Components_20_3E_map" alt=""/>
+  <map id="helios::ecs::details::QueryWithEntityIterator_3C_20Components_20_3E_map" name="helios::ecs::details::QueryWithEntityIterator_3C_20Components_20_3E_map">
+<area href="classhelios_1_1utils_1_1FunctionalAdapterBase.html" alt="helios::utils::FunctionalAdapterBase&lt; QueryWithEntityIterator&lt; Components... &gt; &gt;" shape="rect" coords="0,0,471,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:af60ee16d9bef57ace71d5779f5806f33" id="r_af60ee16d9bef57ace71d5779f5806f33"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html#af60ee16d9bef57ace71d5779f5806f33">ComponentsType</a> = std::conditional_t&lt; <a class="el" href="namespacehelios_1_1ecs_1_1details.html#a66cd9e4416bee68b5fb557ed6674b8e6">AllComponentsConst</a>&lt; Components... &gt;, <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1Components.html">details::Components</a>, <a class="el" href="classhelios_1_1ecs_1_1details_1_1Components.html">details::Components</a> &gt;</td></tr>
+<tr class="memdesc:af60ee16d9bef57ace71d5779f5806f33"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Components.html" title="Manager for all component storages in the ECS world.">Components</a> manager type based on whether all components are const-qualified.  <br /></td></tr>
+<tr class="separator:af60ee16d9bef57ace71d5779f5806f33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae9655b8e5734f718ee8eacd6654321c" id="r_aae9655b8e5734f718ee8eacd6654321c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html#aae9655b8e5734f718ee8eacd6654321c">iterator_category</a> = std::forward_iterator_tag</td></tr>
+<tr class="separator:aae9655b8e5734f718ee8eacd6654321c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a090e5ea03cc51c32fe8170720b6a4587" id="r_a090e5ea03cc51c32fe8170720b6a4587"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html#a090e5ea03cc51c32fe8170720b6a4587">value_type</a> = std::tuple&lt; <a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>, <a class="el" href="namespacehelios_1_1ecs_1_1details.html#abd1a4dbf69fb38bd09d2ca0d4943dea3">ComponentAccessType</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1details_1_1Components.html">Components</a> &gt;... &gt;</td></tr>
+<tr class="separator:a090e5ea03cc51c32fe8170720b6a4587"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23aeec40095c8157872912fcf460669e" id="r_a23aeec40095c8157872912fcf460669e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html#a23aeec40095c8157872912fcf460669e">difference_type</a> = <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ptrdiff_t</a></td></tr>
+<tr class="separator:a23aeec40095c8157872912fcf460669e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d33ef80905a391e96631c4430634b83" id="r_a1d33ef80905a391e96631c4430634b83"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html#a1d33ef80905a391e96631c4430634b83">pointer</a> = <a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html#a090e5ea03cc51c32fe8170720b6a4587">value_type</a> *</td></tr>
+<tr class="separator:a1d33ef80905a391e96631c4430634b83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc0a65deba9524b64a0e32ae6ef6d7db" id="r_acc0a65deba9524b64a0e32ae6ef6d7db"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html#acc0a65deba9524b64a0e32ae6ef6d7db">reference</a> = <a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html#a090e5ea03cc51c32fe8170720b6a4587">value_type</a></td></tr>
+<tr class="separator:acc0a65deba9524b64a0e32ae6ef6d7db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a0cd4c1f2c3c70dee9297c9d7699cd4bc" id="r_a0cd4c1f2c3c70dee9297c9d7699cd4bc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html#a0cd4c1f2c3c70dee9297c9d7699cd4bc">QueryWithEntityIterator</a> (std::span&lt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> std::reference_wrapper&lt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html">Archetype</a> &gt; &gt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">archetypes</a>, <a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html#af60ee16d9bef57ace71d5779f5806f33">ComponentsType</a> &amp;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">components</a>, <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">archetype_index</a>=0, <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">entity_index</a>=0)</td></tr>
+<tr class="memdesc:a0cd4c1f2c3c70dee9297c9d7699cd4bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs iterator for query results with entity.  <br /></td></tr>
+<tr class="separator:a0cd4c1f2c3c70dee9297c9d7699cd4bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4373bb1b36cf09dabc1d3fe0186d45e0" id="r_a4373bb1b36cf09dabc1d3fe0186d45e0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html#a4373bb1b36cf09dabc1d3fe0186d45e0">QueryWithEntityIterator</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">QueryWithEntityIterator</a> &amp;) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:a4373bb1b36cf09dabc1d3fe0186d45e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e8936e0607622143dedb2598fda2e1c" id="r_a0e8936e0607622143dedb2598fda2e1c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html#a0e8936e0607622143dedb2598fda2e1c">QueryWithEntityIterator</a> (<a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">QueryWithEntityIterator</a> &amp;&amp;) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:a0e8936e0607622143dedb2598fda2e1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f0fa729af8d7537de844421f2b1bd7a" id="r_a1f0fa729af8d7537de844421f2b1bd7a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html#a1f0fa729af8d7537de844421f2b1bd7a">~QueryWithEntityIterator</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:a1f0fa729af8d7537de844421f2b1bd7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88e49f0e4586f628e0c244cf654db8b5" id="r_a88e49f0e4586f628e0c244cf654db8b5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">QueryWithEntityIterator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html#a88e49f0e4586f628e0c244cf654db8b5">operator=</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">QueryWithEntityIterator</a> &amp;) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:a88e49f0e4586f628e0c244cf654db8b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54369fcf85a729b39889442b4b300af9" id="r_a54369fcf85a729b39889442b4b300af9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">QueryWithEntityIterator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html#a54369fcf85a729b39889442b4b300af9">operator=</a> (<a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">QueryWithEntityIterator</a> &amp;&amp;) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a>=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:a54369fcf85a729b39889442b4b300af9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebeddc2e54315808bebebe8ecdda438a" id="r_aebeddc2e54315808bebebe8ecdda438a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">QueryWithEntityIterator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html#aebeddc2e54315808bebebe8ecdda438a">operator++</a> ()</td></tr>
+<tr class="memdesc:aebeddc2e54315808bebebe8ecdda438a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advances iterator to next matching entity.  <br /></td></tr>
+<tr class="separator:aebeddc2e54315808bebebe8ecdda438a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2405a7d1c6033c54d6e4da3e0a29a11" id="r_ac2405a7d1c6033c54d6e4da3e0a29a11"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">QueryWithEntityIterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html#ac2405a7d1c6033c54d6e4da3e0a29a11">operator++</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">int</a>)</td></tr>
+<tr class="memdesc:ac2405a7d1c6033c54d6e4da3e0a29a11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advances iterator to next matching entity.  <br /></td></tr>
+<tr class="separator:ac2405a7d1c6033c54d6e4da3e0a29a11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae284f4ac913e0456160fb63d4d66c77f" id="r_ae284f4ac913e0456160fb63d4d66c77f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">QueryWithEntityIterator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html#ae284f4ac913e0456160fb63d4d66c77f">operator--</a> ()</td></tr>
+<tr class="memdesc:ae284f4ac913e0456160fb63d4d66c77f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves iterator to previous matching entity.  <br /></td></tr>
+<tr class="separator:ae284f4ac913e0456160fb63d4d66c77f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c8cb99980756abffee6fdff3502d9b7" id="r_a1c8cb99980756abffee6fdff3502d9b7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">QueryWithEntityIterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html#a1c8cb99980756abffee6fdff3502d9b7">operator--</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">int</a>)</td></tr>
+<tr class="memdesc:a1c8cb99980756abffee6fdff3502d9b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves iterator to previous matching entity.  <br /></td></tr>
+<tr class="separator:a1c8cb99980756abffee6fdff3502d9b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac19e493498a93f3488512806b6ef8256" id="r_ac19e493498a93f3488512806b6ef8256"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html#a090e5ea03cc51c32fe8170720b6a4587">value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html#ac19e493498a93f3488512806b6ef8256">operator*</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a></td></tr>
+<tr class="memdesc:ac19e493498a93f3488512806b6ef8256"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dereferences iterator to get entity and component tuple.  <br /></td></tr>
+<tr class="separator:ac19e493498a93f3488512806b6ef8256"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e4f35a214163aa2cb9bbc29f53d314b" id="r_a1e4f35a214163aa2cb9bbc29f53d314b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html#a1e4f35a214163aa2cb9bbc29f53d314b">operator==</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">QueryWithEntityIterator</a> &amp;other) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:a1e4f35a214163aa2cb9bbc29f53d314b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares iterators for equality.  <br /></td></tr>
+<tr class="separator:a1e4f35a214163aa2cb9bbc29f53d314b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a883b1bd3b05e5c80499f65086e99219a" id="r_a883b1bd3b05e5c80499f65086e99219a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html#a883b1bd3b05e5c80499f65086e99219a">operator!=</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">QueryWithEntityIterator</a> &amp;other) <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:a883b1bd3b05e5c80499f65086e99219a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares iterators for inequality.  <br /></td></tr>
+<tr class="separator:a883b1bd3b05e5c80499f65086e99219a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ced68236dd203d32677e653c29a58be" id="r_a6ced68236dd203d32677e653c29a58be"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">QueryWithEntityIterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html#a6ced68236dd203d32677e653c29a58be">begin</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:a6ced68236dd203d32677e653c29a58be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns iterator to the beginning.  <br /></td></tr>
+<tr class="separator:a6ced68236dd203d32677e653c29a58be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29e5159b286fd90eef7bf75d0a4e9045" id="r_a29e5159b286fd90eef7bf75d0a4e9045"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">QueryWithEntityIterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html#a29e5159b286fd90eef7bf75d0a4e9045">end</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:a29e5159b286fd90eef7bf75d0a4e9045"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns iterator to the end.  <br /></td></tr>
+<tr class="separator:a29e5159b286fd90eef7bf75d0a4e9045"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;ComponentTrait... Components&gt;<br />
+requires utils::UniqueTypes&lt;Components...&gt;<br />
+class helios::ecs::details::QueryWithEntityIterator&lt; Components &gt;</div><p>Iterator for query results with entity information. </p>
+<p>Provides forward iteration over entities matching the query criteria, returning tuples that include the entity followed by requested component references. </p><dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname"><a class="el" href="classhelios_1_1ecs_1_1details_1_1Components.html" title="Manager for all component storages in the ECS world.">Components</a></td><td>Requested component access types (may include const qualifiers) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00249">249</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="af60ee16d9bef57ace71d5779f5806f33" name="af60ee16d9bef57ace71d5779f5806f33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af60ee16d9bef57ace71d5779f5806f33">&#9670;&#160;</a></span>ComponentsType</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait... Components&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">helios::ecs::details::QueryWithEntityIterator</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1details_1_1Components.html">Components</a> &gt;::ComponentsType =  std::conditional_t&lt;<a class="el" href="namespacehelios_1_1ecs_1_1details.html#a66cd9e4416bee68b5fb557ed6674b8e6">AllComponentsConst</a>&lt;Components...&gt;, <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1Components.html">details::Components</a>, <a class="el" href="classhelios_1_1ecs_1_1details_1_1Components.html">details::Components</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classhelios_1_1ecs_1_1details_1_1Components.html" title="Manager for all component storages in the ECS world.">Components</a> manager type based on whether all components are const-qualified. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2query_8hpp-example.html#a23">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/query.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00252">252</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a23aeec40095c8157872912fcf460669e" name="a23aeec40095c8157872912fcf460669e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23aeec40095c8157872912fcf460669e">&#9670;&#160;</a></span>difference_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait... Components&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">helios::ecs::details::QueryWithEntityIterator</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1details_1_1Components.html">Components</a> &gt;::difference_type =  <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ptrdiff_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2query_8hpp-example.html#a26">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/query.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00258">258</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aae9655b8e5734f718ee8eacd6654321c" name="aae9655b8e5734f718ee8eacd6654321c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae9655b8e5734f718ee8eacd6654321c">&#9670;&#160;</a></span>iterator_category</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait... Components&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">helios::ecs::details::QueryWithEntityIterator</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1details_1_1Components.html">Components</a> &gt;::iterator_category =  std::forward_iterator_tag</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2query_8hpp-example.html#a24">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/query.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00256">256</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a1d33ef80905a391e96631c4430634b83" name="a1d33ef80905a391e96631c4430634b83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d33ef80905a391e96631c4430634b83">&#9670;&#160;</a></span>pointer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait... Components&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">helios::ecs::details::QueryWithEntityIterator</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1details_1_1Components.html">Components</a> &gt;::pointer =  <a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html#a090e5ea03cc51c32fe8170720b6a4587">value_type</a>*</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2query_8hpp-example.html#a27">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/query.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00259">259</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+
+</div>
+</div>
+<a id="acc0a65deba9524b64a0e32ae6ef6d7db" name="acc0a65deba9524b64a0e32ae6ef6d7db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc0a65deba9524b64a0e32ae6ef6d7db">&#9670;&#160;</a></span>reference</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait... Components&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">helios::ecs::details::QueryWithEntityIterator</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1details_1_1Components.html">Components</a> &gt;::reference =  <a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html#a090e5ea03cc51c32fe8170720b6a4587">value_type</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2query_8hpp-example.html#a28">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/query.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00260">260</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a090e5ea03cc51c32fe8170720b6a4587" name="a090e5ea03cc51c32fe8170720b6a4587"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a090e5ea03cc51c32fe8170720b6a4587">&#9670;&#160;</a></span>value_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait... Components&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">helios::ecs::details::QueryWithEntityIterator</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1details_1_1Components.html">Components</a> &gt;::value_type =  std::tuple&lt;<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>, <a class="el" href="namespacehelios_1_1ecs_1_1details.html#abd1a4dbf69fb38bd09d2ca0d4943dea3">ComponentAccessType</a>&lt;<a class="el" href="classhelios_1_1ecs_1_1details_1_1Components.html">Components</a>&gt;...&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2query_8hpp-example.html#a25">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/query.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00257">257</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a0cd4c1f2c3c70dee9297c9d7699cd4bc" name="a0cd4c1f2c3c70dee9297c9d7699cd4bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0cd4c1f2c3c70dee9297c9d7699cd4bc">&#9670;&#160;</a></span>QueryWithEntityIterator() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait... Components&gt; <br />
+requires utils::UniqueTypes&lt;Components...&gt;</div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">helios::ecs::details::QueryWithEntityIterator</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1details_1_1Components.html">Components</a> &gt;::QueryWithEntityIterator </td>
+          <td>(</td>
+          <td class="paramtype">std::span&lt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> std::reference_wrapper&lt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1Archetype.html">Archetype</a> &gt; &gt;&#160;</td>
+          <td class="paramname"><em>archetypes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html#af60ee16d9bef57ace71d5779f5806f33">ComponentsType</a> &amp;&#160;</td>
+          <td class="paramname"><em>components</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a>&#160;</td>
+          <td class="paramname"><em>archetype_index</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a>&#160;</td>
+          <td class="paramname"><em>entity_index</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructs iterator for query results with entity. </p>
+<p>Initializes iterator to point to the first matching entity. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">archetypes</td><td>Span of archetypes matching the query </td></tr>
+    <tr><td class="paramname">components</td><td>Component manager for accessing component data </td></tr>
+    <tr><td class="paramname">archetype_index</td><td>Starting archetype index (default: 0) </td></tr>
+    <tr><td class="paramname">entity_index</td><td>Starting entity index within archetype (default: 0) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2query_8hpp-example.html#a40">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/query.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00453">453</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  456</span>    : archetypes_(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">archetypes</a>), components_(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">components</a>), archetype_index_(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">archetype_index</a>), entity_index_(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">entity_index</a>) {</div>
+<div class="line"><span class="lineno">  457</span>  AdvanceToValidEntity();</div>
+<div class="line"><span class="lineno">  458</span>}</div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_af0384de48d847585fcb340c71c231e5e"><div class="ttname"><a href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, Allocator, Components... &gt; Query</div><div class="ttdoc">Type alias for query with mutable world access.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02515">query.hpp:2515</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a4373bb1b36cf09dabc1d3fe0186d45e0" name="a4373bb1b36cf09dabc1d3fe0186d45e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4373bb1b36cf09dabc1d3fe0186d45e0">&#9670;&#160;</a></span>QueryWithEntityIterator() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait... Components&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">helios::ecs::details::QueryWithEntityIterator</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1details_1_1Components.html">Components</a> &gt;::QueryWithEntityIterator </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">QueryWithEntityIterator</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1details_1_1Components.html">Components</a> &gt; &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0e8936e0607622143dedb2598fda2e1c" name="a0e8936e0607622143dedb2598fda2e1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e8936e0607622143dedb2598fda2e1c">&#9670;&#160;</a></span>QueryWithEntityIterator() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait... Components&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">helios::ecs::details::QueryWithEntityIterator</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1details_1_1Components.html">Components</a> &gt;::QueryWithEntityIterator </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">QueryWithEntityIterator</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1details_1_1Components.html">Components</a> &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1f0fa729af8d7537de844421f2b1bd7a" name="a1f0fa729af8d7537de844421f2b1bd7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f0fa729af8d7537de844421f2b1bd7a">&#9670;&#160;</a></span>~QueryWithEntityIterator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait... Components&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">helios::ecs::details::QueryWithEntityIterator</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1details_1_1Components.html">Components</a> &gt;::~<a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">QueryWithEntityIterator</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2query_8hpp-example.html#a29">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/query.hpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a6ced68236dd203d32677e653c29a58be" name="a6ced68236dd203d32677e653c29a58be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ced68236dd203d32677e653c29a58be">&#9670;&#160;</a></span>begin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait... Components&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">QueryWithEntityIterator</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">helios::ecs::details::QueryWithEntityIterator</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1details_1_1Components.html">Components</a> &gt;::begin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns iterator to the beginning. </p>
+<dl class="section return"><dt>Returns</dt><dd>Copy of this iterator </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2query_8hpp-example.html#a36">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/query.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00331">331</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  331</span>{ <span class="keywordflow">return</span> *<span class="keyword">this</span>; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a29e5159b286fd90eef7bf75d0a4e9045" name="a29e5159b286fd90eef7bf75d0a4e9045"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29e5159b286fd90eef7bf75d0a4e9045">&#9670;&#160;</a></span>end()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait... Components&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">QueryWithEntityIterator</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">helios::ecs::details::QueryWithEntityIterator</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1details_1_1Components.html">Components</a> &gt;::end </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns iterator to the end. </p>
+<dl class="section return"><dt>Returns</dt><dd>End iterator </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2query_8hpp-example.html#a37">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/query.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00337">337</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  337</span>                                                             {</div>
+<div class="line"><span class="lineno">  338</span>    <span class="keywordflow">return</span> {archetypes_, components_.get(), archetypes_.size(), 0};</div>
+<div class="line"><span class="lineno">  339</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a883b1bd3b05e5c80499f65086e99219a" name="a883b1bd3b05e5c80499f65086e99219a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a883b1bd3b05e5c80499f65086e99219a">&#9670;&#160;</a></span>operator!=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait... Components&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">helios::ecs::details::QueryWithEntityIterator</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1details_1_1Components.html">Components</a> &gt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">::operator!</a>= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">QueryWithEntityIterator</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1details_1_1Components.html">Components</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compares iterators for inequality. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Iterator to compare with </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if iterators are not equal, false otherwise </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2query_8hpp-example.html#a35">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/query.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00325">325</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  325</span>{ <span class="keywordflow">return</span> !(*<span class="keyword">this</span> == other); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ac19e493498a93f3488512806b6ef8256" name="ac19e493498a93f3488512806b6ef8256"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac19e493498a93f3488512806b6ef8256">&#9670;&#160;</a></span>operator*()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait... Components&gt; <br />
+requires utils::UniqueTypes&lt;Components...&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">auto</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">helios::ecs::details::QueryWithEntityIterator</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1details_1_1Components.html">Components</a> &gt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">::operator</a>* </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Dereferences iterator to get entity and component tuple. </p>
+<p>Returns tuple starting with entity followed by component references. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if iterator is at end or in invalid state. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Tuple of entity and component references </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2query_8hpp-example.html#a33">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/query.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00514">514</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  514</span>                                                                                  {</div>
+<div class="line"><span class="lineno">  515</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!IsAtEnd(), <span class="stringliteral">&quot;Cannot dereference end iterator!&quot;</span>);</div>
+<div class="line"><span class="lineno">  516</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(archetype_index_ &lt; archetypes_.size(), <span class="stringliteral">&quot;Archetype index out of bounds!&quot;</span>);</div>
+<div class="line"><span class="lineno">  517</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(entity_index_ &lt; archetypes_[archetype_index_].<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">get</a>().Entities().size(), <span class="stringliteral">&quot;Entity index out of bounds!&quot;</span>);</div>
+<div class="line"><span class="lineno">  518</span> </div>
+<div class="line"><span class="lineno">  519</span>  <span class="keyword">const</span> <span class="keyword">auto</span>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">archetype</a> = archetypes_[archetype_index_].get();</div>
+<div class="line"><span class="lineno">  520</span>  <span class="keyword">const</span> Entity entity = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">archetype</a>.Entities()[entity_index_];</div>
+<div class="line"><span class="lineno">  521</span> </div>
+<div class="line"><span class="lineno">  522</span>  <span class="keywordflow">return</span> {entity,</div>
+<div class="line"><span class="lineno">  523</span>          [&amp;]&lt;<span class="keyword">typename</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ComponentType</a> = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ComponentTypeExtractor_t&lt;Components&gt;</a>&gt;() -&gt; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ComponentAccessType&lt;Components&gt;</a> {</div>
+<div class="line"><span class="lineno">  524</span>            <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ComponentAccessType&lt;Components&gt;</a><span class="keyword">&gt;</span>(</div>
+<div class="line"><span class="lineno">  525</span>                components_.get().template <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">GetComponent&lt;ComponentType&gt;</a>(entity));</div>
+<div class="line"><span class="lineno">  526</span>          }()...};</div>
+<div class="line"><span class="lineno">  527</span>}</div>
+<div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00149">assert.hpp:149</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aebeddc2e54315808bebebe8ecdda438a" name="aebeddc2e54315808bebebe8ecdda438a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebeddc2e54315808bebebe8ecdda438a">&#9670;&#160;</a></span>operator++() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait... Components&gt; <br />
+requires utils::UniqueTypes&lt;Components...&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">auto</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">helios::ecs::details::QueryWithEntityIterator</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1details_1_1Components.html">Components</a> &gt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">::operator</a>++ </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Advances iterator to next matching entity. </p>
+<dl class="section return"><dt>Returns</dt><dd>Reference to this iterator after advancement </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2query_8hpp-example.html#a31">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/query.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00462">462</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  462</span>                                                                                           {</div>
+<div class="line"><span class="lineno">  463</span>  ++entity_index_;</div>
+<div class="line"><span class="lineno">  464</span>  AdvanceToValidEntity();</div>
+<div class="line"><span class="lineno">  465</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><span class="lineno">  466</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ac2405a7d1c6033c54d6e4da3e0a29a11" name="ac2405a7d1c6033c54d6e4da3e0a29a11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2405a7d1c6033c54d6e4da3e0a29a11">&#9670;&#160;</a></span>operator++() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait... Components&gt; <br />
+requires utils::UniqueTypes&lt;Components...&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">auto</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">helios::ecs::details::QueryWithEntityIterator</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1details_1_1Components.html">Components</a> &gt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">::operator</a>++ </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">int</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Advances iterator to next matching entity. </p>
+<dl class="section return"><dt>Returns</dt><dd>Copy of iterator before advancement </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00470">470</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  470</span>                                                                                             {</div>
+<div class="line"><span class="lineno">  471</span>  <span class="keyword">auto</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">copy</a> = *<span class="keyword">this</span>;</div>
+<div class="line"><span class="lineno">  472</span>  ++(*this);</div>
+<div class="line"><span class="lineno">  473</span>  <span class="keywordflow">return</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">copy</a>;</div>
+<div class="line"><span class="lineno">  474</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ae284f4ac913e0456160fb63d4d66c77f" name="ae284f4ac913e0456160fb63d4d66c77f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae284f4ac913e0456160fb63d4d66c77f">&#9670;&#160;</a></span>operator--() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait... Components&gt; <br />
+requires utils::UniqueTypes&lt;Components...&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">auto</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">helios::ecs::details::QueryWithEntityIterator</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1details_1_1Components.html">Components</a> &gt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">::operator</a>-- </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Moves iterator to previous matching entity. </p>
+<dl class="section return"><dt>Returns</dt><dd>Reference to this iterator after moving backward </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2query_8hpp-example.html#a32">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/query.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00478">478</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  478</span>                                                                                           {</div>
+<div class="line"><span class="lineno">  479</span>  <span class="comment">// If at end or beginning of current archetype, need to go back</span></div>
+<div class="line"><span class="lineno">  480</span>  <span class="keywordflow">while</span> (<span class="keyword">true</span>) {</div>
+<div class="line"><span class="lineno">  481</span>    <span class="keywordflow">if</span> (entity_index_ &gt; 0) {</div>
+<div class="line"><span class="lineno">  482</span>      --entity_index_;</div>
+<div class="line"><span class="lineno">  483</span>      <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><span class="lineno">  484</span>    }</div>
+<div class="line"><span class="lineno">  485</span> </div>
+<div class="line"><span class="lineno">  486</span>    <span class="comment">// Need to move to previous archetype</span></div>
+<div class="line"><span class="lineno">  487</span>    <span class="keywordflow">if</span> (archetype_index_ == 0) {</div>
+<div class="line"><span class="lineno">  488</span>      <span class="comment">// Already at beginning, can&#39;t go back further</span></div>
+<div class="line"><span class="lineno">  489</span>      <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><span class="lineno">  490</span>    }</div>
+<div class="line"><span class="lineno">  491</span> </div>
+<div class="line"><span class="lineno">  492</span>    --archetype_index_;</div>
+<div class="line"><span class="lineno">  493</span>    <span class="comment">// Move to last entity in previous archetype</span></div>
+<div class="line"><span class="lineno">  494</span>    <span class="keywordflow">if</span> (archetype_index_ &lt; archetypes_.size()) {</div>
+<div class="line"><span class="lineno">  495</span>      entity_index_ = archetypes_[archetype_index_].get().EntityCount();</div>
+<div class="line"><span class="lineno">  496</span>      <span class="keywordflow">if</span> (entity_index_ &gt; 0) {</div>
+<div class="line"><span class="lineno">  497</span>        --entity_index_;</div>
+<div class="line"><span class="lineno">  498</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><span class="lineno">  499</span>      }</div>
+<div class="line"><span class="lineno">  500</span>    }</div>
+<div class="line"><span class="lineno">  501</span>  }</div>
+<div class="line"><span class="lineno">  502</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a1c8cb99980756abffee6fdff3502d9b7" name="a1c8cb99980756abffee6fdff3502d9b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c8cb99980756abffee6fdff3502d9b7">&#9670;&#160;</a></span>operator--() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait... Components&gt; <br />
+requires utils::UniqueTypes&lt;Components...&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">auto</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">helios::ecs::details::QueryWithEntityIterator</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1details_1_1Components.html">Components</a> &gt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">::operator</a>-- </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">int</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Moves iterator to previous matching entity. </p>
+<dl class="section return"><dt>Returns</dt><dd>Copy of iterator before moving backward </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00506">506</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  506</span>                                                                                             {</div>
+<div class="line"><span class="lineno">  507</span>  <span class="keyword">auto</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">copy</a> = *<span class="keyword">this</span>;</div>
+<div class="line"><span class="lineno">  508</span>  --(*this);</div>
+<div class="line"><span class="lineno">  509</span>  <span class="keywordflow">return</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">copy</a>;</div>
+<div class="line"><span class="lineno">  510</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a88e49f0e4586f628e0c244cf654db8b5" name="a88e49f0e4586f628e0c244cf654db8b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88e49f0e4586f628e0c244cf654db8b5">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait... Components&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">QueryWithEntityIterator</a> &amp; <a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">helios::ecs::details::QueryWithEntityIterator</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1details_1_1Components.html">Components</a> &gt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">::operator</a>= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">QueryWithEntityIterator</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1details_1_1Components.html">Components</a> &gt; &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2query_8hpp-example.html#a30">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/query.hpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<a id="a54369fcf85a729b39889442b4b300af9" name="a54369fcf85a729b39889442b4b300af9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54369fcf85a729b39889442b4b300af9">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait... Components&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">QueryWithEntityIterator</a> &amp; <a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">helios::ecs::details::QueryWithEntityIterator</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1details_1_1Components.html">Components</a> &gt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">::operator</a>= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">QueryWithEntityIterator</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1details_1_1Components.html">Components</a> &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1e4f35a214163aa2cb9bbc29f53d314b" name="a1e4f35a214163aa2cb9bbc29f53d314b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e4f35a214163aa2cb9bbc29f53d314b">&#9670;&#160;</a></span>operator==()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentTrait... Components&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">helios::ecs::details::QueryWithEntityIterator</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1details_1_1Components.html">Components</a> &gt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">::operator</a>== </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">QueryWithEntityIterator</a>&lt; <a class="el" href="classhelios_1_1ecs_1_1details_1_1Components.html">Components</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compares iterators for equality. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Iterator to compare with </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if iterators are equal, false otherwise </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2query_8hpp-example.html#a34">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/query.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l00316">316</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  316</span>                                                                                     {</div>
+<div class="line"><span class="lineno">  317</span>    <span class="keywordflow">return</span> archetype_index_ == other.archetype_index_ &amp;&amp; entity_index_ == other.entity_index_;</div>
+<div class="line"><span class="lineno">  318</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehelios.html">helios</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1ecs.html">ecs</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1ecs_1_1details.html">details</a></li><li class="navelem"><a class="el" href="classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html">QueryWithEntityIterator</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>
