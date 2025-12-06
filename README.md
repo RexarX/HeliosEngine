@@ -564,6 +564,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- MARKDOWN LINKS & IMAGES -->
 
 [license-shield]: https://img.shields.io/github/license/RexarX/HeliosEngine.svg?style=for-the-badge
-[license-url]: https://github.com/RexarX/HeliosEngine/blob/master/LICENSE
+[license-url]: https://github.com/RexarX/HeliosEngine/blob/main/LICENSE
 [cpp-shield]: https://img.shields.io/badge/C%2B%2B-23-blue.svg?style=for-the-badge&logo=c%2B%2B
 [cpp-url]: https://en.cppreference.com/w/cpp/23
