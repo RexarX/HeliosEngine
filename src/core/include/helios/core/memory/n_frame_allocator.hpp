@@ -11,6 +11,7 @@
 #include <array>
 #include <concepts>
 #include <cstddef>
+#include <memory>
 #include <mutex>
 #include <shared_mutex>
 #include <utility>
@@ -19,9 +20,8 @@ namespace helios::memory {
 
 /**
  * @brief N-buffered frame allocator.
- * @details Maintains N frame buffers, allowing memory from the previous N-1 frames
- * to remain valid. Useful for pipelined operations (e.g., CPU-GPU synchronization
- * with multiple frames in flight).
+ * @details Maintains N frame buffers, allowing memory from the previous N-1 frames to remain valid.
+ * Useful for pipelined operations (e.g., CPU-GPU synchronization with multiple frames in flight).
  *
  * The allocator cycles through N buffers, ensuring that data from the previous
  * N-1 frames remains accessible while allocating for the current frame.
@@ -325,8 +325,8 @@ template <typename T, typename... Args>
 inline T* NFrameAllocator<N>::AllocateAndConstruct(Args&&... args) noexcept(
     std::is_nothrow_constructible_v<T, Args...>) {
   T* ptr = Allocate<T>();
-  if (ptr != nullptr) {
-    ::new (static_cast<void*>(ptr)) T(std::forward<Args>(args)...);
+  if (ptr != nullptr) [[likely]] {
+    std::construct_at(ptr, std::forward<Args>(args)...);
   }
   return ptr;
 }
@@ -338,9 +338,9 @@ template <typename T>
 inline T* NFrameAllocator<N>::AllocateAndConstructArray(size_t count) noexcept(
     std::is_nothrow_default_constructible_v<T>) {
   T* ptr = Allocate<T>(count);
-  if (ptr != nullptr) {
+  if (ptr != nullptr) [[likely]] {
     for (size_t i = 0; i < count; ++i) {
-      ::new (static_cast<void*>(ptr + i)) T{};
+      std::construct_at(ptr + i);
     }
   }
   return ptr;

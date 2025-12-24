@@ -12,6 +12,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <cstring>
+#include <memory>
 
 namespace helios::memory {
 
@@ -341,8 +342,8 @@ template <typename T, typename... Args>
   requires std::constructible_from<T, Args...>
 inline T* FrameAllocator::AllocateAndConstruct(Args&&... args) noexcept(std::is_nothrow_constructible_v<T, Args...>) {
   T* ptr = Allocate<T>();
-  if (ptr != nullptr) {
-    ::new (static_cast<void*>(ptr)) T(std::forward<Args>(args)...);
+  if (ptr != nullptr) [[likely]] {
+    std::construct_at(ptr, std::forward<Args>(args)...);
   }
   return ptr;
 }
@@ -351,9 +352,9 @@ template <typename T>
   requires std::default_initializable<T>
 inline T* FrameAllocator::AllocateAndConstructArray(size_t count) noexcept(std::is_nothrow_default_constructible_v<T>) {
   T* ptr = Allocate<T>(count);
-  if (ptr != nullptr) {
+  if (ptr != nullptr) [[likely]] {
     for (size_t i = 0; i < count; ++i) {
-      ::new (static_cast<void*>(ptr + i)) T{};
+      std::construct_at(ptr + i);
     }
   }
   return ptr;

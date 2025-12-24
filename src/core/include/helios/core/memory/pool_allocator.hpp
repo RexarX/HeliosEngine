@@ -13,22 +13,22 @@
 #include <cstddef>
 #include <cstdint>
 #include <cstring>
+#include <memory>
 
 namespace helios::memory {
 
 /**
  * @brief Pool allocator for fixed-size allocations.
  * @details Allocates objects of a fixed size from a pre-allocated pool.
- * Extremely efficient for scenarios where many objects of the same size
- * are allocated and deallocated frequently.
+ * Extremely efficient for scenarios where many objects of the same size are allocated and deallocated frequently.
  *
- * Uses a lock-free free list to track available slots. Each free slot stores
- * a pointer to the next free slot, forming a linked list through the free blocks.
+ * Uses a lock-free free list to track available slots. Each free slot stores a pointer to the next free slot,
+ * forming a linked list through the free blocks.
  *
  * Supports proper deallocation and reuse of freed blocks.
  *
- * Uses lock-free atomic operations for allocation/deallocation, providing
- * excellent performance in multi-threaded scenarios.
+ * Uses lock-free atomic operations for allocation/deallocation,
+ * providing excellent performance in multi-threaded scenarios.
  *
  * @note Thread-safe with lock-free operations.
  * All allocations must be the same size (or smaller than block_size).
@@ -434,8 +434,8 @@ template <typename T, typename... Args>
   requires std::constructible_from<T, Args...>
 inline T* PoolAllocator::AllocateAndConstruct(Args&&... args) noexcept(std::is_nothrow_constructible_v<T, Args...>) {
   T* ptr = Allocate<T>();
-  if (ptr != nullptr) {
-    ::new (static_cast<void*>(ptr)) T(std::forward<Args>(args)...);
+  if (ptr != nullptr) [[likely]] {
+    std::construct_at(ptr, std::forward<Args>(args)...);
   }
   return ptr;
 }

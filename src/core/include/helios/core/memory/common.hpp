@@ -4,6 +4,7 @@
 
 #include <helios/core/assert.hpp>
 #include <helios/core/logger.hpp>
+#include <helios/core/memory/allocator_traits.hpp>
 
 #include <cstddef>
 #include <cstdlib>
@@ -28,12 +29,14 @@ namespace helios::memory {
  */
 inline void* AlignedAlloc(size_t alignment, size_t size) {
   HELIOS_ASSERT(alignment != 0, "Failed to allocate memory: alignment cannot be zero!");
-  HELIOS_ASSERT((alignment & (alignment - 1)) == 0, "Failed to allocate memory: alignment must be a power of two!");
+  HELIOS_ASSERT(IsPowerOfTwo(alignment), "Failed to allocate memory: alignment must be a power of two!");
   HELIOS_ASSERT(size != 0, "Failed to allocate memory: size cannot be zero!");
 #ifdef _MSC_VER
   return _aligned_malloc(size, alignment);
 #else
-  return std::aligned_alloc(alignment, size);
+  // POSIX aligned_alloc requires size to be a multiple of alignment
+  // Round up size to the next multiple of alignment
+  return std::aligned_alloc(alignment, AlignUp(size, alignment));
 #endif
 }
 

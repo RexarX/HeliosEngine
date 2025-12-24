@@ -13,15 +13,16 @@
 #include <cstddef>
 #include <cstdint>
 #include <cstring>
+#include <memory>
 #include <mutex>
 
 namespace helios::memory {
 
 /**
  * @brief Stack/linear allocator with LIFO deallocation support.
- * @details Allocates memory sequentially using a bump pointer, but unlike
- * FrameAllocator, supports LIFO (stack-like) deallocations. Each allocation
- * stores a header with the previous offset, allowing proper unwinding.
+ * @details Allocates memory sequentially using a bump pointer, but unlike FrameAllocator,
+ * supports LIFO (stack-like) deallocations.
+ * Each allocation stores a header with the previous offset, allowing proper unwinding.
  *
  * Ideal for hierarchical/scoped allocations where deallocation follows
  * allocation order (e.g., call stacks, recursive algorithms).
@@ -457,8 +458,8 @@ template <typename T, typename... Args>
   requires std::constructible_from<T, Args...>
 inline T* StackAllocator::AllocateAndConstruct(Args&&... args) noexcept(std::is_nothrow_constructible_v<T, Args...>) {
   T* ptr = Allocate<T>();
-  if (ptr != nullptr) {
-    ::new (static_cast<void*>(ptr)) T(std::forward<Args>(args)...);
+  if (ptr != nullptr) [[likely]] {
+    std::construct_at(ptr, std::forward<Args>(args)...);
   }
   return ptr;
 }
@@ -467,9 +468,9 @@ template <typename T>
   requires std::default_initializable<T>
 inline T* StackAllocator::AllocateAndConstructArray(size_t count) noexcept(std::is_nothrow_default_constructible_v<T>) {
   T* ptr = Allocate<T>(count);
-  if (ptr != nullptr) {
+  if (ptr != nullptr) [[likely]] {
     for (size_t i = 0; i < count; ++i) {
-      ::new (static_cast<void*>(ptr + i)) T{};
+      std::construct_at(ptr + i);
     }
   }
   return ptr;

@@ -6,6 +6,7 @@
 #include <concepts>
 #include <cstddef>
 #include <cstdint>
+#include <memory>
 #include <type_traits>
 
 namespace helios::memory {
@@ -240,8 +241,8 @@ template <typename T, Allocator Alloc, typename... Args>
 [[nodiscard]] constexpr T* AllocateAndConstruct(Alloc& allocator,
                                                 Args&&... args) noexcept(std::is_nothrow_constructible_v<T, Args...>) {
   T* ptr = Allocate<T>(allocator);
-  if (ptr != nullptr) {
-    ::new (static_cast<void*>(ptr)) T(std::forward<Args>(args)...);
+  if (ptr != nullptr) [[likely]] {
+    std::construct_at(ptr, std::forward<Args>(args)...);
   }
   return ptr;
 }
@@ -267,9 +268,9 @@ template <typename T, Allocator Alloc>
 [[nodiscard]] constexpr T* AllocateAndConstructArray(Alloc& allocator, size_t count) noexcept(
     std::is_nothrow_default_constructible_v<T>) {
   T* ptr = Allocate<T>(allocator, count);
-  if (ptr != nullptr) {
+  if (ptr != nullptr) [[likely]] {
     for (size_t i = 0; i < count; ++i) {
-      ::new (static_cast<void*>(ptr + i)) T{};
+      std::construct_at(ptr + i);
     }
   }
   return ptr;

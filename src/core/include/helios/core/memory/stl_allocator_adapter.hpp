@@ -138,7 +138,7 @@ inline T* STLAllocatorAdapter<T, UnderlyingAllocator>::allocate(size_type count)
   }
 
   const size_t size = count * sizeof(T);
-  const size_t alignment = std::max(alignof(T), kMinAlignment);
+  constexpr size_t alignment = std::max(alignof(T), kMinAlignment);
 
   auto result = allocator_->Allocate(size, alignment);
 
@@ -151,7 +151,7 @@ inline T* STLAllocatorAdapter<T, UnderlyingAllocator>::allocate(size_type count)
 
 template <typename T, typename UnderlyingAllocator>
 inline void STLAllocatorAdapter<T, UnderlyingAllocator>::deallocate(T* ptr, size_type count) noexcept {
-  if (ptr != nullptr) [[unlikely]] {
+  if (ptr == nullptr) [[unlikely]] {
     return;
   }
 

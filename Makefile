@@ -7,7 +7,7 @@
 # ============================================================================
 
 # Python interpreter
-PYTHON := python
+PYTHON := python3
 
 # Script paths
 SCRIPTS_DIR := scripts

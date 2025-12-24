@@ -9,6 +9,7 @@
 #include <algorithm>
 #include <concepts>
 #include <cstddef>
+#include <memory>
 #include <mutex>
 #include <shared_mutex>
 #include <type_traits>
@@ -18,17 +19,16 @@ namespace helios::memory {
 
 /**
  * @brief Growable allocator adapter that automatically expands capacity.
- * @details Wraps another allocator and automatically creates additional allocator
- * instances when capacity is exceeded. Manages multiple allocator instances and
- * delegates allocations to them.
+ * @details Wraps another allocator and automatically creates additional allocator instances when capacity is exceeded.
+ * Manages multiple allocator instances and delegates allocations to them.
  *
- * When an allocation fails due to insufficient capacity, a new allocator instance
- * is created with a configurable growth factor applied to the initial capacity.
+ * When an allocation fails due to insufficient capacity,
+ * a new allocator instance is created with a configurable growth factor applied to the initial capacity.
  *
  * Supports deallocation by tracking which allocator owns each pointer.
  *
- * The GrowableAllocator itself is thread-safe, using shared_mutex for optimal
- * concurrent access. Underlying allocators are already thread-safe.
+ * The GrowableAllocator itself is thread-safe, using shared_mutex for optimal concurrent access.
+ * Underlying allocators are already thread-safe.
  *
  * @note Thread-safe with optimized locking.
  * Growth occurs only when an allocation fails due to capacity constraints.
@@ -41,8 +41,8 @@ namespace helios::memory {
  * Not compatible with: PoolAllocator (requires additional construction parameters).
  *
  * Copy operations are conditionally available based on the underlying allocator.
- * If a custom copyable allocator is provided, GrowableAllocator will automatically support
- * copy construction and copy assignment.
+ * If a custom copyable allocator is provided,
+ * GrowableAllocator will automatically support copy construction and copy assignment.
  *
  * @tparam Allocator The underlying allocator type to wrap
  */
@@ -554,8 +554,8 @@ template <typename T, typename... Args>
 inline T* GrowableAllocator<Allocator>::AllocateAndConstruct(Args&&... args) noexcept(
     std::is_nothrow_constructible_v<T, Args...>) {
   T* ptr = Allocate<T>();
-  if (ptr != nullptr) {
-    ::new (static_cast<void*>(ptr)) T(std::forward<Args>(args)...);
+  if (ptr != nullptr) [[likely]] {
+    std::construct_at(ptr, std::forward<Args>(args)...);
   }
   return ptr;
 }
@@ -566,9 +566,9 @@ template <typename T>
 inline T* GrowableAllocator<Allocator>::AllocateAndConstructArray(size_t count) noexcept(
     std::is_nothrow_default_constructible_v<T>) {
   T* ptr = Allocate<T>(count);
-  if (ptr != nullptr) {
+  if (ptr != nullptr) [[likely]] {
     for (size_t i = 0; i < count; ++i) {
-      ::new (static_cast<void*>(ptr + i)) T{};
+      std::construct_at(ptr + i);
     }
   }
   return ptr;
