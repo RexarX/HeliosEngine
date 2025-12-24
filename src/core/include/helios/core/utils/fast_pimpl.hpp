@@ -32,21 +32,24 @@ public:
     std::construct_at(Impl(), std::forward<Args>(args)...);
   }
 
-  constexpr FastPimpl(const FastPimpl& other) noexcept(std::is_nothrow_copy_constructible_v<T>) : FastPimpl(*other) {}
-  constexpr FastPimpl(FastPimpl&& other) noexcept(std::is_nothrow_move_constructible_v<T>)
+  constexpr FastPimpl(const FastPimpl& other) noexcept(noexcept(FastPimpl(std::declval<const T&>())))
+      : FastPimpl(*other) {}
+
+  constexpr FastPimpl(FastPimpl&& other) noexcept(noexcept(FastPimpl(std::declval<T&&>())))
       : FastPimpl(std::move(*other)) {}
 
-  constexpr ~FastPimpl() noexcept(std::is_nothrow_destructible_v<T>);
+  constexpr ~FastPimpl() noexcept(noexcept(std::destroy_at(std::declval<T*>())));
 
-  constexpr FastPimpl& operator=(const FastPimpl& rhs) noexcept(std::is_nothrow_copy_assignable_v<T>);
-  constexpr FastPimpl& operator=(FastPimpl&& rhs) noexcept(std::is_nothrow_move_assignable_v<T>);
+  constexpr FastPimpl& operator=(const FastPimpl& rhs) noexcept(
+      noexcept(std::declval<T&>() = std::declval<const T&>()));
+  constexpr FastPimpl& operator=(FastPimpl&& rhs) noexcept(noexcept(std::declval<T&>() = std::declval<T&&>()));
 
   /**
    * @brief Copy-assigns from a T instance.
    * @param value Source value
    * @return Reference to this instance
    */
-  constexpr FastPimpl& operator=(const T& value) noexcept(std::is_nothrow_copy_assignable_v<T>)
+  constexpr FastPimpl& operator=(const T& value) noexcept(noexcept(std::declval<T&>() = std::declval<const T&>()))
     requires std::copy_constructible<T>;
 
   /**
@@ -54,7 +57,7 @@ public:
    * @param value Source value
    * @return Reference to this instance
    */
-  constexpr FastPimpl& operator=(T&& value) noexcept(std::is_nothrow_move_assignable_v<T>)
+  constexpr FastPimpl& operator=(T&& value) noexcept(noexcept(std::declval<T&>() = std::declval<T&&>()))
     requires std::move_constructible<T>;
 
   constexpr T* operator->() noexcept { return Impl(); }
@@ -72,14 +75,15 @@ private:
 };
 
 template <class T, size_t Size, size_t Alignment, bool RequireStrictMatch>
-constexpr FastPimpl<T, Size, Alignment, RequireStrictMatch>::~FastPimpl() noexcept(std::is_nothrow_destructible_v<T>) {
+constexpr FastPimpl<T, Size, Alignment, RequireStrictMatch>::~FastPimpl() noexcept(
+    noexcept(std::destroy_at(std::declval<T*>()))) {
   ValidateConstraints();
   std::destroy_at(Impl());
 }
 
 template <class T, size_t Size, size_t Alignment, bool RequireStrictMatch>
 constexpr auto FastPimpl<T, Size, Alignment, RequireStrictMatch>::operator=(const FastPimpl& rhs) noexcept(
-    std::is_nothrow_copy_assignable_v<T>) -> FastPimpl& {
+    noexcept(std::declval<T&>() = std::declval<const T&>())) -> FastPimpl& {
   if (this != &rhs) [[likely]] {
     *Impl() = *rhs;
   }
@@ -88,7 +92,7 @@ constexpr auto FastPimpl<T, Size, Alignment, RequireStrictMatch>::operator=(cons
 
 template <class T, size_t Size, size_t Alignment, bool RequireStrictMatch>
 constexpr auto FastPimpl<T, Size, Alignment, RequireStrictMatch>::operator=(FastPimpl&& rhs) noexcept(
-    std::is_nothrow_move_assignable_v<T>) -> FastPimpl& {
+    noexcept(std::declval<T&>() = std::declval<T&&>())) -> FastPimpl& {
   if (this != &rhs) [[likely]] {
     *Impl() = std::move(*rhs);
   }
@@ -97,7 +101,7 @@ constexpr auto FastPimpl<T, Size, Alignment, RequireStrictMatch>::operator=(Fast
 
 template <class T, size_t Size, size_t Alignment, bool RequireStrictMatch>
 constexpr auto FastPimpl<T, Size, Alignment, RequireStrictMatch>::operator=(const T& value) noexcept(
-    std::is_nothrow_copy_assignable_v<T>) -> FastPimpl&
+    noexcept(std::declval<T&>() = std::declval<const T&>())) -> FastPimpl&
   requires std::copy_constructible<T>
 {
   if (Impl() != &value) [[likely]] {
@@ -108,7 +112,7 @@ constexpr auto FastPimpl<T, Size, Alignment, RequireStrictMatch>::operator=(cons
 
 template <class T, size_t Size, size_t Alignment, bool RequireStrictMatch>
 constexpr auto FastPimpl<T, Size, Alignment, RequireStrictMatch>::operator=(T&& value) noexcept(
-    std::is_nothrow_move_assignable_v<T>) -> FastPimpl&
+    noexcept(std::declval<T&>() = std::declval<T&&>())) -> FastPimpl&
   requires std::move_constructible<T>
 {
   if (Impl() != &value) [[likely]] {

@@ -1,35 +1,35 @@
 name: Build and Deploy Doxygen Docs
 
 on:
-  push:
-    branches:
-      - main # Add or remove branches as needed
+    push:
+        branches:
+            - main # Add or remove branches as needed
 
 permissions:
-  contents: write
+    contents: write
 
 jobs:
-  doxygen-docs:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository (with submodules)
-        uses: actions/checkout@v4
-        with:
-          submodules: recursive
-          fetch-depth: 0
+    doxygen-docs:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository (with submodules)
+              uses: actions/checkout@v4
+              with:
+                  submodules: recursive
+                  fetch-depth: 0
 
-      - name: Install Doxygen and Graphviz
-        run: sudo apt-get update && sudo apt-get install -y doxygen graphviz
+            - name: Install Doxygen and Graphviz
+              run: sudo apt-get update && sudo apt-get install -y doxygen graphviz
 
-      - name: Build Doxygen documentation
-        working-directory: docs/doxygen
-        run: doxygen Doxyfile
+            - name: Build Doxygen documentation
+              working-directory: docs/doxygen
+              run: doxygen Doxyfile
 
-      - name: Deploy to gh-pages branch
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: docs/doxygen/html
-          publish_branch: gh-pages
-          destination_dir: ${{ github.ref_name }}
-          keep_files: true
+            - name: Deploy to gh-pages branch
+              uses: peaceiris/actions-gh-pages@v4
+              with:
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  publish_dir: docs/doxygen/html
+                  publish_branch: gh-pages
+                  destination_dir: ${{ github.ref_name }}
+                  keep_files: true

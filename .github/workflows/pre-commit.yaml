@@ -1,111 +1,111 @@
 name: Pre-Commit Checks
 
 on:
-  pull_request:
-    types: [opened, synchronize, reopened]
+    pull_request:
+        types: [opened, synchronize, reopened]
 
 permissions:
-  contents: read
-  pull-requests: write
+    contents: read
+    pull-requests: write
 
 jobs:
-  # ============================================================================
-  # Pre-Commit Format Check
-  # ============================================================================
-  pre-commit-format:
-    name: Format Check
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          submodules: recursive
-          fetch-depth: 0
-          ref: ${{ github.event.pull_request.head.sha }}
+    # ============================================================================
+    # Pre-Commit Format Check
+    # ============================================================================
+    pre-commit-format:
+        name: Format Check
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+              with:
+                  submodules: recursive
+                  fetch-depth: 0
+                  ref: ${{ github.event.pull_request.head.sha }}
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
+            - name: Setup Python
+              uses: actions/setup-python@v5
+              with:
+                  python-version: "3.11"
 
-      - name: Install clang-format
-        run: |
-          wget https://apt.llvm.org/llvm.sh
-          chmod +x llvm.sh
-          sudo ./llvm.sh 21
-          sudo apt-get install -y clang-format-21
-          sudo ln -sf /usr/bin/clang-format-21 /usr/bin/clang-format
+            - name: Install clang-format
+              run: |
+                  wget https://apt.llvm.org/llvm.sh
+                  chmod +x llvm.sh
+                  sudo ./llvm.sh 21
+                  sudo apt-get install -y clang-format-21
+                  sudo ln -sf /usr/bin/clang-format-21 /usr/bin/clang-format
 
-      - name: Get changed files
-        id: changed-files
-        uses: tj-actions/changed-files@v41
-        with:
-          files: |
-            src/**/*.cpp
-            src/**/*.hpp
-            src/**/*.h
-            tests/**/*.cpp
-            tests/**/*.hpp
-            examples/**/*.cpp
-            examples/**/*.hpp
+            - name: Get changed files
+              id: changed-files
+              uses: tj-actions/changed-files@v41
+              with:
+                  files: |
+                      src/**/*.cpp
+                      src/**/*.hpp
+                      src/**/*.h
+                      tests/**/*.cpp
+                      tests/**/*.hpp
+                      examples/**/*.cpp
+                      examples/**/*.hpp
 
-      - name: Check formatting of changed files
-        if: steps.changed-files.outputs.any_changed == 'true'
-        run: |
-          echo "Checking formatting for changed files..."
-          echo ""
-          python3 scripts/format.py --check ${{ steps.changed-files.outputs.all_changed_files }}
+            - name: Check formatting of changed files
+              if: steps.changed-files.outputs.any_changed == 'true'
+              run: |
+                  echo "Checking formatting for changed files..."
+                  echo ""
+                  python3 scripts/format.py --check ${{ steps.changed-files.outputs.all_changed_files }}
 
-      - name: Comment on PR (if formatting fails)
-        if: failure()
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const issue_number = context.issue.number;
-            const body = `## ❌ Code Formatting Check Failed
+            - name: Comment on PR (if formatting fails)
+              if: failure()
+              uses: actions/github-script@v7
+              with:
+                  script: |
+                      const issue_number = context.issue.number;
+                      const body = `## ❌ Code Formatting Check Failed
 
-            Some files in this PR do not follow the project's formatting guidelines.
+                      Some files in this PR do not follow the project's formatting guidelines.
 
-            ### How to fix:
+                      ### How to fix:
 
-            Run the formatting script locally (requires clang-format 21+):
-            \`\`\`bash
-            python scripts/format.py
-            \`\`\`
+                      Run the formatting script locally (requires clang-format 21+):
+                      \`\`\`bash
+                      python scripts/format.py
+                      \`\`\`
 
-            Or manually format the files:
-            \`\`\`bash
-            clang-format -i -style=file <file>
-            \`\`\`
+                      Or manually format the files:
+                      \`\`\`bash
+                      clang-format -i -style=file <file>
+                      \`\`\`
 
-            Then commit and push the changes.
+                      Then commit and push the changes.
 
-            **Note:** Make sure you're using clang-format version 21+. Check with \`clang-format --version\`.
+                      **Note:** Make sure you're using clang-format version 21+. Check with \`clang-format --version\`.
 
-            ### CI will automatically re-check once you push the fixes.
-            `;
+                      ### CI will automatically re-check once you push the fixes.
+                      `;
 
-            github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: issue_number,
-              body: body
-            });
+                      github.rest.issues.createComment({
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        issue_number: issue_number,
+                        body: body
+                      });
 
-      - name: Comment on PR (if formatting passes)
-        if: success() && steps.changed-files.outputs.any_changed == 'true'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const issue_number = context.issue.number;
-            const body = `## ✅ Code Formatting Check Passed
+            - name: Comment on PR (if formatting passes)
+              if: success() && steps.changed-files.outputs.any_changed == 'true'
+              uses: actions/github-script@v7
+              with:
+                  script: |
+                      const issue_number = context.issue.number;
+                      const body = `## ✅ Code Formatting Check Passed
 
-            All files in this PR follow the project's formatting guidelines.
-            `;
+                      All files in this PR follow the project's formatting guidelines.
+                      `;
 
-            github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: issue_number,
-              body: body
-            });
+                      github.rest.issues.createComment({
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        issue_number: issue_number,
+                        body: body
+                      });
