@@ -84,7 +84,7 @@ jobs:
 
       - name: Install project dependencies
         run: |
-          python3 scripts/install_deps.py --no-conan --no-interactive
+          python3 scripts/install_deps.py --use-system --no-interactive
 
       - name: Configure CMake
         run: |
@@ -160,7 +160,7 @@ jobs:
 
       - name: Install project dependencies
         run: |
-          python3 scripts/install_deps.py --no-conan --no-interactive
+          python3 scripts/install_deps.py --use-system --no-interactive
 
       - name: Configure CMake
         run: |
@@ -290,7 +290,7 @@ jobs:
 
       - name: Install project dependencies
         run: |
-          python3 scripts/install_deps.py --no-conan --no-interactive
+          python3 scripts/install_deps.py --use-system --no-interactive
 
       - name: Configure CMake
         run: |

@@ -905,12 +905,12 @@ class DependencyInstaller:
         # Define package mappings
         # Note: TBB is included for Linux because libstdc++ (GCC) parallel STL requires it
         packages = {
-            "apt": ["libboost-all-dev", "libspdlog-dev", "cmake", "git"],
-            "dnf": ["boost-devel", "spdlog-devel", "cmake", "git"],
-            "yum": ["boost-devel", "spdlog-devel", "cmake", "git"],
-            "pacman": ["boost", "spdlog", "cmake", "git"],
-            "zypper": ["boost-devel", "spdlog-devel", "cmake", "git"],
-            "brew": ["boost", "spdlog", "cmake", "git"],
+            "apt": ["libboost-all-dev", "libspdlog-dev", "doctest-dev", "cmake", "git"],
+            "dnf": ["boost-devel", "spdlog-devel", "doctest-devel", "cmake", "git"],
+            "yum": ["boost-devel", "spdlog-devel", "doctest-devel", "cmake", "git"],
+            "pacman": ["boost", "spdlog", "doctest", "cmake", "git"],
+            "zypper": ["boost-devel", "spdlog-devel", "doctest-devel", "cmake", "git"],
+            "brew": ["boost", "spdlog", "doctest", "cmake", "git"],
             "choco": ["boost-msvc-14.3", "spdlog", "cmake", "git", "llvm"],
             "scoop": ["cmake", "git", "llvm"],
         }
@@ -940,7 +940,7 @@ class DependencyInstaller:
 
         if not ask_yes_no(
             f"Install system packages using {self.package_manager}?",
-            default=False,
+            default=True,
             interactive=self.interactive,
         ):
             print_info("Skipping system package installation")
