@@ -1,4 +1,4 @@
-name: CI
+name: Build & Test
 
 on:
   push:
@@ -18,41 +18,20 @@ concurrency:
 
 jobs:
   # ============================================================================
-  # Code Formatting Check
-  # ============================================================================
-  format-check:
-    name: Format Check (clang-format)
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        path:
-          - "src"
-          - "tests"
-          - "examples"
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          submodules: recursive
-
-      - name: Run clang-format style check
-        uses: jidicula/clang-format-action@v4.16.0
-        with:
-          clang-format-version: "21"
-          check-path: ${{ matrix.path }}
-          exclude-regex: "(third-party)"
-
-  # ============================================================================
   # Build and Test - Linux GCC (Latest)
   # ============================================================================
   build-linux-gcc:
-    name: Build & Test (Linux GCC)
+    name: Linux GCC (${{ matrix.build_type }})
     runs-on: ubuntu-24.04
-    needs: format-check
     strategy:
       fail-fast: false
       matrix:
-        build_type: [Debug, Release]
+        build_type: [debug, release]
+        include:
+          - build_type: debug
+            cmake_type: Debug
+          - build_type: release
+            cmake_type: Release
 
     env:
       CC: gcc
@@ -89,7 +68,7 @@ jobs:
         run: |
           python3 scripts/configure.py \
             --compiler gcc \
-            --type ${{ matrix.build_type }} \
+            --type ${{ matrix.cmake_type }} \
             --build-system Ninja \
             --no-interactive
 
@@ -97,9 +76,8 @@ jobs:
         run: |
           python3 scripts/build.py \
             --compiler gcc \
-            --type ${{ matrix.build_type }} \
+            --type ${{ matrix.cmake_type }} \
             --build-system Ninja \
-            --core-only \
             --tests \
             --no-examples \
             --no-interactive
@@ -120,13 +98,17 @@ jobs:
   # Build and Test - Linux Clang (Latest)
   # ============================================================================
   build-linux-clang:
-    name: Build & Test (Linux Clang)
+    name: Linux Clang (${{ matrix.build_type }})
     runs-on: ubuntu-24.04
-    needs: format-check
     strategy:
       fail-fast: false
       matrix:
-        build_type: [Debug, Release]
+        build_type: [debug, release]
+        include:
+          - build_type: debug
+            cmake_type: Debug
+          - build_type: release
+            cmake_type: Release
 
     env:
       CC: clang
@@ -164,7 +146,7 @@ jobs:
         run: |
           python3 scripts/configure.py \
             --compiler clang \
-            --type ${{ matrix.build_type }} \
+            --type ${{ matrix.cmake_type }} \
             --build-system Ninja \
             --no-interactive
 
@@ -172,9 +154,8 @@ jobs:
         run: |
           python3 scripts/build.py \
             --compiler clang \
-            --type ${{ matrix.build_type }} \
+            --type ${{ matrix.cmake_type }} \
             --build-system Ninja \
-            --core-only \
             --tests \
             --no-examples \
             --no-interactive
@@ -195,13 +176,17 @@ jobs:
   # Build and Test - Windows MSVC (Latest)
   # ============================================================================
   build-windows-msvc:
-    name: Build & Test (Windows MSVC)
+    name: Windows MSVC (${{ matrix.build_type }})
     runs-on: windows-latest
-    needs: format-check
     strategy:
       fail-fast: false
       matrix:
-        build_type: [Debug, Release]
+        build_type: [debug, release]
+        include:
+          - build_type: debug
+            cmake_type: Debug
+          - build_type: release
+            cmake_type: Release
 
     steps:
       - name: Checkout repository
@@ -228,7 +213,7 @@ jobs:
         run: |
           python scripts/configure.py `
             --compiler cl `
-            --type ${{ matrix.build_type }} `
+            --type ${{ matrix.cmake_type }} `
             --build-system Ninja `
             --no-interactive
 
@@ -236,9 +221,8 @@ jobs:
         run: |
           python scripts/build.py `
             --compiler cl `
-            --type ${{ matrix.build_type }} `
+            --type ${{ matrix.cmake_type }} `
             --build-system Ninja `
-            --core-only `
             --tests `
             --no-examples `
             --no-interactive
@@ -259,13 +243,17 @@ jobs:
   # Build and Test - macOS (Latest)
   # ============================================================================
   build-macos:
-    name: Build & Test (macOS Clang)
+    name: macOS Clang (${{ matrix.build_type }})
     runs-on: macos-latest
-    needs: format-check
     strategy:
       fail-fast: false
       matrix:
-        build_type: [Debug, Release]
+        build_type: [debug, release]
+        include:
+          - build_type: debug
+            cmake_type: Debug
+          - build_type: release
+            cmake_type: Release
 
     steps:
       - name: Checkout repository
@@ -291,7 +279,7 @@ jobs:
         run: |
           python3 scripts/configure.py \
             --compiler clang \
-            --type ${{ matrix.build_type }} \
+            --type ${{ matrix.cmake_type }} \
             --build-system Ninja \
             --no-interactive
 
@@ -299,9 +287,8 @@ jobs:
         run: |
           python3 scripts/build.py \
             --compiler clang \
-            --type ${{ matrix.build_type }} \
+            --type ${{ matrix.cmake_type }} \
             --build-system Ninja \
-            --core-only \
             --tests \
             --no-examples \
             --no-interactive
@@ -321,11 +308,10 @@ jobs:
   # ============================================================================
   # Summary Job - Required for Branch Protection
   # ============================================================================
-  ci-success:
-    name: CI Success
+  build-success:
+    name: Build Success
     runs-on: ubuntu-latest
     needs:
-      - format-check
       - build-linux-gcc
       - build-linux-clang
       - build-windows-msvc
@@ -334,10 +320,6 @@ jobs:
     steps:
       - name: Check all jobs
         run: |
-          if [[ "${{ needs.format-check.result }}" != "success" ]]; then
-            echo "❌ Format check failed"
-            exit 1
-          fi
           if [[ "${{ needs.build-linux-gcc.result }}" != "success" ]]; then
             echo "❌ Linux GCC build failed"
             exit 1
@@ -354,8 +336,8 @@ jobs:
             echo "❌ macOS build failed"
             exit 1
           fi
-          echo "✅ All CI checks passed!"
+          echo "✅ All builds passed!"
 
       - name: Report Success
         run: |
-          echo "::notice::All CI checks passed successfully!"
+          echo "::notice::All build and test checks passed successfully!"

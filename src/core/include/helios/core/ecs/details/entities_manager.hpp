@@ -257,7 +257,11 @@ inline void Entities::Destroy(const R& entities) {
   }
 
   if (!batch.empty()) {
-    free_indices_.insert_range(free_indices_.end(), batch);
+#ifdef HELIOS_CONTAINERS_RANGES_AVALIABLE
+    free_indices_.append_range(batch);
+#else
+    free_indices_.insert(free_indices_.end(), batch.begin(), batch.end());
+#endif
     free_cursor_.store(static_cast<int64_t>(free_indices_.size()), std::memory_order_relaxed);
     entity_count_.fetch_sub(batch.size(), std::memory_order_relaxed);
   }

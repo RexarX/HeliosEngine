@@ -11,6 +11,7 @@
 #include <helios/core/assert.hpp>
 #include <helios/core/async/executor.hpp>
 #include <helios/core/async/task_graph.hpp>
+#include <helios/core/core.hpp>
 #include <helios/core/ecs/event.hpp>
 #include <helios/core/ecs/resource.hpp>
 #include <helios/core/ecs/system.hpp>
@@ -47,8 +48,13 @@ enum class AppExitCode : uint8_t {
  */
 class App {
 public:
+#ifdef HELIOS_MOVEONLY_FUNCTION_AVALIABLE
   using RunnerFn = std::move_only_function<AppExitCode(App&)>;
   using ExtractFn = std::move_only_function<void(const ecs::World&, ecs::World&)>;
+#else
+  using RunnerFn = std::function<AppExitCode(App&)>;
+  using ExtractFn = std::function<void(const ecs::World&, ecs::World&)>;
+#endif
 
   App() = default;
   App(const App&) = delete;

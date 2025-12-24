@@ -1,12 +1,5 @@
 cmake_minimum_required(VERSION 3.25)
 
-# Set default build type to Release if not specified
-if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
-    set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose the type of build." FORCE)
-    set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release" "RelWithDebInfo")
-    message(STATUS "Setting build type to 'Release' as none was specified.")
-endif()
-
 # Early Conan toolchain detection (before project())
 # HELIOS_USE_CONAN can be set via command line: -DHELIOS_USE_CONAN=ON/OFF
 # If not set, we auto-detect based on toolchain file existence
@@ -59,6 +52,15 @@ project(HeliosEngine
     HOMEPAGE_URL "https://github.com/RexarX/HeliosEngine"
     LANGUAGES CXX
 )
+
+# Set default build type to Release if not specified
+# This is placed after project() to ensure command-line arguments are preserved
+# even if CMake clears the cache mid-run due to compiler changes
+if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+    set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose the type of build." FORCE)
+    set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release" "RelWithDebInfo")
+    message(STATUS "Setting build type to 'Release' as none was specified.")
+endif()
 
 # Set archiver tools for Clang to support LTO
 if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
@@ -205,6 +207,12 @@ set(HELIOS_ROOT_DIR ${PROJECT_SOURCE_DIR})
 
 # Include module utilities
 include(cmake/ModuleUtils.cmake)
+
+# For CMake 4.0+ compatibility with older packages that use cmake_minimum_required < 3.5
+# This must be set before including Dependencies.cmake which may download old packages
+if(CMAKE_VERSION VERSION_GREATER_EQUAL "4.0")
+    set(CMAKE_POLICY_VERSION_MINIMUM 3.5 CACHE STRING "Minimum CMake policy version" FORCE)
+endif()
 
 # Dependency management (system -> vcpkg -> CPM fallback)
 include(cmake/Dependencies.cmake)

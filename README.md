@@ -2,10 +2,14 @@
 
 <!-- PROJECT SHIELDS -->
 
-[![CI](https://github.com/RexarX/HeliosEngine/workflows/CI/badge.svg)](https://github.com/RexarX/HeliosEngine/actions/workflows/ci.yaml)
-[![Format Check](https://github.com/RexarX/HeliosEngine/workflows/Pre-Commit%20Checks/badge.svg)](https://github.com/RexarX/HeliosEngine/actions/workflows/pre-commit.yaml)
-[![MIT License][license-shield]][license-url]
 [![C++23][cpp-shield]][cpp-url]
+[![MIT License][license-shield]][license-url]
+
+[![Format Check](https://github.com/RexarX/HeliosEngine/workflows/Format%20Check/badge.svg)](https://github.com/RexarX/HeliosEngine/actions/workflows/format.yaml)
+[![Linux GCC](https://img.shields.io/github/actions/workflow/status/RexarX/HeliosEngine/build-test.yaml?branch=main&label=Linux%20GCC&logo=linux&logoColor=white)](https://github.com/RexarX/HeliosEngine/actions/workflows/build-test.yaml)
+[![Linux Clang](https://img.shields.io/github/actions/workflow/status/RexarX/HeliosEngine/build-test.yaml?branch=main&label=Linux%20Clang&logo=llvm&logoColor=white)](https://github.com/RexarX/HeliosEngine/actions/workflows/build-test.yaml)
+[![Windows MSVC](https://img.shields.io/github/actions/workflow/status/RexarX/HeliosEngine/build-test.yaml?branch=main&label=Windows%20MSVC&logo=windows&logoColor=white)](https://github.com/RexarX/HeliosEngine/actions/workflows/build-test.yaml)
+[![macOS Clang](https://img.shields.io/github/actions/workflow/status/RexarX/HeliosEngine/build-test.yaml?branch=main&label=macOS%20Clang&logo=apple&logoColor=white)](https://github.com/RexarX/HeliosEngine/actions/workflows/build-test.yaml)
 
 <!-- PROJECT LOGO -->
 <br />
@@ -30,17 +34,17 @@
 ## Table of Contents
 
 - [About The Project](#about-the-project)
-  - [Key Features](#key-features)
-  - [Design Philosophy](#design-philosophy)
+    - [Key Features](#key-features)
+    - [Design Philosophy](#design-philosophy)
 - [Architecture](#architecture)
-  - [Entity Component System (ECS)](#entity-component-system-ecs)
-  - [Modular Design](#modular-design)
-  - [Creating Custom Modules](#creating-custom-modules)
+    - [Entity Component System (ECS)](#entity-component-system-ecs)
+    - [Modular Design](#modular-design)
+    - [Creating Custom Modules](#creating-custom-modules)
 - [Getting Started](#getting-started)
-  - [Requirements](#requirements)
-  - [Dependencies](#dependencies)
-  - [Quick Start](#quick-start)
-  - [Build Options](#build-options)
+    - [Requirements](#requirements)
+    - [Dependencies](#dependencies)
+    - [Quick Start](#quick-start)
+    - [Build Options](#build-options)
 - [Usage Examples](#usage-examples)
 - [Core Module](#core-module)
 - [Roadmap](#roadmap)
@@ -213,14 +217,13 @@ helios_define_module(
 | Tool             | Minimum Version                | Recommended        |
 | ---------------- | ------------------------------ | ------------------ |
 | **CMake**        | 3.25+                          | 3.28+              |
-| **C++ Compiler** | GCC 13+, Clang 16+, MSVC 2022+ | GCC 15+, Clang 18+ |
+| **C++ Compiler** | GCC 14+, Clang 19+, MSVC 2022+ | GCC 15+, Clang 20+ |
 | **Python**       | 3.8+                           | 3.10+              |
-| **Ninja**        | Any                            | Latest             |
 
 **Compiler Support:**
 
-- GCC 13+ (tested on 15.2.1)
-- Clang 16+ (tested on 20.1.8)
+- GCC 14+ (tested on 14.2.0)
+- Clang 19+ (tested on 20.1.8)
 - MSVC 19.34+ (Visual Studio 2022 17.4+)
 
 <a name="dependencies"></a>
@@ -229,8 +232,8 @@ helios_define_module(
 
 #### Core Dependencies
 
-- [Boost](https://www.boost.org/) (1.82+) - stacktrace, pool, unordered containers
-- [spdlog](https://github.com/gabime/spdlog) (1.14+) - Fast logging
+- [Boost](https://www.boost.org/) (1.87+) - stacktrace, pool, unordered containers
+- [spdlog](https://github.com/gabime/spdlog) (1.12+) - Fast logging
 - [stduuid](https://github.com/mariusbancila/stduuid) (1.2+) - UUID generation
 - [Taskflow](https://github.com/taskflow/taskflow) (3.10+) - Parallel task programming
 

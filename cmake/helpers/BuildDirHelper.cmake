@@ -3,10 +3,19 @@
 
 include_guard(GLOBAL)
 
-# Get the platform identifier in lowercase
+# Get the platform identifier in lowercase with standardized names
+# Uses: windows, linux, macos (not Darwin)
 function(helios_get_platform_identifier OUTPUT_VAR)
-    string(TOLOWER "${CMAKE_SYSTEM_NAME}" _platform_lower)
-    set(${OUTPUT_VAR} "${_platform_lower}" PARENT_SCOPE)
+    if(WIN32)
+        set(${OUTPUT_VAR} "windows" PARENT_SCOPE)
+    elseif(APPLE)
+        set(${OUTPUT_VAR} "macos" PARENT_SCOPE)
+    elseif(UNIX)
+        set(${OUTPUT_VAR} "linux" PARENT_SCOPE)
+    else()
+        string(TOLOWER "${CMAKE_SYSTEM_NAME}" _platform_lower)
+        set(${OUTPUT_VAR} "${_platform_lower}" PARENT_SCOPE)
+    endif()
 endfunction()
 
 # Get the build type in lowercase

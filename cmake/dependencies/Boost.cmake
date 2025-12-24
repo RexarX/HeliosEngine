@@ -96,7 +96,7 @@ set(_boost_found_via "")
 
 # 1. Try Conan first if using Conan and not preferring system packages
 if(HELIOS_USE_CONAN AND NOT HELIOS_PREFER_SYSTEM_PACKAGES)
-    find_package(Boost 1.82 QUIET CONFIG)
+    find_package(Boost 1.87 QUIET CONFIG)
     if(Boost_FOUND)
         set(_boost_found_via "Conan")
     endif()
@@ -105,15 +105,15 @@ endif()
 # 2. Try system package manager if not found via Conan
 if(NOT Boost_FOUND)
     # Try CONFIG mode first (modern CMake packages like Arch Linux, Ubuntu 22.04+)
-    find_package(Boost 1.82 QUIET CONFIG)
+    find_package(Boost 1.87 QUIET CONFIG)
     if(Boost_FOUND)
         set(_boost_found_via "system (CONFIG)")
     else()
         # Fall back to MODULE mode with specific components
         if(HELIOS_BOOST_REQUIRED_COMPONENTS)
-            find_package(Boost 1.82 QUIET COMPONENTS ${HELIOS_BOOST_REQUIRED_COMPONENTS})
+            find_package(Boost 1.87 QUIET COMPONENTS ${HELIOS_BOOST_REQUIRED_COMPONENTS})
         else()
-            find_package(Boost 1.82 QUIET)
+            find_package(Boost 1.87 QUIET)
         endif()
         if(Boost_FOUND)
             set(_boost_found_via "system (MODULE)")
@@ -169,6 +169,12 @@ if(Boost_FOUND)
     if(NOT TARGET helios::boost_unordered)
         add_library(helios::boost_unordered INTERFACE IMPORTED GLOBAL)
         target_link_libraries(helios::boost_unordered INTERFACE Boost::boost)
+
+        # Manually add unordered include path if found via system
+        if(Boost_INCLUDE_DIRS)
+            # System Boost should already have all headers accessible
+            # No need to add extra paths
+        endif()
     endif()
 
     # Mark as found for dependency tracking
@@ -182,7 +188,7 @@ else()
         if(HELIOS_USE_STL_STACKTRACE)
             set(_boost_include_libs "unordered")
         else()
-            set(_boost_include_libs "stacktrace\\\\;unordered")
+            set(_boost_include_libs "stacktrace;unordered")
         endif()
 
         include(DownloadUsingCPM)
@@ -233,12 +239,36 @@ else()
             if(NOT TARGET helios::boost_unordered)
                 add_library(helios::boost_unordered INTERFACE IMPORTED GLOBAL)
                 target_link_libraries(helios::boost_unordered INTERFACE helios::boost)
+
+                # Manually add unordered include path since BOOST_INCLUDE_LIBRARIES doesn't always set it up
+                if(Boost_SOURCE_DIR AND EXISTS "${Boost_SOURCE_DIR}/libs/unordered/include")
+                    target_include_directories(helios::boost_unordered SYSTEM INTERFACE
+                        "${Boost_SOURCE_DIR}/libs/unordered/include"
+                    )
+                endif()
+            endif()
+
+            # Mark Boost targets as SYSTEM to suppress warnings
+            if(TARGET Boost::boost)
+                helios_cpm_mark_as_system(Boost::boost)
+            endif()
+            if(TARGET Boost::stacktrace)
+                helios_cpm_mark_as_system(Boost::stacktrace)
+            endif()
+            if(TARGET Boost::stacktrace_backtrace)
+                helios_cpm_mark_as_system(Boost::stacktrace_backtrace)
+            endif()
+            if(TARGET Boost::stacktrace_addr2line)
+                helios_cpm_mark_as_system(Boost::stacktrace_addr2line)
+            endif()
+            if(TARGET Boost::stacktrace_basic)
+                helios_cpm_mark_as_system(Boost::stacktrace_basic)
             endif()
         endif()
 
         # Mark as found for dependency tracking
         list(APPEND _HELIOS_DEPENDENCIES_FOUND "Boost")
-        list(APPEND CPM_PACKAGES "Boost 1.82.0")
+        list(APPEND CPM_PACKAGES "Boost")
     else()
         message(WARNING "  ✗ Boost not found and HELIOS_DOWNLOAD_PACKAGES is OFF. Consider enabling HELIOS_DOWNLOAD_PACKAGES or manually providing the required Boost components.")
     endif()

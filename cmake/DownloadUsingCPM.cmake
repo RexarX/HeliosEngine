@@ -8,21 +8,56 @@ set(CPM_DOWNLOAD_VERSION 0.40.2 CACHE STRING "CPM version to download")
 set(CPM_SOURCE_CACHE "${CMAKE_SOURCE_DIR}/.cpm_cache" CACHE PATH "CPM source cache directory")
 set(CPM_USE_LOCAL_PACKAGES ON CACHE BOOL "Try to use local packages before downloading")
 
-# Download CPM.cmake if not already available
-if(NOT EXISTS "${CMAKE_BINARY_DIR}/cmake/CPM.cmake")
+# Determine CPM.cmake location
+set(_cpm_path "")
+
+# 1. Check if already in build directory
+if(EXISTS "${CMAKE_BINARY_DIR}/cmake/CPM.cmake")
+    file(SIZE "${CMAKE_BINARY_DIR}/cmake/CPM.cmake" _cpm_size)
+    if(_cpm_size GREATER 0)
+        set(_cpm_path "${CMAKE_BINARY_DIR}/cmake/CPM.cmake")
+    endif()
+endif()
+
+# 2. Check source tree for vendored copy
+if(NOT _cpm_path AND EXISTS "${CMAKE_SOURCE_DIR}/cmake/CPM.cmake")
+    file(SIZE "${CMAKE_SOURCE_DIR}/cmake/CPM.cmake" _cpm_size)
+    if(_cpm_size GREATER 0)
+        set(_cpm_path "${CMAKE_SOURCE_DIR}/cmake/CPM.cmake")
+        message(STATUS "Using vendored CPM.cmake from source tree")
+    endif()
+endif()
+
+# 3. Download if not found
+if(NOT _cpm_path)
     message(STATUS "Downloading CPM.cmake v${CPM_DOWNLOAD_VERSION}...")
 
     file(
         DOWNLOAD
         "https://github.com/cpm-cmake/CPM.cmake/releases/download/v${CPM_DOWNLOAD_VERSION}/CPM.cmake"
         "${CMAKE_BINARY_DIR}/cmake/CPM.cmake"
-        EXPECTED_HASH SHA256=c8cdc32c03816538ce22781ed72964dc864b2a34a310d3b7104812a5ca2d835d
+        STATUS _cpm_download_status
         SHOW_PROGRESS
     )
+
+    # Check download status
+    list(GET _cpm_download_status 0 _cpm_status_code)
+    list(GET _cpm_download_status 1 _cpm_status_message)
+
+    if(NOT _cpm_status_code EQUAL 0)
+        message(FATAL_ERROR "Failed to download CPM.cmake: ${_cpm_status_message}\nPlease check your network connection or manually place CPM.cmake in ${CMAKE_BINARY_DIR}/cmake/ or ${CMAKE_SOURCE_DIR}/cmake/")
+    else()
+        # Verify the hash only on successful download
+        file(SHA256 "${CMAKE_BINARY_DIR}/cmake/CPM.cmake" _cpm_hash)
+        if(NOT _cpm_hash STREQUAL "c8cdc32c03816538ce22781ed72964dc864b2a34a310d3b7104812a5ca2d835d")
+            message(WARNING "CPM.cmake hash mismatch. Expected: c8cdc32c03816538ce22781ed72964dc864b2a34a310d3b7104812a5ca2d835d, Got: ${_cpm_hash}")
+        endif()
+        set(_cpm_path "${CMAKE_BINARY_DIR}/cmake/CPM.cmake")
+    endif()
 endif()
 
 # Include CPM
-include("${CMAKE_BINARY_DIR}/cmake/CPM.cmake")
+include("${_cpm_path}")
 
 # Track downloaded packages
 if(NOT DEFINED CPM_PACKAGES)
@@ -84,41 +119,15 @@ macro(helios_cpm_add_package)
         list(APPEND CPM_PACKAGES ${CPM_ARG_NAME})
         set(CPM_PACKAGES "${CPM_PACKAGES}" CACHE INTERNAL "List of packages downloaded via CPM")
 
+        # Store the version that was actually requested for this package
+        if(CPM_ARG_VERSION)
+            set(CPM_${CPM_ARG_NAME}_VERSION "${CPM_ARG_VERSION}" CACHE INTERNAL "CPM version for ${CPM_ARG_NAME}")
+        endif()
+
         message(STATUS "Downloaded ${CPM_ARG_NAME} via CPM")
 
-        # Mark as system to suppress warnings (unless explicitly disabled)
-        if((CPM_ARG_SYSTEM OR NOT DEFINED CPM_ARG_SYSTEM) AND ${CPM_ARG_NAME}_SOURCE_DIR)
-            if(EXISTS "${${CPM_ARG_NAME}_SOURCE_DIR}")
-                set_property(
-                    DIRECTORY "${${CPM_ARG_NAME}_SOURCE_DIR}"
-                    PROPERTY SYSTEM TRUE
-                )
-
-                # Also mark all subdirectories
-                file(GLOB_RECURSE _subdirs "${${CPM_ARG_NAME}_SOURCE_DIR}/*CMakeLists.txt")
-                foreach(_subdir ${_subdirs})
-                    get_filename_component(_dir "${_subdir}" DIRECTORY)
-                    set_property(DIRECTORY "${_dir}" PROPERTY SYSTEM TRUE)
-                endforeach()
-
-                # Mark all targets from this package with SYSTEM includes
-                get_directory_property(_cpm_targets DIRECTORY "${${CPM_ARG_NAME}_SOURCE_DIR}" BUILDSYSTEM_TARGETS)
-                foreach(_target ${_cpm_targets})
-                    if(TARGET ${_target})
-                        get_target_property(_target_type ${_target} TYPE)
-                        # Only process library targets
-                        if(_target_type MATCHES "INTERFACE_LIBRARY|STATIC_LIBRARY|SHARED_LIBRARY|MODULE_LIBRARY|OBJECT_LIBRARY")
-                            get_target_property(_target_includes ${_target} INTERFACE_INCLUDE_DIRECTORIES)
-                            if(_target_includes AND NOT _target_includes STREQUAL "_target_includes-NOTFOUND")
-                                set_target_properties(${_target} PROPERTIES
-                                    INTERFACE_SYSTEM_INCLUDE_DIRECTORIES "${_target_includes}"
-                                )
-                            endif()
-                        endif()
-                    endif()
-                endforeach()
-            endif()
-        endif()
+        # Note: SYSTEM marking is deferred - use helios_cpm_mark_as_system() function
+        # after the package is fully processed to mark specific targets as system includes
     endif()
 
     unset(_cpm_args)
@@ -131,8 +140,10 @@ function(helios_print_cpm_packages)
         list(REMOVE_DUPLICATES CPM_PACKAGES)
         list(SORT CPM_PACKAGES)
         foreach(_pkg ${CPM_PACKAGES})
-            if(${_pkg}_VERSION)
-                message(STATUS "  ↓ ${_pkg} ${${_pkg}_VERSION}")
+            # Use CPM's stored version instead of the package's version variable
+            # to avoid stale cached values from find_package() attempts
+            if(CPM_${_pkg}_VERSION)
+                message(STATUS "  ↓ ${_pkg} ${CPM_${_pkg}_VERSION}")
             else()
                 message(STATUS "  ↓ ${_pkg}")
             endif()
@@ -174,9 +185,17 @@ endfunction()
 # This function can be called manually if automatic marking doesn't work
 function(helios_cpm_mark_as_system target)
     if(TARGET ${target})
-        get_target_property(_include_dirs ${target} INTERFACE_INCLUDE_DIRECTORIES)
+        # Resolve ALIAS targets to their actual target
+        get_target_property(_aliased_target ${target} ALIASED_TARGET)
+        if(_aliased_target)
+            set(_actual_target ${_aliased_target})
+        else()
+            set(_actual_target ${target})
+        endif()
+
+        get_target_property(_include_dirs ${_actual_target} INTERFACE_INCLUDE_DIRECTORIES)
         if(_include_dirs AND NOT _include_dirs STREQUAL "_include_dirs-NOTFOUND")
-            set_target_properties(${target} PROPERTIES
+            set_target_properties(${_actual_target} PROPERTIES
                 INTERFACE_SYSTEM_INCLUDE_DIRECTORIES "${_include_dirs}"
             )
             message(STATUS "Marked ${target} with SYSTEM includes")

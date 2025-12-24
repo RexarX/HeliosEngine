@@ -475,29 +475,8 @@ macro(_helios_cpm_add_package)
 
     CPMAddPackage(${_cpm_args})
 
-    # Mark as system to suppress warnings
-    if(${HELIOS_PKG_CPM_NAME}_SOURCE_DIR)
-        set_property(DIRECTORY ${${HELIOS_PKG_CPM_NAME}_SOURCE_DIR} PROPERTY SYSTEM TRUE)
-
-        # Also mark all targets from this package as SYSTEM
-        if(${HELIOS_PKG_CPM_NAME}_ADDED)
-            # Get all targets defined in the source directory
-            get_directory_property(_cpm_targets DIRECTORY ${${HELIOS_PKG_CPM_NAME}_SOURCE_DIR} BUILDSYSTEM_TARGETS)
-            foreach(_target ${_cpm_targets})
-                if(TARGET ${_target})
-                    get_target_property(_target_type ${_target} TYPE)
-                    if(_target_type MATCHES "INTERFACE_LIBRARY|STATIC_LIBRARY|SHARED_LIBRARY|MODULE_LIBRARY|OBJECT_LIBRARY")
-                        get_target_property(_target_includes ${_target} INTERFACE_INCLUDE_DIRECTORIES)
-                        if(_target_includes)
-                            set_target_properties(${_target} PROPERTIES
-                                INTERFACE_SYSTEM_INCLUDE_DIRECTORIES "${_target_includes}"
-                            )
-                        endif()
-                    endif()
-                endif()
-            endforeach()
-        endif()
-    endif()
+    # Note: SYSTEM marking for CPM packages is handled per-target basis
+    # Use helios_cpm_mark_as_system() after package is added if needed
 
     unset(_cpm_args)
 endmacro()

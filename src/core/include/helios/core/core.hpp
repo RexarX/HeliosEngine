@@ -131,3 +131,11 @@
 #define HELIOS_EXPECT_TRUE(x) (x)
 #define HELIOS_EXPECT_FALSE(x) (x)
 #endif
+
+#if defined(__cpp_lib_move_only_function) && __cpp_lib_move_only_function >= 202110L
+#define HELIOS_MOVEONLY_FUNCTION_AVALIABLE
+#endif
+
+#if defined(__cpp_lib_containers_ranges) && __cpp_lib_containers_ranges >= 202202L
+#define HELIOS_CONTAINERS_RANGES_AVALIABLE
+#endif

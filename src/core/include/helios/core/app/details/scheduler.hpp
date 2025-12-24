@@ -689,10 +689,18 @@ inline void Scheduler::AppendSystemOrderingMetadata(S /*schedule*/, std::span<co
     if (storage.info.type_id == system_id) {
       auto& info = storage.info;
       if (!before.empty()) {
+#ifdef HELIOS_CONTAINERS_RANGES_AVALIABLE
         info.before_systems.append_range(before);
+#else
+        info.before_systems.insert(info.before_systems.end(), before.begin(), before.end());
+#endif
       }
       if (!after.empty()) {
+#ifdef HELIOS_CONTAINERS_RANGES_AVALIABLE
         info.after_systems.append_range(after);
+#else
+        info.after_systems.insert(info.after_systems.end(), after.begin(), after.end());
+#endif
       }
       break;
     }
@@ -712,7 +720,11 @@ inline void Scheduler::AppendSystemSetMetadata(S /*schedule*/, std::span<const S
           std::ranges::find_if(system_storage_, [](const auto& storage) { return storage.info.type_id == system_id; });
       it != system_storage_.end()) {
     auto& info = it->info;
+#ifdef HELIOS_CONTAINERS_RANGES_AVALIABLE
     info.system_sets.append_range(sets);
+#else
+    info.system_sets.insert(info.system_sets.end(), sets.begin(), sets.end());
+#endif
     return;
   }
 }

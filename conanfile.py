@@ -109,8 +109,8 @@ class HeliosEngineConan(ConanFile):
         """Define all dependencies"""
 
         # Core dependencies (always required)
-        self.requires("boost/[>=1.82 <2]", transitive_headers=True)
-        self.requires("spdlog/[>=1.14 <2]", transitive_headers=True)
+        self.requires("boost/[>=1.87 <2]", transitive_headers=True)
+        self.requires("spdlog/[>=1.12 <2]", transitive_headers=True)
         self.requires("stduuid/[>=1.2 <2]")
         self.requires("concurrentqueue/[>=1.0 <2]")
 
