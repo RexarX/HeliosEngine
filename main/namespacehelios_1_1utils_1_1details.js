@@ -6,6 +6,7 @@ var namespacehelios_1_1utils_1_1details =
     [ "is_folder_applicable_impl< Folder, Accumulator, std::tuple< TupleArgs... > >", "structhelios_1_1utils_1_1details_1_1is__folder__applicable__impl_3_01Folder_00_01Accumulator_00_5474f6b3ac109ab26feda2bd4f995a76.html", null ],
     [ "UniqueTypesHelper", "structhelios_1_1utils_1_1details_1_1UniqueTypesHelper.html", null ],
     [ "UniqueTypesHelper< T, Rest... >", "structhelios_1_1utils_1_1details_1_1UniqueTypesHelper_3_01T_00_01Rest_8_8_8_01_4.html", null ],
+    [ "TupleLike", "concepthelios_1_1utils_1_1details_1_1TupleLike.html", null ],
     [ "CallableOrApplicable", "concepthelios_1_1utils_1_1details_1_1CallableOrApplicable.html", null ],
     [ "CallableOrApplicableWithReturn", "concepthelios_1_1utils_1_1details_1_1CallableOrApplicableWithReturn.html", null ],
     [ "call_or_apply_result_t", "namespacehelios_1_1utils_1_1details.html#ab522c5f9db7a41104883d0d96f43f8da", null ],

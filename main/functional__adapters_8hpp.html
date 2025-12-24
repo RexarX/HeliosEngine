@@ -230,6 +230,9 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="concepts" name="concepts"></a>
 Concepts</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1utils_1_1details_1_1TupleLike.html">helios::utils::details::TupleLike</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept to check if a type is tuple-like (has tuple_size and get). <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1utils_1_1details_1_1CallableOrApplicable.html">helios::utils::details::CallableOrApplicable</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1utils_1_1details_1_1CallableOrApplicableWithReturn.html">helios::utils::details::CallableOrApplicableWithReturn</a></td></tr>
@@ -549,11 +552,11 @@ requires ChainAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&l
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>ChainAdapter for the two ranges </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03223">3223</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3227</span>                                                                                          {</div>
-<div class="line"><span class="lineno"> 3228</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range1), std::ranges::cend(range1), std::ranges::cbegin(range2),</div>
-<div class="line"><span class="lineno"> 3229</span>          std::ranges::cend(range2)};</div>
-<div class="line"><span class="lineno"> 3230</span>}</div>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03234">3234</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 3238</span>                                                                                          {</div>
+<div class="line"><span class="lineno"> 3239</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range1), std::ranges::cend(range1), std::ranges::cbegin(range2),</div>
+<div class="line"><span class="lineno"> 3240</span>          std::ranges::cend(range2)};</div>
+<div class="line"><span class="lineno"> 3241</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -611,10 +614,10 @@ requires ChainAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&l
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>ChainAdapter for the two ranges </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03205">3205</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3208</span>                                                                                {</div>
-<div class="line"><span class="lineno"> 3209</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range1), std::ranges::cend(range1), std::ranges::begin(range2), std::ranges::end(range2)};</div>
-<div class="line"><span class="lineno"> 3210</span>}</div>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03216">3216</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 3219</span>                                                                                {</div>
+<div class="line"><span class="lineno"> 3220</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range1), std::ranges::cend(range1), std::ranges::begin(range2), std::ranges::end(range2)};</div>
+<div class="line"><span class="lineno"> 3221</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -672,10 +675,10 @@ requires ChainAdapterRequirements&lt;std::ranges::iterator_t&lt;R1&gt;, decltype
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>ChainAdapter for the two ranges </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03187">3187</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3190</span>                                                                                {</div>
-<div class="line"><span class="lineno"> 3191</span>  <span class="keywordflow">return</span> {std::ranges::begin(range1), std::ranges::end(range1), std::ranges::cbegin(range2), std::ranges::cend(range2)};</div>
-<div class="line"><span class="lineno"> 3192</span>}</div>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03198">3198</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 3201</span>                                                                                {</div>
+<div class="line"><span class="lineno"> 3202</span>  <span class="keywordflow">return</span> {std::ranges::begin(range1), std::ranges::end(range1), std::ranges::cbegin(range2), std::ranges::cend(range2)};</div>
+<div class="line"><span class="lineno"> 3203</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -735,10 +738,10 @@ requires ChainAdapterRequirements&lt;std::ranges::iterator_t&lt;R1&gt;, std::ran
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a158">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03169">3169</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3172</span>                                                                      {</div>
-<div class="line"><span class="lineno"> 3173</span>  <span class="keywordflow">return</span> {std::ranges::begin(range1), std::ranges::end(range1), std::ranges::begin(range2), std::ranges::end(range2)};</div>
-<div class="line"><span class="lineno"> 3174</span>}</div>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03180">3180</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 3183</span>                                                                      {</div>
+<div class="line"><span class="lineno"> 3184</span>  <span class="keywordflow">return</span> {std::ranges::begin(range1), std::ranges::end(range1), std::ranges::begin(range2), std::ranges::end(range2)};</div>
+<div class="line"><span class="lineno"> 3185</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -784,10 +787,10 @@ requires EnumerateAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declv
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>EnumerateAdapter for the range </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03089">3089</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3091</span>                                                          {</div>
-<div class="line"><span class="lineno"> 3092</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range), std::ranges::cend(range)};</div>
-<div class="line"><span class="lineno"> 3093</span>}</div>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03100">3100</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 3102</span>                                                          {</div>
+<div class="line"><span class="lineno"> 3103</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range), std::ranges::cend(range)};</div>
+<div class="line"><span class="lineno"> 3104</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -835,10 +838,10 @@ requires EnumerateAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;&gt;</d
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a167">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03075">3075</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3077</span>                                                {</div>
-<div class="line"><span class="lineno"> 3078</span>  <span class="keywordflow">return</span> {std::ranges::begin(range), std::ranges::end(range)};</div>
-<div class="line"><span class="lineno"> 3079</span>}</div>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03086">3086</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 3088</span>                                                {</div>
+<div class="line"><span class="lineno"> 3089</span>  <span class="keywordflow">return</span> {std::ranges::begin(range), std::ranges::end(range)};</div>
+<div class="line"><span class="lineno"> 3090</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -896,10 +899,10 @@ requires FilterAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>FilterAdapter for the range </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02898">2898</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 2901</span>                                                             {</div>
-<div class="line"><span class="lineno"> 2902</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range), std::ranges::cend(range), std::move(predicate)};</div>
-<div class="line"><span class="lineno"> 2903</span>}</div>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02909">2909</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 2912</span>                                                             {</div>
+<div class="line"><span class="lineno"> 2913</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range), std::ranges::cend(range), std::move(predicate)};</div>
+<div class="line"><span class="lineno"> 2914</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -959,10 +962,10 @@ requires FilterAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;, Pred&gt;
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a161">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02881">2881</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 2884</span>                                                   {</div>
-<div class="line"><span class="lineno"> 2885</span>  <span class="keywordflow">return</span> {std::ranges::begin(range), std::ranges::end(range), std::move(predicate)};</div>
-<div class="line"><span class="lineno"> 2886</span>}</div>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02892">2892</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 2895</span>                                                   {</div>
+<div class="line"><span class="lineno"> 2896</span>  <span class="keywordflow">return</span> {std::ranges::begin(range), std::ranges::end(range), std::move(predicate)};</div>
+<div class="line"><span class="lineno"> 2897</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1020,10 +1023,10 @@ requires InspectAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>InspectAdapter for the range </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03122">3122</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3125</span>                                                              {</div>
-<div class="line"><span class="lineno"> 3126</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range), std::ranges::cend(range), std::move(inspector)};</div>
-<div class="line"><span class="lineno"> 3127</span>}</div>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03133">3133</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 3136</span>                                                              {</div>
+<div class="line"><span class="lineno"> 3137</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range), std::ranges::cend(range), std::move(inspector)};</div>
+<div class="line"><span class="lineno"> 3138</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1083,10 +1086,10 @@ requires InspectAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;, Func&gt
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a168">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03105">3105</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3108</span>                                                    {</div>
-<div class="line"><span class="lineno"> 3109</span>  <span class="keywordflow">return</span> {std::ranges::begin(range), std::ranges::end(range), std::move(inspector)};</div>
-<div class="line"><span class="lineno"> 3110</span>}</div>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03116">3116</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 3119</span>                                                    {</div>
+<div class="line"><span class="lineno"> 3120</span>  <span class="keywordflow">return</span> {std::ranges::begin(range), std::ranges::end(range), std::move(inspector)};</div>
+<div class="line"><span class="lineno"> 3121</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1132,10 +1135,10 @@ requires JoinAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&lt
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>JoinAdapter for the range </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03282">3282</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3284</span>                                                     {</div>
-<div class="line"><span class="lineno"> 3285</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range), std::ranges::cend(range)};</div>
-<div class="line"><span class="lineno"> 3286</span>}</div>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03293">3293</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 3295</span>                                                     {</div>
+<div class="line"><span class="lineno"> 3296</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range), std::ranges::cend(range)};</div>
+<div class="line"><span class="lineno"> 3297</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1183,10 +1186,10 @@ requires JoinAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;&gt;</div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a171">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03268">3268</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3270</span>                                           {</div>
-<div class="line"><span class="lineno"> 3271</span>  <span class="keywordflow">return</span> {std::ranges::begin(range), std::ranges::end(range)};</div>
-<div class="line"><span class="lineno"> 3272</span>}</div>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03279">3279</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 3281</span>                                           {</div>
+<div class="line"><span class="lineno"> 3282</span>  <span class="keywordflow">return</span> {std::ranges::begin(range), std::ranges::end(range)};</div>
+<div class="line"><span class="lineno"> 3283</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1244,10 +1247,10 @@ requires MapAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&lt;
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>MapAdapter for the range </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02932">2932</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 2935</span>                                                          {</div>
-<div class="line"><span class="lineno"> 2936</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range), std::ranges::cend(range), std::move(transform)};</div>
-<div class="line"><span class="lineno"> 2937</span>}</div>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02943">2943</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 2946</span>                                                          {</div>
+<div class="line"><span class="lineno"> 2947</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range), std::ranges::cend(range), std::move(transform)};</div>
+<div class="line"><span class="lineno"> 2948</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1307,10 +1310,10 @@ requires MapAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;, Func&gt;</d
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a162">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02915">2915</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 2918</span>                                                {</div>
-<div class="line"><span class="lineno"> 2919</span>  <span class="keywordflow">return</span> {std::ranges::begin(range), std::ranges::end(range), std::move(transform)};</div>
-<div class="line"><span class="lineno"> 2920</span>}</div>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02926">2926</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 2929</span>                                                {</div>
+<div class="line"><span class="lineno"> 2930</span>  <span class="keywordflow">return</span> {std::ranges::begin(range), std::ranges::end(range), std::move(transform)};</div>
+<div class="line"><span class="lineno"> 2931</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1356,10 +1359,10 @@ requires ReverseAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>ReverseAdapter for the range </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03254">3254</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3256</span>                                                        {</div>
-<div class="line"><span class="lineno"> 3257</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range), std::ranges::cend(range)};</div>
-<div class="line"><span class="lineno"> 3258</span>}</div>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03265">3265</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 3267</span>                                                        {</div>
+<div class="line"><span class="lineno"> 3268</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range), std::ranges::cend(range)};</div>
+<div class="line"><span class="lineno"> 3269</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1407,10 +1410,10 @@ requires ReverseAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;&gt;</div
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a170">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03240">3240</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3242</span>                                              {</div>
-<div class="line"><span class="lineno"> 3243</span>  <span class="keywordflow">return</span> {std::ranges::begin(range), std::ranges::end(range)};</div>
-<div class="line"><span class="lineno"> 3244</span>}</div>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03251">3251</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 3253</span>                                              {</div>
+<div class="line"><span class="lineno"> 3254</span>  <span class="keywordflow">return</span> {std::ranges::begin(range), std::ranges::end(range)};</div>
+<div class="line"><span class="lineno"> 3255</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1467,10 +1470,10 @@ requires SkipAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&lt
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>SkipAdapter for the range </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02993">2993</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 2995</span>                                                     {</div>
-<div class="line"><span class="lineno"> 2996</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range), std::ranges::cend(range), count};</div>
-<div class="line"><span class="lineno"> 2997</span>}</div>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03004">3004</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 3006</span>                                                     {</div>
+<div class="line"><span class="lineno"> 3007</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range), std::ranges::cend(range), count};</div>
+<div class="line"><span class="lineno"> 3008</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1529,10 +1532,10 @@ requires SkipAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;&gt;</div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a164">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02978">2978</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 2980</span>                                           {</div>
-<div class="line"><span class="lineno"> 2981</span>  <span class="keywordflow">return</span> {std::ranges::begin(range), std::ranges::end(range), count};</div>
-<div class="line"><span class="lineno"> 2982</span>}</div>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02989">2989</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 2991</span>                                           {</div>
+<div class="line"><span class="lineno"> 2992</span>  <span class="keywordflow">return</span> {std::ranges::begin(range), std::ranges::end(range), count};</div>
+<div class="line"><span class="lineno"> 2993</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1590,10 +1593,10 @@ requires SkipWhileAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declv
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>SkipWhileAdapter for the range </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03060">3060</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3063</span>                                                                {</div>
-<div class="line"><span class="lineno"> 3064</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range), std::ranges::cend(range), std::move(predicate)};</div>
-<div class="line"><span class="lineno"> 3065</span>}</div>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03071">3071</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 3074</span>                                                                {</div>
+<div class="line"><span class="lineno"> 3075</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range), std::ranges::cend(range), std::move(predicate)};</div>
+<div class="line"><span class="lineno"> 3076</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1653,10 +1656,10 @@ requires SkipWhileAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;, Pred&
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a166">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03043">3043</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3046</span>                                                      {</div>
-<div class="line"><span class="lineno"> 3047</span>  <span class="keywordflow">return</span> {std::ranges::begin(range), std::ranges::end(range), std::move(predicate)};</div>
-<div class="line"><span class="lineno"> 3048</span>}</div>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03054">3054</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 3057</span>                                                      {</div>
+<div class="line"><span class="lineno"> 3058</span>  <span class="keywordflow">return</span> {std::ranges::begin(range), std::ranges::end(range), std::move(predicate)};</div>
+<div class="line"><span class="lineno"> 3059</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1713,10 +1716,10 @@ requires SlideAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&l
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>SlideAdapter for the range </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03312">3312</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3315</span>                                                      {</div>
-<div class="line"><span class="lineno"> 3316</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range), std::ranges::cend(range), window_size};</div>
-<div class="line"><span class="lineno"> 3317</span>}</div>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03323">3323</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 3326</span>                                                      {</div>
+<div class="line"><span class="lineno"> 3327</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range), std::ranges::cend(range), window_size};</div>
+<div class="line"><span class="lineno"> 3328</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1775,10 +1778,10 @@ requires SlideAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;&gt;</div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a172">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03297">3297</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3299</span>                                            {</div>
-<div class="line"><span class="lineno"> 3300</span>  <span class="keywordflow">return</span> {std::ranges::begin(range), std::ranges::end(range), window_size};</div>
-<div class="line"><span class="lineno"> 3301</span>}</div>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03308">3308</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 3310</span>                                            {</div>
+<div class="line"><span class="lineno"> 3311</span>  <span class="keywordflow">return</span> {std::ranges::begin(range), std::ranges::end(range), window_size};</div>
+<div class="line"><span class="lineno"> 3312</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1835,10 +1838,10 @@ requires StepByAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>StepByAdapter for the range </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03153">3153</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3155</span>                                                       {</div>
-<div class="line"><span class="lineno"> 3156</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range), std::ranges::cend(range), step};</div>
-<div class="line"><span class="lineno"> 3157</span>}</div>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03164">3164</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 3166</span>                                                       {</div>
+<div class="line"><span class="lineno"> 3167</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range), std::ranges::cend(range), step};</div>
+<div class="line"><span class="lineno"> 3168</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1897,10 +1900,10 @@ requires StepByAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;&gt;</div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a169">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03138">3138</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3140</span>                                             {</div>
-<div class="line"><span class="lineno"> 3141</span>  <span class="keywordflow">return</span> {std::ranges::begin(range), std::ranges::end(range), step};</div>
-<div class="line"><span class="lineno"> 3142</span>}</div>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03149">3149</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 3151</span>                                             {</div>
+<div class="line"><span class="lineno"> 3152</span>  <span class="keywordflow">return</span> {std::ranges::begin(range), std::ranges::end(range), step};</div>
+<div class="line"><span class="lineno"> 3153</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1957,10 +1960,10 @@ requires StrideAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>StrideAdapter for the range </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03343">3343</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3345</span>                                                       {</div>
-<div class="line"><span class="lineno"> 3346</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range), std::ranges::cend(range), stride};</div>
-<div class="line"><span class="lineno"> 3347</span>}</div>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03354">3354</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 3356</span>                                                       {</div>
+<div class="line"><span class="lineno"> 3357</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range), std::ranges::cend(range), stride};</div>
+<div class="line"><span class="lineno"> 3358</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -2019,10 +2022,10 @@ requires StrideAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;&gt;</div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a173">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03328">3328</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3330</span>                                             {</div>
-<div class="line"><span class="lineno"> 3331</span>  <span class="keywordflow">return</span> {std::ranges::begin(range), std::ranges::end(range), stride};</div>
-<div class="line"><span class="lineno"> 3332</span>}</div>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03339">3339</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 3341</span>                                             {</div>
+<div class="line"><span class="lineno"> 3342</span>  <span class="keywordflow">return</span> {std::ranges::begin(range), std::ranges::end(range), stride};</div>
+<div class="line"><span class="lineno"> 3343</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -2079,10 +2082,10 @@ requires TakeAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&lt
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>TakeAdapter for the range </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02963">2963</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 2965</span>                                                     {</div>
-<div class="line"><span class="lineno"> 2966</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range), std::ranges::cend(range), count};</div>
-<div class="line"><span class="lineno"> 2967</span>}</div>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02974">2974</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 2976</span>                                                     {</div>
+<div class="line"><span class="lineno"> 2977</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range), std::ranges::cend(range), count};</div>
+<div class="line"><span class="lineno"> 2978</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -2141,10 +2144,10 @@ requires TakeAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;&gt;</div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a163">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02948">2948</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 2950</span>                                           {</div>
-<div class="line"><span class="lineno"> 2951</span>  <span class="keywordflow">return</span> {std::ranges::begin(range), std::ranges::end(range), count};</div>
-<div class="line"><span class="lineno"> 2952</span>}</div>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02959">2959</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 2961</span>                                           {</div>
+<div class="line"><span class="lineno"> 2962</span>  <span class="keywordflow">return</span> {std::ranges::begin(range), std::ranges::end(range), count};</div>
+<div class="line"><span class="lineno"> 2963</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -2202,10 +2205,10 @@ requires TakeWhileAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declv
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>TakeWhileAdapter for the range </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03026">3026</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3029</span>                                                                {</div>
-<div class="line"><span class="lineno"> 3030</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range), std::ranges::cend(range), std::move(predicate)};</div>
-<div class="line"><span class="lineno"> 3031</span>}</div>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03037">3037</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 3040</span>                                                                {</div>
+<div class="line"><span class="lineno"> 3041</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range), std::ranges::cend(range), std::move(predicate)};</div>
+<div class="line"><span class="lineno"> 3042</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -2265,10 +2268,10 @@ requires TakeWhileAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;, Pred&
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a165">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03009">3009</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3012</span>                                                      {</div>
-<div class="line"><span class="lineno"> 3013</span>  <span class="keywordflow">return</span> {std::ranges::begin(range), std::ranges::end(range), std::move(predicate)};</div>
-<div class="line"><span class="lineno"> 3014</span>}</div>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03020">3020</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 3023</span>                                                      {</div>
+<div class="line"><span class="lineno"> 3024</span>  <span class="keywordflow">return</span> {std::ranges::begin(range), std::ranges::end(range), std::move(predicate)};</div>
+<div class="line"><span class="lineno"> 3025</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -2326,11 +2329,11 @@ requires ZipAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&lt;
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>ZipAdapter for the two ranges </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03394">3394</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3398</span>                                                                                        {</div>
-<div class="line"><span class="lineno"> 3399</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range1), std::ranges::cend(range1), std::ranges::cbegin(range2),</div>
-<div class="line"><span class="lineno"> 3400</span>          std::ranges::cend(range2)};</div>
-<div class="line"><span class="lineno"> 3401</span>}</div>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03405">3405</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 3409</span>                                                                                        {</div>
+<div class="line"><span class="lineno"> 3410</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range1), std::ranges::cend(range1), std::ranges::cbegin(range2),</div>
+<div class="line"><span class="lineno"> 3411</span>          std::ranges::cend(range2)};</div>
+<div class="line"><span class="lineno"> 3412</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -2388,10 +2391,10 @@ requires ZipAdapterRequirements&lt;std::ranges::iterator_t&lt;R1&gt;, decltype(s
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>ZipAdapter for the two ranges </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03376">3376</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3379</span>                                                                              {</div>
-<div class="line"><span class="lineno"> 3380</span>  <span class="keywordflow">return</span> {std::ranges::begin(range1), std::ranges::end(range1), std::ranges::cbegin(range2), std::ranges::cend(range2)};</div>
-<div class="line"><span class="lineno"> 3381</span>}</div>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03387">3387</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 3390</span>                                                                              {</div>
+<div class="line"><span class="lineno"> 3391</span>  <span class="keywordflow">return</span> {std::ranges::begin(range1), std::ranges::end(range1), std::ranges::cbegin(range2), std::ranges::cend(range2)};</div>
+<div class="line"><span class="lineno"> 3392</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -2451,10 +2454,10 @@ requires ZipAdapterRequirements&lt;std::ranges::iterator_t&lt;R1&gt;, std::range
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a159">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03359">3359</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3362</span>                                                                    {</div>
-<div class="line"><span class="lineno"> 3363</span>  <span class="keywordflow">return</span> {std::ranges::begin(range1), std::ranges::end(range1), std::ranges::begin(range2), std::ranges::end(range2)};</div>
-<div class="line"><span class="lineno"> 3364</span>}</div>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03370">3370</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 3373</span>                                                                    {</div>
+<div class="line"><span class="lineno"> 3374</span>  <span class="keywordflow">return</span> {std::ranges::begin(range1), std::ranges::end(range1), std::ranges::begin(range2), std::ranges::end(range2)};</div>
+<div class="line"><span class="lineno"> 3375</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>

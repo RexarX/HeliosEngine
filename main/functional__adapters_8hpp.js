@@ -14,6 +14,7 @@ var functional__adapters_8hpp =
     [ "helios::utils::StepByAdapter< Iter >", "classhelios_1_1utils_1_1StepByAdapter.html", "classhelios_1_1utils_1_1StepByAdapter" ],
     [ "helios::utils::ChainAdapter< Iter1, Iter2 >", "classhelios_1_1utils_1_1ChainAdapter.html", "classhelios_1_1utils_1_1ChainAdapter" ],
     [ "helios::utils::ReverseAdapter< Iter >", "classhelios_1_1utils_1_1ReverseAdapter.html", "classhelios_1_1utils_1_1ReverseAdapter" ],
+    [ "helios::utils::details::TupleLike", "concepthelios_1_1utils_1_1details_1_1TupleLike.html", null ],
     [ "helios::utils::details::CallableOrApplicable", "concepthelios_1_1utils_1_1details_1_1CallableOrApplicable.html", null ],
     [ "helios::utils::details::CallableOrApplicableWithReturn", "concepthelios_1_1utils_1_1details_1_1CallableOrApplicableWithReturn.html", null ],
     [ "helios::utils::IteratorLike", "concepthelios_1_1utils_1_1IteratorLike.html", null ],

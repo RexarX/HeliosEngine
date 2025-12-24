@@ -60,6 +60,7 @@ var concepts =
       ] ],
       [ "utils", "namespacehelios_1_1utils.html", [
         [ "details", "namespacehelios_1_1utils_1_1details.html", [
+          [ "TupleLike", "concepthelios_1_1utils_1_1details_1_1TupleLike.html", null ],
           [ "CallableOrApplicable", "concepthelios_1_1utils_1_1details_1_1CallableOrApplicable.html", null ],
           [ "CallableOrApplicableWithReturn", "concepthelios_1_1utils_1_1details_1_1CallableOrApplicableWithReturn.html", null ]
         ] ],
