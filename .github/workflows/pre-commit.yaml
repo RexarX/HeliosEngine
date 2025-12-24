@@ -30,8 +30,11 @@ jobs:
 
       - name: Install clang-format
         run: |
-          sudo apt-get update
-          sudo apt-get install -y clang-format-18
+          wget https://apt.llvm.org/llvm.sh
+          chmod +x llvm.sh
+          sudo ./llvm.sh 21
+          sudo apt-get install -y clang-format-21
+          sudo ln -sf /usr/bin/clang-format-21 /usr/bin/clang-format
 
       - name: Get changed files
         id: changed-files
@@ -49,10 +52,8 @@ jobs:
       - name: Check formatting of changed files
         if: steps.changed-files.outputs.any_changed == 'true'
         run: |
-          echo "Checking formatting for changed files using format.py..."
+          echo "Checking formatting for changed files..."
           echo ""
-
-          # Pass changed files to format.py
           python3 scripts/format.py --check ${{ steps.changed-files.outputs.all_changed_files }}
 
       - name: Comment on PR (if formatting fails)
@@ -67,17 +68,19 @@ jobs:
 
             ### How to fix:
 
-            Run the formatting script:
+            Run the formatting script locally (requires clang-format 21+):
             \`\`\`bash
             python scripts/format.py
             \`\`\`
 
             Or manually format the files:
             \`\`\`bash
-            clang-format -i <file>
+            clang-format -i -style=file <file>
             \`\`\`
 
             Then commit and push the changes.
+
+            **Note:** Make sure you're using clang-format version 21+. Check with \`clang-format --version\`.
 
             ### CI will automatically re-check once you push the fixes.
             `;
