@@ -449,7 +449,7 @@ Variables</h2></td></tr>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2app_8hpp-example.html#a47">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/app.hpp</a>, and <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a2">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00127">127</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00128">128</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -505,11 +505,11 @@ Variables</h2></td></tr>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2app_8hpp-example.html#a0">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/app.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="app_8hpp_source.html#l00038">38</a> of file <a class="el" href="app_8hpp_source.html">app.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   38</span>                       : uint8_t {</div>
-<div class="line"><span class="lineno">   39</span>  <a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dba505a83f220c02df2f85c3810cd9ceb38">Success</a> = 0,  <span class="comment">///&lt; Successful execution</span></div>
-<div class="line"><span class="lineno">   40</span>  <a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dbae139a585510a502bbf1841cf589f5086">Failure</a> = 1,  <span class="comment">///&lt; General failure</span></div>
-<div class="line"><span class="lineno">   41</span>};</div>
+<p class="definition">Definition at line <a class="el" href="app_8hpp_source.html#l00039">39</a> of file <a class="el" href="app_8hpp_source.html">app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   39</span>                       : uint8_t {</div>
+<div class="line"><span class="lineno">   40</span>  <a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dba505a83f220c02df2f85c3810cd9ceb38">Success</a> = 0,  <span class="comment">///&lt; Successful execution</span></div>
+<div class="line"><span class="lineno">   41</span>  <a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dbae139a585510a502bbf1841cf589f5086">Failure</a> = 1,  <span class="comment">///&lt; General failure</span></div>
+<div class="line"><span class="lineno">   42</span>};</div>
 <div class="ttc" id="anamespacehelios_1_1app_html_a6cd85782bcdd4e4ee78ffbb2c15916dba505a83f220c02df2f85c3810cd9ceb38"><div class="ttname"><a href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dba505a83f220c02df2f85c3810cd9ceb38">helios::app::AppExitCode::Success</a></div><div class="ttdeci">@ Success</div><div class="ttdoc">Successful execution.</div></div>
 <div class="ttc" id="anamespacehelios_1_1app_html_a6cd85782bcdd4e4ee78ffbb2c15916dbae139a585510a502bbf1841cf589f5086"><div class="ttname"><a href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dbae139a585510a502bbf1841cf589f5086">helios::app::AppExitCode::Failure</a></div><div class="ttdeci">@ Failure</div><div class="ttdoc">General failure.</div></div>
 </div><!-- fragment -->
@@ -898,15 +898,15 @@ template&lt;SubAppTrait T&gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a0">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00102">102</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  102</span>                                                         {</div>
-<div class="line"><span class="lineno">  103</span>  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_concept" href="concepthelios_1_1app_1_1SubAppWithAsyncTrait.html">SubAppWithAsyncTrait&lt;T&gt;</a>) {</div>
-<div class="line"><span class="lineno">  104</span>    <span class="keywordflow">return</span> T::AllowOverlappingUpdates();</div>
-<div class="line"><span class="lineno">  105</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  106</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// Default: no overlapping updates</span></div>
-<div class="line"><span class="lineno">  107</span>  }</div>
-<div class="line"><span class="lineno">  108</span>}</div>
-<div class="ttc" id="aconcepthelios_1_1app_1_1SubAppWithAsyncTrait_html"><div class="ttname"><a href="concepthelios_1_1app_1_1SubAppWithAsyncTrait.html">helios::app::SubAppWithAsyncTrait</a></div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00071">sub_app.hpp:71</a></div></div>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00103">103</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  103</span>                                                         {</div>
+<div class="line"><span class="lineno">  104</span>  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_concept" href="concepthelios_1_1app_1_1SubAppWithAsyncTrait.html">SubAppWithAsyncTrait&lt;T&gt;</a>) {</div>
+<div class="line"><span class="lineno">  105</span>    <span class="keywordflow">return</span> T::AllowOverlappingUpdates();</div>
+<div class="line"><span class="lineno">  106</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  107</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// Default: no overlapping updates</span></div>
+<div class="line"><span class="lineno">  108</span>  }</div>
+<div class="line"><span class="lineno">  109</span>}</div>
+<div class="ttc" id="aconcepthelios_1_1app_1_1SubAppWithAsyncTrait_html"><div class="ttname"><a href="concepthelios_1_1app_1_1SubAppWithAsyncTrait.html">helios::app::SubAppWithAsyncTrait</a></div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00072">sub_app.hpp:72</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -946,15 +946,15 @@ template&lt;SubAppTrait T&gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a1">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00116">116</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  116</span>                                                        {</div>
-<div class="line"><span class="lineno">  117</span>  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_concept" href="concepthelios_1_1app_1_1SubAppWithMaxOverlappingUpdatesTrait.html">SubAppWithMaxOverlappingUpdatesTrait&lt;T&gt;</a>) {</div>
-<div class="line"><span class="lineno">  118</span>    <span class="keywordflow">return</span> T::GetMaxOverlappingUpdates();</div>
-<div class="line"><span class="lineno">  119</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  120</span>    <span class="keywordflow">return</span> 0;  <span class="comment">// Default: no limit</span></div>
-<div class="line"><span class="lineno">  121</span>  }</div>
-<div class="line"><span class="lineno">  122</span>}</div>
-<div class="ttc" id="aconcepthelios_1_1app_1_1SubAppWithMaxOverlappingUpdatesTrait_html"><div class="ttname"><a href="concepthelios_1_1app_1_1SubAppWithMaxOverlappingUpdatesTrait.html">helios::app::SubAppWithMaxOverlappingUpdatesTrait</a></div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00092">sub_app.hpp:92</a></div></div>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00117">117</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  117</span>                                                        {</div>
+<div class="line"><span class="lineno">  118</span>  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_concept" href="concepthelios_1_1app_1_1SubAppWithMaxOverlappingUpdatesTrait.html">SubAppWithMaxOverlappingUpdatesTrait&lt;T&gt;</a>) {</div>
+<div class="line"><span class="lineno">  119</span>    <span class="keywordflow">return</span> T::GetMaxOverlappingUpdates();</div>
+<div class="line"><span class="lineno">  120</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  121</span>    <span class="keywordflow">return</span> 0;  <span class="comment">// Default: no limit</span></div>
+<div class="line"><span class="lineno">  122</span>  }</div>
+<div class="line"><span class="lineno">  123</span>}</div>
+<div class="ttc" id="aconcepthelios_1_1app_1_1SubAppWithMaxOverlappingUpdatesTrait_html"><div class="ttname"><a href="concepthelios_1_1app_1_1SubAppWithMaxOverlappingUpdatesTrait.html">helios::app::SubAppWithMaxOverlappingUpdatesTrait</a></div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00093">sub_app.hpp:93</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -994,15 +994,15 @@ template&lt;SubAppTrait T&gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a4">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00145">145</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  145</span>                                                 {</div>
-<div class="line"><span class="lineno">  146</span>  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_concept" href="concepthelios_1_1app_1_1SubAppWithNameTrait.html">SubAppWithNameTrait&lt;T&gt;</a>) {</div>
-<div class="line"><span class="lineno">  147</span>    <span class="keywordflow">return</span> T::GetName();</div>
-<div class="line"><span class="lineno">  148</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  149</span>    <span class="keywordflow">return</span> ctti::name_of&lt;T&gt;();</div>
-<div class="line"><span class="lineno">  150</span>  }</div>
-<div class="line"><span class="lineno">  151</span>}</div>
-<div class="ttc" id="aconcepthelios_1_1app_1_1SubAppWithNameTrait_html"><div class="ttname"><a href="concepthelios_1_1app_1_1SubAppWithNameTrait.html">helios::app::SubAppWithNameTrait</a></div><div class="ttdoc">Trait to identify sub-apps with custom names.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00050">sub_app.hpp:50</a></div></div>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00146">146</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  146</span>                                                 {</div>
+<div class="line"><span class="lineno">  147</span>  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_concept" href="concepthelios_1_1app_1_1SubAppWithNameTrait.html">SubAppWithNameTrait&lt;T&gt;</a>) {</div>
+<div class="line"><span class="lineno">  148</span>    <span class="keywordflow">return</span> T::GetName();</div>
+<div class="line"><span class="lineno">  149</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  150</span>    <span class="keywordflow">return</span> ctti::name_of&lt;T&gt;();</div>
+<div class="line"><span class="lineno">  151</span>  }</div>
+<div class="line"><span class="lineno">  152</span>}</div>
+<div class="ttc" id="aconcepthelios_1_1app_1_1SubAppWithNameTrait_html"><div class="ttname"><a href="concepthelios_1_1app_1_1SubAppWithNameTrait.html">helios::app::SubAppWithNameTrait</a></div><div class="ttdoc">Trait to identify sub-apps with custom names.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00051">sub_app.hpp:51</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1042,10 +1042,10 @@ template&lt;SubAppTrait T&gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a3">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00135">135</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  135</span>                                                 {</div>
-<div class="line"><span class="lineno">  136</span>  <span class="keywordflow">return</span> ctti::type_index_of&lt;T&gt;().hash();</div>
-<div class="line"><span class="lineno">  137</span>}</div>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00136">136</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  136</span>                                                 {</div>
+<div class="line"><span class="lineno">  137</span>  <span class="keywordflow">return</span> ctti::type_index_of&lt;T&gt;().hash();</div>
+<div class="line"><span class="lineno">  138</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>

@@ -179,8 +179,8 @@ $(document).ready(function(){initNavTree('classhelios_1_1app_1_1SubApp.html','')
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a8f7f06ffb86bd69104b976d86d78be70" id="r_a8f7f06ffb86bd69104b976d86d78be70"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#a8f7f06ffb86bd69104b976d86d78be70">ExtractFn</a> = std::move_only_function&lt; void(const <a class="el" href="classhelios_1_1ecs_1_1World.html">ecs::World</a> &amp;, <a class="el" href="classhelios_1_1ecs_1_1World.html">ecs::World</a> &amp;)&gt;</td></tr>
-<tr class="separator:a8f7f06ffb86bd69104b976d86d78be70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29f5cd651c168ef7f0d00fc46dedefa6" id="r_a29f5cd651c168ef7f0d00fc46dedefa6"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#a29f5cd651c168ef7f0d00fc46dedefa6">ExtractFn</a> = std::function&lt; void(const <a class="el" href="classhelios_1_1ecs_1_1World.html">ecs::World</a> &amp;, <a class="el" href="classhelios_1_1ecs_1_1World.html">ecs::World</a> &amp;)&gt;</td></tr>
+<tr class="separator:a29f5cd651c168ef7f0d00fc46dedefa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -254,7 +254,7 @@ requires (sizeof...(Events) &gt; 1)</td></tr>
 <tr class="memitem:a95c9361adc75fe8893e473c53ab17020"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#a95c9361adc75fe8893e473c53ab17020">AddEvents</a> ()</td></tr>
 <tr class="memdesc:a95c9361adc75fe8893e473c53ab17020"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers multiple event types for use in this sub-app.  <br /></td></tr>
 <tr class="separator:a95c9361adc75fe8893e473c53ab17020"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a347b80bbfd7f8dbff669ec58aebede85" id="r_a347b80bbfd7f8dbff669ec58aebede85"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#a347b80bbfd7f8dbff669ec58aebede85">SetExtractFunction</a> (<a class="el" href="classhelios_1_1app_1_1SubApp.html#a8f7f06ffb86bd69104b976d86d78be70">ExtractFn</a> extract_fn) noexcept</td></tr>
+<tr class="memitem:a347b80bbfd7f8dbff669ec58aebede85" id="r_a347b80bbfd7f8dbff669ec58aebede85"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#a347b80bbfd7f8dbff669ec58aebede85">SetExtractFunction</a> (<a class="el" href="classhelios_1_1app_1_1SubApp.html#a29f5cd651c168ef7f0d00fc46dedefa6">ExtractFn</a> extract_fn) noexcept</td></tr>
 <tr class="memdesc:a347b80bbfd7f8dbff669ec58aebede85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets custom extraction function for this sub-app.  <br /></td></tr>
 <tr class="separator:a347b80bbfd7f8dbff669ec58aebede85"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1420267640572362b84bdbfeac733e53" id="r_a1420267640572362b84bdbfeac733e53"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1SubApp.html#a1420267640572362b84bdbfeac733e53">SetAllowOverlappingUpdates</a> (bool allow) noexcept</td></tr>
@@ -313,23 +313,23 @@ Friends</h2></td></tr>
 <p>SubApps can be added to the main <a class="el" href="classhelios_1_1app_1_1App.html" title="Application class.">App</a> instance and can be updated independently. They support adding modules that can register their own systems and resources.</p>
 <dl class="section note"><dt>Note</dt><dd>Not thread-safe. Use AllowOverlappingUpdates() trait for controlled concurrent access. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00166">166</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00167">167</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
-<a id="a8f7f06ffb86bd69104b976d86d78be70" name="a8f7f06ffb86bd69104b976d86d78be70"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8f7f06ffb86bd69104b976d86d78be70">&#9670;&#160;</a></span>ExtractFn</h2>
+<a id="a29f5cd651c168ef7f0d00fc46dedefa6" name="a29f5cd651c168ef7f0d00fc46dedefa6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29f5cd651c168ef7f0d00fc46dedefa6">&#9670;&#160;</a></span>ExtractFn</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classhelios_1_1app_1_1SubApp.html#a8f7f06ffb86bd69104b976d86d78be70">helios::app::SubApp::ExtractFn</a> =  std::move_only_function&lt;void(const <a class="el" href="classhelios_1_1ecs_1_1World.html">ecs::World</a>&amp;, <a class="el" href="classhelios_1_1ecs_1_1World.html">ecs::World</a>&amp;)&gt;</td>
+          <td class="memname">using <a class="el" href="classhelios_1_1app_1_1SubApp.html#a29f5cd651c168ef7f0d00fc46dedefa6">helios::app::SubApp::ExtractFn</a> =  std::function&lt;void(const <a class="el" href="classhelios_1_1ecs_1_1World.html">ecs::World</a>&amp;, <a class="el" href="classhelios_1_1ecs_1_1World.html">ecs::World</a>&amp;)&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a5">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00168">168</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00172">172</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -411,15 +411,15 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00482">482</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  483</span>    : world_(std::move(other.world_)),</div>
-<div class="line"><span class="lineno">  484</span>      scheduler_(std::move(other.scheduler_)),</div>
-<div class="line"><span class="lineno">  485</span>      extract_fn_(std::move(other.extract_fn_)),</div>
-<div class="line"><span class="lineno">  486</span>      is_updating_(other.is_updating_.load(std::memory_order_acquire)),</div>
-<div class="line"><span class="lineno">  487</span>      graphs_built_(other.graphs_built_),</div>
-<div class="line"><span class="lineno">  488</span>      allow_overlapping_updates_(other.allow_overlapping_updates_),</div>
-<div class="line"><span class="lineno">  489</span>      max_overlapping_updates_(other.max_overlapping_updates_),</div>
-<div class="line"><span class="lineno">  490</span>      current_overlapping_updates_(other.current_overlapping_updates_.load(std::memory_order_acquire)) {}</div>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00487">487</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  488</span>    : world_(std::move(other.world_)),</div>
+<div class="line"><span class="lineno">  489</span>      scheduler_(std::move(other.scheduler_)),</div>
+<div class="line"><span class="lineno">  490</span>      extract_fn_(std::move(other.extract_fn_)),</div>
+<div class="line"><span class="lineno">  491</span>      is_updating_(other.is_updating_.load(std::memory_order_acquire)),</div>
+<div class="line"><span class="lineno">  492</span>      graphs_built_(other.graphs_built_),</div>
+<div class="line"><span class="lineno">  493</span>      allow_overlapping_updates_(other.allow_overlapping_updates_),</div>
+<div class="line"><span class="lineno">  494</span>      max_overlapping_updates_(other.max_overlapping_updates_),</div>
+<div class="line"><span class="lineno">  495</span>      current_overlapping_updates_(other.current_overlapping_updates_.load(std::memory_order_acquire)) {}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -487,10 +487,10 @@ template&lt;ecs::EventTrait T&gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a23">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00332">332</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  332</span>                  {</div>
-<div class="line"><span class="lineno">  333</span>    world_.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#aec4ef048e20d0d51e907617d997d6e12">AddEvent</a>&lt;T&gt;();</div>
-<div class="line"><span class="lineno">  334</span>  }</div>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00337">337</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  337</span>                  {</div>
+<div class="line"><span class="lineno">  338</span>    world_.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#aec4ef048e20d0d51e907617d997d6e12">AddEvent</a>&lt;T&gt;();</div>
+<div class="line"><span class="lineno">  339</span>  }</div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_aec4ef048e20d0d51e907617d997d6e12"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#aec4ef048e20d0d51e907617d997d6e12">helios::ecs::World::AddEvent</a></div><div class="ttdeci">void AddEvent()</div><div class="ttdoc">Registers an event type for use.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00967">world.hpp:967</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -532,10 +532,10 @@ requires (sizeof...(Events) &gt; 1)</div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a25">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00343">343</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  343</span>                   {</div>
-<div class="line"><span class="lineno">  344</span>    world_.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#a1522c30fb211a9bca6fa64ffa9331ed9">AddEvents</a>&lt;Events...&gt;();</div>
-<div class="line"><span class="lineno">  345</span>  }</div>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00348">348</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  348</span>                   {</div>
+<div class="line"><span class="lineno">  349</span>    world_.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#a1522c30fb211a9bca6fa64ffa9331ed9">AddEvents</a>&lt;Events...&gt;();</div>
+<div class="line"><span class="lineno">  350</span>  }</div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_a1522c30fb211a9bca6fa64ffa9331ed9"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#a1522c30fb211a9bca6fa64ffa9331ed9">helios::ecs::World::AddEvents</a></div><div class="ttdeci">void AddEvents()</div><div class="ttdoc">Registers multiple event types for use.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00451">world.hpp:451</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -584,21 +584,21 @@ template&lt;ecs::SystemTrait T, ScheduleTrait S&gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a14">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00590">590</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  590</span>                                        {</div>
-<div class="line"><span class="lineno">  591</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!<a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">IsUpdating</a>(), <span class="stringliteral">&quot;Failed to add system &#39;{}&#39;: Cannot add systems while app is running!&quot;</span>,</div>
-<div class="line"><span class="lineno">  592</span>                <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ecs::SystemNameOf&lt;T&gt;</a>());</div>
-<div class="line"><span class="lineno">  593</span> </div>
-<div class="line"><span class="lineno">  594</span>  <span class="keywordflow">if</span> (ContainsSystem&lt;T&gt;(schedule)) [[unlikely]] {</div>
-<div class="line"><span class="lineno">  595</span>    <a class="code hl_define" href="logger_8hpp.html#abee1a45a543b16109f05136a9771e86c">HELIOS_WARN</a>(<span class="stringliteral">&quot;System &#39;{}&#39; is already exist in app schedule &#39;{}&#39;!&quot;</span>, <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ecs::SystemNameOf&lt;T&gt;</a>(), ScheduleNameOf&lt;S&gt;());</div>
-<div class="line"><span class="lineno">  596</span>    <span class="keywordflow">return</span>;</div>
-<div class="line"><span class="lineno">  597</span>  }</div>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00595">595</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  595</span>                                        {</div>
+<div class="line"><span class="lineno">  596</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!<a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">IsUpdating</a>(), <span class="stringliteral">&quot;Failed to add system &#39;{}&#39;: Cannot add systems while app is running!&quot;</span>,</div>
+<div class="line"><span class="lineno">  597</span>                <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ecs::SystemNameOf&lt;T&gt;</a>());</div>
 <div class="line"><span class="lineno">  598</span> </div>
-<div class="line"><span class="lineno">  599</span>  scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#a6c5e6be3d5fbf6d7a7c215470a3a820e">AddSystem</a>&lt;T&gt;(schedule);</div>
-<div class="line"><span class="lineno">  600</span>  graphs_built_ = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  601</span>}</div>
+<div class="line"><span class="lineno">  599</span>  <span class="keywordflow">if</span> (ContainsSystem&lt;T&gt;(schedule)) [[unlikely]] {</div>
+<div class="line"><span class="lineno">  600</span>    <a class="code hl_define" href="logger_8hpp.html#abee1a45a543b16109f05136a9771e86c">HELIOS_WARN</a>(<span class="stringliteral">&quot;System &#39;{}&#39; is already exist in app schedule &#39;{}&#39;!&quot;</span>, <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ecs::SystemNameOf&lt;T&gt;</a>(), ScheduleNameOf&lt;S&gt;());</div>
+<div class="line"><span class="lineno">  601</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  602</span>  }</div>
+<div class="line"><span class="lineno">  603</span> </div>
+<div class="line"><span class="lineno">  604</span>  scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#a6c5e6be3d5fbf6d7a7c215470a3a820e">AddSystem</a>&lt;T&gt;(schedule);</div>
+<div class="line"><span class="lineno">  605</span>  graphs_built_ = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  606</span>}</div>
 <div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00140">assert.hpp:140</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_ae4f1c424bf407b7f63a7558d9b7e734a"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">helios::app::SubApp::IsUpdating</a></div><div class="ttdeci">bool IsUpdating() const noexcept</div><div class="ttdoc">Checks if the sub-app is currently updating.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00415">sub_app.hpp:415</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_ae4f1c424bf407b7f63a7558d9b7e734a"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">helios::app::SubApp::IsUpdating</a></div><div class="ttdeci">bool IsUpdating() const noexcept</div><div class="ttdoc">Checks if the sub-app is currently updating.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00420">sub_app.hpp:420</a></div></div>
 <div class="ttc" id="aclasshelios_1_1app_1_1details_1_1Scheduler_html_a6c5e6be3d5fbf6d7a7c215470a3a820e"><div class="ttname"><a href="classhelios_1_1app_1_1details_1_1Scheduler.html#a6c5e6be3d5fbf6d7a7c215470a3a820e">helios::app::details::Scheduler::AddSystem</a></div><div class="ttdeci">void AddSystem(S schedule={})</div><div class="ttdoc">Adds a system to the specified schedule.</div><div class="ttdef"><b>Definition</b> <a href="scheduler_8hpp_source.html#l00522">scheduler.hpp:522</a></div></div>
 <div class="ttc" id="alogger_8hpp_html_abee1a45a543b16109f05136a9771e86c"><div class="ttname"><a href="logger_8hpp.html#abee1a45a543b16109f05136a9771e86c">HELIOS_WARN</a></div><div class="ttdeci">#define HELIOS_WARN(...)</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00687">logger.hpp:687</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1ecs_html_af0384de48d847585fcb340c71c231e5e"><div class="ttname"><a href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, Allocator, Components... &gt; Query</div><div class="ttdoc">Type alias for query with mutable world access.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02515">query.hpp:2515</a></div></div>
@@ -650,12 +650,12 @@ template&lt;ecs::SystemTrait T, ScheduleTrait S&gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a17">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00620">620</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  620</span>                                                                     {</div>
-<div class="line"><span class="lineno">  621</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!<a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">IsUpdating</a>(), <span class="stringliteral">&quot;Failed to add system &#39;{}&#39;: Cannot add systems while app is running!&quot;</span>,</div>
-<div class="line"><span class="lineno">  622</span>                <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ecs::SystemNameOf&lt;T&gt;</a>());</div>
-<div class="line"><span class="lineno">  623</span>  <span class="keywordflow">return</span> SystemConfig&lt;S, T&gt;(*<span class="keyword">this</span>, schedule);</div>
-<div class="line"><span class="lineno">  624</span>}</div>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00625">625</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  625</span>                                                                     {</div>
+<div class="line"><span class="lineno">  626</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!<a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">IsUpdating</a>(), <span class="stringliteral">&quot;Failed to add system &#39;{}&#39;: Cannot add systems while app is running!&quot;</span>,</div>
+<div class="line"><span class="lineno">  627</span>                <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ecs::SystemNameOf&lt;T&gt;</a>());</div>
+<div class="line"><span class="lineno">  628</span>  <span class="keywordflow">return</span> SystemConfig&lt;S, T&gt;(*<span class="keyword">this</span>, schedule);</div>
+<div class="line"><span class="lineno">  629</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -704,13 +704,13 @@ requires (sizeof...(Systems) &gt; 1 &amp;&amp; utils::UniqueTypes&lt;Systems...&
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a15">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00605">605</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  605</span>                                         {</div>
-<div class="line"><span class="lineno">  606</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!<a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">IsUpdating</a>(), <span class="stringliteral">&quot;Failed to add systems: Cannot add systems while app is running!&quot;</span>);</div>
-<div class="line"><span class="lineno">  607</span> </div>
-<div class="line"><span class="lineno">  608</span>  (scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#a6c5e6be3d5fbf6d7a7c215470a3a820e">AddSystem</a>&lt;Systems&gt;(schedule), ...);</div>
-<div class="line"><span class="lineno">  609</span>  graphs_built_ = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  610</span>}</div>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00610">610</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  610</span>                                         {</div>
+<div class="line"><span class="lineno">  611</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!<a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">IsUpdating</a>(), <span class="stringliteral">&quot;Failed to add systems: Cannot add systems while app is running!&quot;</span>);</div>
+<div class="line"><span class="lineno">  612</span> </div>
+<div class="line"><span class="lineno">  613</span>  (scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#a6c5e6be3d5fbf6d7a7c215470a3a820e">AddSystem</a>&lt;Systems&gt;(schedule), ...);</div>
+<div class="line"><span class="lineno">  614</span>  graphs_built_ = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  615</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -743,12 +743,12 @@ requires (sizeof...(Systems) &gt; 0 &amp;&amp; utils::UniqueTypes&lt;Systems...&
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a16">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00614">614</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  614</span>                                                                               {</div>
-<div class="line"><span class="lineno">  615</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!<a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">IsUpdating</a>(), <span class="stringliteral">&quot;Failed to add systems: Cannot add systems while app is running!&quot;</span>);</div>
-<div class="line"><span class="lineno">  616</span>  <span class="keywordflow">return</span> <a class="code hl_friend" href="classhelios_1_1app_1_1SubApp.html#ad4bf528779d9dd74c8c5cba3b2b434ca">SystemConfig</a>&lt;S, Systems...&gt;(*<span class="keyword">this</span>, schedule);</div>
-<div class="line"><span class="lineno">  617</span>}</div>
-<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_ad4bf528779d9dd74c8c5cba3b2b434ca"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#ad4bf528779d9dd74c8c5cba3b2b434ca">helios::app::SubApp::SystemConfig</a></div><div class="ttdeci">friend class SystemConfig</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00476">sub_app.hpp:476</a></div></div>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00619">619</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  619</span>                                                                               {</div>
+<div class="line"><span class="lineno">  620</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!<a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">IsUpdating</a>(), <span class="stringliteral">&quot;Failed to add systems: Cannot add systems while app is running!&quot;</span>);</div>
+<div class="line"><span class="lineno">  621</span>  <span class="keywordflow">return</span> <a class="code hl_friend" href="classhelios_1_1app_1_1SubApp.html#ad4bf528779d9dd74c8c5cba3b2b434ca">SystemConfig</a>&lt;S, Systems...&gt;(*<span class="keyword">this</span>, schedule);</div>
+<div class="line"><span class="lineno">  622</span>}</div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_ad4bf528779d9dd74c8c5cba3b2b434ca"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#ad4bf528779d9dd74c8c5cba3b2b434ca">helios::app::SubApp::SystemConfig</a></div><div class="ttdeci">friend class SystemConfig</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00481">sub_app.hpp:481</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -780,8 +780,8 @@ requires (sizeof...(Systems) &gt; 0 &amp;&amp; utils::UniqueTypes&lt;Systems...&
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a37">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00421">421</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  421</span>{ <span class="keywordflow">return</span> allow_overlapping_updates_; }</div>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00426">426</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  426</span>{ <span class="keywordflow">return</span> allow_overlapping_updates_; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -813,13 +813,13 @@ requires (sizeof...(Systems) &gt; 0 &amp;&amp; utils::UniqueTypes&lt;Systems...&
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a11">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00570">570</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  570</span>                                   {</div>
-<div class="line"><span class="lineno">  571</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!<a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">IsUpdating</a>(), <span class="stringliteral">&quot;Failed to build scheduler: Cannot build while app is running!&quot;</span>);</div>
-<div class="line"><span class="lineno">  572</span> </div>
-<div class="line"><span class="lineno">  573</span>  scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#ab5db06cba2f0d7a47c8503417ac55116">BuildAllGraphs</a>(world_);</div>
-<div class="line"><span class="lineno">  574</span>  graphs_built_ = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  575</span>}</div>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00575">575</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  575</span>                                   {</div>
+<div class="line"><span class="lineno">  576</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!<a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">IsUpdating</a>(), <span class="stringliteral">&quot;Failed to build scheduler: Cannot build while app is running!&quot;</span>);</div>
+<div class="line"><span class="lineno">  577</span> </div>
+<div class="line"><span class="lineno">  578</span>  scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#ab5db06cba2f0d7a47c8503417ac55116">BuildAllGraphs</a>(world_);</div>
+<div class="line"><span class="lineno">  579</span>  graphs_built_ = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  580</span>}</div>
 <div class="ttc" id="aclasshelios_1_1app_1_1details_1_1Scheduler_html_ab5db06cba2f0d7a47c8503417ac55116"><div class="ttname"><a href="classhelios_1_1app_1_1details_1_1Scheduler.html#ab5db06cba2f0d7a47c8503417ac55116">helios::app::details::Scheduler::BuildAllGraphs</a></div><div class="ttdeci">void BuildAllGraphs(ecs::World &amp;world)</div><div class="ttdoc">Builds execution graphs for all schedules.</div><div class="ttdef"><b>Definition</b> <a href="scheduler_8cpp_source.html#l00060">scheduler.cpp:60</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -852,15 +852,15 @@ requires (sizeof...(Systems) &gt; 0 &amp;&amp; utils::UniqueTypes&lt;Systems...&
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2app_8hpp-example.html#a46">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/app.hpp</a>, and <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a9">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00507">507</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  507</span>                          {</div>
-<div class="line"><span class="lineno">  508</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!<a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">IsUpdating</a>(), <span class="stringliteral">&quot;Failed to clear sub app: Cannot clear while app is running!&quot;</span>);</div>
-<div class="line"><span class="lineno">  509</span> </div>
-<div class="line"><span class="lineno">  510</span>  world_.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#ae59ec4dcf9819c1dcfdca9e4de4c8cbc">Clear</a>();</div>
-<div class="line"><span class="lineno">  511</span>  scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#a4b7893fedb3bcbef1716e364afc902cc">Clear</a>();</div>
-<div class="line"><span class="lineno">  512</span>  extract_fn_ = <span class="keyword">nullptr</span>;</div>
-<div class="line"><span class="lineno">  513</span>  graphs_built_ = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  514</span>}</div>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00512">512</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  512</span>                          {</div>
+<div class="line"><span class="lineno">  513</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!<a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">IsUpdating</a>(), <span class="stringliteral">&quot;Failed to clear sub app: Cannot clear while app is running!&quot;</span>);</div>
+<div class="line"><span class="lineno">  514</span> </div>
+<div class="line"><span class="lineno">  515</span>  world_.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#ae59ec4dcf9819c1dcfdca9e4de4c8cbc">Clear</a>();</div>
+<div class="line"><span class="lineno">  516</span>  scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#a4b7893fedb3bcbef1716e364afc902cc">Clear</a>();</div>
+<div class="line"><span class="lineno">  517</span>  extract_fn_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  518</span>  graphs_built_ = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  519</span>}</div>
 <div class="ttc" id="aclasshelios_1_1app_1_1details_1_1Scheduler_html_a4b7893fedb3bcbef1716e364afc902cc"><div class="ttname"><a href="classhelios_1_1app_1_1details_1_1Scheduler.html#a4b7893fedb3bcbef1716e364afc902cc">helios::app::details::Scheduler::Clear</a></div><div class="ttdeci">void Clear()</div><div class="ttdoc">Clears all schedules and systems.</div><div class="ttdef"><b>Definition</b> <a href="scheduler_8hpp_source.html#l00465">scheduler.hpp:465</a></div></div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_ae59ec4dcf9819c1dcfdca9e4de4c8cbc"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#ae59ec4dcf9819c1dcfdca9e4de4c8cbc">helios::ecs::World::Clear</a></div><div class="ttdeci">void Clear()</div><div class="ttdoc">Clears the world, removing all data.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00645">world.hpp:645</a></div></div>
 </div><!-- fragment -->
@@ -894,12 +894,12 @@ template&lt;SystemSetTrait Set, ScheduleTrait S&gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a18">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00627">627</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  627</span>                                                                      {</div>
-<div class="line"><span class="lineno">  628</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!<a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">IsUpdating</a>(), <span class="stringliteral">&quot;Failed to configure set &#39;{}&#39;: Cannot configure sets while app is running!&quot;</span>,</div>
-<div class="line"><span class="lineno">  629</span>                SystemSetNameOf&lt;Set&gt;());</div>
-<div class="line"><span class="lineno">  630</span>  <span class="keywordflow">return</span> SystemSetConfig&lt;S, Set&gt;(*<span class="keyword">this</span>, schedule);</div>
-<div class="line"><span class="lineno">  631</span>}</div>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00632">632</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  632</span>                                                                      {</div>
+<div class="line"><span class="lineno">  633</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!<a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">IsUpdating</a>(), <span class="stringliteral">&quot;Failed to configure set &#39;{}&#39;: Cannot configure sets while app is running!&quot;</span>,</div>
+<div class="line"><span class="lineno">  634</span>                SystemSetNameOf&lt;Set&gt;());</div>
+<div class="line"><span class="lineno">  635</span>  <span class="keywordflow">return</span> SystemSetConfig&lt;S, Set&gt;(*<span class="keyword">this</span>, schedule);</div>
+<div class="line"><span class="lineno">  636</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -939,11 +939,11 @@ template&lt;ecs::SystemTrait T&gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2app_8hpp-example.html#a30">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/app.hpp</a>, and <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a30">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00375">375</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  375</span>                                                     {</div>
-<div class="line"><span class="lineno">  376</span>    <span class="keywordflow">return</span> scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#a1b18d24f232e7f455eb401aec2b4956e">ContainsSystem</a>&lt;T&gt;();</div>
-<div class="line"><span class="lineno">  377</span>  }</div>
-<div class="ttc" id="aclasshelios_1_1app_1_1details_1_1Scheduler_html_a1b18d24f232e7f455eb401aec2b4956e"><div class="ttname"><a href="classhelios_1_1app_1_1details_1_1Scheduler.html#a1b18d24f232e7f455eb401aec2b4956e">helios::app::details::Scheduler::ContainsSystem</a></div><div class="ttdeci">bool ContainsSystem() const noexcept</div><div class="ttdoc">Checks if a system of type T is in any schedule.</div><div class="ttdef"><b>Definition</b> <a href="scheduler_8hpp_source.html#l00730">scheduler.hpp:730</a></div></div>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00380">380</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  380</span>                                                     {</div>
+<div class="line"><span class="lineno">  381</span>    <span class="keywordflow">return</span> scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#a1b18d24f232e7f455eb401aec2b4956e">ContainsSystem</a>&lt;T&gt;();</div>
+<div class="line"><span class="lineno">  382</span>  }</div>
+<div class="ttc" id="aclasshelios_1_1app_1_1details_1_1Scheduler_html_a1b18d24f232e7f455eb401aec2b4956e"><div class="ttname"><a href="classhelios_1_1app_1_1details_1_1Scheduler.html#a1b18d24f232e7f455eb401aec2b4956e">helios::app::details::Scheduler::ContainsSystem</a></div><div class="ttdeci">bool ContainsSystem() const noexcept</div><div class="ttdoc">Checks if a system of type T is in any schedule.</div><div class="ttdef"><b>Definition</b> <a href="scheduler_8hpp_source.html#l00742">scheduler.hpp:742</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -989,10 +989,10 @@ template&lt;ecs::SystemTrait T, ScheduleTrait S&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if system is present, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00387">387</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  387</span>                                                 {}) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
-<div class="line"><span class="lineno">  388</span>    <span class="keywordflow">return</span> scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#a1b18d24f232e7f455eb401aec2b4956e">ContainsSystem</a>&lt;T&gt;(schedule);</div>
-<div class="line"><span class="lineno">  389</span>  }</div>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00392">392</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  392</span>                                                 {}) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><span class="lineno">  393</span>    <span class="keywordflow">return</span> scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#a1b18d24f232e7f455eb401aec2b4956e">ContainsSystem</a>&lt;T&gt;(schedule);</div>
+<div class="line"><span class="lineno">  394</span>  }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1041,10 +1041,10 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a21">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00321">321</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  321</span>                                       {</div>
-<div class="line"><span class="lineno">  322</span>    world_.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#a2f993d9701beec843b3925befc340356">EmplaceResource</a>&lt;T&gt;(std::forward&lt;Args&gt;(args)...);</div>
-<div class="line"><span class="lineno">  323</span>  }</div>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00326">326</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  326</span>                                       {</div>
+<div class="line"><span class="lineno">  327</span>    world_.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#a2f993d9701beec843b3925befc340356">EmplaceResource</a>&lt;T&gt;(std::forward&lt;Args&gt;(args)...);</div>
+<div class="line"><span class="lineno">  328</span>  }</div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_a2f993d9701beec843b3925befc340356"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#a2f993d9701beec843b3925befc340356">helios::ecs::World::EmplaceResource</a></div><div class="ttdeci">void EmplaceResource(Args &amp;&amp;... args)</div><div class="ttdoc">Emplaces a resource in-place.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00352">world.hpp:352</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -1103,11 +1103,11 @@ template&lt;ScheduleTrait S&gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a12">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00578">578</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  578</span>                                                                {</div>
-<div class="line"><span class="lineno">  579</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(graphs_built_, <span class="stringliteral">&quot;Failed to execute schedule: Scheduler must be built before update!&quot;</span>);</div>
-<div class="line"><span class="lineno">  580</span>  scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#a14e8ff4d0b8752dc89c76929fa416179">ExecuteSchedule</a>&lt;S&gt;(world_, executor);</div>
-<div class="line"><span class="lineno">  581</span>}</div>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00583">583</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  583</span>                                                                {</div>
+<div class="line"><span class="lineno">  584</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(graphs_built_, <span class="stringliteral">&quot;Failed to execute schedule: Scheduler must be built before update!&quot;</span>);</div>
+<div class="line"><span class="lineno">  585</span>  scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#a14e8ff4d0b8752dc89c76929fa416179">ExecuteSchedule</a>&lt;S&gt;(world_, executor);</div>
+<div class="line"><span class="lineno">  586</span>}</div>
 <div class="ttc" id="aclasshelios_1_1app_1_1details_1_1Scheduler_html_a14e8ff4d0b8752dc89c76929fa416179"><div class="ttname"><a href="classhelios_1_1app_1_1details_1_1Scheduler.html#a14e8ff4d0b8752dc89c76929fa416179">helios::app::details::Scheduler::ExecuteSchedule</a></div><div class="ttdeci">void ExecuteSchedule(ecs::World &amp;world, async::Executor &amp;executor)</div><div class="ttdoc">Executes all systems in the specified schedule.</div><div class="ttdef"><b>Definition</b> <a href="scheduler_8hpp_source.html#l00545">scheduler.hpp:545</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -1155,11 +1155,11 @@ template&lt;StageTrait S&gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a13">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00584">584</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  584</span>                                                        {</div>
-<div class="line"><span class="lineno">  585</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(graphs_built_, <span class="stringliteral">&quot;Failed to execute stage: Scheduler must be built before update!&quot;</span>);</div>
-<div class="line"><span class="lineno">  586</span>  scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#acc68bc227ef3255668e285bb0efcc62d">ExecuteStage</a>&lt;S&gt;(world_, executor);</div>
-<div class="line"><span class="lineno">  587</span>}</div>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00589">589</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  589</span>                                                        {</div>
+<div class="line"><span class="lineno">  590</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(graphs_built_, <span class="stringliteral">&quot;Failed to execute stage: Scheduler must be built before update!&quot;</span>);</div>
+<div class="line"><span class="lineno">  591</span>  scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#acc68bc227ef3255668e285bb0efcc62d">ExecuteStage</a>&lt;S&gt;(world_, executor);</div>
+<div class="line"><span class="lineno">  592</span>}</div>
 <div class="ttc" id="aclasshelios_1_1app_1_1details_1_1Scheduler_html_acc68bc227ef3255668e285bb0efcc62d"><div class="ttname"><a href="classhelios_1_1app_1_1details_1_1Scheduler.html#acc68bc227ef3255668e285bb0efcc62d">helios::app::details::Scheduler::ExecuteStage</a></div><div class="ttdeci">void ExecuteStage(ecs::World &amp;world, async::Executor &amp;executor)</div><div class="ttdoc">Executes all schedules in the specified stage.</div><div class="ttdef"><b>Definition</b> <a href="scheduler_8hpp_source.html#l00578">scheduler.hpp:578</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -1199,14 +1199,14 @@ template&lt;StageTrait S&gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a10">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00562">562</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  562</span>                                                      {</div>
-<div class="line"><span class="lineno">  563</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!<a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">IsUpdating</a>(), <span class="stringliteral">&quot;Failed to extract: Cannot extract while app is running!&quot;</span>);</div>
-<div class="line"><span class="lineno">  564</span> </div>
-<div class="line"><span class="lineno">  565</span>  <span class="keywordflow">if</span> (extract_fn_) {</div>
-<div class="line"><span class="lineno">  566</span>    extract_fn_(main_world, world_);</div>
-<div class="line"><span class="lineno">  567</span>  }</div>
-<div class="line"><span class="lineno">  568</span>}</div>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00567">567</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  567</span>                                                      {</div>
+<div class="line"><span class="lineno">  568</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!<a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">IsUpdating</a>(), <span class="stringliteral">&quot;Failed to extract: Cannot extract while app is running!&quot;</span>);</div>
+<div class="line"><span class="lineno">  569</span> </div>
+<div class="line"><span class="lineno">  570</span>  <span class="keywordflow">if</span> (extract_fn_) {</div>
+<div class="line"><span class="lineno">  571</span>    extract_fn_(main_world, world_);</div>
+<div class="line"><span class="lineno">  572</span>  }</div>
+<div class="line"><span class="lineno">  573</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1238,8 +1238,8 @@ template&lt;StageTrait S&gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2app_8hpp-example.html#a43">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/app.hpp</a>, and <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a40">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00444">444</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  444</span>{ <span class="keywordflow">return</span> world_; }</div>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00449">449</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  449</span>{ <span class="keywordflow">return</span> world_; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1279,10 +1279,10 @@ template&lt;ecs::EventTrait T&gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2app_8hpp-example.html#a36">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/app.hpp</a>, and <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a34">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00407">407</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  407</span>                                               {</div>
-<div class="line"><span class="lineno">  408</span>    <span class="keywordflow">return</span> world_.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#a1631e7cf7bfb4533997958cc08fa7ef3">HasEvent</a>&lt;T&gt;();</div>
-<div class="line"><span class="lineno">  409</span>  }</div>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00412">412</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  412</span>                                               {</div>
+<div class="line"><span class="lineno">  413</span>    <span class="keywordflow">return</span> world_.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#a1631e7cf7bfb4533997958cc08fa7ef3">HasEvent</a>&lt;T&gt;();</div>
+<div class="line"><span class="lineno">  414</span>  }</div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_a1631e7cf7bfb4533997958cc08fa7ef3"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#a1631e7cf7bfb4533997958cc08fa7ef3">helios::ecs::World::HasEvent</a></div><div class="ttdeci">bool HasEvent() const</div><div class="ttdoc">Checks if a event registered.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00545">world.hpp:545</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -1323,10 +1323,10 @@ template&lt;ecs::ResourceTrait T&gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2app_8hpp-example.html#a34">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/app.hpp</a>, and <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a32">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00397">397</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  397</span>                                                  {</div>
-<div class="line"><span class="lineno">  398</span>    <span class="keywordflow">return</span> world_.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#a36499296d4e35d0784b402f6ca500d73">HasResource</a>&lt;T&gt;();</div>
-<div class="line"><span class="lineno">  399</span>  }</div>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00402">402</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  402</span>                                                  {</div>
+<div class="line"><span class="lineno">  403</span>    <span class="keywordflow">return</span> world_.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#a36499296d4e35d0784b402f6ca500d73">HasResource</a>&lt;T&gt;();</div>
+<div class="line"><span class="lineno">  404</span>  }</div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_a36499296d4e35d0784b402f6ca500d73"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#a36499296d4e35d0784b402f6ca500d73">helios::ecs::World::HasResource</a></div><div class="ttdeci">bool HasResource() const</div><div class="ttdoc">Checks if a resource exists.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00534">world.hpp:534</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -1374,10 +1374,10 @@ template&lt;ecs::ResourceTrait T&gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a19">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00308">308</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  308</span>                                    {</div>
-<div class="line"><span class="lineno">  309</span>    world_.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#a5f966712c2bbcfb2d037e82106b55bf9">InsertResource</a>(std::forward&lt;T&gt;(resource));</div>
-<div class="line"><span class="lineno">  310</span>  }</div>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00313">313</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  313</span>                                    {</div>
+<div class="line"><span class="lineno">  314</span>    world_.<a class="code hl_function" href="classhelios_1_1ecs_1_1World.html#a5f966712c2bbcfb2d037e82106b55bf9">InsertResource</a>(std::forward&lt;T&gt;(resource));</div>
+<div class="line"><span class="lineno">  315</span>  }</div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1World_html_a5f966712c2bbcfb2d037e82106b55bf9"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html#a5f966712c2bbcfb2d037e82106b55bf9">helios::ecs::World::InsertResource</a></div><div class="ttdeci">void InsertResource(T &amp;&amp;resource)</div><div class="ttdoc">Inserts a resource into the world.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00327">world.hpp:327</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -1410,8 +1410,8 @@ template&lt;ecs::ResourceTrait T&gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a36">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00415">415</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  415</span>{ <span class="keywordflow">return</span> is_updating_.load(std::memory_order_acquire); }</div>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00420">420</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  420</span>{ <span class="keywordflow">return</span> is_updating_.load(std::memory_order_acquire); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1467,21 +1467,21 @@ template&lt;ecs::ResourceTrait T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00492">492</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  492</span>                                                        {</div>
-<div class="line"><span class="lineno">  493</span>  <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;other) {</div>
-<div class="line"><span class="lineno">  494</span>    world_ = std::move(other.world_);</div>
-<div class="line"><span class="lineno">  495</span>    scheduler_ = std::move(other.scheduler_);</div>
-<div class="line"><span class="lineno">  496</span>    extract_fn_ = std::move(other.extract_fn_);</div>
-<div class="line"><span class="lineno">  497</span>    is_updating_.store(other.is_updating_.load(std::memory_order_acquire), std::memory_order_release);</div>
-<div class="line"><span class="lineno">  498</span>    graphs_built_ = other.graphs_built_;</div>
-<div class="line"><span class="lineno">  499</span>    allow_overlapping_updates_ = other.allow_overlapping_updates_;</div>
-<div class="line"><span class="lineno">  500</span>    max_overlapping_updates_ = other.max_overlapping_updates_;</div>
-<div class="line"><span class="lineno">  501</span>    current_overlapping_updates_.store(other.current_overlapping_updates_.load(std::memory_order_acquire),</div>
-<div class="line"><span class="lineno">  502</span>                                       std::memory_order_release);</div>
-<div class="line"><span class="lineno">  503</span>  }</div>
-<div class="line"><span class="lineno">  504</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><span class="lineno">  505</span>}</div>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00497">497</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  497</span>                                                        {</div>
+<div class="line"><span class="lineno">  498</span>  <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;other) {</div>
+<div class="line"><span class="lineno">  499</span>    world_ = std::move(other.world_);</div>
+<div class="line"><span class="lineno">  500</span>    scheduler_ = std::move(other.scheduler_);</div>
+<div class="line"><span class="lineno">  501</span>    extract_fn_ = std::move(other.extract_fn_);</div>
+<div class="line"><span class="lineno">  502</span>    is_updating_.store(other.is_updating_.load(std::memory_order_acquire), std::memory_order_release);</div>
+<div class="line"><span class="lineno">  503</span>    graphs_built_ = other.graphs_built_;</div>
+<div class="line"><span class="lineno">  504</span>    allow_overlapping_updates_ = other.allow_overlapping_updates_;</div>
+<div class="line"><span class="lineno">  505</span>    max_overlapping_updates_ = other.max_overlapping_updates_;</div>
+<div class="line"><span class="lineno">  506</span>    current_overlapping_updates_.store(other.current_overlapping_updates_.load(std::memory_order_acquire),</div>
+<div class="line"><span class="lineno">  507</span>                                       std::memory_order_release);</div>
+<div class="line"><span class="lineno">  508</span>  }</div>
+<div class="line"><span class="lineno">  509</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><span class="lineno">  510</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1519,8 +1519,8 @@ template&lt;ecs::ResourceTrait T&gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a28">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00361">361</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  361</span>{ allow_overlapping_updates_ = allow; }</div>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00366">366</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  366</span>{ allow_overlapping_updates_ = allow; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1536,7 +1536,7 @@ template&lt;ecs::ResourceTrait T&gt; </div>
         <tr>
           <td class="memname">void helios::app::SubApp::SetExtractFunction </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1SubApp.html#a8f7f06ffb86bd69104b976d86d78be70">ExtractFn</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1SubApp.html#a29f5cd651c168ef7f0d00fc46dedefa6">ExtractFn</a>&#160;</td>
           <td class="paramname"><em>extract_fn</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1558,8 +1558,8 @@ template&lt;ecs::ResourceTrait T&gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a27">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00355">355</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  355</span>{ extract_fn_ = std::move(extract_fn); }</div>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00360">360</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  360</span>{ extract_fn_ = std::move(extract_fn); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1597,8 +1597,8 @@ template&lt;ecs::ResourceTrait T&gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a29">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00367">367</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  367</span>{ max_overlapping_updates_ = max; }</div>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00372">372</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  372</span>{ max_overlapping_updates_ = max; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1630,8 +1630,8 @@ template&lt;ecs::ResourceTrait T&gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2app_8hpp-example.html#a39">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/app.hpp</a>, and <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a38">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00427">427</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  427</span>{ <span class="keywordflow">return</span> scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#ae064d1c0777b4f80d1db19f2647384df">SystemCount</a>(); }</div>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00432">432</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  432</span>{ <span class="keywordflow">return</span> scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#ae064d1c0777b4f80d1db19f2647384df">SystemCount</a>(); }</div>
 <div class="ttc" id="aclasshelios_1_1app_1_1details_1_1Scheduler_html_ae064d1c0777b4f80d1db19f2647384df"><div class="ttname"><a href="classhelios_1_1app_1_1details_1_1Scheduler.html#ae064d1c0777b4f80d1db19f2647384df">helios::app::details::Scheduler::SystemCount</a></div><div class="ttdeci">size_t SystemCount() const noexcept</div><div class="ttdoc">Gets the total number of systems across all schedules.</div><div class="ttdef"><b>Definition</b> <a href="scheduler_8hpp_source.html#l00333">scheduler.hpp:333</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -1677,10 +1677,10 @@ template&lt;ScheduleTrait S&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Number of systems in the schedule </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00436">436</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  436</span>                                                {}) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
-<div class="line"><span class="lineno">  437</span>    <span class="keywordflow">return</span> scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#ae064d1c0777b4f80d1db19f2647384df">SystemCount</a>(schedule);</div>
-<div class="line"><span class="lineno">  438</span>  }</div>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00441">441</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  441</span>                                                {}) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><span class="lineno">  442</span>    <span class="keywordflow">return</span> scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#ae064d1c0777b4f80d1db19f2647384df">SystemCount</a>(schedule);</div>
+<div class="line"><span class="lineno">  443</span>  }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1719,52 +1719,52 @@ template&lt;ScheduleTrait S&gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a47">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00516">516</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  516</span>                                                  {</div>
-<div class="line"><span class="lineno">  517</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(graphs_built_, <span class="stringliteral">&quot;Failed to update sub app: Scheduler must be built before update!&quot;</span>);</div>
-<div class="line"><span class="lineno">  518</span> </div>
-<div class="line"><span class="lineno">  519</span>  <span class="keywordflow">if</span> (!allow_overlapping_updates_) {</div>
-<div class="line"><span class="lineno">  520</span>    <span class="comment">// Enforce single update at a time</span></div>
-<div class="line"><span class="lineno">  521</span>    <span class="keywordtype">bool</span> expected = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  522</span>    <span class="keywordflow">if</span> (!is_updating_.compare_exchange_strong(expected, <span class="keyword">true</span>, std::memory_order_acq_rel)) {</div>
-<div class="line"><span class="lineno">  523</span>      <a class="code hl_define" href="logger_8hpp.html#a5ee2b388c5e1155f8aa9f680e3b8cf3b">HELIOS_ERROR</a>(<span class="stringliteral">&quot;Failed to update sub app: Overlapping updates not allowed!&quot;</span>);</div>
-<div class="line"><span class="lineno">  524</span>      <span class="keywordflow">return</span>;</div>
-<div class="line"><span class="lineno">  525</span>    }</div>
-<div class="line"><span class="lineno">  526</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  527</span>    <span class="comment">// Track overlapping updates if limit is set</span></div>
-<div class="line"><span class="lineno">  528</span>    <span class="keywordflow">if</span> (max_overlapping_updates_ &gt; 0) {</div>
-<div class="line"><span class="lineno">  529</span>      <span class="keywordtype">size_t</span> current = current_overlapping_updates_.fetch_add(1, std::memory_order_acq_rel);</div>
-<div class="line"><span class="lineno">  530</span>      <span class="keywordflow">if</span> (current &gt;= max_overlapping_updates_) {</div>
-<div class="line"><span class="lineno">  531</span>        current_overlapping_updates_.fetch_sub(1, std::memory_order_acq_rel);</div>
-<div class="line"><span class="lineno">  532</span>        <a class="code hl_define" href="logger_8hpp.html#abee1a45a543b16109f05136a9771e86c">HELIOS_WARN</a>(<span class="stringliteral">&quot;Failed to update sub app: Max overlapping updates ({}) reached!&quot;</span>, max_overlapping_updates_);</div>
-<div class="line"><span class="lineno">  533</span>        <span class="keywordflow">return</span>;</div>
-<div class="line"><span class="lineno">  534</span>      }</div>
-<div class="line"><span class="lineno">  535</span>    }</div>
-<div class="line"><span class="lineno">  536</span> </div>
-<div class="line"><span class="lineno">  537</span>    is_updating_.store(<span class="keyword">true</span>, std::memory_order_release);</div>
-<div class="line"><span class="lineno">  538</span>  }</div>
-<div class="line"><span class="lineno">  539</span> </div>
-<div class="line"><span class="lineno">  540</span>  <span class="comment">// Execute all stages in order (StartUpStage only runs during Initialize, not Update)</span></div>
-<div class="line"><span class="lineno">  541</span>  scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#acc68bc227ef3255668e285bb0efcc62d">ExecuteStage</a>&lt;MainStage&gt;(world_, executor);</div>
-<div class="line"><span class="lineno">  542</span>  scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#acc68bc227ef3255668e285bb0efcc62d">ExecuteStage</a>&lt;UpdateStage&gt;(world_, executor);</div>
-<div class="line"><span class="lineno">  543</span>  scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#acc68bc227ef3255668e285bb0efcc62d">ExecuteStage</a>&lt;CleanUpStage&gt;(world_, executor);</div>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00521">521</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  521</span>                                                  {</div>
+<div class="line"><span class="lineno">  522</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(graphs_built_, <span class="stringliteral">&quot;Failed to update sub app: Scheduler must be built before update!&quot;</span>);</div>
+<div class="line"><span class="lineno">  523</span> </div>
+<div class="line"><span class="lineno">  524</span>  <span class="keywordflow">if</span> (!allow_overlapping_updates_) {</div>
+<div class="line"><span class="lineno">  525</span>    <span class="comment">// Enforce single update at a time</span></div>
+<div class="line"><span class="lineno">  526</span>    <span class="keywordtype">bool</span> expected = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  527</span>    <span class="keywordflow">if</span> (!is_updating_.compare_exchange_strong(expected, <span class="keyword">true</span>, std::memory_order_acq_rel)) {</div>
+<div class="line"><span class="lineno">  528</span>      <a class="code hl_define" href="logger_8hpp.html#a5ee2b388c5e1155f8aa9f680e3b8cf3b">HELIOS_ERROR</a>(<span class="stringliteral">&quot;Failed to update sub app: Overlapping updates not allowed!&quot;</span>);</div>
+<div class="line"><span class="lineno">  529</span>      <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  530</span>    }</div>
+<div class="line"><span class="lineno">  531</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  532</span>    <span class="comment">// Track overlapping updates if limit is set</span></div>
+<div class="line"><span class="lineno">  533</span>    <span class="keywordflow">if</span> (max_overlapping_updates_ &gt; 0) {</div>
+<div class="line"><span class="lineno">  534</span>      <span class="keywordtype">size_t</span> current = current_overlapping_updates_.fetch_add(1, std::memory_order_acq_rel);</div>
+<div class="line"><span class="lineno">  535</span>      <span class="keywordflow">if</span> (current &gt;= max_overlapping_updates_) {</div>
+<div class="line"><span class="lineno">  536</span>        current_overlapping_updates_.fetch_sub(1, std::memory_order_acq_rel);</div>
+<div class="line"><span class="lineno">  537</span>        <a class="code hl_define" href="logger_8hpp.html#abee1a45a543b16109f05136a9771e86c">HELIOS_WARN</a>(<span class="stringliteral">&quot;Failed to update sub app: Max overlapping updates ({}) reached!&quot;</span>, max_overlapping_updates_);</div>
+<div class="line"><span class="lineno">  538</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  539</span>      }</div>
+<div class="line"><span class="lineno">  540</span>    }</div>
+<div class="line"><span class="lineno">  541</span> </div>
+<div class="line"><span class="lineno">  542</span>    is_updating_.store(<span class="keyword">true</span>, std::memory_order_release);</div>
+<div class="line"><span class="lineno">  543</span>  }</div>
 <div class="line"><span class="lineno">  544</span> </div>
-<div class="line"><span class="lineno">  545</span>  <span class="comment">// Merge all deferred commands into world after execution</span></div>
-<div class="line"><span class="lineno">  546</span>  scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#a75a24d4f384fa24c487684f608e5d647">MergeCommandsToWorld</a>(world_);</div>
-<div class="line"><span class="lineno">  547</span> </div>
-<div class="line"><span class="lineno">  548</span>  <span class="comment">// Execute all commands (create entities, add/remove components, etc.)</span></div>
-<div class="line"><span class="lineno">  549</span>  world_.Update();</div>
-<div class="line"><span class="lineno">  550</span> </div>
-<div class="line"><span class="lineno">  551</span>  <span class="comment">// Reset all per-system frame allocators to reclaim temporary memory</span></div>
-<div class="line"><span class="lineno">  552</span>  scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#ae4b1ac6c638ac3de40c15057aa67c556">ResetFrameAllocators</a>();</div>
-<div class="line"><span class="lineno">  553</span> </div>
-<div class="line"><span class="lineno">  554</span>  <span class="comment">// Clear update flags</span></div>
-<div class="line"><span class="lineno">  555</span>  <span class="keywordflow">if</span> (allow_overlapping_updates_ &amp;&amp; max_overlapping_updates_ &gt; 0) {</div>
-<div class="line"><span class="lineno">  556</span>    current_overlapping_updates_.fetch_sub(1, std::memory_order_acq_rel);</div>
-<div class="line"><span class="lineno">  557</span>  }</div>
+<div class="line"><span class="lineno">  545</span>  <span class="comment">// Execute all stages in order (StartUpStage only runs during Initialize, not Update)</span></div>
+<div class="line"><span class="lineno">  546</span>  scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#acc68bc227ef3255668e285bb0efcc62d">ExecuteStage</a>&lt;MainStage&gt;(world_, executor);</div>
+<div class="line"><span class="lineno">  547</span>  scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#acc68bc227ef3255668e285bb0efcc62d">ExecuteStage</a>&lt;UpdateStage&gt;(world_, executor);</div>
+<div class="line"><span class="lineno">  548</span>  scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#acc68bc227ef3255668e285bb0efcc62d">ExecuteStage</a>&lt;CleanUpStage&gt;(world_, executor);</div>
+<div class="line"><span class="lineno">  549</span> </div>
+<div class="line"><span class="lineno">  550</span>  <span class="comment">// Merge all deferred commands into world after execution</span></div>
+<div class="line"><span class="lineno">  551</span>  scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#a75a24d4f384fa24c487684f608e5d647">MergeCommandsToWorld</a>(world_);</div>
+<div class="line"><span class="lineno">  552</span> </div>
+<div class="line"><span class="lineno">  553</span>  <span class="comment">// Execute all commands (create entities, add/remove components, etc.)</span></div>
+<div class="line"><span class="lineno">  554</span>  world_.Update();</div>
+<div class="line"><span class="lineno">  555</span> </div>
+<div class="line"><span class="lineno">  556</span>  <span class="comment">// Reset all per-system frame allocators to reclaim temporary memory</span></div>
+<div class="line"><span class="lineno">  557</span>  scheduler_.<a class="code hl_function" href="classhelios_1_1app_1_1details_1_1Scheduler.html#ae4b1ac6c638ac3de40c15057aa67c556">ResetFrameAllocators</a>();</div>
 <div class="line"><span class="lineno">  558</span> </div>
-<div class="line"><span class="lineno">  559</span>  is_updating_.store(<span class="keyword">false</span>, std::memory_order_release);</div>
-<div class="line"><span class="lineno">  560</span>}</div>
+<div class="line"><span class="lineno">  559</span>  <span class="comment">// Clear update flags</span></div>
+<div class="line"><span class="lineno">  560</span>  <span class="keywordflow">if</span> (allow_overlapping_updates_ &amp;&amp; max_overlapping_updates_ &gt; 0) {</div>
+<div class="line"><span class="lineno">  561</span>    current_overlapping_updates_.fetch_sub(1, std::memory_order_acq_rel);</div>
+<div class="line"><span class="lineno">  562</span>  }</div>
+<div class="line"><span class="lineno">  563</span> </div>
+<div class="line"><span class="lineno">  564</span>  is_updating_.store(<span class="keyword">false</span>, std::memory_order_release);</div>
+<div class="line"><span class="lineno">  565</span>}</div>
 <div class="ttc" id="aclasshelios_1_1app_1_1details_1_1Scheduler_html_a75a24d4f384fa24c487684f608e5d647"><div class="ttname"><a href="classhelios_1_1app_1_1details_1_1Scheduler.html#a75a24d4f384fa24c487684f608e5d647">helios::app::details::Scheduler::MergeCommandsToWorld</a></div><div class="ttdeci">void MergeCommandsToWorld(ecs::World &amp;world)</div><div class="ttdoc">Merges all system local commands into the world's main command queue.</div><div class="ttdef"><b>Definition</b> <a href="scheduler_8hpp_source.html#l00562">scheduler.hpp:562</a></div></div>
 <div class="ttc" id="aclasshelios_1_1app_1_1details_1_1Scheduler_html_ae4b1ac6c638ac3de40c15057aa67c556"><div class="ttname"><a href="classhelios_1_1app_1_1details_1_1Scheduler.html#ae4b1ac6c638ac3de40c15057aa67c556">helios::app::details::Scheduler::ResetFrameAllocators</a></div><div class="ttdeci">void ResetFrameAllocators() noexcept</div><div class="ttdoc">Resets all system frame allocators.</div><div class="ttdef"><b>Definition</b> <a href="scheduler_8hpp_source.html#l00571">scheduler.hpp:571</a></div></div>
 <div class="ttc" id="alogger_8hpp_html_a5ee2b388c5e1155f8aa9f680e3b8cf3b"><div class="ttname"><a href="logger_8hpp.html#a5ee2b388c5e1155f8aa9f680e3b8cf3b">HELIOS_ERROR</a></div><div class="ttdeci">#define HELIOS_ERROR(...)</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00689">logger.hpp:689</a></div></div>
@@ -1794,7 +1794,7 @@ template&lt;ScheduleTrait S&gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a41">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00472">472</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00477">477</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -1822,7 +1822,7 @@ template&lt;ScheduleTrait Schedule, ecs::SystemTrait... Systems&gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a42">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00476">476</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00481">481</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -1850,7 +1850,7 @@ template&lt;ScheduleTrait Schedule, SystemSetTrait Set&gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html#a43">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00479">479</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00484">484</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>

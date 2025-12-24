@@ -167,7 +167,8 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md_README"></a> <a class="anchor" id="readme-top"></a></p>
-<p><a href="https://github.com/RexarX/HeliosEngine/actions/workflows/ci.yaml"><img src="https://github.com/RexarX/HeliosEngine/workflows/CI/badge.svg" alt="CI" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/RexarX/HeliosEngine/actions/workflows/pre-commit.yaml"><img src="https://github.com/RexarX/HeliosEngine/workflows/Pre-Commit%20Checks/badge.svg" alt="Format Check" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/RexarX/HeliosEngine/blob/main/LICENSE"><img src="https://img.shields.io/github/license/RexarX/HeliosEngine.svg?style=for-the-badge" alt="MIT License" style="pointer-events: none;" class="inline"/></a> <a href="https://en.cppreference.com/w/cpp/23"><img src="https://img.shields.io/badge/C%2B%2B-23-blue.svg?style=for-the-badge&amp;logo=c%2B%2B" alt="C++23" style="pointer-events: none;" class="inline"/></a></p>
+<p><a href="https://en.cppreference.com/w/cpp/23"><img src="https://img.shields.io/badge/C%2B%2B-23-blue.svg?style=for-the-badge&amp;logo=c%2B%2B" alt="C++23" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/RexarX/HeliosEngine/blob/main/LICENSE"><img src="https://img.shields.io/github/license/RexarX/HeliosEngine.svg?style=for-the-badge" alt="MIT License" style="pointer-events: none;" class="inline"/></a></p>
+<p><a href="https://github.com/RexarX/HeliosEngine/actions/workflows/format.yaml"><img src="https://github.com/RexarX/HeliosEngine/workflows/Format%20Check/badge.svg" alt="Format Check" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/RexarX/HeliosEngine/actions/workflows/build-test.yaml"><img src="https://img.shields.io/github/actions/workflow/status/RexarX/HeliosEngine/build-test.yaml?branch=main&amp;label=Linux%20GCC&amp;logo=linux&amp;logoColor=white" alt="Linux GCC" class="inline"/></a> <a href="https://github.com/RexarX/HeliosEngine/actions/workflows/build-test.yaml"><img src="https://img.shields.io/github/actions/workflow/status/RexarX/HeliosEngine/build-test.yaml?branch=main&amp;label=Linux%20Clang&amp;logo=llvm&amp;logoColor=white" alt="Linux Clang" class="inline"/></a> <a href="https://github.com/RexarX/HeliosEngine/actions/workflows/build-test.yaml"><img src="https://img.shields.io/github/actions/workflow/status/RexarX/HeliosEngine/build-test.yaml?branch=main&amp;label=Windows%20MSVC&amp;logo=windows&amp;logoColor=white" alt="Windows MSVC" class="inline"/></a> <a href="https://github.com/RexarX/HeliosEngine/actions/workflows/build-test.yaml"><img src="https://img.shields.io/github/actions/workflow/status/RexarX/HeliosEngine/build-test.yaml?branch=main&amp;label=macOS%20Clang&amp;logo=apple&amp;logoColor=white" alt="macOS Clang" class="inline"/></a></p>
 <p><br  />
  </p><div align="center"> <img src="https://github.com/RexarX/HeliosEngine/blob/main/docs/img/logo.png" alt="Helios Engine Logo" width="100" height="100" class="inline"/> <h1 align="center">Helios Engine</h1>
 </div><div align="center"> </div><div align="center"> A modern, ECS based modular game engine framework built with C++23 <br  />
@@ -350,16 +351,14 @@ Requirements</h3>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><b>CMake</b>   </td><td class="markdownTableBodyNone">3.25+   </td><td class="markdownTableBodyNone">3.28+    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><b>C++ Compiler</b>   </td><td class="markdownTableBodyNone">GCC 13+, Clang 16+, MSVC 2022+   </td><td class="markdownTableBodyNone">GCC 15+, Clang 18+    </td></tr>
+<td class="markdownTableBodyNone"><b>C++ Compiler</b>   </td><td class="markdownTableBodyNone">GCC 14+, Clang 19+, MSVC 2022+   </td><td class="markdownTableBodyNone">GCC 15+, Clang 20+    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><b>Python</b>   </td><td class="markdownTableBodyNone">3.8+   </td><td class="markdownTableBodyNone">3.10+    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><b>Ninja</b>   </td><td class="markdownTableBodyNone">Any   </td><td class="markdownTableBodyNone">Latest   </td></tr>
+<td class="markdownTableBodyNone"><b>Python</b>   </td><td class="markdownTableBodyNone">3.8+   </td><td class="markdownTableBodyNone">3.10+   </td></tr>
 </table>
 <p><b>Compiler Support:</b></p>
 <ul>
-<li>GCC 13+ (tested on 15.2.1)</li>
-<li>Clang 16+ (tested on 20.1.8)</li>
+<li>GCC 14+ (tested on 14.2.0)</li>
+<li>Clang 19+ (tested on 20.1.8)</li>
 <li>MSVC 19.34+ (Visual Studio 2022 17.4+)</li>
 </ul>
 <p><a class="anchor" id="dependencies"></a></p>
@@ -368,8 +367,8 @@ Dependencies</h3>
 <h4><a class="anchor" id="autotoc_md79"></a>
 Core Dependencies</h4>
 <ul>
-<li><a href="https://www.boost.org/">Boost</a> (1.82+) - stacktrace, pool, unordered containers</li>
-<li><a href="https://github.com/gabime/spdlog">spdlog</a> (1.14+) - Fast logging</li>
+<li><a href="https://www.boost.org/">Boost</a> (1.87+) - stacktrace, pool, unordered containers</li>
+<li><a href="https://github.com/gabime/spdlog">spdlog</a> (1.12+) - Fast logging</li>
 <li><a href="https://github.com/mariusbancila/stduuid">stduuid</a> (1.2+) - UUID generation</li>
 <li><a href="https://github.com/taskflow/taskflow">Taskflow</a> (3.10+) - Parallel task programming</li>
 </ul>
@@ -541,10 +540,10 @@ Basic Application Setup</h3>
 <div class="ttc" id="aapp_8hpp_html"><div class="ttname"><a href="app_8hpp.html">app.hpp</a></div></div>
 <div class="ttc" id="aclasshelios_1_1app_1_1AccessPolicy_html"><div class="ttname"><a href="classhelios_1_1app_1_1AccessPolicy.html">helios::app::AccessPolicy</a></div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00116">access_policy.hpp:116</a></div></div>
 <div class="ttc" id="aclasshelios_1_1app_1_1AccessPolicy_html_aeb90df674f57b9b2d0a35a54c42fa58f"><div class="ttname"><a href="classhelios_1_1app_1_1AccessPolicy.html#aeb90df674f57b9b2d0a35a54c42fa58f">helios::app::AccessPolicy::WriteResources</a></div><div class="ttdeci">constexpr auto WriteResources(this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Declares write access to resource types.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00356">access_policy.hpp:356</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html"><div class="ttname"><a href="classhelios_1_1app_1_1App.html">helios::app::App</a></div><div class="ttdoc">Application class.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00048">app.hpp:48</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a30a24725220ea4c95f3520920d79bb76"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a30a24725220ea4c95f3520920d79bb76">helios::app::App::InsertResource</a></div><div class="ttdeci">auto InsertResource(this auto &amp;&amp;self, T &amp;&amp;resource) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Inserts a resource into the main sub-app.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00604">app.hpp:604</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html"><div class="ttname"><a href="classhelios_1_1app_1_1App.html">helios::app::App</a></div><div class="ttdoc">Application class.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00049">app.hpp:49</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a30a24725220ea4c95f3520920d79bb76"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a30a24725220ea4c95f3520920d79bb76">helios::app::App::InsertResource</a></div><div class="ttdeci">auto InsertResource(this auto &amp;&amp;self, T &amp;&amp;resource) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Inserts a resource into the main sub-app.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00610">app.hpp:610</a></div></div>
 <div class="ttc" id="aclasshelios_1_1app_1_1App_html_a6ecfe054032e3c1eb7bc735f02413ded"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a6ecfe054032e3c1eb7bc735f02413ded">helios::app::App::Run</a></div><div class="ttdeci">AppExitCode Run()</div><div class="ttdoc">Runs the application with the given arguments.</div><div class="ttdef"><b>Definition</b> <a href="app_8cpp_source.html#l00019">app.cpp:19</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_aca1848d9d552b352f72e7538c0628616"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#aca1848d9d552b352f72e7538c0628616">helios::app::App::AddSystem</a></div><div class="ttdeci">auto AddSystem(this auto &amp;&amp;self, Schedule schedule={}) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Adds a system to the specified schedule in the main sub-app.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00576">app.hpp:576</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_aca1848d9d552b352f72e7538c0628616"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#aca1848d9d552b352f72e7538c0628616">helios::app::App::AddSystem</a></div><div class="ttdeci">auto AddSystem(this auto &amp;&amp;self, Schedule schedule={}) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Adds a system to the specified schedule in the main sub-app.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00582">app.hpp:582</a></div></div>
 <div class="ttc" id="aclasshelios_1_1app_1_1SystemContext_html"><div class="ttname"><a href="classhelios_1_1app_1_1SystemContext.html">helios::app::SystemContext</a></div><div class="ttdoc">Per-system execution context with validated access.</div><div class="ttdef"><b>Definition</b> <a href="system__context_8hpp_source.html#l00053">system_context.hpp:53</a></div></div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1BasicQuery_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicQuery.html">helios::ecs::BasicQuery</a></div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l01107">query.hpp:1107</a></div></div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1System_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1System.html">helios::ecs::System</a></div><div class="ttdef"><b>Definition</b> <a href="system_8hpp_source.html#l00057">system.hpp:57</a></div></div>
@@ -621,7 +620,7 @@ Using Modules</h3>
 <div class="line"><span class="comment">// Use the module</span></div>
 <div class="line"><a class="code hl_class" href="classhelios_1_1app_1_1App.html">App</a> app;</div>
 <div class="line">app.<a class="code hl_function" href="classhelios_1_1app_1_1App.html#ad00f452ada02721db7eae955b0eba1f5">AddModule</a>&lt;<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">GameModule</a>&gt;();</div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_ad00f452ada02721db7eae955b0eba1f5"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#ad00f452ada02721db7eae955b0eba1f5">helios::app::App::AddModule</a></div><div class="ttdeci">auto AddModule(this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Adds a module to the main sub-app.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00545">app.hpp:545</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_ad00f452ada02721db7eae955b0eba1f5"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#ad00f452ada02721db7eae955b0eba1f5">helios::app::App::AddModule</a></div><div class="ttdeci">auto AddModule(this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Adds a module to the main sub-app.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00551">app.hpp:551</a></div></div>
 <div class="ttc" id="aclasshelios_1_1app_1_1Module_html"><div class="ttname"><a href="classhelios_1_1app_1_1Module.html">helios::app::Module</a></div><div class="ttdoc">Base class for all modules.</div><div class="ttdef"><b>Definition</b> <a href="module_8hpp_source.html#l00028">module.hpp:28</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1app_html_a6336fe1dd31d2537c02c2571437ab93f"><div class="ttname"><a href="namespacehelios_1_1app.html#a6336fe1dd31d2537c02c2571437ab93f">helios::app::kUpdate</a></div><div class="ttdeci">constexpr Update kUpdate</div><div class="ttdef"><b>Definition</b> <a href="schedules_8hpp_source.html#l00252">schedules.hpp:252</a></div></div>
 </div><!-- fragment --><p><a class="el" href="index.html#readme-top">↑ Back to Top</a></p>

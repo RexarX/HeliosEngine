@@ -461,63 +461,63 @@ template&lt;std::output_iterator&lt; <a class="el" href="classhelios_1_1ecs_1_1E
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2details_2entities_manager_8hpp-example.html#a9">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/details/entities_manager.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="entities__manager_8hpp_source.html#l00267">267</a> of file <a class="el" href="entities__manager_8hpp_source.html">entities_manager.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  267</span>                                                                   {</div>
-<div class="line"><span class="lineno">  268</span>  <span class="keywordflow">if</span> (<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">count</a> == 0) [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">unlikely</a>]] {</div>
-<div class="line"><span class="lineno">  269</span>    <span class="keywordflow">return</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">out</a>;</div>
-<div class="line"><span class="lineno">  270</span>  }</div>
-<div class="line"><span class="lineno">  271</span> </div>
-<div class="line"><span class="lineno">  272</span>  <span class="comment">// Try to satisfy as many as possible from the free list first</span></div>
-<div class="line"><span class="lineno">  273</span>  <span class="keywordtype">size_t</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">remaining</a> = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">count</a>;</div>
-<div class="line"><span class="lineno">  274</span>  <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">int64_t</a> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">cursor</a> = free_cursor_.load(std::memory_order_relaxed);</div>
-<div class="line"><span class="lineno">  275</span>  <span class="comment">// Use std::max with explicit signed type to avoid non-standard integer literal suffix</span></div>
-<div class="line"><span class="lineno">  276</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">available_free</a> = <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(std::max&lt;int64_t&gt;(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">int64_t</a>{0}, <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">cursor</a>));</div>
-<div class="line"><span class="lineno">  277</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">from_free_list</a> = std::min(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">remaining</a>, <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">available_free</a>);</div>
-<div class="line"><span class="lineno">  278</span> </div>
-<div class="line"><span class="lineno">  279</span>  <span class="keywordflow">if</span> (<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">from_free_list</a> &gt; 0) {</div>
-<div class="line"><span class="lineno">  280</span>    <span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">int64_t</a> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">new_cursor</a> = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">cursor</a> - <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">int64_t</a><span class="keyword">&gt;</span>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">from_free_list</a>);</div>
-<div class="line"><span class="lineno">  281</span>    <span class="keywordflow">if</span> (free_cursor_.compare_exchange_strong(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">cursor</a>, <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">new_cursor</a>, std::memory_order_relaxed)) {</div>
-<div class="line"><span class="lineno">  282</span>      <span class="comment">// Successfully claimed indices from free list</span></div>
-<div class="line"><span class="lineno">  283</span>      <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">i</a> = 0; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">i</a> &lt; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">from_free_list</a>; ++<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">i</a>) {</div>
-<div class="line"><span class="lineno">  284</span>        <span class="keyword">const</span> <span class="keywordtype">size_t</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">free_index</a> = <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">new_cursor</a>) + <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">i</a>;</div>
-<div class="line"><span class="lineno">  285</span>        <span class="keywordflow">if</span> (<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">free_index</a> &gt;= free_indices_.size()) {</div>
-<div class="line"><span class="lineno">  286</span>          <span class="keywordflow">continue</span>;</div>
-<div class="line"><span class="lineno">  287</span>        }</div>
-<div class="line"><span class="lineno">  288</span> </div>
-<div class="line"><span class="lineno">  289</span>        <span class="keyword">const</span> <a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">Entity::IndexType</a> index = free_indices_[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">free_index</a>];</div>
-<div class="line"><span class="lineno">  290</span>        <span class="keywordflow">if</span> (index &gt;= generations_.size()) {</div>
-<div class="line"><span class="lineno">  291</span>          <span class="keywordflow">continue</span>;</div>
-<div class="line"><span class="lineno">  292</span>        }</div>
-<div class="line"><span class="lineno">  293</span> </div>
-<div class="line"><span class="lineno">  294</span>        <span class="keyword">const</span> <a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a40d8cd0e93ef835aeb26252597b23b90">Entity::GenerationType</a> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">generation</a> = generations_[index];</div>
-<div class="line"><span class="lineno">  295</span>        *<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">out</a> = CreateEntityWithId(index, <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">generation</a>);</div>
-<div class="line"><span class="lineno">  296</span>        ++<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">out</a>;</div>
-<div class="line"><span class="lineno">  297</span>      }</div>
-<div class="line"><span class="lineno">  298</span>      <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">remaining</a> -= <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">from_free_list</a>;</div>
-<div class="line"><span class="lineno">  299</span>    }</div>
-<div class="line"><span class="lineno">  300</span>  }</div>
-<div class="line"><span class="lineno">  301</span> </div>
-<div class="line"><span class="lineno">  302</span>  <span class="comment">// Create new entities for remaining count</span></div>
-<div class="line"><span class="lineno">  303</span>  <span class="keywordflow">if</span> (<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">remaining</a> &gt; 0) {</div>
-<div class="line"><span class="lineno">  304</span>    <span class="keyword">const</span> <a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">Entity::IndexType</a> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">start_index</a> =</div>
-<div class="line"><span class="lineno">  305</span>        next_index_.fetch_add(<span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">Entity::IndexType</a><span class="keyword">&gt;</span>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">remaining</a>), std::memory_order_relaxed);</div>
-<div class="line"><span class="lineno">  306</span>    <span class="keyword">const</span> <a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">Entity::IndexType</a> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">end_index</a> = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">start_index</a> + <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">Entity::IndexType</a><span class="keyword">&gt;</span>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">remaining</a>);</div>
-<div class="line"><span class="lineno">  307</span> </div>
-<div class="line"><span class="lineno">  308</span>    <span class="comment">// Ensure generations array is large enough</span></div>
-<div class="line"><span class="lineno">  309</span>    <span class="keywordflow">if</span> (<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">end_index</a> &gt; generations_.size()) {</div>
-<div class="line"><span class="lineno">  310</span>      generations_.resize(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">end_index</a>, <a class="code hl_variable" href="classhelios_1_1ecs_1_1Entity.html#a82ae778f12652ea05544ccb502a42876">Entity::kInvalidGeneration</a>);</div>
-<div class="line"><span class="lineno">  311</span>    }</div>
-<div class="line"><span class="lineno">  312</span> </div>
-<div class="line"><span class="lineno">  313</span>    <span class="comment">// Create entities with generation 1</span></div>
-<div class="line"><span class="lineno">  314</span>    <span class="keywordflow">for</span> (<a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">Entity::IndexType</a> index = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">start_index</a>; index &lt; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">end_index</a>; ++index) {</div>
-<div class="line"><span class="lineno">  315</span>      generations_[index] = 1;</div>
-<div class="line"><span class="lineno">  316</span>      *<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">out</a> = CreateEntityWithId(index, 1);</div>
-<div class="line"><span class="lineno">  317</span>      ++<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">out</a>;</div>
-<div class="line"><span class="lineno">  318</span>    }</div>
-<div class="line"><span class="lineno">  319</span>  }</div>
-<div class="line"><span class="lineno">  320</span> </div>
-<div class="line"><span class="lineno">  321</span>  <span class="keywordflow">return</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">out</a>;</div>
-<div class="line"><span class="lineno">  322</span>}</div>
+<p class="definition">Definition at line <a class="el" href="entities__manager_8hpp_source.html#l00271">271</a> of file <a class="el" href="entities__manager_8hpp_source.html">entities_manager.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  271</span>                                                                   {</div>
+<div class="line"><span class="lineno">  272</span>  <span class="keywordflow">if</span> (<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">count</a> == 0) [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">unlikely</a>]] {</div>
+<div class="line"><span class="lineno">  273</span>    <span class="keywordflow">return</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">out</a>;</div>
+<div class="line"><span class="lineno">  274</span>  }</div>
+<div class="line"><span class="lineno">  275</span> </div>
+<div class="line"><span class="lineno">  276</span>  <span class="comment">// Try to satisfy as many as possible from the free list first</span></div>
+<div class="line"><span class="lineno">  277</span>  <span class="keywordtype">size_t</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">remaining</a> = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">count</a>;</div>
+<div class="line"><span class="lineno">  278</span>  <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">int64_t</a> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">cursor</a> = free_cursor_.load(std::memory_order_relaxed);</div>
+<div class="line"><span class="lineno">  279</span>  <span class="comment">// Use std::max with explicit signed type to avoid non-standard integer literal suffix</span></div>
+<div class="line"><span class="lineno">  280</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">available_free</a> = <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(std::max&lt;int64_t&gt;(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">int64_t</a>{0}, <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">cursor</a>));</div>
+<div class="line"><span class="lineno">  281</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">from_free_list</a> = std::min(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">remaining</a>, <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">available_free</a>);</div>
+<div class="line"><span class="lineno">  282</span> </div>
+<div class="line"><span class="lineno">  283</span>  <span class="keywordflow">if</span> (<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">from_free_list</a> &gt; 0) {</div>
+<div class="line"><span class="lineno">  284</span>    <span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">int64_t</a> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">new_cursor</a> = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">cursor</a> - <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">int64_t</a><span class="keyword">&gt;</span>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">from_free_list</a>);</div>
+<div class="line"><span class="lineno">  285</span>    <span class="keywordflow">if</span> (free_cursor_.compare_exchange_strong(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">cursor</a>, <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">new_cursor</a>, std::memory_order_relaxed)) {</div>
+<div class="line"><span class="lineno">  286</span>      <span class="comment">// Successfully claimed indices from free list</span></div>
+<div class="line"><span class="lineno">  287</span>      <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">i</a> = 0; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">i</a> &lt; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">from_free_list</a>; ++<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">i</a>) {</div>
+<div class="line"><span class="lineno">  288</span>        <span class="keyword">const</span> <span class="keywordtype">size_t</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">free_index</a> = <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">new_cursor</a>) + <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">i</a>;</div>
+<div class="line"><span class="lineno">  289</span>        <span class="keywordflow">if</span> (<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">free_index</a> &gt;= free_indices_.size()) {</div>
+<div class="line"><span class="lineno">  290</span>          <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  291</span>        }</div>
+<div class="line"><span class="lineno">  292</span> </div>
+<div class="line"><span class="lineno">  293</span>        <span class="keyword">const</span> <a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">Entity::IndexType</a> index = free_indices_[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">free_index</a>];</div>
+<div class="line"><span class="lineno">  294</span>        <span class="keywordflow">if</span> (index &gt;= generations_.size()) {</div>
+<div class="line"><span class="lineno">  295</span>          <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  296</span>        }</div>
+<div class="line"><span class="lineno">  297</span> </div>
+<div class="line"><span class="lineno">  298</span>        <span class="keyword">const</span> <a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a40d8cd0e93ef835aeb26252597b23b90">Entity::GenerationType</a> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">generation</a> = generations_[index];</div>
+<div class="line"><span class="lineno">  299</span>        *<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">out</a> = CreateEntityWithId(index, <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">generation</a>);</div>
+<div class="line"><span class="lineno">  300</span>        ++<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">out</a>;</div>
+<div class="line"><span class="lineno">  301</span>      }</div>
+<div class="line"><span class="lineno">  302</span>      <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">remaining</a> -= <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">from_free_list</a>;</div>
+<div class="line"><span class="lineno">  303</span>    }</div>
+<div class="line"><span class="lineno">  304</span>  }</div>
+<div class="line"><span class="lineno">  305</span> </div>
+<div class="line"><span class="lineno">  306</span>  <span class="comment">// Create new entities for remaining count</span></div>
+<div class="line"><span class="lineno">  307</span>  <span class="keywordflow">if</span> (<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">remaining</a> &gt; 0) {</div>
+<div class="line"><span class="lineno">  308</span>    <span class="keyword">const</span> <a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">Entity::IndexType</a> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">start_index</a> =</div>
+<div class="line"><span class="lineno">  309</span>        next_index_.fetch_add(<span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">Entity::IndexType</a><span class="keyword">&gt;</span>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">remaining</a>), std::memory_order_relaxed);</div>
+<div class="line"><span class="lineno">  310</span>    <span class="keyword">const</span> <a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">Entity::IndexType</a> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">end_index</a> = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">start_index</a> + <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">Entity::IndexType</a><span class="keyword">&gt;</span>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">remaining</a>);</div>
+<div class="line"><span class="lineno">  311</span> </div>
+<div class="line"><span class="lineno">  312</span>    <span class="comment">// Ensure generations array is large enough</span></div>
+<div class="line"><span class="lineno">  313</span>    <span class="keywordflow">if</span> (<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">end_index</a> &gt; generations_.size()) {</div>
+<div class="line"><span class="lineno">  314</span>      generations_.resize(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">end_index</a>, <a class="code hl_variable" href="classhelios_1_1ecs_1_1Entity.html#a82ae778f12652ea05544ccb502a42876">Entity::kInvalidGeneration</a>);</div>
+<div class="line"><span class="lineno">  315</span>    }</div>
+<div class="line"><span class="lineno">  316</span> </div>
+<div class="line"><span class="lineno">  317</span>    <span class="comment">// Create entities with generation 1</span></div>
+<div class="line"><span class="lineno">  318</span>    <span class="keywordflow">for</span> (<a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">Entity::IndexType</a> index = <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">start_index</a>; index &lt; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">end_index</a>; ++index) {</div>
+<div class="line"><span class="lineno">  319</span>      generations_[index] = 1;</div>
+<div class="line"><span class="lineno">  320</span>      *<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">out</a> = CreateEntityWithId(index, 1);</div>
+<div class="line"><span class="lineno">  321</span>      ++<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">out</a>;</div>
+<div class="line"><span class="lineno">  322</span>    }</div>
+<div class="line"><span class="lineno">  323</span>  }</div>
+<div class="line"><span class="lineno">  324</span> </div>
+<div class="line"><span class="lineno">  325</span>  <span class="keywordflow">return</span> <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">out</a>;</div>
+<div class="line"><span class="lineno">  326</span>}</div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1Entity_html_a3a1347d7a9307abaaccc75279f8db2de"><div class="ttname"><a href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">helios::ecs::Entity::IndexType</a></div><div class="ttdeci">uint32_t IndexType</div><div class="ttdef"><b>Definition</b> <a href="entity_8hpp_source.html#l00023">entity.hpp:23</a></div></div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1Entity_html_a40d8cd0e93ef835aeb26252597b23b90"><div class="ttname"><a href="classhelios_1_1ecs_1_1Entity.html#a40d8cd0e93ef835aeb26252597b23b90">helios::ecs::Entity::GenerationType</a></div><div class="ttdeci">uint32_t GenerationType</div><div class="ttdef"><b>Definition</b> <a href="entity_8hpp_source.html#l00024">entity.hpp:24</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1ecs_html_af0384de48d847585fcb340c71c231e5e"><div class="ttname"><a href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, Allocator, Components... &gt; Query</div><div class="ttdoc">Type alias for query with mutable world access.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02515">query.hpp:2515</a></div></div>
@@ -662,13 +662,17 @@ requires std::same_as&lt;std::ranges::range_value_t&lt;<a class="el" href="names
 <div class="line"><span class="lineno">  257</span>  }</div>
 <div class="line"><span class="lineno">  258</span> </div>
 <div class="line"><span class="lineno">  259</span>  <span class="keywordflow">if</span> (!<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">batch</a>.empty()) {</div>
-<div class="line"><span class="lineno">  260</span>    free_indices_.insert_range(free_indices_.end(), <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">batch</a>);</div>
-<div class="line"><span class="lineno">  261</span>    free_cursor_.store(<span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">int64_t</a><span class="keyword">&gt;</span>(free_indices_.size()), std::memory_order_relaxed);</div>
-<div class="line"><span class="lineno">  262</span>    entity_count_.fetch_sub(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">batch</a>.size(), std::memory_order_relaxed);</div>
-<div class="line"><span class="lineno">  263</span>  }</div>
-<div class="line"><span class="lineno">  264</span>}</div>
+<div class="line"><span class="lineno">  260</span><span class="preprocessor">#ifdef HELIOS_CONTAINERS_RANGES_AVALIABLE</span></div>
+<div class="line"><span class="lineno">  261</span>    free_indices_.append_range(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">batch</a>);</div>
+<div class="line"><span class="lineno">  262</span><span class="preprocessor">#else</span></div>
+<div class="line"><span class="lineno">  263</span>    free_indices_.insert(free_indices_.end(), <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">batch</a>.begin(), <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">batch</a>.end());</div>
+<div class="line"><span class="lineno">  264</span><span class="preprocessor">#endif</span></div>
+<div class="line"><span class="lineno">  265</span>    free_cursor_.store(<span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">int64_t</a><span class="keyword">&gt;</span>(free_indices_.size()), std::memory_order_relaxed);</div>
+<div class="line"><span class="lineno">  266</span>    entity_count_.fetch_sub(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">batch</a>.size(), std::memory_order_relaxed);</div>
+<div class="line"><span class="lineno">  267</span>  }</div>
+<div class="line"><span class="lineno">  268</span>}</div>
 <div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00140">assert.hpp:140</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1Entities_html_a450e55c0c165d2e0177e6a7accc0cbda"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1Entities.html#a450e55c0c165d2e0177e6a7accc0cbda">helios::ecs::details::Entities::IsValid</a></div><div class="ttdeci">bool IsValid(Entity entity) const noexcept</div><div class="ttdoc">Checks if an entity exists and is valid.</div><div class="ttdef"><b>Definition</b> <a href="entities__manager_8hpp_source.html#l00324">entities_manager.hpp:324</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1Entities_html_a450e55c0c165d2e0177e6a7accc0cbda"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1Entities.html#a450e55c0c165d2e0177e6a7accc0cbda">helios::ecs::details::Entities::IsValid</a></div><div class="ttdeci">bool IsValid(Entity entity) const noexcept</div><div class="ttdoc">Checks if an entity exists and is valid.</div><div class="ttdef"><b>Definition</b> <a href="entities__manager_8hpp_source.html#l00328">entities_manager.hpp:328</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -799,11 +803,11 @@ requires std::same_as&lt;std::ranges::range_value_t&lt;<a class="el" href="names
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2details_2entities_manager_8hpp-example.html#a14">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/details/entities_manager.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="entities__manager_8hpp_source.html#l00334">334</a> of file <a class="el" href="entities__manager_8hpp_source.html">entities_manager.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  334</span>                                                                                        {</div>
-<div class="line"><span class="lineno">  335</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(index != <a class="code hl_variable" href="classhelios_1_1ecs_1_1Entity.html#addaed08012909076998b704c1fa3f9f4">Entity::kInvalidIndex</a>, <span class="stringliteral">&quot;Failed to get generation: index is invalid!&quot;</span>);</div>
-<div class="line"><span class="lineno">  336</span>  <span class="keywordflow">return</span> index &lt; generations_.size() ? generations_[index] : <a class="code hl_variable" href="classhelios_1_1ecs_1_1Entity.html#a82ae778f12652ea05544ccb502a42876">Entity::kInvalidGeneration</a>;</div>
-<div class="line"><span class="lineno">  337</span>}</div>
+<p class="definition">Definition at line <a class="el" href="entities__manager_8hpp_source.html#l00338">338</a> of file <a class="el" href="entities__manager_8hpp_source.html">entities_manager.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  338</span>                                                                                        {</div>
+<div class="line"><span class="lineno">  339</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(index != <a class="code hl_variable" href="classhelios_1_1ecs_1_1Entity.html#addaed08012909076998b704c1fa3f9f4">Entity::kInvalidIndex</a>, <span class="stringliteral">&quot;Failed to get generation: index is invalid!&quot;</span>);</div>
+<div class="line"><span class="lineno">  340</span>  <span class="keywordflow">return</span> index &lt; generations_.size() ? generations_[index] : <a class="code hl_variable" href="classhelios_1_1ecs_1_1Entity.html#a82ae778f12652ea05544ccb502a42876">Entity::kInvalidGeneration</a>;</div>
+<div class="line"><span class="lineno">  341</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -843,16 +847,16 @@ requires std::same_as&lt;std::ranges::range_value_t&lt;<a class="el" href="names
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2details_2entities_manager_8hpp-example.html#a11">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/details/entities_manager.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="entities__manager_8hpp_source.html#l00324">324</a> of file <a class="el" href="entities__manager_8hpp_source.html">entities_manager.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  324</span>                                                          {</div>
-<div class="line"><span class="lineno">  325</span>  <span class="keywordflow">if</span> (!entity.Valid()) [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">unlikely</a>]] {</div>
-<div class="line"><span class="lineno">  326</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  327</span>  }</div>
-<div class="line"><span class="lineno">  328</span> </div>
-<div class="line"><span class="lineno">  329</span>  <span class="keyword">const</span> <a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">Entity::IndexType</a> index = entity.Index();</div>
-<div class="line"><span class="lineno">  330</span>  <span class="keywordflow">return</span> index &lt; generations_.size() &amp;&amp; generations_[index] == entity.Generation() &amp;&amp;</div>
-<div class="line"><span class="lineno">  331</span>         generations_[index] != <a class="code hl_variable" href="classhelios_1_1ecs_1_1Entity.html#a82ae778f12652ea05544ccb502a42876">Entity::kInvalidGeneration</a>;</div>
-<div class="line"><span class="lineno">  332</span>}</div>
+<p class="definition">Definition at line <a class="el" href="entities__manager_8hpp_source.html#l00328">328</a> of file <a class="el" href="entities__manager_8hpp_source.html">entities_manager.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  328</span>                                                          {</div>
+<div class="line"><span class="lineno">  329</span>  <span class="keywordflow">if</span> (!entity.Valid()) [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">unlikely</a>]] {</div>
+<div class="line"><span class="lineno">  330</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  331</span>  }</div>
+<div class="line"><span class="lineno">  332</span> </div>
+<div class="line"><span class="lineno">  333</span>  <span class="keyword">const</span> <a class="code hl_typedef" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">Entity::IndexType</a> index = entity.Index();</div>
+<div class="line"><span class="lineno">  334</span>  <span class="keywordflow">return</span> index &lt; generations_.size() &amp;&amp; generations_[index] == entity.Generation() &amp;&amp;</div>
+<div class="line"><span class="lineno">  335</span>         generations_[index] != <a class="code hl_variable" href="classhelios_1_1ecs_1_1Entity.html#a82ae778f12652ea05544ccb502a42876">Entity::kInvalidGeneration</a>;</div>
+<div class="line"><span class="lineno">  336</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
