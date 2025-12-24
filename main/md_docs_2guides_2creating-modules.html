@@ -1,0 +1,751 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: Creating Custom Modules</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('md_docs_2guides_2creating-modules.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">Creating Custom Modules</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p><a class="anchor" id="autotoc_md113"></a> This guide explains how to create custom modules for Helios Engine. Modules are self-contained libraries that extend the engine's functionality while maintaining a consistent build configuration and integration with the core ECS system.</p>
+<h1><a class="anchor" id="autotoc_md114"></a>
+Table of Contents</h1>
+<ul>
+<li><a class="el" href="md_src_2core_2README.html#overview">Overview</a></li>
+<li>Module Structure</li>
+<li><a class="el" href="index.html#quick-start">Quick Start</a></li>
+<li>Step-by-Step Guide<ul>
+<li>1. Create Directory Structure</li>
+<li>2. Create Module.cmake (Optional)</li>
+<li>3. Create CMakeLists.txt</li>
+<li>4. Implement Your Module</li>
+</ul>
+</li>
+<li>CMake Functions Reference<ul>
+<li>helios_register_module</li>
+<li>helios_add_module</li>
+<li>helios_define_module</li>
+</ul>
+</li>
+<li>Module Dependencies</li>
+<li><a class="el" href="index.html#build-options">Build Options</a></li>
+<li><a class="el" href="md_src_2core_2README.html#best-practices">Best Practices</a></li>
+<li>Examples</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md116"></a>
+Overview</h1>
+<p>Helios Engine uses a modular architecture where functionality is organized into separate, independently buildable modules. Each module:</p>
+<ul>
+<li>Has its own build option (<code>HELIOS_BUILD_{NAME}_MODULE</code>)</li>
+<li>Can depend on other modules or external libraries</li>
+<li>Follows a standardized directory structure</li>
+<li>Integrates automatically with the engine's build system</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md117"></a>
+Module Structure</h1>
+<p>Every module follows this directory structure:</p>
+<div class="fragment"><div class="line">src/modules/{module_name}/</div>
+<div class="line">├── Module.cmake              # Optional: Module registration</div>
+<div class="line">├── CMakeLists.txt            # Required: Module build configuration</div>
+<div class="line">├── include/</div>
+<div class="line">│   └── helios/</div>
+<div class="line">│       └── {module_name}/</div>
+<div class="line">│           ├── {module_name}.hpp</div>
+<div class="line">│           └── ...</div>
+<div class="line">└── src/</div>
+<div class="line">    ├── {module_name}.cpp</div>
+<div class="line">    └── ...</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md118"></a>
+File Descriptions</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">File   </th><th class="markdownTableHeadNone">Required   </th><th class="markdownTableHeadNone">Description    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>Module.cmake</code>   </td><td class="markdownTableBodyNone">Optional   </td><td class="markdownTableBodyNone">Registers the module and its build option before processing <code>CMakeLists.txt</code>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>CMakeLists.txt</code>   </td><td class="markdownTableBodyNone">Required   </td><td class="markdownTableBodyNone">Defines the module target using <code>helios_add_module()</code>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>include/</code>   </td><td class="markdownTableBodyNone">Recommended   </td><td class="markdownTableBodyNone">Public headers exposed to users of the module    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>src/</code>   </td><td class="markdownTableBodyNone">Recommended   </td><td class="markdownTableBodyNone">Private implementation files   </td></tr>
+</table>
+<hr  />
+<h1><a class="anchor" id="autotoc_md120"></a>
+Quick Start</h1>
+<p>For a simple module, you can use the convenience function <code>helios_define_module()</code> which handles both registration and creation:</p>
+<div class="fragment"><div class="line"># src/modules/my_module/CMakeLists.txt</div>
+<div class="line"> </div>
+<div class="line">helios_define_module(</div>
+<div class="line">    NAME my_module</div>
+<div class="line">    DESCRIPTION &quot;My custom module&quot;</div>
+<div class="line">    DEFAULT ON</div>
+<div class="line">    VERSION 1.0.0</div>
+<div class="line">    SOURCES</div>
+<div class="line">        src/my_module.cpp</div>
+<div class="line">    HEADERS</div>
+<div class="line">        include/helios/my_module/my_module.hpp</div>
+<div class="line">)</div>
+</div><!-- fragment --><p>This single call:</p>
+<ol type="1">
+<li>Creates the build option <code>HELIOS_BUILD_MY_MODULE_MODULE</code></li>
+<li>Creates the library target <code>helios_module_my_module</code></li>
+<li>Creates the alias <code>helios::module::my_module</code></li>
+<li>Configures all standard settings (C++23, warnings, etc.)</li>
+<li>Links to <code>helios::core</code> automatically</li>
+</ol>
+<hr  />
+<h1><a class="anchor" id="autotoc_md122"></a>
+Step-by-Step Guide</h1>
+<h2><a class="anchor" id="autotoc_md123"></a>
+1. Create Directory Structure</h2>
+<div class="fragment"><div class="line">mkdir -p src/modules/my_module/{include/helios/my_module,src}</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md124"></a>
+2. Create Module.cmake (Optional)</h2>
+<p>The <code>Module.cmake</code> file is used for early registration of the module. This is useful when:</p>
+<ul>
+<li>You have complex dependencies that need to be resolved before building</li>
+<li>You want to configure build options with custom descriptions</li>
+<li>Your module has dependencies on other Helios modules</li>
+</ul>
+<div class="fragment"><div class="line"># src/modules/my_module/Module.cmake</div>
+<div class="line"> </div>
+<div class="line">helios_register_module(</div>
+<div class="line">    NAME my_module</div>
+<div class="line">    DESCRIPTION &quot;My custom module for Helios Engine&quot;</div>
+<div class="line">    DEFAULT ON</div>
+<div class="line">    DEPENDS window              # Requires the window module</div>
+<div class="line">    OPTIONAL_DEPENDS audio      # Can use audio if available</div>
+<div class="line">    EXTERNAL_DEPENDS glfw       # Requires external GLFW library</div>
+<div class="line">)</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md125"></a>
+3. Create CMakeLists.txt</h2>
+<div class="fragment"><div class="line"># src/modules/my_module/CMakeLists.txt</div>
+<div class="line"> </div>
+<div class="line"># If not using Module.cmake, register here (optional but recommended)</div>
+<div class="line">helios_register_module(</div>
+<div class="line">    NAME my_module</div>
+<div class="line">    DESCRIPTION &quot;My custom module&quot;</div>
+<div class="line">    DEFAULT ON</div>
+<div class="line">)</div>
+<div class="line"> </div>
+<div class="line"># Define headers</div>
+<div class="line">set(MY_MODULE_HEADERS</div>
+<div class="line">    include/helios/my_module/my_module.hpp</div>
+<div class="line">    include/helios/my_module/types.hpp</div>
+<div class="line">)</div>
+<div class="line"> </div>
+<div class="line"># Define sources</div>
+<div class="line">set(MY_MODULE_SOURCES</div>
+<div class="line">    src/my_module.cpp</div>
+<div class="line">    src/types.cpp</div>
+<div class="line">)</div>
+<div class="line"> </div>
+<div class="line"># Create the module</div>
+<div class="line">helios_add_module(</div>
+<div class="line">    NAME my_module</div>
+<div class="line">    VERSION 1.0.0</div>
+<div class="line"> </div>
+<div class="line">    HEADERS ${MY_MODULE_HEADERS}</div>
+<div class="line">    SOURCES ${MY_MODULE_SOURCES}</div>
+<div class="line"> </div>
+<div class="line">    # External dependencies</div>
+<div class="line">    PUBLIC_DEPENDENCIES</div>
+<div class="line">        glfw</div>
+<div class="line"> </div>
+<div class="line">    # Other Helios modules</div>
+<div class="line">    MODULE_DEPENDENCIES</div>
+<div class="line">        window</div>
+<div class="line"> </div>
+<div class="line">    # Optional: Precompiled header</div>
+<div class="line">    # PCH include/helios/my_module/my_module_pch.hpp</div>
+<div class="line">)</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md126"></a>
+4. Implement Your Module</h2>
+<p>Create the header file:</p>
+<div class="fragment"><div class="line"><span class="comment">// include/helios/my_module/my_module.hpp</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#pragma once</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;helios/core/app.hpp&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">namespace </span>helios::my_module {</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/// @brief Example component for the module.</span></div>
+<div class="line"><span class="comment"></span><span class="keyword">struct </span>MyComponent {</div>
+<div class="line">  <span class="keywordtype">int</span> value = 0;</div>
+<div class="line">};</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/// @brief Example system that operates on MyComponent.</span></div>
+<div class="line"><span class="comment"></span><span class="keyword">struct </span>MySystem final : <span class="keyword">public</span> ecs::System {</div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view GetName() noexcept {</div>
+<div class="line">    <span class="keywordflow">return</span> <span class="stringliteral">&quot;MySystem&quot;</span>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> GetAccessPolicy() noexcept {</div>
+<div class="line">    <span class="keywordflow">return</span> app::AccessPolicy().Query&lt;MyComponent&amp;&gt;();</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordtype">void</span> Update(app::SystemContext&amp; ctx) <span class="keyword">override</span>;</div>
+<div class="line">};</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/// @brief Module class for easy integration.</span></div>
+<div class="line"><span class="comment"></span><span class="keyword">struct </span>MyModule final : <span class="keyword">public</span> app::Module {</div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view GetName() noexcept {</div>
+<div class="line">    <span class="keywordflow">return</span> <span class="stringliteral">&quot;MyModule&quot;</span>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordtype">void</span> Build(app::App&amp; app) <span class="keyword">override</span>;</div>
+<div class="line">  <span class="keywordtype">void</span> Destroy(app::App&amp; app) <span class="keyword">override</span>;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line">}  <span class="comment">// namespace helios::my_module</span></div>
+</div><!-- fragment --><p>Create the implementation:</p>
+<div class="fragment"><div class="line"><span class="comment">// src/my_module.cpp</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;helios/my_module/my_module.hpp&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">namespace </span>helios::my_module {</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> MySystem::Update(app::SystemContext&amp; ctx) {</div>
+<div class="line">  <span class="keyword">auto</span> query = ctx.Query().Get&lt;MyComponent&amp;&gt;();</div>
+<div class="line"> </div>
+<div class="line">  query.ForEach([](MyComponent&amp; comp) {</div>
+<div class="line">    ++comp.value;</div>
+<div class="line">  });</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> MyModule::Build(app::App&amp; app) {</div>
+<div class="line">  app.AddSystem&lt;MySystem&gt;(app::kUpdate);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> MyModule::Destroy(app::App&amp; app) {</div>
+<div class="line">  <span class="comment">// Cleanup if needed</span></div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">}  <span class="comment">// namespace helios::my_module</span></div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="autotoc_md128"></a>
+CMake Functions Reference</h1>
+<h2><a class="anchor" id="autotoc_md129"></a>
+helios_register_module</h2>
+<p>Registers a module and creates its build option. Call this before <code>helios_add_module()</code> or use <code>Module.cmake</code>.</p>
+<div class="fragment"><div class="line">helios_register_module(</div>
+<div class="line">    NAME &lt;name&gt;                     # Required: Module name (e.g., &quot;window&quot;)</div>
+<div class="line">    DESCRIPTION &lt;desc&gt;              # Optional: Option description</div>
+<div class="line">    DEFAULT &lt;ON|OFF&gt;                # Optional: Default value (default: ON)</div>
+<div class="line">    DEPENDS &lt;modules...&gt;            # Optional: Required Helios modules</div>
+<div class="line">    OPTIONAL_DEPENDS &lt;modules...&gt;   # Optional: Optional Helios modules</div>
+<div class="line">    EXTERNAL_DEPENDS &lt;packages...&gt;  # Optional: Required external packages</div>
+<div class="line">)</div>
+</div><!-- fragment --><p><b>Effects:</b></p>
+<ul>
+<li>Creates option <code>HELIOS_BUILD_{NAME}_MODULE</code></li>
+<li>Stores metadata for dependency resolution</li>
+<li>Adds module to the registered modules list</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md130"></a>
+helios_add_module</h2>
+<p>Creates the module library target with full configuration.</p>
+<div class="fragment"><div class="line">helios_add_module(</div>
+<div class="line">    NAME &lt;name&gt;                          # Required: Module name</div>
+<div class="line">    VERSION &lt;version&gt;                    # Optional: Version (default: 1.0.0)</div>
+<div class="line"> </div>
+<div class="line">    SOURCES &lt;files...&gt;                   # Source files (.cpp)</div>
+<div class="line">    HEADERS &lt;files...&gt;                   # Header files (.hpp)</div>
+<div class="line">    PUBLIC_HEADERS &lt;files...&gt;            # Alternative: Public headers</div>
+<div class="line">    PRIVATE_HEADERS &lt;files...&gt;           # Alternative: Private headers</div>
+<div class="line"> </div>
+<div class="line">    DEPENDENCIES &lt;targets...&gt;            # Public external dependencies</div>
+<div class="line">    PUBLIC_DEPENDENCIES &lt;targets...&gt;     # Explicit public dependencies</div>
+<div class="line">    PRIVATE_DEPENDENCIES &lt;targets...&gt;    # Private dependencies</div>
+<div class="line">    MODULE_DEPENDENCIES &lt;modules...&gt;     # Other Helios modules</div>
+<div class="line"> </div>
+<div class="line">    COMPILE_DEFINITIONS &lt;defs...&gt;        # Compile definitions</div>
+<div class="line">    COMPILE_OPTIONS &lt;opts...&gt;            # Compile options</div>
+<div class="line">    INCLUDE_DIRECTORIES &lt;dirs...&gt;        # Additional include directories</div>
+<div class="line"> </div>
+<div class="line">    PCH &lt;file&gt;                           # Precompiled header file</div>
+<div class="line"> </div>
+<div class="line">    # Library type options (mutually exclusive)</div>
+<div class="line">    HEADER_ONLY                          # Interface/header-only library</div>
+<div class="line">    STATIC_ONLY                          # Force static library</div>
+<div class="line">    SHARED_ONLY                          # Force shared library</div>
+<div class="line"> </div>
+<div class="line">    NO_CORE_LINK                         # Don&#39;t link to helios::core</div>
+<div class="line"> </div>
+<div class="line">    FOLDER &lt;folder&gt;                      # IDE folder (default: &quot;Helios/Modules&quot;)</div>
+<div class="line">    OUTPUT_NAME &lt;name&gt;                   # Override output library name</div>
+<div class="line">    TARGET_NAME &lt;name&gt;                   # Override target name</div>
+<div class="line">)</div>
+</div><!-- fragment --><p><b>Creates:</b></p>
+<ul>
+<li>Target: <code>helios_module_{name}</code></li>
+<li>Alias: <code>helios::module::{name}</code></li>
+</ul>
+<h2><a class="anchor" id="autotoc_md131"></a>
+helios_define_module</h2>
+<p>Convenience wrapper that combines registration and creation.</p>
+<div class="fragment"><div class="line">helios_define_module(</div>
+<div class="line">    NAME &lt;name&gt;</div>
+<div class="line">    DESCRIPTION &lt;desc&gt;</div>
+<div class="line">    DEFAULT &lt;ON|OFF&gt;</div>
+<div class="line">    VERSION &lt;version&gt;</div>
+<div class="line">    SOURCES &lt;files...&gt;</div>
+<div class="line">    HEADERS &lt;files...&gt;</div>
+<div class="line">    DEPENDENCIES &lt;targets...&gt;</div>
+<div class="line">    MODULE_DEPENDENCIES &lt;modules...&gt;</div>
+<div class="line">    EXTERNAL_DEPENDS &lt;packages...&gt;</div>
+<div class="line">    HEADER_ONLY | STATIC_ONLY | SHARED_ONLY</div>
+<div class="line">)</div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="autotoc_md133"></a>
+Module Dependencies</h1>
+<h2><a class="anchor" id="autotoc_md134"></a>
+Depending on Other Helios Modules</h2>
+<p>Use <code>MODULE_DEPENDENCIES</code> to depend on other Helios modules:</p>
+<div class="fragment"><div class="line">helios_add_module(</div>
+<div class="line">    NAME renderer</div>
+<div class="line">    SOURCES src/renderer.cpp</div>
+<div class="line">    MODULE_DEPENDENCIES</div>
+<div class="line">        window</div>
+<div class="line">        assets</div>
+<div class="line">)</div>
+</div><!-- fragment --><p>The build system will:</p>
+<ol type="1">
+<li>Ensure dependent modules are built first</li>
+<li>Link to <code>helios::module::window</code> and <code>helios::module::assets</code></li>
+<li>If a required module is disabled, it will be automatically enabled</li>
+</ol>
+<h2><a class="anchor" id="autotoc_md135"></a>
+Depending on External Libraries</h2>
+<p>Use <code>DEPENDENCIES</code> or <code>PUBLIC_DEPENDENCIES</code>:</p>
+<div class="fragment"><div class="line">helios_add_module(</div>
+<div class="line">    NAME graphics</div>
+<div class="line">    SOURCES src/graphics.cpp</div>
+<div class="line">    PUBLIC_DEPENDENCIES</div>
+<div class="line">        Vulkan::Vulkan</div>
+<div class="line">        glfw</div>
+<div class="line">    PRIVATE_DEPENDENCIES</div>
+<div class="line">        SPIRV-Tools</div>
+<div class="line">)</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md136"></a>
+Conditional Dependencies</h2>
+<p>For optional module integration:</p>
+<div class="fragment"><div class="line"># In your CMakeLists.txt</div>
+<div class="line">helios_module_enabled(audio _audio_enabled)</div>
+<div class="line"> </div>
+<div class="line">if(_audio_enabled)</div>
+<div class="line">    target_compile_definitions(helios_module_my_module PRIVATE</div>
+<div class="line">        HELIOS_HAS_AUDIO_MODULE</div>
+<div class="line">    )</div>
+<div class="line">    target_link_libraries(helios_module_my_module PRIVATE</div>
+<div class="line">        helios::module::audio</div>
+<div class="line">    )</div>
+<div class="line">endif()</div>
+</div><!-- fragment --><p>Or use the helper function:</p>
+<div class="fragment"><div class="line">helios_link_modules_if_enabled(</div>
+<div class="line">    TARGET helios_module_my_module</div>
+<div class="line">    MODULES audio physics</div>
+<div class="line">)</div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="autotoc_md138"></a>
+Build Options</h1>
+<p>Each registered module creates a build option:</p>
+<div class="fragment"><div class="line">HELIOS_BUILD_{NAME}_MODULE</div>
+</div><!-- fragment --><p>For example:</p>
+<ul>
+<li><code>my_module</code> → <code>HELIOS_BUILD_MY_MODULE_MODULE</code></li>
+<li><code>window</code> → <code>HELIOS_BUILD_WINDOW_MODULE</code></li>
+<li><code>physics_2d</code> → <code>HELIOS_BUILD_PHYSICS_2D_MODULE</code></li>
+</ul>
+<h2><a class="anchor" id="autotoc_md139"></a>
+Using Build Options</h2>
+<p>From command line:</p>
+<div class="fragment"><div class="line"># Enable specific modules</div>
+<div class="line">cmake -DHELIOS_BUILD_WINDOW_MODULE=ON -DHELIOS_BUILD_AUDIO_MODULE=OFF ..</div>
+<div class="line"> </div>
+<div class="line"># Or with the build script</div>
+<div class="line">python scripts/build.py -DHELIOS_BUILD_WINDOW_MODULE=ON</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md140"></a>
+Querying Module Status</h2>
+<p>In CMake:</p>
+<div class="fragment"><div class="line">helios_module_enabled(window _is_enabled)</div>
+<div class="line">if(_is_enabled)</div>
+<div class="line">    message(STATUS &quot;Window module is enabled&quot;)</div>
+<div class="line">endif()</div>
+</div><!-- fragment --><p>In C++ code:</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#if defined(HELIOS_HAS_WINDOW_MODULE)</span></div>
+<div class="line">    <span class="comment">// Window-specific code</span></div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="autotoc_md142"></a>
+Best Practices</h1>
+<h2><a class="anchor" id="autotoc_md143"></a>
+1. Use Consistent Naming</h2>
+<ul>
+<li>Module directory: <code>snake_case</code> (e.g., <code>my_module</code>)</li>
+<li>Namespace: <code>helios::module_name</code> (e.g., <code>helios::my_module</code>)</li>
+<li>Target: automatically becomes <code>helios_module_{name}</code></li>
+<li>Alias: automatically becomes <code>helios::module::{name}</code></li>
+</ul>
+<h2><a class="anchor" id="autotoc_md144"></a>
+2. Organize Headers Properly</h2>
+<p>Public API goes in <code>include/helios/{name}/</code>:</p>
+<div class="fragment"><div class="line">include/helios/my_module/</div>
+<div class="line">├── my_module.hpp     # Main header (includes others)</div>
+<div class="line">├── ...</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md145"></a>
+3. Minimize Public Dependencies</h2>
+<ul>
+<li>Use <code>PRIVATE_DEPENDENCIES</code> for implementation details</li>
+<li>Only expose what users of your module need in <code>PUBLIC_DEPENDENCIES</code></li>
+</ul>
+<h2><a class="anchor" id="autotoc_md146"></a>
+4. Document Your Module</h2>
+<p>Create a <code>README.md</code> in your module directory:</p>
+<div class="fragment"><div class="line"># My Module</div>
+<div class="line"> </div>
+<div class="line">Brief description of what this module does.</div>
+<div class="line"> </div>
+<div class="line">## Features</div>
+<div class="line"> </div>
+<div class="line">- Feature 1</div>
+<div class="line">- Feature 2</div>
+<div class="line"> </div>
+<div class="line">## Dependencies</div>
+<div class="line"> </div>
+<div class="line">- window module</div>
+<div class="line">- GLFW (external)</div>
+<div class="line"> </div>
+<div class="line">## Usage</div>
+<div class="line"> </div>
+<div class="line">\```cpp</div>
+<div class="line">#include &lt;helios/my_module/my_module.hpp&gt;</div>
+<div class="line"> </div>
+<div class="line">app.AddModule&lt;helios::my_module::MyModule&gt;();</div>
+<div class="line">\```</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md147"></a>
+5. Write Tests</h2>
+<p>Create tests in <code>tests/modules/my_module/</code>:</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;doctest/doctest.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;helios/my_module/my_module.hpp&gt;</span></div>
+<div class="line"> </div>
+<div class="line">TEST_CASE(<span class="stringliteral">&quot;MyModule basic functionality&quot;</span>) {</div>
+<div class="line">    helios::my_module::MyComponent comp{42};</div>
+<div class="line">    CHECK_EQ(comp.value, 42);</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md148"></a>
+6. Use Precompiled Headers for Large Modules</h2>
+<div class="fragment"><div class="line">helios_add_module(</div>
+<div class="line">    NAME my_large_module</div>
+<div class="line">    SOURCES src/file1.cpp src/file2.cpp src/file3.cpp</div>
+<div class="line">    PCH include/helios/my_large_module/pch.hpp</div>
+<div class="line">)</div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="autotoc_md150"></a>
+Examples</h1>
+<h2><a class="anchor" id="autotoc_md151"></a>
+Minimal Module</h2>
+<div class="fragment"><div class="line"># src/modules/simple/CMakeLists.txt</div>
+<div class="line"> </div>
+<div class="line">helios_define_module(</div>
+<div class="line">    NAME simple</div>
+<div class="line">    SOURCES src/simple.cpp</div>
+<div class="line">    HEADERS include/helios/simple/simple.hpp</div>
+<div class="line">)</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md152"></a>
+Module with Dependencies</h2>
+<div class="fragment"><div class="line"># src/modules/renderer/Module.cmake</div>
+<div class="line"> </div>
+<div class="line">helios_register_module(</div>
+<div class="line">    NAME renderer</div>
+<div class="line">    DESCRIPTION &quot;Graphics rendering module&quot;</div>
+<div class="line">    DEPENDS window</div>
+<div class="line">    EXTERNAL_DEPENDS Vulkan</div>
+<div class="line">)</div>
+</div><!-- fragment --><div class="fragment"><div class="line"># src/modules/renderer/CMakeLists.txt</div>
+<div class="line"> </div>
+<div class="line">find_package(Vulkan REQUIRED)</div>
+<div class="line"> </div>
+<div class="line">helios_add_module(</div>
+<div class="line">    NAME renderer</div>
+<div class="line">    VERSION 1.0.0</div>
+<div class="line"> </div>
+<div class="line">    SOURCES</div>
+<div class="line">        src/renderer.cpp</div>
+<div class="line">        src/pipeline.cpp</div>
+<div class="line">        src/shader.cpp</div>
+<div class="line"> </div>
+<div class="line">    HEADERS</div>
+<div class="line">        include/helios/renderer/renderer.hpp</div>
+<div class="line">        include/helios/renderer/pipeline.hpp</div>
+<div class="line">        include/helios/renderer/shader.hpp</div>
+<div class="line"> </div>
+<div class="line">    MODULE_DEPENDENCIES</div>
+<div class="line">        window</div>
+<div class="line"> </div>
+<div class="line">    PUBLIC_DEPENDENCIES</div>
+<div class="line">        Vulkan::Vulkan</div>
+<div class="line"> </div>
+<div class="line">    PRIVATE_DEPENDENCIES</div>
+<div class="line">        SPIRV-Tools</div>
+<div class="line">)</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md153"></a>
+Header-Only Module</h2>
+<div class="fragment"><div class="line"># src/modules/math_utils/CMakeLists.txt</div>
+<div class="line"> </div>
+<div class="line">helios_define_module(</div>
+<div class="line">    NAME math_utils</div>
+<div class="line">    DESCRIPTION &quot;Math utility functions (header-only)&quot;</div>
+<div class="line">    HEADER_ONLY</div>
+<div class="line">    HEADERS</div>
+<div class="line">        include/helios/math_utils/math_utils.hpp</div>
+<div class="line">        include/helios/math_utils/vector.hpp</div>
+<div class="line">        include/helios/math_utils/matrix.hpp</div>
+<div class="line">)</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md154"></a>
+Module with Optional Features</h2>
+<div class="fragment"><div class="line"># src/modules/input/CMakeLists.txt</div>
+<div class="line"> </div>
+<div class="line">helios_register_module(</div>
+<div class="line">    NAME input</div>
+<div class="line">    DESCRIPTION &quot;Input handling module&quot;</div>
+<div class="line">    OPTIONAL_DEPENDS gamepad</div>
+<div class="line">)</div>
+<div class="line"> </div>
+<div class="line">helios_add_module(</div>
+<div class="line">    NAME input</div>
+<div class="line">    SOURCES src/input.cpp src/keyboard.cpp src/mouse.cpp</div>
+<div class="line">    HEADERS include/helios/input/input.hpp</div>
+<div class="line">    MODULE_DEPENDENCIES window</div>
+<div class="line">)</div>
+<div class="line"> </div>
+<div class="line"># Add optional gamepad support</div>
+<div class="line">helios_module_enabled(gamepad _gamepad_enabled)</div>
+<div class="line">if(_gamepad_enabled)</div>
+<div class="line">    target_sources(helios_module_input PRIVATE src/gamepad.cpp)</div>
+<div class="line">    target_compile_definitions(helios_module_input PUBLIC HELIOS_HAS_GAMEPAD)</div>
+<div class="line">    target_link_libraries(helios_module_input PUBLIC helios::module::gamepad)</div>
+<div class="line">endif()</div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="autotoc_md156"></a>
+Troubleshooting</h1>
+<h2><a class="anchor" id="autotoc_md157"></a>
+Module Not Found</h2>
+<p>If you get an error about a module target not existing:</p>
+<ol type="1">
+<li>Check that the module directory exists under <code>src/modules/</code></li>
+<li>Verify <code>CMakeLists.txt</code> exists in the module directory</li>
+<li>Check if the module is enabled: <code>-DHELIOS_BUILD_{NAME}_MODULE=ON</code></li>
+</ol>
+<h2><a class="anchor" id="autotoc_md158"></a>
+Dependency Errors</h2>
+<p>If a module dependency fails:</p>
+<ol type="1">
+<li>Check that the dependency module is registered before yours</li>
+<li>Verify the dependency name is correct (case-sensitive)</li>
+<li>Use <code>helios_print_modules()</code> to see all registered modules</li>
+</ol>
+<h2><a class="anchor" id="autotoc_md159"></a>
+Build Order Issues</h2>
+<p>The build system automatically resolves dependencies, but if you have issues:</p>
+<ol type="1">
+<li>Use <code>Module.cmake</code> for registration (processed before <code>CMakeLists.txt</code>)</li>
+<li>Ensure all <code>DEPENDS</code> are correctly specified</li>
+<li>Check for circular dependencies</li>
+</ol>
+<hr  />
+<h1><a class="anchor" id="autotoc_md161"></a>
+See Also</h1>
+<ul>
+<li><a class="el" href="md_src_2core_2README.html">Core Module Documentation</a></li>
+<li><a href="../../cmake/ModuleUtils.cmake">CMake ModuleUtils.cmake</a></li>
+<li>Build System Documentation </li>
+</ul>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

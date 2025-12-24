@@ -1,0 +1,296 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: Example Module</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('md_src_2modules_2example_2README.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">Example Module</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p><a class="anchor" id="autotoc_md44"></a> A minimal example module demonstrating the Helios Engine module system.</p>
+<h1><a class="anchor" id="autotoc_md45"></a>
+Overview</h1>
+<p>This module serves as a template and reference for creating custom modules. It shows the basic structure and patterns used in Helios Engine modules, including:</p>
+<ul>
+<li>Module registration with <code>Module.cmake</code></li>
+<li>Module build configuration with <code>CMakeLists.txt</code></li>
+<li>Component, Resource, System, and Module class definitions</li>
+<li>Proper namespace and file organization</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md46"></a>
+Build Option</h1>
+<p>This module can be enabled or disabled via CMake:</p>
+<div class="fragment"><div class="line">-DHELIOS_BUILD_EXAMPLE_MODULE=ON   # Enable (default)</div>
+<div class="line">-DHELIOS_BUILD_EXAMPLE_MODULE=OFF  # Disable</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md47"></a>
+Directory Structure</h1>
+<div class="fragment"><div class="line">example/</div>
+<div class="line">├── Module.cmake                           # Module registration (creates build option)</div>
+<div class="line">├── CMakeLists.txt                         # Module build configuration</div>
+<div class="line">├── README.md                              # This file</div>
+<div class="line">├── include/</div>
+<div class="line">│   └── helios/</div>
+<div class="line">│       └── example/</div>
+<div class="line">│           └── example.hpp                # Public header</div>
+<div class="line">└── src/</div>
+<div class="line">    └── example.cpp                        # Implementation</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md48"></a>
+Usage</h1>
+<h2><a class="anchor" id="autotoc_md49"></a>
+Adding the Module to Your App</h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="app_8hpp.html">helios/core/app/app.hpp</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="example_8hpp.html">helios/example/example.hpp</a>&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main() {</div>
+<div class="line">    <a class="code hl_class" href="classhelios_1_1app_1_1App.html">helios::app::App</a> app;</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Add the example module</span></div>
+<div class="line">    app.<a class="code hl_function" href="classhelios_1_1app_1_1App.html#ad00f452ada02721db7eae955b0eba1f5">AddModule</a>&lt;<a class="code hl_struct" href="structhelios_1_1example_1_1ExampleModule.html">helios::example::ExampleModule</a>&gt;();</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">return</span> std::to_underlying(app.<a class="code hl_function" href="classhelios_1_1app_1_1App.html#a6ecfe054032e3c1eb7bc735f02413ded">Run</a>());</div>
+<div class="line">}</div>
+<div class="ttc" id="aapp_8hpp_html"><div class="ttname"><a href="app_8hpp.html">app.hpp</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html"><div class="ttname"><a href="classhelios_1_1app_1_1App.html">helios::app::App</a></div><div class="ttdoc">Application class.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00048">app.hpp:48</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a6ecfe054032e3c1eb7bc735f02413ded"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a6ecfe054032e3c1eb7bc735f02413ded">helios::app::App::Run</a></div><div class="ttdeci">AppExitCode Run()</div><div class="ttdoc">Runs the application with the given arguments.</div><div class="ttdef"><b>Definition</b> <a href="app_8cpp_source.html#l00019">app.cpp:19</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_ad00f452ada02721db7eae955b0eba1f5"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#ad00f452ada02721db7eae955b0eba1f5">helios::app::App::AddModule</a></div><div class="ttdeci">auto AddModule(this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Adds a module to the main sub-app.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00545">app.hpp:545</a></div></div>
+<div class="ttc" id="aexample_8hpp_html"><div class="ttname"><a href="example_8hpp.html">example.hpp</a></div></div>
+<div class="ttc" id="astructhelios_1_1example_1_1ExampleModule_html"><div class="ttname"><a href="structhelios_1_1example_1_1ExampleModule.html">helios::example::ExampleModule</a></div><div class="ttdef"><b>Definition</b> <a href="example_8hpp_source.html#l00069">example.hpp:69</a></div></div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md50"></a>
+Using the Example Component</h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="example_8hpp.html">helios/example/example.hpp</a>&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create an entity with ExampleComponent</span></div>
+<div class="line"><span class="keyword">auto</span> entity_cmd = ctx.EntityCommands(ctx.ReserveEntity());</div>
+<div class="line">entity_cmd.AddComponents(<a class="code hl_struct" href="structhelios_1_1example_1_1ExampleComponent.html">helios::example::ExampleComponent</a>{42});</div>
+<div class="ttc" id="astructhelios_1_1example_1_1ExampleComponent_html"><div class="ttname"><a href="structhelios_1_1example_1_1ExampleComponent.html">helios::example::ExampleComponent</a></div><div class="ttdoc">Example component to demonstrate module components.</div><div class="ttdef"><b>Definition</b> <a href="example_8hpp_source.html#l00015">example.hpp:15</a></div></div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md51"></a>
+Querying the Example Resource</h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="example_8hpp.html">helios/example/example.hpp</a>&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// In a system&#39;s Update method:</span></div>
+<div class="line"><span class="keyword">const</span> <span class="keyword">auto</span>&amp; resource = ctx.ReadResource&lt;<a class="code hl_struct" href="structhelios_1_1example_1_1ExampleResource.html">helios::example::ExampleResource</a>&gt;();</div>
+<div class="line"><span class="keywordtype">int</span> current_count = resource.<a class="code hl_variable" href="structhelios_1_1example_1_1ExampleResource.html#a9c13c72ee3abd574a6202ece5e2985bf">counter</a>;</div>
+<div class="ttc" id="astructhelios_1_1example_1_1ExampleResource_html"><div class="ttname"><a href="structhelios_1_1example_1_1ExampleResource.html">helios::example::ExampleResource</a></div><div class="ttdoc">Example resource to demonstrate module resources.</div><div class="ttdef"><b>Definition</b> <a href="example_8hpp_source.html#l00022">example.hpp:22</a></div></div>
+<div class="ttc" id="astructhelios_1_1example_1_1ExampleResource_html_a9c13c72ee3abd574a6202ece5e2985bf"><div class="ttname"><a href="structhelios_1_1example_1_1ExampleResource.html#a9c13c72ee3abd574a6202ece5e2985bf">helios::example::ExampleResource::counter</a></div><div class="ttdeci">int counter</div><div class="ttdef"><b>Definition</b> <a href="example_8hpp_source.html#l00023">example.hpp:23</a></div></div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md52"></a>
+Components</h1>
+<h2><a class="anchor" id="autotoc_md53"></a>
+ExampleComponent</h2>
+<p>A simple component with an integer value.</p>
+<div class="fragment"><div class="line"><span class="keyword">struct </span>ExampleComponent final {</div>
+<div class="line">    <span class="keywordtype">int</span> value = 0;</div>
+<div class="line">};</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md54"></a>
+Resources</h1>
+<h2><a class="anchor" id="autotoc_md55"></a>
+ExampleResource</h2>
+<p>A simple resource with a counter that is incremented by the ExampleSystem.</p>
+<div class="fragment"><div class="line"><span class="keyword">struct </span>ExampleResource final {</div>
+<div class="line">    <span class="keywordtype">int</span> counter = 0;</div>
+<div class="line">};</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md56"></a>
+Systems</h1>
+<h2><a class="anchor" id="autotoc_md57"></a>
+ExampleSystem</h2>
+<p>A system that increments the counter in ExampleResource each update.</p>
+<ul>
+<li><b>Schedule</b>: Update</li>
+<li><b>Access</b>: WriteResources&lt;ExampleResource&gt;</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md58"></a>
+Creating Your Own Module</h1>
+<p>Use this module as a starting point:</p>
+<ol type="1">
+<li>Copy the <code>example/</code> directory to <code>src/modules/your_module/</code></li>
+<li>Rename files and update namespaces</li>
+<li>Modify <code>Module.cmake</code> with your module's registration</li>
+<li>Update <code>CMakeLists.txt</code> with your sources and dependencies</li>
+<li>Implement your components, systems, and module class</li>
+</ol>
+<p>For detailed instructions, see <a class="el" href="md_docs_2guides_2creating-modules.html">Creating Custom Modules</a>. </p>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

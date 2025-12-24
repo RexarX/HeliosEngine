@@ -177,10 +177,10 @@ $(document).ready(function(){initNavTree('classhelios_1_1utils_1_1FastPimpl.html
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a51ee60cffe35527a1037861cbfb98396" id="r_a51ee60cffe35527a1037861cbfb98396"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; <br />
-requires (sizeof...(Args) != 1 || (!std::same_as&lt;std::remove_cvref_t&lt;Args&gt;, <a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">FastPimpl</a>&gt; &amp;&amp; ...))</td></tr>
-<tr class="memitem:a51ee60cffe35527a1037861cbfb98396"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FastPimpl.html#a51ee60cffe35527a1037861cbfb98396">explicit</a> (sizeof...(Args)==1) const expr <a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">FastPimpl</a>(Args &amp;&amp;... args) noexcept(std::is_nothrow_constructible_v&lt; T, Args... &gt;)</td></tr>
-<tr class="separator:a51ee60cffe35527a1037861cbfb98396"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c412d9cfd5583d2e69d1af7bd0af5b3" id="r_a5c412d9cfd5583d2e69d1af7bd0af5b3"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; <br />
+requires ((sizeof...(Args) != 1 &amp;&amp; std::constructible_from&lt;T, Args...&gt;) || (!std::same_as&lt;std::remove_cvref_t&lt;Args&gt;, <a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">FastPimpl</a>&gt; &amp;&amp; ...))</td></tr>
+<tr class="memitem:a5c412d9cfd5583d2e69d1af7bd0af5b3"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FastPimpl.html#a5c412d9cfd5583d2e69d1af7bd0af5b3">explicit</a> (sizeof...(Args)==1) const expr <a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">FastPimpl</a>(Args &amp;&amp;... args) noexcept(std::is_nothrow_constructible_v&lt; T, Args... &gt;)</td></tr>
+<tr class="separator:a5c412d9cfd5583d2e69d1af7bd0af5b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9df3738e78a82c2bdc8d607cd9b11ce" id="r_ad9df3738e78a82c2bdc8d607cd9b11ce"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FastPimpl.html#ad9df3738e78a82c2bdc8d607cd9b11ce">FastPimpl</a> (const <a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">FastPimpl</a> &amp;other) noexcept(std::is_nothrow_copy_constructible_v&lt; T &gt;)</td></tr>
 <tr class="separator:ad9df3738e78a82c2bdc8d607cd9b11ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acd502b09a1a128ab3d009b5eab130fa1" id="r_acd502b09a1a128ab3d009b5eab130fa1"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FastPimpl.html#acd502b09a1a128ab3d009b5eab130fa1">FastPimpl</a> (<a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">FastPimpl</a> &amp;&amp;other) noexcept(std::is_nothrow_move_constructible_v&lt; T &gt;)</td></tr>
@@ -191,6 +191,12 @@ requires (sizeof...(Args) != 1 || (!std::same_as&lt;std::remove_cvref_t&lt;Args&
 <tr class="separator:ab50f3c858fc709a79bc6c94480ded1bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a20355ba8cf07716efd6709c0880649d4" id="r_a20355ba8cf07716efd6709c0880649d4"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">FastPimpl</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FastPimpl.html#a20355ba8cf07716efd6709c0880649d4">operator=</a> (<a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">FastPimpl</a> &amp;&amp;rhs) noexcept(std::is_nothrow_move_assignable_v&lt; T &gt;)</td></tr>
 <tr class="separator:a20355ba8cf07716efd6709c0880649d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac252c6d0154d9a576c23536aa9f25fad" id="r_ac252c6d0154d9a576c23536aa9f25fad"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">FastPimpl</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FastPimpl.html#ac252c6d0154d9a576c23536aa9f25fad">operator=</a> (const T &amp;value) noexcept(std::is_nothrow_copy_assignable_v&lt; T &gt;)</td></tr>
+<tr class="memdesc:ac252c6d0154d9a576c23536aa9f25fad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy-assigns from a T instance.  <br /></td></tr>
+<tr class="separator:ac252c6d0154d9a576c23536aa9f25fad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a9ff2d64387eabf3a70a79a11e5b6ae" id="r_a5a9ff2d64387eabf3a70a79a11e5b6ae"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">FastPimpl</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FastPimpl.html#a5a9ff2d64387eabf3a70a79a11e5b6ae">operator=</a> (T &amp;&amp;value) noexcept(std::is_nothrow_move_assignable_v&lt; T &gt;)</td></tr>
+<tr class="memdesc:a5a9ff2d64387eabf3a70a79a11e5b6ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move-assigns from a T instance.  <br /></td></tr>
+<tr class="separator:a5a9ff2d64387eabf3a70a79a11e5b6ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50a4edf2abbc8d167c7402b1d216a173" id="r_a50a4edf2abbc8d167c7402b1d216a173"><td class="memItemLeft" align="right" valign="top">constexpr T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FastPimpl.html#a50a4edf2abbc8d167c7402b1d216a173">operator-&gt;</a> () noexcept</td></tr>
 <tr class="separator:a50a4edf2abbc8d167c7402b1d216a173"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6da371a23738fadfd5c165eabba4b488" id="r_a6da371a23738fadfd5c165eabba4b488"><td class="memItemLeft" align="right" valign="top">constexpr const T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FastPimpl.html#a6da371a23738fadfd5c165eabba4b488">operator-&gt;</a> () const noexcept</td></tr>
@@ -241,9 +247,9 @@ template&lt;class T , size_t Size, size_t Alignment, bool RequireStrictMatch = f
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fast__pimpl_8hpp_source.html#l00034">34</a> of file <a class="el" href="fast__pimpl_8hpp_source.html">fast_pimpl.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   34</span>: <a class="code hl_function" href="classhelios_1_1utils_1_1FastPimpl.html#ad9df3738e78a82c2bdc8d607cd9b11ce">FastPimpl</a>(*other) {}</div>
-<div class="ttc" id="aclasshelios_1_1utils_1_1FastPimpl_html_ad9df3738e78a82c2bdc8d607cd9b11ce"><div class="ttname"><a href="classhelios_1_1utils_1_1FastPimpl.html#ad9df3738e78a82c2bdc8d607cd9b11ce">helios::utils::FastPimpl::FastPimpl</a></div><div class="ttdeci">constexpr FastPimpl(const FastPimpl &amp;other) noexcept(std::is_nothrow_copy_constructible_v&lt; T &gt;)</div><div class="ttdef"><b>Definition</b> <a href="fast__pimpl_8hpp_source.html#l00034">fast_pimpl.hpp:34</a></div></div>
+<p class="definition">Definition at line <a class="el" href="fast__pimpl_8hpp_source.html#l00035">35</a> of file <a class="el" href="fast__pimpl_8hpp_source.html">fast_pimpl.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   35</span>: <a class="code hl_function" href="classhelios_1_1utils_1_1FastPimpl.html#ad9df3738e78a82c2bdc8d607cd9b11ce">FastPimpl</a>(*other) {}</div>
+<div class="ttc" id="aclasshelios_1_1utils_1_1FastPimpl_html_ad9df3738e78a82c2bdc8d607cd9b11ce"><div class="ttname"><a href="classhelios_1_1utils_1_1FastPimpl.html#ad9df3738e78a82c2bdc8d607cd9b11ce">helios::utils::FastPimpl::FastPimpl</a></div><div class="ttdeci">constexpr FastPimpl(const FastPimpl &amp;other) noexcept(std::is_nothrow_copy_constructible_v&lt; T &gt;)</div><div class="ttdef"><b>Definition</b> <a href="fast__pimpl_8hpp_source.html#l00035">fast_pimpl.hpp:35</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -273,8 +279,8 @@ template&lt;class T , size_t Size, size_t Alignment, bool RequireStrictMatch = f
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fast__pimpl_8hpp_source.html#l00035">35</a> of file <a class="el" href="fast__pimpl_8hpp_source.html">fast_pimpl.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   36</span>      : <a class="code hl_function" href="classhelios_1_1utils_1_1FastPimpl.html#ad9df3738e78a82c2bdc8d607cd9b11ce">FastPimpl</a>(std::move(*other)) {}</div>
+<p class="definition">Definition at line <a class="el" href="fast__pimpl_8hpp_source.html#l00036">36</a> of file <a class="el" href="fast__pimpl_8hpp_source.html">fast_pimpl.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   37</span>      : <a class="code hl_function" href="classhelios_1_1utils_1_1FastPimpl.html#ad9df3738e78a82c2bdc8d607cd9b11ce">FastPimpl</a>(std::move(*other)) {}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -303,17 +309,17 @@ template&lt;class T , size_t Size, size_t Alignment, bool RequireStrictMatch&gt;
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fast__pimpl_8hpp_source.html#l00058">58</a> of file <a class="el" href="fast__pimpl_8hpp_source.html">fast_pimpl.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   58</span>                                                                                                                  {</div>
-<div class="line"><span class="lineno">   59</span>  ValidateConstraints();</div>
-<div class="line"><span class="lineno">   60</span>  std::destroy_at(Impl());</div>
-<div class="line"><span class="lineno">   61</span>}</div>
+<p class="definition">Definition at line <a class="el" href="fast__pimpl_8hpp_source.html#l00075">75</a> of file <a class="el" href="fast__pimpl_8hpp_source.html">fast_pimpl.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   75</span>                                                                                                                  {</div>
+<div class="line"><span class="lineno">   76</span>  ValidateConstraints();</div>
+<div class="line"><span class="lineno">   77</span>  std::destroy_at(Impl());</div>
+<div class="line"><span class="lineno">   78</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a51ee60cffe35527a1037861cbfb98396" name="a51ee60cffe35527a1037861cbfb98396"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a51ee60cffe35527a1037861cbfb98396">&#9670;&#160;</a></span>explicit()</h2>
+<a id="a5c412d9cfd5583d2e69d1af7bd0af5b3" name="a5c412d9cfd5583d2e69d1af7bd0af5b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c412d9cfd5583d2e69d1af7bd0af5b3">&#9670;&#160;</a></span>explicit()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -321,7 +327,7 @@ template&lt;class T , size_t Size, size_t Alignment, bool RequireStrictMatch&gt;
 template&lt;class T , size_t Size, size_t Alignment, bool RequireStrictMatch = false&gt; </div>
 <div class="memtemplate">
 template&lt;typename... Args&gt; <br />
-requires (sizeof...(Args) != 1 || (!std::same_as&lt;std::remove_cvref_t&lt;Args&gt;, <a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">FastPimpl</a>&gt; &amp;&amp; ...))</div>
+requires ((sizeof...(Args) != 1 &amp;&amp; std::constructible_from&lt;T, Args...&gt;) || (!std::same_as&lt;std::remove_cvref_t&lt;Args&gt;, <a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">FastPimpl</a>&gt; &amp;&amp; ...))</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -342,9 +348,9 @@ requires (sizeof...(Args) != 1 || (!std::same_as&lt;std::remove_cvref_t&lt;Args&
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="fast__pimpl_8hpp_source.html#l00027">27</a> of file <a class="el" href="fast__pimpl_8hpp_source.html">fast_pimpl.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   30</span>  {</div>
-<div class="line"><span class="lineno">   31</span>    std::construct_at(Impl(), std::forward&lt;Args&gt;(args)...);</div>
-<div class="line"><span class="lineno">   32</span>  }</div>
+<div class="fragment"><div class="line"><span class="lineno">   31</span>  {</div>
+<div class="line"><span class="lineno">   32</span>    std::construct_at(Impl(), std::forward&lt;Args&gt;(args)...);</div>
+<div class="line"><span class="lineno">   33</span>  }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -373,8 +379,8 @@ template&lt;class T , size_t Size, size_t Alignment, bool RequireStrictMatch = f
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fast__pimpl_8hpp_source.html#l00046">46</a> of file <a class="el" href="fast__pimpl_8hpp_source.html">fast_pimpl.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   46</span>{ <span class="keywordflow">return</span> *Impl(); }</div>
+<p class="definition">Definition at line <a class="el" href="fast__pimpl_8hpp_source.html#l00063">63</a> of file <a class="el" href="fast__pimpl_8hpp_source.html">fast_pimpl.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   63</span>{ <span class="keywordflow">return</span> *Impl(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -403,8 +409,8 @@ template&lt;class T , size_t Size, size_t Alignment, bool RequireStrictMatch = f
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fast__pimpl_8hpp_source.html#l00045">45</a> of file <a class="el" href="fast__pimpl_8hpp_source.html">fast_pimpl.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   45</span>{ <span class="keywordflow">return</span> *Impl(); }</div>
+<p class="definition">Definition at line <a class="el" href="fast__pimpl_8hpp_source.html#l00062">62</a> of file <a class="el" href="fast__pimpl_8hpp_source.html">fast_pimpl.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   62</span>{ <span class="keywordflow">return</span> *Impl(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -433,8 +439,8 @@ template&lt;class T , size_t Size, size_t Alignment, bool RequireStrictMatch = f
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fast__pimpl_8hpp_source.html#l00044">44</a> of file <a class="el" href="fast__pimpl_8hpp_source.html">fast_pimpl.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   44</span>{ <span class="keywordflow">return</span> Impl(); }</div>
+<p class="definition">Definition at line <a class="el" href="fast__pimpl_8hpp_source.html#l00061">61</a> of file <a class="el" href="fast__pimpl_8hpp_source.html">fast_pimpl.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   61</span>{ <span class="keywordflow">return</span> Impl(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -463,13 +469,13 @@ template&lt;class T , size_t Size, size_t Alignment, bool RequireStrictMatch = f
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fast__pimpl_8hpp_source.html#l00043">43</a> of file <a class="el" href="fast__pimpl_8hpp_source.html">fast_pimpl.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   43</span>{ <span class="keywordflow">return</span> Impl(); }</div>
+<p class="definition">Definition at line <a class="el" href="fast__pimpl_8hpp_source.html#l00060">60</a> of file <a class="el" href="fast__pimpl_8hpp_source.html">fast_pimpl.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   60</span>{ <span class="keywordflow">return</span> Impl(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
 <a id="ab50f3c858fc709a79bc6c94480ded1bc" name="ab50f3c858fc709a79bc6c94480ded1bc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab50f3c858fc709a79bc6c94480ded1bc">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ab50f3c858fc709a79bc6c94480ded1bc">&#9670;&#160;</a></span>operator=() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -494,18 +500,64 @@ template&lt;class T , size_t Size, size_t Alignment, bool RequireStrictMatch&gt;
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fast__pimpl_8hpp_source.html#l00064">64</a> of file <a class="el" href="fast__pimpl_8hpp_source.html">fast_pimpl.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   65</span>                                                      {</div>
-<div class="line"><span class="lineno">   66</span>  <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;rhs) [[likely]] {</div>
-<div class="line"><span class="lineno">   67</span>    *Impl() = *rhs;</div>
-<div class="line"><span class="lineno">   68</span>  }</div>
-<div class="line"><span class="lineno">   69</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><span class="lineno">   70</span>}</div>
+<p class="definition">Definition at line <a class="el" href="fast__pimpl_8hpp_source.html#l00081">81</a> of file <a class="el" href="fast__pimpl_8hpp_source.html">fast_pimpl.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   82</span>                                                      {</div>
+<div class="line"><span class="lineno">   83</span>  <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;rhs) [[likely]] {</div>
+<div class="line"><span class="lineno">   84</span>    *Impl() = *rhs;</div>
+<div class="line"><span class="lineno">   85</span>  }</div>
+<div class="line"><span class="lineno">   86</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><span class="lineno">   87</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ac252c6d0154d9a576c23536aa9f25fad" name="ac252c6d0154d9a576c23536aa9f25fad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac252c6d0154d9a576c23536aa9f25fad">&#9670;&#160;</a></span>operator=() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T , size_t Size, size_t Alignment, bool RequireStrictMatch&gt; <br />
+requires std::copy_constructible&lt;T&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">helios::utils::FastPimpl</a>&lt; T, Size, Alignment, RequireStrictMatch &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Copy-assigns from a T instance. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>Source value </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to this instance </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="fast__pimpl_8hpp_source.html#l00099">99</a> of file <a class="el" href="fast__pimpl_8hpp_source.html">fast_pimpl.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  102</span>{</div>
+<div class="line"><span class="lineno">  103</span>  <span class="keywordflow">if</span> (Impl() != &amp;value) [[likely]] {</div>
+<div class="line"><span class="lineno">  104</span>    *Impl() = value;</div>
+<div class="line"><span class="lineno">  105</span>  }</div>
+<div class="line"><span class="lineno">  106</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><span class="lineno">  107</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
 <a id="a20355ba8cf07716efd6709c0880649d4" name="a20355ba8cf07716efd6709c0880649d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a20355ba8cf07716efd6709c0880649d4">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a20355ba8cf07716efd6709c0880649d4">&#9670;&#160;</a></span>operator=() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -530,13 +582,59 @@ template&lt;class T , size_t Size, size_t Alignment, bool RequireStrictMatch&gt;
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fast__pimpl_8hpp_source.html#l00073">73</a> of file <a class="el" href="fast__pimpl_8hpp_source.html">fast_pimpl.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   74</span>                                                      {</div>
-<div class="line"><span class="lineno">   75</span>  <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;rhs) [[likely]] {</div>
-<div class="line"><span class="lineno">   76</span>    *Impl() = std::move(*rhs);</div>
-<div class="line"><span class="lineno">   77</span>  }</div>
-<div class="line"><span class="lineno">   78</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><span class="lineno">   79</span>}</div>
+<p class="definition">Definition at line <a class="el" href="fast__pimpl_8hpp_source.html#l00090">90</a> of file <a class="el" href="fast__pimpl_8hpp_source.html">fast_pimpl.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   91</span>                                                      {</div>
+<div class="line"><span class="lineno">   92</span>  <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;rhs) [[likely]] {</div>
+<div class="line"><span class="lineno">   93</span>    *Impl() = std::move(*rhs);</div>
+<div class="line"><span class="lineno">   94</span>  }</div>
+<div class="line"><span class="lineno">   95</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><span class="lineno">   96</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a5a9ff2d64387eabf3a70a79a11e5b6ae" name="a5a9ff2d64387eabf3a70a79a11e5b6ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a9ff2d64387eabf3a70a79a11e5b6ae">&#9670;&#160;</a></span>operator=() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T , size_t Size, size_t Alignment, bool RequireStrictMatch&gt; <br />
+requires std::move_constructible&lt;T&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">helios::utils::FastPimpl</a>&lt; T, Size, Alignment, RequireStrictMatch &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&amp;&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Move-assigns from a T instance. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>Source value </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to this instance </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="fast__pimpl_8hpp_source.html#l00110">110</a> of file <a class="el" href="fast__pimpl_8hpp_source.html">fast_pimpl.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  113</span>{</div>
+<div class="line"><span class="lineno">  114</span>  <span class="keywordflow">if</span> (Impl() != &amp;value) [[likely]] {</div>
+<div class="line"><span class="lineno">  115</span>    *Impl() = std::move(value);</div>
+<div class="line"><span class="lineno">  116</span>  }</div>
+<div class="line"><span class="lineno">  117</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><span class="lineno">  118</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>

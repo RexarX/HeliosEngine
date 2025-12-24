@@ -348,6 +348,8 @@ requires (sizeof...(Events) &gt; 1)</td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Application class. </p>
 <p>Manages the application lifecycle, including initialization, updating, and shutdown. </p><dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2modules_2example_2include_2helios_2example_2example_8hpp-example.html#_a0">/home/runner/work/HeliosEngine/HeliosEngine/src/modules/example/include/helios/example/example.hpp</a>.</dd>
+</dl>
 
 <p class="definition">Definition at line <a class="el" href="app_8hpp_source.html#l00048">48</a> of file <a class="el" href="app_8hpp_source.html">app.hpp</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
@@ -549,7 +551,7 @@ template&lt;ecs::EventTrait T&gt; </div>
 <div class="line"><span class="lineno">  639</span>  self.GetMainSubApp().template AddEvent&lt;T&gt;();</div>
 <div class="line"><span class="lineno">  640</span>  <span class="keywordflow">return</span> std::forward&lt;decltype(self)&gt;(self);</div>
 <div class="line"><span class="lineno">  641</span>}</div>
-<div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00149">assert.hpp:149</a></div></div>
+<div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00140">assert.hpp:140</a></div></div>
 <div class="ttc" id="alogger_8hpp_html_abee1a45a543b16109f05136a9771e86c"><div class="ttname"><a href="logger_8hpp.html#abee1a45a543b16109f05136a9771e86c">HELIOS_WARN</a></div><div class="ttdeci">#define HELIOS_WARN(...)</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00687">logger.hpp:687</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1ecs_html_af0384de48d847585fcb340c71c231e5e"><div class="ttname"><a href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, Allocator, Components... &gt; Query</div><div class="ttdoc">Type alias for query with mutable world access.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02515">query.hpp:2515</a></div></div>
 </div><!-- fragment -->
@@ -641,7 +643,7 @@ template&lt;ModuleTrait T&gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to app for method chaining </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2app_8hpp-example.html#a14">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/app.hpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2app_8hpp-example.html#a14">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/app.hpp</a>, and <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2modules_2example_2include_2helios_2example_2example_8hpp-example.html#a1">/home/runner/work/HeliosEngine/HeliosEngine/src/modules/example/include/helios/example/example.hpp</a>.</dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="app_8hpp_source.html#l00545">545</a> of file <a class="el" href="app_8hpp_source.html">app.hpp</a>.</p>

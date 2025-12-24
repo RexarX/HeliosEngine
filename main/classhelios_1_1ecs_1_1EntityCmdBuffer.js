@@ -13,6 +13,8 @@ var classhelios_1_1ecs_1_1EntityCmdBuffer =
     [ "EmplaceComponent", "classhelios_1_1ecs_1_1EntityCmdBuffer.html#a767503b877b5848e7f80296504f1035f", null ],
     [ "Empty", "classhelios_1_1ecs_1_1EntityCmdBuffer.html#a6106368db710d1a26a8cbf3bd18e756a", null ],
     [ "Flush", "classhelios_1_1ecs_1_1EntityCmdBuffer.html#ac05d67b988ff881b73a27215044bd327", null ],
+    [ "FromEntity", "classhelios_1_1ecs_1_1EntityCmdBuffer.html#af767974af1fd00f472090e7fabb785c3", null ],
+    [ "FromWorld", "classhelios_1_1ecs_1_1EntityCmdBuffer.html#a4d80e194cf8b0c15811d8f62e9f2398b", null ],
     [ "get_allocator", "classhelios_1_1ecs_1_1EntityCmdBuffer.html#a4ad3de13513a9f4ea7c910bd03caf90c", null ],
     [ "GetEntity", "classhelios_1_1ecs_1_1EntityCmdBuffer.html#a9596f5301a7a4b4f428638c180665a34", null ],
     [ "operator=", "classhelios_1_1ecs_1_1EntityCmdBuffer.html#a8917312604d92bc7630f47cb712605dc", null ],

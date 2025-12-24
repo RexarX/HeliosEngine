@@ -167,14 +167,14 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md_README"></a> <a class="anchor" id="readme-top"></a></p>
-<p><a href="https://github.com/RexarX/HeliosEngine/blob/main/LICENSE"><img src="https://img.shields.io/github/license/RexarX/HeliosEngine.svg?style=for-the-badge" alt="MIT License" style="pointer-events: none;" class="inline"/></a> <a href="https://en.cppreference.com/w/cpp/23"><img src="https://img.shields.io/badge/C%2B%2B-23-blue.svg?style=for-the-badge&amp;logo=c%2B%2B" alt="C++23" style="pointer-events: none;" class="inline"/></a></p>
+<p><a href="https://github.com/RexarX/HeliosEngine/actions/workflows/ci.yaml"><img src="https://github.com/RexarX/HeliosEngine/workflows/CI/badge.svg" alt="CI" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/RexarX/HeliosEngine/actions/workflows/pre-commit.yaml"><img src="https://github.com/RexarX/HeliosEngine/workflows/Pre-Commit%20Checks/badge.svg" alt="Format Check" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/RexarX/HeliosEngine/blob/main/LICENSE"><img src="https://img.shields.io/github/license/RexarX/HeliosEngine.svg?style=for-the-badge" alt="MIT License" style="pointer-events: none;" class="inline"/></a> <a href="https://en.cppreference.com/w/cpp/23"><img src="https://img.shields.io/badge/C%2B%2B-23-blue.svg?style=for-the-badge&amp;logo=c%2B%2B" alt="C++23" style="pointer-events: none;" class="inline"/></a></p>
 <p><br  />
  </p><div align="center"> <img src="https://github.com/RexarX/HeliosEngine/blob/main/docs/img/logo.png" alt="Helios Engine Logo" width="100" height="100" class="inline"/> <h1 align="center">Helios Engine</h1>
 </div><div align="center"> </div><div align="center"> A modern, ECS based modular game engine framework built with C++23 <br  />
  <a href="#getting-started"><b>Get Started »</b></a> <br  />
  <br  />
  <a href="#key-features">Features</a> <a href="#architecture">Architecture</a> <a href="#usage-examples">Usage Examples</a> <a href="#contact">Contact</a> </div><div align="center"> </div><hr  />
-<h2><a class="anchor" id="autotoc_md45"></a>
+<h2><a class="anchor" id="autotoc_md60"></a>
 Table of Contents</h2>
 <ul>
 <li><a class="el" href="index.html#about-the-project">About The Project</a><ul>
@@ -185,6 +185,7 @@ Table of Contents</h2>
 <li><a class="el" href="index.html#architecture">Architecture</a><ul>
 <li><a class="el" href="md_src_2core_2README.html#entity-component-system-ecs">Entity Component System (ECS)</a></li>
 <li><a class="el" href="index.html#modular-design">Modular Design</a></li>
+<li><a class="el" href="index.html#creating-custom-modules">Creating Custom Modules</a></li>
 </ul>
 </li>
 <li><a class="el" href="index.html#getting-started">Getting Started</a><ul>
@@ -203,11 +204,11 @@ Table of Contents</h2>
 </ul>
 <hr  />
 <p><a class="anchor" id="about-the-project"></a></p>
-<h2><a class="anchor" id="autotoc_md47"></a>
+<h2><a class="anchor" id="autotoc_md62"></a>
 About The Project</h2>
 <p><b>Helios Engine</b> is a modern, high-performance game engine framework written in C++23 that embraces data-oriented design principles. Inspired by <a href="https://bevyengine.org/">Bevy</a>, it features a powerful Entity Component System (ECS) architecture that enables efficient, scalable game development.</p>
 <p><a class="anchor" id="key-features"></a></p>
-<h3><a class="anchor" id="autotoc_md48"></a>
+<h3><a class="anchor" id="autotoc_md63"></a>
 Key Features</h3>
 <ul>
 <li><b>ECS Architecture</b> - Archetype-based design built from scratch for C++23</li>
@@ -221,7 +222,7 @@ Key Features</h3>
 <li><b>Flexible Dependencies</b> - Conan, system packages, or automatic download via CPM</li>
 </ul>
 <p><a class="anchor" id="design-philosophy"></a></p>
-<h3><a class="anchor" id="autotoc_md49"></a>
+<h3><a class="anchor" id="autotoc_md64"></a>
 Design Philosophy</h3>
 <p>Helios Engine is built on three core principles:</p>
 <ol type="1">
@@ -232,23 +233,23 @@ Design Philosophy</h3>
 <p><a class="el" href="index.html#readme-top">↑ Back to Top</a></p>
 <hr  />
 <p><a class="anchor" id="architecture"></a></p>
-<h2><a class="anchor" id="autotoc_md51"></a>
+<h2><a class="anchor" id="autotoc_md66"></a>
 Architecture</h2>
 <p><a class="anchor" id="project-entity-component-system-ecs"></a></p>
-<h3><a class="anchor" id="autotoc_md52"></a>
+<h3><a class="anchor" id="autotoc_md67"></a>
 Entity Component System (ECS)</h3>
 <p>Helios uses an <b>archetype-based ECS</b>, similar to Bevy:</p>
-<h4><a class="anchor" id="autotoc_md53"></a>
+<h4><a class="anchor" id="autotoc_md68"></a>
 &lt;strong&gt;Entities&lt;/strong&gt;</h4>
 <ul>
 <li>Unique identifiers (UUID-based)</li>
 <li>Lightweight containers for components</li>
 <li>Efficient creation, deletion, and querying</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md54"></a>
+<h4><a class="anchor" id="autotoc_md69"></a>
 &lt;strong&gt;Components&lt;/strong&gt;</h4>
 <ul>
-<li>Plain data structures (POD types)</li>
+<li>Plain data structures</li>
 <li>Stored contiguously in memory by archetype</li>
 <li>No inheritance required</li>
 </ul>
@@ -271,7 +272,7 @@ Entity Component System (ECS)</h3>
 <div class="line"> </div>
 <div class="line">  <span class="keywordtype">bool</span> IsDead() const noexcept { <span class="keywordflow">return</span> current_health &lt;= 0; }</div>
 <div class="line">};</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md55"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md70"></a>
 &lt;strong&gt;Systems&lt;/strong&gt;</h4>
 <ul>
 <li>Classes that operate on entities with specific components</li>
@@ -279,14 +280,14 @@ Entity Component System (ECS)</h3>
 <li>Automatically parallelized based on data dependencies</li>
 <li>Access all data through <code>SystemContext</code></li>
 </ul>
-<h4><a class="anchor" id="autotoc_md56"></a>
+<h4><a class="anchor" id="autotoc_md71"></a>
 &lt;strong&gt;World&lt;/strong&gt;</h4>
 <ul>
 <li>Central container for all entities and components</li>
 <li>Manages component storage and archetype transitions</li>
 <li>Provides query interface and entity operations</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md57"></a>
+<h4><a class="anchor" id="autotoc_md72"></a>
 &lt;strong&gt;Scheduling&lt;/strong&gt;</h4>
 <ul>
 <li>Systems are organized into schedules (Main, PreUpdate, Update, PostUpdate, etc.)</li>
@@ -295,24 +296,53 @@ Entity Component System (ECS)</h3>
 <li>Custom schedules supported</li>
 </ul>
 <p><a class="anchor" id="modular-design"></a></p>
-<h3><a class="anchor" id="autotoc_md58"></a>
+<h3><a class="anchor" id="autotoc_md73"></a>
 Modular Design</h3>
-<p>The engine is divided into three main modules:</p>
+<p>The engine is divided into independent modules that can be enabled or disabled:</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Module   </th><th class="markdownTableHeadNone">Description   </th><th class="markdownTableHeadNone">Status   </th><th class="markdownTableHeadNone">Documentation    </th></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><b>Core</b>   </td><td class="markdownTableBodyNone">ECS, async runtime, event system, utilities   </td><td class="markdownTableBodyNone">Complete   </td><td class="markdownTableBodyNone"><a class="el" href="md_src_2core_2README.html">Core Module</a>   </td></tr>
 </table>
-<p>Build only what you need:</p>
-<div class="fragment"><div class="line">make build</div>
-</div><!-- fragment --><p><a class="el" href="index.html#readme-top">↑ Back to Top</a></p>
+<p>Each module can be individually enabled or disabled via CMake options:</p>
+<div class="fragment"><div class="line"># Enable/disable specific modules</div>
+<div class="line">cmake -DHELIOS_BUILD_WINDOW_MODULE=ON -DHELIOS_BUILD_AUDIO_MODULE=OFF ..</div>
+<div class="line"> </div>
+<div class="line"># Build only core (no modules)</div>
+<div class="line">python scripts/build.py --core-only</div>
+</div><!-- fragment --><p><a class="anchor" id="creating-custom-modules"></a></p>
+<h3><a class="anchor" id="autotoc_md74"></a>
+Creating Custom Modules</h3>
+<p>Helios Engine provides a streamlined system for creating custom modules. Each module:</p>
+<ul>
+<li>Has its own build option (<code>HELIOS_BUILD_{NAME}_MODULE</code>)</li>
+<li>Can depend on other modules or external libraries</li>
+<li>Follows a standardized directory structure</li>
+<li>Integrates automatically with the build system</li>
+</ul>
+<p><b>Quick Example:</b></p>
+<div class="fragment"><div class="line"># src/modules/my_module/CMakeLists.txt</div>
+<div class="line">helios_define_module(</div>
+<div class="line">    NAME my_module</div>
+<div class="line">    DESCRIPTION &quot;My custom module&quot;</div>
+<div class="line">    SOURCES src/my_module.cpp</div>
+<div class="line">    HEADERS include/helios/my_module/my_module.hpp</div>
+<div class="line">)</div>
+</div><!-- fragment --><p><b><a class="el" href="md_docs_2guides_2creating-modules.html">Full Module Creation Guide</a></b> - Comprehensive documentation on creating custom modules, including:</p>
+<ul>
+<li>Directory structure and conventions</li>
+<li>CMake function reference (<code>helios_register_module</code>, <code>helios_add_module</code>, <code>helios_define_module</code>)</li>
+<li>Module dependencies and build options</li>
+<li>Best practices and examples</li>
+</ul>
+<p><a class="el" href="index.html#readme-top">↑ Back to Top</a></p>
 <hr  />
 <p><a class="anchor" id="getting-started"></a></p>
-<h2><a class="anchor" id="autotoc_md60"></a>
+<h2><a class="anchor" id="autotoc_md76"></a>
 Getting Started</h2>
 <p><a class="anchor" id="requirements"></a></p>
-<h3><a class="anchor" id="autotoc_md61"></a>
+<h3><a class="anchor" id="autotoc_md77"></a>
 Requirements</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -333,9 +363,9 @@ Requirements</h3>
 <li>MSVC 19.34+ (Visual Studio 2022 17.4+)</li>
 </ul>
 <p><a class="anchor" id="dependencies"></a></p>
-<h3><a class="anchor" id="autotoc_md62"></a>
+<h3><a class="anchor" id="autotoc_md78"></a>
 Dependencies</h3>
-<h4><a class="anchor" id="autotoc_md63"></a>
+<h4><a class="anchor" id="autotoc_md79"></a>
 Core Dependencies</h4>
 <ul>
 <li><a href="https://www.boost.org/">Boost</a> (1.82+) - stacktrace, pool, unordered containers</li>
@@ -343,12 +373,12 @@ Core Dependencies</h4>
 <li><a href="https://github.com/mariusbancila/stduuid">stduuid</a> (1.2+) - UUID generation</li>
 <li><a href="https://github.com/taskflow/taskflow">Taskflow</a> (3.10+) - Parallel task programming</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md64"></a>
+<h4><a class="anchor" id="autotoc_md80"></a>
 Test Dependencies</h4>
 <ul>
 <li><a href="https://github.com/doctest/doctest">doctest</a> (2.4+) - Testing framework</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md65"></a>
+<h4><a class="anchor" id="autotoc_md81"></a>
 Installation Methods</h4>
 <p><b>Option 1: Conan (Recommended)</b></p>
 <div class="fragment"><div class="line"># Quick install with automatic Conan setup</div>
@@ -374,27 +404,27 @@ Installation Methods</h4>
 <li>No manual intervention required</li>
 </ul>
 <p><a class="anchor" id="quick-start"></a></p>
-<h3><a class="anchor" id="autotoc_md66"></a>
+<h3><a class="anchor" id="autotoc_md82"></a>
 Quick Start</h3>
-<h4><a class="anchor" id="autotoc_md67"></a>
+<h4><a class="anchor" id="autotoc_md83"></a>
 1. Clone the Repository</h4>
 <div class="fragment"><div class="line">git clone --recursive https://github.com/RexarX/HeliosEngine.git</div>
 <div class="line">cd HeliosEngine</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md68"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md84"></a>
 2. Install Dependencies</h4>
 <div class="fragment"><div class="line"># Interactive installation (asks about Conan)</div>
 <div class="line">make install-deps</div>
 <div class="line"> </div>
 <div class="line"># Or directly with Python</div>
 <div class="line">python scripts/install_deps.py</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md69"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md85"></a>
 3. Configure the Project</h4>
 <div class="fragment"><div class="line"># Interactive configuration</div>
 <div class="line">python scripts/configure.py</div>
 <div class="line"> </div>
 <div class="line"># Or non-interactive with specific options</div>
 <div class="line">python scripts/configure.py --type Release --compiler gcc --use-conan</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md70"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md86"></a>
 4. Build the Project</h4>
 <div class="fragment"><div class="line"># Build (calls configure.py first if needed)</div>
 <div class="line">make build</div>
@@ -404,18 +434,18 @@ Quick Start</h3>
 <div class="line"> </div>
 <div class="line"># Specific build configurations</div>
 <div class="line">python scripts/build.py --type Debug --core-only --tests</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md71"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md87"></a>
 5. Run Tests</h4>
-<div class="fragment"><div class="line"># Run all tests</div>
-<div class="line">make test</div>
+<div class="fragment"><div class="line"># Run tests</div>
+<div class="line">make test BUILD_TYPE={debug,relwithdebinfo,release}</div>
 <div class="line"> </div>
 <div class="line"># Or run specific test manually with ctest</div>
-<div class="line">cd build</div>
+<div class="line">cd build/debug/linux  # or your platform</div>
 <div class="line">ctest -L core</div>
 </div><!-- fragment --><p><a class="anchor" id="build-options"></a></p>
-<h3><a class="anchor" id="autotoc_md72"></a>
+<h3><a class="anchor" id="autotoc_md88"></a>
 Build Options</h3>
-<h4><a class="anchor" id="autotoc_md73"></a>
+<h4><a class="anchor" id="autotoc_md89"></a>
 Using Makefile (Recommended)</h4>
 <div class="fragment"><div class="line"># Install dependencies</div>
 <div class="line">make install-deps</div>
@@ -429,7 +459,7 @@ Using Makefile (Recommended)</h4>
 <div class="line"> </div>
 <div class="line"># Clean and rebuild</div>
 <div class="line">make clean build</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md74"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md90"></a>
 Using Python Scripts Directly</h4>
 <div class="fragment"><div class="line"># 1. Install dependencies (interactive)</div>
 <div class="line">python scripts/install_deps.py</div>
@@ -444,7 +474,7 @@ Using Python Scripts Directly</h4>
 <div class="line">python scripts/install_deps.py --use-conan --no-interactive</div>
 <div class="line">python scripts/configure.py --type Release --compiler gcc --use-conan --no-interactive</div>
 <div class="line">python scripts/build.py --type Release --jobs 8</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md75"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md91"></a>
 Using CMake Presets</h4>
 <div class="fragment"><div class="line"># List available presets</div>
 <div class="line">cmake --list-presets</div>
@@ -468,9 +498,9 @@ Using CMake Presets</h4>
 </ul>
 <p><a class="el" href="index.html#readme-top">↑ Back to Top</a></p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md77"></a>
+<h2><a class="anchor" id="autotoc_md93"></a>
 Usage Examples</h2>
-<h3><a class="anchor" id="autotoc_md78"></a>
+<h3><a class="anchor" id="autotoc_md94"></a>
 Basic Application Setup</h3>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="app_8hpp.html">helios/core/app/app.hpp</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="module_8hpp.html">helios/core/app/module.hpp</a>&gt;</span></div>
@@ -484,7 +514,7 @@ Basic Application Setup</h3>
 <div class="line">    <span class="keywordflow">return</span> <span class="stringliteral">&quot;TimeUpdateSystem&quot;</span>;</div>
 <div class="line">  }</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">GetAccessPolicy</a>() <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a> {</div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> GetAccessPolicy() <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a> {</div>
 <div class="line">    <span class="keywordflow">return</span> <a class="code hl_class" href="classhelios_1_1app_1_1AccessPolicy.html">AccessPolicy</a>().<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#aeb90df674f57b9b2d0a35a54c42fa58f">WriteResources</a>&lt;<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">GameTime</a>&gt;();</div>
 <div class="line">  }</div>
 <div class="line"> </div>
@@ -523,7 +553,7 @@ Basic Application Setup</h3>
 <div class="ttc" id="anamespacehelios_1_1app_html_af7f921cb3d1fee929da2b7083b169d76"><div class="ttname"><a href="namespacehelios_1_1app.html#af7f921cb3d1fee929da2b7083b169d76">helios::app::kMain</a></div><div class="ttdeci">constexpr Main kMain</div><div class="ttdef"><b>Definition</b> <a href="schedules_8hpp_source.html#l00245">schedules.hpp:245</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1ecs_html"><div class="ttname"><a href="namespacehelios_1_1ecs.html">helios::ecs</a></div><div class="ttdef"><b>Definition</b> <a href="command_8hpp_source.html#l00005">command.hpp:5</a></div></div>
 <div class="ttc" id="astructhelios_1_1app_1_1Update_html"><div class="ttname"><a href="structhelios_1_1app_1_1Update.html">helios::app::Update</a></div><div class="ttdoc">Update schedule - main update logic.</div><div class="ttdef"><b>Definition</b> <a href="schedules_8hpp_source.html#l00152">schedules.hpp:152</a></div></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md79"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md95"></a>
 Creating Entities</h3>
 <p>Systems can create entities through <code>SystemContext</code>:</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span><a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">SetupSystem</a> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">final</a> : <span class="keyword">public</span> <a class="code hl_class" href="classhelios_1_1ecs_1_1System.html">System</a> {</div>
@@ -531,7 +561,7 @@ Creating Entities</h3>
 <div class="line">    <span class="keywordflow">return</span> <span class="stringliteral">&quot;SetupSystem&quot;</span>;</div>
 <div class="line">  }</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> <a class="code hl_class" href="classhelios_1_1app_1_1AccessPolicy.html">AccessPolicy</a> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">GetAccessPolicy</a>() <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a> {</div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> <a class="code hl_class" href="classhelios_1_1app_1_1AccessPolicy.html">AccessPolicy</a> GetAccessPolicy() <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a> {</div>
 <div class="line">    <span class="keywordflow">return</span> {};</div>
 <div class="line">  }</div>
 <div class="line"> </div>
@@ -545,7 +575,7 @@ Creating Entities</h3>
 <div class="line">        <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">Velocity</a>{1.0F, 0.0F, 0.0F},</div>
 <div class="line">        <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">Health</a>{100, 100});</div>
 <div class="line">  }</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md80"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md96"></a>
 Querying Entities</h3>
 <p>Systems query entities using <code>ctx.Query()</code>:</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span><a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">MovementSystem</a> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">final</a> : <span class="keyword">public</span> <a class="code hl_class" href="classhelios_1_1ecs_1_1System.html">System</a> {</div>
@@ -553,7 +583,7 @@ Querying Entities</h3>
 <div class="line">    <span class="keywordflow">return</span> <span class="stringliteral">&quot;MovementSystem&quot;</span>;</div>
 <div class="line">  }</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">GetAccessPolicy</a>() <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a> {</div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> GetAccessPolicy() <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">noexcept</a> {</div>
 <div class="line">    <span class="keywordflow">return</span> <a class="code hl_class" href="classhelios_1_1app_1_1AccessPolicy.html">AccessPolicy</a>().<a class="code hl_function" href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">Query</a>&lt;Transform&amp;, <span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">Velocity</a>&amp;&gt;().<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">ReadResources&lt;GameTime&gt;</a>();</div>
 <div class="line">  }</div>
 <div class="line"> </div>
@@ -569,7 +599,7 @@ Querying Entities</h3>
 <div class="line">  }</div>
 <div class="ttc" id="aclasshelios_1_1app_1_1AccessPolicy_html_abdd672af7021702de8d0e043b4be252b"><div class="ttname"><a href="classhelios_1_1app_1_1AccessPolicy.html#abdd672af7021702de8d0e043b4be252b">helios::app::AccessPolicy::Query</a></div><div class="ttdeci">constexpr auto Query(this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Declares a query over component types.</div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00293">access_policy.hpp:293</a></div></div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1BasicQuery_html_a366104a42e6ae53fdac3650c58174750"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicQuery.html#a366104a42e6ae53fdac3650c58174750">helios::ecs::BasicQuery::ForEach</a></div><div class="ttdeci">void ForEach(const Action &amp;action) const</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02053">query.hpp:2053</a></div></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md81"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md97"></a>
 Using Modules</h3>
 <p>Organize systems and resources into reusable modules:</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span><a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">GameModule</a> <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">final</a> : <span class="keyword">public</span> <a class="code hl_class" href="classhelios_1_1app_1_1Module.html">Module</a> {</div>
@@ -597,17 +627,17 @@ Using Modules</h3>
 </div><!-- fragment --><p><a class="el" href="index.html#readme-top">↑ Back to Top</a></p>
 <hr  />
 <p><a class="anchor" id="core-module"></a></p>
-<h2><a class="anchor" id="autotoc_md83"></a>
+<h2><a class="anchor" id="autotoc_md99"></a>
 Core Module</h2>
-<h3><a class="anchor" id="autotoc_md84"></a>
+<h3><a class="anchor" id="autotoc_md100"></a>
 Overview</h3>
 <p>See the <a class="el" href="md_src_2core_2README.html">Core Module Documentation</a> for details.</p>
 <p><a class="el" href="index.html#readme-top">↑ Back to Top</a></p>
 <hr  />
 <p><a class="anchor" id="roadmap"></a></p>
-<h2><a class="anchor" id="autotoc_md86"></a>
+<h2><a class="anchor" id="autotoc_md102"></a>
 Roadmap</h2>
-<h3><a class="anchor" id="autotoc_md87"></a>
+<h3><a class="anchor" id="autotoc_md103"></a>
 Completed</h3>
 <ul>
 <li>[x] Core ECS implementation (archetype-based)</li>
@@ -621,14 +651,14 @@ Completed</h3>
 <li>[x] Flexible dependency management (Conan, system, CPM)</li>
 <li>[x] Python build scripts with full automation</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md88"></a>
+<h3><a class="anchor" id="autotoc_md104"></a>
 In Progress</h3>
-<h4><a class="anchor" id="autotoc_md89"></a>
+<h4><a class="anchor" id="autotoc_md105"></a>
 &lt;strong&gt;Runtime modules&lt;/strong&gt;</h4>
 <ul>
 <li>Actual engine implementation (scenes, assets, scripting, etc.)</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md90"></a>
+<h4><a class="anchor" id="autotoc_md106"></a>
 &lt;strong&gt;Renderer modules&lt;/strong&gt;</h4>
 <ul>
 <li>Modern graphics API abstraction</li>
@@ -637,7 +667,7 @@ In Progress</h3>
 <p><a class="el" href="index.html#readme-top">↑ Back to Top</a></p>
 <hr  />
 <p><a class="anchor" id="acknowledgments"></a></p>
-<h2><a class="anchor" id="autotoc_md92"></a>
+<h2><a class="anchor" id="autotoc_md108"></a>
 Acknowledgments</h2>
 <p>This project was inspired by and builds upon ideas from:</p>
 <ul>
@@ -649,13 +679,13 @@ Acknowledgments</h2>
 <p><a class="el" href="index.html#readme-top">↑ Back to Top</a></p>
 <hr  />
 <p><a class="anchor" id="license"></a></p>
-<h2><a class="anchor" id="autotoc_md94"></a>
+<h2><a class="anchor" id="autotoc_md110"></a>
 License</h2>
 <p>Distributed under the MIT License. See <code>LICENSE</code> for more information.</p>
 <p><a class="el" href="index.html#readme-top">↑ Back to Top</a></p>
 <hr  />
 <p><a class="anchor" id="contact"></a></p>
-<h2><a class="anchor" id="autotoc_md96"></a>
+<h2><a class="anchor" id="autotoc_md112"></a>
 Contact</h2>
 <p><b>RexarX</b> - <a href="#" onclick="location.href='mai'+'lto:'+'who'+'72'+'7ca'+'re'+'s@g'+'ma'+'il.'+'co'+'m'; return false;">who72<span class="obfuscator">.nosp@m.</span>7car<span class="obfuscator">.nosp@m.</span>es@gm<span class="obfuscator">.nosp@m.</span>ail.<span class="obfuscator">.nosp@m.</span>com</a></p>
 <p><b>Project Link:</b> <a href="https://github.com/RexarX/HeliosEngine">https://github.com/RexarX/HeliosEngine</a></p>

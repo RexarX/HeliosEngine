@@ -24,5 +24,6 @@ var examples =
     [ "/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/pool_allocator.hpp", "_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2pool_allocator_8hpp-example.html", null ],
     [ "/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stack_allocator.hpp", "_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stack_allocator_8hpp-example.html", null ],
     [ "/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stl_allocator_adapter.hpp", "_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stl_allocator_adapter_8hpp-example.html", null ],
-    [ "/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp", "_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html", null ]
+    [ "/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp", "_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html", null ],
+    [ "/home/runner/work/HeliosEngine/HeliosEngine/src/modules/example/include/helios/example/example.hpp", "_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2modules_2example_2include_2helios_2example_2example_8hpp-example.html", null ]
 ];

@@ -74,6 +74,8 @@ var hierarchy =
     [ "helios::ecs::EventSimpleIterator< T >", "classhelios_1_1ecs_1_1EventSimpleIterator.html", null ],
     [ "helios::ecs::details::EventStorage", "classhelios_1_1ecs_1_1details_1_1EventStorage.html", null ],
     [ "helios::ecs::EventWriter< T >", "classhelios_1_1ecs_1_1EventWriter.html", null ],
+    [ "helios::example::ExampleComponent", "structhelios_1_1example_1_1ExampleComponent.html", null ],
+    [ "helios::example::ExampleResource", "structhelios_1_1example_1_1ExampleResource.html", null ],
     [ "helios::async::Executor", "classhelios_1_1async_1_1Executor.html", null ],
     [ "std::false_type", null, [
       [ "helios::ecs::IsConstComponent< T >", "structhelios_1_1ecs_1_1IsConstComponent.html", null ],
@@ -142,7 +144,9 @@ var hierarchy =
     [ "helios::details::MemberFunctionTraits< FunctionSignature >", "structhelios_1_1details_1_1MemberFunctionTraits.html", null ],
     [ "helios::details::MemberFunctionTraits< R(C::*)(Args...) const >", "structhelios_1_1details_1_1MemberFunctionTraits_3_01R_07C_1_1_5_08_07Args_8_8_8_08_01const_01_4.html", null ],
     [ "helios::details::MemberFunctionTraits< R(C::*)(Args...)>", "structhelios_1_1details_1_1MemberFunctionTraits_3_01R_07C_1_1_5_08_07Args_8_8_8_08_4.html", null ],
-    [ "helios::app::Module", "classhelios_1_1app_1_1Module.html", null ],
+    [ "helios::app::Module", "classhelios_1_1app_1_1Module.html", [
+      [ "helios::example::ExampleModule", "structhelios_1_1example_1_1ExampleModule.html", null ]
+    ] ],
     [ "helios::memory::NFrameAllocator< N >", "classhelios_1_1memory_1_1NFrameAllocator.html", null ],
     [ "helios::memory::PoolAllocator", "classhelios_1_1memory_1_1PoolAllocator.html", null ],
     [ "helios::app::PoolAllocatorResource", "classhelios_1_1app_1_1PoolAllocatorResource.html", null ],
@@ -181,7 +185,9 @@ var hierarchy =
     [ "helios::utils::StringHash", "structhelios_1_1utils_1_1StringHash.html", null ],
     [ "helios::app::SubApp", "classhelios_1_1app_1_1SubApp.html", null ],
     [ "helios::async::SubTaskGraph", "classhelios_1_1async_1_1SubTaskGraph.html", null ],
-    [ "helios::ecs::System", "classhelios_1_1ecs_1_1System.html", null ],
+    [ "helios::ecs::System", "classhelios_1_1ecs_1_1System.html", [
+      [ "helios::example::ExampleSystem", "structhelios_1_1example_1_1ExampleSystem.html", null ]
+    ] ],
     [ "helios::app::SystemConfig< Schedule, Systems >", "classhelios_1_1app_1_1SystemConfig.html", null ],
     [ "helios::app::SystemContext", "classhelios_1_1app_1_1SystemContext.html", null ],
     [ "helios::app::details::SystemDiagnostics", "classhelios_1_1app_1_1details_1_1SystemDiagnostics.html", null ],

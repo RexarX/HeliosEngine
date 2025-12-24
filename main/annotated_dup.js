@@ -134,6 +134,12 @@ var annotated_dup =
         [ "World", "classhelios_1_1ecs_1_1World.html", "classhelios_1_1ecs_1_1World" ],
         [ "WorldCmdBuffer", "classhelios_1_1ecs_1_1WorldCmdBuffer.html", "classhelios_1_1ecs_1_1WorldCmdBuffer" ]
       ] ],
+      [ "example", "namespacehelios_1_1example.html", [
+        [ "ExampleComponent", "structhelios_1_1example_1_1ExampleComponent.html", "structhelios_1_1example_1_1ExampleComponent" ],
+        [ "ExampleModule", "structhelios_1_1example_1_1ExampleModule.html", "structhelios_1_1example_1_1ExampleModule" ],
+        [ "ExampleResource", "structhelios_1_1example_1_1ExampleResource.html", "structhelios_1_1example_1_1ExampleResource" ],
+        [ "ExampleSystem", "structhelios_1_1example_1_1ExampleSystem.html", "structhelios_1_1example_1_1ExampleSystem" ]
+      ] ],
       [ "memory", "namespacehelios_1_1memory.html", [
         [ "AllocationResult", "structhelios_1_1memory_1_1AllocationResult.html", "structhelios_1_1memory_1_1AllocationResult" ],
         [ "AllocatorStats", "structhelios_1_1memory_1_1AllocatorStats.html", "structhelios_1_1memory_1_1AllocatorStats" ],

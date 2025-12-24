@@ -10,5 +10,6 @@ var searchData=
   ['components_5fmanager_2ehpp_7',['components_manager.hpp',['../components__manager_8hpp.html',1,'']]],
   ['core_2ehpp_8',['core.hpp',['../core_8hpp.html',1,'']]],
   ['core_5fpch_2ecpp_9',['core_pch.cpp',['../core__pch_8cpp.html',1,'']]],
-  ['core_5fpch_2ehpp_10',['core_pch.hpp',['../core__pch_8hpp.html',1,'']]]
+  ['core_5fpch_2ehpp_10',['core_pch.hpp',['../core__pch_8hpp.html',1,'']]],
+  ['creating_2dmodules_2emd_11',['creating-modules.md',['../creating-modules_8md.html',1,'']]]
 ];

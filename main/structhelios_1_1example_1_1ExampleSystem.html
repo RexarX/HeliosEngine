@@ -1,0 +1,348 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: helios::example::ExampleSystem Struct Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('structhelios_1_1example_1_1ExampleSystem.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="structhelios_1_1example_1_1ExampleSystem-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">helios::example::ExampleSystem Struct Reference<span class="mlabels"><span class="mlabel">final</span></span></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Example system that increments the counter in <a class="el" href="structhelios_1_1example_1_1ExampleResource.html" title="Example resource to demonstrate module resources.">ExampleResource</a>.  
+ <a href="structhelios_1_1example_1_1ExampleSystem.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="example_8hpp_source.html">example.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for helios::example::ExampleSystem:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="structhelios_1_1example_1_1ExampleSystem.png" usemap="#helios::example::ExampleSystem_map" alt=""/>
+  <map id="helios::example::ExampleSystem_map" name="helios::example::ExampleSystem_map">
+<area href="classhelios_1_1ecs_1_1System.html" alt="helios::ecs::System" shape="rect" coords="0,0,190,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ab73b127fb68b3964ec661ca9e1cec46e" id="r_ab73b127fb68b3964ec661ca9e1cec46e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1example_1_1ExampleSystem.html#ab73b127fb68b3964ec661ca9e1cec46e">Update</a> (<a class="el" href="classhelios_1_1app_1_1SystemContext.html">app::SystemContext</a> &amp;ctx) override</td></tr>
+<tr class="memdesc:ab73b127fb68b3964ec661ca9e1cec46e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the system, incrementing the example resource counter.  <br /></td></tr>
+<tr class="separator:ab73b127fb68b3964ec661ca9e1cec46e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classhelios_1_1ecs_1_1System"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classhelios_1_1ecs_1_1System')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classhelios_1_1ecs_1_1System.html">helios::ecs::System</a></td></tr>
+<tr class="memitem:a96d69d2e810535f826147fe9a2805775 inherit pub_methods_classhelios_1_1ecs_1_1System" id="r_a96d69d2e810535f826147fe9a2805775"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1System.html#a96d69d2e810535f826147fe9a2805775">~System</a> ()=<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">default</a></td></tr>
+<tr class="separator:a96d69d2e810535f826147fe9a2805775 inherit pub_methods_classhelios_1_1ecs_1_1System"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a617f61ce70af912cce3af9936bea8b1b" id="r_a617f61ce70af912cce3af9936bea8b1b"><td class="memItemLeft" align="right" valign="top">static constexpr std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1example_1_1ExampleSystem.html#a617f61ce70af912cce3af9936bea8b1b">GetName</a> () noexcept</td></tr>
+<tr class="memdesc:a617f61ce70af912cce3af9936bea8b1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the name of the system.  <br /></td></tr>
+<tr class="separator:a617f61ce70af912cce3af9936bea8b1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae116260773e3479b99b41eddab0b0d5" id="r_aae116260773e3479b99b41eddab0b0d5"><td class="memItemLeft" align="right" valign="top">static constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1example_1_1ExampleSystem.html#aae116260773e3479b99b41eddab0b0d5">GetAccessPolicy</a> () noexcept</td></tr>
+<tr class="memdesc:aae116260773e3479b99b41eddab0b0d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the access policy for this system.  <br /></td></tr>
+<tr class="separator:aae116260773e3479b99b41eddab0b0d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Example system that increments the counter in <a class="el" href="structhelios_1_1example_1_1ExampleResource.html" title="Example resource to demonstrate module resources.">ExampleResource</a>. </p>
+<p>This system demonstrates how to create a system that operates on resources. </p>
+
+<p class="definition">Definition at line <a class="el" href="example_8hpp_source.html#l00037">37</a> of file <a class="el" href="example_8hpp_source.html">example.hpp</a>.</p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="aae116260773e3479b99b41eddab0b0d5" name="aae116260773e3479b99b41eddab0b0d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae116260773e3479b99b41eddab0b0d5">&#9670;&#160;</a></span>GetAccessPolicy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static constexpr auto helios::example::ExampleSystem::GetAccessPolicy </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the access policy for this system. </p>
+<dl class="section return"><dt>Returns</dt><dd>Access policy declaring resource writes. </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2modules_2example_2include_2helios_2example_2example_8hpp-example.html#a7">/home/runner/work/HeliosEngine/HeliosEngine/src/modules/example/include/helios/example/example.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="example_8hpp_source.html#l00048">48</a> of file <a class="el" href="example_8hpp_source.html">example.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   48</span>{ <span class="keywordflow">return</span> app::AccessPolicy().WriteResources&lt;ExampleResource&gt;(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a617f61ce70af912cce3af9936bea8b1b" name="a617f61ce70af912cce3af9936bea8b1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a617f61ce70af912cce3af9936bea8b1b">&#9670;&#160;</a></span>GetName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static constexpr std::string_view helios::example::ExampleSystem::GetName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the name of the system. </p>
+<dl class="section return"><dt>Returns</dt><dd>System name. </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2modules_2example_2include_2helios_2example_2example_8hpp-example.html#a6">/home/runner/work/HeliosEngine/HeliosEngine/src/modules/example/include/helios/example/example.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="example_8hpp_source.html#l00042">42</a> of file <a class="el" href="example_8hpp_source.html">example.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   42</span>{ <span class="keywordflow">return</span> <span class="stringliteral">&quot;ExampleSystem&quot;</span>; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ab73b127fb68b3964ec661ca9e1cec46e" name="ab73b127fb68b3964ec661ca9e1cec46e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab73b127fb68b3964ec661ca9e1cec46e">&#9670;&#160;</a></span>Update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::example::ExampleSystem::Update </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1SystemContext.html">app::SystemContext</a> &amp;&#160;</td>
+          <td class="paramname"><em>ctx</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Updates the system, incrementing the example resource counter. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ctx</td><td>The system context providing access to resources. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classhelios_1_1ecs_1_1System.html#af1e58fc3b3b82e61f8b50864cb0775bd">helios::ecs::System</a>.</p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2modules_2example_2include_2helios_2example_2example_8hpp-example.html#a8">/home/runner/work/HeliosEngine/HeliosEngine/src/modules/example/include/helios/example/example.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="example_8cpp_source.html#l00008">8</a> of file <a class="el" href="example_8cpp_source.html">example.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">    8</span>                                                {</div>
+<div class="line"><span class="lineno">    9</span>  <span class="keyword">auto</span>&amp; resource = ctx.WriteResource&lt;ExampleResource&gt;();</div>
+<div class="line"><span class="lineno">   10</span>  ++resource.counter;</div>
+<div class="line"><span class="lineno">   11</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehelios.html">helios</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1example.html">example</a></li><li class="navelem"><a class="el" href="structhelios_1_1example_1_1ExampleSystem.html">ExampleSystem</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -511,19 +511,19 @@ template&lt;LoggerTrait T&gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2logger_8hpp-example.html#a35">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/logger.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00278">278</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  278</span>                               {</div>
-<div class="line"><span class="lineno">  279</span>  <span class="keyword">const</span> std::shared_lock lock(loggers_mutex_);</div>
-<div class="line"><span class="lineno">  280</span>  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; [_, logger] : loggers_) {</div>
-<div class="line"><span class="lineno">  281</span>    <span class="keywordflow">if</span> (logger) [[likely]] {</div>
-<div class="line"><span class="lineno">  282</span>      <span class="keywordflow">try</span> {</div>
-<div class="line"><span class="lineno">  283</span>        logger-&gt;flush();</div>
-<div class="line"><span class="lineno">  284</span>      } <span class="keywordflow">catch</span> (...) {</div>
-<div class="line"><span class="lineno">  285</span>        <span class="comment">// Silently ignore flush errors</span></div>
-<div class="line"><span class="lineno">  286</span>      }</div>
-<div class="line"><span class="lineno">  287</span>    }</div>
-<div class="line"><span class="lineno">  288</span>  }</div>
-<div class="line"><span class="lineno">  289</span>}</div>
+<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00304">304</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  304</span>                               {</div>
+<div class="line"><span class="lineno">  305</span>  <span class="keyword">const</span> std::shared_lock lock(loggers_mutex_);</div>
+<div class="line"><span class="lineno">  306</span>  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; [_, logger] : loggers_) {</div>
+<div class="line"><span class="lineno">  307</span>    <span class="keywordflow">if</span> (logger) [[likely]] {</div>
+<div class="line"><span class="lineno">  308</span>      <span class="keywordflow">try</span> {</div>
+<div class="line"><span class="lineno">  309</span>        logger-&gt;flush();</div>
+<div class="line"><span class="lineno">  310</span>      } <span class="keywordflow">catch</span> (...) {</div>
+<div class="line"><span class="lineno">  311</span>        <span class="comment">// Silently ignore flush errors</span></div>
+<div class="line"><span class="lineno">  312</span>      }</div>
+<div class="line"><span class="lineno">  313</span>    }</div>
+<div class="line"><span class="lineno">  314</span>  }</div>
+<div class="line"><span class="lineno">  315</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -625,13 +625,13 @@ template&lt;LoggerTrait T&gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2logger_8hpp-example.html#a43">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/logger.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00314">314</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  314</span>                                         {</div>
-<div class="line"><span class="lineno">  315</span>  <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> logger = GetDefaultLogger()) [[likely]] {</div>
-<div class="line"><span class="lineno">  316</span>    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><a class="code hl_enumeration" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a><span class="keyword">&gt;</span>(logger-&gt;level());</div>
-<div class="line"><span class="lineno">  317</span>  }</div>
-<div class="line"><span class="lineno">  318</span>  <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71afa21506cd249f400de4a974b5a0c8e0e">LogLevel::kTrace</a>;</div>
-<div class="line"><span class="lineno">  319</span>}</div>
+<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00340">340</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  340</span>                                         {</div>
+<div class="line"><span class="lineno">  341</span>  <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> logger = GetDefaultLogger()) [[likely]] {</div>
+<div class="line"><span class="lineno">  342</span>    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><a class="code hl_enumeration" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">LogLevel</a><span class="keyword">&gt;</span>(logger-&gt;level());</div>
+<div class="line"><span class="lineno">  343</span>  }</div>
+<div class="line"><span class="lineno">  344</span>  <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71afa21506cd249f400de4a974b5a0c8e0e">LogLevel::kTrace</a>;</div>
+<div class="line"><span class="lineno">  345</span>}</div>
 <div class="ttc" id="anamespacehelios_html_a22a572a5b6a1313de5eaf69115bbad71"><div class="ttname"><a href="namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71">helios::LogLevel</a></div><div class="ttdeci">LogLevel</div><div class="ttdoc">Log severity levels.</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00034">logger.hpp:34</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -1524,12 +1524,12 @@ template&lt;LoggerTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00301">301</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  301</span>                                             {</div>
-<div class="line"><span class="lineno">  302</span>  <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> logger = GetDefaultLogger()) [[likely]] {</div>
-<div class="line"><span class="lineno">  303</span>    logger-&gt;set_level(<span class="keyword">static_cast&lt;</span>spdlog::level::level_enum<span class="keyword">&gt;</span>(std::to_underlying(level)));</div>
-<div class="line"><span class="lineno">  304</span>  }</div>
-<div class="line"><span class="lineno">  305</span>}</div>
+<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00327">327</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  327</span>                                             {</div>
+<div class="line"><span class="lineno">  328</span>  <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> logger = GetDefaultLogger()) [[likely]] {</div>
+<div class="line"><span class="lineno">  329</span>    logger-&gt;set_level(<span class="keyword">static_cast&lt;</span>spdlog::level::level_enum<span class="keyword">&gt;</span>(std::to_underlying(level)));</div>
+<div class="line"><span class="lineno">  330</span>  }</div>
+<div class="line"><span class="lineno">  331</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1628,13 +1628,13 @@ template&lt;LoggerTrait T&gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2logger_8hpp-example.html#a42">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/logger.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00307">307</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  307</span>                                                    {</div>
-<div class="line"><span class="lineno">  308</span>  <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> logger = GetDefaultLogger()) [[likely]] {</div>
-<div class="line"><span class="lineno">  309</span>    <span class="keywordflow">return</span> logger-&gt;should_log(<span class="keyword">static_cast&lt;</span>spdlog::level::level_enum<span class="keyword">&gt;</span>(std::to_underlying(level)));</div>
-<div class="line"><span class="lineno">  310</span>  }</div>
-<div class="line"><span class="lineno">  311</span>  <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  312</span>}</div>
+<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00333">333</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  333</span>                                                    {</div>
+<div class="line"><span class="lineno">  334</span>  <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> logger = GetDefaultLogger()) [[likely]] {</div>
+<div class="line"><span class="lineno">  335</span>    <span class="keywordflow">return</span> logger-&gt;should_log(<span class="keyword">static_cast&lt;</span>spdlog::level::level_enum<span class="keyword">&gt;</span>(std::to_underlying(level)));</div>
+<div class="line"><span class="lineno">  336</span>  }</div>
+<div class="line"><span class="lineno">  337</span>  <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  338</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
