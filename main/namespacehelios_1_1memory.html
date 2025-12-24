@@ -493,18 +493,22 @@ template&lt;typename T &gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2frame_allocator_8hpp-example.html#a15">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/frame_allocator.hpp</a>, <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2free_list_allocator_8hpp-example.html#a18">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/free_list_allocator.hpp</a>, <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2pool_allocator_8hpp-example.html#a21">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/pool_allocator.hpp</a>, and <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stack_allocator_8hpp-example.html#a19">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stack_allocator.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="memory_2common_8hpp_source.html#l00029">29</a> of file <a class="el" href="memory_2common_8hpp_source.html">common.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   29</span>                                                         {</div>
-<div class="line"><span class="lineno">   30</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(alignment != 0, <span class="stringliteral">&quot;Failed to allocate memory: alignment cannot be zero!&quot;</span>);</div>
-<div class="line"><span class="lineno">   31</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>((alignment &amp; (alignment - 1)) == 0, <span class="stringliteral">&quot;Failed to allocate memory: alignment must be a power of two!&quot;</span>);</div>
-<div class="line"><span class="lineno">   32</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(size != 0, <span class="stringliteral">&quot;Failed to allocate memory: size cannot be zero!&quot;</span>);</div>
-<div class="line"><span class="lineno">   33</span><span class="preprocessor">#ifdef _MSC_VER</span></div>
-<div class="line"><span class="lineno">   34</span>  <span class="keywordflow">return</span> _aligned_malloc(size, alignment);</div>
-<div class="line"><span class="lineno">   35</span><span class="preprocessor">#else</span></div>
-<div class="line"><span class="lineno">   36</span>  <span class="keywordflow">return</span> std::aligned_alloc(alignment, size);</div>
-<div class="line"><span class="lineno">   37</span><span class="preprocessor">#endif</span></div>
-<div class="line"><span class="lineno">   38</span>}</div>
+<p class="definition">Definition at line <a class="el" href="memory_2common_8hpp_source.html#l00030">30</a> of file <a class="el" href="memory_2common_8hpp_source.html">common.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   30</span>                                                         {</div>
+<div class="line"><span class="lineno">   31</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(alignment != 0, <span class="stringliteral">&quot;Failed to allocate memory: alignment cannot be zero!&quot;</span>);</div>
+<div class="line"><span class="lineno">   32</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="namespacehelios_1_1memory.html#a443dc78a3e9ae9f92bba519395020b3e">IsPowerOfTwo</a>(alignment), <span class="stringliteral">&quot;Failed to allocate memory: alignment must be a power of two!&quot;</span>);</div>
+<div class="line"><span class="lineno">   33</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(size != 0, <span class="stringliteral">&quot;Failed to allocate memory: size cannot be zero!&quot;</span>);</div>
+<div class="line"><span class="lineno">   34</span><span class="preprocessor">#ifdef _MSC_VER</span></div>
+<div class="line"><span class="lineno">   35</span>  <span class="keywordflow">return</span> _aligned_malloc(size, alignment);</div>
+<div class="line"><span class="lineno">   36</span><span class="preprocessor">#else</span></div>
+<div class="line"><span class="lineno">   37</span>  <span class="comment">// POSIX aligned_alloc requires size to be a multiple of alignment</span></div>
+<div class="line"><span class="lineno">   38</span>  <span class="comment">// Round up size to the next multiple of alignment</span></div>
+<div class="line"><span class="lineno">   39</span>  <span class="keywordflow">return</span> std::aligned_alloc(alignment, <a class="code hl_function" href="namespacehelios_1_1memory.html#a2d894713b466844926e8b24892da0877">AlignUp</a>(size, alignment));</div>
+<div class="line"><span class="lineno">   40</span><span class="preprocessor">#endif</span></div>
+<div class="line"><span class="lineno">   41</span>}</div>
 <div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00140">assert.hpp:140</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_a2d894713b466844926e8b24892da0877"><div class="ttname"><a href="namespacehelios_1_1memory.html#a2d894713b466844926e8b24892da0877">helios::memory::AlignUp</a></div><div class="ttdeci">constexpr size_t AlignUp(size_t size, size_t alignment) noexcept</div><div class="ttdoc">Helper function to align a size up to the given alignment.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00091">allocator_traits.hpp:91</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_a443dc78a3e9ae9f92bba519395020b3e"><div class="ttname"><a href="namespacehelios_1_1memory.html#a443dc78a3e9ae9f92bba519395020b3e">helios::memory::IsPowerOfTwo</a></div><div class="ttdeci">constexpr bool IsPowerOfTwo(size_t size) noexcept</div><div class="ttdoc">Helper function to check if a size is a power of 2.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00122">allocator_traits.hpp:122</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -545,15 +549,15 @@ template&lt;typename T &gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2frame_allocator_8hpp-example.html#a17">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/frame_allocator.hpp</a>, <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2free_list_allocator_8hpp-example.html#a20">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/free_list_allocator.hpp</a>, <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2pool_allocator_8hpp-example.html#a23">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/pool_allocator.hpp</a>, and <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stack_allocator_8hpp-example.html#a21">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stack_allocator.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="memory_2common_8hpp_source.html#l00050">50</a> of file <a class="el" href="memory_2common_8hpp_source.html">common.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   50</span>                                   {</div>
-<div class="line"><span class="lineno">   51</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(ptr != <span class="keyword">nullptr</span>, <span class="stringliteral">&quot;Failed to free memory: pointer cannot be nullptr!&quot;</span>);</div>
-<div class="line"><span class="lineno">   52</span><span class="preprocessor">#ifdef _MSC_VER</span></div>
-<div class="line"><span class="lineno">   53</span>  _aligned_free(ptr);</div>
-<div class="line"><span class="lineno">   54</span><span class="preprocessor">#else</span></div>
-<div class="line"><span class="lineno">   55</span>  std::free(ptr);</div>
-<div class="line"><span class="lineno">   56</span><span class="preprocessor">#endif</span></div>
-<div class="line"><span class="lineno">   57</span>}</div>
+<p class="definition">Definition at line <a class="el" href="memory_2common_8hpp_source.html#l00053">53</a> of file <a class="el" href="memory_2common_8hpp_source.html">common.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   53</span>                                   {</div>
+<div class="line"><span class="lineno">   54</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(ptr != <span class="keyword">nullptr</span>, <span class="stringliteral">&quot;Failed to free memory: pointer cannot be nullptr!&quot;</span>);</div>
+<div class="line"><span class="lineno">   55</span><span class="preprocessor">#ifdef _MSC_VER</span></div>
+<div class="line"><span class="lineno">   56</span>  _aligned_free(ptr);</div>
+<div class="line"><span class="lineno">   57</span><span class="preprocessor">#else</span></div>
+<div class="line"><span class="lineno">   58</span>  std::free(ptr);</div>
+<div class="line"><span class="lineno">   59</span><span class="preprocessor">#endif</span></div>
+<div class="line"><span class="lineno">   60</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -603,10 +607,10 @@ template&lt;typename T &gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2allocator_traits_8hpp-example.html#a12">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/allocator_traits.hpp</a>, and <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2pool_allocator_8hpp-example.html#a20">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/pool_allocator.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="allocator__traits_8hpp_source.html#l00090">90</a> of file <a class="el" href="allocator__traits_8hpp_source.html">allocator_traits.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   90</span>                                                                               {</div>
-<div class="line"><span class="lineno">   91</span>  <span class="keywordflow">return</span> (size + alignment - 1) &amp; ~(alignment - 1);</div>
-<div class="line"><span class="lineno">   92</span>}</div>
+<p class="definition">Definition at line <a class="el" href="allocator__traits_8hpp_source.html#l00091">91</a> of file <a class="el" href="allocator__traits_8hpp_source.html">allocator_traits.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   91</span>                                                                               {</div>
+<div class="line"><span class="lineno">   92</span>  <span class="keywordflow">return</span> (size + alignment - 1) &amp; ~(alignment - 1);</div>
+<div class="line"><span class="lineno">   93</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -656,12 +660,12 @@ template&lt;typename T &gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2allocator_traits_8hpp-example.html#a13">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/allocator_traits.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="allocator__traits_8hpp_source.html#l00100">100</a> of file <a class="el" href="allocator__traits_8hpp_source.html">allocator_traits.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  100</span>                                                                            {</div>
-<div class="line"><span class="lineno">  101</span>  <span class="keyword">const</span> <span class="keyword">auto</span> addr = <span class="keyword">reinterpret_cast&lt;</span>uintptr_t<span class="keyword">&gt;</span>(ptr);</div>
-<div class="line"><span class="lineno">  102</span>  <span class="keyword">const</span> <span class="keyword">auto</span> aligned_addr = (addr + alignment - 1) &amp; ~(alignment - 1);</div>
-<div class="line"><span class="lineno">  103</span>  <span class="keywordflow">return</span> <span class="keyword">reinterpret_cast&lt;</span><span class="keywordtype">void</span>*<span class="keyword">&gt;</span>(aligned_addr);</div>
-<div class="line"><span class="lineno">  104</span>}</div>
+<p class="definition">Definition at line <a class="el" href="allocator__traits_8hpp_source.html#l00101">101</a> of file <a class="el" href="allocator__traits_8hpp_source.html">allocator_traits.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  101</span>                                                                            {</div>
+<div class="line"><span class="lineno">  102</span>  <span class="keyword">const</span> <span class="keyword">auto</span> addr = <span class="keyword">reinterpret_cast&lt;</span>uintptr_t<span class="keyword">&gt;</span>(ptr);</div>
+<div class="line"><span class="lineno">  103</span>  <span class="keyword">const</span> <span class="keyword">auto</span> aligned_addr = (addr + alignment - 1) &amp; ~(alignment - 1);</div>
+<div class="line"><span class="lineno">  104</span>  <span class="keywordflow">return</span> <span class="keyword">reinterpret_cast&lt;</span><span class="keywordtype">void</span>*<span class="keyword">&gt;</span>(aligned_addr);</div>
+<div class="line"><span class="lineno">  105</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -693,13 +697,13 @@ template&lt;typename T , Allocator Alloc&gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2allocator_traits_8hpp-example.html#a18">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/allocator_traits.hpp</a>, <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2arena_allocator_8hpp-example.html#a22">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/arena_allocator.hpp</a>, <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2frame_allocator_8hpp-example.html#a22">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/frame_allocator.hpp</a>, <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2free_list_allocator_8hpp-example.html#a25">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/free_list_allocator.hpp</a>, <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2growable_allocator_8hpp-example.html#a20">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/growable_allocator.hpp</a>, <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2pool_allocator_8hpp-example.html#a25">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/pool_allocator.hpp</a>, and <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stack_allocator_8hpp-example.html#a26">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stack_allocator.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="allocator__traits_8hpp_source.html#l00182">182</a> of file <a class="el" href="allocator__traits_8hpp_source.html">allocator_traits.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  182</span>                                                               {</div>
-<div class="line"><span class="lineno">  183</span>  <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> size = <span class="keyword">sizeof</span>(T);</div>
-<div class="line"><span class="lineno">  184</span>  <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> alignment = std::max(<span class="keyword">alignof</span>(T), kMinAlignment);</div>
-<div class="line"><span class="lineno">  185</span>  <span class="keyword">auto</span> result = allocator.Allocate(size, alignment);</div>
-<div class="line"><span class="lineno">  186</span>  <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(result.ptr);</div>
-<div class="line"><span class="lineno">  187</span>}</div>
+<p class="definition">Definition at line <a class="el" href="allocator__traits_8hpp_source.html#l00183">183</a> of file <a class="el" href="allocator__traits_8hpp_source.html">allocator_traits.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  183</span>                                                               {</div>
+<div class="line"><span class="lineno">  184</span>  <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> size = <span class="keyword">sizeof</span>(T);</div>
+<div class="line"><span class="lineno">  185</span>  <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> alignment = std::max(<span class="keyword">alignof</span>(T), kMinAlignment);</div>
+<div class="line"><span class="lineno">  186</span>  <span class="keyword">auto</span> result = allocator.Allocate(size, alignment);</div>
+<div class="line"><span class="lineno">  187</span>  <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(result.ptr);</div>
+<div class="line"><span class="lineno">  188</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -739,16 +743,16 @@ template&lt;typename T , Allocator Alloc&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="allocator__traits_8hpp_source.html#l00211">211</a> of file <a class="el" href="allocator__traits_8hpp_source.html">allocator_traits.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  211</span>                                                                             {</div>
-<div class="line"><span class="lineno">  212</span>  <span class="keywordflow">if</span> (count == 0) [[unlikely]] {</div>
-<div class="line"><span class="lineno">  213</span>    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><span class="lineno">  214</span>  }</div>
-<div class="line"><span class="lineno">  215</span>  <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> alignment = std::max(<span class="keyword">alignof</span>(T), kMinAlignment);</div>
-<div class="line"><span class="lineno">  216</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> size = <span class="keyword">sizeof</span>(T) * count;</div>
-<div class="line"><span class="lineno">  217</span>  <span class="keyword">auto</span> result = allocator.Allocate(size, alignment);</div>
-<div class="line"><span class="lineno">  218</span>  <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(result.ptr);</div>
-<div class="line"><span class="lineno">  219</span>}</div>
+<p class="definition">Definition at line <a class="el" href="allocator__traits_8hpp_source.html#l00212">212</a> of file <a class="el" href="allocator__traits_8hpp_source.html">allocator_traits.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  212</span>                                                                             {</div>
+<div class="line"><span class="lineno">  213</span>  <span class="keywordflow">if</span> (count == 0) [[unlikely]] {</div>
+<div class="line"><span class="lineno">  214</span>    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  215</span>  }</div>
+<div class="line"><span class="lineno">  216</span>  <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> alignment = std::max(<span class="keyword">alignof</span>(T), kMinAlignment);</div>
+<div class="line"><span class="lineno">  217</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> size = <span class="keyword">sizeof</span>(T) * count;</div>
+<div class="line"><span class="lineno">  218</span>  <span class="keyword">auto</span> result = allocator.Allocate(size, alignment);</div>
+<div class="line"><span class="lineno">  219</span>  <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(result.ptr);</div>
+<div class="line"><span class="lineno">  220</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -791,14 +795,14 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2allocator_traits_8hpp-example.html#a19">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/allocator_traits.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="allocator__traits_8hpp_source.html#l00240">240</a> of file <a class="el" href="allocator__traits_8hpp_source.html">allocator_traits.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  241</span>                                                                                                                    {</div>
-<div class="line"><span class="lineno">  242</span>  T* ptr = Allocate&lt;T&gt;(allocator);</div>
-<div class="line"><span class="lineno">  243</span>  <span class="keywordflow">if</span> (ptr != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><span class="lineno">  244</span>    ::new (<span class="keyword">static_cast&lt;</span><span class="keywordtype">void</span>*<span class="keyword">&gt;</span>(ptr)) T(std::forward&lt;Args&gt;(args)...);</div>
-<div class="line"><span class="lineno">  245</span>  }</div>
-<div class="line"><span class="lineno">  246</span>  <span class="keywordflow">return</span> ptr;</div>
-<div class="line"><span class="lineno">  247</span>}</div>
+<p class="definition">Definition at line <a class="el" href="allocator__traits_8hpp_source.html#l00241">241</a> of file <a class="el" href="allocator__traits_8hpp_source.html">allocator_traits.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  242</span>                                                                                                                    {</div>
+<div class="line"><span class="lineno">  243</span>  T* ptr = Allocate&lt;T&gt;(allocator);</div>
+<div class="line"><span class="lineno">  244</span>  <span class="keywordflow">if</span> (ptr != <span class="keyword">nullptr</span>) [[likely]] {</div>
+<div class="line"><span class="lineno">  245</span>    std::construct_at(ptr, std::forward&lt;Args&gt;(args)...);</div>
+<div class="line"><span class="lineno">  246</span>  }</div>
+<div class="line"><span class="lineno">  247</span>  <span class="keywordflow">return</span> ptr;</div>
+<div class="line"><span class="lineno">  248</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -841,16 +845,16 @@ requires std::default_initializable&lt;T&gt;</div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2allocator_traits_8hpp-example.html#a20">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/allocator_traits.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="allocator__traits_8hpp_source.html#l00267">267</a> of file <a class="el" href="allocator__traits_8hpp_source.html">allocator_traits.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  268</span>                                              {</div>
-<div class="line"><span class="lineno">  269</span>  T* ptr = Allocate&lt;T&gt;(allocator, count);</div>
-<div class="line"><span class="lineno">  270</span>  <span class="keywordflow">if</span> (ptr != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><span class="lineno">  271</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; count; ++i) {</div>
-<div class="line"><span class="lineno">  272</span>      ::new (<span class="keyword">static_cast&lt;</span><span class="keywordtype">void</span>*<span class="keyword">&gt;</span>(ptr + i)) T{};</div>
-<div class="line"><span class="lineno">  273</span>    }</div>
-<div class="line"><span class="lineno">  274</span>  }</div>
-<div class="line"><span class="lineno">  275</span>  <span class="keywordflow">return</span> ptr;</div>
-<div class="line"><span class="lineno">  276</span>}</div>
+<p class="definition">Definition at line <a class="el" href="allocator__traits_8hpp_source.html#l00268">268</a> of file <a class="el" href="allocator__traits_8hpp_source.html">allocator_traits.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  269</span>                                              {</div>
+<div class="line"><span class="lineno">  270</span>  T* ptr = Allocate&lt;T&gt;(allocator, count);</div>
+<div class="line"><span class="lineno">  271</span>  <span class="keywordflow">if</span> (ptr != <span class="keyword">nullptr</span>) [[likely]] {</div>
+<div class="line"><span class="lineno">  272</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; count; ++i) {</div>
+<div class="line"><span class="lineno">  273</span>      std::construct_at(ptr + i);</div>
+<div class="line"><span class="lineno">  274</span>    }</div>
+<div class="line"><span class="lineno">  275</span>  }</div>
+<div class="line"><span class="lineno">  276</span>  <span class="keywordflow">return</span> ptr;</div>
+<div class="line"><span class="lineno">  277</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -900,12 +904,12 @@ requires std::default_initializable&lt;T&gt;</div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2allocator_traits_8hpp-example.html#a16">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/allocator_traits.hpp</a>, <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2arena_allocator_8hpp-example.html#a17">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/arena_allocator.hpp</a>, and <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2frame_allocator_8hpp-example.html#a20">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/frame_allocator.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="allocator__traits_8hpp_source.html#l00131">131</a> of file <a class="el" href="allocator__traits_8hpp_source.html">allocator_traits.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  131</span>                                                                                         {</div>
-<div class="line"><span class="lineno">  132</span>  <span class="keyword">const</span> <span class="keyword">auto</span> addr = <span class="keyword">reinterpret_cast&lt;</span>uintptr_t<span class="keyword">&gt;</span>(ptr);</div>
-<div class="line"><span class="lineno">  133</span>  <span class="keyword">const</span> <span class="keyword">auto</span> aligned_addr = (addr + alignment - 1) &amp; ~(alignment - 1);</div>
-<div class="line"><span class="lineno">  134</span>  <span class="keywordflow">return</span> aligned_addr - addr;</div>
-<div class="line"><span class="lineno">  135</span>}</div>
+<p class="definition">Definition at line <a class="el" href="allocator__traits_8hpp_source.html#l00132">132</a> of file <a class="el" href="allocator__traits_8hpp_source.html">allocator_traits.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  132</span>                                                                                         {</div>
+<div class="line"><span class="lineno">  133</span>  <span class="keyword">const</span> <span class="keyword">auto</span> addr = <span class="keyword">reinterpret_cast&lt;</span>uintptr_t<span class="keyword">&gt;</span>(ptr);</div>
+<div class="line"><span class="lineno">  134</span>  <span class="keyword">const</span> <span class="keyword">auto</span> aligned_addr = (addr + alignment - 1) &amp; ~(alignment - 1);</div>
+<div class="line"><span class="lineno">  135</span>  <span class="keywordflow">return</span> aligned_addr - addr;</div>
+<div class="line"><span class="lineno">  136</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -962,25 +966,25 @@ requires std::default_initializable&lt;T&gt;</div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2allocator_traits_8hpp-example.html#a17">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/allocator_traits.hpp</a>, <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2free_list_allocator_8hpp-example.html#a23">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/free_list_allocator.hpp</a>, and <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stack_allocator_8hpp-example.html#a24">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stack_allocator.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="allocator__traits_8hpp_source.html#l00144">144</a> of file <a class="el" href="allocator__traits_8hpp_source.html">allocator_traits.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  144</span>                                                                                                                       {</div>
-<div class="line"><span class="lineno">  145</span>  <span class="keyword">const</span> <span class="keyword">auto</span> addr = <span class="keyword">reinterpret_cast&lt;</span>uintptr_t<span class="keyword">&gt;</span>(ptr);</div>
-<div class="line"><span class="lineno">  146</span>  <span class="keyword">const</span> <span class="keyword">auto</span> aligned_addr = (addr + alignment - 1) &amp; ~(alignment - 1);</div>
-<div class="line"><span class="lineno">  147</span>  <span class="keywordtype">size_t</span> padding = aligned_addr - addr;</div>
-<div class="line"><span class="lineno">  148</span> </div>
-<div class="line"><span class="lineno">  149</span>  <span class="comment">// Check if we need more padding to fit the header</span></div>
-<div class="line"><span class="lineno">  150</span>  <span class="keywordflow">if</span> (padding &lt; header_size) {</div>
-<div class="line"><span class="lineno">  151</span>    header_size -= padding;</div>
-<div class="line"><span class="lineno">  152</span>    <span class="comment">// Align header_size to alignment</span></div>
-<div class="line"><span class="lineno">  153</span>    <span class="keywordflow">if</span> (header_size % alignment &gt; 0) {</div>
-<div class="line"><span class="lineno">  154</span>      padding += alignment * (1 + (header_size / alignment));</div>
-<div class="line"><span class="lineno">  155</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  156</span>      padding += alignment * (header_size / alignment);</div>
-<div class="line"><span class="lineno">  157</span>    }</div>
-<div class="line"><span class="lineno">  158</span>  }</div>
-<div class="line"><span class="lineno">  159</span> </div>
-<div class="line"><span class="lineno">  160</span>  <span class="keywordflow">return</span> padding;</div>
-<div class="line"><span class="lineno">  161</span>}</div>
+<p class="definition">Definition at line <a class="el" href="allocator__traits_8hpp_source.html#l00145">145</a> of file <a class="el" href="allocator__traits_8hpp_source.html">allocator_traits.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  145</span>                                                                                                                       {</div>
+<div class="line"><span class="lineno">  146</span>  <span class="keyword">const</span> <span class="keyword">auto</span> addr = <span class="keyword">reinterpret_cast&lt;</span>uintptr_t<span class="keyword">&gt;</span>(ptr);</div>
+<div class="line"><span class="lineno">  147</span>  <span class="keyword">const</span> <span class="keyword">auto</span> aligned_addr = (addr + alignment - 1) &amp; ~(alignment - 1);</div>
+<div class="line"><span class="lineno">  148</span>  <span class="keywordtype">size_t</span> padding = aligned_addr - addr;</div>
+<div class="line"><span class="lineno">  149</span> </div>
+<div class="line"><span class="lineno">  150</span>  <span class="comment">// Check if we need more padding to fit the header</span></div>
+<div class="line"><span class="lineno">  151</span>  <span class="keywordflow">if</span> (padding &lt; header_size) {</div>
+<div class="line"><span class="lineno">  152</span>    header_size -= padding;</div>
+<div class="line"><span class="lineno">  153</span>    <span class="comment">// Align header_size to alignment</span></div>
+<div class="line"><span class="lineno">  154</span>    <span class="keywordflow">if</span> (header_size % alignment &gt; 0) {</div>
+<div class="line"><span class="lineno">  155</span>      padding += alignment * (1 + (header_size / alignment));</div>
+<div class="line"><span class="lineno">  156</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  157</span>      padding += alignment * (header_size / alignment);</div>
+<div class="line"><span class="lineno">  158</span>    }</div>
+<div class="line"><span class="lineno">  159</span>  }</div>
+<div class="line"><span class="lineno">  160</span> </div>
+<div class="line"><span class="lineno">  161</span>  <span class="keywordflow">return</span> padding;</div>
+<div class="line"><span class="lineno">  162</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1030,10 +1034,10 @@ requires std::default_initializable&lt;T&gt;</div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2allocator_traits_8hpp-example.html#a14">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/allocator_traits.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="allocator__traits_8hpp_source.html#l00112">112</a> of file <a class="el" href="allocator__traits_8hpp_source.html">allocator_traits.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  112</span>                                                                                {</div>
-<div class="line"><span class="lineno">  113</span>  <span class="keywordflow">return</span> (<span class="keyword">reinterpret_cast&lt;</span>uintptr_t<span class="keyword">&gt;</span>(ptr) &amp; (alignment - 1)) == 0;</div>
-<div class="line"><span class="lineno">  114</span>}</div>
+<p class="definition">Definition at line <a class="el" href="allocator__traits_8hpp_source.html#l00113">113</a> of file <a class="el" href="allocator__traits_8hpp_source.html">allocator_traits.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  113</span>                                                                                {</div>
+<div class="line"><span class="lineno">  114</span>  <span class="keywordflow">return</span> (<span class="keyword">reinterpret_cast&lt;</span>uintptr_t<span class="keyword">&gt;</span>(ptr) &amp; (alignment - 1)) == 0;</div>
+<div class="line"><span class="lineno">  115</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1072,10 +1076,10 @@ requires std::default_initializable&lt;T&gt;</div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2allocator_traits_8hpp-example.html#a15">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/allocator_traits.hpp</a>, <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2arena_allocator_8hpp-example.html#a20">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/arena_allocator.hpp</a>, <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2frame_allocator_8hpp-example.html#a18">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/frame_allocator.hpp</a>, <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2free_list_allocator_8hpp-example.html#a21">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/free_list_allocator.hpp</a>, <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2growable_allocator_8hpp-example.html#a18">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/growable_allocator.hpp</a>, <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2pool_allocator_8hpp-example.html#a19">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/pool_allocator.hpp</a>, and <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stack_allocator_8hpp-example.html#a22">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stack_allocator.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="allocator__traits_8hpp_source.html#l00121">121</a> of file <a class="el" href="allocator__traits_8hpp_source.html">allocator_traits.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  121</span>                                                                {</div>
-<div class="line"><span class="lineno">  122</span>  <span class="keywordflow">return</span> size != 0 &amp;&amp; (size &amp; (size - 1)) == 0;</div>
-<div class="line"><span class="lineno">  123</span>}</div>
+<p class="definition">Definition at line <a class="el" href="allocator__traits_8hpp_source.html#l00122">122</a> of file <a class="el" href="allocator__traits_8hpp_source.html">allocator_traits.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  122</span>                                                                {</div>
+<div class="line"><span class="lineno">  123</span>  <span class="keywordflow">return</span> size != 0 &amp;&amp; (size &amp; (size - 1)) == 0;</div>
+<div class="line"><span class="lineno">  124</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1104,7 +1108,7 @@ requires std::default_initializable&lt;T&gt;</div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2allocator_resources_8hpp-example.html#a25">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/allocator_resources.hpp</a>, <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2allocator_traits_8hpp-example.html#a10">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/allocator_traits.hpp</a>, <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2arena_allocator_8hpp-example.html#a3">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/arena_allocator.hpp</a>, <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2frame_allocator_8hpp-example.html#a3">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/frame_allocator.hpp</a>, <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2free_list_allocator_8hpp-example.html#a3">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/free_list_allocator.hpp</a>, <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2growable_allocator_8hpp-example.html#a4">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/growable_allocator.hpp</a>, <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2pool_allocator_8hpp-example.html#a1">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/pool_allocator.hpp</a>, and <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stack_allocator_8hpp-example.html#a3">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stack_allocator.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="allocator__traits_8hpp_source.html#l00077">77</a> of file <a class="el" href="allocator__traits_8hpp_source.html">allocator_traits.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="allocator__traits_8hpp_source.html#l00078">78</a> of file <a class="el" href="allocator__traits_8hpp_source.html">allocator_traits.hpp</a>.</p>
 
 </div>
 </div>
@@ -1132,7 +1136,7 @@ requires std::default_initializable&lt;T&gt;</div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2allocator_traits_8hpp-example.html#a11">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/allocator_traits.hpp</a>, <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2arena_allocator_8hpp-example.html#a18">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/arena_allocator.hpp</a>, <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2frame_allocator_8hpp-example.html#a19">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/frame_allocator.hpp</a>, <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2free_list_allocator_8hpp-example.html#a22">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/free_list_allocator.hpp</a>, <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2growable_allocator_8hpp-example.html#a19">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/growable_allocator.hpp</a>, <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stack_allocator_8hpp-example.html#a23">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stack_allocator.hpp</a>, and <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stl_allocator_adapter_8hpp-example.html#a15">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stl_allocator_adapter.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="allocator__traits_8hpp_source.html#l00082">82</a> of file <a class="el" href="allocator__traits_8hpp_source.html">allocator_traits.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="allocator__traits_8hpp_source.html#l00083">83</a> of file <a class="el" href="allocator__traits_8hpp_source.html">allocator_traits.hpp</a>.</p>
 
 </div>
 </div>

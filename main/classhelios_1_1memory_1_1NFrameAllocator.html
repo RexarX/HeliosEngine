@@ -444,7 +444,7 @@ requires (N &gt; 0)</div>
 <div class="line"><span class="lineno">  305</span>  <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(result.ptr);</div>
 <div class="line"><span class="lineno">  306</span>}</div>
 <div class="ttc" id="aclasshelios_1_1memory_1_1NFrameAllocator_html_a877b7c94400eea6b2adfbcea82fb3902"><div class="ttname"><a href="classhelios_1_1memory_1_1NFrameAllocator.html#a877b7c94400eea6b2adfbcea82fb3902">helios::memory::NFrameAllocator::Allocate</a></div><div class="ttdeci">T * Allocate() noexcept</div><div class="ttdoc">Allocates memory for a single object of type T.</div><div class="ttdef"><b>Definition</b> <a href="n__frame__allocator_8hpp_source.html#l00301">n_frame_allocator.hpp:301</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1memory_html_a4b4f9ed5e1cf5fe81a0ccbdb6991395a"><div class="ttname"><a href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">helios::memory::kMinAlignment</a></div><div class="ttdeci">constexpr size_t kMinAlignment</div><div class="ttdoc">Minimum alignment for any allocation.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00082">allocator_traits.hpp:82</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_a4b4f9ed5e1cf5fe81a0ccbdb6991395a"><div class="ttname"><a href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">helios::memory::kMinAlignment</a></div><div class="ttdeci">constexpr size_t kMinAlignment</div><div class="ttdoc">Minimum alignment for any allocation.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00083">allocator_traits.hpp:83</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -615,8 +615,8 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
 <p class="definition">Definition at line <a class="el" href="n__frame__allocator_8hpp_source.html#l00325">325</a> of file <a class="el" href="n__frame__allocator_8hpp_source.html">n_frame_allocator.hpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  326</span>                                               {</div>
 <div class="line"><span class="lineno">  327</span>  T* ptr = Allocate&lt;T&gt;();</div>
-<div class="line"><span class="lineno">  328</span>  <span class="keywordflow">if</span> (ptr != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><span class="lineno">  329</span>    ::new (<span class="keyword">static_cast&lt;</span><span class="keywordtype">void</span>*<span class="keyword">&gt;</span>(ptr)) T(std::forward&lt;Args&gt;(args)...);</div>
+<div class="line"><span class="lineno">  328</span>  <span class="keywordflow">if</span> (ptr != <span class="keyword">nullptr</span>) [[likely]] {</div>
+<div class="line"><span class="lineno">  329</span>    std::construct_at(ptr, std::forward&lt;Args&gt;(args)...);</div>
 <div class="line"><span class="lineno">  330</span>  }</div>
 <div class="line"><span class="lineno">  331</span>  <span class="keywordflow">return</span> ptr;</div>
 <div class="line"><span class="lineno">  332</span>}</div>
@@ -671,9 +671,9 @@ requires std::default_initializable&lt;T&gt;</div>
 <p class="definition">Definition at line <a class="el" href="n__frame__allocator_8hpp_source.html#l00338">338</a> of file <a class="el" href="n__frame__allocator_8hpp_source.html">n_frame_allocator.hpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  339</span>                                              {</div>
 <div class="line"><span class="lineno">  340</span>  T* ptr = Allocate&lt;T&gt;(count);</div>
-<div class="line"><span class="lineno">  341</span>  <span class="keywordflow">if</span> (ptr != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><span class="lineno">  341</span>  <span class="keywordflow">if</span> (ptr != <span class="keyword">nullptr</span>) [[likely]] {</div>
 <div class="line"><span class="lineno">  342</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; count; ++i) {</div>
-<div class="line"><span class="lineno">  343</span>      ::new (<span class="keyword">static_cast&lt;</span><span class="keywordtype">void</span>*<span class="keyword">&gt;</span>(ptr + i)) T{};</div>
+<div class="line"><span class="lineno">  343</span>      std::construct_at(ptr + i);</div>
 <div class="line"><span class="lineno">  344</span>    }</div>
 <div class="line"><span class="lineno">  345</span>  }</div>
 <div class="line"><span class="lineno">  346</span>  <span class="keywordflow">return</span> ptr;</div>

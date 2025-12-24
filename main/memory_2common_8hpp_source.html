@@ -172,70 +172,76 @@ $(document).ready(function(){initNavTree('memory_2common_8hpp_source.html',''); 
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;<a class="code" href="assert_8hpp.html">helios/core/assert.hpp</a>&gt;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;<a class="code" href="logger_8hpp.html">helios/core/logger.hpp</a>&gt;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;cstddef&gt;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;cstdlib&gt;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1memory.html">helios::memory</a> {</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment"></span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"> * @brief Allocate memory with the specified alignment.</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment"> * @details Allocates a block of memory of the specified size aligned to the specified alignment boundary.</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"> * The alignment must be a power of two and non-zero. The size must also be non-zero.</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment"> *</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"> * Uses `_aligned_malloc` on MSVC and `std::aligned_alloc` on other platforms.</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"> *</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"> * @warning Triggers assertion in next cases:</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"> * - alignment is zero</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment"> * - alignment is not a power of two</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"> * - size is zero</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"> * @param alignment The alignment in bytes (must be a power of two and non-zero).</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment"> * @param size The size of the memory block to allocate in bytes (must be non-zero).</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment"> * @return A pointer to the allocated memory block.</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment"> * @throws std::bad_alloc if the allocation fails.</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment"> */</span></div>
-<div class="foldopen" id="foldopen00029" data-start="{" data-end="}">
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="namespacehelios_1_1memory.html#a175355e873ce053598f865a5a0241f94">   29</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span>* <a class="code hl_function" href="namespacehelios_1_1memory.html#a175355e873ce053598f865a5a0241f94">AlignedAlloc</a>(<span class="keywordtype">size_t</span> alignment, <span class="keywordtype">size_t</span> size) {</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(alignment != 0, <span class="stringliteral">&quot;Failed to allocate memory: alignment cannot be zero!&quot;</span>);</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>((alignment &amp; (alignment - 1)) == 0, <span class="stringliteral">&quot;Failed to allocate memory: alignment must be a power of two!&quot;</span>);</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(size != 0, <span class="stringliteral">&quot;Failed to allocate memory: size cannot be zero!&quot;</span>);</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#ifdef _MSC_VER</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <span class="keywordflow">return</span> _aligned_malloc(size, alignment);</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#else</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  <span class="keywordflow">return</span> std::aligned_alloc(alignment, size);</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>}</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;<a class="code" href="allocator__traits_8hpp.html">helios/core/memory/allocator_traits.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;cstddef&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;cstdlib&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1memory.html">helios::memory</a> {</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment"></span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment"> * @brief Allocate memory with the specified alignment.</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"> * @details Allocates a block of memory of the specified size aligned to the specified alignment boundary.</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment"> * The alignment must be a power of two and non-zero. The size must also be non-zero.</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"> * Uses `_aligned_malloc` on MSVC and `std::aligned_alloc` on other platforms.</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"> * @warning Triggers assertion in next cases:</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment"> * - alignment is zero</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"> * - alignment is not a power of two</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"> * - size is zero</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment"> * @param alignment The alignment in bytes (must be a power of two and non-zero).</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment"> * @param size The size of the memory block to allocate in bytes (must be non-zero).</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment"> * @return A pointer to the allocated memory block.</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment"> * @throws std::bad_alloc if the allocation fails.</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment"> */</span></div>
+<div class="foldopen" id="foldopen00030" data-start="{" data-end="}">
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="namespacehelios_1_1memory.html#a175355e873ce053598f865a5a0241f94">   30</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span>* <a class="code hl_function" href="namespacehelios_1_1memory.html#a175355e873ce053598f865a5a0241f94">AlignedAlloc</a>(<span class="keywordtype">size_t</span> alignment, <span class="keywordtype">size_t</span> size) {</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(alignment != 0, <span class="stringliteral">&quot;Failed to allocate memory: alignment cannot be zero!&quot;</span>);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="namespacehelios_1_1memory.html#a443dc78a3e9ae9f92bba519395020b3e">IsPowerOfTwo</a>(alignment), <span class="stringliteral">&quot;Failed to allocate memory: alignment must be a power of two!&quot;</span>);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(size != 0, <span class="stringliteral">&quot;Failed to allocate memory: size cannot be zero!&quot;</span>);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#ifdef _MSC_VER</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  <span class="keywordflow">return</span> _aligned_malloc(size, alignment);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  <span class="comment">// POSIX aligned_alloc requires size to be a multiple of alignment</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  <span class="comment">// Round up size to the next multiple of alignment</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  <span class="keywordflow">return</span> std::aligned_alloc(alignment, <a class="code hl_function" href="namespacehelios_1_1memory.html#a2d894713b466844926e8b24892da0877">AlignUp</a>(size, alignment));</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>}</div>
 </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment"></span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment"> * @brief Free memory allocated with AlignedAlloc.</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment"> * @details Frees a block of memory allocated with AlignedAlloc.</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment"> * The ptr must be a pointer returned by AlignedAlloc.</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment"> *</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment"> * Uses `_aligned_free` on MSVC and `std::free` on other platforms.</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment"> *</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment"> * @warning Triggers assertion if ptr is nullptr.</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment"> * @param ptr The pointer to the memory block to free.</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment"> */</span></div>
-<div class="foldopen" id="foldopen00050" data-start="{" data-end="}">
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="namespacehelios_1_1memory.html#abbe59f6529258733707c209398f9a30f">   50</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespacehelios_1_1memory.html#abbe59f6529258733707c209398f9a30f">AlignedFree</a>(<span class="keywordtype">void</span>* ptr) {</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(ptr != <span class="keyword">nullptr</span>, <span class="stringliteral">&quot;Failed to free memory: pointer cannot be nullptr!&quot;</span>);</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">#ifdef _MSC_VER</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  _aligned_free(ptr);</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="preprocessor">#else</span></div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  std::free(ptr);</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>}</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment"></span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment"> * @brief Free memory allocated with AlignedAlloc.</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment"> * @details Frees a block of memory allocated with AlignedAlloc.</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment"> * The ptr must be a pointer returned by AlignedAlloc.</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment"> * Uses `_aligned_free` on MSVC and `std::free` on other platforms.</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment"> * @warning Triggers assertion if ptr is nullptr.</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment"> * @param ptr The pointer to the memory block to free.</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment"> */</span></div>
+<div class="foldopen" id="foldopen00053" data-start="{" data-end="}">
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="namespacehelios_1_1memory.html#abbe59f6529258733707c209398f9a30f">   53</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespacehelios_1_1memory.html#abbe59f6529258733707c209398f9a30f">AlignedFree</a>(<span class="keywordtype">void</span>* ptr) {</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(ptr != <span class="keyword">nullptr</span>, <span class="stringliteral">&quot;Failed to free memory: pointer cannot be nullptr!&quot;</span>);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="preprocessor">#ifdef _MSC_VER</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  _aligned_free(ptr);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  std::free(ptr);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>}</div>
 </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>}  <span class="comment">// namespace helios::memory</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>}  <span class="comment">// namespace helios::memory</span></div>
+<div class="ttc" id="aallocator__traits_8hpp_html"><div class="ttname"><a href="allocator__traits_8hpp.html">allocator_traits.hpp</a></div></div>
 <div class="ttc" id="aassert_8hpp_html"><div class="ttname"><a href="assert_8hpp.html">assert.hpp</a></div></div>
 <div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00140">assert.hpp:140</a></div></div>
 <div class="ttc" id="acore__pch_8hpp_html"><div class="ttname"><a href="core__pch_8hpp.html">core_pch.hpp</a></div></div>
 <div class="ttc" id="alogger_8hpp_html"><div class="ttname"><a href="logger_8hpp.html">logger.hpp</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1memory_html"><div class="ttname"><a href="namespacehelios_1_1memory.html">helios::memory</a></div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00011">allocator_traits.hpp:11</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1memory_html_a175355e873ce053598f865a5a0241f94"><div class="ttname"><a href="namespacehelios_1_1memory.html#a175355e873ce053598f865a5a0241f94">helios::memory::AlignedAlloc</a></div><div class="ttdeci">void * AlignedAlloc(size_t alignment, size_t size)</div><div class="ttdoc">Allocate memory with the specified alignment.</div><div class="ttdef"><b>Definition</b> <a href="memory_2common_8hpp_source.html#l00029">common.hpp:29</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1memory_html_abbe59f6529258733707c209398f9a30f"><div class="ttname"><a href="namespacehelios_1_1memory.html#abbe59f6529258733707c209398f9a30f">helios::memory::AlignedFree</a></div><div class="ttdeci">void AlignedFree(void *ptr)</div><div class="ttdoc">Free memory allocated with AlignedAlloc.</div><div class="ttdef"><b>Definition</b> <a href="memory_2common_8hpp_source.html#l00050">common.hpp:50</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html"><div class="ttname"><a href="namespacehelios_1_1memory.html">helios::memory</a></div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00012">allocator_traits.hpp:12</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_a175355e873ce053598f865a5a0241f94"><div class="ttname"><a href="namespacehelios_1_1memory.html#a175355e873ce053598f865a5a0241f94">helios::memory::AlignedAlloc</a></div><div class="ttdeci">void * AlignedAlloc(size_t alignment, size_t size)</div><div class="ttdoc">Allocate memory with the specified alignment.</div><div class="ttdef"><b>Definition</b> <a href="memory_2common_8hpp_source.html#l00030">common.hpp:30</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_a2d894713b466844926e8b24892da0877"><div class="ttname"><a href="namespacehelios_1_1memory.html#a2d894713b466844926e8b24892da0877">helios::memory::AlignUp</a></div><div class="ttdeci">constexpr size_t AlignUp(size_t size, size_t alignment) noexcept</div><div class="ttdoc">Helper function to align a size up to the given alignment.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00091">allocator_traits.hpp:91</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_a443dc78a3e9ae9f92bba519395020b3e"><div class="ttname"><a href="namespacehelios_1_1memory.html#a443dc78a3e9ae9f92bba519395020b3e">helios::memory::IsPowerOfTwo</a></div><div class="ttdeci">constexpr bool IsPowerOfTwo(size_t size) noexcept</div><div class="ttdoc">Helper function to check if a size is a power of 2.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00122">allocator_traits.hpp:122</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_abbe59f6529258733707c209398f9a30f"><div class="ttname"><a href="namespacehelios_1_1memory.html#abbe59f6529258733707c209398f9a30f">helios::memory::AlignedFree</a></div><div class="ttdeci">void AlignedFree(void *ptr)</div><div class="ttdoc">Free memory allocated with AlignedAlloc.</div><div class="ttdef"><b>Definition</b> <a href="memory_2common_8hpp_source.html#l00053">common.hpp:53</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->

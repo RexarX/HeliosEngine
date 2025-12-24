@@ -190,6 +190,7 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="preprocessor">#include &lt;algorithm&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;concepts&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;cstddef&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;memory&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;mutex&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;shared_mutex&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
@@ -199,17 +200,16 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">/**</span></div>
 <div class="line"><span class="comment"> * @brief Growable allocator adapter that automatically expands capacity.</span></div>
-<div class="line"><span class="comment"> * @details Wraps another allocator and automatically creates additional allocator</span></div>
-<div class="line"><span class="comment"> * instances when capacity is exceeded. Manages multiple allocator instances and</span></div>
-<div class="line"><span class="comment"> * delegates allocations to them.</span></div>
+<div class="line"><span class="comment"> * @details Wraps another allocator and automatically creates additional allocator instances when capacity is exceeded.</span></div>
+<div class="line"><span class="comment"> * Manages multiple allocator instances and delegates allocations to them.</span></div>
 <div class="line"><span class="comment"> *</span></div>
-<div class="line"><span class="comment"> * When an allocation fails due to insufficient capacity, a new allocator instance</span></div>
-<div class="line"><span class="comment"> * is created with a configurable growth factor applied to the initial capacity.</span></div>
+<div class="line"><span class="comment"> * When an allocation fails due to insufficient capacity,</span></div>
+<div class="line"><span class="comment"> * a new allocator instance is created with a configurable growth factor applied to the initial capacity.</span></div>
 <div class="line"><span class="comment"> *</span></div>
 <div class="line"><span class="comment"> * Supports deallocation by tracking which allocator owns each pointer.</span></div>
 <div class="line"><span class="comment"> *</span></div>
-<div class="line"><span class="comment"> * The GrowableAllocator itself is thread-safe, using shared_mutex for optimal</span></div>
-<div class="line"><span class="comment"> * concurrent access. Underlying allocators are already thread-safe.</span></div>
+<div class="line"><span class="comment"> * The GrowableAllocator itself is thread-safe, using shared_mutex for optimal concurrent access.</span></div>
+<div class="line"><span class="comment"> * Underlying allocators are already thread-safe.</span></div>
 <div class="line"><span class="comment"> *</span></div>
 <div class="line"><span class="comment"> * @note Thread-safe with optimized locking.</span></div>
 <div class="line"><span class="comment"> * Growth occurs only when an allocation fails due to capacity constraints.</span></div>
@@ -222,8 +222,8 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="comment"> * Not compatible with: PoolAllocator (requires additional construction parameters).</span></div>
 <div class="line"><span class="comment"> *</span></div>
 <div class="line"><span class="comment"> * Copy operations are conditionally available based on the underlying allocator.</span></div>
-<div class="line"><span class="comment"> * If a custom copyable allocator is provided, GrowableAllocator will automatically support</span></div>
-<div class="line"><span class="comment"> * copy construction and copy assignment.</span></div>
+<div class="line"><span class="comment"> * If a custom copyable allocator is provided,</span></div>
+<div class="line"><span class="comment"> * GrowableAllocator will automatically support copy construction and copy assignment.</span></div>
 <div class="line"><span class="comment"> *</span></div>
 <div class="line"><span class="comment"> * @tparam Allocator The underlying allocator type to wrap</span></div>
 <div class="line"><span class="comment"> */</span></div>
@@ -735,8 +735,8 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="keyword">inline</span> T* <a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#ac14723d311e3895c9108057ba8100467">GrowableAllocator&lt;Allocator&gt;::AllocateAndConstruct</a>(Args&amp;&amp;... args) <span class="keyword">noexcept</span>(</div>
 <div class="line">    std::is_nothrow_constructible_v&lt;T, Args...&gt;) {</div>
 <div class="line">  T* ptr = Allocate&lt;T&gt;();</div>
-<div class="line">  <span class="keywordflow">if</span> (ptr != <span class="keyword">nullptr</span>) {</div>
-<div class="line">    ::new (<span class="keyword">static_cast&lt;</span><span class="keywordtype">void</span>*<span class="keyword">&gt;</span>(ptr)) T(std::forward&lt;Args&gt;(args)...);</div>
+<div class="line">  <span class="keywordflow">if</span> (ptr != <span class="keyword">nullptr</span>) [[likely]] {</div>
+<div class="line">    std::construct_at(ptr, std::forward&lt;Args&gt;(args)...);</div>
 <div class="line">  }</div>
 <div class="line">  <span class="keywordflow">return</span> ptr;</div>
 <div class="line">}</div>
@@ -747,9 +747,9 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="keyword">inline</span> T* <a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#aadd5966584aed7405cb6636b60fd6bfe">GrowableAllocator&lt;Allocator&gt;::AllocateAndConstructArray</a>(<span class="keywordtype">size_t</span> count) <span class="keyword">noexcept</span>(</div>
 <div class="line">    std::is_nothrow_default_constructible_v&lt;T&gt;) {</div>
 <div class="line">  T* ptr = Allocate&lt;T&gt;(count);</div>
-<div class="line">  <span class="keywordflow">if</span> (ptr != <span class="keyword">nullptr</span>) {</div>
+<div class="line">  <span class="keywordflow">if</span> (ptr != <span class="keyword">nullptr</span>) [[likely]] {</div>
 <div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; count; ++i) {</div>
-<div class="line">      ::new (<span class="keyword">static_cast&lt;</span><span class="keywordtype">void</span>*<span class="keyword">&gt;</span>(ptr + i)) T{};</div>
+<div class="line">      std::construct_at(ptr + i);</div>
 <div class="line">    }</div>
 <div class="line">  }</div>
 <div class="line">  <span class="keywordflow">return</span> ptr;</div>
@@ -777,11 +777,11 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="ttc" id="aclasshelios_1_1memory_1_1GrowableAllocator_html_af706647346f88b6d5fa1f40fc4183af1"><div class="ttname"><a href="classhelios_1_1memory_1_1GrowableAllocator.html#af706647346f88b6d5fa1f40fc4183af1">helios::memory::GrowableAllocator::InitialCapacity</a></div><div class="ttdeci">size_t InitialCapacity() const noexcept</div><div class="ttdoc">Gets the initial capacity.</div><div class="ttdef"><b>Definition</b> <a href="growable__allocator_8hpp_source.html#l00227">growable_allocator.hpp:227</a></div></div>
 <div class="ttc" id="acore__pch_8hpp_html"><div class="ttname"><a href="core__pch_8hpp.html">core_pch.hpp</a></div></div>
 <div class="ttc" id="alogger_8hpp_html"><div class="ttname"><a href="logger_8hpp.html">logger.hpp</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1memory_html"><div class="ttname"><a href="namespacehelios_1_1memory.html">helios::memory</a></div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00011">allocator_traits.hpp:11</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1memory_html_a14c84d27b0af2a3d13d38b2d9f6225c4"><div class="ttname"><a href="namespacehelios_1_1memory.html#a14c84d27b0af2a3d13d38b2d9f6225c4">helios::memory::kDefaultAlignment</a></div><div class="ttdeci">constexpr size_t kDefaultAlignment</div><div class="ttdoc">Default alignment for allocations (cache line size for most modern CPUs).</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00077">allocator_traits.hpp:77</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1memory_html_a443dc78a3e9ae9f92bba519395020b3e"><div class="ttname"><a href="namespacehelios_1_1memory.html#a443dc78a3e9ae9f92bba519395020b3e">helios::memory::IsPowerOfTwo</a></div><div class="ttdeci">constexpr bool IsPowerOfTwo(size_t size) noexcept</div><div class="ttdoc">Helper function to check if a size is a power of 2.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00121">allocator_traits.hpp:121</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1memory_html_a4b4f9ed5e1cf5fe81a0ccbdb6991395a"><div class="ttname"><a href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">helios::memory::kMinAlignment</a></div><div class="ttdeci">constexpr size_t kMinAlignment</div><div class="ttdoc">Minimum alignment for any allocation.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00082">allocator_traits.hpp:82</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1memory_html_ace74b72484caaa07fedc5e4f67e6282a"><div class="ttname"><a href="namespacehelios_1_1memory.html#ace74b72484caaa07fedc5e4f67e6282a">helios::memory::Allocate</a></div><div class="ttdeci">constexpr T * Allocate(Alloc &amp;allocator) noexcept</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00182">allocator_traits.hpp:182</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html"><div class="ttname"><a href="namespacehelios_1_1memory.html">helios::memory</a></div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00012">allocator_traits.hpp:12</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_a14c84d27b0af2a3d13d38b2d9f6225c4"><div class="ttname"><a href="namespacehelios_1_1memory.html#a14c84d27b0af2a3d13d38b2d9f6225c4">helios::memory::kDefaultAlignment</a></div><div class="ttdeci">constexpr size_t kDefaultAlignment</div><div class="ttdoc">Default alignment for allocations (cache line size for most modern CPUs).</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00078">allocator_traits.hpp:78</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_a443dc78a3e9ae9f92bba519395020b3e"><div class="ttname"><a href="namespacehelios_1_1memory.html#a443dc78a3e9ae9f92bba519395020b3e">helios::memory::IsPowerOfTwo</a></div><div class="ttdeci">constexpr bool IsPowerOfTwo(size_t size) noexcept</div><div class="ttdoc">Helper function to check if a size is a power of 2.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00122">allocator_traits.hpp:122</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_a4b4f9ed5e1cf5fe81a0ccbdb6991395a"><div class="ttname"><a href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">helios::memory::kMinAlignment</a></div><div class="ttdeci">constexpr size_t kMinAlignment</div><div class="ttdoc">Minimum alignment for any allocation.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00083">allocator_traits.hpp:83</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_ace74b72484caaa07fedc5e4f67e6282a"><div class="ttname"><a href="namespacehelios_1_1memory.html#ace74b72484caaa07fedc5e4f67e6282a">helios::memory::Allocate</a></div><div class="ttdeci">constexpr T * Allocate(Alloc &amp;allocator) noexcept</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00183">allocator_traits.hpp:183</a></div></div>
 </div><!-- fragment --> </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->

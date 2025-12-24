@@ -251,7 +251,7 @@ requires std::default_initializable&lt;T&gt;</td></tr>
 <dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>Deallocations must follow LIFO order (stack discipline). </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00036">36</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00037">37</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa5d594f50196e718bd214eab6e18b2c7" name="aa5d594f50196e718bd214eab6e18b2c7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa5d594f50196e718bd214eab6e18b2c7">&#9670;&#160;</a></span>StackAllocator() <span class="overload">[1/3]</span></h2>
@@ -288,18 +288,18 @@ requires std::default_initializable&lt;T&gt;</td></tr>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stack_allocator_8hpp-example.html#a17">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stack_allocator.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00231">231</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  231</span>                                                     : capacity_(capacity) {</div>
-<div class="line"><span class="lineno">  232</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(capacity &gt; 0, <span class="stringliteral">&quot;Failed to construct StackAllocator: capacity must be greater than 0!&quot;</span>);</div>
-<div class="line"><span class="lineno">  233</span> </div>
-<div class="line"><span class="lineno">  234</span>  <span class="comment">// Allocate aligned buffer</span></div>
-<div class="line"><span class="lineno">  235</span>  buffer_ = <a class="code hl_function" href="namespacehelios_1_1memory.html#a175355e873ce053598f865a5a0241f94">AlignedAlloc</a>(<a class="code hl_variable" href="namespacehelios_1_1memory.html#a14c84d27b0af2a3d13d38b2d9f6225c4">kDefaultAlignment</a>, capacity_);</div>
-<div class="line"><span class="lineno">  236</span>  <a class="code hl_define" href="assert_8hpp.html#a8b8608656bafeab9911c16dce4827a04">HELIOS_VERIFY</a>(buffer_ != <span class="keyword">nullptr</span>, <span class="stringliteral">&quot;Failed to construct StackAllocator: Allocation of StackAllocator buffer failed!&quot;</span>);</div>
-<div class="line"><span class="lineno">  237</span>}</div>
+<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00232">232</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  232</span>                                                     : capacity_(capacity) {</div>
+<div class="line"><span class="lineno">  233</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(capacity &gt; 0, <span class="stringliteral">&quot;Failed to construct StackAllocator: capacity must be greater than 0!&quot;</span>);</div>
+<div class="line"><span class="lineno">  234</span> </div>
+<div class="line"><span class="lineno">  235</span>  <span class="comment">// Allocate aligned buffer</span></div>
+<div class="line"><span class="lineno">  236</span>  buffer_ = <a class="code hl_function" href="namespacehelios_1_1memory.html#a175355e873ce053598f865a5a0241f94">AlignedAlloc</a>(<a class="code hl_variable" href="namespacehelios_1_1memory.html#a14c84d27b0af2a3d13d38b2d9f6225c4">kDefaultAlignment</a>, capacity_);</div>
+<div class="line"><span class="lineno">  237</span>  <a class="code hl_define" href="assert_8hpp.html#a8b8608656bafeab9911c16dce4827a04">HELIOS_VERIFY</a>(buffer_ != <span class="keyword">nullptr</span>, <span class="stringliteral">&quot;Failed to construct StackAllocator: Allocation of StackAllocator buffer failed!&quot;</span>);</div>
+<div class="line"><span class="lineno">  238</span>}</div>
 <div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00140">assert.hpp:140</a></div></div>
 <div class="ttc" id="aassert_8hpp_html_a8b8608656bafeab9911c16dce4827a04"><div class="ttname"><a href="assert_8hpp.html#a8b8608656bafeab9911c16dce4827a04">HELIOS_VERIFY</a></div><div class="ttdeci">#define HELIOS_VERIFY(condition,...)</div><div class="ttdoc">Verify macro that always checks the condition.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00196">assert.hpp:196</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1memory_html_a14c84d27b0af2a3d13d38b2d9f6225c4"><div class="ttname"><a href="namespacehelios_1_1memory.html#a14c84d27b0af2a3d13d38b2d9f6225c4">helios::memory::kDefaultAlignment</a></div><div class="ttdeci">constexpr size_t kDefaultAlignment</div><div class="ttdoc">Default alignment for allocations (cache line size for most modern CPUs).</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00077">allocator_traits.hpp:77</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1memory_html_a175355e873ce053598f865a5a0241f94"><div class="ttname"><a href="namespacehelios_1_1memory.html#a175355e873ce053598f865a5a0241f94">helios::memory::AlignedAlloc</a></div><div class="ttdeci">void * AlignedAlloc(size_t alignment, size_t size)</div><div class="ttdoc">Allocate memory with the specified alignment.</div><div class="ttdef"><b>Definition</b> <a href="memory_2common_8hpp_source.html#l00029">common.hpp:29</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_a14c84d27b0af2a3d13d38b2d9f6225c4"><div class="ttname"><a href="namespacehelios_1_1memory.html#a14c84d27b0af2a3d13d38b2d9f6225c4">helios::memory::kDefaultAlignment</a></div><div class="ttdeci">constexpr size_t kDefaultAlignment</div><div class="ttdoc">Default alignment for allocations (cache line size for most modern CPUs).</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00078">allocator_traits.hpp:78</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_a175355e873ce053598f865a5a0241f94"><div class="ttname"><a href="namespacehelios_1_1memory.html#a175355e873ce053598f865a5a0241f94">helios::memory::AlignedAlloc</a></div><div class="ttdeci">void * AlignedAlloc(size_t alignment, size_t size)</div><div class="ttdoc">Allocate memory with the specified alignment.</div><div class="ttdef"><b>Definition</b> <a href="memory_2common_8hpp_source.html#l00030">common.hpp:30</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -327,24 +327,24 @@ requires std::default_initializable&lt;T&gt;</td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00245">245</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  246</span>    : buffer_(other.buffer_),</div>
-<div class="line"><span class="lineno">  247</span>      capacity_(other.capacity_),</div>
-<div class="line"><span class="lineno">  248</span>      offset_(other.offset_.load(std::memory_order_acquire)),</div>
-<div class="line"><span class="lineno">  249</span>      peak_offset_(other.peak_offset_.load(std::memory_order_acquire)),</div>
-<div class="line"><span class="lineno">  250</span>      allocation_count_(other.allocation_count_.load(std::memory_order_acquire)),</div>
-<div class="line"><span class="lineno">  251</span>      total_allocations_(other.total_allocations_.load(std::memory_order_acquire)),</div>
-<div class="line"><span class="lineno">  252</span>      total_deallocations_(other.total_deallocations_.load(std::memory_order_acquire)),</div>
-<div class="line"><span class="lineno">  253</span>      alignment_waste_(other.alignment_waste_.load(std::memory_order_acquire)) {</div>
-<div class="line"><span class="lineno">  254</span>  other.buffer_ = <span class="keyword">nullptr</span>;</div>
-<div class="line"><span class="lineno">  255</span>  other.capacity_ = 0;</div>
-<div class="line"><span class="lineno">  256</span>  other.offset_.store(0, std::memory_order_release);</div>
-<div class="line"><span class="lineno">  257</span>  other.peak_offset_.store(0, std::memory_order_release);</div>
-<div class="line"><span class="lineno">  258</span>  other.allocation_count_.store(0, std::memory_order_release);</div>
-<div class="line"><span class="lineno">  259</span>  other.total_allocations_.store(0, std::memory_order_release);</div>
-<div class="line"><span class="lineno">  260</span>  other.total_deallocations_.store(0, std::memory_order_release);</div>
-<div class="line"><span class="lineno">  261</span>  other.alignment_waste_.store(0, std::memory_order_release);</div>
-<div class="line"><span class="lineno">  262</span>}</div>
+<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00246">246</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  247</span>    : buffer_(other.buffer_),</div>
+<div class="line"><span class="lineno">  248</span>      capacity_(other.capacity_),</div>
+<div class="line"><span class="lineno">  249</span>      offset_(other.offset_.load(std::memory_order_acquire)),</div>
+<div class="line"><span class="lineno">  250</span>      peak_offset_(other.peak_offset_.load(std::memory_order_acquire)),</div>
+<div class="line"><span class="lineno">  251</span>      allocation_count_(other.allocation_count_.load(std::memory_order_acquire)),</div>
+<div class="line"><span class="lineno">  252</span>      total_allocations_(other.total_allocations_.load(std::memory_order_acquire)),</div>
+<div class="line"><span class="lineno">  253</span>      total_deallocations_(other.total_deallocations_.load(std::memory_order_acquire)),</div>
+<div class="line"><span class="lineno">  254</span>      alignment_waste_(other.alignment_waste_.load(std::memory_order_acquire)) {</div>
+<div class="line"><span class="lineno">  255</span>  other.buffer_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  256</span>  other.capacity_ = 0;</div>
+<div class="line"><span class="lineno">  257</span>  other.offset_.store(0, std::memory_order_release);</div>
+<div class="line"><span class="lineno">  258</span>  other.peak_offset_.store(0, std::memory_order_release);</div>
+<div class="line"><span class="lineno">  259</span>  other.allocation_count_.store(0, std::memory_order_release);</div>
+<div class="line"><span class="lineno">  260</span>  other.total_allocations_.store(0, std::memory_order_release);</div>
+<div class="line"><span class="lineno">  261</span>  other.total_deallocations_.store(0, std::memory_order_release);</div>
+<div class="line"><span class="lineno">  262</span>  other.alignment_waste_.store(0, std::memory_order_release);</div>
+<div class="line"><span class="lineno">  263</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -399,13 +399,13 @@ requires std::default_initializable&lt;T&gt;</td></tr>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stack_allocator_8hpp-example.html#a0">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stack_allocator.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00239">239</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  239</span>                                                {</div>
-<div class="line"><span class="lineno">  240</span>  <span class="keywordflow">if</span> (buffer_ != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><span class="lineno">  241</span>    <a class="code hl_function" href="namespacehelios_1_1memory.html#abbe59f6529258733707c209398f9a30f">AlignedFree</a>(buffer_);</div>
-<div class="line"><span class="lineno">  242</span>  }</div>
-<div class="line"><span class="lineno">  243</span>}</div>
-<div class="ttc" id="anamespacehelios_1_1memory_html_abbe59f6529258733707c209398f9a30f"><div class="ttname"><a href="namespacehelios_1_1memory.html#abbe59f6529258733707c209398f9a30f">helios::memory::AlignedFree</a></div><div class="ttdeci">void AlignedFree(void *ptr)</div><div class="ttdoc">Free memory allocated with AlignedAlloc.</div><div class="ttdef"><b>Definition</b> <a href="memory_2common_8hpp_source.html#l00050">common.hpp:50</a></div></div>
+<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00240">240</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  240</span>                                                {</div>
+<div class="line"><span class="lineno">  241</span>  <span class="keywordflow">if</span> (buffer_ != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><span class="lineno">  242</span>    <a class="code hl_function" href="namespacehelios_1_1memory.html#abbe59f6529258733707c209398f9a30f">AlignedFree</a>(buffer_);</div>
+<div class="line"><span class="lineno">  243</span>  }</div>
+<div class="line"><span class="lineno">  244</span>}</div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_abbe59f6529258733707c209398f9a30f"><div class="ttname"><a href="namespacehelios_1_1memory.html#abbe59f6529258733707c209398f9a30f">helios::memory::AlignedFree</a></div><div class="ttdeci">void AlignedFree(void *ptr)</div><div class="ttdoc">Free memory allocated with AlignedAlloc.</div><div class="ttdef"><b>Definition</b> <a href="memory_2common_8hpp_source.html#l00053">common.hpp:53</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -437,15 +437,15 @@ template&lt;typename T &gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stack_allocator_8hpp-example.html#a2">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stack_allocator.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00438">438</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  438</span>                                            {</div>
-<div class="line"><span class="lineno">  439</span>  <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> size = <span class="keyword">sizeof</span>(T);</div>
-<div class="line"><span class="lineno">  440</span>  <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> alignment = std::max(<span class="keyword">alignof</span>(T), <a class="code hl_variable" href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">kMinAlignment</a>);</div>
-<div class="line"><span class="lineno">  441</span>  <span class="keyword">auto</span> result = <a class="code hl_function" href="classhelios_1_1memory_1_1StackAllocator.html#a2d919426360ee091a3a0ddd44e02afd9">Allocate</a>(size, alignment);</div>
-<div class="line"><span class="lineno">  442</span>  <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(result.ptr);</div>
-<div class="line"><span class="lineno">  443</span>}</div>
-<div class="ttc" id="aclasshelios_1_1memory_1_1StackAllocator_html_a2d919426360ee091a3a0ddd44e02afd9"><div class="ttname"><a href="classhelios_1_1memory_1_1StackAllocator.html#a2d919426360ee091a3a0ddd44e02afd9">helios::memory::StackAllocator::Allocate</a></div><div class="ttdeci">T * Allocate() noexcept</div><div class="ttdef"><b>Definition</b> <a href="stack__allocator_8hpp_source.html#l00438">stack_allocator.hpp:438</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1memory_html_a4b4f9ed5e1cf5fe81a0ccbdb6991395a"><div class="ttname"><a href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">helios::memory::kMinAlignment</a></div><div class="ttdeci">constexpr size_t kMinAlignment</div><div class="ttdoc">Minimum alignment for any allocation.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00082">allocator_traits.hpp:82</a></div></div>
+<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00439">439</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  439</span>                                            {</div>
+<div class="line"><span class="lineno">  440</span>  <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> size = <span class="keyword">sizeof</span>(T);</div>
+<div class="line"><span class="lineno">  441</span>  <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> alignment = std::max(<span class="keyword">alignof</span>(T), <a class="code hl_variable" href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">kMinAlignment</a>);</div>
+<div class="line"><span class="lineno">  442</span>  <span class="keyword">auto</span> result = <a class="code hl_function" href="classhelios_1_1memory_1_1StackAllocator.html#a2d919426360ee091a3a0ddd44e02afd9">Allocate</a>(size, alignment);</div>
+<div class="line"><span class="lineno">  443</span>  <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(result.ptr);</div>
+<div class="line"><span class="lineno">  444</span>}</div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1StackAllocator_html_a2d919426360ee091a3a0ddd44e02afd9"><div class="ttname"><a href="classhelios_1_1memory_1_1StackAllocator.html#a2d919426360ee091a3a0ddd44e02afd9">helios::memory::StackAllocator::Allocate</a></div><div class="ttdeci">T * Allocate() noexcept</div><div class="ttdef"><b>Definition</b> <a href="stack__allocator_8hpp_source.html#l00439">stack_allocator.hpp:439</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_a4b4f9ed5e1cf5fe81a0ccbdb6991395a"><div class="ttname"><a href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">helios::memory::kMinAlignment</a></div><div class="ttdeci">constexpr size_t kMinAlignment</div><div class="ttdoc">Minimum alignment for any allocation.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00083">allocator_traits.hpp:83</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -475,16 +475,16 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00446">446</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  446</span>                                                        {</div>
-<div class="line"><span class="lineno">  447</span>  <span class="keywordflow">if</span> (count == 0) [[unlikely]] {</div>
-<div class="line"><span class="lineno">  448</span>    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><span class="lineno">  449</span>  }</div>
-<div class="line"><span class="lineno">  450</span>  <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> alignment = std::max(<span class="keyword">alignof</span>(T), <a class="code hl_variable" href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">kMinAlignment</a>);</div>
-<div class="line"><span class="lineno">  451</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> size = <span class="keyword">sizeof</span>(T) * count;</div>
-<div class="line"><span class="lineno">  452</span>  <span class="keyword">auto</span> result = <a class="code hl_function" href="classhelios_1_1memory_1_1StackAllocator.html#a2d919426360ee091a3a0ddd44e02afd9">Allocate</a>(size, alignment);</div>
-<div class="line"><span class="lineno">  453</span>  <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(result.ptr);</div>
-<div class="line"><span class="lineno">  454</span>}</div>
+<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00447">447</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  447</span>                                                        {</div>
+<div class="line"><span class="lineno">  448</span>  <span class="keywordflow">if</span> (count == 0) [[unlikely]] {</div>
+<div class="line"><span class="lineno">  449</span>    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  450</span>  }</div>
+<div class="line"><span class="lineno">  451</span>  <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> alignment = std::max(<span class="keyword">alignof</span>(T), <a class="code hl_variable" href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">kMinAlignment</a>);</div>
+<div class="line"><span class="lineno">  452</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> size = <span class="keyword">sizeof</span>(T) * count;</div>
+<div class="line"><span class="lineno">  453</span>  <span class="keyword">auto</span> result = <a class="code hl_function" href="classhelios_1_1memory_1_1StackAllocator.html#a2d919426360ee091a3a0ddd44e02afd9">Allocate</a>(size, alignment);</div>
+<div class="line"><span class="lineno">  454</span>  <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(result.ptr);</div>
+<div class="line"><span class="lineno">  455</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -537,62 +537,62 @@ template&lt;typename T &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="structhelios_1_1memory_1_1AllocationResult.html" title="Result type for allocation operations.">AllocationResult</a> with pointer and actual allocated size, or {nullptr, 0} on failure </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00300">300</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  300</span>                                                                                       {</div>
-<div class="line"><span class="lineno">  301</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="namespacehelios_1_1memory.html#a443dc78a3e9ae9f92bba519395020b3e">IsPowerOfTwo</a>(alignment), <span class="stringliteral">&quot;Failed to allocate memory: alignment must be power of 2, got &#39;{}&#39;!&quot;</span>,</div>
-<div class="line"><span class="lineno">  302</span>                alignment);</div>
-<div class="line"><span class="lineno">  303</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(alignment &gt;= <a class="code hl_variable" href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">kMinAlignment</a>, <span class="stringliteral">&quot;Failed to allocate memory: alignment must be at least &#39;{}&#39;, got &#39;{}&#39;!&quot;</span>,</div>
-<div class="line"><span class="lineno">  304</span>                <a class="code hl_variable" href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">kMinAlignment</a>, alignment);</div>
-<div class="line"><span class="lineno">  305</span> </div>
-<div class="line"><span class="lineno">  306</span>  <span class="keywordflow">if</span> (size == 0) [[unlikely]] {</div>
-<div class="line"><span class="lineno">  307</span>    <span class="keywordflow">return</span> {.ptr = <span class="keyword">nullptr</span>, .allocated_size = 0};</div>
-<div class="line"><span class="lineno">  308</span>  }</div>
-<div class="line"><span class="lineno">  309</span> </div>
-<div class="line"><span class="lineno">  310</span>  <span class="keyword">const</span> std::scoped_lock lock(mutex_);</div>
-<div class="line"><span class="lineno">  311</span> </div>
-<div class="line"><span class="lineno">  312</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> current_offset = offset_.load(std::memory_order_relaxed);</div>
-<div class="line"><span class="lineno">  313</span> </div>
-<div class="line"><span class="lineno">  314</span>  <span class="comment">// Calculate space needed for header + alignment</span></div>
-<div class="line"><span class="lineno">  315</span>  <span class="keyword">auto</span>* current_ptr = <span class="keyword">static_cast&lt;</span>uint8_t*<span class="keyword">&gt;</span>(buffer_) + current_offset;</div>
-<div class="line"><span class="lineno">  316</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> header_padding = <a class="code hl_function" href="namespacehelios_1_1memory.html#aebee6d30b47c174e1de5b7bcc30997e9">CalculatePaddingWithHeader</a>(current_ptr, alignment, <span class="keyword">sizeof</span>(AllocationHeader));</div>
-<div class="line"><span class="lineno">  317</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> required_space = header_padding + size;</div>
-<div class="line"><span class="lineno">  318</span> </div>
-<div class="line"><span class="lineno">  319</span>  <span class="comment">// Check if we have enough space</span></div>
-<div class="line"><span class="lineno">  320</span>  <span class="keywordflow">if</span> (current_offset + required_space &gt; capacity_) {</div>
-<div class="line"><span class="lineno">  321</span>    <span class="keywordflow">return</span> {.ptr = <span class="keyword">nullptr</span>, .allocated_size = 0};</div>
-<div class="line"><span class="lineno">  322</span>  }</div>
-<div class="line"><span class="lineno">  323</span> </div>
-<div class="line"><span class="lineno">  324</span>  <span class="comment">// Store header at the padded position</span></div>
-<div class="line"><span class="lineno">  325</span>  <span class="keyword">auto</span>* header_ptr = current_ptr + header_padding - <span class="keyword">sizeof</span>(AllocationHeader);</div>
-<div class="line"><span class="lineno">  326</span>  <span class="keyword">auto</span>* header = <span class="keyword">reinterpret_cast&lt;</span>AllocationHeader*<span class="keyword">&gt;</span>(header_ptr);</div>
-<div class="line"><span class="lineno">  327</span>  header-&gt;previous_offset = current_offset;</div>
-<div class="line"><span class="lineno">  328</span>  header-&gt;padding = header_padding;</div>
-<div class="line"><span class="lineno">  329</span> </div>
-<div class="line"><span class="lineno">  330</span>  <span class="comment">// Calculate aligned data pointer</span></div>
-<div class="line"><span class="lineno">  331</span>  <span class="keyword">auto</span>* data_ptr = current_ptr + header_padding;</div>
-<div class="line"><span class="lineno">  332</span> </div>
-<div class="line"><span class="lineno">  333</span>  <span class="comment">// Update offset</span></div>
-<div class="line"><span class="lineno">  334</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> new_offset = current_offset + required_space;</div>
-<div class="line"><span class="lineno">  335</span>  offset_.store(new_offset, std::memory_order_release);</div>
-<div class="line"><span class="lineno">  336</span> </div>
-<div class="line"><span class="lineno">  337</span>  <span class="comment">// Update stats</span></div>
-<div class="line"><span class="lineno">  338</span>  allocation_count_.fetch_add(1, std::memory_order_relaxed);</div>
-<div class="line"><span class="lineno">  339</span>  total_allocations_.fetch_add(1, std::memory_order_relaxed);</div>
-<div class="line"><span class="lineno">  340</span>  alignment_waste_.fetch_add(header_padding - <span class="keyword">sizeof</span>(AllocationHeader), std::memory_order_relaxed);</div>
-<div class="line"><span class="lineno">  341</span> </div>
-<div class="line"><span class="lineno">  342</span>  <span class="comment">// Update peak offset</span></div>
-<div class="line"><span class="lineno">  343</span>  <span class="keywordtype">size_t</span> current_peak = peak_offset_.load(std::memory_order_acquire);</div>
-<div class="line"><span class="lineno">  344</span>  <span class="keywordflow">while</span> (new_offset &gt; current_peak) {</div>
-<div class="line"><span class="lineno">  345</span>    <span class="keywordflow">if</span> (peak_offset_.compare_exchange_weak(current_peak, new_offset, std::memory_order_release,</div>
-<div class="line"><span class="lineno">  346</span>                                           std::memory_order_acquire)) {</div>
-<div class="line"><span class="lineno">  347</span>      <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  348</span>    }</div>
-<div class="line"><span class="lineno">  349</span>  }</div>
-<div class="line"><span class="lineno">  350</span> </div>
-<div class="line"><span class="lineno">  351</span>  <span class="keywordflow">return</span> {data_ptr, size};</div>
-<div class="line"><span class="lineno">  352</span>}</div>
-<div class="ttc" id="anamespacehelios_1_1memory_html_a443dc78a3e9ae9f92bba519395020b3e"><div class="ttname"><a href="namespacehelios_1_1memory.html#a443dc78a3e9ae9f92bba519395020b3e">helios::memory::IsPowerOfTwo</a></div><div class="ttdeci">constexpr bool IsPowerOfTwo(size_t size) noexcept</div><div class="ttdoc">Helper function to check if a size is a power of 2.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00121">allocator_traits.hpp:121</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1memory_html_aebee6d30b47c174e1de5b7bcc30997e9"><div class="ttname"><a href="namespacehelios_1_1memory.html#aebee6d30b47c174e1de5b7bcc30997e9">helios::memory::CalculatePaddingWithHeader</a></div><div class="ttdeci">size_t CalculatePaddingWithHeader(const void *ptr, size_t alignment, size_t header_size) noexcept</div><div class="ttdoc">Calculate padding with header for alignment.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00144">allocator_traits.hpp:144</a></div></div>
+<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00301">301</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  301</span>                                                                                       {</div>
+<div class="line"><span class="lineno">  302</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="namespacehelios_1_1memory.html#a443dc78a3e9ae9f92bba519395020b3e">IsPowerOfTwo</a>(alignment), <span class="stringliteral">&quot;Failed to allocate memory: alignment must be power of 2, got &#39;{}&#39;!&quot;</span>,</div>
+<div class="line"><span class="lineno">  303</span>                alignment);</div>
+<div class="line"><span class="lineno">  304</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(alignment &gt;= <a class="code hl_variable" href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">kMinAlignment</a>, <span class="stringliteral">&quot;Failed to allocate memory: alignment must be at least &#39;{}&#39;, got &#39;{}&#39;!&quot;</span>,</div>
+<div class="line"><span class="lineno">  305</span>                <a class="code hl_variable" href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">kMinAlignment</a>, alignment);</div>
+<div class="line"><span class="lineno">  306</span> </div>
+<div class="line"><span class="lineno">  307</span>  <span class="keywordflow">if</span> (size == 0) [[unlikely]] {</div>
+<div class="line"><span class="lineno">  308</span>    <span class="keywordflow">return</span> {.ptr = <span class="keyword">nullptr</span>, .allocated_size = 0};</div>
+<div class="line"><span class="lineno">  309</span>  }</div>
+<div class="line"><span class="lineno">  310</span> </div>
+<div class="line"><span class="lineno">  311</span>  <span class="keyword">const</span> std::scoped_lock lock(mutex_);</div>
+<div class="line"><span class="lineno">  312</span> </div>
+<div class="line"><span class="lineno">  313</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> current_offset = offset_.load(std::memory_order_relaxed);</div>
+<div class="line"><span class="lineno">  314</span> </div>
+<div class="line"><span class="lineno">  315</span>  <span class="comment">// Calculate space needed for header + alignment</span></div>
+<div class="line"><span class="lineno">  316</span>  <span class="keyword">auto</span>* current_ptr = <span class="keyword">static_cast&lt;</span>uint8_t*<span class="keyword">&gt;</span>(buffer_) + current_offset;</div>
+<div class="line"><span class="lineno">  317</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> header_padding = <a class="code hl_function" href="namespacehelios_1_1memory.html#aebee6d30b47c174e1de5b7bcc30997e9">CalculatePaddingWithHeader</a>(current_ptr, alignment, <span class="keyword">sizeof</span>(AllocationHeader));</div>
+<div class="line"><span class="lineno">  318</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> required_space = header_padding + size;</div>
+<div class="line"><span class="lineno">  319</span> </div>
+<div class="line"><span class="lineno">  320</span>  <span class="comment">// Check if we have enough space</span></div>
+<div class="line"><span class="lineno">  321</span>  <span class="keywordflow">if</span> (current_offset + required_space &gt; capacity_) {</div>
+<div class="line"><span class="lineno">  322</span>    <span class="keywordflow">return</span> {.ptr = <span class="keyword">nullptr</span>, .allocated_size = 0};</div>
+<div class="line"><span class="lineno">  323</span>  }</div>
+<div class="line"><span class="lineno">  324</span> </div>
+<div class="line"><span class="lineno">  325</span>  <span class="comment">// Store header at the padded position</span></div>
+<div class="line"><span class="lineno">  326</span>  <span class="keyword">auto</span>* header_ptr = current_ptr + header_padding - <span class="keyword">sizeof</span>(AllocationHeader);</div>
+<div class="line"><span class="lineno">  327</span>  <span class="keyword">auto</span>* header = <span class="keyword">reinterpret_cast&lt;</span>AllocationHeader*<span class="keyword">&gt;</span>(header_ptr);</div>
+<div class="line"><span class="lineno">  328</span>  header-&gt;previous_offset = current_offset;</div>
+<div class="line"><span class="lineno">  329</span>  header-&gt;padding = header_padding;</div>
+<div class="line"><span class="lineno">  330</span> </div>
+<div class="line"><span class="lineno">  331</span>  <span class="comment">// Calculate aligned data pointer</span></div>
+<div class="line"><span class="lineno">  332</span>  <span class="keyword">auto</span>* data_ptr = current_ptr + header_padding;</div>
+<div class="line"><span class="lineno">  333</span> </div>
+<div class="line"><span class="lineno">  334</span>  <span class="comment">// Update offset</span></div>
+<div class="line"><span class="lineno">  335</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> new_offset = current_offset + required_space;</div>
+<div class="line"><span class="lineno">  336</span>  offset_.store(new_offset, std::memory_order_release);</div>
+<div class="line"><span class="lineno">  337</span> </div>
+<div class="line"><span class="lineno">  338</span>  <span class="comment">// Update stats</span></div>
+<div class="line"><span class="lineno">  339</span>  allocation_count_.fetch_add(1, std::memory_order_relaxed);</div>
+<div class="line"><span class="lineno">  340</span>  total_allocations_.fetch_add(1, std::memory_order_relaxed);</div>
+<div class="line"><span class="lineno">  341</span>  alignment_waste_.fetch_add(header_padding - <span class="keyword">sizeof</span>(AllocationHeader), std::memory_order_relaxed);</div>
+<div class="line"><span class="lineno">  342</span> </div>
+<div class="line"><span class="lineno">  343</span>  <span class="comment">// Update peak offset</span></div>
+<div class="line"><span class="lineno">  344</span>  <span class="keywordtype">size_t</span> current_peak = peak_offset_.load(std::memory_order_acquire);</div>
+<div class="line"><span class="lineno">  345</span>  <span class="keywordflow">while</span> (new_offset &gt; current_peak) {</div>
+<div class="line"><span class="lineno">  346</span>    <span class="keywordflow">if</span> (peak_offset_.compare_exchange_weak(current_peak, new_offset, std::memory_order_release,</div>
+<div class="line"><span class="lineno">  347</span>                                           std::memory_order_acquire)) {</div>
+<div class="line"><span class="lineno">  348</span>      <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  349</span>    }</div>
+<div class="line"><span class="lineno">  350</span>  }</div>
+<div class="line"><span class="lineno">  351</span> </div>
+<div class="line"><span class="lineno">  352</span>  <span class="keywordflow">return</span> {data_ptr, size};</div>
+<div class="line"><span class="lineno">  353</span>}</div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_a443dc78a3e9ae9f92bba519395020b3e"><div class="ttname"><a href="namespacehelios_1_1memory.html#a443dc78a3e9ae9f92bba519395020b3e">helios::memory::IsPowerOfTwo</a></div><div class="ttdeci">constexpr bool IsPowerOfTwo(size_t size) noexcept</div><div class="ttdoc">Helper function to check if a size is a power of 2.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00122">allocator_traits.hpp:122</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_aebee6d30b47c174e1de5b7bcc30997e9"><div class="ttname"><a href="namespacehelios_1_1memory.html#aebee6d30b47c174e1de5b7bcc30997e9">helios::memory::CalculatePaddingWithHeader</a></div><div class="ttdeci">size_t CalculatePaddingWithHeader(const void *ptr, size_t alignment, size_t header_size) noexcept</div><div class="ttdoc">Calculate padding with header for alignment.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00145">allocator_traits.hpp:145</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -625,14 +625,14 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stack_allocator_8hpp-example.html#a4">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stack_allocator.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00458">458</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  458</span>                                                                                                                 {</div>
-<div class="line"><span class="lineno">  459</span>  T* ptr = Allocate&lt;T&gt;();</div>
-<div class="line"><span class="lineno">  460</span>  <span class="keywordflow">if</span> (ptr != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><span class="lineno">  461</span>    ::new (<span class="keyword">static_cast&lt;</span><span class="keywordtype">void</span>*<span class="keyword">&gt;</span>(ptr)) T(std::forward&lt;Args&gt;(args)...);</div>
-<div class="line"><span class="lineno">  462</span>  }</div>
-<div class="line"><span class="lineno">  463</span>  <span class="keywordflow">return</span> ptr;</div>
-<div class="line"><span class="lineno">  464</span>}</div>
+<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00459">459</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  459</span>                                                                                                                 {</div>
+<div class="line"><span class="lineno">  460</span>  T* ptr = Allocate&lt;T&gt;();</div>
+<div class="line"><span class="lineno">  461</span>  <span class="keywordflow">if</span> (ptr != <span class="keyword">nullptr</span>) [[likely]] {</div>
+<div class="line"><span class="lineno">  462</span>    std::construct_at(ptr, std::forward&lt;Args&gt;(args)...);</div>
+<div class="line"><span class="lineno">  463</span>  }</div>
+<div class="line"><span class="lineno">  464</span>  <span class="keywordflow">return</span> ptr;</div>
+<div class="line"><span class="lineno">  465</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -665,16 +665,16 @@ requires std::default_initializable&lt;T&gt;</div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stack_allocator_8hpp-example.html#a5">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stack_allocator.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00468">468</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  468</span>                                                                                                                   {</div>
-<div class="line"><span class="lineno">  469</span>  T* ptr = Allocate&lt;T&gt;(count);</div>
-<div class="line"><span class="lineno">  470</span>  <span class="keywordflow">if</span> (ptr != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><span class="lineno">  471</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; count; ++i) {</div>
-<div class="line"><span class="lineno">  472</span>      ::new (<span class="keyword">static_cast&lt;</span><span class="keywordtype">void</span>*<span class="keyword">&gt;</span>(ptr + i)) T{};</div>
-<div class="line"><span class="lineno">  473</span>    }</div>
-<div class="line"><span class="lineno">  474</span>  }</div>
-<div class="line"><span class="lineno">  475</span>  <span class="keywordflow">return</span> ptr;</div>
-<div class="line"><span class="lineno">  476</span>}</div>
+<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00469">469</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  469</span>                                                                                                                   {</div>
+<div class="line"><span class="lineno">  470</span>  T* ptr = Allocate&lt;T&gt;(count);</div>
+<div class="line"><span class="lineno">  471</span>  <span class="keywordflow">if</span> (ptr != <span class="keyword">nullptr</span>) [[likely]] {</div>
+<div class="line"><span class="lineno">  472</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; count; ++i) {</div>
+<div class="line"><span class="lineno">  473</span>      std::construct_at(ptr + i);</div>
+<div class="line"><span class="lineno">  474</span>    }</div>
+<div class="line"><span class="lineno">  475</span>  }</div>
+<div class="line"><span class="lineno">  476</span>  <span class="keywordflow">return</span> ptr;</div>
+<div class="line"><span class="lineno">  477</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -706,8 +706,8 @@ requires std::default_initializable&lt;T&gt;</div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2allocator_resources_8hpp-example.html#a54">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/allocator_resources.hpp</a>, and <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stack_allocator_8hpp-example.html#a14">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stack_allocator.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00196">196</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  196</span>{ <span class="keywordflow">return</span> capacity_; }</div>
+<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00197">197</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  197</span>{ <span class="keywordflow">return</span> capacity_; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -739,8 +739,8 @@ requires std::default_initializable&lt;T&gt;</div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stack_allocator_8hpp-example.html#a15">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stack_allocator.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00202">202</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  202</span>{ <span class="keywordflow">return</span> offset_.load(std::memory_order_acquire); }</div>
+<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00203">203</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  203</span>{ <span class="keywordflow">return</span> offset_.load(std::memory_order_acquire); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -794,32 +794,32 @@ requires std::default_initializable&lt;T&gt;</div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stack_allocator_8hpp-example.html#a6">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stack_allocator.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00354">354</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  354</span>                                                                                       {</div>
-<div class="line"><span class="lineno">  355</span>  <span class="keywordflow">if</span> (ptr == <span class="keyword">nullptr</span>) [[unlikely]] {</div>
-<div class="line"><span class="lineno">  356</span>    <span class="keywordflow">return</span>;</div>
-<div class="line"><span class="lineno">  357</span>  }</div>
-<div class="line"><span class="lineno">  358</span> </div>
-<div class="line"><span class="lineno">  359</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1memory_1_1StackAllocator.html#a75d073a7aa7d2c45f4c5b57ce8b7c00b">Owns</a>(ptr), <span class="stringliteral">&quot;Failed to deallocate memory: ptr does not belong to this allocator!&quot;</span>);</div>
-<div class="line"><span class="lineno">  360</span> </div>
-<div class="line"><span class="lineno">  361</span>  <span class="keyword">const</span> std::scoped_lock lock(mutex_);</div>
-<div class="line"><span class="lineno">  362</span> </div>
-<div class="line"><span class="lineno">  363</span>  <span class="comment">// Get the header stored before the allocation</span></div>
-<div class="line"><span class="lineno">  364</span>  <span class="keyword">auto</span>* header = <span class="keyword">reinterpret_cast&lt;</span>AllocationHeader*<span class="keyword">&gt;</span>(<span class="keyword">static_cast&lt;</span>uint8_t*<span class="keyword">&gt;</span>(ptr) - <span class="keyword">sizeof</span>(AllocationHeader));</div>
-<div class="line"><span class="lineno">  365</span> </div>
-<div class="line"><span class="lineno">  366</span>  <span class="comment">// Verify this is the most recent allocation (LIFO check)</span></div>
-<div class="line"><span class="lineno">  367</span>  [[maybe_unused]] <span class="keyword">const</span> <span class="keywordtype">size_t</span> current_offset = offset_.load(std::memory_order_relaxed);</div>
-<div class="line"><span class="lineno">  368</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<span class="keyword">static_cast&lt;</span>uint8_t*<span class="keyword">&gt;</span>(ptr) + size &lt;= <span class="keyword">static_cast&lt;</span>uint8_t*<span class="keyword">&gt;</span>(buffer_) + current_offset,</div>
-<div class="line"><span class="lineno">  369</span>                <span class="stringliteral">&quot;Failed to deallocate memory:  Deallocation violates LIFO order!&quot;</span>);</div>
-<div class="line"><span class="lineno">  370</span> </div>
-<div class="line"><span class="lineno">  371</span>  <span class="comment">// Rewind to previous offset</span></div>
-<div class="line"><span class="lineno">  372</span>  offset_.store(header-&gt;previous_offset, std::memory_order_release);</div>
-<div class="line"><span class="lineno">  373</span> </div>
-<div class="line"><span class="lineno">  374</span>  <span class="comment">// Update stats</span></div>
-<div class="line"><span class="lineno">  375</span>  allocation_count_.fetch_sub(1, std::memory_order_relaxed);</div>
-<div class="line"><span class="lineno">  376</span>  total_deallocations_.fetch_add(1, std::memory_order_relaxed);</div>
-<div class="line"><span class="lineno">  377</span>}</div>
-<div class="ttc" id="aclasshelios_1_1memory_1_1StackAllocator_html_a75d073a7aa7d2c45f4c5b57ce8b7c00b"><div class="ttname"><a href="classhelios_1_1memory_1_1StackAllocator.html#a75d073a7aa7d2c45f4c5b57ce8b7c00b">helios::memory::StackAllocator::Owns</a></div><div class="ttdeci">bool Owns(const void *ptr) const noexcept</div><div class="ttdoc">Checks if a pointer belongs to this allocator.</div><div class="ttdef"><b>Definition</b> <a href="stack__allocator_8hpp_source.html#l00401">stack_allocator.hpp:401</a></div></div>
+<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00355">355</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  355</span>                                                                                       {</div>
+<div class="line"><span class="lineno">  356</span>  <span class="keywordflow">if</span> (ptr == <span class="keyword">nullptr</span>) [[unlikely]] {</div>
+<div class="line"><span class="lineno">  357</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  358</span>  }</div>
+<div class="line"><span class="lineno">  359</span> </div>
+<div class="line"><span class="lineno">  360</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1memory_1_1StackAllocator.html#a75d073a7aa7d2c45f4c5b57ce8b7c00b">Owns</a>(ptr), <span class="stringliteral">&quot;Failed to deallocate memory: ptr does not belong to this allocator!&quot;</span>);</div>
+<div class="line"><span class="lineno">  361</span> </div>
+<div class="line"><span class="lineno">  362</span>  <span class="keyword">const</span> std::scoped_lock lock(mutex_);</div>
+<div class="line"><span class="lineno">  363</span> </div>
+<div class="line"><span class="lineno">  364</span>  <span class="comment">// Get the header stored before the allocation</span></div>
+<div class="line"><span class="lineno">  365</span>  <span class="keyword">auto</span>* header = <span class="keyword">reinterpret_cast&lt;</span>AllocationHeader*<span class="keyword">&gt;</span>(<span class="keyword">static_cast&lt;</span>uint8_t*<span class="keyword">&gt;</span>(ptr) - <span class="keyword">sizeof</span>(AllocationHeader));</div>
+<div class="line"><span class="lineno">  366</span> </div>
+<div class="line"><span class="lineno">  367</span>  <span class="comment">// Verify this is the most recent allocation (LIFO check)</span></div>
+<div class="line"><span class="lineno">  368</span>  [[maybe_unused]] <span class="keyword">const</span> <span class="keywordtype">size_t</span> current_offset = offset_.load(std::memory_order_relaxed);</div>
+<div class="line"><span class="lineno">  369</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<span class="keyword">static_cast&lt;</span>uint8_t*<span class="keyword">&gt;</span>(ptr) + size &lt;= <span class="keyword">static_cast&lt;</span>uint8_t*<span class="keyword">&gt;</span>(buffer_) + current_offset,</div>
+<div class="line"><span class="lineno">  370</span>                <span class="stringliteral">&quot;Failed to deallocate memory:  Deallocation violates LIFO order!&quot;</span>);</div>
+<div class="line"><span class="lineno">  371</span> </div>
+<div class="line"><span class="lineno">  372</span>  <span class="comment">// Rewind to previous offset</span></div>
+<div class="line"><span class="lineno">  373</span>  offset_.store(header-&gt;previous_offset, std::memory_order_release);</div>
+<div class="line"><span class="lineno">  374</span> </div>
+<div class="line"><span class="lineno">  375</span>  <span class="comment">// Update stats</span></div>
+<div class="line"><span class="lineno">  376</span>  allocation_count_.fetch_sub(1, std::memory_order_relaxed);</div>
+<div class="line"><span class="lineno">  377</span>  total_deallocations_.fetch_add(1, std::memory_order_relaxed);</div>
+<div class="line"><span class="lineno">  378</span>}</div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1StackAllocator_html_a75d073a7aa7d2c45f4c5b57ce8b7c00b"><div class="ttname"><a href="classhelios_1_1memory_1_1StackAllocator.html#a75d073a7aa7d2c45f4c5b57ce8b7c00b">helios::memory::StackAllocator::Owns</a></div><div class="ttdeci">bool Owns(const void *ptr) const noexcept</div><div class="ttdoc">Checks if a pointer belongs to this allocator.</div><div class="ttdef"><b>Definition</b> <a href="stack__allocator_8hpp_source.html#l00402">stack_allocator.hpp:402</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -851,8 +851,8 @@ requires std::default_initializable&lt;T&gt;</div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2allocator_resources_8hpp-example.html#a48">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/allocator_resources.hpp</a>, and <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stack_allocator_8hpp-example.html#a9">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stack_allocator.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00164">164</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  164</span>{ <span class="keywordflow">return</span> offset_.load(std::memory_order_acquire) == 0; }</div>
+<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00165">165</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  165</span>{ <span class="keywordflow">return</span> offset_.load(std::memory_order_acquire) == 0; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -884,11 +884,11 @@ requires std::default_initializable&lt;T&gt;</div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stack_allocator_8hpp-example.html#a16">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stack_allocator.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00432">432</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  432</span>                                                       {</div>
-<div class="line"><span class="lineno">  433</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> current = offset_.load(std::memory_order_acquire);</div>
-<div class="line"><span class="lineno">  434</span>  <span class="keywordflow">return</span> current &lt; capacity_ ? capacity_ - current : 0;</div>
-<div class="line"><span class="lineno">  435</span>}</div>
+<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00433">433</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  433</span>                                                       {</div>
+<div class="line"><span class="lineno">  434</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> current = offset_.load(std::memory_order_acquire);</div>
+<div class="line"><span class="lineno">  435</span>  <span class="keywordflow">return</span> current &lt; capacity_ ? capacity_ - current : 0;</div>
+<div class="line"><span class="lineno">  436</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -920,8 +920,8 @@ requires std::default_initializable&lt;T&gt;</div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2allocator_resources_8hpp-example.html#a50">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/allocator_resources.hpp</a>, and <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stack_allocator_8hpp-example.html#a10">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stack_allocator.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00170">170</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  170</span>{ <span class="keywordflow">return</span> offset_.load(std::memory_order_acquire) &gt;= capacity_; }</div>
+<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00171">171</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  171</span>{ <span class="keywordflow">return</span> offset_.load(std::memory_order_acquire) &gt;= capacity_; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -954,8 +954,8 @@ requires std::default_initializable&lt;T&gt;</div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stack_allocator_8hpp-example.html#a13">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stack_allocator.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00190">190</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  190</span>{ <span class="keywordflow">return</span> offset_.load(std::memory_order_acquire); }</div>
+<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00191">191</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  191</span>{ <span class="keywordflow">return</span> offset_.load(std::memory_order_acquire); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1011,42 +1011,42 @@ requires std::default_initializable&lt;T&gt;</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00264">264</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  264</span>                                                                                {</div>
-<div class="line"><span class="lineno">  265</span>  <span class="keywordflow">if</span> (<span class="keyword">this</span> == &amp;other) [[unlikely]] {</div>
-<div class="line"><span class="lineno">  266</span>    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><span class="lineno">  267</span>  }</div>
-<div class="line"><span class="lineno">  268</span> </div>
-<div class="line"><span class="lineno">  269</span>  <span class="keyword">const</span> std::scoped_lock lock(mutex_);</div>
-<div class="line"><span class="lineno">  270</span>  <span class="keyword">const</span> std::scoped_lock other_lock(other.mutex_);</div>
-<div class="line"><span class="lineno">  271</span> </div>
-<div class="line"><span class="lineno">  272</span>  <span class="comment">// Free current buffer</span></div>
-<div class="line"><span class="lineno">  273</span>  <span class="keywordflow">if</span> (buffer_ != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><span class="lineno">  274</span>    <a class="code hl_function" href="namespacehelios_1_1memory.html#abbe59f6529258733707c209398f9a30f">AlignedFree</a>(buffer_);</div>
-<div class="line"><span class="lineno">  275</span>  }</div>
-<div class="line"><span class="lineno">  276</span> </div>
-<div class="line"><span class="lineno">  277</span>  <span class="comment">// Move from other</span></div>
-<div class="line"><span class="lineno">  278</span>  buffer_ = other.buffer_;</div>
-<div class="line"><span class="lineno">  279</span>  capacity_ = other.capacity_;</div>
-<div class="line"><span class="lineno">  280</span>  offset_.store(other.offset_.load(std::memory_order_acquire), std::memory_order_release);</div>
-<div class="line"><span class="lineno">  281</span>  peak_offset_.store(other.peak_offset_.load(std::memory_order_acquire), std::memory_order_release);</div>
-<div class="line"><span class="lineno">  282</span>  allocation_count_.store(other.allocation_count_.load(std::memory_order_acquire), std::memory_order_release);</div>
-<div class="line"><span class="lineno">  283</span>  total_allocations_.store(other.total_allocations_.load(std::memory_order_acquire), std::memory_order_release);</div>
-<div class="line"><span class="lineno">  284</span>  total_deallocations_.store(other.total_deallocations_.load(std::memory_order_acquire), std::memory_order_release);</div>
-<div class="line"><span class="lineno">  285</span>  alignment_waste_.store(other.alignment_waste_.load(std::memory_order_acquire), std::memory_order_release);</div>
-<div class="line"><span class="lineno">  286</span> </div>
-<div class="line"><span class="lineno">  287</span>  <span class="comment">// Reset other</span></div>
-<div class="line"><span class="lineno">  288</span>  other.buffer_ = <span class="keyword">nullptr</span>;</div>
-<div class="line"><span class="lineno">  289</span>  other.capacity_ = 0;</div>
-<div class="line"><span class="lineno">  290</span>  other.offset_.store(0, std::memory_order_release);</div>
-<div class="line"><span class="lineno">  291</span>  other.peak_offset_.store(0, std::memory_order_release);</div>
-<div class="line"><span class="lineno">  292</span>  other.allocation_count_.store(0, std::memory_order_release);</div>
-<div class="line"><span class="lineno">  293</span>  other.total_allocations_.store(0, std::memory_order_release);</div>
-<div class="line"><span class="lineno">  294</span>  other.total_deallocations_.store(0, std::memory_order_release);</div>
-<div class="line"><span class="lineno">  295</span>  other.alignment_waste_.store(0, std::memory_order_release);</div>
-<div class="line"><span class="lineno">  296</span> </div>
-<div class="line"><span class="lineno">  297</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><span class="lineno">  298</span>}</div>
+<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00265">265</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  265</span>                                                                                {</div>
+<div class="line"><span class="lineno">  266</span>  <span class="keywordflow">if</span> (<span class="keyword">this</span> == &amp;other) [[unlikely]] {</div>
+<div class="line"><span class="lineno">  267</span>    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><span class="lineno">  268</span>  }</div>
+<div class="line"><span class="lineno">  269</span> </div>
+<div class="line"><span class="lineno">  270</span>  <span class="keyword">const</span> std::scoped_lock lock(mutex_);</div>
+<div class="line"><span class="lineno">  271</span>  <span class="keyword">const</span> std::scoped_lock other_lock(other.mutex_);</div>
+<div class="line"><span class="lineno">  272</span> </div>
+<div class="line"><span class="lineno">  273</span>  <span class="comment">// Free current buffer</span></div>
+<div class="line"><span class="lineno">  274</span>  <span class="keywordflow">if</span> (buffer_ != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><span class="lineno">  275</span>    <a class="code hl_function" href="namespacehelios_1_1memory.html#abbe59f6529258733707c209398f9a30f">AlignedFree</a>(buffer_);</div>
+<div class="line"><span class="lineno">  276</span>  }</div>
+<div class="line"><span class="lineno">  277</span> </div>
+<div class="line"><span class="lineno">  278</span>  <span class="comment">// Move from other</span></div>
+<div class="line"><span class="lineno">  279</span>  buffer_ = other.buffer_;</div>
+<div class="line"><span class="lineno">  280</span>  capacity_ = other.capacity_;</div>
+<div class="line"><span class="lineno">  281</span>  offset_.store(other.offset_.load(std::memory_order_acquire), std::memory_order_release);</div>
+<div class="line"><span class="lineno">  282</span>  peak_offset_.store(other.peak_offset_.load(std::memory_order_acquire), std::memory_order_release);</div>
+<div class="line"><span class="lineno">  283</span>  allocation_count_.store(other.allocation_count_.load(std::memory_order_acquire), std::memory_order_release);</div>
+<div class="line"><span class="lineno">  284</span>  total_allocations_.store(other.total_allocations_.load(std::memory_order_acquire), std::memory_order_release);</div>
+<div class="line"><span class="lineno">  285</span>  total_deallocations_.store(other.total_deallocations_.load(std::memory_order_acquire), std::memory_order_release);</div>
+<div class="line"><span class="lineno">  286</span>  alignment_waste_.store(other.alignment_waste_.load(std::memory_order_acquire), std::memory_order_release);</div>
+<div class="line"><span class="lineno">  287</span> </div>
+<div class="line"><span class="lineno">  288</span>  <span class="comment">// Reset other</span></div>
+<div class="line"><span class="lineno">  289</span>  other.buffer_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  290</span>  other.capacity_ = 0;</div>
+<div class="line"><span class="lineno">  291</span>  other.offset_.store(0, std::memory_order_release);</div>
+<div class="line"><span class="lineno">  292</span>  other.peak_offset_.store(0, std::memory_order_release);</div>
+<div class="line"><span class="lineno">  293</span>  other.allocation_count_.store(0, std::memory_order_release);</div>
+<div class="line"><span class="lineno">  294</span>  other.total_allocations_.store(0, std::memory_order_release);</div>
+<div class="line"><span class="lineno">  295</span>  other.total_deallocations_.store(0, std::memory_order_release);</div>
+<div class="line"><span class="lineno">  296</span>  other.alignment_waste_.store(0, std::memory_order_release);</div>
+<div class="line"><span class="lineno">  297</span> </div>
+<div class="line"><span class="lineno">  298</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><span class="lineno">  299</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1085,18 +1085,18 @@ requires std::default_initializable&lt;T&gt;</div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stack_allocator_8hpp-example.html#a11">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stack_allocator.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00401">401</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  401</span>                                                               {</div>
-<div class="line"><span class="lineno">  402</span>  <span class="keywordflow">if</span> (ptr == <span class="keyword">nullptr</span> || buffer_ == <span class="keyword">nullptr</span>) {</div>
-<div class="line"><span class="lineno">  403</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  404</span>  }</div>
-<div class="line"><span class="lineno">  405</span> </div>
-<div class="line"><span class="lineno">  406</span>  <span class="keyword">const</span> <span class="keyword">auto</span> addr = <span class="keyword">reinterpret_cast&lt;</span>uintptr_t<span class="keyword">&gt;</span>(ptr);</div>
-<div class="line"><span class="lineno">  407</span>  <span class="keyword">const</span> <span class="keyword">auto</span> start = <span class="keyword">reinterpret_cast&lt;</span>uintptr_t<span class="keyword">&gt;</span>(buffer_);</div>
-<div class="line"><span class="lineno">  408</span>  <span class="keyword">const</span> <span class="keyword">auto</span> end = start + capacity_;</div>
-<div class="line"><span class="lineno">  409</span> </div>
-<div class="line"><span class="lineno">  410</span>  <span class="keywordflow">return</span> addr &gt;= start &amp;&amp; addr &lt; end;</div>
-<div class="line"><span class="lineno">  411</span>}</div>
+<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00402">402</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  402</span>                                                               {</div>
+<div class="line"><span class="lineno">  403</span>  <span class="keywordflow">if</span> (ptr == <span class="keyword">nullptr</span> || buffer_ == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><span class="lineno">  404</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  405</span>  }</div>
+<div class="line"><span class="lineno">  406</span> </div>
+<div class="line"><span class="lineno">  407</span>  <span class="keyword">const</span> <span class="keyword">auto</span> addr = <span class="keyword">reinterpret_cast&lt;</span>uintptr_t<span class="keyword">&gt;</span>(ptr);</div>
+<div class="line"><span class="lineno">  408</span>  <span class="keyword">const</span> <span class="keyword">auto</span> start = <span class="keyword">reinterpret_cast&lt;</span>uintptr_t<span class="keyword">&gt;</span>(buffer_);</div>
+<div class="line"><span class="lineno">  409</span>  <span class="keyword">const</span> <span class="keyword">auto</span> end = start + capacity_;</div>
+<div class="line"><span class="lineno">  410</span> </div>
+<div class="line"><span class="lineno">  411</span>  <span class="keywordflow">return</span> addr &gt;= start &amp;&amp; addr &lt; end;</div>
+<div class="line"><span class="lineno">  412</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1128,13 +1128,13 @@ requires std::default_initializable&lt;T&gt;</div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2allocator_resources_8hpp-example.html#a46">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/allocator_resources.hpp</a>, and <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stack_allocator_8hpp-example.html#a7">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stack_allocator.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00379">379</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  379</span>                                           {</div>
-<div class="line"><span class="lineno">  380</span>  <span class="keyword">const</span> std::scoped_lock lock(mutex_);</div>
-<div class="line"><span class="lineno">  381</span>  offset_.store(0, std::memory_order_release);</div>
-<div class="line"><span class="lineno">  382</span>  allocation_count_.store(0, std::memory_order_release);</div>
-<div class="line"><span class="lineno">  383</span>  alignment_waste_.store(0, std::memory_order_release);</div>
-<div class="line"><span class="lineno">  384</span>}</div>
+<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00380">380</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  380</span>                                           {</div>
+<div class="line"><span class="lineno">  381</span>  <span class="keyword">const</span> std::scoped_lock lock(mutex_);</div>
+<div class="line"><span class="lineno">  382</span>  offset_.store(0, std::memory_order_release);</div>
+<div class="line"><span class="lineno">  383</span>  allocation_count_.store(0, std::memory_order_release);</div>
+<div class="line"><span class="lineno">  384</span>  alignment_waste_.store(0, std::memory_order_release);</div>
+<div class="line"><span class="lineno">  385</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1177,21 +1177,21 @@ requires std::default_initializable&lt;T&gt;</div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stack_allocator_8hpp-example.html#a8">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stack_allocator.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00386">386</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  386</span>                                                                 {</div>
-<div class="line"><span class="lineno">  387</span>  <span class="keyword">const</span> std::scoped_lock lock(mutex_);</div>
-<div class="line"><span class="lineno">  388</span> </div>
-<div class="line"><span class="lineno">  389</span>  [[maybe_unused]] <span class="keyword">const</span> <span class="keywordtype">size_t</span> current_offset = offset_.load(std::memory_order_relaxed);</div>
-<div class="line"><span class="lineno">  390</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(marker &lt;= current_offset, <span class="stringliteral">&quot;Failed to rewind to marker: marker &#39;{}&#39; is ahead of current offset &#39;{}&#39;!&quot;</span>,</div>
-<div class="line"><span class="lineno">  391</span>                marker, current_offset);</div>
-<div class="line"><span class="lineno">  392</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(marker &lt;= capacity_, <span class="stringliteral">&quot;Failed to rewind to marker: marker &#39;{}&#39; exceeds capacity &#39;{}&#39;!&quot;</span>, marker,</div>
-<div class="line"><span class="lineno">  393</span>                capacity_);</div>
-<div class="line"><span class="lineno">  394</span> </div>
-<div class="line"><span class="lineno">  395</span>  offset_.store(marker, std::memory_order_release);</div>
-<div class="line"><span class="lineno">  396</span> </div>
-<div class="line"><span class="lineno">  397</span>  <span class="comment">// Note: allocation_count_ becomes inaccurate after rewind, but that&#39;s acceptable</span></div>
-<div class="line"><span class="lineno">  398</span>  <span class="comment">// since we&#39;re doing bulk deallocation</span></div>
-<div class="line"><span class="lineno">  399</span>}</div>
+<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00387">387</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  387</span>                                                                 {</div>
+<div class="line"><span class="lineno">  388</span>  <span class="keyword">const</span> std::scoped_lock lock(mutex_);</div>
+<div class="line"><span class="lineno">  389</span> </div>
+<div class="line"><span class="lineno">  390</span>  [[maybe_unused]] <span class="keyword">const</span> <span class="keywordtype">size_t</span> current_offset = offset_.load(std::memory_order_relaxed);</div>
+<div class="line"><span class="lineno">  391</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(marker &lt;= current_offset, <span class="stringliteral">&quot;Failed to rewind to marker: marker &#39;{}&#39; is ahead of current offset &#39;{}&#39;!&quot;</span>,</div>
+<div class="line"><span class="lineno">  392</span>                marker, current_offset);</div>
+<div class="line"><span class="lineno">  393</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(marker &lt;= capacity_, <span class="stringliteral">&quot;Failed to rewind to marker: marker &#39;{}&#39; exceeds capacity &#39;{}&#39;!&quot;</span>, marker,</div>
+<div class="line"><span class="lineno">  394</span>                capacity_);</div>
+<div class="line"><span class="lineno">  395</span> </div>
+<div class="line"><span class="lineno">  396</span>  offset_.store(marker, std::memory_order_release);</div>
+<div class="line"><span class="lineno">  397</span> </div>
+<div class="line"><span class="lineno">  398</span>  <span class="comment">// Note: allocation_count_ becomes inaccurate after rewind, but that&#39;s acceptable</span></div>
+<div class="line"><span class="lineno">  399</span>  <span class="comment">// since we&#39;re doing bulk deallocation</span></div>
+<div class="line"><span class="lineno">  400</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1223,25 +1223,25 @@ requires std::default_initializable&lt;T&gt;</div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2allocator_resources_8hpp-example.html#a52">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/allocator_resources.hpp</a>, and <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stack_allocator_8hpp-example.html#a12">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stack_allocator.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00413">413</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  413</span>                                                           {</div>
-<div class="line"><span class="lineno">  414</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> current_offset = offset_.load(std::memory_order_acquire);</div>
-<div class="line"><span class="lineno">  415</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> peak = peak_offset_.load(std::memory_order_acquire);</div>
-<div class="line"><span class="lineno">  416</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> alloc_count = allocation_count_.load(std::memory_order_acquire);</div>
-<div class="line"><span class="lineno">  417</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> total_allocs = total_allocations_.load(std::memory_order_acquire);</div>
-<div class="line"><span class="lineno">  418</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> total_deallocs = total_deallocations_.load(std::memory_order_acquire);</div>
-<div class="line"><span class="lineno">  419</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> waste = alignment_waste_.load(std::memory_order_acquire);</div>
-<div class="line"><span class="lineno">  420</span> </div>
-<div class="line"><span class="lineno">  421</span>  <span class="keywordflow">return</span> {</div>
-<div class="line"><span class="lineno">  422</span>      .total_allocated = current_offset,</div>
-<div class="line"><span class="lineno">  423</span>      .total_freed = 0,</div>
-<div class="line"><span class="lineno">  424</span>      .peak_usage = peak,</div>
-<div class="line"><span class="lineno">  425</span>      .allocation_count = alloc_count,</div>
-<div class="line"><span class="lineno">  426</span>      .total_allocations = total_allocs,</div>
-<div class="line"><span class="lineno">  427</span>      .total_deallocations = total_deallocs,</div>
-<div class="line"><span class="lineno">  428</span>      .alignment_waste = waste,</div>
-<div class="line"><span class="lineno">  429</span>  };</div>
-<div class="line"><span class="lineno">  430</span>}</div>
+<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00414">414</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  414</span>                                                           {</div>
+<div class="line"><span class="lineno">  415</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> current_offset = offset_.load(std::memory_order_acquire);</div>
+<div class="line"><span class="lineno">  416</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> peak = peak_offset_.load(std::memory_order_acquire);</div>
+<div class="line"><span class="lineno">  417</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> alloc_count = allocation_count_.load(std::memory_order_acquire);</div>
+<div class="line"><span class="lineno">  418</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> total_allocs = total_allocations_.load(std::memory_order_acquire);</div>
+<div class="line"><span class="lineno">  419</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> total_deallocs = total_deallocations_.load(std::memory_order_acquire);</div>
+<div class="line"><span class="lineno">  420</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> waste = alignment_waste_.load(std::memory_order_acquire);</div>
+<div class="line"><span class="lineno">  421</span> </div>
+<div class="line"><span class="lineno">  422</span>  <span class="keywordflow">return</span> {</div>
+<div class="line"><span class="lineno">  423</span>      .total_allocated = current_offset,</div>
+<div class="line"><span class="lineno">  424</span>      .total_freed = 0,</div>
+<div class="line"><span class="lineno">  425</span>      .peak_usage = peak,</div>
+<div class="line"><span class="lineno">  426</span>      .allocation_count = alloc_count,</div>
+<div class="line"><span class="lineno">  427</span>      .total_allocations = total_allocs,</div>
+<div class="line"><span class="lineno">  428</span>      .total_deallocations = total_deallocs,</div>
+<div class="line"><span class="lineno">  429</span>      .alignment_waste = waste,</div>
+<div class="line"><span class="lineno">  430</span>  };</div>
+<div class="line"><span class="lineno">  431</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>

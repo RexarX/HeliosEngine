@@ -495,7 +495,7 @@ template&lt;typename T &gt; </div>
 <div class="line"><span class="lineno">  536</span>  <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(result.ptr);</div>
 <div class="line"><span class="lineno">  537</span>}</div>
 <div class="ttc" id="aclasshelios_1_1memory_1_1GrowableAllocator_html_ac6176d8676a6b9bfb6691b37aa90d6a9"><div class="ttname"><a href="classhelios_1_1memory_1_1GrowableAllocator.html#ac6176d8676a6b9bfb6691b37aa90d6a9">helios::memory::GrowableAllocator::Allocate</a></div><div class="ttdeci">T * Allocate() noexcept</div><div class="ttdef"><b>Definition</b> <a href="growable__allocator_8hpp_source.html#l00532">growable_allocator.hpp:532</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1memory_html_a4b4f9ed5e1cf5fe81a0ccbdb6991395a"><div class="ttname"><a href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">helios::memory::kMinAlignment</a></div><div class="ttdeci">constexpr size_t kMinAlignment</div><div class="ttdoc">Minimum alignment for any allocation.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00082">allocator_traits.hpp:82</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_a4b4f9ed5e1cf5fe81a0ccbdb6991395a"><div class="ttname"><a href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">helios::memory::kMinAlignment</a></div><div class="ttdeci">constexpr size_t kMinAlignment</div><div class="ttdoc">Minimum alignment for any allocation.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00083">allocator_traits.hpp:83</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -661,7 +661,7 @@ template&lt;typename Allocator &gt; </div>
 <div class="line"><span class="lineno">  418</span>  }</div>
 <div class="line"><span class="lineno">  419</span>  <span class="keywordflow">return</span> {.ptr = <span class="keyword">nullptr</span>, .allocated_size = 0};</div>
 <div class="line"><span class="lineno">  420</span>}</div>
-<div class="ttc" id="anamespacehelios_1_1memory_html_a443dc78a3e9ae9f92bba519395020b3e"><div class="ttname"><a href="namespacehelios_1_1memory.html#a443dc78a3e9ae9f92bba519395020b3e">helios::memory::IsPowerOfTwo</a></div><div class="ttdeci">constexpr bool IsPowerOfTwo(size_t size) noexcept</div><div class="ttdoc">Helper function to check if a size is a power of 2.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00121">allocator_traits.hpp:121</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_a443dc78a3e9ae9f92bba519395020b3e"><div class="ttname"><a href="namespacehelios_1_1memory.html#a443dc78a3e9ae9f92bba519395020b3e">helios::memory::IsPowerOfTwo</a></div><div class="ttdeci">constexpr bool IsPowerOfTwo(size_t size) noexcept</div><div class="ttdoc">Helper function to check if a size is a power of 2.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00122">allocator_traits.hpp:122</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -700,8 +700,8 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
 <p class="definition">Definition at line <a class="el" href="growable__allocator_8hpp_source.html#l00554">554</a> of file <a class="el" href="growable__allocator_8hpp_source.html">growable_allocator.hpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  555</span>                                               {</div>
 <div class="line"><span class="lineno">  556</span>  T* ptr = Allocate&lt;T&gt;();</div>
-<div class="line"><span class="lineno">  557</span>  <span class="keywordflow">if</span> (ptr != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><span class="lineno">  558</span>    ::new (<span class="keyword">static_cast&lt;</span><span class="keywordtype">void</span>*<span class="keyword">&gt;</span>(ptr)) T(std::forward&lt;Args&gt;(args)...);</div>
+<div class="line"><span class="lineno">  557</span>  <span class="keywordflow">if</span> (ptr != <span class="keyword">nullptr</span>) [[likely]] {</div>
+<div class="line"><span class="lineno">  558</span>    std::construct_at(ptr, std::forward&lt;Args&gt;(args)...);</div>
 <div class="line"><span class="lineno">  559</span>  }</div>
 <div class="line"><span class="lineno">  560</span>  <span class="keywordflow">return</span> ptr;</div>
 <div class="line"><span class="lineno">  561</span>}</div>
@@ -743,9 +743,9 @@ requires std::default_initializable&lt;T&gt;</div>
 <p class="definition">Definition at line <a class="el" href="growable__allocator_8hpp_source.html#l00566">566</a> of file <a class="el" href="growable__allocator_8hpp_source.html">growable_allocator.hpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  567</span>                                              {</div>
 <div class="line"><span class="lineno">  568</span>  T* ptr = Allocate&lt;T&gt;(count);</div>
-<div class="line"><span class="lineno">  569</span>  <span class="keywordflow">if</span> (ptr != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><span class="lineno">  569</span>  <span class="keywordflow">if</span> (ptr != <span class="keyword">nullptr</span>) [[likely]] {</div>
 <div class="line"><span class="lineno">  570</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; count; ++i) {</div>
-<div class="line"><span class="lineno">  571</span>      ::new (<span class="keyword">static_cast&lt;</span><span class="keywordtype">void</span>*<span class="keyword">&gt;</span>(ptr + i)) T{};</div>
+<div class="line"><span class="lineno">  571</span>      std::construct_at(ptr + i);</div>
 <div class="line"><span class="lineno">  572</span>    }</div>
 <div class="line"><span class="lineno">  573</span>  }</div>
 <div class="line"><span class="lineno">  574</span>  <span class="keywordflow">return</span> ptr;</div>

@@ -196,22 +196,22 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="preprocessor">#include &lt;cstddef&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;cstring&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;memory&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1memory.html">helios::memory</a> {</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">/**</span></div>
 <div class="line"><span class="comment"> * @brief Pool allocator for fixed-size allocations.</span></div>
 <div class="line"><span class="comment"> * @details Allocates objects of a fixed size from a pre-allocated pool.</span></div>
-<div class="line"><span class="comment"> * Extremely efficient for scenarios where many objects of the same size</span></div>
-<div class="line"><span class="comment"> * are allocated and deallocated frequently.</span></div>
+<div class="line"><span class="comment"> * Extremely efficient for scenarios where many objects of the same size are allocated and deallocated frequently.</span></div>
 <div class="line"><span class="comment"> *</span></div>
-<div class="line"><span class="comment"> * Uses a lock-free free list to track available slots. Each free slot stores</span></div>
-<div class="line"><span class="comment"> * a pointer to the next free slot, forming a linked list through the free blocks.</span></div>
+<div class="line"><span class="comment"> * Uses a lock-free free list to track available slots. Each free slot stores a pointer to the next free slot,</span></div>
+<div class="line"><span class="comment"> * forming a linked list through the free blocks.</span></div>
 <div class="line"><span class="comment"> *</span></div>
 <div class="line"><span class="comment"> * Supports proper deallocation and reuse of freed blocks.</span></div>
 <div class="line"><span class="comment"> *</span></div>
-<div class="line"><span class="comment"> * Uses lock-free atomic operations for allocation/deallocation, providing</span></div>
-<div class="line"><span class="comment"> * excellent performance in multi-threaded scenarios.</span></div>
+<div class="line"><span class="comment"> * Uses lock-free atomic operations for allocation/deallocation,</span></div>
+<div class="line"><span class="comment"> * providing excellent performance in multi-threaded scenarios.</span></div>
 <div class="line"><span class="comment"> *</span></div>
 <div class="line"><span class="comment"> * @note Thread-safe with lock-free operations.</span></div>
 <div class="line"><span class="comment"> * All allocations must be the same size (or smaller than block_size).</span></div>
@@ -617,8 +617,8 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line">  <span class="keyword">requires</span> std::constructible_from&lt;T, Args...&gt;</div>
 <div class="line"><span class="keyword">inline</span> T* <a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#ac3c9fb7ec26db14c697c01d7c78eb4ac">PoolAllocator::AllocateAndConstruct</a>(Args&amp;&amp;... args) <span class="keyword">noexcept</span>(std::is_nothrow_constructible_v&lt;T, Args...&gt;) {</div>
 <div class="line">  T* ptr = Allocate&lt;T&gt;();</div>
-<div class="line">  <span class="keywordflow">if</span> (ptr != <span class="keyword">nullptr</span>) {</div>
-<div class="line">    ::new (<span class="keyword">static_cast&lt;</span><span class="keywordtype">void</span>*<span class="keyword">&gt;</span>(ptr)) T(std::forward&lt;Args&gt;(args)...);</div>
+<div class="line">  <span class="keywordflow">if</span> (ptr != <span class="keyword">nullptr</span>) [[likely]] {</div>
+<div class="line">    std::construct_at(ptr, std::forward&lt;Args&gt;(args)...);</div>
 <div class="line">  }</div>
 <div class="line">  <span class="keywordflow">return</span> ptr;</div>
 <div class="line">}</div>
@@ -648,14 +648,14 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="ttc" id="acore__pch_8hpp_html"><div class="ttname"><a href="core__pch_8hpp.html">core_pch.hpp</a></div></div>
 <div class="ttc" id="alogger_8hpp_html"><div class="ttname"><a href="logger_8hpp.html">logger.hpp</a></div></div>
 <div class="ttc" id="amemory_2common_8hpp_html"><div class="ttname"><a href="memory_2common_8hpp.html">common.hpp</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1memory_html"><div class="ttname"><a href="namespacehelios_1_1memory.html">helios::memory</a></div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00011">allocator_traits.hpp:11</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1memory_html_a14c84d27b0af2a3d13d38b2d9f6225c4"><div class="ttname"><a href="namespacehelios_1_1memory.html#a14c84d27b0af2a3d13d38b2d9f6225c4">helios::memory::kDefaultAlignment</a></div><div class="ttdeci">constexpr size_t kDefaultAlignment</div><div class="ttdoc">Default alignment for allocations (cache line size for most modern CPUs).</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00077">allocator_traits.hpp:77</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1memory_html_a175355e873ce053598f865a5a0241f94"><div class="ttname"><a href="namespacehelios_1_1memory.html#a175355e873ce053598f865a5a0241f94">helios::memory::AlignedAlloc</a></div><div class="ttdeci">void * AlignedAlloc(size_t alignment, size_t size)</div><div class="ttdoc">Allocate memory with the specified alignment.</div><div class="ttdef"><b>Definition</b> <a href="memory_2common_8hpp_source.html#l00029">common.hpp:29</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1memory_html_a2d894713b466844926e8b24892da0877"><div class="ttname"><a href="namespacehelios_1_1memory.html#a2d894713b466844926e8b24892da0877">helios::memory::AlignUp</a></div><div class="ttdeci">constexpr size_t AlignUp(size_t size, size_t alignment) noexcept</div><div class="ttdoc">Helper function to align a size up to the given alignment.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00090">allocator_traits.hpp:90</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1memory_html_a443dc78a3e9ae9f92bba519395020b3e"><div class="ttname"><a href="namespacehelios_1_1memory.html#a443dc78a3e9ae9f92bba519395020b3e">helios::memory::IsPowerOfTwo</a></div><div class="ttdeci">constexpr bool IsPowerOfTwo(size_t size) noexcept</div><div class="ttdoc">Helper function to check if a size is a power of 2.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00121">allocator_traits.hpp:121</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1memory_html_abbe59f6529258733707c209398f9a30f"><div class="ttname"><a href="namespacehelios_1_1memory.html#abbe59f6529258733707c209398f9a30f">helios::memory::AlignedFree</a></div><div class="ttdeci">void AlignedFree(void *ptr)</div><div class="ttdoc">Free memory allocated with AlignedAlloc.</div><div class="ttdef"><b>Definition</b> <a href="memory_2common_8hpp_source.html#l00050">common.hpp:50</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1memory_html_ace74b72484caaa07fedc5e4f67e6282a"><div class="ttname"><a href="namespacehelios_1_1memory.html#ace74b72484caaa07fedc5e4f67e6282a">helios::memory::Allocate</a></div><div class="ttdeci">constexpr T * Allocate(Alloc &amp;allocator) noexcept</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00182">allocator_traits.hpp:182</a></div></div>
-<div class="ttc" id="astructhelios_1_1memory_1_1AllocatorStats_html_abf57f1d0bc4c9cc61f83276735e27a1e"><div class="ttname"><a href="structhelios_1_1memory_1_1AllocatorStats.html#abf57f1d0bc4c9cc61f83276735e27a1e">helios::memory::AllocatorStats::total_allocated</a></div><div class="ttdeci">size_t total_allocated</div><div class="ttdoc">Total bytes currently allocated.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00018">allocator_traits.hpp:18</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html"><div class="ttname"><a href="namespacehelios_1_1memory.html">helios::memory</a></div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00012">allocator_traits.hpp:12</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_a14c84d27b0af2a3d13d38b2d9f6225c4"><div class="ttname"><a href="namespacehelios_1_1memory.html#a14c84d27b0af2a3d13d38b2d9f6225c4">helios::memory::kDefaultAlignment</a></div><div class="ttdeci">constexpr size_t kDefaultAlignment</div><div class="ttdoc">Default alignment for allocations (cache line size for most modern CPUs).</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00078">allocator_traits.hpp:78</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_a175355e873ce053598f865a5a0241f94"><div class="ttname"><a href="namespacehelios_1_1memory.html#a175355e873ce053598f865a5a0241f94">helios::memory::AlignedAlloc</a></div><div class="ttdeci">void * AlignedAlloc(size_t alignment, size_t size)</div><div class="ttdoc">Allocate memory with the specified alignment.</div><div class="ttdef"><b>Definition</b> <a href="memory_2common_8hpp_source.html#l00030">common.hpp:30</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_a2d894713b466844926e8b24892da0877"><div class="ttname"><a href="namespacehelios_1_1memory.html#a2d894713b466844926e8b24892da0877">helios::memory::AlignUp</a></div><div class="ttdeci">constexpr size_t AlignUp(size_t size, size_t alignment) noexcept</div><div class="ttdoc">Helper function to align a size up to the given alignment.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00091">allocator_traits.hpp:91</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_a443dc78a3e9ae9f92bba519395020b3e"><div class="ttname"><a href="namespacehelios_1_1memory.html#a443dc78a3e9ae9f92bba519395020b3e">helios::memory::IsPowerOfTwo</a></div><div class="ttdeci">constexpr bool IsPowerOfTwo(size_t size) noexcept</div><div class="ttdoc">Helper function to check if a size is a power of 2.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00122">allocator_traits.hpp:122</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_abbe59f6529258733707c209398f9a30f"><div class="ttname"><a href="namespacehelios_1_1memory.html#abbe59f6529258733707c209398f9a30f">helios::memory::AlignedFree</a></div><div class="ttdeci">void AlignedFree(void *ptr)</div><div class="ttdoc">Free memory allocated with AlignedAlloc.</div><div class="ttdef"><b>Definition</b> <a href="memory_2common_8hpp_source.html#l00053">common.hpp:53</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_ace74b72484caaa07fedc5e4f67e6282a"><div class="ttname"><a href="namespacehelios_1_1memory.html#ace74b72484caaa07fedc5e4f67e6282a">helios::memory::Allocate</a></div><div class="ttdeci">constexpr T * Allocate(Alloc &amp;allocator) noexcept</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00183">allocator_traits.hpp:183</a></div></div>
+<div class="ttc" id="astructhelios_1_1memory_1_1AllocatorStats_html_abf57f1d0bc4c9cc61f83276735e27a1e"><div class="ttname"><a href="structhelios_1_1memory_1_1AllocatorStats.html#abf57f1d0bc4c9cc61f83276735e27a1e">helios::memory::AllocatorStats::total_allocated</a></div><div class="ttdeci">size_t total_allocated</div><div class="ttdoc">Total bytes currently allocated.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00019">allocator_traits.hpp:19</a></div></div>
 </div><!-- fragment --> </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->

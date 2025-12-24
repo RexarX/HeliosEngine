@@ -577,7 +577,7 @@ template&lt;typename T , typename UnderlyingAllocator &gt; </div>
 <div class="line"><span class="lineno">  138</span>  }</div>
 <div class="line"><span class="lineno">  139</span> </div>
 <div class="line"><span class="lineno">  140</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> size = count * <span class="keyword">sizeof</span>(T);</div>
-<div class="line"><span class="lineno">  141</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> alignment = std::max(<span class="keyword">alignof</span>(T), <a class="code hl_variable" href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">kMinAlignment</a>);</div>
+<div class="line"><span class="lineno">  141</span>  <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> alignment = std::max(<span class="keyword">alignof</span>(T), <a class="code hl_variable" href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">kMinAlignment</a>);</div>
 <div class="line"><span class="lineno">  142</span> </div>
 <div class="line"><span class="lineno">  143</span>  <span class="keyword">auto</span> result = allocator_-&gt;Allocate(size, alignment);</div>
 <div class="line"><span class="lineno">  144</span> </div>
@@ -588,7 +588,7 @@ template&lt;typename T , typename UnderlyingAllocator &gt; </div>
 <div class="line"><span class="lineno">  149</span>  <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(result.ptr);</div>
 <div class="line"><span class="lineno">  150</span>}</div>
 <div class="ttc" id="aclasshelios_1_1memory_1_1STLAllocatorAdapter_html_a820611151e65b9c1152c74feed681999"><div class="ttname"><a href="classhelios_1_1memory_1_1STLAllocatorAdapter.html#a820611151e65b9c1152c74feed681999">helios::memory::STLAllocatorAdapter::max_size</a></div><div class="ttdeci">constexpr size_type max_size() const noexcept</div><div class="ttdoc">Returns maximum number of objects that can be allocated.</div><div class="ttdef"><b>Definition</b> <a href="stl__allocator__adapter_8hpp_source.html#l00109">stl_allocator_adapter.hpp:109</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1memory_html_a4b4f9ed5e1cf5fe81a0ccbdb6991395a"><div class="ttname"><a href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">helios::memory::kMinAlignment</a></div><div class="ttdeci">constexpr size_t kMinAlignment</div><div class="ttdoc">Minimum alignment for any allocation.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00082">allocator_traits.hpp:82</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1memory_html_a4b4f9ed5e1cf5fe81a0ccbdb6991395a"><div class="ttname"><a href="namespacehelios_1_1memory.html#a4b4f9ed5e1cf5fe81a0ccbdb6991395a">helios::memory::kMinAlignment</a></div><div class="ttdeci">constexpr size_t kMinAlignment</div><div class="ttdoc">Minimum alignment for any allocation.</div><div class="ttdef"><b>Definition</b> <a href="allocator__traits_8hpp_source.html#l00083">allocator_traits.hpp:83</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -641,7 +641,7 @@ template&lt;typename T , typename UnderlyingAllocator &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="stl__allocator__adapter_8hpp_source.html#l00153">153</a> of file <a class="el" href="stl__allocator__adapter_8hpp_source.html">stl_allocator_adapter.hpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  153</span>                                                                                                    {</div>
-<div class="line"><span class="lineno">  154</span>  <span class="keywordflow">if</span> (ptr != <span class="keyword">nullptr</span>) [[unlikely]] {</div>
+<div class="line"><span class="lineno">  154</span>  <span class="keywordflow">if</span> (ptr == <span class="keyword">nullptr</span>) [[unlikely]] {</div>
 <div class="line"><span class="lineno">  155</span>    <span class="keywordflow">return</span>;</div>
 <div class="line"><span class="lineno">  156</span>  }</div>
 <div class="line"><span class="lineno">  157</span> </div>
