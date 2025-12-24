@@ -18,6 +18,17 @@ namespace helios::utils {
 namespace details {
 
 /**
+ * @brief Concept to check if a type is tuple-like (has tuple_size and get).
+ * @details This is used to determine if std::tuple_cat can be applied to a type.
+ * @tparam T Type to check
+ */
+template <typename T>
+concept TupleLike = requires {
+  typename std::tuple_size<std::remove_cvref_t<T>>::type;
+  requires std::tuple_size_v<std::remove_cvref_t<T>> >= 0;
+};
+
+/**
  * @brief Helper to extract tuple element types and check if a folder is invocable with accumulator + tuple elements
  */
 template <typename Folder, typename Accumulator, typename Tuple>
@@ -1223,7 +1234,7 @@ template <typename Iter>
   requires EnumerateAdapterRequirements<Iter>
 constexpr auto EnumerateAdapter<Iter>::operator*() const -> value_type {
   auto value = *current_;
-  if constexpr (requires { std::tuple_cat(std::tuple{index_}, value); }) {
+  if constexpr (details::TupleLike<decltype(value)>) {
     return std::tuple_cat(std::tuple{index_}, value);
   } else {
     return std::tuple{index_, value};

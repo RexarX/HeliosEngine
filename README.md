@@ -217,7 +217,7 @@ helios_define_module(
 | Tool             | Minimum Version                | Recommended        |
 | ---------------- | ------------------------------ | ------------------ |
 | **CMake**        | 3.25+                          | 3.28+              |
-| **C++ Compiler** | GCC 14+, Clang 19+, MSVC 2022+ | GCC 15+, Clang 20+ |
+| **C++ Compiler** | GCC 14+, Clang 19+, MSVC 2022+ | GCC 15+, Clang 21+ |
 | **Python**       | 3.8+                           | 3.10+              |
 
 **Compiler Support:**

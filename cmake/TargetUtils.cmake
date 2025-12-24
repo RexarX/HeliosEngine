@@ -90,6 +90,14 @@ function(helios_target_set_optimization TARGET)
             $<$<CONFIG:Release>:-O3 -DNDEBUG>
         >
     )
+
+    # Workaround for Clang < 21: std::forward_like builtin causes issues
+    # See: https://github.com/llvm/llvm-project/issues/64029
+    if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" AND NOT CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang")
+        if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS "21.0")
+            target_compile_options(${TARGET} PRIVATE -fno-builtin-std-forward_like)
+        endif()
+    endif()
 endfunction()
 
 # Enable Link-Time Optimization (LTO) for a target

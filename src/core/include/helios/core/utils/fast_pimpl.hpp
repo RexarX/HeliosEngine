@@ -25,10 +25,7 @@ class FastPimpl {
 public:
   template <typename... Args>
   explicit(sizeof...(Args) ==
-           1) constexpr FastPimpl(Args&&... args) noexcept(std::is_nothrow_constructible_v<T, Args...>)
-    requires((sizeof...(Args) != 1 && std::constructible_from<T, Args...>) ||
-             (!std::same_as<std::remove_cvref_t<Args>, FastPimpl> && ...))
-  {
+           1) constexpr FastPimpl(Args&&... args) noexcept(std::is_nothrow_constructible_v<T, Args...>) {
     std::construct_at(Impl(), std::forward<Args>(args)...);
   }
 
@@ -49,16 +46,14 @@ public:
    * @param value Source value
    * @return Reference to this instance
    */
-  constexpr FastPimpl& operator=(const T& value) noexcept(noexcept(std::declval<T&>() = std::declval<const T&>()))
-    requires std::copy_constructible<T>;
+  constexpr FastPimpl& operator=(const T& value) noexcept(noexcept(std::declval<T&>() = std::declval<const T&>()));
 
   /**
    * @brief Move-assigns from a T instance.
    * @param value Source value
    * @return Reference to this instance
    */
-  constexpr FastPimpl& operator=(T&& value) noexcept(noexcept(std::declval<T&>() = std::declval<T&&>()))
-    requires std::move_constructible<T>;
+  constexpr FastPimpl& operator=(T&& value) noexcept(noexcept(std::declval<T&>() = std::declval<T&&>()));
 
   constexpr T* operator->() noexcept { return Impl(); }
   constexpr const T* operator->() const noexcept { return Impl(); }
@@ -101,9 +96,7 @@ constexpr auto FastPimpl<T, Size, Alignment, RequireStrictMatch>::operator=(Fast
 
 template <class T, size_t Size, size_t Alignment, bool RequireStrictMatch>
 constexpr auto FastPimpl<T, Size, Alignment, RequireStrictMatch>::operator=(const T& value) noexcept(
-    noexcept(std::declval<T&>() = std::declval<const T&>())) -> FastPimpl&
-  requires std::copy_constructible<T>
-{
+    noexcept(std::declval<T&>() = std::declval<const T&>())) -> FastPimpl& {
   if (Impl() != &value) [[likely]] {
     *Impl() = value;
   }
@@ -112,9 +105,7 @@ constexpr auto FastPimpl<T, Size, Alignment, RequireStrictMatch>::operator=(cons
 
 template <class T, size_t Size, size_t Alignment, bool RequireStrictMatch>
 constexpr auto FastPimpl<T, Size, Alignment, RequireStrictMatch>::operator=(T&& value) noexcept(
-    noexcept(std::declval<T&>() = std::declval<T&&>())) -> FastPimpl&
-  requires std::move_constructible<T>
-{
+    noexcept(std::declval<T&>() = std::declval<T&&>())) -> FastPimpl& {
   if (Impl() != &value) [[likely]] {
     *Impl() = std::move(value);
   }

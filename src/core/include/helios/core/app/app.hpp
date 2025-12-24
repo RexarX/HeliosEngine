@@ -59,7 +59,12 @@ public:
   App() = default;
   App(const App&) = delete;
   App(App&&) = delete;
-  ~App() = default;
+
+  /**
+   * @brief Destructor that ensures all async work is completed before destruction.
+   * @details Waits for all overlapping updates and pending executor tasks to complete.
+   */
+  ~App();
 
   App& operator=(const App&) = delete;
   App& operator=(App&&) = delete;
@@ -477,6 +482,17 @@ private:
   /// Map from sub-app index to their overlapping shared futures.
   std::unordered_map<size_t, std::vector<std::shared_future<void>>> sub_app_overlapping_futures_;
 };
+
+inline App::~App() {
+  // Ensure we're not running (should already be false if properly shut down)
+  is_running_.store(false, std::memory_order_release);
+
+  // Wait for any pending overlapping sub-app updates
+  WaitForOverlappingUpdates();
+
+  // Wait for all pending executor tasks to complete
+  executor_.WaitForAll();
+}
 
 inline void App::Clear() {
   HELIOS_ASSERT(!IsRunning(), "Failed to clear app: Cannot clear app while it is running!");
