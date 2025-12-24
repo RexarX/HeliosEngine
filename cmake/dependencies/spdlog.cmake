@@ -66,6 +66,13 @@ if(TARGET spdlog_header_only AND NOT TARGET helios::spdlog_header_only)
     message(STATUS "  ✓ spdlog header-only configured (fallback)")
 endif()
 
+# If we have helios::spdlog but not helios::spdlog_header_only, create the header-only alias
+# This handles cases where pkg-config only provides the compiled library target
+if(TARGET helios::spdlog AND NOT TARGET helios::spdlog_header_only)
+    add_library(helios::spdlog_header_only ALIAS helios::spdlog)
+    message(STATUS "  ✓ spdlog header-only configured (using compiled library)")
+endif()
+
 # Warn if neither target is found
 if(NOT TARGET helios::spdlog AND NOT TARGET helios::spdlog_header_only)
     message(WARNING "  ✗ spdlog not found")

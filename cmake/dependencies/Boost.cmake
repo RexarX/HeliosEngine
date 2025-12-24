@@ -188,8 +188,8 @@ else()
         include(DownloadUsingCPM)
         helios_cpm_add_package(
             NAME Boost
-            VERSION 1.82.0
-            URL https://github.com/boostorg/boost/releases/download/boost-1.82.0/boost-1.82.0-cmake.tar.xz
+            VERSION 1.90.0
+            URL https://github.com/boostorg/boost/releases/download/boost-1.90.0/boost-1.90.0-cmake.tar.xz
             OPTIONS
                 "BOOST_ENABLE_CMAKE ON"
                 "BOOST_INCLUDE_LIBRARIES ${_boost_include_libs}"

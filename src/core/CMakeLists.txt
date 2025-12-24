@@ -210,6 +210,11 @@ else()
         else()
             message(WARNING "libbacktrace not found, boost stacktrace will use basic backend")
         endif()
+    elseif(APPLE)
+        # macOS: _Unwind_Backtrace is available without _GNU_SOURCE
+        target_compile_definitions(helios_core PRIVATE
+            BOOST_STACKTRACE_GNU_SOURCE_NOT_REQUIRED
+        )
     elseif(WIN32)
         target_compile_definitions(helios_core PRIVATE
             BOOST_STACKTRACE_USE_WINDBG
