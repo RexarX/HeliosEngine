@@ -9,7 +9,11 @@
 #include <spdlog/spdlog.h>
 
 #ifdef HELIOS_ENABLE_STACKTRACE
+#ifdef HELIOS_USE_STL_STACKTRACE
+#include <stacktrace>
+#else
 #include <boost/stacktrace.hpp>
+#endif
 #endif
 
 #include <algorithm>
@@ -133,8 +137,13 @@ public:
   }
 
 private:
+#ifdef HELIOS_USE_STL_STACKTRACE
+  [[nodiscard]] static size_t FindStartingFrame(const std::stacktrace& stack_trace,
+                                                const spdlog::source_loc& source_loc) noexcept;
+#else
   [[nodiscard]] static size_t FindStartingFrame(const boost::stacktrace::stacktrace& stack_trace,
                                                 const spdlog::source_loc& source_loc) noexcept;
+#endif
 
   [[nodiscard]] static bool IsExactSourceMatch(const std::string& stacktrace_entry,
                                                const std::string& target_pattern) noexcept;
@@ -160,7 +169,11 @@ void StackTraceFormatterFlag::format(const spdlog::details::log_msg& msg, [[mayb
   using namespace std::literals::string_view_literals;
 
   try {
+#ifdef HELIOS_USE_STL_STACKTRACE
+    const std::stacktrace stack_trace = std::stacktrace::current();
+#else
     const boost::stacktrace::stacktrace stack_trace;
+#endif
     if (stack_trace.size() <= 1) [[unlikely]] {
       dest.append("\nStack trace: <empty>"sv);
       return;
@@ -180,7 +193,11 @@ void StackTraceFormatterFlag::format(const spdlog::details::log_msg& msg, [[mayb
     for (size_t i = start_frame, out_idx = 1; i < frame_count; ++i, ++out_idx) {
       const auto& entry = stack_trace[i];
 
+#ifdef HELIOS_USE_STL_STACKTRACE
+      std::string entry_str = std::to_string(entry);
+#else
       std::string entry_str = boost::stacktrace::to_string(entry);
+#endif
       std::format_to(std::back_inserter(dest), "\n  {}: {}", out_idx, std::move(entry_str));
     }
   } catch (...) {
@@ -188,8 +205,13 @@ void StackTraceFormatterFlag::format(const spdlog::details::log_msg& msg, [[mayb
   }
 }
 
+#ifdef HELIOS_USE_STL_STACKTRACE
+size_t StackTraceFormatterFlag::FindStartingFrame(const std::stacktrace& stack_trace,
+                                                  const spdlog::source_loc& source_loc) noexcept {
+#else
 size_t StackTraceFormatterFlag::FindStartingFrame(const boost::stacktrace::stacktrace& stack_trace,
                                                   const spdlog::source_loc& source_loc) noexcept {
+#endif
   if (source_loc.filename == nullptr || source_loc.line <= 0) [[unlikely]] {
     return 1;  // Default: skip frame 0 (current function)
   }
@@ -211,7 +233,11 @@ size_t StackTraceFormatterFlag::FindStartingFrame(const boost::stacktrace::stack
   for (size_t i = 1; i < stack_trace.size(); ++i) {
     try {
       entry_str.clear();
+#ifdef HELIOS_USE_STL_STACKTRACE
+      entry_str = std::to_string(stack_trace[i]);
+#else
       entry_str = boost::stacktrace::to_string(stack_trace[i]);
+#endif
       if (IsExactSourceMatch(entry_str, target_pattern)) [[unlikely]] {
         return i;
       }

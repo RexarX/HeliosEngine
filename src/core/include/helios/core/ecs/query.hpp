@@ -1132,7 +1132,7 @@ public:
    * @param alloc Allocator instance for internal storage
    */
   BasicQuery(WorldT& world, std::vector<ComponentTypeId, Allocator> with_components,
-             std::vector<ComponentTypeId, Allocator> without_components, Allocator alloc = {});
+             std::vector<ComponentTypeId, Allocator> without_components = {}, Allocator alloc = {});
 
   BasicQuery(const BasicQuery&) = delete;
   BasicQuery(BasicQuery&&) noexcept = default;

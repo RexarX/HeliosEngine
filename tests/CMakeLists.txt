@@ -14,6 +14,20 @@ add_custom_target(core_tests)
 add_custom_target(core_unit_tests)
 add_custom_target(core_integration_tests)
 
+# Function to create module test targets dynamically
+function(create_module_test_targets MODULE_NAME)
+    # Create targets for this module if they don't exist
+    if(NOT TARGET ${MODULE_NAME}_tests)
+        add_custom_target(${MODULE_NAME}_tests)
+    endif()
+    if(NOT TARGET ${MODULE_NAME}_unit_tests)
+        add_custom_target(${MODULE_NAME}_unit_tests)
+    endif()
+    if(NOT TARGET ${MODULE_NAME}_integration_tests)
+        add_custom_target(${MODULE_NAME}_integration_tests)
+    endif()
+endfunction()
+
 # Help target for test commands
 add_custom_target(test_help
     COMMAND ${CMAKE_COMMAND} -E echo ""
@@ -49,6 +63,7 @@ add_custom_target(test_help
 
 # Add module test subdirectories
 # Core tests (always added if tests are enabled)
+create_module_test_targets(core)
 add_subdirectory(core)
 
 # Module tests (only if not building core-only)

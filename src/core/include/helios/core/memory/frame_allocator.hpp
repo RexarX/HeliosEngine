@@ -246,7 +246,6 @@ inline AllocationResult FrameAllocator::Allocate(size_t size, size_t alignment) 
   HELIOS_ASSERT(alignment >= kMinAlignment, "Failed to allocate memory: alignment must be at least '{}', got '{}'!",
                 kMinAlignment, alignment);
 
-
   if (size == 0) [[unlikely]] {
     return {.ptr = nullptr, .allocated_size = 0};
   }

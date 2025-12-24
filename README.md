@@ -2,6 +2,8 @@
 
 <!-- PROJECT SHIELDS -->
 
+[![CI](https://github.com/RexarX/HeliosEngine/workflows/CI/badge.svg)](https://github.com/RexarX/HeliosEngine/actions/workflows/ci.yaml)
+[![Format Check](https://github.com/RexarX/HeliosEngine/workflows/Pre-Commit%20Checks/badge.svg)](https://github.com/RexarX/HeliosEngine/actions/workflows/pre-commit.yaml)
 [![MIT License][license-shield]][license-url]
 [![C++23][cpp-shield]][cpp-url]
 
@@ -33,6 +35,7 @@
 - [Architecture](#architecture)
   - [Entity Component System (ECS)](#entity-component-system-ecs)
   - [Modular Design](#modular-design)
+  - [Creating Custom Modules](#creating-custom-modules)
 - [Getting Started](#getting-started)
   - [Requirements](#requirements)
   - [Dependencies](#dependencies)
@@ -99,7 +102,7 @@ Helios uses an **archetype-based ECS**, similar to Bevy:
 
 #### **Components**
 
-- Plain data structures (POD types)
+- Plain data structures
 - Stored contiguously in memory by archetype
 - No inheritance required
 
@@ -149,17 +152,51 @@ struct Health {
 
 ### Modular Design
 
-The engine is divided into three main modules:
+The engine is divided into independent modules that can be enabled or disabled:
 
 | Module   | Description                                 | Status   | Documentation                     |
 | -------- | ------------------------------------------- | -------- | --------------------------------- |
 | **Core** | ECS, async runtime, event system, utilities | Complete | [Core Module](src/core/README.md) |
 
-Build only what you need:
+Each module can be individually enabled or disabled via CMake options:
 
 ```bash
-make build
+# Enable/disable specific modules
+cmake -DHELIOS_BUILD_WINDOW_MODULE=ON -DHELIOS_BUILD_AUDIO_MODULE=OFF ..
+
+# Build only core (no modules)
+python scripts/build.py --core-only
 ```
+
+<a name="creating-custom-modules"></a>
+
+### Creating Custom Modules
+
+Helios Engine provides a streamlined system for creating custom modules. Each module:
+
+- Has its own build option (`HELIOS_BUILD_{NAME}_MODULE`)
+- Can depend on other modules or external libraries
+- Follows a standardized directory structure
+- Integrates automatically with the build system
+
+**Quick Example:**
+
+```cmake
+# src/modules/my_module/CMakeLists.txt
+helios_define_module(
+    NAME my_module
+    DESCRIPTION "My custom module"
+    SOURCES src/my_module.cpp
+    HEADERS include/helios/my_module/my_module.hpp
+)
+```
+
+**[Full Module Creation Guide](docs/guides/creating-modules.md)** - Comprehensive documentation on creating custom modules, including:
+
+- Directory structure and conventions
+- CMake function reference (`helios_register_module`, `helios_add_module`, `helios_define_module`)
+- Module dependencies and build options
+- Best practices and examples
 
 [↑ Back to Top](#readme-top)
 
@@ -281,11 +318,11 @@ python scripts/build.py --type Debug --core-only --tests
 #### 5. Run Tests
 
 ```bash
-# Run all tests
-make test
+# Run tests
+make test BUILD_TYPE={debug,relwithdebinfo,release}
 
 # Or run specific test manually with ctest
-cd build
+cd build/debug/linux  # or your platform
 ctest -L core
 ```
 

@@ -1,0 +1,367 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+  workflow_dispatch:
+
+# Cancel in-progress runs for the same PR/branch
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ============================================================================
+  # Code Formatting Check
+  # ============================================================================
+  format-check:
+    name: Format Check (clang-format)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install clang-format
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang-format-18
+
+      - name: Check code formatting
+        run: |
+          python3 scripts/format.py --check
+
+  # ============================================================================
+  # Build and Test - Linux GCC
+  # ============================================================================
+  build-linux-gcc:
+    name: Build & Test (Linux GCC)
+    runs-on: ubuntu-24.04
+    needs: format-check
+    strategy:
+      fail-fast: false
+      matrix:
+        build_type: [Debug, Release]
+        compiler_version: [13, 14]
+
+    env:
+      CC: gcc-${{ matrix.compiler_version }}
+      CXX: g++-${{ matrix.compiler_version }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            gcc-${{ matrix.compiler_version }} \
+            g++-${{ matrix.compiler_version }} \
+            cmake \
+            ninja-build \
+            python3 \
+            python3-pip
+
+      - name: Install project dependencies
+        run: |
+          python3 scripts/install_deps.py --no-conan --no-interactive
+
+      - name: Configure CMake
+        run: |
+          python3 scripts/configure.py \
+            --compiler gcc \
+            --type ${{ matrix.build_type }} \
+            --build-system Ninja \
+            --no-interactive
+
+      - name: Build
+        run: |
+          python3 scripts/build.py \
+            --compiler gcc \
+            --type ${{ matrix.build_type }} \
+            --build-system Ninja \
+            --core-only \
+            --tests \
+            --no-examples \
+            --no-interactive
+
+      - name: Run Tests
+        working-directory: build/${{ matrix.build_type }}/linux
+        run: |
+          ctest --output-on-failure --parallel 2
+
+      - name: Upload Test Results
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-linux-gcc-${{ matrix.compiler_version }}-${{ matrix.build_type }}
+          path: build/${{ matrix.build_type }}/linux/Testing/
+
+  # ============================================================================
+  # Build and Test - Linux Clang
+  # ============================================================================
+  build-linux-clang:
+    name: Build & Test (Linux Clang)
+    runs-on: ubuntu-24.04
+    needs: format-check
+    strategy:
+      fail-fast: false
+      matrix:
+        build_type: [Debug, Release]
+        compiler_version: [17, 18]
+
+    env:
+      CC: clang-${{ matrix.compiler_version }}
+      CXX: clang++-${{ matrix.compiler_version }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            clang-${{ matrix.compiler_version }} \
+            libc++-${{ matrix.compiler_version }}-dev \
+            libc++abi-${{ matrix.compiler_version }}-dev \
+            cmake \
+            ninja-build \
+            python3 \
+            python3-pip
+
+      - name: Install project dependencies
+        run: |
+          python3 scripts/install_deps.py --no-conan --no-interactive
+
+      - name: Configure CMake
+        run: |
+          python3 scripts/configure.py \
+            --compiler clang \
+            --type ${{ matrix.build_type }} \
+            --build-system Ninja \
+            --no-interactive
+
+      - name: Build
+        run: |
+          python3 scripts/build.py \
+            --compiler clang \
+            --type ${{ matrix.build_type }} \
+            --build-system Ninja \
+            --core-only \
+            --tests \
+            --no-examples \
+            --no-interactive
+
+      - name: Run Tests
+        working-directory: build/${{ matrix.build_type }}/linux
+        run: |
+          ctest --output-on-failure --parallel 2
+
+      - name: Upload Test Results
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-linux-clang-${{ matrix.compiler_version }}-${{ matrix.build_type }}
+          path: build/${{ matrix.build_type }}/linux/Testing/
+
+  # ============================================================================
+  # Build and Test - Windows MSVC
+  # ============================================================================
+  build-windows-msvc:
+    name: Build & Test (Windows MSVC)
+    runs-on: windows-latest
+    needs: format-check
+    strategy:
+      fail-fast: false
+      matrix:
+        build_type: [Debug, Release]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if (Test-Path scripts/requirements.txt) {
+            pip install -r scripts/requirements.txt
+          }
+
+      - name: Setup MSVC
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x64
+
+      - name: Configure CMake
+        run: |
+          python scripts/configure.py `
+            --compiler cl `
+            --type ${{ matrix.build_type }} `
+            --build-system Ninja `
+            --no-interactive
+
+      - name: Build
+        run: |
+          python scripts/build.py `
+            --compiler cl `
+            --type ${{ matrix.build_type }} `
+            --build-system Ninja `
+            --core-only `
+            --tests `
+            --no-examples `
+            --no-interactive
+
+      - name: Run Tests
+        working-directory: build/${{ matrix.build_type }}/windows
+        run: |
+          ctest --output-on-failure --parallel 2
+
+      - name: Upload Test Results
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-windows-msvc-${{ matrix.build_type }}
+          path: build/${{ matrix.build_type }}/windows/Testing/
+
+  # ============================================================================
+  # Build and Test - macOS
+  # ============================================================================
+  build-macos:
+    name: Build & Test (macOS Clang)
+    runs-on: macos-14
+    needs: format-check
+    strategy:
+      fail-fast: false
+      matrix:
+        build_type: [Debug, Release]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install system dependencies
+        run: |
+          brew install cmake ninja python3
+
+      - name: Install project dependencies
+        run: |
+          python3 scripts/install_deps.py --no-conan --no-interactive
+
+      - name: Configure CMake
+        run: |
+          python3 scripts/configure.py \
+            --compiler clang \
+            --type ${{ matrix.build_type }} \
+            --build-system Ninja \
+            --no-interactive
+
+      - name: Build
+        run: |
+          python3 scripts/build.py \
+            --compiler clang \
+            --type ${{ matrix.build_type }} \
+            --build-system Ninja \
+            --core-only \
+            --tests \
+            --no-examples \
+            --no-interactive
+
+      - name: Run Tests
+        working-directory: build/${{ matrix.build_type }}/macos
+        run: |
+          ctest --output-on-failure --parallel 2
+
+      - name: Upload Test Results
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-macos-${{ matrix.build_type }}
+          path: build/${{ matrix.build_type }}/macos/Testing/
+
+  # ============================================================================
+  # Summary Job - Required for Branch Protection
+  # ============================================================================
+  ci-success:
+    name: CI Success
+    runs-on: ubuntu-latest
+    needs:
+      - format-check
+      - build-linux-gcc
+      - build-linux-clang
+      - build-windows-msvc
+      - build-macos
+    if: always()
+    steps:
+      - name: Check all jobs
+        run: |
+          if [[ "${{ needs.format-check.result }}" != "success" ]]; then
+            echo "❌ Format check failed"
+            exit 1
+          fi
+          if [[ "${{ needs.build-linux-gcc.result }}" != "success" ]]; then
+            echo "❌ Linux GCC build failed"
+            exit 1
+          fi
+          if [[ "${{ needs.build-linux-clang.result }}" != "success" ]]; then
+            echo "❌ Linux Clang build failed"
+            exit 1
+          fi
+          if [[ "${{ needs.build-windows-msvc.result }}" != "success" ]]; then
+            echo "❌ Windows MSVC build failed"
+            exit 1
+          fi
+          if [[ "${{ needs.build-macos.result }}" != "success" ]]; then
+            echo "❌ macOS build failed"
+            exit 1
+          fi
+          echo "✅ All CI checks passed!"
+
+      - name: Report Success
+        run: |
+          echo "::notice::All CI checks passed successfully!"

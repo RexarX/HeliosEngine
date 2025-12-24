@@ -15,7 +15,7 @@ CREATE_SUBDIRS         = NO
 #---------------------------------------------------------------------------
 
 # Use relative paths so Doxygen works from docs/ or project root
-INPUT                  = ../../src ../../README.md ../../src/core/README.md
+INPUT                  = ../../src ../../README.md ../../src/core/README.md ../guides
 FILE_PATTERNS          = *.hpp *.inl *.h *.cpp *.cxx *.c *.md
 RECURSIVE              = YES
 EXCLUDE                = ../../build ../../tests ../../third-party

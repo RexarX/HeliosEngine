@@ -57,10 +57,7 @@ function(helios_add_test)
 
     # Additional compile definitions to match the module PCH
     target_compile_definitions(${HELIOS_TEST_TARGET} PRIVATE
-        $<$<PLATFORM_ID:Windows>:NOMINMAX>
-        $<$<PLATFORM_ID:Windows>:WIN32_LEAN_AND_MEAN>
-        $<$<PLATFORM_ID:Windows>:UNICODE>
-        $<$<PLATFORM_ID:Windows>:_UNICODE>
+        $<$<PLATFORM_ID:Windows>:NOMINMAX WIN32_LEAN_AND_MEAN UNICODE _UNICODE>
     )
 
     # Create PCH for test target using the same header as the module
@@ -100,4 +97,83 @@ function(register_test_target MODULE_NAME TEST_TYPE TARGET_NAME)
 
     # Add to module-specific target
     add_dependencies(${MODULE_NAME}_tests ${TARGET_NAME})
+endfunction()
+
+# Function: helios_add_module_test
+#
+# Simplified function for adding module tests. This function:
+# 1. Verifies the module is enabled
+# 2. Automatically links to helios::module::{module_name}
+# 3. Follows naming convention: helios_module_{module_name}_{type}
+#
+# Usage:
+#   helios_add_module_test(
+#     MODULE_NAME <name>              # Required: Module name (e.g., "example")
+#     TYPE <unit|integration>         # Required: Test type
+#     SOURCES <files...>              # Required: Test source files
+#     DEPENDENCIES <targets...>       # Optional: Additional dependencies
+#   )
+#
+# Example:
+#   helios_add_module_test(
+#     MODULE_NAME example
+#     TYPE unit
+#     SOURCES unit/example_test.cpp unit/main.cpp
+#   )
+#
+function(helios_add_module_test)
+    set(options "")
+    set(oneValueArgs MODULE_NAME TYPE)
+    set(multiValueArgs SOURCES DEPENDENCIES)
+    cmake_parse_arguments(HELIOS_MOD_TEST "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+
+    if(NOT HELIOS_MOD_TEST_MODULE_NAME)
+        message(FATAL_ERROR "helios_add_module_test: MODULE_NAME is required")
+    endif()
+
+    if(NOT HELIOS_MOD_TEST_TYPE)
+        message(FATAL_ERROR "helios_add_module_test: TYPE is required (unit or integration)")
+    endif()
+
+    if(NOT HELIOS_MOD_TEST_SOURCES)
+        message(FATAL_ERROR "helios_add_module_test: SOURCES is required")
+    endif()
+
+    # Validate TYPE
+    if(NOT HELIOS_MOD_TEST_TYPE STREQUAL "unit" AND NOT HELIOS_MOD_TEST_TYPE STREQUAL "integration")
+        message(FATAL_ERROR "helios_add_module_test: TYPE must be 'unit' or 'integration'")
+    endif()
+
+    # Check if module is enabled
+    string(TOUPPER "${HELIOS_MOD_TEST_MODULE_NAME}" _module_upper)
+    if(NOT HELIOS_BUILD_${_module_upper}_MODULE)
+        message(STATUS "Skipping tests for disabled module: ${HELIOS_MOD_TEST_MODULE_NAME}")
+        return()
+    endif()
+
+    # Verify module target exists
+    if(NOT TARGET helios::module::${HELIOS_MOD_TEST_MODULE_NAME})
+        message(WARNING "Module target helios::module::${HELIOS_MOD_TEST_MODULE_NAME} does not exist. Skipping tests.")
+        return()
+    endif()
+
+    # Generate target name: helios_module_{name}_{type}
+    set(_target_name "helios_module_${HELIOS_MOD_TEST_MODULE_NAME}_${HELIOS_MOD_TEST_TYPE}")
+
+    # Prepare dependencies
+    set(_all_deps helios::module::${HELIOS_MOD_TEST_MODULE_NAME})
+    if(HELIOS_MOD_TEST_DEPENDENCIES)
+        list(APPEND _all_deps ${HELIOS_MOD_TEST_DEPENDENCIES})
+    endif()
+
+    # Use the standard helios_add_test function
+    helios_add_test(
+        TARGET ${_target_name}
+        MODULE_NAME "module_${HELIOS_MOD_TEST_MODULE_NAME}"
+        TYPE ${HELIOS_MOD_TEST_TYPE}
+        SOURCES ${HELIOS_MOD_TEST_SOURCES}
+        DEPENDENCIES ${_all_deps}
+    )
+
+    message(STATUS "Added ${HELIOS_MOD_TEST_TYPE} tests for module '${HELIOS_MOD_TEST_MODULE_NAME}': ${_target_name}")
 endfunction()

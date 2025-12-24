@@ -839,4 +839,102 @@ TEST_SUITE("ecs::EntityCommandBuffer") {
     CHECK(world.HasComponent<Name>(reserved_entity));
   }
 
+  TEST_CASE("EntityCmdBuffer: FromWorld static factory") {
+    World world;
+    details::SystemLocalStorage local_storage;
+
+    Entity entity;
+    {
+      auto cmd_buffer = EntityCmdBuffer<>::FromWorld(world, local_storage);
+      entity = cmd_buffer.GetEntity();
+      CHECK(entity.Valid());
+
+      cmd_buffer.AddComponent(Position{1.0F, 2.0F, 3.0F});
+      cmd_buffer.AddComponent(Velocity{4.0F, 5.0F, 6.0F});
+    }
+
+    world.MergeCommands(local_storage.GetCommands());
+    world.Update();
+
+    CHECK(world.Exists(entity));
+    CHECK(world.HasComponent<Position>(entity));
+    CHECK(world.HasComponent<Velocity>(entity));
+  }
+
+  TEST_CASE("EntityCmdBuffer: FromEntity static factory") {
+    World world;
+    details::SystemLocalStorage local_storage;
+
+    Entity entity = world.CreateEntity();
+    CHECK(world.Exists(entity));
+
+    {
+      auto cmd_buffer = EntityCmdBuffer<>::FromEntity(entity, local_storage);
+      CHECK_EQ(cmd_buffer.GetEntity(), entity);
+
+      cmd_buffer.AddComponent(Position{1.0F, 2.0F, 3.0F});
+      cmd_buffer.AddComponent(Health{100});
+    }
+
+    world.MergeCommands(local_storage.GetCommands());
+    world.Update();
+
+    CHECK(world.Exists(entity));
+    CHECK(world.HasComponent<Position>(entity));
+    CHECK(world.HasComponent<Health>(entity));
+  }
+
+  TEST_CASE("EntityCmdBuffer: FromWorld with custom allocator") {
+    World world;
+    details::SystemLocalStorage local_storage;
+
+    helios::memory::GrowableAllocator<helios::memory::FrameAllocator> frame_alloc(4096);
+    using CommandAlloc = helios::memory::STLGrowableAllocator<std::unique_ptr<Command>, helios::memory::FrameAllocator>;
+
+    Entity entity;
+    {
+      auto cmd_buffer = EntityCmdBuffer<CommandAlloc>::FromWorld(world, local_storage, CommandAlloc(frame_alloc));
+      entity = cmd_buffer.GetEntity();
+      CHECK(entity.Valid());
+
+      cmd_buffer.AddComponent(Position{1.0F, 2.0F, 3.0F});
+      cmd_buffer.AddComponent(Name{"FromWorld Entity"});
+    }
+
+    world.MergeCommands(local_storage.GetCommands());
+    world.Update();
+
+    CHECK(world.Exists(entity));
+    CHECK(world.HasComponent<Position>(entity));
+    CHECK(world.HasComponent<Name>(entity));
+  }
+
+  TEST_CASE("EntityCmdBuffer: FromEntity with custom allocator") {
+    World world;
+    details::SystemLocalStorage local_storage;
+
+    Entity entity = world.CreateEntity();
+
+    helios::memory::GrowableAllocator<helios::memory::FrameAllocator> frame_alloc(4096);
+    using CommandAlloc = helios::memory::STLGrowableAllocator<std::unique_ptr<Command>, helios::memory::FrameAllocator>;
+
+    {
+      auto cmd_buffer = EntityCmdBuffer<CommandAlloc>::FromEntity(entity, local_storage, CommandAlloc(frame_alloc));
+      CHECK_EQ(cmd_buffer.GetEntity(), entity);
+
+      cmd_buffer.AddComponent(Position{1.0F, 2.0F, 3.0F});
+      cmd_buffer.AddComponent(Velocity{4.0F, 5.0F, 6.0F});
+      cmd_buffer.AddComponent(Health{100});
+
+      CHECK_EQ(cmd_buffer.Size(), 3);
+    }
+
+    world.MergeCommands(local_storage.GetCommands());
+    world.Update();
+
+    CHECK(world.HasComponent<Position>(entity));
+    CHECK(world.HasComponent<Velocity>(entity));
+    CHECK(world.HasComponent<Health>(entity));
+  }
+
 }  // TEST_SUITE

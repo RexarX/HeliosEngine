@@ -26,7 +26,8 @@ public:
   template <typename... Args>
   explicit(sizeof...(Args) ==
            1) constexpr FastPimpl(Args&&... args) noexcept(std::is_nothrow_constructible_v<T, Args...>)
-    requires(sizeof...(Args) != 1 || (!std::same_as<std::remove_cvref_t<Args>, FastPimpl> && ...))
+    requires((sizeof...(Args) != 1 && std::constructible_from<T, Args...>) ||
+             (!std::same_as<std::remove_cvref_t<Args>, FastPimpl> && ...))
   {
     std::construct_at(Impl(), std::forward<Args>(args)...);
   }
@@ -39,6 +40,22 @@ public:
 
   constexpr FastPimpl& operator=(const FastPimpl& rhs) noexcept(std::is_nothrow_copy_assignable_v<T>);
   constexpr FastPimpl& operator=(FastPimpl&& rhs) noexcept(std::is_nothrow_move_assignable_v<T>);
+
+  /**
+   * @brief Copy-assigns from a T instance.
+   * @param value Source value
+   * @return Reference to this instance
+   */
+  constexpr FastPimpl& operator=(const T& value) noexcept(std::is_nothrow_copy_assignable_v<T>)
+    requires std::copy_constructible<T>;
+
+  /**
+   * @brief Move-assigns from a T instance.
+   * @param value Source value
+   * @return Reference to this instance
+   */
+  constexpr FastPimpl& operator=(T&& value) noexcept(std::is_nothrow_move_assignable_v<T>)
+    requires std::move_constructible<T>;
 
   constexpr T* operator->() noexcept { return Impl(); }
   constexpr const T* operator->() const noexcept { return Impl(); }
@@ -74,6 +91,28 @@ constexpr auto FastPimpl<T, Size, Alignment, RequireStrictMatch>::operator=(Fast
     std::is_nothrow_move_assignable_v<T>) -> FastPimpl& {
   if (this != &rhs) [[likely]] {
     *Impl() = std::move(*rhs);
+  }
+  return *this;
+}
+
+template <class T, size_t Size, size_t Alignment, bool RequireStrictMatch>
+constexpr auto FastPimpl<T, Size, Alignment, RequireStrictMatch>::operator=(const T& value) noexcept(
+    std::is_nothrow_copy_assignable_v<T>) -> FastPimpl&
+  requires std::copy_constructible<T>
+{
+  if (Impl() != &value) [[likely]] {
+    *Impl() = value;
+  }
+  return *this;
+}
+
+template <class T, size_t Size, size_t Alignment, bool RequireStrictMatch>
+constexpr auto FastPimpl<T, Size, Alignment, RequireStrictMatch>::operator=(T&& value) noexcept(
+    std::is_nothrow_move_assignable_v<T>) -> FastPimpl&
+  requires std::move_constructible<T>
+{
+  if (Impl() != &value) [[likely]] {
+    *Impl() = std::move(value);
   }
   return *this;
 }

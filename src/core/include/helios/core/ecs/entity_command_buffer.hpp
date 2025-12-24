@@ -50,6 +50,43 @@ public:
   using allocator_type = Allocator;
 
   /**
+   * @brief Creates command buffer for a new reserved entity from a World.
+   * @details Reserves an entity ID and creates a command buffer for operations on it.
+   * The entity will be created when commands are flushed during World::Update().
+   * @param world World to reserve entity in
+   * @param local_storage Reference to system local storage
+   * @param alloc Allocator instance for internal storage
+   * @return EntityCmdBuffer for the reserved entity
+   *
+   * @example
+   * @code
+   * auto cmd = EntityCmdBuffer<>::FromWorld(world, local_storage);
+   * cmd.AddComponent(Position{1.0F, 2.0F, 3.0F});
+   * @endcode
+   */
+  [[nodiscard]] static EntityCmdBuffer FromWorld(World& world, details::SystemLocalStorage& local_storage,
+                                                 Allocator alloc = Allocator{});
+
+  /**
+   * @brief Creates command buffer for entity operations on existing entity.
+   * @details Creates command buffer for operations on the specified entity.
+   * @warning Triggers assertion if entity is invalid.
+   * @param entity Entity to operate on
+   * @param local_storage Reference to system local storage
+   * @param alloc Allocator instance for internal storage
+   * @return EntityCmdBuffer for the existing entity
+   *
+   * @example
+   * @code
+   * Entity entity = world.CreateEntity();
+   * auto cmd = EntityCmdBuffer<>::FromEntity(entity, local_storage);
+   * cmd.AddComponent(Position{1.0F, 2.0F, 3.0F});
+   * @endcode
+   */
+  [[nodiscard]] static EntityCmdBuffer FromEntity(Entity entity, details::SystemLocalStorage& local_storage,
+                                                  Allocator alloc = Allocator{});
+
+  /**
    * @brief Creates command buffer for a new reserved entity.
    * @details Reserves an entity ID and creates a command buffer for operations on it.
    * The entity will be created when commands are flushed during World::Update().
@@ -281,6 +318,18 @@ private:
   std::vector<std::unique_ptr<Command>, Allocator> commands_;  ///< Local command buffer
   [[no_unique_address]] Allocator alloc_;                      ///< Allocator instance
 };
+
+template <typename Allocator>
+inline auto EntityCmdBuffer<Allocator>::FromWorld(World& world, details::SystemLocalStorage& local_storage,
+                                                  Allocator alloc) -> EntityCmdBuffer {
+  return EntityCmdBuffer(world, local_storage, std::move(alloc));
+}
+
+template <typename Allocator>
+inline auto EntityCmdBuffer<Allocator>::FromEntity(Entity entity, details::SystemLocalStorage& local_storage,
+                                                   Allocator alloc) -> EntityCmdBuffer {
+  return EntityCmdBuffer(entity, local_storage, std::move(alloc));
+}
 
 template <typename Allocator>
 inline EntityCmdBuffer<Allocator>::EntityCmdBuffer(World& world, details::SystemLocalStorage& local_storage,

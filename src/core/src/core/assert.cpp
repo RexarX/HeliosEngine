@@ -5,7 +5,11 @@
 #include <helios/core/core.hpp>
 
 #ifdef HELIOS_ENABLE_STACKTRACE
+#ifdef HELIOS_USE_STL_STACKTRACE
+#include <stacktrace>
+#else
 #include <boost/stacktrace.hpp>
+#endif
 #endif
 
 #include <cstdio>
@@ -16,6 +20,72 @@
 
 namespace helios {
 
+namespace {
+
+#ifdef HELIOS_ENABLE_STACKTRACE
+
+void PrintStackTrace() noexcept {
+  try {
+#ifdef HELIOS_USE_STL_STACKTRACE
+    const std::stacktrace stack_trace = std::stacktrace::current();
+    if (stack_trace.size() > 1) {
+#if defined(__cpp_lib_print) && (__cpp_lib_print >= 202302L)
+      std::println("\nStack trace:");
+      for (size_t i = 1; i < stack_trace.size() && i < 32; ++i) {
+        std::string entry_str = std::to_string(stack_trace[i]);
+        std::println("  {}: {}", i, entry_str);
+      }
+#else
+      std::fprintf(stderr, "\nStack trace:\n");
+      for (size_t i = 1; i < stack_trace.size() && i < 32; ++i) {
+        std::string entry_str = std::to_string(stack_trace[i]);
+        std::fprintf(stderr, "  %zu: %s\n", i, entry_str.c_str());
+      }
+#endif
+    } else {
+#if defined(__cpp_lib_print) && (__cpp_lib_print >= 202302L)
+      std::println("\nStack trace: <empty>");
+#else
+      std::fprintf(stderr, "\nStack trace: <empty>\n");
+#endif
+    }
+#else  // Use Boost stacktrace
+    const boost::stacktrace::stacktrace stack_trace;
+    if (stack_trace.size() > 1) {
+#if defined(__cpp_lib_print) && (__cpp_lib_print >= 202302L)
+      std::println("\nStack trace:");
+      for (size_t i = 1; i < stack_trace.size() && i < 32; ++i) {
+        std::string entry_str = boost::stacktrace::to_string(stack_trace[i]);
+        std::println("  {}: {}", i, entry_str);
+      }
+#else
+      std::fprintf(stderr, "\nStack trace:\n");
+      for (size_t i = 1; i < stack_trace.size() && i < 32; ++i) {
+        std::string entry_str = boost::stacktrace::to_string(stack_trace[i]);
+        std::fprintf(stderr, "  %zu: %s\n", i, entry_str.c_str());
+      }
+#endif
+    } else {
+#if defined(__cpp_lib_print) && (__cpp_lib_print >= 202302L)
+      std::println("\nStack trace: <empty>");
+#else
+      std::fprintf(stderr, "\nStack trace: <empty>\n");
+#endif
+    }
+#endif  // HELIOS_USE_STL_STACKTRACE
+  } catch (...) {
+#if defined(__cpp_lib_print) && (__cpp_lib_print >= 202302L)
+    std::println("\nStack trace: <error during capture>");
+#else
+    std::fprintf(stderr, "\nStack trace: <error during capture>\n");
+#endif
+  }
+}
+
+#endif  // HELIOS_ENABLE_STACKTRACE
+
+}  // namespace
+
 void AbortWithStacktrace(std::string_view message) noexcept {
 #if defined(__cpp_lib_print) && (__cpp_lib_print >= 202302L)
   // Use std::println when available (C++23)
@@ -23,20 +93,7 @@ void AbortWithStacktrace(std::string_view message) noexcept {
   std::println("Message: {}", message);
 
 #ifdef HELIOS_ENABLE_STACKTRACE
-  try {
-    const boost::stacktrace::stacktrace stack_trace;
-    if (stack_trace.size() > 1) {
-      std::println("\nStack trace:");
-      for (size_t i = 1; i < stack_trace.size() && i < 32; ++i) {
-        std::string entry_str = boost::stacktrace::to_string(stack_trace[i]);
-        std::println("  {}: {}", i, entry_str);
-      }
-    } else {
-      std::println("\nStack trace: <empty>");
-    }
-  } catch (...) {
-    std::println("\nStack trace: <error during capture>");
-  }
+  PrintStackTrace();
 #else
   std::println("\nStack trace: <not available - build with HELIOS_ENABLE_STACKTRACE>");
 #endif
@@ -49,20 +106,7 @@ void AbortWithStacktrace(std::string_view message) noexcept {
   std::fprintf(stderr, "Message: %.*s\n", static_cast<int>(message.size()), message.data());
 
 #ifdef HELIOS_ENABLE_STACKTRACE
-  try {
-    const boost::stacktrace::stacktrace stack_trace;
-    if (stack_trace.size() > 1) {
-      std::fprintf(stderr, "\nStack trace:\n");
-      for (size_t i = 1; i < stack_trace.size() && i < 32; ++i) {
-        std::string entry_str = boost::stacktrace::to_string(stack_trace[i]);
-        std::fprintf(stderr, "  %zu: %s\n", i, entry_str.c_str());
-      }
-    } else {
-      std::fprintf(stderr, "\nStack trace: <empty>\n");
-    }
-  } catch (...) {
-    std::fprintf(stderr, "\nStack trace: <error during capture>\n");
-  }
+  PrintStackTrace();
 #else
   std::fprintf(stderr, "\nStack trace: <not available - build with HELIOS_ENABLE_STACKTRACE>\n");
 #endif

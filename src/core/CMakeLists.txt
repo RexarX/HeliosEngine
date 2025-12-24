@@ -194,22 +194,27 @@ if(HELIOS_ENABLE_UNITY_BUILD)
     )
 endif()
 
-# Platform-specific configurations
-if(UNIX AND NOT APPLE)
-    find_library(BACKTRACE_LIBRARY backtrace)
-    if(BACKTRACE_LIBRARY)
-        target_link_libraries(helios_core PRIVATE ${BACKTRACE_LIBRARY})
+# Platform-specific configurations for stacktrace
+if(HELIOS_USE_STL_STACKTRACE)
+    # STL stacktrace is available, no Boost-specific configuration needed
+    message(STATUS "helios_core: Using C++23 STL stacktrace")
+else()
+    # Using Boost stacktrace, configure platform-specific backends
+    if(UNIX AND NOT APPLE)
+        find_library(BACKTRACE_LIBRARY backtrace)
+        if(BACKTRACE_LIBRARY)
+            target_link_libraries(helios_core PRIVATE ${BACKTRACE_LIBRARY})
+            target_compile_definitions(helios_core PRIVATE
+                BOOST_STACKTRACE_USE_BACKTRACE
+            )
+        else()
+            message(WARNING "libbacktrace not found, boost stacktrace will use basic backend")
+        endif()
+    elseif(WIN32)
         target_compile_definitions(helios_core PRIVATE
-            BOOST_STACKTRACE_USE_BACKTRACE
+            BOOST_STACKTRACE_USE_WINDBG
         )
-
-    else()
-        message(WARNING "libbacktrace not found, boost stacktrace will use basic backend")
     endif()
-elseif(WIN32)
-    target_compile_definitions(helios_core PRIVATE
-        BOOST_STACKTRACE_USE_WINDBG
-    )
 endif()
 
 # Build-specific definitions

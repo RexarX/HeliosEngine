@@ -166,6 +166,11 @@ def main() -> int:
         action="store_true",
         help="Check formatting only (don't modify files)",
     )
+    parser.add_argument(
+        "paths",
+        nargs="*",
+        help="Specific files or directories to format (default: all source files)",
+    )
 
     args = parser.parse_args()
 
@@ -181,22 +186,63 @@ def main() -> int:
         print_error("clang-format is not installed. Please install it first.")
         return 1
 
-    # Define source directories
-    source_dirs = [
-        project_root / "src",
-        project_root / "tests",
-        project_root / "examples",
-    ]
-
     # Define file extensions to process
     extensions = ["cpp", "h", "hpp", "inl"]
 
     # Define directories to exclude
     exclude_dirs = [project_root / "third-party"]
 
-    # Find all source files
+    # Find source files
     print_info("Finding source files...")
-    source_files = find_source_files(source_dirs, extensions, exclude_dirs)
+
+    if args.paths:
+        # Process specific paths provided by user
+        source_files = []
+        for path_str in args.paths:
+            path = Path(path_str)
+
+            # Handle absolute and relative paths
+            if not path.is_absolute():
+                path = (project_root / path).resolve()
+
+            if not path.exists():
+                print_warning(f"Path does not exist: {path}")
+                continue
+
+            if path.is_file():
+                # Check if it's a valid source file
+                if path.suffix[1:] in extensions:
+                    # Check if it's not in excluded directories
+                    excluded = False
+                    for exclude_dir in exclude_dirs:
+                        try:
+                            path.relative_to(exclude_dir)
+                            excluded = True
+                            break
+                        except ValueError:
+                            pass
+
+                    if not excluded:
+                        source_files.append(path)
+                    else:
+                        print_warning(f"Skipping excluded file: {path}")
+                else:
+                    print_warning(f"Skipping non-source file: {path}")
+            elif path.is_dir():
+                # Recursively find source files in directory
+                source_files.extend(find_source_files([path], extensions, exclude_dirs))
+            else:
+                print_warning(f"Unknown path type: {path}")
+
+        source_files = sorted(set(source_files))
+    else:
+        # Default: process all source directories
+        source_dirs = [
+            project_root / "src",
+            project_root / "tests",
+            project_root / "examples",
+        ]
+        source_files = find_source_files(source_dirs, extensions, exclude_dirs)
 
     if not source_files:
         print_warning(

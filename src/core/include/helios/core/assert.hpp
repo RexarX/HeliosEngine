@@ -56,45 +56,36 @@ inline void LogAssertionFailure(std::string_view condition, const std::source_lo
 }
 
 /**
- * @brief Fallback assertion handler when logger is not available.
- * @param condition The failed condition as a string
- * @param loc Source location of the assertion
- * @param message Additional message to log
- *
- * This function will first attempt to use the logger via `LogAssertionFailure`.
- * If that doesn't produce visible output, it will print a formatted message using `std::println` and abort.
- *
+ * @brief Assertion handler that logs via the logger system.
  * @param condition The failed condition as a string
  * @param loc Source location of the assertion
  * @param message Additional message to log
  */
 inline void AssertionFailed(std::string_view condition, const std::source_location& loc,
                             std::string_view message) noexcept {
-  // Try to use logger if available (best-effort)
+  // Log via logger (will use stderr fallback if logger is not linked)
   try {
     LogAssertionFailure(condition, loc, message);
   } catch (...) {
-    // Swallow exceptions from logger attempts
-  }
-
-  // Fallback printing using std::println (C++23)
+    // If logger fails, print to stderr as last resort
 #if defined(__cpp_lib_print) && (__cpp_lib_print >= 202302L)
-  if (!message.empty()) {
-    std::println("Assertion failed: {} | {} [{}:{}]", condition, message, loc.file_name(), loc.line());
-  } else {
-    std::println("Assertion failed: {}\nFile: {}\nLine: {}\nFunction: {}", condition, loc.file_name(), loc.line(),
-                 loc.function_name());
-  }
+    if (!message.empty()) {
+      std::println(stderr, "Assertion failed: {} | {} [{}:{}]", condition, message, loc.file_name(), loc.line());
+    } else {
+      std::println(stderr, "Assertion failed: {}\nFile: {}\nLine: {}\nFunction: {}", condition, loc.file_name(),
+                   loc.line(), loc.function_name());
+    }
 #else
-  if (!message.empty()) {
-    std::fprintf(stderr, "Assertion failed: %.*s | %.*s [%s:%u]\n", static_cast<int>(condition.size()),
-                 condition.data(), static_cast<int>(message.size()), message.data(), loc.file_name(), loc.line());
-  } else {
-    std::fprintf(stderr, "Assertion failed: %.*s\nFile: %s\nLine: %u\nFunction: %s\n",
-                 static_cast<int>(condition.size()), condition.data(), loc.file_name(), loc.line(),
-                 loc.function_name());
-  }
+    if (!message.empty()) {
+      std::fprintf(stderr, "Assertion failed: %.*s | %.*s [%s:%u]\n", static_cast<int>(condition.size()),
+                   condition.data(), static_cast<int>(message.size()), message.data(), loc.file_name(), loc.line());
+    } else {
+      std::fprintf(stderr, "Assertion failed: %.*s\nFile: %s\nLine: %u\nFunction: %s\n",
+                   static_cast<int>(condition.size()), condition.data(), loc.file_name(), loc.line(),
+                   loc.function_name());
+    }
 #endif
+  }
 }
 
 #ifdef HELIOS_ENABLE_ASSERTS
