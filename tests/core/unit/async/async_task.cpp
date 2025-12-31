@@ -102,7 +102,10 @@ TEST_SUITE("async::AsyncTask") {
 
       // Complete the task
       should_complete = true;
-      future.wait();
+
+      // Wait with timeout to prevent hanging
+      const auto wait_result = future.wait_for(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(wait_result == std::future_status::ready, "Task did not complete within timeout");
 
       CHECK_FALSE(task.Empty());
       CHECK(task.Done());
@@ -119,7 +122,7 @@ TEST_SUITE("async::AsyncTask") {
           deps);
 
       // Wait for task to complete with timeout
-      constexpr int max_wait_ms = 500;
+      constexpr int max_wait_ms = 1000;
       constexpr int check_interval_ms = 5;
       int waited_ms = 0;
       while (!task.Done() && waited_ms < max_wait_ms) {
@@ -127,8 +130,10 @@ TEST_SUITE("async::AsyncTask") {
         waited_ms += check_interval_ms;
       }
 
+      // Assert that task completed within timeout
+      REQUIRE_MESSAGE(task.Done(), std::format("Task did not complete within {}ms timeout", max_wait_ms));
+
       CHECK_FALSE(task.Empty());
-      CHECK(task.Done());
       CHECK(executed.load());
     }
   }

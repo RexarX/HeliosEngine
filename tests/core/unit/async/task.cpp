@@ -75,7 +75,8 @@ TEST_SUITE("async::Task") {
       CHECK(task.HasWork());
 
       auto future = executor.Run(std::move(graph));
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "Work assignment task did not complete within timeout");
 
       CHECK(executed.load());
     }
@@ -97,7 +98,8 @@ TEST_SUITE("async::Task") {
       CHECK(task.HasWork());
 
       auto future = executor.Run(std::move(graph));
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "Work reassignment task did not complete within timeout");
 
       CHECK_EQ(execution_count.load(), 10);  // Only the second work should execute
     }
@@ -111,7 +113,8 @@ TEST_SUITE("async::Task") {
       CHECK_EQ(task.Name(), "ChainedTask");
 
       auto future = executor.Run(std::move(graph));
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "Method chaining task did not complete within timeout");
 
       CHECK(executed.load());
     }
@@ -136,7 +139,8 @@ TEST_SUITE("async::Task") {
       CHECK_EQ(task_b.PredecessorsCount(), 1);
 
       auto future = executor.Run(std::move(graph));
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "Single predecessor task did not complete within timeout");
 
       CHECK_EQ(execution_order.size(), 2);
       CHECK_LT(execution_order[0], execution_order[1]);  // task_a should execute first
@@ -170,7 +174,9 @@ TEST_SUITE("async::Task") {
       CHECK_EQ(task_c.PredecessorsCount(), 1);
 
       auto future = executor.Run(std::move(graph));
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready,
+                      "Multiple predecessors task did not complete within timeout");
 
       CHECK_EQ(execution_order.size(), 3);
       CHECK_LT(execution_order[0], execution_order[1]);  // task_a executes first
@@ -200,7 +206,9 @@ TEST_SUITE("async::Task") {
       }
 
       auto future = executor.Run(std::move(graph));
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready,
+                      "Chain of dependencies task did not complete within timeout");
 
       CHECK_EQ(execution_order.size(), 4);
       CHECK_LT(execution_order[0], execution_order[1]);
@@ -226,7 +234,8 @@ TEST_SUITE("async::Task") {
       CHECK_EQ(task_b.PredecessorsCount(), 1);
 
       auto future = executor.Run(std::move(graph));
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "Single successor task did not complete within timeout");
 
       CHECK_EQ(execution_order.size(), 2);
       CHECK_LT(execution_order[0], execution_order[1]);  // task_a should execute first
@@ -254,7 +263,8 @@ TEST_SUITE("async::Task") {
       CHECK_EQ(task_c.PredecessorsCount(), 2);
 
       auto future = executor.Run(std::move(graph));
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "Multiple successors task did not complete within timeout");
 
       CHECK_EQ(execution_order.size(), 3);
       CHECK_LT(execution_order[0], execution_order[2]);  // task_a before task_c
@@ -284,7 +294,9 @@ TEST_SUITE("async::Task") {
       CHECK_EQ(final_task.PredecessorsCount(), 3);
 
       auto future = executor.Run(std::move(graph));
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready,
+                      "Bidirectional dependencies task did not complete within timeout");
 
       CHECK_EQ(execution_order.size(), 4);
       // Final task should execute last

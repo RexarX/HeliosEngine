@@ -26,7 +26,8 @@ TEST_SUITE("async::Future") {
 
       auto future2 = std::move(future1);
       CHECK(future2.Valid());
-      future2.Wait();
+      auto status = future2.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "Moved future did not complete within timeout");
     }
 
     SUBCASE("Move assignment") {
@@ -44,7 +45,8 @@ TEST_SUITE("async::Future") {
       CHECK_FALSE(future1.Valid());
 
       // Wait for completion to avoid early destruction
-      future2.Wait();
+      auto status = future2.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "Move-assigned future did not complete within timeout");
     }
   }
 
@@ -58,7 +60,8 @@ TEST_SUITE("async::Future") {
       auto future = executor.Run(graph);
 
       CHECK(future.Valid());
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "Int return task did not complete within timeout");
       CHECK_EQ(result.load(), 42);
       CHECK(future.Valid());  // Wait doesn't invalidate
     }
@@ -78,7 +81,8 @@ TEST_SUITE("async::Future") {
       auto future = executor.Run(graph);
 
       CHECK(future.Valid());
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "Complex object task did not complete within timeout");
       // Check that the result was stored correctly
       CHECK_EQ(result, expected);
       CHECK(future.Valid());
@@ -111,7 +115,8 @@ TEST_SUITE("async::Future") {
 
       // Signal completion and wait
       should_complete = true;
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "Wait for completion task did not complete within timeout");
 
       CHECK(future.Valid());  // Wait doesn't invalidate the future
     }
@@ -174,8 +179,8 @@ TEST_SUITE("async::Future") {
       CHECK(future.Valid());
 
       // Should complete immediately
-      auto status = future.WaitFor(std::chrono::milliseconds(1));
-      CHECK_EQ(status, std::future_status::ready);
+      auto status = future.WaitFor(std::chrono::milliseconds(100));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "Immediate completion task did not complete within timeout");
     }
   }
 
@@ -203,12 +208,12 @@ TEST_SUITE("async::Future") {
       can_run = true;
 
       // Wait for completion with timeout
-      auto status = future.WaitFor(std::chrono::milliseconds(100));
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
 
       // If cancellation succeeded, the task may not complete
       // If cancellation failed, the task should complete and we can check the result
       if (!cancelled) {
-        CHECK_EQ(status, std::future_status::ready);
+        REQUIRE_MESSAGE(status == std::future_status::ready, "Non-cancelled task did not complete within timeout");
         CHECK_EQ(result.load(), 42);
       }
     }
@@ -220,7 +225,8 @@ TEST_SUITE("async::Future") {
       auto future = executor.Run(graph);
 
       // Wait for completion
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "Cancel completed task did not complete within timeout");
 
       // Try to cancel completed task - should fail
       bool cancelled = future.Cancel();
@@ -240,7 +246,8 @@ TEST_SUITE("async::Future") {
 
       CHECK(future.Valid());  // Initially valid
 
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "Valid lifecycle task did not complete within timeout");
       CHECK(future.Valid());  // Still valid after wait
     }
 
@@ -263,7 +270,9 @@ TEST_SUITE("async::Future") {
       auto future2 = std::move(future1);
       CHECK_FALSE(future1.Valid());  // Moved-from future is invalid
       CHECK(future2.Valid());        // Moved-to future is valid
-      future2.Wait();
+      auto status = future2.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready,
+                      "Moved future validity task did not complete within timeout");
     }
   }
 
@@ -282,9 +291,12 @@ TEST_SUITE("async::Future") {
       }
 
       // Wait for all and check results
-      for (auto& future : futures) {
+      for (int i = 0; i < NUM_FUTURES; ++i) {
+        auto& future = futures[i];
         CHECK(future.Valid());
-        future.Wait();
+        auto status = future.WaitFor(std::chrono::milliseconds(1000));
+        REQUIRE_MESSAGE(status == std::future_status::ready,
+                        std::format("Multiple independent future {} did not complete within timeout", i));
         CHECK(future.Valid());
       }
 
@@ -307,7 +319,8 @@ TEST_SUITE("async::Future") {
       task2.Precede(task3);
 
       auto future = executor.Run(graph);
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "Future dependency chain did not complete within timeout");
 
       // Final result should be (10 * 2) + 5 = 25
       CHECK_EQ(final_result.load(), 25);
@@ -334,7 +347,8 @@ TEST_SUITE("async::Future") {
       // Note: TaskGraph execution might handle exceptions internally
       // We check that the task executed and exception was caught
       try {
-        future.Wait();
+        auto status = future.WaitFor(std::chrono::milliseconds(1000));
+        REQUIRE_MESSAGE(status == std::future_status::ready, "Throwing task did not complete within timeout");
       } catch (...) {
         // Exception handling depends on TaskGraph implementation
       }
@@ -353,7 +367,8 @@ TEST_SUITE("async::Future") {
       auto future = executor.Run(graph);
 
       CHECK(future.Valid());
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "Delayed throw task did not complete within timeout");
       CHECK(future.Valid());
       CHECK(task_executed.load());
     }

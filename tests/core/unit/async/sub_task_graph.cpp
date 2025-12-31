@@ -36,7 +36,8 @@ TEST_SUITE("async::SubTaskGraph") {
       });
 
       auto future = executor.Run(std::move(main_graph));
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "Basic sub task did not complete within timeout");
 
       CHECK(sub_task_executed.load());
       CHECK(join_called.load());
@@ -57,7 +58,8 @@ TEST_SUITE("async::SubTaskGraph") {
       });
 
       auto future = executor.Run(std::move(main_graph));
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "Detached sub task did not complete within timeout");
 
       CHECK(retained_flag_set.load());
     }
@@ -81,7 +83,8 @@ TEST_SUITE("async::SubTaskGraph") {
       });
 
       auto future = executor.Run(std::move(main_graph));
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "Multiple sub tasks did not complete within timeout");
 
       CHECK_EQ(execution_count.load(), 5);
     }
@@ -110,7 +113,8 @@ TEST_SUITE("async::SubTaskGraph") {
       });
 
       auto future = executor.Run(std::move(main_graph));
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "Nested sub task did not complete within timeout");
 
       CHECK_EQ(nested_execution_count.load(), 1);
       CHECK_EQ(deep_nested_count.load(), 2);
@@ -135,7 +139,8 @@ TEST_SUITE("async::SubTaskGraph") {
       });
 
       auto future = executor.Run(std::move(main_graph));
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "Multiple nesting levels did not complete within timeout");
 
       CHECK_EQ(total_executions.load(), 4);
     }
@@ -155,7 +160,8 @@ TEST_SUITE("async::SubTaskGraph") {
       });
 
       auto future = executor.Run(std::move(main_graph));
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "Placeholder sub task did not complete within timeout");
 
       CHECK(placeholder_executed.load());
     }
@@ -186,7 +192,8 @@ TEST_SUITE("async::SubTaskGraph") {
       });
 
       auto future = executor.Run(std::move(main_graph));
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "For with modification did not complete within timeout");
 
       CHECK_EQ(processed_count.load(), 5);
       CHECK_EQ(total_sum.load(), 30);  // (1+2+3+4+5)*2 = 30
@@ -211,7 +218,8 @@ TEST_SUITE("async::SubTaskGraph") {
       });
 
       auto future = executor.Run(std::move(main_graph));
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "For with transform did not complete within timeout");
 
       std::vector<int> expected = {1, 4, 9, 16, 25};
       CHECK_EQ(output_data, expected);
@@ -232,7 +240,8 @@ TEST_SUITE("async::SubTaskGraph") {
       });
 
       auto future = executor.Run(std::move(main_graph));
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "For with accumulation did not complete within timeout");
 
       CHECK_EQ(result.load(), 15);  // 1+2+3+4+5
     }
@@ -249,7 +258,8 @@ TEST_SUITE("async::SubTaskGraph") {
       });
 
       auto future = executor.Run(std::move(main_graph));
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "Manual sort simulation did not complete within timeout");
 
       const std::vector<int> expected = {1, 2, 3, 4, 5, 6, 7, 8, 9};
       CHECK_EQ(data, expected);
@@ -275,7 +285,8 @@ TEST_SUITE("async::SubTaskGraph") {
       });
 
       auto future = executor.Run(std::move(main_graph));
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "ForEach with vector did not complete within timeout");
 
       CHECK_EQ(sum.load(), 15);
     }
@@ -297,7 +308,8 @@ TEST_SUITE("async::SubTaskGraph") {
       });
 
       auto future = executor.Run(std::move(main_graph));
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "ForEach with index did not complete within timeout");
 
       CHECK_EQ(count.load(), 5);  // 0, 2, 4, 6, 8
       CHECK_EQ(sum.load(), 20);   // 0+2+4+6+8
@@ -317,7 +329,8 @@ TEST_SUITE("async::SubTaskGraph") {
       });
 
       auto future = executor.Run(std::move(main_graph));
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "Transform operation did not complete within timeout");
 
       std::vector<int> expected = {1, 4, 9, 16, 25};
       CHECK_EQ(output, expected);
@@ -337,7 +350,8 @@ TEST_SUITE("async::SubTaskGraph") {
       });
 
       auto future = executor.Run(std::move(main_graph));
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "Reduce operation did not complete within timeout");
 
       CHECK_EQ(result, 15);
     }
@@ -355,7 +369,9 @@ TEST_SUITE("async::SubTaskGraph") {
       });
 
       auto future = executor.Run(std::move(main_graph));
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready,
+                      "Sort with default comparator did not complete within timeout");
 
       std::vector<int> expected = {1, 2, 3, 4, 5, 6, 7, 8, 9};
       CHECK_EQ(data, expected);
@@ -371,7 +387,9 @@ TEST_SUITE("async::SubTaskGraph") {
       });
 
       auto future = executor.Run(std::move(main_graph));
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready,
+                      "Sort with custom comparator did not complete within timeout");
 
       std::vector<int> expected = {9, 8, 7, 6, 5, 4, 3, 2, 1};
       CHECK_EQ(data, expected);
@@ -405,7 +423,8 @@ TEST_SUITE("async::SubTaskGraph") {
       });
 
       auto future = executor.Run(std::move(main_graph));
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "Manual dependencies did not complete within timeout");
 
       // Verify tasks executed in order
       CHECK_EQ(execution_order.size(), 5);
@@ -440,7 +459,8 @@ TEST_SUITE("async::SubTaskGraph") {
       });
 
       auto future = executor.Run(std::move(main_graph));
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "Complex dependencies did not complete within timeout");
 
       // Verify tasks executed in order
       CHECK_EQ(execution_order.size(), 3);
@@ -469,7 +489,8 @@ TEST_SUITE("async::SubTaskGraph") {
       });
 
       auto future = executor.Run(std::move(main_graph));
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "Conditional execution did not complete within timeout");
 
       CHECK_EQ(execution_count.load(), 2);  // Only task1 and task3 should execute
     }
@@ -493,7 +514,8 @@ TEST_SUITE("async::SubTaskGraph") {
       });
 
       auto future = executor.Run(std::move(main_graph));
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "External dependency did not complete within timeout");
 
       CHECK(external_executed.load());
       CHECK(sub_executed.load());

@@ -1,351 +1,351 @@
 name: Build & Test
 
 on:
-  push:
-    branches:
-      - main
-      - develop
-  pull_request:
-    branches:
-      - main
-      - develop
-  workflow_dispatch:
+    push:
+        branches:
+            - main
+            - dev
+    pull_request:
+        branches:
+            - main
+            - dev
+    workflow_dispatch:
 
 # Cancel in-progress runs for the same PR/branch
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
 
 jobs:
-  # ============================================================================
-  # Build and Test - Linux GCC (Latest)
-  # ============================================================================
-  build-linux-gcc:
-    name: Linux GCC (${{ matrix.build_type }})
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        build_type: [debug, release]
-        include:
-          - build_type: debug
-            cmake_type: Debug
-          - build_type: release
-            cmake_type: Release
+    # ============================================================================
+    # Build and Test - Linux GCC (Latest)
+    # ============================================================================
+    build-linux-gcc:
+        name: Linux GCC (${{ matrix.build_type }})
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                build_type: [debug, release]
+                include:
+                    - build_type: debug
+                      cmake_type: Debug
+                    - build_type: release
+                      cmake_type: Release
 
-    env:
-      CC: gcc
-      CXX: g++
+        env:
+            CC: gcc
+            CXX: g++
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          submodules: recursive
-          fetch-depth: 0
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+              with:
+                  submodules: recursive
+                  fetch-depth: 0
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
+            - name: Setup Python
+              uses: actions/setup-python@v5
+              with:
+                  python-version: "3.11"
 
-      - name: Install system dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y \
-            gcc-14 \
-            g++-14 \
-            cmake \
-            ninja-build \
-            python3 \
-            python3-pip
-          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 140
-          sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 140
+            - name: Install system dependencies
+              run: |
+                  sudo apt-get update
+                  sudo apt-get install -y \
+                    gcc-14 \
+                    g++-14 \
+                    cmake \
+                    ninja-build \
+                    python3 \
+                    python3-pip
+                  sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 140
+                  sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 140
 
-      - name: Install project dependencies
-        run: |
-          python3 scripts/install_deps.py --use-system --no-interactive
+            - name: Install project dependencies
+              run: |
+                  python3 scripts/install_deps.py --use-system --no-interactive
 
-      - name: Configure CMake
-        run: |
-          python3 scripts/configure.py \
-            --compiler gcc \
-            --type ${{ matrix.cmake_type }} \
-            --build-system Ninja \
-            --no-interactive
+            - name: Configure CMake
+              run: |
+                  python3 scripts/configure.py \
+                    --compiler gcc \
+                    --type ${{ matrix.cmake_type }} \
+                    --build-system Ninja \
+                    --no-interactive
 
-      - name: Build
-        run: |
-          python3 scripts/build.py \
-            --compiler gcc \
-            --type ${{ matrix.cmake_type }} \
-            --build-system Ninja \
-            --tests \
-            --no-examples \
-            --no-interactive
+            - name: Build
+              run: |
+                  python3 scripts/build.py \
+                    --compiler gcc \
+                    --type ${{ matrix.cmake_type }} \
+                    --build-system Ninja \
+                    --tests \
+                    --no-examples \
+                    --no-interactive
 
-      - name: Run Tests
-        working-directory: build/${{ matrix.build_type }}/linux
-        run: |
-          ctest --output-on-failure --parallel 2
+            - name: Run Tests
+              working-directory: build/${{ matrix.build_type }}/linux
+              run: |
+                  ctest --output-on-failure --parallel 2
 
-      - name: Upload Test Results
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-results-linux-gcc-${{ matrix.build_type }}
-          path: build/${{ matrix.build_type }}/linux/Testing/
+            - name: Upload Test Results
+              if: failure()
+              uses: actions/upload-artifact@v4
+              with:
+                  name: test-results-linux-gcc-${{ matrix.build_type }}
+                  path: build/${{ matrix.build_type }}/linux/Testing/
 
-  # ============================================================================
-  # Build and Test - Linux Clang (Latest)
-  # ============================================================================
-  build-linux-clang:
-    name: Linux Clang (${{ matrix.build_type }})
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        build_type: [debug, release]
-        include:
-          - build_type: debug
-            cmake_type: Debug
-          - build_type: release
-            cmake_type: Release
+    # ============================================================================
+    # Build and Test - Linux Clang (Latest)
+    # ============================================================================
+    build-linux-clang:
+        name: Linux Clang (${{ matrix.build_type }})
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                build_type: [debug, release]
+                include:
+                    - build_type: debug
+                      cmake_type: Debug
+                    - build_type: release
+                      cmake_type: Release
 
-    env:
-      CC: clang
-      CXX: clang++
+        env:
+            CC: clang
+            CXX: clang++
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          submodules: recursive
-          fetch-depth: 0
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+              with:
+                  submodules: recursive
+                  fetch-depth: 0
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
+            - name: Setup Python
+              uses: actions/setup-python@v5
+              with:
+                  python-version: "3.11"
 
-      - name: Install system dependencies
-        run: |
-          wget https://apt.llvm.org/llvm.sh
-          chmod +x llvm.sh
-          sudo ./llvm.sh 19
-          sudo apt-get update
-          sudo apt-get install -y \
-            libc++-19-dev \
-            libc++abi-19-dev \
-            cmake \
-            ninja-build \
-            python3 \
-            python3-pip
-          sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-19 190
-          sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-19 190
+            - name: Install system dependencies
+              run: |
+                  wget https://apt.llvm.org/llvm.sh
+                  chmod +x llvm.sh
+                  sudo ./llvm.sh 19
+                  sudo apt-get update
+                  sudo apt-get install -y \
+                    libc++-19-dev \
+                    libc++abi-19-dev \
+                    cmake \
+                    ninja-build \
+                    python3 \
+                    python3-pip
+                  sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-19 190
+                  sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-19 190
 
-      - name: Install project dependencies
-        run: |
-          python3 scripts/install_deps.py --use-system --no-interactive
+            - name: Install project dependencies
+              run: |
+                  python3 scripts/install_deps.py --use-system --no-interactive
 
-      - name: Configure CMake
-        run: |
-          python3 scripts/configure.py \
-            --compiler clang \
-            --type ${{ matrix.cmake_type }} \
-            --build-system Ninja \
-            --no-interactive
+            - name: Configure CMake
+              run: |
+                  python3 scripts/configure.py \
+                    --compiler clang \
+                    --type ${{ matrix.cmake_type }} \
+                    --build-system Ninja \
+                    --no-interactive
 
-      - name: Build
-        run: |
-          python3 scripts/build.py \
-            --compiler clang \
-            --type ${{ matrix.cmake_type }} \
-            --build-system Ninja \
-            --tests \
-            --no-examples \
-            --no-interactive
+            - name: Build
+              run: |
+                  python3 scripts/build.py \
+                    --compiler clang \
+                    --type ${{ matrix.cmake_type }} \
+                    --build-system Ninja \
+                    --tests \
+                    --no-examples \
+                    --no-interactive
 
-      - name: Run Tests
-        working-directory: build/${{ matrix.build_type }}/linux
-        run: |
-          ctest --output-on-failure --parallel 2
+            - name: Run Tests
+              working-directory: build/${{ matrix.build_type }}/linux
+              run: |
+                  ctest --output-on-failure --parallel 2
 
-      - name: Upload Test Results
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-results-linux-clang-${{ matrix.build_type }}
-          path: build/${{ matrix.build_type }}/linux/Testing/
+            - name: Upload Test Results
+              if: failure()
+              uses: actions/upload-artifact@v4
+              with:
+                  name: test-results-linux-clang-${{ matrix.build_type }}
+                  path: build/${{ matrix.build_type }}/linux/Testing/
 
-  # ============================================================================
-  # Build and Test - Windows MSVC (Latest)
-  # ============================================================================
-  build-windows-msvc:
-    name: Windows MSVC (${{ matrix.build_type }})
-    runs-on: windows-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        build_type: [debug, release]
-        include:
-          - build_type: debug
-            cmake_type: Debug
-          - build_type: release
-            cmake_type: Release
+    # ============================================================================
+    # Build and Test - Windows MSVC (Latest)
+    # ============================================================================
+    build-windows-msvc:
+        name: Windows MSVC (${{ matrix.build_type }})
+        runs-on: windows-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                build_type: [debug, release]
+                include:
+                    - build_type: debug
+                      cmake_type: Debug
+                    - build_type: release
+                      cmake_type: Release
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          submodules: recursive
-          fetch-depth: 0
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+              with:
+                  submodules: recursive
+                  fetch-depth: 0
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
+            - name: Setup Python
+              uses: actions/setup-python@v5
+              with:
+                  python-version: "3.11"
 
-      - name: Setup MSVC
-        uses: ilammy/msvc-dev-cmd@v1
-        with:
-          arch: x64
+            - name: Setup MSVC
+              uses: ilammy/msvc-dev-cmd@v1
+              with:
+                  arch: x64
 
-      - name: Install project dependencies
-        run: |
-          python scripts/install_deps.py --use-conan --no-interactive
+            - name: Install project dependencies
+              run: |
+                  python scripts/install_deps.py --use-conan --build-type ${{ matrix.cmake_type }} --no-interactive
 
-      - name: Configure CMake
-        run: |
-          python scripts/configure.py `
-            --compiler cl `
-            --type ${{ matrix.cmake_type }} `
-            --build-system Ninja `
-            --use-conan `
-            --no-interactive
+            - name: Configure CMake
+              run: |
+                  python scripts/configure.py `
+                    --compiler cl `
+                    --type ${{ matrix.cmake_type }} `
+                    --build-system Ninja `
+                    --use-conan `
+                    --no-interactive
 
-      - name: Build
-        run: |
-          python scripts/build.py `
-            --compiler cl `
-            --type ${{ matrix.cmake_type }} `
-            --build-system Ninja `
-            --tests `
-            --no-examples `
-            --use-conan `
-            --no-interactive
+            - name: Build
+              run: |
+                  python scripts/build.py `
+                    --compiler cl `
+                    --type ${{ matrix.cmake_type }} `
+                    --build-system Ninja `
+                    --tests `
+                    --no-examples `
+                    --use-conan `
+                    --no-interactive
 
-      - name: Run Tests
-        working-directory: build/${{ matrix.build_type }}/windows
-        run: |
-          ctest --output-on-failure --parallel 2
+            - name: Run Tests
+              working-directory: build/${{ matrix.build_type }}/windows
+              run: |
+                  ctest --output-on-failure --parallel 2
 
-      - name: Upload Test Results
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-results-windows-msvc-${{ matrix.build_type }}
-          path: build/${{ matrix.build_type }}/windows/Testing/
+            - name: Upload Test Results
+              if: failure()
+              uses: actions/upload-artifact@v4
+              with:
+                  name: test-results-windows-msvc-${{ matrix.build_type }}
+                  path: build/${{ matrix.build_type }}/windows/Testing/
 
-  # ============================================================================
-  # Build and Test - macOS (Latest)
-  # ============================================================================
-  build-macos:
-    name: macOS Clang (${{ matrix.build_type }})
-    runs-on: macos-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        build_type: [debug, release]
-        include:
-          - build_type: debug
-            cmake_type: Debug
-          - build_type: release
-            cmake_type: Release
+    # ============================================================================
+    # Build and Test - macOS (Latest)
+    # ============================================================================
+    build-macos:
+        name: macOS Clang (${{ matrix.build_type }})
+        runs-on: macos-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                build_type: [debug, release]
+                include:
+                    - build_type: debug
+                      cmake_type: Debug
+                    - build_type: release
+                      cmake_type: Release
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          submodules: recursive
-          fetch-depth: 0
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+              with:
+                  submodules: recursive
+                  fetch-depth: 0
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
+            - name: Setup Python
+              uses: actions/setup-python@v5
+              with:
+                  python-version: "3.11"
 
-      - name: Install system dependencies
-        run: |
-          brew install cmake ninja python3
+            - name: Install system dependencies
+              run: |
+                  brew install cmake ninja python3
 
-      - name: Install project dependencies
-        run: |
-          python3 scripts/install_deps.py --use-system --no-interactive
+            - name: Install project dependencies
+              run: |
+                  python3 scripts/install_deps.py --use-system --no-interactive
 
-      - name: Configure CMake
-        run: |
-          python3 scripts/configure.py \
-            --compiler clang \
-            --type ${{ matrix.cmake_type }} \
-            --build-system Ninja \
-            --no-interactive
+            - name: Configure CMake
+              run: |
+                  python3 scripts/configure.py \
+                    --compiler clang \
+                    --type ${{ matrix.cmake_type }} \
+                    --build-system Ninja \
+                    --no-interactive
 
-      - name: Build
-        run: |
-          python3 scripts/build.py \
-            --compiler clang \
-            --type ${{ matrix.cmake_type }} \
-            --build-system Ninja \
-            --tests \
-            --no-examples \
-            --no-interactive
+            - name: Build
+              run: |
+                  python3 scripts/build.py \
+                    --compiler clang \
+                    --type ${{ matrix.cmake_type }} \
+                    --build-system Ninja \
+                    --tests \
+                    --no-examples \
+                    --no-interactive
 
-      - name: Run Tests
-        working-directory: build/${{ matrix.build_type }}/macos
-        run: |
-          ctest --output-on-failure --parallel 2
+            - name: Run Tests
+              working-directory: build/${{ matrix.build_type }}/macos
+              run: |
+                  ctest --output-on-failure --parallel 2
 
-      - name: Upload Test Results
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-results-macos-${{ matrix.build_type }}
-          path: build/${{ matrix.build_type }}/macos/Testing/
+            - name: Upload Test Results
+              if: failure()
+              uses: actions/upload-artifact@v4
+              with:
+                  name: test-results-macos-${{ matrix.build_type }}
+                  path: build/${{ matrix.build_type }}/macos/Testing/
 
-  # ============================================================================
-  # Summary Job - Required for Branch Protection
-  # ============================================================================
-  build-success:
-    name: Build Success
-    runs-on: ubuntu-latest
-    needs:
-      - build-linux-gcc
-      - build-linux-clang
-      - build-windows-msvc
-      - build-macos
-    if: always()
-    steps:
-      - name: Check all jobs
-        run: |
-          if [[ "${{ needs.build-linux-gcc.result }}" != "success" ]]; then
-            echo "❌ Linux GCC build failed"
-            exit 1
-          fi
-          if [[ "${{ needs.build-linux-clang.result }}" != "success" ]]; then
-            echo "❌ Linux Clang build failed"
-            exit 1
-          fi
-          if [[ "${{ needs.build-windows-msvc.result }}" != "success" ]]; then
-            echo "❌ Windows MSVC build failed"
-            exit 1
-          fi
-          if [[ "${{ needs.build-macos.result }}" != "success" ]]; then
-            echo "❌ macOS build failed"
-            exit 1
-          fi
-          echo "✅ All builds passed!"
+    # ============================================================================
+    # Summary Job - Required for Branch Protection
+    # ============================================================================
+    build-success:
+        name: Build Success
+        runs-on: ubuntu-latest
+        needs:
+            - build-linux-gcc
+            - build-linux-clang
+            - build-windows-msvc
+            - build-macos
+        if: always()
+        steps:
+            - name: Check all jobs
+              run: |
+                  if [[ "${{ needs.build-linux-gcc.result }}" != "success" ]]; then
+                    echo "❌ Linux GCC build failed"
+                    exit 1
+                  fi
+                  if [[ "${{ needs.build-linux-clang.result }}" != "success" ]]; then
+                    echo "❌ Linux Clang build failed"
+                    exit 1
+                  fi
+                  if [[ "${{ needs.build-windows-msvc.result }}" != "success" ]]; then
+                    echo "❌ Windows MSVC build failed"
+                    exit 1
+                  fi
+                  if [[ "${{ needs.build-macos.result }}" != "success" ]]; then
+                    echo "❌ macOS build failed"
+                    exit 1
+                  fi
+                  echo "✅ All builds passed!"
 
-      - name: Report Success
-        run: |
-          echo "::notice::All build and test checks passed successfully!"
+            - name: Report Success
+              run: |
+                  echo "::notice::All build and test checks passed successfully!"

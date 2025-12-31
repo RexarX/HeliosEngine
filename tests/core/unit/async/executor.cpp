@@ -48,7 +48,8 @@ TEST_SUITE("async::Executor") {
       graph.EmplaceTask([&execution_count]() { execution_count++; });
 
       auto future = executor.Run(graph);
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "Task graph did not complete within timeout");
 
       CHECK_EQ(execution_count.load(), 1);
       CHECK_FALSE(graph.Empty());
@@ -60,7 +61,8 @@ TEST_SUITE("async::Executor") {
       graph.EmplaceTask([&execution_count]() { execution_count++; });
 
       auto future = executor.Run(std::move(graph));
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "Task graph did not complete within timeout");
 
       CHECK_EQ(execution_count.load(), 1);
     }
@@ -71,7 +73,8 @@ TEST_SUITE("async::Executor") {
 
       std::atomic<bool> callback_executed{false};
       auto future = executor.Run(graph, [&callback_executed]() { callback_executed = true; });
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "Task graph did not complete within timeout");
 
       CHECK_EQ(execution_count.load(), 1);
       CHECK(callback_executed.load());
@@ -83,7 +86,8 @@ TEST_SUITE("async::Executor") {
 
       std::atomic<bool> callback_executed{false};
       auto future = executor.Run(std::move(graph), [&callback_executed]() { callback_executed = true; });
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "Task graph did not complete within timeout");
 
       CHECK_EQ(execution_count.load(), 1);
       CHECK(callback_executed.load());
@@ -100,7 +104,8 @@ TEST_SUITE("async::Executor") {
       graph.EmplaceTask([&execution_count]() { execution_count++; });
 
       auto future = executor.RunN(graph, run_count);
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(2000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "RunN did not complete within timeout");
 
       CHECK_EQ(execution_count.load(), run_count);
     }
@@ -110,7 +115,8 @@ TEST_SUITE("async::Executor") {
       graph.EmplaceTask([&execution_count]() { execution_count++; });
 
       auto future = executor.RunN(std::move(graph), run_count);
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(2000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "RunN did not complete within timeout");
 
       CHECK_EQ(execution_count.load(), run_count);
     }
@@ -121,7 +127,8 @@ TEST_SUITE("async::Executor") {
 
       std::atomic<int> callback_count{0};
       auto future = executor.RunN(graph, run_count, [&callback_count]() { callback_count++; });
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(2000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "RunN with callback did not complete within timeout");
 
       CHECK_EQ(execution_count.load(), run_count);
       CHECK_EQ(callback_count.load(), 1);  // Callback is called once after all runs
@@ -133,7 +140,8 @@ TEST_SUITE("async::Executor") {
 
       std::atomic<int> callback_count{0};
       auto future = executor.RunN(std::move(graph), run_count, [&callback_count]() { callback_count++; });
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(2000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "RunN with callback did not complete within timeout");
 
       CHECK_EQ(execution_count.load(), run_count);
       CHECK_EQ(callback_count.load(), 1);
@@ -149,7 +157,8 @@ TEST_SUITE("async::Executor") {
       graph.EmplaceTask([&execution_count]() { execution_count++; });
 
       auto future = executor.RunUntil(graph, [&execution_count]() { return execution_count.load() >= 3; });
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(2000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "RunUntil did not complete within timeout");
 
       CHECK_GE(execution_count.load(), 3);
     }
@@ -159,7 +168,8 @@ TEST_SUITE("async::Executor") {
       graph.EmplaceTask([&execution_count]() { execution_count++; });
 
       auto future = executor.RunUntil(std::move(graph), [&execution_count]() { return execution_count.load() >= 3; });
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(2000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "RunUntil did not complete within timeout");
 
       CHECK_GE(execution_count.load(), 3);
     }
@@ -172,7 +182,8 @@ TEST_SUITE("async::Executor") {
       auto future = executor.RunUntil(
           graph, [&execution_count]() { return execution_count.load() >= 3; },
           [&callback_executed]() { callback_executed = true; });
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(2000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "RunUntil with callback did not complete within timeout");
 
       CHECK_GE(execution_count.load(), 3);
       CHECK(callback_executed.load());
@@ -186,7 +197,8 @@ TEST_SUITE("async::Executor") {
       auto future = executor.RunUntil(
           std::move(graph), [&execution_count]() { return execution_count.load() >= 3; },
           [&callback_executed]() { callback_executed = true; });
-      future.Wait();
+      auto status = future.WaitFor(std::chrono::milliseconds(2000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "RunUntil with callback did not complete within timeout");
 
       CHECK_GE(execution_count.load(), 3);
       CHECK(callback_executed.load());
@@ -209,7 +221,8 @@ TEST_SUITE("async::Executor") {
       auto future = executor.Async([&executed]() { executed = true; });
 
       CHECK(future.valid());
-      future.wait();
+      auto status = future.wait_for(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "Async task did not complete within timeout");
       CHECK(executed.load());
     }
 
@@ -268,8 +281,10 @@ TEST_SUITE("async::Executor") {
       CHECK_FALSE(dependent_task.Empty());
       CHECK(dependent_future.valid());
 
-      first_future.wait();
-      dependent_future.wait();
+      auto status1 = first_future.wait_for(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status1 == std::future_status::ready, "First dependent task did not complete within timeout");
+      auto status2 = dependent_future.wait_for(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status2 == std::future_status::ready, "Second dependent task did not complete within timeout");
 
       CHECK_LT(first_value.load(), second_value.load());
     }
@@ -287,7 +302,8 @@ TEST_SUITE("async::Executor") {
 
       CHECK_FALSE(dependent_task.Empty());
 
-      first_future.wait();
+      auto status = first_future.wait_for(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "First task did not complete within timeout");
       executor.WaitForAll();
 
       CHECK(first_executed.load());
@@ -307,7 +323,9 @@ TEST_SUITE("async::Executor") {
         worker_id_from_task = executor.CurrentWorkerId();
       });
 
-      future.wait();
+      auto status = future.wait_for(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready,
+                      "Worker thread identification task did not complete within timeout");
 
       CHECK(is_worker_from_task.load());
       CHECK_GE(worker_id_from_task.load(), 0);
@@ -328,7 +346,8 @@ TEST_SUITE("async::Executor") {
         executor.CoRun(inner_graph);
       });
 
-      future.wait();
+      auto status = future.wait_for(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "CoRun task did not complete within timeout");
       CHECK(corun_executed.load());
     }
 
@@ -342,7 +361,8 @@ TEST_SUITE("async::Executor") {
         });
       });
 
-      future.wait();
+      auto status = future.wait_for(std::chrono::milliseconds(1000));
+      REQUIRE_MESSAGE(status == std::future_status::ready, "CoRunUntil task did not complete within timeout");
       CHECK_GE(counter.load(), 5);
     }
   }
@@ -409,7 +429,8 @@ TEST_SUITE("async::Executor") {
       should_continue = false;
 
       for (auto& future : futures) {
-        future.wait();
+        auto status = future.wait_for(std::chrono::milliseconds(1000));
+        REQUIRE_MESSAGE(status == std::future_status::ready, "Idle worker count task did not complete within timeout");
       }
     }
 

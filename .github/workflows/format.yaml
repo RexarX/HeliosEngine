@@ -4,11 +4,11 @@ on:
     push:
         branches:
             - main
-            - develop
+            - dev
     pull_request:
         branches:
             - main
-            - develop
+            - dev
     workflow_dispatch:
 
 # Cancel in-progress runs for the same PR/branch
