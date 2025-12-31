@@ -16,6 +16,29 @@
 
 namespace helios::app {
 
+App::~App() {
+  // Ensure we're not running (should already be false if properly shut down)
+  is_running_.store(false, std::memory_order_release);
+
+  // Wait for any pending overlapping sub-app updates
+  WaitForOverlappingUpdates();
+
+  // Wait for all pending executor tasks to complete
+  executor_.WaitForAll();
+}
+
+void App::Clear() {
+  HELIOS_ASSERT(!IsRunning(), "Failed to clear app: Cannot clear app while it is running!");
+
+  WaitForOverlappingUpdates();  // Ensure all async work is done
+  sub_app_overlapping_futures_.clear();
+  main_sub_app_.Clear();
+  sub_apps_.clear();
+  sub_app_index_map_.clear();
+
+  is_initialized_ = false;
+}
+
 AppExitCode App::Run() {
   HELIOS_ASSERT(!IsRunning(), "Failed to run: App is already running!");
 
@@ -35,7 +58,13 @@ AppExitCode App::Run() {
   executor_.WaitForAll();
 
   DestroyModules();
-  Clear();
+
+  // Reset state
+  is_initialized_ = false;
+  sub_app_overlapping_futures_.clear();
+  main_sub_app_.Clear();
+  sub_apps_.clear();
+  sub_app_index_map_.clear();
 
   HELIOS_INFO("Application exiting with code: {}", std::to_underlying(exit_code));
   return exit_code;

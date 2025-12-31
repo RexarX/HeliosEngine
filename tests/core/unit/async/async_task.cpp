@@ -118,7 +118,14 @@ TEST_SUITE("async::AsyncTask") {
           },
           deps);
 
-      std::this_thread::sleep_for(std::chrono::milliseconds(20));
+      // Wait for task to complete with timeout
+      constexpr int max_wait_ms = 500;
+      constexpr int check_interval_ms = 5;
+      int waited_ms = 0;
+      while (!task.Done() && waited_ms < max_wait_ms) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(check_interval_ms));
+        waited_ms += check_interval_ms;
+      }
 
       CHECK_FALSE(task.Empty());
       CHECK(task.Done());

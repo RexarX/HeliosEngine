@@ -492,29 +492,6 @@ private:
   std::unordered_map<size_t, std::vector<std::shared_future<void>>> sub_app_overlapping_futures_;
 };
 
-inline App::~App() {
-  // Ensure we're not running (should already be false if properly shut down)
-  is_running_.store(false, std::memory_order_release);
-
-  // Wait for any pending overlapping sub-app updates
-  WaitForOverlappingUpdates();
-
-  // Wait for all pending executor tasks to complete
-  executor_.WaitForAll();
-}
-
-inline void App::Clear() {
-  HELIOS_ASSERT(!IsRunning(), "Failed to clear app: Cannot clear app while it is running!");
-
-  WaitForOverlappingUpdates();  // Ensure all async work is done
-  sub_app_overlapping_futures_.clear();
-  main_sub_app_.Clear();
-  sub_apps_.clear();
-  sub_app_index_map_.clear();
-
-  is_initialized_ = false;
-}
-
 template <SubAppTrait T>
 inline auto App::AddSubApp(this auto&& self, T /*sub_app*/) -> decltype(std::forward<decltype(self)>(self)) {
   HELIOS_ASSERT(!self.IsInitialized(), "Failed to add sub app '{}': Cannot add sub apps after app initialization!",
