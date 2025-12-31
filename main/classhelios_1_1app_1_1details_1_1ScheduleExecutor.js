@@ -9,12 +9,15 @@ var classhelios_1_1app_1_1details_1_1ScheduleExecutor =
     [ "BuildExecutionGraph", "classhelios_1_1app_1_1details_1_1ScheduleExecutor.html#a6f778d545f3050125e4a51ec91527653", null ],
     [ "Clear", "classhelios_1_1app_1_1details_1_1ScheduleExecutor.html#a756f72b29a897460140b71498b09b243", null ],
     [ "Contains", "classhelios_1_1app_1_1details_1_1ScheduleExecutor.html#a6080fa9d818e354371eb1915761906ed", null ],
+    [ "ContainsSystemOfType", "classhelios_1_1app_1_1details_1_1ScheduleExecutor.html#a89a04fbd37efee52a56a787f671b98f4", null ],
     [ "Empty", "classhelios_1_1app_1_1details_1_1ScheduleExecutor.html#a54171b58bd4302e04c164fc570463e79", null ],
     [ "Execute", "classhelios_1_1app_1_1details_1_1ScheduleExecutor.html#afae39b7d3dde1aa34de8e70a3c0ec040", null ],
+    [ "FindSystemIndexByType", "classhelios_1_1app_1_1details_1_1ScheduleExecutor.html#a24c9acd7d9ec188d64d35f6c4dfdb682", null ],
     [ "GetScheduleId", "classhelios_1_1app_1_1details_1_1ScheduleExecutor.html#a3c6a1603648f8824b5d1ab07dade65b5", null ],
     [ "IsMainStage", "classhelios_1_1app_1_1details_1_1ScheduleExecutor.html#a697b41fff447c7234a922931c7f7bc59", null ],
     [ "operator=", "classhelios_1_1app_1_1details_1_1ScheduleExecutor.html#a7fe57dbec8c1119285927c36a2ed485a", null ],
     [ "operator=", "classhelios_1_1app_1_1details_1_1ScheduleExecutor.html#a94aac8beb42811266cd9a652813514ee", null ],
     [ "RegisterOrdering", "classhelios_1_1app_1_1details_1_1ScheduleExecutor.html#a2ef599f471cb55b5138be302f7910c45", null ],
-    [ "SystemCount", "classhelios_1_1app_1_1details_1_1ScheduleExecutor.html#a90ff3bcef3040d7200bdfffae9662575", null ]
+    [ "SystemCount", "classhelios_1_1app_1_1details_1_1ScheduleExecutor.html#a90ff3bcef3040d7200bdfffae9662575", null ],
+    [ "SystemIndices", "classhelios_1_1app_1_1details_1_1ScheduleExecutor.html#a7b8b93920184a9ec3ee9d1c04b782d66", null ]
 ];

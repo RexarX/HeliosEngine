@@ -627,7 +627,7 @@ $(document).ready(function(){initNavTree('growable__allocator_8hpp_source.html',
 <div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span>  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (</div>
 <div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span>      <span class="keyword">requires</span> { std::declval&lt;Allocator&gt;().Deallocate(ptr, size); } ||</div>
 <div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span>      <span class="keyword">requires</span> { std::declval&lt;Allocator&gt;().Deallocate(ptr); }) {</div>
-<div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span>    <span class="keyword">const</span> std::scoped_lock lock(mutex_);</div>
+<div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span>    <span class="keyword">const</span> std::shared_lock lock(mutex_);</div>
 <div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span> </div>
 <div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span>    <span class="keyword">auto</span>* allocator = FindOwningAllocator(ptr);</div>
 <div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span>    <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(allocator != <span class="keyword">nullptr</span>, <span class="stringliteral">&quot;Failed to deallocate memory: pointer does not belong to any allocator!&quot;</span>);</div>

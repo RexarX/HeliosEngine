@@ -735,7 +735,7 @@ requires std::default_initializable&lt;T&gt;</div>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00197">197</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  197</span>{ <span class="keywordflow">return</span> offset_.load(std::memory_order_acquire); }</div>
+<div class="fragment"><div class="line"><span class="lineno">  197</span>{ <span class="keywordflow">return</span> offset_.load(std::memory_order_relaxed); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -871,7 +871,7 @@ requires std::default_initializable&lt;T&gt;</div>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00171">171</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  171</span>{ <span class="keywordflow">return</span> offset_.load(std::memory_order_acquire) == 0; }</div>
+<div class="fragment"><div class="line"><span class="lineno">  171</span>{ <span class="keywordflow">return</span> offset_.load(std::memory_order_relaxed) == 0; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -905,7 +905,7 @@ requires std::default_initializable&lt;T&gt;</div>
 
 <p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00346">346</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  346</span>                                                       {</div>
-<div class="line"><span class="lineno">  347</span>  <span class="keyword">const</span> <span class="keyword">auto</span> current = offset_.load(std::memory_order_acquire);</div>
+<div class="line"><span class="lineno">  347</span>  <span class="keyword">const</span> <span class="keyword">auto</span> current = offset_.load(std::memory_order_relaxed);</div>
 <div class="line"><span class="lineno">  348</span>  <span class="keywordflow">return</span> current &lt; capacity_ ? capacity_ - current : 0;</div>
 <div class="line"><span class="lineno">  349</span>}</div>
 </div><!-- fragment -->
@@ -940,7 +940,7 @@ requires std::default_initializable&lt;T&gt;</div>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00177">177</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  177</span>{ <span class="keywordflow">return</span> offset_.load(std::memory_order_acquire) &gt;= capacity_; }</div>
+<div class="fragment"><div class="line"><span class="lineno">  177</span>{ <span class="keywordflow">return</span> offset_.load(std::memory_order_relaxed) &gt;= capacity_; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1089,10 +1089,10 @@ requires std::default_initializable&lt;T&gt;</div>
 
 <p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00327">327</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  327</span>                                                           {</div>
-<div class="line"><span class="lineno">  328</span>  <span class="keyword">const</span> <span class="keyword">auto</span> current_offset = offset_.load(std::memory_order_acquire);</div>
-<div class="line"><span class="lineno">  329</span>  <span class="keyword">const</span> <span class="keyword">auto</span> peak = peak_offset_.load(std::memory_order_acquire);</div>
-<div class="line"><span class="lineno">  330</span>  <span class="keyword">const</span> <span class="keyword">auto</span> alloc_count = allocation_count_.load(std::memory_order_acquire);</div>
-<div class="line"><span class="lineno">  331</span>  <span class="keyword">const</span> <span class="keyword">auto</span> waste = alignment_waste_.load(std::memory_order_acquire);</div>
+<div class="line"><span class="lineno">  328</span>  <span class="keyword">const</span> <span class="keyword">auto</span> current_offset = offset_.load(std::memory_order_relaxed);</div>
+<div class="line"><span class="lineno">  329</span>  <span class="keyword">const</span> <span class="keyword">auto</span> peak = peak_offset_.load(std::memory_order_relaxed);</div>
+<div class="line"><span class="lineno">  330</span>  <span class="keyword">const</span> <span class="keyword">auto</span> alloc_count = allocation_count_.load(std::memory_order_relaxed);</div>
+<div class="line"><span class="lineno">  331</span>  <span class="keyword">const</span> <span class="keyword">auto</span> waste = alignment_waste_.load(std::memory_order_relaxed);</div>
 <div class="line"><span class="lineno">  332</span> </div>
 <div class="line"><span class="lineno">  333</span>  <span class="comment">// In an arena, we conceptually &quot;free&quot; everything on reset, but we do not track per-block frees.</span></div>
 <div class="line"><span class="lineno">  334</span>  <span class="comment">// total_freed is modeled as 0; deallocations count remains 0 because `Deallocate` is a no-op.</span></div>

@@ -610,7 +610,7 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (</div>
 <div class="line">      <span class="keyword">requires</span> { std::declval&lt;Allocator&gt;().Deallocate(ptr, size); } ||</div>
 <div class="line">      <span class="keyword">requires</span> { std::declval&lt;Allocator&gt;().Deallocate(ptr); }) {</div>
-<div class="line">    <span class="keyword">const</span> std::scoped_lock lock(mutex_);</div>
+<div class="line">    <span class="keyword">const</span> std::shared_lock lock(mutex_);</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">auto</span>* allocator = FindOwningAllocator(ptr);</div>
 <div class="line">    <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(allocator != <span class="keyword">nullptr</span>, <span class="stringliteral">&quot;Failed to deallocate memory: pointer does not belong to any allocator!&quot;</span>);</div>

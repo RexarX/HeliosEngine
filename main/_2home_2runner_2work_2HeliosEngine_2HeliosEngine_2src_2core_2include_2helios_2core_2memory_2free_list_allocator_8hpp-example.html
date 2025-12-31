@@ -211,8 +211,6 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="comment"> * May suffer from fragmentation over time with varied allocation patterns.</span></div>
 <div class="line"><span class="comment"> * Adjacent free blocks are coalesced to reduce fragmentation.</span></div>
 <div class="line"><span class="comment"> *</span></div>
-<div class="line"><span class="comment"> * Uses mutex for allocation/deallocation operations.</span></div>
-<div class="line"><span class="comment"> *</span></div>
 <div class="line"><span class="comment"> * @note Thread-safe.</span></div>
 <div class="line"><span class="comment"> */</span></div>
 <div class="line"><span class="keyword">class </span>FreeListAllocator final {</div>
@@ -475,18 +473,26 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line">    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line">  }</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">const</span> std::scoped_lock lock(mutex_);</div>
-<div class="line">  <span class="keyword">const</span> std::scoped_lock other_lock(other.mutex_);</div>
+<div class="line">  {</div>
+<div class="line">    <span class="keyword">const</span> std::scoped_lock lock(mutex_);</div>
+<div class="line">    <span class="keyword">const</span> std::scoped_lock other_lock(other.mutex_);</div>
 <div class="line"> </div>
-<div class="line">  <span class="comment">// Free current buffer</span></div>
-<div class="line">  <span class="keywordflow">if</span> (buffer_ != <span class="keyword">nullptr</span>) {</div>
-<div class="line">    <a class="code hl_function" href="namespacehelios_1_1memory.html#abbe59f6529258733707c209398f9a30f">AlignedFree</a>(buffer_);</div>
+<div class="line">    <span class="comment">// Free current buffer</span></div>
+<div class="line">    <span class="keywordflow">if</span> (buffer_ != <span class="keyword">nullptr</span>) {</div>
+<div class="line">      <a class="code hl_function" href="namespacehelios_1_1memory.html#abbe59f6529258733707c209398f9a30f">AlignedFree</a>(buffer_);</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Move from other</span></div>
+<div class="line">    buffer_ = other.buffer_;</div>
+<div class="line">    free_list_head_ = other.free_list_head_;</div>
+<div class="line">    capacity_ = other.capacity_;</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Reset other</span></div>
+<div class="line">    other.buffer_ = <span class="keyword">nullptr</span>;</div>
+<div class="line">    other.free_list_head_ = <span class="keyword">nullptr</span>;</div>
+<div class="line">    other.capacity_ = 0;</div>
 <div class="line">  }</div>
 <div class="line"> </div>
-<div class="line">  <span class="comment">// Move from other</span></div>
-<div class="line">  buffer_ = other.buffer_;</div>
-<div class="line">  free_list_head_ = other.free_list_head_;</div>
-<div class="line">  capacity_ = other.capacity_;</div>
 <div class="line">  used_memory_.store(other.used_memory_.load(std::memory_order_acquire), std::memory_order_release);</div>
 <div class="line">  peak_usage_.store(other.peak_usage_.load(std::memory_order_acquire), std::memory_order_release);</div>
 <div class="line">  free_block_count_.store(other.free_block_count_.load(std::memory_order_acquire), std::memory_order_release);</div>
@@ -495,10 +501,6 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line">  total_deallocations_.store(other.total_deallocations_.load(std::memory_order_acquire), std::memory_order_release);</div>
 <div class="line">  alignment_waste_.store(other.alignment_waste_.load(std::memory_order_acquire), std::memory_order_release);</div>
 <div class="line"> </div>
-<div class="line">  <span class="comment">// Reset other</span></div>
-<div class="line">  other.buffer_ = <span class="keyword">nullptr</span>;</div>
-<div class="line">  other.free_list_head_ = <span class="keyword">nullptr</span>;</div>
-<div class="line">  other.capacity_ = 0;</div>
 <div class="line">  other.used_memory_.store(0, std::memory_order_release);</div>
 <div class="line">  other.peak_usage_.store(0, std::memory_order_release);</div>
 <div class="line">  other.free_block_count_.store(0, std::memory_order_release);</div>
@@ -520,51 +522,60 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line">    <span class="keywordflow">return</span> {.ptr = <span class="keyword">nullptr</span>, .allocated_size = 0};</div>
 <div class="line">  }</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">const</span> std::scoped_lock lock(mutex_);</div>
-<div class="line"> </div>
 <div class="line">  <span class="comment">// Calculate total size needed (with header and alignment padding)</span></div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">size_t</span> header_size = <span class="keyword">sizeof</span>(AllocationHeader);</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">size_t</span> min_block_size = header_size + size;</div>
 <div class="line"> </div>
-<div class="line">  <span class="comment">// Find best-fit block</span></div>
-<div class="line">  FreeBlockHeader* prev_block = <span class="keyword">nullptr</span>;</div>
-<div class="line">  FreeBlockHeader* best_block = FindBestFit(min_block_size + alignment, &amp;prev_block);</div>
+<div class="line">  <span class="keywordtype">size_t</span> total_size = 0;</div>
+<div class="line">  <span class="keywordtype">size_t</span> padding = 0;</div>
 <div class="line"> </div>
-<div class="line">  <span class="keywordflow">if</span> (best_block == <span class="keyword">nullptr</span>) {</div>
-<div class="line">    <span class="keywordflow">return</span> {.ptr = <span class="keyword">nullptr</span>, .allocated_size = 0};</div>
+<div class="line">  AllocationResult result{.ptr = <span class="keyword">nullptr</span>, .allocated_size = 0};</div>
+<div class="line"> </div>
+<div class="line">  {</div>
+<div class="line">    <span class="keyword">const</span> std::scoped_lock lock(mutex_);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Find best-fit block</span></div>
+<div class="line">    FreeBlockHeader* prev_block = <span class="keyword">nullptr</span>;</div>
+<div class="line">    FreeBlockHeader* best_block = FindBestFit(min_block_size + alignment, &amp;prev_block);</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">if</span> (best_block == <span class="keyword">nullptr</span>) [[unlikely]] {</div>
+<div class="line">      <span class="keywordflow">return</span> result;</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Calculate aligned position for user data</span></div>
+<div class="line">    <span class="keyword">auto</span>* block_start = <span class="keyword">reinterpret_cast&lt;</span>uint8_t*<span class="keyword">&gt;</span>(best_block);</div>
+<div class="line">    uint8_t* header_ptr = block_start;</div>
+<div class="line">    padding = <a id="a23" name="a23"></a><a class="code hl_function" href="namespacehelios_1_1memory.html#aebee6d30b47c174e1de5b7bcc30997e9">CalculatePaddingWithHeader</a>(header_ptr, alignment, header_size);</div>
+<div class="line">    uint8_t* aligned_data = block_start + padding;</div>
+<div class="line"> </div>
+<div class="line">    total_size = padding + size;</div>
+<div class="line">    <span class="keyword">const</span> <span class="keywordtype">size_t</span> remaining_size = best_block-&gt;size - total_size;</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Remove block from free list</span></div>
+<div class="line">    <span class="keywordflow">if</span> (prev_block != <span class="keyword">nullptr</span>) {</div>
+<div class="line">      prev_block-&gt;next = best_block-&gt;next;</div>
+<div class="line">    } <span class="keywordflow">else</span> {</div>
+<div class="line">      free_list_head_ = best_block-&gt;next;</div>
+<div class="line">    }</div>
+<div class="line">    free_block_count_.fetch_sub(1, std::memory_order_relaxed);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// If there&#39;s enough space left, create a new free block</span></div>
+<div class="line">    <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> min_free_block_size = <span class="keyword">sizeof</span>(FreeBlockHeader) + 16;</div>
+<div class="line">    <span class="keywordflow">if</span> (remaining_size &gt;= min_free_block_size) {</div>
+<div class="line">      <span class="keyword">auto</span>* new_free_block = <span class="keyword">reinterpret_cast&lt;</span>FreeBlockHeader*<span class="keyword">&gt;</span>(block_start + total_size);</div>
+<div class="line">      new_free_block-&gt;size = remaining_size;</div>
+<div class="line">      new_free_block-&gt;next = free_list_head_;</div>
+<div class="line">      free_list_head_ = new_free_block;</div>
+<div class="line">      free_block_count_.fetch_add(1, std::memory_order_relaxed);</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Write allocation header</span></div>
+<div class="line">    <span class="keyword">auto</span>* alloc_header = <span class="keyword">reinterpret_cast&lt;</span>AllocationHeader*<span class="keyword">&gt;</span>(aligned_data - header_size);</div>
+<div class="line">    alloc_header-&gt;size = total_size;</div>
+<div class="line">    alloc_header-&gt;padding = padding;</div>
+<div class="line"> </div>
+<div class="line">    result = {.ptr = aligned_data, .allocated_size = size};</div>
 <div class="line">  }</div>
-<div class="line"> </div>
-<div class="line">  <span class="comment">// Calculate aligned position for user data</span></div>
-<div class="line">  <span class="keyword">auto</span>* block_start = <span class="keyword">reinterpret_cast&lt;</span>uint8_t*<span class="keyword">&gt;</span>(best_block);</div>
-<div class="line">  <span class="keyword">auto</span>* header_ptr = block_start;</div>
-<div class="line">  <span class="keyword">const</span> <span class="keywordtype">size_t</span> padding = <a id="a23" name="a23"></a><a class="code hl_function" href="namespacehelios_1_1memory.html#aebee6d30b47c174e1de5b7bcc30997e9">CalculatePaddingWithHeader</a>(header_ptr, alignment, header_size);</div>
-<div class="line">  <span class="keyword">auto</span>* aligned_data = block_start + padding;</div>
-<div class="line"> </div>
-<div class="line">  <span class="keyword">const</span> <span class="keywordtype">size_t</span> total_size = padding + size;</div>
-<div class="line">  <span class="keyword">const</span> <span class="keywordtype">size_t</span> remaining_size = best_block-&gt;size - total_size;</div>
-<div class="line"> </div>
-<div class="line">  <span class="comment">// Remove block from free list</span></div>
-<div class="line">  <span class="keywordflow">if</span> (prev_block != <span class="keyword">nullptr</span>) {</div>
-<div class="line">    prev_block-&gt;next = best_block-&gt;next;</div>
-<div class="line">  } <span class="keywordflow">else</span> {</div>
-<div class="line">    free_list_head_ = best_block-&gt;next;</div>
-<div class="line">  }</div>
-<div class="line">  free_block_count_.fetch_sub(1, std::memory_order_relaxed);</div>
-<div class="line"> </div>
-<div class="line">  <span class="comment">// If there&#39;s enough space left, create a new free block</span></div>
-<div class="line">  <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> min_free_block_size = <span class="keyword">sizeof</span>(FreeBlockHeader) + 16;</div>
-<div class="line">  <span class="keywordflow">if</span> (remaining_size &gt;= min_free_block_size) {</div>
-<div class="line">    <span class="keyword">auto</span>* new_free_block = <span class="keyword">reinterpret_cast&lt;</span>FreeBlockHeader*<span class="keyword">&gt;</span>(block_start + total_size);</div>
-<div class="line">    new_free_block-&gt;size = remaining_size;</div>
-<div class="line">    new_free_block-&gt;next = free_list_head_;</div>
-<div class="line">    free_list_head_ = new_free_block;</div>
-<div class="line">    free_block_count_.fetch_add(1, std::memory_order_relaxed);</div>
-<div class="line">  }</div>
-<div class="line"> </div>
-<div class="line">  <span class="comment">// Write allocation header</span></div>
-<div class="line">  <span class="keyword">auto</span>* alloc_header = <span class="keyword">reinterpret_cast&lt;</span>AllocationHeader*<span class="keyword">&gt;</span>(aligned_data - header_size);</div>
-<div class="line">  alloc_header-&gt;size = total_size;</div>
-<div class="line">  alloc_header-&gt;padding = padding;</div>
 <div class="line"> </div>
 <div class="line">  <span class="comment">// Update stats</span></div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">size_t</span> new_used = used_memory_.fetch_add(total_size, std::memory_order_relaxed) + total_size;</div>
@@ -575,11 +586,12 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line">      <span class="keywordflow">break</span>;</div>
 <div class="line">    }</div>
 <div class="line">  }</div>
+<div class="line"> </div>
 <div class="line">  allocation_count_.fetch_add(1, std::memory_order_relaxed);</div>
 <div class="line">  total_allocations_.fetch_add(1, std::memory_order_relaxed);</div>
 <div class="line">  alignment_waste_.fetch_add(padding - header_size, std::memory_order_relaxed);</div>
 <div class="line"> </div>
-<div class="line">  <span class="keywordflow">return</span> {aligned_data, size};</div>
+<div class="line">  <span class="keywordflow">return</span> result;</div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1memory_1_1FreeListAllocator.html#a43c72254480ba79ac0ee0747594bce1f">FreeListAllocator::Deallocate</a>(<span class="keywordtype">void</span>* ptr) <span class="keyword">noexcept</span> {</div>
@@ -588,8 +600,6 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line">  }</div>
 <div class="line"> </div>
 <div class="line">  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(Owns(ptr), <span class="stringliteral">&quot;Failed to deallocate memory: ptr does not belong to this allocator!&quot;</span>);</div>
-<div class="line"> </div>
-<div class="line">  <span class="keyword">const</span> std::scoped_lock lock(mutex_);</div>
 <div class="line"> </div>
 <div class="line">  <span class="comment">// Get allocation header</span></div>
 <div class="line">  <span class="keyword">auto</span>* alloc_header = <span class="keyword">reinterpret_cast&lt;</span>AllocationHeader*<span class="keyword">&gt;</span>(<span class="keyword">static_cast&lt;</span>uint8_t*<span class="keyword">&gt;</span>(ptr) - <span class="keyword">sizeof</span>(AllocationHeader));</div>
@@ -601,8 +611,6 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line">  <span class="comment">// Create new free block</span></div>
 <div class="line">  <span class="keyword">auto</span>* free_block = <span class="keyword">reinterpret_cast&lt;</span>FreeBlockHeader*<span class="keyword">&gt;</span>(block_start);</div>
 <div class="line">  free_block-&gt;size = block_size;</div>
-<div class="line">  free_block-&gt;next = free_list_head_;</div>
-<div class="line">  free_list_head_ = free_block;</div>
 <div class="line">  free_block_count_.fetch_add(1, std::memory_order_relaxed);</div>
 <div class="line"> </div>
 <div class="line">  <span class="comment">// Update stats</span></div>
@@ -610,13 +618,22 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line">  allocation_count_.fetch_sub(1, std::memory_order_relaxed);</div>
 <div class="line">  total_deallocations_.fetch_add(1, std::memory_order_relaxed);</div>
 <div class="line"> </div>
-<div class="line">  <span class="comment">// Coalesce adjacent free blocks</span></div>
-<div class="line">  CoalesceAdjacent(free_block);</div>
+<div class="line">  {</div>
+<div class="line">    <span class="keyword">const</span> std::scoped_lock lock(mutex_);</div>
+<div class="line">    free_block-&gt;next = free_list_head_;</div>
+<div class="line">    free_list_head_ = free_block;</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Coalesce adjacent free blocks</span></div>
+<div class="line">    CoalesceAdjacent(free_block);</div>
+<div class="line">  }</div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1memory_1_1FreeListAllocator.html#a8b92a0e2e115c74bcf6ca54194f3ce13">FreeListAllocator::Reset</a>() <span class="keyword">noexcept</span> {</div>
-<div class="line">  <span class="keyword">const</span> std::scoped_lock lock(mutex_);</div>
-<div class="line">  InitializeFreeList();</div>
+<div class="line">  {</div>
+<div class="line">    <span class="keyword">const</span> std::scoped_lock lock(mutex_);</div>
+<div class="line">    InitializeFreeList();</div>
+<div class="line">  }</div>
+<div class="line"> </div>
 <div class="line">  used_memory_.store(0, std::memory_order_release);</div>
 <div class="line">  allocation_count_.store(0, std::memory_order_release);</div>
 <div class="line">  alignment_waste_.store(0, std::memory_order_release);</div>
@@ -696,7 +713,7 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line">  <span class="comment">// We&#39;ll track if block gets merged into another block</span></div>
 <div class="line">  <span class="keywordtype">bool</span> block_merged = <span class="keyword">false</span>;</div>
 <div class="line">  <span class="keyword">auto</span>* block_start = <span class="keyword">reinterpret_cast&lt;</span>uint8_t*<span class="keyword">&gt;</span>(block);</div>
-<div class="line">  <span class="keyword">auto</span>* block_end = block_start + block-&gt;size;</div>
+<div class="line">  uint8_t* block_end = block_start + block-&gt;size;</div>
 <div class="line"> </div>
 <div class="line">  <span class="comment">// First pass: try to merge blocks that come after &#39;block&#39; in memory</span></div>
 <div class="line">  FreeBlockHeader* current = free_list_head_;</div>
@@ -746,7 +763,7 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line">    }</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">auto</span>* current_start = <span class="keyword">reinterpret_cast&lt;</span>uint8_t*<span class="keyword">&gt;</span>(current);</div>
-<div class="line">    <span class="keyword">auto</span>* current_end = current_start + current-&gt;size;</div>
+<div class="line">    uint8_t* current_end = current_start + current-&gt;size;</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// Check if our block is immediately after current block</span></div>
 <div class="line">    <span class="keywordflow">if</span> (current_end == block_start) {</div>
@@ -839,21 +856,21 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00140">assert.hpp:140</a></div></div>
 <div class="ttc" id="aassert_8hpp_html_a8b8608656bafeab9911c16dce4827a04"><div class="ttname"><a href="assert_8hpp.html#a8b8608656bafeab9911c16dce4827a04">HELIOS_VERIFY</a></div><div class="ttdeci">#define HELIOS_VERIFY(condition,...)</div><div class="ttdoc">Verify macro that always checks the condition.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00196">assert.hpp:196</a></div></div>
 <div class="ttc" id="aclasshelios_1_1memory_1_1FreeListAllocator_html_a0cb05df744865aabed9ef577ecb35f94"><div class="ttname"><a href="classhelios_1_1memory_1_1FreeListAllocator.html#a0cb05df744865aabed9ef577ecb35f94">helios::memory::FreeListAllocator::operator=</a></div><div class="ttdeci">FreeListAllocator &amp; operator=(const FreeListAllocator &amp;)=delete</div></div>
-<div class="ttc" id="aclasshelios_1_1memory_1_1FreeListAllocator_html_a1c0639a6775478d9444425aaf6babf79"><div class="ttname"><a href="classhelios_1_1memory_1_1FreeListAllocator.html#a1c0639a6775478d9444425aaf6babf79">helios::memory::FreeListAllocator::UsedMemory</a></div><div class="ttdeci">size_t UsedMemory() const noexcept</div><div class="ttdoc">Gets the amount of allocated memory.</div><div class="ttdef"><b>Definition</b> <a href="free__list__allocator_8hpp_source.html#l00178">free_list_allocator.hpp:178</a></div></div>
-<div class="ttc" id="aclasshelios_1_1memory_1_1FreeListAllocator_html_a2ae50907f4eb0d3227d5575a6a54ca14"><div class="ttname"><a href="classhelios_1_1memory_1_1FreeListAllocator.html#a2ae50907f4eb0d3227d5575a6a54ca14">helios::memory::FreeListAllocator::FreeMemory</a></div><div class="ttdeci">size_t FreeMemory() const noexcept</div><div class="ttdoc">Gets the amount of free memory.</div><div class="ttdef"><b>Definition</b> <a href="free__list__allocator_8hpp_source.html#l00184">free_list_allocator.hpp:184</a></div></div>
-<div class="ttc" id="aclasshelios_1_1memory_1_1FreeListAllocator_html_a2fcc2104a0a20704c2e3d59cf29f2e34"><div class="ttname"><a href="classhelios_1_1memory_1_1FreeListAllocator.html#a2fcc2104a0a20704c2e3d59cf29f2e34">helios::memory::FreeListAllocator::FreeListAllocator</a></div><div class="ttdeci">FreeListAllocator(size_t capacity)</div><div class="ttdoc">Constructs a free list allocator with specified capacity.</div><div class="ttdef"><b>Definition</b> <a href="free__list__allocator_8hpp_source.html#l00251">free_list_allocator.hpp:251</a></div></div>
-<div class="ttc" id="aclasshelios_1_1memory_1_1FreeListAllocator_html_a375aaef36442e8ef1df6d4ada82b9eaa"><div class="ttname"><a href="classhelios_1_1memory_1_1FreeListAllocator.html#a375aaef36442e8ef1df6d4ada82b9eaa">helios::memory::FreeListAllocator::Stats</a></div><div class="ttdeci">AllocatorStats Stats() const noexcept</div><div class="ttdoc">Gets current allocator statistics.</div><div class="ttdef"><b>Definition</b> <a href="free__list__allocator_8hpp_source.html#l00445">free_list_allocator.hpp:445</a></div></div>
-<div class="ttc" id="aclasshelios_1_1memory_1_1FreeListAllocator_html_a43c72254480ba79ac0ee0747594bce1f"><div class="ttname"><a href="classhelios_1_1memory_1_1FreeListAllocator.html#a43c72254480ba79ac0ee0747594bce1f">helios::memory::FreeListAllocator::Deallocate</a></div><div class="ttdeci">void Deallocate(void *ptr) noexcept</div><div class="ttdoc">Deallocates memory.</div><div class="ttdef"><b>Definition</b> <a href="free__list__allocator_8hpp_source.html#l00404">free_list_allocator.hpp:404</a></div></div>
-<div class="ttc" id="aclasshelios_1_1memory_1_1FreeListAllocator_html_a556511cffce51ca27280298e39899630"><div class="ttname"><a href="classhelios_1_1memory_1_1FreeListAllocator.html#a556511cffce51ca27280298e39899630">helios::memory::FreeListAllocator::Capacity</a></div><div class="ttdeci">size_t Capacity() const noexcept</div><div class="ttdoc">Gets the total capacity of the allocator.</div><div class="ttdef"><b>Definition</b> <a href="free__list__allocator_8hpp_source.html#l00172">free_list_allocator.hpp:172</a></div></div>
-<div class="ttc" id="aclasshelios_1_1memory_1_1FreeListAllocator_html_a56cd1b3002c7be1abcc2d1d9c9f22b45"><div class="ttname"><a href="classhelios_1_1memory_1_1FreeListAllocator.html#a56cd1b3002c7be1abcc2d1d9c9f22b45">helios::memory::FreeListAllocator::Empty</a></div><div class="ttdeci">bool Empty() const noexcept</div><div class="ttdoc">Checks if the allocator is empty (all memory free).</div><div class="ttdef"><b>Definition</b> <a href="free__list__allocator_8hpp_source.html#l00153">free_list_allocator.hpp:153</a></div></div>
-<div class="ttc" id="aclasshelios_1_1memory_1_1FreeListAllocator_html_a693c9450a6ffb8d057814d07eebc2640"><div class="ttname"><a href="classhelios_1_1memory_1_1FreeListAllocator.html#a693c9450a6ffb8d057814d07eebc2640">helios::memory::FreeListAllocator::~FreeListAllocator</a></div><div class="ttdeci">~FreeListAllocator() noexcept</div><div class="ttdef"><b>Definition</b> <a href="free__list__allocator_8hpp_source.html#l00286">free_list_allocator.hpp:286</a></div></div>
-<div class="ttc" id="aclasshelios_1_1memory_1_1FreeListAllocator_html_a7c39843f67b2c5fe4444e88bd53b6980"><div class="ttname"><a href="classhelios_1_1memory_1_1FreeListAllocator.html#a7c39843f67b2c5fe4444e88bd53b6980">helios::memory::FreeListAllocator::AllocateAndConstruct</a></div><div class="ttdeci">T * AllocateAndConstruct(Args &amp;&amp;... args) noexcept(std::is_nothrow_constructible_v&lt; T, Args... &gt;)</div><div class="ttdef"><b>Definition</b> <a href="free__list__allocator_8hpp_source.html#l00633">free_list_allocator.hpp:633</a></div></div>
-<div class="ttc" id="aclasshelios_1_1memory_1_1FreeListAllocator_html_a7fee2b7bf1f60e298e1c43dc45220b38"><div class="ttname"><a href="classhelios_1_1memory_1_1FreeListAllocator.html#a7fee2b7bf1f60e298e1c43dc45220b38">helios::memory::FreeListAllocator::AllocationCount</a></div><div class="ttdeci">size_t AllocationCount() const noexcept</div><div class="ttdoc">Gets the number of active allocations.</div><div class="ttdef"><b>Definition</b> <a href="free__list__allocator_8hpp_source.html#l00196">free_list_allocator.hpp:196</a></div></div>
-<div class="ttc" id="aclasshelios_1_1memory_1_1FreeListAllocator_html_a8131a0b48ca7fd723b6235928a96deac"><div class="ttname"><a href="classhelios_1_1memory_1_1FreeListAllocator.html#a8131a0b48ca7fd723b6235928a96deac">helios::memory::FreeListAllocator::Owns</a></div><div class="ttdeci">bool Owns(const void *ptr) const noexcept</div><div class="ttdoc">Checks if a pointer belongs to this allocator.</div><div class="ttdef"><b>Definition</b> <a href="free__list__allocator_8hpp_source.html#l00464">free_list_allocator.hpp:464</a></div></div>
-<div class="ttc" id="aclasshelios_1_1memory_1_1FreeListAllocator_html_a8b92a0e2e115c74bcf6ca54194f3ce13"><div class="ttname"><a href="classhelios_1_1memory_1_1FreeListAllocator.html#a8b92a0e2e115c74bcf6ca54194f3ce13">helios::memory::FreeListAllocator::Reset</a></div><div class="ttdeci">void Reset() noexcept</div><div class="ttdoc">Resets the allocator, freeing all allocations.</div><div class="ttdef"><b>Definition</b> <a href="free__list__allocator_8hpp_source.html#l00436">free_list_allocator.hpp:436</a></div></div>
-<div class="ttc" id="aclasshelios_1_1memory_1_1FreeListAllocator_html_ab97ac61f548b79e5750ac5e3757e37f8"><div class="ttname"><a href="classhelios_1_1memory_1_1FreeListAllocator.html#ab97ac61f548b79e5750ac5e3757e37f8">helios::memory::FreeListAllocator::FreeBlockCount</a></div><div class="ttdeci">size_t FreeBlockCount() const noexcept</div><div class="ttdoc">Gets the number of free blocks in the free list.</div><div class="ttdef"><b>Definition</b> <a href="free__list__allocator_8hpp_source.html#l00190">free_list_allocator.hpp:190</a></div></div>
-<div class="ttc" id="aclasshelios_1_1memory_1_1FreeListAllocator_html_adb64edc7f76b219507edf954df2b3065"><div class="ttname"><a href="classhelios_1_1memory_1_1FreeListAllocator.html#adb64edc7f76b219507edf954df2b3065">helios::memory::FreeListAllocator::AllocateAndConstructArray</a></div><div class="ttdeci">T * AllocateAndConstructArray(size_t count) noexcept(std::is_nothrow_default_constructible_v&lt; T &gt;)</div><div class="ttdef"><b>Definition</b> <a href="free__list__allocator_8hpp_source.html#l00644">free_list_allocator.hpp:644</a></div></div>
-<div class="ttc" id="aclasshelios_1_1memory_1_1FreeListAllocator_html_aec770f78726434d39d8adbaf3bc2483a"><div class="ttname"><a href="classhelios_1_1memory_1_1FreeListAllocator.html#aec770f78726434d39d8adbaf3bc2483a">helios::memory::FreeListAllocator::Allocate</a></div><div class="ttdeci">T * Allocate() noexcept</div><div class="ttdef"><b>Definition</b> <a href="free__list__allocator_8hpp_source.html#l00613">free_list_allocator.hpp:613</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1FreeListAllocator_html_a1c0639a6775478d9444425aaf6babf79"><div class="ttname"><a href="classhelios_1_1memory_1_1FreeListAllocator.html#a1c0639a6775478d9444425aaf6babf79">helios::memory::FreeListAllocator::UsedMemory</a></div><div class="ttdeci">size_t UsedMemory() const noexcept</div><div class="ttdoc">Gets the amount of allocated memory.</div><div class="ttdef"><b>Definition</b> <a href="free__list__allocator_8hpp_source.html#l00176">free_list_allocator.hpp:176</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1FreeListAllocator_html_a2ae50907f4eb0d3227d5575a6a54ca14"><div class="ttname"><a href="classhelios_1_1memory_1_1FreeListAllocator.html#a2ae50907f4eb0d3227d5575a6a54ca14">helios::memory::FreeListAllocator::FreeMemory</a></div><div class="ttdeci">size_t FreeMemory() const noexcept</div><div class="ttdoc">Gets the amount of free memory.</div><div class="ttdef"><b>Definition</b> <a href="free__list__allocator_8hpp_source.html#l00182">free_list_allocator.hpp:182</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1FreeListAllocator_html_a2fcc2104a0a20704c2e3d59cf29f2e34"><div class="ttname"><a href="classhelios_1_1memory_1_1FreeListAllocator.html#a2fcc2104a0a20704c2e3d59cf29f2e34">helios::memory::FreeListAllocator::FreeListAllocator</a></div><div class="ttdeci">FreeListAllocator(size_t capacity)</div><div class="ttdoc">Constructs a free list allocator with specified capacity.</div><div class="ttdef"><b>Definition</b> <a href="free__list__allocator_8hpp_source.html#l00249">free_list_allocator.hpp:249</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1FreeListAllocator_html_a375aaef36442e8ef1df6d4ada82b9eaa"><div class="ttname"><a href="classhelios_1_1memory_1_1FreeListAllocator.html#a375aaef36442e8ef1df6d4ada82b9eaa">helios::memory::FreeListAllocator::Stats</a></div><div class="ttdeci">AllocatorStats Stats() const noexcept</div><div class="ttdoc">Gets current allocator statistics.</div><div class="ttdef"><b>Definition</b> <a href="free__list__allocator_8hpp_source.html#l00462">free_list_allocator.hpp:462</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1FreeListAllocator_html_a43c72254480ba79ac0ee0747594bce1f"><div class="ttname"><a href="classhelios_1_1memory_1_1FreeListAllocator.html#a43c72254480ba79ac0ee0747594bce1f">helios::memory::FreeListAllocator::Deallocate</a></div><div class="ttdeci">void Deallocate(void *ptr) noexcept</div><div class="ttdoc">Deallocates memory.</div><div class="ttdef"><b>Definition</b> <a href="free__list__allocator_8hpp_source.html#l00416">free_list_allocator.hpp:416</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1FreeListAllocator_html_a556511cffce51ca27280298e39899630"><div class="ttname"><a href="classhelios_1_1memory_1_1FreeListAllocator.html#a556511cffce51ca27280298e39899630">helios::memory::FreeListAllocator::Capacity</a></div><div class="ttdeci">size_t Capacity() const noexcept</div><div class="ttdoc">Gets the total capacity of the allocator.</div><div class="ttdef"><b>Definition</b> <a href="free__list__allocator_8hpp_source.html#l00170">free_list_allocator.hpp:170</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1FreeListAllocator_html_a56cd1b3002c7be1abcc2d1d9c9f22b45"><div class="ttname"><a href="classhelios_1_1memory_1_1FreeListAllocator.html#a56cd1b3002c7be1abcc2d1d9c9f22b45">helios::memory::FreeListAllocator::Empty</a></div><div class="ttdeci">bool Empty() const noexcept</div><div class="ttdoc">Checks if the allocator is empty (all memory free).</div><div class="ttdef"><b>Definition</b> <a href="free__list__allocator_8hpp_source.html#l00151">free_list_allocator.hpp:151</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1FreeListAllocator_html_a693c9450a6ffb8d057814d07eebc2640"><div class="ttname"><a href="classhelios_1_1memory_1_1FreeListAllocator.html#a693c9450a6ffb8d057814d07eebc2640">helios::memory::FreeListAllocator::~FreeListAllocator</a></div><div class="ttdeci">~FreeListAllocator() noexcept</div><div class="ttdef"><b>Definition</b> <a href="free__list__allocator_8hpp_source.html#l00284">free_list_allocator.hpp:284</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1FreeListAllocator_html_a7c39843f67b2c5fe4444e88bd53b6980"><div class="ttname"><a href="classhelios_1_1memory_1_1FreeListAllocator.html#a7c39843f67b2c5fe4444e88bd53b6980">helios::memory::FreeListAllocator::AllocateAndConstruct</a></div><div class="ttdeci">T * AllocateAndConstruct(Args &amp;&amp;... args) noexcept(std::is_nothrow_constructible_v&lt; T, Args... &gt;)</div><div class="ttdef"><b>Definition</b> <a href="free__list__allocator_8hpp_source.html#l00650">free_list_allocator.hpp:650</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1FreeListAllocator_html_a7fee2b7bf1f60e298e1c43dc45220b38"><div class="ttname"><a href="classhelios_1_1memory_1_1FreeListAllocator.html#a7fee2b7bf1f60e298e1c43dc45220b38">helios::memory::FreeListAllocator::AllocationCount</a></div><div class="ttdeci">size_t AllocationCount() const noexcept</div><div class="ttdoc">Gets the number of active allocations.</div><div class="ttdef"><b>Definition</b> <a href="free__list__allocator_8hpp_source.html#l00194">free_list_allocator.hpp:194</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1FreeListAllocator_html_a8131a0b48ca7fd723b6235928a96deac"><div class="ttname"><a href="classhelios_1_1memory_1_1FreeListAllocator.html#a8131a0b48ca7fd723b6235928a96deac">helios::memory::FreeListAllocator::Owns</a></div><div class="ttdeci">bool Owns(const void *ptr) const noexcept</div><div class="ttdoc">Checks if a pointer belongs to this allocator.</div><div class="ttdef"><b>Definition</b> <a href="free__list__allocator_8hpp_source.html#l00481">free_list_allocator.hpp:481</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1FreeListAllocator_html_a8b92a0e2e115c74bcf6ca54194f3ce13"><div class="ttname"><a href="classhelios_1_1memory_1_1FreeListAllocator.html#a8b92a0e2e115c74bcf6ca54194f3ce13">helios::memory::FreeListAllocator::Reset</a></div><div class="ttdeci">void Reset() noexcept</div><div class="ttdoc">Resets the allocator, freeing all allocations.</div><div class="ttdef"><b>Definition</b> <a href="free__list__allocator_8hpp_source.html#l00450">free_list_allocator.hpp:450</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1FreeListAllocator_html_ab97ac61f548b79e5750ac5e3757e37f8"><div class="ttname"><a href="classhelios_1_1memory_1_1FreeListAllocator.html#ab97ac61f548b79e5750ac5e3757e37f8">helios::memory::FreeListAllocator::FreeBlockCount</a></div><div class="ttdeci">size_t FreeBlockCount() const noexcept</div><div class="ttdoc">Gets the number of free blocks in the free list.</div><div class="ttdef"><b>Definition</b> <a href="free__list__allocator_8hpp_source.html#l00188">free_list_allocator.hpp:188</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1FreeListAllocator_html_adb64edc7f76b219507edf954df2b3065"><div class="ttname"><a href="classhelios_1_1memory_1_1FreeListAllocator.html#adb64edc7f76b219507edf954df2b3065">helios::memory::FreeListAllocator::AllocateAndConstructArray</a></div><div class="ttdeci">T * AllocateAndConstructArray(size_t count) noexcept(std::is_nothrow_default_constructible_v&lt; T &gt;)</div><div class="ttdef"><b>Definition</b> <a href="free__list__allocator_8hpp_source.html#l00661">free_list_allocator.hpp:661</a></div></div>
+<div class="ttc" id="aclasshelios_1_1memory_1_1FreeListAllocator_html_aec770f78726434d39d8adbaf3bc2483a"><div class="ttname"><a href="classhelios_1_1memory_1_1FreeListAllocator.html#aec770f78726434d39d8adbaf3bc2483a">helios::memory::FreeListAllocator::Allocate</a></div><div class="ttdeci">T * Allocate() noexcept</div><div class="ttdef"><b>Definition</b> <a href="free__list__allocator_8hpp_source.html#l00630">free_list_allocator.hpp:630</a></div></div>
 <div class="ttc" id="acore__pch_8hpp_html"><div class="ttname"><a href="core__pch_8hpp.html">core_pch.hpp</a></div></div>
 <div class="ttc" id="alogger_8hpp_html"><div class="ttname"><a href="logger_8hpp.html">logger.hpp</a></div></div>
 <div class="ttc" id="amemory_2common_8hpp_html"><div class="ttname"><a href="memory_2common_8hpp.html">common.hpp</a></div></div>

@@ -174,7 +174,7 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
   </table>
   </dd>
 </dl>
-<div class="fragment"><div class="line">app.ConfigureSet&lt;PhysicsSet&gt;(Update{}).After&lt;InputSet&gt;().Before&lt;RenderSet&gt;();</div>
+<div class="fragment"><div class="line">app.ConfigureSet&lt;PhysicsSet&gt;(kUpdate).After&lt;InputSet&gt;().Before&lt;RenderSet&gt;();</div>
 </div><!-- fragment --><div class="fragment"><div class="line"><span class="preprocessor">#pragma once</span></div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="core__pch_8hpp.html">helios/core_pch.hpp</a>&gt;</span></div>
@@ -200,11 +200,11 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="comment"> *</span></div>
 <div class="line"><span class="comment"> * @example</span></div>
 <div class="line"><span class="comment"> * @code</span></div>
-<div class="line"><span class="comment"> * app.ConfigureSet&lt;PhysicsSet&gt;(Update{}).After&lt;InputSet&gt;().Before&lt;RenderSet&gt;();</span></div>
+<div class="line"><span class="comment"> * app.ConfigureSet&lt;PhysicsSet&gt;(kUpdate).After&lt;InputSet&gt;().Before&lt;RenderSet&gt;();</span></div>
 <div class="line"><span class="comment"> * @endcode</span></div>
 <div class="line"><span class="comment"> */</span></div>
 <div class="line"><span class="keyword">template</span> &lt;ScheduleTrait Schedule, SystemSetTrait Set&gt;</div>
-<div class="line"><span class="keyword">class </span>SystemSetConfig final {</div>
+<div class="line"><span class="keyword">class </span>SystemSetConfig {</div>
 <div class="line"><span class="keyword">public</span>:<span class="comment"></span></div>
 <div class="line"><span class="comment">  /**</span></div>
 <div class="line"><span class="comment">   * @brief Constructs a system set configuration builder.</span></div>

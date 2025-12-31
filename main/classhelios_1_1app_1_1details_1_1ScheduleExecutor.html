@@ -206,12 +206,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:afae39b7d3dde1aa34de8e70a3c0ec040" id="r_afae39b7d3dde1aa34de8e70a3c0ec040"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1details_1_1ScheduleExecutor.html#afae39b7d3dde1aa34de8e70a3c0ec040">Execute</a> (<a class="el" href="classhelios_1_1ecs_1_1World.html">ecs::World</a> &amp;world, <a class="el" href="classhelios_1_1async_1_1Executor.html">async::Executor</a> &amp;executor, std::span&lt; <a class="el" href="structhelios_1_1app_1_1details_1_1SystemStorage.html">SystemStorage</a> &gt; system_storage)</td></tr>
 <tr class="memdesc:afae39b7d3dde1aa34de8e70a3c0ec040"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes all systems in this schedule.  <br /></td></tr>
 <tr class="separator:afae39b7d3dde1aa34de8e70a3c0ec040"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24c9acd7d9ec188d64d35f6c4dfdb682" id="r_a24c9acd7d9ec188d64d35f6c4dfdb682"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1details_1_1ScheduleExecutor.html#a24c9acd7d9ec188d64d35f6c4dfdb682">FindSystemIndexByType</a> (<a class="el" href="namespacehelios_1_1ecs.html#ae8ceaaec54a33b280ced09180db654df">ecs::SystemTypeId</a> system_id, std::span&lt; const <a class="el" href="structhelios_1_1app_1_1details_1_1SystemStorage.html">SystemStorage</a> &gt; system_storage) const noexcept -&gt; std::optional&lt; size_t &gt;</td></tr>
+<tr class="memdesc:a24c9acd7d9ec188d64d35f6c4dfdb682"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the storage index of a system by type ID within this schedule.  <br /></td></tr>
+<tr class="separator:a24c9acd7d9ec188d64d35f6c4dfdb682"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a697b41fff447c7234a922931c7f7bc59" id="r_a697b41fff447c7234a922931c7f7bc59"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1details_1_1ScheduleExecutor.html#a697b41fff447c7234a922931c7f7bc59">IsMainStage</a> () const noexcept</td></tr>
 <tr class="memdesc:a697b41fff447c7234a922931c7f7bc59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if this schedule is the <a class="el" href="structhelios_1_1app_1_1Main.html" title="Main schedule - main thread execution.">Main</a> stage.  <br /></td></tr>
 <tr class="separator:a697b41fff447c7234a922931c7f7bc59"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6080fa9d818e354371eb1915761906ed" id="r_a6080fa9d818e354371eb1915761906ed"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1details_1_1ScheduleExecutor.html#a6080fa9d818e354371eb1915761906ed">Contains</a> (size_t system_storage_index) const noexcept</td></tr>
-<tr class="memdesc:a6080fa9d818e354371eb1915761906ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a system is in this schedule.  <br /></td></tr>
+<tr class="memdesc:a6080fa9d818e354371eb1915761906ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a system is in this schedule by storage index.  <br /></td></tr>
 <tr class="separator:a6080fa9d818e354371eb1915761906ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89a04fbd37efee52a56a787f671b98f4" id="r_a89a04fbd37efee52a56a787f671b98f4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1details_1_1ScheduleExecutor.html#a89a04fbd37efee52a56a787f671b98f4">ContainsSystemOfType</a> (<a class="el" href="namespacehelios_1_1ecs.html#ae8ceaaec54a33b280ced09180db654df">ecs::SystemTypeId</a> system_id, std::span&lt; const <a class="el" href="structhelios_1_1app_1_1details_1_1SystemStorage.html">SystemStorage</a> &gt; system_storage) const noexcept</td></tr>
+<tr class="memdesc:a89a04fbd37efee52a56a787f671b98f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a system of given type is in this schedule.  <br /></td></tr>
+<tr class="separator:a89a04fbd37efee52a56a787f671b98f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a54171b58bd4302e04c164fc570463e79" id="r_a54171b58bd4302e04c164fc570463e79"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1details_1_1ScheduleExecutor.html#a54171b58bd4302e04c164fc570463e79">Empty</a> () const noexcept</td></tr>
 <tr class="memdesc:a54171b58bd4302e04c164fc570463e79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if this schedule has any systems.  <br /></td></tr>
 <tr class="separator:a54171b58bd4302e04c164fc570463e79"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -221,6 +227,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a90ff3bcef3040d7200bdfffae9662575" id="r_a90ff3bcef3040d7200bdfffae9662575"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1details_1_1ScheduleExecutor.html#a90ff3bcef3040d7200bdfffae9662575">SystemCount</a> () const noexcept</td></tr>
 <tr class="memdesc:a90ff3bcef3040d7200bdfffae9662575"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of systems in this schedule.  <br /></td></tr>
 <tr class="separator:a90ff3bcef3040d7200bdfffae9662575"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b8b93920184a9ec3ee9d1c04b782d66" id="r_a7b8b93920184a9ec3ee9d1c04b782d66"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; size_t &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1details_1_1ScheduleExecutor.html#a7b8b93920184a9ec3ee9d1c04b782d66">SystemIndices</a> () const noexcept</td></tr>
+<tr class="memdesc:a7b8b93920184a9ec3ee9d1c04b782d66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets const reference to system indices in this schedule.  <br /></td></tr>
+<tr class="separator:a7b8b93920184a9ec3ee9d1c04b782d66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Manages system scheduling and execution for a single schedule. </p>
@@ -392,11 +401,11 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="scheduler_8hpp_source.html#l00205">205</a> of file <a class="el" href="scheduler_8hpp_source.html">scheduler.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  205</span>                                                                   {</div>
-<div class="line"><span class="lineno">  206</span>  system_indices_.push_back(system_storage_index);</div>
-<div class="line"><span class="lineno">  207</span>  graph_built_ = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  208</span>}</div>
+<p class="definition">Definition at line <a class="el" href="scheduler_8hpp_source.html#l00234">234</a> of file <a class="el" href="scheduler_8hpp_source.html">scheduler.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  234</span>                                                                   {</div>
+<div class="line"><span class="lineno">  235</span>  system_indices_.push_back(system_storage_index);</div>
+<div class="line"><span class="lineno">  236</span>  graph_built_ = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  237</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -486,13 +495,13 @@ Public Member Functions</h2></td></tr>
 
 <p>Clears all systems and resets the schedule. </p>
 
-<p class="definition">Definition at line <a class="el" href="scheduler_8hpp_source.html#l00198">198</a> of file <a class="el" href="scheduler_8hpp_source.html">scheduler.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  198</span>                                    {</div>
-<div class="line"><span class="lineno">  199</span>  system_indices_.clear();</div>
-<div class="line"><span class="lineno">  200</span>  system_orderings_.clear();</div>
-<div class="line"><span class="lineno">  201</span>  execution_graph_.<a class="code hl_function" href="classhelios_1_1async_1_1TaskGraph.html#a5133f755bc76abd68c65becb258e0201">Clear</a>();</div>
-<div class="line"><span class="lineno">  202</span>  graph_built_ = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  203</span>}</div>
+<p class="definition">Definition at line <a class="el" href="scheduler_8hpp_source.html#l00227">227</a> of file <a class="el" href="scheduler_8hpp_source.html">scheduler.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  227</span>                                    {</div>
+<div class="line"><span class="lineno">  228</span>  system_indices_.clear();</div>
+<div class="line"><span class="lineno">  229</span>  system_orderings_.clear();</div>
+<div class="line"><span class="lineno">  230</span>  execution_graph_.<a class="code hl_function" href="classhelios_1_1async_1_1TaskGraph.html#a5133f755bc76abd68c65becb258e0201">Clear</a>();</div>
+<div class="line"><span class="lineno">  231</span>  graph_built_ = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  232</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -520,7 +529,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Checks if a system is in this schedule. </p>
+<p>Checks if a system is in this schedule by storage index. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">system_storage_index</td><td>Index in the global system storage </td></tr>
@@ -529,10 +538,63 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if system is present, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="scheduler_8hpp_source.html#l00131">131</a> of file <a class="el" href="scheduler_8hpp_source.html">scheduler.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  131</span>                                                                          {</div>
-<div class="line"><span class="lineno">  132</span>    <span class="keywordflow">return</span> std::ranges::find(system_indices_, system_storage_index) != system_indices_.end();</div>
-<div class="line"><span class="lineno">  133</span>  }</div>
+<p class="definition">Definition at line <a class="el" href="scheduler_8hpp_source.html#l00141">141</a> of file <a class="el" href="scheduler_8hpp_source.html">scheduler.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  141</span>                                                                          {</div>
+<div class="line"><span class="lineno">  142</span>    <span class="keywordflow">return</span> std::ranges::find(system_indices_, system_storage_index) != system_indices_.end();</div>
+<div class="line"><span class="lineno">  143</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a89a04fbd37efee52a56a787f671b98f4" name="a89a04fbd37efee52a56a787f671b98f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89a04fbd37efee52a56a787f671b98f4">&#9670;&#160;</a></span>ContainsSystemOfType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::app::details::ScheduleExecutor::ContainsSystemOfType </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#ae8ceaaec54a33b280ced09180db654df">ecs::SystemTypeId</a>&#160;</td>
+          <td class="paramname"><em>system_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::span&lt; const <a class="el" href="structhelios_1_1app_1_1details_1_1SystemStorage.html">SystemStorage</a> &gt;&#160;</td>
+          <td class="paramname"><em>system_storage</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if a system of given type is in this schedule. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">system_id</td><td>System type ID to check </td></tr>
+    <tr><td class="paramname">system_storage</td><td>Reference to global system storage </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if system of this type is present, false otherwise </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="scheduler_8hpp_source.html#l00151">151</a> of file <a class="el" href="scheduler_8hpp_source.html">scheduler.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  152</span>                                                                                                      {</div>
+<div class="line"><span class="lineno">  153</span>    <span class="keywordflow">return</span> std::ranges::any_of(system_indices_, [system_storage, system_id](<span class="keywordtype">size_t</span> index) {</div>
+<div class="line"><span class="lineno">  154</span>      <span class="keywordflow">return</span> index &lt; system_storage.size() &amp;&amp; system_storage[index].info.type_id == system_id;</div>
+<div class="line"><span class="lineno">  155</span>    });</div>
+<div class="line"><span class="lineno">  156</span>  }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -562,8 +624,8 @@ Public Member Functions</h2></td></tr>
 <p>Checks if this schedule has any systems. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if empty, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="scheduler_8hpp_source.html#l00139">139</a> of file <a class="el" href="scheduler_8hpp_source.html">scheduler.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  139</span>{ <span class="keywordflow">return</span> system_indices_.empty(); }</div>
+<p class="definition">Definition at line <a class="el" href="scheduler_8hpp_source.html#l00162">162</a> of file <a class="el" href="scheduler_8hpp_source.html">scheduler.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  162</span>{ <span class="keywordflow">return</span> system_indices_.empty(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -644,7 +706,66 @@ Public Member Functions</h2></td></tr>
 <div class="line"><span class="lineno">   57</span>  }</div>
 <div class="line"><span class="lineno">   58</span>}</div>
 <div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00140">assert.hpp:140</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1details_1_1ScheduleExecutor_html_a697b41fff447c7234a922931c7f7bc59"><div class="ttname"><a href="classhelios_1_1app_1_1details_1_1ScheduleExecutor.html#a697b41fff447c7234a922931c7f7bc59">helios::app::details::ScheduleExecutor::IsMainStage</a></div><div class="ttdeci">bool IsMainStage() const noexcept</div><div class="ttdoc">Checks if this schedule is the Main stage.</div><div class="ttdef"><b>Definition</b> <a href="scheduler_8hpp_source.html#l00124">scheduler.hpp:124</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1details_1_1ScheduleExecutor_html_a697b41fff447c7234a922931c7f7bc59"><div class="ttname"><a href="classhelios_1_1app_1_1details_1_1ScheduleExecutor.html#a697b41fff447c7234a922931c7f7bc59">helios::app::details::ScheduleExecutor::IsMainStage</a></div><div class="ttdeci">bool IsMainStage() const noexcept</div><div class="ttdoc">Checks if this schedule is the Main stage.</div><div class="ttdef"><b>Definition</b> <a href="scheduler_8hpp_source.html#l00134">scheduler.hpp:134</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a24c9acd7d9ec188d64d35f6c4dfdb682" name="a24c9acd7d9ec188d64d35f6c4dfdb682"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24c9acd7d9ec188d64d35f6c4dfdb682">&#9670;&#160;</a></span>FindSystemIndexByType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::app::details::ScheduleExecutor::FindSystemIndexByType </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#ae8ceaaec54a33b280ced09180db654df">ecs::SystemTypeId</a>&#160;</td>
+          <td class="paramname"><em>system_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::span&lt; const <a class="el" href="structhelios_1_1app_1_1details_1_1SystemStorage.html">SystemStorage</a> &gt;&#160;</td>
+          <td class="paramname"><em>system_storage</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const -&gt; std::optional&lt;size_t&gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Finds the storage index of a system by type ID within this schedule. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">system_id</td><td>System type ID to find </td></tr>
+    <tr><td class="paramname">system_storage</td><td>Reference to global system storage </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Index in system storage if found, std::nullopt otherwise </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="scheduler_8hpp_source.html#l00244">244</a> of file <a class="el" href="scheduler_8hpp_source.html">scheduler.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  246</span>                           {</div>
+<div class="line"><span class="lineno">  247</span>  std::optional&lt;size_t&gt; result;</div>
+<div class="line"><span class="lineno">  248</span>  <span class="keyword">const</span> <span class="keyword">auto</span> it = std::ranges::find_if(system_indices_, [system_storage, system_id](<span class="keywordtype">size_t</span> index) {</div>
+<div class="line"><span class="lineno">  249</span>    <span class="keywordflow">return</span> index &lt; system_storage.size() &amp;&amp; system_storage[index].info.type_id == system_id;</div>
+<div class="line"><span class="lineno">  250</span>  });</div>
+<div class="line"><span class="lineno">  251</span> </div>
+<div class="line"><span class="lineno">  252</span>  <span class="keywordflow">if</span> (it != system_indices_.end()) {</div>
+<div class="line"><span class="lineno">  253</span>    result = *it;</div>
+<div class="line"><span class="lineno">  254</span>  }</div>
+<div class="line"><span class="lineno">  255</span>  <span class="keywordflow">return</span> result;</div>
+<div class="line"><span class="lineno">  256</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -674,8 +795,8 @@ Public Member Functions</h2></td></tr>
 <p>Gets the schedule ID. </p>
 <dl class="section return"><dt>Returns</dt><dd>Schedule ID </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="scheduler_8hpp_source.html#l00145">145</a> of file <a class="el" href="scheduler_8hpp_source.html">scheduler.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  145</span>{ <span class="keywordflow">return</span> schedule_id_; }</div>
+<p class="definition">Definition at line <a class="el" href="scheduler_8hpp_source.html#l00168">168</a> of file <a class="el" href="scheduler_8hpp_source.html">scheduler.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  168</span>{ <span class="keywordflow">return</span> schedule_id_; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -705,8 +826,8 @@ Public Member Functions</h2></td></tr>
 <p>Checks if this schedule is the <a class="el" href="structhelios_1_1app_1_1Main.html" title="Main schedule - main thread execution.">Main</a> stage. </p>
 <p><a class="el" href="structhelios_1_1app_1_1Main.html" title="Main schedule - main thread execution.">Main</a> stage executes synchronously on the main thread. All other stages execute asynchronously via the executor. </p><dl class="section return"><dt>Returns</dt><dd>True if this is the <a class="el" href="structhelios_1_1app_1_1Main.html" title="Main schedule - main thread execution.">Main</a> stage, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="scheduler_8hpp_source.html#l00124">124</a> of file <a class="el" href="scheduler_8hpp_source.html">scheduler.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  124</span>{ <span class="keywordflow">return</span> schedule_id_ == ScheduleIdOf&lt;Main&gt;(); }</div>
+<p class="definition">Definition at line <a class="el" href="scheduler_8hpp_source.html#l00134">134</a> of file <a class="el" href="scheduler_8hpp_source.html">scheduler.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  134</span>{ <span class="keywordflow">return</span> schedule_id_ == ScheduleIdOf&lt;Main&gt;(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -805,11 +926,11 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="scheduler_8hpp_source.html#l00210">210</a> of file <a class="el" href="scheduler_8hpp_source.html">scheduler.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  210</span>                                                                                                 {</div>
-<div class="line"><span class="lineno">  211</span>  system_orderings_[system_id] = std::move(ordering);</div>
-<div class="line"><span class="lineno">  212</span>  graph_built_ = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  213</span>}</div>
+<p class="definition">Definition at line <a class="el" href="scheduler_8hpp_source.html#l00239">239</a> of file <a class="el" href="scheduler_8hpp_source.html">scheduler.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  239</span>                                                                                                 {</div>
+<div class="line"><span class="lineno">  240</span>  system_orderings_[system_id] = std::move(ordering);</div>
+<div class="line"><span class="lineno">  241</span>  graph_built_ = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  242</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -839,8 +960,39 @@ Public Member Functions</h2></td></tr>
 <p>Gets the number of systems in this schedule. </p>
 <dl class="section return"><dt>Returns</dt><dd>Number of systems </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="scheduler_8hpp_source.html#l00151">151</a> of file <a class="el" href="scheduler_8hpp_source.html">scheduler.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  151</span>{ <span class="keywordflow">return</span> system_indices_.size(); }</div>
+<p class="definition">Definition at line <a class="el" href="scheduler_8hpp_source.html#l00174">174</a> of file <a class="el" href="scheduler_8hpp_source.html">scheduler.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  174</span>{ <span class="keywordflow">return</span> system_indices_.size(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a7b8b93920184a9ec3ee9d1c04b782d66" name="a7b8b93920184a9ec3ee9d1c04b782d66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b8b93920184a9ec3ee9d1c04b782d66">&#9670;&#160;</a></span>SystemIndices()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::vector&lt; size_t &gt; &amp; helios::app::details::ScheduleExecutor::SystemIndices </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets const reference to system indices in this schedule. </p>
+<dl class="section return"><dt>Returns</dt><dd>Const reference to vector of system storage indices </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="scheduler_8hpp_source.html#l00180">180</a> of file <a class="el" href="scheduler_8hpp_source.html">scheduler.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  180</span>{ <span class="keywordflow">return</span> system_indices_; }</div>
 </div><!-- fragment -->
 </div>
 </div>

@@ -323,13 +323,13 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="comment">   * @brief Checks if the allocator is empty.</span></div>
 <div class="line"><span class="comment">   * @return True if no allocations have been made since last reset</span></div>
 <div class="line"><span class="comment">   */</span></div>
-<div class="line">  [[nodiscard]] <span class="keywordtype">bool</span> <a id="a7" name="a7"></a><a class="code hl_function" href="classhelios_1_1memory_1_1FrameAllocator.html#a9807a1ebfea73c6978d8b12ffc3a5c5a">Empty</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> offset_.load(std::memory_order_acquire) == 0; }</div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">bool</span> <a id="a7" name="a7"></a><a class="code hl_function" href="classhelios_1_1memory_1_1FrameAllocator.html#a9807a1ebfea73c6978d8b12ffc3a5c5a">Empty</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> offset_.load(std::memory_order_relaxed) == 0; }</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
 <div class="line"><span class="comment">   * @brief Checks if the allocator is full.</span></div>
 <div class="line"><span class="comment">   * @return True if no more allocations can be made without reset</span></div>
 <div class="line"><span class="comment">   */</span></div>
-<div class="line">  [[nodiscard]] <span class="keywordtype">bool</span> <a id="a8" name="a8"></a><a class="code hl_function" href="classhelios_1_1memory_1_1FrameAllocator.html#aea630641cd8fee7a8e14ab7f415b7f8e">Full</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> offset_.load(std::memory_order_acquire) &gt;= capacity_; }</div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">bool</span> <a id="a8" name="a8"></a><a class="code hl_function" href="classhelios_1_1memory_1_1FrameAllocator.html#aea630641cd8fee7a8e14ab7f415b7f8e">Full</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> offset_.load(std::memory_order_relaxed) &gt;= capacity_; }</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
 <div class="line"><span class="comment">   * @brief Gets current allocator statistics.</span></div>
@@ -347,7 +347,7 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="comment">   * @brief Gets the current offset (amount of memory used).</span></div>
 <div class="line"><span class="comment">   * @return Current offset in bytes</span></div>
 <div class="line"><span class="comment">   */</span></div>
-<div class="line">  [[nodiscard]] <span class="keywordtype">size_t</span> <a id="a11" name="a11"></a><a class="code hl_function" href="classhelios_1_1memory_1_1FrameAllocator.html#ac0c7ea13fa25f36af6bad00c63575c73">CurrentOffset</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> offset_.load(std::memory_order_acquire); }</div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">size_t</span> <a id="a11" name="a11"></a><a class="code hl_function" href="classhelios_1_1memory_1_1FrameAllocator.html#ac0c7ea13fa25f36af6bad00c63575c73">CurrentOffset</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> offset_.load(std::memory_order_relaxed); }</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
 <div class="line"><span class="comment">   * @brief Gets the amount of free space remaining.</span></div>
@@ -479,10 +479,10 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">inline</span> AllocatorStats <a class="code hl_function" href="classhelios_1_1memory_1_1FrameAllocator.html#a90a3242100ff38d0fedda80e652a2236">FrameAllocator::Stats</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
-<div class="line">  <span class="keyword">const</span> <span class="keywordtype">size_t</span> current_offset = offset_.load(std::memory_order_acquire);</div>
-<div class="line">  <span class="keyword">const</span> <span class="keywordtype">size_t</span> peak = peak_offset_.load(std::memory_order_acquire);</div>
-<div class="line">  <span class="keyword">const</span> <span class="keywordtype">size_t</span> alloc_count = allocation_count_.load(std::memory_order_acquire);</div>
-<div class="line">  <span class="keyword">const</span> <span class="keywordtype">size_t</span> waste = alignment_waste_.load(std::memory_order_acquire);</div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">size_t</span> current_offset = offset_.load(std::memory_order_relaxed);</div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">size_t</span> peak = peak_offset_.load(std::memory_order_relaxed);</div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">size_t</span> alloc_count = allocation_count_.load(std::memory_order_relaxed);</div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">size_t</span> waste = alignment_waste_.load(std::memory_order_relaxed);</div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> {</div>
 <div class="line">      .<a id="a21" name="a21"></a><a class="code hl_variable" href="structhelios_1_1memory_1_1AllocatorStats.html#abf57f1d0bc4c9cc61f83276735e27a1e">total_allocated</a> = current_offset,</div>
@@ -496,7 +496,7 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">inline</span> <span class="keywordtype">size_t</span> <a class="code hl_function" href="classhelios_1_1memory_1_1FrameAllocator.html#a9f1e7d7fd2de016dbaece1e054b1a2b1">FrameAllocator::FreeSpace</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
-<div class="line">  <span class="keyword">const</span> <span class="keywordtype">size_t</span> current = offset_.load(std::memory_order_acquire);</div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">size_t</span> current = offset_.load(std::memory_order_relaxed);</div>
 <div class="line">  <span class="keywordflow">return</span> current &lt; capacity_ ? capacity_ - current : 0;</div>
 <div class="line">}</div>
 <div class="line"> </div>

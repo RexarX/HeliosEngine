@@ -1,5 +1,13 @@
 var NAVTREEINDEX14 =
 {
+"classhelios_1_1memory_1_1StackAllocator.html#a2d919426360ee091a3a0ddd44e02afd9":[3,0,1,7,9,4],
+"classhelios_1_1memory_1_1StackAllocator.html#a2d919426360ee091a3a0ddd44e02afd9":[5,0,1,6,9,4],
+"classhelios_1_1memory_1_1StackAllocator.html#a3243c6facc230947d8451a6ed95e030d":[3,0,1,7,9,16],
+"classhelios_1_1memory_1_1StackAllocator.html#a3243c6facc230947d8451a6ed95e030d":[5,0,1,6,9,16],
+"classhelios_1_1memory_1_1StackAllocator.html#a36b41d64ed9a97d8a9f3d14d460c2132":[3,0,1,7,9,5],
+"classhelios_1_1memory_1_1StackAllocator.html#a36b41d64ed9a97d8a9f3d14d460c2132":[5,0,1,6,9,5],
+"classhelios_1_1memory_1_1StackAllocator.html#a3bf19efb93d1c7fbc3d4befbce1d3e85":[5,0,1,6,9,21],
+"classhelios_1_1memory_1_1StackAllocator.html#a3bf19efb93d1c7fbc3d4befbce1d3e85":[3,0,1,7,9,21],
 "classhelios_1_1memory_1_1StackAllocator.html#a71cae21188114178a039691c73e9bb49":[5,0,1,6,9,19],
 "classhelios_1_1memory_1_1StackAllocator.html#a71cae21188114178a039691c73e9bb49":[3,0,1,7,9,19],
 "classhelios_1_1memory_1_1StackAllocator.html#a75d073a7aa7d2c45f4c5b57ce8b7c00b":[5,0,1,6,9,18],
@@ -241,13 +249,5 @@ var NAVTREEINDEX14 =
 "classhelios_1_1utils_1_1MapAdapter.html#a7cff97a9de96a084130ed24af4409319":[3,0,1,8,8,15],
 "classhelios_1_1utils_1_1MapAdapter.html#a7cff97a9de96a084130ed24af4409319":[5,0,1,7,8,15],
 "classhelios_1_1utils_1_1MapAdapter.html#a8b6a697c96b90e78444f46417a64edaa":[5,0,1,7,8,0],
-"classhelios_1_1utils_1_1MapAdapter.html#a8b6a697c96b90e78444f46417a64edaa":[3,0,1,8,8,0],
-"classhelios_1_1utils_1_1MapAdapter.html#a902bc56c6b4352aaee4e9d5ff954b816":[3,0,1,8,8,1],
-"classhelios_1_1utils_1_1MapAdapter.html#a902bc56c6b4352aaee4e9d5ff954b816":[5,0,1,7,8,1],
-"classhelios_1_1utils_1_1MapAdapter.html#ab17cd7399d90ea2d3f551daf2b58faac":[5,0,1,7,8,2],
-"classhelios_1_1utils_1_1MapAdapter.html#ab17cd7399d90ea2d3f551daf2b58faac":[3,0,1,8,8,2],
-"classhelios_1_1utils_1_1MapAdapter.html#ac79ca7706b38dbd56f55820f630f1fef":[5,0,1,7,8,4],
-"classhelios_1_1utils_1_1MapAdapter.html#ac79ca7706b38dbd56f55820f630f1fef":[3,0,1,8,8,4],
-"classhelios_1_1utils_1_1MapAdapter.html#ac931c2916acb5b67de62ecc42c6791d2":[3,0,1,8,8,6],
-"classhelios_1_1utils_1_1MapAdapter.html#ac931c2916acb5b67de62ecc42c6791d2":[5,0,1,7,8,6]
+"classhelios_1_1utils_1_1MapAdapter.html#a8b6a697c96b90e78444f46417a64edaa":[3,0,1,8,8,0]
 };

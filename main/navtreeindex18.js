@@ -1,5 +1,13 @@
 var NAVTREEINDEX18 =
 {
+"md_src_2core_2README.html":[0],
+"md_src_2core_2README.html#autotoc_md0":[0,10],
+"md_src_2core_2README.html#autotoc_md10":[0,10,2,1,1],
+"md_src_2core_2README.html#autotoc_md11":[0,10,2,1,2],
+"md_src_2core_2README.html#autotoc_md12":[0,10,2,1,3],
+"md_src_2core_2README.html#autotoc_md13":[0,10,2,1,4],
+"md_src_2core_2README.html#autotoc_md14":[0,10,2,2],
+"md_src_2core_2README.html#autotoc_md15":[0,10,2,2,0],
 "md_src_2core_2README.html#autotoc_md17":[0,10,3],
 "md_src_2core_2README.html#autotoc_md18":[0,10,3,0],
 "md_src_2core_2README.html#autotoc_md19":[0,10,3,1],
@@ -241,13 +249,5 @@ var NAVTREEINDEX18 =
 "namespacemembers_type.html":[3,1,3],
 "namespacemembers_vars.html":[3,1,2],
 "namespaces.html":[3,0],
-"namespacespdlog.html":[3,0,2],
-"pages.html":[],
-"pool__allocator_8hpp.html":[6,0,1,0,0,0,0,4,9],
-"pool__allocator_8hpp_source.html":[6,0,1,0,0,0,0,4,9],
-"query_8hpp.html":[6,0,1,0,0,0,0,3,9],
-"query_8hpp.html#a043191682d0825f0208066be5728efef":[6,0,1,0,0,0,0,3,9,19],
-"query_8hpp.html#a4755541af4fd6360392ff763a9ac514b":[6,0,1,0,0,0,0,3,9,14],
-"query_8hpp.html#a5034b26966a80a3b3c7ee3c8260b3338":[6,0,1,0,0,0,0,3,9,22],
-"query_8hpp.html#a66cd9e4416bee68b5fb557ed6674b8e6":[6,0,1,0,0,0,0,3,9,20]
+"namespacespdlog.html":[3,0,2]
 };

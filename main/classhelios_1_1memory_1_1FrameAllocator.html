@@ -718,7 +718,7 @@ requires std::default_initializable&lt;T&gt;</div>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00169">169</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  169</span>{ <span class="keywordflow">return</span> offset_.load(std::memory_order_acquire); }</div>
+<div class="fragment"><div class="line"><span class="lineno">  169</span>{ <span class="keywordflow">return</span> offset_.load(std::memory_order_relaxed); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -751,7 +751,7 @@ requires std::default_initializable&lt;T&gt;</div>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00145">145</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  145</span>{ <span class="keywordflow">return</span> offset_.load(std::memory_order_acquire) == 0; }</div>
+<div class="fragment"><div class="line"><span class="lineno">  145</span>{ <span class="keywordflow">return</span> offset_.load(std::memory_order_relaxed) == 0; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -785,7 +785,7 @@ requires std::default_initializable&lt;T&gt;</div>
 
 <p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00317">317</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  317</span>                                                       {</div>
-<div class="line"><span class="lineno">  318</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> current = offset_.load(std::memory_order_acquire);</div>
+<div class="line"><span class="lineno">  318</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> current = offset_.load(std::memory_order_relaxed);</div>
 <div class="line"><span class="lineno">  319</span>  <span class="keywordflow">return</span> current &lt; capacity_ ? capacity_ - current : 0;</div>
 <div class="line"><span class="lineno">  320</span>}</div>
 </div><!-- fragment -->
@@ -820,7 +820,7 @@ requires std::default_initializable&lt;T&gt;</div>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00151">151</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  151</span>{ <span class="keywordflow">return</span> offset_.load(std::memory_order_acquire) &gt;= capacity_; }</div>
+<div class="fragment"><div class="line"><span class="lineno">  151</span>{ <span class="keywordflow">return</span> offset_.load(std::memory_order_relaxed) &gt;= capacity_; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -975,10 +975,10 @@ requires std::default_initializable&lt;T&gt;</div>
 
 <p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00300">300</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  300</span>                                                           {</div>
-<div class="line"><span class="lineno">  301</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> current_offset = offset_.load(std::memory_order_acquire);</div>
-<div class="line"><span class="lineno">  302</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> peak = peak_offset_.load(std::memory_order_acquire);</div>
-<div class="line"><span class="lineno">  303</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> alloc_count = allocation_count_.load(std::memory_order_acquire);</div>
-<div class="line"><span class="lineno">  304</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> waste = alignment_waste_.load(std::memory_order_acquire);</div>
+<div class="line"><span class="lineno">  301</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> current_offset = offset_.load(std::memory_order_relaxed);</div>
+<div class="line"><span class="lineno">  302</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> peak = peak_offset_.load(std::memory_order_relaxed);</div>
+<div class="line"><span class="lineno">  303</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> alloc_count = allocation_count_.load(std::memory_order_relaxed);</div>
+<div class="line"><span class="lineno">  304</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> waste = alignment_waste_.load(std::memory_order_relaxed);</div>
 <div class="line"><span class="lineno">  305</span> </div>
 <div class="line"><span class="lineno">  306</span>  <span class="keywordflow">return</span> {</div>
 <div class="line"><span class="lineno">  307</span>      .total_allocated = current_offset,</div>

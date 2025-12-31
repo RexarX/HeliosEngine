@@ -321,9 +321,9 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="comment">   * @brief Checks if the allocator is full.</span></div>
 <div class="line"><span class="comment">   * @return True if all blocks are allocated</span></div>
 <div class="line"><span class="comment">   */</span></div>
-<div class="line">  [[nodiscard]] <span class="keywordtype">bool</span> <a id="a8" name="a8"></a><a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#a27640a2c03a23943a55efd7d4defa615">Full</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> free_block_count_.load(std::memory_order_acquire) == 0; }</div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">bool</span> <a id="a8" name="a8"></a><a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#a27640a2c03a23943a55efd7d4defa615">Full</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> free_block_count_.load(std::memory_order_relaxed) == 0; }</div>
 <div class="line">  [[nodiscard]] <span class="keywordtype">bool</span> <a id="a9" name="a9"></a><a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#a0660899f3aa78e517550ddec2a3d4a3a">Empty</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
-<div class="line">    <span class="keywordflow">return</span> free_block_count_.load(std::memory_order_acquire) == block_count_;</div>
+<div class="line">    <span class="keywordflow">return</span> free_block_count_.load(std::memory_order_relaxed) == block_count_;</div>
 <div class="line">  }</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
@@ -361,14 +361,14 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="comment">   * @brief Gets the number of free blocks.</span></div>
 <div class="line"><span class="comment">   * @return Number of blocks available for allocation</span></div>
 <div class="line"><span class="comment">   */</span></div>
-<div class="line">  [[nodiscard]] <span class="keywordtype">size_t</span> <a id="a15" name="a15"></a><a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#ae5392ee13ff651d35b0a6c5d3170d6bc">FreeBlockCount</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> free_block_count_.load(std::memory_order_acquire); }</div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">size_t</span> <a id="a15" name="a15"></a><a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#ae5392ee13ff651d35b0a6c5d3170d6bc">FreeBlockCount</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> free_block_count_.load(std::memory_order_relaxed); }</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
 <div class="line"><span class="comment">   * @brief Gets the number of used blocks.</span></div>
 <div class="line"><span class="comment">   * @return Number of blocks currently allocated</span></div>
 <div class="line"><span class="comment">   */</span></div>
 <div class="line">  [[nodiscard]] <span class="keywordtype">size_t</span> <a id="a16" name="a16"></a><a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#ac20939d3ca3e86706eeb45269162d8b5">UsedBlockCount</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
-<div class="line">    <span class="keywordflow">return</span> block_count_ - free_block_count_.load(std::memory_order_acquire);</div>
+<div class="line">    <span class="keywordflow">return</span> block_count_ - free_block_count_.load(std::memory_order_relaxed);</div>
 <div class="line">  }</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">private</span>:<span class="comment"></span></div>
@@ -570,13 +570,13 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">inline</span> AllocatorStats <a class="code hl_function" href="classhelios_1_1memory_1_1PoolAllocator.html#af9ad781edde29cd984366d7ca359844e">PoolAllocator::Stats</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
-<div class="line">  <span class="keyword">const</span> <span class="keywordtype">size_t</span> free_blocks = free_block_count_.load(std::memory_order_acquire);</div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">size_t</span> free_blocks = free_block_count_.load(std::memory_order_relaxed);</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">size_t</span> used_blocks = block_count_ - free_blocks;</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">size_t</span> used_bytes = used_blocks * block_size_;</div>
-<div class="line">  <span class="keyword">const</span> <span class="keywordtype">size_t</span> peak_blocks = peak_used_blocks_.load(std::memory_order_acquire);</div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">size_t</span> peak_blocks = peak_used_blocks_.load(std::memory_order_relaxed);</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">size_t</span> peak_bytes = peak_blocks * block_size_;</div>
-<div class="line">  <span class="keyword">const</span> <span class="keywordtype">size_t</span> total_allocs = total_allocations_.load(std::memory_order_acquire);</div>
-<div class="line">  <span class="keyword">const</span> <span class="keywordtype">size_t</span> total_deallocs = total_deallocations_.load(std::memory_order_acquire);</div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">size_t</span> total_allocs = total_allocations_.load(std::memory_order_relaxed);</div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">size_t</span> total_deallocs = total_deallocations_.load(std::memory_order_relaxed);</div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> {</div>
 <div class="line">      .<a id="a24" name="a24"></a><a class="code hl_variable" href="structhelios_1_1memory_1_1AllocatorStats.html#abf57f1d0bc4c9cc61f83276735e27a1e">total_allocated</a> = used_bytes,</div>

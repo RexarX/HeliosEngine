@@ -219,23 +219,23 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00283">283</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  283</span>                                                                                              {</div>
-<div class="line"><span class="lineno">  284</span>  std::string result(pattern);</div>
-<div class="line"><span class="lineno">  285</span> </div>
-<div class="line"><span class="lineno">  286</span>  <span class="keywordtype">size_t</span> pos = result.find(<span class="stringliteral">&quot;{name}&quot;</span>);</div>
-<div class="line"><span class="lineno">  287</span>  <span class="keywordflow">if</span> (pos != std::string::npos) {</div>
-<div class="line"><span class="lineno">  288</span>    result.replace(pos, 6, logger_name);</div>
-<div class="line"><span class="lineno">  289</span>  }</div>
-<div class="line"><span class="lineno">  290</span> </div>
-<div class="line"><span class="lineno">  291</span>  pos = result.find(<span class="stringliteral">&quot;{timestamp}&quot;</span>);</div>
-<div class="line"><span class="lineno">  292</span>  <span class="keywordflow">if</span> (pos != std::string::npos) {</div>
-<div class="line"><span class="lineno">  293</span>    <span class="keyword">const</span> std::string timestamp = <a class="code hl_function" href="namespaceanonymous__namespace_02logger_8cpp_03.html#a917e1b23a3ddf5e8bf602f1bd213de10">GenerateTimestamp</a>().value_or(<span class="stringliteral">&quot;unknown_time&quot;</span>);</div>
-<div class="line"><span class="lineno">  294</span>    result.replace(pos, 11, timestamp);</div>
-<div class="line"><span class="lineno">  295</span>  }</div>
-<div class="line"><span class="lineno">  296</span> </div>
-<div class="line"><span class="lineno">  297</span>  <span class="keywordflow">return</span> result;</div>
-<div class="line"><span class="lineno">  298</span>}</div>
+<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00284">284</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  284</span>                                                                                              {</div>
+<div class="line"><span class="lineno">  285</span>  std::string result(pattern);</div>
+<div class="line"><span class="lineno">  286</span> </div>
+<div class="line"><span class="lineno">  287</span>  <span class="keywordtype">size_t</span> pos = result.find(<span class="stringliteral">&quot;{name}&quot;</span>);</div>
+<div class="line"><span class="lineno">  288</span>  <span class="keywordflow">if</span> (pos != std::string::npos) {</div>
+<div class="line"><span class="lineno">  289</span>    result.replace(pos, 6, logger_name);</div>
+<div class="line"><span class="lineno">  290</span>  }</div>
+<div class="line"><span class="lineno">  291</span> </div>
+<div class="line"><span class="lineno">  292</span>  pos = result.find(<span class="stringliteral">&quot;{timestamp}&quot;</span>);</div>
+<div class="line"><span class="lineno">  293</span>  <span class="keywordflow">if</span> (pos != std::string::npos) {</div>
+<div class="line"><span class="lineno">  294</span>    <span class="keyword">const</span> std::string timestamp = <a class="code hl_function" href="namespaceanonymous__namespace_02logger_8cpp_03.html#a917e1b23a3ddf5e8bf602f1bd213de10">GenerateTimestamp</a>().value_or(<span class="stringliteral">&quot;unknown_time&quot;</span>);</div>
+<div class="line"><span class="lineno">  295</span>    result.replace(pos, 11, timestamp);</div>
+<div class="line"><span class="lineno">  296</span>  }</div>
+<div class="line"><span class="lineno">  297</span> </div>
+<div class="line"><span class="lineno">  298</span>  <span class="keywordflow">return</span> result;</div>
+<div class="line"><span class="lineno">  299</span>}</div>
 <div class="ttc" id="anamespaceanonymous__namespace_02logger_8cpp_03_html_a917e1b23a3ddf5e8bf602f1bd213de10"><div class="ttname"><a href="namespaceanonymous__namespace_02logger_8cpp_03.html#a917e1b23a3ddf5e8bf602f1bd213de10">anonymous_namespace{logger.cpp}::GenerateTimestamp</a></div><div class="ttdeci">auto GenerateTimestamp() noexcept -&gt; std::expected&lt; std::string, std::string_view &gt;</div><div class="ttdef"><b>Definition</b> <a href="logger_8cpp_source.html#l00045">logger.cpp:45</a></div></div>
 </div><!-- fragment -->
 </div>

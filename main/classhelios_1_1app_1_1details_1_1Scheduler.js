@@ -17,7 +17,7 @@ var classhelios_1_1app_1_1details_1_1Scheduler =
     [ "ExecuteSchedule", "classhelios_1_1app_1_1details_1_1Scheduler.html#a14e8ff4d0b8752dc89c76929fa416179", null ],
     [ "ExecuteScheduleById", "classhelios_1_1app_1_1details_1_1Scheduler.html#ae3a2e4e959cc011e556115106e33d454", null ],
     [ "ExecuteStage", "classhelios_1_1app_1_1details_1_1Scheduler.html#acc68bc227ef3255668e285bb0efcc62d", null ],
-    [ "GetOrRegisterSystemSet", "classhelios_1_1app_1_1details_1_1Scheduler.html#ad06664e3196ee999ef2338e22c3e5977", null ],
+    [ "GetOrRegisterSystemSet", "classhelios_1_1app_1_1details_1_1Scheduler.html#a19916b0c4c810ec560007559a793787a", null ],
     [ "GetScheduleOrder", "classhelios_1_1app_1_1details_1_1Scheduler.html#ad52d7d4f2ef13fc8aa9e21b8e080d5dc", null ],
     [ "GetSchedulesInStage", "classhelios_1_1app_1_1details_1_1Scheduler.html#afb9f848e2111c1c3ccae61b85ff60ad9", null ],
     [ "GetSystemStorage", "classhelios_1_1app_1_1details_1_1Scheduler.html#afc60dc3665d7278e9b19984024247634", null ],
