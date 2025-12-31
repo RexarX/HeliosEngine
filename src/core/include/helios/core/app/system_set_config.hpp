@@ -23,11 +23,11 @@ class SubApp;
  *
  * @example
  * @code
- * app.ConfigureSet<PhysicsSet>(Update{}).After<InputSet>().Before<RenderSet>();
+ * app.ConfigureSet<PhysicsSet>(kUpdate).After<InputSet>().Before<RenderSet>();
  * @endcode
  */
 template <ScheduleTrait Schedule, SystemSetTrait Set>
-class SystemSetConfig final {
+class SystemSetConfig {
 public:
   /**
    * @brief Constructs a system set configuration builder.

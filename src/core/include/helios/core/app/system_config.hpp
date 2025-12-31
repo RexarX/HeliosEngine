@@ -30,7 +30,7 @@ class SubApp;
  *
  * @example
  * @code
- * app.AddSystems<MovementSystem, CollisionSystem>(Update{})
+ * app.AddSystems<MovementSystem, CollisionSystem>(kUpdate)
  *     .After<InputSystem>()
  *     .Before<RenderSystem>()
  *     .InSet<PhysicsSet>()

@@ -334,7 +334,9 @@ TEST_SUITE("memory::STLAllocatorAdapter") {
 
   TEST_CASE("Deque with FreeListAllocator") {
     SUBCASE("Push front and back") {
-      FreeListAllocator allocator(8192);
+      // Use larger allocator size for cross-platform compatibility
+      // std::deque allocates memory in chunks that vary by platform (e.g., 4KB on macOS)
+      FreeListAllocator allocator(32768);
       std::deque<int, STLFreeListAllocator<int>> deque{STLFreeListAllocator<int>(allocator)};
 
       deque.push_back(2);
@@ -350,7 +352,8 @@ TEST_SUITE("memory::STLAllocatorAdapter") {
     }
 
     SUBCASE("Random access") {
-      FreeListAllocator allocator(8192);
+      // Use larger allocator size for cross-platform compatibility
+      FreeListAllocator allocator(32768);
       std::deque<int, STLFreeListAllocator<int>> deque{STLFreeListAllocator<int>(allocator)};
 
       for (int i = 0; i < 20; ++i) {

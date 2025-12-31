@@ -30,8 +30,6 @@ namespace helios::memory {
  * May suffer from fragmentation over time with varied allocation patterns.
  * Adjacent free blocks are coalesced to reduce fragmentation.
  *
- * Uses mutex for allocation/deallocation operations.
- *
  * @note Thread-safe.
  */
 class FreeListAllocator final {
@@ -294,18 +292,26 @@ inline FreeListAllocator& FreeListAllocator::operator=(FreeListAllocator&& other
     return *this;
   }
 
-  const std::scoped_lock lock(mutex_);
-  const std::scoped_lock other_lock(other.mutex_);
+  {
+    const std::scoped_lock lock(mutex_);
+    const std::scoped_lock other_lock(other.mutex_);
 
-  // Free current buffer
-  if (buffer_ != nullptr) {
-    AlignedFree(buffer_);
+    // Free current buffer
+    if (buffer_ != nullptr) {
+      AlignedFree(buffer_);
+    }
+
+    // Move from other
+    buffer_ = other.buffer_;
+    free_list_head_ = other.free_list_head_;
+    capacity_ = other.capacity_;
+
+    // Reset other
+    other.buffer_ = nullptr;
+    other.free_list_head_ = nullptr;
+    other.capacity_ = 0;
   }
 
-  // Move from other
-  buffer_ = other.buffer_;
-  free_list_head_ = other.free_list_head_;
-  capacity_ = other.capacity_;
   used_memory_.store(other.used_memory_.load(std::memory_order_acquire), std::memory_order_release);
   peak_usage_.store(other.peak_usage_.load(std::memory_order_acquire), std::memory_order_release);
   free_block_count_.store(other.free_block_count_.load(std::memory_order_acquire), std::memory_order_release);
@@ -314,10 +320,6 @@ inline FreeListAllocator& FreeListAllocator::operator=(FreeListAllocator&& other
   total_deallocations_.store(other.total_deallocations_.load(std::memory_order_acquire), std::memory_order_release);
   alignment_waste_.store(other.alignment_waste_.load(std::memory_order_acquire), std::memory_order_release);
 
-  // Reset other
-  other.buffer_ = nullptr;
-  other.free_list_head_ = nullptr;
-  other.capacity_ = 0;
   other.used_memory_.store(0, std::memory_order_release);
   other.peak_usage_.store(0, std::memory_order_release);
   other.free_block_count_.store(0, std::memory_order_release);
@@ -339,51 +341,60 @@ inline AllocationResult FreeListAllocator::Allocate(size_t size, size_t alignmen
     return {.ptr = nullptr, .allocated_size = 0};
   }
 
-  const std::scoped_lock lock(mutex_);
-
   // Calculate total size needed (with header and alignment padding)
   const size_t header_size = sizeof(AllocationHeader);
   const size_t min_block_size = header_size + size;
 
-  // Find best-fit block
-  FreeBlockHeader* prev_block = nullptr;
-  FreeBlockHeader* best_block = FindBestFit(min_block_size + alignment, &prev_block);
+  size_t total_size = 0;
+  size_t padding = 0;
 
-  if (best_block == nullptr) {
-    return {.ptr = nullptr, .allocated_size = 0};
+  AllocationResult result{.ptr = nullptr, .allocated_size = 0};
+
+  {
+    const std::scoped_lock lock(mutex_);
+
+    // Find best-fit block
+    FreeBlockHeader* prev_block = nullptr;
+    FreeBlockHeader* best_block = FindBestFit(min_block_size + alignment, &prev_block);
+
+    if (best_block == nullptr) [[unlikely]] {
+      return result;
+    }
+
+    // Calculate aligned position for user data
+    auto* block_start = reinterpret_cast<uint8_t*>(best_block);
+    uint8_t* header_ptr = block_start;
+    padding = CalculatePaddingWithHeader(header_ptr, alignment, header_size);
+    uint8_t* aligned_data = block_start + padding;
+
+    total_size = padding + size;
+    const size_t remaining_size = best_block->size - total_size;
+
+    // Remove block from free list
+    if (prev_block != nullptr) {
+      prev_block->next = best_block->next;
+    } else {
+      free_list_head_ = best_block->next;
+    }
+    free_block_count_.fetch_sub(1, std::memory_order_relaxed);
+
+    // If there's enough space left, create a new free block
+    constexpr size_t min_free_block_size = sizeof(FreeBlockHeader) + 16;
+    if (remaining_size >= min_free_block_size) {
+      auto* new_free_block = reinterpret_cast<FreeBlockHeader*>(block_start + total_size);
+      new_free_block->size = remaining_size;
+      new_free_block->next = free_list_head_;
+      free_list_head_ = new_free_block;
+      free_block_count_.fetch_add(1, std::memory_order_relaxed);
+    }
+
+    // Write allocation header
+    auto* alloc_header = reinterpret_cast<AllocationHeader*>(aligned_data - header_size);
+    alloc_header->size = total_size;
+    alloc_header->padding = padding;
+
+    result = {.ptr = aligned_data, .allocated_size = size};
   }
-
-  // Calculate aligned position for user data
-  auto* block_start = reinterpret_cast<uint8_t*>(best_block);
-  auto* header_ptr = block_start;
-  const size_t padding = CalculatePaddingWithHeader(header_ptr, alignment, header_size);
-  auto* aligned_data = block_start + padding;
-
-  const size_t total_size = padding + size;
-  const size_t remaining_size = best_block->size - total_size;
-
-  // Remove block from free list
-  if (prev_block != nullptr) {
-    prev_block->next = best_block->next;
-  } else {
-    free_list_head_ = best_block->next;
-  }
-  free_block_count_.fetch_sub(1, std::memory_order_relaxed);
-
-  // If there's enough space left, create a new free block
-  constexpr size_t min_free_block_size = sizeof(FreeBlockHeader) + 16;
-  if (remaining_size >= min_free_block_size) {
-    auto* new_free_block = reinterpret_cast<FreeBlockHeader*>(block_start + total_size);
-    new_free_block->size = remaining_size;
-    new_free_block->next = free_list_head_;
-    free_list_head_ = new_free_block;
-    free_block_count_.fetch_add(1, std::memory_order_relaxed);
-  }
-
-  // Write allocation header
-  auto* alloc_header = reinterpret_cast<AllocationHeader*>(aligned_data - header_size);
-  alloc_header->size = total_size;
-  alloc_header->padding = padding;
 
   // Update stats
   const size_t new_used = used_memory_.fetch_add(total_size, std::memory_order_relaxed) + total_size;
@@ -394,11 +405,12 @@ inline AllocationResult FreeListAllocator::Allocate(size_t size, size_t alignmen
       break;
     }
   }
+
   allocation_count_.fetch_add(1, std::memory_order_relaxed);
   total_allocations_.fetch_add(1, std::memory_order_relaxed);
   alignment_waste_.fetch_add(padding - header_size, std::memory_order_relaxed);
 
-  return {aligned_data, size};
+  return result;
 }
 
 inline void FreeListAllocator::Deallocate(void* ptr) noexcept {
@@ -407,8 +419,6 @@ inline void FreeListAllocator::Deallocate(void* ptr) noexcept {
   }
 
   HELIOS_ASSERT(Owns(ptr), "Failed to deallocate memory: ptr does not belong to this allocator!");
-
-  const std::scoped_lock lock(mutex_);
 
   // Get allocation header
   auto* alloc_header = reinterpret_cast<AllocationHeader*>(static_cast<uint8_t*>(ptr) - sizeof(AllocationHeader));
@@ -420,8 +430,6 @@ inline void FreeListAllocator::Deallocate(void* ptr) noexcept {
   // Create new free block
   auto* free_block = reinterpret_cast<FreeBlockHeader*>(block_start);
   free_block->size = block_size;
-  free_block->next = free_list_head_;
-  free_list_head_ = free_block;
   free_block_count_.fetch_add(1, std::memory_order_relaxed);
 
   // Update stats
@@ -429,13 +437,22 @@ inline void FreeListAllocator::Deallocate(void* ptr) noexcept {
   allocation_count_.fetch_sub(1, std::memory_order_relaxed);
   total_deallocations_.fetch_add(1, std::memory_order_relaxed);
 
-  // Coalesce adjacent free blocks
-  CoalesceAdjacent(free_block);
+  {
+    const std::scoped_lock lock(mutex_);
+    free_block->next = free_list_head_;
+    free_list_head_ = free_block;
+
+    // Coalesce adjacent free blocks
+    CoalesceAdjacent(free_block);
+  }
 }
 
 inline void FreeListAllocator::Reset() noexcept {
-  const std::scoped_lock lock(mutex_);
-  InitializeFreeList();
+  {
+    const std::scoped_lock lock(mutex_);
+    InitializeFreeList();
+  }
+
   used_memory_.store(0, std::memory_order_release);
   allocation_count_.store(0, std::memory_order_release);
   alignment_waste_.store(0, std::memory_order_release);
@@ -515,7 +532,7 @@ inline void FreeListAllocator::CoalesceAdjacent(FreeBlockHeader* block) noexcept
   // We'll track if block gets merged into another block
   bool block_merged = false;
   auto* block_start = reinterpret_cast<uint8_t*>(block);
-  auto* block_end = block_start + block->size;
+  uint8_t* block_end = block_start + block->size;
 
   // First pass: try to merge blocks that come after 'block' in memory
   FreeBlockHeader* current = free_list_head_;
@@ -565,7 +582,7 @@ inline void FreeListAllocator::CoalesceAdjacent(FreeBlockHeader* block) noexcept
     }
 
     auto* current_start = reinterpret_cast<uint8_t*>(current);
-    auto* current_end = current_start + current->size;
+    uint8_t* current_end = current_start + current->size;
 
     // Check if our block is immediately after current block
     if (current_end == block_start) {

@@ -483,6 +483,8 @@ TEST_SUITE("memory::AllocatorIntegration") {
 
     std::atomic<size_t> successful_allocations{0};
     std::atomic<size_t> total_deallocations{0};
+    std::atomic<double> total_alloc_time_ns{0.0};
+    std::atomic<double> total_dealloc_time_ns{0.0};
 
     Timer timer;
 
@@ -496,8 +498,15 @@ TEST_SUITE("memory::AllocatorIntegration") {
 
         // Allocate
         for (size_t i = 0; i < iterations_per_thread; ++i) {
+          Timer alloc_timer;
           const auto result = allocator.Allocate(block_size);
           if (result.Valid()) {
+            const double alloc_time = static_cast<double>(alloc_timer.ElapsedNanoSec());
+            double expected = total_alloc_time_ns.load(std::memory_order_relaxed);
+            while (!total_alloc_time_ns.compare_exchange_weak(expected, expected + alloc_time,
+                                                              std::memory_order_relaxed)) {
+            }
+
             successful_allocations.fetch_add(1, std::memory_order_relaxed);
             local_ptrs.push_back(result.ptr);
 
@@ -513,7 +522,13 @@ TEST_SUITE("memory::AllocatorIntegration") {
         // Deallocate half
         const size_t half = local_ptrs.size() / 2;
         for (size_t i = 0; i < half; ++i) {
+          Timer dealloc_timer;
           allocator.Deallocate(local_ptrs[i]);
+          const double dealloc_time = static_cast<double>(dealloc_timer.ElapsedNanoSec());
+          double expected = total_dealloc_time_ns.load(std::memory_order_relaxed);
+          while (!total_dealloc_time_ns.compare_exchange_weak(expected, expected + dealloc_time,
+                                                              std::memory_order_relaxed)) {
+          }
           total_deallocations.fetch_add(1, std::memory_order_relaxed);
         }
 
@@ -544,6 +559,13 @@ TEST_SUITE("memory::AllocatorIntegration") {
                            .peak_usage = allocator.Stats().peak_usage,
                            .thread_count = num_threads};
 
+    if (stats.successful_allocations > 0) {
+      stats.avg_alloc_time_ns = total_alloc_time_ns.load() / static_cast<double>(stats.successful_allocations);
+    }
+    if (total_deallocations.load() > 0) {
+      stats.avg_dealloc_time_ns = total_dealloc_time_ns.load() / static_cast<double>(total_deallocations.load());
+    }
+
     stats.Print("PoolAllocator", "Multi-threaded Concurrent Alloc/Dealloc");
 
     CHECK(allocator.Empty());
@@ -557,6 +579,8 @@ TEST_SUITE("memory::AllocatorIntegration") {
 
     std::atomic<size_t> total_allocations{0};
     std::atomic<size_t> total_bytes{0};
+    std::atomic<size_t> max_peak_usage{0};
+    std::atomic<double> total_alloc_time_ns{0.0};
 
     Timer timer;
 
@@ -574,9 +598,16 @@ TEST_SUITE("memory::AllocatorIntegration") {
           // Nested allocations
           for (size_t j = 0; j < 10; ++j) {
             const size_t size = 64 + j * 32;
+            Timer alloc_timer;
             const auto result = allocator.Allocate(size);
 
             if (result.Valid()) {
+              const double alloc_time = static_cast<double>(alloc_timer.ElapsedNanoSec());
+              double expected = total_alloc_time_ns.load(std::memory_order_relaxed);
+              while (!total_alloc_time_ns.compare_exchange_weak(expected, expected + alloc_time,
+                                                                std::memory_order_relaxed)) {
+              }
+
               total_allocations.fetch_add(1, std::memory_order_relaxed);
               total_bytes.fetch_add(result.allocated_size, std::memory_order_relaxed);
 
@@ -593,6 +624,15 @@ TEST_SUITE("memory::AllocatorIntegration") {
           allocator.RewindToMarker(marker);
         }
 
+        // Track peak usage from this thread's allocator
+        const size_t thread_peak = allocator.Stats().peak_usage;
+        size_t current_max = max_peak_usage.load(std::memory_order_relaxed);
+        while (thread_peak > current_max) {
+          if (max_peak_usage.compare_exchange_weak(current_max, thread_peak, std::memory_order_relaxed)) {
+            break;
+          }
+        }
+
         CHECK(allocator.Empty());
       });
     }
@@ -604,7 +644,12 @@ TEST_SUITE("memory::AllocatorIntegration") {
     PerformanceStats stats{.total_time_ms = timer.ElapsedMilliSec(),
                            .successful_allocations = total_allocations.load(),
                            .total_bytes_allocated = total_bytes.load(),
+                           .peak_usage = max_peak_usage.load(),
                            .thread_count = num_threads};
+
+    if (stats.successful_allocations > 0) {
+      stats.avg_alloc_time_ns = total_alloc_time_ns.load() / static_cast<double>(stats.successful_allocations);
+    }
 
     stats.Print("StackAllocator", "Multi-threaded Per-thread Stacks");
 
@@ -620,6 +665,9 @@ TEST_SUITE("memory::AllocatorIntegration") {
 
     std::atomic<size_t> successful_allocations{0};
     std::atomic<size_t> total_deallocations{0};
+    std::atomic<size_t> total_bytes{0};
+    std::atomic<double> total_alloc_time_ns{0.0};
+    std::atomic<double> total_dealloc_time_ns{0.0};
 
     Timer timer;
 
@@ -635,9 +683,17 @@ TEST_SUITE("memory::AllocatorIntegration") {
         for (size_t i = 0; i < iterations_per_thread; ++i) {
           const size_t size = size_dist(rng);
 
+          Timer alloc_timer;
           const auto result = allocator.Allocate(size);
           if (result.Valid()) {
+            const double alloc_time = static_cast<double>(alloc_timer.ElapsedNanoSec());
+            double expected = total_alloc_time_ns.load(std::memory_order_relaxed);
+            while (!total_alloc_time_ns.compare_exchange_weak(expected, expected + alloc_time,
+                                                              std::memory_order_relaxed)) {
+            }
+
             successful_allocations.fetch_add(1, std::memory_order_relaxed);
+            total_bytes.fetch_add(result.allocated_size, std::memory_order_relaxed);
             local_allocations.emplace_back(result.ptr, size);
 
             // Write pattern
@@ -649,7 +705,13 @@ TEST_SUITE("memory::AllocatorIntegration") {
             std::uniform_int_distribution<size_t> idx_dist(0, local_allocations.size() - 1);
             const size_t idx = idx_dist(rng);
 
+            Timer dealloc_timer;
             allocator.Deallocate(local_allocations[idx].first);
+            const double dealloc_time = static_cast<double>(dealloc_timer.ElapsedNanoSec());
+            double expected = total_dealloc_time_ns.load(std::memory_order_relaxed);
+            while (!total_dealloc_time_ns.compare_exchange_weak(expected, expected + dealloc_time,
+                                                                std::memory_order_relaxed)) {
+            }
             total_deallocations.fetch_add(1, std::memory_order_relaxed);
 
             local_allocations.erase(local_allocations.begin() + idx);
@@ -658,7 +720,13 @@ TEST_SUITE("memory::AllocatorIntegration") {
 
         // Cleanup
         for (const auto& [ptr, size] : local_allocations) {
+          Timer dealloc_timer;
           allocator.Deallocate(ptr);
+          const double dealloc_time = static_cast<double>(dealloc_timer.ElapsedNanoSec());
+          double expected = total_dealloc_time_ns.load(std::memory_order_relaxed);
+          while (!total_dealloc_time_ns.compare_exchange_weak(expected, expected + dealloc_time,
+                                                              std::memory_order_relaxed)) {
+          }
           total_deallocations.fetch_add(1, std::memory_order_relaxed);
         }
       });
@@ -670,9 +738,16 @@ TEST_SUITE("memory::AllocatorIntegration") {
 
     PerformanceStats stats{.total_time_ms = timer.ElapsedMilliSec(),
                            .successful_allocations = successful_allocations.load(),
-                           .total_bytes_allocated = allocator.Stats().total_freed,
+                           .total_bytes_allocated = total_bytes.load(),
                            .peak_usage = allocator.Stats().peak_usage,
                            .thread_count = num_threads};
+
+    if (stats.successful_allocations > 0) {
+      stats.avg_alloc_time_ns = total_alloc_time_ns.load() / static_cast<double>(stats.successful_allocations);
+    }
+    if (total_deallocations.load() > 0) {
+      stats.avg_dealloc_time_ns = total_dealloc_time_ns.load() / static_cast<double>(total_deallocations.load());
+    }
 
     stats.Print("FreeListAllocator", "Multi-threaded Stress Test");
 
@@ -688,6 +763,8 @@ TEST_SUITE("memory::AllocatorIntegration") {
     constexpr size_t num_worker_threads = 4;
 
     std::atomic<size_t> total_allocations{0};
+    std::atomic<size_t> total_bytes{0};
+    std::atomic<double> total_alloc_time_ns{0.0};
     std::atomic<bool> should_stop{false};
 
     Timer timer;
@@ -712,10 +789,18 @@ TEST_SUITE("memory::AllocatorIntegration") {
 
         while (!should_stop.load(std::memory_order_acquire)) {
           const size_t size = size_dist(rng);
+          Timer alloc_timer;
           const auto result = allocator.Allocate(size);
 
           if (result.Valid()) {
+            const double alloc_time = static_cast<double>(alloc_timer.ElapsedNanoSec());
+            double expected = total_alloc_time_ns.load(std::memory_order_relaxed);
+            while (!total_alloc_time_ns.compare_exchange_weak(expected, expected + alloc_time,
+                                                              std::memory_order_relaxed)) {
+            }
+
             total_allocations.fetch_add(1, std::memory_order_relaxed);
+            total_bytes.fetch_add(result.allocated_size, std::memory_order_relaxed);
 
             // Write worker ID
             auto* const data = static_cast<uint8_t*>(result.ptr);
@@ -732,8 +817,13 @@ TEST_SUITE("memory::AllocatorIntegration") {
 
     PerformanceStats stats{.total_time_ms = timer.ElapsedMilliSec(),
                            .successful_allocations = total_allocations.load(),
+                           .total_bytes_allocated = total_bytes.load(),
                            .peak_usage = allocator.Stats().peak_usage,
                            .thread_count = num_worker_threads + 1};
+
+    if (stats.successful_allocations > 0) {
+      stats.avg_alloc_time_ns = total_alloc_time_ns.load() / static_cast<double>(stats.successful_allocations);
+    }
 
     stats.Print("DoubleFrameAllocator", "Multi-threaded Frame Sync");
 

@@ -125,30 +125,30 @@ TEST_SUITE("app::details::Scheduler") {
     Scheduler scheduler;
 
     CHECK_EQ(scheduler.SystemCount(), 0);
-    CHECK_EQ(scheduler.SystemCount(Update{}), 0);
+    CHECK_EQ(scheduler.SystemCount(kUpdate), 0);
   }
 
   TEST_CASE("Scheduler::AddSystem: single system") {
     Scheduler scheduler;
 
-    scheduler.AddSystem<FirstSystem>(Update{});
+    scheduler.AddSystem<FirstSystem>(kUpdate);
 
     CHECK_EQ(scheduler.SystemCount(), 1);
-    CHECK_EQ(scheduler.SystemCount(Update{}), 1);
+    CHECK_EQ(scheduler.SystemCount(kUpdate), 1);
     CHECK(scheduler.ContainsSystem<FirstSystem>());
-    CHECK(scheduler.ContainsSystem<FirstSystem>(Update{}));
+    CHECK(scheduler.ContainsSystem<FirstSystem>(kUpdate));
   }
 
   TEST_CASE("Scheduler::AddSystem: multiple systems") {
     Scheduler scheduler;
 
-    scheduler.AddSystem<FirstSystem>(Update{});
-    scheduler.AddSystem<SecondSystem>(Update{});
-    scheduler.AddSystem<ThirdSystem>(PostUpdate{});
+    scheduler.AddSystem<FirstSystem>(kUpdate);
+    scheduler.AddSystem<SecondSystem>(kUpdate);
+    scheduler.AddSystem<ThirdSystem>(kPostUpdate);
 
     CHECK_EQ(scheduler.SystemCount(), 3);
-    CHECK_EQ(scheduler.SystemCount(Update{}), 2);
-    CHECK_EQ(scheduler.SystemCount(PostUpdate{}), 1);
+    CHECK_EQ(scheduler.SystemCount(kUpdate), 2);
+    CHECK_EQ(scheduler.SystemCount(kPostUpdate), 1);
     CHECK(scheduler.ContainsSystem<FirstSystem>());
     CHECK(scheduler.ContainsSystem<SecondSystem>());
     CHECK(scheduler.ContainsSystem<ThirdSystem>());
@@ -157,35 +157,35 @@ TEST_SUITE("app::details::Scheduler") {
   TEST_CASE("Scheduler::ContainsSystem: in different schedules") {
     Scheduler scheduler;
 
-    scheduler.AddSystem<FirstSystem>(Update{});
-    scheduler.AddSystem<SecondSystem>(PostUpdate{});
+    scheduler.AddSystem<FirstSystem>(kUpdate);
+    scheduler.AddSystem<SecondSystem>(kPostUpdate);
 
-    CHECK(scheduler.ContainsSystem<FirstSystem>(Update{}));
-    CHECK_FALSE(scheduler.ContainsSystem<FirstSystem>(PostUpdate{}));
-    CHECK(scheduler.ContainsSystem<SecondSystem>(PostUpdate{}));
-    CHECK_FALSE(scheduler.ContainsSystem<SecondSystem>(Update{}));
+    CHECK(scheduler.ContainsSystem<FirstSystem>(kUpdate));
+    CHECK_FALSE(scheduler.ContainsSystem<FirstSystem>(kPostUpdate));
+    CHECK(scheduler.ContainsSystem<SecondSystem>(kPostUpdate));
+    CHECK_FALSE(scheduler.ContainsSystem<SecondSystem>(kUpdate));
   }
 
   TEST_CASE("Scheduler::SystemCount: across schedules") {
     Scheduler scheduler;
 
-    scheduler.AddSystem<FirstSystem>(PreUpdate{});
-    scheduler.AddSystem<SecondSystem>(Update{});
-    scheduler.AddSystem<ThirdSystem>(PostUpdate{});
+    scheduler.AddSystem<FirstSystem>(kPreUpdate);
+    scheduler.AddSystem<SecondSystem>(kUpdate);
+    scheduler.AddSystem<ThirdSystem>(kPostUpdate);
 
     CHECK_EQ(scheduler.SystemCount(), 3);
-    CHECK_EQ(scheduler.SystemCount(PreUpdate{}), 1);
-    CHECK_EQ(scheduler.SystemCount(Update{}), 1);
-    CHECK_EQ(scheduler.SystemCount(PostUpdate{}), 1);
+    CHECK_EQ(scheduler.SystemCount(kPreUpdate), 1);
+    CHECK_EQ(scheduler.SystemCount(kUpdate), 1);
+    CHECK_EQ(scheduler.SystemCount(kPostUpdate), 1);
     CHECK_EQ(scheduler.SystemCount(Main{}), 0);
   }
 
   TEST_CASE("Scheduler::Clear: removes all systems") {
     Scheduler scheduler;
 
-    scheduler.AddSystem<FirstSystem>(Update{});
-    scheduler.AddSystem<SecondSystem>(Update{});
-    scheduler.AddSystem<ThirdSystem>(PostUpdate{});
+    scheduler.AddSystem<FirstSystem>(kUpdate);
+    scheduler.AddSystem<SecondSystem>(kUpdate);
+    scheduler.AddSystem<ThirdSystem>(kPostUpdate);
 
     CHECK_EQ(scheduler.SystemCount(), 3);
 
@@ -200,15 +200,15 @@ TEST_SUITE("app::details::Scheduler") {
   TEST_CASE("Scheduler::RegisterOrdering: system ordering") {
     Scheduler scheduler;
 
-    scheduler.AddSystem<FirstSystem>(Update{});
-    scheduler.AddSystem<SecondSystem>(Update{});
+    scheduler.AddSystem<FirstSystem>(kUpdate);
+    scheduler.AddSystem<SecondSystem>(kUpdate);
 
     // Register ordering constraint: SecondSystem runs after FirstSystem
     SystemOrdering ordering;
     ordering.after.push_back(SystemTypeIdOf<FirstSystem>());
-    scheduler.RegisterOrdering<SecondSystem>(Update{}, std::move(ordering));
+    scheduler.RegisterOrdering<SecondSystem>(kUpdate, std::move(ordering));
 
-    CHECK_EQ(scheduler.SystemCount(Update{}), 2);
+    CHECK_EQ(scheduler.SystemCount(kUpdate), 2);
     CHECK(scheduler.ContainsSystem<FirstSystem>());
     CHECK(scheduler.ContainsSystem<SecondSystem>());
   }
@@ -219,13 +219,13 @@ TEST_SUITE("app::details::Scheduler") {
     world.InsertResource(GameTime{});
 
     Scheduler scheduler;
-    scheduler.AddSystem<TimeUpdateSystem>(Update{});
+    scheduler.AddSystem<TimeUpdateSystem>(kUpdate);
 
     // Just test that BuildAllGraphs succeeds
     scheduler.BuildAllGraphs(world);
 
-    CHECK_EQ(scheduler.SystemCount(Update{}), 1);
-    CHECK(scheduler.ContainsSystem<TimeUpdateSystem>(Update{}));
+    CHECK_EQ(scheduler.SystemCount(kUpdate), 1);
+    CHECK(scheduler.ContainsSystem<TimeUpdateSystem>(kUpdate));
   }
 
   TEST_CASE("Scheduler::BuildAllGraphs: multiple schedule build") {
@@ -234,23 +234,133 @@ TEST_SUITE("app::details::Scheduler") {
     world.InsertResource(GameTime{});
 
     Scheduler scheduler;
-    scheduler.AddSystem<TimeUpdateSystem>(PreUpdate{});
-    scheduler.AddSystem<TimeUpdateSystem>(Update{});
-    scheduler.AddSystem<TimeUpdateSystem>(PostUpdate{});
+    scheduler.AddSystem<TimeUpdateSystem>(kPreUpdate);
+    scheduler.AddSystem<TimeUpdateSystem>(kUpdate);
+    scheduler.AddSystem<TimeUpdateSystem>(kPostUpdate);
 
     // Just test that BuildAllGraphs succeeds with multiple schedules
     scheduler.BuildAllGraphs(world);
 
-    CHECK_EQ(scheduler.SystemCount(PreUpdate{}), 1);
-    CHECK_EQ(scheduler.SystemCount(Update{}), 1);
-    CHECK_EQ(scheduler.SystemCount(PostUpdate{}), 1);
+    CHECK_EQ(scheduler.SystemCount(kPreUpdate), 1);
+    CHECK_EQ(scheduler.SystemCount(kUpdate), 1);
+    CHECK_EQ(scheduler.SystemCount(kPostUpdate), 1);
+  }
+
+  TEST_CASE("Scheduler::AddSystem: same system in multiple schedules") {
+    Scheduler scheduler;
+
+    // Add the same system type to different schedules
+    scheduler.AddSystem<FirstSystem>(kPreUpdate);
+    scheduler.AddSystem<FirstSystem>(kUpdate);
+    scheduler.AddSystem<FirstSystem>(kPostUpdate);
+
+    // Total systems should be 3 (one per schedule)
+    CHECK_EQ(scheduler.SystemCount(), 3);
+
+    // Each schedule should have exactly one system
+    CHECK_EQ(scheduler.SystemCount(kPreUpdate), 1);
+    CHECK_EQ(scheduler.SystemCount(kUpdate), 1);
+    CHECK_EQ(scheduler.SystemCount(kPostUpdate), 1);
+
+    // ContainsSystem should return true for each schedule
+    CHECK(scheduler.ContainsSystem<FirstSystem>(kPreUpdate));
+    CHECK(scheduler.ContainsSystem<FirstSystem>(kUpdate));
+    CHECK(scheduler.ContainsSystem<FirstSystem>(kPostUpdate));
+
+    // Global ContainsSystem should also return true
+    CHECK(scheduler.ContainsSystem<FirstSystem>());
+  }
+
+  TEST_CASE("Scheduler::AddSystem: same system in multiple schedules with different systems") {
+    Scheduler scheduler;
+
+    // Add FirstSystem to multiple schedules
+    scheduler.AddSystem<FirstSystem>(kPreUpdate);
+    scheduler.AddSystem<FirstSystem>(kPostUpdate);
+
+    // Add other systems to Update
+    scheduler.AddSystem<SecondSystem>(kUpdate);
+    scheduler.AddSystem<ThirdSystem>(kUpdate);
+
+    CHECK_EQ(scheduler.SystemCount(), 4);
+    CHECK_EQ(scheduler.SystemCount(kPreUpdate), 1);
+    CHECK_EQ(scheduler.SystemCount(kUpdate), 2);
+    CHECK_EQ(scheduler.SystemCount(kPostUpdate), 1);
+
+    CHECK(scheduler.ContainsSystem<FirstSystem>(kPreUpdate));
+    CHECK_FALSE(scheduler.ContainsSystem<FirstSystem>(kUpdate));
+    CHECK(scheduler.ContainsSystem<FirstSystem>(kPostUpdate));
+
+    CHECK_FALSE(scheduler.ContainsSystem<SecondSystem>(kPreUpdate));
+    CHECK(scheduler.ContainsSystem<SecondSystem>(kUpdate));
+    CHECK_FALSE(scheduler.ContainsSystem<SecondSystem>(kPostUpdate));
+  }
+
+  TEST_CASE("Scheduler::AddSystem: same system in multiple schedules builds and executes") {
+    Executor executor;
+    World world;
+    world.InsertResource(GameTime{});
+
+    Scheduler scheduler;
+    scheduler.AddSystem<TimeUpdateSystem>(kPreUpdate);
+    scheduler.AddSystem<TimeUpdateSystem>(kUpdate);
+    scheduler.AddSystem<TimeUpdateSystem>(kPostUpdate);
+
+    scheduler.BuildAllGraphs(world);
+
+    // Execute each schedule and verify update_count increments
+    scheduler.ExecuteSchedule<PreUpdate>(world, executor);
+    auto& time1 = world.WriteResource<GameTime>();
+    CHECK_EQ(time1.update_count, 1);
+
+    scheduler.ExecuteSchedule<Update>(world, executor);
+    auto& time2 = world.WriteResource<GameTime>();
+    CHECK_EQ(time2.update_count, 2);
+
+    scheduler.ExecuteSchedule<PostUpdate>(world, executor);
+    auto& time3 = world.WriteResource<GameTime>();
+    CHECK_EQ(time3.update_count, 3);
+  }
+
+  TEST_CASE("Scheduler::AddSystem: cleanup system in multiple schedules pattern") {
+    // This test simulates a real-world use case: a cleanup system that runs
+    // in multiple schedules (e.g., PreUpdate and PostUpdate)
+    Scheduler scheduler;
+
+    scheduler.AddSystem<EmptySystem>(kPreUpdate);
+    scheduler.AddSystem<FirstSystem>(kUpdate);
+    scheduler.AddSystem<SecondSystem>(kUpdate);
+    scheduler.AddSystem<EmptySystem>(kPostUpdate);
+
+    CHECK_EQ(scheduler.SystemCount(), 4);
+    CHECK(scheduler.ContainsSystem<EmptySystem>(kPreUpdate));
+    CHECK_FALSE(scheduler.ContainsSystem<EmptySystem>(kUpdate));
+    CHECK(scheduler.ContainsSystem<EmptySystem>(kPostUpdate));
+  }
+
+  TEST_CASE("Scheduler::Clear: clears same system from multiple schedules") {
+    Scheduler scheduler;
+
+    scheduler.AddSystem<FirstSystem>(kPreUpdate);
+    scheduler.AddSystem<FirstSystem>(kUpdate);
+    scheduler.AddSystem<FirstSystem>(kPostUpdate);
+
+    CHECK_EQ(scheduler.SystemCount(), 3);
+
+    scheduler.Clear();
+
+    CHECK_EQ(scheduler.SystemCount(), 0);
+    CHECK_FALSE(scheduler.ContainsSystem<FirstSystem>());
+    CHECK_FALSE(scheduler.ContainsSystem<FirstSystem>(kPreUpdate));
+    CHECK_FALSE(scheduler.ContainsSystem<FirstSystem>(kUpdate));
+    CHECK_FALSE(scheduler.ContainsSystem<FirstSystem>(kPostUpdate));
   }
 
   TEST_CASE("Scheduler::GetSystemStorage: returns valid span") {
     Scheduler scheduler;
 
-    scheduler.AddSystem<FirstSystem>(Update{});
-    scheduler.AddSystem<SecondSystem>(Update{});
+    scheduler.AddSystem<FirstSystem>(kUpdate);
+    scheduler.AddSystem<SecondSystem>(kUpdate);
 
     const auto& storage = std::as_const(scheduler).GetSystemStorage();
     CHECK_EQ(storage.size(), 2);
@@ -259,7 +369,7 @@ TEST_SUITE("app::details::Scheduler") {
   TEST_CASE("Scheduler::GetSystemStorage: const version") {
     Scheduler scheduler;
 
-    scheduler.AddSystem<FirstSystem>(Update{});
+    scheduler.AddSystem<FirstSystem>(kUpdate);
     const auto& storage = std::as_const(scheduler).GetSystemStorage();
     CHECK_EQ(storage.size(), 1);
   }
@@ -269,11 +379,11 @@ TEST_SUITE("app::details::Scheduler") {
     World world;
     Scheduler scheduler;
 
-    scheduler.AddSystem<FirstSystem>(Update{});
-    scheduler.AddSystem<SecondSystem>(Update{});
-    scheduler.AddSystem<ThirdSystem>(Update{});
+    scheduler.AddSystem<FirstSystem>(kUpdate);
+    scheduler.AddSystem<SecondSystem>(kUpdate);
+    scheduler.AddSystem<ThirdSystem>(kUpdate);
 
-    CHECK_EQ(scheduler.SystemCount(Update{}), 3);
+    CHECK_EQ(scheduler.SystemCount(kUpdate), 3);
     CHECK(scheduler.ContainsSystem<FirstSystem>());
     CHECK(scheduler.ContainsSystem<SecondSystem>());
     CHECK(scheduler.ContainsSystem<ThirdSystem>());
@@ -286,13 +396,13 @@ TEST_SUITE("app::details::Scheduler") {
     World world;
     Scheduler scheduler;
 
-    scheduler.AddSystem<FirstSystem>(Update{});
+    scheduler.AddSystem<FirstSystem>(kUpdate);
     scheduler.BuildAllGraphs(world);
 
-    scheduler.AddSystem<SecondSystem>(Update{});
+    scheduler.AddSystem<SecondSystem>(kUpdate);
     scheduler.BuildAllGraphs(world);
 
-    CHECK_EQ(scheduler.SystemCount(Update{}), 2);
+    CHECK_EQ(scheduler.SystemCount(kUpdate), 2);
   }
 
   TEST_CASE("Scheduler::BuildAllGraphs: empty schedule") {
@@ -300,24 +410,24 @@ TEST_SUITE("app::details::Scheduler") {
     World world;
     Scheduler scheduler;
 
-    CHECK_EQ(scheduler.SystemCount(Update{}), 0);
+    CHECK_EQ(scheduler.SystemCount(kUpdate), 0);
 
     // Should succeed even with no systems
     scheduler.BuildAllGraphs(world);
-    CHECK_EQ(scheduler.SystemCount(Update{}), 0);
+    CHECK_EQ(scheduler.SystemCount(kUpdate), 0);
   }
 
   TEST_CASE("Scheduler::RegisterOrdering") {
     Scheduler scheduler;
 
-    scheduler.AddSystem<FirstSystem>(Update{});
-    scheduler.AddSystem<SecondSystem>(Update{});
+    scheduler.AddSystem<FirstSystem>(kUpdate);
+    scheduler.AddSystem<SecondSystem>(kUpdate);
 
     SystemOrdering ordering;
     ordering.after.push_back(SystemTypeIdOf<FirstSystem>());
-    scheduler.RegisterOrdering<SecondSystem>(Update{}, ordering);
+    scheduler.RegisterOrdering<SecondSystem>(kUpdate, ordering);
 
-    CHECK_EQ(scheduler.SystemCount(Update{}), 2);
+    CHECK_EQ(scheduler.SystemCount(kUpdate), 2);
   }
 
   TEST_CASE("Scheduler::BuildAllGraphs: complex system graph") {
@@ -328,11 +438,11 @@ TEST_SUITE("app::details::Scheduler") {
     world.InsertResource(RenderSettings{});
 
     Scheduler scheduler;
-    scheduler.AddSystem<TimeUpdateSystem>(Update{});
-    scheduler.AddSystem<PhysicsSystem>(Update{});
-    scheduler.AddSystem<RenderSystem>(Update{});
+    scheduler.AddSystem<TimeUpdateSystem>(kUpdate);
+    scheduler.AddSystem<PhysicsSystem>(kUpdate);
+    scheduler.AddSystem<RenderSystem>(kUpdate);
 
-    CHECK_EQ(scheduler.SystemCount(Update{}), 3);
+    CHECK_EQ(scheduler.SystemCount(kUpdate), 3);
     CHECK(scheduler.ContainsSystem<TimeUpdateSystem>());
     CHECK(scheduler.ContainsSystem<PhysicsSystem>());
     CHECK(scheduler.ContainsSystem<RenderSystem>());

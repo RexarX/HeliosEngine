@@ -11,21 +11,19 @@
 #include <concepts>
 #include <cstddef>
 #include <memory>
-#include <mutex>
-#include <shared_mutex>
 #include <utility>
 
 namespace helios::memory {
 
 /**
  * @brief Double-buffered frame allocator.
- * @details Maintains two frame buffers, allowing memory from the previous frame
- * to remain valid while allocating for the current frame.
+ * @details Maintains two frame buffers,
+ * allowing memory from the previous frame to remain valid while allocating for the current frame.
  * Useful when data needs to be accessible for one additional frame (e.g., GPU upload buffers, interpolation).
  *
  * The allocator automatically switches between buffers on each frame.
  *
- * Uses atomic for buffer index and mutex only for frame transitions.
+ * Uses atomic for buffer index and frame transitions.
  * Previous frame's data remains valid until the next frame begins.
  * Allocations are lock-free since FrameAllocator uses atomic operations internally.
  *
@@ -110,6 +108,9 @@ public:
   /**
    * @brief Advances to the next frame, switching buffers.
    * @details Resets the new current buffer and makes the old current buffer the previous buffer.
+   * @warning Not thread-safe with Allocate().
+   * Must be called from a single thread while no other threads are allocating.
+   * Typically called once per frame by the main thread.
    */
   void NextFrame() noexcept;
 
@@ -141,19 +142,23 @@ public:
    * @brief Gets the total capacity across both buffers.
    * @return Total capacity in bytes
    */
-  [[nodiscard]] size_t Capacity() const noexcept;
+  [[nodiscard]] size_t Capacity() const noexcept {
+    return allocators_.front().Capacity() + allocators_.back().Capacity();
+  }
 
   /**
    * @brief Gets the current frame buffer index.
    * @return Current buffer index (0 or 1)
    */
-  [[nodiscard]] size_t CurrentBufferIndex() const noexcept;
+  [[nodiscard]] size_t CurrentBufferIndex() const noexcept { return current_buffer_.load(std::memory_order_relaxed); }
 
   /**
    * @brief Gets the previous frame buffer index.
    * @return Previous buffer index (0 or 1)
    */
-  [[nodiscard]] size_t PreviousBufferIndex() const noexcept;
+  [[nodiscard]] size_t PreviousBufferIndex() const noexcept {
+    return 1 - current_buffer_.load(std::memory_order_relaxed);
+  }
 
   /**
    * @brief Gets free space in current buffer.
@@ -164,7 +169,6 @@ public:
 private:
   std::array<FrameAllocator, kBufferCount> allocators_;  ///< Two frame allocators
   std::atomic<size_t> current_buffer_{0};                ///< Current buffer index (atomic for lock-free reads)
-  mutable std::shared_mutex mutex_;                      ///< Mutex for frame transitions only
 };
 
 inline DoubleFrameAllocator::DoubleFrameAllocator(DoubleFrameAllocator&& other) noexcept
@@ -178,10 +182,8 @@ inline DoubleFrameAllocator& DoubleFrameAllocator::operator=(DoubleFrameAllocato
     return *this;
   }
 
-  const std::scoped_lock lock(mutex_);
-  const std::scoped_lock other_lock(other.mutex_);
-
   allocators_ = std::move(other.allocators_);
+
   current_buffer_.store(other.current_buffer_.load(std::memory_order_acquire), std::memory_order_release);
   other.current_buffer_.store(0, std::memory_order_release);
 
@@ -195,25 +197,24 @@ inline AllocationResult DoubleFrameAllocator::Allocate(size_t size, size_t align
 }
 
 inline void DoubleFrameAllocator::NextFrame() noexcept {
-  const std::scoped_lock lock(mutex_);
   // Switch to the other buffer
   const size_t new_buffer = 1 - current_buffer_.load(std::memory_order_relaxed);
+
   // Reset the new current buffer before switching
   allocators_[new_buffer].Reset();
-  // Atomically switch to new buffer
+
+  // Switch to new buffer
   current_buffer_.store(new_buffer, std::memory_order_release);
 }
 
 inline void DoubleFrameAllocator::Reset() noexcept {
-  const std::scoped_lock lock(mutex_);
   allocators_.front().Reset();
   allocators_.back().Reset();
 }
 
 inline AllocatorStats DoubleFrameAllocator::Stats() const noexcept {
-  const std::shared_lock lock(mutex_);
-  const auto stats0 = allocators_.front().Stats();
-  const auto stats1 = allocators_.back().Stats();
+  const AllocatorStats stats0 = allocators_.front().Stats();
+  const AllocatorStats stats1 = allocators_.back().Stats();
 
   return {
       .total_allocated = stats0.total_allocated + stats1.total_allocated,
@@ -224,34 +225,6 @@ inline AllocatorStats DoubleFrameAllocator::Stats() const noexcept {
       .total_deallocations = stats0.total_deallocations + stats1.total_deallocations,
       .alignment_waste = stats0.alignment_waste + stats1.alignment_waste,
   };
-}
-
-inline AllocatorStats DoubleFrameAllocator::CurrentFrameStats() const noexcept {
-  const size_t buffer = current_buffer_.load(std::memory_order_acquire);
-  return allocators_[buffer].Stats();
-}
-
-inline AllocatorStats DoubleFrameAllocator::PreviousFrameStats() const noexcept {
-  const size_t buffer = current_buffer_.load(std::memory_order_acquire);
-  return allocators_[1 - buffer].Stats();
-}
-
-inline size_t DoubleFrameAllocator::Capacity() const noexcept {
-  // Capacity is immutable after construction, no lock needed
-  return allocators_.front().Capacity() + allocators_.back().Capacity();
-}
-
-inline size_t DoubleFrameAllocator::CurrentBufferIndex() const noexcept {
-  return current_buffer_.load(std::memory_order_acquire);
-}
-
-inline size_t DoubleFrameAllocator::PreviousBufferIndex() const noexcept {
-  return 1 - current_buffer_.load(std::memory_order_acquire);
-}
-
-inline size_t DoubleFrameAllocator::FreeSpace() const noexcept {
-  const size_t buffer = current_buffer_.load(std::memory_order_acquire);
-  return allocators_[buffer].FreeSpace();
 }
 
 template <typename T>
@@ -295,6 +268,21 @@ inline T* DoubleFrameAllocator::AllocateAndConstructArray(size_t count) noexcept
     }
   }
   return ptr;
+}
+
+inline AllocatorStats DoubleFrameAllocator::CurrentFrameStats() const noexcept {
+  const size_t buffer = current_buffer_.load(std::memory_order_relaxed);
+  return allocators_[buffer].Stats();
+}
+
+inline AllocatorStats DoubleFrameAllocator::PreviousFrameStats() const noexcept {
+  const size_t buffer = current_buffer_.load(std::memory_order_relaxed);
+  return allocators_[1 - buffer].Stats();
+}
+
+inline size_t DoubleFrameAllocator::FreeSpace() const noexcept {
+  const size_t buffer = current_buffer_.load(std::memory_order_relaxed);
+  return allocators_[buffer].FreeSpace();
 }
 
 }  // namespace helios::memory

@@ -2394,7 +2394,7 @@ inline auto BasicQuery<WorldT, Allocator, Components...>::GetComponents() const 
  * @endcode
  */
 template <WorldType WorldT = World, typename Allocator = std::allocator<ComponentTypeId>>
-class BasicQueryBuilder final {
+class BasicQueryBuilder {
 public:
   using allocator_type = Allocator;
 

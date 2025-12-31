@@ -33,7 +33,7 @@ TEST_SUITE("app::SystemSetConfig") {
     SubApp sub_app;
 
     // Should compile and create builder
-    auto config = sub_app.ConfigureSet<PhysicsSet>(Update{});
+    auto config = sub_app.ConfigureSet<PhysicsSet>(kUpdate);
 
     CHECK(true);
   }
@@ -42,7 +42,7 @@ TEST_SUITE("app::SystemSetConfig") {
     SubApp sub_app;
 
     // Configure set ordering
-    sub_app.ConfigureSet<PhysicsSet>(Update{}).After<InputSet>();
+    sub_app.ConfigureSet<PhysicsSet>(kUpdate).After<InputSet>();
 
     CHECK(true);
   }
@@ -51,7 +51,7 @@ TEST_SUITE("app::SystemSetConfig") {
     SubApp sub_app;
 
     // Configure set ordering
-    sub_app.ConfigureSet<PhysicsSet>(Update{}).Before<RenderSet>();
+    sub_app.ConfigureSet<PhysicsSet>(kUpdate).Before<RenderSet>();
 
     CHECK(true);
   }
@@ -60,7 +60,7 @@ TEST_SUITE("app::SystemSetConfig") {
     SubApp sub_app;
 
     // Configure with multiple constraints
-    sub_app.ConfigureSet<PhysicsSet>(Update{}).After<InputSet>().Before<RenderSet>();
+    sub_app.ConfigureSet<PhysicsSet>(kUpdate).After<InputSet>().Before<RenderSet>();
 
     CHECK(true);
   }
@@ -68,7 +68,7 @@ TEST_SUITE("app::SystemSetConfig") {
   TEST_CASE("SystemSetConfig::SystemSetConfig: Chained configuration with multiple sets") {
     SubApp sub_app;
 
-    sub_app.ConfigureSet<GameplaySet>(Update{}).After<InputSet>().After<PhysicsSet>().Before<RenderSet>();
+    sub_app.ConfigureSet<GameplaySet>(kUpdate).After<InputSet>().After<PhysicsSet>().Before<RenderSet>();
 
     CHECK(true);
   }

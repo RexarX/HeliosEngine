@@ -9,11 +9,10 @@
 
 #include <algorithm>
 #include <array>
+#include <atomic>
 #include <concepts>
 #include <cstddef>
 #include <memory>
-#include <mutex>
-#include <shared_mutex>
 #include <utility>
 
 namespace helios::memory {
@@ -25,8 +24,6 @@ namespace helios::memory {
  *
  * The allocator cycles through N buffers, ensuring that data from the previous
  * N-1 frames remains accessible while allocating for the current frame.
- *
- * Uses shared mutex for read operations and exclusive lock for writes.
  *
  * @note Thread-safe.
  * Previous N-1 frames' data remains valid until the buffer cycles back.
@@ -61,7 +58,9 @@ public:
    * @param alignment Alignment requirement (must be power of 2)
    * @return AllocationResult with pointer and actual allocated size, or {nullptr, 0} on failure
    */
-  [[nodiscard]] AllocationResult Allocate(size_t size, size_t alignment = kDefaultAlignment) noexcept;
+  [[nodiscard]] AllocationResult Allocate(size_t size, size_t alignment = kDefaultAlignment) noexcept {
+    return allocators_[current_buffer_.load(std::memory_order_acquire)].Allocate(size, alignment);
+  }
 
   /**
    * @brief Allocates memory for a single object of type T.
@@ -110,6 +109,8 @@ public:
   /**
    * @brief Advances to the next frame, cycling through buffers.
    * @details Resets the new current buffer and makes previous buffers accessible.
+   * @warning Not thread-safe with Allocate(). Must be called from a single thread while
+   * no other threads are allocating. Typically called once per frame by the main thread.
    */
   void NextFrame() noexcept;
 
@@ -129,7 +130,9 @@ public:
    * @brief Gets statistics for the current frame buffer.
    * @return AllocatorStats for current buffer
    */
-  [[nodiscard]] AllocatorStats CurrentFrameStats() const noexcept;
+  [[nodiscard]] AllocatorStats CurrentFrameStats() const noexcept {
+    return allocators_[current_buffer_.load(std::memory_order_acquire)].Stats();
+  }
 
   /**
    * @brief Gets statistics for a specific buffer.
@@ -149,13 +152,15 @@ public:
    * @brief Gets the current frame buffer index.
    * @return Current buffer index (0 to N-1)
    */
-  [[nodiscard]] size_t CurrentBufferIndex() const noexcept;
+  [[nodiscard]] size_t CurrentBufferIndex() const noexcept { return current_buffer_.load(std::memory_order_relaxed); }
 
   /**
    * @brief Gets free space in current buffer.
    * @return Free space in bytes
    */
-  [[nodiscard]] size_t FreeSpace() const noexcept;
+  [[nodiscard]] size_t FreeSpace() const noexcept {
+    return allocators_[current_buffer_.load(std::memory_order_acquire)].FreeSpace();
+  }
 
   /**
    * @brief Gets the number of buffers.
@@ -170,15 +175,15 @@ private:
   [[nodiscard]] static auto CreateAllocators(size_t capacity_per_buffer) -> std::array<FrameAllocator, N>;
 
   std::array<FrameAllocator, N> allocators_;  ///< N frame allocators
-  size_t current_buffer_ = 0;                 ///< Current buffer index
-  mutable std::shared_mutex mutex_;           ///< Mutex for thread-safety
+  std::atomic<size_t> current_buffer_{0};     ///< Current buffer index
 };
 
 template <size_t N>
   requires(N > 0)
 inline NFrameAllocator<N>::NFrameAllocator(NFrameAllocator&& other) noexcept
-    : allocators_(std::move(other.allocators_)), current_buffer_(other.current_buffer_) {
-  other.current_buffer_ = 0;
+    : allocators_(std::move(other.allocators_)),
+      current_buffer_(other.current_buffer_.load(std::memory_order_acquire)) {
+  other.current_buffer_.store(0, std::memory_order_release);
 }
 
 template <size_t N>
@@ -188,111 +193,11 @@ inline auto NFrameAllocator<N>::operator=(NFrameAllocator&& other) noexcept -> N
     return *this;
   }
 
-  const std::scoped_lock lock(mutex_);
-  const std::scoped_lock other_lock(other.mutex_);
-
   allocators_ = std::move(other.allocators_);
-  current_buffer_ = other.current_buffer_;
-  other.current_buffer_ = 0;
+  current_buffer_.store(other.current_buffer_.load(std::memory_order_acquire), std::memory_order_release);
+  other.current_buffer_.store(0, std::memory_order_release);
 
   return *this;
-}
-
-template <size_t N>
-  requires(N > 0)
-inline AllocationResult NFrameAllocator<N>::Allocate(size_t size, size_t alignment) noexcept {
-  const std::shared_lock lock(mutex_);
-  return allocators_[current_buffer_].Allocate(size, alignment);
-}
-
-template <size_t N>
-  requires(N > 0)
-inline void NFrameAllocator<N>::NextFrame() noexcept {
-  const std::scoped_lock lock(mutex_);
-  // Advance to next buffer (wrapping around)
-  current_buffer_ = (current_buffer_ + 1) % N;
-  // Reset the new current buffer
-  allocators_[current_buffer_].Reset();
-}
-
-template <size_t N>
-  requires(N > 0)
-inline void NFrameAllocator<N>::Reset() noexcept {
-  const std::scoped_lock lock(mutex_);
-  for (auto& allocator : allocators_) {
-    allocator.Reset();
-  }
-}
-
-template <size_t N>
-  requires(N > 0)
-inline AllocatorStats NFrameAllocator<N>::Stats() const noexcept {
-  const std::shared_lock lock(mutex_);
-  AllocatorStats combined{};
-
-  for (const auto& allocator : allocators_) {
-    const auto stats = allocator.Stats();
-    combined.total_allocated += stats.total_allocated;
-    combined.total_freed += stats.total_freed;
-    combined.peak_usage = std::max(combined.peak_usage, stats.peak_usage);
-    combined.allocation_count += stats.allocation_count;
-    combined.total_allocations += stats.total_allocations;
-    combined.total_deallocations += stats.total_deallocations;
-    combined.alignment_waste += stats.alignment_waste;
-  }
-
-  return combined;
-}
-
-template <size_t N>
-  requires(N > 0)
-inline AllocatorStats NFrameAllocator<N>::CurrentFrameStats() const noexcept {
-  const std::shared_lock lock(mutex_);
-  return allocators_[current_buffer_].Stats();
-}
-
-template <size_t N>
-  requires(N > 0)
-inline AllocatorStats NFrameAllocator<N>::BufferStats(size_t buffer_index) const noexcept {
-  HELIOS_ASSERT(buffer_index < N, "Failed to get buffer stats: buffer_index '{}' is out of range [0, {}]!",
-                buffer_index, N);
-  const std::shared_lock lock(mutex_);
-  return allocators_[buffer_index].Stats();
-}
-
-template <size_t N>
-  requires(N > 0)
-inline size_t NFrameAllocator<N>::Capacity() const noexcept {
-  const std::shared_lock lock(mutex_);
-  size_t total = 0;
-  for (const auto& allocator : allocators_) {
-    total += allocator.Capacity();
-  }
-  return total;
-}
-
-template <size_t N>
-  requires(N > 0)
-inline size_t NFrameAllocator<N>::CurrentBufferIndex() const noexcept {
-  const std::shared_lock lock(mutex_);
-  return current_buffer_;
-}
-
-template <size_t N>
-  requires(N > 0)
-inline size_t NFrameAllocator<N>::FreeSpace() const noexcept {
-  const std::shared_lock lock(mutex_);
-  return allocators_[current_buffer_].FreeSpace();
-}
-
-template <size_t N>
-  requires(N > 0)
-inline auto NFrameAllocator<N>::CreateAllocators(size_t capacity_per_buffer) -> std::array<FrameAllocator, N> {
-  // Helper to construct array with compile-time recursion
-  auto construct = [capacity_per_buffer]<size_t... Is>(std::index_sequence<Is...>) -> std::array<FrameAllocator, N> {
-    return {(static_cast<void>(Is), FrameAllocator(capacity_per_buffer))...};
-  };
-  return construct(std::make_index_sequence<N>{});
 }
 
 template <size_t N>
@@ -344,6 +249,74 @@ inline T* NFrameAllocator<N>::AllocateAndConstructArray(size_t count) noexcept(
     }
   }
   return ptr;
+}
+
+template <size_t N>
+  requires(N > 0)
+inline void NFrameAllocator<N>::NextFrame() noexcept {
+  // Advance to next buffer (wrapping around)
+  const size_t buffer = (current_buffer_.load(std::memory_order_relaxed) + 1) % N;
+
+  // Reset the new current buffer before switching
+  allocators_[buffer].Reset();
+
+  // Switch to new buffer
+  current_buffer_.store(buffer, std::memory_order_release);
+}
+
+template <size_t N>
+  requires(N > 0)
+inline void NFrameAllocator<N>::Reset() noexcept {
+  for (auto& allocator : allocators_) {
+    allocator.Reset();
+  }
+}
+
+template <size_t N>
+  requires(N > 0)
+inline AllocatorStats NFrameAllocator<N>::Stats() const noexcept {
+  AllocatorStats combined{};
+
+  for (const auto& allocator : allocators_) {
+    const auto stats = allocator.Stats();
+    combined.total_allocated += stats.total_allocated;
+    combined.total_freed += stats.total_freed;
+    combined.peak_usage = std::max(combined.peak_usage, stats.peak_usage);
+    combined.allocation_count += stats.allocation_count;
+    combined.total_allocations += stats.total_allocations;
+    combined.total_deallocations += stats.total_deallocations;
+    combined.alignment_waste += stats.alignment_waste;
+  }
+
+  return combined;
+}
+
+template <size_t N>
+  requires(N > 0)
+inline AllocatorStats NFrameAllocator<N>::BufferStats(size_t buffer_index) const noexcept {
+  HELIOS_ASSERT(buffer_index < N, "Failed to get buffer stats: buffer_index '{}' is out of range [0, {}]!",
+                buffer_index, N);
+  return allocators_[buffer_index].Stats();
+}
+
+template <size_t N>
+  requires(N > 0)
+inline size_t NFrameAllocator<N>::Capacity() const noexcept {
+  size_t total = 0;
+  for (const auto& allocator : allocators_) {
+    total += allocator.Capacity();
+  }
+  return total;
+}
+
+template <size_t N>
+  requires(N > 0)
+inline auto NFrameAllocator<N>::CreateAllocators(size_t capacity_per_buffer) -> std::array<FrameAllocator, N> {
+  // Helper to construct array with compile-time recursion
+  auto construct = [capacity_per_buffer]<size_t... Is>(std::index_sequence<Is...>) -> std::array<FrameAllocator, N> {
+    return {(static_cast<void>(Is), FrameAllocator(capacity_per_buffer))...};
+  };
+  return construct(std::make_index_sequence<N>{});
 }
 
 using TripleFrameAllocator = NFrameAllocator<3>;  ///< Triple-buffered frame allocator

@@ -701,6 +701,9 @@ struct EarlyUpdate {
   static constexpr auto Before() noexcept { return std::array{ScheduleIdOf<Update>()}; }
 };
 
+inline constexpr LateUpdate kLateUpdate{};
+inline constexpr EarlyUpdate kEarlyUpdate{};
+
 // ============================================================================
 // Modules
 // ============================================================================
@@ -1047,9 +1050,9 @@ TEST_SUITE("app::AppIntegration") {
       void Update(SystemContext& ctx) override { ctx.WriteResource<ScheduleTracker>().schedules.emplace_back("Late"); }
     };
 
-    app.AddSystem<EarlySystem>(EarlyUpdate{});
+    app.AddSystem<EarlySystem>(kEarlyUpdate);
     app.AddSystem<UpdateSystem>(kUpdate);
-    app.AddSystem<LateSystem>(LateUpdate{});
+    app.AddSystem<LateSystem>(kLateUpdate);
 
     // Capture schedule order during run
     std::vector<std::string> captured_schedules;
@@ -1550,5 +1553,149 @@ TEST_SUITE("app::AppIntegration") {
 
     const double elapsed = timer.ElapsedMilliSec();
     HELIOS_INFO("Frame allocator test completed in {:.3f}ms", elapsed);
+  }
+
+  TEST_CASE("App: Same System In Multiple Schedules") {
+    HELIOS_INFO("Testing same system in multiple schedules");
+    helios::Timer timer;
+
+    App app;
+
+    // Resource to track execution counts per schedule
+    struct CleanupCounter {
+      std::atomic<int> pre_update_count{0};
+      std::atomic<int> post_update_count{0};
+      std::atomic<int> total_count{0};
+
+      CleanupCounter() = default;
+      CleanupCounter(const CleanupCounter& other) noexcept
+          : pre_update_count(other.pre_update_count.load(std::memory_order_relaxed)),
+            post_update_count(other.post_update_count.load(std::memory_order_relaxed)),
+            total_count(other.total_count.load(std::memory_order_relaxed)) {}
+
+      CleanupCounter(CleanupCounter&& other) noexcept
+          : pre_update_count(other.pre_update_count.load(std::memory_order_relaxed)),
+            post_update_count(other.post_update_count.load(std::memory_order_relaxed)),
+            total_count(other.total_count.load(std::memory_order_relaxed)) {}
+
+      CleanupCounter& operator=(const CleanupCounter&) = delete;
+      CleanupCounter& operator=(CleanupCounter&&) = delete;
+    };
+
+    app.InsertResource(CleanupCounter{});
+
+    // A cleanup system that can run in multiple schedules
+    // This simulates a real-world pattern: cleanup at both start and end of update
+    struct CleanupSystem final : public System {
+      static constexpr std::string_view GetName() noexcept { return "CleanupSystem"; }
+      static constexpr auto GetAccessPolicy() noexcept { return AccessPolicy().WriteResources<CleanupCounter>(); }
+
+      void Update(SystemContext& ctx) override {
+        auto& counter = ctx.WriteResource<CleanupCounter>();
+        counter.total_count.fetch_add(1, std::memory_order_relaxed);
+      }
+    };
+
+    // A system that runs only in Update schedule
+    struct GameplaySystem final : public System {
+      static constexpr std::string_view GetName() noexcept { return "GameplaySystem"; }
+      static constexpr auto GetAccessPolicy() noexcept { return AccessPolicy().WriteResources<CleanupCounter>(); }
+
+      void Update(SystemContext& /*ctx*/) override {
+        // Just runs in Update schedule
+      }
+    };
+
+    // Add the same CleanupSystem to PreUpdate and PostUpdate schedules
+    app.AddSystem<CleanupSystem>(kPreUpdate);
+    app.AddSystem<GameplaySystem>(kUpdate);
+    app.AddSystem<CleanupSystem>(kPostUpdate);
+
+    // Verify the systems are correctly registered
+    CHECK_EQ(app.SystemCount(), 3);
+    CHECK_EQ(app.SystemCount(kPreUpdate), 1);
+    CHECK_EQ(app.SystemCount(kUpdate), 1);
+    CHECK_EQ(app.SystemCount(kPostUpdate), 1);
+
+    CHECK(app.ContainsSystem<CleanupSystem>(kPreUpdate));
+    CHECK_FALSE(app.ContainsSystem<CleanupSystem>(kUpdate));
+    CHECK(app.ContainsSystem<CleanupSystem>(kPostUpdate));
+
+    CHECK_FALSE(app.ContainsSystem<GameplaySystem>(kPreUpdate));
+    CHECK(app.ContainsSystem<GameplaySystem>(kUpdate));
+    CHECK_FALSE(app.ContainsSystem<GameplaySystem>(kPostUpdate));
+
+    // Run and verify execution counts
+    int captured_total = 0;
+    const int frames = 10;
+
+    app.SetRunner([frames, &captured_total](App& running_app) {
+      AppExitCode result = FixedFrameRunner(running_app, frames);
+      const auto& world = std::as_const(running_app).GetMainWorld();
+      const auto& counter = world.ReadResource<CleanupCounter>();
+      captured_total = counter.total_count.load(std::memory_order_relaxed);
+      return result;
+    });
+
+    AppExitCode result = app.Run();
+
+    CHECK_EQ(result, AppExitCode::Success);
+    // CleanupSystem runs twice per frame (PreUpdate + PostUpdate)
+    CHECK_EQ(captured_total, frames * 2);
+
+    const double elapsed = timer.ElapsedMilliSec();
+    HELIOS_INFO("Same system in multiple schedules test completed in {:.3f}ms", elapsed);
+  }
+
+  TEST_CASE("App: Multiple Instances Of Same System Execute Independently") {
+    HELIOS_INFO("Testing independent execution of same system in multiple schedules");
+
+    App app;
+
+    // Track which schedules executed
+    struct ScheduleTracker {
+      std::vector<std::string> execution_order;
+    };
+
+    app.InsertResource(ScheduleTracker{});
+
+    struct TrackerSystem final : public System {
+      static constexpr std::string_view GetName() noexcept { return "TrackerSystem"; }
+      static constexpr auto GetAccessPolicy() noexcept { return AccessPolicy().WriteResources<ScheduleTracker>(); }
+
+      void Update(SystemContext& ctx) override {
+        // This system runs multiple times per frame (in different schedules)
+        // We can't know which schedule we're in from inside the system,
+        // but we can track that we executed
+        ctx.WriteResource<ScheduleTracker>().execution_order.emplace_back("TrackerExecuted");
+      }
+    };
+
+    // Add TrackerSystem to three different schedules
+    app.AddSystem<TrackerSystem>(kPreUpdate);
+    app.AddSystem<TrackerSystem>(kUpdate);
+    app.AddSystem<TrackerSystem>(kPostUpdate);
+
+    CHECK_EQ(app.SystemCount(), 3);
+    CHECK(app.ContainsSystem<TrackerSystem>(kPreUpdate));
+    CHECK(app.ContainsSystem<TrackerSystem>(kUpdate));
+    CHECK(app.ContainsSystem<TrackerSystem>(kPostUpdate));
+
+    // Global check should also pass
+    CHECK(app.ContainsSystem<TrackerSystem>());
+
+    std::vector<std::string> captured_order;
+    app.SetRunner([&captured_order](App& running_app) {
+      AppExitCode result = FixedFrameRunner(running_app, 1);
+      const auto& world = std::as_const(running_app).GetMainWorld();
+      const auto& tracker = world.ReadResource<ScheduleTracker>();
+      captured_order = tracker.execution_order;
+      return result;
+    });
+
+    app.Run();
+
+    // TrackerSystem should have executed 3 times (once per schedule)
+    CHECK_EQ(captured_order.size(), 3);
   }
 }  // TEST_SUITE

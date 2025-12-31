@@ -116,6 +116,16 @@ public:
   void Execute(ecs::World& world, async::Executor& executor, std::span<SystemStorage> system_storage);
 
   /**
+   * @brief Finds the storage index of a system by type ID within this schedule.
+   * @param system_id System type ID to find
+   * @param system_storage Reference to global system storage
+   * @return Index in system storage if found, std::nullopt otherwise
+   */
+  [[nodiscard]] auto FindSystemIndexByType(ecs::SystemTypeId system_id,
+                                           std::span<const SystemStorage> system_storage) const noexcept
+      -> std::optional<size_t>;
+
+  /**
    * @brief Checks if this schedule is the Main stage.
    * @details Main stage executes synchronously on the main thread.
    * All other stages execute asynchronously via the executor.
@@ -124,12 +134,25 @@ public:
   [[nodiscard]] bool IsMainStage() const noexcept { return schedule_id_ == ScheduleIdOf<Main>(); }
 
   /**
-   * @brief Checks if a system is in this schedule.
+   * @brief Checks if a system is in this schedule by storage index.
    * @param system_storage_index Index in the global system storage
    * @return True if system is present, false otherwise
    */
   [[nodiscard]] bool Contains(size_t system_storage_index) const noexcept {
     return std::ranges::find(system_indices_, system_storage_index) != system_indices_.end();
+  }
+
+  /**
+   * @brief Checks if a system of given type is in this schedule.
+   * @param system_id System type ID to check
+   * @param system_storage Reference to global system storage
+   * @return True if system of this type is present, false otherwise
+   */
+  [[nodiscard]] bool ContainsSystemOfType(ecs::SystemTypeId system_id,
+                                          std::span<const SystemStorage> system_storage) const noexcept {
+    return std::ranges::any_of(system_indices_, [system_storage, system_id](size_t index) {
+      return index < system_storage.size() && system_storage[index].info.type_id == system_id;
+    });
   }
 
   /**
@@ -149,6 +172,12 @@ public:
    * @return Number of systems
    */
   [[nodiscard]] size_t SystemCount() const noexcept { return system_indices_.size(); }
+
+  /**
+   * @brief Gets const reference to system indices in this schedule.
+   * @return Const reference to vector of system storage indices
+   */
+  [[nodiscard]] const std::vector<size_t>& SystemIndices() const noexcept { return system_indices_; }
 
 private:
   /**
@@ -210,6 +239,20 @@ inline void ScheduleExecutor::AddSystem(size_t system_storage_index) {
 inline void ScheduleExecutor::RegisterOrdering(ecs::SystemTypeId system_id, SystemOrdering ordering) {
   system_orderings_[system_id] = std::move(ordering);
   graph_built_ = false;
+}
+
+inline auto ScheduleExecutor::FindSystemIndexByType(ecs::SystemTypeId system_id,
+                                                    std::span<const SystemStorage> system_storage) const noexcept
+    -> std::optional<size_t> {
+  std::optional<size_t> result;
+  const auto it = std::ranges::find_if(system_indices_, [system_storage, system_id](size_t index) {
+    return index < system_storage.size() && system_storage[index].info.type_id == system_id;
+  });
+
+  if (it != system_indices_.end()) {
+    result = *it;
+  }
+  return result;
 }
 
 /**
@@ -309,6 +352,67 @@ public:
   void BuildAllGraphs(ecs::World& world);
 
   /**
+   * @brief Appends system ordering constraints to a system's metadata in a specific schedule.
+   * @details This updates SystemInfo.before_systems and SystemInfo.after_systems for the given system type
+   * within the specified schedule. If the system has not been added to the schedule yet, this call is a no-op.
+   * @tparam T System type
+   * @tparam S Schedule type
+   * @param schedule Schedule where the system is registered
+   * @param before Systems that must run after T in this schedule
+   * @param after Systems that must run before T in this schedule
+   */
+  template <ecs::SystemTrait T, ScheduleTrait S>
+  void AppendSystemOrderingMetadata(S schedule, std::span<const ecs::SystemTypeId> before,
+                                    std::span<const ecs::SystemTypeId> after);
+
+  /**
+   * @brief Appends system set membership to a system's metadata in a specific schedule.
+   * @details This updates SystemInfo.system_sets for the given system type within the specified schedule.
+   * If the system has not been added to the schedule yet, this call is a no-op.
+   * @tparam T System type
+   * @tparam S Schedule type
+   * @param schedule Schedule where the system is registered
+   * @param sets System set identifiers to append
+   */
+  template <ecs::SystemTrait T, ScheduleTrait S>
+  void AppendSystemSetMetadata(S schedule, std::span<const SystemSetId> sets);
+
+  /**
+   * @brief Gets or registers a system set in the global registry.
+   * @details If the set is not present, it will be created and initialized with its static name and ID.
+   * @tparam Set System set type
+   * @return Reference to the SystemSetInfo for this set
+   */
+  template <SystemSetTrait Set>
+  SystemSetInfo& GetOrRegisterSystemSet();
+
+  /**
+   * @brief Adds a system to a system set's membership list.
+   * @details If the set is not present in the registry this call is a no-op.
+   * @param set_id Identifier of the system set
+   * @param system_id Identifier of the system to add
+   */
+  void AddSystemToSet(SystemSetId set_id, ecs::SystemTypeId system_id);
+
+  /**
+   * @brief Adds a set-level ordering constraint: set A runs before set B.
+   * @details All systems that are members of set A must run before systems that are members of set B.
+   * This relationship is schedule-agnostic at registration time; it is applied when building graphs
+   * for each schedule based on actual system membership in that schedule.
+   * @param before_id Identifier of the set that must run before
+   * @param after_id Identifier of the set that must run after
+   */
+  void AddSetRunsBefore(SystemSetId before_id, SystemSetId after_id);
+
+  /**
+   * @brief Adds a set-level ordering constraint: set A runs after set B.
+   * @details Convenience wrapper around AddSetRunsBefore(B, A).
+   * @param after_id Identifier of the set that must run after
+   * @param before_id Identifier of the set that must run before
+   */
+  void AddSetRunsAfter(SystemSetId after_id, SystemSetId before_id) { AddSetRunsBefore(before_id, after_id); }
+
+  /**
    * @brief Checks if a system of type T is in any schedule.
    * @tparam T System type
    * @return True if system is present, false otherwise
@@ -346,67 +450,6 @@ public:
    * @return Const reference to vector of SystemStorage
    */
   [[nodiscard]] auto GetSystemStorage() const noexcept -> const std::vector<SystemStorage>& { return system_storage_; }
-
-  /**
-   * @brief Appends system ordering constraints to a system's metadata in a specific schedule.
-   * @details This updates SystemInfo.before_systems and SystemInfo.after_systems for the given system type
-   * within the specified schedule. If the system has not been added to the schedule yet, this call is a no-op.
-   * @tparam T System type
-   * @tparam S Schedule type
-   * @param schedule Schedule where the system is registered
-   * @param before Systems that must run after T in this schedule
-   * @param after Systems that must run before T in this schedule
-   */
-  template <ecs::SystemTrait T, ScheduleTrait S>
-  void AppendSystemOrderingMetadata(S schedule, std::span<const ecs::SystemTypeId> before,
-                                    std::span<const ecs::SystemTypeId> after);
-
-  /**
-   * @brief Appends system set membership to a system's metadata in a specific schedule.
-   * @details This updates SystemInfo.system_sets for the given system type within the specified schedule.
-   * If the system has not been added to the schedule yet, this call is a no-op.
-   * @tparam T System type
-   * @tparam S Schedule type
-   * @param schedule Schedule where the system is registered
-   * @param sets System set identifiers to append
-   */
-  template <ecs::SystemTrait T, ScheduleTrait S>
-  void AppendSystemSetMetadata(S schedule, std::span<const SystemSetId> sets);
-
-  /**
-   * @brief Gets or registers a system set in the global registry.
-   * @details If the set is not present, it will be created and initialized with its static name and ID.
-   * @tparam Set System set type
-   * @return Reference to the SystemSetInfo for this set
-   */
-  template <SystemSetTrait Set>
-  auto GetOrRegisterSystemSet() -> SystemSetInfo&;
-
-  /**
-   * @brief Adds a system to a system set's membership list.
-   * @details If the set is not present in the registry this call is a no-op.
-   * @param set_id Identifier of the system set
-   * @param system_id Identifier of the system to add
-   */
-  void AddSystemToSet(SystemSetId set_id, ecs::SystemTypeId system_id);
-
-  /**
-   * @brief Adds a set-level ordering constraint: set A runs before set B.
-   * @details All systems that are members of set A must run before systems that are members of set B.
-   * This relationship is schedule-agnostic at registration time; it is applied when building graphs
-   * for each schedule based on actual system membership in that schedule.
-   * @param before_id Identifier of the set that must run before
-   * @param after_id Identifier of the set that must run after
-   */
-  void AddSetRunsBefore(SystemSetId before_id, SystemSetId after_id);
-
-  /**
-   * @brief Adds a set-level ordering constraint: set A runs after set B.
-   * @details Convenience wrapper around AddSetRunsBefore(B, A).
-   * @param after_id Identifier of the set that must run after
-   * @param before_id Identifier of the set that must run before
-   */
-  void AddSetRunsAfter(SystemSetId after_id, SystemSetId before_id);
 
   /**
    * @brief Gets the schedule execution order (topologically sorted).
@@ -592,27 +635,6 @@ inline void Scheduler::ExecuteStage(ecs::World& world, async::Executor& executor
   }
 }
 
-template <StageTrait S>
-inline auto Scheduler::GetSchedulesInStage() const noexcept -> std::vector<ScheduleId> {
-  constexpr ScheduleId stage_id = ScheduleIdOf<S>();
-  std::vector<ScheduleId> result;
-
-  // Iterate through all schedules in topological order and collect those belonging to this stage
-  for (const ScheduleId schedule_id : schedule_order_) {
-    const auto constraint_it = schedule_constraints_.find(schedule_id);
-    if (constraint_it == schedule_constraints_.end()) {
-      continue;
-    }
-
-    // Check if this schedule belongs to this stage
-    if (constraint_it->second.stage_id == stage_id) {
-      result.push_back(schedule_id);
-    }
-  }
-
-  return result;
-}
-
 inline void Scheduler::AddSetRunsBefore(SystemSetId before_id, SystemSetId after_id) {
   if (before_id == after_id) [[unlikely]] {
     return;
@@ -647,12 +669,8 @@ inline void Scheduler::AddSetRunsBefore(SystemSetId before_id, SystemSetId after
   }
 }
 
-inline void Scheduler::AddSetRunsAfter(SystemSetId after_id, SystemSetId before_id) {
-  AddSetRunsBefore(before_id, after_id);
-}
-
 template <SystemSetTrait Set>
-inline auto Scheduler::GetOrRegisterSystemSet() -> SystemSetInfo& {
+inline SystemSetInfo& Scheduler::GetOrRegisterSystemSet() {
   constexpr SystemSetId id = SystemSetIdOf<Set>();
   const auto it = system_sets_.find(id);
   if (it != system_sets_.end()) {
@@ -682,28 +700,35 @@ inline void Scheduler::AddSystemToSet(SystemSetId set_id, ecs::SystemTypeId syst
 template <ecs::SystemTrait T, ScheduleTrait S>
 inline void Scheduler::AppendSystemOrderingMetadata(S /*schedule*/, std::span<const ecs::SystemTypeId> before,
                                                     std::span<const ecs::SystemTypeId> after) {
+  constexpr ScheduleId schedule_id = ScheduleIdOf<S>();
   constexpr ecs::SystemTypeId system_id = ecs::SystemTypeIdOf<T>();
 
-  // Locate the system in global storage
-  for (auto& storage : system_storage_) {
-    if (storage.info.type_id == system_id) {
-      auto& info = storage.info;
-      if (!before.empty()) {
+  // Find the schedule
+  const auto schedule_it = schedules_.find(schedule_id);
+  if (schedule_it == schedules_.end()) {
+    return;
+  }
+
+  // Find the system index within this specific schedule
+  const auto index_opt = schedule_it->second.FindSystemIndexByType(system_id, system_storage_);
+  if (!index_opt.has_value()) {
+    return;
+  }
+
+  auto& info = system_storage_[index_opt.value()].info;
+  if (!before.empty()) {
 #ifdef HELIOS_CONTAINERS_RANGES_AVALIABLE
-        info.before_systems.append_range(before);
+    info.before_systems.append_range(before);
 #else
-        info.before_systems.insert(info.before_systems.end(), before.begin(), before.end());
+    info.before_systems.insert(info.before_systems.end(), before.begin(), before.end());
 #endif
-      }
-      if (!after.empty()) {
+  }
+  if (!after.empty()) {
 #ifdef HELIOS_CONTAINERS_RANGES_AVALIABLE
-        info.after_systems.append_range(after);
+    info.after_systems.append_range(after);
 #else
-        info.after_systems.insert(info.after_systems.end(), after.begin(), after.end());
+    info.after_systems.insert(info.after_systems.end(), after.begin(), after.end());
 #endif
-      }
-      break;
-    }
   }
 }
 
@@ -713,20 +738,27 @@ inline void Scheduler::AppendSystemSetMetadata(S /*schedule*/, std::span<const S
     return;
   }
 
+  constexpr ScheduleId schedule_id = ScheduleIdOf<S>();
   constexpr ecs::SystemTypeId system_id = ecs::SystemTypeIdOf<T>();
 
-  // Locate the system in global storage
-  if (const auto it =
-          std::ranges::find_if(system_storage_, [](const auto& storage) { return storage.info.type_id == system_id; });
-      it != system_storage_.end()) {
-    auto& info = it->info;
-#ifdef HELIOS_CONTAINERS_RANGES_AVALIABLE
-    info.system_sets.append_range(sets);
-#else
-    info.system_sets.insert(info.system_sets.end(), sets.begin(), sets.end());
-#endif
+  // Find the schedule
+  const auto schedule_it = schedules_.find(schedule_id);
+  if (schedule_it == schedules_.end()) {
     return;
   }
+
+  // Find the system index within this specific schedule
+  const auto index_opt = schedule_it->second.FindSystemIndexByType(system_id, system_storage_);
+  if (!index_opt.has_value()) {
+    return;
+  }
+
+  auto& info = system_storage_[index_opt.value()].info;
+#ifdef HELIOS_CONTAINERS_RANGES_AVALIABLE
+  info.system_sets.append_range(sets);
+#else
+  info.system_sets.insert(info.system_sets.end(), sets.begin(), sets.end());
+#endif
 }
 
 inline auto Scheduler::FindSystemIndex(ecs::SystemTypeId system_id) const noexcept -> std::optional<size_t> {
@@ -741,12 +773,10 @@ inline auto Scheduler::FindSystemIndex(ecs::SystemTypeId system_id) const noexce
 template <ecs::SystemTrait T>
 inline bool Scheduler::ContainsSystem() const noexcept {
   constexpr ecs::SystemTypeId system_id = ecs::SystemTypeIdOf<T>();
-  const auto index = FindSystemIndex(system_id);
-  if (index.has_value()) {
-    return std::ranges::any_of(schedules_,
-                               [index = index.value()](const auto& pair) { return pair.second.Contains(index); });
-  }
-  return false;
+  // Check if any schedule contains a system of this type
+  return std::ranges::any_of(schedules_, [this, system_id](const auto& pair) {
+    return pair.second.ContainsSystemOfType(system_id, system_storage_);
+  });
 }
 
 template <ecs::SystemTrait T, ScheduleTrait S>
@@ -758,10 +788,7 @@ inline bool Scheduler::ContainsSystem(S /*schedule*/) const noexcept {
   }
 
   constexpr ecs::SystemTypeId system_id = ecs::SystemTypeIdOf<T>();
-  if (const auto index = FindSystemIndex(system_id)) {
-    return it->second.Contains(index.value());
-  }
-  return false;
+  return it->second.ContainsSystemOfType(system_id, system_storage_);
 }
 
 template <ScheduleTrait S>
@@ -772,6 +799,27 @@ inline size_t Scheduler::SystemCount(S /*schedule*/) const noexcept {
     return 0;
   }
   return it->second.SystemCount();
+}
+
+template <StageTrait S>
+inline auto Scheduler::GetSchedulesInStage() const noexcept -> std::vector<ScheduleId> {
+  constexpr ScheduleId stage_id = ScheduleIdOf<S>();
+  std::vector<ScheduleId> result;
+
+  // Iterate through all schedules in topological order and collect those belonging to this stage
+  for (const ScheduleId schedule_id : schedule_order_) {
+    const auto constraint_it = schedule_constraints_.find(schedule_id);
+    if (constraint_it == schedule_constraints_.end()) {
+      continue;
+    }
+
+    // Check if this schedule belongs to this stage
+    if (constraint_it->second.stage_id == stage_id) {
+      result.push_back(schedule_id);
+    }
+  }
+
+  return result;
 }
 
 }  // namespace helios::app::details

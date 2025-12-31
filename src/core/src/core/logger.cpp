@@ -174,12 +174,13 @@ void StackTraceFormatterFlag::format(const spdlog::details::log_msg& msg, [[mayb
 #else
     const boost::stacktrace::stacktrace stack_trace;
 #endif
-    if (stack_trace.size() <= 1) [[unlikely]] {
-      dest.append("\nStack trace: <empty>"sv);
-      return;
-    }
 
     dest.append("\nStack trace:"sv);
+
+    if (stack_trace.size() <= 1) [[unlikely]] {
+      dest.append(" <empty>"sv);
+      return;
+    }
 
     // Find the starting frame based on source location
     const size_t start_frame = FindStartingFrame(stack_trace, msg.source);

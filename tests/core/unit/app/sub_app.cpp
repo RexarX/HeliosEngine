@@ -112,23 +112,23 @@ TEST_SUITE("app::SubApp") {
 
   TEST_CASE("SubApp::ctor: AddSystem Single System") {
     SubApp sub_app;
-    sub_app.AddSystem<TestSystem>(Update{});
+    sub_app.AddSystem<TestSystem>(kUpdate);
 
     CHECK_EQ(sub_app.SystemCount(), 1);
-    CHECK_EQ(sub_app.SystemCount(Update{}), 1);
+    CHECK_EQ(sub_app.SystemCount(kUpdate), 1);
     CHECK(sub_app.ContainsSystem<TestSystem>());
-    CHECK(sub_app.ContainsSystem<TestSystem>(Update{}));
+    CHECK(sub_app.ContainsSystem<TestSystem>(kUpdate));
   }
 
   TEST_CASE("SubApp::ctor: AddSystem Multiple Systems") {
     SubApp sub_app;
-    sub_app.AddSystem<TestSystem>(Update{});
-    sub_app.AddSystem<AnotherSystem>(Update{});
-    sub_app.AddSystem<ThirdSystem>(PostUpdate{});
+    sub_app.AddSystem<TestSystem>(kUpdate);
+    sub_app.AddSystem<AnotherSystem>(kUpdate);
+    sub_app.AddSystem<ThirdSystem>(kPostUpdate);
 
     CHECK_EQ(sub_app.SystemCount(), 3);
-    CHECK_EQ(sub_app.SystemCount(Update{}), 2);
-    CHECK_EQ(sub_app.SystemCount(PostUpdate{}), 1);
+    CHECK_EQ(sub_app.SystemCount(kUpdate), 2);
+    CHECK_EQ(sub_app.SystemCount(kPostUpdate), 1);
     CHECK(sub_app.ContainsSystem<TestSystem>());
     CHECK(sub_app.ContainsSystem<AnotherSystem>());
     CHECK(sub_app.ContainsSystem<ThirdSystem>());
@@ -136,10 +136,10 @@ TEST_SUITE("app::SubApp") {
 
   TEST_CASE("SubApp::ctor: AddSystems Multiple At Once") {
     SubApp sub_app;
-    sub_app.AddSystems<TestSystem, AnotherSystem, ThirdSystem>(Update{});
+    sub_app.AddSystems<TestSystem, AnotherSystem, ThirdSystem>(kUpdate);
 
     CHECK_EQ(sub_app.SystemCount(), 3);
-    CHECK_EQ(sub_app.SystemCount(Update{}), 3);
+    CHECK_EQ(sub_app.SystemCount(kUpdate), 3);
     CHECK(sub_app.ContainsSystem<TestSystem>());
     CHECK(sub_app.ContainsSystem<AnotherSystem>());
     CHECK(sub_app.ContainsSystem<ThirdSystem>());
@@ -147,13 +147,13 @@ TEST_SUITE("app::SubApp") {
 
   TEST_CASE("SubApp::ctor: ContainsSystem In Different Schedules") {
     SubApp sub_app;
-    sub_app.AddSystem<TestSystem>(Update{});
-    sub_app.AddSystem<AnotherSystem>(PostUpdate{});
+    sub_app.AddSystem<TestSystem>(kUpdate);
+    sub_app.AddSystem<AnotherSystem>(kPostUpdate);
 
-    CHECK(sub_app.ContainsSystem<TestSystem>(Update{}));
-    CHECK_FALSE(sub_app.ContainsSystem<TestSystem>(PostUpdate{}));
-    CHECK(sub_app.ContainsSystem<AnotherSystem>(PostUpdate{}));
-    CHECK_FALSE(sub_app.ContainsSystem<AnotherSystem>(Update{}));
+    CHECK(sub_app.ContainsSystem<TestSystem>(kUpdate));
+    CHECK_FALSE(sub_app.ContainsSystem<TestSystem>(kPostUpdate));
+    CHECK(sub_app.ContainsSystem<AnotherSystem>(kPostUpdate));
+    CHECK_FALSE(sub_app.ContainsSystem<AnotherSystem>(kUpdate));
   }
 
   TEST_CASE("SubApp::ctor: InsertResource") {
@@ -192,8 +192,8 @@ TEST_SUITE("app::SubApp") {
 
   TEST_CASE("SubApp::ctor: Clear Removes All Data") {
     SubApp sub_app;
-    sub_app.AddSystem<TestSystem>(Update{});
-    sub_app.AddSystem<AnotherSystem>(PostUpdate{});
+    sub_app.AddSystem<TestSystem>(kUpdate);
+    sub_app.AddSystem<AnotherSystem>(kPostUpdate);
     sub_app.InsertResource(GameTime{});
 
     sub_app.Clear();
@@ -206,14 +206,14 @@ TEST_SUITE("app::SubApp") {
 
   TEST_CASE("SubApp::ctor: SystemCount Across Schedules") {
     SubApp sub_app;
-    sub_app.AddSystem<TestSystem>(PreUpdate{});
-    sub_app.AddSystem<UpdateCounterSystem>(Update{});
-    sub_app.AddSystem<ThirdSystem>(PostUpdate{});
+    sub_app.AddSystem<TestSystem>(kPreUpdate);
+    sub_app.AddSystem<UpdateCounterSystem>(kUpdate);
+    sub_app.AddSystem<ThirdSystem>(kPostUpdate);
 
     CHECK_EQ(sub_app.SystemCount(), 3);
-    CHECK_EQ(sub_app.SystemCount(PreUpdate{}), 1);
-    CHECK_EQ(sub_app.SystemCount(Update{}), 1);
-    CHECK_EQ(sub_app.SystemCount(PostUpdate{}), 1);
+    CHECK_EQ(sub_app.SystemCount(kPreUpdate), 1);
+    CHECK_EQ(sub_app.SystemCount(kUpdate), 1);
+    CHECK_EQ(sub_app.SystemCount(kPostUpdate), 1);
     CHECK_EQ(sub_app.SystemCount(Main{}), 0);
   }
 
@@ -226,27 +226,27 @@ TEST_SUITE("app::SubApp") {
 
   TEST_CASE("SubApp::ctor: AddSystemBuilder with Before") {
     SubApp sub_app;
-    sub_app.AddSystem<TestSystem>(Update{});
-    sub_app.AddSystemBuilder<AnotherSystem>(Update{}).Before<TestSystem>();
+    sub_app.AddSystem<TestSystem>(kUpdate);
+    sub_app.AddSystemBuilder<AnotherSystem>(kUpdate).Before<TestSystem>();
 
-    CHECK_EQ(sub_app.SystemCount(Update{}), 2);
+    CHECK_EQ(sub_app.SystemCount(kUpdate), 2);
     CHECK(sub_app.ContainsSystem<TestSystem>());
     CHECK(sub_app.ContainsSystem<AnotherSystem>());
   }
 
   TEST_CASE("SubApp::ctor: AddSystemBuilder with After") {
     SubApp sub_app;
-    sub_app.AddSystem<TestSystem>(Update{});
-    sub_app.AddSystemBuilder<AnotherSystem>(Update{}).After<TestSystem>();
+    sub_app.AddSystem<TestSystem>(kUpdate);
+    sub_app.AddSystemBuilder<AnotherSystem>(kUpdate).After<TestSystem>();
 
-    CHECK_EQ(sub_app.SystemCount(Update{}), 2);
+    CHECK_EQ(sub_app.SystemCount(kUpdate), 2);
     CHECK(sub_app.ContainsSystem<TestSystem>());
     CHECK(sub_app.ContainsSystem<AnotherSystem>());
   }
 
   TEST_CASE("SubApp::ctor: Move Construction") {
     SubApp sub_app1;
-    sub_app1.AddSystem<TestSystem>(Update{});
+    sub_app1.AddSystem<TestSystem>(kUpdate);
     sub_app1.InsertResource(GameTime{});
 
     SubApp sub_app2 = std::move(sub_app1);
@@ -258,7 +258,7 @@ TEST_SUITE("app::SubApp") {
 
   TEST_CASE("SubApp::ctor: Move Assignment") {
     SubApp sub_app1;
-    sub_app1.AddSystem<TestSystem>(Update{});
+    sub_app1.AddSystem<TestSystem>(kUpdate);
     sub_app1.InsertResource(GameTime{});
 
     SubApp sub_app2;

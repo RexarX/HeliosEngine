@@ -89,7 +89,7 @@ struct CounterSystem final : public System {
 
 struct BasicModule final : public Module {
   void Build(App& app) override {
-    app.AddSystem<TestSystem>(Update{});
+    app.AddSystem<TestSystem>(kUpdate);
     app.InsertResource(GameTime{});
   }
 
@@ -100,7 +100,7 @@ struct NamedModule final : public Module {
   static constexpr std::string_view GetName() noexcept { return "CustomModuleName"; }
 
   void Build(App& app) override {
-    app.AddSystem<AnotherSystem>(Update{});
+    app.AddSystem<AnotherSystem>(kUpdate);
     app.InsertResource(PhysicsSettings{});
   }
 
@@ -242,23 +242,23 @@ TEST_SUITE("app::App") {
 
   TEST_CASE("App::AddSystem: Single System") {
     App app;
-    app.AddSystem<TestSystem>(Update{});
+    app.AddSystem<TestSystem>(kUpdate);
 
     CHECK_EQ(app.SystemCount(), 1);
-    CHECK_EQ(app.SystemCount(Update{}), 1);
+    CHECK_EQ(app.SystemCount(kUpdate), 1);
     CHECK(app.ContainsSystem<TestSystem>());
-    CHECK(app.ContainsSystem<TestSystem>(Update{}));
+    CHECK(app.ContainsSystem<TestSystem>(kUpdate));
   }
 
   TEST_CASE("App::AddSystem: Multiple Systems") {
     App app;
-    app.AddSystem<TestSystem>(Update{});
-    app.AddSystem<AnotherSystem>(Update{});
-    app.AddSystem<ThirdSystem>(PostUpdate{});
+    app.AddSystem<TestSystem>(kUpdate);
+    app.AddSystem<AnotherSystem>(kUpdate);
+    app.AddSystem<ThirdSystem>(kPostUpdate);
 
     CHECK_EQ(app.SystemCount(), 3);
-    CHECK_EQ(app.SystemCount(Update{}), 2);
-    CHECK_EQ(app.SystemCount(PostUpdate{}), 1);
+    CHECK_EQ(app.SystemCount(kUpdate), 2);
+    CHECK_EQ(app.SystemCount(kPostUpdate), 1);
     CHECK(app.ContainsSystem<TestSystem>());
     CHECK(app.ContainsSystem<AnotherSystem>());
     CHECK(app.ContainsSystem<ThirdSystem>());
@@ -266,10 +266,10 @@ TEST_SUITE("app::App") {
 
   TEST_CASE("App::AddSystem:s Multiple At Once") {
     App app;
-    app.AddSystems<TestSystem, AnotherSystem, ThirdSystem>(Update{});
+    app.AddSystems<TestSystem, AnotherSystem, ThirdSystem>(kUpdate);
 
     CHECK_EQ(app.SystemCount(), 3);
-    CHECK_EQ(app.SystemCount(Update{}), 3);
+    CHECK_EQ(app.SystemCount(kUpdate), 3);
     CHECK(app.ContainsSystem<TestSystem>());
     CHECK(app.ContainsSystem<AnotherSystem>());
     CHECK(app.ContainsSystem<ThirdSystem>());
@@ -277,13 +277,79 @@ TEST_SUITE("app::App") {
 
   TEST_CASE("App::ContainsSystem: In Different Schedules") {
     App app;
-    app.AddSystem<TestSystem>(Update{});
-    app.AddSystem<AnotherSystem>(PostUpdate{});
+    app.AddSystem<TestSystem>(kUpdate);
+    app.AddSystem<AnotherSystem>(kPostUpdate);
 
-    CHECK(app.ContainsSystem<TestSystem>(Update{}));
-    CHECK_FALSE(app.ContainsSystem<TestSystem>(PostUpdate{}));
-    CHECK(app.ContainsSystem<AnotherSystem>(PostUpdate{}));
-    CHECK_FALSE(app.ContainsSystem<AnotherSystem>(Update{}));
+    CHECK(app.ContainsSystem<TestSystem>(kUpdate));
+    CHECK_FALSE(app.ContainsSystem<TestSystem>(kPostUpdate));
+    CHECK(app.ContainsSystem<AnotherSystem>(kPostUpdate));
+    CHECK_FALSE(app.ContainsSystem<AnotherSystem>(kUpdate));
+  }
+
+  TEST_CASE("App::AddSystem: Same System In Multiple Schedules") {
+    App app;
+
+    // Add the same system type to different schedules
+    app.AddSystem<TestSystem>(kPreUpdate);
+    app.AddSystem<TestSystem>(kUpdate);
+    app.AddSystem<TestSystem>(kPostUpdate);
+
+    // Total systems should be 3 (one per schedule)
+    CHECK_EQ(app.SystemCount(), 3);
+
+    // Each schedule should have exactly one system
+    CHECK_EQ(app.SystemCount(kPreUpdate), 1);
+    CHECK_EQ(app.SystemCount(kUpdate), 1);
+    CHECK_EQ(app.SystemCount(kPostUpdate), 1);
+
+    // ContainsSystem should return true for each schedule
+    CHECK(app.ContainsSystem<TestSystem>(kPreUpdate));
+    CHECK(app.ContainsSystem<TestSystem>(kUpdate));
+    CHECK(app.ContainsSystem<TestSystem>(kPostUpdate));
+
+    // Global ContainsSystem should also return true
+    CHECK(app.ContainsSystem<TestSystem>());
+  }
+
+  TEST_CASE("App::AddSystem: Same System In Multiple Schedules With Other Systems") {
+    App app;
+
+    // Add TestSystem to multiple schedules
+    app.AddSystem<TestSystem>(kPreUpdate);
+    app.AddSystem<TestSystem>(kPostUpdate);
+
+    // Add other systems to Update
+    app.AddSystem<AnotherSystem>(kUpdate);
+    app.AddSystem<ThirdSystem>(kUpdate);
+
+    CHECK_EQ(app.SystemCount(), 4);
+    CHECK_EQ(app.SystemCount(kPreUpdate), 1);
+    CHECK_EQ(app.SystemCount(kUpdate), 2);
+    CHECK_EQ(app.SystemCount(kPostUpdate), 1);
+
+    CHECK(app.ContainsSystem<TestSystem>(kPreUpdate));
+    CHECK_FALSE(app.ContainsSystem<TestSystem>(kUpdate));
+    CHECK(app.ContainsSystem<TestSystem>(kPostUpdate));
+
+    CHECK_FALSE(app.ContainsSystem<AnotherSystem>(kPreUpdate));
+    CHECK(app.ContainsSystem<AnotherSystem>(kUpdate));
+    CHECK_FALSE(app.ContainsSystem<AnotherSystem>(kPostUpdate));
+  }
+
+  TEST_CASE("App::AddSystem: Cleanup System Pattern - Same System In PreUpdate And PostUpdate") {
+    // This test simulates a real-world use case: a cleanup system that runs
+    // both at the beginning and end of an update cycle
+    App app;
+
+    app.AddSystem<InputSystem>(kPreUpdate);  // Cleanup at start
+    app.AddSystem<MovementSystem>(kUpdate);
+    app.AddSystem<CollisionSystem>(kUpdate);
+    app.AddSystem<InputSystem>(kPostUpdate);  // Cleanup at end
+
+    CHECK_EQ(app.SystemCount(), 4);
+    CHECK(app.ContainsSystem<InputSystem>(kPreUpdate));
+    CHECK_FALSE(app.ContainsSystem<InputSystem>(kUpdate));
+    CHECK(app.ContainsSystem<InputSystem>(kPostUpdate));
   }
 
   TEST_CASE("App::InsertResource:") {
@@ -326,7 +392,7 @@ TEST_SUITE("app::App") {
     App app;
     app.AddModule<BasicModule>();
     app.AddModule<NamedModule>();
-    app.AddSystem<ThirdSystem>(Update{});
+    app.AddSystem<ThirdSystem>(kUpdate);
     app.InsertResource(GameTime{});
 
     app.Clear();
@@ -338,111 +404,111 @@ TEST_SUITE("app::App") {
 
   TEST_CASE("App::AddSystem:Builder with Before") {
     App app;
-    app.AddSystem<TestSystem>(Update{});
-    app.AddSystemBuilder<AnotherSystem>(Update{}).Before<TestSystem>();
+    app.AddSystem<TestSystem>(kUpdate);
+    app.AddSystemBuilder<AnotherSystem>(kUpdate).Before<TestSystem>();
 
-    CHECK_EQ(app.SystemCount(Update{}), 2);
+    CHECK_EQ(app.SystemCount(kUpdate), 2);
     CHECK(app.ContainsSystem<TestSystem>());
     CHECK(app.ContainsSystem<AnotherSystem>());
   }
 
   TEST_CASE("App::AddSystem:Builder with InSet") {
     App app;
-    app.AddSystemBuilder<PhysicsSystem>(Update{}).InSet<PhysicsSet>();
+    app.AddSystemBuilder<PhysicsSystem>(kUpdate).InSet<PhysicsSet>();
 
-    CHECK_EQ(app.SystemCount(Update{}), 1);
-    CHECK(app.ContainsSystem<PhysicsSystem>(Update{}));
+    CHECK_EQ(app.SystemCount(kUpdate), 1);
+    CHECK(app.ContainsSystem<PhysicsSystem>(kUpdate));
   }
 
   TEST_CASE("App::AddSystem:sBuilder with Sequence") {
     App app;
-    app.AddSystemsBuilder<MovementSystem, CollisionSystem, PhysicsSystem>(Update{}).Sequence();
+    app.AddSystemsBuilder<MovementSystem, CollisionSystem, PhysicsSystem>(kUpdate).Sequence();
 
-    CHECK_EQ(app.SystemCount(Update{}), 3);
-    CHECK(app.ContainsSystem<MovementSystem>(Update{}));
-    CHECK(app.ContainsSystem<CollisionSystem>(Update{}));
-    CHECK(app.ContainsSystem<PhysicsSystem>(Update{}));
+    CHECK_EQ(app.SystemCount(kUpdate), 3);
+    CHECK(app.ContainsSystem<MovementSystem>(kUpdate));
+    CHECK(app.ContainsSystem<CollisionSystem>(kUpdate));
+    CHECK(app.ContainsSystem<PhysicsSystem>(kUpdate));
   }
 
   TEST_CASE("App::AddSystem:sBuilder with After and Before") {
     App app;
-    app.AddSystem<InputSystem>(Update{});
-    app.AddSystem<RenderSystem>(Update{});
+    app.AddSystem<InputSystem>(kUpdate);
+    app.AddSystem<RenderSystem>(kUpdate);
 
-    app.AddSystemsBuilder<MovementSystem, CollisionSystem>(Update{}).After<InputSystem>().Before<RenderSystem>();
+    app.AddSystemsBuilder<MovementSystem, CollisionSystem>(kUpdate).After<InputSystem>().Before<RenderSystem>();
 
-    CHECK_EQ(app.SystemCount(Update{}), 4);
-    CHECK(app.ContainsSystem<InputSystem>(Update{}));
-    CHECK(app.ContainsSystem<MovementSystem>(Update{}));
-    CHECK(app.ContainsSystem<CollisionSystem>(Update{}));
-    CHECK(app.ContainsSystem<RenderSystem>(Update{}));
+    CHECK_EQ(app.SystemCount(kUpdate), 4);
+    CHECK(app.ContainsSystem<InputSystem>(kUpdate));
+    CHECK(app.ContainsSystem<MovementSystem>(kUpdate));
+    CHECK(app.ContainsSystem<CollisionSystem>(kUpdate));
+    CHECK(app.ContainsSystem<RenderSystem>(kUpdate));
   }
 
   TEST_CASE("App::AddSystem:sBuilder with InSet and Sequence") {
     App app;
-    app.AddSystemsBuilder<MovementSystem, CollisionSystem, PhysicsSystem>(Update{}).InSet<PhysicsSet>().Sequence();
+    app.AddSystemsBuilder<MovementSystem, CollisionSystem, PhysicsSystem>(kUpdate).InSet<PhysicsSet>().Sequence();
 
-    CHECK_EQ(app.SystemCount(Update{}), 3);
-    CHECK(app.ContainsSystem<MovementSystem>(Update{}));
-    CHECK(app.ContainsSystem<CollisionSystem>(Update{}));
-    CHECK(app.ContainsSystem<PhysicsSystem>(Update{}));
+    CHECK_EQ(app.SystemCount(kUpdate), 3);
+    CHECK(app.ContainsSystem<MovementSystem>(kUpdate));
+    CHECK(app.ContainsSystem<CollisionSystem>(kUpdate));
+    CHECK(app.ContainsSystem<PhysicsSystem>(kUpdate));
   }
 
   TEST_CASE("App::AddSystem:sBuilder with Multiple InSet") {
     App app;
-    app.AddSystemsBuilder<MovementSystem, CollisionSystem>(Update{}).InSet<PhysicsSet>().InSet<GameplaySet>();
+    app.AddSystemsBuilder<MovementSystem, CollisionSystem>(kUpdate).InSet<PhysicsSet>().InSet<GameplaySet>();
 
-    CHECK_EQ(app.SystemCount(Update{}), 2);
-    CHECK(app.ContainsSystem<MovementSystem>(Update{}));
-    CHECK(app.ContainsSystem<CollisionSystem>(Update{}));
+    CHECK_EQ(app.SystemCount(kUpdate), 2);
+    CHECK(app.ContainsSystem<MovementSystem>(kUpdate));
+    CHECK(app.ContainsSystem<CollisionSystem>(kUpdate));
   }
 
   TEST_CASE("App::AddSystem:sBuilder Complex Configuration") {
     App app;
-    app.AddSystem<InputSystem>(Update{});
-    app.AddSystem<RenderSystem>(Update{});
+    app.AddSystem<InputSystem>(kUpdate);
+    app.AddSystem<RenderSystem>(kUpdate);
 
-    app.AddSystemsBuilder<MovementSystem, CollisionSystem, PhysicsSystem>(Update{})
+    app.AddSystemsBuilder<MovementSystem, CollisionSystem, PhysicsSystem>(kUpdate)
         .After<InputSystem>()
         .Before<RenderSystem>()
         .InSet<PhysicsSet>()
         .Sequence();
 
-    CHECK_EQ(app.SystemCount(Update{}), 5);
-    CHECK(app.ContainsSystem<InputSystem>(Update{}));
-    CHECK(app.ContainsSystem<MovementSystem>(Update{}));
-    CHECK(app.ContainsSystem<CollisionSystem>(Update{}));
-    CHECK(app.ContainsSystem<PhysicsSystem>(Update{}));
-    CHECK(app.ContainsSystem<RenderSystem>(Update{}));
+    CHECK_EQ(app.SystemCount(kUpdate), 5);
+    CHECK(app.ContainsSystem<InputSystem>(kUpdate));
+    CHECK(app.ContainsSystem<MovementSystem>(kUpdate));
+    CHECK(app.ContainsSystem<CollisionSystem>(kUpdate));
+    CHECK(app.ContainsSystem<PhysicsSystem>(kUpdate));
+    CHECK(app.ContainsSystem<RenderSystem>(kUpdate));
   }
 
   TEST_CASE("App::ConfigureSet: with After") {
     App app;
-    app.ConfigureSet<PhysicsSet>(Update{}).After<InputSet>();
+    app.ConfigureSet<PhysicsSet>(kUpdate).After<InputSet>();
 
     CHECK(true);
   }
 
   TEST_CASE("App::ConfigureSet: with Before") {
     App app;
-    app.ConfigureSet<PhysicsSet>(Update{}).Before<RenderSet>();
+    app.ConfigureSet<PhysicsSet>(kUpdate).Before<RenderSet>();
 
     CHECK(true);
   }
 
   TEST_CASE("App::ConfigureSet: with Multiple Constraints") {
     App app;
-    app.ConfigureSet<PhysicsSet>(Update{}).After<InputSet>().Before<RenderSet>();
+    app.ConfigureSet<PhysicsSet>(kUpdate).After<InputSet>().Before<RenderSet>();
 
     CHECK(true);
   }
 
   TEST_CASE("App::AddSystem:Builder with After") {
     App app;
-    app.AddSystem<TestSystem>(Update{});
-    app.AddSystemBuilder<AnotherSystem>(Update{}).After<TestSystem>();
+    app.AddSystem<TestSystem>(kUpdate);
+    app.AddSystemBuilder<AnotherSystem>(kUpdate).After<TestSystem>();
 
-    CHECK_EQ(app.SystemCount(Update{}), 2);
+    CHECK_EQ(app.SystemCount(kUpdate), 2);
     CHECK(app.ContainsSystem<TestSystem>());
     CHECK(app.ContainsSystem<AnotherSystem>());
   }
@@ -502,7 +568,7 @@ TEST_SUITE("app::App") {
   TEST_CASE("App::AddSubApp: With Instance") {
     App app;
     SubApp render_sub_app;
-    render_sub_app.AddSystem<TestSystem>(Update{});
+    render_sub_app.AddSystem<TestSystem>(kUpdate);
 
     app.AddSubApp<RenderSubApp>(std::move(render_sub_app));
     CHECK(app.ContainsSubApp<RenderSubApp>());
@@ -517,7 +583,7 @@ TEST_SUITE("app::App") {
     app.AddSubApp<RenderSubApp>();
 
     auto& sub_app = app.GetSubApp<RenderSubApp>();
-    sub_app.AddSystem<TestSystem>(Update{});
+    sub_app.AddSystem<TestSystem>(kUpdate);
 
     CHECK_EQ(sub_app.SystemCount(), 1);
   }
@@ -561,14 +627,14 @@ TEST_SUITE("app::App") {
 
   TEST_CASE("App: Method chaining AddSystem") {
     App app;
-    auto& result = app.AddSystem<TestSystem>(Update{});
+    auto& result = app.AddSystem<TestSystem>(kUpdate);
 
     CHECK_EQ(&result, &app);
   }
 
   TEST_CASE("App: Method chaining AddSystems") {
     App app;
-    auto& result = app.AddSystems<TestSystem, AnotherSystem>(Update{});
+    auto& result = app.AddSystems<TestSystem, AnotherSystem>(kUpdate);
 
     CHECK_EQ(&result, &app);
   }
@@ -613,7 +679,7 @@ TEST_SUITE("app::App") {
     App app;
     app.AddModule<BasicModule>()
         .AddModule<NamedModule>()
-        .AddSystem<ThirdSystem>(Update{})
+        .AddSystem<ThirdSystem>(kUpdate)
         .InsertResource(RenderSettings{})
         .AddSubApp<RenderSubApp>();
 
@@ -626,14 +692,14 @@ TEST_SUITE("app::App") {
 
   TEST_CASE("App::SystemCount: Across Schedules") {
     App app;
-    app.AddSystem<TestSystem>(PreUpdate{});
-    app.AddSystem<AnotherSystem>(Update{});
-    app.AddSystem<ThirdSystem>(PostUpdate{});
+    app.AddSystem<TestSystem>(kPreUpdate);
+    app.AddSystem<AnotherSystem>(kUpdate);
+    app.AddSystem<ThirdSystem>(kPostUpdate);
 
     CHECK_EQ(app.SystemCount(), 3);
-    CHECK_EQ(app.SystemCount(PreUpdate{}), 1);
-    CHECK_EQ(app.SystemCount(Update{}), 1);
-    CHECK_EQ(app.SystemCount(PostUpdate{}), 1);
+    CHECK_EQ(app.SystemCount(kPreUpdate), 1);
+    CHECK_EQ(app.SystemCount(kUpdate), 1);
+    CHECK_EQ(app.SystemCount(kPostUpdate), 1);
     CHECK_EQ(app.SystemCount(Main{}), 0);
   }
 
@@ -739,7 +805,7 @@ TEST_SUITE("app::App") {
     }
 
     SUBCASE("Initialize Builds Scheduler") {
-      app.AddSystem<CounterSystem>(Update{});
+      app.AddSystem<CounterSystem>(kUpdate);
       app.InsertResource(GameTime{});
       CHECK_FALSE(app.IsInitialized());
 
@@ -749,7 +815,7 @@ TEST_SUITE("app::App") {
 
     SUBCASE("Initialize With Sub Apps") {
       app.AddSubApp<RenderSubApp>();
-      app.AddSystem<CounterSystem>(Update{});
+      app.AddSystem<CounterSystem>(kUpdate);
       app.InsertResource(GameTime{});
 
       CHECK_FALSE(app.IsInitialized());

@@ -142,13 +142,13 @@ public:
    * @brief Checks if the allocator is empty.
    * @return True if no allocations have been made since last reset
    */
-  [[nodiscard]] bool Empty() const noexcept { return offset_.load(std::memory_order_acquire) == 0; }
+  [[nodiscard]] bool Empty() const noexcept { return offset_.load(std::memory_order_relaxed) == 0; }
 
   /**
    * @brief Checks if the allocator is full.
    * @return True if no more allocations can be made without reset
    */
-  [[nodiscard]] bool Full() const noexcept { return offset_.load(std::memory_order_acquire) >= capacity_; }
+  [[nodiscard]] bool Full() const noexcept { return offset_.load(std::memory_order_relaxed) >= capacity_; }
 
   /**
    * @brief Gets current allocator statistics.
@@ -166,7 +166,7 @@ public:
    * @brief Gets the current offset (amount of memory used).
    * @return Current offset in bytes
    */
-  [[nodiscard]] size_t CurrentOffset() const noexcept { return offset_.load(std::memory_order_acquire); }
+  [[nodiscard]] size_t CurrentOffset() const noexcept { return offset_.load(std::memory_order_relaxed); }
 
   /**
    * @brief Gets the amount of free space remaining.
@@ -298,10 +298,10 @@ inline void FrameAllocator::Reset() noexcept {
 }
 
 inline AllocatorStats FrameAllocator::Stats() const noexcept {
-  const size_t current_offset = offset_.load(std::memory_order_acquire);
-  const size_t peak = peak_offset_.load(std::memory_order_acquire);
-  const size_t alloc_count = allocation_count_.load(std::memory_order_acquire);
-  const size_t waste = alignment_waste_.load(std::memory_order_acquire);
+  const size_t current_offset = offset_.load(std::memory_order_relaxed);
+  const size_t peak = peak_offset_.load(std::memory_order_relaxed);
+  const size_t alloc_count = allocation_count_.load(std::memory_order_relaxed);
+  const size_t waste = alignment_waste_.load(std::memory_order_relaxed);
 
   return {
       .total_allocated = current_offset,
@@ -315,7 +315,7 @@ inline AllocatorStats FrameAllocator::Stats() const noexcept {
 }
 
 inline size_t FrameAllocator::FreeSpace() const noexcept {
-  const size_t current = offset_.load(std::memory_order_acquire);
+  const size_t current = offset_.load(std::memory_order_relaxed);
   return current < capacity_ ? capacity_ - current : 0;
 }
 

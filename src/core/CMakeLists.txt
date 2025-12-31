@@ -227,8 +227,7 @@ target_compile_definitions(helios_core
     PRIVATE
         SPDLOG_USE_STD_FORMAT
         $<$<CONFIG:Release>:SPDLOG_NO_EXCEPTIONS>
-        $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:HELIOS_ENABLE_STACKTRACE>
     PUBLIC
-        $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:HELIOS_ENABLE_ASSERTS>
+        $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:HELIOS_ENABLE_ASSERTS HELIOS_ENABLE_STACKTRACE>
         $<$<BOOL:${HELIOS_ENABLE_PROFILING}>:HELIOS_ENABLE_PROFILING>
 )

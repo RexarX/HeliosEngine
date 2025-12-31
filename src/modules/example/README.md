@@ -44,12 +44,12 @@ example/
 #include <helios/example/example.hpp>
 
 int main() {
-    helios::app::App app;
+  helios::app::App app;
 
-    // Add the example module
-    app.AddModule<helios::example::ExampleModule>();
+  // Add the example module
+  app.AddModule<helios::example::ExampleModule>();
 
-    return std::to_underlying(app.Run());
+  return std::to_underlying(app.Run());
 }
 ```
 
@@ -80,8 +80,8 @@ int current_count = resource.counter;
 A simple component with an integer value.
 
 ```cpp
-struct ExampleComponent final {
-    int value = 0;
+struct ExampleComponent {
+  int value = 0;
 };
 ```
 
@@ -92,8 +92,8 @@ struct ExampleComponent final {
 A simple resource with a counter that is incremented by the ExampleSystem.
 
 ```cpp
-struct ExampleResource final {
-    int counter = 0;
+struct ExampleResource {
+  int counter = 0;
 };
 ```
 

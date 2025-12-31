@@ -14,7 +14,6 @@
 #include <cstdint>
 #include <cstring>
 #include <memory>
-#include <mutex>
 
 namespace helios::memory {
 
@@ -29,10 +28,13 @@ namespace helios::memory {
  *
  * Each allocation has a small header overhead for tracking.
  *
- * Uses mutex for allocation/deallocation operations.
+ * Uses lock-free atomic operations for thread-safe allocations.
  *
- * @note Thread-safe.
+ * @note Thread-safe: Multiple threads can safely call Allocate() concurrently.
  * @warning Deallocations must follow LIFO order (stack discipline).
+ * @warning Move operations (move constructor and move assignment) are NOT thread-safe
+ * and must be externally synchronized. Do not move an allocator while other threads
+ * are accessing it.
  */
 class StackAllocator final {
 public:
@@ -162,13 +164,13 @@ public:
    * @brief Checks if the allocator is empty.
    * @return True if no allocations have been made since last reset
    */
-  [[nodiscard]] bool Empty() const noexcept { return offset_.load(std::memory_order_acquire) == 0; }
+  [[nodiscard]] bool Empty() const noexcept { return offset_.load(std::memory_order_relaxed) == 0; }
 
   /**
    * @brief Checks if the allocator is full.
    * @return True if no more allocations can be made without reset
    */
-  [[nodiscard]] bool Full() const noexcept { return offset_.load(std::memory_order_acquire) >= capacity_; }
+  [[nodiscard]] bool Full() const noexcept { return offset_.load(std::memory_order_relaxed) >= capacity_; }
 
   /**
    * @brief Checks if a pointer belongs to this allocator.
@@ -188,19 +190,19 @@ public:
    * @note Can be used with RewindToMarker for bulk deallocations.
    * @return Current offset as a marker
    */
-  [[nodiscard]] size_t Marker() const noexcept { return offset_.load(std::memory_order_acquire); }
+  [[nodiscard]] size_t Marker() const noexcept { return offset_.load(std::memory_order_relaxed); }
 
   /**
    * @brief Gets the total capacity of the allocator.
    * @return Capacity in bytes
    */
-  [[nodiscard]] size_t Capacity() const noexcept { return capacity_; }
+  [[nodiscard]] size_t Capacity() const noexcept { return capacity_.load(std::memory_order_relaxed); }
 
   /**
    * @brief Gets the current offset (amount of memory used).
    * @return Current offset in bytes
    */
-  [[nodiscard]] size_t CurrentOffset() const noexcept { return offset_.load(std::memory_order_acquire); }
+  [[nodiscard]] size_t CurrentOffset() const noexcept { return offset_.load(std::memory_order_relaxed); }
 
   /**
    * @brief Gets the amount of free space remaining.
@@ -219,21 +221,20 @@ private:
   };
 
   void* buffer_ = nullptr;                      ///< Underlying memory buffer
-  size_t capacity_ = 0;                         ///< Total capacity in bytes
+  std::atomic<size_t> capacity_{0};             ///< Total capacity in bytes
   std::atomic<size_t> offset_{0};               ///< Current allocation offset
   std::atomic<size_t> peak_offset_{0};          ///< Peak offset reached
   std::atomic<size_t> allocation_count_{0};     ///< Number of active allocations
   std::atomic<size_t> total_allocations_{0};    ///< Total allocations made
   std::atomic<size_t> total_deallocations_{0};  ///< Total deallocations made
   std::atomic<size_t> alignment_waste_{0};      ///< Total bytes wasted due to alignment
-  mutable std::mutex mutex_;                    ///< Mutex for thread-safety
 };
 
-inline StackAllocator::StackAllocator(size_t capacity) : capacity_(capacity) {
+inline StackAllocator::StackAllocator(size_t capacity) : capacity_{capacity} {
   HELIOS_ASSERT(capacity > 0, "Failed to construct StackAllocator: capacity must be greater than 0!");
 
   // Allocate aligned buffer
-  buffer_ = AlignedAlloc(kDefaultAlignment, capacity_);
+  buffer_ = AlignedAlloc(kDefaultAlignment, capacity);
   HELIOS_VERIFY(buffer_ != nullptr, "Failed to construct StackAllocator: Allocation of StackAllocator buffer failed!");
 }
 
@@ -245,7 +246,7 @@ inline StackAllocator::~StackAllocator() noexcept {
 
 inline StackAllocator::StackAllocator(StackAllocator&& other) noexcept
     : buffer_(other.buffer_),
-      capacity_(other.capacity_),
+      capacity_{other.capacity_.load(std::memory_order_relaxed)},
       offset_(other.offset_.load(std::memory_order_acquire)),
       peak_offset_(other.peak_offset_.load(std::memory_order_acquire)),
       allocation_count_(other.allocation_count_.load(std::memory_order_acquire)),
@@ -253,7 +254,7 @@ inline StackAllocator::StackAllocator(StackAllocator&& other) noexcept
       total_deallocations_(other.total_deallocations_.load(std::memory_order_acquire)),
       alignment_waste_(other.alignment_waste_.load(std::memory_order_acquire)) {
   other.buffer_ = nullptr;
-  other.capacity_ = 0;
+  other.capacity_.store(0, std::memory_order_relaxed);
   other.offset_.store(0, std::memory_order_release);
   other.peak_offset_.store(0, std::memory_order_release);
   other.allocation_count_.store(0, std::memory_order_release);
@@ -267,9 +268,6 @@ inline StackAllocator& StackAllocator::operator=(StackAllocator&& other) noexcep
     return *this;
   }
 
-  const std::scoped_lock lock(mutex_);
-  const std::scoped_lock other_lock(other.mutex_);
-
   // Free current buffer
   if (buffer_ != nullptr) {
     AlignedFree(buffer_);
@@ -277,7 +275,8 @@ inline StackAllocator& StackAllocator::operator=(StackAllocator&& other) noexcep
 
   // Move from other
   buffer_ = other.buffer_;
-  capacity_ = other.capacity_;
+  capacity_.store(other.capacity_.load(std::memory_order_relaxed), std::memory_order_relaxed);
+
   offset_.store(other.offset_.load(std::memory_order_acquire), std::memory_order_release);
   peak_offset_.store(other.peak_offset_.load(std::memory_order_acquire), std::memory_order_release);
   allocation_count_.store(other.allocation_count_.load(std::memory_order_acquire), std::memory_order_release);
@@ -287,7 +286,7 @@ inline StackAllocator& StackAllocator::operator=(StackAllocator&& other) noexcep
 
   // Reset other
   other.buffer_ = nullptr;
-  other.capacity_ = 0;
+  other.capacity_.store(0, std::memory_order_relaxed);
   other.offset_.store(0, std::memory_order_release);
   other.peak_offset_.store(0, std::memory_order_release);
   other.allocation_count_.store(0, std::memory_order_release);
@@ -308,32 +307,35 @@ inline AllocationResult StackAllocator::Allocate(size_t size, size_t alignment) 
     return {.ptr = nullptr, .allocated_size = 0};
   }
 
-  const std::scoped_lock lock(mutex_);
+  // Lock-free allocation using compare-and-swap
+  size_t current_offset = offset_.load(std::memory_order_acquire);
+  size_t new_offset = 0;
+  size_t header_padding = 0;
+  uint8_t* current_ptr = nullptr;
 
-  const size_t current_offset = offset_.load(std::memory_order_relaxed);
+  do {
+    // Calculate space needed for header + alignment
+    current_ptr = static_cast<uint8_t*>(buffer_) + current_offset;
+    header_padding = CalculatePaddingWithHeader(current_ptr, alignment, sizeof(AllocationHeader));
+    const size_t required_space = header_padding + size;
 
-  // Calculate space needed for header + alignment
-  auto* current_ptr = static_cast<uint8_t*>(buffer_) + current_offset;
-  const size_t header_padding = CalculatePaddingWithHeader(current_ptr, alignment, sizeof(AllocationHeader));
-  const size_t required_space = header_padding + size;
+    // Check if we have enough space
+    if (current_offset + required_space > capacity_.load(std::memory_order_relaxed)) {
+      return {.ptr = nullptr, .allocated_size = 0};
+    }
 
-  // Check if we have enough space
-  if (current_offset + required_space > capacity_) {
-    return {.ptr = nullptr, .allocated_size = 0};
-  }
+    new_offset = current_offset + required_space;
 
-  // Store header at the padded position
+    // Try to atomically update offset
+  } while (
+      !offset_.compare_exchange_weak(current_offset, new_offset, std::memory_order_release, std::memory_order_acquire));
+
+  // Successfully reserved space - now write the header
+  // This is safe because we own the range [current_offset, new_offset)
   auto* header_ptr = current_ptr + header_padding - sizeof(AllocationHeader);
   auto* header = reinterpret_cast<AllocationHeader*>(header_ptr);
   header->previous_offset = current_offset;
   header->padding = header_padding;
-
-  // Calculate aligned data pointer
-  auto* data_ptr = current_ptr + header_padding;
-
-  // Update offset
-  const size_t new_offset = current_offset + required_space;
-  offset_.store(new_offset, std::memory_order_release);
 
   // Update stats
   allocation_count_.fetch_add(1, std::memory_order_relaxed);
@@ -349,6 +351,8 @@ inline AllocationResult StackAllocator::Allocate(size_t size, size_t alignment) 
     }
   }
 
+  // Calculate aligned data pointer
+  uint8_t* data_ptr = current_ptr + header_padding;
   return {data_ptr, size};
 }
 
@@ -359,17 +363,20 @@ inline void StackAllocator::Deallocate(void* ptr, [[maybe_unused]] size_t size) 
 
   HELIOS_ASSERT(Owns(ptr), "Failed to deallocate memory: ptr does not belong to this allocator!");
 
-  const std::scoped_lock lock(mutex_);
-
   // Get the header stored before the allocation
   auto* header = reinterpret_cast<AllocationHeader*>(static_cast<uint8_t*>(ptr) - sizeof(AllocationHeader));
 
-  // Verify this is the most recent allocation (LIFO check)
-  [[maybe_unused]] const size_t current_offset = offset_.load(std::memory_order_relaxed);
-  HELIOS_ASSERT(static_cast<uint8_t*>(ptr) + size <= static_cast<uint8_t*>(buffer_) + current_offset,
-                "Failed to deallocate memory:  Deallocation violates LIFO order!");
+#ifdef HELIOS_DEBUG_MODE
+  {
+    // Verify this is the most recent allocation (LIFO check)
+    const size_t current_offset = offset_.load(std::memory_order_acquire);
+    HELIOS_ASSERT(static_cast<uint8_t*>(ptr) + size <= static_cast<uint8_t*>(buffer_) + current_offset,
+                  "Failed to deallocate memory:  Deallocation violates LIFO order!");
+  }
+#endif
 
   // Rewind to previous offset
+  // Note: LIFO deallocations are expected to be single-threaded per stack or externally synchronized
   offset_.store(header->previous_offset, std::memory_order_release);
 
   // Update stats
@@ -378,20 +385,18 @@ inline void StackAllocator::Deallocate(void* ptr, [[maybe_unused]] size_t size) 
 }
 
 inline void StackAllocator::Reset() noexcept {
-  const std::scoped_lock lock(mutex_);
   offset_.store(0, std::memory_order_release);
   allocation_count_.store(0, std::memory_order_release);
   alignment_waste_.store(0, std::memory_order_release);
 }
 
 inline void StackAllocator::RewindToMarker(size_t marker) noexcept {
-  const std::scoped_lock lock(mutex_);
-
-  [[maybe_unused]] const size_t current_offset = offset_.load(std::memory_order_relaxed);
+  [[maybe_unused]] const size_t current_offset = offset_.load(std::memory_order_acquire);
   HELIOS_ASSERT(marker <= current_offset, "Failed to rewind to marker: marker '{}' is ahead of current offset '{}'!",
                 marker, current_offset);
-  HELIOS_ASSERT(marker <= capacity_, "Failed to rewind to marker: marker '{}' exceeds capacity '{}'!", marker,
-                capacity_);
+
+  const size_t capacity = capacity_.load(std::memory_order_relaxed);
+  HELIOS_ASSERT(marker <= capacity, "Failed to rewind to marker: marker '{}' exceeds capacity '{}'!", marker, capacity);
 
   offset_.store(marker, std::memory_order_release);
 
@@ -404,20 +409,20 @@ inline bool StackAllocator::Owns(const void* ptr) const noexcept {
     return false;
   }
 
+  const uintptr_t start = reinterpret_cast<uintptr_t>(buffer_);
   const auto addr = reinterpret_cast<uintptr_t>(ptr);
-  const auto start = reinterpret_cast<uintptr_t>(buffer_);
-  const auto end = start + capacity_;
+  const uintptr_t end = start + capacity_.load(std::memory_order_relaxed);
 
   return addr >= start && addr < end;
 }
 
 inline AllocatorStats StackAllocator::Stats() const noexcept {
-  const size_t current_offset = offset_.load(std::memory_order_acquire);
-  const size_t peak = peak_offset_.load(std::memory_order_acquire);
-  const size_t alloc_count = allocation_count_.load(std::memory_order_acquire);
-  const size_t total_allocs = total_allocations_.load(std::memory_order_acquire);
-  const size_t total_deallocs = total_deallocations_.load(std::memory_order_acquire);
-  const size_t waste = alignment_waste_.load(std::memory_order_acquire);
+  const size_t current_offset = offset_.load(std::memory_order_relaxed);
+  const size_t peak = peak_offset_.load(std::memory_order_relaxed);
+  const size_t alloc_count = allocation_count_.load(std::memory_order_relaxed);
+  const size_t total_allocs = total_allocations_.load(std::memory_order_relaxed);
+  const size_t total_deallocs = total_deallocations_.load(std::memory_order_relaxed);
+  const size_t waste = alignment_waste_.load(std::memory_order_relaxed);
 
   return {
       .total_allocated = current_offset,
@@ -431,8 +436,9 @@ inline AllocatorStats StackAllocator::Stats() const noexcept {
 }
 
 inline size_t StackAllocator::FreeSpace() const noexcept {
-  const size_t current = offset_.load(std::memory_order_acquire);
-  return current < capacity_ ? capacity_ - current : 0;
+  const size_t current = offset_.load(std::memory_order_relaxed);
+  const size_t capacity = capacity_.load(std::memory_order_relaxed);
+  return current < capacity ? capacity - current : 0;
 }
 
 template <typename T>

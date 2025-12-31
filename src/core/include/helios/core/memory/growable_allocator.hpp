@@ -429,7 +429,7 @@ inline void GrowableAllocator<Allocator>::Deallocate(void* ptr, size_t size) noe
   if constexpr (
       requires { std::declval<Allocator>().Deallocate(ptr, size); } ||
       requires { std::declval<Allocator>().Deallocate(ptr); }) {
-    const std::scoped_lock lock(mutex_);
+    const std::shared_lock lock(mutex_);
 
     auto* allocator = FindOwningAllocator(ptr);
     HELIOS_ASSERT(allocator != nullptr, "Failed to deallocate memory: pointer does not belong to any allocator!");

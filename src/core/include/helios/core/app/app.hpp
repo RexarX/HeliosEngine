@@ -19,6 +19,7 @@
 #include <helios/core/logger.hpp>
 #include <helios/core/utils/common_traits.hpp>
 
+#include <algorithm>
 #include <atomic>
 #include <chrono>
 #include <concepts>
@@ -27,6 +28,7 @@
 #include <functional>
 #include <future>
 #include <memory>
+#include <thread>
 #include <unordered_map>
 #include <utility>
 #include <vector>
@@ -57,6 +59,13 @@ public:
 #endif
 
   App() = default;
+
+  /**
+   * @brief Constructs an App with a specific number of worker threads.
+   * @param worker_thread_count Number of worker threads for the executor
+   */
+  explicit App(size_t worker_thread_count) : executor_(worker_thread_count) {}
+
   App(const App&) = delete;
   App(App&&) = delete;
 

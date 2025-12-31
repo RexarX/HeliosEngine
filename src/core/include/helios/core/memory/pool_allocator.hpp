@@ -138,9 +138,9 @@ public:
    * @brief Checks if the allocator is full.
    * @return True if all blocks are allocated
    */
-  [[nodiscard]] bool Full() const noexcept { return free_block_count_.load(std::memory_order_acquire) == 0; }
+  [[nodiscard]] bool Full() const noexcept { return free_block_count_.load(std::memory_order_relaxed) == 0; }
   [[nodiscard]] bool Empty() const noexcept {
-    return free_block_count_.load(std::memory_order_acquire) == block_count_;
+    return free_block_count_.load(std::memory_order_relaxed) == block_count_;
   }
 
   /**
@@ -178,14 +178,14 @@ public:
    * @brief Gets the number of free blocks.
    * @return Number of blocks available for allocation
    */
-  [[nodiscard]] size_t FreeBlockCount() const noexcept { return free_block_count_.load(std::memory_order_acquire); }
+  [[nodiscard]] size_t FreeBlockCount() const noexcept { return free_block_count_.load(std::memory_order_relaxed); }
 
   /**
    * @brief Gets the number of used blocks.
    * @return Number of blocks currently allocated
    */
   [[nodiscard]] size_t UsedBlockCount() const noexcept {
-    return block_count_ - free_block_count_.load(std::memory_order_acquire);
+    return block_count_ - free_block_count_.load(std::memory_order_relaxed);
   }
 
 private:
@@ -387,13 +387,13 @@ inline bool PoolAllocator::Owns(const void* ptr) const noexcept {
 }
 
 inline AllocatorStats PoolAllocator::Stats() const noexcept {
-  const size_t free_blocks = free_block_count_.load(std::memory_order_acquire);
+  const size_t free_blocks = free_block_count_.load(std::memory_order_relaxed);
   const size_t used_blocks = block_count_ - free_blocks;
   const size_t used_bytes = used_blocks * block_size_;
-  const size_t peak_blocks = peak_used_blocks_.load(std::memory_order_acquire);
+  const size_t peak_blocks = peak_used_blocks_.load(std::memory_order_relaxed);
   const size_t peak_bytes = peak_blocks * block_size_;
-  const size_t total_allocs = total_allocations_.load(std::memory_order_acquire);
-  const size_t total_deallocs = total_deallocations_.load(std::memory_order_acquire);
+  const size_t total_allocs = total_allocations_.load(std::memory_order_relaxed);
+  const size_t total_deallocs = total_deallocations_.load(std::memory_order_relaxed);
 
   return {
       .total_allocated = used_bytes,

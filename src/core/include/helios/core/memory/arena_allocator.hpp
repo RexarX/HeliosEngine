@@ -168,13 +168,13 @@ public:
    * @brief Checks if the arena is empty.
    * @return True if no allocations have been made since the last reset.
    */
-  [[nodiscard]] bool Empty() const noexcept { return offset_.load(std::memory_order_acquire) == 0; }
+  [[nodiscard]] bool Empty() const noexcept { return offset_.load(std::memory_order_relaxed) == 0; }
 
   /**
    * @brief Checks if the arena is full.
    * @return True if no more allocations can be made without reset.
    */
-  [[nodiscard]] bool Full() const noexcept { return offset_.load(std::memory_order_acquire) >= capacity_; }
+  [[nodiscard]] bool Full() const noexcept { return offset_.load(std::memory_order_relaxed) >= capacity_; }
 
   /**
    * @brief Gets current allocator statistics.
@@ -194,7 +194,7 @@ public:
    * @brief Gets the current offset (amount of memory used).
    * @return Current offset in bytes.
    */
-  [[nodiscard]] size_t CurrentOffset() const noexcept { return offset_.load(std::memory_order_acquire); }
+  [[nodiscard]] size_t CurrentOffset() const noexcept { return offset_.load(std::memory_order_relaxed); }
 
   /**
    * @brief Gets the amount of free space remaining.
@@ -325,10 +325,10 @@ inline void ArenaAllocator::Reset() noexcept {
 }
 
 inline AllocatorStats ArenaAllocator::Stats() const noexcept {
-  const auto current_offset = offset_.load(std::memory_order_acquire);
-  const auto peak = peak_offset_.load(std::memory_order_acquire);
-  const auto alloc_count = allocation_count_.load(std::memory_order_acquire);
-  const auto waste = alignment_waste_.load(std::memory_order_acquire);
+  const auto current_offset = offset_.load(std::memory_order_relaxed);
+  const auto peak = peak_offset_.load(std::memory_order_relaxed);
+  const auto alloc_count = allocation_count_.load(std::memory_order_relaxed);
+  const auto waste = alignment_waste_.load(std::memory_order_relaxed);
 
   // In an arena, we conceptually "free" everything on reset, but we do not track per-block frees.
   // total_freed is modeled as 0; deallocations count remains 0 because `Deallocate` is a no-op.
@@ -344,7 +344,7 @@ inline AllocatorStats ArenaAllocator::Stats() const noexcept {
 }
 
 inline size_t ArenaAllocator::FreeSpace() const noexcept {
-  const auto current = offset_.load(std::memory_order_acquire);
+  const auto current = offset_.load(std::memory_order_relaxed);
   return current < capacity_ ? capacity_ - current : 0;
 }
 
