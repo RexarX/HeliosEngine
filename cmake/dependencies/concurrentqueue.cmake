@@ -19,17 +19,29 @@ helios_dep_begin(
 
 helios_dep_end()
 
-# Create helios::concurrentqueue alias if concurrentqueue was found
-if(NOT TARGET helios::concurrentqueue)
+# Create helios::concurrentqueue::concurrentqueue alias if concurrentqueue was found
+if(NOT TARGET helios::concurrentqueue::concurrentqueue)
     if(TARGET concurrentqueue::concurrentqueue)
-        add_library(helios::concurrentqueue ALIAS concurrentqueue::concurrentqueue)
+        add_library(helios::concurrentqueue::concurrentqueue ALIAS concurrentqueue::concurrentqueue)
         message(STATUS "  ✓ concurrentqueue configured (concurrentqueue::concurrentqueue)")
     elseif(TARGET concurrentqueue)
-        add_library(helios::concurrentqueue ALIAS concurrentqueue)
+        add_library(helios::concurrentqueue::concurrentqueue ALIAS concurrentqueue)
         message(STATUS "  ✓ concurrentqueue configured (concurrentqueue)")
     else()
         message(WARNING "  ✗ concurrentqueue not found")
     endif()
 else()
-    message(STATUS "  ✓ concurrentqueue configured (helios::concurrentqueue)")
+    message(STATUS "  ✓ concurrentqueue configured (helios::concurrentqueue::concurrentqueue)")
+endif()
+
+# Create helios::concurrentqueue convenience target that brings in all concurrentqueue targets
+if(NOT TARGET _helios_concurrentqueue_all)
+    add_library(_helios_concurrentqueue_all INTERFACE)
+    if(TARGET helios::concurrentqueue::concurrentqueue)
+        target_link_libraries(_helios_concurrentqueue_all INTERFACE helios::concurrentqueue::concurrentqueue)
+    endif()
+endif()
+
+if(NOT TARGET helios::concurrentqueue)
+    add_library(helios::concurrentqueue ALIAS _helios_concurrentqueue_all)
 endif()

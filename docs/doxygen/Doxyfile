@@ -18,7 +18,7 @@ CREATE_SUBDIRS         = NO
 INPUT                  = ../../src ../../README.md ../../src/core/README.md ../guides
 FILE_PATTERNS          = *.hpp *.inl *.h *.cpp *.cxx *.c *.md
 RECURSIVE              = YES
-EXCLUDE                = ../../build ../../tests ../../third-party
+EXCLUDE                = ../../tests ../../third-party
 
 #---------------------------------------------------------------------------
 # Configuration options related to source browsing

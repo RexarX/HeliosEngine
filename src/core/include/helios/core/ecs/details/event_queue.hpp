@@ -42,9 +42,15 @@ public:
   void Register();
 
   /**
-   * @brief Clears all events from the queue.
+   * @brief Clears all events from the queue and removes registrations.
    */
   void Clear() noexcept { storages_.clear(); }
+
+  /**
+   * @brief Clears all event data but preserves registrations.
+   * @details Use this when you want to clear events without losing type registrations.
+   */
+  void ClearData() noexcept;
 
   /**
    * @brief Clears events of a specific type.
@@ -155,6 +161,47 @@ inline void EventQueue::Register() {
 }
 
 template <EventTrait T>
+inline void EventQueue::Clear() {
+  constexpr EventTypeId type_id = EventTypeIdOf<T>();
+  HELIOS_ASSERT(IsRegistered<T>(), "Failed to clear events: Event type '{}' is not registered!", EventNameOf<T>());
+  storages_.at(type_id).Clear();
+}
+
+inline void EventQueue::ClearData() noexcept {
+  for (auto& [_, storage] : storages_) {
+    storage.Clear();
+  }
+}
+
+inline void EventQueue::ClearByTypeId(EventTypeId type_id) {
+  if (const auto it = storages_.find(type_id); it != storages_.end()) {
+    it->second.Clear();
+  }
+}
+
+inline void EventQueue::Merge(EventQueue& other) {
+  for (auto& [type_id, other_storage] : other.storages_) {
+    if (other_storage.Empty()) {
+      continue;
+    }
+
+    if (const auto it = storages_.find(type_id); it == storages_.end()) {
+      // If we don't have this type registered, move the entire storage
+      storages_.emplace(type_id, std::move(other_storage));
+    } else {
+      auto& this_storage = it->second;
+      if (this_storage.Empty()) {
+        // If our storage is empty, just move the other storage
+        this_storage = std::move(other_storage);
+      } else {
+        // Append raw bytes from other storage to this storage
+        this_storage.AppendRawBytes(other_storage.Data());
+      }
+    }
+  }
+}
+
+template <EventTrait T>
 inline void EventQueue::Write(const T& event) {
   constexpr EventTypeId type_id = EventTypeIdOf<T>();
   HELIOS_ASSERT(IsRegistered<T>(), "Failed to write event: Event type '{}' is not registered!", EventNameOf<T>());
@@ -194,35 +241,6 @@ inline void EventQueue::ReadInto(OutIt out) const {
   it->second.ReadInto<T>(std::move(out));
 }
 
-inline void EventQueue::Merge(EventQueue& other) {
-  for (auto& [type_id, other_storage] : other.storages_) {
-    if (other_storage.Empty()) {
-      continue;
-    }
-
-    if (const auto it = storages_.find(type_id); it == storages_.end()) {
-      // If we don't have this type registered, move the entire storage
-      storages_.emplace(type_id, std::move(other_storage));
-    } else {
-      auto& this_storage = it->second;
-      if (this_storage.Empty()) {
-        // If our storage is empty, just move the other storage
-        this_storage = std::move(other_storage);
-      } else {
-        // Append raw bytes from other storage to this storage
-        this_storage.AppendRawBytes(other_storage.Data());
-      }
-    }
-  }
-}
-
-template <EventTrait T>
-inline void EventQueue::Clear() {
-  constexpr EventTypeId type_id = EventTypeIdOf<T>();
-  HELIOS_ASSERT(IsRegistered<T>(), "Failed to clear events: Event type '{}' is not registered!", EventNameOf<T>());
-  storages_.at(type_id).Clear();
-}
-
 template <EventTrait T>
 inline bool EventQueue::HasEvents() const {
   constexpr EventTypeId type_id = EventTypeIdOf<T>();
@@ -242,12 +260,6 @@ inline size_t EventQueue::TotalSizeBytes() const noexcept {
     total += storage.SizeBytes();
   }
   return total;
-}
-
-inline void EventQueue::ClearByTypeId(EventTypeId type_id) {
-  if (const auto it = storages_.find(type_id); it != storages_.end()) {
-    it->second.Clear();
-  }
 }
 
 }  // namespace helios::ecs::details

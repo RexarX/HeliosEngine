@@ -45,26 +45,26 @@ struct Health {
 };
 
 // Test event types (must be trivially copyable)
-struct EntityCreatedEvent {
+struct CustomEntityCreatedEvent {
   Entity entity;
   float x = 0.0F;
   float y = 0.0F;
   float z = 0.0F;
 
-  static constexpr std::string_view GetName() noexcept { return "EntityCreatedEvent"; }
+  static constexpr std::string_view GetName() noexcept { return "CustomEntityCreatedEvent"; }
 };
 
-struct EntityDestroyedEvent {
+struct CustomEntityDestroyedEvent {
   Entity entity;
   std::array<char, 64> reason = {};
 
-  explicit EntityDestroyedEvent(Entity e = {}, std::string_view r = "") : entity(e) {
+  explicit CustomEntityDestroyedEvent(Entity e = {}, std::string_view r = "") : entity(e) {
     const auto copy_size = std::min(r.size(), reason.size() - 1);
     std::copy_n(r.begin(), copy_size, reason.begin());
     reason[copy_size] = '\0';
   }
 
-  static constexpr std::string_view GetName() noexcept { return "EntityDestroyedEvent"; }
+  static constexpr std::string_view GetName() noexcept { return "CustomEntityDestroyedEvent"; }
 };
 
 struct ComponentAddedEvent {
@@ -641,17 +641,17 @@ TEST_SUITE("ecs::World") {
 
   TEST_CASE("World: Events Basic Operations") {
     World world;
-    world.AddEvent<EntityCreatedEvent>();
+    world.AddEvent<CustomEntityCreatedEvent>();
     world.AddEvent<ScoreEvent>();
     world.AddEvent<DamageEvent>();
 
     SUBCASE("Write and Read Single Event") {
-      auto writer = world.WriteEvents<EntityCreatedEvent>();
+      auto writer = world.WriteEvents<CustomEntityCreatedEvent>();
       Entity entity = world.CreateEntity();
-      writer.Write(EntityCreatedEvent{entity, 1.0F, 2.0F, 3.0F});
+      writer.Write(CustomEntityCreatedEvent{entity, 1.0F, 2.0F, 3.0F});
 
       // Read events
-      auto reader = world.ReadEvents<EntityCreatedEvent>();
+      auto reader = world.ReadEvents<CustomEntityCreatedEvent>();
       auto events = reader.Collect();
       REQUIRE_EQ(events.size(), 1);
       CHECK_EQ(events[0].entity, entity);
@@ -661,16 +661,16 @@ TEST_SUITE("ecs::World") {
     }
 
     SUBCASE("Write and Read Multiple Events") {
-      auto writer = world.WriteEvents<EntityCreatedEvent>();
+      auto writer = world.WriteEvents<CustomEntityCreatedEvent>();
       Entity e1 = world.CreateEntity();
       Entity e2 = world.CreateEntity();
       Entity e3 = world.CreateEntity();
 
-      writer.Write(EntityCreatedEvent{e1, 1.0F, 1.0F, 1.0F});
-      writer.Write(EntityCreatedEvent{e2, 2.0F, 2.0F, 2.0F});
-      writer.Write(EntityCreatedEvent{e3, 3.0F, 3.0F, 3.0F});
+      writer.Write(CustomEntityCreatedEvent{e1, 1.0F, 1.0F, 1.0F});
+      writer.Write(CustomEntityCreatedEvent{e2, 2.0F, 2.0F, 2.0F});
+      writer.Write(CustomEntityCreatedEvent{e3, 3.0F, 3.0F, 3.0F});
 
-      auto reader = world.ReadEvents<EntityCreatedEvent>();
+      auto reader = world.ReadEvents<CustomEntityCreatedEvent>();
       auto events = reader.Collect();
       REQUIRE_EQ(events.size(), 3);
       CHECK_EQ(events[0].entity, e1);
@@ -699,35 +699,35 @@ TEST_SUITE("ecs::World") {
     }
 
     SUBCASE("Clear Specific Event Type") {
-      auto writer_created = world.WriteEvents<EntityCreatedEvent>();
+      auto writer_created = world.WriteEvents<CustomEntityCreatedEvent>();
       auto writer_score = world.WriteEvents<ScoreEvent>();
       Entity e1 = world.CreateEntity();
-      writer_created.Write(EntityCreatedEvent{e1, 1.0F, 2.0F, 3.0F});
+      writer_created.Write(CustomEntityCreatedEvent{e1, 1.0F, 2.0F, 3.0F});
       writer_score.Write(ScoreEvent{100, "TestPlayer"});
 
       // Verify both event types exist
-      CHECK_EQ(world.ReadEvents<EntityCreatedEvent>().Count(), 1);
+      CHECK_EQ(world.ReadEvents<CustomEntityCreatedEvent>().Count(), 1);
       CHECK_EQ(world.ReadEvents<ScoreEvent>().Count(), 1);
 
-      // Clear only EntityCreatedEvent
-      world.ClearEvents<EntityCreatedEvent>();
+      // Clear only CustomEntityCreatedEvent
+      world.ClearEvents<CustomEntityCreatedEvent>();
 
-      // Verify EntityCreatedEvent is cleared but ScoreEvent remains
-      CHECK_EQ(world.ReadEvents<EntityCreatedEvent>().Count(), 0);
+      // Verify CustomEntityCreatedEvent is cleared but ScoreEvent remains
+      CHECK_EQ(world.ReadEvents<CustomEntityCreatedEvent>().Count(), 0);
       CHECK_EQ(world.ReadEvents<ScoreEvent>().Count(), 1);
     }
 
     SUBCASE("Clear All Events") {
       auto writer_damage = world.WriteEvents<DamageEvent>();
-      auto writer_created = world.WriteEvents<EntityCreatedEvent>();
+      auto writer_created = world.WriteEvents<CustomEntityCreatedEvent>();
       auto writer_score = world.WriteEvents<ScoreEvent>();
       Entity e1 = world.CreateEntity();
-      writer_created.Write(EntityCreatedEvent{e1, 1.0F, 2.0F, 3.0F});
+      writer_created.Write(CustomEntityCreatedEvent{e1, 1.0F, 2.0F, 3.0F});
       writer_score.Write(ScoreEvent{100, "TestPlayer"});
       writer_damage.Write(DamageEvent{e1, e1, 50});
 
       // Verify events exist
-      CHECK_EQ(world.ReadEvents<EntityCreatedEvent>().Count(), 1);
+      CHECK_EQ(world.ReadEvents<CustomEntityCreatedEvent>().Count(), 1);
       CHECK_EQ(world.ReadEvents<ScoreEvent>().Count(), 1);
       CHECK_EQ(world.ReadEvents<DamageEvent>().Count(), 1);
 
@@ -735,7 +735,7 @@ TEST_SUITE("ecs::World") {
       world.ClearAllEventQueues();
 
       // Verify all events are cleared
-      CHECK_EQ(world.ReadEvents<EntityCreatedEvent>().Count(), 0);
+      CHECK_EQ(world.ReadEvents<CustomEntityCreatedEvent>().Count(), 0);
       CHECK_EQ(world.ReadEvents<ScoreEvent>().Count(), 0);
       CHECK_EQ(world.ReadEvents<DamageEvent>().Count(), 0);
     }
@@ -757,14 +757,14 @@ TEST_SUITE("ecs::World") {
     }
 
     SUBCASE("Events Persist Across Multiple Reads") {
-      auto writer = world.WriteEvents<EntityCreatedEvent>();
+      auto writer = world.WriteEvents<CustomEntityCreatedEvent>();
       Entity e1 = world.CreateEntity();
-      writer.Write(EntityCreatedEvent{e1, 1.0F, 2.0F, 3.0F});
+      writer.Write(CustomEntityCreatedEvent{e1, 1.0F, 2.0F, 3.0F});
 
       // Read events multiple times
-      auto reader1 = world.ReadEvents<EntityCreatedEvent>();
+      auto reader1 = world.ReadEvents<CustomEntityCreatedEvent>();
       auto events1 = reader1.Collect();
-      auto reader2 = world.ReadEvents<EntityCreatedEvent>();
+      auto reader2 = world.ReadEvents<CustomEntityCreatedEvent>();
       auto events2 = reader2.Collect();
 
       CHECK_EQ(events1.size(), 1);
@@ -773,7 +773,7 @@ TEST_SUITE("ecs::World") {
     }
 
     SUBCASE("No Events Returns Empty Vector") {
-      auto reader = world.ReadEvents<EntityCreatedEvent>();
+      auto reader = world.ReadEvents<CustomEntityCreatedEvent>();
       auto events = reader.Collect();
       CHECK(events.empty());
     }
@@ -781,34 +781,34 @@ TEST_SUITE("ecs::World") {
 
   TEST_CASE("World: Events Multiple Types") {
     World world;
-    world.AddEvent<EntityCreatedEvent>();
+    world.AddEvent<CustomEntityCreatedEvent>();
     world.AddEvent<DamageEvent>();
     world.AddEvent<ScoreEvent>();
-    world.AddEvent<EntityDestroyedEvent>();
+    world.AddEvent<CustomEntityDestroyedEvent>();
 
     Entity player = world.CreateEntity();
     Entity enemy = world.CreateEntity();
 
-    auto writer_created = world.WriteEvents<EntityCreatedEvent>();
+    auto writer_created = world.WriteEvents<CustomEntityCreatedEvent>();
     auto writer_damage = world.WriteEvents<DamageEvent>();
     auto writer_score = world.WriteEvents<ScoreEvent>();
-    auto writer_destroyed = world.WriteEvents<EntityDestroyedEvent>();
+    auto writer_destroyed = world.WriteEvents<CustomEntityDestroyedEvent>();
 
     // Write multiple event types
-    writer_created.Write(EntityCreatedEvent{player, 0.0F, 0.0F, 0.0F});
-    writer_created.Write(EntityCreatedEvent{enemy, 10.0F, 0.0F, 0.0F});
+    writer_created.Write(CustomEntityCreatedEvent{player, 0.0F, 0.0F, 0.0F});
+    writer_created.Write(CustomEntityCreatedEvent{enemy, 10.0F, 0.0F, 0.0F});
     writer_damage.Write(DamageEvent{player, enemy, 25});
     writer_score.Write(ScoreEvent{100, "PlayerOne"});
-    writer_destroyed.Write(EntityDestroyedEvent{enemy, "killed"});
+    writer_destroyed.Write(CustomEntityDestroyedEvent{enemy, "killed"});
 
     // Read each event type
-    auto reader_entitycreatedevent = world.ReadEvents<EntityCreatedEvent>();
+    auto reader_entitycreatedevent = world.ReadEvents<CustomEntityCreatedEvent>();
     auto created_events = reader_entitycreatedevent.Collect();
     auto reader_damageevent = world.ReadEvents<DamageEvent>();
     auto damage_events = reader_damageevent.Collect();
     auto reader_scoreevent = world.ReadEvents<ScoreEvent>();
     auto score_events = reader_scoreevent.Collect();
-    auto reader_entitydestroyedevent = world.ReadEvents<EntityDestroyedEvent>();
+    auto reader_entitydestroyedevent = world.ReadEvents<CustomEntityDestroyedEvent>();
     auto destroyed_events = reader_entitydestroyedevent.Collect();
 
     CHECK_EQ(created_events.size(), 2);
@@ -829,7 +829,7 @@ TEST_SUITE("ecs::World") {
 
   TEST_CASE("World: Events Merge from Multiple Local Storages") {
     World world;
-    world.AddEvent<EntityCreatedEvent>();
+    world.AddEvent<CustomEntityCreatedEvent>();
     world.AddEvent<ScoreEvent>();
 
     helios::ecs::details::SystemLocalStorage storage1;
@@ -840,9 +840,9 @@ TEST_SUITE("ecs::World") {
     Entity e2 = world.CreateEntity();
     Entity e3 = world.CreateEntity();
 
-    storage1.WriteEvent(EntityCreatedEvent{e1, 1.0F, 0.0F, 0.0F});
-    storage2.WriteEvent(EntityCreatedEvent{e2, 2.0F, 0.0F, 0.0F});
-    storage3.WriteEvent(EntityCreatedEvent{e3, 3.0F, 0.0F, 0.0F});
+    storage1.WriteEvent(CustomEntityCreatedEvent{e1, 1.0F, 0.0F, 0.0F});
+    storage2.WriteEvent(CustomEntityCreatedEvent{e2, 2.0F, 0.0F, 0.0F});
+    storage3.WriteEvent(CustomEntityCreatedEvent{e3, 3.0F, 0.0F, 0.0F});
 
     storage1.WriteEvent(ScoreEvent{100, "System1"});
     storage2.WriteEvent(ScoreEvent{200, "System2"});
@@ -853,7 +853,7 @@ TEST_SUITE("ecs::World") {
     world.MergeEventQueue(storage3.GetEventQueue());
     world.Update();
 
-    auto reader_entitycreatedevent = world.ReadEvents<EntityCreatedEvent>();
+    auto reader_entitycreatedevent = world.ReadEvents<CustomEntityCreatedEvent>();
     auto created_events = reader_entitycreatedevent.Collect();
     auto reader_scoreevent = world.ReadEvents<ScoreEvent>();
     auto score_events = reader_scoreevent.Collect();
@@ -864,19 +864,19 @@ TEST_SUITE("ecs::World") {
 
   TEST_CASE("World: Events Large Scale") {
     World world;
-    world.AddEvent<EntityCreatedEvent>();
+    world.AddEvent<CustomEntityCreatedEvent>();
 
     constexpr size_t event_count = 10000;
 
-    auto writer = world.WriteEvents<EntityCreatedEvent>();
+    auto writer = world.WriteEvents<CustomEntityCreatedEvent>();
 
     // Write many events
     for (size_t i = 0; i < event_count; ++i) {
       Entity entity = world.CreateEntity();
-      writer.Write(EntityCreatedEvent{entity, static_cast<float>(i), 0.0F, 0.0F});
+      writer.Write(CustomEntityCreatedEvent{entity, static_cast<float>(i), 0.0F, 0.0F});
     }
 
-    auto reader = world.ReadEvents<EntityCreatedEvent>();
+    auto reader = world.ReadEvents<CustomEntityCreatedEvent>();
     auto events = reader.Collect();
     REQUIRE_EQ(events.size(), event_count);
 
@@ -886,54 +886,54 @@ TEST_SUITE("ecs::World") {
     }
 
     // Clear and verify
-    world.ClearEvents<EntityCreatedEvent>();
-    CHECK(world.ReadEvents<EntityCreatedEvent>().Empty());
+    world.ClearEvents<CustomEntityCreatedEvent>();
+    CHECK(world.ReadEvents<CustomEntityCreatedEvent>().Empty());
   }
 
   TEST_CASE("World: Events with Entity Lifecycle") {
     World world;
-    world.AddEvent<EntityCreatedEvent>();
-    world.AddEvent<EntityDestroyedEvent>();
+    world.AddEvent<CustomEntityCreatedEvent>();
+    world.AddEvent<CustomEntityDestroyedEvent>();
 
     SUBCASE("Events Remain After Entity Destruction") {
-      auto writer = world.WriteEvents<EntityCreatedEvent>();
+      auto writer = world.WriteEvents<CustomEntityCreatedEvent>();
       Entity entity = world.CreateEntity();
       world.AddComponent(entity, Position{1.0F, 2.0F, 3.0F});
 
       // Write event about entity
-      writer.Write(EntityCreatedEvent{entity, 1.0F, 2.0F, 3.0F});
+      writer.Write(CustomEntityCreatedEvent{entity, 1.0F, 2.0F, 3.0F});
 
       // Destroy entity
       world.DestroyEntity(entity);
       CHECK_FALSE(world.Exists(entity));
 
       // Event should still be readable (contains stale entity reference)
-      auto reader = world.ReadEvents<EntityCreatedEvent>();
+      auto reader = world.ReadEvents<CustomEntityCreatedEvent>();
       auto events = reader.Collect();
       REQUIRE_EQ(events.size(), 1);
       CHECK_EQ(events[0].entity, entity);  // Entity ID remains in event
     }
 
     SUBCASE("Track Entity Creation and Destruction") {
-      auto writer_created = world.WriteEvents<EntityCreatedEvent>();
-      auto writer_destroyed = world.WriteEvents<EntityDestroyedEvent>();
+      auto writer_created = world.WriteEvents<CustomEntityCreatedEvent>();
+      auto writer_destroyed = world.WriteEvents<CustomEntityDestroyedEvent>();
 
       std::vector<Entity> entities;
       for (int i = 0; i < 10; ++i) {
         Entity e = world.CreateEntity();
         entities.push_back(e);
-        writer_created.Write(EntityCreatedEvent{e, static_cast<float>(i), 0.0F, 0.0F});
+        writer_created.Write(CustomEntityCreatedEvent{e, static_cast<float>(i), 0.0F, 0.0F});
       }
 
       // Destroy half the entities
       for (int i = 0; i < 5; ++i) {
         world.DestroyEntity(entities[i]);
-        writer_destroyed.Write(EntityDestroyedEvent{entities[i], "test_cleanup"});
+        writer_destroyed.Write(CustomEntityDestroyedEvent{entities[i], "test_cleanup"});
       }
 
-      auto reader_created = world.ReadEvents<EntityCreatedEvent>();
+      auto reader_created = world.ReadEvents<CustomEntityCreatedEvent>();
       auto created = reader_created.Collect();
-      auto reader_destroyed = world.ReadEvents<EntityDestroyedEvent>();
+      auto reader_destroyed = world.ReadEvents<CustomEntityDestroyedEvent>();
       auto destroyed = reader_destroyed.Collect();
 
       CHECK_EQ(created.size(), 10);
@@ -944,18 +944,18 @@ TEST_SUITE("ecs::World") {
 
   TEST_CASE("World: Events Clear After World Clear") {
     World world;
-    world.AddEvent<EntityCreatedEvent>();
+    world.AddEvent<CustomEntityCreatedEvent>();
     world.AddEvent<ScoreEvent>();
 
-    auto writer_created = world.WriteEvents<EntityCreatedEvent>();
+    auto writer_created = world.WriteEvents<CustomEntityCreatedEvent>();
     auto writer_score = world.WriteEvents<ScoreEvent>();
 
     Entity e1 = world.CreateEntity();
-    writer_created.Write(EntityCreatedEvent{e1, 1.0F, 2.0F, 3.0F});
+    writer_created.Write(CustomEntityCreatedEvent{e1, 1.0F, 2.0F, 3.0F});
     writer_score.Write(ScoreEvent{100, "Player"});
 
     // Verify events exist
-    CHECK_EQ(world.ReadEvents<EntityCreatedEvent>().Count(), 1);
+    CHECK_EQ(world.ReadEvents<CustomEntityCreatedEvent>().Count(), 1);
     CHECK_EQ(world.ReadEvents<ScoreEvent>().Count(), 1);
 
     // Clear world (clears everything including event registration)
@@ -965,9 +965,9 @@ TEST_SUITE("ecs::World") {
     CHECK_EQ(world.EntityCount(), 0);
 
     // Events can be registered again after Clear()
-    world.AddEvent<EntityCreatedEvent>();
+    world.AddEvent<CustomEntityCreatedEvent>();
     world.AddEvent<ScoreEvent>();
-    CHECK(world.ReadEvents<EntityCreatedEvent>().Empty());
+    CHECK(world.ReadEvents<CustomEntityCreatedEvent>().Empty());
     CHECK(world.ReadEvents<ScoreEvent>().Empty());
   }
 
@@ -975,55 +975,55 @@ TEST_SUITE("ecs::World") {
     World world;
 
     SUBCASE("HasEvent Returns False Before Event Registration") {
-      CHECK_FALSE(world.HasEvent<EntityCreatedEvent>());
+      CHECK_FALSE(world.HasEvent<CustomEntityCreatedEvent>());
       CHECK_FALSE(world.HasEvent<ScoreEvent>());
       CHECK_FALSE(world.HasEvent<DamageEvent>());
     }
 
     SUBCASE("HasEvent Returns True After Event Registration") {
-      world.AddEvent<EntityCreatedEvent>();
-      CHECK(world.HasEvent<EntityCreatedEvent>());
+      world.AddEvent<CustomEntityCreatedEvent>();
+      CHECK(world.HasEvent<CustomEntityCreatedEvent>());
       CHECK_FALSE(world.HasEvent<ScoreEvent>());
       CHECK_FALSE(world.HasEvent<DamageEvent>());
 
       world.AddEvent<ScoreEvent>();
-      CHECK(world.HasEvent<EntityCreatedEvent>());
+      CHECK(world.HasEvent<CustomEntityCreatedEvent>());
       CHECK(world.HasEvent<ScoreEvent>());
       CHECK_FALSE(world.HasEvent<DamageEvent>());
 
       world.AddEvent<DamageEvent>();
-      CHECK(world.HasEvent<EntityCreatedEvent>());
+      CHECK(world.HasEvent<CustomEntityCreatedEvent>());
       CHECK(world.HasEvent<ScoreEvent>());
       CHECK(world.HasEvent<DamageEvent>());
     }
 
     SUBCASE("HasEvent After Clear") {
-      world.AddEvent<EntityCreatedEvent>();
+      world.AddEvent<CustomEntityCreatedEvent>();
       world.AddEvent<ScoreEvent>();
-      CHECK(world.HasEvent<EntityCreatedEvent>());
+      CHECK(world.HasEvent<CustomEntityCreatedEvent>());
       CHECK(world.HasEvent<ScoreEvent>());
 
       world.Clear();
-      CHECK_FALSE(world.HasEvent<EntityCreatedEvent>());
+      CHECK_FALSE(world.HasEvent<CustomEntityCreatedEvent>());
       CHECK_FALSE(world.HasEvent<ScoreEvent>());
     }
 
     SUBCASE("HasEvent Persistent After ClearAllEventQueues") {
-      world.AddEvent<EntityCreatedEvent>();
+      world.AddEvent<CustomEntityCreatedEvent>();
       world.AddEvent<ScoreEvent>();
 
-      auto writer = world.WriteEvents<EntityCreatedEvent>();
+      auto writer = world.WriteEvents<CustomEntityCreatedEvent>();
       Entity e = world.CreateEntity();
-      writer.Write(EntityCreatedEvent{e, 1.0F, 2.0F, 3.0F});
+      writer.Write(CustomEntityCreatedEvent{e, 1.0F, 2.0F, 3.0F});
 
       world.ClearAllEventQueues();
 
       // Event registration should persist
-      CHECK(world.HasEvent<EntityCreatedEvent>());
+      CHECK(world.HasEvent<CustomEntityCreatedEvent>());
       CHECK(world.HasEvent<ScoreEvent>());
 
       // But queues should be empty
-      CHECK(world.ReadEvents<EntityCreatedEvent>().Empty());
+      CHECK(world.ReadEvents<CustomEntityCreatedEvent>().Empty());
     }
   }
 

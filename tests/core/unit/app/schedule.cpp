@@ -192,6 +192,19 @@ TEST_SUITE("app::DefaultSchedules") {
     CHECK_EQ(ScheduleStageOf<Main>(), ScheduleIdOf<MainStage>());
   }
 
+  TEST_CASE("First: is valid schedule") {
+    CHECK(ScheduleTrait<First>);
+    CHECK(ScheduleWithNameTrait<First>);
+  }
+
+  TEST_CASE("First: properties") {
+    CHECK_EQ(ScheduleNameOf<First>(), "First");
+    CHECK_EQ(ScheduleBeforeOf<First>().size(), 1);
+    CHECK_EQ(ScheduleBeforeOf<First>()[0], ScheduleIdOf<PreUpdate>());
+    CHECK_EQ(ScheduleAfterOf<First>().size(), 0);
+    CHECK_EQ(ScheduleStageOf<First>(), ScheduleIdOf<UpdateStage>());
+  }
+
   TEST_CASE("PreUpdate: is valid schedule") {
     CHECK(ScheduleTrait<PreUpdate>);
     CHECK(ScheduleWithNameTrait<PreUpdate>);
@@ -201,7 +214,8 @@ TEST_SUITE("app::DefaultSchedules") {
     CHECK_EQ(ScheduleNameOf<PreUpdate>(), "PreUpdate");
     CHECK_EQ(ScheduleBeforeOf<PreUpdate>().size(), 1);
     CHECK_EQ(ScheduleBeforeOf<PreUpdate>()[0], ScheduleIdOf<Update>());
-    CHECK_EQ(ScheduleAfterOf<PreUpdate>().size(), 0);
+    CHECK_EQ(ScheduleAfterOf<PreUpdate>().size(), 1);
+    CHECK_EQ(ScheduleAfterOf<PreUpdate>()[0], ScheduleIdOf<First>());
     CHECK_EQ(ScheduleStageOf<PreUpdate>(), ScheduleIdOf<UpdateStage>());
   }
 
@@ -212,8 +226,10 @@ TEST_SUITE("app::DefaultSchedules") {
 
   TEST_CASE("Update: properties") {
     CHECK_EQ(ScheduleNameOf<Update>(), "Update");
-    CHECK_EQ(ScheduleBeforeOf<Update>().size(), 0);
-    CHECK_EQ(ScheduleAfterOf<Update>().size(), 0);
+    CHECK_EQ(ScheduleBeforeOf<Update>().size(), 1);
+    CHECK_EQ(ScheduleBeforeOf<Update>()[0], ScheduleIdOf<PostUpdate>());
+    CHECK_EQ(ScheduleAfterOf<Update>().size(), 1);
+    CHECK_EQ(ScheduleAfterOf<Update>()[0], ScheduleIdOf<PreUpdate>());
     CHECK_EQ(ScheduleStageOf<Update>(), ScheduleIdOf<UpdateStage>());
   }
 
@@ -224,10 +240,24 @@ TEST_SUITE("app::DefaultSchedules") {
 
   TEST_CASE("PostUpdate: properties") {
     CHECK_EQ(ScheduleNameOf<PostUpdate>(), "PostUpdate");
-    CHECK_EQ(ScheduleBeforeOf<PostUpdate>().size(), 0);
+    CHECK_EQ(ScheduleBeforeOf<PostUpdate>().size(), 1);
+    CHECK_EQ(ScheduleBeforeOf<PostUpdate>()[0], ScheduleIdOf<Last>());
     CHECK_EQ(ScheduleAfterOf<PostUpdate>().size(), 1);
     CHECK_EQ(ScheduleAfterOf<PostUpdate>()[0], ScheduleIdOf<Update>());
     CHECK_EQ(ScheduleStageOf<PostUpdate>(), ScheduleIdOf<UpdateStage>());
+  }
+
+  TEST_CASE("Last: is valid schedule") {
+    CHECK(ScheduleTrait<Last>);
+    CHECK(ScheduleWithNameTrait<Last>);
+  }
+
+  TEST_CASE("Last: properties") {
+    CHECK_EQ(ScheduleNameOf<Last>(), "Last");
+    CHECK_EQ(ScheduleBeforeOf<Last>().size(), 0);
+    CHECK_EQ(ScheduleAfterOf<Last>().size(), 1);
+    CHECK_EQ(ScheduleAfterOf<Last>()[0], ScheduleIdOf<PostUpdate>());
+    CHECK_EQ(ScheduleStageOf<Last>(), ScheduleIdOf<UpdateStage>());
   }
 
   TEST_CASE("PreCleanUp: is valid schedule") {
@@ -272,9 +302,11 @@ TEST_SUITE("app::DefaultSchedules") {
     CHECK_NE(ScheduleIdOf<PreStartup>(), ScheduleIdOf<Startup>());
     CHECK_NE(ScheduleIdOf<PreStartup>(), ScheduleIdOf<PostStartup>());
     CHECK_NE(ScheduleIdOf<PreStartup>(), ScheduleIdOf<Main>());
+    CHECK_NE(ScheduleIdOf<PreStartup>(), ScheduleIdOf<First>());
     CHECK_NE(ScheduleIdOf<PreStartup>(), ScheduleIdOf<PreUpdate>());
     CHECK_NE(ScheduleIdOf<PreStartup>(), ScheduleIdOf<Update>());
     CHECK_NE(ScheduleIdOf<PreStartup>(), ScheduleIdOf<PostUpdate>());
+    CHECK_NE(ScheduleIdOf<PreStartup>(), ScheduleIdOf<Last>());
 
     CHECK_NE(ScheduleIdOf<PreStartup>(), ScheduleIdOf<PreCleanUp>());
     CHECK_NE(ScheduleIdOf<PreStartup>(), ScheduleIdOf<CleanUp>());
@@ -282,18 +314,22 @@ TEST_SUITE("app::DefaultSchedules") {
 
     CHECK_NE(ScheduleIdOf<Startup>(), ScheduleIdOf<PostStartup>());
     CHECK_NE(ScheduleIdOf<Startup>(), ScheduleIdOf<Main>());
-    CHECK_NE(ScheduleIdOf<Main>(), ScheduleIdOf<PreUpdate>());
+    CHECK_NE(ScheduleIdOf<Main>(), ScheduleIdOf<First>());
+    CHECK_NE(ScheduleIdOf<First>(), ScheduleIdOf<PreUpdate>());
     CHECK_NE(ScheduleIdOf<PreUpdate>(), ScheduleIdOf<Update>());
     CHECK_NE(ScheduleIdOf<Update>(), ScheduleIdOf<PostUpdate>());
+    CHECK_NE(ScheduleIdOf<PostUpdate>(), ScheduleIdOf<Last>());
   }
 
   TEST_CASE("DefaultSchedules: all have unique names") {
     CHECK_NE(ScheduleNameOf<PreStartup>(), ScheduleNameOf<Startup>());
     CHECK_NE(ScheduleNameOf<Startup>(), ScheduleNameOf<PostStartup>());
-    CHECK_NE(ScheduleNameOf<Main>(), ScheduleNameOf<PreUpdate>());
+    CHECK_NE(ScheduleNameOf<Main>(), ScheduleNameOf<First>());
+    CHECK_NE(ScheduleNameOf<First>(), ScheduleNameOf<PreUpdate>());
     CHECK_NE(ScheduleNameOf<PreUpdate>(), ScheduleNameOf<Update>());
     CHECK_NE(ScheduleNameOf<Update>(), ScheduleNameOf<PostUpdate>());
-    CHECK_NE(ScheduleNameOf<PostUpdate>(), ScheduleNameOf<PreCleanUp>());
+    CHECK_NE(ScheduleNameOf<PostUpdate>(), ScheduleNameOf<Last>());
+    CHECK_NE(ScheduleNameOf<Last>(), ScheduleNameOf<PreCleanUp>());
     CHECK_NE(ScheduleNameOf<PreCleanUp>(), ScheduleNameOf<CleanUp>());
     CHECK_NE(ScheduleNameOf<CleanUp>(), ScheduleNameOf<PostCleanUp>());
   }
@@ -303,9 +339,11 @@ TEST_SUITE("app::DefaultSchedules") {
     CHECK_FALSE(ScheduleNameOf<Startup>().empty());
     CHECK_FALSE(ScheduleNameOf<PostStartup>().empty());
     CHECK_FALSE(ScheduleNameOf<Main>().empty());
+    CHECK_FALSE(ScheduleNameOf<First>().empty());
     CHECK_FALSE(ScheduleNameOf<PreUpdate>().empty());
     CHECK_FALSE(ScheduleNameOf<Update>().empty());
     CHECK_FALSE(ScheduleNameOf<PostUpdate>().empty());
+    CHECK_FALSE(ScheduleNameOf<Last>().empty());
 
     CHECK_FALSE(ScheduleNameOf<PreCleanUp>().empty());
     CHECK_FALSE(ScheduleNameOf<CleanUp>().empty());
@@ -332,15 +370,42 @@ TEST_SUITE("app::DefaultSchedules") {
     CHECK_EQ(post_startup_after.size(), 1);
     CHECK_EQ(post_startup_after[0], ScheduleIdOf<Startup>());
 
-    // PreUpdate runs before Update
+    // First runs before PreUpdate
+    const auto first_before = ScheduleBeforeOf<First>();
+    CHECK_EQ(first_before.size(), 1);
+    CHECK_EQ(first_before[0], ScheduleIdOf<PreUpdate>());
+
+    // PreUpdate runs after First and before Update
+    const auto pre_update_after = ScheduleAfterOf<PreUpdate>();
+    CHECK_EQ(pre_update_after.size(), 1);
+    CHECK_EQ(pre_update_after[0], ScheduleIdOf<First>());
+
     const auto pre_update_before = ScheduleBeforeOf<PreUpdate>();
     CHECK_EQ(pre_update_before.size(), 1);
     CHECK_EQ(pre_update_before[0], ScheduleIdOf<Update>());
 
-    // PostUpdate runs after Update
+    // Update runs after PreUpdate and before PostUpdate
+    const auto update_after = ScheduleAfterOf<Update>();
+    CHECK_EQ(update_after.size(), 1);
+    CHECK_EQ(update_after[0], ScheduleIdOf<PreUpdate>());
+
+    const auto update_before = ScheduleBeforeOf<Update>();
+    CHECK_EQ(update_before.size(), 1);
+    CHECK_EQ(update_before[0], ScheduleIdOf<PostUpdate>());
+
+    // PostUpdate runs after Update and before Last
     const auto post_update_after = ScheduleAfterOf<PostUpdate>();
     CHECK_EQ(post_update_after.size(), 1);
     CHECK_EQ(post_update_after[0], ScheduleIdOf<Update>());
+
+    const auto post_update_before = ScheduleBeforeOf<PostUpdate>();
+    CHECK_EQ(post_update_before.size(), 1);
+    CHECK_EQ(post_update_before[0], ScheduleIdOf<Last>());
+
+    // Last runs after PostUpdate
+    const auto last_after = ScheduleAfterOf<Last>();
+    CHECK_EQ(last_after.size(), 1);
+    CHECK_EQ(last_after[0], ScheduleIdOf<PostUpdate>());
 
     // PreCleanUp runs before CleanUp
     const auto pre_cleanup_before = ScheduleBeforeOf<PreCleanUp>();
@@ -369,9 +434,11 @@ TEST_SUITE("app::DefaultSchedules") {
     CHECK_FALSE(IsStage<Startup>());
     CHECK_FALSE(IsStage<PostStartup>());
     CHECK_FALSE(IsStage<Main>());
+    CHECK_FALSE(IsStage<First>());
     CHECK_FALSE(IsStage<PreUpdate>());
     CHECK_FALSE(IsStage<Update>());
     CHECK_FALSE(IsStage<PostUpdate>());
+    CHECK_FALSE(IsStage<Last>());
     CHECK_FALSE(IsStage<PreCleanUp>());
     CHECK_FALSE(IsStage<CleanUp>());
     CHECK_FALSE(IsStage<PostCleanUp>());
@@ -387,9 +454,11 @@ TEST_SUITE("app::DefaultSchedules") {
     CHECK_EQ(ScheduleStageOf<Main>(), ScheduleIdOf<MainStage>());
 
     // UpdateStage schedules
+    CHECK_EQ(ScheduleStageOf<First>(), ScheduleIdOf<UpdateStage>());
     CHECK_EQ(ScheduleStageOf<PreUpdate>(), ScheduleIdOf<UpdateStage>());
     CHECK_EQ(ScheduleStageOf<Update>(), ScheduleIdOf<UpdateStage>());
     CHECK_EQ(ScheduleStageOf<PostUpdate>(), ScheduleIdOf<UpdateStage>());
+    CHECK_EQ(ScheduleStageOf<Last>(), ScheduleIdOf<UpdateStage>());
 
     // CleanUpStage schedules
     CHECK_EQ(ScheduleStageOf<PreCleanUp>(), ScheduleIdOf<CleanUpStage>());

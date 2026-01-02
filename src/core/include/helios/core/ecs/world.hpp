@@ -661,8 +661,8 @@ inline Entity World::CreateEntity() {
   Entity entity = entities_.CreateEntity();
 
   // Emit EntitySpawnedEvent if registered
-  if (event_manager_.IsRegistered<events::EntitySpawnedEvent>()) {
-    event_manager_.Write(events::EntitySpawnedEvent{entity});
+  if (event_manager_.IsRegistered<EntitySpawnedEvent>()) {
+    event_manager_.Write(EntitySpawnedEvent{entity});
   }
 
   return entity;
@@ -685,8 +685,8 @@ inline void World::DestroyEntity(Entity entity) {
   HELIOS_ASSERT(Exists(entity), "Failed to destroy entity: World does not own entity with index '{}'!", entity.Index());
 
   // Emit EntityDestroyedEvent if registered
-  if (event_manager_.IsRegistered<events::EntityDestroyedEvent>()) {
-    event_manager_.Write(events::EntityDestroyedEvent{entity});
+  if (event_manager_.IsRegistered<EntityDestroyedEvent>()) {
+    event_manager_.Write(EntityDestroyedEvent{entity});
   }
 
   components_.RemoveAllComponents(entity);
@@ -701,8 +701,8 @@ inline void World::TryDestroyEntity(Entity entity) {
   }
 
   // Emit EntityDestroyedEvent if registered
-  if (event_manager_.IsRegistered<events::EntityDestroyedEvent>()) {
-    event_manager_.Write(events::EntityDestroyedEvent{entity});
+  if (event_manager_.IsRegistered<EntityDestroyedEvent>()) {
+    event_manager_.Write(EntityDestroyedEvent{entity});
   }
 
   components_.RemoveAllComponents(entity);
@@ -713,7 +713,7 @@ inline void World::TryDestroyEntity(Entity entity) {
 template <std::ranges::range R>
   requires std::same_as<std::ranges::range_value_t<R>, Entity>
 inline void World::DestroyEntities(const R& entities_range) {
-  const bool emit_events = event_manager_.IsRegistered<events::EntityDestroyedEvent>();
+  const bool emit_events = event_manager_.IsRegistered<EntityDestroyedEvent>();
 
   for (const Entity& entity : entities_range) {
     HELIOS_ASSERT(entity.Valid(), "Failed to destroy entities: Entity is invalid!");
@@ -722,7 +722,7 @@ inline void World::DestroyEntities(const R& entities_range) {
 
     // Emit EntityDestroyedEvent if registered
     if (emit_events) {
-      event_manager_.Write(events::EntityDestroyedEvent{entity});
+      event_manager_.Write(EntityDestroyedEvent{entity});
     }
 
     components_.RemoveAllComponents(entity);
@@ -734,7 +734,7 @@ inline void World::DestroyEntities(const R& entities_range) {
 template <std::ranges::range R>
   requires std::same_as<std::ranges::range_value_t<R>, Entity>
 inline void World::TryDestroyEntities(const R& entities_range) {
-  const bool emit_events = event_manager_.IsRegistered<events::EntityDestroyedEvent>();
+  const bool emit_events = event_manager_.IsRegistered<EntityDestroyedEvent>();
 
   for (const Entity& entity : entities_range) {
     HELIOS_ASSERT(entity.Valid(), "Failed to try destroy entities: Entity is invalid!");
@@ -744,7 +744,7 @@ inline void World::TryDestroyEntities(const R& entities_range) {
 
     // Emit EntityDestroyedEvent if registered
     if (emit_events) {
-      event_manager_.Write(events::EntityDestroyedEvent{entity});
+      event_manager_.Write(EntityDestroyedEvent{entity});
     }
 
     components_.RemoveAllComponents(entity);

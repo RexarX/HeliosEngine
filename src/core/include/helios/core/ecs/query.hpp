@@ -1027,25 +1027,6 @@ public:
   [[nodiscard]] auto Partition(const Pred& predicate) -> std::pair<std::vector<Entity>, std::vector<Entity>>;
 
   /**
-   * @brief Reduces entities to a single value using an accumulator function.
-   * @tparam T Result type
-   * @tparam Func Reducer function type (T, Entity, Components...) -> T
-   * @param init Initial accumulator value
-   * @param reducer Function that combines accumulator with each result
-   * @return Final accumulated value
-   *
-   * @example
-   * @code
-   * float total_health = query.WithEntity().Reduce(0.0F,
-   *   [](float sum, Entity entitiy, const Health& health) { return sum + health.current; }
-   * );
-   * @endcode
-   */
-  template <typename T, typename Func>
-    requires utils::FolderFor<Func, T, std::tuple<Entity, details::ComponentAccessType<Components>...>>
-  [[nodiscard]] T Reduce(T init, const Func& reducer);
-
-  /**
    * @brief Groups entities by a key extracted from components.
    * @tparam KeyExtractor Function type (Entity, Components...) -> Key
    * @param key_extractor Function that extracts the grouping key
@@ -1968,21 +1949,6 @@ inline auto BasicQueryWithEntity<WorldT, Allocator, Components...>::Partition(co
   }
 
   return {std::move(matched), std::move(not_matched)};
-}
-
-template <WorldType WorldT, typename Allocator, ComponentTrait... Components>
-  requires utils::UniqueTypes<Components...>
-template <typename T, typename Func>
-  requires utils::FolderFor<Func, T, std::tuple<Entity, details::ComponentAccessType<Components>...>>
-inline T BasicQueryWithEntity<WorldT, Allocator, Components...>::Reduce(T init, const Func& reducer) {
-  for (auto&& tuple : *this) {
-    init = std::apply(
-        [&init, &reducer](Entity entity, auto&&... components) {
-          return reducer(std::move(init), entity, std::forward<decltype(components)>(components)...);
-        },
-        tuple);
-  }
-  return init;
 }
 
 template <WorldType WorldT, typename Allocator, ComponentTrait... Components>

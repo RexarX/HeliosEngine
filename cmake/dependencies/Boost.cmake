@@ -69,11 +69,11 @@ if(HELIOS_HAS_STL_STACKTRACE)
         endif()
     endif()
 
-    # Create helios::boost_stacktrace as alias to STL stacktrace
-    # This allows existing code to link against helios::boost_stacktrace without changes
-    if(NOT TARGET helios::boost_stacktrace)
-        add_library(helios::boost_stacktrace INTERFACE IMPORTED GLOBAL)
-        target_link_libraries(helios::boost_stacktrace INTERFACE helios::stl_stacktrace)
+    # Create helios::boost::stacktrace as alias to STL stacktrace
+    # This allows existing code to link against helios::boost::stacktrace without changes
+    if(NOT TARGET helios::boost::stacktrace)
+        add_library(helios::boost::stacktrace INTERFACE IMPORTED GLOBAL)
+        target_link_libraries(helios::boost::stacktrace INTERFACE helios::stl_stacktrace)
     endif()
 else()
     message(STATUS "  ✗ C++23 <stacktrace> header not available, using Boost stacktrace")
@@ -129,46 +129,46 @@ if(Boost_FOUND)
         message(STATUS "  ✓ Boost found at ${Boost_DIR}")
     endif()
 
-    # Create convenience target: helios::boost
-    if(NOT TARGET helios::boost)
-        add_library(helios::boost INTERFACE IMPORTED)
-        target_link_libraries(helios::boost INTERFACE Boost::boost)
+    # Create convenience target: helios::boost::boost (main headers)
+    if(NOT TARGET helios::boost::boost)
+        add_library(helios::boost::boost INTERFACE IMPORTED)
+        target_link_libraries(helios::boost::boost INTERFACE Boost::boost)
     endif()
 
-    # Create stacktrace-specific alias: helios::boost_stacktrace (only if not using STL stacktrace)
+    # Create stacktrace-specific alias: helios::boost::stacktrace (only if not using STL stacktrace)
     if(NOT HELIOS_USE_STL_STACKTRACE)
-        if(NOT TARGET helios::boost_stacktrace)
-            add_library(helios::boost_stacktrace INTERFACE IMPORTED GLOBAL)
+        if(NOT TARGET helios::boost::stacktrace)
+            add_library(helios::boost::stacktrace INTERFACE IMPORTED GLOBAL)
             if(TARGET Boost::stacktrace)
-                target_link_libraries(helios::boost_stacktrace INTERFACE Boost::stacktrace)
+                target_link_libraries(helios::boost::stacktrace INTERFACE Boost::stacktrace)
             endif()
         endif()
 
-        if(TARGET Boost::stacktrace_basic AND NOT TARGET helios::boost_stacktrace_basic)
-            add_library(helios::boost_stacktrace_basic INTERFACE IMPORTED GLOBAL)
-            target_link_libraries(helios::boost_stacktrace_basic INTERFACE Boost::stacktrace_basic)
+        if(TARGET Boost::stacktrace_basic AND NOT TARGET helios::boost::stacktrace_basic)
+            add_library(helios::boost::stacktrace_basic INTERFACE IMPORTED GLOBAL)
+            target_link_libraries(helios::boost::stacktrace_basic INTERFACE Boost::stacktrace_basic)
         endif()
 
-        if(TARGET Boost::stacktrace_backtrace AND NOT TARGET helios::boost_stacktrace_backtrace)
-            add_library(helios::boost_stacktrace_backtrace INTERFACE IMPORTED GLOBAL)
-            target_link_libraries(helios::boost_stacktrace_backtrace INTERFACE Boost::stacktrace_backtrace)
+        if(TARGET Boost::stacktrace_backtrace AND NOT TARGET helios::boost::stacktrace_backtrace)
+            add_library(helios::boost::stacktrace_backtrace INTERFACE IMPORTED GLOBAL)
+            target_link_libraries(helios::boost::stacktrace_backtrace INTERFACE Boost::stacktrace_backtrace)
         endif()
 
-        if(TARGET Boost::stacktrace_addr2line AND NOT TARGET helios::boost_stacktrace_addr2line)
-            add_library(helios::boost_stacktrace_addr2line INTERFACE IMPORTED GLOBAL)
-            target_link_libraries(helios::boost_stacktrace_addr2line INTERFACE Boost::stacktrace_addr2line)
+        if(TARGET Boost::stacktrace_addr2line AND NOT TARGET helios::boost::stacktrace_addr2line)
+            add_library(helios::boost::stacktrace_addr2line INTERFACE IMPORTED GLOBAL)
+            target_link_libraries(helios::boost::stacktrace_addr2line INTERFACE Boost::stacktrace_addr2line)
         endif()
 
-        if(TARGET Boost::stacktrace_windbg AND NOT TARGET helios::boost_stacktrace_windbg)
-            add_library(helios::boost_stacktrace_windbg INTERFACE IMPORTED GLOBAL)
-            target_link_libraries(helios::boost_stacktrace_windbg INTERFACE Boost::stacktrace_windbg)
+        if(TARGET Boost::stacktrace_windbg AND NOT TARGET helios::boost::stacktrace_windbg)
+            add_library(helios::boost::stacktrace_windbg INTERFACE IMPORTED GLOBAL)
+            target_link_libraries(helios::boost::stacktrace_windbg INTERFACE Boost::stacktrace_windbg)
         endif()
     endif()
 
     # Create alias for header-only unordered (not a separate component)
-    if(NOT TARGET helios::boost_unordered)
-        add_library(helios::boost_unordered INTERFACE IMPORTED GLOBAL)
-        target_link_libraries(helios::boost_unordered INTERFACE Boost::boost)
+    if(NOT TARGET helios::boost::unordered)
+        add_library(helios::boost::unordered INTERFACE IMPORTED GLOBAL)
+        target_link_libraries(helios::boost::unordered INTERFACE Boost::boost)
 
         # Manually add unordered include path if found via system
         if(Boost_INCLUDE_DIRS)
@@ -200,49 +200,50 @@ else()
                 "BOOST_ENABLE_CMAKE ON"
                 "BOOST_INCLUDE_LIBRARIES ${_boost_include_libs}"
                 "BUILD_SHARED_LIBS OFF"
+                "CMAKE_POSITION_INDEPENDENT_CODE ON"
             SYSTEM
         )
 
         # Create aliases if Boost was just added or already cached
         if(Boost_ADDED OR TARGET Boost::boost)
-            if(NOT TARGET helios::boost)
-                add_library(helios::boost INTERFACE IMPORTED GLOBAL)
+            if(NOT TARGET helios::boost::boost)
+                add_library(helios::boost::boost INTERFACE IMPORTED GLOBAL)
                 if(TARGET Boost::boost)
-                    target_link_libraries(helios::boost INTERFACE Boost::boost)
+                    target_link_libraries(helios::boost::boost INTERFACE Boost::boost)
                 endif()
             endif()
 
             # Only create Boost stacktrace target if not using STL stacktrace
             if(NOT HELIOS_USE_STL_STACKTRACE)
-                if(NOT TARGET helios::boost_stacktrace)
-                    add_library(helios::boost_stacktrace INTERFACE IMPORTED GLOBAL)
+                if(NOT TARGET helios::boost::stacktrace)
+                    add_library(helios::boost::stacktrace INTERFACE IMPORTED GLOBAL)
                 endif()
 
                 if(TARGET Boost::stacktrace)
-                    target_link_libraries(helios::boost_stacktrace INTERFACE Boost::stacktrace)
+                    target_link_libraries(helios::boost::stacktrace INTERFACE Boost::stacktrace)
                 else()
-                    target_link_libraries(helios::boost_stacktrace INTERFACE helios::boost)
+                    target_link_libraries(helios::boost::stacktrace INTERFACE helios::boost::boost)
                 endif()
 
-                if(TARGET Boost::stacktrace_backtrace AND NOT TARGET helios::boost_stacktrace_backtrace)
-                    add_library(helios::boost_stacktrace_backtrace INTERFACE IMPORTED GLOBAL)
-                    target_link_libraries(helios::boost_stacktrace_backtrace INTERFACE Boost::stacktrace_backtrace)
+                if(TARGET Boost::stacktrace_backtrace AND NOT TARGET helios::boost::stacktrace_backtrace)
+                    add_library(helios::boost::stacktrace_backtrace INTERFACE IMPORTED GLOBAL)
+                    target_link_libraries(helios::boost::stacktrace_backtrace INTERFACE Boost::stacktrace_backtrace)
                 endif()
 
-                if(TARGET Boost::stacktrace_addr2line AND NOT TARGET helios::boost_stacktrace_addr2line)
-                    add_library(helios::boost_stacktrace_addr2line INTERFACE IMPORTED GLOBAL)
-                    target_link_libraries(helios::boost_stacktrace_addr2line INTERFACE Boost::stacktrace_addr2line)
+                if(TARGET Boost::stacktrace_addr2line AND NOT TARGET helios::boost::stacktrace_addr2line)
+                    add_library(helios::boost::stacktrace_addr2line INTERFACE IMPORTED GLOBAL)
+                    target_link_libraries(helios::boost::stacktrace_addr2line INTERFACE Boost::stacktrace_addr2line)
                 endif()
             endif()
 
             # Create alias for header-only unordered (not a separate component)
-            if(NOT TARGET helios::boost_unordered)
-                add_library(helios::boost_unordered INTERFACE IMPORTED GLOBAL)
-                target_link_libraries(helios::boost_unordered INTERFACE helios::boost)
+            if(NOT TARGET helios::boost::unordered)
+                add_library(helios::boost::unordered INTERFACE IMPORTED GLOBAL)
+                target_link_libraries(helios::boost::unordered INTERFACE helios::boost::boost)
 
                 # Manually add unordered include path since BOOST_INCLUDE_LIBRARIES doesn't always set it up
                 if(Boost_SOURCE_DIR AND EXISTS "${Boost_SOURCE_DIR}/libs/unordered/include")
-                    target_include_directories(helios::boost_unordered SYSTEM INTERFACE
+                    target_include_directories(helios::boost::unordered SYSTEM INTERFACE
                         "${Boost_SOURCE_DIR}/libs/unordered/include"
                     )
                 endif()
@@ -276,7 +277,7 @@ endif()
 
 # Dynamically create aliases for each Boost component (only if not using STL stacktrace for stacktrace component)
 foreach(component IN LISTS HELIOS_BOOST_REQUIRED_COMPONENTS)
-    set(target_name "helios::boost_${component}") # Use underscores in aliases
+    set(target_name "helios::boost::${component}")
 
     if(TARGET "Boost::${component}")
         if(NOT TARGET ${target_name})
@@ -284,9 +285,9 @@ foreach(component IN LISTS HELIOS_BOOST_REQUIRED_COMPONENTS)
             target_link_libraries(${target_name} INTERFACE "Boost::${component}")
             message(STATUS "  ✓ Created alias: ${target_name}")
         endif()
-        # Link the component to the main helios::boost target (excluding pool and container)
+        # Link the component to the main helios::boost::boost target (excluding pool and container)
         if(NOT component STREQUAL "pool" AND NOT component STREQUAL "container")
-            target_link_libraries(helios::boost INTERFACE "Boost::${component}")
+            target_link_libraries(helios::boost::boost INTERFACE "Boost::${component}")
         endif()
     else()
         if(NOT HELIOS_USE_STL_STACKTRACE OR NOT component STREQUAL "stacktrace")
@@ -294,3 +295,21 @@ foreach(component IN LISTS HELIOS_BOOST_REQUIRED_COMPONENTS)
         endif()
     endif()
 endforeach()
+
+# Create helios::boost convenience target that brings in all Boost targets
+if(NOT TARGET _helios_boost_all)
+    add_library(_helios_boost_all INTERFACE)
+    if(TARGET helios::boost::boost)
+        target_link_libraries(_helios_boost_all INTERFACE helios::boost::boost)
+    endif()
+    if(TARGET helios::boost::unordered)
+        target_link_libraries(_helios_boost_all INTERFACE helios::boost::unordered)
+    endif()
+    if(TARGET helios::boost::stacktrace)
+        target_link_libraries(_helios_boost_all INTERFACE helios::boost::stacktrace)
+    endif()
+endif()
+
+if(NOT TARGET helios::boost)
+    add_library(helios::boost ALIAS _helios_boost_all)
+endif()

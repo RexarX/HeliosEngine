@@ -13,6 +13,38 @@ struct BasicModule final : public Module {
   void Destroy(App& /*app*/) override {}
 };
 
+struct ModuleWithReadyAndFinish final : public Module {
+  mutable bool is_ready_called = false;
+  bool finish_called = false;
+  bool should_be_ready = true;
+
+  void Build(App& /*app*/) override {}
+  void Destroy(App& /*app*/) override {}
+
+  [[nodiscard]] bool IsReady(const App& /*app*/) const noexcept override {
+    is_ready_called = true;
+    return should_be_ready;
+  }
+
+  void Finish(App& /*app*/) override { finish_called = true; }
+};
+
+struct AsyncReadyModule final : public Module {
+  mutable int ready_check_count = 0;
+  int ready_after_checks = 3;
+  bool finish_called = false;
+
+  void Build(App& /*app*/) override {}
+  void Destroy(App& /*app*/) override {}
+
+  [[nodiscard]] bool IsReady(const App& /*app*/) const noexcept override {
+    ++ready_check_count;
+    return ready_check_count >= ready_after_checks;
+  }
+
+  void Finish(App& /*app*/) override { finish_called = true; }
+};
+
 struct NamedModule final : public Module {
   static constexpr std::string_view GetName() noexcept { return "CustomModuleName"; }
 
@@ -116,5 +148,64 @@ TEST_SUITE("app::Module") {
 
     module.Build(*app_ptr);
     module.Destroy(*app_ptr);
+  }
+
+  TEST_CASE("Module:: Default IsReady Returns True") {
+    BasicModule module;
+    App* app_ptr = nullptr;
+
+    CHECK(module.IsReady(*app_ptr));
+  }
+
+  TEST_CASE("Module:: Default Finish Does Nothing") {
+    BasicModule module;
+    App* app_ptr = nullptr;
+
+    // Should not throw or crash
+    module.Finish(*app_ptr);
+  }
+
+  TEST_CASE("Module:: Custom IsReady And Finish") {
+    ModuleWithReadyAndFinish module;
+    App* app_ptr = nullptr;
+
+    CHECK_FALSE(module.is_ready_called);
+    CHECK_FALSE(module.finish_called);
+
+    // Call IsReady
+    CHECK(module.IsReady(*app_ptr));
+    CHECK(module.is_ready_called);
+
+    // Call Finish
+    module.Finish(*app_ptr);
+    CHECK(module.finish_called);
+  }
+
+  TEST_CASE("Module:: IsReady Can Return False") {
+    ModuleWithReadyAndFinish module;
+    module.should_be_ready = false;
+    App* app_ptr = nullptr;
+
+    CHECK_FALSE(module.IsReady(*app_ptr));
+  }
+
+  TEST_CASE("Module:: AsyncReady Pattern") {
+    AsyncReadyModule module;
+    App* app_ptr = nullptr;
+
+    // Initially not ready
+    CHECK_FALSE(module.IsReady(*app_ptr));
+    CHECK_EQ(module.ready_check_count, 1);
+
+    CHECK_FALSE(module.IsReady(*app_ptr));
+    CHECK_EQ(module.ready_check_count, 2);
+
+    // After enough checks, should be ready
+    CHECK(module.IsReady(*app_ptr));
+    CHECK_EQ(module.ready_check_count, 3);
+
+    // Still ready on subsequent checks
+    CHECK(module.IsReady(*app_ptr));
+    CHECK_EQ(module.ready_check_count, 4);
   }
 }

@@ -17,6 +17,14 @@
 #define HELIOS_API
 #endif
 
+#ifdef HELIOS_PLATFORM_WINDOWS
+#define HELIOS_EXPORT __declspec(dllexport)
+#elifdef HELIOS_PLATFORM_LINUX
+#define HELIOS_EXPORT __attribute__((visibility("default")))
+#else
+#define HELIOS_EXPORT
+#endif
+
 // Debug break functionality
 #ifdef HELIOS_ENABLE_ASSERTS
 

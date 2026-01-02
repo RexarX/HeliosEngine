@@ -398,7 +398,7 @@ inline AllocationResult GrowableAllocator<Allocator>::Allocate(size_t size, size
   }
 
   // Calculate next capacity
-  size_t new_capacity = static_cast<size_t>(next_capacity_ * growth_factor_);
+  auto new_capacity = static_cast<size_t>(static_cast<double>(next_capacity_) * growth_factor_);
 
   // Ensure new capacity is at least large enough for the requested allocation
   if (new_capacity < size) {

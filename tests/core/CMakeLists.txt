@@ -14,13 +14,16 @@ set(CORE_UNIT_TESTS_SOURCES
 
     unit/app/access_policy.cpp
     unit/app/app.cpp
+    unit/app/dynamic_module.cpp
     unit/app/module.cpp
+    unit/app/runners.cpp
     unit/app/schedule.cpp
     unit/app/sub_app.cpp
     unit/app/system_config.cpp
-    unit/app/system_set_config.cpp
-    unit/app/system_set.cpp
     unit/app/system_context.cpp
+    unit/app/system_set.cpp
+    unit/app/system_set_config.cpp
+    unit/app/time.cpp
     unit/app/details/scheduler.cpp
     unit/app/details/system_diagnostics.cpp
 
@@ -33,6 +36,7 @@ set(CORE_UNIT_TESTS_SOURCES
     unit/async/task_graph.cpp
 
     unit/container/sparse_set.cpp
+    unit/container/static_string.cpp
 
     unit/memory/allocator_resources.cpp
     unit/memory/arena_allocator.cpp
@@ -53,7 +57,6 @@ set(CORE_UNIT_TESTS_SOURCES
     unit/ecs/event_reader.cpp
     unit/ecs/event_writer.cpp
     unit/ecs/query.cpp
-    unit/ecs/query_adapters.cpp
     unit/ecs/resource.cpp
     unit/ecs/world.cpp
     unit/ecs/world_command_buffer.cpp
@@ -69,14 +72,14 @@ set(CORE_UNIT_TESTS_SOURCES
     unit/ecs/details/query_cache.cpp
     unit/ecs/details/resources_manager.cpp
     unit/ecs/details/system_local_storage.cpp
+    unit/ecs/events/builtin_events.cpp
 
     unit/utils/common_traits.cpp
-
+    unit/utils/dynamic_library.cpp
     unit/utils/fast_pimpl.cpp
     unit/utils/filesystem.cpp
     unit/utils/functional_adapters.cpp
     unit/utils/string_hash.cpp
-
 )
 
 # Create unit test executable
@@ -93,10 +96,14 @@ set(CORE_INTEGRATION_TESTS_SOURCES
     integration/main.cpp
     integration/logger.cpp
     integration/app/app_integration.cpp
+    integration/app/dynamic_module/dynamic_module.cpp
     integration/container/sparse_set.cpp
     integration/ecs/ecs_integration.cpp
     integration/memory/allocator_integration.cpp
 )
+
+# Build test module library for dynamic module tests
+add_subdirectory(integration/app/dynamic_module)
 
 # Create integration test executable
 helios_add_test(
@@ -106,3 +113,6 @@ helios_add_test(
     SOURCES ${CORE_INTEGRATION_TESTS_SOURCES}
     DEPENDENCIES helios::core
 )
+
+# Ensure test module is built before integration tests run
+add_dependencies(helios_core_integration helios_test_module)

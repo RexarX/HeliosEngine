@@ -46,7 +46,7 @@ struct MainStage {
  * @details This is where most game/simulation logic runs on every frame.
  * Executes after MainStage and can run systems in parallel on worker threads.
  *
- * Schedules in this stage: PreUpdate, Update, PostUpdate
+ * Schedules in this stage: First, PreUpdate, Update, PostUpdate, Last
  */
 struct UpdateStage {
   static constexpr bool IsStage() noexcept { return true; }
@@ -143,6 +143,40 @@ struct Main {
 // UPDATE STAGE SCHEDULES
 //==============================================================================
 
+// Forward declarations for Update stage schedules
+struct First;
+struct PreUpdate;
+struct Update;
+struct PostUpdate;
+struct Last;
+
+/**
+ * @brief First schedule - runs first in the UpdateStage.
+ * @details First schedule in the UpdateStage (executes every frame).
+ * Runs after the MainStage and before PreUpdate.
+ * Used for tasks that need to run at the very beginning of the update phase.
+ * Executes: Before(PreUpdate)
+ */
+struct First {
+  static constexpr ScheduleId GetStage() noexcept { return ScheduleIdOf<UpdateStage>(); }
+  static constexpr auto Before() noexcept -> std::array<ScheduleId, 1>;
+  static constexpr auto After() noexcept -> std::array<ScheduleId, 0> { return {}; }
+  static constexpr std::string_view GetName() noexcept { return "First"; }
+};
+
+/**
+ * @brief PreUpdate schedule - runs before the main update.
+ * @details Runs after First schedule in the UpdateStage (executes every frame).
+ * Used for pre-processing tasks that must complete before main update logic.
+ * Executes: After(First) and Before(Update)
+ */
+struct PreUpdate {
+  static constexpr ScheduleId GetStage() noexcept { return ScheduleIdOf<UpdateStage>(); }
+  static constexpr auto Before() noexcept -> std::array<ScheduleId, 1>;
+  static constexpr auto After() noexcept -> std::array<ScheduleId, 1> { return {ScheduleIdOf<First>()}; }
+  static constexpr std::string_view GetName() noexcept { return "PreUpdate"; }
+};
+
 /**
  * @brief Update schedule - main update logic.
  * @details Main update schedule in the UpdateStage (executes every frame).
@@ -151,37 +185,55 @@ struct Main {
  */
 struct Update {
   static constexpr ScheduleId GetStage() noexcept { return ScheduleIdOf<UpdateStage>(); }
-  static constexpr auto Before() noexcept -> std::array<ScheduleId, 0> { return {}; }
-  static constexpr auto After() noexcept -> std::array<ScheduleId, 0> { return {}; }
+  static constexpr auto Before() noexcept -> std::array<ScheduleId, 1>;
+  static constexpr auto After() noexcept -> std::array<ScheduleId, 1> { return {ScheduleIdOf<PreUpdate>()}; }
   static constexpr std::string_view GetName() noexcept { return "Update"; }
 };
 
 /**
- * @brief PreUpdate schedule - runs before the main update.
- * @details First schedule in the UpdateStage (executes every frame).
- * Used for pre-processing tasks that must complete before main update logic.
- * Executes: Before(Update)
- */
-struct PreUpdate {
-  static constexpr ScheduleId GetStage() noexcept { return ScheduleIdOf<UpdateStage>(); }
-  static constexpr auto Before() noexcept -> std::array<ScheduleId, 1> { return {ScheduleIdOf<Update>()}; }
-  static constexpr auto After() noexcept -> std::array<ScheduleId, 0> { return {}; }
-  static constexpr std::string_view GetName() noexcept { return "PreUpdate"; }
-};
-
-/**
  * @brief PostUpdate schedule - runs after the main update.
- * @details Final schedule in the UpdateStage (executes every frame).
+ * @details Runs after Update schedule in the UpdateStage (executes every frame).
  * Used for post-processing tasks after main update logic.
  * Examples: physics cleanup, constraint resolution, late transforms, data extraction.
- * Executes: After(Update)
+ * Executes: After(Update) and Before(Last)
  */
 struct PostUpdate {
   static constexpr ScheduleId GetStage() noexcept { return ScheduleIdOf<UpdateStage>(); }
-  static constexpr auto Before() noexcept -> std::array<ScheduleId, 0> { return {}; }
+  static constexpr auto Before() noexcept -> std::array<ScheduleId, 1>;
   static constexpr auto After() noexcept -> std::array<ScheduleId, 1> { return {ScheduleIdOf<Update>()}; }
   static constexpr std::string_view GetName() noexcept { return "PostUpdate"; }
 };
+
+/**
+ * @brief Last schedule - runs last in the UpdateStage.
+ * @details Final schedule in the UpdateStage (executes every frame).
+ * Runs after PostUpdate and before the CleanUpStage.
+ * Used for tasks that need to run at the very end of the update phase.
+ * Executes: After(PostUpdate)
+ */
+struct Last {
+  static constexpr ScheduleId GetStage() noexcept { return ScheduleIdOf<UpdateStage>(); }
+  static constexpr auto Before() noexcept -> std::array<ScheduleId, 0> { return {}; }
+  static constexpr auto After() noexcept -> std::array<ScheduleId, 1> { return {ScheduleIdOf<PostUpdate>()}; }
+  static constexpr std::string_view GetName() noexcept { return "Last"; }
+};
+
+// Define deferred Before() implementations for Update stage schedules
+constexpr auto First::Before() noexcept -> std::array<ScheduleId, 1> {
+  return {ScheduleIdOf<PreUpdate>()};
+}
+
+constexpr auto PreUpdate::Before() noexcept -> std::array<ScheduleId, 1> {
+  return {ScheduleIdOf<Update>()};
+}
+
+constexpr auto Update::Before() noexcept -> std::array<ScheduleId, 1> {
+  return {ScheduleIdOf<PostUpdate>()};
+}
+
+constexpr auto PostUpdate::Before() noexcept -> std::array<ScheduleId, 1> {
+  return {ScheduleIdOf<Last>()};
+}
 
 //==============================================================================
 // CLEANUP STAGE SCHEDULES
@@ -228,10 +280,6 @@ struct PostCleanUp {
   static constexpr std::string_view GetName() noexcept { return "PostCleanUp"; }
 };
 
-//==============================================================================
-// CONSTEXPR SCHEDULE INSTANCES
-//==============================================================================
-
 /**
  * @brief Constexpr instances of schedules for easier user interface.
  * @details These instances can be used directly without having to construct the schedule types.
@@ -248,9 +296,11 @@ inline constexpr PreStartup kPreStartup{};
 inline constexpr Startup kStartup{};
 inline constexpr PostStartup kPostStartup{};
 
+inline constexpr First kFirst{};
 inline constexpr PreUpdate kPreUpdate{};
 inline constexpr Update kUpdate{};
 inline constexpr PostUpdate kPostUpdate{};
+inline constexpr Last kLast{};
 
 inline constexpr PreCleanUp kPreCleanUp{};
 inline constexpr CleanUp kCleanUp{};

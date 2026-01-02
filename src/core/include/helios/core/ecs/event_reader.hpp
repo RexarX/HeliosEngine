@@ -220,7 +220,7 @@ public:
    * }
    * @endcode
    */
-  [[nodiscard]] auto Read() const -> std::span<const value_type> {
+  [[nodiscard]] auto Read() const& -> std::span<const value_type> {
     EnsureCached();
     return {cached_events_->data(), cached_events_->size()};
   }
@@ -324,7 +324,7 @@ public:
    */
   template <typename Pred>
     requires utils::PredicateFor<Pred, const std::remove_cvref_t<T>&>
-  [[nodiscard]] const value_type* FindFirst(const Pred& predicate) const;
+  [[nodiscard]] const value_type* FindFirst(const Pred& predicate) const&;
 
   /**
    * @brief Counts events that match a predicate.
@@ -358,7 +358,7 @@ public:
    */
   template <typename Pred>
     requires utils::PredicateFor<Pred, const std::remove_cvref_t<T>&>
-  [[nodiscard]] auto Filter(Pred predicate) const -> utils::FilterAdapter<AdaptorIterator, Pred>;
+  [[nodiscard]] auto Filter(Pred predicate) const& -> utils::FilterAdapter<AdaptorIterator, Pred>;
 
   /**
    * @brief Transforms each event using a mapping function.
@@ -377,7 +377,7 @@ public:
    */
   template <typename Func>
     requires utils::TransformFor<Func, const std::remove_cvref_t<T>&>
-  [[nodiscard]] auto Map(Func transform) const -> utils::MapAdapter<AdaptorIterator, Func>;
+  [[nodiscard]] auto Map(Func transform) const& -> utils::MapAdapter<AdaptorIterator, Func>;
 
   /**
    * @brief Takes only the first N events.
@@ -390,7 +390,7 @@ public:
    * auto first_five = reader.Take(5);
    * @endcode
    */
-  [[nodiscard]] auto Take(size_t count) const -> utils::TakeAdapter<AdaptorIterator>;
+  [[nodiscard]] auto Take(size_t count) const& -> utils::TakeAdapter<AdaptorIterator>;
 
   /**
    * @brief Skips the first N events.
@@ -402,7 +402,7 @@ public:
    * auto after_ten = reader.Skip(10);
    * @endcode
    */
-  [[nodiscard]] auto Skip(size_t count) const -> utils::SkipAdapter<AdaptorIterator>;
+  [[nodiscard]] auto Skip(size_t count) const& -> utils::SkipAdapter<AdaptorIterator>;
 
   /**
    * @brief Takes events while a predicate is true.
@@ -418,7 +418,7 @@ public:
    */
   template <typename Pred>
     requires utils::PredicateFor<Pred, const std::remove_cvref_t<T>&>
-  [[nodiscard]] auto TakeWhile(Pred predicate) const -> utils::TakeWhileAdapter<AdaptorIterator, Pred>;
+  [[nodiscard]] auto TakeWhile(Pred predicate) const& -> utils::TakeWhileAdapter<AdaptorIterator, Pred>;
 
   /**
    * @brief Skips events while a predicate is true.
@@ -434,7 +434,7 @@ public:
    */
   template <typename Pred>
     requires utils::PredicateFor<Pred, const std::remove_cvref_t<T>&>
-  [[nodiscard]] auto SkipWhile(Pred predicate) const -> utils::SkipWhileAdapter<AdaptorIterator, Pred>;
+  [[nodiscard]] auto SkipWhile(Pred predicate) const& -> utils::SkipWhileAdapter<AdaptorIterator, Pred>;
 
   /**
    * @brief Adds an index to each event.
@@ -449,7 +449,7 @@ public:
    * }
    * @endcode
    */
-  [[nodiscard]] auto Enumerate() const -> utils::EnumerateAdapter<AdaptorIterator>;
+  [[nodiscard]] auto Enumerate() const& -> utils::EnumerateAdapter<AdaptorIterator>;
 
   /**
    * @brief Inspects each event without consuming it.
@@ -468,7 +468,7 @@ public:
    */
   template <typename Func>
     requires utils::InspectorFor<Func, const std::remove_cvref_t<T>&>
-  [[nodiscard]] auto Inspect(Func inspector) const -> utils::InspectAdapter<AdaptorIterator, Func>;
+  [[nodiscard]] auto Inspect(Func inspector) const& -> utils::InspectAdapter<AdaptorIterator, Func>;
 
   /**
    * @brief Yields every Nth event.
@@ -481,7 +481,7 @@ public:
    * auto every_third = reader.StepBy(3);
    * @endcode
    */
-  [[nodiscard]] auto StepBy(size_t step) const -> utils::StepByAdapter<AdaptorIterator>;
+  [[nodiscard]] auto StepBy(size_t step) const& -> utils::StepByAdapter<AdaptorIterator>;
 
   /**
    * @brief Reverses the order of events.
@@ -494,7 +494,7 @@ public:
    * auto reversed = reader.Reverse();
    * @endcode
    */
-  [[nodiscard]] auto Reverse() const -> utils::ReverseAdapter<AdaptorIterator> { return {begin(), end()}; }
+  [[nodiscard]] auto Reverse() const& -> utils::ReverseAdapter<AdaptorIterator> { return {begin(), end()}; }
 
   /**
    * @brief Creates sliding windows over events.
@@ -508,7 +508,7 @@ public:
    * auto windows = reader.Slide(3);
    * @endcode
    */
-  [[nodiscard]] auto Slide(size_t window_size) const -> utils::SlideAdapter<AdaptorIterator> {
+  [[nodiscard]] auto Slide(size_t window_size) const& -> utils::SlideAdapter<AdaptorIterator> {
     return {begin(), end(), window_size};
   }
 
@@ -524,7 +524,7 @@ public:
    * auto every_third = reader.Stride(3);
    * @endcode
    */
-  [[nodiscard]] auto Stride(size_t stride) const -> utils::StrideAdapter<AdaptorIterator> {
+  [[nodiscard]] auto Stride(size_t stride) const& -> utils::StrideAdapter<AdaptorIterator> {
     return {begin(), end(), stride};
   }
 
@@ -544,8 +544,8 @@ public:
    */
   template <typename OtherIter>
     requires utils::IteratorLike<OtherIter>
-  [[nodiscard]] auto Zip(OtherIter other_begin, OtherIter other_end) const
-      -> utils::ZipAdapter<AdaptorIterator, OtherIter> {
+  [[nodiscard]] auto Zip(OtherIter other_begin,
+                         OtherIter other_end) const& -> utils::ZipAdapter<AdaptorIterator, OtherIter> {
     return {begin(), end(), std::move(other_begin), std::move(other_end)};
   }
 
@@ -767,7 +767,7 @@ inline void EventReader<T>::Into(OutIt out) const {
 template <EventTrait T>
 template <typename Pred>
   requires utils::PredicateFor<Pred, const std::remove_cvref_t<T>&>
-inline auto EventReader<T>::FindFirst(const Pred& predicate) const -> const value_type* {
+inline auto EventReader<T>::FindFirst(const Pred& predicate) const& -> const value_type* {
   EnsureCached();
   for (const auto& event : *cached_events_) {
     if (predicate(event)) {
@@ -813,7 +813,7 @@ inline auto EventReader<T>::CollectWith(Alloc alloc) const -> std::vector<value_
 template <EventTrait T>
 template <typename Pred>
   requires utils::PredicateFor<Pred, const std::remove_cvref_t<T>&>
-inline auto EventReader<T>::Filter(Pred predicate) const -> utils::FilterAdapter<AdaptorIterator, Pred> {
+inline auto EventReader<T>::Filter(Pred predicate) const& -> utils::FilterAdapter<AdaptorIterator, Pred> {
   EnsureCached();
   return {AdaptorIterator(cached_events_->begin()), AdaptorIterator(cached_events_->end()), std::move(predicate)};
 }
@@ -821,19 +821,19 @@ inline auto EventReader<T>::Filter(Pred predicate) const -> utils::FilterAdapter
 template <EventTrait T>
 template <typename Func>
   requires utils::TransformFor<Func, const std::remove_cvref_t<T>&>
-inline auto EventReader<T>::Map(Func transform) const -> utils::MapAdapter<AdaptorIterator, Func> {
+inline auto EventReader<T>::Map(Func transform) const& -> utils::MapAdapter<AdaptorIterator, Func> {
   EnsureCached();
   return {AdaptorIterator(cached_events_->begin()), AdaptorIterator(cached_events_->end()), std::move(transform)};
 }
 
 template <EventTrait T>
-inline auto EventReader<T>::Take(size_t count) const -> utils::TakeAdapter<AdaptorIterator> {
+inline auto EventReader<T>::Take(size_t count) const& -> utils::TakeAdapter<AdaptorIterator> {
   EnsureCached();
   return {AdaptorIterator(cached_events_->begin()), AdaptorIterator(cached_events_->end()), count};
 }
 
 template <EventTrait T>
-inline auto EventReader<T>::Skip(size_t count) const -> utils::SkipAdapter<AdaptorIterator> {
+inline auto EventReader<T>::Skip(size_t count) const& -> utils::SkipAdapter<AdaptorIterator> {
   EnsureCached();
   return {AdaptorIterator(cached_events_->begin()), AdaptorIterator(cached_events_->end()), count};
 }
@@ -841,7 +841,7 @@ inline auto EventReader<T>::Skip(size_t count) const -> utils::SkipAdapter<Adapt
 template <EventTrait T>
 template <typename Pred>
   requires utils::PredicateFor<Pred, const std::remove_cvref_t<T>&>
-inline auto EventReader<T>::TakeWhile(Pred predicate) const -> utils::TakeWhileAdapter<AdaptorIterator, Pred> {
+inline auto EventReader<T>::TakeWhile(Pred predicate) const& -> utils::TakeWhileAdapter<AdaptorIterator, Pred> {
   EnsureCached();
   return {AdaptorIterator(cached_events_->begin()), AdaptorIterator(cached_events_->end()), std::move(predicate)};
 }
@@ -849,13 +849,13 @@ inline auto EventReader<T>::TakeWhile(Pred predicate) const -> utils::TakeWhileA
 template <EventTrait T>
 template <typename Pred>
   requires utils::PredicateFor<Pred, const std::remove_cvref_t<T>&>
-inline auto EventReader<T>::SkipWhile(Pred predicate) const -> utils::SkipWhileAdapter<AdaptorIterator, Pred> {
+inline auto EventReader<T>::SkipWhile(Pred predicate) const& -> utils::SkipWhileAdapter<AdaptorIterator, Pred> {
   EnsureCached();
   return {AdaptorIterator(cached_events_->begin()), AdaptorIterator(cached_events_->end()), std::move(predicate)};
 }
 
 template <EventTrait T>
-inline auto EventReader<T>::Enumerate() const -> utils::EnumerateAdapter<AdaptorIterator> {
+inline auto EventReader<T>::Enumerate() const& -> utils::EnumerateAdapter<AdaptorIterator> {
   EnsureCached();
   return {AdaptorIterator(cached_events_->begin()), AdaptorIterator(cached_events_->end())};
 }
@@ -863,13 +863,13 @@ inline auto EventReader<T>::Enumerate() const -> utils::EnumerateAdapter<Adaptor
 template <EventTrait T>
 template <typename Func>
   requires utils::InspectorFor<Func, const std::remove_cvref_t<T>&>
-inline auto EventReader<T>::Inspect(Func inspector) const -> utils::InspectAdapter<AdaptorIterator, Func> {
+inline auto EventReader<T>::Inspect(Func inspector) const& -> utils::InspectAdapter<AdaptorIterator, Func> {
   EnsureCached();
   return {AdaptorIterator(cached_events_->begin()), AdaptorIterator(cached_events_->end()), std::move(inspector)};
 }
 
 template <EventTrait T>
-inline auto EventReader<T>::StepBy(size_t step) const -> utils::StepByAdapter<AdaptorIterator> {
+inline auto EventReader<T>::StepBy(size_t step) const& -> utils::StepByAdapter<AdaptorIterator> {
   EnsureCached();
   return {AdaptorIterator(cached_events_->begin()), AdaptorIterator(cached_events_->end()), step};
 }

@@ -53,70 +53,82 @@ function(_helios_get_real_target target_name out_var)
     set(${out_var} ${_current_target} PARENT_SCOPE)
 endfunction()
 
-# Create helios alias targets for spdlog
+# Create helios::spdlog::spdlog alias target for spdlog
 
 if(TARGET spdlog::spdlog)
-    if(NOT TARGET helios::spdlog)
+    if(NOT TARGET helios::spdlog::spdlog)
         _helios_get_real_target(spdlog::spdlog _spdlog_real)
         if(_spdlog_real)
-            add_library(helios::spdlog ALIAS ${_spdlog_real})
+            add_library(helios::spdlog::spdlog ALIAS ${_spdlog_real})
         else()
-            add_library(helios::spdlog ALIAS spdlog::spdlog)
+            add_library(helios::spdlog::spdlog ALIAS spdlog::spdlog)
         endif()
     endif()
     message(STATUS "  ✓ spdlog configured (compiled)")
 endif()
 
 if(TARGET spdlog::spdlog_header_only)
-    if(NOT TARGET helios::spdlog_header_only)
+    if(NOT TARGET helios::spdlog::spdlog_header_only)
         _helios_get_real_target(spdlog::spdlog_header_only _spdlog_header_real)
         if(_spdlog_header_real)
-            add_library(helios::spdlog_header_only ALIAS ${_spdlog_header_real})
+            add_library(helios::spdlog::spdlog_header_only ALIAS ${_spdlog_header_real})
         else()
-            add_library(helios::spdlog_header_only ALIAS spdlog::spdlog_header_only)
+            add_library(helios::spdlog::spdlog_header_only ALIAS spdlog::spdlog_header_only)
         endif()
     endif()
     message(STATUS "  ✓ spdlog header-only configured")
 endif()
 
 # Fallbacks for older or non-namespaced targets
-if(TARGET spdlog AND NOT TARGET helios::spdlog)
+if(TARGET spdlog AND NOT TARGET helios::spdlog::spdlog)
     _helios_get_real_target(spdlog _spdlog_real)
     if(_spdlog_real)
-        add_library(helios::spdlog ALIAS ${_spdlog_real})
+        add_library(helios::spdlog::spdlog ALIAS ${_spdlog_real})
     else()
-        add_library(helios::spdlog ALIAS spdlog)
+        add_library(helios::spdlog::spdlog ALIAS spdlog)
     endif()
     message(STATUS "  ✓ spdlog configured (fallback)")
 endif()
 
-if(TARGET spdlog_header_only AND NOT TARGET helios::spdlog_header_only)
+if(TARGET spdlog_header_only AND NOT TARGET helios::spdlog::spdlog_header_only)
     _helios_get_real_target(spdlog_header_only _spdlog_header_real)
     if(_spdlog_header_real)
-        add_library(helios::spdlog_header_only ALIAS ${_spdlog_header_real})
+        add_library(helios::spdlog::spdlog_header_only ALIAS ${_spdlog_header_real})
     else()
-        add_library(helios::spdlog_header_only ALIAS spdlog_header_only)
+        add_library(helios::spdlog::spdlog_header_only ALIAS spdlog_header_only)
     endif()
     message(STATUS "  ✓ spdlog header-only configured (fallback)")
 endif()
 
-# If we have helios::spdlog but not helios::spdlog_header_only, create the header-only alias
+# If we have helios::spdlog::spdlog but not helios::spdlog::spdlog_header_only, create the header-only alias
 # This handles cases where pkg-config only provides the compiled library target
-if(TARGET helios::spdlog AND NOT TARGET helios::spdlog_header_only)
-    # Get the real target that helios::spdlog points to
-    _helios_get_real_target(helios::spdlog _spdlog_real)
+if(TARGET helios::spdlog::spdlog AND NOT TARGET helios::spdlog::spdlog_header_only)
+    # Get the real target that helios::spdlog::spdlog points to
+    _helios_get_real_target(helios::spdlog::spdlog _spdlog_real)
     if(_spdlog_real)
-        add_library(helios::spdlog_header_only ALIAS ${_spdlog_real})
+        add_library(helios::spdlog::spdlog_header_only ALIAS ${_spdlog_real})
     else()
         # If we can't get the real target, create an interface library instead
         add_library(_helios_spdlog_header_only_compat INTERFACE)
-        target_link_libraries(_helios_spdlog_header_only_compat INTERFACE helios::spdlog)
-        add_library(helios::spdlog_header_only ALIAS _helios_spdlog_header_only_compat)
+        target_link_libraries(_helios_spdlog_header_only_compat INTERFACE helios::spdlog::spdlog)
+        add_library(helios::spdlog::spdlog_header_only ALIAS _helios_spdlog_header_only_compat)
     endif()
     message(STATUS "  ✓ spdlog header-only configured (using compiled library)")
 endif()
 
+# Create helios::spdlog convenience target that brings in all spdlog targets
+if(NOT TARGET _helios_spdlog_all)
+    add_library(_helios_spdlog_all INTERFACE)
+    if(TARGET helios::spdlog::spdlog)
+        target_link_libraries(_helios_spdlog_all INTERFACE helios::spdlog::spdlog)
+    endif()
+endif()
+
+if(NOT TARGET helios::spdlog)
+    add_library(helios::spdlog ALIAS _helios_spdlog_all)
+endif()
+
 # Warn if neither target is found
-if(NOT TARGET helios::spdlog AND NOT TARGET helios::spdlog_header_only)
+if(NOT TARGET helios::spdlog::spdlog AND NOT TARGET helios::spdlog::spdlog_header_only)
     message(WARNING "  ✗ spdlog not found")
 endif()

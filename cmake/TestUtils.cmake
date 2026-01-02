@@ -43,9 +43,9 @@ function(helios_add_test)
         helios_target_enable_lto(${HELIOS_TEST_TARGET})
     endif()
 
-    # Link doctest
+    # Link doctest (using new helios::*::* naming convention)
     target_link_libraries(${HELIOS_TEST_TARGET} PRIVATE
-        helios::doctest
+        helios::doctest::doctest
     )
 
     # Link additional dependencies if provided

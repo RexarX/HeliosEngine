@@ -95,9 +95,9 @@ TEST_SUITE("ecs::details::EventManager") {
     }
 
     SUBCASE("Register builtin event") {
-      manager.RegisterEvent<events::EntitySpawnedEvent>();
+      manager.RegisterEvent<EntitySpawnedEvent>();
 
-      const auto* metadata = manager.GetMetadata<events::EntitySpawnedEvent>();
+      const auto* metadata = manager.GetMetadata<EntitySpawnedEvent>();
       REQUIRE(metadata != nullptr);
       CHECK_EQ(metadata->clear_policy, EventClearPolicy::kAutomatic);
     }
@@ -636,14 +636,14 @@ TEST_SUITE("ecs::details::EventManager") {
     EventManager manager;
 
     SUBCASE("Register built-in events") {
-      manager.RegisterEvent<events::EntitySpawnedEvent>();
-      manager.RegisterEvent<events::EntityDestroyedEvent>();
+      manager.RegisterEvent<EntitySpawnedEvent>();
+      manager.RegisterEvent<EntityDestroyedEvent>();
 
-      CHECK(manager.IsRegistered<events::EntitySpawnedEvent>());
-      CHECK(manager.IsRegistered<events::EntityDestroyedEvent>());
+      CHECK(manager.IsRegistered<EntitySpawnedEvent>());
+      CHECK(manager.IsRegistered<EntityDestroyedEvent>());
 
-      const auto* metadata1 = manager.GetMetadata<events::EntitySpawnedEvent>();
-      const auto* metadata2 = manager.GetMetadata<events::EntityDestroyedEvent>();
+      const auto* metadata1 = manager.GetMetadata<EntitySpawnedEvent>();
+      const auto* metadata2 = manager.GetMetadata<EntityDestroyedEvent>();
 
       REQUIRE(metadata1 != nullptr);
       REQUIRE(metadata2 != nullptr);

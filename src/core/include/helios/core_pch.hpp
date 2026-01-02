@@ -6,6 +6,7 @@
 #include <bit>
 #include <charconv>
 #include <chrono>
+#include <compare>
 #include <concepts>
 #include <cstddef>
 #include <cstdint>
@@ -21,11 +22,13 @@
 #include <functional>
 #include <future>
 #include <ios>
+#include <istream>
 #include <iterator>
 #include <limits>
 #include <memory>
 #include <mutex>
 #include <optional>
+#include <ostream>
 #include <random>
 #include <ranges>
 #include <ratio>

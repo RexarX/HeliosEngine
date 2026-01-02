@@ -19,7 +19,9 @@ set(CORE_HEADERS
     # App headers
     include/helios/core/app/access_policy.hpp
     include/helios/core/app/app.hpp
+    include/helios/core/app/dynamic_module.hpp
     include/helios/core/app/module.hpp
+    include/helios/core/app/runners.hpp
     include/helios/core/app/schedule.hpp
     include/helios/core/app/schedules.hpp
     include/helios/core/app/sub_app.hpp
@@ -27,9 +29,9 @@ set(CORE_HEADERS
     include/helios/core/app/system_context.hpp
     include/helios/core/app/system_set.hpp
     include/helios/core/app/system_set_config.hpp
+    include/helios/core/app/time.hpp
 
     # App details headers
-    include/helios/core/app/details/schedule_visualizer.hpp
     include/helios/core/app/details/scheduler.hpp
     include/helios/core/app/details/system_diagnostics.hpp
     include/helios/core/app/details/system_info.hpp
@@ -44,6 +46,7 @@ set(CORE_HEADERS
     include/helios/core/async/task_graph.hpp
 
     # Container headers
+    include/helios/core/container/static_string.hpp
     include/helios/core/container/sparse_set.hpp
 
     # ECS headers
@@ -93,21 +96,11 @@ set(CORE_HEADERS
 
     # Utils headers
     include/helios/core/utils/common_traits.hpp
+    include/helios/core/utils/dynamic_library.hpp
     include/helios/core/utils/fast_pimpl.hpp
     include/helios/core/utils/filesystem.hpp
     include/helios/core/utils/functional_adapters.hpp
     include/helios/core/utils/string_hash.hpp
-
-
-    # Memory headers
-    include/helios/core/memory/allocator_traits.hpp
-    include/helios/core/memory/frame_allocator.hpp
-    include/helios/core/memory/double_frame_allocator.hpp
-    include/helios/core/memory/n_frame_allocator.hpp
-    include/helios/core/memory/pool_allocator.hpp
-    include/helios/core/memory/stack_allocator.hpp
-    include/helios/core/memory/free_list_allocator.hpp
-    include/helios/core/memory/stl_allocator_adapter.hpp
 )
 
 # Explicitly list all source files
@@ -121,6 +114,9 @@ set(CORE_SOURCES
 
     # App sources
     src/core/app/app.cpp
+
+    # Utils sources
+    src/core/utils/dynamic_library.cpp
 
     # App details sources
     src/core/app/details/scheduler.cpp
@@ -147,26 +143,29 @@ helios_target_set_output_dirs(helios_core)
 helios_target_add_pch(helios_core ${CMAKE_CURRENT_SOURCE_DIR}/include/helios/core_pch.hpp)
 helios_target_set_folder(helios_core "Helios/Modules")
 
+# Enable Position Independent Code for linking into shared libraries
+set_target_properties(helios_core PROPERTIES POSITION_INDEPENDENT_CODE ON)
+
 # Enable LTO if requested
 if(HELIOS_ENABLE_LTO)
     helios_target_enable_lto(helios_core)
 endif()
 
-# Link dependencies
+# Link dependencies (using new helios::*::* naming convention)
 target_link_libraries(helios_core
     PUBLIC
-        helios::boost_unordered
-        helios::ctti
-        helios::stduuid
-        helios::taskflow
+        helios::boost::unordered
+        helios::ctti::ctti
+        helios::stduuid::stduuid
+        helios::taskflow::taskflow
     PRIVATE
-        helios::boost_stacktrace
-        helios::spdlog_header_only
+        helios::boost::stacktrace
+        helios::spdlog::spdlog_header_only
 )
 
 # Link TBB on Linux with GCC - required for libstdc++ parallel STL backend
 if(HELIOS_HAS_SYSTEM_TBB)
-    target_link_libraries(helios_core PUBLIC helios::oneTBB)
+    target_link_libraries(helios_core PUBLIC helios::tbb::tbb)
     message(STATUS "helios_core: Linking TBB for libstdc++ parallel STL support")
 endif()
 

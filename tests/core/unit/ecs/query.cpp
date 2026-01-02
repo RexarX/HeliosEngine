@@ -737,21 +737,6 @@ TEST_SUITE("ecs::Query") {
     }
   }
 
-  TEST_CASE("QueryWithEntity::QueryWithEntity: Chaining: Reduce") {
-    World world;
-
-    for (int i = 1; i <= 5; ++i) {
-      Entity entity = world.CreateEntity();
-      world.AddComponent(entity, Health{i * 10});
-    }
-
-    auto query = QueryBuilder(world).Get<const Health&>();
-
-    int total = query.WithEntity().Reduce(0, [](int sum, Entity, const Health& h) { return sum + h.points; });
-
-    CHECK_EQ(total, 150);  // 10 + 20 + 30 + 40 + 50
-  }
-
   TEST_CASE("QueryWithEntity::QueryWithEntity: Chaining: GroupBy") {
     World world;
 

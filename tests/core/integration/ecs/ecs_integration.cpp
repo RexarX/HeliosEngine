@@ -96,35 +96,35 @@ struct GameStats {
 };
 
 // Test event types
-struct EntitySpawnedEvent {
+struct CustomEntitySpawnedEvent {
   Entity entity;
   std::array<char, 32> entity_type = {};
   float x = 0.0F;
   float y = 0.0F;
   float z = 0.0F;
 
-  explicit EntitySpawnedEvent(Entity e = {}, std::string_view type = "", float px = 0.0F, float py = 0.0F,
-                              float pz = 0.0F)
+  explicit CustomEntitySpawnedEvent(Entity e = {}, std::string_view type = "", float px = 0.0F, float py = 0.0F,
+                                    float pz = 0.0F)
       : entity(e), x(px), y(py), z(pz) {
     const auto copy_size = std::min(type.size(), entity_type.size() - 1);
     std::copy_n(type.begin(), copy_size, entity_type.begin());
     entity_type[copy_size] = '\0';
   }
 
-  static constexpr std::string_view GetName() noexcept { return "EntitySpawnedEvent"; }
+  static constexpr std::string_view GetName() noexcept { return "CustomEntitySpawnedEvent"; }
 };
 
-struct EntityDestroyedEvent {
+struct CustomEntityDestroyedEvent {
   Entity entity;
   std::array<char, 32> reason = {};
 
-  explicit EntityDestroyedEvent(Entity e = {}, std::string_view r = "") : entity(e) {
+  explicit CustomEntityDestroyedEvent(Entity e = {}, std::string_view r = "") : entity(e) {
     const auto copy_size = std::min(r.size(), reason.size() - 1);
     std::copy_n(r.begin(), copy_size, reason.begin());
     reason[copy_size] = '\0';
   }
 
-  static constexpr std::string_view GetName() noexcept { return "EntityDestroyedEvent"; }
+  static constexpr std::string_view GetName() noexcept { return "CustomEntityDestroyedEvent"; }
 };
 
 struct CombatEvent {
@@ -1200,8 +1200,8 @@ TEST_SUITE("ecs::EcsIntegration") {
     world.InsertResource(GameStats{});
 
     // Register events
-    world.AddEvent<EntitySpawnedEvent>();
-    world.AddEvent<EntityDestroyedEvent>();
+    world.AddEvent<CustomEntitySpawnedEvent>();
+    world.AddEvent<CustomEntityDestroyedEvent>();
     world.AddEvent<CombatEvent>();
     world.AddEvent<CollisionEvent>();
     world.AddEvent<PlayerLevelUpEvent>();
@@ -1231,7 +1231,8 @@ TEST_SUITE("ecs::EcsIntegration") {
         auto entity_query = QueryBuilder(world).Get<const Transform&, const Name&>();
         for (auto&& [entity, transform, name] : entity_query.WithEntity()) {
           const char* entity_type = world.HasComponent<Player>(entity) ? "Player" : "Enemy";
-          local_storage.WriteEvent(EntitySpawnedEvent{entity, entity_type, transform.x, transform.y, transform.z});
+          local_storage.WriteEvent(
+              CustomEntitySpawnedEvent{entity, entity_type, transform.x, transform.y, transform.z});
         }
 
         // Flush events to world
@@ -1241,7 +1242,7 @@ TEST_SUITE("ecs::EcsIntegration") {
       world.Update();
 
       // Verify spawn events were recorded
-      auto reader_spawn_events = world.ReadEvents<EntitySpawnedEvent>();
+      auto reader_spawn_events = world.ReadEvents<CustomEntitySpawnedEvent>();
       auto spawn_events = reader_spawn_events.Collect();
       CHECK_EQ(spawn_events.size(), 5);
 
@@ -1253,8 +1254,8 @@ TEST_SUITE("ecs::EcsIntegration") {
       }
 
       // Clear events
-      world.ClearEvents<EntitySpawnedEvent>();
-      auto reader_cleared_events = world.ReadEvents<EntitySpawnedEvent>();
+      world.ClearEvents<CustomEntitySpawnedEvent>();
+      auto reader_cleared_events = world.ReadEvents<CustomEntitySpawnedEvent>();
       auto cleared_events = reader_cleared_events.Collect();
       CHECK(cleared_events.empty());
 
@@ -1358,7 +1359,7 @@ TEST_SUITE("ecs::EcsIntegration") {
 
         int destroyed_count = 0;
         for (auto&& [entity, health] : dead_entities) {
-          local_storage.WriteEvent(EntityDestroyedEvent{entity, "health_depleted"});
+          local_storage.WriteEvent(CustomEntityDestroyedEvent{entity, "health_depleted"});
           cmd_buffer.Destroy(entity);
           ++destroyed_count;
         }
@@ -1370,7 +1371,7 @@ TEST_SUITE("ecs::EcsIntegration") {
       world.MergeEventQueue(local_storage.GetEventQueue());
 
       // Read events before entities are destroyed
-      auto reader_destruction_events = world.ReadEvents<EntityDestroyedEvent>();
+      auto reader_destruction_events = world.ReadEvents<CustomEntityDestroyedEvent>();
       auto destruction_events = reader_destruction_events.Collect();
       CHECK_EQ(destruction_events.size(), 10);
 
@@ -1422,7 +1423,8 @@ TEST_SUITE("ecs::EcsIntegration") {
         auto write_spawn_event = [&local_storage](const std::tuple<Entity, const Transform&> tuple)
             -> std::optional<std::remove_cvref_t<decltype(tuple)>> {
           const auto& [entity, transform] = tuple;
-          local_storage.WriteEvent(EntitySpawnedEvent{entity, "Projectile", transform.x, transform.y, transform.z});
+          local_storage.WriteEvent(
+              CustomEntitySpawnedEvent{entity, "Projectile", transform.x, transform.y, transform.z});
           return tuple;
         };
 
@@ -1448,7 +1450,7 @@ TEST_SUITE("ecs::EcsIntegration") {
       world.Update();
 
       // Verify each event type
-      auto reader_spawn_events = world.ReadEvents<EntitySpawnedEvent>();
+      auto reader_spawn_events = world.ReadEvents<CustomEntitySpawnedEvent>();
       auto spawn_events = reader_spawn_events.Collect();
       CHECK_EQ(spawn_events.size(), 1);
       CHECK_EQ(std::string_view(spawn_events[0].entity_type.data()), "Projectile");
@@ -1470,7 +1472,7 @@ TEST_SUITE("ecs::EcsIntegration") {
 
       // Clear all events
       world.ClearAllEventQueues();
-      CHECK(world.ReadEvents<EntitySpawnedEvent>().Empty());
+      CHECK(world.ReadEvents<CustomEntitySpawnedEvent>().Empty());
       CHECK(world.ReadEvents<CombatEvent>().Empty());
       CHECK(world.ReadEvents<CollisionEvent>().Empty());
       CHECK(world.ReadEvents<PlayerLevelUpEvent>().Empty());
@@ -1595,8 +1597,8 @@ TEST_SUITE("ecs::EcsIntegration") {
     world.InsertResource(GameStats{0, 0, 0});
 
     // Register events
-    world.AddEvent<EntitySpawnedEvent>();
-    world.AddEvent<EntityDestroyedEvent>();
+    world.AddEvent<CustomEntitySpawnedEvent>();
+    world.AddEvent<CustomEntityDestroyedEvent>();
     world.AddEvent<CombatEvent>();
     world.AddEvent<CollisionEvent>();
 
@@ -1612,7 +1614,7 @@ TEST_SUITE("ecs::EcsIntegration") {
         Entity player = world.CreateEntity();
         world.AddComponents(player, Name{"Hero"}, Transform{0.0F, 0.0F, 0.0F}, Velocity{0.0F, 0.0F, 0.0F},
                             Health{100, 100}, Player{});
-        local_storage.WriteEvent(EntitySpawnedEvent{player, "Player", 0.0F, 0.0F, 0.0F});
+        local_storage.WriteEvent(CustomEntitySpawnedEvent{player, "Player", 0.0F, 0.0F, 0.0F});
 
         // Spawn enemies in a circle around player
         constexpr int enemy_count = 10;
@@ -1625,7 +1627,7 @@ TEST_SUITE("ecs::EcsIntegration") {
           Entity enemy = world.CreateEntity();
           world.AddComponents(enemy, Name{std::format("Enemy{}", i)}, Transform{x, 0.0F, z}, Velocity{0.0F, 0.0F, 0.0F},
                               Health{50, 50}, Enemy{}, MovingTarget{});
-          local_storage.WriteEvent(EntitySpawnedEvent{enemy, "Enemy", x, 0.0F, z});
+          local_storage.WriteEvent(CustomEntitySpawnedEvent{enemy, "Enemy", x, 0.0F, z});
         }
 
         world.WriteResource<GameStats>().entities_spawned = enemy_count + 1;
@@ -1635,7 +1637,7 @@ TEST_SUITE("ecs::EcsIntegration") {
       world.Update();
 
       // Verify spawning
-      auto reader_spawn_events = world.ReadEvents<EntitySpawnedEvent>();
+      auto reader_spawn_events = world.ReadEvents<CustomEntitySpawnedEvent>();
       auto spawn_events = reader_spawn_events.Collect();
       CHECK_EQ(spawn_events.size(), 11);  // 1 player + 10 enemies
       CHECK_EQ(world.EntityCount(), 11);
@@ -1753,7 +1755,7 @@ TEST_SUITE("ecs::EcsIntegration") {
 
         for (auto&& [entity, health] : health_query.WithEntity().Filter(
                  [](Entity /*entity*/, const Health& health) { return health.IsDead(); })) {
-          local_storage.WriteEvent(EntityDestroyedEvent{entity, "killed_in_combat"});
+          local_storage.WriteEvent(CustomEntityDestroyedEvent{entity, "killed_in_combat"});
           cmd_buffer.Destroy(entity);
           ++destroyed_count;
         }
@@ -1768,7 +1770,7 @@ TEST_SUITE("ecs::EcsIntegration") {
       world.Update();
 
       // Verify destruction events
-      auto reader_destruction_events = world.ReadEvents<EntityDestroyedEvent>();
+      auto reader_destruction_events = world.ReadEvents<CustomEntityDestroyedEvent>();
       auto destruction_events = reader_destruction_events.Collect();
       CHECK_EQ(destruction_events.size(), world.ReadResource<GameStats>().entities_destroyed);
 
@@ -1797,7 +1799,7 @@ TEST_SUITE("ecs::EcsIntegration") {
             Entity enemy = world.CreateEntity();
             world.AddComponents(enemy, Name{std::format("Reinforcement{}", i)}, Transform{x, 0.0F, z},
                                 Velocity{0.0F, 0.0F, 0.0F}, Health{50, 50}, Enemy{}, MovingTarget{});
-            local_storage.WriteEvent(EntitySpawnedEvent{enemy, "Reinforcement", x, 0.0F, z});
+            local_storage.WriteEvent(CustomEntitySpawnedEvent{enemy, "Reinforcement", x, 0.0F, z});
           }
 
           world.WriteResource<GameStats>().entities_spawned += reinforcement_count;
@@ -1828,13 +1830,13 @@ TEST_SUITE("ecs::EcsIntegration") {
       }
 
       // Verify event history is complete
-      auto reader_all_spawn_events = world.ReadEvents<EntitySpawnedEvent>();
+      auto reader_all_spawn_events = world.ReadEvents<CustomEntitySpawnedEvent>();
       auto all_spawn_events = reader_all_spawn_events.Collect();
       auto reader_all_combat_events = world.ReadEvents<CombatEvent>();
       auto all_combat_events = reader_all_combat_events.Collect();
       auto reader_all_collision_events = world.ReadEvents<CollisionEvent>();
       auto all_collision_events = reader_all_collision_events.Collect();
-      auto reader_all_destruction_events = world.ReadEvents<EntityDestroyedEvent>();
+      auto reader_all_destruction_events = world.ReadEvents<CustomEntityDestroyedEvent>();
       auto all_destruction_events = reader_all_destruction_events.Collect();
 
       HELIOS_INFO("Event Summary:");
@@ -2096,7 +2098,7 @@ TEST_SUITE("ecs::EcsIntegration") {
 
         for (auto&& [entity, health] : health_query.WithEntity()) {
           if (health.IsDead()) {
-            system_storages[1].WriteEvent(EntityDestroyedEvent{entity, "combat_death"});
+            system_storages[1].WriteEvent(CustomEntityDestroyedEvent{entity, "combat_death"});
             cmd_buffer.Destroy(entity);
             ++destroyed;
           }
@@ -2123,7 +2125,8 @@ TEST_SUITE("ecs::EcsIntegration") {
                                          Transform{spawn_x, 0.0F, spawn_z}, Velocity{0.0F, 0.0F, -2.0F}, Health{50, 50},
                                          Enemy{}, MovingTarget{});
 
-              system_storages[2].WriteEvent(EntitySpawnedEvent{new_enemy, "Reinforcement", spawn_x, 0.0F, spawn_z});
+              system_storages[2].WriteEvent(
+                  CustomEntitySpawnedEvent{new_enemy, "Reinforcement", spawn_x, 0.0F, spawn_z});
             }
 
             world.WriteResource<GameStats>().entities_spawned += spawn_count;
@@ -2202,7 +2205,7 @@ TEST_SUITE("ecs::EcsIntegration") {
       auto all_collision_events = reader_all_collision_events.Collect();
       auto reader_all_combat_events = world.ReadEvents<CombatEvent>();
       auto all_combat_events = reader_all_combat_events.Collect();
-      auto reader_all_destruction_events = world.ReadEvents<EntityDestroyedEvent>();
+      auto reader_all_destruction_events = world.ReadEvents<CustomEntityDestroyedEvent>();
       auto all_destruction_events = reader_all_destruction_events.Collect();
 
       HELIOS_INFO("Event Counts:");
@@ -2242,7 +2245,7 @@ TEST_SUITE("ecs::EcsIntegration") {
 
     // Register events
     world.AddEvent<CombatEvent>();
-    world.AddEvent<EntityDestroyedEvent>();
+    world.AddEvent<CustomEntityDestroyedEvent>();
     world.AddEvent<CollisionEvent>();
 
     // Create test entities with health
@@ -2438,13 +2441,13 @@ TEST_SUITE("ecs::EcsIntegration") {
       auto collision_writer = world.WriteEvents<CollisionEvent>();
       collision_writer.Emplace(player, enemy2, 100.0F);
 
-      auto destroy_writer = world.WriteEvents<EntityDestroyedEvent>();
+      auto destroy_writer = world.WriteEvents<CustomEntityDestroyedEvent>();
       destroy_writer.Emplace(enemy2, "killed");
 
       // Read each type independently
       auto combat_reader = world.ReadEvents<CombatEvent>();
       auto collision_reader = world.ReadEvents<CollisionEvent>();
-      auto destroy_reader = world.ReadEvents<EntityDestroyedEvent>();
+      auto destroy_reader = world.ReadEvents<CustomEntityDestroyedEvent>();
 
       CHECK_EQ(combat_reader.Count(), 2);
       CHECK_EQ(collision_reader.Count(), 1);

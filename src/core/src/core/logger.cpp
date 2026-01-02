@@ -29,7 +29,6 @@
 #include <iterator>
 #include <memory>
 #include <source_location>
-#include <span>
 #include <string>
 #include <string_view>
 #include <system_error>
@@ -51,7 +50,7 @@ constexpr size_t kStackTraceReserveSize = 512;
 
     // Needed because of compatibility issues on Windows
     // For more info: https://en.cppreference.com/w/c/chrono/localtime.html
-#ifdef _WIN32
+#ifdef HELIOS_PLATFORM_WINDOWS
     const errno_t err = localtime_s(&local_time, &time_t_now);
     if (err != 0) [[unlikely]] {
       return std::unexpected("Failed to get local time");

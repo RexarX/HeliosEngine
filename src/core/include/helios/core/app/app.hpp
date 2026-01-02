@@ -2,6 +2,7 @@
 
 #include <helios/core_pch.hpp>
 
+#include <helios/core/app/dynamic_module.hpp>
 #include <helios/core/app/module.hpp>
 #include <helios/core/app/schedule.hpp>
 #include <helios/core/app/sub_app.hpp>
@@ -28,12 +29,57 @@
 #include <functional>
 #include <future>
 #include <memory>
-#include <thread>
 #include <unordered_map>
 #include <utility>
 #include <vector>
 
 namespace helios::app {
+
+namespace details {
+
+/**
+ * @brief Tracked future with ready flag to reduce syscall churn.
+ * @details Wraps a shared_future with a cached ready flag to avoid repeated wait_for(0) calls.
+ * Once marked ready, no further syscalls are made to check status.
+ */
+struct TrackedFuture {
+  std::shared_future<void> future;  ///< The underlying future
+  bool ready = false;               ///< Cached ready state
+
+  /**
+   * @brief Waits for the future to complete if not already ready.
+   */
+  void Wait() {
+    if (!ready && future.valid()) {
+      future.wait();
+      ready = true;
+    }
+  }
+
+  /**
+   * @brief Checks if the future is ready, caching the result.
+   * @details Only makes a syscall if not already marked ready.
+   * @return True if the future has completed
+   */
+  [[nodiscard]] bool IsReady() noexcept {
+    if (ready) {
+      return true;
+    }
+    if (future.valid() && future.wait_for(std::chrono::seconds(0)) == std::future_status::ready) {
+      ready = true;
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * @brief Checks if the future is valid.
+   * @return True if the underlying future is valid
+   */
+  [[nodiscard]] bool Valid() const noexcept { return future.valid(); }
+};
+
+}  // namespace details
 
 /**
  * @brief Application exit codes.
@@ -58,13 +104,13 @@ public:
   using ExtractFn = std::function<void(const ecs::World&, ecs::World&)>;
 #endif
 
-  App() = default;
+  App();
 
   /**
    * @brief Constructs an App with a specific number of worker threads.
    * @param worker_thread_count Number of worker threads for the executor
    */
-  explicit App(size_t worker_thread_count) : executor_(worker_thread_count) {}
+  explicit App(size_t worker_thread_count);
 
   App(const App&) = delete;
   App(App&&) = delete;
@@ -133,6 +179,13 @@ public:
   void WaitForOverlappingUpdates(const SubApp& sub_app);
 
   /**
+   * @brief Updates the Time resource for the current frame.
+   * @details Should be called at the beginning of each frame by the runner.
+   * Does nothing if Time resource is not registered.
+   */
+  void TickTime() noexcept;
+
+  /**
    * @brief Adds a new sub-application of type T.
    * @warning Triggers an assertion if app is initialized or running.
    * @tparam T Sub-application type
@@ -172,6 +225,16 @@ public:
   template <ModuleTrait... Modules>
     requires(sizeof...(Modules) > 1 && utils::UniqueTypes<Modules...>)
   auto AddModules(this auto&& self) -> decltype(std::forward<decltype(self)>(self));
+
+  /**
+   * @brief Adds a dynamic module to the main sub-app, taking ownership.
+   * @details Modules can add their own systems, resources, and sub-apps.
+   * The App takes ownership of the module via move semantics.
+   * @warning Triggers an assertion if app is initialized or running.
+   * @param module Dynamic module to add (moved)
+   * @return Reference to app for method chaining
+   */
+  auto AddDynamicModule(this auto&& self, DynamicModule&& module) -> decltype(std::forward<decltype(self)>(self));
 
   /**
    * @brief Adds a system to the specified schedule in the main sub-app.
@@ -326,6 +389,13 @@ public:
   [[nodiscard]] bool ContainsModule() const noexcept;
 
   /**
+   * @brief Checks if a dynamic module with the given ID exists.
+   * @param module_id Module type ID
+   * @return True if module exists, false otherwise
+   */
+  [[nodiscard]] bool ContainsDynamicModule(ModuleTypeId module_id) const noexcept;
+
+  /**
    * @brief Checks if a system of type T exists in any schedule of main sub-app.
    * @tparam T System type
    * @return True if system exists, false otherwise
@@ -383,7 +453,7 @@ public:
    * @brief Gets the number of modules in main sub-app.
    * @return Number of modules
    */
-  [[nodiscard]] size_t ModuleCount() const noexcept { return modules_.size(); }
+  [[nodiscard]] size_t ModuleCount() const noexcept { return modules_.size() + dynamic_modules_.size(); }
 
   /**
    * @brief Gets the total number of systems across all schedules in main sub-app.
@@ -466,12 +536,26 @@ private:
   void BuildModules();
 
   /**
+   * @brief Waits for all modules to be ready and calls Finish on them.
+   * @details Called after BuildModules. Polls IsReady on each module
+   * and calls Finish once all modules are ready.
+   */
+  void FinishModules();
+
+  /**
    * @brief Destroys all registered modules.
    * @details Calls Destroy on each module.
    */
   void DestroyModules();
 
-  [[nodiscard]] static AppExitCode DefaultRunner(App& app);
+  /**
+   * @brief Registers built-in resources and events.
+   * @details Called automatically before initialization.
+   * Registers Time resource and ShutdownEvent if not already present.
+   */
+  void RegisterBuiltins();
+
+  [[nodiscard]] static AppExitCode DefaultRunnerWrapper(App& app);
 
   bool is_initialized_ = false;          ///< Whether the app has been initialized
   std::atomic<bool> is_running_{false};  ///< Whether the app is currently running
@@ -480,16 +564,19 @@ private:
   std::vector<SubApp> sub_apps_;                                ///< List of additional sub-applications
   std::unordered_map<SubAppTypeId, size_t> sub_app_index_map_;  ///< Map of sub-application type IDs to their indices
 
-  std::vector<std::unique_ptr<Module>> modules_;               ///< Owned modules
+  std::vector<std::unique_ptr<Module>> modules_;               ///< Owned static modules
   std::unordered_map<ModuleTypeId, size_t> module_index_map_;  ///< Map of module type IDs to their indices
+
+  std::vector<DynamicModule> dynamic_modules_;                         ///< Owned dynamic modules
+  std::unordered_map<ModuleTypeId, size_t> dynamic_module_index_map_;  ///< Map of dynamic module IDs to indices
 
   async::Executor executor_;       ///< Async executor for parallel execution
   async::TaskGraph update_graph_;  ///< Task graph for managing updates
 
-  RunnerFn runner_ = DefaultRunner;  ///< The runner function
+  RunnerFn runner_;  ///< The runner function
 
-  /// Map from sub-app index to their overlapping shared futures.
-  std::unordered_map<size_t, std::vector<std::shared_future<void>>> sub_app_overlapping_futures_;
+  /// Map from sub-app index to their overlapping tracked futures.
+  std::unordered_map<size_t, std::vector<details::TrackedFuture>> sub_app_overlapping_futures_;
 };
 
 template <SubAppTrait T>
@@ -577,6 +664,26 @@ inline auto App::AddModules(this auto&& self) -> decltype(std::forward<decltype(
   HELIOS_ASSERT(!self.IsRunning(), "Failed to add modules: Cannot add modules while app is running!");
 
   (self.template AddModule<Modules>(), ...);
+  return std::forward<decltype(self)>(self);
+}
+
+inline auto App::AddDynamicModule(this auto&& self, DynamicModule&& module)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  const std::string_view name = module.GetModuleName();
+  const ModuleTypeId id = module.GetModuleId();
+
+  HELIOS_ASSERT(!self.IsInitialized(), "Failed to add module '{}': Cannot add modules after app initialization!", name);
+  HELIOS_ASSERT(!self.IsRunning(), "Failed to add module '{}': Cannot add modules while app is running!", name);
+  HELIOS_ASSERT(module.Loaded(), "Failed to add module '{}': Module is not loaded!", name);
+
+  // Check both static and dynamic module maps for duplicates
+  if (self.module_index_map_.contains(id) || self.dynamic_module_index_map_.contains(id)) [[unlikely]] {
+    HELIOS_WARN("Module '{}' already exists in app!", name);
+    return std::forward<decltype(self)>(self);
+  }
+
+  self.dynamic_module_index_map_[id] = self.dynamic_modules_.size();
+  self.dynamic_modules_.push_back(std::move(module));
   return std::forward<decltype(self)>(self);
 }
 
@@ -702,7 +809,11 @@ inline bool App::ContainsSubApp() const noexcept {
 template <ModuleTrait T>
 inline bool App::ContainsModule() const noexcept {
   constexpr ModuleTypeId id = ModuleTypeIdOf<T>();
-  return module_index_map_.contains(id);
+  return module_index_map_.contains(id) || dynamic_module_index_map_.contains(id);
+}
+
+inline bool App::ContainsDynamicModule(ModuleTypeId module_id) const noexcept {
+  return dynamic_module_index_map_.contains(module_id);
 }
 
 template <SubAppTrait T>
@@ -737,10 +848,8 @@ inline void App::WaitForOverlappingUpdates(T /*sub_app*/) {
     return;  // No overlapping futures for this sub-app
   }
 
-  for (auto& future : futures_it->second) {
-    if (future.wait_for(std::chrono::seconds(0)) != std::future_status::ready) {
-      future.wait();
-    }
+  for (auto& tracked : futures_it->second) {
+    tracked.Wait();
   }
   futures_it->second.clear();
 }

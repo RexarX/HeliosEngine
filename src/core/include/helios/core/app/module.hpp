@@ -13,16 +13,13 @@ namespace helios::app {
 
 class App;
 
-// builder.AddSystem<InputSystem>(ExecutionStage::PreUpdate).After<RenderSystem>();
-// builder.AddSystems<WindowSystem, ExampleSystem>(ExecutionStage::Render).After<RenderSystem>();
-// builder.AddModule<PhysicsModule>(ExecutionStage::Update).After<InputSystem, ServerModule>();
-// builder.AddModules<AnotherModule, ExampleModule>(ExecutionStage::PostUpdate).After<SomeModule, SomeSystem>();
-
 /**
  * @brief Base class for all modules.
  * @details Derived classes must implement:
  * - `Build(helios::app::App&)` for initialization
- * - `Destroy(helios::app::App&)` for cleanup
+ * - `Destroy(helios::app::App&)` for cleanup (optional)
+ * - `IsReady(const helios::app::App&)` to check if ready (optional, default: true)
+ * - `Finish(helios::app::App&)` for finalization after all modules are ready (optional)
  * - `static constexpr std::string_view GetName() noexcept` (optional)
  */
 class Module {
@@ -31,15 +28,40 @@ public:
 
   /**
    * @brief Builds the module.
+   * @details Called during application initialization to set up the module.
+   * This is where you should register systems, resources, and events.
    * @param app Application for initialization
    */
   virtual void Build(App& app) = 0;
 
   /**
    * @brief Destroys the module and cleans up resources.
+   * @details Called during application shutdown.
    * @param app The application instance
    */
-  virtual void Destroy(App& app) = 0;
+  virtual void Destroy(App& app) { (void)app; }
+
+  /**
+   * @brief Checks if the module is ready for finalization.
+   * @details This can be useful for modules that need something asynchronous to happen
+   * before they can finish their setup, like the initialization of a renderer.
+   * Once the module is ready, `Finish` will be called.
+   * @param app The application instance (const)
+   * @return True if the module is ready, false otherwise
+   */
+  [[nodiscard]] virtual bool IsReady(const App& app) const noexcept {
+    (void)app;
+    return true;
+  }
+
+  /**
+   * @brief Finishes adding this module to the App, once all modules are ready.
+   * @details This can be useful for modules that depend on another module's asynchronous
+   * setup, like the renderer. Called after all modules' `Build` methods have been called
+   * and all modules return true from `IsReady`.
+   * @param app The application instance
+   */
+  virtual void Finish(App& app) { (void)app; }
 };
 
 /**

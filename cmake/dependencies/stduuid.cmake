@@ -22,17 +22,29 @@ helios_dep_begin(
 
 helios_dep_end()
 
-# Create helios::stduuid alias if stduuid was found
-if(NOT TARGET helios::stduuid)
+# Create helios::stduuid::stduuid alias if stduuid was found
+if(NOT TARGET helios::stduuid::stduuid)
     if(TARGET stduuid::stduuid)
-        add_library(helios::stduuid ALIAS stduuid::stduuid)
+        add_library(helios::stduuid::stduuid ALIAS stduuid::stduuid)
         message(STATUS "  ✓ stduuid configured (stduuid::stduuid)")
     elseif(TARGET stduuid)
-        add_library(helios::stduuid ALIAS stduuid)
+        add_library(helios::stduuid::stduuid ALIAS stduuid)
         message(STATUS "  ✓ stduuid configured (stduuid)")
     else()
         message(WARNING "  ✗ stduuid not found")
     endif()
 else()
-    message(STATUS "  ✓ stduuid configured (helios::stduuid)")
+    message(STATUS "  ✓ stduuid configured (helios::stduuid::stduuid)")
+endif()
+
+# Create helios::stduuid convenience target that brings in all stduuid targets
+if(NOT TARGET _helios_stduuid_all)
+    add_library(_helios_stduuid_all INTERFACE)
+    if(TARGET helios::stduuid::stduuid)
+        target_link_libraries(_helios_stduuid_all INTERFACE helios::stduuid::stduuid)
+    endif()
+endif()
+
+if(NOT TARGET helios::stduuid)
+    add_library(helios::stduuid ALIAS _helios_stduuid_all)
 endif()

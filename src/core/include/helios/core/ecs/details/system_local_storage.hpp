@@ -10,6 +10,7 @@
 #include <helios/core/memory/allocator_traits.hpp>
 #include <helios/core/memory/frame_allocator.hpp>
 #include <helios/core/memory/growable_allocator.hpp>
+#include <helios/core/memory/stl_allocator_adapter.hpp>
 
 #include <concepts>
 #include <cstddef>
@@ -34,11 +35,17 @@ inline constexpr size_t kDefaultFrameAllocatorCapacity = 64UZ * 1024UZ;
  * It uses a growable allocator internally to automatically expand if the initial capacity is exceeded.
  * The allocator should be reset at frame boundaries or after each system execution.
  *
+ * Command metadata uses a standard heap-allocated vector to ensure safe cross-frame and
+ * cross-thread transfer. For systems that need maximum performance and don't transfer
+ * commands across frames, use CreateFrameAllocatedCommandBuffer() which uses the frame allocator.
+ *
  * @note Not thread-safe - each system has its own instance.
  */
 class SystemLocalStorage {
 public:
   using FrameAllocatorType = memory::GrowableAllocator<memory::FrameAllocator>;
+  using FrameCommandAllocator = memory::STLGrowableAllocator<std::unique_ptr<Command>, memory::FrameAllocator>;
+  using FrameCommandVector = std::vector<std::unique_ptr<Command>, FrameCommandAllocator>;
 
   /**
    * @brief Constructs system local storage with default frame allocator capacity.
@@ -117,6 +124,16 @@ public:
    * Do not store references or pointers to frame-allocated data beyond the current frame.
    */
   void ResetFrameAllocator() noexcept { frame_allocator_.Reset(); }
+
+  /**
+   * @brief Creates a frame-allocated command allocator.
+   * @details Use this for temporary command buffers that don't outlive the current frame.
+   * More efficient than heap allocation for short-lived command storage.
+   * @return Frame command allocator instance
+   */
+  [[nodiscard]] FrameCommandAllocator CreateFrameCommandAllocator() noexcept {
+    return FrameCommandAllocator(frame_allocator_);
+  }
 
   /**
    * @brief Checks if both commands and events are empty.

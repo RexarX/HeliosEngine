@@ -319,7 +319,7 @@ endfunction()
 
 # Copy dynamic library dependencies to target output directory
 # This ensures that executables can find their runtime dependencies
-# Usage: helios_copy_runtime_dependencies(TARGET my_target LIBRARIES lib1 lib2...)
+# Usage: helios_copy_runtime_dependencies(my_target LIBRARIES lib1 lib2...)
 function(helios_copy_runtime_dependencies TARGET)
     cmake_parse_arguments(ARG "" "" "LIBRARIES" ${ARGN})
 

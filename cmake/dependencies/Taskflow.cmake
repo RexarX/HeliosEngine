@@ -27,15 +27,15 @@ helios_dep_begin(
 
 helios_dep_end()
 
-# Create helios::taskflow alias if Taskflow was found
-if(NOT TARGET helios::taskflow)
+# Create helios::taskflow::taskflow alias if Taskflow was found
+if(NOT TARGET helios::taskflow::taskflow)
     if(TARGET Taskflow::Taskflow)
         # Taskflow::Taskflow might be an alias itself, get the real target
         get_target_property(_taskflow_aliased Taskflow::Taskflow ALIASED_TARGET)
         if(_taskflow_aliased)
-            add_library(helios::taskflow ALIAS ${_taskflow_aliased})
+            add_library(helios::taskflow::taskflow ALIAS ${_taskflow_aliased})
         else()
-            add_library(helios::taskflow ALIAS Taskflow::Taskflow)
+            add_library(helios::taskflow::taskflow ALIAS Taskflow::Taskflow)
         endif()
         message(STATUS "  ✓ Taskflow configured (Taskflow::Taskflow)")
 
@@ -49,7 +49,7 @@ if(NOT TARGET helios::taskflow)
             endif()
         endif()
     elseif(TARGET Taskflow)
-        add_library(helios::taskflow ALIAS Taskflow)
+        add_library(helios::taskflow::taskflow ALIAS Taskflow)
         message(STATUS "  ✓ Taskflow configured (Taskflow)")
 
         # Mark Taskflow targets as SYSTEM to suppress warnings if downloaded via CPM
@@ -60,5 +60,17 @@ if(NOT TARGET helios::taskflow)
         message(WARNING "  ✗ Taskflow not found")
     endif()
 else()
-    message(STATUS "  ✓ Taskflow configured (helios::taskflow)")
+    message(STATUS "  ✓ Taskflow configured (helios::taskflow::taskflow)")
+endif()
+
+# Create helios::taskflow convenience target that brings in all taskflow targets
+if(NOT TARGET _helios_taskflow_all)
+    add_library(_helios_taskflow_all INTERFACE)
+    if(TARGET helios::taskflow::taskflow)
+        target_link_libraries(_helios_taskflow_all INTERFACE helios::taskflow::taskflow)
+    endif()
+endif()
+
+if(NOT TARGET helios::taskflow)
+    add_library(helios::taskflow ALIAS _helios_taskflow_all)
 endif()
