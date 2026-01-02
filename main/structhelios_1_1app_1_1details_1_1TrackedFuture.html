@@ -1,0 +1,387 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: helios::app::details::TrackedFuture Struct Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('structhelios_1_1app_1_1details_1_1TrackedFuture.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="structhelios_1_1app_1_1details_1_1TrackedFuture-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">helios::app::details::TrackedFuture Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Tracked future with ready flag to reduce syscall churn.  
+ <a href="structhelios_1_1app_1_1details_1_1TrackedFuture.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="app_8hpp_source.html">app.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a37848dfec632c9746c3fd91a124d286a" id="r_a37848dfec632c9746c3fd91a124d286a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1app_1_1details_1_1TrackedFuture.html#a37848dfec632c9746c3fd91a124d286a">Wait</a> ()</td></tr>
+<tr class="memdesc:a37848dfec632c9746c3fd91a124d286a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Waits for the future to complete if not already ready.  <br /></td></tr>
+<tr class="separator:a37848dfec632c9746c3fd91a124d286a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a475a4d344ff91c755eb4624755b2f589" id="r_a475a4d344ff91c755eb4624755b2f589"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1app_1_1details_1_1TrackedFuture.html#a475a4d344ff91c755eb4624755b2f589">IsReady</a> () noexcept</td></tr>
+<tr class="memdesc:a475a4d344ff91c755eb4624755b2f589"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the future is ready, caching the result.  <br /></td></tr>
+<tr class="separator:a475a4d344ff91c755eb4624755b2f589"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af665beb4c8b0853cfe488104b1b19552" id="r_af665beb4c8b0853cfe488104b1b19552"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1app_1_1details_1_1TrackedFuture.html#af665beb4c8b0853cfe488104b1b19552">Valid</a> () const noexcept</td></tr>
+<tr class="memdesc:af665beb4c8b0853cfe488104b1b19552"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the future is valid.  <br /></td></tr>
+<tr class="separator:af665beb4c8b0853cfe488104b1b19552"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a94f7808c463896c7c795b7096e55879d" id="r_a94f7808c463896c7c795b7096e55879d"><td class="memItemLeft" align="right" valign="top">std::shared_future&lt; void &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1app_1_1details_1_1TrackedFuture.html#a94f7808c463896c7c795b7096e55879d">future</a></td></tr>
+<tr class="memdesc:a94f7808c463896c7c795b7096e55879d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The underlying future.  <br /></td></tr>
+<tr class="separator:a94f7808c463896c7c795b7096e55879d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d5eeb6b6246ec0e73d37b8c12e93900" id="r_a9d5eeb6b6246ec0e73d37b8c12e93900"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1app_1_1details_1_1TrackedFuture.html#a9d5eeb6b6246ec0e73d37b8c12e93900">ready</a> = false</td></tr>
+<tr class="memdesc:a9d5eeb6b6246ec0e73d37b8c12e93900"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cached ready state.  <br /></td></tr>
+<tr class="separator:a9d5eeb6b6246ec0e73d37b8c12e93900"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Tracked future with ready flag to reduce syscall churn. </p>
+<p>Wraps a shared_future with a cached ready flag to avoid repeated wait_for(0) calls. Once marked ready, no further syscalls are made to check status. </p>
+
+<p class="definition">Definition at line <a class="el" href="app_8hpp_source.html#l00045">45</a> of file <a class="el" href="app_8hpp_source.html">app.hpp</a>.</p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a475a4d344ff91c755eb4624755b2f589" name="a475a4d344ff91c755eb4624755b2f589"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a475a4d344ff91c755eb4624755b2f589">&#9670;&#160;</a></span>IsReady()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::app::details::TrackedFuture::IsReady </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if the future is ready, caching the result. </p>
+<p>Only makes a syscall if not already marked ready. </p><dl class="section return"><dt>Returns</dt><dd>True if the future has completed </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2app_8hpp-example.html#a3">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/app.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="app_8hpp_source.html#l00064">64</a> of file <a class="el" href="app_8hpp_source.html">app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   64</span>                                        {</div>
+<div class="line"><span class="lineno">   65</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="structhelios_1_1app_1_1details_1_1TrackedFuture.html#a9d5eeb6b6246ec0e73d37b8c12e93900">ready</a>) {</div>
+<div class="line"><span class="lineno">   66</span>      <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">   67</span>    }</div>
+<div class="line"><span class="lineno">   68</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="structhelios_1_1app_1_1details_1_1TrackedFuture.html#a94f7808c463896c7c795b7096e55879d">future</a>.valid() &amp;&amp; <a class="code hl_variable" href="structhelios_1_1app_1_1details_1_1TrackedFuture.html#a94f7808c463896c7c795b7096e55879d">future</a>.wait_for(std::chrono::seconds(0)) == std::future_status::ready) {</div>
+<div class="line"><span class="lineno">   69</span>      <a class="code hl_variable" href="structhelios_1_1app_1_1details_1_1TrackedFuture.html#a9d5eeb6b6246ec0e73d37b8c12e93900">ready</a> = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">   70</span>      <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">   71</span>    }</div>
+<div class="line"><span class="lineno">   72</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">   73</span>  }</div>
+<div class="ttc" id="astructhelios_1_1app_1_1details_1_1TrackedFuture_html_a94f7808c463896c7c795b7096e55879d"><div class="ttname"><a href="structhelios_1_1app_1_1details_1_1TrackedFuture.html#a94f7808c463896c7c795b7096e55879d">helios::app::details::TrackedFuture::future</a></div><div class="ttdeci">std::shared_future&lt; void &gt; future</div><div class="ttdoc">The underlying future.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00046">app.hpp:46</a></div></div>
+<div class="ttc" id="astructhelios_1_1app_1_1details_1_1TrackedFuture_html_a9d5eeb6b6246ec0e73d37b8c12e93900"><div class="ttname"><a href="structhelios_1_1app_1_1details_1_1TrackedFuture.html#a9d5eeb6b6246ec0e73d37b8c12e93900">helios::app::details::TrackedFuture::ready</a></div><div class="ttdeci">bool ready</div><div class="ttdoc">Cached ready state.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00047">app.hpp:47</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="af665beb4c8b0853cfe488104b1b19552" name="af665beb4c8b0853cfe488104b1b19552"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af665beb4c8b0853cfe488104b1b19552">&#9670;&#160;</a></span>Valid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::app::details::TrackedFuture::Valid </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if the future is valid. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if the underlying future is valid </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2app_8hpp-example.html#a4">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/app.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="app_8hpp_source.html#l00079">79</a> of file <a class="el" href="app_8hpp_source.html">app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   79</span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="structhelios_1_1app_1_1details_1_1TrackedFuture.html#a94f7808c463896c7c795b7096e55879d">future</a>.valid(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a37848dfec632c9746c3fd91a124d286a" name="a37848dfec632c9746c3fd91a124d286a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37848dfec632c9746c3fd91a124d286a">&#9670;&#160;</a></span>Wait()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::app::details::TrackedFuture::Wait </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Waits for the future to complete if not already ready. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2app_8hpp-example.html#a2">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/app.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="app_8hpp_source.html#l00052">52</a> of file <a class="el" href="app_8hpp_source.html">app.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   52</span>              {</div>
+<div class="line"><span class="lineno">   53</span>    <span class="keywordflow">if</span> (!<a class="code hl_variable" href="structhelios_1_1app_1_1details_1_1TrackedFuture.html#a9d5eeb6b6246ec0e73d37b8c12e93900">ready</a> &amp;&amp; <a class="code hl_variable" href="structhelios_1_1app_1_1details_1_1TrackedFuture.html#a94f7808c463896c7c795b7096e55879d">future</a>.valid()) {</div>
+<div class="line"><span class="lineno">   54</span>      <a class="code hl_variable" href="structhelios_1_1app_1_1details_1_1TrackedFuture.html#a94f7808c463896c7c795b7096e55879d">future</a>.wait();</div>
+<div class="line"><span class="lineno">   55</span>      <a class="code hl_variable" href="structhelios_1_1app_1_1details_1_1TrackedFuture.html#a9d5eeb6b6246ec0e73d37b8c12e93900">ready</a> = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">   56</span>    }</div>
+<div class="line"><span class="lineno">   57</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a94f7808c463896c7c795b7096e55879d" name="a94f7808c463896c7c795b7096e55879d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94f7808c463896c7c795b7096e55879d">&#9670;&#160;</a></span>future</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_future&lt;void&gt; helios::app::details::TrackedFuture::future</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The underlying future. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2app_8hpp-example.html#a0">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/app.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="app_8hpp_source.html#l00046">46</a> of file <a class="el" href="app_8hpp_source.html">app.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a9d5eeb6b6246ec0e73d37b8c12e93900" name="a9d5eeb6b6246ec0e73d37b8c12e93900"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d5eeb6b6246ec0e73d37b8c12e93900">&#9670;&#160;</a></span>ready</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::app::details::TrackedFuture::ready = false</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Cached ready state. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2app_8hpp-example.html#a1">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/app.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="app_8hpp_source.html#l00047">47</a> of file <a class="el" href="app_8hpp_source.html">app.hpp</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehelios.html">helios</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1app.html">app</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1app_1_1details.html">details</a></li><li class="navelem"><a class="el" href="structhelios_1_1app_1_1details_1_1TrackedFuture.html">TrackedFuture</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -10,9 +10,8 @@ var searchData=
   ['helios_3a_3adetails_7',['details',['../namespacehelios_1_1details.html',1,'helios']]],
   ['helios_3a_3aecs_8',['ecs',['../namespacehelios_1_1ecs.html',1,'helios']]],
   ['helios_3a_3aecs_3a_3adetails_9',['details',['../namespacehelios_1_1ecs_1_1details.html',1,'helios::ecs']]],
-  ['helios_3a_3aecs_3a_3aevents_10',['events',['../namespacehelios_1_1ecs_1_1events.html',1,'helios::ecs']]],
-  ['helios_3a_3aexample_11',['example',['../namespacehelios_1_1example.html',1,'helios']]],
-  ['helios_3a_3amemory_12',['memory',['../namespacehelios_1_1memory.html',1,'helios']]],
-  ['helios_3a_3autils_13',['utils',['../namespacehelios_1_1utils.html',1,'helios']]],
-  ['helios_3a_3autils_3a_3adetails_14',['details',['../namespacehelios_1_1utils_1_1details.html',1,'helios::utils']]]
+  ['helios_3a_3aexample_10',['example',['../namespacehelios_1_1example.html',1,'helios']]],
+  ['helios_3a_3amemory_11',['memory',['../namespacehelios_1_1memory.html',1,'helios']]],
+  ['helios_3a_3autils_12',['utils',['../namespacehelios_1_1utils.html',1,'helios']]],
+  ['helios_3a_3autils_3a_3adetails_13',['details',['../namespacehelios_1_1utils_1_1details.html',1,'helios::utils']]]
 ];

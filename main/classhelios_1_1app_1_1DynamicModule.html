@@ -1,0 +1,1259 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: helios::app::DynamicModule Class Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classhelios_1_1app_1_1DynamicModule.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classhelios_1_1app_1_1DynamicModule-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">helios::app::DynamicModule Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="dynamic__module_8hpp_source.html">dynamic_module.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:acd8a848e1498248ddae893f783b2a561" id="r_acd8a848e1498248ddae893f783b2a561"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1DynamicModule.html#acd8a848e1498248ddae893f783b2a561">FileTime</a> = std::filesystem::file_time_type</td></tr>
+<tr class="separator:acd8a848e1498248ddae893f783b2a561"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a1cad9faf03f56a8d1ed8aa06742dafbd" id="r_a1cad9faf03f56a8d1ed8aa06742dafbd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1DynamicModule.html#a1cad9faf03f56a8d1ed8aa06742dafbd">DynamicModule</a> ()=default</td></tr>
+<tr class="separator:a1cad9faf03f56a8d1ed8aa06742dafbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a608bccac1e5ea5a0abc5bf27ac197b87" id="r_a608bccac1e5ea5a0abc5bf27ac197b87"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1DynamicModule.html#a608bccac1e5ea5a0abc5bf27ac197b87">DynamicModule</a> (const std::filesystem::path &amp;path, <a class="el" href="structhelios_1_1app_1_1DynamicModuleConfig.html">DynamicModuleConfig</a> config={})</td></tr>
+<tr class="memdesc:a608bccac1e5ea5a0abc5bf27ac197b87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs and loads a module from the specified path.  <br /></td></tr>
+<tr class="separator:a608bccac1e5ea5a0abc5bf27ac197b87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac33cc55dc68736cf50a1f1edc86b79f7" id="r_ac33cc55dc68736cf50a1f1edc86b79f7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1DynamicModule.html#ac33cc55dc68736cf50a1f1edc86b79f7">DynamicModule</a> (const <a class="el" href="classhelios_1_1app_1_1DynamicModule.html">DynamicModule</a> &amp;)=delete</td></tr>
+<tr class="separator:ac33cc55dc68736cf50a1f1edc86b79f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af57134be4f247efcde97ce2e92ea04de" id="r_af57134be4f247efcde97ce2e92ea04de"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1DynamicModule.html#af57134be4f247efcde97ce2e92ea04de">DynamicModule</a> (<a class="el" href="classhelios_1_1app_1_1DynamicModule.html">DynamicModule</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="separator:af57134be4f247efcde97ce2e92ea04de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a833d2e06f7631bb5b42af5d56b03a648" id="r_a833d2e06f7631bb5b42af5d56b03a648"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1DynamicModule.html#a833d2e06f7631bb5b42af5d56b03a648">~DynamicModule</a> () noexcept=default</td></tr>
+<tr class="memdesc:a833d2e06f7631bb5b42af5d56b03a648"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor that destroys the module if loaded.  <br /></td></tr>
+<tr class="separator:a833d2e06f7631bb5b42af5d56b03a648"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a660523b3bfa533b0be45e1fe59fae0d4" id="r_a660523b3bfa533b0be45e1fe59fae0d4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1DynamicModule.html">DynamicModule</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1DynamicModule.html#a660523b3bfa533b0be45e1fe59fae0d4">operator=</a> (const <a class="el" href="classhelios_1_1app_1_1DynamicModule.html">DynamicModule</a> &amp;)=delete</td></tr>
+<tr class="separator:a660523b3bfa533b0be45e1fe59fae0d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8e31026eea4ac95f2246af65dddff1c" id="r_ab8e31026eea4ac95f2246af65dddff1c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1DynamicModule.html">DynamicModule</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1DynamicModule.html#ab8e31026eea4ac95f2246af65dddff1c">operator=</a> (<a class="el" href="classhelios_1_1app_1_1DynamicModule.html">DynamicModule</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="separator:ab8e31026eea4ac95f2246af65dddff1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7baebbcb6dcb4850b8f2d8c94cebb831" id="r_a7baebbcb6dcb4850b8f2d8c94cebb831"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1DynamicModule.html#a7baebbcb6dcb4850b8f2d8c94cebb831">Load</a> (const std::filesystem::path &amp;path, <a class="el" href="structhelios_1_1app_1_1DynamicModuleConfig.html">DynamicModuleConfig</a> config={}) -&gt; std::expected&lt; void, <a class="el" href="namespacehelios_1_1app.html#a000b3ce106f3376b7f30ef1baaebc7b6">DynamicModuleError</a> &gt;</td></tr>
+<tr class="memdesc:a7baebbcb6dcb4850b8f2d8c94cebb831"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads a module from the specified path.  <br /></td></tr>
+<tr class="separator:a7baebbcb6dcb4850b8f2d8c94cebb831"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f5e3b0a3dc7b0c75aef2f9be976f134" id="r_a6f5e3b0a3dc7b0c75aef2f9be976f134"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1DynamicModule.html#a6f5e3b0a3dc7b0c75aef2f9be976f134">Unload</a> () -&gt; std::expected&lt; void, <a class="el" href="namespacehelios_1_1app.html#a000b3ce106f3376b7f30ef1baaebc7b6">DynamicModuleError</a> &gt;</td></tr>
+<tr class="memdesc:a6f5e3b0a3dc7b0c75aef2f9be976f134"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unloads the current module.  <br /></td></tr>
+<tr class="separator:a6f5e3b0a3dc7b0c75aef2f9be976f134"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c5998ffff8e465fae735ed85a9b0471" id="r_a5c5998ffff8e465fae735ed85a9b0471"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1DynamicModule.html#a5c5998ffff8e465fae735ed85a9b0471">Reload</a> (<a class="el" href="classhelios_1_1app_1_1App.html">App</a> &amp;app) -&gt; std::expected&lt; void, <a class="el" href="namespacehelios_1_1app.html#a000b3ce106f3376b7f30ef1baaebc7b6">DynamicModuleError</a> &gt;</td></tr>
+<tr class="memdesc:a5c5998ffff8e465fae735ed85a9b0471"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reloads the module from the same path.  <br /></td></tr>
+<tr class="separator:a5c5998ffff8e465fae735ed85a9b0471"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6be7de7fef8e4ad84f743810f5a2f3b" id="r_ab6be7de7fef8e4ad84f743810f5a2f3b"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1DynamicModule.html#ab6be7de7fef8e4ad84f743810f5a2f3b">ReloadIfChanged</a> (<a class="el" href="classhelios_1_1app_1_1App.html">App</a> &amp;app) -&gt; std::expected&lt; void, <a class="el" href="namespacehelios_1_1app.html#a000b3ce106f3376b7f30ef1baaebc7b6">DynamicModuleError</a> &gt;</td></tr>
+<tr class="memdesc:ab6be7de7fef8e4ad84f743810f5a2f3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reloads the module only if the file has changed.  <br /></td></tr>
+<tr class="separator:ab6be7de7fef8e4ad84f743810f5a2f3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91b8f43f4836a5e8ce825587cd61e4aa" id="r_a91b8f43f4836a5e8ce825587cd61e4aa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1DynamicModule.html#a91b8f43f4836a5e8ce825587cd61e4aa">UpdateFileTime</a> () noexcept</td></tr>
+<tr class="memdesc:a91b8f43f4836a5e8ce825587cd61e4aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the cached file modification time.  <br /></td></tr>
+<tr class="separator:a91b8f43f4836a5e8ce825587cd61e4aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4e95d69caa4986e9bfb324d54291ea2" id="r_aa4e95d69caa4986e9bfb324d54291ea2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1DynamicModule.html#aa4e95d69caa4986e9bfb324d54291ea2">HasFileChanged</a> () const noexcept</td></tr>
+<tr class="memdesc:aa4e95d69caa4986e9bfb324d54291ea2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the library file has been modified since last load.  <br /></td></tr>
+<tr class="separator:aa4e95d69caa4986e9bfb324d54291ea2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84f7fa9eacf7098a27e15e710b671eb2" id="r_a84f7fa9eacf7098a27e15e710b671eb2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1DynamicModule.html#a84f7fa9eacf7098a27e15e710b671eb2">Loaded</a> () const noexcept</td></tr>
+<tr class="memdesc:a84f7fa9eacf7098a27e15e710b671eb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a module is currently loaded.  <br /></td></tr>
+<tr class="separator:a84f7fa9eacf7098a27e15e710b671eb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af46b9b74e23b95d7a01a71eb63699d1b" id="r_af46b9b74e23b95d7a01a71eb63699d1b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1Module.html">Module</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1DynamicModule.html#af46b9b74e23b95d7a01a71eb63699d1b">GetModule</a> () noexcept</td></tr>
+<tr class="memdesc:af46b9b74e23b95d7a01a71eb63699d1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets reference to the loaded module.  <br /></td></tr>
+<tr class="separator:af46b9b74e23b95d7a01a71eb63699d1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae79b4b23bd3b29ba4af043203f854466" id="r_ae79b4b23bd3b29ba4af043203f854466"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classhelios_1_1app_1_1Module.html">Module</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1DynamicModule.html#ae79b4b23bd3b29ba4af043203f854466">GetModule</a> () const noexcept</td></tr>
+<tr class="memdesc:ae79b4b23bd3b29ba4af043203f854466"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets const reference to the loaded module.  <br /></td></tr>
+<tr class="separator:ae79b4b23bd3b29ba4af043203f854466"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0d3cf01cf32fa07bd1807752afb4034" id="r_aa0d3cf01cf32fa07bd1807752afb4034"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1app_1_1Module.html">Module</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1DynamicModule.html#aa0d3cf01cf32fa07bd1807752afb4034">GetModulePtr</a> () noexcept</td></tr>
+<tr class="memdesc:aa0d3cf01cf32fa07bd1807752afb4034"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets pointer to the loaded module.  <br /></td></tr>
+<tr class="separator:aa0d3cf01cf32fa07bd1807752afb4034"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abdc0855bfe00b77feda07b86cde7313f" id="r_abdc0855bfe00b77feda07b86cde7313f"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classhelios_1_1app_1_1Module.html">Module</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1DynamicModule.html#abdc0855bfe00b77feda07b86cde7313f">GetModulePtr</a> () const noexcept</td></tr>
+<tr class="memdesc:abdc0855bfe00b77feda07b86cde7313f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets const pointer to the loaded module.  <br /></td></tr>
+<tr class="separator:abdc0855bfe00b77feda07b86cde7313f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f1dff06bae8c5b5ebe48d040827bb6c" id="r_a9f1dff06bae8c5b5ebe48d040827bb6c"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classhelios_1_1app_1_1Module.html">Module</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1DynamicModule.html#a9f1dff06bae8c5b5ebe48d040827bb6c">ReleaseModule</a> () noexcept</td></tr>
+<tr class="memdesc:a9f1dff06bae8c5b5ebe48d040827bb6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Releases ownership of the module.  <br /></td></tr>
+<tr class="separator:a9f1dff06bae8c5b5ebe48d040827bb6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4d827dad1cdc9b5ce0e85bba543aaa0" id="r_ab4d827dad1cdc9b5ce0e85bba543aaa0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1app.html#a6d04077cb9ea6077a44fdfe33f480ac5">ModuleTypeId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1DynamicModule.html#ab4d827dad1cdc9b5ce0e85bba543aaa0">GetModuleId</a> () const noexcept</td></tr>
+<tr class="memdesc:ab4d827dad1cdc9b5ce0e85bba543aaa0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the module type ID.  <br /></td></tr>
+<tr class="separator:ab4d827dad1cdc9b5ce0e85bba543aaa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4459280cca123e9fc3c32a69b8c19139" id="r_a4459280cca123e9fc3c32a69b8c19139"><td class="memItemLeft" align="right" valign="top">std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1DynamicModule.html#a4459280cca123e9fc3c32a69b8c19139">GetModuleName</a> () const noexcept</td></tr>
+<tr class="memdesc:a4459280cca123e9fc3c32a69b8c19139"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the module name.  <br /></td></tr>
+<tr class="separator:a4459280cca123e9fc3c32a69b8c19139"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a345aa247eafec21771546e0b83b2b96b" id="r_a345aa247eafec21771546e0b83b2b96b"><td class="memItemLeft" align="right" valign="top">const std::filesystem::path &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1DynamicModule.html#a345aa247eafec21771546e0b83b2b96b">Path</a> () const noexcept</td></tr>
+<tr class="memdesc:a345aa247eafec21771546e0b83b2b96b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the path of the loaded library.  <br /></td></tr>
+<tr class="separator:a345aa247eafec21771546e0b83b2b96b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c93f6bac0226b27cf3c41b400921d8e" id="r_a7c93f6bac0226b27cf3c41b400921d8e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1utils_1_1DynamicLibrary.html">helios::utils::DynamicLibrary</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1DynamicModule.html#a7c93f6bac0226b27cf3c41b400921d8e">Library</a> () noexcept</td></tr>
+<tr class="memdesc:a7c93f6bac0226b27cf3c41b400921d8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets reference to the underlying dynamic library.  <br /></td></tr>
+<tr class="separator:a7c93f6bac0226b27cf3c41b400921d8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79075ecda433cefd69e855e53905afb6" id="r_a79075ecda433cefd69e855e53905afb6"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classhelios_1_1utils_1_1DynamicLibrary.html">helios::utils::DynamicLibrary</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1DynamicModule.html#a79075ecda433cefd69e855e53905afb6">Library</a> () const noexcept</td></tr>
+<tr class="memdesc:a79075ecda433cefd69e855e53905afb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets const reference to the underlying dynamic library.  <br /></td></tr>
+<tr class="separator:a79075ecda433cefd69e855e53905afb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7f28134be55fdfa65f0c79129541fd4" id="r_aa7f28134be55fdfa65f0c79129541fd4"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structhelios_1_1app_1_1DynamicModuleConfig.html">DynamicModuleConfig</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1DynamicModule.html#aa7f28134be55fdfa65f0c79129541fd4">Config</a> () const noexcept</td></tr>
+<tr class="memdesc:aa7f28134be55fdfa65f0c79129541fd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the configuration used for this module.  <br /></td></tr>
+<tr class="separator:aa7f28134be55fdfa65f0c79129541fd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="dynamic__module_8hpp_source.html#l00154">154</a> of file <a class="el" href="dynamic__module_8hpp_source.html">dynamic_module.hpp</a>.</p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="acd8a848e1498248ddae893f783b2a561" name="acd8a848e1498248ddae893f783b2a561"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd8a848e1498248ddae893f783b2a561">&#9670;&#160;</a></span>FileTime</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classhelios_1_1app_1_1DynamicModule.html#acd8a848e1498248ddae893f783b2a561">helios::app::DynamicModule::FileTime</a> =  std::filesystem::file_time_type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="dynamic__module_8hpp_source.html#l00156">156</a> of file <a class="el" href="dynamic__module_8hpp_source.html">dynamic_module.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a1cad9faf03f56a8d1ed8aa06742dafbd" name="a1cad9faf03f56a8d1ed8aa06742dafbd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1cad9faf03f56a8d1ed8aa06742dafbd">&#9670;&#160;</a></span>DynamicModule() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::app::DynamicModule::DynamicModule </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a608bccac1e5ea5a0abc5bf27ac197b87" name="a608bccac1e5ea5a0abc5bf27ac197b87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a608bccac1e5ea5a0abc5bf27ac197b87">&#9670;&#160;</a></span>DynamicModule() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::app::DynamicModule::DynamicModule </td>
+          <td>(</td>
+          <td class="paramtype">const std::filesystem::path &amp;&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structhelios_1_1app_1_1DynamicModuleConfig.html">DynamicModuleConfig</a>&#160;</td>
+          <td class="paramname"><em>config</em> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructs and loads a module from the specified path. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>Path to the dynamic library </td></tr>
+    <tr><td class="paramname">config</td><td>Configuration options </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="dynamic__module_8hpp_source.html#l00314">314</a> of file <a class="el" href="dynamic__module_8hpp_source.html">dynamic_module.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  314</span>                                                                                             {</div>
+<div class="line"><span class="lineno">  315</span>  <span class="keyword">auto</span> result = <a class="code hl_function" href="classhelios_1_1app_1_1DynamicModule.html#a7baebbcb6dcb4850b8f2d8c94cebb831">Load</a>(path, config);</div>
+<div class="line"><span class="lineno">  316</span>  <span class="keywordflow">if</span> (!result) {</div>
+<div class="line"><span class="lineno">  317</span>    <a class="code hl_define" href="logger_8hpp.html#a5ee2b388c5e1155f8aa9f680e3b8cf3b">HELIOS_ERROR</a>(<span class="stringliteral">&quot;Failed to load dynamic module &#39;{}&#39;: {}&quot;</span>, path.string(), <a class="code hl_function" href="namespacehelios_1_1app.html#a22d5ee7fd77b86d5f5a2edd8186ba282">DynamicModuleErrorToString</a>(result.error()));</div>
+<div class="line"><span class="lineno">  318</span>  }</div>
+<div class="line"><span class="lineno">  319</span>}</div>
+<div class="ttc" id="aclasshelios_1_1app_1_1DynamicModule_html_a7baebbcb6dcb4850b8f2d8c94cebb831"><div class="ttname"><a href="classhelios_1_1app_1_1DynamicModule.html#a7baebbcb6dcb4850b8f2d8c94cebb831">helios::app::DynamicModule::Load</a></div><div class="ttdeci">auto Load(const std::filesystem::path &amp;path, DynamicModuleConfig config={}) -&gt; std::expected&lt; void, DynamicModuleError &gt;</div><div class="ttdoc">Loads a module from the specified path.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__module_8hpp_source.html#l00346">dynamic_module.hpp:346</a></div></div>
+<div class="ttc" id="alogger_8hpp_html_a5ee2b388c5e1155f8aa9f680e3b8cf3b"><div class="ttname"><a href="logger_8hpp.html#a5ee2b388c5e1155f8aa9f680e3b8cf3b">HELIOS_ERROR</a></div><div class="ttdeci">#define HELIOS_ERROR(...)</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00689">logger.hpp:689</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1app_html_a22d5ee7fd77b86d5f5a2edd8186ba282"><div class="ttname"><a href="namespacehelios_1_1app.html#a22d5ee7fd77b86d5f5a2edd8186ba282">helios::app::DynamicModuleErrorToString</a></div><div class="ttdeci">constexpr std::string_view DynamicModuleErrorToString(DynamicModuleError error) noexcept</div><div class="ttdoc">Gets a human-readable description for a DynamicModuleError.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__module_8hpp_source.html#l00077">dynamic_module.hpp:77</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ac33cc55dc68736cf50a1f1edc86b79f7" name="ac33cc55dc68736cf50a1f1edc86b79f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac33cc55dc68736cf50a1f1edc86b79f7">&#9670;&#160;</a></span>DynamicModule() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::app::DynamicModule::DynamicModule </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1app_1_1DynamicModule.html">DynamicModule</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af57134be4f247efcde97ce2e92ea04de" name="af57134be4f247efcde97ce2e92ea04de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af57134be4f247efcde97ce2e92ea04de">&#9670;&#160;</a></span>DynamicModule() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::app::DynamicModule::DynamicModule </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1DynamicModule.html">DynamicModule</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="dynamic__module_8hpp_source.html#l00321">321</a> of file <a class="el" href="dynamic__module_8hpp_source.html">dynamic_module.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  322</span>    : library_(std::move(other.library_)),</div>
+<div class="line"><span class="lineno">  323</span>      module_(std::move(other.module_)),</div>
+<div class="line"><span class="lineno">  324</span>      module_id_(other.module_id_),</div>
+<div class="line"><span class="lineno">  325</span>      module_name_(std::move(other.module_name_)),</div>
+<div class="line"><span class="lineno">  326</span>      config_(other.config_),</div>
+<div class="line"><span class="lineno">  327</span>      last_write_time_(other.last_write_time_) {</div>
+<div class="line"><span class="lineno">  328</span>  other.module_id_ = 0;</div>
+<div class="line"><span class="lineno">  329</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a833d2e06f7631bb5b42af5d56b03a648" name="a833d2e06f7631bb5b42af5d56b03a648"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a833d2e06f7631bb5b42af5d56b03a648">&#9670;&#160;</a></span>~DynamicModule()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">helios::app::DynamicModule::~DynamicModule </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor that destroys the module if loaded. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aa7f28134be55fdfa65f0c79129541fd4" name="aa7f28134be55fdfa65f0c79129541fd4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7f28134be55fdfa65f0c79129541fd4">&#9670;&#160;</a></span>Config()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structhelios_1_1app_1_1DynamicModuleConfig.html">DynamicModuleConfig</a> &amp; helios::app::DynamicModule::Config </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the configuration used for this module. </p>
+<dl class="section return"><dt>Returns</dt><dd>Configuration struct </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="dynamic__module_8hpp_source.html#l00295">295</a> of file <a class="el" href="dynamic__module_8hpp_source.html">dynamic_module.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  295</span>{ <span class="keywordflow">return</span> config_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ae79b4b23bd3b29ba4af043203f854466" name="ae79b4b23bd3b29ba4af043203f854466"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae79b4b23bd3b29ba4af043203f854466">&#9670;&#160;</a></span>GetModule() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classhelios_1_1app_1_1Module.html">Module</a> &amp; helios::app::DynamicModule::GetModule </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets const reference to the loaded module. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if module is not loaded. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Const reference to the module </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="dynamic__module_8hpp_source.html#l00471">471</a> of file <a class="el" href="dynamic__module_8hpp_source.html">dynamic_module.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  471</span>                                                             {</div>
+<div class="line"><span class="lineno">  472</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1app_1_1DynamicModule.html#a84f7fa9eacf7098a27e15e710b671eb2">Loaded</a>(), <span class="stringliteral">&quot;Failed to get module: Module is not loaded!&quot;</span>);</div>
+<div class="line"><span class="lineno">  473</span>  <span class="keywordflow">return</span> *module_;</div>
+<div class="line"><span class="lineno">  474</span>}</div>
+<div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00140">assert.hpp:140</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1DynamicModule_html_a84f7fa9eacf7098a27e15e710b671eb2"><div class="ttname"><a href="classhelios_1_1app_1_1DynamicModule.html#a84f7fa9eacf7098a27e15e710b671eb2">helios::app::DynamicModule::Loaded</a></div><div class="ttdeci">bool Loaded() const noexcept</div><div class="ttdoc">Checks if a module is currently loaded.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__module_8hpp_source.html#l00225">dynamic_module.hpp:225</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="af46b9b74e23b95d7a01a71eb63699d1b" name="af46b9b74e23b95d7a01a71eb63699d1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af46b9b74e23b95d7a01a71eb63699d1b">&#9670;&#160;</a></span>GetModule() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1Module.html">Module</a> &amp; helios::app::DynamicModule::GetModule </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets reference to the loaded module. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if module is not loaded. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to the module </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="dynamic__module_8hpp_source.html#l00466">466</a> of file <a class="el" href="dynamic__module_8hpp_source.html">dynamic_module.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  466</span>                                                 {</div>
+<div class="line"><span class="lineno">  467</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_function" href="classhelios_1_1app_1_1DynamicModule.html#a84f7fa9eacf7098a27e15e710b671eb2">Loaded</a>(), <span class="stringliteral">&quot;Failed to get module: Module is not loaded!&quot;</span>);</div>
+<div class="line"><span class="lineno">  468</span>  <span class="keywordflow">return</span> *module_;</div>
+<div class="line"><span class="lineno">  469</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ab4d827dad1cdc9b5ce0e85bba543aaa0" name="ab4d827dad1cdc9b5ce0e85bba543aaa0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4d827dad1cdc9b5ce0e85bba543aaa0">&#9670;&#160;</a></span>GetModuleId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1app.html#a6d04077cb9ea6077a44fdfe33f480ac5">ModuleTypeId</a> helios::app::DynamicModule::GetModuleId </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the module type ID. </p>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1app_1_1Module.html" title="Base class for all modules.">Module</a> type ID, or 0 if not loaded </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="dynamic__module_8hpp_source.html#l00265">265</a> of file <a class="el" href="dynamic__module_8hpp_source.html">dynamic_module.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  265</span>{ <span class="keywordflow">return</span> module_id_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a4459280cca123e9fc3c32a69b8c19139" name="a4459280cca123e9fc3c32a69b8c19139"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4459280cca123e9fc3c32a69b8c19139">&#9670;&#160;</a></span>GetModuleName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string_view helios::app::DynamicModule::GetModuleName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the module name. </p>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1app_1_1Module.html" title="Base class for all modules.">Module</a> name, or empty string if not loaded </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="dynamic__module_8hpp_source.html#l00271">271</a> of file <a class="el" href="dynamic__module_8hpp_source.html">dynamic_module.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  271</span>{ <span class="keywordflow">return</span> module_name_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="abdc0855bfe00b77feda07b86cde7313f" name="abdc0855bfe00b77feda07b86cde7313f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abdc0855bfe00b77feda07b86cde7313f">&#9670;&#160;</a></span>GetModulePtr() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classhelios_1_1app_1_1Module.html">Module</a> * helios::app::DynamicModule::GetModulePtr </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets const pointer to the loaded module. </p>
+<dl class="section return"><dt>Returns</dt><dd>Const pointer to module, or nullptr if not loaded </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="dynamic__module_8hpp_source.html#l00251">251</a> of file <a class="el" href="dynamic__module_8hpp_source.html">dynamic_module.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  251</span>{ <span class="keywordflow">return</span> module_.get(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aa0d3cf01cf32fa07bd1807752afb4034" name="aa0d3cf01cf32fa07bd1807752afb4034"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0d3cf01cf32fa07bd1807752afb4034">&#9670;&#160;</a></span>GetModulePtr() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1Module.html">Module</a> * helios::app::DynamicModule::GetModulePtr </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets pointer to the loaded module. </p>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to module, or nullptr if not loaded </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="dynamic__module_8hpp_source.html#l00245">245</a> of file <a class="el" href="dynamic__module_8hpp_source.html">dynamic_module.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  245</span>{ <span class="keywordflow">return</span> module_.get(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aa4e95d69caa4986e9bfb324d54291ea2" name="aa4e95d69caa4986e9bfb324d54291ea2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4e95d69caa4986e9bfb324d54291ea2">&#9670;&#160;</a></span>HasFileChanged()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::app::DynamicModule::HasFileChanged </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if the library file has been modified since last load. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if the file modification time has changed </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="dynamic__module_8hpp_source.html#l00452">452</a> of file <a class="el" href="dynamic__module_8hpp_source.html">dynamic_module.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  452</span>                                                         {</div>
+<div class="line"><span class="lineno">  453</span>  <span class="keywordflow">if</span> (!library_.<a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#a288d4be41c78e85c62093a5e77c39040">Loaded</a>()) {</div>
+<div class="line"><span class="lineno">  454</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  455</span>  }</div>
+<div class="line"><span class="lineno">  456</span> </div>
+<div class="line"><span class="lineno">  457</span>  std::error_code ec;</div>
+<div class="line"><span class="lineno">  458</span>  <span class="keyword">auto</span> current_time = std::filesystem::last_write_time(library_.<a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#adac397318002d901ea095b877cd08824">Path</a>(), ec);</div>
+<div class="line"><span class="lineno">  459</span>  <span class="keywordflow">if</span> (ec) {</div>
+<div class="line"><span class="lineno">  460</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  461</span>  }</div>
+<div class="line"><span class="lineno">  462</span> </div>
+<div class="line"><span class="lineno">  463</span>  <span class="keywordflow">return</span> current_time != last_write_time_;</div>
+<div class="line"><span class="lineno">  464</span>}</div>
+<div class="ttc" id="aclasshelios_1_1utils_1_1DynamicLibrary_html_a288d4be41c78e85c62093a5e77c39040"><div class="ttname"><a href="classhelios_1_1utils_1_1DynamicLibrary.html#a288d4be41c78e85c62093a5e77c39040">helios::utils::DynamicLibrary::Loaded</a></div><div class="ttdeci">bool Loaded() const noexcept</div><div class="ttdoc">Checks if a library is currently loaded.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__library_8hpp_source.html#l00142">dynamic_library.hpp:142</a></div></div>
+<div class="ttc" id="aclasshelios_1_1utils_1_1DynamicLibrary_html_adac397318002d901ea095b877cd08824"><div class="ttname"><a href="classhelios_1_1utils_1_1DynamicLibrary.html#adac397318002d901ea095b877cd08824">helios::utils::DynamicLibrary::Path</a></div><div class="ttdeci">const std::filesystem::path &amp; Path() const noexcept</div><div class="ttdoc">Gets the path of the loaded library.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__library_8hpp_source.html#l00148">dynamic_library.hpp:148</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a79075ecda433cefd69e855e53905afb6" name="a79075ecda433cefd69e855e53905afb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79075ecda433cefd69e855e53905afb6">&#9670;&#160;</a></span>Library() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classhelios_1_1utils_1_1DynamicLibrary.html">helios::utils::DynamicLibrary</a> &amp; helios::app::DynamicModule::Library </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets const reference to the underlying dynamic library. </p>
+<dl class="section return"><dt>Returns</dt><dd>Const reference to <a class="el" href="classhelios_1_1utils_1_1DynamicLibrary.html">helios::utils::DynamicLibrary</a> </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="dynamic__module_8hpp_source.html#l00289">289</a> of file <a class="el" href="dynamic__module_8hpp_source.html">dynamic_module.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  289</span>{ <span class="keywordflow">return</span> library_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a7c93f6bac0226b27cf3c41b400921d8e" name="a7c93f6bac0226b27cf3c41b400921d8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c93f6bac0226b27cf3c41b400921d8e">&#9670;&#160;</a></span>Library() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1utils_1_1DynamicLibrary.html">helios::utils::DynamicLibrary</a> &amp; helios::app::DynamicModule::Library </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets reference to the underlying dynamic library. </p>
+<dl class="section return"><dt>Returns</dt><dd>Reference to <a class="el" href="classhelios_1_1utils_1_1DynamicLibrary.html">helios::utils::DynamicLibrary</a> </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="dynamic__module_8hpp_source.html#l00283">283</a> of file <a class="el" href="dynamic__module_8hpp_source.html">dynamic_module.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  283</span>{ <span class="keywordflow">return</span> library_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a7baebbcb6dcb4850b8f2d8c94cebb831" name="a7baebbcb6dcb4850b8f2d8c94cebb831"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7baebbcb6dcb4850b8f2d8c94cebb831">&#9670;&#160;</a></span>Load()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::app::DynamicModule::Load </td>
+          <td>(</td>
+          <td class="paramtype">const std::filesystem::path &amp;&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structhelios_1_1app_1_1DynamicModuleConfig.html">DynamicModuleConfig</a>&#160;</td>
+          <td class="paramname"><em>config</em> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> -&gt; std::expected&lt;void, <a class="el" href="namespacehelios_1_1app.html#a000b3ce106f3376b7f30ef1baaebc7b6">DynamicModuleError</a>&gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Loads a module from the specified path. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>Path to the dynamic library </td></tr>
+    <tr><td class="paramname">config</td><td>Configuration options </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Expected with void on success, or error on failure </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="dynamic__module_8hpp_source.html#l00346">346</a> of file <a class="el" href="dynamic__module_8hpp_source.html">dynamic_module.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  347</span>                                             {</div>
+<div class="line"><span class="lineno">  348</span>  config_ = config;</div>
+<div class="line"><span class="lineno">  349</span> </div>
+<div class="line"><span class="lineno">  350</span>  <span class="comment">// Load the library</span></div>
+<div class="line"><span class="lineno">  351</span>  <span class="keyword">const</span> <span class="keyword">auto</span> load_result = library_.<a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#ac1ca51a6830a4159681abbe401bfe49a">Load</a>(path);</div>
+<div class="line"><span class="lineno">  352</span>  <span class="keywordflow">if</span> (!load_result) {</div>
+<div class="line"><span class="lineno">  353</span>    <span class="keywordflow">return</span> std::unexpected(<a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a000b3ce106f3376b7f30ef1baaebc7b6a62ab29fe5f81a99390f031bad9889df5">DynamicModuleError::LibraryLoadFailed</a>);</div>
+<div class="line"><span class="lineno">  354</span>  }</div>
+<div class="line"><span class="lineno">  355</span> </div>
+<div class="line"><span class="lineno">  356</span>  <span class="comment">// Load module symbols and create instance</span></div>
+<div class="line"><span class="lineno">  357</span>  <span class="keyword">auto</span> module_result = LoadModuleInstance();</div>
+<div class="line"><span class="lineno">  358</span>  <span class="keywordflow">if</span> (!module_result) {</div>
+<div class="line"><span class="lineno">  359</span>    [[maybe_unused]] <span class="keyword">auto</span> _ = library_.<a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#acc94af44554c3c2e1c3c497e23a463a7">Unload</a>();</div>
+<div class="line"><span class="lineno">  360</span>    <span class="keywordflow">return</span> module_result;</div>
+<div class="line"><span class="lineno">  361</span>  }</div>
+<div class="line"><span class="lineno">  362</span> </div>
+<div class="line"><span class="lineno">  363</span>  <span class="comment">// Cache the file modification time</span></div>
+<div class="line"><span class="lineno">  364</span>  <a class="code hl_function" href="classhelios_1_1app_1_1DynamicModule.html#a91b8f43f4836a5e8ce825587cd61e4aa">UpdateFileTime</a>();</div>
+<div class="line"><span class="lineno">  365</span> </div>
+<div class="line"><span class="lineno">  366</span>  <a class="code hl_define" href="logger_8hpp.html#aed26636d1bb7300df2a5f8522a93b0d6">HELIOS_INFO</a>(<span class="stringliteral">&quot;Loaded dynamic module &#39;{}&#39; from: {}&quot;</span>, module_name_, path.string());</div>
+<div class="line"><span class="lineno">  367</span>  <span class="keywordflow">return</span> {};</div>
+<div class="line"><span class="lineno">  368</span>}</div>
+<div class="ttc" id="aclasshelios_1_1app_1_1DynamicModule_html_a91b8f43f4836a5e8ce825587cd61e4aa"><div class="ttname"><a href="classhelios_1_1app_1_1DynamicModule.html#a91b8f43f4836a5e8ce825587cd61e4aa">helios::app::DynamicModule::UpdateFileTime</a></div><div class="ttdeci">void UpdateFileTime() noexcept</div><div class="ttdoc">Updates the cached file modification time.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__module_8hpp_source.html#l00443">dynamic_module.hpp:443</a></div></div>
+<div class="ttc" id="aclasshelios_1_1utils_1_1DynamicLibrary_html_ac1ca51a6830a4159681abbe401bfe49a"><div class="ttname"><a href="classhelios_1_1utils_1_1DynamicLibrary.html#ac1ca51a6830a4159681abbe401bfe49a">helios::utils::DynamicLibrary::Load</a></div><div class="ttdeci">auto Load(const std::filesystem::path &amp;path) -&gt; std::expected&lt; void, DynamicLibraryError &gt;</div><div class="ttdoc">Loads a dynamic library from the specified path.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__library_8cpp_source.html#l00026">dynamic_library.cpp:26</a></div></div>
+<div class="ttc" id="aclasshelios_1_1utils_1_1DynamicLibrary_html_acc94af44554c3c2e1c3c497e23a463a7"><div class="ttname"><a href="classhelios_1_1utils_1_1DynamicLibrary.html#acc94af44554c3c2e1c3c497e23a463a7">helios::utils::DynamicLibrary::Unload</a></div><div class="ttdeci">auto Unload() -&gt; std::expected&lt; void, DynamicLibraryError &gt;</div><div class="ttdoc">Unloads the currently loaded library.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__library_8cpp_source.html#l00052">dynamic_library.cpp:52</a></div></div>
+<div class="ttc" id="alogger_8hpp_html_aed26636d1bb7300df2a5f8522a93b0d6"><div class="ttname"><a href="logger_8hpp.html#aed26636d1bb7300df2a5f8522a93b0d6">HELIOS_INFO</a></div><div class="ttdeci">#define HELIOS_INFO(...)</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00685">logger.hpp:685</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1app_html_a000b3ce106f3376b7f30ef1baaebc7b6a62ab29fe5f81a99390f031bad9889df5"><div class="ttname"><a href="namespacehelios_1_1app.html#a000b3ce106f3376b7f30ef1baaebc7b6a62ab29fe5f81a99390f031bad9889df5">helios::app::DynamicModuleError::LibraryLoadFailed</a></div><div class="ttdeci">@ LibraryLoadFailed</div><div class="ttdoc">Failed to load the dynamic library.</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a84f7fa9eacf7098a27e15e710b671eb2" name="a84f7fa9eacf7098a27e15e710b671eb2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84f7fa9eacf7098a27e15e710b671eb2">&#9670;&#160;</a></span>Loaded()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::app::DynamicModule::Loaded </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if a module is currently loaded. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if a module is loaded </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="dynamic__module_8hpp_source.html#l00225">225</a> of file <a class="el" href="dynamic__module_8hpp_source.html">dynamic_module.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  225</span>{ <span class="keywordflow">return</span> module_ != <span class="keyword">nullptr</span> &amp;&amp; library_.<a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#a288d4be41c78e85c62093a5e77c39040">Loaded</a>(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a660523b3bfa533b0be45e1fe59fae0d4" name="a660523b3bfa533b0be45e1fe59fae0d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a660523b3bfa533b0be45e1fe59fae0d4">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1DynamicModule.html">DynamicModule</a> &amp; helios::app::DynamicModule::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1app_1_1DynamicModule.html">DynamicModule</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab8e31026eea4ac95f2246af65dddff1c" name="ab8e31026eea4ac95f2246af65dddff1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8e31026eea4ac95f2246af65dddff1c">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1app_1_1DynamicModule.html">DynamicModule</a> &amp; helios::app::DynamicModule::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1DynamicModule.html">DynamicModule</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="dynamic__module_8hpp_source.html#l00331">331</a> of file <a class="el" href="dynamic__module_8hpp_source.html">dynamic_module.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  331</span>                                                                             {</div>
+<div class="line"><span class="lineno">  332</span>  <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;other) {</div>
+<div class="line"><span class="lineno">  333</span>    module_.reset();</div>
+<div class="line"><span class="lineno">  334</span>    library_ = std::move(other.library_);</div>
+<div class="line"><span class="lineno">  335</span>    module_ = std::move(other.module_);</div>
+<div class="line"><span class="lineno">  336</span>    module_id_ = other.module_id_;</div>
+<div class="line"><span class="lineno">  337</span>    module_name_ = std::move(other.module_name_);</div>
+<div class="line"><span class="lineno">  338</span>    config_ = other.config_;</div>
+<div class="line"><span class="lineno">  339</span>    last_write_time_ = other.last_write_time_;</div>
+<div class="line"><span class="lineno">  340</span> </div>
+<div class="line"><span class="lineno">  341</span>    other.module_id_ = 0;</div>
+<div class="line"><span class="lineno">  342</span>  }</div>
+<div class="line"><span class="lineno">  343</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><span class="lineno">  344</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a345aa247eafec21771546e0b83b2b96b" name="a345aa247eafec21771546e0b83b2b96b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a345aa247eafec21771546e0b83b2b96b">&#9670;&#160;</a></span>Path()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::filesystem::path &amp; helios::app::DynamicModule::Path </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the path of the loaded library. </p>
+<dl class="section return"><dt>Returns</dt><dd>Path to the library, or empty if not loaded </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="dynamic__module_8hpp_source.html#l00277">277</a> of file <a class="el" href="dynamic__module_8hpp_source.html">dynamic_module.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  277</span>{ <span class="keywordflow">return</span> library_.<a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#adac397318002d901ea095b877cd08824">Path</a>(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a9f1dff06bae8c5b5ebe48d040827bb6c" name="a9f1dff06bae8c5b5ebe48d040827bb6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f1dff06bae8c5b5ebe48d040827bb6c">&#9670;&#160;</a></span>ReleaseModule()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt; <a class="el" href="classhelios_1_1app_1_1Module.html">Module</a> &gt; helios::app::DynamicModule::ReleaseModule </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Releases ownership of the module. </p>
+<p>After this call, the <a class="el" href="classhelios_1_1app_1_1DynamicModule.html">DynamicModule</a> no longer owns the module. The caller is responsible for the module's lifetime. </p><dl class="section return"><dt>Returns</dt><dd>Unique pointer to the module </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="dynamic__module_8hpp_source.html#l00259">259</a> of file <a class="el" href="dynamic__module_8hpp_source.html">dynamic_module.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  259</span>{ <span class="keywordflow">return</span> std::move(module_); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a5c5998ffff8e465fae735ed85a9b0471" name="a5c5998ffff8e465fae735ed85a9b0471"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c5998ffff8e465fae735ed85a9b0471">&#9670;&#160;</a></span>Reload()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::app::DynamicModule::Reload </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1App.html">App</a> &amp;&#160;</td>
+          <td class="paramname"><em>app</em></td><td>)</td>
+          <td> -&gt; std::expected&lt;void, <a class="el" href="namespacehelios_1_1app.html#a000b3ce106f3376b7f30ef1baaebc7b6">DynamicModuleError</a>&gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reloads the module from the same path. </p>
+<p>Calls Destroy on the old module, unloads the library, loads it again, and calls Build on the new module. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">app</td><td>Reference to the app for Build/Destroy calls </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Expected with void on success, or error on failure </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="dynamic__module_8hpp_source.html#l00388">388</a> of file <a class="el" href="dynamic__module_8hpp_source.html">dynamic_module.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  388</span>                                                                                   {</div>
+<div class="line"><span class="lineno">  389</span>  <span class="keywordflow">if</span> (!<a class="code hl_function" href="classhelios_1_1app_1_1DynamicModule.html#a84f7fa9eacf7098a27e15e710b671eb2">Loaded</a>()) {</div>
+<div class="line"><span class="lineno">  390</span>    <span class="keywordflow">return</span> std::unexpected(<a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a000b3ce106f3376b7f30ef1baaebc7b6a5111e24c1ecc6266ce0de4b4dc42033b">DynamicModuleError::NotLoaded</a>);</div>
+<div class="line"><span class="lineno">  391</span>  }</div>
+<div class="line"><span class="lineno">  392</span> </div>
+<div class="line"><span class="lineno">  393</span>  <span class="comment">// Call Destroy on the old module</span></div>
+<div class="line"><span class="lineno">  394</span>  <a class="code hl_define" href="logger_8hpp.html#aed26636d1bb7300df2a5f8522a93b0d6">HELIOS_INFO</a>(<span class="stringliteral">&quot;Reloading dynamic module &#39;{}&#39;: {}&quot;</span>, module_name_, library_.<a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#adac397318002d901ea095b877cd08824">Path</a>().string());</div>
+<div class="line"><span class="lineno">  395</span>  module_-&gt;Destroy(app);</div>
+<div class="line"><span class="lineno">  396</span> </div>
+<div class="line"><span class="lineno">  397</span>  <span class="comment">// Save the path and config before unloading</span></div>
+<div class="line"><span class="lineno">  398</span>  <span class="keyword">auto</span> saved_path = library_.<a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#adac397318002d901ea095b877cd08824">Path</a>();</div>
+<div class="line"><span class="lineno">  399</span>  <span class="keyword">auto</span> saved_config = config_;</div>
+<div class="line"><span class="lineno">  400</span> </div>
+<div class="line"><span class="lineno">  401</span>  <span class="comment">// Release module and unload library</span></div>
+<div class="line"><span class="lineno">  402</span>  module_.reset();</div>
+<div class="line"><span class="lineno">  403</span>  module_id_ = 0;</div>
+<div class="line"><span class="lineno">  404</span>  module_name_.clear();</div>
+<div class="line"><span class="lineno">  405</span> </div>
+<div class="line"><span class="lineno">  406</span>  <span class="keyword">auto</span> unload_result = library_.<a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#acc94af44554c3c2e1c3c497e23a463a7">Unload</a>();</div>
+<div class="line"><span class="lineno">  407</span>  <span class="keywordflow">if</span> (!unload_result) {</div>
+<div class="line"><span class="lineno">  408</span>    <span class="keywordflow">return</span> std::unexpected(<a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a000b3ce106f3376b7f30ef1baaebc7b6a3b7382b1f22129eb51b5db7507b5f7fc">DynamicModuleError::ReloadFailed</a>);</div>
+<div class="line"><span class="lineno">  409</span>  }</div>
+<div class="line"><span class="lineno">  410</span> </div>
+<div class="line"><span class="lineno">  411</span>  <span class="comment">// Reload the library</span></div>
+<div class="line"><span class="lineno">  412</span>  <span class="keyword">auto</span> load_result = library_.<a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#ac1ca51a6830a4159681abbe401bfe49a">Load</a>(saved_path);</div>
+<div class="line"><span class="lineno">  413</span>  <span class="keywordflow">if</span> (!load_result) {</div>
+<div class="line"><span class="lineno">  414</span>    <span class="keywordflow">return</span> std::unexpected(<a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a000b3ce106f3376b7f30ef1baaebc7b6a3b7382b1f22129eb51b5db7507b5f7fc">DynamicModuleError::ReloadFailed</a>);</div>
+<div class="line"><span class="lineno">  415</span>  }</div>
+<div class="line"><span class="lineno">  416</span> </div>
+<div class="line"><span class="lineno">  417</span>  <span class="comment">// Load module symbols and create new instance</span></div>
+<div class="line"><span class="lineno">  418</span>  config_ = saved_config;</div>
+<div class="line"><span class="lineno">  419</span>  <span class="keyword">auto</span> module_result = LoadModuleInstance();</div>
+<div class="line"><span class="lineno">  420</span>  <span class="keywordflow">if</span> (!module_result) {</div>
+<div class="line"><span class="lineno">  421</span>    [[maybe_unused]] <span class="keyword">auto</span> _ = library_.<a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#acc94af44554c3c2e1c3c497e23a463a7">Unload</a>();</div>
+<div class="line"><span class="lineno">  422</span>    <span class="keywordflow">return</span> std::unexpected(<a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a000b3ce106f3376b7f30ef1baaebc7b6a3b7382b1f22129eb51b5db7507b5f7fc">DynamicModuleError::ReloadFailed</a>);</div>
+<div class="line"><span class="lineno">  423</span>  }</div>
+<div class="line"><span class="lineno">  424</span> </div>
+<div class="line"><span class="lineno">  425</span>  <span class="comment">// Call Build on the new module</span></div>
+<div class="line"><span class="lineno">  426</span>  module_-&gt;Build(app);</div>
+<div class="line"><span class="lineno">  427</span> </div>
+<div class="line"><span class="lineno">  428</span>  <span class="comment">// Update file time</span></div>
+<div class="line"><span class="lineno">  429</span>  <a class="code hl_function" href="classhelios_1_1app_1_1DynamicModule.html#a91b8f43f4836a5e8ce825587cd61e4aa">UpdateFileTime</a>();</div>
+<div class="line"><span class="lineno">  430</span> </div>
+<div class="line"><span class="lineno">  431</span>  <a class="code hl_define" href="logger_8hpp.html#aed26636d1bb7300df2a5f8522a93b0d6">HELIOS_INFO</a>(<span class="stringliteral">&quot;Successfully reloaded dynamic module &#39;{}&#39;: {}&quot;</span>, module_name_, saved_path.string());</div>
+<div class="line"><span class="lineno">  432</span>  <span class="keywordflow">return</span> {};</div>
+<div class="line"><span class="lineno">  433</span>}</div>
+<div class="ttc" id="anamespacehelios_1_1app_html_a000b3ce106f3376b7f30ef1baaebc7b6a3b7382b1f22129eb51b5db7507b5f7fc"><div class="ttname"><a href="namespacehelios_1_1app.html#a000b3ce106f3376b7f30ef1baaebc7b6a3b7382b1f22129eb51b5db7507b5f7fc">helios::app::DynamicModuleError::ReloadFailed</a></div><div class="ttdeci">@ ReloadFailed</div><div class="ttdoc">Failed to reload module.</div></div>
+<div class="ttc" id="anamespacehelios_1_1app_html_a000b3ce106f3376b7f30ef1baaebc7b6a5111e24c1ecc6266ce0de4b4dc42033b"><div class="ttname"><a href="namespacehelios_1_1app.html#a000b3ce106f3376b7f30ef1baaebc7b6a5111e24c1ecc6266ce0de4b4dc42033b">helios::app::DynamicModuleError::NotLoaded</a></div><div class="ttdeci">@ NotLoaded</div><div class="ttdoc">Module is not loaded.</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ab6be7de7fef8e4ad84f743810f5a2f3b" name="ab6be7de7fef8e4ad84f743810f5a2f3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6be7de7fef8e4ad84f743810f5a2f3b">&#9670;&#160;</a></span>ReloadIfChanged()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::app::DynamicModule::ReloadIfChanged </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1App.html">App</a> &amp;&#160;</td>
+          <td class="paramname"><em>app</em></td><td>)</td>
+          <td> -&gt; std::expected&lt;void, <a class="el" href="namespacehelios_1_1app.html#a000b3ce106f3376b7f30ef1baaebc7b6">DynamicModuleError</a>&gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reloads the module only if the file has changed. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">app</td><td>Reference to the app for Build/Destroy calls </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Expected with void on success, FileNotChanged if not modified, or error on failure </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="dynamic__module_8hpp_source.html#l00435">435</a> of file <a class="el" href="dynamic__module_8hpp_source.html">dynamic_module.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  435</span>                                                                                            {</div>
+<div class="line"><span class="lineno">  436</span>  <span class="keywordflow">if</span> (!<a class="code hl_function" href="classhelios_1_1app_1_1DynamicModule.html#aa4e95d69caa4986e9bfb324d54291ea2">HasFileChanged</a>()) {</div>
+<div class="line"><span class="lineno">  437</span>    <span class="keywordflow">return</span> std::unexpected(<a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a000b3ce106f3376b7f30ef1baaebc7b6a33374bc36ad000cf69abe6cc8c088479">DynamicModuleError::FileNotChanged</a>);</div>
+<div class="line"><span class="lineno">  438</span>  }</div>
+<div class="line"><span class="lineno">  439</span> </div>
+<div class="line"><span class="lineno">  440</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="classhelios_1_1app_1_1DynamicModule.html#a5c5998ffff8e465fae735ed85a9b0471">Reload</a>(app);</div>
+<div class="line"><span class="lineno">  441</span>}</div>
+<div class="ttc" id="aclasshelios_1_1app_1_1DynamicModule_html_a5c5998ffff8e465fae735ed85a9b0471"><div class="ttname"><a href="classhelios_1_1app_1_1DynamicModule.html#a5c5998ffff8e465fae735ed85a9b0471">helios::app::DynamicModule::Reload</a></div><div class="ttdeci">auto Reload(App &amp;app) -&gt; std::expected&lt; void, DynamicModuleError &gt;</div><div class="ttdoc">Reloads the module from the same path.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__module_8hpp_source.html#l00388">dynamic_module.hpp:388</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1DynamicModule_html_aa4e95d69caa4986e9bfb324d54291ea2"><div class="ttname"><a href="classhelios_1_1app_1_1DynamicModule.html#aa4e95d69caa4986e9bfb324d54291ea2">helios::app::DynamicModule::HasFileChanged</a></div><div class="ttdeci">bool HasFileChanged() const noexcept</div><div class="ttdoc">Checks if the library file has been modified since last load.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__module_8hpp_source.html#l00452">dynamic_module.hpp:452</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1app_html_a000b3ce106f3376b7f30ef1baaebc7b6a33374bc36ad000cf69abe6cc8c088479"><div class="ttname"><a href="namespacehelios_1_1app.html#a000b3ce106f3376b7f30ef1baaebc7b6a33374bc36ad000cf69abe6cc8c088479">helios::app::DynamicModuleError::FileNotChanged</a></div><div class="ttdeci">@ FileNotChanged</div><div class="ttdoc">File has not been modified.</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a6f5e3b0a3dc7b0c75aef2f9be976f134" name="a6f5e3b0a3dc7b0c75aef2f9be976f134"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f5e3b0a3dc7b0c75aef2f9be976f134">&#9670;&#160;</a></span>Unload()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::app::DynamicModule::Unload </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt; std::expected&lt;void, <a class="el" href="namespacehelios_1_1app.html#a000b3ce106f3376b7f30ef1baaebc7b6">DynamicModuleError</a>&gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Unloads the current module. </p>
+<p>Releases the module and unloads the library. </p><dl class="section return"><dt>Returns</dt><dd>Expected with void on success, or error on failure </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="dynamic__module_8hpp_source.html#l00370">370</a> of file <a class="el" href="dynamic__module_8hpp_source.html">dynamic_module.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  370</span>                                                                           {</div>
+<div class="line"><span class="lineno">  371</span>  <span class="keywordflow">if</span> (!<a class="code hl_function" href="classhelios_1_1app_1_1DynamicModule.html#a84f7fa9eacf7098a27e15e710b671eb2">Loaded</a>()) {</div>
+<div class="line"><span class="lineno">  372</span>    <span class="keywordflow">return</span> std::unexpected(<a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a000b3ce106f3376b7f30ef1baaebc7b6a5111e24c1ecc6266ce0de4b4dc42033b">DynamicModuleError::NotLoaded</a>);</div>
+<div class="line"><span class="lineno">  373</span>  }</div>
+<div class="line"><span class="lineno">  374</span> </div>
+<div class="line"><span class="lineno">  375</span>  <span class="comment">// Release module before unloading library</span></div>
+<div class="line"><span class="lineno">  376</span>  module_.reset();</div>
+<div class="line"><span class="lineno">  377</span>  module_id_ = 0;</div>
+<div class="line"><span class="lineno">  378</span>  module_name_.clear();</div>
+<div class="line"><span class="lineno">  379</span> </div>
+<div class="line"><span class="lineno">  380</span>  <span class="keyword">auto</span> unload_result = library_.<a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#acc94af44554c3c2e1c3c497e23a463a7">Unload</a>();</div>
+<div class="line"><span class="lineno">  381</span>  <span class="keywordflow">if</span> (!unload_result) {</div>
+<div class="line"><span class="lineno">  382</span>    <span class="keywordflow">return</span> std::unexpected(<a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a000b3ce106f3376b7f30ef1baaebc7b6a62ab29fe5f81a99390f031bad9889df5">DynamicModuleError::LibraryLoadFailed</a>);</div>
+<div class="line"><span class="lineno">  383</span>  }</div>
+<div class="line"><span class="lineno">  384</span> </div>
+<div class="line"><span class="lineno">  385</span>  <span class="keywordflow">return</span> {};</div>
+<div class="line"><span class="lineno">  386</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a91b8f43f4836a5e8ce825587cd61e4aa" name="a91b8f43f4836a5e8ce825587cd61e4aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91b8f43f4836a5e8ce825587cd61e4aa">&#9670;&#160;</a></span>UpdateFileTime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::app::DynamicModule::UpdateFileTime </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Updates the cached file modification time. </p>
+<p>Call this after detecting a change to reset the tracking. </p>
+
+<p class="definition">Definition at line <a class="el" href="dynamic__module_8hpp_source.html#l00443">443</a> of file <a class="el" href="dynamic__module_8hpp_source.html">dynamic_module.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  443</span>                                                   {</div>
+<div class="line"><span class="lineno">  444</span>  <span class="keywordflow">if</span> (!library_.<a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#a288d4be41c78e85c62093a5e77c39040">Loaded</a>()) {</div>
+<div class="line"><span class="lineno">  445</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  446</span>  }</div>
+<div class="line"><span class="lineno">  447</span> </div>
+<div class="line"><span class="lineno">  448</span>  std::error_code ec;</div>
+<div class="line"><span class="lineno">  449</span>  last_write_time_ = std::filesystem::last_write_time(library_.<a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#adac397318002d901ea095b877cd08824">Path</a>(), ec);</div>
+<div class="line"><span class="lineno">  450</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehelios.html">helios</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1app.html">app</a></li><li class="navelem"><a class="el" href="classhelios_1_1app_1_1DynamicModule.html">DynamicModule</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -33,7 +33,6 @@ var classhelios_1_1ecs_1_1BasicQueryWithEntity =
     [ "operator=", "classhelios_1_1ecs_1_1BasicQueryWithEntity.html#ab26d723c5a1eee65d8b8b629a6c4d0d4", null ],
     [ "operator=", "classhelios_1_1ecs_1_1BasicQueryWithEntity.html#ad6d436187f99bd324f3247fb9a0e8fbb", null ],
     [ "Partition", "classhelios_1_1ecs_1_1BasicQueryWithEntity.html#a7d66edcf99ce30894b39d6fa2d1aea04", null ],
-    [ "Reduce", "classhelios_1_1ecs_1_1BasicQueryWithEntity.html#a0600813b9a1213d699f5150bf0d4cd9e", null ],
     [ "Reverse", "classhelios_1_1ecs_1_1BasicQueryWithEntity.html#a6d903406acd43f87509c6616f2866387", null ],
     [ "Skip", "classhelios_1_1ecs_1_1BasicQueryWithEntity.html#a5436692bf64f7220459a13762aada489", null ],
     [ "SkipWhile", "classhelios_1_1ecs_1_1BasicQueryWithEntity.html#a614ea8b640c4bb923ac4f2085d6dc282", null ],

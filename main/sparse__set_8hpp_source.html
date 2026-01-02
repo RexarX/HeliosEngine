@@ -237,7 +237,7 @@ $(document).ready(function(){initNavTree('sparse__set_8hpp_source.html',''); ini
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">   * @details Creates an empty sparse set.</span></div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">   * Exception safety: No-throw guarantee if T and Allocator are nothrow default constructible.</span></div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment">   */</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="classhelios_1_1container_1_1SparseSet.html#a4be14393449e1f246c157ca342a9cacc">   70</a></span>  <span class="keyword">constexpr</span> <a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a4be14393449e1f246c157ca342a9cacc">SparseSet</a>() noexcept(std::is_nothrow_default_constructible_v&lt;Allocator&gt;) = default;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="classhelios_1_1container_1_1SparseSet.html#a4be14393449e1f246c157ca342a9cacc">   70</a></span>  <span class="keyword">constexpr</span> <a class="code hl_function" href="classhelios_1_1container_1_1SparseSet.html#a4be14393449e1f246c157ca342a9cacc">SparseSet</a>() noexcept(<a class="code hl_namespace" href="namespacestd.html">std</a>::is_nothrow_default_constructible_v&lt;Allocator&gt;) = default;</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment"></span> </div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">  /**</span></div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">   * @brief Constructor with custom allocator.</span></div>
@@ -1009,6 +1009,7 @@ $(document).ready(function(){initNavTree('sparse__set_8hpp_source.html',''); ini
 <div class="ttc" id="alogger_8hpp_html"><div class="ttname"><a href="logger_8hpp.html">logger.hpp</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1container_html"><div class="ttname"><a href="namespacehelios_1_1container.html">helios::container</a></div><div class="ttdef"><b>Definition</b> <a href="sparse__set_8hpp_source.html#l00018">sparse_set.hpp:18</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1container_html_aa371bc350485c37970be3a4bad61d3d0"><div class="ttname"><a href="namespacehelios_1_1container.html#aa371bc350485c37970be3a4bad61d3d0">helios::container::swap</a></div><div class="ttdeci">void swap(SparseSet&lt; T, IndexType, Allocator &gt; &amp;lhs, SparseSet&lt; T, IndexType, Allocator &gt; &amp;rhs) noexcept</div><div class="ttdoc">Swaps two sparse sets.</div><div class="ttdef"><b>Definition</b> <a href="sparse__set_8hpp_source.html#l00698">sparse_set.hpp:698</a></div></div>
+<div class="ttc" id="anamespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div><div class="ttdoc">STL namespace.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->

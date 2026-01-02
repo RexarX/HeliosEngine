@@ -215,7 +215,6 @@ var NAVTREE =
         [ "Functions", "functions_func.html", "functions_func" ],
         [ "Variables", "functions_vars.html", null ],
         [ "Typedefs", "functions_type.html", null ],
-        [ "Enumerations", "functions_enum.html", null ],
         [ "Related Symbols", "functions_rela.html", null ]
       ] ]
     ] ],
@@ -233,28 +232,31 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2access_policy_8hpp-example.html",
-"classhelios_1_1Timer.html#a4fc5c6306c82598e97ba9bed4fe4c29a",
-"classhelios_1_1app_1_1FrameAllocatorResource.html",
-"classhelios_1_1app_1_1SystemContext.html#a2781ca846ccbafe313ff647cb1163a0a",
-"classhelios_1_1async_1_1AsyncTask.html#ad1e866c2cfd950be380cea89360ec3b0",
-"classhelios_1_1async_1_1Task.html#aa4ebfbb594aa24be3588efcb4e94ed15",
-"classhelios_1_1ecs_1_1BasicQuery.html#a6338a2492f95a4c65251f94bb7fc81a2",
-"classhelios_1_1ecs_1_1EntityCmdBuffer.html#a198026038664031f8701e68b94919d5f",
-"classhelios_1_1ecs_1_1System.html#a96d69d2e810535f826147fe9a2805775",
-"classhelios_1_1ecs_1_1details_1_1Archetypes.html#a3b9b3f1e86d3ce5e20f334faf2586abc",
-"classhelios_1_1ecs_1_1details_1_1DestroyEntitiesCmd.html#a2abd26e072639ac870ef6b5c2757a8c5",
-"classhelios_1_1ecs_1_1details_1_1QueryCacheManager.html#a9c1e0a8d3891688bf54abb6ae0e35542",
-"classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#aaea164c77719a037db8d503ad7d274cb",
-"classhelios_1_1memory_1_1FrameAllocator.html#a90a3242100ff38d0fedda80e652a2236",
-"classhelios_1_1memory_1_1StackAllocator.html#a2d919426360ee091a3a0ddd44e02afd9",
-"classhelios_1_1utils_1_1MapAdapter.html#a902bc56c6b4352aaee4e9d5ff954b816",
-"command_8hpp.html",
-"event__storage_8hpp.html",
-"md_src_2core_2README.html",
-"pages.html",
-"structhelios_1_1app_1_1Update.html#adfbb577b418eb1e9ffd51ffac6b2d4b6",
-"structhelios_1_1ecs_1_1details_1_1QueryState.html#a39006d1f6972234e75a1ef098f9705ba"
+"Library-example.html",
+"classhelios_1_1Timer.html",
+"classhelios_1_1app_1_1App.html#ad308effb663540132ceacdba98d3fa3f",
+"classhelios_1_1app_1_1SubApp.html#a9e15c7dc905300f48ee7422061dcc726",
+"classhelios_1_1app_1_1details_1_1Scheduler.html#a132fc6391fd437468ea0af8ac949f27d",
+"classhelios_1_1async_1_1SubTaskGraph.html#a6a6f083993c8d7a891bc87c44e178b1f",
+"classhelios_1_1container_1_1BasicStaticString.html#a4c924e0eaf4d7230f18051f245f1c21c",
+"classhelios_1_1container_1_1SparseSet.html#a7b5c4e92274e0c7e91767777e512c3a7",
+"classhelios_1_1ecs_1_1BasicQueryWithEntity.html#abb8fb6ed4fd85805ad03a663d9cd7fc8",
+"classhelios_1_1ecs_1_1EventReader.html#a8dce10c72ebda782d4131976cd0dca86",
+"classhelios_1_1ecs_1_1details_1_1AddComponentCmd.html#a5bcf51c475e6d5abe79e5cb32fa957cd",
+"classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#a710f5c65fd37d21e54e64eb83a0338b1",
+"classhelios_1_1ecs_1_1details_1_1EventQueue.html#af8eb8855a10cc64dd87df034047217b7",
+"classhelios_1_1ecs_1_1details_1_1ResourceStorage.html#a77f4f85aaefeac7f064ff3c0abe921f5",
+"classhelios_1_1memory_1_1ArenaAllocator.html#a0ae1bb3f11fb623257dab7ad145c3eef",
+"classhelios_1_1memory_1_1NFrameAllocator.html#aecf998c923d0fd7eac5a662aae33262b",
+"classhelios_1_1utils_1_1EnumerateAdapter.html#aa27e5e0b9ca4e1e23c28decc70e4e9a1",
+"classhelios_1_1utils_1_1SkipWhileAdapter.html#a7884b85eef41352e00f6a42425dfd103",
+"concepthelios_1_1ecs_1_1WorldType.html",
+"functions_b.html",
+"namespacehelios.html#a0ec54c8a5c5da6a3de37b457da2729f3",
+"query_8hpp_source.html",
+"structhelios_1_1app_1_1PostUpdate.html#a33cecc1c1213296761a104c0d19eafa2",
+"structhelios_1_1ecs_1_1EntityDestroyedEvent.html",
+"system__set_8hpp.html#a597a95646f0ae2fe9b36c1d97a0dc102"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -1,0 +1,872 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: helios::app::Time Class Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classhelios_1_1app_1_1Time.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="classhelios_1_1app_1_1Time-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">helios::app::Time Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="time_8hpp_source.html">time.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a60eaf338bb93feeffdde81289f6141cc" id="r_a60eaf338bb93feeffdde81289f6141cc"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1Time.html#a60eaf338bb93feeffdde81289f6141cc">ClockType</a> = std::chrono::steady_clock</td></tr>
+<tr class="separator:a60eaf338bb93feeffdde81289f6141cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9f43bb8559f90c47fa319eb11a4dcbb" id="r_aa9f43bb8559f90c47fa319eb11a4dcbb"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1Time.html#aa9f43bb8559f90c47fa319eb11a4dcbb">TimePoint</a> = ClockType::time_point</td></tr>
+<tr class="separator:aa9f43bb8559f90c47fa319eb11a4dcbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c7659cd20f3f6d2dbe5ed2cbaf1a843" id="r_a8c7659cd20f3f6d2dbe5ed2cbaf1a843"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1Time.html#a8c7659cd20f3f6d2dbe5ed2cbaf1a843">Duration</a> = ClockType::duration</td></tr>
+<tr class="separator:a8c7659cd20f3f6d2dbe5ed2cbaf1a843"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a59ad6fb3ae039c438bafdc341df755f4" id="r_a59ad6fb3ae039c438bafdc341df755f4"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1Time.html#a59ad6fb3ae039c438bafdc341df755f4">Time</a> () noexcept=default</td></tr>
+<tr class="memdesc:a59ad6fb3ae039c438bafdc341df755f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <br /></td></tr>
+<tr class="separator:a59ad6fb3ae039c438bafdc341df755f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af05802e7bd2d3ae0ad83c5113d0c8406" id="r_af05802e7bd2d3ae0ad83c5113d0c8406"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1Time.html#af05802e7bd2d3ae0ad83c5113d0c8406">Time</a> (const <a class="el" href="classhelios_1_1app_1_1Time.html">Time</a> &amp;) noexcept=default</td></tr>
+<tr class="separator:af05802e7bd2d3ae0ad83c5113d0c8406"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2718ba5d073a0b71e8ea5fbc63bb8aeb" id="r_a2718ba5d073a0b71e8ea5fbc63bb8aeb"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1Time.html#a2718ba5d073a0b71e8ea5fbc63bb8aeb">Time</a> (<a class="el" href="classhelios_1_1app_1_1Time.html">Time</a> &amp;&amp;) noexcept=default</td></tr>
+<tr class="separator:a2718ba5d073a0b71e8ea5fbc63bb8aeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05b5e0fe80122d0c2c558497bf4a0f47" id="r_a05b5e0fe80122d0c2c558497bf4a0f47"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1Time.html#a05b5e0fe80122d0c2c558497bf4a0f47">~Time</a> () noexcept=default</td></tr>
+<tr class="separator:a05b5e0fe80122d0c2c558497bf4a0f47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa37a18db51cec622a3baef0ce086abac" id="r_aa37a18db51cec622a3baef0ce086abac"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1app_1_1Time.html">Time</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1Time.html#aa37a18db51cec622a3baef0ce086abac">operator=</a> (const <a class="el" href="classhelios_1_1app_1_1Time.html">Time</a> &amp;) noexcept=default</td></tr>
+<tr class="separator:aa37a18db51cec622a3baef0ce086abac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd02bba261f4c347016be1c568387e71" id="r_abd02bba261f4c347016be1c568387e71"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1app_1_1Time.html">Time</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1Time.html#abd02bba261f4c347016be1c568387e71">operator=</a> (<a class="el" href="classhelios_1_1app_1_1Time.html">Time</a> &amp;&amp;) noexcept=default</td></tr>
+<tr class="separator:abd02bba261f4c347016be1c568387e71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78d63a62e67574f37fb92ee1894d1897" id="r_a78d63a62e67574f37fb92ee1894d1897"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1Time.html#a78d63a62e67574f37fb92ee1894d1897">Tick</a> () noexcept</td></tr>
+<tr class="memdesc:a78d63a62e67574f37fb92ee1894d1897"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates timing information for a new frame.  <br /></td></tr>
+<tr class="separator:a78d63a62e67574f37fb92ee1894d1897"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adefd426d1b281eb0719ec5699b832ca1" id="r_adefd426d1b281eb0719ec5699b832ca1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1Time.html#adefd426d1b281eb0719ec5699b832ca1">Reset</a> () noexcept</td></tr>
+<tr class="memdesc:adefd426d1b281eb0719ec5699b832ca1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets all timing information.  <br /></td></tr>
+<tr class="separator:adefd426d1b281eb0719ec5699b832ca1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a168d3a8d3bb8d91dbceb0465a06f6d3b" id="r_a168d3a8d3bb8d91dbceb0465a06f6d3b"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1Time.html#a168d3a8d3bb8d91dbceb0465a06f6d3b">IsFirstFrame</a> () const noexcept</td></tr>
+<tr class="memdesc:a168d3a8d3bb8d91dbceb0465a06f6d3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if this is the first frame.  <br /></td></tr>
+<tr class="separator:a168d3a8d3bb8d91dbceb0465a06f6d3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52177d90153d6d080b41ac1eaff3b6b1" id="r_a52177d90153d6d080b41ac1eaff3b6b1"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1app_1_1Time.html#a8c7659cd20f3f6d2dbe5ed2cbaf1a843">Duration</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1Time.html#a52177d90153d6d080b41ac1eaff3b6b1">Delta</a> () const noexcept</td></tr>
+<tr class="memdesc:a52177d90153d6d080b41ac1eaff3b6b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the raw delta duration.  <br /></td></tr>
+<tr class="separator:a52177d90153d6d080b41ac1eaff3b6b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a349c96f109262058958dd3849623e7a3" id="r_a349c96f109262058958dd3849623e7a3"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1Time.html#a349c96f109262058958dd3849623e7a3">DeltaSeconds</a> () const noexcept</td></tr>
+<tr class="memdesc:a349c96f109262058958dd3849623e7a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the time elapsed since the last frame in seconds.  <br /></td></tr>
+<tr class="separator:a349c96f109262058958dd3849623e7a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a531ab7702d12793a2c0bf5f58292882d" id="r_a531ab7702d12793a2c0bf5f58292882d"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1Time.html#a531ab7702d12793a2c0bf5f58292882d">DeltaMilliseconds</a> () const noexcept</td></tr>
+<tr class="memdesc:a531ab7702d12793a2c0bf5f58292882d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the time elapsed since the last frame in milliseconds.  <br /></td></tr>
+<tr class="separator:a531ab7702d12793a2c0bf5f58292882d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0f7b50d720fab8d2ad1f6f7d24b9f87" id="r_af0f7b50d720fab8d2ad1f6f7d24b9f87"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1app_1_1Time.html#a8c7659cd20f3f6d2dbe5ed2cbaf1a843">Duration</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1Time.html#af0f7b50d720fab8d2ad1f6f7d24b9f87">Elapsed</a> () const noexcept</td></tr>
+<tr class="memdesc:af0f7b50d720fab8d2ad1f6f7d24b9f87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the total elapsed time since timing started.  <br /></td></tr>
+<tr class="separator:af0f7b50d720fab8d2ad1f6f7d24b9f87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f93e630edaffc880b1c6f6ca0939265" id="r_a9f93e630edaffc880b1c6f6ca0939265"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1Time.html#a9f93e630edaffc880b1c6f6ca0939265">ElapsedSeconds</a> () const noexcept</td></tr>
+<tr class="memdesc:a9f93e630edaffc880b1c6f6ca0939265"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the total elapsed time since timing started in seconds.  <br /></td></tr>
+<tr class="separator:a9f93e630edaffc880b1c6f6ca0939265"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b3030c4a3c2d3a8211cf0319685ae30" id="r_a0b3030c4a3c2d3a8211cf0319685ae30"><td class="memItemLeft" align="right" valign="top">constexpr uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1Time.html#a0b3030c4a3c2d3a8211cf0319685ae30">FrameCount</a> () const noexcept</td></tr>
+<tr class="memdesc:a0b3030c4a3c2d3a8211cf0319685ae30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the current frame number.  <br /></td></tr>
+<tr class="separator:a0b3030c4a3c2d3a8211cf0319685ae30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36c371135c519607fb4d30b6585ec665" id="r_a36c371135c519607fb4d30b6585ec665"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1Time.html#a36c371135c519607fb4d30b6585ec665">Fps</a> () const noexcept</td></tr>
+<tr class="memdesc:a36c371135c519607fb4d30b6585ec665"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the current frames per second.  <br /></td></tr>
+<tr class="separator:a36c371135c519607fb4d30b6585ec665"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:ae55cbc2b08b4725150e85d6ed37ea74a" id="r_ae55cbc2b08b4725150e85d6ed37ea74a"><td class="memItemLeft" align="right" valign="top">static constexpr std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1Time.html#ae55cbc2b08b4725150e85d6ed37ea74a">GetName</a> () noexcept</td></tr>
+<tr class="memdesc:ae55cbc2b08b4725150e85d6ed37ea74a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the resource name for trait requirements.  <br /></td></tr>
+<tr class="separator:ae55cbc2b08b4725150e85d6ed37ea74a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="time_8hpp_source.html#l00031">31</a> of file <a class="el" href="time_8hpp_source.html">time.hpp</a>.</p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a60eaf338bb93feeffdde81289f6141cc" name="a60eaf338bb93feeffdde81289f6141cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60eaf338bb93feeffdde81289f6141cc">&#9670;&#160;</a></span>ClockType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classhelios_1_1app_1_1Time.html#a60eaf338bb93feeffdde81289f6141cc">helios::app::Time::ClockType</a> =  std::chrono::steady_clock</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2time_8hpp-example.html#a0">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/time.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="time_8hpp_source.html#l00033">33</a> of file <a class="el" href="time_8hpp_source.html">time.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a8c7659cd20f3f6d2dbe5ed2cbaf1a843" name="a8c7659cd20f3f6d2dbe5ed2cbaf1a843"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c7659cd20f3f6d2dbe5ed2cbaf1a843">&#9670;&#160;</a></span>Duration</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classhelios_1_1app_1_1Time.html#a8c7659cd20f3f6d2dbe5ed2cbaf1a843">helios::app::Time::Duration</a> =  ClockType::duration</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2time_8hpp-example.html#a2">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/time.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="time_8hpp_source.html#l00035">35</a> of file <a class="el" href="time_8hpp_source.html">time.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aa9f43bb8559f90c47fa319eb11a4dcbb" name="aa9f43bb8559f90c47fa319eb11a4dcbb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9f43bb8559f90c47fa319eb11a4dcbb">&#9670;&#160;</a></span>TimePoint</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classhelios_1_1app_1_1Time.html#aa9f43bb8559f90c47fa319eb11a4dcbb">helios::app::Time::TimePoint</a> =  ClockType::time_point</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2time_8hpp-example.html#a1">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/time.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="time_8hpp_source.html#l00034">34</a> of file <a class="el" href="time_8hpp_source.html">time.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a59ad6fb3ae039c438bafdc341df755f4" name="a59ad6fb3ae039c438bafdc341df755f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59ad6fb3ae039c438bafdc341df755f4">&#9670;&#160;</a></span>Time() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr helios::app::Time::Time </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default constructor. </p>
+<p>Initializes time with zero delta and records start time. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2time_8hpp-example.html#a3">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/time.hpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<a id="af05802e7bd2d3ae0ad83c5113d0c8406" name="af05802e7bd2d3ae0ad83c5113d0c8406"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af05802e7bd2d3ae0ad83c5113d0c8406">&#9670;&#160;</a></span>Time() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr helios::app::Time::Time </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1app_1_1Time.html">Time</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2718ba5d073a0b71e8ea5fbc63bb8aeb" name="a2718ba5d073a0b71e8ea5fbc63bb8aeb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2718ba5d073a0b71e8ea5fbc63bb8aeb">&#9670;&#160;</a></span>Time() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr helios::app::Time::Time </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1Time.html">Time</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a05b5e0fe80122d0c2c558497bf4a0f47" name="a05b5e0fe80122d0c2c558497bf4a0f47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05b5e0fe80122d0c2c558497bf4a0f47">&#9670;&#160;</a></span>~Time()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr helios::app::Time::~Time </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2time_8hpp-example.html#a4">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/time.hpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a52177d90153d6d080b41ac1eaff3b6b1" name="a52177d90153d6d080b41ac1eaff3b6b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52177d90153d6d080b41ac1eaff3b6b1">&#9670;&#160;</a></span>Delta()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1app_1_1Time.html#a8c7659cd20f3f6d2dbe5ed2cbaf1a843">Duration</a> helios::app::Time::Delta </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the raw delta duration. </p>
+<dl class="section return"><dt>Returns</dt><dd>Delta time as std::chrono::duration </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2time_8hpp-example.html#a9">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/time.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="time_8hpp_source.html#l00072">72</a> of file <a class="el" href="time_8hpp_source.html">time.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   72</span>{ <span class="keywordflow">return</span> delta_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a531ab7702d12793a2c0bf5f58292882d" name="a531ab7702d12793a2c0bf5f58292882d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a531ab7702d12793a2c0bf5f58292882d">&#9670;&#160;</a></span>DeltaMilliseconds()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr float helios::app::Time::DeltaMilliseconds </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the time elapsed since the last frame in milliseconds. </p>
+<dl class="section return"><dt>Returns</dt><dd>Delta time in milliseconds as float </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2time_8hpp-example.html#a11">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/time.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="time_8hpp_source.html#l00084">84</a> of file <a class="el" href="time_8hpp_source.html">time.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   84</span>{ <span class="keywordflow">return</span> delta_seconds_ * 1000.0F; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a349c96f109262058958dd3849623e7a3" name="a349c96f109262058958dd3849623e7a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a349c96f109262058958dd3849623e7a3">&#9670;&#160;</a></span>DeltaSeconds()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr float helios::app::Time::DeltaSeconds </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the time elapsed since the last frame in seconds. </p>
+<dl class="section return"><dt>Returns</dt><dd>Delta time in seconds as float </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2time_8hpp-example.html#a10">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/time.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="time_8hpp_source.html#l00078">78</a> of file <a class="el" href="time_8hpp_source.html">time.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   78</span>{ <span class="keywordflow">return</span> delta_seconds_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="af0f7b50d720fab8d2ad1f6f7d24b9f87" name="af0f7b50d720fab8d2ad1f6f7d24b9f87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0f7b50d720fab8d2ad1f6f7d24b9f87">&#9670;&#160;</a></span>Elapsed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1app_1_1Time.html#a8c7659cd20f3f6d2dbe5ed2cbaf1a843">Duration</a> helios::app::Time::Elapsed </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the total elapsed time since timing started. </p>
+<dl class="section return"><dt>Returns</dt><dd>Total elapsed time as std::chrono::duration </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2time_8hpp-example.html#a12">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/time.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="time_8hpp_source.html#l00090">90</a> of file <a class="el" href="time_8hpp_source.html">time.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   90</span>{ <span class="keywordflow">return</span> elapsed_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a9f93e630edaffc880b1c6f6ca0939265" name="a9f93e630edaffc880b1c6f6ca0939265"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f93e630edaffc880b1c6f6ca0939265">&#9670;&#160;</a></span>ElapsedSeconds()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr float helios::app::Time::ElapsedSeconds </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the total elapsed time since timing started in seconds. </p>
+<dl class="section return"><dt>Returns</dt><dd>Total elapsed time in seconds as float </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2time_8hpp-example.html#a13">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/time.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="time_8hpp_source.html#l00096">96</a> of file <a class="el" href="time_8hpp_source.html">time.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   96</span>{ <span class="keywordflow">return</span> elapsed_seconds_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a36c371135c519607fb4d30b6585ec665" name="a36c371135c519607fb4d30b6585ec665"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36c371135c519607fb4d30b6585ec665">&#9670;&#160;</a></span>Fps()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr float helios::app::Time::Fps </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculates the current frames per second. </p>
+<p>Based on the current delta time. </p><dl class="section return"><dt>Returns</dt><dd>FPS as float, or 0 if delta is zero </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2time_8hpp-example.html#a15">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/time.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="time_8hpp_source.html#l00110">110</a> of file <a class="el" href="time_8hpp_source.html">time.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  110</span>{ <span class="keywordflow">return</span> delta_seconds_ &gt; 0.0F ? 1.0F / delta_seconds_ : 0.0F; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a0b3030c4a3c2d3a8211cf0319685ae30" name="a0b3030c4a3c2d3a8211cf0319685ae30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b3030c4a3c2d3a8211cf0319685ae30">&#9670;&#160;</a></span>FrameCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint64_t helios::app::Time::FrameCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the current frame number. </p>
+<p>Incremented each time <a class="el" href="classhelios_1_1app_1_1Time.html#a78d63a62e67574f37fb92ee1894d1897" title="Updates timing information for a new frame.">Tick()</a> is called. </p><dl class="section return"><dt>Returns</dt><dd>Current frame count (0-indexed, first frame is 0) </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2time_8hpp-example.html#a14">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/time.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="time_8hpp_source.html#l00103">103</a> of file <a class="el" href="time_8hpp_source.html">time.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  103</span>{ <span class="keywordflow">return</span> frame_count_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ae55cbc2b08b4725150e85d6ed37ea74a" name="ae55cbc2b08b4725150e85d6ed37ea74a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae55cbc2b08b4725150e85d6ed37ea74a">&#9670;&#160;</a></span>GetName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static constexpr std::string_view helios::app::Time::GetName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the resource name for trait requirements. </p>
+<dl class="section return"><dt>Returns</dt><dd>Resource name </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2time_8hpp-example.html#a16">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/time.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="time_8hpp_source.html#l00116">116</a> of file <a class="el" href="time_8hpp_source.html">time.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  116</span>{ <span class="keywordflow">return</span> <span class="stringliteral">&quot;Time&quot;</span>; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a168d3a8d3bb8d91dbceb0465a06f6d3b" name="a168d3a8d3bb8d91dbceb0465a06f6d3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a168d3a8d3bb8d91dbceb0465a06f6d3b">&#9670;&#160;</a></span>IsFirstFrame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool helios::app::Time::IsFirstFrame </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if this is the first frame. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if frame count is 0 </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2time_8hpp-example.html#a8">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/time.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="time_8hpp_source.html#l00066">66</a> of file <a class="el" href="time_8hpp_source.html">time.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   66</span>{ <span class="keywordflow">return</span> frame_count_ == 0; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aa37a18db51cec622a3baef0ce086abac" name="aa37a18db51cec622a3baef0ce086abac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa37a18db51cec622a3baef0ce086abac">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1app_1_1Time.html">Time</a> &amp; helios::app::Time::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1app_1_1Time.html">Time</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2time_8hpp-example.html#a5">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/time.hpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<a id="abd02bba261f4c347016be1c568387e71" name="abd02bba261f4c347016be1c568387e71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd02bba261f4c347016be1c568387e71">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1app_1_1Time.html">Time</a> &amp; helios::app::Time::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1Time.html">Time</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adefd426d1b281eb0719ec5699b832ca1" name="adefd426d1b281eb0719ec5699b832ca1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adefd426d1b281eb0719ec5699b832ca1">&#9670;&#160;</a></span>Reset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::app::Time::Reset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Resets all timing information. </p>
+<p>Sets delta to zero, resets elapsed time, and resets frame count. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2time_8hpp-example.html#a7">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/time.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="time_8hpp_source.html#l00144">144</a> of file <a class="el" href="time_8hpp_source.html">time.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  144</span>                                 {</div>
+<div class="line"><span class="lineno">  145</span>  <span class="keyword">const</span> <a class="code hl_typedef" href="classhelios_1_1app_1_1Time.html#aa9f43bb8559f90c47fa319eb11a4dcbb">TimePoint</a> now = ClockType::now();</div>
+<div class="line"><span class="lineno">  146</span> </div>
+<div class="line"><span class="lineno">  147</span>  last_tick_ = now;</div>
+<div class="line"><span class="lineno">  148</span>  start_time_ = now;</div>
+<div class="line"><span class="lineno">  149</span>  delta_ = Duration::zero();</div>
+<div class="line"><span class="lineno">  150</span>  elapsed_ = Duration::zero();</div>
+<div class="line"><span class="lineno">  151</span>  delta_seconds_ = 0.0F;</div>
+<div class="line"><span class="lineno">  152</span>  elapsed_seconds_ = 0.0F;</div>
+<div class="line"><span class="lineno">  153</span>  frame_count_ = 0;</div>
+<div class="line"><span class="lineno">  154</span>}</div>
+<div class="ttc" id="aclasshelios_1_1app_1_1Time_html_aa9f43bb8559f90c47fa319eb11a4dcbb"><div class="ttname"><a href="classhelios_1_1app_1_1Time.html#aa9f43bb8559f90c47fa319eb11a4dcbb">helios::app::Time::TimePoint</a></div><div class="ttdeci">ClockType::time_point TimePoint</div><div class="ttdef"><b>Definition</b> <a href="time_8hpp_source.html#l00034">time.hpp:34</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a78d63a62e67574f37fb92ee1894d1897" name="a78d63a62e67574f37fb92ee1894d1897"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78d63a62e67574f37fb92ee1894d1897">&#9670;&#160;</a></span>Tick()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::app::Time::Tick </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Updates timing information for a new frame. </p>
+<p>Should be called at the beginning of each frame by the runner. Calculates delta time based on the time since last update. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2time_8hpp-example.html#a6">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/time.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="time_8hpp_source.html#l00131">131</a> of file <a class="el" href="time_8hpp_source.html">time.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  131</span>                                {</div>
+<div class="line"><span class="lineno">  132</span>  <span class="keyword">const</span> <a class="code hl_typedef" href="classhelios_1_1app_1_1Time.html#aa9f43bb8559f90c47fa319eb11a4dcbb">TimePoint</a> now = ClockType::now();</div>
+<div class="line"><span class="lineno">  133</span> </div>
+<div class="line"><span class="lineno">  134</span>  delta_ = now - last_tick_;</div>
+<div class="line"><span class="lineno">  135</span>  elapsed_ = now - start_time_;</div>
+<div class="line"><span class="lineno">  136</span> </div>
+<div class="line"><span class="lineno">  137</span>  delta_seconds_ = std::chrono::duration&lt;float&gt;(delta_).count();</div>
+<div class="line"><span class="lineno">  138</span>  elapsed_seconds_ = std::chrono::duration&lt;float&gt;(elapsed_).count();</div>
+<div class="line"><span class="lineno">  139</span> </div>
+<div class="line"><span class="lineno">  140</span>  last_tick_ = now;</div>
+<div class="line"><span class="lineno">  141</span>  ++frame_count_;</div>
+<div class="line"><span class="lineno">  142</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehelios.html">helios</a></li><li class="navelem"><a class="el" href="namespacehelios_1_1app.html">app</a></li><li class="navelem"><a class="el" href="classhelios_1_1app_1_1Time.html">Time</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

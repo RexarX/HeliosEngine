@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['tasktype_0',['TaskType',['../namespacehelios_1_1async.html#a09f164e8eba5bc20e0d6176fe9804ccd',1,'helios::async']]]
+  ['loglevel_0',['LogLevel',['../namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71',1,'helios']]]
 ];

@@ -191,6 +191,7 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="core__pch_8hpp.html">helios/core_pch.hpp</a>&gt;</span></div>
 <div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="dynamic__module_8hpp.html">helios/core/app/dynamic_module.hpp</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="module_8hpp.html">helios/core/app/module.hpp</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="schedule_8hpp.html">helios/core/app/schedule.hpp</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="sub__app_8hpp.html">helios/core/app/sub_app.hpp</a>&gt;</span></div>
@@ -217,19 +218,64 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="preprocessor">#include &lt;functional&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;future&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;thread&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;utility&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;vector&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1app.html">helios::app</a> {</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">namespace </span>details {</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief Tracked future with ready flag to reduce syscall churn.</span></div>
+<div class="line"><span class="comment"> * @details Wraps a shared_future with a cached ready flag to avoid repeated wait_for(0) calls.</span></div>
+<div class="line"><span class="comment"> * Once marked ready, no further syscalls are made to check status.</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">struct </span>TrackedFuture {</div>
+<div class="line">  std::shared_future&lt;void&gt; <a id="a0" name="a0"></a><a class="code hl_variable" href="structhelios_1_1app_1_1details_1_1TrackedFuture.html#a94f7808c463896c7c795b7096e55879d">future</a>;  <span class="comment">///&lt; The underlying future</span></div>
+<div class="line">  <span class="keywordtype">bool</span> <a id="a1" name="a1"></a><a class="code hl_variable" href="structhelios_1_1app_1_1details_1_1TrackedFuture.html#a9d5eeb6b6246ec0e73d37b8c12e93900">ready</a> = <span class="keyword">false</span>;               <span class="comment">///&lt; Cached ready state</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Waits for the future to complete if not already ready.</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a2" name="a2"></a><a class="code hl_function" href="structhelios_1_1app_1_1details_1_1TrackedFuture.html#a37848dfec632c9746c3fd91a124d286a">Wait</a>() {</div>
+<div class="line">    <span class="keywordflow">if</span> (!<a class="code hl_variable" href="structhelios_1_1app_1_1details_1_1TrackedFuture.html#a9d5eeb6b6246ec0e73d37b8c12e93900">ready</a> &amp;&amp; <a class="code hl_variable" href="structhelios_1_1app_1_1details_1_1TrackedFuture.html#a94f7808c463896c7c795b7096e55879d">future</a>.valid()) {</div>
+<div class="line">      <a class="code hl_variable" href="structhelios_1_1app_1_1details_1_1TrackedFuture.html#a94f7808c463896c7c795b7096e55879d">future</a>.wait();</div>
+<div class="line">      <a class="code hl_variable" href="structhelios_1_1app_1_1details_1_1TrackedFuture.html#a9d5eeb6b6246ec0e73d37b8c12e93900">ready</a> = <span class="keyword">true</span>;</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Checks if the future is ready, caching the result.</span></div>
+<div class="line"><span class="comment">   * @details Only makes a syscall if not already marked ready.</span></div>
+<div class="line"><span class="comment">   * @return True if the future has completed</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">bool</span> <a id="a3" name="a3"></a><a class="code hl_function" href="structhelios_1_1app_1_1details_1_1TrackedFuture.html#a475a4d344ff91c755eb4624755b2f589">IsReady</a>() <span class="keyword">noexcept</span> {</div>
+<div class="line">    <span class="keywordflow">if</span> (<a class="code hl_variable" href="structhelios_1_1app_1_1details_1_1TrackedFuture.html#a9d5eeb6b6246ec0e73d37b8c12e93900">ready</a>) {</div>
+<div class="line">      <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordflow">if</span> (<a class="code hl_variable" href="structhelios_1_1app_1_1details_1_1TrackedFuture.html#a94f7808c463896c7c795b7096e55879d">future</a>.valid() &amp;&amp; <a class="code hl_variable" href="structhelios_1_1app_1_1details_1_1TrackedFuture.html#a94f7808c463896c7c795b7096e55879d">future</a>.wait_for(std::chrono::seconds(0)) == std::future_status::ready) {</div>
+<div class="line">      <a class="code hl_variable" href="structhelios_1_1app_1_1details_1_1TrackedFuture.html#a9d5eeb6b6246ec0e73d37b8c12e93900">ready</a> = <span class="keyword">true</span>;</div>
+<div class="line">      <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Checks if the future is valid.</span></div>
+<div class="line"><span class="comment">   * @return True if the underlying future is valid</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">bool</span> <a id="a4" name="a4"></a><a class="code hl_function" href="structhelios_1_1app_1_1details_1_1TrackedFuture.html#af665beb4c8b0853cfe488104b1b19552">Valid</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> <a class="code hl_variable" href="structhelios_1_1app_1_1details_1_1TrackedFuture.html#a94f7808c463896c7c795b7096e55879d">future</a>.valid(); }</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line">}  <span class="comment">// namespace details</span></div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">/**</span></div>
 <div class="line"><span class="comment"> * @brief Application exit codes.</span></div>
 <div class="line"><span class="comment"> */</span></div>
-<div class="line"><span class="keyword">enum class</span> <a id="a0" name="a0"></a><a class="code hl_enumeration" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916db">AppExitCode</a> : uint8_t {</div>
-<div class="line">  <a id="a1" name="a1"></a><a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dba505a83f220c02df2f85c3810cd9ceb38">Success</a> = 0,  <span class="comment">///&lt; Successful execution</span></div>
-<div class="line">  <a id="a2" name="a2"></a><a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dbae139a585510a502bbf1841cf589f5086">Failure</a> = 1,  <span class="comment">///&lt; General failure</span></div>
+<div class="line"><span class="keyword">enum class</span> <a id="a5" name="a5"></a><a class="code hl_enumeration" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916db">AppExitCode</a> : uint8_t {</div>
+<div class="line">  <a id="a6" name="a6"></a><a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dba505a83f220c02df2f85c3810cd9ceb38">Success</a> = 0,  <span class="comment">///&lt; Successful execution</span></div>
+<div class="line">  <a id="a7" name="a7"></a><a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dbae139a585510a502bbf1841cf589f5086">Failure</a> = 1,  <span class="comment">///&lt; General failure</span></div>
 <div class="line">};</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">/**</span></div>
@@ -240,38 +286,38 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="keyword">class </span>App {</div>
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line"><span class="preprocessor">#ifdef HELIOS_MOVEONLY_FUNCTION_AVALIABLE</span></div>
-<div class="line">  <span class="keyword">using </span><a id="a3" name="a3"></a><a class="code hl_typedef" href="classhelios_1_1app_1_1App.html#aa915dfbe8c5591735eb777f2a685300f">RunnerFn</a> = std::move_only_function&lt;<a class="code hl_enumeration" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916db">AppExitCode</a>(<a id="a4" name="a4"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a8d923e7c2ff8cf675a91961125daf396">App</a>&amp;)&gt;;</div>
-<div class="line">  <span class="keyword">using </span><a id="a5" name="a5"></a><a class="code hl_typedef" href="classhelios_1_1app_1_1App.html#a185f72b974ae60051fbb6ba25e6eeea0">ExtractFn</a> = std::move_only_function&lt;void(<span class="keyword">const</span> ecs::World&amp;, ecs::World&amp;)&gt;;</div>
+<div class="line">  <span class="keyword">using </span><a id="a8" name="a8"></a><a class="code hl_typedef" href="classhelios_1_1app_1_1App.html#aa915dfbe8c5591735eb777f2a685300f">RunnerFn</a> = std::move_only_function&lt;<a class="code hl_enumeration" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916db">AppExitCode</a>(<a id="a9" name="a9"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#aa98948e6a898f7f01715c5b33cd4090d">App</a>&amp;)&gt;;</div>
+<div class="line">  <span class="keyword">using </span><a id="a10" name="a10"></a><a class="code hl_typedef" href="classhelios_1_1app_1_1App.html#a185f72b974ae60051fbb6ba25e6eeea0">ExtractFn</a> = std::move_only_function&lt;void(<span class="keyword">const</span> ecs::World&amp;, ecs::World&amp;)&gt;;</div>
 <div class="line"><span class="preprocessor">#else</span></div>
-<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="classhelios_1_1app_1_1App.html#aa915dfbe8c5591735eb777f2a685300f">RunnerFn</a> = std::function&lt;<a class="code hl_enumeration" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916db">AppExitCode</a>(<a class="code hl_function" href="classhelios_1_1app_1_1App.html#a8d923e7c2ff8cf675a91961125daf396">App</a>&amp;)&gt;;</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="classhelios_1_1app_1_1App.html#aa915dfbe8c5591735eb777f2a685300f">RunnerFn</a> = std::function&lt;<a class="code hl_enumeration" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916db">AppExitCode</a>(<a class="code hl_function" href="classhelios_1_1app_1_1App.html#aa98948e6a898f7f01715c5b33cd4090d">App</a>&amp;)&gt;;</div>
 <div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="classhelios_1_1app_1_1App.html#a185f72b974ae60051fbb6ba25e6eeea0">ExtractFn</a> = std::function&lt;void(<span class="keyword">const</span> ecs::World&amp;, ecs::World&amp;)&gt;;</div>
 <div class="line"><span class="preprocessor">#endif</span></div>
 <div class="line"> </div>
-<div class="line">  <a class="code hl_function" href="classhelios_1_1app_1_1App.html#a8d923e7c2ff8cf675a91961125daf396">App</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line">  <a class="code hl_function" href="classhelios_1_1app_1_1App.html#aa98948e6a898f7f01715c5b33cd4090d">App</a>();</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
 <div class="line"><span class="comment">   * @brief Constructs an App with a specific number of worker threads.</span></div>
 <div class="line"><span class="comment">   * @param worker_thread_count Number of worker threads for the executor</span></div>
 <div class="line"><span class="comment">   */</span></div>
-<div class="line">  <span class="keyword">explicit</span> <a class="code hl_function" href="classhelios_1_1app_1_1App.html#a8d923e7c2ff8cf675a91961125daf396">App</a>(<span class="keywordtype">size_t</span> worker_thread_count) : executor_(worker_thread_count) {}</div>
+<div class="line">  <span class="keyword">explicit</span> <a class="code hl_function" href="classhelios_1_1app_1_1App.html#aa98948e6a898f7f01715c5b33cd4090d">App</a>(<span class="keywordtype">size_t</span> worker_thread_count);</div>
 <div class="line"> </div>
-<div class="line">  <a class="code hl_function" href="classhelios_1_1app_1_1App.html#a8d923e7c2ff8cf675a91961125daf396">App</a>(<span class="keyword">const</span> <a class="code hl_function" href="classhelios_1_1app_1_1App.html#a8d923e7c2ff8cf675a91961125daf396">App</a>&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line">  <a class="code hl_function" href="classhelios_1_1app_1_1App.html#a8d923e7c2ff8cf675a91961125daf396">App</a>(<a class="code hl_function" href="classhelios_1_1app_1_1App.html#a8d923e7c2ff8cf675a91961125daf396">App</a>&amp;&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line">  <a class="code hl_function" href="classhelios_1_1app_1_1App.html#aa98948e6a898f7f01715c5b33cd4090d">App</a>(<span class="keyword">const</span> <a class="code hl_function" href="classhelios_1_1app_1_1App.html#aa98948e6a898f7f01715c5b33cd4090d">App</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line">  <a class="code hl_function" href="classhelios_1_1app_1_1App.html#aa98948e6a898f7f01715c5b33cd4090d">App</a>(<a class="code hl_function" href="classhelios_1_1app_1_1App.html#aa98948e6a898f7f01715c5b33cd4090d">App</a>&amp;&amp;) = <span class="keyword">delete</span>;</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
 <div class="line"><span class="comment">   * @brief Destructor that ensures all async work is completed before destruction.</span></div>
 <div class="line"><span class="comment">   * @details Waits for all overlapping updates and pending executor tasks to complete.</span></div>
 <div class="line"><span class="comment">   */</span></div>
-<div class="line">  <a id="a6" name="a6"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#acf734aa3c7b0408127b3552551df50f4">~App</a>();</div>
+<div class="line">  <a id="a11" name="a11"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#acf734aa3c7b0408127b3552551df50f4">~App</a>();</div>
 <div class="line"> </div>
-<div class="line">  <a class="code hl_function" href="classhelios_1_1app_1_1App.html#a8d923e7c2ff8cf675a91961125daf396">App</a>&amp; <a id="a7" name="a7"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a5562d46b386a2750bb1c6f960b57f20c">operator=</a>(<span class="keyword">const</span> <a class="code hl_function" href="classhelios_1_1app_1_1App.html#a8d923e7c2ff8cf675a91961125daf396">App</a>&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line">  <a class="code hl_function" href="classhelios_1_1app_1_1App.html#a8d923e7c2ff8cf675a91961125daf396">App</a>&amp; <a class="code hl_function" href="classhelios_1_1app_1_1App.html#a5562d46b386a2750bb1c6f960b57f20c">operator=</a>(<a class="code hl_function" href="classhelios_1_1app_1_1App.html#a8d923e7c2ff8cf675a91961125daf396">App</a>&amp;&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line">  <a class="code hl_function" href="classhelios_1_1app_1_1App.html#aa98948e6a898f7f01715c5b33cd4090d">App</a>&amp; <a id="a12" name="a12"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a5562d46b386a2750bb1c6f960b57f20c">operator=</a>(<span class="keyword">const</span> <a class="code hl_function" href="classhelios_1_1app_1_1App.html#aa98948e6a898f7f01715c5b33cd4090d">App</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line">  <a class="code hl_function" href="classhelios_1_1app_1_1App.html#aa98948e6a898f7f01715c5b33cd4090d">App</a>&amp; <a class="code hl_function" href="classhelios_1_1app_1_1App.html#a5562d46b386a2750bb1c6f960b57f20c">operator=</a>(<a class="code hl_function" href="classhelios_1_1app_1_1App.html#aa98948e6a898f7f01715c5b33cd4090d">App</a>&amp;&amp;) = <span class="keyword">delete</span>;</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
 <div class="line"><span class="comment">   * @brief Clears the application state, removing all data.</span></div>
 <div class="line"><span class="comment">   * @warning Triggers assertion if app is running.</span></div>
 <div class="line"><span class="comment">   */</span></div>
-<div class="line">  <span class="keywordtype">void</span> <a id="a8" name="a8"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#ac3c9939c10ef6d2a9a31aee51de545e9">Clear</a>();</div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a13" name="a13"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#ac3c9939c10ef6d2a9a31aee51de545e9">Clear</a>();</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
 <div class="line"><span class="comment">   * @brief Initializes the application and its subsystems.</span></div>
@@ -280,7 +326,7 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="comment">   * @note Automaticly called in Run().</span></div>
 <div class="line"><span class="comment">   * @warning Triggers assertion if app is already initialized or running.</span></div>
 <div class="line"><span class="comment">   */</span></div>
-<div class="line">  <span class="keywordtype">void</span> <a id="a9" name="a9"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a8fcb1acd56f67ad784625e700661f9e1">Initialize</a>();</div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a14" name="a14"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a8fcb1acd56f67ad784625e700661f9e1">Initialize</a>();</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
 <div class="line"><span class="comment">   * @brief Updates the application and its subsystems.</span></div>
@@ -289,21 +335,21 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="comment">   * @note Should not be called directly - use the runner function instead.</span></div>
 <div class="line"><span class="comment">   * @warning Triggers assertion if app is not initialized.</span></div>
 <div class="line"><span class="comment">   */</span></div>
-<div class="line">  <span class="keywordtype">void</span> <a id="a10" name="a10"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#ad9c41ded54e87910d24f1a592f9350d4">Update</a>();</div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a15" name="a15"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#ad9c41ded54e87910d24f1a592f9350d4">Update</a>();</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
 <div class="line"><span class="comment">   * @brief Runs the application with the given arguments.</span></div>
 <div class="line"><span class="comment">   * @warning Triggers assertion if app is initialized or running.</span></div>
 <div class="line"><span class="comment">   * @return Exit code of the application.</span></div>
 <div class="line"><span class="comment">   */</span></div>
-<div class="line">  <a class="code hl_enumeration" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916db">AppExitCode</a> <a id="a11" name="a11"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a6ecfe054032e3c1eb7bc735f02413ded">Run</a>();</div>
+<div class="line">  <a class="code hl_enumeration" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916db">AppExitCode</a> <a id="a16" name="a16"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a6ecfe054032e3c1eb7bc735f02413ded">Run</a>();</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
 <div class="line"><span class="comment">   * @brief Waits for all overlapping sub-app updates to complete.</span></div>
 <div class="line"><span class="comment">   * @details Can be called explicitly when synchronization is needed.</span></div>
 <div class="line"><span class="comment">   * Automatically called during CleanUp().</span></div>
 <div class="line"><span class="comment">   */</span></div>
-<div class="line">  <span class="keywordtype">void</span> <a id="a12" name="a12"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#abf42953340c5baea8aecec9e7ea1c454">WaitForOverlappingUpdates</a>();</div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a17" name="a17"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#abf42953340c5baea8aecec9e7ea1c454">WaitForOverlappingUpdates</a>();</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
 <div class="line"><span class="comment">   * @brief Waits for overlapping updates of a specific sub-app type to complete.</span></div>
@@ -322,6 +368,13 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line">  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1app_1_1App.html#abf42953340c5baea8aecec9e7ea1c454">WaitForOverlappingUpdates</a>(<span class="keyword">const</span> SubApp&amp; sub_app);</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Updates the Time resource for the current frame.</span></div>
+<div class="line"><span class="comment">   * @details Should be called at the beginning of each frame by the runner.</span></div>
+<div class="line"><span class="comment">   * Does nothing if Time resource is not registered.</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a18" name="a18"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#acba92c483b55c9930f21b86270499a76">TickTime</a>() <span class="keyword">noexcept</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
 <div class="line"><span class="comment">   * @brief Adds a new sub-application of type T.</span></div>
 <div class="line"><span class="comment">   * @warning Triggers an assertion if app is initialized or running.</span></div>
 <div class="line"><span class="comment">   * @tparam T Sub-application type</span></div>
@@ -329,7 +382,7 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="comment">   * @return Reference to app for method chaining</span></div>
 <div class="line"><span class="comment">   */</span></div>
 <div class="line">  <span class="keyword">template</span> &lt;SubAppTrait T&gt;</div>
-<div class="line">  <span class="keyword">auto</span> <a id="a13" name="a13"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#aa537adab5a7cbbffc267a33584e938de">AddSubApp</a>(<span class="keyword">this</span> <span class="keyword">auto</span>&amp;&amp; self, T sub_app = {}) -&gt; <span class="keyword">decltype</span>(std::forward&lt;<span class="keyword">decltype</span>(self)&gt;(self));</div>
+<div class="line">  <span class="keyword">auto</span> <a id="a19" name="a19"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#aa537adab5a7cbbffc267a33584e938de">AddSubApp</a>(<span class="keyword">this</span> <span class="keyword">auto</span>&amp;&amp; self, T sub_app = {}) -&gt; <span class="keyword">decltype</span>(std::forward&lt;<span class="keyword">decltype</span>(self)&gt;(self));</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
 <div class="line"><span class="comment">   * @brief Adds an existing sub-application instance.</span></div>
@@ -350,7 +403,7 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="comment">   * @return Reference to app for method chaining</span></div>
 <div class="line"><span class="comment">   */</span></div>
 <div class="line">  <span class="keyword">template</span> &lt;ModuleTrait T&gt;</div>
-<div class="line">  <span class="keyword">auto</span> <a id="a14" name="a14"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#ad00f452ada02721db7eae955b0eba1f5">AddModule</a>(<span class="keyword">this</span> <span class="keyword">auto</span>&amp;&amp; self) -&gt; <span class="keyword">decltype</span>(std::forward&lt;decltype(self)&gt;(self));</div>
+<div class="line">  <span class="keyword">auto</span> <a id="a20" name="a20"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#ad00f452ada02721db7eae955b0eba1f5">AddModule</a>(<span class="keyword">this</span> <span class="keyword">auto</span>&amp;&amp; self) -&gt; <span class="keyword">decltype</span>(std::forward&lt;decltype(self)&gt;(self));</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
 <div class="line"><span class="comment">   * @brief Adds multiple modules to the main sub-app.</span></div>
@@ -360,7 +413,17 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="comment">   */</span></div>
 <div class="line">  <span class="keyword">template</span> &lt;ModuleTrait... Modules&gt;</div>
 <div class="line">    <span class="keyword">requires</span>(<span class="keyword">sizeof</span>...(Modules) &gt; 1 &amp;&amp; utils::UniqueTypes&lt;Modules...&gt;)</div>
-<div class="line">  <span class="keyword">auto</span> <a id="a15" name="a15"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a4770130c039e32697d9a467cfdfabcf6">AddModules</a>(<span class="keyword">this</span> <span class="keyword">auto</span>&amp;&amp; self) -&gt; <span class="keyword">decltype</span>(std::forward&lt;decltype(self)&gt;(self));</div>
+<div class="line">  <span class="keyword">auto</span> <a id="a21" name="a21"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a4770130c039e32697d9a467cfdfabcf6">AddModules</a>(<span class="keyword">this</span> <span class="keyword">auto</span>&amp;&amp; self) -&gt; <span class="keyword">decltype</span>(std::forward&lt;decltype(self)&gt;(self));</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Adds a dynamic module to the main sub-app, taking ownership.</span></div>
+<div class="line"><span class="comment">   * @details Modules can add their own systems, resources, and sub-apps.</span></div>
+<div class="line"><span class="comment">   * The App takes ownership of the module via move semantics.</span></div>
+<div class="line"><span class="comment">   * @warning Triggers an assertion if app is initialized or running.</span></div>
+<div class="line"><span class="comment">   * @param module Dynamic module to add (moved)</span></div>
+<div class="line"><span class="comment">   * @return Reference to app for method chaining</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">auto</span> <a id="a22" name="a22"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#afa9aee3c3108c42adddb68cf34dc22a8">AddDynamicModule</a>(<span class="keyword">this</span> <span class="keyword">auto</span>&amp;&amp; self, DynamicModule&amp;&amp; module) -&gt; <span class="keyword">decltype</span>(std::forward&lt;decltype(self)&gt;(self));</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
 <div class="line"><span class="comment">   * @brief Adds a system to the specified schedule in the main sub-app.</span></div>
@@ -371,7 +434,7 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="comment">   * @return Reference to app for method chaining</span></div>
 <div class="line"><span class="comment">   */</span></div>
 <div class="line">  <span class="keyword">template</span> &lt;ecs::SystemTrait T, ScheduleTrait Schedule&gt;</div>
-<div class="line">  <span class="keyword">auto</span> <a id="a16" name="a16"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#aca1848d9d552b352f72e7538c0628616">AddSystem</a>(<span class="keyword">this</span> <span class="keyword">auto</span>&amp;&amp; self, Schedule schedule = {}) -&gt; <span class="keyword">decltype</span>(std::forward&lt;<span class="keyword">decltype</span>(self)&gt;(self));</div>
+<div class="line">  <span class="keyword">auto</span> <a id="a23" name="a23"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#aca1848d9d552b352f72e7538c0628616">AddSystem</a>(<span class="keyword">this</span> <span class="keyword">auto</span>&amp;&amp; self, Schedule schedule = {}) -&gt; <span class="keyword">decltype</span>(std::forward&lt;<span class="keyword">decltype</span>(self)&gt;(self));</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
 <div class="line"><span class="comment">   * @brief Adds multiple systems to the specified schedule in the main sub-app.</span></div>
@@ -383,7 +446,7 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="comment">   */</span></div>
 <div class="line">  <span class="keyword">template</span> &lt;ecs::SystemTrait... Systems, ScheduleTrait Schedule&gt;</div>
 <div class="line">    <span class="keyword">requires</span>(<span class="keyword">sizeof</span>...(Systems) &gt; 1 &amp;&amp; utils::UniqueTypes&lt;Systems...&gt;)</div>
-<div class="line">  <span class="keyword">auto</span> <a id="a17" name="a17"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a84a4a19d1424293b8e617654a37a4957">AddSystems</a>(<span class="keyword">this</span> <span class="keyword">auto</span>&amp;&amp; self, Schedule schedule = {}) -&gt; <span class="keyword">decltype</span>(std::forward&lt;<span class="keyword">decltype</span>(self)&gt;(self));</div>
+<div class="line">  <span class="keyword">auto</span> <a id="a24" name="a24"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a84a4a19d1424293b8e617654a37a4957">AddSystems</a>(<span class="keyword">this</span> <span class="keyword">auto</span>&amp;&amp; self, Schedule schedule = {}) -&gt; <span class="keyword">decltype</span>(std::forward&lt;<span class="keyword">decltype</span>(self)&gt;(self));</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
 <div class="line"><span class="comment">   * @brief Adds systems with fluent configuration builder.</span></div>
@@ -406,7 +469,7 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="comment">   */</span></div>
 <div class="line">  <span class="keyword">template</span> &lt;ecs::SystemTrait... Systems, ScheduleTrait Schedule&gt;</div>
 <div class="line">    <span class="keyword">requires</span>(<span class="keyword">sizeof</span>...(Systems) &gt; 0 &amp;&amp; utils::UniqueTypes&lt;Systems...&gt;)</div>
-<div class="line">  <span class="keyword">auto</span> <a id="a18" name="a18"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a501d5af4fa0445c9901f26c530c9ab6e">AddSystemsBuilder</a>(<span class="keyword">this</span> <span class="keyword">auto</span>&amp;&amp; self, Schedule schedule = {}) -&gt; SystemConfig&lt;Schedule, Systems...&gt;;</div>
+<div class="line">  <span class="keyword">auto</span> <a id="a25" name="a25"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a501d5af4fa0445c9901f26c530c9ab6e">AddSystemsBuilder</a>(<span class="keyword">this</span> <span class="keyword">auto</span>&amp;&amp; self, Schedule schedule = {}) -&gt; SystemConfig&lt;Schedule, Systems...&gt;;</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
 <div class="line"><span class="comment">   * @brief Adds a single system with fluent configuration builder.</span></div>
@@ -418,7 +481,7 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="comment">   * @return SystemConfig builder for fluent configuration</span></div>
 <div class="line"><span class="comment">   */</span></div>
 <div class="line">  <span class="keyword">template</span> &lt;ecs::SystemTrait T, ScheduleTrait Schedule&gt;</div>
-<div class="line">  <span class="keyword">auto</span> <a id="a19" name="a19"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a78fb8e6d436ed6b07686561130641df8">AddSystemBuilder</a>(<span class="keyword">this</span> <span class="keyword">auto</span>&amp;&amp; self, Schedule schedule = {}) -&gt; SystemConfig&lt;Schedule, T&gt;;</div>
+<div class="line">  <span class="keyword">auto</span> <a id="a26" name="a26"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a78fb8e6d436ed6b07686561130641df8">AddSystemBuilder</a>(<span class="keyword">this</span> <span class="keyword">auto</span>&amp;&amp; self, Schedule schedule = {}) -&gt; SystemConfig&lt;Schedule, T&gt;;</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
 <div class="line"><span class="comment">   * @brief Configures a system set with fluent builder.</span></div>
@@ -435,7 +498,7 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="comment">   * @endcode</span></div>
 <div class="line"><span class="comment">   */</span></div>
 <div class="line">  <span class="keyword">template</span> &lt;SystemSetTrait Set, ScheduleTrait Schedule&gt;</div>
-<div class="line">  <span class="keyword">auto</span> <a id="a20" name="a20"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a49b3c5551a3e8aa0b1b7278e99d4fe60">ConfigureSet</a>(<span class="keyword">this</span> <span class="keyword">auto</span>&amp;&amp; self, Schedule schedule = {}) -&gt; SystemSetConfig&lt;Schedule, Set&gt;;</div>
+<div class="line">  <span class="keyword">auto</span> <a id="a27" name="a27"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a49b3c5551a3e8aa0b1b7278e99d4fe60">ConfigureSet</a>(<span class="keyword">this</span> <span class="keyword">auto</span>&amp;&amp; self, Schedule schedule = {}) -&gt; SystemSetConfig&lt;Schedule, Set&gt;;</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
 <div class="line"><span class="comment">   * @brief Inserts a resource into the main sub-app.</span></div>
@@ -445,7 +508,7 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="comment">   * @return Reference to app for method chaining</span></div>
 <div class="line"><span class="comment">   */</span></div>
 <div class="line">  <span class="keyword">template</span> &lt;ecs::ResourceTrait T&gt;</div>
-<div class="line">  <span class="keyword">auto</span> <a id="a21" name="a21"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a30a24725220ea4c95f3520920d79bb76">InsertResource</a>(<span class="keyword">this</span> <span class="keyword">auto</span>&amp;&amp; self, T&amp;&amp; resource) -&gt; <span class="keyword">decltype</span>(std::forward&lt;decltype(self)&gt;(self));</div>
+<div class="line">  <span class="keyword">auto</span> <a id="a28" name="a28"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a30a24725220ea4c95f3520920d79bb76">InsertResource</a>(<span class="keyword">this</span> <span class="keyword">auto</span>&amp;&amp; self, T&amp;&amp; resource) -&gt; <span class="keyword">decltype</span>(std::forward&lt;decltype(self)&gt;(self));</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
 <div class="line"><span class="comment">   * @brief Emplaces a resource into the main sub-app&#39;s world.</span></div>
@@ -457,7 +520,7 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="comment">   */</span></div>
 <div class="line">  <span class="keyword">template</span> &lt;ecs::ResourceTrait T, <span class="keyword">typename</span>... Args&gt;</div>
 <div class="line">    <span class="keyword">requires</span> std::constructible_from&lt;T, Args...&gt;</div>
-<div class="line">  <span class="keyword">auto</span> <a id="a22" name="a22"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a00f2c3673d99d3f9715ac1b11647d80d">EmplaceResource</a>(<span class="keyword">this</span> <span class="keyword">auto</span>&amp;&amp; self, Args&amp;&amp;... args) -&gt; <span class="keyword">decltype</span>(std::forward&lt;decltype(self)&gt;(self));</div>
+<div class="line">  <span class="keyword">auto</span> <a id="a29" name="a29"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a00f2c3673d99d3f9715ac1b11647d80d">EmplaceResource</a>(<span class="keyword">this</span> <span class="keyword">auto</span>&amp;&amp; self, Args&amp;&amp;... args) -&gt; <span class="keyword">decltype</span>(std::forward&lt;decltype(self)&gt;(self));</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
 <div class="line"><span class="comment">   * @brief Registers an event type for use in the main sub-app.</span></div>
@@ -467,7 +530,7 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="comment">   * @return Reference to app for method chaining</span></div>
 <div class="line"><span class="comment">   */</span></div>
 <div class="line">  <span class="keyword">template</span> &lt;ecs::EventTrait T&gt;</div>
-<div class="line">  <span class="keyword">auto</span> <a id="a23" name="a23"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a3b4025dae2e9d36c8c1ccd175eb3b0d9">AddEvent</a>(<span class="keyword">this</span> <span class="keyword">auto</span>&amp;&amp; self) -&gt; <span class="keyword">decltype</span>(std::forward&lt;decltype(self)&gt;(self));</div>
+<div class="line">  <span class="keyword">auto</span> <a id="a30" name="a30"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a3b4025dae2e9d36c8c1ccd175eb3b0d9">AddEvent</a>(<span class="keyword">this</span> <span class="keyword">auto</span>&amp;&amp; self) -&gt; <span class="keyword">decltype</span>(std::forward&lt;decltype(self)&gt;(self));</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
 <div class="line"><span class="comment">   * @brief Registers multiple event types for use in the main sub-app.</span></div>
@@ -477,7 +540,7 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="comment">   */</span></div>
 <div class="line">  <span class="keyword">template</span> &lt;ecs::EventTrait... Events&gt;</div>
 <div class="line">    <span class="keyword">requires</span>(<span class="keyword">sizeof</span>...(Events) &gt; 1)</div>
-<div class="line">  <span class="keyword">auto</span> <a id="a24" name="a24"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a2633b7daf263d352adff406f60db9b60">AddEvents</a>(<span class="keyword">this</span> <span class="keyword">auto</span>&amp;&amp; self) -&gt; <span class="keyword">decltype</span>(std::forward&lt;decltype(self)&gt;(self));</div>
+<div class="line">  <span class="keyword">auto</span> <a id="a31" name="a31"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a2633b7daf263d352adff406f60db9b60">AddEvents</a>(<span class="keyword">this</span> <span class="keyword">auto</span>&amp;&amp; self) -&gt; <span class="keyword">decltype</span>(std::forward&lt;decltype(self)&gt;(self));</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
 <div class="line"><span class="comment">   * @brief Sets runner function for the application.</span></div>
@@ -485,7 +548,7 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="comment">   * @param runner A move-only function that takes an App reference and returns an AppExitCode.</span></div>
 <div class="line"><span class="comment">   * @return Reference to app for method chaining</span></div>
 <div class="line"><span class="comment">   */</span></div>
-<div class="line">  <span class="keyword">auto</span> <a id="a25" name="a25"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a768fbfe09eff0c53e35f4328ae8b5b42">SetRunner</a>(<span class="keyword">this</span> <span class="keyword">auto</span>&amp;&amp; self, <a class="code hl_typedef" href="classhelios_1_1app_1_1App.html#aa915dfbe8c5591735eb777f2a685300f">RunnerFn</a> runner) <span class="keyword">noexcept</span> -&gt; <span class="keyword">decltype</span>(std::forward&lt;decltype(self)&gt;(self));</div>
+<div class="line">  <span class="keyword">auto</span> <a id="a32" name="a32"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a768fbfe09eff0c53e35f4328ae8b5b42">SetRunner</a>(<span class="keyword">this</span> <span class="keyword">auto</span>&amp;&amp; self, <a class="code hl_typedef" href="classhelios_1_1app_1_1App.html#aa915dfbe8c5591735eb777f2a685300f">RunnerFn</a> runner) <span class="keyword">noexcept</span> -&gt; <span class="keyword">decltype</span>(std::forward&lt;decltype(self)&gt;(self));</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
 <div class="line"><span class="comment">   * @brief Sets extraction function for a sub-app.</span></div>
@@ -496,7 +559,7 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="comment">   * @return Reference to app for method chaining</span></div>
 <div class="line"><span class="comment">   */</span></div>
 <div class="line">  <span class="keyword">template</span> &lt;SubAppTrait T&gt;</div>
-<div class="line">  <span class="keyword">auto</span> <a id="a26" name="a26"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#ad25abab1ce31391961633f678d64ff22">SetSubAppExtraction</a>(<span class="keyword">this</span> <span class="keyword">auto</span>&amp;&amp; self, <a class="code hl_typedef" href="classhelios_1_1app_1_1App.html#a185f72b974ae60051fbb6ba25e6eeea0">ExtractFn</a> extract_fn) -&gt; <span class="keyword">decltype</span>(std::forward&lt;decltype(self)&gt;(self));</div>
+<div class="line">  <span class="keyword">auto</span> <a id="a33" name="a33"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#ad25abab1ce31391961633f678d64ff22">SetSubAppExtraction</a>(<span class="keyword">this</span> <span class="keyword">auto</span>&amp;&amp; self, <a class="code hl_typedef" href="classhelios_1_1app_1_1App.html#a185f72b974ae60051fbb6ba25e6eeea0">ExtractFn</a> extract_fn) -&gt; <span class="keyword">decltype</span>(std::forward&lt;decltype(self)&gt;(self));</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
 <div class="line"><span class="comment">   * @brief Checks if a sub app of type T exists in main sub-app.</span></div>
@@ -504,7 +567,7 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="comment">   * @return True if sub app exists, false otherwise</span></div>
 <div class="line"><span class="comment">   */</span></div>
 <div class="line">  <span class="keyword">template</span> &lt;SubAppTrait T&gt;</div>
-<div class="line">  [[nodiscard]] <span class="keywordtype">bool</span> <a id="a27" name="a27"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a00cc6cab18088c5c794da426a11c9952">ContainsSubApp</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">bool</span> <a id="a34" name="a34"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a00cc6cab18088c5c794da426a11c9952">ContainsSubApp</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
 <div class="line"><span class="comment">   * @brief Checks if a module of type T exists in main sub-app.</span></div>
@@ -512,7 +575,14 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="comment">   * @return True if module exists, false otherwise</span></div>
 <div class="line"><span class="comment">   */</span></div>
 <div class="line">  <span class="keyword">template</span> &lt;ModuleTrait T&gt;</div>
-<div class="line">  [[nodiscard]] <span class="keywordtype">bool</span> <a id="a28" name="a28"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#ad93ccac7ae13e39f02ebb97fc5a593cd">ContainsModule</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">bool</span> <a id="a35" name="a35"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#ad93ccac7ae13e39f02ebb97fc5a593cd">ContainsModule</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Checks if a dynamic module with the given ID exists.</span></div>
+<div class="line"><span class="comment">   * @param module_id Module type ID</span></div>
+<div class="line"><span class="comment">   * @return True if module exists, false otherwise</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">bool</span> <a id="a36" name="a36"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a8927916d4a85a5194faf2db6e7ac2a35">ContainsDynamicModule</a>(<a id="a37" name="a37"></a><a class="code hl_typedef" href="namespacehelios_1_1app.html#a6d04077cb9ea6077a44fdfe33f480ac5">ModuleTypeId</a> module_id) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
 <div class="line"><span class="comment">   * @brief Checks if a system of type T exists in any schedule of main sub-app.</span></div>
@@ -520,8 +590,8 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="comment">   * @return True if system exists, false otherwise</span></div>
 <div class="line"><span class="comment">   */</span></div>
 <div class="line">  <span class="keyword">template</span> &lt;ecs::SystemTrait T&gt;</div>
-<div class="line">  [[nodiscard]] <span class="keywordtype">bool</span> <a id="a29" name="a29"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a86e8d847fc891b85620ca3cadd1702d7">ContainsSystem</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
-<div class="line">    <span class="keywordflow">return</span> main_sub_app_.<a id="a30" name="a30"></a><a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a467a8144c1510e02d2d41a49212449c9">ContainsSystem</a>&lt;T&gt;();</div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">bool</span> <a id="a38" name="a38"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a86e8d847fc891b85620ca3cadd1702d7">ContainsSystem</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line">    <span class="keywordflow">return</span> main_sub_app_.<a id="a39" name="a39"></a><a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a467a8144c1510e02d2d41a49212449c9">ContainsSystem</a>&lt;T&gt;();</div>
 <div class="line">  }</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
@@ -540,13 +610,13 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="comment">   * @brief Checks if the app has been initialized.</span></div>
 <div class="line"><span class="comment">   * @return True if initialized, false otherwise</span></div>
 <div class="line"><span class="comment">   */</span></div>
-<div class="line">  [[nodiscard]] <span class="keywordtype">bool</span> <a id="a31" name="a31"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#aa10e21204a97b31402a6d1d77bc9c256">IsInitialized</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> is_initialized_; }</div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">bool</span> <a id="a40" name="a40"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#aa10e21204a97b31402a6d1d77bc9c256">IsInitialized</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> is_initialized_; }</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
 <div class="line"><span class="comment">   * @brief Checks if the app is currently running.</span></div>
 <div class="line"><span class="comment">   * @return True if running, false otherwise</span></div>
 <div class="line"><span class="comment">   */</span></div>
-<div class="line">  [[nodiscard]] <span class="keywordtype">bool</span> <a id="a32" name="a32"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a1b76dbd6f97fde6e57c059110f7b8f75">IsRunning</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> is_running_.load(std::memory_order_acquire); }</div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">bool</span> <a id="a41" name="a41"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a1b76dbd6f97fde6e57c059110f7b8f75">IsRunning</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> is_running_.load(std::memory_order_acquire); }</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
 <div class="line"><span class="comment">   * @brief Checks if a resource exists in main sub_app.</span></div>
@@ -554,8 +624,8 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="comment">   * @return True if resource exists, false otherwise</span></div>
 <div class="line"><span class="comment">   */</span></div>
 <div class="line">  <span class="keyword">template</span> &lt;ecs::ResourceTrait T&gt;</div>
-<div class="line">  [[nodiscard]] <span class="keywordtype">bool</span> <a id="a33" name="a33"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a0c396809e0df264517e33bfe7e126693">HasResource</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
-<div class="line">    <span class="keywordflow">return</span> main_sub_app_.<a id="a34" name="a34"></a><a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#adef2bc054c090aab68496520cec63717">HasResource</a>&lt;T&gt;();</div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">bool</span> <a id="a42" name="a42"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a0c396809e0df264517e33bfe7e126693">HasResource</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line">    <span class="keywordflow">return</span> main_sub_app_.<a id="a43" name="a43"></a><a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#adef2bc054c090aab68496520cec63717">HasResource</a>&lt;T&gt;();</div>
 <div class="line">  }</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
@@ -564,21 +634,21 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="comment">   * @return True if event exists, false otherwise</span></div>
 <div class="line"><span class="comment">   */</span></div>
 <div class="line">  <span class="keyword">template</span> &lt;ecs::EventTrait T&gt;</div>
-<div class="line">  [[nodiscard]] <span class="keywordtype">bool</span> <a id="a35" name="a35"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#ad679c1f930309afa2668528f8419a5aa">HasEvent</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
-<div class="line">    <span class="keywordflow">return</span> main_sub_app_.<a id="a36" name="a36"></a><a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ad6681df779359dab3f63c0f7db7f99bf">HasEvent</a>&lt;T&gt;();</div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">bool</span> <a id="a44" name="a44"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#ad679c1f930309afa2668528f8419a5aa">HasEvent</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line">    <span class="keywordflow">return</span> main_sub_app_.<a id="a45" name="a45"></a><a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ad6681df779359dab3f63c0f7db7f99bf">HasEvent</a>&lt;T&gt;();</div>
 <div class="line">  }</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
 <div class="line"><span class="comment">   * @brief Gets the number of modules in main sub-app.</span></div>
 <div class="line"><span class="comment">   * @return Number of modules</span></div>
 <div class="line"><span class="comment">   */</span></div>
-<div class="line">  [[nodiscard]] <span class="keywordtype">size_t</span> <a id="a37" name="a37"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#acea7fc37cd9453147be9ef8e541c3160">ModuleCount</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> modules_.size(); }</div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">size_t</span> <a id="a46" name="a46"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#acea7fc37cd9453147be9ef8e541c3160">ModuleCount</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> modules_.size() + dynamic_modules_.size(); }</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
 <div class="line"><span class="comment">   * @brief Gets the total number of systems across all schedules in main sub-app.</span></div>
 <div class="line"><span class="comment">   * @return Total number of systems</span></div>
 <div class="line"><span class="comment">   */</span></div>
-<div class="line">  [[nodiscard]] <span class="keywordtype">size_t</span> <a id="a38" name="a38"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#ad69adf2eb3305bc2c47229ca5d5a18d4">SystemCount</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> main_sub_app_.<a id="a39" name="a39"></a><a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a3e3e52d2fceddcb2b9907f41512ed5fa">SystemCount</a>(); }</div>
+<div class="line">  [[nodiscard]] <span class="keywordtype">size_t</span> <a id="a47" name="a47"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#ad69adf2eb3305bc2c47229ca5d5a18d4">SystemCount</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> main_sub_app_.<a id="a48" name="a48"></a><a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a3e3e52d2fceddcb2b9907f41512ed5fa">SystemCount</a>(); }</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
 <div class="line"><span class="comment">   * @brief Gets the number of systems in the specified schedule of main sub-app.</span></div>
@@ -599,7 +669,7 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="comment">   * @return Reference to the sub-application</span></div>
 <div class="line"><span class="comment">   */</span></div>
 <div class="line">  <span class="keyword">template</span> &lt;SubAppTrait T&gt;</div>
-<div class="line">  [[nodiscard]] SubApp&amp; <a id="a40" name="a40"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a03252592a0ba42988b576739d6783ca3">GetSubApp</a>() <span class="keyword">noexcept</span>;</div>
+<div class="line">  [[nodiscard]] SubApp&amp; <a id="a49" name="a49"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a03252592a0ba42988b576739d6783ca3">GetSubApp</a>() <span class="keyword">noexcept</span>;</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
 <div class="line"><span class="comment">   * @brief Gets a sub-application by type (const version).</span></div>
@@ -614,7 +684,7 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="comment">   * @brief Gets the main sub-application.</span></div>
 <div class="line"><span class="comment">   * @return Reference to the main sub-application</span></div>
 <div class="line"><span class="comment">   */</span></div>
-<div class="line">  [[nodiscard]] SubApp&amp; <a id="a41" name="a41"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a29904e17495959b5e3de02e9009ee654">GetMainSubApp</a>() <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> main_sub_app_; }</div>
+<div class="line">  [[nodiscard]] SubApp&amp; <a id="a50" name="a50"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a29904e17495959b5e3de02e9009ee654">GetMainSubApp</a>() <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> main_sub_app_; }</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
 <div class="line"><span class="comment">   * @brief Gets the main sub-application (const version).</span></div>
@@ -626,13 +696,13 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="comment">   * @brief Gets the main world.</span></div>
 <div class="line"><span class="comment">   * @return Reference to the main world</span></div>
 <div class="line"><span class="comment">   */</span></div>
-<div class="line">  [[nodiscard]] <span class="keyword">const</span> ecs::World&amp; <a id="a42" name="a42"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a999b03fa7f69783664ca3054c173e023">GetMainWorld</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> main_sub_app_.<a id="a43" name="a43"></a><a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a0719550ca7a5d19e8c37950591aae8b6">GetWorld</a>(); }</div>
+<div class="line">  [[nodiscard]] <span class="keyword">const</span> ecs::World&amp; <a id="a51" name="a51"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#a999b03fa7f69783664ca3054c173e023">GetMainWorld</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> main_sub_app_.<a id="a52" name="a52"></a><a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a0719550ca7a5d19e8c37950591aae8b6">GetWorld</a>(); }</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
 <div class="line"><span class="comment">   * @brief Gets the async executor.</span></div>
 <div class="line"><span class="comment">   * @return Reference to the async executor</span></div>
 <div class="line"><span class="comment">   */</span></div>
-<div class="line">  [[nodiscard]] async::Executor&amp; <a id="a44" name="a44"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#ae7a2d7b4fac262cf5824c5df4d5b93c3">GetExecutor</a>() <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> executor_; }</div>
+<div class="line">  [[nodiscard]] async::Executor&amp; <a id="a53" name="a53"></a><a class="code hl_function" href="classhelios_1_1app_1_1App.html#ae7a2d7b4fac262cf5824c5df4d5b93c3">GetExecutor</a>() <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> executor_; }</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
 <div class="line"><span class="comment">   * @brief Gets the async executor (const version).</span></div>
@@ -655,12 +725,26 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line">  <span class="keywordtype">void</span> BuildModules();</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Waits for all modules to be ready and calls Finish on them.</span></div>
+<div class="line"><span class="comment">   * @details Called after BuildModules. Polls IsReady on each module</span></div>
+<div class="line"><span class="comment">   * and calls Finish once all modules are ready.</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keywordtype">void</span> FinishModules();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
 <div class="line"><span class="comment">   * @brief Destroys all registered modules.</span></div>
 <div class="line"><span class="comment">   * @details Calls Destroy on each module.</span></div>
 <div class="line"><span class="comment">   */</span></div>
 <div class="line">  <span class="keywordtype">void</span> DestroyModules();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Registers built-in resources and events.</span></div>
+<div class="line"><span class="comment">   * @details Called automatically before initialization.</span></div>
+<div class="line"><span class="comment">   * Registers Time resource and ShutdownEvent if not already present.</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keywordtype">void</span> RegisterBuiltins();</div>
 <div class="line"> </div>
-<div class="line">  [[nodiscard]] <span class="keyword">static</span> <a class="code hl_enumeration" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916db">AppExitCode</a> DefaultRunner(<a class="code hl_function" href="classhelios_1_1app_1_1App.html#a8d923e7c2ff8cf675a91961125daf396">App</a>&amp; app);</div>
+<div class="line">  [[nodiscard]] <span class="keyword">static</span> <a class="code hl_enumeration" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916db">AppExitCode</a> DefaultRunnerWrapper(<a class="code hl_function" href="classhelios_1_1app_1_1App.html#aa98948e6a898f7f01715c5b33cd4090d">App</a>&amp; app);</div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordtype">bool</span> is_initialized_ = <span class="keyword">false</span>;          <span class="comment">///&lt; Whether the app has been initialized</span></div>
 <div class="line">  std::atomic&lt;bool&gt; is_running_{<span class="keyword">false</span>};  <span class="comment">///&lt; Whether the app is currently running</span></div>
@@ -669,29 +753,32 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line">  std::vector&lt;SubApp&gt; sub_apps_;                                <span class="comment">///&lt; List of additional sub-applications</span></div>
 <div class="line">  std::unordered_map&lt;SubAppTypeId, size_t&gt; sub_app_index_map_;  <span class="comment">///&lt; Map of sub-application type IDs to their indices</span></div>
 <div class="line"> </div>
-<div class="line">  std::vector&lt;std::unique_ptr&lt;Module&gt;&gt; modules_;               <span class="comment">///&lt; Owned modules</span></div>
+<div class="line">  std::vector&lt;std::unique_ptr&lt;Module&gt;&gt; modules_;               <span class="comment">///&lt; Owned static modules</span></div>
 <div class="line">  std::unordered_map&lt;ModuleTypeId, size_t&gt; module_index_map_;  <span class="comment">///&lt; Map of module type IDs to their indices</span></div>
+<div class="line"> </div>
+<div class="line">  std::vector&lt;DynamicModule&gt; dynamic_modules_;                         <span class="comment">///&lt; Owned dynamic modules</span></div>
+<div class="line">  std::unordered_map&lt;ModuleTypeId, size_t&gt; dynamic_module_index_map_;  <span class="comment">///&lt; Map of dynamic module IDs to indices</span></div>
 <div class="line"> </div>
 <div class="line">  async::Executor executor_;       <span class="comment">///&lt; Async executor for parallel execution</span></div>
 <div class="line">  async::TaskGraph update_graph_;  <span class="comment">///&lt; Task graph for managing updates</span></div>
 <div class="line"> </div>
-<div class="line">  <a class="code hl_typedef" href="classhelios_1_1app_1_1App.html#aa915dfbe8c5591735eb777f2a685300f">RunnerFn</a> runner_ = DefaultRunner;  <span class="comment">///&lt; The runner function</span></div>
+<div class="line">  <a class="code hl_typedef" href="classhelios_1_1app_1_1App.html#aa915dfbe8c5591735eb777f2a685300f">RunnerFn</a> runner_;  <span class="comment">///&lt; The runner function</span></div>
 <div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment">  /// Map from sub-app index to their overlapping shared futures.</span></div>
-<div class="line"><span class="comment"></span>  std::unordered_map&lt;size_t, std::vector&lt;std::shared_future&lt;void&gt;&gt;&gt; sub_app_overlapping_futures_;</div>
+<div class="line"><span class="comment">  /// Map from sub-app index to their overlapping tracked futures.</span></div>
+<div class="line"><span class="comment"></span>  std::unordered_map&lt;size_t, std::vector&lt;details::TrackedFuture&gt;&gt; sub_app_overlapping_futures_;</div>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;SubAppTrait T&gt;</div>
 <div class="line"><span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1app_1_1App.html#aa537adab5a7cbbffc267a33584e938de">App::AddSubApp</a>(<span class="keyword">this</span> <span class="keyword">auto</span>&amp;&amp; self, T <span class="comment">/*sub_app*/</span>) -&gt; <span class="keyword">decltype</span>(std::forward&lt;decltype(self)&gt;(self)) {</div>
-<div class="line">  <a id="a45" name="a45"></a><a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!self.IsInitialized(), <span class="stringliteral">&quot;Failed to add sub app &#39;{}&#39;: Cannot add sub apps after app initialization!&quot;</span>,</div>
+<div class="line">  <a id="a54" name="a54"></a><a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!self.IsInitialized(), <span class="stringliteral">&quot;Failed to add sub app &#39;{}&#39;: Cannot add sub apps after app initialization!&quot;</span>,</div>
 <div class="line">                SubAppNameOf&lt;T&gt;());</div>
 <div class="line"> </div>
 <div class="line">  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!self.IsRunning(), <span class="stringliteral">&quot;Failed to add sub app &#39;{}&#39;: Cannot add sub apps while app is running!&quot;</span>,</div>
 <div class="line">                SubAppNameOf&lt;T&gt;());</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">constexpr</span> <a id="a46" name="a46"></a><a class="code hl_typedef" href="namespacehelios_1_1app.html#a1c78747b4cc5ca72b3811b26772c9057">SubAppTypeId</a> <span class="keywordtype">id</span> = SubAppTypeIdOf&lt;T&gt;();</div>
+<div class="line">  <span class="keyword">constexpr</span> <a id="a55" name="a55"></a><a class="code hl_typedef" href="namespacehelios_1_1app.html#a1c78747b4cc5ca72b3811b26772c9057">SubAppTypeId</a> <span class="keywordtype">id</span> = SubAppTypeIdOf&lt;T&gt;();</div>
 <div class="line">  <span class="keywordflow">if</span> (self.sub_app_index_map_.contains(<span class="keywordtype">id</span>)) [[unlikely]] {</div>
-<div class="line">    <a id="a47" name="a47"></a><a class="code hl_define" href="logger_8hpp.html#abee1a45a543b16109f05136a9771e86c">HELIOS_WARN</a>(<span class="stringliteral">&quot;Sub app &#39;{}&#39; is already exist in app!&quot;</span>, SubAppNameOf&lt;T&gt;());</div>
+<div class="line">    <a id="a56" name="a56"></a><a class="code hl_define" href="logger_8hpp.html#abee1a45a543b16109f05136a9771e86c">HELIOS_WARN</a>(<span class="stringliteral">&quot;Sub app &#39;{}&#39; is already exist in app!&quot;</span>, SubAppNameOf&lt;T&gt;());</div>
 <div class="line">    <span class="keywordflow">return</span> std::forward&lt;decltype(self)&gt;(self);</div>
 <div class="line">  }</div>
 <div class="line"> </div>
@@ -747,7 +834,7 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line">                ModuleNameOf&lt;T&gt;());</div>
 <div class="line"> </div>
 <div class="line">  <span class="comment">// module-&gt;Build(self);  // Will be called after all modules are added</span></div>
-<div class="line">  <span class="keyword">constexpr</span> <a id="a48" name="a48"></a><a class="code hl_typedef" href="namespacehelios_1_1app.html#a6d04077cb9ea6077a44fdfe33f480ac5">ModuleTypeId</a> <span class="keywordtype">id</span> = ModuleTypeIdOf&lt;T&gt;();</div>
+<div class="line">  <span class="keyword">constexpr</span> <a class="code hl_typedef" href="namespacehelios_1_1app.html#a6d04077cb9ea6077a44fdfe33f480ac5">ModuleTypeId</a> <span class="keywordtype">id</span> = ModuleTypeIdOf&lt;T&gt;();</div>
 <div class="line">  <span class="keywordflow">if</span> (self.module_index_map_.contains(<span class="keywordtype">id</span>)) [[unlikely]] {</div>
 <div class="line">    <a class="code hl_define" href="logger_8hpp.html#abee1a45a543b16109f05136a9771e86c">HELIOS_WARN</a>(<span class="stringliteral">&quot;Module &#39;{}&#39; is already exist in app!&quot;</span>, ModuleNameOf&lt;T&gt;());</div>
 <div class="line">    <span class="keywordflow">return</span> std::forward&lt;decltype(self)&gt;(self);</div>
@@ -769,10 +856,30 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line">  <span class="keywordflow">return</span> std::forward&lt;decltype(self)&gt;(self);</div>
 <div class="line">}</div>
 <div class="line"> </div>
+<div class="line"><span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1app_1_1App.html#afa9aee3c3108c42adddb68cf34dc22a8">App::AddDynamicModule</a>(<span class="keyword">this</span> <span class="keyword">auto</span>&amp;&amp; self, DynamicModule&amp;&amp; module)</div>
+<div class="line">    -&gt; <span class="keyword">decltype</span>(std::forward&lt;decltype(self)&gt;(self)) {</div>
+<div class="line">  <span class="keyword">const</span> std::string_view name = <span class="keyword">module</span>.GetModuleName();</div>
+<div class="line">  <span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1app.html#a6d04077cb9ea6077a44fdfe33f480ac5">ModuleTypeId</a> <span class="keywordtype">id</span> = <span class="keyword">module</span>.GetModuleId();</div>
+<div class="line"> </div>
+<div class="line">  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!self.IsInitialized(), <span class="stringliteral">&quot;Failed to add module &#39;{}&#39;: Cannot add modules after app initialization!&quot;</span>, name);</div>
+<div class="line">  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!self.IsRunning(), <span class="stringliteral">&quot;Failed to add module &#39;{}&#39;: Cannot add modules while app is running!&quot;</span>, name);</div>
+<div class="line">  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(module.Loaded(), <span class="stringliteral">&quot;Failed to add module &#39;{}&#39;: Module is not loaded!&quot;</span>, name);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Check both static and dynamic module maps for duplicates</span></div>
+<div class="line">  <span class="keywordflow">if</span> (self.module_index_map_.contains(<span class="keywordtype">id</span>) || self.dynamic_module_index_map_.contains(<span class="keywordtype">id</span>)) [[unlikely]] {</div>
+<div class="line">    <a class="code hl_define" href="logger_8hpp.html#abee1a45a543b16109f05136a9771e86c">HELIOS_WARN</a>(<span class="stringliteral">&quot;Module &#39;{}&#39; already exists in app!&quot;</span>, name);</div>
+<div class="line">    <span class="keywordflow">return</span> std::forward&lt;decltype(self)&gt;(self);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  self.dynamic_module_index_map_[id] = self.dynamic_modules_.size();</div>
+<div class="line">  self.dynamic_modules_.push_back(std::move(module));</div>
+<div class="line">  <span class="keywordflow">return</span> std::forward&lt;decltype(self)&gt;(self);</div>
+<div class="line">}</div>
+<div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;ecs::SystemTrait T, ScheduleTrait Schedule&gt;</div>
 <div class="line"><span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1app_1_1App.html#aca1848d9d552b352f72e7538c0628616">App::AddSystem</a>(<span class="keyword">this</span> <span class="keyword">auto</span>&amp;&amp; self, Schedule schedule) -&gt; <span class="keyword">decltype</span>(std::forward&lt;decltype(self)&gt;(self)) {</div>
 <div class="line">  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!self.IsInitialized(), <span class="stringliteral">&quot;Failed to add system &#39;{}&#39;: Cannot add systems after app initialization!&quot;</span>,</div>
-<div class="line">                <a id="a49" name="a49"></a><a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ecs::SystemNameOf&lt;T&gt;</a>());</div>
+<div class="line">                <a id="a57" name="a57"></a><a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ecs::SystemNameOf&lt;T&gt;</a>());</div>
 <div class="line"> </div>
 <div class="line">  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!self.IsRunning(), <span class="stringliteral">&quot;Failed to add system &#39;{}&#39;: Cannot add systems while app is running!&quot;</span>,</div>
 <div class="line">                <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ecs::SystemNameOf&lt;T&gt;</a>());</div>
@@ -891,7 +998,11 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="keyword">template</span> &lt;ModuleTrait T&gt;</div>
 <div class="line"><span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1app_1_1App.html#ad93ccac7ae13e39f02ebb97fc5a593cd">App::ContainsModule</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
 <div class="line">  <span class="keyword">constexpr</span> <a class="code hl_typedef" href="namespacehelios_1_1app.html#a6d04077cb9ea6077a44fdfe33f480ac5">ModuleTypeId</a> <span class="keywordtype">id</span> = ModuleTypeIdOf&lt;T&gt;();</div>
-<div class="line">  <span class="keywordflow">return</span> module_index_map_.contains(<span class="keywordtype">id</span>);</div>
+<div class="line">  <span class="keywordflow">return</span> module_index_map_.contains(<span class="keywordtype">id</span>) || dynamic_module_index_map_.contains(<span class="keywordtype">id</span>);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1app_1_1App.html#a8927916d4a85a5194faf2db6e7ac2a35">App::ContainsDynamicModule</a>(<a class="code hl_typedef" href="namespacehelios_1_1app.html#a6d04077cb9ea6077a44fdfe33f480ac5">ModuleTypeId</a> module_id) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line">  <span class="keywordflow">return</span> dynamic_module_index_map_.contains(module_id);</div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;SubAppTrait T&gt;</div>
@@ -926,10 +1037,8 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line">    <span class="keywordflow">return</span>;  <span class="comment">// No overlapping futures for this sub-app</span></div>
 <div class="line">  }</div>
 <div class="line"> </div>
-<div class="line">  <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; future : futures_it-&gt;second) {</div>
-<div class="line">    <span class="keywordflow">if</span> (future.wait_for(std::chrono::seconds(0)) != std::future_status::ready) {</div>
-<div class="line">      future.wait();</div>
-<div class="line">    }</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; tracked : futures_it-&gt;second) {</div>
+<div class="line">    tracked.Wait();</div>
 <div class="line">  }</div>
 <div class="line">  futures_it-&gt;second.clear();</div>
 <div class="line">}</div>
@@ -966,43 +1075,46 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line">}  <span class="comment">// namespace helios::app</span></div>
 <div class="ttc" id="aassert_8hpp_html"><div class="ttname"><a href="assert_8hpp.html">assert.hpp</a></div></div>
 <div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00140">assert.hpp:140</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a00cc6cab18088c5c794da426a11c9952"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a00cc6cab18088c5c794da426a11c9952">helios::app::App::ContainsSubApp</a></div><div class="ttdeci">bool ContainsSubApp() const noexcept</div><div class="ttdoc">Checks if a sub app of type T exists in main sub-app.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00697">app.hpp:697</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a00f2c3673d99d3f9715ac1b11647d80d"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a00f2c3673d99d3f9715ac1b11647d80d">helios::app::App::EmplaceResource</a></div><div class="ttdeci">auto EmplaceResource(this auto &amp;&amp;self, Args &amp;&amp;... args) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Emplaces a resource into the main sub-app's world.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00622">app.hpp:622</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a03252592a0ba42988b576739d6783ca3"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a03252592a0ba42988b576739d6783ca3">helios::app::App::GetSubApp</a></div><div class="ttdeci">SubApp &amp; GetSubApp() noexcept</div><div class="ttdoc">Gets a sub-application by type.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00709">app.hpp:709</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a0c396809e0df264517e33bfe7e126693"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a0c396809e0df264517e33bfe7e126693">helios::app::App::HasResource</a></div><div class="ttdeci">bool HasResource() const noexcept</div><div class="ttdoc">Checks if a resource exists in main sub_app.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00368">app.hpp:368</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a185f72b974ae60051fbb6ba25e6eeea0"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a185f72b974ae60051fbb6ba25e6eeea0">helios::app::App::ExtractFn</a></div><div class="ttdeci">std::function&lt; void(const ecs::World &amp;, ecs::World &amp;)&gt; ExtractFn</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00058">app.hpp:58</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a1b76dbd6f97fde6e57c059110f7b8f75"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a1b76dbd6f97fde6e57c059110f7b8f75">helios::app::App::IsRunning</a></div><div class="ttdeci">bool IsRunning() const noexcept</div><div class="ttdoc">Checks if the app is currently running.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00360">app.hpp:360</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a2633b7daf263d352adff406f60db9b60"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a2633b7daf263d352adff406f60db9b60">helios::app::App::AddEvents</a></div><div class="ttdeci">auto AddEvents(this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Registers multiple event types for use in the main sub-app.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00653">app.hpp:653</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a29904e17495959b5e3de02e9009ee654"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a29904e17495959b5e3de02e9009ee654">helios::app::App::GetMainSubApp</a></div><div class="ttdeci">SubApp &amp; GetMainSubApp() noexcept</div><div class="ttdoc">Gets the main sub-application.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00428">app.hpp:428</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a30a24725220ea4c95f3520920d79bb76"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a30a24725220ea4c95f3520920d79bb76">helios::app::App::InsertResource</a></div><div class="ttdeci">auto InsertResource(this auto &amp;&amp;self, T &amp;&amp;resource) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Inserts a resource into the main sub-app.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00612">app.hpp:612</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a3b4025dae2e9d36c8c1ccd175eb3b0d9"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a3b4025dae2e9d36c8c1ccd175eb3b0d9">helios::app::App::AddEvent</a></div><div class="ttdeci">auto AddEvent(this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Registers an event type for use in the main sub-app.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00635">app.hpp:635</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a4770130c039e32697d9a467cfdfabcf6"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a4770130c039e32697d9a467cfdfabcf6">helios::app::App::AddModules</a></div><div class="ttdeci">auto AddModules(this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Adds multiple modules to the main sub-app.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00575">app.hpp:575</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a49b3c5551a3e8aa0b1b7278e99d4fe60"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a49b3c5551a3e8aa0b1b7278e99d4fe60">helios::app::App::ConfigureSet</a></div><div class="ttdeci">auto ConfigureSet(this auto &amp;&amp;self, Schedule schedule={}) -&gt; SystemSetConfig&lt; Schedule, Set &gt;</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00768">app.hpp:768</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a501d5af4fa0445c9901f26c530c9ab6e"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a501d5af4fa0445c9901f26c530c9ab6e">helios::app::App::AddSystemsBuilder</a></div><div class="ttdeci">auto AddSystemsBuilder(this auto &amp;&amp;self, Schedule schedule={}) -&gt; SystemConfig&lt; Schedule, Systems... &gt;</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00750">app.hpp:750</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a00cc6cab18088c5c794da426a11c9952"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a00cc6cab18088c5c794da426a11c9952">helios::app::App::ContainsSubApp</a></div><div class="ttdeci">bool ContainsSubApp() const noexcept</div><div class="ttdoc">Checks if a sub app of type T exists in main sub-app.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00804">app.hpp:804</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a00f2c3673d99d3f9715ac1b11647d80d"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a00f2c3673d99d3f9715ac1b11647d80d">helios::app::App::EmplaceResource</a></div><div class="ttdeci">auto EmplaceResource(this auto &amp;&amp;self, Args &amp;&amp;... args) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Emplaces a resource into the main sub-app's world.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00729">app.hpp:729</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a03252592a0ba42988b576739d6783ca3"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a03252592a0ba42988b576739d6783ca3">helios::app::App::GetSubApp</a></div><div class="ttdeci">SubApp &amp; GetSubApp() noexcept</div><div class="ttdoc">Gets a sub-application by type.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00820">app.hpp:820</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a0c396809e0df264517e33bfe7e126693"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a0c396809e0df264517e33bfe7e126693">helios::app::App::HasResource</a></div><div class="ttdeci">bool HasResource() const noexcept</div><div class="ttdoc">Checks if a resource exists in main sub_app.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00438">app.hpp:438</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a185f72b974ae60051fbb6ba25e6eeea0"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a185f72b974ae60051fbb6ba25e6eeea0">helios::app::App::ExtractFn</a></div><div class="ttdeci">std::function&lt; void(const ecs::World &amp;, ecs::World &amp;)&gt; ExtractFn</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00104">app.hpp:104</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a1b76dbd6f97fde6e57c059110f7b8f75"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a1b76dbd6f97fde6e57c059110f7b8f75">helios::app::App::IsRunning</a></div><div class="ttdeci">bool IsRunning() const noexcept</div><div class="ttdoc">Checks if the app is currently running.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00430">app.hpp:430</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a2633b7daf263d352adff406f60db9b60"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a2633b7daf263d352adff406f60db9b60">helios::app::App::AddEvents</a></div><div class="ttdeci">auto AddEvents(this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Registers multiple event types for use in the main sub-app.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00760">app.hpp:760</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a29904e17495959b5e3de02e9009ee654"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a29904e17495959b5e3de02e9009ee654">helios::app::App::GetMainSubApp</a></div><div class="ttdeci">SubApp &amp; GetMainSubApp() noexcept</div><div class="ttdoc">Gets the main sub-application.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00498">app.hpp:498</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a30a24725220ea4c95f3520920d79bb76"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a30a24725220ea4c95f3520920d79bb76">helios::app::App::InsertResource</a></div><div class="ttdeci">auto InsertResource(this auto &amp;&amp;self, T &amp;&amp;resource) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Inserts a resource into the main sub-app.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00719">app.hpp:719</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a3b4025dae2e9d36c8c1ccd175eb3b0d9"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a3b4025dae2e9d36c8c1ccd175eb3b0d9">helios::app::App::AddEvent</a></div><div class="ttdeci">auto AddEvent(this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Registers an event type for use in the main sub-app.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00742">app.hpp:742</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a4770130c039e32697d9a467cfdfabcf6"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a4770130c039e32697d9a467cfdfabcf6">helios::app::App::AddModules</a></div><div class="ttdeci">auto AddModules(this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Adds multiple modules to the main sub-app.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00662">app.hpp:662</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a49b3c5551a3e8aa0b1b7278e99d4fe60"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a49b3c5551a3e8aa0b1b7278e99d4fe60">helios::app::App::ConfigureSet</a></div><div class="ttdeci">auto ConfigureSet(this auto &amp;&amp;self, Schedule schedule={}) -&gt; SystemSetConfig&lt; Schedule, Set &gt;</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00877">app.hpp:877</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a501d5af4fa0445c9901f26c530c9ab6e"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a501d5af4fa0445c9901f26c530c9ab6e">helios::app::App::AddSystemsBuilder</a></div><div class="ttdeci">auto AddSystemsBuilder(this auto &amp;&amp;self, Schedule schedule={}) -&gt; SystemConfig&lt; Schedule, Systems... &gt;</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00859">app.hpp:859</a></div></div>
 <div class="ttc" id="aclasshelios_1_1app_1_1App_html_a5562d46b386a2750bb1c6f960b57f20c"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a5562d46b386a2750bb1c6f960b57f20c">helios::app::App::operator=</a></div><div class="ttdeci">App &amp; operator=(const App &amp;)=delete</div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a6ecfe054032e3c1eb7bc735f02413ded"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a6ecfe054032e3c1eb7bc735f02413ded">helios::app::App::Run</a></div><div class="ttdeci">AppExitCode Run()</div><div class="ttdoc">Runs the application with the given arguments.</div><div class="ttdef"><b>Definition</b> <a href="app_8cpp_source.html#l00042">app.cpp:42</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a768fbfe09eff0c53e35f4328ae8b5b42"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a768fbfe09eff0c53e35f4328ae8b5b42">helios::app::App::SetRunner</a></div><div class="ttdeci">auto SetRunner(this auto &amp;&amp;self, RunnerFn runner) noexcept -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Sets runner function for the application.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00661">app.hpp:661</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a78fb8e6d436ed6b07686561130641df8"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a78fb8e6d436ed6b07686561130641df8">helios::app::App::AddSystemBuilder</a></div><div class="ttdeci">auto AddSystemBuilder(this auto &amp;&amp;self, Schedule schedule={}) -&gt; SystemConfig&lt; Schedule, T &gt;</div><div class="ttdoc">Adds a single system with fluent configuration builder.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00758">app.hpp:758</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a84a4a19d1424293b8e617654a37a4957"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a84a4a19d1424293b8e617654a37a4957">helios::app::App::AddSystems</a></div><div class="ttdeci">auto AddSystems(this auto &amp;&amp;self, Schedule schedule={}) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Adds multiple systems to the specified schedule in the main sub-app.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00603">app.hpp:603</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a86e8d847fc891b85620ca3cadd1702d7"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a86e8d847fc891b85620ca3cadd1702d7">helios::app::App::ContainsSystem</a></div><div class="ttdeci">bool ContainsSystem() const noexcept</div><div class="ttdoc">Checks if a system of type T exists in any schedule of main sub-app.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00334">app.hpp:334</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a8d923e7c2ff8cf675a91961125daf396"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a8d923e7c2ff8cf675a91961125daf396">helios::app::App::App</a></div><div class="ttdeci">App()=default</div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a8fcb1acd56f67ad784625e700661f9e1"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a8fcb1acd56f67ad784625e700661f9e1">helios::app::App::Initialize</a></div><div class="ttdeci">void Initialize()</div><div class="ttdoc">Initializes the application and its subsystems.</div><div class="ttdef"><b>Definition</b> <a href="app_8cpp_source.html#l00106">app.cpp:106</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a999b03fa7f69783664ca3054c173e023"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a999b03fa7f69783664ca3054c173e023">helios::app::App::GetMainWorld</a></div><div class="ttdeci">const ecs::World &amp; GetMainWorld() const noexcept</div><div class="ttdoc">Gets the main world.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00440">app.hpp:440</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_aa10e21204a97b31402a6d1d77bc9c256"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#aa10e21204a97b31402a6d1d77bc9c256">helios::app::App::IsInitialized</a></div><div class="ttdeci">bool IsInitialized() const noexcept</div><div class="ttdoc">Checks if the app has been initialized.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00354">app.hpp:354</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_aa537adab5a7cbbffc267a33584e938de"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#aa537adab5a7cbbffc267a33584e938de">helios::app::App::AddSubApp</a></div><div class="ttdeci">auto AddSubApp(this auto &amp;&amp;self, T sub_app={}) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Adds a new sub-application of type T.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00496">app.hpp:496</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_aa915dfbe8c5591735eb777f2a685300f"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#aa915dfbe8c5591735eb777f2a685300f">helios::app::App::RunnerFn</a></div><div class="ttdeci">std::function&lt; AppExitCode(App &amp;)&gt; RunnerFn</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00057">app.hpp:57</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_abf42953340c5baea8aecec9e7ea1c454"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#abf42953340c5baea8aecec9e7ea1c454">helios::app::App::WaitForOverlappingUpdates</a></div><div class="ttdeci">void WaitForOverlappingUpdates()</div><div class="ttdoc">Waits for all overlapping sub-app updates to complete.</div><div class="ttdef"><b>Definition</b> <a href="app_8cpp_source.html#l00162">app.cpp:162</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_ac3c9939c10ef6d2a9a31aee51de545e9"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#ac3c9939c10ef6d2a9a31aee51de545e9">helios::app::App::Clear</a></div><div class="ttdeci">void Clear()</div><div class="ttdoc">Clears the application state, removing all data.</div><div class="ttdef"><b>Definition</b> <a href="app_8cpp_source.html#l00030">app.cpp:30</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_aca1848d9d552b352f72e7538c0628616"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#aca1848d9d552b352f72e7538c0628616">helios::app::App::AddSystem</a></div><div class="ttdeci">auto AddSystem(this auto &amp;&amp;self, Schedule schedule={}) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Adds a system to the specified schedule in the main sub-app.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00584">app.hpp:584</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_acea7fc37cd9453147be9ef8e541c3160"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#acea7fc37cd9453147be9ef8e541c3160">helios::app::App::ModuleCount</a></div><div class="ttdeci">size_t ModuleCount() const noexcept</div><div class="ttdoc">Gets the number of modules in main sub-app.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00386">app.hpp:386</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_acf734aa3c7b0408127b3552551df50f4"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#acf734aa3c7b0408127b3552551df50f4">helios::app::App::~App</a></div><div class="ttdeci">~App()</div><div class="ttdoc">Destructor that ensures all async work is completed before destruction.</div><div class="ttdef"><b>Definition</b> <a href="app_8cpp_source.html#l00019">app.cpp:19</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_ad00f452ada02721db7eae955b0eba1f5"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#ad00f452ada02721db7eae955b0eba1f5">helios::app::App::AddModule</a></div><div class="ttdeci">auto AddModule(this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Adds a module to the main sub-app.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00553">app.hpp:553</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_ad25abab1ce31391961633f678d64ff22"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#ad25abab1ce31391961633f678d64ff22">helios::app::App::SetSubAppExtraction</a></div><div class="ttdeci">auto SetSubAppExtraction(this auto &amp;&amp;self, ExtractFn extract_fn) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Sets extraction function for a sub-app.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00672">app.hpp:672</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_ad679c1f930309afa2668528f8419a5aa"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#ad679c1f930309afa2668528f8419a5aa">helios::app::App::HasEvent</a></div><div class="ttdeci">bool HasEvent() const noexcept</div><div class="ttdoc">Checks if a event is registered in main sub_app.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00378">app.hpp:378</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_ad69adf2eb3305bc2c47229ca5d5a18d4"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#ad69adf2eb3305bc2c47229ca5d5a18d4">helios::app::App::SystemCount</a></div><div class="ttdeci">size_t SystemCount() const noexcept</div><div class="ttdoc">Gets the total number of systems across all schedules in main sub-app.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00392">app.hpp:392</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_ad93ccac7ae13e39f02ebb97fc5a593cd"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#ad93ccac7ae13e39f02ebb97fc5a593cd">helios::app::App::ContainsModule</a></div><div class="ttdeci">bool ContainsModule() const noexcept</div><div class="ttdoc">Checks if a module of type T exists in main sub-app.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00703">app.hpp:703</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_ad9c41ded54e87910d24f1a592f9350d4"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#ad9c41ded54e87910d24f1a592f9350d4">helios::app::App::Update</a></div><div class="ttdeci">void Update()</div><div class="ttdoc">Updates the application and its subsystems.</div><div class="ttdef"><b>Definition</b> <a href="app_8cpp_source.html#l00073">app.cpp:73</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_ae7a2d7b4fac262cf5824c5df4d5b93c3"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#ae7a2d7b4fac262cf5824c5df4d5b93c3">helios::app::App::GetExecutor</a></div><div class="ttdeci">async::Executor &amp; GetExecutor() noexcept</div><div class="ttdoc">Gets the async executor.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00446">app.hpp:446</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a6ecfe054032e3c1eb7bc735f02413ded"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a6ecfe054032e3c1eb7bc735f02413ded">helios::app::App::Run</a></div><div class="ttdeci">AppExitCode Run()</div><div class="ttdoc">Runs the application with the given arguments.</div><div class="ttdef"><b>Definition</b> <a href="app_8cpp_source.html#l00049">app.cpp:49</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a768fbfe09eff0c53e35f4328ae8b5b42"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a768fbfe09eff0c53e35f4328ae8b5b42">helios::app::App::SetRunner</a></div><div class="ttdeci">auto SetRunner(this auto &amp;&amp;self, RunnerFn runner) noexcept -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Sets runner function for the application.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00768">app.hpp:768</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a78fb8e6d436ed6b07686561130641df8"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a78fb8e6d436ed6b07686561130641df8">helios::app::App::AddSystemBuilder</a></div><div class="ttdeci">auto AddSystemBuilder(this auto &amp;&amp;self, Schedule schedule={}) -&gt; SystemConfig&lt; Schedule, T &gt;</div><div class="ttdoc">Adds a single system with fluent configuration builder.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00867">app.hpp:867</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a84a4a19d1424293b8e617654a37a4957"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a84a4a19d1424293b8e617654a37a4957">helios::app::App::AddSystems</a></div><div class="ttdeci">auto AddSystems(this auto &amp;&amp;self, Schedule schedule={}) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Adds multiple systems to the specified schedule in the main sub-app.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00710">app.hpp:710</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a86e8d847fc891b85620ca3cadd1702d7"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a86e8d847fc891b85620ca3cadd1702d7">helios::app::App::ContainsSystem</a></div><div class="ttdeci">bool ContainsSystem() const noexcept</div><div class="ttdoc">Checks if a system of type T exists in any schedule of main sub-app.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00404">app.hpp:404</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a8927916d4a85a5194faf2db6e7ac2a35"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a8927916d4a85a5194faf2db6e7ac2a35">helios::app::App::ContainsDynamicModule</a></div><div class="ttdeci">bool ContainsDynamicModule(ModuleTypeId module_id) const noexcept</div><div class="ttdoc">Checks if a dynamic module with the given ID exists.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00815">app.hpp:815</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a8fcb1acd56f67ad784625e700661f9e1"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a8fcb1acd56f67ad784625e700661f9e1">helios::app::App::Initialize</a></div><div class="ttdeci">void Initialize()</div><div class="ttdoc">Initializes the application and its subsystems.</div><div class="ttdef"><b>Definition</b> <a href="app_8cpp_source.html#l00116">app.cpp:116</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a999b03fa7f69783664ca3054c173e023"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a999b03fa7f69783664ca3054c173e023">helios::app::App::GetMainWorld</a></div><div class="ttdeci">const ecs::World &amp; GetMainWorld() const noexcept</div><div class="ttdoc">Gets the main world.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00510">app.hpp:510</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_aa10e21204a97b31402a6d1d77bc9c256"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#aa10e21204a97b31402a6d1d77bc9c256">helios::app::App::IsInitialized</a></div><div class="ttdeci">bool IsInitialized() const noexcept</div><div class="ttdoc">Checks if the app has been initialized.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00424">app.hpp:424</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_aa537adab5a7cbbffc267a33584e938de"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#aa537adab5a7cbbffc267a33584e938de">helios::app::App::AddSubApp</a></div><div class="ttdeci">auto AddSubApp(this auto &amp;&amp;self, T sub_app={}) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Adds a new sub-application of type T.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00583">app.hpp:583</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_aa915dfbe8c5591735eb777f2a685300f"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#aa915dfbe8c5591735eb777f2a685300f">helios::app::App::RunnerFn</a></div><div class="ttdeci">std::function&lt; AppExitCode(App &amp;)&gt; RunnerFn</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00103">app.hpp:103</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_aa98948e6a898f7f01715c5b33cd4090d"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#aa98948e6a898f7f01715c5b33cd4090d">helios::app::App::App</a></div><div class="ttdeci">App()</div><div class="ttdef"><b>Definition</b> <a href="app_8cpp_source.html#l00022">app.cpp:22</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_abf42953340c5baea8aecec9e7ea1c454"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#abf42953340c5baea8aecec9e7ea1c454">helios::app::App::WaitForOverlappingUpdates</a></div><div class="ttdeci">void WaitForOverlappingUpdates()</div><div class="ttdoc">Waits for all overlapping sub-app updates to complete.</div><div class="ttdef"><b>Definition</b> <a href="app_8cpp_source.html#l00172">app.cpp:172</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_ac3c9939c10ef6d2a9a31aee51de545e9"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#ac3c9939c10ef6d2a9a31aee51de545e9">helios::app::App::Clear</a></div><div class="ttdeci">void Clear()</div><div class="ttdoc">Clears the application state, removing all data.</div><div class="ttdef"><b>Definition</b> <a href="app_8cpp_source.html#l00037">app.cpp:37</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_aca1848d9d552b352f72e7538c0628616"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#aca1848d9d552b352f72e7538c0628616">helios::app::App::AddSystem</a></div><div class="ttdeci">auto AddSystem(this auto &amp;&amp;self, Schedule schedule={}) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Adds a system to the specified schedule in the main sub-app.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00691">app.hpp:691</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_acba92c483b55c9930f21b86270499a76"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#acba92c483b55c9930f21b86270499a76">helios::app::App::TickTime</a></div><div class="ttdeci">void TickTime() noexcept</div><div class="ttdoc">Updates the Time resource for the current frame.</div><div class="ttdef"><b>Definition</b> <a href="app_8cpp_source.html#l00206">app.cpp:206</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_acea7fc37cd9453147be9ef8e541c3160"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#acea7fc37cd9453147be9ef8e541c3160">helios::app::App::ModuleCount</a></div><div class="ttdeci">size_t ModuleCount() const noexcept</div><div class="ttdoc">Gets the number of modules in main sub-app.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00456">app.hpp:456</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_acf734aa3c7b0408127b3552551df50f4"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#acf734aa3c7b0408127b3552551df50f4">helios::app::App::~App</a></div><div class="ttdeci">~App()</div><div class="ttdoc">Destructor that ensures all async work is completed before destruction.</div><div class="ttdef"><b>Definition</b> <a href="app_8cpp_source.html#l00026">app.cpp:26</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_ad00f452ada02721db7eae955b0eba1f5"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#ad00f452ada02721db7eae955b0eba1f5">helios::app::App::AddModule</a></div><div class="ttdeci">auto AddModule(this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Adds a module to the main sub-app.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00640">app.hpp:640</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_ad25abab1ce31391961633f678d64ff22"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#ad25abab1ce31391961633f678d64ff22">helios::app::App::SetSubAppExtraction</a></div><div class="ttdeci">auto SetSubAppExtraction(this auto &amp;&amp;self, ExtractFn extract_fn) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Sets extraction function for a sub-app.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00779">app.hpp:779</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_ad679c1f930309afa2668528f8419a5aa"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#ad679c1f930309afa2668528f8419a5aa">helios::app::App::HasEvent</a></div><div class="ttdeci">bool HasEvent() const noexcept</div><div class="ttdoc">Checks if a event is registered in main sub_app.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00448">app.hpp:448</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_ad69adf2eb3305bc2c47229ca5d5a18d4"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#ad69adf2eb3305bc2c47229ca5d5a18d4">helios::app::App::SystemCount</a></div><div class="ttdeci">size_t SystemCount() const noexcept</div><div class="ttdoc">Gets the total number of systems across all schedules in main sub-app.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00462">app.hpp:462</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_ad93ccac7ae13e39f02ebb97fc5a593cd"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#ad93ccac7ae13e39f02ebb97fc5a593cd">helios::app::App::ContainsModule</a></div><div class="ttdeci">bool ContainsModule() const noexcept</div><div class="ttdoc">Checks if a module of type T exists in main sub-app.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00810">app.hpp:810</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_ad9c41ded54e87910d24f1a592f9350d4"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#ad9c41ded54e87910d24f1a592f9350d4">helios::app::App::Update</a></div><div class="ttdeci">void Update()</div><div class="ttdoc">Updates the application and its subsystems.</div><div class="ttdef"><b>Definition</b> <a href="app_8cpp_source.html#l00084">app.cpp:84</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_ae7a2d7b4fac262cf5824c5df4d5b93c3"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#ae7a2d7b4fac262cf5824c5df4d5b93c3">helios::app::App::GetExecutor</a></div><div class="ttdeci">async::Executor &amp; GetExecutor() noexcept</div><div class="ttdoc">Gets the async executor.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00516">app.hpp:516</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_afa9aee3c3108c42adddb68cf34dc22a8"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#afa9aee3c3108c42adddb68cf34dc22a8">helios::app::App::AddDynamicModule</a></div><div class="ttdeci">auto AddDynamicModule(this auto &amp;&amp;self, DynamicModule &amp;&amp;module) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Adds a dynamic module to the main sub-app, taking ownership.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00670">app.hpp:670</a></div></div>
 <div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_a0719550ca7a5d19e8c37950591aae8b6"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#a0719550ca7a5d19e8c37950591aae8b6">helios::app::SubApp::GetWorld</a></div><div class="ttdeci">const ecs::World &amp; GetWorld() const noexcept</div><div class="ttdoc">Gets const reference to this sub-app's world.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00449">sub_app.hpp:449</a></div></div>
 <div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_a3e3e52d2fceddcb2b9907f41512ed5fa"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#a3e3e52d2fceddcb2b9907f41512ed5fa">helios::app::SubApp::SystemCount</a></div><div class="ttdeci">size_t SystemCount() const noexcept</div><div class="ttdoc">Gets the total number of systems across all schedules.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00432">sub_app.hpp:432</a></div></div>
 <div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_a467a8144c1510e02d2d41a49212449c9"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#a467a8144c1510e02d2d41a49212449c9">helios::app::SubApp::ContainsSystem</a></div><div class="ttdeci">bool ContainsSystem() const noexcept</div><div class="ttdoc">Checks if a system of type T is in any schedule.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00380">sub_app.hpp:380</a></div></div>
@@ -1011,6 +1123,7 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="ttc" id="acommon__traits_8hpp_html"><div class="ttname"><a href="common__traits_8hpp.html">common_traits.hpp</a></div></div>
 <div class="ttc" id="acore_8hpp_html"><div class="ttname"><a href="core_8hpp.html">core.hpp</a></div></div>
 <div class="ttc" id="acore__pch_8hpp_html"><div class="ttname"><a href="core__pch_8hpp.html">core_pch.hpp</a></div></div>
+<div class="ttc" id="adynamic__module_8hpp_html"><div class="ttname"><a href="dynamic__module_8hpp.html">dynamic_module.hpp</a></div></div>
 <div class="ttc" id="aevent_8hpp_html"><div class="ttname"><a href="event_8hpp.html">event.hpp</a></div></div>
 <div class="ttc" id="aexecutor_8hpp_html"><div class="ttname"><a href="executor_8hpp.html">executor.hpp</a></div></div>
 <div class="ttc" id="alogger_8hpp_html"><div class="ttname"><a href="logger_8hpp.html">logger.hpp</a></div></div>
@@ -1018,13 +1131,18 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="ttc" id="amodule_8hpp_html"><div class="ttname"><a href="module_8hpp.html">module.hpp</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1app_html"><div class="ttname"><a href="namespacehelios_1_1app.html">helios::app</a></div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00017">access_policy.hpp:17</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1app_html_a1c78747b4cc5ca72b3811b26772c9057"><div class="ttname"><a href="namespacehelios_1_1app.html#a1c78747b4cc5ca72b3811b26772c9057">helios::app::SubAppTypeId</a></div><div class="ttdeci">size_t SubAppTypeId</div><div class="ttdoc">Type alias for sub-app type IDs.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00128">sub_app.hpp:128</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1app_html_a6cd85782bcdd4e4ee78ffbb2c15916db"><div class="ttname"><a href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916db">helios::app::AppExitCode</a></div><div class="ttdeci">AppExitCode</div><div class="ttdoc">Application exit codes.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00041">app.hpp:41</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1app_html_a6cd85782bcdd4e4ee78ffbb2c15916db"><div class="ttname"><a href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916db">helios::app::AppExitCode</a></div><div class="ttdeci">AppExitCode</div><div class="ttdoc">Application exit codes.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00087">app.hpp:87</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1app_html_a6cd85782bcdd4e4ee78ffbb2c15916dba505a83f220c02df2f85c3810cd9ceb38"><div class="ttname"><a href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dba505a83f220c02df2f85c3810cd9ceb38">helios::app::AppExitCode::Success</a></div><div class="ttdeci">@ Success</div><div class="ttdoc">Successful execution.</div></div>
 <div class="ttc" id="anamespacehelios_1_1app_html_a6cd85782bcdd4e4ee78ffbb2c15916dbae139a585510a502bbf1841cf589f5086"><div class="ttname"><a href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dbae139a585510a502bbf1841cf589f5086">helios::app::AppExitCode::Failure</a></div><div class="ttdeci">@ Failure</div><div class="ttdoc">General failure.</div></div>
-<div class="ttc" id="anamespacehelios_1_1app_html_a6d04077cb9ea6077a44fdfe33f480ac5"><div class="ttname"><a href="namespacehelios_1_1app.html#a6d04077cb9ea6077a44fdfe33f480ac5">helios::app::ModuleTypeId</a></div><div class="ttdeci">size_t ModuleTypeId</div><div class="ttdef"><b>Definition</b> <a href="module_8hpp_source.html#l00062">module.hpp:62</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1ecs_html_af0384de48d847585fcb340c71c231e5e"><div class="ttname"><a href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, Allocator, Components... &gt; Query</div><div class="ttdoc">Type alias for query with mutable world access.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02515">query.hpp:2515</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1app_html_a6d04077cb9ea6077a44fdfe33f480ac5"><div class="ttname"><a href="namespacehelios_1_1app.html#a6d04077cb9ea6077a44fdfe33f480ac5">helios::app::ModuleTypeId</a></div><div class="ttdeci">size_t ModuleTypeId</div><div class="ttdef"><b>Definition</b> <a href="module_8hpp_source.html#l00084">module.hpp:84</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_af0384de48d847585fcb340c71c231e5e"><div class="ttname"><a href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, Allocator, Components... &gt; Query</div><div class="ttdoc">Type alias for query with mutable world access.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02481">query.hpp:2481</a></div></div>
 <div class="ttc" id="aresource_8hpp_html"><div class="ttname"><a href="resource_8hpp.html">resource.hpp</a></div></div>
 <div class="ttc" id="aschedule_8hpp_html"><div class="ttname"><a href="schedule_8hpp.html">schedule.hpp</a></div></div>
+<div class="ttc" id="astructhelios_1_1app_1_1details_1_1TrackedFuture_html_a37848dfec632c9746c3fd91a124d286a"><div class="ttname"><a href="structhelios_1_1app_1_1details_1_1TrackedFuture.html#a37848dfec632c9746c3fd91a124d286a">helios::app::details::TrackedFuture::Wait</a></div><div class="ttdeci">void Wait()</div><div class="ttdoc">Waits for the future to complete if not already ready.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00052">app.hpp:52</a></div></div>
+<div class="ttc" id="astructhelios_1_1app_1_1details_1_1TrackedFuture_html_a475a4d344ff91c755eb4624755b2f589"><div class="ttname"><a href="structhelios_1_1app_1_1details_1_1TrackedFuture.html#a475a4d344ff91c755eb4624755b2f589">helios::app::details::TrackedFuture::IsReady</a></div><div class="ttdeci">bool IsReady() noexcept</div><div class="ttdoc">Checks if the future is ready, caching the result.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00064">app.hpp:64</a></div></div>
+<div class="ttc" id="astructhelios_1_1app_1_1details_1_1TrackedFuture_html_a94f7808c463896c7c795b7096e55879d"><div class="ttname"><a href="structhelios_1_1app_1_1details_1_1TrackedFuture.html#a94f7808c463896c7c795b7096e55879d">helios::app::details::TrackedFuture::future</a></div><div class="ttdeci">std::shared_future&lt; void &gt; future</div><div class="ttdoc">The underlying future.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00046">app.hpp:46</a></div></div>
+<div class="ttc" id="astructhelios_1_1app_1_1details_1_1TrackedFuture_html_a9d5eeb6b6246ec0e73d37b8c12e93900"><div class="ttname"><a href="structhelios_1_1app_1_1details_1_1TrackedFuture.html#a9d5eeb6b6246ec0e73d37b8c12e93900">helios::app::details::TrackedFuture::ready</a></div><div class="ttdeci">bool ready</div><div class="ttdoc">Cached ready state.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00047">app.hpp:47</a></div></div>
+<div class="ttc" id="astructhelios_1_1app_1_1details_1_1TrackedFuture_html_af665beb4c8b0853cfe488104b1b19552"><div class="ttname"><a href="structhelios_1_1app_1_1details_1_1TrackedFuture.html#af665beb4c8b0853cfe488104b1b19552">helios::app::details::TrackedFuture::Valid</a></div><div class="ttdeci">bool Valid() const noexcept</div><div class="ttdoc">Checks if the future is valid.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00079">app.hpp:79</a></div></div>
 <div class="ttc" id="asub__app_8hpp_html"><div class="ttname"><a href="sub__app_8hpp.html">sub_app.hpp</a></div></div>
 <div class="ttc" id="asystem_8hpp_html"><div class="ttname"><a href="system_8hpp.html">system.hpp</a></div></div>
 <div class="ttc" id="asystem__config_8hpp_html"><div class="ttname"><a href="system__config_8hpp.html">system_config.hpp</a></div></div>

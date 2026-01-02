@@ -1,0 +1,384 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: /home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/time.hpp</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2time_8hpp-example.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/time.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<p>Resource for tracking frame timing information.</p>
+<p>Resource for tracking frame timing information. Provides delta time (time since last frame), total elapsed time, and frame count. Updated automatically by the engine before each frame. </p><dl class="section note"><dt>Note</dt><dd>Thread-safe for read operations. Written only by the runner before Update().</dd></dl>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> MovementSystem(SystemContext&amp; ctx) {</div>
+<div class="line">  <span class="keyword">const</span> <span class="keyword">auto</span>&amp; time = ctx.ReadResource&lt;Time&gt;();</div>
+<div class="line">  <span class="keyword">auto</span> query = ctx.Query().Get&lt;Position&amp;, <span class="keyword">const</span> Velocity&amp;&gt;();</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp;&amp; [entity, pos, vel] : query) {</div>
+<div class="line">    pos.x += vel.x * time.DeltaSeconds();</div>
+<div class="line">    pos.y += vel.y * time.DeltaSeconds();</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+</div><!-- fragment --><div class="fragment"><div class="line"><span class="preprocessor">#pragma once</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="core__pch_8hpp.html">helios/core_pch.hpp</a>&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="resource_8hpp.html">helios/core/ecs/resource.hpp</a>&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;chrono&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;string_view&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1app.html">helios::app</a> {</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief Resource for tracking frame timing information.</span></div>
+<div class="line"><span class="comment"> * @details Provides delta time (time since last frame), total elapsed time, and frame count.</span></div>
+<div class="line"><span class="comment"> * Updated automatically by the engine before each frame.</span></div>
+<div class="line"><span class="comment"> * @note Thread-safe for read operations. Written only by the runner before Update().</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * @example</span></div>
+<div class="line"><span class="comment"> * @code</span></div>
+<div class="line"><span class="comment"> * void MovementSystem(SystemContext&amp; ctx) {</span></div>
+<div class="line"><span class="comment"> *   const auto&amp; time = ctx.ReadResource&lt;Time&gt;();</span></div>
+<div class="line"><span class="comment"> *   auto query = ctx.Query().Get&lt;Position&amp;, const Velocity&amp;&gt;();</span></div>
+<div class="line"><span class="comment"> *   for (auto&amp;&amp; [entity, pos, vel] : query) {</span></div>
+<div class="line"><span class="comment"> *     pos.x += vel.x * time.DeltaSeconds();</span></div>
+<div class="line"><span class="comment"> *     pos.y += vel.y * time.DeltaSeconds();</span></div>
+<div class="line"><span class="comment"> *   }</span></div>
+<div class="line"><span class="comment"> * }</span></div>
+<div class="line"><span class="comment"> * @endcode</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">class </span>Time {</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">  <span class="keyword">using </span><a id="a0" name="a0"></a><a class="code hl_typedef" href="classhelios_1_1app_1_1Time.html#a60eaf338bb93feeffdde81289f6141cc">ClockType</a> = std::chrono::steady_clock;</div>
+<div class="line">  <span class="keyword">using </span><a id="a1" name="a1"></a><a class="code hl_typedef" href="classhelios_1_1app_1_1Time.html#aa9f43bb8559f90c47fa319eb11a4dcbb">TimePoint</a> = ClockType::time_point;</div>
+<div class="line">  <span class="keyword">using </span><a id="a2" name="a2"></a><a class="code hl_typedef" href="classhelios_1_1app_1_1Time.html#a8c7659cd20f3f6d2dbe5ed2cbaf1a843">Duration</a> = ClockType::duration;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Default constructor.</span></div>
+<div class="line"><span class="comment">   * @details Initializes time with zero delta and records start time.</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">constexpr</span> <a id="a3" name="a3"></a><a class="code hl_function" href="classhelios_1_1app_1_1Time.html#a59ad6fb3ae039c438bafdc341df755f4">Time</a>() <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line">  <span class="keyword">constexpr</span> <a class="code hl_function" href="classhelios_1_1app_1_1Time.html#a59ad6fb3ae039c438bafdc341df755f4">Time</a>(<span class="keyword">const</span> <a class="code hl_function" href="classhelios_1_1app_1_1Time.html#a59ad6fb3ae039c438bafdc341df755f4">Time</a>&amp;) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line">  <span class="keyword">constexpr</span> <a class="code hl_function" href="classhelios_1_1app_1_1Time.html#a59ad6fb3ae039c438bafdc341df755f4">Time</a>(<a class="code hl_function" href="classhelios_1_1app_1_1Time.html#a59ad6fb3ae039c438bafdc341df755f4">Time</a>&amp;&amp;) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line">  <span class="keyword">constexpr</span> <a id="a4" name="a4"></a><a class="code hl_function" href="classhelios_1_1app_1_1Time.html#a05b5e0fe80122d0c2c558497bf4a0f47">~Time</a>() <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">constexpr</span> <a class="code hl_function" href="classhelios_1_1app_1_1Time.html#a59ad6fb3ae039c438bafdc341df755f4">Time</a>&amp; <a id="a5" name="a5"></a><a class="code hl_function" href="classhelios_1_1app_1_1Time.html#aa37a18db51cec622a3baef0ce086abac">operator=</a>(<span class="keyword">const</span> <a class="code hl_function" href="classhelios_1_1app_1_1Time.html#a59ad6fb3ae039c438bafdc341df755f4">Time</a>&amp;) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line">  <span class="keyword">constexpr</span> <a class="code hl_function" href="classhelios_1_1app_1_1Time.html#a59ad6fb3ae039c438bafdc341df755f4">Time</a>&amp; <a class="code hl_function" href="classhelios_1_1app_1_1Time.html#aa37a18db51cec622a3baef0ce086abac">operator=</a>(<a class="code hl_function" href="classhelios_1_1app_1_1Time.html#a59ad6fb3ae039c438bafdc341df755f4">Time</a>&amp;&amp;) <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Updates timing information for a new frame.</span></div>
+<div class="line"><span class="comment">   * @details Should be called at the beginning of each frame by the runner.</span></div>
+<div class="line"><span class="comment">   * Calculates delta time based on the time since last update.</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a6" name="a6"></a><a class="code hl_function" href="classhelios_1_1app_1_1Time.html#a78d63a62e67574f37fb92ee1894d1897">Tick</a>() <span class="keyword">noexcept</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Resets all timing information.</span></div>
+<div class="line"><span class="comment">   * @details Sets delta to zero, resets elapsed time, and resets frame count.</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a7" name="a7"></a><a class="code hl_function" href="classhelios_1_1app_1_1Time.html#adefd426d1b281eb0719ec5699b832ca1">Reset</a>() <span class="keyword">noexcept</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Checks if this is the first frame.</span></div>
+<div class="line"><span class="comment">   * @return True if frame count is 0</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a id="a8" name="a8"></a><a class="code hl_function" href="classhelios_1_1app_1_1Time.html#a168d3a8d3bb8d91dbceb0465a06f6d3b">IsFirstFrame</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> frame_count_ == 0; }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Gets the raw delta duration.</span></div>
+<div class="line"><span class="comment">   * @return Delta time as std::chrono::duration</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] <span class="keyword">constexpr</span> <a class="code hl_typedef" href="classhelios_1_1app_1_1Time.html#a8c7659cd20f3f6d2dbe5ed2cbaf1a843">Duration</a> <a id="a9" name="a9"></a><a class="code hl_function" href="classhelios_1_1app_1_1Time.html#a52177d90153d6d080b41ac1eaff3b6b1">Delta</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> delta_; }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Gets the time elapsed since the last frame in seconds.</span></div>
+<div class="line"><span class="comment">   * @return Delta time in seconds as float</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] <span class="keyword">constexpr</span> <span class="keywordtype">float</span> <a id="a10" name="a10"></a><a class="code hl_function" href="classhelios_1_1app_1_1Time.html#a349c96f109262058958dd3849623e7a3">DeltaSeconds</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> delta_seconds_; }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Gets the time elapsed since the last frame in milliseconds.</span></div>
+<div class="line"><span class="comment">   * @return Delta time in milliseconds as float</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] <span class="keyword">constexpr</span> <span class="keywordtype">float</span> <a id="a11" name="a11"></a><a class="code hl_function" href="classhelios_1_1app_1_1Time.html#a531ab7702d12793a2c0bf5f58292882d">DeltaMilliseconds</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> delta_seconds_ * 1000.0F; }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Gets the total elapsed time since timing started.</span></div>
+<div class="line"><span class="comment">   * @return Total elapsed time as std::chrono::duration</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] <span class="keyword">constexpr</span> <a class="code hl_typedef" href="classhelios_1_1app_1_1Time.html#a8c7659cd20f3f6d2dbe5ed2cbaf1a843">Duration</a> <a id="a12" name="a12"></a><a class="code hl_function" href="classhelios_1_1app_1_1Time.html#af0f7b50d720fab8d2ad1f6f7d24b9f87">Elapsed</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> elapsed_; }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Gets the total elapsed time since timing started in seconds.</span></div>
+<div class="line"><span class="comment">   * @return Total elapsed time in seconds as float</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] <span class="keyword">constexpr</span> <span class="keywordtype">float</span> <a id="a13" name="a13"></a><a class="code hl_function" href="classhelios_1_1app_1_1Time.html#a9f93e630edaffc880b1c6f6ca0939265">ElapsedSeconds</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> elapsed_seconds_; }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Gets the current frame number.</span></div>
+<div class="line"><span class="comment">   * @details Incremented each time Tick() is called.</span></div>
+<div class="line"><span class="comment">   * @return Current frame count (0-indexed, first frame is 0)</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] <span class="keyword">constexpr</span> uint64_t <a id="a14" name="a14"></a><a class="code hl_function" href="classhelios_1_1app_1_1Time.html#a0b3030c4a3c2d3a8211cf0319685ae30">FrameCount</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> frame_count_; }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Calculates the current frames per second.</span></div>
+<div class="line"><span class="comment">   * @details Based on the current delta time.</span></div>
+<div class="line"><span class="comment">   * @return FPS as float, or 0 if delta is zero</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  [[nodiscard]] <span class="keyword">constexpr</span> <span class="keywordtype">float</span> <a id="a15" name="a15"></a><a class="code hl_function" href="classhelios_1_1app_1_1Time.html#a36c371135c519607fb4d30b6585ec665">Fps</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> delta_seconds_ &gt; 0.0F ? 1.0F / delta_seconds_ : 0.0F; }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Gets the resource name for trait requirements.</span></div>
+<div class="line"><span class="comment">   * @return Resource name</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view <a id="a16" name="a16"></a><a class="code hl_function" href="classhelios_1_1app_1_1Time.html#ae55cbc2b08b4725150e85d6ed37ea74a">GetName</a>() <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> <span class="stringliteral">&quot;Time&quot;</span>; }</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">  <a class="code hl_typedef" href="classhelios_1_1app_1_1Time.html#aa9f43bb8559f90c47fa319eb11a4dcbb">TimePoint</a> last_tick_{ClockType::now()};   <span class="comment">///&lt; Time point of the last tick</span></div>
+<div class="line">  <a class="code hl_typedef" href="classhelios_1_1app_1_1Time.html#aa9f43bb8559f90c47fa319eb11a4dcbb">TimePoint</a> start_time_{ClockType::now()};  <span class="comment">///&lt; Time point when timing started</span></div>
+<div class="line"> </div>
+<div class="line">  <a class="code hl_typedef" href="classhelios_1_1app_1_1Time.html#a8c7659cd20f3f6d2dbe5ed2cbaf1a843">Duration</a> delta_{Duration::zero()};    <span class="comment">///&lt; Duration since last frame</span></div>
+<div class="line">  <a class="code hl_typedef" href="classhelios_1_1app_1_1Time.html#a8c7659cd20f3f6d2dbe5ed2cbaf1a843">Duration</a> elapsed_{Duration::zero()};  <span class="comment">///&lt; Total elapsed duration</span></div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordtype">float</span> delta_seconds_ = 0.0F;    <span class="comment">///&lt; Delta time in seconds (cached for performance)</span></div>
+<div class="line">  <span class="keywordtype">float</span> elapsed_seconds_ = 0.0F;  <span class="comment">///&lt; Elapsed time in seconds (cached for performance)</span></div>
+<div class="line"> </div>
+<div class="line">  uint64_t frame_count_ = 0;  <span class="comment">///&lt; Number of frames since timing started</span></div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1app_1_1Time.html#a78d63a62e67574f37fb92ee1894d1897">Time::Tick</a>() <span class="keyword">noexcept</span> {</div>
+<div class="line">  <span class="keyword">const</span> TimePoint now = ClockType::now();</div>
+<div class="line"> </div>
+<div class="line">  delta_ = now - last_tick_;</div>
+<div class="line">  elapsed_ = now - start_time_;</div>
+<div class="line"> </div>
+<div class="line">  delta_seconds_ = std::chrono::duration&lt;float&gt;(delta_).count();</div>
+<div class="line">  elapsed_seconds_ = std::chrono::duration&lt;float&gt;(elapsed_).count();</div>
+<div class="line"> </div>
+<div class="line">  last_tick_ = now;</div>
+<div class="line">  ++frame_count_;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1app_1_1Time.html#adefd426d1b281eb0719ec5699b832ca1">Time::Reset</a>() <span class="keyword">noexcept</span> {</div>
+<div class="line">  <span class="keyword">const</span> TimePoint now = ClockType::now();</div>
+<div class="line"> </div>
+<div class="line">  last_tick_ = now;</div>
+<div class="line">  start_time_ = now;</div>
+<div class="line">  delta_ = Duration::zero();</div>
+<div class="line">  elapsed_ = Duration::zero();</div>
+<div class="line">  delta_seconds_ = 0.0F;</div>
+<div class="line">  elapsed_seconds_ = 0.0F;</div>
+<div class="line">  frame_count_ = 0;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Ensure Time satisfies ResourceTrait</span></div>
+<div class="line"><span class="keyword">static_assert</span>(<a id="a17" name="a17"></a><a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">ecs::ResourceTrait&lt;Time&gt;</a>, <span class="stringliteral">&quot;Time must satisfy ResourceTrait&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">}  <span class="comment">// namespace helios::app</span></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1Time_html_a05b5e0fe80122d0c2c558497bf4a0f47"><div class="ttname"><a href="classhelios_1_1app_1_1Time.html#a05b5e0fe80122d0c2c558497bf4a0f47">helios::app::Time::~Time</a></div><div class="ttdeci">constexpr ~Time() noexcept=default</div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1Time_html_a0b3030c4a3c2d3a8211cf0319685ae30"><div class="ttname"><a href="classhelios_1_1app_1_1Time.html#a0b3030c4a3c2d3a8211cf0319685ae30">helios::app::Time::FrameCount</a></div><div class="ttdeci">constexpr uint64_t FrameCount() const noexcept</div><div class="ttdoc">Gets the current frame number.</div><div class="ttdef"><b>Definition</b> <a href="time_8hpp_source.html#l00103">time.hpp:103</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1Time_html_a168d3a8d3bb8d91dbceb0465a06f6d3b"><div class="ttname"><a href="classhelios_1_1app_1_1Time.html#a168d3a8d3bb8d91dbceb0465a06f6d3b">helios::app::Time::IsFirstFrame</a></div><div class="ttdeci">constexpr bool IsFirstFrame() const noexcept</div><div class="ttdoc">Checks if this is the first frame.</div><div class="ttdef"><b>Definition</b> <a href="time_8hpp_source.html#l00066">time.hpp:66</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1Time_html_a349c96f109262058958dd3849623e7a3"><div class="ttname"><a href="classhelios_1_1app_1_1Time.html#a349c96f109262058958dd3849623e7a3">helios::app::Time::DeltaSeconds</a></div><div class="ttdeci">constexpr float DeltaSeconds() const noexcept</div><div class="ttdoc">Gets the time elapsed since the last frame in seconds.</div><div class="ttdef"><b>Definition</b> <a href="time_8hpp_source.html#l00078">time.hpp:78</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1Time_html_a36c371135c519607fb4d30b6585ec665"><div class="ttname"><a href="classhelios_1_1app_1_1Time.html#a36c371135c519607fb4d30b6585ec665">helios::app::Time::Fps</a></div><div class="ttdeci">constexpr float Fps() const noexcept</div><div class="ttdoc">Calculates the current frames per second.</div><div class="ttdef"><b>Definition</b> <a href="time_8hpp_source.html#l00110">time.hpp:110</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1Time_html_a52177d90153d6d080b41ac1eaff3b6b1"><div class="ttname"><a href="classhelios_1_1app_1_1Time.html#a52177d90153d6d080b41ac1eaff3b6b1">helios::app::Time::Delta</a></div><div class="ttdeci">constexpr Duration Delta() const noexcept</div><div class="ttdoc">Gets the raw delta duration.</div><div class="ttdef"><b>Definition</b> <a href="time_8hpp_source.html#l00072">time.hpp:72</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1Time_html_a531ab7702d12793a2c0bf5f58292882d"><div class="ttname"><a href="classhelios_1_1app_1_1Time.html#a531ab7702d12793a2c0bf5f58292882d">helios::app::Time::DeltaMilliseconds</a></div><div class="ttdeci">constexpr float DeltaMilliseconds() const noexcept</div><div class="ttdoc">Gets the time elapsed since the last frame in milliseconds.</div><div class="ttdef"><b>Definition</b> <a href="time_8hpp_source.html#l00084">time.hpp:84</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1Time_html_a59ad6fb3ae039c438bafdc341df755f4"><div class="ttname"><a href="classhelios_1_1app_1_1Time.html#a59ad6fb3ae039c438bafdc341df755f4">helios::app::Time::Time</a></div><div class="ttdeci">constexpr Time() noexcept=default</div><div class="ttdoc">Default constructor.</div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1Time_html_a60eaf338bb93feeffdde81289f6141cc"><div class="ttname"><a href="classhelios_1_1app_1_1Time.html#a60eaf338bb93feeffdde81289f6141cc">helios::app::Time::ClockType</a></div><div class="ttdeci">std::chrono::steady_clock ClockType</div><div class="ttdef"><b>Definition</b> <a href="time_8hpp_source.html#l00033">time.hpp:33</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1Time_html_a78d63a62e67574f37fb92ee1894d1897"><div class="ttname"><a href="classhelios_1_1app_1_1Time.html#a78d63a62e67574f37fb92ee1894d1897">helios::app::Time::Tick</a></div><div class="ttdeci">void Tick() noexcept</div><div class="ttdoc">Updates timing information for a new frame.</div><div class="ttdef"><b>Definition</b> <a href="time_8hpp_source.html#l00131">time.hpp:131</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1Time_html_a8c7659cd20f3f6d2dbe5ed2cbaf1a843"><div class="ttname"><a href="classhelios_1_1app_1_1Time.html#a8c7659cd20f3f6d2dbe5ed2cbaf1a843">helios::app::Time::Duration</a></div><div class="ttdeci">ClockType::duration Duration</div><div class="ttdef"><b>Definition</b> <a href="time_8hpp_source.html#l00035">time.hpp:35</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1Time_html_a9f93e630edaffc880b1c6f6ca0939265"><div class="ttname"><a href="classhelios_1_1app_1_1Time.html#a9f93e630edaffc880b1c6f6ca0939265">helios::app::Time::ElapsedSeconds</a></div><div class="ttdeci">constexpr float ElapsedSeconds() const noexcept</div><div class="ttdoc">Gets the total elapsed time since timing started in seconds.</div><div class="ttdef"><b>Definition</b> <a href="time_8hpp_source.html#l00096">time.hpp:96</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1Time_html_aa37a18db51cec622a3baef0ce086abac"><div class="ttname"><a href="classhelios_1_1app_1_1Time.html#aa37a18db51cec622a3baef0ce086abac">helios::app::Time::operator=</a></div><div class="ttdeci">constexpr Time &amp; operator=(const Time &amp;) noexcept=default</div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1Time_html_aa9f43bb8559f90c47fa319eb11a4dcbb"><div class="ttname"><a href="classhelios_1_1app_1_1Time.html#aa9f43bb8559f90c47fa319eb11a4dcbb">helios::app::Time::TimePoint</a></div><div class="ttdeci">ClockType::time_point TimePoint</div><div class="ttdef"><b>Definition</b> <a href="time_8hpp_source.html#l00034">time.hpp:34</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1Time_html_adefd426d1b281eb0719ec5699b832ca1"><div class="ttname"><a href="classhelios_1_1app_1_1Time.html#adefd426d1b281eb0719ec5699b832ca1">helios::app::Time::Reset</a></div><div class="ttdeci">void Reset() noexcept</div><div class="ttdoc">Resets all timing information.</div><div class="ttdef"><b>Definition</b> <a href="time_8hpp_source.html#l00144">time.hpp:144</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1Time_html_ae55cbc2b08b4725150e85d6ed37ea74a"><div class="ttname"><a href="classhelios_1_1app_1_1Time.html#ae55cbc2b08b4725150e85d6ed37ea74a">helios::app::Time::GetName</a></div><div class="ttdeci">static constexpr std::string_view GetName() noexcept</div><div class="ttdoc">Gets the resource name for trait requirements.</div><div class="ttdef"><b>Definition</b> <a href="time_8hpp_source.html#l00116">time.hpp:116</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1Time_html_af0f7b50d720fab8d2ad1f6f7d24b9f87"><div class="ttname"><a href="classhelios_1_1app_1_1Time.html#af0f7b50d720fab8d2ad1f6f7d24b9f87">helios::app::Time::Elapsed</a></div><div class="ttdeci">constexpr Duration Elapsed() const noexcept</div><div class="ttdoc">Gets the total elapsed time since timing started.</div><div class="ttdef"><b>Definition</b> <a href="time_8hpp_source.html#l00090">time.hpp:90</a></div></div>
+<div class="ttc" id="acore__pch_8hpp_html"><div class="ttname"><a href="core__pch_8hpp.html">core_pch.hpp</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1app_html"><div class="ttname"><a href="namespacehelios_1_1app.html">helios::app</a></div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00017">access_policy.hpp:17</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_af0384de48d847585fcb340c71c231e5e"><div class="ttname"><a href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, Allocator, Components... &gt; Query</div><div class="ttdoc">Type alias for query with mutable world access.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02481">query.hpp:2481</a></div></div>
+<div class="ttc" id="aresource_8hpp_html"><div class="ttname"><a href="resource_8hpp.html">resource.hpp</a></div></div>
+</div><!-- fragment --> </div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

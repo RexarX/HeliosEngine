@@ -195,7 +195,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a49800624c2338552dc91e8f5db3025e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a087e6e17f3279ed85bf7157b72f0c9f6" id="r_a087e6e17f3279ed85bf7157b72f0c9f6"><td class="memTemplParams" colspan="2">template&lt;std::ranges::sized_range R&gt; <br />
 requires std::same_as&lt;std::ranges::range_value_t&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">R</a>&gt;, T&gt;</td></tr>
-<tr class="memitem:a087e6e17f3279ed85bf7157b72f0c9f6"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1EventWriter.html#a087e6e17f3279ed85bf7157b72f0c9f6">WriteBulk</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">R</a> &amp;events)</td></tr>
+<tr class="memitem:a087e6e17f3279ed85bf7157b72f0c9f6"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1EventWriter.html#a087e6e17f3279ed85bf7157b72f0c9f6">WriteBulk</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">R</a> &amp;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">events</a>)</td></tr>
 <tr class="memdesc:a087e6e17f3279ed85bf7157b72f0c9f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes multiple events to the queue in bulk.  <br /></td></tr>
 <tr class="separator:a087e6e17f3279ed85bf7157b72f0c9f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9e0e5c914c1bdfed28f3ba6df258615" id="r_ad9e0e5c914c1bdfed28f3ba6df258615"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; <br />
@@ -218,7 +218,7 @@ class helios::ecs::EventWriter&lt; T &gt;</div><p>Type-safe writer for events. <
 <div class="line"><a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">writer</a>.Write(<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">MyEvent</a>{42});</div>
 <div class="line"><a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">writer</a>.Emplace(42);  <span class="comment">// Construct in-place</span></div>
 <div class="line"><a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">writer</a>.WriteBulk(<a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">event_span</a>);</div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1BasicQuery_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicQuery.html">helios::ecs::BasicQuery</a></div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l01107">query.hpp:1107</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1BasicQuery_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicQuery.html">helios::ecs::BasicQuery</a></div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l01088">query.hpp:1088</a></div></div>
 </div><!-- fragment --> 
 <p class="definition">Definition at line <a class="el" href="event__writer_8hpp_source.html#l00028">28</a> of file <a class="el" href="event__writer_8hpp_source.html">event_writer.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -258,7 +258,7 @@ template&lt;EventTrait T&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="event__writer_8hpp_source.html#l00034">34</a> of file <a class="el" href="event__writer_8hpp_source.html">event_writer.hpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   34</span>: manager_(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">manager</a>) {}</div>
-<div class="ttc" id="anamespacehelios_1_1ecs_html_af0384de48d847585fcb340c71c231e5e"><div class="ttname"><a href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, Allocator, Components... &gt; Query</div><div class="ttdoc">Type alias for query with mutable world access.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02515">query.hpp:2515</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_af0384de48d847585fcb340c71c231e5e"><div class="ttname"><a href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, Allocator, Components... &gt; Query</div><div class="ttdoc">Type alias for query with mutable world access.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02481">query.hpp:2481</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -537,7 +537,7 @@ requires std::same_as&lt;std::ranges::range_value_t&lt;<a class="el" href="names
 
 <p class="definition">Definition at line <a class="el" href="event__writer_8hpp_source.html#l00056">56</a> of file <a class="el" href="event__writer_8hpp_source.html">event_writer.hpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   56</span>                                  {</div>
-<div class="line"><span class="lineno">   57</span>    manager_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#aef70988c5b8c409cb8e3e4989551814e">WriteBulk</a>(events);</div>
+<div class="line"><span class="lineno">   57</span>    manager_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventManager.html#aef70988c5b8c409cb8e3e4989551814e">WriteBulk</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">events</a>);</div>
 <div class="line"><span class="lineno">   58</span>  }</div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventManager_html_aef70988c5b8c409cb8e3e4989551814e"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventManager.html#aef70988c5b8c409cb8e3e4989551814e">helios::ecs::details::EventManager::WriteBulk</a></div><div class="ttdeci">void WriteBulk(const R &amp;events)</div><div class="ttdoc">Writes multiple events to the queue in bulk.</div><div class="ttdef"><b>Definition</b> <a href="event__manager_8hpp_source.html#l00297">event_manager.hpp:297</a></div></div>
 </div><!-- fragment -->

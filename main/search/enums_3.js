@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['loglevel_0',['LogLevel',['../namespacehelios.html#a22a572a5b6a1313de5eaf69115bbad71',1,'helios']]]
+  ['fileerror_0',['FileError',['../namespacehelios_1_1utils.html#aa8f8d89ee8389efd92330df687025d68',1,'helios::utils']]]
 ];

@@ -255,7 +255,7 @@ $(document).ready(function(){initNavTree('future_8hpp_source.html',''); initResi
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="classhelios_1_1async_1_1Future.html#adc143630a414f009a675f039a5034fd0">   82</a></span>  [[nodiscard]] <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1async_1_1Future.html#adc143630a414f009a675f039a5034fd0">Valid</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> future_.valid(); }</div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  <span class="keyword">explicit</span> <a class="code hl_function" href="classhelios_1_1async_1_1Future.html#ade70cf53df1e25c667a6f6f191700812">Future</a>(tf::Future&lt;T&gt; future) : future_(std::move(future)) {}</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  <span class="keyword">explicit</span> <a class="code hl_function" href="classhelios_1_1async_1_1Future.html#ade70cf53df1e25c667a6f6f191700812">Future</a>(tf::Future&lt;T&gt; future) : future_(<a class="code hl_namespace" href="namespacestd.html">std</a>::move(future)) {}</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  <span class="keyword">mutable</span> tf::Future&lt;T&gt; future_;</div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
@@ -282,6 +282,7 @@ $(document).ready(function(){initNavTree('future_8hpp_source.html',''); initResi
 <div class="ttc" id="aclasshelios_1_1async_1_1SubTaskGraph_html"><div class="ttname"><a href="classhelios_1_1async_1_1SubTaskGraph.html">helios::async::SubTaskGraph</a></div><div class="ttdoc">Dynamic task graph that can be created within the execution of a task.</div><div class="ttdef"><b>Definition</b> <a href="sub__task__graph_8hpp_source.html#l00041">sub_task_graph.hpp:41</a></div></div>
 <div class="ttc" id="acore__pch_8hpp_html"><div class="ttname"><a href="core__pch_8hpp.html">core_pch.hpp</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1async_html"><div class="ttname"><a href="namespacehelios_1_1async.html">helios::async</a></div><div class="ttdef"><b>Definition</b> <a href="async__task_8hpp_source.html#l00012">async_task.hpp:12</a></div></div>
+<div class="ttc" id="anamespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div><div class="ttdoc">STL namespace.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->

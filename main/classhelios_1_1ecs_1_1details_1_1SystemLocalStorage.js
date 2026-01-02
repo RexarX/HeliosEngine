@@ -1,6 +1,8 @@
 var classhelios_1_1ecs_1_1details_1_1SystemLocalStorage =
 [
     [ "FrameAllocatorType", "classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a803609b8b736c6f321a8344c5ce0d7de", null ],
+    [ "FrameCommandAllocator", "classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a6474c36c5496c30380007bece73de3a5", null ],
+    [ "FrameCommandVector", "classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#abd7648cfd57cbb7451b087e1c7ad8aff", null ],
     [ "SystemLocalStorage", "classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a02a9023d395bfbcc68bb0a880ea376e4", null ],
     [ "SystemLocalStorage", "classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a7ff6bdded02028911fee721245dd1d17", null ],
     [ "SystemLocalStorage", "classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#aa2e37d7df15de5bf12a3c75889916a1f", null ],
@@ -10,6 +12,7 @@ var classhelios_1_1ecs_1_1details_1_1SystemLocalStorage =
     [ "Clear", "classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a1a3438361d24b7b076f71a4c35e56324", null ],
     [ "ClearAll", "classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#ab97719685947e4d4b91247015137f66c", null ],
     [ "CommandCount", "classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a4fbaab77fd560fe79c9d10f5d7853754", null ],
+    [ "CreateFrameCommandAllocator", "classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#ac9d8002f76a7c65221b9d13a80359aea", null ],
     [ "EmplaceCommand", "classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a2fcd5cda672add3690a5808f0a4a2ff7", null ],
     [ "Empty", "classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#af3b3f7c35d6bcddf6c028182f7aa41c4", null ],
     [ "FrameAllocator", "classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a8dd2b728de449c83a04b373cf3307aa2", null ],

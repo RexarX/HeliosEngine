@@ -8,6 +8,7 @@ var core_8hpp =
     [ "HELIOS_DEBUG_BREAK", "core_8hpp.html#ada983df2522c351b671d6943887b483e", null ],
     [ "HELIOS_EXPECT_FALSE", "core_8hpp.html#af2f0a86a0f14c42148fbec11f27b4690", null ],
     [ "HELIOS_EXPECT_TRUE", "core_8hpp.html#ad21e58157e9f3c2d9c39f2ea5423d017", null ],
+    [ "HELIOS_EXPORT", "core_8hpp.html#addef039204a27478a1fff77081d409bd", null ],
     [ "HELIOS_FORCE_INLINE", "core_8hpp.html#a754fba4b22744e64a97ad1afc9065bc1", null ],
     [ "HELIOS_NO_INLINE", "core_8hpp.html#a95ef3dcee5d3dd81a75581aaa5a91b3a", null ],
     [ "HELIOS_RELEASE_UNREACHABLE", "core_8hpp.html#a0baa94baca2a0f972f63b78d01a9034d", null ],

@@ -165,25 +165,28 @@ $(document).ready(function(){initNavTree('builtin__events_8hpp.html',''); initRe
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#enum-members">Enumerations</a>  </div>
   <div class="headertitle"><div class="title">builtin_events.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;<a class="el" href="core__pch_8hpp_source.html">helios/core_pch.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="entity_8hpp_source.html">helios/core/ecs/entity.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="event_8hpp_source.html">helios/core/ecs/event.hpp</a>&gt;</code><br />
+<code>#include &lt;cstdint&gt;</code><br />
 <code>#include &lt;string_view&gt;</code><br />
-<code>#include &lt;type_traits&gt;</code><br />
 </div>
 <p><a href="builtin__events_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1ecs_1_1events_1_1EntitySpawnedEvent.html">helios::ecs::events::EntitySpawnedEvent</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event emitted when an entity is spawned/created.  <a href="structhelios_1_1ecs_1_1events_1_1EntitySpawnedEvent.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1ecs_1_1EntitySpawnedEvent.html">helios::ecs::EntitySpawnedEvent</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event emitted when an entity is spawned/created.  <a href="structhelios_1_1ecs_1_1EntitySpawnedEvent.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1ecs_1_1events_1_1EntityDestroyedEvent.html">helios::ecs::events::EntityDestroyedEvent</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event emitted when an entity is destroyed.  <a href="structhelios_1_1ecs_1_1events_1_1EntityDestroyedEvent.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1ecs_1_1EntityDestroyedEvent.html">helios::ecs::EntityDestroyedEvent</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event emitted when an entity is destroyed.  <a href="structhelios_1_1ecs_1_1EntityDestroyedEvent.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1ecs_1_1ShutdownEvent.html">helios::ecs::ShutdownEvent</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
@@ -192,8 +195,14 @@ Namespaces</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespacehelios_1_1ecs" id="r_namespacehelios_1_1ecs"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1ecs.html">helios::ecs</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:namespacehelios_1_1ecs_1_1events" id="r_namespacehelios_1_1ecs_1_1events"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1ecs_1_1events.html">helios::ecs::events</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:ae984f0803649a1da782a858e73401658" id="r_ae984f0803649a1da782a858e73401658"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1ecs.html#ae984f0803649a1da782a858e73401658">helios::ecs::ShutdownExitCode</a> : uint8_t { <a class="el" href="namespacehelios_1_1ecs.html#ae984f0803649a1da782a858e73401658a505a83f220c02df2f85c3810cd9ceb38">helios::ecs::Success</a> = 0
+, <a class="el" href="namespacehelios_1_1ecs.html#ae984f0803649a1da782a858e73401658ae139a585510a502bbf1841cf589f5086">helios::ecs::Failure</a> = 1
+ }</td></tr>
+<tr class="memdesc:ae984f0803649a1da782a858e73401658"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exit code for application shutdown.  <a href="namespacehelios_1_1ecs.html#ae984f0803649a1da782a858e73401658">More...</a><br /></td></tr>
+<tr class="separator:ae984f0803649a1da782a858e73401658"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->

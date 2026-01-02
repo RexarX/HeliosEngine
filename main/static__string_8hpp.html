@@ -1,0 +1,299 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: src/core/include/helios/core/container/static_string.hpp File Reference</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('static__string_8hpp.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a>  </div>
+  <div class="headertitle"><div class="title">static_string.hpp File Reference</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;<a class="el" href="core__pch_8hpp_source.html">helios/core_pch.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="assert_8hpp_source.html">helios/core/assert.hpp</a>&gt;</code><br />
+<code>#include &lt;algorithm&gt;</code><br />
+<code>#include &lt;array&gt;</code><br />
+<code>#include &lt;compare&gt;</code><br />
+<code>#include &lt;cstddef&gt;</code><br />
+<code>#include &lt;format&gt;</code><br />
+<code>#include &lt;functional&gt;</code><br />
+<code>#include &lt;istream&gt;</code><br />
+<code>#include &lt;iterator&gt;</code><br />
+<code>#include &lt;ostream&gt;</code><br />
+<code>#include &lt;ranges&gt;</code><br />
+<code>#include &lt;string&gt;</code><br />
+<code>#include &lt;string_view&gt;</code><br />
+</div>
+<p><a href="static__string_8hpp_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1container_1_1BasicStaticString.html">helios::container::BasicStaticString&lt; StrCapacity, CharT, Traits &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A fixed-capacity string class that owns its storage.  <a href="classhelios_1_1container_1_1BasicStaticString.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespacehelios" id="r_namespacehelios"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios.html">helios</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespacehelios_1_1container" id="r_namespacehelios_1_1container"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1container.html">helios::container</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespacestd" id="r_namespacestd"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacestd.html">std</a></td></tr>
+<tr class="memdesc:namespacestd"><td class="mdescLeft">&#160;</td><td class="mdescRight">STL namespace. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a6e5dd7e72d0af0844ffe45232a6f7e92" id="r_a6e5dd7e72d0af0844ffe45232a6f7e92"><td class="memTemplParams" colspan="2">template&lt;size_t N&gt; </td></tr>
+<tr class="memitem:a6e5dd7e72d0af0844ffe45232a6f7e92"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1container.html#a6e5dd7e72d0af0844ffe45232a6f7e92">helios::container::StaticString</a> = <a class="el" href="classhelios_1_1container_1_1BasicStaticString.html">BasicStaticString</a>&lt; N, char &gt;</td></tr>
+<tr class="memdesc:a6e5dd7e72d0af0844ffe45232a6f7e92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fixed-capacity string of char.  <br /></td></tr>
+<tr class="separator:a6e5dd7e72d0af0844ffe45232a6f7e92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa707350408c2a90e2c15b08150fa33c7" id="r_aa707350408c2a90e2c15b08150fa33c7"><td class="memTemplParams" colspan="2">template&lt;size_t N&gt; </td></tr>
+<tr class="memitem:aa707350408c2a90e2c15b08150fa33c7"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1container.html#aa707350408c2a90e2c15b08150fa33c7">helios::container::StaticWString</a> = <a class="el" href="classhelios_1_1container_1_1BasicStaticString.html">BasicStaticString</a>&lt; N, wchar_t &gt;</td></tr>
+<tr class="memdesc:aa707350408c2a90e2c15b08150fa33c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fixed-capacity string of wchar_t.  <br /></td></tr>
+<tr class="separator:aa707350408c2a90e2c15b08150fa33c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a260ebf03bdaf1a3ed388a5bd00729694" id="r_a260ebf03bdaf1a3ed388a5bd00729694"><td class="memTemplParams" colspan="2">template&lt;size_t N&gt; </td></tr>
+<tr class="memitem:a260ebf03bdaf1a3ed388a5bd00729694"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1container.html#a260ebf03bdaf1a3ed388a5bd00729694">helios::container::StaticU8String</a> = <a class="el" href="classhelios_1_1container_1_1BasicStaticString.html">BasicStaticString</a>&lt; N, char8_t &gt;</td></tr>
+<tr class="memdesc:a260ebf03bdaf1a3ed388a5bd00729694"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fixed-capacity string of char8_t.  <br /></td></tr>
+<tr class="separator:a260ebf03bdaf1a3ed388a5bd00729694"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a083fedc7899524175724a908cd8fc9ef" id="r_a083fedc7899524175724a908cd8fc9ef"><td class="memTemplParams" colspan="2">template&lt;size_t N&gt; </td></tr>
+<tr class="memitem:a083fedc7899524175724a908cd8fc9ef"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1container.html#a083fedc7899524175724a908cd8fc9ef">helios::container::StaticU16String</a> = <a class="el" href="classhelios_1_1container_1_1BasicStaticString.html">BasicStaticString</a>&lt; N, char16_t &gt;</td></tr>
+<tr class="memdesc:a083fedc7899524175724a908cd8fc9ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fixed-capacity string of char16_t.  <br /></td></tr>
+<tr class="separator:a083fedc7899524175724a908cd8fc9ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4dd8055e4156abe78f6e74643d6618ad" id="r_a4dd8055e4156abe78f6e74643d6618ad"><td class="memTemplParams" colspan="2">template&lt;size_t N&gt; </td></tr>
+<tr class="memitem:a4dd8055e4156abe78f6e74643d6618ad"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1container.html#a4dd8055e4156abe78f6e74643d6618ad">helios::container::StaticU32String</a> = <a class="el" href="classhelios_1_1container_1_1BasicStaticString.html">BasicStaticString</a>&lt; N, char32_t &gt;</td></tr>
+<tr class="memdesc:a4dd8055e4156abe78f6e74643d6618ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fixed-capacity string of char32_t.  <br /></td></tr>
+<tr class="separator:a4dd8055e4156abe78f6e74643d6618ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a23eac4f64d87d9be75d34d620b518db5" id="r_a23eac4f64d87d9be75d34d620b518db5"><td class="memTemplParams" colspan="2">template&lt;size_t N1, size_t N2, typename CharT , typename Traits &gt; </td></tr>
+<tr class="memitem:a23eac4f64d87d9be75d34d620b518db5"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1container.html#a23eac4f64d87d9be75d34d620b518db5">helios::container::operator+</a> (const <a class="el" href="classhelios_1_1container_1_1BasicStaticString.html">BasicStaticString</a>&lt; N1, CharT, Traits &gt; &amp;lhs, const <a class="el" href="classhelios_1_1container_1_1BasicStaticString.html">BasicStaticString</a>&lt; N2, CharT, Traits &gt; &amp;rhs) noexcept -&gt; <a class="el" href="classhelios_1_1container_1_1BasicStaticString.html">BasicStaticString</a>&lt; N1+N2, CharT, Traits &gt;</td></tr>
+<tr class="memdesc:a23eac4f64d87d9be75d34d620b518db5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concatenates two StaticStrings.  <br /></td></tr>
+<tr class="separator:a23eac4f64d87d9be75d34d620b518db5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2fb1cc0b5e13016f5c951d088158d09" id="r_aa2fb1cc0b5e13016f5c951d088158d09"><td class="memTemplParams" colspan="2">template&lt;size_t N, typename CharT , typename Traits &gt; </td></tr>
+<tr class="memitem:aa2fb1cc0b5e13016f5c951d088158d09"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1container.html#aa2fb1cc0b5e13016f5c951d088158d09">helios::container::operator+</a> (const <a class="el" href="classhelios_1_1container_1_1BasicStaticString.html">BasicStaticString</a>&lt; N, CharT, Traits &gt; &amp;lhs, std::basic_string_view&lt; CharT, Traits &gt; rhs) noexcept -&gt; <a class="el" href="classhelios_1_1container_1_1BasicStaticString.html">BasicStaticString</a>&lt; N, CharT, Traits &gt;</td></tr>
+<tr class="memdesc:aa2fb1cc0b5e13016f5c951d088158d09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concatenates StaticString with string_view.  <br /></td></tr>
+<tr class="separator:aa2fb1cc0b5e13016f5c951d088158d09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f7eace7b2343144069e4e2045963436" id="r_a0f7eace7b2343144069e4e2045963436"><td class="memTemplParams" colspan="2">template&lt;size_t N, typename CharT , typename Traits &gt; </td></tr>
+<tr class="memitem:a0f7eace7b2343144069e4e2045963436"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1container.html#a0f7eace7b2343144069e4e2045963436">helios::container::operator+</a> (std::basic_string_view&lt; CharT, Traits &gt; lhs, const <a class="el" href="classhelios_1_1container_1_1BasicStaticString.html">BasicStaticString</a>&lt; N, CharT, Traits &gt; &amp;rhs) noexcept -&gt; <a class="el" href="classhelios_1_1container_1_1BasicStaticString.html">BasicStaticString</a>&lt; N, CharT, Traits &gt;</td></tr>
+<tr class="memdesc:a0f7eace7b2343144069e4e2045963436"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concatenates string_view with StaticString.  <br /></td></tr>
+<tr class="separator:a0f7eace7b2343144069e4e2045963436"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae65063f6a2c4510a77b75c4a696774fb" id="r_ae65063f6a2c4510a77b75c4a696774fb"><td class="memTemplParams" colspan="2">template&lt;size_t N, typename CharT , typename Traits &gt; </td></tr>
+<tr class="memitem:ae65063f6a2c4510a77b75c4a696774fb"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1container.html#ae65063f6a2c4510a77b75c4a696774fb">helios::container::operator+</a> (const <a class="el" href="classhelios_1_1container_1_1BasicStaticString.html">BasicStaticString</a>&lt; N, CharT, Traits &gt; &amp;lhs, CharT rhs) noexcept -&gt; <a class="el" href="classhelios_1_1container_1_1BasicStaticString.html">BasicStaticString</a>&lt; N, CharT, Traits &gt;</td></tr>
+<tr class="memdesc:ae65063f6a2c4510a77b75c4a696774fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concatenates StaticString with character.  <br /></td></tr>
+<tr class="separator:ae65063f6a2c4510a77b75c4a696774fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a384ca661ae2305a2e4bd294185c79fb2" id="r_a384ca661ae2305a2e4bd294185c79fb2"><td class="memTemplParams" colspan="2">template&lt;size_t N, typename CharT , typename Traits &gt; </td></tr>
+<tr class="memitem:a384ca661ae2305a2e4bd294185c79fb2"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1container.html#a384ca661ae2305a2e4bd294185c79fb2">helios::container::operator+</a> (CharT lhs, const <a class="el" href="classhelios_1_1container_1_1BasicStaticString.html">BasicStaticString</a>&lt; N, CharT, Traits &gt; &amp;rhs) noexcept -&gt; <a class="el" href="classhelios_1_1container_1_1BasicStaticString.html">BasicStaticString</a>&lt; N, CharT, Traits &gt;</td></tr>
+<tr class="memdesc:a384ca661ae2305a2e4bd294185c79fb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concatenates character with StaticString.  <br /></td></tr>
+<tr class="separator:a384ca661ae2305a2e4bd294185c79fb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a2d36fc14fc9b00ba78bf0f1e68530a" id="r_a6a2d36fc14fc9b00ba78bf0f1e68530a"><td class="memTemplParams" colspan="2">template&lt;size_t StrCapacity, typename CharT , typename Traits &gt; </td></tr>
+<tr class="memitem:a6a2d36fc14fc9b00ba78bf0f1e68530a"><td class="memTemplItemLeft" align="right" valign="top">constexpr void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1container.html#a6a2d36fc14fc9b00ba78bf0f1e68530a">helios::container::swap</a> (<a class="el" href="classhelios_1_1container_1_1BasicStaticString.html">BasicStaticString</a>&lt; StrCapacity, CharT, Traits &gt; &amp;lhs, <a class="el" href="classhelios_1_1container_1_1BasicStaticString.html">BasicStaticString</a>&lt; StrCapacity, CharT, Traits &gt; &amp;rhs) noexcept</td></tr>
+<tr class="memdesc:a6a2d36fc14fc9b00ba78bf0f1e68530a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Swaps two BasicStaticStrings.  <br /></td></tr>
+<tr class="separator:a6a2d36fc14fc9b00ba78bf0f1e68530a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78b054a4be3b01b969252cf2b1ce36a3" id="r_a78b054a4be3b01b969252cf2b1ce36a3"><td class="memTemplParams" colspan="2">template&lt;size_t StrCapacity, typename CharT , typename Traits &gt; </td></tr>
+<tr class="memitem:a78b054a4be3b01b969252cf2b1ce36a3"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1container.html#a78b054a4be3b01b969252cf2b1ce36a3">helios::container::erase</a> (<a class="el" href="classhelios_1_1container_1_1BasicStaticString.html">BasicStaticString</a>&lt; StrCapacity, CharT, Traits &gt; &amp;str, CharT value) noexcept -&gt; typename <a class="el" href="classhelios_1_1container_1_1BasicStaticString.html">BasicStaticString</a>&lt; StrCapacity, CharT, Traits &gt;::size_type</td></tr>
+<tr class="memdesc:a78b054a4be3b01b969252cf2b1ce36a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Erases all elements equal to value.  <br /></td></tr>
+<tr class="separator:a78b054a4be3b01b969252cf2b1ce36a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2906a4b7ceb9235e0954fd6b7ad314e" id="r_ae2906a4b7ceb9235e0954fd6b7ad314e"><td class="memTemplParams" colspan="2">template&lt;size_t StrCapacity, typename CharT , typename Traits , typename Pred &gt; </td></tr>
+<tr class="memitem:ae2906a4b7ceb9235e0954fd6b7ad314e"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1container.html#ae2906a4b7ceb9235e0954fd6b7ad314e">helios::container::erase_if</a> (<a class="el" href="classhelios_1_1container_1_1BasicStaticString.html">BasicStaticString</a>&lt; StrCapacity, CharT, Traits &gt; &amp;str, Pred pred) noexcept -&gt; typename <a class="el" href="classhelios_1_1container_1_1BasicStaticString.html">BasicStaticString</a>&lt; StrCapacity, CharT, Traits &gt;::size_type</td></tr>
+<tr class="memdesc:ae2906a4b7ceb9235e0954fd6b7ad314e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Erases all elements satisfying predicate.  <br /></td></tr>
+<tr class="separator:ae2906a4b7ceb9235e0954fd6b7ad314e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49946138b14d7e366817380f8822044e" id="r_a49946138b14d7e366817380f8822044e"><td class="memTemplParams" colspan="2">template&lt;size_t StrCapacity, typename CharT , typename Traits &gt; </td></tr>
+<tr class="memitem:a49946138b14d7e366817380f8822044e"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1container.html#a49946138b14d7e366817380f8822044e">helios::container::operator&lt;&lt;</a> (std::basic_ostream&lt; CharT, Traits &gt; &amp;os, const <a class="el" href="classhelios_1_1container_1_1BasicStaticString.html">BasicStaticString</a>&lt; StrCapacity, CharT, Traits &gt; &amp;str) -&gt; std::basic_ostream&lt; CharT, Traits &gt; &amp;</td></tr>
+<tr class="memdesc:a49946138b14d7e366817380f8822044e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs a <a class="el" href="classhelios_1_1container_1_1BasicStaticString.html" title="A fixed-capacity string class that owns its storage.">BasicStaticString</a> to an output stream.  <br /></td></tr>
+<tr class="separator:a49946138b14d7e366817380f8822044e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75851f3bcb3db11a178838920fa6cbc5" id="r_a75851f3bcb3db11a178838920fa6cbc5"><td class="memTemplParams" colspan="2">template&lt;size_t StrCapacity, typename CharT , typename Traits &gt; </td></tr>
+<tr class="memitem:a75851f3bcb3db11a178838920fa6cbc5"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1container.html#a75851f3bcb3db11a178838920fa6cbc5">helios::container::operator&gt;&gt;</a> (std::basic_istream&lt; CharT, Traits &gt; &amp;is, <a class="el" href="classhelios_1_1container_1_1BasicStaticString.html">BasicStaticString</a>&lt; StrCapacity, CharT, Traits &gt; &amp;str) -&gt; std::basic_istream&lt; CharT, Traits &gt; &amp;</td></tr>
+<tr class="memdesc:a75851f3bcb3db11a178838920fa6cbc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inputs a <a class="el" href="classhelios_1_1container_1_1BasicStaticString.html" title="A fixed-capacity string class that owns its storage.">BasicStaticString</a> from an input stream.  <br /></td></tr>
+<tr class="separator:a75851f3bcb3db11a178838920fa6cbc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_aebb8dcc11953d78e620bbef0b9e2183.html">core</a></li><li class="navelem"><a class="el" href="dir_8f49dd062eda24395df599c5385a3cb1.html">include</a></li><li class="navelem"><a class="el" href="dir_23069df5183a130785923908e80258ad.html">helios</a></li><li class="navelem"><a class="el" href="dir_2da2d982aeea650f7dd0b34d7b8d0119.html">core</a></li><li class="navelem"><a class="el" href="dir_08036296086b51a2d5091e67d1affcea.html">container</a></li><li class="navelem"><a class="el" href="static__string_8hpp.html">static_string.hpp</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

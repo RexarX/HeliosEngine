@@ -219,7 +219,7 @@ The adapter is constexpr-compatible for compile-time evaluation. </dd></dl>
 <div class="line"><span class="keyword">struct </span>is_folder_applicable_impl : std::false_type {};</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Folder, <span class="keyword">typename</span> Accumulator, <span class="keyword">typename</span>... TupleArgs&gt;</div>
-<div class="line"><span class="keyword">struct </span>is_folder_applicable_impl&lt;Folder, Accumulator, std::tuple&lt;TupleArgs...&gt;&gt;</div>
+<div class="line"><span class="keyword">struct </span>is_folder_applicable_impl&lt;Folder, Accumulator, <a class="code hl_namespace" href="namespacestd.html">std</a>::tuple&lt;TupleArgs...&gt;&gt;</div>
 <div class="line">    : std::bool_constant&lt;std::invocable&lt;Folder, Accumulator, TupleArgs...&gt;&gt; {};</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Folder, <span class="keyword">typename</span> Accumulator, <span class="keyword">typename</span> Tuple&gt;</div>
@@ -232,7 +232,7 @@ The adapter is constexpr-compatible for compile-time evaluation. </dd></dl>
 <div class="line"><span class="keyword">struct </span>folder_apply_result;</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Folder, <span class="keyword">typename</span> Accumulator, <span class="keyword">typename</span>... TupleArgs&gt;</div>
-<div class="line"><span class="keyword">struct </span>folder_apply_result&lt;Folder, Accumulator, std::tuple&lt;TupleArgs...&gt;&gt; {</div>
+<div class="line"><span class="keyword">struct </span>folder_apply_result&lt;Folder, Accumulator, <a class="code hl_namespace" href="namespacestd.html">std</a>::tuple&lt;TupleArgs...&gt;&gt; {</div>
 <div class="line">  <span class="keyword">using </span>type = std::invoke_result_t&lt;Folder, Accumulator, TupleArgs...&gt;;</div>
 <div class="line">};</div>
 <div class="line"> </div>
@@ -714,7 +714,7 @@ The adapter is constexpr-compatible for compile-time evaluation. </dd></dl>
 <div class="line">  <span class="keyword">struct </span>DeduceValueType;</div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Args&gt;</div>
-<div class="line">  <span class="keyword">struct </span>DeduceValueType&lt;std::tuple&lt;Args...&gt;&gt; {</div>
+<div class="line">  <span class="keyword">struct </span>DeduceValueType&lt;<a class="code hl_namespace" href="namespacestd.html">std</a>::tuple&lt;Args...&gt;&gt; {</div>
 <div class="line">    <span class="keyword">using </span>Type = <span class="keyword">decltype</span>(std::apply(std::declval&lt;Func&gt;(), std::declval&lt;std::tuple&lt;Args...&gt;&gt;()));</div>
 <div class="line">  };</div>
 <div class="line"> </div>
@@ -1336,7 +1336,7 @@ The adapter is constexpr-compatible for compile-time evaluation. </dd></dl>
 <div class="line">  };</div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Args&gt;</div>
-<div class="line">  <span class="keyword">struct </span>MakeEnumeratedValue&lt;std::tuple&lt;Args...&gt;&gt; {</div>
+<div class="line">  <span class="keyword">struct </span>MakeEnumeratedValue&lt;<a class="code hl_namespace" href="namespacestd.html">std</a>::tuple&lt;Args...&gt;&gt; {</div>
 <div class="line">    <span class="keyword">using </span>type = std::tuple&lt;size_t, Args...&gt;;</div>
 <div class="line">  };</div>
 <div class="line"> </div>
@@ -3768,6 +3768,7 @@ The adapter is constexpr-compatible for compile-time evaluation. </dd></dl>
 <div class="ttc" id="anamespacehelios_1_1utils_html"><div class="ttname"><a href="namespacehelios_1_1utils.html">helios::utils</a></div><div class="ttdef"><b>Definition</b> <a href="common__traits_8hpp_source.html#l00008">common_traits.hpp:8</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1utils_html_ab0f9ee0135bae7b098c5f83d04a272bb"><div class="ttname"><a href="namespacehelios_1_1utils.html#ab0f9ee0135bae7b098c5f83d04a272bb">helios::utils::GetDerived</a></div><div class="ttdeci">constexpr Derived &amp; GetDerived() noexcept</div><div class="ttdoc">Gets reference to derived class instance.</div><div class="ttdef"><b>Definition</b> <a href="functional__adapters_8hpp_source.html#l02636">functional_adapters.hpp:2636</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1utils_html_afc9a7a7bb1cbdcdf23e717f41fa763be"><div class="ttname"><a href="namespacehelios_1_1utils.html#afc9a7a7bb1cbdcdf23e717f41fa763be">helios::utils::Into</a></div><div class="ttdeci">constexpr void Into(OutIt out) const</div></div>
+<div class="ttc" id="anamespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div><div class="ttdoc">STL namespace.</div></div>
 </div><!-- fragment --> </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->

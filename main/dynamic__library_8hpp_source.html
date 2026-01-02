@@ -1,0 +1,516 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: src/core/include/helios/core/utils/dynamic_library.hpp Source File</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('dynamic__library_8hpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">dynamic_library.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="dynamic__library_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;<a class="code" href="core__pch_8hpp.html">helios/core_pch.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;<a class="code" href="logger_8hpp.html">helios/core/logger.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;expected&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;filesystem&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;string_view&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1utils.html">helios::utils</a> {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment"></span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment"> * @brief Error codes for dynamic library operations.</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"> */</span></div>
+<div class="foldopen" id="foldopen00019" data-start="{" data-end="};">
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365e">   19</a></span><span class="keyword">enum class</span> <a class="code hl_enumeration" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365e">DynamicLibraryError</a> : uint8_t {</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  <a class="code hl_enumvalue" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea2767828026039e8ba7b38973cbb701f2">FileNotFound</a>,    <span class="comment">///&lt; Library file not found</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  <a class="code hl_enumvalue" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea3729d9667c9ed82ae96b6174b288a3a5">LoadFailed</a>,      <span class="comment">///&lt; Failed to load library</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  <a class="code hl_enumvalue" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365eac11f7f7d37763d1430ed2682642ea0ac">SymbolNotFound</a>,  <span class="comment">///&lt; Symbol not found in library</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  <a class="code hl_enumvalue" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea2d0e462e9958ce7bb443e70023241dfe">InvalidHandle</a>,   <span class="comment">///&lt; Invalid library handle</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  <a class="code hl_enumvalue" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea3cd0dcca263062e228b48dc510f78334">AlreadyLoaded</a>,   <span class="comment">///&lt; Library is already loaded</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  <a class="code hl_enumvalue" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea5111e24c1ecc6266ce0de4b4dc42033b">NotLoaded</a>,       <span class="comment">///&lt; Library is not loaded</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  <a class="code hl_enumvalue" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365eaba8ea63548a12106e8f5aed4e964ae6a">PlatformError</a>,   <span class="comment">///&lt; Platform-specific error</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>};</div>
+</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment"></span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment"> * @brief Gets a human-readable description for a DynamicLibraryError.</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment"> * @param error The error code</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment"> * @return String description of the error</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment"> */</span></div>
+<div class="foldopen" id="foldopen00034" data-start="{" data-end="}">
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="namespacehelios_1_1utils.html#abc4221e0af800d4c7dd1f3042525427c">   34</a></span>[[nodiscard]] <span class="keyword">constexpr</span> std::string_view <a class="code hl_function" href="namespacehelios_1_1utils.html#abc4221e0af800d4c7dd1f3042525427c">DynamicLibraryErrorToString</a>(<a class="code hl_enumeration" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365e">DynamicLibraryError</a> error) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  <span class="keywordflow">switch</span> (error) {</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea2767828026039e8ba7b38973cbb701f2">DynamicLibraryError::FileNotFound</a>:</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;Library file not found&quot;</span>;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea3729d9667c9ed82ae96b6174b288a3a5">DynamicLibraryError::LoadFailed</a>:</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;Failed to load library&quot;</span>;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365eac11f7f7d37763d1430ed2682642ea0ac">DynamicLibraryError::SymbolNotFound</a>:</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;Symbol not found in library&quot;</span>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea2d0e462e9958ce7bb443e70023241dfe">DynamicLibraryError::InvalidHandle</a>:</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;Invalid library handle&quot;</span>;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea3cd0dcca263062e228b48dc510f78334">DynamicLibraryError::AlreadyLoaded</a>:</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;Library is already loaded&quot;</span>;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea5111e24c1ecc6266ce0de4b4dc42033b">DynamicLibraryError::NotLoaded</a>:</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;Library is not loaded&quot;</span>;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365eaba8ea63548a12106e8f5aed4e964ae6a">DynamicLibraryError::PlatformError</a>:</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;Platform-specific error&quot;</span>;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;Unknown error&quot;</span>;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  }</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>}</div>
+</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment"></span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment"> * @brief Cross-platform dynamic library loader.</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment"> * @details Provides a unified interface for loading dynamic libraries (DLLs on Windows,</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment"> * .so on Linux, .dylib on macOS) and retrieving function symbols.</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment"> * @note Not thread-safe. External synchronization required for concurrent access.</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment"> * @example</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment"> * @code</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment"> * DynamicLibrary lib;</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment"> * if (auto result = lib.Load(&quot;my_module.so&quot;); result) {</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment"> *   using CreateModuleFn = Module* (*)();</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment"> *   if (auto fn = lib.GetSymbol&lt;CreateModuleFn&gt;(&quot;create_module&quot;); fn) {</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment"> *     Module* module = (*fn)();</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment"> *     // Use module...</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment"> *   }</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment"> * }</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment"> * @endcode</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment"> */</span></div>
+<div class="foldopen" id="foldopen00074" data-start="{" data-end="};">
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="classhelios_1_1utils_1_1DynamicLibrary.html">   74</a></span><span class="keyword">class </span><a class="code hl_class" href="classhelios_1_1utils_1_1DynamicLibrary.html">DynamicLibrary</a> {</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">  /// Native handle type (void* on all platforms for ABI stability)</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="classhelios_1_1utils_1_1DynamicLibrary.html#a66a5e2a5513d86a01874fcb4264a2158">   77</a></span><span class="comment"></span>  <span class="keyword">using </span><a class="code hl_typedef" href="classhelios_1_1utils_1_1DynamicLibrary.html#a66a5e2a5513d86a01874fcb4264a2158">HandleType</a> = <span class="keywordtype">void</span>*;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="classhelios_1_1utils_1_1DynamicLibrary.html#aa808316f4be99328739518e23b53877d">   78</a></span>  <span class="keyword">static</span> <span class="keyword">constexpr</span> <a class="code hl_typedef" href="classhelios_1_1utils_1_1DynamicLibrary.html#a66a5e2a5513d86a01874fcb4264a2158">HandleType</a> <a class="code hl_variable" href="classhelios_1_1utils_1_1DynamicLibrary.html#aa808316f4be99328739518e23b53877d">kInvalidHandle</a> = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="classhelios_1_1utils_1_1DynamicLibrary.html#abacc87c4e5b1d85df0c8f75930a11aab">   80</a></span>  <a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#abacc87c4e5b1d85df0c8f75930a11aab">DynamicLibrary</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment"></span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">   * @brief Constructs and loads a library from the specified path.</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment">   * @param path Path to the dynamic library</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  <span class="keyword">explicit</span> <a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#abacc87c4e5b1d85df0c8f75930a11aab">DynamicLibrary</a>(<span class="keyword">const</span> std::filesystem::path&amp; path);</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="classhelios_1_1utils_1_1DynamicLibrary.html#ab2fbf8816511d12d8d1176ac427809f4">   87</a></span>  <a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#ab2fbf8816511d12d8d1176ac427809f4">DynamicLibrary</a>(<span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1utils_1_1DynamicLibrary.html">DynamicLibrary</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  <a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#abacc87c4e5b1d85df0c8f75930a11aab">DynamicLibrary</a>(<a class="code hl_class" href="classhelios_1_1utils_1_1DynamicLibrary.html">DynamicLibrary</a>&amp;&amp; other) <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment"></span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">   * @brief Destructor that unloads the library if loaded.</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  <a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#ae192319051979d47ef6650c46035e483">~DynamicLibrary</a>() noexcept;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno"><a class="line" href="classhelios_1_1utils_1_1DynamicLibrary.html#ae4aebaab013110dd6c2c2472f968ce1a">   95</a></span>  <a class="code hl_class" href="classhelios_1_1utils_1_1DynamicLibrary.html">DynamicLibrary</a>&amp; operator=(const <a class="code hl_class" href="classhelios_1_1utils_1_1DynamicLibrary.html">DynamicLibrary</a>&amp;) = delete;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>  <a class="code hl_class" href="classhelios_1_1utils_1_1DynamicLibrary.html">DynamicLibrary</a>&amp; operator=(<a class="code hl_class" href="classhelios_1_1utils_1_1DynamicLibrary.html">DynamicLibrary</a>&amp;&amp; other) noexcept;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno"><a class="line" href="classhelios_1_1utils_1_1DynamicLibrary.html#a803de48840ec4030f4fa2fca13b54399">   98</a></span>  [[nodiscard]] static auto <a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#a803de48840ec4030f4fa2fca13b54399">FromPath</a>(const <a class="code hl_namespace" href="namespacestd.html">std</a>::filesystem::path&amp; path)</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>      -&gt; <a class="code hl_namespace" href="namespacestd.html">std</a>::expected&lt;<a class="code hl_class" href="classhelios_1_1utils_1_1DynamicLibrary.html">DynamicLibrary</a>, <a class="code hl_enumeration" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365e">DynamicLibraryError</a>&gt;;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="comment"></span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="comment">   * @brief Loads a dynamic library from the specified path.</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="comment">   * @param path Path to the dynamic library</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="comment">   * @return Expected with void on success, or error on failure</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>  [[nodiscard]] auto <a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#ac1ca51a6830a4159681abbe401bfe49a">Load</a>(const <a class="code hl_namespace" href="namespacestd.html">std</a>::filesystem::path&amp; path) -&gt; <a class="code hl_namespace" href="namespacestd.html">std</a>::expected&lt;<span class="keywordtype">void</span>, <a class="code hl_enumeration" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365e">DynamicLibraryError</a>&gt;;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="comment"></span> </div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="comment">   * @brief Unloads the currently loaded library.</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="comment">   * @return Expected with void on success, or error on failure</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>  [[nodiscard]] auto <a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#acc94af44554c3c2e1c3c497e23a463a7">Unload</a>() -&gt; <a class="code hl_namespace" href="namespacestd.html">std</a>::expected&lt;<span class="keywordtype">void</span>, <a class="code hl_enumeration" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365e">DynamicLibraryError</a>&gt;;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="comment"></span> </div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="comment">   * @brief Reloads the library from the same path.</span></div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="comment">   * @details Unloads the current library and loads it again.</span></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="comment">   * @return Expected with void on success, or error on failure</span></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>  [[nodiscard]] auto <a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#aab4fe8877808adf1b95b702441d90d38">Reload</a>() -&gt; <a class="code hl_namespace" href="namespacestd.html">std</a>::expected&lt;<span class="keywordtype">void</span>, <a class="code hl_enumeration" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365e">DynamicLibraryError</a>&gt;;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="comment"></span> </div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="comment">   * @brief Gets a raw symbol address from the library.</span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="comment">   * @param name Name of the symbol to retrieve</span></div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="comment">   * @return Expected with void pointer on success, or error on failure</span></div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>  [[nodiscard]] auto <a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#a3ac68198100c24ccfe78f46864b1c7ff">GetSymbolAddress</a>(<a class="code hl_namespace" href="namespacestd.html">std</a>::string_view name) const -&gt; <a class="code hl_namespace" href="namespacestd.html">std</a>::expected&lt;<span class="keywordtype">void</span>*, <a class="code hl_enumeration" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365e">DynamicLibraryError</a>&gt;;</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="comment"></span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="comment">   * @brief Gets a typed function pointer from the library.</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="comment">   * @tparam T Function pointer type</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span><span class="comment">   * @param name Name of the symbol to retrieve</span></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="comment">   * @return Expected with function pointer on success, or error on failure</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>  template &lt;typename T&gt;</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    requires <a class="code hl_namespace" href="namespacestd.html">std</a>::is_pointer_v&lt;T&gt;</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>  [[nodiscard]] auto <a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#a03ed6e6d31d86974215381901173dd14">GetSymbol</a>(<a class="code hl_namespace" href="namespacestd.html">std</a>::string_view name) const -&gt; <a class="code hl_namespace" href="namespacestd.html">std</a>::expected&lt;T, <a class="code hl_enumeration" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365e">DynamicLibraryError</a>&gt;;</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span><span class="comment"></span> </div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span><span class="comment">   * @brief Checks if a library is currently loaded.</span></div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span><span class="comment">   * @return True if a library is loaded</span></div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno"><a class="line" href="classhelios_1_1utils_1_1DynamicLibrary.html#a288d4be41c78e85c62093a5e77c39040">  142</a></span>  [[nodiscard]] <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#a288d4be41c78e85c62093a5e77c39040">Loaded</a>() const noexcept { <span class="keywordflow">return</span> handle_ != <a class="code hl_variable" href="classhelios_1_1utils_1_1DynamicLibrary.html#aa808316f4be99328739518e23b53877d">kInvalidHandle</a>; }</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span><span class="comment"></span> </div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span><span class="comment">   * @brief Gets the path of the loaded library.</span></div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span><span class="comment">   * @return Path to the library, or empty if not loaded</span></div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno"><a class="line" href="classhelios_1_1utils_1_1DynamicLibrary.html#adac397318002d901ea095b877cd08824">  148</a></span>  [[nodiscard]] <span class="keyword">const</span> std::filesystem::path&amp; <a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#adac397318002d901ea095b877cd08824">Path</a>() const noexcept { <span class="keywordflow">return</span> path_; }</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span><span class="comment"></span> </div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span><span class="comment">   * @brief Gets the native handle of the loaded library.</span></div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span><span class="comment">   * @return Native handle, or kInvalidHandle if not loaded</span></div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno"><a class="line" href="classhelios_1_1utils_1_1DynamicLibrary.html#a322d8099dc47ca8755b7cbabdcf86809">  154</a></span>  [[nodiscard]] <a class="code hl_typedef" href="classhelios_1_1utils_1_1DynamicLibrary.html#a66a5e2a5513d86a01874fcb4264a2158">HandleType</a> <a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#a322d8099dc47ca8755b7cbabdcf86809">Handle</a>() const noexcept { <span class="keywordflow">return</span> handle_; }</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span><span class="comment"></span> </div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span><span class="comment">   * @brief Gets the last platform-specific error message.</span></div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span><span class="comment">   * @return Error message string</span></div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>  [[nodiscard]] <span class="keyword">static</span> std::string <a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#a58d553d3644111f84a9a07bf6d203388">GetLastErrorMessage</a>() noexcept;</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span><span class="comment"></span> </div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span><span class="comment">   * @brief Gets the platform-specific file extension for dynamic libraries.</span></div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span><span class="comment">   * @return &quot;.dll&quot; on Windows, &quot;.so&quot; on Linux, &quot;.dylib&quot; on macOS</span></div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span><span class="comment">   */</span></div>
+<div class="foldopen" id="foldopen00166" data-start="{" data-end="}">
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno"><a class="line" href="classhelios_1_1utils_1_1DynamicLibrary.html#a28be664016bb89052b096f6307a0f5cd">  166</a></span>  [[nodiscard]] static constexpr <a class="code hl_namespace" href="namespacestd.html">std</a>::string_view <a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#a28be664016bb89052b096f6307a0f5cd">GetPlatformExtension</a>() noexcept {</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span><span class="preprocessor">#ifdef HELIOS_PLATFORM_WINDOWS</span></div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    <span class="keywordflow">return</span> <span class="stringliteral">&quot;.dll&quot;</span>;</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="preprocessor">#elifdef HELIOS_PLATFORM_MACOS</span></div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    <span class="keywordflow">return</span> <span class="stringliteral">&quot;.dylib&quot;</span>;</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    <span class="keywordflow">return</span> <span class="stringliteral">&quot;.so&quot;</span>;</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>  }</div>
+</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span><span class="comment"></span> </div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span><span class="comment">   * @brief Gets the platform-specific library prefix.</span></div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span><span class="comment">   * @return Empty on Windows, &quot;lib&quot; on Unix-like systems</span></div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span><span class="comment">   */</span></div>
+<div class="foldopen" id="foldopen00180" data-start="{" data-end="}">
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno"><a class="line" href="classhelios_1_1utils_1_1DynamicLibrary.html#a8bd0e538eeb28f5760f9620c6e6b926d">  180</a></span>  [[nodiscard]] <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view <a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#a8bd0e538eeb28f5760f9620c6e6b926d">GetPlatformPrefix</a>() noexcept {</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span><span class="preprocessor">#ifdef HELIOS_PLATFORM_WINDOWS</span></div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    <span class="keywordflow">return</span> <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    <span class="keywordflow">return</span> <span class="stringliteral">&quot;lib&quot;</span>;</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>  }</div>
+</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span> </div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>  <a class="code hl_typedef" href="classhelios_1_1utils_1_1DynamicLibrary.html#a66a5e2a5513d86a01874fcb4264a2158">HandleType</a> handle_ = <a class="code hl_variable" href="classhelios_1_1utils_1_1DynamicLibrary.html#aa808316f4be99328739518e23b53877d">kInvalidHandle</a>;  <span class="comment">///&lt; Native library handle</span></div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>  std::filesystem::path path_;          <span class="comment">///&lt; Path to the loaded library</span></div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>};</div>
+</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span> </div>
+<div class="foldopen" id="foldopen00193" data-start="{" data-end="}">
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno"><a class="line" href="classhelios_1_1utils_1_1DynamicLibrary.html#a4076825b05ec3879b5177bb37bff236d">  193</a></span><span class="keyword">inline</span> <a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#abacc87c4e5b1d85df0c8f75930a11aab">DynamicLibrary::DynamicLibrary</a>(<span class="keyword">const</span> std::filesystem::path&amp; path) {</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>  <span class="keyword">auto</span> result = <a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#ac1ca51a6830a4159681abbe401bfe49a">Load</a>(path);</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>  <span class="keywordflow">if</span> (!result) {</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    <a class="code hl_define" href="logger_8hpp.html#a5ee2b388c5e1155f8aa9f680e3b8cf3b">HELIOS_ERROR</a>(<span class="stringliteral">&quot;Failed to load dynamic library &#39;{}&#39;: {}!&quot;</span>, path.c_str(), <a class="code hl_function" href="namespacehelios_1_1utils.html#abc4221e0af800d4c7dd1f3042525427c">DynamicLibraryErrorToString</a>(result.error()));</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>  }</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>}</div>
+</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span> </div>
+<div class="foldopen" id="foldopen00200" data-start="{" data-end="}">
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno"><a class="line" href="classhelios_1_1utils_1_1DynamicLibrary.html#ae7b810d0eb51c4fd4fa6dd7c037f3ff1">  200</a></span><span class="keyword">inline</span> <a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#abacc87c4e5b1d85df0c8f75930a11aab">DynamicLibrary::DynamicLibrary</a>(<a class="code hl_class" href="classhelios_1_1utils_1_1DynamicLibrary.html">DynamicLibrary</a>&amp;&amp; other) noexcept</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    : handle_(other.handle_), path_(std::move(other.path_)) {</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>  other.handle_ = kInvalidHandle;</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>}</div>
+</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span> </div>
+<div class="foldopen" id="foldopen00205" data-start="{" data-end="}">
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno"><a class="line" href="classhelios_1_1utils_1_1DynamicLibrary.html#ae192319051979d47ef6650c46035e483">  205</a></span><span class="keyword">inline</span> <a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#ae192319051979d47ef6650c46035e483">DynamicLibrary::~DynamicLibrary</a>() noexcept {</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>  <span class="keywordflow">if</span> (<a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#a288d4be41c78e85c62093a5e77c39040">Loaded</a>()) {</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    <span class="keyword">auto</span> result = <a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#acc94af44554c3c2e1c3c497e23a463a7">Unload</a>();</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    <span class="keywordflow">if</span> (!result) {</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>      <a class="code hl_define" href="logger_8hpp.html#abee1a45a543b16109f05136a9771e86c">HELIOS_WARN</a>(<span class="stringliteral">&quot;Failed to unload dynamic library &#39;{}&#39;: {}!&quot;</span>, path_.c_str(),</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>                  <a class="code hl_function" href="namespacehelios_1_1utils.html#abc4221e0af800d4c7dd1f3042525427c">DynamicLibraryErrorToString</a>(result.error()));</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    }</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>  }</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>}</div>
+</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span> </div>
+<div class="foldopen" id="foldopen00215" data-start="{" data-end="}">
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno"><a class="line" href="classhelios_1_1utils_1_1DynamicLibrary.html#ae79f7544c32b6cd16d57a137ff63b5b8">  215</a></span><span class="keyword">inline</span> <a class="code hl_class" href="classhelios_1_1utils_1_1DynamicLibrary.html">DynamicLibrary</a>&amp; <a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#ae4aebaab013110dd6c2c2472f968ce1a">DynamicLibrary::operator=</a>(<a class="code hl_class" href="classhelios_1_1utils_1_1DynamicLibrary.html">DynamicLibrary</a>&amp;&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>  <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;other) {</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    <span class="keywordflow">if</span> (Loaded()) {</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>      [[maybe_unused]] <span class="keyword">auto</span> _ = Unload();</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    }</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    handle_ = other.handle_;</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    path_ = std::move(other.path_);</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    other.handle_ = kInvalidHandle;</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>  }</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>}</div>
+</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span> </div>
+<div class="foldopen" id="foldopen00227" data-start="{" data-end="}">
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno"><a class="line" href="namespacehelios_1_1utils.html#ac60a7361517b211c989c0a9f1d5518b3">  227</a></span><span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="namespacehelios_1_1utils.html#ac60a7361517b211c989c0a9f1d5518b3">FromPath</a>(<span class="keyword">const</span> std::filesystem::path&amp; path) -&gt; std::expected&lt;DynamicLibrary, DynamicLibraryError&gt; {</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>  <a class="code hl_class" href="classhelios_1_1utils_1_1DynamicLibrary.html">DynamicLibrary</a> lib;</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>  <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> result = lib.<a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#ac1ca51a6830a4159681abbe401bfe49a">Load</a>(path); !result) {</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>    <span class="keywordflow">return</span> std::unexpected(result.error());</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>  }</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>  <span class="keywordflow">return</span> lib;</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>}</div>
+</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span> </div>
+<div class="foldopen" id="foldopen00235" data-start="{" data-end="}">
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno"><a class="line" href="classhelios_1_1utils_1_1DynamicLibrary.html#aab4fe8877808adf1b95b702441d90d38">  235</a></span><span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#aab4fe8877808adf1b95b702441d90d38">DynamicLibrary::Reload</a>() -&gt; std::expected&lt;void, DynamicLibraryError&gt; {</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>  <span class="keywordflow">if</span> (!Loaded()) {</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>    <span class="keywordflow">return</span> std::unexpected(<a class="code hl_enumvalue" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea5111e24c1ecc6266ce0de4b4dc42033b">DynamicLibraryError::NotLoaded</a>);</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>  }</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span> </div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>  <span class="keyword">const</span> <span class="keyword">auto</span> saved_path = path_;</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span> </div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>  <span class="keyword">auto</span> unload_result = Unload();</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>  <span class="keywordflow">if</span> (!unload_result) {</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>    <span class="keywordflow">return</span> unload_result;</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>  }</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span> </div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>  <span class="keywordflow">return</span> Load(saved_path);</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>}</div>
+</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span> </div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>  <span class="keyword">requires</span> std::is_pointer_v&lt;T&gt;</div>
+<div class="foldopen" id="foldopen00252" data-start="{" data-end="}">
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno"><a class="line" href="classhelios_1_1utils_1_1DynamicLibrary.html#a03ed6e6d31d86974215381901173dd14">  252</a></span><span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#a03ed6e6d31d86974215381901173dd14">DynamicLibrary::GetSymbol</a>(std::string_view name) <span class="keyword">const</span> -&gt; std::expected&lt;T, DynamicLibraryError&gt; {</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>  <span class="keyword">auto</span> result = GetSymbolAddress(name);</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>  <span class="keywordflow">if</span> (!result) {</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>    <span class="keywordflow">return</span> std::unexpected(result.error());</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>  }</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span> </div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>  <span class="comment">// NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)</span></div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>  <span class="keywordflow">return</span> <span class="keyword">reinterpret_cast&lt;</span>T<span class="keyword">&gt;</span>(*result);</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>}</div>
+</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span> </div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>}  <span class="comment">// namespace helios::utils</span></div>
+<div class="ttc" id="aclasshelios_1_1utils_1_1DynamicLibrary_html"><div class="ttname"><a href="classhelios_1_1utils_1_1DynamicLibrary.html">helios::utils::DynamicLibrary</a></div><div class="ttdef"><b>Definition</b> <a href="dynamic__library_8hpp_source.html#l00074">dynamic_library.hpp:74</a></div></div>
+<div class="ttc" id="aclasshelios_1_1utils_1_1DynamicLibrary_html_a03ed6e6d31d86974215381901173dd14"><div class="ttname"><a href="classhelios_1_1utils_1_1DynamicLibrary.html#a03ed6e6d31d86974215381901173dd14">helios::utils::DynamicLibrary::GetSymbol</a></div><div class="ttdeci">auto GetSymbol(std::string_view name) const -&gt; std::expected&lt; T, DynamicLibraryError &gt;</div><div class="ttdoc">Gets a typed function pointer from the library.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__library_8hpp_source.html#l00252">dynamic_library.hpp:252</a></div></div>
+<div class="ttc" id="aclasshelios_1_1utils_1_1DynamicLibrary_html_a288d4be41c78e85c62093a5e77c39040"><div class="ttname"><a href="classhelios_1_1utils_1_1DynamicLibrary.html#a288d4be41c78e85c62093a5e77c39040">helios::utils::DynamicLibrary::Loaded</a></div><div class="ttdeci">bool Loaded() const noexcept</div><div class="ttdoc">Checks if a library is currently loaded.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__library_8hpp_source.html#l00142">dynamic_library.hpp:142</a></div></div>
+<div class="ttc" id="aclasshelios_1_1utils_1_1DynamicLibrary_html_a28be664016bb89052b096f6307a0f5cd"><div class="ttname"><a href="classhelios_1_1utils_1_1DynamicLibrary.html#a28be664016bb89052b096f6307a0f5cd">helios::utils::DynamicLibrary::GetPlatformExtension</a></div><div class="ttdeci">static constexpr std::string_view GetPlatformExtension() noexcept</div><div class="ttdoc">Gets the platform-specific file extension for dynamic libraries.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__library_8hpp_source.html#l00166">dynamic_library.hpp:166</a></div></div>
+<div class="ttc" id="aclasshelios_1_1utils_1_1DynamicLibrary_html_a322d8099dc47ca8755b7cbabdcf86809"><div class="ttname"><a href="classhelios_1_1utils_1_1DynamicLibrary.html#a322d8099dc47ca8755b7cbabdcf86809">helios::utils::DynamicLibrary::Handle</a></div><div class="ttdeci">HandleType Handle() const noexcept</div><div class="ttdoc">Gets the native handle of the loaded library.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__library_8hpp_source.html#l00154">dynamic_library.hpp:154</a></div></div>
+<div class="ttc" id="aclasshelios_1_1utils_1_1DynamicLibrary_html_a3ac68198100c24ccfe78f46864b1c7ff"><div class="ttname"><a href="classhelios_1_1utils_1_1DynamicLibrary.html#a3ac68198100c24ccfe78f46864b1c7ff">helios::utils::DynamicLibrary::GetSymbolAddress</a></div><div class="ttdeci">auto GetSymbolAddress(std::string_view name) const -&gt; std::expected&lt; void *, DynamicLibraryError &gt;</div><div class="ttdoc">Gets a raw symbol address from the library.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__library_8cpp_source.html#l00076">dynamic_library.cpp:76</a></div></div>
+<div class="ttc" id="aclasshelios_1_1utils_1_1DynamicLibrary_html_a58d553d3644111f84a9a07bf6d203388"><div class="ttname"><a href="classhelios_1_1utils_1_1DynamicLibrary.html#a58d553d3644111f84a9a07bf6d203388">helios::utils::DynamicLibrary::GetLastErrorMessage</a></div><div class="ttdeci">static std::string GetLastErrorMessage() noexcept</div><div class="ttdoc">Gets the last platform-specific error message.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__library_8cpp_source.html#l00100">dynamic_library.cpp:100</a></div></div>
+<div class="ttc" id="aclasshelios_1_1utils_1_1DynamicLibrary_html_a66a5e2a5513d86a01874fcb4264a2158"><div class="ttname"><a href="classhelios_1_1utils_1_1DynamicLibrary.html#a66a5e2a5513d86a01874fcb4264a2158">helios::utils::DynamicLibrary::HandleType</a></div><div class="ttdeci">void * HandleType</div><div class="ttdoc">Native handle type (void* on all platforms for ABI stability)</div><div class="ttdef"><b>Definition</b> <a href="dynamic__library_8hpp_source.html#l00077">dynamic_library.hpp:77</a></div></div>
+<div class="ttc" id="aclasshelios_1_1utils_1_1DynamicLibrary_html_a803de48840ec4030f4fa2fca13b54399"><div class="ttname"><a href="classhelios_1_1utils_1_1DynamicLibrary.html#a803de48840ec4030f4fa2fca13b54399">helios::utils::DynamicLibrary::FromPath</a></div><div class="ttdeci">static auto FromPath(const std::filesystem::path &amp;path) -&gt; std::expected&lt; DynamicLibrary, DynamicLibraryError &gt;</div></div>
+<div class="ttc" id="aclasshelios_1_1utils_1_1DynamicLibrary_html_a8bd0e538eeb28f5760f9620c6e6b926d"><div class="ttname"><a href="classhelios_1_1utils_1_1DynamicLibrary.html#a8bd0e538eeb28f5760f9620c6e6b926d">helios::utils::DynamicLibrary::GetPlatformPrefix</a></div><div class="ttdeci">static constexpr std::string_view GetPlatformPrefix() noexcept</div><div class="ttdoc">Gets the platform-specific library prefix.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__library_8hpp_source.html#l00180">dynamic_library.hpp:180</a></div></div>
+<div class="ttc" id="aclasshelios_1_1utils_1_1DynamicLibrary_html_aa808316f4be99328739518e23b53877d"><div class="ttname"><a href="classhelios_1_1utils_1_1DynamicLibrary.html#aa808316f4be99328739518e23b53877d">helios::utils::DynamicLibrary::kInvalidHandle</a></div><div class="ttdeci">static constexpr HandleType kInvalidHandle</div><div class="ttdef"><b>Definition</b> <a href="dynamic__library_8hpp_source.html#l00078">dynamic_library.hpp:78</a></div></div>
+<div class="ttc" id="aclasshelios_1_1utils_1_1DynamicLibrary_html_aab4fe8877808adf1b95b702441d90d38"><div class="ttname"><a href="classhelios_1_1utils_1_1DynamicLibrary.html#aab4fe8877808adf1b95b702441d90d38">helios::utils::DynamicLibrary::Reload</a></div><div class="ttdeci">auto Reload() -&gt; std::expected&lt; void, DynamicLibraryError &gt;</div><div class="ttdoc">Reloads the library from the same path.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__library_8hpp_source.html#l00235">dynamic_library.hpp:235</a></div></div>
+<div class="ttc" id="aclasshelios_1_1utils_1_1DynamicLibrary_html_ab2fbf8816511d12d8d1176ac427809f4"><div class="ttname"><a href="classhelios_1_1utils_1_1DynamicLibrary.html#ab2fbf8816511d12d8d1176ac427809f4">helios::utils::DynamicLibrary::DynamicLibrary</a></div><div class="ttdeci">DynamicLibrary(const DynamicLibrary &amp;)=delete</div></div>
+<div class="ttc" id="aclasshelios_1_1utils_1_1DynamicLibrary_html_abacc87c4e5b1d85df0c8f75930a11aab"><div class="ttname"><a href="classhelios_1_1utils_1_1DynamicLibrary.html#abacc87c4e5b1d85df0c8f75930a11aab">helios::utils::DynamicLibrary::DynamicLibrary</a></div><div class="ttdeci">DynamicLibrary()=default</div></div>
+<div class="ttc" id="aclasshelios_1_1utils_1_1DynamicLibrary_html_ac1ca51a6830a4159681abbe401bfe49a"><div class="ttname"><a href="classhelios_1_1utils_1_1DynamicLibrary.html#ac1ca51a6830a4159681abbe401bfe49a">helios::utils::DynamicLibrary::Load</a></div><div class="ttdeci">auto Load(const std::filesystem::path &amp;path) -&gt; std::expected&lt; void, DynamicLibraryError &gt;</div><div class="ttdoc">Loads a dynamic library from the specified path.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__library_8cpp_source.html#l00026">dynamic_library.cpp:26</a></div></div>
+<div class="ttc" id="aclasshelios_1_1utils_1_1DynamicLibrary_html_acc94af44554c3c2e1c3c497e23a463a7"><div class="ttname"><a href="classhelios_1_1utils_1_1DynamicLibrary.html#acc94af44554c3c2e1c3c497e23a463a7">helios::utils::DynamicLibrary::Unload</a></div><div class="ttdeci">auto Unload() -&gt; std::expected&lt; void, DynamicLibraryError &gt;</div><div class="ttdoc">Unloads the currently loaded library.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__library_8cpp_source.html#l00052">dynamic_library.cpp:52</a></div></div>
+<div class="ttc" id="aclasshelios_1_1utils_1_1DynamicLibrary_html_adac397318002d901ea095b877cd08824"><div class="ttname"><a href="classhelios_1_1utils_1_1DynamicLibrary.html#adac397318002d901ea095b877cd08824">helios::utils::DynamicLibrary::Path</a></div><div class="ttdeci">const std::filesystem::path &amp; Path() const noexcept</div><div class="ttdoc">Gets the path of the loaded library.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__library_8hpp_source.html#l00148">dynamic_library.hpp:148</a></div></div>
+<div class="ttc" id="aclasshelios_1_1utils_1_1DynamicLibrary_html_ae192319051979d47ef6650c46035e483"><div class="ttname"><a href="classhelios_1_1utils_1_1DynamicLibrary.html#ae192319051979d47ef6650c46035e483">helios::utils::DynamicLibrary::~DynamicLibrary</a></div><div class="ttdeci">~DynamicLibrary() noexcept</div><div class="ttdoc">Destructor that unloads the library if loaded.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__library_8hpp_source.html#l00205">dynamic_library.hpp:205</a></div></div>
+<div class="ttc" id="aclasshelios_1_1utils_1_1DynamicLibrary_html_ae4aebaab013110dd6c2c2472f968ce1a"><div class="ttname"><a href="classhelios_1_1utils_1_1DynamicLibrary.html#ae4aebaab013110dd6c2c2472f968ce1a">helios::utils::DynamicLibrary::operator=</a></div><div class="ttdeci">DynamicLibrary &amp; operator=(const DynamicLibrary &amp;)=delete</div></div>
+<div class="ttc" id="acore__pch_8hpp_html"><div class="ttname"><a href="core__pch_8hpp.html">core_pch.hpp</a></div></div>
+<div class="ttc" id="alogger_8hpp_html"><div class="ttname"><a href="logger_8hpp.html">logger.hpp</a></div></div>
+<div class="ttc" id="alogger_8hpp_html_a5ee2b388c5e1155f8aa9f680e3b8cf3b"><div class="ttname"><a href="logger_8hpp.html#a5ee2b388c5e1155f8aa9f680e3b8cf3b">HELIOS_ERROR</a></div><div class="ttdeci">#define HELIOS_ERROR(...)</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00689">logger.hpp:689</a></div></div>
+<div class="ttc" id="alogger_8hpp_html_abee1a45a543b16109f05136a9771e86c"><div class="ttname"><a href="logger_8hpp.html#abee1a45a543b16109f05136a9771e86c">HELIOS_WARN</a></div><div class="ttdeci">#define HELIOS_WARN(...)</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00687">logger.hpp:687</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1utils_html"><div class="ttname"><a href="namespacehelios_1_1utils.html">helios::utils</a></div><div class="ttdef"><b>Definition</b> <a href="common__traits_8hpp_source.html#l00008">common_traits.hpp:8</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1utils_html_abc4221e0af800d4c7dd1f3042525427c"><div class="ttname"><a href="namespacehelios_1_1utils.html#abc4221e0af800d4c7dd1f3042525427c">helios::utils::DynamicLibraryErrorToString</a></div><div class="ttdeci">constexpr std::string_view DynamicLibraryErrorToString(DynamicLibraryError error) noexcept</div><div class="ttdoc">Gets a human-readable description for a DynamicLibraryError.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__library_8hpp_source.html#l00034">dynamic_library.hpp:34</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1utils_html_ac60a7361517b211c989c0a9f1d5518b3"><div class="ttname"><a href="namespacehelios_1_1utils.html#ac60a7361517b211c989c0a9f1d5518b3">helios::utils::FromPath</a></div><div class="ttdeci">auto FromPath(const std::filesystem::path &amp;path) -&gt; std::expected&lt; DynamicLibrary, DynamicLibraryError &gt;</div><div class="ttdef"><b>Definition</b> <a href="dynamic__library_8hpp_source.html#l00227">dynamic_library.hpp:227</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1utils_html_aca74c060b4e32cb671a0bc6fb378365e"><div class="ttname"><a href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365e">helios::utils::DynamicLibraryError</a></div><div class="ttdeci">DynamicLibraryError</div><div class="ttdoc">Error codes for dynamic library operations.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__library_8hpp_source.html#l00019">dynamic_library.hpp:19</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1utils_html_aca74c060b4e32cb671a0bc6fb378365ea2767828026039e8ba7b38973cbb701f2"><div class="ttname"><a href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea2767828026039e8ba7b38973cbb701f2">helios::utils::DynamicLibraryError::FileNotFound</a></div><div class="ttdeci">@ FileNotFound</div><div class="ttdoc">Library file not found.</div></div>
+<div class="ttc" id="anamespacehelios_1_1utils_html_aca74c060b4e32cb671a0bc6fb378365ea2d0e462e9958ce7bb443e70023241dfe"><div class="ttname"><a href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea2d0e462e9958ce7bb443e70023241dfe">helios::utils::DynamicLibraryError::InvalidHandle</a></div><div class="ttdeci">@ InvalidHandle</div><div class="ttdoc">Invalid library handle.</div></div>
+<div class="ttc" id="anamespacehelios_1_1utils_html_aca74c060b4e32cb671a0bc6fb378365ea3729d9667c9ed82ae96b6174b288a3a5"><div class="ttname"><a href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea3729d9667c9ed82ae96b6174b288a3a5">helios::utils::DynamicLibraryError::LoadFailed</a></div><div class="ttdeci">@ LoadFailed</div><div class="ttdoc">Failed to load library.</div></div>
+<div class="ttc" id="anamespacehelios_1_1utils_html_aca74c060b4e32cb671a0bc6fb378365ea3cd0dcca263062e228b48dc510f78334"><div class="ttname"><a href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea3cd0dcca263062e228b48dc510f78334">helios::utils::DynamicLibraryError::AlreadyLoaded</a></div><div class="ttdeci">@ AlreadyLoaded</div><div class="ttdoc">Library is already loaded.</div></div>
+<div class="ttc" id="anamespacehelios_1_1utils_html_aca74c060b4e32cb671a0bc6fb378365ea5111e24c1ecc6266ce0de4b4dc42033b"><div class="ttname"><a href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea5111e24c1ecc6266ce0de4b4dc42033b">helios::utils::DynamicLibraryError::NotLoaded</a></div><div class="ttdeci">@ NotLoaded</div><div class="ttdoc">Library is not loaded.</div></div>
+<div class="ttc" id="anamespacehelios_1_1utils_html_aca74c060b4e32cb671a0bc6fb378365eaba8ea63548a12106e8f5aed4e964ae6a"><div class="ttname"><a href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365eaba8ea63548a12106e8f5aed4e964ae6a">helios::utils::DynamicLibraryError::PlatformError</a></div><div class="ttdeci">@ PlatformError</div><div class="ttdoc">Platform-specific error.</div></div>
+<div class="ttc" id="anamespacehelios_1_1utils_html_aca74c060b4e32cb671a0bc6fb378365eac11f7f7d37763d1430ed2682642ea0ac"><div class="ttname"><a href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365eac11f7f7d37763d1430ed2682642ea0ac">helios::utils::DynamicLibraryError::SymbolNotFound</a></div><div class="ttdeci">@ SymbolNotFound</div><div class="ttdoc">Symbol not found in library.</div></div>
+<div class="ttc" id="anamespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div><div class="ttdoc">STL namespace.</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_aebb8dcc11953d78e620bbef0b9e2183.html">core</a></li><li class="navelem"><a class="el" href="dir_8f49dd062eda24395df599c5385a3cb1.html">include</a></li><li class="navelem"><a class="el" href="dir_23069df5183a130785923908e80258ad.html">helios</a></li><li class="navelem"><a class="el" href="dir_2da2d982aeea650f7dd0b34d7b8d0119.html">core</a></li><li class="navelem"><a class="el" href="dir_e4be5508b76bccd0c02d62302f080517.html">utils</a></li><li class="navelem"><a class="el" href="dynamic__library_8hpp.html">dynamic_library.hpp</a></li>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

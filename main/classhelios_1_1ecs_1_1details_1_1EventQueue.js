@@ -7,6 +7,7 @@ var classhelios_1_1ecs_1_1details_1_1EventQueue =
     [ "Clear", "classhelios_1_1ecs_1_1details_1_1EventQueue.html#ab384f1741408b5838d9d49b871d3dc2d", null ],
     [ "Clear", "classhelios_1_1ecs_1_1details_1_1EventQueue.html#a86288a1af0a4110d136cb75eca7ee89a", null ],
     [ "ClearByTypeId", "classhelios_1_1ecs_1_1details_1_1EventQueue.html#a21d9bfb7e25dbf5460626b3a5766db32", null ],
+    [ "ClearData", "classhelios_1_1ecs_1_1details_1_1EventQueue.html#a57bd9accd3b910c19e6e7f725bd73afb", null ],
     [ "Empty", "classhelios_1_1ecs_1_1details_1_1EventQueue.html#a7dc029411a47caec19d06f13446527ad", null ],
     [ "HasEvents", "classhelios_1_1ecs_1_1details_1_1EventQueue.html#ad276882e9155f5b722c3b6c137f39d27", null ],
     [ "IsRegistered", "classhelios_1_1ecs_1_1details_1_1EventQueue.html#af38bf78014d3593b7004d8ca42e9c39d", null ],

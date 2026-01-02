@@ -182,6 +182,8 @@ Namespaces</h2></td></tr>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1ChainAdapter.html">ChainAdapter</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1DynamicLibrary.html">DynamicLibrary</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1EnumerateAdapter.html">EnumerateAdapter</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FastPimpl.html">FastPimpl</a></td></tr>
@@ -297,6 +299,19 @@ Concepts</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
+<tr class="memitem:aca74c060b4e32cb671a0bc6fb378365e" id="r_aca74c060b4e32cb671a0bc6fb378365e"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365e">DynamicLibraryError</a> : uint8_t { <br />
+&#160;&#160;<a class="el" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea2767828026039e8ba7b38973cbb701f2">FileNotFound</a>
+, <a class="el" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea3729d9667c9ed82ae96b6174b288a3a5">LoadFailed</a>
+, <a class="el" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365eac11f7f7d37763d1430ed2682642ea0ac">SymbolNotFound</a>
+, <a class="el" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea2d0e462e9958ce7bb443e70023241dfe">InvalidHandle</a>
+, <br />
+&#160;&#160;<a class="el" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea3cd0dcca263062e228b48dc510f78334">AlreadyLoaded</a>
+, <a class="el" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea5111e24c1ecc6266ce0de4b4dc42033b">NotLoaded</a>
+, <a class="el" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365eaba8ea63548a12106e8f5aed4e964ae6a">PlatformError</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:aca74c060b4e32cb671a0bc6fb378365e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Error codes for dynamic library operations.  <a href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365e">More...</a><br /></td></tr>
+<tr class="separator:aca74c060b4e32cb671a0bc6fb378365e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa8f8d89ee8389efd92330df687025d68" id="r_aa8f8d89ee8389efd92330df687025d68"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#aa8f8d89ee8389efd92330df687025d68">FileError</a> : uint8_t { <a class="el" href="namespacehelios_1_1utils.html#aa8f8d89ee8389efd92330df687025d68a84f032166061bfc754d13eb5fde4a3f7">kCouldNotOpen</a>
 , <a class="el" href="namespacehelios_1_1utils.html#aa8f8d89ee8389efd92330df687025d68a58d3b11e0fadcadf0990c58e19a8be7e">kReadError</a>
  }</td></tr>
@@ -304,6 +319,11 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:abc4221e0af800d4c7dd1f3042525427c" id="r_abc4221e0af800d4c7dd1f3042525427c"><td class="memItemLeft" align="right" valign="top">constexpr std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#abc4221e0af800d4c7dd1f3042525427c">DynamicLibraryErrorToString</a> (<a class="el" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365e">DynamicLibraryError</a> error) noexcept</td></tr>
+<tr class="memdesc:abc4221e0af800d4c7dd1f3042525427c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a human-readable description for a DynamicLibraryError.  <br /></td></tr>
+<tr class="separator:abc4221e0af800d4c7dd1f3042525427c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac60a7361517b211c989c0a9f1d5518b3" id="r_ac60a7361517b211c989c0a9f1d5518b3"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#ac60a7361517b211c989c0a9f1d5518b3">FromPath</a> (const std::filesystem::path &amp;path) -&gt; std::expected&lt; <a class="el" href="classhelios_1_1utils_1_1DynamicLibrary.html">DynamicLibrary</a>, <a class="el" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365e">DynamicLibraryError</a> &gt;</td></tr>
+<tr class="separator:ac60a7361517b211c989c0a9f1d5518b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8456f8516be4dd86cc838b2e928b7239" id="r_a8456f8516be4dd86cc838b2e928b7239"><td class="memItemLeft" align="right" valign="top">constexpr std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#a8456f8516be4dd86cc838b2e928b7239">FileErrorToString</a> (<a class="el" href="namespacehelios_1_1utils.html#aa8f8d89ee8389efd92330df687025d68">FileError</a> error) noexcept</td></tr>
 <tr class="memdesc:a8456f8516be4dd86cc838b2e928b7239"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts FileError to a human-readable string.  <br /></td></tr>
 <tr class="separator:a8456f8516be4dd86cc838b2e928b7239"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -327,6 +347,65 @@ Functions</h2></td></tr>
 <tr class="separator:ab0f9ee0135bae7b098c5f83d04a272bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="aca74c060b4e32cb671a0bc6fb378365e" name="aca74c060b4e32cb671a0bc6fb378365e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca74c060b4e32cb671a0bc6fb378365e">&#9670;&#160;</a></span>DynamicLibraryError</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365e">helios::utils::DynamicLibraryError</a> : uint8_t</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Error codes for dynamic library operations. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aca74c060b4e32cb671a0bc6fb378365ea2767828026039e8ba7b38973cbb701f2" name="aca74c060b4e32cb671a0bc6fb378365ea2767828026039e8ba7b38973cbb701f2"></a>FileNotFound&#160;</td><td class="fielddoc"><p>Library file not found. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="aca74c060b4e32cb671a0bc6fb378365ea3729d9667c9ed82ae96b6174b288a3a5" name="aca74c060b4e32cb671a0bc6fb378365ea3729d9667c9ed82ae96b6174b288a3a5"></a>LoadFailed&#160;</td><td class="fielddoc"><p>Failed to load library. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="aca74c060b4e32cb671a0bc6fb378365eac11f7f7d37763d1430ed2682642ea0ac" name="aca74c060b4e32cb671a0bc6fb378365eac11f7f7d37763d1430ed2682642ea0ac"></a>SymbolNotFound&#160;</td><td class="fielddoc"><p>Symbol not found in library. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="aca74c060b4e32cb671a0bc6fb378365ea2d0e462e9958ce7bb443e70023241dfe" name="aca74c060b4e32cb671a0bc6fb378365ea2d0e462e9958ce7bb443e70023241dfe"></a>InvalidHandle&#160;</td><td class="fielddoc"><p>Invalid library handle. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="aca74c060b4e32cb671a0bc6fb378365ea3cd0dcca263062e228b48dc510f78334" name="aca74c060b4e32cb671a0bc6fb378365ea3cd0dcca263062e228b48dc510f78334"></a>AlreadyLoaded&#160;</td><td class="fielddoc"><p>Library is already loaded. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="aca74c060b4e32cb671a0bc6fb378365ea5111e24c1ecc6266ce0de4b4dc42033b" name="aca74c060b4e32cb671a0bc6fb378365ea5111e24c1ecc6266ce0de4b4dc42033b"></a>NotLoaded&#160;</td><td class="fielddoc"><p>Library is not loaded. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="aca74c060b4e32cb671a0bc6fb378365eaba8ea63548a12106e8f5aed4e964ae6a" name="aca74c060b4e32cb671a0bc6fb378365eaba8ea63548a12106e8f5aed4e964ae6a"></a>PlatformError&#160;</td><td class="fielddoc"><p>Platform-specific error. </p>
+</td></tr>
+</table>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2dynamic_library_8hpp-example.html#a0">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/dynamic_library.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00019">19</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   19</span>                               : uint8_t {</div>
+<div class="line"><span class="lineno">   20</span>  <a class="code hl_enumvalue" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea2767828026039e8ba7b38973cbb701f2">FileNotFound</a>,    <span class="comment">///&lt; Library file not found</span></div>
+<div class="line"><span class="lineno">   21</span>  <a class="code hl_enumvalue" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea3729d9667c9ed82ae96b6174b288a3a5">LoadFailed</a>,      <span class="comment">///&lt; Failed to load library</span></div>
+<div class="line"><span class="lineno">   22</span>  <a class="code hl_enumvalue" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365eac11f7f7d37763d1430ed2682642ea0ac">SymbolNotFound</a>,  <span class="comment">///&lt; Symbol not found in library</span></div>
+<div class="line"><span class="lineno">   23</span>  <a class="code hl_enumvalue" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea2d0e462e9958ce7bb443e70023241dfe">InvalidHandle</a>,   <span class="comment">///&lt; Invalid library handle</span></div>
+<div class="line"><span class="lineno">   24</span>  <a class="code hl_enumvalue" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea3cd0dcca263062e228b48dc510f78334">AlreadyLoaded</a>,   <span class="comment">///&lt; Library is already loaded</span></div>
+<div class="line"><span class="lineno">   25</span>  NotLoaded,       <span class="comment">///&lt; Library is not loaded</span></div>
+<div class="line"><span class="lineno">   26</span>  <a class="code hl_enumvalue" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365eaba8ea63548a12106e8f5aed4e964ae6a">PlatformError</a>,   <span class="comment">///&lt; Platform-specific error</span></div>
+<div class="line"><span class="lineno">   27</span>};</div>
+<div class="ttc" id="anamespacehelios_1_1utils_html_aca74c060b4e32cb671a0bc6fb378365ea2767828026039e8ba7b38973cbb701f2"><div class="ttname"><a href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea2767828026039e8ba7b38973cbb701f2">helios::utils::DynamicLibraryError::FileNotFound</a></div><div class="ttdeci">@ FileNotFound</div><div class="ttdoc">Library file not found.</div></div>
+<div class="ttc" id="anamespacehelios_1_1utils_html_aca74c060b4e32cb671a0bc6fb378365ea2d0e462e9958ce7bb443e70023241dfe"><div class="ttname"><a href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea2d0e462e9958ce7bb443e70023241dfe">helios::utils::DynamicLibraryError::InvalidHandle</a></div><div class="ttdeci">@ InvalidHandle</div><div class="ttdoc">Invalid library handle.</div></div>
+<div class="ttc" id="anamespacehelios_1_1utils_html_aca74c060b4e32cb671a0bc6fb378365ea3729d9667c9ed82ae96b6174b288a3a5"><div class="ttname"><a href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea3729d9667c9ed82ae96b6174b288a3a5">helios::utils::DynamicLibraryError::LoadFailed</a></div><div class="ttdeci">@ LoadFailed</div><div class="ttdoc">Failed to load library.</div></div>
+<div class="ttc" id="anamespacehelios_1_1utils_html_aca74c060b4e32cb671a0bc6fb378365ea3cd0dcca263062e228b48dc510f78334"><div class="ttname"><a href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea3cd0dcca263062e228b48dc510f78334">helios::utils::DynamicLibraryError::AlreadyLoaded</a></div><div class="ttdeci">@ AlreadyLoaded</div><div class="ttdoc">Library is already loaded.</div></div>
+<div class="ttc" id="anamespacehelios_1_1utils_html_aca74c060b4e32cb671a0bc6fb378365eaba8ea63548a12106e8f5aed4e964ae6a"><div class="ttname"><a href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365eaba8ea63548a12106e8f5aed4e964ae6a">helios::utils::DynamicLibraryError::PlatformError</a></div><div class="ttdeci">@ PlatformError</div><div class="ttdoc">Platform-specific error.</div></div>
+<div class="ttc" id="anamespacehelios_1_1utils_html_aca74c060b4e32cb671a0bc6fb378365eac11f7f7d37763d1430ed2682642ea0ac"><div class="ttname"><a href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365eac11f7f7d37763d1430ed2682642ea0ac">helios::utils::DynamicLibraryError::SymbolNotFound</a></div><div class="ttdeci">@ SymbolNotFound</div><div class="ttdoc">Symbol not found in library.</div></div>
+</div><!-- fragment -->
+</div>
+</div>
 <a id="aa8f8d89ee8389efd92330df687025d68" name="aa8f8d89ee8389efd92330df687025d68"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa8f8d89ee8389efd92330df687025d68">&#9670;&#160;</a></span>FileError</h2>
 
@@ -359,6 +438,65 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="abc4221e0af800d4c7dd1f3042525427c" name="abc4221e0af800d4c7dd1f3042525427c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc4221e0af800d4c7dd1f3042525427c">&#9670;&#160;</a></span>DynamicLibraryErrorToString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr std::string_view helios::utils::DynamicLibraryErrorToString </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365e">DynamicLibraryError</a>&#160;</td>
+          <td class="paramname"><em>error</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets a human-readable description for a DynamicLibraryError. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">error</td><td>The error code </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>String description of the error </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2dynamic_library_8hpp-example.html#a8">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/dynamic_library.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00034">34</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   34</span>                                                                                                       {</div>
+<div class="line"><span class="lineno">   35</span>  <span class="keywordflow">switch</span> (error) {</div>
+<div class="line"><span class="lineno">   36</span>    <span class="keywordflow">case</span> DynamicLibraryError::FileNotFound:</div>
+<div class="line"><span class="lineno">   37</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;Library file not found&quot;</span>;</div>
+<div class="line"><span class="lineno">   38</span>    <span class="keywordflow">case</span> DynamicLibraryError::LoadFailed:</div>
+<div class="line"><span class="lineno">   39</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;Failed to load library&quot;</span>;</div>
+<div class="line"><span class="lineno">   40</span>    <span class="keywordflow">case</span> DynamicLibraryError::SymbolNotFound:</div>
+<div class="line"><span class="lineno">   41</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;Symbol not found in library&quot;</span>;</div>
+<div class="line"><span class="lineno">   42</span>    <span class="keywordflow">case</span> DynamicLibraryError::InvalidHandle:</div>
+<div class="line"><span class="lineno">   43</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;Invalid library handle&quot;</span>;</div>
+<div class="line"><span class="lineno">   44</span>    <span class="keywordflow">case</span> DynamicLibraryError::AlreadyLoaded:</div>
+<div class="line"><span class="lineno">   45</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;Library is already loaded&quot;</span>;</div>
+<div class="line"><span class="lineno">   46</span>    <span class="keywordflow">case</span> DynamicLibraryError::NotLoaded:</div>
+<div class="line"><span class="lineno">   47</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;Library is not loaded&quot;</span>;</div>
+<div class="line"><span class="lineno">   48</span>    <span class="keywordflow">case</span> DynamicLibraryError::PlatformError:</div>
+<div class="line"><span class="lineno">   49</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;Platform-specific error&quot;</span>;</div>
+<div class="line"><span class="lineno">   50</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">   51</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;Unknown error&quot;</span>;</div>
+<div class="line"><span class="lineno">   52</span>  }</div>
+<div class="line"><span class="lineno">   53</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
 <a id="a8456f8516be4dd86cc838b2e928b7239" name="a8456f8516be4dd86cc838b2e928b7239"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8456f8516be4dd86cc838b2e928b7239">&#9670;&#160;</a></span>FileErrorToString()</h2>
 
@@ -403,6 +541,45 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   30</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;Unknown file error&quot;</span>;</div>
 <div class="line"><span class="lineno">   31</span>  }</div>
 <div class="line"><span class="lineno">   32</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ac60a7361517b211c989c0a9f1d5518b3" name="ac60a7361517b211c989c0a9f1d5518b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac60a7361517b211c989c0a9f1d5518b3">&#9670;&#160;</a></span>FromPath()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::utils::FromPath </td>
+          <td>(</td>
+          <td class="paramtype">const std::filesystem::path &amp;&#160;</td>
+          <td class="paramname"><em>path</em></td><td>)</td>
+          <td> -&gt; std::expected&lt;<a class="el" href="classhelios_1_1utils_1_1DynamicLibrary.html">DynamicLibrary</a>, <a class="el" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365e">DynamicLibraryError</a>&gt; </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2dynamic_library_8hpp-example.html#a28">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/dynamic_library.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00227">227</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  227</span>                                                                                                        {</div>
+<div class="line"><span class="lineno">  228</span>  <a class="code hl_class" href="classhelios_1_1utils_1_1DynamicLibrary.html">DynamicLibrary</a> lib;</div>
+<div class="line"><span class="lineno">  229</span>  <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> result = lib.<a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#ac1ca51a6830a4159681abbe401bfe49a">Load</a>(path); !result) {</div>
+<div class="line"><span class="lineno">  230</span>    <span class="keywordflow">return</span> std::unexpected(result.error());</div>
+<div class="line"><span class="lineno">  231</span>  }</div>
+<div class="line"><span class="lineno">  232</span>  <span class="keywordflow">return</span> lib;</div>
+<div class="line"><span class="lineno">  233</span>}</div>
+<div class="ttc" id="aclasshelios_1_1utils_1_1DynamicLibrary_html"><div class="ttname"><a href="classhelios_1_1utils_1_1DynamicLibrary.html">helios::utils::DynamicLibrary</a></div><div class="ttdef"><b>Definition</b> <a href="dynamic__library_8hpp_source.html#l00074">dynamic_library.hpp:74</a></div></div>
+<div class="ttc" id="aclasshelios_1_1utils_1_1DynamicLibrary_html_ac1ca51a6830a4159681abbe401bfe49a"><div class="ttname"><a href="classhelios_1_1utils_1_1DynamicLibrary.html#ac1ca51a6830a4159681abbe401bfe49a">helios::utils::DynamicLibrary::Load</a></div><div class="ttdeci">auto Load(const std::filesystem::path &amp;path) -&gt; std::expected&lt; void, DynamicLibraryError &gt;</div><div class="ttdoc">Loads a dynamic library from the specified path.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__library_8cpp_source.html#l00026">dynamic_library.cpp:26</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>

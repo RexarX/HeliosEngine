@@ -1,0 +1,325 @@
+<!-- HTML header for doxygen 1.9.1+ with doxygen-awesome-css extensions -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=11" />
+        <meta name="generator" content="Doxygen 1.9.8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helios Engine: /home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/events/builtin_events.hpp</title>
+        <!--BEGIN PROJECT_ICON-->
+        <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!--END PROJECT_ICON-->
+        <link href="tabs.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="dynsections.js"></script>
+        <!--BEGIN COPY_CLIPBOARD-->
+        <script type="text/javascript" src="clipboard.js"></script>
+        <!--END COPY_CLIPBOARD-->
+        <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+ <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>  
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+        <!-- doxygen-awesome-css extensions -->
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-fragment-copy-button.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-paragraph-link.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-interactive-toc.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="doxygen-awesome-tabs.js"
+        ></script>
+        <!-- Initialize doxygen-awesome-css extensions -->
+        <script type="text/javascript">
+            // Dark mode toggle customization
+            //DoxygenAwesomeDarkModeToggle.title = "Toggle light/dark mode";
+            //DoxygenAwesomeDarkModeToggle.lightModeIcon = "☀️";
+            //DoxygenAwesomeDarkModeToggle.darkModeIcon = "🌙";
+            //DoxygenAwesomeDarkModeToggle.init();
+            // Fragment copy button customization
+            DoxygenAwesomeFragmentCopyButton.title = "Copy to clipboard";
+            DoxygenAwesomeFragmentCopyButton.init();
+            // Paragraph link customization
+            DoxygenAwesomeParagraphLink.title = "Copy link to this section";
+            DoxygenAwesomeParagraphLink.icon = "¶";
+            DoxygenAwesomeParagraphLink.init();
+            // Interactive TOC customization
+            DoxygenAwesomeInteractiveToc.topOffset = 45;
+            DoxygenAwesomeInteractiveToc.hideMobileMenu = true;
+            DoxygenAwesomeInteractiveToc.init();
+            // Tabs extension
+            DoxygenAwesomeTabs.init();
+        </script>
+    </head>
+    <body>
+            <div id="top">
+                <!-- do not remove this div, it is closed by doxygen! -->
+                <div id="titlearea">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr id="projectrow">
+                                <td id="projectlogo">
+                                    <img
+                                        alt="Logo"
+                                        src="logo.png"
+                                        $logosize
+                                    />
+                                </td>
+                                <td id="projectalign">
+                                    <div id="projectname">
+                                        Helios Engine<span
+                                            id="projectnumber"
+                                            >&#160;0.1.0</span
+                                        >
+                                    </div>
+                                    <div id="projectbrief">A modular ECS based data-oriented C++23 game engine</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end header part -->
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2events_2builtin_events_8hpp-example.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/events/builtin_events.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<p>Event emitted to request application shutdown.</p>
+<p>Event emitted to request application shutdown. This event is read by the default runner to gracefully stop the application loop. Systems can emit this event to request shutdown with an optional exit code. </p><dl class="section note"><dt>Note</dt><dd>Must be trivially copyable for event storage requirements.</dd></dl>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> QuitSystem(SystemContext&amp; ctx) {</div>
+<div class="line">  <span class="keyword">const</span> <span class="keyword">auto</span>&amp; input = ctx.ReadResource&lt;Input&gt;();</div>
+<div class="line">  <span class="keywordflow">if</span> (input.IsKeyPressed(Key::Escape)) {</div>
+<div class="line">    ctx.EmitEvent(ShutdownEvent{});</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+</div><!-- fragment --><div class="fragment"><div class="line"><span class="preprocessor">#pragma once</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="core__pch_8hpp.html">helios/core_pch.hpp</a>&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="entity_8hpp.html">helios/core/ecs/entity.hpp</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="event_8hpp.html">helios/core/ecs/event.hpp</a>&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;string_view&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1ecs.html">helios::ecs</a> {</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief Event emitted when an entity is spawned/created.</span></div>
+<div class="line"><span class="comment"> * @details This event is automatically emitted by World::CreateEntity() and World::ReserveEntity()</span></div>
+<div class="line"><span class="comment"> * if the event is registered via AddEvent&lt;EntitySpawnedEvent&gt;().</span></div>
+<div class="line"><span class="comment"> * @note Must be trivially copyable for event storage requirements.</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">struct </span>EntitySpawnedEvent {</div>
+<div class="line">  Entity <a id="a0" name="a0"></a><a class="code hl_variable" href="structhelios_1_1ecs_1_1EntitySpawnedEvent.html#a24f2ff10e79bdad7d0edaf7082b8a12a">entity</a>;  <span class="comment">///&lt; The spawned entity</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Gets the event name.</span></div>
+<div class="line"><span class="comment">   * @return Event name string</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view <a id="a1" name="a1"></a><a class="code hl_function" href="structhelios_1_1ecs_1_1EntitySpawnedEvent.html#a517ea21923fd5a36cac931ffe1db0992">GetName</a>() <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> <span class="stringliteral">&quot;EntitySpawnedEvent&quot;</span>; }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Gets the clear policy for this event.</span></div>
+<div class="line"><span class="comment">   * @return Event clear policy (automatic)</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> <a id="a2" name="a2"></a><a class="code hl_enumeration" href="namespacehelios_1_1ecs.html#ab48aaed34af66c40a97690ad39f727f4">EventClearPolicy</a> <a id="a3" name="a3"></a><a class="code hl_function" href="structhelios_1_1ecs_1_1EntitySpawnedEvent.html#aae5656747fcbf29af4d993e5336fa5a6">GetClearPolicy</a>() <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> <a id="a4" name="a4"></a><a class="code hl_enumvalue" href="namespacehelios_1_1ecs.html#ab48aaed34af66c40a97690ad39f727f4a0edd03ba1f5a73f26d1fd764255ddaa1">EventClearPolicy::kAutomatic</a>; }</div>
+<div class="line">};</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief Event emitted when an entity is destroyed.</span></div>
+<div class="line"><span class="comment"> * @details This event is automatically emitted by World::DestroyEntity() and related methods</span></div>
+<div class="line"><span class="comment"> * if the event is registered via AddEvent&lt;EntityDestroyedEvent&gt;().</span></div>
+<div class="line"><span class="comment"> * @note Must be trivially copyable for event storage requirements.</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">struct </span>EntityDestroyedEvent {</div>
+<div class="line">  Entity <a id="a5" name="a5"></a><a class="code hl_variable" href="structhelios_1_1ecs_1_1EntityDestroyedEvent.html#aa1dd354b6a7fdbb2436b8282151348c1">entity</a>;  <span class="comment">///&lt; The destroyed entity</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Gets the event name.</span></div>
+<div class="line"><span class="comment">   * @return Event name string</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view <a id="a6" name="a6"></a><a class="code hl_function" href="structhelios_1_1ecs_1_1EntityDestroyedEvent.html#a17795dfb6dcd028f58567cfb6424b0b8">GetName</a>() <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> <span class="stringliteral">&quot;EntityDestroyedEvent&quot;</span>; }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Gets the clear policy for this event.</span></div>
+<div class="line"><span class="comment">   * @return Event clear policy (automatic)</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> <a class="code hl_enumeration" href="namespacehelios_1_1ecs.html#ab48aaed34af66c40a97690ad39f727f4">EventClearPolicy</a> <a id="a7" name="a7"></a><a class="code hl_function" href="structhelios_1_1ecs_1_1EntityDestroyedEvent.html#a7beb556220ecb2212032e0446285f4b7">GetClearPolicy</a>() <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="namespacehelios_1_1ecs.html#ab48aaed34af66c40a97690ad39f727f4a0edd03ba1f5a73f26d1fd764255ddaa1">EventClearPolicy::kAutomatic</a>; }</div>
+<div class="line">};</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief Exit code for application shutdown.</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">enum class</span> <a id="a8" name="a8"></a><a class="code hl_enumeration" href="namespacehelios_1_1ecs.html#ae984f0803649a1da782a858e73401658">ShutdownExitCode</a> : <a id="a9" name="a9"></a><a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">uint8_t</a> {</div>
+<div class="line">  <a id="a10" name="a10"></a><a class="code hl_enumvalue" href="namespacehelios_1_1ecs.html#ae984f0803649a1da782a858e73401658a505a83f220c02df2f85c3810cd9ceb38">Success</a> = 0,  <span class="comment">///&lt; Normal shutdown</span></div>
+<div class="line">  <a id="a11" name="a11"></a><a class="code hl_enumvalue" href="namespacehelios_1_1ecs.html#ae984f0803649a1da782a858e73401658ae139a585510a502bbf1841cf589f5086">Failure</a> = 1,  <span class="comment">///&lt; Shutdown due to error</span></div>
+<div class="line">};</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * @brief Event emitted to request application shutdown.</span></div>
+<div class="line"><span class="comment"> * @details This event is read by the default runner to gracefully stop the application loop.</span></div>
+<div class="line"><span class="comment"> * Systems can emit this event to request shutdown with an optional exit code.</span></div>
+<div class="line"><span class="comment"> * @note Must be trivially copyable for event storage requirements.</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * @example</span></div>
+<div class="line"><span class="comment"> * @code</span></div>
+<div class="line"><span class="comment"> * void QuitSystem(SystemContext&amp; ctx) {</span></div>
+<div class="line"><span class="comment"> *   const auto&amp; input = ctx.ReadResource&lt;Input&gt;();</span></div>
+<div class="line"><span class="comment"> *   if (input.IsKeyPressed(Key::Escape)) {</span></div>
+<div class="line"><span class="comment"> *     ctx.EmitEvent(ShutdownEvent{});</span></div>
+<div class="line"><span class="comment"> *   }</span></div>
+<div class="line"><span class="comment"> * }</span></div>
+<div class="line"><span class="comment"> * @endcode</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"><span class="keyword">struct </span>ShutdownEvent {</div>
+<div class="line">  <a class="code hl_enumeration" href="namespacehelios_1_1ecs.html#ae984f0803649a1da782a858e73401658">ShutdownExitCode</a> <a id="a12" name="a12"></a><a class="code hl_variable" href="structhelios_1_1ecs_1_1ShutdownEvent.html#aaff369bb4408a483f311a091f7301246">exit_code</a> = <a class="code hl_enumvalue" href="namespacehelios_1_1ecs.html#ae984f0803649a1da782a858e73401658a505a83f220c02df2f85c3810cd9ceb38">ShutdownExitCode::Success</a>;  <span class="comment">///&lt; Exit code for the shutdown</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Gets the event name.</span></div>
+<div class="line"><span class="comment">   * @return Event name string</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view <a id="a13" name="a13"></a><a class="code hl_function" href="structhelios_1_1ecs_1_1ShutdownEvent.html#a07079001fa68257393802c164e95c7a7">GetName</a>() <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> <span class="stringliteral">&quot;ShutdownEvent&quot;</span>; }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /**</span></div>
+<div class="line"><span class="comment">   * @brief Gets the clear policy for this event.</span></div>
+<div class="line"><span class="comment">   * @details Uses manual clear policy since shutdown should persist until processed.</span></div>
+<div class="line"><span class="comment">   * @return Event clear policy (manual)</span></div>
+<div class="line"><span class="comment">   */</span></div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> <a class="code hl_enumeration" href="namespacehelios_1_1ecs.html#ab48aaed34af66c40a97690ad39f727f4">EventClearPolicy</a> <a id="a14" name="a14"></a><a class="code hl_function" href="structhelios_1_1ecs_1_1ShutdownEvent.html#a43b1d8652f9b94d83b02f32242da58ff">GetClearPolicy</a>() <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> <a id="a15" name="a15"></a><a class="code hl_enumvalue" href="namespacehelios_1_1ecs.html#ab48aaed34af66c40a97690ad39f727f4a840f73673d401f2e539743e82e167a45">EventClearPolicy::kManual</a>; }</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Static assertions to ensure events meet requirements</span></div>
+<div class="line"><span class="keyword">static_assert</span>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">EventTrait&lt;EntitySpawnedEvent&gt;</a>);</div>
+<div class="line"><span class="keyword">static_assert</span>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">EventTrait&lt;EntityDestroyedEvent&gt;</a>);</div>
+<div class="line"><span class="keyword">static_assert</span>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">EventTrait&lt;ShutdownEvent&gt;</a>);</div>
+<div class="line"> </div>
+<div class="line">}  <span class="comment">// namespace helios::ecs</span></div>
+<div class="ttc" id="acore__pch_8hpp_html"><div class="ttname"><a href="core__pch_8hpp.html">core_pch.hpp</a></div></div>
+<div class="ttc" id="aentity_8hpp_html"><div class="ttname"><a href="entity_8hpp.html">entity.hpp</a></div></div>
+<div class="ttc" id="aevent_8hpp_html"><div class="ttname"><a href="event_8hpp.html">event.hpp</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html"><div class="ttname"><a href="namespacehelios_1_1ecs.html">helios::ecs</a></div><div class="ttdef"><b>Definition</b> <a href="command_8hpp_source.html#l00005">command.hpp:5</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_ab48aaed34af66c40a97690ad39f727f4"><div class="ttname"><a href="namespacehelios_1_1ecs.html#ab48aaed34af66c40a97690ad39f727f4">helios::ecs::EventClearPolicy</a></div><div class="ttdeci">EventClearPolicy</div><div class="ttdoc">Policy for event clearing behavior.</div><div class="ttdef"><b>Definition</b> <a href="event_8hpp_source.html#l00023">event.hpp:23</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_ab48aaed34af66c40a97690ad39f727f4a0edd03ba1f5a73f26d1fd764255ddaa1"><div class="ttname"><a href="namespacehelios_1_1ecs.html#ab48aaed34af66c40a97690ad39f727f4a0edd03ba1f5a73f26d1fd764255ddaa1">helios::ecs::EventClearPolicy::kAutomatic</a></div><div class="ttdeci">@ kAutomatic</div><div class="ttdoc">Events are automatically cleared after double buffer cycle.</div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_ab48aaed34af66c40a97690ad39f727f4a840f73673d401f2e539743e82e167a45"><div class="ttname"><a href="namespacehelios_1_1ecs.html#ab48aaed34af66c40a97690ad39f727f4a840f73673d401f2e539743e82e167a45">helios::ecs::EventClearPolicy::kManual</a></div><div class="ttdeci">@ kManual</div><div class="ttdoc">Events persist until manually cleared via ManualClear()</div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_ae984f0803649a1da782a858e73401658"><div class="ttname"><a href="namespacehelios_1_1ecs.html#ae984f0803649a1da782a858e73401658">helios::ecs::ShutdownExitCode</a></div><div class="ttdeci">ShutdownExitCode</div><div class="ttdoc">Exit code for application shutdown.</div><div class="ttdef"><b>Definition</b> <a href="builtin__events_8hpp_source.html#l00060">builtin_events.hpp:60</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_ae984f0803649a1da782a858e73401658a505a83f220c02df2f85c3810cd9ceb38"><div class="ttname"><a href="namespacehelios_1_1ecs.html#ae984f0803649a1da782a858e73401658a505a83f220c02df2f85c3810cd9ceb38">helios::ecs::ShutdownExitCode::Success</a></div><div class="ttdeci">@ Success</div><div class="ttdoc">Normal shutdown.</div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_ae984f0803649a1da782a858e73401658ae139a585510a502bbf1841cf589f5086"><div class="ttname"><a href="namespacehelios_1_1ecs.html#ae984f0803649a1da782a858e73401658ae139a585510a502bbf1841cf589f5086">helios::ecs::ShutdownExitCode::Failure</a></div><div class="ttdeci">@ Failure</div><div class="ttdoc">Shutdown due to error.</div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_af0384de48d847585fcb340c71c231e5e"><div class="ttname"><a href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, Allocator, Components... &gt; Query</div><div class="ttdoc">Type alias for query with mutable world access.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02481">query.hpp:2481</a></div></div>
+<div class="ttc" id="astructhelios_1_1ecs_1_1EntityDestroyedEvent_html_a17795dfb6dcd028f58567cfb6424b0b8"><div class="ttname"><a href="structhelios_1_1ecs_1_1EntityDestroyedEvent.html#a17795dfb6dcd028f58567cfb6424b0b8">helios::ecs::EntityDestroyedEvent::GetName</a></div><div class="ttdeci">static constexpr std::string_view GetName() noexcept</div><div class="ttdoc">Gets the event name.</div><div class="ttdef"><b>Definition</b> <a href="builtin__events_8hpp_source.html#l00048">builtin_events.hpp:48</a></div></div>
+<div class="ttc" id="astructhelios_1_1ecs_1_1EntityDestroyedEvent_html_a7beb556220ecb2212032e0446285f4b7"><div class="ttname"><a href="structhelios_1_1ecs_1_1EntityDestroyedEvent.html#a7beb556220ecb2212032e0446285f4b7">helios::ecs::EntityDestroyedEvent::GetClearPolicy</a></div><div class="ttdeci">static constexpr EventClearPolicy GetClearPolicy() noexcept</div><div class="ttdoc">Gets the clear policy for this event.</div><div class="ttdef"><b>Definition</b> <a href="builtin__events_8hpp_source.html#l00054">builtin_events.hpp:54</a></div></div>
+<div class="ttc" id="astructhelios_1_1ecs_1_1EntityDestroyedEvent_html_aa1dd354b6a7fdbb2436b8282151348c1"><div class="ttname"><a href="structhelios_1_1ecs_1_1EntityDestroyedEvent.html#aa1dd354b6a7fdbb2436b8282151348c1">helios::ecs::EntityDestroyedEvent::entity</a></div><div class="ttdeci">Entity entity</div><div class="ttdoc">The destroyed entity.</div><div class="ttdef"><b>Definition</b> <a href="builtin__events_8hpp_source.html#l00042">builtin_events.hpp:42</a></div></div>
+<div class="ttc" id="astructhelios_1_1ecs_1_1EntitySpawnedEvent_html_a24f2ff10e79bdad7d0edaf7082b8a12a"><div class="ttname"><a href="structhelios_1_1ecs_1_1EntitySpawnedEvent.html#a24f2ff10e79bdad7d0edaf7082b8a12a">helios::ecs::EntitySpawnedEvent::entity</a></div><div class="ttdeci">Entity entity</div><div class="ttdoc">The spawned entity.</div><div class="ttdef"><b>Definition</b> <a href="builtin__events_8hpp_source.html#l00020">builtin_events.hpp:20</a></div></div>
+<div class="ttc" id="astructhelios_1_1ecs_1_1EntitySpawnedEvent_html_a517ea21923fd5a36cac931ffe1db0992"><div class="ttname"><a href="structhelios_1_1ecs_1_1EntitySpawnedEvent.html#a517ea21923fd5a36cac931ffe1db0992">helios::ecs::EntitySpawnedEvent::GetName</a></div><div class="ttdeci">static constexpr std::string_view GetName() noexcept</div><div class="ttdoc">Gets the event name.</div><div class="ttdef"><b>Definition</b> <a href="builtin__events_8hpp_source.html#l00026">builtin_events.hpp:26</a></div></div>
+<div class="ttc" id="astructhelios_1_1ecs_1_1EntitySpawnedEvent_html_aae5656747fcbf29af4d993e5336fa5a6"><div class="ttname"><a href="structhelios_1_1ecs_1_1EntitySpawnedEvent.html#aae5656747fcbf29af4d993e5336fa5a6">helios::ecs::EntitySpawnedEvent::GetClearPolicy</a></div><div class="ttdeci">static constexpr EventClearPolicy GetClearPolicy() noexcept</div><div class="ttdoc">Gets the clear policy for this event.</div><div class="ttdef"><b>Definition</b> <a href="builtin__events_8hpp_source.html#l00032">builtin_events.hpp:32</a></div></div>
+<div class="ttc" id="astructhelios_1_1ecs_1_1ShutdownEvent_html_a07079001fa68257393802c164e95c7a7"><div class="ttname"><a href="structhelios_1_1ecs_1_1ShutdownEvent.html#a07079001fa68257393802c164e95c7a7">helios::ecs::ShutdownEvent::GetName</a></div><div class="ttdeci">static constexpr std::string_view GetName() noexcept</div><div class="ttdoc">Gets the event name.</div><div class="ttdef"><b>Definition</b> <a href="builtin__events_8hpp_source.html#l00088">builtin_events.hpp:88</a></div></div>
+<div class="ttc" id="astructhelios_1_1ecs_1_1ShutdownEvent_html_a43b1d8652f9b94d83b02f32242da58ff"><div class="ttname"><a href="structhelios_1_1ecs_1_1ShutdownEvent.html#a43b1d8652f9b94d83b02f32242da58ff">helios::ecs::ShutdownEvent::GetClearPolicy</a></div><div class="ttdeci">static constexpr EventClearPolicy GetClearPolicy() noexcept</div><div class="ttdoc">Gets the clear policy for this event.</div><div class="ttdef"><b>Definition</b> <a href="builtin__events_8hpp_source.html#l00095">builtin_events.hpp:95</a></div></div>
+<div class="ttc" id="astructhelios_1_1ecs_1_1ShutdownEvent_html_aaff369bb4408a483f311a091f7301246"><div class="ttname"><a href="structhelios_1_1ecs_1_1ShutdownEvent.html#aaff369bb4408a483f311a091f7301246">helios::ecs::ShutdownEvent::exit_code</a></div><div class="ttdeci">ShutdownExitCode exit_code</div><div class="ttdoc">Exit code for the shutdown.</div><div class="ttdef"><b>Definition</b> <a href="builtin__events_8hpp_source.html#l00082">builtin_events.hpp:82</a></div></div>
+</div><!-- fragment --> </div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">
+      <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
+        <div style="margin-bottom: 0.5em;">
+          &copy; 2025 <strong>Helios Engine</strong> - A modular ECS based data-oriented C++23 game engine framework
+        </div>
+        <div style="color: var(--text-color-secondary, #888);">
+          Generated by
+          <a href="https://www.doxygen.org/index.html" target="_blank" rel="noopener noreferrer">
+            <img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/>
+          </a> 1.9.8
+        </div>
+        <div style="margin-top: 0.5em; color: var(--text-color-secondary, #888);">
+          Styled with <a href="https://github.com/jothepro/doxygen-awesome-css" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color, #1779c4); text-decoration: none;">doxygen-awesome-css</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -2,15 +2,20 @@ var examples =
 [
     [ "/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/access_policy.hpp", "_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2access_policy_8hpp-example.html", null ],
     [ "/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/app.hpp", "_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2app_8hpp-example.html", null ],
+    [ "Library", "Library-example.html", null ],
+    [ "Usage", "Usage-example.html", null ],
+    [ "/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/runners.hpp", "_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2runners_8hpp-example.html", null ],
     [ "/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/schedule.hpp", "_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2schedule_8hpp-example.html", null ],
     [ "/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/schedules.hpp", "_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2schedules_8hpp-example.html", null ],
     [ "/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/sub_app.hpp", "_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2sub_app_8hpp-example.html", null ],
     [ "/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_config.hpp", "_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_config_8hpp-example.html", null ],
     [ "/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp", "_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html", null ],
     [ "/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_set_config.hpp", "_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_set_config_8hpp-example.html", null ],
+    [ "/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/time.hpp", "_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2time_8hpp-example.html", null ],
     [ "/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/details/entities_manager.hpp", "_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2details_2entities_manager_8hpp-example.html", null ],
     [ "/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/entity_command_buffer.hpp", "_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2entity_command_buffer_8hpp-example.html", null ],
     [ "/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/event_reader.hpp", "_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2event_reader_8hpp-example.html", null ],
+    [ "/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/events/builtin_events.hpp", "_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2events_2builtin_events_8hpp-example.html", null ],
     [ "/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/query.hpp", "_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2query_8hpp-example.html", null ],
     [ "/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/system.hpp", "_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2system_8hpp-example.html", null ],
     [ "/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/world_command_buffer.hpp", "_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2world_command_buffer_8hpp-example.html", null ],
@@ -24,6 +29,7 @@ var examples =
     [ "/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/pool_allocator.hpp", "_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2pool_allocator_8hpp-example.html", null ],
     [ "/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stack_allocator.hpp", "_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stack_allocator_8hpp-example.html", null ],
     [ "/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/memory/stl_allocator_adapter.hpp", "_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2memory_2stl_allocator_adapter_8hpp-example.html", null ],
+    [ "/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/dynamic_library.hpp", "_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2dynamic_library_8hpp-example.html", null ],
     [ "/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp", "_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html", null ],
     [ "/home/runner/work/HeliosEngine/HeliosEngine/src/modules/example/include/helios/example/example.hpp", "_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2modules_2example_2include_2helios_2example_2example_8hpp-example.html", null ]
 ];

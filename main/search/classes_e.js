@@ -1,9 +1,11 @@
 var searchData=
 [
-  ['querycachemanager_0',['QueryCacheManager',['../classhelios_1_1ecs_1_1details_1_1QueryCacheManager.html',1,'helios::ecs::details']]],
-  ['querycachestats_1',['QueryCacheStats',['../structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html',1,'helios::ecs::details']]],
-  ['querydescriptor_2',['QueryDescriptor',['../structhelios_1_1app_1_1details_1_1QueryDescriptor.html',1,'helios::app::details']]],
-  ['queryiterator_3',['QueryIterator',['../classhelios_1_1ecs_1_1details_1_1QueryIterator.html',1,'helios::ecs::details']]],
-  ['querystate_4',['QueryState',['../structhelios_1_1ecs_1_1details_1_1QueryState.html',1,'helios::ecs::details']]],
-  ['querywithentityiterator_5',['QueryWithEntityIterator',['../classhelios_1_1ecs_1_1details_1_1QueryWithEntityIterator.html',1,'helios::ecs::details']]]
+  ['poolallocator_0',['PoolAllocator',['../classhelios_1_1memory_1_1PoolAllocator.html',1,'helios::memory']]],
+  ['poolallocatorresource_1',['PoolAllocatorResource',['../classhelios_1_1app_1_1PoolAllocatorResource.html',1,'helios::app']]],
+  ['postcleanup_2',['PostCleanUp',['../structhelios_1_1app_1_1PostCleanUp.html',1,'helios::app']]],
+  ['poststartup_3',['PostStartup',['../structhelios_1_1app_1_1PostStartup.html',1,'helios::app']]],
+  ['postupdate_4',['PostUpdate',['../structhelios_1_1app_1_1PostUpdate.html',1,'helios::app']]],
+  ['precleanup_5',['PreCleanUp',['../structhelios_1_1app_1_1PreCleanUp.html',1,'helios::app']]],
+  ['prestartup_6',['PreStartup',['../structhelios_1_1app_1_1PreStartup.html',1,'helios::app']]],
+  ['preupdate_7',['PreUpdate',['../structhelios_1_1app_1_1PreUpdate.html',1,'helios::app']]]
 ];

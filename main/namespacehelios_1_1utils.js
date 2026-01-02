@@ -2,6 +2,7 @@ var namespacehelios_1_1utils =
 [
     [ "details", "namespacehelios_1_1utils_1_1details.html", "namespacehelios_1_1utils_1_1details" ],
     [ "ChainAdapter", "classhelios_1_1utils_1_1ChainAdapter.html", "classhelios_1_1utils_1_1ChainAdapter" ],
+    [ "DynamicLibrary", "classhelios_1_1utils_1_1DynamicLibrary.html", "classhelios_1_1utils_1_1DynamicLibrary" ],
     [ "EnumerateAdapter", "classhelios_1_1utils_1_1EnumerateAdapter.html", "classhelios_1_1utils_1_1EnumerateAdapter" ],
     [ "FastPimpl", "classhelios_1_1utils_1_1FastPimpl.html", "classhelios_1_1utils_1_1FastPimpl" ],
     [ "FilterAdapter", "classhelios_1_1utils_1_1FilterAdapter.html", "classhelios_1_1utils_1_1FilterAdapter" ],
@@ -44,11 +45,22 @@ var namespacehelios_1_1utils =
     [ "SlideAdapterRequirements", "concepthelios_1_1utils_1_1SlideAdapterRequirements.html", null ],
     [ "StrideAdapterRequirements", "concepthelios_1_1utils_1_1StrideAdapterRequirements.html", null ],
     [ "ZipAdapterRequirements", "concepthelios_1_1utils_1_1ZipAdapterRequirements.html", null ],
+    [ "DynamicLibraryError", "namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365e", [
+      [ "FileNotFound", "namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea2767828026039e8ba7b38973cbb701f2", null ],
+      [ "LoadFailed", "namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea3729d9667c9ed82ae96b6174b288a3a5", null ],
+      [ "SymbolNotFound", "namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365eac11f7f7d37763d1430ed2682642ea0ac", null ],
+      [ "InvalidHandle", "namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea2d0e462e9958ce7bb443e70023241dfe", null ],
+      [ "AlreadyLoaded", "namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea3cd0dcca263062e228b48dc510f78334", null ],
+      [ "NotLoaded", "namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea5111e24c1ecc6266ce0de4b4dc42033b", null ],
+      [ "PlatformError", "namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365eaba8ea63548a12106e8f5aed4e964ae6a", null ]
+    ] ],
     [ "FileError", "namespacehelios_1_1utils.html#aa8f8d89ee8389efd92330df687025d68", [
       [ "kCouldNotOpen", "namespacehelios_1_1utils.html#aa8f8d89ee8389efd92330df687025d68a84f032166061bfc754d13eb5fde4a3f7", null ],
       [ "kReadError", "namespacehelios_1_1utils.html#aa8f8d89ee8389efd92330df687025d68a58d3b11e0fadcadf0990c58e19a8be7e", null ]
     ] ],
+    [ "DynamicLibraryErrorToString", "namespacehelios_1_1utils.html#abc4221e0af800d4c7dd1f3042525427c", null ],
     [ "FileErrorToString", "namespacehelios_1_1utils.html#a8456f8516be4dd86cc838b2e928b7239", null ],
+    [ "FromPath", "namespacehelios_1_1utils.html#ac60a7361517b211c989c0a9f1d5518b3", null ],
     [ "GetDerived", "namespacehelios_1_1utils.html#ab0f9ee0135bae7b098c5f83d04a272bb", null ],
     [ "GetFileExtension", "namespacehelios_1_1utils.html#a1e85990bc74f7ba9ae1a47fdf4720dc9", null ],
     [ "GetFileName", "namespacehelios_1_1utils.html#a7ac5167111686abbfdf1126b47034746", null ],

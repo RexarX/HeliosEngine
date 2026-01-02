@@ -579,7 +579,7 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line">  }</div>
 <div class="line"> </div>
 <div class="line">  <span class="comment">// Calculate next capacity</span></div>
-<div class="line">  <span class="keywordtype">size_t</span> new_capacity = <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(next_capacity_ * growth_factor_);</div>
+<div class="line">  <span class="keyword">auto</span> new_capacity = <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(<span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(next_capacity_) * growth_factor_);</div>
 <div class="line"> </div>
 <div class="line">  <span class="comment">// Ensure new capacity is at least large enough for the requested allocation</span></div>
 <div class="line">  <span class="keywordflow">if</span> (new_capacity &lt; size) {</div>

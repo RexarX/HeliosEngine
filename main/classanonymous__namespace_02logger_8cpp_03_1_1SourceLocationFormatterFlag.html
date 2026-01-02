@@ -187,7 +187,7 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00078">78</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00077">77</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a71f3151795784f23b7b3bc9e1fe3be45" name="a71f3151795784f23b7b3bc9e1fe3be45"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a71f3151795784f23b7b3bc9e1fe3be45">&#9670;&#160;</a></span>SourceLocationFormatterFlag()</h2>
@@ -213,8 +213,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00080">80</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   80</span>: min_level_(min_level) {}</div>
+<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00079">79</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   79</span>: min_level_(min_level) {}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -242,10 +242,10 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00084">84</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   84</span>                                                                                          {</div>
-<div class="line"><span class="lineno">   85</span>    <span class="keywordflow">return</span> std::make_unique&lt;SourceLocationFormatterFlag&gt;(min_level_);</div>
-<div class="line"><span class="lineno">   86</span>  }</div>
+<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00083">83</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   83</span>                                                                                          {</div>
+<div class="line"><span class="lineno">   84</span>    <span class="keywordflow">return</span> std::make_unique&lt;SourceLocationFormatterFlag&gt;(min_level_);</div>
+<div class="line"><span class="lineno">   85</span>  }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -289,41 +289,41 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00092">92</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   93</span>                                                                   {</div>
-<div class="line"><span class="lineno">   94</span>  <span class="comment">// Only add source location if level is at or above minimum</span></div>
-<div class="line"><span class="lineno">   95</span>  <span class="keywordflow">if</span> (msg.level &lt; min_level_) [[likely]] {</div>
-<div class="line"><span class="lineno">   96</span>    <span class="keywordflow">return</span>;</div>
-<div class="line"><span class="lineno">   97</span>  }</div>
-<div class="line"><span class="lineno">   98</span> </div>
-<div class="line"><span class="lineno">   99</span>  std::array&lt;char, kFormatBufferReserveSize&gt; buffer = {};</div>
-<div class="line"><span class="lineno">  100</span> </div>
-<div class="line"><span class="lineno">  101</span>  <span class="keywordtype">char</span>* ptr = buffer.data();</div>
-<div class="line"><span class="lineno">  102</span>  <span class="keywordtype">char</span>* <span class="keyword">const</span> buffer_end = buffer.data() + buffer.size();</div>
-<div class="line"><span class="lineno">  103</span> </div>
-<div class="line"><span class="lineno">  104</span>  *ptr++ = <span class="charliteral">&#39; &#39;</span>;</div>
-<div class="line"><span class="lineno">  105</span>  *ptr++ = <span class="charliteral">&#39;[&#39;</span>;</div>
-<div class="line"><span class="lineno">  106</span> </div>
-<div class="line"><span class="lineno">  107</span>  <span class="keywordflow">if</span> (msg.source.filename != <span class="keyword">nullptr</span>) [[likely]] {</div>
-<div class="line"><span class="lineno">  108</span>    <span class="keyword">const</span> std::string_view filename(msg.source.filename);</div>
-<div class="line"><span class="lineno">  109</span>    <span class="keyword">const</span> <span class="keyword">auto</span> remaining_space = <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(std::distance(ptr, buffer_end));</div>
-<div class="line"><span class="lineno">  110</span>    <span class="keyword">const</span> <span class="keywordtype">size_t</span> copy_len = std::min(filename.size(), remaining_space - 20);</div>
-<div class="line"><span class="lineno">  111</span>    ptr = std::copy_n(filename.begin(), copy_len, ptr);</div>
-<div class="line"><span class="lineno">  112</span>  }</div>
-<div class="line"><span class="lineno">  113</span> </div>
-<div class="line"><span class="lineno">  114</span>  *ptr++ = <span class="charliteral">&#39;:&#39;</span>;</div>
-<div class="line"><span class="lineno">  115</span> </div>
-<div class="line"><span class="lineno">  116</span>  <span class="comment">// Use to_chars for safe formatting</span></div>
-<div class="line"><span class="lineno">  117</span>  <span class="keyword">const</span> <span class="keyword">auto</span> result = std::to_chars(ptr, buffer_end - 1, msg.source.line);</div>
-<div class="line"><span class="lineno">  118</span>  <span class="keywordflow">if</span> (result.ec == std::errc{}) [[likely]] {</div>
-<div class="line"><span class="lineno">  119</span>    ptr = result.ptr;</div>
-<div class="line"><span class="lineno">  120</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  121</span>    *ptr++ = <span class="charliteral">&#39;?&#39;</span>;</div>
-<div class="line"><span class="lineno">  122</span>  }</div>
-<div class="line"><span class="lineno">  123</span> </div>
-<div class="line"><span class="lineno">  124</span>  *ptr++ = <span class="charliteral">&#39;]&#39;</span>;</div>
-<div class="line"><span class="lineno">  125</span>  dest.append(buffer.data(), ptr);</div>
-<div class="line"><span class="lineno">  126</span>}</div>
+<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00091">91</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   92</span>                                                                   {</div>
+<div class="line"><span class="lineno">   93</span>  <span class="comment">// Only add source location if level is at or above minimum</span></div>
+<div class="line"><span class="lineno">   94</span>  <span class="keywordflow">if</span> (msg.level &lt; min_level_) [[likely]] {</div>
+<div class="line"><span class="lineno">   95</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">   96</span>  }</div>
+<div class="line"><span class="lineno">   97</span> </div>
+<div class="line"><span class="lineno">   98</span>  std::array&lt;char, kFormatBufferReserveSize&gt; buffer = {};</div>
+<div class="line"><span class="lineno">   99</span> </div>
+<div class="line"><span class="lineno">  100</span>  <span class="keywordtype">char</span>* ptr = buffer.data();</div>
+<div class="line"><span class="lineno">  101</span>  <span class="keywordtype">char</span>* <span class="keyword">const</span> buffer_end = buffer.data() + buffer.size();</div>
+<div class="line"><span class="lineno">  102</span> </div>
+<div class="line"><span class="lineno">  103</span>  *ptr++ = <span class="charliteral">&#39; &#39;</span>;</div>
+<div class="line"><span class="lineno">  104</span>  *ptr++ = <span class="charliteral">&#39;[&#39;</span>;</div>
+<div class="line"><span class="lineno">  105</span> </div>
+<div class="line"><span class="lineno">  106</span>  <span class="keywordflow">if</span> (msg.source.filename != <span class="keyword">nullptr</span>) [[likely]] {</div>
+<div class="line"><span class="lineno">  107</span>    <span class="keyword">const</span> std::string_view filename(msg.source.filename);</div>
+<div class="line"><span class="lineno">  108</span>    <span class="keyword">const</span> <span class="keyword">auto</span> remaining_space = <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(std::distance(ptr, buffer_end));</div>
+<div class="line"><span class="lineno">  109</span>    <span class="keyword">const</span> <span class="keywordtype">size_t</span> copy_len = std::min(filename.size(), remaining_space - 20);</div>
+<div class="line"><span class="lineno">  110</span>    ptr = std::copy_n(filename.begin(), copy_len, ptr);</div>
+<div class="line"><span class="lineno">  111</span>  }</div>
+<div class="line"><span class="lineno">  112</span> </div>
+<div class="line"><span class="lineno">  113</span>  *ptr++ = <span class="charliteral">&#39;:&#39;</span>;</div>
+<div class="line"><span class="lineno">  114</span> </div>
+<div class="line"><span class="lineno">  115</span>  <span class="comment">// Use to_chars for safe formatting</span></div>
+<div class="line"><span class="lineno">  116</span>  <span class="keyword">const</span> <span class="keyword">auto</span> result = std::to_chars(ptr, buffer_end - 1, msg.source.line);</div>
+<div class="line"><span class="lineno">  117</span>  <span class="keywordflow">if</span> (result.ec == std::errc{}) [[likely]] {</div>
+<div class="line"><span class="lineno">  118</span>    ptr = result.ptr;</div>
+<div class="line"><span class="lineno">  119</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  120</span>    *ptr++ = <span class="charliteral">&#39;?&#39;</span>;</div>
+<div class="line"><span class="lineno">  121</span>  }</div>
+<div class="line"><span class="lineno">  122</span> </div>
+<div class="line"><span class="lineno">  123</span>  *ptr++ = <span class="charliteral">&#39;]&#39;</span>;</div>
+<div class="line"><span class="lineno">  124</span>  dest.append(buffer.data(), ptr);</div>
+<div class="line"><span class="lineno">  125</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>

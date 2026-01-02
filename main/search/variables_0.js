@@ -11,5 +11,6 @@ var searchData=
   ['archetype_5fchanges_8',['archetype_changes',['../structhelios_1_1ecs_1_1details_1_1QueryCacheStats.html#a24dcdb7a6b76fc444f07d61ec809ea94',1,'helios::ecs::details::QueryCacheStats']]],
   ['archetype_5fgenerations_9',['archetype_generations',['../structhelios_1_1ecs_1_1details_1_1QueryState.html#a429d717e46bce7150be212e2d624a18f',1,'helios::ecs::details::QueryState']]],
   ['async_5flogging_10',['async_logging',['../structhelios_1_1LoggerConfig.html#aa98fe93efdcdd36fd878d4d61da46cb3',1,'helios::LoggerConfig']]],
-  ['auto_5fflush_5flevel_11',['auto_flush_level',['../structhelios_1_1LoggerConfig.html#a7a9095b67e68dcab0cbf6ac5ab647d72',1,'helios::LoggerConfig']]]
+  ['auto_5fflush_5flevel_11',['auto_flush_level',['../structhelios_1_1LoggerConfig.html#a7a9095b67e68dcab0cbf6ac5ab647d72',1,'helios::LoggerConfig']]],
+  ['auto_5freload_12',['auto_reload',['../structhelios_1_1app_1_1DynamicModuleConfig.html#ada58f6a2e3b42c9768faa95f6eb17db8',1,'helios::app::DynamicModuleConfig']]]
 ];

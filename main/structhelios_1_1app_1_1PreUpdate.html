@@ -179,21 +179,21 @@ $(document).ready(function(){initNavTree('structhelios_1_1app_1_1PreUpdate.html'
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a8c57732b9349964e35a12ec3c9d06fdc" id="r_a8c57732b9349964e35a12ec3c9d06fdc"><td class="memItemLeft" align="right" valign="top">static constexpr <a class="el" href="namespacehelios_1_1app.html#ac4575f1bc8761b136a03724dfbd2d6d5">ScheduleId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1app_1_1PreUpdate.html#a8c57732b9349964e35a12ec3c9d06fdc">GetStage</a> () noexcept</td></tr>
 <tr class="separator:a8c57732b9349964e35a12ec3c9d06fdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a433276c1f46d67f5c5ae401dd881258f" id="r_a433276c1f46d67f5c5ae401dd881258f"><td class="memItemLeft" align="right" valign="top">static constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1app_1_1PreUpdate.html#a433276c1f46d67f5c5ae401dd881258f">Before</a> () noexcept -&gt; std::array&lt; <a class="el" href="namespacehelios_1_1app.html#ac4575f1bc8761b136a03724dfbd2d6d5">ScheduleId</a>, 1 &gt;</td></tr>
-<tr class="separator:a433276c1f46d67f5c5ae401dd881258f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3e094e9c35933102c1d0e2036ae4099a" id="r_a3e094e9c35933102c1d0e2036ae4099a"><td class="memItemLeft" align="right" valign="top">static constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1app_1_1PreUpdate.html#a3e094e9c35933102c1d0e2036ae4099a">After</a> () noexcept -&gt; std::array&lt; <a class="el" href="namespacehelios_1_1app.html#ac4575f1bc8761b136a03724dfbd2d6d5">ScheduleId</a>, 0 &gt;</td></tr>
-<tr class="separator:a3e094e9c35933102c1d0e2036ae4099a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51aab75a93f0432c1696785f7a022488" id="r_a51aab75a93f0432c1696785f7a022488"><td class="memItemLeft" align="right" valign="top">static constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1app_1_1PreUpdate.html#a51aab75a93f0432c1696785f7a022488">Before</a> () noexcept -&gt; std::array&lt; <a class="el" href="namespacehelios_1_1app.html#ac4575f1bc8761b136a03724dfbd2d6d5">ScheduleId</a>, 1 &gt;</td></tr>
+<tr class="separator:a51aab75a93f0432c1696785f7a022488"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a740ca248d34c029e1f109e7d7f5b8db4" id="r_a740ca248d34c029e1f109e7d7f5b8db4"><td class="memItemLeft" align="right" valign="top">static constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1app_1_1PreUpdate.html#a740ca248d34c029e1f109e7d7f5b8db4">After</a> () noexcept -&gt; std::array&lt; <a class="el" href="namespacehelios_1_1app.html#ac4575f1bc8761b136a03724dfbd2d6d5">ScheduleId</a>, 1 &gt;</td></tr>
+<tr class="separator:a740ca248d34c029e1f109e7d7f5b8db4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4dac407cc679eee035a07903ef672fcd" id="r_a4dac407cc679eee035a07903ef672fcd"><td class="memItemLeft" align="right" valign="top">static constexpr std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1app_1_1PreUpdate.html#a4dac407cc679eee035a07903ef672fcd">GetName</a> () noexcept</td></tr>
 <tr class="separator:a4dac407cc679eee035a07903ef672fcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="structhelios_1_1app_1_1PreUpdate.html" title="PreUpdate schedule - runs before the main update.">PreUpdate</a> schedule - runs before the main update. </p>
-<p>First schedule in the <a class="el" href="structhelios_1_1app_1_1UpdateStage.html" title="UpdateStage - main update logic phase.">UpdateStage</a> (executes every frame). Used for pre-processing tasks that must complete before main update logic. Executes: Before(Update) </p>
+<p>Runs after <a class="el" href="structhelios_1_1app_1_1First.html" title="First schedule - runs first in the UpdateStage.">First</a> schedule in the <a class="el" href="structhelios_1_1app_1_1UpdateStage.html" title="UpdateStage - main update logic phase.">UpdateStage</a> (executes every frame). Used for pre-processing tasks that must complete before main update logic. Executes: After(First) and Before(Update) </p>
 
-<p class="definition">Definition at line <a class="el" href="schedules_8hpp_source.html#l00165">165</a> of file <a class="el" href="schedules_8hpp_source.html">schedules.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedules_8hpp_source.html#l00173">173</a> of file <a class="el" href="schedules_8hpp_source.html">schedules.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a3e094e9c35933102c1d0e2036ae4099a" name="a3e094e9c35933102c1d0e2036ae4099a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3e094e9c35933102c1d0e2036ae4099a">&#9670;&#160;</a></span>After()</h2>
+<a id="a740ca248d34c029e1f109e7d7f5b8db4" name="a740ca248d34c029e1f109e7d7f5b8db4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a740ca248d34c029e1f109e7d7f5b8db4">&#9670;&#160;</a></span>After()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -205,7 +205,7 @@ Static Public Member Functions</h2></td></tr>
           <td class="memname">static constexpr auto helios::app::PreUpdate::After </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td> -&gt; std::array&lt;<a class="el" href="namespacehelios_1_1app.html#ac4575f1bc8761b136a03724dfbd2d6d5">ScheduleId</a>, 0&gt; </td>
+          <td> -&gt; std::array&lt;<a class="el" href="namespacehelios_1_1app.html#ac4575f1bc8761b136a03724dfbd2d6d5">ScheduleId</a>, 1&gt; </td>
         </tr>
       </table>
   </td>
@@ -217,13 +217,13 @@ Static Public Member Functions</h2></td></tr>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2schedules_8hpp-example.html#a31">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/schedules.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="schedules_8hpp_source.html#l00168">168</a> of file <a class="el" href="schedules_8hpp_source.html">schedules.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  168</span>{ <span class="keywordflow">return</span> {}; }</div>
+<p class="definition">Definition at line <a class="el" href="schedules_8hpp_source.html#l00176">176</a> of file <a class="el" href="schedules_8hpp_source.html">schedules.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  176</span>{ <span class="keywordflow">return</span> {ScheduleIdOf&lt;First&gt;()}; }</div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a433276c1f46d67f5c5ae401dd881258f" name="a433276c1f46d67f5c5ae401dd881258f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a433276c1f46d67f5c5ae401dd881258f">&#9670;&#160;</a></span>Before()</h2>
+<a id="a51aab75a93f0432c1696785f7a022488" name="a51aab75a93f0432c1696785f7a022488"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51aab75a93f0432c1696785f7a022488">&#9670;&#160;</a></span>Before()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -232,23 +232,25 @@ Static Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static constexpr auto helios::app::PreUpdate::Before </td>
+          <td class="memname">constexpr auto helios::app::PreUpdate::Before </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td> -&gt; std::array&lt;<a class="el" href="namespacehelios_1_1app.html#ac4575f1bc8761b136a03724dfbd2d6d5">ScheduleId</a>, 1&gt; </td>
+          <td> -&gt; std::array&lt;<a class="el" href="namespacehelios_1_1app.html#ac4575f1bc8761b136a03724dfbd2d6d5">ScheduleId</a>, 1&gt;</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2schedules_8hpp-example.html#a30">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/schedules.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="schedules_8hpp_source.html#l00167">167</a> of file <a class="el" href="schedules_8hpp_source.html">schedules.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  167</span>{ <span class="keywordflow">return</span> {ScheduleIdOf&lt;Update&gt;()}; }</div>
+<p class="definition">Definition at line <a class="el" href="schedules_8hpp_source.html#l00226">226</a> of file <a class="el" href="schedules_8hpp_source.html">schedules.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  226</span>                                                                     {</div>
+<div class="line"><span class="lineno">  227</span>  <span class="keywordflow">return</span> {ScheduleIdOf&lt;Update&gt;()};</div>
+<div class="line"><span class="lineno">  228</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -277,8 +279,8 @@ Static Public Member Functions</h2></td></tr>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2schedules_8hpp-example.html#a32">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/schedules.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="schedules_8hpp_source.html#l00169">169</a> of file <a class="el" href="schedules_8hpp_source.html">schedules.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  169</span>{ <span class="keywordflow">return</span> <span class="stringliteral">&quot;PreUpdate&quot;</span>; }</div>
+<p class="definition">Definition at line <a class="el" href="schedules_8hpp_source.html#l00177">177</a> of file <a class="el" href="schedules_8hpp_source.html">schedules.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  177</span>{ <span class="keywordflow">return</span> <span class="stringliteral">&quot;PreUpdate&quot;</span>; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -307,8 +309,8 @@ Static Public Member Functions</h2></td></tr>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2schedules_8hpp-example.html#a29">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/schedules.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="schedules_8hpp_source.html#l00166">166</a> of file <a class="el" href="schedules_8hpp_source.html">schedules.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  166</span>{ <span class="keywordflow">return</span> ScheduleIdOf&lt;UpdateStage&gt;(); }</div>
+<p class="definition">Definition at line <a class="el" href="schedules_8hpp_source.html#l00174">174</a> of file <a class="el" href="schedules_8hpp_source.html">schedules.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  174</span>{ <span class="keywordflow">return</span> ScheduleIdOf&lt;UpdateStage&gt;(); }</div>
 </div><!-- fragment -->
 </div>
 </div>

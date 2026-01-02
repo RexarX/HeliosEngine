@@ -12,22 +12,30 @@ var annotated_dup =
           [ "ScheduleExecutor", "classhelios_1_1app_1_1details_1_1ScheduleExecutor.html", "classhelios_1_1app_1_1details_1_1ScheduleExecutor" ],
           [ "ScheduleOrdering", "structhelios_1_1app_1_1details_1_1ScheduleOrdering.html", "structhelios_1_1app_1_1details_1_1ScheduleOrdering" ],
           [ "Scheduler", "classhelios_1_1app_1_1details_1_1Scheduler.html", "classhelios_1_1app_1_1details_1_1Scheduler" ],
-          [ "ScheduleVisualizer", "classhelios_1_1app_1_1details_1_1ScheduleVisualizer.html", "classhelios_1_1app_1_1details_1_1ScheduleVisualizer" ],
           [ "SystemDiagnostics", "classhelios_1_1app_1_1details_1_1SystemDiagnostics.html", "classhelios_1_1app_1_1details_1_1SystemDiagnostics" ],
           [ "SystemInfo", "structhelios_1_1app_1_1details_1_1SystemInfo.html", "structhelios_1_1app_1_1details_1_1SystemInfo" ],
           [ "SystemOrdering", "structhelios_1_1app_1_1details_1_1SystemOrdering.html", "structhelios_1_1app_1_1details_1_1SystemOrdering" ],
           [ "SystemSetInfo", "structhelios_1_1app_1_1details_1_1SystemSetInfo.html", "structhelios_1_1app_1_1details_1_1SystemSetInfo" ],
-          [ "SystemStorage", "structhelios_1_1app_1_1details_1_1SystemStorage.html", "structhelios_1_1app_1_1details_1_1SystemStorage" ]
+          [ "SystemStorage", "structhelios_1_1app_1_1details_1_1SystemStorage.html", "structhelios_1_1app_1_1details_1_1SystemStorage" ],
+          [ "TrackedFuture", "structhelios_1_1app_1_1details_1_1TrackedFuture.html", "structhelios_1_1app_1_1details_1_1TrackedFuture" ]
         ] ],
         [ "AccessPolicy", "classhelios_1_1app_1_1AccessPolicy.html", "classhelios_1_1app_1_1AccessPolicy" ],
         [ "App", "classhelios_1_1app_1_1App.html", "classhelios_1_1app_1_1App" ],
         [ "CleanUp", "structhelios_1_1app_1_1CleanUp.html", "structhelios_1_1app_1_1CleanUp" ],
         [ "CleanUpStage", "structhelios_1_1app_1_1CleanUpStage.html", "structhelios_1_1app_1_1CleanUpStage" ],
+        [ "DefaultRunnerConfig", "structhelios_1_1app_1_1DefaultRunnerConfig.html", "structhelios_1_1app_1_1DefaultRunnerConfig" ],
+        [ "DynamicModule", "classhelios_1_1app_1_1DynamicModule.html", "classhelios_1_1app_1_1DynamicModule" ],
+        [ "DynamicModuleConfig", "structhelios_1_1app_1_1DynamicModuleConfig.html", "structhelios_1_1app_1_1DynamicModuleConfig" ],
+        [ "First", "structhelios_1_1app_1_1First.html", "structhelios_1_1app_1_1First" ],
+        [ "FixedTimestepRunnerConfig", "structhelios_1_1app_1_1FixedTimestepRunnerConfig.html", "structhelios_1_1app_1_1FixedTimestepRunnerConfig" ],
         [ "FrameAllocatorResource", "classhelios_1_1app_1_1FrameAllocatorResource.html", "classhelios_1_1app_1_1FrameAllocatorResource" ],
+        [ "FrameLimitedRunnerConfig", "structhelios_1_1app_1_1FrameLimitedRunnerConfig.html", "structhelios_1_1app_1_1FrameLimitedRunnerConfig" ],
         [ "FreeListAllocatorResource", "classhelios_1_1app_1_1FreeListAllocatorResource.html", "classhelios_1_1app_1_1FreeListAllocatorResource" ],
+        [ "Last", "structhelios_1_1app_1_1Last.html", "structhelios_1_1app_1_1Last" ],
         [ "Main", "structhelios_1_1app_1_1Main.html", "structhelios_1_1app_1_1Main" ],
         [ "MainStage", "structhelios_1_1app_1_1MainStage.html", "structhelios_1_1app_1_1MainStage" ],
         [ "Module", "classhelios_1_1app_1_1Module.html", "classhelios_1_1app_1_1Module" ],
+        [ "OnceRunnerConfig", "structhelios_1_1app_1_1OnceRunnerConfig.html", "structhelios_1_1app_1_1OnceRunnerConfig" ],
         [ "PoolAllocatorResource", "classhelios_1_1app_1_1PoolAllocatorResource.html", "classhelios_1_1app_1_1PoolAllocatorResource" ],
         [ "PostCleanUp", "structhelios_1_1app_1_1PostCleanUp.html", "structhelios_1_1app_1_1PostCleanUp" ],
         [ "PostStartup", "structhelios_1_1app_1_1PostStartup.html", "structhelios_1_1app_1_1PostStartup" ],
@@ -42,6 +50,8 @@ var annotated_dup =
         [ "SystemConfig", "classhelios_1_1app_1_1SystemConfig.html", "classhelios_1_1app_1_1SystemConfig" ],
         [ "SystemContext", "classhelios_1_1app_1_1SystemContext.html", "classhelios_1_1app_1_1SystemContext" ],
         [ "SystemSetConfig", "classhelios_1_1app_1_1SystemSetConfig.html", "classhelios_1_1app_1_1SystemSetConfig" ],
+        [ "Time", "classhelios_1_1app_1_1Time.html", "classhelios_1_1app_1_1Time" ],
+        [ "TimedRunnerConfig", "structhelios_1_1app_1_1TimedRunnerConfig.html", "structhelios_1_1app_1_1TimedRunnerConfig" ],
         [ "Update", "structhelios_1_1app_1_1Update.html", "structhelios_1_1app_1_1Update" ],
         [ "UpdateStage", "structhelios_1_1app_1_1UpdateStage.html", "structhelios_1_1app_1_1UpdateStage" ]
       ] ],
@@ -54,6 +64,7 @@ var annotated_dup =
         [ "TaskGraph", "classhelios_1_1async_1_1TaskGraph.html", "classhelios_1_1async_1_1TaskGraph" ]
       ] ],
       [ "container", "namespacehelios_1_1container.html", [
+        [ "BasicStaticString", "classhelios_1_1container_1_1BasicStaticString.html", "classhelios_1_1container_1_1BasicStaticString" ],
         [ "SparseSet", "classhelios_1_1container_1_1SparseSet.html", "classhelios_1_1container_1_1SparseSet" ]
       ] ],
       [ "details", "namespacehelios_1_1details.html", [
@@ -112,10 +123,6 @@ var annotated_dup =
           [ "TryRemoveComponentsCmd", "classhelios_1_1ecs_1_1details_1_1TryRemoveComponentsCmd.html", "classhelios_1_1ecs_1_1details_1_1TryRemoveComponentsCmd" ],
           [ "TryRemoveResourceCmd", "classhelios_1_1ecs_1_1details_1_1TryRemoveResourceCmd.html", "classhelios_1_1ecs_1_1details_1_1TryRemoveResourceCmd" ]
         ] ],
-        [ "events", "namespacehelios_1_1ecs_1_1events.html", [
-          [ "EntityDestroyedEvent", "structhelios_1_1ecs_1_1events_1_1EntityDestroyedEvent.html", "structhelios_1_1ecs_1_1events_1_1EntityDestroyedEvent" ],
-          [ "EntitySpawnedEvent", "structhelios_1_1ecs_1_1events_1_1EntitySpawnedEvent.html", "structhelios_1_1ecs_1_1events_1_1EntitySpawnedEvent" ]
-        ] ],
         [ "BasicQuery", "classhelios_1_1ecs_1_1BasicQuery.html", "classhelios_1_1ecs_1_1BasicQuery" ],
         [ "BasicQueryBuilder", "classhelios_1_1ecs_1_1BasicQueryBuilder.html", "classhelios_1_1ecs_1_1BasicQueryBuilder" ],
         [ "BasicQueryWithEntity", "classhelios_1_1ecs_1_1BasicQueryWithEntity.html", "classhelios_1_1ecs_1_1BasicQueryWithEntity" ],
@@ -124,12 +131,15 @@ var annotated_dup =
         [ "ComponentTypeInfo", "classhelios_1_1ecs_1_1ComponentTypeInfo.html", "classhelios_1_1ecs_1_1ComponentTypeInfo" ],
         [ "Entity", "classhelios_1_1ecs_1_1Entity.html", "classhelios_1_1ecs_1_1Entity" ],
         [ "EntityCmdBuffer", "classhelios_1_1ecs_1_1EntityCmdBuffer.html", "classhelios_1_1ecs_1_1EntityCmdBuffer" ],
+        [ "EntityDestroyedEvent", "structhelios_1_1ecs_1_1EntityDestroyedEvent.html", "structhelios_1_1ecs_1_1EntityDestroyedEvent" ],
+        [ "EntitySpawnedEvent", "structhelios_1_1ecs_1_1EntitySpawnedEvent.html", "structhelios_1_1ecs_1_1EntitySpawnedEvent" ],
         [ "EventIterator", "classhelios_1_1ecs_1_1EventIterator.html", "classhelios_1_1ecs_1_1EventIterator" ],
         [ "EventReader", "classhelios_1_1ecs_1_1EventReader.html", "classhelios_1_1ecs_1_1EventReader" ],
         [ "EventSimpleIterator", "classhelios_1_1ecs_1_1EventSimpleIterator.html", "classhelios_1_1ecs_1_1EventSimpleIterator" ],
         [ "EventWriter", "classhelios_1_1ecs_1_1EventWriter.html", "classhelios_1_1ecs_1_1EventWriter" ],
         [ "IsConstComponent", "structhelios_1_1ecs_1_1IsConstComponent.html", null ],
         [ "IsConstComponent< const T >", "structhelios_1_1ecs_1_1IsConstComponent_3_01const_01T_01_4.html", null ],
+        [ "ShutdownEvent", "structhelios_1_1ecs_1_1ShutdownEvent.html", "structhelios_1_1ecs_1_1ShutdownEvent" ],
         [ "System", "classhelios_1_1ecs_1_1System.html", "classhelios_1_1ecs_1_1System" ],
         [ "World", "classhelios_1_1ecs_1_1World.html", "classhelios_1_1ecs_1_1World" ],
         [ "WorldCmdBuffer", "classhelios_1_1ecs_1_1WorldCmdBuffer.html", "classhelios_1_1ecs_1_1WorldCmdBuffer" ]
@@ -163,6 +173,7 @@ var annotated_dup =
           [ "UniqueTypesHelper< T, Rest... >", "structhelios_1_1utils_1_1details_1_1UniqueTypesHelper_3_01T_00_01Rest_8_8_8_01_4.html", null ]
         ] ],
         [ "ChainAdapter", "classhelios_1_1utils_1_1ChainAdapter.html", "classhelios_1_1utils_1_1ChainAdapter" ],
+        [ "DynamicLibrary", "classhelios_1_1utils_1_1DynamicLibrary.html", "classhelios_1_1utils_1_1DynamicLibrary" ],
         [ "EnumerateAdapter", "classhelios_1_1utils_1_1EnumerateAdapter.html", "classhelios_1_1utils_1_1EnumerateAdapter" ],
         [ "FastPimpl", "classhelios_1_1utils_1_1FastPimpl.html", "classhelios_1_1utils_1_1FastPimpl" ],
         [ "FilterAdapter", "classhelios_1_1utils_1_1FilterAdapter.html", "classhelios_1_1utils_1_1FilterAdapter" ],
@@ -193,7 +204,7 @@ var annotated_dup =
       [ "Uuid", "classhelios_1_1Uuid.html", "classhelios_1_1Uuid" ],
       [ "UuidGenerator", "classhelios_1_1UuidGenerator.html", "classhelios_1_1UuidGenerator" ]
     ] ],
-    [ "std", null, [
+    [ "std", "namespacestd.html", [
       [ "hash< helios::ecs::ComponentTypeInfo >", "structstd_1_1hash_3_01helios_1_1ecs_1_1ComponentTypeInfo_01_4.html", "structstd_1_1hash_3_01helios_1_1ecs_1_1ComponentTypeInfo_01_4" ],
       [ "hash< helios::ecs::Entity >", "structstd_1_1hash_3_01helios_1_1ecs_1_1Entity_01_4.html", "structstd_1_1hash_3_01helios_1_1ecs_1_1Entity_01_4" ],
       [ "hash< helios::Uuid >", "structstd_1_1hash_3_01helios_1_1Uuid_01_4.html", "structstd_1_1hash_3_01helios_1_1Uuid_01_4" ]

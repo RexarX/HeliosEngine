@@ -180,6 +180,10 @@ $(document).ready(function(){initNavTree('classhelios_1_1ecs_1_1details_1_1Syste
 Public Types</h2></td></tr>
 <tr class="memitem:a803609b8b736c6f321a8344c5ce0d7de" id="r_a803609b8b736c6f321a8344c5ce0d7de"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a803609b8b736c6f321a8344c5ce0d7de">FrameAllocatorType</a> = <a class="el" href="classhelios_1_1memory_1_1GrowableAllocator.html">memory::GrowableAllocator</a>&lt; <a class="el" href="classhelios_1_1memory_1_1FrameAllocator.html">memory::FrameAllocator</a> &gt;</td></tr>
 <tr class="separator:a803609b8b736c6f321a8344c5ce0d7de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6474c36c5496c30380007bece73de3a5" id="r_a6474c36c5496c30380007bece73de3a5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a6474c36c5496c30380007bece73de3a5">FrameCommandAllocator</a> = <a class="el" href="namespacehelios_1_1memory.html#ab1eecdf8e5369e7088871d5000ed769a">memory::STLGrowableAllocator</a>&lt; std::unique_ptr&lt; <a class="el" href="classhelios_1_1ecs_1_1Command.html">Command</a> &gt;, <a class="el" href="classhelios_1_1memory_1_1FrameAllocator.html">memory::FrameAllocator</a> &gt;</td></tr>
+<tr class="separator:a6474c36c5496c30380007bece73de3a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd7648cfd57cbb7451b087e1c7ad8aff" id="r_abd7648cfd57cbb7451b087e1c7ad8aff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#abd7648cfd57cbb7451b087e1c7ad8aff">FrameCommandVector</a> = std::vector&lt; std::unique_ptr&lt; <a class="el" href="classhelios_1_1ecs_1_1Command.html">Command</a> &gt;, <a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a6474c36c5496c30380007bece73de3a5">FrameCommandAllocator</a> &gt;</td></tr>
+<tr class="separator:abd7648cfd57cbb7451b087e1c7ad8aff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -222,12 +226,15 @@ requires std::constructible_from&lt;T, Args...&gt;</td></tr>
 <tr class="separator:a2051d079e315ec42be1dab7ab6439ebf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2112be2db3f3b8fec023efa98c9bafec" id="r_a2112be2db3f3b8fec023efa98c9bafec"><td class="memTemplParams" colspan="2">template&lt;std::ranges::sized_range R&gt; <br />
 requires EventTrait&lt;std::ranges::range_value_t&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">R</a>&gt;&gt;</td></tr>
-<tr class="memitem:a2112be2db3f3b8fec023efa98c9bafec"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a2112be2db3f3b8fec023efa98c9bafec">WriteEventBulk</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">R</a> &amp;events)</td></tr>
+<tr class="memitem:a2112be2db3f3b8fec023efa98c9bafec"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a2112be2db3f3b8fec023efa98c9bafec">WriteEventBulk</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">R</a> &amp;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">events</a>)</td></tr>
 <tr class="memdesc:a2112be2db3f3b8fec023efa98c9bafec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes multiple events to the local event queue in bulk.  <br /></td></tr>
 <tr class="separator:a2112be2db3f3b8fec023efa98c9bafec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaea164c77719a037db8d503ad7d274cb" id="r_aaea164c77719a037db8d503ad7d274cb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#aaea164c77719a037db8d503ad7d274cb">ResetFrameAllocator</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
 <tr class="memdesc:aaea164c77719a037db8d503ad7d274cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the frame allocator, freeing all temporary allocations.  <br /></td></tr>
 <tr class="separator:aaea164c77719a037db8d503ad7d274cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9d8002f76a7c65221b9d13a80359aea" id="r_ac9d8002f76a7c65221b9d13a80359aea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a6474c36c5496c30380007bece73de3a5">FrameCommandAllocator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#ac9d8002f76a7c65221b9d13a80359aea">CreateFrameCommandAllocator</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
+<tr class="memdesc:ac9d8002f76a7c65221b9d13a80359aea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a frame-allocated command allocator.  <br /></td></tr>
+<tr class="separator:ac9d8002f76a7c65221b9d13a80359aea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af3b3f7c35d6bcddf6c028182f7aa41c4" id="r_af3b3f7c35d6bcddf6c028182f7aa41c4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#af3b3f7c35d6bcddf6c028182f7aa41c4">Empty</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">const</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
 <tr class="memdesc:af3b3f7c35d6bcddf6c028182f7aa41c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if both commands and events are empty.  <br /></td></tr>
 <tr class="separator:af3b3f7c35d6bcddf6c028182f7aa41c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -263,9 +270,10 @@ requires EventTrait&lt;std::ranges::range_value_t&lt;<a class="el" href="namespa
 <div class="textblock"><p>Local storage for system-specific data (commands, events, and temporary allocations). </p>
 <p>Each system gets its own local storage during execution to avoid contention. After system execution, the local storage is flushed to the appropriate global queues.</p>
 <p>The frame allocator is designed for temporary per-frame allocations within a system. It uses a growable allocator internally to automatically expand if the initial capacity is exceeded. The allocator should be reset at frame boundaries or after each system execution.</p>
+<p><a class="el" href="classhelios_1_1ecs_1_1Command.html" title="Base class for all commands to be executed in the world.">Command</a> metadata uses a standard heap-allocated vector to ensure safe cross-frame and cross-thread transfer. For systems that need maximum performance and don't transfer commands across frames, use <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e" title="Type alias for query with mutable world access.">CreateFrameAllocatedCommandBuffer()</a> which uses the frame allocator.</p>
 <dl class="section note"><dt>Note</dt><dd>Not thread-safe - each system has its own instance. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00039">39</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00044">44</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a803609b8b736c6f321a8344c5ce0d7de" name="a803609b8b736c6f321a8344c5ce0d7de"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a803609b8b736c6f321a8344c5ce0d7de">&#9670;&#160;</a></span>FrameAllocatorType</h2>
@@ -281,7 +289,39 @@ requires EventTrait&lt;std::ranges::range_value_t&lt;<a class="el" href="namespa
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a31">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00041">41</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00046">46</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a6474c36c5496c30380007bece73de3a5" name="a6474c36c5496c30380007bece73de3a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6474c36c5496c30380007bece73de3a5">&#9670;&#160;</a></span>FrameCommandAllocator</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a6474c36c5496c30380007bece73de3a5">helios::ecs::details::SystemLocalStorage::FrameCommandAllocator</a> =  <a class="el" href="namespacehelios_1_1memory.html#ab1eecdf8e5369e7088871d5000ed769a">memory::STLGrowableAllocator</a>&lt;std::unique_ptr&lt;<a class="el" href="classhelios_1_1ecs_1_1Command.html">Command</a>&gt;, <a class="el" href="classhelios_1_1memory_1_1FrameAllocator.html">memory::FrameAllocator</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00047">47</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+
+</div>
+</div>
+<a id="abd7648cfd57cbb7451b087e1c7ad8aff" name="abd7648cfd57cbb7451b087e1c7ad8aff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd7648cfd57cbb7451b087e1c7ad8aff">&#9670;&#160;</a></span>FrameCommandVector</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">using</a> <a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#abd7648cfd57cbb7451b087e1c7ad8aff">helios::ecs::details::SystemLocalStorage::FrameCommandVector</a> =  std::vector&lt;std::unique_ptr&lt;<a class="el" href="classhelios_1_1ecs_1_1Command.html">Command</a>&gt;, <a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a6474c36c5496c30380007bece73de3a5">FrameCommandAllocator</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00048">48</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
 
 </div>
 </div>
@@ -311,9 +351,9 @@ requires EventTrait&lt;std::ranges::range_value_t&lt;<a class="el" href="namespa
 
 <p>Constructs system local storage with default frame allocator capacity. </p>
 
-<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00046">46</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   46</span>: frame_allocator_(<a class="code hl_variable" href="namespacehelios_1_1ecs_1_1details.html#a92ad37d9567d73d7c7bd0bd1efe6c318">kDefaultFrameAllocatorCapacity</a>) {}</div>
-<div class="ttc" id="anamespacehelios_1_1ecs_1_1details_html_a92ad37d9567d73d7c7bd0bd1efe6c318"><div class="ttname"><a href="namespacehelios_1_1ecs_1_1details.html#a92ad37d9567d73d7c7bd0bd1efe6c318">helios::ecs::details::kDefaultFrameAllocatorCapacity</a></div><div class="ttdeci">constexpr size_t kDefaultFrameAllocatorCapacity</div><div class="ttdoc">Default initial capacity for the per-system frame allocator (64KB).</div><div class="ttdef"><b>Definition</b> <a href="system__local__storage_8hpp_source.html#l00026">system_local_storage.hpp:26</a></div></div>
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00053">53</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   53</span>: frame_allocator_(<a class="code hl_variable" href="namespacehelios_1_1ecs_1_1details.html#a92ad37d9567d73d7c7bd0bd1efe6c318">kDefaultFrameAllocatorCapacity</a>) {}</div>
+<div class="ttc" id="anamespacehelios_1_1ecs_1_1details_html_a92ad37d9567d73d7c7bd0bd1efe6c318"><div class="ttname"><a href="namespacehelios_1_1ecs_1_1details.html#a92ad37d9567d73d7c7bd0bd1efe6c318">helios::ecs::details::kDefaultFrameAllocatorCapacity</a></div><div class="ttdeci">constexpr size_t kDefaultFrameAllocatorCapacity</div><div class="ttdoc">Default initial capacity for the per-system frame allocator (64KB).</div><div class="ttdef"><b>Definition</b> <a href="system__local__storage_8hpp_source.html#l00027">system_local_storage.hpp:27</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -349,9 +389,9 @@ requires EventTrait&lt;std::ranges::range_value_t&lt;<a class="el" href="namespa
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00052">52</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   52</span>: frame_allocator_(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">frame_allocator_capacity</a>) {}</div>
-<div class="ttc" id="anamespacehelios_1_1ecs_html_af0384de48d847585fcb340c71c231e5e"><div class="ttname"><a href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, Allocator, Components... &gt; Query</div><div class="ttdoc">Type alias for query with mutable world access.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02515">query.hpp:2515</a></div></div>
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00059">59</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   59</span>: frame_allocator_(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">frame_allocator_capacity</a>) {}</div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_af0384de48d847585fcb340c71c231e5e"><div class="ttname"><a href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, Allocator, Components... &gt; Query</div><div class="ttdoc">Type alias for query with mutable world access.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02481">query.hpp:2481</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -465,11 +505,11 @@ requires EventTrait&lt;std::ranges::range_value_t&lt;<a class="el" href="namespa
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00190">190</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  190</span>                                                                           {</div>
-<div class="line"><span class="lineno">  191</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">command</a> != <span class="keyword">nullptr</span>, <span class="stringliteral">&quot;Failed to add command: command is null!&quot;</span>);</div>
-<div class="line"><span class="lineno">  192</span>  commands_.push_back(std::move(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">command</a>));</div>
-<div class="line"><span class="lineno">  193</span>}</div>
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00207">207</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  207</span>                                                                           {</div>
+<div class="line"><span class="lineno">  208</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">command</a> != <span class="keyword">nullptr</span>, <span class="stringliteral">&quot;Failed to add command: command is null!&quot;</span>);</div>
+<div class="line"><span class="lineno">  209</span>  commands_.push_back(std::move(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">command</a>));</div>
+<div class="line"><span class="lineno">  210</span>}</div>
 <div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00140">assert.hpp:140</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -500,12 +540,12 @@ requires EventTrait&lt;std::ranges::range_value_t&lt;<a class="el" href="namespa
 <p>Clears all stored commands and events. </p>
 <dl class="section note"><dt>Note</dt><dd>Does not reset the frame allocator. Call <a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#aaea164c77719a037db8d503ad7d274cb" title="Resets the frame allocator, freeing all temporary allocations.">ResetFrameAllocator()</a> separately. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00195">195</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  195</span>                                      {</div>
-<div class="line"><span class="lineno">  196</span>  commands_.clear();</div>
-<div class="line"><span class="lineno">  197</span>  events_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#a86288a1af0a4110d136cb75eca7ee89a">Clear</a>();</div>
-<div class="line"><span class="lineno">  198</span>}</div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventQueue_html_a86288a1af0a4110d136cb75eca7ee89a"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#a86288a1af0a4110d136cb75eca7ee89a">helios::ecs::details::EventQueue::Clear</a></div><div class="ttdeci">void Clear() noexcept</div><div class="ttdoc">Clears all events from the queue.</div><div class="ttdef"><b>Definition</b> <a href="event__queue_8hpp_source.html#l00047">event_queue.hpp:47</a></div></div>
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00212">212</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  212</span>                                      {</div>
+<div class="line"><span class="lineno">  213</span>  commands_.clear();</div>
+<div class="line"><span class="lineno">  214</span>  events_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#a86288a1af0a4110d136cb75eca7ee89a">Clear</a>();</div>
+<div class="line"><span class="lineno">  215</span>}</div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventQueue_html_a86288a1af0a4110d136cb75eca7ee89a"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#a86288a1af0a4110d136cb75eca7ee89a">helios::ecs::details::EventQueue::Clear</a></div><div class="ttdeci">void Clear() noexcept</div><div class="ttdoc">Clears all events from the queue and removes registrations.</div><div class="ttdef"><b>Definition</b> <a href="event__queue_8hpp_source.html#l00047">event_queue.hpp:47</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -535,13 +575,13 @@ requires EventTrait&lt;std::ranges::range_value_t&lt;<a class="el" href="namespa
 <p>Clears commands, events, and resets the frame allocator. </p>
 <p>Call this at frame boundaries to reclaim all temporary memory. </p>
 
-<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00200">200</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  200</span>                                         {</div>
-<div class="line"><span class="lineno">  201</span>  <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a1a3438361d24b7b076f71a4c35e56324">Clear</a>();</div>
-<div class="line"><span class="lineno">  202</span>  <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#aaea164c77719a037db8d503ad7d274cb">ResetFrameAllocator</a>();</div>
-<div class="line"><span class="lineno">  203</span>}</div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1SystemLocalStorage_html_a1a3438361d24b7b076f71a4c35e56324"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a1a3438361d24b7b076f71a4c35e56324">helios::ecs::details::SystemLocalStorage::Clear</a></div><div class="ttdeci">void Clear()</div><div class="ttdoc">Clears all stored commands and events.</div><div class="ttdef"><b>Definition</b> <a href="system__local__storage_8hpp_source.html#l00195">system_local_storage.hpp:195</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1SystemLocalStorage_html_aaea164c77719a037db8d503ad7d274cb"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#aaea164c77719a037db8d503ad7d274cb">helios::ecs::details::SystemLocalStorage::ResetFrameAllocator</a></div><div class="ttdeci">void ResetFrameAllocator() noexcept</div><div class="ttdoc">Resets the frame allocator, freeing all temporary allocations.</div><div class="ttdef"><b>Definition</b> <a href="system__local__storage_8hpp_source.html#l00119">system_local_storage.hpp:119</a></div></div>
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00217">217</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  217</span>                                         {</div>
+<div class="line"><span class="lineno">  218</span>  <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a1a3438361d24b7b076f71a4c35e56324">Clear</a>();</div>
+<div class="line"><span class="lineno">  219</span>  <a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#aaea164c77719a037db8d503ad7d274cb">ResetFrameAllocator</a>();</div>
+<div class="line"><span class="lineno">  220</span>}</div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1SystemLocalStorage_html_a1a3438361d24b7b076f71a4c35e56324"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a1a3438361d24b7b076f71a4c35e56324">helios::ecs::details::SystemLocalStorage::Clear</a></div><div class="ttdeci">void Clear()</div><div class="ttdoc">Clears all stored commands and events.</div><div class="ttdef"><b>Definition</b> <a href="system__local__storage_8hpp_source.html#l00212">system_local_storage.hpp:212</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1SystemLocalStorage_html_aaea164c77719a037db8d503ad7d274cb"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#aaea164c77719a037db8d503ad7d274cb">helios::ecs::details::SystemLocalStorage::ResetFrameAllocator</a></div><div class="ttdeci">void ResetFrameAllocator() noexcept</div><div class="ttdoc">Resets the frame allocator, freeing all temporary allocations.</div><div class="ttdef"><b>Definition</b> <a href="system__local__storage_8hpp_source.html#l00126">system_local_storage.hpp:126</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -571,8 +611,42 @@ requires EventTrait&lt;std::ranges::range_value_t&lt;<a class="el" href="namespa
 <p>Gets the number of commands in the buffer. </p>
 <dl class="section return"><dt>Returns</dt><dd>Count of commands </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00131">131</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  131</span>{ <span class="keywordflow">return</span> commands_.size(); }</div>
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00148">148</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  148</span>{ <span class="keywordflow">return</span> commands_.size(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ac9d8002f76a7c65221b9d13a80359aea" name="ac9d8002f76a7c65221b9d13a80359aea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9d8002f76a7c65221b9d13a80359aea">&#9670;&#160;</a></span>CreateFrameCommandAllocator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a6474c36c5496c30380007bece73de3a5">FrameCommandAllocator</a> helios::ecs::details::SystemLocalStorage::CreateFrameCommandAllocator </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a frame-allocated command allocator. </p>
+<p>Use this for temporary command buffers that don't outlive the current frame. More efficient than heap allocation for short-lived command storage. </p><dl class="section return"><dt>Returns</dt><dd>Frame command allocator instance </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00134">134</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  134</span>                                                                             {</div>
+<div class="line"><span class="lineno">  135</span>    <span class="keywordflow">return</span> <a class="code hl_typedef" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a6474c36c5496c30380007bece73de3a5">FrameCommandAllocator</a>(frame_allocator_);</div>
+<div class="line"><span class="lineno">  136</span>  }</div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1SystemLocalStorage_html_a6474c36c5496c30380007bece73de3a5"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a6474c36c5496c30380007bece73de3a5">helios::ecs::details::SystemLocalStorage::FrameCommandAllocator</a></div><div class="ttdeci">memory::STLGrowableAllocator&lt; std::unique_ptr&lt; Command &gt;, memory::FrameAllocator &gt; FrameCommandAllocator</div><div class="ttdef"><b>Definition</b> <a href="system__local__storage_8hpp_source.html#l00047">system_local_storage.hpp:47</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -618,10 +692,10 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00080">80</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   80</span>                                      {</div>
-<div class="line"><span class="lineno">   81</span>    commands_.push_back(std::make_unique&lt;T&gt;(std::forward&lt;Args&gt;(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">args</a>)...));</div>
-<div class="line"><span class="lineno">   82</span>  }</div>
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00087">87</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   87</span>                                      {</div>
+<div class="line"><span class="lineno">   88</span>    commands_.push_back(std::make_unique&lt;T&gt;(std::forward&lt;Args&gt;(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">args</a>)...));</div>
+<div class="line"><span class="lineno">   89</span>  }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -651,9 +725,9 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
 <p>Checks if both commands and events are empty. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if no commands or events are stored, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00125">125</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  125</span>{ <span class="keywordflow">return</span> commands_.empty() &amp;&amp; events_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#a7dc029411a47caec19d06f13446527ad">Empty</a>(); }</div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventQueue_html_a7dc029411a47caec19d06f13446527ad"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#a7dc029411a47caec19d06f13446527ad">helios::ecs::details::EventQueue::Empty</a></div><div class="ttdeci">bool Empty() const noexcept</div><div class="ttdoc">Checks if the queue is empty.</div><div class="ttdef"><b>Definition</b> <a href="event__queue_8hpp_source.html#l00129">event_queue.hpp:129</a></div></div>
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00142">142</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  142</span>{ <span class="keywordflow">return</span> commands_.empty() &amp;&amp; events_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#a7dc029411a47caec19d06f13446527ad">Empty</a>(); }</div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventQueue_html_a7dc029411a47caec19d06f13446527ad"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#a7dc029411a47caec19d06f13446527ad">helios::ecs::details::EventQueue::Empty</a></div><div class="ttdeci">bool Empty() const noexcept</div><div class="ttdoc">Checks if the queue is empty.</div><div class="ttdef"><b>Definition</b> <a href="event__queue_8hpp_source.html#l00135">event_queue.hpp:135</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -684,8 +758,8 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
 <dl class="section warning"><dt>Warning</dt><dd>Data allocated with the frame allocator is only valid for the current frame. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to the growable frame allocator </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00182">182</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  182</span>{ <span class="keywordflow">return</span> frame_allocator_; }</div>
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00199">199</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  199</span>{ <span class="keywordflow">return</span> frame_allocator_; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -717,8 +791,8 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a7">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00175">175</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  175</span>{ <span class="keywordflow">return</span> frame_allocator_; }</div>
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00192">192</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  192</span>{ <span class="keywordflow">return</span> frame_allocator_; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -748,8 +822,8 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
 <p>Gets total capacity of the frame allocator across all internal allocators. </p>
 <dl class="section return"><dt>Returns</dt><dd>Total capacity in bytes </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00143">143</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  143</span>{ <span class="keywordflow">return</span> frame_allocator_.<a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#a889031631ac9782835ab31d100fde0fe">TotalCapacity</a>(); }</div>
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00160">160</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  160</span>{ <span class="keywordflow">return</span> frame_allocator_.<a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#a889031631ac9782835ab31d100fde0fe">TotalCapacity</a>(); }</div>
 <div class="ttc" id="aclasshelios_1_1memory_1_1GrowableAllocator_html_a889031631ac9782835ab31d100fde0fe"><div class="ttname"><a href="classhelios_1_1memory_1_1GrowableAllocator.html#a889031631ac9782835ab31d100fde0fe">helios::memory::GrowableAllocator::TotalCapacity</a></div><div class="ttdeci">size_t TotalCapacity() const noexcept</div><div class="ttdoc">Gets the total capacity across all allocator instances.</div><div class="ttdef"><b>Definition</b> <a href="growable__allocator_8hpp_source.html#l00499">growable_allocator.hpp:499</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -782,8 +856,8 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a30">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00137">137</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  137</span>{ <span class="keywordflow">return</span> frame_allocator_.<a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#a909bbae085c9b3deab0996f962299711">Stats</a>(); }</div>
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00154">154</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  154</span>{ <span class="keywordflow">return</span> frame_allocator_.<a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#a909bbae085c9b3deab0996f962299711">Stats</a>(); }</div>
 <div class="ttc" id="aclasshelios_1_1memory_1_1GrowableAllocator_html_a909bbae085c9b3deab0996f962299711"><div class="ttname"><a href="classhelios_1_1memory_1_1GrowableAllocator.html#a909bbae085c9b3deab0996f962299711">helios::memory::GrowableAllocator::Stats</a></div><div class="ttdeci">AllocatorStats Stats() const noexcept</div><div class="ttdoc">Gets combined statistics for all allocator instances.</div><div class="ttdef"><b>Definition</b> <a href="growable__allocator_8hpp_source.html#l00479">growable_allocator.hpp:479</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -814,8 +888,8 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
 <p>Gets const reference to the command buffer. </p>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to command vector </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00155">155</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  155</span>{ <span class="keywordflow">return</span> commands_; }</div>
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00172">172</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  172</span>{ <span class="keywordflow">return</span> commands_; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -845,8 +919,8 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
 <p>Gets reference to the command buffer. </p>
 <dl class="section return"><dt>Returns</dt><dd>Reference to command vector </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00149">149</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  149</span>{ <span class="keywordflow">return</span> commands_; }</div>
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00166">166</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  166</span>{ <span class="keywordflow">return</span> commands_; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -876,8 +950,8 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
 <p>Gets const reference to the event queue. </p>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to event queue </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00167">167</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  167</span>{ <span class="keywordflow">return</span> events_; }</div>
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00184">184</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  184</span>{ <span class="keywordflow">return</span> events_; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -907,8 +981,8 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
 <p>Gets reference to the event queue. </p>
 <dl class="section return"><dt>Returns</dt><dd>Reference to event queue </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00161">161</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  161</span>{ <span class="keywordflow">return</span> events_; }</div>
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00178">178</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  178</span>{ <span class="keywordflow">return</span> events_; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -996,8 +1070,8 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00094">94</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   94</span>{ commands_.reserve(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">capacity</a>); }</div>
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00101">101</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  101</span>{ commands_.reserve(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">capacity</a>); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1027,8 +1101,8 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
 <p>Resets the frame allocator, freeing all temporary allocations. </p>
 <p>Call this at frame boundaries or after system execution to reclaim memory. </p><dl class="section warning"><dt>Warning</dt><dd>All pointers obtained from the frame allocator become invalid after this call. Do not store references or pointers to frame-allocated data beyond the current frame. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00119">119</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  119</span>{ frame_allocator_.<a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#abea05c7e16c48144cdae48e46e47c3cc">Reset</a>(); }</div>
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00126">126</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  126</span>{ frame_allocator_.<a class="code hl_function" href="classhelios_1_1memory_1_1GrowableAllocator.html#abea05c7e16c48144cdae48e46e47c3cc">Reset</a>(); }</div>
 <div class="ttc" id="aclasshelios_1_1memory_1_1GrowableAllocator_html_abea05c7e16c48144cdae48e46e47c3cc"><div class="ttname"><a href="classhelios_1_1memory_1_1GrowableAllocator.html#abea05c7e16c48144cdae48e46e47c3cc">helios::memory::GrowableAllocator::Reset</a></div><div class="ttdeci">void Reset() noexcept</div><div class="ttdoc">Resets all allocator instances.</div><div class="ttdef"><b>Definition</b> <a href="growable__allocator_8hpp_source.html#l00448">growable_allocator.hpp:448</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -1075,16 +1149,16 @@ template&lt;EventTrait T&gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a45">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00206">206</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  206</span>                                                         {</div>
-<div class="line"><span class="lineno">  207</span>  <span class="keywordflow">if</span> (!events_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#af38bf78014d3593b7004d8ca42e9c39d">IsRegistered</a>&lt;T&gt;()) {</div>
-<div class="line"><span class="lineno">  208</span>    events_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#ac6d4a5cf2eb57b6a965c7182b1a396a0">Register</a>&lt;T&gt;();</div>
-<div class="line"><span class="lineno">  209</span>  }</div>
-<div class="line"><span class="lineno">  210</span>  events_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#ae77c15357c3a18795761941351988539">Write</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a>);</div>
-<div class="line"><span class="lineno">  211</span>}</div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventQueue_html_ac6d4a5cf2eb57b6a965c7182b1a396a0"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#ac6d4a5cf2eb57b6a965c7182b1a396a0">helios::ecs::details::EventQueue::Register</a></div><div class="ttdeci">void Register()</div><div class="ttdoc">Registers an event type with the queue.</div><div class="ttdef"><b>Definition</b> <a href="event__queue_8hpp_source.html#l00150">event_queue.hpp:150</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventQueue_html_ae77c15357c3a18795761941351988539"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#ae77c15357c3a18795761941351988539">helios::ecs::details::EventQueue::Write</a></div><div class="ttdeci">void Write(const T &amp;event)</div><div class="ttdoc">Writes a single event to the queue.</div><div class="ttdef"><b>Definition</b> <a href="event__queue_8hpp_source.html#l00158">event_queue.hpp:158</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventQueue_html_af38bf78014d3593b7004d8ca42e9c39d"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#af38bf78014d3593b7004d8ca42e9c39d">helios::ecs::details::EventQueue::IsRegistered</a></div><div class="ttdeci">bool IsRegistered() const</div><div class="ttdoc">Checks if an event type is registered.</div><div class="ttdef"><b>Definition</b> <a href="event__queue_8hpp_source.html#l00234">event_queue.hpp:234</a></div></div>
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00223">223</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  223</span>                                                         {</div>
+<div class="line"><span class="lineno">  224</span>  <span class="keywordflow">if</span> (!events_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#af38bf78014d3593b7004d8ca42e9c39d">IsRegistered</a>&lt;T&gt;()) {</div>
+<div class="line"><span class="lineno">  225</span>    events_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#ac6d4a5cf2eb57b6a965c7182b1a396a0">Register</a>&lt;T&gt;();</div>
+<div class="line"><span class="lineno">  226</span>  }</div>
+<div class="line"><span class="lineno">  227</span>  events_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#ae77c15357c3a18795761941351988539">Write</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">event</a>);</div>
+<div class="line"><span class="lineno">  228</span>}</div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventQueue_html_ac6d4a5cf2eb57b6a965c7182b1a396a0"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#ac6d4a5cf2eb57b6a965c7182b1a396a0">helios::ecs::details::EventQueue::Register</a></div><div class="ttdeci">void Register()</div><div class="ttdoc">Registers an event type with the queue.</div><div class="ttdef"><b>Definition</b> <a href="event__queue_8hpp_source.html#l00156">event_queue.hpp:156</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventQueue_html_ae77c15357c3a18795761941351988539"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#ae77c15357c3a18795761941351988539">helios::ecs::details::EventQueue::Write</a></div><div class="ttdeci">void Write(const T &amp;event)</div><div class="ttdoc">Writes a single event to the queue.</div><div class="ttdef"><b>Definition</b> <a href="event__queue_8hpp_source.html#l00205">event_queue.hpp:205</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventQueue_html_af38bf78014d3593b7004d8ca42e9c39d"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#af38bf78014d3593b7004d8ca42e9c39d">helios::ecs::details::EventQueue::IsRegistered</a></div><div class="ttdeci">bool IsRegistered() const</div><div class="ttdoc">Checks if an event type is registered.</div><div class="ttdef"><b>Definition</b> <a href="event__queue_8hpp_source.html#l00252">event_queue.hpp:252</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1131,15 +1205,15 @@ requires EventTrait&lt;std::ranges::range_value_t&lt;<a class="el" href="namespa
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2system_context_8hpp-example.html#a46">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/system_context.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00215">215</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  215</span>                                                              {</div>
-<div class="line"><span class="lineno">  216</span>  <span class="keyword">using </span><a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">EventType</a> = std::ranges::range_value_t&lt;R&gt;;</div>
-<div class="line"><span class="lineno">  217</span>  <span class="keywordflow">if</span> (!events_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#af38bf78014d3593b7004d8ca42e9c39d">IsRegistered</a>&lt;<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">EventType</a>&gt;()) {</div>
-<div class="line"><span class="lineno">  218</span>    events_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#ac6d4a5cf2eb57b6a965c7182b1a396a0">Register</a>&lt;<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">EventType</a>&gt;();</div>
-<div class="line"><span class="lineno">  219</span>  }</div>
-<div class="line"><span class="lineno">  220</span>  events_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#a0ee465b6d6ce2718593cb0aa851804fb">WriteBulk</a>(events);</div>
-<div class="line"><span class="lineno">  221</span>}</div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventQueue_html_a0ee465b6d6ce2718593cb0aa851804fb"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#a0ee465b6d6ce2718593cb0aa851804fb">helios::ecs::details::EventQueue::WriteBulk</a></div><div class="ttdeci">void WriteBulk(const R &amp;events)</div><div class="ttdoc">Writes multiple events to the queue in bulk.</div><div class="ttdef"><b>Definition</b> <a href="event__queue_8hpp_source.html#l00166">event_queue.hpp:166</a></div></div>
+<p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00232">232</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  232</span>                                                              {</div>
+<div class="line"><span class="lineno">  233</span>  <span class="keyword">using </span><a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">EventType</a> = std::ranges::range_value_t&lt;R&gt;;</div>
+<div class="line"><span class="lineno">  234</span>  <span class="keywordflow">if</span> (!events_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#af38bf78014d3593b7004d8ca42e9c39d">IsRegistered</a>&lt;<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">EventType</a>&gt;()) {</div>
+<div class="line"><span class="lineno">  235</span>    events_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#ac6d4a5cf2eb57b6a965c7182b1a396a0">Register</a>&lt;<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">EventType</a>&gt;();</div>
+<div class="line"><span class="lineno">  236</span>  }</div>
+<div class="line"><span class="lineno">  237</span>  events_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#a0ee465b6d6ce2718593cb0aa851804fb">WriteBulk</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">events</a>);</div>
+<div class="line"><span class="lineno">  238</span>}</div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1EventQueue_html_a0ee465b6d6ce2718593cb0aa851804fb"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1EventQueue.html#a0ee465b6d6ce2718593cb0aa851804fb">helios::ecs::details::EventQueue::WriteBulk</a></div><div class="ttdeci">void WriteBulk(const R &amp;events)</div><div class="ttdoc">Writes multiple events to the queue in bulk.</div><div class="ttdef"><b>Definition</b> <a href="event__queue_8hpp_source.html#l00213">event_queue.hpp:213</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>

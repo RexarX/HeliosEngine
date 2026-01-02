@@ -1,7 +1,6 @@
 var namespacehelios_1_1ecs =
 [
     [ "details", "namespacehelios_1_1ecs_1_1details.html", "namespacehelios_1_1ecs_1_1details" ],
-    [ "events", "namespacehelios_1_1ecs_1_1events.html", "namespacehelios_1_1ecs_1_1events" ],
     [ "BasicQuery", "classhelios_1_1ecs_1_1BasicQuery.html", "classhelios_1_1ecs_1_1BasicQuery" ],
     [ "BasicQueryBuilder", "classhelios_1_1ecs_1_1BasicQueryBuilder.html", "classhelios_1_1ecs_1_1BasicQueryBuilder" ],
     [ "BasicQueryWithEntity", "classhelios_1_1ecs_1_1BasicQueryWithEntity.html", "classhelios_1_1ecs_1_1BasicQueryWithEntity" ],
@@ -10,12 +9,15 @@ var namespacehelios_1_1ecs =
     [ "ComponentTypeInfo", "classhelios_1_1ecs_1_1ComponentTypeInfo.html", "classhelios_1_1ecs_1_1ComponentTypeInfo" ],
     [ "Entity", "classhelios_1_1ecs_1_1Entity.html", "classhelios_1_1ecs_1_1Entity" ],
     [ "EntityCmdBuffer", "classhelios_1_1ecs_1_1EntityCmdBuffer.html", "classhelios_1_1ecs_1_1EntityCmdBuffer" ],
+    [ "EntityDestroyedEvent", "structhelios_1_1ecs_1_1EntityDestroyedEvent.html", "structhelios_1_1ecs_1_1EntityDestroyedEvent" ],
+    [ "EntitySpawnedEvent", "structhelios_1_1ecs_1_1EntitySpawnedEvent.html", "structhelios_1_1ecs_1_1EntitySpawnedEvent" ],
     [ "EventIterator", "classhelios_1_1ecs_1_1EventIterator.html", "classhelios_1_1ecs_1_1EventIterator" ],
     [ "EventReader", "classhelios_1_1ecs_1_1EventReader.html", "classhelios_1_1ecs_1_1EventReader" ],
     [ "EventSimpleIterator", "classhelios_1_1ecs_1_1EventSimpleIterator.html", "classhelios_1_1ecs_1_1EventSimpleIterator" ],
     [ "EventWriter", "classhelios_1_1ecs_1_1EventWriter.html", "classhelios_1_1ecs_1_1EventWriter" ],
     [ "IsConstComponent", "structhelios_1_1ecs_1_1IsConstComponent.html", null ],
     [ "IsConstComponent< const T >", "structhelios_1_1ecs_1_1IsConstComponent_3_01const_01T_01_4.html", null ],
+    [ "ShutdownEvent", "structhelios_1_1ecs_1_1ShutdownEvent.html", "structhelios_1_1ecs_1_1ShutdownEvent" ],
     [ "System", "classhelios_1_1ecs_1_1System.html", "classhelios_1_1ecs_1_1System" ],
     [ "World", "classhelios_1_1ecs_1_1World.html", "classhelios_1_1ecs_1_1World" ],
     [ "WorldCmdBuffer", "classhelios_1_1ecs_1_1WorldCmdBuffer.html", "classhelios_1_1ecs_1_1WorldCmdBuffer" ],
@@ -52,6 +54,10 @@ var namespacehelios_1_1ecs =
     [ "EventClearPolicy", "namespacehelios_1_1ecs.html#ab48aaed34af66c40a97690ad39f727f4", [
       [ "kAutomatic", "namespacehelios_1_1ecs.html#ab48aaed34af66c40a97690ad39f727f4a0edd03ba1f5a73f26d1fd764255ddaa1", null ],
       [ "kManual", "namespacehelios_1_1ecs.html#ab48aaed34af66c40a97690ad39f727f4a840f73673d401f2e539743e82e167a45", null ]
+    ] ],
+    [ "ShutdownExitCode", "namespacehelios_1_1ecs.html#ae984f0803649a1da782a858e73401658", [
+      [ "Success", "namespacehelios_1_1ecs.html#ae984f0803649a1da782a858e73401658a505a83f220c02df2f85c3810cd9ceb38", null ],
+      [ "Failure", "namespacehelios_1_1ecs.html#ae984f0803649a1da782a858e73401658ae139a585510a502bbf1841cf589f5086", null ]
     ] ],
     [ "BasicQueryBuilder", "namespacehelios_1_1ecs.html#ad685b588a20af7553d7a0cf9d638eb0b", null ],
     [ "BasicQueryBuilder", "namespacehelios_1_1ecs.html#ab5392b35b4d3dc2a8101e81462c8de0d", null ],
