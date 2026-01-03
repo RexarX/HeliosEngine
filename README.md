@@ -6,10 +6,10 @@
 [![MIT License][license-shield]][license-url]
 
 [![Format Check](https://github.com/RexarX/HeliosEngine/workflows/Format%20Check/badge.svg)](https://github.com/RexarX/HeliosEngine/actions/workflows/format.yaml)
-[![Linux GCC](https://img.shields.io/github/actions/workflow/status/RexarX/HeliosEngine/build-test.yaml?branch=main&label=Linux%20GCC&logo=linux&logoColor=white)](https://github.com/RexarX/HeliosEngine/actions/workflows/build-test.yaml)
-[![Linux Clang](https://img.shields.io/github/actions/workflow/status/RexarX/HeliosEngine/build-test.yaml?branch=main&label=Linux%20Clang&logo=llvm&logoColor=white)](https://github.com/RexarX/HeliosEngine/actions/workflows/build-test.yaml)
-[![Windows MSVC](https://img.shields.io/github/actions/workflow/status/RexarX/HeliosEngine/build-test.yaml?branch=main&label=Windows%20MSVC&logo=windows&logoColor=white)](https://github.com/RexarX/HeliosEngine/actions/workflows/build-test.yaml)
-[![macOS Clang](https://img.shields.io/github/actions/workflow/status/RexarX/HeliosEngine/build-test.yaml?branch=main&label=macOS%20Clang&logo=apple&logoColor=white)](https://github.com/RexarX/HeliosEngine/actions/workflows/build-test.yaml)
+[![Linux GCC](https://img.shields.io/github/actions/workflow/status/RexarX/HeliosEngine/linux-gcc.yaml?branch=main&label=Linux%20GCC&logo=linux&logoColor=white)](https://github.com/RexarX/HeliosEngine/actions/workflows/linux-gcc.yaml)
+[![Linux Clang](https://img.shields.io/github/actions/workflow/status/RexarX/HeliosEngine/linux-clang.yaml?branch=main&label=Linux%20Clang&logo=llvm&logoColor=white)](https://github.com/RexarX/HeliosEngine/actions/workflows/linux-clang.yaml)
+[![Windows MSVC](https://img.shields.io/github/actions/workflow/status/RexarX/HeliosEngine/windows-msvc.yaml?branch=main&label=Windows%20MSVC&logo=windows&logoColor=white)](https://github.com/RexarX/HeliosEngine/actions/workflows/windows-msvc.yaml)
+[![macOS Clang](https://img.shields.io/github/actions/workflow/status/RexarX/HeliosEngine/macos-clang.yaml?branch=main&label=macOS%20Clang&logo=apple&logoColor=white)](https://github.com/RexarX/HeliosEngine/actions/workflows/macos-clang.yaml)
 
 <!-- PROJECT LOGO -->
 <br />

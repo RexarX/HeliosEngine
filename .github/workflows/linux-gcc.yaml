@@ -1,0 +1,94 @@
+name: Linux GCC
+
+on:
+    push:
+        branches:
+            - main
+            - dev
+    pull_request:
+        branches:
+            - main
+            - dev
+    workflow_dispatch:
+
+# Cancel in-progress runs for the same PR/branch
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    build-linux-gcc:
+        name: Linux GCC (${{ matrix.build_type }})
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                build_type: [debug, release]
+                include:
+                    - build_type: debug
+                      cmake_type: Debug
+                    - build_type: release
+                      cmake_type: Release
+
+        env:
+            CC: gcc
+            CXX: g++
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+              with:
+                  submodules: recursive
+                  fetch-depth: 0
+
+            - name: Setup Python
+              uses: actions/setup-python@v5
+              with:
+                  python-version: "3.11"
+
+            - name: Install system dependencies
+              run: |
+                  sudo apt-get update
+                  sudo apt-get install -y \
+                    gcc-14 \
+                    g++-14 \
+                    cmake \
+                    ninja-build \
+                    python3 \
+                    python3-pip
+                  sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 140
+                  sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 140
+
+            - name: Install project dependencies
+              run: |
+                  python3 scripts/install_deps.py --use-system --no-interactive
+
+            - name: Configure CMake
+              run: |
+                  python3 scripts/configure.py \
+                    --compiler gcc \
+                    --type ${{ matrix.cmake_type }} \
+                    --build-system Ninja \
+                    --no-interactive
+
+            - name: Build
+              run: |
+                  python3 scripts/build.py \
+                    --compiler gcc \
+                    --type ${{ matrix.cmake_type }} \
+                    --build-system Ninja \
+                    --tests \
+                    --no-examples \
+                    --no-interactive
+
+            - name: Run Tests
+              working-directory: build/${{ matrix.build_type }}/linux
+              run: |
+                  ctest --output-on-failure --parallel 2
+
+            - name: Upload Test Results
+              if: failure()
+              uses: actions/upload-artifact@v4
+              with:
+                  name: test-results-linux-gcc-${{ matrix.build_type }}
+                  path: build/${{ matrix.build_type }}/linux/Testing/
