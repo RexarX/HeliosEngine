@@ -40,12 +40,12 @@ auto DynamicLibrary::Load(const std::filesystem::path& path) -> std::expected<vo
 #endif
 
   if (handle_ == kInvalidHandle) {
-    HELIOS_ERROR("Failed to load library '{}': {}!", path.c_str(), GetLastErrorMessage());
+    HELIOS_ERROR("Failed to load library '{}': {}!", path.string(), GetLastErrorMessage());
     return std::unexpected(DynamicLibraryError::LoadFailed);
   }
 
   path_ = path;
-  HELIOS_DEBUG("Loaded dynamic library: {}", path_.c_str());
+  HELIOS_DEBUG("Loaded dynamic library: {}", path_.string());
   return {};
 }
 
@@ -63,11 +63,11 @@ auto DynamicLibrary::Unload() -> std::expected<void, DynamicLibraryError> {
 #endif
 
   if (!success) {
-    HELIOS_ERROR("Failed to unload library '{}': {}!", path_.c_str(), GetLastErrorMessage());
+    HELIOS_ERROR("Failed to unload library '{}': {}!", path_.string(), GetLastErrorMessage());
     return std::unexpected(DynamicLibraryError::PlatformError);
   }
 
-  HELIOS_DEBUG("Unloaded dynamic library: {}", path_.c_str());
+  HELIOS_DEBUG("Unloaded dynamic library: {}", path_.string());
   handle_ = kInvalidHandle;
   path_.clear();
   return {};

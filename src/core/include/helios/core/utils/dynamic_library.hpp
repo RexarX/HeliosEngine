@@ -193,7 +193,8 @@ private:
 inline DynamicLibrary::DynamicLibrary(const std::filesystem::path& path) {
   auto result = Load(path);
   if (!result) {
-    HELIOS_ERROR("Failed to load dynamic library '{}': {}!", path.c_str(), DynamicLibraryErrorToString(result.error()));
+    HELIOS_ERROR("Failed to load dynamic library '{}': {}!", path.string(),
+                 DynamicLibraryErrorToString(result.error()));
   }
 }
 
@@ -206,7 +207,7 @@ inline DynamicLibrary::~DynamicLibrary() noexcept {
   if (Loaded()) {
     auto result = Unload();
     if (!result) {
-      HELIOS_WARN("Failed to unload dynamic library '{}': {}!", path_.c_str(),
+      HELIOS_WARN("Failed to unload dynamic library '{}': {}!", path_.string(),
                   DynamicLibraryErrorToString(result.error()));
     }
   }
