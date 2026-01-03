@@ -333,9 +333,10 @@ Static Public Attributes</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">  193</span>                                                                   {</div>
 <div class="line"><span class="lineno">  194</span>  <span class="keyword">auto</span> result = <a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#ac1ca51a6830a4159681abbe401bfe49a">Load</a>(path);</div>
 <div class="line"><span class="lineno">  195</span>  <span class="keywordflow">if</span> (!result) {</div>
-<div class="line"><span class="lineno">  196</span>    <a class="code hl_define" href="logger_8hpp.html#a5ee2b388c5e1155f8aa9f680e3b8cf3b">HELIOS_ERROR</a>(<span class="stringliteral">&quot;Failed to load dynamic library &#39;{}&#39;: {}!&quot;</span>, path.c_str(), <a class="code hl_function" href="namespacehelios_1_1utils.html#abc4221e0af800d4c7dd1f3042525427c">DynamicLibraryErrorToString</a>(result.error()));</div>
-<div class="line"><span class="lineno">  197</span>  }</div>
-<div class="line"><span class="lineno">  198</span>}</div>
+<div class="line"><span class="lineno">  196</span>    <a class="code hl_define" href="logger_8hpp.html#a5ee2b388c5e1155f8aa9f680e3b8cf3b">HELIOS_ERROR</a>(<span class="stringliteral">&quot;Failed to load dynamic library &#39;{}&#39;: {}!&quot;</span>, path.string(),</div>
+<div class="line"><span class="lineno">  197</span>                 <a class="code hl_function" href="namespacehelios_1_1utils.html#abc4221e0af800d4c7dd1f3042525427c">DynamicLibraryErrorToString</a>(result.error()));</div>
+<div class="line"><span class="lineno">  198</span>  }</div>
+<div class="line"><span class="lineno">  199</span>}</div>
 <div class="ttc" id="aclasshelios_1_1utils_1_1DynamicLibrary_html_ac1ca51a6830a4159681abbe401bfe49a"><div class="ttname"><a href="classhelios_1_1utils_1_1DynamicLibrary.html#ac1ca51a6830a4159681abbe401bfe49a">helios::utils::DynamicLibrary::Load</a></div><div class="ttdeci">auto Load(const std::filesystem::path &amp;path) -&gt; std::expected&lt; void, DynamicLibraryError &gt;</div><div class="ttdoc">Loads a dynamic library from the specified path.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__library_8cpp_source.html#l00026">dynamic_library.cpp:26</a></div></div>
 <div class="ttc" id="alogger_8hpp_html_a5ee2b388c5e1155f8aa9f680e3b8cf3b"><div class="ttname"><a href="logger_8hpp.html#a5ee2b388c5e1155f8aa9f680e3b8cf3b">HELIOS_ERROR</a></div><div class="ttdeci">#define HELIOS_ERROR(...)</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00689">logger.hpp:689</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1utils_html_abc4221e0af800d4c7dd1f3042525427c"><div class="ttname"><a href="namespacehelios_1_1utils.html#abc4221e0af800d4c7dd1f3042525427c">helios::utils::DynamicLibraryErrorToString</a></div><div class="ttdeci">constexpr std::string_view DynamicLibraryErrorToString(DynamicLibraryError error) noexcept</div><div class="ttdoc">Gets a human-readable description for a DynamicLibraryError.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__library_8hpp_source.html#l00034">dynamic_library.hpp:34</a></div></div>
@@ -392,10 +393,10 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00200">200</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  201</span>    : handle_(other.handle_), path_(std::move(other.path_)) {</div>
-<div class="line"><span class="lineno">  202</span>  other.handle_ = <a class="code hl_variable" href="classhelios_1_1utils_1_1DynamicLibrary.html#aa808316f4be99328739518e23b53877d">kInvalidHandle</a>;</div>
-<div class="line"><span class="lineno">  203</span>}</div>
+<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00201">201</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  202</span>    : handle_(other.handle_), path_(std::move(other.path_)) {</div>
+<div class="line"><span class="lineno">  203</span>  other.handle_ = <a class="code hl_variable" href="classhelios_1_1utils_1_1DynamicLibrary.html#aa808316f4be99328739518e23b53877d">kInvalidHandle</a>;</div>
+<div class="line"><span class="lineno">  204</span>}</div>
 <div class="ttc" id="aclasshelios_1_1utils_1_1DynamicLibrary_html_aa808316f4be99328739518e23b53877d"><div class="ttname"><a href="classhelios_1_1utils_1_1DynamicLibrary.html#aa808316f4be99328739518e23b53877d">helios::utils::DynamicLibrary::kInvalidHandle</a></div><div class="ttdeci">static constexpr HandleType kInvalidHandle</div><div class="ttdef"><b>Definition</b> <a href="dynamic__library_8hpp_source.html#l00078">dynamic_library.hpp:78</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -427,16 +428,16 @@ Static Public Attributes</h2></td></tr>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2dynamic_library_8hpp-example.html#a12">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/dynamic_library.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00205">205</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  205</span>                                                {</div>
-<div class="line"><span class="lineno">  206</span>  <span class="keywordflow">if</span> (<a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#a288d4be41c78e85c62093a5e77c39040">Loaded</a>()) {</div>
-<div class="line"><span class="lineno">  207</span>    <span class="keyword">auto</span> result = <a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#acc94af44554c3c2e1c3c497e23a463a7">Unload</a>();</div>
-<div class="line"><span class="lineno">  208</span>    <span class="keywordflow">if</span> (!result) {</div>
-<div class="line"><span class="lineno">  209</span>      <a class="code hl_define" href="logger_8hpp.html#abee1a45a543b16109f05136a9771e86c">HELIOS_WARN</a>(<span class="stringliteral">&quot;Failed to unload dynamic library &#39;{}&#39;: {}!&quot;</span>, path_.c_str(),</div>
-<div class="line"><span class="lineno">  210</span>                  <a class="code hl_function" href="namespacehelios_1_1utils.html#abc4221e0af800d4c7dd1f3042525427c">DynamicLibraryErrorToString</a>(result.error()));</div>
-<div class="line"><span class="lineno">  211</span>    }</div>
-<div class="line"><span class="lineno">  212</span>  }</div>
-<div class="line"><span class="lineno">  213</span>}</div>
+<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00206">206</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  206</span>                                                {</div>
+<div class="line"><span class="lineno">  207</span>  <span class="keywordflow">if</span> (<a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#a288d4be41c78e85c62093a5e77c39040">Loaded</a>()) {</div>
+<div class="line"><span class="lineno">  208</span>    <span class="keyword">auto</span> result = <a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#acc94af44554c3c2e1c3c497e23a463a7">Unload</a>();</div>
+<div class="line"><span class="lineno">  209</span>    <span class="keywordflow">if</span> (!result) {</div>
+<div class="line"><span class="lineno">  210</span>      <a class="code hl_define" href="logger_8hpp.html#abee1a45a543b16109f05136a9771e86c">HELIOS_WARN</a>(<span class="stringliteral">&quot;Failed to unload dynamic library &#39;{}&#39;: {}!&quot;</span>, path_.string(),</div>
+<div class="line"><span class="lineno">  211</span>                  <a class="code hl_function" href="namespacehelios_1_1utils.html#abc4221e0af800d4c7dd1f3042525427c">DynamicLibraryErrorToString</a>(result.error()));</div>
+<div class="line"><span class="lineno">  212</span>    }</div>
+<div class="line"><span class="lineno">  213</span>  }</div>
+<div class="line"><span class="lineno">  214</span>}</div>
 <div class="ttc" id="aclasshelios_1_1utils_1_1DynamicLibrary_html_a288d4be41c78e85c62093a5e77c39040"><div class="ttname"><a href="classhelios_1_1utils_1_1DynamicLibrary.html#a288d4be41c78e85c62093a5e77c39040">helios::utils::DynamicLibrary::Loaded</a></div><div class="ttdeci">bool Loaded() const noexcept</div><div class="ttdoc">Checks if a library is currently loaded.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__library_8hpp_source.html#l00142">dynamic_library.hpp:142</a></div></div>
 <div class="ttc" id="aclasshelios_1_1utils_1_1DynamicLibrary_html_acc94af44554c3c2e1c3c497e23a463a7"><div class="ttname"><a href="classhelios_1_1utils_1_1DynamicLibrary.html#acc94af44554c3c2e1c3c497e23a463a7">helios::utils::DynamicLibrary::Unload</a></div><div class="ttdeci">auto Unload() -&gt; std::expected&lt; void, DynamicLibraryError &gt;</div><div class="ttdoc">Unloads the currently loaded library.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__library_8cpp_source.html#l00052">dynamic_library.cpp:52</a></div></div>
 <div class="ttc" id="alogger_8hpp_html_abee1a45a543b16109f05136a9771e86c"><div class="ttname"><a href="logger_8hpp.html#abee1a45a543b16109f05136a9771e86c">HELIOS_WARN</a></div><div class="ttdeci">#define HELIOS_WARN(...)</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00687">logger.hpp:687</a></div></div>
@@ -654,16 +655,16 @@ requires std::is_pointer_v&lt;T&gt;</div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2dynamic_library_8hpp-example.html#a19">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/dynamic_library.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00252">252</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  252</span>                                                                                                      {</div>
-<div class="line"><span class="lineno">  253</span>  <span class="keyword">auto</span> result = <a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#a3ac68198100c24ccfe78f46864b1c7ff">GetSymbolAddress</a>(name);</div>
-<div class="line"><span class="lineno">  254</span>  <span class="keywordflow">if</span> (!result) {</div>
-<div class="line"><span class="lineno">  255</span>    <span class="keywordflow">return</span> std::unexpected(result.error());</div>
-<div class="line"><span class="lineno">  256</span>  }</div>
-<div class="line"><span class="lineno">  257</span> </div>
-<div class="line"><span class="lineno">  258</span>  <span class="comment">// NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)</span></div>
-<div class="line"><span class="lineno">  259</span>  <span class="keywordflow">return</span> <span class="keyword">reinterpret_cast&lt;</span>T<span class="keyword">&gt;</span>(*result);</div>
-<div class="line"><span class="lineno">  260</span>}</div>
+<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00253">253</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  253</span>                                                                                                      {</div>
+<div class="line"><span class="lineno">  254</span>  <span class="keyword">auto</span> result = <a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#a3ac68198100c24ccfe78f46864b1c7ff">GetSymbolAddress</a>(name);</div>
+<div class="line"><span class="lineno">  255</span>  <span class="keywordflow">if</span> (!result) {</div>
+<div class="line"><span class="lineno">  256</span>    <span class="keywordflow">return</span> std::unexpected(result.error());</div>
+<div class="line"><span class="lineno">  257</span>  }</div>
+<div class="line"><span class="lineno">  258</span> </div>
+<div class="line"><span class="lineno">  259</span>  <span class="comment">// NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)</span></div>
+<div class="line"><span class="lineno">  260</span>  <span class="keywordflow">return</span> <span class="keyword">reinterpret_cast&lt;</span>T<span class="keyword">&gt;</span>(*result);</div>
+<div class="line"><span class="lineno">  261</span>}</div>
 <div class="ttc" id="aclasshelios_1_1utils_1_1DynamicLibrary_html_a3ac68198100c24ccfe78f46864b1c7ff"><div class="ttname"><a href="classhelios_1_1utils_1_1DynamicLibrary.html#a3ac68198100c24ccfe78f46864b1c7ff">helios::utils::DynamicLibrary::GetSymbolAddress</a></div><div class="ttdeci">auto GetSymbolAddress(std::string_view name) const -&gt; std::expected&lt; void *, DynamicLibraryError &gt;</div><div class="ttdoc">Gets a raw symbol address from the library.</div><div class="ttdef"><b>Definition</b> <a href="dynamic__library_8cpp_source.html#l00076">dynamic_library.cpp:76</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -803,12 +804,12 @@ requires std::is_pointer_v&lt;T&gt;</div>
 <div class="line"><span class="lineno">   40</span><span class="preprocessor">#endif</span></div>
 <div class="line"><span class="lineno">   41</span> </div>
 <div class="line"><span class="lineno">   42</span>  <span class="keywordflow">if</span> (handle_ == <a class="code hl_variable" href="classhelios_1_1utils_1_1DynamicLibrary.html#aa808316f4be99328739518e23b53877d">kInvalidHandle</a>) {</div>
-<div class="line"><span class="lineno">   43</span>    <a class="code hl_define" href="logger_8hpp.html#a5ee2b388c5e1155f8aa9f680e3b8cf3b">HELIOS_ERROR</a>(<span class="stringliteral">&quot;Failed to load library &#39;{}&#39;: {}!&quot;</span>, path.c_str(), <a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#a58d553d3644111f84a9a07bf6d203388">GetLastErrorMessage</a>());</div>
+<div class="line"><span class="lineno">   43</span>    <a class="code hl_define" href="logger_8hpp.html#a5ee2b388c5e1155f8aa9f680e3b8cf3b">HELIOS_ERROR</a>(<span class="stringliteral">&quot;Failed to load library &#39;{}&#39;: {}!&quot;</span>, path.string(), <a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#a58d553d3644111f84a9a07bf6d203388">GetLastErrorMessage</a>());</div>
 <div class="line"><span class="lineno">   44</span>    <span class="keywordflow">return</span> std::unexpected(<a class="code hl_enumvalue" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea3729d9667c9ed82ae96b6174b288a3a5">DynamicLibraryError::LoadFailed</a>);</div>
 <div class="line"><span class="lineno">   45</span>  }</div>
 <div class="line"><span class="lineno">   46</span> </div>
 <div class="line"><span class="lineno">   47</span>  path_ = path;</div>
-<div class="line"><span class="lineno">   48</span>  <a class="code hl_define" href="logger_8hpp.html#a19dfad10d07cd557a99345e3d51cba95">HELIOS_DEBUG</a>(<span class="stringliteral">&quot;Loaded dynamic library: {}&quot;</span>, path_.c_str());</div>
+<div class="line"><span class="lineno">   48</span>  <a class="code hl_define" href="logger_8hpp.html#a19dfad10d07cd557a99345e3d51cba95">HELIOS_DEBUG</a>(<span class="stringliteral">&quot;Loaded dynamic library: {}&quot;</span>, path_.string());</div>
 <div class="line"><span class="lineno">   49</span>  <span class="keywordflow">return</span> {};</div>
 <div class="line"><span class="lineno">   50</span>}</div>
 <div class="ttc" id="aclasshelios_1_1utils_1_1DynamicLibrary_html_a66a5e2a5513d86a01874fcb4264a2158"><div class="ttname"><a href="classhelios_1_1utils_1_1DynamicLibrary.html#a66a5e2a5513d86a01874fcb4264a2158">helios::utils::DynamicLibrary::HandleType</a></div><div class="ttdeci">void * HandleType</div><div class="ttdoc">Native handle type (void* on all platforms for ABI stability)</div><div class="ttdef"><b>Definition</b> <a href="dynamic__library_8hpp_source.html#l00077">dynamic_library.hpp:77</a></div></div>
@@ -904,18 +905,18 @@ requires std::is_pointer_v&lt;T&gt;</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00215">215</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  215</span>                                                                                {</div>
-<div class="line"><span class="lineno">  216</span>  <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;other) {</div>
-<div class="line"><span class="lineno">  217</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#a288d4be41c78e85c62093a5e77c39040">Loaded</a>()) {</div>
-<div class="line"><span class="lineno">  218</span>      [[maybe_unused]] <span class="keyword">auto</span> _ = <a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#acc94af44554c3c2e1c3c497e23a463a7">Unload</a>();</div>
-<div class="line"><span class="lineno">  219</span>    }</div>
-<div class="line"><span class="lineno">  220</span>    handle_ = other.handle_;</div>
-<div class="line"><span class="lineno">  221</span>    path_ = std::move(other.path_);</div>
-<div class="line"><span class="lineno">  222</span>    other.handle_ = <a class="code hl_variable" href="classhelios_1_1utils_1_1DynamicLibrary.html#aa808316f4be99328739518e23b53877d">kInvalidHandle</a>;</div>
-<div class="line"><span class="lineno">  223</span>  }</div>
-<div class="line"><span class="lineno">  224</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><span class="lineno">  225</span>}</div>
+<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00216">216</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  216</span>                                                                                {</div>
+<div class="line"><span class="lineno">  217</span>  <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;other) {</div>
+<div class="line"><span class="lineno">  218</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#a288d4be41c78e85c62093a5e77c39040">Loaded</a>()) {</div>
+<div class="line"><span class="lineno">  219</span>      [[maybe_unused]] <span class="keyword">auto</span> _ = <a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#acc94af44554c3c2e1c3c497e23a463a7">Unload</a>();</div>
+<div class="line"><span class="lineno">  220</span>    }</div>
+<div class="line"><span class="lineno">  221</span>    handle_ = other.handle_;</div>
+<div class="line"><span class="lineno">  222</span>    path_ = std::move(other.path_);</div>
+<div class="line"><span class="lineno">  223</span>    other.handle_ = <a class="code hl_variable" href="classhelios_1_1utils_1_1DynamicLibrary.html#aa808316f4be99328739518e23b53877d">kInvalidHandle</a>;</div>
+<div class="line"><span class="lineno">  224</span>  }</div>
+<div class="line"><span class="lineno">  225</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><span class="lineno">  226</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -980,21 +981,21 @@ requires std::is_pointer_v&lt;T&gt;</div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2dynamic_library_8hpp-example.html#a17">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/dynamic_library.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00235">235</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  235</span>                                                                             {</div>
-<div class="line"><span class="lineno">  236</span>  <span class="keywordflow">if</span> (!<a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#a288d4be41c78e85c62093a5e77c39040">Loaded</a>()) {</div>
-<div class="line"><span class="lineno">  237</span>    <span class="keywordflow">return</span> std::unexpected(<a class="code hl_enumvalue" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea5111e24c1ecc6266ce0de4b4dc42033b">DynamicLibraryError::NotLoaded</a>);</div>
-<div class="line"><span class="lineno">  238</span>  }</div>
-<div class="line"><span class="lineno">  239</span> </div>
-<div class="line"><span class="lineno">  240</span>  <span class="keyword">const</span> <span class="keyword">auto</span> saved_path = path_;</div>
-<div class="line"><span class="lineno">  241</span> </div>
-<div class="line"><span class="lineno">  242</span>  <span class="keyword">auto</span> unload_result = <a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#acc94af44554c3c2e1c3c497e23a463a7">Unload</a>();</div>
-<div class="line"><span class="lineno">  243</span>  <span class="keywordflow">if</span> (!unload_result) {</div>
-<div class="line"><span class="lineno">  244</span>    <span class="keywordflow">return</span> unload_result;</div>
-<div class="line"><span class="lineno">  245</span>  }</div>
-<div class="line"><span class="lineno">  246</span> </div>
-<div class="line"><span class="lineno">  247</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#ac1ca51a6830a4159681abbe401bfe49a">Load</a>(saved_path);</div>
-<div class="line"><span class="lineno">  248</span>}</div>
+<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00236">236</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  236</span>                                                                             {</div>
+<div class="line"><span class="lineno">  237</span>  <span class="keywordflow">if</span> (!<a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#a288d4be41c78e85c62093a5e77c39040">Loaded</a>()) {</div>
+<div class="line"><span class="lineno">  238</span>    <span class="keywordflow">return</span> std::unexpected(<a class="code hl_enumvalue" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea5111e24c1ecc6266ce0de4b4dc42033b">DynamicLibraryError::NotLoaded</a>);</div>
+<div class="line"><span class="lineno">  239</span>  }</div>
+<div class="line"><span class="lineno">  240</span> </div>
+<div class="line"><span class="lineno">  241</span>  <span class="keyword">const</span> <span class="keyword">auto</span> saved_path = path_;</div>
+<div class="line"><span class="lineno">  242</span> </div>
+<div class="line"><span class="lineno">  243</span>  <span class="keyword">auto</span> unload_result = <a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#acc94af44554c3c2e1c3c497e23a463a7">Unload</a>();</div>
+<div class="line"><span class="lineno">  244</span>  <span class="keywordflow">if</span> (!unload_result) {</div>
+<div class="line"><span class="lineno">  245</span>    <span class="keywordflow">return</span> unload_result;</div>
+<div class="line"><span class="lineno">  246</span>  }</div>
+<div class="line"><span class="lineno">  247</span> </div>
+<div class="line"><span class="lineno">  248</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#ac1ca51a6830a4159681abbe401bfe49a">Load</a>(saved_path);</div>
+<div class="line"><span class="lineno">  249</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1033,11 +1034,11 @@ requires std::is_pointer_v&lt;T&gt;</div>
 <div class="line"><span class="lineno">   63</span><span class="preprocessor">#endif</span></div>
 <div class="line"><span class="lineno">   64</span> </div>
 <div class="line"><span class="lineno">   65</span>  <span class="keywordflow">if</span> (!success) {</div>
-<div class="line"><span class="lineno">   66</span>    <a class="code hl_define" href="logger_8hpp.html#a5ee2b388c5e1155f8aa9f680e3b8cf3b">HELIOS_ERROR</a>(<span class="stringliteral">&quot;Failed to unload library &#39;{}&#39;: {}!&quot;</span>, path_.c_str(), <a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#a58d553d3644111f84a9a07bf6d203388">GetLastErrorMessage</a>());</div>
+<div class="line"><span class="lineno">   66</span>    <a class="code hl_define" href="logger_8hpp.html#a5ee2b388c5e1155f8aa9f680e3b8cf3b">HELIOS_ERROR</a>(<span class="stringliteral">&quot;Failed to unload library &#39;{}&#39;: {}!&quot;</span>, path_.string(), <a class="code hl_function" href="classhelios_1_1utils_1_1DynamicLibrary.html#a58d553d3644111f84a9a07bf6d203388">GetLastErrorMessage</a>());</div>
 <div class="line"><span class="lineno">   67</span>    <span class="keywordflow">return</span> std::unexpected(<a class="code hl_enumvalue" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365eaba8ea63548a12106e8f5aed4e964ae6a">DynamicLibraryError::PlatformError</a>);</div>
 <div class="line"><span class="lineno">   68</span>  }</div>
 <div class="line"><span class="lineno">   69</span> </div>
-<div class="line"><span class="lineno">   70</span>  <a class="code hl_define" href="logger_8hpp.html#a19dfad10d07cd557a99345e3d51cba95">HELIOS_DEBUG</a>(<span class="stringliteral">&quot;Unloaded dynamic library: {}&quot;</span>, path_.c_str());</div>
+<div class="line"><span class="lineno">   70</span>  <a class="code hl_define" href="logger_8hpp.html#a19dfad10d07cd557a99345e3d51cba95">HELIOS_DEBUG</a>(<span class="stringliteral">&quot;Unloaded dynamic library: {}&quot;</span>, path_.string());</div>
 <div class="line"><span class="lineno">   71</span>  handle_ = <a class="code hl_variable" href="classhelios_1_1utils_1_1DynamicLibrary.html#aa808316f4be99328739518e23b53877d">kInvalidHandle</a>;</div>
 <div class="line"><span class="lineno">   72</span>  path_.clear();</div>
 <div class="line"><span class="lineno">   73</span>  <span class="keywordflow">return</span> {};</div>

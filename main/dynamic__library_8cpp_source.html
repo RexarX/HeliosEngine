@@ -209,12 +209,12 @@ $(document).ready(function(){initNavTree('dynamic__library_8cpp_source.html','')
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  <span class="keywordflow">if</span> (handle_ == kInvalidHandle) {</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <a class="code hl_define" href="logger_8hpp.html#a5ee2b388c5e1155f8aa9f680e3b8cf3b">HELIOS_ERROR</a>(<span class="stringliteral">&quot;Failed to load library &#39;{}&#39;: {}!&quot;</span>, path.c_str(), GetLastErrorMessage());</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <a class="code hl_define" href="logger_8hpp.html#a5ee2b388c5e1155f8aa9f680e3b8cf3b">HELIOS_ERROR</a>(<span class="stringliteral">&quot;Failed to load library &#39;{}&#39;: {}!&quot;</span>, path.string(), GetLastErrorMessage());</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordflow">return</span> std::unexpected(<a class="code hl_enumvalue" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea3729d9667c9ed82ae96b6174b288a3a5">DynamicLibraryError::LoadFailed</a>);</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  }</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  path_ = path;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  <a class="code hl_define" href="logger_8hpp.html#a19dfad10d07cd557a99345e3d51cba95">HELIOS_DEBUG</a>(<span class="stringliteral">&quot;Loaded dynamic library: {}&quot;</span>, path_.c_str());</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  <a class="code hl_define" href="logger_8hpp.html#a19dfad10d07cd557a99345e3d51cba95">HELIOS_DEBUG</a>(<span class="stringliteral">&quot;Loaded dynamic library: {}&quot;</span>, path_.string());</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  <span class="keywordflow">return</span> {};</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>}</div>
 </div>
@@ -234,11 +234,11 @@ $(document).ready(function(){initNavTree('dynamic__library_8cpp_source.html','')
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  <span class="keywordflow">if</span> (!success) {</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <a class="code hl_define" href="logger_8hpp.html#a5ee2b388c5e1155f8aa9f680e3b8cf3b">HELIOS_ERROR</a>(<span class="stringliteral">&quot;Failed to unload library &#39;{}&#39;: {}!&quot;</span>, path_.c_str(), GetLastErrorMessage());</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <a class="code hl_define" href="logger_8hpp.html#a5ee2b388c5e1155f8aa9f680e3b8cf3b">HELIOS_ERROR</a>(<span class="stringliteral">&quot;Failed to unload library &#39;{}&#39;: {}!&quot;</span>, path_.string(), GetLastErrorMessage());</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordflow">return</span> std::unexpected(<a class="code hl_enumvalue" href="namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365eaba8ea63548a12106e8f5aed4e964ae6a">DynamicLibraryError::PlatformError</a>);</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  }</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  <a class="code hl_define" href="logger_8hpp.html#a19dfad10d07cd557a99345e3d51cba95">HELIOS_DEBUG</a>(<span class="stringliteral">&quot;Unloaded dynamic library: {}&quot;</span>, path_.c_str());</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  <a class="code hl_define" href="logger_8hpp.html#a19dfad10d07cd557a99345e3d51cba95">HELIOS_DEBUG</a>(<span class="stringliteral">&quot;Unloaded dynamic library: {}&quot;</span>, path_.string());</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  handle_ = kInvalidHandle;</div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  path_.clear();</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  <span class="keywordflow">return</span> {};</div>
