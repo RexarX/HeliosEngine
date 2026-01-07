@@ -75,6 +75,7 @@ set(CORE_UNIT_TESTS_SOURCES
     unit/ecs/events/builtin_events.cpp
 
     unit/utils/common_traits.cpp
+    unit/utils/defer.cpp
     unit/utils/dynamic_library.cpp
     unit/utils/fast_pimpl.cpp
     unit/utils/filesystem.cpp

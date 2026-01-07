@@ -96,6 +96,7 @@ set(CORE_HEADERS
 
     # Utils headers
     include/helios/core/utils/common_traits.hpp
+    include/helios/core/utils/defer.hpp
     include/helios/core/utils/dynamic_library.hpp
     include/helios/core/utils/fast_pimpl.hpp
     include/helios/core/utils/filesystem.hpp

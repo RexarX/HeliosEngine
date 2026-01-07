@@ -33,7 +33,7 @@ public:
    * @brief Pushes a pre-constructed command to the buffer.
    * @param command Unique pointer to command
    */
-  void Push(std::unique_ptr<Command>&& command);
+  void Push(std::unique_ptr<Command> command);
 
   /**
    * @brief Constructs and pushes a command to the buffer.
@@ -51,7 +51,7 @@ private:
   SystemLocalStorage& local_storage_;
 };
 
-inline void CmdBuffer::Push(std::unique_ptr<Command>&& command) {
+inline void CmdBuffer::Push(std::unique_ptr<Command> command) {
   HELIOS_ASSERT(command != nullptr, "Failed to push command to command buffer: command is nullptr!");
   local_storage_.AddCommand(std::move(command));
 }

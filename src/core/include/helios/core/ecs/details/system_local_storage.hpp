@@ -92,7 +92,7 @@ public:
    * @brief Adds a pre-constructed command to the local buffer.
    * @param command Unique pointer to command
    */
-  void AddCommand(std::unique_ptr<Command>&& command);
+  void AddCommand(std::unique_ptr<Command> command);
 
   /**
    * @brief Reserves space for commands.
@@ -204,7 +204,7 @@ private:
   FrameAllocatorType frame_allocator_;              ///< Per-system frame allocator for temporary allocations
 };
 
-inline void SystemLocalStorage::AddCommand(std::unique_ptr<Command>&& command) {
+inline void SystemLocalStorage::AddCommand(std::unique_ptr<Command> command) {
   HELIOS_ASSERT(command != nullptr, "Failed to add command: command is null!");
   commands_.push_back(std::move(command));
 }

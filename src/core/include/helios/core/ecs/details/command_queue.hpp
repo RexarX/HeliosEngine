@@ -71,7 +71,7 @@ public:
    * @warning Triggers assertion if command is nullptr.
    * @param command Unique pointer to command to enqueue
    */
-  void Enqueue(std::unique_ptr<Command>&& command);
+  void Enqueue(std::unique_ptr<Command> command);
 
   /**
    * @brief Enqueues multiple commands in bulk.
@@ -112,7 +112,7 @@ private:
   std::vector<std::unique_ptr<Command>> commands_;  ///< Vector storing command pointers
 };
 
-inline void CmdQueue::Enqueue(std::unique_ptr<Command>&& command) {
+inline void CmdQueue::Enqueue(std::unique_ptr<Command> command) {
   HELIOS_ASSERT(command != nullptr, "Failed to enqueue command: command is nullptr!");
   commands_.push_back(std::move(command));
 }
@@ -120,12 +120,6 @@ inline void CmdQueue::Enqueue(std::unique_ptr<Command>&& command) {
 template <std::ranges::range R>
   requires std::same_as<std::ranges::range_value_t<R>, std::unique_ptr<Command>>
 inline void CmdQueue::EnqueueBulk(R&& commands) {
-#ifdef HELIOS_ENABLE_ASSERTS
-  for (const auto& command : commands) {
-    HELIOS_ASSERT(command != nullptr, "Failed to enqueue commands in bulk: one of the commands is nullptr!");
-  }
-#endif
-
   if constexpr (std::ranges::sized_range<R>) {
     // Reserve space to avoid multiple reallocations
     commands_.reserve(commands_.size() + std::ranges::size(commands));
@@ -133,6 +127,7 @@ inline void CmdQueue::EnqueueBulk(R&& commands) {
 
   // Move all commands into the queue
   for (auto&& command : commands) {
+    HELIOS_ASSERT(command != nullptr, "Failed to enqueue commands in bulk: one of the commands is nullptr!");
     commands_.push_back(std::move(command));
   }
 }

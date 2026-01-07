@@ -234,7 +234,7 @@ public:
    * @param module Dynamic module to add (moved)
    * @return Reference to app for method chaining
    */
-  auto AddDynamicModule(this auto&& self, DynamicModule&& module) -> decltype(std::forward<decltype(self)>(self));
+  auto AddDynamicModule(this auto&& self, DynamicModule module) -> decltype(std::forward<decltype(self)>(self));
 
   /**
    * @brief Adds a system to the specified schedule in the main sub-app.
@@ -667,7 +667,7 @@ inline auto App::AddModules(this auto&& self) -> decltype(std::forward<decltype(
   return std::forward<decltype(self)>(self);
 }
 
-inline auto App::AddDynamicModule(this auto&& self, DynamicModule&& module)
+inline auto App::AddDynamicModule(this auto&& self, DynamicModule module)
     -> decltype(std::forward<decltype(self)>(self)) {
   const std::string_view name = module.GetModuleName();
   const ModuleTypeId id = module.GetModuleId();
