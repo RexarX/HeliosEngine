@@ -2,6 +2,7 @@ var namespacehelios_1_1utils =
 [
     [ "details", "namespacehelios_1_1utils_1_1details.html", "namespacehelios_1_1utils_1_1details" ],
     [ "ChainAdapter", "classhelios_1_1utils_1_1ChainAdapter.html", "classhelios_1_1utils_1_1ChainAdapter" ],
+    [ "Defer", "classhelios_1_1utils_1_1Defer.html", "classhelios_1_1utils_1_1Defer" ],
     [ "DynamicLibrary", "classhelios_1_1utils_1_1DynamicLibrary.html", "classhelios_1_1utils_1_1DynamicLibrary" ],
     [ "EnumerateAdapter", "classhelios_1_1utils_1_1EnumerateAdapter.html", "classhelios_1_1utils_1_1EnumerateAdapter" ],
     [ "FastPimpl", "classhelios_1_1utils_1_1FastPimpl.html", "classhelios_1_1utils_1_1FastPimpl" ],

@@ -59,6 +59,7 @@ var hierarchy =
     ] ],
     [ "helios::DefaultLogger", "structhelios_1_1DefaultLogger.html", null ],
     [ "helios::app::DefaultRunnerConfig", "structhelios_1_1app_1_1DefaultRunnerConfig.html", null ],
+    [ "helios::utils::Defer< F >", "classhelios_1_1utils_1_1Defer.html", null ],
     [ "helios::Delegate< FunctionSignature >", "classhelios_1_1Delegate.html", null ],
     [ "helios::Delegate< ReturnType(Args...)>", "classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html", null ],
     [ "helios::memory::DoubleFrameAllocator", "classhelios_1_1memory_1_1DoubleFrameAllocator.html", null ],

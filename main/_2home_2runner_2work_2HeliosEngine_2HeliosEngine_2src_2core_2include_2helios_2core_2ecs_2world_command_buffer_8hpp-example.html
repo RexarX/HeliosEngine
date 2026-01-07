@@ -263,7 +263,7 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="comment">   */</span></div>
 <div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> F&gt;</div>
 <div class="line">    <span class="keyword">requires</span> std::invocable&lt;F, World&amp;&gt;</div>
-<div class="line">  <span class="keywordtype">void</span> <a id="a5" name="a5"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#a48a9e1455731c6723a81aa11c3539f61">Push</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">F</a>&amp;&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">func</a>) {</div>
+<div class="line">  <span class="keywordtype">void</span> <a id="a5" name="a5"></a><a class="code hl_function" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#a48a9e1455731c6723a81aa11c3539f61">Push</a>(F&amp;&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">func</a>) {</div>
 <div class="line">    commands_.push_back(std::make_unique&lt;details::FunctionCmd&lt;F&gt;&gt;(std::forward&lt;F&gt;(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">func</a>)));</div>
 <div class="line">  }</div>
 <div class="line"><span class="comment"></span> </div>

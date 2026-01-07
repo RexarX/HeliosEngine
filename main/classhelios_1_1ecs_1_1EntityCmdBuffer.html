@@ -818,12 +818,12 @@ template&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb
 <div class="fragment"><div class="line"><span class="lineno">  350</span>                                                       {</div>
 <div class="line"><span class="lineno">  351</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">cmd</a> : commands_) {</div>
 <div class="line"><span class="lineno">  352</span>    <span class="keywordflow">if</span> (<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">cmd</a> != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><span class="lineno">  353</span>      local_storage_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#ac7479c1d618317b532c80614836dc41f">AddCommand</a>(std::move(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">cmd</a>));</div>
+<div class="line"><span class="lineno">  353</span>      local_storage_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a89b841b371ca462ee6153f8909315ef9">AddCommand</a>(std::move(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">cmd</a>));</div>
 <div class="line"><span class="lineno">  354</span>    }</div>
 <div class="line"><span class="lineno">  355</span>  }</div>
 <div class="line"><span class="lineno">  356</span>  commands_.clear();</div>
 <div class="line"><span class="lineno">  357</span>}</div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1SystemLocalStorage_html_ac7479c1d618317b532c80614836dc41f"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#ac7479c1d618317b532c80614836dc41f">helios::ecs::details::SystemLocalStorage::AddCommand</a></div><div class="ttdeci">void AddCommand(std::unique_ptr&lt; Command &gt; &amp;&amp;command)</div><div class="ttdoc">Adds a pre-constructed command to the local buffer.</div><div class="ttdef"><b>Definition</b> <a href="system__local__storage_8hpp_source.html#l00207">system_local_storage.hpp:207</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1SystemLocalStorage_html_a89b841b371ca462ee6153f8909315ef9"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a89b841b371ca462ee6153f8909315ef9">helios::ecs::details::SystemLocalStorage::AddCommand</a></div><div class="ttdeci">void AddCommand(std::unique_ptr&lt; Command &gt; command)</div><div class="ttdoc">Adds a pre-constructed command to the local buffer.</div><div class="ttdef"><b>Definition</b> <a href="system__local__storage_8hpp_source.html#l00207">system_local_storage.hpp:207</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>

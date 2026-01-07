@@ -197,9 +197,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae432e8ae5ec78e57822d5a403385fe18" id="r_ae432e8ae5ec78e57822d5a403385fe18"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#ae432e8ae5ec78e57822d5a403385fe18">Flush</a> () <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">noexcept</a></td></tr>
 <tr class="memdesc:ae432e8ae5ec78e57822d5a403385fe18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flushes all pending commands to the system local storage.  <br /></td></tr>
 <tr class="separator:ae432e8ae5ec78e57822d5a403385fe18"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48a9e1455731c6723a81aa11c3539f61" id="r_a48a9e1455731c6723a81aa11c3539f61"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typename</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">F</a> &gt; <br />
-requires std::invocable&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">F</a>, <a class="el" href="classhelios_1_1ecs_1_1World.html">World</a>&amp;&gt;</td></tr>
-<tr class="memitem:a48a9e1455731c6723a81aa11c3539f61"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#a48a9e1455731c6723a81aa11c3539f61">Push</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">F</a> &amp;&amp;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">func</a>)</td></tr>
+<tr class="memitem:a48a9e1455731c6723a81aa11c3539f61" id="r_a48a9e1455731c6723a81aa11c3539f61"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typename</a> F &gt; <br />
+requires std::invocable&lt;F, <a class="el" href="classhelios_1_1ecs_1_1World.html">World</a>&amp;&gt;</td></tr>
+<tr class="memitem:a48a9e1455731c6723a81aa11c3539f61"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#a48a9e1455731c6723a81aa11c3539f61">Push</a> (F &amp;&amp;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">func</a>)</td></tr>
 <tr class="memdesc:a48a9e1455731c6723a81aa11c3539f61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pushes a custom command function to be executed on the world.  <br /></td></tr>
 <tr class="separator:a48a9e1455731c6723a81aa11c3539f61"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad5210475d25a416a44353b422c5b34ec" id="r_ad5210475d25a416a44353b422c5b34ec"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html#ad5210475d25a416a44353b422c5b34ec">Destroy</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> entity)</td></tr>
@@ -659,12 +659,12 @@ template&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb
 <div class="fragment"><div class="line"><span class="lineno">  170</span>                                                      {</div>
 <div class="line"><span class="lineno">  171</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">cmd</a> : commands_) {</div>
 <div class="line"><span class="lineno">  172</span>    <span class="keywordflow">if</span> (<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">cmd</a> != <span class="keyword">nullptr</span>) [[<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">likely</a>]] {</div>
-<div class="line"><span class="lineno">  173</span>      local_storage_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#ac7479c1d618317b532c80614836dc41f">AddCommand</a>(std::move(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">cmd</a>));</div>
+<div class="line"><span class="lineno">  173</span>      local_storage_.<a class="code hl_function" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a89b841b371ca462ee6153f8909315ef9">AddCommand</a>(std::move(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">cmd</a>));</div>
 <div class="line"><span class="lineno">  174</span>    }</div>
 <div class="line"><span class="lineno">  175</span>  }</div>
 <div class="line"><span class="lineno">  176</span>  commands_.clear();</div>
 <div class="line"><span class="lineno">  177</span>}</div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1SystemLocalStorage_html_ac7479c1d618317b532c80614836dc41f"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#ac7479c1d618317b532c80614836dc41f">helios::ecs::details::SystemLocalStorage::AddCommand</a></div><div class="ttdeci">void AddCommand(std::unique_ptr&lt; Command &gt; &amp;&amp;command)</div><div class="ttdoc">Adds a pre-constructed command to the local buffer.</div><div class="ttdef"><b>Definition</b> <a href="system__local__storage_8hpp_source.html#l00207">system_local_storage.hpp:207</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1details_1_1SystemLocalStorage_html_a89b841b371ca462ee6153f8909315ef9"><div class="ttname"><a href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a89b841b371ca462ee6153f8909315ef9">helios::ecs::details::SystemLocalStorage::AddCommand</a></div><div class="ttdeci">void AddCommand(std::unique_ptr&lt; Command &gt; command)</div><div class="ttdoc">Adds a pre-constructed command to the local buffer.</div><div class="ttdef"><b>Definition</b> <a href="system__local__storage_8hpp_source.html#l00207">system_local_storage.hpp:207</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -769,8 +769,8 @@ template&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb
 <div class="memtemplate">
 template&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typename</a> Allocator  = std::allocator&lt;std::unique_ptr&lt;Command&gt;&gt;&gt; </div>
 <div class="memtemplate">
-template&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typename</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">F</a> &gt; <br />
-requires std::invocable&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">F</a>, <a class="el" href="classhelios_1_1ecs_1_1World.html">World</a>&amp;&gt;</div>
+template&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">typename</a> F &gt; <br />
+requires std::invocable&lt;F, <a class="el" href="classhelios_1_1ecs_1_1World.html">World</a>&amp;&gt;</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -778,7 +778,7 @@ requires std::invocable&lt;<a class="el" href="namespacehelios_1_1ecs.html#af038
         <tr>
           <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a> <a class="el" href="classhelios_1_1ecs_1_1WorldCmdBuffer.html">helios::ecs::WorldCmdBuffer</a>&lt; Allocator &gt;::Push </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">F</a> &amp;&amp;&#160;</td>
+          <td class="paramtype">F &amp;&amp;&#160;</td>
           <td class="paramname"><em>func</em></td><td>)</td>
           <td></td>
         </tr>

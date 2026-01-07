@@ -248,15 +248,15 @@ var NAVTREEINDEX =
 "classhelios_1_1ecs_1_1details_1_1ResourceStorage.html#a77f4f85aaefeac7f064ff3c0abe921f5",
 "classhelios_1_1memory_1_1ArenaAllocator.html#a0ae1bb3f11fb623257dab7ad145c3eef",
 "classhelios_1_1memory_1_1NFrameAllocator.html#aecf998c923d0fd7eac5a662aae33262b",
-"classhelios_1_1utils_1_1EnumerateAdapter.html#aa27e5e0b9ca4e1e23c28decc70e4e9a1",
-"classhelios_1_1utils_1_1SkipWhileAdapter.html#a7884b85eef41352e00f6a42425dfd103",
-"concepthelios_1_1ecs_1_1WorldType.html",
-"functions_b.html",
-"namespacehelios.html#a0ec54c8a5c5da6a3de37b457da2729f3",
-"query_8hpp_source.html",
-"structhelios_1_1app_1_1PostUpdate.html#a33cecc1c1213296761a104c0d19eafa2",
-"structhelios_1_1ecs_1_1EntityDestroyedEvent.html",
-"system__set_8hpp.html#a597a95646f0ae2fe9b36c1d97a0dc102"
+"classhelios_1_1utils_1_1EnumerateAdapter.html#a482628bbe36d777dd2e23b29fe67bc62",
+"classhelios_1_1utils_1_1SkipWhileAdapter.html",
+"concepthelios_1_1ecs_1_1ResourceWithNameTrait.html",
+"functional__adapters_8hpp.html#aaaff5718ee2a83211c03c29e78cc7f46",
+"md_src_2modules_2example_2README.html#autotoc_md58",
+"namespacespdlog.html",
+"structhelios_1_1app_1_1PostCleanUp.html#a50b5b3769692a1d84f576c1bebb4c1bc",
+"structhelios_1_1details_1_1TupleToFunctionSignature_3_01std_1_1tuple_3_01R_00_01Args_8_8_8_01_4_01_4.html",
+"sub__app_8hpp_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

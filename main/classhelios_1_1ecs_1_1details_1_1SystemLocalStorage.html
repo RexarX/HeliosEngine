@@ -214,9 +214,9 @@ requires std::constructible_from&lt;T, Args...&gt;</td></tr>
 <tr class="memitem:a2fcd5cda672add3690a5808f0a4a2ff7"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a2fcd5cda672add3690a5808f0a4a2ff7">EmplaceCommand</a> (Args &amp;&amp;... <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">args</a>)</td></tr>
 <tr class="memdesc:a2fcd5cda672add3690a5808f0a4a2ff7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a command to the local command buffer.  <br /></td></tr>
 <tr class="separator:a2fcd5cda672add3690a5808f0a4a2ff7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac7479c1d618317b532c80614836dc41f" id="r_ac7479c1d618317b532c80614836dc41f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#ac7479c1d618317b532c80614836dc41f">AddCommand</a> (std::unique_ptr&lt; <a class="el" href="classhelios_1_1ecs_1_1Command.html">Command</a> &gt; &amp;&amp;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">command</a>)</td></tr>
-<tr class="memdesc:ac7479c1d618317b532c80614836dc41f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a pre-constructed command to the local buffer.  <br /></td></tr>
-<tr class="separator:ac7479c1d618317b532c80614836dc41f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89b841b371ca462ee6153f8909315ef9" id="r_a89b841b371ca462ee6153f8909315ef9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a89b841b371ca462ee6153f8909315ef9">AddCommand</a> (std::unique_ptr&lt; <a class="el" href="classhelios_1_1ecs_1_1Command.html">Command</a> &gt; <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">command</a>)</td></tr>
+<tr class="memdesc:a89b841b371ca462ee6153f8909315ef9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a pre-constructed command to the local buffer.  <br /></td></tr>
+<tr class="separator:a89b841b371ca462ee6153f8909315ef9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a817e2192f2f44438c4960cfb709df025" id="r_a817e2192f2f44438c4960cfb709df025"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ecs_1_1details_1_1SystemLocalStorage.html#a817e2192f2f44438c4960cfb709df025">ReserveCommands</a> (<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">size_t</a> <a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">capacity</a>)</td></tr>
 <tr class="memdesc:a817e2192f2f44438c4960cfb709df025"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reserves space for commands.  <br /></td></tr>
 <tr class="separator:a817e2192f2f44438c4960cfb709df025"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -473,8 +473,8 @@ requires EventTrait&lt;std::ranges::range_value_t&lt;<a class="el" href="namespa
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ac7479c1d618317b532c80614836dc41f" name="ac7479c1d618317b532c80614836dc41f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac7479c1d618317b532c80614836dc41f">&#9670;&#160;</a></span>AddCommand()</h2>
+<a id="a89b841b371ca462ee6153f8909315ef9" name="a89b841b371ca462ee6153f8909315ef9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89b841b371ca462ee6153f8909315ef9">&#9670;&#160;</a></span>AddCommand()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -485,7 +485,7 @@ requires EventTrait&lt;std::ranges::range_value_t&lt;<a class="el" href="namespa
         <tr>
           <td class="memname"><a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">void</a> helios::ecs::details::SystemLocalStorage::AddCommand </td>
           <td>(</td>
-          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="classhelios_1_1ecs_1_1Command.html">Command</a> &gt; &amp;&amp;&#160;</td>
+          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="classhelios_1_1ecs_1_1Command.html">Command</a> &gt;&#160;</td>
           <td class="paramname"><em>command</em></td><td>)</td>
           <td></td>
         </tr>
@@ -506,7 +506,7 @@ requires EventTrait&lt;std::ranges::range_value_t&lt;<a class="el" href="namespa
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="system__local__storage_8hpp_source.html#l00207">207</a> of file <a class="el" href="system__local__storage_8hpp_source.html">system_local_storage.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  207</span>                                                                           {</div>
+<div class="fragment"><div class="line"><span class="lineno">  207</span>                                                                         {</div>
 <div class="line"><span class="lineno">  208</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">command</a> != <span class="keyword">nullptr</span>, <span class="stringliteral">&quot;Failed to add command: command is null!&quot;</span>);</div>
 <div class="line"><span class="lineno">  209</span>  commands_.push_back(std::move(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb340c71c231e5e">command</a>));</div>
 <div class="line"><span class="lineno">  210</span>}</div>

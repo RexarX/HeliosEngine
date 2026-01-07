@@ -243,9 +243,9 @@ requires (sizeof...(Modules) &gt; 1 &amp;&amp; utils::UniqueTypes&lt;Modules...&
 <tr class="memitem:a4770130c039e32697d9a467cfdfabcf6"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1App.html#a4770130c039e32697d9a467cfdfabcf6">AddModules</a> (this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
 <tr class="memdesc:a4770130c039e32697d9a467cfdfabcf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds multiple modules to the main sub-app.  <br /></td></tr>
 <tr class="separator:a4770130c039e32697d9a467cfdfabcf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa9aee3c3108c42adddb68cf34dc22a8" id="r_afa9aee3c3108c42adddb68cf34dc22a8"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1App.html#afa9aee3c3108c42adddb68cf34dc22a8">AddDynamicModule</a> (this auto &amp;&amp;self, <a class="el" href="classhelios_1_1app_1_1DynamicModule.html">DynamicModule</a> &amp;&amp;module) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
-<tr class="memdesc:afa9aee3c3108c42adddb68cf34dc22a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a dynamic module to the main sub-app, taking ownership.  <br /></td></tr>
-<tr class="separator:afa9aee3c3108c42adddb68cf34dc22a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9e2e62fb2756595702130190866da6f" id="r_ad9e2e62fb2756595702130190866da6f"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1App.html#ad9e2e62fb2756595702130190866da6f">AddDynamicModule</a> (this auto &amp;&amp;self, <a class="el" href="classhelios_1_1app_1_1DynamicModule.html">DynamicModule</a> module) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
+<tr class="memdesc:ad9e2e62fb2756595702130190866da6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a dynamic module to the main sub-app, taking ownership.  <br /></td></tr>
+<tr class="separator:ad9e2e62fb2756595702130190866da6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aca1848d9d552b352f72e7538c0628616" id="r_aca1848d9d552b352f72e7538c0628616"><td class="memTemplParams" colspan="2">template&lt;ecs::SystemTrait T, ScheduleTrait Schedule&gt; </td></tr>
 <tr class="memitem:aca1848d9d552b352f72e7538c0628616"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1App.html#aca1848d9d552b352f72e7538c0628616">AddSystem</a> (this auto &amp;&amp;self, Schedule schedule={}) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
 <tr class="memdesc:aca1848d9d552b352f72e7538c0628616"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a system to the specified schedule in the main sub-app.  <br /></td></tr>
@@ -551,8 +551,8 @@ requires (sizeof...(Events) &gt; 1)</td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="afa9aee3c3108c42adddb68cf34dc22a8" name="afa9aee3c3108c42adddb68cf34dc22a8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afa9aee3c3108c42adddb68cf34dc22a8">&#9670;&#160;</a></span>AddDynamicModule()</h2>
+<a id="ad9e2e62fb2756595702130190866da6f" name="ad9e2e62fb2756595702130190866da6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9e2e62fb2756595702130190866da6f">&#9670;&#160;</a></span>AddDynamicModule()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -569,7 +569,7 @@ requires (sizeof...(Events) &gt; 1)</td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1DynamicModule.html">DynamicModule</a> &amp;&amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1DynamicModule.html">DynamicModule</a>&#160;</td>
           <td class="paramname"><em>module</em>&#160;</td>
         </tr>
         <tr>

@@ -6,7 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=11" />
         <meta name="generator" content="Doxygen 1.9.8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Helios Engine: File Members</title>
+        <title>Helios Engine: src/core/include/helios/core/utils/defer.hpp File Reference</title>
         <!--BEGIN PROJECT_ICON-->
         <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
         <link rel="icon" href="favicon.ico" type="image/x-icon" />
@@ -137,7 +137,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('globals_defs.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('defer_8hpp.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -162,50 +162,94 @@ $(document).ready(function(){initNavTree('globals_defs.html',''); initResizable(
 </div>
 </div>
 
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#define-members">Macros</a>  </div>
+  <div class="headertitle"><div class="title">defer.hpp File Reference</div></div>
+</div><!--header-->
 <div class="contents">
-<div class="textblock">Here is a list of all macros with links to the files they belong to:</div>
+<div class="textblock"><code>#include &lt;<a class="el" href="core__pch_8hpp_source.html">helios/core_pch.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="core_8hpp_source.html">helios/core/core.hpp</a>&gt;</code><br />
+<code>#include &lt;concepts&gt;</code><br />
+<code>#include &lt;type_traits&gt;</code><br />
+<code>#include &lt;utility&gt;</code><br />
+</div>
+<p><a href="defer_8hpp_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1Defer.html">helios::utils::Defer&lt; F &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespacehelios" id="r_namespacehelios"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios.html">helios</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespacehelios_1_1utils" id="r_namespacehelios_1_1utils"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html">helios::utils</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespacehelios_1_1utils_1_1details" id="r_namespacehelios_1_1utils_1_1details"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils_1_1details.html">helios::utils::details</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:ab0802fad42e1ecfeaed34b159cc468a4" id="r_ab0802fad42e1ecfeaed34b159cc468a4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defer_8hpp.html#ab0802fad42e1ecfeaed34b159cc468a4">HELIOS_DEFER_CALL</a>(callable)&#160;&#160;&#160;auto <a class="el" href="core_8hpp.html#a46e4d6cbf2452fa304c6d00871af9dfb">HELIOS_CONCAT</a>(_defer_, __LINE__) = <a class="el" href="classhelios_1_1utils_1_1Defer.html">::helios::utils::Defer</a>(callable)</td></tr>
+<tr class="separator:ab0802fad42e1ecfeaed34b159cc468a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a170e91546778eb9eceda22d3896b5ad0" id="r_a170e91546778eb9eceda22d3896b5ad0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defer_8hpp.html#a170e91546778eb9eceda22d3896b5ad0">HELIOS_DEFER</a></td></tr>
+<tr class="separator:a170e91546778eb9eceda22d3896b5ad0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a170e91546778eb9eceda22d3896b5ad0" name="a170e91546778eb9eceda22d3896b5ad0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a170e91546778eb9eceda22d3896b5ad0">&#9670;&#160;</a></span>HELIOS_DEFER</h2>
 
-<h3><a id="index_h" name="index_h"></a>- h -</h3><ul>
-<li>HELIOS_ANONYMOUS_VAR&#160;:&#160;<a class="el" href="core_8hpp.html#a970386823b90d92c77c4d3c19d619b7a">core.hpp</a></li>
-<li>HELIOS_API&#160;:&#160;<a class="el" href="core_8hpp.html#af82a8ce6d0033191eafb5eff2173159c">core.hpp</a></li>
-<li>HELIOS_ASSERT&#160;:&#160;<a class="el" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">assert.hpp</a></li>
-<li>HELIOS_BIT&#160;:&#160;<a class="el" href="core_8hpp.html#ac2f8c278b92c19e156146c758e906a9e">core.hpp</a></li>
-<li>HELIOS_CONCAT&#160;:&#160;<a class="el" href="core_8hpp.html#a46e4d6cbf2452fa304c6d00871af9dfb">core.hpp</a></li>
-<li>HELIOS_CONCAT_IMPL&#160;:&#160;<a class="el" href="core_8hpp.html#a285f4973c3550f0a19a20ebcb3c58186">core.hpp</a></li>
-<li>HELIOS_CRITICAL&#160;:&#160;<a class="el" href="logger_8hpp.html#afbc72b7a3187584885014282cfb8e42f">logger.hpp</a></li>
-<li>HELIOS_CRITICAL_LOGGER&#160;:&#160;<a class="el" href="logger_8hpp.html#a602708e01da4a37b5b848d491a454853">logger.hpp</a></li>
-<li>HELIOS_DEBUG&#160;:&#160;<a class="el" href="logger_8hpp.html#a19dfad10d07cd557a99345e3d51cba95">logger.hpp</a></li>
-<li>HELIOS_DEBUG_BREAK&#160;:&#160;<a class="el" href="core_8hpp.html#ada983df2522c351b671d6943887b483e">core.hpp</a></li>
-<li>HELIOS_DEBUG_LOGGER&#160;:&#160;<a class="el" href="logger_8hpp.html#a687d858170de2c4816418701c5aaae06">logger.hpp</a></li>
-<li>HELIOS_DEFER&#160;:&#160;<a class="el" href="defer_8hpp.html#a170e91546778eb9eceda22d3896b5ad0">defer.hpp</a></li>
-<li>HELIOS_DEFER_CALL&#160;:&#160;<a class="el" href="defer_8hpp.html#ab0802fad42e1ecfeaed34b159cc468a4">defer.hpp</a></li>
-<li>HELIOS_ERROR&#160;:&#160;<a class="el" href="logger_8hpp.html#a5ee2b388c5e1155f8aa9f680e3b8cf3b">logger.hpp</a></li>
-<li>HELIOS_ERROR_LOGGER&#160;:&#160;<a class="el" href="logger_8hpp.html#a37b6be687294d88fbcd44c429f71d6b2">logger.hpp</a></li>
-<li>HELIOS_EXPECT_FALSE&#160;:&#160;<a class="el" href="core_8hpp.html#af2f0a86a0f14c42148fbec11f27b4690">core.hpp</a></li>
-<li>HELIOS_EXPECT_TRUE&#160;:&#160;<a class="el" href="core_8hpp.html#ad21e58157e9f3c2d9c39f2ea5423d017">core.hpp</a></li>
-<li>HELIOS_EXPORT&#160;:&#160;<a class="el" href="core_8hpp.html#addef039204a27478a1fff77081d409bd">core.hpp</a></li>
-<li>HELIOS_FORCE_INLINE&#160;:&#160;<a class="el" href="core_8hpp.html#a754fba4b22744e64a97ad1afc9065bc1">core.hpp</a></li>
-<li>HELIOS_INFO&#160;:&#160;<a class="el" href="logger_8hpp.html#aed26636d1bb7300df2a5f8522a93b0d6">logger.hpp</a></li>
-<li>HELIOS_INFO_LOGGER&#160;:&#160;<a class="el" href="logger_8hpp.html#a34d891adfd0761dc7a0d9b5ddd648c77">logger.hpp</a></li>
-<li>HELIOS_INVARIANT&#160;:&#160;<a class="el" href="assert_8hpp.html#a717b59a334b4e29f2d1bcd580de3d38f">assert.hpp</a></li>
-<li>HELIOS_NO_INLINE&#160;:&#160;<a class="el" href="core_8hpp.html#a95ef3dcee5d3dd81a75581aaa5a91b3a">core.hpp</a></li>
-<li>HELIOS_RELEASE_UNREACHABLE&#160;:&#160;<a class="el" href="core_8hpp.html#a0baa94baca2a0f972f63b78d01a9034d">core.hpp</a></li>
-<li>HELIOS_STRINGIFY&#160;:&#160;<a class="el" href="core_8hpp.html#a48f3e62b87770c7794446ce3015653b5">core.hpp</a></li>
-<li>HELIOS_STRINGIFY_IMPL&#160;:&#160;<a class="el" href="core_8hpp.html#a88543d6f718bdf82483fbcb4ee50f3ad">core.hpp</a></li>
-<li>HELIOS_TRACE&#160;:&#160;<a class="el" href="logger_8hpp.html#aacdbc6bd0ded553a9dccaccd7d96e80c">logger.hpp</a></li>
-<li>HELIOS_TRACE_LOGGER&#160;:&#160;<a class="el" href="logger_8hpp.html#a11e0be8a7f07214b0bfb8b05b60cd3ff">logger.hpp</a></li>
-<li>HELIOS_UNREACHABLE&#160;:&#160;<a class="el" href="core_8hpp.html#a97e756b8b0cf2000780f149894e07d0c">core.hpp</a></li>
-<li>HELIOS_VERIFY&#160;:&#160;<a class="el" href="assert_8hpp.html#a8b8608656bafeab9911c16dce4827a04">assert.hpp</a></li>
-<li>HELIOS_VERIFY_LOGGER&#160;:&#160;<a class="el" href="assert_8hpp.html#a205f14a4c95d5eb9a6205c2296ad1fff">assert.hpp</a></li>
-<li>HELIOS_WARN&#160;:&#160;<a class="el" href="logger_8hpp.html#abee1a45a543b16109f05136a9771e86c">logger.hpp</a></li>
-<li>HELIOS_WARN_LOGGER&#160;:&#160;<a class="el" href="logger_8hpp.html#ad46e8332c8d2bf0fcf211134516261d0">logger.hpp</a></li>
-</ul>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HELIOS_DEFER</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">  <span class="keyword">auto</span> <a class="code hl_define" href="core_8hpp.html#a46e4d6cbf2452fa304c6d00871af9dfb">HELIOS_CONCAT</a>(_defer_, __LINE__) = \</div>
+<div class="line">      ::helios::utils::details::DeferHelper() + [&amp;]()</div>
+<div class="ttc" id="acore_8hpp_html_a46e4d6cbf2452fa304c6d00871af9dfb"><div class="ttname"><a href="core_8hpp.html#a46e4d6cbf2452fa304c6d00871af9dfb">HELIOS_CONCAT</a></div><div class="ttdeci">#define HELIOS_CONCAT(a, b)</div><div class="ttdef"><b>Definition</b> <a href="core_8hpp_source.html#l00111">core.hpp:111</a></div></div>
+</div><!-- fragment --><dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2defer_8hpp-example.html#a1">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/defer.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="defer_8hpp_source.html#l00090">90</a> of file <a class="el" href="defer_8hpp_source.html">defer.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ab0802fad42e1ecfeaed34b159cc468a4" name="ab0802fad42e1ecfeaed34b159cc468a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0802fad42e1ecfeaed34b159cc468a4">&#9670;&#160;</a></span>HELIOS_DEFER_CALL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HELIOS_DEFER_CALL</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">callable</td><td>)</td>
+          <td>&#160;&#160;&#160;auto <a class="el" href="core_8hpp.html#a46e4d6cbf2452fa304c6d00871af9dfb">HELIOS_CONCAT</a>(_defer_, __LINE__) = <a class="el" href="classhelios_1_1utils_1_1Defer.html">::helios::utils::Defer</a>(callable)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2defer_8hpp-example.html#a0">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/defer.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="defer_8hpp_source.html#l00077">77</a> of file <a class="el" href="defer_8hpp_source.html">defer.hpp</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_aebb8dcc11953d78e620bbef0b9e2183.html">core</a></li><li class="navelem"><a class="el" href="dir_8f49dd062eda24395df599c5385a3cb1.html">include</a></li><li class="navelem"><a class="el" href="dir_23069df5183a130785923908e80258ad.html">helios</a></li><li class="navelem"><a class="el" href="dir_2da2d982aeea650f7dd0b34d7b8d0119.html">core</a></li><li class="navelem"><a class="el" href="dir_e4be5508b76bccd0c02d62302f080517.html">utils</a></li><li class="navelem"><a class="el" href="defer_8hpp.html">defer.hpp</a></li>
     <li class="footer">
       <div style="text-align: center; padding: 1em 0; font-size: 0.9em;">
         <div style="margin-bottom: 0.5em;">

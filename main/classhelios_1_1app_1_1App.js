@@ -7,7 +7,7 @@ var classhelios_1_1app_1_1App =
     [ "App", "classhelios_1_1app_1_1App.html#a40b48b561b805063e303833071c3afbf", null ],
     [ "App", "classhelios_1_1app_1_1App.html#a5de83704b739a591e9234fbdc62a57ff", null ],
     [ "~App", "classhelios_1_1app_1_1App.html#acf734aa3c7b0408127b3552551df50f4", null ],
-    [ "AddDynamicModule", "classhelios_1_1app_1_1App.html#afa9aee3c3108c42adddb68cf34dc22a8", null ],
+    [ "AddDynamicModule", "classhelios_1_1app_1_1App.html#ad9e2e62fb2756595702130190866da6f", null ],
     [ "AddEvent", "classhelios_1_1app_1_1App.html#a3b4025dae2e9d36c8c1ccd175eb3b0d9", null ],
     [ "AddEvents", "classhelios_1_1app_1_1App.html#a2633b7daf263d352adff406f60db9b60", null ],
     [ "AddModule", "classhelios_1_1app_1_1App.html#ad00f452ada02721db7eae955b0eba1f5", null ],
