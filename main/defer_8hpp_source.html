@@ -244,7 +244,7 @@ $(document).ready(function(){initNavTree('defer_8hpp_source.html',''); initResiz
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment"> * HELIOS_DEFER_CALL(cleanup);</span></div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment"> * @endcode</span></div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="defer_8hpp.html#ab0802fad42e1ecfeaed34b159cc468a4">   77</a></span><span class="preprocessor">#define HELIOS_DEFER_CALL(callable) auto HELIOS_CONCAT(_defer_, __LINE__) = ::helios::utils::Defer(callable)</span><span class="comment"></span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="defer_8hpp.html#ab0802fad42e1ecfeaed34b159cc468a4">   77</a></span><span class="preprocessor">#define HELIOS_DEFER_CALL(callable) auto HELIOS_CONCAT(_defer_, __COUNTER__) = ::helios::utils::Defer(callable)</span><span class="comment"></span></div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">/**</span></div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment"> * @brief Defers execution of an inline lambda until the end of the current scope.</span></div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment"> * The lambda is written directly after the macro without explicit capture list.</span></div>
@@ -257,8 +257,8 @@ $(document).ready(function(){initNavTree('defer_8hpp_source.html',''); initResiz
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment"> * };</span></div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment"> * @endcode</span></div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment"> */</span><span class="preprocessor"></span></div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno"><a class="line" href="defer_8hpp.html#a170e91546778eb9eceda22d3896b5ad0">   90</a></span><span class="preprocessor">#define HELIOS_DEFER                      \</span></div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="preprocessor">  auto HELIOS_CONCAT(_defer_, __LINE__) = \</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno"><a class="line" href="defer_8hpp.html#a170e91546778eb9eceda22d3896b5ad0">   90</a></span><span class="preprocessor">#define HELIOS_DEFER                         \</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="preprocessor">  auto HELIOS_CONCAT(_defer_, __COUNTER__) = \</span></div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="preprocessor">      ::helios::utils::details::DeferHelper() + [&amp;]()  </span><span class="comment">// NOLINT(bugprone-macro-parentheses)</span></div>
 <div class="ttc" id="aclasshelios_1_1utils_1_1Defer_html"><div class="ttname"><a href="classhelios_1_1utils_1_1Defer.html">helios::utils::Defer</a></div><div class="ttdef"><b>Definition</b> <a href="defer_8hpp_source.html#l00030">defer.hpp:30</a></div></div>
 <div class="ttc" id="aclasshelios_1_1utils_1_1Defer_html_a604ebc85bf66da0dcabc866a86a8d74c"><div class="ttname"><a href="classhelios_1_1utils_1_1Defer.html#a604ebc85bf66da0dcabc866a86a8d74c">helios::utils::Defer::operator=</a></div><div class="ttdeci">Defer &amp; operator=(const Defer &amp;)=delete</div></div>

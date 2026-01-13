@@ -194,7 +194,7 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:ab0802fad42e1ecfeaed34b159cc468a4" id="r_ab0802fad42e1ecfeaed34b159cc468a4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defer_8hpp.html#ab0802fad42e1ecfeaed34b159cc468a4">HELIOS_DEFER_CALL</a>(callable)&#160;&#160;&#160;auto <a class="el" href="core_8hpp.html#a46e4d6cbf2452fa304c6d00871af9dfb">HELIOS_CONCAT</a>(_defer_, __LINE__) = <a class="el" href="classhelios_1_1utils_1_1Defer.html">::helios::utils::Defer</a>(callable)</td></tr>
+<tr class="memitem:ab0802fad42e1ecfeaed34b159cc468a4" id="r_ab0802fad42e1ecfeaed34b159cc468a4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defer_8hpp.html#ab0802fad42e1ecfeaed34b159cc468a4">HELIOS_DEFER_CALL</a>(callable)&#160;&#160;&#160;auto <a class="el" href="core_8hpp.html#a46e4d6cbf2452fa304c6d00871af9dfb">HELIOS_CONCAT</a>(_defer_, __COUNTER__) = <a class="el" href="classhelios_1_1utils_1_1Defer.html">::helios::utils::Defer</a>(callable)</td></tr>
 <tr class="separator:ab0802fad42e1ecfeaed34b159cc468a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a170e91546778eb9eceda22d3896b5ad0" id="r_a170e91546778eb9eceda22d3896b5ad0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defer_8hpp.html#a170e91546778eb9eceda22d3896b5ad0">HELIOS_DEFER</a></td></tr>
 <tr class="separator:a170e91546778eb9eceda22d3896b5ad0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -211,7 +211,7 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">  <span class="keyword">auto</span> <a class="code hl_define" href="core_8hpp.html#a46e4d6cbf2452fa304c6d00871af9dfb">HELIOS_CONCAT</a>(_defer_, __LINE__) = \</div>
+<b>Value:</b><div class="fragment"><div class="line">  <span class="keyword">auto</span> <a class="code hl_define" href="core_8hpp.html#a46e4d6cbf2452fa304c6d00871af9dfb">HELIOS_CONCAT</a>(_defer_, __COUNTER__) = \</div>
 <div class="line">      ::helios::utils::details::DeferHelper() + [&amp;]()</div>
 <div class="ttc" id="acore_8hpp_html_a46e4d6cbf2452fa304c6d00871af9dfb"><div class="ttname"><a href="core_8hpp.html#a46e4d6cbf2452fa304c6d00871af9dfb">HELIOS_CONCAT</a></div><div class="ttdeci">#define HELIOS_CONCAT(a, b)</div><div class="ttdef"><b>Definition</b> <a href="core_8hpp_source.html#l00111">core.hpp:111</a></div></div>
 </div><!-- fragment --><dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2defer_8hpp-example.html#a1">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/defer.hpp</a>.</dd>
@@ -232,7 +232,7 @@ Macros</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">callable</td><td>)</td>
-          <td>&#160;&#160;&#160;auto <a class="el" href="core_8hpp.html#a46e4d6cbf2452fa304c6d00871af9dfb">HELIOS_CONCAT</a>(_defer_, __LINE__) = <a class="el" href="classhelios_1_1utils_1_1Defer.html">::helios::utils::Defer</a>(callable)</td>
+          <td>&#160;&#160;&#160;auto <a class="el" href="core_8hpp.html#a46e4d6cbf2452fa304c6d00871af9dfb">HELIOS_CONCAT</a>(_defer_, __COUNTER__) = <a class="el" href="classhelios_1_1utils_1_1Defer.html">::helios::utils::Defer</a>(callable)</td>
         </tr>
       </table>
 </div><div class="memdoc">
