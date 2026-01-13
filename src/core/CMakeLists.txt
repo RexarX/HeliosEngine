@@ -1,5 +1,6 @@
 include(TargetUtils)
 include(SimdUtils)
+include(Sanitizers)
 
 # Explicitly list all header files
 set(CORE_HEADERS
@@ -143,6 +144,7 @@ helios_target_set_warnings(helios_core)
 helios_target_set_output_dirs(helios_core)
 helios_target_add_pch(helios_core ${CMAKE_CURRENT_SOURCE_DIR}/include/helios/core_pch.hpp)
 helios_target_set_folder(helios_core "Helios/Modules")
+helios_target_enable_sanitizers(helios_core)
 
 # Enable Position Independent Code for linking into shared libraries
 set_target_properties(helios_core PROPERTIES POSITION_INDEPENDENT_CODE ON)

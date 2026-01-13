@@ -1,6 +1,7 @@
 # Test utilities for Helios Engine
 
 include(TargetUtils)
+include(Sanitizers)
 
 function(helios_add_test)
     set(options "")
@@ -42,6 +43,9 @@ function(helios_add_test)
     if(HELIOS_ENABLE_LTO)
         helios_target_enable_lto(${HELIOS_TEST_TARGET})
     endif()
+
+    # Enable sanitizers for Debug builds
+    helios_target_enable_sanitizers(${HELIOS_TEST_TARGET})
 
     # Link doctest (using new helios::*::* naming convention)
     target_link_libraries(${HELIOS_TEST_TARGET} PRIVATE

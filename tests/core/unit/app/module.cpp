@@ -1,5 +1,6 @@
 #include <doctest/doctest.h>
 
+#include <helios/core/app/app.hpp>
 #include <helios/core/app/module.hpp>
 
 #include <string_view>
@@ -144,68 +145,68 @@ TEST_SUITE("app::Module") {
 
   TEST_CASE("Module:: Build And Destroy Interface") {
     BasicModule module;
-    App* app_ptr = nullptr;
+    App app;
 
-    module.Build(*app_ptr);
-    module.Destroy(*app_ptr);
+    module.Build(app);
+    module.Destroy(app);
   }
 
   TEST_CASE("Module:: Default IsReady Returns True") {
     BasicModule module;
-    App* app_ptr = nullptr;
+    App app;
 
-    CHECK(module.IsReady(*app_ptr));
+    CHECK(module.IsReady(app));
   }
 
   TEST_CASE("Module:: Default Finish Does Nothing") {
     BasicModule module;
-    App* app_ptr = nullptr;
+    App app;
 
     // Should not throw or crash
-    module.Finish(*app_ptr);
+    module.Finish(app);
   }
 
   TEST_CASE("Module:: Custom IsReady And Finish") {
     ModuleWithReadyAndFinish module;
-    App* app_ptr = nullptr;
+    App app;
 
     CHECK_FALSE(module.is_ready_called);
     CHECK_FALSE(module.finish_called);
 
     // Call IsReady
-    CHECK(module.IsReady(*app_ptr));
+    CHECK(module.IsReady(app));
     CHECK(module.is_ready_called);
 
     // Call Finish
-    module.Finish(*app_ptr);
+    module.Finish(app);
     CHECK(module.finish_called);
   }
 
   TEST_CASE("Module:: IsReady Can Return False") {
     ModuleWithReadyAndFinish module;
     module.should_be_ready = false;
-    App* app_ptr = nullptr;
+    App app;
 
-    CHECK_FALSE(module.IsReady(*app_ptr));
+    CHECK_FALSE(module.IsReady(app));
   }
 
   TEST_CASE("Module:: AsyncReady Pattern") {
     AsyncReadyModule module;
-    App* app_ptr = nullptr;
+    App app;
 
     // Initially not ready
-    CHECK_FALSE(module.IsReady(*app_ptr));
+    CHECK_FALSE(module.IsReady(app));
     CHECK_EQ(module.ready_check_count, 1);
 
-    CHECK_FALSE(module.IsReady(*app_ptr));
+    CHECK_FALSE(module.IsReady(app));
     CHECK_EQ(module.ready_check_count, 2);
 
     // After enough checks, should be ready
-    CHECK(module.IsReady(*app_ptr));
+    CHECK(module.IsReady(app));
     CHECK_EQ(module.ready_check_count, 3);
 
     // Still ready on subsequent checks
-    CHECK(module.IsReady(*app_ptr));
+    CHECK(module.IsReady(app));
     CHECK_EQ(module.ready_check_count, 4);
   }
 }

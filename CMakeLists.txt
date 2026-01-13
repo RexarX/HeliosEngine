@@ -208,6 +208,9 @@ set(HELIOS_ROOT_DIR ${PROJECT_SOURCE_DIR})
 # Include module utilities
 include(cmake/ModuleUtils.cmake)
 
+# Include sanitizer support
+include(cmake/Sanitizers.cmake)
+
 # For CMake 4.0+ compatibility with older packages that use cmake_minimum_required < 3.5
 # This must be set before including Dependencies.cmake which may download old packages
 if(CMAKE_VERSION VERSION_GREATER_EQUAL "4.0")
@@ -216,6 +219,9 @@ endif()
 
 # Dependency management (system -> vcpkg -> CPM fallback)
 include(cmake/Dependencies.cmake)
+
+# Print sanitizer configuration
+helios_print_sanitizer_status()
 
 # Third-party libraries
 add_subdirectory(third-party)

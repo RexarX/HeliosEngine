@@ -12,6 +12,8 @@
 
 include_guard(GLOBAL)
 
+include(Sanitizers)
+
 # ============================================================================
 # Module Registration and Build Options
 # ============================================================================
@@ -503,6 +505,9 @@ function(helios_add_module)
 
         # Warning settings
         helios_target_set_warnings(${MODULE_TARGET_NAME})
+
+        # Sanitizer settings
+        helios_target_enable_sanitizers(${MODULE_TARGET_NAME})
 
         # Output directories
         helios_target_set_output_dirs(${MODULE_TARGET_NAME})

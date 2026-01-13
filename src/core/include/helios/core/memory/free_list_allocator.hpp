@@ -379,10 +379,22 @@ inline AllocationResult FreeListAllocator::Allocate(size_t size, size_t alignmen
     free_block_count_.fetch_sub(1, std::memory_order_relaxed);
 
     // If there's enough space left, create a new free block
+    // Ensure the new free block is properly aligned for FreeBlockHeader
+    constexpr size_t header_alignment = alignof(FreeBlockHeader);
     constexpr size_t min_free_block_size = sizeof(FreeBlockHeader) + 16;
-    if (remaining_size >= min_free_block_size) {
-      auto* new_free_block = reinterpret_cast<FreeBlockHeader*>(block_start + total_size);
-      new_free_block->size = remaining_size;
+
+    // Calculate aligned position for the new free block
+    auto* potential_new_block = block_start + total_size;
+    const auto potential_addr = reinterpret_cast<uintptr_t>(potential_new_block);
+    const size_t alignment_offset = (header_alignment - (potential_addr % header_alignment)) % header_alignment;
+    auto* aligned_new_block = potential_new_block + alignment_offset;
+
+    // Check if there's still enough space after alignment adjustment
+    const size_t adjusted_remaining_size = remaining_size > alignment_offset ? remaining_size - alignment_offset : 0;
+
+    if (adjusted_remaining_size >= min_free_block_size) {
+      auto* new_free_block = reinterpret_cast<FreeBlockHeader*>(aligned_new_block);
+      new_free_block->size = adjusted_remaining_size;
       new_free_block->next = free_list_head_;
       free_list_head_ = new_free_block;
       free_block_count_.fetch_add(1, std::memory_order_relaxed);

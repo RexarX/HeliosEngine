@@ -74,7 +74,7 @@ struct DeferHelper {
  * HELIOS_DEFER_CALL(cleanup);
  * @endcode
  */
-#define HELIOS_DEFER_CALL(callable) auto HELIOS_CONCAT(_defer_, __LINE__) = ::helios::utils::Defer(callable)
+#define HELIOS_DEFER_CALL(callable) auto HELIOS_CONCAT(_defer_, __COUNTER__) = ::helios::utils::Defer(callable)
 /**
  * @brief Defers execution of an inline lambda until the end of the current scope.
  * The lambda is written directly after the macro without explicit capture list.
@@ -87,6 +87,6 @@ struct DeferHelper {
  * };
  * @endcode
  */
-#define HELIOS_DEFER                      \
-  auto HELIOS_CONCAT(_defer_, __LINE__) = \
+#define HELIOS_DEFER                         \
+  auto HELIOS_CONCAT(_defer_, __COUNTER__) = \
       ::helios::utils::details::DeferHelper() + [&]()  // NOLINT(bugprone-macro-parentheses)
