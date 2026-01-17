@@ -158,6 +158,7 @@ endif()
 target_link_libraries(helios_core
     PUBLIC
         helios::boost::unordered
+        helios::concurrentqueue::concurrentqueue
         helios::ctti::ctti
         helios::stduuid::stduuid
         helios::taskflow::taskflow

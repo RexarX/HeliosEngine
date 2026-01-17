@@ -11,10 +11,6 @@
 
 using namespace helios::ecs;
 
-// ============================================================================
-// Test Suite
-// ============================================================================
-
 TEST_SUITE("ecs::BuiltinEvents") {
   // ============================================================================
   // EntitySpawnedEvent Tests
@@ -153,23 +149,23 @@ TEST_SUITE("ecs::BuiltinEvents") {
   // ShutdownExitCode Tests
   // ============================================================================
 
-  TEST_CASE("ShutdownExitCode: Success value is 0") {
-    CHECK_EQ(static_cast<uint8_t>(ShutdownExitCode::Success), 0U);
+  TEST_CASE("ShutdownExitCode::k: Success value is 0") {
+    CHECK_EQ(static_cast<uint8_t>(ShutdownExitCode::kSuccess), 0U);
   }
 
-  TEST_CASE("ShutdownExitCode: Failure value is 1") {
-    CHECK_EQ(static_cast<uint8_t>(ShutdownExitCode::Failure), 1U);
+  TEST_CASE("ShutdownExitCode::k: Failure value is 1") {
+    CHECK_EQ(static_cast<uint8_t>(ShutdownExitCode::kFailure), 1U);
   }
 
-  TEST_CASE("ShutdownExitCode: Can be compared") {
-    ShutdownExitCode code1 = ShutdownExitCode::Success;
-    ShutdownExitCode code2 = ShutdownExitCode::Success;
+  TEST_CASE("ShutdownExitCode::k: Can be compared") {
+    constexpr auto code1 = ShutdownExitCode::kSuccess;
+    constexpr auto code2 = ShutdownExitCode::kSuccess;
     CHECK_EQ(code1, code2);
   }
 
-  TEST_CASE("ShutdownExitCode: Different values are not equal") {
-    ShutdownExitCode code1 = ShutdownExitCode::Success;
-    ShutdownExitCode code2 = ShutdownExitCode::Failure;
+  TEST_CASE("ShutdownExitCode::k: Different values are not equal") {
+    constexpr auto code1 = ShutdownExitCode::kSuccess;
+    constexpr auto code2 = ShutdownExitCode::kFailure;
     CHECK_NE(code1, code2);
   }
 
@@ -191,12 +187,12 @@ TEST_SUITE("ecs::BuiltinEvents") {
 
   TEST_CASE("ShutdownEvent: Default construction uses success exit code") {
     ShutdownEvent event{};
-    CHECK_EQ(event.exit_code, ShutdownExitCode::Success);
+    CHECK_EQ(event.exit_code, ShutdownExitCode::kSuccess);
   }
 
   TEST_CASE("ShutdownEvent: Can set exit code") {
-    ShutdownEvent event{.exit_code = ShutdownExitCode::Failure};
-    CHECK_EQ(event.exit_code, ShutdownExitCode::Failure);
+    ShutdownEvent event{.exit_code = ShutdownExitCode::kFailure};
+    CHECK_EQ(event.exit_code, ShutdownExitCode::kFailure);
   }
 
   TEST_CASE("ShutdownEvent: Is trivially copyable") {
@@ -208,13 +204,13 @@ TEST_SUITE("ecs::BuiltinEvents") {
     world.AddEvent<ShutdownEvent>();
 
     // Emit event with success
-    world.WriteEvents<ShutdownEvent>().Write(ShutdownEvent{.exit_code = ShutdownExitCode::Success});
+    world.WriteEvents<ShutdownEvent>().Write(ShutdownEvent{.exit_code = ShutdownExitCode::kSuccess});
 
     // Read event
     auto reader = world.ReadEvents<ShutdownEvent>();
     const auto events = reader.Read();
     REQUIRE_EQ(events.size(), 1);
-    CHECK_EQ(events[0].exit_code, ShutdownExitCode::Success);
+    CHECK_EQ(events[0].exit_code, ShutdownExitCode::kSuccess);
   }
 
   TEST_CASE("ShutdownEvent: Can be emitted with failure code") {
@@ -222,13 +218,13 @@ TEST_SUITE("ecs::BuiltinEvents") {
     world.AddEvent<ShutdownEvent>();
 
     // Emit event with failure
-    world.WriteEvents<ShutdownEvent>().Write(ShutdownEvent{.exit_code = ShutdownExitCode::Failure});
+    world.WriteEvents<ShutdownEvent>().Write(ShutdownEvent{.exit_code = ShutdownExitCode::kFailure});
 
     // Read event
     auto reader = world.ReadEvents<ShutdownEvent>();
     const auto events = reader.Read();
     REQUIRE_EQ(events.size(), 1);
-    CHECK_EQ(events[0].exit_code, ShutdownExitCode::Failure);
+    CHECK_EQ(events[0].exit_code, ShutdownExitCode::kFailure);
   }
 
   TEST_CASE("ShutdownEvent: Multiple events can be stored") {
@@ -236,18 +232,18 @@ TEST_SUITE("ecs::BuiltinEvents") {
     world.AddEvent<ShutdownEvent>();
 
     // Emit multiple events with different codes
-    world.WriteEvents<ShutdownEvent>().Write(ShutdownEvent{.exit_code = ShutdownExitCode::Success});
-    world.WriteEvents<ShutdownEvent>().Write(ShutdownEvent{.exit_code = ShutdownExitCode::Failure});
-    world.WriteEvents<ShutdownEvent>().Write(ShutdownEvent{.exit_code = ShutdownExitCode::Success});
+    world.WriteEvents<ShutdownEvent>().Write(ShutdownEvent{.exit_code = ShutdownExitCode::kSuccess});
+    world.WriteEvents<ShutdownEvent>().Write(ShutdownEvent{.exit_code = ShutdownExitCode::kFailure});
+    world.WriteEvents<ShutdownEvent>().Write(ShutdownEvent{.exit_code = ShutdownExitCode::kSuccess});
 
     // Read events
     auto reader = world.ReadEvents<ShutdownEvent>();
     const auto events = reader.Read();
     REQUIRE_EQ(events.size(), 3);
 
-    CHECK_EQ(events[0].exit_code, ShutdownExitCode::Success);
-    CHECK_EQ(events[1].exit_code, ShutdownExitCode::Failure);
-    CHECK_EQ(events[2].exit_code, ShutdownExitCode::Success);
+    CHECK_EQ(events[0].exit_code, ShutdownExitCode::kSuccess);
+    CHECK_EQ(events[1].exit_code, ShutdownExitCode::kFailure);
+    CHECK_EQ(events[2].exit_code, ShutdownExitCode::kSuccess);
   }
 
   // ============================================================================
@@ -288,7 +284,7 @@ TEST_SUITE("ecs::BuiltinEvents") {
     // Emit events of different types
     world.WriteEvents<EntitySpawnedEvent>().Write(EntitySpawnedEvent{.entity = Entity{1, 1}});
     world.WriteEvents<EntityDestroyedEvent>().Write(EntityDestroyedEvent{.entity = Entity{2, 1}});
-    world.WriteEvents<ShutdownEvent>().Write(ShutdownEvent{.exit_code = ShutdownExitCode::Success});
+    world.WriteEvents<ShutdownEvent>().Write(ShutdownEvent{.exit_code = ShutdownExitCode::kSuccess});
 
     // Read events of different types
     auto spawned_reader = world.ReadEvents<EntitySpawnedEvent>();
@@ -304,7 +300,7 @@ TEST_SUITE("ecs::BuiltinEvents") {
 
     CHECK_EQ(spawned[0].entity.Index(), 1U);
     CHECK_EQ(destroyed[0].entity.Index(), 2U);
-    CHECK_EQ(shutdown[0].exit_code, ShutdownExitCode::Success);
+    CHECK_EQ(shutdown[0].exit_code, ShutdownExitCode::kSuccess);
   }
 
   TEST_CASE("Clear policy affects event persistence") {
@@ -314,7 +310,7 @@ TEST_SUITE("ecs::BuiltinEvents") {
 
     // Emit both event types
     world.WriteEvents<EntitySpawnedEvent>().Write(EntitySpawnedEvent{.entity = Entity{1, 1}});
-    world.WriteEvents<ShutdownEvent>().Write(ShutdownEvent{.exit_code = ShutdownExitCode::Success});
+    world.WriteEvents<ShutdownEvent>().Write(ShutdownEvent{.exit_code = ShutdownExitCode::kSuccess});
 
     // Read events
     {
@@ -351,9 +347,9 @@ TEST_SUITE("ecs::BuiltinEvents") {
     EntitySpawnedEvent event2 = event1;
     CHECK_EQ(event2.entity.Index(), 100U);
 
-    ShutdownEvent shutdown1{.exit_code = ShutdownExitCode::Failure};
+    ShutdownEvent shutdown1{.exit_code = ShutdownExitCode::kFailure};
     ShutdownEvent shutdown2 = shutdown1;
-    CHECK_EQ(shutdown2.exit_code, ShutdownExitCode::Failure);
+    CHECK_EQ(shutdown2.exit_code, ShutdownExitCode::kFailure);
   }
 
   TEST_CASE("Events can be move constructed") {
@@ -361,8 +357,8 @@ TEST_SUITE("ecs::BuiltinEvents") {
     EntitySpawnedEvent event2 = std::move(event1);
     CHECK_EQ(event2.entity.Index(), 100U);
 
-    ShutdownEvent shutdown1{.exit_code = ShutdownExitCode::Failure};
+    ShutdownEvent shutdown1{.exit_code = ShutdownExitCode::kFailure};
     ShutdownEvent shutdown2 = std::move(shutdown1);
-    CHECK_EQ(shutdown2.exit_code, ShutdownExitCode::Failure);
+    CHECK_EQ(shutdown2.exit_code, ShutdownExitCode::kFailure);
   }
 }

@@ -1629,9 +1629,8 @@ TEST_SUITE("utils::FunctionalAdapters") {
 
     SUBCASE("Slide with Filter") {
       std::vector<int> data = {1, 2, 3, 4, 5};
-      auto result = SlideAdapterFromRange(data, 2)
-                        .Filter([](const std::vector<int>& window) { return window[0] % 2 == 1; })
-                        .Collect();
+      auto result =
+          SlideAdapterFromRange(data, 2).Filter([](const auto& window) { return window[0] % 2 == 1; }).Collect();
 
       CHECK_EQ(result.size(), 2);
       CHECK_EQ(result[0], std::vector<int>{1, 2});
@@ -1775,7 +1774,112 @@ TEST_SUITE("utils::FunctionalAdapters") {
     }
   }
 
-  TEST_CASE("Complex adapter chains with new adapters") {
+  TEST_CASE("ConcatAdapter") {
+    SUBCASE("Basic concatenation") {
+      std::vector<int> first = {1, 2, 3};
+      std::vector<int> second = {4, 5, 6};
+      auto concat = ConcatAdapterFromRange(first, second);
+      auto result = concat.Collect();
+
+      CHECK_EQ(result, std::vector<int>{1, 2, 3, 4, 5, 6});
+    }
+
+    SUBCASE("Empty first range") {
+      std::vector<int> first = {};
+      std::vector<int> second = {1, 2, 3};
+      auto concat = ConcatAdapterFromRange(first, second);
+      auto result = concat.Collect();
+
+      CHECK_EQ(result, std::vector<int>{1, 2, 3});
+    }
+
+    SUBCASE("Empty second range") {
+      std::vector<int> first = {1, 2, 3};
+      std::vector<int> second = {};
+      auto concat = ConcatAdapterFromRange(first, second);
+      auto result = concat.Collect();
+
+      CHECK_EQ(result, std::vector<int>{1, 2, 3});
+    }
+
+    SUBCASE("Both empty ranges") {
+      std::vector<int> first = {};
+      std::vector<int> second = {};
+      auto concat = ConcatAdapterFromRange(first, second);
+      auto result = concat.Collect();
+
+      CHECK(result.empty());
+    }
+
+    SUBCASE("Const ranges") {
+      const std::vector<int> first = {1, 2, 3};
+      const std::vector<int> second = {4, 5, 6};
+      auto concat = ConcatAdapterFromRange(first, second);
+      auto result = concat.Collect();
+
+      CHECK_EQ(result, std::vector<int>{1, 2, 3, 4, 5, 6});
+    }
+
+    SUBCASE("Concat with Filter") {
+      std::vector<int> first = {1, 2, 3};
+      std::vector<int> second = {4, 5, 6};
+      auto result = ConcatAdapterFromRange(first, second).Filter([](int x) { return x % 2 == 0; }).Collect();
+
+      CHECK_EQ(result, std::vector<int>{2, 4, 6});
+    }
+
+    SUBCASE("Concat with Map") {
+      std::vector<int> first = {1, 2};
+      std::vector<int> second = {3, 4};
+      auto result = ConcatAdapterFromRange(first, second).Map([](int x) { return x * 2; }).Collect();
+
+      CHECK_EQ(result, std::vector<int>{2, 4, 6, 8});
+    }
+
+    SUBCASE("Concat with Take") {
+      std::vector<int> first = {1, 2, 3};
+      std::vector<int> second = {4, 5, 6};
+      auto result = ConcatAdapterFromRange(first, second).Take(4).Collect();
+
+      CHECK_EQ(result, std::vector<int>{1, 2, 3, 4});
+    }
+
+    SUBCASE("Concat with Skip") {
+      std::vector<int> first = {1, 2, 3};
+      std::vector<int> second = {4, 5, 6};
+      auto result = ConcatAdapterFromRange(first, second).Skip(2).Collect();
+
+      CHECK_EQ(result, std::vector<int>{3, 4, 5, 6});
+    }
+
+    SUBCASE("Iteration via range-based for") {
+      std::vector<int> first = {1, 2};
+      std::vector<int> second = {3, 4};
+      auto concat = ConcatAdapterFromRange(first, second);
+
+      std::vector<int> result;
+      for (int val : concat) {
+        result.push_back(val);
+      }
+
+      CHECK_EQ(result, std::vector<int>{1, 2, 3, 4});
+    }
+
+    SUBCASE("Size calculation") {
+      std::vector<int> first = {1, 2, 3};
+      std::vector<int> second = {4, 5};
+      auto concat = ConcatAdapterFromRange(first, second);
+
+      size_t count = 0;
+      for ([[maybe_unused]] int val : concat) {
+        ++count;
+      }
+
+      CHECK_EQ(count, 5);
+    }
+  }
+
+  TEST_CASE("Complex adapter chains") {
     SUBCASE("Reverse -> Filter -> Map") {
       std::vector<int> data = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
       auto result = ReverseAdapterFromRange(data)
@@ -1796,7 +1900,7 @@ TEST_SUITE("utils::FunctionalAdapters") {
     SUBCASE("Slide -> Map -> Filter") {
       std::vector<int> data = {1, 2, 3, 4, 5};
       auto result = SlideAdapterFromRange(data, 2)
-                        .Map([](const std::vector<int>& window) { return window[0] + window[1]; })
+                        .Map([](const auto& window) { return window[0] + window[1]; })
                         .Filter([](int sum) { return sum > 4; })
                         .Collect();
 
@@ -1814,5 +1918,4 @@ TEST_SUITE("utils::FunctionalAdapters") {
       CHECK_EQ(result, std::vector<int>{5, 8});
     }
   }
-
-}  // TEST_SUITE
+}

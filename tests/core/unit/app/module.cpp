@@ -14,6 +14,37 @@ struct BasicModule final : public Module {
   void Destroy(App& /*app*/) override {}
 };
 
+struct ConfigurableModule final : public Module {
+  int config_value = 0;
+  float multiplier = 1.0F;
+
+  ConfigurableModule() = default;
+  explicit ConfigurableModule(int value) : config_value(value) {}
+  ConfigurableModule(int value, float mult) : config_value(value), multiplier(mult) {}
+
+  void Build(App& /*app*/) override {}
+  void Destroy(App& /*app*/) override {}
+};
+
+struct NonDefaultConstructibleModule final : public Module {
+  int value_ = 0;
+
+  explicit NonDefaultConstructibleModule(int value) : value_(value) {}
+
+  void Build(App& /*app*/) override {}
+  void Destroy(App& /*app*/) override {}
+};
+
+struct AnotherNonDefaultModule final : public Module {
+  std::string_view name_;
+  int priority_ = 0;
+
+  AnotherNonDefaultModule(std::string_view name, int priority) : name_(name), priority_(priority) {}
+
+  void Build(App& /*app*/) override {}
+  void Destroy(App& /*app*/) override {}
+};
+
 struct ModuleWithReadyAndFinish final : public Module {
   mutable bool is_ready_called = false;
   bool finish_called = false;
@@ -58,15 +89,6 @@ struct AnotherModule final : public Module {
   void Destroy(App& /*app*/) override {}
 };
 
-struct NonDefaultConstructibleModule final : public Module {
-  explicit NonDefaultConstructibleModule(int value) : value_(value) {}
-
-  void Build(App& /*app*/) override {}
-  void Destroy(App& /*app*/) override {}
-
-  int value_ = 0;
-};
-
 struct NotAModule {
   void Build(App& /*app*/) {}
   void Destroy(App& /*app*/) {}
@@ -79,12 +101,26 @@ TEST_SUITE("app::Module") {
     CHECK(ModuleTrait<BasicModule>);
     CHECK(ModuleTrait<NamedModule>);
     CHECK(ModuleTrait<AnotherModule>);
+    CHECK(ModuleTrait<ConfigurableModule>);
+    CHECK(ModuleTrait<NonDefaultConstructibleModule>);
+    CHECK(ModuleTrait<AnotherNonDefaultModule>);
   }
 
   TEST_CASE("ModuleTrait: Invalid Module Types") {
     CHECK_FALSE(ModuleTrait<NotAModule>);
     CHECK_FALSE(ModuleTrait<int>);
-    CHECK_FALSE(ModuleTrait<NonDefaultConstructibleModule>);
+  }
+
+  TEST_CASE("DefaultConstructibleModuleTrait: Valid Modules") {
+    CHECK(DefaultConstructibleModuleTrait<BasicModule>);
+    CHECK(DefaultConstructibleModuleTrait<NamedModule>);
+    CHECK(DefaultConstructibleModuleTrait<AnotherModule>);
+    CHECK(DefaultConstructibleModuleTrait<ConfigurableModule>);
+  }
+
+  TEST_CASE("DefaultConstructibleModuleTrait: Non-Default Constructible Modules") {
+    CHECK_FALSE(DefaultConstructibleModuleTrait<NonDefaultConstructibleModule>);
+    CHECK_FALSE(DefaultConstructibleModuleTrait<AnotherNonDefaultModule>);
   }
 
   TEST_CASE("ModuleWithNameTrait: Valid Named Module") {
@@ -208,5 +244,80 @@ TEST_SUITE("app::Module") {
     // Still ready on subsequent checks
     CHECK(module.IsReady(app));
     CHECK_EQ(module.ready_check_count, 4);
+  }
+
+  TEST_CASE("App::AddModule: With Instance - Default Constructible") {
+    App app;
+    ConfigurableModule module(42, 2.5F);
+    app.AddModule(std::move(module));
+
+    CHECK_EQ(app.ModuleCount(), 1);
+    CHECK(app.ContainsModule<ConfigurableModule>());
+  }
+
+  TEST_CASE("App::AddModule: With Instance - Non-Default Constructible") {
+    App app;
+    app.AddModule(NonDefaultConstructibleModule(100));
+
+    CHECK_EQ(app.ModuleCount(), 1);
+    CHECK(app.ContainsModule<NonDefaultConstructibleModule>());
+  }
+
+  TEST_CASE("App::AddModule: With Instance - Multiple Args Constructor") {
+    App app;
+    app.AddModule(AnotherNonDefaultModule("TestModule", 5));
+
+    CHECK_EQ(app.ModuleCount(), 1);
+    CHECK(app.ContainsModule<AnotherNonDefaultModule>());
+  }
+
+  TEST_CASE("App::AddModule: With Instance - Duplicate Detection") {
+    App app;
+    app.AddModule(NonDefaultConstructibleModule(1));
+    app.AddModule(NonDefaultConstructibleModule(2));  // Should warn, not add
+
+    CHECK_EQ(app.ModuleCount(), 1);
+  }
+
+  TEST_CASE("App::AddModules: With Instances - Multiple Non-Default Constructible") {
+    App app;
+    app.AddModules(NonDefaultConstructibleModule(42), AnotherNonDefaultModule("Test", 10));
+
+    CHECK_EQ(app.ModuleCount(), 2);
+    CHECK(app.ContainsModule<NonDefaultConstructibleModule>());
+    CHECK(app.ContainsModule<AnotherNonDefaultModule>());
+  }
+
+  TEST_CASE("App::AddModules: With Instances - Mixed Constructibility") {
+    App app;
+    app.AddModules(ConfigurableModule(100, 3.0F), NonDefaultConstructibleModule(50));
+
+    CHECK_EQ(app.ModuleCount(), 2);
+    CHECK(app.ContainsModule<ConfigurableModule>());
+    CHECK(app.ContainsModule<NonDefaultConstructibleModule>());
+  }
+
+  TEST_CASE("App::AddModule: Method Chaining With Instance") {
+    App app;
+    app.AddModule(NonDefaultConstructibleModule(1))
+        .AddModule(AnotherNonDefaultModule("Chain", 2))
+        .AddModule<BasicModule>();
+
+    CHECK_EQ(app.ModuleCount(), 3);
+    CHECK(app.ContainsModule<NonDefaultConstructibleModule>());
+    CHECK(app.ContainsModule<AnotherNonDefaultModule>());
+    CHECK(app.ContainsModule<BasicModule>());
+  }
+
+  TEST_CASE("App::AddModules: Method Chaining With Instances") {
+    App app;
+    app.AddModules(NonDefaultConstructibleModule(1), AnotherNonDefaultModule("Test", 2))
+        .AddModules<BasicModule, NamedModule>();
+
+    CHECK_EQ(app.ModuleCount(), 4);
+    CHECK(app.ContainsModule<NonDefaultConstructibleModule>());
+    CHECK(app.ContainsModule<AnotherNonDefaultModule>());
+    CHECK(app.ContainsModule<BasicModule>());
+    CHECK(app.ContainsModule<NamedModule>());
   }
 }

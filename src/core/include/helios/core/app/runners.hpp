@@ -25,12 +25,12 @@ namespace helios::app {
   const auto& world = app.GetMainWorld();
 
   if (!world.HasEvent<ecs::ShutdownEvent>()) {
-    return {false, ecs::ShutdownExitCode::Success};
+    return {false, ecs::ShutdownExitCode::kSuccess};
   }
 
   const auto reader = world.ReadEvents<ecs::ShutdownEvent>();
   if (reader.Empty()) {
-    return {false, ecs::ShutdownExitCode::Success};
+    return {false, ecs::ShutdownExitCode::kSuccess};
   }
 
   // Return the first shutdown event's exit code
@@ -43,10 +43,10 @@ namespace helios::app {
  */
 [[nodiscard]] constexpr AppExitCode ToAppExitCode(ecs::ShutdownExitCode code) noexcept {
   switch (code) {
-    case ecs::ShutdownExitCode::Success:
-      return AppExitCode::Success;
+    case ecs::ShutdownExitCode::kSuccess:
+      return AppExitCode::kSuccess;
     default:
-      return AppExitCode::Failure;
+      return AppExitCode::kFailure;
   }
 }
 
@@ -94,10 +94,10 @@ inline AppExitCode DefaultRunner(App& app, DefaultRunnerConfig config = {}) {
     }
   } catch (const std::exception& exception) {
     HELIOS_CRITICAL("Application encountered an unhandled exception and will exit: {}!", exception.what());
-    return AppExitCode::Failure;
+    return AppExitCode::kFailure;
   }
 
-  return AppExitCode::Success;
+  return AppExitCode::kSuccess;
 }
 
 /**
@@ -147,10 +147,10 @@ inline AppExitCode FrameLimitedRunner(App& app, FrameLimitedRunnerConfig config)
     }
   } catch (const std::exception& exception) {
     HELIOS_CRITICAL("Application encountered an unhandled exception and will exit: {}!", exception.what());
-    return AppExitCode::Failure;
+    return AppExitCode::kFailure;
   }
 
-  return AppExitCode::Success;
+  return AppExitCode::kSuccess;
 }
 
 /**
@@ -205,10 +205,10 @@ inline AppExitCode TimedRunner(App& app, TimedRunnerConfig config) {
     }
   } catch (const std::exception& exception) {
     HELIOS_CRITICAL("Application encountered an unhandled exception and will exit: {}!", exception.what());
-    return AppExitCode::Failure;
+    return AppExitCode::kFailure;
   }
 
-  return AppExitCode::Success;
+  return AppExitCode::kSuccess;
 }
 
 /**
@@ -282,10 +282,10 @@ inline AppExitCode FixedTimestepRunner(App& app, FixedTimestepRunnerConfig confi
     }
   } catch (const std::exception& exception) {
     HELIOS_CRITICAL("Application encountered an unhandled exception and will exit: {}!", exception.what());
-    return AppExitCode::Failure;
+    return AppExitCode::kFailure;
   }
 
-  return AppExitCode::Success;
+  return AppExitCode::kSuccess;
 }
 
 /**
@@ -323,10 +323,10 @@ inline AppExitCode OnceRunner(App& app, OnceRunnerConfig config = {}) {
     }
   } catch (const std::exception& exception) {
     HELIOS_CRITICAL("Application encountered an unhandled exception and will exit: {}!", exception.what());
-    return AppExitCode::Failure;
+    return AppExitCode::kFailure;
   }
 
-  return AppExitCode::Success;
+  return AppExitCode::kSuccess;
 }
 
 }  // namespace helios::app

@@ -112,6 +112,27 @@ struct EmptyModule final : public Module {
   void Destroy(App& /*app*/) override {}
 };
 
+struct ConfigurableModule final : public Module {
+  int config_value = 0;
+  float multiplier = 1.0F;
+
+  ConfigurableModule() = default;
+  explicit ConfigurableModule(int value) : config_value(value) {}
+  ConfigurableModule(int value, float mult) : config_value(value), multiplier(mult) {}
+
+  void Build(App& /*app*/) override {}
+  void Destroy(App& /*app*/) override {}
+};
+
+struct NonDefaultConstructibleModule final : public Module {
+  int value_ = 0;
+
+  explicit NonDefaultConstructibleModule(int value) : value_(value) {}
+
+  void Build(App& /*app*/) override {}
+  void Destroy(App& /*app*/) override {}
+};
+
 struct CountingModule final : public Module {
   void Build(App& /*ctx*/) override { ++build_count; }
   void Destroy(App& /*ctx*/) override { ++destroy_count; }
@@ -229,6 +250,41 @@ TEST_SUITE("app::App") {
     CHECK(app.ContainsModule<BasicModule>());
     CHECK(app.ContainsModule<NamedModule>());
     CHECK(app.ContainsModule<EmptyModule>());
+  }
+
+  TEST_CASE("App::AddModule: With Instance - Configured Module") {
+    App app;
+    app.AddModule(ConfigurableModule(42, 2.5F));
+
+    CHECK_EQ(app.ModuleCount(), 1);
+    CHECK(app.ContainsModule<ConfigurableModule>());
+  }
+
+  TEST_CASE("App::AddModule: With Instance - Non-Default Constructible") {
+    App app;
+    app.AddModule(NonDefaultConstructibleModule(100));
+
+    CHECK_EQ(app.ModuleCount(), 1);
+    CHECK(app.ContainsModule<NonDefaultConstructibleModule>());
+  }
+
+  TEST_CASE("App::AddModules: With Instances") {
+    App app;
+    app.AddModules(ConfigurableModule(42, 1.5F), NonDefaultConstructibleModule(100));
+
+    CHECK_EQ(app.ModuleCount(), 2);
+    CHECK(app.ContainsModule<ConfigurableModule>());
+    CHECK(app.ContainsModule<NonDefaultConstructibleModule>());
+  }
+
+  TEST_CASE("App::AddModule: With Instance - Method Chaining") {
+    App app;
+    app.AddModule(NonDefaultConstructibleModule(1)).AddModule(ConfigurableModule(2, 3.0F)).AddModule<BasicModule>();
+
+    CHECK_EQ(app.ModuleCount(), 3);
+    CHECK(app.ContainsModule<NonDefaultConstructibleModule>());
+    CHECK(app.ContainsModule<ConfigurableModule>());
+    CHECK(app.ContainsModule<BasicModule>());
   }
 
   TEST_CASE("App::ContainsModule: Returns False For Non-Existent Module") {
@@ -662,7 +718,7 @@ TEST_SUITE("app::App") {
 
   TEST_CASE("App: Method chaining SetRunner") {
     App app;
-    auto& result = app.SetRunner([](App& /*app*/) { return AppExitCode::Success; });
+    auto& result = app.SetRunner([](App& /*app*/) { return AppExitCode::kSuccess; });
 
     CHECK_EQ(&result, &app);
   }
@@ -704,11 +760,11 @@ TEST_SUITE("app::App") {
   }
 
   TEST_CASE("AppExitCode: Success Value") {
-    CHECK_EQ(static_cast<int>(AppExitCode::Success), 0);
+    CHECK_EQ(static_cast<int>(AppExitCode::kSuccess), 0);
   }
 
   TEST_CASE("AppExitCode: Failure Value") {
-    CHECK_EQ(static_cast<int>(AppExitCode::Failure), 1);
+    CHECK_EQ(static_cast<int>(AppExitCode::kFailure), 1);
   }
 
   TEST_CASE("App::AddSubApp: Sets Overlapping Flag For Async SubApp") {

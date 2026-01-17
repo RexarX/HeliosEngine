@@ -112,7 +112,7 @@ AppExitCode GameRunner(App& app, int max_frames = 1000) {
   HELIOS_INFO("=== RPG Text Game Complete ===");
   HELIOS_INFO("Total execution time: {:.2f}ms", total_time);
 
-  return AppExitCode::Success;
+  return AppExitCode::kSuccess;
 }
 
 // ============================================================================
@@ -147,7 +147,7 @@ int main() {
   HELIOS_INFO("Starting game...");
   AppExitCode result = app.Run();
 
-  if (result == AppExitCode::Success) {
+  if (result == AppExitCode::kSuccess) {
     HELIOS_INFO("Game exited successfully!");
   } else {
     HELIOS_ERROR("Game exited with errors!");

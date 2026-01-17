@@ -55,7 +55,7 @@ struct ShutdownTriggerSystem final : public System {
     auto& counter = ctx.WriteResource<FrameCounter>();
 
     if (trigger.trigger_frame == counter.count) {
-      ctx.EmitEvent(ShutdownEvent{.exit_code = ShutdownExitCode::Success});
+      ctx.EmitEvent(ShutdownEvent{.exit_code = ShutdownExitCode::kSuccess});
     }
   }
 };
@@ -100,7 +100,7 @@ TEST_SUITE("app::Runners") {
 
     AppExitCode result = app.Run();
 
-    CHECK_EQ(result, AppExitCode::Success);
+    CHECK_EQ(result, AppExitCode::kSuccess);
     CHECK_EQ(captured_frames, 5);
   }
 
@@ -150,7 +150,7 @@ TEST_SUITE("app::Runners") {
     AppExitCode result = app.Run();
 
     // Should exit gracefully when shutdown event is emitted
-    CHECK_EQ(result, AppExitCode::Success);
+    CHECK_EQ(result, AppExitCode::kSuccess);
     CHECK_EQ(captured_frames, 3);
   }
 
@@ -195,7 +195,7 @@ TEST_SUITE("app::Runners") {
 
     AppExitCode result = app.Run();
 
-    CHECK_EQ(result, AppExitCode::Success);
+    CHECK_EQ(result, AppExitCode::kSuccess);
     CHECK_EQ(captured_frames, 10);
   }
 
@@ -241,7 +241,7 @@ TEST_SUITE("app::Runners") {
     AppExitCode result = app.Run();
 
     // Should exit early due to shutdown event, not reaching max_frames
-    CHECK_EQ(result, AppExitCode::Success);
+    CHECK_EQ(result, AppExitCode::kSuccess);
     CHECK_EQ(captured_frames, 5);
   }
 
@@ -307,7 +307,7 @@ TEST_SUITE("app::Runners") {
     AppExitCode result = app.Run();
 
     // Should exit early due to shutdown event before time limit
-    CHECK_EQ(result, AppExitCode::Success);
+    CHECK_EQ(result, AppExitCode::kSuccess);
     CHECK_EQ(captured_frames, 2);
   }
 
@@ -397,7 +397,7 @@ TEST_SUITE("app::Runners") {
     AppExitCode result = app.Run();
 
     // Should exit early due to shutdown event
-    CHECK_EQ(result, AppExitCode::Success);
+    CHECK_EQ(result, AppExitCode::kSuccess);
     CHECK_EQ(captured_frames, 3);
   }
 
@@ -417,7 +417,7 @@ TEST_SUITE("app::Runners") {
 
     AppExitCode result = app.Run();
 
-    CHECK_EQ(result, AppExitCode::Success);
+    CHECK_EQ(result, AppExitCode::kSuccess);
     CHECK_EQ(captured_frames, 1);
   }
 
@@ -447,17 +447,17 @@ TEST_SUITE("app::Runners") {
     const auto [should_shutdown, exit_code] = CheckShutdownEvent(app);
 
     CHECK_FALSE(should_shutdown);
-    CHECK_EQ(exit_code, ShutdownExitCode::Success);
+    CHECK_EQ(exit_code, ShutdownExitCode::kSuccess);
   }
 
   TEST_CASE("ToAppExitCode: Converts success") {
-    AppExitCode result = ToAppExitCode(ShutdownExitCode::Success);
-    CHECK_EQ(result, AppExitCode::Success);
+    AppExitCode result = ToAppExitCode(ShutdownExitCode::kSuccess);
+    CHECK_EQ(result, AppExitCode::kSuccess);
   }
 
   TEST_CASE("ToAppExitCode: Converts failure") {
-    AppExitCode result = ToAppExitCode(ShutdownExitCode::Failure);
-    CHECK_EQ(result, AppExitCode::Failure);
+    AppExitCode result = ToAppExitCode(ShutdownExitCode::kFailure);
+    CHECK_EQ(result, AppExitCode::kFailure);
   }
 
   TEST_CASE("DefaultRunnerConfig: Default values") {

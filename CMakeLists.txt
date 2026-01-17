@@ -48,7 +48,7 @@ endif()
 
 project(HeliosEngine
     VERSION 0.1.0
-    DESCRIPTION "ECS based data-oriented game engine"
+    DESCRIPTION "ECS based data-oriented game engine framework"
     HOMEPAGE_URL "https://github.com/RexarX/HeliosEngine"
     LANGUAGES CXX
 )

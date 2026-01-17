@@ -118,11 +118,8 @@ class HeliosEngineConan(ConanFile):
 
         # Module dependencies (only if not core_only)
         if not self.options.core_only:
-            # Add module-specific dependencies here as needed
-            # Example:
-            # self.requires("vulkan/[>=1.3 <2]")
-            # self.requires("glfw/[>=3.3 <4]")
-            pass
+            # Window module requires GLFW
+            self.requires("glfw/[>=3.3 <4]")
 
         # Test dependencies
         if self.options.with_tests:

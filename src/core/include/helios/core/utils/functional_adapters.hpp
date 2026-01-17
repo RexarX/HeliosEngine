@@ -2,6 +2,7 @@
 
 #include <helios/core_pch.hpp>
 
+#include <algorithm>
 #include <concepts>
 #include <cstddef>
 #include <iterator>
@@ -284,6 +285,14 @@ template <typename Iter>
 concept SlideAdapterRequirements = IteratorLike<Iter>;
 
 /**
+ * @brief Concept to validate ConcatAdapter requirements.
+ * @details ConcatAdapter concatenates two ranges of the same value type.
+ * @tparam Iter Iterator type (same type for both ranges)
+ */
+template <typename Iter>
+concept ConcatAdapterRequirements = IteratorLike<Iter>;
+
+/**
  * @brief Concept to validate StrideAdapter requirements.
  * @tparam Iter Iterator type
  */
@@ -360,6 +369,10 @@ class StrideAdapter;
 template <typename Iter1, typename Iter2>
   requires ZipAdapterRequirements<Iter1, Iter2>
 class ZipAdapter;
+
+template <typename Iter>
+  requires ConcatAdapterRequirements<Iter>
+class ConcatAdapter;
 
 /**
  * @brief Iterator adapter that filters elements based on a predicate function.
@@ -1927,26 +1940,216 @@ constexpr void JoinAdapter<Iter>::AdvanceToValid() noexcept(noexcept(std::declva
 }
 
 /**
+ * @brief A non-owning view over a sliding window of elements.
+ * @details Provides a lightweight, non-allocating view over a contiguous window of elements.
+ * @tparam Iter Type of the underlying iterator
+ *
+ * @example
+ * @code
+ * std::vector<int> data = {1, 2, 3, 4, 5};
+ * auto slide = SlideAdapterFromRange(data, 3);
+ * for (const auto& window : slide) {
+ *   // window is a SlideView, iterate over it
+ *   for (int val : window) {
+ *     std::cout << val << " ";
+ *   }
+ *   std::cout << "\n";
+ * }
+ * // Output:
+ * // 1 2 3
+ * // 2 3 4
+ * // 3 4 5
+ * @endcode
+ */
+template <IteratorLike Iter>
+class SlideView {
+public:
+  using iterator = Iter;
+  using const_iterator = Iter;
+  using value_type = std::iter_value_t<Iter>;
+  using reference = decltype(*std::declval<Iter>());
+  using size_type = size_t;
+
+  /**
+   * @brief Constructs a SlideView.
+   * @param begin Iterator to the beginning of the window
+   * @param size Size of the window
+   */
+  constexpr SlideView(Iter begin, size_t size) noexcept(std::is_nothrow_copy_constructible_v<Iter>)
+      : begin_(begin), size_(size) {}
+
+  constexpr SlideView(const SlideView&) noexcept(std::is_nothrow_copy_constructible_v<Iter>) = default;
+  constexpr SlideView(SlideView&&) noexcept(std::is_nothrow_move_constructible_v<Iter>) = default;
+  constexpr ~SlideView() noexcept = default;
+
+  constexpr SlideView& operator=(const SlideView&) noexcept(std::is_nothrow_copy_assignable_v<Iter>) = default;
+  constexpr SlideView& operator=(SlideView&&) noexcept(std::is_nothrow_move_assignable_v<Iter>) = default;
+
+  /**
+   * @brief Collects the window elements into a vector.
+   * @details Use when you need ownership of the elements.
+   * @return Vector containing copies of the window elements
+   */
+  [[nodiscard]] constexpr auto Collect() const -> std::vector<value_type>
+    requires std::copy_constructible<value_type>;
+
+  /**
+   * @brief Accesses an element by index.
+   * @warning Index must be less than size
+   * @param index Index of the element
+   * @return Reference to the element
+   */
+  [[nodiscard]] constexpr reference operator[](size_t index) const
+      noexcept(noexcept(*std::declval<Iter>()) && noexcept(++std::declval<Iter&>()));
+
+  /**
+   * @brief Compares two SlideViews for equality.
+   * @param other SlideView to compare with
+   * @return True if both views have the same elements
+   */
+  [[nodiscard]] constexpr bool operator==(const SlideView& other) const;
+
+  /**
+   * @brief Compares SlideView with a vector for equality.
+   * @tparam R
+   * @param vec Vector to compare with
+   * @return True if the view has the same elements as the vector
+   */
+  template <std::ranges::sized_range R>
+  [[nodiscard]] constexpr bool operator==(const R& range) const;
+
+  /**
+   * @brief Checks if the window is empty.
+   * @return True if the window has no elements
+   */
+  [[nodiscard]] constexpr bool Empty() const noexcept { return size_ == 0; }
+
+  /**
+   * @brief Returns the size of the window.
+   * @return Number of elements in the window
+   */
+  [[nodiscard]] constexpr size_t Size() const noexcept { return size_; }
+
+  /**
+   * @brief Returns an iterator to the beginning.
+   * @return Iterator to the first element
+   */
+  [[nodiscard]] constexpr Iter begin() const noexcept(std::is_nothrow_copy_constructible_v<Iter>) { return begin_; }
+
+  /**
+   * @brief Returns an iterator to the end.
+   * @return Iterator past the last element
+   */
+  [[nodiscard]] constexpr Iter end() const
+      noexcept(std::is_nothrow_copy_constructible_v<Iter> && noexcept(++std::declval<Iter&>()));
+
+private:
+  Iter begin_;
+  size_t size_ = 0;
+};
+
+template <IteratorLike Iter>
+constexpr auto SlideView<Iter>::Collect() const -> std::vector<value_type>
+  requires std::copy_constructible<value_type>
+{
+  std::vector<value_type> result;
+  result.reserve(size_);
+  auto it = begin_;
+  for (size_t i = 0; i < size_; ++i) {
+    result.push_back(*it++);
+  }
+  return result;
+}
+
+template <IteratorLike Iter>
+constexpr auto SlideView<Iter>::operator[](size_t index) const
+    noexcept(noexcept(*std::declval<Iter>()) && noexcept(++std::declval<Iter&>())) -> reference {
+  auto it = begin_;
+  for (size_t i = 0; i < index; ++i) {
+    ++it;
+  }
+  return *it;
+}
+
+template <IteratorLike Iter>
+constexpr bool SlideView<Iter>::operator==(const SlideView& other) const {
+  if (size_ != other.size_) {
+    return false;
+  }
+
+  auto it1 = begin_;
+  auto it2 = other.begin_;
+  for (size_t i = 0; i < size_; ++i) {
+    if (*it1++ != *it2++) {
+      return false;
+    }
+  }
+  return true;
+}
+
+template <IteratorLike Iter>
+template <std::ranges::sized_range R>
+constexpr bool SlideView<Iter>::operator==(const R& range) const {
+  if (size_ != std::ranges::size(range)) {
+    return false;
+  }
+
+  return std::equal(std::ranges::cbegin(range), std::ranges::cend(range), begin_);
+}
+
+template <IteratorLike Iter>
+constexpr Iter SlideView<Iter>::end() const
+    noexcept(std::is_nothrow_copy_constructible_v<Iter> && noexcept(++std::declval<Iter&>())) {
+  auto it = begin_;
+  for (size_t i = 0; i < size_; ++i) {
+    ++it;
+  }
+  return it;
+}
+
+/**
  * @brief Adapter that yields sliding windows of elements.
  * @details Creates overlapping windows of a fixed size, moving one element at a time.
+ * Each window is returned as a SlideView, which is a non-allocating view over the elements.
  * @tparam Iter Type of the underlying iterator
+ *
+ * @example
+ * @code
+ * std::vector<int> data = {1, 2, 3, 4, 5};
+ * auto slide = SlideAdapterFromRange(data, 3);
+ *
+ * // Iterate over windows
+ * for (const auto& window : slide) {
+ *   // Each window is a SlideView
+ *   for (int val : window) {
+ *     std::cout << val << " ";
+ *   }
+ *   std::cout << "\n";
+ * }
+ *
+ * // Collect windows if needed
+ * auto windows = slide.Collect();  // Vector of SlideViews
+ *
+ * // Convert a window to vector if ownership needed
+ * auto first_window = (*slide.begin()).Collect();  // std::vector<int>
+ * @endcode
  */
 template <typename Iter>
   requires SlideAdapterRequirements<Iter>
 class SlideAdapter final : public FunctionalAdapterBase<SlideAdapter<Iter>> {
 public:
   using iterator_category = std::forward_iterator_tag;
-  using value_type = std::vector<std::iter_value_t<Iter>>;
+  using value_type = SlideView<Iter>;
   using difference_type = std::iter_difference_t<Iter>;
   using pointer = value_type*;
   using reference = value_type;
 
   /**
    * @brief Constructs a slide adapter.
+   * @warning window_size must be greater than 0
    * @param begin Iterator to the beginning of the range
    * @param end Iterator to the end of the range
    * @param window_size Size of the sliding window
-   * @warning window_size must be greater than 0
    */
   constexpr SlideAdapter(Iter begin, Iter end,
                          size_t window_size) noexcept(std::is_nothrow_move_constructible_v<Iter> &&
@@ -1965,26 +2168,39 @@ public:
   constexpr SlideAdapter operator++(int) noexcept(std::is_nothrow_copy_constructible_v<SlideAdapter> &&
                                                   noexcept(++std::declval<SlideAdapter&>()));
 
-  constexpr value_type operator*() const;
+  /**
+   * @brief Dereferences the iterator to get the current window.
+   * @return SlideView representing the current window
+   */
+  [[nodiscard]] constexpr value_type operator*() const
+      noexcept(std::is_nothrow_constructible_v<SlideView<Iter>, Iter, size_t>) {
+    return {current_, window_size_};
+  }
 
-  constexpr bool operator==(const SlideAdapter& other) const
+  [[nodiscard]] constexpr bool operator==(const SlideAdapter& other) const
       noexcept(noexcept(std::declval<const Iter&>() == std::declval<const Iter&>())) {
     return current_ == other.current_;
   }
 
-  constexpr bool operator!=(const SlideAdapter& other) const
+  [[nodiscard]] constexpr bool operator!=(const SlideAdapter& other) const
       noexcept(noexcept(std::declval<const Iter&>() != std::declval<const Iter&>())) {
     return current_ != other.current_;
   }
 
-  constexpr SlideAdapter begin() const
+  [[nodiscard]] constexpr SlideAdapter begin() const
       noexcept(std::is_nothrow_constructible_v<SlideAdapter, const Iter&, const Iter&, size_t>) {
     return {begin_, end_, window_size_};
   }
 
-  constexpr SlideAdapter end() const
+  [[nodiscard]] constexpr SlideAdapter end() const
       noexcept(std::is_nothrow_copy_constructible_v<SlideAdapter> && std::is_nothrow_copy_assignable_v<Iter> &&
                noexcept(std::declval<Iter&>() != std::declval<const Iter&>()) && noexcept(++std::declval<Iter&>()));
+
+  /**
+   * @brief Returns the window size.
+   * @return Size of the sliding window
+   */
+  [[nodiscard]] constexpr size_t WindowSize() const noexcept { return window_size_; }
 
 private:
   Iter begin_;
@@ -2032,20 +2248,6 @@ constexpr auto SlideAdapter<Iter>::operator++(int) noexcept(std::is_nothrow_copy
 
 template <typename Iter>
   requires SlideAdapterRequirements<Iter>
-constexpr auto SlideAdapter<Iter>::operator*() const -> value_type {
-  value_type window;
-  window.reserve(window_size_);
-
-  Iter iter = current_;
-  for (size_t i = 0; i < window_size_ && iter != end_; ++i, ++iter) {
-    window.push_back(*iter);
-  }
-
-  return window;
-}
-
-template <typename Iter>
-  requires SlideAdapterRequirements<Iter>
 constexpr auto SlideAdapter<Iter>::end() const
     noexcept(std::is_nothrow_copy_constructible_v<SlideAdapter> && std::is_nothrow_copy_assignable_v<Iter> &&
              noexcept(std::declval<Iter&>() != std::declval<const Iter&>()) && noexcept(++std::declval<Iter&>()))
@@ -2077,6 +2279,16 @@ constexpr auto SlideAdapter<Iter>::end() const
  * @brief Adapter that yields every Nth element from the range.
  * @details Similar to StepBy but with different semantics - takes stride, not step.
  * @tparam Iter Type of the underlying iterator
+ *
+ * @example
+ * @code
+ * std::vector<int> data = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+ * auto strided = StrideAdapterFromRange(data, 3);
+ * // Yields: 1, 4, 7
+ * for (int val : strided) {
+ *   std::cout << val << " ";
+ * }
+ * @endcode
  */
 template <typename Iter>
   requires StrideAdapterRequirements<Iter>
@@ -2174,6 +2386,20 @@ constexpr auto StrideAdapter<Iter>::end() const
  * Stops when either range is exhausted.
  * @tparam Iter1 Type of the first iterator
  * @tparam Iter2 Type of the second iterator
+ *
+ * @example
+ * @code
+ * std::vector<int> ids = {1, 2, 3};
+ * std::vector<std::string> names = {"Alice", "Bob", "Charlie"};
+ * auto zipped = ZipAdapterFromRange(ids, names);
+ * for (const auto& [id, name] : zipped) {
+ *   std::cout << id << ": " << name << "\n";
+ * }
+ * // Output:
+ * // 1: Alice
+ * // 2: Bob
+ * // 3: Charlie
+ * @endcode
  */
 template <typename Iter1, typename Iter2>
   requires ZipAdapterRequirements<Iter1, Iter2>
@@ -2286,6 +2512,184 @@ constexpr auto ZipAdapter<Iter1, Iter2>::end() const noexcept(std::is_nothrow_co
   result.first_current_ = result.first_end_;
   result.second_current_ = result.second_end_;
   return result;
+}
+
+/**
+ * @brief Adapter that concatenates two ranges of the same type into a single range.
+ * @details Iterates through the first range completely, then continues with the second range.
+ * This is similar to ChainAdapter but simplified for same-iterator-type ranges.
+ * @tparam Iter Type of the underlying iterator (same for both ranges)
+ *
+ * @example
+ * @code
+ * std::vector<int> first = {1, 2, 3};
+ * std::vector<int> second = {4, 5, 6};
+ * auto concat = ConcatAdapterFromRange(first, second);
+ *
+ * // Iterate over concatenated range
+ * for (int val : concat) {
+ *   std::cout << val << " ";  // Outputs: 1 2 3 4 5 6
+ * }
+ *
+ * // Collect into vector
+ * auto collected = concat.Collect();  // {1, 2, 3, 4, 5, 6}
+ *
+ * // Use with message/event spans
+ * auto [prev, curr] = reader.Spans();
+ * auto all_messages = ConcatAdapterFromRange(prev, curr);
+ * @endcode
+ */
+template <typename Iter>
+  requires ConcatAdapterRequirements<Iter>
+class ConcatAdapter final : public FunctionalAdapterBase<ConcatAdapter<Iter>> {
+public:
+  using iterator_category = std::forward_iterator_tag;
+  using value_type = std::iter_value_t<Iter>;
+  using difference_type = std::iter_difference_t<Iter>;
+  using pointer = value_type*;
+  using reference = value_type;
+
+  /**
+   * @brief Constructs a concat adapter with two iterator ranges.
+   * @param first_begin Start of the first iterator range
+   * @param first_end End of the first iterator range
+   * @param second_begin Start of the second iterator range
+   * @param second_end End of the second iterator range
+   */
+  constexpr ConcatAdapter(Iter first_begin, Iter first_end, Iter second_begin,
+                          Iter second_end) noexcept(std::is_nothrow_move_constructible_v<Iter> &&
+                                                    noexcept(std::declval<Iter&>() != std::declval<Iter&>()))
+      : first_current_(std::move(first_begin)),
+        first_end_(std::move(first_end)),
+        second_current_(std::move(second_begin)),
+        second_end_(std::move(second_end)),
+        in_first_(first_current_ != first_end_) {}
+
+  constexpr ConcatAdapter(const ConcatAdapter&) noexcept(std::is_nothrow_copy_constructible_v<Iter>) = default;
+  constexpr ConcatAdapter(ConcatAdapter&&) noexcept(std::is_nothrow_move_constructible_v<Iter>) = default;
+  constexpr ~ConcatAdapter() noexcept(std::is_nothrow_destructible_v<Iter>) = default;
+
+  constexpr ConcatAdapter& operator=(const ConcatAdapter&) noexcept(std::is_nothrow_copy_assignable_v<Iter>) = default;
+  constexpr ConcatAdapter& operator=(ConcatAdapter&&) noexcept(std::is_nothrow_move_assignable_v<Iter>) = default;
+
+  constexpr ConcatAdapter& operator++() noexcept(noexcept(++std::declval<Iter&>()) &&
+                                                 noexcept(std::declval<Iter&>() == std::declval<Iter&>()) &&
+                                                 noexcept(std::declval<Iter&>() != std::declval<Iter&>()));
+  constexpr ConcatAdapter operator++(int) noexcept(std::is_nothrow_copy_constructible_v<ConcatAdapter> &&
+                                                   noexcept(++std::declval<ConcatAdapter&>()));
+
+  [[nodiscard]] constexpr value_type operator*() const noexcept(noexcept(*std::declval<const Iter&>())) {
+    return in_first_ ? *first_current_ : *second_current_;
+  }
+
+  [[nodiscard]] constexpr bool operator==(const ConcatAdapter& other) const
+      noexcept(noexcept(std::declval<const Iter&>() == std::declval<const Iter&>()));
+
+  [[nodiscard]] constexpr bool operator!=(const ConcatAdapter& other) const
+      noexcept(noexcept(std::declval<const ConcatAdapter&>() == std::declval<const ConcatAdapter&>())) {
+    return !(*this == other);
+  }
+
+  /**
+   * @brief Checks if the adapter is at the end.
+   * @return True if all elements have been consumed
+   */
+  [[nodiscard]] constexpr bool IsAtEnd() const
+      noexcept(noexcept(std::declval<const Iter&>() == std::declval<const Iter&>())) {
+    return !in_first_ && (second_current_ == second_end_);
+  }
+
+  /**
+   * @brief Returns the total size of both ranges.
+   * @details This requires iterating through both ranges to count elements.
+   * @return Total number of elements in both ranges
+   */
+  [[nodiscard]] constexpr size_t Size() const
+      noexcept(noexcept(std::declval<Iter&>() != std::declval<Iter&>()) && noexcept(++std::declval<Iter&>()));
+
+  [[nodiscard]] constexpr ConcatAdapter begin() const noexcept(std::is_nothrow_copy_constructible_v<ConcatAdapter>) {
+    return *this;
+  }
+
+  [[nodiscard]] constexpr ConcatAdapter end() const
+      noexcept(std::is_nothrow_copy_constructible_v<ConcatAdapter> && std::is_nothrow_copy_constructible_v<Iter>);
+
+private:
+  Iter first_current_;    ///< Current position in first range
+  Iter first_end_;        ///< End of first range
+  Iter second_current_;   ///< Current position in second range
+  Iter second_end_;       ///< End of second range
+  bool in_first_ = true;  ///< Whether currently iterating through first range
+};
+
+template <typename Iter>
+  requires ConcatAdapterRequirements<Iter>
+constexpr auto ConcatAdapter<Iter>::operator++() noexcept(noexcept(++std::declval<Iter&>()) &&
+                                                          noexcept(std::declval<Iter&>() == std::declval<Iter&>()) &&
+                                                          noexcept(std::declval<Iter&>() != std::declval<Iter&>()))
+    -> ConcatAdapter& {
+  if (in_first_) {
+    ++first_current_;
+    if (first_current_ == first_end_) {
+      in_first_ = false;
+    }
+  } else {
+    if (second_current_ != second_end_) {
+      ++second_current_;
+    }
+  }
+  return *this;
+}
+
+template <typename Iter>
+  requires ConcatAdapterRequirements<Iter>
+constexpr auto ConcatAdapter<Iter>::operator++(int) noexcept(std::is_nothrow_copy_constructible_v<ConcatAdapter> &&
+                                                             noexcept(++std::declval<ConcatAdapter&>()))
+    -> ConcatAdapter {
+  auto temp = *this;
+  ++(*this);
+  return temp;
+}
+
+template <typename Iter>
+  requires ConcatAdapterRequirements<Iter>
+constexpr bool ConcatAdapter<Iter>::operator==(const ConcatAdapter& other) const
+    noexcept(noexcept(std::declval<const Iter&>() == std::declval<const Iter&>())) {
+  // Check if both are at end (in second range and at second_end_)
+  const bool this_at_end = !in_first_ && (second_current_ == second_end_);
+  const bool other_at_end = !other.in_first_ && (other.second_current_ == other.second_end_);
+
+  if (this_at_end && other_at_end) {
+    return true;
+  }
+
+  // Otherwise, must be in same range at same position
+  if (in_first_ != other.in_first_) {
+    return false;
+  }
+
+  return in_first_ ? (first_current_ == other.first_current_) : (second_current_ == other.second_current_);
+}
+
+template <typename Iter>
+  requires ConcatAdapterRequirements<Iter>
+constexpr size_t ConcatAdapter<Iter>::Size() const
+    noexcept(noexcept(std::declval<Iter&>() != std::declval<Iter&>()) && noexcept(++std::declval<Iter&>())) {
+  size_t count = std::accumulate(first_current_, first_end_, 0);
+  count += std::accumulate(second_current_, second_end_, 0);
+  return count;
+}
+
+template <typename Iter>
+  requires ConcatAdapterRequirements<Iter>
+constexpr auto ConcatAdapter<Iter>::end() const
+    noexcept(std::is_nothrow_copy_constructible_v<ConcatAdapter> && std::is_nothrow_copy_constructible_v<Iter>)
+        -> ConcatAdapter {
+  auto end_iter = *this;
+  end_iter.first_current_ = first_end_;
+  end_iter.second_current_ = second_end_;
+  end_iter.in_first_ = false;
+  return end_iter;
 }
 
 /**
@@ -3407,6 +3811,98 @@ constexpr auto ZipAdapterFromRange(const R1& range1, const R2& range2) noexcept(
         std::ranges::cbegin(range1), std::ranges::cend(range1), std::ranges::cbegin(range2),
         std::ranges::cend(range2))))
     -> ZipAdapter<decltype(std::ranges::cbegin(range1)), decltype(std::ranges::cbegin(range2))> {
+  return {std::ranges::cbegin(range1), std::ranges::cend(range1), std::ranges::cbegin(range2),
+          std::ranges::cend(range2)};
+}
+
+/**
+ * @brief Helper function to create a ConcatAdapter from two ranges of the same type.
+ * @details Concatenates two ranges into a single iterable range.
+ * @tparam R Range type (must be the same for both)
+ * @param range1 First range
+ * @param range2 Second range
+ * @return ConcatAdapter for the two ranges
+ *
+ * @example
+ * @code
+ * std::vector<int> first = {1, 2, 3};
+ * std::vector<int> second = {4, 5, 6};
+ * auto concat = ConcatAdapterFromRange(first, second);
+ * for (int val : concat) {
+ *   std::cout << val << " ";  // Outputs: 1 2 3 4 5 6
+ * }
+ * @endcode
+ */
+template <std::ranges::range R>
+  requires ConcatAdapterRequirements<std::ranges::iterator_t<R>>
+constexpr auto ConcatAdapterFromRange(R& range1, R& range2) noexcept(noexcept(ConcatAdapter<std::ranges::iterator_t<R>>(
+    std::ranges::begin(range1), std::ranges::end(range1), std::ranges::begin(range2), std::ranges::end(range2))))
+    -> ConcatAdapter<std::ranges::iterator_t<R>> {
+  return {std::ranges::begin(range1), std::ranges::end(range1), std::ranges::begin(range2), std::ranges::end(range2)};
+}
+
+/**
+ * @brief Helper function to create a ConcatAdapter from two const ranges of the same type.
+ * @details Concatenates two const ranges into a single iterable range.
+ * @tparam R Range type (must be the same for both)
+ * @param range1 First range
+ * @param range2 Second range
+ * @return ConcatAdapter for the two ranges
+ *
+ * @example
+ * @code
+ * const std::vector<int> first = {1, 2, 3};
+ * const std::vector<int> second = {4, 5, 6};
+ * auto concat = ConcatAdapterFromRange(first, second);
+ * for (int val : concat) {
+ *   std::cout << val << " ";  // Outputs: 1 2 3 4 5 6
+ * }
+ * @endcode
+ */
+template <std::ranges::range R>
+  requires ConcatAdapterRequirements<decltype(std::ranges::cbegin(std::declval<const R&>()))>
+constexpr auto ConcatAdapterFromRange(const R& range1, const R& range2) noexcept(noexcept(
+    ConcatAdapter<decltype(std::ranges::cbegin(range1))>(std::ranges::cbegin(range1), std::ranges::cend(range1),
+                                                         std::ranges::cbegin(range2), std::ranges::cend(range2))))
+    -> ConcatAdapter<decltype(std::ranges::cbegin(range1))> {
+  return {std::ranges::cbegin(range1), std::ranges::cend(range1), std::ranges::cbegin(range2),
+          std::ranges::cend(range2)};
+}
+
+/**
+ * @brief Helper function to create a ConcatAdapter from a non-const and const range of the same type.
+ * @tparam R Range type (must be the same for both)
+ * @param range1 First range (non-const)
+ * @param range2 Second range (const)
+ * @return ConcatAdapter for the two ranges using const iterators
+ */
+template <std::ranges::range R>
+  requires ConcatAdapterRequirements<decltype(std::ranges::cbegin(std::declval<const R&>()))>
+constexpr auto ConcatAdapterFromRange(R& range1, const R& range2) noexcept(
+    noexcept(ConcatAdapter<decltype(std::ranges::cbegin(std::declval<const R&>()))>(std::ranges::cbegin(range1),
+                                                                                    std::ranges::cend(range1),
+                                                                                    std::ranges::cbegin(range2),
+                                                                                    std::ranges::cend(range2))))
+    -> ConcatAdapter<decltype(std::ranges::cbegin(std::declval<const R&>()))> {
+  return {std::ranges::cbegin(range1), std::ranges::cend(range1), std::ranges::cbegin(range2),
+          std::ranges::cend(range2)};
+}
+
+/**
+ * @brief Helper function to create a ConcatAdapter from a const and non-const range of the same type.
+ * @tparam R Range type (must be the same for both)
+ * @param range1 First range (const)
+ * @param range2 Second range (non-const)
+ * @return ConcatAdapter for the two ranges using const iterators
+ */
+template <std::ranges::range R>
+  requires ConcatAdapterRequirements<decltype(std::ranges::cbegin(std::declval<const R&>()))>
+constexpr auto ConcatAdapterFromRange(const R& range1, R& range2) noexcept(
+    noexcept(ConcatAdapter<decltype(std::ranges::cbegin(std::declval<const R&>()))>(std::ranges::cbegin(range1),
+                                                                                    std::ranges::cend(range1),
+                                                                                    std::ranges::cbegin(range2),
+                                                                                    std::ranges::cend(range2))))
+    -> ConcatAdapter<decltype(std::ranges::cbegin(std::declval<const R&>()))> {
   return {std::ranges::cbegin(range1), std::ranges::cend(range1), std::ranges::cbegin(range2),
           std::ranges::cend(range2)};
 }

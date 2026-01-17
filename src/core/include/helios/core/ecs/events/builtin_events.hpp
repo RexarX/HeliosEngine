@@ -58,8 +58,8 @@ struct EntityDestroyedEvent {
  * @brief Exit code for application shutdown.
  */
 enum class ShutdownExitCode : uint8_t {
-  Success = 0,  ///< Normal shutdown
-  Failure = 1,  ///< Shutdown due to error
+  kSuccess = 0,  ///< Normal shutdown
+  kFailure = 1,  ///< Shutdown due to error
 };
 
 /**
@@ -79,7 +79,7 @@ enum class ShutdownExitCode : uint8_t {
  * @endcode
  */
 struct ShutdownEvent {
-  ShutdownExitCode exit_code = ShutdownExitCode::Success;  ///< Exit code for the shutdown
+  ShutdownExitCode exit_code = ShutdownExitCode::kSuccess;  ///< Exit code for the shutdown
 
   /**
    * @brief Gets the event name.

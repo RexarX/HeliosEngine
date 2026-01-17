@@ -39,7 +39,7 @@ AppExitCode FixedFrameRunner(App& app, int max_frames) {
     app.Update();
     ++frame;
   }
-  return AppExitCode::Success;
+  return AppExitCode::kSuccess;
 }
 
 template <typename Condition>
@@ -51,7 +51,7 @@ AppExitCode ConditionalRunner(App& app, Condition condition, int max_frames = 10
     app.Update();
     ++frame;
   }
-  return frame < max_frames ? AppExitCode::Success : AppExitCode::Failure;
+  return frame < max_frames ? AppExitCode::kSuccess : AppExitCode::kFailure;
 }
 
 // ============================================================================
@@ -298,6 +298,38 @@ struct GameplayModule final : public Module {
   void Destroy(App& /*app*/) override {}
 };
 
+struct ConfigurableModule final : public Module {
+  int initial_counter_value = 0;
+  float speed_multiplier = 1.0F;
+
+  static constexpr std::string_view GetName() noexcept { return "ConfigurableModule"; }
+
+  ConfigurableModule() = default;
+  explicit ConfigurableModule(int counter_value) : initial_counter_value(counter_value) {}
+  ConfigurableModule(int counter_value, float speed) : initial_counter_value(counter_value), speed_multiplier(speed) {}
+
+  void Build(App& app) override {
+    ThreadSafeCounter counter;
+    counter.value.store(initial_counter_value, std::memory_order_relaxed);
+    app.InsertResource(std::move(counter));
+  }
+
+  void Destroy(App& /*app*/) override {}
+};
+
+struct NonDefaultConstructibleIntegrationModule final : public Module {
+  std::string_view module_name_;
+  int priority_ = 0;
+
+  static constexpr std::string_view GetName() noexcept { return "NonDefaultConstructibleIntegrationModule"; }
+
+  NonDefaultConstructibleIntegrationModule(std::string_view name, int priority)
+      : module_name_(name), priority_(priority) {}
+
+  void Build(App& /*app*/) override {}
+  void Destroy(App& /*app*/) override {}
+};
+
 }  // namespace
 
 // ============================================================================
@@ -327,11 +359,58 @@ TEST_SUITE("app::AppIntegration") {
 
     AppExitCode result = app.Run();
 
-    CHECK_EQ(result, AppExitCode::Success);
+    CHECK_EQ(result, AppExitCode::kSuccess);
     CHECK_EQ(captured_value, frames);
 
     const double elapsed = timer.ElapsedMilliSec();
     HELIOS_INFO("Basic test completed in {:.3f}ms", elapsed);
+  }
+
+  TEST_CASE("App: Configurable Module With Instance") {
+    HELIOS_INFO("Testing configurable module with non-default constructor");
+    helios::Timer timer;
+
+    App app;
+
+    const int initial_value = 100;
+    app.AddModule(ConfigurableModule(initial_value, 2.0F));
+    app.AddSystem<IncrementSystem>(kUpdate);
+
+    int captured_value = 0;
+    const int frames = 5;
+
+    app.SetRunner([frames, &captured_value](App& running_app) {
+      AppExitCode result = FixedFrameRunner(running_app, frames);
+      const auto& world = std::as_const(running_app).GetMainWorld();
+      const auto& counter = world.ReadResource<ThreadSafeCounter>();
+      captured_value = counter.value.load(std::memory_order_relaxed);
+      return result;
+    });
+
+    AppExitCode result = app.Run();
+
+    CHECK_EQ(result, AppExitCode::kSuccess);
+    // Initial value was set to 100 by the configurable module, then incremented 5 times
+    CHECK_EQ(captured_value, initial_value + frames);
+
+    const double elapsed = timer.ElapsedMilliSec();
+    HELIOS_INFO("Configurable module test completed in {:.3f}ms", elapsed);
+  }
+
+  TEST_CASE("App: Multiple Non-Default Constructible Modules") {
+    HELIOS_INFO("Testing multiple non-default constructible modules");
+    helios::Timer timer;
+
+    App app;
+
+    app.AddModules(ConfigurableModule(50, 1.5F), NonDefaultConstructibleIntegrationModule("TestModule", 10));
+
+    CHECK_EQ(app.ModuleCount(), 2);
+    CHECK(app.ContainsModule<ConfigurableModule>());
+    CHECK(app.ContainsModule<NonDefaultConstructibleIntegrationModule>());
+
+    const double elapsed = timer.ElapsedMilliSec();
+    HELIOS_INFO("Multiple non-default modules test completed in {:.3f}ms", elapsed);
   }
 
   TEST_CASE("App: Module System") {

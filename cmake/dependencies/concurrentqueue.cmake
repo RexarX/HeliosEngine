@@ -10,10 +10,10 @@ message(STATUS "Configuring concurrentqueue dependency...")
 # Use helios_module system for standard package finding
 helios_dep_begin(
     NAME concurrentqueue
-    VERSION 1.0
+    VERSION 1.0.4
     PKG_CONFIG_NAMES concurrentqueue
     CPM_NAME concurrentqueue
-    CPM_VERSION 1.0
+    CPM_VERSION 1.0.4
     CPM_GITHUB_REPOSITORY cameron314/concurrentqueue
 )
 

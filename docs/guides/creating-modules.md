@@ -1,6 +1,10 @@
+<a name="creating-modules-top"></a>
+
 # Creating Custom Modules
 
 This guide explains how to create custom modules for Helios Engine. Modules are self-contained libraries that extend the engine's functionality while maintaining a consistent build configuration and integration with the core ECS system.
+
+<a name="table-of-contents"></a>
 
 ## Table of Contents
 
@@ -25,6 +29,8 @@ This guide explains how to create custom modules for Helios Engine. Modules are 
 
 ---
 
+<a name="overview"></a>
+
 ## Overview
 
 Helios Engine uses a modular architecture where functionality is organized into separate, independently buildable modules. Each module:
@@ -33,6 +39,10 @@ Helios Engine uses a modular architecture where functionality is organized into 
 - Can depend on other modules or external libraries
 - Follows a standardized directory structure
 - Integrates automatically with the engine's build system
+
+[↑ Back to Top](#creating-modules-top)
+
+<a name="module-structure"></a>
 
 ## Module Structure
 
@@ -61,7 +71,11 @@ src/modules/{module_name}/
 | `include/`       | Recommended | Public headers exposed to users of the module                                |
 | `src/`           | Recommended | Private implementation files                                                 |
 
+[↑ Back to Top](#creating-modules-top)
+
 ---
+
+<a name="quick-start"></a>
 
 ## Quick Start
 
@@ -90,15 +104,23 @@ This single call:
 4. Configures all standard settings (C++23, warnings, etc.)
 5. Links to `helios::core` automatically
 
+[↑ Back to Top](#creating-modules-top)
+
 ---
 
+<a name="step-by-step-guide"></a>
+
 ## Step-by-Step Guide
+
+<a name="1-create-directory-structure"></a>
 
 ### 1. Create Directory Structure
 
 ```bash
 mkdir -p src/modules/my_module/{include/helios/my_module,src}
 ```
+
+<a name="2-create-modulecmake-optional"></a>
 
 ### 2. Create Module.cmake (Optional)
 
@@ -120,6 +142,8 @@ helios_register_module(
     EXTERNAL_DEPENDS glfw       # Requires external GLFW library
 )
 ```
+
+<a name="3-create-cmakeliststxt"></a>
 
 ### 3. Create CMakeLists.txt
 
@@ -165,6 +189,8 @@ helios_add_module(
     # PCH include/helios/my_module/my_module_pch.hpp
 )
 ```
+
+<a name="4-implement-your-module"></a>
 
 ### 4. Implement Your Module
 
@@ -238,9 +264,15 @@ void MyModule::Destroy(app::App& app) {
 }  // namespace helios::my_module
 ```
 
+[↑ Back to Top](#creating-modules-top)
+
 ---
 
+<a name="cmake-functions-reference"></a>
+
 ## CMake Functions Reference
+
+<a name="helios_register_module"></a>
 
 ### helios_register_module
 
@@ -262,6 +294,8 @@ helios_register_module(
 - Creates option `HELIOS_BUILD_{NAME}_MODULE`
 - Stores metadata for dependency resolution
 - Adds module to the registered modules list
+
+<a name="helios_add_module"></a>
 
 ### helios_add_module
 
@@ -306,6 +340,8 @@ helios_add_module(
 - Target: `helios_module_{name}`
 - Alias: `helios::module::{name}`
 
+<a name="helios_define_module"></a>
+
 ### helios_define_module
 
 Convenience wrapper that combines registration and creation.
@@ -325,7 +361,11 @@ helios_define_module(
 )
 ```
 
+[↑ Back to Top](#creating-modules-top)
+
 ---
+
+<a name="module-dependencies"></a>
 
 ## Module Dependencies
 
@@ -392,7 +432,11 @@ helios_link_modules_if_enabled(
 )
 ```
 
+[↑ Back to Top](#creating-modules-top)
+
 ---
+
+<a name="build-options"></a>
 
 ## Build Options
 
@@ -439,7 +483,11 @@ In C++ code:
 #endif
 ```
 
+[↑ Back to Top](#creating-modules-top)
+
 ---
+
+<a name="best-practices"></a>
 
 ## Best Practices
 
@@ -517,7 +565,11 @@ helios_add_module(
 )
 ```
 
+[↑ Back to Top](#creating-modules-top)
+
 ---
+
+<a name="examples"></a>
 
 ## Examples
 
@@ -619,7 +671,11 @@ if(_gamepad_enabled)
 endif()
 ```
 
+[↑ Back to Top](#creating-modules-top)
+
 ---
+
+<a name="troubleshooting"></a>
 
 ## Troubleshooting
 
@@ -647,10 +703,16 @@ The build system automatically resolves dependencies, but if you have issues:
 2. Ensure all `DEPENDS` are correctly specified
 3. Check for circular dependencies
 
+[↑ Back to Top](#creating-modules-top)
+
 ---
+
+<a name="see-also"></a>
 
 ## See Also
 
 - [Core Module Documentation](../../src/core/README.md)
 - [CMake ModuleUtils.cmake](../../cmake/ModuleUtils.cmake)
 - [Build System Documentation](../README.md)
+
+[↑ Back to Top](#creating-modules-top)

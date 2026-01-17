@@ -67,6 +67,7 @@ docs/doxygen/html
 
 # Logs
 Logs
+TestLogs
 logs
 *.log
 

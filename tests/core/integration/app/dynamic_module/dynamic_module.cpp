@@ -101,13 +101,13 @@ TEST_SUITE("DynamicModule Integration") {
         a.Update();
         ++update_count;
       }
-      return AppExitCode::Success;
+      return AppExitCode::kSuccess;
     });
 
     // Verify the resource was added by the module during Build
     // Note: Run() will call BuildModules which calls Build on our module
     auto exit_code = app.Run();
-    CHECK_EQ(exit_code, AppExitCode::Success);
+    CHECK_EQ(exit_code, AppExitCode::kSuccess);
     CHECK_EQ(update_count, 3);
   }
 

@@ -35,11 +35,20 @@ public:
   virtual void Build(App& app) = 0;
 
   /**
+   * @brief Finishes adding this module to the App, once all modules are ready.
+   * @details This can be useful for modules that depend on another module's asynchronous
+   * setup, like the renderer. Called after all modules' `Build` methods have been called
+   * and all modules return true from `IsReady`.
+   * @param app The application instance
+   */
+  virtual void Finish(App& /*app*/) {}
+
+  /**
    * @brief Destroys the module and cleans up resources.
    * @details Called during application shutdown.
    * @param app The application instance
    */
-  virtual void Destroy(App& app) { (void)app; }
+  virtual void Destroy(App& /*app*/) {}
 
   /**
    * @brief Checks if the module is ready for finalization.
@@ -49,27 +58,22 @@ public:
    * @param app The application instance (const)
    * @return True if the module is ready, false otherwise
    */
-  [[nodiscard]] virtual bool IsReady(const App& app) const noexcept {
-    (void)app;
-    return true;
-  }
-
-  /**
-   * @brief Finishes adding this module to the App, once all modules are ready.
-   * @details This can be useful for modules that depend on another module's asynchronous
-   * setup, like the renderer. Called after all modules' `Build` methods have been called
-   * and all modules return true from `IsReady`.
-   * @param app The application instance
-   */
-  virtual void Finish(App& app) { (void)app; }
+  [[nodiscard]] virtual bool IsReady(const App& /*app*/) const noexcept { return true; }
 };
 
 /**
  * @brief Concept to ensure a type is a valid Module.
- * @details A valid Module must derive from Module and be default constructible.
+ * @details A valid Module must derive from Module.
  */
 template <typename T>
-concept ModuleTrait = std::derived_from<T, Module> && std::constructible_from<T>;
+concept ModuleTrait = std::derived_from<T, Module>;
+
+/**
+ * @brief Concept for modules that can be default constructed.
+ * @details Used by AddModule<T>() overload that creates the module internally.
+ */
+template <typename T>
+concept DefaultConstructibleModuleTrait = ModuleTrait<T> && std::default_initializable<T>;
 
 /**
  * @brief Concept to check if a Module provides a GetName() method.

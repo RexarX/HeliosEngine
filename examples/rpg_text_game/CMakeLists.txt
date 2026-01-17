@@ -33,6 +33,7 @@ helios_simd_apply_to_target(TARGET ${RPG_EXAMPLE_NAME})
 helios_target_set_warnings(${RPG_EXAMPLE_NAME})
 helios_target_set_output_dirs(${RPG_EXAMPLE_NAME} CUSTOM_FOLDER examples/rpg_text_game)
 helios_target_set_folder(${RPG_EXAMPLE_NAME} "Helios/Examples/RPGTextGame")
+helios_target_enable_sanitizers(${RPG_EXAMPLE_NAME})
 
 # Include directories
 target_include_directories(${RPG_EXAMPLE_NAME} PRIVATE

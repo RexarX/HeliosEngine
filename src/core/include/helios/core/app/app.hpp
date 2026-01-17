@@ -85,8 +85,8 @@ struct TrackedFuture {
  * @brief Application exit codes.
  */
 enum class AppExitCode : uint8_t {
-  Success = 0,  ///< Successful execution
-  Failure = 1,  ///< General failure
+  kSuccess = 0,  ///< Successful execution
+  kFailure = 1,  ///< General failure
 };
 
 /**
@@ -207,24 +207,47 @@ public:
   auto AddSubApp(this auto&& self, SubApp sub_app, T sub_app_tag = {}) -> decltype(std::forward<decltype(self)>(self));
 
   /**
-   * @brief Adds a module to the main sub-app.
+   * @brief Adds a default-constructed module to the main sub-app.
    * @details Modules can add their own systems, resources, and sub-apps.
    * @warning Triggers an assertion if app is initialized or running.
-   * @tparam T Module type
+   * @tparam T Module type (must be default constructible)
    * @return Reference to app for method chaining
    */
-  template <ModuleTrait T>
+  template <DefaultConstructibleModuleTrait T>
   auto AddModule(this auto&& self) -> decltype(std::forward<decltype(self)>(self));
 
   /**
-   * @brief Adds multiple modules to the main sub-app.
+   * @brief Adds a pre-constructed module instance to the main sub-app.
+   * @details Allows adding modules with non-default constructors or pre-configured state.
+   * @warning Triggers an assertion if app is initialized or running.
+   * @tparam T Module type
+   * @param module Module instance to add (will be moved)
+   * @return Reference to app for method chaining
+   */
+  template <ModuleTrait T>
+  auto AddModule(this auto&& self, T module) -> decltype(std::forward<decltype(self)>(self));
+
+  /**
+   * @brief Adds multiple default-constructed modules to the main sub-app.
+   * @warning Triggers an assertion if app is initialized or running.
+   * @tparam Modules Module types (must be default constructible)
+   * @return Reference to app for method chaining
+   */
+  template <DefaultConstructibleModuleTrait... Modules>
+    requires(sizeof...(Modules) > 1 && utils::UniqueTypes<Modules...>)
+  auto AddModules(this auto&& self) -> decltype(std::forward<decltype(self)>(self));
+
+  /**
+   * @brief Adds multiple pre-constructed module instances to the main sub-app.
+   * @details Allows adding modules with non-default constructors or pre-configured state.
    * @warning Triggers an assertion if app is initialized or running.
    * @tparam Modules Module types
+   * @param modules Module instances to add (will be moved)
    * @return Reference to app for method chaining
    */
   template <ModuleTrait... Modules>
     requires(sizeof...(Modules) > 1 && utils::UniqueTypes<Modules...>)
-  auto AddModules(this auto&& self) -> decltype(std::forward<decltype(self)>(self));
+  auto AddModules(this auto&& self, Modules&&... modules) -> decltype(std::forward<decltype(self)>(self));
 
   /**
    * @brief Adds a dynamic module to the main sub-app, taking ownership.
@@ -636,7 +659,7 @@ inline auto App::AddSubApp(this auto&& self, SubApp sub_app, T /*sub_app_tag*/)
   return std::forward<decltype(self)>(self);
 }
 
-template <ModuleTrait T>
+template <DefaultConstructibleModuleTrait T>
 inline auto App::AddModule(this auto&& self) -> decltype(std::forward<decltype(self)>(self)) {
   HELIOS_ASSERT(!self.IsInitialized(), "Failed to add module '{}': Cannot add modules after app initialization!",
                 ModuleNameOf<T>());
@@ -657,13 +680,42 @@ inline auto App::AddModule(this auto&& self) -> decltype(std::forward<decltype(s
   return std::forward<decltype(self)>(self);
 }
 
-template <ModuleTrait... Modules>
+template <ModuleTrait T>
+inline auto App::AddModule(this auto&& self, T module) -> decltype(std::forward<decltype(self)>(self)) {
+  HELIOS_ASSERT(!self.IsInitialized(), "Failed to add module '{}': Cannot add modules after app initialization!",
+                ModuleNameOf<T>());
+
+  HELIOS_ASSERT(!self.IsRunning(), "Failed to add module '{}': Cannot add modules while app is running!",
+                ModuleNameOf<T>());
+
+  constexpr ModuleTypeId id = ModuleTypeIdOf<T>();
+  if (self.module_index_map_.contains(id)) [[unlikely]] {
+    HELIOS_WARN("Module '{}' is already exist in app!", ModuleNameOf<T>());
+    return std::forward<decltype(self)>(self);
+  }
+
+  self.module_index_map_[id] = self.modules_.size();
+  self.modules_.push_back(std::make_unique<T>(std::move(module)));
+  return std::forward<decltype(self)>(self);
+}
+
+template <DefaultConstructibleModuleTrait... Modules>
   requires(sizeof...(Modules) > 1 && utils::UniqueTypes<Modules...>)
 inline auto App::AddModules(this auto&& self) -> decltype(std::forward<decltype(self)>(self)) {
   HELIOS_ASSERT(!self.IsInitialized(), "Failed to add modules: Cannot add modules after app initialization!");
   HELIOS_ASSERT(!self.IsRunning(), "Failed to add modules: Cannot add modules while app is running!");
 
   (self.template AddModule<Modules>(), ...);
+  return std::forward<decltype(self)>(self);
+}
+
+template <ModuleTrait... Modules>
+  requires(sizeof...(Modules) > 1 && utils::UniqueTypes<Modules...>)
+inline auto App::AddModules(this auto&& self, Modules&&... modules) -> decltype(std::forward<decltype(self)>(self)) {
+  HELIOS_ASSERT(!self.IsInitialized(), "Failed to add modules: Cannot add modules after app initialization!");
+  HELIOS_ASSERT(!self.IsRunning(), "Failed to add modules: Cannot add modules while app is running!");
+
+  (self.AddModule(std::forward<Modules>(modules)), ...);
   return std::forward<decltype(self)>(self);
 }
 

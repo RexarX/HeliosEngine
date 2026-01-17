@@ -91,6 +91,18 @@ function(helios_target_set_optimization TARGET)
         >
     )
 
+    # Enable incremental linking for Debug builds on MSVC
+    # This significantly speeds up link times during development
+    get_target_property(_target_type ${TARGET} TYPE)
+    if(_target_type STREQUAL "EXECUTABLE" OR _target_type STREQUAL "SHARED_LIBRARY")
+        target_link_options(${TARGET} PRIVATE
+            $<$<OR:$<CXX_COMPILER_ID:MSVC>,$<AND:$<CXX_COMPILER_ID:Clang>,$<PLATFORM_ID:Windows>>>:
+                $<$<CONFIG:Debug>:/INCREMENTAL>
+                $<$<NOT:$<CONFIG:Debug>>:/INCREMENTAL:NO>
+            >
+        )
+    endif()
+
     # Workaround for Clang < 21: std::forward_like builtin causes issues
     # See: https://github.com/llvm/llvm-project/issues/64029
     if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" AND NOT CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang")
