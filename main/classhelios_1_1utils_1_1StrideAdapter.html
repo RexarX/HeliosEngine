@@ -163,15 +163,730 @@ $(document).ready(function(){initNavTree('classhelios_1_1utils_1_1StrideAdapter.
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classhelios_1_1utils_1_1StrideAdapter-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">helios::utils::StrideAdapter&lt; Iter &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for helios::utils::StrideAdapter&lt; Iter &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classhelios_1_1utils_1_1StrideAdapter.png" usemap="#helios::utils::StrideAdapter_3C_20Iter_20_3E_map" alt=""/>
+  <map id="helios::utils::StrideAdapter_3C_20Iter_20_3E_map" name="helios::utils::StrideAdapter_3C_20Iter_20_3E_map">
+<area href="classhelios_1_1utils_1_1FunctionalAdapterBase.html" alt="helios::utils::FunctionalAdapterBase&lt; StrideAdapter&lt; Iter &gt; &gt;" shape="rect" coords="0,0,355,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a9c85ed288065f7ed514674b2e0f61697" id="r_a9c85ed288065f7ed514674b2e0f61697"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html#a9c85ed288065f7ed514674b2e0f61697">iterator_category</a> = std::forward_iterator_tag</td></tr>
+<tr class="separator:a9c85ed288065f7ed514674b2e0f61697"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9b118caeeed45222090b8ae7bb83efc" id="r_af9b118caeeed45222090b8ae7bb83efc"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html#af9b118caeeed45222090b8ae7bb83efc">value_type</a> = std::iter_value_t&lt; Iter &gt;</td></tr>
+<tr class="separator:af9b118caeeed45222090b8ae7bb83efc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ead3fa64a7dddefc29ac57e790130b7" id="r_a8ead3fa64a7dddefc29ac57e790130b7"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html#a8ead3fa64a7dddefc29ac57e790130b7">difference_type</a> = std::iter_difference_t&lt; Iter &gt;</td></tr>
+<tr class="separator:a8ead3fa64a7dddefc29ac57e790130b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6002667760417fa91003fca4122bd2a9" id="r_a6002667760417fa91003fca4122bd2a9"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html#a6002667760417fa91003fca4122bd2a9">pointer</a> = <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html#af9b118caeeed45222090b8ae7bb83efc">value_type</a> *</td></tr>
+<tr class="separator:a6002667760417fa91003fca4122bd2a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91217f6e770ad4be86ba03f9e1b62b89" id="r_a91217f6e770ad4be86ba03f9e1b62b89"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html#a91217f6e770ad4be86ba03f9e1b62b89">reference</a> = <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html#af9b118caeeed45222090b8ae7bb83efc">value_type</a></td></tr>
+<tr class="separator:a91217f6e770ad4be86ba03f9e1b62b89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a2dab863ce244ecde6c4a2da8786d24ed" id="r_a2dab863ce244ecde6c4a2da8786d24ed"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html#a2dab863ce244ecde6c4a2da8786d24ed">StrideAdapter</a> (Iter <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html#a60a3fdbfe689bfb3945e041aa284e6d1">begin</a>, Iter <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html#aa76fa8fd0285c32b4c3823829b26c9cc">end</a>, size_t stride) noexcept(std::is_nothrow_move_constructible_v&lt; Iter &gt; &amp;&amp;std::is_nothrow_copy_constructible_v&lt; Iter &gt;)</td></tr>
+<tr class="memdesc:a2dab863ce244ecde6c4a2da8786d24ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a stride adapter.  <br /></td></tr>
+<tr class="separator:a2dab863ce244ecde6c4a2da8786d24ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91b200fde7b32ee7842ae8d3e3f450bf" id="r_a91b200fde7b32ee7842ae8d3e3f450bf"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html#a91b200fde7b32ee7842ae8d3e3f450bf">StrideAdapter</a> (const <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a> &amp;) noexcept(std::is_nothrow_copy_constructible_v&lt; Iter &gt;)=default</td></tr>
+<tr class="separator:a91b200fde7b32ee7842ae8d3e3f450bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2494dcd33804767eba18df73f721901" id="r_aa2494dcd33804767eba18df73f721901"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html#aa2494dcd33804767eba18df73f721901">StrideAdapter</a> (<a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a> &amp;&amp;) noexcept(std::is_nothrow_move_constructible_v&lt; Iter &gt;)=default</td></tr>
+<tr class="separator:aa2494dcd33804767eba18df73f721901"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2fbc9c4e8e27f40645e17d75835256f" id="r_aa2fbc9c4e8e27f40645e17d75835256f"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html#aa2fbc9c4e8e27f40645e17d75835256f">~StrideAdapter</a> () noexcept(std::is_nothrow_destructible_v&lt; Iter &gt;)=default</td></tr>
+<tr class="separator:aa2fbc9c4e8e27f40645e17d75835256f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9968d21c0b8b7fdb1f9b750fdb3f041" id="r_af9968d21c0b8b7fdb1f9b750fdb3f041"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html#af9968d21c0b8b7fdb1f9b750fdb3f041">operator=</a> (const <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a> &amp;) noexcept(std::is_nothrow_copy_assignable_v&lt; Iter &gt;)=default</td></tr>
+<tr class="separator:af9968d21c0b8b7fdb1f9b750fdb3f041"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28585cebaee0c18cd67bae8efad5d1de" id="r_a28585cebaee0c18cd67bae8efad5d1de"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html#a28585cebaee0c18cd67bae8efad5d1de">operator=</a> (<a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a> &amp;&amp;) noexcept(std::is_nothrow_move_assignable_v&lt; Iter &gt;)=default</td></tr>
+<tr class="separator:a28585cebaee0c18cd67bae8efad5d1de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8f68f23bf8b6123f7b5d00eecf865ca" id="r_ad8f68f23bf8b6123f7b5d00eecf865ca"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html#ad8f68f23bf8b6123f7b5d00eecf865ca">operator++</a> () noexcept(noexcept(std::declval&lt; Iter &amp; &gt;() !=std::declval&lt; Iter &amp; &gt;()) &amp;&amp;noexcept(++std::declval&lt; Iter &amp; &gt;()))</td></tr>
+<tr class="separator:ad8f68f23bf8b6123f7b5d00eecf865ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37f4c696730edcec73bed88f5c6b3595" id="r_a37f4c696730edcec73bed88f5c6b3595"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html#a37f4c696730edcec73bed88f5c6b3595">operator++</a> (int) noexcept(std::is_nothrow_copy_constructible_v&lt; <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a> &gt; &amp;&amp;noexcept(++std::declval&lt; <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a> &amp; &gt;()))</td></tr>
+<tr class="separator:a37f4c696730edcec73bed88f5c6b3595"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88f622ee61d3c08d6b19c0314b7f5a7c" id="r_a88f622ee61d3c08d6b19c0314b7f5a7c"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html#af9b118caeeed45222090b8ae7bb83efc">value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html#a88f622ee61d3c08d6b19c0314b7f5a7c">operator*</a> () const noexcept(noexcept(*std::declval&lt; const Iter &amp; &gt;()))</td></tr>
+<tr class="separator:a88f622ee61d3c08d6b19c0314b7f5a7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ec8f672425260795b8b256b2368eb0a" id="r_a2ec8f672425260795b8b256b2368eb0a"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html#a2ec8f672425260795b8b256b2368eb0a">operator==</a> (const <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a> &amp;other) const noexcept(noexcept(std::declval&lt; const Iter &amp; &gt;()==std::declval&lt; const Iter &amp; &gt;()))</td></tr>
+<tr class="separator:a2ec8f672425260795b8b256b2368eb0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a876f9f363ec94b3a2039858da64b7d" id="r_a6a876f9f363ec94b3a2039858da64b7d"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html#a6a876f9f363ec94b3a2039858da64b7d">operator!=</a> (const <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a> &amp;other) const noexcept(noexcept(std::declval&lt; const Iter &amp; &gt;() !=std::declval&lt; const Iter &amp; &gt;()))</td></tr>
+<tr class="separator:a6a876f9f363ec94b3a2039858da64b7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60a3fdbfe689bfb3945e041aa284e6d1" id="r_a60a3fdbfe689bfb3945e041aa284e6d1"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html#a60a3fdbfe689bfb3945e041aa284e6d1">begin</a> () const noexcept(std::is_nothrow_constructible_v&lt; <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a>, const Iter &amp;, const Iter &amp;, size_t &gt;)</td></tr>
+<tr class="separator:a60a3fdbfe689bfb3945e041aa284e6d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa76fa8fd0285c32b4c3823829b26c9cc" id="r_aa76fa8fd0285c32b4c3823829b26c9cc"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html#aa76fa8fd0285c32b4c3823829b26c9cc">end</a> () const noexcept(std::is_nothrow_copy_constructible_v&lt; <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a> &gt; &amp;&amp;std::is_nothrow_copy_assignable_v&lt; Iter &gt;)</td></tr>
+<tr class="separator:aa76fa8fd0285c32b4c3823829b26c9cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase&lt; StrideAdapter&lt; Iter &gt; &gt;</a></td></tr>
+<tr class="memitem:ab01800764520f2fa73ef51912adabcf1 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_ab01800764520f2fa73ef51912adabcf1"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#ab01800764520f2fa73ef51912adabcf1">Filter</a> (Pred predicate) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1FilterAdapter.html">FilterAdapter</a>&lt; <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a>&lt; Iter &gt;, Pred &gt;(GetDerived().begin(), GetDerived().end(), std::move(predicate))))</td></tr>
+<tr class="memdesc:ab01800764520f2fa73ef51912adabcf1 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chains another filter operation on top of this iterator.  <br /></td></tr>
+<tr class="separator:ab01800764520f2fa73ef51912adabcf1 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a8b012ca6fc77ef45a0f26f43ecdbe9 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a4a8b012ca6fc77ef45a0f26f43ecdbe9"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a4a8b012ca6fc77ef45a0f26f43ecdbe9">Map</a> (Func transform) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1MapAdapter.html">MapAdapter</a>&lt; <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a>&lt; Iter &gt;, Func &gt;(GetDerived().begin(), GetDerived().end(), std::move(transform))))</td></tr>
+<tr class="memdesc:a4a8b012ca6fc77ef45a0f26f43ecdbe9 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transforms each element using the given function.  <br /></td></tr>
+<tr class="separator:a4a8b012ca6fc77ef45a0f26f43ecdbe9 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af57c214e209204c69e50de8dc935d0a6 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_af57c214e209204c69e50de8dc935d0a6"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#af57c214e209204c69e50de8dc935d0a6">Take</a> (size_t count) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1TakeAdapter.html">TakeAdapter</a>&lt; <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a>&lt; Iter &gt; &gt;(GetDerived().begin(), GetDerived().end(), count)))</td></tr>
+<tr class="memdesc:af57c214e209204c69e50de8dc935d0a6 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Limits the number of elements to at most count.  <br /></td></tr>
+<tr class="separator:af57c214e209204c69e50de8dc935d0a6 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab016bc9350aa52a903bf1b065ea38221 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_ab016bc9350aa52a903bf1b065ea38221"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#ab016bc9350aa52a903bf1b065ea38221">Skip</a> (size_t count) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1SkipAdapter.html">SkipAdapter</a>&lt; <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a>&lt; Iter &gt; &gt;(GetDerived().begin(), GetDerived().end(), count)))</td></tr>
+<tr class="memdesc:ab016bc9350aa52a903bf1b065ea38221 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Skips the first count elements.  <br /></td></tr>
+<tr class="separator:ab016bc9350aa52a903bf1b065ea38221 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5941ca7ea5dbe31b0240dd3dbe475396 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a5941ca7ea5dbe31b0240dd3dbe475396"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a5941ca7ea5dbe31b0240dd3dbe475396">TakeWhile</a> (Pred predicate) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1TakeWhileAdapter.html">TakeWhileAdapter</a>&lt; <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a>&lt; Iter &gt;, Pred &gt;(GetDerived().begin(), GetDerived().end(), std::move(predicate))))</td></tr>
+<tr class="memdesc:a5941ca7ea5dbe31b0240dd3dbe475396 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes elements while a predicate is true.  <br /></td></tr>
+<tr class="separator:a5941ca7ea5dbe31b0240dd3dbe475396 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaaf89432c98c7a6052e894c99153620b inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_aaaf89432c98c7a6052e894c99153620b"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#aaaf89432c98c7a6052e894c99153620b">SkipWhile</a> (Pred predicate) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1SkipWhileAdapter.html">SkipWhileAdapter</a>&lt; <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a>&lt; Iter &gt;, Pred &gt;(GetDerived().begin(), GetDerived().end(), std::move(predicate))))</td></tr>
+<tr class="memdesc:aaaf89432c98c7a6052e894c99153620b inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Skips elements while a predicate is true.  <br /></td></tr>
+<tr class="separator:aaaf89432c98c7a6052e894c99153620b inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f240c888f45805510f2af63dfadb2b8 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a0f240c888f45805510f2af63dfadb2b8"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a0f240c888f45805510f2af63dfadb2b8">Enumerate</a> () const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1EnumerateAdapter.html">EnumerateAdapter</a>&lt; <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a>&lt; Iter &gt; &gt;(GetDerived().begin(), GetDerived().end())))</td></tr>
+<tr class="memdesc:a0f240c888f45805510f2af63dfadb2b8 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds an index to each element.  <br /></td></tr>
+<tr class="separator:a0f240c888f45805510f2af63dfadb2b8 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73a8bfda58cfb57697f1dd19e95bd6a6 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a73a8bfda58cfb57697f1dd19e95bd6a6"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a73a8bfda58cfb57697f1dd19e95bd6a6">Inspect</a> (Func inspector) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1InspectAdapter.html">InspectAdapter</a>&lt; <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a>&lt; Iter &gt;, Func &gt;(GetDerived().begin(), GetDerived().end(), std::move(inspector))))</td></tr>
+<tr class="memdesc:a73a8bfda58cfb57697f1dd19e95bd6a6 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Observes each element without modifying it.  <br /></td></tr>
+<tr class="separator:a73a8bfda58cfb57697f1dd19e95bd6a6 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3387620f51635c19a2b16abe92c3a2e inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_ac3387620f51635c19a2b16abe92c3a2e"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#ac3387620f51635c19a2b16abe92c3a2e">StepBy</a> (size_t step) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1StepByAdapter.html">StepByAdapter</a>&lt; <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a>&lt; Iter &gt; &gt;(GetDerived().begin(), GetDerived().end(), step)))</td></tr>
+<tr class="memdesc:ac3387620f51635c19a2b16abe92c3a2e inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes every Nth element.  <br /></td></tr>
+<tr class="separator:ac3387620f51635c19a2b16abe92c3a2e inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9db7228e3579aefbc75c78291c5e4b59 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a9db7228e3579aefbc75c78291c5e4b59"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a9db7228e3579aefbc75c78291c5e4b59">Chain</a> (OtherIter begin, OtherIter end) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1ChainAdapter.html">ChainAdapter</a>&lt; <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a>&lt; Iter &gt;, OtherIter &gt;(GetDerived().begin(), GetDerived().end(), std::move(begin), std::move(end))))</td></tr>
+<tr class="memdesc:a9db7228e3579aefbc75c78291c5e4b59 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chains another range after this one.  <br /></td></tr>
+<tr class="separator:a9db7228e3579aefbc75c78291c5e4b59 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a019d17818973e1e6b24da6ce2290f9d5 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a019d17818973e1e6b24da6ce2290f9d5"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a019d17818973e1e6b24da6ce2290f9d5">Chain</a> (R &amp;range) const noexcept(noexcept(ChainAdapterFromRange(GetDerived(), range)))</td></tr>
+<tr class="memdesc:a019d17818973e1e6b24da6ce2290f9d5 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chains another range after this one.  <br /></td></tr>
+<tr class="separator:a019d17818973e1e6b24da6ce2290f9d5 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b65f73316a42d8e0d021013dac3d11b inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a3b65f73316a42d8e0d021013dac3d11b"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a3b65f73316a42d8e0d021013dac3d11b">Chain</a> (const R &amp;range) const noexcept(noexcept(ChainAdapterFromRange(GetDerived(), range)))</td></tr>
+<tr class="memdesc:a3b65f73316a42d8e0d021013dac3d11b inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chains another range after this one.  <br /></td></tr>
+<tr class="separator:a3b65f73316a42d8e0d021013dac3d11b inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a634889b61feadebcd7701eb099815a8f inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a634889b61feadebcd7701eb099815a8f"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a634889b61feadebcd7701eb099815a8f">Reverse</a> () const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1ReverseAdapter.html">ReverseAdapter</a>&lt; <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a>&lt; Iter &gt; &gt;(GetDerived().begin(), GetDerived().end())))</td></tr>
+<tr class="memdesc:a634889b61feadebcd7701eb099815a8f inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reverses the order of elements.  <br /></td></tr>
+<tr class="separator:a634889b61feadebcd7701eb099815a8f inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6785a8a5adc56bb25294bbfef261000 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_ab6785a8a5adc56bb25294bbfef261000"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#ab6785a8a5adc56bb25294bbfef261000">Slide</a> (size_t window_size) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1SlideAdapter.html">SlideAdapter</a>&lt; <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a>&lt; Iter &gt; &gt;(GetDerived().begin(), GetDerived().end(), window_size)))</td></tr>
+<tr class="memdesc:ab6785a8a5adc56bb25294bbfef261000 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates sliding windows over elements.  <br /></td></tr>
+<tr class="separator:ab6785a8a5adc56bb25294bbfef261000 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f4c201c163d5be88b9f3e351caefeba inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a6f4c201c163d5be88b9f3e351caefeba"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6f4c201c163d5be88b9f3e351caefeba">Stride</a> (size_t stride) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a>&lt; <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a>&lt; Iter &gt; &gt;(GetDerived().begin(), GetDerived().end(), stride)))</td></tr>
+<tr class="memdesc:a6f4c201c163d5be88b9f3e351caefeba inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes every Nth element with stride.  <br /></td></tr>
+<tr class="separator:a6f4c201c163d5be88b9f3e351caefeba inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaba0fd7e864b439cc55db33bd095f4a3 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_aaba0fd7e864b439cc55db33bd095f4a3"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#aaba0fd7e864b439cc55db33bd095f4a3">Zip</a> (OtherIter begin, OtherIter end) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1ZipAdapter.html">ZipAdapter</a>&lt; <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a>&lt; Iter &gt;, OtherIter &gt;(GetDerived().begin(), GetDerived().end(), std::move(begin), std::move(end))))</td></tr>
+<tr class="memdesc:aaba0fd7e864b439cc55db33bd095f4a3 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Zips another range with this one.  <br /></td></tr>
+<tr class="separator:aaba0fd7e864b439cc55db33bd095f4a3 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86c4b4bb7e6d158e8968afb2ce6f196e inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a86c4b4bb7e6d158e8968afb2ce6f196e"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a86c4b4bb7e6d158e8968afb2ce6f196e">Zip</a> (R &amp;range) const noexcept(noexcept(ZipAdapterFromRange(GetDerived(), range)))</td></tr>
+<tr class="memdesc:a86c4b4bb7e6d158e8968afb2ce6f196e inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Zips another range with this one.  <br /></td></tr>
+<tr class="separator:a86c4b4bb7e6d158e8968afb2ce6f196e inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc4bcd87112873fc5d34617e5b7444e1 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_adc4bcd87112873fc5d34617e5b7444e1"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#adc4bcd87112873fc5d34617e5b7444e1">Zip</a> (const R &amp;range) const noexcept(noexcept(ZipAdapterFromRange(GetDerived(), range)))</td></tr>
+<tr class="memdesc:adc4bcd87112873fc5d34617e5b7444e1 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Zips another range with this one.  <br /></td></tr>
+<tr class="separator:adc4bcd87112873fc5d34617e5b7444e1 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac699b03f66eb2139beb18126191d27f9 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_ac699b03f66eb2139beb18126191d27f9"><td class="memItemLeft" align="right" valign="top">constexpr void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#ac699b03f66eb2139beb18126191d27f9">ForEach</a> (const Action &amp;action) const</td></tr>
+<tr class="memdesc:ac699b03f66eb2139beb18126191d27f9 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: applies an action to each element.  <br /></td></tr>
+<tr class="separator:ac699b03f66eb2139beb18126191d27f9 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad37328f4c6e64ff7eb15abb9a2b2f894 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_ad37328f4c6e64ff7eb15abb9a2b2f894"><td class="memItemLeft" align="right" valign="top">constexpr T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#ad37328f4c6e64ff7eb15abb9a2b2f894">Fold</a> (T init, const Folder &amp;folder) const</td></tr>
+<tr class="memdesc:ad37328f4c6e64ff7eb15abb9a2b2f894 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: reduces elements to a single value using a folder function.  <br /></td></tr>
+<tr class="separator:ad37328f4c6e64ff7eb15abb9a2b2f894 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af289817b75ec2f37aede9d9329dead09 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_af289817b75ec2f37aede9d9329dead09"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#af289817b75ec2f37aede9d9329dead09">Any</a> (const Pred &amp;predicate) const</td></tr>
+<tr class="memdesc:af289817b75ec2f37aede9d9329dead09 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: checks if any element satisfies a predicate.  <br /></td></tr>
+<tr class="separator:af289817b75ec2f37aede9d9329dead09 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25a0467b816b37cd68d74177e21e096b inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a25a0467b816b37cd68d74177e21e096b"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a25a0467b816b37cd68d74177e21e096b">All</a> (const Pred &amp;predicate) const</td></tr>
+<tr class="memdesc:a25a0467b816b37cd68d74177e21e096b inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: checks if all elements satisfy a predicate.  <br /></td></tr>
+<tr class="separator:a25a0467b816b37cd68d74177e21e096b inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a791509606f43cb6011e5975d483d6589 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a791509606f43cb6011e5975d483d6589"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a791509606f43cb6011e5975d483d6589">None</a> (const Pred &amp;predicate) const</td></tr>
+<tr class="memdesc:a791509606f43cb6011e5975d483d6589 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: checks if no elements satisfy a predicate.  <br /></td></tr>
+<tr class="separator:a791509606f43cb6011e5975d483d6589 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b714e5c8e0d77b1c486a8685bff6bee inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a7b714e5c8e0d77b1c486a8685bff6bee"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a7b714e5c8e0d77b1c486a8685bff6bee">Find</a> (const Pred &amp;predicate) const</td></tr>
+<tr class="memdesc:a7b714e5c8e0d77b1c486a8685bff6bee inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: finds the first element satisfying a predicate.  <br /></td></tr>
+<tr class="separator:a7b714e5c8e0d77b1c486a8685bff6bee inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a067a927e5be14e8851642b1a49ff0636 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a067a927e5be14e8851642b1a49ff0636"><td class="memItemLeft" align="right" valign="top">constexpr size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a067a927e5be14e8851642b1a49ff0636">CountIf</a> (const Pred &amp;predicate) const</td></tr>
+<tr class="memdesc:a067a927e5be14e8851642b1a49ff0636 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: counts elements satisfying a predicate.  <br /></td></tr>
+<tr class="separator:a067a927e5be14e8851642b1a49ff0636 inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bddc9da14c1742058e0f0c816aa44ce inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a7bddc9da14c1742058e0f0c816aa44ce"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a7bddc9da14c1742058e0f0c816aa44ce">Partition</a> (const Pred &amp;predicate) const</td></tr>
+<tr class="memdesc:a7bddc9da14c1742058e0f0c816aa44ce inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: partitions elements into two groups based on a predicate.  <br /></td></tr>
+<tr class="separator:a7bddc9da14c1742058e0f0c816aa44ce inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5413a0ac213cda3a6b508881af956acc inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a5413a0ac213cda3a6b508881af956acc"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a5413a0ac213cda3a6b508881af956acc">MaxBy</a> (const KeyFunc &amp;key_func) const</td></tr>
+<tr class="memdesc:a5413a0ac213cda3a6b508881af956acc inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: finds the element with the maximum value according to a key function.  <br /></td></tr>
+<tr class="separator:a5413a0ac213cda3a6b508881af956acc inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac70342387e9f9db44ba448e391eafbd inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_aac70342387e9f9db44ba448e391eafbd"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#aac70342387e9f9db44ba448e391eafbd">MinBy</a> (const KeyFunc &amp;key_func) const</td></tr>
+<tr class="memdesc:aac70342387e9f9db44ba448e391eafbd inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: finds the element with the minimum value according to a key function.  <br /></td></tr>
+<tr class="separator:aac70342387e9f9db44ba448e391eafbd inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34abb87022d768a03070fcccd64df0ac inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a34abb87022d768a03070fcccd64df0ac"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a34abb87022d768a03070fcccd64df0ac">GroupBy</a> (const KeyFunc &amp;key_func) const</td></tr>
+<tr class="memdesc:a34abb87022d768a03070fcccd64df0ac inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: groups elements by a key function.  <br /></td></tr>
+<tr class="separator:a34abb87022d768a03070fcccd64df0ac inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a834e53c6229570dceb2a30a7fd5bfa4d inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a834e53c6229570dceb2a30a7fd5bfa4d"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a834e53c6229570dceb2a30a7fd5bfa4d">Collect</a> () const</td></tr>
+<tr class="memdesc:a834e53c6229570dceb2a30a7fd5bfa4d inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: collects all elements into a vector.  <br /></td></tr>
+<tr class="separator:a834e53c6229570dceb2a30a7fd5bfa4d inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6352ac1157243d7ab76a014120fa68ac inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a6352ac1157243d7ab76a014120fa68ac"><td class="memItemLeft" align="right" valign="top">constexpr void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6352ac1157243d7ab76a014120fa68ac">Into</a> (OutIt out) const</td></tr>
+<tr class="separator:a6352ac1157243d7ab76a014120fa68ac inherit pub_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classhelios_1_1utils_1_1FunctionalAdapterBase')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase&lt; StrideAdapter&lt; Iter &gt; &gt;</a></td></tr>
+<tr class="memitem:a6a31b42112f20291cb0a04d8e93a8f00 inherit pro_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_a6a31b42112f20291cb0a04d8e93a8f00"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a>&lt; Iter &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a> () noexcept</td></tr>
+<tr class="memdesc:a6a31b42112f20291cb0a04d8e93a8f00 inherit pro_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets reference to derived class instance.  <br /></td></tr>
+<tr class="separator:a6a31b42112f20291cb0a04d8e93a8f00 inherit pro_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aece9f4d575d09f5952d659dbbd03f835 inherit pro_methods_classhelios_1_1utils_1_1FunctionalAdapterBase" id="r_aece9f4d575d09f5952d659dbbd03f835"><td class="memItemLeft" align="right" valign="top">constexpr const <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a>&lt; Iter &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#aece9f4d575d09f5952d659dbbd03f835">GetDerived</a> () const noexcept</td></tr>
+<tr class="memdesc:aece9f4d575d09f5952d659dbbd03f835 inherit pro_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets const reference to derived class instance.  <br /></td></tr>
+<tr class="separator:aece9f4d575d09f5952d659dbbd03f835 inherit pro_methods_classhelios_1_1utils_1_1FunctionalAdapterBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename Iter&gt;<br />
 requires StrideAdapterRequirements&lt;Iter&gt;<br />
 class helios::utils::StrideAdapter&lt; Iter &gt;</div>
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l00358">358</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-</div></div><!-- contents -->
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02295">2295</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a8ead3fa64a7dddefc29ac57e790130b7" name="a8ead3fa64a7dddefc29ac57e790130b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ead3fa64a7dddefc29ac57e790130b7">&#9670;&#160;</a></span>difference_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iter &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">helios::utils::StrideAdapter</a>&lt; Iter &gt;::difference_type =  std::iter_difference_t&lt;Iter&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a189">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02299">2299</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a9c85ed288065f7ed514674b2e0f61697" name="a9c85ed288065f7ed514674b2e0f61697"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c85ed288065f7ed514674b2e0f61697">&#9670;&#160;</a></span>iterator_category</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iter &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">helios::utils::StrideAdapter</a>&lt; Iter &gt;::iterator_category =  std::forward_iterator_tag</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a187">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02297">2297</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a6002667760417fa91003fca4122bd2a9" name="a6002667760417fa91003fca4122bd2a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6002667760417fa91003fca4122bd2a9">&#9670;&#160;</a></span>pointer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iter &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">helios::utils::StrideAdapter</a>&lt; Iter &gt;::pointer =  <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html#af9b118caeeed45222090b8ae7bb83efc">value_type</a>*</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a190">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02300">2300</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a91217f6e770ad4be86ba03f9e1b62b89" name="a91217f6e770ad4be86ba03f9e1b62b89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91217f6e770ad4be86ba03f9e1b62b89">&#9670;&#160;</a></span>reference</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iter &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">helios::utils::StrideAdapter</a>&lt; Iter &gt;::reference =  <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html#af9b118caeeed45222090b8ae7bb83efc">value_type</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a191">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02301">2301</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+
+</div>
+</div>
+<a id="af9b118caeeed45222090b8ae7bb83efc" name="af9b118caeeed45222090b8ae7bb83efc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9b118caeeed45222090b8ae7bb83efc">&#9670;&#160;</a></span>value_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iter &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">helios::utils::StrideAdapter</a>&lt; Iter &gt;::value_type =  std::iter_value_t&lt;Iter&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a188">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02298">2298</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a2dab863ce244ecde6c4a2da8786d24ed" name="a2dab863ce244ecde6c4a2da8786d24ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2dab863ce244ecde6c4a2da8786d24ed">&#9670;&#160;</a></span>StrideAdapter() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iter &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">helios::utils::StrideAdapter</a>&lt; Iter &gt;::StrideAdapter </td>
+          <td>(</td>
+          <td class="paramtype">Iter&#160;</td>
+          <td class="paramname"><em>begin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iter&#160;</td>
+          <td class="paramname"><em>end</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>stride</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructs a stride adapter. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">begin</td><td>Iterator to the beginning of the range </td></tr>
+    <tr><td class="paramname">end</td><td>Iterator to the end of the range </td></tr>
+    <tr><td class="paramname">stride</td><td>Number of elements to skip between yields (1 = every element, 2 = every other, etc.) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section warning"><dt>Warning</dt><dd>stride must be greater than 0 </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02310">2310</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 2312</span>      : begin_(std::move(<a class="code hl_function" href="classhelios_1_1utils_1_1StrideAdapter.html#a60a3fdbfe689bfb3945e041aa284e6d1">begin</a>)), current_(begin_), end_(std::move(<a class="code hl_function" href="classhelios_1_1utils_1_1StrideAdapter.html#aa76fa8fd0285c32b4c3823829b26c9cc">end</a>)), stride_(stride) {}</div>
+<div class="ttc" id="aclasshelios_1_1utils_1_1StrideAdapter_html_a60a3fdbfe689bfb3945e041aa284e6d1"><div class="ttname"><a href="classhelios_1_1utils_1_1StrideAdapter.html#a60a3fdbfe689bfb3945e041aa284e6d1">helios::utils::StrideAdapter::begin</a></div><div class="ttdeci">constexpr StrideAdapter begin() const noexcept(std::is_nothrow_constructible_v&lt; StrideAdapter, const Iter &amp;, const Iter &amp;, size_t &gt;)</div><div class="ttdef"><b>Definition</b> <a href="functional__adapters_8hpp_source.html#l02338">functional_adapters.hpp:2338</a></div></div>
+<div class="ttc" id="aclasshelios_1_1utils_1_1StrideAdapter_html_aa76fa8fd0285c32b4c3823829b26c9cc"><div class="ttname"><a href="classhelios_1_1utils_1_1StrideAdapter.html#aa76fa8fd0285c32b4c3823829b26c9cc">helios::utils::StrideAdapter::end</a></div><div class="ttdeci">constexpr StrideAdapter end() const noexcept(std::is_nothrow_copy_constructible_v&lt; StrideAdapter &gt; &amp;&amp;std::is_nothrow_copy_assignable_v&lt; Iter &gt;)</div><div class="ttdef"><b>Definition</b> <a href="functional__adapters_8hpp_source.html#l02375">functional_adapters.hpp:2375</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a91b200fde7b32ee7842ae8d3e3f450bf" name="a91b200fde7b32ee7842ae8d3e3f450bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91b200fde7b32ee7842ae8d3e3f450bf">&#9670;&#160;</a></span>StrideAdapter() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iter &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">helios::utils::StrideAdapter</a>&lt; Iter &gt;::StrideAdapter </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a>&lt; Iter &gt; &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa2494dcd33804767eba18df73f721901" name="aa2494dcd33804767eba18df73f721901"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2494dcd33804767eba18df73f721901">&#9670;&#160;</a></span>StrideAdapter() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iter &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">helios::utils::StrideAdapter</a>&lt; Iter &gt;::StrideAdapter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a>&lt; Iter &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa2fbc9c4e8e27f40645e17d75835256f" name="aa2fbc9c4e8e27f40645e17d75835256f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2fbc9c4e8e27f40645e17d75835256f">&#9670;&#160;</a></span>~StrideAdapter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iter &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">helios::utils::StrideAdapter</a>&lt; Iter &gt;::~<a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a194">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a60a3fdbfe689bfb3945e041aa284e6d1" name="a60a3fdbfe689bfb3945e041aa284e6d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60a3fdbfe689bfb3945e041aa284e6d1">&#9670;&#160;</a></span>begin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iter &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a> <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">helios::utils::StrideAdapter</a>&lt; Iter &gt;::begin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a192">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02338">2338</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 2339</span>                                                                                               {</div>
+<div class="line"><span class="lineno"> 2340</span>    <span class="keywordflow">return</span> {begin_, end_, stride_};</div>
+<div class="line"><span class="lineno"> 2341</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aa76fa8fd0285c32b4c3823829b26c9cc" name="aa76fa8fd0285c32b4c3823829b26c9cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa76fa8fd0285c32b4c3823829b26c9cc">&#9670;&#160;</a></span>end()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iter &gt; <br />
+requires StrideAdapterRequirements&lt;Iter&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">helios::utils::StrideAdapter</a>&lt; Iter &gt;::end </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a193">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02375">2375</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 2377</span>                         {</div>
+<div class="line"><span class="lineno"> 2378</span>  <span class="keyword">auto</span> result = *<span class="keyword">this</span>;</div>
+<div class="line"><span class="lineno"> 2379</span>  result.current_ = end_;</div>
+<div class="line"><span class="lineno"> 2380</span>  <span class="keywordflow">return</span> result;</div>
+<div class="line"><span class="lineno"> 2381</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a6a876f9f363ec94b3a2039858da64b7d" name="a6a876f9f363ec94b3a2039858da64b7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a876f9f363ec94b3a2039858da64b7d">&#9670;&#160;</a></span>operator!=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iter &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">helios::utils::StrideAdapter</a>&lt; Iter &gt;::operator!= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a>&lt; Iter &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a199">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02333">2333</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 2334</span>                                                                                 {</div>
+<div class="line"><span class="lineno"> 2335</span>    <span class="keywordflow">return</span> current_ != other.current_;</div>
+<div class="line"><span class="lineno"> 2336</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a88f622ee61d3c08d6b19c0314b7f5a7c" name="a88f622ee61d3c08d6b19c0314b7f5a7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88f622ee61d3c08d6b19c0314b7f5a7c">&#9670;&#160;</a></span>operator*()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iter &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html#af9b118caeeed45222090b8ae7bb83efc">value_type</a> <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">helios::utils::StrideAdapter</a>&lt; Iter &gt;::operator* </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a197">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02326">2326</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 2326</span>{ <span class="keywordflow">return</span> *current_; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ad8f68f23bf8b6123f7b5d00eecf865ca" name="ad8f68f23bf8b6123f7b5d00eecf865ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8f68f23bf8b6123f7b5d00eecf865ca">&#9670;&#160;</a></span>operator++() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iter &gt; <br />
+requires StrideAdapterRequirements&lt;Iter&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">helios::utils::StrideAdapter</a>&lt; Iter &gt;::operator++ </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a196">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02355">2355</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 2356</span>                                                                                                             {</div>
+<div class="line"><span class="lineno"> 2357</span>  <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; stride_ &amp;&amp; current_ != end_; ++i) {</div>
+<div class="line"><span class="lineno"> 2358</span>    ++current_;</div>
+<div class="line"><span class="lineno"> 2359</span>  }</div>
+<div class="line"><span class="lineno"> 2360</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><span class="lineno"> 2361</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a37f4c696730edcec73bed88f5c6b3595" name="a37f4c696730edcec73bed88f5c6b3595"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37f4c696730edcec73bed88f5c6b3595">&#9670;&#160;</a></span>operator++() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iter &gt; <br />
+requires StrideAdapterRequirements&lt;Iter&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">helios::utils::StrideAdapter</a>&lt; Iter &gt;::operator++ </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02365">2365</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 2367</span>                     {</div>
+<div class="line"><span class="lineno"> 2368</span>  <span class="keyword">auto</span> temp = *<span class="keyword">this</span>;</div>
+<div class="line"><span class="lineno"> 2369</span>  ++(*this);</div>
+<div class="line"><span class="lineno"> 2370</span>  <span class="keywordflow">return</span> temp;</div>
+<div class="line"><span class="lineno"> 2371</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="af9968d21c0b8b7fdb1f9b750fdb3f041" name="af9968d21c0b8b7fdb1f9b750fdb3f041"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9968d21c0b8b7fdb1f9b750fdb3f041">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iter &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a> &amp; <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">helios::utils::StrideAdapter</a>&lt; Iter &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a>&lt; Iter &gt; &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a195">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<a id="a28585cebaee0c18cd67bae8efad5d1de" name="a28585cebaee0c18cd67bae8efad5d1de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28585cebaee0c18cd67bae8efad5d1de">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iter &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a> &amp; <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">helios::utils::StrideAdapter</a>&lt; Iter &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a>&lt; Iter &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2ec8f672425260795b8b256b2368eb0a" name="a2ec8f672425260795b8b256b2368eb0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ec8f672425260795b8b256b2368eb0a">&#9670;&#160;</a></span>operator==()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iter &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">helios::utils::StrideAdapter</a>&lt; Iter &gt;::operator== </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a>&lt; Iter &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a198">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02328">2328</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 2329</span>                                                                                 {</div>
+<div class="line"><span class="lineno"> 2330</span>    <span class="keywordflow">return</span> current_ == other.current_;</div>
+<div class="line"><span class="lineno"> 2331</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
 <!-- start footer part -->

@@ -163,14 +163,1937 @@ $(document).ready(function(){initNavTree('classhelios_1_1utils_1_1FunctionalAdap
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="classhelios_1_1utils_1_1FunctionalAdapterBase-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">helios::utils::FunctionalAdapterBase&lt; Derived &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>CRTP base class providing common adapter operations.  
+ <a href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ab01800764520f2fa73ef51912adabcf1" id="r_ab01800764520f2fa73ef51912adabcf1"><td class="memTemplParams" colspan="2">template&lt;typename Pred &gt; </td></tr>
+<tr class="memitem:ab01800764520f2fa73ef51912adabcf1"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#ab01800764520f2fa73ef51912adabcf1">Filter</a> (Pred predicate) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1FilterAdapter.html">FilterAdapter</a>&lt; Derived, Pred &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), std::move(predicate))))</td></tr>
+<tr class="memdesc:ab01800764520f2fa73ef51912adabcf1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chains another filter operation on top of this iterator.  <br /></td></tr>
+<tr class="separator:ab01800764520f2fa73ef51912adabcf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a8b012ca6fc77ef45a0f26f43ecdbe9" id="r_a4a8b012ca6fc77ef45a0f26f43ecdbe9"><td class="memTemplParams" colspan="2">template&lt;typename Func &gt; </td></tr>
+<tr class="memitem:a4a8b012ca6fc77ef45a0f26f43ecdbe9"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a4a8b012ca6fc77ef45a0f26f43ecdbe9">Map</a> (Func transform) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1MapAdapter.html">MapAdapter</a>&lt; Derived, Func &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), std::move(transform))))</td></tr>
+<tr class="memdesc:a4a8b012ca6fc77ef45a0f26f43ecdbe9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transforms each element using the given function.  <br /></td></tr>
+<tr class="separator:a4a8b012ca6fc77ef45a0f26f43ecdbe9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af57c214e209204c69e50de8dc935d0a6" id="r_af57c214e209204c69e50de8dc935d0a6"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#af57c214e209204c69e50de8dc935d0a6">Take</a> (size_t count) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1TakeAdapter.html">TakeAdapter</a>&lt; Derived &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), count)))</td></tr>
+<tr class="memdesc:af57c214e209204c69e50de8dc935d0a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Limits the number of elements to at most count.  <br /></td></tr>
+<tr class="separator:af57c214e209204c69e50de8dc935d0a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab016bc9350aa52a903bf1b065ea38221" id="r_ab016bc9350aa52a903bf1b065ea38221"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#ab016bc9350aa52a903bf1b065ea38221">Skip</a> (size_t count) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1SkipAdapter.html">SkipAdapter</a>&lt; Derived &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), count)))</td></tr>
+<tr class="memdesc:ab016bc9350aa52a903bf1b065ea38221"><td class="mdescLeft">&#160;</td><td class="mdescRight">Skips the first count elements.  <br /></td></tr>
+<tr class="separator:ab016bc9350aa52a903bf1b065ea38221"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5941ca7ea5dbe31b0240dd3dbe475396" id="r_a5941ca7ea5dbe31b0240dd3dbe475396"><td class="memTemplParams" colspan="2">template&lt;typename Pred &gt; </td></tr>
+<tr class="memitem:a5941ca7ea5dbe31b0240dd3dbe475396"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a5941ca7ea5dbe31b0240dd3dbe475396">TakeWhile</a> (Pred predicate) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1TakeWhileAdapter.html">TakeWhileAdapter</a>&lt; Derived, Pred &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), std::move(predicate))))</td></tr>
+<tr class="memdesc:a5941ca7ea5dbe31b0240dd3dbe475396"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes elements while a predicate is true.  <br /></td></tr>
+<tr class="separator:a5941ca7ea5dbe31b0240dd3dbe475396"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaaf89432c98c7a6052e894c99153620b" id="r_aaaf89432c98c7a6052e894c99153620b"><td class="memTemplParams" colspan="2">template&lt;typename Pred &gt; </td></tr>
+<tr class="memitem:aaaf89432c98c7a6052e894c99153620b"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#aaaf89432c98c7a6052e894c99153620b">SkipWhile</a> (Pred predicate) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1SkipWhileAdapter.html">SkipWhileAdapter</a>&lt; Derived, Pred &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), std::move(predicate))))</td></tr>
+<tr class="memdesc:aaaf89432c98c7a6052e894c99153620b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Skips elements while a predicate is true.  <br /></td></tr>
+<tr class="separator:aaaf89432c98c7a6052e894c99153620b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f240c888f45805510f2af63dfadb2b8" id="r_a0f240c888f45805510f2af63dfadb2b8"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a0f240c888f45805510f2af63dfadb2b8">Enumerate</a> () const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1EnumerateAdapter.html">EnumerateAdapter</a>&lt; Derived &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end())))</td></tr>
+<tr class="memdesc:a0f240c888f45805510f2af63dfadb2b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds an index to each element.  <br /></td></tr>
+<tr class="separator:a0f240c888f45805510f2af63dfadb2b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73a8bfda58cfb57697f1dd19e95bd6a6" id="r_a73a8bfda58cfb57697f1dd19e95bd6a6"><td class="memTemplParams" colspan="2">template&lt;typename Func &gt; </td></tr>
+<tr class="memitem:a73a8bfda58cfb57697f1dd19e95bd6a6"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a73a8bfda58cfb57697f1dd19e95bd6a6">Inspect</a> (Func inspector) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1InspectAdapter.html">InspectAdapter</a>&lt; Derived, Func &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), std::move(inspector))))</td></tr>
+<tr class="memdesc:a73a8bfda58cfb57697f1dd19e95bd6a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Observes each element without modifying it.  <br /></td></tr>
+<tr class="separator:a73a8bfda58cfb57697f1dd19e95bd6a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3387620f51635c19a2b16abe92c3a2e" id="r_ac3387620f51635c19a2b16abe92c3a2e"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#ac3387620f51635c19a2b16abe92c3a2e">StepBy</a> (size_t step) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1StepByAdapter.html">StepByAdapter</a>&lt; Derived &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), step)))</td></tr>
+<tr class="memdesc:ac3387620f51635c19a2b16abe92c3a2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes every Nth element.  <br /></td></tr>
+<tr class="separator:ac3387620f51635c19a2b16abe92c3a2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9db7228e3579aefbc75c78291c5e4b59" id="r_a9db7228e3579aefbc75c78291c5e4b59"><td class="memTemplParams" colspan="2">template&lt;typename OtherIter &gt; </td></tr>
+<tr class="memitem:a9db7228e3579aefbc75c78291c5e4b59"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a9db7228e3579aefbc75c78291c5e4b59">Chain</a> (OtherIter begin, OtherIter end) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1ChainAdapter.html">ChainAdapter</a>&lt; Derived, OtherIter &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), std::move(begin), std::move(end))))</td></tr>
+<tr class="memdesc:a9db7228e3579aefbc75c78291c5e4b59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chains another range after this one.  <br /></td></tr>
+<tr class="separator:a9db7228e3579aefbc75c78291c5e4b59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a019d17818973e1e6b24da6ce2290f9d5" id="r_a019d17818973e1e6b24da6ce2290f9d5"><td class="memTemplParams" colspan="2">template&lt;typename R &gt; </td></tr>
+<tr class="memitem:a019d17818973e1e6b24da6ce2290f9d5"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a019d17818973e1e6b24da6ce2290f9d5">Chain</a> (R &amp;range) const noexcept(noexcept(<a class="el" href="namespacehelios_1_1utils.html#ab1d58f627e97599dde0bc68dda816bb2">ChainAdapterFromRange</a>(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>(), range)))</td></tr>
+<tr class="memdesc:a019d17818973e1e6b24da6ce2290f9d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chains another range after this one.  <br /></td></tr>
+<tr class="separator:a019d17818973e1e6b24da6ce2290f9d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b65f73316a42d8e0d021013dac3d11b" id="r_a3b65f73316a42d8e0d021013dac3d11b"><td class="memTemplParams" colspan="2">template&lt;typename R &gt; </td></tr>
+<tr class="memitem:a3b65f73316a42d8e0d021013dac3d11b"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a3b65f73316a42d8e0d021013dac3d11b">Chain</a> (const R &amp;range) const noexcept(noexcept(<a class="el" href="namespacehelios_1_1utils.html#ab1d58f627e97599dde0bc68dda816bb2">ChainAdapterFromRange</a>(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>(), range)))</td></tr>
+<tr class="memdesc:a3b65f73316a42d8e0d021013dac3d11b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chains another range after this one.  <br /></td></tr>
+<tr class="separator:a3b65f73316a42d8e0d021013dac3d11b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a634889b61feadebcd7701eb099815a8f" id="r_a634889b61feadebcd7701eb099815a8f"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a634889b61feadebcd7701eb099815a8f">Reverse</a> () const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1ReverseAdapter.html">ReverseAdapter</a>&lt; Derived &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end())))</td></tr>
+<tr class="memdesc:a634889b61feadebcd7701eb099815a8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reverses the order of elements.  <br /></td></tr>
+<tr class="separator:a634889b61feadebcd7701eb099815a8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6785a8a5adc56bb25294bbfef261000" id="r_ab6785a8a5adc56bb25294bbfef261000"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#ab6785a8a5adc56bb25294bbfef261000">Slide</a> (size_t window_size) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1SlideAdapter.html">SlideAdapter</a>&lt; Derived &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), window_size)))</td></tr>
+<tr class="memdesc:ab6785a8a5adc56bb25294bbfef261000"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates sliding windows over elements.  <br /></td></tr>
+<tr class="separator:ab6785a8a5adc56bb25294bbfef261000"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f4c201c163d5be88b9f3e351caefeba" id="r_a6f4c201c163d5be88b9f3e351caefeba"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6f4c201c163d5be88b9f3e351caefeba">Stride</a> (size_t stride) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a>&lt; Derived &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), stride)))</td></tr>
+<tr class="memdesc:a6f4c201c163d5be88b9f3e351caefeba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes every Nth element with stride.  <br /></td></tr>
+<tr class="separator:a6f4c201c163d5be88b9f3e351caefeba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaba0fd7e864b439cc55db33bd095f4a3" id="r_aaba0fd7e864b439cc55db33bd095f4a3"><td class="memTemplParams" colspan="2">template&lt;typename OtherIter &gt; </td></tr>
+<tr class="memitem:aaba0fd7e864b439cc55db33bd095f4a3"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#aaba0fd7e864b439cc55db33bd095f4a3">Zip</a> (OtherIter begin, OtherIter end) const noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1ZipAdapter.html">ZipAdapter</a>&lt; Derived, OtherIter &gt;(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), std::move(begin), std::move(end))))</td></tr>
+<tr class="memdesc:aaba0fd7e864b439cc55db33bd095f4a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Zips another range with this one.  <br /></td></tr>
+<tr class="separator:aaba0fd7e864b439cc55db33bd095f4a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86c4b4bb7e6d158e8968afb2ce6f196e" id="r_a86c4b4bb7e6d158e8968afb2ce6f196e"><td class="memTemplParams" colspan="2">template&lt;typename R &gt; </td></tr>
+<tr class="memitem:a86c4b4bb7e6d158e8968afb2ce6f196e"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a86c4b4bb7e6d158e8968afb2ce6f196e">Zip</a> (R &amp;range) const noexcept(noexcept(<a class="el" href="namespacehelios_1_1utils.html#afa4431ba8c1810e6574464b02fa87eb8">ZipAdapterFromRange</a>(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>(), range)))</td></tr>
+<tr class="memdesc:a86c4b4bb7e6d158e8968afb2ce6f196e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Zips another range with this one.  <br /></td></tr>
+<tr class="separator:a86c4b4bb7e6d158e8968afb2ce6f196e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc4bcd87112873fc5d34617e5b7444e1" id="r_adc4bcd87112873fc5d34617e5b7444e1"><td class="memTemplParams" colspan="2">template&lt;typename R &gt; </td></tr>
+<tr class="memitem:adc4bcd87112873fc5d34617e5b7444e1"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#adc4bcd87112873fc5d34617e5b7444e1">Zip</a> (const R &amp;range) const noexcept(noexcept(<a class="el" href="namespacehelios_1_1utils.html#afa4431ba8c1810e6574464b02fa87eb8">ZipAdapterFromRange</a>(<a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>(), range)))</td></tr>
+<tr class="memdesc:adc4bcd87112873fc5d34617e5b7444e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Zips another range with this one.  <br /></td></tr>
+<tr class="separator:adc4bcd87112873fc5d34617e5b7444e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac699b03f66eb2139beb18126191d27f9" id="r_ac699b03f66eb2139beb18126191d27f9"><td class="memTemplParams" colspan="2">template&lt;typename Action &gt; </td></tr>
+<tr class="memitem:ac699b03f66eb2139beb18126191d27f9"><td class="memTemplItemLeft" align="right" valign="top">constexpr void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#ac699b03f66eb2139beb18126191d27f9">ForEach</a> (const Action &amp;action) const</td></tr>
+<tr class="memdesc:ac699b03f66eb2139beb18126191d27f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: applies an action to each element.  <br /></td></tr>
+<tr class="separator:ac699b03f66eb2139beb18126191d27f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad37328f4c6e64ff7eb15abb9a2b2f894" id="r_ad37328f4c6e64ff7eb15abb9a2b2f894"><td class="memTemplParams" colspan="2">template&lt;typename T , typename Folder &gt; </td></tr>
+<tr class="memitem:ad37328f4c6e64ff7eb15abb9a2b2f894"><td class="memTemplItemLeft" align="right" valign="top">constexpr T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#ad37328f4c6e64ff7eb15abb9a2b2f894">Fold</a> (T init, const Folder &amp;folder) const</td></tr>
+<tr class="memdesc:ad37328f4c6e64ff7eb15abb9a2b2f894"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: reduces elements to a single value using a folder function.  <br /></td></tr>
+<tr class="separator:ad37328f4c6e64ff7eb15abb9a2b2f894"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af289817b75ec2f37aede9d9329dead09" id="r_af289817b75ec2f37aede9d9329dead09"><td class="memTemplParams" colspan="2">template&lt;typename Pred &gt; </td></tr>
+<tr class="memitem:af289817b75ec2f37aede9d9329dead09"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#af289817b75ec2f37aede9d9329dead09">Any</a> (const Pred &amp;predicate) const</td></tr>
+<tr class="memdesc:af289817b75ec2f37aede9d9329dead09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: checks if any element satisfies a predicate.  <br /></td></tr>
+<tr class="separator:af289817b75ec2f37aede9d9329dead09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25a0467b816b37cd68d74177e21e096b" id="r_a25a0467b816b37cd68d74177e21e096b"><td class="memTemplParams" colspan="2">template&lt;typename Pred &gt; </td></tr>
+<tr class="memitem:a25a0467b816b37cd68d74177e21e096b"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a25a0467b816b37cd68d74177e21e096b">All</a> (const Pred &amp;predicate) const</td></tr>
+<tr class="memdesc:a25a0467b816b37cd68d74177e21e096b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: checks if all elements satisfy a predicate.  <br /></td></tr>
+<tr class="separator:a25a0467b816b37cd68d74177e21e096b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a791509606f43cb6011e5975d483d6589" id="r_a791509606f43cb6011e5975d483d6589"><td class="memTemplParams" colspan="2">template&lt;typename Pred &gt; </td></tr>
+<tr class="memitem:a791509606f43cb6011e5975d483d6589"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a791509606f43cb6011e5975d483d6589">None</a> (const Pred &amp;predicate) const</td></tr>
+<tr class="memdesc:a791509606f43cb6011e5975d483d6589"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: checks if no elements satisfy a predicate.  <br /></td></tr>
+<tr class="separator:a791509606f43cb6011e5975d483d6589"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b714e5c8e0d77b1c486a8685bff6bee" id="r_a7b714e5c8e0d77b1c486a8685bff6bee"><td class="memTemplParams" colspan="2">template&lt;typename Pred &gt; </td></tr>
+<tr class="memitem:a7b714e5c8e0d77b1c486a8685bff6bee"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a7b714e5c8e0d77b1c486a8685bff6bee">Find</a> (const Pred &amp;predicate) const</td></tr>
+<tr class="memdesc:a7b714e5c8e0d77b1c486a8685bff6bee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: finds the first element satisfying a predicate.  <br /></td></tr>
+<tr class="separator:a7b714e5c8e0d77b1c486a8685bff6bee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a067a927e5be14e8851642b1a49ff0636" id="r_a067a927e5be14e8851642b1a49ff0636"><td class="memTemplParams" colspan="2">template&lt;typename Pred &gt; </td></tr>
+<tr class="memitem:a067a927e5be14e8851642b1a49ff0636"><td class="memTemplItemLeft" align="right" valign="top">constexpr size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a067a927e5be14e8851642b1a49ff0636">CountIf</a> (const Pred &amp;predicate) const</td></tr>
+<tr class="memdesc:a067a927e5be14e8851642b1a49ff0636"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: counts elements satisfying a predicate.  <br /></td></tr>
+<tr class="separator:a067a927e5be14e8851642b1a49ff0636"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bddc9da14c1742058e0f0c816aa44ce" id="r_a7bddc9da14c1742058e0f0c816aa44ce"><td class="memTemplParams" colspan="2">template&lt;typename Pred &gt; </td></tr>
+<tr class="memitem:a7bddc9da14c1742058e0f0c816aa44ce"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a7bddc9da14c1742058e0f0c816aa44ce">Partition</a> (const Pred &amp;predicate) const</td></tr>
+<tr class="memdesc:a7bddc9da14c1742058e0f0c816aa44ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: partitions elements into two groups based on a predicate.  <br /></td></tr>
+<tr class="separator:a7bddc9da14c1742058e0f0c816aa44ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5413a0ac213cda3a6b508881af956acc" id="r_a5413a0ac213cda3a6b508881af956acc"><td class="memTemplParams" colspan="2">template&lt;typename KeyFunc &gt; </td></tr>
+<tr class="memitem:a5413a0ac213cda3a6b508881af956acc"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a5413a0ac213cda3a6b508881af956acc">MaxBy</a> (const KeyFunc &amp;key_func) const</td></tr>
+<tr class="memdesc:a5413a0ac213cda3a6b508881af956acc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: finds the element with the maximum value according to a key function.  <br /></td></tr>
+<tr class="separator:a5413a0ac213cda3a6b508881af956acc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac70342387e9f9db44ba448e391eafbd" id="r_aac70342387e9f9db44ba448e391eafbd"><td class="memTemplParams" colspan="2">template&lt;typename KeyFunc &gt; </td></tr>
+<tr class="memitem:aac70342387e9f9db44ba448e391eafbd"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#aac70342387e9f9db44ba448e391eafbd">MinBy</a> (const KeyFunc &amp;key_func) const</td></tr>
+<tr class="memdesc:aac70342387e9f9db44ba448e391eafbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: finds the element with the minimum value according to a key function.  <br /></td></tr>
+<tr class="separator:aac70342387e9f9db44ba448e391eafbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34abb87022d768a03070fcccd64df0ac" id="r_a34abb87022d768a03070fcccd64df0ac"><td class="memTemplParams" colspan="2">template&lt;typename KeyFunc &gt; </td></tr>
+<tr class="memitem:a34abb87022d768a03070fcccd64df0ac"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a34abb87022d768a03070fcccd64df0ac">GroupBy</a> (const KeyFunc &amp;key_func) const</td></tr>
+<tr class="memdesc:a34abb87022d768a03070fcccd64df0ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: groups elements by a key function.  <br /></td></tr>
+<tr class="separator:a34abb87022d768a03070fcccd64df0ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a834e53c6229570dceb2a30a7fd5bfa4d" id="r_a834e53c6229570dceb2a30a7fd5bfa4d"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a834e53c6229570dceb2a30a7fd5bfa4d">Collect</a> () const</td></tr>
+<tr class="memdesc:a834e53c6229570dceb2a30a7fd5bfa4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminal operation: collects all elements into a vector.  <br /></td></tr>
+<tr class="separator:a834e53c6229570dceb2a30a7fd5bfa4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6352ac1157243d7ab76a014120fa68ac" id="r_a6352ac1157243d7ab76a014120fa68ac"><td class="memTemplParams" colspan="2">template&lt;typename OutIt &gt; </td></tr>
+<tr class="memitem:a6352ac1157243d7ab76a014120fa68ac"><td class="memTemplItemLeft" align="right" valign="top">constexpr void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6352ac1157243d7ab76a014120fa68ac">Into</a> (OutIt out) const</td></tr>
+<tr class="separator:a6352ac1157243d7ab76a014120fa68ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a6a31b42112f20291cb0a04d8e93a8f00" id="r_a6a31b42112f20291cb0a04d8e93a8f00"><td class="memItemLeft" align="right" valign="top">constexpr Derived &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a> () noexcept</td></tr>
+<tr class="memdesc:a6a31b42112f20291cb0a04d8e93a8f00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets reference to derived class instance.  <br /></td></tr>
+<tr class="separator:a6a31b42112f20291cb0a04d8e93a8f00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aece9f4d575d09f5952d659dbbd03f835" id="r_aece9f4d575d09f5952d659dbbd03f835"><td class="memItemLeft" align="right" valign="top">constexpr const Derived &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#aece9f4d575d09f5952d659dbbd03f835">GetDerived</a> () const noexcept</td></tr>
+<tr class="memdesc:aece9f4d575d09f5952d659dbbd03f835"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets const reference to derived class instance.  <br /></td></tr>
+<tr class="separator:aece9f4d575d09f5952d659dbbd03f835"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename Derived&gt;<br />
-class helios::utils::FunctionalAdapterBase&lt; Derived &gt;</div>
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l00302">302</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-</div></div><!-- contents -->
+class helios::utils::FunctionalAdapterBase&lt; Derived &gt;</div><p>CRTP base class providing common adapter operations. </p>
+<p>Provides chaining methods (Filter, Map, Take, Skip, etc.) that can be used by any derived adapter class. Uses CRTP pattern to return the correct derived type. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Derived</td><td>The derived adapter class </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02702">2702</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a25a0467b816b37cd68d74177e21e096b" name="a25a0467b816b37cd68d74177e21e096b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25a0467b816b37cd68d74177e21e096b">&#9670;&#160;</a></span>All()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived &gt; </div>
+<div class="memtemplate">
+template&lt;typename Pred &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::All </td>
+          <td>(</td>
+          <td class="paramtype">const Pred &amp;&#160;</td>
+          <td class="paramname"><em>predicate</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Terminal operation: checks if all elements satisfy a predicate. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Pred</td><td>Predicate type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">predicate</td><td>Function to test elements </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if all elements satisfy the predicate, false otherwise </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a252">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03095">3095</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 3095</span>                                                                              {</div>
+<div class="line"><span class="lineno"> 3096</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp;&amp; value : <a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>()) {</div>
+<div class="line"><span class="lineno"> 3097</span>    <span class="keywordtype">bool</span> result = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno"> 3098</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::invocable&lt;Pred, <span class="keyword">decltype</span>(value)&gt;) {</div>
+<div class="line"><span class="lineno"> 3099</span>      result = predicate(std::forward&lt;<span class="keyword">decltype</span>(value)&gt;(value));</div>
+<div class="line"><span class="lineno"> 3100</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno"> 3101</span>      result = std::apply(predicate, std::forward&lt;<span class="keyword">decltype</span>(value)&gt;(value));</div>
+<div class="line"><span class="lineno"> 3102</span>    }</div>
+<div class="line"><span class="lineno"> 3103</span>    <span class="keywordflow">if</span> (!result) {</div>
+<div class="line"><span class="lineno"> 3104</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno"> 3105</span>    }</div>
+<div class="line"><span class="lineno"> 3106</span>  }</div>
+<div class="line"><span class="lineno"> 3107</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno"> 3108</span>}</div>
+<div class="ttc" id="aclasshelios_1_1utils_1_1FunctionalAdapterBase_html_a6a31b42112f20291cb0a04d8e93a8f00"><div class="ttname"><a href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">helios::utils::FunctionalAdapterBase::GetDerived</a></div><div class="ttdeci">constexpr Derived &amp; GetDerived() noexcept</div><div class="ttdoc">Gets reference to derived class instance.</div><div class="ttdef"><b>Definition</b> <a href="functional__adapters_8hpp_source.html#l03040">functional_adapters.hpp:3040</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="af289817b75ec2f37aede9d9329dead09" name="af289817b75ec2f37aede9d9329dead09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af289817b75ec2f37aede9d9329dead09">&#9670;&#160;</a></span>Any()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived &gt; </div>
+<div class="memtemplate">
+template&lt;typename Pred &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::Any </td>
+          <td>(</td>
+          <td class="paramtype">const Pred &amp;&#160;</td>
+          <td class="paramname"><em>predicate</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Terminal operation: checks if any element satisfies a predicate. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Pred</td><td>Predicate type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">predicate</td><td>Function to test elements </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if any element satisfies the predicate, false otherwise </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a251">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03078">3078</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 3078</span>                                                                              {</div>
+<div class="line"><span class="lineno"> 3079</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp;&amp; value : <a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>()) {</div>
+<div class="line"><span class="lineno"> 3080</span>    <span class="keywordtype">bool</span> result = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno"> 3081</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::invocable&lt;Pred, <span class="keyword">decltype</span>(value)&gt;) {</div>
+<div class="line"><span class="lineno"> 3082</span>      result = predicate(std::forward&lt;<span class="keyword">decltype</span>(value)&gt;(value));</div>
+<div class="line"><span class="lineno"> 3083</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno"> 3084</span>      result = std::apply(predicate, std::forward&lt;<span class="keyword">decltype</span>(value)&gt;(value));</div>
+<div class="line"><span class="lineno"> 3085</span>    }</div>
+<div class="line"><span class="lineno"> 3086</span>    <span class="keywordflow">if</span> (result) {</div>
+<div class="line"><span class="lineno"> 3087</span>      <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno"> 3088</span>    }</div>
+<div class="line"><span class="lineno"> 3089</span>  }</div>
+<div class="line"><span class="lineno"> 3090</span>  <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno"> 3091</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a3b65f73316a42d8e0d021013dac3d11b" name="a3b65f73316a42d8e0d021013dac3d11b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b65f73316a42d8e0d021013dac3d11b">&#9670;&#160;</a></span>Chain() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived &gt; </div>
+<div class="memtemplate">
+template&lt;typename R &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::Chain </td>
+          <td>(</td>
+          <td class="paramtype">const R &amp;&#160;</td>
+          <td class="paramname"><em>range</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Chains another range after this one. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">R</td><td>Range type of the other adapter </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">range</td><td>The other range to chain </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1utils_1_1ChainAdapter.html">ChainAdapter</a> that yields elements from both ranges </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02838">2838</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 2839</span>                                                                     {</div>
+<div class="line"><span class="lineno"> 2840</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="namespacehelios_1_1utils.html#ab1d58f627e97599dde0bc68dda816bb2">ChainAdapterFromRange</a>(<a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>(), range);</div>
+<div class="line"><span class="lineno"> 2841</span>  }</div>
+<div class="ttc" id="anamespacehelios_1_1utils_html_ab1d58f627e97599dde0bc68dda816bb2"><div class="ttname"><a href="namespacehelios_1_1utils.html#ab1d58f627e97599dde0bc68dda816bb2">helios::utils::ChainAdapterFromRange</a></div><div class="ttdeci">constexpr auto ChainAdapterFromRange(R1 &amp;range1, R2 &amp;range2) noexcept(noexcept(ChainAdapter&lt; std::ranges::iterator_t&lt; R1 &gt;, std::ranges::iterator_t&lt; R2 &gt; &gt;(std::ranges::begin(range1), std::ranges::end(range1), std::ranges::begin(range2), std::ranges::end(range2)))) -&gt; ChainAdapter&lt; std::ranges::iterator_t&lt; R1 &gt;, std::ranges::iterator_t&lt; R2 &gt; &gt;</div><div class="ttdoc">Helper function to create a ChainAdapter from two non-const ranges.</div><div class="ttdef"><b>Definition</b> <a href="functional__adapters_8hpp_source.html#l03584">functional_adapters.hpp:3584</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a9db7228e3579aefbc75c78291c5e4b59" name="a9db7228e3579aefbc75c78291c5e4b59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9db7228e3579aefbc75c78291c5e4b59">&#9670;&#160;</a></span>Chain() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived &gt; </div>
+<div class="memtemplate">
+template&lt;typename OtherIter &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::Chain </td>
+          <td>(</td>
+          <td class="paramtype">OtherIter&#160;</td>
+          <td class="paramname"><em>begin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">OtherIter&#160;</td>
+          <td class="paramname"><em>end</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Chains another range after this one. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">OtherIter</td><td>Iterator type of the other adapter </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">begin</td><td>Begin iterator of the other adapter </td></tr>
+    <tr><td class="paramname">end</td><td>End iterator of the other adapter </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1utils_1_1ChainAdapter.html">ChainAdapter</a> that yields elements from both ranges </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a242">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02814">2814</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 2816</span>                                                                         {</div>
+<div class="line"><span class="lineno"> 2817</span>    <span class="keywordflow">return</span> ChainAdapter&lt;Derived, OtherIter&gt;(<a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), std::move(begin), std::move(end));</div>
+<div class="line"><span class="lineno"> 2818</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a019d17818973e1e6b24da6ce2290f9d5" name="a019d17818973e1e6b24da6ce2290f9d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a019d17818973e1e6b24da6ce2290f9d5">&#9670;&#160;</a></span>Chain() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived &gt; </div>
+<div class="memtemplate">
+template&lt;typename R &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::Chain </td>
+          <td>(</td>
+          <td class="paramtype">R &amp;&#160;</td>
+          <td class="paramname"><em>range</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Chains another range after this one. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">R</td><td>Range type of the other adapter </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">range</td><td>The other range to chain </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1utils_1_1ChainAdapter.html">ChainAdapter</a> that yields elements from both ranges </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02827">2827</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 2827</span>                                                                                                                    {</div>
+<div class="line"><span class="lineno"> 2828</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="namespacehelios_1_1utils.html#ab1d58f627e97599dde0bc68dda816bb2">ChainAdapterFromRange</a>(<a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>(), range);</div>
+<div class="line"><span class="lineno"> 2829</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a834e53c6229570dceb2a30a7fd5bfa4d" name="a834e53c6229570dceb2a30a7fd5bfa4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a834e53c6229570dceb2a30a7fd5bfa4d">&#9670;&#160;</a></span>Collect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::Collect </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Terminal operation: collects all elements into a vector. </p>
+<dl class="section return"><dt>Returns</dt><dd>Vector containing all elements </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a260">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03147">3147</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 3147</span>                                                             {</div>
+<div class="line"><span class="lineno"> 3148</span>  <span class="keyword">using </span>ValueType = std::iter_value_t&lt;Derived&gt;;</div>
+<div class="line"><span class="lineno"> 3149</span>  std::vector&lt;ValueType&gt; result;</div>
+<div class="line"><span class="lineno"> 3150</span>  result.reserve(<span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(std::distance(<a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end())));</div>
+<div class="line"><span class="lineno"> 3151</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp;&amp; value : <a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>()) {</div>
+<div class="line"><span class="lineno"> 3152</span>    result.push_back(std::forward&lt;<span class="keyword">decltype</span>(value)&gt;(value));</div>
+<div class="line"><span class="lineno"> 3153</span>  }</div>
+<div class="line"><span class="lineno"> 3154</span>  <span class="keywordflow">return</span> result;</div>
+<div class="line"><span class="lineno"> 3155</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a067a927e5be14e8851642b1a49ff0636" name="a067a927e5be14e8851642b1a49ff0636"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a067a927e5be14e8851642b1a49ff0636">&#9670;&#160;</a></span>CountIf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived &gt; </div>
+<div class="memtemplate">
+template&lt;typename Pred &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr size_t <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::CountIf </td>
+          <td>(</td>
+          <td class="paramtype">const Pred &amp;&#160;</td>
+          <td class="paramname"><em>predicate</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Terminal operation: counts elements satisfying a predicate. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Pred</td><td>Predicate type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">predicate</td><td>Function to test elements </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Number of elements that satisfy the predicate </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a255">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03130">3130</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 3130</span>                                                                                    {</div>
+<div class="line"><span class="lineno"> 3131</span>  <span class="keywordtype">size_t</span> count = 0;</div>
+<div class="line"><span class="lineno"> 3132</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp;&amp; value : <a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>()) {</div>
+<div class="line"><span class="lineno"> 3133</span>    <span class="keywordtype">bool</span> result = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno"> 3134</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::invocable&lt;Pred, <span class="keyword">decltype</span>(value)&gt;) {</div>
+<div class="line"><span class="lineno"> 3135</span>      result = predicate(std::forward&lt;<span class="keyword">decltype</span>(value)&gt;(value));</div>
+<div class="line"><span class="lineno"> 3136</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno"> 3137</span>      result = std::apply(predicate, std::forward&lt;<span class="keyword">decltype</span>(value)&gt;(value));</div>
+<div class="line"><span class="lineno"> 3138</span>    }</div>
+<div class="line"><span class="lineno"> 3139</span>    <span class="keywordflow">if</span> (result) {</div>
+<div class="line"><span class="lineno"> 3140</span>      ++count;</div>
+<div class="line"><span class="lineno"> 3141</span>    }</div>
+<div class="line"><span class="lineno"> 3142</span>  }</div>
+<div class="line"><span class="lineno"> 3143</span>  <span class="keywordflow">return</span> count;</div>
+<div class="line"><span class="lineno"> 3144</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a0f240c888f45805510f2af63dfadb2b8" name="a0f240c888f45805510f2af63dfadb2b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f240c888f45805510f2af63dfadb2b8">&#9670;&#160;</a></span>Enumerate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::Enumerate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Adds an index to each element. </p>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1utils_1_1EnumerateAdapter.html">EnumerateAdapter</a> that pairs indices with values </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a239">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02778">2778</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 2779</span>                                                                                              {</div>
+<div class="line"><span class="lineno"> 2780</span>    <span class="keywordflow">return</span> EnumerateAdapter&lt;Derived&gt;(<a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end());</div>
+<div class="line"><span class="lineno"> 2781</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ab01800764520f2fa73ef51912adabcf1" name="ab01800764520f2fa73ef51912adabcf1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab01800764520f2fa73ef51912adabcf1">&#9670;&#160;</a></span>Filter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived &gt; </div>
+<div class="memtemplate">
+template&lt;typename Pred &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::Filter </td>
+          <td>(</td>
+          <td class="paramtype">Pred&#160;</td>
+          <td class="paramname"><em>predicate</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Chains another filter operation on top of this iterator. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Pred</td><td>Predicate type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">predicate</td><td>Function to filter elements </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1utils_1_1FilterAdapter.html">FilterAdapter</a> that applies this adapter then filters </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a232">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02711">2711</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 2712</span>                                                                                                                     {</div>
+<div class="line"><span class="lineno"> 2713</span>    <span class="keywordflow">return</span> FilterAdapter&lt;Derived, Pred&gt;(<a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), std::move(predicate));</div>
+<div class="line"><span class="lineno"> 2714</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a7b714e5c8e0d77b1c486a8685bff6bee" name="a7b714e5c8e0d77b1c486a8685bff6bee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b714e5c8e0d77b1c486a8685bff6bee">&#9670;&#160;</a></span>Find()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived &gt; </div>
+<div class="memtemplate">
+template&lt;typename Pred &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::Find </td>
+          <td>(</td>
+          <td class="paramtype">const Pred &amp;&#160;</td>
+          <td class="paramname"><em>predicate</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Terminal operation: finds the first element satisfying a predicate. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Pred</td><td>Predicate type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">predicate</td><td>Function to test elements </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Optional containing the first matching element, or empty if none found </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a254">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03112">3112</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 3112</span>                                                                               {</div>
+<div class="line"><span class="lineno"> 3113</span>  <span class="keyword">using </span>ValueType = std::iter_value_t&lt;Derived&gt;;</div>
+<div class="line"><span class="lineno"> 3114</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp;&amp; value : <a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>()) {</div>
+<div class="line"><span class="lineno"> 3115</span>    <span class="keywordtype">bool</span> result = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno"> 3116</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::invocable&lt;Pred, <span class="keyword">decltype</span>(value)&gt;) {</div>
+<div class="line"><span class="lineno"> 3117</span>      result = predicate(std::forward&lt;<span class="keyword">decltype</span>(value)&gt;(value));</div>
+<div class="line"><span class="lineno"> 3118</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno"> 3119</span>      result = std::apply(predicate, std::forward&lt;<span class="keyword">decltype</span>(value)&gt;(value));</div>
+<div class="line"><span class="lineno"> 3120</span>    }</div>
+<div class="line"><span class="lineno"> 3121</span>    <span class="keywordflow">if</span> (result) {</div>
+<div class="line"><span class="lineno"> 3122</span>      <span class="keywordflow">return</span> std::optional&lt;ValueType&gt;(std::forward&lt;<span class="keyword">decltype</span>(value)&gt;(value));</div>
+<div class="line"><span class="lineno"> 3123</span>    }</div>
+<div class="line"><span class="lineno"> 3124</span>  }</div>
+<div class="line"><span class="lineno"> 3125</span>  <span class="keywordflow">return</span> std::optional&lt;ValueType&gt;{};</div>
+<div class="line"><span class="lineno"> 3126</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ad37328f4c6e64ff7eb15abb9a2b2f894" name="ad37328f4c6e64ff7eb15abb9a2b2f894"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad37328f4c6e64ff7eb15abb9a2b2f894">&#9670;&#160;</a></span>Fold()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived &gt; </div>
+<div class="memtemplate">
+template&lt;typename T , typename Folder &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr T <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::Fold </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>init</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Folder &amp;&#160;</td>
+          <td class="paramname"><em>folder</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Terminal operation: reduces elements to a single value using a folder function. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Accumulator type </td></tr>
+    <tr><td class="paramname">Folder</td><td>Function type that combines accumulator with each element </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">init</td><td>Initial accumulator value </td></tr>
+    <tr><td class="paramname">folder</td><td>Function to fold elements </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Final accumulated value </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a250">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03063">3063</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 3063</span>                                                                                   {</div>
+<div class="line"><span class="lineno"> 3064</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp;&amp; value : <a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>()) {</div>
+<div class="line"><span class="lineno"> 3065</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::invocable&lt;Folder, T&amp;&amp;, <span class="keyword">decltype</span>(value)&gt;) {</div>
+<div class="line"><span class="lineno"> 3066</span>      init = folder(std::move(init), std::forward&lt;<span class="keyword">decltype</span>(value)&gt;(value));</div>
+<div class="line"><span class="lineno"> 3067</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno"> 3068</span>      init = std::apply(</div>
+<div class="line"><span class="lineno"> 3069</span>          [&amp;init, &amp;folder](<span class="keyword">auto</span>&amp;&amp;... args) { <span class="keywordflow">return</span> folder(std::move(init), std::forward&lt;<span class="keyword">decltype</span>(args)&gt;(args)...); },</div>
+<div class="line"><span class="lineno"> 3070</span>          std::forward&lt;decltype(value)&gt;(value));</div>
+<div class="line"><span class="lineno"> 3071</span>    }</div>
+<div class="line"><span class="lineno"> 3072</span>  }</div>
+<div class="line"><span class="lineno"> 3073</span>  <span class="keywordflow">return</span> init;</div>
+<div class="line"><span class="lineno"> 3074</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ac699b03f66eb2139beb18126191d27f9" name="ac699b03f66eb2139beb18126191d27f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac699b03f66eb2139beb18126191d27f9">&#9670;&#160;</a></span>ForEach()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived &gt; </div>
+<div class="memtemplate">
+template&lt;typename Action &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr void <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::ForEach </td>
+          <td>(</td>
+          <td class="paramtype">const Action &amp;&#160;</td>
+          <td class="paramname"><em>action</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Terminal operation: applies an action to each element. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Action</td><td>Function type that processes each element </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">action</td><td>Function to apply to each element </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a249">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03051">3051</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 3051</span>                                                                                 {</div>
+<div class="line"><span class="lineno"> 3052</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp;&amp; value : <a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>()) {</div>
+<div class="line"><span class="lineno"> 3053</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::invocable&lt;Action, <span class="keyword">decltype</span>(value)&gt;) {</div>
+<div class="line"><span class="lineno"> 3054</span>      action(std::forward&lt;<span class="keyword">decltype</span>(value)&gt;(value));</div>
+<div class="line"><span class="lineno"> 3055</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno"> 3056</span>      std::apply(action, std::forward&lt;<span class="keyword">decltype</span>(value)&gt;(value));</div>
+<div class="line"><span class="lineno"> 3057</span>    }</div>
+<div class="line"><span class="lineno"> 3058</span>  }</div>
+<div class="line"><span class="lineno"> 3059</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aece9f4d575d09f5952d659dbbd03f835" name="aece9f4d575d09f5952d659dbbd03f835"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aece9f4d575d09f5952d659dbbd03f835">&#9670;&#160;</a></span>GetDerived() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr const Derived &amp; <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::GetDerived </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets const reference to derived class instance. </p>
+<dl class="section return"><dt>Returns</dt><dd>Const reference to derived class </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03046">3046</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 3046</span>{ <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>Derived&amp;<span class="keyword">&gt;</span>(*this); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a6a31b42112f20291cb0a04d8e93a8f00" name="a6a31b42112f20291cb0a04d8e93a8f00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a31b42112f20291cb0a04d8e93a8f00">&#9670;&#160;</a></span>GetDerived() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr Derived &amp; <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::GetDerived </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets reference to derived class instance. </p>
+<dl class="section return"><dt>Returns</dt><dd>Reference to derived class </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a233">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03040">3040</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 3040</span>{ <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>Derived&amp;<span class="keyword">&gt;</span>(*this); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a34abb87022d768a03070fcccd64df0ac" name="a34abb87022d768a03070fcccd64df0ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34abb87022d768a03070fcccd64df0ac">&#9670;&#160;</a></span>GroupBy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived &gt; </div>
+<div class="memtemplate">
+template&lt;typename KeyFunc &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::GroupBy </td>
+          <td>(</td>
+          <td class="paramtype">const KeyFunc &amp;&#160;</td>
+          <td class="paramname"><em>key_func</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Terminal operation: groups elements by a key function. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">KeyFunc</td><td>Key extraction function type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key_func</td><td>Function to extract grouping key from each element </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Map from keys to vectors of elements with that key </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a259">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03268">3268</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 3268</span>                                                                                    {</div>
+<div class="line"><span class="lineno"> 3269</span>  <span class="keyword">using </span>ValueType = std::iter_value_t&lt;Derived&gt;;</div>
+<div class="line"><span class="lineno"> 3270</span>  <span class="keyword">using </span>KeyType = std::decay_t&lt;std::invoke_result_t&lt;KeyFunc, ValueType&gt;&gt;;</div>
+<div class="line"><span class="lineno"> 3271</span>  std::unordered_map&lt;KeyType, std::vector&lt;ValueType&gt;&gt; groups;</div>
+<div class="line"><span class="lineno"> 3272</span> </div>
+<div class="line"><span class="lineno"> 3273</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp;&amp; value : <a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>()) {</div>
+<div class="line"><span class="lineno"> 3274</span>    KeyType key;</div>
+<div class="line"><span class="lineno"> 3275</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::invocable&lt;KeyFunc, <span class="keyword">decltype</span>(value)&gt;) {</div>
+<div class="line"><span class="lineno"> 3276</span>      key = key_func(std::forward&lt;<span class="keyword">decltype</span>(value)&gt;(value));</div>
+<div class="line"><span class="lineno"> 3277</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno"> 3278</span>      key = std::apply(key_func, std::forward&lt;<span class="keyword">decltype</span>(value)&gt;(value));</div>
+<div class="line"><span class="lineno"> 3279</span>    }</div>
+<div class="line"><span class="lineno"> 3280</span>    groups[std::move(key)].push_back(std::forward&lt;<span class="keyword">decltype</span>(value)&gt;(value));</div>
+<div class="line"><span class="lineno"> 3281</span>  }</div>
+<div class="line"><span class="lineno"> 3282</span> </div>
+<div class="line"><span class="lineno"> 3283</span>  <span class="keywordflow">return</span> groups;</div>
+<div class="line"><span class="lineno"> 3284</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a73a8bfda58cfb57697f1dd19e95bd6a6" name="a73a8bfda58cfb57697f1dd19e95bd6a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73a8bfda58cfb57697f1dd19e95bd6a6">&#9670;&#160;</a></span>Inspect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived &gt; </div>
+<div class="memtemplate">
+template&lt;typename Func &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::Inspect </td>
+          <td>(</td>
+          <td class="paramtype">Func&#160;</td>
+          <td class="paramname"><em>inspector</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Observes each element without modifying it. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Func</td><td>Inspector function type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">inspector</td><td>Function to call on each element </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1utils_1_1InspectAdapter.html">InspectAdapter</a> for side effects </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a240">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02790">2790</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 2792</span>                                                                            {</div>
+<div class="line"><span class="lineno"> 2793</span>    <span class="keywordflow">return</span> InspectAdapter&lt;Derived, Func&gt;(<a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), std::move(inspector));</div>
+<div class="line"><span class="lineno"> 2794</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a6352ac1157243d7ab76a014120fa68ac" name="a6352ac1157243d7ab76a014120fa68ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6352ac1157243d7ab76a014120fa68ac">&#9670;&#160;</a></span>Into()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived &gt; </div>
+<div class="memtemplate">
+template&lt;typename OutIt &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr void <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::Into </td>
+          <td>(</td>
+          <td class="paramtype">OutIt&#160;</td>
+          <td class="paramname"><em>out</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a261">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03159">3159</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 3159</span>                                                                   {</div>
+<div class="line"><span class="lineno"> 3160</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp;&amp; value : <a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>()) {</div>
+<div class="line"><span class="lineno"> 3161</span>    *out++ = std::forward&lt;decltype(value)&gt;(value);</div>
+<div class="line"><span class="lineno"> 3162</span>  }</div>
+<div class="line"><span class="lineno"> 3163</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a4a8b012ca6fc77ef45a0f26f43ecdbe9" name="a4a8b012ca6fc77ef45a0f26f43ecdbe9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a8b012ca6fc77ef45a0f26f43ecdbe9">&#9670;&#160;</a></span>Map()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived &gt; </div>
+<div class="memtemplate">
+template&lt;typename Func &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::Map </td>
+          <td>(</td>
+          <td class="paramtype">Func&#160;</td>
+          <td class="paramname"><em>transform</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Transforms each element using the given function. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Func</td><td>Transformation function type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">transform</td><td>Function to apply to each element </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1utils_1_1MapAdapter.html">MapAdapter</a> that transforms adapted results </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a234">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02723">2723</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 2724</span>                                                                                                                  {</div>
+<div class="line"><span class="lineno"> 2725</span>    <span class="keywordflow">return</span> MapAdapter&lt;Derived, Func&gt;(<a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), std::move(transform));</div>
+<div class="line"><span class="lineno"> 2726</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a5413a0ac213cda3a6b508881af956acc" name="a5413a0ac213cda3a6b508881af956acc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5413a0ac213cda3a6b508881af956acc">&#9670;&#160;</a></span>MaxBy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived &gt; </div>
+<div class="memtemplate">
+template&lt;typename KeyFunc &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::MaxBy </td>
+          <td>(</td>
+          <td class="paramtype">const KeyFunc &amp;&#160;</td>
+          <td class="paramname"><em>key_func</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Terminal operation: finds the element with the maximum value according to a key function. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">KeyFunc</td><td>Key extraction function type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key_func</td><td>Function to extract comparison key from each element </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Optional containing the element with maximum key, or empty if no elements </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a257">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03192">3192</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 3192</span>                                                                                  {</div>
+<div class="line"><span class="lineno"> 3193</span>  <span class="keyword">using </span>ValueType = std::iter_value_t&lt;Derived&gt;;</div>
+<div class="line"><span class="lineno"> 3194</span>  <span class="keyword">auto</span> iter = <a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin();</div>
+<div class="line"><span class="lineno"> 3195</span>  <span class="keyword">const</span> <span class="keyword">auto</span> end_iter = <a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end();</div>
+<div class="line"><span class="lineno"> 3196</span> </div>
+<div class="line"><span class="lineno"> 3197</span>  <span class="keywordflow">if</span> (iter == end_iter) {</div>
+<div class="line"><span class="lineno"> 3198</span>    <span class="keywordflow">return</span> std::nullopt;</div>
+<div class="line"><span class="lineno"> 3199</span>  }</div>
+<div class="line"><span class="lineno"> 3200</span> </div>
+<div class="line"><span class="lineno"> 3201</span>  std::optional&lt;ValueType&gt; max_element;</div>
+<div class="line"><span class="lineno"> 3202</span>  max_element.emplace(*iter);</div>
+<div class="line"><span class="lineno"> 3203</span> </div>
+<div class="line"><span class="lineno"> 3204</span>  <span class="keyword">auto</span> get_key = [&amp;key_func](<span class="keyword">auto</span>&amp;&amp; val) {</div>
+<div class="line"><span class="lineno"> 3205</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::invocable&lt;KeyFunc, <span class="keyword">decltype</span>(val)&gt;) {</div>
+<div class="line"><span class="lineno"> 3206</span>      <span class="keywordflow">return</span> key_func(std::forward&lt;<span class="keyword">decltype</span>(val)&gt;(val));</div>
+<div class="line"><span class="lineno"> 3207</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno"> 3208</span>      <span class="keywordflow">return</span> std::apply(key_func, std::forward&lt;<span class="keyword">decltype</span>(val)&gt;(val));</div>
+<div class="line"><span class="lineno"> 3209</span>    }</div>
+<div class="line"><span class="lineno"> 3210</span>  };</div>
+<div class="line"><span class="lineno"> 3211</span> </div>
+<div class="line"><span class="lineno"> 3212</span>  <span class="keyword">auto</span> max_key = get_key(*max_element);</div>
+<div class="line"><span class="lineno"> 3213</span>  ++iter;</div>
+<div class="line"><span class="lineno"> 3214</span> </div>
+<div class="line"><span class="lineno"> 3215</span>  <span class="keywordflow">while</span> (iter != end_iter) {</div>
+<div class="line"><span class="lineno"> 3216</span>    <span class="keyword">auto</span> current = *iter;</div>
+<div class="line"><span class="lineno"> 3217</span>    <span class="keyword">auto</span> current_key = get_key(current);</div>
+<div class="line"><span class="lineno"> 3218</span>    <span class="keywordflow">if</span> (current_key &gt; max_key) {</div>
+<div class="line"><span class="lineno"> 3219</span>      max_key = current_key;</div>
+<div class="line"><span class="lineno"> 3220</span>      max_element.emplace(current);</div>
+<div class="line"><span class="lineno"> 3221</span>    }</div>
+<div class="line"><span class="lineno"> 3222</span>    ++iter;</div>
+<div class="line"><span class="lineno"> 3223</span>  }</div>
+<div class="line"><span class="lineno"> 3224</span> </div>
+<div class="line"><span class="lineno"> 3225</span>  <span class="keywordflow">return</span> max_element;</div>
+<div class="line"><span class="lineno"> 3226</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aac70342387e9f9db44ba448e391eafbd" name="aac70342387e9f9db44ba448e391eafbd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac70342387e9f9db44ba448e391eafbd">&#9670;&#160;</a></span>MinBy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived &gt; </div>
+<div class="memtemplate">
+template&lt;typename KeyFunc &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::MinBy </td>
+          <td>(</td>
+          <td class="paramtype">const KeyFunc &amp;&#160;</td>
+          <td class="paramname"><em>key_func</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Terminal operation: finds the element with the minimum value according to a key function. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">KeyFunc</td><td>Key extraction function type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key_func</td><td>Function to extract comparison key from each element </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Optional containing the element with minimum key, or empty if no elements </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a258">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03230">3230</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 3230</span>                                                                                  {</div>
+<div class="line"><span class="lineno"> 3231</span>  <span class="keyword">using </span>ValueType = std::iter_value_t&lt;Derived&gt;;</div>
+<div class="line"><span class="lineno"> 3232</span>  <span class="keyword">auto</span> iter = <a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin();</div>
+<div class="line"><span class="lineno"> 3233</span>  <span class="keyword">const</span> <span class="keyword">auto</span> end_iter = <a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end();</div>
+<div class="line"><span class="lineno"> 3234</span> </div>
+<div class="line"><span class="lineno"> 3235</span>  <span class="keywordflow">if</span> (iter == end_iter) {</div>
+<div class="line"><span class="lineno"> 3236</span>    <span class="keywordflow">return</span> std::nullopt;</div>
+<div class="line"><span class="lineno"> 3237</span>  }</div>
+<div class="line"><span class="lineno"> 3238</span> </div>
+<div class="line"><span class="lineno"> 3239</span>  std::optional&lt;ValueType&gt; min_element;</div>
+<div class="line"><span class="lineno"> 3240</span>  min_element.emplace(*iter);</div>
+<div class="line"><span class="lineno"> 3241</span> </div>
+<div class="line"><span class="lineno"> 3242</span>  <span class="keyword">auto</span> get_key = [&amp;key_func](<span class="keyword">auto</span>&amp;&amp; val) {</div>
+<div class="line"><span class="lineno"> 3243</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::invocable&lt;KeyFunc, <span class="keyword">decltype</span>(val)&gt;) {</div>
+<div class="line"><span class="lineno"> 3244</span>      <span class="keywordflow">return</span> key_func(std::forward&lt;<span class="keyword">decltype</span>(val)&gt;(val));</div>
+<div class="line"><span class="lineno"> 3245</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno"> 3246</span>      <span class="keywordflow">return</span> std::apply(key_func, std::forward&lt;<span class="keyword">decltype</span>(val)&gt;(val));</div>
+<div class="line"><span class="lineno"> 3247</span>    }</div>
+<div class="line"><span class="lineno"> 3248</span>  };</div>
+<div class="line"><span class="lineno"> 3249</span> </div>
+<div class="line"><span class="lineno"> 3250</span>  <span class="keyword">auto</span> min_key = get_key(*min_element);</div>
+<div class="line"><span class="lineno"> 3251</span>  ++iter;</div>
+<div class="line"><span class="lineno"> 3252</span> </div>
+<div class="line"><span class="lineno"> 3253</span>  <span class="keywordflow">while</span> (iter != end_iter) {</div>
+<div class="line"><span class="lineno"> 3254</span>    <span class="keyword">auto</span> current = *iter;</div>
+<div class="line"><span class="lineno"> 3255</span>    <span class="keyword">auto</span> current_key = get_key(current);</div>
+<div class="line"><span class="lineno"> 3256</span>    <span class="keywordflow">if</span> (current_key &lt; min_key) {</div>
+<div class="line"><span class="lineno"> 3257</span>      min_key = current_key;</div>
+<div class="line"><span class="lineno"> 3258</span>      min_element.emplace(current);</div>
+<div class="line"><span class="lineno"> 3259</span>    }</div>
+<div class="line"><span class="lineno"> 3260</span>    ++iter;</div>
+<div class="line"><span class="lineno"> 3261</span>  }</div>
+<div class="line"><span class="lineno"> 3262</span> </div>
+<div class="line"><span class="lineno"> 3263</span>  <span class="keywordflow">return</span> min_element;</div>
+<div class="line"><span class="lineno"> 3264</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a791509606f43cb6011e5975d483d6589" name="a791509606f43cb6011e5975d483d6589"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a791509606f43cb6011e5975d483d6589">&#9670;&#160;</a></span>None()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived &gt; </div>
+<div class="memtemplate">
+template&lt;typename Pred &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::None </td>
+          <td>(</td>
+          <td class="paramtype">const Pred &amp;&#160;</td>
+          <td class="paramname"><em>predicate</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Terminal operation: checks if no elements satisfy a predicate. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Pred</td><td>Predicate type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">predicate</td><td>Function to test elements </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if no elements satisfy the predicate, false otherwise </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a253">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02955">2955</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 2955</span>                                                                 {</div>
+<div class="line"><span class="lineno"> 2956</span>    <span class="keywordflow">return</span> !<a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#af289817b75ec2f37aede9d9329dead09">Any</a>(predicate);</div>
+<div class="line"><span class="lineno"> 2957</span>  }</div>
+<div class="ttc" id="aclasshelios_1_1utils_1_1FunctionalAdapterBase_html_af289817b75ec2f37aede9d9329dead09"><div class="ttname"><a href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#af289817b75ec2f37aede9d9329dead09">helios::utils::FunctionalAdapterBase::Any</a></div><div class="ttdeci">constexpr bool Any(const Pred &amp;predicate) const</div><div class="ttdoc">Terminal operation: checks if any element satisfies a predicate.</div><div class="ttdef"><b>Definition</b> <a href="functional__adapters_8hpp_source.html#l03078">functional_adapters.hpp:3078</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a7bddc9da14c1742058e0f0c816aa44ce" name="a7bddc9da14c1742058e0f0c816aa44ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7bddc9da14c1742058e0f0c816aa44ce">&#9670;&#160;</a></span>Partition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived &gt; </div>
+<div class="memtemplate">
+template&lt;typename Pred &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::Partition </td>
+          <td>(</td>
+          <td class="paramtype">const Pred &amp;&#160;</td>
+          <td class="paramname"><em>predicate</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Terminal operation: partitions elements into two groups based on a predicate. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Pred</td><td>Predicate type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">predicate</td><td>Function to test elements </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Pair of vectors: first contains elements satisfying predicate, second contains the rest </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a256">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03167">3167</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 3167</span>                                                                                    {</div>
+<div class="line"><span class="lineno"> 3168</span>  <span class="keyword">using </span>ValueType = std::iter_value_t&lt;Derived&gt;;</div>
+<div class="line"><span class="lineno"> 3169</span>  std::vector&lt;ValueType&gt; matched;</div>
+<div class="line"><span class="lineno"> 3170</span>  std::vector&lt;ValueType&gt; not_matched;</div>
+<div class="line"><span class="lineno"> 3171</span> </div>
+<div class="line"><span class="lineno"> 3172</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp;&amp; value : <a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>()) {</div>
+<div class="line"><span class="lineno"> 3173</span>    <span class="keywordtype">bool</span> result = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno"> 3174</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::invocable&lt;Pred, <span class="keyword">decltype</span>(value)&gt;) {</div>
+<div class="line"><span class="lineno"> 3175</span>      result = predicate(std::forward&lt;<span class="keyword">decltype</span>(value)&gt;(value));</div>
+<div class="line"><span class="lineno"> 3176</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno"> 3177</span>      result = std::apply(predicate, std::forward&lt;<span class="keyword">decltype</span>(value)&gt;(value));</div>
+<div class="line"><span class="lineno"> 3178</span>    }</div>
+<div class="line"><span class="lineno"> 3179</span> </div>
+<div class="line"><span class="lineno"> 3180</span>    <span class="keywordflow">if</span> (result) {</div>
+<div class="line"><span class="lineno"> 3181</span>      matched.push_back(std::forward&lt;<span class="keyword">decltype</span>(value)&gt;(value));</div>
+<div class="line"><span class="lineno"> 3182</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno"> 3183</span>      not_matched.push_back(std::forward&lt;<span class="keyword">decltype</span>(value)&gt;(value));</div>
+<div class="line"><span class="lineno"> 3184</span>    }</div>
+<div class="line"><span class="lineno"> 3185</span>  }</div>
+<div class="line"><span class="lineno"> 3186</span> </div>
+<div class="line"><span class="lineno"> 3187</span>  <span class="keywordflow">return</span> std::pair{std::move(matched), std::move(not_matched)};</div>
+<div class="line"><span class="lineno"> 3188</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a634889b61feadebcd7701eb099815a8f" name="a634889b61feadebcd7701eb099815a8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a634889b61feadebcd7701eb099815a8f">&#9670;&#160;</a></span>Reverse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::Reverse </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reverses the order of elements. </p>
+<dl class="section note"><dt>Note</dt><dd>Requires bidirectional iterator support </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1utils_1_1ReverseAdapter.html">ReverseAdapter</a> that yields elements in reverse order </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a244">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02848">2848</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 2849</span>                                                                                            {</div>
+<div class="line"><span class="lineno"> 2850</span>    <span class="keywordflow">return</span> ReverseAdapter&lt;Derived&gt;(<a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end());</div>
+<div class="line"><span class="lineno"> 2851</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ab016bc9350aa52a903bf1b065ea38221" name="ab016bc9350aa52a903bf1b065ea38221"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab016bc9350aa52a903bf1b065ea38221">&#9670;&#160;</a></span>Skip()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::Skip </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>count</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Skips the first count elements. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">count</td><td>Number of elements to skip </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1utils_1_1SkipAdapter.html">SkipAdapter</a> that skips adapted results </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a236">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02743">2743</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 2744</span>                                                                                                {</div>
+<div class="line"><span class="lineno"> 2745</span>    <span class="keywordflow">return</span> SkipAdapter&lt;Derived&gt;(<a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), count);</div>
+<div class="line"><span class="lineno"> 2746</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aaaf89432c98c7a6052e894c99153620b" name="aaaf89432c98c7a6052e894c99153620b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaaf89432c98c7a6052e894c99153620b">&#9670;&#160;</a></span>SkipWhile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived &gt; </div>
+<div class="memtemplate">
+template&lt;typename Pred &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::SkipWhile </td>
+          <td>(</td>
+          <td class="paramtype">Pred&#160;</td>
+          <td class="paramname"><em>predicate</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Skips elements while a predicate is true. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Pred</td><td>Predicate type for skip-while operation </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">predicate</td><td>Predicate to determine when to stop skipping </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1utils_1_1SkipWhileAdapter.html">SkipWhileAdapter</a> that conditionally skips elements </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a238">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02768">2768</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 2770</span>                                                                              {</div>
+<div class="line"><span class="lineno"> 2771</span>    <span class="keywordflow">return</span> SkipWhileAdapter&lt;Derived, Pred&gt;(<a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), std::move(predicate));</div>
+<div class="line"><span class="lineno"> 2772</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ab6785a8a5adc56bb25294bbfef261000" name="ab6785a8a5adc56bb25294bbfef261000"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6785a8a5adc56bb25294bbfef261000">&#9670;&#160;</a></span>Slide()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::Slide </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>window_size</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates sliding windows over elements. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">window_size</td><td>Size of the sliding window </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1utils_1_1SlideAdapter.html">SlideAdapter</a> that yields windows of elements </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>window_size must be greater than 0 </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a245">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02859">2859</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 2860</span>                                                                                                       {</div>
+<div class="line"><span class="lineno"> 2861</span>    <span class="keywordflow">return</span> SlideAdapter&lt;Derived&gt;(<a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), window_size);</div>
+<div class="line"><span class="lineno"> 2862</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ac3387620f51635c19a2b16abe92c3a2e" name="ac3387620f51635c19a2b16abe92c3a2e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3387620f51635c19a2b16abe92c3a2e">&#9670;&#160;</a></span>StepBy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::StepBy </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>step</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Takes every Nth element. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">step</td><td>Step size between elements </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1utils_1_1StepByAdapter.html">StepByAdapter</a> that skips elements </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a241">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02801">2801</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 2802</span>                                                                                                 {</div>
+<div class="line"><span class="lineno"> 2803</span>    <span class="keywordflow">return</span> StepByAdapter&lt;Derived&gt;(<a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), step);</div>
+<div class="line"><span class="lineno"> 2804</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a6f4c201c163d5be88b9f3e351caefeba" name="a6f4c201c163d5be88b9f3e351caefeba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f4c201c163d5be88b9f3e351caefeba">&#9670;&#160;</a></span>Stride()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::Stride </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>stride</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Takes every Nth element with stride. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">stride</td><td>Number of elements to skip between yields </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a> that yields every Nth element </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>stride must be greater than 0 </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a246">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02870">2870</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 2871</span>                                                                                                   {</div>
+<div class="line"><span class="lineno"> 2872</span>    <span class="keywordflow">return</span> StrideAdapter&lt;Derived&gt;(<a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), stride);</div>
+<div class="line"><span class="lineno"> 2873</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="af57c214e209204c69e50de8dc935d0a6" name="af57c214e209204c69e50de8dc935d0a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af57c214e209204c69e50de8dc935d0a6">&#9670;&#160;</a></span>Take()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::Take </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>count</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Limits the number of elements to at most count. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">count</td><td>Maximum number of elements to yield </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1utils_1_1TakeAdapter.html">TakeAdapter</a> that limits adapted results </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a235">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02733">2733</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 2734</span>                                                                                                {</div>
+<div class="line"><span class="lineno"> 2735</span>    <span class="keywordflow">return</span> TakeAdapter&lt;Derived&gt;(<a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), count);</div>
+<div class="line"><span class="lineno"> 2736</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a5941ca7ea5dbe31b0240dd3dbe475396" name="a5941ca7ea5dbe31b0240dd3dbe475396"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5941ca7ea5dbe31b0240dd3dbe475396">&#9670;&#160;</a></span>TakeWhile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived &gt; </div>
+<div class="memtemplate">
+template&lt;typename Pred &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::TakeWhile </td>
+          <td>(</td>
+          <td class="paramtype">Pred&#160;</td>
+          <td class="paramname"><em>predicate</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Takes elements while a predicate is true. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Pred</td><td>Predicate type for take-while operation </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">predicate</td><td>Predicate to determine when to stop taking </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1utils_1_1TakeWhileAdapter.html">TakeWhileAdapter</a> that conditionally takes elements </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a237">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02755">2755</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 2757</span>                                                                              {</div>
+<div class="line"><span class="lineno"> 2758</span>    <span class="keywordflow">return</span> TakeWhileAdapter&lt;Derived, Pred&gt;(<a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), std::move(predicate));</div>
+<div class="line"><span class="lineno"> 2759</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="adc4bcd87112873fc5d34617e5b7444e1" name="adc4bcd87112873fc5d34617e5b7444e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc4bcd87112873fc5d34617e5b7444e1">&#9670;&#160;</a></span>Zip() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived &gt; </div>
+<div class="memtemplate">
+template&lt;typename R &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::Zip </td>
+          <td>(</td>
+          <td class="paramtype">const R &amp;&#160;</td>
+          <td class="paramname"><em>range</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Zips another range with this one. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">R</td><td>Other range </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">range</td><td>The other range to zip with </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1utils_1_1ZipAdapter.html">ZipAdapter</a> that </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02907">2907</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 2907</span>                                                                                                                      {</div>
+<div class="line"><span class="lineno"> 2908</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="namespacehelios_1_1utils.html#afa4431ba8c1810e6574464b02fa87eb8">ZipAdapterFromRange</a>(<a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>(), range);</div>
+<div class="line"><span class="lineno"> 2909</span>  }</div>
+<div class="ttc" id="anamespacehelios_1_1utils_html_afa4431ba8c1810e6574464b02fa87eb8"><div class="ttname"><a href="namespacehelios_1_1utils.html#afa4431ba8c1810e6574464b02fa87eb8">helios::utils::ZipAdapterFromRange</a></div><div class="ttdeci">constexpr auto ZipAdapterFromRange(R1 &amp;range1, R2 &amp;range2) noexcept(noexcept(ZipAdapter&lt; std::ranges::iterator_t&lt; R1 &gt;, std::ranges::iterator_t&lt; R2 &gt; &gt;(std::ranges::begin(range1), std::ranges::end(range1), std::ranges::begin(range2), std::ranges::end(range2)))) -&gt; ZipAdapter&lt; std::ranges::iterator_t&lt; R1 &gt;, std::ranges::iterator_t&lt; R2 &gt; &gt;</div><div class="ttdoc">Helper function to create a ZipAdapter from two ranges.</div><div class="ttdef"><b>Definition</b> <a href="functional__adapters_8hpp_source.html#l03774">functional_adapters.hpp:3774</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aaba0fd7e864b439cc55db33bd095f4a3" name="aaba0fd7e864b439cc55db33bd095f4a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaba0fd7e864b439cc55db33bd095f4a3">&#9670;&#160;</a></span>Zip() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived &gt; </div>
+<div class="memtemplate">
+template&lt;typename OtherIter &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::Zip </td>
+          <td>(</td>
+          <td class="paramtype">OtherIter&#160;</td>
+          <td class="paramname"><em>begin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">OtherIter&#160;</td>
+          <td class="paramname"><em>end</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Zips another range with this one. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">OtherIter</td><td>Iterator type to zip with </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">begin</td><td>Begin iterator for the other range </td></tr>
+    <tr><td class="paramname">end</td><td>End iterator for the other range </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1utils_1_1ZipAdapter.html">ZipAdapter</a> that yields tuples of corresponding elements </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a247">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02883">2883</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 2885</span>                                                                       {</div>
+<div class="line"><span class="lineno"> 2886</span>    <span class="keywordflow">return</span> ZipAdapter&lt;Derived, OtherIter&gt;(<a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().begin(), <a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>().end(), std::move(begin), std::move((end)));</div>
+<div class="line"><span class="lineno"> 2887</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a86c4b4bb7e6d158e8968afb2ce6f196e" name="a86c4b4bb7e6d158e8968afb2ce6f196e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86c4b4bb7e6d158e8968afb2ce6f196e">&#9670;&#160;</a></span>Zip() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived &gt; </div>
+<div class="memtemplate">
+template&lt;typename R &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase</a>&lt; Derived &gt;::Zip </td>
+          <td>(</td>
+          <td class="paramtype">R &amp;&#160;</td>
+          <td class="paramname"><em>range</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Zips another range with this one. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">R</td><td>Other range </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">range</td><td>The other range to zip with </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1utils_1_1ZipAdapter.html">ZipAdapter</a> that </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02896">2896</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 2896</span>                                                                                                                {</div>
+<div class="line"><span class="lineno"> 2897</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="namespacehelios_1_1utils.html#afa4431ba8c1810e6574464b02fa87eb8">ZipAdapterFromRange</a>(<a class="code hl_function" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00">GetDerived</a>(), range);</div>
+<div class="line"><span class="lineno"> 2898</span>  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->
 <!-- start footer part -->

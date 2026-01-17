@@ -174,6 +174,7 @@ $(document).ready(function(){initNavTree('functional__adapters_8hpp.html',''); i
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;<a class="el" href="core__pch_8hpp_source.html">helios/core_pch.hpp</a>&gt;</code><br />
+<code>#include &lt;algorithm&gt;</code><br />
 <code>#include &lt;concepts&gt;</code><br />
 <code>#include &lt;cstddef&gt;</code><br />
 <code>#include &lt;iterator&gt;</code><br />
@@ -217,6 +218,19 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1ChainAdapter.html">helios::utils::ChainAdapter&lt; Iter1, Iter2 &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1ReverseAdapter.html">helios::utils::ReverseAdapter&lt; Iter &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1SlideView.html">helios::utils::SlideView&lt; Iter &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1SlideAdapter.html">helios::utils::SlideAdapter&lt; Iter &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">helios::utils::StrideAdapter&lt; Iter &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1ZipAdapter.html">helios::utils::ZipAdapter&lt; Iter1, Iter2 &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1ConcatAdapter.html">helios::utils::ConcatAdapter&lt; Iter &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1utils_1_1FunctionalAdapterBase.html">helios::utils::FunctionalAdapterBase&lt; Derived &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">CRTP base class providing common adapter operations.  <a href="classhelios_1_1utils_1_1FunctionalAdapterBase.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
@@ -297,6 +311,9 @@ Concepts</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1utils_1_1SlideAdapterRequirements.html">helios::utils::SlideAdapterRequirements</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept to validate SlideAdapter requirements. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1utils_1_1ConcatAdapterRequirements.html">helios::utils::ConcatAdapterRequirements</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept to validate ConcatAdapter requirements. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concepthelios_1_1utils_1_1StrideAdapterRequirements.html">helios::utils::StrideAdapterRequirements</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept to validate StrideAdapter requirements. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -319,177 +336,189 @@ Functions</h2></td></tr>
 <tr class="memitem:a1bbd3cf95b591c66c67c6b8a5f3de936"><td class="memTemplItemLeft" align="right" valign="top">consteval auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils_1_1details.html#a1bbd3cf95b591c66c67c6b8a5f3de936">helios::utils::details::get_call_or_apply_result_type</a> () noexcept</td></tr>
 <tr class="memdesc:a1bbd3cf95b591c66c67c6b8a5f3de936"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper to get the result type of either invoke or apply.  <br /></td></tr>
 <tr class="separator:a1bbd3cf95b591c66c67c6b8a5f3de936"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc9a7a7bb1cbdcdf23e717f41fa763be" id="r_afc9a7a7bb1cbdcdf23e717f41fa763be"><td class="memTemplParams" colspan="2">template&lt;typename OutIt &gt; </td></tr>
-<tr class="memitem:afc9a7a7bb1cbdcdf23e717f41fa763be"><td class="memTemplItemLeft" align="right" valign="top">constexpr void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#afc9a7a7bb1cbdcdf23e717f41fa763be">helios::utils::Into</a> (OutIt out) const</td></tr>
-<tr class="separator:afc9a7a7bb1cbdcdf23e717f41fa763be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab0f9ee0135bae7b098c5f83d04a272bb" id="r_ab0f9ee0135bae7b098c5f83d04a272bb"><td class="memItemLeft" align="right" valign="top">constexpr Derived &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#ab0f9ee0135bae7b098c5f83d04a272bb">helios::utils::GetDerived</a> () noexcept</td></tr>
-<tr class="memdesc:ab0f9ee0135bae7b098c5f83d04a272bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets reference to derived class instance.  <br /></td></tr>
-<tr class="separator:ab0f9ee0135bae7b098c5f83d04a272bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:add0bba7ad8887393d4a80827e4d1331c" id="r_add0bba7ad8887393d4a80827e4d1331c"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R, typename Pred &gt; <br />
+<tr class="memitem:ae76512a14a29f49e4e81c33b69d4511c" id="r_ae76512a14a29f49e4e81c33b69d4511c"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R, typename Pred &gt; <br />
 requires FilterAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;, Pred&gt;</td></tr>
-<tr class="memitem:add0bba7ad8887393d4a80827e4d1331c"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="functional__adapters_8hpp.html#add0bba7ad8887393d4a80827e4d1331c">FilterAdapterFromRange</a> (R &amp;range, Pred predicate) noexcept(noexcept(FilterAdapter&lt; std::ranges::iterator_t&lt; R &gt;, Pred &gt;(std::ranges::begin(range), std::ranges::end(range), std::move(predicate)))) -&gt; FilterAdapter&lt; std::ranges::iterator_t&lt; R &gt;, Pred &gt;</td></tr>
-<tr class="memdesc:add0bba7ad8887393d4a80827e4d1331c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a FilterAdapter from a non-const range.  <br /></td></tr>
-<tr class="separator:add0bba7ad8887393d4a80827e4d1331c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af3dbcf0a25bec07c5e8eb9c5ae55a100" id="r_af3dbcf0a25bec07c5e8eb9c5ae55a100"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R, typename Pred &gt; <br />
+<tr class="memitem:ae76512a14a29f49e4e81c33b69d4511c"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#ae76512a14a29f49e4e81c33b69d4511c">helios::utils::FilterAdapterFromRange</a> (R &amp;range, Pred predicate) noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1FilterAdapter.html">FilterAdapter</a>&lt; std::ranges::iterator_t&lt; R &gt;, Pred &gt;(std::ranges::begin(range), std::ranges::end(range), std::move(predicate)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1FilterAdapter.html">FilterAdapter</a>&lt; std::ranges::iterator_t&lt; R &gt;, Pred &gt;</td></tr>
+<tr class="memdesc:ae76512a14a29f49e4e81c33b69d4511c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a <a class="el" href="classhelios_1_1utils_1_1FilterAdapter.html">FilterAdapter</a> from a non-const range.  <br /></td></tr>
+<tr class="separator:ae76512a14a29f49e4e81c33b69d4511c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd858065c2d369f4038b535132c7e3e2" id="r_acd858065c2d369f4038b535132c7e3e2"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R, typename Pred &gt; <br />
 requires FilterAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&lt;const R&amp;&gt;())), Pred&gt;</td></tr>
-<tr class="memitem:af3dbcf0a25bec07c5e8eb9c5ae55a100"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="functional__adapters_8hpp.html#af3dbcf0a25bec07c5e8eb9c5ae55a100">FilterAdapterFromRange</a> (const R &amp;range, Pred predicate) noexcept(noexcept(FilterAdapter&lt; decltype(std::ranges::cbegin(range)), Pred &gt;(std::ranges::cbegin(range), std::ranges::cend(range), std::move(predicate)))) -&gt; FilterAdapter&lt; decltype(std::ranges::cbegin(range)), Pred &gt;</td></tr>
-<tr class="memdesc:af3dbcf0a25bec07c5e8eb9c5ae55a100"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a FilterAdapter from a const range.  <br /></td></tr>
-<tr class="separator:af3dbcf0a25bec07c5e8eb9c5ae55a100"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae484a9df0df45155f7f4b1bc3c82a926" id="r_ae484a9df0df45155f7f4b1bc3c82a926"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R, typename Func &gt; <br />
+<tr class="memitem:acd858065c2d369f4038b535132c7e3e2"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#acd858065c2d369f4038b535132c7e3e2">helios::utils::FilterAdapterFromRange</a> (const R &amp;range, Pred predicate) noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1FilterAdapter.html">FilterAdapter</a>&lt; decltype(std::ranges::cbegin(range)), Pred &gt;(std::ranges::cbegin(range), std::ranges::cend(range), std::move(predicate)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1FilterAdapter.html">FilterAdapter</a>&lt; decltype(std::ranges::cbegin(range)), Pred &gt;</td></tr>
+<tr class="memdesc:acd858065c2d369f4038b535132c7e3e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a <a class="el" href="classhelios_1_1utils_1_1FilterAdapter.html">FilterAdapter</a> from a const range.  <br /></td></tr>
+<tr class="separator:acd858065c2d369f4038b535132c7e3e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0a6eb6f4e86e5f87cb050790c92a8bc" id="r_af0a6eb6f4e86e5f87cb050790c92a8bc"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R, typename Func &gt; <br />
 requires MapAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;, Func&gt;</td></tr>
-<tr class="memitem:ae484a9df0df45155f7f4b1bc3c82a926"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="functional__adapters_8hpp.html#ae484a9df0df45155f7f4b1bc3c82a926">MapAdapterFromRange</a> (R &amp;range, Func transform) noexcept(noexcept(MapAdapter&lt; std::ranges::iterator_t&lt; R &gt;, Func &gt;(std::ranges::begin(range), std::ranges::end(range), std::move(transform)))) -&gt; MapAdapter&lt; std::ranges::iterator_t&lt; R &gt;, Func &gt;</td></tr>
-<tr class="memdesc:ae484a9df0df45155f7f4b1bc3c82a926"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a MapAdapter from a range.  <br /></td></tr>
-<tr class="separator:ae484a9df0df45155f7f4b1bc3c82a926"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adfec94f5dfe07a988c82b8f5be3e325f" id="r_adfec94f5dfe07a988c82b8f5be3e325f"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R, typename Func &gt; <br />
+<tr class="memitem:af0a6eb6f4e86e5f87cb050790c92a8bc"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#af0a6eb6f4e86e5f87cb050790c92a8bc">helios::utils::MapAdapterFromRange</a> (R &amp;range, Func transform) noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1MapAdapter.html">MapAdapter</a>&lt; std::ranges::iterator_t&lt; R &gt;, Func &gt;(std::ranges::begin(range), std::ranges::end(range), std::move(transform)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1MapAdapter.html">MapAdapter</a>&lt; std::ranges::iterator_t&lt; R &gt;, Func &gt;</td></tr>
+<tr class="memdesc:af0a6eb6f4e86e5f87cb050790c92a8bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a <a class="el" href="classhelios_1_1utils_1_1MapAdapter.html">MapAdapter</a> from a range.  <br /></td></tr>
+<tr class="separator:af0a6eb6f4e86e5f87cb050790c92a8bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ee8f9649b3a44d0677fa7a84a2ff942" id="r_a2ee8f9649b3a44d0677fa7a84a2ff942"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R, typename Func &gt; <br />
 requires MapAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&lt;const R&amp;&gt;())), Func&gt;</td></tr>
-<tr class="memitem:adfec94f5dfe07a988c82b8f5be3e325f"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="functional__adapters_8hpp.html#adfec94f5dfe07a988c82b8f5be3e325f">MapAdapterFromRange</a> (const R &amp;range, Func transform) noexcept(noexcept(MapAdapter&lt; decltype(std::ranges::cbegin(range)), Func &gt;(std::ranges::cbegin(range), std::ranges::cend(range), std::move(transform)))) -&gt; MapAdapter&lt; decltype(std::ranges::cbegin(range)), Func &gt;</td></tr>
-<tr class="memdesc:adfec94f5dfe07a988c82b8f5be3e325f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a MapAdapter from a const range.  <br /></td></tr>
-<tr class="separator:adfec94f5dfe07a988c82b8f5be3e325f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a5fe42a5d6a908d4890d22cdd1ac0b5" id="r_a6a5fe42a5d6a908d4890d22cdd1ac0b5"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
+<tr class="memitem:a2ee8f9649b3a44d0677fa7a84a2ff942"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#a2ee8f9649b3a44d0677fa7a84a2ff942">helios::utils::MapAdapterFromRange</a> (const R &amp;range, Func transform) noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1MapAdapter.html">MapAdapter</a>&lt; decltype(std::ranges::cbegin(range)), Func &gt;(std::ranges::cbegin(range), std::ranges::cend(range), std::move(transform)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1MapAdapter.html">MapAdapter</a>&lt; decltype(std::ranges::cbegin(range)), Func &gt;</td></tr>
+<tr class="memdesc:a2ee8f9649b3a44d0677fa7a84a2ff942"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a <a class="el" href="classhelios_1_1utils_1_1MapAdapter.html">MapAdapter</a> from a const range.  <br /></td></tr>
+<tr class="separator:a2ee8f9649b3a44d0677fa7a84a2ff942"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad515350a8e9c043b21a70905e9e91ff6" id="r_ad515350a8e9c043b21a70905e9e91ff6"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
 requires TakeAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;&gt;</td></tr>
-<tr class="memitem:a6a5fe42a5d6a908d4890d22cdd1ac0b5"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="functional__adapters_8hpp.html#a6a5fe42a5d6a908d4890d22cdd1ac0b5">TakeAdapterFromRange</a> (R &amp;range, size_t count) noexcept(noexcept(TakeAdapter&lt; std::ranges::iterator_t&lt; R &gt; &gt;(std::ranges::begin(range), std::ranges::end(range), count))) -&gt; TakeAdapter&lt; std::ranges::iterator_t&lt; R &gt; &gt;</td></tr>
-<tr class="memdesc:a6a5fe42a5d6a908d4890d22cdd1ac0b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a TakeAdapter from a non-const range.  <br /></td></tr>
-<tr class="separator:a6a5fe42a5d6a908d4890d22cdd1ac0b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac358199cbf05e78ba4ac3a25882b6357" id="r_ac358199cbf05e78ba4ac3a25882b6357"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
+<tr class="memitem:ad515350a8e9c043b21a70905e9e91ff6"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#ad515350a8e9c043b21a70905e9e91ff6">helios::utils::TakeAdapterFromRange</a> (R &amp;range, size_t count) noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1TakeAdapter.html">TakeAdapter</a>&lt; std::ranges::iterator_t&lt; R &gt; &gt;(std::ranges::begin(range), std::ranges::end(range), count))) -&gt; <a class="el" href="classhelios_1_1utils_1_1TakeAdapter.html">TakeAdapter</a>&lt; std::ranges::iterator_t&lt; R &gt; &gt;</td></tr>
+<tr class="memdesc:ad515350a8e9c043b21a70905e9e91ff6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a <a class="el" href="classhelios_1_1utils_1_1TakeAdapter.html">TakeAdapter</a> from a non-const range.  <br /></td></tr>
+<tr class="separator:ad515350a8e9c043b21a70905e9e91ff6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1283341e0f4b7f0959910fc8640895bf" id="r_a1283341e0f4b7f0959910fc8640895bf"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
 requires TakeAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&lt;const R&amp;&gt;()))&gt;</td></tr>
-<tr class="memitem:ac358199cbf05e78ba4ac3a25882b6357"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="functional__adapters_8hpp.html#ac358199cbf05e78ba4ac3a25882b6357">TakeAdapterFromRange</a> (const R &amp;range, size_t count) noexcept(noexcept(TakeAdapter&lt; decltype(std::ranges::cbegin(range))&gt;(std::ranges::cbegin(range), std::ranges::cend(range), count))) -&gt; TakeAdapter&lt; decltype(std::ranges::cbegin(range))&gt;</td></tr>
-<tr class="memdesc:ac358199cbf05e78ba4ac3a25882b6357"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a TakeAdapter from a const range.  <br /></td></tr>
-<tr class="separator:ac358199cbf05e78ba4ac3a25882b6357"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a865e738990cd1d760c9a395d24646704" id="r_a865e738990cd1d760c9a395d24646704"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
+<tr class="memitem:a1283341e0f4b7f0959910fc8640895bf"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#a1283341e0f4b7f0959910fc8640895bf">helios::utils::TakeAdapterFromRange</a> (const R &amp;range, size_t count) noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1TakeAdapter.html">TakeAdapter</a>&lt; decltype(std::ranges::cbegin(range))&gt;(std::ranges::cbegin(range), std::ranges::cend(range), count))) -&gt; <a class="el" href="classhelios_1_1utils_1_1TakeAdapter.html">TakeAdapter</a>&lt; decltype(std::ranges::cbegin(range))&gt;</td></tr>
+<tr class="memdesc:a1283341e0f4b7f0959910fc8640895bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a <a class="el" href="classhelios_1_1utils_1_1TakeAdapter.html">TakeAdapter</a> from a const range.  <br /></td></tr>
+<tr class="separator:a1283341e0f4b7f0959910fc8640895bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2497009418a7ac12677b3dfccf2afb90" id="r_a2497009418a7ac12677b3dfccf2afb90"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
 requires SkipAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;&gt;</td></tr>
-<tr class="memitem:a865e738990cd1d760c9a395d24646704"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="functional__adapters_8hpp.html#a865e738990cd1d760c9a395d24646704">SkipAdapterFromRange</a> (R &amp;range, size_t count) noexcept(noexcept(SkipAdapter&lt; std::ranges::iterator_t&lt; R &gt; &gt;(std::ranges::begin(range), std::ranges::end(range), count))) -&gt; SkipAdapter&lt; std::ranges::iterator_t&lt; R &gt; &gt;</td></tr>
-<tr class="memdesc:a865e738990cd1d760c9a395d24646704"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a SkipAdapter from a non-const range.  <br /></td></tr>
-<tr class="separator:a865e738990cd1d760c9a395d24646704"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a53ad52c7f56d56b97ec90961136bf999" id="r_a53ad52c7f56d56b97ec90961136bf999"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
+<tr class="memitem:a2497009418a7ac12677b3dfccf2afb90"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#a2497009418a7ac12677b3dfccf2afb90">helios::utils::SkipAdapterFromRange</a> (R &amp;range, size_t count) noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1SkipAdapter.html">SkipAdapter</a>&lt; std::ranges::iterator_t&lt; R &gt; &gt;(std::ranges::begin(range), std::ranges::end(range), count))) -&gt; <a class="el" href="classhelios_1_1utils_1_1SkipAdapter.html">SkipAdapter</a>&lt; std::ranges::iterator_t&lt; R &gt; &gt;</td></tr>
+<tr class="memdesc:a2497009418a7ac12677b3dfccf2afb90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a <a class="el" href="classhelios_1_1utils_1_1SkipAdapter.html">SkipAdapter</a> from a non-const range.  <br /></td></tr>
+<tr class="separator:a2497009418a7ac12677b3dfccf2afb90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac45c115d1555c31c0bc0f11b94dc395a" id="r_ac45c115d1555c31c0bc0f11b94dc395a"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
 requires SkipAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&lt;const R&amp;&gt;()))&gt;</td></tr>
-<tr class="memitem:a53ad52c7f56d56b97ec90961136bf999"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="functional__adapters_8hpp.html#a53ad52c7f56d56b97ec90961136bf999">SkipAdapterFromRange</a> (const R &amp;range, size_t count) noexcept(noexcept(SkipAdapter&lt; decltype(std::ranges::cbegin(range))&gt;(std::ranges::cbegin(range), std::ranges::cend(range), count))) -&gt; SkipAdapter&lt; decltype(std::ranges::cbegin(range))&gt;</td></tr>
-<tr class="memdesc:a53ad52c7f56d56b97ec90961136bf999"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a SkipAdapter from a const range.  <br /></td></tr>
-<tr class="separator:a53ad52c7f56d56b97ec90961136bf999"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae395ae0aba4682d48ff4e235a326fbf0" id="r_ae395ae0aba4682d48ff4e235a326fbf0"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R, typename Pred &gt; <br />
+<tr class="memitem:ac45c115d1555c31c0bc0f11b94dc395a"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#ac45c115d1555c31c0bc0f11b94dc395a">helios::utils::SkipAdapterFromRange</a> (const R &amp;range, size_t count) noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1SkipAdapter.html">SkipAdapter</a>&lt; decltype(std::ranges::cbegin(range))&gt;(std::ranges::cbegin(range), std::ranges::cend(range), count))) -&gt; <a class="el" href="classhelios_1_1utils_1_1SkipAdapter.html">SkipAdapter</a>&lt; decltype(std::ranges::cbegin(range))&gt;</td></tr>
+<tr class="memdesc:ac45c115d1555c31c0bc0f11b94dc395a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a <a class="el" href="classhelios_1_1utils_1_1SkipAdapter.html">SkipAdapter</a> from a const range.  <br /></td></tr>
+<tr class="separator:ac45c115d1555c31c0bc0f11b94dc395a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a472cf8f0629ac705e20c3c997d57c3" id="r_a6a472cf8f0629ac705e20c3c997d57c3"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R, typename Pred &gt; <br />
 requires TakeWhileAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;, Pred&gt;</td></tr>
-<tr class="memitem:ae395ae0aba4682d48ff4e235a326fbf0"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="functional__adapters_8hpp.html#ae395ae0aba4682d48ff4e235a326fbf0">TakeWhileAdapterFromRange</a> (R &amp;range, Pred predicate) noexcept(noexcept(TakeWhileAdapter&lt; std::ranges::iterator_t&lt; R &gt;, Pred &gt;(std::ranges::begin(range), std::ranges::end(range), std::move(predicate)))) -&gt; TakeWhileAdapter&lt; std::ranges::iterator_t&lt; R &gt;, Pred &gt;</td></tr>
-<tr class="memdesc:ae395ae0aba4682d48ff4e235a326fbf0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a TakeWhileAdapter from a non-const range.  <br /></td></tr>
-<tr class="separator:ae395ae0aba4682d48ff4e235a326fbf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d4413e0037e9b4528efebff15a54d67" id="r_a0d4413e0037e9b4528efebff15a54d67"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R, typename Pred &gt; <br />
+<tr class="memitem:a6a472cf8f0629ac705e20c3c997d57c3"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#a6a472cf8f0629ac705e20c3c997d57c3">helios::utils::TakeWhileAdapterFromRange</a> (R &amp;range, Pred predicate) noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1TakeWhileAdapter.html">TakeWhileAdapter</a>&lt; std::ranges::iterator_t&lt; R &gt;, Pred &gt;(std::ranges::begin(range), std::ranges::end(range), std::move(predicate)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1TakeWhileAdapter.html">TakeWhileAdapter</a>&lt; std::ranges::iterator_t&lt; R &gt;, Pred &gt;</td></tr>
+<tr class="memdesc:a6a472cf8f0629ac705e20c3c997d57c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a <a class="el" href="classhelios_1_1utils_1_1TakeWhileAdapter.html">TakeWhileAdapter</a> from a non-const range.  <br /></td></tr>
+<tr class="separator:a6a472cf8f0629ac705e20c3c997d57c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8718755087040d06b50b42b74ca14664" id="r_a8718755087040d06b50b42b74ca14664"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R, typename Pred &gt; <br />
 requires TakeWhileAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&lt;const R&amp;&gt;())), Pred&gt;</td></tr>
-<tr class="memitem:a0d4413e0037e9b4528efebff15a54d67"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="functional__adapters_8hpp.html#a0d4413e0037e9b4528efebff15a54d67">TakeWhileAdapterFromRange</a> (const R &amp;range, Pred predicate) noexcept(noexcept(TakeWhileAdapter&lt; decltype(std::ranges::cbegin(range)), Pred &gt;(std::ranges::cbegin(range), std::ranges::cend(range), std::move(predicate)))) -&gt; TakeWhileAdapter&lt; decltype(std::ranges::cbegin(range)), Pred &gt;</td></tr>
-<tr class="memdesc:a0d4413e0037e9b4528efebff15a54d67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a TakeWhileAdapter from a const range.  <br /></td></tr>
-<tr class="separator:a0d4413e0037e9b4528efebff15a54d67"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f7766fbd29295bb0e1464dace44c679" id="r_a3f7766fbd29295bb0e1464dace44c679"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R, typename Pred &gt; <br />
+<tr class="memitem:a8718755087040d06b50b42b74ca14664"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#a8718755087040d06b50b42b74ca14664">helios::utils::TakeWhileAdapterFromRange</a> (const R &amp;range, Pred predicate) noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1TakeWhileAdapter.html">TakeWhileAdapter</a>&lt; decltype(std::ranges::cbegin(range)), Pred &gt;(std::ranges::cbegin(range), std::ranges::cend(range), std::move(predicate)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1TakeWhileAdapter.html">TakeWhileAdapter</a>&lt; decltype(std::ranges::cbegin(range)), Pred &gt;</td></tr>
+<tr class="memdesc:a8718755087040d06b50b42b74ca14664"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a <a class="el" href="classhelios_1_1utils_1_1TakeWhileAdapter.html">TakeWhileAdapter</a> from a const range.  <br /></td></tr>
+<tr class="separator:a8718755087040d06b50b42b74ca14664"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4adf6ce03d57cc76b5840f7d77f56a9" id="r_ac4adf6ce03d57cc76b5840f7d77f56a9"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R, typename Pred &gt; <br />
 requires SkipWhileAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;, Pred&gt;</td></tr>
-<tr class="memitem:a3f7766fbd29295bb0e1464dace44c679"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="functional__adapters_8hpp.html#a3f7766fbd29295bb0e1464dace44c679">SkipWhileAdapterFromRange</a> (R &amp;range, Pred predicate) noexcept(noexcept(SkipWhileAdapter&lt; std::ranges::iterator_t&lt; R &gt;, Pred &gt;(std::ranges::begin(range), std::ranges::end(range), std::move(predicate)))) -&gt; SkipWhileAdapter&lt; std::ranges::iterator_t&lt; R &gt;, Pred &gt;</td></tr>
-<tr class="memdesc:a3f7766fbd29295bb0e1464dace44c679"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a SkipWhileAdapter from a non-const range.  <br /></td></tr>
-<tr class="separator:a3f7766fbd29295bb0e1464dace44c679"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a57d5fa54f13514d1e7089a5c0d4b5487" id="r_a57d5fa54f13514d1e7089a5c0d4b5487"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R, typename Pred &gt; <br />
+<tr class="memitem:ac4adf6ce03d57cc76b5840f7d77f56a9"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#ac4adf6ce03d57cc76b5840f7d77f56a9">helios::utils::SkipWhileAdapterFromRange</a> (R &amp;range, Pred predicate) noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1SkipWhileAdapter.html">SkipWhileAdapter</a>&lt; std::ranges::iterator_t&lt; R &gt;, Pred &gt;(std::ranges::begin(range), std::ranges::end(range), std::move(predicate)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1SkipWhileAdapter.html">SkipWhileAdapter</a>&lt; std::ranges::iterator_t&lt; R &gt;, Pred &gt;</td></tr>
+<tr class="memdesc:ac4adf6ce03d57cc76b5840f7d77f56a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a <a class="el" href="classhelios_1_1utils_1_1SkipWhileAdapter.html">SkipWhileAdapter</a> from a non-const range.  <br /></td></tr>
+<tr class="separator:ac4adf6ce03d57cc76b5840f7d77f56a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7dd6cda498446bc5ecd8a51a2da61b71" id="r_a7dd6cda498446bc5ecd8a51a2da61b71"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R, typename Pred &gt; <br />
 requires SkipWhileAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&lt;const R&amp;&gt;())), Pred&gt;</td></tr>
-<tr class="memitem:a57d5fa54f13514d1e7089a5c0d4b5487"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="functional__adapters_8hpp.html#a57d5fa54f13514d1e7089a5c0d4b5487">SkipWhileAdapterFromRange</a> (const R &amp;range, Pred predicate) noexcept(noexcept(SkipWhileAdapter&lt; decltype(std::ranges::cbegin(range)), Pred &gt;(std::ranges::cbegin(range), std::ranges::cend(range), std::move(predicate)))) -&gt; SkipWhileAdapter&lt; decltype(std::ranges::cbegin(range)), Pred &gt;</td></tr>
-<tr class="memdesc:a57d5fa54f13514d1e7089a5c0d4b5487"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a SkipWhileAdapter from a const range.  <br /></td></tr>
-<tr class="separator:a57d5fa54f13514d1e7089a5c0d4b5487"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26c8c7da02f4a54443fbb24411500ba2" id="r_a26c8c7da02f4a54443fbb24411500ba2"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
+<tr class="memitem:a7dd6cda498446bc5ecd8a51a2da61b71"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#a7dd6cda498446bc5ecd8a51a2da61b71">helios::utils::SkipWhileAdapterFromRange</a> (const R &amp;range, Pred predicate) noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1SkipWhileAdapter.html">SkipWhileAdapter</a>&lt; decltype(std::ranges::cbegin(range)), Pred &gt;(std::ranges::cbegin(range), std::ranges::cend(range), std::move(predicate)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1SkipWhileAdapter.html">SkipWhileAdapter</a>&lt; decltype(std::ranges::cbegin(range)), Pred &gt;</td></tr>
+<tr class="memdesc:a7dd6cda498446bc5ecd8a51a2da61b71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a <a class="el" href="classhelios_1_1utils_1_1SkipWhileAdapter.html">SkipWhileAdapter</a> from a const range.  <br /></td></tr>
+<tr class="separator:a7dd6cda498446bc5ecd8a51a2da61b71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83681bf4c909648e74a2468943179268" id="r_a83681bf4c909648e74a2468943179268"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
 requires EnumerateAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;&gt;</td></tr>
-<tr class="memitem:a26c8c7da02f4a54443fbb24411500ba2"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="functional__adapters_8hpp.html#a26c8c7da02f4a54443fbb24411500ba2">EnumerateAdapterFromRange</a> (R &amp;range) noexcept(noexcept(EnumerateAdapter&lt; std::ranges::iterator_t&lt; R &gt; &gt;(std::ranges::begin(range), std::ranges::end(range)))) -&gt; EnumerateAdapter&lt; std::ranges::iterator_t&lt; R &gt; &gt;</td></tr>
-<tr class="memdesc:a26c8c7da02f4a54443fbb24411500ba2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create an EnumerateAdapter from a non-const range.  <br /></td></tr>
-<tr class="separator:a26c8c7da02f4a54443fbb24411500ba2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d276599e3f544544c87b436e955f39b" id="r_a5d276599e3f544544c87b436e955f39b"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
+<tr class="memitem:a83681bf4c909648e74a2468943179268"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#a83681bf4c909648e74a2468943179268">helios::utils::EnumerateAdapterFromRange</a> (R &amp;range) noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1EnumerateAdapter.html">EnumerateAdapter</a>&lt; std::ranges::iterator_t&lt; R &gt; &gt;(std::ranges::begin(range), std::ranges::end(range)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1EnumerateAdapter.html">EnumerateAdapter</a>&lt; std::ranges::iterator_t&lt; R &gt; &gt;</td></tr>
+<tr class="memdesc:a83681bf4c909648e74a2468943179268"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create an <a class="el" href="classhelios_1_1utils_1_1EnumerateAdapter.html">EnumerateAdapter</a> from a non-const range.  <br /></td></tr>
+<tr class="separator:a83681bf4c909648e74a2468943179268"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02caf3f1b80448dda4ef6a56bc027470" id="r_a02caf3f1b80448dda4ef6a56bc027470"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
 requires EnumerateAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&lt;const R&amp;&gt;()))&gt;</td></tr>
-<tr class="memitem:a5d276599e3f544544c87b436e955f39b"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="functional__adapters_8hpp.html#a5d276599e3f544544c87b436e955f39b">EnumerateAdapterFromRange</a> (const R &amp;range) noexcept(noexcept(EnumerateAdapter&lt; decltype(std::ranges::cbegin(range))&gt;(std::ranges::cbegin(range), std::ranges::cend(range)))) -&gt; EnumerateAdapter&lt; decltype(std::ranges::cbegin(range))&gt;</td></tr>
-<tr class="memdesc:a5d276599e3f544544c87b436e955f39b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create an EnumerateAdapter from a const range.  <br /></td></tr>
-<tr class="separator:a5d276599e3f544544c87b436e955f39b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad246f1f7640da69f162cf174105bde02" id="r_ad246f1f7640da69f162cf174105bde02"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R, typename Func &gt; <br />
+<tr class="memitem:a02caf3f1b80448dda4ef6a56bc027470"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#a02caf3f1b80448dda4ef6a56bc027470">helios::utils::EnumerateAdapterFromRange</a> (const R &amp;range) noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1EnumerateAdapter.html">EnumerateAdapter</a>&lt; decltype(std::ranges::cbegin(range))&gt;(std::ranges::cbegin(range), std::ranges::cend(range)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1EnumerateAdapter.html">EnumerateAdapter</a>&lt; decltype(std::ranges::cbegin(range))&gt;</td></tr>
+<tr class="memdesc:a02caf3f1b80448dda4ef6a56bc027470"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create an <a class="el" href="classhelios_1_1utils_1_1EnumerateAdapter.html">EnumerateAdapter</a> from a const range.  <br /></td></tr>
+<tr class="separator:a02caf3f1b80448dda4ef6a56bc027470"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad689b8c7d9fe0a22b556c8b4418f07de" id="r_ad689b8c7d9fe0a22b556c8b4418f07de"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R, typename Func &gt; <br />
 requires InspectAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;, Func&gt;</td></tr>
-<tr class="memitem:ad246f1f7640da69f162cf174105bde02"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="functional__adapters_8hpp.html#ad246f1f7640da69f162cf174105bde02">InspectAdapterFromRange</a> (R &amp;range, Func inspector) noexcept(noexcept(InspectAdapter&lt; std::ranges::iterator_t&lt; R &gt;, Func &gt;(std::ranges::begin(range), std::ranges::end(range), std::move(inspector)))) -&gt; InspectAdapter&lt; std::ranges::iterator_t&lt; R &gt;, Func &gt;</td></tr>
-<tr class="memdesc:ad246f1f7640da69f162cf174105bde02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create an InspectAdapter from a non-const range.  <br /></td></tr>
-<tr class="separator:ad246f1f7640da69f162cf174105bde02"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9cf37029b273f8a4654678bbe762dbd3" id="r_a9cf37029b273f8a4654678bbe762dbd3"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R, typename Func &gt; <br />
+<tr class="memitem:ad689b8c7d9fe0a22b556c8b4418f07de"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#ad689b8c7d9fe0a22b556c8b4418f07de">helios::utils::InspectAdapterFromRange</a> (R &amp;range, Func inspector) noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1InspectAdapter.html">InspectAdapter</a>&lt; std::ranges::iterator_t&lt; R &gt;, Func &gt;(std::ranges::begin(range), std::ranges::end(range), std::move(inspector)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1InspectAdapter.html">InspectAdapter</a>&lt; std::ranges::iterator_t&lt; R &gt;, Func &gt;</td></tr>
+<tr class="memdesc:ad689b8c7d9fe0a22b556c8b4418f07de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create an <a class="el" href="classhelios_1_1utils_1_1InspectAdapter.html">InspectAdapter</a> from a non-const range.  <br /></td></tr>
+<tr class="separator:ad689b8c7d9fe0a22b556c8b4418f07de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0536e4f8cbeca1292f70d01dd6c11f2e" id="r_a0536e4f8cbeca1292f70d01dd6c11f2e"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R, typename Func &gt; <br />
 requires InspectAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&lt;const R&amp;&gt;())), Func&gt;</td></tr>
-<tr class="memitem:a9cf37029b273f8a4654678bbe762dbd3"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="functional__adapters_8hpp.html#a9cf37029b273f8a4654678bbe762dbd3">InspectAdapterFromRange</a> (const R &amp;range, Func inspector) noexcept(noexcept(InspectAdapter&lt; decltype(std::ranges::cbegin(range)), Func &gt;(std::ranges::cbegin(range), std::ranges::cend(range), std::move(inspector)))) -&gt; InspectAdapter&lt; decltype(std::ranges::cbegin(range)), Func &gt;</td></tr>
-<tr class="memdesc:a9cf37029b273f8a4654678bbe762dbd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create an InspectAdapter from a const range.  <br /></td></tr>
-<tr class="separator:a9cf37029b273f8a4654678bbe762dbd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abf8910c7748dc4db0ce7534c2ee6c941" id="r_abf8910c7748dc4db0ce7534c2ee6c941"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
+<tr class="memitem:a0536e4f8cbeca1292f70d01dd6c11f2e"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#a0536e4f8cbeca1292f70d01dd6c11f2e">helios::utils::InspectAdapterFromRange</a> (const R &amp;range, Func inspector) noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1InspectAdapter.html">InspectAdapter</a>&lt; decltype(std::ranges::cbegin(range)), Func &gt;(std::ranges::cbegin(range), std::ranges::cend(range), std::move(inspector)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1InspectAdapter.html">InspectAdapter</a>&lt; decltype(std::ranges::cbegin(range)), Func &gt;</td></tr>
+<tr class="memdesc:a0536e4f8cbeca1292f70d01dd6c11f2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create an <a class="el" href="classhelios_1_1utils_1_1InspectAdapter.html">InspectAdapter</a> from a const range.  <br /></td></tr>
+<tr class="separator:a0536e4f8cbeca1292f70d01dd6c11f2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70b7d942d95a3929c406053b8352b6c8" id="r_a70b7d942d95a3929c406053b8352b6c8"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
 requires StepByAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;&gt;</td></tr>
-<tr class="memitem:abf8910c7748dc4db0ce7534c2ee6c941"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="functional__adapters_8hpp.html#abf8910c7748dc4db0ce7534c2ee6c941">StepByAdapterFromRange</a> (R &amp;range, size_t step) noexcept(noexcept(StepByAdapter&lt; std::ranges::iterator_t&lt; R &gt; &gt;(std::ranges::begin(range), std::ranges::end(range), step))) -&gt; StepByAdapter&lt; std::ranges::iterator_t&lt; R &gt; &gt;</td></tr>
-<tr class="memdesc:abf8910c7748dc4db0ce7534c2ee6c941"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a StepByAdapter from a non-const range.  <br /></td></tr>
-<tr class="separator:abf8910c7748dc4db0ce7534c2ee6c941"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8464aac41581863ac79df1da1376d216" id="r_a8464aac41581863ac79df1da1376d216"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
+<tr class="memitem:a70b7d942d95a3929c406053b8352b6c8"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#a70b7d942d95a3929c406053b8352b6c8">helios::utils::StepByAdapterFromRange</a> (R &amp;range, size_t step) noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1StepByAdapter.html">StepByAdapter</a>&lt; std::ranges::iterator_t&lt; R &gt; &gt;(std::ranges::begin(range), std::ranges::end(range), step))) -&gt; <a class="el" href="classhelios_1_1utils_1_1StepByAdapter.html">StepByAdapter</a>&lt; std::ranges::iterator_t&lt; R &gt; &gt;</td></tr>
+<tr class="memdesc:a70b7d942d95a3929c406053b8352b6c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a <a class="el" href="classhelios_1_1utils_1_1StepByAdapter.html">StepByAdapter</a> from a non-const range.  <br /></td></tr>
+<tr class="separator:a70b7d942d95a3929c406053b8352b6c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5871424c4a5add264e394e45f633694f" id="r_a5871424c4a5add264e394e45f633694f"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
 requires StepByAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&lt;const R&amp;&gt;()))&gt;</td></tr>
-<tr class="memitem:a8464aac41581863ac79df1da1376d216"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="functional__adapters_8hpp.html#a8464aac41581863ac79df1da1376d216">StepByAdapterFromRange</a> (const R &amp;range, size_t step) noexcept(noexcept(StepByAdapter&lt; decltype(std::ranges::cbegin(range))&gt;(std::ranges::cbegin(range), std::ranges::cend(range), step))) -&gt; StepByAdapter&lt; decltype(std::ranges::cbegin(range))&gt;</td></tr>
-<tr class="memdesc:a8464aac41581863ac79df1da1376d216"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a StepByAdapter from a const range.  <br /></td></tr>
-<tr class="separator:a8464aac41581863ac79df1da1376d216"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aadcef6f6e0d096f987d0f75a5aac3abf" id="r_aadcef6f6e0d096f987d0f75a5aac3abf"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R1, std::ranges::range R2&gt; <br />
+<tr class="memitem:a5871424c4a5add264e394e45f633694f"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#a5871424c4a5add264e394e45f633694f">helios::utils::StepByAdapterFromRange</a> (const R &amp;range, size_t step) noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1StepByAdapter.html">StepByAdapter</a>&lt; decltype(std::ranges::cbegin(range))&gt;(std::ranges::cbegin(range), std::ranges::cend(range), step))) -&gt; <a class="el" href="classhelios_1_1utils_1_1StepByAdapter.html">StepByAdapter</a>&lt; decltype(std::ranges::cbegin(range))&gt;</td></tr>
+<tr class="memdesc:a5871424c4a5add264e394e45f633694f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a <a class="el" href="classhelios_1_1utils_1_1StepByAdapter.html">StepByAdapter</a> from a const range.  <br /></td></tr>
+<tr class="separator:a5871424c4a5add264e394e45f633694f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1d58f627e97599dde0bc68dda816bb2" id="r_ab1d58f627e97599dde0bc68dda816bb2"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R1, std::ranges::range R2&gt; <br />
 requires ChainAdapterRequirements&lt;std::ranges::iterator_t&lt;R1&gt;, std::ranges::iterator_t&lt;R2&gt;&gt;</td></tr>
-<tr class="memitem:aadcef6f6e0d096f987d0f75a5aac3abf"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="functional__adapters_8hpp.html#aadcef6f6e0d096f987d0f75a5aac3abf">ChainAdapterFromRange</a> (R1 &amp;range1, R2 &amp;range2) noexcept(noexcept(ChainAdapter&lt; std::ranges::iterator_t&lt; R1 &gt;, std::ranges::iterator_t&lt; R2 &gt; &gt;(std::ranges::begin(range1), std::ranges::end(range1), std::ranges::begin(range2), std::ranges::end(range2)))) -&gt; ChainAdapter&lt; std::ranges::iterator_t&lt; R1 &gt;, std::ranges::iterator_t&lt; R2 &gt; &gt;</td></tr>
-<tr class="memdesc:aadcef6f6e0d096f987d0f75a5aac3abf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a ChainAdapter from two non-const ranges.  <br /></td></tr>
-<tr class="separator:aadcef6f6e0d096f987d0f75a5aac3abf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa511079d33070ec8844e6434ce7084c" id="r_aaa511079d33070ec8844e6434ce7084c"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R1, std::ranges::range R2&gt; <br />
+<tr class="memitem:ab1d58f627e97599dde0bc68dda816bb2"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#ab1d58f627e97599dde0bc68dda816bb2">helios::utils::ChainAdapterFromRange</a> (R1 &amp;range1, R2 &amp;range2) noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1ChainAdapter.html">ChainAdapter</a>&lt; std::ranges::iterator_t&lt; R1 &gt;, std::ranges::iterator_t&lt; R2 &gt; &gt;(std::ranges::begin(range1), std::ranges::end(range1), std::ranges::begin(range2), std::ranges::end(range2)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1ChainAdapter.html">ChainAdapter</a>&lt; std::ranges::iterator_t&lt; R1 &gt;, std::ranges::iterator_t&lt; R2 &gt; &gt;</td></tr>
+<tr class="memdesc:ab1d58f627e97599dde0bc68dda816bb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a <a class="el" href="classhelios_1_1utils_1_1ChainAdapter.html">ChainAdapter</a> from two non-const ranges.  <br /></td></tr>
+<tr class="separator:ab1d58f627e97599dde0bc68dda816bb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a999d66fbf48a7216ed1ce1d8eecb4226" id="r_a999d66fbf48a7216ed1ce1d8eecb4226"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R1, std::ranges::range R2&gt; <br />
 requires ChainAdapterRequirements&lt;std::ranges::iterator_t&lt;R1&gt;, decltype(std::ranges::cbegin(std::declval&lt;const R2&amp;&gt;()))&gt;</td></tr>
-<tr class="memitem:aaa511079d33070ec8844e6434ce7084c"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="functional__adapters_8hpp.html#aaa511079d33070ec8844e6434ce7084c">ChainAdapterFromRange</a> (R1 &amp;range1, const R2 &amp;range2) noexcept(noexcept(ChainAdapter&lt; std::ranges::iterator_t&lt; R1 &gt;, decltype(std::ranges::cbegin(range2))&gt;(std::ranges::begin(range1), std::ranges::end(range1), std::ranges::cbegin(range2), std::ranges::cend(range2)))) -&gt; ChainAdapter&lt; std::ranges::iterator_t&lt; R1 &gt;, decltype(std::ranges::cbegin(range2))&gt;</td></tr>
-<tr class="memdesc:aaa511079d33070ec8844e6434ce7084c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a ChainAdapter from non-const and const ranges.  <br /></td></tr>
-<tr class="separator:aaa511079d33070ec8844e6434ce7084c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1541fc2b269edfe2e7e0e4af4a776c2b" id="r_a1541fc2b269edfe2e7e0e4af4a776c2b"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R1, std::ranges::range R2&gt; <br />
+<tr class="memitem:a999d66fbf48a7216ed1ce1d8eecb4226"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#a999d66fbf48a7216ed1ce1d8eecb4226">helios::utils::ChainAdapterFromRange</a> (R1 &amp;range1, const R2 &amp;range2) noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1ChainAdapter.html">ChainAdapter</a>&lt; std::ranges::iterator_t&lt; R1 &gt;, decltype(std::ranges::cbegin(range2))&gt;(std::ranges::begin(range1), std::ranges::end(range1), std::ranges::cbegin(range2), std::ranges::cend(range2)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1ChainAdapter.html">ChainAdapter</a>&lt; std::ranges::iterator_t&lt; R1 &gt;, decltype(std::ranges::cbegin(range2))&gt;</td></tr>
+<tr class="memdesc:a999d66fbf48a7216ed1ce1d8eecb4226"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a <a class="el" href="classhelios_1_1utils_1_1ChainAdapter.html">ChainAdapter</a> from non-const and const ranges.  <br /></td></tr>
+<tr class="separator:a999d66fbf48a7216ed1ce1d8eecb4226"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1611aa1f97b4a3adbc5f821bf8ae48d" id="r_ac1611aa1f97b4a3adbc5f821bf8ae48d"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R1, std::ranges::range R2&gt; <br />
 requires ChainAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&lt;const R1&amp;&gt;())), std::ranges::iterator_t&lt;R2&gt;&gt;</td></tr>
-<tr class="memitem:a1541fc2b269edfe2e7e0e4af4a776c2b"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="functional__adapters_8hpp.html#a1541fc2b269edfe2e7e0e4af4a776c2b">ChainAdapterFromRange</a> (const R1 &amp;range1, R2 &amp;range2) noexcept(noexcept(ChainAdapter&lt; decltype(std::ranges::cbegin(range1)), std::ranges::iterator_t&lt; R2 &gt; &gt;(std::ranges::cbegin(range1), std::ranges::cend(range1), std::ranges::begin(range2), std::ranges::end(range2)))) -&gt; ChainAdapter&lt; decltype(std::ranges::cbegin(range1)), std::ranges::iterator_t&lt; R2 &gt; &gt;</td></tr>
-<tr class="memdesc:a1541fc2b269edfe2e7e0e4af4a776c2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a ChainAdapter from const and non-const ranges.  <br /></td></tr>
-<tr class="separator:a1541fc2b269edfe2e7e0e4af4a776c2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af834c08115ebc4f405b9b65a43660b53" id="r_af834c08115ebc4f405b9b65a43660b53"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R1, std::ranges::range R2&gt; <br />
+<tr class="memitem:ac1611aa1f97b4a3adbc5f821bf8ae48d"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#ac1611aa1f97b4a3adbc5f821bf8ae48d">helios::utils::ChainAdapterFromRange</a> (const R1 &amp;range1, R2 &amp;range2) noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1ChainAdapter.html">ChainAdapter</a>&lt; decltype(std::ranges::cbegin(range1)), std::ranges::iterator_t&lt; R2 &gt; &gt;(std::ranges::cbegin(range1), std::ranges::cend(range1), std::ranges::begin(range2), std::ranges::end(range2)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1ChainAdapter.html">ChainAdapter</a>&lt; decltype(std::ranges::cbegin(range1)), std::ranges::iterator_t&lt; R2 &gt; &gt;</td></tr>
+<tr class="memdesc:ac1611aa1f97b4a3adbc5f821bf8ae48d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a <a class="el" href="classhelios_1_1utils_1_1ChainAdapter.html">ChainAdapter</a> from const and non-const ranges.  <br /></td></tr>
+<tr class="separator:ac1611aa1f97b4a3adbc5f821bf8ae48d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a613c24eed270f87a7f9278864d8393e0" id="r_a613c24eed270f87a7f9278864d8393e0"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R1, std::ranges::range R2&gt; <br />
 requires ChainAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&lt;const R1&amp;&gt;())), decltype(std::ranges::cbegin(std::declval&lt;const R2&amp;&gt;()))&gt;</td></tr>
-<tr class="memitem:af834c08115ebc4f405b9b65a43660b53"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="functional__adapters_8hpp.html#af834c08115ebc4f405b9b65a43660b53">ChainAdapterFromRange</a> (const R1 &amp;range1, const R2 &amp;range2) noexcept(noexcept(ChainAdapter&lt; decltype(std::ranges::cbegin(range1)), decltype(std::ranges::cbegin(range2))&gt;(std::ranges::cbegin(range1), std::ranges::cend(range1), std::ranges::cbegin(range2), std::ranges::cend(range2)))) -&gt; ChainAdapter&lt; decltype(std::ranges::cbegin(range1)), decltype(std::ranges::cbegin(range2))&gt;</td></tr>
-<tr class="memdesc:af834c08115ebc4f405b9b65a43660b53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a ChainAdapter from two const ranges.  <br /></td></tr>
-<tr class="separator:af834c08115ebc4f405b9b65a43660b53"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f22bfef6bdc6c9e48c264f1ab73b94c" id="r_a1f22bfef6bdc6c9e48c264f1ab73b94c"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
+<tr class="memitem:a613c24eed270f87a7f9278864d8393e0"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#a613c24eed270f87a7f9278864d8393e0">helios::utils::ChainAdapterFromRange</a> (const R1 &amp;range1, const R2 &amp;range2) noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1ChainAdapter.html">ChainAdapter</a>&lt; decltype(std::ranges::cbegin(range1)), decltype(std::ranges::cbegin(range2))&gt;(std::ranges::cbegin(range1), std::ranges::cend(range1), std::ranges::cbegin(range2), std::ranges::cend(range2)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1ChainAdapter.html">ChainAdapter</a>&lt; decltype(std::ranges::cbegin(range1)), decltype(std::ranges::cbegin(range2))&gt;</td></tr>
+<tr class="memdesc:a613c24eed270f87a7f9278864d8393e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a <a class="el" href="classhelios_1_1utils_1_1ChainAdapter.html">ChainAdapter</a> from two const ranges.  <br /></td></tr>
+<tr class="separator:a613c24eed270f87a7f9278864d8393e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0636c6aac59c5c7fd67bb77aa0b2ee1" id="r_ab0636c6aac59c5c7fd67bb77aa0b2ee1"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
 requires ReverseAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;&gt;</td></tr>
-<tr class="memitem:a1f22bfef6bdc6c9e48c264f1ab73b94c"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="functional__adapters_8hpp.html#a1f22bfef6bdc6c9e48c264f1ab73b94c">ReverseAdapterFromRange</a> (R &amp;range) noexcept(noexcept(ReverseAdapter&lt; std::ranges::iterator_t&lt; R &gt; &gt;(std::ranges::begin(range), std::ranges::end(range)))) -&gt; ReverseAdapter&lt; std::ranges::iterator_t&lt; R &gt; &gt;</td></tr>
-<tr class="memdesc:a1f22bfef6bdc6c9e48c264f1ab73b94c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a ReverseAdapter from a range.  <br /></td></tr>
-<tr class="separator:a1f22bfef6bdc6c9e48c264f1ab73b94c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64515d4cfea47078da3e2260638ea23d" id="r_a64515d4cfea47078da3e2260638ea23d"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
+<tr class="memitem:ab0636c6aac59c5c7fd67bb77aa0b2ee1"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#ab0636c6aac59c5c7fd67bb77aa0b2ee1">helios::utils::ReverseAdapterFromRange</a> (R &amp;range) noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1ReverseAdapter.html">ReverseAdapter</a>&lt; std::ranges::iterator_t&lt; R &gt; &gt;(std::ranges::begin(range), std::ranges::end(range)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1ReverseAdapter.html">ReverseAdapter</a>&lt; std::ranges::iterator_t&lt; R &gt; &gt;</td></tr>
+<tr class="memdesc:ab0636c6aac59c5c7fd67bb77aa0b2ee1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a <a class="el" href="classhelios_1_1utils_1_1ReverseAdapter.html">ReverseAdapter</a> from a range.  <br /></td></tr>
+<tr class="separator:ab0636c6aac59c5c7fd67bb77aa0b2ee1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8fc409c668ef19aec7057a57be96733" id="r_ad8fc409c668ef19aec7057a57be96733"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
 requires ReverseAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&lt;const R&amp;&gt;()))&gt;</td></tr>
-<tr class="memitem:a64515d4cfea47078da3e2260638ea23d"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="functional__adapters_8hpp.html#a64515d4cfea47078da3e2260638ea23d">ReverseAdapterFromRange</a> (const R &amp;range) noexcept(noexcept(ReverseAdapter&lt; decltype(std::ranges::cbegin(range))&gt;(std::ranges::cbegin(range), std::ranges::cend(range)))) -&gt; ReverseAdapter&lt; decltype(std::ranges::cbegin(range))&gt;</td></tr>
-<tr class="memdesc:a64515d4cfea47078da3e2260638ea23d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a ReverseAdapter from a const range.  <br /></td></tr>
-<tr class="separator:a64515d4cfea47078da3e2260638ea23d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a24be1e723416c19e6b3f500653076dd9" id="r_a24be1e723416c19e6b3f500653076dd9"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
+<tr class="memitem:ad8fc409c668ef19aec7057a57be96733"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#ad8fc409c668ef19aec7057a57be96733">helios::utils::ReverseAdapterFromRange</a> (const R &amp;range) noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1ReverseAdapter.html">ReverseAdapter</a>&lt; decltype(std::ranges::cbegin(range))&gt;(std::ranges::cbegin(range), std::ranges::cend(range)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1ReverseAdapter.html">ReverseAdapter</a>&lt; decltype(std::ranges::cbegin(range))&gt;</td></tr>
+<tr class="memdesc:ad8fc409c668ef19aec7057a57be96733"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a <a class="el" href="classhelios_1_1utils_1_1ReverseAdapter.html">ReverseAdapter</a> from a const range.  <br /></td></tr>
+<tr class="separator:ad8fc409c668ef19aec7057a57be96733"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad239bdf2589669023ded7dbedd239246" id="r_ad239bdf2589669023ded7dbedd239246"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
 requires JoinAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;&gt;</td></tr>
-<tr class="memitem:a24be1e723416c19e6b3f500653076dd9"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="functional__adapters_8hpp.html#a24be1e723416c19e6b3f500653076dd9">JoinAdapterFromRange</a> (R &amp;range) noexcept(noexcept(JoinAdapter&lt; std::ranges::iterator_t&lt; R &gt; &gt;(std::ranges::begin(range), std::ranges::end(range)))) -&gt; JoinAdapter&lt; std::ranges::iterator_t&lt; R &gt; &gt;</td></tr>
-<tr class="memdesc:a24be1e723416c19e6b3f500653076dd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a JoinAdapter from a range.  <br /></td></tr>
-<tr class="separator:a24be1e723416c19e6b3f500653076dd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaaff5718ee2a83211c03c29e78cc7f46" id="r_aaaff5718ee2a83211c03c29e78cc7f46"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
+<tr class="memitem:ad239bdf2589669023ded7dbedd239246"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#ad239bdf2589669023ded7dbedd239246">helios::utils::JoinAdapterFromRange</a> (R &amp;range) noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1JoinAdapter.html">JoinAdapter</a>&lt; std::ranges::iterator_t&lt; R &gt; &gt;(std::ranges::begin(range), std::ranges::end(range)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1JoinAdapter.html">JoinAdapter</a>&lt; std::ranges::iterator_t&lt; R &gt; &gt;</td></tr>
+<tr class="memdesc:ad239bdf2589669023ded7dbedd239246"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a <a class="el" href="classhelios_1_1utils_1_1JoinAdapter.html">JoinAdapter</a> from a range.  <br /></td></tr>
+<tr class="separator:ad239bdf2589669023ded7dbedd239246"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acab060840018312071d2155732216ed7" id="r_acab060840018312071d2155732216ed7"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
 requires JoinAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&lt;const R&amp;&gt;()))&gt;</td></tr>
-<tr class="memitem:aaaff5718ee2a83211c03c29e78cc7f46"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="functional__adapters_8hpp.html#aaaff5718ee2a83211c03c29e78cc7f46">JoinAdapterFromRange</a> (const R &amp;range) noexcept(noexcept(JoinAdapter&lt; decltype(std::ranges::cbegin(range))&gt;(std::ranges::cbegin(range), std::ranges::cend(range)))) -&gt; JoinAdapter&lt; decltype(std::ranges::cbegin(range))&gt;</td></tr>
-<tr class="memdesc:aaaff5718ee2a83211c03c29e78cc7f46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a JoinAdapter from a const range.  <br /></td></tr>
-<tr class="separator:aaaff5718ee2a83211c03c29e78cc7f46"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea9c1e9b8d0d8913b14a2c348aa0c2a4" id="r_aea9c1e9b8d0d8913b14a2c348aa0c2a4"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
+<tr class="memitem:acab060840018312071d2155732216ed7"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#acab060840018312071d2155732216ed7">helios::utils::JoinAdapterFromRange</a> (const R &amp;range) noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1JoinAdapter.html">JoinAdapter</a>&lt; decltype(std::ranges::cbegin(range))&gt;(std::ranges::cbegin(range), std::ranges::cend(range)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1JoinAdapter.html">JoinAdapter</a>&lt; decltype(std::ranges::cbegin(range))&gt;</td></tr>
+<tr class="memdesc:acab060840018312071d2155732216ed7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a <a class="el" href="classhelios_1_1utils_1_1JoinAdapter.html">JoinAdapter</a> from a const range.  <br /></td></tr>
+<tr class="separator:acab060840018312071d2155732216ed7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb071b99a42b001615ab27c74255a51b" id="r_aeb071b99a42b001615ab27c74255a51b"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
 requires SlideAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;&gt;</td></tr>
-<tr class="memitem:aea9c1e9b8d0d8913b14a2c348aa0c2a4"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="functional__adapters_8hpp.html#aea9c1e9b8d0d8913b14a2c348aa0c2a4">SlideAdapterFromRange</a> (R &amp;range, size_t window_size) noexcept(noexcept(SlideAdapter&lt; std::ranges::iterator_t&lt; R &gt; &gt;(std::ranges::begin(range), std::ranges::end(range), window_size))) -&gt; SlideAdapter&lt; std::ranges::iterator_t&lt; R &gt; &gt;</td></tr>
-<tr class="memdesc:aea9c1e9b8d0d8913b14a2c348aa0c2a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a SlideAdapter from a range.  <br /></td></tr>
-<tr class="separator:aea9c1e9b8d0d8913b14a2c348aa0c2a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac26019561fe38eb4e09cb5787045fc03" id="r_ac26019561fe38eb4e09cb5787045fc03"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
+<tr class="memitem:aeb071b99a42b001615ab27c74255a51b"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#aeb071b99a42b001615ab27c74255a51b">helios::utils::SlideAdapterFromRange</a> (R &amp;range, size_t window_size) noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1SlideAdapter.html">SlideAdapter</a>&lt; std::ranges::iterator_t&lt; R &gt; &gt;(std::ranges::begin(range), std::ranges::end(range), window_size))) -&gt; <a class="el" href="classhelios_1_1utils_1_1SlideAdapter.html">SlideAdapter</a>&lt; std::ranges::iterator_t&lt; R &gt; &gt;</td></tr>
+<tr class="memdesc:aeb071b99a42b001615ab27c74255a51b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a <a class="el" href="classhelios_1_1utils_1_1SlideAdapter.html">SlideAdapter</a> from a range.  <br /></td></tr>
+<tr class="separator:aeb071b99a42b001615ab27c74255a51b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af78ca40e87e1f52008f12a5fe97f86da" id="r_af78ca40e87e1f52008f12a5fe97f86da"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
 requires SlideAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&lt;const R&amp;&gt;()))&gt;</td></tr>
-<tr class="memitem:ac26019561fe38eb4e09cb5787045fc03"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="functional__adapters_8hpp.html#ac26019561fe38eb4e09cb5787045fc03">SlideAdapterFromRange</a> (const R &amp;range, size_t window_size) noexcept(noexcept(SlideAdapter&lt; decltype(std::ranges::cbegin(range))&gt;(std::ranges::cbegin(range), std::ranges::cend(range), window_size))) -&gt; SlideAdapter&lt; decltype(std::ranges::cbegin(range))&gt;</td></tr>
-<tr class="memdesc:ac26019561fe38eb4e09cb5787045fc03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a SlideAdapter from a const range.  <br /></td></tr>
-<tr class="separator:ac26019561fe38eb4e09cb5787045fc03"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4298b8b0abb2ebfe46dccfd80362d61" id="r_af4298b8b0abb2ebfe46dccfd80362d61"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
+<tr class="memitem:af78ca40e87e1f52008f12a5fe97f86da"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#af78ca40e87e1f52008f12a5fe97f86da">helios::utils::SlideAdapterFromRange</a> (const R &amp;range, size_t window_size) noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1SlideAdapter.html">SlideAdapter</a>&lt; decltype(std::ranges::cbegin(range))&gt;(std::ranges::cbegin(range), std::ranges::cend(range), window_size))) -&gt; <a class="el" href="classhelios_1_1utils_1_1SlideAdapter.html">SlideAdapter</a>&lt; decltype(std::ranges::cbegin(range))&gt;</td></tr>
+<tr class="memdesc:af78ca40e87e1f52008f12a5fe97f86da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a <a class="el" href="classhelios_1_1utils_1_1SlideAdapter.html">SlideAdapter</a> from a const range.  <br /></td></tr>
+<tr class="separator:af78ca40e87e1f52008f12a5fe97f86da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51fbbe3dc689a420aa4546c211761b07" id="r_a51fbbe3dc689a420aa4546c211761b07"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
 requires StrideAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;&gt;</td></tr>
-<tr class="memitem:af4298b8b0abb2ebfe46dccfd80362d61"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="functional__adapters_8hpp.html#af4298b8b0abb2ebfe46dccfd80362d61">StrideAdapterFromRange</a> (R &amp;range, size_t stride) noexcept(noexcept(StrideAdapter&lt; std::ranges::iterator_t&lt; R &gt; &gt;(std::ranges::begin(range), std::ranges::end(range), stride))) -&gt; StrideAdapter&lt; std::ranges::iterator_t&lt; R &gt; &gt;</td></tr>
-<tr class="memdesc:af4298b8b0abb2ebfe46dccfd80362d61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a StrideAdapter from a range.  <br /></td></tr>
-<tr class="separator:af4298b8b0abb2ebfe46dccfd80362d61"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac293343796c1657a419633ddc22c2c73" id="r_ac293343796c1657a419633ddc22c2c73"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
+<tr class="memitem:a51fbbe3dc689a420aa4546c211761b07"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#a51fbbe3dc689a420aa4546c211761b07">helios::utils::StrideAdapterFromRange</a> (R &amp;range, size_t stride) noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a>&lt; std::ranges::iterator_t&lt; R &gt; &gt;(std::ranges::begin(range), std::ranges::end(range), stride))) -&gt; <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a>&lt; std::ranges::iterator_t&lt; R &gt; &gt;</td></tr>
+<tr class="memdesc:a51fbbe3dc689a420aa4546c211761b07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a> from a range.  <br /></td></tr>
+<tr class="separator:a51fbbe3dc689a420aa4546c211761b07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39511091f6caf05dd2eb311ae8877102" id="r_a39511091f6caf05dd2eb311ae8877102"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
 requires StrideAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&lt;const R&amp;&gt;()))&gt;</td></tr>
-<tr class="memitem:ac293343796c1657a419633ddc22c2c73"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="functional__adapters_8hpp.html#ac293343796c1657a419633ddc22c2c73">StrideAdapterFromRange</a> (const R &amp;range, size_t stride) noexcept(noexcept(StrideAdapter&lt; decltype(std::ranges::cbegin(range))&gt;(std::ranges::cbegin(range), std::ranges::cend(range), stride))) -&gt; StrideAdapter&lt; decltype(std::ranges::cbegin(range))&gt;</td></tr>
-<tr class="memdesc:ac293343796c1657a419633ddc22c2c73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a StrideAdapter from a const range.  <br /></td></tr>
-<tr class="separator:ac293343796c1657a419633ddc22c2c73"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22e05a1859c49e16d93d42691c556664" id="r_a22e05a1859c49e16d93d42691c556664"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R1, std::ranges::range R2&gt; <br />
+<tr class="memitem:a39511091f6caf05dd2eb311ae8877102"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#a39511091f6caf05dd2eb311ae8877102">helios::utils::StrideAdapterFromRange</a> (const R &amp;range, size_t stride) noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a>&lt; decltype(std::ranges::cbegin(range))&gt;(std::ranges::cbegin(range), std::ranges::cend(range), stride))) -&gt; <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a>&lt; decltype(std::ranges::cbegin(range))&gt;</td></tr>
+<tr class="memdesc:a39511091f6caf05dd2eb311ae8877102"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a <a class="el" href="classhelios_1_1utils_1_1StrideAdapter.html">StrideAdapter</a> from a const range.  <br /></td></tr>
+<tr class="separator:a39511091f6caf05dd2eb311ae8877102"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa4431ba8c1810e6574464b02fa87eb8" id="r_afa4431ba8c1810e6574464b02fa87eb8"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R1, std::ranges::range R2&gt; <br />
 requires ZipAdapterRequirements&lt;std::ranges::iterator_t&lt;R1&gt;, std::ranges::iterator_t&lt;R2&gt;&gt;</td></tr>
-<tr class="memitem:a22e05a1859c49e16d93d42691c556664"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="functional__adapters_8hpp.html#a22e05a1859c49e16d93d42691c556664">ZipAdapterFromRange</a> (R1 &amp;range1, R2 &amp;range2) noexcept(noexcept(ZipAdapter&lt; std::ranges::iterator_t&lt; R1 &gt;, std::ranges::iterator_t&lt; R2 &gt; &gt;(std::ranges::begin(range1), std::ranges::end(range1), std::ranges::begin(range2), std::ranges::end(range2)))) -&gt; ZipAdapter&lt; std::ranges::iterator_t&lt; R1 &gt;, std::ranges::iterator_t&lt; R2 &gt; &gt;</td></tr>
-<tr class="memdesc:a22e05a1859c49e16d93d42691c556664"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a ZipAdapter from two ranges.  <br /></td></tr>
-<tr class="separator:a22e05a1859c49e16d93d42691c556664"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a407d710bc86d36396ec2e9fcba7f9e8a" id="r_a407d710bc86d36396ec2e9fcba7f9e8a"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R1, std::ranges::range R2&gt; <br />
+<tr class="memitem:afa4431ba8c1810e6574464b02fa87eb8"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#afa4431ba8c1810e6574464b02fa87eb8">helios::utils::ZipAdapterFromRange</a> (R1 &amp;range1, R2 &amp;range2) noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1ZipAdapter.html">ZipAdapter</a>&lt; std::ranges::iterator_t&lt; R1 &gt;, std::ranges::iterator_t&lt; R2 &gt; &gt;(std::ranges::begin(range1), std::ranges::end(range1), std::ranges::begin(range2), std::ranges::end(range2)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1ZipAdapter.html">ZipAdapter</a>&lt; std::ranges::iterator_t&lt; R1 &gt;, std::ranges::iterator_t&lt; R2 &gt; &gt;</td></tr>
+<tr class="memdesc:afa4431ba8c1810e6574464b02fa87eb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a <a class="el" href="classhelios_1_1utils_1_1ZipAdapter.html">ZipAdapter</a> from two ranges.  <br /></td></tr>
+<tr class="separator:afa4431ba8c1810e6574464b02fa87eb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0e0188d86c0f29974b81d75d195b20e" id="r_aa0e0188d86c0f29974b81d75d195b20e"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R1, std::ranges::range R2&gt; <br />
 requires ZipAdapterRequirements&lt;std::ranges::iterator_t&lt;R1&gt;, decltype(std::ranges::cbegin(std::declval&lt;const R2&amp;&gt;()))&gt;</td></tr>
-<tr class="memitem:a407d710bc86d36396ec2e9fcba7f9e8a"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="functional__adapters_8hpp.html#a407d710bc86d36396ec2e9fcba7f9e8a">ZipAdapterFromRange</a> (R1 &amp;range1, const R2 &amp;range2) noexcept(noexcept(ZipAdapter&lt; std::ranges::iterator_t&lt; R1 &gt;, decltype(std::ranges::cbegin(range2))&gt;(std::ranges::begin(range1), std::ranges::end(range1), std::ranges::cbegin(range2), std::ranges::cend(range2)))) -&gt; ZipAdapter&lt; std::ranges::iterator_t&lt; R1 &gt;, decltype(std::ranges::cbegin(range2))&gt;</td></tr>
-<tr class="memdesc:a407d710bc86d36396ec2e9fcba7f9e8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a ZipAdapter from a range and a const range.  <br /></td></tr>
-<tr class="separator:a407d710bc86d36396ec2e9fcba7f9e8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5ad87bdafd2a83dfda7068cfcb4c3b28" id="r_a5ad87bdafd2a83dfda7068cfcb4c3b28"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R1, std::ranges::range R2&gt; <br />
+<tr class="memitem:aa0e0188d86c0f29974b81d75d195b20e"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#aa0e0188d86c0f29974b81d75d195b20e">helios::utils::ZipAdapterFromRange</a> (R1 &amp;range1, const R2 &amp;range2) noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1ZipAdapter.html">ZipAdapter</a>&lt; std::ranges::iterator_t&lt; R1 &gt;, decltype(std::ranges::cbegin(range2))&gt;(std::ranges::begin(range1), std::ranges::end(range1), std::ranges::cbegin(range2), std::ranges::cend(range2)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1ZipAdapter.html">ZipAdapter</a>&lt; std::ranges::iterator_t&lt; R1 &gt;, decltype(std::ranges::cbegin(range2))&gt;</td></tr>
+<tr class="memdesc:aa0e0188d86c0f29974b81d75d195b20e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a <a class="el" href="classhelios_1_1utils_1_1ZipAdapter.html">ZipAdapter</a> from a range and a const range.  <br /></td></tr>
+<tr class="separator:aa0e0188d86c0f29974b81d75d195b20e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fe3aedb4c97ae0e1a50831f4165e110" id="r_a1fe3aedb4c97ae0e1a50831f4165e110"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R1, std::ranges::range R2&gt; <br />
 requires ZipAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&lt;const R1&amp;&gt;())), decltype(std::ranges::cbegin(std::declval&lt;const R2&amp;&gt;()))&gt;</td></tr>
-<tr class="memitem:a5ad87bdafd2a83dfda7068cfcb4c3b28"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="functional__adapters_8hpp.html#a5ad87bdafd2a83dfda7068cfcb4c3b28">ZipAdapterFromRange</a> (const R1 &amp;range1, const R2 &amp;range2) noexcept(noexcept(ZipAdapter&lt; decltype(std::ranges::cbegin(range1)), decltype(std::ranges::cbegin(range2))&gt;(std::ranges::cbegin(range1), std::ranges::cend(range1), std::ranges::cbegin(range2), std::ranges::cend(range2)))) -&gt; ZipAdapter&lt; decltype(std::ranges::cbegin(range1)), decltype(std::ranges::cbegin(range2))&gt;</td></tr>
-<tr class="memdesc:a5ad87bdafd2a83dfda7068cfcb4c3b28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a ZipAdapter from two const ranges.  <br /></td></tr>
-<tr class="separator:a5ad87bdafd2a83dfda7068cfcb4c3b28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fe3aedb4c97ae0e1a50831f4165e110"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#a1fe3aedb4c97ae0e1a50831f4165e110">helios::utils::ZipAdapterFromRange</a> (const R1 &amp;range1, const R2 &amp;range2) noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1ZipAdapter.html">ZipAdapter</a>&lt; decltype(std::ranges::cbegin(range1)), decltype(std::ranges::cbegin(range2))&gt;(std::ranges::cbegin(range1), std::ranges::cend(range1), std::ranges::cbegin(range2), std::ranges::cend(range2)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1ZipAdapter.html">ZipAdapter</a>&lt; decltype(std::ranges::cbegin(range1)), decltype(std::ranges::cbegin(range2))&gt;</td></tr>
+<tr class="memdesc:a1fe3aedb4c97ae0e1a50831f4165e110"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a <a class="el" href="classhelios_1_1utils_1_1ZipAdapter.html">ZipAdapter</a> from two const ranges.  <br /></td></tr>
+<tr class="separator:a1fe3aedb4c97ae0e1a50831f4165e110"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac23c345c40b7e27a3f05362dbadde71c" id="r_ac23c345c40b7e27a3f05362dbadde71c"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
+requires ConcatAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;&gt;</td></tr>
+<tr class="memitem:ac23c345c40b7e27a3f05362dbadde71c"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#ac23c345c40b7e27a3f05362dbadde71c">helios::utils::ConcatAdapterFromRange</a> (R &amp;range1, R &amp;range2) noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1ConcatAdapter.html">ConcatAdapter</a>&lt; std::ranges::iterator_t&lt; R &gt; &gt;(std::ranges::begin(range1), std::ranges::end(range1), std::ranges::begin(range2), std::ranges::end(range2)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1ConcatAdapter.html">ConcatAdapter</a>&lt; std::ranges::iterator_t&lt; R &gt; &gt;</td></tr>
+<tr class="separator:ac23c345c40b7e27a3f05362dbadde71c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42c9c31870863da4ac20b82493cc8eef" id="r_a42c9c31870863da4ac20b82493cc8eef"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
+requires ConcatAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&lt;const R&amp;&gt;()))&gt;</td></tr>
+<tr class="memitem:a42c9c31870863da4ac20b82493cc8eef"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#a42c9c31870863da4ac20b82493cc8eef">helios::utils::ConcatAdapterFromRange</a> (const R &amp;range1, const R &amp;range2) noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1ConcatAdapter.html">ConcatAdapter</a>&lt; decltype(std::ranges::cbegin(range1))&gt;(std::ranges::cbegin(range1), std::ranges::cend(range1), std::ranges::cbegin(range2), std::ranges::cend(range2)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1ConcatAdapter.html">ConcatAdapter</a>&lt; decltype(std::ranges::cbegin(range1))&gt;</td></tr>
+<tr class="separator:a42c9c31870863da4ac20b82493cc8eef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40fd8bd38a825ca38dcee457682c30ec" id="r_a40fd8bd38a825ca38dcee457682c30ec"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
+requires ConcatAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&lt;const R&amp;&gt;()))&gt;</td></tr>
+<tr class="memitem:a40fd8bd38a825ca38dcee457682c30ec"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#a40fd8bd38a825ca38dcee457682c30ec">helios::utils::ConcatAdapterFromRange</a> (R &amp;range1, const R &amp;range2) noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1ConcatAdapter.html">ConcatAdapter</a>&lt; decltype(std::ranges::cbegin(std::declval&lt; const R &amp; &gt;()))&gt;(std::ranges::cbegin(range1), std::ranges::cend(range1), std::ranges::cbegin(range2), std::ranges::cend(range2)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1ConcatAdapter.html">ConcatAdapter</a>&lt; decltype(std::ranges::cbegin(std::declval&lt; const R &amp; &gt;()))&gt;</td></tr>
+<tr class="memdesc:a40fd8bd38a825ca38dcee457682c30ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a <a class="el" href="classhelios_1_1utils_1_1ConcatAdapter.html">ConcatAdapter</a> from a non-const and const range of the same type.  <br /></td></tr>
+<tr class="separator:a40fd8bd38a825ca38dcee457682c30ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f505c1b6f55bb3dd0a1b503161263d7" id="r_a4f505c1b6f55bb3dd0a1b503161263d7"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
+requires ConcatAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&lt;const R&amp;&gt;()))&gt;</td></tr>
+<tr class="memitem:a4f505c1b6f55bb3dd0a1b503161263d7"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils.html#a4f505c1b6f55bb3dd0a1b503161263d7">helios::utils::ConcatAdapterFromRange</a> (const R &amp;range1, R &amp;range2) noexcept(noexcept(<a class="el" href="classhelios_1_1utils_1_1ConcatAdapter.html">ConcatAdapter</a>&lt; decltype(std::ranges::cbegin(std::declval&lt; const R &amp; &gt;()))&gt;(std::ranges::cbegin(range1), std::ranges::cend(range1), std::ranges::cbegin(range2), std::ranges::cend(range2)))) -&gt; <a class="el" href="classhelios_1_1utils_1_1ConcatAdapter.html">ConcatAdapter</a>&lt; decltype(std::ranges::cbegin(std::declval&lt; const R &amp; &gt;()))&gt;</td></tr>
+<tr class="memdesc:a4f505c1b6f55bb3dd0a1b503161263d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to create a <a class="el" href="classhelios_1_1utils_1_1ConcatAdapter.html">ConcatAdapter</a> from a const and non-const range of the same type.  <br /></td></tr>
+<tr class="separator:a4f505c1b6f55bb3dd0a1b503161263d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -497,1970 +526,6 @@ Variables</h2></td></tr>
 <tr class="memitem:a8382073153ee459213c49f4cc31f1883"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1utils_1_1details.html#a8382073153ee459213c49f4cc31f1883">helios::utils::details::is_folder_applicable_v</a> = <a class="el" href="structhelios_1_1utils_1_1details_1_1is__folder__applicable__impl.html">is_folder_applicable_impl</a>&lt;Folder, Accumulator, Tuple&gt;::value</td></tr>
 <tr class="separator:a8382073153ee459213c49f4cc31f1883"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="af834c08115ebc4f405b9b65a43660b53" name="af834c08115ebc4f405b9b65a43660b53"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af834c08115ebc4f405b9b65a43660b53">&#9670;&#160;</a></span>ChainAdapterFromRange() <span class="overload">[1/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::ranges::range R1, std::ranges::range R2&gt; <br />
-requires ChainAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&lt;const R1&amp;&gt;())), decltype(std::ranges::cbegin(std::declval&lt;const R2&amp;&gt;()))&gt;</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto ChainAdapterFromRange </td>
-          <td>(</td>
-          <td class="paramtype">const R1 &amp;&#160;</td>
-          <td class="paramname"><em>range1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const R2 &amp;&#160;</td>
-          <td class="paramname"><em>range2</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> -&gt; ChainAdapter&lt;decltype(std::ranges::cbegin(range1)), decltype(std::ranges::cbegin(range2))&gt; </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Helper function to create a ChainAdapter from two const ranges. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">R1</td><td>First range type </td></tr>
-    <tr><td class="paramname">R2</td><td>Second range type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">range1</td><td>First range </td></tr>
-    <tr><td class="paramname">range2</td><td>Second range </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>ChainAdapter for the two ranges </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03234">3234</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3238</span>                                                                                          {</div>
-<div class="line"><span class="lineno"> 3239</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range1), std::ranges::cend(range1), std::ranges::cbegin(range2),</div>
-<div class="line"><span class="lineno"> 3240</span>          std::ranges::cend(range2)};</div>
-<div class="line"><span class="lineno"> 3241</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a1541fc2b269edfe2e7e0e4af4a776c2b" name="a1541fc2b269edfe2e7e0e4af4a776c2b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1541fc2b269edfe2e7e0e4af4a776c2b">&#9670;&#160;</a></span>ChainAdapterFromRange() <span class="overload">[2/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::ranges::range R1, std::ranges::range R2&gt; <br />
-requires ChainAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&lt;const R1&amp;&gt;())), std::ranges::iterator_t&lt;R2&gt;&gt;</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto ChainAdapterFromRange </td>
-          <td>(</td>
-          <td class="paramtype">const R1 &amp;&#160;</td>
-          <td class="paramname"><em>range1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">R2 &amp;&#160;</td>
-          <td class="paramname"><em>range2</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> -&gt; ChainAdapter&lt;decltype(std::ranges::cbegin(range1)), std::ranges::iterator_t&lt;R2&gt;&gt; </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Helper function to create a ChainAdapter from const and non-const ranges. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">R1</td><td>First range type </td></tr>
-    <tr><td class="paramname">R2</td><td>Second range type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">range1</td><td>First range </td></tr>
-    <tr><td class="paramname">range2</td><td>Second range </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>ChainAdapter for the two ranges </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03216">3216</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3219</span>                                                                                {</div>
-<div class="line"><span class="lineno"> 3220</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range1), std::ranges::cend(range1), std::ranges::begin(range2), std::ranges::end(range2)};</div>
-<div class="line"><span class="lineno"> 3221</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="aaa511079d33070ec8844e6434ce7084c" name="aaa511079d33070ec8844e6434ce7084c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaa511079d33070ec8844e6434ce7084c">&#9670;&#160;</a></span>ChainAdapterFromRange() <span class="overload">[3/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::ranges::range R1, std::ranges::range R2&gt; <br />
-requires ChainAdapterRequirements&lt;std::ranges::iterator_t&lt;R1&gt;, decltype(std::ranges::cbegin(std::declval&lt;const R2&amp;&gt;()))&gt;</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto ChainAdapterFromRange </td>
-          <td>(</td>
-          <td class="paramtype">R1 &amp;&#160;</td>
-          <td class="paramname"><em>range1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const R2 &amp;&#160;</td>
-          <td class="paramname"><em>range2</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> -&gt; ChainAdapter&lt;std::ranges::iterator_t&lt;R1&gt;, decltype(std::ranges::cbegin(range2))&gt; </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Helper function to create a ChainAdapter from non-const and const ranges. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">R1</td><td>First range type </td></tr>
-    <tr><td class="paramname">R2</td><td>Second range type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">range1</td><td>First range </td></tr>
-    <tr><td class="paramname">range2</td><td>Second range </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>ChainAdapter for the two ranges </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03198">3198</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3201</span>                                                                                {</div>
-<div class="line"><span class="lineno"> 3202</span>  <span class="keywordflow">return</span> {std::ranges::begin(range1), std::ranges::end(range1), std::ranges::cbegin(range2), std::ranges::cend(range2)};</div>
-<div class="line"><span class="lineno"> 3203</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="aadcef6f6e0d096f987d0f75a5aac3abf" name="aadcef6f6e0d096f987d0f75a5aac3abf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aadcef6f6e0d096f987d0f75a5aac3abf">&#9670;&#160;</a></span>ChainAdapterFromRange() <span class="overload">[4/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::ranges::range R1, std::ranges::range R2&gt; <br />
-requires ChainAdapterRequirements&lt;std::ranges::iterator_t&lt;R1&gt;, std::ranges::iterator_t&lt;R2&gt;&gt;</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto ChainAdapterFromRange </td>
-          <td>(</td>
-          <td class="paramtype">R1 &amp;&#160;</td>
-          <td class="paramname"><em>range1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">R2 &amp;&#160;</td>
-          <td class="paramname"><em>range2</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> -&gt; ChainAdapter&lt;std::ranges::iterator_t&lt;R1&gt;, std::ranges::iterator_t&lt;R2&gt;&gt; </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Helper function to create a ChainAdapter from two non-const ranges. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">R1</td><td>First range type </td></tr>
-    <tr><td class="paramname">R2</td><td>Second range type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">range1</td><td>First range </td></tr>
-    <tr><td class="paramname">range2</td><td>Second range </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>ChainAdapter for the two ranges </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a158">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03180">3180</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3183</span>                                                                      {</div>
-<div class="line"><span class="lineno"> 3184</span>  <span class="keywordflow">return</span> {std::ranges::begin(range1), std::ranges::end(range1), std::ranges::begin(range2), std::ranges::end(range2)};</div>
-<div class="line"><span class="lineno"> 3185</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a5d276599e3f544544c87b436e955f39b" name="a5d276599e3f544544c87b436e955f39b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d276599e3f544544c87b436e955f39b">&#9670;&#160;</a></span>EnumerateAdapterFromRange() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::ranges::range R&gt; <br />
-requires EnumerateAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&lt;const R&amp;&gt;()))&gt;</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto EnumerateAdapterFromRange </td>
-          <td>(</td>
-          <td class="paramtype">const R &amp;&#160;</td>
-          <td class="paramname"><em>range</em></td><td>)</td>
-          <td> -&gt; EnumerateAdapter&lt;decltype(std::ranges::cbegin(range))&gt; </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Helper function to create an EnumerateAdapter from a const range. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">R</td><td>Range type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">range</td><td>Range to enumerate </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>EnumerateAdapter for the range </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03100">3100</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3102</span>                                                          {</div>
-<div class="line"><span class="lineno"> 3103</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range), std::ranges::cend(range)};</div>
-<div class="line"><span class="lineno"> 3104</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a26c8c7da02f4a54443fbb24411500ba2" name="a26c8c7da02f4a54443fbb24411500ba2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a26c8c7da02f4a54443fbb24411500ba2">&#9670;&#160;</a></span>EnumerateAdapterFromRange() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::ranges::range R&gt; <br />
-requires EnumerateAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;&gt;</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto EnumerateAdapterFromRange </td>
-          <td>(</td>
-          <td class="paramtype">R &amp;&#160;</td>
-          <td class="paramname"><em>range</em></td><td>)</td>
-          <td> -&gt; EnumerateAdapter&lt;std::ranges::iterator_t&lt;R&gt;&gt; </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Helper function to create an EnumerateAdapter from a non-const range. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">R</td><td>Range type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">range</td><td>Range to enumerate </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>EnumerateAdapter for the range </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a167">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03086">3086</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3088</span>                                                {</div>
-<div class="line"><span class="lineno"> 3089</span>  <span class="keywordflow">return</span> {std::ranges::begin(range), std::ranges::end(range)};</div>
-<div class="line"><span class="lineno"> 3090</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="af3dbcf0a25bec07c5e8eb9c5ae55a100" name="af3dbcf0a25bec07c5e8eb9c5ae55a100"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af3dbcf0a25bec07c5e8eb9c5ae55a100">&#9670;&#160;</a></span>FilterAdapterFromRange() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::ranges::range R, typename Pred &gt; <br />
-requires FilterAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&lt;const R&amp;&gt;())), Pred&gt;</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto FilterAdapterFromRange </td>
-          <td>(</td>
-          <td class="paramtype">const R &amp;&#160;</td>
-          <td class="paramname"><em>range</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Pred&#160;</td>
-          <td class="paramname"><em>predicate</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> -&gt; FilterAdapter&lt;decltype(std::ranges::cbegin(range)), Pred&gt; </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Helper function to create a FilterAdapter from a const range. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">R</td><td>Range type </td></tr>
-    <tr><td class="paramname">Pred</td><td>Predicate type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">range</td><td>Range to filter </td></tr>
-    <tr><td class="paramname">predicate</td><td>Function to filter elements </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>FilterAdapter for the range </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02909">2909</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 2912</span>                                                             {</div>
-<div class="line"><span class="lineno"> 2913</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range), std::ranges::cend(range), std::move(predicate)};</div>
-<div class="line"><span class="lineno"> 2914</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="add0bba7ad8887393d4a80827e4d1331c" name="add0bba7ad8887393d4a80827e4d1331c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#add0bba7ad8887393d4a80827e4d1331c">&#9670;&#160;</a></span>FilterAdapterFromRange() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::ranges::range R, typename Pred &gt; <br />
-requires FilterAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;, Pred&gt;</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto FilterAdapterFromRange </td>
-          <td>(</td>
-          <td class="paramtype">R &amp;&#160;</td>
-          <td class="paramname"><em>range</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Pred&#160;</td>
-          <td class="paramname"><em>predicate</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> -&gt; FilterAdapter&lt;std::ranges::iterator_t&lt;R&gt;, Pred&gt; </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Helper function to create a FilterAdapter from a non-const range. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">R</td><td>Range type </td></tr>
-    <tr><td class="paramname">Pred</td><td>Predicate type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">range</td><td>Range to filter </td></tr>
-    <tr><td class="paramname">predicate</td><td>Function to filter elements </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>FilterAdapter for the range </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a161">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02892">2892</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 2895</span>                                                   {</div>
-<div class="line"><span class="lineno"> 2896</span>  <span class="keywordflow">return</span> {std::ranges::begin(range), std::ranges::end(range), std::move(predicate)};</div>
-<div class="line"><span class="lineno"> 2897</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a9cf37029b273f8a4654678bbe762dbd3" name="a9cf37029b273f8a4654678bbe762dbd3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9cf37029b273f8a4654678bbe762dbd3">&#9670;&#160;</a></span>InspectAdapterFromRange() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::ranges::range R, typename Func &gt; <br />
-requires InspectAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&lt;const R&amp;&gt;())), Func&gt;</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto InspectAdapterFromRange </td>
-          <td>(</td>
-          <td class="paramtype">const R &amp;&#160;</td>
-          <td class="paramname"><em>range</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Func&#160;</td>
-          <td class="paramname"><em>inspector</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> -&gt; InspectAdapter&lt;decltype(std::ranges::cbegin(range)), Func&gt; </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Helper function to create an InspectAdapter from a const range. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">R</td><td>Range type </td></tr>
-    <tr><td class="paramname">Func</td><td>Inspector function type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">range</td><td>Range to inspect </td></tr>
-    <tr><td class="paramname">inspector</td><td>Function to call for each element </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>InspectAdapter for the range </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03133">3133</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3136</span>                                                              {</div>
-<div class="line"><span class="lineno"> 3137</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range), std::ranges::cend(range), std::move(inspector)};</div>
-<div class="line"><span class="lineno"> 3138</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="ad246f1f7640da69f162cf174105bde02" name="ad246f1f7640da69f162cf174105bde02"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad246f1f7640da69f162cf174105bde02">&#9670;&#160;</a></span>InspectAdapterFromRange() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::ranges::range R, typename Func &gt; <br />
-requires InspectAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;, Func&gt;</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto InspectAdapterFromRange </td>
-          <td>(</td>
-          <td class="paramtype">R &amp;&#160;</td>
-          <td class="paramname"><em>range</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Func&#160;</td>
-          <td class="paramname"><em>inspector</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> -&gt; InspectAdapter&lt;std::ranges::iterator_t&lt;R&gt;, Func&gt; </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Helper function to create an InspectAdapter from a non-const range. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">R</td><td>Range type </td></tr>
-    <tr><td class="paramname">Func</td><td>Inspector function type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">range</td><td>Range to inspect </td></tr>
-    <tr><td class="paramname">inspector</td><td>Function to call on each element </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>InspectAdapter for the range </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a168">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03116">3116</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3119</span>                                                    {</div>
-<div class="line"><span class="lineno"> 3120</span>  <span class="keywordflow">return</span> {std::ranges::begin(range), std::ranges::end(range), std::move(inspector)};</div>
-<div class="line"><span class="lineno"> 3121</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="aaaff5718ee2a83211c03c29e78cc7f46" name="aaaff5718ee2a83211c03c29e78cc7f46"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaaff5718ee2a83211c03c29e78cc7f46">&#9670;&#160;</a></span>JoinAdapterFromRange() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::ranges::range R&gt; <br />
-requires JoinAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&lt;const R&amp;&gt;()))&gt;</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto JoinAdapterFromRange </td>
-          <td>(</td>
-          <td class="paramtype">const R &amp;&#160;</td>
-          <td class="paramname"><em>range</em></td><td>)</td>
-          <td> -&gt; JoinAdapter&lt;decltype(std::ranges::cbegin(range))&gt; </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Helper function to create a JoinAdapter from a const range. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">R</td><td>Range type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">range</td><td>Range to join </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>JoinAdapter for the range </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03293">3293</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3295</span>                                                     {</div>
-<div class="line"><span class="lineno"> 3296</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range), std::ranges::cend(range)};</div>
-<div class="line"><span class="lineno"> 3297</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a24be1e723416c19e6b3f500653076dd9" name="a24be1e723416c19e6b3f500653076dd9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a24be1e723416c19e6b3f500653076dd9">&#9670;&#160;</a></span>JoinAdapterFromRange() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::ranges::range R&gt; <br />
-requires JoinAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;&gt;</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto JoinAdapterFromRange </td>
-          <td>(</td>
-          <td class="paramtype">R &amp;&#160;</td>
-          <td class="paramname"><em>range</em></td><td>)</td>
-          <td> -&gt; JoinAdapter&lt;std::ranges::iterator_t&lt;R&gt;&gt; </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Helper function to create a JoinAdapter from a range. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">R</td><td>Range type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">range</td><td>Range to join </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>JoinAdapter for the range </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a171">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03279">3279</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3281</span>                                           {</div>
-<div class="line"><span class="lineno"> 3282</span>  <span class="keywordflow">return</span> {std::ranges::begin(range), std::ranges::end(range)};</div>
-<div class="line"><span class="lineno"> 3283</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="adfec94f5dfe07a988c82b8f5be3e325f" name="adfec94f5dfe07a988c82b8f5be3e325f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adfec94f5dfe07a988c82b8f5be3e325f">&#9670;&#160;</a></span>MapAdapterFromRange() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::ranges::range R, typename Func &gt; <br />
-requires MapAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&lt;const R&amp;&gt;())), Func&gt;</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto MapAdapterFromRange </td>
-          <td>(</td>
-          <td class="paramtype">const R &amp;&#160;</td>
-          <td class="paramname"><em>range</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Func&#160;</td>
-          <td class="paramname"><em>transform</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> -&gt; MapAdapter&lt;decltype(std::ranges::cbegin(range)), Func&gt; </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Helper function to create a MapAdapter from a const range. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">R</td><td>Range type </td></tr>
-    <tr><td class="paramname">Func</td><td>Transformation function type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">range</td><td>Range to map </td></tr>
-    <tr><td class="paramname">transform</td><td>Function to apply to each element </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>MapAdapter for the range </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02943">2943</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 2946</span>                                                          {</div>
-<div class="line"><span class="lineno"> 2947</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range), std::ranges::cend(range), std::move(transform)};</div>
-<div class="line"><span class="lineno"> 2948</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="ae484a9df0df45155f7f4b1bc3c82a926" name="ae484a9df0df45155f7f4b1bc3c82a926"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae484a9df0df45155f7f4b1bc3c82a926">&#9670;&#160;</a></span>MapAdapterFromRange() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::ranges::range R, typename Func &gt; <br />
-requires MapAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;, Func&gt;</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto MapAdapterFromRange </td>
-          <td>(</td>
-          <td class="paramtype">R &amp;&#160;</td>
-          <td class="paramname"><em>range</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Func&#160;</td>
-          <td class="paramname"><em>transform</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> -&gt; MapAdapter&lt;std::ranges::iterator_t&lt;R&gt;, Func&gt; </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Helper function to create a MapAdapter from a range. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">R</td><td>Range type </td></tr>
-    <tr><td class="paramname">Func</td><td>Transformation function type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">range</td><td>Range to map </td></tr>
-    <tr><td class="paramname">transform</td><td>Function to apply to each element </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>MapAdapter for the range </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a162">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02926">2926</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 2929</span>                                                {</div>
-<div class="line"><span class="lineno"> 2930</span>  <span class="keywordflow">return</span> {std::ranges::begin(range), std::ranges::end(range), std::move(transform)};</div>
-<div class="line"><span class="lineno"> 2931</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a64515d4cfea47078da3e2260638ea23d" name="a64515d4cfea47078da3e2260638ea23d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a64515d4cfea47078da3e2260638ea23d">&#9670;&#160;</a></span>ReverseAdapterFromRange() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::ranges::range R&gt; <br />
-requires ReverseAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&lt;const R&amp;&gt;()))&gt;</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto ReverseAdapterFromRange </td>
-          <td>(</td>
-          <td class="paramtype">const R &amp;&#160;</td>
-          <td class="paramname"><em>range</em></td><td>)</td>
-          <td> -&gt; ReverseAdapter&lt;decltype(std::ranges::cbegin(range))&gt; </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Helper function to create a ReverseAdapter from a const range. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">R</td><td>Range type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">range</td><td>Range to reverse </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>ReverseAdapter for the range </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03265">3265</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3267</span>                                                        {</div>
-<div class="line"><span class="lineno"> 3268</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range), std::ranges::cend(range)};</div>
-<div class="line"><span class="lineno"> 3269</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a1f22bfef6bdc6c9e48c264f1ab73b94c" name="a1f22bfef6bdc6c9e48c264f1ab73b94c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1f22bfef6bdc6c9e48c264f1ab73b94c">&#9670;&#160;</a></span>ReverseAdapterFromRange() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::ranges::range R&gt; <br />
-requires ReverseAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;&gt;</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto ReverseAdapterFromRange </td>
-          <td>(</td>
-          <td class="paramtype">R &amp;&#160;</td>
-          <td class="paramname"><em>range</em></td><td>)</td>
-          <td> -&gt; ReverseAdapter&lt;std::ranges::iterator_t&lt;R&gt;&gt; </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Helper function to create a ReverseAdapter from a range. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">R</td><td>Range type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">range</td><td>Range to reverse </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>ReverseAdapter for the range </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a170">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03251">3251</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3253</span>                                              {</div>
-<div class="line"><span class="lineno"> 3254</span>  <span class="keywordflow">return</span> {std::ranges::begin(range), std::ranges::end(range)};</div>
-<div class="line"><span class="lineno"> 3255</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a53ad52c7f56d56b97ec90961136bf999" name="a53ad52c7f56d56b97ec90961136bf999"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a53ad52c7f56d56b97ec90961136bf999">&#9670;&#160;</a></span>SkipAdapterFromRange() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::ranges::range R&gt; <br />
-requires SkipAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&lt;const R&amp;&gt;()))&gt;</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto SkipAdapterFromRange </td>
-          <td>(</td>
-          <td class="paramtype">const R &amp;&#160;</td>
-          <td class="paramname"><em>range</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>count</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> -&gt; SkipAdapter&lt;decltype(std::ranges::cbegin(range))&gt; </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Helper function to create a SkipAdapter from a const range. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">R</td><td>Range type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">range</td><td>Range to skip from </td></tr>
-    <tr><td class="paramname">count</td><td>Number of elements to skip </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>SkipAdapter for the range </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03004">3004</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3006</span>                                                     {</div>
-<div class="line"><span class="lineno"> 3007</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range), std::ranges::cend(range), count};</div>
-<div class="line"><span class="lineno"> 3008</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a865e738990cd1d760c9a395d24646704" name="a865e738990cd1d760c9a395d24646704"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a865e738990cd1d760c9a395d24646704">&#9670;&#160;</a></span>SkipAdapterFromRange() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::ranges::range R&gt; <br />
-requires SkipAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;&gt;</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto SkipAdapterFromRange </td>
-          <td>(</td>
-          <td class="paramtype">R &amp;&#160;</td>
-          <td class="paramname"><em>range</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>count</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> -&gt; SkipAdapter&lt;std::ranges::iterator_t&lt;R&gt;&gt; </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Helper function to create a SkipAdapter from a non-const range. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">R</td><td>Range type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">range</td><td>Range to skip from </td></tr>
-    <tr><td class="paramname">count</td><td>Number of elements to skip </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>SkipAdapter for the range </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a164">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02989">2989</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 2991</span>                                           {</div>
-<div class="line"><span class="lineno"> 2992</span>  <span class="keywordflow">return</span> {std::ranges::begin(range), std::ranges::end(range), count};</div>
-<div class="line"><span class="lineno"> 2993</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a57d5fa54f13514d1e7089a5c0d4b5487" name="a57d5fa54f13514d1e7089a5c0d4b5487"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a57d5fa54f13514d1e7089a5c0d4b5487">&#9670;&#160;</a></span>SkipWhileAdapterFromRange() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::ranges::range R, typename Pred &gt; <br />
-requires SkipWhileAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&lt;const R&amp;&gt;())), Pred&gt;</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto SkipWhileAdapterFromRange </td>
-          <td>(</td>
-          <td class="paramtype">const R &amp;&#160;</td>
-          <td class="paramname"><em>range</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Pred&#160;</td>
-          <td class="paramname"><em>predicate</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> -&gt; SkipWhileAdapter&lt;decltype(std::ranges::cbegin(range)), Pred&gt; </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Helper function to create a SkipWhileAdapter from a const range. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">R</td><td>Range type </td></tr>
-    <tr><td class="paramname">Pred</td><td>Predicate type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">range</td><td>Range to skip from </td></tr>
-    <tr><td class="paramname">predicate</td><td>Predicate to test elements </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>SkipWhileAdapter for the range </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03071">3071</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3074</span>                                                                {</div>
-<div class="line"><span class="lineno"> 3075</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range), std::ranges::cend(range), std::move(predicate)};</div>
-<div class="line"><span class="lineno"> 3076</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a3f7766fbd29295bb0e1464dace44c679" name="a3f7766fbd29295bb0e1464dace44c679"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3f7766fbd29295bb0e1464dace44c679">&#9670;&#160;</a></span>SkipWhileAdapterFromRange() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::ranges::range R, typename Pred &gt; <br />
-requires SkipWhileAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;, Pred&gt;</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto SkipWhileAdapterFromRange </td>
-          <td>(</td>
-          <td class="paramtype">R &amp;&#160;</td>
-          <td class="paramname"><em>range</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Pred&#160;</td>
-          <td class="paramname"><em>predicate</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> -&gt; SkipWhileAdapter&lt;std::ranges::iterator_t&lt;R&gt;, Pred&gt; </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Helper function to create a SkipWhileAdapter from a non-const range. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">R</td><td>Range type </td></tr>
-    <tr><td class="paramname">Pred</td><td>Predicate type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">range</td><td>Range to skip from </td></tr>
-    <tr><td class="paramname">predicate</td><td>Predicate to test elements </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>SkipWhileAdapter for the range </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a166">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03054">3054</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3057</span>                                                      {</div>
-<div class="line"><span class="lineno"> 3058</span>  <span class="keywordflow">return</span> {std::ranges::begin(range), std::ranges::end(range), std::move(predicate)};</div>
-<div class="line"><span class="lineno"> 3059</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="ac26019561fe38eb4e09cb5787045fc03" name="ac26019561fe38eb4e09cb5787045fc03"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac26019561fe38eb4e09cb5787045fc03">&#9670;&#160;</a></span>SlideAdapterFromRange() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::ranges::range R&gt; <br />
-requires SlideAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&lt;const R&amp;&gt;()))&gt;</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto SlideAdapterFromRange </td>
-          <td>(</td>
-          <td class="paramtype">const R &amp;&#160;</td>
-          <td class="paramname"><em>range</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>window_size</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> -&gt; SlideAdapter&lt;decltype(std::ranges::cbegin(range))&gt; </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Helper function to create a SlideAdapter from a const range. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">R</td><td>Range type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">range</td><td>Range to slide over </td></tr>
-    <tr><td class="paramname">window_size</td><td>Size of the sliding window </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>SlideAdapter for the range </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03323">3323</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3326</span>                                                      {</div>
-<div class="line"><span class="lineno"> 3327</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range), std::ranges::cend(range), window_size};</div>
-<div class="line"><span class="lineno"> 3328</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="aea9c1e9b8d0d8913b14a2c348aa0c2a4" name="aea9c1e9b8d0d8913b14a2c348aa0c2a4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aea9c1e9b8d0d8913b14a2c348aa0c2a4">&#9670;&#160;</a></span>SlideAdapterFromRange() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::ranges::range R&gt; <br />
-requires SlideAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;&gt;</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto SlideAdapterFromRange </td>
-          <td>(</td>
-          <td class="paramtype">R &amp;&#160;</td>
-          <td class="paramname"><em>range</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>window_size</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> -&gt; SlideAdapter&lt;std::ranges::iterator_t&lt;R&gt;&gt; </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Helper function to create a SlideAdapter from a range. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">R</td><td>Range type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">range</td><td>Range to slide over </td></tr>
-    <tr><td class="paramname">window_size</td><td>Size of the sliding window </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>SlideAdapter for the range </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a172">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03308">3308</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3310</span>                                            {</div>
-<div class="line"><span class="lineno"> 3311</span>  <span class="keywordflow">return</span> {std::ranges::begin(range), std::ranges::end(range), window_size};</div>
-<div class="line"><span class="lineno"> 3312</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a8464aac41581863ac79df1da1376d216" name="a8464aac41581863ac79df1da1376d216"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8464aac41581863ac79df1da1376d216">&#9670;&#160;</a></span>StepByAdapterFromRange() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::ranges::range R&gt; <br />
-requires StepByAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&lt;const R&amp;&gt;()))&gt;</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto StepByAdapterFromRange </td>
-          <td>(</td>
-          <td class="paramtype">const R &amp;&#160;</td>
-          <td class="paramname"><em>range</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>step</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> -&gt; StepByAdapter&lt;decltype(std::ranges::cbegin(range))&gt; </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Helper function to create a StepByAdapter from a const range. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">R</td><td>Range type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">range</td><td>Range to step through </td></tr>
-    <tr><td class="paramname">step</td><td>Number of elements to step by </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>StepByAdapter for the range </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03164">3164</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3166</span>                                                       {</div>
-<div class="line"><span class="lineno"> 3167</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range), std::ranges::cend(range), step};</div>
-<div class="line"><span class="lineno"> 3168</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="abf8910c7748dc4db0ce7534c2ee6c941" name="abf8910c7748dc4db0ce7534c2ee6c941"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abf8910c7748dc4db0ce7534c2ee6c941">&#9670;&#160;</a></span>StepByAdapterFromRange() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::ranges::range R&gt; <br />
-requires StepByAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;&gt;</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto StepByAdapterFromRange </td>
-          <td>(</td>
-          <td class="paramtype">R &amp;&#160;</td>
-          <td class="paramname"><em>range</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>step</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> -&gt; StepByAdapter&lt;std::ranges::iterator_t&lt;R&gt;&gt; </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Helper function to create a StepByAdapter from a non-const range. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">R</td><td>Range type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">range</td><td>Range to step through </td></tr>
-    <tr><td class="paramname">step</td><td>Step size </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>StepByAdapter for the range </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a169">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03149">3149</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3151</span>                                             {</div>
-<div class="line"><span class="lineno"> 3152</span>  <span class="keywordflow">return</span> {std::ranges::begin(range), std::ranges::end(range), step};</div>
-<div class="line"><span class="lineno"> 3153</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="ac293343796c1657a419633ddc22c2c73" name="ac293343796c1657a419633ddc22c2c73"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac293343796c1657a419633ddc22c2c73">&#9670;&#160;</a></span>StrideAdapterFromRange() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::ranges::range R&gt; <br />
-requires StrideAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&lt;const R&amp;&gt;()))&gt;</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto StrideAdapterFromRange </td>
-          <td>(</td>
-          <td class="paramtype">const R &amp;&#160;</td>
-          <td class="paramname"><em>range</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>stride</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> -&gt; StrideAdapter&lt;decltype(std::ranges::cbegin(range))&gt; </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Helper function to create a StrideAdapter from a const range. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">R</td><td>Range type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">range</td><td>Range to stride over </td></tr>
-    <tr><td class="paramname">stride</td><td>Stride value </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>StrideAdapter for the range </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03354">3354</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3356</span>                                                       {</div>
-<div class="line"><span class="lineno"> 3357</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range), std::ranges::cend(range), stride};</div>
-<div class="line"><span class="lineno"> 3358</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="af4298b8b0abb2ebfe46dccfd80362d61" name="af4298b8b0abb2ebfe46dccfd80362d61"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af4298b8b0abb2ebfe46dccfd80362d61">&#9670;&#160;</a></span>StrideAdapterFromRange() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::ranges::range R&gt; <br />
-requires StrideAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;&gt;</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto StrideAdapterFromRange </td>
-          <td>(</td>
-          <td class="paramtype">R &amp;&#160;</td>
-          <td class="paramname"><em>range</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>stride</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> -&gt; StrideAdapter&lt;std::ranges::iterator_t&lt;R&gt;&gt; </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Helper function to create a StrideAdapter from a range. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">R</td><td>Range type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">range</td><td>Range to stride over </td></tr>
-    <tr><td class="paramname">stride</td><td>Stride value </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>StrideAdapter for the range </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a173">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03339">3339</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3341</span>                                             {</div>
-<div class="line"><span class="lineno"> 3342</span>  <span class="keywordflow">return</span> {std::ranges::begin(range), std::ranges::end(range), stride};</div>
-<div class="line"><span class="lineno"> 3343</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="ac358199cbf05e78ba4ac3a25882b6357" name="ac358199cbf05e78ba4ac3a25882b6357"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac358199cbf05e78ba4ac3a25882b6357">&#9670;&#160;</a></span>TakeAdapterFromRange() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::ranges::range R&gt; <br />
-requires TakeAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&lt;const R&amp;&gt;()))&gt;</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto TakeAdapterFromRange </td>
-          <td>(</td>
-          <td class="paramtype">const R &amp;&#160;</td>
-          <td class="paramname"><em>range</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>count</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> -&gt; TakeAdapter&lt;decltype(std::ranges::cbegin(range))&gt; </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Helper function to create a TakeAdapter from a const range. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">R</td><td>Range type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">range</td><td>Range to take from </td></tr>
-    <tr><td class="paramname">count</td><td>Maximum number of elements to yield </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>TakeAdapter for the range </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02974">2974</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 2976</span>                                                     {</div>
-<div class="line"><span class="lineno"> 2977</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range), std::ranges::cend(range), count};</div>
-<div class="line"><span class="lineno"> 2978</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a6a5fe42a5d6a908d4890d22cdd1ac0b5" name="a6a5fe42a5d6a908d4890d22cdd1ac0b5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6a5fe42a5d6a908d4890d22cdd1ac0b5">&#9670;&#160;</a></span>TakeAdapterFromRange() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::ranges::range R&gt; <br />
-requires TakeAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;&gt;</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto TakeAdapterFromRange </td>
-          <td>(</td>
-          <td class="paramtype">R &amp;&#160;</td>
-          <td class="paramname"><em>range</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>count</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> -&gt; TakeAdapter&lt;std::ranges::iterator_t&lt;R&gt;&gt; </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Helper function to create a TakeAdapter from a non-const range. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">R</td><td>Range type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">range</td><td>Range to take from </td></tr>
-    <tr><td class="paramname">count</td><td>Maximum number of elements to yield </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>TakeAdapter for the range </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a163">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l02959">2959</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 2961</span>                                           {</div>
-<div class="line"><span class="lineno"> 2962</span>  <span class="keywordflow">return</span> {std::ranges::begin(range), std::ranges::end(range), count};</div>
-<div class="line"><span class="lineno"> 2963</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a0d4413e0037e9b4528efebff15a54d67" name="a0d4413e0037e9b4528efebff15a54d67"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0d4413e0037e9b4528efebff15a54d67">&#9670;&#160;</a></span>TakeWhileAdapterFromRange() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::ranges::range R, typename Pred &gt; <br />
-requires TakeWhileAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&lt;const R&amp;&gt;())), Pred&gt;</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto TakeWhileAdapterFromRange </td>
-          <td>(</td>
-          <td class="paramtype">const R &amp;&#160;</td>
-          <td class="paramname"><em>range</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Pred&#160;</td>
-          <td class="paramname"><em>predicate</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> -&gt; TakeWhileAdapter&lt;decltype(std::ranges::cbegin(range)), Pred&gt; </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Helper function to create a TakeWhileAdapter from a const range. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">R</td><td>Range type </td></tr>
-    <tr><td class="paramname">Pred</td><td>Predicate type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">range</td><td>Range to take from </td></tr>
-    <tr><td class="paramname">predicate</td><td>Predicate to test elements </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>TakeWhileAdapter for the range </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03037">3037</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3040</span>                                                                {</div>
-<div class="line"><span class="lineno"> 3041</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range), std::ranges::cend(range), std::move(predicate)};</div>
-<div class="line"><span class="lineno"> 3042</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="ae395ae0aba4682d48ff4e235a326fbf0" name="ae395ae0aba4682d48ff4e235a326fbf0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae395ae0aba4682d48ff4e235a326fbf0">&#9670;&#160;</a></span>TakeWhileAdapterFromRange() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::ranges::range R, typename Pred &gt; <br />
-requires TakeWhileAdapterRequirements&lt;std::ranges::iterator_t&lt;R&gt;, Pred&gt;</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto TakeWhileAdapterFromRange </td>
-          <td>(</td>
-          <td class="paramtype">R &amp;&#160;</td>
-          <td class="paramname"><em>range</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Pred&#160;</td>
-          <td class="paramname"><em>predicate</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> -&gt; TakeWhileAdapter&lt;std::ranges::iterator_t&lt;R&gt;, Pred&gt; </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Helper function to create a TakeWhileAdapter from a non-const range. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">R</td><td>Range type </td></tr>
-    <tr><td class="paramname">Pred</td><td>Predicate type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">range</td><td>Range to take from </td></tr>
-    <tr><td class="paramname">predicate</td><td>Predicate to test elements </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>TakeWhileAdapter for the range </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a165">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03020">3020</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3023</span>                                                      {</div>
-<div class="line"><span class="lineno"> 3024</span>  <span class="keywordflow">return</span> {std::ranges::begin(range), std::ranges::end(range), std::move(predicate)};</div>
-<div class="line"><span class="lineno"> 3025</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a5ad87bdafd2a83dfda7068cfcb4c3b28" name="a5ad87bdafd2a83dfda7068cfcb4c3b28"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5ad87bdafd2a83dfda7068cfcb4c3b28">&#9670;&#160;</a></span>ZipAdapterFromRange() <span class="overload">[1/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::ranges::range R1, std::ranges::range R2&gt; <br />
-requires ZipAdapterRequirements&lt;decltype(std::ranges::cbegin(std::declval&lt;const R1&amp;&gt;())), decltype(std::ranges::cbegin(std::declval&lt;const R2&amp;&gt;()))&gt;</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto ZipAdapterFromRange </td>
-          <td>(</td>
-          <td class="paramtype">const R1 &amp;&#160;</td>
-          <td class="paramname"><em>range1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const R2 &amp;&#160;</td>
-          <td class="paramname"><em>range2</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> -&gt; ZipAdapter&lt;decltype(std::ranges::cbegin(range1)), decltype(std::ranges::cbegin(range2))&gt; </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Helper function to create a ZipAdapter from two const ranges. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">R1</td><td>First range type </td></tr>
-    <tr><td class="paramname">R2</td><td>Second range type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">range1</td><td>First range </td></tr>
-    <tr><td class="paramname">range2</td><td>Second range </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>ZipAdapter for the two ranges </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03405">3405</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3409</span>                                                                                        {</div>
-<div class="line"><span class="lineno"> 3410</span>  <span class="keywordflow">return</span> {std::ranges::cbegin(range1), std::ranges::cend(range1), std::ranges::cbegin(range2),</div>
-<div class="line"><span class="lineno"> 3411</span>          std::ranges::cend(range2)};</div>
-<div class="line"><span class="lineno"> 3412</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a407d710bc86d36396ec2e9fcba7f9e8a" name="a407d710bc86d36396ec2e9fcba7f9e8a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a407d710bc86d36396ec2e9fcba7f9e8a">&#9670;&#160;</a></span>ZipAdapterFromRange() <span class="overload">[2/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::ranges::range R1, std::ranges::range R2&gt; <br />
-requires ZipAdapterRequirements&lt;std::ranges::iterator_t&lt;R1&gt;, decltype(std::ranges::cbegin(std::declval&lt;const R2&amp;&gt;()))&gt;</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto ZipAdapterFromRange </td>
-          <td>(</td>
-          <td class="paramtype">R1 &amp;&#160;</td>
-          <td class="paramname"><em>range1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const R2 &amp;&#160;</td>
-          <td class="paramname"><em>range2</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> -&gt; ZipAdapter&lt;std::ranges::iterator_t&lt;R1&gt;, decltype(std::ranges::cbegin(range2))&gt; </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Helper function to create a ZipAdapter from a range and a const range. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">R1</td><td>First range type </td></tr>
-    <tr><td class="paramname">R2</td><td>Second range type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">range1</td><td>First range </td></tr>
-    <tr><td class="paramname">range2</td><td>Second range </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>ZipAdapter for the two ranges </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03387">3387</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3390</span>                                                                              {</div>
-<div class="line"><span class="lineno"> 3391</span>  <span class="keywordflow">return</span> {std::ranges::begin(range1), std::ranges::end(range1), std::ranges::cbegin(range2), std::ranges::cend(range2)};</div>
-<div class="line"><span class="lineno"> 3392</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a22e05a1859c49e16d93d42691c556664" name="a22e05a1859c49e16d93d42691c556664"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a22e05a1859c49e16d93d42691c556664">&#9670;&#160;</a></span>ZipAdapterFromRange() <span class="overload">[3/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::ranges::range R1, std::ranges::range R2&gt; <br />
-requires ZipAdapterRequirements&lt;std::ranges::iterator_t&lt;R1&gt;, std::ranges::iterator_t&lt;R2&gt;&gt;</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto ZipAdapterFromRange </td>
-          <td>(</td>
-          <td class="paramtype">R1 &amp;&#160;</td>
-          <td class="paramname"><em>range1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">R2 &amp;&#160;</td>
-          <td class="paramname"><em>range2</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> -&gt; ZipAdapter&lt;std::ranges::iterator_t&lt;R1&gt;, std::ranges::iterator_t&lt;R2&gt;&gt; </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Helper function to create a ZipAdapter from two ranges. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">R1</td><td>First range type </td></tr>
-    <tr><td class="paramname">R2</td><td>Second range type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">range1</td><td>First range </td></tr>
-    <tr><td class="paramname">range2</td><td>Second range </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>ZipAdapter for the two ranges </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a159">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l03370">3370</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 3373</span>                                                                    {</div>
-<div class="line"><span class="lineno"> 3374</span>  <span class="keywordflow">return</span> {std::ranges::begin(range1), std::ranges::end(range1), std::ranges::begin(range2), std::ranges::end(range2)};</div>
-<div class="line"><span class="lineno"> 3375</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->

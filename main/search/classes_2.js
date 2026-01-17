@@ -15,5 +15,6 @@ var searchData=
   ['componentstoragebase_12',['ComponentStorageBase',['../classhelios_1_1ecs_1_1details_1_1ComponentStorageBase.html',1,'helios::ecs::details']]],
   ['componenttraits_13',['ComponentTraits',['../structhelios_1_1ecs_1_1ComponentTraits.html',1,'helios::ecs']]],
   ['componenttypeextractor_14',['ComponentTypeExtractor',['../structhelios_1_1ecs_1_1details_1_1ComponentTypeExtractor.html',1,'helios::ecs::details']]],
-  ['componenttypeinfo_15',['componenttypeinfo',['../structhelios_1_1app_1_1details_1_1ComponentTypeInfo.html',1,'helios::app::details::ComponentTypeInfo'],['../classhelios_1_1ecs_1_1ComponentTypeInfo.html',1,'helios::ecs::ComponentTypeInfo']]]
+  ['componenttypeinfo_15',['componenttypeinfo',['../structhelios_1_1app_1_1details_1_1ComponentTypeInfo.html',1,'helios::app::details::ComponentTypeInfo'],['../classhelios_1_1ecs_1_1ComponentTypeInfo.html',1,'helios::ecs::ComponentTypeInfo']]],
+  ['concatadapter_16',['ConcatAdapter',['../classhelios_1_1utils_1_1ConcatAdapter.html',1,'helios::utils']]]
 ];

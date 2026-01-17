@@ -230,24 +230,16 @@ Variables</h2></td></tr>
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename Func , typename... Args&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">using <a class="el" href="namespacehelios_1_1utils_1_1details.html#ab522c5f9db7a41104883d0d96f43f8da">helios::utils::details::call_or_apply_result_t</a> = typedef typename decltype(<a class="el" href="namespacehelios_1_1utils_1_1details.html#a1bbd3cf95b591c66c67c6b8a5f3de936">get_call_or_apply_result_type</a>&lt;Func, Args...&gt;())::type</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a3">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l00074">74</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l00075">75</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -258,24 +250,16 @@ template&lt;typename Func , typename... Args&gt; </div>
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename Folder , typename Accumulator , typename Tuple &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">using <a class="el" href="namespacehelios_1_1utils_1_1details.html#a783a48bbae4b9deac0e6086616ddef31">helios::utils::details::folder_apply_result_t</a> = typedef typename <a class="el" href="structhelios_1_1utils_1_1details_1_1folder__apply__result.html">folder_apply_result</a>&lt;Folder, Accumulator, Tuple&gt;::type</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a1">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l00056">56</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l00057">57</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>
@@ -300,7 +284,7 @@ template&lt;typename Func , typename... Args&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -309,17 +293,17 @@ template&lt;typename Func , typename... Args&gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a2">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l00062">62</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   62</span>                                                        {</div>
-<div class="line"><span class="lineno">   63</span>  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::invocable&lt;Func, Args...&gt;) {</div>
-<div class="line"><span class="lineno">   64</span>    <span class="keywordflow">return</span> std::type_identity&lt;std::invoke_result_t&lt;Func, Args...&gt;&gt;{};</div>
-<div class="line"><span class="lineno">   65</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<span class="keyword">sizeof</span>...(Args) == 1) {</div>
-<div class="line"><span class="lineno">   66</span>    <span class="keywordflow">return</span> std::type_identity&lt;decltype(std::apply(std::declval&lt;Func&gt;(), std::declval&lt;Args&gt;()...))&gt;{};</div>
-<div class="line"><span class="lineno">   67</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">   68</span>    <span class="keyword">static_assert</span>(<span class="keyword">sizeof</span>...(Args) == 1,</div>
-<div class="line"><span class="lineno">   69</span>                  <span class="stringliteral">&quot;Callable must be invocable with Args or via std::apply with a single tuple argument&quot;</span>);</div>
-<div class="line"><span class="lineno">   70</span>  }</div>
-<div class="line"><span class="lineno">   71</span>}</div>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l00063">63</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   63</span>                                                        {</div>
+<div class="line"><span class="lineno">   64</span>  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::invocable&lt;Func, Args...&gt;) {</div>
+<div class="line"><span class="lineno">   65</span>    <span class="keywordflow">return</span> std::type_identity&lt;std::invoke_result_t&lt;Func, Args...&gt;&gt;{};</div>
+<div class="line"><span class="lineno">   66</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<span class="keyword">sizeof</span>...(Args) == 1) {</div>
+<div class="line"><span class="lineno">   67</span>    <span class="keywordflow">return</span> std::type_identity&lt;decltype(std::apply(std::declval&lt;Func&gt;(), std::declval&lt;Args&gt;()...))&gt;{};</div>
+<div class="line"><span class="lineno">   68</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">   69</span>    <span class="keyword">static_assert</span>(<span class="keyword">sizeof</span>...(Args) == 1,</div>
+<div class="line"><span class="lineno">   70</span>                  <span class="stringliteral">&quot;Callable must be invocable with Args or via std::apply with a single tuple argument&quot;</span>);</div>
+<div class="line"><span class="lineno">   71</span>  }</div>
+<div class="line"><span class="lineno">   72</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -341,14 +325,14 @@ template&lt;typename Folder , typename Accumulator , typename Tuple &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2utils_2functional_adapters_8hpp-example.html#a0">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/utils/functional_adapters.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l00042">42</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l00043">43</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
 
 </div>
 </div>

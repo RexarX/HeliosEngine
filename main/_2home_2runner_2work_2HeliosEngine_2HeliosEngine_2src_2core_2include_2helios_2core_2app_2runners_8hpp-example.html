@@ -212,12 +212,12 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line">  <span class="keyword">const</span> <span class="keyword">auto</span>&amp; world = app.GetMainWorld();</div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">if</span> (!world.HasEvent&lt;ecs::ShutdownEvent&gt;()) {</div>
-<div class="line">    <span class="keywordflow">return</span> {<span class="keyword">false</span>, <a id="a1" name="a1"></a><a class="code hl_enumvalue" href="namespacehelios_1_1ecs.html#ae984f0803649a1da782a858e73401658a505a83f220c02df2f85c3810cd9ceb38">ecs::ShutdownExitCode::Success</a>};</div>
+<div class="line">    <span class="keywordflow">return</span> {<span class="keyword">false</span>, <a id="a1" name="a1"></a><a class="code hl_enumvalue" href="namespacehelios_1_1ecs.html#ae984f0803649a1da782a858e73401658a8c632159fa131f09d04f94e3cbcd8782">ecs::ShutdownExitCode::kSuccess</a>};</div>
 <div class="line">  }</div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keyword">auto</span> reader = world.ReadEvents&lt;ecs::ShutdownEvent&gt;();</div>
 <div class="line">  <span class="keywordflow">if</span> (reader.Empty()) {</div>
-<div class="line">    <span class="keywordflow">return</span> {<span class="keyword">false</span>, <a class="code hl_enumvalue" href="namespacehelios_1_1ecs.html#ae984f0803649a1da782a858e73401658a505a83f220c02df2f85c3810cd9ceb38">ecs::ShutdownExitCode::Success</a>};</div>
+<div class="line">    <span class="keywordflow">return</span> {<span class="keyword">false</span>, <a class="code hl_enumvalue" href="namespacehelios_1_1ecs.html#ae984f0803649a1da782a858e73401658a8c632159fa131f09d04f94e3cbcd8782">ecs::ShutdownExitCode::kSuccess</a>};</div>
 <div class="line">  }</div>
 <div class="line"> </div>
 <div class="line">  <span class="comment">// Return the first shutdown event&#39;s exit code</span></div>
@@ -230,10 +230,10 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line"><span class="comment"> */</span></div>
 <div class="line">[[nodiscard]] <span class="keyword">constexpr</span> <a id="a2" name="a2"></a><a class="code hl_enumeration" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916db">AppExitCode</a> <a id="a3" name="a3"></a><a class="code hl_function" href="namespacehelios_1_1app.html#ad4745328196543cc9de4622637eabd85">ToAppExitCode</a>(<a id="a4" name="a4"></a><a class="code hl_enumeration" href="namespacehelios_1_1ecs.html#ae984f0803649a1da782a858e73401658">ecs::ShutdownExitCode</a> code) <span class="keyword">noexcept</span> {</div>
 <div class="line">  <span class="keywordflow">switch</span> (code) {</div>
-<div class="line">    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacehelios_1_1ecs.html#ae984f0803649a1da782a858e73401658a505a83f220c02df2f85c3810cd9ceb38">ecs::ShutdownExitCode::Success</a>:</div>
-<div class="line">      <span class="keywordflow">return</span> <a id="a5" name="a5"></a><a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dba505a83f220c02df2f85c3810cd9ceb38">AppExitCode::Success</a>;</div>
+<div class="line">    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacehelios_1_1ecs.html#ae984f0803649a1da782a858e73401658a8c632159fa131f09d04f94e3cbcd8782">ecs::ShutdownExitCode::kSuccess</a>:</div>
+<div class="line">      <span class="keywordflow">return</span> <a id="a5" name="a5"></a><a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dba8c632159fa131f09d04f94e3cbcd8782">AppExitCode::kSuccess</a>;</div>
 <div class="line">    <span class="keywordflow">default</span>:</div>
-<div class="line">      <span class="keywordflow">return</span> <a id="a6" name="a6"></a><a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dbae139a585510a502bbf1841cf589f5086">AppExitCode::Failure</a>;</div>
+<div class="line">      <span class="keywordflow">return</span> <a id="a6" name="a6"></a><a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dba45d5f642bcbee805302334d856c54259">AppExitCode::kFailure</a>;</div>
 <div class="line">  }</div>
 <div class="line">}</div>
 <div class="line"><span class="comment"></span> </div>
@@ -281,10 +281,10 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line">    }</div>
 <div class="line">  } <span class="keywordflow">catch</span> (<span class="keyword">const</span> std::exception&amp; exception) {</div>
 <div class="line">    <a id="a9" name="a9"></a><a class="code hl_define" href="logger_8hpp.html#afbc72b7a3187584885014282cfb8e42f">HELIOS_CRITICAL</a>(<span class="stringliteral">&quot;Application encountered an unhandled exception and will exit: {}!&quot;</span>, exception.what());</div>
-<div class="line">    <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dbae139a585510a502bbf1841cf589f5086">AppExitCode::Failure</a>;</div>
+<div class="line">    <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dba45d5f642bcbee805302334d856c54259">AppExitCode::kFailure</a>;</div>
 <div class="line">  }</div>
 <div class="line"> </div>
-<div class="line">  <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dba505a83f220c02df2f85c3810cd9ceb38">AppExitCode::Success</a>;</div>
+<div class="line">  <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dba8c632159fa131f09d04f94e3cbcd8782">AppExitCode::kSuccess</a>;</div>
 <div class="line">}</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">/**</span></div>
@@ -334,10 +334,10 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line">    }</div>
 <div class="line">  } <span class="keywordflow">catch</span> (<span class="keyword">const</span> std::exception&amp; exception) {</div>
 <div class="line">    <a class="code hl_define" href="logger_8hpp.html#afbc72b7a3187584885014282cfb8e42f">HELIOS_CRITICAL</a>(<span class="stringliteral">&quot;Application encountered an unhandled exception and will exit: {}!&quot;</span>, exception.what());</div>
-<div class="line">    <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dbae139a585510a502bbf1841cf589f5086">AppExitCode::Failure</a>;</div>
+<div class="line">    <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dba45d5f642bcbee805302334d856c54259">AppExitCode::kFailure</a>;</div>
 <div class="line">  }</div>
 <div class="line"> </div>
-<div class="line">  <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dba505a83f220c02df2f85c3810cd9ceb38">AppExitCode::Success</a>;</div>
+<div class="line">  <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dba8c632159fa131f09d04f94e3cbcd8782">AppExitCode::kSuccess</a>;</div>
 <div class="line">}</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">/**</span></div>
@@ -392,10 +392,10 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line">    }</div>
 <div class="line">  } <span class="keywordflow">catch</span> (<span class="keyword">const</span> std::exception&amp; exception) {</div>
 <div class="line">    <a class="code hl_define" href="logger_8hpp.html#afbc72b7a3187584885014282cfb8e42f">HELIOS_CRITICAL</a>(<span class="stringliteral">&quot;Application encountered an unhandled exception and will exit: {}!&quot;</span>, exception.what());</div>
-<div class="line">    <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dbae139a585510a502bbf1841cf589f5086">AppExitCode::Failure</a>;</div>
+<div class="line">    <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dba45d5f642bcbee805302334d856c54259">AppExitCode::kFailure</a>;</div>
 <div class="line">  }</div>
 <div class="line"> </div>
-<div class="line">  <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dba505a83f220c02df2f85c3810cd9ceb38">AppExitCode::Success</a>;</div>
+<div class="line">  <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dba8c632159fa131f09d04f94e3cbcd8782">AppExitCode::kSuccess</a>;</div>
 <div class="line">}</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">/**</span></div>
@@ -469,10 +469,10 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line">    }</div>
 <div class="line">  } <span class="keywordflow">catch</span> (<span class="keyword">const</span> std::exception&amp; exception) {</div>
 <div class="line">    <a class="code hl_define" href="logger_8hpp.html#afbc72b7a3187584885014282cfb8e42f">HELIOS_CRITICAL</a>(<span class="stringliteral">&quot;Application encountered an unhandled exception and will exit: {}!&quot;</span>, exception.what());</div>
-<div class="line">    <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dbae139a585510a502bbf1841cf589f5086">AppExitCode::Failure</a>;</div>
+<div class="line">    <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dba45d5f642bcbee805302334d856c54259">AppExitCode::kFailure</a>;</div>
 <div class="line">  }</div>
 <div class="line"> </div>
-<div class="line">  <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dba505a83f220c02df2f85c3810cd9ceb38">AppExitCode::Success</a>;</div>
+<div class="line">  <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dba8c632159fa131f09d04f94e3cbcd8782">AppExitCode::kSuccess</a>;</div>
 <div class="line">}</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">/**</span></div>
@@ -510,10 +510,10 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="line">    }</div>
 <div class="line">  } <span class="keywordflow">catch</span> (<span class="keyword">const</span> std::exception&amp; exception) {</div>
 <div class="line">    <a class="code hl_define" href="logger_8hpp.html#afbc72b7a3187584885014282cfb8e42f">HELIOS_CRITICAL</a>(<span class="stringliteral">&quot;Application encountered an unhandled exception and will exit: {}!&quot;</span>, exception.what());</div>
-<div class="line">    <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dbae139a585510a502bbf1841cf589f5086">AppExitCode::Failure</a>;</div>
+<div class="line">    <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dba45d5f642bcbee805302334d856c54259">AppExitCode::kFailure</a>;</div>
 <div class="line">  }</div>
 <div class="line"> </div>
-<div class="line">  <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dba505a83f220c02df2f85c3810cd9ceb38">AppExitCode::Success</a>;</div>
+<div class="line">  <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dba8c632159fa131f09d04f94e3cbcd8782">AppExitCode::kSuccess</a>;</div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line">}  <span class="comment">// namespace helios::app</span></div>
@@ -528,14 +528,14 @@ $(document).ready(function(){initNavTree('_2home_2runner_2work_2HeliosEngine_2He
 <div class="ttc" id="anamespacehelios_1_1app_html_a4bd00622a22812a22014d15d5488146b"><div class="ttname"><a href="namespacehelios_1_1app.html#a4bd00622a22812a22014d15d5488146b">helios::app::OnceRunner</a></div><div class="ttdeci">AppExitCode OnceRunner(App &amp;app, OnceRunnerConfig config={})</div><div class="ttdef"><b>Definition</b> <a href="runners_8hpp_source.html#l00315">runners.hpp:315</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1app_html_a56f55ddf3869f18c8e2218f97c1a52a4"><div class="ttname"><a href="namespacehelios_1_1app.html#a56f55ddf3869f18c8e2218f97c1a52a4">helios::app::TimedRunner</a></div><div class="ttdeci">AppExitCode TimedRunner(App &amp;app, TimedRunnerConfig config)</div><div class="ttdef"><b>Definition</b> <a href="runners_8hpp_source.html#l00184">runners.hpp:184</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1app_html_a6cd85782bcdd4e4ee78ffbb2c15916db"><div class="ttname"><a href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916db">helios::app::AppExitCode</a></div><div class="ttdeci">AppExitCode</div><div class="ttdoc">Application exit codes.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00087">app.hpp:87</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1app_html_a6cd85782bcdd4e4ee78ffbb2c15916dba505a83f220c02df2f85c3810cd9ceb38"><div class="ttname"><a href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dba505a83f220c02df2f85c3810cd9ceb38">helios::app::AppExitCode::Success</a></div><div class="ttdeci">@ Success</div><div class="ttdoc">Successful execution.</div></div>
-<div class="ttc" id="anamespacehelios_1_1app_html_a6cd85782bcdd4e4ee78ffbb2c15916dbae139a585510a502bbf1841cf589f5086"><div class="ttname"><a href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dbae139a585510a502bbf1841cf589f5086">helios::app::AppExitCode::Failure</a></div><div class="ttdeci">@ Failure</div><div class="ttdoc">General failure.</div></div>
+<div class="ttc" id="anamespacehelios_1_1app_html_a6cd85782bcdd4e4ee78ffbb2c15916dba45d5f642bcbee805302334d856c54259"><div class="ttname"><a href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dba45d5f642bcbee805302334d856c54259">helios::app::AppExitCode::kFailure</a></div><div class="ttdeci">@ kFailure</div><div class="ttdoc">General failure.</div></div>
+<div class="ttc" id="anamespacehelios_1_1app_html_a6cd85782bcdd4e4ee78ffbb2c15916dba8c632159fa131f09d04f94e3cbcd8782"><div class="ttname"><a href="namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dba8c632159fa131f09d04f94e3cbcd8782">helios::app::AppExitCode::kSuccess</a></div><div class="ttdeci">@ kSuccess</div><div class="ttdoc">Successful execution.</div></div>
 <div class="ttc" id="anamespacehelios_1_1app_html_a9d9793c8a49fa877e306b790c9e73b62"><div class="ttname"><a href="namespacehelios_1_1app.html#a9d9793c8a49fa877e306b790c9e73b62">helios::app::DefaultRunner</a></div><div class="ttdeci">AppExitCode DefaultRunner(App &amp;app, DefaultRunnerConfig config={})</div><div class="ttdef"><b>Definition</b> <a href="runners_8hpp_source.html#l00080">runners.hpp:80</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1app_html_aa14f3e424ce3ff41a171c6121782653d"><div class="ttname"><a href="namespacehelios_1_1app.html#aa14f3e424ce3ff41a171c6121782653d">helios::app::CheckShutdownEvent</a></div><div class="ttdeci">auto CheckShutdownEvent(App &amp;app) noexcept -&gt; std::pair&lt; bool, ecs::ShutdownExitCode &gt;</div><div class="ttdoc">Checks if a shutdown event has been received.</div><div class="ttdef"><b>Definition</b> <a href="runners_8hpp_source.html#l00024">runners.hpp:24</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1app_html_ad4745328196543cc9de4622637eabd85"><div class="ttname"><a href="namespacehelios_1_1app.html#ad4745328196543cc9de4622637eabd85">helios::app::ToAppExitCode</a></div><div class="ttdeci">constexpr AppExitCode ToAppExitCode(ecs::ShutdownExitCode code) noexcept</div><div class="ttdoc">Converts shutdown exit code to app exit code.</div><div class="ttdef"><b>Definition</b> <a href="runners_8hpp_source.html#l00044">runners.hpp:44</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1app_html_ae6c41388529fb34ca3d52d796ae8c653"><div class="ttname"><a href="namespacehelios_1_1app.html#ae6c41388529fb34ca3d52d796ae8c653">helios::app::FixedTimestepRunner</a></div><div class="ttdeci">AppExitCode FixedTimestepRunner(App &amp;app, FixedTimestepRunnerConfig config)</div><div class="ttdef"><b>Definition</b> <a href="runners_8hpp_source.html#l00244">runners.hpp:244</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1ecs_html_ae984f0803649a1da782a858e73401658"><div class="ttname"><a href="namespacehelios_1_1ecs.html#ae984f0803649a1da782a858e73401658">helios::ecs::ShutdownExitCode</a></div><div class="ttdeci">ShutdownExitCode</div><div class="ttdoc">Exit code for application shutdown.</div><div class="ttdef"><b>Definition</b> <a href="builtin__events_8hpp_source.html#l00060">builtin_events.hpp:60</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1ecs_html_ae984f0803649a1da782a858e73401658a505a83f220c02df2f85c3810cd9ceb38"><div class="ttname"><a href="namespacehelios_1_1ecs.html#ae984f0803649a1da782a858e73401658a505a83f220c02df2f85c3810cd9ceb38">helios::ecs::ShutdownExitCode::Success</a></div><div class="ttdeci">@ Success</div><div class="ttdoc">Normal shutdown.</div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_ae984f0803649a1da782a858e73401658a8c632159fa131f09d04f94e3cbcd8782"><div class="ttname"><a href="namespacehelios_1_1ecs.html#ae984f0803649a1da782a858e73401658a8c632159fa131f09d04f94e3cbcd8782">helios::ecs::ShutdownExitCode::kSuccess</a></div><div class="ttdeci">@ kSuccess</div><div class="ttdoc">Normal shutdown.</div></div>
 <div class="ttc" id="astructhelios_1_1app_1_1DefaultRunnerConfig_html_a51bbb618f564f95e3619ed6397b0188e"><div class="ttname"><a href="structhelios_1_1app_1_1DefaultRunnerConfig.html#a51bbb618f564f95e3619ed6397b0188e">helios::app::DefaultRunnerConfig::update_time_resource</a></div><div class="ttdeci">bool update_time_resource</div><div class="ttdoc">Whether to automatically update the Time resource.</div><div class="ttdef"><b>Definition</b> <a href="runners_8hpp_source.html#l00057">runners.hpp:57</a></div></div>
 <div class="ttc" id="astructhelios_1_1app_1_1FixedTimestepRunnerConfig_html_a881eef59e4aca1a7485e6727d20dc30f"><div class="ttname"><a href="structhelios_1_1app_1_1FixedTimestepRunnerConfig.html#a881eef59e4aca1a7485e6727d20dc30f">helios::app::FixedTimestepRunnerConfig::fixed_delta_seconds</a></div><div class="ttdeci">float fixed_delta_seconds</div><div class="ttdoc">Fixed timestep in seconds (default: 60 FPS)</div><div class="ttdef"><b>Definition</b> <a href="runners_8hpp_source.html#l00218">runners.hpp:218</a></div></div>
 <div class="ttc" id="astructhelios_1_1app_1_1FixedTimestepRunnerConfig_html_ad4c0c4a3665af30ecfcbf37c25ea2cf3"><div class="ttname"><a href="structhelios_1_1app_1_1FixedTimestepRunnerConfig.html#ad4c0c4a3665af30ecfcbf37c25ea2cf3">helios::app::FixedTimestepRunnerConfig::update_time_resource</a></div><div class="ttdeci">bool update_time_resource</div><div class="ttdoc">Whether to automatically update the Time resource.</div><div class="ttdef"><b>Definition</b> <a href="runners_8hpp_source.html#l00220">runners.hpp:220</a></div></div>

@@ -37,6 +37,7 @@ var namespacehelios_1_1app =
     [ "Update", "structhelios_1_1app_1_1Update.html", "structhelios_1_1app_1_1Update" ],
     [ "UpdateStage", "structhelios_1_1app_1_1UpdateStage.html", "structhelios_1_1app_1_1UpdateStage" ],
     [ "ModuleTrait", "concepthelios_1_1app_1_1ModuleTrait.html", null ],
+    [ "DefaultConstructibleModuleTrait", "concepthelios_1_1app_1_1DefaultConstructibleModuleTrait.html", null ],
     [ "ModuleWithNameTrait", "concepthelios_1_1app_1_1ModuleWithNameTrait.html", null ],
     [ "ScheduleTrait", "concepthelios_1_1app_1_1ScheduleTrait.html", null ],
     [ "ScheduleWithNameTrait", "concepthelios_1_1app_1_1ScheduleWithNameTrait.html", null ],
@@ -58,8 +59,8 @@ var namespacehelios_1_1app =
     [ "SubAppTypeId", "namespacehelios_1_1app.html#a1c78747b4cc5ca72b3811b26772c9057", null ],
     [ "SystemSetId", "namespacehelios_1_1app.html#ac8d5585fdc5fe5dbb999827e9a2e2257", null ],
     [ "AppExitCode", "namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916db", [
-      [ "Success", "namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dba505a83f220c02df2f85c3810cd9ceb38", null ],
-      [ "Failure", "namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dbae139a585510a502bbf1841cf589f5086", null ]
+      [ "kSuccess", "namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dba8c632159fa131f09d04f94e3cbcd8782", null ],
+      [ "kFailure", "namespacehelios_1_1app.html#a6cd85782bcdd4e4ee78ffbb2c15916dba45d5f642bcbee805302334d856c54259", null ]
     ] ],
     [ "DynamicModuleError", "namespacehelios_1_1app.html#a000b3ce106f3376b7f30ef1baaebc7b6", [
       [ "LibraryLoadFailed", "namespacehelios_1_1app.html#a000b3ce106f3376b7f30ef1baaebc7b6a62ab29fe5f81a99390f031bad9889df5", null ],

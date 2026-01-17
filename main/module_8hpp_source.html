@@ -204,98 +204,101 @@ $(document).ready(function(){initNavTree('module_8hpp_source.html',''); initResi
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="classhelios_1_1app_1_1Module.html#aed537f1386a345ceb984f7a19402e1ec">   35</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1app_1_1Module.html#aed537f1386a345ceb984f7a19402e1ec">Build</a>(<a class="code hl_class" href="classhelios_1_1app_1_1App.html">App</a>&amp; app) = 0;</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment"></span> </div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">  /**</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">   * @brief Destroys the module and cleans up resources.</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">   * @details Called during application shutdown.</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">   * @param app The application instance</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">   */</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="classhelios_1_1app_1_1Module.html#aea3c7830a39ec52bce85d815ad9380d9">   42</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1app_1_1Module.html#aea3c7830a39ec52bce85d815ad9380d9">Destroy</a>(<a class="code hl_class" href="classhelios_1_1app_1_1App.html">App</a>&amp; app) { (void)app; }</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment"></span> </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">  /**</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">   * @brief Checks if the module is ready for finalization.</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">   * @details This can be useful for modules that need something asynchronous to happen</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">   * before they can finish their setup, like the initialization of a renderer.</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">   * Once the module is ready, `Finish` will be called.</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">   * @param app The application instance (const)</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">   * @return True if the module is ready, false otherwise</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">   */</span></div>
-<div class="foldopen" id="foldopen00052" data-start="{" data-end="}">
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="classhelios_1_1app_1_1Module.html#a9473af39324fe86d5f362765b70271fd">   52</a></span>  [[nodiscard]] <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1app_1_1Module.html#a9473af39324fe86d5f362765b70271fd">IsReady</a>(<span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1app_1_1App.html">App</a>&amp; app) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    (void)app;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  }</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">   * @brief Finishes adding this module to the App, once all modules are ready.</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">   * @details This can be useful for modules that depend on another module&#39;s asynchronous</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">   * setup, like the renderer. Called after all modules&#39; `Build` methods have been called</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">   * and all modules return true from `IsReady`.</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">   * @param app The application instance</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="classhelios_1_1app_1_1Module.html#a0c2fe5bda7ac065b64fb05a0f0316c26">   44</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1app_1_1Module.html#a0c2fe5bda7ac065b64fb05a0f0316c26">Finish</a>(<a class="code hl_class" href="classhelios_1_1app_1_1App.html">App</a>&amp; <span class="comment">/*app*/</span>) {}</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment"></span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">   * @brief Destroys the module and cleans up resources.</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">   * @details Called during application shutdown.</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">   * @param app The application instance</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="classhelios_1_1app_1_1Module.html#aed659ed047e7a0e805d2036b185a1e93">   51</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1app_1_1Module.html#aed659ed047e7a0e805d2036b185a1e93">Destroy</a>(<a class="code hl_class" href="classhelios_1_1app_1_1App.html">App</a>&amp; <span class="comment">/*app*/</span>) {}</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment"></span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">   * @brief Checks if the module is ready for finalization.</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">   * @details This can be useful for modules that need something asynchronous to happen</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">   * before they can finish their setup, like the initialization of a renderer.</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">   * Once the module is ready, `Finish` will be called.</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">   * @param app The application instance (const)</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">   * @return True if the module is ready, false otherwise</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="classhelios_1_1app_1_1Module.html#a0ccb380fb36e7f5a5705baf5b2b3395f">   61</a></span>  [[nodiscard]] <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1app_1_1Module.html#a0ccb380fb36e7f5a5705baf5b2b3395f">IsReady</a>(<span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1app_1_1App.html">App</a>&amp; <span class="comment">/*app*/</span>) <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> <span class="keyword">true</span>; }</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>};</div>
 </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment"></span> </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">  /**</span></div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">   * @brief Finishes adding this module to the App, once all modules are ready.</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">   * @details This can be useful for modules that depend on another module&#39;s asynchronous</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">   * setup, like the renderer. Called after all modules&#39; `Build` methods have been called</span></div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">   * and all modules return true from `IsReady`.</span></div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">   * @param app The application instance</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">   */</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="classhelios_1_1app_1_1Module.html#a6795daeba4b444da40a22d96989047bc">   64</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1app_1_1Module.html#a6795daeba4b444da40a22d96989047bc">Finish</a>(<a class="code hl_class" href="classhelios_1_1app_1_1App.html">App</a>&amp; app) { (void)app; }</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>};</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment"></span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment"> * @brief Concept to ensure a type is a valid Module.</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment"> * @details A valid Module must derive from Module.</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="concepthelios_1_1app_1_1ModuleTrait.html">   69</a></span><span class="keyword">concept </span><a class="code hl_concept" href="concepthelios_1_1app_1_1ModuleTrait.html">ModuleTrait</a> = std::derived_from&lt;T, Module&gt;;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment"></span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment"> * @brief Concept for modules that can be default constructed.</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment"> * @details Used by AddModule&lt;T&gt;() overload that creates the module internally.</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="concepthelios_1_1app_1_1DefaultConstructibleModuleTrait.html">   76</a></span><span class="keyword">concept </span><a class="code hl_concept" href="concepthelios_1_1app_1_1DefaultConstructibleModuleTrait.html">DefaultConstructibleModuleTrait</a> = <a class="code hl_concept" href="concepthelios_1_1app_1_1ModuleTrait.html">ModuleTrait&lt;T&gt;</a> &amp;&amp; std::default_initializable&lt;T&gt;;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment"></span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment"> * @brief Concept to check if a Module provides a GetName() method.</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment"> * @details A Module with name trait must satisfy ModuleTrait and provide:</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment"> * - `static constexpr std::string_view GetName() noexcept`</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00084" data-start="{" data-end="}">
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="concepthelios_1_1app_1_1ModuleWithNameTrait.html">   84</a></span><span class="keyword">concept </span><a class="code hl_concept" href="concepthelios_1_1app_1_1ModuleWithNameTrait.html">ModuleWithNameTrait</a> = <a class="code hl_concept" href="concepthelios_1_1app_1_1ModuleTrait.html">ModuleTrait&lt;T&gt;</a> &amp;&amp; <span class="keyword">requires</span> {</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  { T::GetName() } -&gt; std::same_as&lt;std::string_view&gt;;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>};</div>
 </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment"></span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment"> * @brief Concept to ensure a type is a valid Module.</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment"> * @details A valid Module must derive from Module and be default constructible.</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="concepthelios_1_1app_1_1ModuleTrait.html">   72</a></span><span class="keyword">concept </span><a class="code hl_concept" href="concepthelios_1_1app_1_1ModuleTrait.html">ModuleTrait</a> = std::derived_from&lt;T, Module&gt; &amp;&amp; std::constructible_from&lt;T&gt;;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment"></span> </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment"> * @brief Concept to check if a Module provides a GetName() method.</span></div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment"> * @details A Module with name trait must satisfy ModuleTrait and provide:</span></div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment"> * - `static constexpr std::string_view GetName() noexcept`</span></div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="foldopen" id="foldopen00080" data-start="{" data-end="}">
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="concepthelios_1_1app_1_1ModuleWithNameTrait.html">   80</a></span><span class="keyword">concept </span><a class="code hl_concept" href="concepthelios_1_1app_1_1ModuleWithNameTrait.html">ModuleWithNameTrait</a> = <a class="code hl_concept" href="concepthelios_1_1app_1_1ModuleTrait.html">ModuleTrait&lt;T&gt;</a> &amp;&amp; <span class="keyword">requires</span> {</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  { T::GetName() } -&gt; std::same_as&lt;std::string_view&gt;;</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>};</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno"><a class="line" href="namespacehelios_1_1app.html#a6d04077cb9ea6077a44fdfe33f480ac5">   88</a></span><span class="keyword">using </span><a class="code hl_typedef" href="namespacehelios_1_1app.html#a6d04077cb9ea6077a44fdfe33f480ac5">ModuleTypeId</a> = size_t;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00091" data-start="{" data-end="}">
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="namespacehelios_1_1app.html#a96686cda43a3158cb7a69401b8c69821">   91</a></span><span class="keyword">constexpr</span> <a class="code hl_typedef" href="namespacehelios_1_1app.html#a6d04077cb9ea6077a44fdfe33f480ac5">ModuleTypeId</a> <a class="code hl_function" href="namespacehelios_1_1app.html#a96686cda43a3158cb7a69401b8c69821">ModuleTypeIdOf</a>() noexcept {</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  <span class="keywordflow">return</span> ctti::type_index_of&lt;T&gt;().hash();</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>}</div>
 </div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="namespacehelios_1_1app.html#a6d04077cb9ea6077a44fdfe33f480ac5">   84</a></span><span class="keyword">using </span><a class="code hl_typedef" href="namespacehelios_1_1app.html#a6d04077cb9ea6077a44fdfe33f480ac5">ModuleTypeId</a> = size_t;</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="foldopen" id="foldopen00087" data-start="{" data-end="}">
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="namespacehelios_1_1app.html#a96686cda43a3158cb7a69401b8c69821">   87</a></span><span class="keyword">constexpr</span> <a class="code hl_typedef" href="namespacehelios_1_1app.html#a6d04077cb9ea6077a44fdfe33f480ac5">ModuleTypeId</a> <a class="code hl_function" href="namespacehelios_1_1app.html#a96686cda43a3158cb7a69401b8c69821">ModuleTypeIdOf</a>() noexcept {</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  <span class="keywordflow">return</span> ctti::type_index_of&lt;T&gt;().hash();</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>}</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment"></span> </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment"> * @brief Gets the name of a module.</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment"> * @details Returns provided name or type name as fallback.</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment"> * @tparam T Module type</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment"> * @return Module name</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="keyword">template</span> &lt;ModuleTrait T&gt;</div>
+<div class="foldopen" id="foldopen00102" data-start="{" data-end="}">
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="namespacehelios_1_1app.html#ac7595fa02372cd1a63aa3285b5b29aac">  102</a></span>[[nodiscard]] <span class="keyword">constexpr</span> std::string_view <a class="code hl_function" href="namespacehelios_1_1app.html#ac7595fa02372cd1a63aa3285b5b29aac">ModuleNameOf</a>() noexcept {</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_concept" href="concepthelios_1_1app_1_1ModuleWithNameTrait.html">ModuleWithNameTrait&lt;T&gt;</a>) {</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <span class="keywordflow">return</span> T::GetName();</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <span class="keywordflow">return</span> ctti::name_of&lt;T&gt;();</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>  }</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>}</div>
 </div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment"></span> </div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment"> * @brief Gets the name of a module.</span></div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment"> * @details Returns provided name or type name as fallback.</span></div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment"> * @tparam T Module type</span></div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="comment"> * @return Module name</span></div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="keyword">template</span> &lt;ModuleTrait T&gt;</div>
-<div class="foldopen" id="foldopen00098" data-start="{" data-end="}">
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno"><a class="line" href="namespacehelios_1_1app.html#ac7595fa02372cd1a63aa3285b5b29aac">   98</a></span>[[nodiscard]] <span class="keyword">constexpr</span> std::string_view <a class="code hl_function" href="namespacehelios_1_1app.html#ac7595fa02372cd1a63aa3285b5b29aac">ModuleNameOf</a>() noexcept {</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_concept" href="concepthelios_1_1app_1_1ModuleWithNameTrait.html">ModuleWithNameTrait&lt;T&gt;</a>) {</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <span class="keywordflow">return</span> T::GetName();</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="keywordflow">return</span> ctti::name_of&lt;T&gt;();</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>  }</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>}</div>
-</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>}  <span class="comment">// namespace helios::app</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>}  <span class="comment">// namespace helios::app</span></div>
 <div class="ttc" id="aclasshelios_1_1app_1_1App_html"><div class="ttname"><a href="classhelios_1_1app_1_1App.html">helios::app::App</a></div><div class="ttdoc">Application class.</div><div class="ttdef"><b>Definition</b> <a href="app_8hpp_source.html#l00097">app.hpp:97</a></div></div>
 <div class="ttc" id="aclasshelios_1_1app_1_1Module_html"><div class="ttname"><a href="classhelios_1_1app_1_1Module.html">helios::app::Module</a></div><div class="ttdoc">Base class for all modules.</div><div class="ttdef"><b>Definition</b> <a href="module_8hpp_source.html#l00025">module.hpp:25</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1Module_html_a6795daeba4b444da40a22d96989047bc"><div class="ttname"><a href="classhelios_1_1app_1_1Module.html#a6795daeba4b444da40a22d96989047bc">helios::app::Module::Finish</a></div><div class="ttdeci">virtual void Finish(App &amp;app)</div><div class="ttdoc">Finishes adding this module to the App, once all modules are ready.</div><div class="ttdef"><b>Definition</b> <a href="module_8hpp_source.html#l00064">module.hpp:64</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1Module_html_a9473af39324fe86d5f362765b70271fd"><div class="ttname"><a href="classhelios_1_1app_1_1Module.html#a9473af39324fe86d5f362765b70271fd">helios::app::Module::IsReady</a></div><div class="ttdeci">virtual bool IsReady(const App &amp;app) const noexcept</div><div class="ttdoc">Checks if the module is ready for finalization.</div><div class="ttdef"><b>Definition</b> <a href="module_8hpp_source.html#l00052">module.hpp:52</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1Module_html_a0c2fe5bda7ac065b64fb05a0f0316c26"><div class="ttname"><a href="classhelios_1_1app_1_1Module.html#a0c2fe5bda7ac065b64fb05a0f0316c26">helios::app::Module::Finish</a></div><div class="ttdeci">virtual void Finish(App &amp;)</div><div class="ttdoc">Finishes adding this module to the App, once all modules are ready.</div><div class="ttdef"><b>Definition</b> <a href="module_8hpp_source.html#l00044">module.hpp:44</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1Module_html_a0ccb380fb36e7f5a5705baf5b2b3395f"><div class="ttname"><a href="classhelios_1_1app_1_1Module.html#a0ccb380fb36e7f5a5705baf5b2b3395f">helios::app::Module::IsReady</a></div><div class="ttdeci">virtual bool IsReady(const App &amp;) const noexcept</div><div class="ttdoc">Checks if the module is ready for finalization.</div><div class="ttdef"><b>Definition</b> <a href="module_8hpp_source.html#l00061">module.hpp:61</a></div></div>
 <div class="ttc" id="aclasshelios_1_1app_1_1Module_html_acc35d2dad821e5bae8c6b63eb12aa183"><div class="ttname"><a href="classhelios_1_1app_1_1Module.html#acc35d2dad821e5bae8c6b63eb12aa183">helios::app::Module::~Module</a></div><div class="ttdeci">virtual ~Module()=default</div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1Module_html_aea3c7830a39ec52bce85d815ad9380d9"><div class="ttname"><a href="classhelios_1_1app_1_1Module.html#aea3c7830a39ec52bce85d815ad9380d9">helios::app::Module::Destroy</a></div><div class="ttdeci">virtual void Destroy(App &amp;app)</div><div class="ttdoc">Destroys the module and cleans up resources.</div><div class="ttdef"><b>Definition</b> <a href="module_8hpp_source.html#l00042">module.hpp:42</a></div></div>
 <div class="ttc" id="aclasshelios_1_1app_1_1Module_html_aed537f1386a345ceb984f7a19402e1ec"><div class="ttname"><a href="classhelios_1_1app_1_1Module.html#aed537f1386a345ceb984f7a19402e1ec">helios::app::Module::Build</a></div><div class="ttdeci">virtual void Build(App &amp;app)=0</div><div class="ttdoc">Builds the module.</div></div>
-<div class="ttc" id="aconcepthelios_1_1app_1_1ModuleTrait_html"><div class="ttname"><a href="concepthelios_1_1app_1_1ModuleTrait.html">helios::app::ModuleTrait</a></div><div class="ttdoc">Concept to ensure a type is a valid Module.</div><div class="ttdef"><b>Definition</b> <a href="module_8hpp_source.html#l00072">module.hpp:72</a></div></div>
-<div class="ttc" id="aconcepthelios_1_1app_1_1ModuleWithNameTrait_html"><div class="ttname"><a href="concepthelios_1_1app_1_1ModuleWithNameTrait.html">helios::app::ModuleWithNameTrait</a></div><div class="ttdoc">Concept to check if a Module provides a GetName() method.</div><div class="ttdef"><b>Definition</b> <a href="module_8hpp_source.html#l00080">module.hpp:80</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1Module_html_aed659ed047e7a0e805d2036b185a1e93"><div class="ttname"><a href="classhelios_1_1app_1_1Module.html#aed659ed047e7a0e805d2036b185a1e93">helios::app::Module::Destroy</a></div><div class="ttdeci">virtual void Destroy(App &amp;)</div><div class="ttdoc">Destroys the module and cleans up resources.</div><div class="ttdef"><b>Definition</b> <a href="module_8hpp_source.html#l00051">module.hpp:51</a></div></div>
+<div class="ttc" id="aconcepthelios_1_1app_1_1DefaultConstructibleModuleTrait_html"><div class="ttname"><a href="concepthelios_1_1app_1_1DefaultConstructibleModuleTrait.html">helios::app::DefaultConstructibleModuleTrait</a></div><div class="ttdoc">Concept for modules that can be default constructed.</div><div class="ttdef"><b>Definition</b> <a href="module_8hpp_source.html#l00076">module.hpp:76</a></div></div>
+<div class="ttc" id="aconcepthelios_1_1app_1_1ModuleTrait_html"><div class="ttname"><a href="concepthelios_1_1app_1_1ModuleTrait.html">helios::app::ModuleTrait</a></div><div class="ttdoc">Concept to ensure a type is a valid Module.</div><div class="ttdef"><b>Definition</b> <a href="module_8hpp_source.html#l00069">module.hpp:69</a></div></div>
+<div class="ttc" id="aconcepthelios_1_1app_1_1ModuleWithNameTrait_html"><div class="ttname"><a href="concepthelios_1_1app_1_1ModuleWithNameTrait.html">helios::app::ModuleWithNameTrait</a></div><div class="ttdoc">Concept to check if a Module provides a GetName() method.</div><div class="ttdef"><b>Definition</b> <a href="module_8hpp_source.html#l00084">module.hpp:84</a></div></div>
 <div class="ttc" id="acore__pch_8hpp_html"><div class="ttname"><a href="core__pch_8hpp.html">core_pch.hpp</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1app_html"><div class="ttname"><a href="namespacehelios_1_1app.html">helios::app</a></div><div class="ttdef"><b>Definition</b> <a href="access__policy_8hpp_source.html#l00017">access_policy.hpp:17</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1app_html_a6d04077cb9ea6077a44fdfe33f480ac5"><div class="ttname"><a href="namespacehelios_1_1app.html#a6d04077cb9ea6077a44fdfe33f480ac5">helios::app::ModuleTypeId</a></div><div class="ttdeci">size_t ModuleTypeId</div><div class="ttdef"><b>Definition</b> <a href="module_8hpp_source.html#l00084">module.hpp:84</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1app_html_a96686cda43a3158cb7a69401b8c69821"><div class="ttname"><a href="namespacehelios_1_1app.html#a96686cda43a3158cb7a69401b8c69821">helios::app::ModuleTypeIdOf</a></div><div class="ttdeci">constexpr ModuleTypeId ModuleTypeIdOf() noexcept</div><div class="ttdef"><b>Definition</b> <a href="module_8hpp_source.html#l00087">module.hpp:87</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1app_html_ac7595fa02372cd1a63aa3285b5b29aac"><div class="ttname"><a href="namespacehelios_1_1app.html#ac7595fa02372cd1a63aa3285b5b29aac">helios::app::ModuleNameOf</a></div><div class="ttdeci">constexpr std::string_view ModuleNameOf() noexcept</div><div class="ttdoc">Gets the name of a module.</div><div class="ttdef"><b>Definition</b> <a href="module_8hpp_source.html#l00098">module.hpp:98</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1app_html_a6d04077cb9ea6077a44fdfe33f480ac5"><div class="ttname"><a href="namespacehelios_1_1app.html#a6d04077cb9ea6077a44fdfe33f480ac5">helios::app::ModuleTypeId</a></div><div class="ttdeci">size_t ModuleTypeId</div><div class="ttdef"><b>Definition</b> <a href="module_8hpp_source.html#l00088">module.hpp:88</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1app_html_a96686cda43a3158cb7a69401b8c69821"><div class="ttname"><a href="namespacehelios_1_1app.html#a96686cda43a3158cb7a69401b8c69821">helios::app::ModuleTypeIdOf</a></div><div class="ttdeci">constexpr ModuleTypeId ModuleTypeIdOf() noexcept</div><div class="ttdef"><b>Definition</b> <a href="module_8hpp_source.html#l00091">module.hpp:91</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1app_html_ac7595fa02372cd1a63aa3285b5b29aac"><div class="ttname"><a href="namespacehelios_1_1app.html#ac7595fa02372cd1a63aa3285b5b29aac">helios::app::ModuleNameOf</a></div><div class="ttdeci">constexpr std::string_view ModuleNameOf() noexcept</div><div class="ttdoc">Gets the name of a module.</div><div class="ttdef"><b>Definition</b> <a href="module_8hpp_source.html#l00102">module.hpp:102</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.1+ with doxygen-awesome-css -->

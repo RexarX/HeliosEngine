@@ -3,6 +3,7 @@ var concepts =
     [ "helios", "namespacehelios.html", [
       [ "app", "namespacehelios_1_1app.html", [
         [ "ModuleTrait", "concepthelios_1_1app_1_1ModuleTrait.html", null ],
+        [ "DefaultConstructibleModuleTrait", "concepthelios_1_1app_1_1DefaultConstructibleModuleTrait.html", null ],
         [ "ModuleWithNameTrait", "concepthelios_1_1app_1_1ModuleWithNameTrait.html", null ],
         [ "ScheduleTrait", "concepthelios_1_1app_1_1ScheduleTrait.html", null ],
         [ "ScheduleWithNameTrait", "concepthelios_1_1app_1_1ScheduleWithNameTrait.html", null ],
@@ -86,6 +87,7 @@ var concepts =
         [ "ReverseAdapterRequirements", "concepthelios_1_1utils_1_1ReverseAdapterRequirements.html", null ],
         [ "JoinAdapterRequirements", "concepthelios_1_1utils_1_1JoinAdapterRequirements.html", null ],
         [ "SlideAdapterRequirements", "concepthelios_1_1utils_1_1SlideAdapterRequirements.html", null ],
+        [ "ConcatAdapterRequirements", "concepthelios_1_1utils_1_1ConcatAdapterRequirements.html", null ],
         [ "StrideAdapterRequirements", "concepthelios_1_1utils_1_1StrideAdapterRequirements.html", null ],
         [ "ZipAdapterRequirements", "concepthelios_1_1utils_1_1ZipAdapterRequirements.html", null ]
       ] ],

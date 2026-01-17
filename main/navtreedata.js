@@ -147,58 +147,60 @@ var NAVTREE =
       ] ],
       [ "Creating Your Own Module", "md_src_2modules_2example_2README.html#autotoc_md58", null ]
     ] ],
-    [ "Creating Custom Modules", "md_docs_2guides_2creating-modules.html", [
-      [ "Table of Contents", "md_docs_2guides_2creating-modules.html#autotoc_md114", null ],
-      [ "Overview", "md_docs_2guides_2creating-modules.html#autotoc_md116", null ],
-      [ "Module Structure", "md_docs_2guides_2creating-modules.html#autotoc_md117", [
-        [ "File Descriptions", "md_docs_2guides_2creating-modules.html#autotoc_md118", null ]
-      ] ],
-      [ "Quick Start", "md_docs_2guides_2creating-modules.html#autotoc_md120", null ],
-      [ "Step-by-Step Guide", "md_docs_2guides_2creating-modules.html#autotoc_md122", [
-        [ "1. Create Directory Structure", "md_docs_2guides_2creating-modules.html#autotoc_md123", null ],
-        [ "2. Create Module.cmake (Optional)", "md_docs_2guides_2creating-modules.html#autotoc_md124", null ],
-        [ "3. Create CMakeLists.txt", "md_docs_2guides_2creating-modules.html#autotoc_md125", null ],
-        [ "4. Implement Your Module", "md_docs_2guides_2creating-modules.html#autotoc_md126", null ]
-      ] ],
-      [ "CMake Functions Reference", "md_docs_2guides_2creating-modules.html#autotoc_md128", [
-        [ "helios_register_module", "md_docs_2guides_2creating-modules.html#autotoc_md129", null ],
-        [ "helios_add_module", "md_docs_2guides_2creating-modules.html#autotoc_md130", null ],
-        [ "helios_define_module", "md_docs_2guides_2creating-modules.html#autotoc_md131", null ]
-      ] ],
-      [ "Module Dependencies", "md_docs_2guides_2creating-modules.html#autotoc_md133", [
-        [ "Depending on Other Helios Modules", "md_docs_2guides_2creating-modules.html#autotoc_md134", null ],
-        [ "Depending on External Libraries", "md_docs_2guides_2creating-modules.html#autotoc_md135", null ],
-        [ "Conditional Dependencies", "md_docs_2guides_2creating-modules.html#autotoc_md136", null ]
-      ] ],
-      [ "Build Options", "md_docs_2guides_2creating-modules.html#autotoc_md138", [
-        [ "Using Build Options", "md_docs_2guides_2creating-modules.html#autotoc_md139", null ],
-        [ "Querying Module Status", "md_docs_2guides_2creating-modules.html#autotoc_md140", null ]
-      ] ],
-      [ "Best Practices", "md_docs_2guides_2creating-modules.html#autotoc_md142", [
-        [ "1. Use Consistent Naming", "md_docs_2guides_2creating-modules.html#autotoc_md143", null ],
-        [ "2. Organize Headers Properly", "md_docs_2guides_2creating-modules.html#autotoc_md144", null ],
-        [ "3. Minimize Public Dependencies", "md_docs_2guides_2creating-modules.html#autotoc_md145", null ],
-        [ "4. Document Your Module", "md_docs_2guides_2creating-modules.html#autotoc_md146", null ],
-        [ "5. Write Tests", "md_docs_2guides_2creating-modules.html#autotoc_md147", null ],
-        [ "6. Use Precompiled Headers for Large Modules", "md_docs_2guides_2creating-modules.html#autotoc_md148", null ]
-      ] ],
-      [ "Examples", "md_docs_2guides_2creating-modules.html#autotoc_md150", [
-        [ "Minimal Module", "md_docs_2guides_2creating-modules.html#autotoc_md151", null ],
-        [ "Module with Dependencies", "md_docs_2guides_2creating-modules.html#autotoc_md152", null ],
-        [ "Header-Only Module", "md_docs_2guides_2creating-modules.html#autotoc_md153", null ],
-        [ "Module with Optional Features", "md_docs_2guides_2creating-modules.html#autotoc_md154", null ]
-      ] ],
-      [ "Troubleshooting", "md_docs_2guides_2creating-modules.html#autotoc_md156", [
-        [ "Module Not Found", "md_docs_2guides_2creating-modules.html#autotoc_md157", null ],
-        [ "Dependency Errors", "md_docs_2guides_2creating-modules.html#autotoc_md158", null ],
-        [ "Build Order Issues", "md_docs_2guides_2creating-modules.html#autotoc_md159", null ]
-      ] ],
-      [ "See Also", "md_docs_2guides_2creating-modules.html#autotoc_md161", null ]
+    [ "creating-modules", "md_docs_2guides_2creating-modules.html", [
+      [ "Creating Custom Modules", "md_docs_2guides_2creating-modules.html#autotoc_md113", [
+        [ "Table of Contents", "md_docs_2guides_2creating-modules.html#autotoc_md114", null ],
+        [ "Overview", "md_docs_2guides_2creating-modules.html#autotoc_md116", null ],
+        [ "Module Structure", "md_docs_2guides_2creating-modules.html#autotoc_md117", [
+          [ "File Descriptions", "md_docs_2guides_2creating-modules.html#autotoc_md118", null ]
+        ] ],
+        [ "Quick Start", "md_docs_2guides_2creating-modules.html#autotoc_md120", null ],
+        [ "Step-by-Step Guide", "md_docs_2guides_2creating-modules.html#autotoc_md122", [
+          [ "1. Create Directory Structure", "md_docs_2guides_2creating-modules.html#autotoc_md123", null ],
+          [ "2. Create Module.cmake (Optional)", "md_docs_2guides_2creating-modules.html#autotoc_md124", null ],
+          [ "3. Create CMakeLists.txt", "md_docs_2guides_2creating-modules.html#autotoc_md125", null ],
+          [ "4. Implement Your Module", "md_docs_2guides_2creating-modules.html#autotoc_md126", null ]
+        ] ],
+        [ "CMake Functions Reference", "md_docs_2guides_2creating-modules.html#autotoc_md128", [
+          [ "helios_register_module", "md_docs_2guides_2creating-modules.html#autotoc_md129", null ],
+          [ "helios_add_module", "md_docs_2guides_2creating-modules.html#autotoc_md130", null ],
+          [ "helios_define_module", "md_docs_2guides_2creating-modules.html#autotoc_md131", null ]
+        ] ],
+        [ "Module Dependencies", "md_docs_2guides_2creating-modules.html#autotoc_md133", [
+          [ "Depending on Other Helios Modules", "md_docs_2guides_2creating-modules.html#autotoc_md134", null ],
+          [ "Depending on External Libraries", "md_docs_2guides_2creating-modules.html#autotoc_md135", null ],
+          [ "Conditional Dependencies", "md_docs_2guides_2creating-modules.html#autotoc_md136", null ]
+        ] ],
+        [ "Build Options", "md_docs_2guides_2creating-modules.html#autotoc_md138", [
+          [ "Using Build Options", "md_docs_2guides_2creating-modules.html#autotoc_md139", null ],
+          [ "Querying Module Status", "md_docs_2guides_2creating-modules.html#autotoc_md140", null ]
+        ] ],
+        [ "Best Practices", "md_docs_2guides_2creating-modules.html#autotoc_md142", [
+          [ "1. Use Consistent Naming", "md_docs_2guides_2creating-modules.html#autotoc_md143", null ],
+          [ "2. Organize Headers Properly", "md_docs_2guides_2creating-modules.html#autotoc_md144", null ],
+          [ "3. Minimize Public Dependencies", "md_docs_2guides_2creating-modules.html#autotoc_md145", null ],
+          [ "4. Document Your Module", "md_docs_2guides_2creating-modules.html#autotoc_md146", null ],
+          [ "5. Write Tests", "md_docs_2guides_2creating-modules.html#autotoc_md147", null ],
+          [ "6. Use Precompiled Headers for Large Modules", "md_docs_2guides_2creating-modules.html#autotoc_md148", null ]
+        ] ],
+        [ "Examples", "md_docs_2guides_2creating-modules.html#autotoc_md150", [
+          [ "Minimal Module", "md_docs_2guides_2creating-modules.html#autotoc_md151", null ],
+          [ "Module with Dependencies", "md_docs_2guides_2creating-modules.html#autotoc_md152", null ],
+          [ "Header-Only Module", "md_docs_2guides_2creating-modules.html#autotoc_md153", null ],
+          [ "Module with Optional Features", "md_docs_2guides_2creating-modules.html#autotoc_md154", null ]
+        ] ],
+        [ "Troubleshooting", "md_docs_2guides_2creating-modules.html#autotoc_md156", [
+          [ "Module Not Found", "md_docs_2guides_2creating-modules.html#autotoc_md157", null ],
+          [ "Dependency Errors", "md_docs_2guides_2creating-modules.html#autotoc_md158", null ],
+          [ "Build Order Issues", "md_docs_2guides_2creating-modules.html#autotoc_md159", null ]
+        ] ],
+        [ "See Also", "md_docs_2guides_2creating-modules.html#autotoc_md161", null ]
+      ] ]
     ] ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
-        [ "All", "namespacemembers.html", null ],
+        [ "All", "namespacemembers.html", "namespacemembers_dup" ],
         [ "Functions", "namespacemembers_func.html", null ],
         [ "Variables", "namespacemembers_vars.html", null ],
         [ "Typedefs", "namespacemembers_type.html", null ],
@@ -222,7 +224,6 @@ var NAVTREE =
       [ "File List", "files.html", "files_dup" ],
       [ "File Members", "globals.html", [
         [ "All", "globals.html", null ],
-        [ "Functions", "globals_func.html", null ],
         [ "Macros", "globals_defs.html", null ]
       ] ]
     ] ],
@@ -234,29 +235,30 @@ var NAVTREEINDEX =
 [
 "Library-example.html",
 "classhelios_1_1Timer.html",
-"classhelios_1_1app_1_1App.html#ad308effb663540132ceacdba98d3fa3f",
-"classhelios_1_1app_1_1SubApp.html#a9e15c7dc905300f48ee7422061dcc726",
-"classhelios_1_1app_1_1details_1_1Scheduler.html#a132fc6391fd437468ea0af8ac949f27d",
-"classhelios_1_1async_1_1SubTaskGraph.html#a6a6f083993c8d7a891bc87c44e178b1f",
-"classhelios_1_1container_1_1BasicStaticString.html#a4c924e0eaf4d7230f18051f245f1c21c",
-"classhelios_1_1container_1_1SparseSet.html#a7b5c4e92274e0c7e91767777e512c3a7",
-"classhelios_1_1ecs_1_1BasicQueryWithEntity.html#abb8fb6ed4fd85805ad03a663d9cd7fc8",
-"classhelios_1_1ecs_1_1EventReader.html#a8dce10c72ebda782d4131976cd0dca86",
-"classhelios_1_1ecs_1_1details_1_1AddComponentCmd.html#a5bcf51c475e6d5abe79e5cb32fa957cd",
-"classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#a710f5c65fd37d21e54e64eb83a0338b1",
-"classhelios_1_1ecs_1_1details_1_1EventQueue.html#af8eb8855a10cc64dd87df034047217b7",
-"classhelios_1_1ecs_1_1details_1_1ResourceStorage.html#a77f4f85aaefeac7f064ff3c0abe921f5",
-"classhelios_1_1memory_1_1ArenaAllocator.html#a0ae1bb3f11fb623257dab7ad145c3eef",
-"classhelios_1_1memory_1_1NFrameAllocator.html#aecf998c923d0fd7eac5a662aae33262b",
-"classhelios_1_1utils_1_1EnumerateAdapter.html#a482628bbe36d777dd2e23b29fe67bc62",
-"classhelios_1_1utils_1_1SkipWhileAdapter.html",
-"concepthelios_1_1ecs_1_1ResourceWithNameTrait.html",
-"functional__adapters_8hpp.html#aaaff5718ee2a83211c03c29e78cc7f46",
-"md_src_2modules_2example_2README.html#autotoc_md58",
-"namespacespdlog.html",
-"structhelios_1_1app_1_1PostCleanUp.html#a50b5b3769692a1d84f576c1bebb4c1bc",
-"structhelios_1_1details_1_1TupleToFunctionSignature_3_01std_1_1tuple_3_01R_00_01Args_8_8_8_01_4_01_4.html",
-"sub__app_8hpp_source.html"
+"classhelios_1_1app_1_1App.html#ad00f452ada02721db7eae955b0eba1f5",
+"classhelios_1_1app_1_1SubApp.html#a97e261a8fdad2b345bf2bb019ce96aa5",
+"classhelios_1_1app_1_1details_1_1ScheduleExecutor.html#afae39b7d3dde1aa34de8e70a3c0ec040",
+"classhelios_1_1async_1_1SubTaskGraph.html#a61b89f007aca8810fce649b351874b32",
+"classhelios_1_1container_1_1BasicStaticString.html#a45080898c8dd518da06ac2181ab5e1cd",
+"classhelios_1_1container_1_1SparseSet.html#a7576763f28bd88882b37844a8adc4281",
+"classhelios_1_1ecs_1_1BasicQueryWithEntity.html#ab44e72f4411e116eaca5e31977ac8adc",
+"classhelios_1_1ecs_1_1EventReader.html#a877068c4eafce5231660a5606ced9724",
+"classhelios_1_1ecs_1_1details_1_1AddComponentCmd.html#a55151e390c7d96d0c4fc673252ccc1e9",
+"classhelios_1_1ecs_1_1details_1_1ComponentStorage.html#a5b21df2c686e7859de700c6b6f3abfad",
+"classhelios_1_1ecs_1_1details_1_1EventQueue.html#af38bf78014d3593b7004d8ca42e9c39d",
+"classhelios_1_1ecs_1_1details_1_1ResourceStorage.html#a4ddaa0c549600ba3530d2ac535c1f9ba",
+"classhelios_1_1memory_1_1ArenaAllocator.html",
+"classhelios_1_1memory_1_1NFrameAllocator.html#ae7fe715f5eba83236e7b1d86d65b8300",
+"classhelios_1_1utils_1_1DynamicLibrary.html#a4076825b05ec3879b5177bb37bff236d",
+"classhelios_1_1utils_1_1MapAdapter.html#a14e07d6291a03d265feed573a0e37195",
+"classhelios_1_1utils_1_1StepByAdapter.html#a7ad930037fb9e06f61f0d11a61f55af2",
+"concepthelios_1_1ecs_1_1ComponentWithNameTrait.html",
+"functional__adapters_8hpp.html",
+"md_src_2core_2README.html#autotoc_md36",
+"namespacehelios_1_1utils.html#a2497009418a7ac12677b3dfccf2afb90",
+"structhelios_1_1app_1_1CleanUp.html#af0c9538f30e592f31ce723922c502b66",
+"structhelios_1_1app_1_1details_1_1SystemOrdering.html",
+"structhelios_1_1memory_1_1AllocatorStats.html#a313c2b1c8f3b7478190b86cb7b53c869"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

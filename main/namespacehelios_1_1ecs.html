@@ -343,8 +343,8 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:ab48aaed34af66c40a97690ad39f727f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Policy for event clearing behavior.  <a href="namespacehelios_1_1ecs.html#ab48aaed34af66c40a97690ad39f727f4">More...</a><br /></td></tr>
 <tr class="separator:ab48aaed34af66c40a97690ad39f727f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae984f0803649a1da782a858e73401658" id="r_ae984f0803649a1da782a858e73401658"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1ecs.html#ae984f0803649a1da782a858e73401658">ShutdownExitCode</a> : uint8_t { <a class="el" href="namespacehelios_1_1ecs.html#ae984f0803649a1da782a858e73401658a505a83f220c02df2f85c3810cd9ceb38">Success</a> = 0
-, <a class="el" href="namespacehelios_1_1ecs.html#ae984f0803649a1da782a858e73401658ae139a585510a502bbf1841cf589f5086">Failure</a> = 1
+<tr class="memitem:ae984f0803649a1da782a858e73401658" id="r_ae984f0803649a1da782a858e73401658"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1ecs.html#ae984f0803649a1da782a858e73401658">ShutdownExitCode</a> : uint8_t { <a class="el" href="namespacehelios_1_1ecs.html#ae984f0803649a1da782a858e73401658a8c632159fa131f09d04f94e3cbcd8782">kSuccess</a> = 0
+, <a class="el" href="namespacehelios_1_1ecs.html#ae984f0803649a1da782a858e73401658a45d5f642bcbee805302334d856c54259">kFailure</a> = 1
  }</td></tr>
 <tr class="memdesc:ae984f0803649a1da782a858e73401658"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exit code for application shutdown.  <a href="namespacehelios_1_1ecs.html#ae984f0803649a1da782a858e73401658">More...</a><br /></td></tr>
 <tr class="separator:ae984f0803649a1da782a858e73401658"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -684,9 +684,9 @@ template&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb
 
 <p>Exit code for application shutdown. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ae984f0803649a1da782a858e73401658a505a83f220c02df2f85c3810cd9ceb38" name="ae984f0803649a1da782a858e73401658a505a83f220c02df2f85c3810cd9ceb38"></a>Success&#160;</td><td class="fielddoc"><p>Normal shutdown. </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ae984f0803649a1da782a858e73401658a8c632159fa131f09d04f94e3cbcd8782" name="ae984f0803649a1da782a858e73401658a8c632159fa131f09d04f94e3cbcd8782"></a>kSuccess&#160;</td><td class="fielddoc"><p>Normal shutdown. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="ae984f0803649a1da782a858e73401658ae139a585510a502bbf1841cf589f5086" name="ae984f0803649a1da782a858e73401658ae139a585510a502bbf1841cf589f5086"></a>Failure&#160;</td><td class="fielddoc"><p>Shutdown due to error. </p>
+<tr><td class="fieldname"><a id="ae984f0803649a1da782a858e73401658a45d5f642bcbee805302334d856c54259" name="ae984f0803649a1da782a858e73401658a45d5f642bcbee805302334d856c54259"></a>kFailure&#160;</td><td class="fielddoc"><p>Shutdown due to error. </p>
 </td></tr>
 </table>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2app_2runners_8hpp-example.html#a4">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/app/runners.hpp</a>, and <a class="el" href="_2home_2runner_2work_2HeliosEngine_2HeliosEngine_2src_2core_2include_2helios_2core_2ecs_2events_2builtin_events_8hpp-example.html#a8">/home/runner/work/HeliosEngine/HeliosEngine/src/core/include/helios/core/ecs/events/builtin_events.hpp</a>.</dd>
@@ -694,8 +694,8 @@ template&lt;<a class="el" href="namespacehelios_1_1ecs.html#af0384de48d847585fcb
 
 <p class="definition">Definition at line <a class="el" href="builtin__events_8hpp_source.html#l00060">60</a> of file <a class="el" href="builtin__events_8hpp_source.html">builtin_events.hpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   60</span>                            : <a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">uint8_t</a> {</div>
-<div class="line"><span class="lineno">   61</span>  Success = 0,  <span class="comment">///&lt; Normal shutdown</span></div>
-<div class="line"><span class="lineno">   62</span>  Failure = 1,  <span class="comment">///&lt; Shutdown due to error</span></div>
+<div class="line"><span class="lineno">   61</span>  kSuccess = 0,  <span class="comment">///&lt; Normal shutdown</span></div>
+<div class="line"><span class="lineno">   62</span>  kFailure = 1,  <span class="comment">///&lt; Shutdown due to error</span></div>
 <div class="line"><span class="lineno">   63</span>};</div>
 </div><!-- fragment -->
 </div>

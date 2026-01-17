@@ -6,7 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=11" />
         <meta name="generator" content="Doxygen 1.9.8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Helios Engine: Creating Custom Modules</title>
+        <title>Helios Engine: creating-modules</title>
         <!--BEGIN PROJECT_ICON-->
         <!--<link rel="icon" href="$projecticon" type="image/x-icon" />-->
         <link rel="icon" href="favicon.ico" type="image/x-icon" />
@@ -163,39 +163,44 @@ $(document).ready(function(){initNavTree('md_docs_2guides_2creating-modules.html
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Creating Custom Modules</div></div>
+  <div class="headertitle"><div class="title">creating-modules</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md113"></a> This guide explains how to create custom modules for Helios Engine. Modules are self-contained libraries that extend the engine's functionality while maintaining a consistent build configuration and integration with the core ECS system.</p>
-<h1><a class="anchor" id="autotoc_md114"></a>
-Table of Contents</h1>
+<div class="textblock"><p><a class="anchor" id="creating-modules-top"></a></p>
+<h1><a class="anchor" id="autotoc_md113"></a>
+Creating Custom Modules</h1>
+<p>This guide explains how to create custom modules for Helios Engine. Modules are self-contained libraries that extend the engine's functionality while maintaining a consistent build configuration and integration with the core ECS system.</p>
+<p><a class="anchor" id="table-of-contents"></a></p>
+<h2><a class="anchor" id="autotoc_md114"></a>
+Table of Contents</h2>
 <ul>
-<li><a class="el" href="md_src_2core_2README.html#overview">Overview</a></li>
-<li>Module Structure</li>
+<li><a class="el" href="md_docs_2guides_2creating-modules.html#overview">Overview</a></li>
+<li><a class="el" href="md_docs_2guides_2creating-modules.html#module-structure">Module Structure</a></li>
 <li><a class="el" href="index.html#quick-start">Quick Start</a></li>
-<li>Step-by-Step Guide<ul>
+<li><a class="el" href="md_docs_2guides_2creating-modules.html#step-by-step-guide">Step-by-Step Guide</a><ul>
 <li>1. Create Directory Structure</li>
 <li>2. Create Module.cmake (Optional)</li>
 <li>3. Create CMakeLists.txt</li>
 <li>4. Implement Your Module</li>
 </ul>
 </li>
-<li>CMake Functions Reference<ul>
-<li>helios_register_module</li>
-<li>helios_add_module</li>
-<li>helios_define_module</li>
+<li><a class="el" href="md_docs_2guides_2creating-modules.html#cmake-functions-reference">CMake Functions Reference</a><ul>
+<li><a class="el" href="md_docs_2guides_2creating-modules.html#helios_register_module">helios_register_module</a></li>
+<li><a class="el" href="md_docs_2guides_2creating-modules.html#helios_add_module">helios_add_module</a></li>
+<li><a class="el" href="md_docs_2guides_2creating-modules.html#helios_define_module">helios_define_module</a></li>
 </ul>
 </li>
-<li>Module Dependencies</li>
+<li><a class="el" href="md_docs_2guides_2creating-modules.html#module-dependencies">Module Dependencies</a></li>
 <li><a class="el" href="index.html#build-options">Build Options</a></li>
-<li><a class="el" href="md_src_2core_2README.html#best-practices">Best Practices</a></li>
-<li>Examples</li>
-<li>Troubleshooting</li>
-<li>See Also</li>
+<li><a class="el" href="md_docs_2guides_2creating-modules.html#best-practices">Best Practices</a></li>
+<li><a class="el" href="md_docs_2guides_2creating-modules.html#examples">Examples</a></li>
+<li><a class="el" href="md_docs_2guides_2creating-modules.html#troubleshooting">Troubleshooting</a></li>
+<li><a class="el" href="md_docs_2guides_2creating-modules.html#see-also">See Also</a></li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md116"></a>
-Overview</h1>
+<p><a class="anchor" id="overview"></a></p>
+<h2><a class="anchor" id="autotoc_md116"></a>
+Overview</h2>
 <p>Helios Engine uses a modular architecture where functionality is organized into separate, independently buildable modules. Each module:</p>
 <ul>
 <li>Has its own build option (<code>HELIOS_BUILD_{NAME}_MODULE</code>)</li>
@@ -203,8 +208,10 @@ Overview</h1>
 <li>Follows a standardized directory structure</li>
 <li>Integrates automatically with the engine's build system</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md117"></a>
-Module Structure</h1>
+<p><a class="el" href="md_docs_2guides_2creating-modules.html#creating-modules-top">↑ Back to Top</a></p>
+<p><a class="anchor" id="module-structure"></a></p>
+<h2><a class="anchor" id="autotoc_md117"></a>
+Module Structure</h2>
 <p>Every module follows this directory structure:</p>
 <div class="fragment"><div class="line">src/modules/{module_name}/</div>
 <div class="line">├── Module.cmake              # Optional: Module registration</div>
@@ -217,8 +224,8 @@ Module Structure</h1>
 <div class="line">└── src/</div>
 <div class="line">    ├── {module_name}.cpp</div>
 <div class="line">    └── ...</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md118"></a>
-File Descriptions</h2>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md118"></a>
+File Descriptions</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">File   </th><th class="markdownTableHeadNone">Required   </th><th class="markdownTableHeadNone">Description    </th></tr>
@@ -231,9 +238,11 @@ File Descriptions</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><code>src/</code>   </td><td class="markdownTableBodyNone">Recommended   </td><td class="markdownTableBodyNone">Private implementation files   </td></tr>
 </table>
+<p><a class="el" href="md_docs_2guides_2creating-modules.html#creating-modules-top">↑ Back to Top</a></p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md120"></a>
-Quick Start</h1>
+<p><a class="anchor" id="quick-start"></a></p>
+<h2><a class="anchor" id="autotoc_md120"></a>
+Quick Start</h2>
 <p>For a simple module, you can use the convenience function <code>helios_define_module()</code> which handles both registration and creation:</p>
 <div class="fragment"><div class="line"># src/modules/my_module/CMakeLists.txt</div>
 <div class="line"> </div>
@@ -255,14 +264,18 @@ Quick Start</h1>
 <li>Configures all standard settings (C++23, warnings, etc.)</li>
 <li>Links to <code>helios::core</code> automatically</li>
 </ol>
+<p><a class="el" href="md_docs_2guides_2creating-modules.html#creating-modules-top">↑ Back to Top</a></p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md122"></a>
-Step-by-Step Guide</h1>
-<h2><a class="anchor" id="autotoc_md123"></a>
-1. Create Directory Structure</h2>
+<p><a class="anchor" id="step-by-step-guide"></a></p>
+<h2><a class="anchor" id="autotoc_md122"></a>
+Step-by-Step Guide</h2>
+<p><a class="anchor" id="1-create-directory-structure"></a></p>
+<h3><a class="anchor" id="autotoc_md123"></a>
+1. Create Directory Structure</h3>
 <div class="fragment"><div class="line">mkdir -p src/modules/my_module/{include/helios/my_module,src}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md124"></a>
-2. Create Module.cmake (Optional)</h2>
+</div><!-- fragment --><p><a class="anchor" id="2-create-modulecmake-optional"></a></p>
+<h3><a class="anchor" id="autotoc_md124"></a>
+2. Create Module.cmake (Optional)</h3>
 <p>The <code>Module.cmake</code> file is used for early registration of the module. This is useful when:</p>
 <ul>
 <li>You have complex dependencies that need to be resolved before building</li>
@@ -279,8 +292,9 @@ Step-by-Step Guide</h1>
 <div class="line">    OPTIONAL_DEPENDS audio      # Can use audio if available</div>
 <div class="line">    EXTERNAL_DEPENDS glfw       # Requires external GLFW library</div>
 <div class="line">)</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md125"></a>
-3. Create CMakeLists.txt</h2>
+</div><!-- fragment --><p><a class="anchor" id="3-create-cmakeliststxt"></a></p>
+<h3><a class="anchor" id="autotoc_md125"></a>
+3. Create CMakeLists.txt</h3>
 <div class="fragment"><div class="line"># src/modules/my_module/CMakeLists.txt</div>
 <div class="line"> </div>
 <div class="line"># If not using Module.cmake, register here (optional but recommended)</div>
@@ -321,8 +335,9 @@ Step-by-Step Guide</h1>
 <div class="line">    # Optional: Precompiled header</div>
 <div class="line">    # PCH include/helios/my_module/my_module_pch.hpp</div>
 <div class="line">)</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md126"></a>
-4. Implement Your Module</h2>
+</div><!-- fragment --><p><a class="anchor" id="4-implement-your-module"></a></p>
+<h3><a class="anchor" id="autotoc_md126"></a>
+4. Implement Your Module</h3>
 <p>Create the header file:</p>
 <div class="fragment"><div class="line"><span class="comment">// include/helios/my_module/my_module.hpp</span></div>
 <div class="line"> </div>
@@ -385,11 +400,14 @@ Step-by-Step Guide</h1>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line">}  <span class="comment">// namespace helios::my_module</span></div>
-</div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md128"></a>
-CMake Functions Reference</h1>
-<h2><a class="anchor" id="autotoc_md129"></a>
-helios_register_module</h2>
+</div><!-- fragment --><p><a class="el" href="md_docs_2guides_2creating-modules.html#creating-modules-top">↑ Back to Top</a></p>
+<hr  />
+<p><a class="anchor" id="cmake-functions-reference"></a></p>
+<h2><a class="anchor" id="autotoc_md128"></a>
+CMake Functions Reference</h2>
+<p><a class="anchor" id="helios_register_module"></a></p>
+<h3><a class="anchor" id="autotoc_md129"></a>
+helios_register_module</h3>
 <p>Registers a module and creates its build option. Call this before <code>helios_add_module()</code> or use <code>Module.cmake</code>.</p>
 <div class="fragment"><div class="line">helios_register_module(</div>
 <div class="line">    NAME &lt;name&gt;                     # Required: Module name (e.g., &quot;window&quot;)</div>
@@ -405,8 +423,9 @@ helios_register_module</h2>
 <li>Stores metadata for dependency resolution</li>
 <li>Adds module to the registered modules list</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md130"></a>
-helios_add_module</h2>
+<p><a class="anchor" id="helios_add_module"></a></p>
+<h3><a class="anchor" id="autotoc_md130"></a>
+helios_add_module</h3>
 <p>Creates the module library target with full configuration.</p>
 <div class="fragment"><div class="line">helios_add_module(</div>
 <div class="line">    NAME &lt;name&gt;                          # Required: Module name</div>
@@ -444,8 +463,9 @@ helios_add_module</h2>
 <li>Target: <code>helios_module_{name}</code></li>
 <li>Alias: <code>helios::module::{name}</code></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md131"></a>
-helios_define_module</h2>
+<p><a class="anchor" id="helios_define_module"></a></p>
+<h3><a class="anchor" id="autotoc_md131"></a>
+helios_define_module</h3>
 <p>Convenience wrapper that combines registration and creation.</p>
 <div class="fragment"><div class="line">helios_define_module(</div>
 <div class="line">    NAME &lt;name&gt;</div>
@@ -459,11 +479,13 @@ helios_define_module</h2>
 <div class="line">    EXTERNAL_DEPENDS &lt;packages...&gt;</div>
 <div class="line">    HEADER_ONLY | STATIC_ONLY | SHARED_ONLY</div>
 <div class="line">)</div>
-</div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md133"></a>
-Module Dependencies</h1>
-<h2><a class="anchor" id="autotoc_md134"></a>
-Depending on Other Helios Modules</h2>
+</div><!-- fragment --><p><a class="el" href="md_docs_2guides_2creating-modules.html#creating-modules-top">↑ Back to Top</a></p>
+<hr  />
+<p><a class="anchor" id="module-dependencies"></a></p>
+<h2><a class="anchor" id="autotoc_md133"></a>
+Module Dependencies</h2>
+<h3><a class="anchor" id="autotoc_md134"></a>
+Depending on Other Helios Modules</h3>
 <p>Use <code>MODULE_DEPENDENCIES</code> to depend on other Helios modules:</p>
 <div class="fragment"><div class="line">helios_add_module(</div>
 <div class="line">    NAME renderer</div>
@@ -478,8 +500,8 @@ Depending on Other Helios Modules</h2>
 <li>Link to <code>helios::module::window</code> and <code>helios::module::assets</code></li>
 <li>If a required module is disabled, it will be automatically enabled</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md135"></a>
-Depending on External Libraries</h2>
+<h3><a class="anchor" id="autotoc_md135"></a>
+Depending on External Libraries</h3>
 <p>Use <code>DEPENDENCIES</code> or <code>PUBLIC_DEPENDENCIES</code>:</p>
 <div class="fragment"><div class="line">helios_add_module(</div>
 <div class="line">    NAME graphics</div>
@@ -490,8 +512,8 @@ Depending on External Libraries</h2>
 <div class="line">    PRIVATE_DEPENDENCIES</div>
 <div class="line">        SPIRV-Tools</div>
 <div class="line">)</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md136"></a>
-Conditional Dependencies</h2>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md136"></a>
+Conditional Dependencies</h3>
 <p>For optional module integration:</p>
 <div class="fragment"><div class="line"># In your CMakeLists.txt</div>
 <div class="line">helios_module_enabled(audio _audio_enabled)</div>
@@ -509,9 +531,11 @@ Conditional Dependencies</h2>
 <div class="line">    TARGET helios_module_my_module</div>
 <div class="line">    MODULES audio physics</div>
 <div class="line">)</div>
-</div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md138"></a>
-Build Options</h1>
+</div><!-- fragment --><p><a class="el" href="md_docs_2guides_2creating-modules.html#creating-modules-top">↑ Back to Top</a></p>
+<hr  />
+<p><a class="anchor" id="build-options"></a></p>
+<h2><a class="anchor" id="autotoc_md138"></a>
+Build Options</h2>
 <p>Each registered module creates a build option:</p>
 <div class="fragment"><div class="line">HELIOS_BUILD_{NAME}_MODULE</div>
 </div><!-- fragment --><p>For example:</p>
@@ -520,16 +544,16 @@ Build Options</h1>
 <li><code>window</code> → <code>HELIOS_BUILD_WINDOW_MODULE</code></li>
 <li><code>physics_2d</code> → <code>HELIOS_BUILD_PHYSICS_2D_MODULE</code></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md139"></a>
-Using Build Options</h2>
+<h3><a class="anchor" id="autotoc_md139"></a>
+Using Build Options</h3>
 <p>From command line:</p>
 <div class="fragment"><div class="line"># Enable specific modules</div>
 <div class="line">cmake -DHELIOS_BUILD_WINDOW_MODULE=ON -DHELIOS_BUILD_AUDIO_MODULE=OFF ..</div>
 <div class="line"> </div>
 <div class="line"># Or with the build script</div>
 <div class="line">python scripts/build.py -DHELIOS_BUILD_WINDOW_MODULE=ON</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md140"></a>
-Querying Module Status</h2>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md140"></a>
+Querying Module Status</h3>
 <p>In CMake:</p>
 <div class="fragment"><div class="line">helios_module_enabled(window _is_enabled)</div>
 <div class="line">if(_is_enabled)</div>
@@ -539,31 +563,33 @@ Querying Module Status</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#if defined(HELIOS_HAS_WINDOW_MODULE)</span></div>
 <div class="line">    <span class="comment">// Window-specific code</span></div>
 <div class="line"><span class="preprocessor">#endif</span></div>
-</div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md142"></a>
-Best Practices</h1>
-<h2><a class="anchor" id="autotoc_md143"></a>
-1. Use Consistent Naming</h2>
+</div><!-- fragment --><p><a class="el" href="md_docs_2guides_2creating-modules.html#creating-modules-top">↑ Back to Top</a></p>
+<hr  />
+<p><a class="anchor" id="best-practices"></a></p>
+<h2><a class="anchor" id="autotoc_md142"></a>
+Best Practices</h2>
+<h3><a class="anchor" id="autotoc_md143"></a>
+1. Use Consistent Naming</h3>
 <ul>
 <li>Module directory: <code>snake_case</code> (e.g., <code>my_module</code>)</li>
 <li>Namespace: <code>helios::module_name</code> (e.g., <code>helios::my_module</code>)</li>
 <li>Target: automatically becomes <code>helios_module_{name}</code></li>
 <li>Alias: automatically becomes <code>helios::module::{name}</code></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md144"></a>
-2. Organize Headers Properly</h2>
+<h3><a class="anchor" id="autotoc_md144"></a>
+2. Organize Headers Properly</h3>
 <p>Public API goes in <code>include/helios/{name}/</code>:</p>
 <div class="fragment"><div class="line">include/helios/my_module/</div>
 <div class="line">├── my_module.hpp     # Main header (includes others)</div>
 <div class="line">├── ...</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md145"></a>
-3. Minimize Public Dependencies</h2>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md145"></a>
+3. Minimize Public Dependencies</h3>
 <ul>
 <li>Use <code>PRIVATE_DEPENDENCIES</code> for implementation details</li>
 <li>Only expose what users of your module need in <code>PUBLIC_DEPENDENCIES</code></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md146"></a>
-4. Document Your Module</h2>
+<h3><a class="anchor" id="autotoc_md146"></a>
+4. Document Your Module</h3>
 <p>Create a <code>README.md</code> in your module directory:</p>
 <div class="fragment"><div class="line"># My Module</div>
 <div class="line"> </div>
@@ -586,8 +612,8 @@ Best Practices</h1>
 <div class="line"> </div>
 <div class="line">app.AddModule&lt;helios::my_module::MyModule&gt;();</div>
 <div class="line">\```</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md147"></a>
-5. Write Tests</h2>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md147"></a>
+5. Write Tests</h3>
 <p>Create tests in <code>tests/modules/my_module/</code>:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;doctest/doctest.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;helios/my_module/my_module.hpp&gt;</span></div>
@@ -596,18 +622,20 @@ Best Practices</h1>
 <div class="line">    helios::my_module::MyComponent comp{42};</div>
 <div class="line">    CHECK_EQ(comp.value, 42);</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md148"></a>
-6. Use Precompiled Headers for Large Modules</h2>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md148"></a>
+6. Use Precompiled Headers for Large Modules</h3>
 <div class="fragment"><div class="line">helios_add_module(</div>
 <div class="line">    NAME my_large_module</div>
 <div class="line">    SOURCES src/file1.cpp src/file2.cpp src/file3.cpp</div>
 <div class="line">    PCH include/helios/my_large_module/pch.hpp</div>
 <div class="line">)</div>
-</div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md150"></a>
-Examples</h1>
-<h2><a class="anchor" id="autotoc_md151"></a>
-Minimal Module</h2>
+</div><!-- fragment --><p><a class="el" href="md_docs_2guides_2creating-modules.html#creating-modules-top">↑ Back to Top</a></p>
+<hr  />
+<p><a class="anchor" id="examples"></a></p>
+<h2><a class="anchor" id="autotoc_md150"></a>
+Examples</h2>
+<h3><a class="anchor" id="autotoc_md151"></a>
+Minimal Module</h3>
 <div class="fragment"><div class="line"># src/modules/simple/CMakeLists.txt</div>
 <div class="line"> </div>
 <div class="line">helios_define_module(</div>
@@ -615,8 +643,8 @@ Minimal Module</h2>
 <div class="line">    SOURCES src/simple.cpp</div>
 <div class="line">    HEADERS include/helios/simple/simple.hpp</div>
 <div class="line">)</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md152"></a>
-Module with Dependencies</h2>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md152"></a>
+Module with Dependencies</h3>
 <div class="fragment"><div class="line"># src/modules/renderer/Module.cmake</div>
 <div class="line"> </div>
 <div class="line">helios_register_module(</div>
@@ -652,8 +680,8 @@ Module with Dependencies</h2>
 <div class="line">    PRIVATE_DEPENDENCIES</div>
 <div class="line">        SPIRV-Tools</div>
 <div class="line">)</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md153"></a>
-Header-Only Module</h2>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md153"></a>
+Header-Only Module</h3>
 <div class="fragment"><div class="line"># src/modules/math_utils/CMakeLists.txt</div>
 <div class="line"> </div>
 <div class="line">helios_define_module(</div>
@@ -665,8 +693,8 @@ Header-Only Module</h2>
 <div class="line">        include/helios/math_utils/vector.hpp</div>
 <div class="line">        include/helios/math_utils/matrix.hpp</div>
 <div class="line">)</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md154"></a>
-Module with Optional Features</h2>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md154"></a>
+Module with Optional Features</h3>
 <div class="fragment"><div class="line"># src/modules/input/CMakeLists.txt</div>
 <div class="line"> </div>
 <div class="line">helios_register_module(</div>
@@ -689,41 +717,46 @@ Module with Optional Features</h2>
 <div class="line">    target_compile_definitions(helios_module_input PUBLIC HELIOS_HAS_GAMEPAD)</div>
 <div class="line">    target_link_libraries(helios_module_input PUBLIC helios::module::gamepad)</div>
 <div class="line">endif()</div>
-</div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md156"></a>
-Troubleshooting</h1>
-<h2><a class="anchor" id="autotoc_md157"></a>
-Module Not Found</h2>
+</div><!-- fragment --><p><a class="el" href="md_docs_2guides_2creating-modules.html#creating-modules-top">↑ Back to Top</a></p>
+<hr  />
+<p><a class="anchor" id="troubleshooting"></a></p>
+<h2><a class="anchor" id="autotoc_md156"></a>
+Troubleshooting</h2>
+<h3><a class="anchor" id="autotoc_md157"></a>
+Module Not Found</h3>
 <p>If you get an error about a module target not existing:</p>
 <ol type="1">
 <li>Check that the module directory exists under <code>src/modules/</code></li>
 <li>Verify <code>CMakeLists.txt</code> exists in the module directory</li>
 <li>Check if the module is enabled: <code>-DHELIOS_BUILD_{NAME}_MODULE=ON</code></li>
 </ol>
-<h2><a class="anchor" id="autotoc_md158"></a>
-Dependency Errors</h2>
+<h3><a class="anchor" id="autotoc_md158"></a>
+Dependency Errors</h3>
 <p>If a module dependency fails:</p>
 <ol type="1">
 <li>Check that the dependency module is registered before yours</li>
 <li>Verify the dependency name is correct (case-sensitive)</li>
 <li>Use <code>helios_print_modules()</code> to see all registered modules</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md159"></a>
-Build Order Issues</h2>
+<h3><a class="anchor" id="autotoc_md159"></a>
+Build Order Issues</h3>
 <p>The build system automatically resolves dependencies, but if you have issues:</p>
 <ol type="1">
 <li>Use <code>Module.cmake</code> for registration (processed before <code>CMakeLists.txt</code>)</li>
 <li>Ensure all <code>DEPENDS</code> are correctly specified</li>
 <li>Check for circular dependencies</li>
 </ol>
+<p><a class="el" href="md_docs_2guides_2creating-modules.html#creating-modules-top">↑ Back to Top</a></p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md161"></a>
-See Also</h1>
+<p><a class="anchor" id="see-also"></a></p>
+<h2><a class="anchor" id="autotoc_md161"></a>
+See Also</h2>
 <ul>
 <li><a class="el" href="md_src_2core_2README.html">Core Module Documentation</a></li>
 <li><a href="../../cmake/ModuleUtils.cmake">CMake ModuleUtils.cmake</a></li>
-<li>Build System Documentation </li>
+<li>Build System Documentation</li>
 </ul>
+<p><a class="el" href="md_docs_2guides_2creating-modules.html#creating-modules-top">↑ Back to Top</a> </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

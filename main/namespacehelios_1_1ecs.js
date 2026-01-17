@@ -56,8 +56,8 @@ var namespacehelios_1_1ecs =
       [ "kManual", "namespacehelios_1_1ecs.html#ab48aaed34af66c40a97690ad39f727f4a840f73673d401f2e539743e82e167a45", null ]
     ] ],
     [ "ShutdownExitCode", "namespacehelios_1_1ecs.html#ae984f0803649a1da782a858e73401658", [
-      [ "Success", "namespacehelios_1_1ecs.html#ae984f0803649a1da782a858e73401658a505a83f220c02df2f85c3810cd9ceb38", null ],
-      [ "Failure", "namespacehelios_1_1ecs.html#ae984f0803649a1da782a858e73401658ae139a585510a502bbf1841cf589f5086", null ]
+      [ "kSuccess", "namespacehelios_1_1ecs.html#ae984f0803649a1da782a858e73401658a8c632159fa131f09d04f94e3cbcd8782", null ],
+      [ "kFailure", "namespacehelios_1_1ecs.html#ae984f0803649a1da782a858e73401658a45d5f642bcbee805302334d856c54259", null ]
     ] ],
     [ "BasicQueryBuilder", "namespacehelios_1_1ecs.html#ad685b588a20af7553d7a0cf9d638eb0b", null ],
     [ "BasicQueryBuilder", "namespacehelios_1_1ecs.html#ab5392b35b4d3dc2a8101e81462c8de0d", null ],

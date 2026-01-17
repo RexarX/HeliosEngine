@@ -102,6 +102,9 @@ var hierarchy =
     [ "helios::utils::FunctionalAdapterBase< ChainAdapter< Iter1, Iter2 > >", "classhelios_1_1utils_1_1FunctionalAdapterBase.html", [
       [ "helios::utils::ChainAdapter< Iter1, Iter2 >", "classhelios_1_1utils_1_1ChainAdapter.html", null ]
     ] ],
+    [ "helios::utils::FunctionalAdapterBase< ConcatAdapter< Iter > >", "classhelios_1_1utils_1_1FunctionalAdapterBase.html", [
+      [ "helios::utils::ConcatAdapter< Iter >", "classhelios_1_1utils_1_1ConcatAdapter.html", null ]
+    ] ],
     [ "helios::utils::FunctionalAdapterBase< EnumerateAdapter< Iter > >", "classhelios_1_1utils_1_1FunctionalAdapterBase.html", [
       [ "helios::utils::EnumerateAdapter< Iter >", "classhelios_1_1utils_1_1EnumerateAdapter.html", null ]
     ] ],
@@ -129,14 +132,23 @@ var hierarchy =
     [ "helios::utils::FunctionalAdapterBase< SkipWhileAdapter< Iter, Pred > >", "classhelios_1_1utils_1_1FunctionalAdapterBase.html", [
       [ "helios::utils::SkipWhileAdapter< Iter, Pred >", "classhelios_1_1utils_1_1SkipWhileAdapter.html", null ]
     ] ],
+    [ "helios::utils::FunctionalAdapterBase< SlideAdapter< Iter > >", "classhelios_1_1utils_1_1FunctionalAdapterBase.html", [
+      [ "helios::utils::SlideAdapter< Iter >", "classhelios_1_1utils_1_1SlideAdapter.html", null ]
+    ] ],
     [ "helios::utils::FunctionalAdapterBase< StepByAdapter< Iter > >", "classhelios_1_1utils_1_1FunctionalAdapterBase.html", [
       [ "helios::utils::StepByAdapter< Iter >", "classhelios_1_1utils_1_1StepByAdapter.html", null ]
+    ] ],
+    [ "helios::utils::FunctionalAdapterBase< StrideAdapter< Iter > >", "classhelios_1_1utils_1_1FunctionalAdapterBase.html", [
+      [ "helios::utils::StrideAdapter< Iter >", "classhelios_1_1utils_1_1StrideAdapter.html", null ]
     ] ],
     [ "helios::utils::FunctionalAdapterBase< TakeAdapter< Iter > >", "classhelios_1_1utils_1_1FunctionalAdapterBase.html", [
       [ "helios::utils::TakeAdapter< Iter >", "classhelios_1_1utils_1_1TakeAdapter.html", null ]
     ] ],
     [ "helios::utils::FunctionalAdapterBase< TakeWhileAdapter< Iter, Pred > >", "classhelios_1_1utils_1_1FunctionalAdapterBase.html", [
       [ "helios::utils::TakeWhileAdapter< Iter, Pred >", "classhelios_1_1utils_1_1TakeWhileAdapter.html", null ]
+    ] ],
+    [ "helios::utils::FunctionalAdapterBase< ZipAdapter< Iter1, Iter2 > >", "classhelios_1_1utils_1_1FunctionalAdapterBase.html", [
+      [ "helios::utils::ZipAdapter< Iter1, Iter2 >", "classhelios_1_1utils_1_1ZipAdapter.html", null ]
     ] ],
     [ "helios::async::Future< T >", "classhelios_1_1async_1_1Future.html", null ],
     [ "helios::memory::GrowableAllocator< Allocator >", "classhelios_1_1memory_1_1GrowableAllocator.html", null ],
@@ -182,7 +194,7 @@ var hierarchy =
     [ "helios::app::details::ScheduleOrdering", "structhelios_1_1app_1_1details_1_1ScheduleOrdering.html", null ],
     [ "helios::app::details::Scheduler", "classhelios_1_1app_1_1details_1_1Scheduler.html", null ],
     [ "helios::ecs::ShutdownEvent", "structhelios_1_1ecs_1_1ShutdownEvent.html", null ],
-    [ "helios::utils::SlideAdapter< Iter >", "classhelios_1_1utils_1_1SlideAdapter.html", null ],
+    [ "helios::utils::SlideView< Iter >", "classhelios_1_1utils_1_1SlideView.html", null ],
     [ "helios::container::SparseSet< T, IndexType, Allocator >", "classhelios_1_1container_1_1SparseSet.html", null ],
     [ "helios::container::SparseSet< T, Entity::IndexType >", "classhelios_1_1container_1_1SparseSet.html", null ],
     [ "helios::memory::StackAllocator", "classhelios_1_1memory_1_1StackAllocator.html", null ],
@@ -190,7 +202,6 @@ var hierarchy =
     [ "helios::app::Startup", "structhelios_1_1app_1_1Startup.html", null ],
     [ "helios::app::StartUpStage", "structhelios_1_1app_1_1StartUpStage.html", null ],
     [ "helios::memory::STLAllocatorAdapter< T, UnderlyingAllocator >", "classhelios_1_1memory_1_1STLAllocatorAdapter.html", null ],
-    [ "helios::utils::StrideAdapter< Iter >", "classhelios_1_1utils_1_1StrideAdapter.html", null ],
     [ "helios::utils::StringEqual", "structhelios_1_1utils_1_1StringEqual.html", null ],
     [ "helios::utils::StringHash", "structhelios_1_1utils_1_1StringHash.html", null ],
     [ "helios::app::SubApp", "classhelios_1_1app_1_1SubApp.html", null ],
@@ -225,6 +236,5 @@ var hierarchy =
     [ "helios::Uuid", "classhelios_1_1Uuid.html", null ],
     [ "helios::UuidGenerator", "classhelios_1_1UuidGenerator.html", null ],
     [ "helios::ecs::World", "classhelios_1_1ecs_1_1World.html", null ],
-    [ "helios::ecs::WorldCmdBuffer< Allocator >", "classhelios_1_1ecs_1_1WorldCmdBuffer.html", null ],
-    [ "helios::utils::ZipAdapter< Iter1, Iter2 >", "classhelios_1_1utils_1_1ZipAdapter.html", null ]
+    [ "helios::ecs::WorldCmdBuffer< Allocator >", "classhelios_1_1ecs_1_1WorldCmdBuffer.html", null ]
 ];
