@@ -4,7 +4,7 @@
 #include <helios/profile/backend.hpp>
 #include <helios/profile/common.hpp>
 
-#include <concurrentqueue.h>
+#include <concurrentqueue/concurrentqueue.h>
 #include <atomic>
 #include <cstddef>
 #include <cstdint>

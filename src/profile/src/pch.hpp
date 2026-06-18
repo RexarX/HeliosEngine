@@ -20,4 +20,4 @@
 #include <thread>
 #include <variant>
 
-#include <concurrentqueue.h>
+#include <concurrentqueue/concurrentqueue.h>

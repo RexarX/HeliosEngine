@@ -4,7 +4,7 @@
 #include <helios/compiler/compiler.hpp>
 #include <helios/ecs/message/message.hpp>
 
-#include <concurrentqueue.h>
+#include <concurrentqueue/concurrentqueue.h>
 
 #ifdef HELIOS_STL_FLAT_MAP_AVAILABLE
 #include <flat_map>

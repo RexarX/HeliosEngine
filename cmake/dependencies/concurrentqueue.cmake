@@ -9,11 +9,90 @@ helios_dependency(
 
     CPM_REPOSITORY cameron314/concurrentqueue
     CPM_VERSION 1.0.5
-
-    ALIASES
-        helios::concurrentqueue::concurrentqueue concurrentqueue::concurrentqueue
-        helios::concurrentqueue::concurrentqueue concurrentqueue
 )
+
+# Canonical include: <concurrentqueue/concurrentqueue.h>
+# System packages use include_root/concurrentqueue/concurrentqueue.h.
+# CPM / upstream expose SOURCE_DIR/concurrentqueue.h — add a build-tree shim.
+
+if(NOT TARGET helios::concurrentqueue::concurrentqueue)
+  if(TARGET concurrentqueue::concurrentqueue OR TARGET concurrentqueue)
+    add_library(helios::concurrentqueue::concurrentqueue INTERFACE IMPORTED GLOBAL)
+    set(_helios_cq_include_root "")
+    set(_helios_cq_flat_header "")
+    set(_helios_cq_packaged_header "")
+
+    if(DEFINED concurrentqueue_SOURCE_DIR AND concurrentqueue_SOURCE_DIR)
+      if(EXISTS "${concurrentqueue_SOURCE_DIR}/concurrentqueue.h")
+        set(_helios_cq_flat_header
+            "${concurrentqueue_SOURCE_DIR}/concurrentqueue.h")
+      elseif(EXISTS "${concurrentqueue_SOURCE_DIR}/concurrentqueue/concurrentqueue.h")
+        set(_helios_cq_packaged_header
+            "${concurrentqueue_SOURCE_DIR}/concurrentqueue/concurrentqueue.h")
+      endif()
+    endif()
+
+    if(NOT _helios_cq_flat_header AND NOT _helios_cq_packaged_header)
+      set(_helios_cq_system_hints "")
+      if(TARGET concurrentqueue::concurrentqueue)
+        get_target_property(_helios_cq_target_includes
+            concurrentqueue::concurrentqueue
+            INTERFACE_INCLUDE_DIRECTORIES
+        )
+        if(_helios_cq_target_includes AND NOT _helios_cq_target_includes MATCHES "-NOTFOUND$")
+          list(APPEND _helios_cq_system_hints ${_helios_cq_target_includes})
+        endif()
+      endif()
+
+      find_path(_helios_cq_packaged_header
+          NAMES concurrentqueue.h
+          HINTS ${_helios_cq_system_hints}
+          PATH_SUFFIXES concurrentqueue
+      )
+
+      if(_helios_cq_packaged_header)
+        get_filename_component(_helios_cq_parent_dir "${_helios_cq_packaged_header}" DIRECTORY)
+        get_filename_component(_helios_cq_parent_name "${_helios_cq_parent_dir}" NAME)
+        if(NOT _helios_cq_parent_name STREQUAL "concurrentqueue")
+          set(_helios_cq_packaged_header "")
+        endif()
+      endif()
+    endif()
+
+    if(_helios_cq_flat_header)
+      set(_helios_cq_shim_root "${CMAKE_BINARY_DIR}/helios_shims/concurrentqueue")
+      file(MAKE_DIRECTORY "${_helios_cq_shim_root}/concurrentqueue")
+      file(COPY "${_helios_cq_flat_header}" DESTINATION "${_helios_cq_shim_root}/concurrentqueue")
+      set(_helios_cq_include_root "${_helios_cq_shim_root}")
+      helios_dep_log(STATUS
+          "Created helios::concurrentqueue::concurrentqueue (CPM flat → shim)")
+      helios_dep_log(STATUS
+          "concurrentqueue: <concurrentqueue/concurrentqueue.h> via ${_helios_cq_shim_root}")
+    elseif(_helios_cq_packaged_header)
+      get_filename_component(_helios_cq_include_root "${_helios_cq_packaged_header}" DIRECTORY)
+      get_filename_component(_helios_cq_include_root "${_helios_cq_include_root}" DIRECTORY)
+      if(TARGET concurrentqueue::concurrentqueue)
+        helios_dep_log(STATUS
+            "Created helios::concurrentqueue::concurrentqueue → concurrentqueue::concurrentqueue")
+        target_link_libraries(
+            helios::concurrentqueue::concurrentqueue INTERFACE concurrentqueue::concurrentqueue)
+      elseif(TARGET concurrentqueue)
+        helios_dep_log(STATUS "Created helios::concurrentqueue::concurrentqueue → concurrentqueue")
+        target_link_libraries(helios::concurrentqueue::concurrentqueue INTERFACE concurrentqueue)
+      endif()
+      helios_dep_log(STATUS
+          "concurrentqueue: <concurrentqueue/concurrentqueue.h> via ${_helios_cq_include_root}")
+    endif()
+
+    if(_helios_cq_include_root)
+      target_include_directories(helios::concurrentqueue::concurrentqueue
+          SYSTEM INTERFACE "${_helios_cq_include_root}")
+    else()
+      message(WARNING
+          "concurrentqueue: could not locate concurrentqueue.h to normalize include path")
+    endif()
+  endif()
+endif()
 
 if(TARGET helios::concurrentqueue::concurrentqueue AND NOT TARGET helios::concurrentqueue)
   add_library(_helios_concurrentqueue_all INTERFACE)

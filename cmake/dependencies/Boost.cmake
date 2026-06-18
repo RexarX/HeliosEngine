@@ -149,9 +149,8 @@ else()
       set(_boost_include_libs "container;stacktrace;unordered")
     endif()
 
-    # Semicolons must be escaped — otherwise cmake_parse_arguments splits the list.
-    string(REPLACE ";" "\\;" _boost_include_libs_escaped "${_boost_include_libs}")
-
+    # BOOST_INCLUDE_LIBRARIES is semicolon-separated; CPM must iterate OPTIONS with
+    # foreach(... IN LISTS ...) so the value is not split (see cmake/CPM.cmake).
     include(DownloadUsingCPM)
     helios_cpm_add_package(
             NAME Boost
@@ -159,7 +158,7 @@ else()
             URL https://github.com/boostorg/boost/releases/download/boost-1.90.0/boost-1.90.0-cmake.tar.xz
             OPTIONS
                 "BOOST_ENABLE_CMAKE ON"
-                "BOOST_INCLUDE_LIBRARIES ${_boost_include_libs_escaped}"
+                "BOOST_INCLUDE_LIBRARIES ${_boost_include_libs}"
                 "BUILD_SHARED_LIBS OFF"
                 "CMAKE_POSITION_INDEPENDENT_CODE ON"
             SYSTEM
