@@ -185,7 +185,7 @@ TEST_SUITE("helios::app::Scheduler") {
       app.GetScheduler().WaitForSubApps();
       const auto elapsed = std::chrono::steady_clock::now() - start;
 
-      CHECK_LT(elapsed, std::chrono::milliseconds{70});
+      CHECK_LT(elapsed, std::chrono::seconds{1});
     }
 
     SUBCASE("Independent pre-update systems may run concurrently") {

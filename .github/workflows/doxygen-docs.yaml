@@ -24,7 +24,16 @@ jobs:
           fetch-depth: 0
 
       - name: Install Doxygen and Graphviz
-        run: sudo apt-get update && sudo apt-get install -y doxygen graphviz
+        run: |
+          sudo apt-get update && sudo apt-get install -y graphviz curl
+          # Match local header template (1.17.x); distro packages are often older.
+          DOXYGEN_VERSION=1.17.0
+          curl -fsSL "https://github.com/doxygen/doxygen/releases/download/Release_1_17_0/doxygen-${DOXYGEN_VERSION}.linux.bin.tar.gz" \
+            -o /tmp/doxygen.tar.gz
+          sudo mkdir -p /usr/local/doxygen
+          sudo tar -xzf /tmp/doxygen.tar.gz -C /usr/local/doxygen --strip-components=1
+          sudo ln -sf /usr/local/doxygen/bin/doxygen /usr/local/bin/doxygen
+          doxygen --version
 
       - name: Ensure jQuery is present (required by doxygen-awesome extensions)
         run: |

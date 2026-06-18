@@ -6,8 +6,7 @@ Script for building Doxygen documentation.
 """
 
 import argparse
-import os
-import platform
+import re
 import shutil
 import subprocess
 import sys
@@ -95,9 +94,7 @@ def check_dependencies(root_dir: Path) -> Tuple[bool, list, list]:
         missing.append("doxygen")
 
     # Check for doxygen-awesome-css theme (git submodule)
-    theme_css = (
-        root_dir / "third-party" / "doxygen-awesome-css" / "doxygen-awesome.css"
-    )
+    theme_css = root_dir / "third-party" / "doxygen-awesome-css" / "doxygen-awesome.css"
     if not theme_css.exists():
         missing.append(
             "doxygen-awesome-css (run: git submodule update --init "
@@ -121,6 +118,21 @@ def get_doxygen_version() -> Optional[str]:
         return result.stdout.strip()
     except Exception:
         return None
+
+
+def parse_version(version: str) -> Tuple[int, int, int]:
+    """Parse a Doxygen version string into (major, minor, patch)."""
+
+    match = re.match(r"(\d+)\.(\d+)\.(\d+)", version.strip())
+    if not match:
+        return 0, 0, 0
+    return int(match.group(1)), int(match.group(2)), int(match.group(3))
+
+
+def is_doxygen_version_supported(version: str, minimum: str = "1.17.0") -> bool:
+    """Return True when version meets the minimum required for the HTML header."""
+
+    return parse_version(version) >= parse_version(minimum)
 
 
 def count_warnings(output: str) -> int:
@@ -165,21 +177,25 @@ def build_docs(docs_dir: Path, clean: bool = False, quiet: bool = False) -> bool
         result = subprocess.run(
             ["doxygen", str(doxyfile)],
             cwd=str(doxygen_dir),
-            capture_output=not quiet,
+            capture_output=True,
             text=True,
             check=False,
         )
 
+        if not quiet:
+            if result.stdout:
+                print(result.stdout)
+            if result.stderr:
+                print(result.stderr, file=sys.stderr)
+
         if result.returncode != 0:
             print_error("Doxygen build failed!")
-            if result.stderr and not quiet:
+            if result.stderr and quiet:
+                # only re-print stderr here if we didn't already echo it above
                 print(result.stderr, file=sys.stderr)
             return False
 
-        # Count warnings
-        output = (
-            result.stdout + result.stderr if result.stdout and result.stderr else ""
-        )
+        output = (result.stdout or "") + (result.stderr or "")
         warning_count = count_warnings(output)
 
         # Success!
@@ -189,7 +205,7 @@ def build_docs(docs_dir: Path, clean: bool = False, quiet: bool = False) -> bool
         print_info(f"Output location: {output_dir / 'index.html'}")
         print()
         print("To view the documentation:")
-        print(f"  1. Open in browser:")
+        print("  1. Open in browser:")
 
         if sys.platform == "win32":
             print(f"     start {output_dir / 'index.html'}")
@@ -199,10 +215,10 @@ def build_docs(docs_dir: Path, clean: bool = False, quiet: bool = False) -> bool
             print(f"     xdg-open {output_dir / 'index.html'}")
 
         print()
-        print(f"  2. Or run a local server:")
+        print("  2. Or run a local server:")
         print(f"     cd {output_dir}")
-        print(f"     python3 -m http.server 8000")
-        print(f"     Then open: http://localhost:8000")
+        print("     python3 -m http.server 8000")
+        print("     Then open: http://localhost:8000")
         print()
 
         if warning_count > 0:
@@ -333,6 +349,14 @@ Examples:
     version = get_doxygen_version()
     if version:
         print_success(f"Found Doxygen version {version}")
+        if not is_doxygen_version_supported(version):
+            print_error(
+                "Doxygen 1.17.0 or newer is required for docs/doxygen/header.html"
+            )
+            print_info(
+                "Ubuntu/Debian: install from https://github.com/doxygen/doxygen/releases"
+            )
+            return 1
     else:
         print_warning("Could not determine Doxygen version")
 
