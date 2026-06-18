@@ -482,8 +482,8 @@ Typedefs</h2></td></tr>
 <tr class="memdesc:a1ade48c83dca16fbbd2344906a052f6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type id for resources.  <br /></td></tr>
 <tr class="memitem:a34db310b526164dbdfe54b540f177144" id="r_a34db310b526164dbdfe54b540f177144"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:a34db310b526164dbdfe54b540f177144 template"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a34db310b526164dbdfe54b540f177144">DagResult</a> = std::expected&lt;T, <a class="el" href="structhelios_1_1ecs_1_1DagError.html">DagError</a>&gt;</td></tr>
-<tr class="memitem:aa718c4dd899676a625fb40dfc6b25757" id="r_aa718c4dd899676a625fb40dfc6b25757"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa718c4dd899676a625fb40dfc6b25757">RunCondition</a> = std::move_only_function&lt;bool(<a class="el" href="classhelios_1_1ecs_1_1World.html">World</a>&amp;, <a class="el" href="structhelios_1_1ecs_1_1SystemLocalData.html">SystemLocalData</a>&amp;)&gt;</td></tr>
-<tr class="memdesc:aa718c4dd899676a625fb40dfc6b25757"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type-erased run condition: returns bool, receives <a class="el" href="classhelios_1_1ecs_1_1World.html" title="The World class manages entities with their components and systems.">World</a>&amp; + local data.  <br /></td></tr>
+<tr class="memitem:a7fc51c0d815495c4c0ed0c2b72564d79" id="r_a7fc51c0d815495c4c0ed0c2b72564d79"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7fc51c0d815495c4c0ed0c2b72564d79">RunCondition</a> = std::function&lt;bool(<a class="el" href="classhelios_1_1ecs_1_1World.html">World</a>&amp;, <a class="el" href="structhelios_1_1ecs_1_1SystemLocalData.html">SystemLocalData</a>&amp;)&gt;</td></tr>
+<tr class="memdesc:a7fc51c0d815495c4c0ed0c2b72564d79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type-erased run condition: returns bool, receives <a class="el" href="classhelios_1_1ecs_1_1World.html" title="The World class manages entities with their components and systems.">World</a>&amp; + local data.  <br /></td></tr>
 <tr class="memitem:a8cec1c99840fcd195fceb9741c34bab4" id="r_a8cec1c99840fcd195fceb9741c34bab4"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8cec1c99840fcd195fceb9741c34bab4">ScheduleTypeIndex</a> = <a class="el" href="classhelios_1_1utils_1_1TypeIndex.html">utils::TypeIndex</a></td></tr>
 <tr class="memdesc:a8cec1c99840fcd195fceb9741c34bab4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type index for schedules.  <br /></td></tr>
 <tr class="memitem:a9a2e7b1ba0ca6b85f9ed50d10f266c27" id="r_a9a2e7b1ba0ca6b85f9ed50d10f266c27"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9a2e7b1ba0ca6b85f9ed50d10f266c27">ScheduleTypeId</a> = <a class="el" href="classhelios_1_1utils_1_1TypeId.html">utils::TypeId</a></td></tr>
@@ -499,6 +499,7 @@ Typedefs</h2></td></tr>
 <tr class="memdesc:a1d0761737d08956eba67f4c207e2554e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type index for system sets.  <br /></td></tr>
 <tr class="memitem:aaaec0d1d4a188372f5202f12e971a30c" id="r_aaaec0d1d4a188372f5202f12e971a30c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaaec0d1d4a188372f5202f12e971a30c">SystemSetTypeId</a> = <a class="el" href="classhelios_1_1utils_1_1TypeId.html">utils::TypeId</a></td></tr>
 <tr class="memdesc:aaaec0d1d4a188372f5202f12e971a30c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type id for system sets.  <br /></td></tr>
+<tr class="memitem:a9ff616e80af940f228159b93af9b2d0e" id="r_a9ff616e80af940f228159b93af9b2d0e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9ff616e80af940f228159b93af9b2d0e">SystemCallable</a> = std::function&lt;void(<a class="el" href="classhelios_1_1ecs_1_1World.html">World</a>&amp;, <a class="el" href="structhelios_1_1ecs_1_1SystemLocalData.html">SystemLocalData</a>&amp;)&gt;</td></tr>
 <tr class="memitem:a9295908adf83529ac636a0833e5d98fb" id="r_a9295908adf83529ac636a0833e5d98fb"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9295908adf83529ac636a0833e5d98fb">SystemTypeId</a> = <a class="el" href="classhelios_1_1utils_1_1TypeId.html">utils::TypeId</a></td></tr>
 <tr class="memdesc:a9295908adf83529ac636a0833e5d98fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type id for systems.  <br /></td></tr>
 <tr class="memitem:ac86bf65121d23957c17a8d9661ad51cb" id="r_ac86bf65121d23957c17a8d9661ad51cb"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac86bf65121d23957c17a8d9661ad51cb">SystemTypeIndex</a> = <a class="el" href="classhelios_1_1utils_1_1TypeIndex.html">utils::TypeIndex</a></td></tr>
@@ -1247,21 +1248,21 @@ template&lt;typename... Components&gt; </div>
 
 </div>
 </div>
-<a id="aa718c4dd899676a625fb40dfc6b25757" name="aa718c4dd899676a625fb40dfc6b25757"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa718c4dd899676a625fb40dfc6b25757">&#9670;&#160;</a></span>RunCondition</h2>
+<a id="a7fc51c0d815495c4c0ed0c2b72564d79" name="a7fc51c0d815495c4c0ed0c2b72564d79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7fc51c0d815495c4c0ed0c2b72564d79">&#9670;&#160;</a></span>RunCondition</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="#aa718c4dd899676a625fb40dfc6b25757">helios::ecs::RunCondition</a> = std::move_only_function&lt;bool(<a class="el" href="classhelios_1_1ecs_1_1World.html">World</a>&amp;, <a class="el" href="structhelios_1_1ecs_1_1SystemLocalData.html">SystemLocalData</a>&amp;)&gt;</td>
+          <td class="memname">using <a class="el" href="#a7fc51c0d815495c4c0ed0c2b72564d79">helios::ecs::RunCondition</a> = std::function&lt;bool(<a class="el" href="classhelios_1_1ecs_1_1World.html">World</a>&amp;, <a class="el" href="structhelios_1_1ecs_1_1SystemLocalData.html">SystemLocalData</a>&amp;)&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Type-erased run condition: returns bool, receives <a class="el" href="classhelios_1_1ecs_1_1World.html" title="The World class manages entities with their components and systems.">World</a>&amp; + local data. </p>
 
-<p class="definition">Definition at line <a class="el" href="run__condition_8hpp_source.html#l00016">16</a> of file <a class="el" href="run__condition_8hpp_source.html">run_condition.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__condition_8hpp_source.html#l00020">20</a> of file <a class="el" href="run__condition_8hpp_source.html">run_condition.hpp</a>.</p>
 
 </div>
 </div>
@@ -1354,6 +1355,22 @@ template&lt;typename T&gt; </div>
 <p>Type index for stages. </p>
 
 <p class="definition">Definition at line <a class="el" href="stage_8hpp_source.html#l00012">12</a> of file <a class="el" href="stage_8hpp_source.html">stage.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a9ff616e80af940f228159b93af9b2d0e" name="a9ff616e80af940f228159b93af9b2d0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ff616e80af940f228159b93af9b2d0e">&#9670;&#160;</a></span>SystemCallable</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#a9ff616e80af940f228159b93af9b2d0e">helios::ecs::SystemCallable</a> = std::function&lt;void(<a class="el" href="classhelios_1_1ecs_1_1World.html">World</a>&amp;, <a class="el" href="structhelios_1_1ecs_1_1SystemLocalData.html">SystemLocalData</a>&amp;)&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="system__storage_8hpp_source.html#l00021">21</a> of file <a class="el" href="system__storage_8hpp_source.html">system_storage.hpp</a>.</p>
 
 </div>
 </div>

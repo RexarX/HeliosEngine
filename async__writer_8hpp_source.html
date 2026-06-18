@@ -197,7 +197,7 @@ $(function(){initNavTree('async__writer_8hpp_source.html','',''); });
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">   */</span></div>
 <div class="foldopen" id="foldopen00050" data-start="{" data-end="}">
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1AsyncMessageWriter.html#ad38c5244e2a034ee542fec7714e3f4d4">   50</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1AsyncMessageWriter.html#ad38c5244e2a034ee542fec7714e3f4d4">Write</a>(T&amp;&amp; message) {</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    async_queue_.get().Enqueue&lt;T&gt;(token_, std::move(message));</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    async_queue_.get().<span class="keyword">template</span> Enqueue&lt;T&gt;(token_, std::move(message));</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  }</div>
 </div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment"></span> </div>
@@ -209,7 +209,7 @@ $(function(){initNavTree('async__writer_8hpp_source.html','',''); });
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1AsyncMessageWriter.html#a7dee0d12fb2ed5e2122aca91d303e52c">   58</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1AsyncMessageWriter.html#a7dee0d12fb2ed5e2122aca91d303e52c">Write</a>(<span class="keyword">const</span> T&amp; message)</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keyword">requires</span> std::copy_constructible&lt;T&gt;</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  {</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    async_queue_.get().Enqueue&lt;T&gt;(token_, T{message});</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    async_queue_.get().template Enqueue&lt;T&gt;(token_, T{message});</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  }</div>
 </div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment"></span> </div>
@@ -235,19 +235,20 @@ $(function(){initNavTree('async__writer_8hpp_source.html','',''); });
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="keyword">requires</span> std::constructible_from&lt;T, Args...&gt;</div>
 <div class="foldopen" id="foldopen00082" data-start="{" data-end="}">
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1AsyncMessageWriter.html#a9a577afda8b526d61c05fbfc104cfa94">   82</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1AsyncMessageWriter.html#a9a577afda8b526d61c05fbfc104cfa94">Emplace</a>(Args&amp;&amp;... args) {</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    async_queue_.get().Enqueue&lt;T&gt;(token_, T{std::forward&lt;Args&gt;(args)...});</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  }</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    async_queue_.get().template Enqueue&lt;T&gt;(token_,</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>                                           T{std::forward&lt;Args&gt;(args)...});</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  }</div>
 </div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  std::reference_wrapper&lt;AsyncMessageQueue&gt;</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>      async_queue_;  <span class="comment">///&lt; Reference to the shared async message queue</span></div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#a87cb006b37e2a79de065c80d524358ce">AsyncMessageQueueProducerToken</a></div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>      token_;  <span class="comment">///&lt; Per-writer producer token for improved throughput</span></div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>};</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  std::reference_wrapper&lt;AsyncMessageQueue&gt;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>      async_queue_;  <span class="comment">///&lt; Reference to the shared async message queue</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>  <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#a87cb006b37e2a79de065c80d524358ce">AsyncMessageQueueProducerToken</a></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>      token_;  <span class="comment">///&lt; Per-writer producer token for improved throughput</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>};</div>
 </div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>}  <span class="comment">// namespace helios::ecs</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>}  <span class="comment">// namespace helios::ecs</span></div>
 <div class="ttc" id="aasync__queue_8hpp_html"><div class="ttname"><a href="async__queue_8hpp.html">async_queue.hpp</a></div></div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1AsyncMessageQueue_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1AsyncMessageQueue.html">helios::ecs::AsyncMessageQueue</a></div><div class="ttdoc">Async queue for managing multiple message types via lock-free concurrent queues.</div><div class="ttdef"><b>Definition</b> <a href="async__queue_8hpp_source.html#l00323">async_queue.hpp:323</a></div></div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1AsyncMessageWriter_html_a4fc2c9f34b5b2fffc34275b7fa6654cf"><div class="ttname"><a href="classhelios_1_1ecs_1_1AsyncMessageWriter.html#a4fc2c9f34b5b2fffc34275b7fa6654cf">helios::ecs::AsyncMessageWriter::AsyncMessageWriter</a></div><div class="ttdeci">constexpr AsyncMessageWriter(MessageManager &amp;manager) noexcept</div><div class="ttdoc">Constructs an AsyncMessageWriter from the message manager.</div><div class="ttdef"><b>Definition</b> <a href="#l00029">async_writer.hpp:29</a></div></div>

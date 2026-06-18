@@ -145,7 +145,8 @@ $(function(){initNavTree('run__condition_8hpp.html','',''); });
   <div class="headertitle"><div class="title">run_condition.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;<a class="el" href="system__local__data_8hpp_source.html">helios/ecs/schedule/system_local_data.hpp</a>&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="compiler_8hpp_source.html">helios/compiler/compiler.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="system__local__data_8hpp_source.html">helios/ecs/schedule/system_local_data.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="param__policy_8hpp_source.html">helios/ecs/system/param_policy.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="system_8hpp_source.html">helios/ecs/system/system.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="world_8hpp_source.html">helios/ecs/world.hpp</a>&gt;</code><br />
@@ -167,8 +168,8 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:aa718c4dd899676a625fb40dfc6b25757" id="r_aa718c4dd899676a625fb40dfc6b25757"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1ecs.html#aa718c4dd899676a625fb40dfc6b25757">helios::ecs::RunCondition</a> = std::move_only_function&lt;bool(<a class="el" href="classhelios_1_1ecs_1_1World.html">World</a>&amp;, <a class="el" href="structhelios_1_1ecs_1_1SystemLocalData.html">SystemLocalData</a>&amp;)&gt;</td></tr>
-<tr class="memdesc:aa718c4dd899676a625fb40dfc6b25757"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type-erased run condition: returns bool, receives <a class="el" href="classhelios_1_1ecs_1_1World.html" title="The World class manages entities with their components and systems.">World</a>&amp; + local data.  <br /></td></tr>
+<tr class="memitem:a7fc51c0d815495c4c0ed0c2b72564d79" id="r_a7fc51c0d815495c4c0ed0c2b72564d79"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1ecs.html#a7fc51c0d815495c4c0ed0c2b72564d79">helios::ecs::RunCondition</a> = std::function&lt;bool(<a class="el" href="classhelios_1_1ecs_1_1World.html">World</a>&amp;, <a class="el" href="structhelios_1_1ecs_1_1SystemLocalData.html">SystemLocalData</a>&amp;)&gt;</td></tr>
+<tr class="memdesc:a7fc51c0d815495c4c0ed0c2b72564d79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type-erased run condition: returns bool, receives <a class="el" href="classhelios_1_1ecs_1_1World.html" title="The World class manages entities with their components and systems.">World</a>&amp; + local data.  <br /></td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->
