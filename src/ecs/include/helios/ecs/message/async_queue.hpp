@@ -4,7 +4,7 @@
 #include <helios/compiler/compiler.hpp>
 #include <helios/ecs/message/message.hpp>
 
-#include <concurrentqueue/concurrentqueue.h>
+#include <concurrentqueue/moodycamel/concurrentqueue.h>
 
 #ifdef HELIOS_STL_FLAT_MAP_AVAILABLE
 #include <flat_map>

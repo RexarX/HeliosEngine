@@ -437,6 +437,10 @@ helios_link_modules(
 )
 ```
 
+<concurrentqueue.h>
+<concurrentqueue/concurrentqueue.h>
+<concurrentqueue/moodycamel/concurrentqueue.h>
+
 ### Method 4: Installed Package (`find_package`) {#method-4-installed-package-find_package}
 
 Build and install Helios, then use the generated CMake package config.

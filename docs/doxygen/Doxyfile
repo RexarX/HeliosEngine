@@ -3,7 +3,7 @@
 #---------------------------------------------------------------------------
 
 PROJECT_NAME           = "Helios Engine"
-PROJECT_BRIEF          = "A modular ECS based data-oriented C++23 game engine"
+PROJECT_BRIEF          = "A modular ECS based data-oriented C++23 game engine framework"
 PROJECT_LOGO           = ../img/logo.png
 PROJECT_NUMBER         = 0.1.0
 
