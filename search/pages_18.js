@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['ubuntu_20debian_0',['Linux (APT — Ubuntu / Debian)',['../index.html#linux-apt--ubuntu--debian',1,'']]],
-  ['usage_1',['Usage',['../index.html#usage',1,'Usage'],['../dir_4b68c2fef3e151b6b93d5e93b14f1857.html#usage-1',1,'Usage']]],
-  ['using_20as_20a_20dependency_2',['Using as a Dependency',['../index.html#using-as-a-dependency',1,'']]],
-  ['utilities_3',['Utilities',['../dir_313caf1132e152dd9b58bea13a4052ca.html#utils--common-utilities',1,'`utils` — Common Utilities'],['../dir_94d7edf6f8f3d9af5fd63c44172da41c.html#utilities',1,'Utilities']]],
-  ['utils_20—_20common_20utilities_4',['`utils` — Common Utilities',['../dir_313caf1132e152dd9b58bea13a4052ca.html#utils--common-utilities',1,'']]],
-  ['uuid_5',['UUID',['../dir_aebb8dcc11953d78e620bbef0b9e2183.html#uuid',1,'']]]
+  ['what_20you_20get_0',['What you get',['../dir_217ee790cdc210ca56feb9a8b7616066.html#what-you-get',1,'']]],
+  ['window_20—_20cross_20platform_20window_20management_1',['`window` — Cross-Platform Window Management',['../dir_c7f79d9fead0a70cab4af348b59fbdf1.html#window--cross-platform-window-management',1,'']]],
+  ['window_20management_2',['`window` — Cross-Platform Window Management',['../dir_c7f79d9fead0a70cab4af348b59fbdf1.html#window--cross-platform-window-management',1,'']]],
+  ['windows_3',['Windows',['../index.html#windows',1,'']]],
+  ['windows_20msvc_4',['Windows (MSVC)',['../index.html#windows-msvc',1,'']]],
+  ['world_20lifecycle_5',['World Lifecycle',['../dir_ddca5f149c4ce13074f28b270e950ba9.html#world-lifecycle',1,'']]]
 ];

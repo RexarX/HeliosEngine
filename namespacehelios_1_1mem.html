@@ -538,7 +538,7 @@ template&lt;typename T, typename Allocator = std::allocator&lt;T&gt;&gt; </div>
 </div><div class="memdoc">
 
 <p>Allocates memory with the specified alignment. </p>
-<p>Uses <span class="tt">_aligned_malloc</span> on MSVC and <span class="tt">std::aligned_alloc</span> on other platforms. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion in next cases:<ul>
+<p>Uses <span class="tt">_aligned_malloc</span> on MSVC and <span class="tt">std::aligned_alloc</span> on other platforms. On POSIX, <span class="tt">std::aligned_alloc</span> requires alignment &gt;= <span class="tt">sizeof(void*)</span>. Smaller alignments are satisfied via <span class="tt">malloc</span>, which provides at least <span class="tt">alignof(std::max_align_t)</span> alignment. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion in next cases:<ul>
 <li>alignment is zero.</li>
 <li>alignment is not a power of two.</li>
 <li>size is zero.</li>
@@ -554,7 +554,7 @@ template&lt;typename T, typename Allocator = std::allocator&lt;T&gt;&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A pointer to the allocated memory block, or <span class="tt">nullptr</span> on failure </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="aligned__alloc_8hpp_source.html#l00028">28</a> of file <a class="el" href="aligned__alloc_8hpp_source.html">aligned_alloc.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="aligned__alloc_8hpp_source.html#l00031">31</a> of file <a class="el" href="aligned__alloc_8hpp_source.html">aligned_alloc.hpp</a>.</p>
 
 </div>
 </div>
@@ -595,7 +595,7 @@ template&lt;typename T, typename Allocator = std::allocator&lt;T&gt;&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="aligned__alloc_8hpp_source.html#l00060">60</a> of file <a class="el" href="aligned__alloc_8hpp_source.html">aligned_alloc.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="aligned__alloc_8hpp_source.html#l00070">70</a> of file <a class="el" href="aligned__alloc_8hpp_source.html">aligned_alloc.hpp</a>.</p>
 
 </div>
 </div>

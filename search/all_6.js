@@ -64,7 +64,7 @@ var searchData=
   ['build_20definition_20cmakelists_20txt_61',['Build definition (&lt;span class=&quot;tt&quot;&gt;CMakeLists.txt&lt;/span&gt;)',['../md_docs_2guidelines.html#build-definition-cmakeliststxt',1,'']]],
   ['build_20tools_62',['All platforms — build tools',['../index.html#all-platforms--build-tools',1,'']]],
   ['buildassertionstacktraceconfig_63',['BuildAssertionStacktraceConfig',['../namespacehelios_1_1anonymous__namespace_02assert_8cpp_03.html#aa6cff68a01035a02dc6b3dee49b88f4e',1,'helios::anonymous_namespace{assert.cpp}']]],
-  ['building_64',['Building',['../index.html#building-by-platform',1,'Building'],['../md_docs_2guidelines.html#building',1,'Building']]],
+  ['building_64',['Building',['../index.html#building',1,'Building'],['../md_docs_2guidelines.html#building-1',1,'Building']]],
   ['buildpolicyfromparams_65',['BuildPolicyFromParams',['../namespacehelios_1_1ecs.html#ae0dd28e270ba97fca25237bae0991612',1,'helios::ecs']]],
   ['buildpolicyfromsystem_66',['BuildPolicyFromSystem',['../namespacehelios_1_1ecs.html#a890403dcdc57f5f6e1a6e10943d73c79',1,'helios::ecs']]],
   ['builds_67',['Selective module builds',['../md_docs_2guidelines.html#selective-module-builds',1,'']]],

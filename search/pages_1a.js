@@ -1,4 +1,25 @@
 var searchData=
 [
-  ['you_20get_0',['What you get',['../dir_217ee790cdc210ca56feb9a8b7616066.html#what-you-get',1,'']]]
+  ['—_20application_20framework_0',['`app` — Application Framework',['../dir_5194e5fea318fda12687127c23f8aba1.html#app--application-framework',1,'']]],
+  ['—_20arch_1',['Linux (Pacman — Arch)',['../index.html#linux-pacman--arch',1,'']]],
+  ['—_20build_20tools_2',['All platforms — build tools',['../index.html#all-platforms--build-tools',1,'']]],
+  ['—_20common_20utilities_3',['`utils` — Common Utilities',['../dir_313caf1132e152dd9b58bea13a4052ca.html#utils--common-utilities',1,'']]],
+  ['—_20compiler_20detection_20intrinsics_4',['`compiler` — Compiler Detection &amp;amp; Intrinsics',['../dir_f13bc85843fa14191e0ad4a3a157cf60.html#compiler--compiler-detection--intrinsics',1,'']]],
+  ['—_20consume_20from_20an_20executable_5',['Step 5 — Consume from an executable',['../dir_217ee790cdc210ca56feb9a8b7616066.html#step-5--consume-from-an-executable',1,'']]],
+  ['—_20core_20engine_20primitives_6',['`core` — Core Engine Primitives',['../dir_aebb8dcc11953d78e620bbef0b9e2183.html#core--core-engine-primitives',1,'']]],
+  ['—_20cpu_20memory_20lock_20profiling_7',['`profile` — CPU/Memory/Lock Profiling',['../dir_2730ace12cf03b0ba989133b5ac743ea.html#profile--cpumemorylock-profiling',1,'']]],
+  ['—_20cross_20platform_20window_20management_8',['`window` — Cross-Platform Window Management',['../dir_c7f79d9fead0a70cab4af348b59fbdf1.html#window--cross-platform-window-management',1,'']]],
+  ['—_20data_20oriented_20containers_9',['`container` — Data-Oriented Containers',['../dir_1b313d86a3cedf427c8a82c0995b1bb6.html#container--data-oriented-containers',1,'']]],
+  ['—_20deferred_20mutations_10',['Commands — Deferred Mutations',['../dir_ddca5f149c4ce13074f28b270e950ba9.html#commands--deferred-mutations',1,'']]],
+  ['—_20define_20the_20build_20cmakelists_20txt_11',['Step 2 — Define the build (&lt;span class=&quot;tt&quot;&gt;CMakeLists.txt&lt;/span&gt;)',['../dir_217ee790cdc210ca56feb9a8b7616066.html#step-2--define-the-build-cmakeliststxt',1,'']]],
+  ['—_20discovery_20no_20manual_20include_12',['Step 3 — Discovery (no manual &lt;span class=&quot;tt&quot;&gt;include()&lt;/span&gt;)',['../dir_217ee790cdc210ca56feb9a8b7616066.html#step-3--discovery-no-manual-include',1,'']]],
+  ['—_20entity_20component_20system_13',['`ecs` — Entity Component System',['../dir_ddca5f149c4ce13074f28b270e950ba9.html#ecs--entity-component-system',1,'']]],
+  ['—_20fedora_14',['Linux (DNF — Fedora)',['../index.html#linux-dnf--fedora',1,'']]],
+  ['—_20logging_15',['`log` — Logging',['../dir_2241064965c8d9ca993f08b926076f7d.html#log--logging',1,'']]],
+  ['—_20platform_20detection_20api_20macros_16',['`platform` — Platform Detection &amp;amp; API Macros',['../dir_4b68c2fef3e151b6b93d5e93b14f1857.html#platform--platform-detection--api-macros',1,'']]],
+  ['—_20pmr_20allocators_20reference_20counting_17',['`memory` — PMR Allocators &amp;amp; Reference Counting',['../dir_94d7edf6f8f3d9af5fd63c44172da41c.html#memory--pmr-allocators--reference-counting',1,'']]],
+  ['—_20public_20api_18',['Step 4 — Public API',['../dir_217ee790cdc210ca56feb9a8b7616066.html#step-4--public-api',1,'']]],
+  ['—_20register_20the_20module_20module_20cmake_19',['Step 1 — Register the module (&lt;span class=&quot;tt&quot;&gt;Module.cmake&lt;/span&gt;)',['../dir_217ee790cdc210ca56feb9a8b7616066.html#step-1--register-the-module-modulecmake',1,'']]],
+  ['—_20task_20based_20parallelism_20',['`async` — Task-Based Parallelism',['../dir_b60a79ed93f318a37dbc9781b4452c17.html#async--task-based-parallelism',1,'']]],
+  ['—_20ubuntu_20debian_21',['Linux (APT — Ubuntu / Debian)',['../index.html#linux-apt--ubuntu--debian',1,'']]]
 ];
