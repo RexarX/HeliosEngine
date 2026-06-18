@@ -16,7 +16,7 @@
 
 <div align="center">
 
-![Helios Engine Logo](docs/img/logo.png)
+<img src="docs/img/logo.png" alt="Helios Engine Logo" width="200">
 
 # Helios Engine
 
@@ -56,13 +56,17 @@ A modular, data-oriented C++23 game engine framework inspired by Bevy
 
 ---
 
-## About The Project {#about-the-project}
+<a id="about-the-project"></a>
+
+## About The Project
 
 **Helios Engine** is a high-performance, ECS-based game engine framework written in C++23. It combines an archetype-based Entity Component System with deferred commands, double-buffered messages, and parallel system scheduling over a work-stealing task executor.
 
 <a href="#readme-top">↑ Back to Top</a>
 
-### Key Features {#key-features}
+<a id="key-features"></a>
+
+### Key Features
 
 - **ECS** — archetype and sparse-set storage, deferred `Commands`, rich query iterators
 - **Parallel scheduling** — access-conflict detection, topological execution, Taskflow-backed executors
@@ -71,7 +75,9 @@ A modular, data-oriented C++23 game engine framework inspired by Bevy
 - **Modern C++23** — concepts, ranges, `std::expected`, PMR allocators
 - **Flexible dependencies** — system packages first, [CPM](https://github.com/cpm-cmake/CPM.cmake) download as fallback
 
-### Design Philosophy {#design-philosophy}
+<a id="design-philosophy"></a>
+
+### Design Philosophy
 
 1. **Data-oriented design** — components stored contiguously for cache-friendly iteration
 2. **Composability** — behavior emerges from systems operating on component data
@@ -81,7 +87,9 @@ A modular, data-oriented C++23 game engine framework inspired by Bevy
 
 ---
 
-## Modules {#modules}
+<a id="modules"></a>
+
+## Modules
 
 | Module      | Description                                        | Default | Documentation                     |
 | ----------- | -------------------------------------------------- | :-----: | --------------------------------- |
@@ -106,9 +114,13 @@ cmake --preset linux-gcc-release -DHELIOS_BUILD_PROFILE_MODULE=ON -DHELIOS_BUILD
 
 ---
 
-## Getting Started {#getting-started}
+<a id="getting-started"></a>
 
-### Requirements {#requirements}
+## Getting Started
+
+<a id="requirements"></a>
+
+### Requirements
 
 | Tool             | Minimum                         | Recommended                 |
 | ---------------- | ------------------------------- | --------------------------- |
@@ -124,7 +136,9 @@ git clone --recursive https://github.com/RexarX/HeliosEngine.git
 cd HeliosEngine
 ```
 
-### Installing Dependencies {#installing-dependencies}
+<a id="installing-dependencies"></a>
+
+### Installing Dependencies
 
 Helios resolves dependencies per module: **system packages are tried first**, then **CPM download** if missing (`HELIOS_DOWNLOAD_PACKAGES=ON`, default). Pre-installing system packages speeds up configuration and avoids network fetches.
 
@@ -189,7 +203,9 @@ choco install llvm
 # Or use clang-format bundled with Visual Studio 2022
 ```
 
-### Building {#building-by-platform}
+<a id="building-by-platform"></a>
+
+### Building
 
 Preset pattern: `{os}-{compiler}-{build_type}`
 
@@ -254,7 +270,9 @@ cmake --preset linux-gcc-release \
 | `HELIOS_DOWNLOAD_PACKAGES`     | ON             | CPM fallback for missing deps |
 | `HELIOS_BUILD_{MODULE}_MODULE` | module default | Per-module toggle             |
 
-### Run the Example {#run-the-example}
+<a id="run-the-example"></a>
+
+### Run the Example
 
 ```bash
 cmake --preset linux-gcc-release \
@@ -270,7 +288,9 @@ See [examples/simple/src/main.cpp](examples/simple/src/main.cpp) for schedules, 
 
 ---
 
-## Usage {#usage}
+<a id="usage"></a>
+
+## Usage
 
 Systems are plain structs — `operator()` parameters declare data access. `App` owns the main world, executor, and frame scheduler.
 
@@ -323,7 +343,9 @@ Builtin schedules (`helios/app/schedules.hpp`): `MainStartup` → `PreStartup` �
 
 ---
 
-## Architecture {#architecture}
+<a id="architecture"></a>
+
+## Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -356,7 +378,9 @@ Builtin schedules (`helios/app/schedules.hpp`): `MainStartup` → `PreStartup` �
 
 ---
 
-## Using as a Dependency {#using-as-a-dependency}
+<a id="using-as-a-dependency"></a>
+
+## Using as a Dependency
 
 Helios can be consumed from another CMake project in several ways. All methods expose targets as `helios::module::<name>` and the helper `helios_link_modules()`.
 
@@ -367,7 +391,9 @@ set(HELIOS_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(HELIOS_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 ```
 
-### Method 1: `add_subdirectory` {#method-1-add_subdirectory}
+<a id="method-1-add_subdirectory"></a>
+
+### Method 1: `add_subdirectory`
 
 Best for vendoring a copy inside your tree (e.g. `third_party/HeliosEngine`).
 
@@ -387,7 +413,9 @@ helios_link_modules(
 )
 ```
 
-### Method 2: `FetchContent` {#method-2-fetchcontent}
+<a id="method-2-fetchcontent"></a>
+
+### Method 2: `FetchContent`
 
 Fetches at configure time without a manual submodule.
 
@@ -413,7 +441,9 @@ helios_link_modules(
 )
 ```
 
-### Method 3: CPM {#method-3-cpm}
+<a id="method-3-cpm"></a>
+
+### Method 3: CPM
 
 Uses the same CPM integration as Helios itself ([`cmake/DownloadUsingCPM.cmake`](cmake/DownloadUsingCPM.cmake)).
 
@@ -437,11 +467,9 @@ helios_link_modules(
 )
 ```
 
-<concurrentqueue.h>
-<concurrentqueue/concurrentqueue.h>
-<concurrentqueue/moodycamel/concurrentqueue.h>
+<a id="method-4-installed-package-find_package"></a>
 
-### Method 4: Installed Package (`find_package`) {#method-4-installed-package-find_package}
+### Method 4: Installed Package (`find_package`)
 
 Build and install Helios, then use the generated CMake package config.
 
@@ -468,7 +496,9 @@ Installed artifacts: `HeliosConfig.cmake`, `HeliosConfigVersion.cmake`, `HeliosT
 
 ---
 
-## Documentation {#documentation}
+<a id="documentation"></a>
+
+## Documentation
 
 ### API reference (Doxygen)
 
@@ -485,7 +515,9 @@ Config: [`docs/doxygen/Doxyfile`](docs/doxygen/Doxyfile) — [doxygen-awesome-cs
 
 ---
 
-## Development {#development}
+<a id="development"></a>
+
+## Development
 
 ### Code formatting
 
@@ -508,7 +540,9 @@ pip install pre-commit
 pre-commit install
 ```
 
-### Creating a Custom Module {#creating-a-custom-module}
+<a id="creating-a-custom-module"></a>
+
+### Creating a Custom Module
 
 Helios modules live under `src/` by default. Register additional search paths with `helios_add_extra_module_dirs()` (before discovery) or `HELIOS_EXTRA_MODULE_DIRS`. The `greeting` example path is registered automatically when `HELIOS_BUILD_EXAMPLES=ON`. See the full walkthrough:
 
@@ -557,7 +591,9 @@ ctest --preset linux-gcc-release                            # tests
 
 ---
 
-## Roadmap {#roadmap}
+<a id="roadmap"></a>
+
+## Roadmap
 
 - Rendering module
 - Full window/input integration
@@ -566,7 +602,9 @@ ctest --preset linux-gcc-release                            # tests
 
 ---
 
-## Acknowledgments {#acknowledgments}
+<a id="acknowledgments"></a>
+
+## Acknowledgments
 
 Inspired by [Bevy](https://bevyengine.org/), [EnTT](https://github.com/skypjack/entt), and [Taskflow](https://taskflow.github.io/).
 
@@ -574,7 +612,9 @@ Inspired by [Bevy](https://bevyengine.org/), [EnTT](https://github.com/skypjack/
 
 ---
 
-## License {#license}
+<a id="license"></a>
+
+## License
 
 Distributed under the MIT License. See [LICENSE](LICENSE) for details.
 
@@ -582,7 +622,9 @@ Distributed under the MIT License. See [LICENSE](LICENSE) for details.
 
 ---
 
-## Contact {#contact}
+<a id="contact"></a>
+
+## Contact
 
 **RexarX** — who727cares@gmail.com
 

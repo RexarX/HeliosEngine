@@ -195,6 +195,13 @@ def build_docs(docs_dir: Path, clean: bool = False, quiet: bool = False) -> bool
                 print(result.stderr, file=sys.stderr)
             return False
 
+        # README uses repo-relative image paths (e.g. docs/img/logo.png); Doxygen
+        # emits those unchanged, so mirror docs/img into the HTML output tree.
+        img_src = docs_dir / "img"
+        img_dst = output_dir / "docs" / "img"
+        if img_src.is_dir():
+            shutil.copytree(img_src, img_dst, dirs_exist_ok=True)
+
         output = (result.stdout or "") + (result.stderr or "")
         warning_count = count_warnings(output)
 

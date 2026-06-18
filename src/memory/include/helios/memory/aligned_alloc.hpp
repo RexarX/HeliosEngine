@@ -13,6 +13,9 @@ namespace helios::mem {
  * @brief Allocates memory with the specified alignment.
  * @details Uses `_aligned_malloc` on MSVC and `std::aligned_alloc` on other
  * platforms.
+ * On POSIX, `std::aligned_alloc` requires alignment >= `sizeof(void*)`.
+ * Smaller alignments are satisfied via `malloc`, which provides at least
+ * `alignof(std::max_align_t)` alignment.
  * @warning Triggers assertion in next cases:
  * - alignment is zero.
  * - alignment is not a power of two.
@@ -41,8 +44,15 @@ namespace helios::mem {
 #ifdef _MSC_VER
   void* const ptr = _aligned_malloc(size, alignment);
 #else
-  // POSIX aligned_alloc requires size to be a multiple of alignment.
-  void* const ptr = std::aligned_alloc(alignment, AlignUp(size, alignment));
+  // POSIX aligned_alloc requires size to be a multiple of alignment and
+  // alignment >= sizeof(void*). malloc is sufficient for smaller alignments
+  // because it is aligned for any scalar type.
+  void* ptr = nullptr;
+  if (alignment < sizeof(void*)) {
+    ptr = std::malloc(size);
+  } else {
+    ptr = std::aligned_alloc(alignment, AlignUp(size, alignment));
+  }
 #endif
   if (ptr != nullptr && enable_profile) {
     HELIOS_MEMORY_PROFILE_ALLOC(ptr, size, "AlignedAlloc");
