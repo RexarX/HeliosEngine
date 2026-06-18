@@ -145,7 +145,7 @@ Package names below match `INSTALL_HINTS` in [`cmake/dependencies/`](cmake/depen
 sudo apt-get update
 sudo apt-get install -y ninja-build clang-format doxygen \
   libboost-all-dev libtbb-dev libspdlog-dev \
-  libtaskflow-cpp-dev concurrentqueue-dev libglfw3-dev \
+  libtaskflow-cpp-dev libconcurrentqueue-dev libglfw3-dev \
   doctest-dev
 ```
 

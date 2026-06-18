@@ -3,7 +3,7 @@ helios_dependency(
     VERSION "^1.0.0"
 
     INSTALL_HINTS
-        apt concurrentqueue-dev
+        apt libconcurrentqueue-dev
         brew concurrentqueue
         pkg_config concurrentqueue
 

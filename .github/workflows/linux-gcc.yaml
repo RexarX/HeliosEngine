@@ -36,7 +36,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y ninja-build \
             libboost-all-dev libtbb-dev libspdlog-dev \
-            libtaskflow-cpp-dev concurrentqueue-dev libglfw3-dev \
+            libtaskflow-cpp-dev libconcurrentqueue-dev libglfw3-dev \
             doctest-dev
 
       - name: Configure (${{ matrix.preset }})

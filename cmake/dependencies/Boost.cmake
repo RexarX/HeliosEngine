@@ -93,13 +93,24 @@ if(NOT _boost_prefer_cpm)
   endif()
 endif()
 
+# Link a Helios Boost wrapper to the best available imported Boost target.
+function(_helios_link_boost_interface _helios_target)
+  if(TARGET Boost::boost)
+    target_link_libraries(${_helios_target} INTERFACE Boost::boost)
+  elseif(TARGET Boost::headers)
+    target_link_libraries(${_helios_target} INTERFACE Boost::headers)
+  elseif(Boost_INCLUDE_DIRS)
+    target_include_directories(${_helios_target} SYSTEM INTERFACE ${Boost_INCLUDE_DIRS})
+  endif()
+endfunction()
+
 if(Boost_FOUND)
   helios_dep_log(SUCCESS "Boost found via ${_boost_found_via}")
   helios_dep_mark_found(NAME "Boost" VIA "${_boost_found_via}")
 
   if(NOT TARGET helios::boost::boost)
-    add_library(helios::boost::boost INTERFACE IMPORTED)
-    target_link_libraries(helios::boost::boost INTERFACE Boost::boost)
+    add_library(helios::boost::boost INTERFACE IMPORTED GLOBAL)
+    _helios_link_boost_interface(helios::boost::boost)
   endif()
 
   if(NOT HELIOS_USE_STL_STACKTRACE)
@@ -107,13 +118,24 @@ if(Boost_FOUND)
       add_library(helios::boost::stacktrace INTERFACE IMPORTED GLOBAL)
       if(TARGET Boost::stacktrace)
         target_link_libraries(helios::boost::stacktrace INTERFACE Boost::stacktrace)
+      else()
+        _helios_link_boost_interface(helios::boost::stacktrace)
       endif()
     endif()
   endif()
 
   if(NOT TARGET helios::boost::unordered)
     add_library(helios::boost::unordered INTERFACE IMPORTED GLOBAL)
-    target_link_libraries(helios::boost::unordered INTERFACE Boost::boost)
+    _helios_link_boost_interface(helios::boost::unordered)
+  endif()
+
+  if(NOT TARGET helios::boost::container)
+    add_library(helios::boost::container INTERFACE IMPORTED GLOBAL)
+    if(TARGET Boost::container)
+      target_link_libraries(helios::boost::container INTERFACE Boost::container)
+    else()
+      _helios_link_boost_interface(helios::boost::container)
+    endif()
   endif()
 
   helios_dep_mark_processed(NAME "Boost")
@@ -127,6 +149,9 @@ else()
       set(_boost_include_libs "container;stacktrace;unordered")
     endif()
 
+    # Semicolons must be escaped — otherwise cmake_parse_arguments splits the list.
+    string(REPLACE ";" "\\;" _boost_include_libs_escaped "${_boost_include_libs}")
+
     include(DownloadUsingCPM)
     helios_cpm_add_package(
             NAME Boost
@@ -134,7 +159,7 @@ else()
             URL https://github.com/boostorg/boost/releases/download/boost-1.90.0/boost-1.90.0-cmake.tar.xz
             OPTIONS
                 "BOOST_ENABLE_CMAKE ON"
-                "BOOST_INCLUDE_LIBRARIES ${_boost_include_libs}"
+                "BOOST_INCLUDE_LIBRARIES ${_boost_include_libs_escaped}"
                 "BUILD_SHARED_LIBS OFF"
                 "CMAKE_POSITION_INDEPENDENT_CODE ON"
             SYSTEM

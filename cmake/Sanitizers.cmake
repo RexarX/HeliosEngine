@@ -179,6 +179,30 @@ function(_helios_get_sanitizer_flags OUT_COMPILE_FLAGS OUT_LINK_FLAGS)
   set(${OUT_LINK_FLAGS} "${_link_flags}" PARENT_SCOPE)
 endfunction()
 
+# ============================================================================
+# Global Sanitizer Flags (GCC / Clang)
+# ============================================================================
+#
+# Static libraries embed instrumented .o files. Every executable (and shared
+# library) that links them must also link the sanitizer runtime — PRIVATE
+# link options on static targets do not propagate to consumers.
+
+if((HELIOS_COMPILER_IS_GNU OR HELIOS_COMPILER_IS_CLANG) AND HELIOS_ENABLE_SANITIZERS)
+  _helios_get_sanitizer_flags(_helios_global_sanitizer_compile_flags _helios_global_sanitizer_link_flags)
+
+  if(_helios_global_sanitizer_compile_flags)
+    separate_arguments(_helios_global_sanitizer_compile_flags_list
+        UNIX_COMMAND "${_helios_global_sanitizer_compile_flags}")
+    foreach(_helios_sanitizer_compile_flag IN LISTS _helios_global_sanitizer_compile_flags_list)
+      add_compile_options("$<$<CONFIG:Debug>:${_helios_sanitizer_compile_flag}>")
+    endforeach()
+  endif()
+
+  if(_helios_global_sanitizer_link_flags)
+    add_link_options("$<$<CONFIG:Debug>:SHELL:${_helios_global_sanitizer_link_flags}>")
+  endif()
+endif()
+
 # Build the sanitizer flags for MSVC
 function(_helios_get_msvc_sanitizer_flags OUT_COMPILE_FLAGS OUT_LINK_FLAGS)
   set(_compile_flags "")
@@ -206,9 +230,10 @@ function(helios_target_enable_sanitizers TARGET)
     return()
   endif()
 
-  # MSVC and clang-cl sanitizers are applied globally via add_compile_options
-  # (required for ABI-consistent instrumentation across all TUs, including CPM deps)
-  if(HELIOS_COMPILER_IS_MSVC OR HELIOS_COMPILER_IS_CLANG_CL)
+  # Sanitizers are applied globally (see sections above) so instrumentation
+  # and runtime linking stay consistent across static libs and executables.
+  if(HELIOS_COMPILER_IS_MSVC OR HELIOS_COMPILER_IS_CLANG_CL
+      OR HELIOS_COMPILER_IS_GNU OR HELIOS_COMPILER_IS_CLANG)
     return()
   endif()
 
@@ -219,16 +244,15 @@ function(helios_target_enable_sanitizers TARGET)
 
   if(_compile_flags)
     separate_arguments(_compile_flags_list UNIX_COMMAND "${_compile_flags}")
-    target_compile_options(${TARGET} PRIVATE
-            $<${_is_debug}:${_compile_flags_list}>
-        )
+    foreach(_helios_sanitizer_compile_flag IN LISTS _compile_flags_list)
+      target_compile_options(${TARGET} PRIVATE
+              "$<$<CONFIG:Debug>:${_helios_sanitizer_compile_flag}>")
+    endforeach()
   endif()
 
   if(_link_flags)
-    separate_arguments(_link_flags_list UNIX_COMMAND "${_link_flags}")
     target_link_options(${TARGET} PRIVATE
-            $<${_is_debug}:${_link_flags_list}>
-        )
+            "$<$<CONFIG:Debug>:SHELL:${_link_flags}>")
   endif()
 endfunction()
 

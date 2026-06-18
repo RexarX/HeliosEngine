@@ -31,6 +31,9 @@ jobs:
           restore-keys: |
             cpm-${{ runner.os }}-
 
+      - name: Setup MSVC
+        uses: ilammy/msvc-dev-cmd@v1
+
       - name: Configure (${{ matrix.preset }})
         run: cmake --preset ${{ matrix.preset }} ${{ matrix.cmake_extra }}
 
