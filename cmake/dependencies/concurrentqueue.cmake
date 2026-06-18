@@ -1,47 +1,22 @@
-# This module handles finding concurrentqueue from multiple sources:
-# 1. Conan (if using Conan)
-# 2. System packages (pacman, apt, etc.)
-# 3. CPM download (fallback)
-
-include_guard(GLOBAL)
-
-message(STATUS "Configuring concurrentqueue dependency...")
-
-# Use helios_module system for standard package finding
-helios_dep_begin(
+helios_dependency(
     NAME concurrentqueue
-    VERSION 1.0.4
-    PKG_CONFIG_NAMES concurrentqueue
-    CPM_NAME concurrentqueue
-    CPM_VERSION 1.0.4
-    CPM_GITHUB_REPOSITORY cameron314/concurrentqueue
+    VERSION "^1.0.0"
+
+    INSTALL_HINTS
+        apt concurrentqueue-dev
+        brew concurrentqueue
+        pkg_config concurrentqueue
+
+    CPM_REPOSITORY cameron314/concurrentqueue
+    CPM_VERSION 1.0.5
+
+    ALIASES
+        helios::concurrentqueue::concurrentqueue concurrentqueue::concurrentqueue
+        helios::concurrentqueue::concurrentqueue concurrentqueue
 )
 
-helios_dep_end()
-
-# Create helios::concurrentqueue::concurrentqueue alias if concurrentqueue was found
-if(NOT TARGET helios::concurrentqueue::concurrentqueue)
-    if(TARGET concurrentqueue::concurrentqueue)
-        add_library(helios::concurrentqueue::concurrentqueue ALIAS concurrentqueue::concurrentqueue)
-        message(STATUS "  ✓ concurrentqueue configured (concurrentqueue::concurrentqueue)")
-    elseif(TARGET concurrentqueue)
-        add_library(helios::concurrentqueue::concurrentqueue ALIAS concurrentqueue)
-        message(STATUS "  ✓ concurrentqueue configured (concurrentqueue)")
-    else()
-        message(WARNING "  ✗ concurrentqueue not found")
-    endif()
-else()
-    message(STATUS "  ✓ concurrentqueue configured (helios::concurrentqueue::concurrentqueue)")
-endif()
-
-# Create helios::concurrentqueue convenience target that brings in all concurrentqueue targets
-if(NOT TARGET _helios_concurrentqueue_all)
-    add_library(_helios_concurrentqueue_all INTERFACE)
-    if(TARGET helios::concurrentqueue::concurrentqueue)
-        target_link_libraries(_helios_concurrentqueue_all INTERFACE helios::concurrentqueue::concurrentqueue)
-    endif()
-endif()
-
-if(NOT TARGET helios::concurrentqueue)
-    add_library(helios::concurrentqueue ALIAS _helios_concurrentqueue_all)
+if(TARGET helios::concurrentqueue::concurrentqueue AND NOT TARGET helios::concurrentqueue)
+  add_library(_helios_concurrentqueue_all INTERFACE)
+  target_link_libraries(_helios_concurrentqueue_all INTERFACE helios::concurrentqueue::concurrentqueue)
+  add_library(helios::concurrentqueue ALIAS _helios_concurrentqueue_all)
 endif()

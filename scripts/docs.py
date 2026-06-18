@@ -84,7 +84,7 @@ def find_executable(name: str) -> Optional[Path]:
     return Path(result) if result else None
 
 
-def check_dependencies() -> Tuple[bool, list]:
+def check_dependencies(root_dir: Path) -> Tuple[bool, list, list]:
     """Check for required dependencies"""
 
     missing = []
@@ -93,6 +93,16 @@ def check_dependencies() -> Tuple[bool, list]:
     # Check for doxygen
     if not find_executable("doxygen"):
         missing.append("doxygen")
+
+    # Check for doxygen-awesome-css theme (git submodule)
+    theme_css = (
+        root_dir / "third-party" / "doxygen-awesome-css" / "doxygen-awesome.css"
+    )
+    if not theme_css.exists():
+        missing.append(
+            "doxygen-awesome-css (run: git submodule update --init "
+            "third-party/doxygen-awesome-css)"
+        )
 
     # Check for dot (graphviz) - optional but recommended
     if not find_executable("dot"):
@@ -293,9 +303,11 @@ Examples:
 
     print_info(f"Documentation directory: {docs_dir}")
 
+    root_dir = docs_dir.parent
+
     # Check dependencies
     print_info("Checking dependencies...")
-    deps_ok, missing, warnings = check_dependencies()
+    deps_ok, missing, warnings = check_dependencies(root_dir)
 
     if not deps_ok:
         print_error("Missing required dependencies:")

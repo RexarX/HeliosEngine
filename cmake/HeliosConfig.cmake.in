@@ -1,0 +1,14 @@
+# HeliosConfig.cmake — CMake package config for Helios Engine
+#
+# Provides:
+#   helios::module::<name>    — per-module targets
+#   helios_link_modules(...)  — consumer helper
+
+@PACKAGE_INIT@
+
+include("${CMAKE_CURRENT_LIST_DIR}/HeliosTargets.cmake")
+
+include("${CMAKE_CURRENT_LIST_DIR}/HeliosModuleLinking.cmake" OPTIONAL)
+if(NOT COMMAND helios_link_modules)
+    include("${CMAKE_CURRENT_LIST_DIR}/HeliosModuleUtils.cmake" OPTIONAL)
+endif()

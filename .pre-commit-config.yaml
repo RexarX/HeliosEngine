@@ -1,0 +1,12 @@
+# Local formatting — auto-fixes sources on commit; CI runs --check (format.yaml)
+# Install: pip install pre-commit && pre-commit install
+
+repos:
+  - repo: local
+    hooks:
+      - id: helios-clang-format
+        name: Helios clang-format
+        entry: python scripts/format.py
+        language: system
+        pass_filenames: false
+        always_run: true

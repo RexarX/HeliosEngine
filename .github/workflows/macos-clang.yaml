@@ -1,81 +1,45 @@
 name: macOS Clang
 
 on:
-    push:
-        branches:
-            - main
-            - dev
-    pull_request:
-        branches:
-            - main
-            - dev
-    workflow_dispatch:
-
-# Cancel in-progress runs for the same PR/branch
-concurrency:
-    group: ${{ github.workflow }}-${{ github.ref }}
-    cancel-in-progress: true
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
-    build-macos:
-        name: macOS Clang (${{ matrix.build_type }})
-        runs-on: macos-latest
-        strategy:
-            fail-fast: false
-            matrix:
-                build_type: [debug, release]
-                include:
-                    - build_type: debug
-                      cmake_type: Debug
-                    - build_type: release
-                      cmake_type: Release
+  build:
+    runs-on: macos-14
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - preset: macos-clang-debug
+            cmake_extra: -DHELIOS_DEVELOPER_MODE=ON -DHELIOS_BUILD_EXAMPLES=OFF
+          - preset: macos-clang-release
+            cmake_extra: -DHELIOS_BUILD_EXAMPLES=OFF
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
-        steps:
-            - name: Checkout repository
-              uses: actions/checkout@v4
-              with:
-                  submodules: recursive
-                  fetch-depth: 0
+      - name: Restore CPM cache
+        uses: actions/cache@v4
+        with:
+          path: .cpm_cache
+          key: cpm-${{ runner.os }}-${{ hashFiles('cmake/dependencies/**', 'cmake/DownloadUsingCPM.cmake') }}
+          restore-keys: |
+            cpm-${{ runner.os }}-
 
-            - name: Setup Python
-              uses: actions/setup-python@v5
-              with:
-                  python-version: "3.11"
+      - name: Install dependencies
+        run: |
+          brew install ninja boost spdlog taskflow glfw doctest concurrentqueue
 
-            - name: Install system dependencies
-              run: |
-                  brew install cmake ninja python3
+      - name: Configure (${{ matrix.preset }})
+        run: cmake --preset ${{ matrix.preset }} ${{ matrix.cmake_extra }}
 
-            - name: Install project dependencies
-              run: |
-                  python3 scripts/install_deps.py --use-system --no-interactive
+      - name: Build (${{ matrix.preset }})
+        run: cmake --build --preset ${{ matrix.preset }}
 
-            - name: Configure CMake
-              run: |
-                  python3 scripts/configure.py \
-                    --compiler clang \
-                    --type ${{ matrix.cmake_type }} \
-                    --build-system Ninja \
-                    --no-interactive
-
-            - name: Build
-              run: |
-                  python3 scripts/build.py \
-                    --compiler clang \
-                    --type ${{ matrix.cmake_type }} \
-                    --build-system Ninja \
-                    --tests \
-                    --no-examples \
-                    --no-interactive
-
-            - name: Run Tests
-              working-directory: build/${{ matrix.build_type }}/macos
-              run: |
-                  ctest --output-on-failure --parallel 2
-
-            - name: Upload Test Results
-              if: failure()
-              uses: actions/upload-artifact@v4
-              with:
-                  name: test-results-macos-${{ matrix.build_type }}
-                  path: build/${{ matrix.build_type }}/macos/Testing/
+      - name: Test (${{ matrix.preset }})
+        run: ctest --preset ${{ matrix.preset }}

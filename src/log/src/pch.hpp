@@ -1,0 +1,28 @@
+#pragma once
+
+#include <charconv>
+#include <chrono>
+#include <concepts>
+#include <cstddef>
+#include <cstdint>
+#include <ctime>
+#include <expected>
+#include <filesystem>
+#include <format>
+#include <iterator>
+#include <memory>
+#include <mutex>
+#include <shared_mutex>
+#include <string>
+#include <string_view>
+#include <system_error>
+#include <type_traits>
+#include <unordered_map>
+#include <vector>
+
+#include <spdlog/async.h>
+#include <spdlog/logger.h>
+#include <spdlog/pattern_formatter.h>
+#include <spdlog/sinks/basic_file_sink.h>
+#include <spdlog/sinks/stdout_color_sinks.h>
+#include <spdlog/spdlog.h>

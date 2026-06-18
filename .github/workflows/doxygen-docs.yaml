@@ -1,35 +1,56 @@
 name: Build and Deploy Doxygen Docs
 
 on:
-    push:
-        branches:
-            - main # Add or remove branches as needed
+  push:
+    branches:
+      - main
+      - dev
 
 permissions:
-    contents: write
+  contents: write
+
+concurrency:
+  group: gh-pages-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-    doxygen-docs:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout repository (with submodules)
-              uses: actions/checkout@v4
-              with:
-                  submodules: recursive
-                  fetch-depth: 0
+  doxygen-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository (with submodules)
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
 
-            - name: Install Doxygen and Graphviz
-              run: sudo apt-get update && sudo apt-get install -y doxygen graphviz
+      - name: Install Doxygen and Graphviz
+        run: sudo apt-get update && sudo apt-get install -y doxygen graphviz
 
-            - name: Build Doxygen documentation
-              working-directory: docs/doxygen
-              run: doxygen Doxyfile
+      - name: Ensure jQuery is present (required by doxygen-awesome extensions)
+        run: |
+          if [ ! -f docs/doxygen/jquery.min.js ]; then
+            curl -fsSL https://code.jquery.com/jquery-3.7.1.min.js \
+              -o docs/doxygen/jquery.min.js
+          fi
 
-            - name: Deploy to gh-pages branch
-              uses: peaceiris/actions-gh-pages@v4
-              with:
-                  github_token: ${{ secrets.GITHUB_TOKEN }}
-                  publish_dir: docs/doxygen/html
-                  publish_branch: gh-pages
-                  destination_dir: ${{ github.ref_name }}
-                  keep_files: true
+      - name: Build Doxygen documentation
+        run: python3 scripts/docs.py
+
+      - name: Deploy to GitHub Pages (main → site root)
+        if: github.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/doxygen/html
+          publish_branch: gh-pages
+          keep_files: true
+
+      - name: Deploy to GitHub Pages (other branches → /<branch>/)
+        if: github.ref != 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/doxygen/html
+          publish_branch: gh-pages
+          destination_dir: ${{ github.ref_name }}
+          keep_files: true

@@ -15,20 +15,26 @@ CREATE_SUBDIRS         = NO
 #---------------------------------------------------------------------------
 
 # Use relative paths so Doxygen works from docs/ or project root
-INPUT                  = ../../src ../../README.md ../../src/core/README.md ../guides
+INPUT                  = ../../src \
+                         ../../README.md \
+                         ../../docs/guidelines.md \
+                         ../../examples/custom_module/README.md
 FILE_PATTERNS          = *.hpp *.inl *.h *.cpp *.cxx *.c *.md
 RECURSIVE              = YES
 EXCLUDE                = ../../tests ../../third-party
+EXCLUDE_PATTERNS       = */tests/* \
+                         */details/*
 
 #---------------------------------------------------------------------------
 # Configuration options related to source browsing
 #---------------------------------------------------------------------------
 
+# SOURCE_BROWSER keeps "Definition at line N of file …" links; INLINE_SOURCES
+# controls whether the function body is also embedded on the member page.
 SOURCE_BROWSER         = YES
-INLINE_SOURCES         = YES
+INLINE_SOURCES         = NO
 STRIP_CODE_COMMENTS    = NO
 SHOW_USED_FILES        = NO
-SHOW_FILE_NAMES        = NO
 FULL_PATH_NAMES        = YES
 STRIP_FROM_PATH        = ../../
 
@@ -46,36 +52,27 @@ ALPHABETICAL_INDEX     = YES
 GENERATE_HTML          = YES
 HTML_OUTPUT            = html
 
-# Sidebar-only theme with doxygen-awesome-css
-HTML_EXTRA_STYLESHEET  = ../../third-party/doxygen-awesome-css/doxygen-awesome.css \
-                         ../../third-party/doxygen-awesome-css/doxygen-awesome-sidebar-only.css \
-                         custom.css
-
-HTML_EXTRA_FILES       = ../img/logo.png \
-                         ../img/favicon.ico \
-                         ../../third-party/doxygen-awesome-css/doxygen-awesome-fragment-copy-button.js \
-                         ../../third-party/doxygen-awesome-css/doxygen-awesome-paragraph-link.js \
-                         ../../third-party/doxygen-awesome-css/doxygen-awesome-interactive-toc.js \
-                         ../../third-party/doxygen-awesome-css/doxygen-awesome-tabs.js
-
-
-# Required for sidebar-only theme
-GENERATE_TREEVIEW      = YES
-DISABLE_INDEX          = YES
-FULL_SIDEBAR           = NO
-HTML_COLORSTYLE        = DARK
-
-# Custom header and footer
+# Base theme (doxygen-awesome-css + extensions)
 HTML_HEADER            = header.html
 HTML_FOOTER            = footer.html
-
-# Disable Doxygen's built-in copy clipboard (we use the extension)
+HTML_EXTRA_STYLESHEET  = ../../third-party/doxygen-awesome-css/doxygen-awesome.css \
+                         custom.css
+HTML_EXTRA_FILES       = jquery.min.js \
+                         ../../third-party/doxygen-awesome-css/doxygen-awesome-darkmode-toggle.js \
+                         ../../third-party/doxygen-awesome-css/doxygen-awesome-fragment-copy-button.js \
+                         ../../third-party/doxygen-awesome-css/doxygen-awesome-interactive-toc.js \
+                         ../../third-party/doxygen-awesome-css/doxygen-awesome-tabs.js
 HTML_COPY_CLIPBOARD    = NO
-
-# Disable page outline panel (we use interactive TOC extension)
 PAGE_OUTLINE_PANEL     = NO
 
+# Base theme (see doxygen-awesome-css README)
+GENERATE_TREEVIEW      = YES
+DISABLE_INDEX          = NO
+FULL_SIDEBAR           = NO
+HTML_COLORSTYLE        = LIGHT
 TREEVIEW_WIDTH         = 335
+
+PROJECT_ICON           = ../img/favicon.ico
 
 IMAGE_PATH             = ../img
 
@@ -134,7 +131,6 @@ CALL_GRAPH             = YES
 CALLER_GRAPH           = YES
 COLLABORATION_GRAPH    = YES
 UML_LOOK               = YES
-DOT_MULTI_TARGETS      = YES
 
 #---------------------------------------------------------------------------
 # Configuration options related to the extraction process
@@ -160,6 +156,7 @@ WARN_IF_DOC_ERROR      = YES
 
 USE_MDFILE_AS_MAINPAGE = ../../README.md
 MARKDOWN_SUPPORT       = YES
+MARKDOWN_ID_STYLE      = GITHUB
 AUTOLINK_SUPPORT       = YES
 
 #---------------------------------------------------------------------------

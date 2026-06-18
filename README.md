@@ -1,11 +1,9 @@
-<a name="readme-top"></a>
+<a id="readme-top"></a>
 
 <!-- PROJECT SHIELDS -->
 
 [![C++23][cpp-shield]][cpp-url]
 [![MIT License][license-shield]][license-url]
-
-[![Format Check](https://github.com/RexarX/HeliosEngine/workflows/Format%20Check/badge.svg)](https://github.com/RexarX/HeliosEngine/actions/workflows/format.yaml)
 
 [![Linux GCC](https://img.shields.io/github/actions/workflow/status/RexarX/HeliosEngine/linux-gcc.yaml?branch=main&label=Linux%20GCC&logo=linux&logoColor=white)](https://github.com/RexarX/HeliosEngine/actions/workflows/linux-gcc.yaml)
 [![Linux Clang](https://img.shields.io/github/actions/workflow/status/RexarX/HeliosEngine/linux-clang.yaml?branch=main&label=Linux%20Clang&logo=llvm&logoColor=white)](https://github.com/RexarX/HeliosEngine/actions/workflows/linux-clang.yaml)
@@ -13,594 +11,580 @@
 [![macOS Clang](https://img.shields.io/github/actions/workflow/status/RexarX/HeliosEngine/macos-clang.yaml?branch=main&label=macOS%20Clang&logo=apple&logoColor=white)](https://github.com/RexarX/HeliosEngine/actions/workflows/macos-clang.yaml)
 
 <!-- PROJECT LOGO -->
+
 <br />
+
 <div align="center">
-  <img src="https://github.com/RexarX/HeliosEngine/blob/main/docs/img/logo.png" alt="Helios Engine Logo" width="100" height="100">
-  <h1 align="center">Helios Engine</h1>
-  <p align="center">
-    A modern, ECS based modular game engine framework built with C++23
-    <br />
-    <a href="#getting-started"><strong>Get Started »</strong></a>
-    <br />
-    <br />
-    <a href="#key-features">Features</a>
-    <a href="#architecture">Architecture</a>
-    <a href="#usage-examples">Usage Examples</a>
-    <a href="#contact">Contact</a>
-  </p>
+
+![Helios Engine Logo](docs/img/logo.png)
+
+# Helios Engine
+
+A modular, data-oriented C++23 game engine framework inspired by Bevy
+
+<b><a href="#getting-started">Get Started »</a></b> · <a href="#key-features">Features</a> · <a href="#modules">Modules</a> · <a href="#building-by-platform">Build</a> · <a href="#using-as-a-dependency">Third-Party</a> · <a href="#documentation">Docs</a>
+
 </div>
 
 ---
 
 ## Table of Contents
 
-- [About The Project](#about-the-project)
-    - [Key Features](#key-features)
-    - [Design Philosophy](#design-philosophy)
-- [Architecture](#architecture)
-    - [Entity Component System (ECS)](#entity-component-system-ecs)
-    - [Modular Design](#modular-design)
-    - [Creating Custom Modules](#creating-custom-modules)
-- [Getting Started](#getting-started)
-    - [Requirements](#requirements)
-    - [Dependencies](#dependencies)
-    - [Quick Start](#quick-start)
-    - [Build Options](#build-options)
-- [Usage Examples](#usage-examples)
-- [Core Module](#core-module)
-- [Roadmap](#roadmap)
-- [Acknowledgments](#acknowledgments)
-- [License](#license)
-- [Contact](#contact)
+- <a href="#about-the-project">About The Project</a>
+  - <a href="#key-features">Key Features</a>
+  - <a href="#design-philosophy">Design Philosophy</a>
+- <a href="#modules">Modules</a>
+- <a href="#getting-started">Getting Started</a>
+  - <a href="#requirements">Requirements</a>
+  - <a href="#installing-dependencies">Installing Dependencies</a>
+  - <a href="#building-by-platform">Building</a>
+  - <a href="#run-the-example">Run the Example</a>
+- <a href="#usage">Usage</a>
+- <a href="#architecture">Architecture</a>
+- <a href="#using-as-a-dependency">Using as a Dependency</a>
+  - <a href="#method-1-add_subdirectory">add_subdirectory</a>
+  - <a href="#method-2-fetchcontent">FetchContent</a>
+  - <a href="#method-3-cpm">CPM</a>
+  - <a href="#method-4-installed-package-find_package">Installed Package (find_package)</a>
+- <a href="#documentation">Documentation</a>
+- <a href="#development">Development</a>
+  - <a href="#creating-a-custom-module">Creating a Custom Module</a>
+- <a href="#roadmap">Roadmap</a>
+- <a href="#acknowledgments">Acknowledgments</a>
+- <a href="#license">License</a>
+- <a href="#contact">Contact</a>
 
 ---
 
-<a name="about-the-project"></a>
+## About The Project {#about-the-project}
 
-## About The Project
+**Helios Engine** is a high-performance, ECS-based game engine framework written in C++23. It combines an archetype-based Entity Component System with deferred commands, double-buffered messages, and parallel system scheduling over a work-stealing task executor.
 
-**Helios Engine** is a modern, high-performance game engine framework written in C++23 that embraces data-oriented design principles. Inspired by [Bevy](https://bevyengine.org/), it features a powerful Entity Component System (ECS) architecture that enables efficient, scalable game development.
+<a href="#readme-top">↑ Back to Top</a>
 
-<a name="key-features"></a>
+### Key Features {#key-features}
 
-### Key Features
+- **ECS** — archetype and sparse-set storage, deferred `Commands`, rich query iterators
+- **Parallel scheduling** — access-conflict detection, topological execution, Taskflow-backed executors
+- **Application layer** — `App` / `SubApp` lifecycle, builtin schedules, static and dynamic plugins
+- **Modular build** — twelve independent modules; enable only what you need
+- **Modern C++23** — concepts, ranges, `std::expected`, PMR allocators
+- **Flexible dependencies** — system packages first, [CPM](https://github.com/cpm-cmake/CPM.cmake) download as fallback
 
-- **ECS Architecture** - Archetype-based design built from scratch for C++23
-- **High Performance** - Data-oriented design with cache-friendly memory layouts
-- **Parallel Execution** - Multi-threaded system scheduling with automatic dependency resolution
-- **Event System** - Type-safe, efficient event handling with readers/writers
-- **Query System** - Powerful component queries with filters and optional components
-- **Resource Management** - Global resources accessible from any system
-- **Modern C++23** - Leverages coroutines, concepts, and ranges
-- **Modular Design** - Build only what you need (Core, Renderer, Runtime)
-- **Flexible Dependencies** - Conan, system packages, or automatic download via CPM
+### Design Philosophy {#design-philosophy}
 
-<a name="design-philosophy"></a>
+1. **Data-oriented design** — components stored contiguously for cache-friendly iteration
+2. **Composability** — behavior emerges from systems operating on component data
+3. **Explicitness** — data access declared through system parameter types; schedules resolve ordering
 
-### Design Philosophy
-
-Helios Engine is built on three core principles:
-
-1. **Data-Oriented Design**: Components are stored in contiguous memory (archetypes) for optimal cache performance
-2. **Composability**: Entities are composed of components, behavior emerges from systems
-3. **Explicitness**: System dependencies and data access patterns are declared explicitly
-
-[↑ Back to Top](#readme-top)
+<a href="#readme-top">↑ Back to Top</a>
 
 ---
 
-<a name="architecture"></a>
+## Modules {#modules}
 
-## Architecture
-
-<a name="project-entity-component-system-ecs"></a>
-
-### Entity Component System (ECS)
-
-Helios uses an **archetype-based ECS**, similar to Bevy:
-
-#### **Entities**
-
-- Unique identifiers (UUID-based)
-- Lightweight containers for components
-- Efficient creation, deletion, and querying
-
-#### **Components**
-
-- Plain data structures
-- Stored contiguously in memory by archetype
-- No inheritance required
-
-```cpp
-struct Transform {
-  float x = 0.0F;
-  float y = 0.0F;
-  float z = 0.0F;
-  float rotation = 0.0F;
-};
-
-struct Velocity {
-  float dx = 0.0F;
-  float dy = 0.0F;
-  float dz = 0.0F;
-};
-
-struct Health {
-  int max_health = 100;
-  int current_health = 100;
-
-  bool IsDead() const noexcept { return current_health <= 0; }
-};
-```
-
-#### **Systems**
-
-- Classes that operate on entities with specific components
-- Declare data access patterns at compile-time via `GetAccessPolicy()`
-- Automatically parallelized based on data dependencies
-- Access all data through `SystemContext`
-
-#### **World**
-
-- Central container for all entities and components
-- Manages component storage and archetype transitions
-- Provides query interface and entity operations
-
-#### **Scheduling**
-
-- Systems are organized into schedules (Main, PreUpdate, Update, PostUpdate, etc.)
-- Automatic parallelization based on declared data access
-- Conflict detection ensures data race freedom
-- Custom schedules supported
-
-<a name="modular-design"></a>
-
-### Modular Design
-
-The engine is divided into independent modules that can be enabled or disabled:
-
-| Module   | Description                                 | Status   | Documentation                     |
-| -------- | ------------------------------------------- | -------- | --------------------------------- |
-| **Core** | ECS, async runtime, event system, utilities | Complete | [Core Module](src/core/README.md) |
-
-Each module can be individually enabled or disabled via CMake options:
+| Module      | Description                                        | Default | Documentation                     |
+| ----------- | -------------------------------------------------- | :-----: | --------------------------------- |
+| `core`      | Asserts, UUID, stack traces, CStringView           |   ON    | [README](src/core/README.md)      |
+| `platform`  | Platform detection, `HELIOS_API`, debug break      |   ON    | [README](src/platform/README.md)  |
+| `compiler`  | Branch hints, feature detection macros             |   ON    | [README](src/compiler/README.md)  |
+| `utils`     | TypeId, Delegate, timers, filesystem, adapters     |   ON    | [README](src/utils/README.md)     |
+| `container` | SparseSet, MultiTypeMap, TypedBuffer, StaticString |   ON    | [README](src/container/README.md) |
+| `memory`    | PMR allocators, `Rc`/`Arc`                         |   ON    | [README](src/memory/README.md)    |
+| `log`       | spdlog-based typed logging                         |   ON    | [README](src/log/README.md)       |
+| `async`     | Task graphs and work-stealing executor             |   ON    | [README](src/async/README.md)     |
+| `ecs`       | World, entities, components, schedules             |   ON    | [README](src/ecs/README.md)       |
+| `app`       | Application framework, plugins, sub-apps           |   ON    | [README](src/app/README.md)       |
+| `profile`   | Tracy / flamegraph profiling (opt-in)              |   OFF   | [README](src/profile/README.md)   |
+| `window`    | GLFW windowing (skeleton)                          |   ON    | [README](src/window/README.md)    |
 
 ```bash
-# Enable/disable specific modules
-cmake -DHELIOS_BUILD_WINDOW_MODULE=ON -DHELIOS_BUILD_AUDIO_MODULE=OFF ..
-
-# Build only core (no modules)
-python scripts/build.py --core-only
+cmake --preset linux-gcc-release -DHELIOS_BUILD_PROFILE_MODULE=ON -DHELIOS_BUILD_WINDOW_MODULE=OFF
 ```
 
-<a name="creating-custom-modules"></a>
-
-### Creating Custom Modules
-
-Helios Engine provides a streamlined system for creating custom modules. Each module:
-
-- Has its own build option (`HELIOS_BUILD_{NAME}_MODULE`)
-- Can depend on other modules or external libraries
-- Follows a standardized directory structure
-- Integrates automatically with the build system
-
-**Quick Example:**
-
-```cmake
-# src/modules/my_module/CMakeLists.txt
-helios_define_module(
-    NAME my_module
-    DESCRIPTION "My custom module"
-    SOURCES src/my_module.cpp
-    HEADERS include/helios/my_module/my_module.hpp
-)
-```
-
-**[Full Module Creation Guide](docs/guides/creating-modules.md)** - Comprehensive documentation on creating custom modules, including:
-
-- Directory structure and conventions
-- CMake function reference (`helios_register_module`, `helios_add_module`, `helios_define_module`)
-- Module dependencies and build options
-- Best practices and examples
-
-[↑ Back to Top](#readme-top)
+<a href="#readme-top">↑ Back to Top</a>
 
 ---
 
-<a name="getting-started"></a>
+## Getting Started {#getting-started}
 
-## Getting Started
+### Requirements {#requirements}
 
-<a name="requirements"></a>
+| Tool             | Minimum                         | Recommended                 |
+| ---------------- | ------------------------------- | --------------------------- |
+| **CMake**        | 3.25+                           | 3.28+                       |
+| **C++ compiler** | GCC 14+, Clang 19+, MSVC 19.34+ | GCC 15+, Clang 21+          |
+| **Generator**    | —                               | Ninja                       |
+| **Python**       | 3.8+                            | 3.10+ (scripts, pre-commit) |
 
-### Requirements
-
-| Tool             | Minimum Version                | Recommended        |
-| ---------------- | ------------------------------ | ------------------ |
-| **CMake**        | 3.25+                          | 3.28+              |
-| **C++ Compiler** | GCC 14+, Clang 19+, MSVC 2022+ | GCC 15+, Clang 21+ |
-| **Python**       | 3.8+                           | 3.10+              |
-
-**Compiler Support:**
-
-- GCC 14+ (tested on 14.2.0)
-- Clang 19+ (tested on 20.1.8)
-- MSVC 19.34+ (Visual Studio 2022 17.4+)
-
-<a name="dependencies"></a>
-
-### Dependencies
-
-#### Core Dependencies
-
-- [Boost](https://www.boost.org/) (1.87+) - stacktrace, pool, unordered containers
-- [spdlog](https://github.com/gabime/spdlog) (1.12+) - Fast logging
-- [stduuid](https://github.com/mariusbancila/stduuid) (1.2+) - UUID generation
-- [Taskflow](https://github.com/taskflow/taskflow) (3.10+) - Parallel task programming
-
-#### Test Dependencies
-
-- [doctest](https://github.com/doctest/doctest) (2.4+) - Testing framework
-
-#### Installation Methods
-
-**Option 1: Conan (Recommended)**
-
-```bash
-# Quick install with automatic Conan setup
-make install-deps
-
-# Or manually with Python script
-python scripts/install-deps.py
-```
-
-**Option 2: System Packages**
-
-```bash
-# Arch Linux
-sudo pacman -S boost intel-tbb spdlog
-
-# Ubuntu/Debian (22.04+)
-sudo apt install libboost-all-dev libtbb-dev libspdlog-dev
-
-# Fedora
-sudo dnf install boost-devel tbb-devel spdlog-devel
-
-# macOS
-brew install boost tbb spdlog
-```
-
-**Option 3: CPM (Automatic Fallback)**
-
-- Dependencies are automatically downloaded if not found
-- No manual intervention required
-
-<a name="quick-start"></a>
-
-### Quick Start
-
-#### 1. Clone the Repository
+Clone with submodules (needed for Doxygen theme):
 
 ```bash
 git clone --recursive https://github.com/RexarX/HeliosEngine.git
 cd HeliosEngine
 ```
 
-#### 2. Install Dependencies
+### Installing Dependencies {#installing-dependencies}
+
+Helios resolves dependencies per module: **system packages are tried first**, then **CPM download** if missing (`HELIOS_DOWNLOAD_PACKAGES=ON`, default). Pre-installing system packages speeds up configuration and avoids network fetches.
+
+Package names below match `INSTALL_HINTS` in [`cmake/dependencies/`](cmake/dependencies/).
+
+#### All platforms — build tools
+
+| Tool         | Purpose                                 |
+| ------------ | --------------------------------------- |
+| CMake ≥ 3.25 | Configure and build                     |
+| Ninja        | Recommended generator (used by presets) |
+| clang-format | Code formatting (`scripts/format.py`)   |
+| Doxygen      | API docs (`scripts/docs.py`) — optional |
+
+#### Linux (APT — Ubuntu / Debian)
 
 ```bash
-# Interactive installation (asks about Conan)
-make install-deps
-
-# Or directly with Python
-python scripts/install_deps.py
+sudo apt-get update
+sudo apt-get install -y ninja-build clang-format doxygen \
+  libboost-all-dev libtbb-dev libspdlog-dev \
+  libtaskflow-cpp-dev concurrentqueue-dev libglfw3-dev \
+  doctest-dev
 ```
 
-#### 3. Configure the Project
+Optional (profile module): `sudo apt-get install -y libtracy-dev`
+
+#### Linux (DNF — Fedora)
 
 ```bash
-# Interactive configuration
-python scripts/configure.py
-
-# Or non-interactive with specific options
-python scripts/configure.py --type Release --compiler gcc --use-conan
+sudo dnf install -y ninja-build clang-tools-extra doxygen \
+  boost-devel tbb-devel spdlog-devel taskflow-devel \
+  glfw-devel doctest-devel stduuid-devel
 ```
 
-#### 4. Build the Project
+#### Linux (Pacman — Arch)
 
 ```bash
-# Build (calls configure.py first if needed)
-make build
-
-# Or directly with Python
-python scripts/build.py
-
-# Specific build configurations
-python scripts/build.py --type Debug --core-only --tests
+sudo pacman -S --needed ninja clang doxygen \
+  boost tbb spdlog taskflow glfw doctest concurrentqueue
 ```
 
-#### 5. Run Tests
+Optional (profile module): `sudo pacman -S tracy`
+
+#### macOS (Homebrew)
 
 ```bash
-# Run tests
-make test BUILD_TYPE={debug,relwithdebinfo,release}
-
-# Or run specific test manually with ctest
-cd build/debug/linux  # or your platform
-ctest -L core
+brew install cmake ninja clang-format doxygen \
+  boost spdlog taskflow glfw doctest concurrentqueue
 ```
 
-<a name="build-options"></a>
+Optional (profile module): `brew install tracy`
 
-### Build Options
+> **Note:** On Linux with **GCC + libstdc++**, [TBB](https://github.com/oneapi-src/oneTBB) is required for parallel STL (`libtbb-dev` / `tbb-devel` / `onetbb`). Clang on Linux and all macOS builds use libc++ and do not require TBB. spdlog is auto-downloaded via CPM when using Clang on Linux (system Ubuntu packages are incompatible).
 
-#### Using Makefile (Recommended)
+#### Windows (MSVC)
+
+No system packages required for a minimal build — MSVC + Ninja (via Visual Studio) is sufficient; missing libraries are fetched by CPM.
+
+```bat
+# Optional: LLVM clang-format for local formatting
+choco install llvm
+# Or use clang-format bundled with Visual Studio 2022
+```
+
+### Building {#building-by-platform}
+
+Preset pattern: `{os}-{compiler}-{build_type}`
 
 ```bash
-# Install dependencies
-make install-deps
-
-# Configure and build
-make build
-
-# Or configure separately
-make configure
-make build
-
-# Clean and rebuild
-make clean build
+cmake --list-presets          # configure presets
+cmake --list-presets build    # build presets
+cmake --list-presets test     # test presets
 ```
 
-#### Using Python Scripts Directly
+#### Linux (GCC)
 
 ```bash
-# 1. Install dependencies (interactive)
-python scripts/install_deps.py
-
-# 2. Configure CMake (interactive)
-python scripts/configure.py
-
-# 3. Build the project
-python scripts/build.py
-
-# Or with specific options (non-interactive)
-python scripts/install_deps.py --use-conan --no-interactive
-python scripts/configure.py --type Release --compiler gcc --use-conan --no-interactive
-python scripts/build.py --type Release --jobs 8
+cmake --preset linux-gcc-release
+cmake --build --preset linux-gcc-release
+ctest --preset linux-gcc-release
 ```
 
-#### Using CMake Presets
+#### Linux (Clang)
 
 ```bash
-# List available presets
-cmake --list-presets
-
-# Configure with preset
-cmake --preset linux-gcc-debug
-
-# Build
-cmake --build --preset linux-gcc-debug
-
-# Test
-ctest --preset linux-gcc-debug
+cmake --preset linux-clang-release
+cmake --build --preset linux-clang-release
+ctest --preset linux-clang-release
 ```
 
-**Available Presets:**
+#### Windows
 
-- `linux-gcc-debug` / `linux-gcc-release` / `linux-gcc-relwithdebinfo`
-- `linux-clang-debug` / `linux-clang-release` / `linux-clang-relwithdebinfo`
-- `windows-msvc-debug` / `windows-msvc-release` / `windows-msvc-relwithdebinfo`
-- `macos-clang-debug` / `macos-clang-release` / `macos-clang-relwithdebinfo`
-- `dev` - Development preset with all features
-- `ci-*` - CI presets with strict warnings
+Manually after `vcvars64.bat`:
 
-[↑ Back to Top](#readme-top)
+```bat
+cmake --preset windows-msvc-release
+cmake --build --preset windows-msvc-release
+```
+
+Or generate Visual Studio solution and build from IDE:
+
+```bat
+cmake --preset windows-vs-release
+```
+
+#### macOS (Clang)
+
+```bash
+cmake --preset macos-clang-release
+cmake --build --preset macos-clang-release
+ctest --preset macos-clang-release
+```
+
+#### Recommended developer flags
+
+```bash
+cmake --preset linux-gcc-release \
+  -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
+  -DHELIOS_DEVELOPER_MODE=ON \
+```
+
+| Option                         | Default        | Notes                         |
+| ------------------------------ | -------------- | ----------------------------- |
+| `HELIOS_BUILD_TESTS`           | ON (top-level) | Module test suites            |
+| `HELIOS_BUILD_EXAMPLES`        | ON (top-level) | Example applications          |
+| `HELIOS_DEVELOPER_MODE`        | OFF            | Sanitizers and dev checks     |
+| `HELIOS_DOWNLOAD_PACKAGES`     | ON             | CPM fallback for missing deps |
+| `HELIOS_BUILD_{MODULE}_MODULE` | module default | Per-module toggle             |
+
+### Run the Example {#run-the-example}
+
+```bash
+cmake --preset linux-gcc-release \
+  -DHELIOS_BUILD_EXAMPLES=ON \
+  -DHELIOS_BUILD_PROFILE_MODULE=ON
+cmake --build --preset linux-gcc-release --target simple_example
+./bin/examples/debug-linux-x86_64/simple_example
+```
+
+See [examples/simple/src/main.cpp](examples/simple/src/main.cpp) for schedules, system sets, sub-apps, and profiling.
+
+<a href="#readme-top">↑ Back to Top</a>
 
 ---
 
-## Usage Examples
+## Usage {#usage}
 
-### Basic Application Setup
+Systems are plain structs — `operator()` parameters declare data access. `App` owns the main world, executor, and frame scheduler.
 
 ```cpp
-#include <helios/core/app/app.hpp>
-#include <helios/core/app/module.hpp>
+#include <helios/app/app.hpp>
+#include <helios/app/schedules.hpp>
+#include <helios/ecs/command/commands.hpp>
+#include <helios/ecs/query/query.hpp>
+#include <helios/ecs/resource/param.hpp>
 
-using namespace helios::app;
-using namespace helios::ecs;
+#include <utility>
 
-// Define a simple system
-struct TimeUpdateSystem final : public System {
-  static constexpr std::string_view GetName() noexcept {
-    return "TimeUpdateSystem";
+struct Position { float x = 0, y = 0; };
+struct Velocity { float dx = 1, dy = 0; };
+
+struct MoveEntities {
+  void operator()(helios::ecs::Query<Position&, const Velocity&> movables) {
+    movables.ForEach([](Position& pos, const Velocity& vel) {
+      pos.x += vel.dx;
+      pos.y += vel.dy;
+    });
   }
+};
 
-  static constexpr auto GetAccessPolicy() noexcept {
-    return AccessPolicy().WriteResources<GameTime>();
-  }
-
-  void Update(SystemContext& ctx) override {
-    auto& time = ctx.WriteResource<GameTime>();
-    time.delta_time = 0.016F;
-    time.total_time += time.delta_time;
-    ++time.frame_count;
+struct RequestExit {
+  void operator()(helios::ecs::MessageWriter<helios::app::AppExit> exit) {
+    exit.Write({.code = helios::app::ExitCode::kSuccess});
   }
 };
 
 int main() {
-  App app;
-
-  // Insert resources
-  app.InsertResource(GameTime{});
-
-  // Add systems to schedules
-  app.AddSystem<TimeUpdateSystem>(kMain);
-
-  // Run the application
+  helios::app::App app;
+  app.AddSystems(helios::app::kUpdate, MoveEntities{}, RequestExit{});
+  app.AddMessages<helios::app::AppExit>();  // Already added by default, but explicit registration is allowed
   return std::to_underlying(app.Run());
 }
 ```
 
-### Creating Entities
+| Parameter                               | Purpose                                                    |
+| --------------------------------------- | ---------------------------------------------------------- |
+| `Res<T>` / `Res<const T>`               | Singleton resource access                                  |
+| `Query<Args...>`                        | Entity iteration with `With<>` / `Without<>` filters       |
+| `Commands`                              | Deferred spawn, destroy, component, and resource mutations |
+| `Local<T>`                              | Per-system persistent state                                |
+| `MessageWriter<T>` / `MessageReader<T>` | Frame-delayed inter-system messages                        |
 
-Systems can create entities through `SystemContext`:
+Builtin schedules (`helios/app/schedules.hpp`): `MainStartup` → `PreStartup` → `Startup` → `PostStartup` → `First` → `PreUpdate` → `Update` → `PostUpdate` → `Last` → `Extract` → shutdown stages.
 
-```cpp
-struct SetupSystem final : public System {
-  static constexpr std::string_view GetName() noexcept {
-    return "SetupSystem";
-  }
+<a href="#readme-top">↑ Back to Top</a>
 
-  static constexpr AccessPolicy GetAccessPolicy() noexcept {
-    return {};
-  }
+---
 
-  void Update(SystemContext& ctx) override {
-    // Reserve an entity and get its command buffer
-    auto entity_cmd = ctx.EntityCommands(ctx.ReserveEntity());
+## Architecture {#architecture}
 
-    // Add components to the entity
-    entity_cmd.AddComponents(
-        Transform{0.0F, 0.0F, 0.0F},
-        Velocity{1.0F, 0.0F, 0.0F},
-        Health{100, 100});
-  }
+```
+┌─────────────────────────────────────────────────────────┐
+│  App                                                    │
+│  ├─ async::Executor        (work-stealing thread pool)  │
+│  ├─ Scheduler              (frame stages)               │
+│  ├─ SubApp (main)          (ecs::World + schedules)     │
+│  ├─ SubApp...              (optional parallel worlds)   │
+│  └─ Plugins                (static + dynamic)           │
+└─────────────────────────────────────────────────────────┘
+         │ schedules                │ task graphs
+         ▼                          ▼
+┌─────────────────┐        ┌─────────────────┐
+│  ecs::Schedule  │        │ async::Executor │
+│  systems + DAG  │        │ TaskGraph       │
+└─────────────────┘        └─────────────────┘
+         │
+         ▼
+┌─────────────────────────────────────────────────────────┐
+│ ecs::World                                              │
+│ entities · components · resources · messages · commands │
+└─────────────────────────────────────────────────────────┘
 ```
 
-### Querying Entities
+- **Entities** — 64-bit ID (32-bit index + 32-bit generation), free-list recycling
+- **Components** — archetype columns or per-type sparse sets; structural changes via deferred `Commands`
+- **Messages** — double-buffered (read previous frame); async messages use lock-free queues
 
-Systems query entities using `ctx.Query()`:
+<a href="#readme-top">↑ Back to Top</a>
 
-```cpp
-struct MovementSystem final : public System {
-  static constexpr std::string_view GetName() noexcept {
-    return "MovementSystem";
-  }
+---
 
-  static constexpr auto GetAccessPolicy() noexcept {
-    return AccessPolicy().Query<Transform&, const Velocity&>().ReadResources<GameTime>();
-  }
+## Using as a Dependency {#using-as-a-dependency}
 
-  void Update(SystemContext& ctx) override {
-    const auto& time = ctx.ReadResource<GameTime>();
-    auto query = ctx.Query().Get<Transform&, const Velocity&>();
+Helios can be consumed from another CMake project in several ways. All methods expose targets as `helios::module::<name>` and the helper `helios_link_modules()`.
 
-    query.ForEach([&time](Transform& transform, const Velocity& velocity) {
-      transform.x += velocity.dx * time.delta_time;
-      transform.y += velocity.dy * time.delta_time;
-      transform.z += velocity.dz * time.delta_time;
-    });
-  }
+Typical consumer settings when embedding:
+
+```cmake
+set(HELIOS_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+set(HELIOS_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 ```
 
-### Using Modules
+### Method 1: `add_subdirectory` {#method-1-add_subdirectory}
 
-Organize systems and resources into reusable modules:
+Best for vendoring a copy inside your tree (e.g. `third_party/HeliosEngine`).
 
-```cpp
-struct GameModule final : public Module {
-  void Build(App& app) override {
-    app.InsertResource(GameTime{})
-        .InsertResource(GameStats{})
-        .AddSystem<TimeUpdateSystem>(kMain)
-        .AddSystem<MovementSystem>(kUpdate)
-        .AddSystem<RenderSystem>(kPostUpdate);
-  }
+```cmake
+# YourProject/CMakeLists.txt
+cmake_minimum_required(VERSION 3.25)
+project(MyGame LANGUAGES CXX)
 
-  void Destroy(App& app) override {}
+set(CMAKE_CXX_STANDARD 23)
 
-  static constexpr std::string_view GetName() noexcept {
-    return "GameModule";
-  }
-};
+add_subdirectory(third_party/HeliosEngine)
 
-// Use the module
-App app;
-app.AddModule<GameModule>();
+add_executable(my_game src/main.cpp)
+helios_link_modules(
+    TARGET my_game
+    MODULES PUBLIC app
+)
 ```
 
-[↑ Back to Top](#readme-top)
+### Method 2: `FetchContent` {#method-2-fetchcontent}
+
+Fetches at configure time without a manual submodule.
+
+```cmake
+include(FetchContent)
+
+FetchContent_Declare(
+    HeliosEngine
+    GIT_REPOSITORY https://github.com/RexarX/HeliosEngine.git
+    GIT_TAG        main
+    GIT_SHALLOW    TRUE
+)
+
+set(HELIOS_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+set(HELIOS_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+
+FetchContent_MakeAvailable(HeliosEngine)
+
+add_executable(my_game src/main.cpp)
+helios_link_modules(
+    TARGET my_game
+    MODULES PUBLIC app
+)
+```
+
+### Method 3: CPM {#method-3-cpm}
+
+Uses the same CPM integration as Helios itself ([`cmake/DownloadUsingCPM.cmake`](cmake/DownloadUsingCPM.cmake)).
+
+```cmake
+# Download CPM once (or vendor cmake/CPM.cmake)
+include(cmake/DownloadUsingCPM.cmake)  # from Helios, or your own CPM bootstrap
+
+CPMAddPackage(
+    NAME HeliosEngine
+    GITHUB_REPOSITORY RexarX/HeliosEngine
+    GIT_TAG main
+    OPTIONS
+        "HELIOS_BUILD_TESTS OFF"
+        "HELIOS_BUILD_EXAMPLES OFF"
+)
+
+add_executable(my_game src/main.cpp)
+helios_link_modules(
+    TARGET my_game
+    MODULES PUBLIC app
+)
+```
+
+### Method 4: Installed Package (`find_package`) {#method-4-installed-package-find_package}
+
+Build and install Helios, then use the generated CMake package config.
+
+```bash
+cmake --preset linux-gcc-release -DHELIOS_ENABLE_INSTALL=ON
+cmake --build --preset linux-gcc-release
+cmake --install build/linux-gcc-release --prefix /opt/helios
+```
+
+```cmake
+list(APPEND CMAKE_PREFIX_PATH "/opt/helios")
+find_package(Helios REQUIRED CONFIG)
+
+add_executable(my_game src/main.cpp)
+helios_link_modules(
+    TARGET my_game
+    MODULES PUBLIC app
+)
+```
+
+Installed artifacts: `HeliosConfig.cmake`, `HeliosConfigVersion.cmake`, `HeliosTargets.cmake` (see [`cmake/Install.cmake`](cmake/Install.cmake)).
+
+<a href="#readme-top">↑ Back to Top</a>
 
 ---
 
-<a name="core-module"></a>
+## Documentation {#documentation}
 
-## Core Module
+### API reference (Doxygen)
 
-### Overview
+```bash
+python scripts/docs.py
+# → docs/doxygen/html/index.html
+```
 
-See the [Core Module Documentation](src/core/README.md) for details.
+Config: [`docs/doxygen/Doxyfile`](docs/doxygen/Doxyfile) — [doxygen-awesome-css](third-party/doxygen-awesome-css) theme (git submodule).
 
-[↑ Back to Top](#readme-top)
+### Project guidelines
 
----
-
-<a name="roadmap"></a>
-
-## Roadmap
-
-### Completed
-
-- [x] Core ECS implementation (archetype-based)
-- [x] System scheduling with automatic parallelization
-- [x] Event system with readers/writers
-- [x] Resource management
-- [x] Query system with filters and optional components
-- [x] Command buffers
-- [x] Comprehensive test suite
-- [x] Cross-platform build system (Linux, Windows, macOS)
-- [x] Flexible dependency management (Conan, system, CPM)
-- [x] Python build scripts with full automation
-
-### In Progress
-
-#### **Runtime modules**
-
-- Actual engine implementation (scenes, assets, scripting, etc.)
-
-#### **Renderer modules**
-
-- Modern graphics API abstraction
-- **[DiligentEngine](https://github.com/DiligentGraphics/DiligentEngine)** integration for cross-platform rendering
-
-[↑ Back to Top](#readme-top)
+[docs/guidelines.md](docs/guidelines.md) — code style, module layout, testing, build options.
 
 ---
 
-<a name="acknowledgments"></a>
+## Development {#development}
 
-## Acknowledgments
+### Code formatting
 
-This project was inspired by and builds upon ideas from:
+Formatting runs automatically on every local commit (via [pre-commit](https://pre-commit.com/)) and is verified on every push / PR ([`.github/workflows/format.yaml`](.github/workflows/format.yaml)). Unformatted code cannot land on `main` if hooks and CI are used.
 
-- [Bevy Engine](https://bevyengine.org/) - ECS architecture and design philosophy
-- [EnTT](https://github.com/skypjack/entt) - High-performance ECS implementation
-- [Taskflow](https://taskflow.github.io/) - Modern parallel task programming
-- [DiligentEngine](https://github.com/DiligentGraphics/DiligentEngine) - Cross-platform graphics engine
+| When                     | Mechanism                                                         |
+| ------------------------ | ----------------------------------------------------------------- |
+| **Every commit** (local) | `pre-commit install` — runs `python scripts/format.py` (auto-fix) |
+| **Every push / PR**      | CI — `python scripts/format.py --check`                           |
 
-[↑ Back to Top](#readme-top)
+```bash
+# Format all sources
+python scripts/format.py
+
+# Check only (same as CI)
+python scripts/format.py --check
+
+# Install local commit hook (auto-formats on commit)
+pip install pre-commit
+pre-commit install
+```
+
+### Creating a Custom Module {#creating-a-custom-module}
+
+Helios modules live under `src/` by default. Register additional search paths with `helios_add_extra_module_dirs()` (before discovery) or `HELIOS_EXTRA_MODULE_DIRS`. The `greeting` example path is registered automatically when `HELIOS_BUILD_EXAMPLES=ON`. See the full walkthrough:
+
+**[examples/custom_module/README.md](examples/custom_module/README.md)**
+
+That example defines a minimal `greeting` module (registration, build target, tests, and a demo executable) under `examples/custom_module/`, discovered through the extra module path mechanism — no manual `include(Module.cmake)` required.
+
+```bash
+# From a parent CMake project (before add_subdirectory(HeliosEngine)):
+# list(APPEND CMAKE_MODULE_PATH ".../HeliosEngine/cmake")
+# include(ModuleRegistry)
+# helios_add_extra_module_dirs("${CMAKE_CURRENT_SOURCE_DIR}/modules")
+
+# Or via cache variable:
+cmake --preset linux-gcc-release \
+  -DHELIOS_EXTRA_MODULE_DIRS="/path/to/my/modules"
+```
+
+When `HELIOS_BUILD_EXAMPLES=ON`, Helios calls `helios_add_extra_module_dirs(examples/custom_module)` before discovery.
+
+Quick layout:
+
+```
+examples/custom_module/
+├── Module.cmake              # helios_register_module(...)
+├── CMakeLists.txt            # helios_module(...) + demo target
+├── README.md                 # Step-by-step guide
+├── include/helios/greeting/  # Public headers
+├── src/                      # Optional private sources
+└── tests/                    # doctest suite
+```
+
+Link it from your executable with `helios_link_modules(TARGET … MODULES PUBLIC greeting)`.
+
+See also [docs/guidelines.md](docs/guidelines.md) for module conventions.
+
+### Other scripts
+
+```bash
+python scripts/lint.py --build-dir build/linux-gcc-release  # clang-tidy
+python scripts/docs.py                                      # Doxygen
+ctest --preset linux-gcc-release                            # tests
+```
+
+<a href="#readme-top">↑ Back to Top</a>
 
 ---
 
-<a name="license"></a>
+## Roadmap {#roadmap}
 
-## License
+- Rendering module
+- Full window/input integration
 
-Distributed under the MIT License. See `LICENSE` for more information.
-
-[↑ Back to Top](#readme-top)
+<a href="#readme-top">↑ Back to Top</a>
 
 ---
 
-<a name="contact"></a>
+## Acknowledgments {#acknowledgments}
 
-## Contact
+Inspired by [Bevy](https://bevyengine.org/), [EnTT](https://github.com/skypjack/entt), and [Taskflow](https://taskflow.github.io/).
 
-**RexarX** - who727cares@gmail.com
+<a href="#readme-top">↑ Back to Top</a>
 
-**Project Link:** [https://github.com/RexarX/HeliosEngine](https://github.com/RexarX/HeliosEngine)
+---
 
-[↑ Back to Top](#readme-top)
+## License {#license}
+
+Distributed under the MIT License. See [LICENSE](LICENSE) for details.
+
+<a href="#readme-top">↑ Back to Top</a>
+
+---
+
+## Contact {#contact}
+
+**RexarX** — who727cares@gmail.com
+
+**Project:** [github.com/RexarX/HeliosEngine](https://github.com/RexarX/HeliosEngine)
+
+<a href="#readme-top">↑ Back to Top</a>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
