@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['—_20application_20framework_0',['&lt;tt&gt;app&lt;/tt&gt; — Application Framework',['../md_src_2app_2README.html',1,'']]],
+  ['—_20arch_1',['Linux (Pacman — Arch)',['../index.html#linux-pacman--arch',1,'']]],
+  ['—_20build_20tools_2',['All platforms — build tools',['../index.html#all-platforms--build-tools',1,'']]],
+  ['—_20common_20utilities_3',['&lt;tt&gt;utils&lt;/tt&gt; — Common Utilities',['../md_src_2utils_2README.html',1,'']]],
+  ['—_20compiler_20detection_20intrinsics_4',['&lt;tt&gt;compiler&lt;/tt&gt; — Compiler Detection &amp; Intrinsics',['../md_src_2compiler_2README.html',1,'']]],
+  ['—_20consume_20from_20an_20executable_5',['Step 5 — Consume from an executable',['../md_examples_2custom__module_2README.html#step-5--consume-from-an-executable',1,'']]],
+  ['—_20core_20engine_20primitives_6',['&lt;tt&gt;core&lt;/tt&gt; — Core Engine Primitives',['../md_src_2core_2README.html',1,'']]],
+  ['—_20cpu_20memory_20lock_20profiling_7',['&lt;tt&gt;profile&lt;/tt&gt; — CPU/Memory/Lock Profiling',['../md_src_2profile_2README.html',1,'']]],
+  ['—_20cross_20platform_20window_20management_8',['&lt;tt&gt;window&lt;/tt&gt; — Cross-Platform Window Management',['../md_src_2window_2README.html',1,'']]],
+  ['—_20data_20oriented_20containers_9',['&lt;tt&gt;container&lt;/tt&gt; — Data-Oriented Containers',['../md_src_2container_2README.html',1,'']]],
+  ['—_20deferred_20mutations_10',['Commands — Deferred Mutations',['../md_src_2ecs_2README.html#commands--deferred-mutations',1,'']]],
+  ['—_20define_20the_20build_20tt_20cmakelists_20txt_20tt_11',['Step 2 — Define the build (&lt;tt&gt;CMakeLists.txt&lt;/tt&gt;)',['../md_examples_2custom__module_2README.html#step-2--define-the-build-cmakeliststxt',1,'']]],
+  ['—_20discovery_20no_20manual_20tt_20include_20tt_12',['Step 3 — Discovery (no manual &lt;tt&gt;include()&lt;/tt&gt;)',['../md_examples_2custom__module_2README.html#step-3--discovery-no-manual-include',1,'']]],
+  ['—_20entity_20component_20system_13',['&lt;tt&gt;ecs&lt;/tt&gt; — Entity Component System',['../md_src_2ecs_2README.html',1,'']]],
+  ['—_20fedora_14',['Linux (DNF — Fedora)',['../index.html#linux-dnf--fedora',1,'']]],
+  ['—_20logging_15',['&lt;tt&gt;log&lt;/tt&gt; — Logging',['../md_src_2log_2README.html',1,'']]],
+  ['—_20platform_20detection_20api_20macros_16',['&lt;tt&gt;platform&lt;/tt&gt; — Platform Detection &amp; API Macros',['../md_src_2platform_2README.html',1,'']]],
+  ['—_20pmr_20allocators_20reference_20counting_17',['&lt;tt&gt;memory&lt;/tt&gt; — PMR Allocators &amp; Reference Counting',['../md_src_2memory_2README.html',1,'']]],
+  ['—_20public_20api_18',['Step 4 — Public API',['../md_examples_2custom__module_2README.html#step-4--public-api',1,'']]],
+  ['—_20register_20the_20module_20tt_20module_20cmake_20tt_19',['Step 1 — Register the module (&lt;tt&gt;Module.cmake&lt;/tt&gt;)',['../md_examples_2custom__module_2README.html#step-1--register-the-module-modulecmake',1,'']]],
+  ['—_20task_20based_20parallelism_20',['&lt;tt&gt;async&lt;/tt&gt; — Task-Based Parallelism',['../md_src_2async_2README.html',1,'']]],
+  ['—_20ubuntu_20debian_21',['Linux (APT — Ubuntu / Debian)',['../index.html#linux-apt--ubuntu--debian',1,'']]]
+];

@@ -1,0 +1,37 @@
+var namespacehelios =
+[
+    [ "anonymous_namespace{assert.cpp}", "namespacehelios_1_1anonymous__namespace_02assert_8cpp_03.html", [
+      [ "BuildAssertionStacktraceConfig", "namespacehelios_1_1anonymous__namespace_02assert_8cpp_03.html#aa6cff68a01035a02dc6b3dee49b88f4e", null ],
+      [ "kDefaultAssertionStacktraceFrames", "namespacehelios_1_1anonymous__namespace_02assert_8cpp_03.html#a0189e7cd23efa9fad7846d01fe4b047d", null ]
+    ] ],
+    [ "app", "namespacehelios_1_1app.html", "namespacehelios_1_1app" ],
+    [ "async", "namespacehelios_1_1async.html", "namespacehelios_1_1async" ],
+    [ "container", "namespacehelios_1_1container.html", "namespacehelios_1_1container" ],
+    [ "details", "namespacehelios_1_1details.html", "namespacehelios_1_1details" ],
+    [ "ecs", "namespacehelios_1_1ecs.html", "namespacehelios_1_1ecs" ],
+    [ "log", "namespacehelios_1_1log.html", "namespacehelios_1_1log" ],
+    [ "mem", "namespacehelios_1_1mem.html", "namespacehelios_1_1mem" ],
+    [ "profile", "namespacehelios_1_1profile.html", "namespacehelios_1_1profile" ],
+    [ "utils", "namespacehelios_1_1utils.html", "namespacehelios_1_1utils" ],
+    [ "BasicCStringView", "classhelios_1_1BasicCStringView.html", "classhelios_1_1BasicCStringView" ],
+    [ "Delegate", "classhelios_1_1Delegate.html", null ],
+    [ "Delegate< ReturnType(Args...)>", "classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html", "classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4" ],
+    [ "Stacktrace", "classhelios_1_1Stacktrace.html", "classhelios_1_1Stacktrace" ],
+    [ "StacktraceConfig", "structhelios_1_1StacktraceConfig.html", "structhelios_1_1StacktraceConfig" ],
+    [ "Uuid", "classhelios_1_1Uuid.html", "classhelios_1_1Uuid" ],
+    [ "UuidGenerator", "classhelios_1_1UuidGenerator.html", "classhelios_1_1UuidGenerator" ],
+    [ "AssertionHandler", "namespacehelios.html#a6475f362eaf983df9350e3e56cb4cd31", null ],
+    [ "CStringView", "namespacehelios.html#ad8073f01bff62d713e7ee8b1679f0a36", null ],
+    [ "U16CStringView", "namespacehelios.html#a61a15d24ac3a55c64d1e0e90563fabfd", null ],
+    [ "U32CStringView", "namespacehelios.html#a0eae2881bdcf398546547f64adce687a", null ],
+    [ "U8CStringView", "namespacehelios.html#a27fcdbe05fcbf22c909f750dda565fae", null ],
+    [ "WCStringView", "namespacehelios.html#a163bb8c4345998672ef6f77e10305293", null ],
+    [ "AbortWithStacktrace", "namespacehelios.html#a353d3912bb7ad37d555a2d43f9fcd02f", null ],
+    [ "GetAssertionHandler", "namespacehelios.html#a7982e4af7b9267b962018d6cfd53c165", null ],
+    [ "MakeDelegate", "namespacehelios.html#a5e276a5c70bbb86023543f06d4c58d28", null ],
+    [ "MakeDelegate", "namespacehelios.html#aee35cc85a0c840f1488c6be990bca4f1", null ],
+    [ "operator<<", "namespacehelios.html#a04eb3c74a31879c847aadb77c486305f", null ],
+    [ "SetAssertionHandler", "namespacehelios.html#afc2e2d6e5d9076d42481c5837df0f6ba", null ],
+    [ "swap", "namespacehelios.html#abb4bbfb05b19dbe5a7dc2eba5368db7e", null ],
+    [ "kDefaultAssertionHandler", "namespacehelios.html#a5dd8e95e4cb808a93be15d4df228eb36", null ]
+];

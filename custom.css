@@ -1,0 +1,9 @@
+/* README main-page logo — source image is high-res; constrain display size */
+div.textblock div[align="center"] .image img {
+  width: 100px;
+  height: auto;
+}
+
+div.textblock div[align="center"] .image .caption {
+  display: none;
+}
