@@ -1,5 +1,6 @@
 #pragma once
 
+#include <helios/compiler/compiler.hpp>
 #include <helios/ecs/schedule/system_local_data.hpp>
 #include <helios/ecs/system/param_policy.hpp>
 #include <helios/ecs/system/system.hpp>
@@ -13,7 +14,11 @@ namespace helios::ecs {
 
 /// @brief Type-erased run condition: returns bool, receives World& + local
 /// data.
+#ifdef HELIOS_MOVEONLY_FUNCTION_AVAILABLE
 using RunCondition = std::move_only_function<bool(World&, SystemLocalData&)>;
+#else
+using RunCondition = std::function<bool(World&, SystemLocalData&)>;
+#endif
 
 /// @brief Storage for a run condition — predicate + access policy + local data.
 struct RunConditionStorage {

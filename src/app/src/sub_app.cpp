@@ -57,7 +57,7 @@ void SubApp::WaitUntilFullyIdle() const noexcept {
   }
 }
 
-inline bool SubApp::ShouldExit() const noexcept {
+bool SubApp::ShouldExit() const noexcept {
   if (AsyncLoopStopRequested()) {
     return true;
   }

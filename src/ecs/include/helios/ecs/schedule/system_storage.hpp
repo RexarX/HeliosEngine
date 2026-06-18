@@ -1,5 +1,6 @@
 #pragma once
 
+#include <helios/compiler/compiler.hpp>
 #include <helios/ecs/schedule/system_local_data.hpp>
 #include <helios/ecs/system/access_policy.hpp>
 #include <helios/ecs/system/param_policy.hpp>
@@ -14,6 +15,12 @@ namespace helios::ecs {
 
 class World;
 
+#ifdef HELIOS_MOVEONLY_FUNCTION_AVAILABLE
+using SystemCallable = std::move_only_function<void(World&, SystemLocalData&)>;
+#else
+using SystemCallable = std::function<void(World&, SystemLocalData&)>;
+#endif
+
 /// @brief Storage for a system.
 struct SystemStorage {
   SystemId id;
@@ -23,7 +30,7 @@ struct SystemStorage {
   /// Type-erased system callable.
   /// Receives World& and SystemLocalData& directly. The wrapper
   /// lambda constructs params and calls Update after the system runs.
-  std::move_only_function<void(World&, SystemLocalData&)> system;
+  SystemCallable system;
 
   SystemLocalData local_data;
 
@@ -38,8 +45,7 @@ struct SystemStorage {
    * @param options System local data options
    */
   SystemStorage(SystemId sid, std::string sname, AccessPolicy spolicy,
-                std::move_only_function<void(World&, SystemLocalData&)> ssystem,
-                SystemLocalDataOptions options);
+                SystemCallable ssystem, SystemLocalDataOptions options);
   SystemStorage(const SystemStorage&) = delete;
   SystemStorage(SystemStorage&&) noexcept = default;
   ~SystemStorage() noexcept = default;
@@ -84,10 +90,10 @@ struct SystemStorage {
    * @param options System local data options
    * @return System storage
    */
-  [[nodiscard]] static SystemStorage From(
-      std::string name,
-      std::move_only_function<void(World&, SystemLocalData&)> system,
-      AccessPolicy access_policy = {}, SystemLocalDataOptions options = {}) {
+  [[nodiscard]] static SystemStorage From(std::string name,
+                                          SystemCallable system,
+                                          AccessPolicy access_policy = {},
+                                          SystemLocalDataOptions options = {}) {
     return {SystemId::From(name), std::move(name), std::move(access_policy),
             std::move(system), options};
   }
@@ -101,10 +107,11 @@ struct SystemStorage {
    * @param options System local data options
    * @return System storage
    */
-  [[nodiscard]] static SystemStorage From(
-      std::string name, SystemTypeIndex index,
-      std::move_only_function<void(World&, SystemLocalData&)> system,
-      AccessPolicy access_policy = {}, SystemLocalDataOptions options = {}) {
+  [[nodiscard]] static SystemStorage From(std::string name,
+                                          SystemTypeIndex index,
+                                          SystemCallable system,
+                                          AccessPolicy access_policy = {},
+                                          SystemLocalDataOptions options = {}) {
     return {SystemId::From(index), std::move(name), std::move(access_policy),
             std::move(system), options};
   }
@@ -118,19 +125,19 @@ struct SystemStorage {
    * @param options System local data options
    * @return System storage
    */
-  [[nodiscard]] static SystemStorage From(
-      std::string name, SystemTypeId id,
-      std::move_only_function<void(World&, SystemLocalData&)> system,
-      AccessPolicy access_policy = {}, SystemLocalDataOptions options = {}) {
+  [[nodiscard]] static SystemStorage From(std::string name, SystemTypeId id,
+                                          SystemCallable system,
+                                          AccessPolicy access_policy = {},
+                                          SystemLocalDataOptions options = {}) {
     return From(std::move(name), id.Index(), std::move(system),
                 std::move(access_policy), options);
   }
 };
 
-inline SystemStorage::SystemStorage(
-    SystemId sid, std::string sname, AccessPolicy spolicy,
-    std::move_only_function<void(World&, SystemLocalData&)> ssystem,
-    SystemLocalDataOptions options)
+inline SystemStorage::SystemStorage(SystemId sid, std::string sname,
+                                    AccessPolicy spolicy,
+                                    SystemCallable ssystem,
+                                    SystemLocalDataOptions options)
     : id(sid),
       name(std::move(sname)),
       access_policy(std::move(spolicy)),

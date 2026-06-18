@@ -1,5 +1,7 @@
 #pragma once
 
+#include <bit>
+
 #include <taskflow/core/task.hpp>
 
 #include <concepts>

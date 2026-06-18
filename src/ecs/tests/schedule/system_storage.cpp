@@ -32,8 +32,7 @@ TEST_SUITE("helios::ecs::SystemStorage") {
     SUBCASE("Constructing from members creates valid storage") {
       auto storage = SystemStorage::From(
           "TestSystem",
-          std::move_only_function<void(World&, SystemLocalData&)>(
-              [](World& /*world*/, SystemLocalData& /*data*/) {}),
+          SystemCallable([](World& /*world*/, SystemLocalData& /*data*/) {}),
           AccessPolicy{});
 
       CHECK_EQ(storage.name, "TestSystem");
@@ -45,8 +44,7 @@ TEST_SUITE("helios::ecs::SystemStorage") {
     SUBCASE("From with explicit name and callable creates valid storage") {
       auto storage = SystemStorage::From(
           "TestSystem",
-          std::move_only_function<void(World&, SystemLocalData&)>(
-              [](World& /*world*/, SystemLocalData& /*data*/) {}),
+          SystemCallable([](World& /*world*/, SystemLocalData& /*data*/) {}),
           AccessPolicy{});
 
       CHECK_EQ(storage.name, "TestSystem");
@@ -56,8 +54,7 @@ TEST_SUITE("helios::ecs::SystemStorage") {
     SUBCASE("From with empty name creates a hashed id") {
       auto storage = SystemStorage::From(
           "",
-          std::move_only_function<void(World&, SystemLocalData&)>(
-              [](World& /*world*/, SystemLocalData& /*data*/) {}),
+          SystemCallable([](World& /*world*/, SystemLocalData& /*data*/) {}),
           AccessPolicy{});
 
       CHECK_EQ(storage.name, "");
@@ -69,8 +66,7 @@ TEST_SUITE("helios::ecs::SystemStorage") {
 
       auto storage = SystemStorage::From(
           "SimpleSystem", index,
-          std::move_only_function<void(World&, SystemLocalData&)>(
-              [](World& /*world*/, SystemLocalData& /*data*/) {}),
+          SystemCallable([](World& /*world*/, SystemLocalData& /*data*/) {}),
           AccessPolicy{});
 
       CHECK_EQ(storage.name, "SimpleSystem");
@@ -82,8 +78,7 @@ TEST_SUITE("helios::ecs::SystemStorage") {
 
       auto storage = SystemStorage::From(
           "SimpleSystem", type_id,
-          std::move_only_function<void(World&, SystemLocalData&)>(
-              [](World& /*world*/, SystemLocalData& /*data*/) {}),
+          SystemCallable([](World& /*world*/, SystemLocalData& /*data*/) {}),
           AccessPolicy{});
 
       CHECK_EQ(storage.name, "SimpleSystem");

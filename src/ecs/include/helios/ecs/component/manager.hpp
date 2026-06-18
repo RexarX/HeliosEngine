@@ -1601,7 +1601,7 @@ inline bool ComponentManager::Has(Entity entity) const {
     if (it == entity_archetype_.end()) {
       return false;
     }
-    return it->second.get().HasColumn<T>();
+    return it->second.get().template HasColumn<T>();
   }
 }
 

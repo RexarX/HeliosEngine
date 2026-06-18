@@ -74,7 +74,7 @@ public:
    * Multiple calls are idempotent (sorted-unique insertion).
    */
   constexpr void Consume() const {
-    registry_.get().MarkConsumed<T>(global_index_);
+    registry_.get().template MarkConsumed<T>(global_index_);
   }
 
   /**
@@ -83,7 +83,7 @@ public:
    * @return True if the message has been consumed, false otherwise
    */
   [[nodiscard]] bool IsConsumed() const noexcept {
-    return registry_.get().IsConsumed<T>(global_index_);
+    return registry_.get().template IsConsumed<T>(global_index_);
   }
 
   /**

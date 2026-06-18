@@ -4,6 +4,7 @@
 #include <helios/app/schedules.hpp>
 #include <helios/assert.hpp>
 #include <helios/async/executor.hpp>
+#include <helios/compiler/compiler.hpp>
 #include <helios/ecs/message/message.hpp>
 #include <helios/ecs/resource/resource.hpp>
 #include <helios/ecs/schedule/schedule.hpp>
@@ -142,9 +143,14 @@ template <SubAppTrait T>
  */
 class SubApp {
 public:
+#ifdef HELIOS_MOVEONLY_FUNCTION_AVAILABLE
   using RunnerFn = std::move_only_function<void(SubApp&, async::Executor&)>;
   using ExtractFn =
       std::move_only_function<void(const ecs::World&, ecs::World&)>;
+#else
+  using RunnerFn = std::function<void(SubApp&, async::Executor&)>;
+  using ExtractFn = std::function<void(const ecs::World&, ecs::World&)>;
+#endif
 
   /// @brief Constructs a sub-app with built-in schedules registered.
   SubApp();

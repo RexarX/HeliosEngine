@@ -6,6 +6,7 @@
 #include <helios/app/scheduler.hpp>
 #include <helios/app/schedules.hpp>
 #include <helios/app/sub_app.hpp>
+#include <helios/compiler/compiler.hpp>
 #include <helios/ecs/command/command.hpp>
 #include <helios/ecs/message/message.hpp>
 #include <helios/ecs/message/reader.hpp>
@@ -72,9 +73,14 @@ struct AppExit {
  */
 class App {
 public:
+#ifdef HELIOS_MOVEONLY_FUNCTION_AVAILABLE
   using RunnerFn = std::move_only_function<ExitCode(App&)>;
   using ExtractFn =
       std::move_only_function<void(const ecs::World&, ecs::World&)>;
+#else
+  using RunnerFn = std::function<ExitCode(App&)>;
+  using ExtractFn = std::function<void(const ecs::World&, ecs::World&)>;
+#endif
 
   App();
 

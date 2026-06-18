@@ -57,15 +57,16 @@ public:
   template <typename... Args>
     requires std::constructible_from<DecayedT, Args...> && (!std::is_const_v<T>)
   void Emplace(Args&&... args) const {
-    return resources_.get().Emplace<DecayedT>(std::forward<Args>(args)...);
+    return resources_.get().template Emplace<DecayedT>(
+        std::forward<Args>(args)...);
   }
 
   [[nodiscard]] T& operator*() const noexcept {
-    return resources_.get().Get<DecayedT>();
+    return resources_.get().template Get<DecayedT>();
   }
 
   [[nodiscard]] T* operator->() const noexcept {
-    return &resources_.get().Get<DecayedT>();
+    return &resources_.get().template Get<DecayedT>();
   }
 
   /**
@@ -73,7 +74,7 @@ public:
    * @return Reference to the local resource
    */
   [[nodiscard]] T& Get() const noexcept {
-    return resources_.get().Get<DecayedT>();
+    return resources_.get().template Get<DecayedT>();
   }
 
   /**

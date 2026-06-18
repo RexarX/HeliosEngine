@@ -964,10 +964,9 @@ public:
    * @param options Local data options
    * @return Handle for further configuration
    */
-  SystemHandle Add(
-      std::string name,
-      std::move_only_function<void(World&, SystemLocalData&)> system,
-      AccessPolicy policy = {}, SystemLocalDataOptions options = {});
+  SystemHandle Add(std::string name, SystemCallable system,
+                   AccessPolicy policy = {},
+                   SystemLocalDataOptions options = {});
 
   /**
    * @brief Gets or creates a system set with the given identifier.
@@ -1231,10 +1230,9 @@ inline SystemSetHandle Schedule::Add(Ts&&... systems) {
   return set_handle;
 }
 
-inline SystemHandle Schedule::Add(
-    std::string name,
-    std::move_only_function<void(World&, SystemLocalData&)> system,
-    AccessPolicy policy, SystemLocalDataOptions options) {
+inline SystemHandle Schedule::Add(std::string name, SystemCallable system,
+                                  AccessPolicy policy,
+                                  SystemLocalDataOptions options) {
   const size_t slot = AddEntry(SystemStorage::From(
       std::move(name), std::move(system), std::move(policy), options));
   return SystemHandle(ScheduleSystemId{.id = system_entries_[slot].storage.id,

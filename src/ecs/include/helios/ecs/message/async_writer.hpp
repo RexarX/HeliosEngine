@@ -48,7 +48,7 @@ public:
    * @param message Message to write
    */
   void Write(T&& message) {
-    async_queue_.get().Enqueue<T>(token_, std::move(message));
+    async_queue_.get().template Enqueue<T>(token_, std::move(message));
   }
 
   /**
@@ -58,7 +58,7 @@ public:
   void Write(const T& message)
     requires std::copy_constructible<T>
   {
-    async_queue_.get().Enqueue<T>(token_, T{message});
+    async_queue_.get().template Enqueue<T>(token_, T{message});
   }
 
   /**
@@ -80,7 +80,8 @@ public:
   template <typename... Args>
     requires std::constructible_from<T, Args...>
   void Emplace(Args&&... args) {
-    async_queue_.get().Enqueue<T>(token_, T{std::forward<Args>(args)...});
+    async_queue_.get().template Enqueue<T>(token_,
+                                           T{std::forward<Args>(args)...});
   }
 
 private:
