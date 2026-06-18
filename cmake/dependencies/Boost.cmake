@@ -153,16 +153,16 @@ else()
     # foreach(... IN LISTS ...) so the value is not split (see cmake/CPM.cmake).
     include(DownloadUsingCPM)
     helios_cpm_add_package(
-            NAME Boost
-            VERSION 1.90.0
-            URL https://github.com/boostorg/boost/releases/download/boost-1.90.0/boost-1.90.0-cmake.tar.xz
-            OPTIONS
-                "BOOST_ENABLE_CMAKE ON"
-                "BOOST_INCLUDE_LIBRARIES ${_boost_include_libs}"
-                "BUILD_SHARED_LIBS OFF"
-                "CMAKE_POSITION_INDEPENDENT_CODE ON"
-            SYSTEM
-        )
+        NAME Boost
+        VERSION 1.90.0
+        URL https://github.com/boostorg/boost/releases/download/boost-1.90.0/boost-1.90.0-cmake.tar.xz
+        OPTIONS
+            "BOOST_ENABLE_CMAKE ON"
+            "BOOST_INCLUDE_LIBRARIES ${_boost_include_libs}"
+            "BUILD_SHARED_LIBS OFF"
+            "CMAKE_POSITION_INDEPENDENT_CODE ON"
+        SYSTEM
+    )
 
     if(Boost_ADDED OR TARGET Boost::boost)
       if(NOT TARGET helios::boost::boost)
@@ -188,7 +188,8 @@ else()
         target_link_libraries(helios::boost::unordered INTERFACE helios::boost::boost)
         if(Boost_SOURCE_DIR AND EXISTS "${Boost_SOURCE_DIR}/libs/unordered/include")
           target_include_directories(helios::boost::unordered SYSTEM INTERFACE
-                        "${Boost_SOURCE_DIR}/libs/unordered/include")
+              "${Boost_SOURCE_DIR}/libs/unordered/include"
+          )
         endif()
       endif()
 
@@ -226,4 +227,12 @@ if(NOT TARGET helios::boost)
     target_link_libraries(_helios_boost_all INTERFACE helios::boost::stacktrace)
   endif()
   add_library(helios::boost ALIAS _helios_boost_all)
+endif()
+
+# Boost.Stacktrace platform requirements must be INTERFACE so they propagate to
+# test targets that reuse module PCHs including <boost/stacktrace.hpp>.
+if(NOT HELIOS_USE_STL_STACKTRACE AND TARGET helios::boost::stacktrace AND APPLE)
+  target_compile_definitions(helios::boost::stacktrace INTERFACE
+      BOOST_STACKTRACE_GNU_SOURCE_NOT_REQUIRED
+  )
 endif()
