@@ -8,8 +8,8 @@ var classhelios_1_1utils_1_1FastPimpl =
     [ "operator*", "classhelios_1_1utils_1_1FastPimpl.html#ab2f1c8c1a8dc86160552f9da6d6aa763", null ],
     [ "operator->", "classhelios_1_1utils_1_1FastPimpl.html#a14c88b000e29f1799c3de1f91dd3966b", null ],
     [ "operator->", "classhelios_1_1utils_1_1FastPimpl.html#aa20d3f100ab894da3afbf0711a9a3e50", null ],
-    [ "operator=", "classhelios_1_1utils_1_1FastPimpl.html#a4cfab38781811e2af46afec68337aea5", null ],
-    [ "operator=", "classhelios_1_1utils_1_1FastPimpl.html#afabc1209fb831202de62c94cac40d752", null ],
-    [ "operator=", "classhelios_1_1utils_1_1FastPimpl.html#af3407507ef5d0d01a4a00a2a1bb24f46", null ],
-    [ "operator=", "classhelios_1_1utils_1_1FastPimpl.html#a28af15bb8fc095b4a89301d264c7969e", null ]
+    [ "operator=", "classhelios_1_1utils_1_1FastPimpl.html#a715e8d17d431afb81f4bdb24b4cb76d0", null ],
+    [ "operator=", "classhelios_1_1utils_1_1FastPimpl.html#aac49a356ec97da30fdf346a9766844e0", null ],
+    [ "operator=", "classhelios_1_1utils_1_1FastPimpl.html#aea0827eb658c93588dc410aaf6c3b9a4", null ],
+    [ "operator=", "classhelios_1_1utils_1_1FastPimpl.html#ac7fd215df75c7fb1c7a1d9d79d9a7825", null ]
 ];

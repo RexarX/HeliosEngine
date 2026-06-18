@@ -1,13 +1,7 @@
 var namespacehelios_1_1profile =
 [
-    [ "details", "namespacehelios_1_1profile_1_1details.html", "namespacehelios_1_1profile_1_1details" ],
     [ "anonymous_namespace{flamegraph.cpp}", "namespacehelios_1_1profile_1_1anonymous__namespace_02flamegraph_8cpp_03.html", [
       [ "AlignUp", "namespacehelios_1_1profile_1_1anonymous__namespace_02flamegraph_8cpp_03.html#af6dfce868ecbf4f6ea45fc0028e09fad", null ]
-    ] ],
-    [ "anonymous_namespace{tracy.cpp}", "namespacehelios_1_1profile_1_1anonymous__namespace_02tracy_8cpp_03.html", [
-      [ "AsTracyZone", "namespacehelios_1_1profile_1_1anonymous__namespace_02tracy_8cpp_03.html#ae3417c6768986f78593284ad6c7ea719", null ],
-      [ "ToTracyPlotFormat", "namespacehelios_1_1profile_1_1anonymous__namespace_02tracy_8cpp_03.html#ab08b6ece8c080a7f983e31eed4ef58a2", null ],
-      [ "kTracyZoneStorageSize", "namespacehelios_1_1profile_1_1anonymous__namespace_02tracy_8cpp_03.html#a865aa885be7aead12fc60112b56e4382", null ]
     ] ],
     [ "anonymous_namespace{profiler.cpp}", "namespacehelios_1_1profile_1_1anonymous__namespace_02profiler_8cpp_03.html", [
       [ "AlignUp", "namespacehelios_1_1profile_1_1anonymous__namespace_02profiler_8cpp_03.html#aedb39d6659ac0e40ed68fc0497cc650d", null ],
@@ -16,17 +10,23 @@ var namespacehelios_1_1profile =
       [ "g_profiler_finalized", "namespacehelios_1_1profile_1_1anonymous__namespace_02profiler_8cpp_03.html#a220742fda8b53e44428f74ecc0afeb40", null ],
       [ "g_profiler_memory_dispatch_enabled", "namespacehelios_1_1profile_1_1anonymous__namespace_02profiler_8cpp_03.html#ac6003773ce9468fe51dd4cdaddb7b5f5", null ]
     ] ],
+    [ "anonymous_namespace{tracy.cpp}", "namespacehelios_1_1profile_1_1anonymous__namespace_02tracy_8cpp_03.html", [
+      [ "AsTracyZone", "namespacehelios_1_1profile_1_1anonymous__namespace_02tracy_8cpp_03.html#ae3417c6768986f78593284ad6c7ea719", null ],
+      [ "ToTracyPlotFormat", "namespacehelios_1_1profile_1_1anonymous__namespace_02tracy_8cpp_03.html#ab08b6ece8c080a7f983e31eed4ef58a2", null ],
+      [ "kTracyZoneStorageSize", "namespacehelios_1_1profile_1_1anonymous__namespace_02tracy_8cpp_03.html#a865aa885be7aead12fc60112b56e4382", null ]
+    ] ],
     [ "anonymous_namespace{zone.cpp}", "namespacehelios_1_1profile_1_1anonymous__namespace_02zone_8cpp_03.html", [
       [ "g_current_zone_storage", "namespacehelios_1_1profile_1_1anonymous__namespace_02zone_8cpp_03.html#a3e75f6f06fbebef913f9bf488c4161e6", null ],
       [ "g_zone_annotations_suppressed", "namespacehelios_1_1profile_1_1anonymous__namespace_02zone_8cpp_03.html#a5f45608241148cefd4caf47faee33828", null ]
     ] ],
+    [ "details", "namespacehelios_1_1profile_1_1details.html", "namespacehelios_1_1profile_1_1details" ],
     [ "Backend", "classhelios_1_1profile_1_1Backend.html", "classhelios_1_1profile_1_1Backend" ],
-    [ "FlamegraphBackendConfig", "structhelios_1_1profile_1_1FlamegraphBackendConfig.html", "structhelios_1_1profile_1_1FlamegraphBackendConfig" ],
     [ "FlamegraphBackend", "classhelios_1_1profile_1_1FlamegraphBackend.html", "classhelios_1_1profile_1_1FlamegraphBackend" ],
-    [ "TracyBackend", "classhelios_1_1profile_1_1TracyBackend.html", "classhelios_1_1profile_1_1TracyBackend" ],
-    [ "ZoneSpec", "structhelios_1_1profile_1_1ZoneSpec.html", "structhelios_1_1profile_1_1ZoneSpec" ],
+    [ "FlamegraphBackendConfig", "structhelios_1_1profile_1_1FlamegraphBackendConfig.html", "structhelios_1_1profile_1_1FlamegraphBackendConfig" ],
     [ "Profiler", "classhelios_1_1profile_1_1Profiler.html", "classhelios_1_1profile_1_1Profiler" ],
     [ "ScopedZone", "classhelios_1_1profile_1_1ScopedZone.html", "classhelios_1_1profile_1_1ScopedZone" ],
+    [ "TracyBackend", "classhelios_1_1profile_1_1TracyBackend.html", "classhelios_1_1profile_1_1TracyBackend" ],
+    [ "ZoneSpec", "structhelios_1_1profile_1_1ZoneSpec.html", "structhelios_1_1profile_1_1ZoneSpec" ],
     [ "ProfilerBackendTrait", "concepthelios_1_1profile_1_1ProfilerBackendTrait.html", null ],
     [ "BackendTypeId", "namespacehelios_1_1profile.html#a3a64ff9c560e2a2949899b22ee54d34c", null ],
     [ "BackendTypeIndex", "namespacehelios_1_1profile.html#a1f91791bd4cef3897510d2d0f05464be", null ],

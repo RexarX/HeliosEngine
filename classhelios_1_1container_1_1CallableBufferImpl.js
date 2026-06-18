@@ -1,7 +1,7 @@
 var classhelios_1_1container_1_1CallableBufferImpl =
 [
     [ "allocator_type", "classhelios_1_1container_1_1CallableBufferImpl.html#a018c4cc25437e6f9ffe13500906dc440", null ],
-    [ "byte_allocator_type", "classhelios_1_1container_1_1CallableBufferImpl.html#a5b0e86b39b1fe863215fb3bc6fb8167c", null ],
+    [ "byte_allocator_type", "classhelios_1_1container_1_1CallableBufferImpl.html#ac6a60ba724c5251498b5724bf0ce6ac2", null ],
     [ "size_type", "classhelios_1_1container_1_1CallableBufferImpl.html#a5c3df1f3434dd4bbfab0f1fe74c5f966", null ],
     [ "CallableBufferImpl", "classhelios_1_1container_1_1CallableBufferImpl.html#af5f98cf252cb9eb2e57110a743eaeb36", null ],
     [ "CallableBufferImpl", "classhelios_1_1container_1_1CallableBufferImpl.html#a0e128c84e9ad29cbc0b3e827e307257e", null ],
@@ -15,7 +15,7 @@ var classhelios_1_1container_1_1CallableBufferImpl =
     [ "Empty", "classhelios_1_1container_1_1CallableBufferImpl.html#a0902956326abfe29c0871e69708f4f7c", null ],
     [ "GetAllocator", "classhelios_1_1container_1_1CallableBufferImpl.html#ab771a3b3eba4c6239f410a94d481d9b9", null ],
     [ "Invoke", "classhelios_1_1container_1_1CallableBufferImpl.html#a17dbe36b649a9db5e3c3be9c9e0be3e7", null ],
-    [ "operator=", "classhelios_1_1container_1_1CallableBufferImpl.html#a1a7115281d0e2e4141caf2d2cb0975dd", null ],
+    [ "operator=", "classhelios_1_1container_1_1CallableBufferImpl.html#a10644bda6c8ef2ffd7234fb6f6e5a78d", null ],
     [ "operator=", "classhelios_1_1container_1_1CallableBufferImpl.html#a63728c19b550170e4ad513527f18dcd8", null ],
     [ "Set", "classhelios_1_1container_1_1CallableBufferImpl.html#acf11ad06b6a58d948c3eaaba116505c7", null ],
     [ "Set", "classhelios_1_1container_1_1CallableBufferImpl.html#a50a463136a2774d6ae3d0a0614a167d3", null ],

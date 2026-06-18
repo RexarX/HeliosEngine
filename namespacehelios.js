@@ -1,13 +1,13 @@
 var namespacehelios =
 [
-    [ "app", "namespacehelios_1_1app.html", "namespacehelios_1_1app" ],
-    [ "async", "namespacehelios_1_1async.html", "namespacehelios_1_1async" ],
-    [ "container", "namespacehelios_1_1container.html", "namespacehelios_1_1container" ],
-    [ "details", "namespacehelios_1_1details.html", "namespacehelios_1_1details" ],
     [ "anonymous_namespace{assert.cpp}", "namespacehelios_1_1anonymous__namespace_02assert_8cpp_03.html", [
       [ "BuildAssertionStacktraceConfig", "namespacehelios_1_1anonymous__namespace_02assert_8cpp_03.html#aa6cff68a01035a02dc6b3dee49b88f4e", null ],
       [ "kDefaultAssertionStacktraceFrames", "namespacehelios_1_1anonymous__namespace_02assert_8cpp_03.html#a0189e7cd23efa9fad7846d01fe4b047d", null ]
     ] ],
+    [ "app", "namespacehelios_1_1app.html", "namespacehelios_1_1app" ],
+    [ "async", "namespacehelios_1_1async.html", "namespacehelios_1_1async" ],
+    [ "container", "namespacehelios_1_1container.html", "namespacehelios_1_1container" ],
+    [ "details", "namespacehelios_1_1details.html", "namespacehelios_1_1details" ],
     [ "ecs", "namespacehelios_1_1ecs.html", "namespacehelios_1_1ecs" ],
     [ "log", "namespacehelios_1_1log.html", "namespacehelios_1_1log" ],
     [ "mem", "namespacehelios_1_1mem.html", "namespacehelios_1_1mem" ],
@@ -16,11 +16,11 @@ var namespacehelios =
     [ "BasicCStringView", "classhelios_1_1BasicCStringView.html", "classhelios_1_1BasicCStringView" ],
     [ "Delegate", "classhelios_1_1Delegate.html", null ],
     [ "Delegate&lt; ReturnType(Args...)&gt;", "classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html", "classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4" ],
-    [ "StacktraceConfig", "structhelios_1_1StacktraceConfig.html", "structhelios_1_1StacktraceConfig" ],
     [ "Stacktrace", "classhelios_1_1Stacktrace.html", "classhelios_1_1Stacktrace" ],
+    [ "StacktraceConfig", "structhelios_1_1StacktraceConfig.html", "structhelios_1_1StacktraceConfig" ],
     [ "Uuid", "classhelios_1_1Uuid.html", "classhelios_1_1Uuid" ],
     [ "UuidGenerator", "classhelios_1_1UuidGenerator.html", "classhelios_1_1UuidGenerator" ],
-    [ "AssertionHandler", "namespacehelios.html#a0839aa0267be40555e8b4a50ffa8a1c9", null ],
+    [ "AssertionHandler", "namespacehelios.html#a3cc4370a16e087a93b8545f2495c12c4", null ],
     [ "CStringView", "namespacehelios.html#a27054e3c65ddee94a897de87b010255f", null ],
     [ "U16CStringView", "namespacehelios.html#a2e2ac7e78c9c7a539c7474a9bc7d0df9", null ],
     [ "U32CStringView", "namespacehelios.html#a972743e2f2714ec185e080de5028f319", null ],

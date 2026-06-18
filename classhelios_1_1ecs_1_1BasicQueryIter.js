@@ -1,6 +1,6 @@
 var classhelios_1_1ecs_1_1BasicQueryIter =
 [
-    [ "ComponentManagerType", "classhelios_1_1ecs_1_1BasicQueryIter.html#aa449119193ada76109d6e454170a9e38", null ],
+    [ "ComponentManagerType", "classhelios_1_1ecs_1_1BasicQueryIter.html#aa19105fcf3a8de6b48f0c97d2a526560", null ],
     [ "difference_type", "classhelios_1_1ecs_1_1BasicQueryIter.html#a94a8245e63420885efa8e2583b9e97b4", null ],
     [ "iterator_category", "classhelios_1_1ecs_1_1BasicQueryIter.html#a304315028814549d11033c295ad1c317", null ],
     [ "iterator_concept", "classhelios_1_1ecs_1_1BasicQueryIter.html#a4a50d9f8b7c92373e26dc1c17140f14a", null ],
@@ -15,10 +15,10 @@ var classhelios_1_1ecs_1_1BasicQueryIter =
     [ "end", "classhelios_1_1ecs_1_1BasicQueryIter.html#a62a25d39df4870fffef8a3b94eba2cc7", null ],
     [ "operator!=", "classhelios_1_1ecs_1_1BasicQueryIter.html#aafbd2b4387b3f2461c2a8ee328902c3d", null ],
     [ "operator*", "classhelios_1_1ecs_1_1BasicQueryIter.html#af5731f84e7c0367cb84971148e63932a", null ],
-    [ "operator++", "classhelios_1_1ecs_1_1BasicQueryIter.html#a869c9e9386279859b2197bc519e6241c", null ],
-    [ "operator++", "classhelios_1_1ecs_1_1BasicQueryIter.html#a9972667bd6cedf374450de54e437fb53", null ],
-    [ "operator--", "classhelios_1_1ecs_1_1BasicQueryIter.html#afd0ff701a1e7622fa470c80f5cf7f77c", null ],
-    [ "operator--", "classhelios_1_1ecs_1_1BasicQueryIter.html#a1458d811d8cc15d8aaf21977a7e62511", null ],
+    [ "operator++", "classhelios_1_1ecs_1_1BasicQueryIter.html#ab4fa93e02a71a453408636bc60995a0e", null ],
+    [ "operator++", "classhelios_1_1ecs_1_1BasicQueryIter.html#a6bd5da8e1597d0f653f4c3def1ee0b6f", null ],
+    [ "operator--", "classhelios_1_1ecs_1_1BasicQueryIter.html#a706353d1908c0b2efed7472cd10d7d65", null ],
+    [ "operator--", "classhelios_1_1ecs_1_1BasicQueryIter.html#a2b94418a8fb1ab2d5bf0d8256b724718", null ],
     [ "operator->", "classhelios_1_1ecs_1_1BasicQueryIter.html#a68d88fba215c015e27eac8e6ad8bf3d0", null ],
     [ "operator=", "classhelios_1_1ecs_1_1BasicQueryIter.html#a81da2fe27e829053701860a62ab8143a", null ],
     [ "operator=", "classhelios_1_1ecs_1_1BasicQueryIter.html#afb76013ea742c0a0286f742d7201837d", null ],

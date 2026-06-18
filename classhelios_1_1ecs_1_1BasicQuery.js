@@ -8,7 +8,7 @@ var classhelios_1_1ecs_1_1BasicQuery =
     [ "pointer", "classhelios_1_1ecs_1_1BasicQuery.html#a15d3411a98fdcf32b3530ed4bb5b69c7", null ],
     [ "reference", "classhelios_1_1ecs_1_1BasicQuery.html#ac9633334e81227cd819c3bafe1b94f9f", null ],
     [ "value_type", "classhelios_1_1ecs_1_1BasicQuery.html#aaf78c357bb9d8ca11e58d54e22e8acba", null ],
-    [ "WithEntityIterator", "classhelios_1_1ecs_1_1BasicQuery.html#a15d77582bce03bb648f00abb5933a58b", null ],
+    [ "WithEntityIterator", "classhelios_1_1ecs_1_1BasicQuery.html#abefa2c8768cbcd53f20def86a71e2c5a", null ],
     [ "BasicQuery", "classhelios_1_1ecs_1_1BasicQuery.html#aa2bda02b87e0cab8bd62cf0334b26c80", null ],
     [ "BasicQuery", "classhelios_1_1ecs_1_1BasicQuery.html#adf564a038672b2b8076622b02a75d717", null ],
     [ "BasicQuery", "classhelios_1_1ecs_1_1BasicQuery.html#ac3ed14cac310989b50145f5a3b266962", null ],

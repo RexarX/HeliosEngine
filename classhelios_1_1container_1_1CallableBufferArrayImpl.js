@@ -1,8 +1,8 @@
 var classhelios_1_1container_1_1CallableBufferArrayImpl =
 [
     [ "allocator_type", "classhelios_1_1container_1_1CallableBufferArrayImpl.html#a8d42ae38c53f8e97b4b8433600388485", null ],
-    [ "byte_allocator_type", "classhelios_1_1container_1_1CallableBufferArrayImpl.html#a994b39fdab11632b31dd0c1b58329b94", null ],
-    [ "offset_allocator_type", "classhelios_1_1container_1_1CallableBufferArrayImpl.html#a2fcbd2985f9e6711dea672e4085c14ac", null ],
+    [ "byte_allocator_type", "classhelios_1_1container_1_1CallableBufferArrayImpl.html#a4634a789e68b3f776925cceac31dfeb0", null ],
+    [ "offset_allocator_type", "classhelios_1_1container_1_1CallableBufferArrayImpl.html#a9e118ff9f0f26a6e750600c3701b038e", null ],
     [ "size_type", "classhelios_1_1container_1_1CallableBufferArrayImpl.html#a58f0ea80dad07bc43767f120873def9b", null ],
     [ "CallableBufferArrayImpl", "classhelios_1_1container_1_1CallableBufferArrayImpl.html#a693cee1a0475ac9b9bc20a019d9b64e9", null ],
     [ "CallableBufferArrayImpl", "classhelios_1_1container_1_1CallableBufferArrayImpl.html#a069d1c3b3939b3e7e423974bf052e837", null ],
@@ -17,7 +17,7 @@ var classhelios_1_1container_1_1CallableBufferArrayImpl =
     [ "GetAllocator", "classhelios_1_1container_1_1CallableBufferArrayImpl.html#a28bcd6730fed6a054513e2495f594a36", null ],
     [ "Invoke", "classhelios_1_1container_1_1CallableBufferArrayImpl.html#a05a2e839ba08b6898df7ae230fc23b00", null ],
     [ "Merge", "classhelios_1_1container_1_1CallableBufferArrayImpl.html#aca61c9daa0b38a21bfa80848e0874c2b", null ],
-    [ "operator=", "classhelios_1_1container_1_1CallableBufferArrayImpl.html#a964cc4993764060e0467f158310a4d0e", null ],
+    [ "operator=", "classhelios_1_1container_1_1CallableBufferArrayImpl.html#a9b0a944614242a30cf7afbe31f62a5cc", null ],
     [ "operator=", "classhelios_1_1container_1_1CallableBufferArrayImpl.html#af3773dbb94a37103ce1856da83c2baee", null ],
     [ "Push", "classhelios_1_1container_1_1CallableBufferArrayImpl.html#a7c6411036ef659cec3b0a81f83e942a0", null ],
     [ "Push", "classhelios_1_1container_1_1CallableBufferArrayImpl.html#a99c6d50b8df02627ea8539834c3803e9", null ],

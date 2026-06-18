@@ -18,7 +18,6 @@ var classhelios_1_1ecs_1_1ComponentManager =
     [ "Emplace", "classhelios_1_1ecs_1_1ComponentManager.html#a9df40e2f5b99322ec23acf5e63368096", null ],
     [ "EmplaceArchetypeComponent", "classhelios_1_1ecs_1_1ComponentManager.html#adb42cd3698f109e371da2c70405794fa", null ],
     [ "EmplaceSparseComponent", "classhelios_1_1ecs_1_1ComponentManager.html#a2f68083480ea53fe3f5aade45c5be542", null ],
-    [ "EnsureSparseStorage", "classhelios_1_1ecs_1_1ComponentManager.html#ae60f4c6e22ae9de18401dd8fde4b4817", null ],
     [ "EntityArchetype", "classhelios_1_1ecs_1_1ComponentManager.html#a59a0424b1b843b6755f3941b785ace99", null ],
     [ "EntityArchetype", "classhelios_1_1ecs_1_1ComponentManager.html#ad7f50acbfc2173d765da2ff3f7213078", null ],
     [ "Get", "classhelios_1_1ecs_1_1ComponentManager.html#a510d783f7af293aafe7f12c36287ebe8", null ],

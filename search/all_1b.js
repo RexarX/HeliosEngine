@@ -19,7 +19,7 @@ var searchData=
   ['windowsize_16',['WindowSize',['../classhelios_1_1utils_1_1SlideAdapter.html#a603b42be13217726a9de22947d6c1711',1,'helios::utils::SlideAdapter']]],
   ['with_17',['With',['../classhelios_1_1ecs_1_1ArchetypeId.html#ab3e93421a4d1099c7b2718eacdc3a278',1,'helios::ecs::ArchetypeId::With(ComponentTypeIndex type) const'],['../classhelios_1_1ecs_1_1ArchetypeId.html#a647bf112b68c56dbd3da392e1bc14863',1,'helios::ecs::ArchetypeId::With() const']]],
   ['withentity_18',['WithEntity',['../classhelios_1_1ecs_1_1BasicQuery.html#a52bf3bc4bd535366253d3630bfcb3626',1,'helios::ecs::BasicQuery']]],
-  ['withentityiterator_19',['WithEntityIterator',['../classhelios_1_1ecs_1_1BasicQuery.html#a15d77582bce03bb648f00abb5933a58b',1,'helios::ecs::BasicQuery']]],
+  ['withentityiterator_19',['WithEntityIterator',['../classhelios_1_1ecs_1_1BasicQuery.html#abefa2c8768cbcd53f20def86a71e2c5a',1,'helios::ecs::BasicQuery']]],
   ['without_20',['Without',['../classhelios_1_1ecs_1_1ArchetypeId.html#aba0e607f46937c02e51af8362f4d2519',1,'helios::ecs::ArchetypeId::Without(ComponentTypeIndex type) const'],['../classhelios_1_1ecs_1_1ArchetypeId.html#af8b7d713171990dc37686ea2d72d0176',1,'helios::ecs::ArchetypeId::Without() const']]],
   ['withouttypes_21',['WithoutTypes',['../classhelios_1_1ecs_1_1BasicQuery.html#a8938b46c51a3ff087f2dcb830cccd6a7',1,'helios::ecs::BasicQuery']]],
   ['work_22',['Work',['../classhelios_1_1async_1_1Task.html#a78e35f3bebbd33cbe6d9867c173adaed',1,'helios::async::Task']]],

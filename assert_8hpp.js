@@ -3,7 +3,7 @@ var assert_8hpp =
     [ "HELIOS_ASSERT", "assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc", null ],
     [ "HELIOS_INVARIANT", "assert_8hpp.html#a717b59a334b4e29f2d1bcd580de3d38f", null ],
     [ "HELIOS_VERIFY", "assert_8hpp.html#a8b8608656bafeab9911c16dce4827a04", null ],
-    [ "helios::AssertionHandler", "namespacehelios.html#a0839aa0267be40555e8b4a50ffa8a1c9", null ],
+    [ "helios::AssertionHandler", "namespacehelios.html#a3cc4370a16e087a93b8545f2495c12c4", null ],
     [ "helios::AbortWithStacktrace", "namespacehelios.html#a353d3912bb7ad37d555a2d43f9fcd02f", null ],
     [ "helios::details::DefaultAssertionHandler", "namespacehelios_1_1details.html#ac7257329ff9480b84750b75c7638f95a", null ],
     [ "helios::details::FormatAssertionMessage", "namespacehelios_1_1details.html#adb5b08a1efebd6763f5c5358aaccdea7", null ],
