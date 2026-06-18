@@ -7,7 +7,7 @@ var namespacehelios_1_1profile_1_1details =
       [ "RawAlignedFree", "namespacehelios_1_1profile_1_1details_1_1anonymous__namespace_02global__alloc_8cpp_03.html#a29de1722242734c5f1a572e237013fc9", null ],
       [ "RawAlloc", "namespacehelios_1_1profile_1_1details_1_1anonymous__namespace_02global__alloc_8cpp_03.html#a23e66d8487c62843f0855af1d78f6c58", null ],
       [ "RawFree", "namespacehelios_1_1profile_1_1details_1_1anonymous__namespace_02global__alloc_8cpp_03.html#a62b3396c3e94ebf9f92f35eb8a87b8d0", null ],
-      [ "g_in_global_alloc_hook", "namespacehelios_1_1profile_1_1details_1_1anonymous__namespace_02global__alloc_8cpp_03.html#a6eb66910a6660167cb69b1771de1cfdb", null ],
+      [ "g_in_global_alloc_hook", "namespacehelios_1_1profile_1_1details_1_1anonymous__namespace_02global__alloc_8cpp_03.html#aff73d09aba793a15d1d1cb02544580d3", null ],
       [ "kGlobalAllocName", "namespacehelios_1_1profile_1_1details_1_1anonymous__namespace_02global__alloc_8cpp_03.html#a427816e9bb7fc4b139eaa096b0560829", null ]
     ] ],
     [ "ActiveBackendCount", "namespacehelios_1_1profile_1_1details.html#adbc5b32a907307e978671d242519c43e", null ],

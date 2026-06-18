@@ -1,12 +1,12 @@
 var namespacehelios_1_1details =
 [
-    [ "FreeFunctionTraits", "structhelios_1_1details_1_1FreeFunctionTraits.html", null ],
-    [ "FreeFunctionTraits< R(*)(Args...)>", "structhelios_1_1details_1_1FreeFunctionTraits_3_01R_07_5_08_07Args_8_8_8_08_4.html", "structhelios_1_1details_1_1FreeFunctionTraits_3_01R_07_5_08_07Args_8_8_8_08_4" ],
-    [ "MemberFunctionTraits", "structhelios_1_1details_1_1MemberFunctionTraits.html", null ],
-    [ "MemberFunctionTraits< R(C::*)(Args...) const >", "structhelios_1_1details_1_1MemberFunctionTraits_3_01R_07C_1_1_5_08_07Args_8_8_8_08_01const_01_4.html", "structhelios_1_1details_1_1MemberFunctionTraits_3_01R_07C_1_1_5_08_07Args_8_8_8_08_01const_01_4" ],
-    [ "MemberFunctionTraits< R(C::*)(Args...)>", "structhelios_1_1details_1_1MemberFunctionTraits_3_01R_07C_1_1_5_08_07Args_8_8_8_08_4.html", "structhelios_1_1details_1_1MemberFunctionTraits_3_01R_07C_1_1_5_08_07Args_8_8_8_08_4" ],
     [ "TupleToFunctionSignature", "structhelios_1_1details_1_1TupleToFunctionSignature.html", null ],
-    [ "TupleToFunctionSignature< std::tuple< R, Args... > >", "structhelios_1_1details_1_1TupleToFunctionSignature_3_01std_1_1tuple_3_01R_00_01Args_8_8_8_01_4_01_4.html", "structhelios_1_1details_1_1TupleToFunctionSignature_3_01std_1_1tuple_3_01R_00_01Args_8_8_8_01_4_01_4" ],
+    [ "TupleToFunctionSignature&lt; std::tuple&lt; R, Args... &gt; &gt;", "structhelios_1_1details_1_1TupleToFunctionSignature_3_01std_1_1tuple_3_01R_00_01Args_8_8_8_01_4_01_4.html", "structhelios_1_1details_1_1TupleToFunctionSignature_3_01std_1_1tuple_3_01R_00_01Args_8_8_8_01_4_01_4" ],
+    [ "FreeFunctionTraits", "structhelios_1_1details_1_1FreeFunctionTraits.html", null ],
+    [ "FreeFunctionTraits&lt; R(*)(Args...)&gt;", "structhelios_1_1details_1_1FreeFunctionTraits_3_01R_07_5_08_07Args_8_8_8_08_4.html", "structhelios_1_1details_1_1FreeFunctionTraits_3_01R_07_5_08_07Args_8_8_8_08_4" ],
+    [ "MemberFunctionTraits", "structhelios_1_1details_1_1MemberFunctionTraits.html", null ],
+    [ "MemberFunctionTraits&lt; R(C::*)(Args...)&gt;", "structhelios_1_1details_1_1MemberFunctionTraits_3_01R_07C_1_1_5_08_07Args_8_8_8_08_4.html", "structhelios_1_1details_1_1MemberFunctionTraits_3_01R_07C_1_1_5_08_07Args_8_8_8_08_4" ],
+    [ "MemberFunctionTraits&lt; R(C::*)(Args...) const &gt;", "structhelios_1_1details_1_1MemberFunctionTraits_3_01R_07C_1_1_5_08_07Args_8_8_8_08_01const_01_4.html", "structhelios_1_1details_1_1MemberFunctionTraits_3_01R_07C_1_1_5_08_07Args_8_8_8_08_01const_01_4" ],
     [ "DefaultAssertionHandler", "namespacehelios_1_1details.html#ac7257329ff9480b84750b75c7638f95a", null ],
     [ "FormatAssertionMessage", "namespacehelios_1_1details.html#adb5b08a1efebd6763f5c5358aaccdea7", null ],
     [ "HandleAssertion", "namespacehelios_1_1details.html#a271289d7b12e0f10ed7d0e53cf04d2e4", null ],

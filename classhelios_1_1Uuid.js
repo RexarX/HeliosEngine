@@ -17,6 +17,6 @@ var classhelios_1_1Uuid =
     [ "operator==", "classhelios_1_1Uuid.html#aaf1ed5acd319dac2cf349413b25549c7", null ],
     [ "ToString", "classhelios_1_1Uuid.html#a63c5c1a87aceecb2cb4a52f216be18fc", null ],
     [ "Valid", "classhelios_1_1Uuid.html#abfb3a7d9213d6db2f3b6d3bdb44a3dae", null ],
-    [ "swap", "classhelios_1_1Uuid.html#a69b70a1fc19180296a6233f58fc5f63b", null ],
+    [ "swap", "classhelios_1_1Uuid.html#a7aca9c41e78206017dd8f4c371cd4d84", null ],
     [ "UuidGenerator", "classhelios_1_1Uuid.html#a62fab7af377e8f5cc7e8a61efdb960b9", null ]
 ];

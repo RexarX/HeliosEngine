@@ -1,17 +1,17 @@
 var query_8hpp =
 [
-    [ "helios::ecs::BasicQueryWithEntity< WorldT, Allocator, Args >", "classhelios_1_1ecs_1_1BasicQueryWithEntity.html", "classhelios_1_1ecs_1_1BasicQueryWithEntity" ],
-    [ "helios::ecs::BasicQuery< WorldT, Allocator, Args >", "classhelios_1_1ecs_1_1BasicQuery.html", "classhelios_1_1ecs_1_1BasicQuery" ],
-    [ "MutBasicQuery", "query_8hpp.html#a9a393e8cb1f8566f97be7fe776eafc9d", null ],
-    [ "MutBasicQueryWithEntity", "query_8hpp.html#a6ce7cda13d82dbc92d2233fcba3ce9a2", null ],
-    [ "PmrBasicQuery", "query_8hpp.html#ab47339fb3a4f84c39a049eb7926eb57f", null ],
-    [ "PmrBasicQueryWithEntity", "query_8hpp.html#a611e25ecadd95c288f03d5808c6b9c25", null ],
-    [ "PmrReadOnlyBasicQuery", "query_8hpp.html#a0e7db65c47a738e9ab0cd322334cb029", null ],
-    [ "PmrReadOnlyBasicQueryWithEntity", "query_8hpp.html#a26ad1f3a453b7114b0eea967d5b4468a", null ],
-    [ "Query", "query_8hpp.html#a43625444d4d8722ac308aefce14b1022", null ],
-    [ "ReadOnlyBasicQuery", "query_8hpp.html#aaef7c21c53c155f87fc1424b12d10e26", null ],
-    [ "ReadOnlyBasicQueryWithEntity", "query_8hpp.html#a677a8d1124e06c66e5cac791e85c20ec", null ],
-    [ "EntityHasComponentsCheck", "query_8hpp.html#a1a74972b5a4035409515c59ab401c3f4", null ],
-    [ "FetchComponentsConst", "query_8hpp.html#a2883d36960653314eef20cb253e33462", null ],
-    [ "FetchComponentsMutable", "query_8hpp.html#a3f4d97f715b3fddda4c8cad2b6a01b22", null ]
+    [ "helios::ecs::BasicQueryWithEntity&lt; WorldT, Allocator, Args &gt;", "classhelios_1_1ecs_1_1BasicQueryWithEntity.html", "classhelios_1_1ecs_1_1BasicQueryWithEntity" ],
+    [ "helios::ecs::BasicQuery&lt; WorldT, Allocator, Args &gt;", "classhelios_1_1ecs_1_1BasicQuery.html", "classhelios_1_1ecs_1_1BasicQuery" ],
+    [ "helios::ecs::MutBasicQuery", "namespacehelios_1_1ecs.html#a3070e34789bbcb0a4664277324f82e78", null ],
+    [ "helios::ecs::MutBasicQueryWithEntity", "namespacehelios_1_1ecs.html#a1628be8e655ae078350643c449db2d66", null ],
+    [ "helios::ecs::PmrBasicQuery", "namespacehelios_1_1ecs.html#a8256d3f8ee78a638af86ef5f82ea9629", null ],
+    [ "helios::ecs::PmrBasicQueryWithEntity", "namespacehelios_1_1ecs.html#a1b5db63333913ce51ac62e08c6c486c1", null ],
+    [ "helios::ecs::PmrReadOnlyBasicQuery", "namespacehelios_1_1ecs.html#a73c1d699b175c8516650c4a63da7a238", null ],
+    [ "helios::ecs::PmrReadOnlyBasicQueryWithEntity", "namespacehelios_1_1ecs.html#ac45d5c4ba417033f0d5f7ff619d20e8d", null ],
+    [ "helios::ecs::Query", "namespacehelios_1_1ecs.html#a2222a8ceaa7f9005447fc4e1bf219cb5", null ],
+    [ "helios::ecs::ReadOnlyBasicQuery", "namespacehelios_1_1ecs.html#a37e0ea608f7589b6c8d84920531eb0b0", null ],
+    [ "helios::ecs::ReadOnlyBasicQueryWithEntity", "namespacehelios_1_1ecs.html#a50d3da19c311432771fa5d914c9cc446", null ],
+    [ "helios::ecs::details::EntityHasComponentsCheck", "namespacehelios_1_1ecs_1_1details.html#a1a74972b5a4035409515c59ab401c3f4", null ],
+    [ "helios::ecs::details::FetchComponentsConst", "namespacehelios_1_1ecs_1_1details.html#a2883d36960653314eef20cb253e33462", null ],
+    [ "helios::ecs::details::FetchComponentsMutable", "namespacehelios_1_1ecs_1_1details.html#a3f4d97f715b3fddda4c8cad2b6a01b22", null ]
 ];

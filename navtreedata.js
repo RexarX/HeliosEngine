@@ -53,10 +53,10 @@ var NAVTREE =
       ] ],
       [ "Architecture", "index.html#architecture", null ],
       [ "Using as a Dependency", "index.html#using-as-a-dependency", [
-        [ "Method 1: <tt>add_subdirectory</tt>", "index.html#method-1-add_subdirectory", null ],
-        [ "Method 2: <tt>FetchContent</tt>", "index.html#method-2-fetchcontent", null ],
+        [ "Method 1: <span class=\"tt\">add_subdirectory</span>", "index.html#method-1-add_subdirectory", null ],
+        [ "Method 2: <span class=\"tt\">FetchContent</span>", "index.html#method-2-fetchcontent", null ],
         [ "Method 3: CPM", "index.html#method-3-cpm", null ],
-        [ "Method 4: Installed Package (<tt>find_package</tt>)", "index.html#method-4-installed-package-find_package", null ]
+        [ "Method 4: Installed Package (<span class=\"tt\">find_package</span>)", "index.html#method-4-installed-package-find_package", null ]
       ] ],
       [ "Documentation", "index.html#documentation", [
         [ "API reference (Doxygen)", "index.html#api-reference-doxygen", null ],
@@ -72,136 +72,6 @@ var NAVTREE =
       [ "License", "index.html#license", null ],
       [ "Contact", "index.html#contact", null ]
     ] ],
-    [ "<tt>app</tt> — Application Framework", "md_src_2app_2README.html", [
-      [ "Public API", "md_src_2app_2README.html#public-api", [
-        [ "Builtin Stages & Schedules (<tt>schedules.hpp</tt>)", "md_src_2app_2README.html#builtin-stages--schedules-scheduleshpp", null ],
-        [ "Sub-App Label Traits", "md_src_2app_2README.html#sub-app-label-traits", null ]
-      ] ],
-      [ "Quick Start", "md_src_2app_2README.html#quick-start", null ],
-      [ "Lifecycle", "md_src_2app_2README.html#lifecycle", null ],
-      [ "Frame Lifecycle", "md_src_2app_2README.html#frame-lifecycle", null ],
-      [ "Sub-Apps", "md_src_2app_2README.html#sub-apps", null ],
-      [ "Plugins", "md_src_2app_2README.html#plugins", null ],
-      [ "Custom Runner", "md_src_2app_2README.html#custom-runner", null ],
-      [ "Dependencies", "md_src_2app_2README.html#dependencies", null ]
-    ] ],
-    [ "<tt>async</tt> — Task-Based Parallelism", "md_src_2async_2README.html", [
-      [ "Public API", "md_src_2async_2README.html#public-api-1", [
-        [ "<tt>Executor</tt> Methods", "md_src_2async_2README.html#executor-methods", null ]
-      ] ],
-      [ "Quick Start", "md_src_2async_2README.html#quick-start-1", null ],
-      [ "Parallel Algorithms", "md_src_2async_2README.html#parallel-algorithms", null ],
-      [ "Independent Async Tasks", "md_src_2async_2README.html#independent-async-tasks", null ],
-      [ "Dynamic Subflows", "md_src_2async_2README.html#dynamic-subflows", null ],
-      [ "Dispatch Paths", "md_src_2async_2README.html#dispatch-paths", null ],
-      [ "Thread Safety", "md_src_2async_2README.html#thread-safety", null ],
-      [ "Dependencies", "md_src_2async_2README.html#dependencies-1", null ]
-    ] ],
-    [ "<tt>compiler</tt> — Compiler Detection & Intrinsics", "md_src_2compiler_2README.html", [
-      [ "Public API", "md_src_2compiler_2README.html#public-api-2", [
-        [ "Usage", "md_src_2compiler_2README.html#usage", null ]
-      ] ],
-      [ "Macros", "md_src_2compiler_2README.html#macros", null ]
-    ] ],
-    [ "<tt>container</tt> — Data-Oriented Containers", "md_src_2container_2README.html", [
-      [ "Public API", "md_src_2container_2README.html#public-api-3", null ],
-      [ "SparseSet", "md_src_2container_2README.html#sparseset", null ],
-      [ "MultiTypeMap", "md_src_2container_2README.html#multitypemap", null ],
-      [ "TypedBuffer", "md_src_2container_2README.html#typedbuffer", null ],
-      [ "CallableBuffer", "md_src_2container_2README.html#callablebuffer", null ],
-      [ "StaticString", "md_src_2container_2README.html#staticstring", null ],
-      [ "Dependencies", "md_src_2container_2README.html#dependencies-2", null ]
-    ] ],
-    [ "<tt>core</tt> — Core Engine Primitives", "md_src_2core_2README.html", [
-      [ "Public API", "md_src_2core_2README.html#public-api-4", null ],
-      [ "Assert System", "md_src_2core_2README.html#assert-system", null ],
-      [ "UUID", "md_src_2core_2README.html#uuid", null ],
-      [ "Stacktrace", "md_src_2core_2README.html#stacktrace", null ],
-      [ "CStringView", "md_src_2core_2README.html#cstringview", null ],
-      [ "Dependencies", "md_src_2core_2README.html#dependencies-3", null ]
-    ] ],
-    [ "<tt>ecs</tt> — Entity Component System", "md_src_2ecs_2README.html", [
-      [ "Public API", "md_src_2ecs_2README.html#public-api-5", [
-        [ "Core Types", "md_src_2ecs_2README.html#core-types", null ],
-        [ "World Lifecycle", "md_src_2ecs_2README.html#world-lifecycle", null ]
-      ] ],
-      [ "Quick Start", "md_src_2ecs_2README.html#quick-start-2", null ],
-      [ "Systems & Schedules", "md_src_2ecs_2README.html#systems--schedules", [
-        [ "System Parameters", "md_src_2ecs_2README.html#system-parameters", null ],
-        [ "Custom System Parameters", "md_src_2ecs_2README.html#custom-system-parameters", [
-          [ "Aggregate parameters (<tt>CompositeSystemParam</tt>)", "md_src_2ecs_2README.html#aggregate-parameters-compositesystemparam", null ],
-          [ "Fully custom parameters", "md_src_2ecs_2README.html#fully-custom-parameters", null ]
-        ] ],
-        [ "Ordering", "md_src_2ecs_2README.html#ordering", null ]
-      ] ],
-      [ "Commands — Deferred Mutations", "md_src_2ecs_2README.html#commands--deferred-mutations", null ],
-      [ "Messages", "md_src_2ecs_2README.html#messages", null ],
-      [ "Components", "md_src_2ecs_2README.html#components", null ],
-      [ "Queries", "md_src_2ecs_2README.html#queries", null ],
-      [ "Executors", "md_src_2ecs_2README.html#executors", null ],
-      [ "Builtin Types", "md_src_2ecs_2README.html#builtin-types", null ],
-      [ "Dependencies", "md_src_2ecs_2README.html#dependencies-4", null ]
-    ] ],
-    [ "<tt>log</tt> — Logging", "md_src_2log_2README.html", [
-      [ "Public API", "md_src_2log_2README.html#public-api-6", [
-        [ "Free Functions", "md_src_2log_2README.html#free-functions", null ]
-      ] ],
-      [ "Quick Start", "md_src_2log_2README.html#quick-start-3", null ],
-      [ "Custom Logger Types", "md_src_2log_2README.html#custom-logger-types", null ],
-      [ "Configuration", "md_src_2log_2README.html#configuration", null ],
-      [ "Runtime Control", "md_src_2log_2README.html#runtime-control", null ],
-      [ "Assert Integration", "md_src_2log_2README.html#assert-integration", null ],
-      [ "Dependencies", "md_src_2log_2README.html#dependencies-5", null ]
-    ] ],
-    [ "<tt>memory</tt> — PMR Allocators & Reference Counting", "md_src_2memory_2README.html", [
-      [ "Public API", "md_src_2memory_2README.html#public-api-7", [
-        [ "Allocators", "md_src_2memory_2README.html#allocators", null ],
-        [ "Reference Counting", "md_src_2memory_2README.html#reference-counting", null ],
-        [ "Utilities", "md_src_2memory_2README.html#utilities", null ]
-      ] ],
-      [ "Arena Allocator", "md_src_2memory_2README.html#arena-allocator", null ],
-      [ "Frame Allocator", "md_src_2memory_2README.html#frame-allocator", null ],
-      [ "Pool Allocator", "md_src_2memory_2README.html#pool-allocator", null ],
-      [ "Reference Counting", "md_src_2memory_2README.html#reference-counting-1", null ],
-      [ "Dependencies", "md_src_2memory_2README.html#dependencies-6", null ]
-    ] ],
-    [ "<tt>platform</tt> — Platform Detection & API Macros", "md_src_2platform_2README.html", [
-      [ "Public API", "md_src_2platform_2README.html#public-api-8", null ],
-      [ "Usage", "md_src_2platform_2README.html#usage-1", null ],
-      [ "Macros", "md_src_2platform_2README.html#macros-1", null ]
-    ] ],
-    [ "<tt>profile</tt> — CPU/Memory/Lock Profiling", "md_src_2profile_2README.html", [
-      [ "Public API", "md_src_2profile_2README.html#public-api-9", [
-        [ "Free Functions", "md_src_2profile_2README.html#free-functions-1", null ]
-      ] ],
-      [ "Quick Start", "md_src_2profile_2README.html#quick-start-4", null ],
-      [ "Macro Reference", "md_src_2profile_2README.html#macro-reference", [
-        [ "Memory in Tracy", "md_src_2profile_2README.html#memory-in-tracy", null ]
-      ] ],
-      [ "Multi-Backend", "md_src_2profile_2README.html#multi-backend", null ],
-      [ "Lock Profiling (Tracy-specific)", "md_src_2profile_2README.html#lock-profiling-tracy-specific", null ],
-      [ "Custom Backends", "md_src_2profile_2README.html#custom-backends", null ],
-      [ "Build", "md_src_2profile_2README.html#build", null ],
-      [ "Thread Safety", "md_src_2profile_2README.html#thread-safety-1", null ],
-      [ "Dependencies", "md_src_2profile_2README.html#dependencies-7", null ]
-    ] ],
-    [ "<tt>utils</tt> — Common Utilities", "md_src_2utils_2README.html", [
-      [ "Public API", "md_src_2utils_2README.html#public-api-10", null ],
-      [ "Type Identification", "md_src_2utils_2README.html#type-identification", null ],
-      [ "Delegate", "md_src_2utils_2README.html#delegate", null ],
-      [ "Scope Guard", "md_src_2utils_2README.html#scope-guard", null ],
-      [ "Timer", "md_src_2utils_2README.html#timer", null ],
-      [ "Random", "md_src_2utils_2README.html#random", null ],
-      [ "Filesystem", "md_src_2utils_2README.html#filesystem", null ],
-      [ "Dynamic Library", "md_src_2utils_2README.html#dynamic-library", null ],
-      [ "Iterator Adapters", "md_src_2utils_2README.html#iterator-adapters", null ],
-      [ "Dependencies", "md_src_2utils_2README.html#dependencies-8", null ]
-    ] ],
-    [ "<tt>window</tt> — Cross-Platform Window Management", "md_src_2window_2README.html", [
-      [ "Public API", "md_src_2window_2README.html#public-api-11", null ],
-      [ "Intended Scope", "md_src_2window_2README.html#intended-scope", null ],
-      [ "Dependencies", "md_src_2window_2README.html#dependencies-9", null ]
-    ] ],
     [ "Project Guidelines", "md_docs_2guidelines.html", [
       [ "Code rules", "md_docs_2guidelines.html#code-rules", [
         [ "Non-negotiable", "md_docs_2guidelines.html#non-negotiable", null ],
@@ -214,8 +84,8 @@ var NAVTREE =
         [ "Tag order", "md_docs_2guidelines.html#tag-order", null ]
       ] ],
       [ "Module structure", "md_docs_2guidelines.html#module-structure", [
-        [ "Registration (<tt>Module.cmake</tt>)", "md_docs_2guidelines.html#registration-modulecmake", null ],
-        [ "Build definition (<tt>CMakeLists.txt</tt>)", "md_docs_2guidelines.html#build-definition-cmakeliststxt", null ],
+        [ "Registration (<span class=\"tt\">Module.cmake</span>)", "md_docs_2guidelines.html#registration-modulecmake", null ],
+        [ "Build definition (<span class=\"tt\">CMakeLists.txt</span>)", "md_docs_2guidelines.html#build-definition-cmakeliststxt", null ],
         [ "Selective module builds", "md_docs_2guidelines.html#selective-module-builds", null ]
       ] ],
       [ "Testing", "md_docs_2guidelines.html#testing", [
@@ -231,16 +101,6 @@ var NAVTREE =
         [ "Formatting enforcement", "md_docs_2guidelines.html#formatting-enforcement", null ]
       ] ],
       [ "Further reading", "md_docs_2guidelines.html#further-reading", null ]
-    ] ],
-    [ "Creating a Custom Helios Module", "md_examples_2custom__module_2README.html", [
-      [ "What you get", "md_examples_2custom__module_2README.html#what-you-get", null ],
-      [ "Layout", "md_examples_2custom__module_2README.html#layout", null ],
-      [ "Step 1 — Register the module (<tt>Module.cmake</tt>)", "md_examples_2custom__module_2README.html#step-1--register-the-module-modulecmake", null ],
-      [ "Step 2 — Define the build (<tt>CMakeLists.txt</tt>)", "md_examples_2custom__module_2README.html#step-2--define-the-build-cmakeliststxt", null ],
-      [ "Step 3 — Discovery (no manual <tt>include()</tt>)", "md_examples_2custom__module_2README.html#step-3--discovery-no-manual-include", null ],
-      [ "Step 4 — Public API", "md_examples_2custom__module_2README.html#step-4--public-api", null ],
-      [ "Step 5 — Consume from an executable", "md_examples_2custom__module_2README.html#step-5--consume-from-an-executable", null ],
-      [ "Further reading", "md_examples_2custom__module_2README.html#further-reading-1", null ]
     ] ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
@@ -280,42 +140,41 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "access__decl_8hpp.html",
-"classhelios_1_1BasicCStringView.html#ac2718b8424052e8f467226fdcb549ed8",
-"classhelios_1_1app_1_1App.html#ac3603ebfaf1c5a070f6024a1e8180e33",
-"classhelios_1_1async_1_1Executor.html",
-"classhelios_1_1async_1_1Task.html#ae776e77776ea246366fc4c988d355cfb",
-"classhelios_1_1container_1_1BasicStaticString.html#ac2a05a9c4e3fa5707c7b3263cd9c054a",
-"classhelios_1_1container_1_1MultiTypeMap.html#aa5b3701092540ab350f1b8003feb2b04",
-"classhelios_1_1container_1_1TypedBufferArray.html#a277106ac80d000db5a21633108f778de",
-"classhelios_1_1ecs_1_1Archetype.html#a3b5366e22d9a8fd4466ea9d3b7f7ddb7",
-"classhelios_1_1ecs_1_1BasicMessageWriter.html#a051c666b9a617eccddd4ff27afd34998",
-"classhelios_1_1ecs_1_1BasicQueryWithEntity.html#a639daf4e859712feba2b0ee1a2d80ac4",
-"classhelios_1_1ecs_1_1ComponentManager.html#a40c02f693ff880d2d6fb67864703b962",
-"classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html#a72d1848a65b2d48008b4ab4e0cc50475",
-"classhelios_1_1ecs_1_1EntityCmdBuffer.html#ae1d1748be411a64d30b351c3b0d289be",
-"classhelios_1_1ecs_1_1MessageQueue.html#a61d1955e914805535a6aaaef1cd4edd7",
-"classhelios_1_1ecs_1_1MessageWrapperIter.html#aff843697d763c30a8f696ddbf9a888f0",
-"classhelios_1_1ecs_1_1Scheduler.html#aa0d8e9a705819e722395c722d708902a",
-"classhelios_1_1ecs_1_1SystemSetHandle.html#a476b56f27b1a5601751022c1d4c45a70",
-"classhelios_1_1ecs_1_1World.html#ab23c40337d5a5330b31e73754402999e",
-"classhelios_1_1mem_1_1AtomicRefCounted.html#a190395dd24f98367b5a7bc39bdfcfe35",
-"classhelios_1_1mem_1_1RefCounted.html#ab7561a602056cc3cf2eccc8bcd52c0f7",
-"classhelios_1_1profile_1_1ScopedZone.html#a7c60d112ce6ec29a48d2653ad3c076dc",
-"classhelios_1_1utils_1_1FilterAdapter.html#a72d4d330718c70483b2d7e77ff8ad078",
-"classhelios_1_1utils_1_1ReverseAdapter.html#a6d273277a5dcdf77a15ce7599db6b7d7",
-"classhelios_1_1utils_1_1StrideAdapter.html#a28585cebaee0c18cd67bae8efad5d1de",
-"classhelios_1_1utils_1_1ZipAdapter.html#a2a8dc24033773885c9fdf8bbf7cdb36a",
-"cstring__view_8hpp.html#a0eae2881bdcf398546547f64adce687a",
-"functions_func_u.html",
-"md_docs_2guidelines.html#prerequisites",
-"namespacehelios_1_1app.html#aaa2e7e163848df09000145bed33817e4",
-"namespacehelios_1_1mem.html#ae38a06a39f091ee615bae93c111f6faa",
-"profile_8hpp.html",
-"structhelios_1_1app_1_1FixedRunnerConfig.html",
-"structhelios_1_1ecs_1_1ResourceConflictInfo.html#a80d297812eb1328cff5ab3696b41a8b0",
-"structhelios_1_1ecs_1_1SystemParamTraits_3_01WorldView_01_4.html",
-"structhelios_1_1profile_1_1ZoneSpec.html#a94e13218e1a4d6bd7a7c1027fe7cbcd3"
+"classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#aa92cb4e9496f7eebd58f68de0a652563",
+"classhelios_1_1app_1_1DynamicPlugin.html#acdb4ff84ee5ba0c2f0be23043a8a5d47",
+"classhelios_1_1async_1_1Executor.html#afa2cdb7c2fdea0737800ebbe28847203",
+"classhelios_1_1async_1_1TaskGraph.html#ae9345588c4199e1c37216585178a6e16",
+"classhelios_1_1container_1_1BasicStaticString.html#afc8b8f2bc646d8ad31d84380c17ae8fa",
+"classhelios_1_1container_1_1SparseSet.html#a3889d6f69f2ce7fb7532fbf40c0d9047",
+"classhelios_1_1container_1_1TypedBufferArray.html#a6dcaaa813670781575b2760e607bc9d7",
+"classhelios_1_1ecs_1_1ArchetypeId.html#a34a4bfbda60b2fd2f8ddc6a958ee90e0",
+"classhelios_1_1ecs_1_1BasicQuery.html#a5013090f7e73748ad78e9762c32549fe",
+"classhelios_1_1ecs_1_1BasicQueryWithEntity.html#aec951e525c74dfef7f0d2fbae946eca3",
+"classhelios_1_1ecs_1_1ComponentManager.html#ad7f50acbfc2173d765da2ff3f7213078",
+"classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html#a52baae77b079a420fa27be835cbd7ec1",
+"classhelios_1_1ecs_1_1EntityManager.html#aa47bd00fe78174b9f38ba865481d9821",
+"classhelios_1_1ecs_1_1MessageReader.html#a328e776a75f65f56c59876345900994c",
+"classhelios_1_1ecs_1_1Res.html#ad4fda7cdf66668d6d2796b48fb06b64d",
+"classhelios_1_1ecs_1_1SparseComponentStorage.html",
+"classhelios_1_1ecs_1_1TryDestroyEntitiesCmd.html#a9dc1b4c7a3828f530790febe39687e14",
+"classhelios_1_1ecs_1_1World.html#afb4b8db5d665eabe721d8cba1207ee77",
+"classhelios_1_1mem_1_1AtomicRefCounted.html#ad81740fe59564e41c296e711149173d7",
+"classhelios_1_1profile_1_1Backend.html#a000645aa569d0216ddede3a12abe5c60",
+"classhelios_1_1utils_1_1ChainAdapter.html#a24d079ad5a4b289c447a207a9d7e5f9f",
+"classhelios_1_1utils_1_1FunctionalAdapterBase.html#a6a31b42112f20291cb0a04d8e93a8f00",
+"classhelios_1_1utils_1_1SkipAdapter.html#aef24e8db0f0be49f476b5f41eb13ce3f",
+"classhelios_1_1utils_1_1TakeAdapter.html#a10bdc858f5fbed1bfdc6155e2ed5717d",
+"composite__param_8hpp.html",
+"dir_d28a4824dc47e487b107a5db32ef43c4.html",
+"macros_8hpp.html#adc8086efeaa01584ac9bf9218414005b",
+"namespacehelios_1_1ecs.html#a7dd9b5d716679ce5ef8671f7f11aba2b",
+"namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea5111e24c1ecc6266ce0de4b4dc42033b",
+"structhelios_1_1app_1_1MainStartup.html#acdce21f84721365fc5b18812a1f8fd37",
+"structhelios_1_1ecs_1_1ResourceConflictInfo.html#a49f37ae292ed9e10903df3b4e0e9aa29",
+"structhelios_1_1ecs_1_1SystemParamTraits_3_01Res_3_01const_01T_01_4_01_4.html#af32dcf1613d1a251d34f8729021054a0",
+"structhelios_1_1profile_1_1ZoneSpec.html#a13fd67327bde6b653693c1f000a4adb7"
 ];
 
-var SYNCONMSG = 'click to disable panel synchronisation';
-var SYNCOFFMSG = 'click to enable panel synchronisation';
+var SYNCONMSG = 'click to disable panel synchronization';
+var SYNCOFFMSG = 'click to enable panel synchronization';
+var LISTOFALLMEMBERS = 'List of all members';

@@ -23,6 +23,7 @@ var classhelios_1_1ecs_1_1BasicQueryWithEntity =
     [ "CollectEntitiesWith", "classhelios_1_1ecs_1_1BasicQueryWithEntity.html#ad1a72be04ea7beef978457eaed4e2f3e", null ],
     [ "CollectEntitiesWith", "classhelios_1_1ecs_1_1BasicQueryWithEntity.html#a05edf438ae446ed2614c574e216bd59e", null ],
     [ "CollectEntitiesWith", "classhelios_1_1ecs_1_1BasicQueryWithEntity.html#a639daf4e859712feba2b0ee1a2d80ac4", null ],
+    [ "CollectWith", "classhelios_1_1ecs_1_1BasicQueryWithEntity.html#a223839b64eaec5ec6f09dbf55a662757", null ],
     [ "CollectWith", "classhelios_1_1ecs_1_1BasicQueryWithEntity.html#a039934298a26fe244428169d490f969d", null ],
     [ "CollectWith", "classhelios_1_1ecs_1_1BasicQueryWithEntity.html#a22e000bb798f5a66be8dd87ecd511406", null ],
     [ "CollectWith", "classhelios_1_1ecs_1_1BasicQueryWithEntity.html#ad85794764e15378cd206b49ae6a1141d", null ],

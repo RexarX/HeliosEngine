@@ -1,13 +1,15 @@
 var namespacehelios_1_1log =
 [
-    [ "details", "namespacehelios_1_1log_1_1details.html", null ],
+    [ "details", "namespacehelios_1_1log_1_1details.html", [
+      [ "LogAssertionViaLogger", "namespacehelios_1_1log_1_1details.html#a201722f711a427b79a0f2c1d1be79762", null ]
+    ] ],
     [ "Config", "structhelios_1_1log_1_1Config.html", "structhelios_1_1log_1_1Config" ],
     [ "DefaultLogger", "structhelios_1_1log_1_1DefaultLogger.html", "structhelios_1_1log_1_1DefaultLogger" ],
     [ "Logger", "classhelios_1_1log_1_1Logger.html", "classhelios_1_1log_1_1Logger" ],
     [ "LoggerTrait", "concepthelios_1_1log_1_1LoggerTrait.html", null ],
     [ "LoggerWithConfigTrait", "concepthelios_1_1log_1_1LoggerWithConfigTrait.html", null ],
-    [ "LoggerTypeId", "namespacehelios_1_1log.html#ab88fd8f08a95c79e39ee1dc5a7c285b6", null ],
-    [ "LoggerTypeIndex", "namespacehelios_1_1log.html#a382b25650b1656793e88e0c0bea8c13b", null ],
+    [ "LoggerTypeId", "namespacehelios_1_1log.html#a1f24785af5310bca24fb5a60937ccbf7", null ],
+    [ "LoggerTypeIndex", "namespacehelios_1_1log.html#a344817756a6c68e671a220a24f75b6b6", null ],
     [ "Level", "namespacehelios_1_1log.html#addfd119fad8921232327088631b3aeb9", [
       [ "kTrace", "namespacehelios_1_1log.html#addfd119fad8921232327088631b3aeb9afa21506cd249f400de4a974b5a0c8e0e", null ],
       [ "kDebug", "namespacehelios_1_1log.html#addfd119fad8921232327088631b3aeb9abb53ce21b7c0b7c8a8f7860a41901d29", null ],

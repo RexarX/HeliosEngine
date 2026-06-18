@@ -1,5 +1,5 @@
 var typed__buffer_8hpp =
 [
-    [ "helios::container::TypedBuffer< Allocator >", "classhelios_1_1container_1_1TypedBuffer.html", "classhelios_1_1container_1_1TypedBuffer" ],
-    [ "PmrTypedBuffer", "typed__buffer_8hpp.html#abcdb97042776cdd6ad96f9951bcfe842", null ]
+    [ "helios::container::TypedBuffer&lt; Allocator &gt;", "classhelios_1_1container_1_1TypedBuffer.html", "classhelios_1_1container_1_1TypedBuffer" ],
+    [ "helios::container::PmrTypedBuffer", "namespacehelios_1_1container.html#a83182c2bd8d8af72a9c8920a78164ffe", null ]
 ];

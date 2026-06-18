@@ -1,5 +1,5 @@
 var zone_8cpp =
 [
-    [ "g_current_zone_storage", "zone_8cpp.html#a4768298dc2d09249807893bbeafd35e1", null ],
-    [ "g_zone_annotations_suppressed", "zone_8cpp.html#a2550445ec704f33c442b110a2b6058d4", null ]
+    [ "helios::profile::anonymous_namespace{zone.cpp}::g_current_zone_storage", "namespacehelios_1_1profile_1_1anonymous__namespace_02zone_8cpp_03.html#a3e75f6f06fbebef913f9bf488c4161e6", null ],
+    [ "helios::profile::anonymous_namespace{zone.cpp}::g_zone_annotations_suppressed", "namespacehelios_1_1profile_1_1anonymous__namespace_02zone_8cpp_03.html#a5f45608241148cefd4caf47faee33828", null ]
 ];

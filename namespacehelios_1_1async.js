@@ -12,7 +12,7 @@ var namespacehelios_1_1async =
     [ "StaticTask", "concepthelios_1_1async_1_1StaticTask.html", null ],
     [ "SubTask", "concepthelios_1_1async_1_1SubTask.html", null ],
     [ "AnyTask", "concepthelios_1_1async_1_1AnyTask.html", null ],
-    [ "AsyncResult", "namespacehelios_1_1async.html#abdb9bb21bd2dff542f5374f6e057ee76", null ],
+    [ "AsyncResult", "namespacehelios_1_1async.html#aa4db334bbf4bb8e9a6c42ed1caa5750d", null ],
     [ "AsyncError", "namespacehelios_1_1async.html#a09e08269962c2b0f4513d8f58a31db0a", [
       [ "kInvalidTask", "namespacehelios_1_1async.html#a09e08269962c2b0f4513d8f58a31db0aac16781e79cf92c2ac2e29bef3edfc6fa", null ],
       [ "kExecutorShutdown", "namespacehelios_1_1async.html#a09e08269962c2b0f4513d8f58a31db0aa6bd63b4edf2e1dfeae7417fe19388345", null ],

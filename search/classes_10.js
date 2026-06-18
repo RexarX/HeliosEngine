@@ -17,7 +17,9 @@ var searchData=
   ['tupletofunctionsignature_3c_20std_3a_3atuple_3c_20r_2c_20args_2e_2e_2e_20_3e_20_3e_14',['TupleToFunctionSignature&lt; std::tuple&lt; R, Args... &gt; &gt;',['../structhelios_1_1details_1_1TupleToFunctionSignature_3_01std_1_1tuple_3_01R_00_01Args_8_8_8_01_4_01_4.html',1,'helios::details']]],
   ['typedasyncmessagestorage_15',['TypedAsyncMessageStorage',['../classhelios_1_1ecs_1_1TypedAsyncMessageStorage.html',1,'helios::ecs']]],
   ['typedbuffer_16',['TypedBuffer',['../classhelios_1_1container_1_1TypedBuffer.html',1,'helios::container']]],
-  ['typedbufferarray_17',['TypedBufferArray',['../classhelios_1_1container_1_1TypedBufferArray.html',1,'helios::container']]],
-  ['typeid_18',['TypeId',['../classhelios_1_1utils_1_1TypeId.html',1,'helios::utils']]],
-  ['typeindex_19',['TypeIndex',['../classhelios_1_1utils_1_1TypeIndex.html',1,'helios::utils']]]
+  ['typedbuffer_3c_20std_3a_3apmr_3a_3apolymorphic_5fallocator_3c_20std_3a_3abyte_20_3e_20_3e_17',['TypedBuffer&lt; std::pmr::polymorphic_allocator&lt; std::byte &gt; &gt;',['../classhelios_1_1container_1_1TypedBuffer.html',1,'helios::container']]],
+  ['typedbufferarray_18',['TypedBufferArray',['../classhelios_1_1container_1_1TypedBufferArray.html',1,'helios::container']]],
+  ['typedbufferarray_3c_20std_3a_3apmr_3a_3apolymorphic_5fallocator_3c_20std_3a_3abyte_20_3e_20_3e_19',['TypedBufferArray&lt; std::pmr::polymorphic_allocator&lt; std::byte &gt; &gt;',['../classhelios_1_1container_1_1TypedBufferArray.html',1,'helios::container']]],
+  ['typeid_20',['TypeId',['../classhelios_1_1utils_1_1TypeId.html',1,'helios::utils']]],
+  ['typeindex_21',['TypeIndex',['../classhelios_1_1utils_1_1TypeIndex.html',1,'helios::utils']]]
 ];

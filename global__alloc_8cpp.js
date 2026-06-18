@@ -18,12 +18,12 @@ var global__alloc_8cpp =
     [ "operator new[]", "global__alloc_8cpp.html#a372575ee587ac01e5beec279d2be2e66", null ],
     [ "operator new[]", "global__alloc_8cpp.html#ae32f48344fe9f9febbade800183c3af6", null ],
     [ "operator new[]", "global__alloc_8cpp.html#a0839e8376b1a38e86cbd52c2b995c202", null ],
-    [ "ProfileAlloc", "global__alloc_8cpp.html#a68a49db6dc5422bc5b15d5b0d197614f", null ],
-    [ "ProfileFree", "global__alloc_8cpp.html#a9fc0b31f0b225acab7d20adeb15eee9d", null ],
-    [ "RawAlignedAlloc", "global__alloc_8cpp.html#a383c336da598486f3756bf8bd267d121", null ],
-    [ "RawAlignedFree", "global__alloc_8cpp.html#a29de1722242734c5f1a572e237013fc9", null ],
-    [ "RawAlloc", "global__alloc_8cpp.html#a23e66d8487c62843f0855af1d78f6c58", null ],
-    [ "RawFree", "global__alloc_8cpp.html#a62b3396c3e94ebf9f92f35eb8a87b8d0", null ],
-    [ "g_in_global_alloc_hook", "global__alloc_8cpp.html#a6eb66910a6660167cb69b1771de1cfdb", null ],
-    [ "kGlobalAllocName", "global__alloc_8cpp.html#a427816e9bb7fc4b139eaa096b0560829", null ]
+    [ "helios::profile::details::anonymous_namespace{global_alloc.cpp}::ProfileAlloc", "namespacehelios_1_1profile_1_1details_1_1anonymous__namespace_02global__alloc_8cpp_03.html#a68a49db6dc5422bc5b15d5b0d197614f", null ],
+    [ "helios::profile::details::anonymous_namespace{global_alloc.cpp}::ProfileFree", "namespacehelios_1_1profile_1_1details_1_1anonymous__namespace_02global__alloc_8cpp_03.html#a9fc0b31f0b225acab7d20adeb15eee9d", null ],
+    [ "helios::profile::details::anonymous_namespace{global_alloc.cpp}::RawAlignedAlloc", "namespacehelios_1_1profile_1_1details_1_1anonymous__namespace_02global__alloc_8cpp_03.html#a383c336da598486f3756bf8bd267d121", null ],
+    [ "helios::profile::details::anonymous_namespace{global_alloc.cpp}::RawAlignedFree", "namespacehelios_1_1profile_1_1details_1_1anonymous__namespace_02global__alloc_8cpp_03.html#a29de1722242734c5f1a572e237013fc9", null ],
+    [ "helios::profile::details::anonymous_namespace{global_alloc.cpp}::RawAlloc", "namespacehelios_1_1profile_1_1details_1_1anonymous__namespace_02global__alloc_8cpp_03.html#a23e66d8487c62843f0855af1d78f6c58", null ],
+    [ "helios::profile::details::anonymous_namespace{global_alloc.cpp}::RawFree", "namespacehelios_1_1profile_1_1details_1_1anonymous__namespace_02global__alloc_8cpp_03.html#a62b3396c3e94ebf9f92f35eb8a87b8d0", null ],
+    [ "helios::profile::details::anonymous_namespace{global_alloc.cpp}::g_in_global_alloc_hook", "namespacehelios_1_1profile_1_1details_1_1anonymous__namespace_02global__alloc_8cpp_03.html#aff73d09aba793a15d1d1cb02544580d3", null ],
+    [ "helios::profile::details::anonymous_namespace{global_alloc.cpp}::kGlobalAllocName", "namespacehelios_1_1profile_1_1details_1_1anonymous__namespace_02global__alloc_8cpp_03.html#a427816e9bb7fc4b139eaa096b0560829", null ]
 ];
