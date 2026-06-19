@@ -5,6 +5,14 @@ on:
     branches:
       - main
       - dev
+    paths:
+      - ".github/workflows/doxygen-docs.yaml"
+      - "docs/**"
+      - "examples/**"
+      - "scripts/docs.py"
+      - "src/**"
+      - "third-party/doxygen-awesome-css/**"
+      - "README.md"
 
 permissions:
   contents: write

@@ -2,9 +2,31 @@ name: Linux Clang
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+      - dev
+    paths:
+      - ".github/workflows/linux-clang.yaml"
+      - "cmake/**"
+      - "examples/**"
+      - "src/**"
+      - "CMakeLists.txt"
+      - "CMakePresets.json"
+    paths-ignore:
+      - "**.md"
   pull_request:
-    branches: [main]
+    branches:
+      - main
+      - dev
+    paths:
+      - ".github/workflows/linux-clang.yaml"
+      - "cmake/**"
+      - "examples/**"
+      - "src/**"
+      - "CMakeLists.txt"
+      - "CMakePresets.json"
+    paths-ignore:
+      - "**.md"
 
 jobs:
   build:

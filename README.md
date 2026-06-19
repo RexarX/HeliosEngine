@@ -22,7 +22,7 @@
 
 A modular, data-oriented C++23 game engine framework inspired by Bevy
 
-<b><a href="#getting-started">Get Started »</a></b> · <a href="#key-features">Features</a> · <a href="#modules">Modules</a> · <a href="#building-by-platform">Build</a> · <a href="#using-as-a-dependency">Third-Party</a> · <a href="#documentation">Docs</a>
+<b><a href="#getting-started">Get Started »</a></b> · <a href="#key-features">Features</a> · <a href="#modules">Modules</a> · <a href="#building">Build</a> · <a href="#using-as-a-dependency">Third-Party</a> · <a href="#documentation">Docs</a>
 
 </div>
 
@@ -37,7 +37,7 @@ A modular, data-oriented C++23 game engine framework inspired by Bevy
 - <a href="#getting-started">Getting Started</a>
   - <a href="#requirements">Requirements</a>
   - <a href="#installing-dependencies">Installing Dependencies</a>
-  - <a href="#building-by-platform">Building</a>
+  - <a href="#building">Building</a>
   - <a href="#run-the-example">Run the Example</a>
 - <a href="#usage">Usage</a>
 - <a href="#architecture">Architecture</a>
@@ -56,15 +56,11 @@ A modular, data-oriented C++23 game engine framework inspired by Bevy
 
 ---
 
-<a id="about-the-project"></a>
-
 ## About The Project
 
 **Helios Engine** is a high-performance, ECS-based game engine framework written in C++23. It combines an archetype-based Entity Component System with deferred commands, double-buffered messages, and parallel system scheduling over a work-stealing task executor.
 
 <a href="#readme-top">↑ Back to Top</a>
-
-<a id="key-features"></a>
 
 ### Key Features
 
@@ -75,8 +71,6 @@ A modular, data-oriented C++23 game engine framework inspired by Bevy
 - **Modern C++23** — concepts, ranges, `std::expected`, PMR allocators
 - **Flexible dependencies** — system packages first, [CPM](https://github.com/cpm-cmake/CPM.cmake) download as fallback
 
-<a id="design-philosophy"></a>
-
 ### Design Philosophy
 
 1. **Data-oriented design** — components stored contiguously for cache-friendly iteration
@@ -86,8 +80,6 @@ A modular, data-oriented C++23 game engine framework inspired by Bevy
 <a href="#readme-top">↑ Back to Top</a>
 
 ---
-
-<a id="modules"></a>
 
 ## Modules
 
@@ -114,11 +106,7 @@ cmake --preset linux-gcc-release -DHELIOS_BUILD_PROFILE_MODULE=ON -DHELIOS_BUILD
 
 ---
 
-<a id="getting-started"></a>
-
 ## Getting Started
-
-<a id="requirements"></a>
 
 ### Requirements
 
@@ -135,8 +123,6 @@ Clone with submodules (needed for Doxygen theme):
 git clone --recursive https://github.com/RexarX/HeliosEngine.git
 cd HeliosEngine
 ```
-
-<a id="installing-dependencies"></a>
 
 ### Installing Dependencies
 
@@ -203,8 +189,6 @@ choco install llvm
 # Or use clang-format bundled with Visual Studio 2022
 ```
 
-<a id="building-by-platform"></a>
-
 ### Building
 
 Preset pattern: `{os}-{compiler}-{build_type}`
@@ -270,8 +254,6 @@ cmake --preset linux-gcc-release \
 | `HELIOS_DOWNLOAD_PACKAGES`     | ON             | CPM fallback for missing deps |
 | `HELIOS_BUILD_{MODULE}_MODULE` | module default | Per-module toggle             |
 
-<a id="run-the-example"></a>
-
 ### Run the Example
 
 ```bash
@@ -288,9 +270,7 @@ See [examples/simple/src/main.cpp](examples/simple/src/main.cpp) for schedules, 
 
 ---
 
-<a id="usage"></a>
-
-## Usage
+<h2 id="usage">Usage</h2>
 
 Systems are plain structs — `operator()` parameters declare data access. `App` owns the main world, executor, and frame scheduler.
 
@@ -343,8 +323,6 @@ Builtin schedules (`helios/app/schedules.hpp`): `MainStartup` → `PreStartup` �
 
 ---
 
-<a id="architecture"></a>
-
 ## Architecture
 
 ```
@@ -378,8 +356,6 @@ Builtin schedules (`helios/app/schedules.hpp`): `MainStartup` → `PreStartup` �
 
 ---
 
-<a id="using-as-a-dependency"></a>
-
 ## Using as a Dependency
 
 Helios can be consumed from another CMake project in several ways. All methods expose targets as `helios::module::<name>` and the helper `helios_link_modules()`.
@@ -390,8 +366,6 @@ Typical consumer settings when embedding:
 set(HELIOS_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(HELIOS_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 ```
-
-<a id="method-1-add_subdirectory"></a>
 
 ### Method 1: `add_subdirectory`
 
@@ -412,8 +386,6 @@ helios_link_modules(
     MODULES PUBLIC app
 )
 ```
-
-<a id="method-2-fetchcontent"></a>
 
 ### Method 2: `FetchContent`
 
@@ -441,8 +413,6 @@ helios_link_modules(
 )
 ```
 
-<a id="method-3-cpm"></a>
-
 ### Method 3: CPM
 
 Uses the same CPM integration as Helios itself ([`cmake/DownloadUsingCPM.cmake`](cmake/DownloadUsingCPM.cmake)).
@@ -466,8 +436,6 @@ helios_link_modules(
     MODULES PUBLIC app
 )
 ```
-
-<a id="method-4-installed-package-find_package"></a>
 
 ### Method 4: Installed Package (`find_package`)
 
@@ -496,8 +464,6 @@ Installed artifacts: `HeliosConfig.cmake`, `HeliosConfigVersion.cmake`, `HeliosT
 
 ---
 
-<a id="documentation"></a>
-
 ## Documentation
 
 ### API reference (Doxygen)
@@ -514,8 +480,6 @@ Config: [`docs/doxygen/Doxyfile`](docs/doxygen/Doxyfile) — [doxygen-awesome-cs
 [docs/guidelines.md](docs/guidelines.md) — code style, module layout, testing, build options.
 
 ---
-
-<a id="development"></a>
 
 ## Development
 
@@ -539,8 +503,6 @@ python scripts/format.py --check
 pip install pre-commit
 pre-commit install
 ```
-
-<a id="creating-a-custom-module"></a>
 
 ### Creating a Custom Module
 
@@ -591,8 +553,6 @@ ctest --preset linux-gcc-release                            # tests
 
 ---
 
-<a id="roadmap"></a>
-
 ## Roadmap
 
 - Rendering module
@@ -602,8 +562,6 @@ ctest --preset linux-gcc-release                            # tests
 
 ---
 
-<a id="acknowledgments"></a>
-
 ## Acknowledgments
 
 Inspired by [Bevy](https://bevyengine.org/), [EnTT](https://github.com/skypjack/entt), and [Taskflow](https://taskflow.github.io/).
@@ -612,17 +570,13 @@ Inspired by [Bevy](https://bevyengine.org/), [EnTT](https://github.com/skypjack/
 
 ---
 
-<a id="license"></a>
-
 ## License
 
-Distributed under the MIT License. See [LICENSE](LICENSE) for details.
+Distributed under the MIT License. See [LICENSE][license-url] for details.
 
 <a href="#readme-top">↑ Back to Top</a>
 
 ---
-
-<a id="contact"></a>
 
 ## Contact
 

@@ -2,9 +2,25 @@ name: Format Check
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+      - dev
+    paths:
+      - ".github/workflows/format.yaml"
+      - "examples/**"
+      - "scripts/format.py"
+      - "src/**"
+      - ".clang-format"
   pull_request:
-    branches: [main]
+    branches:
+      - main
+      - dev
+    paths:
+      - ".github/workflows/format.yaml"
+      - "examples/**"
+      - "scripts/format.py"
+      - "src/**"
+      - ".clang-format"
 
 jobs:
   format:
