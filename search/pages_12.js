@@ -1,26 +1,8 @@
 var searchData=
 [
-  ['pacman_20—_20arch_0',['Linux (Pacman — Arch)',['../index.html#linux-pacman--arch',1,'']]],
-  ['parallel_20algorithms_1',['Parallel Algorithms',['../dir_b60a79ed93f318a37dbc9781b4452c17.html#parallel-algorithms',1,'']]],
-  ['parallelism_2',['`async` — Task-Based Parallelism',['../dir_b60a79ed93f318a37dbc9781b4452c17.html#async--task-based-parallelism',1,'']]],
-  ['parameters_3',['Parameters',['../dir_ddca5f149c4ce13074f28b270e950ba9.html#custom-system-parameters',1,'Custom System Parameters'],['../dir_ddca5f149c4ce13074f28b270e950ba9.html#system-parameters',1,'System Parameters']]],
-  ['parameters_4',['Fully custom parameters',['../dir_ddca5f149c4ce13074f28b270e950ba9.html#fully-custom-parameters',1,'']]],
-  ['parameters_20compositesystemparam_5',['Aggregate parameters (&lt;span class=&quot;tt&quot;&gt;CompositeSystemParam&lt;/span&gt;)',['../dir_ddca5f149c4ce13074f28b270e950ba9.html#aggregate-parameters-compositesystemparam',1,'']]],
-  ['paths_6',['Dispatch Paths',['../dir_b60a79ed93f318a37dbc9781b4452c17.html#dispatch-paths',1,'']]],
-  ['platform_20—_20platform_20detection_20api_20macros_7',['`platform` — Platform Detection &amp;amp; API Macros',['../dir_4b68c2fef3e151b6b93d5e93b14f1857.html#platform--platform-detection--api-macros',1,'']]],
-  ['platform_20detection_20api_20macros_8',['`platform` — Platform Detection &amp;amp; API Macros',['../dir_4b68c2fef3e151b6b93d5e93b14f1857.html#platform--platform-detection--api-macros',1,'']]],
-  ['platform_20window_20management_9',['`window` — Cross-Platform Window Management',['../dir_c7f79d9fead0a70cab4af348b59fbdf1.html#window--cross-platform-window-management',1,'']]],
-  ['platforms_20—_20build_20tools_10',['All platforms — build tools',['../index.html#all-platforms--build-tools',1,'']]],
-  ['plugins_11',['Plugins',['../dir_5194e5fea318fda12687127c23f8aba1.html#plugins',1,'']]],
-  ['pmr_20allocators_20reference_20counting_12',['`memory` — PMR Allocators &amp;amp; Reference Counting',['../dir_94d7edf6f8f3d9af5fd63c44172da41c.html#memory--pmr-allocators--reference-counting',1,'']]],
-  ['pool_20allocator_13',['Pool Allocator',['../dir_94d7edf6f8f3d9af5fd63c44172da41c.html#pool-allocator',1,'']]],
-  ['prerequisites_14',['Prerequisites',['../md_docs_2guidelines.html#prerequisites',1,'']]],
-  ['presets_15',['CMake presets',['../md_docs_2guidelines.html#cmake-presets',1,'']]],
-  ['primitives_16',['`core` — Core Engine Primitives',['../dir_aebb8dcc11953d78e620bbef0b9e2183.html#core--core-engine-primitives',1,'']]],
-  ['profile_20—_20cpu_20memory_20lock_20profiling_17',['`profile` — CPU/Memory/Lock Profiling',['../dir_2730ace12cf03b0ba989133b5ac743ea.html#profile--cpumemorylock-profiling',1,'']]],
-  ['profiling_18',['`profile` — CPU/Memory/Lock Profiling',['../dir_2730ace12cf03b0ba989133b5ac743ea.html#profile--cpumemorylock-profiling',1,'']]],
-  ['profiling_20tracy_20specific_19',['Lock Profiling (Tracy-specific)',['../dir_2730ace12cf03b0ba989133b5ac743ea.html#lock-profiling-tracy-specific',1,'']]],
-  ['project_20guidelines_20',['Project Guidelines',['../md_docs_2guidelines.html',1,'']]],
-  ['project_20guidelines_21',['Project guidelines',['../index.html#project-guidelines',1,'']]],
-  ['public_20api_22',['Public API',['../dir_5194e5fea318fda12687127c23f8aba1.html#public-api',1,'Public API'],['../dir_b60a79ed93f318a37dbc9781b4452c17.html#public-api-1',1,'Public API'],['../dir_f13bc85843fa14191e0ad4a3a157cf60.html#public-api-2',1,'Public API'],['../dir_1b313d86a3cedf427c8a82c0995b1bb6.html#public-api-3',1,'Public API'],['../dir_aebb8dcc11953d78e620bbef0b9e2183.html#public-api-4',1,'Public API'],['../dir_ddca5f149c4ce13074f28b270e950ba9.html#public-api-5',1,'Public API'],['../dir_2241064965c8d9ca993f08b926076f7d.html#public-api-6',1,'Public API'],['../dir_94d7edf6f8f3d9af5fd63c44172da41c.html#public-api-7',1,'Public API'],['../dir_4b68c2fef3e151b6b93d5e93b14f1857.html#public-api-8',1,'Public API'],['../dir_2730ace12cf03b0ba989133b5ac743ea.html#public-api-9',1,'Public API'],['../dir_313caf1132e152dd9b58bea13a4052ca.html#public-api-10',1,'Public API'],['../dir_c7f79d9fead0a70cab4af348b59fbdf1.html#public-api-11',1,'Public API'],['../dir_217ee790cdc210ca56feb9a8b7616066.html#step-4--public-api',1,'Step 4 — Public API']]]
+  ['of_20contents_0',['Table of Contents',['../index.html#table-of-contents',1,'']]],
+  ['order_1',['Tag order',['../md_docs_2guidelines.html#tag-order',1,'']]],
+  ['ordering_2',['Ordering',['../dir_ddca5f149c4ce13074f28b270e950ba9.html#ordering',1,'']]],
+  ['oriented_20containers_3',['`container` — Data-Oriented Containers',['../dir_1b313d86a3cedf427c8a82c0995b1bb6.html#container--data-oriented-containers',1,'']]],
+  ['other_20scripts_4',['Other scripts',['../index.html#other-scripts',1,'']]]
 ];

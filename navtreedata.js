@@ -27,14 +27,14 @@ var NAVTREE =
   [ "Helios Engine", "index.html", [
     [ "Helios Engine", "index.html#helios-engine", [
       [ "Table of Contents", "index.html#table-of-contents", null ],
-      [ "about-the-project", "index.html#about-the-project", [
-        [ "key-features", "index.html#key-features", null ],
-        [ "design-philosophy", "index.html#design-philosophy", null ]
+      [ "About The Project", "index.html#about-the-project", [
+        [ "Key Features", "index.html#key-features", null ],
+        [ "Design Philosophy", "index.html#design-philosophy", null ]
       ] ],
-      [ "modules", "index.html#modules", null ],
-      [ "getting-started", "index.html#getting-started", [
-        [ "requirements", "index.html#requirements", null ],
-        [ "installing-dependencies", "index.html#installing-dependencies", [
+      [ "Modules", "index.html#modules", null ],
+      [ "Getting Started", "index.html#getting-started", [
+        [ "Requirements", "index.html#requirements", null ],
+        [ "Installing Dependencies", "index.html#installing-dependencies", [
           [ "All platforms — build tools", "index.html#all-platforms--build-tools", null ],
           [ "Linux (APT — Ubuntu / Debian)", "index.html#linux-apt--ubuntu--debian", null ],
           [ "Linux (DNF — Fedora)", "index.html#linux-dnf--fedora", null ],
@@ -49,29 +49,28 @@ var NAVTREE =
           [ "macOS (Clang)", "index.html#macos-clang", null ],
           [ "Recommended developer flags", "index.html#recommended-developer-flags", null ]
         ] ],
-        [ "run-the-example", "index.html#run-the-example", null ]
+        [ "Run the Example", "index.html#run-the-example", null ]
       ] ],
-      [ "Usage", "index.html#usage-2", null ],
-      [ "architecture", "index.html#architecture", null ],
-      [ "using-as-a-dependency", "index.html#using-as-a-dependency", [
-        [ "method-1-add_subdirectory", "index.html#method-1-add_subdirectory", null ],
-        [ "method-2-fetchcontent", "index.html#method-2-fetchcontent", null ],
-        [ "method-3-cpm", "index.html#method-3-cpm", null ],
-        [ "method-4-installed-package-find_package", "index.html#method-4-installed-package-find_package", null ]
+      [ "Architecture", "index.html#architecture", null ],
+      [ "Using as a Dependency", "index.html#using-as-a-dependency", [
+        [ "Method 1: <span class=\"tt\">add_subdirectory</span>", "index.html#method-1-add_subdirectory", null ],
+        [ "Method 2: <span class=\"tt\">FetchContent</span>", "index.html#method-2-fetchcontent", null ],
+        [ "Method 3: CPM", "index.html#method-3-cpm", null ],
+        [ "Method 4: Installed Package (<span class=\"tt\">find_package</span>)", "index.html#method-4-installed-package-find_package", null ]
       ] ],
-      [ "documentation", "index.html#documentation", [
+      [ "Documentation", "index.html#documentation", [
         [ "API reference (Doxygen)", "index.html#api-reference-doxygen", null ],
         [ "Project guidelines", "index.html#project-guidelines", null ]
       ] ],
-      [ "development", "index.html#development", [
+      [ "Development", "index.html#development", [
         [ "Code formatting", "index.html#code-formatting", null ],
-        [ "creating-a-custom-module", "index.html#creating-a-custom-module", null ],
+        [ "Creating a Custom Module", "index.html#creating-a-custom-module", null ],
         [ "Other scripts", "index.html#other-scripts", null ]
       ] ],
-      [ "roadmap", "index.html#roadmap", null ],
-      [ "acknowledgments", "index.html#acknowledgments", null ],
-      [ "license", "index.html#license", null ],
-      [ "contact", "index.html#contact", null ]
+      [ "Roadmap", "index.html#roadmap", null ],
+      [ "Acknowledgments", "index.html#acknowledgments", null ],
+      [ "License", "index.html#license", null ],
+      [ "Contact", "index.html#contact", null ]
     ] ],
     [ "Project Guidelines", "md_docs_2guidelines.html", [
       [ "Code rules", "md_docs_2guidelines.html#code-rules", [
@@ -167,9 +166,9 @@ var NAVTREEINDEX =
 "classhelios_1_1utils_1_1TakeAdapter.html#a578db7198a6993f6a5643beb171a830b",
 "concepthelios_1_1app_1_1SubAppWithMaxOverlappingUpdatesTrait.html",
 "dir_f522a3de144b4c8ae87ff795abacf224.html",
-"md_docs_2guidelines.html#build-definition-cmakeliststxt",
-"namespacehelios_1_1ecs.html#a9b3736dcb167cbead8b16fb9b9a9acca",
-"namespacehelios_1_1utils.html#ae6f12943a45b892bec3a5e117dfc5aea",
+"md_docs_2guidelines.html#building-1",
+"namespacehelios_1_1ecs.html#a9c6e3d31b96a0dc13fa1f5f29e301e12",
+"namespacehelios_1_1utils.html#af292c47cb42cb423e672cbeb5a2c355b",
 "structhelios_1_1app_1_1PluginTypeExport.html#a7f1ac94ed64eea5d393ba89df38100dd",
 "structhelios_1_1ecs_1_1ResourceInsertedMsg.html#a103262439a77f7975a465647ad997672",
 "structhelios_1_1ecs_1_1SystemParamTraits_3_01std_1_1optional_3_01Local_3_01const_01T_01_4_01_4_01_4.html",

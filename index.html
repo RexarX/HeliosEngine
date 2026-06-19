@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('index.html',''
 </p>
 <div align="center"></div><div align="center"><img src="docs/img/logo.png" alt="Helios Engine Logo" width="200" class="inline"/></div><div align="center"></div><h1 class="doxsection"><a class="anchor" id="helios-engine"></a>
 <div align="center">Helios Engine</div></h1>
-<div align="center"></div><div align="center">A modular, data-oriented C++23 game engine framework inspired by Bevy</div><div align="center"><b><a href="#getting-started">Get Started »</a></b> · <a href="#key-features">Features</a> · <a href="#modules">Modules</a> · <a href="#building-by-platform">Build</a> · <a href="#using-as-a-dependency">Third-Party</a> · <a href="#documentation">Docs</a></div><div align="center"></div><hr  />
+<div align="center"></div><div align="center">A modular, data-oriented C++23 game engine framework inspired by Bevy</div><div align="center"><b><a href="#getting-started">Get Started »</a></b> · <a href="#key-features">Features</a> · <a href="#modules">Modules</a> · <a href="#building">Build</a> · <a href="#using-as-a-dependency">Third-Party</a> · <a href="#documentation">Docs</a></div><div align="center"></div><hr  />
 <h2 class="doxsection"><a class="anchor" id="table-of-contents"></a>
 Table of Contents</h2>
 <ul>
@@ -178,7 +178,7 @@ Table of Contents</h2>
 <li><a href="#getting-started">Getting Started</a><ul>
 <li><a href="#requirements">Requirements</a></li>
 <li><a href="#installing-dependencies">Installing Dependencies</a></li>
-<li><a href="#building-by-platform">Building</a></li>
+<li><a href="#building">Building</a></li>
 <li><a href="#run-the-example">Run the Example</a></li>
 </ul>
 </li>
@@ -202,14 +202,12 @@ Table of Contents</h2>
 <li><a href="#contact">Contact</a></li>
 </ul>
 <hr  />
-<p><a class="anchor" id="about-the-project"></a></p>
 <h2 class="doxsection"><a class="anchor" id="about-the-project"></a>
-about-the-project</h2>
+About The Project</h2>
 <p><b>Helios Engine</b> is a high-performance, ECS-based game engine framework written in C++23. It combines an archetype-based Entity Component System with deferred commands, double-buffered messages, and parallel system scheduling over a work-stealing task executor.</p>
 <p><a href="#readme-top">↑ Back to Top</a></p>
-<p><a class="anchor" id="key-features"></a></p>
 <h3 class="doxsection"><a class="anchor" id="key-features"></a>
-key-features</h3>
+Key Features</h3>
 <ul>
 <li><b>ECS</b> — archetype and sparse-set storage, deferred <span class="tt">Commands</span>, rich query iterators</li>
 <li><b>Parallel scheduling</b> — access-conflict detection, topological execution, Taskflow-backed executors</li>
@@ -218,9 +216,8 @@ key-features</h3>
 <li><b>Modern C++23</b> — concepts, ranges, <span class="tt">std::expected</span>, PMR allocators</li>
 <li><b>Flexible dependencies</b> — system packages first, <a href="https://github.com/cpm-cmake/CPM.cmake">CPM</a> download as fallback</li>
 </ul>
-<p><a class="anchor" id="design-philosophy"></a></p>
 <h3 class="doxsection"><a class="anchor" id="design-philosophy"></a>
-design-philosophy</h3>
+Design Philosophy</h3>
 <ol type="1">
 <li><b>Data-oriented design</b> — components stored contiguously for cache-friendly iteration</li>
 <li><b>Composability</b> — behavior emerges from systems operating on component data</li>
@@ -228,9 +225,8 @@ design-philosophy</h3>
 </ol>
 <p><a href="#readme-top">↑ Back to Top</a></p>
 <hr  />
-<p><a class="anchor" id="modules"></a></p>
 <h2 class="doxsection"><a class="anchor" id="modules"></a>
-modules</h2>
+Modules</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Module  </th><th class="markdownTableHeadNone">Description  </th><th class="markdownTableHeadCenter">Default  </th><th class="markdownTableHeadNone">Documentation  </th></tr>
@@ -262,12 +258,10 @@ modules</h2>
 <div class="fragment"><div class="line">cmake --preset linux-gcc-release -DHELIOS_BUILD_PROFILE_MODULE=ON -DHELIOS_BUILD_WINDOW_MODULE=OFF</div>
 </div><!-- fragment --><p><a href="#readme-top">↑ Back to Top</a></p>
 <hr  />
-<p><a class="anchor" id="getting-started"></a></p>
 <h2 class="doxsection"><a class="anchor" id="getting-started"></a>
-getting-started</h2>
-<p><a class="anchor" id="requirements"></a></p>
+Getting Started</h2>
 <h3 class="doxsection"><a class="anchor" id="requirements"></a>
-requirements</h3>
+Requirements</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Tool  </th><th class="markdownTableHeadNone">Minimum  </th><th class="markdownTableHeadNone">Recommended  </th></tr>
@@ -283,9 +277,8 @@ requirements</h3>
 <p>Clone with submodules (needed for Doxygen theme):</p>
 <div class="fragment"><div class="line">git clone --recursive https://github.com/RexarX/HeliosEngine.git</div>
 <div class="line">cd HeliosEngine</div>
-</div><!-- fragment --><p><a class="anchor" id="installing-dependencies"></a></p>
-<h3 class="doxsection"><a class="anchor" id="installing-dependencies"></a>
-installing-dependencies</h3>
+</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="installing-dependencies"></a>
+Installing Dependencies</h3>
 <p>Helios resolves dependencies per module: <b>system packages are tried first</b>, then <b>CPM download</b> if missing (<span class="tt">HELIOS_DOWNLOAD_PACKAGES=ON</span>, default). Pre-installing system packages speeds up configuration and avoids network fetches.</p>
 <p>Package names below match <span class="tt">INSTALL_HINTS</span> in <a href="cmake/dependencies/"><span class="tt">cmake/dependencies/</span></a>.</p>
 <h4 class="doxsection"><a class="anchor" id="all-platforms--build-tools"></a>
@@ -334,8 +327,7 @@ Windows (MSVC)</h4>
 <div class="fragment"><div class="line"># Optional: LLVM clang-format for local formatting</div>
 <div class="line">choco install llvm</div>
 <div class="line"># Or use clang-format bundled with Visual Studio 2022</div>
-</div><!-- fragment --><p><a class="anchor" id="building-by-platform"></a></p>
-<h3 class="doxsection"><a class="anchor" id="building"></a>
+</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="building"></a>
 Building</h3>
 <p>Preset pattern: <span class="tt">{os}-{compiler}-{build_type}</span></p>
 <div class="fragment"><div class="line">cmake --list-presets          # configure presets</div>
@@ -382,9 +374,8 @@ Recommended developer flags</h4>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">HELIOS_BUILD_{MODULE}_MODULE</span>  </td><td class="markdownTableBodyNone">module default  </td><td class="markdownTableBodyNone">Per-module toggle  </td></tr>
 </table>
-<p><a class="anchor" id="run-the-example"></a></p>
 <h3 class="doxsection"><a class="anchor" id="run-the-example"></a>
-run-the-example</h3>
+Run the Example</h3>
 <div class="fragment"><div class="line">cmake --preset linux-gcc-release \</div>
 <div class="line">  -DHELIOS_BUILD_EXAMPLES=ON \</div>
 <div class="line">  -DHELIOS_BUILD_PROFILE_MODULE=ON</div>
@@ -393,9 +384,7 @@ run-the-example</h3>
 </div><!-- fragment --><p>See <a href="examples/simple/src/main.cpp">examples/simple/src/main.cpp</a> for schedules, system sets, sub-apps, and profiling.</p>
 <p><a href="#readme-top">↑ Back to Top</a></p>
 <hr  />
-<p><a class="anchor" id="usage"></a></p>
-<h2 class="doxsection"><a class="anchor" id="usage-2"></a>
-Usage</h2>
+<h2 id="usage">Usage</h2>
 <p>Systems are plain structs — <span class="tt">operator()</span> parameters declare data access. <span class="tt">App</span> owns the main world, executor, and frame scheduler.</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="app_8hpp.html">helios/app/app.hpp</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="schedules_8hpp.html">helios/app/schedules.hpp</a>&gt;</span></div>
@@ -462,9 +451,8 @@ Usage</h2>
 <p>Builtin schedules (<span class="tt"><a class="el" href="schedules_8hpp.html">helios/app/schedules.hpp</a></span>): <span class="tt">MainStartup</span> → <span class="tt">PreStartup</span> → <span class="tt">Startup</span> → <span class="tt">PostStartup</span> → <span class="tt">First</span> → <span class="tt">PreUpdate</span> → <span class="tt">Update</span> → <span class="tt">PostUpdate</span> → <span class="tt">Last</span> → <span class="tt">Extract</span> → shutdown stages.</p>
 <p><a href="#readme-top">↑ Back to Top</a></p>
 <hr  />
-<p><a class="anchor" id="architecture"></a></p>
 <h2 class="doxsection"><a class="anchor" id="architecture"></a>
-architecture</h2>
+Architecture</h2>
 <div class="fragment"><div class="line">┌─────────────────────────────────────────────────────────┐</div>
 <div class="line">│  App                                                    │</div>
 <div class="line">│  ├─ async::Executor        (work-stealing thread pool)  │</div>
@@ -492,16 +480,14 @@ architecture</h2>
 </ul>
 <p><a href="#readme-top">↑ Back to Top</a></p>
 <hr  />
-<p><a class="anchor" id="using-as-a-dependency"></a></p>
 <h2 class="doxsection"><a class="anchor" id="using-as-a-dependency"></a>
-using-as-a-dependency</h2>
+Using as a Dependency</h2>
 <p>Helios can be consumed from another CMake project in several ways. All methods expose targets as <span class="tt">helios::module::&lt;name&gt;</span> and the helper <span class="tt">helios_link_modules()</span>.</p>
 <p>Typical consumer settings when embedding:</p>
 <div class="fragment"><div class="line">set(HELIOS_BUILD_TESTS OFF CACHE BOOL &quot;&quot; FORCE)</div>
 <div class="line">set(HELIOS_BUILD_EXAMPLES OFF CACHE BOOL &quot;&quot; FORCE)</div>
-</div><!-- fragment --><p><a class="anchor" id="method-1-add_subdirectory"></a></p>
-<h3 class="doxsection"><a class="anchor" id="method-1-add_subdirectory"></a>
-method-1-add_subdirectory</h3>
+</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="method-1-add_subdirectory"></a>
+Method 1: <span class="tt">add_subdirectory</span></h3>
 <p>Best for vendoring a copy inside your tree (e.g. <span class="tt">third_party/HeliosEngine</span>).</p>
 <div class="fragment"><div class="line"># YourProject/CMakeLists.txt</div>
 <div class="line">cmake_minimum_required(VERSION 3.25)</div>
@@ -516,9 +502,8 @@ method-1-add_subdirectory</h3>
 <div class="line">    TARGET my_game</div>
 <div class="line">    MODULES PUBLIC app</div>
 <div class="line">)</div>
-</div><!-- fragment --><p><a class="anchor" id="method-2-fetchcontent"></a></p>
-<h3 class="doxsection"><a class="anchor" id="method-2-fetchcontent"></a>
-method-2-fetchcontent</h3>
+</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="method-2-fetchcontent"></a>
+Method 2: <span class="tt">FetchContent</span></h3>
 <p>Fetches at configure time without a manual submodule.</p>
 <div class="fragment"><div class="line">include(FetchContent)</div>
 <div class="line"> </div>
@@ -539,9 +524,8 @@ method-2-fetchcontent</h3>
 <div class="line">    TARGET my_game</div>
 <div class="line">    MODULES PUBLIC app</div>
 <div class="line">)</div>
-</div><!-- fragment --><p><a class="anchor" id="method-3-cpm"></a></p>
-<h3 class="doxsection"><a class="anchor" id="method-3-cpm"></a>
-method-3-cpm</h3>
+</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="method-3-cpm"></a>
+Method 3: CPM</h3>
 <p>Uses the same CPM integration as Helios itself (<a href="cmake/DownloadUsingCPM.cmake"><span class="tt">cmake/DownloadUsingCPM.cmake</span></a>).</p>
 <div class="fragment"><div class="line"># Download CPM once (or vendor cmake/CPM.cmake)</div>
 <div class="line">include(cmake/DownloadUsingCPM.cmake)  # from Helios, or your own CPM bootstrap</div>
@@ -560,9 +544,8 @@ method-3-cpm</h3>
 <div class="line">    TARGET my_game</div>
 <div class="line">    MODULES PUBLIC app</div>
 <div class="line">)</div>
-</div><!-- fragment --><p><a class="anchor" id="method-4-installed-package-find_package"></a></p>
-<h3 class="doxsection"><a class="anchor" id="method-4-installed-package-find_package"></a>
-method-4-installed-package-find_package</h3>
+</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="method-4-installed-package-find_package"></a>
+Method 4: Installed Package (<span class="tt">find_package</span>)</h3>
 <p>Build and install Helios, then use the generated CMake package config.</p>
 <div class="fragment"><div class="line">cmake --preset linux-gcc-release -DHELIOS_ENABLE_INSTALL=ON</div>
 <div class="line">cmake --build --preset linux-gcc-release</div>
@@ -578,9 +561,8 @@ method-4-installed-package-find_package</h3>
 </div><!-- fragment --><p>Installed artifacts: <span class="tt">HeliosConfig.cmake</span>, <span class="tt">HeliosConfigVersion.cmake</span>, <span class="tt">HeliosTargets.cmake</span> (see <a href="cmake/Install.cmake"><span class="tt">cmake/Install.cmake</span></a>).</p>
 <p><a href="#readme-top">↑ Back to Top</a></p>
 <hr  />
-<p><a class="anchor" id="documentation"></a></p>
 <h2 class="doxsection"><a class="anchor" id="documentation"></a>
-documentation</h2>
+Documentation</h2>
 <h3 class="doxsection"><a class="anchor" id="api-reference-doxygen"></a>
 API reference (Doxygen)</h3>
 <div class="fragment"><div class="line">python scripts/docs.py</div>
@@ -590,9 +572,8 @@ API reference (Doxygen)</h3>
 Project guidelines</h3>
 <p><a class="el" href="md_docs_2guidelines.html" title="Project Guidelines">docs/guidelines.md</a> — code style, module layout, testing, build options.</p>
 <hr  />
-<p><a class="anchor" id="development"></a></p>
 <h2 class="doxsection"><a class="anchor" id="development"></a>
-development</h2>
+Development</h2>
 <h3 class="doxsection"><a class="anchor" id="code-formatting"></a>
 Code formatting</h3>
 <p>Formatting runs automatically on every local commit (via <a href="https://pre-commit.com/">pre-commit</a>) and is verified on every push / PR (<a href=".github/workflows/format.yaml"><span class="tt">.github/workflows/format.yaml</span></a>). Unformatted code cannot land on <span class="tt">main</span> if hooks and CI are used.</p>
@@ -613,9 +594,8 @@ Code formatting</h3>
 <div class="line"># Install local commit hook (auto-formats on commit)</div>
 <div class="line">pip install pre-commit</div>
 <div class="line">pre-commit install</div>
-</div><!-- fragment --><p><a class="anchor" id="creating-a-custom-module"></a></p>
-<h3 class="doxsection"><a class="anchor" id="creating-a-custom-module"></a>
-creating-a-custom-module</h3>
+</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="creating-a-custom-module"></a>
+Creating a Custom Module</h3>
 <p>Helios modules live under <span class="tt">src/</span> by default. Register additional search paths with <span class="tt">helios_add_extra_module_dirs()</span> (before discovery) or <span class="tt">HELIOS_EXTRA_MODULE_DIRS</span>. The <span class="tt">greeting</span> example path is registered automatically when <span class="tt">HELIOS_BUILD_EXAMPLES=ON</span>. See the full walkthrough:</p>
 <p><b><a class="el" href="dir_217ee790cdc210ca56feb9a8b7616066.html" title="/home/runner/work/HeliosEngine/HeliosEngine/examples/custom_module/README.md">examples/custom_module/README.md</a></b></p>
 <p>That example defines a minimal <span class="tt">greeting</span> module (registration, build target, tests, and a demo executable) under <span class="tt">examples/custom_module/</span>, discovered through the extra module path mechanism — no manual <span class="tt">include(Module.cmake)</span> required.</p>
@@ -645,30 +625,26 @@ Other scripts</h3>
 <div class="line">ctest --preset linux-gcc-release                            # tests</div>
 </div><!-- fragment --><p><a href="#readme-top">↑ Back to Top</a></p>
 <hr  />
-<p><a class="anchor" id="roadmap"></a></p>
 <h2 class="doxsection"><a class="anchor" id="roadmap"></a>
-roadmap</h2>
+Roadmap</h2>
 <ul>
 <li>Rendering module</li>
 <li>Full window/input integration</li>
 </ul>
 <p><a href="#readme-top">↑ Back to Top</a></p>
 <hr  />
-<p><a class="anchor" id="acknowledgments"></a></p>
 <h2 class="doxsection"><a class="anchor" id="acknowledgments"></a>
-acknowledgments</h2>
+Acknowledgments</h2>
 <p>Inspired by <a href="https://bevyengine.org/">Bevy</a>, <a href="https://github.com/skypjack/entt">EnTT</a>, and <a href="https://taskflow.github.io/">Taskflow</a>.</p>
 <p><a href="#readme-top">↑ Back to Top</a></p>
 <hr  />
-<p><a class="anchor" id="license"></a></p>
 <h2 class="doxsection"><a class="anchor" id="license"></a>
-license</h2>
-<p>Distributed under the MIT License. See [LICENSE](LICENSE) for details.</p>
+License</h2>
+<p>Distributed under the MIT License. See <a href="https://github.com/RexarX/HeliosEngine/blob/main/LICENSE">LICENSE</a> for details.</p>
 <p><a href="#readme-top">↑ Back to Top</a></p>
 <hr  />
-<p><a class="anchor" id="contact"></a></p>
 <h2 class="doxsection"><a class="anchor" id="contact"></a>
-contact</h2>
+Contact</h2>
 <p><b>RexarX</b> — <a href="#" onclick="location.href='mai'+'lto:'+'who'+'72'+'7ca'+'re'+'s@g'+'ma'+'il.'+'co'+'m'; return false;">who72<span class="obfuscator">.nosp@m.</span>7car<span class="obfuscator">.nosp@m.</span>es@gm<span class="obfuscator">.nosp@m.</span>ail.<span class="obfuscator">.nosp@m.</span>com</a></p>
 <p><b>Project:</b> <a href="https://github.com/RexarX/HeliosEngine">github.com/RexarX/HeliosEngine</a></p>
 <p><a href="#readme-top">↑ Back to Top</a> </p>
