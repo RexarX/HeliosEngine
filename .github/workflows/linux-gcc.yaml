@@ -12,8 +12,7 @@ on:
       - "src/**"
       - "CMakeLists.txt"
       - "CMakePresets.json"
-    paths-ignore:
-      - "**.md"
+      - "!**.md"
   pull_request:
     branches:
       - main
@@ -25,8 +24,7 @@ on:
       - "src/**"
       - "CMakeLists.txt"
       - "CMakePresets.json"
-    paths-ignore:
-      - "**.md"
+      - "!**.md"
 
 jobs:
   build:
