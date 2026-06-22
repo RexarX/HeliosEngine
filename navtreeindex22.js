@@ -1,5 +1,7 @@
 var NAVTREEINDEX22 =
 {
+"classhelios_1_1utils_1_1FunctionalAdapterBase.html#a7bddc9da14c1742058e0f0c816aa44ce":[4,0,2,8,7,25],
+"classhelios_1_1utils_1_1FunctionalAdapterBase.html#a834e53c6229570dceb2a30a7fd5bfa4d":[2,0,6,9,7,5],
 "classhelios_1_1utils_1_1FunctionalAdapterBase.html#a834e53c6229570dceb2a30a7fd5bfa4d":[4,0,2,8,7,5],
 "classhelios_1_1utils_1_1FunctionalAdapterBase.html#a84844cd254ee0912a6cde565442fe852":[2,0,6,9,7,2],
 "classhelios_1_1utils_1_1FunctionalAdapterBase.html#a84844cd254ee0912a6cde565442fe852":[4,0,2,8,7,2],
@@ -247,7 +249,5 @@ var NAVTREEINDEX22 =
 "classhelios_1_1utils_1_1SkipAdapter.html#afc5c4ed15425cdee23d48393da19fe7d":[4,0,2,8,13,1],
 "classhelios_1_1utils_1_1SkipWhileAdapter.html":[2,0,6,9,14],
 "classhelios_1_1utils_1_1SkipWhileAdapter.html":[4,0,2,8,14],
-"classhelios_1_1utils_1_1SkipWhileAdapter.html#a06a7bafb13a0156164401cae005c4277":[2,0,6,9,14,13],
-"classhelios_1_1utils_1_1SkipWhileAdapter.html#a06a7bafb13a0156164401cae005c4277":[4,0,2,8,14,13],
-"classhelios_1_1utils_1_1SkipWhileAdapter.html#a0e80ec0f4f4af31b1b1e145fa0609243":[2,0,6,9,14,2]
+"classhelios_1_1utils_1_1SkipWhileAdapter.html#a06a7bafb13a0156164401cae005c4277":[2,0,6,9,14,13]
 };

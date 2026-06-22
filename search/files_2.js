@@ -11,5 +11,7 @@ var searchData=
   ['composite_5fparam_2ehpp_8',['composite_param.hpp',['../composite__param_8hpp.html',1,'']]],
   ['config_2ehpp_9',['config.hpp',['../log_2include_2helios_2log_2config_8hpp.html',1,'(Global Namespace)'],['../profile_2include_2helios_2profile_2config_8hpp.html',1,'(Global Namespace)']]],
   ['consumed_5fregistry_2ehpp_10',['consumed_registry.hpp',['../consumed__registry_8hpp.html',1,'']]],
-  ['cstring_5fview_2ehpp_11',['cstring_view.hpp',['../cstring__view_8hpp.html',1,'']]]
+  ['container_2ehpp_11',['container.hpp',['../container_8hpp.html',1,'']]],
+  ['core_2ehpp_12',['core.hpp',['../core_8hpp.html',1,'']]],
+  ['cstring_5fview_2ehpp_13',['cstring_view.hpp',['../cstring__view_8hpp.html',1,'']]]
 ];

@@ -55,7 +55,7 @@ var searchData=
   ['helios_20module_52',['Creating a Custom Helios Module',['../dir_217ee790cdc210ca56feb9a8b7616066.html#creating-a-custom-helios-module',1,'']]],
   ['helios_3a_3aanonymous_5fnamespace_7bassert_2ecpp_7d_53',['anonymous_namespace{assert.cpp}',['../namespacehelios_1_1anonymous__namespace_02assert_8cpp_03.html',1,'helios']]],
   ['helios_3a_3aapp_54',['app',['../namespacehelios_1_1app.html',1,'helios']]],
-  ['helios_3a_3aapp_3a_3aanonymous_5fnamespace_7bapp_2ecpp_7d_55',['anonymous_namespace{app.cpp}',['../namespacehelios_1_1app_1_1anonymous__namespace_02app_8cpp_03.html',1,'helios::app']]],
+  ['helios_3a_3aapp_3a_3aanonymous_5fnamespace_7bapplication_2ecpp_7d_55',['anonymous_namespace{application.cpp}',['../namespacehelios_1_1app_1_1anonymous__namespace_02application_8cpp_03.html',1,'helios::app']]],
   ['helios_3a_3aasync_56',['async',['../namespacehelios_1_1async.html',1,'helios']]],
   ['helios_3a_3aasync_3a_3adetails_57',['details',['../namespacehelios_1_1async_1_1details.html',1,'helios::async']]],
   ['helios_3a_3acontainer_58',['container',['../namespacehelios_1_1container.html',1,'helios']]],

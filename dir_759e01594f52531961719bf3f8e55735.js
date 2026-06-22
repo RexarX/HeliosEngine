@@ -11,5 +11,6 @@ var dir_759e01594f52531961719bf3f8e55735 =
     [ "random.hpp", "random_8hpp.html", "random_8hpp" ],
     [ "string_hash.hpp", "string__hash_8hpp.html", "string__hash_8hpp" ],
     [ "timer.hpp", "timer_8hpp.html", "timer_8hpp" ],
-    [ "type_info.hpp", "type__info_8hpp.html", "type__info_8hpp" ]
+    [ "type_info.hpp", "type__info_8hpp.html", "type__info_8hpp" ],
+    [ "utils.hpp", "utils_8hpp.html", null ]
 ];

@@ -300,9 +300,9 @@ template&lt;typename... Args&gt; </div>
 <div class="line">multi_cmd.Set&lt;&amp;Cmd::Execute, &amp;Cmd::Log&gt;(Cmd{data});</div>
 <div class="line">multi_cmd.Invoke&lt;0&gt;(world);</div>
 <div class="line">multi_cmd.Invoke&lt;1&gt;(logger);</div>
-<div class="ttc" id="anamespacehelios_1_1container_html_a36b75ba1590a28b6cf6127945279fba7"><div class="ttname"><a href="#a36b75ba1590a28b6cf6127945279fba7">helios::container::CallableBuffer</a></div><div class="ttdeci">typename details::CallableBufferDeducer&lt; Args... &gt;::type CallableBuffer</div><div class="ttdoc">Single-instance callable buffer with type-erased invocation.</div><div class="ttdef"><b>Definition</b> <a href="callable__buffer_8hpp_source.html#l00567">callable_buffer.hpp:567</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1container_html_a36b75ba1590a28b6cf6127945279fba7"><div class="ttname"><a href="#a36b75ba1590a28b6cf6127945279fba7">helios::container::CallableBuffer</a></div><div class="ttdeci">typename details::CallableBufferDeducer&lt; Args... &gt;::type CallableBuffer</div><div class="ttdoc">Single-instance callable buffer with type-erased invocation.</div><div class="ttdef"><b>Definition</b> <a href="callable__buffer_8hpp_source.html#l00563">callable_buffer.hpp:563</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="callable__buffer_8hpp_source.html#l00567">567</a> of file <a class="el" href="callable__buffer_8hpp_source.html">callable_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="callable__buffer_8hpp_source.html#l00563">563</a> of file <a class="el" href="callable__buffer_8hpp_source.html">callable_buffer.hpp</a>.</p>
 
 </div>
 </div>
@@ -321,7 +321,7 @@ template&lt;typename... Args&gt; </div>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line"> </div>
 <div class="line"><span class="keyword">typename</span> <a class="code hl_struct" href="structhelios_1_1container_1_1details_1_1CallableBufferArrayDeducer.html">details::CallableBufferArrayDeducer</a>&lt;Args...&gt;::type</div>
-<div class="ttc" id="astructhelios_1_1container_1_1details_1_1CallableBufferArrayDeducer_html"><div class="ttname"><a href="structhelios_1_1container_1_1details_1_1CallableBufferArrayDeducer.html">helios::container::details::CallableBufferArrayDeducer</a></div><div class="ttdoc">Deduces the CallableBufferArrayImpl type from signature arguments.</div><div class="ttdef"><b>Definition</b> <a href="callable__buffer__array_8hpp_source.html#l00680">callable_buffer_array.hpp:680</a></div></div>
+<div class="ttc" id="astructhelios_1_1container_1_1details_1_1CallableBufferArrayDeducer_html"><div class="ttname"><a href="structhelios_1_1container_1_1details_1_1CallableBufferArrayDeducer.html">helios::container::details::CallableBufferArrayDeducer</a></div><div class="ttdoc">Deduces the CallableBufferArrayImpl type from signature arguments.</div><div class="ttdef"><b>Definition</b> <a href="callable__buffer__array_8hpp_source.html#l00673">callable_buffer_array.hpp:673</a></div></div>
 </div><!-- fragment -->
 <p>Inline storage for heterogeneous callable instances with type-erased invocation. </p>
 <p>Stores callable instances of different types in a single contiguous buffer with embedded function pointers for type-safe invocation. Optimized for fast sequential iteration without virtual dispatch or per-callable heap allocations.</p>
@@ -342,9 +342,9 @@ template&lt;typename... Args&gt; </div>
 <div class="line">multi.Push&lt;&amp;Cmd::Execute, &amp;Cmd::Log&gt;(Cmd{data});</div>
 <div class="line">multi.Invoke&lt;0&gt;(world);</div>
 <div class="line">multi.Invoke&lt;1&gt;(logger);</div>
-<div class="ttc" id="anamespacehelios_1_1container_html_aacdb5f6325f330b3973615b525ad06bf"><div class="ttname"><a href="#aacdb5f6325f330b3973615b525ad06bf">helios::container::CallableBufferArray</a></div><div class="ttdeci">typename details::CallableBufferArrayDeducer&lt; Args... &gt;::type CallableBufferArray</div><div class="ttdoc">Inline storage for heterogeneous callable instances with type-erased invocation.</div><div class="ttdef"><b>Definition</b> <a href="callable__buffer__array_8hpp_source.html#l00725">callable_buffer_array.hpp:725</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1container_html_aacdb5f6325f330b3973615b525ad06bf"><div class="ttname"><a href="#aacdb5f6325f330b3973615b525ad06bf">helios::container::CallableBufferArray</a></div><div class="ttdeci">typename details::CallableBufferArrayDeducer&lt; Args... &gt;::type CallableBufferArray</div><div class="ttdoc">Inline storage for heterogeneous callable instances with type-erased invocation.</div><div class="ttdef"><b>Definition</b> <a href="callable__buffer__array_8hpp_source.html#l00718">callable_buffer_array.hpp:718</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="callable__buffer__array_8hpp_source.html#l00725">725</a> of file <a class="el" href="callable__buffer__array_8hpp_source.html">callable_buffer_array.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="callable__buffer__array_8hpp_source.html#l00718">718</a> of file <a class="el" href="callable__buffer__array_8hpp_source.html">callable_buffer_array.hpp</a>.</p>
 
 </div>
 </div>
@@ -364,7 +364,7 @@ template&lt;typename... Signatures&gt; </div>
 <b>Initial value:</b><div class="fragment"><div class="line"> </div>
 <div class="line"><a class="code hl_class" href="classhelios_1_1container_1_1CallableBufferImpl.html">CallableBufferImpl&lt;std::pmr::polymorphic_allocator&lt;std::byte&gt;</a>,</div>
 <div class="line">                   Signatures...&gt;</div>
-<div class="ttc" id="aclasshelios_1_1container_1_1CallableBufferImpl_html"><div class="ttname"><a href="classhelios_1_1container_1_1CallableBufferImpl.html">helios::container::CallableBufferImpl</a></div><div class="ttdoc">Implementation class for a single-instance callable buffer with explicit allocator.</div><div class="ttdef"><b>Definition</b> <a href="callable__buffer_8hpp_source.html#l00037">callable_buffer.hpp:37</a></div></div>
+<div class="ttc" id="aclasshelios_1_1container_1_1CallableBufferImpl_html"><div class="ttname"><a href="classhelios_1_1container_1_1CallableBufferImpl.html">helios::container::CallableBufferImpl</a></div><div class="ttdoc">Implementation class for a single-instance callable buffer with explicit allocator.</div><div class="ttdef"><b>Definition</b> <a href="callable__buffer_8hpp_source.html#l00038">callable_buffer.hpp:38</a></div></div>
 </div><!-- fragment -->
 <p>Single-instance callable buffer with type-erased invocation with polymorphic allocator. </p>
 <p>Stores exactly one callable of any type in a contiguous byte buffer with embedded function pointers for type-safe dispatch. Optimized for use-cases where a single command or handler needs to be stored and invoked without virtual dispatch or heap allocation per instance.</p>
@@ -385,9 +385,9 @@ template&lt;typename... Signatures&gt; </div>
 <div class="line">multi_cmd.Set&lt;&amp;Cmd::Execute, &amp;Cmd::Log&gt;(Cmd{data});</div>
 <div class="line">multi_cmd.Invoke&lt;0&gt;(world);</div>
 <div class="line">multi_cmd.Invoke&lt;1&gt;(logger);</div>
-<div class="ttc" id="anamespacehelios_1_1container_html_ad71b43f1a3a48d0cb2d27f2442035134"><div class="ttname"><a href="#ad71b43f1a3a48d0cb2d27f2442035134">helios::container::PmrCallableBuffer</a></div><div class="ttdeci">CallableBufferImpl&lt; std::pmr::polymorphic_allocator&lt; std::byte &gt;, Signatures... &gt; PmrCallableBuffer</div><div class="ttdoc">Single-instance callable buffer with type-erased invocation with polymorphic allocator.</div><div class="ttdef"><b>Definition</b> <a href="callable__buffer_8hpp_source.html#l00598">callable_buffer.hpp:598</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1container_html_ad71b43f1a3a48d0cb2d27f2442035134"><div class="ttname"><a href="#ad71b43f1a3a48d0cb2d27f2442035134">helios::container::PmrCallableBuffer</a></div><div class="ttdeci">CallableBufferImpl&lt; std::pmr::polymorphic_allocator&lt; std::byte &gt;, Signatures... &gt; PmrCallableBuffer</div><div class="ttdoc">Single-instance callable buffer with type-erased invocation with polymorphic allocator.</div><div class="ttdef"><b>Definition</b> <a href="callable__buffer_8hpp_source.html#l00594">callable_buffer.hpp:594</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="callable__buffer_8hpp_source.html#l00598">598</a> of file <a class="el" href="callable__buffer_8hpp_source.html">callable_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="callable__buffer_8hpp_source.html#l00594">594</a> of file <a class="el" href="callable__buffer_8hpp_source.html">callable_buffer.hpp</a>.</p>
 
 </div>
 </div>
@@ -428,9 +428,9 @@ template&lt;typename... Signatures&gt; </div>
 <div class="line">multi.Push&lt;&amp;Cmd::Execute, &amp;Cmd::Log&gt;(Cmd{data});</div>
 <div class="line">multi.Invoke&lt;0&gt;(world);</div>
 <div class="line">multi.Invoke&lt;1&gt;(logger);</div>
-<div class="ttc" id="anamespacehelios_1_1container_html_aa4701ee2ad117e23b261dc96bc04d31b"><div class="ttname"><a href="#aa4701ee2ad117e23b261dc96bc04d31b">helios::container::PmrCallableBufferArray</a></div><div class="ttdeci">CallableBufferArrayImpl&lt; std::pmr::polymorphic_allocator&lt; std::byte &gt;, Signatures... &gt; PmrCallableBufferArray</div><div class="ttdoc">Inline storage for heterogeneous callable instances with type-erased invocation with polymorphic allo...</div><div class="ttdef"><b>Definition</b> <a href="callable__buffer__array_8hpp_source.html#l00757">callable_buffer_array.hpp:757</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1container_html_aa4701ee2ad117e23b261dc96bc04d31b"><div class="ttname"><a href="#aa4701ee2ad117e23b261dc96bc04d31b">helios::container::PmrCallableBufferArray</a></div><div class="ttdeci">CallableBufferArrayImpl&lt; std::pmr::polymorphic_allocator&lt; std::byte &gt;, Signatures... &gt; PmrCallableBufferArray</div><div class="ttdoc">Inline storage for heterogeneous callable instances with type-erased invocation with polymorphic allo...</div><div class="ttdef"><b>Definition</b> <a href="callable__buffer__array_8hpp_source.html#l00750">callable_buffer_array.hpp:750</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="callable__buffer__array_8hpp_source.html#l00757">757</a> of file <a class="el" href="callable__buffer__array_8hpp_source.html">callable_buffer_array.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="callable__buffer__array_8hpp_source.html#l00750">750</a> of file <a class="el" href="callable__buffer__array_8hpp_source.html">callable_buffer_array.hpp</a>.</p>
 
 </div>
 </div>

@@ -1,5 +1,7 @@
 var NAVTREEINDEX24 =
 {
+"classhelios_1_1utils_1_1TakeAdapter.html#a2def5bf84c73cb4fe6ff910ef393f20f":[4,0,2,8,21,5],
+"classhelios_1_1utils_1_1TakeAdapter.html#a578db7198a6993f6a5643beb171a830b":[2,0,6,9,21,2],
 "classhelios_1_1utils_1_1TakeAdapter.html#a578db7198a6993f6a5643beb171a830b":[4,0,2,8,21,2],
 "classhelios_1_1utils_1_1TakeAdapter.html#a633c6d4fab556314345dd26f89750944":[2,0,6,9,21,19],
 "classhelios_1_1utils_1_1TakeAdapter.html#a633c6d4fab556314345dd26f89750944":[4,0,2,8,21,19],
@@ -247,7 +249,5 @@ var NAVTREEINDEX24 =
 "concepthelios_1_1app_1_1PluginTrait.html":[2,0,6,1,29],
 "concepthelios_1_1app_1_1PluginTrait.html":[3,0,0,2],
 "concepthelios_1_1app_1_1PluginWithNameTrait.html":[2,0,6,1,30],
-"concepthelios_1_1app_1_1PluginWithNameTrait.html":[3,0,0,3],
-"concepthelios_1_1app_1_1SubAppTrait.html":[2,0,6,1,31],
-"concepthelios_1_1app_1_1SubAppTrait.html":[3,0,0,4]
+"concepthelios_1_1app_1_1PluginWithNameTrait.html":[3,0,0,3]
 };

@@ -1,8 +1,8 @@
 var namespacehelios_1_1app =
 [
-    [ "anonymous_namespace{app.cpp}", "namespacehelios_1_1app_1_1anonymous__namespace_02app_8cpp_03.html", [
-      [ "kPluginReadyPollMaxSleep", "namespacehelios_1_1app_1_1anonymous__namespace_02app_8cpp_03.html#a2b8faa892d32f6947cc11e3996469b9d", null ],
-      [ "kPluginReadyPollMinSleep", "namespacehelios_1_1app_1_1anonymous__namespace_02app_8cpp_03.html#a878cc6d95412c9a955f9af52cc3e92e1", null ]
+    [ "anonymous_namespace{application.cpp}", "namespacehelios_1_1app_1_1anonymous__namespace_02application_8cpp_03.html", [
+      [ "kPluginReadyPollMaxSleep", "namespacehelios_1_1app_1_1anonymous__namespace_02application_8cpp_03.html#a5f8a0fe2119d58b227a6218d1e6a050d", null ],
+      [ "kPluginReadyPollMinSleep", "namespacehelios_1_1app_1_1anonymous__namespace_02application_8cpp_03.html#a2bb4c30e88659bda1eafd58b20ad40f8", null ]
     ] ],
     [ "App", "classhelios_1_1app_1_1App.html", "classhelios_1_1app_1_1App" ],
     [ "AppExit", "structhelios_1_1app_1_1AppExit.html", "structhelios_1_1app_1_1AppExit" ],

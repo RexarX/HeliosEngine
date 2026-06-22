@@ -7,7 +7,7 @@ var dir_6383254860cdef988b633f46022eb19d =
     [ "config.hpp", "profile_2include_2helios_2profile_2config_8hpp.html", "profile_2include_2helios_2profile_2config_8hpp" ],
     [ "frame.hpp", "frame_8hpp.html", "frame_8hpp" ],
     [ "macros.hpp", "macros_8hpp.html", "macros_8hpp" ],
-    [ "memory.hpp", "memory_8hpp.html", "memory_8hpp" ],
+    [ "memory.hpp", "profile_2include_2helios_2profile_2memory_8hpp.html", "profile_2include_2helios_2profile_2memory_8hpp" ],
     [ "message.hpp", "profile_2include_2helios_2profile_2message_8hpp.html", "profile_2include_2helios_2profile_2message_8hpp" ],
     [ "plot.hpp", "plot_8hpp.html", "plot_8hpp" ],
     [ "profile.hpp", "profile_8hpp.html", null ],

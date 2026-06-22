@@ -338,7 +338,7 @@ Custom Backends</h1>
 </div><!-- fragment --><p>Ensure total <span class="tt">ZoneStorageSize()</span> across all backends fits within <span class="tt"><a class="el" href="profile_2include_2helios_2profile_2config_8hpp.html#ae8cc210b42d828c4220819b45b7f9203" title="Per-scope stack storage for backend zone state (bytes).">HELIOS_PROFILE_ZONE_STORAGE_BYTES</a></span> (default 256). Tune via <span class="tt">-DHELIOS_PROFILE_ZONE_STORAGE_BYTES=512</span>.</p>
 <h1 class="doxsection"><a class="anchor" id="build"></a>
 Build</h1>
-<div class="fragment"><div class="line">cmake -DHELIOS_BUILD_PROFILE_MODULE=ON ..</div>
+<div class="fragment"><div class="line">cmake -DHELIOS_BUILD_PROFILE=ON ..</div>
 </div><!-- fragment --><p><span class="tt">HELIOS_ENABLE_PROFILE</span> is <span class="tt">ON</span> by default in Debug and RelWithDebInfo. Force in Release with <span class="tt">-DHELIOS_ENABLE_PROFILE=ON</span>. Tracy is auto-fetched via CPM if not installed system-wide.</p>
 <h1 class="doxsection"><a class="anchor" id="thread-safety-1"></a>
 Thread Safety</h1>

@@ -15,11 +15,6 @@ var concepts =
         [ "SubTask", "concepthelios_1_1async_1_1SubTask.html", null ],
         [ "AnyTask", "concepthelios_1_1async_1_1AnyTask.html", null ]
       ] ],
-      [ "container", "namespacehelios_1_1container.html", [
-        [ "details", "namespacehelios_1_1container_1_1details.html", [
-          [ "InstantiatedAllocator", "concepthelios_1_1container_1_1details_1_1InstantiatedAllocator.html", null ]
-        ] ]
-      ] ],
       [ "ecs", "namespacehelios_1_1ecs.html", [
         [ "details", "namespacehelios_1_1ecs_1_1details.html", [
           [ "HasValidSystemParams", "concepthelios_1_1ecs_1_1details_1_1HasValidSystemParams.html", null ],

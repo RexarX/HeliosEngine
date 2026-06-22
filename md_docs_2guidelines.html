@@ -274,8 +274,8 @@ Build definition (<span class="tt">CMakeLists.txt</span>)</h2>
 </div><!-- fragment --><p>External dependencies are declared per-module via <span class="tt">USES</span> and resolved from <span class="tt">cmake/dependencies/</span> (system packages first, CPM fallback).</p>
 <h2 class="doxsection"><a class="anchor" id="selective-module-builds"></a>
 Selective module builds</h2>
-<div class="fragment"><div class="line">cmake --preset linux-gcc-debug -DHELIOS_BUILD_WINDOW_MODULE=OFF</div>
-<div class="line">cmake --preset linux-gcc-debug -DHELIOS_BUILD_PROFILE_MODULE=ON</div>
+<div class="fragment"><div class="line">cmake --preset linux-gcc-debug -DHELIOS_BUILD_WINDOW=OFF</div>
+<div class="line">cmake --preset linux-gcc-debug -DHELIOS_BUILD_PROFILE=ON</div>
 </div><!-- fragment --><hr  />
 <h1 class="doxsection"><a class="anchor" id="testing"></a>
 Testing</h1>
