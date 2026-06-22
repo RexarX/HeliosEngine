@@ -229,8 +229,9 @@ if(NOT TARGET helios::boost)
   add_library(helios::boost ALIAS _helios_boost_all)
 endif()
 
-# Boost.Stacktrace platform requirements must be INTERFACE so they propagate to
-# test targets that reuse module PCHs including <boost/stacktrace.hpp>.
+# Boost.Stacktrace platform requirements for core's own translation units (PCH,
+# stacktrace.cpp). Applied on the imported target so PRIVATE module USES still
+# pick them up when compiling helios_module_core.
 if(NOT HELIOS_USE_STL_STACKTRACE AND TARGET helios::boost::stacktrace AND APPLE)
   target_compile_definitions(helios::boost::stacktrace INTERFACE
       BOOST_STACKTRACE_GNU_SOURCE_NOT_REQUIRED

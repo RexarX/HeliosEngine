@@ -4,6 +4,7 @@ helios_module(
     DESCRIPTION "Utility module providing common helpers and utilities"
 
     HEADERS
+        include/helios/utils/utils.hpp
         include/helios/utils/common_traits.hpp
         include/helios/utils/defer.hpp
         include/helios/utils/dynamic_library.hpp

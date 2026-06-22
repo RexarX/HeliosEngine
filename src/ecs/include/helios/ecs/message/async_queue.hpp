@@ -4,13 +4,13 @@
 #include <helios/compiler/compiler.hpp>
 #include <helios/ecs/message/message.hpp>
 
-#include <concurrentqueue/moodycamel/concurrentqueue.h>
-
 #ifdef HELIOS_STL_FLAT_MAP_AVAILABLE
 #include <flat_map>
 #else
 #include <boost/container/flat_map.hpp>
 #endif
+
+#include <concurrentqueue/moodycamel/concurrentqueue.h>
 
 #include <algorithm>
 #include <concepts>

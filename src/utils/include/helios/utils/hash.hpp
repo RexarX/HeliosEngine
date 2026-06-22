@@ -8,11 +8,11 @@ namespace helios::utils {
 using HashType = size_t;
 
 #if SIZE_MAX == UINT64_MAX
-constexpr HashType kFnvBasis = 14695981039346656037ULL;
-constexpr HashType kFnvPrime = 1099511628211ULL;
+inline constexpr HashType kFnvBasis = 14695981039346656037ULL;
+inline constexpr HashType kFnvPrime = 1099511628211ULL;
 #elif SIZE_MAX == UINT32_MAX
-constexpr HashType kFnvBasis = 2166136261U;
-constexpr HashType kFnvPrime = 16777619U;
+inline constexpr HashType kFnvBasis = 2166136261U;
+inline constexpr HashType kFnvPrime = 16777619U;
 #else
 #error "Unsupported platform: size_t must be 32 or 64 bits"
 #endif

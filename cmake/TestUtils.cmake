@@ -302,7 +302,7 @@ function(helios_add_module_test)
 
   # Check if module is enabled
   string(TOUPPER "${TEST_MODULE_NAME}" _upper_name)
-  if(DEFINED HELIOS_BUILD_${_upper_name}_MODULE AND NOT HELIOS_BUILD_${_upper_name}_MODULE)
+  if(DEFINED HELIOS_BUILD_${_upper_name} AND NOT HELIOS_BUILD_${_upper_name})
     message(STATUS "[Test] Skipping ${TEST_TYPE} tests for disabled module: ${TEST_MODULE_NAME}")
     return()
   endif()

@@ -133,8 +133,8 @@ External dependencies are declared per-module via `USES` and resolved from `cmak
 ### Selective module builds
 
 ```bash
-cmake --preset linux-gcc-debug -DHELIOS_BUILD_WINDOW_MODULE=OFF
-cmake --preset linux-gcc-debug -DHELIOS_BUILD_PROFILE_MODULE=ON
+cmake --preset linux-gcc-debug -DHELIOS_BUILD_WINDOW=OFF
+cmake --preset linux-gcc-debug -DHELIOS_BUILD_PROFILE=ON
 ```
 
 ---

@@ -4,6 +4,7 @@ helios_module(
     DESCRIPTION "Logging module built on spdlog"
 
     HEADERS
+        include/helios/log/log.hpp
         include/helios/log/config.hpp
         include/helios/log/logger.hpp
 

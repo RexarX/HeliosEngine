@@ -4,11 +4,11 @@ helios_module(
     DESCRIPTION "Container data structures module"
 
     HEADERS
+        include/helios/container/container.hpp
         include/helios/container/details/callable_buffer_common.hpp
         include/helios/container/details/typed_buffer_common.hpp
         include/helios/container/callable_buffer.hpp
         include/helios/container/callable_buffer_array.hpp
-        include/helios/container/multi_type_buffer.hpp
         include/helios/container/multi_type_map.hpp
         include/helios/container/sparse_set.hpp
         include/helios/container/static_string.hpp

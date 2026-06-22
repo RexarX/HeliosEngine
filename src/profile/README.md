@@ -161,7 +161,7 @@ Tune via `-DHELIOS_PROFILE_ZONE_STORAGE_BYTES=512`.
 ## Build
 
 ```bash
-cmake -DHELIOS_BUILD_PROFILE_MODULE=ON ..
+cmake -DHELIOS_BUILD_PROFILE=ON ..
 ```
 
 `HELIOS_ENABLE_PROFILE` is `ON` by default in Debug and RelWithDebInfo.

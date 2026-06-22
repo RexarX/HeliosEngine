@@ -1,58 +1,44 @@
-<a id="readme-top"></a>
+[C++23](https://en.cppreference.com/w/cpp/23)
+[MIT License](https://github.com/RexarX/HeliosEngine/blob/main/LICENSE)
 
-<!-- PROJECT SHIELDS -->
-
-[![C++23][cpp-shield]][cpp-url]
-[![MIT License][license-shield]][license-url]
-
-[![Linux GCC](https://img.shields.io/github/actions/workflow/status/RexarX/HeliosEngine/linux-gcc.yaml?branch=main&label=Linux%20GCC&logo=linux&logoColor=white)](https://github.com/RexarX/HeliosEngine/actions/workflows/linux-gcc.yaml)
-[![Linux Clang](https://img.shields.io/github/actions/workflow/status/RexarX/HeliosEngine/linux-clang.yaml?branch=main&label=Linux%20Clang&logo=llvm&logoColor=white)](https://github.com/RexarX/HeliosEngine/actions/workflows/linux-clang.yaml)
-[![Windows MSVC](https://img.shields.io/github/actions/workflow/status/RexarX/HeliosEngine/windows-msvc.yaml?branch=main&label=Windows%20MSVC&logo=windows&logoColor=white)](https://github.com/RexarX/HeliosEngine/actions/workflows/windows-msvc.yaml)
-[![macOS Clang](https://img.shields.io/github/actions/workflow/status/RexarX/HeliosEngine/macos-clang.yaml?branch=main&label=macOS%20Clang&logo=apple&logoColor=white)](https://github.com/RexarX/HeliosEngine/actions/workflows/macos-clang.yaml)
-
-<!-- PROJECT LOGO -->
-
-<br />
-
-<div align="center">
-
-<img src="docs/img/logo.png" alt="Helios Engine Logo" width="200">
+[Linux GCC](https://github.com/RexarX/HeliosEngine/actions/workflows/linux-gcc.yaml)
+[Linux Clang](https://github.com/RexarX/HeliosEngine/actions/workflows/linux-clang.yaml)
+[Windows MSVC](https://github.com/RexarX/HeliosEngine/actions/workflows/windows-msvc.yaml)
+[macOS Clang](https://github.com/RexarX/HeliosEngine/actions/workflows/macos-clang.yaml)
 
 # Helios Engine
 
 A modular, data-oriented C++23 game engine framework inspired by Bevy
 
-<b><a href="#getting-started">Get Started »</a></b> · <a href="#key-features">Features</a> · <a href="#modules">Modules</a> · <a href="#building">Build</a> · <a href="#using-as-a-dependency">Third-Party</a> · <a href="#documentation">Docs</a>
-
-</div>
+**[Get Started »](#getting-started)** · [Features](#key-features) · [Modules](#modules) · [Build](#building) · [Third-Party](#using-as-a-dependency) · [Docs](#documentation)
 
 ---
 
 ## Table of Contents
 
-- <a href="#about-the-project">About The Project</a>
-  - <a href="#key-features">Key Features</a>
-  - <a href="#design-philosophy">Design Philosophy</a>
-- <a href="#modules">Modules</a>
-- <a href="#getting-started">Getting Started</a>
-  - <a href="#requirements">Requirements</a>
-  - <a href="#installing-dependencies">Installing Dependencies</a>
-  - <a href="#building">Building</a>
-  - <a href="#run-the-example">Run the Example</a>
-- <a href="#usage">Usage</a>
-- <a href="#architecture">Architecture</a>
-- <a href="#using-as-a-dependency">Using as a Dependency</a>
-  - <a href="#method-1-add_subdirectory">add_subdirectory</a>
-  - <a href="#method-2-fetchcontent">FetchContent</a>
-  - <a href="#method-3-cpm">CPM</a>
-  - <a href="#method-4-installed-package-find_package">Installed Package (find_package)</a>
-- <a href="#documentation">Documentation</a>
-- <a href="#development">Development</a>
-  - <a href="#creating-a-custom-module">Creating a Custom Module</a>
-- <a href="#roadmap">Roadmap</a>
-- <a href="#acknowledgments">Acknowledgments</a>
-- <a href="#license">License</a>
-- <a href="#contact">Contact</a>
+- [About The Project](#about-the-project)
+  - [Key Features](#key-features)
+  - [Design Philosophy](#design-philosophy)
+- [Modules](#modules)
+- [Getting Started](#getting-started)
+  - [Requirements](#requirements)
+  - [Installing Dependencies](#installing-dependencies)
+  - [Building](#building)
+  - [Run the Example](#run-the-example)
+- [Usage](#usage)
+- [Architecture](#architecture)
+- [Using as a Dependency](#using-as-a-dependency)
+  - [add_subdirectory](#method-1-add_subdirectory)
+  - [FetchContent](#method-2-fetchcontent)
+  - [CPM](#method-3-cpm)
+  - [Installed Package (find_package)](#method-4-installed-package-find_package)
+- [Documentation](#documentation)
+- [Development](#development)
+  - [Creating a Custom Module](#creating-a-custom-module)
+- [Roadmap](#roadmap)
+- [Acknowledgments](#acknowledgments)
+- [License](#license)
+- [Contact](#contact)
 
 ---
 
@@ -60,7 +46,7 @@ A modular, data-oriented C++23 game engine framework inspired by Bevy
 
 **Helios Engine** is a high-performance, ECS-based game engine framework written in C++23. It combines an archetype-based Entity Component System with deferred commands, double-buffered messages, and parallel system scheduling over a work-stealing task executor.
 
-<a href="#readme-top">↑ Back to Top</a>
+[↑ Back to Top](#readme-top)
 
 ### Key Features
 
@@ -77,32 +63,32 @@ A modular, data-oriented C++23 game engine framework inspired by Bevy
 2. **Composability** — behavior emerges from systems operating on component data
 3. **Explicitness** — data access declared through system parameter types; schedules resolve ordering
 
-<a href="#readme-top">↑ Back to Top</a>
+[↑ Back to Top](#readme-top)
 
 ---
 
 ## Modules
 
 | Module      | Description                                        | Default | Documentation                     |
-| ----------- | -------------------------------------------------- | :-----: | --------------------------------- |
-| `core`      | Asserts, UUID, stack traces, CStringView           |   ON    | [README](src/core/README.md)      |
-| `platform`  | Platform detection, `HELIOS_API`, debug break      |   ON    | [README](src/platform/README.md)  |
-| `compiler`  | Branch hints, feature detection macros             |   ON    | [README](src/compiler/README.md)  |
-| `utils`     | TypeId, Delegate, timers, filesystem, adapters     |   ON    | [README](src/utils/README.md)     |
-| `container` | SparseSet, MultiTypeMap, TypedBuffer, StaticString |   ON    | [README](src/container/README.md) |
-| `memory`    | PMR allocators, `Rc`/`Arc`                         |   ON    | [README](src/memory/README.md)    |
-| `log`       | spdlog-based typed logging                         |   ON    | [README](src/log/README.md)       |
-| `async`     | Task graphs and work-stealing executor             |   ON    | [README](src/async/README.md)     |
-| `ecs`       | World, entities, components, schedules             |   ON    | [README](src/ecs/README.md)       |
-| `app`       | Application framework, plugins, sub-apps           |   ON    | [README](src/app/README.md)       |
-| `profile`   | Tracy / flamegraph profiling (opt-in)              |   OFF   | [README](src/profile/README.md)   |
-| `window`    | GLFW windowing (skeleton)                          |   ON    | [README](src/window/README.md)    |
+| ----------- | -------------------------------------------------- | ------- | --------------------------------- |
+| `core`      | Asserts, UUID, stack traces, CStringView           | ON      | [README](src/core/README.md)      |
+| `platform`  | Platform detection, `HELIOS_API`, debug break      | ON      | [README](src/platform/README.md)  |
+| `compiler`  | Branch hints, feature detection macros             | ON      | [README](src/compiler/README.md)  |
+| `utils`     | TypeId, Delegate, timers, filesystem, adapters     | ON      | [README](src/utils/README.md)     |
+| `container` | SparseSet, MultiTypeMap, TypedBuffer, StaticString | ON      | [README](src/container/README.md) |
+| `memory`    | PMR allocators, `Rc`/`Arc`                         | ON      | [README](src/memory/README.md)    |
+| `log`       | spdlog-based typed logging                         | ON      | [README](src/log/README.md)       |
+| `async`     | Task graphs and work-stealing executor             | ON      | [README](src/async/README.md)     |
+| `ecs`       | World, entities, components, schedules             | ON      | [README](src/ecs/README.md)       |
+| `app`       | Application framework, plugins, sub-apps           | ON      | [README](src/app/README.md)       |
+| `profile`   | Tracy / flamegraph profiling (opt-in)              | OFF     | [README](src/profile/README.md)   |
+| `window`    | GLFW windowing (skeleton)                          | ON      | [README](src/window/README.md)    |
 
 ```bash
-cmake --preset linux-gcc-release -DHELIOS_BUILD_PROFILE_MODULE=ON -DHELIOS_BUILD_WINDOW_MODULE=OFF
+cmake --preset linux-gcc-release -DHELIOS_BUILD_PROFILE=ON -DHELIOS_BUILD_WINDOW=OFF
 ```
 
-<a href="#readme-top">↑ Back to Top</a>
+[↑ Back to Top](#readme-top)
 
 ---
 
@@ -128,7 +114,7 @@ cd HeliosEngine
 
 Helios resolves dependencies per module: **system packages are tried first**, then **CPM download** if missing (`HELIOS_DOWNLOAD_PACKAGES=ON`, default). Pre-installing system packages speeds up configuration and avoids network fetches.
 
-Package names below match `INSTALL_HINTS` in [`cmake/dependencies/`](cmake/dependencies/).
+Package names below match `INSTALL_HINTS` in `[cmake/dependencies/](cmake/dependencies/)`.
 
 #### All platforms — build tools
 
@@ -246,47 +232,70 @@ cmake --preset linux-gcc-release \
   -DHELIOS_DEVELOPER_MODE=ON \
 ```
 
-| Option                         | Default        | Notes                         |
-| ------------------------------ | -------------- | ----------------------------- |
-| `HELIOS_BUILD_TESTS`           | ON (top-level) | Module test suites            |
-| `HELIOS_BUILD_EXAMPLES`        | ON (top-level) | Example applications          |
-| `HELIOS_DEVELOPER_MODE`        | OFF            | Sanitizers and dev checks     |
-| `HELIOS_DOWNLOAD_PACKAGES`     | ON             | CPM fallback for missing deps |
-| `HELIOS_BUILD_{MODULE}_MODULE` | module default | Per-module toggle             |
+| Option                     | Default        | Notes                         |
+| -------------------------- | -------------- | ----------------------------- |
+| `HELIOS_BUILD_TESTS`       | ON (top-level) | Module test suites            |
+| `HELIOS_BUILD_EXAMPLES`    | ON (top-level) | Example applications          |
+| `HELIOS_DEVELOPER_MODE`    | OFF            | Sanitizers and dev checks     |
+| `HELIOS_DOWNLOAD_PACKAGES` | ON             | CPM fallback for missing deps |
+| `HELIOS_BUILD_{MODULE}`    | module default | Per-module toggle             |
 
 ### Run the Example
 
 ```bash
 cmake --preset linux-gcc-release \
   -DHELIOS_BUILD_EXAMPLES=ON \
-  -DHELIOS_BUILD_PROFILE_MODULE=ON
+  -DHELIOS_BUILD_PROFILE=ON
 cmake --build --preset linux-gcc-release --target simple_example
 ./bin/examples/debug-linux-x86_64/simple_example
 ```
 
 See [examples/simple/src/main.cpp](examples/simple/src/main.cpp) for schedules, system sets, sub-apps, and profiling.
 
-<a href="#readme-top">↑ Back to Top</a>
+[↑ Back to Top](#readme-top)
 
 ---
 
-<h2 id="usage">Usage</h2>
+## Usage
 
 Systems are plain structs — `operator()` parameters declare data access. `App` owns the main world, executor, and frame scheduler.
 
 ```cpp
-#include <helios/app/app.hpp>
-#include <helios/app/schedules.hpp>
+#include <helios/app/application.hpp>
 #include <helios/ecs/command/commands.hpp>
 #include <helios/ecs/query/query.hpp>
 #include <helios/ecs/resource/param.hpp>
+#include <helios/ecs/schedule/system_set.hpp>
 
 #include <utility>
 
-struct Position { float x = 0, y = 0; };
-struct Velocity { float dx = 1, dy = 0; };
+inline constexpr float kVelocityBoost = 1.25F;
 
-struct MoveEntities {
+struct Position {
+  float x = 0.0F;
+  float y = 0.0F;
+};
+
+struct Velocity {
+  float dx = 1.0F;
+  float dy = 0.0F;
+};
+
+struct FrameCount {
+  size_t count = 0;
+};
+
+struct SpawnEntities {
+  void operator()(helios::ecs::Res<const FrameCount> frame_count,
+                  helios::ecs::Commands commands) {
+    // Spawning new entity every even frame
+    if (frame_count->count % 2 == 0) {
+      commands.Spawn().AddComponents(Position{}, Velocity{});
+    }
+  }
+};
+
+struct ChangePosition {
   void operator()(helios::ecs::Query<Position&, const Velocity&> movables) {
     movables.ForEach([](Position& pos, const Velocity& vel) {
       pos.x += vel.dx;
@@ -295,31 +304,51 @@ struct MoveEntities {
   }
 };
 
+struct ChangeVelocity {
+  void operator()(helios::ecs::Query<Velocity&> movables) {
+    movables.ForEach([](Velocity& vel) {
+      vel.dx *= kVelocityBoost ;
+      vel.dy *= kVelocityBoost ;
+    });
+  }
+};
+
 struct RequestExit {
   void operator()(helios::ecs::MessageWriter<helios::app::AppExit> exit) {
+    // Sending message that would be handled in the next schedule
     exit.Write({.code = helios::app::ExitCode::kSuccess});
   }
 };
 
 int main() {
   helios::app::App app;
-  app.AddSystems(helios::app::kUpdate, MoveEntities{}, RequestExit{});
-  app.AddMessages<helios::app::AppExit>();  // Already added by default, but explicit registration is allowed
+  app.InsertResource(FrameCount{});
+
+  app.AddSystem(helios::app::kPreUpdate, SpawnEntities{}); // Spawn entities, before modifying
+  app.AddSystems(helios::app::kUpdate, ChangePosition{}, ChangeVelocity{})
+      .Sequence(); // Sytems will run one after another (ChangePosition -> ChangeVelocity)
+  app.AddSystem(helios::app::kPostUpdate, RequestExit{}) // Shutdown after 500 frames
+      .RunIf("IsFrameCountReached", [](helios::ecs::Res<const FrameCount> frame_count) {
+                                      return frame_count->count > 500;
+                                    });
+
+  app.AddMessages<helios::app::AppExit>();
   return std::to_underlying(app.Run());
 }
 ```
 
-| Parameter                               | Purpose                                                    |
-| --------------------------------------- | ---------------------------------------------------------- |
-| `Res<T>` / `Res<const T>`               | Singleton resource access                                  |
-| `Query<Args...>`                        | Entity iteration with `With<>` / `Without<>` filters       |
-| `Commands`                              | Deferred spawn, destroy, component, and resource mutations |
-| `Local<T>`                              | Per-system persistent state                                |
-| `MessageWriter<T>` / `MessageReader<T>` | Frame-delayed inter-system messages                        |
+| Parameter                                         | Purpose                                                                                   |
+| ------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `Res<T>` / `Res<const T>`                         | Singleton resource access                                                                 |
+| `Query<Args...>`                                  | Entity iteration with `With<>` / `Without<>` filters                                      |
+| `Commands`                                        | Deferred spawn, destroy, component, and resource mutations                                |
+| `Local<T>`                                        | Per-system persistent state                                                               |
+| `MessageWriter<T>` / `MessageReader<T>`           | Frame-delayed inter-system messages Live two frames by default, visible between schedules |
+| `AsyncMessageWriter<T>` / `AsyncMessageReader<T>` | Lock-free async messages between systems                                                  |
 
 Builtin schedules (`helios/app/schedules.hpp`): `MainStartup` → `PreStartup` → `Startup` → `PostStartup` → `First` → `PreUpdate` → `Update` → `PostUpdate` → `Last` → `Extract` → shutdown stages.
 
-<a href="#readme-top">↑ Back to Top</a>
+[↑ Back to Top](#readme-top)
 
 ---
 
@@ -352,7 +381,7 @@ Builtin schedules (`helios/app/schedules.hpp`): `MainStartup` → `PreStartup` �
 - **Components** — archetype columns or per-type sparse sets; structural changes via deferred `Commands`
 - **Messages** — double-buffered (read previous frame); async messages use lock-free queues
 
-<a href="#readme-top">↑ Back to Top</a>
+[↑ Back to Top](#readme-top)
 
 ---
 
@@ -397,8 +426,8 @@ include(FetchContent)
 FetchContent_Declare(
     HeliosEngine
     GIT_REPOSITORY https://github.com/RexarX/HeliosEngine.git
-    GIT_TAG        main
-    GIT_SHALLOW    TRUE
+    GIT_TAG main
+    GIT_SHALLOW TRUE
 )
 
 set(HELIOS_BUILD_TESTS OFF CACHE BOOL "" FORCE)
@@ -415,7 +444,7 @@ helios_link_modules(
 
 ### Method 3: CPM
 
-Uses the same CPM integration as Helios itself ([`cmake/DownloadUsingCPM.cmake`](cmake/DownloadUsingCPM.cmake)).
+Uses the same CPM integration as Helios itself (`[cmake/DownloadUsingCPM.cmake](cmake/DownloadUsingCPM.cmake)`).
 
 ```cmake
 # Download CPM once (or vendor cmake/CPM.cmake)
@@ -458,9 +487,9 @@ helios_link_modules(
 )
 ```
 
-Installed artifacts: `HeliosConfig.cmake`, `HeliosConfigVersion.cmake`, `HeliosTargets.cmake` (see [`cmake/Install.cmake`](cmake/Install.cmake)).
+Installed artifacts: `HeliosConfig.cmake`, `HeliosConfigVersion.cmake`, `HeliosTargets.cmake` (see `[cmake/Install.cmake](cmake/Install.cmake)`).
 
-<a href="#readme-top">↑ Back to Top</a>
+[↑ Back to Top](#readme-top)
 
 ---
 
@@ -473,7 +502,7 @@ python scripts/docs.py
 # → docs/doxygen/html/index.html
 ```
 
-Config: [`docs/doxygen/Doxyfile`](docs/doxygen/Doxyfile) — [doxygen-awesome-css](third-party/doxygen-awesome-css) theme (git submodule).
+Config: `[docs/doxygen/Doxyfile](docs/doxygen/Doxyfile)` — [doxygen-awesome-css](third-party/doxygen-awesome-css) theme (git submodule).
 
 ### Project guidelines
 
@@ -485,7 +514,7 @@ Config: [`docs/doxygen/Doxyfile`](docs/doxygen/Doxyfile) — [doxygen-awesome-cs
 
 ### Code formatting
 
-Formatting runs automatically on every local commit (via [pre-commit](https://pre-commit.com/)) and is verified on every push / PR ([`.github/workflows/format.yaml`](.github/workflows/format.yaml)). Unformatted code cannot land on `main` if hooks and CI are used.
+Formatting runs automatically on every local commit (via [pre-commit](https://pre-commit.com/)) and is verified on every push / PR (`[.github/workflows/format.yaml](.github/workflows/format.yaml)`). Unformatted code cannot land on `main` if hooks and CI are used.
 
 | When                     | Mechanism                                                         |
 | ------------------------ | ----------------------------------------------------------------- |
@@ -549,7 +578,7 @@ python scripts/docs.py                                      # Doxygen
 ctest --preset linux-gcc-release                            # tests
 ```
 
-<a href="#readme-top">↑ Back to Top</a>
+[↑ Back to Top](#readme-top)
 
 ---
 
@@ -558,7 +587,7 @@ ctest --preset linux-gcc-release                            # tests
 - Rendering module
 - Full window/input integration
 
-<a href="#readme-top">↑ Back to Top</a>
+[↑ Back to Top](#readme-top)
 
 ---
 
@@ -566,29 +595,22 @@ ctest --preset linux-gcc-release                            # tests
 
 Inspired by [Bevy](https://bevyengine.org/), [EnTT](https://github.com/skypjack/entt), and [Taskflow](https://taskflow.github.io/).
 
-<a href="#readme-top">↑ Back to Top</a>
+[↑ Back to Top](#readme-top)
 
 ---
 
 ## License
 
-Distributed under the MIT License. See [LICENSE][license-url] for details.
+Distributed under the MIT License. See [LICENSE](https://github.com/RexarX/HeliosEngine/blob/main/LICENSE) for details.
 
-<a href="#readme-top">↑ Back to Top</a>
+[↑ Back to Top](#readme-top)
 
 ---
 
 ## Contact
 
-**RexarX** — who727cares@gmail.com
+**RexarX** — [who727cares@gmail.com](mailto:who727cares@gmail.com)
 
 **Project:** [github.com/RexarX/HeliosEngine](https://github.com/RexarX/HeliosEngine)
 
-<a href="#readme-top">↑ Back to Top</a>
-
-<!-- MARKDOWN LINKS & IMAGES -->
-
-[license-shield]: https://img.shields.io/github/license/RexarX/HeliosEngine.svg?style=for-the-badge
-[license-url]: https://github.com/RexarX/HeliosEngine/blob/main/LICENSE
-[cpp-shield]: https://img.shields.io/badge/C%2B%2B-23-blue.svg?style=for-the-badge&logo=c%2B%2B
-[cpp-url]: https://en.cppreference.com/w/cpp/23
+[↑ Back to Top](#readme-top)

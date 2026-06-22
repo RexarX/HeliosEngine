@@ -4,8 +4,10 @@ helios_module(
     DESCRIPTION "Core engine module providing asserts, UUID, and other core functionality"
 
     HEADERS
+        include/helios/core/core.hpp
         include/helios/assert.hpp
         include/helios/cstring_view.hpp
+        include/helios/delegate.hpp
         include/helios/stacktrace.hpp
         include/helios/uuid.hpp
 
@@ -15,11 +17,14 @@ helios_module(
 
     PCH src/pch.hpp
 
-    DEPENDS compiler platform utils
+    DEPENDS
+        PUBLIC compiler
+        PUBLIC platform
+        PUBLIC utils
 
     USES
         stduuid PUBLIC helios::stduuid::stduuid
-        Boost PUBLIC helios::boost::stacktrace
+        Boost PRIVATE helios::boost::stacktrace
 
     COMPILE_DEFINITIONS
         PUBLIC

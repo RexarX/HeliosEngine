@@ -6,17 +6,18 @@ helios_module(
     DESCRIPTION "Application framework module"
 
     HEADERS
-         include/helios/app/details/profile.hpp
+        include/helios/app/details/profile.hpp
         include/helios/app/app.hpp
-        include/helios/app/schedules.hpp
-        include/helios/app/scheduler.hpp
+        include/helios/app/application.hpp
         include/helios/app/dynamic_plugin.hpp
         include/helios/app/plugin.hpp
         include/helios/app/runners.hpp
+        include/helios/app/scheduler.hpp
+        include/helios/app/schedules.hpp
         include/helios/app/sub_app.hpp
 
     SOURCES
-        src/app.cpp
+        src/application.cpp
         src/scheduler.cpp
         src/sub_app.cpp
 
@@ -33,14 +34,14 @@ helios_module(
         PUBLIC profile
 
     USES
-        Boost PUBLIC helios::boost::unordered
+        FlatMap PUBLIC helios::flat_map
 
     COMPILE_DEFINITIONS
         PUBLIC
             $<$<BOOL:HELIOS_APP_ENABLE_PROFILE>:HELIOS_APP_ENABLE_PROFILE>
 
     TEST_SOURCES
-        tests/app.cpp
+        tests/application.cpp
         tests/dynamic_plugin.cpp
         tests/main.cpp
         tests/plugin.cpp

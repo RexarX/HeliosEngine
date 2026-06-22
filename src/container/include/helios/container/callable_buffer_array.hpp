@@ -668,13 +668,6 @@ inline void* CallableBufferArrayImpl<Allocator, Signatures...>::GetDataPtr(
 
 namespace details {
 
-/// @brief Concept for instantiated allocator types.
-template <typename T>
-concept InstantiatedAllocator =
-    std::is_class_v<T> && !VoidSignature<T> && requires {
-      typename std::allocator_traits<T>::template rebind_alloc<std::byte>;
-    };
-
 /// @brief Deduces the `CallableBufferArrayImpl` type from signature arguments.
 template <typename... Args>
 struct CallableBufferArrayDeducer;

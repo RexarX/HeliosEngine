@@ -188,6 +188,13 @@ template <typename T, typename SignatureTuple, auto... Methods>
 concept AllMethodsValid =
     AllMethodsValidHelper<T, SignatureTuple, Methods...>::kValue;
 
+/// @brief Concept for instantiated allocator types.
+template <typename T>
+concept InstantiatedAllocator =
+    std::is_class_v<T> && !VoidSignature<T> && requires {
+      typename std::allocator_traits<T>::template rebind_alloc<std::byte>;
+    };
+
 }  // namespace details
 
 /**

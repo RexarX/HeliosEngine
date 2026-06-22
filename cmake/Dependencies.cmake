@@ -5,7 +5,7 @@
 #
 # This file provides:
 # - Initial setup and status messages
-# - Test dependencies (loaded here since tests are built after plugins)
+# - Test dependencies (loaded here since tests are built after modules)
 # - Summary printing at the end of configuration
 #
 # Strategy: System packages -> CPM fallback
@@ -19,7 +19,7 @@ include(DownloadUsingCPM)
 # Print configuration header
 message(STATUS "")
 message(STATUS "========== Helios Dependency Configuration ==========")
-message(STATUS "  → Dependencies loaded on-demand by plugins")
+message(STATUS "  → Dependencies loaded on-demand by modules")
 message(STATUS "  → System packages checked FIRST")
 message(STATUS "  → CPM downloads for missing dependencies")
 message(STATUS "Allow CPM downloads: ${HELIOS_DOWNLOAD_PACKAGES}")
@@ -41,10 +41,10 @@ if(HELIOS_BUILD_TESTS)
 endif()
 
 # ============================================================================
-# Summary Function (called after plugins are built)
+# Summary Function (called after modules are built)
 # ============================================================================
 
-# This function should be called after all plugins are configured to print
+# This function should be called after all modules are configured to print
 # a summary of all found dependencies.
 function(helios_print_dependency_summary)
   helios_print_dependencies()

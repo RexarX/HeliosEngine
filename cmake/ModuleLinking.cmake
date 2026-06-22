@@ -88,8 +88,8 @@ function(helios_link_modules)
       helios_module_enabled(${_item} _is_enabled)
       if(NOT _is_enabled)
         message(FATAL_ERROR
-                    "helios_link_modules: Required module '${_item}' is not enabled. "
-                    "Enable it with -DHELIOS_BUILD_${_upper}_MODULE=ON")
+            "helios_link_modules: Required module '${_item}' is not enabled. "
+            "Enable it with -DHELIOS_BUILD_${_upper}=ON")
       endif()
 
       if(TARGET helios::module::${_item})

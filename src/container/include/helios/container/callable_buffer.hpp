@@ -1,5 +1,6 @@
 #pragma once
 
+#include <helios/assert.hpp>
 #include <helios/container/details/callable_buffer_common.hpp>
 
 #include <concepts>
@@ -287,6 +288,8 @@ template <size_t N, typename... UArgs>
            (N < sizeof...(Signatures))
 inline void CallableBufferImpl<Allocator, Signatures...>::Invoke(
     UArgs&&... args) noexcept {
+  HELIOS_ASSERT(!Empty(), "Cannot invoke on an empty buffer!");
+
   using ArgsTuple = details::NthSignatureArgsT<N, Signatures...>;
   using ExecuteFn = details::TupleToFunctionPtrType<ArgsTuple>;
 
@@ -510,13 +513,6 @@ inline void* CallableBufferImpl<Allocator, Signatures...>::GetDataPtr()
 }
 
 namespace details {
-
-/// @brief Concept for instantiated allocator types.
-template <typename T>
-concept InstantiatedAllocator =
-    std::is_class_v<T> && !VoidSignature<T> && requires {
-      typename std::allocator_traits<T>::template rebind_alloc<std::byte>;
-    };
 
 /// @brief Deduces the `CallableBufferImpl` type from signature arguments.
 template <typename... Args>

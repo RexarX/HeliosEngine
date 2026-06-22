@@ -27,7 +27,7 @@ custom_module/
 
 ## Step 1 — Register the module (`Module.cmake`)
 
-`helios_register_module` adds the module to Helios's dependency graph and creates the `HELIOS_BUILD_GREETING_MODULE` CMake option:
+`helios_register_module` adds the module to Helios's dependency graph and creates the `HELIOS_BUILD_GREETING` CMake option:
 
 ```cmake
 helios_register_module(

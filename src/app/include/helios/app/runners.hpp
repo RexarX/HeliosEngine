@@ -1,6 +1,6 @@
 #pragma once
 
-#include <helios/app/app.hpp>
+#include <helios/app/application.hpp>
 #include <helios/app/sub_app.hpp>
 
 #include <algorithm>

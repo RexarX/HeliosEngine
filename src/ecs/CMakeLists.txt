@@ -6,6 +6,7 @@ helios_module(
     DESCRIPTION "Entity Component System module"
 
     HEADERS
+        include/helios/ecs/ecs.hpp
         include/helios/ecs/command/command.hpp
         include/helios/ecs/command/commands.hpp
         include/helios/ecs/command/entity_buffer.hpp
@@ -86,7 +87,7 @@ helios_module(
 
     USES
         concurrentqueue PUBLIC helios::concurrentqueue::concurrentqueue
-        Boost PUBLIC helios::boost::unordered
+        FlatMap PUBLIC helios::flat_map
 
     COMPILE_DEFINITIONS
         PUBLIC

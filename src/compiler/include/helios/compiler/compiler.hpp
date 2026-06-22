@@ -1,5 +1,7 @@
 #pragma once
 
+#include <version>
+
 #if defined(__GNUC__) || defined(__clang__)
 #define HELIOS_EXPECT_TRUE(x) __builtin_expect(!!(x), 1)
 #define HELIOS_EXPECT_FALSE(x) __builtin_expect(!!(x), 0)
