@@ -59,9 +59,21 @@ concept HasValidSystemParams = requires {
 }(static_cast<typename MemberFnArgs<F>::ArgsTuple*>(nullptr));
 
 template <typename T>
+struct HasSystemParamCallOperatorHelper {
+  static constexpr bool kValue = [] {
+    using Decayed = std::remove_cvref_t<T>;
+    if constexpr (std::is_class_v<Decayed> &&
+                  requires { &Decayed::operator(); }) {
+      return HasValidSystemParams<decltype(&Decayed::operator())>;
+    } else {
+      return HasValidSystemParams<T>;
+    }
+  }();
+};
+
+template <typename T>
 concept HasSystemParamCallOperator =
-    HasValidSystemParams<T> ||
-    HasValidSystemParams<decltype(&std::remove_cvref_t<T>::operator())>;
+    HasSystemParamCallOperatorHelper<T>::kValue;
 
 }  // namespace details
 

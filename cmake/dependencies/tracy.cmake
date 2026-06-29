@@ -21,14 +21,14 @@ helios_dependency(
         "TRACY_STATIC ON"
 
     ALIASES
-        helios::tracy::TracyClient Tracy::TracyClient
-        helios::tracy Tracy::TracyClient
+        helios::lib::tracy::TracyClient Tracy::TracyClient
+        helios::lib::tracy Tracy::TracyClient
 )
 
-if(TARGET helios::tracy::TracyClient AND NOT TARGET helios::tracy)
+if(TARGET helios::lib::tracy::TracyClient AND NOT TARGET helios::lib::tracy)
   add_library(_helios_tracy_all INTERFACE)
-  target_link_libraries(_helios_tracy_all INTERFACE helios::tracy::TracyClient)
-  add_library(helios::tracy ALIAS _helios_tracy_all)
+  target_link_libraries(_helios_tracy_all INTERFACE helios::lib::tracy::TracyClient)
+  add_library(helios::lib::tracy ALIAS _helios_tracy_all)
 endif()
 
 if(TARGET TracyClient)

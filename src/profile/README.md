@@ -56,43 +56,39 @@ Connect the [Tracy profiler GUI](https://github.com/wolfpld/tracy) to a Debug or
 
 ## Macro Reference
 
-| Macro                                   | Purpose                               |
-| --------------------------------------- | ------------------------------------- |
-| `HELIOS_PROFILE_SCOPE()`                | Function-named zone                   |
-| `HELIOS_PROFILE_SCOPE_N(name)`          | Named zone                            |
-| `HELIOS_PROFILE_SCOPE_NS(name, depth)`  | Named zone with stack-capture depth   |
-| `HELIOS_PROFILE_SCOPE_C(color)`         | Colored zone                          |
-| `HELIOS_PROFILE_SCOPE_NC(name, color)`  | Named + colored zone                  |
-| `HELIOS_PROFILE_SCOPE_IF(name, cond)`   | Conditional zone (runtime check)      |
-| `HELIOS_PROFILE_SCOPE_S(depth)`         | Zone with stack-capture depth         |
-| `HELIOS_PROFILE_ZONE_TEXT(txt)`         | Attach text to active zone            |
-| `HELIOS_PROFILE_ZONE_VALUE(val)`        | Attach numeric value                  |
-| `HELIOS_PROFILE_ZONE_NAME(name)`        | Rename active zone                    |
-| `HELIOS_PROFILE_FRAME()`                | Frame boundary                        |
-| `HELIOS_PROFILE_FRAME_N(name)`          | Named frame boundary                  |
-| `HELIOS_PROFILE_FRAME_START(name)`      | Split frame region start              |
-| `HELIOS_PROFILE_FRAME_END(name)`        | Split frame region end                |
-| `HELIOS_PROFILE_MESSAGE(msg)`           | Timeline message                      |
-| `HELIOS_PROFILE_SET_THREAD_NAME(name)`  | Label a thread                        |
-| `HELIOS_PROFILE_PLOT(name, value)`      | Plot a value over time                |
-| `HELIOS_PROFILE_PLOT_CONFIG(...)`       | Plot configuration                    |
-| `HELIOS_PROFILE_ALLOC(ptr, size)`       | Track allocation                      |
-| `HELIOS_PROFILE_ALLOC_N(name, size)`    | Named allocation tracking             |
-| `HELIOS_PROFILE_FREE(ptr)`              | Track deallocation                    |
-| `HELIOS_PROFILE_FREE_N(name, ptr)`      | Named free tracking                   |
-| `HELIOS_PROFILE_MEMORY_DISCARD(name)`   | Arena/pool discard                    |
-| `HELIOS_PROFILE_MEMORY_DISCARD_S(n, d)` | Discard with stack-capture depth      |
-| `HELIOS_PROFILE_GLOBAL_ALLOC` (CMake)   | Hook global `operator new` / `delete` |
+| Macro                                         | Purpose                                                         |
+| --------------------------------------------- | --------------------------------------------------------------- |
+| `HELIOS_PROFILE_SCOPE()`                      | Function-named zone                                             |
+| `HELIOS_PROFILE_SCOPE_N(name)`                | Named zone                                                      |
+| `HELIOS_PROFILE_SCOPE_NS(name, depth)`        | Named zone with stack-capture depth                             |
+| `HELIOS_PROFILE_SCOPE_C(color)`               | Colored zone                                                    |
+| `HELIOS_PROFILE_SCOPE_NC(name, color)`        | Named + colored zone                                            |
+| `HELIOS_PROFILE_SCOPE_IF(name, cond)`         | Conditional zone (runtime check)                                |
+| `HELIOS_PROFILE_SCOPE_S(depth)`               | Zone with stack-capture depth                                   |
+| `HELIOS_PROFILE_ZONE_TEXT(txt)`               | Attach text to active zone                                      |
+| `HELIOS_PROFILE_ZONE_VALUE(val)`              | Attach numeric value                                            |
+| `HELIOS_PROFILE_ZONE_NAME(name)`              | Rename active zone                                              |
+| `HELIOS_PROFILE_FRAME()`                      | Frame boundary                                                  |
+| `HELIOS_PROFILE_FRAME_N(name)`                | Named frame boundary                                            |
+| `HELIOS_PROFILE_FRAME_START(name)`            | Split frame region start                                        |
+| `HELIOS_PROFILE_FRAME_END(name)`              | Split frame region end                                          |
+| `HELIOS_PROFILE_MESSAGE(msg)`                 | Timeline message                                                |
+| `HELIOS_PROFILE_SET_THREAD_NAME(name)`        | Label a thread                                                  |
+| `HELIOS_PROFILE_PLOT(name, value)`            | Plot a value over time                                          |
+| `HELIOS_PROFILE_PLOT_CONFIG(...)`             | Plot configuration                                              |
+| `HELIOS_PROFILE_ALLOC(ptr, size)`             | Track allocation                                                |
+| `HELIOS_PROFILE_ALLOC_N(name, size)`          | Named allocation tracking                                       |
+| `HELIOS_PROFILE_FREE(ptr)`                    | Track deallocation                                              |
+| `HELIOS_PROFILE_FREE_N(name, ptr)`            | Named free tracking                                             |
+| `HELIOS_PROFILE_MEMORY_DISCARD(name)`         | Arena/pool discard                                              |
+| `HELIOS_PROFILE_MEMORY_DISCARD_S(n, d)`       | Discard with stack-capture depth                                |
+| `HELIOS_MEMORY_OVERRIDE_GLOBAL_ALLOC` (CMake) | Inherit global `operator new` / `delete` hooks via memory links |
 
 All macros are no-ops when `HELIOS_ENABLE_PROFILE` is undefined.
 
 ### Memory in Tracy
 
-Open the **Memory** tab in the Tracy GUI. Link `helios::profile::global_alloc` into executables that should hook `new`/`delete`, or use `HELIOS_PROFILE_ALLOC` / `HELIOS_MEMORY_PROFILE_*` on custom allocators. Global hooks fan out through `Profiler::Alloc` / `Free` like all other memory events. Call `Profiler::Finalize()` before the workload you want to profile.
-
-```cmake
-helios_profile_link_global_alloc(my_executable)
-```
+Open the **Memory** tab in the Tracy GUI. Link `helios::module::memory` (with `HELIOS_MEMORY_OVERRIDE_GLOBAL_ALLOC=ON`) to hook `new`/`delete`, or use `HELIOS_PROFILE_ALLOC` / `HELIOS_MEMORY_PROFILE_*` on custom allocators. Global hooks fan out through `Profiler::Alloc` / `Free` like all other memory events. Call `Profiler::Finalize()` before the workload you want to profile.
 
 ## Multi-Backend
 

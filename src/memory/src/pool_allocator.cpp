@@ -2,6 +2,7 @@
 
 #include <helios/memory/pool_allocator.hpp>
 
+#include <details/accumulate_peak.hpp>
 #include <helios/assert.hpp>
 #include <helios/memory/aligned_alloc.hpp>
 #include <helios/memory/common.hpp>
@@ -12,19 +13,9 @@
 #include <cstddef>
 #include <cstdint>
 #include <memory>
+#include <utility>
 
 namespace {
-
-void AccumulatePeak(std::atomic<size_t>& peak, size_t candidate) noexcept {
-  size_t observed = peak.load(std::memory_order_relaxed);
-  while (candidate > observed) {
-    if (peak.compare_exchange_weak(observed, candidate,
-                                   std::memory_order_relaxed,
-                                   std::memory_order_relaxed)) {
-      return;
-    }
-  }
-}
 
 void PushBlock(std::atomic<void*>& head, void* block) noexcept {
   void* observed = head.load(std::memory_order_acquire);
@@ -55,6 +46,31 @@ void PushBlock(std::atomic<void*>& head, void* block) noexcept {
 
 namespace helios::mem {
 
+PoolAllocator::PoolAllocator(PoolAllocatorOptions options) noexcept
+    : block_size_(std::max(options.block_size, sizeof(void*))),
+      initial_block_count_(options.block_count),
+      alignment_(options.alignment),
+      growth_(options.growth) {
+  HELIOS_ASSERT(block_size_ > 0, "block_size must be greater than zero!");
+  HELIOS_ASSERT(initial_block_count_ > 0,
+                "block_count must be greater than zero!");
+  HELIOS_ASSERT(IsPowerOfTwo(alignment_),
+                "alignment '{}' must be power of two!", alignment_);
+  HELIOS_ASSERT(alignment_ >= alignof(void*), "alignment '{}' must be >= '{}'!",
+                alignment_, alignof(void*));
+
+  block_size_ = AlignUp(block_size_, alignment_);
+
+  ChunkHeader* const initial_chunk =
+      CreateChunk(block_size_, initial_block_count_, alignment_);
+  HELIOS_VERIFY(initial_chunk != nullptr, "Failed to allocate pool chunk!");
+
+  chunks_.store(initial_chunk, std::memory_order_release);
+  total_blocks_.store(initial_chunk->block_count, std::memory_order_relaxed);
+  free_blocks_.store(initial_chunk->block_count, std::memory_order_relaxed);
+  PushChunkBlocks(*initial_chunk);
+}
+
 bool PoolAllocator::Owns(const void* ptr) const noexcept {
   HELIOS_MEMORY_PROFILE_SCOPE_N("helios::mem::PoolAllocator::Owns");
 
@@ -74,6 +90,35 @@ bool PoolAllocator::Owns(const void* ptr) const noexcept {
   }
 
   return false;
+}
+
+void PoolAllocator::MoveFrom(PoolAllocator& other) noexcept {
+  block_size_ = std::exchange(other.block_size_, 0);
+  initial_block_count_ = std::exchange(other.initial_block_count_, 0);
+  alignment_ = std::exchange(other.alignment_, 0);
+  growth_ = std::exchange(other.growth_, {});
+  free_head_.store(
+      other.free_head_.exchange(nullptr, std::memory_order_acq_rel),
+      std::memory_order_release);
+  chunks_.store(other.chunks_.exchange(nullptr, std::memory_order_acq_rel),
+                std::memory_order_release);
+  grow_state_.store(
+      other.grow_state_.exchange(GrowState::kIdle, std::memory_order_acq_rel),
+      std::memory_order_release);
+  total_blocks_.store(
+      other.total_blocks_.exchange(0, std::memory_order_acq_rel),
+      std::memory_order_release);
+  free_blocks_.store(other.free_blocks_.exchange(0, std::memory_order_acq_rel),
+                     std::memory_order_release);
+  peak_used_blocks_.store(
+      other.peak_used_blocks_.exchange(0, std::memory_order_acq_rel),
+      std::memory_order_release);
+  total_allocations_.store(
+      other.total_allocations_.exchange(0, std::memory_order_acq_rel),
+      std::memory_order_release);
+  total_deallocations_.store(
+      other.total_deallocations_.exchange(0, std::memory_order_acq_rel),
+      std::memory_order_release);
 }
 
 auto PoolAllocator::CreateChunk(size_t block_size, size_t block_count,
@@ -128,7 +173,9 @@ bool PoolAllocator::GrowIfNeeded() noexcept {
                                            std::memory_order_acq_rel,
                                            std::memory_order_acquire)) {
     grow_state_.wait(GrowState::kGrowing, std::memory_order_acquire);
-    return free_head_.load(std::memory_order_acquire) != nullptr;
+    // Another allocator completed the coordinated attempt. Its blocks may
+    // already have been consumed, so the caller must retry the pop/grow loop.
+    return true;
   }
 
   const size_t chunk_blocks = desired_blocks - current_blocks;
@@ -196,12 +243,9 @@ void* PoolAllocator::do_allocate(size_t bytes, size_t alignment) {
                 "Requested size ({}) exceeds pool block size ({})!", bytes,
                 block_size_);
 
-  void* block = PopBlock(free_head_);
-  if (block == nullptr) {
+  void* block = nullptr;
+  while ((block = PopBlock(free_head_)) == nullptr) {
     HELIOS_VERIFY(GrowIfNeeded(), "Pool exhausted and growth failed!");
-
-    block = PopBlock(free_head_);
-    HELIOS_VERIFY(block != nullptr, "Pool exhausted after growth!");
   }
 
   const size_t free_now =
@@ -210,7 +254,7 @@ void* PoolAllocator::do_allocate(size_t bytes, size_t alignment) {
 
   const size_t total = total_blocks_.load(std::memory_order_relaxed);
   const size_t used = total - free_now;
-  AccumulatePeak(peak_used_blocks_, used);
+  details::AccumulatePeak(peak_used_blocks_, used);
 
   return block;
 }

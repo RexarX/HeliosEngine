@@ -9,7 +9,7 @@ helios_module(
     PCH src/pch.hpp
 
     USES
-        glfw PUBLIC helios::glfw::glfw
+        glfw PUBLIC helios::lib::glfw::glfw
 )
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")

@@ -318,17 +318,19 @@ public:
 
   /**
    * @brief Adds multiple functor systems to the same main sub-app schedule.
+   * @details Returns a `SystemGroupHandle` for configuring the batch. Use
+   * `InSet` on the returned handle to assign every system to a named set.
    * @note Not thread-safe.
    * @warning Triggers assertion if app is initialized or running.
    * @tparam L Schedule label type
    * @tparam Systems System types satisfying `FunctorSystemTrait`
    * @param label Target schedule label
    * @param systems System instances
-   * @return Handle for configuring the anonymous system set
+   * @return Handle for configuring the system group
    */
   template <ecs::ScheduleTrait L, ecs::FunctorSystemTrait... Systems>
     requires(sizeof...(Systems) > 1)
-  ecs::SystemSetHandle AddSystems(const L& label, Systems&&... systems);
+  ecs::SystemGroupHandle AddSystems(const L& label, Systems&&... systems);
 
   /**
    * @brief Gets or creates a system set in a main sub-app schedule.
@@ -779,8 +781,8 @@ inline auto App::InitSchedule(this auto&& self, const T& label)
 
 template <ecs::ScheduleTrait L, ecs::FunctorSystemTrait... Systems>
   requires(sizeof...(Systems) > 1)
-inline ecs::SystemSetHandle App::AddSystems(const L& label,
-                                            Systems&&... systems) {
+inline ecs::SystemGroupHandle App::AddSystems(const L& label,
+                                              Systems&&... systems) {
   return main_sub_app_.AddSystems(label, std::forward<Systems>(systems)...);
 }
 

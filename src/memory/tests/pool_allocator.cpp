@@ -4,6 +4,7 @@
 
 #include <algorithm>
 #include <atomic>
+#include <barrier>
 #include <cstddef>
 #include <cstdint>
 #include <memory_resource>
@@ -78,7 +79,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
     }
 
     SUBCASE("Growth policy is stored correctly") {
-      const GrowthPolicy policy = GrowthPolicy::Fixed();
+      const auto policy = GrowthPolicy::Geometric();
       const PoolAllocator pool(PoolAllocatorOptions{.block_size = kBlockSize,
                                                     .block_count = kBlockCount,
                                                     .growth = policy});
@@ -107,26 +108,10 @@ TEST_SUITE("helios::mem::PoolAllocator") {
       CHECK_EQ(pool.Alignment(), 16);
     }
 
-    SUBCASE("Uses Fixed growth policy") {
+    SUBCASE("Uses geometric growth policy") {
       const PoolAllocator pool(kBlockSize, kBlockCount);
-      CHECK_EQ(pool.Growth().max_capacity, GrowthPolicy::Fixed().max_capacity);
-    }
-  }
-
-  TEST_CASE("mem::PoolAllocator::ForType") {
-    SUBCASE("BlockSize is at least sizeof(T)") {
-      const PoolAllocator pool = PoolAllocator::ForType<Vec3>(8);
-      CHECK_GE(pool.BlockSize(), sizeof(Vec3));
-    }
-
-    SUBCASE("Alignment is at least alignof(T)") {
-      const PoolAllocator pool = PoolAllocator::ForType<Vec3>(8);
-      CHECK_GE(pool.Alignment(), alignof(Vec3));
-    }
-
-    SUBCASE("InitialBlockCount equals the argument") {
-      const PoolAllocator pool = PoolAllocator::ForType<Vec3>(16);
-      CHECK_EQ(pool.InitialBlockCount(), 16);
+      CHECK_EQ(pool.Growth().max_capacity,
+               GrowthPolicy::Geometric().max_capacity);
     }
   }
 
@@ -184,6 +169,23 @@ TEST_SUITE("helios::mem::PoolAllocator") {
       ref = std::move(pool);  // NOLINT(clang-diagnostic-self-move)
 
       CHECK_FALSE(ref.Empty());
+    }
+  }
+
+  TEST_CASE("mem::PoolAllocator::ForType") {
+    SUBCASE("BlockSize is at least sizeof(T)") {
+      const PoolAllocator pool = PoolAllocator::ForType<Vec3>(8);
+      CHECK_GE(pool.BlockSize(), sizeof(Vec3));
+    }
+
+    SUBCASE("Alignment is at least alignof(T)") {
+      const PoolAllocator pool = PoolAllocator::ForType<Vec3>(8);
+      CHECK_GE(pool.Alignment(), alignof(Vec3));
+    }
+
+    SUBCASE("InitialBlockCount equals the argument") {
+      const PoolAllocator pool = PoolAllocator::ForType<Vec3>(16);
+      CHECK_EQ(pool.InitialBlockCount(), 16);
     }
   }
 
@@ -250,10 +252,11 @@ TEST_SUITE("helios::mem::PoolAllocator") {
       CHECK_FALSE(pool.Full());
     }
 
-    SUBCASE("Returns true after all blocks are allocated (Fixed growth)") {
-      PoolAllocator pool(PoolAllocatorOptions{.block_size = kBlockSize,
-                                              .block_count = 2,
-                                              .growth = GrowthPolicy::Fixed()});
+    SUBCASE("Returns true after all blocks are allocated (geometric growth)") {
+      PoolAllocator pool(
+          PoolAllocatorOptions{.block_size = kBlockSize,
+                               .block_count = 2,
+                               .growth = GrowthPolicy::Geometric()});
       const void* ptr = pool.allocate(kBlockSize, kAlign);
       ptr = pool.allocate(kBlockSize, kAlign);
 
@@ -261,9 +264,10 @@ TEST_SUITE("helios::mem::PoolAllocator") {
     }
 
     SUBCASE("Returns false after one block is freed") {
-      PoolAllocator pool(PoolAllocatorOptions{.block_size = kBlockSize,
-                                              .block_count = 2,
-                                              .growth = GrowthPolicy::Fixed()});
+      PoolAllocator pool(
+          PoolAllocatorOptions{.block_size = kBlockSize,
+                               .block_count = 2,
+                               .growth = GrowthPolicy::Geometric()});
       [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
       void* const second = pool.allocate(kBlockSize, kAlign);
       pool.deallocate(second, kBlockSize, kAlign);
@@ -272,9 +276,10 @@ TEST_SUITE("helios::mem::PoolAllocator") {
     }
 
     SUBCASE("Returns false after Reset") {
-      PoolAllocator pool(PoolAllocatorOptions{.block_size = kBlockSize,
-                                              .block_count = 2,
-                                              .growth = GrowthPolicy::Fixed()});
+      PoolAllocator pool(
+          PoolAllocatorOptions{.block_size = kBlockSize,
+                               .block_count = 2,
+                               .growth = GrowthPolicy::Geometric()});
       const void* ptr = pool.allocate(kBlockSize, kAlign);
       ptr = pool.allocate(kBlockSize, kAlign);
 
@@ -575,9 +580,10 @@ TEST_SUITE("helios::mem::PoolAllocator") {
   }
 
   TEST_CASE("mem::PoolAllocator::Growth") {
-    SUBCASE("Returns Fixed policy for size_t ctor") {
+    SUBCASE("Returns geometric policy for size_t ctor") {
       const PoolAllocator pool(kBlockSize, kBlockCount);
-      CHECK_EQ(pool.Growth().max_capacity, GrowthPolicy::Fixed().max_capacity);
+      CHECK_EQ(pool.Growth().max_capacity,
+               GrowthPolicy::Geometric().max_capacity);
     }
 
     SUBCASE("Returns Linear policy when supplied via options") {
@@ -591,7 +597,8 @@ TEST_SUITE("helios::mem::PoolAllocator") {
     SUBCASE("Unchanged by allocations") {
       PoolAllocator pool(kBlockSize, kBlockCount);
       [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
-      CHECK_EQ(pool.Growth().max_capacity, GrowthPolicy::Fixed().max_capacity);
+      CHECK_EQ(pool.Growth().max_capacity,
+               GrowthPolicy::Geometric().max_capacity);
     }
   }
 
@@ -643,9 +650,10 @@ TEST_SUITE("helios::mem::PoolAllocator") {
 
   TEST_CASE("mem::PoolAllocator::deallocate") {
     SUBCASE("Freed block is returned to free list") {
-      PoolAllocator pool(PoolAllocatorOptions{.block_size = kBlockSize,
-                                              .block_count = 2,
-                                              .growth = GrowthPolicy::Fixed()});
+      PoolAllocator pool(
+          PoolAllocatorOptions{.block_size = kBlockSize,
+                               .block_count = 2,
+                               .growth = GrowthPolicy::Geometric()});
 
       [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
       void* const second = pool.allocate(kBlockSize, kAlign);
@@ -764,9 +772,37 @@ TEST_SUITE("helios::mem::PoolAllocator") {
 
       CHECK_EQ(std::ranges::adjacent_find(all), all.end());
     }
-  }
 
-  TEST_CASE("mem::PoolAllocator thread-safety: concurrent alloc+dealloc") {
+    SUBCASE("Retries when another thread consumes a grown chunk") {
+      PoolAllocator pool(PoolAllocatorOptions{
+          .block_size = 32,
+          .block_count = 1,
+          .alignment = kAlign,
+          .growth =
+              GrowthPolicy::Linear(1, std::numeric_limits<size_t>::max())});
+
+      constexpr size_t kThreads = 8;
+      constexpr size_t kAllocations = 64;
+      std::barrier start(static_cast<std::ptrdiff_t>(kThreads));
+      std::atomic<size_t> successes{0};
+      std::vector<std::thread> threads;
+      threads.reserve(kThreads);
+      for (size_t index = 0; index < kThreads; ++index) {
+        threads.emplace_back([&] {
+          start.arrive_and_wait();
+          for (size_t allocation = 0; allocation < kAllocations; ++allocation) {
+            if (pool.allocate(32, kAlign) != nullptr) {
+              successes.fetch_add(1, std::memory_order_relaxed);
+            }
+          }
+        });
+      }
+      for (auto& thread : threads) {
+        thread.join();
+      }
+      CHECK_EQ(successes.load(), kThreads * kAllocations);
+    }
+
     SUBCASE("Pool is empty after all paired alloc/dealloc across threads") {
       PoolAllocator pool(GrowingOptions(kBlockSize, 256));
 

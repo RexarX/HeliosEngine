@@ -207,10 +207,10 @@ After specialization, pass the type to `Schedule::Add` like any other system —
 
 ```cpp
 struct SpawnSet {};
+struct MovementSet {};
 
+schedule.Add(SpawnSystem{}, MoveSystem{}).InSet(MovementSet{}).Sequence();
 schedule.Set<SpawnSet>().Sequence();
-schedule.Add(SpawnSystem{}).InSet(SpawnSet{});
-schedule.Add(MoveSystem{}).After<SpawnSystem>();
 schedule.Add(RenderSystem{}).Before<MoveSystem>();
 ```
 

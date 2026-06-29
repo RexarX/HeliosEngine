@@ -55,8 +55,11 @@ helios_module(
         include/helios/ecs/schedule/schedule.hpp
         include/helios/ecs/schedule/scheduler.hpp
         include/helios/ecs/schedule/stage.hpp
+        include/helios/ecs/schedule/system_group_handle.hpp
+        include/helios/ecs/schedule/system_handle.hpp
         include/helios/ecs/schedule/system_local_data.hpp
         include/helios/ecs/schedule/system_set.hpp
+        include/helios/ecs/schedule/system_set_handle.hpp
         include/helios/ecs/schedule/system_storage.hpp
         include/helios/ecs/builtin_commands.hpp
         include/helios/ecs/builtin_messages.hpp
@@ -86,8 +89,8 @@ helios_module(
         profile
 
     USES
-        concurrentqueue PUBLIC helios::concurrentqueue::concurrentqueue
-        FlatMap PUBLIC helios::flat_map
+        concurrentqueue PUBLIC helios::lib::concurrentqueue::concurrentqueue
+        FlatMap PUBLIC helios::lib::flat_map
 
     COMPILE_DEFINITIONS
         PUBLIC
@@ -131,12 +134,15 @@ helios_module(
         tests/system/param_traits.cpp
         tests/system/system.cpp
         tests/schedule/dag.cpp
-        tests/schedule/stage.cpp
         tests/schedule/run_condition.cpp
         tests/schedule/schedule.cpp
         tests/schedule/scheduler.cpp
+        tests/schedule/stage.cpp
+        tests/schedule/system_group_handle.cpp
+        tests/schedule/system_handle.cpp
         tests/schedule/system_local_data.cpp
         tests/schedule/system_set.cpp
+        tests/schedule/system_set_handle.cpp
         tests/schedule/system_storage.cpp
         tests/schedule/executor/main_thread.cpp
         tests/schedule/executor/multi_threaded.cpp

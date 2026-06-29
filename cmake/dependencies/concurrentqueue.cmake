@@ -34,9 +34,9 @@ function(_helios_concurrentqueue_include_root_from_header _header _out_var)
   set(${_out_var} "${_include_root}" PARENT_SCOPE)
 endfunction()
 
-if(NOT TARGET helios::concurrentqueue::concurrentqueue)
+if(NOT TARGET helios::lib::concurrentqueue::concurrentqueue)
   if(TARGET concurrentqueue::concurrentqueue OR TARGET concurrentqueue)
-    add_library(helios::concurrentqueue::concurrentqueue INTERFACE IMPORTED GLOBAL)
+    add_library(helios::lib::concurrentqueue::concurrentqueue INTERFACE IMPORTED GLOBAL)
     set(_helios_cq_include_root "")
     set(_helios_cq_canonical_header "")
 
@@ -81,24 +81,24 @@ if(NOT TARGET helios::concurrentqueue::concurrentqueue)
 
       set(_helios_cq_include_root "${_helios_cq_shim_root}")
       helios_dep_log(STATUS
-          "Created helios::concurrentqueue::concurrentqueue (CPM flat → moodycamel shim)")
+          "Created helios::lib::concurrentqueue::concurrentqueue (CPM flat → moodycamel shim)")
     elseif(_helios_cq_canonical_header)
       _helios_concurrentqueue_include_root_from_header(
           "${_helios_cq_canonical_header}" _helios_cq_include_root)
 
       if(TARGET concurrentqueue::concurrentqueue)
         helios_dep_log(STATUS
-            "Created helios::concurrentqueue::concurrentqueue → concurrentqueue::concurrentqueue")
-        target_link_libraries(helios::concurrentqueue::concurrentqueue
+            "Created helios::lib::concurrentqueue::concurrentqueue → concurrentqueue::concurrentqueue")
+        target_link_libraries(helios::lib::concurrentqueue::concurrentqueue
             INTERFACE concurrentqueue::concurrentqueue)
       elseif(TARGET concurrentqueue)
-        helios_dep_log(STATUS "Created helios::concurrentqueue::concurrentqueue → concurrentqueue")
-        target_link_libraries(helios::concurrentqueue::concurrentqueue INTERFACE concurrentqueue)
+        helios_dep_log(STATUS "Created helios::lib::concurrentqueue::concurrentqueue → concurrentqueue")
+        target_link_libraries(helios::lib::concurrentqueue::concurrentqueue INTERFACE concurrentqueue)
       endif()
     endif()
 
     if(_helios_cq_include_root)
-      target_include_directories(helios::concurrentqueue::concurrentqueue SYSTEM INTERFACE
+      target_include_directories(helios::lib::concurrentqueue::concurrentqueue SYSTEM INTERFACE
           "${_helios_cq_include_root}")
       helios_dep_log(STATUS
           "concurrentqueue: <concurrentqueue/moodycamel/concurrentqueue.h> via ${_helios_cq_include_root}")
@@ -109,8 +109,8 @@ if(NOT TARGET helios::concurrentqueue::concurrentqueue)
   endif()
 endif()
 
-if(TARGET helios::concurrentqueue::concurrentqueue AND NOT TARGET helios::concurrentqueue)
+if(TARGET helios::lib::concurrentqueue::concurrentqueue AND NOT TARGET helios::lib::concurrentqueue)
   add_library(_helios_concurrentqueue_all INTERFACE)
-  target_link_libraries(_helios_concurrentqueue_all INTERFACE helios::concurrentqueue::concurrentqueue)
-  add_library(helios::concurrentqueue ALIAS _helios_concurrentqueue_all)
+  target_link_libraries(_helios_concurrentqueue_all INTERFACE helios::lib::concurrentqueue::concurrentqueue)
+  add_library(helios::lib::concurrentqueue ALIAS _helios_concurrentqueue_all)
 endif()

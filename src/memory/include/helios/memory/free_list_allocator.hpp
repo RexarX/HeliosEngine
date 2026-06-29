@@ -6,46 +6,63 @@
 
 #include <atomic>
 #include <cstddef>
+#include <cstdint>
 #include <memory_resource>
 #include <mutex>
-#include <string_view>
 
 namespace helios::mem {
 
 /// @brief Configuration for `FreeListAllocator`.
 struct FreeListAllocatorOptions {
+  /// @brief Capacity of the initial backing region in bytes.
   size_t initial_capacity = 0;
-  GrowthPolicy growth = GrowthPolicy::Fixed();
+  /// @brief Growth policy applied when additional regions are required.
+  GrowthPolicy growth = GrowthPolicy::Geometric();
 };
 
 /**
  * @brief General-purpose PMR free-list allocator.
- * @details Uses a best-fit free-list with coalescing, protected by mutex.
- *
- * Hot path is optimized for minimal lock hold time, but allocator is not
- * lock-free due to variable-size block management and coalescing.
+ * @details Best-fit free-list with coalescing under a mutex. Growable backing
+ * regions retire through epoch-based reclamation so `Owns()` can scan
+ * regions without holding the free-list mutex.
  */
 class FreeListAllocator final : public std::pmr::memory_resource {
 public:
   /**
    * @brief Constructs free-list allocator from options.
-   * @warning Triggers assertion if initial capacity is too small.
+   * @warning Triggers assertion if `options.initial_capacity` is too small or
+   * `options.growth.max_capacity < options.initial_capacity`.
    * @param options Allocator options
    */
   explicit FreeListAllocator(FreeListAllocatorOptions options) noexcept;
 
   /**
-   * @brief Constructs free-list allocator with fixed growth.
+   * @brief Constructs free-list allocator with geometric growth.
+   * @warning Triggers assertion when initial capacity is too small.
    * @param initial_capacity Initial backing capacity
    */
-  explicit FreeListAllocator(size_t initial_capacity) noexcept;
+  explicit FreeListAllocator(size_t initial_capacity) noexcept
+      : FreeListAllocator(FreeListAllocatorOptions{
+            .initial_capacity = initial_capacity,
+            .growth = GrowthPolicy::Geometric(),
+        }) {}
+
   FreeListAllocator(const FreeListAllocator&) = delete;
+
+  /**
+   * @brief Move-constructs free-list allocator from another instance.
+   * @param other Source allocator; left in empty moved-from state
+   */
   FreeListAllocator(FreeListAllocator&& other) noexcept;
-  ~FreeListAllocator() noexcept override {
-    FreeRegions(regions_.load(std::memory_order_acquire));
-  }
+  ~FreeListAllocator() noexcept override { ReleaseRegions(); }
 
   FreeListAllocator& operator=(const FreeListAllocator&) = delete;
+
+  /**
+   * @brief Move-assigns free-list state from another instance.
+   * @param other Source allocator; left in empty moved-from state
+   * @return Reference to this allocator
+   */
   FreeListAllocator& operator=(FreeListAllocator&& other) noexcept;
 
   /**
@@ -131,14 +148,18 @@ private:
     std::atomic<RegionHeader*> next{nullptr};
   };
 
+  enum class GrowState : uint8_t { kIdle, kGrowing };
+
   static RegionHeader* CreateRegion(size_t capacity) noexcept;
   void FreeRegions(RegionHeader* region) noexcept;
+  void ReleaseRegions() noexcept;
 
   [[nodiscard]] void* AllocateLocked(size_t bytes, size_t alignment) noexcept;
   void DeallocateLocked(void* ptr) noexcept;
-  [[nodiscard]] bool GrowLocked(size_t min_capacity) noexcept;
+  [[nodiscard]] bool EnsureCapacity(size_t min_capacity) noexcept;
   void InsertAndCoalesceLocked(FreeBlockHeader* block) noexcept;
   void InitializeRegionLocked(RegionHeader& region) noexcept;
+  void MoveFrom(FreeListAllocator& other) noexcept;
 
   [[nodiscard]] void* do_allocate(size_t bytes, size_t alignment) override;
   void do_deallocate(void* ptr, size_t bytes, size_t alignment) override;
@@ -149,6 +170,7 @@ private:
 
   FreeBlockHeader* free_list_ = nullptr;
   std::atomic<RegionHeader*> regions_{nullptr};
+  std::atomic<GrowState> grow_state_{GrowState::kIdle};
   size_t initial_capacity_ = 0;
   GrowthPolicy growth_;
 
@@ -189,40 +211,10 @@ inline FreeListAllocator::FreeListAllocator(
   }
 }
 
-inline FreeListAllocator::FreeListAllocator(size_t initial_capacity) noexcept
-    : FreeListAllocator(FreeListAllocatorOptions{
-          .initial_capacity = initial_capacity,
-          .growth = GrowthPolicy::Fixed(),
-      }) {}
-
-inline FreeListAllocator::FreeListAllocator(FreeListAllocator&& other) noexcept
-    : free_list_(other.free_list_),
-      regions_(other.regions_.load(std::memory_order_acquire)),
-      initial_capacity_(other.initial_capacity_),
-      growth_(other.growth_),
-      capacity_(other.capacity_.load(std::memory_order_acquire)),
-      used_memory_(other.used_memory_.load(std::memory_order_acquire)),
-      peak_usage_(other.peak_usage_.load(std::memory_order_acquire)),
-      free_block_count_(
-          other.free_block_count_.load(std::memory_order_acquire)),
-      allocation_count_(
-          other.allocation_count_.load(std::memory_order_acquire)),
-      total_allocations_(
-          other.total_allocations_.load(std::memory_order_acquire)),
-      total_deallocations_(
-          other.total_deallocations_.load(std::memory_order_acquire)),
-      alignment_waste_(other.alignment_waste_.load(std::memory_order_acquire)) {
-  other.free_list_ = nullptr;
-  other.regions_.store(nullptr, std::memory_order_release);
-  other.initial_capacity_ = 0;
-  other.capacity_.store(0, std::memory_order_release);
-  other.used_memory_.store(0, std::memory_order_release);
-  other.peak_usage_.store(0, std::memory_order_release);
-  other.free_block_count_.store(0, std::memory_order_release);
-  other.allocation_count_.store(0, std::memory_order_release);
-  other.total_allocations_.store(0, std::memory_order_release);
-  other.total_deallocations_.store(0, std::memory_order_release);
-  other.alignment_waste_.store(0, std::memory_order_release);
+inline FreeListAllocator::FreeListAllocator(
+    FreeListAllocator&& other) noexcept {
+  const std::scoped_lock lock(other.mutex_);
+  MoveFrom(other);
 }
 
 inline FreeListAllocator& FreeListAllocator::operator=(
@@ -231,58 +223,9 @@ inline FreeListAllocator& FreeListAllocator::operator=(
     return *this;
   }
 
-  auto transfer = [this, &other]() {
-    FreeRegions(regions_.load(std::memory_order_acquire));
-    free_list_ = other.free_list_;
-    regions_.store(other.regions_.load(std::memory_order_acquire),
-                   std::memory_order_release);
-    other.free_list_ = nullptr;
-    other.regions_.store(nullptr, std::memory_order_release);
-  };
-
-  if (this < &other) {
-    const std::scoped_lock self_lock(mutex_);
-    const std::scoped_lock other_lock(other.mutex_);
-    transfer();
-  } else {
-    const std::scoped_lock other_lock(other.mutex_);
-    const std::scoped_lock self_lock(mutex_);
-    transfer();
-  }
-
-  initial_capacity_ = other.initial_capacity_;
-  growth_ = other.growth_;
-  capacity_.store(other.capacity_.load(std::memory_order_acquire),
-                  std::memory_order_release);
-  used_memory_.store(other.used_memory_.load(std::memory_order_acquire),
-                     std::memory_order_release);
-  peak_usage_.store(other.peak_usage_.load(std::memory_order_acquire),
-                    std::memory_order_release);
-  free_block_count_.store(
-      other.free_block_count_.load(std::memory_order_acquire),
-      std::memory_order_release);
-  allocation_count_.store(
-      other.allocation_count_.load(std::memory_order_acquire),
-      std::memory_order_release);
-  total_allocations_.store(
-      other.total_allocations_.load(std::memory_order_acquire),
-      std::memory_order_release);
-  total_deallocations_.store(
-      other.total_deallocations_.load(std::memory_order_acquire),
-      std::memory_order_release);
-  alignment_waste_.store(other.alignment_waste_.load(std::memory_order_acquire),
-                         std::memory_order_release);
-
-  other.initial_capacity_ = 0;
-  other.capacity_.store(0, std::memory_order_release);
-  other.used_memory_.store(0, std::memory_order_release);
-  other.peak_usage_.store(0, std::memory_order_release);
-  other.free_block_count_.store(0, std::memory_order_release);
-  other.allocation_count_.store(0, std::memory_order_release);
-  other.total_allocations_.store(0, std::memory_order_release);
-  other.total_deallocations_.store(0, std::memory_order_release);
-  other.alignment_waste_.store(0, std::memory_order_release);
-
+  const std::scoped_lock lock(mutex_, other.mutex_);
+  ReleaseRegions();
+  MoveFrom(other);
   return *this;
 }
 
@@ -296,12 +239,6 @@ inline AllocatorStats FreeListAllocator::Stats() const noexcept {
           total_deallocations_.load(std::memory_order_relaxed),
       .alignment_waste = alignment_waste_.load(std::memory_order_relaxed),
   };
-}
-
-inline size_t FreeListAllocator::FreeMemory() const noexcept {
-  const size_t cap = capacity_.load(std::memory_order_relaxed);
-  const size_t used = used_memory_.load(std::memory_order_relaxed);
-  return cap >= used ? cap - used : 0;
 }
 
 }  // namespace helios::mem

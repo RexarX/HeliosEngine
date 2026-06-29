@@ -2,6 +2,8 @@
 
 #include <helios/memory/free_list_allocator.hpp>
 
+#include <details/accumulate_peak.hpp>
+#include <details/deferred_region_ebr.hpp>
 #include <helios/memory/aligned_alloc.hpp>
 #include <helios/memory/common.hpp>
 #include <helios/memory/details/profile.hpp>
@@ -12,6 +14,8 @@
 #include <cstdint>
 #include <memory>
 #include <mutex>
+#include <string_view>
+#include <utility>
 
 namespace {
 
@@ -19,17 +23,6 @@ struct AllocationHeader {
   size_t size = 0;
   size_t padding = 0;
 };
-
-void AccumulatePeak(std::atomic<size_t>& peak, size_t candidate) noexcept {
-  size_t observed = peak.load(std::memory_order_relaxed);
-  while (candidate > observed) {
-    if (peak.compare_exchange_weak(observed, candidate,
-                                   std::memory_order_relaxed,
-                                   std::memory_order_relaxed)) {
-      return;
-    }
-  }
-}
 
 }  // namespace
 
@@ -49,6 +42,7 @@ void FreeListAllocator::Reset() noexcept {
   }
 
   used_memory_.store(0, std::memory_order_release);
+  peak_usage_.store(0, std::memory_order_release);
   allocation_count_.store(0, std::memory_order_release);
   total_allocations_.store(0, std::memory_order_release);
   total_deallocations_.store(0, std::memory_order_release);
@@ -63,6 +57,7 @@ bool FreeListAllocator::Owns(const void* ptr) const noexcept {
   }
 
   const auto addr = reinterpret_cast<uintptr_t>(ptr);
+  const details::DeferredRegionEpochGuard guard;
   RegionHeader* region = regions_.load(std::memory_order_acquire);
   while (region != nullptr) {
     const auto begin = reinterpret_cast<uintptr_t>(region->buffer);
@@ -74,6 +69,49 @@ bool FreeListAllocator::Owns(const void* ptr) const noexcept {
   }
 
   return false;
+}
+
+void FreeListAllocator::MoveFrom(FreeListAllocator& other) noexcept {
+  free_list_ = std::exchange(other.free_list_, nullptr);
+  regions_.store(other.regions_.exchange(nullptr, std::memory_order_acq_rel),
+                 std::memory_order_release);
+  grow_state_.store(
+      other.grow_state_.exchange(GrowState::kIdle, std::memory_order_acq_rel),
+      std::memory_order_release);
+  initial_capacity_ = std::exchange(other.initial_capacity_, 0);
+  growth_ = std::exchange(other.growth_, {});
+  capacity_.store(other.capacity_.exchange(0, std::memory_order_acq_rel),
+                  std::memory_order_release);
+  used_memory_.store(other.used_memory_.exchange(0, std::memory_order_acq_rel),
+                     std::memory_order_release);
+  peak_usage_.store(other.peak_usage_.exchange(0, std::memory_order_acq_rel),
+                    std::memory_order_release);
+  free_block_count_.store(
+      other.free_block_count_.exchange(0, std::memory_order_acq_rel),
+      std::memory_order_release);
+  allocation_count_.store(
+      other.allocation_count_.exchange(0, std::memory_order_acq_rel),
+      std::memory_order_release);
+  total_allocations_.store(
+      other.total_allocations_.exchange(0, std::memory_order_acq_rel),
+      std::memory_order_release);
+  total_deallocations_.store(
+      other.total_deallocations_.exchange(0, std::memory_order_acq_rel),
+      std::memory_order_release);
+  alignment_waste_.store(
+      other.alignment_waste_.exchange(0, std::memory_order_acq_rel),
+      std::memory_order_release);
+}
+
+void FreeListAllocator::ReleaseRegions() noexcept {
+  FreeRegions(regions_.load(std::memory_order_acquire));
+  details::FlushDeferredRegions();
+}
+
+size_t FreeListAllocator::FreeMemory() const noexcept {
+  const size_t cap = capacity_.load(std::memory_order_relaxed);
+  const size_t used = used_memory_.load(std::memory_order_relaxed);
+  return cap >= used ? cap - used : 0;
 }
 
 auto FreeListAllocator::CreateRegion(size_t capacity) noexcept
@@ -102,13 +140,10 @@ void FreeListAllocator::FreeRegions(RegionHeader* region) noexcept {
     return;
   }
 
-  RegionHeader* current = region;
-  while (current != nullptr) {
-    RegionHeader* const next = current->next.load(std::memory_order_relaxed);
-    HELIOS_MEMORY_PROFILE_FREE(current, "FreeListAllocator");
-    std::destroy_at(current);
-    AlignedFree(current, false);
-    current = next;
+  while (region != nullptr) {
+    RegionHeader* const next = region->next.load(std::memory_order_relaxed);
+    details::RetireRegionAllocation(region);
+    region = next;
   }
 }
 
@@ -198,7 +233,7 @@ void FreeListAllocator::DeallocateLocked(void* ptr) noexcept {
   InsertAndCoalesceLocked(free_block);
 }
 
-bool FreeListAllocator::GrowLocked(size_t min_capacity) noexcept {
+bool FreeListAllocator::EnsureCapacity(size_t min_capacity) noexcept {
   const size_t current_capacity = capacity_.load(std::memory_order_relaxed);
   const size_t next_capacity = growth_.NextCapacity(
       current_capacity, SaturatingAdd(current_capacity, min_capacity));
@@ -206,20 +241,38 @@ bool FreeListAllocator::GrowLocked(size_t min_capacity) noexcept {
     return false;
   }
 
+  auto expected = GrowState::kIdle;
+  if (!grow_state_.compare_exchange_strong(expected, GrowState::kGrowing,
+                                           std::memory_order_acq_rel,
+                                           std::memory_order_acquire)) {
+    grow_state_.wait(GrowState::kGrowing, std::memory_order_acquire);
+    return true;
+  }
+
   const size_t region_capacity = next_capacity - current_capacity;
   RegionHeader* const region = CreateRegion(region_capacity);
   if (region == nullptr) [[unlikely]] {
+    grow_state_.store(GrowState::kIdle, std::memory_order_release);
+    grow_state_.notify_all();
     return false;
   }
 
-  RegionHeader* observed = regions_.load(std::memory_order_acquire);
-  do {
-    region->next.store(observed, std::memory_order_relaxed);
-  } while (!regions_.compare_exchange_weak(
-      observed, region, std::memory_order_release, std::memory_order_acquire));
+  {
+    const std::scoped_lock lock(mutex_);
+    HELIOS_MEMORY_PROFILE_LOCK_MARK(mutex_);
+    RegionHeader* observed = regions_.load(std::memory_order_acquire);
+    do {
+      region->next.store(observed, std::memory_order_relaxed);
+    } while (!regions_.compare_exchange_weak(observed, region,
+                                             std::memory_order_release,
+                                             std::memory_order_acquire));
 
-  capacity_.fetch_add(region_capacity, std::memory_order_relaxed);
-  InitializeRegionLocked(*region);
+    capacity_.fetch_add(region_capacity, std::memory_order_relaxed);
+    InitializeRegionLocked(*region);
+  }
+
+  grow_state_.store(GrowState::kIdle, std::memory_order_release);
+  grow_state_.notify_all();
   return true;
 }
 
@@ -281,17 +334,18 @@ void* FreeListAllocator::do_allocate(size_t bytes, size_t alignment) {
                 "alignment must be a power of two, got {}!", alignment);
 
   void* result = nullptr;
-  {
-    const std::scoped_lock lock(mutex_);
-    HELIOS_MEMORY_PROFILE_LOCK_MARK(mutex_);
-    result = AllocateLocked(bytes, alignment);
-    if (result == nullptr) [[unlikely]] {
-      HELIOS_VERIFY(GrowLocked(SaturatingAdd(bytes, alignment)),
-                    "Free-list allocator out of memory and cannot grow!");
+  while (result == nullptr) {
+    {
+      const std::scoped_lock lock(mutex_);
+      HELIOS_MEMORY_PROFILE_LOCK_MARK(mutex_);
       result = AllocateLocked(bytes, alignment);
-      HELIOS_VERIFY(result != nullptr,
-                    "Free-list allocator allocation failed after growth!");
+      if (result != nullptr) {
+        break;
+      }
     }
+
+    HELIOS_VERIFY(EnsureCapacity(SaturatingAdd(bytes, alignment)),
+                  "Free-list allocator out of memory and cannot grow!");
   }
 
   const auto* header = std::launder(reinterpret_cast<const AllocationHeader*>(
@@ -300,7 +354,7 @@ void* FreeListAllocator::do_allocate(size_t bytes, size_t alignment) {
 
   const size_t used =
       used_memory_.fetch_add(consumed, std::memory_order_relaxed) + consumed;
-  AccumulatePeak(peak_usage_, used);
+  details::AccumulatePeak(peak_usage_, used);
   allocation_count_.fetch_add(1, std::memory_order_relaxed);
   total_allocations_.fetch_add(1, std::memory_order_relaxed);
 

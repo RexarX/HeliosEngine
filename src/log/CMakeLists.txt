@@ -19,14 +19,14 @@ helios_module(
         PUBLIC utils
 
     USES
-        spdlog PRIVATE helios::spdlog::spdlog_header_only
+        spdlog PRIVATE helios::lib::spdlog::spdlog_header_only
 
     COMPILE_DEFINITIONS
         PRIVATE
             SPDLOG_HEADER_ONLY
 
     TEST_DEPENDENCIES
-        helios::spdlog::spdlog_header_only
+        helios::lib::spdlog::spdlog_header_only
 
     TEST_SOURCES
         tests/config.cpp

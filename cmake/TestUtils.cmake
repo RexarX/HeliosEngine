@@ -221,8 +221,8 @@ endfunction()
     Internal function to link the test framework to a target.
 ]]
 function(_helios_link_test_framework TARGET_NAME)
-  if(TARGET helios::doctest::doctest)
-    target_link_libraries(${TARGET_NAME} PRIVATE helios::doctest::doctest)
+  if(TARGET helios::lib::doctest::doctest)
+    target_link_libraries(${TARGET_NAME} PRIVATE helios::lib::doctest::doctest)
   elseif(TARGET doctest::doctest)
     target_link_libraries(${TARGET_NAME} PRIVATE doctest::doctest)
   elseif(TARGET doctest)

@@ -4,6 +4,7 @@
 
 #include <algorithm>
 #include <atomic>
+#include <barrier>
 #include <cstddef>
 #include <cstdint>
 #include <memory_resource>
@@ -52,7 +53,7 @@ TEST_SUITE("helios::mem::StackAllocator") {
     }
 
     SUBCASE("Growth policy is stored from options") {
-      const GrowthPolicy policy = GrowthPolicy::Fixed();
+      const auto policy = GrowthPolicy::Geometric();
       const StackAllocator stack(
           StackAllocatorOptions{.initial_capacity = 256, .growth = policy});
       CHECK_EQ(stack.Growth().max_capacity, policy.max_capacity);
@@ -65,9 +66,10 @@ TEST_SUITE("helios::mem::StackAllocator") {
       CHECK_EQ(stack.InitialCapacity(), 2048);
     }
 
-    SUBCASE("Uses Fixed growth policy") {
+    SUBCASE("Uses geometric growth policy") {
       const StackAllocator stack(512);
-      CHECK_EQ(stack.Growth().max_capacity, GrowthPolicy::Fixed().max_capacity);
+      CHECK_EQ(stack.Growth().max_capacity,
+               GrowthPolicy::Geometric().max_capacity);
     }
 
     SUBCASE("Stack is empty on construction") {
@@ -145,42 +147,6 @@ TEST_SUITE("helios::mem::StackAllocator") {
       ref = std::move(stack);  // NOLINT(clang-diagnostic-self-move)
 
       CHECK_FALSE(ref.Empty());
-    }
-  }
-
-  TEST_CASE("mem::StackAllocator::GetMarker") {
-    SUBCASE("Marker on fresh stack has offset zero") {
-      const StackAllocator stack(512);
-      const StackAllocator::Marker marker = stack.GetMarker();
-      CHECK_EQ(marker.offset, 0);
-    }
-
-    SUBCASE("Marker block is non-null on fresh stack") {
-      const StackAllocator stack(512);
-      const StackAllocator::Marker marker = stack.GetMarker();
-      CHECK_NE(marker.block, nullptr);
-    }
-
-    SUBCASE("Marker offset advances after each allocation") {
-      StackAllocator stack(1024);
-
-      const void* ptr = stack.allocate(64, kAlign);
-      const StackAllocator::Marker m1 = stack.GetMarker();
-      ptr = stack.allocate(64, kAlign);
-      const StackAllocator::Marker m2 = stack.GetMarker();
-
-      CHECK_GT(m2.offset, m1.offset);
-    }
-
-    SUBCASE("Two successive markers from same block share the same block ptr") {
-      StackAllocator stack(1024);
-
-      const void* ptr = stack.allocate(16, kAlign);
-      const StackAllocator::Marker m1 = stack.GetMarker();
-      ptr = stack.allocate(16, kAlign);
-      const StackAllocator::Marker m2 = stack.GetMarker();
-
-      CHECK_EQ(m1.block, m2.block);
     }
   }
 
@@ -320,6 +286,42 @@ TEST_SUITE("helios::mem::StackAllocator") {
       stack.Reset();
 
       CHECK(stack.Empty());
+    }
+  }
+
+  TEST_CASE("mem::StackAllocator::GetMarker") {
+    SUBCASE("Marker on fresh stack has offset zero") {
+      const StackAllocator stack(512);
+      const StackAllocator::Marker marker = stack.GetMarker();
+      CHECK_EQ(marker.offset, 0);
+    }
+
+    SUBCASE("Marker block is non-null on fresh stack") {
+      const StackAllocator stack(512);
+      const StackAllocator::Marker marker = stack.GetMarker();
+      CHECK_NE(marker.block, nullptr);
+    }
+
+    SUBCASE("Marker offset advances after each allocation") {
+      StackAllocator stack(1024);
+
+      const void* ptr = stack.allocate(64, kAlign);
+      const StackAllocator::Marker m1 = stack.GetMarker();
+      ptr = stack.allocate(64, kAlign);
+      const StackAllocator::Marker m2 = stack.GetMarker();
+
+      CHECK_GT(m2.offset, m1.offset);
+    }
+
+    SUBCASE("Two successive markers from same block share the same block ptr") {
+      StackAllocator stack(1024);
+
+      const void* ptr = stack.allocate(16, kAlign);
+      const StackAllocator::Marker m1 = stack.GetMarker();
+      ptr = stack.allocate(16, kAlign);
+      const StackAllocator::Marker m2 = stack.GetMarker();
+
+      CHECK_EQ(m1.block, m2.block);
     }
   }
 
@@ -477,9 +479,10 @@ TEST_SUITE("helios::mem::StackAllocator") {
   }
 
   TEST_CASE("mem::StackAllocator::Growth") {
-    SUBCASE("Returns Fixed policy for size_t ctor") {
+    SUBCASE("Returns geometric policy for size_t ctor") {
       const StackAllocator stack(256);
-      CHECK_EQ(stack.Growth().max_capacity, GrowthPolicy::Fixed().max_capacity);
+      CHECK_EQ(stack.Growth().max_capacity,
+               GrowthPolicy::Geometric().max_capacity);
     }
 
     SUBCASE("Returns policy supplied via options") {
@@ -493,7 +496,8 @@ TEST_SUITE("helios::mem::StackAllocator") {
     SUBCASE("Unchanged by allocations") {
       StackAllocator stack(512);
       [[maybe_unused]] const void* _ = stack.allocate(32, kAlign);
-      CHECK_EQ(stack.Growth().max_capacity, GrowthPolicy::Fixed().max_capacity);
+      CHECK_EQ(stack.Growth().max_capacity,
+               GrowthPolicy::Geometric().max_capacity);
     }
   }
 
@@ -690,6 +694,34 @@ TEST_SUITE("helios::mem::StackAllocator") {
 
       CHECK_EQ(std::ranges::adjacent_find(all), all.end());
     }
+
+    SUBCASE("Retries when another thread consumes a grown block") {
+      StackAllocator stack(StackAllocatorOptions{
+          .initial_capacity = 128,
+          .growth =
+              GrowthPolicy::Linear(128, std::numeric_limits<size_t>::max())});
+
+      constexpr size_t kThreads = 8;
+      constexpr size_t kAllocations = 64;
+      std::barrier start(static_cast<std::ptrdiff_t>(kThreads));
+      std::atomic<size_t> successes{0};
+      std::vector<std::thread> threads;
+      threads.reserve(kThreads);
+      for (size_t index = 0; index < kThreads; ++index) {
+        threads.emplace_back([&] {
+          start.arrive_and_wait();
+          for (size_t allocation = 0; allocation < kAllocations; ++allocation) {
+            if (stack.allocate(32, kAlign) != nullptr) {
+              successes.fetch_add(1, std::memory_order_relaxed);
+            }
+          }
+        });
+      }
+      for (auto& thread : threads) {
+        thread.join();
+      }
+      CHECK_EQ(successes.load(), kThreads * kAllocations);
+    }
   }
 
   TEST_CASE("mem::StackAllocator thread-safety: concurrent deallocate") {
@@ -725,6 +757,50 @@ TEST_SUITE("helios::mem::StackAllocator") {
 
       // All threads executed the deallocate path without crashing.
       CHECK_EQ(dealloc_count.load(), kThreads);
+    }
+
+    SUBCASE(
+        "CAS-backed LIFO deallocate survives barrier-synchronized contention") {
+      StackAllocator stack(StackAllocatorOptions{
+          .initial_capacity = 65536,
+          .growth =
+              GrowthPolicy::Linear(65536, std::numeric_limits<size_t>::max())});
+
+      constexpr size_t kThreads = 8;
+      constexpr size_t kRounds = 128;
+      std::barrier round_start(static_cast<std::ptrdiff_t>(kThreads));
+      std::atomic<size_t> allocation_count{0};
+      std::atomic<size_t> successful_deallocations{0};
+
+      std::vector<std::thread> threads;
+      threads.reserve(kThreads);
+      for (size_t index = 0; index < kThreads; ++index) {
+        threads.emplace_back([&] {
+          for (size_t round = 0; round < kRounds; ++round) {
+            round_start.arrive_and_wait();
+            void* const ptr = stack.allocate(32, kAlign);
+            if (ptr != nullptr) {
+              allocation_count.fetch_add(1, std::memory_order_relaxed);
+            }
+            round_start.arrive_and_wait();
+            if (ptr != nullptr) {
+              const size_t before = stack.Stats().total_deallocations;
+              stack.deallocate(ptr, 32, kAlign);
+              if (stack.Stats().total_deallocations > before) {
+                successful_deallocations.fetch_add(1,
+                                                   std::memory_order_relaxed);
+              }
+            }
+          }
+        });
+      }
+      for (auto& thread : threads) {
+        thread.join();
+      }
+
+      CHECK_EQ(allocation_count.load(), kThreads * kRounds);
+      CHECK_GT(successful_deallocations.load(), 0);
+      CHECK_LE(successful_deallocations.load(), allocation_count.load());
     }
   }
 }  // TEST_SUITE

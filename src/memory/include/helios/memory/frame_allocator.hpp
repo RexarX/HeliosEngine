@@ -13,10 +13,15 @@
 
 namespace helios::mem {
 
-/// @brief Configuration for `NFrameAllocator`.
+/**
+ * @brief Configuration for `FrameAllocator`.
+ * @details Controls per-frame arena capacity and growth behavior.
+ */
 struct FrameAllocatorOptions {
+  /// @brief Initial per-frame arena capacity in bytes.
   size_t initial_capacity = 0;
-  GrowthPolicy growth = GrowthPolicy::Fixed();
+  /// @brief Growth policy applied to each frame arena.
+  GrowthPolicy growth = GrowthPolicy::Geometric();
 };
 
 /**
@@ -30,35 +35,62 @@ struct FrameAllocatorOptions {
  * @warning `Advance()` and `Reset()` must not run concurrently with allocate.
  * @tparam N Number of frame buffers, must be >= 1
  */
-template <size_t N>
+template <size_t N = 2>
   requires(N >= 1)
-class NFrameAllocator final : public std::pmr::memory_resource {
+class FrameAllocator final : public std::pmr::memory_resource {
 public:
   /**
    * @brief Constructs N-frame allocator from options.
-   * @warning Triggers assertion if `options.initial_capacity == 0`.
+   * @warning Triggers assertion if `options.initial_capacity == 0` or
+   * `options.growth.max_capacity < options.initial_capacity`.
    * @param options Frame allocator options
    */
-  explicit NFrameAllocator(FrameAllocatorOptions options) noexcept;
+  explicit FrameAllocator(FrameAllocatorOptions options) noexcept;
 
   /**
-   * @brief Constructs N-frame allocator with fixed-growth arenas.
+   * @brief Constructs N-frame allocator with geometrically growing arenas.
    * @warning Triggers assertion if `initial_capacity == 0`.
    * @param initial_capacity Initial per-frame arena capacity
    */
-  explicit NFrameAllocator(size_t initial_capacity) noexcept;
+  explicit FrameAllocator(size_t initial_capacity) noexcept
+      : FrameAllocator(
+            FrameAllocatorOptions{.initial_capacity = initial_capacity,
+                                  .growth = GrowthPolicy::Geometric()}) {}
 
-  NFrameAllocator(const NFrameAllocator&) = delete;
-  NFrameAllocator(NFrameAllocator&& other) noexcept;
-  ~NFrameAllocator() noexcept override = default;
+  FrameAllocator(const FrameAllocator&) = delete;
 
-  NFrameAllocator& operator=(const NFrameAllocator&) = delete;
-  NFrameAllocator& operator=(NFrameAllocator&& other) noexcept;
+  /**
+   * @brief Move-constructs frame allocator from another instance.
+   * @param other Source allocator; frame index and arenas are transferred
+   */
+  FrameAllocator(FrameAllocator&& other) noexcept
+      : arenas_(std::move(other.arenas_)) {
+    MoveFrom(other);
+  }
 
-  /// @brief Advances frame index and resets new current arena.
+  ~FrameAllocator() noexcept override = default;
+
+  FrameAllocator& operator=(const FrameAllocator&) = delete;
+
+  /**
+   * @brief Move-assigns frame allocator state from another instance.
+   * @param other Source allocator; left in default moved-from state
+   * @return Reference to this allocator
+   */
+  FrameAllocator& operator=(FrameAllocator&& other) noexcept;
+
+  /**
+   * @brief Advances to the next frame and resets its arena.
+   * @details Wraps the frame index modulo `N`. The newly current arena is
+   * soft-reset, reclaiming all prior allocations in that slot.
+   * @warning Must not be called concurrently with `allocate` or `deallocate`.
+   */
   void Advance() noexcept;
 
-  /// @brief Resets all arenas and sets frame index to zero.
+  /**
+   * @brief Resets all frame arenas and returns to frame zero.
+   * @warning Must not be called concurrently with `allocate` or `deallocate`.
+   */
   void Reset() noexcept;
 
   /**
@@ -148,6 +180,8 @@ private:
     return arenas_[frame_index_];
   }
 
+  void MoveFrom(FrameAllocator& other) noexcept;
+
   template <size_t... Indexes>
   [[nodiscard]] static auto BuildArenas(const FrameAllocatorOptions& options,
                                         std::index_sequence<Indexes...> /*seq*/)
@@ -180,48 +214,38 @@ private:
 
 template <size_t N>
   requires(N >= 1)
-inline NFrameAllocator<N>::NFrameAllocator(
-    FrameAllocatorOptions options) noexcept
+inline FrameAllocator<N>::FrameAllocator(FrameAllocatorOptions options) noexcept
     : arenas_(BuildArenas(options, std::make_index_sequence<N>{})),
       initial_capacity_(options.initial_capacity),
       growth_(options.growth) {
   HELIOS_ASSERT(initial_capacity_ > 0,
-                "initial_capacity must be greater than zero");
+                "initial_capacity must be greater than zero!");
 }
 
 template <size_t N>
   requires(N >= 1)
-inline NFrameAllocator<N>::NFrameAllocator(size_t initial_capacity) noexcept
-    : NFrameAllocator(
-          FrameAllocatorOptions{.initial_capacity = initial_capacity,
-                                .growth = GrowthPolicy::Fixed()}) {}
-
-template <size_t N>
-  requires(N >= 1)
-inline NFrameAllocator<N>::NFrameAllocator(NFrameAllocator&& other) noexcept
-    : arenas_(std::move(other.arenas_)),
-      initial_capacity_(std::exchange(other.initial_capacity_, 0)),
-      growth_(other.growth_),
-      frame_index_(std::exchange(other.frame_index_, 0)) {}
-
-template <size_t N>
-  requires(N >= 1)
-inline NFrameAllocator<N>& NFrameAllocator<N>::operator=(
-    NFrameAllocator&& other) noexcept {
+inline FrameAllocator<N>& FrameAllocator<N>::operator=(
+    FrameAllocator&& other) noexcept {
   if (this == &other) [[unlikely]] {
     return *this;
   }
 
   arenas_ = std::move(other.arenas_);
-  initial_capacity_ = std::exchange(other.initial_capacity_, 0);
-  growth_ = other.growth_;
-  frame_index_ = std::exchange(other.frame_index_, 0);
+  MoveFrom(other);
   return *this;
 }
 
 template <size_t N>
   requires(N >= 1)
-inline void NFrameAllocator<N>::Advance() noexcept {
+inline void FrameAllocator<N>::MoveFrom(FrameAllocator& other) noexcept {
+  initial_capacity_ = std::exchange(other.initial_capacity_, 0);
+  growth_ = other.growth_;
+  frame_index_ = std::exchange(other.frame_index_, 0);
+}
+
+template <size_t N>
+  requires(N >= 1)
+inline void FrameAllocator<N>::Advance() noexcept {
   HELIOS_MEMORY_PROFILE_SCOPE();
   HELIOS_MEMORY_PROFILE_ZONE_VALUE(frame_index_);
 
@@ -231,7 +255,7 @@ inline void NFrameAllocator<N>::Advance() noexcept {
 
 template <size_t N>
   requires(N >= 1)
-inline void NFrameAllocator<N>::Reset() noexcept {
+inline void FrameAllocator<N>::Reset() noexcept {
   HELIOS_MEMORY_PROFILE_SCOPE();
 
   for (auto& arena : arenas_) {
@@ -242,7 +266,7 @@ inline void NFrameAllocator<N>::Reset() noexcept {
 
 template <size_t N>
   requires(N >= 1)
-inline AllocatorStats NFrameAllocator<N>::AggregateStats() const noexcept {
+inline AllocatorStats FrameAllocator<N>::AggregateStats() const noexcept {
   AllocatorStats aggregate{};
   for (const auto& arena : arenas_) {
     const AllocatorStats stats = arena.Stats();
@@ -264,14 +288,14 @@ inline AllocatorStats NFrameAllocator<N>::AggregateStats() const noexcept {
 
 template <size_t N>
   requires(N >= 1)
-inline ArenaAllocator& NFrameAllocator<N>::Arena(size_t index) noexcept {
+inline ArenaAllocator& FrameAllocator<N>::Arena(size_t index) noexcept {
   HELIOS_ASSERT(index < N, "index '{}' is out of range [0, {})!", index, N);
   return arenas_[index];
 }
 
 template <size_t N>
   requires(N >= 1)
-inline const ArenaAllocator& NFrameAllocator<N>::Arena(
+inline const ArenaAllocator& FrameAllocator<N>::Arena(
     size_t index) const noexcept {
   HELIOS_ASSERT(index < N, "index '{}' is out of range [0, {})!", index, N);
   return arenas_[index];
@@ -280,15 +304,12 @@ inline const ArenaAllocator& NFrameAllocator<N>::Arena(
 template <size_t N>
   requires(N >= 1)
 template <size_t... Indexes>
-inline auto NFrameAllocator<N>::BuildArenas(
+inline auto FrameAllocator<N>::BuildArenas(
     const FrameAllocatorOptions& options,
     std::index_sequence<Indexes...> /*seq*/) -> std::array<ArenaAllocator, N> {
   return {((void)Indexes, ArenaAllocator(ArenaOptions{
                               .initial_capacity = options.initial_capacity,
                               .growth = options.growth}))...};
 }
-
-using FrameAllocator = NFrameAllocator<1>;
-using DoubleFrameAllocator = NFrameAllocator<2>;
 
 }  // namespace helios::mem

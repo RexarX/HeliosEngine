@@ -39,8 +39,11 @@
 #include <helios/ecs/schedule/schedule.hpp>
 #include <helios/ecs/schedule/scheduler.hpp>
 #include <helios/ecs/schedule/stage.hpp>
+#include <helios/ecs/schedule/system_group_handle.hpp>
+#include <helios/ecs/schedule/system_handle.hpp>
 #include <helios/ecs/schedule/system_local_data.hpp>
 #include <helios/ecs/schedule/system_set.hpp>
+#include <helios/ecs/schedule/system_set_handle.hpp>
 #include <helios/ecs/schedule/system_storage.hpp>
 #include <helios/ecs/system/access_decl.hpp>
 #include <helios/ecs/system/access_policy.hpp>

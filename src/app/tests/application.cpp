@@ -160,6 +160,7 @@ struct CustomSchedule {
 };
 
 struct SetOne {};
+struct SetTwo {};
 
 }  // namespace
 
@@ -643,8 +644,31 @@ TEST_SUITE("helios::app::App") {
     SUBCASE("AddSystems registers both systems in the same schedule") {
       App app;
       app.InsertResources(CounterResource{});
-      [[maybe_unused]] const auto set =
-          app.AddSystems(kUpdate, IncrementSystem{}, IncrementSystem{});
+      app.AddSystems(kUpdate, IncrementSystem{}, IncrementSystem{});
+      app.Initialize();
+      app.Update();
+      CHECK_EQ(app.GetWorld().ReadResource<CounterResource>().value, 2);
+    }
+
+    SUBCASE("AddSystems with InSet runs both systems in the named set") {
+      App app;
+      app.InsertResources(CounterResource{});
+      app.AddSystems(kUpdate, IncrementSystem{}, IncrementSystem{})
+          .InSet(SetOne{});
+      app.Initialize();
+      app.Update();
+      CHECK_EQ(app.GetWorld().ReadResource<CounterResource>().value, 2);
+    }
+
+    SUBCASE("Configured set ordering affects bulk-added systems") {
+      App app;
+      app.InsertResources(CounterResource{});
+
+      auto movement =
+          app.AddSystems(kUpdate, IncrementSystem{}, IncrementSystem{})
+              .InSet(SetOne{});
+      app.ConfigureSet(kUpdate, SetTwo{}).After(movement);
+
       app.Initialize();
       app.Update();
       CHECK_EQ(app.GetWorld().ReadResource<CounterResource>().value, 2);

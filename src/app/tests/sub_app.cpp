@@ -285,9 +285,25 @@ TEST_SUITE("helios::app::SubApp") {
     SUBCASE("AddSystems marks scheduler dirty") {
       SubApp sub_app("RenderSubApp");
       sub_app.InsertResources(CounterResource{});
-      [[maybe_unused]] const auto set =
-          sub_app.AddSystems(kUpdate, IncrementSystem{}, IncrementSystem{});
+      sub_app.AddSystems(kUpdate, IncrementSystem{}, IncrementSystem{});
       CHECK(sub_app.GetScheduler().IsDirty());
+    }
+
+    SUBCASE("AddSystems with InSet runs both systems") {
+      App app(2);
+      SubApp sub_app("RenderSubApp");
+      sub_app.InsertResources(CounterResource{});
+      sub_app.AddSystems(kUpdate, IncrementSystem{}, IncrementSystem{})
+          .InSet(kSetOne);
+      app.InsertSubApp(kNamedSubApp, std::move(sub_app));
+      app.Initialize();
+      app.Update();
+
+      CHECK_EQ(app.GetSubApp(kNamedSubApp)
+                   .GetWorld()
+                   .ReadResource<CounterResource>()
+                   .value,
+               2);
     }
   }
 

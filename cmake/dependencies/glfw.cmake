@@ -19,13 +19,13 @@ helios_dependency(
         "GLFW_INSTALL OFF"
 
     ALIASES
-        helios::glfw::glfw glfw::glfw
-        helios::glfw::glfw glfw3
-        helios::glfw::glfw glfw
+        helios::lib::glfw::glfw glfw::glfw
+        helios::lib::glfw::glfw glfw3
+        helios::lib::glfw::glfw glfw
 )
 
-if(TARGET helios::glfw::glfw AND NOT TARGET helios::glfw)
+if(TARGET helios::lib::glfw::glfw AND NOT TARGET helios::lib::glfw)
   add_library(_helios_glfw_all INTERFACE)
-  target_link_libraries(_helios_glfw_all INTERFACE helios::glfw::glfw)
-  add_library(helios::glfw ALIAS _helios_glfw_all)
+  target_link_libraries(_helios_glfw_all INTERFACE helios::lib::glfw::glfw)
+  add_library(helios::lib::glfw ALIAS _helios_glfw_all)
 endif()

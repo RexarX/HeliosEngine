@@ -1,4 +1,3 @@
-#include <iterator>
 #include <pch.hpp>
 
 #include <helios/ecs/schedule/schedule.hpp>
@@ -11,6 +10,8 @@
 #include <cstddef>
 #include <expected>
 #include <format>
+#include <iterator>
+#include <ranges>
 #include <span>
 #include <unordered_map>
 #include <utility>
@@ -161,6 +162,7 @@ void Schedule::Clear() {
   sets_.clear();
   conditions_cache_.clear();
   plan_.reset();
+  next_anonymous_group_id_ = 1;
   is_dirty_ = true;
   ++generation_;
 }
@@ -170,7 +172,7 @@ size_t Schedule::AddEntry(SystemStorage&& storage) {
 
   for (const auto& entry : system_entries_) {
     if (entry.storage.id == storage.id) {
-      storage.id = SystemId::From(storage.name + "#" + std::to_string(index));
+      storage.id = SystemId::From(std::format("{}#{}", storage.name, index));
       break;
     }
   }

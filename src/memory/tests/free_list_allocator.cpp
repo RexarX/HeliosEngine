@@ -52,7 +52,7 @@ TEST_SUITE("helios::mem::FreeListAllocator") {
     }
 
     SUBCASE("Growth policy is stored correctly") {
-      const GrowthPolicy policy = GrowthPolicy::Fixed();
+      const auto policy = GrowthPolicy::Geometric();
       const FreeListAllocator alloc(FreeListAllocatorOptions{
           .initial_capacity = kMinCap, .growth = policy});
       CHECK_EQ(alloc.Growth().max_capacity, policy.max_capacity);
@@ -65,9 +65,10 @@ TEST_SUITE("helios::mem::FreeListAllocator") {
       CHECK_GE(alloc.Capacity(), kMinCap);
     }
 
-    SUBCASE("Uses Fixed growth policy") {
+    SUBCASE("Uses geometric growth policy") {
       const FreeListAllocator alloc(kMinCap);
-      CHECK_EQ(alloc.Growth().max_capacity, GrowthPolicy::Fixed().max_capacity);
+      CHECK_EQ(alloc.Growth().max_capacity,
+               GrowthPolicy::Geometric().max_capacity);
     }
 
     SUBCASE("Allocator is empty on construction") {
@@ -457,9 +458,10 @@ TEST_SUITE("helios::mem::FreeListAllocator") {
   }
 
   TEST_CASE("mem::FreeListAllocator::Growth") {
-    SUBCASE("Returns Fixed policy for size_t ctor") {
+    SUBCASE("Returns geometric policy for size_t ctor") {
       const FreeListAllocator alloc(kMinCap);
-      CHECK_EQ(alloc.Growth().max_capacity, GrowthPolicy::Fixed().max_capacity);
+      CHECK_EQ(alloc.Growth().max_capacity,
+               GrowthPolicy::Geometric().max_capacity);
     }
 
     SUBCASE("Returns policy supplied via options") {
@@ -473,7 +475,8 @@ TEST_SUITE("helios::mem::FreeListAllocator") {
     SUBCASE("Unchanged by allocations") {
       FreeListAllocator alloc(kMinCap);
       [[maybe_unused]] const void* _ = alloc.allocate(32, kAlign);
-      CHECK_EQ(alloc.Growth().max_capacity, GrowthPolicy::Fixed().max_capacity);
+      CHECK_EQ(alloc.Growth().max_capacity,
+               GrowthPolicy::Geometric().max_capacity);
     }
   }
 

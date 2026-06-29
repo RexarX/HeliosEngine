@@ -160,8 +160,20 @@ macro(helios_cpm_add_package)
     set(CMAKE_BUILD_TYPE "${_helios_dep_build_type}" CACHE STRING "" FORCE)
   endif()
 
+  # CPM dependencies must not inherit parent LTO: mixed C/C++ compiler versions
+  # (e.g. gcc-15 vs g++-16) produce incompatible -flto bytecode at link time.
+  set(_helios_saved_ipo_release "${CMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE}")
+  set(_helios_saved_ipo_relwithdebinfo "${CMAKE_INTERPROCEDURAL_OPTIMIZATION_RELWITHDEBINFO}")
+  set(CMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE OFF)
+  set(CMAKE_INTERPROCEDURAL_OPTIMIZATION_RELWITHDEBINFO OFF)
+
   # Add the package
   CPMAddPackage(${_cpm_args})
+
+  set(CMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE "${_helios_saved_ipo_release}")
+  set(CMAKE_INTERPROCEDURAL_OPTIMIZATION_RELWITHDEBINFO "${_helios_saved_ipo_relwithdebinfo}")
+  unset(_helios_saved_ipo_release)
+  unset(_helios_saved_ipo_relwithdebinfo)
 
   if(DEFINED _helios_saved_build_type)
     set(CMAKE_BUILD_TYPE "${_helios_saved_build_type}" CACHE STRING "" FORCE)

@@ -26,18 +26,18 @@ helios_dependency(
         "SPDLOG_FMT_EXTERNAL OFF"
 
     ALIASES
-        helios::spdlog spdlog::spdlog
-        helios::spdlog spdlog::spdlog_header_only
-        helios::spdlog spdlog
-        helios::spdlog::spdlog_header_only spdlog::spdlog_header_only
-        helios::spdlog::spdlog_header_only spdlog::spdlog
-        helios::spdlog::spdlog_header_only spdlog
+        helios::lib::spdlog spdlog::spdlog
+        helios::lib::spdlog spdlog::spdlog_header_only
+        helios::lib::spdlog spdlog
+        helios::lib::spdlog::spdlog_header_only spdlog::spdlog_header_only
+        helios::lib::spdlog::spdlog_header_only spdlog::spdlog
+        helios::lib::spdlog::spdlog_header_only spdlog
 )
 
 # Bridge fallback: if only compiled spdlog exists, create header-only compat alias
-if(TARGET helios::spdlog AND NOT TARGET helios::spdlog::spdlog_header_only)
+if(TARGET helios::lib::spdlog AND NOT TARGET helios::lib::spdlog::spdlog_header_only)
   add_library(_helios_spdlog_ho_compat INTERFACE)
-  target_link_libraries(_helios_spdlog_ho_compat INTERFACE helios::spdlog)
-  add_library(helios::spdlog::spdlog_header_only ALIAS _helios_spdlog_ho_compat)
+  target_link_libraries(_helios_spdlog_ho_compat INTERFACE helios::lib::spdlog)
+  add_library(helios::lib::spdlog::spdlog_header_only ALIAS _helios_spdlog_ho_compat)
   _helios_mark_target_system(_helios_spdlog_ho_compat)
 endif()

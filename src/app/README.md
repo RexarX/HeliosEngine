@@ -77,7 +77,8 @@ struct RequestExit {
 int main() {
   helios::app::App app;
 
-  app.AddSystems(helios::app::kUpdate, MoveEntities{}, RequestExit{});
+  app.AddSystems(helios::app::kUpdate, MoveEntities{}, RequestExit{})
+      .Sequence();
   app.InsertResources(/* resources... */);
   app.AddMessages<helios::app::AppExit>();
 

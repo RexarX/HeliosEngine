@@ -332,9 +332,9 @@ endfunction()
 
         # Ordered fallback — first existing target wins for the alias
         ALIASES
-            helios::spdlog  spdlog::spdlog
-            helios::spdlog  spdlog::spdlog_header_only
-            helios::spdlog  spdlog
+            helios::lib::spdlog spdlog::spdlog
+            helios::lib::spdlog spdlog::spdlog_header_only
+            helios::lib::spdlog spdlog
     )
 ]]
 function(helios_dependency)
@@ -488,7 +488,7 @@ function(_helios_dep_create_aliases DEP_NAME ALIASES_LIST)
   set(_cur_sources "")
 
   foreach(_item ${ALIASES_LIST})
-    if(_item MATCHES "^helios::")
+    if(_item MATCHES "^helios::lib::")
       if(_cur_helios AND _cur_sources)
         _helios_dep_create_single_alias("${_cur_helios}" "${_cur_sources}")
       endif()
@@ -611,7 +611,7 @@ macro(helios_dep_begin)
       unset("${_PKG_NAME}_FIND_VERSION")
     endif()
 
-    if(TARGET ${_PKG_NAME} OR TARGET helios::${_PKG_NAME})
+    if(TARGET ${_PKG_NAME} OR TARGET helios::lib::${_PKG_NAME})
       if(NOT ${_PKG_NAME}_FIND_VERSION)
         set("${_PKG_NAME}_FOUND" ON)
         set("${_PKG_NAME}_SKIP_HELIOS_FIND" ON)

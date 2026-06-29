@@ -20,7 +20,7 @@ helios_module(
         PUBLIC utils
 
     USES
-        FlatMap PUBLIC helios::flat_map
+        FlatMap PUBLIC helios::lib::flat_map
 
     TEST_SOURCES
         tests/callable_buffer.cpp

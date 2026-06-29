@@ -28,8 +28,8 @@ helios_dependency(
 
     # Ordered fallback chain — first existing target wins for the alias
     ALIASES
-        helios::package package::package
-        helios::package package
+        helios::lib::package package::package
+        helios::lib::package package
 )
 
 # For advanced cases that cannot be expressed via helios_dependency,

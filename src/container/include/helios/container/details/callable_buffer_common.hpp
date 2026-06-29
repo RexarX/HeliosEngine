@@ -145,23 +145,44 @@ template <typename T, typename... Sigs>
 concept DefaultOpCallable =
     (sizeof...(Sigs) > 0) && DefaultOpCallableHelper<T, Sigs...>::kValue;
 
+/// @brief Traits for member function pointers used by method validation.
+template <typename>
+struct MemberMethodTraits;
+
+template <typename C, typename R, typename... Args>
+struct MemberMethodTraits<R (C::*)(Args...)> {
+  using ArgsTuple = std::tuple<Args...>;
+  static constexpr bool kReturnsVoid = std::is_void_v<R>;
+};
+
+template <typename C, typename R, typename... Args>
+struct MemberMethodTraits<R (C::*)(Args...) const> {
+  using ArgsTuple = std::tuple<Args...>;
+  static constexpr bool kReturnsVoid = std::is_void_v<R>;
+};
+
 /// @brief Helper to check if a method is invocable on T with signature
 /// arguments.
 template <auto Method, typename T, typename ArgsTuple>
 struct MethodInvocableWithHelper : std::false_type {};
 
 template <auto Method, typename T, typename... Args>
-  requires std::invocable<decltype(Method), T&, Args...> &&
-           std::is_void_v<std::invoke_result_t<decltype(Method), T&, Args...>>
-struct MethodInvocableWithHelper<Method, T, std::tuple<Args...>>
-    : std::true_type {};
+struct MethodInvocableWithHelper<Method, T, std::tuple<Args...>> {
+  static constexpr bool kValue = [] {
+    using MethodType = std::remove_cvref_t<decltype(Method)>;
+    if constexpr (std::is_member_function_pointer_v<MethodType>) {
+      using Traits = MemberMethodTraits<MethodType>;
+      return Traits::kReturnsVoid &&
+             std::same_as<typename Traits::ArgsTuple, std::tuple<Args...>> &&
+             std::is_invocable_v<decltype(Method), T&, Args...>;
+    } else {
+      return std::is_invocable_v<decltype(Method), Args...> &&
+             std::is_void_v<std::invoke_result_t<decltype(Method), Args...>>;
+    }
+  }();
 
-template <auto Method, typename T, typename... Args>
-  requires std::invocable<decltype(Method), Args...> &&
-           (!std::invocable<decltype(Method), T&, Args...>) &&
-           std::is_void_v<std::invoke_result_t<decltype(Method), Args...>>
-struct MethodInvocableWithHelper<Method, T, std::tuple<Args...>>
-    : std::true_type {};
+  static constexpr bool value = kValue;
+};
 
 /// @brief Concept: a method is invocable on T with signature arguments and
 /// returns void.
@@ -169,18 +190,36 @@ template <auto Method, typename T, typename ArgsTuple>
 concept MethodInvocableWith =
     MethodInvocableWithHelper<Method, T, ArgsTuple>::value;
 
+/// @brief Recursive method/signature validation (avoids Clang NTTP pack
+/// issues).
+template <size_t Index, typename T, typename SignatureTuple, auto... Methods>
+struct AllMethodsValidHelperRec;
+
+template <size_t Index, typename T, typename... Signatures, auto Head,
+          auto... Tail>
+struct AllMethodsValidHelperRec<Index, T, std::tuple<Signatures...>, Head,
+                                Tail...> {
+  static constexpr bool kValue =
+      MethodInvocableWithHelper<
+          Head, T, NthSignatureArgsT<Index, Signatures...>>::value &&
+      AllMethodsValidHelperRec<Index + 1, T, std::tuple<Signatures...>,
+                               Tail...>::kValue;
+};
+
+template <size_t Index, typename T, typename... Signatures>
+struct AllMethodsValidHelperRec<Index, T, std::tuple<Signatures...>> {
+  static constexpr bool kValue = true;
+};
+
 /// @brief Helper to validate all methods match their corresponding signatures.
 template <typename T, typename SignatureTuple, auto... Methods>
 struct AllMethodsValidHelper;
 
 template <typename T, typename... Signatures, auto... Methods>
 struct AllMethodsValidHelper<T, std::tuple<Signatures...>, Methods...> {
-  static constexpr bool kValue = []<size_t... Indices>(
-                                     std::index_sequence<Indices...>) {
-    return (MethodInvocableWith<kNthMethod<Indices, Methods...>, T,
-                                NthSignatureArgsT<Indices, Signatures...>> &&
-            ...);
-  }(std::make_index_sequence<sizeof...(Methods)>{});
+  static constexpr bool kValue =
+      AllMethodsValidHelperRec<0, T, std::tuple<Signatures...>,
+                               Methods...>::kValue;
 };
 
 /// @brief Concept: all methods are valid for their corresponding signatures.

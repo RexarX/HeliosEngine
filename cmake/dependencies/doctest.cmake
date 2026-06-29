@@ -17,12 +17,12 @@ helios_dependency(
         "DOCTEST_WITH_MAIN_IN_STATIC_LIB OFF"
 
     ALIASES
-        helios::doctest::doctest doctest::doctest
-        helios::doctest::doctest doctest
+        helios::lib::doctest::doctest doctest::doctest
+        helios::lib::doctest::doctest doctest
 )
 
-if(TARGET helios::doctest::doctest AND NOT TARGET helios::doctest)
+if(TARGET helios::lib::doctest::doctest AND NOT TARGET helios::lib::doctest)
   add_library(_helios_doctest_all INTERFACE)
-  target_link_libraries(_helios_doctest_all INTERFACE helios::doctest::doctest)
-  add_library(helios::doctest ALIAS _helios_doctest_all)
+  target_link_libraries(_helios_doctest_all INTERFACE helios::lib::doctest::doctest)
+  add_library(helios::lib::doctest ALIAS _helios_doctest_all)
 endif()

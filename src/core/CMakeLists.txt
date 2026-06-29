@@ -23,8 +23,8 @@ helios_module(
         PUBLIC utils
 
     USES
-        stduuid PUBLIC helios::stduuid::stduuid
-        Boost PRIVATE helios::boost::stacktrace
+        stduuid PUBLIC helios::lib::stduuid::stduuid
+        Boost PRIVATE helios::lib::boost::stacktrace
 
     COMPILE_DEFINITIONS
         PUBLIC
@@ -72,8 +72,8 @@ else()
       if(DL_LIBRARY)
         target_link_libraries(helios_module_core PRIVATE ${DL_LIBRARY})
       endif()
-      if(TARGET helios::boost::stacktrace_backtrace)
-        target_link_libraries(helios_module_core PRIVATE helios::boost::stacktrace_backtrace)
+      if(TARGET helios::lib::boost::stacktrace_backtrace)
+        target_link_libraries(helios_module_core PRIVATE helios::lib::boost::stacktrace_backtrace)
       endif()
       get_filename_component(BACKTRACE_INCLUDE_DIR "${BACKTRACE_LIBRARY}" DIRECTORY)
       get_filename_component(BACKTRACE_INCLUDE_DIR "${BACKTRACE_INCLUDE_DIR}/include" ABSOLUTE)
@@ -82,8 +82,8 @@ else()
       endif()
       target_compile_definitions(helios_module_core PRIVATE BOOST_STACKTRACE_USE_BACKTRACE)
     else()
-      if(TARGET helios::boost::stacktrace_addr2line)
-        target_link_libraries(helios_module_core PRIVATE helios::boost::stacktrace_addr2line)
+      if(TARGET helios::lib::boost::stacktrace_addr2line)
+        target_link_libraries(helios_module_core PRIVATE helios::lib::boost::stacktrace_addr2line)
       endif()
       if(DL_LIBRARY)
         target_link_libraries(helios_module_core PRIVATE ${DL_LIBRARY})

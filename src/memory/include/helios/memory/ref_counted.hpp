@@ -56,12 +56,22 @@ class AtomicRefCounted;
 template <typename Derived>
 class RcFromThis {
 public:
+  /// @brief Default-constructs with reference count zero.
   RcFromThis() noexcept = default;
+
+  /// @brief Copy-constructs; does not copy the reference count.
   RcFromThis(const RcFromThis& /*other*/) noexcept {}
+
+  /// @brief Move-constructs; does not transfer the reference count.
   RcFromThis(RcFromThis&& /*other*/) noexcept {}
+
+  /// @brief Destroys the embedded counter; does not delete the derived object.
   ~RcFromThis() noexcept = default;
 
+  /// @brief Copy-assigns; does not affect the reference count.
   RcFromThis& operator=(const RcFromThis& /*other*/) noexcept { return *this; }
+
+  /// @brief Move-assigns; does not affect the reference count.
   RcFromThis& operator=(RcFromThis&& /*other*/) noexcept { return *this; }
 
   /**
@@ -126,14 +136,24 @@ inline bool RcFromThis<Derived>::Release() noexcept {
 template <typename Derived>
 class ArcFromThis {
 public:
+  /// @brief Default-constructs with reference count zero.
   ArcFromThis() noexcept = default;
+
+  /// @brief Copy-constructs; does not copy the reference count.
   ArcFromThis(const ArcFromThis& /*other*/) noexcept {}
+
+  /// @brief Move-constructs; does not transfer the reference count.
   ArcFromThis(ArcFromThis&& /*other*/) noexcept {}
+
+  /// @brief Destroys the embedded counter; does not delete the derived object.
   ~ArcFromThis() noexcept = default;
 
+  /// @brief Copy-assigns; does not affect the reference count.
   ArcFromThis& operator=(const ArcFromThis& /*other*/) noexcept {
     return *this;
   }
+
+  /// @brief Move-assigns; does not affect the reference count.
   ArcFromThis& operator=(ArcFromThis&& /*other*/) noexcept { return *this; }
 
   /**
@@ -281,7 +301,16 @@ public:
     requires std::default_initializable<AllocatorType>
       : RefCounted(ptr, AllocatorType{}) {}
 
+  /**
+   * @brief Copy-constructs a handle sharing ownership with `other`.
+   * @param other Handle to copy from
+   */
   RefCounted(const RefCounted& other) noexcept;
+
+  /**
+   * @brief Move-constructs a handle transferring ownership from `other`.
+   * @param other Handle to move from; left null after the operation
+   */
   RefCounted(RefCounted&& other) noexcept;
 
   // NOLINTBEGIN(hicpp-explicit-conversions)
@@ -308,19 +337,47 @@ public:
   // NOLINTEND(google-explicit-constructor)
   // NOLINTEND(hicpp-explicit-conversions)
 
+  /// @brief Destroys the handle and decrements the reference count.
   ~RefCounted() noexcept { DecRef(); }
 
+  /**
+   * @brief Copy-assigns shared ownership from `other`.
+   * @param other Handle to copy from
+   * @return Reference to this handle
+   */
   RefCounted& operator=(const RefCounted& other) noexcept;
+
+  /**
+   * @brief Move-assigns ownership from `other`.
+   * @param other Handle to move from; left null after the operation
+   * @return Reference to this handle
+   */
   RefCounted& operator=(RefCounted&& other) noexcept;
 
+  /**
+   * @brief Converting copy-assignment from a compatible (derived) handle.
+   * @tparam Other Type convertible to `Derived*`
+   * @param other Handle to copy from
+   * @return Reference to this handle
+   */
   template <typename Other>
     requires std::convertible_to<Other*, Derived*>
   RefCounted& operator=(const RefCounted<Other, Allocator>& other) noexcept;
 
+  /**
+   * @brief Converting move-assignment from a compatible (derived) handle.
+   * @tparam Other Type convertible to `Derived*`
+   * @param other Handle to move from; left null after the operation
+   * @return Reference to this handle
+   */
   template <typename Other>
     requires std::convertible_to<Other*, Derived*>
   RefCounted& operator=(RefCounted<Other, Allocator>&& other) noexcept;
 
+  /**
+   * @brief Assigns null, releasing any currently managed object.
+   * @return Reference to this handle
+   */
   RefCounted& operator=(std::nullptr_t) noexcept;
 
   /**
@@ -337,20 +394,51 @@ public:
    */
   [[nodiscard]] Derived* Release() noexcept;
 
+  /**
+   * @brief Dereferences the managed object.
+   * @warning Triggers assertion when the handle is null.
+   * @return Reference to the managed object
+   */
   [[nodiscard]] Derived& operator*() const noexcept;
+
+  /**
+   * @brief Accesses the managed object through pointer syntax.
+   * @warning Triggers assertion when the handle is null.
+   * @return Pointer to the managed object
+   */
   [[nodiscard]] Derived* operator->() const noexcept;
 
+  /**
+   * @brief Checks whether the handle owns an object.
+   * @return True when non-null, false otherwise
+   */
   [[nodiscard]] explicit operator bool() const noexcept {
     return ptr_ != nullptr;
   }
 
+  /**
+   * @brief Compares handle identity by managed pointer address.
+   * @param other Handle to compare against
+   * @return True when both handles refer to the same object
+   */
   [[nodiscard]] bool operator==(const RefCounted& other) const noexcept {
     return ptr_ == other.ptr_;
   }
+
+  /**
+   * @brief Checks whether the handle is null.
+   * @return True when no object is managed
+   */
   [[nodiscard]] bool operator==(std::nullptr_t) const noexcept {
     return ptr_ == nullptr;
   }
 
+  /**
+   * @brief Compares handle identity against a compatible derived handle.
+   * @tparam Other Derived type convertible to `Derived*`
+   * @param other Handle to compare against
+   * @return True when both handles refer to the same object
+   */
   template <typename Other>
   [[nodiscard]] bool operator==(
       const RefCounted<Other, Allocator>& other) const noexcept {
@@ -678,7 +766,16 @@ public:
     requires std::default_initializable<AllocatorType>
       : AtomicRefCounted(ptr, AllocatorType{}) {}
 
+  /**
+   * @brief Copy-constructs a handle sharing ownership with `other`.
+   * @param other Handle to copy from
+   */
   AtomicRefCounted(const AtomicRefCounted& other) noexcept;
+
+  /**
+   * @brief Move-constructs a handle transferring ownership from `other`.
+   * @param other Handle to move from; left null after the operation
+   */
   AtomicRefCounted(AtomicRefCounted&& other) noexcept;
 
   // NOLINTBEGIN(hicpp-explicit-conversions)
@@ -705,21 +802,49 @@ public:
   // NOLINTEND(hicpp-explicit-conversions)
   // NOLINTEND(google-explicit-constructor)
 
+  /// @brief Destroys the handle and decrements the reference count.
   ~AtomicRefCounted() noexcept { DecRef(); }
 
+  /**
+   * @brief Copy-assigns shared ownership from `other`.
+   * @param other Handle to copy from
+   * @return Reference to this handle
+   */
   AtomicRefCounted& operator=(const AtomicRefCounted& other) noexcept;
+
+  /**
+   * @brief Move-assigns ownership from `other`.
+   * @param other Handle to move from; left null after the operation
+   * @return Reference to this handle
+   */
   AtomicRefCounted& operator=(AtomicRefCounted&& other) noexcept;
 
+  /**
+   * @brief Converting copy-assignment from a compatible (derived) handle.
+   * @tparam Other Type convertible to `Derived*`
+   * @param other Handle to copy from
+   * @return Reference to this handle
+   */
   template <typename Other>
     requires std::convertible_to<Other*, Derived*>
   AtomicRefCounted& operator=(
       const AtomicRefCounted<Other, Allocator>& other) noexcept;
 
+  /**
+   * @brief Converting move-assignment from a compatible (derived) handle.
+   * @tparam Other Type convertible to `Derived*`
+   * @param other Handle to move from; left null after the operation
+   * @return Reference to this handle
+   */
   template <typename Other>
     requires std::convertible_to<Other*, Derived*>
   AtomicRefCounted& operator=(
       AtomicRefCounted<Other, Allocator>&& other) noexcept;
 
+  /**
+   * @brief Assigns null, releasing any currently managed object.
+   * @return Reference to this handle
+   */
   AtomicRefCounted& operator=(std::nullptr_t) noexcept;
 
   /**
@@ -736,20 +861,51 @@ public:
    */
   [[nodiscard]] Derived* Release() noexcept;
 
+  /**
+   * @brief Dereferences the managed object.
+   * @warning Triggers assertion when the handle is null.
+   * @return Reference to the managed object
+   */
   [[nodiscard]] Derived& operator*() const noexcept;
+
+  /**
+   * @brief Accesses the managed object through pointer syntax.
+   * @warning Triggers assertion when the handle is null.
+   * @return Pointer to the managed object
+   */
   [[nodiscard]] Derived* operator->() const noexcept;
 
+  /**
+   * @brief Checks whether the handle owns an object.
+   * @return True when non-null, false otherwise
+   */
   [[nodiscard]] explicit operator bool() const noexcept {
     return ptr_ != nullptr;
   }
 
+  /**
+   * @brief Compares handle identity by managed pointer address.
+   * @param other Handle to compare against
+   * @return True when both handles refer to the same object
+   */
   [[nodiscard]] bool operator==(const AtomicRefCounted& other) const noexcept {
     return ptr_ == other.ptr_;
   }
+
+  /**
+   * @brief Checks whether the handle is null.
+   * @return True when no object is managed
+   */
   [[nodiscard]] bool operator==(std::nullptr_t) const noexcept {
     return ptr_ == nullptr;
   }
 
+  /**
+   * @brief Compares handle identity against a compatible derived handle.
+   * @tparam Other Derived type convertible to `Derived*`
+   * @param other Handle to compare against
+   * @return True when both handles refer to the same object
+   */
   template <typename Other>
   [[nodiscard]] bool operator==(
       const AtomicRefCounted<Other, Allocator>& other) const noexcept {
@@ -982,15 +1138,18 @@ using Rc = RefCounted<T, Allocator>;
 template <typename T, typename Allocator = std::allocator<T>>
 using Arc = AtomicRefCounted<T, Allocator>;
 
-/// @brief Alias for `RefCounted<T>` using polymorphic memory allocator.
-/// @details Allows using `std::pmr::memory_resource` for dynamic allocator
-/// selection.
+/**
+ * @brief Alias for `RefCounted<T>` using polymorphic memory allocator.
+ * @details Allows using `std::pmr::memory_resource` for dynamic allocator
+ * selection.
+ */
 template <typename T>
 using PmrRc = RefCounted<T, std::pmr::polymorphic_allocator<T>>;
 
-/// @brief Alias for `AtomicRefCounted<T>` using polymorphic memory allocator.
-/// @details Allows using `std::pmr::memory_resource` for dynamic allocator
-/// selection. Thread-safe intrusive reference-counted handle with PMR support.
+/**
+ * @brief Alias for `AtomicRefCounted<T>` using polymorphic memory allocator.
+ * @details Thread-safe intrusive reference-counted handle with PMR support.
+ */
 template <typename T>
 using PmrArc = AtomicRefCounted<T, std::pmr::polymorphic_allocator<T>>;
 
@@ -1153,6 +1312,6 @@ template <typename T, typename... Args>
 }
 
 template <typename T, typename... Args>
-auto MakeArcWith(std::nullptr_t, Args&&...) -> PmrRc<T> = delete;
+auto MakeArcWith(std::nullptr_t, Args&&...) -> PmrArc<T> = delete;
 
 }  // namespace helios::mem

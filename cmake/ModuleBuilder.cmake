@@ -904,6 +904,11 @@ function(helios_module)
       target_precompile_headers(${_test_target_name} PRIVATE "${MODULE_PCH}")
     endif()
 
+    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/tests")
+      target_include_directories(${_test_target_name} PRIVATE
+        "${CMAKE_CURRENT_SOURCE_DIR}/tests")
+    endif()
+
     add_test(NAME ${_test_target_name} COMMAND ${_test_target_name})
     set_tests_properties(${_test_target_name} PROPERTIES
             LABELS "${MODULE_NAME};unit"

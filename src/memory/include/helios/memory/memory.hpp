@@ -4,6 +4,10 @@
 #include <helios/memory/allocator_traits.hpp>
 #include <helios/memory/arena_allocator.hpp>
 #include <helios/memory/common.hpp>
+#include <helios/memory/fixed_arena_allocator.hpp>
+#include <helios/memory/fixed_free_list_allocator.hpp>
+#include <helios/memory/fixed_pool_allocator.hpp>
+#include <helios/memory/fixed_stack_allocator.hpp>
 #include <helios/memory/frame_allocator.hpp>
 #include <helios/memory/free_list_allocator.hpp>
 #include <helios/memory/pool_allocator.hpp>

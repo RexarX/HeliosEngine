@@ -1768,23 +1768,25 @@ inline void BasicQuery<WorldT, Allocator, Args...>::RefreshArchetypes() const {
 
     bool has_all_comp = [this, &arch_id]<typename... CompTypes>(
                             std::tuple<CompTypes...>*) {
-      return (([this, &arch_id]() -> bool {
-                if constexpr (details::kIsPointerAccess<CompTypes>) {
-                  return true;
-                }
-                using RawType = details::ComponentTypeExtractor_t<CompTypes>;
-                const auto type_idx = ComponentTypeIndex::From<RawType>();
-                const auto* meta =
-                    std::as_const(components_.get()).MetadataByIndex(type_idx);
-                if (meta == nullptr) {
-                  return false;
-                }
-                if (meta->storage_type == ComponentStorageType::kSparseSet) {
-                  return true;
-                }
-                return arch_id.Contains(type_idx);
-              }()) &&
-              ...);
+      return (
+          ([this, &arch_id]() -> bool {
+            if constexpr (details::kIsPointerAccess<CompTypes>) {
+              return true;
+            } else {
+              using RawType = details::ComponentTypeExtractor_t<CompTypes>;
+              const auto type_idx = ComponentTypeIndex::From<RawType>();
+              const auto* meta =
+                  std::as_const(components_.get()).MetadataByIndex(type_idx);
+              if (meta == nullptr) {
+                return false;
+              }
+              if (meta->storage_type == ComponentStorageType::kSparseSet) {
+                return true;
+              }
+              return arch_id.Contains(type_idx);
+            }
+          }()) &&
+          ...);
     }(static_cast<typename Split::Components*>(nullptr));
     if (!has_all_comp) {
       continue;

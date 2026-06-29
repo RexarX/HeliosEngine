@@ -11,12 +11,12 @@ helios_dependency(
         "STDUUID_BUILD_TESTS OFF"
 
     ALIASES
-        helios::stduuid::stduuid stduuid::stduuid
-        helios::stduuid::stduuid stduuid
+        helios::lib::stduuid::stduuid stduuid::stduuid
+        helios::lib::stduuid::stduuid stduuid
 )
 
-if(TARGET helios::stduuid::stduuid AND NOT TARGET helios::stduuid)
+if(TARGET helios::lib::stduuid::stduuid AND NOT TARGET helios::lib::stduuid)
   add_library(_helios_stduuid_all INTERFACE)
-  target_link_libraries(_helios_stduuid_all INTERFACE helios::stduuid::stduuid)
-  add_library(helios::stduuid ALIAS _helios_stduuid_all)
+  target_link_libraries(_helios_stduuid_all INTERFACE helios::lib::stduuid::stduuid)
+  add_library(helios::lib::stduuid ALIAS _helios_stduuid_all)
 endif()

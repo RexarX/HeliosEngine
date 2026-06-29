@@ -2,6 +2,7 @@
 
 #include <helios/memory/arena_allocator.hpp>
 
+#include <details/accumulate_peak.hpp>
 #include <helios/assert.hpp>
 #include <helios/memory/aligned_alloc.hpp>
 #include <helios/memory/common.hpp>
@@ -10,23 +11,25 @@
 #include <atomic>
 #include <cstddef>
 #include <memory>
-
-namespace {
-
-void AccumulatePeak(std::atomic<size_t>& peak, size_t candidate) noexcept {
-  size_t observed = peak.load(std::memory_order_relaxed);
-  while (candidate > observed) {
-    if (peak.compare_exchange_weak(observed, candidate,
-                                   std::memory_order_relaxed,
-                                   std::memory_order_relaxed)) {
-      return;
-    }
-  }
-}
-
-}  // namespace
+#include <utility>
 
 namespace helios::mem {
+
+ArenaAllocator::ArenaAllocator(ArenaOptions options) noexcept
+    : initial_capacity_(options.initial_capacity), growth_(options.growth) {
+  HELIOS_ASSERT(initial_capacity_ > 0,
+                "initial_capacity must be greater than zero!");
+  HELIOS_ASSERT(growth_.max_capacity >= initial_capacity_,
+                "max_capacity '{}' must be >= initial_capacity '{}'!",
+                growth_.max_capacity, initial_capacity_);
+
+  Block* const initial_block = CreateBlock(initial_capacity_);
+  HELIOS_VERIFY(initial_block != nullptr, "Failed to allocate initial block!");
+
+  head_.store(initial_block, std::memory_order_release);
+  total_capacity_.store(initial_capacity_, std::memory_order_relaxed);
+  block_count_.store(1, std::memory_order_relaxed);
+}
 
 void ArenaAllocator::Reset() noexcept {
   HELIOS_MEMORY_PROFILE_SCOPE_N("helios::mem::ArenaAllocator::Reset");
@@ -43,6 +46,38 @@ void ArenaAllocator::Reset() noexcept {
   total_allocations_.store(0, std::memory_order_release);
   total_deallocations_.store(0, std::memory_order_release);
   alignment_waste_.store(0, std::memory_order_release);
+}
+
+void ArenaAllocator::MoveFrom(ArenaAllocator& other) noexcept {
+  head_.store(other.head_.exchange(nullptr, std::memory_order_acq_rel),
+              std::memory_order_release);
+  grow_state_.store(
+      other.grow_state_.exchange(GrowState::kIdle, std::memory_order_acq_rel),
+      std::memory_order_release);
+  initial_capacity_ = std::exchange(other.initial_capacity_, 0);
+  growth_ = std::exchange(other.growth_, {});
+  total_capacity_.store(
+      other.total_capacity_.exchange(0, std::memory_order_acq_rel),
+      std::memory_order_release);
+  total_allocated_.store(
+      other.total_allocated_.exchange(0, std::memory_order_acq_rel),
+      std::memory_order_release);
+  peak_usage_.store(other.peak_usage_.exchange(0, std::memory_order_acq_rel),
+                    std::memory_order_release);
+  allocation_count_.store(
+      other.allocation_count_.exchange(0, std::memory_order_acq_rel),
+      std::memory_order_release);
+  total_allocations_.store(
+      other.total_allocations_.exchange(0, std::memory_order_acq_rel),
+      std::memory_order_release);
+  total_deallocations_.store(
+      other.total_deallocations_.exchange(0, std::memory_order_acq_rel),
+      std::memory_order_release);
+  alignment_waste_.store(
+      other.alignment_waste_.exchange(0, std::memory_order_acq_rel),
+      std::memory_order_release);
+  block_count_.store(other.block_count_.exchange(0, std::memory_order_acq_rel),
+                     std::memory_order_release);
 }
 
 auto ArenaAllocator::CreateBlock(size_t capacity) noexcept -> Block* {
@@ -62,6 +97,18 @@ auto ArenaAllocator::CreateBlock(size_t capacity) noexcept -> Block* {
   block->offset.store(0, std::memory_order_relaxed);
   block->next.store(nullptr, std::memory_order_relaxed);
   return block;
+}
+
+void ArenaAllocator::PublishBlock(Block* block) noexcept {
+  Block* expected_head = head_.load(std::memory_order_acquire);
+  do {
+    block->next.store(expected_head, std::memory_order_relaxed);
+  } while (!head_.compare_exchange_weak(expected_head, block,
+                                        std::memory_order_release,
+                                        std::memory_order_acquire));
+
+  total_capacity_.fetch_add(block->capacity, std::memory_order_relaxed);
+  block_count_.fetch_add(1, std::memory_order_relaxed);
 }
 
 void ArenaAllocator::FreeChain(Block* head) noexcept {
@@ -120,8 +167,7 @@ bool ArenaAllocator::EnsureCapacity(size_t min_capacity) noexcept {
                                            std::memory_order_acq_rel,
                                            std::memory_order_acquire)) {
     grow_state_.wait(GrowState::kGrowing, std::memory_order_acquire);
-    Block* const new_head = head_.load(std::memory_order_acquire);
-    return new_head != nullptr && new_head->capacity >= min_capacity;
+    return true;
   }
 
   Block* new_block = CreateBlock(desired_capacity);
@@ -137,18 +183,6 @@ bool ArenaAllocator::EnsureCapacity(size_t min_capacity) noexcept {
   return true;
 }
 
-void ArenaAllocator::PublishBlock(Block* block) noexcept {
-  Block* expected_head = head_.load(std::memory_order_acquire);
-  do {
-    block->next.store(expected_head, std::memory_order_relaxed);
-  } while (!head_.compare_exchange_weak(expected_head, block,
-                                        std::memory_order_release,
-                                        std::memory_order_acquire));
-
-  total_capacity_.fetch_add(block->capacity, std::memory_order_relaxed);
-  block_count_.fetch_add(1, std::memory_order_relaxed);
-}
-
 void* ArenaAllocator::do_allocate(size_t bytes, size_t alignment) {
   HELIOS_MEMORY_PROFILE_SCOPE_N("helios::mem::ArenaAllocator::do_allocate");
   HELIOS_MEMORY_PROFILE_ZONE_VALUE(bytes);
@@ -161,23 +195,19 @@ void* ArenaAllocator::do_allocate(size_t bytes, size_t alignment) {
                 "alignment must be a power of two, got {}!", alignment);
 
   const size_t effective_alignment = std::max(alignment, kMinAlignment);
-  Block* head = head_.load(std::memory_order_acquire);
-
   Reservation reservation{};
-  if (head != nullptr) {
-    reservation = TryReserve(*head, bytes, effective_alignment);
-  }
+  for (;;) {
+    Block* const head = head_.load(std::memory_order_acquire);
+    if (head != nullptr) {
+      reservation = TryReserve(*head, bytes, effective_alignment);
+      if (reservation.ptr != nullptr) {
+        break;
+      }
+    }
 
-  if (reservation.ptr == nullptr) {
     const size_t min_capacity = SaturatingAdd(bytes, effective_alignment);
     HELIOS_VERIFY(EnsureCapacity(min_capacity),
                   "Unable to grow arena block chain!");
-
-    head = head_.load(std::memory_order_acquire);
-    HELIOS_ASSERT(head != nullptr, "Head block must exist after grow!");
-    reservation = TryReserve(*head, bytes, effective_alignment);
-    HELIOS_VERIFY(reservation.ptr != nullptr,
-                  "Reservation failed after successful arena growth!");
   }
 
   allocation_count_.fetch_add(1, std::memory_order_relaxed);
@@ -185,7 +215,7 @@ void* ArenaAllocator::do_allocate(size_t bytes, size_t alignment) {
   alignment_waste_.fetch_add(reservation.padding, std::memory_order_relaxed);
   const size_t total =
       total_allocated_.fetch_add(bytes, std::memory_order_relaxed) + bytes;
-  AccumulatePeak(peak_usage_, total);
+  details::AccumulatePeak(peak_usage_, total);
 
   return reservation.ptr;
 }

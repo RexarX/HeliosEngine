@@ -4,6 +4,7 @@
 
 #include <algorithm>
 #include <atomic>
+#include <barrier>
 #include <cstddef>
 #include <cstdint>
 #include <memory_resource>
@@ -50,7 +51,7 @@ TEST_SUITE("helios::mem::ArenaAllocator") {
     }
 
     SUBCASE("Growth policy is stored from options") {
-      const GrowthPolicy policy = GrowthPolicy::Fixed();
+      const auto policy = GrowthPolicy::Geometric();
       const ArenaAllocator arena(
           ArenaOptions{.initial_capacity = 256, .growth = policy});
       CHECK_EQ(arena.Growth().max_capacity, policy.max_capacity);
@@ -63,10 +64,11 @@ TEST_SUITE("helios::mem::ArenaAllocator") {
       CHECK_EQ(arena.InitialCapacity(), 2048);
     }
 
-    SUBCASE("Uses Fixed growth policy") {
-      // Fixed means max_capacity == initial_capacity, no growth allowed.
+    SUBCASE("Uses geometric growth policy") {
+      // The size constructor uses the default geometric growth policy.
       const ArenaAllocator arena(512);
-      CHECK_EQ(arena.Growth().max_capacity, GrowthPolicy::Fixed().max_capacity);
+      CHECK_EQ(arena.Growth().max_capacity,
+               GrowthPolicy::Geometric().max_capacity);
     }
 
     SUBCASE("BlockCount is 1 on construction") {
@@ -378,9 +380,10 @@ TEST_SUITE("helios::mem::ArenaAllocator") {
   }
 
   TEST_CASE("mem::ArenaAllocator::Growth") {
-    SUBCASE("Returns Fixed policy when constructed with size_t ctor") {
+    SUBCASE("Returns geometric policy when constructed with size_t ctor") {
       const ArenaAllocator arena(256);
-      CHECK_EQ(arena.Growth().max_capacity, GrowthPolicy::Fixed().max_capacity);
+      CHECK_EQ(arena.Growth().max_capacity,
+               GrowthPolicy::Geometric().max_capacity);
     }
 
     SUBCASE("Returns policy supplied in ArenaOptions") {
@@ -394,7 +397,8 @@ TEST_SUITE("helios::mem::ArenaAllocator") {
     SUBCASE("Unchanged after allocations") {
       ArenaAllocator arena(512);
       [[maybe_unused]] const void* _ = arena.allocate(32, kAlign);
-      CHECK_EQ(arena.Growth().max_capacity, GrowthPolicy::Fixed().max_capacity);
+      CHECK_EQ(arena.Growth().max_capacity,
+               GrowthPolicy::Geometric().max_capacity);
     }
   }
 
@@ -576,6 +580,34 @@ TEST_SUITE("helios::mem::ArenaAllocator") {
 
       const auto dup = std::ranges::adjacent_find(all);
       CHECK_EQ(dup, all.end());
+    }
+
+    SUBCASE("Retries when another thread consumes a grown block") {
+      ArenaAllocator arena(ArenaOptions{
+          .initial_capacity = 64,
+          .growth =
+              GrowthPolicy::Linear(64, std::numeric_limits<size_t>::max())});
+
+      constexpr size_t kThreads = 8;
+      constexpr size_t kAllocations = 64;
+      std::barrier start(static_cast<std::ptrdiff_t>(kThreads));
+      std::atomic<size_t> successes{0};
+      std::vector<std::thread> threads;
+      threads.reserve(kThreads);
+      for (size_t index = 0; index < kThreads; ++index) {
+        threads.emplace_back([&] {
+          start.arrive_and_wait();
+          for (size_t allocation = 0; allocation < kAllocations; ++allocation) {
+            if (arena.allocate(32, kAlign) != nullptr) {
+              successes.fetch_add(1, std::memory_order_relaxed);
+            }
+          }
+        });
+      }
+      for (auto& thread : threads) {
+        thread.join();
+      }
+      CHECK_EQ(successes.load(), kThreads * kAllocations);
     }
   }
 

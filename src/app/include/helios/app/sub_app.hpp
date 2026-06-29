@@ -327,19 +327,21 @@ public:
   }
 
   /**
-   * @brief Adds multiple functor systems to the same schedule as an anonymous
-   * set.
+   * @brief Adds multiple functor systems to the same schedule as a system
+   * group.
+   * @details Returns a `SystemGroupHandle` for configuring the batch. Use
+   * `InSet` on the returned handle to assign every system to a named set.
    * @note Not thread-safe.
    * @warning Triggers assertion if an update is in progress.
    * @tparam L Schedule label type
    * @tparam Systems System types satisfying `FunctorSystemTrait`
    * @param label Target schedule label
    * @param systems System instances
-   * @return Handle for configuring the anonymous system set
+   * @return Handle for configuring the system group
    */
   template <ecs::ScheduleTrait L, ecs::FunctorSystemTrait... Systems>
     requires(sizeof...(Systems) > 1)
-  ecs::SystemSetHandle AddSystems(const L& label, Systems&&... systems) {
+  ecs::SystemGroupHandle AddSystems(const L& label, Systems&&... systems) {
     return scheduler_.In(label).Add(std::forward<Systems>(systems)...);
   }
 

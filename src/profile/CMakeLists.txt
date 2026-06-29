@@ -1,7 +1,4 @@
 option(HELIOS_PROFILE_BUNDLE_TRACY "Bundle Tracy profiler" ON)
-option(HELIOS_PROFILE_GLOBAL_ALLOC
-       "Build optional global operator new/delete profiling hooks"
-       ON)
 
 helios_module(
     NAME profile
@@ -41,7 +38,7 @@ helios_module(
         PUBLIC utils
 
     USES
-        concurrentqueue PUBLIC helios::concurrentqueue::concurrentqueue
+        concurrentqueue PUBLIC helios::lib::concurrentqueue::concurrentqueue
 
     COMPILE_DEFINITIONS
         PUBLIC
@@ -60,38 +57,8 @@ helios_module(
 
 if(HELIOS_PROFILE_BUNDLE_TRACY)
   helios_require_dependency(tracy)
-  target_link_libraries(helios_module_profile PUBLIC helios::tracy::TracyClient)
+  target_link_libraries(helios_module_profile PUBLIC helios::lib::tracy::TracyClient)
   if(TARGET helios_profile_tests)
-    target_link_libraries(helios_profile_tests PRIVATE helios::tracy::TracyClient)
+    target_link_libraries(helios_profile_tests PRIVATE helios::lib::tracy::TracyClient)
   endif()
 endif()
-
-if(HELIOS_PROFILE_GLOBAL_ALLOC)
-  add_library(helios_profile_global_alloc OBJECT
-      src/global_alloc.cpp
-  )
-  add_library(helios::profile::global_alloc ALIAS helios_profile_global_alloc)
-
-  helios_target_set_cxx_standard(helios_profile_global_alloc STANDARD 23)
-  helios_target_set_platform(helios_profile_global_alloc)
-  helios_target_set_warnings(helios_profile_global_alloc)
-  helios_target_set_optimization(helios_profile_global_alloc)
-  helios_target_set_folder(helios_profile_global_alloc "Modules/profile")
-
-  target_link_libraries(helios_profile_global_alloc PUBLIC helios::module::profile)
-  target_compile_definitions(helios_profile_global_alloc
-      PUBLIC HELIOS_PROFILE_GLOBAL_ALLOC
-  )
-endif()
-
-function(helios_profile_link_global_alloc TARGET_NAME)
-  if(NOT TARGET ${TARGET_NAME})
-    message(FATAL_ERROR "helios_profile_link_global_alloc: target '${TARGET_NAME}' not found")
-  endif()
-  if(NOT TARGET helios_profile_global_alloc)
-    message(FATAL_ERROR
-        "helios_profile_link_global_alloc: global alloc hooks are disabled "
-        "(enable with -DHELIOS_PROFILE_GLOBAL_ALLOC=ON)")
-  endif()
-  target_link_libraries(${TARGET_NAME} PRIVATE helios_profile_global_alloc)
-endfunction()

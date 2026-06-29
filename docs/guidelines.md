@@ -121,7 +121,7 @@ helios_module(
         PUBLIC core
         ...
     USES
-        concurrentqueue PUBLIC helios::concurrentqueue::concurrentqueue
+        concurrentqueue PUBLIC helios::lib::concurrentqueue::concurrentqueue
     TEST_SOURCES
         tests/main.cpp
         ...

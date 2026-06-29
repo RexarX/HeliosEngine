@@ -23,28 +23,14 @@ TEST_SUITE("helios::mem::CommonConstants") {
 
 TEST_SUITE("helios::mem::GrowthMode") {
   TEST_CASE("mem::GrowthMode::enumerators are distinct") {
-    CHECK_NE(static_cast<int>(GrowthMode::kFixed),
-             static_cast<int>(GrowthMode::kLinear));
-    CHECK_NE(static_cast<int>(GrowthMode::kFixed),
-             static_cast<int>(GrowthMode::kGeometric));
     CHECK_NE(static_cast<int>(GrowthMode::kLinear),
              static_cast<int>(GrowthMode::kGeometric));
   }
 }
 
 TEST_SUITE("helios::mem::GrowthPolicy") {
-  TEST_CASE("mem::GrowthPolicy::Fixed") {
-    const GrowthPolicy policy = GrowthPolicy::Fixed(1024);
-
-    CHECK_EQ(policy.mode, GrowthMode::kFixed);
-    CHECK_EQ(policy.max_capacity, 1024);
-    CHECK_EQ(policy.linear_step, 0);
-    CHECK_EQ(policy.geometric_numerator, 2);
-    CHECK_EQ(policy.geometric_denominator, 1);
-  }
-
   TEST_CASE("mem::GrowthPolicy::Linear") {
-    const GrowthPolicy policy = GrowthPolicy::Linear(64, 4096);
+    const auto policy = GrowthPolicy::Linear(64, 4096);
 
     CHECK_EQ(policy.mode, GrowthMode::kLinear);
     CHECK_EQ(policy.linear_step, 64);
@@ -63,21 +49,10 @@ TEST_SUITE("helios::mem::GrowthPolicy") {
     CHECK_EQ(policy.linear_step, 0);
   }
 
-  TEST_CASE("mem::GrowthPolicy::Growable") {
-    CHECK_FALSE(GrowthPolicy::Fixed().Growable());
-    CHECK(GrowthPolicy::Linear(1).Growable());
-    CHECK(GrowthPolicy::Geometric().Growable());
-  }
-
   TEST_CASE("mem::GrowthPolicy::NextCapacity") {
-    SUBCASE("Fixed returns current when already sufficient") {
-      const GrowthPolicy policy = GrowthPolicy::Fixed();
+    SUBCASE("Returns current when already sufficient") {
+      const auto policy = GrowthPolicy::Geometric();
       CHECK_EQ(policy.NextCapacity(256, 128), 256);
-    }
-
-    SUBCASE("Fixed returns zero when growth is needed") {
-      const GrowthPolicy policy = GrowthPolicy::Fixed();
-      CHECK_EQ(policy.NextCapacity(128, 256), 0);
     }
 
     SUBCASE("Linear grows by configured step") {
@@ -133,14 +108,14 @@ TEST_SUITE("helios::mem::AllocatorStats") {
 
 TEST_SUITE("helios::mem::MemoryErrorToString") {
   TEST_CASE("mem::MemoryErrorToString::maps each error to a message") {
-    CHECK(MemoryErrorToString(MemoryError::kOutOfMemory) == "out of memory");
+    CHECK(MemoryErrorToString(MemoryError::kOutOfMemory) == "Out of memory");
     CHECK(MemoryErrorToString(MemoryError::kInvalidAlignment) ==
-          "invalid alignment");
-    CHECK(MemoryErrorToString(MemoryError::kInvalidSize) == "invalid size");
+          "Invalid alignment");
+    CHECK(MemoryErrorToString(MemoryError::kInvalidSize) == "Invalid size");
     CHECK(MemoryErrorToString(MemoryError::kGrowthDisabled) ==
-          "growth is disabled");
+          "Growth is disabled");
     CHECK(MemoryErrorToString(MemoryError::kOwnershipMismatch) ==
-          "pointer is not owned by allocator");
+          "Pointer is not owned by allocator");
   }
 }
 

@@ -26,7 +26,7 @@ helios_module(
         PUBLIC profile
 
     USES
-        Taskflow PUBLIC helios::taskflow::taskflow
+        Taskflow PUBLIC helios::lib::taskflow::taskflow
 
     COMPILE_DEFINITIONS
         PUBLIC
@@ -45,6 +45,6 @@ helios_module(
 
 # Link TBB on Linux with GCC — required for libstdc++ parallel STL backend
 if(HELIOS_HAS_SYSTEM_TBB)
-  target_link_libraries(helios_module_async INTERFACE helios::tbb::tbb)
+  target_link_libraries(helios_module_async INTERFACE helios::lib::tbb::tbb)
   message(STATUS "helios_module_async: Linking TBB for libstdc++ parallel STL support")
 endif()

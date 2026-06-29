@@ -34,7 +34,7 @@ helios_module(
         PUBLIC profile
 
     USES
-        FlatMap PUBLIC helios::flat_map
+        FlatMap PUBLIC helios::lib::flat_map
 
     COMPILE_DEFINITIONS
         PUBLIC

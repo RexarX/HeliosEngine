@@ -8,15 +8,17 @@ Namespace: `helios::mem`.
 
 ### Allocators
 
-| Allocator              | Strategy                                                    | Thread safety      |
-| ---------------------- | ----------------------------------------------------------- | ------------------ |
-| `ArenaAllocator`       | Lock-free bump-pointer; individual deallocation is a no-op. | Lock-free allocate |
-| `StackAllocator`       | LIFO-aware with marker/rewind.                              | Lock-free          |
-| `PoolAllocator`        | Fixed-size blocks, intrusive freelist (atomic CAS).         | Lock-free          |
-| `FreeListAllocator`    | Best-fit with coalescing.                                   | Mutex-protected    |
-| `NFrameAllocator<N>`   | N arenas; `Advance()` rotates and resets.                   | Delegates to arena |
-| `FrameAllocator`       | Alias for `NFrameAllocator<1>`.                             |                    |
-| `DoubleFrameAllocator` | Alias for `NFrameAllocator<2>`.                             |                    |
+| Allocator                | Strategy                                           | Thread safety                                |
+| ------------------------ | -------------------------------------------------- | -------------------------------------------- |
+| `ArenaAllocator`         | Growable lock-free bump allocator.                 | Lock-free allocate                           |
+| `FixedArenaAllocator`    | Fixed-capacity bump allocator.                     | Lock-free allocate                           |
+| `StackAllocator`         | Growable LIFO-aware allocator with marker/rewind.  | Lock-free allocate + LIFO deallocate on head |
+| `FixedStackAllocator`    | Fixed-capacity stack allocator.                    | Lock-free allocate + LIFO deallocate         |
+| `PoolAllocator`          | Growable fixed-size-block pool.                    | Lock-free                                    |
+| `FixedPoolAllocator`     | Fixed-capacity block pool.                         | Lock-free                                    |
+| `FreeListAllocator`      | Growable best-fit allocator with coalescing.       | Mutex-protected                              |
+| `FixedFreeListAllocator` | Fixed-capacity best-fit allocator.                 | Mutex-protected                              |
+| `FrameAllocator<N = 2>`  | N growable arenas; `Advance()` rotates and resets. | Delegates to arena                           |
 
 ### Reference Counting
 
@@ -33,11 +35,21 @@ Namespace: `helios::mem`.
 
 ### Utilities
 
-| Type / Function                | Purpose                                                |
-| ------------------------------ | ------------------------------------------------------ |
-| `GrowthPolicy`                 | Shared growth config (`Fixed`, `Linear`, `Geometric`). |
-| `AllocatorStats`               | Snapshot of allocation counters and capacity.          |
-| `AlignedAlloc` / `AlignedFree` | Cross-platform aligned allocation.                     |
+| Type / Function                | Purpose                                              |
+| ------------------------------ | ---------------------------------------------------- |
+| `GrowthPolicy`                 | Growable allocator policy (`Linear` or `Geometric`). |
+| `AllocatorStats`               | Snapshot of allocation counters and capacity.        |
+| `AlignedAlloc` / `AlignedFree` | Cross-platform aligned allocation.                   |
+
+## mimalloc and global allocation
+
+| CMake option                          | Default | Effect                                                              |
+| ------------------------------------- | ------- | ------------------------------------------------------------------- |
+| `HELIOS_MEMORY_USE_MIMALLOC`          | ON      | Routes backing `AlignedAlloc` / growable `Create*` through mimalloc |
+| `HELIOS_MEMORY_ENABLE_PROFILE`        | ON      | Enables memory-module profile macros when profile module is linked  |
+| `HELIOS_MEMORY_OVERRIDE_GLOBAL_ALLOC` | ON      | Inherits global `operator new`/`delete` hooks when linking memory   |
+
+Global `operator new`/`delete` hooks are inherited automatically when you link `helios::module::memory`. The hook implementation lives in the memory module and reports allocations to the profiler when the profile module is linked and `HELIOS_MEMORY_ENABLE_PROFILE=ON`. Disable with `-DHELIOS_MEMORY_OVERRIDE_GLOBAL_ALLOC=OFF`.
 
 ## Arena Allocator
 
@@ -57,7 +69,7 @@ arena.Reset();
 ```cpp
 #include <helios/memory/frame_allocator.hpp>
 
-helios::mem::DoubleFrameAllocator frames(64 * 1024);
+helios::mem::FrameAllocator frames(64 * 1024);
 std::pmr::polymorphic_allocator<std::byte> alloc(&frames);
 
 auto* data = alloc.allocate(128);  // current frame
@@ -100,4 +112,5 @@ auto tex = helios::mem::MakeArc<Texture>();  // thread-safe ref count
 ## Dependencies
 
 - `core` — asserts
-- `platform` — aligned allocation backends
+- `mimalloc` (default ON) — backing heap via `helios::lib::mimalloc::static`
+- `profile` (optional) — Tracy scope/zone/lock and backing ALLOC/FREE macros

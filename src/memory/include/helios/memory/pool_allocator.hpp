@@ -8,15 +8,20 @@
 #include <cstddef>
 #include <cstdint>
 #include <memory_resource>
+#include <utility>
 
 namespace helios::mem {
 
 /// @brief Configuration for PoolAllocator.
 struct PoolAllocatorOptions {
+  /// @brief Minimum payload size of each pool block in bytes.
   size_t block_size = 0;
+  /// @brief Number of blocks in the initial chunk.
   size_t block_count = 0;
+  /// @brief Alignment of each block in bytes; must be a power of two.
   size_t alignment = kDefaultAlignment;
-  GrowthPolicy growth = GrowthPolicy::Fixed();
+  /// @brief Growth policy applied when additional chunks are required.
+  GrowthPolicy growth = GrowthPolicy::Geometric();
 };
 
 /**
@@ -31,27 +36,48 @@ class PoolAllocator final : public std::pmr::memory_resource {
 public:
   /**
    * @brief Constructs pool allocator from options.
-   * @warning Triggers assertion when block_size or block_count is zero.
+   * @warning Triggers assertion when block_size or block_count is zero, when
+   * alignment is not a power of two, or when alignment is less than
+   * `alignof(void*)`.
    * @param options Pool allocator options
    */
   explicit PoolAllocator(PoolAllocatorOptions options) noexcept;
 
   /**
-   * @brief Constructs pool allocator with fixed growth.
+   * @brief Constructs pool allocator with geometric growth.
+   * @warning Triggers assertion when `block_size` or `block_count` is zero,
+   * when `alignment` is not a power of two, or when `alignment` is less than
+   * `alignof(void*)`.
    * @param block_size Size of each block in bytes
    * @param block_count Number of blocks in initial chunk
    * @param alignment Block alignment
    */
   PoolAllocator(size_t block_size, size_t block_count,
-                size_t alignment = kDefaultAlignment) noexcept;
+                size_t alignment = kDefaultAlignment) noexcept
+      : PoolAllocator(
+            PoolAllocatorOptions{.block_size = block_size,
+                                 .block_count = block_count,
+                                 .alignment = alignment,
+                                 .growth = GrowthPolicy::Geometric()}) {}
 
   PoolAllocator(const PoolAllocator&) = delete;
-  PoolAllocator(PoolAllocator&& other) noexcept;
+
+  /**
+   * @brief Move-constructs pool allocator from another instance.
+   * @param other Source allocator; left in empty moved-from state
+   */
+  PoolAllocator(PoolAllocator&& other) noexcept { MoveFrom(other); }
   ~PoolAllocator() noexcept override {
     FreeChunkChain(chunks_.load(std::memory_order_acquire));
   }
 
   PoolAllocator& operator=(const PoolAllocator&) = delete;
+
+  /**
+   * @brief Move-assigns pool state from another instance.
+   * @param other Source allocator; left in empty moved-from state
+   * @return Reference to this allocator
+   */
   PoolAllocator& operator=(PoolAllocator&& other) noexcept;
 
   /**
@@ -168,6 +194,7 @@ private:
   [[nodiscard]] bool GrowIfNeeded() noexcept;
   void PushChunkBlocks(ChunkHeader& chunk) noexcept;
   void RebuildFreeList() noexcept;
+  void MoveFrom(PoolAllocator& other) noexcept;
 
   [[nodiscard]] void* do_allocate(size_t bytes, size_t alignment) override;
   void do_deallocate(void* ptr, size_t bytes, size_t alignment) override;
@@ -192,72 +219,11 @@ private:
   std::atomic<size_t> total_deallocations_{0};
 };
 
-inline PoolAllocator::PoolAllocator(PoolAllocatorOptions options) noexcept
-    : block_size_(std::max(options.block_size, sizeof(void*))),
-      initial_block_count_(options.block_count),
-      alignment_(options.alignment),
-      growth_(options.growth) {
-  HELIOS_ASSERT(block_size_ > 0, "block_size must be greater than zero!");
-  HELIOS_ASSERT(initial_block_count_ > 0,
-                "block_count must be greater than zero!");
-  HELIOS_ASSERT(IsPowerOfTwo(alignment_),
-                "alignment '{}' must be power of two!", alignment_);
-  HELIOS_ASSERT(alignment_ >= alignof(void*), "alignment '{}' must be >= '{}'!",
-                alignment_, alignof(void*));
-
-  block_size_ = AlignUp(block_size_, alignment_);
-
-  ChunkHeader* const initial_chunk =
-      CreateChunk(block_size_, initial_block_count_, alignment_);
-  HELIOS_VERIFY(initial_chunk != nullptr, "Failed to allocate pool chunk!");
-
-  chunks_.store(initial_chunk, std::memory_order_release);
-  total_blocks_.store(initial_chunk->block_count, std::memory_order_relaxed);
-  free_blocks_.store(initial_chunk->block_count, std::memory_order_relaxed);
-  PushChunkBlocks(*initial_chunk);
-}
-
-inline PoolAllocator::PoolAllocator(size_t block_size, size_t block_count,
-                                    size_t alignment) noexcept
-    : PoolAllocator(PoolAllocatorOptions{.block_size = block_size,
-                                         .block_count = block_count,
-                                         .alignment = alignment,
-                                         .growth = GrowthPolicy::Fixed()}) {}
-
 template <typename T>
 inline PoolAllocator PoolAllocator::ForType(size_t block_count) noexcept {
   constexpr size_t kAlign =
       alignof(T) > alignof(void*) ? alignof(T) : alignof(void*);
   return {sizeof(T), block_count, kAlign};
-}
-
-inline PoolAllocator::PoolAllocator(PoolAllocator&& other) noexcept
-    : block_size_(other.block_size_),
-      initial_block_count_(other.initial_block_count_),
-      alignment_(other.alignment_),
-      growth_(other.growth_),
-      free_head_(other.free_head_.load(std::memory_order_acquire)),
-      chunks_(other.chunks_.load(std::memory_order_acquire)),
-      grow_state_(other.grow_state_.load(std::memory_order_acquire)),
-      total_blocks_(other.total_blocks_.load(std::memory_order_acquire)),
-      free_blocks_(other.free_blocks_.load(std::memory_order_acquire)),
-      peak_used_blocks_(
-          other.peak_used_blocks_.load(std::memory_order_acquire)),
-      total_allocations_(
-          other.total_allocations_.load(std::memory_order_acquire)),
-      total_deallocations_(
-          other.total_deallocations_.load(std::memory_order_acquire)) {
-  other.block_size_ = 0;
-  other.initial_block_count_ = 0;
-  other.alignment_ = 0;
-  other.free_head_.store(nullptr, std::memory_order_release);
-  other.chunks_.store(nullptr, std::memory_order_release);
-  other.grow_state_.store(GrowState::kIdle, std::memory_order_release);
-  other.total_blocks_.store(0, std::memory_order_release);
-  other.free_blocks_.store(0, std::memory_order_release);
-  other.peak_used_blocks_.store(0, std::memory_order_release);
-  other.total_allocations_.store(0, std::memory_order_release);
-  other.total_deallocations_.store(0, std::memory_order_release);
 }
 
 inline PoolAllocator& PoolAllocator::operator=(PoolAllocator&& other) noexcept {
@@ -266,43 +232,7 @@ inline PoolAllocator& PoolAllocator::operator=(PoolAllocator&& other) noexcept {
   }
 
   FreeChunkChain(chunks_.load(std::memory_order_acquire));
-
-  block_size_ = other.block_size_;
-  initial_block_count_ = other.initial_block_count_;
-  alignment_ = other.alignment_;
-  growth_ = other.growth_;
-  free_head_.store(other.free_head_.load(std::memory_order_acquire),
-                   std::memory_order_release);
-  chunks_.store(other.chunks_.load(std::memory_order_acquire),
-                std::memory_order_release);
-  grow_state_.store(other.grow_state_.load(std::memory_order_acquire),
-                    std::memory_order_release);
-  total_blocks_.store(other.total_blocks_.load(std::memory_order_acquire),
-                      std::memory_order_release);
-  free_blocks_.store(other.free_blocks_.load(std::memory_order_acquire),
-                     std::memory_order_release);
-  peak_used_blocks_.store(
-      other.peak_used_blocks_.load(std::memory_order_acquire),
-      std::memory_order_release);
-  total_allocations_.store(
-      other.total_allocations_.load(std::memory_order_acquire),
-      std::memory_order_release);
-  total_deallocations_.store(
-      other.total_deallocations_.load(std::memory_order_acquire),
-      std::memory_order_release);
-
-  other.block_size_ = 0;
-  other.initial_block_count_ = 0;
-  other.alignment_ = 0;
-  other.free_head_.store(nullptr, std::memory_order_release);
-  other.chunks_.store(nullptr, std::memory_order_release);
-  other.grow_state_.store(GrowState::kIdle, std::memory_order_release);
-  other.total_blocks_.store(0, std::memory_order_release);
-  other.free_blocks_.store(0, std::memory_order_release);
-  other.peak_used_blocks_.store(0, std::memory_order_release);
-  other.total_allocations_.store(0, std::memory_order_release);
-  other.total_deallocations_.store(0, std::memory_order_release);
-
+  MoveFrom(other);
   return *this;
 }
 

@@ -31,6 +31,10 @@
 #include <format>
 #endif
 
+#include <helios/ecs/schedule/system_group_handle.hpp>
+#include <helios/ecs/schedule/system_handle.hpp>
+#include <helios/ecs/schedule/system_set_handle.hpp>
+
 namespace helios::ecs {
 
 /// @brief Type index for schedules.
@@ -74,22 +78,6 @@ template <ScheduleTrait T>
 }
 
 class Schedule;
-
-/**
- * @brief Unique identifier for a system within a schedule.
- * @details Combines the type-based SystemId with a per-schedule index for
- * uniqueness, enabling the same system type to be added multiple times.
- */
-struct ScheduleSystemId {
-  SystemId id;
-  size_t slot = 0;
-  size_t generation = 0;
-
-  [[nodiscard]] constexpr bool operator==(
-      const ScheduleSystemId&) const noexcept = default;
-  [[nodiscard]] constexpr std::strong_ordering operator<=>(
-      const ScheduleSystemId&) const noexcept = default;
-};
 
 /// @brief Metadata attached to a system entry for ordering and configuration.
 struct ScheduleSystemMetadata {
@@ -137,6 +125,15 @@ struct ScheduleSystemMetadata {
   }
 
   /**
+   * @brief Adds a system set membership if not already present.
+   * @details If the set id is already present, it is not added again.
+   * @param id Set to assign this system to
+   */
+  constexpr void AddMemberOfSet(SystemSetId id) {
+    AppendUnique(member_of_sets, id);
+  }
+
+  /**
    * @brief Appends a value to a vector if it is not already present.
    * @tparam T The type of the value
    * @param vec The vector to append to
@@ -149,635 +146,6 @@ struct ScheduleSystemMetadata {
     }
   }
 };
-
-class SystemSetHandle;
-
-/// @brief Handle returned by Schedule::Add for configuring a system.
-class SystemHandle {
-public:
-  /**
-   * @brief Constructs a `SystemHandle` with the given system id and schedule.
-   * @param id The system id
-   * @param schedule The schedule that the system belongs to
-   */
-  constexpr SystemHandle(ScheduleSystemId id, Schedule& schedule) noexcept
-      : id_(id), schedule_(schedule) {}
-
-  SystemHandle(const SystemHandle&) = delete;
-  constexpr SystemHandle(SystemHandle&&) noexcept = default;
-  constexpr ~SystemHandle() noexcept = default;
-
-  SystemHandle& operator=(const SystemHandle&) = delete;
-  constexpr SystemHandle& operator=(SystemHandle&&) noexcept = default;
-
-  /**
-   * @brief Adds an ordering constraint: this system must run before the given
-   * system id.
-   * @param target System id that this system must precede
-   * @return Reference to this handle for chaining
-   */
-  constexpr auto Before(this auto&& self, SystemId target)
-      -> decltype(std::forward<decltype(self)>(self));
-
-  /**
-   * @brief Adds an ordering constraint: this system must run before the given
-   * system type.
-   * @tparam T System type satisfying `SystemTrait`
-   * @return Reference to this handle for chaining
-   */
-  template <SystemTrait T>
-  constexpr auto Before(this auto&& self)
-      -> decltype(std::forward<decltype(self)>(self)) {
-    return std::forward<decltype(self)>(self).Before(SystemId::From<T>());
-  }
-
-  /**
-   * @brief Adds an ordering constraint: this system must run before the given
-   * system handle.
-   * @param target System handle that this system must precede
-   * @return Reference to this handle for chaining
-   */
-  constexpr auto Before(this auto&& self, const SystemHandle& target)
-      -> decltype(std::forward<decltype(self)>(self)) {
-    return std::forward<decltype(self)>(self).Before(target.Id().id);
-  }
-
-  /**
-   * @brief Adds an ordering constraint: this system must run before the given
-   * system set handle.
-   * @param target System set handle that this system must precede
-   * @return Reference to this handle for chaining
-   */
-  constexpr auto Before(this auto&& self, const SystemSetHandle& target)
-      -> decltype(std::forward<decltype(self)>(self));
-
-  /**
-   * @brief Adds an ordering constraint: this system must run before all members
-   * of the given set.
-   * @param target Set that this system must precede
-   * @return Reference to this handle for chaining
-   */
-  constexpr auto Before(this auto&& self, SystemSetId target)
-      -> decltype(std::forward<decltype(self)>(self));
-
-  /**
-   * @brief Adds an ordering constraint: this system must run before all members
-   * of the given set type.
-   * @tparam T Set type satisfying `SystemSetTrait`
-   * @return Reference to this handle for chaining
-   */
-  template <SystemSetTrait T>
-  constexpr auto BeforeSet(this auto&& self)
-      -> decltype(std::forward<decltype(self)>(self)) {
-    return std::forward<decltype(self)>(self).Before(SystemSetId::From<T>());
-  }
-
-  /**
-   * @brief Adds an ordering constraint: this system must run after the given
-   * system id.
-   * @param target System id that this system must follow
-   * @return Reference to this handle for chaining
-   */
-  constexpr auto After(this auto&& self, SystemId target)
-      -> decltype(std::forward<decltype(self)>(self));
-
-  /**
-   * @brief Adds an ordering constraint: this system must run after the given
-   * system type.
-   * @tparam T System type satisfying `SystemTrait`
-   * @return Reference to this handle for chaining
-   */
-  template <SystemTrait T>
-  constexpr auto After(this auto&& self)
-      -> decltype(std::forward<decltype(self)>(self)) {
-    return std::forward<decltype(self)>(self).After(SystemId::From<T>());
-  }
-
-  /**
-   * @brief Adds an ordering constraint: this system must run after the given
-   * system handle.
-   * @param target System handle that this system must follow
-   * @return Reference to this handle for chaining
-   */
-  constexpr auto After(this auto&& self, const SystemHandle& target)
-      -> decltype(std::forward<decltype(self)>(self)) {
-    return std::forward<decltype(self)>(self).After(target.Id().id);
-  }
-
-  /**
-   * @brief Adds an ordering constraint: this system must run after all members
-   * of the given set.
-   * @param target Set that this system must follow
-   * @return Reference to this handle for chaining
-   */
-  constexpr auto After(this auto&& self, SystemSetId target)
-      -> decltype(std::forward<decltype(self)>(self));
-
-  /**
-   * @brief Adds an ordering constraint: this system must run after all members
-   * of the given set type.
-   * @tparam T Set type satisfying `SystemSetTrait`
-   * @return Reference to this handle for chaining
-   */
-  template <SystemSetTrait T>
-  constexpr auto AfterSet(this auto&& self)
-      -> decltype(std::forward<decltype(self)>(self)) {
-    return std::forward<decltype(self)>(self).After(SystemSetId::From<T>());
-  }
-
-  /**
-   * @brief Adds an ordering constraint: this system must run before the given
-   * system set handle.
-   * @param target System set handle that this system must precede
-   * @return Reference to this handle for chaining
-   */
-  constexpr auto After(this auto&& self, const SystemSetHandle& target)
-      -> decltype(std::forward<decltype(self)>(self));
-
-  /**
-   * @brief Adds a run condition predicate that must return true for this system
-   * to execute.
-   * @param condition Predicate evaluated before the system runs
-   * @param policy Access policy for the run condition
-   * @param options Options for run condition local data construction
-   * @return Reference to this handle for chaining
-   */
-  constexpr auto RunIf(this auto&& self, RunCondition condition,
-                       AccessPolicy policy = {},
-                       SystemLocalDataOptions options = {})
-      -> decltype(std::forward<decltype(self)>(self));
-
-  /**
-   * @brief Adds a run condition functor that must return true for this system
-   * to execute.
-   * @details Lambdas are rejected; use `RunIf(std::string, T&&)` to register
-   * them with an explicit name.
-   * @tparam T Run condition type satisfying `FunctorSystemTrait`
-   * @param condition Functor with declared access policy
-   * @return Reference to this handle for chaining
-   */
-  template <FunctorSystemTrait T>
-  constexpr auto RunIf(this auto&& self, T&& condition)
-      -> decltype(std::forward<decltype(self)>(self));
-
-  /**
-   * @brief Adds a run condition to this system with an explicit name.
-   * @details Required for lambdas. Derives identity from the provided name.
-   * @tparam T Run condition type satisfying `SystemTrait`
-   * @param name Human-readable name
-   * @param condition Functor with declared access policy
-   * @return Reference to this handle for chaining
-   */
-  template <SystemTrait T>
-  constexpr auto RunIf(this auto&& self, std::string name, T&& condition)
-      -> decltype(std::forward<decltype(self)>(self));
-
-  /**
-   * @brief Assigns this system to a labeled set by id.
-   * @param set_id Set to assign this system to
-   * @return Reference to this handle for chaining
-   */
-  constexpr auto InSet(this auto&& self, SystemSetId set_id)
-      -> decltype(std::forward<decltype(self)>(self));
-
-  /**
-   * @brief Assigns this system to a labeled set by type.
-   * @tparam T Set type satisfying `SystemSetTrait`
-   * @return Reference to this handle for chaining
-   */
-  template <SystemSetTrait T>
-  constexpr auto InSet(this auto&& self, const T& /*set*/ = {})
-      -> decltype(std::forward<decltype(self)>(self)) {
-    return std::forward<decltype(self)>(self).InSet(SystemSetId::From<T>());
-  }
-
-  /**
-   * @brief Finishes configuration and returns a reference to the parent
-   * schedule.
-   * @return Reference to the parent schedule for continued configuration
-   */
-  constexpr Schedule& Done() noexcept { return schedule_.get(); }
-
-  /**
-   * @brief Gets the unique schedule-local identifier for this system.
-   * @return Schedule system id
-   */
-  [[nodiscard]] constexpr ScheduleSystemId Id() const noexcept { return id_; }
-
-private:
-  ScheduleSystemId id_;
-  std::reference_wrapper<Schedule> schedule_;
-};
-
-constexpr auto SystemHandle::Before(this auto&& self, SystemId target)
-    -> decltype(std::forward<decltype(self)>(self)) {
-  auto& schedule = self.schedule_.get();
-
-  auto& entry = schedule.GetSystemEntry(self.id_.slot);
-  entry.metadata.AddBefore(target);
-  schedule.MarkDirty();
-
-  return std::forward<decltype(self)>(self);
-}
-
-constexpr auto SystemHandle::Before(this auto&& self, SystemSetId target)
-    -> decltype(std::forward<decltype(self)>(self)) {
-  auto& schedule = self.schedule_.get();
-
-  auto& entry = schedule.GetSystemEntry(self.id_.slot);
-  entry.metadata.AddBefore(target);
-  schedule.MarkDirty();
-
-  return std::forward<decltype(self)>(self);
-}
-
-constexpr auto SystemHandle::After(this auto&& self, SystemId target)
-    -> decltype(std::forward<decltype(self)>(self)) {
-  auto& schedule = self.schedule_.get();
-
-  auto& entry = schedule.GetSystemEntry(self.id_.slot);
-  entry.metadata.AddAfter(target);
-  schedule.MarkDirty();
-
-  return std::forward<decltype(self)>(self);
-}
-
-constexpr auto SystemHandle::After(this auto&& self, SystemSetId target)
-    -> decltype(std::forward<decltype(self)>(self)) {
-  auto& schedule = self.schedule_.get();
-
-  auto& entry = schedule.GetSystemEntry(self.id_.slot);
-  entry.metadata.AddAfter(target);
-  schedule.MarkDirty();
-
-  return std::forward<decltype(self)>(self);
-}
-
-constexpr auto SystemHandle::RunIf(this auto&& self, RunCondition condition,
-                                   AccessPolicy policy,
-                                   SystemLocalDataOptions options)
-    -> decltype(std::forward<decltype(self)>(self)) {
-  auto& schedule = self.schedule_.get();
-
-  auto& entry = schedule.GetSystemEntry(self.id_.slot);
-  entry.metadata.conditions.push_back(RunConditionStorage::From(
-      std::move(condition), std::move(policy), options));
-  schedule.MarkDirty();
-
-  return std::forward<decltype(self)>(self);
-}
-
-template <FunctorSystemTrait T>
-constexpr auto SystemHandle::RunIf(this auto&& self, T&& condition)
-    -> decltype(std::forward<decltype(self)>(self)) {
-  auto& schedule = self.schedule_.get();
-
-  auto& entry = schedule.GetSystemEntry(self.id_.slot);
-  entry.metadata.conditions.push_back(
-      RunConditionStorage::FromParam(std::forward<T>(condition)));
-  schedule.MarkDirty();
-
-  return std::forward<decltype(self)>(self);
-}
-
-template <SystemTrait T>
-constexpr auto SystemHandle::RunIf(this auto&& self, std::string name,
-                                   T&& condition)
-    -> decltype(std::forward<decltype(self)>(self)) {
-  auto& schedule = self.schedule_.get();
-
-  auto& entry = schedule.GetSystemEntry(self.id_.slot);
-  entry.metadata.conditions.push_back(RunConditionStorage::FromParamNamed(
-      std::move(name), std::forward<T>(condition)));
-  schedule.MarkDirty();
-
-  return std::forward<decltype(self)>(self);
-}
-
-constexpr auto SystemHandle::InSet(this auto&& self, SystemSetId set_id)
-    -> decltype(std::forward<decltype(self)>(self)) {
-  auto& schedule = self.schedule_.get();
-
-  auto& entry = schedule.GetSystemEntry(self.id_.slot);
-  entry.metadata.member_of_sets.push_back(set_id);
-  schedule.MarkDirty();
-
-  return std::forward<decltype(self)>(self);
-}
-
-/// @brief Handle returned by Schedule::Set for configuring a system set.
-class SystemSetHandle {
-public:
-  /**
-   * @brief Constructs a `SystemSetHandle` with the given system set id and
-   * schedule.
-   * @param id The system set id
-   * @param schedule The schedule that the system set belongs to
-   */
-  constexpr SystemSetHandle(SystemSetId id, Schedule& schedule) noexcept
-      : id_(id), schedule_(schedule) {}
-
-  SystemSetHandle(const SystemSetHandle&) = delete;
-  constexpr SystemSetHandle(SystemSetHandle&&) noexcept = default;
-  constexpr ~SystemSetHandle() noexcept = default;
-
-  SystemSetHandle& operator=(const SystemSetHandle&) = delete;
-  constexpr SystemSetHandle& operator=(SystemSetHandle&&) noexcept = default;
-
-  /**
-   * @brief Adds an ordering constraint: all members of this set must run before
-   * the given system.
-   * @param target System id that this set must precede
-   * @return Reference to this handle for chaining
-   */
-  constexpr auto Before(this auto&& self, SystemId target)
-      -> decltype(std::forward<decltype(self)>(self));
-
-  /**
-   * @brief Adds an ordering constraint: all members of this set must run
-   * before the given system type.
-   * @tparam T System type
-   * @return Reference to this handle for chaining
-   */
-  template <SystemTrait T>
-  constexpr auto Before(this auto&& self)
-      -> decltype(std::forward<decltype(self)>(self)) {
-    return std::forward<decltype(self)>(self).Before(SystemId::From<T>());
-  }
-
-  /**
-   * @brief Adds an ordering constraint: all members of this set must run before
-   * the given system handle.
-   * @param target System handle that this system must precede
-   * @return Reference to this handle for chaining
-   */
-  constexpr auto Before(this auto&& self, const SystemHandle& target)
-      -> decltype(std::forward<decltype(self)>(self)) {
-    return std::forward<decltype(self)>(self).Before(target.Id().id);
-  }
-
-  /**
-   * @brief Adds an ordering constraint: all members of this set must run
-   * before all members of the given set.
-   * @param target Set id that this set must precede
-   * @return Reference to this handle for chaining
-   */
-  constexpr auto Before(this auto&& self, SystemSetId target)
-      -> decltype(std::forward<decltype(self)>(self));
-
-  /**
-   * @brief Adds an ordering constraint: all members of this set must run before
-   * all members of the given set type.
-   * @tparam T Set type satisfying `SystemSetTrait`
-   * @return Reference to this handle for chaining
-   */
-  template <SystemSetTrait T>
-  constexpr auto BeforeSet(this auto&& self)
-      -> decltype(std::forward<decltype(self)>(self)) {
-    return std::forward<decltype(self)>(self).Before(SystemSetId::From<T>());
-  }
-
-  /**
-   * @brief Adds an ordering constraint: all members of this set must run before
-   * the given system set handle.
-   * @param target System set handle that this system must precede
-   * @return Reference to this handle for chaining
-   */
-  constexpr auto Before(this auto&& self, const SystemSetHandle& target)
-      -> decltype(std::forward<decltype(self)>(self)) {
-    return std::forward<decltype(self)>(self).Before(target.Id());
-  }
-
-  /**
-   * @brief Adds an ordering constraint: all members of this set must run after
-   * the given system.
-   * @param target System id that this set must follow
-   * @return Reference to this handle for chaining
-   */
-  constexpr auto After(this auto&& self, SystemId target)
-      -> decltype(std::forward<decltype(self)>(self));
-
-  /**
-   * @brief Adds an ordering constraint: all members of this set must run after
-   * the given system type.
-   * @tparam T System type satisfying `SystemTrait`
-   * @return Reference to this handle for chaining
-   */
-  template <SystemTrait T>
-  constexpr auto After(this auto&& self)
-      -> decltype(std::forward<decltype(self)>(self)) {
-    return std::forward<decltype(self)>(self).After(SystemId::From<T>());
-  }
-
-  /**
-   * @brief Adds an ordering constraint: all members of this set must run after
-   * the given system handle.
-   * @param target System handle that this system must precede
-   * @return Reference to this handle for chaining
-   */
-  constexpr auto After(this auto&& self, const SystemHandle& target)
-      -> decltype(std::forward<decltype(self)>(self)) {
-    return std::forward<decltype(self)>(self).After(target.Id().id);
-  }
-
-  /**
-   * @brief Adds an ordering constraint: all members of this set must run after
-   * all members of the given set.
-   * @param target Set id that this set must follow
-   * @return Reference to this handle for chaining
-   */
-  constexpr auto After(this auto&& self, SystemSetId target)
-      -> decltype(std::forward<decltype(self)>(self));
-
-  /**
-   * @brief Adds an ordering constraint: all members of this set must run after
-   * all members of the given set type.
-   * @tparam T Set type satisfying `SystemSetTrait`
-   * @return Reference to this handle for chaining
-   */
-  template <SystemSetTrait T>
-  constexpr auto AfterSet(this auto&& self)
-      -> decltype(std::forward<decltype(self)>(self)) {
-    return std::forward<decltype(self)>(self).After(SystemSetId::From<T>());
-  }
-
-  /**
-   * @brief Adds an ordering constraint: all members of this set must run after
-   * the given system set handle.
-   * @param target System set handle that this system must precede
-   * @return Reference to this handle for chaining
-   */
-  constexpr auto After(this auto&& self, const SystemSetHandle& target)
-      -> decltype(std::forward<decltype(self)>(self)) {
-    return std::forward<decltype(self)>(self).After(target.Id());
-  }
-
-  /**
-   * @brief Adds a run condition predicate that applies to all members.
-   * @param condition Predicate evaluated before any member runs
-   * @param policy Access policy for the run condition
-   * @param options Options for run condition local data construction
-   * @return Reference to this handle for chaining
-   */
-  constexpr auto RunIf(this auto&& self, RunCondition condition,
-                       AccessPolicy policy = {},
-                       SystemLocalDataOptions options = {})
-      -> decltype(std::forward<decltype(self)>(self));
-
-  /**
-   * @brief Adds a run condition functor that applies to all members.
-   * @details Lambdas are rejected; use `RunIf(std::string, T&&)`.
-   * @tparam T Run condition type satisfying `FunctorSystemTrait`
-   * @param condition Functor with declared access policy
-   * @return Reference to this handle for chaining
-   */
-  template <FunctorSystemTrait T>
-  constexpr auto RunIf(this auto&& self, T&& condition)
-      -> decltype(std::forward<decltype(self)>(self));
-
-  /**
-   * @brief Adds a run condition to all set members with an explicit name.
-   * @details Required for lambdas.
-   * @tparam T Run condition type satisfying `SystemTrait`
-   * @param name Human-readable name
-   * @param condition Functor with declared access policy
-   * @return Reference to this handle for chaining
-   */
-  template <SystemTrait T>
-  constexpr auto RunIf(this auto&& self, std::string name, T&& condition)
-      -> decltype(std::forward<decltype(self)>(self));
-
-  /**
-   * @brief Marks this set as a sequence: systems run in insertion order.
-   * @return Reference to this handle for chaining
-   */
-  constexpr auto Sequence(this auto&& self)
-      -> decltype(std::forward<decltype(self)>(self));
-
-  /**
-   * @brief Finishes configuration and returns a reference to the parent
-   * schedule.
-   * @return Reference to the parent schedule for continued configuration
-   */
-  constexpr Schedule& Done() noexcept { return schedule_.get(); }
-
-  /**
-   * @brief Gets the identifier for this system set.
-   * @return System set id
-   */
-  [[nodiscard]] constexpr SystemSetId Id() const noexcept { return id_; }
-
-private:
-  SystemSetId id_;
-  std::reference_wrapper<Schedule> schedule_;
-};
-
-constexpr auto SystemHandle::Before(this auto&& self,
-                                    const SystemSetHandle& target)
-    -> decltype(std::forward<decltype(self)>(self)) {
-  return std::forward<decltype(self)>(self).Before(target.Id());
-}
-
-constexpr auto SystemHandle::After(this auto&& self,
-                                   const SystemSetHandle& target)
-    -> decltype(std::forward<decltype(self)>(self)) {
-  return std::forward<decltype(self)>(self).After(target.Id());
-}
-
-constexpr auto SystemSetHandle::Before(this auto&& self, SystemId target)
-    -> decltype(std::forward<decltype(self)>(self)) {
-  auto& schedule = self.schedule_.get();
-
-  auto& set_entry = schedule.GetSystemSet(self.id_.id);
-  set_entry.Before(target);
-  schedule.MarkDirty();
-
-  return std::forward<decltype(self)>(self);
-}
-
-constexpr auto SystemSetHandle::Before(this auto&& self, SystemSetId target)
-    -> decltype(std::forward<decltype(self)>(self)) {
-  auto& schedule = self.schedule_.get();
-
-  auto& set_entry = schedule.GetSystemSet(self.id_.id);
-  set_entry.Before(target);
-  schedule.MarkDirty();
-
-  return std::forward<decltype(self)>(self);
-}
-
-constexpr auto SystemSetHandle::After(this auto&& self, SystemId target)
-    -> decltype(std::forward<decltype(self)>(self)) {
-  auto& schedule = self.schedule_.get();
-
-  auto& set_entry = schedule.GetSystemSet(self.id_.id);
-  set_entry.After(target);
-  schedule.MarkDirty();
-
-  return std::forward<decltype(self)>(self);
-}
-
-constexpr auto SystemSetHandle::After(this auto&& self, SystemSetId target)
-    -> decltype(std::forward<decltype(self)>(self)) {
-  auto& schedule = self.schedule_.get();
-
-  auto& set_entry = schedule.GetSystemSet(self.id_.id);
-  set_entry.After(target);
-  schedule.MarkDirty();
-
-  return std::forward<decltype(self)>(self);
-}
-
-constexpr auto SystemSetHandle::RunIf(this auto&& self, RunCondition condition,
-                                      AccessPolicy policy,
-                                      SystemLocalDataOptions options)
-    -> decltype(std::forward<decltype(self)>(self)) {
-  auto& schedule = self.schedule_.get();
-
-  auto& set_entry = schedule.GetSystemSet(self.id_.id);
-  set_entry.RunIf(RunConditionStorage::From(std::move(condition),
-                                            std::move(policy), options));
-  schedule.MarkDirty();
-
-  return std::forward<decltype(self)>(self);
-}
-
-template <FunctorSystemTrait T>
-constexpr auto SystemSetHandle::RunIf(this auto&& self, T&& condition)
-    -> decltype(std::forward<decltype(self)>(self)) {
-  auto& schedule = self.schedule_.get();
-
-  auto& set_entry = schedule.GetSystemSet(self.id_.id);
-  set_entry.RunIf(RunConditionStorage::FromParam(std::forward<T>(condition)));
-  schedule.MarkDirty();
-
-  return std::forward<decltype(self)>(self);
-}
-
-template <SystemTrait T>
-constexpr auto SystemSetHandle::RunIf(this auto&& self, std::string name,
-                                      T&& condition)
-    -> decltype(std::forward<decltype(self)>(self)) {
-  auto& schedule = self.schedule_.get();
-
-  auto& set_entry = schedule.GetSystemSet(self.id_.id);
-  set_entry.RunIf(RunConditionStorage::FromParamNamed(
-      std::move(name), std::forward<T>(condition)));
-  schedule.MarkDirty();
-
-  return std::forward<decltype(self)>(self);
-}
-
-constexpr auto SystemSetHandle::Sequence(this auto&& self)
-    -> decltype(std::forward<decltype(self)>(self)) {
-  auto& schedule = self.schedule_.get();
-
-  auto& set_entry = schedule.GetSystemSet(self.id_.id);
-  set_entry.Sequence();
-  schedule.MarkDirty();
-
-  return std::forward<decltype(self)>(self);
-}
 
 /// @brief Settings that control how a schedule is compiled and executed.
 struct ScheduleSettings {
@@ -941,19 +309,18 @@ public:
                    SystemLocalDataOptions options = {});
 
   /**
-   * @brief Adds multiple param-style functor systems as an anonymous system
-   * set.
-   * @details Each system is added to the schedule and assigned to a set whose
-   * id is derived from the member system ids. The returned handle configures
-   * all members collectively. Lambdas must be registered individually with
-   * explicit names.
+   * @brief Adds multiple param-style functor systems as a system group.
+   * @details Each system is added to the schedule and assigned to a unique
+   * anonymous group. The returned handle configures all members collectively
+   * and can assign them to a named set via `InSet`. Lambdas must be registered
+   * individually with explicit names.
    * @tparam Ts System types satisfying `FunctorSystemTrait`
    * @param systems System instances
-   * @return Handle for configuring the anonymous system set
+   * @return Handle for configuring the system group
    */
   template <FunctorSystemTrait... Ts>
     requires(sizeof...(Ts) > 1)
-  SystemSetHandle Add(Ts&&... systems);
+  SystemGroupHandle Add(Ts&&... systems);
 
   /**
    * @brief Adds a callable system to the schedule with explicit name and access
@@ -1111,6 +478,40 @@ private:
 
   void WarnAmbiguousAccess(const Dag& dag);
 
+  /**
+   * @brief Gets or creates a system set entry in the schedule.
+   * @details Marks the schedule dirty when a new set is created.
+   * @param set_id Set identifier
+   */
+  void EnsureSet(SystemSetId set_id);
+
+  /**
+   * @brief Assigns a system to a set if it is not already a member.
+   * @details Creates the target set if needed and marks the schedule dirty only
+   * when membership changes.
+   * @param slot Index of the system entry to update
+   * @param set_id Set to assign the system to
+   * @return True if membership was added
+   */
+  bool AddSystemToSet(size_t slot, SystemSetId set_id);
+
+  /**
+   * @brief Assigns every member of an anonymous group to a named set.
+   * @details Creates the target set if needed. Each matching member is updated
+   * through `AddSystemToSet`.
+   * @param group_id Anonymous group id returned by variadic `Add`
+   * @param target_set_id Named set to assign group members to
+   */
+  void AssignGroupToSet(SystemSetId group_id, SystemSetId target_set_id);
+
+  /**
+   * @brief Allocates a unique id for an anonymous system group.
+   * @details Each variadic `Add` call receives a distinct id so batches with
+   * the same system types do not share configuration.
+   * @return New anonymous group id
+   */
+  [[nodiscard]] SystemSetId AllocateAnonymousGroupId() noexcept;
+
   /// @brief Bumps the generation counter and marks the schedule dirty.
   void MarkDirty() noexcept {
     is_dirty_ = true;
@@ -1152,6 +553,7 @@ private:
   std::unique_ptr<Executor> executor_;
 
   size_t generation_ = 0;  ///< Bumped on every structural modification
+  size_t next_anonymous_group_id_ = 1;
   bool is_dirty_ = true;
 
   friend class MainThreadExecutor;
@@ -1159,6 +561,7 @@ private:
   friend class MultiThreadedExecutor;
   friend class SystemHandle;
   friend class SystemSetHandle;
+  friend class SystemGroupHandle;
 };
 
 inline void Schedule::Run(World& world) {
@@ -1212,22 +615,17 @@ inline SystemHandle Schedule::Add(std::string name, T&& system,
 
 template <FunctorSystemTrait... Ts>
   requires(sizeof...(Ts) > 1)
-inline SystemSetHandle Schedule::Add(Ts&&... systems) {
+inline SystemGroupHandle Schedule::Add(Ts&&... systems) {
   std::array handles = {Add(std::forward<Ts>(systems))...};
 
-  std::array<SystemId, sizeof...(Ts)> member_ids = {};
-  for (size_t i = 0; i < handles.size(); ++i) {
-    member_ids[i] = handles[i].Id().id;
-  }
-
-  const SystemSetId set_id = SystemSetId::From(member_ids);
-  SystemSetHandle set_handle = Set(set_id);
+  const SystemSetId group_id = AllocateAnonymousGroupId();
+  EnsureSet(group_id);
 
   for (SystemHandle& handle : handles) {
-    handle.InSet(set_id);
+    AddSystemToSet(handle.Id().slot, group_id);
   }
 
-  return set_handle;
+  return {group_id, *this};
 }
 
 inline SystemHandle Schedule::Add(std::string name, SystemCallable system,
@@ -1242,9 +640,375 @@ inline SystemHandle Schedule::Add(std::string name, SystemCallable system,
 }
 
 inline SystemSetHandle Schedule::Set(SystemSetId id) {
-  sets_.emplace(id.id, SystemSet(id));
+  EnsureSet(id);
   MarkDirty();
   return {id, *this};
+}
+
+inline void Schedule::EnsureSet(SystemSetId set_id) {
+  if (sets_.contains(set_id.id)) {
+    return;
+  }
+
+  sets_.emplace(set_id.id, SystemSet(set_id));
+  MarkDirty();
+}
+
+inline bool Schedule::AddSystemToSet(size_t slot, SystemSetId set_id) {
+  EnsureSet(set_id);
+
+  auto& entry = GetSystemEntry(slot);
+  const size_t before = entry.metadata.member_of_sets.size();
+  entry.metadata.AddMemberOfSet(set_id);
+  if (entry.metadata.member_of_sets.size() != before) {
+    MarkDirty();
+    return true;
+  }
+  return false;
+}
+
+inline void Schedule::AssignGroupToSet(SystemSetId group_id,
+                                       SystemSetId target_set_id) {
+  EnsureSet(target_set_id);
+
+  for (size_t slot = 0; slot < system_entries_.size(); ++slot) {
+    const auto& entry = system_entries_[slot];
+    if (std::ranges::find(entry.metadata.member_of_sets, group_id) !=
+        entry.metadata.member_of_sets.end()) {
+      AddSystemToSet(slot, target_set_id);
+    }
+  }
+}
+
+inline SystemSetId Schedule::AllocateAnonymousGroupId() noexcept {
+  static constexpr size_t kAnonymousGroupIdTag = static_cast<size_t>(1) << 63;
+  return SystemSetId{.id = kAnonymousGroupIdTag ^ next_anonymous_group_id_++};
+}
+
+constexpr auto SystemHandle::Before(this auto&& self, SystemId target)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  auto& schedule = self.schedule_.get();
+
+  auto& entry = schedule.GetSystemEntry(self.id_.slot);
+  entry.metadata.AddBefore(target);
+  schedule.MarkDirty();
+
+  return std::forward<decltype(self)>(self);
+}
+
+constexpr auto SystemHandle::Before(this auto&& self, SystemSetId target)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  auto& schedule = self.schedule_.get();
+
+  auto& entry = schedule.GetSystemEntry(self.id_.slot);
+  entry.metadata.AddBefore(target);
+  schedule.MarkDirty();
+
+  return std::forward<decltype(self)>(self);
+}
+
+constexpr auto SystemHandle::Before(this auto&& self,
+                                    const SystemSetHandle& target)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  return std::forward<decltype(self)>(self).Before(target.Id());
+}
+
+constexpr auto SystemHandle::Before(this auto&& self,
+                                    const SystemGroupHandle& target)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  return std::forward<decltype(self)>(self).Before(target.Id());
+}
+
+constexpr auto SystemHandle::After(this auto&& self, SystemId target)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  auto& schedule = self.schedule_.get();
+
+  auto& entry = schedule.GetSystemEntry(self.id_.slot);
+  entry.metadata.AddAfter(target);
+  schedule.MarkDirty();
+
+  return std::forward<decltype(self)>(self);
+}
+
+constexpr auto SystemHandle::After(this auto&& self, SystemSetId target)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  auto& schedule = self.schedule_.get();
+
+  auto& entry = schedule.GetSystemEntry(self.id_.slot);
+  entry.metadata.AddAfter(target);
+  schedule.MarkDirty();
+
+  return std::forward<decltype(self)>(self);
+}
+
+constexpr auto SystemHandle::After(this auto&& self,
+                                   const SystemSetHandle& target)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  return std::forward<decltype(self)>(self).After(target.Id());
+}
+
+constexpr auto SystemHandle::After(this auto&& self,
+                                   const SystemGroupHandle& target)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  return std::forward<decltype(self)>(self).After(target.Id());
+}
+
+constexpr auto SystemHandle::RunIf(this auto&& self, RunCondition condition,
+                                   AccessPolicy policy,
+                                   SystemLocalDataOptions options)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  auto& schedule = self.schedule_.get();
+
+  auto& entry = schedule.GetSystemEntry(self.id_.slot);
+  entry.metadata.conditions.push_back(RunConditionStorage::From(
+      std::move(condition), std::move(policy), options));
+  schedule.MarkDirty();
+
+  return std::forward<decltype(self)>(self);
+}
+
+template <FunctorSystemTrait T>
+constexpr auto SystemHandle::RunIf(this auto&& self, T&& condition)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  auto& schedule = self.schedule_.get();
+
+  auto& entry = schedule.GetSystemEntry(self.id_.slot);
+  entry.metadata.conditions.push_back(
+      RunConditionStorage::FromParam(std::forward<T>(condition)));
+  schedule.MarkDirty();
+
+  return std::forward<decltype(self)>(self);
+}
+
+template <SystemTrait T>
+constexpr auto SystemHandle::RunIf(this auto&& self, std::string name,
+                                   T&& condition)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  auto& schedule = self.schedule_.get();
+
+  auto& entry = schedule.GetSystemEntry(self.id_.slot);
+  entry.metadata.conditions.push_back(RunConditionStorage::FromParamNamed(
+      std::move(name), std::forward<T>(condition)));
+  schedule.MarkDirty();
+
+  return std::forward<decltype(self)>(self);
+}
+
+constexpr auto SystemHandle::InSet(this auto&& self, SystemSetId set_id)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  auto& schedule = self.schedule_.get();
+  schedule.AddSystemToSet(self.id_.slot, set_id);
+  return std::forward<decltype(self)>(self);
+}
+
+constexpr auto SystemSetHandle::Before(this auto&& self, SystemId target)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  auto& schedule = self.schedule_.get();
+
+  auto& set_entry = schedule.GetSystemSet(self.id_.id);
+  set_entry.Before(target);
+  schedule.MarkDirty();
+
+  return std::forward<decltype(self)>(self);
+}
+
+constexpr auto SystemSetHandle::Before(this auto&& self, SystemSetId target)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  auto& schedule = self.schedule_.get();
+
+  auto& set_entry = schedule.GetSystemSet(self.id_.id);
+  set_entry.Before(target);
+  schedule.MarkDirty();
+
+  return std::forward<decltype(self)>(self);
+}
+
+constexpr auto SystemSetHandle::Before(this auto&& self,
+                                       const SystemGroupHandle& target)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  return std::forward<decltype(self)>(self).Before(target.Id());
+}
+
+constexpr auto SystemSetHandle::After(this auto&& self, SystemId target)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  auto& schedule = self.schedule_.get();
+
+  auto& set_entry = schedule.GetSystemSet(self.id_.id);
+  set_entry.After(target);
+  schedule.MarkDirty();
+
+  return std::forward<decltype(self)>(self);
+}
+
+constexpr auto SystemSetHandle::After(this auto&& self, SystemSetId target)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  auto& schedule = self.schedule_.get();
+
+  auto& set_entry = schedule.GetSystemSet(self.id_.id);
+  set_entry.After(target);
+  schedule.MarkDirty();
+
+  return std::forward<decltype(self)>(self);
+}
+
+constexpr auto SystemSetHandle::After(this auto&& self,
+                                      const SystemGroupHandle& target)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  return std::forward<decltype(self)>(self).After(target.Id());
+}
+
+constexpr auto SystemSetHandle::RunIf(this auto&& self, RunCondition condition,
+                                      AccessPolicy policy,
+                                      SystemLocalDataOptions options)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  auto& schedule = self.schedule_.get();
+
+  auto& set_entry = schedule.GetSystemSet(self.id_.id);
+  set_entry.RunIf(RunConditionStorage::From(std::move(condition),
+                                            std::move(policy), options));
+  schedule.MarkDirty();
+
+  return std::forward<decltype(self)>(self);
+}
+
+template <FunctorSystemTrait T>
+constexpr auto SystemSetHandle::RunIf(this auto&& self, T&& condition)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  auto& schedule = self.schedule_.get();
+
+  auto& set_entry = schedule.GetSystemSet(self.id_.id);
+  set_entry.RunIf(RunConditionStorage::FromParam(std::forward<T>(condition)));
+  schedule.MarkDirty();
+
+  return std::forward<decltype(self)>(self);
+}
+
+template <SystemTrait T>
+constexpr auto SystemSetHandle::RunIf(this auto&& self, std::string name,
+                                      T&& condition)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  auto& schedule = self.schedule_.get();
+
+  auto& set_entry = schedule.GetSystemSet(self.id_.id);
+  set_entry.RunIf(RunConditionStorage::FromParamNamed(
+      std::move(name), std::forward<T>(condition)));
+  schedule.MarkDirty();
+
+  return std::forward<decltype(self)>(self);
+}
+
+constexpr auto SystemSetHandle::Sequence(this auto&& self)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  auto& schedule = self.schedule_.get();
+
+  auto& set_entry = schedule.GetSystemSet(self.id_.id);
+  set_entry.Sequence();
+  schedule.MarkDirty();
+
+  return std::forward<decltype(self)>(self);
+}
+
+constexpr auto SystemGroupHandle::Before(this auto&& self, SystemId target)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  auto& schedule = self.schedule_.get();
+
+  auto& set_entry = schedule.GetSystemSet(self.id_.id);
+  set_entry.Before(target);
+  schedule.MarkDirty();
+
+  return std::forward<decltype(self)>(self);
+}
+
+constexpr auto SystemGroupHandle::Before(this auto&& self, SystemSetId target)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  auto& schedule = self.schedule_.get();
+
+  auto& set_entry = schedule.GetSystemSet(self.id_.id);
+  set_entry.Before(target);
+  schedule.MarkDirty();
+
+  return std::forward<decltype(self)>(self);
+}
+
+constexpr auto SystemGroupHandle::After(this auto&& self, SystemId target)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  auto& schedule = self.schedule_.get();
+
+  auto& set_entry = schedule.GetSystemSet(self.id_.id);
+  set_entry.After(target);
+  schedule.MarkDirty();
+
+  return std::forward<decltype(self)>(self);
+}
+
+constexpr auto SystemGroupHandle::After(this auto&& self, SystemSetId target)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  auto& schedule = self.schedule_.get();
+
+  auto& set_entry = schedule.GetSystemSet(self.id_.id);
+  set_entry.After(target);
+  schedule.MarkDirty();
+
+  return std::forward<decltype(self)>(self);
+}
+
+constexpr auto SystemGroupHandle::RunIf(this auto&& self,
+                                        RunCondition condition,
+                                        AccessPolicy policy,
+                                        SystemLocalDataOptions options)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  auto& schedule = self.schedule_.get();
+
+  auto& set_entry = schedule.GetSystemSet(self.id_.id);
+  set_entry.RunIf(RunConditionStorage::From(std::move(condition),
+                                            std::move(policy), options));
+  schedule.MarkDirty();
+
+  return std::forward<decltype(self)>(self);
+}
+
+template <FunctorSystemTrait T>
+constexpr auto SystemGroupHandle::RunIf(this auto&& self, T&& condition)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  auto& schedule = self.schedule_.get();
+
+  auto& set_entry = schedule.GetSystemSet(self.id_.id);
+  set_entry.RunIf(RunConditionStorage::FromParam(std::forward<T>(condition)));
+  schedule.MarkDirty();
+
+  return std::forward<decltype(self)>(self);
+}
+
+template <SystemTrait T>
+constexpr auto SystemGroupHandle::RunIf(this auto&& self, std::string name,
+                                        T&& condition)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  auto& schedule = self.schedule_.get();
+
+  auto& set_entry = schedule.GetSystemSet(self.id_.id);
+  set_entry.RunIf(RunConditionStorage::FromParamNamed(
+      std::move(name), std::forward<T>(condition)));
+  schedule.MarkDirty();
+
+  return std::forward<decltype(self)>(self);
+}
+
+constexpr auto SystemGroupHandle::InSet(this auto&& self, SystemSetId target)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  auto& schedule = self.schedule_.get();
+  schedule.AssignGroupToSet(self.id_, target);
+  return std::forward<decltype(self)>(self);
+}
+
+constexpr auto SystemGroupHandle::Sequence(this auto&& self)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  auto& schedule = self.schedule_.get();
+
+  auto& set_entry = schedule.GetSystemSet(self.id_.id);
+  set_entry.Sequence();
+  schedule.MarkDirty();
+
+  return std::forward<decltype(self)>(self);
 }
 
 }  // namespace helios::ecs

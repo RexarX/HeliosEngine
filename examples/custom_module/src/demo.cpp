@@ -2,8 +2,10 @@
 
 #include <helios/log/logger.hpp>
 
+namespace hlog = helios::log;
+
 int main() {
-  helios::log::Info("{}", helios::greeting::Format("Helios"));
-  helios::log::Info("{}", helios::greeting::Format(""));
+  hlog::Info("{}", helios::greeting::Format("Helios"));
+  hlog::Info("{}", helios::greeting::Format(""));
   return 0;
 }

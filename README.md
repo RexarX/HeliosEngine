@@ -1,44 +1,58 @@
-[C++23](https://en.cppreference.com/w/cpp/23)
-[MIT License](https://github.com/RexarX/HeliosEngine/blob/main/LICENSE)
+<a id="readme-top"></a>
 
-[Linux GCC](https://github.com/RexarX/HeliosEngine/actions/workflows/linux-gcc.yaml)
-[Linux Clang](https://github.com/RexarX/HeliosEngine/actions/workflows/linux-clang.yaml)
-[Windows MSVC](https://github.com/RexarX/HeliosEngine/actions/workflows/windows-msvc.yaml)
-[macOS Clang](https://github.com/RexarX/HeliosEngine/actions/workflows/macos-clang.yaml)
+<!-- PROJECT SHIELDS -->
+
+[![C++23][cpp-shield]][cpp-url]
+[![MIT License][license-shield]][license-url]
+
+[![Linux GCC](https://img.shields.io/github/actions/workflow/status/RexarX/HeliosEngine/linux-gcc.yaml?branch=main&label=Linux%20GCC&logo=linux&logoColor=white)](https://github.com/RexarX/HeliosEngine/actions/workflows/linux-gcc.yaml)
+[![Linux Clang](https://img.shields.io/github/actions/workflow/status/RexarX/HeliosEngine/linux-clang.yaml?branch=main&label=Linux%20Clang&logo=llvm&logoColor=white)](https://github.com/RexarX/HeliosEngine/actions/workflows/linux-clang.yaml)
+[![Windows MSVC](https://img.shields.io/github/actions/workflow/status/RexarX/HeliosEngine/windows-msvc.yaml?branch=main&label=Windows%20MSVC&logo=windows&logoColor=white)](https://github.com/RexarX/HeliosEngine/actions/workflows/windows-msvc.yaml)
+[![macOS Clang](https://img.shields.io/github/actions/workflow/status/RexarX/HeliosEngine/macos-clang.yaml?branch=main&label=macOS%20Clang&logo=apple&logoColor=white)](https://github.com/RexarX/HeliosEngine/actions/workflows/macos-clang.yaml)
+
+<!-- PROJECT LOGO -->
+
+<br />
+
+<div align="center">
+
+<img src="docs/img/logo.png" alt="Helios Engine Logo" width="200">
 
 # Helios Engine
 
 A modular, data-oriented C++23 game engine framework inspired by Bevy
 
-**[Get Started »](#getting-started)** · [Features](#key-features) · [Modules](#modules) · [Build](#building) · [Third-Party](#using-as-a-dependency) · [Docs](#documentation)
+<b><a href="#getting-started">Get Started »</a></b> · <a href="#key-features">Features</a> · <a href="#modules">Modules</a> · <a href="#building">Build</a> · <a href="#using-as-a-dependency">Third-Party</a> · <a href="#documentation">Docs</a>
+
+</div>
 
 ---
 
 ## Table of Contents
 
-- [About The Project](#about-the-project)
-  - [Key Features](#key-features)
-  - [Design Philosophy](#design-philosophy)
-- [Modules](#modules)
-- [Getting Started](#getting-started)
-  - [Requirements](#requirements)
-  - [Installing Dependencies](#installing-dependencies)
-  - [Building](#building)
-  - [Run the Example](#run-the-example)
-- [Usage](#usage)
-- [Architecture](#architecture)
-- [Using as a Dependency](#using-as-a-dependency)
-  - [add_subdirectory](#method-1-add_subdirectory)
-  - [FetchContent](#method-2-fetchcontent)
-  - [CPM](#method-3-cpm)
-  - [Installed Package (find_package)](#method-4-installed-package-find_package)
-- [Documentation](#documentation)
-- [Development](#development)
-  - [Creating a Custom Module](#creating-a-custom-module)
-- [Roadmap](#roadmap)
-- [Acknowledgments](#acknowledgments)
-- [License](#license)
-- [Contact](#contact)
+- <a href="#about-the-project">About The Project</a>
+  - <a href="#key-features">Key Features</a>
+  - <a href="#design-philosophy">Design Philosophy</a>
+- <a href="#modules">Modules</a>
+- <a href="#getting-started">Getting Started</a>
+  - <a href="#requirements">Requirements</a>
+  - <a href="#installing-dependencies">Installing Dependencies</a>
+  - <a href="#building">Building</a>
+  - <a href="#run-the-example">Run the Example</a>
+- <a href="#usage">Usage</a>
+- <a href="#architecture">Architecture</a>
+- <a href="#using-as-a-dependency">Using as a Dependency</a>
+  - <a href="#method-1-add_subdirectory">add_subdirectory</a>
+  - <a href="#method-2-fetchcontent">FetchContent</a>
+  - <a href="#method-3-cpm">CPM</a>
+  - <a href="#method-4-installed-package-find_package">Installed Package (find_package)</a>
+- <a href="#documentation">Documentation</a>
+- <a href="#development">Development</a>
+  - <a href="#creating-a-custom-module">Creating a Custom Module</a>
+- <a href="#roadmap">Roadmap</a>
+- <a href="#acknowledgments">Acknowledgments</a>
+- <a href="#license">License</a>
+- <a href="#contact">Contact</a>
 
 ---
 
@@ -46,7 +60,7 @@ A modular, data-oriented C++23 game engine framework inspired by Bevy
 
 **Helios Engine** is a high-performance, ECS-based game engine framework written in C++23. It combines an archetype-based Entity Component System with deferred commands, double-buffered messages, and parallel system scheduling over a work-stealing task executor.
 
-[↑ Back to Top](#readme-top)
+<a href="#readme-top">↑ Back to Top</a>
 
 ### Key Features
 
@@ -63,7 +77,7 @@ A modular, data-oriented C++23 game engine framework inspired by Bevy
 2. **Composability** — behavior emerges from systems operating on component data
 3. **Explicitness** — data access declared through system parameter types; schedules resolve ordering
 
-[↑ Back to Top](#readme-top)
+<a href="#readme-top">↑ Back to Top</a>
 
 ---
 
@@ -88,7 +102,7 @@ A modular, data-oriented C++23 game engine framework inspired by Bevy
 cmake --preset linux-gcc-release -DHELIOS_BUILD_PROFILE=ON -DHELIOS_BUILD_WINDOW=OFF
 ```
 
-[↑ Back to Top](#readme-top)
+<a href="#readme-top">↑ Back to Top</a>
 
 ---
 
@@ -114,7 +128,7 @@ cd HeliosEngine
 
 Helios resolves dependencies per module: **system packages are tried first**, then **CPM download** if missing (`HELIOS_DOWNLOAD_PACKAGES=ON`, default). Pre-installing system packages speeds up configuration and avoids network fetches.
 
-Package names below match `INSTALL_HINTS` in `[cmake/dependencies/](cmake/dependencies/)`.
+Package names below match `INSTALL_HINTS` in [`cmake/dependencies/`](cmake/dependencies/).
 
 #### All platforms — build tools
 
@@ -252,7 +266,7 @@ cmake --build --preset linux-gcc-release --target simple_example
 
 See [examples/simple/src/main.cpp](examples/simple/src/main.cpp) for schedules, system sets, sub-apps, and profiling.
 
-[↑ Back to Top](#readme-top)
+<a href="#readme-top">↑ Back to Top</a>
 
 ---
 
@@ -348,7 +362,7 @@ int main() {
 
 Builtin schedules (`helios/app/schedules.hpp`): `MainStartup` → `PreStartup` → `Startup` → `PostStartup` → `First` → `PreUpdate` → `Update` → `PostUpdate` → `Last` → `Extract` → shutdown stages.
 
-[↑ Back to Top](#readme-top)
+<a href="#readme-top">↑ Back to Top</a>
 
 ---
 
@@ -381,7 +395,7 @@ Builtin schedules (`helios/app/schedules.hpp`): `MainStartup` → `PreStartup` �
 - **Components** — archetype columns or per-type sparse sets; structural changes via deferred `Commands`
 - **Messages** — double-buffered (read previous frame); async messages use lock-free queues
 
-[↑ Back to Top](#readme-top)
+<a href="#readme-top">↑ Back to Top</a>
 
 ---
 
@@ -444,7 +458,7 @@ helios_link_modules(
 
 ### Method 3: CPM
 
-Uses the same CPM integration as Helios itself (`[cmake/DownloadUsingCPM.cmake](cmake/DownloadUsingCPM.cmake)`).
+Uses the same CPM integration as Helios itself ([`cmake/DownloadUsingCPM.cmake`](cmake/DownloadUsingCPM.cmake)).
 
 ```cmake
 # Download CPM once (or vendor cmake/CPM.cmake)
@@ -487,9 +501,9 @@ helios_link_modules(
 )
 ```
 
-Installed artifacts: `HeliosConfig.cmake`, `HeliosConfigVersion.cmake`, `HeliosTargets.cmake` (see `[cmake/Install.cmake](cmake/Install.cmake)`).
+Installed artifacts: `HeliosConfig.cmake`, `HeliosConfigVersion.cmake`, `HeliosTargets.cmake` (see [`cmake/Install.cmake`](cmake/Install.cmake)).
 
-[↑ Back to Top](#readme-top)
+<a href="#readme-top">↑ Back to Top</a>
 
 ---
 
@@ -502,7 +516,7 @@ python scripts/docs.py
 # → docs/doxygen/html/index.html
 ```
 
-Config: `[docs/doxygen/Doxyfile](docs/doxygen/Doxyfile)` — [doxygen-awesome-css](third-party/doxygen-awesome-css) theme (git submodule).
+Config: [`docs/doxygen/Doxyfile`](docs/doxygen/Doxyfile) — [doxygen-awesome-css](third-party/doxygen-awesome-css) theme (git submodule).
 
 ### Project guidelines
 
@@ -514,7 +528,7 @@ Config: `[docs/doxygen/Doxyfile](docs/doxygen/Doxyfile)` — [doxygen-awesome-cs
 
 ### Code formatting
 
-Formatting runs automatically on every local commit (via [pre-commit](https://pre-commit.com/)) and is verified on every push / PR (`[.github/workflows/format.yaml](.github/workflows/format.yaml)`). Unformatted code cannot land on `main` if hooks and CI are used.
+Formatting runs automatically on every local commit (via [pre-commit](https://pre-commit.com/)) and is verified on every push / PR ([`.github/workflows/format.yaml`](.github/workflows/format.yaml)). Unformatted code cannot land on `main` if hooks and CI are used.
 
 | When                     | Mechanism                                                         |
 | ------------------------ | ----------------------------------------------------------------- |
@@ -578,7 +592,7 @@ python scripts/docs.py                                      # Doxygen
 ctest --preset linux-gcc-release                            # tests
 ```
 
-[↑ Back to Top](#readme-top)
+<a href="#readme-top">↑ Back to Top</a>
 
 ---
 
@@ -587,7 +601,7 @@ ctest --preset linux-gcc-release                            # tests
 - Rendering module
 - Full window/input integration
 
-[↑ Back to Top](#readme-top)
+<a href="#readme-top">↑ Back to Top</a>
 
 ---
 
@@ -595,22 +609,29 @@ ctest --preset linux-gcc-release                            # tests
 
 Inspired by [Bevy](https://bevyengine.org/), [EnTT](https://github.com/skypjack/entt), and [Taskflow](https://taskflow.github.io/).
 
-[↑ Back to Top](#readme-top)
+<a href="#readme-top">↑ Back to Top</a>
 
 ---
 
 ## License
 
-Distributed under the MIT License. See [LICENSE](https://github.com/RexarX/HeliosEngine/blob/main/LICENSE) for details.
+Distributed under the MIT License. See [LICENSE][license-url] for details.
 
-[↑ Back to Top](#readme-top)
+<a href="#readme-top">↑ Back to Top</a>
 
 ---
 
 ## Contact
 
-**RexarX** — [who727cares@gmail.com](mailto:who727cares@gmail.com)
+**RexarX** — who727cares@gmail.com
 
 **Project:** [github.com/RexarX/HeliosEngine](https://github.com/RexarX/HeliosEngine)
 
-[↑ Back to Top](#readme-top)
+<a href="#readme-top">↑ Back to Top</a>
+
+<!-- MARKDOWN LINKS & IMAGES -->
+
+[license-shield]: https://img.shields.io/github/license/RexarX/HeliosEngine.svg?style=for-the-badge
+[license-url]: https://github.com/RexarX/HeliosEngine/blob/main/LICENSE
+[cpp-shield]: https://img.shields.io/badge/C%2B%2B-23-blue.svg?style=for-the-badge&logo=c%2B%2B
+[cpp-url]: https://en.cppreference.com/w/cpp/23
