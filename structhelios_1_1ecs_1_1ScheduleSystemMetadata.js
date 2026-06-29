@@ -4,6 +4,7 @@ var structhelios_1_1ecs_1_1ScheduleSystemMetadata =
     [ "AddAfter", "structhelios_1_1ecs_1_1ScheduleSystemMetadata.html#aee519ec6526e7a461d9705d37bc1b992", null ],
     [ "AddBefore", "structhelios_1_1ecs_1_1ScheduleSystemMetadata.html#a84389e469d3b5356936f7a752c1d9ba2", null ],
     [ "AddBefore", "structhelios_1_1ecs_1_1ScheduleSystemMetadata.html#a24d278f59967a030d2034eba8bba06ce", null ],
+    [ "AddMemberOfSet", "structhelios_1_1ecs_1_1ScheduleSystemMetadata.html#a9bf980ca081e30c9ada13f18bb1e9052", null ],
     [ "AppendUnique", "structhelios_1_1ecs_1_1ScheduleSystemMetadata.html#a4d4dbe530439097efbe216383e60c344", null ],
     [ "after_set_targets", "structhelios_1_1ecs_1_1ScheduleSystemMetadata.html#ab2b0c5a22c8dbba85aba34c82a2fbaf0", null ],
     [ "after_targets", "structhelios_1_1ecs_1_1ScheduleSystemMetadata.html#a792aadf76cd68785aad4fda819532a7b", null ],

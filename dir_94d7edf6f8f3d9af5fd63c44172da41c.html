@@ -177,19 +177,23 @@ Allocators</h2>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Allocator  </th><th class="markdownTableHeadNone">Strategy  </th><th class="markdownTableHeadNone">Thread safety  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt">ArenaAllocator</span>  </td><td class="markdownTableBodyNone">Lock-free bump-pointer; individual deallocation is a no-op.  </td><td class="markdownTableBodyNone">Lock-free allocate  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">ArenaAllocator</span>  </td><td class="markdownTableBodyNone">Growable lock-free bump allocator.  </td><td class="markdownTableBodyNone">Lock-free allocate  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt">StackAllocator</span>  </td><td class="markdownTableBodyNone">LIFO-aware with marker/rewind.  </td><td class="markdownTableBodyNone">Lock-free  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">FixedArenaAllocator</span>  </td><td class="markdownTableBodyNone">Fixed-capacity bump allocator.  </td><td class="markdownTableBodyNone">Lock-free allocate  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt">PoolAllocator</span>  </td><td class="markdownTableBodyNone">Fixed-size blocks, intrusive freelist (atomic CAS).  </td><td class="markdownTableBodyNone">Lock-free  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">StackAllocator</span>  </td><td class="markdownTableBodyNone">Growable LIFO-aware allocator with marker/rewind.  </td><td class="markdownTableBodyNone">Lock-free allocate + LIFO deallocate on head  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt">FreeListAllocator</span>  </td><td class="markdownTableBodyNone">Best-fit with coalescing.  </td><td class="markdownTableBodyNone">Mutex-protected  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">FixedStackAllocator</span>  </td><td class="markdownTableBodyNone">Fixed-capacity stack allocator.  </td><td class="markdownTableBodyNone">Lock-free allocate + LIFO deallocate  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt">NFrameAllocator&lt;N&gt;</span>  </td><td class="markdownTableBodyNone">N arenas; <span class="tt">Advance()</span> rotates and resets.  </td><td class="markdownTableBodyNone">Delegates to arena  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">PoolAllocator</span>  </td><td class="markdownTableBodyNone">Growable fixed-size-block pool.  </td><td class="markdownTableBodyNone">Lock-free  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt">FrameAllocator</span>  </td><td class="markdownTableBodyNone">Alias for <span class="tt">NFrameAllocator&lt;1&gt;</span>.  </td><td class="markdownTableBodyNone"></td></tr>
+<td class="markdownTableBodyNone"><span class="tt">FixedPoolAllocator</span>  </td><td class="markdownTableBodyNone">Fixed-capacity block pool.  </td><td class="markdownTableBodyNone">Lock-free  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt">DoubleFrameAllocator</span>  </td><td class="markdownTableBodyNone">Alias for <span class="tt">NFrameAllocator&lt;2&gt;</span>.  </td><td class="markdownTableBodyNone"></td></tr>
+<td class="markdownTableBodyNone"><span class="tt">FreeListAllocator</span>  </td><td class="markdownTableBodyNone">Growable best-fit allocator with coalescing.  </td><td class="markdownTableBodyNone">Mutex-protected  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">FixedFreeListAllocator</span>  </td><td class="markdownTableBodyNone">Fixed-capacity best-fit allocator.  </td><td class="markdownTableBodyNone">Mutex-protected  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">FrameAllocator&lt;N = 2&gt;</span>  </td><td class="markdownTableBodyNone">N growable arenas; <span class="tt">Advance()</span> rotates and resets.  </td><td class="markdownTableBodyNone">Delegates to arena  </td></tr>
 </table>
 <h2 class="doxsection"><a class="anchor" id="reference-counting"></a>
 Reference Counting</h2>
@@ -219,12 +223,25 @@ Utilities</h2>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Type / Function  </th><th class="markdownTableHeadNone">Purpose  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt">GrowthPolicy</span>  </td><td class="markdownTableBodyNone">Shared growth config (<span class="tt">Fixed</span>, <span class="tt">Linear</span>, <span class="tt">Geometric</span>).  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">GrowthPolicy</span>  </td><td class="markdownTableBodyNone">Growable allocator policy (<span class="tt">Linear</span> or <span class="tt">Geometric</span>).  </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">AllocatorStats</span>  </td><td class="markdownTableBodyNone">Snapshot of allocation counters and capacity.  </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt">AlignedAlloc</span> / <span class="tt">AlignedFree</span>  </td><td class="markdownTableBodyNone">Cross-platform aligned allocation.  </td></tr>
 </table>
+<h1 class="doxsection"><a class="anchor" id="mimalloc-and-global-allocation"></a>
+mimalloc and global allocation</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">CMake option  </th><th class="markdownTableHeadNone">Default  </th><th class="markdownTableHeadNone">Effect  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">HELIOS_MEMORY_USE_MIMALLOC</span>  </td><td class="markdownTableBodyNone">ON  </td><td class="markdownTableBodyNone">Routes backing <span class="tt">AlignedAlloc</span> / growable <span class="tt">Create*</span> through mimalloc  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">HELIOS_MEMORY_ENABLE_PROFILE</span>  </td><td class="markdownTableBodyNone">ON  </td><td class="markdownTableBodyNone">Enables memory-module profile macros when profile module is linked  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">HELIOS_MEMORY_OVERRIDE_GLOBAL_ALLOC</span>  </td><td class="markdownTableBodyNone">ON  </td><td class="markdownTableBodyNone">Inherits global <span class="tt">operator new</span>/<span class="tt">delete</span> hooks when linking memory  </td></tr>
+</table>
+<p>Global <span class="tt">operator new</span>/<span class="tt">delete</span> hooks are inherited automatically when you link <span class="tt">helios::module::memory</span>. The hook implementation lives in the memory module and reports allocations to the profiler when the profile module is linked and <span class="tt">HELIOS_MEMORY_ENABLE_PROFILE=ON</span>. Disable with <span class="tt">-DHELIOS_MEMORY_OVERRIDE_GLOBAL_ALLOC=OFF</span>.</p>
 <h1 class="doxsection"><a class="anchor" id="arena-allocator"></a>
 Arena Allocator</h1>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="arena__allocator_8hpp.html">helios/memory/arena_allocator.hpp</a>&gt;</span></div>
@@ -236,19 +253,19 @@ Arena Allocator</h1>
 <div class="line"><span class="comment">// no individual deallocate — memory reclaimed on Reset() or destruction</span></div>
 <div class="line">arena.Reset();</div>
 <div class="ttc" id="aarena__allocator_8hpp_html"><div class="ttname"><a href="arena__allocator_8hpp.html">arena_allocator.hpp</a></div></div>
-<div class="ttc" id="aclasshelios_1_1mem_1_1ArenaAllocator_html"><div class="ttname"><a href="classhelios_1_1mem_1_1ArenaAllocator.html">helios::mem::ArenaAllocator</a></div><div class="ttdoc">PMR arena allocator with lock-free hot allocation path.</div><div class="ttdef"><b>Definition</b> <a href="arena__allocator_8hpp_source.html#l00037">arena_allocator.hpp:37</a></div></div>
+<div class="ttc" id="aclasshelios_1_1mem_1_1ArenaAllocator_html"><div class="ttname"><a href="classhelios_1_1mem_1_1ArenaAllocator.html">helios::mem::ArenaAllocator</a></div><div class="ttdoc">PMR arena allocator with lock-free hot allocation path.</div><div class="ttdef"><b>Definition</b> <a href="arena__allocator_8hpp_source.html#l00030">arena_allocator.hpp:30</a></div></div>
 </div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="frame-allocator"></a>
 Frame Allocator</h1>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="frame__allocator_8hpp.html">helios/memory/frame_allocator.hpp</a>&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><a class="code hl_typedef" href="namespacehelios_1_1mem.html#aeab730f98e2a00d3d8a3a7f26941f4ea">helios::mem::DoubleFrameAllocator</a> frames(64 * 1024);</div>
+<div class="line"><a class="code hl_class" href="classhelios_1_1mem_1_1FrameAllocator.html">helios::mem::FrameAllocator</a> frames(64 * 1024);</div>
 <div class="line">std::pmr::polymorphic_allocator&lt;std::byte&gt; alloc(&amp;frames);</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">auto</span>* data = alloc.allocate(128);  <span class="comment">// current frame</span></div>
 <div class="line"> </div>
 <div class="line">frames.Advance();  <span class="comment">// next frame; previous arena reset</span></div>
+<div class="ttc" id="aclasshelios_1_1mem_1_1FrameAllocator_html"><div class="ttname"><a href="classhelios_1_1mem_1_1FrameAllocator.html">helios::mem::FrameAllocator</a></div><div class="ttdoc">N-buffered PMR frame allocator.</div><div class="ttdef"><b>Definition</b> <a href="frame__allocator_8hpp_source.html#l00040">frame_allocator.hpp:40</a></div></div>
 <div class="ttc" id="aframe__allocator_8hpp_html"><div class="ttname"><a href="frame__allocator_8hpp.html">frame_allocator.hpp</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1mem_html_aeab730f98e2a00d3d8a3a7f26941f4ea"><div class="ttname"><a href="namespacehelios_1_1mem.html#aeab730f98e2a00d3d8a3a7f26941f4ea">helios::mem::DoubleFrameAllocator</a></div><div class="ttdeci">NFrameAllocator&lt; 2 &gt; DoubleFrameAllocator</div><div class="ttdef"><b>Definition</b> <a href="frame__allocator_8hpp_source.html#l00292">frame_allocator.hpp:292</a></div></div>
 </div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="pool-allocator"></a>
 Pool Allocator</h1>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="pool__allocator_8hpp.html">helios/memory/pool_allocator.hpp</a>&gt;</span></div>
@@ -258,7 +275,7 @@ Pool Allocator</h1>
 <div class="line"> </div>
 <div class="line"><span class="keyword">auto</span>* obj = alloc.new_object&lt;MyStruct&gt;(args...);</div>
 <div class="line">alloc.delete_object(obj);</div>
-<div class="ttc" id="aclasshelios_1_1mem_1_1PoolAllocator_html"><div class="ttname"><a href="classhelios_1_1mem_1_1PoolAllocator.html">helios::mem::PoolAllocator</a></div><div class="ttdoc">Lock-free PMR pool allocator for fixed-size blocks.</div><div class="ttdef"><b>Definition</b> <a href="pool__allocator_8hpp_source.html#l00030">pool_allocator.hpp:30</a></div></div>
+<div class="ttc" id="aclasshelios_1_1mem_1_1PoolAllocator_html"><div class="ttname"><a href="classhelios_1_1mem_1_1PoolAllocator.html">helios::mem::PoolAllocator</a></div><div class="ttdoc">Lock-free PMR pool allocator for fixed-size blocks.</div><div class="ttdef"><b>Definition</b> <a href="pool__allocator_8hpp_source.html#l00035">pool_allocator.hpp:35</a></div></div>
 <div class="ttc" id="apool__allocator_8hpp_html"><div class="ttname"><a href="pool__allocator_8hpp.html">pool_allocator.hpp</a></div></div>
 </div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="reference-counting-1"></a>
 Reference Counting</h1>
@@ -277,16 +294,17 @@ Reference Counting</h1>
 <div class="line"> </div>
 <div class="line"><span class="keyword">class </span>Texture final : <span class="keyword">public</span> <a class="code hl_class" href="classhelios_1_1mem_1_1ArcFromThis.html">helios::mem::ArcFromThis</a>&lt;Texture&gt; {};</div>
 <div class="line"><span class="keyword">auto</span> tex = <a class="code hl_function" href="namespacehelios_1_1mem.html#a10f597088c98df7a40f43d8ac7236814">helios::mem::MakeArc&lt;Texture&gt;</a>();  <span class="comment">// thread-safe ref count</span></div>
-<div class="ttc" id="aclasshelios_1_1mem_1_1ArcFromThis_html"><div class="ttname"><a href="classhelios_1_1mem_1_1ArcFromThis.html">helios::mem::ArcFromThis</a></div><div class="ttdoc">CRTP base class that embeds an atomic reference counter into the derived type.</div><div class="ttdef"><b>Definition</b> <a href="ref__counted_8hpp_source.html#l00127">ref_counted.hpp:127</a></div></div>
+<div class="ttc" id="aclasshelios_1_1mem_1_1ArcFromThis_html"><div class="ttname"><a href="classhelios_1_1mem_1_1ArcFromThis.html">helios::mem::ArcFromThis</a></div><div class="ttdoc">CRTP base class that embeds an atomic reference counter into the derived type.</div><div class="ttdef"><b>Definition</b> <a href="ref__counted_8hpp_source.html#l00137">ref_counted.hpp:137</a></div></div>
 <div class="ttc" id="aclasshelios_1_1mem_1_1RcFromThis_html"><div class="ttname"><a href="classhelios_1_1mem_1_1RcFromThis.html">helios::mem::RcFromThis</a></div><div class="ttdoc">CRTP base class that embeds a non-atomic reference counter into the derived type.</div><div class="ttdef"><b>Definition</b> <a href="ref__counted_8hpp_source.html#l00057">ref_counted.hpp:57</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1mem_html_a10f597088c98df7a40f43d8ac7236814"><div class="ttname"><a href="namespacehelios_1_1mem.html#a10f597088c98df7a40f43d8ac7236814">helios::mem::MakeArc</a></div><div class="ttdeci">auto MakeArc(Args &amp;&amp;... args) -&gt; Arc&lt; T &gt;</div><div class="ttdoc">Allocates and constructs a T object, returning an Arc&lt;T, std::allocator&lt;T&gt;&gt; handle.</div><div class="ttdef"><b>Definition</b> <a href="ref__counted_8hpp_source.html#l01045">ref_counted.hpp:1045</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1mem_html_a3739908b3ea624bbd6e990f5c0ebe5da"><div class="ttname"><a href="namespacehelios_1_1mem.html#a3739908b3ea624bbd6e990f5c0ebe5da">helios::mem::MakeRc</a></div><div class="ttdeci">auto MakeRc(Args &amp;&amp;... args) -&gt; Rc&lt; T &gt;</div><div class="ttdoc">Allocates and constructs a T object, returning a Rc&lt;T, std::allocator&lt;T&gt;&gt; handle.</div><div class="ttdef"><b>Definition</b> <a href="ref__counted_8hpp_source.html#l01015">ref_counted.hpp:1015</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1mem_html_a10f597088c98df7a40f43d8ac7236814"><div class="ttname"><a href="namespacehelios_1_1mem.html#a10f597088c98df7a40f43d8ac7236814">helios::mem::MakeArc</a></div><div class="ttdeci">auto MakeArc(Args &amp;&amp;... args) -&gt; Arc&lt; T &gt;</div><div class="ttdoc">Allocates and constructs a T object, returning an Arc&lt;T, std::allocator&lt;T&gt;&gt; handle.</div><div class="ttdef"><b>Definition</b> <a href="ref__counted_8hpp_source.html#l01204">ref_counted.hpp:1204</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1mem_html_a3739908b3ea624bbd6e990f5c0ebe5da"><div class="ttname"><a href="namespacehelios_1_1mem.html#a3739908b3ea624bbd6e990f5c0ebe5da">helios::mem::MakeRc</a></div><div class="ttdeci">auto MakeRc(Args &amp;&amp;... args) -&gt; Rc&lt; T &gt;</div><div class="ttdoc">Allocates and constructs a T object, returning a Rc&lt;T, std::allocator&lt;T&gt;&gt; handle.</div><div class="ttdef"><b>Definition</b> <a href="ref__counted_8hpp_source.html#l01174">ref_counted.hpp:1174</a></div></div>
 <div class="ttc" id="aref__counted_8hpp_html"><div class="ttname"><a href="ref__counted_8hpp.html">ref_counted.hpp</a></div></div>
 </div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="dependencies-6"></a>
 Dependencies</h1>
 <ul>
 <li><span class="tt">core</span> — asserts</li>
-<li><span class="tt">platform</span> — aligned allocation backends </li>
+<li><span class="tt">mimalloc</span> (default ON) — backing heap via <span class="tt">helios::lib::mimalloc::static</span></li>
+<li><span class="tt">profile</span> (optional) — Tracy scope/zone/lock and backing ALLOC/FREE macros </li>
 </ul>
 </div></div><!-- contents -->
 </div><!-- doc-content -->

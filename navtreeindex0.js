@@ -4,6 +4,8 @@ var NAVTREEINDEX0 =
 "access__decl_8hpp_source.html":[5,0,2,5,0,0,0,7,0],
 "access__policy_8hpp.html":[5,0,2,5,0,0,0,7,1],
 "access__policy_8hpp_source.html":[5,0,2,5,0,0,0,7,1],
+"aligned__alloc_8cpp.html":[5,0,2,7,1,0],
+"aligned__alloc_8cpp_source.html":[5,0,2,7,1,0],
 "aligned__alloc_8hpp.html":[5,0,2,7,0,0,0,0],
 "aligned__alloc_8hpp_source.html":[5,0,2,7,0,0,0,0],
 "allocator__traits_8hpp.html":[5,0,2,7,0,0,0,1],
@@ -25,8 +27,8 @@ var NAVTREEINDEX0 =
 "archetype_8hpp_source.html":[5,0,2,5,0,0,0,1,0],
 "archetype__id_8hpp.html":[5,0,2,5,0,0,0,1,1],
 "archetype__id_8hpp_source.html":[5,0,2,5,0,0,0,1,1],
-"arena__allocator_8cpp.html":[5,0,2,7,1,0],
-"arena__allocator_8cpp_source.html":[5,0,2,7,1,0],
+"arena__allocator_8cpp.html":[5,0,2,7,1,1],
+"arena__allocator_8cpp_source.html":[5,0,2,7,1,1],
 "arena__allocator_8hpp.html":[5,0,2,7,0,0,0,2],
 "arena__allocator_8hpp_source.html":[5,0,2,7,0,0,0,2],
 "assert_8cpp.html":[5,0,2,4,1,0],
@@ -247,7 +249,5 @@ var NAVTREEINDEX0 =
 "classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#a7ffd51bc5d6de517d4377b4e3cb856a2":[4,0,2,11,13],
 "classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#a967ac7ecaa2cc04d793f34b54b555e55":[2,0,6,12,6],
 "classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#a967ac7ecaa2cc04d793f34b54b555e55":[4,0,2,11,6],
-"classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#aa021385d636b7d83de50d31296ab1ed3":[2,0,6,12,7],
-"classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#aa021385d636b7d83de50d31296ab1ed3":[4,0,2,11,7],
-"classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#aa63e8061d6ff9395afc8928dab6cdbd5":[2,0,6,12,12]
+"classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#aa021385d636b7d83de50d31296ab1ed3":[2,0,6,12,7]
 };

@@ -3,7 +3,7 @@ var searchData=
   ['mainstartup_0',['MainStartup',['../structhelios_1_1app_1_1MainStartup.html',1,'helios::app']]],
   ['mainthreadexecutor_1',['MainThreadExecutor',['../classhelios_1_1ecs_1_1MainThreadExecutor.html',1,'helios::ecs']]],
   ['mapadapter_2',['MapAdapter',['../classhelios_1_1utils_1_1MapAdapter.html',1,'helios::utils']]],
-  ['marker_3',['Marker',['../structhelios_1_1mem_1_1StackAllocator_1_1Marker.html',1,'helios::mem::StackAllocator']]],
+  ['marker_3',['Marker',['../structhelios_1_1mem_1_1FixedStackAllocator_1_1Marker.html',1,'helios::mem::FixedStackAllocator::Marker'],['../structhelios_1_1mem_1_1StackAllocator_1_1Marker.html',1,'helios::mem::StackAllocator::Marker']]],
   ['memberfnargs_4',['MemberFnArgs',['../structhelios_1_1ecs_1_1details_1_1MemberFnArgs.html',1,'helios::ecs::details']]],
   ['memberfnargs_3c_20r_28_2a_29_28args_2e_2e_2e_29_3e_5',['MemberFnArgs&lt; R(*)(Args...)&gt;',['../structhelios_1_1ecs_1_1details_1_1MemberFnArgs_3_01R_07_5_08_07Args_8_8_8_08_4.html',1,'helios::ecs::details']]],
   ['memberfnargs_3c_20r_28args_2e_2e_2e_29_3e_6',['MemberFnArgs&lt; R(Args...)&gt;',['../structhelios_1_1ecs_1_1details_1_1MemberFnArgs_3_01R_07Args_8_8_8_08_4.html',1,'helios::ecs::details']]],

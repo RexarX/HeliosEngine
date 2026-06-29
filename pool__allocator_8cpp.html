@@ -163,6 +163,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('pool__allocato
 <div class="contents">
 <div class="textblock"><code>#include &lt;<a class="el" href="memory_2src_2pch_8hpp_source.html">pch.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="pool__allocator_8hpp_source.html">helios/memory/pool_allocator.hpp</a>&gt;</code><br />
+<code>#include &lt;details/accumulate_peak.hpp&gt;</code><br />
 <code>#include &lt;<a class="el" href="assert_8hpp_source.html">helios/assert.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="aligned__alloc_8hpp_source.html">helios/memory/aligned_alloc.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html">helios/memory/common.hpp</a>&gt;</code><br />
@@ -172,6 +173,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('pool__allocato
 <code>#include &lt;cstddef&gt;</code><br />
 <code>#include &lt;cstdint&gt;</code><br />
 <code>#include &lt;memory&gt;</code><br />
+<code>#include &lt;utility&gt;</code><br />
 </div>
 <p><a href="pool__allocator_8cpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -183,7 +185,6 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ae449926cc3f64922a4b4efd56dcd3f64" id="r_ae449926cc3f64922a4b4efd56dcd3f64"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespaceanonymous__namespace_02pool__allocator_8cpp_03.html#ae449926cc3f64922a4b4efd56dcd3f64">anonymous_namespace{pool_allocator.cpp}::AccumulatePeak</a> (std::atomic&lt; size_t &gt; &amp;peak, size_t candidate) noexcept</td></tr>
 <tr class="memitem:a531a460312e833969a15d1cc88f02c18" id="r_a531a460312e833969a15d1cc88f02c18"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespaceanonymous__namespace_02pool__allocator_8cpp_03.html#a531a460312e833969a15d1cc88f02c18">anonymous_namespace{pool_allocator.cpp}::PushBlock</a> (std::atomic&lt; void * &gt; &amp;head, void *block) noexcept</td></tr>
 <tr class="memitem:a1b3773629ceb7a6c0c748f8000f6e039" id="r_a1b3773629ceb7a6c0c748f8000f6e039"><td class="memItemLeft">void *&#160;</td><td class="memItemRight"><a class="el" href="namespaceanonymous__namespace_02pool__allocator_8cpp_03.html#a1b3773629ceb7a6c0c748f8000f6e039">anonymous_namespace{pool_allocator.cpp}::PopBlock</a> (std::atomic&lt; void * &gt; &amp;head) noexcept</td></tr>
 </table>

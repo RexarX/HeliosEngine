@@ -79,6 +79,7 @@ var namespacehelios_1_1ecs =
     [ "SingleThreadedExecutor", "classhelios_1_1ecs_1_1SingleThreadedExecutor.html", "classhelios_1_1ecs_1_1SingleThreadedExecutor" ],
     [ "SparseComponentStorage", "classhelios_1_1ecs_1_1SparseComponentStorage.html", "classhelios_1_1ecs_1_1SparseComponentStorage" ],
     [ "StageOrdering", "classhelios_1_1ecs_1_1StageOrdering.html", "classhelios_1_1ecs_1_1StageOrdering" ],
+    [ "SystemGroupHandle", "classhelios_1_1ecs_1_1SystemGroupHandle.html", "classhelios_1_1ecs_1_1SystemGroupHandle" ],
     [ "SystemHandle", "classhelios_1_1ecs_1_1SystemHandle.html", "classhelios_1_1ecs_1_1SystemHandle" ],
     [ "SystemId", "structhelios_1_1ecs_1_1SystemId.html", "structhelios_1_1ecs_1_1SystemId" ],
     [ "SystemLocalData", "structhelios_1_1ecs_1_1SystemLocalData.html", "structhelios_1_1ecs_1_1SystemLocalData" ],

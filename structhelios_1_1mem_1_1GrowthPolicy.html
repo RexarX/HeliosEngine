@@ -171,56 +171,35 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('structhelios_1
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a03102395b0726b25d6599f0872b00759" id="r_a03102395b0726b25d6599f0872b00759"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#a03102395b0726b25d6599f0872b00759">Growable</a> () const noexcept</td></tr>
 <tr class="memitem:a0cf2f8a63f9f6417e49d0441c2d48c3b" id="r_a0cf2f8a63f9f6417e49d0441c2d48c3b"><td class="memItemLeft">constexpr size_t&#160;</td><td class="memItemRight"><a class="el" href="#a0cf2f8a63f9f6417e49d0441c2d48c3b">NextCapacity</a> (size_t current_capacity, size_t min_capacity) const noexcept</td></tr>
+<tr class="memdesc:a0cf2f8a63f9f6417e49d0441c2d48c3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the next block capacity for a grow request.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:afa6505bd6f3a90e3035e7c098e130604" id="r_afa6505bd6f3a90e3035e7c098e130604"><td class="memItemLeft">static constexpr <a class="el" href="structhelios_1_1mem_1_1GrowthPolicy.html">GrowthPolicy</a>&#160;</td><td class="memItemRight"><a class="el" href="#afa6505bd6f3a90e3035e7c098e130604">Fixed</a> (size_t max=std::numeric_limits&lt; size_t &gt;::max()) noexcept</td></tr>
 <tr class="memitem:a088e5526869b8462e658161532eca454" id="r_a088e5526869b8462e658161532eca454"><td class="memItemLeft">static constexpr <a class="el" href="structhelios_1_1mem_1_1GrowthPolicy.html">GrowthPolicy</a>&#160;</td><td class="memItemRight"><a class="el" href="#a088e5526869b8462e658161532eca454">Linear</a> (size_t step, size_t max=std::numeric_limits&lt; size_t &gt;::max()) noexcept</td></tr>
+<tr class="memdesc:a088e5526869b8462e658161532eca454"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a linear growth policy.  <br /></td></tr>
 <tr class="memitem:a1acb0a41728ac1706fb7bb88a59ef824" id="r_a1acb0a41728ac1706fb7bb88a59ef824"><td class="memItemLeft">static constexpr <a class="el" href="structhelios_1_1mem_1_1GrowthPolicy.html">GrowthPolicy</a>&#160;</td><td class="memItemRight"><a class="el" href="#a1acb0a41728ac1706fb7bb88a59ef824">Geometric</a> (size_t numerator=2, size_t denominator=1, size_t max=std::numeric_limits&lt; size_t &gt;::max()) noexcept</td></tr>
+<tr class="memdesc:a1acb0a41728ac1706fb7bb88a59ef824"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a geometric growth policy.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:abfdafc6967414e67578876fc8e6aadad" id="r_abfdafc6967414e67578876fc8e6aadad"><td class="memItemLeft"><a class="el" href="namespacehelios_1_1mem.html#a1562f4775c233b5c54e524a8c3a28e52">GrowthMode</a>&#160;</td><td class="memItemRight"><a class="el" href="#abfdafc6967414e67578876fc8e6aadad">mode</a> = <a class="el" href="namespacehelios_1_1mem.html#a1562f4775c233b5c54e524a8c3a28e52a826888a09763de7e2a9f60eb85d88b24">GrowthMode::kFixed</a></td></tr>
+<tr class="memitem:abfdafc6967414e67578876fc8e6aadad" id="r_abfdafc6967414e67578876fc8e6aadad"><td class="memItemLeft"><a class="el" href="namespacehelios_1_1mem.html#a1562f4775c233b5c54e524a8c3a28e52">GrowthMode</a>&#160;</td><td class="memItemRight"><a class="el" href="#abfdafc6967414e67578876fc8e6aadad">mode</a> = <a class="el" href="namespacehelios_1_1mem.html#a1562f4775c233b5c54e524a8c3a28e52a214d2c89b85e706df3d39c258b9b7b5f">GrowthMode::kGeometric</a></td></tr>
+<tr class="memdesc:abfdafc6967414e67578876fc8e6aadad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Active growth strategy.  <br /></td></tr>
 <tr class="memitem:a8a3233dd67c2e7947b6610f2884baee1" id="r_a8a3233dd67c2e7947b6610f2884baee1"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="#a8a3233dd67c2e7947b6610f2884baee1">linear_step</a> = 0</td></tr>
+<tr class="memdesc:a8a3233dd67c2e7947b6610f2884baee1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bytes added per growth step when <span class="tt"><a class="el" href="#abfdafc6967414e67578876fc8e6aadad" title="Active growth strategy.">mode</a> == kLinear</span>.  <br /></td></tr>
 <tr class="memitem:a5d687dfdc3ccbe8b5b78486843cd1a40" id="r_a5d687dfdc3ccbe8b5b78486843cd1a40"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="#a5d687dfdc3ccbe8b5b78486843cd1a40">geometric_numerator</a> = 2</td></tr>
+<tr class="memdesc:a5d687dfdc3ccbe8b5b78486843cd1a40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Capacity multiplier numerator for geometric growth.  <br /></td></tr>
 <tr class="memitem:aace2966ad973588c04989b21174df64c" id="r_aace2966ad973588c04989b21174df64c"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="#aace2966ad973588c04989b21174df64c">geometric_denominator</a> = 1</td></tr>
+<tr class="memdesc:aace2966ad973588c04989b21174df64c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Capacity multiplier denominator for geometric growth.  <br /></td></tr>
 <tr class="memitem:ae5e64ef425f8a350be7c4dc3e5c11c12" id="r_ae5e64ef425f8a350be7c4dc3e5c11c12"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="#ae5e64ef425f8a350be7c4dc3e5c11c12">max_capacity</a> = std::numeric_limits&lt;size_t&gt;::max()</td></tr>
+<tr class="memdesc:ae5e64ef425f8a350be7c4dc3e5c11c12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum capacity ceiling for any growth operation.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Capacity growth configuration. </p>
 <p>This policy is shared by all PMR allocators in the memory module. </p>
 
-<p class="definition">Definition at line <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00033">33</a> of file <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html">common.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00060">60</a> of file <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html">common.hpp</a>.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="afa6505bd6f3a90e3035e7c098e130604" name="afa6505bd6f3a90e3035e7c098e130604"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afa6505bd6f3a90e3035e7c098e130604">&#9670;&#160;</a></span>Fixed()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr <a class="el" href="structhelios_1_1mem_1_1GrowthPolicy.html">GrowthPolicy</a> helios::mem::GrowthPolicy::Fixed </td>
-          <td>(</td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>max</em></span><span class="paramdefsep"> = </span><span class="paramdefval">std::numeric_limits&lt;size_t&gt;::max()</span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00040">40</a> of file <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html">common.hpp</a>.</p>
-
-</div>
-</div>
 <a id="a1acb0a41728ac1706fb7bb88a59ef824" name="a1acb0a41728ac1706fb7bb88a59ef824"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1acb0a41728ac1706fb7bb88a59ef824">&#9670;&#160;</a></span>Geometric()</h2>
 
@@ -253,34 +232,18 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00062">62</a> of file <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html">common.hpp</a>.</p>
+<p>Creates a geometric growth policy. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">numerator</td><td>Capacity multiplier numerator </td></tr>
+    <tr><td class="paramname">denominator</td><td>Capacity multiplier denominator </td></tr>
+    <tr><td class="paramname">max</td><td>Maximum capacity ceiling </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Geometric growth policy </dd></dl>
 
-</div>
-</div>
-<a id="a03102395b0726b25d6599f0872b00759" name="a03102395b0726b25d6599f0872b00759"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a03102395b0726b25d6599f0872b00759">&#9670;&#160;</a></span>Growable()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool helios::mem::GrowthPolicy::Growable </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00074">74</a> of file <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html">common.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00096">96</a> of file <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html">common.hpp</a>.</p>
 
 </div>
 </div>
@@ -311,7 +274,17 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00051">51</a> of file <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html">common.hpp</a>.</p>
+<p>Creates a linear growth policy. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">step</td><td>Bytes added per growth step </td></tr>
+    <tr><td class="paramname">max</td><td>Maximum capacity ceiling </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Linear growth policy </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00078">78</a> of file <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html">common.hpp</a>.</p>
 
 </div>
 </div>
@@ -342,7 +315,17 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00078">78</a> of file <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html">common.hpp</a>.</p>
+<p>Computes the next block capacity for a grow request. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">current_capacity</td><td>Current block or region capacity </td></tr>
+    <tr><td class="paramname">min_capacity</td><td>Minimum bytes required for the pending allocation </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Next capacity, clamped to <span class="tt"><a class="el" href="#ae5e64ef425f8a350be7c4dc3e5c11c12" title="Maximum capacity ceiling for any growth operation.">max_capacity</a></span>; returns <span class="tt">0</span> when growth is disabled </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00115">115</a> of file <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html">common.hpp</a>.</p>
 
 </div>
 </div>
@@ -359,7 +342,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00037">37</a> of file <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html">common.hpp</a>.</p>
+<p>Capacity multiplier denominator for geometric growth. </p>
+
+<p class="definition">Definition at line <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00068">68</a> of file <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html">common.hpp</a>.</p>
 
 </div>
 </div>
@@ -375,7 +360,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00036">36</a> of file <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html">common.hpp</a>.</p>
+<p>Capacity multiplier numerator for geometric growth. </p>
+
+<p class="definition">Definition at line <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00066">66</a> of file <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html">common.hpp</a>.</p>
 
 </div>
 </div>
@@ -391,7 +378,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00035">35</a> of file <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html">common.hpp</a>.</p>
+<p>Bytes added per growth step when <span class="tt"><a class="el" href="#abfdafc6967414e67578876fc8e6aadad" title="Active growth strategy.">mode</a> == kLinear</span>. </p>
+
+<p class="definition">Definition at line <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00064">64</a> of file <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html">common.hpp</a>.</p>
 
 </div>
 </div>
@@ -407,7 +396,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00038">38</a> of file <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html">common.hpp</a>.</p>
+<p>Maximum capacity ceiling for any growth operation. </p>
+
+<p class="definition">Definition at line <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00070">70</a> of file <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html">common.hpp</a>.</p>
 
 </div>
 </div>
@@ -418,12 +409,14 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacehelios_1_1mem.html#a1562f4775c233b5c54e524a8c3a28e52">GrowthMode</a> helios::mem::GrowthPolicy::mode = <a class="el" href="namespacehelios_1_1mem.html#a1562f4775c233b5c54e524a8c3a28e52a826888a09763de7e2a9f60eb85d88b24">GrowthMode::kFixed</a></td>
+          <td class="memname"><a class="el" href="namespacehelios_1_1mem.html#a1562f4775c233b5c54e524a8c3a28e52">GrowthMode</a> helios::mem::GrowthPolicy::mode = <a class="el" href="namespacehelios_1_1mem.html#a1562f4775c233b5c54e524a8c3a28e52a214d2c89b85e706df3d39c258b9b7b5f">GrowthMode::kGeometric</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00034">34</a> of file <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html">common.hpp</a>.</p>
+<p>Active growth strategy. </p>
+
+<p class="definition">Definition at line <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00062">62</a> of file <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html">common.hpp</a>.</p>
 
 </div>
 </div>

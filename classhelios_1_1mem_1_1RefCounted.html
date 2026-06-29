@@ -191,7 +191,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:afc95151b94e7edc7b73d42ac719edab5" id="r_afc95151b94e7edc7b73d42ac719edab5"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#afc95151b94e7edc7b73d42ac719edab5">RefCounted</a> (Derived *ptr) noexcept</td></tr>
 <tr class="memdesc:afc95151b94e7edc7b73d42ac719edab5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs from a raw pointer using a default-constructed allocator.  <br /></td></tr>
 <tr class="memitem:a99d245c89d3f1740ebba03b72fb90ae6" id="r_a99d245c89d3f1740ebba03b72fb90ae6"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a99d245c89d3f1740ebba03b72fb90ae6">RefCounted</a> (const RefCounted &amp;other) noexcept</td></tr>
+<tr class="memdesc:a99d245c89d3f1740ebba03b72fb90ae6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy-constructs a handle sharing ownership with <span class="tt">other</span>.  <br /></td></tr>
 <tr class="memitem:a7d3b7bf5f979083a9a74a64e8af12bd5" id="r_a7d3b7bf5f979083a9a74a64e8af12bd5"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a7d3b7bf5f979083a9a74a64e8af12bd5">RefCounted</a> (RefCounted &amp;&amp;other) noexcept</td></tr>
+<tr class="memdesc:a7d3b7bf5f979083a9a74a64e8af12bd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move-constructs a handle transferring ownership from <span class="tt">other</span>.  <br /></td></tr>
 <tr class="memitem:a36486a295745593ac8ca3dd8575c2560" id="r_a36486a295745593ac8ca3dd8575c2560"><td class="memTemplParams" colspan="2">template&lt;typename Other&gt; <br />
 requires std::convertible_to&lt;Other*, Derived*&gt;</td></tr>
 <tr class="memitem:a36486a295745593ac8ca3dd8575c2560 template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a36486a295745593ac8ca3dd8575c2560">RefCounted</a> (const RefCounted&lt; Other, Allocator &gt; &amp;other) noexcept</td></tr>
@@ -201,26 +203,38 @@ requires std::convertible_to&lt;Other*, Derived*&gt;</td></tr>
 <tr class="memitem:ac2ef2692b2e471b61540c82ee2f037e5 template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ac2ef2692b2e471b61540c82ee2f037e5">RefCounted</a> (RefCounted&lt; Other, Allocator &gt; &amp;&amp;other) noexcept</td></tr>
 <tr class="memdesc:ac2ef2692b2e471b61540c82ee2f037e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converting move constructor from a compatible (derived) type.  <br /></td></tr>
 <tr class="memitem:a56ee0833ea628ef7cc001bfb1402cb6f" id="r_a56ee0833ea628ef7cc001bfb1402cb6f"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a56ee0833ea628ef7cc001bfb1402cb6f">~RefCounted</a> () noexcept</td></tr>
+<tr class="memdesc:a56ee0833ea628ef7cc001bfb1402cb6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys the handle and decrements the reference count.  <br /></td></tr>
 <tr class="memitem:a88582b2e29ee3290f51cfb6ca2905431" id="r_a88582b2e29ee3290f51cfb6ca2905431"><td class="memItemLeft"><a class="el" href="#aae6d20348c377662a3cea2bc03a2dd14">RefCounted</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a88582b2e29ee3290f51cfb6ca2905431">operator=</a> (const <a class="el" href="#aae6d20348c377662a3cea2bc03a2dd14">RefCounted</a> &amp;other) noexcept</td></tr>
+<tr class="memdesc:a88582b2e29ee3290f51cfb6ca2905431"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy-assigns shared ownership from <span class="tt">other</span>.  <br /></td></tr>
 <tr class="memitem:aea989dd5b9c8caf8ed5efde3db9455e4" id="r_aea989dd5b9c8caf8ed5efde3db9455e4"><td class="memItemLeft"><a class="el" href="#aae6d20348c377662a3cea2bc03a2dd14">RefCounted</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#aea989dd5b9c8caf8ed5efde3db9455e4">operator=</a> (<a class="el" href="#aae6d20348c377662a3cea2bc03a2dd14">RefCounted</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="memdesc:aea989dd5b9c8caf8ed5efde3db9455e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move-assigns ownership from <span class="tt">other</span>.  <br /></td></tr>
 <tr class="memitem:a8366a6f74937c6d2a4129a158dce0dde" id="r_a8366a6f74937c6d2a4129a158dce0dde"><td class="memTemplParams" colspan="2">template&lt;typename Other&gt; <br />
 requires std::convertible_to&lt;Other*, Derived*&gt;</td></tr>
 <tr class="memitem:a8366a6f74937c6d2a4129a158dce0dde template"><td class="memItemLeft"><a class="el" href="#aae6d20348c377662a3cea2bc03a2dd14">RefCounted</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a8366a6f74937c6d2a4129a158dce0dde">operator=</a> (const <a class="el" href="#aae6d20348c377662a3cea2bc03a2dd14">RefCounted</a>&lt; Other, Allocator &gt; &amp;other) noexcept</td></tr>
+<tr class="memdesc:a8366a6f74937c6d2a4129a158dce0dde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converting copy-assignment from a compatible (derived) handle.  <br /></td></tr>
 <tr class="memitem:a5364bca3ebba074f3374fc0a2a46c188" id="r_a5364bca3ebba074f3374fc0a2a46c188"><td class="memTemplParams" colspan="2">template&lt;typename Other&gt; <br />
 requires std::convertible_to&lt;Other*, Derived*&gt;</td></tr>
 <tr class="memitem:a5364bca3ebba074f3374fc0a2a46c188 template"><td class="memItemLeft"><a class="el" href="#aae6d20348c377662a3cea2bc03a2dd14">RefCounted</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a5364bca3ebba074f3374fc0a2a46c188">operator=</a> (<a class="el" href="#aae6d20348c377662a3cea2bc03a2dd14">RefCounted</a>&lt; Other, Allocator &gt; &amp;&amp;other) noexcept</td></tr>
+<tr class="memdesc:a5364bca3ebba074f3374fc0a2a46c188"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converting move-assignment from a compatible (derived) handle.  <br /></td></tr>
 <tr class="memitem:ad88fe019075b9185641da99d0cd907e5" id="r_ad88fe019075b9185641da99d0cd907e5"><td class="memItemLeft"><a class="el" href="#aae6d20348c377662a3cea2bc03a2dd14">RefCounted</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ad88fe019075b9185641da99d0cd907e5">operator=</a> (std::nullptr_t) noexcept</td></tr>
+<tr class="memdesc:ad88fe019075b9185641da99d0cd907e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns null, releasing any currently managed object.  <br /></td></tr>
 <tr class="memitem:a339327a5f4559e5481c67156e6aed59c" id="r_a339327a5f4559e5481c67156e6aed59c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a339327a5f4559e5481c67156e6aed59c">Reset</a> () noexcept</td></tr>
 <tr class="memdesc:a339327a5f4559e5481c67156e6aed59c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Releases ownership and resets the handle to null.  <br /></td></tr>
 <tr class="memitem:ab7561a602056cc3cf2eccc8bcd52c0f7" id="r_ab7561a602056cc3cf2eccc8bcd52c0f7"><td class="memItemLeft">Derived *&#160;</td><td class="memItemRight"><a class="el" href="#ab7561a602056cc3cf2eccc8bcd52c0f7">Release</a> () noexcept</td></tr>
 <tr class="memdesc:ab7561a602056cc3cf2eccc8bcd52c0f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Releases ownership without decrementing the ref count.  <br /></td></tr>
 <tr class="memitem:a5cfa9372160e707faacf9b9f58587114" id="r_a5cfa9372160e707faacf9b9f58587114"><td class="memItemLeft">Derived &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a5cfa9372160e707faacf9b9f58587114">operator*</a> () const noexcept</td></tr>
+<tr class="memdesc:a5cfa9372160e707faacf9b9f58587114"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dereferences the managed object.  <br /></td></tr>
 <tr class="memitem:a87017331883958cfce3647bca71fdca0" id="r_a87017331883958cfce3647bca71fdca0"><td class="memItemLeft">Derived *&#160;</td><td class="memItemRight"><a class="el" href="#a87017331883958cfce3647bca71fdca0">operator-&gt;</a> () const noexcept</td></tr>
+<tr class="memdesc:a87017331883958cfce3647bca71fdca0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accesses the managed object through pointer syntax.  <br /></td></tr>
 <tr class="memitem:a11aa2c5715ce0d81501e47cfeae65ad7" id="r_a11aa2c5715ce0d81501e47cfeae65ad7"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a11aa2c5715ce0d81501e47cfeae65ad7">operator bool</a> () const noexcept</td></tr>
+<tr class="memdesc:a11aa2c5715ce0d81501e47cfeae65ad7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether the handle owns an object.  <br /></td></tr>
 <tr class="memitem:af9f21797f1069cbfa03780e8cb790019" id="r_af9f21797f1069cbfa03780e8cb790019"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#af9f21797f1069cbfa03780e8cb790019">operator==</a> (const <a class="el" href="#aae6d20348c377662a3cea2bc03a2dd14">RefCounted</a> &amp;other) const noexcept</td></tr>
+<tr class="memdesc:af9f21797f1069cbfa03780e8cb790019"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares handle identity by managed pointer address.  <br /></td></tr>
 <tr class="memitem:a24a8eac4c82dbd7930b6c631ed02ccb8" id="r_a24a8eac4c82dbd7930b6c631ed02ccb8"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a24a8eac4c82dbd7930b6c631ed02ccb8">operator==</a> (std::nullptr_t) const noexcept</td></tr>
+<tr class="memdesc:a24a8eac4c82dbd7930b6c631ed02ccb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether the handle is null.  <br /></td></tr>
 <tr class="memitem:ab9cd0d80e9695840df40538f5c70dfdd" id="r_ab9cd0d80e9695840df40538f5c70dfdd"><td class="memTemplParams" colspan="2">template&lt;typename Other&gt; </td></tr>
 <tr class="memitem:ab9cd0d80e9695840df40538f5c70dfdd template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ab9cd0d80e9695840df40538f5c70dfdd">operator==</a> (const <a class="el" href="#aae6d20348c377662a3cea2bc03a2dd14">RefCounted</a>&lt; Other, Allocator &gt; &amp;other) const noexcept</td></tr>
+<tr class="memdesc:ab9cd0d80e9695840df40538f5c70dfdd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares handle identity against a compatible derived handle.  <br /></td></tr>
 <tr class="memitem:ab3f8020c2290a84cc42624f3c3dc64e4" id="r_ab3f8020c2290a84cc42624f3c3dc64e4"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ab3f8020c2290a84cc42624f3c3dc64e4">Unique</a> () const noexcept</td></tr>
 <tr class="memdesc:ab3f8020c2290a84cc42624f3c3dc64e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if this handle is the sole owner of the managed object.  <br /></td></tr>
 <tr class="memitem:a5a8dabc2d31e5cb49399f6a834016463" id="r_a5a8dabc2d31e5cb49399f6a834016463"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a5a8dabc2d31e5cb49399f6a834016463">Empty</a> () const noexcept</td></tr>
@@ -266,10 +280,10 @@ class helios::mem::RefCounted&lt; Derived, Allocator &gt;</div><p>Non-atomic int
 <div class="line">mesh.Reset();                         <span class="comment">// ref count: 1</span></div>
 <div class="line">copy.Reset();                         <span class="comment">// ref count: 0 → Mesh deleted via</span></div>
 <div class="line"><a class="code hl_class" href="classhelios_1_1mem_1_1PoolAllocator.html">PoolAllocator</a></div>
-<div class="ttc" id="aclasshelios_1_1mem_1_1PoolAllocator_html"><div class="ttname"><a href="classhelios_1_1mem_1_1PoolAllocator.html">helios::mem::PoolAllocator</a></div><div class="ttdoc">Lock-free PMR pool allocator for fixed-size blocks.</div><div class="ttdef"><b>Definition</b> <a href="pool__allocator_8hpp_source.html#l00030">pool_allocator.hpp:30</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1mem_html_a3739908b3ea624bbd6e990f5c0ebe5da"><div class="ttname"><a href="namespacehelios_1_1mem.html#a3739908b3ea624bbd6e990f5c0ebe5da">helios::mem::MakeRc</a></div><div class="ttdeci">auto MakeRc(Args &amp;&amp;... args) -&gt; Rc&lt; T &gt;</div><div class="ttdoc">Allocates and constructs a T object, returning a Rc&lt;T, std::allocator&lt;T&gt;&gt; handle.</div><div class="ttdef"><b>Definition</b> <a href="ref__counted_8hpp_source.html#l01015">ref_counted.hpp:1015</a></div></div>
+<div class="ttc" id="aclasshelios_1_1mem_1_1PoolAllocator_html"><div class="ttname"><a href="classhelios_1_1mem_1_1PoolAllocator.html">helios::mem::PoolAllocator</a></div><div class="ttdoc">Lock-free PMR pool allocator for fixed-size blocks.</div><div class="ttdef"><b>Definition</b> <a href="pool__allocator_8hpp_source.html#l00035">pool_allocator.hpp:35</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1mem_html_a3739908b3ea624bbd6e990f5c0ebe5da"><div class="ttname"><a href="namespacehelios_1_1mem.html#a3739908b3ea624bbd6e990f5c0ebe5da">helios::mem::MakeRc</a></div><div class="ttdeci">auto MakeRc(Args &amp;&amp;... args) -&gt; Rc&lt; T &gt;</div><div class="ttdoc">Allocates and constructs a T object, returning a Rc&lt;T, std::allocator&lt;T&gt;&gt; handle.</div><div class="ttdef"><b>Definition</b> <a href="ref__counted_8hpp_source.html#l01174">ref_counted.hpp:1174</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00210">210</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00230">230</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 </div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>
 <a id="ac4720852cd4e3e18027d1e20c6fc6ed1" name="ac4720852cd4e3e18027d1e20c6fc6ed1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac4720852cd4e3e18027d1e20c6fc6ed1">&#9670;&#160;</a></span>AllocatorType</h2>
@@ -285,7 +299,7 @@ template&lt;typename Derived, typename Allocator&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00212">212</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00232">232</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -348,7 +362,7 @@ template&lt;typename Derived, typename Allocator&gt; </div>
 <p>Constructs a null handle storing a pre-built allocator. </p>
 <p>Use this when the allocator is stateful and you need a typed null handle that is ready to receive an assignment from a <span class="tt"><a class="el" href="namespacehelios_1_1mem.html#abe028765a3fedd39dc19845d8f46e043" title="Overload of MakeRc accepting a pre-constructed allocator instance.">MakeRcWith</a></span>-created handle. </p>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00229">229</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00249">249</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -379,7 +393,7 @@ template&lt;typename Derived, typename Allocator&gt; </div>
 
 <p>Constructs a null handle explicitly (default-constructible allocators only). </p>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00234">234</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00254">254</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -414,7 +428,7 @@ template&lt;typename Derived, typename Allocator&gt; </div>
 
 <p>Constructs a null handle explicitly with an explicit allocator. </p>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00239">239</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00259">259</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -451,7 +465,7 @@ template&lt;typename Derived, typename Allocator&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00248">248</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00268">268</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -493,7 +507,7 @@ template&lt;typename Derived, typename Allocator&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00261">261</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00281">281</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -537,7 +551,7 @@ requires std::derived_from&lt;Derived, <a class="el" href="classhelios_1_1mem_1_
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00410">410</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00498">498</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -569,7 +583,7 @@ template&lt;typename Derived, typename Allocator&gt; </div>
 <p>Constructs from a raw pointer using a default-constructed allocator. </p>
 <dl class="section note"><dt>Note</dt><dd>Only available when <span class="tt"><a class="el" href="#ac4720852cd4e3e18027d1e20c6fc6ed1">AllocatorType</a></span> is default-constructible. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00280">280</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00300">300</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -599,7 +613,15 @@ requires std::derived_from&lt;Derived, <a class="el" href="classhelios_1_1mem_1_
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00420">420</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p>Copy-constructs a handle sharing ownership with <span class="tt">other</span>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Handle to copy from </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00508">508</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -629,7 +651,15 @@ requires std::derived_from&lt;Derived, <a class="el" href="classhelios_1_1mem_1_
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00432">432</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p>Move-constructs a handle transferring ownership from <span class="tt">other</span>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Handle to move from; left null after the operation </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00520">520</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -676,7 +706,7 @@ requires std::convertible_to&lt;Other*, Derived*&gt;</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00441">441</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00529">529</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -723,7 +753,7 @@ requires std::convertible_to&lt;Other*, Derived*&gt;</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00455">455</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00543">543</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -752,7 +782,9 @@ template&lt;typename Derived, typename Allocator&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00311">311</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p>Destroys the handle and decrements the reference count. </p>
+
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00341">341</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -785,7 +817,7 @@ template&lt;typename Derived, typename Allocator&gt; </div>
 <p>Checks if the handle is null. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if no object is managed </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00370">370</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00458">458</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -817,7 +849,7 @@ template&lt;typename Derived, typename Allocator&gt; </div>
 <p>Returns the raw pointer without releasing ownership. </p>
 <dl class="section return"><dt>Returns</dt><dd>Raw pointer, or <span class="tt">nullptr</span> if the handle is null </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00376">376</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00464">464</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -849,7 +881,7 @@ template&lt;typename Derived, typename Allocator&gt; </div>
 <p>Returns a reference to the stored allocator. </p>
 <dl class="section return"><dt>Returns</dt><dd>The allocator instance used for this handle </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00391">391</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00479">479</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -878,7 +910,10 @@ template&lt;typename Derived, typename Allocator&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00343">343</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p>Checks whether the handle owns an object. </p>
+<dl class="section return"><dt>Returns</dt><dd>True when non-null, false otherwise </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00415">415</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -908,7 +943,11 @@ requires std::derived_from&lt;Derived, <a class="el" href="classhelios_1_1mem_1_
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00553">553</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p>Dereferences the managed object. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion when the handle is null. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to the managed object </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00641">641</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -938,7 +977,11 @@ requires std::derived_from&lt;Derived, <a class="el" href="classhelios_1_1mem_1_
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00560">560</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p>Accesses the managed object through pointer syntax. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion when the handle is null. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to the managed object </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00648">648</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -968,7 +1011,16 @@ requires std::derived_from&lt;Derived, <a class="el" href="classhelios_1_1mem_1_
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00462">462</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p>Copy-assigns shared ownership from <span class="tt">other</span>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Handle to copy from </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to this handle </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00550">550</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -1000,7 +1052,7 @@ requires std::convertible_to&lt;Other*, Derived*&gt;</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00498">498</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00586">586</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -1032,6 +1084,21 @@ requires std::convertible_to&lt;Other*, Derived*&gt;</div>
 </table>
 </div><div class="memdoc">
 
+<p>Converting copy-assignment from a compatible (derived) handle. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Other</td><td>Type convertible to <span class="tt">Derived*</span> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Handle to copy from </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to this handle </dd></dl>
+
 </div>
 </div>
 <a id="aea989dd5b9c8caf8ed5efde3db9455e4" name="aea989dd5b9c8caf8ed5efde3db9455e4"></a>
@@ -1060,7 +1127,16 @@ requires std::derived_from&lt;Derived, <a class="el" href="classhelios_1_1mem_1_
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00480">480</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p>Move-assigns ownership from <span class="tt">other</span>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Handle to move from; left null after the operation </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to this handle </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00568">568</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -1092,7 +1168,7 @@ requires std::convertible_to&lt;Other*, Derived*&gt;</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00517">517</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00605">605</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -1124,6 +1200,21 @@ requires std::convertible_to&lt;Other*, Derived*&gt;</div>
 </table>
 </div><div class="memdoc">
 
+<p>Converting move-assignment from a compatible (derived) handle. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Other</td><td>Type convertible to <span class="tt">Derived*</span> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Handle to move from; left null after the operation </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to this handle </dd></dl>
+
 </div>
 </div>
 <a id="ad88fe019075b9185641da99d0cd907e5" name="ad88fe019075b9185641da99d0cd907e5"></a>
@@ -1152,7 +1243,10 @@ requires std::derived_from&lt;Derived, <a class="el" href="classhelios_1_1mem_1_
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00531">531</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p>Assigns null, releasing any currently managed object. </p>
+<dl class="section return"><dt>Returns</dt><dd>Reference to this handle </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00619">619</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -1181,7 +1275,16 @@ template&lt;typename Derived, typename Allocator&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00347">347</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p>Compares handle identity by managed pointer address. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Handle to compare against </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True when both handles refer to the same object </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00424">424</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -1212,7 +1315,22 @@ template&lt;typename Other&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00355">355</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p>Compares handle identity against a compatible derived handle. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Other</td><td>Derived type convertible to <span class="tt">Derived*</span> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Handle to compare against </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True when both handles refer to the same object </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00443">443</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -1241,7 +1359,10 @@ template&lt;typename Derived, typename Allocator&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00350">350</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p>Checks whether the handle is null. </p>
+<dl class="section return"><dt>Returns</dt><dd>True when no object is managed </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00432">432</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -1274,7 +1395,7 @@ template&lt;typename Derived, typename Allocator&gt; </div>
 <dl class="section warning"><dt>Warning</dt><dd>Returns 0 if the handle is null. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Current reference count, or 0 for a null handle </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00383">383</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00471">471</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -1307,7 +1428,7 @@ requires std::derived_from&lt;Derived, <a class="el" href="classhelios_1_1mem_1_
 <p>Releases ownership without decrementing the ref count. </p>
 <p>The caller becomes responsible for managing the object's lifetime. </p><dl class="section return"><dt>Returns</dt><dd>Raw pointer that was managed, or <span class="tt">nullptr</span> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00545">545</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00633">633</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -1340,7 +1461,7 @@ requires std::derived_from&lt;Derived, <a class="el" href="classhelios_1_1mem_1_
 <p>Releases ownership and resets the handle to null. </p>
 <p>Decrements the ref count; destroys the object via the stored allocator if it reaches 0. </p>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00538">538</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00626">626</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -1372,7 +1493,7 @@ template&lt;typename Derived, typename Allocator&gt; </div>
 <p>Checks if this handle is the sole owner of the managed object. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if ref count == 1, false if null or ref count &gt; 1 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00364">364</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00452">452</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>

@@ -1,5 +1,7 @@
 var NAVTREEINDEX1 =
 {
+"classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#aa021385d636b7d83de50d31296ab1ed3":[4,0,2,11,7],
+"classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#aa63e8061d6ff9395afc8928dab6cdbd5":[2,0,6,12,12],
 "classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#aa63e8061d6ff9395afc8928dab6cdbd5":[4,0,2,11,12],
 "classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#aa92cb4e9496f7eebd58f68de0a652563":[2,0,6,12,5],
 "classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#aa92cb4e9496f7eebd58f68de0a652563":[4,0,2,11,5],
@@ -181,8 +183,6 @@ var NAVTREEINDEX1 =
 "classhelios_1_1app_1_1App.html#ab1e7d6a6140a7580e67b6ba74d69338b":[4,0,2,0,0,34],
 "classhelios_1_1app_1_1App.html#ab46f03545666e2881cbbaef960c50faf":[2,0,6,1,1,14],
 "classhelios_1_1app_1_1App.html#ab46f03545666e2881cbbaef960c50faf":[4,0,2,0,0,14],
-"classhelios_1_1app_1_1App.html#ab478cd0250c3f95ac27c06049ddc7fcd":[2,0,6,1,1,15],
-"classhelios_1_1app_1_1App.html#ab478cd0250c3f95ac27c06049ddc7fcd":[4,0,2,0,0,15],
 "classhelios_1_1app_1_1App.html#abb5a6854d555e4bce7a5daad3024fa3c":[2,0,6,1,1,26],
 "classhelios_1_1app_1_1App.html#abb5a6854d555e4bce7a5daad3024fa3c":[4,0,2,0,0,26],
 "classhelios_1_1app_1_1App.html#ac34e107cb6fd9145d5a01ebf3024813a":[2,0,6,1,1,42],
@@ -197,6 +197,8 @@ var NAVTREEINDEX1 =
 "classhelios_1_1app_1_1App.html#acf734aa3c7b0408127b3552551df50f4":[4,0,2,0,0,6],
 "classhelios_1_1app_1_1App.html#acfc8a4af0224ded97cdd0a522269f3d9":[2,0,6,1,1,38],
 "classhelios_1_1app_1_1App.html#acfc8a4af0224ded97cdd0a522269f3d9":[4,0,2,0,0,38],
+"classhelios_1_1app_1_1App.html#ad88147a9c541ed672401349ccb6d42fd":[2,0,6,1,1,15],
+"classhelios_1_1app_1_1App.html#ad88147a9c541ed672401349ccb6d42fd":[4,0,2,0,0,15],
 "classhelios_1_1app_1_1App.html#ad9c41ded54e87910d24f1a592f9350d4":[2,0,6,1,1,52],
 "classhelios_1_1app_1_1App.html#ad9c41ded54e87910d24f1a592f9350d4":[4,0,2,0,0,52],
 "classhelios_1_1app_1_1App.html#ade17edd51d5429683671b86dbf4189af":[2,0,6,1,1,33],
@@ -247,7 +249,5 @@ var NAVTREEINDEX1 =
 "classhelios_1_1app_1_1DynamicPlugin.html#aaa9b318e27ce87805e607cf3a65d49df":[4,0,2,0,2,11],
 "classhelios_1_1app_1_1DynamicPlugin.html#ab9135603191cf66bb39b194d54082b0c":[2,0,6,1,3,9],
 "classhelios_1_1app_1_1DynamicPlugin.html#ab9135603191cf66bb39b194d54082b0c":[4,0,2,0,2,9],
-"classhelios_1_1app_1_1DynamicPlugin.html#abbb1ba75dc8609dc3b98bb39cb627272":[2,0,6,1,3,12],
-"classhelios_1_1app_1_1DynamicPlugin.html#abbb1ba75dc8609dc3b98bb39cb627272":[4,0,2,0,2,12],
-"classhelios_1_1app_1_1DynamicPlugin.html#ac2ec38e7678b63f9db8a0f389c058cff":[2,0,6,1,3,4]
+"classhelios_1_1app_1_1DynamicPlugin.html#abbb1ba75dc8609dc3b98bb39cb627272":[2,0,6,1,3,12]
 };

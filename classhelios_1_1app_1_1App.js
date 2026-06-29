@@ -15,7 +15,7 @@ var classhelios_1_1app_1_1App =
     [ "AddSchedule", "classhelios_1_1app_1_1App.html#a18bb7e6fc5a3e6d54c881e881911be4f", null ],
     [ "AddSystem", "classhelios_1_1app_1_1App.html#aabbdf71882c4e7219a73fc527fae150e", null ],
     [ "AddSystem", "classhelios_1_1app_1_1App.html#ab46f03545666e2881cbbaef960c50faf", null ],
-    [ "AddSystems", "classhelios_1_1app_1_1App.html#ab478cd0250c3f95ac27c06049ddc7fcd", null ],
+    [ "AddSystems", "classhelios_1_1app_1_1App.html#ad88147a9c541ed672401349ccb6d42fd", null ],
     [ "Clear", "classhelios_1_1app_1_1App.html#ac3c9939c10ef6d2a9a31aee51de545e9", null ],
     [ "ConfigureSet", "classhelios_1_1app_1_1App.html#a0742567c03797a721db30bc7d7ec4275", null ],
     [ "EditSchedule", "classhelios_1_1app_1_1App.html#a2ad4cee1cdb4eedd8f3d55c003bd6f39", null ],

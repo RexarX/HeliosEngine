@@ -170,12 +170,14 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('structhelios_1
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a773e28e224136b1444b99113731e5085" id="r_a773e28e224136b1444b99113731e5085"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="#a773e28e224136b1444b99113731e5085">initial_capacity</a> = 0</td></tr>
-<tr class="memitem:ae339fcb83e17ab0f8856a9729b8e6f93" id="r_ae339fcb83e17ab0f8856a9729b8e6f93"><td class="memItemLeft"><a class="el" href="structhelios_1_1mem_1_1GrowthPolicy.html">GrowthPolicy</a>&#160;</td><td class="memItemRight"><a class="el" href="#ae339fcb83e17ab0f8856a9729b8e6f93">growth</a> = <a class="el" href="structhelios_1_1mem_1_1GrowthPolicy.html#afa6505bd6f3a90e3035e7c098e130604">GrowthPolicy::Fixed</a>()</td></tr>
+<tr class="memdesc:a773e28e224136b1444b99113731e5085"><td class="mdescLeft">&#160;</td><td class="mdescRight">Capacity of the initial backing block in bytes.  <br /></td></tr>
+<tr class="memitem:ae339fcb83e17ab0f8856a9729b8e6f93" id="r_ae339fcb83e17ab0f8856a9729b8e6f93"><td class="memItemLeft"><a class="el" href="structhelios_1_1mem_1_1GrowthPolicy.html">GrowthPolicy</a>&#160;</td><td class="memItemRight"><a class="el" href="#ae339fcb83e17ab0f8856a9729b8e6f93">growth</a> = <a class="el" href="structhelios_1_1mem_1_1GrowthPolicy.html#a1acb0a41728ac1706fb7bb88a59ef824">GrowthPolicy::Geometric</a>()</td></tr>
+<tr class="memdesc:ae339fcb83e17ab0f8856a9729b8e6f93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Growth policy applied when additional blocks are required.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Configuration for <a class="el" href="classhelios_1_1mem_1_1StackAllocator.html" title="PMR stack allocator with LIFO-aware deallocation.">StackAllocator</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00016">16</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00017">17</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
 </div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
 <a id="ae339fcb83e17ab0f8856a9729b8e6f93" name="ae339fcb83e17ab0f8856a9729b8e6f93"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae339fcb83e17ab0f8856a9729b8e6f93">&#9670;&#160;</a></span>growth</h2>
@@ -184,12 +186,14 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structhelios_1_1mem_1_1GrowthPolicy.html">GrowthPolicy</a> helios::mem::StackAllocatorOptions::growth = <a class="el" href="structhelios_1_1mem_1_1GrowthPolicy.html#afa6505bd6f3a90e3035e7c098e130604">GrowthPolicy::Fixed</a>()</td>
+          <td class="memname"><a class="el" href="structhelios_1_1mem_1_1GrowthPolicy.html">GrowthPolicy</a> helios::mem::StackAllocatorOptions::growth = <a class="el" href="structhelios_1_1mem_1_1GrowthPolicy.html#a1acb0a41728ac1706fb7bb88a59ef824">GrowthPolicy::Geometric</a>()</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00018">18</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
+<p>Growth policy applied when additional blocks are required. </p>
+
+<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00021">21</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -205,7 +209,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00017">17</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
+<p>Capacity of the initial backing block in bytes. </p>
+
+<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00019">19</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
 
 </div>
 </div>

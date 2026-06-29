@@ -184,20 +184,22 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aced4d8677f908a82c8e071c710fb4173" id="r_aced4d8677f908a82c8e071c710fb4173"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#aced4d8677f908a82c8e071c710fb4173">StackAllocator</a> (<a class="el" href="structhelios_1_1mem_1_1StackAllocatorOptions.html">StackAllocatorOptions</a> options) noexcept</td></tr>
 <tr class="memdesc:aced4d8677f908a82c8e071c710fb4173"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs stack allocator from options.  <br /></td></tr>
 <tr class="memitem:a70d71f3907401062c6333a78fc12162c" id="r_a70d71f3907401062c6333a78fc12162c"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a70d71f3907401062c6333a78fc12162c">StackAllocator</a> (size_t initial_capacity) noexcept</td></tr>
-<tr class="memdesc:a70d71f3907401062c6333a78fc12162c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs stack allocator with fixed growth.  <br /></td></tr>
+<tr class="memdesc:a70d71f3907401062c6333a78fc12162c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs stack allocator with geometric growth.  <br /></td></tr>
 <tr class="memitem:aa0390c911e872c901380932e76b87ad4" id="r_aa0390c911e872c901380932e76b87ad4"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#aa0390c911e872c901380932e76b87ad4">StackAllocator</a> (const StackAllocator &amp;)=delete</td></tr>
 <tr class="memitem:a6bc916d6b53330852998465534472ebf" id="r_a6bc916d6b53330852998465534472ebf"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a6bc916d6b53330852998465534472ebf">StackAllocator</a> (StackAllocator &amp;&amp;other) noexcept</td></tr>
+<tr class="memdesc:a6bc916d6b53330852998465534472ebf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move-constructs stack allocator from another instance.  <br /></td></tr>
 <tr class="memitem:a8d0e2b7af45920c5708aa5d063afb4d7" id="r_a8d0e2b7af45920c5708aa5d063afb4d7"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a8d0e2b7af45920c5708aa5d063afb4d7">~StackAllocator</a> () noexcept override</td></tr>
 <tr class="memitem:a9209c1293627db6c177cbf072941a92e" id="r_a9209c1293627db6c177cbf072941a92e"><td class="memItemLeft"><a class="el" href="#aced4d8677f908a82c8e071c710fb4173">StackAllocator</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a9209c1293627db6c177cbf072941a92e">operator=</a> (const <a class="el" href="#aced4d8677f908a82c8e071c710fb4173">StackAllocator</a> &amp;)=delete</td></tr>
 <tr class="memitem:a770f69ca3607672bb1246c0fcd11ffb9" id="r_a770f69ca3607672bb1246c0fcd11ffb9"><td class="memItemLeft"><a class="el" href="#aced4d8677f908a82c8e071c710fb4173">StackAllocator</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a770f69ca3607672bb1246c0fcd11ffb9">operator=</a> (<a class="el" href="#aced4d8677f908a82c8e071c710fb4173">StackAllocator</a> &amp;&amp;other) noexcept</td></tr>
-<tr class="memitem:a29d71ba5b024f865b3f27c394d3a95fc" id="r_a29d71ba5b024f865b3f27c394d3a95fc"><td class="memItemLeft"><a class="el" href="structhelios_1_1mem_1_1StackAllocator_1_1Marker.html">Marker</a>&#160;</td><td class="memItemRight"><a class="el" href="#a29d71ba5b024f865b3f27c394d3a95fc">GetMarker</a> () const noexcept</td></tr>
-<tr class="memdesc:a29d71ba5b024f865b3f27c394d3a95fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns current marker.  <br /></td></tr>
+<tr class="memdesc:a770f69ca3607672bb1246c0fcd11ffb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move-assigns stack state from another instance.  <br /></td></tr>
 <tr class="memitem:a2a7a99f0379c4676cb9c3d02f661bbf3" id="r_a2a7a99f0379c4676cb9c3d02f661bbf3"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a2a7a99f0379c4676cb9c3d02f661bbf3">RewindToMarker</a> (<a class="el" href="structhelios_1_1mem_1_1StackAllocator_1_1Marker.html">Marker</a> marker) noexcept</td></tr>
 <tr class="memdesc:a2a7a99f0379c4676cb9c3d02f661bbf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rewinds allocator to marker.  <br /></td></tr>
 <tr class="memitem:ab0fefaa745120675f38a3e6a681c17e6" id="r_ab0fefaa745120675f38a3e6a681c17e6"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ab0fefaa745120675f38a3e6a681c17e6">Reset</a> () noexcept</td></tr>
 <tr class="memdesc:ab0fefaa745120675f38a3e6a681c17e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets allocator to a fresh single initial block.  <br /></td></tr>
 <tr class="memitem:a44c5c8db3669ea472678a3bd663d2e8e" id="r_a44c5c8db3669ea472678a3bd663d2e8e"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a44c5c8db3669ea472678a3bd663d2e8e">Empty</a> () const noexcept</td></tr>
 <tr class="memdesc:a44c5c8db3669ea472678a3bd663d2e8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true when no active allocations remain.  <br /></td></tr>
+<tr class="memitem:a29d71ba5b024f865b3f27c394d3a95fc" id="r_a29d71ba5b024f865b3f27c394d3a95fc"><td class="memItemLeft"><a class="el" href="structhelios_1_1mem_1_1StackAllocator_1_1Marker.html">Marker</a>&#160;</td><td class="memItemRight"><a class="el" href="#a29d71ba5b024f865b3f27c394d3a95fc">GetMarker</a> () const noexcept</td></tr>
+<tr class="memdesc:a29d71ba5b024f865b3f27c394d3a95fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns current marker.  <br /></td></tr>
 <tr class="memitem:a83ec7dd6df874bcc67aa4fa2fd7e169f" id="r_a83ec7dd6df874bcc67aa4fa2fd7e169f"><td class="memItemLeft"><a class="el" href="structhelios_1_1mem_1_1AllocatorStats.html">AllocatorStats</a>&#160;</td><td class="memItemRight"><a class="el" href="#a83ec7dd6df874bcc67aa4fa2fd7e169f">Stats</a> () const noexcept</td></tr>
 <tr class="memdesc:a83ec7dd6df874bcc67aa4fa2fd7e169f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns runtime statistics.  <br /></td></tr>
 <tr class="memitem:a8cd8be5ce56734c0d6e5f289a5110eda" id="r_a8cd8be5ce56734c0d6e5f289a5110eda"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="#a8cd8be5ce56734c0d6e5f289a5110eda">InitialCapacity</a> () const noexcept</td></tr>
@@ -213,9 +215,9 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><p>PMR stack allocator with LIFO-aware deallocation. </p>
 <p>Uses block-chained bump allocation with per-allocation headers.</p>
 <p>Allocation path is lock-free with atomic CAS on head block offset. Deallocate tries LIFO rewind when possible. Non-LIFO deallocation is treated as no-op, which keeps PMR compatibility for containers that may free out of order.</p>
-<dl class="section note"><dt>Note</dt><dd>Thread-safe for <span class="tt">allocate</span>. <span class="tt"><a class="el" href="#ab0fefaa745120675f38a3e6a681c17e6" title="Resets allocator to a fresh single initial block.">Reset()</a></span> and marker operations require external synchronization. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd><span class="tt">allocate</span> and LIFO <span class="tt">deallocate</span> on the current head are lock-free. <span class="tt"><a class="el" href="#ab0fefaa745120675f38a3e6a681c17e6" title="Resets allocator to a fresh single initial block.">Reset</a></span>, <span class="tt"><a class="el" href="#a29d71ba5b024f865b3f27c394d3a95fc" title="Returns current marker.">GetMarker</a></span>, and <span class="tt"><a class="el" href="#a2a7a99f0379c4676cb9c3d02f661bbf3" title="Rewinds allocator to marker.">RewindToMarker</a></span> require external synchronization. <span class="tt"><a class="el" href="structhelios_1_1mem_1_1StackAllocator_1_1Marker.html#aa92a3fdb3bb9f5f7182798da5c839dd2" title="Block containing the marker offset; invalid after growth.">Marker.block</a></span> is internal and invalid after growth. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00032">32</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00036">36</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aced4d8677f908a82c8e071c710fb4173" name="aced4d8677f908a82c8e071c710fb4173"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aced4d8677f908a82c8e071c710fb4173">&#9670;&#160;</a></span>StackAllocator() <span class="overload">[1/4]</span></h2>
@@ -241,7 +243,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Constructs stack allocator from options. </p>
-<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if <span class="tt">options.initial_capacity == 0</span>. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if <span class="tt">options.initial_capacity == 0</span> or <span class="tt">options.growth.max_capacity &lt; options.initial_capacity</span>. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">options</td><td>Stack allocator options </td></tr>
@@ -249,7 +251,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00180">180</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00204">204</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -276,7 +278,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Constructs stack allocator with fixed growth. </p>
+<p>Constructs stack allocator with geometric growth. </p>
 <dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if <span class="tt">initial_capacity == 0</span>. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -285,7 +287,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00195">195</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00059">59</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -337,7 +339,15 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00199">199</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
+<p>Move-constructs stack allocator from another instance. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Source allocator; left in empty moved-from state </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00070">70</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -364,7 +374,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00055">55</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00071">71</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -395,7 +405,7 @@ Public Member Functions</h2></td></tr>
 <p>Returns current number of blocks. </p>
 <dl class="section return"><dt>Returns</dt><dd>Block count </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00116">116</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00138">138</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -425,7 +435,7 @@ Public Member Functions</h2></td></tr>
 <p>Returns true when no active allocations remain. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if empty, false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00086">86</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00102">102</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -455,7 +465,7 @@ Public Member Functions</h2></td></tr>
 <p>Returns current marker. </p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="structhelios_1_1mem_1_1StackAllocator_1_1Marker.html" title="Marker for rewind operations.">Marker</a> that can later be rewound to </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00277">277</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00230">230</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -485,7 +495,7 @@ Public Member Functions</h2></td></tr>
 <p>Returns growth policy. </p>
 <dl class="section return"><dt>Returns</dt><dd>Growth policy </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00124">124</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00146">146</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -515,7 +525,7 @@ Public Member Functions</h2></td></tr>
 <p>Returns initial block capacity. </p>
 <dl class="section return"><dt>Returns</dt><dd>Capacity in bytes </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00100">100</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00122">122</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -567,7 +577,16 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00228">228</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
+<p>Move-assigns stack state from another instance. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Source allocator; left in empty moved-from state </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to this allocator </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00219">219</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -589,7 +608,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -597,7 +616,7 @@ Public Member Functions</h2></td></tr>
 <p>Resets allocator to a fresh single initial block. </p>
 <dl class="section warning"><dt>Warning</dt><dd>Must not be called concurrently with allocation/deallocation. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00288">288</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stack__allocator_8cpp_source.html#l00020">20</a> of file <a class="el" href="stack__allocator_8cpp_source.html">stack_allocator.cpp</a>.</p>
 
 </div>
 </div>
@@ -633,7 +652,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="stack__allocator_8cpp_source.html#l00033">33</a> of file <a class="el" href="stack__allocator_8cpp_source.html">stack_allocator.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stack__allocator_8cpp_source.html#l00042">42</a> of file <a class="el" href="stack__allocator_8cpp_source.html">stack_allocator.cpp</a>.</p>
 
 </div>
 </div>
@@ -663,7 +682,7 @@ Public Member Functions</h2></td></tr>
 <p>Returns runtime statistics. </p>
 <dl class="section return"><dt>Returns</dt><dd>Allocator stats snapshot </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00310">310</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00242">242</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -693,7 +712,7 @@ Public Member Functions</h2></td></tr>
 <p>Returns total capacity across block chain. </p>
 <dl class="section return"><dt>Returns</dt><dd>Capacity in bytes </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00108">108</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stack__allocator_8hpp_source.html#l00130">130</a> of file <a class="el" href="stack__allocator_8hpp_source.html">stack_allocator.hpp</a>.</p>
 
 </div>
 </div>

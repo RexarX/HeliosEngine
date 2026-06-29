@@ -216,10 +216,10 @@ requires std::invocable&lt;F, <a class="el" href="classhelios_1_1ecs_1_1Schedule
 <tr class="memitem:a0798bd17fa65edd7450b055a97e41ab5" id="r_a0798bd17fa65edd7450b055a97e41ab5"><td class="memTemplParams" colspan="2">template&lt;ecs::ScheduleTrait L, ecs::SystemTrait S&gt; </td></tr>
 <tr class="memitem:a0798bd17fa65edd7450b055a97e41ab5 template"><td class="memItemLeft"><a class="el" href="classhelios_1_1ecs_1_1SystemHandle.html">ecs::SystemHandle</a>&#160;</td><td class="memItemRight"><a class="el" href="#a0798bd17fa65edd7450b055a97e41ab5">AddSystem</a> (const L &amp;label, std::string name, S &amp;&amp;system, <a class="el" href="structhelios_1_1ecs_1_1SystemLocalDataOptions.html">ecs::SystemLocalDataOptions</a> options={})</td></tr>
 <tr class="memdesc:a0798bd17fa65edd7450b055a97e41ab5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a system to the given schedule with an explicit name.  <br /></td></tr>
-<tr class="memitem:a69a5a40855a161c2f987643e5ba231dd" id="r_a69a5a40855a161c2f987643e5ba231dd"><td class="memTemplParams" colspan="2">template&lt;ecs::ScheduleTrait L, ecs::FunctorSystemTrait... Systems&gt; <br />
+<tr class="memitem:aa174d6bf1494c72851caf736e3760098" id="r_aa174d6bf1494c72851caf736e3760098"><td class="memTemplParams" colspan="2">template&lt;ecs::ScheduleTrait L, ecs::FunctorSystemTrait... Systems&gt; <br />
 requires (sizeof...(Systems) &gt; 1)</td></tr>
-<tr class="memitem:a69a5a40855a161c2f987643e5ba231dd template"><td class="memItemLeft"><a class="el" href="classhelios_1_1ecs_1_1SystemSetHandle.html">ecs::SystemSetHandle</a>&#160;</td><td class="memItemRight"><a class="el" href="#a69a5a40855a161c2f987643e5ba231dd">AddSystems</a> (const L &amp;label, Systems &amp;&amp;... systems)</td></tr>
-<tr class="memdesc:a69a5a40855a161c2f987643e5ba231dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds multiple functor systems to the same schedule as an anonymous set.  <br /></td></tr>
+<tr class="memitem:aa174d6bf1494c72851caf736e3760098 template"><td class="memItemLeft"><a class="el" href="classhelios_1_1ecs_1_1SystemGroupHandle.html">ecs::SystemGroupHandle</a>&#160;</td><td class="memItemRight"><a class="el" href="#aa174d6bf1494c72851caf736e3760098">AddSystems</a> (const L &amp;label, Systems &amp;&amp;... systems)</td></tr>
+<tr class="memdesc:aa174d6bf1494c72851caf736e3760098"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds multiple functor systems to the same schedule as a system group.  <br /></td></tr>
 <tr class="memitem:a7e619f361a9ed86d14b69795b2c3f93a" id="r_a7e619f361a9ed86d14b69795b2c3f93a"><td class="memTemplParams" colspan="2">template&lt;ecs::ScheduleTrait L, ecs::SystemSetTrait S&gt; </td></tr>
 <tr class="memitem:a7e619f361a9ed86d14b69795b2c3f93a template"><td class="memItemLeft"><a class="el" href="classhelios_1_1ecs_1_1SystemSetHandle.html">ecs::SystemSetHandle</a>&#160;</td><td class="memItemRight"><a class="el" href="#a7e619f361a9ed86d14b69795b2c3f93a">ConfigureSet</a> (const L &amp;label={}, const S &amp;set={})</td></tr>
 <tr class="memdesc:a7e619f361a9ed86d14b69795b2c3f93a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets or creates a system set in the given schedule.  <br /></td></tr>
@@ -443,7 +443,7 @@ Friends</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00636">636</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00638">638</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -510,7 +510,7 @@ requires (sizeof...(Ts) &gt; 0)</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this sub-app for chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00760">760</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00762">762</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -730,8 +730,8 @@ template&lt;ecs::ScheduleTrait L, ecs::SystemTrait S&gt; </div>
 
 </div>
 </div>
-<a id="a69a5a40855a161c2f987643e5ba231dd" name="a69a5a40855a161c2f987643e5ba231dd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a69a5a40855a161c2f987643e5ba231dd">&#9670;&#160;</a></span>AddSystems()</h2>
+<a id="aa174d6bf1494c72851caf736e3760098" name="aa174d6bf1494c72851caf736e3760098"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa174d6bf1494c72851caf736e3760098">&#9670;&#160;</a></span>AddSystems()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -743,7 +743,7 @@ requires (sizeof...(Systems) &gt; 1)</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1SystemSetHandle.html">ecs::SystemSetHandle</a> helios::app::SubApp::AddSystems </td>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1SystemGroupHandle.html">ecs::SystemGroupHandle</a> helios::app::SubApp::AddSystems </td>
           <td>(</td>
           <td class="paramtype">const L &amp;</td>          <td class="paramname"><span class="paramname"><em>label</em></span>, </td>
         </tr>
@@ -760,8 +760,8 @@ requires (sizeof...(Systems) &gt; 1)</div>
 </table>
 </div><div class="memdoc">
 
-<p>Adds multiple functor systems to the same schedule as an anonymous set. </p>
-<dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
+<p>Adds multiple functor systems to the same schedule as a system group. </p>
+<p>Returns a <span class="tt">SystemGroupHandle</span> for configuring the batch. Use <span class="tt">InSet</span> on the returned handle to assign every system to a named set. </p><dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if an update is in progress. </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -777,9 +777,9 @@ requires (sizeof...(Systems) &gt; 1)</div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Handle for configuring the anonymous system set </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Handle for configuring the system group </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00342">342</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00344">344</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -810,7 +810,7 @@ requires (sizeof...(Systems) &gt; 1)</div>
 <dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>True if overlapping extraction skips are enabled </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00529">529</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00531">531</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -847,7 +847,7 @@ requires (sizeof...(Systems) &gt; 1)</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00714">714</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00716">716</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -922,7 +922,7 @@ template&lt;ecs::ScheduleTrait L, ecs::SystemSetTrait S&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Handle for configuring the set </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00357">357</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00359">359</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -979,7 +979,7 @@ requires std::invocable&lt;F, <a class="el" href="classhelios_1_1ecs_1_1Schedule
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this sub-app for chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00738">738</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00740">740</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -1021,7 +1021,7 @@ requires std::invocable&lt;F, <a class="el" href="classhelios_1_1ecs_1_1Schedule
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00697">697</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00699">699</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -1096,7 +1096,7 @@ template&lt;SubAppTrait T&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Sub-app name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00410">410</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00412">412</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -1127,7 +1127,7 @@ template&lt;SubAppTrait T&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>ECS scheduler reference </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00574">574</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00576">576</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -1158,7 +1158,7 @@ template&lt;SubAppTrait T&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>ECS scheduler reference </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00567">567</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00569">569</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -1188,7 +1188,7 @@ template&lt;SubAppTrait T&gt; </div>
 <p>Gets this sub-app's ECS world. </p>
 <dl class="section return"><dt>Returns</dt><dd>ECS world reference </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00560">560</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00562">562</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -1219,7 +1219,7 @@ template&lt;SubAppTrait T&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Thread-safe for read access to returned world. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>ECS world reference </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00554">554</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00556">556</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -1269,7 +1269,7 @@ template&lt;ecs::ScheduleTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this sub-app for chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00728">728</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00730">730</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -1319,7 +1319,7 @@ template&lt;ecs::ResourceTrait... Ts&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this sub-app for chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00745">745</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00747">747</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -1350,7 +1350,7 @@ template&lt;ecs::ResourceTrait... Ts&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>True for async sub-apps </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00538">538</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00540">540</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -1381,7 +1381,7 @@ template&lt;ecs::ResourceTrait... Ts&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>True while an update pass is running, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00520">520</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00522">522</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -1412,7 +1412,7 @@ template&lt;ecs::ResourceTrait... Ts&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Skip budget; <span class="tt">0</span> means unlimited </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00545">545</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00547">547</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -1473,7 +1473,7 @@ template&lt;ecs::ResourceTrait... Ts&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00652">652</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00654">654</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -1510,7 +1510,7 @@ template&lt;ecs::ResourceTrait... Ts&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00784">784</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00786">786</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -1549,7 +1549,7 @@ Does not change the runner. When <code class="param">is_async</code> is true, ca
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00797">797</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00799">799</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -1595,7 +1595,7 @@ requires std::invocable&lt;F, const <a class="el" href="classhelios_1_1ecs_1_1Wo
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00779">779</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00781">781</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -1632,7 +1632,7 @@ requires std::invocable&lt;F, const <a class="el" href="classhelios_1_1ecs_1_1Wo
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00791">791</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00793">793</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -1669,7 +1669,7 @@ requires std::invocable&lt;F, const <a class="el" href="classhelios_1_1ecs_1_1Wo
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00766">766</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00768">768</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -1706,7 +1706,7 @@ requires std::invocable&lt;F, const <a class="el" href="classhelios_1_1ecs_1_1Wo
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00771">771</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00773">773</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -1751,7 +1751,7 @@ template&lt;ecs::StageTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00808">808</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00810">810</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -1788,7 +1788,7 @@ template&lt;ecs::StageTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00802">802</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00804">804</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -1864,7 +1864,7 @@ template&lt;ecs::ScheduleTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the schedule, or <span class="tt">nullptr</span> if missing </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00489">489</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00491">491</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -1909,7 +1909,7 @@ template&lt;ecs::ScheduleTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the schedule, or <span class="tt">nullptr</span> if missing </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00501">501</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00503">503</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -1959,7 +1959,7 @@ template&lt;ecs::ResourceTrait... Ts&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this sub-app for chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00752">752</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00754">754</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -1996,7 +1996,7 @@ template&lt;ecs::ResourceTrait... Ts&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00678">678</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00680">680</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -2051,7 +2051,7 @@ template&lt;ecs::ResourceTrait... Ts&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00632">632</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00634">634</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>
@@ -2075,7 +2075,7 @@ template&lt;ecs::ResourceTrait... Ts&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00633">633</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__app_8hpp_source.html#l00635">635</a> of file <a class="el" href="sub__app_8hpp_source.html">sub_app.hpp</a>.</p>
 
 </div>
 </div>

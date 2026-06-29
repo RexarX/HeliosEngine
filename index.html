@@ -158,89 +158,54 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('index.html',''
   <div class="headertitle"><div class="title">Helios Engine </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="md_README"></a> <a href="https://en.cppreference.com/w/cpp/23">C++23</a> <a href="https://github.com/RexarX/HeliosEngine/blob/main/LICENSE">MIT License</a></p>
-<p><a href="https://github.com/RexarX/HeliosEngine/actions/workflows/linux-gcc.yaml">Linux GCC</a> <a href="https://github.com/RexarX/HeliosEngine/actions/workflows/linux-clang.yaml">Linux Clang</a> <a href="https://github.com/RexarX/HeliosEngine/actions/workflows/windows-msvc.yaml">Windows MSVC</a> <a href="https://github.com/RexarX/HeliosEngine/actions/workflows/macos-clang.yaml">macOS Clang</a></p>
-<h1 class="doxsection"><a class="anchor" id="helios-engine"></a>
-Helios Engine</h1>
-<p>A modular, data-oriented C++23 game engine framework inspired by Bevy</p>
-<p><b><a class="el" href="#getting-started" title="Getting Started">Get Started »</a>Get Started »</b> · <a class="el" href="#key-features" title="Key Features">Features</a>Features · <a class="el" href="#modules" title="Modules">Modules</a>Modules · <a class="el" href="#building" title="Building">Build</a>Build · <a class="el" href="#using-as-a-dependency" title="Using as a Dependency">Third-Party</a>Third-Party · <a class="el" href="#documentation" title="Documentation">Docs</a>Docs</p>
-<hr  />
+<div class="textblock"><p><a class="anchor" id="md_README"></a> <a class="anchor" id="readme-top"></a></p>
+<p><a href="https://en.cppreference.com/w/cpp/23"><img src="https://img.shields.io/badge/C%2B%2B-23-blue.svg?style=for-the-badge&amp;logo=c%2B%2B" alt="C++23" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/RexarX/HeliosEngine/blob/main/LICENSE"><img src="https://img.shields.io/github/license/RexarX/HeliosEngine.svg?style=for-the-badge" alt="MIT License" style="pointer-events: none;" class="inline"/></a></p>
+<p><a href="https://github.com/RexarX/HeliosEngine/actions/workflows/linux-gcc.yaml"><img src="https://img.shields.io/github/actions/workflow/status/RexarX/HeliosEngine/linux-gcc.yaml?branch=main&amp;label=Linux%20GCC&amp;logo=linux&amp;logoColor=white" alt="Linux GCC" class="inline"/></a> <a href="https://github.com/RexarX/HeliosEngine/actions/workflows/linux-clang.yaml"><img src="https://img.shields.io/github/actions/workflow/status/RexarX/HeliosEngine/linux-clang.yaml?branch=main&amp;label=Linux%20Clang&amp;logo=llvm&amp;logoColor=white" alt="Linux Clang" class="inline"/></a> <a href="https://github.com/RexarX/HeliosEngine/actions/workflows/windows-msvc.yaml"><img src="https://img.shields.io/github/actions/workflow/status/RexarX/HeliosEngine/windows-msvc.yaml?branch=main&amp;label=Windows%20MSVC&amp;logo=windows&amp;logoColor=white" alt="Windows MSVC" class="inline"/></a> <a href="https://github.com/RexarX/HeliosEngine/actions/workflows/macos-clang.yaml"><img src="https://img.shields.io/github/actions/workflow/status/RexarX/HeliosEngine/macos-clang.yaml?branch=main&amp;label=macOS%20Clang&amp;logo=apple&amp;logoColor=white" alt="macOS Clang" class="inline"/></a></p>
+<p><br  />
+</p>
+<div align="center"></div><div align="center"><img src="docs/img/logo.png" alt="Helios Engine Logo" width="200" class="inline"/></div><div align="center"></div><h1 class="doxsection"><a class="anchor" id="helios-engine"></a>
+<div align="center">Helios Engine</div></h1>
+<div align="center"></div><div align="center">A modular, data-oriented C++23 game engine framework inspired by Bevy</div><div align="center"><b><a href="#getting-started">Get Started »</a></b> · <a href="#key-features">Features</a> · <a href="#modules">Modules</a> · <a href="#building">Build</a> · <a href="#using-as-a-dependency">Third-Party</a> · <a href="#documentation">Docs</a></div><div align="center"></div><hr  />
 <h2 class="doxsection"><a class="anchor" id="table-of-contents"></a>
 Table of Contents</h2>
 <ul>
-<li><a class="el" href="#about-the-project" title="About The Project">About The Project</a>About The Project</li>
+<li><a href="#about-the-project">About The Project</a><ul>
+<li><a href="#key-features">Key Features</a></li>
+<li><a href="#design-philosophy">Design Philosophy</a></li>
 </ul>
-<ul>
-<li><a class="el" href="#key-features" title="Key Features">Key Features</a>Key Features</li>
+</li>
+<li><a href="#modules">Modules</a></li>
+<li><a href="#getting-started">Getting Started</a><ul>
+<li><a href="#requirements">Requirements</a></li>
+<li><a href="#installing-dependencies">Installing Dependencies</a></li>
+<li><a href="#building">Building</a></li>
+<li><a href="#run-the-example">Run the Example</a></li>
 </ul>
-<ul>
-<li><a class="el" href="#design-philosophy" title="Design Philosophy">Design Philosophy</a>Design Philosophy</li>
+</li>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#architecture">Architecture</a></li>
+<li><a href="#using-as-a-dependency">Using as a Dependency</a><ul>
+<li><a href="#method-1-add_subdirectory">add_subdirectory</a></li>
+<li><a href="#method-2-fetchcontent">FetchContent</a></li>
+<li><a href="#method-3-cpm">CPM</a></li>
+<li><a href="#method-4-installed-package-find_package">Installed Package (find_package)</a></li>
 </ul>
-<ul>
-<li><a class="el" href="#modules" title="Modules">Modules</a>Modules</li>
+</li>
+<li><a href="#documentation">Documentation</a></li>
+<li><a href="#development">Development</a><ul>
+<li><a href="#creating-a-custom-module">Creating a Custom Module</a></li>
 </ul>
-<ul>
-<li><a class="el" href="#getting-started" title="Getting Started">Getting Started</a>Getting Started</li>
-</ul>
-<ul>
-<li><a class="el" href="#requirements" title="Requirements">Requirements</a>Requirements</li>
-</ul>
-<ul>
-<li><a class="el" href="#installing-dependencies" title="Installing Dependencies">Installing Dependencies</a>Installing Dependencies</li>
-</ul>
-<ul>
-<li><a class="el" href="#building" title="Building">Building</a>Building</li>
-</ul>
-<ul>
-<li><a class="el" href="#run-the-example" title="Run the Example">Run the Example</a>Run the Example</li>
-</ul>
-<ul>
-<li><a class="el" href="dir_f13bc85843fa14191e0ad4a3a157cf60.html#usage" title="Usage">Usage</a>Usage</li>
-</ul>
-<ul>
-<li><a class="el" href="#architecture" title="Architecture">Architecture</a>Architecture</li>
-</ul>
-<ul>
-<li><a class="el" href="#using-as-a-dependency" title="Using as a Dependency">Using as a Dependency</a>Using as a Dependency</li>
-</ul>
-<ul>
-<li><a class="el" href="#method-1-add_subdirectory" title="Method 1: &lt;tt&gt;add_subdirectory&lt;/tt&gt;">add_subdirectory</a>add_subdirectory</li>
-</ul>
-<ul>
-<li><a class="el" href="#method-2-fetchcontent" title="Method 2: &lt;tt&gt;FetchContent&lt;/tt&gt;">FetchContent</a>FetchContent</li>
-</ul>
-<ul>
-<li><a class="el" href="#method-3-cpm" title="Method 3: CPM">CPM</a>CPM</li>
-</ul>
-<ul>
-<li><a class="el" href="#method-4-installed-package-find_package" title="Method 4: Installed Package (&lt;tt&gt;find_package&lt;/tt&gt;)">Installed Package (find_package)</a>Installed Package (find_package)</li>
-</ul>
-<ul>
-<li><a class="el" href="#documentation" title="Documentation">Documentation</a>Documentation</li>
-</ul>
-<ul>
-<li><a class="el" href="#development" title="Development">Development</a>Development</li>
-</ul>
-<ul>
-<li><a class="el" href="#creating-a-custom-module" title="Creating a Custom Module">Creating a Custom Module</a>Creating a Custom Module</li>
-</ul>
-<ul>
-<li><a class="el" href="#roadmap" title="Roadmap">Roadmap</a>Roadmap</li>
-</ul>
-<ul>
-<li><a class="el" href="#acknowledgments" title="Acknowledgments">Acknowledgments</a>Acknowledgments</li>
-</ul>
-<ul>
-<li><a class="el" href="#license" title="License">License</a>License</li>
-</ul>
-<ul>
-<li><a class="el" href="#contact" title="Contact">Contact</a>Contact</li>
+</li>
+<li><a href="#roadmap">Roadmap</a></li>
+<li><a href="#acknowledgments">Acknowledgments</a></li>
+<li><a href="#license">License</a></li>
+<li><a href="#contact">Contact</a></li>
 </ul>
 <hr  />
 <h2 class="doxsection"><a class="anchor" id="about-the-project"></a>
 About The Project</h2>
 <p><b>Helios Engine</b> is a high-performance, ECS-based game engine framework written in C++23. It combines an archetype-based Entity Component System with deferred commands, double-buffered messages, and parallel system scheduling over a work-stealing task executor.</p>
-<p>↑ Back to Top↑ Back to Top</p>
+<p><a href="#readme-top">↑ Back to Top</a></p>
 <h3 class="doxsection"><a class="anchor" id="key-features"></a>
 Key Features</h3>
 <ul>
@@ -258,7 +223,7 @@ Design Philosophy</h3>
 <li><b>Composability</b> — behavior emerges from systems operating on component data</li>
 <li><b>Explicitness</b> — data access declared through system parameter types; schedules resolve ordering</li>
 </ol>
-<p>↑ Back to Top↑ Back to Top</p>
+<p><a href="#readme-top">↑ Back to Top</a></p>
 <hr  />
 <h2 class="doxsection"><a class="anchor" id="modules"></a>
 Modules</h2>
@@ -291,7 +256,7 @@ Modules</h2>
 <td class="markdownTableBodyNone"><span class="tt">window</span>  </td><td class="markdownTableBodyNone">GLFW windowing (skeleton)  </td><td class="markdownTableBodyNone">ON  </td><td class="markdownTableBodyNone"><a class="el" href="dir_c7f79d9fead0a70cab4af348b59fbdf1.html" title="/home/runner/work/HeliosEngine/HeliosEngine/src/window/README.md">README</a>  </td></tr>
 </table>
 <div class="fragment"><div class="line">cmake --preset linux-gcc-release -DHELIOS_BUILD_PROFILE=ON -DHELIOS_BUILD_WINDOW=OFF</div>
-</div><!-- fragment --><p>↑ Back to Top↑ Back to Top</p>
+</div><!-- fragment --><p><a href="#readme-top">↑ Back to Top</a></p>
 <hr  />
 <h2 class="doxsection"><a class="anchor" id="getting-started"></a>
 Getting Started</h2>
@@ -315,7 +280,7 @@ Requirements</h3>
 </div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="installing-dependencies"></a>
 Installing Dependencies</h3>
 <p>Helios resolves dependencies per module: <b>system packages are tried first</b>, then <b>CPM download</b> if missing (<span class="tt">HELIOS_DOWNLOAD_PACKAGES=ON</span>, default). Pre-installing system packages speeds up configuration and avoids network fetches.</p>
-<p>Package names below match <span class="tt">INSTALL_HINTS</span> in <span class="tt">[cmake/dependencies/](cmake/dependencies/)</span>.</p>
+<p>Package names below match <span class="tt">INSTALL_HINTS</span> in <a href="cmake/dependencies/"><span class="tt">cmake/dependencies/</span></a>.</p>
 <h4 class="doxsection"><a class="anchor" id="all-platforms--build-tools"></a>
 All platforms — build tools</h4>
 <table class="markdownTable">
@@ -417,7 +382,7 @@ Run the Example</h3>
 <div class="line">cmake --build --preset linux-gcc-release --target simple_example</div>
 <div class="line">./bin/examples/debug-linux-x86_64/simple_example</div>
 </div><!-- fragment --><p>See <a href="examples/simple/src/main.cpp">examples/simple/src/main.cpp</a> for schedules, system sets, sub-apps, and profiling.</p>
-<p>↑ Back to Top↑ Back to Top</p>
+<p><a href="#readme-top">↑ Back to Top</a></p>
 <hr  />
 <h2 class="doxsection"><a class="anchor" id="usage-2"></a>
 Usage</h2>
@@ -486,7 +451,7 @@ Usage</h2>
 <div class="line">  app.InsertResource(FrameCount{});</div>
 <div class="line"> </div>
 <div class="line">  app.<a class="code hl_function" href="classhelios_1_1app_1_1App.html#aabbdf71882c4e7219a73fc527fae150e">AddSystem</a>(<a class="code hl_variable" href="namespacehelios_1_1app.html#a9ae6423443d7b91d02971971253e2e1c">helios::app::kPreUpdate</a>, SpawnEntities{}); <span class="comment">// Spawn entities, before modifying</span></div>
-<div class="line">  app.<a class="code hl_function" href="classhelios_1_1app_1_1App.html#ab478cd0250c3f95ac27c06049ddc7fcd">AddSystems</a>(<a class="code hl_variable" href="namespacehelios_1_1app.html#a6336fe1dd31d2537c02c2571437ab93f">helios::app::kUpdate</a>, ChangePosition{}, ChangeVelocity{})</div>
+<div class="line">  app.<a class="code hl_function" href="classhelios_1_1app_1_1App.html#ad88147a9c541ed672401349ccb6d42fd">AddSystems</a>(<a class="code hl_variable" href="namespacehelios_1_1app.html#a6336fe1dd31d2537c02c2571437ab93f">helios::app::kUpdate</a>, ChangePosition{}, ChangeVelocity{})</div>
 <div class="line">      .Sequence(); <span class="comment">// Sytems will run one after another (ChangePosition -&gt; ChangeVelocity)</span></div>
 <div class="line">  app.<a class="code hl_function" href="classhelios_1_1app_1_1App.html#aabbdf71882c4e7219a73fc527fae150e">AddSystem</a>(<a class="code hl_variable" href="namespacehelios_1_1app.html#a12383482410e87f279ccb7f69e4381af">helios::app::kPostUpdate</a>, RequestExit{}) <span class="comment">// Shutdown after 500 frames</span></div>
 <div class="line">      .RunIf(<span class="stringliteral">&quot;IsFrameCountReached&quot;</span>, [](<a class="code hl_class" href="classhelios_1_1ecs_1_1Res.html">helios::ecs::Res&lt;const FrameCount&gt;</a> frame_count) {</div>
@@ -498,9 +463,9 @@ Usage</h2>
 <div class="line">}</div>
 <div class="ttc" id="aapplication_8hpp_html"><div class="ttname"><a href="application_8hpp.html">application.hpp</a></div></div>
 <div class="ttc" id="aclasshelios_1_1app_1_1App_html"><div class="ttname"><a href="classhelios_1_1app_1_1App.html">helios::app::App</a></div><div class="ttdoc">Application class.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00074">application.hpp:74</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a5f2c1a0106d181ec8a4956f2ab494e51"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a5f2c1a0106d181ec8a4956f2ab494e51">helios::app::App::AddMessages</a></div><div class="ttdeci">auto AddMessages(this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Registers multiple message types on the main world.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00811">application.hpp:811</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a5f2c1a0106d181ec8a4956f2ab494e51"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a5f2c1a0106d181ec8a4956f2ab494e51">helios::app::App::AddMessages</a></div><div class="ttdeci">auto AddMessages(this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Registers multiple message types on the main world.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00813">application.hpp:813</a></div></div>
 <div class="ttc" id="aclasshelios_1_1app_1_1App_html_aabbdf71882c4e7219a73fc527fae150e"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#aabbdf71882c4e7219a73fc527fae150e">helios::app::App::AddSystem</a></div><div class="ttdeci">auto AddSystem(const L &amp;label, S &amp;&amp;system, ecs::SystemLocalDataOptions options={}) -&gt; ecs::SystemHandle</div><div class="ttdoc">Adds a functor system to a main sub-app schedule.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00291">application.hpp:291</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_ab478cd0250c3f95ac27c06049ddc7fcd"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#ab478cd0250c3f95ac27c06049ddc7fcd">helios::app::App::AddSystems</a></div><div class="ttdeci">ecs::SystemSetHandle AddSystems(const L &amp;label, Systems &amp;&amp;... systems)</div><div class="ttdoc">Adds multiple functor systems to the same main sub-app schedule.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00782">application.hpp:782</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_ad88147a9c541ed672401349ccb6d42fd"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#ad88147a9c541ed672401349ccb6d42fd">helios::app::App::AddSystems</a></div><div class="ttdeci">ecs::SystemGroupHandle AddSystems(const L &amp;label, Systems &amp;&amp;... systems)</div><div class="ttdoc">Adds multiple functor systems to the same main sub-app schedule.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00784">application.hpp:784</a></div></div>
 <div class="ttc" id="aclasshelios_1_1app_1_1App_html_ae1bc7b5b668ca63cc91dfd87757e99be"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#ae1bc7b5b668ca63cc91dfd87757e99be">helios::app::App::Run</a></div><div class="ttdeci">ExitCode Run()</div><div class="ttdoc">Runs the application with the given arguments.</div><div class="ttdef"><b>Definition</b> <a href="application_8cpp_source.html#l00074">application.cpp:74</a></div></div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1BasicMessageWriter_html_a1879828695519f011fbaad76115245dd"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicMessageWriter.html#a1879828695519f011fbaad76115245dd">helios::ecs::BasicMessageWriter::Write</a></div><div class="ttdeci">void Write(U &amp;&amp;message) const</div><div class="ttdoc">Writes a single message to the local queue.</div><div class="ttdef"><b>Definition</b> <a href="writer_8hpp_source.html#l00049">writer.hpp:49</a></div></div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1BasicQuery_html_a96897d89cdf618e38944a1a9ba9b6f46"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicQuery.html#a96897d89cdf618e38944a1a9ba9b6f46">helios::ecs::BasicQuery::ForEach</a></div><div class="ttdeci">void ForEach(const Action &amp;action) const</div><div class="ttdoc">Executes an action for each matching entity&#39;s components.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l01408">query.hpp:1408</a></div></div>
@@ -513,7 +478,7 @@ Usage</h2>
 <div class="ttc" id="anamespacehelios_1_1app_html_a6336fe1dd31d2537c02c2571437ab93f"><div class="ttname"><a href="namespacehelios_1_1app.html#a6336fe1dd31d2537c02c2571437ab93f">helios::app::kUpdate</a></div><div class="ttdeci">constexpr Update kUpdate</div><div class="ttdoc">Builtin update schedule.</div><div class="ttdef"><b>Definition</b> <a href="schedules_8hpp_source.html#l00098">schedules.hpp:98</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1app_html_a9ae6423443d7b91d02971971253e2e1c"><div class="ttname"><a href="namespacehelios_1_1app.html#a9ae6423443d7b91d02971971253e2e1c">helios::app::kPreUpdate</a></div><div class="ttdeci">constexpr PreUpdate kPreUpdate</div><div class="ttdoc">Builtin pre-update schedule.</div><div class="ttdef"><b>Definition</b> <a href="schedules_8hpp_source.html#l00090">schedules.hpp:90</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1ecs_html_a1a3cca45d631afb052c728c7589f4554"><div class="ttname"><a href="namespacehelios_1_1ecs.html#a1a3cca45d631afb052c728c7589f4554">helios::ecs::MessageWriter</a></div><div class="ttdeci">PmrBasicMessageWriter&lt; T &gt; MessageWriter</div><div class="ttdoc">Alias for BasicMessageWriter bound to a PMR allocator.</div><div class="ttdef"><b>Definition</b> <a href="writer_8hpp_source.html#l00097">writer.hpp:97</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1ecs_html_a2222a8ceaa7f9005447fc4e1bf219cb5"><div class="ttname"><a href="namespacehelios_1_1ecs.html#a2222a8ceaa7f9005447fc4e1bf219cb5">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, std::pmr::polymorphic_allocator&lt;&gt;, Args... &gt; Query</div><div class="ttdoc">Alias for BasicQuery bound to World with a PMR allocator.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02262">query.hpp:2262</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_a2222a8ceaa7f9005447fc4e1bf219cb5"><div class="ttname"><a href="namespacehelios_1_1ecs.html#a2222a8ceaa7f9005447fc4e1bf219cb5">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, std::pmr::polymorphic_allocator&lt;&gt;, Args... &gt; Query</div><div class="ttdoc">Alias for BasicQuery bound to World with a PMR allocator.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02264">query.hpp:2264</a></div></div>
 <div class="ttc" id="aparam_8hpp_html"><div class="ttname"><a href="param_8hpp.html">param.hpp</a></div></div>
 <div class="ttc" id="aquery_8hpp_html"><div class="ttname"><a href="query_8hpp.html">query.hpp</a></div></div>
 <div class="ttc" id="astructhelios_1_1app_1_1AppExit_html"><div class="ttname"><a href="structhelios_1_1app_1_1AppExit.html">helios::app::AppExit</a></div><div class="ttdoc">Message that requests the application to exit.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00058">application.hpp:58</a></div></div>
@@ -535,7 +500,7 @@ Usage</h2>
 <td class="markdownTableBodyNone"><span class="tt">AsyncMessageWriter&lt;T&gt;</span> / <span class="tt">AsyncMessageReader&lt;T&gt;</span>  </td><td class="markdownTableBodyNone">Lock-free async messages between systems  </td></tr>
 </table>
 <p>Builtin schedules (<span class="tt"><a class="el" href="schedules_8hpp.html">helios/app/schedules.hpp</a></span>): <span class="tt">MainStartup</span> → <span class="tt">PreStartup</span> → <span class="tt">Startup</span> → <span class="tt">PostStartup</span> → <span class="tt">First</span> → <span class="tt">PreUpdate</span> → <span class="tt">Update</span> → <span class="tt">PostUpdate</span> → <span class="tt">Last</span> → <span class="tt">Extract</span> → shutdown stages.</p>
-<p>↑ Back to Top↑ Back to Top</p>
+<p><a href="#readme-top">↑ Back to Top</a></p>
 <hr  />
 <h2 class="doxsection"><a class="anchor" id="architecture"></a>
 Architecture</h2>
@@ -564,7 +529,7 @@ Architecture</h2>
 <li><b>Components</b> — archetype columns or per-type sparse sets; structural changes via deferred <span class="tt">Commands</span></li>
 <li><b>Messages</b> — double-buffered (read previous frame); async messages use lock-free queues</li>
 </ul>
-<p>↑ Back to Top↑ Back to Top</p>
+<p><a href="#readme-top">↑ Back to Top</a></p>
 <hr  />
 <h2 class="doxsection"><a class="anchor" id="using-as-a-dependency"></a>
 Using as a Dependency</h2>
@@ -612,7 +577,7 @@ Method 2: <span class="tt">FetchContent</span></h3>
 <div class="line">)</div>
 </div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="method-3-cpm"></a>
 Method 3: CPM</h3>
-<p>Uses the same CPM integration as Helios itself (<span class="tt">[cmake/DownloadUsingCPM.cmake](cmake/DownloadUsingCPM.cmake)</span>).</p>
+<p>Uses the same CPM integration as Helios itself (<a href="cmake/DownloadUsingCPM.cmake"><span class="tt">cmake/DownloadUsingCPM.cmake</span></a>).</p>
 <div class="fragment"><div class="line"># Download CPM once (or vendor cmake/CPM.cmake)</div>
 <div class="line">include(cmake/DownloadUsingCPM.cmake)  # from Helios, or your own CPM bootstrap</div>
 <div class="line"> </div>
@@ -644,8 +609,8 @@ Method 4: Installed Package (<span class="tt">find_package</span>)</h3>
 <div class="line">    TARGET my_game</div>
 <div class="line">    MODULES PUBLIC app</div>
 <div class="line">)</div>
-</div><!-- fragment --><p>Installed artifacts: <span class="tt">HeliosConfig.cmake</span>, <span class="tt">HeliosConfigVersion.cmake</span>, <span class="tt">HeliosTargets.cmake</span> (see <span class="tt">[cmake/Install.cmake](cmake/Install.cmake)</span>).</p>
-<p>↑ Back to Top↑ Back to Top</p>
+</div><!-- fragment --><p>Installed artifacts: <span class="tt">HeliosConfig.cmake</span>, <span class="tt">HeliosConfigVersion.cmake</span>, <span class="tt">HeliosTargets.cmake</span> (see <a href="cmake/Install.cmake"><span class="tt">cmake/Install.cmake</span></a>).</p>
+<p><a href="#readme-top">↑ Back to Top</a></p>
 <hr  />
 <h2 class="doxsection"><a class="anchor" id="documentation"></a>
 Documentation</h2>
@@ -653,7 +618,7 @@ Documentation</h2>
 API reference (Doxygen)</h3>
 <div class="fragment"><div class="line">python scripts/docs.py</div>
 <div class="line"># → docs/doxygen/html/index.html</div>
-</div><!-- fragment --><p>Config: <span class="tt">[docs/doxygen/Doxyfile](docs/doxygen/Doxyfile)</span> — <a href="third-party/doxygen-awesome-css">doxygen-awesome-css</a> theme (git submodule).</p>
+</div><!-- fragment --><p>Config: <a href="docs/doxygen/Doxyfile"><span class="tt">docs/doxygen/Doxyfile</span></a> — <a href="third-party/doxygen-awesome-css">doxygen-awesome-css</a> theme (git submodule).</p>
 <h3 class="doxsection"><a class="anchor" id="project-guidelines"></a>
 Project guidelines</h3>
 <p><a class="el" href="md_docs_2guidelines.html" title="Project Guidelines">docs/guidelines.md</a> — code style, module layout, testing, build options.</p>
@@ -662,7 +627,7 @@ Project guidelines</h3>
 Development</h2>
 <h3 class="doxsection"><a class="anchor" id="code-formatting"></a>
 Code formatting</h3>
-<p>Formatting runs automatically on every local commit (via <a href="https://pre-commit.com/">pre-commit</a>) and is verified on every push / PR (<span class="tt">[.github/workflows/format.yaml](.github/workflows/format.yaml)</span>). Unformatted code cannot land on <span class="tt">main</span> if hooks and CI are used.</p>
+<p>Formatting runs automatically on every local commit (via <a href="https://pre-commit.com/">pre-commit</a>) and is verified on every push / PR (<a href=".github/workflows/format.yaml"><span class="tt">.github/workflows/format.yaml</span></a>). Unformatted code cannot land on <span class="tt">main</span> if hooks and CI are used.</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">When  </th><th class="markdownTableHeadNone">Mechanism  </th></tr>
@@ -709,7 +674,7 @@ Other scripts</h3>
 <div class="fragment"><div class="line">python scripts/lint.py --build-dir build/linux-gcc-release  # clang-tidy</div>
 <div class="line">python scripts/docs.py                                      # Doxygen</div>
 <div class="line">ctest --preset linux-gcc-release                            # tests</div>
-</div><!-- fragment --><p>↑ Back to Top↑ Back to Top</p>
+</div><!-- fragment --><p><a href="#readme-top">↑ Back to Top</a></p>
 <hr  />
 <h2 class="doxsection"><a class="anchor" id="roadmap"></a>
 Roadmap</h2>
@@ -717,23 +682,23 @@ Roadmap</h2>
 <li>Rendering module</li>
 <li>Full window/input integration</li>
 </ul>
-<p>↑ Back to Top↑ Back to Top</p>
+<p><a href="#readme-top">↑ Back to Top</a></p>
 <hr  />
 <h2 class="doxsection"><a class="anchor" id="acknowledgments"></a>
 Acknowledgments</h2>
 <p>Inspired by <a href="https://bevyengine.org/">Bevy</a>, <a href="https://github.com/skypjack/entt">EnTT</a>, and <a href="https://taskflow.github.io/">Taskflow</a>.</p>
-<p>↑ Back to Top↑ Back to Top</p>
+<p><a href="#readme-top">↑ Back to Top</a></p>
 <hr  />
 <h2 class="doxsection"><a class="anchor" id="license"></a>
 License</h2>
 <p>Distributed under the MIT License. See <a href="https://github.com/RexarX/HeliosEngine/blob/main/LICENSE">LICENSE</a> for details.</p>
-<p>↑ Back to Top↑ Back to Top</p>
+<p><a href="#readme-top">↑ Back to Top</a></p>
 <hr  />
 <h2 class="doxsection"><a class="anchor" id="contact"></a>
 Contact</h2>
-<p><b>RexarX</b> — <a href="#" onclick="location.href='mai'+'lto:'+'who'+'72'+'7ca'+'re'+'s@g'+'ma'+'il.'+'co'+'m'; return false;">who727cares@gmail.com</a></p>
+<p><b>RexarX</b> — <a href="#" onclick="location.href='mai'+'lto:'+'who'+'72'+'7ca'+'re'+'s@g'+'ma'+'il.'+'co'+'m'; return false;">who72<span class="obfuscator">.nosp@m.</span>7car<span class="obfuscator">.nosp@m.</span>es@gm<span class="obfuscator">.nosp@m.</span>ail.<span class="obfuscator">.nosp@m.</span>com</a></p>
 <p><b>Project:</b> <a href="https://github.com/RexarX/HeliosEngine">github.com/RexarX/HeliosEngine</a></p>
-<p>↑ Back to Top↑ Back to Top </p>
+<p><a href="#readme-top">↑ Back to Top</a> </p>
 </div></div><!-- PageDoc -->
 <a href="doxygen_crawl.html"></a>
 </div><!-- contents -->

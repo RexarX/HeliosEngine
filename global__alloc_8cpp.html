@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11" />
     <meta name="generator" content="Doxygen 1.17.0" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Helios Engine: src/profile/src/global_alloc.cpp File Reference</title>
+    <title>Helios Engine: src/memory/src/global_alloc.cpp File Reference</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link href="tabs.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="codefolding.js"></script>
@@ -157,14 +157,11 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('global__alloc_
 <div class="header">
   <div class="summary">
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">global_alloc.cpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;<a class="el" href="cstring__view_8hpp_source.html">helios/cstring_view.hpp</a>&gt;</code><br />
-<code>#include &lt;helios/profile/details/memory_dispatch.hpp&gt;</code><br />
-<code>#include &lt;<a class="el" href="profile_2include_2helios_2profile_2memory_8hpp_source.html">helios/profile/memory.hpp</a>&gt;</code><br />
+<div class="textblock"><code>#include &lt;helios/memory/details/profile.hpp&gt;</code><br />
 <code>#include &lt;cstddef&gt;</code><br />
 <code>#include &lt;cstdlib&gt;</code><br />
 <code>#include &lt;new&gt;</code><br />
@@ -173,19 +170,17 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('global__alloc_
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:helios" id="r_helios"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios.html">helios</a></td></tr>
-<tr class="memitem:helios_3A_3Aprofile" id="r_helios_3A_3Aprofile"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1profile.html">helios::profile</a></td></tr>
-<tr class="memitem:helios_3A_3Aprofile_3A_3Adetails" id="r_helios_3A_3Aprofile_3A_3Adetails"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1profile_1_1details.html">helios::profile::details</a></td></tr>
-<tr class="memitem:helios_3A_3Aprofile_3A_3Adetails_3A_3Aanonymous_5Fnamespace_7Bglobal_5Falloc_2Ecpp_7D" id="r_helios_3A_3Aprofile_3A_3Adetails_3A_3Aanonymous_5Fnamespace_7Bglobal_5Falloc_2Ecpp_7D"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1profile_1_1details_1_1anonymous__namespace_02global__alloc_8cpp_03.html">helios::profile::details::anonymous_namespace{global_alloc.cpp}</a></td></tr>
+<tr class="memitem:anonymous_5Fnamespace_7Bglobal_5Falloc_2Ecpp_7D" id="r_anonymous_5Fnamespace_7Bglobal_5Falloc_2Ecpp_7D"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespaceanonymous__namespace_02global__alloc_8cpp_03.html">anonymous_namespace{global_alloc.cpp}</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a23e66d8487c62843f0855af1d78f6c58" id="r_a23e66d8487c62843f0855af1d78f6c58"><td class="memItemLeft">void *&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1profile_1_1details_1_1anonymous__namespace_02global__alloc_8cpp_03.html#a23e66d8487c62843f0855af1d78f6c58">helios::profile::details::anonymous_namespace{global_alloc.cpp}::RawAlloc</a> (size_t size) noexcept</td></tr>
-<tr class="memitem:a383c336da598486f3756bf8bd267d121" id="r_a383c336da598486f3756bf8bd267d121"><td class="memItemLeft">void *&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1profile_1_1details_1_1anonymous__namespace_02global__alloc_8cpp_03.html#a383c336da598486f3756bf8bd267d121">helios::profile::details::anonymous_namespace{global_alloc.cpp}::RawAlignedAlloc</a> (size_t size, std::align_val_t alignment) noexcept</td></tr>
-<tr class="memitem:a62b3396c3e94ebf9f92f35eb8a87b8d0" id="r_a62b3396c3e94ebf9f92f35eb8a87b8d0"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1profile_1_1details_1_1anonymous__namespace_02global__alloc_8cpp_03.html#a62b3396c3e94ebf9f92f35eb8a87b8d0">helios::profile::details::anonymous_namespace{global_alloc.cpp}::RawFree</a> (void *ptr) noexcept</td></tr>
-<tr class="memitem:a29de1722242734c5f1a572e237013fc9" id="r_a29de1722242734c5f1a572e237013fc9"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1profile_1_1details_1_1anonymous__namespace_02global__alloc_8cpp_03.html#a29de1722242734c5f1a572e237013fc9">helios::profile::details::anonymous_namespace{global_alloc.cpp}::RawAlignedFree</a> (void *ptr) noexcept</td></tr>
-<tr class="memitem:a68a49db6dc5422bc5b15d5b0d197614f" id="r_a68a49db6dc5422bc5b15d5b0d197614f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1profile_1_1details_1_1anonymous__namespace_02global__alloc_8cpp_03.html#a68a49db6dc5422bc5b15d5b0d197614f">helios::profile::details::anonymous_namespace{global_alloc.cpp}::ProfileAlloc</a> (const void *ptr, size_t size) noexcept</td></tr>
-<tr class="memitem:a9fc0b31f0b225acab7d20adeb15eee9d" id="r_a9fc0b31f0b225acab7d20adeb15eee9d"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1profile_1_1details_1_1anonymous__namespace_02global__alloc_8cpp_03.html#a9fc0b31f0b225acab7d20adeb15eee9d">helios::profile::details::anonymous_namespace{global_alloc.cpp}::ProfileFree</a> (const void *ptr) noexcept</td></tr>
+<tr class="memitem:aa4b9fcde8bcb43a33a4301a70298ec95" id="r_aa4b9fcde8bcb43a33a4301a70298ec95"><td class="memItemLeft">constexpr size_t&#160;</td><td class="memItemRight"><a class="el" href="namespaceanonymous__namespace_02global__alloc_8cpp_03.html#aa4b9fcde8bcb43a33a4301a70298ec95">anonymous_namespace{global_alloc.cpp}::AlignUp</a> (size_t value, size_t alignment) noexcept</td></tr>
+<tr class="memitem:a81c499e1512d0c00ad916e18d2a91236" id="r_a81c499e1512d0c00ad916e18d2a91236"><td class="memItemLeft">void *&#160;</td><td class="memItemRight"><a class="el" href="namespaceanonymous__namespace_02global__alloc_8cpp_03.html#a81c499e1512d0c00ad916e18d2a91236">anonymous_namespace{global_alloc.cpp}::RawAlloc</a> (size_t size) noexcept</td></tr>
+<tr class="memitem:ad799df80433aadfc92bc3b41576e541e" id="r_ad799df80433aadfc92bc3b41576e541e"><td class="memItemLeft">void *&#160;</td><td class="memItemRight"><a class="el" href="namespaceanonymous__namespace_02global__alloc_8cpp_03.html#ad799df80433aadfc92bc3b41576e541e">anonymous_namespace{global_alloc.cpp}::RawAlignedAlloc</a> (size_t size, std::align_val_t alignment) noexcept</td></tr>
+<tr class="memitem:af2f17c741d7cb8f10b5be5a316d91e4b" id="r_af2f17c741d7cb8f10b5be5a316d91e4b"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespaceanonymous__namespace_02global__alloc_8cpp_03.html#af2f17c741d7cb8f10b5be5a316d91e4b">anonymous_namespace{global_alloc.cpp}::RawFree</a> (void *ptr) noexcept</td></tr>
+<tr class="memitem:ada176eb8a1329cbd7120205980bd8321" id="r_ada176eb8a1329cbd7120205980bd8321"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespaceanonymous__namespace_02global__alloc_8cpp_03.html#ada176eb8a1329cbd7120205980bd8321">anonymous_namespace{global_alloc.cpp}::RawAlignedFree</a> (void *ptr) noexcept</td></tr>
+<tr class="memitem:a47f5b87000e7122ad4d0f10ce00ca73b" id="r_a47f5b87000e7122ad4d0f10ce00ca73b"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespaceanonymous__namespace_02global__alloc_8cpp_03.html#a47f5b87000e7122ad4d0f10ce00ca73b">anonymous_namespace{global_alloc.cpp}::ProfileAlloc</a> (const void *ptr, size_t size) noexcept</td></tr>
+<tr class="memitem:a8972c2285eb026a415643372edf0335e" id="r_a8972c2285eb026a415643372edf0335e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespaceanonymous__namespace_02global__alloc_8cpp_03.html#a8972c2285eb026a415643372edf0335e">anonymous_namespace{global_alloc.cpp}::ProfileFree</a> (const void *ptr) noexcept</td></tr>
 <tr class="memitem:a160dcabc54bbecfc69484678cafadb81" id="r_a160dcabc54bbecfc69484678cafadb81"><td class="memItemLeft">void *&#160;</td><td class="memItemRight"><a class="el" href="#a160dcabc54bbecfc69484678cafadb81">operator new</a> (size_t size)</td></tr>
 <tr class="memitem:af2243bb4c2126b7b2b393e06090fbe59" id="r_af2243bb4c2126b7b2b393e06090fbe59"><td class="memItemLeft">void *&#160;</td><td class="memItemRight"><a class="el" href="#af2243bb4c2126b7b2b393e06090fbe59">operator new[]</a> (size_t size)</td></tr>
 <tr class="memitem:a16ac0f06fb28f80778c7830a36512700" id="r_a16ac0f06fb28f80778c7830a36512700"><td class="memItemLeft">void *&#160;</td><td class="memItemRight"><a class="el" href="#a16ac0f06fb28f80778c7830a36512700">operator new</a> (size_t size, const std::nothrow_t &amp;) noexcept</td></tr>
@@ -204,11 +199,6 @@ Functions</h2></td></tr>
 <tr class="memitem:ac994c2e259ce3af72fc3175119fe8b60" id="r_ac994c2e259ce3af72fc3175119fe8b60"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ac994c2e259ce3af72fc3175119fe8b60">operator delete[]</a> (void *ptr, std::align_val_t alignment) noexcept</td></tr>
 <tr class="memitem:a2cbaeb706dae8c2a1d66145775c801b8" id="r_a2cbaeb706dae8c2a1d66145775c801b8"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a2cbaeb706dae8c2a1d66145775c801b8">operator delete</a> (void *ptr, size_t, std::align_val_t alignment) noexcept</td></tr>
 <tr class="memitem:a839bd8e55705408398d6dde956ad9c7e" id="r_a839bd8e55705408398d6dde956ad9c7e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a839bd8e55705408398d6dde956ad9c7e">operator delete[]</a> (void *ptr, size_t size, std::align_val_t alignment) noexcept</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:aff73d09aba793a15d1d1cb02544580d3" id="r_aff73d09aba793a15d1d1cb02544580d3"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1profile_1_1details_1_1anonymous__namespace_02global__alloc_8cpp_03.html#aff73d09aba793a15d1d1cb02544580d3">helios::profile::details::anonymous_namespace{global_alloc.cpp}::g_in_global_alloc_hook</a> = false</td></tr>
-<tr class="memitem:a427816e9bb7fc4b139eaa096b0560829" id="r_a427816e9bb7fc4b139eaa096b0560829"><td class="memItemLeft">constexpr <a class="el" href="namespacehelios.html#a27054e3c65ddee94a897de87b010255f">CStringView</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1profile_1_1details_1_1anonymous__namespace_02global__alloc_8cpp_03.html#a427816e9bb7fc4b139eaa096b0560829">helios::profile::details::anonymous_namespace{global_alloc.cpp}::kGlobalAllocName</a> {&quot;global&quot;}</td></tr>
 </table>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
 <a id="afa145befcf5e7b83424408ca503c8637" name="afa145befcf5e7b83424408ca503c8637"></a>
@@ -234,7 +224,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00111">111</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00139">139</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
 
 </div>
 </div>
@@ -265,7 +255,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00132">132</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00160">160</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
 
 </div>
 </div>
@@ -296,7 +286,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00124">124</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00152">152</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
 
 </div>
 </div>
@@ -332,7 +322,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00181">181</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00209">209</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
 
 </div>
 </div>
@@ -363,7 +353,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00168">168</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00196">196</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
 
 </div>
 </div>
@@ -390,7 +380,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00120">120</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00148">148</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
 
 </div>
 </div>
@@ -421,7 +411,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00136">136</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00164">164</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
 
 </div>
 </div>
@@ -457,7 +447,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00186">186</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00214">214</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
 
 </div>
 </div>
@@ -488,7 +478,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00128">128</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00156">156</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
 
 </div>
 </div>
@@ -519,7 +509,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00177">177</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00205">205</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
 
 </div>
 </div>
@@ -538,7 +528,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00085">85</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00113">113</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
 
 </div>
 </div>
@@ -569,7 +559,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00099">99</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00127">127</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
 
 </div>
 </div>
@@ -592,7 +582,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00140">140</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00168">168</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
 
 </div>
 </div>
@@ -628,7 +618,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00154">154</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00182">182</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
 
 </div>
 </div>
@@ -647,7 +637,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00095">95</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00123">123</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
 
 </div>
 </div>
@@ -678,7 +668,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00107">107</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00135">135</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
 
 </div>
 </div>
@@ -701,7 +691,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00150">150</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00178">178</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
 
 </div>
 </div>
@@ -737,7 +727,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00163">163</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00191">191</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
 
 </div>
 </div>
@@ -748,7 +738,7 @@ Variables</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="dir_2730ace12cf03b0ba989133b5ac743ea.html">profile</a></li><li class="navelem"><a href="dir_3896a04b32b30f3dd53d629057e4f290.html">src</a></li><li class="navelem"><a href="global__alloc_8cpp.html">global_alloc.cpp</a></li>
+    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="dir_94d7edf6f8f3d9af5fd63c44172da41c.html">memory</a></li><li class="navelem"><a href="dir_6aa18a6b3f9b43fee914b8c78dd7fd0c.html">src</a></li><li class="navelem"><a href="global__alloc_8cpp.html">global_alloc.cpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

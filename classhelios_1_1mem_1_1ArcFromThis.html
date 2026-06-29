@@ -171,11 +171,17 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('classhelios_1_
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a09be2f73f96ecc0f99f0bea3985fbbfe" id="r_a09be2f73f96ecc0f99f0bea3985fbbfe"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a09be2f73f96ecc0f99f0bea3985fbbfe">ArcFromThis</a> () noexcept=default</td></tr>
+<tr class="memdesc:a09be2f73f96ecc0f99f0bea3985fbbfe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default-constructs with reference count zero.  <br /></td></tr>
 <tr class="memitem:a8bcee87951be8a7638f35807cbc552b8" id="r_a8bcee87951be8a7638f35807cbc552b8"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a8bcee87951be8a7638f35807cbc552b8">ArcFromThis</a> (const ArcFromThis &amp;) noexcept</td></tr>
+<tr class="memdesc:a8bcee87951be8a7638f35807cbc552b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy-constructs; does not copy the reference count.  <br /></td></tr>
 <tr class="memitem:adfb7b5530aba20493ebd3ea45f1839f1" id="r_adfb7b5530aba20493ebd3ea45f1839f1"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#adfb7b5530aba20493ebd3ea45f1839f1">ArcFromThis</a> (ArcFromThis &amp;&amp;) noexcept</td></tr>
+<tr class="memdesc:adfb7b5530aba20493ebd3ea45f1839f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move-constructs; does not transfer the reference count.  <br /></td></tr>
 <tr class="memitem:a75bc3d2ab94fa26c905346ed815acb29" id="r_a75bc3d2ab94fa26c905346ed815acb29"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a75bc3d2ab94fa26c905346ed815acb29">~ArcFromThis</a> () noexcept=default</td></tr>
+<tr class="memdesc:a75bc3d2ab94fa26c905346ed815acb29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys the embedded counter; does not delete the derived object.  <br /></td></tr>
 <tr class="memitem:abaf8348b73f7f747015502c2e721253f" id="r_abaf8348b73f7f747015502c2e721253f"><td class="memItemLeft"><a class="el" href="#a09be2f73f96ecc0f99f0bea3985fbbfe">ArcFromThis</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#abaf8348b73f7f747015502c2e721253f">operator=</a> (const <a class="el" href="#a09be2f73f96ecc0f99f0bea3985fbbfe">ArcFromThis</a> &amp;) noexcept</td></tr>
+<tr class="memdesc:abaf8348b73f7f747015502c2e721253f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy-assigns; does not affect the reference count.  <br /></td></tr>
 <tr class="memitem:a7598ebba120a045e01202787b56d721f" id="r_a7598ebba120a045e01202787b56d721f"><td class="memItemLeft"><a class="el" href="#a09be2f73f96ecc0f99f0bea3985fbbfe">ArcFromThis</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a7598ebba120a045e01202787b56d721f">operator=</a> (<a class="el" href="#a09be2f73f96ecc0f99f0bea3985fbbfe">ArcFromThis</a> &amp;&amp;) noexcept</td></tr>
+<tr class="memdesc:a7598ebba120a045e01202787b56d721f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move-assigns; does not affect the reference count.  <br /></td></tr>
 <tr class="memitem:a59707b2a747fc8bdbe852254de6db55e" id="r_a59707b2a747fc8bdbe852254de6db55e"><td class="memItemLeft">uint32_t&#160;</td><td class="memItemRight"><a class="el" href="#a59707b2a747fc8bdbe852254de6db55e">RefCount</a> () const noexcept</td></tr>
 <tr class="memdesc:a59707b2a747fc8bdbe852254de6db55e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current reference count.  <br /></td></tr>
 </table><table class="memberdecls">
@@ -204,10 +210,10 @@ class helios::mem::ArcFromThis&lt; Derived &gt;</div><p>CRTP base class that emb
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">auto</span> tex = <a class="code hl_function" href="namespacehelios_1_1mem.html#a10f597088c98df7a40f43d8ac7236814">helios::mem::MakeArc&lt;Texture&gt;</a>(<span class="stringliteral">&quot;diffuse&quot;</span>);</div>
-<div class="ttc" id="aclasshelios_1_1mem_1_1ArcFromThis_html"><div class="ttname"><a href="classhelios_1_1mem_1_1ArcFromThis.html">helios::mem::ArcFromThis</a></div><div class="ttdoc">CRTP base class that embeds an atomic reference counter into the derived type.</div><div class="ttdef"><b>Definition</b> <a href="ref__counted_8hpp_source.html#l00127">ref_counted.hpp:127</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1mem_html_a10f597088c98df7a40f43d8ac7236814"><div class="ttname"><a href="namespacehelios_1_1mem.html#a10f597088c98df7a40f43d8ac7236814">helios::mem::MakeArc</a></div><div class="ttdeci">auto MakeArc(Args &amp;&amp;... args) -&gt; Arc&lt; T &gt;</div><div class="ttdoc">Allocates and constructs a T object, returning an Arc&lt;T, std::allocator&lt;T&gt;&gt; handle.</div><div class="ttdef"><b>Definition</b> <a href="ref__counted_8hpp_source.html#l01045">ref_counted.hpp:1045</a></div></div>
+<div class="ttc" id="aclasshelios_1_1mem_1_1ArcFromThis_html"><div class="ttname"><a href="classhelios_1_1mem_1_1ArcFromThis.html">helios::mem::ArcFromThis</a></div><div class="ttdoc">CRTP base class that embeds an atomic reference counter into the derived type.</div><div class="ttdef"><b>Definition</b> <a href="ref__counted_8hpp_source.html#l00137">ref_counted.hpp:137</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1mem_html_a10f597088c98df7a40f43d8ac7236814"><div class="ttname"><a href="namespacehelios_1_1mem.html#a10f597088c98df7a40f43d8ac7236814">helios::mem::MakeArc</a></div><div class="ttdeci">auto MakeArc(Args &amp;&amp;... args) -&gt; Arc&lt; T &gt;</div><div class="ttdoc">Allocates and constructs a T object, returning an Arc&lt;T, std::allocator&lt;T&gt;&gt; handle.</div><div class="ttdef"><b>Definition</b> <a href="ref__counted_8hpp_source.html#l01204">ref_counted.hpp:1204</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00127">127</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00137">137</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a09be2f73f96ecc0f99f0bea3985fbbfe" name="a09be2f73f96ecc0f99f0bea3985fbbfe"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a09be2f73f96ecc0f99f0bea3985fbbfe">&#9670;&#160;</a></span>ArcFromThis() <span class="overload">[1/3]</span></h2>
@@ -233,6 +239,8 @@ template&lt;typename Derived&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Default-constructs with reference count zero. </p>
 
 </div>
 </div>
@@ -261,7 +269,9 @@ template&lt;typename Derived&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00130">130</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p>Copy-constructs; does not copy the reference count. </p>
+
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00143">143</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -290,7 +300,9 @@ template&lt;typename Derived&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00131">131</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p>Move-constructs; does not transfer the reference count. </p>
+
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00146">146</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -318,6 +330,8 @@ template&lt;typename Derived&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Destroys the embedded counter; does not delete the derived object. </p>
 
 </div>
 </div>
@@ -347,7 +361,9 @@ template&lt;typename Derived&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00137">137</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p>Move-assigns; does not affect the reference count. </p>
+
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00157">157</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -376,7 +392,9 @@ template&lt;typename Derived&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00134">134</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p>Copy-assigns; does not affect the reference count. </p>
+
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00152">152</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -409,7 +427,7 @@ template&lt;typename Derived&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>This is a snapshot; the value may change immediately after the call in a multithreaded context. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Current number of <span class="tt"><a class="el" href="classhelios_1_1mem_1_1AtomicRefCounted.html" title="Thread-safe intrusive reference-counted smart pointer.">AtomicRefCounted</a></span> handles owning this object </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00145">145</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00165">165</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>
@@ -438,7 +456,7 @@ template&lt;typename D, typename A&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00152">152</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ref__counted_8hpp_source.html#l00172">172</a> of file <a class="el" href="ref__counted_8hpp_source.html">ref_counted.hpp</a>.</p>
 
 </div>
 </div>

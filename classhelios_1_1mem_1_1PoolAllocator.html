@@ -179,12 +179,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aba6f02dae5373638ed61bcf1138dd6bf" id="r_aba6f02dae5373638ed61bcf1138dd6bf"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#aba6f02dae5373638ed61bcf1138dd6bf">PoolAllocator</a> (<a class="el" href="structhelios_1_1mem_1_1PoolAllocatorOptions.html">PoolAllocatorOptions</a> options) noexcept</td></tr>
 <tr class="memdesc:aba6f02dae5373638ed61bcf1138dd6bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs pool allocator from options.  <br /></td></tr>
 <tr class="memitem:a3dc0c541d6729443e1f33a2241bbaa95" id="r_a3dc0c541d6729443e1f33a2241bbaa95"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a3dc0c541d6729443e1f33a2241bbaa95">PoolAllocator</a> (size_t block_size, size_t block_count, size_t alignment=<a class="el" href="namespacehelios_1_1mem.html#af41137401afc9dd5b312a8b55c2a2d39">kDefaultAlignment</a>) noexcept</td></tr>
-<tr class="memdesc:a3dc0c541d6729443e1f33a2241bbaa95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs pool allocator with fixed growth.  <br /></td></tr>
+<tr class="memdesc:a3dc0c541d6729443e1f33a2241bbaa95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs pool allocator with geometric growth.  <br /></td></tr>
 <tr class="memitem:aca6199a8a61e8e849cae4a388bc1aedc" id="r_aca6199a8a61e8e849cae4a388bc1aedc"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#aca6199a8a61e8e849cae4a388bc1aedc">PoolAllocator</a> (const PoolAllocator &amp;)=delete</td></tr>
 <tr class="memitem:a12c6affb1f96b9191b34daea367e1b72" id="r_a12c6affb1f96b9191b34daea367e1b72"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a12c6affb1f96b9191b34daea367e1b72">PoolAllocator</a> (PoolAllocator &amp;&amp;other) noexcept</td></tr>
+<tr class="memdesc:a12c6affb1f96b9191b34daea367e1b72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move-constructs pool allocator from another instance.  <br /></td></tr>
 <tr class="memitem:ae38ef998bb4090a03634b2c647eceb41" id="r_ae38ef998bb4090a03634b2c647eceb41"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ae38ef998bb4090a03634b2c647eceb41">~PoolAllocator</a> () noexcept override</td></tr>
 <tr class="memitem:a2a9594c3e0e2eefa583f2b10fbe160ac" id="r_a2a9594c3e0e2eefa583f2b10fbe160ac"><td class="memItemLeft"><a class="el" href="#aba6f02dae5373638ed61bcf1138dd6bf">PoolAllocator</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a2a9594c3e0e2eefa583f2b10fbe160ac">operator=</a> (const <a class="el" href="#aba6f02dae5373638ed61bcf1138dd6bf">PoolAllocator</a> &amp;)=delete</td></tr>
 <tr class="memitem:a6e44ddadaf8656508b3e39365f4cc01d" id="r_a6e44ddadaf8656508b3e39365f4cc01d"><td class="memItemLeft"><a class="el" href="#aba6f02dae5373638ed61bcf1138dd6bf">PoolAllocator</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a6e44ddadaf8656508b3e39365f4cc01d">operator=</a> (<a class="el" href="#aba6f02dae5373638ed61bcf1138dd6bf">PoolAllocator</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="memdesc:a6e44ddadaf8656508b3e39365f4cc01d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move-assigns pool state from another instance.  <br /></td></tr>
 <tr class="memitem:a7decfb7f4e374c73a644faf45cc57197" id="r_a7decfb7f4e374c73a644faf45cc57197"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a7decfb7f4e374c73a644faf45cc57197">Reset</a> () noexcept</td></tr>
 <tr class="memdesc:a7decfb7f4e374c73a644faf45cc57197"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets pool to fully free state.  <br /></td></tr>
 <tr class="memitem:a5da2ed4b76ed417cf92b7777010f40dc" id="r_a5da2ed4b76ed417cf92b7777010f40dc"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a5da2ed4b76ed417cf92b7777010f40dc">Full</a> () const noexcept</td></tr>
@@ -221,7 +223,7 @@ Static Public Member Functions</h2></td></tr>
 <p>Allocates from fixed-size blocks stored in growable chunks.</p>
 <p>Fast path uses lock-free freelist push/pop based on embedded next pointers. Growth allocates and links a new chunk, then pushes all its blocks into the freelist. </p>
 
-<p class="definition">Definition at line <a class="el" href="pool__allocator_8hpp_source.html#l00030">30</a> of file <a class="el" href="pool__allocator_8hpp_source.html">pool_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pool__allocator_8hpp_source.html#l00035">35</a> of file <a class="el" href="pool__allocator_8hpp_source.html">pool_allocator.hpp</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aba6f02dae5373638ed61bcf1138dd6bf" name="aba6f02dae5373638ed61bcf1138dd6bf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aba6f02dae5373638ed61bcf1138dd6bf">&#9670;&#160;</a></span>PoolAllocator() <span class="overload">[1/4]</span></h2>
@@ -241,13 +243,13 @@ Static Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel explicit">explicit</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Constructs pool allocator from options. </p>
-<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion when block_size or block_count is zero. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion when block_size or block_count is zero, when alignment is not a power of two, or when alignment is less than <span class="tt">alignof(void*)</span>. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">options</td><td>Pool allocator options </td></tr>
@@ -255,7 +257,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="pool__allocator_8hpp_source.html#l00195">195</a> of file <a class="el" href="pool__allocator_8hpp_source.html">pool_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pool__allocator_8cpp_source.html#l00049">49</a> of file <a class="el" href="pool__allocator_8cpp_source.html">pool_allocator.cpp</a>.</p>
 
 </div>
 </div>
@@ -291,7 +293,8 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Constructs pool allocator with fixed growth. </p>
+<p>Constructs pool allocator with geometric growth. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion when <span class="tt">block_size</span> or <span class="tt">block_count</span> is zero, when <span class="tt">alignment</span> is not a power of two, or when <span class="tt">alignment</span> is less than <span class="tt">alignof(void*)</span>. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">block_size</td><td>Size of each block in bytes </td></tr>
@@ -301,7 +304,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="pool__allocator_8hpp_source.html#l00220">220</a> of file <a class="el" href="pool__allocator_8hpp_source.html">pool_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pool__allocator_8hpp_source.html#l00055">55</a> of file <a class="el" href="pool__allocator_8hpp_source.html">pool_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -353,7 +356,15 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pool__allocator_8hpp_source.html#l00234">234</a> of file <a class="el" href="pool__allocator_8hpp_source.html">pool_allocator.hpp</a>.</p>
+<p>Move-constructs pool allocator from another instance. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Source allocator; left in empty moved-from state </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="pool__allocator_8hpp_source.html#l00069">69</a> of file <a class="el" href="pool__allocator_8hpp_source.html">pool_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -380,7 +391,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pool__allocator_8hpp_source.html#l00050">50</a> of file <a class="el" href="pool__allocator_8hpp_source.html">pool_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pool__allocator_8hpp_source.html#l00070">70</a> of file <a class="el" href="pool__allocator_8hpp_source.html">pool_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -411,7 +422,7 @@ Static Public Member Functions</h2></td></tr>
 <p>Returns configured block alignment. </p>
 <dl class="section return"><dt>Returns</dt><dd>Alignment in bytes </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="pool__allocator_8hpp_source.html#l00112">112</a> of file <a class="el" href="pool__allocator_8hpp_source.html">pool_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pool__allocator_8hpp_source.html#l00138">138</a> of file <a class="el" href="pool__allocator_8hpp_source.html">pool_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -441,7 +452,7 @@ Static Public Member Functions</h2></td></tr>
 <p>Returns total blocks across chunks. </p>
 <dl class="section return"><dt>Returns</dt><dd>Total block count </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="pool__allocator_8hpp_source.html#l00126">126</a> of file <a class="el" href="pool__allocator_8hpp_source.html">pool_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pool__allocator_8hpp_source.html#l00152">152</a> of file <a class="el" href="pool__allocator_8hpp_source.html">pool_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -471,7 +482,7 @@ Static Public Member Functions</h2></td></tr>
 <p>Returns effective block size. </p>
 <dl class="section return"><dt>Returns</dt><dd>Block size in bytes </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="pool__allocator_8hpp_source.html#l00106">106</a> of file <a class="el" href="pool__allocator_8hpp_source.html">pool_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pool__allocator_8hpp_source.html#l00132">132</a> of file <a class="el" href="pool__allocator_8hpp_source.html">pool_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -501,7 +512,7 @@ Static Public Member Functions</h2></td></tr>
 <p>Returns true when all blocks are free. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if empty, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="pool__allocator_8hpp_source.html#l00084">84</a> of file <a class="el" href="pool__allocator_8hpp_source.html">pool_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pool__allocator_8hpp_source.html#l00110">110</a> of file <a class="el" href="pool__allocator_8hpp_source.html">pool_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -545,7 +556,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Configured pool allocator </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="pool__allocator_8hpp_source.html#l00228">228</a> of file <a class="el" href="pool__allocator_8hpp_source.html">pool_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pool__allocator_8hpp_source.html#l00223">223</a> of file <a class="el" href="pool__allocator_8hpp_source.html">pool_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -575,7 +586,7 @@ template&lt;typename T&gt; </div>
 <p>Returns free block count. </p>
 <dl class="section return"><dt>Returns</dt><dd>Free block count </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="pool__allocator_8hpp_source.html#l00134">134</a> of file <a class="el" href="pool__allocator_8hpp_source.html">pool_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pool__allocator_8hpp_source.html#l00160">160</a> of file <a class="el" href="pool__allocator_8hpp_source.html">pool_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -605,7 +616,7 @@ template&lt;typename T&gt; </div>
 <p>Returns true when no free blocks remain. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if full, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="pool__allocator_8hpp_source.html#l00076">76</a> of file <a class="el" href="pool__allocator_8hpp_source.html">pool_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pool__allocator_8hpp_source.html#l00102">102</a> of file <a class="el" href="pool__allocator_8hpp_source.html">pool_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -635,7 +646,7 @@ template&lt;typename T&gt; </div>
 <p>Returns growth policy. </p>
 <dl class="section return"><dt>Returns</dt><dd>Growth policy </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="pool__allocator_8hpp_source.html#l00148">148</a> of file <a class="el" href="pool__allocator_8hpp_source.html">pool_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pool__allocator_8hpp_source.html#l00174">174</a> of file <a class="el" href="pool__allocator_8hpp_source.html">pool_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -665,7 +676,7 @@ template&lt;typename T&gt; </div>
 <p>Returns number of blocks in first chunk. </p>
 <dl class="section return"><dt>Returns</dt><dd>Initial block count </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="pool__allocator_8hpp_source.html#l00118">118</a> of file <a class="el" href="pool__allocator_8hpp_source.html">pool_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pool__allocator_8hpp_source.html#l00144">144</a> of file <a class="el" href="pool__allocator_8hpp_source.html">pool_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -717,7 +728,16 @@ template&lt;typename T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pool__allocator_8hpp_source.html#l00263">263</a> of file <a class="el" href="pool__allocator_8hpp_source.html">pool_allocator.hpp</a>.</p>
+<p>Move-assigns pool state from another instance. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Source allocator; left in empty moved-from state </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to this allocator </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="pool__allocator_8hpp_source.html#l00229">229</a> of file <a class="el" href="pool__allocator_8hpp_source.html">pool_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -753,7 +773,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True when pointer belongs to any pool chunk, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="pool__allocator_8cpp_source.html#l00058">58</a> of file <a class="el" href="pool__allocator_8cpp_source.html">pool_allocator.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pool__allocator_8cpp_source.html#l00074">74</a> of file <a class="el" href="pool__allocator_8cpp_source.html">pool_allocator.cpp</a>.</p>
 
 </div>
 </div>
@@ -783,7 +803,7 @@ template&lt;typename T&gt; </div>
 <p>Resets pool to fully free state. </p>
 <dl class="section warning"><dt>Warning</dt><dd>Must not be called concurrently with allocate/deallocate. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="pool__allocator_8hpp_source.html#l00309">309</a> of file <a class="el" href="pool__allocator_8hpp_source.html">pool_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pool__allocator_8hpp_source.html#l00239">239</a> of file <a class="el" href="pool__allocator_8hpp_source.html">pool_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -813,7 +833,7 @@ template&lt;typename T&gt; </div>
 <p>Returns runtime stats. </p>
 <dl class="section return"><dt>Returns</dt><dd>Allocator stats </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="pool__allocator_8hpp_source.html#l00317">317</a> of file <a class="el" href="pool__allocator_8hpp_source.html">pool_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pool__allocator_8hpp_source.html#l00247">247</a> of file <a class="el" href="pool__allocator_8hpp_source.html">pool_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -843,7 +863,7 @@ template&lt;typename T&gt; </div>
 <p>Returns used block count. </p>
 <dl class="section return"><dt>Returns</dt><dd>Used block count </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="pool__allocator_8hpp_source.html#l00334">334</a> of file <a class="el" href="pool__allocator_8hpp_source.html">pool_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pool__allocator_8hpp_source.html#l00264">264</a> of file <a class="el" href="pool__allocator_8hpp_source.html">pool_allocator.hpp</a>.</p>
 
 </div>
 </div>

@@ -280,8 +280,8 @@ Systems &amp; Schedules</h1>
 <div class="ttc" id="aclasshelios_1_1async_1_1Executor_html"><div class="ttname"><a href="classhelios_1_1async_1_1Executor.html">helios::async::Executor</a></div><div class="ttdoc">Manages worker threads and executes task graphs using work-stealing scheduling.</div><div class="ttdef"><b>Definition</b> <a href="async_2include_2helios_2async_2executor_8hpp_source.html#l00032">executor.hpp:32</a></div></div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1BasicQuery_html_a96897d89cdf618e38944a1a9ba9b6f46"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicQuery.html#a96897d89cdf618e38944a1a9ba9b6f46">helios::ecs::BasicQuery::ForEach</a></div><div class="ttdeci">void ForEach(const Action &amp;action) const</div><div class="ttdoc">Executes an action for each matching entity&#39;s components.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l01408">query.hpp:1408</a></div></div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1Res_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1Res.html">helios::ecs::Res</a></div><div class="ttdoc">Read-only or mutable access to resource.</div><div class="ttdef"><b>Definition</b> <a href="param_8hpp_source.html#l00017">param.hpp:17</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1Schedule_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1Schedule.html">helios::ecs::Schedule</a></div><div class="ttdoc">A collection of systems, sets, and run conditions with ordering constraints.</div><div class="ttdef"><b>Definition</b> <a href="schedule_8hpp_source.html#l00814">schedule.hpp:814</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1ecs_html_a2222a8ceaa7f9005447fc4e1bf219cb5"><div class="ttname"><a href="namespacehelios_1_1ecs.html#a2222a8ceaa7f9005447fc4e1bf219cb5">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, std::pmr::polymorphic_allocator&lt;&gt;, Args... &gt; Query</div><div class="ttdoc">Alias for BasicQuery bound to World with a PMR allocator.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02262">query.hpp:2262</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1Schedule_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1Schedule.html">helios::ecs::Schedule</a></div><div class="ttdoc">A collection of systems, sets, and run conditions with ordering constraints.</div><div class="ttdef"><b>Definition</b> <a href="schedule_8hpp_source.html#l00182">schedule.hpp:182</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_a2222a8ceaa7f9005447fc4e1bf219cb5"><div class="ttname"><a href="namespacehelios_1_1ecs.html#a2222a8ceaa7f9005447fc4e1bf219cb5">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, std::pmr::polymorphic_allocator&lt;&gt;, Args... &gt; Query</div><div class="ttdoc">Alias for BasicQuery bound to World with a PMR allocator.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02264">query.hpp:2264</a></div></div>
 <div class="ttc" id="asystem_8hpp_html"><div class="ttname"><a href="system_8hpp.html">system.hpp</a></div></div>
 </div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="system-parameters"></a>
 System Parameters</h2>
@@ -404,10 +404,10 @@ Fully custom parameters</h3>
 <h2 class="doxsection"><a class="anchor" id="ordering"></a>
 Ordering</h2>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>SpawnSet {};</div>
+<div class="line"><span class="keyword">struct </span>MovementSet {};</div>
 <div class="line"> </div>
+<div class="line">schedule.Add(SpawnSystem{}, MoveSystem{}).InSet(MovementSet{}).Sequence();</div>
 <div class="line">schedule.Set&lt;SpawnSet&gt;().Sequence();</div>
-<div class="line">schedule.Add(SpawnSystem{}).InSet(SpawnSet{});</div>
-<div class="line">schedule.Add(MoveSystem{}).After&lt;SpawnSystem&gt;();</div>
 <div class="line">schedule.Add(RenderSystem{}).Before&lt;MoveSystem&gt;();</div>
 </div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="commands--deferred-mutations"></a>
 Commands — Deferred Mutations</h1>

@@ -3,7 +3,6 @@ var memory_2include_2helios_2memory_2common_8hpp =
     [ "helios::mem::GrowthPolicy", "structhelios_1_1mem_1_1GrowthPolicy.html", "structhelios_1_1mem_1_1GrowthPolicy" ],
     [ "helios::mem::AllocatorStats", "structhelios_1_1mem_1_1AllocatorStats.html", "structhelios_1_1mem_1_1AllocatorStats" ],
     [ "helios::mem::GrowthMode", "namespacehelios_1_1mem.html#a1562f4775c233b5c54e524a8c3a28e52", [
-      [ "helios::mem::GrowthMode::kFixed", "namespacehelios_1_1mem.html#a1562f4775c233b5c54e524a8c3a28e52a826888a09763de7e2a9f60eb85d88b24", null ],
       [ "helios::mem::GrowthMode::kLinear", "namespacehelios_1_1mem.html#a1562f4775c233b5c54e524a8c3a28e52aac97f0008bcf7c7fe4f2ff94160e1385", null ],
       [ "helios::mem::GrowthMode::kGeometric", "namespacehelios_1_1mem.html#a1562f4775c233b5c54e524a8c3a28e52a214d2c89b85e706df3d39c258b9b7b5f", null ]
     ] ],

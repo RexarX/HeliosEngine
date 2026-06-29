@@ -178,12 +178,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0f21f03a927c27ef41a536617d2dd373" id="r_a0f21f03a927c27ef41a536617d2dd373"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a0f21f03a927c27ef41a536617d2dd373">ArenaAllocator</a> (<a class="el" href="structhelios_1_1mem_1_1ArenaOptions.html">ArenaOptions</a> options={}) noexcept</td></tr>
 <tr class="memdesc:a0f21f03a927c27ef41a536617d2dd373"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs arena allocator from options.  <br /></td></tr>
 <tr class="memitem:a0956cae23d9314853cf85fed19904409" id="r_a0956cae23d9314853cf85fed19904409"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a0956cae23d9314853cf85fed19904409">ArenaAllocator</a> (size_t initial_capacity) noexcept</td></tr>
-<tr class="memdesc:a0956cae23d9314853cf85fed19904409"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs arena allocator with fixed capacity.  <br /></td></tr>
+<tr class="memdesc:a0956cae23d9314853cf85fed19904409"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs arena allocator with geometric growth.  <br /></td></tr>
 <tr class="memitem:abacbc7d7d627a677e8e296fd4b41ef6a" id="r_abacbc7d7d627a677e8e296fd4b41ef6a"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#abacbc7d7d627a677e8e296fd4b41ef6a">ArenaAllocator</a> (const ArenaAllocator &amp;)=delete</td></tr>
 <tr class="memitem:afbd13ab08b6e8972040cd9ba747b9dcb" id="r_afbd13ab08b6e8972040cd9ba747b9dcb"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#afbd13ab08b6e8972040cd9ba747b9dcb">ArenaAllocator</a> (ArenaAllocator &amp;&amp;other) noexcept</td></tr>
+<tr class="memdesc:afbd13ab08b6e8972040cd9ba747b9dcb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move-constructs arena allocator from another instance.  <br /></td></tr>
 <tr class="memitem:a2386439ea66f0464a85629c253dff34a" id="r_a2386439ea66f0464a85629c253dff34a"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a2386439ea66f0464a85629c253dff34a">~ArenaAllocator</a> () noexcept override</td></tr>
 <tr class="memitem:a99120177ab92b62f1f1f46e7bcd9237a" id="r_a99120177ab92b62f1f1f46e7bcd9237a"><td class="memItemLeft"><a class="el" href="#a0f21f03a927c27ef41a536617d2dd373">ArenaAllocator</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a99120177ab92b62f1f1f46e7bcd9237a">operator=</a> (const <a class="el" href="#a0f21f03a927c27ef41a536617d2dd373">ArenaAllocator</a> &amp;)=delete</td></tr>
 <tr class="memitem:a286cdc444bf93acba3f0aae9a2c3b7d1" id="r_a286cdc444bf93acba3f0aae9a2c3b7d1"><td class="memItemLeft"><a class="el" href="#a0f21f03a927c27ef41a536617d2dd373">ArenaAllocator</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a286cdc444bf93acba3f0aae9a2c3b7d1">operator=</a> (<a class="el" href="#a0f21f03a927c27ef41a536617d2dd373">ArenaAllocator</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="memdesc:a286cdc444bf93acba3f0aae9a2c3b7d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move-assigns arena state from another instance.  <br /></td></tr>
 <tr class="memitem:a3c3eee537182f839def34a230a97cb15" id="r_a3c3eee537182f839def34a230a97cb15"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a3c3eee537182f839def34a230a97cb15">Reset</a> () noexcept</td></tr>
 <tr class="memdesc:a3c3eee537182f839def34a230a97cb15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Soft-resets all block bump pointers to zero.  <br /></td></tr>
 <tr class="memitem:ab532a40e805cfb4d3dcec29bd6dbc9b8" id="r_ab532a40e805cfb4d3dcec29bd6dbc9b8"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ab532a40e805cfb4d3dcec29bd6dbc9b8">Empty</a> () const noexcept</td></tr>
@@ -201,13 +203,10 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>PMR arena allocator with lock-free hot allocation path. </p>
-<p>Allocates memory from chained blocks using atomic bump pointers.</p>
-<p>Allocation hot path is lock-free and performs one CAS on the current head block. When a block is exhausted, allocator enters a coordinated grow slow path where a single thread allocates and publishes a new block.</p>
-<p>Individual deallocation is a no-op, matching monotonic arena semantics. Memory is reclaimed by <span class="tt"><a class="el" href="#a3c3eee537182f839def34a230a97cb15" title="Soft-resets all block bump pointers to zero.">Reset()</a></span> or destruction.</p>
-<dl class="section note"><dt>Note</dt><dd>Thread-safe for <span class="tt">allocate</span> and <span class="tt">deallocate</span>. </dd></dl>
+<p>Individual deallocation is a no-op, matching monotonic arena semantics. Memory is reclaimed by <span class="tt"><a class="el" href="#a3c3eee537182f839def34a230a97cb15" title="Soft-resets all block bump pointers to zero.">Reset()</a></span> or destruction. </p><dl class="section note"><dt>Note</dt><dd>Thread-safe for <span class="tt">allocate</span> and <span class="tt">deallocate</span>. </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd><span class="tt"><a class="el" href="#a3c3eee537182f839def34a230a97cb15" title="Soft-resets all block bump pointers to zero.">Reset()</a></span> must not run concurrently with allocation/deallocation. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00037">37</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00030">30</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a0f21f03a927c27ef41a536617d2dd373" name="a0f21f03a927c27ef41a536617d2dd373"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0f21f03a927c27ef41a536617d2dd373">&#9670;&#160;</a></span>ArenaAllocator() <span class="overload">[1/4]</span></h2>
@@ -227,13 +226,13 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel explicit">explicit</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Constructs arena allocator from options. </p>
-<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if <span class="tt">options.initial_capacity == 0</span>. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if <span class="tt">options.initial_capacity == 0</span> or <span class="tt">options.growth.max_capacity &lt; options.initial_capacity</span>. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">options</td><td>Arena configuration </td></tr>
@@ -241,7 +240,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00168">168</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="arena__allocator_8cpp_source.html#l00018">18</a> of file <a class="el" href="arena__allocator_8cpp_source.html">arena_allocator.cpp</a>.</p>
 
 </div>
 </div>
@@ -268,7 +267,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Constructs arena allocator with fixed capacity. </p>
+<p>Constructs arena allocator with geometric growth. </p>
 <dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if <span class="tt">initial_capacity == 0</span>. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -277,7 +276,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00051">51</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00045">45</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -329,7 +328,15 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00184">184</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
+<p>Move-constructs arena allocator from another instance. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Source allocator; left in empty moved-from state </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00055">55</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -356,7 +363,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00057">57</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00056">56</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -387,7 +394,7 @@ Public Member Functions</h2></td></tr>
 <p>Returns current number of blocks. </p>
 <dl class="section return"><dt>Returns</dt><dd>Block count </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00106">106</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00113">113</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -415,9 +422,9 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Returns true when no allocations are currently active. </p>
-<dl class="section return"><dt>Returns</dt><dd>True if arena is empty, false otherwise </dd></dl>
+<p>Uses a monotonic allocation counter; stays false after any allocation until <span class="tt"><a class="el" href="#a3c3eee537182f839def34a230a97cb15" title="Soft-resets all block bump pointers to zero.">Reset()</a></span> even though individual deallocations are no-ops. </p><dl class="section return"><dt>Returns</dt><dd>True if arena is empty, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00076">76</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00083">83</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -447,7 +454,7 @@ Public Member Functions</h2></td></tr>
 <p>Returns configured growth policy. </p>
 <dl class="section return"><dt>Returns</dt><dd>Growth policy </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00114">114</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00121">121</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -477,7 +484,7 @@ Public Member Functions</h2></td></tr>
 <p>Returns initial block capacity. </p>
 <dl class="section return"><dt>Returns</dt><dd>Initial capacity in bytes </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00098">98</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00105">105</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -504,7 +511,16 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00213">213</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
+<p>Move-assigns arena state from another instance. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Source allocator; left in empty moved-from state </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to this allocator </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00176">176</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -559,7 +575,7 @@ Public Member Functions</h2></td></tr>
 <p>Soft-resets all block bump pointers to zero. </p>
 <p>All existing allocations become logically invalid. Blocks are kept allocated and offsets reset to the start, allowing immediate reuse. </p><dl class="section warning"><dt>Warning</dt><dd>Must not be called concurrently with <span class="tt">allocate</span>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="arena__allocator_8cpp_source.html#l00031">31</a> of file <a class="el" href="arena__allocator_8cpp_source.html">arena_allocator.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="arena__allocator_8cpp_source.html#l00034">34</a> of file <a class="el" href="arena__allocator_8cpp_source.html">arena_allocator.cpp</a>.</p>
 
 </div>
 </div>
@@ -587,9 +603,9 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Returns allocator statistics snapshot. </p>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="structhelios_1_1mem_1_1AllocatorStats.html" title="Runtime statistics for PMR allocators.">AllocatorStats</a> for this arena </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="structhelios_1_1mem_1_1AllocatorStats.html" title="Runtime statistics snapshot for PMR allocators.">AllocatorStats</a> for this arena </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00262">262</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00187">187</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -619,7 +635,7 @@ Public Member Functions</h2></td></tr>
 <p>Returns total capacity across all active blocks. </p>
 <dl class="section return"><dt>Returns</dt><dd>Capacity in bytes </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00090">90</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="arena__allocator_8hpp_source.html#l00097">97</a> of file <a class="el" href="arena__allocator_8hpp_source.html">arena_allocator.hpp</a>.</p>
 
 </div>
 </div>

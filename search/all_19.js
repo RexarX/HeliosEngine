@@ -16,7 +16,7 @@ var searchData=
   ['updatestage_13',['UpdateStage',['../structhelios_1_1app_1_1UpdateStage.html',1,'helios::app']]],
   ['usage_14',['Usage',['../dir_f13bc85843fa14191e0ad4a3a157cf60.html#usage',1,'Usage'],['../dir_4b68c2fef3e151b6b93d5e93b14f1857.html#usage-1',1,'Usage'],['../index.html#usage-2',1,'Usage']]],
   ['usecount_15',['UseCount',['../classhelios_1_1async_1_1AsyncTask.html#a312952686e8ead105cab3e051d3ad5ab',1,'helios::async::AsyncTask']]],
-  ['usedblockcount_16',['UsedBlockCount',['../classhelios_1_1mem_1_1PoolAllocator.html#a735065e11b02ff7cd3787e8bbf8b74cd',1,'helios::mem::PoolAllocator']]],
+  ['usedblockcount_16',['UsedBlockCount',['../classhelios_1_1mem_1_1FixedPoolAllocator.html#a342f384d69f728586b9615d1c76bef9b',1,'helios::mem::FixedPoolAllocator::UsedBlockCount()'],['../classhelios_1_1mem_1_1PoolAllocator.html#a735065e11b02ff7cd3787e8bbf8b74cd',1,'helios::mem::PoolAllocator::UsedBlockCount()']]],
   ['usedmemory_17',['UsedMemory',['../classhelios_1_1mem_1_1FreeListAllocator.html#a420eb36cccc7bc9d8f21858da60ece8a',1,'helios::mem::FreeListAllocator']]],
   ['using_20as_20a_20dependency_18',['Using as a Dependency',['../index.html#using-as-a-dependency',1,'']]],
   ['utilities_19',['Utilities',['../dir_313caf1132e152dd9b58bea13a4052ca.html#utils--common-utilities',1,'`utils` — Common Utilities'],['../dir_94d7edf6f8f3d9af5fd63c44172da41c.html#utilities',1,'Utilities']]],

@@ -1,14 +1,21 @@
 var searchData=
 [
-  ['plugin_0',['Plugin',['../classhelios_1_1app_1_1Plugin.html',1,'helios::app']]],
-  ['plugintypeexport_1',['PluginTypeExport',['../structhelios_1_1app_1_1PluginTypeExport.html',1,'helios::app']]],
-  ['poolallocator_2',['PoolAllocator',['../classhelios_1_1mem_1_1PoolAllocator.html',1,'helios::mem']]],
-  ['poolallocatoroptions_3',['PoolAllocatorOptions',['../structhelios_1_1mem_1_1PoolAllocatorOptions.html',1,'helios::mem']]],
-  ['postshutdown_4',['PostShutdown',['../structhelios_1_1app_1_1PostShutdown.html',1,'helios::app']]],
-  ['poststartup_5',['PostStartup',['../structhelios_1_1app_1_1PostStartup.html',1,'helios::app']]],
-  ['postupdate_6',['PostUpdate',['../structhelios_1_1app_1_1PostUpdate.html',1,'helios::app']]],
-  ['preshutdown_7',['PreShutdown',['../structhelios_1_1app_1_1PreShutdown.html',1,'helios::app']]],
-  ['prestartup_8',['PreStartup',['../structhelios_1_1app_1_1PreStartup.html',1,'helios::app']]],
-  ['preupdate_9',['PreUpdate',['../structhelios_1_1app_1_1PreUpdate.html',1,'helios::app']]],
-  ['profiler_10',['Profiler',['../classhelios_1_1profile_1_1Profiler.html',1,'helios::profile']]]
+  ['randomgenerator_0',['RandomGenerator',['../classhelios_1_1utils_1_1RandomGenerator.html',1,'helios::utils']]],
+  ['randomgenerator_3c_20defaultrandomengine_20_3e_1',['RandomGenerator&lt; DefaultRandomEngine &gt;',['../classhelios_1_1utils_1_1RandomGenerator.html',1,'helios::utils']]],
+  ['randomgenerator_3c_20fastrandomengine_20_3e_2',['RandomGenerator&lt; FastRandomEngine &gt;',['../classhelios_1_1utils_1_1RandomGenerator.html',1,'helios::utils']]],
+  ['rcfromthis_3',['RcFromThis',['../classhelios_1_1mem_1_1RcFromThis.html',1,'helios::mem']]],
+  ['refcounted_4',['RefCounted',['../classhelios_1_1mem_1_1RefCounted.html',1,'helios::mem']]],
+  ['refcounted_3c_20t_2c_20allocator_20_3e_5',['RefCounted&lt; T, Allocator &gt;',['../classhelios_1_1mem_1_1RefCounted.html',1,'helios::mem']]],
+  ['refcounted_3c_20t_2c_20std_3a_3apmr_3a_3apolymorphic_5fallocator_3c_20t_20_3e_20_3e_6',['RefCounted&lt; T, std::pmr::polymorphic_allocator&lt; T &gt; &gt;',['../classhelios_1_1mem_1_1RefCounted.html',1,'helios::mem']]],
+  ['registerqueryaccess_7',['RegisterQueryAccess',['../structhelios_1_1ecs_1_1details_1_1RegisterQueryAccess.html',1,'helios::ecs::details']]],
+  ['registerqueryaccess_3c_20std_3a_3atuple_3c_20cs_2e_2e_2e_20_3e_20_3e_8',['RegisterQueryAccess&lt; std::tuple&lt; Cs... &gt; &gt;',['../structhelios_1_1ecs_1_1details_1_1RegisterQueryAccess_3_01std_1_1tuple_3_01Cs_8_8_8_01_4_01_4.html',1,'helios::ecs::details']]],
+  ['removecomponentscmd_9',['RemoveComponentsCmd',['../classhelios_1_1ecs_1_1RemoveComponentsCmd.html',1,'helios::ecs']]],
+  ['removeresourcecmd_10',['RemoveResourceCmd',['../structhelios_1_1ecs_1_1RemoveResourceCmd.html',1,'helios::ecs']]],
+  ['res_11',['Res',['../classhelios_1_1ecs_1_1Res.html',1,'helios::ecs']]],
+  ['resourceconflictinfo_12',['ResourceConflictInfo',['../structhelios_1_1ecs_1_1ResourceConflictInfo.html',1,'helios::ecs']]],
+  ['resourceinsertedmsg_13',['ResourceInsertedMsg',['../structhelios_1_1ecs_1_1ResourceInsertedMsg.html',1,'helios::ecs']]],
+  ['resourcemanager_14',['ResourceManager',['../classhelios_1_1ecs_1_1ResourceManager.html',1,'helios::ecs']]],
+  ['resourceremovedmsg_15',['ResourceRemovedMsg',['../structhelios_1_1ecs_1_1ResourceRemovedMsg.html',1,'helios::ecs']]],
+  ['reverseadapter_16',['ReverseAdapter',['../classhelios_1_1utils_1_1ReverseAdapter.html',1,'helios::utils']]],
+  ['runconditionstorage_17',['RunConditionStorage',['../structhelios_1_1ecs_1_1RunConditionStorage.html',1,'helios::ecs']]]
 ];

@@ -178,12 +178,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae9cce242e609ced3849dc4ef02bec95c" id="r_ae9cce242e609ced3849dc4ef02bec95c"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ae9cce242e609ced3849dc4ef02bec95c">FreeListAllocator</a> (<a class="el" href="structhelios_1_1mem_1_1FreeListAllocatorOptions.html">FreeListAllocatorOptions</a> options) noexcept</td></tr>
 <tr class="memdesc:ae9cce242e609ced3849dc4ef02bec95c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs free-list allocator from options.  <br /></td></tr>
 <tr class="memitem:ab0592c45409ac153052bc38d87caf437" id="r_ab0592c45409ac153052bc38d87caf437"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ab0592c45409ac153052bc38d87caf437">FreeListAllocator</a> (size_t initial_capacity) noexcept</td></tr>
-<tr class="memdesc:ab0592c45409ac153052bc38d87caf437"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs free-list allocator with fixed growth.  <br /></td></tr>
+<tr class="memdesc:ab0592c45409ac153052bc38d87caf437"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs free-list allocator with geometric growth.  <br /></td></tr>
 <tr class="memitem:a58064e6e1eec6c9a74248b905c596d2b" id="r_a58064e6e1eec6c9a74248b905c596d2b"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a58064e6e1eec6c9a74248b905c596d2b">FreeListAllocator</a> (const FreeListAllocator &amp;)=delete</td></tr>
 <tr class="memitem:aea345c4edd7be64276be2d2c2a4b76a4" id="r_aea345c4edd7be64276be2d2c2a4b76a4"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#aea345c4edd7be64276be2d2c2a4b76a4">FreeListAllocator</a> (FreeListAllocator &amp;&amp;other) noexcept</td></tr>
+<tr class="memdesc:aea345c4edd7be64276be2d2c2a4b76a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move-constructs free-list allocator from another instance.  <br /></td></tr>
 <tr class="memitem:a20b9e7a6237969290e6d59a93fec0a98" id="r_a20b9e7a6237969290e6d59a93fec0a98"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a20b9e7a6237969290e6d59a93fec0a98">~FreeListAllocator</a> () noexcept override</td></tr>
 <tr class="memitem:a5cd948df36c1523d00546ab0603ad1f7" id="r_a5cd948df36c1523d00546ab0603ad1f7"><td class="memItemLeft"><a class="el" href="#ae9cce242e609ced3849dc4ef02bec95c">FreeListAllocator</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a5cd948df36c1523d00546ab0603ad1f7">operator=</a> (const <a class="el" href="#ae9cce242e609ced3849dc4ef02bec95c">FreeListAllocator</a> &amp;)=delete</td></tr>
 <tr class="memitem:a3618c5a5a6fe034535df1dbd24b755eb" id="r_a3618c5a5a6fe034535df1dbd24b755eb"><td class="memItemLeft"><a class="el" href="#ae9cce242e609ced3849dc4ef02bec95c">FreeListAllocator</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a3618c5a5a6fe034535df1dbd24b755eb">operator=</a> (<a class="el" href="#ae9cce242e609ced3849dc4ef02bec95c">FreeListAllocator</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="memdesc:a3618c5a5a6fe034535df1dbd24b755eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move-assigns free-list state from another instance.  <br /></td></tr>
 <tr class="memitem:ad3ffb91c1f22aad8ded905b53c925b11" id="r_ad3ffb91c1f22aad8ded905b53c925b11"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad3ffb91c1f22aad8ded905b53c925b11">Reset</a> () noexcept</td></tr>
 <tr class="memdesc:ad3ffb91c1f22aad8ded905b53c925b11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets allocator to initial state.  <br /></td></tr>
 <tr class="memitem:a52351142637306f779c328daa47d3bc9" id="r_a52351142637306f779c328daa47d3bc9"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a52351142637306f779c328daa47d3bc9">Empty</a> () const noexcept</td></tr>
@@ -207,10 +209,9 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>General-purpose PMR free-list allocator. </p>
-<p>Uses a best-fit free-list with coalescing, protected by mutex.</p>
-<p>Hot path is optimized for minimal lock hold time, but allocator is not lock-free due to variable-size block management and coalescing. </p>
+<p>Best-fit free-list with coalescing under a mutex. Growable backing regions retire through epoch-based reclamation so <span class="tt"><a class="el" href="#af202ca917c71ad5a19551182b8c851a1" title="Checks whether pointer belongs to allocator storage.">Owns()</a></span> can scan regions without holding the free-list mutex. </p>
 
-<p class="definition">Definition at line <a class="el" href="free__list__allocator_8hpp_source.html#l00028">28</a> of file <a class="el" href="free__list__allocator_8hpp_source.html">free_list_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="free__list__allocator_8hpp_source.html#l00029">29</a> of file <a class="el" href="free__list__allocator_8hpp_source.html">free_list_allocator.hpp</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ae9cce242e609ced3849dc4ef02bec95c" name="ae9cce242e609ced3849dc4ef02bec95c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae9cce242e609ced3849dc4ef02bec95c">&#9670;&#160;</a></span>FreeListAllocator() <span class="overload">[1/4]</span></h2>
@@ -236,7 +237,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Constructs free-list allocator from options. </p>
-<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if initial capacity is too small. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if <span class="tt">options.initial_capacity</span> is too small or <span class="tt">options.growth.max_capacity &lt; options.initial_capacity</span>. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">options</td><td>Allocator options </td></tr>
@@ -244,7 +245,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="free__list__allocator_8hpp_source.html#l00167">167</a> of file <a class="el" href="free__list__allocator_8hpp_source.html">free_list_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="free__list__allocator_8hpp_source.html#l00189">189</a> of file <a class="el" href="free__list__allocator_8hpp_source.html">free_list_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -271,7 +272,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Constructs free-list allocator with fixed growth. </p>
+<p>Constructs free-list allocator with geometric growth. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion when initial capacity is too small. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">initial_capacity</td><td>Initial backing capacity </td></tr>
@@ -279,7 +281,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="free__list__allocator_8hpp_source.html#l00192">192</a> of file <a class="el" href="free__list__allocator_8hpp_source.html">free_list_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="free__list__allocator_8hpp_source.html#l00044">44</a> of file <a class="el" href="free__list__allocator_8hpp_source.html">free_list_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -331,7 +333,15 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="free__list__allocator_8hpp_source.html#l00198">198</a> of file <a class="el" href="free__list__allocator_8hpp_source.html">free_list_allocator.hpp</a>.</p>
+<p>Move-constructs free-list allocator from another instance. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Source allocator; left in empty moved-from state </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="free__list__allocator_8hpp_source.html#l00214">214</a> of file <a class="el" href="free__list__allocator_8hpp_source.html">free_list_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -358,7 +368,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="free__list__allocator_8hpp_source.html#l00044">44</a> of file <a class="el" href="free__list__allocator_8hpp_source.html">free_list_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="free__list__allocator_8hpp_source.html#l00057">57</a> of file <a class="el" href="free__list__allocator_8hpp_source.html">free_list_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -389,7 +399,7 @@ Public Member Functions</h2></td></tr>
 <p>Returns current active allocation count. </p>
 <dl class="section return"><dt>Returns</dt><dd>Number of active allocations </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="free__list__allocator_8hpp_source.html#l00112">112</a> of file <a class="el" href="free__list__allocator_8hpp_source.html">free_list_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="free__list__allocator_8hpp_source.html#l00129">129</a> of file <a class="el" href="free__list__allocator_8hpp_source.html">free_list_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -419,7 +429,7 @@ Public Member Functions</h2></td></tr>
 <p>Returns total capacity across regions. </p>
 <dl class="section return"><dt>Returns</dt><dd>Capacity in bytes </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="free__list__allocator_8hpp_source.html#l00082">82</a> of file <a class="el" href="free__list__allocator_8hpp_source.html">free_list_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="free__list__allocator_8hpp_source.html#l00099">99</a> of file <a class="el" href="free__list__allocator_8hpp_source.html">free_list_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -449,7 +459,7 @@ Public Member Functions</h2></td></tr>
 <p>Returns true when no allocations are active. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if empty, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="free__list__allocator_8hpp_source.html#l00061">61</a> of file <a class="el" href="free__list__allocator_8hpp_source.html">free_list_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="free__list__allocator_8hpp_source.html#l00078">78</a> of file <a class="el" href="free__list__allocator_8hpp_source.html">free_list_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -479,7 +489,7 @@ Public Member Functions</h2></td></tr>
 <p>Returns free-list block count. </p>
 <dl class="section return"><dt>Returns</dt><dd>Number of free blocks </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="free__list__allocator_8hpp_source.html#l00104">104</a> of file <a class="el" href="free__list__allocator_8hpp_source.html">free_list_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="free__list__allocator_8hpp_source.html#l00121">121</a> of file <a class="el" href="free__list__allocator_8hpp_source.html">free_list_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -501,7 +511,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -509,7 +519,7 @@ Public Member Functions</h2></td></tr>
 <p>Returns free memory bytes. </p>
 <dl class="section return"><dt>Returns</dt><dd>Free bytes </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="free__list__allocator_8hpp_source.html#l00301">301</a> of file <a class="el" href="free__list__allocator_8hpp_source.html">free_list_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="free__list__allocator_8cpp_source.html#l00111">111</a> of file <a class="el" href="free__list__allocator_8cpp_source.html">free_list_allocator.cpp</a>.</p>
 
 </div>
 </div>
@@ -539,7 +549,7 @@ Public Member Functions</h2></td></tr>
 <p>Returns growth policy. </p>
 <dl class="section return"><dt>Returns</dt><dd>Growth policy </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="free__list__allocator_8hpp_source.html#l00120">120</a> of file <a class="el" href="free__list__allocator_8hpp_source.html">free_list_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="free__list__allocator_8hpp_source.html#l00137">137</a> of file <a class="el" href="free__list__allocator_8hpp_source.html">free_list_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -591,7 +601,16 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="free__list__allocator_8hpp_source.html#l00228">228</a> of file <a class="el" href="free__list__allocator_8hpp_source.html">free_list_allocator.hpp</a>.</p>
+<p>Move-assigns free-list state from another instance. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Source allocator; left in empty moved-from state </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to this allocator </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="free__list__allocator_8hpp_source.html#l00220">220</a> of file <a class="el" href="free__list__allocator_8hpp_source.html">free_list_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -627,7 +646,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True when owned, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="free__list__allocator_8cpp_source.html#l00058">58</a> of file <a class="el" href="free__list__allocator_8cpp_source.html">free_list_allocator.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="free__list__allocator_8cpp_source.html#l00052">52</a> of file <a class="el" href="free__list__allocator_8cpp_source.html">free_list_allocator.cpp</a>.</p>
 
 </div>
 </div>
@@ -657,7 +676,7 @@ Public Member Functions</h2></td></tr>
 <p>Resets allocator to initial state. </p>
 <dl class="section warning"><dt>Warning</dt><dd>Must not be called concurrently with allocate/deallocate. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="free__list__allocator_8cpp_source.html#l00038">38</a> of file <a class="el" href="free__list__allocator_8cpp_source.html">free_list_allocator.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="free__list__allocator_8cpp_source.html#l00031">31</a> of file <a class="el" href="free__list__allocator_8cpp_source.html">free_list_allocator.cpp</a>.</p>
 
 </div>
 </div>
@@ -687,7 +706,7 @@ Public Member Functions</h2></td></tr>
 <p>Returns runtime stats. </p>
 <dl class="section return"><dt>Returns</dt><dd>Allocator stats snapshot </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="free__list__allocator_8hpp_source.html#l00289">289</a> of file <a class="el" href="free__list__allocator_8hpp_source.html">free_list_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="free__list__allocator_8hpp_source.html#l00232">232</a> of file <a class="el" href="free__list__allocator_8hpp_source.html">free_list_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -717,7 +736,7 @@ Public Member Functions</h2></td></tr>
 <p>Returns used memory bytes. </p>
 <dl class="section return"><dt>Returns</dt><dd>Used bytes </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="free__list__allocator_8hpp_source.html#l00090">90</a> of file <a class="el" href="free__list__allocator_8hpp_source.html">free_list_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="free__list__allocator_8hpp_source.html#l00107">107</a> of file <a class="el" href="free__list__allocator_8hpp_source.html">free_list_allocator.hpp</a>.</p>
 
 </div>
 </div>

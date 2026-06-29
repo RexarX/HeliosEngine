@@ -22,7 +22,6 @@ var searchData=
   ['helios_3a_3aprofile_3a_3aanonymous_5fnamespace_7btracy_2ecpp_7d_19',['anonymous_namespace{tracy.cpp}',['../namespacehelios_1_1profile_1_1anonymous__namespace_02tracy_8cpp_03.html',1,'helios::profile']]],
   ['helios_3a_3aprofile_3a_3aanonymous_5fnamespace_7bzone_2ecpp_7d_20',['anonymous_namespace{zone.cpp}',['../namespacehelios_1_1profile_1_1anonymous__namespace_02zone_8cpp_03.html',1,'helios::profile']]],
   ['helios_3a_3aprofile_3a_3adetails_21',['details',['../namespacehelios_1_1profile_1_1details.html',1,'helios::profile']]],
-  ['helios_3a_3aprofile_3a_3adetails_3a_3aanonymous_5fnamespace_7bglobal_5falloc_2ecpp_7d_22',['anonymous_namespace{global_alloc.cpp}',['../namespacehelios_1_1profile_1_1details_1_1anonymous__namespace_02global__alloc_8cpp_03.html',1,'helios::profile::details']]],
-  ['helios_3a_3autils_23',['utils',['../namespacehelios_1_1utils.html',1,'helios']]],
-  ['helios_3a_3autils_3a_3adetails_24',['details',['../namespacehelios_1_1utils_1_1details.html',1,'helios::utils']]]
+  ['helios_3a_3autils_22',['utils',['../namespacehelios_1_1utils.html',1,'helios']]],
+  ['helios_3a_3autils_3a_3adetails_23',['details',['../namespacehelios_1_1utils_1_1details.html',1,'helios::utils']]]
 ];

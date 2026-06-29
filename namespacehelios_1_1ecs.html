@@ -317,6 +317,8 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concrete sparse-set storage for a single component type (non-polymorphic).  <a href="classhelios_1_1ecs_1_1SparseComponentStorage.html#details">More...</a><br /></td></tr>
 <tr class="memitem:StageOrdering" id="r_StageOrdering"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1StageOrdering.html">StageOrdering</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle returned when configuring stage ordering.  <a href="classhelios_1_1ecs_1_1StageOrdering.html#details">More...</a><br /></td></tr>
+<tr class="memitem:SystemGroupHandle" id="r_SystemGroupHandle"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1SystemGroupHandle.html">SystemGroupHandle</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle returned by variadic <a class="el" href="classhelios_1_1ecs_1_1Schedule.html#a3f5cdecd1020d57258f83d2f03b8978d" title="Adds a param-style functor system to the schedule.">Schedule::Add</a> for configuring a batch of systems added together.  <a href="classhelios_1_1ecs_1_1SystemGroupHandle.html#details">More...</a><br /></td></tr>
 <tr class="memitem:SystemHandle" id="r_SystemHandle"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1SystemHandle.html">SystemHandle</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle returned by <a class="el" href="classhelios_1_1ecs_1_1Schedule.html#a3f5cdecd1020d57258f83d2f03b8978d" title="Adds a param-style functor system to the schedule.">Schedule::Add</a> for configuring a system.  <a href="classhelios_1_1ecs_1_1SystemHandle.html#details">More...</a><br /></td></tr>
 <tr class="memitem:SystemId" id="r_SystemId"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemId.html">SystemId</a></td></tr>
@@ -347,7 +349,7 @@ Classes</h2></td></tr>
 <tr class="memitem:SystemSet" id="r_SystemSet"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1SystemSet.html">SystemSet</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A group of systems that share ordering, run conditions, and other properties.  <a href="classhelios_1_1ecs_1_1SystemSet.html#details">More...</a><br /></td></tr>
 <tr class="memitem:SystemSetHandle" id="r_SystemSetHandle"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1SystemSetHandle.html">SystemSetHandle</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle returned by <a class="el" href="classhelios_1_1ecs_1_1Schedule.html#a49ceb949f38cab82eccb3aea4420548b" title="Gets or creates a system set with the given identifier.">Schedule::Set</a> for configuring a system set.  <a href="classhelios_1_1ecs_1_1SystemSetHandle.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle returned by <a class="el" href="classhelios_1_1ecs_1_1Schedule.html#a49ceb949f38cab82eccb3aea4420548b" title="Gets or creates a system set with the given identifier.">Schedule::Set</a> for configuring a named system set.  <a href="classhelios_1_1ecs_1_1SystemSetHandle.html#details">More...</a><br /></td></tr>
 <tr class="memitem:SystemSetId" id="r_SystemSetId"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemSetId.html">SystemSetId</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Identifier for a system set.  <a href="structhelios_1_1ecs_1_1SystemSetId.html#details">More...</a><br /></td></tr>
 <tr class="memitem:SystemStorage" id="r_SystemStorage"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1SystemStorage.html">SystemStorage</a></td></tr>
@@ -810,7 +812,7 @@ template&lt;typename Alloc, QueryArg... Args&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02220">2220</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02222">2222</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -828,7 +830,7 @@ template&lt;typename Alloc, QueryArg... Args&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02226">2226</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02228">2228</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -870,7 +872,7 @@ template&lt;QueryArg... Args&gt; </div>
 <div class="line"><a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">BasicQuery&lt;World, std::pmr::polymorphic_allocator&lt;&gt;</a>, Args...&gt;</div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1BasicQuery_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicQuery.html">helios::ecs::BasicQuery</a></div><div class="ttdoc">Query result object for iterating over matching entities and components.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l00659">query.hpp:659</a></div></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02233">2233</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02235">2235</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -891,7 +893,7 @@ template&lt;QueryArg... Args&gt; </div>
 <div class="line"><a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQueryWithEntity.html">BasicQueryWithEntity&lt;World, std::pmr::polymorphic_allocator&lt;&gt;</a>, Args...&gt;</div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1BasicQueryWithEntity_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicQueryWithEntity.html">helios::ecs::BasicQueryWithEntity</a></div><div class="ttdoc">Wrapper that provides entity-aware iteration over query results.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l00080">query.hpp:80</a></div></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02241">2241</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02243">2243</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -996,7 +998,7 @@ template&lt;QueryArg... Args&gt; </div>
 <b>Initial value:</b><div class="fragment"><div class="line"> </div>
 <div class="line"><a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQuery.html">BasicQuery&lt;const World, std::pmr::polymorphic_allocator&lt;&gt;</a>, Args...&gt;</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02237">2237</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02239">2239</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -1017,7 +1019,7 @@ template&lt;QueryArg... Args&gt; </div>
 <div class="line"><a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQueryWithEntity.html">BasicQueryWithEntity&lt;const World, std::pmr::polymorphic_allocator&lt;&gt;</a>,</div>
 <div class="line">                     Args...&gt;</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02245">2245</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02247">2247</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -1073,9 +1075,9 @@ template&lt;QueryArg... Args&gt; </div>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> MySystem(<a class="code hl_typedef" href="#a2222a8ceaa7f9005447fc4e1bf219cb5">Query</a>&lt;Transform&amp;, <span class="keyword">const</span> Velocity&amp;, With&lt;Player&gt;&gt; query) {</div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp;&amp; [transform, velocity] : query) { ... }</div>
 <div class="line">}</div>
-<div class="ttc" id="anamespacehelios_1_1ecs_html_a2222a8ceaa7f9005447fc4e1bf219cb5"><div class="ttname"><a href="#a2222a8ceaa7f9005447fc4e1bf219cb5">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, std::pmr::polymorphic_allocator&lt;&gt;, Args... &gt; Query</div><div class="ttdoc">Alias for BasicQuery bound to World with a PMR allocator.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02262">query.hpp:2262</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ecs_html_a2222a8ceaa7f9005447fc4e1bf219cb5"><div class="ttname"><a href="#a2222a8ceaa7f9005447fc4e1bf219cb5">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, std::pmr::polymorphic_allocator&lt;&gt;, Args... &gt; Query</div><div class="ttdoc">Alias for BasicQuery bound to World with a PMR allocator.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02264">query.hpp:2264</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02262">2262</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02264">2264</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -1147,7 +1149,7 @@ template&lt;typename Alloc, QueryArg... Args&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02223">2223</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02225">2225</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -1168,7 +1170,7 @@ template&lt;typename Alloc, QueryArg... Args&gt; </div>
 <div class="line"><a class="code hl_class" href="classhelios_1_1ecs_1_1BasicQueryWithEntity.html">BasicQueryWithEntity</a>&lt;<span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1ecs_1_1World.html">World</a>, Alloc, Args...&gt;</div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1World_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1World.html">helios::ecs::World</a></div><div class="ttdoc">The World class manages entities with their components and systems.</div><div class="ttdef"><b>Definition</b> <a href="world_8hpp_source.html#l00039">world.hpp:39</a></div></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02229">2229</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="query_8hpp_source.html#l02231">2231</a> of file <a class="el" href="query_8hpp_source.html">query.hpp</a>.</p>
 
 </div>
 </div>
@@ -1299,7 +1301,7 @@ template&lt;typename T&gt; </div>
 
 <p>Result type for schedule operations that can fail. </p>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00805">805</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00173">173</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -1317,7 +1319,7 @@ template&lt;typename T&gt; </div>
 
 <p>Type id for schedules. </p>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00040">40</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00044">44</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -1335,7 +1337,7 @@ template&lt;typename T&gt; </div>
 
 <p>Type index for schedules. </p>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00037">37</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00041">41</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -1619,7 +1621,7 @@ template&lt;typename T&gt; </div>
 <tr><td class="fieldname"><a id="abd1fa5ad164fafc85b0908aac3fbf20ba03fd5b5c9577b8248bfb9a2f39f770e4" name="abd1fa5ad164fafc85b0908aac3fbf20ba03fd5b5c9577b8248bfb9a2f39f770e4"></a>kUnknownNode&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00788">788</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00156">156</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -2548,7 +2550,7 @@ template&lt;ScheduleTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1ecs_1_1Schedule.html" title="A collection of systems, sets, and run conditions with ordering constraints.">Schedule</a> name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00067">67</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="schedule_8hpp_source.html#l00071">71</a> of file <a class="el" href="schedule_8hpp_source.html">schedule.hpp</a>.</p>
 
 </div>
 </div>
@@ -2630,7 +2632,7 @@ template&lt;SystemTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>System name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="system_8hpp_source.html#l00113">113</a> of file <a class="el" href="system_8hpp_source.html">system.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="system_8hpp_source.html#l00125">125</a> of file <a class="el" href="system_8hpp_source.html">system.hpp</a>.</p>
 
 </div>
 </div>
@@ -2674,7 +2676,7 @@ template&lt;SystemTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>System name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="system_8hpp_source.html#l00128">128</a> of file <a class="el" href="system_8hpp_source.html">system.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="system_8hpp_source.html#l00140">140</a> of file <a class="el" href="system_8hpp_source.html">system.hpp</a>.</p>
 
 </div>
 </div>

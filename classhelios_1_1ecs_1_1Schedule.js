@@ -8,7 +8,7 @@ var classhelios_1_1ecs_1_1Schedule =
     [ "Add", "classhelios_1_1ecs_1_1Schedule.html#a80ad9a4850c0b868853ac1513f508d58", null ],
     [ "Add", "classhelios_1_1ecs_1_1Schedule.html#aa2b25ce77ceadf7f0eecf3efbca87b61", null ],
     [ "Add", "classhelios_1_1ecs_1_1Schedule.html#a3f5cdecd1020d57258f83d2f03b8978d", null ],
-    [ "Add", "classhelios_1_1ecs_1_1Schedule.html#a51fb4964a2079142ca333d63414cad2a", null ],
+    [ "Add", "classhelios_1_1ecs_1_1Schedule.html#af8495d5d6b161523b4c0e6d2b50111c4", null ],
     [ "ApplyDeferred", "classhelios_1_1ecs_1_1Schedule.html#a834817ef85b5ffe3d8ce610814a96f22", null ],
     [ "Build", "classhelios_1_1ecs_1_1Schedule.html#a221472b7e946bfae9b23c1c31085c7b5", null ],
     [ "Clear", "classhelios_1_1ecs_1_1Schedule.html#ac6af493c1a374570d293578731aa5c44", null ],
@@ -33,6 +33,7 @@ var classhelios_1_1ecs_1_1Schedule =
     [ "MainThreadExecutor", "classhelios_1_1ecs_1_1Schedule.html#a7734bae033fbf6c5c01fc5ab33b2538c", null ],
     [ "MultiThreadedExecutor", "classhelios_1_1ecs_1_1Schedule.html#aaf097cb9c0a9f6a7d7d9f5e9d1266521", null ],
     [ "SingleThreadedExecutor", "classhelios_1_1ecs_1_1Schedule.html#a9255ac496ffc9d47a5155483aed7e565", null ],
+    [ "SystemGroupHandle", "classhelios_1_1ecs_1_1Schedule.html#a961e2af5c88ee2800f0f25a0712c5f3c", null ],
     [ "SystemHandle", "classhelios_1_1ecs_1_1Schedule.html#a51c803ed67a12a74c80ddfb40d466c64", null ],
     [ "SystemSetHandle", "classhelios_1_1ecs_1_1Schedule.html#ab47215f34e58594b69d0c86eaf9366a0", null ]
 ];

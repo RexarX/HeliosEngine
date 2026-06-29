@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('structhelios_1
 </div><!--header-->
 <div class="contents">
 
-<p>Configuration for <span class="tt"><a class="el" href="classhelios_1_1mem_1_1NFrameAllocator.html" title="N-buffered PMR frame allocator.">NFrameAllocator</a></span>.  
+<p>Configuration for <span class="tt"><a class="el" href="classhelios_1_1mem_1_1FrameAllocator.html" title="N-buffered PMR frame allocator.">FrameAllocator</a></span>.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>&gt;</code></p>
@@ -170,12 +170,15 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('structhelios_1
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:ae6d596a7705fb44b915772a2e60fd633" id="r_ae6d596a7705fb44b915772a2e60fd633"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="#ae6d596a7705fb44b915772a2e60fd633">initial_capacity</a> = 0</td></tr>
-<tr class="memitem:a3e432f47bb462db7bf139425eb882a9a" id="r_a3e432f47bb462db7bf139425eb882a9a"><td class="memItemLeft"><a class="el" href="structhelios_1_1mem_1_1GrowthPolicy.html">GrowthPolicy</a>&#160;</td><td class="memItemRight"><a class="el" href="#a3e432f47bb462db7bf139425eb882a9a">growth</a> = <a class="el" href="structhelios_1_1mem_1_1GrowthPolicy.html#afa6505bd6f3a90e3035e7c098e130604">GrowthPolicy::Fixed</a>()</td></tr>
+<tr class="memdesc:ae6d596a7705fb44b915772a2e60fd633"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initial per-frame arena capacity in bytes.  <br /></td></tr>
+<tr class="memitem:a3e432f47bb462db7bf139425eb882a9a" id="r_a3e432f47bb462db7bf139425eb882a9a"><td class="memItemLeft"><a class="el" href="structhelios_1_1mem_1_1GrowthPolicy.html">GrowthPolicy</a>&#160;</td><td class="memItemRight"><a class="el" href="#a3e432f47bb462db7bf139425eb882a9a">growth</a> = <a class="el" href="structhelios_1_1mem_1_1GrowthPolicy.html#a1acb0a41728ac1706fb7bb88a59ef824">GrowthPolicy::Geometric</a>()</td></tr>
+<tr class="memdesc:a3e432f47bb462db7bf139425eb882a9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Growth policy applied to each frame arena.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Configuration for <span class="tt"><a class="el" href="classhelios_1_1mem_1_1NFrameAllocator.html" title="N-buffered PMR frame allocator.">NFrameAllocator</a></span>. </p>
+<div class="textblock"><p>Configuration for <span class="tt"><a class="el" href="classhelios_1_1mem_1_1FrameAllocator.html" title="N-buffered PMR frame allocator.">FrameAllocator</a></span>. </p>
+<p>Controls per-frame arena capacity and growth behavior. </p>
 
-<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00017">17</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00020">20</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
 </div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
 <a id="a3e432f47bb462db7bf139425eb882a9a" name="a3e432f47bb462db7bf139425eb882a9a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3e432f47bb462db7bf139425eb882a9a">&#9670;&#160;</a></span>growth</h2>
@@ -184,12 +187,14 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structhelios_1_1mem_1_1GrowthPolicy.html">GrowthPolicy</a> helios::mem::FrameAllocatorOptions::growth = <a class="el" href="structhelios_1_1mem_1_1GrowthPolicy.html#afa6505bd6f3a90e3035e7c098e130604">GrowthPolicy::Fixed</a>()</td>
+          <td class="memname"><a class="el" href="structhelios_1_1mem_1_1GrowthPolicy.html">GrowthPolicy</a> helios::mem::FrameAllocatorOptions::growth = <a class="el" href="structhelios_1_1mem_1_1GrowthPolicy.html#a1acb0a41728ac1706fb7bb88a59ef824">GrowthPolicy::Geometric</a>()</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00019">19</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
+<p>Growth policy applied to each frame arena. </p>
+
+<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00024">24</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
 
 </div>
 </div>
@@ -205,7 +210,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00018">18</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
+<p>Initial per-frame arena capacity in bytes. </p>
+
+<p class="definition">Definition at line <a class="el" href="frame__allocator_8hpp_source.html#l00022">22</a> of file <a class="el" href="frame__allocator_8hpp_source.html">frame_allocator.hpp</a>.</p>
 
 </div>
 </div>

@@ -156,13 +156,13 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('stack__allocat
 
 <div class="header">
   <div class="summary">
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle"><div class="title">stack_allocator.cpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;<a class="el" href="memory_2src_2pch_8hpp_source.html">pch.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="stack__allocator_8hpp_source.html">helios/memory/stack_allocator.hpp</a>&gt;</code><br />
+<code>#include &lt;details/accumulate_peak.hpp&gt;</code><br />
 <code>#include &lt;<a class="el" href="assert_8hpp_source.html">helios/assert.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="aligned__alloc_8hpp_source.html">helios/memory/aligned_alloc.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html">helios/memory/common.hpp</a>&gt;</code><br />
@@ -172,18 +172,14 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('stack__allocat
 <code>#include &lt;cstddef&gt;</code><br />
 <code>#include &lt;cstdint&gt;</code><br />
 <code>#include &lt;memory&gt;</code><br />
+<code>#include &lt;utility&gt;</code><br />
 </div>
 <p><a href="stack__allocator_8cpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:anonymous_5Fnamespace_7Bstack_5Fallocator_2Ecpp_7D" id="r_anonymous_5Fnamespace_7Bstack_5Fallocator_2Ecpp_7D"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespaceanonymous__namespace_02stack__allocator_8cpp_03.html">anonymous_namespace{stack_allocator.cpp}</a></td></tr>
 <tr class="memitem:helios" id="r_helios"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios.html">helios</a></td></tr>
 <tr class="memitem:helios_3A_3Amem" id="r_helios_3A_3Amem"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1mem.html">helios::mem</a></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a8be5736e1b3ba976e10ab85fdb3925dc" id="r_a8be5736e1b3ba976e10ab85fdb3925dc"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespaceanonymous__namespace_02stack__allocator_8cpp_03.html#a8be5736e1b3ba976e10ab85fdb3925dc">anonymous_namespace{stack_allocator.cpp}::AccumulatePeak</a> (std::atomic&lt; size_t &gt; &amp;peak, size_t candidate) noexcept</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->

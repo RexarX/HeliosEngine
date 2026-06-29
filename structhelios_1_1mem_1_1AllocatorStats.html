@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('structhelios_1
 </div><!--header-->
 <div class="contents">
 
-<p>Runtime statistics for PMR allocators.  
+<p>Runtime statistics snapshot for PMR allocators.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html">common.hpp</a>&gt;</code></p>
@@ -170,16 +170,22 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('structhelios_1
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a2ec02531913f2a03fce894c166eb4074" id="r_a2ec02531913f2a03fce894c166eb4074"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="#a2ec02531913f2a03fce894c166eb4074">total_allocated</a> = 0</td></tr>
+<tr class="memdesc:a2ec02531913f2a03fce894c166eb4074"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bytes currently reserved or bumped (allocator-specific semantics).  <br /></td></tr>
 <tr class="memitem:a4306fd94db7f97ad8b4f46fcbb6f1128" id="r_a4306fd94db7f97ad8b4f46fcbb6f1128"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="#a4306fd94db7f97ad8b4f46fcbb6f1128">peak_usage</a> = 0</td></tr>
+<tr class="memdesc:a4306fd94db7f97ad8b4f46fcbb6f1128"><td class="mdescLeft">&#160;</td><td class="mdescRight">High-water mark of <span class="tt"><a class="el" href="#a2ec02531913f2a03fce894c166eb4074" title="Bytes currently reserved or bumped (allocator-specific semantics).">total_allocated</a></span>.  <br /></td></tr>
 <tr class="memitem:ad0d7321a53ffc7ec734d8ad564ad2e7e" id="r_ad0d7321a53ffc7ec734d8ad564ad2e7e"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="#ad0d7321a53ffc7ec734d8ad564ad2e7e">allocation_count</a> = 0</td></tr>
+<tr class="memdesc:ad0d7321a53ffc7ec734d8ad564ad2e7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of live allocations tracked by the allocator.  <br /></td></tr>
 <tr class="memitem:a5d6015f02261b7605687fe5d978b4721" id="r_a5d6015f02261b7605687fe5d978b4721"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="#a5d6015f02261b7605687fe5d978b4721">total_allocations</a> = 0</td></tr>
+<tr class="memdesc:a5d6015f02261b7605687fe5d978b4721"><td class="mdescLeft">&#160;</td><td class="mdescRight">Total successful allocation calls.  <br /></td></tr>
 <tr class="memitem:a476839bc0edb9e4995ce7030de20f420" id="r_a476839bc0edb9e4995ce7030de20f420"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="#a476839bc0edb9e4995ce7030de20f420">total_deallocations</a> = 0</td></tr>
+<tr class="memdesc:a476839bc0edb9e4995ce7030de20f420"><td class="mdescLeft">&#160;</td><td class="mdescRight">Total deallocation calls (including arena no-op deallocates).  <br /></td></tr>
 <tr class="memitem:a4e2bc8332972d6ba50cb18917cc2cc7d" id="r_a4e2bc8332972d6ba50cb18917cc2cc7d"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="#a4e2bc8332972d6ba50cb18917cc2cc7d">alignment_waste</a> = 0</td></tr>
+<tr class="memdesc:a4e2bc8332972d6ba50cb18917cc2cc7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Padding bytes consumed for alignment.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Runtime statistics for PMR allocators. </p>
+<div class="textblock"><p>Runtime statistics snapshot for PMR allocators. </p>
 
-<p class="definition">Definition at line <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00130">130</a> of file <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html">common.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00163">163</a> of file <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html">common.hpp</a>.</p>
 </div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
 <a id="a4e2bc8332972d6ba50cb18917cc2cc7d" name="a4e2bc8332972d6ba50cb18917cc2cc7d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4e2bc8332972d6ba50cb18917cc2cc7d">&#9670;&#160;</a></span>alignment_waste</h2>
@@ -193,7 +199,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00136">136</a> of file <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html">common.hpp</a>.</p>
+<p>Padding bytes consumed for alignment. </p>
+
+<p class="definition">Definition at line <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00175">175</a> of file <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html">common.hpp</a>.</p>
 
 </div>
 </div>
@@ -209,7 +217,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00133">133</a> of file <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html">common.hpp</a>.</p>
+<p>Number of live allocations tracked by the allocator. </p>
+
+<p class="definition">Definition at line <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00169">169</a> of file <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html">common.hpp</a>.</p>
 
 </div>
 </div>
@@ -225,7 +235,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00132">132</a> of file <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html">common.hpp</a>.</p>
+<p>High-water mark of <span class="tt"><a class="el" href="#a2ec02531913f2a03fce894c166eb4074" title="Bytes currently reserved or bumped (allocator-specific semantics).">total_allocated</a></span>. </p>
+
+<p class="definition">Definition at line <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00167">167</a> of file <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html">common.hpp</a>.</p>
 
 </div>
 </div>
@@ -241,7 +253,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00131">131</a> of file <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html">common.hpp</a>.</p>
+<p>Bytes currently reserved or bumped (allocator-specific semantics). </p>
+
+<p class="definition">Definition at line <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00165">165</a> of file <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html">common.hpp</a>.</p>
 
 </div>
 </div>
@@ -257,7 +271,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00134">134</a> of file <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html">common.hpp</a>.</p>
+<p>Total successful allocation calls. </p>
+
+<p class="definition">Definition at line <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00171">171</a> of file <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html">common.hpp</a>.</p>
 
 </div>
 </div>
@@ -273,7 +289,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00135">135</a> of file <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html">common.hpp</a>.</p>
+<p>Total deallocation calls (including arena no-op deallocates). </p>
+
+<p class="definition">Definition at line <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html#l00173">173</a> of file <a class="el" href="memory_2include_2helios_2memory_2common_8hpp_source.html">common.hpp</a>.</p>
 
 </div>
 </div>

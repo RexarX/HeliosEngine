@@ -1,9 +1,6 @@
 var schedule_8hpp =
 [
-    [ "helios::ecs::ScheduleSystemId", "structhelios_1_1ecs_1_1ScheduleSystemId.html", "structhelios_1_1ecs_1_1ScheduleSystemId" ],
     [ "helios::ecs::ScheduleSystemMetadata", "structhelios_1_1ecs_1_1ScheduleSystemMetadata.html", "structhelios_1_1ecs_1_1ScheduleSystemMetadata" ],
-    [ "helios::ecs::SystemHandle", "classhelios_1_1ecs_1_1SystemHandle.html", "classhelios_1_1ecs_1_1SystemHandle" ],
-    [ "helios::ecs::SystemSetHandle", "classhelios_1_1ecs_1_1SystemSetHandle.html", "classhelios_1_1ecs_1_1SystemSetHandle" ],
     [ "helios::ecs::ScheduleSettings", "structhelios_1_1ecs_1_1ScheduleSettings.html", "structhelios_1_1ecs_1_1ScheduleSettings" ],
     [ "helios::ecs::ScheduleError", "structhelios_1_1ecs_1_1ScheduleError.html", "structhelios_1_1ecs_1_1ScheduleError" ],
     [ "helios::ecs::Schedule", "classhelios_1_1ecs_1_1Schedule.html", "classhelios_1_1ecs_1_1Schedule" ],

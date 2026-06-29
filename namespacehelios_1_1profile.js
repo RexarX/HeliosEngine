@@ -19,7 +19,15 @@ var namespacehelios_1_1profile =
       [ "g_current_zone_storage", "namespacehelios_1_1profile_1_1anonymous__namespace_02zone_8cpp_03.html#a3e75f6f06fbebef913f9bf488c4161e6", null ],
       [ "g_zone_annotations_suppressed", "namespacehelios_1_1profile_1_1anonymous__namespace_02zone_8cpp_03.html#a5f45608241148cefd4caf47faee33828", null ]
     ] ],
-    [ "details", "namespacehelios_1_1profile_1_1details.html", "namespacehelios_1_1profile_1_1details" ],
+    [ "details", "namespacehelios_1_1profile_1_1details.html", [
+      [ "ActiveBackendCount", "namespacehelios_1_1profile_1_1details.html#adbc5b32a907307e978671d242519c43e", null ],
+      [ "BackendStorageOffset", "namespacehelios_1_1profile_1_1details.html#a43bb86afc2328887e2f37e8acf4a0279", null ],
+      [ "DisableProfilerMemoryDispatch", "namespacehelios_1_1profile_1_1details.html#ad8e0db4bcda26558e7e22c65e12e9e1d", null ],
+      [ "IsMemoryDispatchSuspended", "namespacehelios_1_1profile_1_1details.html#a65b08bf2f95aa853483056d49db4cb5b", null ],
+      [ "IsProfilerFinalized", "namespacehelios_1_1profile_1_1details.html#aada7f4f5d5f75ecfc100da0f5a40a63f", null ],
+      [ "IsProfilerMemoryDispatchEnabled", "namespacehelios_1_1profile_1_1details.html#aac34df1f0c4dde9a943803a1ed36be0f", null ],
+      [ "ResetProfilerFinalized", "namespacehelios_1_1profile_1_1details.html#a119cbacfe020ae5d7221fb6679f7078a", null ]
+    ] ],
     [ "Backend", "classhelios_1_1profile_1_1Backend.html", "classhelios_1_1profile_1_1Backend" ],
     [ "FlamegraphBackend", "classhelios_1_1profile_1_1FlamegraphBackend.html", "classhelios_1_1profile_1_1FlamegraphBackend" ],
     [ "FlamegraphBackendConfig", "structhelios_1_1profile_1_1FlamegraphBackendConfig.html", "structhelios_1_1profile_1_1FlamegraphBackendConfig" ],

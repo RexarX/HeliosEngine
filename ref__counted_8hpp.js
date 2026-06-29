@@ -10,7 +10,7 @@ var ref__counted_8hpp =
     [ "helios::mem::Rc", "namespacehelios_1_1mem.html#ad5390d36d8d20d8fe9c4667d00608cae", null ],
     [ "helios::mem::MakeArc", "namespacehelios_1_1mem.html#a10f597088c98df7a40f43d8ac7236814", null ],
     [ "helios::mem::MakeArcWith", "namespacehelios_1_1mem.html#a620b6cca583af089faa00b80142398cd", null ],
-    [ "helios::mem::MakeArcWith", "namespacehelios_1_1mem.html#a1082d55404ee3f3de9bac82647dfcf10", null ],
+    [ "helios::mem::MakeArcWith", "namespacehelios_1_1mem.html#a31657b023691dba17dd127c2d7237fbe", null ],
     [ "helios::mem::MakeArcWith", "namespacehelios_1_1mem.html#a1afd247667103169ce36927d66ddb4bf", null ],
     [ "helios::mem::MakeRc", "namespacehelios_1_1mem.html#a3739908b3ea624bbd6e990f5c0ebe5da", null ],
     [ "helios::mem::MakeRcWith", "namespacehelios_1_1mem.html#abe028765a3fedd39dc19845d8f46e043", null ],

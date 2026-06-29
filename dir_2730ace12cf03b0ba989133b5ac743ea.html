@@ -277,14 +277,13 @@ Macro Reference</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt"><a class="el" href="macros_8hpp.html#ac0ae14c6575dc7fc012f9794acb6eee7">HELIOS_PROFILE_MEMORY_DISCARD_S(n, d)</a></span>  </td><td class="markdownTableBodyNone">Discard with stack-capture depth  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt">HELIOS_PROFILE_GLOBAL_ALLOC</span> (CMake)  </td><td class="markdownTableBodyNone">Hook global <span class="tt">operator new</span> / <span class="tt">delete</span>  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">HELIOS_MEMORY_OVERRIDE_GLOBAL_ALLOC</span> (CMake)  </td><td class="markdownTableBodyNone">Inherit global <span class="tt">operator new</span> / <span class="tt">delete</span> hooks via memory links  </td></tr>
 </table>
 <p>All macros are no-ops when <span class="tt">HELIOS_ENABLE_PROFILE</span> is undefined.</p>
 <h2 class="doxsection"><a class="anchor" id="memory-in-tracy"></a>
 Memory in Tracy</h2>
-<p>Open the <b>Memory</b> tab in the Tracy GUI. Link <span class="tt">helios::profile::global_alloc</span> into executables that should hook <span class="tt">new</span>/<span class="tt">delete</span>, or use <span class="tt"><a class="el" href="macros_8hpp.html#a72be86f7388e764bb7a71c4157bfec0c">HELIOS_PROFILE_ALLOC</a></span> / <span class="tt">HELIOS_MEMORY_PROFILE_*</span> on custom allocators. Global hooks fan out through <span class="tt">Profiler::Alloc</span> / <span class="tt">Free</span> like all other memory events. Call <span class="tt">Profiler::Finalize()</span> before the workload you want to profile.</p>
-<div class="fragment"><div class="line">helios_profile_link_global_alloc(my_executable)</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="multi-backend"></a>
+<p>Open the <b>Memory</b> tab in the Tracy GUI. Link <span class="tt">helios::module::memory</span> (with <span class="tt">HELIOS_MEMORY_OVERRIDE_GLOBAL_ALLOC=ON</span>) to hook <span class="tt">new</span>/<span class="tt">delete</span>, or use <span class="tt"><a class="el" href="macros_8hpp.html#a72be86f7388e764bb7a71c4157bfec0c">HELIOS_PROFILE_ALLOC</a></span> / <span class="tt">HELIOS_MEMORY_PROFILE_*</span> on custom allocators. Global hooks fan out through <span class="tt">Profiler::Alloc</span> / <span class="tt">Free</span> like all other memory events. Call <span class="tt">Profiler::Finalize()</span> before the workload you want to profile.</p>
+<h1 class="doxsection"><a class="anchor" id="multi-backend"></a>
 Multi-Backend</h1>
 <div class="fragment"><div class="line">profiler.AddBackend&lt;TracyBackend&gt;();</div>
 <div class="line">profiler.AddBackend&lt;FlamegraphBackend&gt;();  <span class="comment">// Chrome trace JSON</span></div>

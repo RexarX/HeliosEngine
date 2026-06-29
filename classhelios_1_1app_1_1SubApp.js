@@ -12,7 +12,7 @@ var classhelios_1_1app_1_1SubApp =
     [ "AddSchedule", "classhelios_1_1app_1_1SubApp.html#aa75f5d3524dc0a88a5f85f171db63c1f", null ],
     [ "AddSystem", "classhelios_1_1app_1_1SubApp.html#addfd12d7a109ad433a98859324efbb12", null ],
     [ "AddSystem", "classhelios_1_1app_1_1SubApp.html#a0798bd17fa65edd7450b055a97e41ab5", null ],
-    [ "AddSystems", "classhelios_1_1app_1_1SubApp.html#a69a5a40855a161c2f987643e5ba231dd", null ],
+    [ "AddSystems", "classhelios_1_1app_1_1SubApp.html#aa174d6bf1494c72851caf736e3760098", null ],
     [ "AllowsOverlappingUpdates", "classhelios_1_1app_1_1SubApp.html#a725248d88c8364a55ca5f136c1082b21", null ],
     [ "BuildScheduler", "classhelios_1_1app_1_1SubApp.html#ab9266ff66aed0f6d7bd5dd984b4c8a0a", null ],
     [ "Clear", "classhelios_1_1app_1_1SubApp.html#a025e14a168fd6d551bcb97612eb30a8b", null ],
