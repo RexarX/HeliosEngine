@@ -1,6 +1,5 @@
 var NAVTREEINDEX31 =
 {
-"structhelios_1_1app_1_1PreShutdown.html":[2,0,6,1,16],
 "structhelios_1_1app_1_1PreShutdown.html":[4,0,2,0,15],
 "structhelios_1_1app_1_1PreShutdown.html#a6acced5d0f36eed7aec2583b1f42ead4":[2,0,6,1,16,0],
 "structhelios_1_1app_1_1PreShutdown.html#a6acced5d0f36eed7aec2583b1f42ead4":[4,0,2,0,15,0],
@@ -249,5 +248,6 @@ var NAVTREEINDEX31 =
 "structhelios_1_1ecs_1_1ResourceRemovedMsg.html#a9af744a720f4974dcdbbd77d1d6eadad":[2,0,6,5,63,1],
 "structhelios_1_1ecs_1_1ResourceRemovedMsg.html#a9af744a720f4974dcdbbd77d1d6eadad":[4,0,2,4,62,1],
 "structhelios_1_1ecs_1_1ResourceRemovedMsg.html#a9f1a1add175ab88d4d974822e941ce98":[2,0,6,5,63,2],
-"structhelios_1_1ecs_1_1ResourceRemovedMsg.html#a9f1a1add175ab88d4d974822e941ce98":[4,0,2,4,62,2]
+"structhelios_1_1ecs_1_1ResourceRemovedMsg.html#a9f1a1add175ab88d4d974822e941ce98":[4,0,2,4,62,2],
+"structhelios_1_1ecs_1_1ResourceRemovedMsg.html#ac315af71c3c5105480808b789eade655":[2,0,6,5,63,0]
 };

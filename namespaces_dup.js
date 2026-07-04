@@ -6,7 +6,6 @@ var namespaces_dup =
     ] ],
     [ "anonymous_namespace{free_list_allocator.cpp}", "namespaceanonymous__namespace_02free__list__allocator_8cpp_03.html", "namespaceanonymous__namespace_02free__list__allocator_8cpp_03" ],
     [ "anonymous_namespace{global_alloc.cpp}", "namespaceanonymous__namespace_02global__alloc_8cpp_03.html", [
-      [ "AlignUp", "namespaceanonymous__namespace_02global__alloc_8cpp_03.html#aa4b9fcde8bcb43a33a4301a70298ec95", null ],
       [ "ProfileAlloc", "namespaceanonymous__namespace_02global__alloc_8cpp_03.html#a47f5b87000e7122ad4d0f10ce00ca73b", null ],
       [ "ProfileFree", "namespaceanonymous__namespace_02global__alloc_8cpp_03.html#a8972c2285eb026a415643372edf0335e", null ],
       [ "RawAlignedAlloc", "namespaceanonymous__namespace_02global__alloc_8cpp_03.html#ad799df80433aadfc92bc3b41576e541e", null ],

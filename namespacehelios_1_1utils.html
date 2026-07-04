@@ -489,7 +489,7 @@ Variables</h2></td></tr>
 <p>Convenience alias for a generator using the default-quality engine. </p>
 <p>Uses thread-local <span class="tt"><a class="el" href="#ae412d06926f505f92866943e64611a72" title="Thread-local default-quality engine.">DefaultEngine()</a></span> as the underlying engine. </p>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00249">249</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00248">248</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
@@ -527,7 +527,7 @@ Variables</h2></td></tr>
 <p>Convenience alias for a generator using the fast engine. </p>
 <p>Uses thread-local <span class="tt"><a class="el" href="#a89028784f8decd2bf7a4801c250d0eb8" title="Thread-local fast engine.">FastEngineInstance()</a></span> as the underlying engine. </p>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00255">255</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00254">254</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
@@ -693,7 +693,7 @@ requires ChainAdapterRequirements&lt;std::ranges::iterator_t&lt;R1&gt;, std::ran
 <p>Thread-local default-quality engine. </p>
 <p>Uses Meyer's singleton pattern per thread to avoid global static initialization order issues while providing a convenient default. </p><dl class="section return"><dt>Returns</dt><dd>Reference to thread-local <span class="tt"><a class="el" href="#aa277c9bc6bdfb97423e88f6bc45686b0" title="Default engine type used by random utilities.">DefaultRandomEngine</a></span> instance </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00110">110</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00109">109</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
@@ -797,7 +797,7 @@ template&lt;ExternalRange R&gt; </div>
 <p>Thread-local fast engine. </p>
 <p>Uses Meyer's singleton pattern per thread to avoid global static initialization order issues while providing a fast default. </p><dl class="section return"><dt>Returns</dt><dd>Reference to thread-local <span class="tt"><a class="el" href="#a82e57611045b81ffeda913f085c2131c" title="Fast but lower-quality engine type used by random utilities.">FastRandomEngine</a></span> instance </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00121">121</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00120">120</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
@@ -1169,7 +1169,7 @@ template&lt;ExternalRange R, typename Func&gt; </div>
 <p>Creates a fast linear random engine seeded with <span class="tt">std::random_device</span>. </p>
 <p>Intended for performance-critical code where statistical quality is less important. Not suitable for cryptographic purposes. </p><dl class="section return"><dt>Returns</dt><dd><span class="tt"><a class="el" href="#a82e57611045b81ffeda913f085c2131c" title="Fast but lower-quality engine type used by random utilities.">FastRandomEngine</a></span> instance seeded with <span class="tt">std::random_device</span> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00099">99</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00098">98</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
@@ -1491,7 +1491,7 @@ template&lt;typename T&gt; </div>
 <p>Provides access to a thread-local default-quality random generator. </p>
 <p>Uses Meyer's singleton pattern per thread and avoids any static engine objects other than thread-local instances that are lazily initialized on first use. </p><dl class="section return"><dt>Returns</dt><dd>Reference to <span class="tt"><a class="el" href="#a371e8184717930153141198aee96e1cf" title="Convenience alias for a generator using the default-quality engine.">DefaultRandomGenerator</a></span> bound to <span class="tt"><a class="el" href="#ae412d06926f505f92866943e64611a72" title="Thread-local default-quality engine.">DefaultEngine()</a></span> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00264">264</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00263">263</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
@@ -1551,7 +1551,7 @@ template&lt;typename T&gt; </div>
 <p>Provides access to a thread-local fast random generator. </p>
 <p>Uses Meyer's singleton pattern per thread and avoids any static engine objects other than thread-local instances that are lazily initialized on first use. </p><dl class="section return"><dt>Returns</dt><dd>Reference to <span class="tt"><a class="el" href="#a851b4e170d6c739b36753930996cdd85" title="Convenience alias for a generator using the fast engine.">FastRandomGeneratorType</a></span> bound to <span class="tt"><a class="el" href="#a89028784f8decd2bf7a4801c250d0eb8" title="Thread-local fast engine.">FastEngineInstance()</a></span> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00277">277</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00276">276</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
@@ -1589,7 +1589,7 @@ template&lt;utils::ArithmeticTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Randomly generated value of type <span class="tt">T</span> using the fast engine </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00319">319</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00318">318</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
@@ -1639,7 +1639,7 @@ template&lt;utils::ArithmeticTrait T, utils::ArithmeticTrait U&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Random value of <span class="tt">std::common_type_t&lt;T, U&gt;</span> in [min, max] or [min, max) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00335">335</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00334">334</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
@@ -1677,7 +1677,7 @@ template&lt;utils::ArithmeticTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Randomly generated value of type T </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00290">290</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00289">289</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>
@@ -1727,7 +1727,7 @@ template&lt;utils::ArithmeticTrait T, utils::ArithmeticTrait U&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Random value of <span class="tt">std::common_type_t&lt;T, U&gt;</span> in [min, max] or [min, max) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00306">306</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="random_8hpp_source.html#l00305">305</a> of file <a class="el" href="random_8hpp_source.html">random.hpp</a>.</p>
 
 </div>
 </div>

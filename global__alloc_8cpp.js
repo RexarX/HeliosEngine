@@ -1,6 +1,5 @@
 var global__alloc_8cpp =
 [
-    [ "anonymous_namespace{global_alloc.cpp}::AlignUp", "namespaceanonymous__namespace_02global__alloc_8cpp_03.html#aa4b9fcde8bcb43a33a4301a70298ec95", null ],
     [ "operator delete", "global__alloc_8cpp.html#afa145befcf5e7b83424408ca503c8637", null ],
     [ "operator delete", "global__alloc_8cpp.html#a8550e9bb1c5db86131284c9c9f4941d7", null ],
     [ "operator delete", "global__alloc_8cpp.html#aeb70b064678e54ac9d17095b41f45e10", null ],

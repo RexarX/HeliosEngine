@@ -178,7 +178,7 @@ Public API</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">UuidGenerator</span>  </td><td class="markdownTableBodyNone">Standalone UUID generator (multiple instances supported).  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt">Stacktrace</span>  </td><td class="markdownTableBodyNone">Stack capture via Backward-cpp. Configurable filters.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">Stacktrace</span>  </td><td class="markdownTableBodyNone">Stack capture via C++23 <span class="tt">&lt;stacktrace&gt;</span> or Boost.Stacktrace fallback. Configurable filters.  </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">StacktraceConfig</span>  </td><td class="markdownTableBodyNone">Configuration for stack trace capture (frames, skip, filters).  </td></tr>
 <tr class="markdownTableRowOdd">
@@ -238,7 +238,7 @@ Stacktrace</h1>
 <div class="line">    .skip_frames = 2,</div>
 <div class="line">});</div>
 <div class="ttc" id="astacktrace_8hpp_html"><div class="ttname"><a href="stacktrace_8hpp.html">stacktrace.hpp</a></div></div>
-</div><!-- fragment --><p>Configurable max frames, skip frames, include/exclude filters, and source-location anchoring. Uses <b>Backward-cpp</b> under the hood.</p>
+</div><!-- fragment --><p>Configurable max frames, skip frames, include/exclude filters, and source-location anchoring. Uses C++23 <span class="tt">&lt;stacktrace&gt;</span> when available and falls back to Boost.Stacktrace when the standard library backend is missing.</p>
 <h1 class="doxsection"><a class="anchor" id="cstringview"></a>
 CStringView</h1>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="cstring__view_8hpp.html">helios/cstring_view.hpp</a>&gt;</span></div>
@@ -253,7 +253,7 @@ Dependencies</h1>
 <li><span class="tt">compiler</span> — intrinsics</li>
 <li><span class="tt">platform</span> — platform detection</li>
 <li><span class="tt">utils</span> — macros, type utilities</li>
-<li>External: stduuid, Backward-cpp </li>
+<li>External: stduuid, Boost.Stacktrace fallback when needed </li>
 </ul>
 </div></div><!-- contents -->
 </div><!-- doc-content -->

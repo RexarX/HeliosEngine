@@ -1,19 +1,10 @@
 var searchData=
 [
-  ['features_0',['Key Features',['../index.html#key-features',1,'']]],
-  ['fedora_1',['Linux (DNF — Fedora)',['../index.html#linux-dnf--fedora',1,'']]],
-  ['fetchcontent_2',['Method 2: &lt;span class=&quot;tt&quot;&gt;FetchContent&lt;/span&gt;',['../index.html#method-2-fetchcontent',1,'']]],
-  ['filesystem_3',['Filesystem',['../dir_313caf1132e152dd9b58bea13a4052ca.html#filesystem',1,'']]],
-  ['find_5fpackage_4',['Method 4: Installed Package (&lt;span class=&quot;tt&quot;&gt;find_package&lt;/span&gt;)',['../index.html#method-4-installed-package-find_package',1,'']]],
-  ['flags_5',['Recommended developer flags',['../index.html#recommended-developer-flags',1,'']]],
-  ['formatting_6',['Code formatting',['../index.html#code-formatting',1,'']]],
-  ['formatting_20enforcement_7',['Formatting enforcement',['../md_docs_2guidelines.html#formatting-enforcement',1,'']]],
-  ['frame_20allocator_8',['Frame Allocator',['../dir_94d7edf6f8f3d9af5fd63c44172da41c.html#frame-allocator',1,'']]],
-  ['frame_20lifecycle_9',['Frame Lifecycle',['../dir_5194e5fea318fda12687127c23f8aba1.html#frame-lifecycle',1,'']]],
-  ['framework_10',['`app` — Application Framework',['../dir_5194e5fea318fda12687127c23f8aba1.html#app--application-framework',1,'']]],
-  ['free_20functions_11',['Free Functions',['../dir_2241064965c8d9ca993f08b926076f7d.html#free-functions',1,'Free Functions'],['../dir_2730ace12cf03b0ba989133b5ac743ea.html#free-functions-1',1,'Free Functions']]],
-  ['from_20an_20executable_12',['Step 5 — Consume from an executable',['../dir_217ee790cdc210ca56feb9a8b7616066.html#step-5--consume-from-an-executable',1,'']]],
-  ['fully_20custom_20parameters_13',['Fully custom parameters',['../dir_ddca5f149c4ce13074f28b270e950ba9.html#fully-custom-parameters',1,'']]],
-  ['functions_14',['Functions',['../dir_2241064965c8d9ca993f08b926076f7d.html#free-functions',1,'Free Functions'],['../dir_2730ace12cf03b0ba989133b5ac743ea.html#free-functions-1',1,'Free Functions']]],
-  ['further_20reading_15',['Further reading',['../md_docs_2guidelines.html#further-reading',1,'Further reading'],['../dir_217ee790cdc210ca56feb9a8b7616066.html#further-reading-1',1,'Further reading']]]
+  ['gcc_0',['Linux (GCC)',['../index.html#linux-gcc',1,'']]],
+  ['get_1',['What You Get',['../dir_217ee790cdc210ca56feb9a8b7616066.html#what-you-get',1,'']]],
+  ['getting_20started_2',['Getting Started',['../index.html#getting-started',1,'']]],
+  ['global_20allocation_3',['mimalloc and global allocation',['../dir_94d7edf6f8f3d9af5fd63c44172da41c.html#mimalloc-and-global-allocation',1,'']]],
+  ['guard_4',['Scope Guard',['../dir_313caf1132e152dd9b58bea13a4052ca.html#scope-guard',1,'']]],
+  ['guidelines_5',['Project Guidelines',['../md_docs_2guidelines.html',1,'']]],
+  ['guidelines_6',['Project guidelines',['../index.html#project-guidelines',1,'']]]
 ];

@@ -388,7 +388,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('resource_2mana
 <div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span><span class="keyword">template</span> &lt;ResourceTrait T&gt;</div>
 <div class="foldopen" id="foldopen00211" data-start="{" data-end="}">
 <div class="line"><a id="l00211" name="l00211"></a><span class="lineno"><a class="line" href="classhelios_1_1ecs_1_1ResourceManager.html#aae70bf8e8825cda8aa31f3906707fcb1">  211</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1ecs_1_1ResourceManager.html#aae70bf8e8825cda8aa31f3906707fcb1">ResourceManager::Remove</a>() {</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>  <span class="keyword">const</span> <span class="keywordtype">bool</span> removed = resources_.Remove&lt;T&gt;();</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>  [[maybe_unused]] <span class="keyword">const</span> <span class="keywordtype">bool</span> removed = resources_.Remove&lt;T&gt;();</div>
 <div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(removed, <span class="stringliteral">&quot;Resource &#39;{}&#39; does not exist!&quot;</span>, <a class="code hl_function" href="namespacehelios_1_1ecs.html#aa156d33741937b2c039927f9c831105a">ResourceNameOf&lt;T&gt;</a>());</div>
 <div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>}</div>
 </div>
