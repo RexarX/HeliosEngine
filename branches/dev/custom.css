@@ -1,0 +1,17 @@
+/* README main-page logo — source image is high-res; constrain display size */
+div.textblock div[align="center"] .image img,
+div.textblock div[align="center"] img.inline {
+  width: 200px;
+  height: auto;
+}
+
+div.textblock div[align="center"] .image .caption {
+  display: none;
+}
+
+#versionSelector {
+  font-size: 90%;
+  margin-left: 0.35em;
+  vertical-align: baseline;
+  max-width: 12em;
+}
