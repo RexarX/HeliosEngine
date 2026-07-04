@@ -58,10 +58,8 @@ jobs:
         run: |
           cmake -B build-docs -G Ninja \
             -DCMAKE_BUILD_TYPE=Release \
-            -DHELIOS_BUILD_DOCS=ON \
-            -DHELIOS_BUILD_TESTS=OFF \
-            -DHELIOS_BUILD_EXAMPLES=OFF \
-            -DHELIOS_ENABLE_LTO=OFF
+            -DHELIOS_DOCS_ONLY=ON \
+            -DHELIOS_BUILD_DOCS=ON
 
       - name: Build Doxygen documentation
         env:

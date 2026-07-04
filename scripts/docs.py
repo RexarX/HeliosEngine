@@ -379,8 +379,8 @@ def print_build_success(output_dir: Path, warning_count: int, quiet: bool) -> No
     )
     print()
     print_info(
-        "Tip: configure with -DHELIOS_BUILD_DOCS=ON and run "
-        "cmake --build <dir> --target helios_docs"
+        "Tip: cmake -B build-docs -DHELIOS_DOCS_ONLY=ON -DHELIOS_BUILD_DOCS=ON "
+        "&& cmake --build build-docs --target helios_docs"
     )
     print()
 

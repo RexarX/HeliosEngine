@@ -39,6 +39,7 @@ else()
 endif()
 option(HELIOS_BUILD_EXAMPLES "Build examples" ${PROJECT_IS_TOP_LEVEL})
 option(HELIOS_BUILD_DOCS "Build API documentation (Doxygen)" OFF)
+option(HELIOS_DOCS_ONLY "Configure documentation targets only (skip engine modules)" OFF)
 option(HELIOS_ENABLE_UNITY_BUILD "Enable Unity/Jumbo builds" OFF)
 option(HELIOS_ENABLE_LTO "Enable Link Time Optimization" ON)
 option(HELIOS_ENABLE_WARNINGS_AS_ERRORS "Treat warnings as errors" OFF)
@@ -107,6 +108,23 @@ if(CMAKE_VERSION VERSION_GREATER_EQUAL "4.0")
 endif()
 
 helios_print_sanitizer_status()
+
+# ============================================================================
+# Documentation-only configuration (CI / quick local docs builds)
+# ============================================================================
+
+if(HELIOS_DOCS_ONLY)
+  if(NOT HELIOS_BUILD_DOCS)
+    message(FATAL_ERROR "HELIOS_DOCS_ONLY requires HELIOS_BUILD_DOCS=ON")
+  endif()
+
+  message(STATUS "")
+  message(STATUS "========================================")
+  message(STATUS "Documentation-only configuration")
+  message(STATUS "========================================")
+  add_subdirectory(docs)
+  return()
+endif()
 
 # Third-party libraries
 add_subdirectory(third-party)
