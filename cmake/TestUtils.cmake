@@ -204,7 +204,10 @@ function(_helios_configure_test_target TARGET_NAME)
   helios_target_set_output_dirs(${TARGET_NAME} CUSTOM_FOLDER tests)
 
   # IDE folder (will be overridden if needed)
-  set_target_properties(${TARGET_NAME} PROPERTIES FOLDER "Helios/Tests")
+  set_target_properties(${TARGET_NAME} PROPERTIES
+      FOLDER "Helios/Tests"
+      HELIOS_TEST_TARGET TRUE
+  )
 
   # LTO
   if(HELIOS_ENABLE_LTO)

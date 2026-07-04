@@ -66,4 +66,4 @@ jobs:
         run: cmake --build --preset ${{ matrix.preset }}
 
       - name: Test (${{ matrix.preset }})
-        run: ctest --preset ${{ matrix.preset }}
+        run: ctest --preset ${{ matrix.preset }} --output-on-failure

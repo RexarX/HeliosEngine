@@ -64,6 +64,7 @@ if(TARGET helios_app_tests AND HELIOS_BUILD_TESTS)
         OUTPUT_NAME "helios_app_test_plugin"
         LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/tests"
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/tests"
+        HELIOS_TEST_TARGET TRUE
     )
   helios_target_set_output_dirs(helios_app_test_plugin CUSTOM_FOLDER tests)
 

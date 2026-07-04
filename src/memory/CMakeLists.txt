@@ -107,8 +107,12 @@ if(HELIOS_MEMORY_OVERRIDE_GLOBAL_ALLOC)
     target_link_libraries(helios_memory_global_alloc PRIVATE helios::lib::mimalloc::static)
   endif()
 
+  # Inject global operator new/delete for non-test consumers only. Test
+  # executables use the system allocator to avoid mimalloc/LTO static-init
+  # issues on some platforms (notably macOS release + AppleClang).
   set_target_properties(helios_module_memory PROPERTIES
-      INTERFACE_LINK_LIBRARIES_DIRECT helios_memory_global_alloc
+      INTERFACE_LINK_LIBRARIES_DIRECT
+          "$<$<NOT:$<BOOL:$<TARGET_PROPERTY:HELIOS_TEST_TARGET>>>:helios_memory_global_alloc>"
   )
   target_compile_definitions(helios_module_memory PUBLIC
       HELIOS_MEMORY_OVERRIDE_GLOBAL_ALLOC
