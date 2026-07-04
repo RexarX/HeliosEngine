@@ -1,0 +1,4 @@
+var structhelios_1_1utils_1_1details_1_1folder__apply__result_3_01Folder_00_01Accumulator_00_01std_1ce2978c0f27b507bfe0e6e04cc632169 =
+[
+    [ "type", "structhelios_1_1utils_1_1details_1_1folder__apply__result_3_01Folder_00_01Accumulator_00_01std_1ce2978c0f27b507bfe0e6e04cc632169.html#a6bf3c057d31530d3a2f175632d98aba4", null ]
+];
