@@ -51,6 +51,10 @@
     </script>
     <script
       type="text/javascript"
+      src="edition_selector_data.js"
+    ></script>
+    <script
+      type="text/javascript"
       src="version_selector_handler.js"
     ></script>
   </head>
@@ -68,8 +72,15 @@
                   <div id="projectname">
                     Helios Engine<span
                       id="projectnumber"
-                      data-fallback="0.1.0"
-                      >&#160;0.1.0</span
+                      ><span class="helios-edition-control"
+                        ><span
+                          id="editionselector"
+                          class="helios-edition-select-wrap helios-branch-select-wrap"
+                        ></span
+                        ><span
+                          id="versionselector"
+                          class="helios-edition-select-wrap helios-version-select-wrap"
+                        ></span></span></span
                     >
                   </div>
                   <div id="projectbrief">A modular ECS based data-oriented C++23 game engine framework</div>

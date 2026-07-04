@@ -51,6 +51,10 @@
     </script>
     <script
       type="text/javascript"
+      src="edition_selector_data.js"
+    ></script>
+    <script
+      type="text/javascript"
       src="version_selector_handler.js"
     ></script>
   </head>
@@ -68,8 +72,15 @@
                   <div id="projectname">
                     Helios Engine<span
                       id="projectnumber"
-                      data-fallback="0.1.0"
-                      >&#160;0.1.0</span
+                      ><span class="helios-edition-control"
+                        ><span
+                          id="editionselector"
+                          class="helios-edition-select-wrap helios-branch-select-wrap"
+                        ></span
+                        ><span
+                          id="versionselector"
+                          class="helios-edition-select-wrap helios-version-select-wrap"
+                        ></span></span></span
                     >
                   </div>
                   <div id="projectbrief">A modular ECS based data-oriented C++23 game engine framework</div>
@@ -623,7 +634,7 @@ Documentation</h2>
 API reference (Doxygen)</h3>
 <div class="fragment"><div class="line">python scripts/docs.py</div>
 <div class="line"># → docs/doxygen/html/index.html</div>
-</div><!-- fragment --><p>Config: <a href="docs/doxygen/Doxyfile.in"><span class="tt">docs/doxygen/Doxyfile.in</span></a> — version from <span class="tt">project(VERSION …)</span> via CMake (<span class="tt">-DHELIOS_BUILD_DOCS=ON</span>, target <span class="tt">helios_docs</span>) or <span class="tt">scripts/docs.py</span>.</p>
+</div><!-- fragment --><p>Config: <a href="docs/doxygen/Doxyfile.in"><span class="tt">docs/doxygen/Doxyfile.in</span></a> — version from <span class="tt">project(VERSION …)</span> via CMake (<span class="tt">cmake --preset docs</span>, <span class="tt">cmake --build --preset docs</span>) or <span class="tt">scripts/docs.py</span>.</p>
 <h3 class="doxsection"><a class="anchor" id="project-guidelines"></a>
 Project guidelines</h3>
 <p><a class="el" href="md_docs_2guidelines.html" title="Project Guidelines">docs/guidelines.md</a> — code style, module layout, testing, build options.</p>

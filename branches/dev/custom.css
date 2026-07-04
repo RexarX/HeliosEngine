@@ -9,9 +9,152 @@ div.textblock div[align="center"] .image .caption {
   display: none;
 }
 
+/*
+ * Branch + version controls — styled like doxygen-awesome search & dropdown UI.
+ * Layout: [ branch ▼ ] [ version ▼ ]
+ */
+
+#projectnumber {
+  margin-left: var(--spacing-large);
+}
+
+#projectnumber .helios-edition-control {
+  --helios-edition-scale: 1;
+  display: inline-flex;
+  align-items: stretch;
+  vertical-align: middle;
+  margin-left: 0;
+  min-height: calc(var(--searchbar-height) * var(--helios-edition-scale));
+  background: var(--searchbar-background);
+  border: 1px solid var(--separator-color);
+  border-radius: calc(
+    var(--border-radius-medium) * var(--helios-edition-scale)
+  );
+  overflow: visible;
+  box-shadow: none;
+  transition:
+    border-color var(--animation-duration) ease-in-out,
+    box-shadow var(--animation-duration) ease-in-out;
+}
+
+#projectnumber .helios-edition-control:focus-within {
+  border-color: var(--primary-color);
+  box-shadow: inset 0 0 0 1px var(--primary-color);
+}
+
+#projectnumber .helios-edition-select-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-width: 4.25em;
+}
+
+#projectnumber .helios-branch-select-wrap {
+  border-right: 1px solid var(--separator-color);
+}
+
+#projectnumber .helios-edition-select-wrap::after {
+  content: "";
+  position: absolute;
+  right: calc(var(--spacing-small) + 1px);
+  pointer-events: none;
+  width: 0;
+  height: 0;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-top: 4px solid var(--page-secondary-foreground-color);
+  transition: border-top-color var(--animation-duration) ease-in-out;
+  z-index: 1;
+}
+
+#projectnumber .helios-edition-control:hover .helios-edition-select-wrap::after,
+#projectnumber
+  .helios-edition-control:focus-within
+  .helios-edition-select-wrap::after {
+  border-top-color: var(--primary-color);
+}
+
+#branchSelector,
 #versionSelector {
-  font-size: 90%;
-  margin-left: 0.35em;
-  vertical-align: baseline;
-  max-width: 12em;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: calc(var(--searchbar-height) * var(--helios-edition-scale));
+  margin: 0;
+  padding: 0 calc(var(--spacing-medium) + 8px) 0 var(--spacing-small);
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: var(--page-foreground-color);
+  font-family: var(--font-family);
+  font-size: calc(var(--navigation-font-size) * var(--helios-edition-scale));
+  font-weight: 500;
+  line-height: calc(var(--searchbar-height) * var(--helios-edition-scale));
+  cursor: pointer;
+  transition:
+    background-color var(--animation-duration) ease-in-out,
+    color var(--animation-duration) ease-in-out;
+}
+
+#branchSelector {
+  min-width: 4.25em;
+  max-width: 7.5em;
+}
+
+#versionSelector {
+  min-width: 3.5em;
+  max-width: 6em;
+}
+
+#branchSelector:hover,
+#versionSelector:hover {
+  background: var(--menu-selected-background);
+}
+
+#branchSelector:active,
+#versionSelector:active {
+  background: var(--menu-focus-background);
+  color: var(--menu-focus-foreground);
+}
+
+#branchSelector:focus,
+#versionSelector:focus {
+  outline: none;
+}
+
+#branchSelector:focus-visible,
+#versionSelector:focus-visible {
+  background: var(--menu-selected-background);
+}
+
+#branchSelector option,
+#versionSelector option {
+  background: var(--page-background-color);
+  color: var(--page-foreground-color);
+  font-weight: normal;
+}
+
+@media screen and (max-width: 767px) {
+  #projectnumber {
+    display: block;
+    margin-left: 0;
+    margin-top: var(--spacing-small);
+  }
+
+  #projectnumber .helios-edition-control {
+    margin-left: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  #projectnumber .helios-edition-select-wrap,
+  #branchSelector,
+  #versionSelector {
+    flex: 1;
+    max-width: none;
+  }
 }
