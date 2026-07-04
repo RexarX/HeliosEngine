@@ -516,7 +516,7 @@ python scripts/docs.py
 # → docs/doxygen/html/index.html
 ```
 
-Config: [`docs/doxygen/Doxyfile.in`](docs/doxygen/Doxyfile.in) — version from `project(VERSION …)` via CMake (`-DHELIOS_BUILD_DOCS=ON`, target `helios_docs`) or `scripts/docs.py`.
+Config: [`docs/doxygen/Doxyfile.in`](docs/doxygen/Doxyfile.in) — version from `project(VERSION …)` via CMake (`cmake --preset docs`, `cmake --build --preset docs`) or `scripts/docs.py`.
 
 ### Project guidelines
 

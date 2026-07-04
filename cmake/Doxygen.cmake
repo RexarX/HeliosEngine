@@ -7,17 +7,7 @@ function(helios_normalize_path_for_doxygen input_path output_var)
 endfunction()
 
 function(helios_resolve_doxygen_project_number output_var)
-  if(DEFINED ENV{DOCS_LABEL} AND NOT "$ENV{DOCS_LABEL}" STREQUAL "")
-    set(_label "$ENV{DOCS_LABEL}")
-  else()
-    set(_label "")
-  endif()
-
-  if(_label STREQUAL "" OR _label STREQUAL "main")
-    set("${output_var}" "${PROJECT_VERSION}" PARENT_SCOPE)
-  else()
-    set("${output_var}" "${PROJECT_VERSION} (${_label})" PARENT_SCOPE)
-  endif()
+  set("${output_var}" "${PROJECT_VERSION}" PARENT_SCOPE)
 endfunction()
 
 function(helios_add_doxygen_docs)

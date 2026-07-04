@@ -58,6 +58,7 @@ HTML_FOOTER            = @HELIOS_SOURCE_DIR@/docs/doxygen/footer.html
 HTML_EXTRA_STYLESHEET  = @HELIOS_SOURCE_DIR@/third-party/doxygen-awesome-css/doxygen-awesome.css \
                          @HELIOS_SOURCE_DIR@/docs/doxygen/custom.css
 HTML_EXTRA_FILES       = @HELIOS_SOURCE_DIR@/docs/doxygen/jquery.min.js \
+                         @HELIOS_SOURCE_DIR@/docs/doxygen/edition_selector_data.js \
                          @HELIOS_SOURCE_DIR@/docs/doxygen/version_selector_handler.js \
                          @HELIOS_SOURCE_DIR@/third-party/doxygen-awesome-css/doxygen-awesome-darkmode-toggle.js \
                          @HELIOS_SOURCE_DIR@/third-party/doxygen-awesome-css/doxygen-awesome-fragment-copy-button.js \

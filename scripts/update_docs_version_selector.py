@@ -1,57 +1,42 @@
 #!/usr/bin/env python3
 """
-Generate version_selector.html for multi-edition GitHub Pages documentation.
+Generate selector data for multi-edition GitHub Pages documentation.
 
-Enumerates published doc editions on the gh-pages branch (main at site root,
-branch previews under branches/, future semver releases at top level) and
-writes a <select> element consumed by version_selector_handler.js.
+Published docs use three locations:
+  - main branch snapshot at the site root
+  - release tags at top-level semver directories, e.g. 0.2.0/
+  - branch previews under branches/<branch>/
 """
 
 from __future__ import annotations
 
 import argparse
-import re
 import subprocess
 import sys
 from pathlib import Path
-from typing import List, Sequence, Tuple
+from typing import Iterable, List, Sequence, Tuple
 
-SEMVER_DIR = re.compile(r"^\d+\.\d+\.\d+")
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from edition_selector import (
+    SEMVER_DIR,
+    normalize_docs_label,
+    read_project_version,
+    render_branch_selector_html,
+    render_version_selector_html,
+    resolve_current_branch,
+    resolve_current_label,
+    resolve_current_version,
+    write_selector_js,
+)
+
 SKIP_TOP_LEVEL = frozenset({"branches", "search", "docs"})
 
 
-def git_ls_tree(
-    repo_root: Path, ref: str, path: str = "", *, directories_only: bool = False
-) -> List[str]:
-    cmd = ["git", "ls-tree", "--name-only"]
-    if directories_only:
-        cmd.append("-d")
-    cmd.append(ref)
-    if path:
-        cmd.append(path if path.endswith("/") else f"{path}/")
-
-    result = subprocess.run(
-        cmd, cwd=repo_root, capture_output=True, text=True, check=False
-    )
-    if result.returncode != 0:
-        return []
-    return [line.strip() for line in result.stdout.splitlines() if line.strip()]
-
-
-def git_has_file(repo_root: Path, ref: str, path: str) -> bool:
-    result = subprocess.run(
-        ["git", "ls-tree", "--name-only", ref, path],
-        cwd=repo_root,
-        capture_output=True,
-        text=True,
-        check=False,
-    )
-    return result.returncode == 0 and bool(result.stdout.strip())
-
-
 def parse_semver(value: str) -> Tuple[int, ...]:
+    version = value.split("+", 1)[0].split("-", 1)[0]
     parts: List[int] = []
-    for piece in value.split("."):
+    for piece in version.split("."):
         try:
             parts.append(int(piece))
         except ValueError:
@@ -59,60 +44,182 @@ def parse_semver(value: str) -> Tuple[int, ...]:
     return tuple(parts)
 
 
-def discover_versions(repo_root: Path, gh_pages_ref: str) -> List[Tuple[str, str]]:
-    """Return (path_value, display_label) pairs in selector order."""
+def fetch_gh_pages(repo_root: Path) -> None:
+    result = subprocess.run(
+        ["git", "fetch", "origin", "gh-pages"],
+        cwd=repo_root,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if result.returncode != 0:
+        message = result.stderr.strip() or result.stdout.strip()
+        raise RuntimeError(f"failed to fetch origin/gh-pages: {message}")
 
-    editions: List[Tuple[str, str, Tuple[int, ...]]] = []
 
-    if git_has_file(repo_root, gh_pages_ref, "index.html"):
-        editions.append(("main", "main", (0,)))
+def git_published_paths(repo_root: Path, ref: str) -> List[str]:
+    result = subprocess.run(
+        ["git", "ls-tree", "-r", "--name-only", ref],
+        cwd=repo_root,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if result.returncode != 0:
+        message = result.stderr.strip() or result.stdout.strip()
+        raise RuntimeError(f"failed to inspect {ref}: {message}")
+    return [line.strip().replace("\\", "/") for line in result.stdout.splitlines()]
 
-    for entry in git_ls_tree(repo_root, gh_pages_ref, directories_only=True):
-        name = Path(entry).name
+
+def filesystem_published_paths(pages_root: Path) -> List[str]:
+    return [
+        path.relative_to(pages_root).as_posix()
+        for path in pages_root.rglob("*")
+        if path.is_file()
+    ]
+
+
+def branch_label_from_value(value: str) -> str:
+    return value.removeprefix("branches/")
+
+
+def discover_branch_options(
+    published_paths: Sequence[str], current_branch: str
+) -> List[Tuple[str, str]]:
+    options: List[Tuple[str, str]] = []
+    seen = set()
+
+    def add(value: str, label: str) -> None:
+        if value not in seen:
+            options.append((value, label))
+            seen.add(value)
+
+    if "index.html" in published_paths or current_branch == "main":
+        add("main", "main")
+
+    for path in published_paths:
+        if not path.startswith("branches/") or not path.endswith("/index.html"):
+            continue
+        branch = path[len("branches/") : -len("/index.html")]
+        if branch:
+            add(f"branches/{branch}", branch)
+
+    if current_branch != "main":
+        add(current_branch, branch_label_from_value(current_branch))
+
+    return options
+
+
+def discover_version_options(
+    repo_root: Path, published_paths: Sequence[str], current_version: str
+) -> List[Tuple[str, str]]:
+    project_version = read_project_version(repo_root)
+    versions: List[Tuple[str, str, Tuple[int, ...]]] = []
+    seen = set()
+
+    def add(version: str) -> None:
+        if version not in seen:
+            versions.append((version, version, parse_semver(version)))
+            seen.add(version)
+
+    add(project_version)
+    add(current_version)
+
+    for path in published_paths:
+        if "/" not in path:
+            continue
+        name, rest = path.split("/", 1)
+        if rest != "index.html":
+            continue
         if name in SKIP_TOP_LEVEL or name.startswith("."):
             continue
-        if SEMVER_DIR.match(name) and git_has_file(
-            repo_root, gh_pages_ref, f"{name}/index.html"
-        ):
-            editions.append((name, name, (1, *parse_semver(name))))
+        if SEMVER_DIR.fullmatch(name):
+            add(name)
 
-    for entry in git_ls_tree(
-        repo_root, gh_pages_ref, "branches", directories_only=True
-    ):
-        branch = Path(entry).name
-        path_value = f"branches/{branch}"
-        if git_has_file(repo_root, gh_pages_ref, f"{path_value}/index.html"):
-            editions.append((path_value, branch, (2, 0)))
+    versions.sort(key=lambda item: item[2], reverse=True)
+    return [(value, label) for value, label, _ in versions]
 
-    editions.sort(key=lambda item: item[2])
-    # Semver editions: newest first among release folders.
-    semver = [e for e in editions if e[2][0] == 1]
-    semver.sort(key=lambda item: item[2][1:], reverse=True)
-    ordered = [e for e in editions if e[2][0] == 0]
-    ordered.extend(semver)
-    ordered.extend(
-        sorted((e for e in editions if e[2][0] == 2), key=lambda item: item[1])
+
+def build_selector_html(
+    repo_root: Path, published_paths: Sequence[str], current_label: str
+) -> Tuple[str, str, str]:
+    current_label = normalize_docs_label(current_label)
+    current_branch = resolve_current_branch(current_label)
+    current_version = resolve_current_version(repo_root, current_label)
+    branch_options = discover_branch_options(published_paths, current_branch)
+    version_options = discover_version_options(
+        repo_root, published_paths, current_version
     )
-    return [(value, label) for value, label, _ in ordered]
+    branch_html = render_branch_selector_html(branch_options, current_branch)
+    version_html = render_version_selector_html(version_options, current_version)
+    return branch_html, version_html, current_version
 
 
-def render_selector(options: Sequence[Tuple[str, str]]) -> str:
-    lines = ['<select id="versionSelector" title="Documentation edition">']
-    for value, label in options:
-        lines.append(f'  <option value="{value}">{label}</option>')
-    lines.append("</select>")
-    return "\n".join(lines) + "\n"
+def write_selector_data(
+    repo_root: Path,
+    published_paths: Sequence[str],
+    current_label: str,
+    output: Path,
+) -> None:
+    branch_html, version_html, default_version = build_selector_html(
+        repo_root, published_paths, current_label
+    )
+    write_selector_js(output, branch_html, version_html, default_version)
+    print(f"Wrote selector data to {output}")
 
 
-def main() -> int:
+def discover_published_editions(pages_root: Path) -> List[Tuple[str, Path]]:
+    editions: List[Tuple[str, Path]] = []
+
+    if (pages_root / "index.html").is_file():
+        editions.append(("main", pages_root / "edition_selector_data.js"))
+
+    for child in sorted(path for path in pages_root.iterdir() if path.is_dir()):
+        if child.name in SKIP_TOP_LEVEL or child.name.startswith("."):
+            continue
+        if SEMVER_DIR.fullmatch(child.name) and (child / "index.html").is_file():
+            editions.append((child.name, child / "edition_selector_data.js"))
+
+    branches_root = pages_root / "branches"
+    if branches_root.is_dir():
+        for index in sorted(branches_root.rglob("index.html")):
+            branch = index.parent.relative_to(branches_root).as_posix()
+            if branch:
+                editions.append((branch, index.parent / "edition_selector_data.js"))
+
+    return editions
+
+
+def refresh_all_editions(repo_root: Path, pages_root: Path) -> None:
+    published_paths = filesystem_published_paths(pages_root)
+    editions = discover_published_editions(pages_root)
+    if not editions:
+        raise RuntimeError(f"no published documentation editions found in {pages_root}")
+
+    for label, output in editions:
+        write_selector_data(repo_root, published_paths, label, output)
+
+    print(f"Refreshed {len(editions)} documentation edition selector(s)")
+
+
+def main(argv: Iterable[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
-        description="Generate version_selector.html for published documentation editions"
+        description="Generate edition selector data for published documentation"
     )
     parser.add_argument(
-        "--output",
+        "--js-output",
         type=Path,
-        required=True,
-        help="Path to write version_selector.html",
+        help="Path to write edition_selector_data.js for the current build",
+    )
+    parser.add_argument(
+        "--refresh-pages-root",
+        type=Path,
+        help="Checked-out gh-pages root; rewrites selector data for every edition",
+    )
+    parser.add_argument(
+        "--current-label",
+        default=None,
+        help="Edition label to mark selected (default: DOCS_LABEL or main)",
     )
     parser.add_argument(
         "--gh-pages-ref",
@@ -125,30 +232,29 @@ def main() -> int:
         default=None,
         help="Repository root (default: parent of scripts/)",
     )
-    args = parser.parse_args()
+    args = parser.parse_args(list(argv) if argv is not None else None)
+
+    if not args.js_output and not args.refresh_pages_root:
+        parser.error("At least one of --js-output or --refresh-pages-root is required")
 
     repo_root = (args.repo_root or Path(__file__).resolve().parent.parent).resolve()
-    subprocess.run(
-        ["git", "fetch", "origin", "gh-pages"],
-        cwd=repo_root,
-        capture_output=True,
-        text=True,
-        check=False,
-    )
+    current_label = normalize_docs_label(args.current_label or resolve_current_label())
 
-    options = discover_versions(repo_root, args.gh_pages_ref)
-    if not options:
-        print(
-            "Warning: no documentation editions found on gh-pages; defaulting to main",
-            file=sys.stderr,
-        )
-        options = [("main", "main")]
+    try:
+        if args.js_output:
+            fetch_gh_pages(repo_root)
+            published_paths = git_published_paths(repo_root, args.gh_pages_ref)
+            write_selector_data(
+                repo_root, published_paths, current_label, args.js_output
+            )
 
-    args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(render_selector(options), encoding="utf-8")
-    print(f"Wrote {len(options)} edition(s) to {args.output}")
-    for value, label in options:
-        print(f"  - {label} ({value})")
+        if args.refresh_pages_root:
+            pages_root = args.refresh_pages_root.resolve()
+            refresh_all_editions(repo_root, pages_root)
+    except RuntimeError as error:
+        print(f"error: {error}", file=sys.stderr)
+        return 1
+
     return 0
 
 

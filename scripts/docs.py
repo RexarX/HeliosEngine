@@ -16,6 +16,15 @@ import sys
 from pathlib import Path
 from typing import Optional, Tuple
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from edition_selector import (
+    read_project_version,
+    render_branch_selector_html,
+    render_version_selector_html,
+    write_selector_js,
+)
+
 
 class Colors:
     """ANSI color codes for terminal output"""
@@ -182,20 +191,18 @@ def detect_docs_label() -> str:
 
 
 def format_project_number(version: str) -> str:
-    """Build Doxygen PROJECT_NUMBER from version and optional DOCS_LABEL env."""
+    """Return Doxygen PROJECT_NUMBER (semver only; branch is in the edition selector)."""
 
-    label = detect_docs_label()
-    if not label or label in ("main", "local"):
-        return version
-    return f"{version} ({label})"
+    return version
 
 
 def resolve_project_number(root_dir: Path) -> str:
     """Return the Doxygen project number for the current build."""
 
-    return os.environ.get(
-        "HELIOS_DOXYGEN_PROJECT_NUMBER", ""
-    ).strip() or format_project_number(read_project_version(root_dir))
+    env_number = os.environ.get("HELIOS_DOXYGEN_PROJECT_NUMBER", "").strip()
+    if env_number:
+        return env_number
+    return format_project_number(read_project_version(root_dir))
 
 
 def cmake_path(path: Path) -> str:
@@ -232,22 +239,27 @@ def html_output_dir(root_dir: Path) -> Path:
     return root_dir / "docs/doxygen/html"
 
 
-def write_local_version_selector(output_dir: Path, root_dir: Path) -> None:
-    """Write a single-edition selector for local preview (http.server)."""
+def write_local_edition_selector(output_dir: Path, root_dir: Path) -> None:
+    """Write embedded edition selector assets for local preview."""
 
-    project_number = resolve_project_number(root_dir)
     label = detect_docs_label()
     if label in ("main", "local"):
-        display = f"{project_number} (local)"
+        branch_options = [("main", "main")]
     else:
-        display = project_number
+        branch_options = [(f"branches/{label}", label)]
 
-    html = (
-        '<select id="versionSelector" title="Documentation edition" disabled>\n'
-        f'  <option value="local">{display}</option>\n'
-        "</select>\n"
+    project_version = read_project_version(root_dir)
+    version_options = [(project_version, project_version)]
+    current_branch = branch_options[0][0]
+
+    branch_html = render_branch_selector_html(branch_options, current_branch)
+    version_html = render_version_selector_html(version_options, project_version)
+    write_selector_js(
+        output_dir / "edition_selector_data.js",
+        branch_html,
+        version_html,
+        project_version,
     )
-    (output_dir / "version_selector.html").write_text(html, encoding="utf-8")
 
 
 def post_process_docs(root_dir: Path) -> None:
@@ -261,7 +273,7 @@ def post_process_docs(root_dir: Path) -> None:
     if img_src.is_dir():
         shutil.copytree(img_src, img_dst, dirs_exist_ok=True)
 
-    write_local_version_selector(output_dir, root_dir)
+    write_local_edition_selector(output_dir, root_dir)
 
 
 def find_cmake_build_dir(root_dir: Path) -> Optional[Path]:
@@ -378,10 +390,7 @@ def print_build_success(output_dir: Path, warning_count: int, quiet: bool) -> No
         "Use a local server (not file://) so the edition label and selector load correctly"
     )
     print()
-    print_info(
-        "Tip: cmake -B build-docs -DHELIOS_DOCS_ONLY=ON -DHELIOS_BUILD_DOCS=ON "
-        "&& cmake --build build-docs --target helios_docs"
-    )
+    print_info("Tip: cmake --preset docs && cmake --build --preset docs")
     print()
 
     if warning_count > 0:
@@ -446,8 +455,8 @@ Examples:
   python scripts/docs.py
 
   # Build through CMake
-  cmake --preset linux-clang-debug -DHELIOS_BUILD_DOCS=ON
-  cmake --build --preset linux-clang-debug --target helios_docs
+  cmake --preset docs
+  cmake --build --preset docs
 
   # Clean documentation
   python scripts/docs.py --clean

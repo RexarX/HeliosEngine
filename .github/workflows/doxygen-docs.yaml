@@ -5,6 +5,8 @@ on:
     branches:
       - main
       - dev
+    tags:
+      - "v*.*.*"
     paths:
       - ".github/workflows/doxygen-docs.yaml"
       - "CMakeLists.txt"
@@ -12,6 +14,7 @@ on:
       - "docs/**"
       - "examples/**"
       - "scripts/docs.py"
+      - "scripts/edition_selector.py"
       - "scripts/update_docs_version_selector.py"
       - "src/**"
       - "third-party/doxygen-awesome-css/**"
@@ -22,8 +25,8 @@ permissions:
   contents: write
 
 concurrency:
-  group: gh-pages-${{ github.ref }}
-  cancel-in-progress: true
+  group: gh-pages-deploy
+  cancel-in-progress: false
 
 jobs:
   doxygen-docs:
@@ -34,6 +37,28 @@ jobs:
         with:
           submodules: recursive
           fetch-depth: 0
+
+      - name: Resolve documentation edition
+        id: edition
+        shell: bash
+        run: |
+          if [[ "${GITHUB_REF_TYPE}" == "tag" ]]; then
+            label="${GITHUB_REF_NAME#v}"
+            if [[ ! "$label" =~ ^[0-9]+\.[0-9]+\.[0-9]+([-+][0-9A-Za-z.-]+)?$ ]]; then
+              echo "Unsupported documentation tag: ${GITHUB_REF_NAME}" >&2
+              exit 1
+            fi
+            destination_dir="$label"
+          elif [[ "${GITHUB_REF_NAME}" == "main" ]]; then
+            label="main"
+            destination_dir=""
+          else
+            label="${GITHUB_REF_NAME}"
+            destination_dir="branches/${GITHUB_REF_NAME}"
+          fi
+
+          echo "label=${label}" >> "$GITHUB_OUTPUT"
+          echo "destination_dir=${destination_dir}" >> "$GITHUB_OUTPUT"
 
       - name: Install Doxygen and Graphviz
         run: |
@@ -55,49 +80,62 @@ jobs:
           fi
 
       - name: Configure documentation build
-        run: |
-          cmake -B build-docs -G Ninja \
-            -DCMAKE_BUILD_TYPE=Release \
-            -DHELIOS_DOCS_ONLY=ON \
-            -DHELIOS_BUILD_DOCS=ON
+        run: cmake --preset docs
 
       - name: Build Doxygen documentation
         env:
-          DOCS_LABEL: ${{ github.ref == 'refs/heads/main' && 'main' || github.ref_name }}
-        run: cmake --build build-docs --target helios_docs
+          DOCS_LABEL: ${{ steps.edition.outputs.label }}
+        run: cmake --build --preset docs
 
-      - name: Deploy to GitHub Pages (main → site root)
-        if: github.ref == 'refs/heads/main'
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: docs/doxygen/html
-          publish_branch: gh-pages
-          keep_files: true
-
-      - name: Deploy to GitHub Pages (other branches → /branches/<branch>/)
-        if: github.ref != 'refs/heads/main'
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: docs/doxygen/html
-          publish_branch: gh-pages
-          # GitHub Pages does not serve top-level folders named after common
-          # branch names such as "dev" or "main" (they 404 even when present on
-          # gh-pages). Use a neutral prefix instead of ${{ github.ref_name }}.
-          destination_dir: branches/${{ github.ref_name }}
-          keep_files: true
-
-      - name: Update documentation edition selector
+      - name: Embed multi-edition selector in HTML output
+        env:
+          DOCS_LABEL: ${{ steps.edition.outputs.label }}
         run: |
           python3 scripts/update_docs_version_selector.py \
-            --output build/version_selector.html \
+            --js-output docs/doxygen/html/edition_selector_data.js \
             --gh-pages-ref origin/gh-pages
 
-      - name: Deploy edition selector to GitHub Pages root
+      - name: Deploy to GitHub Pages root
+        if: steps.edition.outputs.destination_dir == ''
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: build
+          publish_dir: docs/doxygen/html
           publish_branch: gh-pages
           keep_files: true
+
+      - name: Deploy to GitHub Pages edition directory
+        if: steps.edition.outputs.destination_dir != ''
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/doxygen/html
+          publish_branch: gh-pages
+          destination_dir: ${{ steps.edition.outputs.destination_dir }}
+          keep_files: true
+
+      - name: Checkout GitHub Pages branch
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: gh-pages
+          fetch-depth: 0
+
+      - name: Refresh selector data in all published editions
+        run: |
+          python3 scripts/update_docs_version_selector.py \
+            --refresh-pages-root gh-pages
+
+      - name: Commit refreshed selector data
+        working-directory: gh-pages
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "Selector data is already up to date."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Refresh documentation edition selector"
+          git push origin gh-pages
