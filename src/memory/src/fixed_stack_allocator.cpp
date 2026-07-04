@@ -10,7 +10,6 @@
 #include <algorithm>
 #include <atomic>
 #include <cstddef>
-#include <memory>
 #include <utility>
 
 namespace helios::mem {
@@ -119,7 +118,8 @@ void FixedStackAllocator::do_deallocate(void* ptr, size_t /*bytes*/,
                                       std::memory_order_acq_rel)) {
     allocation_count_.fetch_sub(1, std::memory_order_relaxed);
     total_deallocations_.fetch_add(1, std::memory_order_relaxed);
-    const size_t user_offset = static_cast<std::byte*>(ptr) - buffer_;
+    const auto user_offset =
+        static_cast<size_t>(static_cast<std::byte*>(ptr) - buffer_);
     const size_t waste = user_offset - header->previous_offset - kHeaderSize;
     alignment_waste_.fetch_sub(
         std::min(waste, alignment_waste_.load(std::memory_order_relaxed)),

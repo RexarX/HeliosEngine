@@ -9,7 +9,6 @@
 #include <concepts>
 #include <cstddef>
 #include <cstdint>
-#include <new>
 #include <ostream>
 #include <source_location>
 #include <span>

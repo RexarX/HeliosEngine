@@ -615,9 +615,7 @@ constexpr auto AccessPolicyBuilder::Query(this auto&& self)
         // Tag components have no data to conflict on.
         if constexpr (TagComponentTrait<RawComponent>) {
           return;
-        }
-
-        if constexpr (details::kIsConstAccess<Components>) {
+        } else if constexpr (details::kIsConstAccess<Components>) {
           self.InsertSorted(self.read_components_,
                             ComponentTypeId::From<RawComponent>());
         } else {

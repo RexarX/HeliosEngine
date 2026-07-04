@@ -70,7 +70,7 @@ struct AsyncResRunCondition {
 };
 
 struct WorldViewRunCondition {
-  bool operator()(WorldView view) const { return view.EntityCount() >= 0; }
+  bool operator()(WorldView /*view*/) const { return true; }
 };
 
 struct MessageReaderRunCondition {
@@ -334,8 +334,7 @@ TEST_SUITE("helios::ecs::RunConditionStorage") {
   TEST_CASE("ecs::RunConditionStorage::FromParamNamed") {
     SUBCASE("FromParamNamed with lambda produces valid storage and name") {
       auto storage = RunConditionStorage::FromParamNamed(
-          "LambdaCondition",
-          [](Res<CounterResource> counter) -> bool { return true; });
+          "LambdaCondition", [](Res<CounterResource>) -> bool { return true; });
 
       CHECK(storage.run_condition);
       CHECK_EQ(storage.name, "LambdaCondition");
@@ -344,7 +343,7 @@ TEST_SUITE("helios::ecs::RunConditionStorage") {
     SUBCASE("FromParamNamed lambda evaluates correctly") {
       auto storage = RunConditionStorage::FromParamNamed(
           "AlwaysTrueLambda",
-          [](Res<CounterResource> counter) -> bool { return true; });
+          [](Res<CounterResource>) -> bool { return true; });
 
       World world;
       world.InsertResources(CounterResource{5});
@@ -357,7 +356,7 @@ TEST_SUITE("helios::ecs::RunConditionStorage") {
     SUBCASE("FromParamNamed lambda returning false evaluates correctly") {
       auto storage = RunConditionStorage::FromParamNamed(
           "AlwaysFalseLambda",
-          [](Res<CounterResource> counter) -> bool { return false; });
+          [](Res<CounterResource>) -> bool { return false; });
 
       World world;
       world.InsertResources(CounterResource{5});

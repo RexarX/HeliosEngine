@@ -3,10 +3,10 @@
 #include <helios/assert.hpp>
 #include <helios/ecs/component/component.hpp>
 #include <helios/ecs/entity/entity.hpp>
+#include <helios/ecs/message/message.hpp>
 #include <helios/ecs/resource/resource.hpp>
 
 #include <string_view>
-#include "helios/ecs/message/message.hpp"
 
 namespace helios::ecs {
 

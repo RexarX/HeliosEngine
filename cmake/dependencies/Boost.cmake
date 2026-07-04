@@ -1,7 +1,8 @@
 # Boost dependency configuration
 #
 # Handles Boost dependency + C++23 std::stacktrace detection.
-# Complex custom logic — uses helios_dep_begin/end API.
+# Custom logic is intentional: Boost must cooperate with C++23 <stacktrace>
+# detection and expose several focused Helios wrapper targets.
 #
 # Usage: helios_require_dependency(Boost)
 
@@ -154,8 +155,8 @@ else()
     include(DownloadUsingCPM)
     helios_cpm_add_package(
         NAME Boost
-        VERSION 1.90.0
-        URL https://github.com/boostorg/boost/releases/download/boost-1.90.0/boost-1.90.0-cmake.tar.xz
+        VERSION 1.87.0
+        URL https://github.com/boostorg/boost/releases/download/boost-1.87.0/boost-1.87.0-cmake.tar.xz
         OPTIONS
             "BOOST_ENABLE_CMAKE ON"
             "BOOST_INCLUDE_LIBRARIES ${_boost_include_libs}"

@@ -2,7 +2,9 @@
 
 #if defined(HELIOS_APP_ENABLE_PROFILE) && \
     defined(HELIOS_MODULE_PROFILE_AVAILABLE)
+#ifndef HELIOS_ENABLE_PROFILE
 #define HELIOS_ENABLE_PROFILE
+#endif
 #include <helios/profile/macros.hpp>
 #include <helios/profile/tracy/lock.hpp>
 

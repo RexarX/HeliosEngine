@@ -1708,11 +1708,18 @@ template <typename Iter>
   requires EnumerateAdapterRequirements<Iter>
 constexpr auto EnumerateAdapter<Iter>::operator*() const -> reference {
   auto value = *current_;
+#if defined(_MSC_VER)
+#pragma warning(push)
+#pragma warning(disable : 4702)
+#endif
   if constexpr (details::TupleLike<decltype(value)>) {
     return std::tuple_cat(std::tuple{index_}, value);
   } else {
     return std::tuple{index_, value};
   }
+#if defined(_MSC_VER)
+#pragma warning(pop)
+#endif
 }
 
 /**

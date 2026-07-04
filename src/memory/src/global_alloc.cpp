@@ -1,9 +1,5 @@
 #include <helios/memory/details/profile.hpp>
 
-#include <cstddef>
-#include <cstdlib>
-#include <new>
-
 #ifdef HELIOS_MEMORY_USE_MIMALLOC
 #include <mimalloc.h>
 #endif
@@ -11,6 +7,10 @@
 #if defined(_MSC_VER) && defined(_DEBUG)
 #include <crtdbg.h>
 #endif
+
+#include <cstddef>
+#include <cstdlib>
+#include <new>
 
 // mimalloc global hooks bypass MSVC ASan-instrumented allocation. Route through
 // the CRT/debug heap when AddressSanitizer is enabled (MSVC /fsanitize=address
@@ -25,11 +25,6 @@ namespace {
     defined(HELIOS_MODULE_PROFILE_AVAILABLE)
 thread_local bool g_in_global_alloc_hook = false;
 #endif
-
-[[nodiscard]] constexpr size_t AlignUp(size_t value,
-                                       size_t alignment) noexcept {
-  return (value + alignment - 1) & ~(alignment - 1);
-}
 
 [[nodiscard]] void* RawAlloc(size_t size) noexcept {
 #ifdef HELIOS_GLOBAL_ALLOC_USE_MIMALLOC_BACKEND
@@ -53,7 +48,8 @@ thread_local bool g_in_global_alloc_hook = false;
   return _aligned_malloc(size, static_cast<size_t>(alignment));
 #else
   const auto align = static_cast<size_t>(alignment);
-  return std::aligned_alloc(align, AlignUp(size, align));
+  const size_t aligned = (size + align - 1) & ~(align - 1);
+  return std::aligned_alloc(align, aligned);
 #endif
 }
 
@@ -77,7 +73,8 @@ void RawAlignedFree(void* ptr) noexcept {
 #endif
 }
 
-void ProfileAlloc(const void* ptr, size_t size) noexcept {
+void ProfileAlloc([[maybe_unused]] const void* ptr,
+                  [[maybe_unused]] size_t size) noexcept {
 #if defined(HELIOS_MEMORY_ENABLE_PROFILE) && \
     defined(HELIOS_MODULE_PROFILE_AVAILABLE)
   if (ptr == nullptr || g_in_global_alloc_hook) {
@@ -87,13 +84,10 @@ void ProfileAlloc(const void* ptr, size_t size) noexcept {
   g_in_global_alloc_hook = true;
   HELIOS_MEMORY_GLOBAL_ALLOC_PROFILE_ALLOC(ptr, size);
   g_in_global_alloc_hook = false;
-#else
-  (void)ptr;
-  (void)size;
 #endif
 }
 
-void ProfileFree(const void* ptr) noexcept {
+void ProfileFree([[maybe_unused]] const void* ptr) noexcept {
 #if defined(HELIOS_MEMORY_ENABLE_PROFILE) && \
     defined(HELIOS_MODULE_PROFILE_AVAILABLE)
   if (ptr == nullptr || g_in_global_alloc_hook) {
@@ -103,8 +97,6 @@ void ProfileFree(const void* ptr) noexcept {
   g_in_global_alloc_hook = true;
   HELIOS_MEMORY_GLOBAL_ALLOC_PROFILE_FREE(ptr);
   g_in_global_alloc_hook = false;
-#else
-  (void)ptr;
 #endif
 }
 

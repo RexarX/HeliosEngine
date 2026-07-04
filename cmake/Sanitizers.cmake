@@ -32,9 +32,27 @@ include_guard(GLOBAL)
 
 # Sanitizers are a developer-only feature.
 if(NOT HELIOS_DEVELOPER_MODE)
+  #[[
+      helios_target_enable_sanitizers(<target>)
+
+      Developer-mode sanitizer hook. When HELIOS_DEVELOPER_MODE is OFF this is
+      a no-op so targets can call it unconditionally.
+
+      Example:
+          helios_target_enable_sanitizers(helios_module_core)
+  ]]
   function(helios_target_enable_sanitizers TARGET)
   endfunction()
 
+  #[[
+      helios_print_sanitizer_status()
+
+      Prints the sanitizer configuration summary. When developer mode is OFF it
+      reports that sanitizer support is disabled.
+
+      Example:
+          helios_print_sanitizer_status()
+  ]]
   function(helios_print_sanitizer_status)
     message(STATUS "Sanitizers: DISABLED (HELIOS_DEVELOPER_MODE=OFF)")
   endfunction()
@@ -203,28 +221,16 @@ if((HELIOS_COMPILER_IS_GNU OR HELIOS_COMPILER_IS_CLANG) AND HELIOS_ENABLE_SANITI
   endif()
 endif()
 
-# Build the sanitizer flags for MSVC
-function(_helios_get_msvc_sanitizer_flags OUT_COMPILE_FLAGS OUT_LINK_FLAGS)
-  set(_compile_flags "")
-  set(_link_flags "")
-
-  if(HELIOS_COMPILER_IS_MSVC OR HELIOS_COMPILER_IS_CLANG_CL)
-    if(HELIOS_SANITIZER_ADDRESS)
-      set(_compile_flags "/fsanitize=address")
-      # MSVC ASan doesn't require special linker flags
-    endif()
-  endif()
-
-  set(${OUT_COMPILE_FLAGS} "${_compile_flags}" PARENT_SCOPE)
-  set(${OUT_LINK_FLAGS} "${_link_flags}" PARENT_SCOPE)
-endfunction()
-
 # ============================================================================
 # Public API
 # ============================================================================
 
-# Enable sanitizers for a specific target
-# Usage: helios_target_enable_sanitizers(my_target)
+#[[
+    helios_target_enable_sanitizers(<target>)
+
+    Applies sanitizer instrumentation to a target when sanitizer policy is not
+    already handled globally for the active compiler.
+]]
 function(helios_target_enable_sanitizers TARGET)
   if(NOT HELIOS_ENABLE_SANITIZERS)
     return()
@@ -256,7 +262,11 @@ function(helios_target_enable_sanitizers TARGET)
   endif()
 endfunction()
 
-# Print sanitizer configuration status
+#[[
+    helios_print_sanitizer_status()
+
+    Prints the active sanitizer configuration.
+]]
 function(helios_print_sanitizer_status)
   if(NOT HELIOS_ENABLE_SANITIZERS)
     message(STATUS "Sanitizers: DISABLED")

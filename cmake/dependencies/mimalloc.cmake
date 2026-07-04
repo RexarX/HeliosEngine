@@ -10,7 +10,6 @@ helios_dependency(
         pkg_config mimalloc
 
     CPM_REPOSITORY microsoft/mimalloc
-    CPM_VERSION 3.3.2
     CPM_GIT_TAG v3.3.2
     CPM_OPTIONS
         "MI_BUILD_SHARED OFF"

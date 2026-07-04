@@ -2,6 +2,7 @@
 # Provides automatic dependency downloading as a fallback when system packages aren't available
 
 include_guard(GLOBAL)
+include(Primitives)
 
 # CPM configuration options
 set(CPM_DOWNLOAD_VERSION 0.40.2 CACHE STRING "CPM version to download")
@@ -72,12 +73,12 @@ if(NOT _cpm_path)
   message(STATUS "Downloading CPM.cmake v${CPM_DOWNLOAD_VERSION}...")
 
   file(
-        DOWNLOAD
-        "https://github.com/cpm-cmake/CPM.cmake/releases/download/v${CPM_DOWNLOAD_VERSION}/CPM.cmake"
-        "${CMAKE_BINARY_DIR}/cmake/CPM.cmake"
-        STATUS _cpm_download_status
-        SHOW_PROGRESS
-    )
+      DOWNLOAD
+      "https://github.com/cpm-cmake/CPM.cmake/releases/download/v${CPM_DOWNLOAD_VERSION}/CPM.cmake"
+      "${CMAKE_BINARY_DIR}/cmake/CPM.cmake"
+      STATUS _cpm_download_status
+      SHOW_PROGRESS
+  )
 
   # Check download status
   list(GET _cpm_download_status 0 _cpm_status_code)
@@ -103,7 +104,22 @@ if(NOT DEFINED CPM_PACKAGES)
   set(CPM_PACKAGES "" CACHE INTERNAL "List of packages downloaded via CPM")
 endif()
 
-# Wrapper around CPMAddPackage that tracks packages and marks them as system
+#[[
+    helios_cpm_add_package(
+        NAME <name>
+        [VERSION <version>]
+        [GIT_TAG <tag>]
+        [GITHUB_REPOSITORY <owner/repo>]
+        [URL <url>]
+        [SOURCE_SUBDIR <dir>]
+        [OPTIONS <options...>]
+        [DOWNLOAD_ONLY]
+        [EXCLUDE_FROM_ALL]
+        [SYSTEM]
+    )
+
+    Wraps CPMAddPackage with Helios dependency build-type and LTO isolation.
+]]
 macro(helios_cpm_add_package)
   set(options DOWNLOAD_ONLY EXCLUDE_FROM_ALL SYSTEM)
   set(oneValueArgs NAME VERSION GIT_TAG GITHUB_REPOSITORY URL SOURCE_SUBDIR)
@@ -192,14 +208,18 @@ macro(helios_cpm_add_package)
 
     message(STATUS "Downloaded ${CPM_ARG_NAME} via CPM")
 
-    # Note: SYSTEM marking is deferred - use helios_cpm_mark_as_system() function
+    # Note: SYSTEM marking is deferred; use helios_mark_system_includes().
     # after the package is fully processed to mark specific targets as system includes
   endif()
 
   unset(_cpm_args)
 endmacro()
 
-# Helper function to print all CPM packages
+#[[
+    helios_print_cpm_packages()
+
+    Prints packages downloaded through CPM during this configure run.
+]]
 function(helios_print_cpm_packages)
   if(CPM_PACKAGES)
     message(STATUS "========== CPM Downloaded Packages ==========")
@@ -218,7 +238,17 @@ function(helios_print_cpm_packages)
   endif()
 endfunction()
 
-# Convenience function for common package patterns
+#[[
+    helios_cpm_add_github_package(
+        NAME <name>
+        REPOSITORY <owner/repo>
+        [VERSION <version>]
+        [GIT_TAG <tag>]
+        [OPTIONS <options...>]
+    )
+
+    Convenience wrapper for GitHub-hosted CPM packages.
+]]
 function(helios_cpm_add_github_package)
   set(options)
   set(oneValueArgs NAME VERSION REPOSITORY GIT_TAG)
@@ -245,28 +275,6 @@ function(helios_cpm_add_github_package)
   endif()
 
   helios_cpm_add_package(${_args})
-endfunction()
-
-# Mark targets from CPM as system includes
-# This function can be called manually if automatic marking doesn't work
-function(helios_cpm_mark_as_system target)
-  if(TARGET ${target})
-    # Resolve ALIAS targets to their actual target
-    get_target_property(_aliased_target ${target} ALIASED_TARGET)
-    if(_aliased_target)
-      set(_actual_target ${_aliased_target})
-    else()
-      set(_actual_target ${target})
-    endif()
-
-    get_target_property(_include_dirs ${_actual_target} INTERFACE_INCLUDE_DIRECTORIES)
-    if(_include_dirs AND NOT _include_dirs STREQUAL "_include_dirs-NOTFOUND")
-      set_target_properties(${_actual_target} PROPERTIES
-                INTERFACE_SYSTEM_INCLUDE_DIRECTORIES "${_include_dirs}"
-            )
-      message(STATUS "Marked ${target} with SYSTEM includes")
-    endif()
-  endif()
 endfunction()
 
 # Configure CPM cache

@@ -6,8 +6,6 @@ helios_module(
     HEADERS
         include/helios/window/window.hpp
 
-    PCH src/pch.hpp
-
     USES
         glfw PUBLIC helios::lib::glfw::glfw
 )

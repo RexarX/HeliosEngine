@@ -3,7 +3,8 @@
 # TBB is required on Linux when using GCC's libstdc++ because the parallel STL
 # implementation uses TBB as its backend.
 #
-# Sourced from system packages only — no CPM download.
+# Custom logic is intentional: TBB is sourced from system packages only and may
+# be optional depending on platform/STL detection. No CPM download is used.
 
 # Check if already processed (handled by helios_require_dependency, but we
 # need early guard here to avoid duplicate processing of the body)
@@ -49,6 +50,7 @@ else()
       target_include_directories(TBB::tbb INTERFACE ${TBB_PKG_INCLUDE_DIRS})
       target_link_libraries(TBB::tbb INTERFACE ${TBB_PKG_LIBRARIES})
       target_link_directories(TBB::tbb INTERFACE ${TBB_PKG_LIBRARY_DIRS})
+      helios_mark_system_includes(TBB::tbb)
     endif()
   endif()
 endif()
@@ -58,9 +60,11 @@ helios_dep_mark_processed(NAME "TBB")
 if(NOT TARGET helios::lib::tbb::tbb)
   if(TARGET TBB::tbb)
     add_library(helios::lib::tbb::tbb ALIAS TBB::tbb)
+    helios_mark_system_includes(TBB::tbb)
     set(HELIOS_HAS_SYSTEM_TBB TRUE CACHE INTERNAL "System TBB is available")
   elseif(TARGET TBB::TBB)
     add_library(helios::lib::tbb::tbb ALIAS TBB::TBB)
+    helios_mark_system_includes(TBB::TBB)
     set(HELIOS_HAS_SYSTEM_TBB TRUE CACHE INTERNAL "System TBB is available")
   else()
     set(HELIOS_HAS_SYSTEM_TBB FALSE CACHE INTERNAL "System TBB is not available")

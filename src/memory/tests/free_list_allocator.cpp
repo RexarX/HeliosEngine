@@ -7,6 +7,7 @@
 #include <cstdint>
 #include <memory_resource>
 #include <thread>
+#include <tuple>
 #include <vector>
 
 using namespace helios::mem;
@@ -80,7 +81,7 @@ TEST_SUITE("helios::mem::FreeListAllocator") {
   TEST_CASE("mem::FreeListAllocator::ctor(FreeListAllocator&&)") {
     SUBCASE("Moved-into allocator carries allocation state") {
       FreeListAllocator source(kMinCap);
-      [[maybe_unused]] const void* _ = source.allocate(32, kAlign);
+      std::ignore = source.allocate(32, kAlign);
 
       FreeListAllocator moved(std::move(source));
 
@@ -95,7 +96,7 @@ TEST_SUITE("helios::mem::FreeListAllocator") {
 
     SUBCASE("Source is empty after move") {
       FreeListAllocator source(kMinCap);
-      [[maybe_unused]] const void* _ = source.allocate(32, kAlign);
+      std::ignore = source.allocate(32, kAlign);
 
       FreeListAllocator moved(std::move(source));
 
@@ -106,7 +107,7 @@ TEST_SUITE("helios::mem::FreeListAllocator") {
   TEST_CASE("mem::FreeListAllocator::operator=(FreeListAllocator&&)") {
     SUBCASE("Target acquires source state") {
       FreeListAllocator source(kMinCap);
-      [[maybe_unused]] const void* _ = source.allocate(32, kAlign);
+      std::ignore = source.allocate(32, kAlign);
       FreeListAllocator target(kMinCap);
 
       target = std::move(source);
@@ -125,7 +126,7 @@ TEST_SUITE("helios::mem::FreeListAllocator") {
 
     SUBCASE("Self move assignment does not corrupt state") {
       FreeListAllocator alloc(kMinCap);
-      [[maybe_unused]] const void* _ = alloc.allocate(16, kAlign);
+      std::ignore = alloc.allocate(16, kAlign);
       FreeListAllocator& ref = alloc;
 
       ref = std::move(alloc);  // NOLINT(clang-diagnostic-self-move)
@@ -137,7 +138,7 @@ TEST_SUITE("helios::mem::FreeListAllocator") {
   TEST_CASE("mem::FreeListAllocator::Reset") {
     SUBCASE("Empty returns true after Reset") {
       FreeListAllocator alloc(kMinCap);
-      [[maybe_unused]] const void* _ = alloc.allocate(32, kAlign);
+      std::ignore = alloc.allocate(32, kAlign);
 
       alloc.Reset();
 
@@ -146,7 +147,7 @@ TEST_SUITE("helios::mem::FreeListAllocator") {
 
     SUBCASE("AllocationCount is zero after Reset") {
       FreeListAllocator alloc(kMinCap);
-      [[maybe_unused]] const void* _ = alloc.allocate(32, kAlign);
+      std::ignore = alloc.allocate(32, kAlign);
 
       alloc.Reset();
 
@@ -155,7 +156,7 @@ TEST_SUITE("helios::mem::FreeListAllocator") {
 
     SUBCASE("Stats counters are zeroed after Reset") {
       FreeListAllocator alloc(kMinCap);
-      [[maybe_unused]] const void* _ = alloc.allocate(32, kAlign);
+      std::ignore = alloc.allocate(32, kAlign);
 
       alloc.Reset();
 
@@ -167,14 +168,14 @@ TEST_SUITE("helios::mem::FreeListAllocator") {
 
     SUBCASE("UsedMemory is zero after Reset") {
       FreeListAllocator alloc(kMinCap);
-      [[maybe_unused]] const void* _ = alloc.allocate(32, kAlign);
+      std::ignore = alloc.allocate(32, kAlign);
       alloc.Reset();
       CHECK_EQ(alloc.UsedMemory(), 0);
     }
 
     SUBCASE("Allocation succeeds after Reset") {
       FreeListAllocator alloc(kMinCap);
-      [[maybe_unused]] const void* _ = alloc.allocate(64, kAlign);
+      std::ignore = alloc.allocate(64, kAlign);
       alloc.Reset();
       void* const ptr = alloc.allocate(32, kAlign);
       CHECK_NE(ptr, nullptr);
@@ -182,7 +183,7 @@ TEST_SUITE("helios::mem::FreeListAllocator") {
 
     SUBCASE("Capacity is preserved across Reset (regions not freed)") {
       FreeListAllocator alloc(GrowingOptions());
-      [[maybe_unused]] const void* _ = alloc.allocate(32, kAlign);
+      std::ignore = alloc.allocate(32, kAlign);
       const size_t cap_before = alloc.Capacity();
       alloc.Reset();
       CHECK_EQ(alloc.Capacity(), cap_before);
@@ -197,7 +198,7 @@ TEST_SUITE("helios::mem::FreeListAllocator") {
 
     SUBCASE("Returns false after allocation") {
       FreeListAllocator alloc(kMinCap);
-      [[maybe_unused]] const void* _ = alloc.allocate(16, kAlign);
+      std::ignore = alloc.allocate(16, kAlign);
       CHECK_FALSE(alloc.Empty());
     }
 
@@ -212,7 +213,7 @@ TEST_SUITE("helios::mem::FreeListAllocator") {
 
     SUBCASE("Returns true after Reset") {
       FreeListAllocator alloc(kMinCap);
-      [[maybe_unused]] const void* _ = alloc.allocate(32, kAlign);
+      std::ignore = alloc.allocate(32, kAlign);
       alloc.Reset();
       CHECK(alloc.Empty());
     }
@@ -268,8 +269,8 @@ TEST_SUITE("helios::mem::FreeListAllocator") {
     SUBCASE("total_allocations counts every allocate call") {
       FreeListAllocator alloc(kMinCap);
 
-      const void* ptr = alloc.allocate(16, kAlign);
-      ptr = alloc.allocate(16, kAlign);
+      std::ignore = alloc.allocate(16, kAlign);
+      std::ignore = alloc.allocate(16, kAlign);
 
       CHECK_EQ(alloc.Stats().total_allocations, 2);
     }
@@ -278,7 +279,7 @@ TEST_SUITE("helios::mem::FreeListAllocator") {
       FreeListAllocator alloc(kMinCap);
 
       void* const first = alloc.allocate(16, kAlign);
-      [[maybe_unused]] const void* _ = alloc.allocate(16, kAlign);
+      std::ignore = alloc.allocate(16, kAlign);
 
       CHECK_EQ(alloc.Stats().allocation_count, 2);
       alloc.deallocate(first, 16, kAlign);
@@ -339,7 +340,7 @@ TEST_SUITE("helios::mem::FreeListAllocator") {
 
     SUBCASE("Increases after allocation") {
       FreeListAllocator alloc(kMinCap);
-      [[maybe_unused]] const void* _ = alloc.allocate(64, kAlign);
+      std::ignore = alloc.allocate(64, kAlign);
       CHECK_GT(alloc.UsedMemory(), 0);
     }
 
@@ -380,7 +381,7 @@ TEST_SUITE("helios::mem::FreeListAllocator") {
       FreeListAllocator alloc(kMinCap);
 
       const size_t free_before = alloc.FreeMemory();
-      [[maybe_unused]] const void* _ = alloc.allocate(64, kAlign);
+      std::ignore = alloc.allocate(64, kAlign);
 
       CHECK_LT(alloc.FreeMemory(), free_before);
     }
@@ -439,9 +440,9 @@ TEST_SUITE("helios::mem::FreeListAllocator") {
     SUBCASE("Increases by one per allocate call") {
       FreeListAllocator alloc(kMinCap);
 
-      const void* ptr = alloc.allocate(16, kAlign);
+      std::ignore = alloc.allocate(16, kAlign);
       CHECK_EQ(alloc.AllocationCount(), 1);
-      ptr = alloc.allocate(16, kAlign);
+      std::ignore = alloc.allocate(16, kAlign);
       CHECK_EQ(alloc.AllocationCount(), 2);
     }
 
@@ -474,7 +475,7 @@ TEST_SUITE("helios::mem::FreeListAllocator") {
 
     SUBCASE("Unchanged by allocations") {
       FreeListAllocator alloc(kMinCap);
-      [[maybe_unused]] const void* _ = alloc.allocate(32, kAlign);
+      std::ignore = alloc.allocate(32, kAlign);
       CHECK_EQ(alloc.Growth().max_capacity,
                GrowthPolicy::Geometric().max_capacity);
     }
@@ -603,7 +604,7 @@ TEST_SUITE("helios::mem::FreeListAllocator") {
       for (size_t j = 0; j < kThreads; ++j) {
         threads.emplace_back([&alloc] {
           for (size_t i = 0; i < kAllocsPerThread; ++i) {
-            [[maybe_unused]] const void* _ = alloc.allocate(8, kAlign);
+            std::ignore = alloc.allocate(8, kAlign);
           }
         });
       }

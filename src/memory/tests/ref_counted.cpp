@@ -7,6 +7,7 @@
 #include <cstdint>
 #include <memory>
 #include <thread>
+#include <tuple>
 #include <vector>
 
 namespace {
@@ -243,7 +244,14 @@ TEST_SUITE("helios::mem::RefCounted") {
     auto rc = MakeRc<Widget>(11);
     auto* raw = rc.Get();
 
+#if defined(__GNUC__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wself-move"
+#endif
     rc = std::move(rc);  // NOLINT(bugprone-move-forwarding-reference)
+#if defined(__GNUC__)
+#pragma GCC diagnostic pop
+#endif
 
     (void)raw;
     CHECK_EQ(rc.RefCount(), rc.Empty() ? 0 : 1);
@@ -453,7 +461,7 @@ TEST_SUITE("helios::mem::RefCounted") {
     std::pmr::monotonic_buffer_resource mbr;
     auto rc = MakeRcWith<Widget>(&mbr, 1111);
 
-    const auto& alloc = rc.GetAllocator();
+    [[maybe_unused]] const auto& alloc = rc.GetAllocator();
     // Verify it's a polymorphic_allocator by checking ref count still works
     CHECK_EQ(rc.RefCount(), 1);
   }
@@ -846,7 +854,7 @@ TEST_SUITE("helios::mem::AtomicRefCounted") {
     std::pmr::monotonic_buffer_resource mbr;
     auto arc = MakeArcWith<Texture>(&mbr, 2222);
 
-    const auto& alloc = arc.GetAllocator();
+    [[maybe_unused]] const auto& alloc = arc.GetAllocator();
     // Verify it's a polymorphic_allocator by checking ref count still works
     CHECK_EQ(arc.RefCount(), 1);
   }

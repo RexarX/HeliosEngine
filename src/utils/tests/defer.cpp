@@ -167,8 +167,8 @@ TEST_SUITE("helios::utils::Defer") {
       CHECK(vec.empty());
     }
     REQUIRE_EQ(vec.size(), 5);
-    for (int i = 0; i < 5; ++i) {
-      CHECK_EQ(vec[i], i);
+    for (size_t i = 0; i < 5; ++i) {
+      CHECK_EQ(vec[i], static_cast<int>(i));
     }
   }
 

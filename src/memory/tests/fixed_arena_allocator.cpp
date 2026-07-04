@@ -9,6 +9,7 @@
 #include <cstdint>
 #include <memory_resource>
 #include <thread>
+#include <tuple>
 #include <vector>
 
 using namespace helios::mem;
@@ -59,7 +60,7 @@ TEST_SUITE("helios::mem::FixedArenaAllocator") {
 
     SUBCASE("Moved-into arena carries existing allocation state") {
       FixedArenaAllocator source(kCapacity);
-      [[maybe_unused]] const void* _ = source.allocate(64, kAlign);
+      std::ignore = source.allocate(64, kAlign);
       const FixedArenaAllocator moved(std::move(source));
       CHECK_FALSE(moved.Empty());
       CHECK_EQ(moved.Stats().allocation_count, 1);
@@ -67,14 +68,14 @@ TEST_SUITE("helios::mem::FixedArenaAllocator") {
 
     SUBCASE("Source is empty after move") {
       FixedArenaAllocator source(kCapacity);
-      [[maybe_unused]] const void* _ = source.allocate(32, kAlign);
+      std::ignore = source.allocate(32, kAlign);
       const FixedArenaAllocator moved(std::move(source));
       CHECK(source.Empty());
     }
 
     SUBCASE("Source stats are zeroed after move") {
       FixedArenaAllocator source(kCapacity);
-      [[maybe_unused]] const void* _ = source.allocate(32, kAlign);
+      std::ignore = source.allocate(32, kAlign);
       const FixedArenaAllocator moved(std::move(source));
       CHECK_EQ(source.Stats().allocation_count, 0);
       CHECK_EQ(source.Stats().total_allocated, 0);
@@ -90,7 +91,7 @@ TEST_SUITE("helios::mem::FixedArenaAllocator") {
   TEST_CASE("mem::FixedArenaAllocator::operator=(FixedArenaAllocator&&)") {
     SUBCASE("Target acquires source allocation state") {
       FixedArenaAllocator source(kCapacity);
-      [[maybe_unused]] const void* _ = source.allocate(32, kAlign);
+      std::ignore = source.allocate(32, kAlign);
       FixedArenaAllocator target(kCapacity);
 
       target = std::move(source);
@@ -101,7 +102,7 @@ TEST_SUITE("helios::mem::FixedArenaAllocator") {
 
     SUBCASE("Source is empty after move assign") {
       FixedArenaAllocator source(kCapacity);
-      [[maybe_unused]] const void* _ = source.allocate(32, kAlign);
+      std::ignore = source.allocate(32, kAlign);
       FixedArenaAllocator target(kCapacity);
 
       target = std::move(source);
@@ -112,7 +113,7 @@ TEST_SUITE("helios::mem::FixedArenaAllocator") {
 
     SUBCASE("Self move assignment does not corrupt state") {
       FixedArenaAllocator arena(kCapacity);
-      [[maybe_unused]] const void* _ = arena.allocate(16, kAlign);
+      std::ignore = arena.allocate(16, kAlign);
       FixedArenaAllocator& ref = arena;
 
       ref = std::move(arena);  // NOLINT(clang-diagnostic-self-move)
@@ -136,21 +137,21 @@ TEST_SUITE("helios::mem::FixedArenaAllocator") {
   TEST_CASE("mem::FixedArenaAllocator::Reset") {
     SUBCASE("Empty returns true after Reset") {
       FixedArenaAllocator arena(kCapacity);
-      [[maybe_unused]] const void* _ = arena.allocate(128, kAlign);
+      std::ignore = arena.allocate(128, kAlign);
       arena.Reset();
       CHECK(arena.Empty());
     }
 
     SUBCASE("TotalCapacity remains unchanged after Reset") {
       FixedArenaAllocator arena(kCapacity);
-      [[maybe_unused]] const void* _ = arena.allocate(128, kAlign);
+      std::ignore = arena.allocate(128, kAlign);
       arena.Reset();
       CHECK_EQ(arena.TotalCapacity(), kCapacity);
     }
 
     SUBCASE("Stats counters are zeroed after Reset") {
       FixedArenaAllocator arena(kCapacity);
-      [[maybe_unused]] const void* _ = arena.allocate(64, kAlign);
+      std::ignore = arena.allocate(64, kAlign);
       arena.Reset();
       const AllocatorStats stats = arena.Stats();
       CHECK_EQ(stats.total_allocated, 0);
@@ -163,7 +164,7 @@ TEST_SUITE("helios::mem::FixedArenaAllocator") {
 
     SUBCASE("Allocations succeed after Reset") {
       FixedArenaAllocator arena(kCapacity);
-      [[maybe_unused]] const void* _ = arena.allocate(512, kAlign);
+      std::ignore = arena.allocate(512, kAlign);
       arena.Reset();
       void* const ptr = arena.allocate(64, kAlign);
       CHECK_NE(ptr, nullptr);
@@ -178,13 +179,13 @@ TEST_SUITE("helios::mem::FixedArenaAllocator") {
 
     SUBCASE("Returns false after one allocation") {
       FixedArenaAllocator arena(kCapacity);
-      [[maybe_unused]] const void* _ = arena.allocate(8, kAlign);
+      std::ignore = arena.allocate(8, kAlign);
       CHECK_FALSE(arena.Empty());
     }
 
     SUBCASE("Returns true after Reset") {
       FixedArenaAllocator arena(kCapacity);
-      [[maybe_unused]] const void* _ = arena.allocate(8, kAlign);
+      std::ignore = arena.allocate(8, kAlign);
       arena.Reset();
       CHECK(arena.Empty());
     }
@@ -252,23 +253,23 @@ TEST_SUITE("helios::mem::FixedArenaAllocator") {
 
     SUBCASE("total_allocated reflects bump offset after allocations") {
       FixedArenaAllocator arena(kCapacity);
-      const void* ptr = arena.allocate(64, kAlign);
-      ptr = arena.allocate(128, kAlign);
+      std::ignore = arena.allocate(64, kAlign);
+      std::ignore = arena.allocate(128, kAlign);
       CHECK_GE(arena.Stats().total_allocated, 192);
     }
 
     SUBCASE("allocation_count tracks live allocation count") {
       FixedArenaAllocator arena(kCapacity);
-      const void* ptr = arena.allocate(32, kAlign);
-      ptr = arena.allocate(32, kAlign);
+      std::ignore = arena.allocate(32, kAlign);
+      std::ignore = arena.allocate(32, kAlign);
       CHECK_EQ(arena.Stats().allocation_count, 2);
     }
 
     SUBCASE("total_allocations counts every allocate call") {
       FixedArenaAllocator arena(kCapacity);
-      const void* ptr = arena.allocate(16, kAlign);
-      ptr = arena.allocate(16, kAlign);
-      ptr = arena.allocate(16, kAlign);
+      std::ignore = arena.allocate(16, kAlign);
+      std::ignore = arena.allocate(16, kAlign);
+      std::ignore = arena.allocate(16, kAlign);
       CHECK_EQ(arena.Stats().total_allocations, 3);
     }
 
@@ -283,14 +284,14 @@ TEST_SUITE("helios::mem::FixedArenaAllocator") {
 
     SUBCASE("peak_usage is at least total bytes allocated at high watermark") {
       FixedArenaAllocator arena(kCapacity);
-      const void* ptr = arena.allocate(256, kAlign);
-      ptr = arena.allocate(128, kAlign);
+      std::ignore = arena.allocate(256, kAlign);
+      std::ignore = arena.allocate(128, kAlign);
       CHECK_GE(arena.Stats().peak_usage, 256);
     }
 
     SUBCASE("alignment_waste is non-negative with large alignment request") {
       FixedArenaAllocator arena(kCapacity);
-      [[maybe_unused]] const void* _ = arena.allocate(1, 64);
+      std::ignore = arena.allocate(1, 64);
       CHECK_GE(arena.Stats().alignment_waste, 0);
     }
   }
@@ -303,13 +304,13 @@ TEST_SUITE("helios::mem::FixedArenaAllocator") {
 
     SUBCASE("Unchanged by allocations") {
       FixedArenaAllocator arena(kCapacity);
-      [[maybe_unused]] const void* _ = arena.allocate(512, kAlign);
+      std::ignore = arena.allocate(512, kAlign);
       CHECK_EQ(arena.InitialCapacity(), kCapacity);
     }
 
     SUBCASE("Unchanged after Reset") {
       FixedArenaAllocator arena(kCapacity);
-      [[maybe_unused]] const void* _ = arena.allocate(512, kAlign);
+      std::ignore = arena.allocate(512, kAlign);
       arena.Reset();
       CHECK_EQ(arena.InitialCapacity(), kCapacity);
     }
@@ -323,13 +324,13 @@ TEST_SUITE("helios::mem::FixedArenaAllocator") {
 
     SUBCASE("Unchanged by allocations") {
       FixedArenaAllocator arena(kCapacity);
-      [[maybe_unused]] const void* _ = arena.allocate(512, kAlign);
+      std::ignore = arena.allocate(512, kAlign);
       CHECK_EQ(arena.TotalCapacity(), kCapacity);
     }
 
     SUBCASE("Unchanged after Reset") {
       FixedArenaAllocator arena(kCapacity);
-      [[maybe_unused]] const void* _ = arena.allocate(512, kAlign);
+      std::ignore = arena.allocate(512, kAlign);
       arena.Reset();
       CHECK_EQ(arena.TotalCapacity(), kCapacity);
     }
@@ -448,7 +449,7 @@ TEST_SUITE("helios::mem::FixedArenaAllocator") {
       for (size_t j = 0; j < kThreads; ++j) {
         threads.emplace_back([&arena] {
           for (size_t i = 0; i < kAllocsPerThread; ++i) {
-            [[maybe_unused]] const void* _ = arena.allocate(8, kAlign);
+            std::ignore = arena.allocate(8, kAlign);
           }
         });
       }

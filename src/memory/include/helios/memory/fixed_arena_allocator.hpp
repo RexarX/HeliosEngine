@@ -9,7 +9,6 @@
 #include <cstddef>
 #include <cstdint>
 #include <memory_resource>
-#include <utility>
 
 namespace helios::mem {
 

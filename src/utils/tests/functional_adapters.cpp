@@ -1805,7 +1805,7 @@ TEST_SUITE("helios::utils::FunctionalAdapters") {
       std::vector<int> first = {1, 2, 3, 4, 5};
       std::vector<int> second = {10, 20, 30, 40, 50};
       auto result = ZipAdapter(first, second)
-                        .Filter([](int a, int b) { return a % 2 == 0; })
+                        .Filter([](int a, int /*b*/) { return a % 2 == 0; })
                         .Collect();
 
       CHECK_EQ(result.size(), 2);

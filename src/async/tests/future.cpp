@@ -300,18 +300,19 @@ TEST_SUITE("helios::async::Future") {
     Executor executor(4);
 
     SUBCASE("Multiple independent futures") {
-      constexpr int NUM_FUTURES = 5;
-      std::array<Future<void>, NUM_FUTURES> futures = {};
-      std::vector<int> results(NUM_FUTURES);
+      constexpr size_t kNumFutures = 5;
+      std::array<Future<void>, kNumFutures> futures = {};
+      std::vector<int> results(kNumFutures);
 
-      for (int i = 0; i < NUM_FUTURES; ++i) {
-        TaskGraph graph(std::format("IndependentGraph{}", std::to_string(i)));
-        graph.EmplaceTask([&results, i]() { results[i] = i * 10; });
+      for (size_t i = 0; i < kNumFutures; ++i) {
+        TaskGraph graph(std::format("IndependentGraph{}", i));
+        graph.EmplaceTask(
+            [&results, i]() { results[i] = static_cast<int>(i * 10); });
         futures[i] = executor.Run(std::move(graph));
       }
 
       // Wait for all and check results
-      for (int i = 0; i < NUM_FUTURES; ++i) {
+      for (size_t i = 0; i < kNumFutures; ++i) {
         auto& future = futures[i];
         CHECK(future.Valid());
         auto status = future.WaitFor(std::chrono::milliseconds(1000));
@@ -322,8 +323,8 @@ TEST_SUITE("helios::async::Future") {
         CHECK(future.Valid());
       }
 
-      for (int i = 0; i < NUM_FUTURES; ++i) {
-        CHECK_EQ(results[i], i * 10);
+      for (size_t i = 0; i < kNumFutures; ++i) {
+        CHECK_EQ(results[i], static_cast<int>(i * 10));
       }
     }
 

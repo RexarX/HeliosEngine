@@ -86,8 +86,7 @@ using FastRandomEngine = std::minstd_rand;
  * @return `DefaultRandomEngine` instance seeded with `std::random_device`
  */
 [[nodiscard]] inline DefaultRandomEngine MakeDefaultEngine() {
-  return DefaultRandomEngine{
-      static_cast<DefaultRandomEngine::result_type>(RandomDeviceSeed())};
+  return DefaultRandomEngine{RandomDeviceSeed()};
 }
 
 /**

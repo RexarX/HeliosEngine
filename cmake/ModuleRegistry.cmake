@@ -1,29 +1,43 @@
 # Helios Engine Module Registry
 #
-# Handles module registration, dependency resolution, validation,
-# and circular dependency checking.
+# Stores module metadata gathered during discovery and resolves enabled module
+# dependencies before targets are created.
 
 include_guard(GLOBAL)
 
-# ============================================================================
-# Public Registration API
-# ============================================================================
+include(Primitives)
 
-# Function: helios_preregister_module
-#
-# Lightweight pre-registration for when a module must appear in the
-# dependency graph before its CMakeLists.txt is processed. Called from
-# Module.cmake or during the dry-run registration pass of helios_module.
-#
-function(helios_preregister_module)
+#[[
+    helios_register_module(
+        NAME <name>
+        [DESCRIPTION <text>]
+        [VERSION <version>]
+        [DEFAULT <ON|OFF>]
+        [HEADER_ONLY]
+        [DEPENDS <visibility> <module>...]
+        [OPTIONAL_DEPENDS <visibility> <module>...]
+    )
+
+    Registers a module in the dependency graph. Visibility markers are accepted
+    for authoring symmetry with helios_module(), but the cached graph stores
+    bare module names.
+
+    Example:
+        helios_register_module(
+            NAME app
+            DEFAULT ON
+            DEPENDS PUBLIC async PUBLIC core PUBLIC ecs
+            OPTIONAL_DEPENDS PUBLIC profile
+        )
+]]
+function(helios_register_module)
   set(options HEADER_ONLY)
   set(oneValueArgs NAME DESCRIPTION DEFAULT VERSION)
   set(multiValueArgs DEPENDS OPTIONAL_DEPENDS)
-
   cmake_parse_arguments(MODULE "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
   if(NOT MODULE_NAME)
-    message(FATAL_ERROR "helios_preregister_module: NAME is required")
+    message(FATAL_ERROR "helios_register_module: NAME is required")
   endif()
 
   string(TOUPPER "${MODULE_NAME}" _upper_name)
@@ -32,35 +46,45 @@ function(helios_preregister_module)
   if(NOT DEFINED MODULE_DEFAULT)
     set(MODULE_DEFAULT ON)
   endif()
-
   if(NOT MODULE_DESCRIPTION)
     set(MODULE_DESCRIPTION "Build the ${MODULE_NAME} module")
   endif()
+  if(NOT MODULE_VERSION)
+    set(MODULE_VERSION "0.1.0")
+  endif()
 
-  # Create the build option only if not already defined
+  if(MODULE_DEPENDS)
+    helios_parse_visibility(
+        INPUT ${MODULE_DEPENDS}
+        PUBLIC_VAR _unused_public
+        PRIVATE_VAR _unused_private
+        INTERFACE_VAR _unused_interface
+        STRIP_VAR _depends_stripped
+    )
+  else()
+    set(_depends_stripped)
+  endif()
+
+  if(MODULE_OPTIONAL_DEPENDS)
+    helios_parse_visibility(
+        INPUT ${MODULE_OPTIONAL_DEPENDS}
+        PUBLIC_VAR _unused_public
+        PRIVATE_VAR _unused_private
+        INTERFACE_VAR _unused_interface
+        STRIP_VAR _optional_depends_stripped
+    )
+  else()
+    set(_optional_depends_stripped)
+  endif()
+
   if(NOT DEFINED ${_option_name})
     option(${_option_name} "${MODULE_DESCRIPTION}" ${MODULE_DEFAULT})
   endif()
 
   set(HELIOS_MODULE_${_upper_name}_REGISTERED TRUE CACHE INTERNAL "Module ${MODULE_NAME} is registered")
-
-  if(MODULE_DEPENDS)
-    set(HELIOS_MODULE_${_upper_name}_DEPENDS "${MODULE_DEPENDS}" CACHE INTERNAL "Dependencies for ${MODULE_NAME}")
-  else()
-    set(HELIOS_MODULE_${_upper_name}_DEPENDS "" CACHE INTERNAL "Dependencies for ${MODULE_NAME}")
-  endif()
-
-  if(MODULE_OPTIONAL_DEPENDS)
-    set(HELIOS_MODULE_${_upper_name}_OPTIONAL_DEPENDS "${MODULE_OPTIONAL_DEPENDS}" CACHE INTERNAL "Optional dependencies for ${MODULE_NAME}")
-  else()
-    set(HELIOS_MODULE_${_upper_name}_OPTIONAL_DEPENDS "" CACHE INTERNAL "Optional dependencies for ${MODULE_NAME}")
-  endif()
-
-  if(MODULE_VERSION)
-    set(HELIOS_MODULE_${_upper_name}_VERSION "${MODULE_VERSION}" CACHE INTERNAL "Version of ${MODULE_NAME}")
-  else()
-    set(HELIOS_MODULE_${_upper_name}_VERSION "0.1.0" CACHE INTERNAL "Version of ${MODULE_NAME}")
-  endif()
+  set(HELIOS_MODULE_${_upper_name}_DEPENDS "${_depends_stripped}" CACHE INTERNAL "Dependencies for ${MODULE_NAME}")
+  set(HELIOS_MODULE_${_upper_name}_OPTIONAL_DEPENDS "${_optional_depends_stripped}" CACHE INTERNAL "Optional dependencies for ${MODULE_NAME}")
+  set(HELIOS_MODULE_${_upper_name}_VERSION "${MODULE_VERSION}" CACHE INTERNAL "Version of ${MODULE_NAME}")
 
   if(MODULE_HEADER_ONLY)
     set(HELIOS_MODULE_${_upper_name}_HEADER_ONLY TRUE CACHE INTERNAL "Module ${MODULE_NAME} is header-only")
@@ -69,27 +93,21 @@ function(helios_preregister_module)
   endif()
 
   get_property(_registered GLOBAL PROPERTY HELIOS_REGISTERED_MODULES)
-  if(NOT "${MODULE_NAME}" IN_LIST _registered)
+  if(NOT _registered)
+    set(_registered)
+  endif()
+  if(NOT MODULE_NAME IN_LIST _registered)
     set_property(GLOBAL APPEND PROPERTY HELIOS_REGISTERED_MODULES ${MODULE_NAME})
   endif()
 
-  message(STATUS "Registered module: ${MODULE_NAME} v${HELIOS_MODULE_${_upper_name}_VERSION} (${_option_name}=${${_option_name}})")
+  message(STATUS "Registered module: ${MODULE_NAME} v${MODULE_VERSION} (${_option_name}=${${_option_name}})")
 endfunction()
 
-# Function: helios_register_module
-#
-# Registers a module in the dependency graph before its CMakeLists.txt is
-# processed. Called from Module.cmake or during the dry-run registration pass
-# of helios_module (when no Module.cmake exists).
-#
-function(helios_register_module)
-  helios_preregister_module(${ARGN})
-endfunction()
+#[[
+    helios_module_enabled(<name> <output_var>)
 
-# ============================================================================
-# Module Status Queries
-# ============================================================================
-
+    Sets output_var to TRUE when HELIOS_BUILD_<NAME> is enabled.
+]]
 function(helios_module_enabled NAME OUTPUT_VAR)
   string(TOUPPER "${NAME}" _upper_name)
   set(_option_name "HELIOS_BUILD_${_upper_name}")
@@ -101,6 +119,11 @@ function(helios_module_enabled NAME OUTPUT_VAR)
   endif()
 endfunction()
 
+#[[
+    helios_module_is_header_only(<name> <output_var>)
+
+    Sets output_var to TRUE when the registered module has no source files.
+]]
 function(helios_module_is_header_only NAME OUTPUT_VAR)
   string(TOUPPER "${NAME}" _upper_name)
 
@@ -111,13 +134,14 @@ function(helios_module_is_header_only NAME OUTPUT_VAR)
   endif()
 endfunction()
 
-# ============================================================================
-# Dependency Resolution
-# ============================================================================
+#[[
+    helios_resolve_module_dependencies()
 
+    Forces required dependencies of enabled modules on until the enabled module
+    set reaches a fixed point.
+]]
 function(helios_resolve_module_dependencies)
   get_property(_modules GLOBAL PROPERTY HELIOS_REGISTERED_MODULES)
-
   if(NOT _modules)
     return()
   endif()
@@ -128,119 +152,63 @@ function(helios_resolve_module_dependencies)
     set(_changed FALSE)
     math(EXPR _iterations "${_iterations} + 1")
 
-    foreach(_module ${_modules})
+    foreach(_module IN LISTS _modules)
       helios_module_enabled(${_module} _is_enabled)
-
-      if(_is_enabled)
-        string(TOUPPER "${_module}" _upper_name)
-        set(_deps ${HELIOS_MODULE_${_upper_name}_DEPENDS})
-
-        foreach(_dep ${_deps})
-          helios_module_enabled(${_dep} _dep_enabled)
-
-          if(NOT _dep_enabled)
-            string(TOUPPER "${_dep}" _dep_upper)
-            set(_dep_option "HELIOS_BUILD_${_dep_upper}")
-            message(STATUS "Enabling module '${_dep}' (required by '${_module}')")
-            set(${_dep_option} ON CACHE BOOL "Build the ${_dep} module" FORCE)
-            set(_changed TRUE)
-          endif()
-        endforeach()
+      if(NOT _is_enabled)
+        continue()
       endif()
+
+      string(TOUPPER "${_module}" _upper_name)
+      foreach(_dep IN LISTS HELIOS_MODULE_${_upper_name}_DEPENDS)
+        helios_module_enabled(${_dep} _dep_enabled)
+        if(NOT _dep_enabled)
+          string(TOUPPER "${_dep}" _dep_upper)
+          set(_dep_option "HELIOS_BUILD_${_dep_upper}")
+          message(STATUS "Enabling module '${_dep}' (required by '${_module}')")
+          set(${_dep_option} ON CACHE BOOL "Build the ${_dep} module" FORCE)
+          set(_changed TRUE)
+        endif()
+      endforeach()
     endforeach()
   endwhile()
 
   if(_iterations GREATER_EQUAL 100)
-    message(WARNING "Module dependency resolution reached iteration limit. Possible circular dependency.")
+    message(FATAL_ERROR "Module dependency resolution reached iteration limit. Possible circular dependency.")
   endif()
 endfunction()
 
+#[[
+    helios_validate_module_dependencies()
+
+    Fails configure when an enabled module has a required dependency that remains
+    disabled after dependency resolution.
+]]
 function(helios_validate_module_dependencies)
   get_property(_modules GLOBAL PROPERTY HELIOS_REGISTERED_MODULES)
-
-  foreach(_module ${_modules})
-    helios_module_enabled(${_module} _is_enabled)
-
-    if(_is_enabled)
-      string(TOUPPER "${_module}" _upper_name)
-
-      set(_deps ${HELIOS_MODULE_${_upper_name}_DEPENDS})
-      foreach(_dep ${_deps})
-        helios_module_enabled(${_dep} _dep_enabled)
-        if(NOT _dep_enabled)
-          string(TOUPPER "${_dep}" _upper_dep)
-          message(FATAL_ERROR
-              "Module '${_module}' requires module '${_dep}', but it is disabled. "
-              "Enable it with -DHELIOS_BUILD_${_upper_dep}=ON")
-        endif()
-      endforeach()
-    endif()
-  endforeach()
-endfunction()
-
-function(helios_check_circular_dependencies)
-  get_property(_modules GLOBAL PROPERTY HELIOS_REGISTERED_MODULES)
-
-  if(NOT _modules)
-    return()
-  endif()
-
-  foreach(_module ${_modules})
-    helios_module_is_header_only(${_module} _is_ho)
-    if(_is_ho)
-      continue()
-    endif()
-
+  foreach(_module IN LISTS _modules)
     helios_module_enabled(${_module} _is_enabled)
     if(NOT _is_enabled)
       continue()
     endif()
 
-    set(_visited)
-    set(_queue)
     string(TOUPPER "${_module}" _upper_name)
-    set(_deps ${HELIOS_MODULE_${_upper_name}_DEPENDS})
-
-    foreach(_dep ${_deps})
-      helios_module_is_header_only(${_dep} _dep_is_ho)
-      if(NOT _dep_is_ho)
-        list(APPEND _queue ${_dep})
+    foreach(_dep IN LISTS HELIOS_MODULE_${_upper_name}_DEPENDS)
+      helios_module_enabled(${_dep} _dep_enabled)
+      if(NOT _dep_enabled)
+        string(TOUPPER "${_dep}" _upper_dep)
+        message(FATAL_ERROR
+            "Module '${_module}' requires module '${_dep}', but it is disabled. "
+            "Enable it with -DHELIOS_BUILD_${_upper_dep}=ON")
       endif()
     endforeach()
-
-    while(_queue)
-      list(POP_FRONT _queue _current)
-
-      if("${_current}" STREQUAL "${_module}")
-        message(FATAL_ERROR
-            "Circular dependency detected: module '${_module}' depends on itself "
-            "(through non-header-only module chain). Consider refactoring.")
-      endif()
-
-      if("${_current}" IN_LIST _visited)
-          continue()
-      endif()
-      list(APPEND _visited ${_current})
-
-      string(TOUPPER "${_current}" _current_upper)
-      set(_current_deps ${HELIOS_MODULE_${_current_upper}_DEPENDS})
-
-      foreach(_dep ${_current_deps})
-        helios_module_is_header_only(${_dep} _dep_is_ho)
-        if(NOT _dep_is_ho)
-          if(NOT "${_dep}" IN_LIST _visited)
-            list(APPEND _queue ${_dep})
-          endif()
-        endif()
-      endforeach()
-    endwhile()
   endforeach()
 endfunction()
 
-# ============================================================================
-# Informational Functions
-# ============================================================================
+#[[
+    helios_print_modules()
 
+    Prints registered and built module summaries.
+]]
 function(helios_print_modules)
   get_property(_registered GLOBAL PROPERTY HELIOS_REGISTERED_MODULES)
   get_property(_built GLOBAL PROPERTY HELIOS_MODULES)
@@ -252,18 +220,17 @@ function(helios_print_modules)
     list(REMOVE_DUPLICATES _registered)
     list(SORT _registered)
     message(STATUS "Registered modules:")
-    foreach(_module ${_registered})
+    foreach(_module IN LISTS _registered)
       helios_module_enabled(${_module} _is_enabled)
       helios_module_is_header_only(${_module} _is_header_only)
-      string(TOUPPER "${_module}" _upper_name)
       if(_is_enabled)
         if(_is_header_only)
-          message(STATUS "  ✓ ${_module} [ENABLED] [HEADER_ONLY]")
+          message(STATUS "  + ${_module} [ENABLED] [HEADER_ONLY]")
         else()
-          message(STATUS "  ✓ ${_module} [ENABLED]")
+          message(STATUS "  + ${_module} [ENABLED]")
         endif()
       else()
-        message(STATUS "  ✗ ${_module} [DISABLED]")
+        message(STATUS "  - ${_module} [DISABLED]")
       endif()
     endforeach()
   else()
@@ -276,14 +243,14 @@ function(helios_print_modules)
     list(REMOVE_DUPLICATES _built)
     list(SORT _built)
     message(STATUS "Built modules:")
-    foreach(_target ${_built})
+    foreach(_target IN LISTS _built)
       get_target_property(_name ${_target} HELIOS_MODULE_NAME)
       get_target_property(_version ${_target} HELIOS_MODULE_VERSION)
       get_target_property(_type ${_target} TYPE)
       if(_name AND _version)
-        message(STATUS "  ✓ ${_name} v${_version} (${_target}) [${_type}]")
+        message(STATUS "  + ${_name} v${_version} (${_target}) [${_type}]")
       else()
-        message(STATUS "  ✓ ${_target} [${_type}]")
+        message(STATUS "  + ${_target} [${_type}]")
       endif()
     endforeach()
   else()
@@ -294,6 +261,11 @@ function(helios_print_modules)
   message(STATUS "")
 endfunction()
 
+#[[
+    helios_print_module_build_options()
+
+    Prints cache options that control module enablement and library type.
+]]
 function(helios_print_module_build_options)
   get_property(_registered GLOBAL PROPERTY HELIOS_REGISTERED_MODULES)
   get_property(_built GLOBAL PROPERTY HELIOS_MODULES)
@@ -304,7 +276,7 @@ function(helios_print_module_build_options)
   if(_registered)
     list(SORT _registered)
     message(STATUS "Enable/Disable modules:")
-    foreach(_module ${_registered})
+    foreach(_module IN LISTS _registered)
       string(TOUPPER "${_module}" _upper_name)
       set(_option "HELIOS_BUILD_${_upper_name}")
       helios_module_is_header_only(${_module} _is_ho)
@@ -324,7 +296,7 @@ function(helios_print_module_build_options)
     list(SORT _built)
     message(STATUS "Library type overrides (non-header-only modules):")
     set(_has_type_options FALSE)
-    foreach(_target ${_built})
+    foreach(_target IN LISTS _built)
       get_target_property(_name ${_target} HELIOS_MODULE_NAME)
       if(_name)
         string(TOUPPER "${_name}" _upper_name)
@@ -348,6 +320,11 @@ function(helios_print_module_build_options)
   message(STATUS "")
 endfunction()
 
+#[[
+    helios_get_module_list(<output_var>)
+
+    Gets built module target names.
+]]
 function(helios_get_module_list OUTPUT_VAR)
   get_property(_modules GLOBAL PROPERTY HELIOS_MODULES)
   if(_modules)
@@ -357,11 +334,16 @@ function(helios_get_module_list OUTPUT_VAR)
   set(${OUTPUT_VAR} ${_modules} PARENT_SCOPE)
 endfunction()
 
+#[[
+    helios_get_enabled_modules(<output_var>)
+
+    Gets registered module names whose HELIOS_BUILD_<NAME> option is enabled.
+]]
 function(helios_get_enabled_modules OUTPUT_VAR)
   get_property(_registered GLOBAL PROPERTY HELIOS_REGISTERED_MODULES)
   set(_enabled)
 
-  foreach(_module ${_registered})
+  foreach(_module IN LISTS _registered)
     helios_module_enabled(${_module} _is_enabled)
     if(_is_enabled)
       list(APPEND _enabled ${_module})
@@ -371,13 +353,17 @@ function(helios_get_enabled_modules OUTPUT_VAR)
   set(${OUTPUT_VAR} ${_enabled} PARENT_SCOPE)
 endfunction()
 
+#[[
+    helios_get_module_path(NAME <name> OUTPUT_VAR <out>)
+
+    Gets the discovered filesystem path for a registered module.
+]]
 function(helios_get_module_path)
   cmake_parse_arguments(ARG "" "NAME;OUTPUT_VAR" "" ${ARGN})
 
   if(NOT ARG_NAME)
     message(FATAL_ERROR "helios_get_module_path: NAME is required")
   endif()
-
   if(NOT ARG_OUTPUT_VAR)
     message(FATAL_ERROR "helios_get_module_path: OUTPUT_VAR is required")
   endif()
@@ -390,20 +376,11 @@ function(helios_get_module_path)
   endif()
 endfunction()
 
-# ============================================================================
-# Extra Module Search Paths
-# ============================================================================
-
 #[[
     helios_add_extra_module_dirs(<path>...)
 
-    Appends directories to the extra module search list. Call before module
-    discovery begins — either from a parent project (include ModuleRegistry.cmake
-    before add_subdirectory(HeliosEngine)) or from Helios CMakeLists.txt prior to
-    helios_discover_modules() / helios_discover_extra_module_dirs().
-
-    Paths are normalized to absolute form relative to CMAKE_CURRENT_SOURCE_DIR
-    at the call site. Merged at discovery time with HELIOS_EXTRA_MODULE_DIRS.
+    Appends directories to the extra module search list. Paths are normalized to
+    absolute form relative to the call site.
 ]]
 function(helios_add_extra_module_dirs)
   if(ARGC EQUAL 0)
@@ -415,7 +392,7 @@ function(helios_add_extra_module_dirs)
     set(_dirs "")
   endif()
 
-  foreach(_raw_dir ${ARGN})
+  foreach(_raw_dir IN LISTS ARGN)
     cmake_path(ABSOLUTE_PATH _raw_dir BASE_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
                NORMALIZE OUTPUT_VARIABLE _abs_dir)
 
@@ -428,6 +405,12 @@ function(helios_add_extra_module_dirs)
   set_property(GLOBAL PROPERTY HELIOS_EXTRA_MODULE_DIRS_ACCUM "${_dirs}")
 endfunction()
 
+#[[
+    helios_get_extra_module_dirs(<output_var>)
+
+    Gets all module search dirs registered by helios_add_extra_module_dirs() and
+    HELIOS_EXTRA_MODULE_DIRS.
+]]
 function(helios_get_extra_module_dirs OUTPUT_VAR)
   get_property(_accum GLOBAL PROPERTY HELIOS_EXTRA_MODULE_DIRS_ACCUM)
   if(NOT _accum)

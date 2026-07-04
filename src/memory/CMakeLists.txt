@@ -4,6 +4,11 @@ option(HELIOS_MEMORY_OVERRIDE_GLOBAL_ALLOC
        "Override global operator new/delete when linking the memory module"
        ON)
 
+set(_helios_memory_uses)
+if(HELIOS_MEMORY_USE_MIMALLOC)
+  list(APPEND _helios_memory_uses mimalloc PRIVATE helios::lib::mimalloc::static)
+endif()
+
 helios_module(
     NAME memory
     VERSION 0.1.0
@@ -44,9 +49,13 @@ helios_module(
 
     DEPENDS
         PUBLIC core
+        PUBLIC platform
 
     OPTIONAL_DEPENDS
         PUBLIC profile
+
+    USES
+        ${_helios_memory_uses}
 
     COMPILE_DEFINITIONS
         PUBLIC
@@ -69,11 +78,6 @@ helios_module(
         tests/ref_counted.cpp
         tests/stack_allocator.cpp
 )
-
-if(HELIOS_MEMORY_USE_MIMALLOC)
-  helios_require_dependency(mimalloc)
-  target_link_libraries(helios_module_memory PRIVATE helios::lib::mimalloc::static)
-endif()
 
 if(HELIOS_MEMORY_OVERRIDE_GLOBAL_ALLOC)
   add_library(helios_memory_global_alloc OBJECT src/global_alloc.cpp)

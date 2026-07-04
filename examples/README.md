@@ -26,7 +26,6 @@ Binaries are written to `bin/examples/<config>-<os>-<arch>/`.
 | ----------------------- | ------------------------------ | -------------------- | ---------------------------------------------------- |
 | `simple/`               | `simple_example`               | app, log             | Minimal `App`, resources, systems, exit message      |
 | `profile/`              | `profile_example`              | app, profile, log    | Tracy + custom logging backend, scopes, sub-apps     |
-| `profile_global_alloc/` | `profile_global_alloc_example` | profile, memory, log | Global `new`/`delete` hooks in Tracy Memory tab      |
 | `sub_apps/`             | `sub_apps_example`             | app, log             | Blocking sub-app extract/update                      |
 | `overlapping_sub_apps/` | `overlapping_sub_apps_example` | app, log             | Overlapping sub-app updates                          |
 | `async_sub_apps/`       | `async_sub_apps_example`       | app, log             | Async background sub-app                             |

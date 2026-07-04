@@ -579,8 +579,8 @@ TEST_SUITE("helios::container::CallableBufferArray") {
       CHECK_EQ(arr1.Size(), 6);
 
       arr1.Invoke();
-      for (int i = 0; i < 6; ++i) {
-        CHECK_EQ(InvocationTracker::call_order[i], i * 10);
+      for (size_t i = 0; i < 6; ++i) {
+        CHECK_EQ(InvocationTracker::call_order[i], static_cast<int>(i * 10));
       }
     }
 
@@ -680,8 +680,8 @@ TEST_SUITE("helios::container::CallableBufferArray") {
     arr.Invoke();
 
     CHECK_EQ(InvocationTracker::call_order.size(), kCount);
-    for (int i = 0; i < kCount; ++i) {
-      CHECK_EQ(InvocationTracker::call_order[i], i);
+    for (size_t i = 0; i < static_cast<size_t>(kCount); ++i) {
+      CHECK_EQ(InvocationTracker::call_order[i], static_cast<int>(i));
     }
   }
 

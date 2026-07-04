@@ -29,7 +29,7 @@ constexpr size_t kTracyZoneStorageSize = sizeof(tracy::ScopedZone);
 static_assert(kTracyZoneStorageSize <= kZoneStorageBytes,
               "Tracy ScopedZone exceeds HELIOS_PROFILE_ZONE_STORAGE_BYTES");
 
-[[nodiscard]] tracy::PlotFormatType ToTracyPlotFormat(
+[[nodiscard]] constexpr tracy::PlotFormatType ToTracyPlotFormat(
     PlotFormat format) noexcept {
   switch (format) {
     case PlotFormat::kNumber:

@@ -1,6 +1,3 @@
-# TBB must be loaded before checking HELIOS_HAS_SYSTEM_TBB
-helios_require_dependency(TBB)
-
 option(HELIOS_ASYNC_ENABLE_PROFILE "Enable profiling in the async module if profile module is available" ON)
 
 helios_module(
@@ -44,6 +41,7 @@ helios_module(
 )
 
 # Link TBB on Linux with GCC — required for libstdc++ parallel STL backend
+helios_require_dependency(TBB)
 if(HELIOS_HAS_SYSTEM_TBB)
   target_link_libraries(helios_module_async INTERFACE helios::lib::tbb::tbb)
   message(STATUS "helios_module_async: Linking TBB for libstdc++ parallel STL support")

@@ -364,9 +364,9 @@ TEST_SUITE("helios::utils::Random") {
       constexpr int kBuckets = kMax - kMin + 1;
 
       std::vector<int> counts(kBuckets, 0);
-      for (int i = 0; i < kSamples; ++i) {
-        int value = RandomValueFromRange(kMin, kMax);
-        ++counts[value - kMin];
+      for (size_t i = 0; i < static_cast<size_t>(kSamples); ++i) {
+        const int value = RandomValueFromRange(kMin, kMax);
+        ++counts[static_cast<size_t>(value - kMin)];
       }
 
       // Each bucket should have roughly kSamples / kBuckets counts
@@ -374,7 +374,7 @@ TEST_SUITE("helios::utils::Random") {
       const int expected = kSamples / kBuckets;
       const int tolerance = expected / 2;
 
-      for (int i = 0; i < kBuckets; ++i) {
+      for (size_t i = 0; i < static_cast<size_t>(kBuckets); ++i) {
         CHECK_GT(counts[i], expected - tolerance);
         CHECK_LT(counts[i], expected + tolerance);
       }

@@ -4,6 +4,7 @@ helios_module(
     NAME profile
     VERSION 0.1.0
     DESCRIPTION "Profiling module with composable backends"
+    DEFAULT OFF
 
     HEADERS
         include/helios/profile/backends/flamegraph.hpp

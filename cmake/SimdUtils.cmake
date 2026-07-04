@@ -11,7 +11,7 @@ set_property(CACHE HELIOS_SIMD_LEVEL PROPERTY STRINGS
 )
 
 # Internal: Map SIMD level to compiler flags
-function(helios_simd_build_flag_lists LEVEL OUT_GNU_FLAGS OUT_MSVC_FLAGS)
+function(_helios_simd_build_flag_lists LEVEL OUT_GNU_FLAGS OUT_MSVC_FLAGS)
   set(_gnu "")
   set(_msvc "")
 
@@ -55,7 +55,7 @@ function(helios_simd_build_flag_lists LEVEL OUT_GNU_FLAGS OUT_MSVC_FLAGS)
 endfunction()
 
 # Internal: Filter flags to only those supported by the compiler
-function(helios_simd_filter_supported_flags FLAGS_LIST_VAR OUT_VAR)
+function(_helios_simd_filter_supported_flags FLAGS_LIST_VAR OUT_VAR)
   set(_in ${${FLAGS_LIST_VAR}})
   set(_accepted "")
 
@@ -72,10 +72,35 @@ function(helios_simd_filter_supported_flags FLAGS_LIST_VAR OUT_VAR)
   set(${OUT_VAR} "${_accepted}" PARENT_SCOPE)
 endfunction()
 
-# Apply SIMD flags to a target
-# Usage:
-#   helios_simd_apply_to_target(TARGET mylib LEVEL avx2)
-#   helios_simd_apply_to_target(TARGET mylib) # uses HELIOS_SIMD_LEVEL
+function(_helios_simd_resolve_options LEVEL OUT_VAR)
+  _helios_simd_build_flag_lists("${LEVEL}" _gnu_flags _msvc_flags)
+  _helios_simd_filter_supported_flags(_gnu_flags _gnu_accepted)
+  _helios_simd_filter_supported_flags(_msvc_flags _msvc_accepted)
+
+  set(_opts)
+  if(_gnu_accepted)
+    string(REPLACE ";" " " _gnu_joined "${_gnu_accepted}")
+    list(APPEND _opts
+        $<$<AND:$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang>>,$<OR:$<CONFIG:Release>,$<CONFIG:RelWithDebInfo>>>:${_gnu_joined}>
+    )
+  endif()
+
+  if(_msvc_accepted)
+    string(REPLACE ";" " " _msvc_joined "${_msvc_accepted}")
+    list(APPEND _opts
+        $<$<AND:$<CXX_COMPILER_ID:MSVC>,$<OR:$<CONFIG:Release>,$<CONFIG:RelWithDebInfo>>>:${_msvc_joined}>
+    )
+  endif()
+
+  set(${OUT_VAR} "${_opts}" PARENT_SCOPE)
+endfunction()
+
+#[[
+    helios_simd_apply_to_target(TARGET <target> [LEVEL <level>])
+
+    Applies supported SIMD compile flags to a target for Release and
+    RelWithDebInfo. LEVEL defaults to HELIOS_SIMD_LEVEL.
+]]
 function(helios_simd_apply_to_target)
   cmake_parse_arguments(SIMD "" "TARGET;LEVEL" "" ${ARGN})
 
@@ -92,33 +117,17 @@ function(helios_simd_apply_to_target)
     return()
   endif()
 
-  # Build flag lists
-  helios_simd_build_flag_lists("${_level}" _gnu_flags _msvc_flags)
-
-  # Filter to supported flags
-  helios_simd_filter_supported_flags(_gnu_flags _gnu_accepted)
-  helios_simd_filter_supported_flags(_msvc_flags _msvc_accepted)
-
-  # Apply flags only for Release and RelWithDebInfo
-  if(_gnu_accepted)
-    string(REPLACE ";" " " _gnu_joined "${_gnu_accepted}")
-    target_compile_options(${SIMD_TARGET} PRIVATE
-        $<$<AND:$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang>>,$<OR:$<CONFIG:Release>,$<CONFIG:RelWithDebInfo>>>:${_gnu_joined}>
-    )
-  endif()
-
-  if(_msvc_accepted)
-    string(REPLACE ";" " " _msvc_joined "${_msvc_accepted}")
-    target_compile_options(${SIMD_TARGET} PRIVATE
-        $<$<AND:$<CXX_COMPILER_ID:MSVC>,$<OR:$<CONFIG:Release>,$<CONFIG:RelWithDebInfo>>>:${_msvc_joined}>
-    )
+  _helios_simd_resolve_options("${_level}" _opts)
+  if(_opts)
+    target_compile_options(${SIMD_TARGET} PRIVATE ${_opts})
   endif()
 endfunction()
 
-# Create INTERFACE library targets for each SIMD level
-# Usage:
-#   helios_simd_create_interface_libs()
-#   target_link_libraries(mytarget PRIVATE simd::avx2)
+#[[
+    helios_simd_create_interface_libs()
+
+    Creates simd::<level> interface libraries for each known SIMD level.
+]]
 function(helios_simd_create_interface_libs)
   set(_levels "none" "native" "sse2" "sse3" "ssse3" "sse4.1" "sse4.2" "avx" "avx2" "avx512")
 
@@ -140,33 +149,18 @@ function(helios_simd_create_interface_libs)
 
     add_library(${_tgt} INTERFACE)
 
-    # Get flags
-    helios_simd_build_flag_lists("${_lvl}" _g _m)
-    helios_simd_filter_supported_flags(_g _g_ok)
-    helios_simd_filter_supported_flags(_m _m_ok)
-
-    set(_opts "")
-    if(_g_ok)
-      string(REPLACE ";" " " _g_joined "${_g_ok}")
-      list(APPEND _opts
-          $<$<AND:$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang>>,$<OR:$<CONFIG:Release>,$<CONFIG:RelWithDebInfo>>>:${_g_joined}>
-      )
-    endif()
-
-    if(_m_ok)
-      string(REPLACE ";" " " _m_joined "${_m_ok}")
-      list(APPEND _opts
-          $<$<AND:$<CXX_COMPILER_ID:MSVC>,$<OR:$<CONFIG:Release>,$<CONFIG:RelWithDebInfo>>>:${_m_joined}>
-      )
-    endif()
-
+    _helios_simd_resolve_options("${_lvl}" _opts)
     if(_opts)
       target_compile_options(${_tgt} INTERFACE ${_opts})
     endif()
   endforeach()
 endfunction()
 
-# Utility: Get list of known SIMD levels
+#[[
+    helios_simd_known_levels(<output_var>)
+
+    Gets the list of supported HELIOS_SIMD_LEVEL values.
+]]
 function(helios_simd_known_levels OUT_VAR)
   set(_levels "none" "native" "sse2" "sse3" "ssse3" "sse4.1" "sse4.2" "avx" "avx2" "avx512")
   set(${OUT_VAR} "${_levels}" PARENT_SCOPE)

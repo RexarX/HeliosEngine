@@ -177,6 +177,7 @@ function(_helios_register_test_target TARGET_NAME MODULE_NAME TEST_TYPE)
 
   # Track in global list
   set_property(GLOBAL APPEND PROPERTY HELIOS_ALL_TESTS ${TARGET_NAME})
+  set_property(GLOBAL APPEND PROPERTY HELIOS_MODULE_TESTS_${MODULE_NAME} ${TARGET_NAME})
 endfunction()
 
 # ============================================================================
@@ -191,6 +192,10 @@ endfunction()
 function(_helios_configure_test_target TARGET_NAME)
   # C++ standard
   helios_target_set_cxx_standard(${TARGET_NAME} STANDARD 23)
+
+  # Match module targets so REUSE_FROM precompiled headers stay consistent.
+  helios_target_set_platform(${TARGET_NAME})
+  helios_target_set_test_warnings(${TARGET_NAME})
 
   # Optimization
   helios_target_set_optimization(${TARGET_NAME})
@@ -208,11 +213,6 @@ function(_helios_configure_test_target TARGET_NAME)
 
   # Sanitizers
   helios_target_enable_sanitizers(${TARGET_NAME})
-
-  # Platform definitions
-  target_compile_definitions(${TARGET_NAME} PRIVATE
-        $<$<PLATFORM_ID:Windows>:NOMINMAX WIN32_LEAN_AND_MEAN UNICODE _UNICODE>
-    )
 endfunction()
 
 #[[
@@ -236,6 +236,96 @@ endfunction()
 # ============================================================================
 # Public Test Functions
 # ============================================================================
+
+#[[
+    helios_add_test_executable(
+        NAME <target>
+        MODULE <module>
+        SOURCES <files...>
+        [TYPE <unit|integration|custom>]
+        [DEPENDENCIES <targets...>]
+        [DEFINITIONS <defs...>]
+        [LABELS <labels...>]
+        [REUSE_PCH]
+    )
+
+    Creates, configures, links, and registers a Helios test executable. This is
+    the single test target factory used by module tests, rich TESTS suites, and
+    integration tests.
+
+    Example:
+        helios_add_test_executable(
+            NAME helios_core_tests
+            MODULE core
+            SOURCES tests/main.cpp tests/assert.cpp
+            LABELS unit
+            REUSE_PCH
+        )
+]]
+function(helios_add_test_executable)
+  set(options REUSE_PCH)
+  set(oneValueArgs NAME MODULE TYPE)
+  set(multiValueArgs SOURCES DEPENDENCIES DEFINITIONS LABELS)
+  cmake_parse_arguments(TEST "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+
+  if(NOT TEST_NAME)
+    message(FATAL_ERROR "helios_add_test_executable: NAME is required")
+  endif()
+  if(NOT TEST_MODULE)
+    message(FATAL_ERROR "helios_add_test_executable: MODULE is required")
+  endif()
+  if(NOT TEST_SOURCES)
+    message(FATAL_ERROR "helios_add_test_executable: SOURCES is required")
+  endif()
+  if(NOT TEST_TYPE)
+    set(TEST_TYPE unit)
+  endif()
+
+  add_executable(${TEST_NAME} ${TEST_SOURCES})
+  _helios_configure_test_target(${TEST_NAME})
+
+  if(TEST_TYPE STREQUAL "integration")
+    helios_target_set_folder(${TEST_NAME} "Helios/Tests/Integration")
+  else()
+    helios_target_set_folder(${TEST_NAME} "Helios/Tests/${TEST_MODULE}")
+  endif()
+
+  _helios_link_test_framework(${TEST_NAME})
+
+  if(TARGET helios::module::${TEST_MODULE})
+    target_link_libraries(${TEST_NAME} PRIVATE helios::module::${TEST_MODULE})
+  endif()
+
+  if(TEST_DEPENDENCIES)
+    target_link_libraries(${TEST_NAME} PRIVATE ${TEST_DEPENDENCIES})
+  endif()
+
+  if(TEST_DEFINITIONS)
+    target_compile_definitions(${TEST_NAME} PRIVATE ${TEST_DEFINITIONS})
+  endif()
+
+  if(TEST_REUSE_PCH)
+    helios_target_reuse_module_pch(${TEST_NAME} ${TEST_MODULE})
+  endif()
+
+  if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/tests")
+    target_include_directories(${TEST_NAME} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/tests")
+  endif()
+
+  add_test(NAME ${TEST_NAME} COMMAND ${TEST_NAME})
+
+  set(_ctest_labels ${TEST_MODULE})
+  if(TEST_LABELS)
+    list(APPEND _ctest_labels ${TEST_LABELS})
+  else()
+    list(APPEND _ctest_labels ${TEST_TYPE})
+  endif()
+  list(REMOVE_DUPLICATES _ctest_labels)
+  set_tests_properties(${TEST_NAME} PROPERTIES LABELS "${_ctest_labels}")
+
+  _helios_register_test_target(${TEST_NAME} ${TEST_MODULE} ${TEST_TYPE})
+  message(STATUS "[Test] Added ${TEST_TYPE} test: ${TEST_NAME} (module: ${TEST_MODULE})")
+endfunction()
 
 #[[
     helios_add_module_test(
@@ -314,52 +404,17 @@ function(helios_add_module_test)
     return()
   endif()
 
-  # Generate target name
   set(_target_name "helios_${TEST_MODULE_NAME}_${TEST_TYPE}")
-
-  # Create test executable
-  add_executable(${_target_name} ${TEST_SOURCES})
-
-  # Configure
-  _helios_configure_test_target(${_target_name})
-
-  # Set module-specific folder
-  helios_target_set_folder(${_target_name} "Helios/Tests/${TEST_MODULE_NAME}")
-
-  # Link test framework
-  _helios_link_test_framework(${_target_name})
-
-  # Link the module being tested (if target exists)
-  if(TARGET helios::module::${TEST_MODULE_NAME})
-    target_link_libraries(${_target_name} PRIVATE helios::module::${TEST_MODULE_NAME})
-  endif()
-
-  # Link additional dependencies
-  if(TEST_DEPENDENCIES)
-    target_link_libraries(${_target_name} PRIVATE ${TEST_DEPENDENCIES})
-  endif()
-
-  # Add compile definitions
-  if(TEST_COMPILE_DEFINITIONS)
-    target_compile_definitions(${_target_name} PRIVATE ${TEST_COMPILE_DEFINITIONS})
-  endif()
-
-  # Try to reuse module's PCH
-  set(_pch_path "${HELIOS_ROOT_DIR}/src/${TEST_MODULE_NAME}/include/helios/${TEST_MODULE_NAME}_pch.hpp")
-  if(EXISTS "${_pch_path}")
-    target_precompile_headers(${_target_name} PRIVATE "${_pch_path}")
-  endif()
-
-  # Register with CTest
-  add_test(NAME ${_target_name} COMMAND ${_target_name})
-  set_tests_properties(${_target_name} PROPERTIES
-        LABELS "${TEST_MODULE_NAME};${TEST_TYPE}"
-    )
-
-  # Register with aggregate targets
-  _helios_register_test_target(${_target_name} ${TEST_MODULE_NAME} ${TEST_TYPE})
-
-  message(STATUS "[Test] Added ${TEST_TYPE} test: ${_target_name} (module: ${TEST_MODULE_NAME})")
+  helios_add_test_executable(
+      NAME ${_target_name}
+      MODULE ${TEST_MODULE_NAME}
+      TYPE ${TEST_TYPE}
+      SOURCES ${TEST_SOURCES}
+      DEPENDENCIES ${TEST_DEPENDENCIES}
+      DEFINITIONS ${TEST_COMPILE_DEFINITIONS}
+      LABELS ${TEST_TYPE}
+      REUSE_PCH
+  )
 endfunction()
 
 #[[
@@ -420,27 +475,15 @@ function(helios_add_integration_test)
     return()
   endif()
 
-  # Generate target name
   set(_target_name "helios_integration_${TEST_NAME}")
 
-  # Create test executable
-  add_executable(${_target_name} ${TEST_SOURCES})
-
-  # Configure
-  _helios_configure_test_target(${_target_name})
-
-  # Set folder
-  helios_target_set_folder(${_target_name} "Helios/Tests/Integration")
-
-  # Link test framework
-  _helios_link_test_framework(${_target_name})
-
   # Link modules and collect labels
-  set(_test_labels "integration")
+  set(_test_labels integration)
+  set(_module_deps)
   if(TEST_MODULES)
     foreach(_module ${TEST_MODULES})
       if(TARGET helios::module::${_module})
-        target_link_libraries(${_target_name} PRIVATE helios::module::${_module})
+        list(APPEND _module_deps helios::module::${_module})
         list(APPEND _test_labels ${_module})
       else()
         message(WARNING "[Test] Module ${_module} not found for integration test ${TEST_NAME}")
@@ -448,31 +491,23 @@ function(helios_add_integration_test)
     endforeach()
   endif()
 
-  # Link additional dependencies
-  if(TEST_DEPENDENCIES)
-    target_link_libraries(${_target_name} PRIVATE ${TEST_DEPENDENCIES})
-  endif()
-
-  # Add compile definitions
-  if(TEST_COMPILE_DEFINITIONS)
-    target_compile_definitions(${_target_name} PRIVATE ${TEST_COMPILE_DEFINITIONS})
-  endif()
-
-  # Register with CTest
-  add_test(NAME ${_target_name} COMMAND ${_target_name})
-  set_tests_properties(${_target_name} PROPERTIES
-        LABELS "${_test_labels}"
-    )
-
   # Register with aggregate targets (use first module or "integration" as module name)
   if(TEST_MODULES)
     list(GET TEST_MODULES 0 _primary_module)
   else()
     set(_primary_module "integration")
   endif()
-  _helios_register_test_target(${_target_name} ${_primary_module} "integration")
 
-  message(STATUS "[Test] Added integration test: ${_target_name}")
+  helios_add_test_executable(
+      NAME ${_target_name}
+      MODULE ${_primary_module}
+      TYPE integration
+      SOURCES ${TEST_SOURCES}
+      DEPENDENCIES ${_module_deps} ${TEST_DEPENDENCIES}
+      DEFINITIONS ${TEST_COMPILE_DEFINITIONS}
+      LABELS ${_test_labels}
+      REUSE_PCH
+  )
 endfunction()
 
 # ============================================================================
@@ -575,14 +610,6 @@ endfunction()
     Gets a list of test targets for a specific module.
 ]]
 function(helios_get_module_test_targets MODULE_NAME OUTPUT_VAR)
-  get_property(_all_tests GLOBAL PROPERTY HELIOS_ALL_TESTS)
-  set(_module_tests "")
-
-  foreach(_test ${_all_tests})
-    if(_test MATCHES "^helios_${MODULE_NAME}_")
-      list(APPEND _module_tests ${_test})
-    endif()
-  endforeach()
-
+  get_property(_module_tests GLOBAL PROPERTY HELIOS_MODULE_TESTS_${MODULE_NAME})
   set(${OUTPUT_VAR} "${_module_tests}" PARENT_SCOPE)
 endfunction()

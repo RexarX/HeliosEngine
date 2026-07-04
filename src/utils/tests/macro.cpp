@@ -144,7 +144,7 @@ TEST_SUITE("helios::utils::Macro") {
     }
 
     SUBCASE("Variable is usable") {
-      int HELIOS_ANONYMOUS_VAR(counter_) = 42;
+      [[maybe_unused]] int HELIOS_ANONYMOUS_VAR(counter_) = 42;
       // We can use the variable by knowing the line number, but typically
       // anonymous variables are meant to be unused after initialization
       CHECK(true);

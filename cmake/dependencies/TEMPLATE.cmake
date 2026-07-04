@@ -32,5 +32,6 @@ helios_dependency(
         helios::lib::package package
 )
 
-# For advanced cases that cannot be expressed via helios_dependency,
-# use helios_dep_begin / helios_dep_end directly instead of helios_dependency.
+# For advanced cases that cannot be expressed via helios_dependency, use the
+# internal _helios_dep_begin / _helios_dep_end pair and document why the file
+# cannot stay declarative.

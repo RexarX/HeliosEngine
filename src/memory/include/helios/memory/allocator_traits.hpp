@@ -5,11 +5,9 @@
 #include <algorithm>
 #include <concepts>
 #include <cstddef>
-#include <cstdint>
 #include <expected>
 #include <memory_resource>
 #include <span>
-#include <type_traits>
 
 namespace helios::mem {
 
@@ -142,8 +140,9 @@ template <PmrAllocator Alloc>
 [[nodiscard]] constexpr AllocatorStats Stats(const Alloc& allocator) noexcept {
   if constexpr (PmrAllocatorWithStats<Alloc>) {
     return allocator.Stats();
+  } else {
+    return {};
   }
-  return {};
 }
 
 }  // namespace helios::mem

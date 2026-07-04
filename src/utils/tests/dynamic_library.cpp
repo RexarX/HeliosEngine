@@ -139,7 +139,14 @@ TEST_SUITE("helios::utils::DynamicLibrary") {
 
   TEST_CASE("utils::DynamicLibrary::operator=: self move assignment is safe") {
     DynamicLibrary lib;
+#if defined(__GNUC__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wself-move"
+#endif
     lib = std::move(lib);  // NOLINT(clang-diagnostic-self-move)
+#if defined(__GNUC__)
+#pragma GCC diagnostic pop
+#endif
     CHECK_FALSE(lib.Loaded());
   }
 }

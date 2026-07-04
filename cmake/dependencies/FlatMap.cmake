@@ -1,6 +1,8 @@
 # FlatMap dependency configuration
 #
 # Checks for C++23 std::flat_map availability and falls back to Boost.Container.
+# Custom logic is intentional because this is a feature probe plus fallback
+# wrapper, not a normal external package lookup.
 
 include(CheckCXXSourceCompiles)
 include(CMakePushCheckState)

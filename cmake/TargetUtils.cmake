@@ -1,12 +1,17 @@
 # Provides small, focused helper functions that do one thing well
 
 include(CheckIPOSupported)
+include(Primitives)
 
 # ============================================================================
 # Warning Configuration
 # ============================================================================
 
-# Apply standard compiler warnings to a target
+#[[
+    helios_target_set_warnings(<target>)
+
+    Applies the standard Helios warning set to a non-interface target.
+]]
 function(helios_target_set_warnings TARGET)
   set(MSVC_WARNINGS
       /W4              # High warning level
@@ -69,11 +74,30 @@ function(helios_target_set_warnings TARGET)
   )
 endfunction()
 
+#[[
+    helios_target_set_test_warnings(<target>)
+
+    Applies standard warnings plus doctest-friendly suppressions for tests.
+]]
+function(helios_target_set_test_warnings TARGET)
+  helios_target_set_warnings(${TARGET})
+
+  # doctest SUBCASE blocks routinely shadow outer locals; suppress in tests only.
+  target_compile_options(${TARGET} PRIVATE
+      $<$<OR:$<CXX_COMPILER_ID:GNU>,$<AND:$<CXX_COMPILER_ID:Clang>,$<NOT:$<PLATFORM_ID:Windows>>>>:-Wno-shadow>
+      $<$<OR:$<CXX_COMPILER_ID:MSVC>,$<AND:$<CXX_COMPILER_ID:Clang>,$<PLATFORM_ID:Windows>>>:/wd4456>
+  )
+endfunction()
+
 # ============================================================================
 # Optimization Configuration
 # ============================================================================
 
-# Apply standard optimization flags to a target
+#[[
+    helios_target_set_optimization(<target>)
+
+    Applies configuration-specific optimization and debug compile options.
+]]
 function(helios_target_set_optimization TARGET)
   target_compile_options(${TARGET} PRIVATE
       # MSVC and clang-cl (MSVC frontend)
@@ -112,7 +136,11 @@ function(helios_target_set_optimization TARGET)
   endif()
 endfunction()
 
-# Enable Link-Time Optimization (LTO) for a target
+#[[
+    helios_target_enable_lto(<target>)
+
+    Enables IPO/LTO properties for Release and RelWithDebInfo when supported.
+]]
 function(helios_target_enable_lto TARGET)
   if(NOT HELIOS_ENABLE_LTO)
     return()
@@ -121,6 +149,7 @@ function(helios_target_enable_lto TARGET)
   if(NOT DEFINED HELIOS_IPO_CACHED)
     include(CheckIPOSupported)
     check_ipo_supported(RESULT HELIOS_IPO_SUPPORTED OUTPUT _ipo_error LANGUAGES CXX)
+    set(HELIOS_IPO_SUPPORTED "${HELIOS_IPO_SUPPORTED}" CACHE INTERNAL "IPO/LTO support result")
     set(HELIOS_IPO_CACHED TRUE CACHE INTERNAL "IPO/LTO support has been checked globally")
   endif()
 
@@ -136,7 +165,11 @@ endfunction()
 # Platform Configuration
 # ============================================================================
 
-# Apply platform-specific compile definitions to a target
+#[[
+    helios_target_set_platform(<target>)
+
+    Adds Helios platform/configuration compile definitions to a target.
+]]
 function(helios_target_set_platform TARGET)
   target_compile_definitions(${TARGET} PRIVATE
       $<$<PLATFORM_ID:Windows>:HELIOS_PLATFORM_WINDOWS>
@@ -156,6 +189,11 @@ function(helios_target_set_platform TARGET)
   endif()
 endfunction()
 
+#[[
+    helios_target_set_shared_lib_platform(<target>)
+
+    Applies shared-library platform properties such as PIC and MSVC runtime.
+]]
 function(helios_target_set_shared_lib_platform TARGET)
   if(WIN32 AND MSVC)
     set_target_properties(${TARGET} PROPERTIES
@@ -171,7 +209,11 @@ endfunction()
 # Output Directory Configuration
 # ============================================================================
 
-# Set standard output directories for a target
+#[[
+    helios_target_set_output_dirs(<target> [CUSTOM_FOLDER <folder>])
+
+    Places target outputs under the standard Helios bin layout.
+]]
 function(helios_target_set_output_dirs TARGET)
   cmake_parse_arguments(ARG "" "CUSTOM_FOLDER" "" ${ARGN})
 
@@ -197,7 +239,11 @@ endfunction()
 # C++ Standard Configuration
 # ============================================================================
 
-# Set C++ standard for a target
+#[[
+    helios_target_set_cxx_standard(<target> [STANDARD <version>])
+
+    Sets CXX_STANDARD, CXX_STANDARD_REQUIRED, and disables extensions.
+]]
 function(helios_target_set_cxx_standard TARGET)
   cmake_parse_arguments(ARG "" "STANDARD" "" ${ARGN})
 
@@ -216,7 +262,11 @@ endfunction()
 # IDE Organization
 # ============================================================================
 
-# Set IDE folder for a target
+#[[
+    helios_target_set_folder(<target> <folder>)
+
+    Sets the IDE folder property for generated project views.
+]]
 function(helios_target_set_folder TARGET FOLDER_NAME)
   set_target_properties(${TARGET} PROPERTIES FOLDER ${FOLDER_NAME})
 endfunction()
@@ -225,7 +275,11 @@ endfunction()
 # Unity Build Configuration
 # ============================================================================
 
-# Enable unity build for a target
+#[[
+    helios_target_enable_unity_build(<target> [BATCH_SIZE <n>] [EXCLUDE_FILES <files...>])
+
+    Enables CMake unity builds and optionally excludes specific files.
+]]
 function(helios_target_enable_unity_build TARGET)
   cmake_parse_arguments(ARG "" "BATCH_SIZE" "EXCLUDE_FILES" ${ARGN})
 
@@ -251,7 +305,11 @@ endfunction()
 # Precompiled Headers
 # ============================================================================
 
-# Add precompiled header to a target
+#[[
+    helios_target_add_pch(<target> <pch-file> [PUBLIC|INTERFACE])
+
+    Adds a C++ precompiled header to a target.
+]]
 function(helios_target_add_pch TARGET PCH_FILE)
   cmake_parse_arguments(ARG "PUBLIC;INTERFACE" "" "" ${ARGN})
 
@@ -267,56 +325,87 @@ function(helios_target_add_pch TARGET PCH_FILE)
   )
 endfunction()
 
+# Reuse a module's precompiled header in a test (or other consumer) target.
+function(_helios_share_module_pch_context CONSUMER_TARGET MODULE_TARGET)
+  get_target_property(_defs ${MODULE_TARGET} COMPILE_DEFINITIONS)
+  if(_defs AND NOT _defs STREQUAL "_defs-NOTFOUND")
+    target_compile_definitions(${CONSUMER_TARGET} PRIVATE ${_defs})
+  endif()
+
+  get_target_property(_link_libs ${MODULE_TARGET} LINK_LIBRARIES)
+  if(_link_libs AND NOT _link_libs STREQUAL "_link_libs-NOTFOUND")
+    target_link_libraries(${CONSUMER_TARGET} PRIVATE ${_link_libs})
+  endif()
+
+  get_target_property(_include_dirs ${MODULE_TARGET} INCLUDE_DIRECTORIES)
+  if(_include_dirs AND NOT _include_dirs STREQUAL "_include_dirs-NOTFOUND")
+    target_include_directories(${CONSUMER_TARGET} PRIVATE ${_include_dirs})
+  endif()
+endfunction()
+
+#[[
+    helios_target_reuse_module_pch(<consumer-target> <module-name>)
+
+    Reuses or mirrors a module target's PCH setup on a consumer target.
+]]
+function(helios_target_reuse_module_pch CONSUMER_TARGET MODULE_NAME)
+  set(_module_target "helios_module_${MODULE_NAME}")
+  if(NOT TARGET ${_module_target})
+    return()
+  endif()
+
+  get_target_property(_module_type ${_module_target} TYPE)
+  if(_module_type STREQUAL "INTERFACE_LIBRARY")
+    return()
+  endif()
+
+  get_target_property(_pch ${_module_target} PRECOMPILE_HEADERS)
+  if(NOT _pch OR _pch STREQUAL "_pch-NOTFOUND")
+    return()
+  endif()
+
+  # REUSE_FROM is reliable on MSVC/clang-cl. On ELF, static-library PCHs use
+  # -fPIC while executables default to -fPIE, so compile the PCH locally on the
+  # test target and mirror the module's private link/include context instead.
+  if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC"
+      OR (CMAKE_CXX_COMPILER_ID STREQUAL "Clang" AND WIN32))
+    target_precompile_headers(${CONSUMER_TARGET} REUSE_FROM ${_module_target})
+  else()
+    target_precompile_headers(${CONSUMER_TARGET} PRIVATE ${_pch})
+  endif()
+
+  _helios_share_module_pch_context(${CONSUMER_TARGET} ${_module_target})
+endfunction()
+
 # ============================================================================
 # External Dependency Configuration
 # ============================================================================
 
-# Mark external dependencies with SYSTEM includes to suppress warnings
-# This prevents warnings from third-party code from cluttering build output
+#[[
+    helios_target_mark_dependencies_as_system(<target>)
+
+    Marks linked target dependencies' interface includes as SYSTEM.
+]]
 function(helios_target_mark_dependencies_as_system TARGET)
-  # Get all link libraries for the target
   get_target_property(_link_libs ${TARGET} LINK_LIBRARIES)
-
   if(_link_libs AND NOT _link_libs STREQUAL "_link_libs-NOTFOUND")
-    foreach(_lib ${_link_libs})
-      if(TARGET ${_lib})
-        # Get the include directories from the dependency
-        get_target_property(_lib_includes ${_lib} INTERFACE_INCLUDE_DIRECTORIES)
-
-        if(_lib_includes AND NOT _lib_includes STREQUAL "_lib_includes-NOTFOUND")
-          # Mark them as system includes
-          set_target_properties(${_lib} PROPERTIES
-              INTERFACE_SYSTEM_INCLUDE_DIRECTORIES "${_lib_includes}"
-          )
-        endif()
-      endif()
-    endforeach()
+    helios_mark_system_includes(${_link_libs})
   endif()
 endfunction()
 
-# Link to external target with SYSTEM includes to suppress warnings
-# Usage: helios_target_link_system_libraries(my_target PUBLIC external::lib1 external::lib2)
+#[[
+    helios_target_link_system_libraries(<target> <visibility> <libs...>)
+
+    Marks target libraries as SYSTEM where possible, then links them.
+]]
 function(helios_target_link_system_libraries TARGET VISIBILITY)
   cmake_parse_arguments(ARG "" "" "" ${ARGN})
 
   foreach(_lib ${ARG_UNPARSED_ARGUMENTS})
     if(TARGET ${_lib})
-      # Get the include directories
-      get_target_property(_lib_includes ${_lib} INTERFACE_INCLUDE_DIRECTORIES)
-
-      if(_lib_includes AND NOT _lib_includes STREQUAL "_lib_includes-NOTFOUND")
-        # Mark as system before linking
-        set_target_properties(${_lib} PROPERTIES
-            INTERFACE_SYSTEM_INCLUDE_DIRECTORIES "${_lib_includes}"
-        )
-      endif()
-
-      # Now link the library
-      target_link_libraries(${TARGET} ${VISIBILITY} ${_lib})
-    else()
-      # If not a target, just link normally
-      target_link_libraries(${TARGET} ${VISIBILITY} ${_lib})
+      helios_mark_system_includes(${_lib})
     endif()
+    target_link_libraries(${TARGET} ${VISIBILITY} ${_lib})
   endforeach()
 endfunction()
 
@@ -324,9 +413,12 @@ endfunction()
 # Dynamic Library Management
 # ============================================================================
 
-# Copy dynamic library dependencies to target output directory
-# This ensures that executables can find their runtime dependencies
-# Usage: helios_copy_runtime_dependencies(my_target LIBRARIES lib1 lib2...)
+#[[
+    helios_copy_runtime_dependencies(<target> LIBRARIES <libs...>)
+
+    Copies shared library targets or shared library file paths beside a target
+    after build.
+]]
 function(helios_copy_runtime_dependencies TARGET)
   cmake_parse_arguments(ARG "" "" "LIBRARIES" ${ARGN})
 
@@ -336,19 +428,7 @@ function(helios_copy_runtime_dependencies TARGET)
 
   foreach(_lib ${ARG_LIBRARIES})
     if(TARGET ${_lib})
-      # Get the library type
-      get_target_property(_lib_type ${_lib} TYPE)
-
-      if(_lib_type STREQUAL "SHARED_LIBRARY")
-        # Add a post-build command to copy the shared library
-        add_custom_command(TARGET ${TARGET} POST_BUILD
-            COMMAND ${CMAKE_COMMAND} -E copy_if_different
-                $<TARGET_FILE:${_lib}>
-                $<TARGET_FILE_DIR:${TARGET}>
-            COMMENT "Copying ${_lib} runtime dependency to ${TARGET} output directory"
-            VERBATIM
-        )
-      endif()
+      helios_copy_shared_lib(CONSUMER ${TARGET} PROVIDER ${_lib})
     else()
       # Handle non-target libraries (file paths)
       if(EXISTS "${_lib}" AND _lib MATCHES "\\.(so|dll|dylib)(\\..*)?$")

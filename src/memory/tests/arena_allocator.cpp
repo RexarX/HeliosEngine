@@ -9,6 +9,7 @@
 #include <cstdint>
 #include <memory_resource>
 #include <thread>
+#include <tuple>
 #include <vector>
 
 using namespace helios::mem;
@@ -86,7 +87,7 @@ TEST_SUITE("helios::mem::ArenaAllocator") {
 
     SUBCASE("Moved-into arena carries existing allocation state") {
       ArenaAllocator source(1024);
-      [[maybe_unused]] const void* _ = source.allocate(64, kAlign);
+      std::ignore = source.allocate(64, kAlign);
       const ArenaAllocator moved(std::move(source));
       CHECK_FALSE(moved.Empty());
     }
@@ -99,7 +100,7 @@ TEST_SUITE("helios::mem::ArenaAllocator") {
 
     SUBCASE("Source is empty after move") {
       ArenaAllocator source(512);
-      [[maybe_unused]] const void* _ = source.allocate(32, kAlign);
+      std::ignore = source.allocate(32, kAlign);
 
       const ArenaAllocator moved(std::move(source));
 
@@ -119,7 +120,7 @@ TEST_SUITE("helios::mem::ArenaAllocator") {
 
     SUBCASE("Target carries allocation state from source") {
       ArenaAllocator source(1024);
-      [[maybe_unused]] const void* _ = source.allocate(32, kAlign);
+      std::ignore = source.allocate(32, kAlign);
       ArenaAllocator target(128);
 
       target = std::move(source);
@@ -138,7 +139,7 @@ TEST_SUITE("helios::mem::ArenaAllocator") {
 
     SUBCASE("Self move assignment does not corrupt state") {
       ArenaAllocator arena(512);
-      [[maybe_unused]] const void* _ = arena.allocate(16, kAlign);
+      std::ignore = arena.allocate(16, kAlign);
       ArenaAllocator& ref = arena;
 
       ref = std::move(arena);  // NOLINT(clang-diagnostic-self-move)
@@ -150,7 +151,7 @@ TEST_SUITE("helios::mem::ArenaAllocator") {
   TEST_CASE("mem::ArenaAllocator::Reset") {
     SUBCASE("Empty returns true after Reset") {
       ArenaAllocator arena(1024);
-      [[maybe_unused]] const void* _ = arena.allocate(128, kAlign);
+      std::ignore = arena.allocate(128, kAlign);
 
       arena.Reset();
 
@@ -159,8 +160,8 @@ TEST_SUITE("helios::mem::ArenaAllocator") {
 
     SUBCASE("BlockCount remains unchanged after soft Reset") {
       ArenaAllocator arena(GrowingOptions());
-      const void* ptr = arena.allocate(kGrowCapacity, 1);
-      ptr = arena.allocate(kGrowCapacity, 1);  // forces second block
+      std::ignore = arena.allocate(kGrowCapacity, 1);
+      std::ignore = arena.allocate(kGrowCapacity, 1);  // forces second block
       const size_t blocks_before = arena.BlockCount();
       CHECK_GT(blocks_before, 1);
 
@@ -170,8 +171,8 @@ TEST_SUITE("helios::mem::ArenaAllocator") {
 
     SUBCASE("TotalCapacity remains unchanged after soft Reset") {
       ArenaAllocator arena(GrowingOptions());
-      const void* ptr = arena.allocate(kGrowCapacity, 1);
-      ptr = arena.allocate(kGrowCapacity, 1);
+      std::ignore = arena.allocate(kGrowCapacity, 1);
+      std::ignore = arena.allocate(kGrowCapacity, 1);
       const size_t capacity_before = arena.TotalCapacity();
       CHECK_GT(capacity_before, arena.InitialCapacity());
 
@@ -181,7 +182,7 @@ TEST_SUITE("helios::mem::ArenaAllocator") {
 
     SUBCASE("Stats counters are zeroed after Reset") {
       ArenaAllocator arena(1024);
-      [[maybe_unused]] const void* _ = arena.allocate(64, kAlign);
+      std::ignore = arena.allocate(64, kAlign);
 
       arena.Reset();
 
@@ -195,7 +196,7 @@ TEST_SUITE("helios::mem::ArenaAllocator") {
 
     SUBCASE("Allocations succeed after Reset") {
       ArenaAllocator arena(1024);
-      [[maybe_unused]] const void* _ = arena.allocate(512, kAlign);
+      std::ignore = arena.allocate(512, kAlign);
 
       arena.Reset();
 
@@ -212,13 +213,13 @@ TEST_SUITE("helios::mem::ArenaAllocator") {
 
     SUBCASE("Returns false after one allocation") {
       ArenaAllocator arena(256);
-      [[maybe_unused]] const void* _ = arena.allocate(8, kAlign);
+      std::ignore = arena.allocate(8, kAlign);
       CHECK_FALSE(arena.Empty());
     }
 
     SUBCASE("Returns true after Reset") {
       ArenaAllocator arena(256);
-      [[maybe_unused]] const void* _ = arena.allocate(8, kAlign);
+      std::ignore = arena.allocate(8, kAlign);
       arena.Reset();
       CHECK(arena.Empty());
     }
@@ -247,25 +248,25 @@ TEST_SUITE("helios::mem::ArenaAllocator") {
 
     SUBCASE("total_allocated equals sum of requested bytes") {
       ArenaAllocator arena(1024);
-      const void* ptr = arena.allocate(64, kAlign);
-      ptr = arena.allocate(128, kAlign);
+      std::ignore = arena.allocate(64, kAlign);
+      std::ignore = arena.allocate(128, kAlign);
 
       CHECK_GE(arena.Stats().total_allocated, 192);
     }
 
     SUBCASE("allocation_count tracks live allocation count") {
       ArenaAllocator arena(1024);
-      const void* ptr = arena.allocate(32, kAlign);
-      ptr = arena.allocate(32, kAlign);
+      std::ignore = arena.allocate(32, kAlign);
+      std::ignore = arena.allocate(32, kAlign);
 
       CHECK_EQ(arena.Stats().allocation_count, 2);
     }
 
     SUBCASE("total_allocations counts every allocate call") {
       ArenaAllocator arena(1024);
-      const void* ptr = arena.allocate(16, kAlign);
-      ptr = arena.allocate(16, kAlign);
-      ptr = arena.allocate(16, kAlign);
+      std::ignore = arena.allocate(16, kAlign);
+      std::ignore = arena.allocate(16, kAlign);
+      std::ignore = arena.allocate(16, kAlign);
 
       CHECK_EQ(arena.Stats().total_allocations, 3);
     }
@@ -282,8 +283,8 @@ TEST_SUITE("helios::mem::ArenaAllocator") {
 
     SUBCASE("peak_usage is at least total bytes allocated at high watermark") {
       ArenaAllocator arena(1024);
-      const void* ptr = arena.allocate(256, kAlign);
-      ptr = arena.allocate(128, kAlign);
+      std::ignore = arena.allocate(256, kAlign);
+      std::ignore = arena.allocate(128, kAlign);
 
       CHECK_GE(arena.Stats().peak_usage, 256);
     }
@@ -305,16 +306,16 @@ TEST_SUITE("helios::mem::ArenaAllocator") {
     SUBCASE("Increases when a second block is allocated due to overflow") {
       ArenaAllocator arena(GrowingOptions());
       const size_t before = arena.TotalCapacity();
-      const void* ptr = arena.allocate(kGrowCapacity, 1);
-      ptr = arena.allocate(kGrowCapacity, 1);  // forces growth
+      std::ignore = arena.allocate(kGrowCapacity, 1);
+      std::ignore = arena.allocate(kGrowCapacity, 1);  // forces growth
 
       CHECK_GT(arena.TotalCapacity(), before);
     }
 
     SUBCASE("Remains unchanged after Reset (soft reset preserves blocks)") {
       ArenaAllocator arena(GrowingOptions());
-      const void* ptr = arena.allocate(kGrowCapacity, 1);
-      ptr = arena.allocate(kGrowCapacity, 1);
+      std::ignore = arena.allocate(kGrowCapacity, 1);
+      std::ignore = arena.allocate(kGrowCapacity, 1);
       const size_t capacity_before = arena.TotalCapacity();
 
       arena.Reset();
@@ -336,14 +337,14 @@ TEST_SUITE("helios::mem::ArenaAllocator") {
 
     SUBCASE("Unchanged by allocations") {
       ArenaAllocator arena(1024);
-      [[maybe_unused]] const void* _ = arena.allocate(512, kAlign);
+      std::ignore = arena.allocate(512, kAlign);
       CHECK_EQ(arena.InitialCapacity(), 1024);
     }
 
     SUBCASE("Unchanged after Reset") {
       ArenaAllocator arena(1024);
 
-      [[maybe_unused]] const void* _ = arena.allocate(512, kAlign);
+      std::ignore = arena.allocate(512, kAlign);
       arena.Reset();
 
       CHECK_EQ(arena.InitialCapacity(), 1024);
@@ -359,8 +360,8 @@ TEST_SUITE("helios::mem::ArenaAllocator") {
     SUBCASE("Increases when arena grows into a second block") {
       ArenaAllocator arena(GrowingOptions());
 
-      const void* ptr = arena.allocate(kGrowCapacity, 1);
-      ptr = arena.allocate(kGrowCapacity, 1);
+      std::ignore = arena.allocate(kGrowCapacity, 1);
+      std::ignore = arena.allocate(kGrowCapacity, 1);
 
       CHECK_GT(arena.BlockCount(), 1);
     }
@@ -368,8 +369,8 @@ TEST_SUITE("helios::mem::ArenaAllocator") {
     SUBCASE("Remains unchanged after Reset (soft reset preserves blocks)") {
       ArenaAllocator arena(GrowingOptions());
 
-      const void* ptr = arena.allocate(kGrowCapacity, 1);
-      ptr = arena.allocate(kGrowCapacity, 1);
+      std::ignore = arena.allocate(kGrowCapacity, 1);
+      std::ignore = arena.allocate(kGrowCapacity, 1);
       const size_t blocks_before = arena.BlockCount();
       CHECK_GT(blocks_before, 1);
 
@@ -396,7 +397,7 @@ TEST_SUITE("helios::mem::ArenaAllocator") {
 
     SUBCASE("Unchanged after allocations") {
       ArenaAllocator arena(512);
-      [[maybe_unused]] const void* _ = arena.allocate(32, kAlign);
+      std::ignore = arena.allocate(32, kAlign);
       CHECK_EQ(arena.Growth().max_capacity,
                GrowthPolicy::Geometric().max_capacity);
     }
@@ -434,7 +435,7 @@ TEST_SUITE("helios::mem::ArenaAllocator") {
     SUBCASE("Allocation that overflows current block triggers growth") {
       ArenaAllocator arena(GrowingOptions());
 
-      [[maybe_unused]] const void* _ = arena.allocate(kGrowCapacity, 1);
+      std::ignore = arena.allocate(kGrowCapacity, 1);
       void* const ptr = arena.allocate(kGrowCapacity, 1);
 
       CHECK_NE(ptr, nullptr);
@@ -531,7 +532,7 @@ TEST_SUITE("helios::mem::ArenaAllocator") {
       for (size_t j = 0; j < kThreads; ++j) {
         threads.emplace_back([&arena] {
           for (size_t i = 0; i < kAllocsPerThread; ++i) {
-            [[maybe_unused]] const void* _ = arena.allocate(8, kAlign);
+            std::ignore = arena.allocate(8, kAlign);
           }
         });
       }

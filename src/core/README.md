@@ -4,15 +4,15 @@ Foundational utilities used by every other module: assertions, UUIDs, stack trac
 
 ## Public API
 
-| Type               | Purpose                                                                               |
-| ------------------ | ------------------------------------------------------------------------------------- |
-| `Uuid`             | UUID value type. Thread-local MT19937 generation via `Uuid::Generate()`.              |
-| `UuidGenerator`    | Standalone UUID generator (multiple instances supported).                             |
-| `Stacktrace`       | Stack capture via Backward-cpp. Configurable filters.                                 |
-| `StacktraceConfig` | Configuration for stack trace capture (frames, skip, filters).                        |
-| `CStringView`      | Null-terminated string view for APIs requiring `\0`.                                  |
-| `WCStringView`     | Wide-char variant. Also `U8CStringView`, `U16CStringView`, `U32CStringView`.          |
-| `AssertionHandler` | `void(*)(std::string_view, std::source_location, std::string_view)` — custom handler. |
+| Type               | Purpose                                                                                    |
+| ------------------ | ------------------------------------------------------------------------------------------ |
+| `Uuid`             | UUID value type. Thread-local MT19937 generation via `Uuid::Generate()`.                   |
+| `UuidGenerator`    | Standalone UUID generator (multiple instances supported).                                  |
+| `Stacktrace`       | Stack capture via C++23 `<stacktrace>` or Boost.Stacktrace fallback. Configurable filters. |
+| `StacktraceConfig` | Configuration for stack trace capture (frames, skip, filters).                             |
+| `CStringView`      | Null-terminated string view for APIs requiring `\0`.                                       |
+| `WCStringView`     | Wide-char variant. Also `U8CStringView`, `U16CStringView`, `U32CStringView`.               |
+| `AssertionHandler` | `void(*)(std::string_view, std::source_location, std::string_view)` — custom handler.      |
 
 ## Assert System
 
@@ -73,7 +73,7 @@ auto filtered = Stacktrace::Capture(StacktraceConfig{
 });
 ```
 
-Configurable max frames, skip frames, include/exclude filters, and source-location anchoring. Uses **Backward-cpp** under the hood.
+Configurable max frames, skip frames, include/exclude filters, and source-location anchoring. Uses C++23 `<stacktrace>` when available and falls back to Boost.Stacktrace when the standard library backend is missing.
 
 ## CStringView
 
@@ -90,4 +90,4 @@ const char* raw = name.c_str();       // safe to pass to C APIs
 - `compiler` — intrinsics
 - `platform` — platform detection
 - `utils` — macros, type utilities
-- External: stduuid, Backward-cpp
+- External: stduuid, Boost.Stacktrace fallback when needed

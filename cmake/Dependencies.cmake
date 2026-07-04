@@ -44,8 +44,11 @@ endif()
 # Summary Function (called after modules are built)
 # ============================================================================
 
-# This function should be called after all modules are configured to print
-# a summary of all found dependencies.
+#[[
+    helios_print_dependency_summary()
+
+    Prints found dependencies and CPM package summary after modules are built.
+]]
 function(helios_print_dependency_summary)
   helios_print_dependencies()
   if(CPM_PACKAGES)

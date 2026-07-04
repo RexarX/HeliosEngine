@@ -1,3 +1,9 @@
+# concurrentqueue dependency configuration
+#
+# Custom logic is intentional: upstream CPM exposes flat headers while system
+# packages commonly expose concurrentqueue/moodycamel/*.h, so this file
+# normalizes include layout before creating Helios wrapper targets.
+
 helios_dependency(
     NAME concurrentqueue
     VERSION "^1.0.0"

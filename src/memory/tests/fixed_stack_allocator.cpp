@@ -1,5 +1,7 @@
 #include <doctest/doctest.h>
 
+#include <tuple>
+
 #include <helios/memory/fixed_stack_allocator.hpp>
 
 #include <cstddef>
@@ -71,14 +73,14 @@ TEST_SUITE("helios::mem::FixedStackAllocator") {
 
     SUBCASE("Source is empty after move") {
       FixedStackAllocator source(kCapacity);
-      [[maybe_unused]] const void* _ = source.allocate(32, kAlign);
+      std::ignore = source.allocate(32, kAlign);
       const FixedStackAllocator moved(std::move(source));
       CHECK(source.Empty());
     }
 
     SUBCASE("Source stats are zeroed after move") {
       FixedStackAllocator source(kCapacity);
-      [[maybe_unused]] const void* _ = source.allocate(32, kAlign);
+      std::ignore = source.allocate(32, kAlign);
       const FixedStackAllocator moved(std::move(source));
       CHECK_EQ(source.Stats().allocation_count, 0);
       CHECK_EQ(source.Stats().total_allocated, 0);
@@ -94,7 +96,7 @@ TEST_SUITE("helios::mem::FixedStackAllocator") {
   TEST_CASE("mem::FixedStackAllocator::operator=(FixedStackAllocator&&)") {
     SUBCASE("Target acquires source allocation state") {
       FixedStackAllocator source(kCapacity);
-      [[maybe_unused]] const void* _ = source.allocate(32, kAlign);
+      std::ignore = source.allocate(32, kAlign);
       FixedStackAllocator target(kCapacity);
 
       target = std::move(source);
@@ -105,7 +107,7 @@ TEST_SUITE("helios::mem::FixedStackAllocator") {
 
     SUBCASE("Source is empty after move assign") {
       FixedStackAllocator source(kCapacity);
-      [[maybe_unused]] const void* _ = source.allocate(32, kAlign);
+      std::ignore = source.allocate(32, kAlign);
       FixedStackAllocator target(kCapacity);
 
       target = std::move(source);
@@ -116,7 +118,7 @@ TEST_SUITE("helios::mem::FixedStackAllocator") {
 
     SUBCASE("Self move assignment does not corrupt state") {
       FixedStackAllocator stack(kCapacity);
-      [[maybe_unused]] const void* _ = stack.allocate(16, kAlign);
+      std::ignore = stack.allocate(16, kAlign);
       FixedStackAllocator& ref = stack;
 
       ref = std::move(stack);  // NOLINT(clang-diagnostic-self-move)
@@ -141,7 +143,7 @@ TEST_SUITE("helios::mem::FixedStackAllocator") {
     SUBCASE("Rewinds offset to captured marker") {
       FixedStackAllocator stack(kCapacity);
       const auto marker = stack.GetMarker();
-      [[maybe_unused]] const void* _ = stack.allocate(64, kAlign);
+      std::ignore = stack.allocate(64, kAlign);
       stack.RewindToMarker(marker);
       CHECK_EQ(stack.GetMarker().offset, marker.offset);
       CHECK(stack.Empty());
@@ -150,7 +152,7 @@ TEST_SUITE("helios::mem::FixedStackAllocator") {
     SUBCASE("Clears allocation_count after rewind") {
       FixedStackAllocator stack(kCapacity);
       const auto marker = stack.GetMarker();
-      [[maybe_unused]] const void* _ = stack.allocate(64, kAlign);
+      std::ignore = stack.allocate(64, kAlign);
       stack.RewindToMarker(marker);
       CHECK_EQ(stack.Stats().allocation_count, 0);
     }
@@ -171,7 +173,7 @@ TEST_SUITE("helios::mem::FixedStackAllocator") {
       const auto base = stack.GetMarker();
       void* const first = stack.allocate(32, kAlign);
       const auto mid = stack.GetMarker();
-      [[maybe_unused]] const void* _ = stack.allocate(32, kAlign);
+      std::ignore = stack.allocate(32, kAlign);
       stack.RewindToMarker(mid);
       CHECK(stack.Owns(first));
       CHECK_EQ(stack.Stats().allocation_count, 0);
@@ -183,14 +185,14 @@ TEST_SUITE("helios::mem::FixedStackAllocator") {
   TEST_CASE("mem::FixedStackAllocator::Reset") {
     SUBCASE("Empty returns true after Reset") {
       FixedStackAllocator stack(kCapacity);
-      [[maybe_unused]] const void* _ = stack.allocate(128, kAlign);
+      std::ignore = stack.allocate(128, kAlign);
       stack.Reset();
       CHECK(stack.Empty());
     }
 
     SUBCASE("Stats counters are zeroed after Reset") {
       FixedStackAllocator stack(kCapacity);
-      [[maybe_unused]] const void* _ = stack.allocate(64, kAlign);
+      std::ignore = stack.allocate(64, kAlign);
       stack.Reset();
       const AllocatorStats stats = stack.Stats();
       CHECK_EQ(stats.total_allocated, 0);
@@ -203,14 +205,14 @@ TEST_SUITE("helios::mem::FixedStackAllocator") {
 
     SUBCASE("GetMarker returns zero offset after Reset") {
       FixedStackAllocator stack(kCapacity);
-      [[maybe_unused]] const void* _ = stack.allocate(64, kAlign);
+      std::ignore = stack.allocate(64, kAlign);
       stack.Reset();
       CHECK_EQ(stack.GetMarker().offset, 0);
     }
 
     SUBCASE("Allocations succeed after Reset") {
       FixedStackAllocator stack(kCapacity);
-      [[maybe_unused]] const void* _ = stack.allocate(512, kAlign);
+      std::ignore = stack.allocate(512, kAlign);
       stack.Reset();
       void* const ptr = stack.allocate(64, kAlign);
       CHECK_NE(ptr, nullptr);
@@ -225,13 +227,13 @@ TEST_SUITE("helios::mem::FixedStackAllocator") {
 
     SUBCASE("Returns false after one allocation") {
       FixedStackAllocator stack(kCapacity);
-      [[maybe_unused]] const void* _ = stack.allocate(8, kAlign);
+      std::ignore = stack.allocate(8, kAlign);
       CHECK_FALSE(stack.Empty());
     }
 
     SUBCASE("Returns true after Reset") {
       FixedStackAllocator stack(kCapacity);
-      [[maybe_unused]] const void* _ = stack.allocate(8, kAlign);
+      std::ignore = stack.allocate(8, kAlign);
       stack.Reset();
       CHECK(stack.Empty());
     }
@@ -246,7 +248,7 @@ TEST_SUITE("helios::mem::FixedStackAllocator") {
     SUBCASE("Returns false after non-LIFO deallocate") {
       FixedStackAllocator stack(kCapacity);
       void* const first = stack.allocate(8, kAlign);
-      [[maybe_unused]] const void* _ = stack.allocate(8, kAlign);
+      std::ignore = stack.allocate(8, kAlign);
       stack.deallocate(first, 8, kAlign);
       CHECK_FALSE(stack.Empty());
     }
@@ -301,7 +303,7 @@ TEST_SUITE("helios::mem::FixedStackAllocator") {
 
     SUBCASE("Captures current bump offset after allocations") {
       FixedStackAllocator stack(kCapacity);
-      [[maybe_unused]] const void* _ = stack.allocate(64, kAlign);
+      std::ignore = stack.allocate(64, kAlign);
       const size_t offset_after_alloc = stack.Stats().total_allocated;
       CHECK_EQ(stack.GetMarker().offset, offset_after_alloc);
     }
@@ -309,7 +311,7 @@ TEST_SUITE("helios::mem::FixedStackAllocator") {
     SUBCASE("Marker is unchanged by non-LIFO deallocate") {
       FixedStackAllocator stack(kCapacity);
       void* const first = stack.allocate(64, kAlign);
-      [[maybe_unused]] const void* _ = stack.allocate(64, kAlign);
+      std::ignore = stack.allocate(64, kAlign);
       const auto marker = stack.GetMarker();
       stack.deallocate(first, 64, kAlign);
       CHECK_EQ(stack.GetMarker().offset, marker.offset);
@@ -317,7 +319,7 @@ TEST_SUITE("helios::mem::FixedStackAllocator") {
 
     SUBCASE("Marker rewinds after LIFO deallocate") {
       FixedStackAllocator stack(kCapacity);
-      [[maybe_unused]] const void* _ = stack.allocate(64, kAlign);
+      std::ignore = stack.allocate(64, kAlign);
       void* const second = stack.allocate(64, kAlign);
       const size_t offset_before = stack.GetMarker().offset;
       stack.deallocate(second, 64, kAlign);
@@ -339,23 +341,23 @@ TEST_SUITE("helios::mem::FixedStackAllocator") {
 
     SUBCASE("total_allocated reflects bump offset after allocations") {
       FixedStackAllocator stack(kCapacity);
-      const void* ptr = stack.allocate(64, kAlign);
-      ptr = stack.allocate(128, kAlign);
+      std::ignore = stack.allocate(64, kAlign);
+      std::ignore = stack.allocate(128, kAlign);
       CHECK_GE(stack.Stats().total_allocated, 192);
     }
 
     SUBCASE("allocation_count tracks live allocations") {
       FixedStackAllocator stack(kCapacity);
-      const void* ptr = stack.allocate(32, kAlign);
-      ptr = stack.allocate(32, kAlign);
+      std::ignore = stack.allocate(32, kAlign);
+      std::ignore = stack.allocate(32, kAlign);
       CHECK_EQ(stack.Stats().allocation_count, 2);
     }
 
     SUBCASE("total_allocations counts every allocate call") {
       FixedStackAllocator stack(kCapacity);
-      const void* ptr = stack.allocate(16, kAlign);
-      ptr = stack.allocate(16, kAlign);
-      ptr = stack.allocate(16, kAlign);
+      std::ignore = stack.allocate(16, kAlign);
+      std::ignore = stack.allocate(16, kAlign);
+      std::ignore = stack.allocate(16, kAlign);
       CHECK_EQ(stack.Stats().total_allocations, 3);
     }
 
@@ -371,14 +373,14 @@ TEST_SUITE("helios::mem::FixedStackAllocator") {
 
     SUBCASE("peak_usage is at least total bytes allocated at high watermark") {
       FixedStackAllocator stack(kCapacity);
-      const void* ptr = stack.allocate(256, kAlign);
-      ptr = stack.allocate(128, kAlign);
+      std::ignore = stack.allocate(256, kAlign);
+      std::ignore = stack.allocate(128, kAlign);
       CHECK_GE(stack.Stats().peak_usage, 256);
     }
 
     SUBCASE("alignment_waste is non-negative with large alignment request") {
       FixedStackAllocator stack(kCapacity);
-      [[maybe_unused]] const void* _ = stack.allocate(1, 64);
+      std::ignore = stack.allocate(1, 64);
       CHECK_GE(stack.Stats().alignment_waste, 0);
     }
   }
@@ -391,13 +393,13 @@ TEST_SUITE("helios::mem::FixedStackAllocator") {
 
     SUBCASE("Unchanged by allocations") {
       FixedStackAllocator stack(kCapacity);
-      [[maybe_unused]] const void* _ = stack.allocate(512, kAlign);
+      std::ignore = stack.allocate(512, kAlign);
       CHECK_EQ(stack.InitialCapacity(), kCapacity);
     }
 
     SUBCASE("Unchanged after Reset") {
       FixedStackAllocator stack(kCapacity);
-      [[maybe_unused]] const void* _ = stack.allocate(512, kAlign);
+      std::ignore = stack.allocate(512, kAlign);
       stack.Reset();
       CHECK_EQ(stack.InitialCapacity(), kCapacity);
     }
@@ -411,13 +413,13 @@ TEST_SUITE("helios::mem::FixedStackAllocator") {
 
     SUBCASE("Unchanged by allocations") {
       FixedStackAllocator stack(kCapacity);
-      [[maybe_unused]] const void* _ = stack.allocate(512, kAlign);
+      std::ignore = stack.allocate(512, kAlign);
       CHECK_EQ(stack.TotalCapacity(), kCapacity);
     }
 
     SUBCASE("Unchanged after Reset") {
       FixedStackAllocator stack(kCapacity);
-      [[maybe_unused]] const void* _ = stack.allocate(512, kAlign);
+      std::ignore = stack.allocate(512, kAlign);
       stack.Reset();
       CHECK_EQ(stack.TotalCapacity(), kCapacity);
     }
@@ -476,7 +478,7 @@ TEST_SUITE("helios::mem::FixedStackAllocator") {
   TEST_CASE("mem::FixedStackAllocator::deallocate") {
     SUBCASE("LIFO deallocate decrements allocation_count") {
       FixedStackAllocator stack(kCapacity);
-      [[maybe_unused]] const void* _ = stack.allocate(64, kAlign);
+      std::ignore = stack.allocate(64, kAlign);
       void* const second = stack.allocate(64, kAlign);
       stack.deallocate(second, 64, kAlign);
       CHECK_EQ(stack.Stats().allocation_count, 1);
@@ -484,7 +486,7 @@ TEST_SUITE("helios::mem::FixedStackAllocator") {
 
     SUBCASE("LIFO deallocate reduces total_allocated") {
       FixedStackAllocator stack(kCapacity);
-      [[maybe_unused]] const void* _ = stack.allocate(64, kAlign);
+      std::ignore = stack.allocate(64, kAlign);
       void* const second = stack.allocate(64, kAlign);
       const size_t allocated_before = stack.Stats().total_allocated;
       stack.deallocate(second, 64, kAlign);
@@ -501,7 +503,7 @@ TEST_SUITE("helios::mem::FixedStackAllocator") {
     SUBCASE("Non-LIFO deallocate is a no-op for allocation_count") {
       FixedStackAllocator stack(kCapacity);
       void* const first = stack.allocate(64, kAlign);
-      [[maybe_unused]] const void* _ = stack.allocate(64, kAlign);
+      std::ignore = stack.allocate(64, kAlign);
       stack.deallocate(first, 64, kAlign);
       CHECK_EQ(stack.Stats().allocation_count, 2);
     }
@@ -509,7 +511,7 @@ TEST_SUITE("helios::mem::FixedStackAllocator") {
     SUBCASE("Non-LIFO deallocate is a no-op for total_allocated") {
       FixedStackAllocator stack(kCapacity);
       void* const first = stack.allocate(64, kAlign);
-      [[maybe_unused]] const void* _ = stack.allocate(64, kAlign);
+      std::ignore = stack.allocate(64, kAlign);
       const size_t allocated_before = stack.Stats().total_allocated;
       stack.deallocate(first, 64, kAlign);
       CHECK_EQ(stack.Stats().total_allocated, allocated_before);
@@ -518,7 +520,7 @@ TEST_SUITE("helios::mem::FixedStackAllocator") {
     SUBCASE("Non-LIFO deallocate does not increment total_deallocations") {
       FixedStackAllocator stack(kCapacity);
       void* const first = stack.allocate(64, kAlign);
-      [[maybe_unused]] const void* _ = stack.allocate(64, kAlign);
+      std::ignore = stack.allocate(64, kAlign);
       stack.deallocate(first, 64, kAlign);
       CHECK_EQ(stack.Stats().total_deallocations, 0);
     }

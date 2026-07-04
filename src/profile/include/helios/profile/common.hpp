@@ -21,7 +21,7 @@ enum class PlotFormat : uint8_t {
  */
 struct ZoneSpec {
   std::string_view name;
-  std::source_location loc;
+  std::source_location loc = std::source_location::current();
   uint32_t color = 0;
   bool active = true;
   /// Optional stack-capture depth hint. Backends that do not support callstack

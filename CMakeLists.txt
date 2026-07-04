@@ -14,37 +14,6 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
   message(STATUS "Setting build type to 'Release' as none was specified.")
 endif()
 
-# Set archiver tools for Clang to support LTO
-if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-  if(MSVC OR CMAKE_CXX_COMPILER_FRONTEND_VARIANT STREQUAL "MSVC")
-    find_program(LLVM_LIB_EXECUTABLE
-        NAMES llvm-lib llvm-lib.exe
-        HINTS
-            "$ENV{VCINSTALLDIR}/Tools/Llvm/x64/bin"
-            "$ENV{VCINSTALLDIR}/Tools/Llvm/bin"
-            "C:/Program Files/LLVM/bin"
-            "C:/Program Files (x86)/LLVM/bin"
-    )
-    find_program(MSVC_LIB_EXECUTABLE NAMES lib lib.exe)
-
-    if(LLVM_LIB_EXECUTABLE)
-      set(CMAKE_AR "${LLVM_LIB_EXECUTABLE}" CACHE FILEPATH "Archiver" FORCE)
-    elseif(MSVC_LIB_EXECUTABLE)
-      set(CMAKE_AR "${MSVC_LIB_EXECUTABLE}" CACHE FILEPATH "Archiver" FORCE)
-    endif()
-    set(CMAKE_RANLIB "" CACHE FILEPATH "Ranlib" FORCE)
-  else()
-    find_program(LLVM_AR_EXECUTABLE llvm-ar)
-    find_program(LLVM_RANLIB_EXECUTABLE llvm-ranlib)
-    if(LLVM_AR_EXECUTABLE)
-      set(CMAKE_AR "${LLVM_AR_EXECUTABLE}" CACHE FILEPATH "Archiver" FORCE)
-    endif()
-    if(LLVM_RANLIB_EXECUTABLE)
-      set(CMAKE_RANLIB "${LLVM_RANLIB_EXECUTABLE}" CACHE FILEPATH "Ranlib" FORCE)
-    endif()
-  endif()
-endif()
-
 if(CMAKE_CONFIGURATION_TYPES)
   set(CMAKE_CONFIGURATION_TYPES "Debug;RelWithDebInfo;Release" CACHE STRING "" FORCE)
 endif()
@@ -82,7 +51,8 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/helpers")
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
-include(BuildDirHelper)
+include(ClangArchiver)
+helios_configure_clang_archiver()
 
 if(HELIOS_ENABLE_UNITY_BUILD)
   set(CMAKE_UNITY_BUILD ON)
@@ -91,12 +61,11 @@ endif()
 
 set(HELIOS_ROOT_DIR ${PROJECT_SOURCE_DIR})
 
-helios_print_build_dir_info()
-
 if(HELIOS_ENABLE_LTO)
   include(CheckIPOSupported)
   check_ipo_supported(RESULT HELIOS_IPO_SUPPORTED OUTPUT error)
   if(HELIOS_IPO_SUPPORTED)
+    set(HELIOS_IPO_SUPPORTED "${HELIOS_IPO_SUPPORTED}" CACHE INTERNAL "IPO/LTO support result")
     set(CMAKE_INTERPROCEDURAL_OPTIMIZATION_RELWITHDEBINFO ON)
     set(CMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE ON)
     message(STATUS "Link-Time Optimization (LTO) enabled for Release and RelWithDebInfo builds")
@@ -166,9 +135,8 @@ helios_discover_modules(
 )
 helios_discover_extra_module_dirs()
 
-# Pass 1C-E: Resolve, check, validate
+# Pass 1C-E: Resolve and validate
 helios_resolve_module_dependencies()
-helios_check_circular_dependencies()
 helios_validate_module_dependencies()
 
 # Pass 2: Build enabled modules in topological order

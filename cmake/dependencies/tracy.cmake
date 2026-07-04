@@ -13,23 +13,17 @@ helios_dependency(
         pkg_config tracy
 
     CPM_REPOSITORY wolfpld/tracy
-    CPM_VERSION 0.13.1
     CPM_GIT_TAG v0.13.1
     CPM_OPTIONS
         "TRACY_ENABLE ON"
         "TRACY_ON_DEMAND ON"
         "TRACY_STATIC ON"
 
+    UMBRELLA_ALIAS helios::lib::tracy
+
     ALIASES
         helios::lib::tracy::TracyClient Tracy::TracyClient
-        helios::lib::tracy Tracy::TracyClient
 )
-
-if(TARGET helios::lib::tracy::TracyClient AND NOT TARGET helios::lib::tracy)
-  add_library(_helios_tracy_all INTERFACE)
-  target_link_libraries(_helios_tracy_all INTERFACE helios::lib::tracy::TracyClient)
-  add_library(helios::lib::tracy ALIAS _helios_tracy_all)
-endif()
 
 if(TARGET TracyClient)
   get_target_property(_helios_tracy_defs TracyClient INTERFACE_COMPILE_DEFINITIONS)

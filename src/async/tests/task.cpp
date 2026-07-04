@@ -167,17 +167,17 @@ TEST_SUITE("helios::async::Task") {
 
       auto task_a = graph.EmplaceTask([&execution_order, &order_counter]() {
         const int index = order_counter.fetch_add(1);
-        execution_order[index] = index;
+        execution_order[static_cast<size_t>(index)] = index;
       });
 
       auto task_b = graph.EmplaceTask([&execution_order, &order_counter]() {
         const int index = order_counter.fetch_add(1);
-        execution_order[index] = index;
+        execution_order[static_cast<size_t>(index)] = index;
       });
 
       auto task_c = graph.EmplaceTask([&execution_order, &order_counter]() {
         const int index = order_counter.fetch_add(1);
-        execution_order[index] = index;
+        execution_order[static_cast<size_t>(index)] = index;
       });
 
       task_a.Precede(task_b, task_c);
@@ -210,7 +210,7 @@ TEST_SUITE("helios::async::Task") {
       });
 
       std::vector<Task> dependent_tasks;
-      for (int i = 1; i < 4; ++i) {
+      for (size_t i = 1; i < 4; ++i) {
         dependent_tasks.push_back(
             graph.EmplaceTask([&execution_order, &order_counter, i]() {
               execution_order[i] = order_counter.fetch_add(1);
@@ -308,7 +308,7 @@ TEST_SUITE("helios::async::Task") {
       std::atomic<int> order_counter{0};
 
       std::vector<Task> dependency_tasks;
-      for (int i = 0; i < 3; ++i) {
+      for (size_t i = 0; i < 3; ++i) {
         dependency_tasks.push_back(
             graph.EmplaceTask([&execution_order, &order_counter, i]() {
               execution_order[i] = order_counter.fetch_add(1);

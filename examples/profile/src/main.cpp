@@ -122,7 +122,7 @@ struct SimulatePhysics {
 struct ExitAfterFrames {
   void operator()(hecs::Res<const FrameCount> frames,
                   hecs::MessageWriter<happ::AppExit> exit_writer) const {
-    if (frames->count >= 5) {
+    if (frames->count >= 100) {
       exit_writer.Write({.code = happ::ExitCode::kSuccess});
     }
   }

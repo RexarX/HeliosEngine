@@ -632,18 +632,18 @@ TEST_SUITE("helios::async::TaskGraph") {
     }
 
     SUBCASE("Linear chain") {
-      constexpr int chain_length = 10;
+      constexpr size_t kChainLength = 10;
       std::vector<int> execution_order;
       std::atomic<int> order_counter{0};
       std::vector<Task> tasks;
       std::mutex order_mutex;
 
       // Create linear chain of tasks
-      for (int i = 0; i < chain_length; ++i) {
+      for (size_t i = 0; i < kChainLength; ++i) {
         tasks.push_back(
             graph
                 .EmplaceTask(
-                    [&execution_order, &order_counter, &order_mutex, i]() {
+                    [&execution_order, &order_counter, &order_mutex]() {
                       const std::scoped_lock lock(order_mutex);
                       execution_order.push_back(order_counter.fetch_add(1));
                     })
@@ -651,16 +651,16 @@ TEST_SUITE("helios::async::TaskGraph") {
       }
 
       // Link them in sequence
-      for (int i = 0; i < chain_length - 1; ++i) {
+      for (size_t i = 0; i < kChainLength - 1; ++i) {
         tasks[i].Precede(tasks[i + 1]);
       }
 
       auto future = executor.Run(std::move(graph));
       future.Wait();
 
-      CHECK_EQ(execution_order.size(), chain_length);
-      for (int i = 0; i < chain_length; ++i) {
-        CHECK_EQ(execution_order[i], i);
+      CHECK_EQ(execution_order.size(), kChainLength);
+      for (size_t i = 0; i < kChainLength; ++i) {
+        CHECK_EQ(execution_order[i], static_cast<int>(i));
       }
     }
   }

@@ -209,7 +209,7 @@ inline bool ResourceManager::TryEmplace(Args&&... args) {
 
 template <ResourceTrait T>
 inline void ResourceManager::Remove() {
-  const bool removed = resources_.Remove<T>();
+  [[maybe_unused]] const bool removed = resources_.Remove<T>();
   HELIOS_ASSERT(removed, "Resource '{}' does not exist!", ResourceNameOf<T>());
 }
 

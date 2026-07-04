@@ -9,7 +9,6 @@
 #include <atomic>
 #include <cstddef>
 #include <memory_resource>
-#include <utility>
 
 namespace helios::mem {
 
@@ -222,9 +221,9 @@ inline FixedPoolAllocator& FixedPoolAllocator::operator=(
 template <typename T>
 inline FixedPoolAllocator FixedPoolAllocator::ForType(
     size_t block_count) noexcept {
-  constexpr size_t kAlign =
+  constexpr size_t type_align =
       alignof(T) > alignof(void*) ? alignof(T) : alignof(void*);
-  return {sizeof(T), block_count, kAlign};
+  return {sizeof(T), block_count, type_align};
 }
 
 inline void FixedPoolAllocator::Reset() noexcept {

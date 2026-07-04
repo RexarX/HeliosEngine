@@ -5,6 +5,7 @@
 #include <helios/profile/common.hpp>
 
 #include <concurrentqueue/moodycamel/concurrentqueue.h>
+
 #include <atomic>
 #include <cstddef>
 #include <cstdint>

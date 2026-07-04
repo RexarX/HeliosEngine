@@ -45,7 +45,7 @@ TEST_SUITE("helios::ecs::FunctionCmd") {
       World world;
       World* received = nullptr;
 
-      FunctionCmd cmd([&received](World& world) { received = &world; });
+      FunctionCmd cmd([&received](World& captured) { received = &captured; });
       cmd.Execute(world);
 
       CHECK_EQ(received, &world);

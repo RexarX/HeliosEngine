@@ -4,12 +4,6 @@
 #include <helios/compiler/compiler.hpp>
 #include <helios/ecs/message/message.hpp>
 
-#ifdef HELIOS_STL_FLAT_MAP_AVAILABLE
-#include <flat_map>
-#else
-#include <boost/container/flat_map.hpp>
-#endif
-
 #include <concurrentqueue/moodycamel/concurrentqueue.h>
 
 #include <algorithm>
@@ -20,6 +14,12 @@
 #include <memory>
 #include <ranges>
 #include <utility>
+
+#ifdef HELIOS_STL_FLAT_MAP_AVAILABLE
+#include <flat_map>
+#else
+#include <boost/container/flat_map.hpp>
+#endif
 
 namespace helios::ecs {
 

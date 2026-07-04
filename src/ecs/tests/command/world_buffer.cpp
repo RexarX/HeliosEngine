@@ -250,7 +250,8 @@ TEST_SUITE("helios::ecs::WorldCmdBuffer") {
 
       {
         WorldCmdBuffer buf(queue, std::pmr::get_default_resource());
-        buf.DeferredUpdate([&received](World& world) { received = &world; });
+        buf.DeferredUpdate(
+            [&received](World& captured) { received = &captured; });
       }
 
       queue.ExecuteAll(world);

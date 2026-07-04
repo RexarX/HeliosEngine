@@ -598,7 +598,7 @@ TEST_SUITE("helios::ecs::World") {
 
       const auto query = world.Query<Position>(resource);
       int count = 0;
-      for (auto&& [pos] : query) {
+      for ([[maybe_unused]] auto&& [pos] : query) {
         ++count;
       }
       CHECK_EQ(count, 1);

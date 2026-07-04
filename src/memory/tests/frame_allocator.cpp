@@ -8,6 +8,7 @@
 #include <cstdint>
 #include <memory_resource>
 #include <thread>
+#include <tuple>
 #include <vector>
 
 using namespace helios::mem;
@@ -92,7 +93,7 @@ TEST_SUITE("helios::mem::FrameAllocator") {
 
     SUBCASE("Moved-into allocator carries existing allocation state") {
       FrameAllocator<2> source(BasicOptions());
-      [[maybe_unused]] const void* _ = source.allocate(64, kAlign);
+      std::ignore = source.allocate(64, kAlign);
 
       const FrameAllocator<2> moved(std::move(source));
 
@@ -118,7 +119,7 @@ TEST_SUITE("helios::mem::FrameAllocator") {
 
     SUBCASE("Target carries allocation state from source") {
       FrameAllocator<2> source(BasicOptions());
-      [[maybe_unused]] const void* _ = source.allocate(32, kAlign);
+      std::ignore = source.allocate(32, kAlign);
       FrameAllocator<2> target(FrameAllocatorOptions{.initial_capacity = 128});
 
       target = std::move(source);
@@ -137,7 +138,7 @@ TEST_SUITE("helios::mem::FrameAllocator") {
 
     SUBCASE("Self move assignment does not corrupt state") {
       FrameAllocator<2> alloc(BasicOptions());
-      [[maybe_unused]] const void* _ = alloc.allocate(16, kAlign);
+      std::ignore = alloc.allocate(16, kAlign);
       FrameAllocator<2>& ref = alloc;
 
       ref = std::move(alloc);  // NOLINT(clang-diagnostic-self-move)
@@ -169,7 +170,7 @@ TEST_SUITE("helios::mem::FrameAllocator") {
       FrameAllocator<2> alloc(BasicOptions());
 
       alloc.Advance();
-      [[maybe_unused]] const void* _ = alloc.allocate(64, kAlign);
+      std::ignore = alloc.allocate(64, kAlign);
       alloc.Advance();  // wraps back to frame 0, which gets Reset
 
       CHECK(alloc.Empty());
@@ -190,7 +191,7 @@ TEST_SUITE("helios::mem::FrameAllocator") {
       FrameAllocator<2> alloc(BasicOptions());
 
       alloc.Advance();
-      [[maybe_unused]] const void* _ = alloc.allocate(64, kAlign);
+      std::ignore = alloc.allocate(64, kAlign);
       alloc.Advance();  // resets frame 0
 
       CHECK_EQ(alloc.Stats().allocation_count, 0);
@@ -211,11 +212,11 @@ TEST_SUITE("helios::mem::FrameAllocator") {
 
     SUBCASE("All arenas are empty after Reset") {
       FrameAllocator<3> alloc(BasicOptions());
-      const void* ptr = alloc.allocate(32, kAlign);
+      std::ignore = alloc.allocate(32, kAlign);
       alloc.Advance();
-      ptr = alloc.allocate(32, kAlign);
+      std::ignore = alloc.allocate(32, kAlign);
       alloc.Advance();
-      ptr = alloc.allocate(32, kAlign);
+      std::ignore = alloc.allocate(32, kAlign);
 
       alloc.Reset();
       for (size_t i = 0; i < 3; ++i) {
@@ -225,7 +226,7 @@ TEST_SUITE("helios::mem::FrameAllocator") {
 
     SUBCASE("Allocation succeeds after Reset") {
       FrameAllocator<2> alloc(BasicOptions());
-      [[maybe_unused]] const void* _ = alloc.allocate(512, kAlign);
+      std::ignore = alloc.allocate(512, kAlign);
 
       alloc.Reset();
 
@@ -242,20 +243,20 @@ TEST_SUITE("helios::mem::FrameAllocator") {
 
     SUBCASE("Returns false after allocation in current frame") {
       FrameAllocator<2> alloc(BasicOptions());
-      [[maybe_unused]] const void* _ = alloc.allocate(16, kAlign);
+      std::ignore = alloc.allocate(16, kAlign);
       CHECK_FALSE(alloc.Empty());
     }
 
     SUBCASE("Returns true for the new frame after Advance") {
       FrameAllocator<2> alloc(BasicOptions());
-      [[maybe_unused]] const void* _ = alloc.allocate(64, kAlign);
+      std::ignore = alloc.allocate(64, kAlign);
       alloc.Advance();
       CHECK(alloc.Empty());
     }
 
     SUBCASE("Returns true after Reset") {
       FrameAllocator<2> alloc(BasicOptions());
-      [[maybe_unused]] const void* _ = alloc.allocate(64, kAlign);
+      std::ignore = alloc.allocate(64, kAlign);
       alloc.Reset();
       CHECK(alloc.Empty());
     }
@@ -273,16 +274,16 @@ TEST_SUITE("helios::mem::FrameAllocator") {
 
     SUBCASE("total_allocations counts allocations in current frame") {
       FrameAllocator<2> alloc(BasicOptions());
-      const void* ptr = alloc.allocate(64, kAlign);
-      ptr = alloc.allocate(64, kAlign);
+      std::ignore = alloc.allocate(64, kAlign);
+      std::ignore = alloc.allocate(64, kAlign);
 
       CHECK_EQ(alloc.Stats().total_allocations, 2);
     }
 
     SUBCASE("Stats show only current frame after Advance") {
       FrameAllocator<2> alloc(BasicOptions());
-      [[maybe_unused]] const void* _ = alloc.allocate(64, kAlign);  // frame 0
-      alloc.Advance();  // now frame 1
+      std::ignore = alloc.allocate(64, kAlign);  // frame 0
+      alloc.Advance();                           // now frame 1
 
       CHECK_EQ(alloc.Stats().allocation_count, 0);
     }
@@ -304,10 +305,10 @@ TEST_SUITE("helios::mem::FrameAllocator") {
     SUBCASE("Sums total_allocations across all frame arenas") {
       FrameAllocator<2> alloc(BasicOptions());
 
-      const void* ptr = alloc.allocate(32, kAlign);  // frame 0: 1 alloc
-      ptr = alloc.allocate(32, kAlign);              // frame 0: 2 allocs
+      std::ignore = alloc.allocate(32, kAlign);  // frame 0: 1 alloc
+      std::ignore = alloc.allocate(32, kAlign);  // frame 0: 2 allocs
       alloc.Advance();
-      ptr = alloc.allocate(64, kAlign);  // frame 1: 1 alloc
+      std::ignore = alloc.allocate(64, kAlign);  // frame 1: 1 alloc
 
       const AllocatorStats agg = alloc.AggregateStats();
       CHECK_EQ(agg.total_allocations, 3);
@@ -316,9 +317,9 @@ TEST_SUITE("helios::mem::FrameAllocator") {
     SUBCASE("Sums peak_usage across all frames (saturating)") {
       FrameAllocator<2> alloc(BasicOptions());
 
-      const void* ptr = alloc.allocate(128, kAlign);
+      std::ignore = alloc.allocate(128, kAlign);
       alloc.Advance();
-      ptr = alloc.allocate(64, kAlign);
+      std::ignore = alloc.allocate(64, kAlign);
 
       const AllocatorStats agg = alloc.AggregateStats();
       CHECK_GE(agg.peak_usage, 64);
@@ -406,7 +407,7 @@ TEST_SUITE("helios::mem::FrameAllocator") {
 
     SUBCASE("Unchanged by allocations") {
       FrameAllocator<2> alloc(BasicOptions());
-      [[maybe_unused]] const void* _ = alloc.allocate(128, kAlign);
+      std::ignore = alloc.allocate(128, kAlign);
       CHECK_EQ(alloc.InitialCapacity(), kCap);
     }
 
@@ -419,7 +420,7 @@ TEST_SUITE("helios::mem::FrameAllocator") {
     SUBCASE("Unchanged after Reset") {
       FrameAllocator<2> alloc(BasicOptions());
 
-      [[maybe_unused]] const void* _ = alloc.allocate(64, kAlign);
+      std::ignore = alloc.allocate(64, kAlign);
       alloc.Reset();
 
       CHECK_EQ(alloc.InitialCapacity(), kCap);
@@ -466,8 +467,8 @@ TEST_SUITE("helios::mem::FrameAllocator") {
       FrameAllocator<2> alloc(GrowingOptions(64));
 
       const size_t before = alloc.TotalCapacity();
-      const void* ptr = alloc.allocate(64, 1);
-      ptr = alloc.allocate(64, 1);  // forces growth in current arena
+      std::ignore = alloc.allocate(64, 1);
+      std::ignore = alloc.allocate(64, 1);  // forces growth in current arena
 
       CHECK_GT(alloc.TotalCapacity(), before);
     }
@@ -482,8 +483,8 @@ TEST_SUITE("helios::mem::FrameAllocator") {
     SUBCASE("Increases when current arena grows") {
       FrameAllocator<2> alloc(GrowingOptions(64));
 
-      const void* ptr = alloc.allocate(64, 1);
-      ptr = alloc.allocate(64, 1);
+      std::ignore = alloc.allocate(64, 1);
+      std::ignore = alloc.allocate(64, 1);
 
       CHECK_GT(alloc.BlockCount(), 1);
     }
@@ -491,8 +492,8 @@ TEST_SUITE("helios::mem::FrameAllocator") {
     SUBCASE("Returns to 1 after Advance (new current arena is fresh)") {
       FrameAllocator<2> alloc(GrowingOptions(64));
 
-      const void* ptr = alloc.allocate(64, 1);
-      ptr = alloc.allocate(64, 1);
+      std::ignore = alloc.allocate(64, 1);
+      std::ignore = alloc.allocate(64, 1);
       alloc.Advance();  // switch to the other arena which is fresh
 
       CHECK_EQ(alloc.BlockCount(), 1);
@@ -515,7 +516,7 @@ TEST_SUITE("helios::mem::FrameAllocator") {
       FrameAllocator<2> alloc(BasicOptions());
 
       alloc.Advance();  // now on frame 1
-      [[maybe_unused]] const void* _ = alloc.allocate(64, kAlign);
+      std::ignore = alloc.allocate(64, kAlign);
 
       CHECK_EQ(alloc.Arena(alloc.FrameIndex()).Stats().allocation_count,
                alloc.Stats().allocation_count);
@@ -526,9 +527,9 @@ TEST_SUITE("helios::mem::FrameAllocator") {
     SUBCASE("Const Arena returns correct Stats for each frame") {
       FrameAllocator<2> alloc(BasicOptions());
 
-      const void* ptr = alloc.allocate(64, kAlign);  // frame 0: 1 alloc
+      std::ignore = alloc.allocate(64, kAlign);  // frame 0: 1 alloc
       alloc.Advance();
-      ptr = alloc.allocate(128, kAlign);  // frame 1: 1 alloc
+      std::ignore = alloc.allocate(128, kAlign);  // frame 1: 1 alloc
 
       const FrameAllocator<2>& const_alloc = alloc;
       CHECK_EQ(const_alloc.Arena(0).Stats().allocation_count, 1);
@@ -569,7 +570,7 @@ TEST_SUITE("helios::mem::FrameAllocator") {
     SUBCASE("Routes allocations to current frame arena after Advance") {
       FrameAllocator<2> alloc(BasicOptions());
       alloc.Advance();  // switch to frame 1
-      [[maybe_unused]] const void* _ = alloc.allocate(32, kAlign);
+      std::ignore = alloc.allocate(32, kAlign);
       CHECK_EQ(alloc.Arena(1).Stats().allocation_count, 1);
       CHECK_EQ(alloc.Arena(0).Stats().allocation_count, 0);
     }
@@ -615,7 +616,7 @@ TEST_SUITE("helios::mem::FrameAllocator") {
     SUBCASE("Behaves as single-buffered FrameAllocator") {
       FrameAllocator<1> alloc(BasicOptions());
 
-      [[maybe_unused]] const void* _ = alloc.allocate(16, kAlign);
+      std::ignore = alloc.allocate(16, kAlign);
       CHECK_FALSE(alloc.Empty());
       alloc.Advance();  // wraps back to frame 0, resets it
       CHECK(alloc.Empty());
@@ -684,7 +685,7 @@ TEST_SUITE("helios::mem::FrameAllocator") {
       for (size_t j = 0; j < kThreads; ++j) {
         threads.emplace_back([&alloc] {
           for (size_t i = 0; i < kAllocsPerThread; ++i) {
-            [[maybe_unused]] const void* _ = alloc.allocate(8, kAlign);
+            std::ignore = alloc.allocate(8, kAlign);
           }
         });
       }

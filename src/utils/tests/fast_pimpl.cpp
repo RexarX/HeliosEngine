@@ -62,7 +62,9 @@ TEST_SUITE("helios::utils::FastPimpl") {
     CHECK_EQ(instance.Str(), "hello");
 
     instance.SetNum(100);
+    instance.SetStr("world");
     CHECK_EQ(instance.Num(), 100);
+    CHECK_EQ(instance.Str(), "world");
 
     SUBCASE("Copy and move") {
       auto instance_copy = instance;

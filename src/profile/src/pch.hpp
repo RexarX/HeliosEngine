@@ -6,6 +6,7 @@
 #include <concepts>
 #include <cstddef>
 #include <cstdint>
+#include <cstdlib>
 #include <cstring>
 #include <filesystem>
 #include <fstream>
@@ -18,6 +19,11 @@
 #include <string>
 #include <string_view>
 #include <thread>
+#include <type_traits>
 #include <variant>
 
-#include <concurrentqueue/moodycamel/concurrentqueue.h>
+#ifdef HELIOS_PROFILE_BUNDLE_TRACY
+#include <client/TracyProfiler.hpp>
+#include <client/TracyScoped.hpp>
+#include <client/TracyThread.hpp>
+#endif

@@ -1,5 +1,7 @@
 #include <doctest/doctest.h>
 
+#include <tuple>
+
 #include <helios/memory/fixed_pool_allocator.hpp>
 
 #include <algorithm>
@@ -23,6 +25,7 @@ struct alignas(16) Vec3 {
   float x = 0.F;
   float y = 0.F;
   float z = 0.F;
+  float w = 0.F;
 };
 
 }  // namespace
@@ -68,7 +71,7 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
   TEST_CASE("mem::FixedPoolAllocator::ctor(FixedPoolAllocator&&)") {
     SUBCASE("Moved-into pool carries allocation state") {
       FixedPoolAllocator source(kBlockSize, kBlockCount, kAlign);
-      [[maybe_unused]] const void* _ = source.allocate(kBlockSize, kAlign);
+      std::ignore = source.allocate(kBlockSize, kAlign);
 
       FixedPoolAllocator moved(std::move(source));
 
@@ -98,7 +101,7 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
   TEST_CASE("mem::FixedPoolAllocator::operator=(FixedPoolAllocator&&)") {
     SUBCASE("Target acquires source allocation state") {
       FixedPoolAllocator source(kBlockSize, kBlockCount, kAlign);
-      [[maybe_unused]] const void* _ = source.allocate(kBlockSize, kAlign);
+      std::ignore = source.allocate(kBlockSize, kAlign);
       FixedPoolAllocator target(kBlockSize, kBlockCount, kAlign);
 
       target = std::move(source);
@@ -119,7 +122,7 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
 
     SUBCASE("Self move assignment does not corrupt state") {
       FixedPoolAllocator pool(kBlockSize, kBlockCount, kAlign);
-      [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
       FixedPoolAllocator& ref = pool;
 
       ref = std::move(pool);  // NOLINT(clang-diagnostic-self-move)
@@ -131,7 +134,7 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
   TEST_CASE("mem::FixedPoolAllocator::Reset") {
     SUBCASE("Empty returns true after Reset") {
       FixedPoolAllocator pool(kBlockSize, kBlockCount, kAlign);
-      [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
 
       pool.Reset();
 
@@ -140,7 +143,7 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
 
     SUBCASE("FreeBlockCount equals BlockCount after Reset") {
       FixedPoolAllocator pool(kBlockSize, kBlockCount, kAlign);
-      [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
 
       pool.Reset();
 
@@ -149,7 +152,7 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
 
     SUBCASE("Stats counters are zeroed after Reset") {
       FixedPoolAllocator pool(kBlockSize, kBlockCount, kAlign);
-      [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
 
       pool.Reset();
 
@@ -162,7 +165,7 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
     SUBCASE("Allocation succeeds after Reset") {
       FixedPoolAllocator pool(kBlockSize, kBlockCount, kAlign);
       for (size_t index = 0; index < kBlockCount; ++index) {
-        [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+        std::ignore = pool.allocate(kBlockSize, kAlign);
       }
 
       pool.Reset();
@@ -181,7 +184,7 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
     SUBCASE("Returns true after all blocks are allocated") {
       FixedPoolAllocator pool(kBlockSize, kBlockCount, kAlign);
       for (size_t index = 0; index < kBlockCount; ++index) {
-        [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+        std::ignore = pool.allocate(kBlockSize, kAlign);
       }
 
       CHECK(pool.Full());
@@ -189,7 +192,7 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
 
     SUBCASE("Returns false after one block is freed") {
       FixedPoolAllocator pool(kBlockSize, kBlockCount, kAlign);
-      [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
       void* const second = pool.allocate(kBlockSize, kAlign);
       pool.deallocate(second, kBlockSize, kAlign);
 
@@ -199,7 +202,7 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
     SUBCASE("Returns false after Reset") {
       FixedPoolAllocator pool(kBlockSize, kBlockCount, kAlign);
       for (size_t index = 0; index < kBlockCount; ++index) {
-        [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+        std::ignore = pool.allocate(kBlockSize, kAlign);
       }
 
       pool.Reset();
@@ -216,7 +219,7 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
 
     SUBCASE("Returns false after any allocation") {
       FixedPoolAllocator pool(kBlockSize, kBlockCount, kAlign);
-      [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
       CHECK_FALSE(pool.Empty());
     }
 
@@ -233,7 +236,7 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
 
     SUBCASE("Returns true after Reset") {
       FixedPoolAllocator pool(kBlockSize, kBlockCount, kAlign);
-      [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
 
       pool.Reset();
 
@@ -292,8 +295,8 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
     SUBCASE("total_allocations counts every allocate call") {
       FixedPoolAllocator pool(kBlockSize, kBlockCount, kAlign);
 
-      const void* ptr = pool.allocate(kBlockSize, kAlign);
-      ptr = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
 
       CHECK_EQ(pool.Stats().total_allocations, 2);
     }
@@ -302,7 +305,7 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
       FixedPoolAllocator pool(kBlockSize, kBlockCount, kAlign);
 
       void* const first = pool.allocate(kBlockSize, kAlign);
-      [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
 
       CHECK_EQ(pool.Stats().allocation_count, 2);
       pool.deallocate(first, kBlockSize, kAlign);
@@ -333,7 +336,7 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
 
     SUBCASE("alignment_waste is always zero for fixed pool allocator") {
       FixedPoolAllocator pool(kBlockSize, kBlockCount, kAlign);
-      [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
       CHECK_EQ(pool.Stats().alignment_waste, 0);
     }
   }
@@ -351,7 +354,7 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
 
     SUBCASE("Unchanged by allocations") {
       FixedPoolAllocator pool(kBlockSize, kBlockCount, kAlign);
-      [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
       CHECK_GE(pool.BlockSize(), kBlockSize);
     }
   }
@@ -377,7 +380,7 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
 
     SUBCASE("Unchanged after allocations") {
       FixedPoolAllocator pool(kBlockSize, kBlockCount, kAlign);
-      [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
       CHECK_EQ(pool.InitialBlockCount(), kBlockCount);
     }
   }
@@ -397,7 +400,7 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
 
     SUBCASE("Preserved after Reset") {
       FixedPoolAllocator pool(kBlockSize, kBlockCount, kAlign);
-      [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
       pool.Reset();
       CHECK_EQ(pool.BlockCount(), kBlockCount);
     }
@@ -411,7 +414,7 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
 
     SUBCASE("Decreases by one per allocate") {
       FixedPoolAllocator pool(kBlockSize, kBlockCount, kAlign);
-      [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
       CHECK_EQ(pool.FreeBlockCount(), kBlockCount - 1);
     }
 
@@ -428,7 +431,7 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
     SUBCASE("Equals BlockCount after Reset") {
       FixedPoolAllocator pool(kBlockSize, kBlockCount, kAlign);
 
-      [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
       pool.Reset();
 
       CHECK_EQ(pool.FreeBlockCount(), pool.BlockCount());
@@ -444,8 +447,8 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
     SUBCASE("Increases by one per allocate") {
       FixedPoolAllocator pool(kBlockSize, kBlockCount, kAlign);
 
-      const void* ptr = pool.allocate(kBlockSize, kAlign);
-      ptr = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
 
       CHECK_EQ(pool.UsedBlockCount(), 2);
     }
@@ -453,7 +456,7 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
     SUBCASE("Decreases by one per deallocate") {
       FixedPoolAllocator pool(kBlockSize, kBlockCount, kAlign);
 
-      [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
       void* const second = pool.allocate(kBlockSize, kAlign);
       pool.deallocate(second, kBlockSize, kAlign);
 
@@ -463,7 +466,7 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
     SUBCASE("Is zero after Reset") {
       FixedPoolAllocator pool(kBlockSize, kBlockCount, kAlign);
 
-      [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
       pool.Reset();
 
       CHECK_EQ(pool.UsedBlockCount(), 0);
@@ -472,8 +475,8 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
     SUBCASE("Equals BlockCount minus FreeBlockCount") {
       FixedPoolAllocator pool(kBlockSize, kBlockCount, kAlign);
 
-      const void* ptr = pool.allocate(kBlockSize, kAlign);
-      ptr = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
 
       CHECK_EQ(pool.UsedBlockCount(),
                pool.BlockCount() - pool.FreeBlockCount());
@@ -526,7 +529,7 @@ TEST_SUITE("helios::mem::FixedPoolAllocator") {
     SUBCASE("Freed block is returned to free list") {
       FixedPoolAllocator pool(kBlockSize, 2, kAlign);
 
-      [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
       void* const second = pool.allocate(kBlockSize, kAlign);
       CHECK(pool.Full());
       pool.deallocate(second, kBlockSize, kAlign);

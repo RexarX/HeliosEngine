@@ -1,47 +1,33 @@
-# Creating a Custom Helios Module
+# Creating A Custom Helios Module
 
-## What you get
+## What You Get
 
-| Artifact        | Target / output                                 |
-| --------------- | ----------------------------------------------- |
-| Module library  | `helios::module::greeting`                      |
-| Unit tests      | `greeting_tests` (when `HELIOS_BUILD_TESTS=ON`) |
-| Demo executable | `greeting_demo`                                 |
+| Artifact        | Target / output                                      |
+| --------------- | ---------------------------------------------------- |
+| Module library  | `helios::module::greeting`                           |
+| Unit tests      | `helios_greeting_tests` when `HELIOS_BUILD_TESTS=ON` |
+| Demo executable | `greeting_demo`                                      |
 
 ## Layout
 
-```
+```text
 custom_module/
-├── Module.cmake                      # Register in the dependency graph
-├── CMakeLists.txt                    # Build definition + demo app
-├── README.md                         # This file
-├── include/helios/greeting/
-│   └── greeting.hpp                  # Public API
-├── src/
-│   ├── greeting.cpp                  # Implementation
-│   └── demo.cpp                      # Example consumer
-└── tests/
-    ├── main.cpp                      # doctest entry
-    └── greeting.cpp                  # Unit tests
+|-- CMakeLists.txt
+|-- README.md
+|-- include/helios/greeting/
+|   `-- greeting.hpp
+|-- src/
+|   |-- greeting.cpp
+|   `-- demo.cpp
+`-- tests/
+    |-- main.cpp
+    `-- greeting.cpp
 ```
 
-## Step 1 — Register the module (`Module.cmake`)
+There is no `Module.cmake`. The module is registered and built from the same
+`CMakeLists.txt`.
 
-`helios_register_module` adds the module to Helios's dependency graph and creates the `HELIOS_BUILD_GREETING` CMake option:
-
-```cmake
-helios_register_module(
-    NAME greeting
-    DESCRIPTION "Example custom Helios module (greeting utilities)"
-    DEFAULT ON
-    DEPENDS core utils
-)
-```
-
-- `DEPENDS` — other Helios modules that must be enabled (resolved automatically).
-- `DEFAULT ON` — this example is enabled once discovered (see discovery below).
-
-## Step 2 — Define the build (`CMakeLists.txt`)
+## Module Definition
 
 ```cmake
 helios_module(
@@ -63,58 +49,7 @@ helios_module(
         tests/greeting.cpp
         tests/main.cpp
 )
-```
 
-`helios_module` creates:
-
-- CMake target `helios_module_greeting`
-- Alias `helios::module::greeting`
-- Test binary when `HELIOS_BUILD_TESTS=ON`
-
-## Step 3 — Discovery (no manual `include()`)
-
-Cmake scans `src/` automatically. For out-of-tree modules, register search paths **before module discovery** with `helios_add_extra_module_dirs()`:
-
-```cmake
-# Parent project CMakeLists.txt — before add_subdirectory(HeliosEngine)
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/third_party/HeliosEngine/cmake")
-include(ModuleRegistry)
-
-helios_add_extra_module_dirs("${CMAKE_CURRENT_SOURCE_DIR}/modules")
-
-add_subdirectory(third_party/HeliosEngine)
-```
-
-Alternatively, pass paths through the cache variable (merged at discovery time):
-
-```bash
-cmake --preset linux-gcc-release \
-  -DHELIOS_EXTRA_MODULE_DIRS="/path/to/my/modules;/another/module/root"
-```
-
-Each entry may be either:
-
-- **A module container** — immediate child directories with `CMakeLists.txt` are registered (same as `src/`).
-- **A single module root** — the directory itself is registered when it contains `Module.cmake` (this example).
-
-When `HELIOS_BUILD_EXAMPLES=ON`, Helios registers `examples/custom_module` via `helios_add_extra_module_dirs()` before discovery.
-
-## Step 4 — Public API
-
-Headers live under `include/helios/<module>/` and use the `helios::<module>` namespace:
-
-```cpp
-#include <helios/greeting/greeting.hpp>
-
-auto message = helios::greeting::Format("World");
-// "Hello, World!"
-```
-
-## Step 5 — Consume from an executable
-
-The demo target in `CMakeLists.txt` shows linking:
-
-```cmake
 add_executable(greeting_demo src/demo.cpp)
 
 helios_link_modules(
@@ -125,7 +60,56 @@ helios_link_modules(
 )
 ```
 
-## Further reading
+During module discovery Helios includes this file with
+`HELIOS_REGISTRATION_PASS=ON`. The `helios_module()` macro records module
+metadata and returns from the file, so the `greeting_demo` target is created
+only during the build pass.
 
-- [docs/guidelines.md](../../docs/guidelines.md) — coding standards and module conventions
-- [README.md](../../README.md) — project overview
+Authoring rule:
+
+- Put `option()` calls and simple variable setup above `helios_module()` if
+  needed.
+- Put dependency loading, target mutation, generated files, and custom targets
+  below `helios_module()`.
+
+## Discovery
+
+By default Helios scans `src/`. For out-of-tree modules, register search paths
+before discovery with `helios_add_extra_module_dirs()`:
+
+```cmake
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/third_party/HeliosEngine/cmake")
+include(ModuleRegistry)
+
+helios_add_extra_module_dirs("${CMAKE_CURRENT_SOURCE_DIR}/modules")
+
+add_subdirectory(third_party/HeliosEngine)
+```
+
+Or pass paths through the cache variable:
+
+```bash
+cmake --preset linux-gcc-release \
+  -DHELIOS_EXTRA_MODULE_DIRS="/path/to/my/modules;/another/module/root"
+```
+
+Each entry may be a module container whose child directories contain
+`CMakeLists.txt`, or a single module root containing its own `CMakeLists.txt`.
+When `HELIOS_BUILD_EXAMPLES=ON`, Helios registers this example module through
+`helios_add_extra_module_dirs()`.
+
+## Public API
+
+Headers live under `include/helios/<module>/` and use the
+`helios::<module>` namespace:
+
+```cpp
+#include <helios/greeting/greeting.hpp>
+
+auto message = helios::greeting::Format("World");
+```
+
+## Further Reading
+
+- [docs/guidelines.md](../../docs/guidelines.md)
+- [README.md](../../README.md)

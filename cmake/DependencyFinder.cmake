@@ -5,7 +5,7 @@
 # Key APIs:
 #   helios_dependency()         — declarative single-call dependency
 #   helios_require_dependency() — include a dependency file (internal + escape hatch)
-#   helios_dep_begin/end        — imperative pair for advanced dependency files
+#   _helios_dep_begin/end       — internal imperative pair for advanced files
 #
 # New features:
 #   - HELIOS_DEPENDENCY_PATHS / HELIOS_DEPENDENCY_OVERRIDE_PATHS
@@ -15,6 +15,7 @@
 include_guard(GLOBAL)
 
 cmake_policy(SET CMP0054 NEW)
+include(Primitives)
 
 # ============================================================================
 # Global State
@@ -40,6 +41,11 @@ endif()
 # Logging Helpers
 # ============================================================================
 
+#[[
+    helios_dep_log(<kind> <message>)
+
+    Emits standardized dependency status messages. Used by dependency scripts.
+]]
 function(helios_dep_log)
   set(options "")
   set(oneValueArgs MESSAGE STATUS WARNING ERROR SUCCESS DOWNLOAD CONFIGURE FOUND NOT_FOUND)
@@ -67,6 +73,11 @@ function(helios_dep_log)
   endif()
 endfunction()
 
+#[[
+    helios_dep_header(NAME <name>)
+
+    Prints a dependency configuration header.
+]]
 function(helios_dep_header)
   cmake_parse_arguments(HDR "" "NAME" "" ${ARGN})
   if(HDR_NAME)
@@ -78,6 +89,11 @@ endfunction()
 # Processing State (per-run, not cached)
 # ============================================================================
 
+#[[
+    helios_dep_is_processed(NAME <name> OUTPUT_VAR <out>)
+
+    Checks whether a dependency script has already run this configure pass.
+]]
 function(helios_dep_is_processed)
   cmake_parse_arguments(ARG "" "NAME;OUTPUT_VAR" "" ${ARGN})
   if(NOT ARG_NAME OR NOT ARG_OUTPUT_VAR)
@@ -93,6 +109,11 @@ function(helios_dep_is_processed)
   endif()
 endfunction()
 
+#[[
+    helios_dep_mark_processed(NAME <name>)
+
+    Marks a dependency script as processed.
+]]
 function(helios_dep_mark_processed)
   cmake_parse_arguments(ARG "" "NAME" "" ${ARGN})
   if(NOT ARG_NAME)
@@ -103,6 +124,11 @@ function(helios_dep_mark_processed)
   set_property(GLOBAL PROPERTY HELIOS_DEP_${_upper_name}_PROCESSED TRUE)
 endfunction()
 
+#[[
+    helios_dep_is_found(NAME <name> OUTPUT_VAR <out>)
+
+    Checks whether a dependency has been found.
+]]
 function(helios_dep_is_found)
   cmake_parse_arguments(ARG "" "NAME;OUTPUT_VAR" "" ${ARGN})
   if(NOT ARG_NAME OR NOT ARG_OUTPUT_VAR)
@@ -117,6 +143,11 @@ function(helios_dep_is_found)
   endif()
 endfunction()
 
+#[[
+    helios_dep_mark_found(NAME <name> [VIA <source>])
+
+    Marks a dependency as found and records how it was resolved.
+]]
 function(helios_dep_mark_found)
   cmake_parse_arguments(ARG "" "NAME;VIA" "" ${ARGN})
   if(NOT ARG_NAME)
@@ -179,6 +210,11 @@ function(_helios_resolve_dep_file DEP_NAME OUT_PATH)
   set(${OUT_PATH} "" PARENT_SCOPE)
 endfunction()
 
+#[[
+    helios_require_dependency(<name>)
+
+    Includes the named dependency script once, resolving override/search paths.
+]]
 macro(helios_require_dependency _dep_name)
   helios_dep_is_processed(NAME "${_dep_name}" OUTPUT_VAR _already_processed)
 
@@ -312,16 +348,18 @@ endfunction()
 
 #[[
     helios_dependency(
-        NAME    spdlog
+        NAME spdlog
         VERSION "^1.12.0"
 
         INSTALL_HINTS
-            apt    libspdlog-dev   dnf    spdlog-devel
-            pacman spdlog          brew   spdlog
-            vcpkg  spdlog
+            apt libspdlog-dev
+            dnf spdlog-devel
+            pacman spdloga
+            brew spdlog
+            pkg_config spdlog
 
-        CPM_REPOSITORY  gabime/spdlog
-        CPM_VERSION     1.16.0
+        CPM_REPOSITORY gabime/spdlog
+        CPM_VERSION 1.16.0
         CPM_OPTIONS
             "SPDLOG_BUILD_SHARED OFF"
             "SPDLOG_BUILD_TESTS  OFF"
@@ -329,6 +367,9 @@ endfunction()
         # Per-dependency CMAKE_BUILD_TYPE override (Debug, RelWithDebInfo, Release).
         # Falls back to HELIOS_DEPENDENCY_BUILD_TYPE when not set.
         # BUILD_TYPE RelWithDebInfo
+
+        # Optional umbrella alias composed from helios::lib::* aliases below.
+        UMBRELLA_ALIAS helios::lib::spdlog
 
         # Ordered fallback — first existing target wins for the alias
         ALIASES
@@ -339,7 +380,7 @@ endfunction()
 ]]
 function(helios_dependency)
   set(options "")
-  set(oneValueArgs NAME VERSION CPM_REPOSITORY CPM_GITHUB_REPOSITORY CPM_VERSION CPM_URL CPM_GIT_TAG CPM_SOURCE_SUBDIR CPM_DOWNLOAD_ONLY BUILD_TYPE)
+  set(oneValueArgs NAME VERSION CPM_REPOSITORY CPM_GITHUB_REPOSITORY CPM_VERSION CPM_URL CPM_GIT_TAG CPM_SOURCE_SUBDIR CPM_DOWNLOAD_ONLY BUILD_TYPE UMBRELLA_ALIAS)
   set(multiValueArgs INSTALL_HINTS CPM_OPTIONS ALIASES)
 
   cmake_parse_arguments(DEP "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
@@ -353,6 +394,7 @@ function(helios_dependency)
   if(_already)
     # If previously found, still try to create aliases (they're per-run)
     _helios_dep_create_aliases("${DEP_NAME}" "${DEP_ALIASES}")
+    _helios_dep_create_umbrella_alias("${DEP_NAME}" "${DEP_UMBRELLA_ALIAS}" "${DEP_ALIASES}")
     return()
   endif()
 
@@ -367,7 +409,7 @@ function(helios_dependency)
     helios_parse_version_constraint("${DEP_VERSION}" _ver_min _ver_max _ver_min_incl _ver_max_incl)
   endif()
 
-  # Parse INSTALL_HINTS into the legacy formats for compatibility with helios_dep_begin/end
+  # Parse INSTALL_HINTS into the legacy formats for compatibility with _helios_dep_begin/end
   set(_debian_names "")
   set(_rpm_names "")
   set(_pacman_names "")
@@ -411,7 +453,7 @@ function(helios_dependency)
     set(_cpm_repo "${DEP_CPM_GITHUB_REPOSITORY}")
   endif()
 
-  # Build the helios_dep_begin call
+  # Build the _helios_dep_begin call
   set(_begin_args NAME ${DEP_NAME})
   if(_ver_min)
     list(APPEND _begin_args VERSION ${_ver_min})
@@ -461,8 +503,8 @@ function(helios_dependency)
   include(DownloadUsingCPM)
   _helios_resolve_dependency_build_type("${DEP_BUILD_TYPE}" _helios_dep_build_type)
 
-  helios_dep_begin(${_begin_args})
-  helios_dep_end()
+  _helios_dep_begin(${_begin_args})
+  _helios_dep_end()
 
   # Check version satisfies the constraint
   if(DEP_VERSION AND ${DEP_NAME}_FOUND AND ${DEP_NAME}_VERSION)
@@ -475,6 +517,7 @@ function(helios_dependency)
   # Create aliases
   if(${DEP_NAME}_FOUND)
     _helios_dep_create_aliases("${DEP_NAME}" "${DEP_ALIASES}")
+    _helios_dep_create_umbrella_alias("${DEP_NAME}" "${DEP_UMBRELLA_ALIAS}" "${DEP_ALIASES}")
   endif()
 endfunction()
 
@@ -515,10 +558,10 @@ function(_helios_dep_create_single_alias HELIOS_TARGET SOURCE_TARGETS)
       get_target_property(_aliased ${_src} ALIASED_TARGET)
       if(_aliased AND NOT _aliased MATCHES "-NOTFOUND$")
         add_library(${HELIOS_TARGET} ALIAS ${_aliased})
-        _helios_mark_target_system("${_aliased}")
+        helios_mark_system_includes("${_aliased}")
       else()
         add_library(${HELIOS_TARGET} ALIAS ${_src})
-        _helios_mark_target_system("${_src}")
+        helios_mark_system_includes("${_src}")
       endif()
       helios_dep_log(STATUS "Created alias: ${HELIOS_TARGET} → ${_src}")
       return()
@@ -528,36 +571,40 @@ function(_helios_dep_create_single_alias HELIOS_TARGET SOURCE_TARGETS)
   helios_dep_log(NOT_FOUND "${HELIOS_TARGET} (no source target found)")
 endfunction()
 
-# Internal: mark a target's INTERFACE_INCLUDE_DIRECTORIES as SYSTEM
-function(_helios_mark_target_system TARGET)
-  if(NOT TARGET ${TARGET})
+function(_helios_dep_create_umbrella_alias DEP_NAME UMBRELLA_ALIAS ALIASES_LIST)
+  if(NOT UMBRELLA_ALIAS OR TARGET ${UMBRELLA_ALIAS})
     return()
   endif()
 
-  set(_actual ${TARGET})
-  get_target_property(_aliased ${TARGET} ALIASED_TARGET)
-  if(_aliased AND NOT _aliased MATCHES "-NOTFOUND$")
-    set(_actual ${_aliased})
+  set(_helios_targets)
+  foreach(_item IN LISTS ALIASES_LIST)
+    if(_item MATCHES "^helios::lib::" AND NOT _item STREQUAL "${UMBRELLA_ALIAS}")
+      if(TARGET ${_item})
+        list(APPEND _helios_targets ${_item})
+      endif()
+    endif()
+  endforeach()
+  list(REMOVE_DUPLICATES _helios_targets)
+
+  if(NOT _helios_targets)
+    return()
   endif()
 
-  get_target_property(_type ${_actual} TYPE)
-  if(_type STREQUAL "INTERFACE_LIBRARY" OR _type STREQUAL "STATIC_LIBRARY"
-       OR _type STREQUAL "SHARED_LIBRARY" OR _type STREQUAL "OBJECT_LIBRARY"
-       OR _type STREQUAL "UNKNOWN_LIBRARY")
-    get_target_property(_includes ${_actual} INTERFACE_INCLUDE_DIRECTORIES)
-    if(_includes AND NOT _includes MATCHES "-NOTFOUND$")
-      set_target_properties(${_actual} PROPERTIES
-                INTERFACE_SYSTEM_INCLUDE_DIRECTORIES "${_includes}"
-            )
-    endif()
+  string(MAKE_C_IDENTIFIER "${DEP_NAME}_${UMBRELLA_ALIAS}" _umbrella_id)
+  set(_umbrella_target "_helios_${_umbrella_id}_umbrella")
+  if(NOT TARGET ${_umbrella_target})
+    add_library(${_umbrella_target} INTERFACE)
+    target_link_libraries(${_umbrella_target} INTERFACE ${_helios_targets})
   endif()
+  add_library(${UMBRELLA_ALIAS} ALIAS ${_umbrella_target})
+  helios_dep_log(STATUS "Created umbrella alias: ${UMBRELLA_ALIAS}")
 endfunction()
 
 # ============================================================================
-# helios_dep_begin / helios_dep_end (for advanced dependency files)
+# _helios_dep_begin / _helios_dep_end (for advanced dependency files)
 # ============================================================================
 
-macro(helios_dep_begin)
+macro(_helios_dep_begin)
   set(options CPM_DOWNLOAD_ONLY)
   set(oneValueArgs NAME VERSION CPM_NAME CPM_VERSION CPM_GITHUB_REPOSITORY CPM_URL CPM_GIT_TAG CPM_SOURCE_SUBDIR)
   set(multiValueArgs DEBIAN_NAMES RPM_NAMES PACMAN_NAMES BREW_NAMES PKG_CONFIG_NAMES CPM_OPTIONS)
@@ -647,7 +694,7 @@ macro(helios_dep_begin)
   endif()
 endmacro()
 
-macro(helios_dep_end)
+macro(_helios_dep_end)
   if(${_PKG_NAME}_SKIP_HELIOS_FIND)
     return()
   endif()
@@ -699,11 +746,11 @@ macro(helios_dep_end)
   if(_required_vars AND NOT ${_PKG_NAME}_FOUND AND NOT _PKG_FORCE_CPM)
     include(FindPackageHandleStandardArgs)
     find_package_handle_standard_args(
-            ${_PKG_NAME}
-            REQUIRED_VARS ${_required_vars}
-            VERSION_VAR ${_PKG_NAME}_VERSION
-            FAIL_MESSAGE "${_ERROR_MESSAGE}"
-        )
+        ${_PKG_NAME}
+        REQUIRED_VARS ${_required_vars}
+        VERSION_VAR ${_PKG_NAME}_VERSION
+        FAIL_MESSAGE "${_ERROR_MESSAGE}"
+    )
     if(${_PKG_NAME}_FOUND)
       set(_FOUND_VIA "manual search")
     endif()
@@ -730,24 +777,24 @@ macro(helios_dep_end)
 
     # Mark found targets as SYSTEM to suppress third-party warnings
     if(TARGET ${_PKG_NAME})
-      _helios_mark_target_system(${_PKG_NAME})
+      helios_mark_system_includes(${_PKG_NAME})
     endif()
     if(TARGET ${_PKG_NAME}::${_PKG_NAME})
-      _helios_mark_target_system(${_PKG_NAME}::${_PKG_NAME})
+      helios_mark_system_includes(${_PKG_NAME}::${_PKG_NAME})
     endif()
 
     if(_required_vars AND NOT TARGET ${_PKG_NAME})
       add_library(${_PKG_NAME} INTERFACE IMPORTED GLOBAL)
       if(${_PKG_NAME}_INCLUDE_DIRS)
         set_target_properties(${_PKG_NAME} PROPERTIES
-                    INTERFACE_INCLUDE_DIRECTORIES "${${_PKG_NAME}_INCLUDE_DIRS}"
-                    INTERFACE_SYSTEM_INCLUDE_DIRECTORIES "${${_PKG_NAME}_INCLUDE_DIRS}"
-                )
+            INTERFACE_INCLUDE_DIRECTORIES "${${_PKG_NAME}_INCLUDE_DIRS}"
+            INTERFACE_SYSTEM_INCLUDE_DIRECTORIES "${${_PKG_NAME}_INCLUDE_DIRS}"
+        )
       endif()
       if(${_PKG_NAME}_LIBRARIES)
         set_target_properties(${_PKG_NAME} PROPERTIES
-                    INTERFACE_LINK_LIBRARIES "${${_PKG_NAME}_LIBRARIES}"
-                )
+            INTERFACE_LINK_LIBRARIES "${${_PKG_NAME}_LIBRARIES}"
+        )
       endif()
     endif()
   else()
@@ -817,41 +864,41 @@ macro(_helios_dep_find_part)
   if("${PART_PART_TYPE}" STREQUAL "library")
     set(_variable "${_PKG_NAME}_LIBRARIES")
     find_library(${_PKG_NAME}_LIBRARIES_${PART_NAMES}
-            NAMES ${PART_NAMES}
-            PATHS ${PART_PATHS}
-            PATH_SUFFIXES ${PART_PATH_SUFFIXES}
-        )
+        NAMES ${PART_NAMES}
+        PATHS ${PART_PATHS}
+        PATH_SUFFIXES ${PART_PATH_SUFFIXES}
+    )
     list(APPEND "${_variable}" "${${_PKG_NAME}_LIBRARIES_${PART_NAMES}}")
   elseif("${PART_PART_TYPE}" STREQUAL "include")
     set(_variable "${_PKG_NAME}_INCLUDE_DIRS")
     find_path(${_PKG_NAME}_INCLUDE_DIRS_${PART_NAMES}
-            NAMES ${PART_NAMES}
-            PATHS ${PART_PATHS}
-            PATH_SUFFIXES ${PART_PATH_SUFFIXES}
-        )
+        NAMES ${PART_NAMES}
+        PATHS ${PART_PATHS}
+        PATH_SUFFIXES ${PART_PATH_SUFFIXES}
+    )
     list(APPEND "${_variable}" "${${_PKG_NAME}_INCLUDE_DIRS_${PART_NAMES}}")
   elseif("${PART_PART_TYPE}" STREQUAL "program")
     set(_variable "${_PKG_NAME}_EXECUTABLE")
     find_program(${_PKG_NAME}_EXECUTABLE_${PART_NAMES}
-            NAMES ${PART_NAMES}
-            PATHS ${PART_PATHS}
-            PATH_SUFFIXES ${PART_PATH_SUFFIXES}
-        )
+        NAMES ${PART_NAMES}
+        PATHS ${PART_PATHS}
+        PATH_SUFFIXES ${PART_PATH_SUFFIXES}
+    )
     list(APPEND "${_variable}" "${${_PKG_NAME}_EXECUTABLE_${PART_NAMES}}")
   endif()
 endmacro()
 
-macro(helios_dep_find_library)
+macro(_helios_dep_find_library)
   cmake_parse_arguments(LIB "" "" "NAMES;PATHS;PATH_SUFFIXES" ${ARGN})
   _helios_dep_find_part(PART_TYPE library NAMES ${LIB_NAMES} PATHS ${LIB_PATHS} PATH_SUFFIXES ${LIB_PATH_SUFFIXES})
 endmacro()
 
-macro(helios_dep_find_include)
+macro(_helios_dep_find_include)
   cmake_parse_arguments(INC "" "" "NAMES;PATHS;PATH_SUFFIXES" ${ARGN})
   _helios_dep_find_part(PART_TYPE include NAMES ${INC_NAMES} PATHS ${INC_PATHS} PATH_SUFFIXES ${INC_PATH_SUFFIXES})
 endmacro()
 
-macro(helios_dep_find_program)
+macro(_helios_dep_find_program)
   cmake_parse_arguments(PROG "" "" "NAMES;PATHS;PATH_SUFFIXES" ${ARGN})
   _helios_dep_find_part(PART_TYPE program NAMES ${PROG_NAMES} PATHS ${PROG_PATHS} PATH_SUFFIXES ${PROG_PATH_SUFFIXES})
 endmacro()
@@ -860,6 +907,11 @@ endmacro()
 # Summary
 # ============================================================================
 
+#[[
+    helios_print_dependencies()
+
+    Prints all dependencies marked found during the configure run.
+]]
 function(helios_print_dependencies)
   message(STATUS "========== Helios Engine Dependencies ==========")
   if(_HELIOS_DEPENDENCIES_FOUND)

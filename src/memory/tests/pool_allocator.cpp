@@ -9,6 +9,7 @@
 #include <cstdint>
 #include <memory_resource>
 #include <thread>
+#include <tuple>
 #include <vector>
 
 using namespace helios::mem;
@@ -28,7 +29,10 @@ constexpr PoolAllocatorOptions GrowingOptions(size_t bs = kBlockSize,
 }
 
 struct alignas(16) Vec3 {
-  float x = 0.F, y = 0.F, z = 0.F;
+  float x = 0.F;
+  float y = 0.F;
+  float z = 0.F;
+  float w = 0.F;
 };
 
 }  // namespace
@@ -118,7 +122,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
   TEST_CASE("mem::PoolAllocator::ctor(PoolAllocator&&)") {
     SUBCASE("Moved-into pool carries allocation state") {
       PoolAllocator source(kBlockSize, kBlockCount);
-      [[maybe_unused]] const void* _ = source.allocate(kBlockSize, kAlign);
+      std::ignore = source.allocate(kBlockSize, kAlign);
 
       PoolAllocator moved(std::move(source));
 
@@ -133,7 +137,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
 
     SUBCASE("Source is empty after move") {
       PoolAllocator source(kBlockSize, kBlockCount);
-      [[maybe_unused]] const void* _ = source.allocate(kBlockSize, kAlign);
+      std::ignore = source.allocate(kBlockSize, kAlign);
 
       PoolAllocator moved(std::move(source));
 
@@ -144,7 +148,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
   TEST_CASE("mem::PoolAllocator::operator=(PoolAllocator&&)") {
     SUBCASE("Target acquires source allocation state") {
       PoolAllocator source(kBlockSize, kBlockCount);
-      [[maybe_unused]] const void* _ = source.allocate(kBlockSize, kAlign);
+      std::ignore = source.allocate(kBlockSize, kAlign);
       PoolAllocator target(kBlockSize * 2, 4);
 
       target = std::move(source);
@@ -163,7 +167,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
 
     SUBCASE("Self move assignment does not corrupt state") {
       PoolAllocator pool(kBlockSize, kBlockCount);
-      [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
       PoolAllocator& ref = pool;
 
       ref = std::move(pool);  // NOLINT(clang-diagnostic-self-move)
@@ -192,8 +196,8 @@ TEST_SUITE("helios::mem::PoolAllocator") {
   TEST_CASE("mem::PoolAllocator::Reset") {
     SUBCASE("Empty returns true after Reset") {
       PoolAllocator pool(kBlockSize, kBlockCount);
-      const void* ptr = pool.allocate(kBlockSize, kAlign);
-      ptr = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
 
       pool.Reset();
 
@@ -202,7 +206,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
 
     SUBCASE("FreeBlockCount equals BlockCount after Reset") {
       PoolAllocator pool(kBlockSize, kBlockCount);
-      [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
 
       pool.Reset();
 
@@ -211,7 +215,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
 
     SUBCASE("Stats counters are zeroed after Reset") {
       PoolAllocator pool(kBlockSize, kBlockCount);
-      [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
 
       pool.Reset();
 
@@ -224,7 +228,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
     SUBCASE("BlockCount across grown chunks is preserved after Reset") {
       PoolAllocator pool(GrowingOptions());
       for (size_t i = 0; i < kBlockCount + 1; ++i) {
-        [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+        std::ignore = pool.allocate(kBlockSize, kAlign);
       }
       const size_t count_before = pool.BlockCount();
 
@@ -236,7 +240,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
     SUBCASE("Allocation succeeds after Reset") {
       PoolAllocator pool(kBlockSize, kBlockCount);
       for (size_t i = 0; i < kBlockCount; ++i) {
-        [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+        std::ignore = pool.allocate(kBlockSize, kAlign);
       }
 
       pool.Reset();
@@ -257,8 +261,8 @@ TEST_SUITE("helios::mem::PoolAllocator") {
           PoolAllocatorOptions{.block_size = kBlockSize,
                                .block_count = 2,
                                .growth = GrowthPolicy::Geometric()});
-      const void* ptr = pool.allocate(kBlockSize, kAlign);
-      ptr = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
 
       CHECK(pool.Full());
     }
@@ -268,7 +272,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
           PoolAllocatorOptions{.block_size = kBlockSize,
                                .block_count = 2,
                                .growth = GrowthPolicy::Geometric()});
-      [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
       void* const second = pool.allocate(kBlockSize, kAlign);
       pool.deallocate(second, kBlockSize, kAlign);
 
@@ -280,8 +284,8 @@ TEST_SUITE("helios::mem::PoolAllocator") {
           PoolAllocatorOptions{.block_size = kBlockSize,
                                .block_count = 2,
                                .growth = GrowthPolicy::Geometric()});
-      const void* ptr = pool.allocate(kBlockSize, kAlign);
-      ptr = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
 
       pool.Reset();
 
@@ -297,7 +301,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
 
     SUBCASE("Returns false after any allocation") {
       PoolAllocator pool(kBlockSize, kBlockCount);
-      [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
       CHECK_FALSE(pool.Empty());
     }
 
@@ -314,7 +318,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
 
     SUBCASE("Returns true after Reset") {
       PoolAllocator pool(kBlockSize, kBlockCount);
-      [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
 
       pool.Reset();
 
@@ -373,8 +377,8 @@ TEST_SUITE("helios::mem::PoolAllocator") {
     SUBCASE("total_allocations counts every allocate call") {
       PoolAllocator pool(kBlockSize, kBlockCount);
 
-      const void* ptr = pool.allocate(kBlockSize, kAlign);
-      ptr = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
 
       CHECK_EQ(pool.Stats().total_allocations, 2);
     }
@@ -383,7 +387,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
       PoolAllocator pool(kBlockSize, kBlockCount);
 
       void* const first = pool.allocate(kBlockSize, kAlign);
-      [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
 
       CHECK_EQ(pool.Stats().allocation_count, 2);
       pool.deallocate(first, kBlockSize, kAlign);
@@ -414,7 +418,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
 
     SUBCASE("alignment_waste is always zero for pool allocator") {
       PoolAllocator pool(kBlockSize, kBlockCount);
-      [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
       CHECK_EQ(pool.Stats().alignment_waste, 0);
     }
   }
@@ -432,7 +436,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
 
     SUBCASE("Unchanged by allocations") {
       PoolAllocator pool(kBlockSize, kBlockCount);
-      [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
       CHECK_GE(pool.BlockSize(), kBlockSize);
     }
   }
@@ -465,7 +469,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
       PoolAllocator pool(GrowingOptions(kBlockSize, 4));
 
       for (size_t i = 0; i < 5; ++i) {
-        [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+        std::ignore = pool.allocate(kBlockSize, kAlign);
       }
 
       CHECK_EQ(pool.InitialBlockCount(), 4);
@@ -482,7 +486,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
       PoolAllocator pool(GrowingOptions(kBlockSize, 4));
 
       for (size_t i = 0; i < 5; ++i) {
-        [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+        std::ignore = pool.allocate(kBlockSize, kAlign);
       }
 
       CHECK_GT(pool.BlockCount(), 4);
@@ -492,7 +496,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
       PoolAllocator pool(GrowingOptions(kBlockSize, 4));
 
       for (size_t i = 0; i < 5; ++i) {
-        [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+        std::ignore = pool.allocate(kBlockSize, kAlign);
       }
       const size_t count_before = pool.BlockCount();
 
@@ -510,7 +514,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
 
     SUBCASE("Decreases by one per allocate") {
       PoolAllocator pool(kBlockSize, kBlockCount);
-      [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
       CHECK_EQ(pool.FreeBlockCount(), kBlockCount - 1);
     }
 
@@ -527,7 +531,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
     SUBCASE("Equals BlockCount after Reset") {
       PoolAllocator pool(kBlockSize, kBlockCount);
 
-      [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
       pool.Reset();
 
       CHECK_EQ(pool.FreeBlockCount(), pool.BlockCount());
@@ -543,8 +547,8 @@ TEST_SUITE("helios::mem::PoolAllocator") {
     SUBCASE("Increases by one per allocate") {
       PoolAllocator pool(kBlockSize, kBlockCount);
 
-      const void* ptr = pool.allocate(kBlockSize, kAlign);
-      ptr = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
 
       CHECK_EQ(pool.UsedBlockCount(), 2);
     }
@@ -552,7 +556,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
     SUBCASE("Decreases by one per deallocate") {
       PoolAllocator pool(kBlockSize, kBlockCount);
 
-      [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
       void* const second = pool.allocate(kBlockSize, kAlign);
       pool.deallocate(second, kBlockSize, kAlign);
 
@@ -562,7 +566,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
     SUBCASE("Is zero after Reset") {
       PoolAllocator pool(kBlockSize, kBlockCount);
 
-      [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
       pool.Reset();
 
       CHECK_EQ(pool.UsedBlockCount(), 0);
@@ -571,8 +575,8 @@ TEST_SUITE("helios::mem::PoolAllocator") {
     SUBCASE("Equals BlockCount minus FreeBlockCount") {
       PoolAllocator pool(kBlockSize, kBlockCount);
 
-      const void* ptr = pool.allocate(kBlockSize, kAlign);
-      ptr = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
 
       CHECK_EQ(pool.UsedBlockCount(),
                pool.BlockCount() - pool.FreeBlockCount());
@@ -596,7 +600,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
 
     SUBCASE("Unchanged by allocations") {
       PoolAllocator pool(kBlockSize, kBlockCount);
-      [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
       CHECK_EQ(pool.Growth().max_capacity,
                GrowthPolicy::Geometric().max_capacity);
     }
@@ -626,8 +630,8 @@ TEST_SUITE("helios::mem::PoolAllocator") {
     SUBCASE("Allocation triggers growth when pool is exhausted") {
       PoolAllocator pool(GrowingOptions(kBlockSize, 2));
 
-      const void* not_used = pool.allocate(kBlockSize, kAlign);
-      not_used = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
       void* const ptr = pool.allocate(kBlockSize, kAlign);  // must grow
 
       CHECK_NE(ptr, nullptr);
@@ -655,7 +659,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
                                .block_count = 2,
                                .growth = GrowthPolicy::Geometric()});
 
-      [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+      std::ignore = pool.allocate(kBlockSize, kAlign);
       void* const second = pool.allocate(kBlockSize, kAlign);
       CHECK(pool.Full());
       pool.deallocate(second, kBlockSize, kAlign);
@@ -728,7 +732,7 @@ TEST_SUITE("helios::mem::PoolAllocator") {
       for (size_t j = 0; j < kThreads; ++j) {
         threads.emplace_back([&pool] {
           for (size_t i = 0; i < kAllocsPerThread; ++i) {
-            [[maybe_unused]] const void* _ = pool.allocate(kBlockSize, kAlign);
+            std::ignore = pool.allocate(kBlockSize, kAlign);
           }
         });
       }

@@ -67,7 +67,7 @@ A modular, data-oriented C++23 game engine framework inspired by Bevy
 - **ECS** — archetype and sparse-set storage, deferred `Commands`, rich query iterators
 - **Parallel scheduling** — access-conflict detection, topological execution, Taskflow-backed executors
 - **Application layer** — `App` / `SubApp` lifecycle, builtin schedules, static and dynamic plugins
-- **Modular build** — twelve independent modules; enable only what you need
+- **Modular build** — independent modules; enable only what you need
 - **Modern C++23** — concepts, ranges, `std::expected`, PMR allocators
 - **Flexible dependencies** — system packages first, [CPM](https://github.com/cpm-cmake/CPM.cmake) download as fallback
 

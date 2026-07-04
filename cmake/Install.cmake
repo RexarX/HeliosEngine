@@ -38,6 +38,7 @@ configure_package_config_file(
 install(FILES
     "${CMAKE_CURRENT_BINARY_DIR}/HeliosConfig.cmake"
     "${CMAKE_CURRENT_BINARY_DIR}/HeliosConfigVersion.cmake"
+    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/HeliosModuleLinking.cmake"
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/Helios
 )
 

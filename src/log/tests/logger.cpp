@@ -142,7 +142,6 @@ TEST_SUITE("helios::log::Logger") {
 
     SUBCASE("Set level for custom logger") {
       logger.AddLogger(TestLogger{});
-      const auto original_level = logger.GetLevel<TestLogger>();
 
       logger.SetLevel(TestLogger{}, Level::kError);
       CHECK_EQ(logger.GetLevel<TestLogger>(), Level::kError);

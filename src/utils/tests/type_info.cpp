@@ -283,9 +283,8 @@ TEST_SUITE("helios::utils::TypeId") {
   TEST_CASE("utils::TypeId::FromExported") {
     SUBCASE("FromExported round-trips hash and qualified name") {
       constexpr auto original = TypeId::From<Foo>();
-      const auto restored =
-          TypeId::FromExported(static_cast<uint64_t>(original.Index().Hash()),
-                               original.QualifiedName());
+      const auto restored = TypeId::FromExported(original.Index().Hash(),
+                                                 original.QualifiedName());
       CHECK_EQ(restored, original);
       CHECK_EQ(restored.Name(), "Foo");
       CHECK_EQ(restored.Index(), original.Index());
@@ -293,16 +292,14 @@ TEST_SUITE("helios::utils::TypeId") {
 
     SUBCASE("FromExported with empty name yields empty Name()") {
       constexpr auto original = TypeId::From<Bar>();
-      const auto restored =
-          TypeId::FromExported(static_cast<uint64_t>(original.Index().Hash()));
+      const auto restored = TypeId::FromExported(original.Index().Hash());
       CHECK_EQ(restored.Index(), original.Index());
       CHECK(restored.Name().empty());
     }
 
     SUBCASE("FromExported hash-only matches TypeIndex::FromHash") {
       constexpr auto original = TypeId::From<outer::inner::Qux>();
-      const auto restored =
-          TypeId::FromExported(static_cast<uint64_t>(original.Index().Hash()));
+      const auto restored = TypeId::FromExported(original.Index().Hash());
       CHECK_EQ(restored.Index(), TypeIndex::FromHash(original.Index().Hash()));
     }
   }
@@ -453,7 +450,6 @@ TEST_SUITE("helios::utils::TypeNameOf") {
 
   TEST_CASE("utils::TypeNameOf (instance overload)") {
     SUBCASE("Returns unqualified name from instance") {
-      const Foo instance{};
       constexpr std::string_view name = TypeNameOf(Foo{});
       CHECK_EQ(name, "Foo");
     }

@@ -69,15 +69,6 @@ struct ScriptComponent {
 
 }  // namespace
 
-namespace {
-
-ComponentManager MakeManager() {
-  ComponentManager mgr;
-  return mgr;
-}
-
-}  // namespace
-
 TEST_SUITE("helios::ecs::ComponentManager") {
   TEST_CASE("ecs::ComponentManager::ctor") {
     constexpr Entity entity{1, 0};
@@ -718,15 +709,15 @@ TEST_SUITE("helios::ecs::ComponentManager") {
 
     SUBCASE("Mixed components") {
       ComponentManager mgr;
-      constexpr Entity entity{1, 0};
+      constexpr Entity mixed_entity{1, 0};
       const Position pos{.x = 2.0F, .y = 4.0F};
       const SparseVelocity vel{.x = 1.0F, .y = 3.0F};
 
-      mgr.InitEntity(entity);
-      mgr.Add(entity, pos, vel);
+      mgr.InitEntity(mixed_entity);
+      mgr.Add(mixed_entity, pos, vel);
 
-      CHECK_EQ(mgr.Get<Position>(entity), pos);
-      CHECK_EQ(mgr.Get<SparseVelocity>(entity), vel);
+      CHECK_EQ(mgr.Get<Position>(mixed_entity), pos);
+      CHECK_EQ(mgr.Get<SparseVelocity>(mixed_entity), vel);
       CHECK_EQ(mgr.ArchetypeCount(), 2);
       const auto& vel_storage = mgr.SparseStorage<SparseVelocity>();
       CHECK_EQ(vel_storage.Size(), 1);

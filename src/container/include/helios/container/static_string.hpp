@@ -952,7 +952,7 @@ template <size_t StrCapacity, typename CharT, typename Traits>
 constexpr BasicStaticString<StrCapacity, CharT, Traits>::BasicStaticString(
     size_type count, CharT ch) noexcept {
   HELIOS_ASSERT(count <= StrCapacity, "Count exceeds capacity!");
-  std::ranges::fill_n(data_.begin(), count, ch);
+  std::ranges::fill_n(data_.begin(), static_cast<ptrdiff_t>(count), ch);
   size_ = count;
   data_[size_] = CharT{};
 }
@@ -1064,7 +1064,7 @@ constexpr auto BasicStaticString<StrCapacity, CharT, Traits>::Insert(
     Traits::move(data_.data() + pos + count, data_.data() + pos, size_ - pos);
   }
 
-  std::ranges::fill_n(data_.begin() + pos, count, ch);
+  std::ranges::fill_n(data_.begin() + pos, static_cast<ptrdiff_t>(count), ch);
   size_ += count;
   data_[size_] = CharT{};
   return *this;
@@ -1165,7 +1165,7 @@ template <size_t StrCapacity, typename CharT, typename Traits>
 constexpr auto BasicStaticString<StrCapacity, CharT, Traits>::Append(
     size_type count, CharT ch) noexcept -> BasicStaticString& {
   HELIOS_ASSERT(size_ + count <= StrCapacity, "Append would exceed capacity!");
-  std::ranges::fill_n(data_.begin() + size_, count, ch);
+  std::ranges::fill_n(data_.begin() + size_, static_cast<ptrdiff_t>(count), ch);
   size_ += count;
   data_[size_] = CharT{};
   return *this;
@@ -1225,7 +1225,7 @@ constexpr auto BasicStaticString<StrCapacity, CharT, Traits>::Replace(
                  tail_len);
   }
 
-  std::ranges::fill_n(data_.begin() + pos, count2, ch);
+  std::ranges::fill_n(data_.begin() + pos, static_cast<ptrdiff_t>(count2), ch);
   size_ = new_size;
   data_[size_] = CharT{};
   return *this;
@@ -1290,7 +1290,8 @@ constexpr void BasicStaticString<StrCapacity, CharT, Traits>::Resize(
     size_type count, CharT ch) noexcept {
   HELIOS_ASSERT(count <= StrCapacity, "Resize count exceeds capacity!");
   if (count > size_) {
-    std::ranges::fill_n(data_.begin() + size_, count - size_, ch);
+    std::ranges::fill_n(data_.begin() + size_,
+                        static_cast<ptrdiff_t>(count - size_), ch);
   }
   size_ = count;
   data_[size_] = CharT{};
@@ -1320,7 +1321,7 @@ template <size_t StrCapacity, typename CharT, typename Traits>
 constexpr auto BasicStaticString<StrCapacity, CharT, Traits>::Assign(
     size_type count, CharT ch) noexcept -> BasicStaticString& {
   HELIOS_ASSERT(count <= StrCapacity, "Count exceeds capacity!");
-  std::ranges::fill_n(data_.begin(), count, ch);
+  std::ranges::fill_n(data_.begin(), static_cast<ptrdiff_t>(count), ch);
   size_ = count;
   data_[size_] = CharT{};
   return *this;

@@ -252,7 +252,7 @@ TEST_SUITE("helios::profile::ZoneSpec") {
     }
 
     SUBCASE("ZoneSpec with callstack_depth zero") {
-      const ZoneSpec spec{.callstack_depth = 0};
+      const ZoneSpec spec{.name = {}, .callstack_depth = 0};
       CHECK_EQ(spec.callstack_depth, 0);
     }
   }
@@ -288,7 +288,7 @@ TEST_SUITE("helios::profile::Backend") {
 
     SUBCASE("ZoneSpec callstack depth is forwarded") {
       MockBackend backend;
-      ZoneSpec spec{.callstack_depth = 5};
+      ZoneSpec spec{.name = {}, .callstack_depth = 5};
       std::array<std::byte, 256> storage{};
       backend.BeginZone(spec, storage);
       CHECK_EQ(backend.last_callstack_depth, 5);

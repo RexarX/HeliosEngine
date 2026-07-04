@@ -5,6 +5,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <memory_resource>
+#include <tuple>
 #include <vector>
 
 using namespace helios::mem;
@@ -55,7 +56,7 @@ TEST_SUITE("helios::mem::FixedFreeListAllocator") {
   TEST_CASE("mem::FixedFreeListAllocator::ctor(FixedFreeListAllocator&&)") {
     SUBCASE("Moved-into allocator carries allocation state") {
       FixedFreeListAllocator source(kCapacity);
-      [[maybe_unused]] const void* _ = source.allocate(64, kAlign);
+      std::ignore = source.allocate(64, kAlign);
       FixedFreeListAllocator moved(std::move(source));
       CHECK_FALSE(moved.Empty());
       CHECK_EQ(moved.Stats().allocation_count, 1);
@@ -63,7 +64,7 @@ TEST_SUITE("helios::mem::FixedFreeListAllocator") {
 
     SUBCASE("Source is empty after move") {
       FixedFreeListAllocator source(kCapacity);
-      [[maybe_unused]] const void* _ = source.allocate(32, kAlign);
+      std::ignore = source.allocate(32, kAlign);
       FixedFreeListAllocator moved(std::move(source));
       CHECK(source.Empty());
     }
@@ -92,7 +93,7 @@ TEST_SUITE("helios::mem::FixedFreeListAllocator") {
       "mem::FixedFreeListAllocator::operator=(FixedFreeListAllocator&&)") {
     SUBCASE("Target acquires source allocation state") {
       FixedFreeListAllocator source(kCapacity);
-      [[maybe_unused]] const void* _ = source.allocate(32, kAlign);
+      std::ignore = source.allocate(32, kAlign);
       FixedFreeListAllocator target(kCapacity);
       target = std::move(source);
       CHECK_FALSE(target.Empty());
@@ -101,7 +102,7 @@ TEST_SUITE("helios::mem::FixedFreeListAllocator") {
 
     SUBCASE("Source is empty after move assign") {
       FixedFreeListAllocator source(kCapacity);
-      [[maybe_unused]] const void* _ = source.allocate(32, kAlign);
+      std::ignore = source.allocate(32, kAlign);
       FixedFreeListAllocator target(kCapacity);
       target = std::move(source);
       CHECK(source.Empty());
@@ -109,7 +110,7 @@ TEST_SUITE("helios::mem::FixedFreeListAllocator") {
 
     SUBCASE("Self move assignment does not corrupt state") {
       FixedFreeListAllocator alloc(kCapacity);
-      [[maybe_unused]] const void* _ = alloc.allocate(16, kAlign);
+      std::ignore = alloc.allocate(16, kAlign);
       FixedFreeListAllocator& ref = alloc;
       ref = std::move(alloc);  // NOLINT(clang-diagnostic-self-move)
       CHECK_FALSE(ref.Empty());
@@ -129,7 +130,7 @@ TEST_SUITE("helios::mem::FixedFreeListAllocator") {
   TEST_CASE("mem::FixedFreeListAllocator::Reset") {
     SUBCASE("Empty returns true after Reset") {
       FixedFreeListAllocator alloc(kCapacity);
-      [[maybe_unused]] const void* _ = alloc.allocate(32, kAlign);
+      std::ignore = alloc.allocate(32, kAlign);
       alloc.Reset();
       CHECK(alloc.Empty());
     }
@@ -146,7 +147,7 @@ TEST_SUITE("helios::mem::FixedFreeListAllocator") {
 
     SUBCASE("Stats counters are zeroed after Reset") {
       FixedFreeListAllocator alloc(kCapacity);
-      [[maybe_unused]] const void* _ = alloc.allocate(32, kAlign);
+      std::ignore = alloc.allocate(32, kAlign);
       alloc.Reset();
       const AllocatorStats stats = alloc.Stats();
       CHECK_EQ(stats.total_allocated, 0);
@@ -159,14 +160,14 @@ TEST_SUITE("helios::mem::FixedFreeListAllocator") {
 
     SUBCASE("TotalCapacity remains unchanged after Reset") {
       FixedFreeListAllocator alloc(kCapacity);
-      [[maybe_unused]] const void* _ = alloc.allocate(32, kAlign);
+      std::ignore = alloc.allocate(32, kAlign);
       alloc.Reset();
       CHECK_EQ(alloc.TotalCapacity(), kCapacity);
     }
 
     SUBCASE("Allocation succeeds after Reset") {
       FixedFreeListAllocator alloc(kCapacity);
-      [[maybe_unused]] const void* _ = alloc.allocate(64, kAlign);
+      std::ignore = alloc.allocate(64, kAlign);
       alloc.Reset();
       void* const ptr = alloc.allocate(32, kAlign);
       CHECK_NE(ptr, nullptr);
@@ -181,7 +182,7 @@ TEST_SUITE("helios::mem::FixedFreeListAllocator") {
 
     SUBCASE("Returns false after allocation") {
       FixedFreeListAllocator alloc(kCapacity);
-      [[maybe_unused]] const void* _ = alloc.allocate(16, kAlign);
+      std::ignore = alloc.allocate(16, kAlign);
       CHECK_FALSE(alloc.Empty());
     }
 
@@ -196,7 +197,7 @@ TEST_SUITE("helios::mem::FixedFreeListAllocator") {
 
     SUBCASE("Returns true after Reset") {
       FixedFreeListAllocator alloc(kCapacity);
-      [[maybe_unused]] const void* _ = alloc.allocate(16, kAlign);
+      std::ignore = alloc.allocate(16, kAlign);
       alloc.Reset();
       CHECK(alloc.Empty());
     }
@@ -250,7 +251,7 @@ TEST_SUITE("helios::mem::FixedFreeListAllocator") {
     SUBCASE("allocation_count tracks live allocations") {
       FixedFreeListAllocator alloc(kCapacity);
       void* const first = alloc.allocate(32, kAlign);
-      [[maybe_unused]] const void* _ = alloc.allocate(32, kAlign);
+      std::ignore = alloc.allocate(32, kAlign);
       CHECK_EQ(alloc.Stats().allocation_count, 2);
       alloc.deallocate(first, 32, kAlign);
       CHECK_EQ(alloc.Stats().allocation_count, 1);
@@ -258,9 +259,9 @@ TEST_SUITE("helios::mem::FixedFreeListAllocator") {
 
     SUBCASE("total_allocations counts every allocate call") {
       FixedFreeListAllocator alloc(kCapacity);
-      const void* ptr = alloc.allocate(16, kAlign);
-      ptr = alloc.allocate(16, kAlign);
-      ptr = alloc.allocate(16, kAlign);
+      std::ignore = alloc.allocate(16, kAlign);
+      std::ignore = alloc.allocate(16, kAlign);
+      std::ignore = alloc.allocate(16, kAlign);
       CHECK_EQ(alloc.Stats().total_allocations, 3);
     }
 
@@ -275,10 +276,10 @@ TEST_SUITE("helios::mem::FixedFreeListAllocator") {
 
     SUBCASE("total_allocated reflects used memory while blocks are live") {
       FixedFreeListAllocator alloc(kCapacity);
-      [[maybe_unused]] const void* _ = alloc.allocate(96, 32);
+      std::ignore = alloc.allocate(96, 32);
       const size_t used_after_first = alloc.Stats().total_allocated;
       CHECK_GT(used_after_first, 0);
-      [[maybe_unused]] const void* _2 = alloc.allocate(128, 64);
+      std::ignore = alloc.allocate(128, 64);
       CHECK_GT(alloc.Stats().total_allocated, used_after_first);
     }
 
@@ -293,14 +294,14 @@ TEST_SUITE("helios::mem::FixedFreeListAllocator") {
 
     SUBCASE("peak_usage is at least high watermark of used memory") {
       FixedFreeListAllocator alloc(kCapacity);
-      [[maybe_unused]] const void* _ = alloc.allocate(256, kAlign);
-      [[maybe_unused]] const void* _2 = alloc.allocate(128, kAlign);
+      std::ignore = alloc.allocate(256, kAlign);
+      std::ignore = alloc.allocate(128, kAlign);
       CHECK_GE(alloc.Stats().peak_usage, alloc.Stats().total_allocated);
     }
 
     SUBCASE("alignment_waste is non-negative") {
       FixedFreeListAllocator alloc(kCapacity);
-      [[maybe_unused]] const void* _ = alloc.allocate(1, 64);
+      std::ignore = alloc.allocate(1, 64);
       CHECK_GE(alloc.Stats().alignment_waste, 0);
     }
   }
@@ -313,13 +314,13 @@ TEST_SUITE("helios::mem::FixedFreeListAllocator") {
 
     SUBCASE("Unchanged by allocations") {
       FixedFreeListAllocator alloc(kCapacity);
-      [[maybe_unused]] const void* _ = alloc.allocate(512, kAlign);
+      std::ignore = alloc.allocate(512, kAlign);
       CHECK_EQ(alloc.InitialCapacity(), kCapacity);
     }
 
     SUBCASE("Unchanged after Reset") {
       FixedFreeListAllocator alloc(kCapacity);
-      [[maybe_unused]] const void* _ = alloc.allocate(512, kAlign);
+      std::ignore = alloc.allocate(512, kAlign);
       alloc.Reset();
       CHECK_EQ(alloc.InitialCapacity(), kCapacity);
     }
@@ -333,13 +334,13 @@ TEST_SUITE("helios::mem::FixedFreeListAllocator") {
 
     SUBCASE("Unchanged by allocations") {
       FixedFreeListAllocator alloc(kCapacity);
-      [[maybe_unused]] const void* _ = alloc.allocate(512, kAlign);
+      std::ignore = alloc.allocate(512, kAlign);
       CHECK_EQ(alloc.TotalCapacity(), kCapacity);
     }
 
     SUBCASE("Unchanged after Reset") {
       FixedFreeListAllocator alloc(kCapacity);
-      [[maybe_unused]] const void* _ = alloc.allocate(512, kAlign);
+      std::ignore = alloc.allocate(512, kAlign);
       alloc.Reset();
       CHECK_EQ(alloc.TotalCapacity(), kCapacity);
     }
@@ -353,7 +354,7 @@ TEST_SUITE("helios::mem::FixedFreeListAllocator") {
 
     SUBCASE("Increases when allocation splits the sole free block") {
       FixedFreeListAllocator alloc(kCapacity);
-      [[maybe_unused]] const void* _ = alloc.allocate(64, kAlign);
+      std::ignore = alloc.allocate(64, kAlign);
       CHECK_GE(alloc.FreeBlockCount(), 1);
     }
 

@@ -9,6 +9,7 @@
 #include <cstdint>
 #include <memory_resource>
 #include <thread>
+#include <tuple>
 #include <vector>
 
 using namespace helios::mem;
@@ -87,7 +88,7 @@ TEST_SUITE("helios::mem::StackAllocator") {
 
     SUBCASE("Moved-into stack carries existing allocation state") {
       StackAllocator source(1024);
-      [[maybe_unused]] const void* _ = source.allocate(64, kAlign);
+      std::ignore = source.allocate(64, kAlign);
 
       const StackAllocator moved(std::move(source));
 
@@ -102,7 +103,7 @@ TEST_SUITE("helios::mem::StackAllocator") {
 
     SUBCASE("Source is empty after move") {
       StackAllocator source(512);
-      [[maybe_unused]] const void* _ = source.allocate(32, kAlign);
+      std::ignore = source.allocate(32, kAlign);
 
       const StackAllocator moved(std::move(source));
 
@@ -122,7 +123,7 @@ TEST_SUITE("helios::mem::StackAllocator") {
 
     SUBCASE("Target carries allocation state from source") {
       StackAllocator source(1024);
-      [[maybe_unused]] const void* _ = source.allocate(32, kAlign);
+      std::ignore = source.allocate(32, kAlign);
       StackAllocator target(128);
 
       target = std::move(source);
@@ -141,7 +142,7 @@ TEST_SUITE("helios::mem::StackAllocator") {
 
     SUBCASE("Self move assignment does not corrupt state") {
       StackAllocator stack(512);
-      [[maybe_unused]] const void* _ = stack.allocate(16, kAlign);
+      std::ignore = stack.allocate(16, kAlign);
       StackAllocator& ref = stack;
 
       ref = std::move(stack);  // NOLINT(clang-diagnostic-self-move)
@@ -155,7 +156,7 @@ TEST_SUITE("helios::mem::StackAllocator") {
       StackAllocator stack(1024);
 
       const StackAllocator::Marker before = stack.GetMarker();
-      [[maybe_unused]] const void* _ = stack.allocate(128, kAlign);
+      std::ignore = stack.allocate(128, kAlign);
       stack.RewindToMarker(before);
 
       CHECK(stack.Empty());
@@ -164,10 +165,10 @@ TEST_SUITE("helios::mem::StackAllocator") {
     SUBCASE("Rewinding to mid-point preserves earlier allocation count") {
       StackAllocator stack(1024);
 
-      const void* ptr = stack.allocate(64, kAlign);
+      std::ignore = stack.allocate(64, kAlign);
       const StackAllocator::Marker mid = stack.GetMarker();
-      ptr = stack.allocate(128, kAlign);
-      ptr = stack.allocate(64, kAlign);
+      std::ignore = stack.allocate(128, kAlign);
+      std::ignore = stack.allocate(64, kAlign);
       stack.RewindToMarker(mid);
 
       // RewindToMarker conservatively zeroes allocation_count; total_allocated
@@ -179,7 +180,7 @@ TEST_SUITE("helios::mem::StackAllocator") {
       StackAllocator stack(1024);
 
       const StackAllocator::Marker before = stack.GetMarker();
-      [[maybe_unused]] const void* _ = stack.allocate(256, kAlign);
+      std::ignore = stack.allocate(256, kAlign);
       stack.RewindToMarker(before);
       void* const ptr = stack.allocate(64, kAlign);
 
@@ -190,9 +191,9 @@ TEST_SUITE("helios::mem::StackAllocator") {
       StackAllocator stack(GrowingOptions(kGrowCap));
 
       // Keep one allocation in the initial block, then force growth.
-      const void* ptr = stack.allocate(16, kAlign);
+      std::ignore = stack.allocate(16, kAlign);
       const StackAllocator::Marker before_second = stack.GetMarker();
-      ptr = stack.allocate(kGrowCap, 1);
+      std::ignore = stack.allocate(kGrowCap, 1);
       CHECK_GT(stack.BlockCount(), 1);
 
       // Rewind to a marker in the initial block.
@@ -206,7 +207,7 @@ TEST_SUITE("helios::mem::StackAllocator") {
     SUBCASE("Empty returns true after Reset") {
       StackAllocator stack(1024);
 
-      [[maybe_unused]] const void* _ = stack.allocate(256, kAlign);
+      std::ignore = stack.allocate(256, kAlign);
       stack.Reset();
 
       CHECK(stack.Empty());
@@ -215,8 +216,8 @@ TEST_SUITE("helios::mem::StackAllocator") {
     SUBCASE("BlockCount returns to 1 after Reset") {
       StackAllocator stack(GrowingOptions());
 
-      const void* ptr = stack.allocate(kGrowCap, 1);
-      ptr = stack.allocate(kGrowCap, 1);
+      std::ignore = stack.allocate(kGrowCap, 1);
+      std::ignore = stack.allocate(kGrowCap, 1);
 
       CHECK_GT(stack.BlockCount(), 1);
       stack.Reset();
@@ -226,8 +227,8 @@ TEST_SUITE("helios::mem::StackAllocator") {
     SUBCASE("TotalCapacity returns to InitialCapacity after Reset") {
       StackAllocator stack(GrowingOptions());
 
-      const void* ptr = stack.allocate(kGrowCap, 1);
-      ptr = stack.allocate(kGrowCap, 1);
+      std::ignore = stack.allocate(kGrowCap, 1);
+      std::ignore = stack.allocate(kGrowCap, 1);
 
       stack.Reset();
       CHECK_EQ(stack.TotalCapacity(), stack.InitialCapacity());
@@ -236,7 +237,7 @@ TEST_SUITE("helios::mem::StackAllocator") {
     SUBCASE("Stats counters are zeroed after Reset") {
       StackAllocator stack(1024);
 
-      [[maybe_unused]] const void* _ = stack.allocate(64, kAlign);
+      std::ignore = stack.allocate(64, kAlign);
       stack.Reset();
 
       const AllocatorStats stats = stack.Stats();
@@ -250,7 +251,7 @@ TEST_SUITE("helios::mem::StackAllocator") {
     SUBCASE("Allocation succeeds after Reset") {
       StackAllocator stack(1024);
 
-      [[maybe_unused]] const void* _ = stack.allocate(512, kAlign);
+      std::ignore = stack.allocate(512, kAlign);
       stack.Reset();
       void* const ptr = stack.allocate(64, kAlign);
 
@@ -266,7 +267,7 @@ TEST_SUITE("helios::mem::StackAllocator") {
 
     SUBCASE("Returns false after one allocation") {
       StackAllocator stack(256);
-      [[maybe_unused]] const void* _ = stack.allocate(8, kAlign);
+      std::ignore = stack.allocate(8, kAlign);
       CHECK_FALSE(stack.Empty());
     }
 
@@ -282,7 +283,7 @@ TEST_SUITE("helios::mem::StackAllocator") {
     SUBCASE("Returns true after Reset") {
       StackAllocator stack(256);
 
-      [[maybe_unused]] const void* _ = stack.allocate(8, kAlign);
+      std::ignore = stack.allocate(8, kAlign);
       stack.Reset();
 
       CHECK(stack.Empty());
@@ -305,9 +306,9 @@ TEST_SUITE("helios::mem::StackAllocator") {
     SUBCASE("Marker offset advances after each allocation") {
       StackAllocator stack(1024);
 
-      const void* ptr = stack.allocate(64, kAlign);
+      std::ignore = stack.allocate(64, kAlign);
       const StackAllocator::Marker m1 = stack.GetMarker();
-      ptr = stack.allocate(64, kAlign);
+      std::ignore = stack.allocate(64, kAlign);
       const StackAllocator::Marker m2 = stack.GetMarker();
 
       CHECK_GT(m2.offset, m1.offset);
@@ -316,9 +317,9 @@ TEST_SUITE("helios::mem::StackAllocator") {
     SUBCASE("Two successive markers from same block share the same block ptr") {
       StackAllocator stack(1024);
 
-      const void* ptr = stack.allocate(16, kAlign);
+      std::ignore = stack.allocate(16, kAlign);
       const StackAllocator::Marker m1 = stack.GetMarker();
-      ptr = stack.allocate(16, kAlign);
+      std::ignore = stack.allocate(16, kAlign);
       const StackAllocator::Marker m2 = stack.GetMarker();
 
       CHECK_EQ(m1.block, m2.block);
@@ -341,8 +342,8 @@ TEST_SUITE("helios::mem::StackAllocator") {
     SUBCASE("total_allocated reflects bytes consumed on the stack") {
       StackAllocator stack(1024);
 
-      const void* ptr = stack.allocate(64, kAlign);
-      ptr = stack.allocate(128, kAlign);
+      std::ignore = stack.allocate(64, kAlign);
+      std::ignore = stack.allocate(128, kAlign);
 
       CHECK_GE(stack.Stats().total_allocated, 192);
     }
@@ -350,8 +351,8 @@ TEST_SUITE("helios::mem::StackAllocator") {
     SUBCASE("allocation_count tracks live count") {
       StackAllocator stack(1024);
 
-      const void* ptr = stack.allocate(32, kAlign);
-      ptr = stack.allocate(32, kAlign);
+      std::ignore = stack.allocate(32, kAlign);
+      std::ignore = stack.allocate(32, kAlign);
 
       CHECK_EQ(stack.Stats().allocation_count, 2);
     }
@@ -359,9 +360,9 @@ TEST_SUITE("helios::mem::StackAllocator") {
     SUBCASE("total_allocations counts every allocate call") {
       StackAllocator stack(1024);
 
-      const void* ptr = stack.allocate(16, kAlign);
-      ptr = stack.allocate(16, kAlign);
-      ptr = stack.allocate(16, kAlign);
+      std::ignore = stack.allocate(16, kAlign);
+      std::ignore = stack.allocate(16, kAlign);
+      std::ignore = stack.allocate(16, kAlign);
 
       CHECK_EQ(stack.Stats().total_allocations, 3);
     }
@@ -389,8 +390,8 @@ TEST_SUITE("helios::mem::StackAllocator") {
     SUBCASE("peak_usage is at least the high watermark of total_allocated") {
       StackAllocator stack(1024);
 
-      const void* ptr = stack.allocate(256, kAlign);
-      ptr = stack.allocate(128, kAlign);
+      std::ignore = stack.allocate(256, kAlign);
+      std::ignore = stack.allocate(128, kAlign);
 
       CHECK_GE(stack.Stats().peak_usage, 256);
     }
@@ -410,14 +411,14 @@ TEST_SUITE("helios::mem::StackAllocator") {
 
     SUBCASE("Unchanged by allocations") {
       StackAllocator stack(1024);
-      [[maybe_unused]] const void* _ = stack.allocate(512, kAlign);
+      std::ignore = stack.allocate(512, kAlign);
       CHECK_EQ(stack.InitialCapacity(), 1024);
     }
 
     SUBCASE("Unchanged after Reset") {
       StackAllocator stack(1024);
 
-      [[maybe_unused]] const void* _ = stack.allocate(512, kAlign);
+      std::ignore = stack.allocate(512, kAlign);
       stack.Reset();
 
       CHECK_EQ(stack.InitialCapacity(), 1024);
@@ -435,8 +436,8 @@ TEST_SUITE("helios::mem::StackAllocator") {
       StackAllocator stack(GrowingOptions());
 
       const size_t before = stack.TotalCapacity();
-      const void* ptr = stack.allocate(kGrowCap, 1);
-      ptr = stack.allocate(kGrowCap, 1);
+      std::ignore = stack.allocate(kGrowCap, 1);
+      std::ignore = stack.allocate(kGrowCap, 1);
 
       CHECK_GT(stack.TotalCapacity(), before);
     }
@@ -444,8 +445,8 @@ TEST_SUITE("helios::mem::StackAllocator") {
     SUBCASE("Returns to InitialCapacity after Reset") {
       StackAllocator stack(GrowingOptions());
 
-      const void* ptr = stack.allocate(kGrowCap, 1);
-      ptr = stack.allocate(kGrowCap, 1);
+      std::ignore = stack.allocate(kGrowCap, 1);
+      std::ignore = stack.allocate(kGrowCap, 1);
       stack.Reset();
 
       CHECK_EQ(stack.TotalCapacity(), stack.InitialCapacity());
@@ -461,8 +462,8 @@ TEST_SUITE("helios::mem::StackAllocator") {
     SUBCASE("Increases when first new block is appended") {
       StackAllocator stack(GrowingOptions());
 
-      const void* ptr = stack.allocate(kGrowCap, 1);
-      ptr = stack.allocate(kGrowCap, 1);
+      std::ignore = stack.allocate(kGrowCap, 1);
+      std::ignore = stack.allocate(kGrowCap, 1);
 
       CHECK_GT(stack.BlockCount(), 1);
     }
@@ -470,8 +471,8 @@ TEST_SUITE("helios::mem::StackAllocator") {
     SUBCASE("Returns to 1 after Reset") {
       StackAllocator stack(GrowingOptions());
 
-      const void* ptr = stack.allocate(kGrowCap, 1);
-      ptr = stack.allocate(kGrowCap, 1);
+      std::ignore = stack.allocate(kGrowCap, 1);
+      std::ignore = stack.allocate(kGrowCap, 1);
       stack.Reset();
 
       CHECK_EQ(stack.BlockCount(), 1);
@@ -495,7 +496,7 @@ TEST_SUITE("helios::mem::StackAllocator") {
 
     SUBCASE("Unchanged by allocations") {
       StackAllocator stack(512);
-      [[maybe_unused]] const void* _ = stack.allocate(32, kAlign);
+      std::ignore = stack.allocate(32, kAlign);
       CHECK_EQ(stack.Growth().max_capacity,
                GrowthPolicy::Geometric().max_capacity);
     }
@@ -534,7 +535,7 @@ TEST_SUITE("helios::mem::StackAllocator") {
     SUBCASE("Overflow triggers growth and returns valid pointer") {
       StackAllocator stack(GrowingOptions());
 
-      [[maybe_unused]] const void* _ = stack.allocate(kGrowCap, 1);
+      std::ignore = stack.allocate(kGrowCap, 1);
       void* const ptr = stack.allocate(kGrowCap, 1);
 
       CHECK_NE(ptr, nullptr);
@@ -577,7 +578,7 @@ TEST_SUITE("helios::mem::StackAllocator") {
       StackAllocator stack(1024);
 
       void* const first = stack.allocate(32, kAlign);
-      [[maybe_unused]] const void* _ = stack.allocate(32, kAlign);
+      std::ignore = stack.allocate(32, kAlign);
       // Deallocate 'first' while 'second' is alive — out-of-order: ignored.
       stack.deallocate(first, 32, kAlign);
 
@@ -646,7 +647,7 @@ TEST_SUITE("helios::mem::StackAllocator") {
       for (size_t j = 0; j < kThreads; ++j) {
         threads.emplace_back([&stack] {
           for (size_t i = 0; i < kAllocsPerThread; ++i) {
-            [[maybe_unused]] const void* _ = stack.allocate(8, kAlign);
+            std::ignore = stack.allocate(8, kAlign);
           }
         });
       }

@@ -9,6 +9,7 @@
 #include <helios/ecs/schedule/schedule.hpp>
 #include <helios/ecs/world.hpp>
 
+#include <cstddef>
 #include <thread>
 
 namespace helios::app {

@@ -115,10 +115,8 @@ TEST_SUITE("helios::utils::Hash") {
 
 #if SIZE_MAX == UINT64_MAX
     // Known FNV-1a 64-bit values for common test vectors
-    CHECK_EQ(Fnv1aHash(std::string_view{"a"}),
-             static_cast<HashType>(0xAF63DC4C8601EC8C));
-    CHECK_EQ(Fnv1aHash(std::string_view{"foobar"}),
-             static_cast<HashType>(0x85944171F73967E8));
+    CHECK_EQ(Fnv1aHash(std::string_view{"a"}), 0xAF63DC4C8601EC8CULL);
+    CHECK_EQ(Fnv1aHash(std::string_view{"foobar"}), 0x85944171F73967E8ULL);
 #endif
   }
 

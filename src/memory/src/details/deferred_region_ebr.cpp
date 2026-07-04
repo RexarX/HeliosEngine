@@ -80,8 +80,7 @@ void RetireRegionAllocation(void* raw_region) noexcept {
   auto& state = DeferredRegionState::Instance();
   const uint64_t epoch = state.global_epoch.load(std::memory_order_relaxed);
   const std::scoped_lock lock(state.retire_mutex);
-  state.retire_ring[static_cast<size_t>(epoch % kEpochRingSize)].push_back(
-      raw_region);
+  state.retire_ring[epoch % kEpochRingSize].push_back(raw_region);
 }
 
 void SynchronizeDeferredRegions() noexcept {
@@ -90,8 +89,8 @@ void SynchronizeDeferredRegions() noexcept {
   auto& state = DeferredRegionState::Instance();
   const uint64_t new_epoch =
       state.global_epoch.fetch_add(1, std::memory_order_acq_rel) + 1;
-  const auto reclaim_slot = static_cast<size_t>(
-      (new_epoch >= 2 ? new_epoch - 2 : 0) % kEpochRingSize);
+  const size_t reclaim_slot =
+      (new_epoch >= 2 ? new_epoch - 2 : 0) % kEpochRingSize;
   ReclaimSlot(reclaim_slot);
 }
 

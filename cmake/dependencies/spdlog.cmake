@@ -2,7 +2,10 @@
 # (consteval format-string checks in spdlog/details/fmt_helper.h). Use the CPM
 # build with std::format instead.
 if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-  set(HELIOS_FORCE_DOWNLOAD_SPDLOG ON CACHE BOOL "" FORCE)
+  if(NOT DEFINED HELIOS_FORCE_DOWNLOAD_SPDLOG)
+    set(HELIOS_FORCE_DOWNLOAD_SPDLOG ON CACHE BOOL
+        "Force CPM spdlog when Clang would otherwise pick a system fmt-backed package")
+  endif()
 endif()
 
 helios_dependency(
@@ -39,5 +42,5 @@ if(TARGET helios::lib::spdlog AND NOT TARGET helios::lib::spdlog::spdlog_header_
   add_library(_helios_spdlog_ho_compat INTERFACE)
   target_link_libraries(_helios_spdlog_ho_compat INTERFACE helios::lib::spdlog)
   add_library(helios::lib::spdlog::spdlog_header_only ALIAS _helios_spdlog_ho_compat)
-  _helios_mark_target_system(_helios_spdlog_ho_compat)
+  helios_mark_system_includes(_helios_spdlog_ho_compat)
 endif()

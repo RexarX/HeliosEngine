@@ -3,18 +3,18 @@
 #include <helios/stacktrace.hpp>
 #include <helios/utils/filesystem.hpp>
 
-#ifdef HELIOS_USE_STL_STACKTRACE
-#include <stacktrace>
-#else
-#include <boost/stacktrace.hpp>
-#endif
-
 #include <algorithm>
 #include <cctype>
 #include <format>
 #include <iterator>
 #include <string>
 #include <vector>
+
+#ifdef HELIOS_USE_STL_STACKTRACE
+#include <stacktrace>
+#else
+#include <boost/stacktrace.hpp>
+#endif
 
 namespace {
 

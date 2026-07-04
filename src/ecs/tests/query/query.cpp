@@ -108,28 +108,6 @@ void AddSparseFlag(ComponentManager& mgr, Entity entity, SparseFlag flag) {
   mgr.AddSparseComponent(entity, flag);
 }
 
-struct AssertionCapture {
-  bool called = false;
-  std::string condition;
-  std::string message;
-};
-
-thread_local AssertionCapture g_assert_capture;
-
-void QueryTestAssertionHandler(std::string_view condition,
-                               const std::source_location&,
-                               std::string_view message) noexcept {
-  g_assert_capture.called = true;
-  g_assert_capture.condition = std::string(condition);
-  g_assert_capture.message = std::string(message);
-}
-
-void ResetAssertionCapture() {
-  g_assert_capture.called = false;
-  g_assert_capture.condition.clear();
-  g_assert_capture.message.clear();
-}
-
 }  // namespace
 
 TEST_SUITE("helios::ecs::BasicQuery") {
@@ -891,11 +869,10 @@ TEST_SUITE("helios::ecs::BasicQuery") {
 
       // Iteration order is not guaranteed, but TakeWhile must stop as soon as
       // the predicate fails for the first encountered element.
-      float sum = 0.0F;
       int count = 0;
       for (auto&& [pos] :
-           query.TakeWhile([](const Position& pos) { return pos.x < 3.0F; })) {
-        sum += pos.x;
+           query.TakeWhile([](const Position& p) { return p.x < 3.0F; })) {
+        std::ignore = pos;
         ++count;
       }
       CHECK_LE(count, 2);
@@ -953,12 +930,12 @@ TEST_SUITE("helios::ecs::BasicQuery") {
       AddPos(mgr, Entity{1, 0}, {});
       const auto query = MakeQuery<const Position&>(mgr);
 
-      size_t first_index = 999;
-      for (auto&& [idx, tuple] : query.Enumerate()) {
-        first_index = idx;
-        break;
-      }
-      CHECK_EQ(first_index, 0);
+      const auto enumerated = query.Enumerate();
+      const auto it = enumerated.begin();
+      REQUIRE(it != enumerated.end());
+      const auto [idx, pos] = *it;
+      std::ignore = pos;
+      CHECK_EQ(idx, 0);
     }
 
     SUBCASE("Index increments for each element") {
@@ -970,7 +947,8 @@ TEST_SUITE("helios::ecs::BasicQuery") {
 
       size_t last_index = 0;
       size_t count = 0;
-      for (auto&& [idx, tuple] : query.Enumerate()) {
+      for (auto&& [idx, pos] : query.Enumerate()) {
+        std::ignore = pos;
         last_index = idx;
         ++count;
       }
