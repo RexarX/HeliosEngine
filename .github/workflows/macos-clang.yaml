@@ -35,6 +35,8 @@ jobs:
         include:
           - preset: macos-clang-debug
             cmake_extra: -DHELIOS_DEVELOPER_MODE=ON -DHELIOS_BUILD_EXAMPLES=OFF
+          - preset: macos-clang-relwithdebinfo
+            cmake_extra: -DHELIOS_BUILD_EXAMPLES=OFF
           - preset: macos-clang-release
             cmake_extra: -DHELIOS_BUILD_EXAMPLES=OFF
     steps:

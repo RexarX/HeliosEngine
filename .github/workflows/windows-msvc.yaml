@@ -35,6 +35,8 @@ jobs:
         include:
           - preset: windows-msvc-debug
             cmake_extra: -DHELIOS_DEVELOPER_MODE=ON -DHELIOS_BUILD_EXAMPLES=OFF
+          - preset: windows-msvc-relwithdebinfo
+            cmake_extra: -DHELIOS_BUILD_EXAMPLES=OFF
           - preset: windows-msvc-release
             cmake_extra: -DHELIOS_BUILD_EXAMPLES=OFF
     steps:
