@@ -62,6 +62,10 @@
       DoxygenAwesomeInteractiveToc.init();
       DoxygenAwesomeTabs.init();
     </script>
+    <script
+      type="text/javascript"
+      src="$relpath^version_selector_handler.js"
+    ></script>
   </head>
   <body>
     <!--BEGIN FULL_SIDEBAR-->
@@ -87,6 +91,7 @@
                   <div id="projectname">
                     $projectname<!--BEGIN PROJECT_NUMBER--><span
                       id="projectnumber"
+                      data-fallback="$projectnumber"
                       >&#160;$projectnumber</span
                     ><!--END PROJECT_NUMBER-->
                   </div>

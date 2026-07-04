@@ -7,12 +7,16 @@ on:
       - dev
     paths:
       - ".github/workflows/doxygen-docs.yaml"
+      - "CMakeLists.txt"
+      - "cmake/Doxygen.cmake"
       - "docs/**"
       - "examples/**"
       - "scripts/docs.py"
+      - "scripts/update_docs_version_selector.py"
       - "src/**"
       - "third-party/doxygen-awesome-css/**"
       - "README.md"
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -50,8 +54,19 @@ jobs:
               -o docs/doxygen/jquery.min.js
           fi
 
+      - name: Configure documentation build
+        run: |
+          cmake -B build-docs -G Ninja \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DHELIOS_BUILD_DOCS=ON \
+            -DHELIOS_BUILD_TESTS=OFF \
+            -DHELIOS_BUILD_EXAMPLES=OFF \
+            -DHELIOS_ENABLE_LTO=OFF
+
       - name: Build Doxygen documentation
-        run: python3 scripts/docs.py
+        env:
+          DOCS_LABEL: ${{ github.ref == 'refs/heads/main' && 'main' || github.ref_name }}
+        run: cmake --build build-docs --target helios_docs
 
       - name: Deploy to GitHub Pages (main → site root)
         if: github.ref == 'refs/heads/main'
@@ -62,12 +77,29 @@ jobs:
           publish_branch: gh-pages
           keep_files: true
 
-      - name: Deploy to GitHub Pages (other branches → /<branch>/)
+      - name: Deploy to GitHub Pages (other branches → /branches/<branch>/)
         if: github.ref != 'refs/heads/main'
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: docs/doxygen/html
           publish_branch: gh-pages
-          destination_dir: ${{ github.ref_name }}
+          # GitHub Pages does not serve top-level folders named after common
+          # branch names such as "dev" or "main" (they 404 even when present on
+          # gh-pages). Use a neutral prefix instead of ${{ github.ref_name }}.
+          destination_dir: branches/${{ github.ref_name }}
+          keep_files: true
+
+      - name: Update documentation edition selector
+        run: |
+          python3 scripts/update_docs_version_selector.py \
+            --output build/version_selector.html \
+            --gh-pages-ref origin/gh-pages
+
+      - name: Deploy edition selector to GitHub Pages root
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: build
+          publish_branch: gh-pages
           keep_files: true

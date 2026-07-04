@@ -38,6 +38,7 @@ else()
   set(BUILD_TESTING ${HELIOS_BUILD_TESTS} CACHE BOOL "Build tests")
 endif()
 option(HELIOS_BUILD_EXAMPLES "Build examples" ${PROJECT_IS_TOP_LEVEL})
+option(HELIOS_BUILD_DOCS "Build API documentation (Doxygen)" OFF)
 option(HELIOS_ENABLE_UNITY_BUILD "Enable Unity/Jumbo builds" OFF)
 option(HELIOS_ENABLE_LTO "Enable Link Time Optimization" ON)
 option(HELIOS_ENABLE_WARNINGS_AS_ERRORS "Treat warnings as errors" OFF)
@@ -161,6 +162,14 @@ endif()
 
 if(HELIOS_BUILD_EXAMPLES)
   add_subdirectory(examples)
+endif()
+
+# ============================================================================
+# Documentation
+# ============================================================================
+
+if(HELIOS_BUILD_DOCS)
+  add_subdirectory(docs)
 endif()
 
 # ============================================================================

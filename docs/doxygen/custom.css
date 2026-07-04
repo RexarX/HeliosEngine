@@ -8,3 +8,10 @@ div.textblock div[align="center"] img.inline {
 div.textblock div[align="center"] .image .caption {
   display: none;
 }
+
+#versionSelector {
+  font-size: 90%;
+  margin-left: 0.35em;
+  vertical-align: baseline;
+  max-width: 12em;
+}

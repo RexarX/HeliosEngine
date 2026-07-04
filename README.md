@@ -516,7 +516,7 @@ python scripts/docs.py
 # → docs/doxygen/html/index.html
 ```
 
-Config: [`docs/doxygen/Doxyfile`](docs/doxygen/Doxyfile) — [doxygen-awesome-css](third-party/doxygen-awesome-css) theme (git submodule).
+Config: [`docs/doxygen/Doxyfile.in`](docs/doxygen/Doxyfile.in) — version from `project(VERSION …)` via CMake (`-DHELIOS_BUILD_DOCS=ON`, target `helios_docs`) or `scripts/docs.py`.
 
 ### Project guidelines
 
