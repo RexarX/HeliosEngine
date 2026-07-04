@@ -1,4 +1,0 @@
-var structstd_1_1formatter_3_01helios_1_1container_1_1BasicStaticString_3_01StrCapacity_00_01CharT_00_01Traits_01_4_01_4 =
-[
-    [ "format", "structstd_1_1formatter_3_01helios_1_1container_1_1BasicStaticString_3_01StrCapacity_00_01CharT_00_01Traits_01_4_01_4.html#ae40910071f4e2323f7365c756f1204d7", null ]
-];

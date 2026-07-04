@@ -1,4 +1,0 @@
-var structhelios_1_1container_1_1details_1_1CallableBufferArrayDeducer_3_01Alloc_00_01FirstSig_00_01RestSigs_8_8_8_01_4 =
-[
-    [ "type", "structhelios_1_1container_1_1details_1_1CallableBufferArrayDeducer_3_01Alloc_00_01FirstSig_00_01RestSigs_8_8_8_01_4.html#ae8e031b38dea003de92132926e142c0b", null ]
-];
