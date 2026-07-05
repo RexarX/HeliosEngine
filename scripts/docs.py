@@ -302,8 +302,6 @@ def build_docs_with_cmake(build_dir: Path, quiet: bool) -> Tuple[bool, int]:
 
     print_info(f"Building documentation via CMake: {build_dir}")
     command = ["cmake", "--build", str(build_dir), "--target", "helios_docs"]
-    if quiet:
-        command.append("--quiet")
 
     result = subprocess.run(command, capture_output=True, text=True, check=False)
     if not quiet:

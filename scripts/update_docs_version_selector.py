@@ -44,15 +44,20 @@ def parse_semver(value: str) -> Tuple[int, ...]:
     return tuple(parts)
 
 
-def _is_missing_gh_pages_ref(message: str) -> bool:
-    lowered = message.lower()
-    return (
-        "couldn't find remote ref" in lowered
-        or "not found in upstream origin" in lowered
-    )
-
-
 def fetch_gh_pages(repo_root: Path) -> bool:
+    probe = subprocess.run(
+        ["git", "ls-remote", "--exit-code", "origin", "gh-pages"],
+        cwd=repo_root,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if probe.returncode == 2:
+        return False
+    if probe.returncode != 0:
+        message = probe.stderr.strip() or probe.stdout.strip()
+        raise RuntimeError(f"failed to probe origin/gh-pages: {message}")
+
     result = subprocess.run(
         ["git", "fetch", "origin", "gh-pages"],
         cwd=repo_root,
@@ -60,14 +65,10 @@ def fetch_gh_pages(repo_root: Path) -> bool:
         text=True,
         check=False,
     )
-    if result.returncode == 0:
-        return True
-
-    message = result.stderr.strip() or result.stdout.strip()
-    if _is_missing_gh_pages_ref(message):
-        return False
-
-    raise RuntimeError(f"failed to fetch origin/gh-pages: {message}")
+    if result.returncode != 0:
+        message = result.stderr.strip() or result.stdout.strip()
+        raise RuntimeError(f"failed to fetch origin/gh-pages: {message}")
+    return True
 
 
 def git_published_paths(repo_root: Path, ref: str) -> List[str]:
