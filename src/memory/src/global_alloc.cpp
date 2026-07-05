@@ -19,6 +19,28 @@
 #define HELIOS_GLOBAL_ALLOC_USE_MIMALLOC_BACKEND
 #endif
 
+// These replaceable operator new/delete overloads form a single atomic set:
+// once any of them is provided, every allocation must be paired with a
+// deallocation from this same file. LTO and linker dead-stripping can each
+// independently decide that an individual overload has no directly-visible
+// caller (calls to it may only be emitted implicitly, e.g. by scalar
+// deleting destructors) and discard it, while keeping others - silently
+// falling back to the default library implementation for the discarded
+// overloads. Mixing this file's operator new with the default operator
+// delete (or vice versa) corrupts the heap, so every overload below is
+// force-kept regardless of apparent reachability.
+#if defined(__has_attribute)
+#if __has_attribute(retain)
+#define HELIOS_GLOBAL_ALLOC_KEEP __attribute__((used, retain))
+#else
+#define HELIOS_GLOBAL_ALLOC_KEEP __attribute__((used))
+#endif
+#elif defined(__GNUC__) || defined(__clang__)
+#define HELIOS_GLOBAL_ALLOC_KEEP __attribute__((used))
+#else
+#define HELIOS_GLOBAL_ALLOC_KEEP
+#endif
+
 namespace {
 
 #if defined(HELIOS_MEMORY_ENABLE_PROFILE) && \
@@ -66,6 +88,8 @@ void RawFree(void* ptr) noexcept {
 void RawAlignedFree(void* ptr) noexcept {
 #ifdef HELIOS_GLOBAL_ALLOC_USE_MIMALLOC_BACKEND
   mi_free(ptr);
+#elif defined(_MSC_VER) && defined(_DEBUG)
+  _aligned_free_dbg(ptr);
 #elif defined(_MSC_VER)
   _aligned_free(ptr);
 #else
@@ -102,7 +126,7 @@ void ProfileFree([[maybe_unused]] const void* ptr) noexcept {
 
 }  // namespace
 
-void* operator new(size_t size) {
+HELIOS_GLOBAL_ALLOC_KEEP void* operator new(size_t size) {
   void* const ptr = RawAlloc(size);
   if (ptr == nullptr) [[unlikely]] {
     throw std::bad_alloc{};
@@ -112,11 +136,12 @@ void* operator new(size_t size) {
   return ptr;
 }
 
-void* operator new[](size_t size) {
+HELIOS_GLOBAL_ALLOC_KEEP void* operator new[](size_t size) {
   return ::operator new(size);
 }
 
-void* operator new(size_t size, const std::nothrow_t&) noexcept {
+HELIOS_GLOBAL_ALLOC_KEEP void* operator new(size_t size,
+                                            const std::nothrow_t&) noexcept {
   void* const ptr = RawAlloc(size);
   if (ptr != nullptr) {
     ProfileAlloc(ptr, size);
@@ -124,11 +149,12 @@ void* operator new(size_t size, const std::nothrow_t&) noexcept {
   return ptr;
 }
 
-void* operator new[](size_t size, const std::nothrow_t&) noexcept {
+HELIOS_GLOBAL_ALLOC_KEEP void* operator new[](size_t size,
+                                              const std::nothrow_t&) noexcept {
   return ::operator new(size, std::nothrow);
 }
 
-void operator delete(void* ptr) noexcept {
+HELIOS_GLOBAL_ALLOC_KEEP void operator delete(void* ptr) noexcept {
   if (ptr == nullptr) [[unlikely]] {
     return;
   }
@@ -137,27 +163,30 @@ void operator delete(void* ptr) noexcept {
   RawFree(ptr);
 }
 
-void operator delete[](void* ptr) noexcept {
+HELIOS_GLOBAL_ALLOC_KEEP void operator delete[](void* ptr) noexcept {
   ::operator delete(ptr);
 }
 
-void operator delete(void* ptr, size_t) noexcept {
+HELIOS_GLOBAL_ALLOC_KEEP void operator delete(void* ptr, size_t) noexcept {
   ::operator delete(ptr);
 }
 
-void operator delete[](void* ptr, size_t) noexcept {
+HELIOS_GLOBAL_ALLOC_KEEP void operator delete[](void* ptr, size_t) noexcept {
   ::operator delete(ptr);
 }
 
-void operator delete(void* ptr, const std::nothrow_t&) noexcept {
+HELIOS_GLOBAL_ALLOC_KEEP void operator delete(void* ptr,
+                                              const std::nothrow_t&) noexcept {
   ::operator delete(ptr);
 }
 
-void operator delete[](void* ptr, const std::nothrow_t&) noexcept {
+HELIOS_GLOBAL_ALLOC_KEEP void operator delete[](
+    void* ptr, const std::nothrow_t& /*nothrow*/) noexcept {
   ::operator delete(ptr);
 }
 
-void* operator new(size_t size, std::align_val_t alignment) {
+HELIOS_GLOBAL_ALLOC_KEEP void* operator new(size_t size,
+                                            std::align_val_t alignment) {
   void* const ptr = RawAlignedAlloc(size, alignment);
   if (ptr == nullptr) [[unlikely]] {
     throw std::bad_alloc{};
@@ -167,12 +196,14 @@ void* operator new(size_t size, std::align_val_t alignment) {
   return ptr;
 }
 
-void* operator new[](size_t size, std::align_val_t alignment) {
+HELIOS_GLOBAL_ALLOC_KEEP void* operator new[](size_t size,
+                                              std::align_val_t alignment) {
   return ::operator new(size, alignment);
 }
 
-void* operator new(size_t size, std::align_val_t alignment,
-                   const std::nothrow_t&) noexcept {
+HELIOS_GLOBAL_ALLOC_KEEP void* operator new(
+    size_t size, std::align_val_t alignment,
+    const std::nothrow_t& /*nothrow*/) noexcept {
   void* const ptr = RawAlignedAlloc(size, alignment);
   if (ptr != nullptr) {
     ProfileAlloc(ptr, size);
@@ -180,12 +211,14 @@ void* operator new(size_t size, std::align_val_t alignment,
   return ptr;
 }
 
-void* operator new[](size_t size, std::align_val_t alignment,
-                     const std::nothrow_t&) noexcept {
+HELIOS_GLOBAL_ALLOC_KEEP void* operator new[](
+    size_t size, std::align_val_t alignment,
+    const std::nothrow_t& /*nothrow*/) noexcept {
   return ::operator new(size, alignment, std::nothrow);
 }
 
-void operator delete(void* ptr, std::align_val_t /*alignment*/) noexcept {
+HELIOS_GLOBAL_ALLOC_KEEP void operator delete(
+    void* ptr, std::align_val_t /*alignment*/) noexcept {
   if (ptr == nullptr) [[unlikely]] {
     return;
   }
@@ -194,16 +227,17 @@ void operator delete(void* ptr, std::align_val_t /*alignment*/) noexcept {
   RawAlignedFree(ptr);
 }
 
-void operator delete[](void* ptr, std::align_val_t alignment) noexcept {
+HELIOS_GLOBAL_ALLOC_KEEP void operator delete[](
+    void* ptr, std::align_val_t alignment) noexcept {
   ::operator delete(ptr, alignment);
 }
 
-void operator delete(void* ptr, size_t /*size*/,
-                     std::align_val_t alignment) noexcept {
+HELIOS_GLOBAL_ALLOC_KEEP void operator delete(
+    void* ptr, size_t /*size*/, std::align_val_t alignment) noexcept {
   ::operator delete(ptr, alignment);
 }
 
-void operator delete[](void* ptr, size_t size,
-                       std::align_val_t alignment) noexcept {
+HELIOS_GLOBAL_ALLOC_KEEP void operator delete[](
+    void* ptr, size_t size, std::align_val_t alignment) noexcept {
   ::operator delete(ptr, size, alignment);
 }

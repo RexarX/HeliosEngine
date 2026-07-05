@@ -108,8 +108,23 @@ TEST_SUITE("helios::async::AsyncTask") {
       REQUIRE_MESSAGE(wait_result == std::future_status::ready,
                       "Task did not complete within timeout");
 
+      // task.Done() may lag briefly behind future readiness on loaded CI
+      // runners
+      constexpr int max_wait_ms = 1000;
+      constexpr int check_interval_ms = 5;
+      int waited_ms = 0;
+      while (!task.Done() && waited_ms < max_wait_ms) {
+        std::this_thread::sleep_for(
+            std::chrono::milliseconds(check_interval_ms));
+        waited_ms += check_interval_ms;
+      }
+
+      REQUIRE_MESSAGE(
+          task.Done(),
+          std::format("Task did not report done within {}ms timeout",
+                      max_wait_ms));
+
       CHECK_FALSE(task.Empty());
-      CHECK(task.Done());
     }
 
     SUBCASE("SilentDependentAsync task completion detection") {

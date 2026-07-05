@@ -2,16 +2,27 @@
 """
 HeliosEngine Documentation Builder
 
-Script for building Doxygen documentation.
+Builds Doxygen HTML via the CMake target ``helios_docs`` when available,
+or configures docs/doxygen/Doxyfile.in into the build tree and runs Doxygen
+directly. Version comes from project(VERSION ...) in CMakeLists.txt.
 """
 
 import argparse
+import os
 import re
 import shutil
 import subprocess
 import sys
 from pathlib import Path
 from typing import Optional, Tuple
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from edition_selector import (
+    render_branch_selector_html,
+    render_version_selector_html,
+    write_selector_js,
+)
 
 
 class Colors:
@@ -89,11 +100,9 @@ def check_dependencies(root_dir: Path) -> Tuple[bool, list, list]:
     missing = []
     warnings = []
 
-    # Check for doxygen
     if not find_executable("doxygen"):
         missing.append("doxygen")
 
-    # Check for doxygen-awesome-css theme (git submodule)
     theme_css = root_dir / "third-party" / "doxygen-awesome-css" / "doxygen-awesome.css"
     if not theme_css.exists():
         missing.append(
@@ -101,7 +110,6 @@ def check_dependencies(root_dir: Path) -> Tuple[bool, list, list]:
             "third-party/doxygen-awesome-css)"
         )
 
-    # Check for dot (graphviz) - optional but recommended
     if not find_executable("dot"):
         warnings.append("graphviz (dot) - graphs will not be generated")
 
@@ -141,42 +149,192 @@ def count_warnings(output: str) -> int:
     return output.lower().count("warning:")
 
 
-def build_docs(docs_dir: Path, clean: bool = False, quiet: bool = False) -> bool:
-    """Build documentation using Doxygen"""
+def read_project_version(root_dir: Path) -> str:
+    """Read project VERSION from the root CMakeLists.txt."""
 
-    doxygen_dir = docs_dir / "doxygen"
-    doxyfile = doxygen_dir / "Doxyfile"
-    output_dir = doxygen_dir / "html"
+    cmake_file = root_dir / "CMakeLists.txt"
+    text = cmake_file.read_text(encoding="utf-8")
+    match = re.search(
+        r"project\s*\(\s*HeliosEngine\s+VERSION\s+([\d.]+)",
+        text,
+        re.IGNORECASE | re.DOTALL,
+    )
+    if not match:
+        print_warning(f"Could not parse VERSION from {cmake_file}; using 0.0.0")
+        return "0.0.0"
+    return match.group(1)
 
-    # Verify Doxyfile exists
-    if not doxyfile.exists():
-        print_error(f"Doxyfile not found: {doxyfile}")
+
+def detect_docs_label() -> str:
+    """Resolve documentation edition label from env or current git branch."""
+
+    label = os.environ.get("DOCS_LABEL", "").strip()
+    if label:
+        return label
+
+    try:
+        result = subprocess.run(
+            ["git", "rev-parse", "--abbrev-ref", "HEAD"],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if result.returncode == 0:
+            branch = result.stdout.strip()
+            if branch and branch != "HEAD":
+                return branch
+    except Exception:
+        pass
+
+    return "local"
+
+
+def format_project_number(version: str) -> str:
+    """Return Doxygen PROJECT_NUMBER (semver only; branch is in the edition selector)."""
+
+    return version
+
+
+def resolve_project_number(root_dir: Path) -> str:
+    """Return the Doxygen project number for the current build."""
+
+    env_number = os.environ.get("HELIOS_DOXYGEN_PROJECT_NUMBER", "").strip()
+    if env_number:
+        return env_number
+    return format_project_number(read_project_version(root_dir))
+
+
+def cmake_path(path: Path) -> str:
+    """Normalize a path for Doxygen (forward slashes)."""
+
+    return str(path.resolve()).replace("\\", "/")
+
+
+def configure_doxyfile(root_dir: Path, build_doxygen_dir: Path) -> Path:
+    """Materialize Doxyfile.in into the build tree."""
+
+    template = root_dir / "docs/doxygen/Doxyfile.in"
+    if not template.exists():
+        raise FileNotFoundError(f"Doxyfile template not found: {template}")
+
+    project_number = resolve_project_number(root_dir)
+    text = template.read_text(encoding="utf-8")
+    text = text.replace("@HELIOS_SOURCE_DIR@", cmake_path(root_dir))
+    text = text.replace(
+        "@HELIOS_DOXYGEN_OUTPUT_DIR@", cmake_path(root_dir / "docs/doxygen")
+    )
+    text = text.replace("@HELIOS_DOXYGEN_PROJECT_NUMBER@", project_number)
+
+    build_doxygen_dir.mkdir(parents=True, exist_ok=True)
+    doxyfile = build_doxygen_dir / "Doxyfile"
+    doxyfile.write_text(text, encoding="utf-8")
+    print_info(f"Project version: {project_number}")
+    return doxyfile
+
+
+def html_output_dir(root_dir: Path) -> Path:
+    """Return the generated HTML output directory."""
+
+    return root_dir / "docs/doxygen/html"
+
+
+def write_local_edition_selector(output_dir: Path, root_dir: Path) -> None:
+    """Write embedded edition selector assets for local preview."""
+
+    label = detect_docs_label()
+    if label in ("main", "local"):
+        branch_options = [("main", "main")]
+    else:
+        branch_options = [(f"branches/{label}", label)]
+
+    project_version = read_project_version(root_dir)
+    version_options = [(project_version, project_version)]
+    current_branch = branch_options[0][0]
+
+    branch_html = render_branch_selector_html(branch_options, current_branch)
+    version_html = render_version_selector_html(version_options, project_version)
+    write_selector_js(
+        output_dir / "edition_selector_data.js",
+        branch_html,
+        version_html,
+        project_version,
+    )
+
+
+def post_process_docs(root_dir: Path) -> None:
+    """Copy assets and write the local edition selector."""
+
+    docs_dir = root_dir / "docs"
+    output_dir = html_output_dir(root_dir)
+
+    img_src = docs_dir / "img"
+    img_dst = output_dir / "docs" / "img"
+    if img_src.is_dir():
+        shutil.copytree(img_src, img_dst, dirs_exist_ok=True)
+
+    write_local_edition_selector(output_dir, root_dir)
+
+
+def find_cmake_build_dir(root_dir: Path) -> Optional[Path]:
+    """Find a configured build directory with HELIOS_BUILD_DOCS enabled."""
+
+    build_root = root_dir / "build"
+    if not build_root.is_dir():
+        return None
+
+    candidates = sorted(
+        (path for path in build_root.iterdir() if path.is_dir()),
+        key=lambda path: path.stat().st_mtime,
+        reverse=True,
+    )
+    for candidate in candidates:
+        cache = candidate / "CMakeCache.txt"
+        if not cache.exists():
+            continue
+        cache_text = cache.read_text(encoding="utf-8", errors="ignore")
+        if "HELIOS_BUILD_DOCS:BOOL=ON" in cache_text:
+            return candidate
+    return None
+
+
+def build_docs_with_cmake(build_dir: Path, quiet: bool) -> Tuple[bool, int]:
+    """Build documentation through the helios_docs CMake target."""
+
+    print_info(f"Building documentation via CMake: {build_dir}")
+    command = ["cmake", "--build", str(build_dir), "--target", "helios_docs"]
+
+    result = subprocess.run(command, capture_output=True, text=True, check=False)
+    if not quiet:
+        if result.stdout:
+            print(result.stdout)
+        if result.stderr:
+            print(result.stderr, file=sys.stderr)
+
+    output = (result.stdout or "") + (result.stderr or "")
+    warning_count = count_warnings(output)
+    return result.returncode == 0, warning_count
+
+
+def build_docs_standalone(root_dir: Path, quiet: bool) -> bool:
+    """Configure Doxyfile.in in the build tree and run Doxygen directly."""
+
+    build_doxygen_dir = root_dir / "build/docs-doxygen"
+    output_dir = html_output_dir(root_dir)
+
+    try:
+        configure_doxyfile(root_dir, build_doxygen_dir)
+    except FileNotFoundError as error:
+        print_error(str(error))
         return False
 
-    # Clean if requested
-    if clean:
-        if output_dir.exists():
-            print_info(f"Cleaning output directory: {output_dir}")
-            try:
-                shutil.rmtree(output_dir)
-                print_success("Documentation cleaned successfully!")
-            except Exception as e:
-                print_error(f"Failed to clean output directory: {e}")
-                return False
-        else:
-            print_info("Output directory already clean")
-        return True
-
-    # Build documentation
-    print_info(f"Building documentation from: {doxyfile}")
+    print_info(f"Building documentation from: {build_doxygen_dir / 'Doxyfile'}")
     print_info(f"Output directory: {output_dir}")
     print()
 
     try:
-        # Run doxygen
         result = subprocess.run(
-            ["doxygen", str(doxyfile)],
-            cwd=str(doxygen_dir),
+            ["doxygen", "Doxyfile"],
+            cwd=str(build_doxygen_dir),
             capture_output=True,
             text=True,
             check=False,
@@ -191,61 +349,107 @@ def build_docs(docs_dir: Path, clean: bool = False, quiet: bool = False) -> bool
         if result.returncode != 0:
             print_error("Doxygen build failed!")
             if result.stderr and quiet:
-                # only re-print stderr here if we didn't already echo it above
                 print(result.stderr, file=sys.stderr)
             return False
 
-        # README uses repo-relative image paths (e.g. docs/img/logo.png); Doxygen
-        # emits those unchanged, so mirror docs/img into the HTML output tree.
-        img_src = docs_dir / "img"
-        img_dst = output_dir / "docs" / "img"
-        if img_src.is_dir():
-            shutil.copytree(img_src, img_dst, dirs_exist_ok=True)
+        post_process_docs(root_dir)
 
         output = (result.stdout or "") + (result.stderr or "")
         warning_count = count_warnings(output)
-
-        # Success!
-        print()
-        print_header("Documentation Built Successfully!")
-        print()
-        print_info(f"Output location: {output_dir / 'index.html'}")
-        print()
-        print("To view the documentation:")
-        print("  1. Open in browser:")
-
-        if sys.platform == "win32":
-            print(f"     start {output_dir / 'index.html'}")
-        elif sys.platform == "darwin":
-            print(f"     open {output_dir / 'index.html'}")
-        else:
-            print(f"     xdg-open {output_dir / 'index.html'}")
-
-        print()
-        print("  2. Or run a local server:")
-        print(f"     cd {output_dir}")
-        print("     python3 -m http.server 8000")
-        print("     Then open: http://localhost:8000")
-        print()
-
-        if warning_count > 0:
-            print_warning(f"Build completed with {warning_count} warning(s)")
-            if not quiet:
-                print_info("Tip: Run without --quiet to see full build output")
-        else:
-            print_success("Build completed with no warnings!")
-
+        print_build_success(output_dir, warning_count, quiet)
         return True
 
     except FileNotFoundError:
         print_error("Doxygen not found in PATH")
         return False
-    except Exception as e:
-        print_error(f"Unexpected error during build: {e}")
+    except Exception as error:
+        print_error(f"Unexpected error during build: {error}")
         return False
 
 
-def main():
+def print_build_success(output_dir: Path, warning_count: int, quiet: bool) -> None:
+    """Print the standard success summary."""
+
+    print()
+    print_header("Documentation Built Successfully!")
+    print()
+    print_info(f"Output location: {output_dir / 'index.html'}")
+    print()
+    print("To view the documentation:")
+    print("  1. Open in browser:")
+
+    if sys.platform == "win32":
+        print(f"     start {output_dir / 'index.html'}")
+    elif sys.platform == "darwin":
+        print(f"     open {output_dir / 'index.html'}")
+    else:
+        print(f"     xdg-open {output_dir / 'index.html'}")
+
+    print()
+    print("  2. Or run a local server:")
+    print(f"     cd {output_dir}")
+    print("     python3 -m http.server 8000")
+    print("     Then open: http://localhost:8000")
+    print()
+    print_info(
+        "Use a local server (not file://) so the edition label and selector load correctly"
+    )
+    print()
+    print_info("Tip: cmake --preset docs && cmake --build --preset docs")
+    print()
+
+    if warning_count > 0:
+        print_warning(f"Build completed with {warning_count} warning(s)")
+        if not quiet:
+            print_info("Tip: Run without --quiet to see full build output")
+    else:
+        print_success("Build completed with no warnings!")
+
+
+def build_docs(
+    root_dir: Path,
+    *,
+    clean: bool = False,
+    quiet: bool = False,
+    use_cmake: bool = False,
+    build_dir: Optional[Path] = None,
+) -> bool:
+    """Build documentation using CMake when configured, otherwise standalone."""
+
+    output_dir = html_output_dir(root_dir)
+
+    if clean:
+        if output_dir.exists():
+            print_info(f"Cleaning output directory: {output_dir}")
+            try:
+                shutil.rmtree(output_dir)
+                print_success("Documentation cleaned successfully!")
+            except Exception as error:
+                print_error(f"Failed to clean output directory: {error}")
+                return False
+        else:
+            print_info("Output directory already clean")
+        return True
+
+    resolved_build_dir = build_dir or find_cmake_build_dir(root_dir)
+    if use_cmake or resolved_build_dir:
+        if not resolved_build_dir:
+            print_error(
+                "CMake docs build requested but no configured build directory was found. "
+                "Configure with -DHELIOS_BUILD_DOCS=ON first."
+            )
+            return False
+        cmake_ok, warning_count = build_docs_with_cmake(resolved_build_dir, quiet)
+        if not cmake_ok:
+            print_error("CMake documentation build failed!")
+            return False
+        print_build_success(output_dir, warning_count, quiet)
+        return True
+
+    return build_docs_standalone(root_dir, quiet)
+
+
+def main() -> int:
     """Main entry point"""
 
     parser = argparse.ArgumentParser(
@@ -253,72 +457,80 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  # Build documentation
-  python docs.py
+  # Build documentation (standalone, or via CMake when configured)
+  python scripts/docs.py
 
-  # Build with verbose output
-  python docs.py --verbose
+  # Build through CMake
+  cmake --preset docs
+  cmake --build --preset docs
 
   # Clean documentation
-  python docs.py --clean
-
-  # Check dependencies only
-  python docs.py --check-only
+  python scripts/docs.py --clean
         """,
     )
 
     parser.add_argument(
         "--clean", action="store_true", help="Clean generated documentation"
     )
-
+    parser.add_argument(
+        "--post-process",
+        action="store_true",
+        help="Only run post-processing steps (used by the helios_docs CMake target)",
+    )
     parser.add_argument(
         "--check-only",
         action="store_true",
         help="Only check for required dependencies, don't build",
     )
-
     parser.add_argument(
         "--quiet",
         "-q",
         action="store_true",
         help="Suppress Doxygen output (only show summary)",
     )
-
     parser.add_argument(
         "--verbose",
         "-v",
         action="store_true",
         help="Show verbose output (opposite of --quiet)",
     )
-
+    parser.add_argument(
+        "--cmake",
+        action="store_true",
+        help="Require the helios_docs CMake target (fail if not configured)",
+    )
+    parser.add_argument(
+        "--build-dir",
+        type=Path,
+        help="CMake build directory for the helios_docs target",
+    )
     parser.add_argument(
         "--docs-dir", type=Path, help="Path to docs directory (default: auto-detect)"
     )
-
     parser.add_argument(
         "--no-color", action="store_true", help="Disable colored output"
     )
 
     args = parser.parse_args()
 
-    # Disable colors if requested
     if args.no_color:
         Colors.disable()
 
-    # Handle quiet/verbose
     quiet = args.quiet and not args.verbose
 
-    # Print header
-    print_header("Helios Engine Documentation Builder")
-
-    # Determine docs directory
+    script_dir = Path(__file__).parent
+    root_dir = script_dir.parent
     if args.docs_dir:
         docs_dir = args.docs_dir.resolve()
+        root_dir = docs_dir.parent
     else:
-        # Auto-detect: script is in scripts/, docs is in ../docs
-        script_dir = Path(__file__).parent
-        root_dir = script_dir.parent
         docs_dir = root_dir / "docs"
+
+    if args.post_process:
+        post_process_docs(root_dir)
+        return 0
+
+    print_header("Helios Engine Documentation Builder")
 
     if not docs_dir.exists():
         print_error(f"Documentation directory not found: {docs_dir}")
@@ -326,9 +538,6 @@ Examples:
 
     print_info(f"Documentation directory: {docs_dir}")
 
-    root_dir = docs_dir.parent
-
-    # Check dependencies
     print_info("Checking dependencies...")
     deps_ok, missing, warnings = check_dependencies(root_dir)
 
@@ -336,23 +545,8 @@ Examples:
         print_error("Missing required dependencies:")
         for dep in missing:
             print(f"  - {dep}")
-        print()
-        print("Please install missing dependencies:")
-
-        if sys.platform == "linux":
-            print("  Ubuntu/Debian: sudo apt-get install doxygen graphviz")
-            print("  Arch Linux:    sudo pacman -S doxygen graphviz")
-        elif sys.platform == "darwin":
-            print("  macOS:         brew install doxygen graphviz")
-        elif sys.platform == "win32":
-            print("  Windows:       choco install doxygen.install graphviz")
-            print(
-                "                 or download from https://www.doxygen.nl/download.html"
-            )
-
         return 1
 
-    # Show version
     version = get_doxygen_version()
     if version:
         print_success(f"Found Doxygen version {version}")
@@ -360,18 +554,13 @@ Examples:
             print_error(
                 "Doxygen 1.17.0 or newer is required for docs/doxygen/header.html"
             )
-            print_info(
-                "Ubuntu/Debian: install from https://github.com/doxygen/doxygen/releases"
-            )
             return 1
     else:
         print_warning("Could not determine Doxygen version")
 
-    # Show warnings
     for warning in warnings:
         print_warning(f"Optional dependency missing: {warning}")
 
-    # Exit if check-only
     if args.check_only:
         print()
         print_success("Dependency check complete!")
@@ -379,9 +568,13 @@ Examples:
 
     print()
 
-    # Build or clean
-    success = build_docs(docs_dir, clean=args.clean, quiet=quiet)
-
+    success = build_docs(
+        root_dir,
+        clean=args.clean,
+        quiet=quiet,
+        use_cmake=args.cmake,
+        build_dir=args.build_dir.resolve() if args.build_dir else None,
+    )
     return 0 if success else 1
 
 

@@ -35,6 +35,8 @@ jobs:
         include:
           - preset: linux-gcc-debug
             cmake_extra: -DHELIOS_DEVELOPER_MODE=ON -DHELIOS_BUILD_EXAMPLES=OFF
+          - preset: linux-gcc-relwithdebinfo
+            cmake_extra: -DHELIOS_BUILD_EXAMPLES=OFF
           - preset: linux-gcc-release
             cmake_extra: -DHELIOS_BUILD_EXAMPLES=OFF
     steps:

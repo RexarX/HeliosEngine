@@ -62,6 +62,14 @@
       DoxygenAwesomeInteractiveToc.init();
       DoxygenAwesomeTabs.init();
     </script>
+    <script
+      type="text/javascript"
+      src="$relpath^edition_selector_data.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="$relpath^version_selector_handler.js"
+    ></script>
   </head>
   <body>
     <!--BEGIN FULL_SIDEBAR-->
@@ -87,7 +95,15 @@
                   <div id="projectname">
                     $projectname<!--BEGIN PROJECT_NUMBER--><span
                       id="projectnumber"
-                      >&#160;$projectnumber</span
+                      ><span class="helios-edition-control"
+                        ><span
+                          id="editionselector"
+                          class="helios-edition-select-wrap helios-branch-select-wrap"
+                        ></span
+                        ><span
+                          id="versionselector"
+                          class="helios-edition-select-wrap helios-version-select-wrap"
+                        ></span></span></span
                     ><!--END PROJECT_NUMBER-->
                   </div>
                   <!--BEGIN PROJECT_BRIEF-->

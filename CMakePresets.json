@@ -128,6 +128,18 @@
       }
     },
     {
+      "name": "docs",
+      "displayName": "Documentation",
+      "description": "Configure a docs-only Doxygen build",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build-docs",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "HELIOS_DOCS_ONLY": "ON",
+        "HELIOS_BUILD_DOCS": "ON"
+      }
+    },
+    {
       "name": "linux-gcc-debug",
       "displayName": "Linux GCC Debug",
       "description": "Linux debug build with GCC",
@@ -237,6 +249,13 @@
     }
   ],
   "buildPresets": [
+    {
+      "name": "docs",
+      "configurePreset": "docs",
+      "displayName": "Build Documentation",
+      "description": "Build Doxygen documentation",
+      "targets": ["helios_docs"]
+    },
     {
       "name": "linux-gcc-debug",
       "configurePreset": "linux-gcc-debug",

@@ -4,24 +4,23 @@
 
 PROJECT_NAME           = "Helios Engine"
 PROJECT_BRIEF          = "A modular ECS based data-oriented C++23 game engine framework"
-PROJECT_LOGO           = ../img/logo.png
-PROJECT_NUMBER         = 0.1.0
+PROJECT_LOGO           = @HELIOS_SOURCE_DIR@/docs/img/logo.png
+# PROJECT_NUMBER comes from project(VERSION ...) via cmake/Doxygen.cmake
+PROJECT_NUMBER         = @HELIOS_DOXYGEN_PROJECT_NUMBER@
 
-OUTPUT_DIRECTORY       =
+OUTPUT_DIRECTORY       = @HELIOS_DOXYGEN_OUTPUT_DIR@
 CREATE_SUBDIRS         = NO
 
 #---------------------------------------------------------------------------
 # Configuration options related to the input files
 #---------------------------------------------------------------------------
 
-# Use relative paths so Doxygen works from docs/ or project root
-INPUT                  = ../../src \
-                         ../../README.md \
-                         ../../docs/guidelines.md \
-                         ../../examples/custom_module/README.md
+INPUT                  = @HELIOS_SOURCE_DIR@/src \
+                         @HELIOS_SOURCE_DIR@/README.md \
+                         @HELIOS_SOURCE_DIR@/docs/guidelines.md \
+                         @HELIOS_SOURCE_DIR@/examples/custom_module/README.md
 FILE_PATTERNS          = *.hpp *.inl *.h *.cpp *.cxx *.c *.md
 RECURSIVE              = YES
-EXCLUDE                = ../../tests ../../third-party
 EXCLUDE_PATTERNS       = */tests/* \
                          */details/*
 
@@ -36,7 +35,7 @@ INLINE_SOURCES         = NO
 STRIP_CODE_COMMENTS    = NO
 SHOW_USED_FILES        = NO
 FULL_PATH_NAMES        = YES
-STRIP_FROM_PATH        = ../../
+STRIP_FROM_PATH        = @HELIOS_SOURCE_DIR@/
 
 
 #---------------------------------------------------------------------------
@@ -53,15 +52,17 @@ GENERATE_HTML          = YES
 HTML_OUTPUT            = html
 
 # Base theme (doxygen-awesome-css + extensions)
-HTML_HEADER            = header.html
-HTML_FOOTER            = footer.html
-HTML_EXTRA_STYLESHEET  = ../../third-party/doxygen-awesome-css/doxygen-awesome.css \
-                         custom.css
-HTML_EXTRA_FILES       = jquery.min.js \
-                         ../../third-party/doxygen-awesome-css/doxygen-awesome-darkmode-toggle.js \
-                         ../../third-party/doxygen-awesome-css/doxygen-awesome-fragment-copy-button.js \
-                         ../../third-party/doxygen-awesome-css/doxygen-awesome-interactive-toc.js \
-                         ../../third-party/doxygen-awesome-css/doxygen-awesome-tabs.js
+HTML_HEADER            = @HELIOS_SOURCE_DIR@/docs/doxygen/header.html
+HTML_FOOTER            = @HELIOS_SOURCE_DIR@/docs/doxygen/footer.html
+HTML_EXTRA_STYLESHEET  = @HELIOS_SOURCE_DIR@/third-party/doxygen-awesome-css/doxygen-awesome.css \
+                         @HELIOS_SOURCE_DIR@/docs/doxygen/custom.css
+HTML_EXTRA_FILES       = @HELIOS_SOURCE_DIR@/docs/doxygen/jquery.min.js \
+                         @HELIOS_SOURCE_DIR@/docs/doxygen/edition_selector_data.js \
+                         @HELIOS_SOURCE_DIR@/docs/doxygen/version_selector_handler.js \
+                         @HELIOS_SOURCE_DIR@/third-party/doxygen-awesome-css/doxygen-awesome-darkmode-toggle.js \
+                         @HELIOS_SOURCE_DIR@/third-party/doxygen-awesome-css/doxygen-awesome-fragment-copy-button.js \
+                         @HELIOS_SOURCE_DIR@/third-party/doxygen-awesome-css/doxygen-awesome-interactive-toc.js \
+                         @HELIOS_SOURCE_DIR@/third-party/doxygen-awesome-css/doxygen-awesome-tabs.js
 HTML_COPY_CLIPBOARD    = NO
 PAGE_OUTLINE_PANEL     = NO
 
@@ -72,9 +73,9 @@ FULL_SIDEBAR           = NO
 HTML_COLORSTYLE        = LIGHT
 TREEVIEW_WIDTH         = 335
 
-PROJECT_ICON           = ../img/favicon.ico
+PROJECT_ICON           = @HELIOS_SOURCE_DIR@/docs/img/favicon.ico
 
-IMAGE_PATH             = ../img
+IMAGE_PATH             = @HELIOS_SOURCE_DIR@/docs/img
 
 #---------------------------------------------------------------------------
 # Configuration options related to LaTeX/PDF output
@@ -154,7 +155,7 @@ WARN_IF_DOC_ERROR      = YES
 # Configuration options related to grouping and main page
 #---------------------------------------------------------------------------
 
-USE_MDFILE_AS_MAINPAGE = ../../README.md
+USE_MDFILE_AS_MAINPAGE = @HELIOS_SOURCE_DIR@/README.md
 MARKDOWN_SUPPORT       = YES
 MARKDOWN_ID_STYLE      = GITHUB
 AUTOLINK_SUPPORT       = YES

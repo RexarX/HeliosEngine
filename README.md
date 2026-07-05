@@ -516,7 +516,7 @@ python scripts/docs.py
 # → docs/doxygen/html/index.html
 ```
 
-Config: [`docs/doxygen/Doxyfile`](docs/doxygen/Doxyfile) — [doxygen-awesome-css](third-party/doxygen-awesome-css) theme (git submodule).
+Config: [`docs/doxygen/Doxyfile.in`](docs/doxygen/Doxyfile.in) — version from `project(VERSION …)` via CMake (`cmake --preset docs`, `cmake --build --preset docs`) or `scripts/docs.py`.
 
 ### Project guidelines
 
