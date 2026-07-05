@@ -49,6 +49,14 @@
       DoxygenAwesomeInteractiveToc.init();
       DoxygenAwesomeTabs.init();
     </script>
+    <script
+      type="text/javascript"
+      src="edition_selector_data.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="version_selector_handler.js"
+    ></script>
   </head>
   <body>
       <div id="top">
@@ -64,7 +72,15 @@
                   <div id="projectname">
                     Helios Engine<span
                       id="projectnumber"
-                      >&#160;0.1.0</span
+                      ><span class="helios-edition-control"
+                        ><span
+                          id="editionselector"
+                          class="helios-edition-select-wrap helios-branch-select-wrap"
+                        ></span
+                        ><span
+                          id="versionselector"
+                          class="helios-edition-select-wrap helios-version-select-wrap"
+                        ></span></span></span
                     >
                   </div>
                   <div id="projectbrief">A modular ECS based data-oriented C++23 game engine framework</div>
@@ -157,6 +173,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('global__alloc_
 <div class="header">
   <div class="summary">
 <a href="#namespaces">Namespaces</a> &#124;
+<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">global_alloc.cpp File Reference</div></div>
 </div><!--header-->
@@ -172,6 +189,10 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('global__alloc_
 Namespaces</h2></td></tr>
 <tr class="memitem:anonymous_5Fnamespace_7Bglobal_5Falloc_2Ecpp_7D" id="r_anonymous_5Fnamespace_7Bglobal_5Falloc_2Ecpp_7D"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespaceanonymous__namespace_02global__alloc_8cpp_03.html">anonymous_namespace{global_alloc.cpp}</a></td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a02878fbb451aa018547acce8245e025f" id="r_a02878fbb451aa018547acce8245e025f"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a02878fbb451aa018547acce8245e025f">HELIOS_GLOBAL_ALLOC_KEEP</a></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a81c499e1512d0c00ad916e18d2a91236" id="r_a81c499e1512d0c00ad916e18d2a91236"><td class="memItemLeft">void *&#160;</td><td class="memItemRight"><a class="el" href="namespaceanonymous__namespace_02global__alloc_8cpp_03.html#a81c499e1512d0c00ad916e18d2a91236">anonymous_namespace{global_alloc.cpp}::RawAlloc</a> (size_t size) noexcept</td></tr>
@@ -180,28 +201,45 @@ Functions</h2></td></tr>
 <tr class="memitem:ada176eb8a1329cbd7120205980bd8321" id="r_ada176eb8a1329cbd7120205980bd8321"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespaceanonymous__namespace_02global__alloc_8cpp_03.html#ada176eb8a1329cbd7120205980bd8321">anonymous_namespace{global_alloc.cpp}::RawAlignedFree</a> (void *ptr) noexcept</td></tr>
 <tr class="memitem:a47f5b87000e7122ad4d0f10ce00ca73b" id="r_a47f5b87000e7122ad4d0f10ce00ca73b"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespaceanonymous__namespace_02global__alloc_8cpp_03.html#a47f5b87000e7122ad4d0f10ce00ca73b">anonymous_namespace{global_alloc.cpp}::ProfileAlloc</a> (const void *ptr, size_t size) noexcept</td></tr>
 <tr class="memitem:a8972c2285eb026a415643372edf0335e" id="r_a8972c2285eb026a415643372edf0335e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespaceanonymous__namespace_02global__alloc_8cpp_03.html#a8972c2285eb026a415643372edf0335e">anonymous_namespace{global_alloc.cpp}::ProfileFree</a> (const void *ptr) noexcept</td></tr>
-<tr class="memitem:a160dcabc54bbecfc69484678cafadb81" id="r_a160dcabc54bbecfc69484678cafadb81"><td class="memItemLeft">void *&#160;</td><td class="memItemRight"><a class="el" href="#a160dcabc54bbecfc69484678cafadb81">operator new</a> (size_t size)</td></tr>
-<tr class="memitem:af2243bb4c2126b7b2b393e06090fbe59" id="r_af2243bb4c2126b7b2b393e06090fbe59"><td class="memItemLeft">void *&#160;</td><td class="memItemRight"><a class="el" href="#af2243bb4c2126b7b2b393e06090fbe59">operator new[]</a> (size_t size)</td></tr>
-<tr class="memitem:a16ac0f06fb28f80778c7830a36512700" id="r_a16ac0f06fb28f80778c7830a36512700"><td class="memItemLeft">void *&#160;</td><td class="memItemRight"><a class="el" href="#a16ac0f06fb28f80778c7830a36512700">operator new</a> (size_t size, const std::nothrow_t &amp;) noexcept</td></tr>
-<tr class="memitem:a372575ee587ac01e5beec279d2be2e66" id="r_a372575ee587ac01e5beec279d2be2e66"><td class="memItemLeft">void *&#160;</td><td class="memItemRight"><a class="el" href="#a372575ee587ac01e5beec279d2be2e66">operator new[]</a> (size_t size, const std::nothrow_t &amp;) noexcept</td></tr>
-<tr class="memitem:afa145befcf5e7b83424408ca503c8637" id="r_afa145befcf5e7b83424408ca503c8637"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#afa145befcf5e7b83424408ca503c8637">operator delete</a> (void *ptr) noexcept</td></tr>
-<tr class="memitem:a22aea74a1155aa798d6032da46da2391" id="r_a22aea74a1155aa798d6032da46da2391"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a22aea74a1155aa798d6032da46da2391">operator delete[]</a> (void *ptr) noexcept</td></tr>
-<tr class="memitem:aeb70b064678e54ac9d17095b41f45e10" id="r_aeb70b064678e54ac9d17095b41f45e10"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aeb70b064678e54ac9d17095b41f45e10">operator delete</a> (void *ptr, size_t) noexcept</td></tr>
-<tr class="memitem:af43c18f24479333933613aeb791e9cf9" id="r_af43c18f24479333933613aeb791e9cf9"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#af43c18f24479333933613aeb791e9cf9">operator delete[]</a> (void *ptr, size_t) noexcept</td></tr>
-<tr class="memitem:a8550e9bb1c5db86131284c9c9f4941d7" id="r_a8550e9bb1c5db86131284c9c9f4941d7"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a8550e9bb1c5db86131284c9c9f4941d7">operator delete</a> (void *ptr, const std::nothrow_t &amp;) noexcept</td></tr>
-<tr class="memitem:a32e6840057e14ada18c1f92c0ba0cbf0" id="r_a32e6840057e14ada18c1f92c0ba0cbf0"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a32e6840057e14ada18c1f92c0ba0cbf0">operator delete[]</a> (void *ptr, const std::nothrow_t &amp;) noexcept</td></tr>
-<tr class="memitem:af30eb3cdec24219daed41e8bddc0c824" id="r_af30eb3cdec24219daed41e8bddc0c824"><td class="memItemLeft">void *&#160;</td><td class="memItemRight"><a class="el" href="#af30eb3cdec24219daed41e8bddc0c824">operator new</a> (size_t size, std::align_val_t alignment)</td></tr>
-<tr class="memitem:ae32f48344fe9f9febbade800183c3af6" id="r_ae32f48344fe9f9febbade800183c3af6"><td class="memItemLeft">void *&#160;</td><td class="memItemRight"><a class="el" href="#ae32f48344fe9f9febbade800183c3af6">operator new[]</a> (size_t size, std::align_val_t alignment)</td></tr>
-<tr class="memitem:a5d37bc02219374f4f2b5579e6de6b19b" id="r_a5d37bc02219374f4f2b5579e6de6b19b"><td class="memItemLeft">void *&#160;</td><td class="memItemRight"><a class="el" href="#a5d37bc02219374f4f2b5579e6de6b19b">operator new</a> (size_t size, std::align_val_t alignment, const std::nothrow_t &amp;) noexcept</td></tr>
-<tr class="memitem:a0839e8376b1a38e86cbd52c2b995c202" id="r_a0839e8376b1a38e86cbd52c2b995c202"><td class="memItemLeft">void *&#160;</td><td class="memItemRight"><a class="el" href="#a0839e8376b1a38e86cbd52c2b995c202">operator new[]</a> (size_t size, std::align_val_t alignment, const std::nothrow_t &amp;) noexcept</td></tr>
-<tr class="memitem:ae687fe1d0a408ab4f327a7dd0348744d" id="r_ae687fe1d0a408ab4f327a7dd0348744d"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ae687fe1d0a408ab4f327a7dd0348744d">operator delete</a> (void *ptr, std::align_val_t) noexcept</td></tr>
-<tr class="memitem:ac994c2e259ce3af72fc3175119fe8b60" id="r_ac994c2e259ce3af72fc3175119fe8b60"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ac994c2e259ce3af72fc3175119fe8b60">operator delete[]</a> (void *ptr, std::align_val_t alignment) noexcept</td></tr>
-<tr class="memitem:a2cbaeb706dae8c2a1d66145775c801b8" id="r_a2cbaeb706dae8c2a1d66145775c801b8"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a2cbaeb706dae8c2a1d66145775c801b8">operator delete</a> (void *ptr, size_t, std::align_val_t alignment) noexcept</td></tr>
-<tr class="memitem:a839bd8e55705408398d6dde956ad9c7e" id="r_a839bd8e55705408398d6dde956ad9c7e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a839bd8e55705408398d6dde956ad9c7e">operator delete[]</a> (void *ptr, size_t size, std::align_val_t alignment) noexcept</td></tr>
+<tr class="memitem:a598c149e925ab064721c40acd2a51d84" id="r_a598c149e925ab064721c40acd2a51d84"><td class="memItemLeft"><a class="el" href="#a02878fbb451aa018547acce8245e025f">HELIOS_GLOBAL_ALLOC_KEEP</a> void *&#160;</td><td class="memItemRight"><a class="el" href="#a598c149e925ab064721c40acd2a51d84">operator new</a> (size_t size)</td></tr>
+<tr class="memitem:a0dcb984f65ac3e26bf6760cb5dbd18d8" id="r_a0dcb984f65ac3e26bf6760cb5dbd18d8"><td class="memItemLeft"><a class="el" href="#a02878fbb451aa018547acce8245e025f">HELIOS_GLOBAL_ALLOC_KEEP</a> void *&#160;</td><td class="memItemRight"><a class="el" href="#a0dcb984f65ac3e26bf6760cb5dbd18d8">operator new[]</a> (size_t size)</td></tr>
+<tr class="memitem:a64a7e546401c1af3a7eac35316085c02" id="r_a64a7e546401c1af3a7eac35316085c02"><td class="memItemLeft"><a class="el" href="#a02878fbb451aa018547acce8245e025f">HELIOS_GLOBAL_ALLOC_KEEP</a> void *&#160;</td><td class="memItemRight"><a class="el" href="#a64a7e546401c1af3a7eac35316085c02">operator new</a> (size_t size, const std::nothrow_t &amp;) noexcept</td></tr>
+<tr class="memitem:a423f0c7372a3b21f3f3a65ce0487073f" id="r_a423f0c7372a3b21f3f3a65ce0487073f"><td class="memItemLeft"><a class="el" href="#a02878fbb451aa018547acce8245e025f">HELIOS_GLOBAL_ALLOC_KEEP</a> void *&#160;</td><td class="memItemRight"><a class="el" href="#a423f0c7372a3b21f3f3a65ce0487073f">operator new[]</a> (size_t size, const std::nothrow_t &amp;) noexcept</td></tr>
+<tr class="memitem:a0c85a3f90a18c8005f26c25b474d3969" id="r_a0c85a3f90a18c8005f26c25b474d3969"><td class="memItemLeft"><a class="el" href="#a02878fbb451aa018547acce8245e025f">HELIOS_GLOBAL_ALLOC_KEEP</a> void&#160;</td><td class="memItemRight"><a class="el" href="#a0c85a3f90a18c8005f26c25b474d3969">operator delete</a> (void *ptr) noexcept</td></tr>
+<tr class="memitem:af830b75e3da1499f7ef5927c5acfbbf0" id="r_af830b75e3da1499f7ef5927c5acfbbf0"><td class="memItemLeft"><a class="el" href="#a02878fbb451aa018547acce8245e025f">HELIOS_GLOBAL_ALLOC_KEEP</a> void&#160;</td><td class="memItemRight"><a class="el" href="#af830b75e3da1499f7ef5927c5acfbbf0">operator delete[]</a> (void *ptr) noexcept</td></tr>
+<tr class="memitem:a97681249e6c7818635405ae89aae226b" id="r_a97681249e6c7818635405ae89aae226b"><td class="memItemLeft"><a class="el" href="#a02878fbb451aa018547acce8245e025f">HELIOS_GLOBAL_ALLOC_KEEP</a> void&#160;</td><td class="memItemRight"><a class="el" href="#a97681249e6c7818635405ae89aae226b">operator delete</a> (void *ptr, size_t) noexcept</td></tr>
+<tr class="memitem:a703add5495e98b1b111c88bdb691d2c6" id="r_a703add5495e98b1b111c88bdb691d2c6"><td class="memItemLeft"><a class="el" href="#a02878fbb451aa018547acce8245e025f">HELIOS_GLOBAL_ALLOC_KEEP</a> void&#160;</td><td class="memItemRight"><a class="el" href="#a703add5495e98b1b111c88bdb691d2c6">operator delete[]</a> (void *ptr, size_t) noexcept</td></tr>
+<tr class="memitem:a049172388fa785273c6a7d20912cf7f0" id="r_a049172388fa785273c6a7d20912cf7f0"><td class="memItemLeft"><a class="el" href="#a02878fbb451aa018547acce8245e025f">HELIOS_GLOBAL_ALLOC_KEEP</a> void&#160;</td><td class="memItemRight"><a class="el" href="#a049172388fa785273c6a7d20912cf7f0">operator delete</a> (void *ptr, const std::nothrow_t &amp;) noexcept</td></tr>
+<tr class="memitem:a917fcdc1cedf6716640c40089cf220f7" id="r_a917fcdc1cedf6716640c40089cf220f7"><td class="memItemLeft"><a class="el" href="#a02878fbb451aa018547acce8245e025f">HELIOS_GLOBAL_ALLOC_KEEP</a> void&#160;</td><td class="memItemRight"><a class="el" href="#a917fcdc1cedf6716640c40089cf220f7">operator delete[]</a> (void *ptr, const std::nothrow_t &amp;) noexcept</td></tr>
+<tr class="memitem:a46ae1fd39d887379eda509fd46c9d80e" id="r_a46ae1fd39d887379eda509fd46c9d80e"><td class="memItemLeft"><a class="el" href="#a02878fbb451aa018547acce8245e025f">HELIOS_GLOBAL_ALLOC_KEEP</a> void *&#160;</td><td class="memItemRight"><a class="el" href="#a46ae1fd39d887379eda509fd46c9d80e">operator new</a> (size_t size, std::align_val_t alignment)</td></tr>
+<tr class="memitem:abed690c65dc9ede3e322da2daf9857db" id="r_abed690c65dc9ede3e322da2daf9857db"><td class="memItemLeft"><a class="el" href="#a02878fbb451aa018547acce8245e025f">HELIOS_GLOBAL_ALLOC_KEEP</a> void *&#160;</td><td class="memItemRight"><a class="el" href="#abed690c65dc9ede3e322da2daf9857db">operator new[]</a> (size_t size, std::align_val_t alignment)</td></tr>
+<tr class="memitem:a80598f1c66063caa77be47d2f315b6e4" id="r_a80598f1c66063caa77be47d2f315b6e4"><td class="memItemLeft"><a class="el" href="#a02878fbb451aa018547acce8245e025f">HELIOS_GLOBAL_ALLOC_KEEP</a> void *&#160;</td><td class="memItemRight"><a class="el" href="#a80598f1c66063caa77be47d2f315b6e4">operator new</a> (size_t size, std::align_val_t alignment, const std::nothrow_t &amp;) noexcept</td></tr>
+<tr class="memitem:a281091b2b0db8886029ea1a7dd5ad2d8" id="r_a281091b2b0db8886029ea1a7dd5ad2d8"><td class="memItemLeft"><a class="el" href="#a02878fbb451aa018547acce8245e025f">HELIOS_GLOBAL_ALLOC_KEEP</a> void *&#160;</td><td class="memItemRight"><a class="el" href="#a281091b2b0db8886029ea1a7dd5ad2d8">operator new[]</a> (size_t size, std::align_val_t alignment, const std::nothrow_t &amp;) noexcept</td></tr>
+<tr class="memitem:a83722d1ec7a9b16292884186056ab08c" id="r_a83722d1ec7a9b16292884186056ab08c"><td class="memItemLeft"><a class="el" href="#a02878fbb451aa018547acce8245e025f">HELIOS_GLOBAL_ALLOC_KEEP</a> void&#160;</td><td class="memItemRight"><a class="el" href="#a83722d1ec7a9b16292884186056ab08c">operator delete</a> (void *ptr, std::align_val_t) noexcept</td></tr>
+<tr class="memitem:ac801a39d1f0d61a3b04172323ea5a658" id="r_ac801a39d1f0d61a3b04172323ea5a658"><td class="memItemLeft"><a class="el" href="#a02878fbb451aa018547acce8245e025f">HELIOS_GLOBAL_ALLOC_KEEP</a> void&#160;</td><td class="memItemRight"><a class="el" href="#ac801a39d1f0d61a3b04172323ea5a658">operator delete[]</a> (void *ptr, std::align_val_t alignment) noexcept</td></tr>
+<tr class="memitem:ae4614b287976120c6cc12d7c002adeae" id="r_ae4614b287976120c6cc12d7c002adeae"><td class="memItemLeft"><a class="el" href="#a02878fbb451aa018547acce8245e025f">HELIOS_GLOBAL_ALLOC_KEEP</a> void&#160;</td><td class="memItemRight"><a class="el" href="#ae4614b287976120c6cc12d7c002adeae">operator delete</a> (void *ptr, size_t, std::align_val_t alignment) noexcept</td></tr>
+<tr class="memitem:a89a2eb87603864bfd8392abde01c6918" id="r_a89a2eb87603864bfd8392abde01c6918"><td class="memItemLeft"><a class="el" href="#a02878fbb451aa018547acce8245e025f">HELIOS_GLOBAL_ALLOC_KEEP</a> void&#160;</td><td class="memItemRight"><a class="el" href="#a89a2eb87603864bfd8392abde01c6918">operator delete[]</a> (void *ptr, size_t size, std::align_val_t alignment) noexcept</td></tr>
 </table>
+<a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
+<a id="a02878fbb451aa018547acce8245e025f" name="a02878fbb451aa018547acce8245e025f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02878fbb451aa018547acce8245e025f">&#9670;&#160;</a></span>HELIOS_GLOBAL_ALLOC_KEEP</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HELIOS_GLOBAL_ALLOC_KEEP</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00041">41</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
+
+</div>
+</div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="afa145befcf5e7b83424408ca503c8637" name="afa145befcf5e7b83424408ca503c8637"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afa145befcf5e7b83424408ca503c8637">&#9670;&#160;</a></span>operator delete() <span class="overload">[1/5]</span></h2>
+<a id="a0c85a3f90a18c8005f26c25b474d3969" name="a0c85a3f90a18c8005f26c25b474d3969"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c85a3f90a18c8005f26c25b474d3969">&#9670;&#160;</a></span>operator delete() <span class="overload">[1/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -210,7 +248,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void operator delete </td>
+          <td class="memname"><a class="el" href="#a02878fbb451aa018547acce8245e025f">HELIOS_GLOBAL_ALLOC_KEEP</a> void operator delete </td>
           <td>(</td>
           <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span></td><td>)</td>
           <td></td>
@@ -223,12 +261,12 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00131">131</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00157">157</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a8550e9bb1c5db86131284c9c9f4941d7" name="a8550e9bb1c5db86131284c9c9f4941d7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8550e9bb1c5db86131284c9c9f4941d7">&#9670;&#160;</a></span>operator delete() <span class="overload">[2/5]</span></h2>
+<a id="a049172388fa785273c6a7d20912cf7f0" name="a049172388fa785273c6a7d20912cf7f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a049172388fa785273c6a7d20912cf7f0">&#9670;&#160;</a></span>operator delete() <span class="overload">[2/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -237,7 +275,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void operator delete </td>
+          <td class="memname"><a class="el" href="#a02878fbb451aa018547acce8245e025f">HELIOS_GLOBAL_ALLOC_KEEP</a> void operator delete </td>
           <td>(</td>
           <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span>, </td>
         </tr>
@@ -254,12 +292,12 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00152">152</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00178">178</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
 
 </div>
 </div>
-<a id="aeb70b064678e54ac9d17095b41f45e10" name="aeb70b064678e54ac9d17095b41f45e10"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeb70b064678e54ac9d17095b41f45e10">&#9670;&#160;</a></span>operator delete() <span class="overload">[3/5]</span></h2>
+<a id="a97681249e6c7818635405ae89aae226b" name="a97681249e6c7818635405ae89aae226b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97681249e6c7818635405ae89aae226b">&#9670;&#160;</a></span>operator delete() <span class="overload">[3/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -268,7 +306,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void operator delete </td>
+          <td class="memname"><a class="el" href="#a02878fbb451aa018547acce8245e025f">HELIOS_GLOBAL_ALLOC_KEEP</a> void operator delete </td>
           <td>(</td>
           <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span>, </td>
         </tr>
@@ -285,12 +323,12 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00144">144</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00170">170</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a2cbaeb706dae8c2a1d66145775c801b8" name="a2cbaeb706dae8c2a1d66145775c801b8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2cbaeb706dae8c2a1d66145775c801b8">&#9670;&#160;</a></span>operator delete() <span class="overload">[4/5]</span></h2>
+<a id="ae4614b287976120c6cc12d7c002adeae" name="ae4614b287976120c6cc12d7c002adeae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4614b287976120c6cc12d7c002adeae">&#9670;&#160;</a></span>operator delete() <span class="overload">[4/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -299,7 +337,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void operator delete </td>
+          <td class="memname"><a class="el" href="#a02878fbb451aa018547acce8245e025f">HELIOS_GLOBAL_ALLOC_KEEP</a> void operator delete </td>
           <td>(</td>
           <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span>, </td>
         </tr>
@@ -321,12 +359,12 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00201">201</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00235">235</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
 
 </div>
 </div>
-<a id="ae687fe1d0a408ab4f327a7dd0348744d" name="ae687fe1d0a408ab4f327a7dd0348744d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae687fe1d0a408ab4f327a7dd0348744d">&#9670;&#160;</a></span>operator delete() <span class="overload">[5/5]</span></h2>
+<a id="a83722d1ec7a9b16292884186056ab08c" name="a83722d1ec7a9b16292884186056ab08c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83722d1ec7a9b16292884186056ab08c">&#9670;&#160;</a></span>operator delete() <span class="overload">[5/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -335,7 +373,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void operator delete </td>
+          <td class="memname"><a class="el" href="#a02878fbb451aa018547acce8245e025f">HELIOS_GLOBAL_ALLOC_KEEP</a> void operator delete </td>
           <td>(</td>
           <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span>, </td>
         </tr>
@@ -352,12 +390,12 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00188">188</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00220">220</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a22aea74a1155aa798d6032da46da2391" name="a22aea74a1155aa798d6032da46da2391"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a22aea74a1155aa798d6032da46da2391">&#9670;&#160;</a></span>operator delete[]() <span class="overload">[1/5]</span></h2>
+<a id="af830b75e3da1499f7ef5927c5acfbbf0" name="af830b75e3da1499f7ef5927c5acfbbf0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af830b75e3da1499f7ef5927c5acfbbf0">&#9670;&#160;</a></span>operator delete[]() <span class="overload">[1/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -366,7 +404,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void operator delete[] </td>
+          <td class="memname"><a class="el" href="#a02878fbb451aa018547acce8245e025f">HELIOS_GLOBAL_ALLOC_KEEP</a> void operator delete[] </td>
           <td>(</td>
           <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span></td><td>)</td>
           <td></td>
@@ -379,12 +417,12 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00140">140</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00166">166</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a32e6840057e14ada18c1f92c0ba0cbf0" name="a32e6840057e14ada18c1f92c0ba0cbf0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a32e6840057e14ada18c1f92c0ba0cbf0">&#9670;&#160;</a></span>operator delete[]() <span class="overload">[2/5]</span></h2>
+<a id="a917fcdc1cedf6716640c40089cf220f7" name="a917fcdc1cedf6716640c40089cf220f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a917fcdc1cedf6716640c40089cf220f7">&#9670;&#160;</a></span>operator delete[]() <span class="overload">[2/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -393,7 +431,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void operator delete[] </td>
+          <td class="memname"><a class="el" href="#a02878fbb451aa018547acce8245e025f">HELIOS_GLOBAL_ALLOC_KEEP</a> void operator delete[] </td>
           <td>(</td>
           <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span>, </td>
         </tr>
@@ -410,12 +448,12 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00156">156</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00183">183</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a839bd8e55705408398d6dde956ad9c7e" name="a839bd8e55705408398d6dde956ad9c7e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a839bd8e55705408398d6dde956ad9c7e">&#9670;&#160;</a></span>operator delete[]() <span class="overload">[3/5]</span></h2>
+<a id="a89a2eb87603864bfd8392abde01c6918" name="a89a2eb87603864bfd8392abde01c6918"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89a2eb87603864bfd8392abde01c6918">&#9670;&#160;</a></span>operator delete[]() <span class="overload">[3/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -424,7 +462,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void operator delete[] </td>
+          <td class="memname"><a class="el" href="#a02878fbb451aa018547acce8245e025f">HELIOS_GLOBAL_ALLOC_KEEP</a> void operator delete[] </td>
           <td>(</td>
           <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span>, </td>
         </tr>
@@ -446,12 +484,12 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00206">206</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00240">240</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
 
 </div>
 </div>
-<a id="af43c18f24479333933613aeb791e9cf9" name="af43c18f24479333933613aeb791e9cf9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af43c18f24479333933613aeb791e9cf9">&#9670;&#160;</a></span>operator delete[]() <span class="overload">[4/5]</span></h2>
+<a id="a703add5495e98b1b111c88bdb691d2c6" name="a703add5495e98b1b111c88bdb691d2c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a703add5495e98b1b111c88bdb691d2c6">&#9670;&#160;</a></span>operator delete[]() <span class="overload">[4/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -460,7 +498,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void operator delete[] </td>
+          <td class="memname"><a class="el" href="#a02878fbb451aa018547acce8245e025f">HELIOS_GLOBAL_ALLOC_KEEP</a> void operator delete[] </td>
           <td>(</td>
           <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span>, </td>
         </tr>
@@ -477,12 +515,12 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00148">148</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00174">174</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
 
 </div>
 </div>
-<a id="ac994c2e259ce3af72fc3175119fe8b60" name="ac994c2e259ce3af72fc3175119fe8b60"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac994c2e259ce3af72fc3175119fe8b60">&#9670;&#160;</a></span>operator delete[]() <span class="overload">[5/5]</span></h2>
+<a id="ac801a39d1f0d61a3b04172323ea5a658" name="ac801a39d1f0d61a3b04172323ea5a658"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac801a39d1f0d61a3b04172323ea5a658">&#9670;&#160;</a></span>operator delete[]() <span class="overload">[5/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -491,7 +529,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void operator delete[] </td>
+          <td class="memname"><a class="el" href="#a02878fbb451aa018547acce8245e025f">HELIOS_GLOBAL_ALLOC_KEEP</a> void operator delete[] </td>
           <td>(</td>
           <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span>, </td>
         </tr>
@@ -508,18 +546,18 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00197">197</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00230">230</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a160dcabc54bbecfc69484678cafadb81" name="a160dcabc54bbecfc69484678cafadb81"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a160dcabc54bbecfc69484678cafadb81">&#9670;&#160;</a></span>operator new() <span class="overload">[1/4]</span></h2>
+<a id="a598c149e925ab064721c40acd2a51d84" name="a598c149e925ab064721c40acd2a51d84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a598c149e925ab064721c40acd2a51d84">&#9670;&#160;</a></span>operator new() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void * operator new </td>
+          <td class="memname"><a class="el" href="#a02878fbb451aa018547acce8245e025f">HELIOS_GLOBAL_ALLOC_KEEP</a> void * operator new </td>
           <td>(</td>
           <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>size</em></span></td><td>)</td>
           <td></td>
@@ -527,12 +565,12 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00105">105</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00129">129</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a16ac0f06fb28f80778c7830a36512700" name="a16ac0f06fb28f80778c7830a36512700"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a16ac0f06fb28f80778c7830a36512700">&#9670;&#160;</a></span>operator new() <span class="overload">[2/4]</span></h2>
+<a id="a64a7e546401c1af3a7eac35316085c02" name="a64a7e546401c1af3a7eac35316085c02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64a7e546401c1af3a7eac35316085c02">&#9670;&#160;</a></span>operator new() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -541,7 +579,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void * operator new </td>
+          <td class="memname"><a class="el" href="#a02878fbb451aa018547acce8245e025f">HELIOS_GLOBAL_ALLOC_KEEP</a> void * operator new </td>
           <td>(</td>
           <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>size</em></span>, </td>
         </tr>
@@ -558,18 +596,18 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00119">119</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00143">143</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
 
 </div>
 </div>
-<a id="af30eb3cdec24219daed41e8bddc0c824" name="af30eb3cdec24219daed41e8bddc0c824"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af30eb3cdec24219daed41e8bddc0c824">&#9670;&#160;</a></span>operator new() <span class="overload">[3/4]</span></h2>
+<a id="a46ae1fd39d887379eda509fd46c9d80e" name="a46ae1fd39d887379eda509fd46c9d80e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46ae1fd39d887379eda509fd46c9d80e">&#9670;&#160;</a></span>operator new() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void * operator new </td>
+          <td class="memname"><a class="el" href="#a02878fbb451aa018547acce8245e025f">HELIOS_GLOBAL_ALLOC_KEEP</a> void * operator new </td>
           <td>(</td>
           <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>size</em></span>, </td>
         </tr>
@@ -581,12 +619,12 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00160">160</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00188">188</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a5d37bc02219374f4f2b5579e6de6b19b" name="a5d37bc02219374f4f2b5579e6de6b19b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d37bc02219374f4f2b5579e6de6b19b">&#9670;&#160;</a></span>operator new() <span class="overload">[4/4]</span></h2>
+<a id="a80598f1c66063caa77be47d2f315b6e4" name="a80598f1c66063caa77be47d2f315b6e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80598f1c66063caa77be47d2f315b6e4">&#9670;&#160;</a></span>operator new() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -595,7 +633,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void * operator new </td>
+          <td class="memname"><a class="el" href="#a02878fbb451aa018547acce8245e025f">HELIOS_GLOBAL_ALLOC_KEEP</a> void * operator new </td>
           <td>(</td>
           <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>size</em></span>, </td>
         </tr>
@@ -617,18 +655,18 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00174">174</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00204">204</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
 
 </div>
 </div>
-<a id="af2243bb4c2126b7b2b393e06090fbe59" name="af2243bb4c2126b7b2b393e06090fbe59"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af2243bb4c2126b7b2b393e06090fbe59">&#9670;&#160;</a></span>operator new[]() <span class="overload">[1/4]</span></h2>
+<a id="a0dcb984f65ac3e26bf6760cb5dbd18d8" name="a0dcb984f65ac3e26bf6760cb5dbd18d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0dcb984f65ac3e26bf6760cb5dbd18d8">&#9670;&#160;</a></span>operator new[]() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void * operator new[] </td>
+          <td class="memname"><a class="el" href="#a02878fbb451aa018547acce8245e025f">HELIOS_GLOBAL_ALLOC_KEEP</a> void * operator new[] </td>
           <td>(</td>
           <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>size</em></span></td><td>)</td>
           <td></td>
@@ -636,12 +674,12 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00115">115</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00139">139</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a372575ee587ac01e5beec279d2be2e66" name="a372575ee587ac01e5beec279d2be2e66"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a372575ee587ac01e5beec279d2be2e66">&#9670;&#160;</a></span>operator new[]() <span class="overload">[2/4]</span></h2>
+<a id="a423f0c7372a3b21f3f3a65ce0487073f" name="a423f0c7372a3b21f3f3a65ce0487073f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a423f0c7372a3b21f3f3a65ce0487073f">&#9670;&#160;</a></span>operator new[]() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -650,7 +688,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void * operator new[] </td>
+          <td class="memname"><a class="el" href="#a02878fbb451aa018547acce8245e025f">HELIOS_GLOBAL_ALLOC_KEEP</a> void * operator new[] </td>
           <td>(</td>
           <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>size</em></span>, </td>
         </tr>
@@ -667,18 +705,18 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00127">127</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00152">152</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
 
 </div>
 </div>
-<a id="ae32f48344fe9f9febbade800183c3af6" name="ae32f48344fe9f9febbade800183c3af6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae32f48344fe9f9febbade800183c3af6">&#9670;&#160;</a></span>operator new[]() <span class="overload">[3/4]</span></h2>
+<a id="abed690c65dc9ede3e322da2daf9857db" name="abed690c65dc9ede3e322da2daf9857db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abed690c65dc9ede3e322da2daf9857db">&#9670;&#160;</a></span>operator new[]() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void * operator new[] </td>
+          <td class="memname"><a class="el" href="#a02878fbb451aa018547acce8245e025f">HELIOS_GLOBAL_ALLOC_KEEP</a> void * operator new[] </td>
           <td>(</td>
           <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>size</em></span>, </td>
         </tr>
@@ -690,12 +728,12 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00170">170</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00199">199</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a0839e8376b1a38e86cbd52c2b995c202" name="a0839e8376b1a38e86cbd52c2b995c202"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0839e8376b1a38e86cbd52c2b995c202">&#9670;&#160;</a></span>operator new[]() <span class="overload">[4/4]</span></h2>
+<a id="a281091b2b0db8886029ea1a7dd5ad2d8" name="a281091b2b0db8886029ea1a7dd5ad2d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a281091b2b0db8886029ea1a7dd5ad2d8">&#9670;&#160;</a></span>operator new[]() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -704,7 +742,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void * operator new[] </td>
+          <td class="memname"><a class="el" href="#a02878fbb451aa018547acce8245e025f">HELIOS_GLOBAL_ALLOC_KEEP</a> void * operator new[] </td>
           <td>(</td>
           <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>size</em></span>, </td>
         </tr>
@@ -726,7 +764,7 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00183">183</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="global__alloc_8cpp_source.html#l00214">214</a> of file <a class="el" href="global__alloc_8cpp_source.html">global_alloc.cpp</a>.</p>
 
 </div>
 </div>

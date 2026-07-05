@@ -49,6 +49,14 @@
       DoxygenAwesomeInteractiveToc.init();
       DoxygenAwesomeTabs.init();
     </script>
+    <script
+      type="text/javascript"
+      src="edition_selector_data.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="version_selector_handler.js"
+    ></script>
   </head>
   <body>
       <div id="top">
@@ -64,7 +72,15 @@
                   <div id="projectname">
                     Helios Engine<span
                       id="projectnumber"
-                      >&#160;0.1.0</span
+                      ><span class="helios-edition-control"
+                        ><span
+                          id="editionselector"
+                          class="helios-edition-select-wrap helios-branch-select-wrap"
+                        ></span
+                        ><span
+                          id="versionselector"
+                          class="helios-edition-select-wrap helios-version-select-wrap"
+                        ></span></span></span
                     >
                   </div>
                   <div id="projectbrief">A modular ECS based data-oriented C++23 game engine framework</div>
@@ -158,10 +174,10 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('globals_func.h
 <div class="textblock">Here is a list of all functions with links to the files they belong to:</div><br/>
 <div class="qindex"><a class="qindex" href="#index_o">O</a></div>
 <ul>
-<li>operator delete()&#160;:&#160;<a class="el" href="global__alloc_8cpp.html#afa145befcf5e7b83424408ca503c8637">global_alloc.cpp</a></li>
-<li>operator delete[]()&#160;:&#160;<a class="el" href="global__alloc_8cpp.html#a22aea74a1155aa798d6032da46da2391">global_alloc.cpp</a></li>
-<li>operator new()&#160;:&#160;<a class="el" href="global__alloc_8cpp.html#a160dcabc54bbecfc69484678cafadb81">global_alloc.cpp</a></li>
-<li>operator new[]()&#160;:&#160;<a class="el" href="global__alloc_8cpp.html#af2243bb4c2126b7b2b393e06090fbe59">global_alloc.cpp</a></li>
+<li>operator delete()&#160;:&#160;<a class="el" href="global__alloc_8cpp.html#a0c85a3f90a18c8005f26c25b474d3969">global_alloc.cpp</a></li>
+<li>operator delete[]()&#160;:&#160;<a class="el" href="global__alloc_8cpp.html#af830b75e3da1499f7ef5927c5acfbbf0">global_alloc.cpp</a></li>
+<li>operator new()&#160;:&#160;<a class="el" href="global__alloc_8cpp.html#a598c149e925ab064721c40acd2a51d84">global_alloc.cpp</a></li>
+<li>operator new[]()&#160;:&#160;<a class="el" href="global__alloc_8cpp.html#a0dcb984f65ac3e26bf6760cb5dbd18d8">global_alloc.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

@@ -1,5 +1,6 @@
 var NAVTREEINDEX30 =
 {
+"namespacehelios_1_1utils_1_1details.html#aed24e26b1df2da90fda7bd6d3fe47218":[2,0,6,9,0,17],
 "namespacehelios_1_1utils_1_1details.html#af67afb470d6fde6d0d3312805da9ef30":[2,0,6,9,0,28],
 "namespacehelios_1_1utils_1_1details.html#af7c1921a6f5df0fc560b4ae8a6b9df6e":[2,0,6,9,0,25],
 "namespacehelios_1_1utils_1_1details.html#afbdfccb8f75933121d6d8d082f8907f1":[2,0,6,9,0,33],
@@ -248,6 +249,5 @@ var NAVTREEINDEX30 =
 "structhelios_1_1app_1_1PostUpdate.html":[2,0,6,1,15],
 "structhelios_1_1app_1_1PostUpdate.html":[4,0,2,0,14],
 "structhelios_1_1app_1_1PostUpdate.html#a3820acb1af55d38241a51948171afded":[2,0,6,1,15,0],
-"structhelios_1_1app_1_1PostUpdate.html#a3820acb1af55d38241a51948171afded":[4,0,2,0,14,0],
-"structhelios_1_1app_1_1PreShutdown.html":[2,0,6,1,16]
+"structhelios_1_1app_1_1PostUpdate.html#a3820acb1af55d38241a51948171afded":[4,0,2,0,14,0]
 };

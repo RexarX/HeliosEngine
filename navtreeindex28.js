@@ -1,5 +1,6 @@
 var NAVTREEINDEX28 =
 {
+"md_docs_2guidelines.html#method-implementation":[1,2],
 "md_docs_2guidelines.html#module-structure":[1,4],
 "md_docs_2guidelines.html#naming":[1,0,2],
 "md_docs_2guidelines.html#non-negotiable":[1,0,0],
@@ -248,6 +249,5 @@ var NAVTREEINDEX28 =
 "namespacehelios_1_1ecs.html#a9ca07edc4e3788c35e4020626ba2978b":[2,0,6,5,155],
 "namespacehelios_1_1ecs.html#a9d6e67a879f64c69cb68dc4e581e5e43":[2,0,6,5,146],
 "namespacehelios_1_1ecs.html#a9da4cd90207265b52b84d6dfe285ed9e":[2,0,6,5,167],
-"namespacehelios_1_1ecs.html#a9ff616e80af940f228159b93af9b2d0e":[2,0,6,5,177],
-"namespacehelios_1_1ecs.html#aa156d33741937b2c039927f9c831105a":[2,0,6,5,207]
+"namespacehelios_1_1ecs.html#a9ff616e80af940f228159b93af9b2d0e":[2,0,6,5,177]
 };
