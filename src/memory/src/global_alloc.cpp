@@ -88,6 +88,8 @@ void RawFree(void* ptr) noexcept {
 void RawAlignedFree(void* ptr) noexcept {
 #ifdef HELIOS_GLOBAL_ALLOC_USE_MIMALLOC_BACKEND
   mi_free(ptr);
+#elif defined(_MSC_VER) && defined(_DEBUG)
+  _aligned_free_dbg(ptr);
 #elif defined(_MSC_VER)
   _aligned_free(ptr);
 #else
@@ -179,7 +181,7 @@ HELIOS_GLOBAL_ALLOC_KEEP void operator delete(void* ptr,
 }
 
 HELIOS_GLOBAL_ALLOC_KEEP void operator delete[](
-    void* ptr, const std::nothrow_t&) noexcept {
+    void* ptr, const std::nothrow_t& /*nothrow*/) noexcept {
   ::operator delete(ptr);
 }
 
@@ -199,9 +201,9 @@ HELIOS_GLOBAL_ALLOC_KEEP void* operator new[](size_t size,
   return ::operator new(size, alignment);
 }
 
-HELIOS_GLOBAL_ALLOC_KEEP void* operator new(size_t size,
-                                            std::align_val_t alignment,
-                                            const std::nothrow_t&) noexcept {
+HELIOS_GLOBAL_ALLOC_KEEP void* operator new(
+    size_t size, std::align_val_t alignment,
+    const std::nothrow_t& /*nothrow*/) noexcept {
   void* const ptr = RawAlignedAlloc(size, alignment);
   if (ptr != nullptr) {
     ProfileAlloc(ptr, size);
@@ -209,9 +211,9 @@ HELIOS_GLOBAL_ALLOC_KEEP void* operator new(size_t size,
   return ptr;
 }
 
-HELIOS_GLOBAL_ALLOC_KEEP void* operator new[](size_t size,
-                                              std::align_val_t alignment,
-                                              const std::nothrow_t&) noexcept {
+HELIOS_GLOBAL_ALLOC_KEEP void* operator new[](
+    size_t size, std::align_val_t alignment,
+    const std::nothrow_t& /*nothrow*/) noexcept {
   return ::operator new(size, alignment, std::nothrow);
 }
 

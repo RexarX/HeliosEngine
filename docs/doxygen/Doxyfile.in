@@ -21,7 +21,6 @@ INPUT                  = @HELIOS_SOURCE_DIR@/src \
                          @HELIOS_SOURCE_DIR@/examples/custom_module/README.md
 FILE_PATTERNS          = *.hpp *.inl *.h *.cpp *.cxx *.c *.md
 RECURSIVE              = YES
-EXCLUDE                = @HELIOS_SOURCE_DIR@/tests @HELIOS_SOURCE_DIR@/third-party
 EXCLUDE_PATTERNS       = */tests/* \
                          */details/*
 

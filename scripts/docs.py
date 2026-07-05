@@ -19,7 +19,6 @@ from typing import Optional, Tuple
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from edition_selector import (
-    read_project_version,
     render_branch_selector_html,
     render_version_selector_html,
     write_selector_js,
@@ -298,7 +297,7 @@ def find_cmake_build_dir(root_dir: Path) -> Optional[Path]:
     return None
 
 
-def build_docs_with_cmake(build_dir: Path, quiet: bool) -> bool:
+def build_docs_with_cmake(build_dir: Path, quiet: bool) -> Tuple[bool, int]:
     """Build documentation through the helios_docs CMake target."""
 
     print_info(f"Building documentation via CMake: {build_dir}")
@@ -306,8 +305,16 @@ def build_docs_with_cmake(build_dir: Path, quiet: bool) -> bool:
     if quiet:
         command.append("--quiet")
 
-    result = subprocess.run(command, check=False)
-    return result.returncode == 0
+    result = subprocess.run(command, capture_output=True, text=True, check=False)
+    if not quiet:
+        if result.stdout:
+            print(result.stdout)
+        if result.stderr:
+            print(result.stderr, file=sys.stderr)
+
+    output = (result.stdout or "") + (result.stderr or "")
+    warning_count = count_warnings(output)
+    return result.returncode == 0, warning_count
 
 
 def build_docs_standalone(root_dir: Path, quiet: bool) -> bool:
@@ -434,10 +441,11 @@ def build_docs(
                 "Configure with -DHELIOS_BUILD_DOCS=ON first."
             )
             return False
-        if not build_docs_with_cmake(resolved_build_dir, quiet):
+        cmake_ok, warning_count = build_docs_with_cmake(resolved_build_dir, quiet)
+        if not cmake_ok:
             print_error("CMake documentation build failed!")
             return False
-        print_build_success(output_dir, 0, quiet)
+        print_build_success(output_dir, warning_count, quiet)
         return True
 
     return build_docs_standalone(root_dir, quiet)

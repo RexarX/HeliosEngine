@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import html
 import json
 import os
 import re
@@ -62,32 +63,45 @@ def resolve_current_version(repo_root: Path, label: Optional[str] = None) -> str
     return read_project_version(repo_root)
 
 
-def render_branch_selector_html(
+def render_selector_html(
+    select_id: str,
+    title: str,
     options: Sequence[Tuple[str, str]],
     selected: Optional[str] = None,
 ) -> str:
     if selected is None and options:
         selected = options[0][0]
-    lines = ['<select id="branchSelector" title="Documentation branch">']
+    lines = [
+        f'<select id="{html.escape(select_id, quote=True)}" '
+        f'title="{html.escape(title, quote=True)}">'
+    ]
     for value, label in options:
         selected_attr = " selected" if value == selected else ""
-        lines.append(f'  <option value="{value}"{selected_attr}>{label}</option>')
+        escaped_value = html.escape(value, quote=True)
+        escaped_label = html.escape(label, quote=False)
+        lines.append(
+            f'  <option value="{escaped_value}"{selected_attr}>{escaped_label}</option>'
+        )
     lines.append("</select>")
     return "\n".join(lines)
+
+
+def render_branch_selector_html(
+    options: Sequence[Tuple[str, str]],
+    selected: Optional[str] = None,
+) -> str:
+    return render_selector_html(
+        "branchSelector", "Documentation branch", options, selected
+    )
 
 
 def render_version_selector_html(
     options: Sequence[Tuple[str, str]],
     selected: Optional[str] = None,
 ) -> str:
-    if selected is None and options:
-        selected = options[0][0]
-    lines = ['<select id="versionSelector" title="Documentation version">']
-    for value, label in options:
-        selected_attr = " selected" if value == selected else ""
-        lines.append(f'  <option value="{value}"{selected_attr}>{label}</option>')
-    lines.append("</select>")
-    return "\n".join(lines)
+    return render_selector_html(
+        "versionSelector", "Documentation version", options, selected
+    )
 
 
 def write_selector_js(

@@ -44,7 +44,15 @@ def parse_semver(value: str) -> Tuple[int, ...]:
     return tuple(parts)
 
 
-def fetch_gh_pages(repo_root: Path) -> None:
+def _is_missing_gh_pages_ref(message: str) -> bool:
+    lowered = message.lower()
+    return (
+        "couldn't find remote ref" in lowered
+        or "not found in upstream origin" in lowered
+    )
+
+
+def fetch_gh_pages(repo_root: Path) -> bool:
     result = subprocess.run(
         ["git", "fetch", "origin", "gh-pages"],
         cwd=repo_root,
@@ -52,9 +60,14 @@ def fetch_gh_pages(repo_root: Path) -> None:
         text=True,
         check=False,
     )
-    if result.returncode != 0:
-        message = result.stderr.strip() or result.stdout.strip()
-        raise RuntimeError(f"failed to fetch origin/gh-pages: {message}")
+    if result.returncode == 0:
+        return True
+
+    message = result.stderr.strip() or result.stdout.strip()
+    if _is_missing_gh_pages_ref(message):
+        return False
+
+    raise RuntimeError(f"failed to fetch origin/gh-pages: {message}")
 
 
 def git_published_paths(repo_root: Path, ref: str) -> List[str]:
@@ -242,8 +255,10 @@ def main(argv: Iterable[str] | None = None) -> int:
 
     try:
         if args.js_output:
-            fetch_gh_pages(repo_root)
-            published_paths = git_published_paths(repo_root, args.gh_pages_ref)
+            if fetch_gh_pages(repo_root):
+                published_paths = git_published_paths(repo_root, args.gh_pages_ref)
+            else:
+                published_paths = []
             write_selector_data(
                 repo_root, published_paths, current_label, args.js_output
             )
