@@ -35,9 +35,6 @@
         return best;
       }
     }
-    if (/^\d+\.\d+/.test(parts[1]) && !parts[1].endsWith(".html")) {
-      return "main";
-    }
     return "main";
   }
 
