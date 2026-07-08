@@ -284,7 +284,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('task__graph_8h
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="comment">   * @tparam R Range type containing Task objects</span></div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="comment">   * @param tasks Range of tasks to linearize (first-&gt;second-&gt;third-&gt;...)</span></div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="comment">   */</span></div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>  <span class="keyword">template</span> &lt;std::ranges::range R&gt;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>  <span class="keyword">template</span> &lt;std::ranges::input_range R&gt;</div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <span class="keyword">requires</span> std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="code hl_class" href="classhelios_1_1async_1_1Task.html">Task</a>&gt;</div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1async_1_1TaskGraph.html#acb6774e9775ba422bd8f6167cd85f979">Linearize</a>(<span class="keyword">const</span> R&amp; tasks);</div>
 <div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="comment"></span> </div>
@@ -296,7 +296,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('task__graph_8h
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="comment">   * @param callable Function to apply to each element</span></div>
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="comment">   * @return Task handle for the parallel operation</span></div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="comment">   */</span></div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>  <span class="keyword">template</span> &lt;std::ranges::range R, <span class="keyword">typename</span> C&gt;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>  <span class="keyword">template</span> &lt;std::ranges::input_range R, <span class="keyword">typename</span> C&gt;</div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    <span class="keyword">requires</span> std::invocable&lt;C, std::ranges::range_reference_t&lt;R&gt;&gt;</div>
 <div class="foldopen" id="foldopen00120" data-start="{" data-end="}">
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno"><a class="line" href="classhelios_1_1async_1_1TaskGraph.html#a04d04592d13b52d6df748d7331533f7e">  120</a></span>  <a class="code hl_class" href="classhelios_1_1async_1_1Task.html">Task</a> <a class="code hl_function" href="classhelios_1_1async_1_1TaskGraph.html#a04d04592d13b52d6df748d7331533f7e">ForEach</a>(<span class="keyword">const</span> R&amp; range, C&amp;&amp; callable) {</div>
@@ -337,7 +337,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('task__graph_8h
 <div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span><span class="comment">   * @return Task handle for the parallel operation</span></div>
 <div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span><span class="comment">   */</span></div>
 <div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>  <span class="keyword">template</span> &lt;</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>      std::ranges::range InputRange, std::ranges::range OutputRange,</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>      std::ranges::input_range InputRange, std::ranges::input_range OutputRange,</div>
 <div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>      std::invocable&lt;std::ranges::range_reference_t&lt;InputRange&gt;&gt; TransformFunc&gt;</div>
 <div class="foldopen" id="foldopen00157" data-start="{" data-end="}">
 <div class="line"><a id="l00157" name="l00157"></a><span class="lineno"><a class="line" href="classhelios_1_1async_1_1TaskGraph.html#a37d7f7fd5753ba287f6f66bf64762f7d">  157</a></span>  <a class="code hl_class" href="classhelios_1_1async_1_1Task.html">Task</a> <a class="code hl_function" href="classhelios_1_1async_1_1TaskGraph.html#a37d7f7fd5753ba287f6f66bf64762f7d">Transform</a>(<span class="keyword">const</span> InputRange&amp; input_range, OutputRange&amp; output_range,</div>
@@ -360,7 +360,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('task__graph_8h
 <div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span><span class="comment">   * @param binary_op Binary function to combine elements</span></div>
 <div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span><span class="comment">   * @return Task handle for the parallel operation</span></div>
 <div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span><span class="comment">   */</span></div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>  <span class="keyword">template</span> &lt;std::ranges::range R, <span class="keyword">typename</span> T, <span class="keyword">typename</span> BinaryOp&gt;</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>  <span class="keyword">template</span> &lt;std::ranges::input_range R, <span class="keyword">typename</span> T, <span class="keyword">typename</span> BinaryOp&gt;</div>
 <div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    <span class="keyword">requires</span> std::invocable&lt;BinaryOp, T, std::ranges::range_reference_t&lt;R&gt;&gt;</div>
 <div class="foldopen" id="foldopen00178" data-start="{" data-end="}">
 <div class="line"><a id="l00178" name="l00178"></a><span class="lineno"><a class="line" href="classhelios_1_1async_1_1TaskGraph.html#a3f105770aceed2593f3ca9bb0e77a3a1">  178</a></span>  <a class="code hl_class" href="classhelios_1_1async_1_1Task.html">Task</a> <a class="code hl_function" href="classhelios_1_1async_1_1TaskGraph.html#a3f105770aceed2593f3ca9bb0e77a3a1">Reduce</a>(<span class="keyword">const</span> R&amp; range, T&amp; init, BinaryOp&amp;&amp; binary_op) {</div>
@@ -470,7 +470,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('task__graph_8h
 <div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>}</div>
 </div>
 <div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span> </div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span><span class="keyword">template</span> &lt;std::ranges::range R&gt;</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span><span class="keyword">template</span> &lt;std::ranges::input_range R&gt;</div>
 <div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>  <span class="keyword">requires</span> std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="code hl_class" href="classhelios_1_1async_1_1Task.html">Task</a>&gt;</div>
 <div class="foldopen" id="foldopen00279" data-start="{" data-end="}">
 <div class="line"><a id="l00279" name="l00279"></a><span class="lineno"><a class="line" href="classhelios_1_1async_1_1TaskGraph.html#acb6774e9775ba422bd8f6167cd85f979">  279</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1async_1_1TaskGraph.html#acb6774e9775ba422bd8f6167cd85f979">TaskGraph::Linearize</a>(<span class="keyword">const</span> R&amp; tasks) {</div>

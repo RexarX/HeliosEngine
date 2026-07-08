@@ -65,20 +65,20 @@ var concepts =
       ] ],
       [ "utils", "namespacehelios_1_1utils.html", [
         [ "details", "namespacehelios_1_1utils_1_1details.html", [
-          [ "CallableOrApplicable", "concepthelios_1_1utils_1_1details_1_1CallableOrApplicable.html", null ],
-          [ "CallableOrApplicableWithReturn", "concepthelios_1_1utils_1_1details_1_1CallableOrApplicableWithReturn.html", null ],
-          [ "ClockTrait", "concepthelios_1_1utils_1_1details_1_1ClockTrait.html", null ],
-          [ "DurationTrait", "concepthelios_1_1utils_1_1details_1_1DurationTrait.html", null ],
-          [ "FolderApplicable", "concepthelios_1_1utils_1_1details_1_1FolderApplicable.html", null ],
           [ "IterYieldsReference", "concepthelios_1_1utils_1_1details_1_1IterYieldsReference.html", null ],
-          [ "TupleLike", "concepthelios_1_1utils_1_1details_1_1TupleLike.html", null ]
+          [ "TupleLike", "concepthelios_1_1utils_1_1details_1_1TupleLike.html", null ],
+          [ "FolderApplicable", "concepthelios_1_1utils_1_1details_1_1FolderApplicable.html", null ],
+          [ "CallableOrApplicable", "concepthelios_1_1utils_1_1details_1_1CallableOrApplicable.html", null ],
+          [ "CallableOrApplicableWithReturn", "concepthelios_1_1utils_1_1details_1_1CallableOrApplicableWithReturn.html", null ]
         ] ],
         [ "ActionFor", "concepthelios_1_1utils_1_1ActionFor.html", null ],
         [ "AdapterTrait", "concepthelios_1_1utils_1_1AdapterTrait.html", null ],
         [ "ArithmeticTrait", "concepthelios_1_1utils_1_1ArithmeticTrait.html", null ],
         [ "BidirectionalIteratorLike", "concepthelios_1_1utils_1_1BidirectionalIteratorLike.html", null ],
         [ "ChainAdapterRequirements", "concepthelios_1_1utils_1_1ChainAdapterRequirements.html", null ],
+        [ "ClockTrait", "concepthelios_1_1utils_1_1ClockTrait.html", null ],
         [ "Distribution", "concepthelios_1_1utils_1_1Distribution.html", null ],
+        [ "DurationTrait", "concepthelios_1_1utils_1_1DurationTrait.html", null ],
         [ "EnumerateAdapterRequirements", "concepthelios_1_1utils_1_1EnumerateAdapterRequirements.html", null ],
         [ "ExternalRange", "concepthelios_1_1utils_1_1ExternalRange.html", null ],
         [ "FilterAdapterRequirements", "concepthelios_1_1utils_1_1FilterAdapterRequirements.html", null ],

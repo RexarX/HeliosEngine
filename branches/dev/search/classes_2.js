@@ -37,5 +37,6 @@ var searchData=
   ['consumablemessagewrapper_34',['ConsumableMessageWrapper',['../classhelios_1_1ecs_1_1ConsumableMessageWrapper.html',1,'helios::ecs']]],
   ['consumablemessagewrapperiter_35',['ConsumableMessageWrapperIter',['../classhelios_1_1ecs_1_1ConsumableMessageWrapperIter.html',1,'helios::ecs']]],
   ['consumedmessagesregistry_36',['ConsumedMessagesRegistry',['../classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html',1,'helios::ecs']]],
-  ['consumedmessagesregistry_3c_20std_3a_3apmr_3a_3apolymorphic_5fallocator_3c_20std_3a_3abyte_20_3e_20_3e_37',['ConsumedMessagesRegistry&lt; std::pmr::polymorphic_allocator&lt; std::byte &gt; &gt;',['../classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html',1,'helios::ecs']]]
+  ['consumedmessagesregistry_3c_20std_3a_3apmr_3a_3apolymorphic_5fallocator_3c_20std_3a_3abyte_20_3e_20_3e_37',['ConsumedMessagesRegistry&lt; std::pmr::polymorphic_allocator&lt; std::byte &gt; &gt;',['../classhelios_1_1ecs_1_1ConsumedMessagesRegistry.html',1,'helios::ecs']]],
+  ['countframe_38',['CountFrame',['../structhelios_1_1app_1_1CountFrame.html',1,'helios::app']]]
 ];

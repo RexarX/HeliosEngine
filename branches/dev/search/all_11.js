@@ -9,10 +9,8 @@ var searchData=
   ['nodes_6',['Nodes',['../classhelios_1_1ecs_1_1Dag.html#a751b5787a048dd171ee31ad6f827e193',1,'helios::ecs::Dag']]],
   ['non_20negotiable_7',['Non-negotiable',['../md_docs_2guidelines.html#non-negotiable',1,'']]],
   ['none_8',['None',['../classhelios_1_1ecs_1_1MessageReaderBase.html#a1f601f646f1764a2ea747afcf51a1ff6',1,'helios::ecs::MessageReaderBase::None()'],['../classhelios_1_1ecs_1_1BasicQueryWithEntity.html#a3315dc8434c7dbbcaa4040919d95e7d0',1,'helios::ecs::BasicQueryWithEntity::None()'],['../classhelios_1_1ecs_1_1BasicQuery.html#a5ab1017e0bc28cc28dc05f4d73c7f7aa',1,'helios::ecs::BasicQuery::None()'],['../classhelios_1_1utils_1_1FunctionalAdapterBase.html#a791509606f43cb6011e5975d483d6589',1,'helios::utils::FunctionalAdapterBase::None()']]],
-  ['normalizedclockduration_9',['NormalizedClockDuration',['../namespacehelios_1_1utils_1_1details.html#aae550197ef49fd149d65415596f66c2f',1,'helios::utils::details']]],
-  ['normalizedduration_10',['NormalizedDuration',['../namespacehelios_1_1utils_1_1details.html#a49a1755c0abb8d39991fbf7f2000657f',1,'helios::utils::details']]],
-  ['normalizepathseparators_11',['NormalizePathSeparators',['../namespaceanonymous__namespace_02stacktrace_8cpp_03.html#a68c657b10aabf35a67e8bbcc0225f480',1,'anonymous_namespace{stacktrace.cpp}']]],
-  ['notifypluginreadinesschanged_12',['NotifyPluginReadinessChanged',['../classhelios_1_1app_1_1App.html#ac34e107cb6fd9145d5a01ebf3024813a',1,'helios::app::App']]],
-  ['notloaded_13',['NotLoaded',['../namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea5111e24c1ecc6266ce0de4b4dc42033b',1,'helios::utils']]],
-  ['npos_14',['npos',['../classhelios_1_1container_1_1BasicStaticString.html#a32a21e1ca52552c8e18d9bf6f75dce56',1,'helios::container::BasicStaticString::npos'],['../classhelios_1_1BasicCStringView.html#a1ee3c40ac8abed5d4ff6df230983880b',1,'helios::BasicCStringView::npos']]]
+  ['normalizepathseparators_9',['NormalizePathSeparators',['../namespaceanonymous__namespace_02stacktrace_8cpp_03.html#a68c657b10aabf35a67e8bbcc0225f480',1,'anonymous_namespace{stacktrace.cpp}']]],
+  ['notifypluginreadinesschanged_10',['NotifyPluginReadinessChanged',['../classhelios_1_1app_1_1App.html#ac34e107cb6fd9145d5a01ebf3024813a',1,'helios::app::App']]],
+  ['notloaded_11',['NotLoaded',['../namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea5111e24c1ecc6266ce0de4b4dc42033b',1,'helios::utils']]],
+  ['npos_12',['npos',['../classhelios_1_1container_1_1BasicStaticString.html#a32a21e1ca52552c8e18d9bf6f75dce56',1,'helios::container::BasicStaticString::npos'],['../classhelios_1_1BasicCStringView.html#a1ee3c40ac8abed5d4ff6df230983880b',1,'helios::BasicCStringView::npos']]]
 ];

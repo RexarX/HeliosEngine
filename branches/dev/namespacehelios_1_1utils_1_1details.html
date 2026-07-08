@@ -200,17 +200,13 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-concepts" class="groupheader"><a id="concepts" name="concepts"></a>
 Concepts</h2></td></tr>
-<tr class="memitem:CallableOrApplicable" id="r_CallableOrApplicable"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1utils_1_1details_1_1CallableOrApplicable.html">CallableOrApplicable</a></td></tr>
-<tr class="memitem:CallableOrApplicableWithReturn" id="r_CallableOrApplicableWithReturn"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1utils_1_1details_1_1CallableOrApplicableWithReturn.html">CallableOrApplicableWithReturn</a></td></tr>
-<tr class="memitem:ClockTrait" id="r_ClockTrait"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1utils_1_1details_1_1ClockTrait.html">ClockTrait</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for clock types compatible with std::chrono clocks. <br /></td></tr>
-<tr class="memitem:DurationTrait" id="r_DurationTrait"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1utils_1_1details_1_1DurationTrait.html">DurationTrait</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for duration types based on std::chrono::duration. <br /></td></tr>
-<tr class="memitem:FolderApplicable" id="r_FolderApplicable"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1utils_1_1details_1_1FolderApplicable.html">FolderApplicable</a></td></tr>
 <tr class="memitem:IterYieldsReference" id="r_IterYieldsReference"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1utils_1_1details_1_1IterYieldsReference.html">IterYieldsReference</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the iterator yields a genuine reference (lvalue ref), not a proxy/value. <br /></td></tr>
 <tr class="memitem:TupleLike" id="r_TupleLike"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1utils_1_1details_1_1TupleLike.html">TupleLike</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept to check if a type is tuple-like (has tuple_size and get). <br /></td></tr>
+<tr class="memitem:FolderApplicable" id="r_FolderApplicable"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1utils_1_1details_1_1FolderApplicable.html">FolderApplicable</a></td></tr>
+<tr class="memitem:CallableOrApplicable" id="r_CallableOrApplicable"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1utils_1_1details_1_1CallableOrApplicable.html">CallableOrApplicable</a></td></tr>
+<tr class="memitem:CallableOrApplicableWithReturn" id="r_CallableOrApplicableWithReturn"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1utils_1_1details_1_1CallableOrApplicableWithReturn.html">CallableOrApplicableWithReturn</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -227,12 +223,6 @@ Typedefs</h2></td></tr>
 <tr class="memitem:abb816378aaa50f126b032c31c4ca2226 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#abb816378aaa50f126b032c31c4ca2226">folder_apply_result_t</a></td></tr>
 <tr class="memitem:afe105881999be52188e10bdcbfd7590e" id="r_afe105881999be52188e10bdcbfd7590e"><td class="memTemplParams" colspan="2">template&lt;typename Func, typename... Args&gt; </td></tr>
 <tr class="memitem:afe105881999be52188e10bdcbfd7590e template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#afe105881999be52188e10bdcbfd7590e">call_or_apply_result_t</a></td></tr>
-<tr class="memitem:a49a1755c0abb8d39991fbf7f2000657f" id="r_a49a1755c0abb8d39991fbf7f2000657f"><td class="memTemplParams" colspan="2">template&lt;typename Rep, typename Period&gt; </td></tr>
-<tr class="memitem:a49a1755c0abb8d39991fbf7f2000657f template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a49a1755c0abb8d39991fbf7f2000657f">NormalizedDuration</a> = std::chrono::duration&lt;Rep, Period&gt;</td></tr>
-<tr class="memdesc:a49a1755c0abb8d39991fbf7f2000657f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper alias to normalize a duration to its canonical std::chrono::duration form.  <br /></td></tr>
-<tr class="memitem:aae550197ef49fd149d65415596f66c2f" id="r_aae550197ef49fd149d65415596f66c2f"><td class="memTemplParams" colspan="2">template&lt;typename Clock, typename Rep, typename Period&gt; </td></tr>
-<tr class="memitem:aae550197ef49fd149d65415596f66c2f template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#aae550197ef49fd149d65415596f66c2f">NormalizedClockDuration</a> = std::chrono::duration&lt;Rep, Period&gt;</td></tr>
-<tr class="memdesc:aae550197ef49fd149d65415596f66c2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper alias to normalize a clock's duration to a specific rep/period.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -382,46 +372,6 @@ template&lt;typename Folder, typename Accumulator, typename Tuple&gt; </div>
 <div class="ttc" id="astructhelios_1_1utils_1_1details_1_1folder__apply__result_html"><div class="ttname"><a href="structhelios_1_1utils_1_1details_1_1folder__apply__result.html">helios::utils::details::folder_apply_result</a></div><div class="ttdoc">Helper to get the result type of folder applied with accumulator + tuple elements.</div><div class="ttdef"><b>Definition</b> <a href="functional__adapters_8hpp_source.html#l00089">functional_adapters.hpp:89</a></div></div>
 </div><!-- fragment -->
 <p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l00097">97</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
-
-</div>
-</div>
-<a id="aae550197ef49fd149d65415596f66c2f" name="aae550197ef49fd149d65415596f66c2f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aae550197ef49fd149d65415596f66c2f">&#9670;&#160;</a></span>NormalizedClockDuration</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Clock, typename Rep, typename Period&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="#aae550197ef49fd149d65415596f66c2f">helios::utils::details::NormalizedClockDuration</a> = std::chrono::duration&lt;Rep, Period&gt;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Helper alias to normalize a clock's duration to a specific rep/period. </p>
-
-<p class="definition">Definition at line <a class="el" href="timer_8hpp_source.html#l00047">47</a> of file <a class="el" href="timer_8hpp_source.html">timer.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a49a1755c0abb8d39991fbf7f2000657f" name="a49a1755c0abb8d39991fbf7f2000657f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a49a1755c0abb8d39991fbf7f2000657f">&#9670;&#160;</a></span>NormalizedDuration</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Rep, typename Period&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="#a49a1755c0abb8d39991fbf7f2000657f">helios::utils::details::NormalizedDuration</a> = std::chrono::duration&lt;Rep, Period&gt;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Helper alias to normalize a duration to its canonical std::chrono::duration form. </p>
-
-<p class="definition">Definition at line <a class="el" href="timer_8hpp_source.html#l00041">41</a> of file <a class="el" href="timer_8hpp_source.html">timer.hpp</a>.</p>
 
 </div>
 </div>

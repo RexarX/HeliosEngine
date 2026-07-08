@@ -21,7 +21,7 @@ var searchData=
   ['haspendinglocaldata_18',['HasPendingLocalData',['../classhelios_1_1ecs_1_1Schedule.html#a8adda3de32928835f7fddba77d113898',1,'helios::ecs::Schedule']]],
   ['haspendingwork_19',['HasPendingWork',['../structhelios_1_1ecs_1_1SystemLocalData.html#a3d32d0a75337cd453a4b0fc27125cf04',1,'helios::ecs::SystemLocalData']]],
   ['hasplugin_20',['HasPlugin',['../classhelios_1_1app_1_1App.html#a49617e4e03ff4e108e5312e8366313cd',1,'helios::app::App']]],
-  ['hasplugins_21',['HasPlugins',['../classhelios_1_1app_1_1App.html#ade17edd51d5429683671b86dbf4189af',1,'helios::app::App::HasPlugins() const noexcept'],['../classhelios_1_1app_1_1App.html#ab1e7d6a6140a7580e67b6ba74d69338b',1,'helios::app::App::HasPlugins() const noexcept -&gt; std::array&lt; bool, sizeof...(Plugins)&gt;']]],
+  ['hasplugins_21',['HasPlugins',['../classhelios_1_1app_1_1App.html#ade17edd51d5429683671b86dbf4189af',1,'helios::app::App::HasPlugins() const noexcept'],['../classhelios_1_1app_1_1App.html#ab8033d1c1056a5b0b8469c616e9f6d14',1,'helios::app::App::HasPlugins() const noexcept -&gt; std::array&lt; bool, sizeof...(Ts)&gt;']]],
   ['hasqueryconflictwith_22',['HasQueryConflictWith',['../classhelios_1_1ecs_1_1AccessPolicy.html#acf6930707e037720d5d9bb935dc6cd78',1,'helios::ecs::AccessPolicy']]],
   ['hasreadcomponent_23',['HasReadComponent',['../classhelios_1_1ecs_1_1AccessPolicy.html#a91dfa00bd07e46e93dd3fa022aa9290b',1,'helios::ecs::AccessPolicy']]],
   ['hasreadresource_24',['HasReadResource',['../classhelios_1_1ecs_1_1AccessPolicy.html#a98a90b1764449a8b4b01ee6972e01382',1,'helios::ecs::AccessPolicy']]],

@@ -211,17 +211,17 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ae1bc7b5b668ca63cc91dfd87757e99be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs the application with the given arguments.  <br /></td></tr>
 <tr class="memitem:ac34e107cb6fd9145d5a01ebf3024813a" id="r_ac34e107cb6fd9145d5a01ebf3024813a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ac34e107cb6fd9145d5a01ebf3024813a">NotifyPluginReadinessChanged</a> () noexcept</td></tr>
 <tr class="memdesc:ac34e107cb6fd9145d5a01ebf3024813a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Notifies the app that plugin readiness may have changed.  <br /></td></tr>
-<tr class="memitem:a5f7818994d347e0b4d67b9e49f553839" id="r_a5f7818994d347e0b4d67b9e49f553839"><td class="memTemplParams" colspan="2">template&lt;PluginTrait Plugin&gt; </td></tr>
-<tr class="memitem:a5f7818994d347e0b4d67b9e49f553839 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a5f7818994d347e0b4d67b9e49f553839">AddPlugins</a> (this auto &amp;&amp;self, <a class="el" href="classhelios_1_1app_1_1Plugin.html">Plugin</a> &amp;&amp;plugin) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
-<tr class="memdesc:a5f7818994d347e0b4d67b9e49f553839"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds plugin instance, if plugin of the same type is not already registered.  <br /></td></tr>
-<tr class="memitem:ac3603ebfaf1c5a070f6024a1e8180e33" id="r_ac3603ebfaf1c5a070f6024a1e8180e33"><td class="memTemplParams" colspan="2">template&lt;PluginTrait... Plugins&gt; <br />
-requires utils::UniqueTypes&lt;Plugins...&gt; &amp;&amp; (sizeof...(Plugins) &gt; 1)</td></tr>
-<tr class="memitem:ac3603ebfaf1c5a070f6024a1e8180e33 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#ac3603ebfaf1c5a070f6024a1e8180e33">AddPlugins</a> (this auto &amp;&amp;self, Plugins &amp;&amp;... plugins) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
-<tr class="memdesc:ac3603ebfaf1c5a070f6024a1e8180e33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds multiple plugin instances, if plugins of the same types are not already registered.  <br /></td></tr>
-<tr class="memitem:a57ad4754ff82bfa0dc555e57d12fdae7" id="r_a57ad4754ff82bfa0dc555e57d12fdae7"><td class="memTemplParams" colspan="2">template&lt;PluginTrait Plugin, typename... Args&gt; <br />
-requires std::constructible_from&lt;<a class="el" href="classhelios_1_1app_1_1Plugin.html">Plugin</a>, Args...&gt;</td></tr>
-<tr class="memitem:a57ad4754ff82bfa0dc555e57d12fdae7 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a57ad4754ff82bfa0dc555e57d12fdae7">EmplacePlugin</a> (this auto &amp;&amp;self, Args &amp;&amp;... args) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
-<tr class="memdesc:a57ad4754ff82bfa0dc555e57d12fdae7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds one plugin, constructing it in-place with the given arguments if a plugin of the same type is not already registered.  <br /></td></tr>
+<tr class="memitem:a77f59c028a07f66d00b4afec965aad45" id="r_a77f59c028a07f66d00b4afec965aad45"><td class="memTemplParams" colspan="2">template&lt;PluginTrait T&gt; </td></tr>
+<tr class="memitem:a77f59c028a07f66d00b4afec965aad45 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a77f59c028a07f66d00b4afec965aad45">AddPlugins</a> (this auto &amp;&amp;self, T &amp;&amp;plugin) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
+<tr class="memdesc:a77f59c028a07f66d00b4afec965aad45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds plugin instance, if plugin of the same type is not already registered.  <br /></td></tr>
+<tr class="memitem:a1b75283648afee66b016d48d96141859" id="r_a1b75283648afee66b016d48d96141859"><td class="memTemplParams" colspan="2">template&lt;PluginTrait... Ts&gt; <br />
+requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 1)</td></tr>
+<tr class="memitem:a1b75283648afee66b016d48d96141859 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a1b75283648afee66b016d48d96141859">AddPlugins</a> (this auto &amp;&amp;self, Ts &amp;&amp;... plugins) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
+<tr class="memdesc:a1b75283648afee66b016d48d96141859"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds multiple plugin instances, if plugins of the same types are not already registered.  <br /></td></tr>
+<tr class="memitem:ab8b6fd19a69aa43488319bc0a91072b0" id="r_ab8b6fd19a69aa43488319bc0a91072b0"><td class="memTemplParams" colspan="2">template&lt;PluginTrait T, typename... Args&gt; <br />
+requires std::constructible_from&lt;T, Args...&gt;</td></tr>
+<tr class="memitem:ab8b6fd19a69aa43488319bc0a91072b0 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#ab8b6fd19a69aa43488319bc0a91072b0">EmplacePlugin</a> (this auto &amp;&amp;self, Args &amp;&amp;... args) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
+<tr class="memdesc:ab8b6fd19a69aa43488319bc0a91072b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds one plugin, constructing it in-place with the given arguments if a plugin of the same type is not already registered.  <br /></td></tr>
 <tr class="memitem:ae7e9c0b7ba8ec6b77a485f9a4b8139cf" id="r_ae7e9c0b7ba8ec6b77a485f9a4b8139cf"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#ae7e9c0b7ba8ec6b77a485f9a4b8139cf">AddDynamicPlugin</a> (this auto &amp;&amp;self, <a class="el" href="classhelios_1_1app_1_1DynamicPlugin.html">DynamicPlugin</a> plugin) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
 <tr class="memdesc:ae7e9c0b7ba8ec6b77a485f9a4b8139cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a dynamic plugin instance, if a plugin of the same type is not already registered.  <br /></td></tr>
 <tr class="memitem:a663d45a150a1edfec9c4604f77390186" id="r_a663d45a150a1edfec9c4604f77390186"><td class="memTemplParams" colspan="2">template&lt;SubAppTrait T&gt; </td></tr>
@@ -275,13 +275,13 @@ requires (sizeof...(Ts) &gt; 0)</td></tr>
 <tr class="memdesc:a1b76dbd6f97fde6e57c059110f7b8f75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the app is currently running.  <br /></td></tr>
 <tr class="memitem:a49617e4e03ff4e108e5312e8366313cd" id="r_a49617e4e03ff4e108e5312e8366313cd"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a49617e4e03ff4e108e5312e8366313cd">HasPlugin</a> (<a class="el" href="namespacehelios_1_1app.html#a277eefb0f319dafd0033d82c7d66707c">PluginTypeIndex</a> index) const noexcept</td></tr>
 <tr class="memdesc:a49617e4e03ff4e108e5312e8366313cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the app has a plugin of the given type.  <br /></td></tr>
-<tr class="memitem:ade17edd51d5429683671b86dbf4189af" id="r_ade17edd51d5429683671b86dbf4189af"><td class="memTemplParams" colspan="2">template&lt;PluginTrait Plugin&gt; </td></tr>
+<tr class="memitem:ade17edd51d5429683671b86dbf4189af" id="r_ade17edd51d5429683671b86dbf4189af"><td class="memTemplParams" colspan="2">template&lt;PluginTrait T&gt; </td></tr>
 <tr class="memitem:ade17edd51d5429683671b86dbf4189af template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ade17edd51d5429683671b86dbf4189af">HasPlugins</a> () const noexcept</td></tr>
 <tr class="memdesc:ade17edd51d5429683671b86dbf4189af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the app has a plugin of the given type.  <br /></td></tr>
-<tr class="memitem:ab1e7d6a6140a7580e67b6ba74d69338b" id="r_ab1e7d6a6140a7580e67b6ba74d69338b"><td class="memTemplParams" colspan="2">template&lt;PluginTrait... Plugins&gt; <br />
-requires utils::UniqueTypes&lt;Plugins...&gt; &amp;&amp; (sizeof...(Plugins) &gt; 1)</td></tr>
-<tr class="memitem:ab1e7d6a6140a7580e67b6ba74d69338b template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#ab1e7d6a6140a7580e67b6ba74d69338b">HasPlugins</a> () const noexcept -&gt; std::array&lt; bool, sizeof...(Plugins)&gt;</td></tr>
-<tr class="memdesc:ab1e7d6a6140a7580e67b6ba74d69338b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the app has plugins of given types.  <br /></td></tr>
+<tr class="memitem:ab8033d1c1056a5b0b8469c616e9f6d14" id="r_ab8033d1c1056a5b0b8469c616e9f6d14"><td class="memTemplParams" colspan="2">template&lt;PluginTrait... Ts&gt; <br />
+requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 1)</td></tr>
+<tr class="memitem:ab8033d1c1056a5b0b8469c616e9f6d14 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#ab8033d1c1056a5b0b8469c616e9f6d14">HasPlugins</a> () const noexcept -&gt; std::array&lt; bool, sizeof...(Ts)&gt;</td></tr>
+<tr class="memdesc:ab8033d1c1056a5b0b8469c616e9f6d14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the app has plugins of given types.  <br /></td></tr>
 <tr class="memitem:acde3257c45f6bdd1c8139af28a5f4057" id="r_acde3257c45f6bdd1c8139af28a5f4057"><td class="memTemplParams" colspan="2">template&lt;SubAppTrait T&gt; </td></tr>
 <tr class="memitem:acde3257c45f6bdd1c8139af28a5f4057 template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#acde3257c45f6bdd1c8139af28a5f4057">HasSubApp</a> (const T &amp;label={}) const noexcept</td></tr>
 <tr class="memdesc:acde3257c45f6bdd1c8139af28a5f4057"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether a sub-app is registered for the label.  <br /></td></tr>
@@ -309,14 +309,14 @@ requires utils::UniqueTypes&lt;Plugins...&gt; &amp;&amp; (sizeof...(Plugins) &gt
 <tr class="memdesc:ae7a2d7b4fac262cf5824c5df4d5b93c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the async executor.  <br /></td></tr>
 <tr class="memitem:a25bfb7666c95683988310351260abd86" id="r_a25bfb7666c95683988310351260abd86"><td class="memItemLeft">const <a class="el" href="classhelios_1_1async_1_1Executor.html">async::Executor</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a25bfb7666c95683988310351260abd86">GetExecutor</a> () const noexcept</td></tr>
 <tr class="memdesc:a25bfb7666c95683988310351260abd86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the async executor (const version).  <br /></td></tr>
-<tr class="memitem:a409af4023d47ec17a79f3d3d86f07ee7" id="r_a409af4023d47ec17a79f3d3d86f07ee7"><td class="memItemLeft"><a class="el" href="classhelios_1_1ecs_1_1World.html">ecs::World</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a409af4023d47ec17a79f3d3d86f07ee7">GetWorld</a> () noexcept</td></tr>
-<tr class="memdesc:a409af4023d47ec17a79f3d3d86f07ee7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the main sub-app's ECS world.  <br /></td></tr>
-<tr class="memitem:a265d66eaa88342d27bdea288853558ab" id="r_a265d66eaa88342d27bdea288853558ab"><td class="memItemLeft">const <a class="el" href="classhelios_1_1ecs_1_1World.html">ecs::World</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a265d66eaa88342d27bdea288853558ab">GetWorld</a> () const noexcept</td></tr>
-<tr class="memdesc:a265d66eaa88342d27bdea288853558ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the main sub-app's ECS world (const version).  <br /></td></tr>
 <tr class="memitem:a15ebe19e2dabe536c4575b9c276b4a62" id="r_a15ebe19e2dabe536c4575b9c276b4a62"><td class="memItemLeft"><a class="el" href="#afb88c77ea5daaefa6c8fa6bc5b9aa5c1">Scheduler</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a15ebe19e2dabe536c4575b9c276b4a62">GetScheduler</a> () noexcept</td></tr>
 <tr class="memdesc:a15ebe19e2dabe536c4575b9c276b4a62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the application frame scheduler.  <br /></td></tr>
 <tr class="memitem:a625acfecb08d53ac7e89d6a5cf956417" id="r_a625acfecb08d53ac7e89d6a5cf956417"><td class="memItemLeft">const <a class="el" href="#afb88c77ea5daaefa6c8fa6bc5b9aa5c1">Scheduler</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a625acfecb08d53ac7e89d6a5cf956417">GetScheduler</a> () const noexcept</td></tr>
 <tr class="memdesc:a625acfecb08d53ac7e89d6a5cf956417"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the application frame scheduler (const version).  <br /></td></tr>
+<tr class="memitem:a409af4023d47ec17a79f3d3d86f07ee7" id="r_a409af4023d47ec17a79f3d3d86f07ee7"><td class="memItemLeft"><a class="el" href="classhelios_1_1ecs_1_1World.html">ecs::World</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a409af4023d47ec17a79f3d3d86f07ee7">GetWorld</a> () noexcept</td></tr>
+<tr class="memdesc:a409af4023d47ec17a79f3d3d86f07ee7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the main sub-app's ECS world.  <br /></td></tr>
+<tr class="memitem:a265d66eaa88342d27bdea288853558ab" id="r_a265d66eaa88342d27bdea288853558ab"><td class="memItemLeft">const <a class="el" href="classhelios_1_1ecs_1_1World.html">ecs::World</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a265d66eaa88342d27bdea288853558ab">GetWorld</a> () const noexcept</td></tr>
+<tr class="memdesc:a265d66eaa88342d27bdea288853558ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the main sub-app's ECS world (const version).  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-friends" class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
@@ -326,7 +326,7 @@ Friends</h2></td></tr>
 <div class="textblock"><p>Application class. </p>
 <p>Manages the application lifecycle, including initialization, updating, and shutdown. </p><dl class="section note"><dt>Note</dt><dd>Partially thread-safe. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00074">74</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00099">99</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 </div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>
 <a id="a185f72b974ae60051fbb6ba25e6eeea0" name="a185f72b974ae60051fbb6ba25e6eeea0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a185f72b974ae60051fbb6ba25e6eeea0">&#9670;&#160;</a></span>ExtractFn</h2>
@@ -340,7 +340,7 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00082">82</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00107">107</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -356,7 +356,7 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00081">81</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00106">106</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -491,7 +491,7 @@ Friends</h2></td></tr>
 <p>Destructor that ensures all async work is completed before destruction. </p>
 <p>Waits for all overlapping updates and pending executor tasks to complete. </p>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00666">666</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00693">693</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -534,7 +534,7 @@ Friends</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to app for method chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00722">722</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00748">748</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -575,17 +575,17 @@ requires (sizeof...(Ts) &gt; 0)</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this app for chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00813">813</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00839">839</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a5f7818994d347e0b4d67b9e49f553839" name="a5f7818994d347e0b4d67b9e49f553839"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5f7818994d347e0b4d67b9e49f553839">&#9670;&#160;</a></span>AddPlugins() <span class="overload">[1/2]</span></h2>
+<a id="a77f59c028a07f66d00b4afec965aad45" name="a77f59c028a07f66d00b4afec965aad45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77f59c028a07f66d00b4afec965aad45">&#9670;&#160;</a></span>AddPlugins() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;PluginTrait Plugin&gt; </div>
+template&lt;PluginTrait T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -598,7 +598,7 @@ template&lt;PluginTrait Plugin&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classhelios_1_1app_1_1Plugin.html">Plugin</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>plugin</em></span>&#160;) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td>
+          <td class="paramtype">T &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>plugin</em></span>&#160;) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td>
         </tr>
       </table>
   </td>
@@ -613,7 +613,7 @@ template&lt;PluginTrait Plugin&gt; </div>
 <dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if app is initialized or running. </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">Plugin</td><td><a class="el" href="classhelios_1_1app_1_1Plugin.html" title="Base class for all plugins.">Plugin</a> type </td></tr>
+    <tr><td class="paramname">T</td><td><a class="el" href="classhelios_1_1app_1_1Plugin.html" title="Base class for all plugins.">Plugin</a> type </td></tr>
   </table>
   </dd>
 </dl>
@@ -625,18 +625,18 @@ template&lt;PluginTrait Plugin&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to app for method chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00684">684</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00711">711</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ac3603ebfaf1c5a070f6024a1e8180e33" name="ac3603ebfaf1c5a070f6024a1e8180e33"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac3603ebfaf1c5a070f6024a1e8180e33">&#9670;&#160;</a></span>AddPlugins() <span class="overload">[2/2]</span></h2>
+<a id="a1b75283648afee66b016d48d96141859" name="a1b75283648afee66b016d48d96141859"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b75283648afee66b016d48d96141859">&#9670;&#160;</a></span>AddPlugins() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;PluginTrait... Plugins&gt; <br />
-requires utils::UniqueTypes&lt;Plugins...&gt; &amp;&amp; (sizeof...(Plugins) &gt; 1)</div>
+template&lt;PluginTrait... Ts&gt; <br />
+requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 1)</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -649,7 +649,7 @@ requires utils::UniqueTypes&lt;Plugins...&gt; &amp;&amp; (sizeof...(Plugins) &gt
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Plugins &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>plugins</em></span>&#160;) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td>
+          <td class="paramtype">Ts &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>plugins</em></span>&#160;) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td>
         </tr>
       </table>
   </td>
@@ -664,7 +664,7 @@ requires utils::UniqueTypes&lt;Plugins...&gt; &amp;&amp; (sizeof...(Plugins) &gt
 <dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if app is initialized or running. </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">Plugins</td><td><a class="el" href="classhelios_1_1app_1_1Plugin.html" title="Base class for all plugins.">Plugin</a> types </td></tr>
+    <tr><td class="paramname">Ts</td><td><a class="el" href="classhelios_1_1app_1_1Plugin.html" title="Base class for all plugins.">Plugin</a> types </td></tr>
   </table>
   </dd>
 </dl>
@@ -676,7 +676,7 @@ requires utils::UniqueTypes&lt;Plugins...&gt; &amp;&amp; (sizeof...(Plugins) &gt
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to app for method chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00698">698</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00725">725</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -727,7 +727,7 @@ template&lt;ecs::ScheduleTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Ordering handle for configuring placement </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00766">766</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00792">792</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -770,7 +770,7 @@ template&lt;ecs::ScheduleTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Ordering handle for configuring placement </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00756">756</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00782">782</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -828,7 +828,7 @@ template&lt;ecs::ScheduleTrait L, ecs::FunctorSystemTrait S&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>System configuration handle </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00291">291</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00316">316</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -892,7 +892,7 @@ template&lt;ecs::ScheduleTrait L, ecs::SystemTrait S&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>System configuration handle </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00312">312</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00337">337</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -945,7 +945,7 @@ requires (sizeof...(Systems) &gt; 1)</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Handle for configuring the system group </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00784">784</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00810">810</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1020,7 +1020,7 @@ template&lt;ecs::ScheduleTrait L, ecs::SystemSetTrait S&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>System set handle </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00346">346</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00371">371</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1077,18 +1077,18 @@ requires std::invocable&lt;F, <a class="el" href="classhelios_1_1ecs_1_1Schedule
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this app for chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00791">791</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00817">817</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a57ad4754ff82bfa0dc555e57d12fdae7" name="a57ad4754ff82bfa0dc555e57d12fdae7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a57ad4754ff82bfa0dc555e57d12fdae7">&#9670;&#160;</a></span>EmplacePlugin()</h2>
+<a id="ab8b6fd19a69aa43488319bc0a91072b0" name="ab8b6fd19a69aa43488319bc0a91072b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8b6fd19a69aa43488319bc0a91072b0">&#9670;&#160;</a></span>EmplacePlugin()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;PluginTrait Plugin, typename... Args&gt; <br />
-requires std::constructible_from&lt;<a class="el" href="classhelios_1_1app_1_1Plugin.html">Plugin</a>, Args...&gt;</div>
+template&lt;PluginTrait T, typename... Args&gt; <br />
+requires std::constructible_from&lt;T, Args...&gt;</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1116,7 +1116,7 @@ requires std::constructible_from&lt;<a class="el" href="classhelios_1_1app_1_1Pl
 <dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if app is initialized or running. </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">Plugin</td><td><a class="el" href="classhelios_1_1app_1_1Plugin.html" title="Base class for all plugins.">Plugin</a> type </td></tr>
+    <tr><td class="paramname">T</td><td><a class="el" href="classhelios_1_1app_1_1Plugin.html" title="Base class for all plugins.">Plugin</a> type </td></tr>
   </table>
   </dd>
 </dl>
@@ -1128,7 +1128,7 @@ requires std::constructible_from&lt;<a class="el" href="classhelios_1_1app_1_1Pl
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to app for method chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00710">710</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00737">737</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1159,7 +1159,7 @@ requires std::constructible_from&lt;<a class="el" href="classhelios_1_1app_1_1Pl
 <dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to the async executor </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00558">558</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00585">585</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1190,7 +1190,7 @@ requires std::constructible_from&lt;<a class="el" href="classhelios_1_1app_1_1Pl
 <dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the async executor </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00551">551</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00578">578</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1221,7 +1221,7 @@ requires std::constructible_from&lt;<a class="el" href="classhelios_1_1app_1_1Pl
 <dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to the main sub-application </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00478">478</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00505">505</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1252,7 +1252,7 @@ requires std::constructible_from&lt;<a class="el" href="classhelios_1_1app_1_1Pl
 <dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the main sub-application </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00471">471</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00498">498</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1283,7 +1283,7 @@ requires std::constructible_from&lt;<a class="el" href="classhelios_1_1app_1_1Pl
 <dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to the application frame scheduler </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00592">592</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00601">601</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1314,7 +1314,7 @@ requires std::constructible_from&lt;<a class="el" href="classhelios_1_1app_1_1Pl
 <dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the application frame scheduler </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00585">585</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00594">594</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1360,7 +1360,7 @@ template&lt;SubAppTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to the sub-app </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00851">851</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00877">877</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1406,7 +1406,7 @@ template&lt;SubAppTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the sub-app </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00843">843</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00869">869</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1444,7 +1444,7 @@ template&lt;SubAppTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to the sub-app </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00836">836</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00862">862</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1482,7 +1482,7 @@ template&lt;SubAppTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the sub-app </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00830">830</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00856">856</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1513,7 +1513,7 @@ template&lt;SubAppTrait T&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to the main sub-app's ECS world </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00576">576</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00619">619</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1544,7 +1544,7 @@ template&lt;SubAppTrait T&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the main sub-app's ECS world </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00567">567</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00610">610</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1575,7 +1575,7 @@ template&lt;SubAppTrait T&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the plugin is registered, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00429">429</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00454">454</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1585,7 +1585,7 @@ template&lt;SubAppTrait T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;PluginTrait Plugin&gt; </div>
+template&lt;PluginTrait T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1606,20 +1606,26 @@ template&lt;PluginTrait Plugin&gt; </div>
 
 <p>Checks if the app has a plugin of the given type. </p>
 <dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td><a class="el" href="classhelios_1_1app_1_1Plugin.html" title="Base class for all plugins.">Plugin</a> type </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the plugin is registered, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00439">439</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00465">465</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ab1e7d6a6140a7580e67b6ba74d69338b" name="ab1e7d6a6140a7580e67b6ba74d69338b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab1e7d6a6140a7580e67b6ba74d69338b">&#9670;&#160;</a></span>HasPlugins() <span class="overload">[2/2]</span></h2>
+<a id="ab8033d1c1056a5b0b8469c616e9f6d14" name="ab8033d1c1056a5b0b8469c616e9f6d14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8033d1c1056a5b0b8469c616e9f6d14">&#9670;&#160;</a></span>HasPlugins() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;PluginTrait... Plugins&gt; <br />
-requires utils::UniqueTypes&lt;Plugins...&gt; &amp;&amp; (sizeof...(Plugins) &gt; 1)</div>
+template&lt;PluginTrait... Ts&gt; <br />
+requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 1)</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1628,7 +1634,7 @@ requires utils::UniqueTypes&lt;Plugins...&gt; &amp;&amp; (sizeof...(Plugins) &gt
           <td class="memname">auto helios::app::App::HasPlugins </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td> const -&gt; std::array&lt; bool, sizeof...(Plugins)&gt;</td>
+          <td> const -&gt; std::array&lt; bool, sizeof...(Ts)&gt;</td>
         </tr>
       </table>
   </td>
@@ -1640,9 +1646,15 @@ requires utils::UniqueTypes&lt;Plugins...&gt; &amp;&amp; (sizeof...(Plugins) &gt
 
 <p>Checks if the app has plugins of given types. </p>
 <dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Ts</td><td><a class="el" href="classhelios_1_1app_1_1Plugin.html" title="Base class for all plugins.">Plugin</a> types </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section return"><dt>Returns</dt><dd>Array of bools indicating whether each plugin is registered </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00450">450</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00477">477</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1686,7 +1698,7 @@ template&lt;SubAppTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the sub-app is registered, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00462">462</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00489">489</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1760,7 +1772,7 @@ template&lt;ecs::ScheduleTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this app for chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00776">776</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00802">802</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1810,7 +1822,7 @@ template&lt;ecs::ResourceTrait... Ts&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this app for chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00798">798</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00824">824</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1866,7 +1878,7 @@ template&lt;SubAppTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this app for chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00735">735</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00761">761</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1897,7 +1909,7 @@ template&lt;SubAppTrait T&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>True if initialized, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00413">413</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00438">438</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1928,7 +1940,7 @@ template&lt;SubAppTrait T&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>True if running, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00420">420</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00445">445</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -1958,7 +1970,7 @@ template&lt;SubAppTrait T&gt; </div>
 <p>Notifies the app that plugin readiness may have changed. </p>
 <p>Async plugins should call this after completing background setup so <span class="tt">WaitForPluginsReady</span> can resume without busy-waiting. </p><dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00147">147</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00172">172</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -2048,7 +2060,7 @@ template&lt;SubAppTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if a sub-app was removed </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00748">748</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00774">774</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -2121,7 +2133,7 @@ Triggers assertion in next cases:<ul>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to app for method chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00819">819</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00845">845</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -2197,7 +2209,7 @@ template&lt;ecs::ScheduleTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the schedule, or <span class="tt">nullptr</span> if not found </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00530">530</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00557">557</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -2242,7 +2254,7 @@ template&lt;ecs::ScheduleTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the schedule, or <span class="tt">nullptr</span> if not found </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00542">542</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00569">569</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -2292,7 +2304,7 @@ template&lt;ecs::ResourceTrait... Ts&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this app for chaining </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00805">805</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00831">831</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -2323,7 +2335,7 @@ template&lt;ecs::ResourceTrait... Ts&gt; </div>
 <p>Calls <a class="el" href="structhelios_1_1app_1_1Update.html" title="Update schedule.">Update</a> on the main sub-app and all registered sub-apps. Spawns async tasks as needed. </p><dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if app is not initialized. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00674">674</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00701">701</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -2348,7 +2360,7 @@ template&lt;ecs::ResourceTrait... Ts&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00663">663</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00690">690</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
