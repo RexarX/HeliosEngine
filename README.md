@@ -275,11 +275,8 @@ See [examples/simple/src/main.cpp](examples/simple/src/main.cpp) for schedules, 
 Systems are plain structs — `operator()` parameters declare data access. `App` owns the main world, executor, and frame scheduler.
 
 ```cpp
-#include <helios/app/application.hpp>
-#include <helios/ecs/command/commands.hpp>
-#include <helios/ecs/query/query.hpp>
-#include <helios/ecs/resource/param.hpp>
-#include <helios/ecs/schedule/system_set.hpp>
+#include <helios/app/app.hpp>
+#include <helios/ecs/ecs.hpp>
 
 #include <utility>
 
@@ -295,12 +292,8 @@ struct Velocity {
   float dy = 0.0F;
 };
 
-struct FrameCount {
-  size_t count = 0;
-};
-
 struct SpawnEntities {
-  void operator()(helios::ecs::Res<const FrameCount> frame_count,
+  void operator()(helios::ecs::Res<const helios::app::FrameCount> frame_count,
                   helios::ecs::Commands commands) {
     // Spawning new entity every even frame
     if (frame_count->count % 2 == 0) {
@@ -321,8 +314,8 @@ struct ChangePosition {
 struct ChangeVelocity {
   void operator()(helios::ecs::Query<Velocity&> movables) {
     movables.ForEach([](Velocity& vel) {
-      vel.dx *= kVelocityBoost ;
-      vel.dy *= kVelocityBoost ;
+      vel.dx *= kVelocityBoost;
+      vel.dy *= kVelocityBoost;
     });
   }
 };
@@ -330,21 +323,22 @@ struct ChangeVelocity {
 struct RequestExit {
   void operator()(helios::ecs::MessageWriter<helios::app::AppExit> exit) {
     // Sending message that would be handled in the next schedule
-    exit.Write({.code = helios::app::ExitCode::kSuccess});
+    exit.Write(helios::app::AppExit::Success());
   }
 };
 
 int main() {
   helios::app::App app;
-  app.InsertResource(FrameCount{});
+  app.AddPlugins(helios::app::FrameCountPlugin{});
 
   app.AddSystem(helios::app::kPreUpdate, SpawnEntities{}); // Spawn entities, before modifying
   app.AddSystems(helios::app::kUpdate, ChangePosition{}, ChangeVelocity{})
       .Sequence(); // Sytems will run one after another (ChangePosition -> ChangeVelocity)
   app.AddSystem(helios::app::kPostUpdate, RequestExit{}) // Shutdown after 500 frames
-      .RunIf("IsFrameCountReached", [](helios::ecs::Res<const FrameCount> frame_count) {
-                                      return frame_count->count > 500;
-                                    });
+      .RunIf("IsFrameCountReached",
+             [](helios::ecs::Res<const helios::app::FrameCount> frame_count) {
+               return frame_count->count > 500;
+             });
 
   app.AddMessages<helios::app::AppExit>();
   return std::to_underlying(app.Run());
@@ -360,7 +354,8 @@ int main() {
 | `MessageWriter<T>` / `MessageReader<T>`           | Frame-delayed inter-system messages Live two frames by default, visible between schedules |
 | `AsyncMessageWriter<T>` / `AsyncMessageReader<T>` | Lock-free async messages between systems                                                  |
 
-Builtin schedules (`helios/app/schedules.hpp`): `MainStartup` → `PreStartup` → `Startup` → `PostStartup` → `First` → `PreUpdate` → `Update` → `PostUpdate` → `Last` → `Extract` → shutdown stages.
+Builtin schedules are available through `<helios/app/app.hpp>`: `MainStartup` → `PreStartup` → `Startup` → `PostStartup` → `First` → `PreUpdate` → `Update` → `PostUpdate` → `Last` → `Extract` → shutdown stages.
+By default, `MainStartup` and `Shutdown` use the main-thread schedule executor; the other built-in schedules, including `First` and `Last`, use the multi-threaded executor.
 
 <a href="#readme-top">↑ Back to Top</a>
 

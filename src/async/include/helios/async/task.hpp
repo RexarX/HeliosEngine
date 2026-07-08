@@ -75,7 +75,7 @@ public:
    * @param tasks Range of tasks that should run after this task
    * @return Reference to this task for method chaining
    */
-  template <std::ranges::range R>
+  template <std::ranges::input_range R>
     requires std::same_as<std::ranges::range_value_t<R>, Task>
   Task& Precede(const R& tasks);
 
@@ -103,7 +103,7 @@ public:
    * @param tasks Range of tasks that should run before this task
    * @return Reference to this task for method chaining
    */
-  template <std::ranges::range R>
+  template <std::ranges::input_range R>
     requires std::same_as<std::ranges::range_value_t<R>, Task>
   Task& Succeed(const R& tasks);
 
@@ -207,7 +207,7 @@ inline Task& Task::Precede(Tasks&&... tasks) {
   return Precede(std::to_array({std::forward<Tasks>(tasks)...}));
 }
 
-template <std::ranges::range R>
+template <std::ranges::input_range R>
   requires std::same_as<std::ranges::range_value_t<R>, Task>
 inline Task& Task::Precede(const R& tasks) {
   HELIOS_ASSERT(!Empty(), "Task cannot be empty!");
@@ -226,7 +226,7 @@ inline Task& Task::Succeed(Tasks&&... tasks) {
   return Succeed(std::to_array({std::forward<Tasks>(tasks)...}));
 }
 
-template <std::ranges::range R>
+template <std::ranges::input_range R>
   requires std::same_as<std::ranges::range_value_t<R>, Task>
 inline Task& Task::Succeed(const R& tasks) {
   HELIOS_ASSERT(!Empty(), "Task cannot be empty!");

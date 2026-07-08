@@ -1,14 +1,11 @@
-#include <helios/app/application.hpp>
-#include <helios/app/schedules.hpp>
-#include <helios/app/sub_app.hpp>
-#include <helios/ecs/message/writer.hpp>
-#include <helios/ecs/resource/param.hpp>
-#include <helios/ecs/world.hpp>
-#include <helios/log/logger.hpp>
+#include <helios/app/app.hpp>
+#include <helios/ecs/ecs.hpp>
+#include <helios/log/log.hpp>
 
 #include <chrono>
 #include <cstddef>
 #include <thread>
+#include <utility>
 
 namespace happ = helios::app;
 namespace hecs = helios::ecs;
@@ -21,20 +18,12 @@ struct OverlapLabel {
   static constexpr size_t kMaxOverlappingUpdates = 1;
 };
 
-struct FrameCount {
-  size_t count = 0;
-};
-
 struct MainTick {
   int value = 0;
 };
 
 struct SubTick {
   int generation = 0;
-};
-
-struct BumpFrame {
-  void operator()(hecs::Res<FrameCount> frames) const { ++frames->count; }
 };
 
 struct BumpMain {
@@ -62,11 +51,11 @@ void ExtractSub(const hecs::World& main, hecs::World& sub) {
 }
 
 struct ExitAfterFrames {
-  void operator()(hecs::Res<const FrameCount> frames,
+  void operator()(hecs::Res<const happ::FrameCount> frames,
                   hecs::MessageWriter<happ::AppExit> exit_writer) const {
     if (frames->count >= 8) {
       hlog::Info("overlapping_sub_apps: exit frame {}", frames->count);
-      exit_writer.Write({.code = happ::ExitCode::kSuccess});
+      exit_writer.Write(happ::AppExit::Success());
     }
   }
 };
@@ -75,10 +64,10 @@ struct ExitAfterFrames {
 
 int main() {
   happ::App app;
-  app.InsertResources(FrameCount{}, MainTick{});
-  app.AddSystem(happ::kFirst, BumpFrame{});
+  app.AddPlugins(happ::FrameCountPlugin{});
+  app.InsertResources(MainTick{});
   app.AddSystem(happ::kUpdate, BumpMain{});
-  app.AddSystem(happ::kLast, ExitAfterFrames{});
+  app.AddSystem(happ::kPostUpdate, ExitAfterFrames{});
 
   auto overlap = happ::SubApp::From(OverlapLabel{});
   overlap.SetExtractFunction(ExtractSub);

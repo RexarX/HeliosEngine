@@ -184,14 +184,16 @@ inline void RegisterBuiltinSchedules(ecs::Scheduler& scheduler) {
                ecs::ExecutorKind::kMultiThreaded);
   add_in_stage(scheduler, kPostStartup, kStartupStage,
                ecs::ExecutorKind::kMultiThreaded);
-  add_in_stage(scheduler, kFirst, kUpdateStage, ecs::ExecutorKind::kMainThread);
+  add_in_stage(scheduler, kFirst, kUpdateStage,
+               ecs::ExecutorKind::kMultiThreaded);
   add_in_stage(scheduler, kPreUpdate, kUpdateStage,
                ecs::ExecutorKind::kMultiThreaded);
   add_in_stage(scheduler, kUpdate, kUpdateStage,
                ecs::ExecutorKind::kMultiThreaded);
   add_in_stage(scheduler, kPostUpdate, kUpdateStage,
                ecs::ExecutorKind::kMultiThreaded);
-  add_in_stage(scheduler, kLast, kUpdateStage, ecs::ExecutorKind::kMainThread);
+  add_in_stage(scheduler, kLast, kUpdateStage,
+               ecs::ExecutorKind::kMultiThreaded);
   add_in_stage(scheduler, kExtract, kExtractStage,
                ecs::ExecutorKind::kMultiThreaded);
   add_in_stage(scheduler, kPreShutdown, kShutdownStage,
@@ -250,14 +252,16 @@ inline void RegisterBuiltinSubAppSchedules(ecs::Scheduler& scheduler) {
                ecs::ExecutorKind::kMultiThreaded);
   add_in_stage(scheduler, kPostStartup, kStartupStage,
                ecs::ExecutorKind::kMultiThreaded);
-  add_in_stage(scheduler, kFirst, kUpdateStage, ecs::ExecutorKind::kMainThread);
+  add_in_stage(scheduler, kFirst, kUpdateStage,
+               ecs::ExecutorKind::kMultiThreaded);
   add_in_stage(scheduler, kPreUpdate, kUpdateStage,
                ecs::ExecutorKind::kMultiThreaded);
   add_in_stage(scheduler, kUpdate, kUpdateStage,
                ecs::ExecutorKind::kMultiThreaded);
   add_in_stage(scheduler, kPostUpdate, kUpdateStage,
                ecs::ExecutorKind::kMultiThreaded);
-  add_in_stage(scheduler, kLast, kUpdateStage, ecs::ExecutorKind::kMainThread);
+  add_in_stage(scheduler, kLast, kUpdateStage,
+               ecs::ExecutorKind::kMultiThreaded);
   add_in_stage(scheduler, kPreShutdown, kShutdownStage,
                ecs::ExecutorKind::kMultiThreaded);
   add_in_stage(scheduler, kShutdown, kShutdownStage,

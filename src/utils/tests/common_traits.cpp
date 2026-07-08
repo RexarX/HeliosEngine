@@ -2,6 +2,8 @@
 
 #include <helios/utils/common_traits.hpp>
 
+#include <chrono>
+#include <cstdint>
 #include <string>
 
 namespace {
@@ -32,6 +34,36 @@ struct TestFunctor {
   void operator()() const {}
 };
 
+struct ValidClock {
+  using rep = int64_t;
+  using period = std::nano;
+  using duration = std::chrono::duration<rep, period>;
+  using time_point = std::chrono::time_point<ValidClock>;
+
+  static time_point now() noexcept { return time_point{}; }
+};
+
+struct ClockWithoutNow {
+  using rep = int64_t;
+  using period = std::nano;
+  using duration = std::chrono::duration<rep, period>;
+  using time_point = std::chrono::time_point<ClockWithoutNow>;
+};
+
+struct ClockWithWrongNow {
+  using rep = int64_t;
+  using period = std::nano;
+  using duration = std::chrono::duration<rep, period>;
+  using time_point = std::chrono::time_point<ClockWithWrongNow>;
+
+  static duration now() noexcept { return duration{}; }
+};
+
+struct DurationLike {
+  using rep = int64_t;
+  using period = std::milli;
+};
+
 }  // namespace
 
 using namespace helios::utils;
@@ -54,6 +86,40 @@ TEST_SUITE("helios::utils::ArithmeticTrait") {
     SUBCASE("Non-arithmetic types") {
       CHECK_FALSE(ArithmeticTrait<std::string>);
       CHECK_FALSE(ArithmeticTrait<void*>);
+    }
+  }
+}
+
+TEST_SUITE("helios::utils::ClockTrait") {
+  TEST_CASE("utils::ClockTrait: concept validation") {
+    SUBCASE("std::chrono clocks satisfy ClockTrait") {
+      CHECK(ClockTrait<std::chrono::steady_clock>);
+      CHECK(ClockTrait<std::chrono::system_clock>);
+      CHECK(ClockTrait<ValidClock>);
+    }
+
+    SUBCASE("Non-clock types do NOT satisfy ClockTrait") {
+      CHECK_FALSE(ClockTrait<int>);
+      CHECK_FALSE(ClockTrait<std::chrono::milliseconds>);
+      CHECK_FALSE(ClockTrait<ClockWithoutNow>);
+      CHECK_FALSE(ClockTrait<ClockWithWrongNow>);
+    }
+  }
+}
+
+TEST_SUITE("helios::utils::DurationTrait") {
+  TEST_CASE("utils::DurationTrait: concept validation") {
+    SUBCASE("std::chrono durations satisfy DurationTrait") {
+      CHECK(DurationTrait<std::chrono::steady_clock::duration>);
+      CHECK(DurationTrait<std::chrono::seconds>);
+      CHECK(DurationTrait<std::chrono::milliseconds>);
+      CHECK(DurationTrait<std::chrono::duration<double, std::milli>>);
+    }
+
+    SUBCASE("Non-duration types do NOT satisfy DurationTrait") {
+      CHECK_FALSE(DurationTrait<int>);
+      CHECK_FALSE(DurationTrait<std::chrono::steady_clock>);
+      CHECK_FALSE(DurationTrait<DurationLike>);
     }
   }
 }

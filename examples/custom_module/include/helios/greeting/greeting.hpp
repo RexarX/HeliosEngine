@@ -1,6 +1,6 @@
 #pragma once
 
-#include <helios/cstring_view.hpp>
+#include <helios/core/core.hpp>
 
 #include <string>
 

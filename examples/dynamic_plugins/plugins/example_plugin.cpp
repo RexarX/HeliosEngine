@@ -1,12 +1,8 @@
 #include "shared/plugin_types.hpp"
 
-#include <helios/app/application.hpp>
-#include <helios/app/dynamic_plugin.hpp>
-#include <helios/app/plugin.hpp>
-#include <helios/app/schedules.hpp>
-#include <helios/ecs/message/writer.hpp>
-#include <helios/ecs/resource/param.hpp>
-#include <helios/log/logger.hpp>
+#include <helios/app/app.hpp>
+#include <helios/ecs/ecs.hpp>
+#include <helios/log/log.hpp>
 #include <helios/platform/platform.hpp>
 
 #include <string_view>

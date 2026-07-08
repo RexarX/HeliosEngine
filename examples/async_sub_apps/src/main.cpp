@@ -1,13 +1,11 @@
-#include <helios/app/application.hpp>
-#include <helios/app/schedules.hpp>
-#include <helios/app/sub_app.hpp>
-#include <helios/ecs/message/writer.hpp>
-#include <helios/ecs/resource/param.hpp>
-#include <helios/log/logger.hpp>
+#include <helios/app/app.hpp>
+#include <helios/ecs/ecs.hpp>
+#include <helios/log/log.hpp>
 
 #include <chrono>
 #include <cstddef>
 #include <thread>
+#include <utility>
 
 namespace happ = helios::app;
 namespace hecs = helios::ecs;
@@ -19,20 +17,12 @@ struct AsyncLabel {
   static constexpr bool kAsync = true;
 };
 
-struct FrameCount {
-  size_t count = 0;
-};
-
 struct AsyncCounter {
   size_t ticks = 0;
 };
 
-struct BumpFrame {
-  void operator()(hecs::Res<FrameCount> frames) const { ++frames->count; }
-};
-
 struct LogMain {
-  void operator()(hecs::Res<const FrameCount> frames) const {
+  void operator()(hecs::Res<const happ::FrameCount> frames) const {
     hlog::Info("async_sub_apps: main frame={}", frames->count);
   }
 };
@@ -47,15 +37,15 @@ struct AsyncTick {
 
 void MirrorMain(const hecs::World& main, hecs::World& sub) {
   sub.InsertResources(
-      AsyncCounter{.ticks = main.ReadResource<FrameCount>().count});
+      AsyncCounter{.ticks = main.ReadResource<happ::FrameCount>().count});
 }
 
 struct ExitAfterFrames {
-  void operator()(hecs::Res<const FrameCount> frames,
+  void operator()(hecs::Res<const happ::FrameCount> frames,
                   hecs::MessageWriter<happ::AppExit> exit_writer) const {
     if (frames->count >= 15) {
       hlog::Info("async_sub_apps: requesting shutdown");
-      exit_writer.Write({.code = happ::ExitCode::kSuccess});
+      exit_writer.Write(happ::AppExit::Success());
     }
   }
 };
@@ -64,10 +54,9 @@ struct ExitAfterFrames {
 
 int main() {
   happ::App app;
-  app.InsertResources(FrameCount{});
-  app.AddSystem(happ::kFirst, BumpFrame{});
+  app.AddPlugins(happ::FrameCountPlugin{});
   app.AddSystem(happ::kUpdate, LogMain{});
-  app.AddSystem(happ::kLast, ExitAfterFrames{});
+  app.AddSystem(happ::kPostUpdate, ExitAfterFrames{});
 
   auto async_sub = happ::SubApp::From(AsyncLabel{});
   async_sub.SetExtractFunction(MirrorMain);

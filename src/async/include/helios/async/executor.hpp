@@ -303,7 +303,7 @@ public:
    * @param dependencies Tasks that must complete before this task runs
    * @return Pair containing AsyncTask handle and Future for the result
    */
-  template <std::invocable C, std::ranges::range Dependencies>
+  template <std::invocable C, std::ranges::input_range Dependencies>
     requires std::same_as<std::ranges::range_value_t<Dependencies>, AsyncTask>
   auto DependentAsync(C&& callable, const Dependencies& dependencies)
       -> std::pair<AsyncTask, std::future<std::invoke_result_t<C>>>;
@@ -319,7 +319,7 @@ public:
    * @param dependencies Tasks that must complete before this task runs
    * @return AsyncTask handle
    */
-  template <std::invocable C, std::ranges::range Dependencies>
+  template <std::invocable C, std::ranges::input_range Dependencies>
     requires std::same_as<std::ranges::range_value_t<Dependencies>, AsyncTask>
   AsyncTask SilentDependentAsync(C&& callable,
                                  const Dependencies& dependencies);
@@ -422,7 +422,7 @@ inline void Executor::SilentAsync(std::string name, C&& callable) {
   executor_.silent_async(params, std::forward<C>(callable));
 }
 
-template <std::invocable C, std::ranges::range Dependencies>
+template <std::invocable C, std::ranges::input_range Dependencies>
   requires std::same_as<std::ranges::range_value_t<Dependencies>, AsyncTask>
 inline auto Executor::DependentAsync(C&& callable,
                                      const Dependencies& dependencies)
@@ -441,7 +441,7 @@ inline auto Executor::DependentAsync(C&& callable,
   return std::make_pair(AsyncTask(std::move(task)), std::move(future));
 }
 
-template <std::invocable C, std::ranges::range Dependencies>
+template <std::invocable C, std::ranges::input_range Dependencies>
   requires std::same_as<std::ranges::range_value_t<Dependencies>, AsyncTask>
 inline AsyncTask Executor::SilentDependentAsync(
     C&& callable, const Dependencies& dependencies) {

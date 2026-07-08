@@ -1,6 +1,5 @@
 #include <helios/greeting/greeting.hpp>
-
-#include <helios/log/logger.hpp>
+#include <helios/log/log.hpp>
 
 namespace hlog = helios::log;
 

@@ -1,27 +1,18 @@
+#include "helios/app/schedules.hpp"
 #include "shared/plugin_types.hpp"
 
-#include <helios/app/application.hpp>
-#include <helios/app/dynamic_plugin.hpp>
-#include <helios/app/schedules.hpp>
-#include <helios/ecs/message/writer.hpp>
-#include <helios/ecs/resource/param.hpp>
-#include <helios/log/logger.hpp>
+#include <helios/app/app.hpp>
+#include <helios/ecs/ecs.hpp>
+#include <helios/log/log.hpp>
 
 #include <filesystem>
+#include <utility>
 
 namespace happ = helios::app;
 namespace hecs = helios::ecs;
 namespace hlog = helios::log;
 
 namespace {
-
-struct FrameCount {
-  size_t count = 0;
-};
-
-struct BumpFrame {
-  void operator()(hecs::Res<FrameCount> frames) const { ++frames->count; }
-};
 
 struct LogPluginResource {
   void operator()(hecs::Res<example_plugins::PluginTicks> ticks) const {
@@ -31,10 +22,10 @@ struct LogPluginResource {
 };
 
 struct ExitAfterFrames {
-  void operator()(hecs::Res<const FrameCount> frames,
+  void operator()(hecs::Res<const happ::FrameCount> frames,
                   hecs::MessageWriter<happ::AppExit> exit_writer) const {
     if (frames->count >= 5) {
-      exit_writer.Write({.code = happ::ExitCode::kSuccess});
+      exit_writer.Write(happ::AppExit::Success());
     }
   }
 };
@@ -51,18 +42,17 @@ int main() {
 
   happ::DynamicPlugin dynamic_plugin;
   const auto load_result = dynamic_plugin.Load(plugin_path);
-  if (!load_result) {
+  if (!load_result) [[unlikely]] {
     hlog::Error("dynamic_plugins: load failed ({})",
                 happ::DynamicPluginErrorToString(load_result.error()));
     return 1;
   }
 
   happ::App app;
-  app.InsertResources(FrameCount{});
+  app.AddPlugins(happ::FrameCountPlugin{});
   app.AddDynamicPlugin(std::move(dynamic_plugin));
-  app.AddSystem(happ::kFirst, BumpFrame{});
   app.AddSystem(happ::kUpdate, LogPluginResource{});
-  app.AddSystem(happ::kLast, ExitAfterFrames{});
+  app.AddSystem(happ::kPostUpdate, ExitAfterFrames{});
 
   const auto code = app.Run();
   return std::to_underlying(code);

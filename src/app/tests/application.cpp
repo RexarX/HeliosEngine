@@ -35,7 +35,7 @@ struct ExitSystem {
   ExitCode code = ExitCode::kSuccess;
 
   void operator()(MessageWriter<AppExit> exits) const {
-    exits.Write(AppExit{.code = code});
+    exits.Write(AppExit::From(code));
   }
 };
 

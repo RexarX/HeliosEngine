@@ -219,6 +219,14 @@ struct ConstOperatorAllParamsSystem {
                   Commands /*commands*/, WorldView /*view*/) const {}
 };
 
+struct NoexceptSystem {
+  void operator()(Query<const Position&> /*query*/) noexcept {}
+};
+
+struct ConstNoexceptSystem {
+  void operator()(Res<const Camera> /*camera*/) const noexcept {}
+};
+
 struct StaticOperatorSystem {
   static void operator()(Query<const Position&> /*query*/) {}
 };
@@ -264,6 +272,10 @@ constexpr void FreeFunctionWithQuery(Query<const Position&> /*query*/) {}
 // Free function with mixed ECS params
 constexpr void FreeFunctionWithMixed(Query<const Position&> /*query*/,
                                      Res<const Camera> /*camera*/) {}
+
+// Noexcept free function with ECS params
+constexpr void FreeFunctionWithQueryNoexcept(
+    Query<const Position&> /*query*/) noexcept {}
 
 // Another free function for testing (invalid param)
 constexpr void AnotherFreeFunction(int /*value*/) {}
@@ -379,6 +391,20 @@ TEST_SUITE("helios::ecs::SystemTrait") {
 
     SUBCASE("Const operator() with all param types satisfies SystemTrait") {
       CHECK(SystemTrait<ConstOperatorAllParamsSystem>);
+    }
+  }
+
+  TEST_CASE("ecs::SystemTrait::noexcept_operator") {
+    SUBCASE("Noexcept operator() satisfies SystemTrait") {
+      CHECK(SystemTrait<NoexceptSystem>);
+    }
+
+    SUBCASE("Const noexcept operator() satisfies SystemTrait") {
+      CHECK(SystemTrait<ConstNoexceptSystem>);
+    }
+
+    SUBCASE("Noexcept free function satisfies SystemTrait") {
+      CHECK(SystemTrait<decltype(&FreeFunctionWithQueryNoexcept)>);
     }
   }
 

@@ -2,6 +2,7 @@
 
 #include <helios/utils/type_info.hpp>
 
+#include <chrono>
 #include <concepts>
 #include <type_traits>
 
@@ -31,6 +32,33 @@ struct UniqueTypesHelper<T, Rest...>
  */
 template <typename T>
 concept ArithmeticTrait = std::integral<T> || std::floating_point<T>;
+
+/**
+ * @brief Concept for clock types compatible with std::chrono clocks.
+ * @details Requires nested types `rep`, `period`, `duration` and `time_point`,
+ * and a static `now()` function returning `time_point`.
+ */
+template <typename T>
+concept ClockTrait = requires {
+  typename T::rep;
+  typename T::period;
+  typename T::duration;
+  typename T::time_point;
+  { T::now() } -> std::same_as<typename T::time_point>;
+};
+
+/**
+ * @brief Concept for duration types based on std::chrono::duration.
+ * @details Requires nested types `rep` and `period`, and must be a
+ * specialization of `std::chrono::duration`.
+ */
+template <typename T>
+concept DurationTrait =
+    requires {
+      typename T::rep;
+      typename T::period;
+    } &&
+    std::same_as<T, std::chrono::duration<typename T::rep, typename T::period>>;
 
 /**
  * @brief Concept for lambda closure types.

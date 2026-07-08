@@ -30,7 +30,17 @@ struct MemberFnArgs<R (C::*)(Args...)> {
 };
 
 template <typename R, typename C, typename... Args>
+struct MemberFnArgs<R (C::*)(Args...) noexcept> {
+  using ArgsTuple = std::tuple<Args...>;
+};
+
+template <typename R, typename C, typename... Args>
 struct MemberFnArgs<R (C::*)(Args...) const> {
+  using ArgsTuple = std::tuple<Args...>;
+};
+
+template <typename R, typename C, typename... Args>
+struct MemberFnArgs<R (C::*)(Args...) const noexcept> {
   using ArgsTuple = std::tuple<Args...>;
 };
 
@@ -47,7 +57,17 @@ struct MemberFnArgs<R (*)(Args...)> {
 };
 
 template <typename R, typename... Args>
+struct MemberFnArgs<R (*)(Args...) noexcept> {
+  using ArgsTuple = std::tuple<Args...>;
+};
+
+template <typename R, typename... Args>
 struct MemberFnArgs<R(Args...)> {
+  using ArgsTuple = std::tuple<Args...>;
+};
+
+template <typename R, typename... Args>
+struct MemberFnArgs<R(Args...) noexcept> {
   using ArgsTuple = std::tuple<Args...>;
 };
 

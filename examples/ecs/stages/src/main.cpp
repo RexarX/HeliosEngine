@@ -1,8 +1,6 @@
-#include <helios/app/application.hpp>
-#include <helios/ecs/resource/param.hpp>
-#include <helios/ecs/schedule/schedule.hpp>
-#include <helios/ecs/schedule/stage.hpp>
-#include <helios/log/logger.hpp>
+#include <helios/app/app.hpp>
+#include <helios/ecs/ecs.hpp>
+#include <helios/log/log.hpp>
 
 namespace happ = helios::app;
 namespace hecs = helios::ecs;

@@ -2,6 +2,7 @@
 
 #include <helios/app/schedules.hpp>
 #include <helios/async/executor.hpp>
+#include <helios/ecs/schedule/executor/multi_threaded.hpp>
 #include <helios/ecs/schedule/scheduler.hpp>
 
 #include <string_view>
@@ -55,11 +56,17 @@ TEST_SUITE("helios::app::RegisterBuiltinSchedules") {
       ecs::Scheduler scheduler;
       RegisterBuiltinSchedules(scheduler);
 
-      CHECK_EQ(scheduler.TryGetSchedule(kFirst)->Settings().executor_kind,
+      CHECK_EQ(scheduler.TryGetSchedule(kMainStartup)->Settings().executor_kind,
                ExecutorKind::kMainThread);
+      CHECK_EQ(scheduler.TryGetSchedule(kFirst)->Settings().executor_kind,
+               ExecutorKind::kMultiThreaded);
       CHECK_EQ(scheduler.TryGetSchedule(kPreUpdate)->Settings().executor_kind,
                ExecutorKind::kMultiThreaded);
       CHECK_EQ(scheduler.TryGetSchedule(kUpdate)->Settings().executor_kind,
+               ExecutorKind::kMultiThreaded);
+      CHECK_EQ(scheduler.TryGetSchedule(kPostUpdate)->Settings().executor_kind,
+               ExecutorKind::kMultiThreaded);
+      CHECK_EQ(scheduler.TryGetSchedule(kLast)->Settings().executor_kind,
                ExecutorKind::kMultiThreaded);
       CHECK_EQ(scheduler.TryGetSchedule(kExtract)->Settings().executor_kind,
                ExecutorKind::kMultiThreaded);

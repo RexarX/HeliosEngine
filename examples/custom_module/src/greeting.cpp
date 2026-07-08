@@ -1,6 +1,5 @@
+#include <helios/core/core.hpp>
 #include <helios/greeting/greeting.hpp>
-
-#include <helios/cstring_view.hpp>
 
 #include <format>
 #include <string>

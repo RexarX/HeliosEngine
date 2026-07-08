@@ -13,6 +13,12 @@ High-level application layer that wires together the ECS, async executor, plugin
 | `DynamicPlugin`    | Runtime-loaded plugin wrapper around a shared library.                                    |
 | `ExitCode`         | `kSuccess`, `kFailure`.                                                                   |
 | `AppExit`          | Message that requests application shutdown (`kManual` clear policy).                      |
+| `Time`             | Resource with `steady_clock` `delta_time` and `elapsed` durations.                        |
+| `FrameCount`       | Resource with the current frame count.                                                    |
+| `Executor`         | Resource wrapper around the app's `async::Executor`.                                      |
+| `TimePlugin`       | Adds `Time` and updates it in `kFirst`.                                                   |
+| `FrameCountPlugin` | Adds `FrameCount` and increments it in `kLast`.                                           |
+| `ExecutorPlugin`   | Adds `Executor`.                                                                          |
 | `RunDefault`       | Runner: loop `Update()` until `AppExit`.                                                  |
 | `RunFixed`         | Fixed-timestep runner via `FixedRunnerConfig`.                                            |
 | `RunOnce`          | Single-frame runner.                                                                      |
@@ -28,6 +34,23 @@ High-level application layer that wires together the ECS, async executor, plugin
 | `kShutdownStage` | `kPreShutdown`, `kShutdown`, `kPostShutdown`              |
 
 Stages are grouping namespaces only — they are never run directly. Call `RegisterBuiltinSchedules(scheduler)` to wire default ordering and executor kinds.
+
+Default executor kinds:
+
+| Executor kind  | Builtin schedules                                                                                                                                 |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Main thread    | `kMainStartup`, `kShutdown`                                                                                                                       |
+| Multi-threaded | `kPreStartup`, `kStartup`, `kPostStartup`, `kFirst`, `kPreUpdate`, `kUpdate`, `kPostUpdate`, `kLast`, `kExtract`, `kPreShutdown`, `kPostShutdown` |
+
+Sub-app schedulers use the same defaults except they do not register `kExtract`.
+
+### Builtin Resources, Plugins & Messages
+
+| Kind      | Names                                              | Notes                                                         |
+| --------- | -------------------------------------------------- | ------------------------------------------------------------- |
+| Resources | `Time`, `FrameCount`, `Executor`                   | Added by their matching plugins.                              |
+| Plugins   | `TimePlugin`, `FrameCountPlugin`, `ExecutorPlugin` | Register builtin resources and maintenance systems as needed. |
+| Messages  | `AppExit`                                          | Registered automatically by `App`; write it to request exit.  |
 
 ### Sub-App Label Traits
 
@@ -50,11 +73,7 @@ Async and overlapping modes are mutually exclusive (compile-time enforced).
 
 ```cpp
 #include <helios/app/app.hpp>
-#include <helios/app/schedules.hpp>
-#include <helios/ecs/command/commands.hpp>
-#include <helios/ecs/message/writer.hpp>
-#include <helios/ecs/query/query.hpp>
-#include <helios/ecs/resource/param.hpp>
+#include <helios/ecs/ecs.hpp>
 
 struct Position { float x = 0, y = 0; };
 struct Velocity { float dx = 1, dy = 0; };
@@ -70,7 +89,7 @@ struct MoveEntities {
 
 struct RequestExit {
   void operator()(helios::ecs::MessageWriter<helios::app::AppExit> exit) {
-    exit.Write({.code = helios::app::ExitCode::kSuccess});
+    exit.Write(helios::app::AppExit::Success());
   }
 };
 
@@ -80,7 +99,6 @@ int main() {
   app.AddSystems(helios::app::kUpdate, MoveEntities{}, RequestExit{})
       .Sequence();
   app.InsertResources(/* resources... */);
-  app.AddMessages<helios::app::AppExit>();
 
   return static_cast<int>(app.Run());
 }

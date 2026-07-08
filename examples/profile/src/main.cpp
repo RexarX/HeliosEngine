@@ -1,10 +1,7 @@
-#include <helios/app/application.hpp>
-#include <helios/app/schedules.hpp>
-#include <helios/cstring_view.hpp>
-#include <helios/ecs/message/writer.hpp>
-#include <helios/ecs/resource/param.hpp>
-#include <helios/log/logger.hpp>
-#include <helios/profile/backends/tracy.hpp>
+#include <helios/app/app.hpp>
+#include <helios/core/core.hpp>
+#include <helios/ecs/ecs.hpp>
+#include <helios/log/log.hpp>
 #include <helios/profile/profile.hpp>
 
 #include <cstddef>
@@ -14,7 +11,7 @@
 #include <source_location>
 #include <span>
 #include <string_view>
-#include <vector>
+#include <utility>
 
 namespace happ = helios::app;
 namespace hecs = helios::ecs;
@@ -22,10 +19,6 @@ namespace hlog = helios::log;
 namespace hprofile = helios::profile;
 
 namespace {
-
-struct FrameCount {
-  size_t count = 0;
-};
 
 class LoggingBackend final : public hprofile::Backend {
 public:
@@ -88,23 +81,16 @@ struct PhysicsCounter {
   size_t bodies = 0;
 };
 
-struct BumpFrame {
-  void operator()(hecs::Res<FrameCount> frames) const {
-    HELIOS_PROFILE_SCOPE_N("BumpFrame");
-    ++frames->count;
-    HELIOS_PROFILE_PLOT("frame_count", static_cast<double>(frames->count));
-  }
-};
-
 struct PreUpdateWork {
   void operator()() const { HELIOS_PROFILE_SCOPE_N("PreUpdateWork"); }
 };
 
 struct UpdateWork {
-  void operator()(hecs::Res<const FrameCount> frames) const {
+  void operator()(hecs::Res<const happ::FrameCount> frames) const {
     HELIOS_PROFILE_SCOPE_N("UpdateWork");
     HELIOS_PROFILE_MESSAGE("update tick");
     HELIOS_PROFILE_ZONE_VALUE(frames->count);
+    HELIOS_PROFILE_PLOT("frame_count", static_cast<double>(frames->count));
   }
 };
 
@@ -120,10 +106,10 @@ struct SimulatePhysics {
 };
 
 struct ExitAfterFrames {
-  void operator()(hecs::Res<const FrameCount> frames,
+  void operator()(hecs::Res<const happ::FrameCount> frames,
                   hecs::MessageWriter<happ::AppExit> exit_writer) const {
     if (frames->count >= 100) {
-      exit_writer.Write({.code = happ::ExitCode::kSuccess});
+      exit_writer.Write(happ::AppExit::Success());
     }
   }
 };
@@ -132,19 +118,17 @@ struct ExitAfterFrames {
 
 int main() {
   auto& profiler = hprofile::Profiler::Instance();
-  profiler.AddBackend<hprofile::TracyBackend>();
   profiler.AddBackend<LoggingBackend>();
   profiler.Finalize();
 
   HELIOS_PROFILE_SET_THREAD_NAME("profile_example_main");
 
   happ::App app;
-  app.InsertResources(FrameCount{});
-  app.AddSystem(happ::kFirst, BumpFrame{});
+  app.AddPlugins(happ::FrameCountPlugin{});
   app.AddSystem(happ::kPreUpdate, PreUpdateWork{});
   app.AddSystem(happ::kUpdate, UpdateWork{});
   app.AddSystem(happ::kPostUpdate, PostUpdateWork{});
-  app.AddSystem(happ::kLast, ExitAfterFrames{});
+  app.AddSystem(happ::kPostUpdate, ExitAfterFrames{});
 
   auto physics = happ::SubApp::From(PhysicsLabel{});
   physics.InsertResources(PhysicsCounter{});

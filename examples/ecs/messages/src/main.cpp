@@ -1,26 +1,17 @@
-#include <helios/app/application.hpp>
-#include <helios/app/schedules.hpp>
-#include <helios/ecs/message/async_reader.hpp>
-#include <helios/ecs/message/message.hpp>
-#include <helios/ecs/message/reader.hpp>
-#include <helios/ecs/message/writer.hpp>
-#include <helios/ecs/resource/param.hpp>
-#include <helios/log/logger.hpp>
+#include <helios/app/app.hpp>
+#include <helios/ecs/ecs.hpp>
+#include <helios/log/log.hpp>
 
 #include <chrono>
-#include <cstddef>
 #include <string>
 #include <thread>
+#include <utility>
 
 namespace happ = helios::app;
 namespace hecs = helios::ecs;
 namespace hlog = helios::log;
 
 namespace {
-
-struct FrameCount {
-  size_t count = 0;
-};
 
 struct ChatMessage {
   std::string text;
@@ -31,15 +22,11 @@ struct AsyncPing {
   int id = 0;
 };
 
-struct BumpFrame {
-  void operator()(hecs::Res<FrameCount> frames) const { ++frames->count; }
-};
-
 struct WriteRegularMessage {
-  void operator()(hecs::Res<const FrameCount> frames,
+  void operator()(hecs::Res<const happ::FrameCount> frames,
                   hecs::MessageWriter<ChatMessage> writer) const {
-    if (frames->count == 1) {
-      writer.Write(ChatMessage{.text = "hello from frame 1"});
+    if (frames->count == 0) {
+      writer.Write(ChatMessage{.text = "hello from frame 0"});
       hlog::Info("messages: wrote regular ChatMessage");
     }
   }
@@ -62,10 +49,10 @@ struct ReadAsyncMessage {
 };
 
 struct ExitAfterFrames {
-  void operator()(hecs::Res<const FrameCount> frames,
+  void operator()(hecs::Res<const happ::FrameCount> frames,
                   hecs::MessageWriter<happ::AppExit> exit_writer) const {
     if (frames->count >= 4) {
-      exit_writer.Write({.code = happ::ExitCode::kSuccess});
+      exit_writer.Write(happ::AppExit::Success());
     }
   }
 };
@@ -74,12 +61,11 @@ struct ExitAfterFrames {
 
 int main() {
   happ::App app;
+  app.AddPlugins(happ::FrameCountPlugin{});
   app.AddMessages<ChatMessage, AsyncPing>();
-  app.InsertResources(FrameCount{});
-  app.AddSystem(happ::kFirst, BumpFrame{});
   app.AddSystem(happ::kPreUpdate, WriteRegularMessage{});
   app.AddSystems(happ::kUpdate, ReadRegularMessage{}, ReadAsyncMessage{});
-  app.AddSystem(happ::kLast, ExitAfterFrames{});
+  app.AddSystem(happ::kPostUpdate, ExitAfterFrames{});
 
   std::thread async_writer([&app]() {
     auto writer = app.GetWorld().WriteAsyncMessages<AsyncPing>();

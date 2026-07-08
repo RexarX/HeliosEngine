@@ -1,12 +1,8 @@
-#include <helios/app/application.hpp>
-#include <helios/app/schedules.hpp>
-#include <helios/ecs/entity/entity.hpp>
-#include <helios/ecs/message/writer.hpp>
-#include <helios/ecs/resource/param.hpp>
-#include <helios/ecs/world.hpp>
-#include <helios/log/logger.hpp>
+#include <helios/app/app.hpp>
+#include <helios/ecs/ecs.hpp>
+#include <helios/log/log.hpp>
 
-#include <cstddef>
+#include <utility>
 
 namespace happ = helios::app;
 namespace hecs = helios::ecs;
@@ -14,19 +10,11 @@ namespace hlog = helios::log;
 
 namespace {
 
-struct FrameCount {
-  size_t count = 0;
-};
-
-struct BumpFrame {
-  void operator()(hecs::Res<FrameCount> frames) const { ++frames->count; }
-};
-
 struct ExitAfterFrames {
-  void operator()(hecs::Res<const FrameCount> frames,
+  void operator()(hecs::Res<const happ::FrameCount> frames,
                   hecs::MessageWriter<happ::AppExit> exit_writer) const {
     if (frames->count >= 3) {
-      exit_writer.Write({.code = happ::ExitCode::kSuccess});
+      exit_writer.Write(happ::AppExit::Success());
     }
   }
 };
@@ -57,11 +45,10 @@ void DemonstrateEntities(hecs::World& world) {
 
 int main() {
   happ::App app;
+  app.AddPlugins(happ::FrameCountPlugin{});
   DemonstrateEntities(app.GetWorld());
 
-  app.InsertResources(FrameCount{});
-  app.AddSystem(happ::kFirst, BumpFrame{});
-  app.AddSystem(happ::kLast, ExitAfterFrames{});
+  app.AddSystem(happ::kPostUpdate, ExitAfterFrames{});
 
   const auto code = app.Run();
   return std::to_underlying(code);

@@ -53,6 +53,7 @@ public:
    * subflow.
    */
   void Join();
+
   /**
    * @brief Specifies whether to keep the sub task graph after it is joined.
    * @details By default, a sub task graph is destroyed after being joined.
@@ -111,7 +112,7 @@ public:
    * @tparam R Range type containing Task objects
    * @param tasks Range of tasks to linearize (first->second->third->...)
    */
-  template <std::ranges::range R>
+  template <std::ranges::input_range R>
     requires std::same_as<std::ranges::range_value_t<R>, Task>
   void Linearize(const R& tasks);
 
@@ -124,7 +125,7 @@ public:
    * @param callable Function to apply to each element
    * @return Task handle for the parallel operation
    */
-  template <std::ranges::range R,
+  template <std::ranges::input_range R,
             std::invocable<std::ranges::range_reference_t<R>> C>
   Task ForEach(const R& range, C&& callable) {
     return Task(subflow_.for_each(std::ranges::begin(range),
@@ -162,7 +163,7 @@ public:
    * @return Task handle for the parallel operation
    */
   template <
-      std::ranges::range InputRange, std::ranges::range OutputRange,
+      std::ranges::input_range InputRange, std::ranges::input_range OutputRange,
       std::invocable<std::ranges::range_reference_t<InputRange>> TransformFunc>
   Task Transform(const InputRange& input_range, OutputRange& output_range,
                  TransformFunc&& transform_func) {
@@ -184,7 +185,7 @@ public:
    * @param binary_op Binary function to combine elements
    * @return Task handle for the parallel operation
    */
-  template <std::ranges::range R, typename T, typename BinaryOp>
+  template <std::ranges::input_range R, typename T, typename BinaryOp>
     requires std::invocable<BinaryOp, T, std::ranges::range_reference_t<R>>
   Task Reduce(const R& range, T& init, BinaryOp&& binary_op) {
     return Task(subflow_.reduce(std::ranges::begin(range),
@@ -497,7 +498,7 @@ public:
    * @param dependencies Tasks that must complete before this task runs
    * @return Pair containing AsyncTask handle and Future for the result
    */
-  template <std::invocable C, std::ranges::range Dependencies>
+  template <std::invocable C, std::ranges::input_range Dependencies>
     requires std::same_as<std::ranges::range_value_t<Dependencies>, AsyncTask>
   auto DependentAsync(C&& callable, const Dependencies& dependencies)
       -> std::pair<AsyncTask, std::future<std::invoke_result_t<C>>>;
@@ -513,17 +514,10 @@ public:
    * @param dependencies Tasks that must complete before this task runs
    * @return AsyncTask handle
    */
-  template <std::invocable C, std::ranges::range Dependencies>
+  template <std::invocable C, std::ranges::input_range Dependencies>
     requires std::same_as<std::ranges::range_value_t<Dependencies>, AsyncTask>
   AsyncTask SilentDependentAsync(C&& callable,
                                  const Dependencies& dependencies);
-
-  /**
-   * @brief Blocks until all submitted tasks complete.
-   * @details Waits for all taskflows and async tasks to finish.
-   * @note Thread-safe.
-   */
-  void WaitForAll() { subflow_.executor().wait_for_all(); }
 
   /**
    * @brief Runs a task graph cooperatively and waits until it completes using
@@ -625,7 +619,7 @@ inline Task SubTaskGraph::EmplaceTask(C&& callable) {
       }));
 }
 
-template <std::ranges::range R>
+template <std::ranges::input_range R>
   requires std::same_as<std::ranges::range_value_t<R>, Task>
 inline void SubTaskGraph::Linearize(const R& tasks) {
   HELIOS_ASYNC_PROFILE_SCOPE_N("helios::async::SubTaskGraph::Linearize");
@@ -654,7 +648,7 @@ inline Task SubTaskGraph::Sort(R& range, Compare&& comparator) {
   }
 }
 
-template <std::invocable C, std::ranges::range Dependencies>
+template <std::invocable C, std::ranges::input_range Dependencies>
   requires std::same_as<std::ranges::range_value_t<Dependencies>, AsyncTask>
 inline auto SubTaskGraph::DependentAsync(C&& callable,
                                          const Dependencies& dependencies)
@@ -673,7 +667,7 @@ inline auto SubTaskGraph::DependentAsync(C&& callable,
   return std::make_pair(AsyncTask(std::move(task)), std::move(future));
 }
 
-template <std::invocable C, std::ranges::range Dependencies>
+template <std::invocable C, std::ranges::input_range Dependencies>
   requires std::same_as<std::ranges::range_value_t<Dependencies>, AsyncTask>
 inline AsyncTask SubTaskGraph::SilentDependentAsync(
     C&& callable, const Dependencies& dependencies) {
