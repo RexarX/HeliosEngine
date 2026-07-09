@@ -2,6 +2,7 @@
 #include <helios/core/core.hpp>
 #include <helios/ecs/ecs.hpp>
 #include <helios/log/log.hpp>
+#include <helios/profile/backends/tracy.hpp>
 #include <helios/profile/profile.hpp>
 
 #include <cstddef>
@@ -20,10 +21,10 @@ namespace hprofile = helios::profile;
 
 namespace {
 
+// This backend keeps profiling enabled without requiring an external viewer.
+// It ignores zone storage and forwards profile messages to the normal logger.
 class LoggingBackend final : public hprofile::Backend {
 public:
-  [[nodiscard]] size_t ZoneStorageSize() const noexcept override { return 0; }
-
   void BeginZone(const hprofile::ZoneSpec& /*spec*/,
                  std::span<std::byte> /*storage*/) noexcept override {}
 
@@ -70,6 +71,8 @@ public:
   void MemoryDiscard(helios::CStringView /*name*/,
                      int /*depth*/) noexcept override {}
 
+  [[nodiscard]] size_t ZoneStorageSize() const noexcept override { return 0; }
+
   [[nodiscard]] std::string_view Name() const noexcept override {
     return "logging";
   }
@@ -82,12 +85,14 @@ struct PhysicsCounter {
 };
 
 struct PreUpdateWork {
+  // Profile scopes measure the lifetime of the current C++ scope.
   void operator()() const { HELIOS_PROFILE_SCOPE_N("PreUpdateWork"); }
 };
 
 struct UpdateWork {
   void operator()(hecs::Res<const happ::FrameCount> frames) const {
     HELIOS_PROFILE_SCOPE_N("UpdateWork");
+    // Messages, values, and plots annotate the current backend stream.
     HELIOS_PROFILE_MESSAGE("update tick");
     HELIOS_PROFILE_ZONE_VALUE(frames->count);
     HELIOS_PROFILE_PLOT("frame_count", static_cast<double>(frames->count));
@@ -118,18 +123,29 @@ struct ExitAfterFrames {
 
 int main() {
   auto& profiler = hprofile::Profiler::Instance();
+
+  // Backends must be registered before Finalize. After that, profiling macros
+  // can dispatch events without mutating backend configuration.
   profiler.AddBackend<LoggingBackend>();
+
+  // Profile module provides a Tracy backend that can be used to visualize
+  // profiling data in the Tracy profiler application. This backend is optional
+  // and can be omitted if you don't want to use Tracy.
+  profiler.AddBackend<hprofile::TracyBackend>();
   profiler.Finalize();
 
   HELIOS_PROFILE_SET_THREAD_NAME("profile_example_main");
 
   happ::App app;
   app.AddPlugins(happ::FrameCountPlugin{});
+
+  // The app schedules profile-marked work across the normal frame stages.
   app.AddSystem(happ::kPreUpdate, PreUpdateWork{});
   app.AddSystem(happ::kUpdate, UpdateWork{});
   app.AddSystem(happ::kPostUpdate, PostUpdateWork{});
   app.AddSystem(happ::kPostUpdate, ExitAfterFrames{});
 
+  // Sub-app work is profiled through the same global profiler instance.
   auto physics = happ::SubApp::From(PhysicsLabel{});
   physics.InsertResources(PhysicsCounter{});
   physics.AddSystem(happ::kUpdate, SimulatePhysics{});

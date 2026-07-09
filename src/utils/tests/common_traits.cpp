@@ -34,6 +34,9 @@ struct TestFunctor {
   void operator()() const {}
 };
 
+void TestFreeFunction() {}
+void TestNoexceptFreeFunction() noexcept {}
+
 struct ValidClock {
   using rep = int64_t;
   using period = std::nano;
@@ -250,6 +253,27 @@ TEST_SUITE("helios::utils::FunctorTrait") {
       constexpr auto lambda = []() {};
       CHECK_NE(LambdaTrait<TestFunctor>, FunctorTrait<TestFunctor>);
       CHECK_NE(LambdaTrait<decltype(lambda)>, FunctorTrait<decltype(lambda)>);
+    }
+  }
+}
+
+TEST_SUITE("helios::utils::FreeFunctionTrait") {
+  TEST_CASE("utils::FreeFunctionTrait: concept validation") {
+    SUBCASE("Free function pointers satisfy FreeFunctionTrait") {
+      CHECK(FreeFunctionTrait<decltype(&TestFreeFunction)>);
+      CHECK(FreeFunctionTrait<decltype(&TestNoexceptFreeFunction)>);
+    }
+
+    SUBCASE("Non-function-pointer callables do not satisfy FreeFunctionTrait") {
+      constexpr auto lambda = []() {};
+
+      CHECK_FALSE(FreeFunctionTrait<TestFunctor>);
+      CHECK_FALSE(FreeFunctionTrait<decltype(lambda)>);
+    }
+
+    SUBCASE("Non-callable types do not satisfy FreeFunctionTrait") {
+      CHECK_FALSE(FreeFunctionTrait<int>);
+      CHECK_FALSE(FreeFunctionTrait<void*>);
     }
   }
 }

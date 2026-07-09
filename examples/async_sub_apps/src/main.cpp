@@ -14,6 +14,8 @@ namespace hlog = helios::log;
 namespace {
 
 struct AsyncLabel {
+  // Async sub-apps run on their own worker loop instead of being stepped once
+  // per main-frame update.
   static constexpr bool kAsync = true;
 };
 
@@ -29,6 +31,7 @@ struct LogMain {
 
 struct AsyncTick {
   void operator()(hecs::Res<AsyncCounter> counter) const {
+    // The sleep makes the background cadence visible beside the main app logs.
     ++counter->ticks;
     hlog::Info("async_sub_apps: async tick {}", counter->ticks);
     std::this_thread::sleep_for(std::chrono::milliseconds(30));
@@ -36,6 +39,8 @@ struct AsyncTick {
 };
 
 void MirrorMain(const hecs::World& main, hecs::World& sub) {
+  // Extraction still copies data from main to sub, but the async mode controls
+  // when the sub-app consumes that snapshot.
   sub.InsertResources(
       AsyncCounter{.ticks = main.ReadResource<happ::FrameCount>().count});
 }
@@ -58,6 +63,8 @@ int main() {
   app.AddSystem(happ::kUpdate, LogMain{});
   app.AddSystem(happ::kPostUpdate, ExitAfterFrames{});
 
+  // The sub-app starts with its own world state, then MirrorMain refreshes it
+  // from the main world as the app runs.
   auto async_sub = happ::SubApp::From(AsyncLabel{});
   async_sub.SetExtractFunction(MirrorMain);
   async_sub.InsertResources(AsyncCounter{});

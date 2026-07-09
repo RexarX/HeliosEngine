@@ -2,6 +2,7 @@
 #include <helios/ecs/ecs.hpp>
 #include <helios/log/log.hpp>
 
+#include <optional>
 #include <utility>
 
 namespace happ = helios::app;
@@ -10,6 +11,8 @@ namespace hlog = helios::log;
 
 namespace {
 
+// Regular resources live in the World. Any system that asks for
+// `Res<GameConfig>` observes the same shared object.
 struct GameConfig {
   void OnInsert(hecs::World& /*world*/) {
     hlog::Info("resources: GameConfig::OnInsert");
@@ -22,9 +25,22 @@ struct GameConfig {
   int difficulty = 1;
 };
 
+// Thread-safe resources can be requested through `AsyncRes<T>`. The parameter
+// works like `Res<T>`, but documents that parallel access is intended.
 struct ThreadSafeCounter {
   static constexpr bool kThreadSafe = true;
   int value = 0;
+};
+
+// Local resources are stored in the system's local data instead of the World.
+// Current schedule execution clears that data around each run, so this is best
+// used for per-run scratch state here.
+struct LocalScratch {
+  int updates_this_run = 0;
+};
+
+struct DebugOverlay {
+  bool visible = false;
 };
 
 struct UseRegularResource {
@@ -33,8 +49,6 @@ struct UseRegularResource {
     hlog::Info("resources: regular difficulty={}", config->difficulty);
   }
 };
-
-// `AsyncRes` is no different from `Res`, used for more explicitness
 
 struct IncrementThreadSafe {
   void operator()(hecs::AsyncRes<ThreadSafeCounter> counter) const {
@@ -46,6 +60,47 @@ struct IncrementThreadSafe {
 struct ReadThreadSafeResource {
   void operator()(hecs::AsyncRes<const ThreadSafeCounter> counter) const {
     hlog::Info("resources: thread-safe counter={}", counter->value);
+  }
+};
+
+struct ReadOptionalResources {
+  void operator()(std::optional<hecs::Res<const GameConfig>> config,
+                  std::optional<hecs::Res<const DebugOverlay>> overlay) const {
+    // Optional world resources let a system run whether the resource exists or
+    // not. GameConfig exists, but DebugOverlay is intentionally not inserted.
+    if (config.has_value()) {
+      hlog::Info("resources: optional config difficulty={}",
+                 (*config)->difficulty);
+    }
+
+    if (!overlay.has_value()) {
+      hlog::Info("resources: optional debug overlay is absent");
+    }
+  }
+};
+
+struct UseLocalScratch {
+  void operator()(hecs::Local<LocalScratch> scratch) const {
+    // The local resource manager starts empty for this run. Initialize the
+    // scratch value before reading it.
+    if (!scratch.Resources().Has<LocalScratch>()) {
+      scratch.Insert(LocalScratch{});
+    }
+
+    ++scratch->updates_this_run;
+    hlog::Info("resources: local scratch updates={}",
+               scratch->updates_this_run);
+  }
+};
+
+struct ReadOptionalLocalScratch {
+  void operator()(std::optional<hecs::Local<LocalScratch>> scratch) const {
+    // Optional Local behaves like optional Res, but it checks this system's own
+    // local resource manager. This system never creates LocalScratch, so the
+    // optional is empty.
+    if (!scratch.has_value()) {
+      hlog::Info("resources: optional local scratch is absent");
+    }
   }
 };
 
@@ -68,11 +123,19 @@ struct ExitAfterFrames {
 
 int main() {
   happ::App app;
+
   app.AddPlugins(happ::FrameCountPlugin{});
+
+  // Insert world resources before any systems try to access them.
   app.InsertResources(GameConfig{}, ThreadSafeCounter{});
-  app.AddSystems(happ::kUpdate, UseRegularResource{}, IncrementThreadSafe{});
-  app.AddSystem(happ::kPostUpdate, ReadThreadSafeResource{});
-  app.AddSystem(happ::kPostUpdate, ExitAfterFrames{});
+
+  app.AddSystems(happ::kUpdate, UseRegularResource{}, IncrementThreadSafe{},
+                 UseLocalScratch{}, ReadOptionalLocalScratch{});
+
+  app.AddSystems(happ::kPostUpdate, ReadThreadSafeResource{},
+                 ReadOptionalResources{}, ExitAfterFrames{});
+
+  // Removing the resource on shutdown triggers GameConfig::OnRemove.
   app.AddSystem(happ::kShutdown, RemoveConfigOnShutdown{});
 
   const auto code = app.Run();

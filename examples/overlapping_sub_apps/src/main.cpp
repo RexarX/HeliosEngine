@@ -14,6 +14,8 @@ namespace hlog = helios::log;
 namespace {
 
 struct OverlapLabel {
+  // Overlapping sub-apps may still be running when the next main frame starts.
+  // The max count caps how many pending updates can accumulate.
   static constexpr bool kAllowOverlappingUpdates = true;
   static constexpr size_t kMaxOverlappingUpdates = 1;
 };
@@ -35,6 +37,8 @@ struct BumpMain {
 
 struct SlowSubUpdate {
   void operator()(hecs::Res<SubTick> tick) const {
+    // Sleeping exaggerates a long-running worker so overlap is visible in the
+    // log output.
     hlog::Info("overlapping_sub_apps: sub update start gen={}",
                tick->generation);
     std::this_thread::sleep_for(std::chrono::milliseconds(80));
@@ -44,6 +48,8 @@ struct SlowSubUpdate {
 };
 
 void ExtractSub(const hecs::World& main, hecs::World& sub) {
+  // Each submitted worker update receives a snapshot copied from the main
+  // world at extraction time.
   hlog::Info("overlapping_sub_apps: extract main={}",
              main.ReadResource<MainTick>().value);
   sub.InsertResources(
@@ -65,6 +71,8 @@ struct ExitAfterFrames {
 int main() {
   happ::App app;
   app.AddPlugins(happ::FrameCountPlugin{});
+
+  // The main app keeps ticking even while slow sub-app work is in flight.
   app.InsertResources(MainTick{});
   app.AddSystem(happ::kUpdate, BumpMain{});
   app.AddSystem(happ::kPostUpdate, ExitAfterFrames{});

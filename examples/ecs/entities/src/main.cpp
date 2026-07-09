@@ -20,24 +20,29 @@ struct ExitAfterFrames {
 };
 
 void DemonstrateEntities(hecs::World& world) {
+  // CreateEntity mutates the world immediately and returns a live handle.
   const hecs::Entity immediate = world.CreateEntity();
-  hlog::Info("entities: CreateEntity -> index={} gen={}", immediate.Index(),
+  hlog::Info("entities: CreateEntity -> entity={} gen={}", immediate,
              immediate.Generation());
 
+  // ReserveEntity only allocates an id. The entity becomes real on Flush.
   const hecs::Entity reserved = world.ReserveEntity();
-  hlog::Info("entities: ReserveEntity -> index={} (pending flush)",
-             reserved.Index());
+  hlog::Info("entities: ReserveEntity -> entity={} (pending flush)", reserved);
 
+  // Flush publishes reserved entities and runs queued world commands.
   world.Flush();
   hlog::Info("entities: after Flush reserved exists={}",
              world.Exists(reserved));
 
+  // Destroying bumps the generation, so old handles stop validating.
   world.DestroyEntity(immediate);
   hlog::Info("entities: destroyed immediate, stale handle exists={}",
              world.Exists(immediate));
 
+  // The index can be recycled, but the generation distinguishes the new entity
+  // from stale handles that used the same slot.
   const hecs::Entity recycled = world.CreateEntity();
-  hlog::Info("entities: recycled index={} gen={}", recycled.Index(),
+  hlog::Info("entities: recycled entity={} gen={}", recycled,
              recycled.Generation());
 }
 
@@ -46,6 +51,9 @@ void DemonstrateEntities(hecs::World& world) {
 int main() {
   happ::App app;
   app.AddPlugins(happ::FrameCountPlugin{});
+
+  // This example uses the immediate World API directly before the app runner
+  // starts, where no systems are executing concurrently.
   DemonstrateEntities(app.GetWorld());
 
   app.AddSystem(happ::kPostUpdate, ExitAfterFrames{});

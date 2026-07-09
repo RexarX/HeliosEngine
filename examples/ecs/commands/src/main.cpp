@@ -10,6 +10,8 @@ namespace hlog = helios::log;
 
 namespace {
 
+// Components are plain data. Commands decide when entities receive or lose
+// them, without mutating the world during parallel system execution.
 struct Health {
   int hp = 3;
 };
@@ -20,13 +22,14 @@ struct ReinforcementsCalled {
   int count = 0;
 };
 
+// Custom commands run later with exclusive World access, so they may use
+// the immediate World API safely.
 struct SpawnReinforcementCommand {
   void Execute(hecs::World& world) const {
     const hecs::Entity entity = world.CreateEntity();
     world.AddComponents(entity, Health{.hp = 5}, Spawned{});
     world.WriteResource<ReinforcementsCalled>().count += 1;
-    hlog::Info("commands: custom command spawned reinforcement {}",
-               entity.Index());
+    hlog::Info("commands: custom command spawned reinforcement {}", entity);
   }
 };
 
@@ -34,6 +37,8 @@ struct SpawnUnit {
   void operator()(hecs::Res<const happ::FrameCount> frames,
                   hecs::Commands commands) const {
     if (frames->count == 0) {
+      // Spawn reserves the entity work now; AddComponents is applied when the
+      // schedule flushes its deferred command queues.
       hlog::Info("commands: spawning entity (deferred)");
       commands.Spawn().AddComponents(Health{.hp = 3}, Spawned{});
     }
@@ -44,6 +49,8 @@ struct EnqueueReinforcement {
   void operator()(hecs::Res<const happ::FrameCount> frames,
                   hecs::Commands commands) const {
     if (frames->count == 1) {
+      // Enqueue accepts user-defined command objects with an Execute(World&)
+      // method, which is useful for batching a small world edit.
       hlog::Info("commands: enqueuing custom reinforcement command");
       commands.Enqueue(SpawnReinforcementCommand{});
     }
@@ -54,9 +61,11 @@ struct DamageUnits {
   void operator()(hecs::Query<Health&> units, hecs::Commands commands) const {
     units.ForEachWithEntity([&commands](hecs::Entity entity, Health& health) {
       --health.hp;
-      hlog::Info("commands: entity {} hp={}", entity.Index(), health.hp);
+      hlog::Info("commands: entity {} hp={}", entity, health.hp);
       if (health.hp <= 0) {
-        hlog::Info("commands: queue destroy for {}", entity.Index());
+        // Entity commands target an existing entity and keep destruction
+        // deferred until the current schedule has finished.
+        hlog::Info("commands: queue destroy for {}", entity);
         commands.Entity(entity).Destroy();
       }
     });
@@ -85,6 +94,9 @@ struct ExitAfterFrames {
 int main() {
   happ::App app;
   app.AddPlugins(happ::FrameCountPlugin{});
+
+  // Commands issued in PreUpdate are applied before the Update schedule runs,
+  // so DamageUnits can see the entities spawned earlier in the frame.
   app.AddSystems(happ::kPreUpdate, SpawnUnit{}, EnqueueReinforcement{});
   app.AddSystem(happ::kUpdate, DamageUnits{});
   app.AddSystem(happ::kPostUpdate, LogRemaining{});

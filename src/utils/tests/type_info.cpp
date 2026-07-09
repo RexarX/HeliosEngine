@@ -6,6 +6,22 @@
 
 using namespace helios::utils;
 
+void TypeInfoGlobalFunctionProbe() {}
+void TypeInfoGlobalFunctionProbeNoexcept() noexcept {}
+
+namespace helios::utils::type_info_test {
+
+void TypeInfoNamespacedFunctionProbe() {}
+
+namespace overloaded {
+
+void TypeInfoOverloadedFunctionProbe() {}
+void TypeInfoOverloadedFunctionProbe(int /*value*/) {}
+
+}  // namespace overloaded
+
+}  // namespace helios::utils::type_info_test
+
 namespace {
 
 struct Foo {};
@@ -485,6 +501,64 @@ TEST_SUITE("helios::utils::QualifiedTypeNameOf") {
       constexpr std::string_view name = QualifiedTypeNameOf(outer::Baz{});
       CHECK_NE(name.find("Baz"), std::string_view::npos);
       CHECK_NE(name.find("outer"), std::string_view::npos);
+    }
+  }
+}
+
+TEST_SUITE("helios::utils::FunctionNameOf") {
+  TEST_CASE("utils::FunctionNameOf (template)") {
+    SUBCASE("Returns unqualified name for global function") {
+      constexpr std::string_view name =
+          FunctionNameOf<TypeInfoGlobalFunctionProbe>();
+      CHECK_EQ(name, "TypeInfoGlobalFunctionProbe");
+    }
+
+    SUBCASE("Returns unqualified name for noexcept function") {
+      constexpr std::string_view name =
+          FunctionNameOf<TypeInfoGlobalFunctionProbeNoexcept>();
+      CHECK_EQ(name, "TypeInfoGlobalFunctionProbeNoexcept");
+    }
+
+    SUBCASE("Returns unqualified name for namespaced function") {
+      constexpr std::string_view name =
+          FunctionNameOf<type_info_test::TypeInfoNamespacedFunctionProbe>();
+      CHECK_EQ(name, "TypeInfoNamespacedFunctionProbe");
+    }
+
+    SUBCASE("Returns unqualified name for overload selected by cast") {
+      constexpr std::string_view name = FunctionNameOf<static_cast<void (*)()>(
+          &type_info_test::overloaded::TypeInfoOverloadedFunctionProbe)>();
+      CHECK_EQ(name, "TypeInfoOverloadedFunctionProbe");
+    }
+  }
+}
+
+TEST_SUITE("helios::utils::QualifiedFunctionNameOf") {
+  TEST_CASE("utils::QualifiedFunctionNameOf (template)") {
+    SUBCASE("Returns global function name") {
+      constexpr std::string_view name =
+          QualifiedFunctionNameOf<TypeInfoGlobalFunctionProbe>();
+      CHECK_EQ(name, "TypeInfoGlobalFunctionProbe");
+    }
+
+    SUBCASE("Contains full qualifier for namespaced function") {
+      constexpr std::string_view name = QualifiedFunctionNameOf<
+          type_info_test::TypeInfoNamespacedFunctionProbe>();
+
+      CHECK_NE(name.find("helios"), std::string_view::npos);
+      CHECK_NE(name.find("utils"), std::string_view::npos);
+      CHECK_NE(name.find("type_info_test"), std::string_view::npos);
+      CHECK_NE(name.find("TypeInfoNamespacedFunctionProbe"),
+               std::string_view::npos);
+    }
+
+    SUBCASE("Returns selected overload without argument signature") {
+      constexpr std::string_view name =
+          QualifiedFunctionNameOf<static_cast<void (*)()>(
+              &type_info_test::overloaded::TypeInfoOverloadedFunctionProbe)>();
+      CHECK_EQ(name,
+               "helios::utils::type_info_test::overloaded::"
+               "TypeInfoOverloadedFunctionProbe");
     }
   }
 }

@@ -75,6 +75,12 @@ concept LambdaTrait = details::IsLambdaType<T>();
 template <typename T>
 concept FunctorTrait = std::is_class_v<T> && !LambdaTrait<T>;
 
+/// @brief Concept for free function pointer types.
+template <typename T>
+concept FreeFunctionTrait =
+    std::is_pointer_v<std::remove_cvref_t<T>> &&
+    std::is_function_v<std::remove_pointer_t<std::remove_cvref_t<T>>>;
+
 /**
  * @brief Concept that checks if all types in a pack are unique (after removing
  * cv/ref qualifiers).

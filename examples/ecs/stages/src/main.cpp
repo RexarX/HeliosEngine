@@ -8,6 +8,8 @@ namespace hlog = helios::log;
 
 namespace {
 
+// Stages are coarser than schedules: a stage owns one or more schedules and can
+// be run explicitly.
 struct Counter {
   int value = 0;
 };
@@ -36,14 +38,19 @@ int main() {
   happ::App app;
   app.InsertResources(Counter{});
 
+  // This example uses the scheduler directly to show manual stage construction.
   auto& scheduler = app.GetMainSubApp().GetScheduler();
+
+  // Stage ordering is separate from schedule ordering inside a stage.
   scheduler.AddStage(FirstStage{});
   scheduler.AddStage(SecondStage{});
   scheduler.OrderStage(SecondStage{}).After(FirstStage{});
 
+  // Each schedule is placed into the stage it should run inside.
   scheduler.Add(FirstSchedule{}, hecs::Schedule{}).InStage(FirstStage{});
   scheduler.Add(SecondSchedule{}, hecs::Schedule{}).InStage(SecondStage{});
 
+  // Within a schedule, system handles can express before/after dependencies.
   const auto increment = scheduler.In(FirstSchedule{}).Add(Increment{});
   scheduler.In(FirstSchedule{})
       .Add(LogStage{.name = "FirstStage"})
@@ -53,9 +60,11 @@ int main() {
       .Add(LogStage{.name = "SecondStage"})
       .After(increment_second);
 
+  // Initialize prepares app/plugin state without entering the default runner.
   app.Initialize();
 
   auto& world = app.GetWorld();
+  // Running stages manually is useful for tests or custom engine loops.
   hlog::Info("stages: running FirstStage");
   scheduler.RunStage(FirstStage{}, world);
   hlog::Info("stages: running SecondStage");

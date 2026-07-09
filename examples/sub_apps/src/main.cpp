@@ -10,6 +10,8 @@ namespace hlog = helios::log;
 
 namespace {
 
+// The main app and the worker sub-app have separate worlds. The extract step
+// copies just the state the worker needs.
 struct MainCounter {
   int value = 0;
 };
@@ -35,6 +37,8 @@ struct BumpSub {
 };
 
 void ExtractToSub(const hecs::World& main, hecs::World& sub) {
+  // Blocking sub-apps run extract, then update the sub world before the main
+  // frame continues.
   const int value = main.ReadResource<MainCounter>().value;
   hlog::Info("sub_apps: extract main={} -> sub", value);
   sub.InsertResources(SubCounter{.extracted = value});
@@ -55,14 +59,19 @@ struct ExitAfterFrames {
 int main() {
   happ::App app;
   app.AddPlugins(happ::FrameCountPlugin{});
+
+  // Main-world systems own the authoritative counter.
   app.InsertResources(MainCounter{});
   app.AddSystem(happ::kUpdate, BumpMain{});
   app.AddSystem(happ::kPostUpdate, ExitAfterFrames{});
 
+  // The label type identifies the sub-app and carries any mode settings.
   auto worker = happ::SubApp::From(WorkerLabel{});
   worker.SetExtractFunction(ExtractToSub);
   worker.InsertResources(SubCounter{});
   worker.AddSystem(happ::kUpdate, BumpSub{});
+
+  // InsertSubApp attaches the worker to the main app's frame lifecycle.
   app.InsertSubApp(WorkerLabel{}, std::move(worker));
 
   const auto code = app.Run();

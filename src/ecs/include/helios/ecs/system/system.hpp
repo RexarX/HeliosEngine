@@ -1,6 +1,7 @@
 #pragma once
 
 #include <helios/ecs/system/system_param.hpp>
+#include <helios/utils/common_traits.hpp>
 #include <helios/utils/hash.hpp>
 #include <helios/utils/type_info.hpp>
 
@@ -8,7 +9,9 @@
 #include <concepts>
 #include <cstddef>
 #include <string_view>
+#include <tuple>
 #include <type_traits>
+#include <utility>
 
 namespace helios::ecs {
 
@@ -71,6 +74,25 @@ struct MemberFnArgs<R(Args...) noexcept> {
   using ArgsTuple = std::tuple<Args...>;
 };
 
+/// @brief Extracts a system call argument tuple from a class call operator or
+/// function pointer.
+template <typename T, bool kHasCallOperator>
+struct SystemArgsTupleImpl {
+  using ArgsTuple = typename MemberFnArgs<std::remove_cvref_t<T>>::ArgsTuple;
+};
+
+template <typename T>
+struct SystemArgsTupleImpl<T, true> {
+  using ArgsTuple = typename MemberFnArgs<
+      decltype(&std::remove_cvref_t<T>::operator())>::ArgsTuple;
+};
+
+template <typename T>
+using SystemArgsTuple = typename SystemArgsTupleImpl<
+    T, std::is_class_v<std::remove_cvref_t<T>>&& requires {
+      &std::remove_cvref_t<T>::operator();
+    }>::ArgsTuple;
+
 template <typename F>
 concept HasValidSystemParams = requires {
   typename MemberFnArgs<F>::ArgsTuple;
@@ -95,7 +117,60 @@ template <typename T>
 concept HasSystemParamCallOperator =
     HasSystemParamCallOperatorHelper<T>::kValue;
 
+template <auto Fn, typename FnType>
+struct FreeFunctionSystemImpl;
+
+template <auto Fn, typename R, typename... Args>
+struct FreeFunctionSystemImpl<Fn, R(Args...)> {
+  static constexpr std::string_view kName =
+      utils::QualifiedFunctionNameOf<Fn>();
+
+  constexpr auto operator()(Args... args) const
+      noexcept(noexcept(Fn(std::forward<Args>(args)...))) -> R {
+    return Fn(std::forward<Args>(args)...);
+  }
+};
+
+template <auto Fn, typename R, typename... Args>
+struct FreeFunctionSystemImpl<Fn, R(Args...) noexcept> {
+  static constexpr std::string_view kName =
+      utils::QualifiedFunctionNameOf<Fn>();
+
+  constexpr auto operator()(Args... args) const noexcept -> R {
+    return Fn(std::forward<Args>(args)...);
+  }
+};
+
+template <auto Fn, typename R, typename... Args>
+struct FreeFunctionSystemImpl<Fn, R (*)(Args...)>
+    : FreeFunctionSystemImpl<Fn, R(Args...)> {};
+
+template <auto Fn, typename R, typename... Args>
+struct FreeFunctionSystemImpl<Fn, R (*)(Args...) noexcept>
+    : FreeFunctionSystemImpl<Fn, R(Args...) noexcept> {};
+
 }  // namespace details
+
+/**
+ * @brief Wraps a free function as an empty param-style system.
+ * @details Prefer the `kSystem<Fn>` variable template when registering free
+ * functions with schedules, run conditions, apps, or sub-apps. The wrapper is
+ * a unique type per function and exposes `kName` as the qualified free
+ * function name.
+ * @tparam Fn Free function pointer to invoke
+ */
+template <auto Fn>
+  requires utils::FreeFunctionTrait<decltype(Fn)>
+struct FreeFunctionSystem : details::FreeFunctionSystemImpl<Fn, decltype(Fn)> {
+};
+
+/**
+ * @brief Inline free function system wrapper instance.
+ * @tparam Fn Free function pointer to invoke
+ */
+template <auto Fn>
+  requires utils::FreeFunctionTrait<decltype(Fn)>
+inline constexpr FreeFunctionSystem<Fn> kSystem{};
 
 /**
  * @brief Concept for systems that declare all data access via parameter types.
@@ -120,9 +195,10 @@ template <typename T>
 concept LambdaSystemTrait =
     SystemTrait<T> && utils::LambdaTrait<std::remove_cvref_t<T>>;
 
-/// @brief Concept for system types that are not lambda closures.
+/// @brief Concept for named functor-like system objects.
 template <typename T>
-concept FunctorSystemTrait = SystemTrait<T> && !LambdaSystemTrait<T>;
+concept FunctorSystemTrait = SystemTrait<T> && !LambdaSystemTrait<T> &&
+                             std::is_class_v<std::remove_cvref_t<T>>;
 
 /**
  * @brief Concept for systems that declare all data access via parameter types.
@@ -172,7 +248,7 @@ struct SystemId {
    * @return System id
    */
   [[nodiscard]] static constexpr SystemId From(std::string_view name) noexcept {
-    return SystemId{.id = utils::Fnv1aHash(name)};
+    return {.id = utils::Fnv1aHash(name)};
   }
 
   /**
@@ -181,7 +257,7 @@ struct SystemId {
    * @return System id
    */
   [[nodiscard]] static constexpr SystemId From(SystemTypeIndex index) noexcept {
-    return SystemId{.id = index.Hash()};
+    return {.id = index.Hash()};
   }
 
   /**

@@ -203,6 +203,57 @@ TEST_SUITE("helios::ecs::SystemParamTraits") {
       CHECK(HasRegisterAccess<std::optional<Local<Camera>>>);
     }
 
+    SUBCASE("Local<T> Make returns a wrapper over system-local resources") {
+      World world;
+      SystemLocalData data = SystemLocalData::From();
+      AccessPolicy policy;
+
+      const Local<Camera> local =
+          SystemParamTraits<Local<Camera>>::Make(world, data, policy);
+      local.Insert(Camera{.fov = 75.0F});
+
+      CHECK_EQ(data.resource_manager.Get<Camera>().fov, 75.0F);
+    }
+
+    SUBCASE("Local<const T> Make reads system-local resources") {
+      World world;
+      SystemLocalData data = SystemLocalData::From();
+      AccessPolicy policy;
+      data.resource_manager.Insert(Camera{.fov = 80.0F});
+
+      const Local<const Camera> local =
+          SystemParamTraits<Local<const Camera>>::Make(world, data, policy);
+
+      CHECK_EQ(local->fov, 80.0F);
+    }
+
+    SUBCASE(
+        "std::optional<Local<T>> Make is empty when local resource is absent") {
+      World world;
+      SystemLocalData data = SystemLocalData::From();
+      AccessPolicy policy;
+
+      const auto local = SystemParamTraits<std::optional<Local<Camera>>>::Make(
+          world, data, policy);
+
+      CHECK_FALSE(local.has_value());
+    }
+
+    SUBCASE(
+        "std::optional<Local<T>> Make returns wrapper when resource exists") {
+      World world;
+      SystemLocalData data = SystemLocalData::From();
+      AccessPolicy policy;
+      data.resource_manager.Insert(Camera{.fov = 85.0F});
+
+      const auto local = SystemParamTraits<std::optional<Local<Camera>>>::Make(
+          world, data, policy);
+      REQUIRE(local.has_value());
+      local->Insert(Camera{.fov = 95.0F});
+
+      CHECK_EQ(data.resource_manager.Get<Camera>().fov, 95.0F);
+    }
+
     SUBCASE("Local<const T> RegisterAccess produces empty policy") {
       AccessPolicyBuilder builder;
       SystemParamTraits<Local<const Camera>>::RegisterAccess(builder);
