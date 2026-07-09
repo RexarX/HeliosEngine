@@ -83,6 +83,11 @@ var annotated_dup =
         ] ],
         [ "details", "namespacehelios_1_1ecs_1_1details.html", [
           [ "AsyncMessageStorage", "classhelios_1_1ecs_1_1details_1_1AsyncMessageStorage.html", "classhelios_1_1ecs_1_1details_1_1AsyncMessageStorage" ],
+          [ "FreeFunctionSystemImpl", "structhelios_1_1ecs_1_1details_1_1FreeFunctionSystemImpl.html", null ],
+          [ "FreeFunctionSystemImpl&lt; Fn, R(*)(Args...) noexcept &gt;", "structhelios_1_1ecs_1_1details_1_1FreeFunctionSystemImpl_3_01Fn_00_01R_07_5_08_07Args_8_8_8_08_01noexcept_01_4.html", null ],
+          [ "FreeFunctionSystemImpl&lt; Fn, R(*)(Args...)&gt;", "structhelios_1_1ecs_1_1details_1_1FreeFunctionSystemImpl_3_01Fn_00_01R_07_5_08_07Args_8_8_8_08_4.html", null ],
+          [ "FreeFunctionSystemImpl&lt; Fn, R(Args...) noexcept &gt;", "structhelios_1_1ecs_1_1details_1_1FreeFunctionSystemImpl_3_01Fn_00_01R_07Args_8_8_8_08_01noexcept_01_4.html", "structhelios_1_1ecs_1_1details_1_1FreeFunctionSystemImpl_3_01Fn_00_01R_07Args_8_8_8_08_01noexcept_01_4" ],
+          [ "FreeFunctionSystemImpl&lt; Fn, R(Args...)&gt;", "structhelios_1_1ecs_1_1details_1_1FreeFunctionSystemImpl_3_01Fn_00_01R_07Args_8_8_8_08_4.html", "structhelios_1_1ecs_1_1details_1_1FreeFunctionSystemImpl_3_01Fn_00_01R_07Args_8_8_8_08_4" ],
           [ "HasSystemParamCallOperatorHelper", "structhelios_1_1ecs_1_1details_1_1HasSystemParamCallOperatorHelper.html", "structhelios_1_1ecs_1_1details_1_1HasSystemParamCallOperatorHelper" ],
           [ "MemberFnArgs", "structhelios_1_1ecs_1_1details_1_1MemberFnArgs.html", null ],
           [ "MemberFnArgs&lt; R(*)(Args...) noexcept &gt;", "structhelios_1_1ecs_1_1details_1_1MemberFnArgs_3_01R_07_5_08_07Args_8_8_8_08_01noexcept_01_4.html", "structhelios_1_1ecs_1_1details_1_1MemberFnArgs_3_01R_07_5_08_07Args_8_8_8_08_01noexcept_01_4" ],
@@ -94,7 +99,9 @@ var annotated_dup =
           [ "MemberFnArgs&lt; R(C::*)(Args...) noexcept &gt;", "structhelios_1_1ecs_1_1details_1_1MemberFnArgs_3_01R_07C_1_1_5_08_07Args_8_8_8_08_01noexcept_01_4.html", "structhelios_1_1ecs_1_1details_1_1MemberFnArgs_3_01R_07C_1_1_5_08_07Args_8_8_8_08_01noexcept_01_4" ],
           [ "MemberFnArgs&lt; R(C::*)(Args...)&gt;", "structhelios_1_1ecs_1_1details_1_1MemberFnArgs_3_01R_07C_1_1_5_08_07Args_8_8_8_08_4.html", "structhelios_1_1ecs_1_1details_1_1MemberFnArgs_3_01R_07C_1_1_5_08_07Args_8_8_8_08_4" ],
           [ "RegisterQueryAccess", "structhelios_1_1ecs_1_1details_1_1RegisterQueryAccess.html", null ],
-          [ "RegisterQueryAccess&lt; std::tuple&lt; Cs... &gt; &gt;", "structhelios_1_1ecs_1_1details_1_1RegisterQueryAccess_3_01std_1_1tuple_3_01Cs_8_8_8_01_4_01_4.html", "structhelios_1_1ecs_1_1details_1_1RegisterQueryAccess_3_01std_1_1tuple_3_01Cs_8_8_8_01_4_01_4" ]
+          [ "RegisterQueryAccess&lt; std::tuple&lt; Cs... &gt; &gt;", "structhelios_1_1ecs_1_1details_1_1RegisterQueryAccess_3_01std_1_1tuple_3_01Cs_8_8_8_01_4_01_4.html", "structhelios_1_1ecs_1_1details_1_1RegisterQueryAccess_3_01std_1_1tuple_3_01Cs_8_8_8_01_4_01_4" ],
+          [ "SystemArgsTupleImpl", "structhelios_1_1ecs_1_1details_1_1SystemArgsTupleImpl.html", "structhelios_1_1ecs_1_1details_1_1SystemArgsTupleImpl" ],
+          [ "SystemArgsTupleImpl&lt; T, true &gt;", "structhelios_1_1ecs_1_1details_1_1SystemArgsTupleImpl_3_01T_00_01true_01_4.html", "structhelios_1_1ecs_1_1details_1_1SystemArgsTupleImpl_3_01T_00_01true_01_4" ]
         ] ],
         [ "AccessPolicy", "classhelios_1_1ecs_1_1AccessPolicy.html", "classhelios_1_1ecs_1_1AccessPolicy" ],
         [ "AccessPolicyBuilder", "classhelios_1_1ecs_1_1AccessPolicyBuilder.html", "classhelios_1_1ecs_1_1AccessPolicyBuilder" ],
@@ -138,6 +145,7 @@ var annotated_dup =
         [ "EntityDestroyedMsg", "classhelios_1_1ecs_1_1EntityDestroyedMsg.html", "classhelios_1_1ecs_1_1EntityDestroyedMsg" ],
         [ "EntityManager", "classhelios_1_1ecs_1_1EntityManager.html", "classhelios_1_1ecs_1_1EntityManager" ],
         [ "Executor", "classhelios_1_1ecs_1_1Executor.html", "classhelios_1_1ecs_1_1Executor" ],
+        [ "FreeFunctionSystem", "structhelios_1_1ecs_1_1FreeFunctionSystem.html", null ],
         [ "FunctionCmd", "classhelios_1_1ecs_1_1FunctionCmd.html", "classhelios_1_1ecs_1_1FunctionCmd" ],
         [ "InsertResourceCmd", "classhelios_1_1ecs_1_1InsertResourceCmd.html", "classhelios_1_1ecs_1_1InsertResourceCmd" ],
         [ "Local", "classhelios_1_1ecs_1_1Local.html", "classhelios_1_1ecs_1_1Local" ],

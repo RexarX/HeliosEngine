@@ -175,20 +175,21 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('concepthelios_
 </div><!--header-->
 <div class="contents">
 
-<p>Concept for system types that are not lambda closures.  
+<p>Concept for named functor-like system objects.  
 <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="system_8hpp_source.html">system.hpp</a>&gt;</code></p>
 <h2 id="header-conceptdef" class="groupheader">Concept definition</h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><span class="keyword">concept </span><a class="code hl_concept" href="concepthelios_1_1ecs_1_1FunctorSystemTrait.html">FunctorSystemTrait</a> = <a class="code hl_concept" href="concepthelios_1_1ecs_1_1SystemTrait.html">SystemTrait&lt;T&gt;</a> &amp;&amp; !<a class="code hl_concept" href="concepthelios_1_1ecs_1_1LambdaSystemTrait.html">LambdaSystemTrait&lt;T&gt;</a></div>
-<div class="ttc" id="aconcepthelios_1_1ecs_1_1FunctorSystemTrait_html"><div class="ttname"><a href="concepthelios_1_1ecs_1_1FunctorSystemTrait.html">helios::ecs::FunctorSystemTrait</a></div><div class="ttdoc">Concept for system types that are not lambda closures.</div><div class="ttdef"><b>Definition</b> <a href="system_8hpp_source.html#l00125">system.hpp:125</a></div></div>
-<div class="ttc" id="aconcepthelios_1_1ecs_1_1LambdaSystemTrait_html"><div class="ttname"><a href="concepthelios_1_1ecs_1_1LambdaSystemTrait.html">helios::ecs::LambdaSystemTrait</a></div><div class="ttdoc">Concept for lambda closure types that satisfy SystemTrait.</div><div class="ttdef"><b>Definition</b> <a href="system_8hpp_source.html#l00120">system.hpp:120</a></div></div>
-<div class="ttc" id="aconcepthelios_1_1ecs_1_1SystemTrait_html"><div class="ttname"><a href="concepthelios_1_1ecs_1_1SystemTrait.html">helios::ecs::SystemTrait</a></div><div class="ttdoc">Concept for systems that declare all data access via parameter types.</div><div class="ttdef"><b>Definition</b> <a href="system_8hpp_source.html#l00107">system.hpp:107</a></div></div>
+<div class="line"><span class="keyword">concept </span><a class="code hl_concept" href="concepthelios_1_1ecs_1_1FunctorSystemTrait.html">FunctorSystemTrait</a> = <a class="code hl_concept" href="concepthelios_1_1ecs_1_1SystemTrait.html">SystemTrait&lt;T&gt;</a> &amp;&amp; !<a class="code hl_concept" href="concepthelios_1_1ecs_1_1LambdaSystemTrait.html">LambdaSystemTrait&lt;T&gt;</a> &amp;&amp;</div>
+<div class="line">                             std::is_class_v&lt;std::remove_cvref_t&lt;T&gt;&gt;</div>
+<div class="ttc" id="aconcepthelios_1_1ecs_1_1FunctorSystemTrait_html"><div class="ttname"><a href="concepthelios_1_1ecs_1_1FunctorSystemTrait.html">helios::ecs::FunctorSystemTrait</a></div><div class="ttdoc">Concept for named functor-like system objects.</div><div class="ttdef"><b>Definition</b> <a href="system_8hpp_source.html#l00200">system.hpp:200</a></div></div>
+<div class="ttc" id="aconcepthelios_1_1ecs_1_1LambdaSystemTrait_html"><div class="ttname"><a href="concepthelios_1_1ecs_1_1LambdaSystemTrait.html">helios::ecs::LambdaSystemTrait</a></div><div class="ttdoc">Concept for lambda closure types that satisfy SystemTrait.</div><div class="ttdef"><b>Definition</b> <a href="system_8hpp_source.html#l00195">system.hpp:195</a></div></div>
+<div class="ttc" id="aconcepthelios_1_1ecs_1_1SystemTrait_html"><div class="ttname"><a href="concepthelios_1_1ecs_1_1SystemTrait.html">helios::ecs::SystemTrait</a></div><div class="ttdoc">Concept for systems that declare all data access via parameter types.</div><div class="ttdef"><b>Definition</b> <a href="system_8hpp_source.html#l00182">system.hpp:182</a></div></div>
 </div><!-- fragment --><a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Concept for system types that are not lambda closures. </p>
+<div class="textblock"><p>Concept for named functor-like system objects. </p>
 
-<p class="definition">Definition at line <a class="el" href="system_8hpp_source.html#l00125">125</a> of file <a class="el" href="system_8hpp_source.html">system.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="system_8hpp_source.html#l00200">200</a> of file <a class="el" href="system_8hpp_source.html">system.hpp</a>.</p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

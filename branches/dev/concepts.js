@@ -83,6 +83,7 @@ var concepts =
         [ "ExternalRange", "concepthelios_1_1utils_1_1ExternalRange.html", null ],
         [ "FilterAdapterRequirements", "concepthelios_1_1utils_1_1FilterAdapterRequirements.html", null ],
         [ "FolderFor", "concepthelios_1_1utils_1_1FolderFor.html", null ],
+        [ "FreeFunctionTrait", "concepthelios_1_1utils_1_1FreeFunctionTrait.html", null ],
         [ "FunctorTrait", "concepthelios_1_1utils_1_1FunctorTrait.html", null ],
         [ "InspectAdapterRequirements", "concepthelios_1_1utils_1_1InspectAdapterRequirements.html", null ],
         [ "InspectorFor", "concepthelios_1_1utils_1_1InspectorFor.html", null ],

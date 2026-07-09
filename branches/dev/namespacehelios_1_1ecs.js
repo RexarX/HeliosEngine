@@ -49,6 +49,7 @@ var namespacehelios_1_1ecs =
     [ "EntityDestroyedMsg", "classhelios_1_1ecs_1_1EntityDestroyedMsg.html", "classhelios_1_1ecs_1_1EntityDestroyedMsg" ],
     [ "EntityManager", "classhelios_1_1ecs_1_1EntityManager.html", "classhelios_1_1ecs_1_1EntityManager" ],
     [ "Executor", "classhelios_1_1ecs_1_1Executor.html", "classhelios_1_1ecs_1_1Executor" ],
+    [ "FreeFunctionSystem", "structhelios_1_1ecs_1_1FreeFunctionSystem.html", null ],
     [ "FunctionCmd", "classhelios_1_1ecs_1_1FunctionCmd.html", "classhelios_1_1ecs_1_1FunctionCmd" ],
     [ "InsertResourceCmd", "classhelios_1_1ecs_1_1InsertResourceCmd.html", "classhelios_1_1ecs_1_1InsertResourceCmd" ],
     [ "Local", "classhelios_1_1ecs_1_1Local.html", "classhelios_1_1ecs_1_1Local" ],
@@ -238,5 +239,6 @@ var namespacehelios_1_1ecs =
     [ "SystemNameOf", "namespacehelios_1_1ecs.html#a540f69ba76f75c794592d72eeaf92258", null ],
     [ "SystemSetNameOf", "namespacehelios_1_1ecs.html#a68ccf901a694ff87f6703a19855aa67f", null ],
     [ "SystemSetNameOf", "namespacehelios_1_1ecs.html#a35d8baa0404c020cfaf3cf49c84935e1", null ],
-    [ "TryAddComponentsCmd", "namespacehelios_1_1ecs.html#a9b3736dcb167cbead8b16fb9b9a9acca", null ]
+    [ "TryAddComponentsCmd", "namespacehelios_1_1ecs.html#a9b3736dcb167cbead8b16fb9b9a9acca", null ],
+    [ "kSystem", "namespacehelios_1_1ecs.html#ada7d094331ca0a65eb27df397cda305e", null ]
 ];

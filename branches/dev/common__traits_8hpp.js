@@ -7,6 +7,7 @@ var common__traits_8hpp =
     [ "helios::utils::DurationTrait", "concepthelios_1_1utils_1_1DurationTrait.html", null ],
     [ "helios::utils::LambdaTrait", "concepthelios_1_1utils_1_1LambdaTrait.html", null ],
     [ "helios::utils::FunctorTrait", "concepthelios_1_1utils_1_1FunctorTrait.html", null ],
+    [ "helios::utils::FreeFunctionTrait", "concepthelios_1_1utils_1_1FreeFunctionTrait.html", null ],
     [ "helios::utils::UniqueTypes", "concepthelios_1_1utils_1_1UniqueTypes.html", null ],
     [ "helios::utils::PolymorphicConvertible", "concepthelios_1_1utils_1_1PolymorphicConvertible.html", null ]
 ];

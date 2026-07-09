@@ -53,6 +53,8 @@ var searchData=
   ['exists_50',['Exists',['../classhelios_1_1ecs_1_1World.html#afc6a4741afcfdfba012c1de9f14bc297',1,'helios::ecs::World']]],
   ['explicit_51',['explicit',['../classhelios_1_1container_1_1BasicStaticString.html#aca9a94919329a6f1a4ef7e8c9e5d1672',1,'helios::container::BasicStaticString::explicit()'],['../classhelios_1_1utils_1_1FastPimpl.html#a1b98bffdd5d49fefcf93de9bace4b7c8',1,'helios::utils::FastPimpl::explicit()']]],
   ['extract_52',['Extract',['../classhelios_1_1app_1_1SubApp.html#ae65eb6b0575aa007977ddfb904aecdc6',1,'helios::app::SubApp']]],
-  ['extracttypename_53',['ExtractTypeName',['../namespacehelios_1_1utils_1_1details.html#af7c1921a6f5df0fc560b4ae8a6b9df6e',1,'helios::utils::details']]],
-  ['extractunqualifiedname_54',['ExtractUnqualifiedName',['../namespacehelios_1_1utils_1_1details.html#a1c0ccd722cca8427a870ef0ec73014e4',1,'helios::utils::details']]]
+  ['extractfunctionname_53',['ExtractFunctionName',['../namespacehelios_1_1utils_1_1details.html#a659de311ec87b5770ef335bfb24571eb',1,'helios::utils::details']]],
+  ['extractsignatureargument_54',['ExtractSignatureArgument',['../namespacehelios_1_1utils_1_1details.html#ad30b4594360279456b39a818a2e2e0df',1,'helios::utils::details']]],
+  ['extracttypename_55',['ExtractTypeName',['../namespacehelios_1_1utils_1_1details.html#af7c1921a6f5df0fc560b4ae8a6b9df6e',1,'helios::utils::details']]],
+  ['extractunqualifiedname_56',['ExtractUnqualifiedName',['../namespacehelios_1_1utils_1_1details.html#a1c0ccd722cca8427a870ef0ec73014e4',1,'helios::utils::details']]]
 ];

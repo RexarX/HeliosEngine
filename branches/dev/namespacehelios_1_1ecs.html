@@ -177,7 +177,8 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('namespacehelio
 <a href="#concepts">Concepts</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">helios::ecs Namespace Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -273,6 +274,8 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> manager responsible for entity creation, destruction, and validation.  <a href="classhelios_1_1ecs_1_1EntityManager.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Executor" id="r_Executor"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1Executor.html">Executor</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract interface for schedule executors.  <a href="classhelios_1_1ecs_1_1Executor.html#details">More...</a><br /></td></tr>
+<tr class="memitem:FreeFunctionSystem" id="r_FreeFunctionSystem"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhelios_1_1ecs_1_1FreeFunctionSystem.html">FreeFunctionSystem</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wraps a free function as an empty param-style system.  <a href="structhelios_1_1ecs_1_1FreeFunctionSystem.html#details">More...</a><br /></td></tr>
 <tr class="memitem:FunctionCmd" id="r_FunctionCmd"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1FunctionCmd.html">FunctionCmd</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command that executes a function with <span class="tt"><a class="el" href="classhelios_1_1ecs_1_1World.html" title="The World class manages entities with their components and systems.">World</a></span> reference.  <a href="classhelios_1_1ecs_1_1FunctionCmd.html#details">More...</a><br /></td></tr>
 <tr class="memitem:InsertResourceCmd" id="r_InsertResourceCmd"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1InsertResourceCmd.html">InsertResourceCmd</a></td></tr>
@@ -412,7 +415,7 @@ Concepts</h2></td></tr>
 <tr class="memitem:ConsumableMessageTrait" id="r_ConsumableMessageTrait"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1ecs_1_1ConsumableMessageTrait.html">ConsumableMessageTrait</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for consumable message types. <br /></td></tr>
 <tr class="memitem:FunctorSystemTrait" id="r_FunctorSystemTrait"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1ecs_1_1FunctorSystemTrait.html">FunctorSystemTrait</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for system types that are not lambda closures. <br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for named functor-like system objects. <br /></td></tr>
 <tr class="memitem:LambdaSystemTrait" id="r_LambdaSystemTrait"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1ecs_1_1LambdaSystemTrait.html">LambdaSystemTrait</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for lambda closure types that satisfy <span class="tt">SystemTrait</span>. <br /></td></tr>
 <tr class="memitem:MessageTrait" id="r_MessageTrait"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1ecs_1_1MessageTrait.html">MessageTrait</a></td></tr>
@@ -657,6 +660,12 @@ requires utils::UniqueTypes&lt;Cs...&gt;</td></tr>
 <tr class="memitem:a540f69ba76f75c794592d72eeaf92258" id="r_a540f69ba76f75c794592d72eeaf92258"><td class="memTemplParams" colspan="2">template&lt;SystemTrait T&gt; </td></tr>
 <tr class="memitem:a540f69ba76f75c794592d72eeaf92258 template"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#a540f69ba76f75c794592d72eeaf92258">SystemNameOf</a> (const T &amp;) noexcept</td></tr>
 <tr class="memdesc:a540f69ba76f75c794592d72eeaf92258"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the name of a system.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:ada7d094331ca0a65eb27df397cda305e" id="r_ada7d094331ca0a65eb27df397cda305e"><td class="memTemplParams" colspan="2">template&lt;auto Fn&gt; </td></tr>
+<tr class="memitem:ada7d094331ca0a65eb27df397cda305e template"><td class="memItemLeft">constexpr <a class="el" href="structhelios_1_1ecs_1_1FreeFunctionSystem.html">FreeFunctionSystem</a>&lt; Fn &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ada7d094331ca0a65eb27df397cda305e">kSystem</a> {}</td></tr>
+<tr class="memdesc:ada7d094331ca0a65eb27df397cda305e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inline free function system wrapper instance.  <br /></td></tr>
 </table>
 <a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
 <a id="a71994db78118f91bcaf65469f04be4af" name="a71994db78118f91bcaf65469f04be4af"></a>
@@ -1297,7 +1306,7 @@ template&lt;typename... Components&gt; </div>
 
 <p>Type-erased run condition: returns bool, receives <a class="el" href="classhelios_1_1ecs_1_1World.html" title="The World class manages entities with their components and systems.">World</a>&amp; + local data. </p>
 
-<p class="definition">Definition at line <a class="el" href="run__condition_8hpp_source.html#l00020">20</a> of file <a class="el" href="run__condition_8hpp_source.html">run_condition.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="run__condition_8hpp_source.html#l00021">21</a> of file <a class="el" href="run__condition_8hpp_source.html">run_condition.hpp</a>.</p>
 
 </div>
 </div>
@@ -1405,7 +1414,7 @@ template&lt;typename T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="system__storage_8hpp_source.html#l00021">21</a> of file <a class="el" href="system__storage_8hpp_source.html">system_storage.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="system__storage_8hpp_source.html#l00022">22</a> of file <a class="el" href="system__storage_8hpp_source.html">system_storage.hpp</a>.</p>
 
 </div>
 </div>
@@ -1459,7 +1468,7 @@ template&lt;typename T&gt; </div>
 
 <p>Type id for systems. </p>
 
-<p class="definition">Definition at line <a class="el" href="system_8hpp_source.html#l00016">16</a> of file <a class="el" href="system_8hpp_source.html">system.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="system_8hpp_source.html#l00019">19</a> of file <a class="el" href="system_8hpp_source.html">system.hpp</a>.</p>
 
 </div>
 </div>
@@ -1477,7 +1486,7 @@ template&lt;typename T&gt; </div>
 
 <p>Type index for systems. </p>
 
-<p class="definition">Definition at line <a class="el" href="system_8hpp_source.html#l00019">19</a> of file <a class="el" href="system_8hpp_source.html">system.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="system_8hpp_source.html#l00022">22</a> of file <a class="el" href="system_8hpp_source.html">system.hpp</a>.</p>
 
 </div>
 </div>
@@ -2648,7 +2657,7 @@ template&lt;SystemTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>System name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="system_8hpp_source.html#l00145">145</a> of file <a class="el" href="system_8hpp_source.html">system.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="system_8hpp_source.html#l00221">221</a> of file <a class="el" href="system_8hpp_source.html">system.hpp</a>.</p>
 
 </div>
 </div>
@@ -2692,7 +2701,7 @@ template&lt;SystemTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>System name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="system_8hpp_source.html#l00160">160</a> of file <a class="el" href="system_8hpp_source.html">system.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="system_8hpp_source.html#l00236">236</a> of file <a class="el" href="system_8hpp_source.html">system.hpp</a>.</p>
 
 </div>
 </div>
@@ -2798,6 +2807,41 @@ template&lt;ComponentTrait... Us&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a id="ada7d094331ca0a65eb27df397cda305e" name="ada7d094331ca0a65eb27df397cda305e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada7d094331ca0a65eb27df397cda305e">&#9670;&#160;</a></span>kSystem</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;auto Fn&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structhelios_1_1ecs_1_1FreeFunctionSystem.html">FreeFunctionSystem</a>&lt;Fn&gt; helios::ecs::kSystem {}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Inline free function system wrapper instance. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Fn</td><td>Free function pointer to invoke </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="system_8hpp_source.html#l00173">173</a> of file <a class="el" href="system_8hpp_source.html">system.hpp</a>.</p>
 
 </div>
 </div>

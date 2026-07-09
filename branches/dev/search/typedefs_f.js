@@ -16,9 +16,10 @@ var searchData=
   ['storagetype_13',['StorageType',['../classhelios_1_1container_1_1TypedBuffer.html#a5cb4d4aec32851a21b604d39230d14a9',1,'helios::container::TypedBuffer']]],
   ['subapptypeid_14',['SubAppTypeId',['../namespacehelios_1_1app.html#a409d8978d21f7a1f205d39f4216459f7',1,'helios::app']]],
   ['subapptypeindex_15',['SubAppTypeIndex',['../namespacehelios_1_1app.html#a2c58d71ce8fa872eeb2ba31f2d18ab0a',1,'helios::app']]],
-  ['systemcallable_16',['SystemCallable',['../namespacehelios_1_1ecs.html#a9ff616e80af940f228159b93af9b2d0e',1,'helios::ecs']]],
-  ['systemsettypeid_17',['SystemSetTypeId',['../namespacehelios_1_1ecs.html#aaaec0d1d4a188372f5202f12e971a30c',1,'helios::ecs']]],
-  ['systemsettypeindex_18',['SystemSetTypeIndex',['../namespacehelios_1_1ecs.html#a1d0761737d08956eba67f4c207e2554e',1,'helios::ecs']]],
-  ['systemtypeid_19',['SystemTypeId',['../namespacehelios_1_1ecs.html#a9295908adf83529ac636a0833e5d98fb',1,'helios::ecs']]],
-  ['systemtypeindex_20',['SystemTypeIndex',['../namespacehelios_1_1ecs.html#ac86bf65121d23957c17a8d9661ad51cb',1,'helios::ecs']]]
+  ['systemargstuple_16',['SystemArgsTuple',['../namespacehelios_1_1ecs_1_1details.html#ab217129fd1b9ba400cb1770c1d7edddc',1,'helios::ecs::details']]],
+  ['systemcallable_17',['SystemCallable',['../namespacehelios_1_1ecs.html#a9ff616e80af940f228159b93af9b2d0e',1,'helios::ecs']]],
+  ['systemsettypeid_18',['SystemSetTypeId',['../namespacehelios_1_1ecs.html#aaaec0d1d4a188372f5202f12e971a30c',1,'helios::ecs']]],
+  ['systemsettypeindex_19',['SystemSetTypeIndex',['../namespacehelios_1_1ecs.html#a1d0761737d08956eba67f4c207e2554e',1,'helios::ecs']]],
+  ['systemtypeid_20',['SystemTypeId',['../namespacehelios_1_1ecs.html#a9295908adf83529ac636a0833e5d98fb',1,'helios::ecs']]],
+  ['systemtypeindex_21',['SystemTypeIndex',['../namespacehelios_1_1ecs.html#ac86bf65121d23957c17a8d9661ad51cb',1,'helios::ecs']]]
 ];

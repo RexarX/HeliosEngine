@@ -106,6 +106,16 @@ var hierarchy =
     [ "std::formatter&lt; helios::ecs::Entity &gt;", "structstd_1_1formatter_3_01helios_1_1ecs_1_1Entity_01_4.html", null ],
     [ "helios::mem::FrameAllocatorOptions", "structhelios_1_1mem_1_1FrameAllocatorOptions.html", null ],
     [ "helios::app::FrameCount", "structhelios_1_1app_1_1FrameCount.html", null ],
+    [ "helios::ecs::details::FreeFunctionSystemImpl&lt; Fn, FnType &gt;", "structhelios_1_1ecs_1_1details_1_1FreeFunctionSystemImpl.html", null ],
+    [ "helios::ecs::details::FreeFunctionSystemImpl&lt; Fn, decltype(Fn)&gt;", "structhelios_1_1ecs_1_1details_1_1FreeFunctionSystemImpl.html", [
+      [ "helios::ecs::FreeFunctionSystem< Fn >", "structhelios_1_1ecs_1_1FreeFunctionSystem.html", null ]
+    ] ],
+    [ "helios::ecs::details::FreeFunctionSystemImpl&lt; Fn, R(Args...) noexcept &gt;", "structhelios_1_1ecs_1_1details_1_1FreeFunctionSystemImpl_3_01Fn_00_01R_07Args_8_8_8_08_01noexcept_01_4.html", [
+      [ "helios::ecs::details::FreeFunctionSystemImpl< Fn, R(*)(Args...) noexcept >", "structhelios_1_1ecs_1_1details_1_1FreeFunctionSystemImpl_3_01Fn_00_01R_07_5_08_07Args_8_8_8_08_01noexcept_01_4.html", null ]
+    ] ],
+    [ "helios::ecs::details::FreeFunctionSystemImpl&lt; Fn, R(Args...)&gt;", "structhelios_1_1ecs_1_1details_1_1FreeFunctionSystemImpl_3_01Fn_00_01R_07Args_8_8_8_08_4.html", [
+      [ "helios::ecs::details::FreeFunctionSystemImpl< Fn, R(*)(Args...)>", "structhelios_1_1ecs_1_1details_1_1FreeFunctionSystemImpl_3_01Fn_00_01R_07_5_08_07Args_8_8_8_08_4.html", null ]
+    ] ],
     [ "helios::details::FreeFunctionTraits&lt; FunctionSignature &gt;", "structhelios_1_1details_1_1FreeFunctionTraits.html", null ],
     [ "helios::details::FreeFunctionTraits&lt; R(*)(Args...)&gt;", "structhelios_1_1details_1_1FreeFunctionTraits_3_01R_07_5_08_07Args_8_8_8_08_4.html", null ],
     [ "helios::mem::FreeListAllocatorOptions", "structhelios_1_1mem_1_1FreeListAllocatorOptions.html", null ],
@@ -276,6 +286,8 @@ var hierarchy =
     [ "helios::utils::StringHash", "structhelios_1_1utils_1_1StringHash.html", null ],
     [ "helios::app::SubApp", "classhelios_1_1app_1_1SubApp.html", null ],
     [ "helios::async::SubTaskGraph", "classhelios_1_1async_1_1SubTaskGraph.html", null ],
+    [ "helios::ecs::details::SystemArgsTupleImpl&lt; T, kHasCallOperator &gt;", "structhelios_1_1ecs_1_1details_1_1SystemArgsTupleImpl.html", null ],
+    [ "helios::ecs::details::SystemArgsTupleImpl&lt; T, true &gt;", "structhelios_1_1ecs_1_1details_1_1SystemArgsTupleImpl_3_01T_00_01true_01_4.html", null ],
     [ "helios::ecs::SystemGroupHandle", "classhelios_1_1ecs_1_1SystemGroupHandle.html", null ],
     [ "helios::ecs::SystemHandle", "classhelios_1_1ecs_1_1SystemHandle.html", null ],
     [ "helios::ecs::SystemId", "structhelios_1_1ecs_1_1SystemId.html", null ],

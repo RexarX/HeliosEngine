@@ -229,13 +229,20 @@ Functions</h2></td></tr>
 <tr class="memitem:a309adc02aff2b6da6abcadf39440a554" id="r_a309adc02aff2b6da6abcadf39440a554"><td class="memTemplParams" colspan="2">template&lt;typename Func, typename... Args&gt; </td></tr>
 <tr class="memitem:a309adc02aff2b6da6abcadf39440a554 template"><td class="memItemLeft">consteval auto&#160;</td><td class="memItemRight"><a class="el" href="#a309adc02aff2b6da6abcadf39440a554">GetCallOrApplyResultType</a> () noexcept</td></tr>
 <tr class="memdesc:a309adc02aff2b6da6abcadf39440a554"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper to get the result type of either invoke or apply.  <br /></td></tr>
+<tr class="memitem:ad30b4594360279456b39a818a2e2e0df" id="r_ad30b4594360279456b39a818a2e2e0df"><td class="memItemLeft">consteval std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#ad30b4594360279456b39a818a2e2e0df">ExtractSignatureArgument</a> (std::string_view function, std::string_view prefix, std::string_view suffix) noexcept</td></tr>
+<tr class="memdesc:ad30b4594360279456b39a818a2e2e0df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts a template argument fragment from a compiler signature.  <br /></td></tr>
+<tr class="memitem:a07c9e4f2149ebb314a95f1a6f51ebe6a" id="r_a07c9e4f2149ebb314a95f1a6f51ebe6a"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#a07c9e4f2149ebb314a95f1a6f51ebe6a">StripGccAliasExposition</a> (std::string_view name) noexcept</td></tr>
+<tr class="memdesc:a07c9e4f2149ebb314a95f1a6f51ebe6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes GCC alias exposition from a signature fragment.  <br /></td></tr>
+<tr class="memitem:a1c0ccd722cca8427a870ef0ec73014e4" id="r_a1c0ccd722cca8427a870ef0ec73014e4"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#a1c0ccd722cca8427a870ef0ec73014e4">ExtractUnqualifiedName</a> (std::string_view full_name) noexcept</td></tr>
+<tr class="memdesc:a1c0ccd722cca8427a870ef0ec73014e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the unqualified name from a fully qualified name.  <br /></td></tr>
+<tr class="memitem:a625ada1b40b6ef5a93afe9d31ff5f427" id="r_a625ada1b40b6ef5a93afe9d31ff5f427"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#a625ada1b40b6ef5a93afe9d31ff5f427">StripFunctionNameDecorations</a> (std::string_view name) noexcept</td></tr>
+<tr class="memdesc:a625ada1b40b6ef5a93afe9d31ff5f427"><td class="mdescLeft">&#160;</td><td class="mdescRight">Strips compiler-specific function decorations from a function name.  <br /></td></tr>
 <tr class="memitem:af7c1921a6f5df0fc560b4ae8a6b9df6e" id="r_af7c1921a6f5df0fc560b4ae8a6b9df6e"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:af7c1921a6f5df0fc560b4ae8a6b9df6e template"><td class="memItemLeft">consteval std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#af7c1921a6f5df0fc560b4ae8a6b9df6e">ExtractTypeName</a> () noexcept</td></tr>
 <tr class="memdesc:af7c1921a6f5df0fc560b4ae8a6b9df6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the type name of <span class="tt">T</span> from the compiler-specific function signature.  <br /></td></tr>
-<tr class="memitem:a252e6659a0841a19c2553f35fa9459b1" id="r_a252e6659a0841a19c2553f35fa9459b1"><td class="memItemLeft">consteval size_t&#160;</td><td class="memItemRight"><a class="el" href="#a252e6659a0841a19c2553f35fa9459b1">CountQualifiers</a> (std::string_view full_name) noexcept</td></tr>
-<tr class="memdesc:a252e6659a0841a19c2553f35fa9459b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Counts the number of qualifiers (namespaces and class scopes) in a fully qualified type name.  <br /></td></tr>
-<tr class="memitem:a1c0ccd722cca8427a870ef0ec73014e4" id="r_a1c0ccd722cca8427a870ef0ec73014e4"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#a1c0ccd722cca8427a870ef0ec73014e4">ExtractUnqualifiedName</a> (std::string_view full_name) noexcept</td></tr>
-<tr class="memdesc:a1c0ccd722cca8427a870ef0ec73014e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the unqualified type name from a fully qualified type name.  <br /></td></tr>
+<tr class="memitem:a659de311ec87b5770ef335bfb24571eb" id="r_a659de311ec87b5770ef335bfb24571eb"><td class="memTemplParams" colspan="2">template&lt;auto Fn&gt; </td></tr>
+<tr class="memitem:a659de311ec87b5770ef335bfb24571eb template"><td class="memItemLeft">consteval std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#a659de311ec87b5770ef335bfb24571eb">ExtractFunctionName</a> () noexcept</td></tr>
+<tr class="memdesc:a659de311ec87b5770ef335bfb24571eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts a fully qualified function name from compiler signature text.  <br /></td></tr>
 <tr class="memitem:a007610868c5d4be777ff5285f4d1f840" id="r_a007610868c5d4be777ff5285f4d1f840"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:a007610868c5d4be777ff5285f4d1f840 template"><td class="memItemLeft">consteval const char *&#160;</td><td class="memItemRight"><a class="el" href="#a007610868c5d4be777ff5285f4d1f840">GetFullTypeNameCString</a> () noexcept</td></tr>
 <tr class="memdesc:a007610868c5d4be777ff5285f4d1f840"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves a null-terminated fully qualified type name for <span class="tt">T</span>.  <br /></td></tr>
@@ -245,6 +252,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a2c16cc078a6438ecd3f101efdbc1e9b0" id="r_a2c16cc078a6438ecd3f101efdbc1e9b0"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:a2c16cc078a6438ecd3f101efdbc1e9b0 template"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#a2c16cc078a6438ecd3f101efdbc1e9b0">GetUnqualifiedTypeName</a> () noexcept</td></tr>
 <tr class="memdesc:a2c16cc078a6438ecd3f101efdbc1e9b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the unqualified type name of <span class="tt">T</span>.  <br /></td></tr>
+<tr class="memitem:a7165063a984196bd569037a257a850f3" id="r_a7165063a984196bd569037a257a850f3"><td class="memTemplParams" colspan="2">template&lt;auto Fn&gt; </td></tr>
+<tr class="memitem:a7165063a984196bd569037a257a850f3 template"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#a7165063a984196bd569037a257a850f3">GetFullFunctionName</a> () noexcept</td></tr>
+<tr class="memdesc:a7165063a984196bd569037a257a850f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the fully qualified function name for <span class="tt">Fn</span>.  <br /></td></tr>
 <tr class="memitem:a08674f58d6aced25acd67c1ee913fb69" id="r_a08674f58d6aced25acd67c1ee913fb69"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:a08674f58d6aced25acd67c1ee913fb69 template"><td class="memItemLeft">consteval size_t&#160;</td><td class="memItemRight"><a class="el" href="#a08674f58d6aced25acd67c1ee913fb69">ComputeTypeHash</a> () noexcept</td></tr>
 <tr class="memdesc:a08674f58d6aced25acd67c1ee913fb69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes a hash value for the type <span class="tt">T</span> based on its fully qualified name.  <br /></td></tr>
@@ -410,23 +420,25 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The computed hash value </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00201">201</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00309">309</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a252e6659a0841a19c2553f35fa9459b1" name="a252e6659a0841a19c2553f35fa9459b1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a252e6659a0841a19c2553f35fa9459b1">&#9670;&#160;</a></span>CountQualifiers()</h2>
+<a id="a659de311ec87b5770ef335bfb24571eb" name="a659de311ec87b5770ef335bfb24571eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a659de311ec87b5770ef335bfb24571eb">&#9670;&#160;</a></span>ExtractFunctionName()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;auto Fn&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t helios::utils::details::CountQualifiers </td>
+          <td class="memname">std::string_view helios::utils::details::ExtractFunctionName </td>
           <td>(</td>
-          <td class="paramtype">std::string_view</td>          <td class="paramname"><span class="paramname"><em>full_name</em></span></td><td>)</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -437,16 +449,63 @@ template&lt;typename T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Counts the number of qualifiers (namespaces and class scopes) in a fully qualified type name. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">full_name</td><td>The fully qualified type name to analyze </td></tr>
+<p>Extracts a fully qualified function name from compiler signature text. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Fn</td><td>Function pointer value to extract the name for </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The number of qualifiers in the type name </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The extracted fully qualified function name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00121">121</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00234">234</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ad30b4594360279456b39a818a2e2e0df" name="ad30b4594360279456b39a818a2e2e0df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad30b4594360279456b39a818a2e2e0df">&#9670;&#160;</a></span>ExtractSignatureArgument()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string_view helios::utils::details::ExtractSignatureArgument </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view</td>          <td class="paramname"><span class="paramname"><em>function</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view</td>          <td class="paramname"><span class="paramname"><em>prefix</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view</td>          <td class="paramname"><span class="paramname"><em>suffix</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel consteval">consteval</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Extracts a template argument fragment from a compiler signature. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">function</td><td>Compiler-provided signature text </td></tr>
+    <tr><td class="paramname">prefix</td><td>Text immediately before the fragment </td></tr>
+    <tr><td class="paramname">suffix</td><td>Text immediately after the fragment </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Extracted signature fragment </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00035">35</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -484,7 +543,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The extracted type name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00079">79</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00207">207</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -511,16 +570,16 @@ template&lt;typename T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Extracts the unqualified type name from a fully qualified type name. </p>
+<p>Extracts the unqualified name from a fully qualified name. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">full_name</td><td>The fully qualified type name to extract from </td></tr>
+    <tr><td class="paramname">full_name</td><td>Fully qualified name </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The unqualified type name </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Unqualified name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00139">139</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00074">74</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -552,6 +611,44 @@ template&lt;typename Func, typename... Args&gt; </div>
 <p>Helper to get the result type of either invoke or apply. </p>
 
 <p class="definition">Definition at line <a class="el" href="functional__adapters_8hpp_source.html#l00102">102</a> of file <a class="el" href="functional__adapters_8hpp_source.html">functional_adapters.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a7165063a984196bd569037a257a850f3" name="a7165063a984196bd569037a257a850f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7165063a984196bd569037a257a850f3">&#9670;&#160;</a></span>GetFullFunctionName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;auto Fn&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string_view helios::utils::details::GetFullFunctionName </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Retrieves the fully qualified function name for <span class="tt">Fn</span>. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Fn</td><td>Function pointer value to retrieve the name for </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The fully qualified function name </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00296">296</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -589,7 +686,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The fully qualified type name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00178">178</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00276">276</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -627,7 +724,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to static null-terminated storage </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00168">168</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00266">266</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -665,7 +762,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The unqualified type name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00188">188</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00286">286</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -703,7 +800,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><span class="tt">true</span> when <span class="tt">T</span> is an object type that is not a lambda </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00240">240</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00348">348</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -741,7 +838,79 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><span class="tt">true</span> when <span class="tt">T</span> is a lambda closure type </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00214">214</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00322">322</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a625ada1b40b6ef5a93afe9d31ff5f427" name="a625ada1b40b6ef5a93afe9d31ff5f427"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a625ada1b40b6ef5a93afe9d31ff5f427">&#9670;&#160;</a></span>StripFunctionNameDecorations()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string_view helios::utils::details::StripFunctionNameDecorations </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view</td>          <td class="paramname"><span class="paramname"><em>name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Strips compiler-specific function decorations from a function name. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>Compiler-provided function name fragment </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Qualified function name without return type, address marker, or args </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00098">98</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a07c9e4f2149ebb314a95f1a6f51ebe6a" name="a07c9e4f2149ebb314a95f1a6f51ebe6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07c9e4f2149ebb314a95f1a6f51ebe6a">&#9670;&#160;</a></span>StripGccAliasExposition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string_view helios::utils::details::StripGccAliasExposition </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view</td>          <td class="paramname"><span class="paramname"><em>name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Removes GCC alias exposition from a signature fragment. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>Extracted signature fragment </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Fragment before the first alias exposition </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00058">58</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -769,10 +938,10 @@ template&lt;typename T&gt; </div>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">                                   =</div>
 <div class="line"><a class="code hl_struct" href="structhelios_1_1utils_1_1details_1_1FixedString.html">FixedString&lt;ExtractTypeName&lt;T&gt;</a>().size()&gt;(<a class="code hl_function" href="#af7c1921a6f5df0fc560b4ae8a6b9df6e">ExtractTypeName&lt;T&gt;</a>())</div>
-<div class="ttc" id="anamespacehelios_1_1utils_1_1details_html_af7c1921a6f5df0fc560b4ae8a6b9df6e"><div class="ttname"><a href="#af7c1921a6f5df0fc560b4ae8a6b9df6e">helios::utils::details::ExtractTypeName</a></div><div class="ttdeci">consteval std::string_view ExtractTypeName() noexcept</div><div class="ttdoc">Extracts the type name of T from the compiler-specific function signature.</div><div class="ttdef"><b>Definition</b> <a href="type__info_8hpp_source.html#l00079">type_info.hpp:79</a></div></div>
-<div class="ttc" id="astructhelios_1_1utils_1_1details_1_1FixedString_html"><div class="ttname"><a href="structhelios_1_1utils_1_1details_1_1FixedString.html">helios::utils::details::FixedString</a></div><div class="ttdoc">A fixed-size string that can be constructed at compile time.</div><div class="ttdef"><b>Definition</b> <a href="type__info_8hpp_source.html#l00061">type_info.hpp:61</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1utils_1_1details_html_af7c1921a6f5df0fc560b4ae8a6b9df6e"><div class="ttname"><a href="#af7c1921a6f5df0fc560b4ae8a6b9df6e">helios::utils::details::ExtractTypeName</a></div><div class="ttdeci">consteval std::string_view ExtractTypeName() noexcept</div><div class="ttdoc">Extracts the type name of T from the compiler-specific function signature.</div><div class="ttdef"><b>Definition</b> <a href="type__info_8hpp_source.html#l00207">type_info.hpp:207</a></div></div>
+<div class="ttc" id="astructhelios_1_1utils_1_1details_1_1FixedString_html"><div class="ttname"><a href="structhelios_1_1utils_1_1details_1_1FixedString.html">helios::utils::details::FixedString</a></div><div class="ttdoc">A fixed-size string that can be constructed at compile time.</div><div class="ttdef"><b>Definition</b> <a href="type__info_8hpp_source.html#l00189">type_info.hpp:189</a></div></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00159">159</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00257">257</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
