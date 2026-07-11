@@ -3,7 +3,7 @@ var classhelios_1_1app_1_1PluginGroup =
     [ "PluginGroup", "classhelios_1_1app_1_1PluginGroup.html#ad1e1db5002102f3c9bce5e2c6bce65c6", null ],
     [ "PluginGroup", "classhelios_1_1app_1_1PluginGroup.html#ac5cc69f0346f1e80b269e291695b3e23", null ],
     [ "~PluginGroup", "classhelios_1_1app_1_1PluginGroup.html#ac5ce60d0d022bb2e9892475cb4cff57f", null ],
-    [ "PluginGroup", "classhelios_1_1app_1_1PluginGroup.html#a22da7d65f61f4d41e492e241c24ecf66", null ],
+    [ "PluginGroup", "classhelios_1_1app_1_1PluginGroup.html#aa6310c362ffe1643f9609918c2fbfa2b", null ],
     [ "PluginGroup", "classhelios_1_1app_1_1PluginGroup.html#a2cdc74dbe342bfdd34595be8cb43c8d2", null ],
     [ "Add", "classhelios_1_1app_1_1PluginGroup.html#a3262fffbe17748dee8b047ab50f04260", null ],
     [ "Build", "classhelios_1_1app_1_1PluginGroup.html#ab289645d2e0cc1a32722d444aa44babc", null ],
