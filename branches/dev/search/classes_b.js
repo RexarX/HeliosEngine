@@ -32,7 +32,8 @@ var searchData=
   ['multitypemap_3c_20container_3a_3atypedbufferarray_3c_20allocator_20_3e_2c_20allocator_20_3e_29',['MultiTypeMap&lt; container::TypedBufferArray&lt; Allocator &gt;, Allocator &gt;',['../classhelios_1_1container_1_1MultiTypeMap.html',1,'helios::container']]],
   ['multitypemap_3c_20container_3a_3atypedbufferarray_3c_20std_3a_3aallocator_3c_20std_3a_3abyte_20_3e_20_3e_2c_20std_3a_3aallocator_3c_20std_3a_3abyte_20_3e_20_3e_30',['MultiTypeMap&lt; container::TypedBufferArray&lt; std::allocator&lt; std::byte &gt; &gt;, std::allocator&lt; std::byte &gt; &gt;',['../classhelios_1_1container_1_1MultiTypeMap.html',1,'helios::container']]],
   ['multitypemap_3c_20messagemetadata_20_3e_31',['MultiTypeMap&lt; MessageMetadata &gt;',['../classhelios_1_1container_1_1MultiTypeMap.html',1,'helios::container']]],
-  ['multitypemap_3c_20sparsestorageentry_20_3e_32',['MultiTypeMap&lt; SparseStorageEntry &gt;',['../classhelios_1_1container_1_1MultiTypeMap.html',1,'helios::container']]],
-  ['multitypemap_3c_20storage_2c_20std_3a_3apmr_3a_3apolymorphic_5fallocator_3c_20std_3a_3abyte_20_3e_20_3e_33',['MultiTypeMap&lt; Storage, std::pmr::polymorphic_allocator&lt; std::byte &gt; &gt;',['../classhelios_1_1container_1_1MultiTypeMap.html',1,'helios::container']]],
-  ['multitypemap_3c_20storagetype_20_3e_34',['MultiTypeMap&lt; StorageType &gt;',['../classhelios_1_1container_1_1MultiTypeMap.html',1,'helios::container']]]
+  ['multitypemap_3c_20pluginstorage_20_3e_32',['MultiTypeMap&lt; PluginStorage &gt;',['../classhelios_1_1container_1_1MultiTypeMap.html',1,'helios::container']]],
+  ['multitypemap_3c_20sparsestorageentry_20_3e_33',['MultiTypeMap&lt; SparseStorageEntry &gt;',['../classhelios_1_1container_1_1MultiTypeMap.html',1,'helios::container']]],
+  ['multitypemap_3c_20storage_2c_20std_3a_3apmr_3a_3apolymorphic_5fallocator_3c_20std_3a_3abyte_20_3e_20_3e_34',['MultiTypeMap&lt; Storage, std::pmr::polymorphic_allocator&lt; std::byte &gt; &gt;',['../classhelios_1_1container_1_1MultiTypeMap.html',1,'helios::container']]],
+  ['multitypemap_3c_20storagetype_20_3e_35',['MultiTypeMap&lt; StorageType &gt;',['../classhelios_1_1container_1_1MultiTypeMap.html',1,'helios::container']]]
 ];

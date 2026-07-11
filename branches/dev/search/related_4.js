@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['refcounted_0',['RefCounted',['../classhelios_1_1mem_1_1RcFromThis.html#ac20d1941493daba6aded88aa5598911f',1,'helios::mem::RcFromThis']]]
+  ['plugingroup_0',['PluginGroup',['../classhelios_1_1app_1_1App.html#a1df4f9d837225e260229bf4dce7fa43b',1,'helios::app::App']]]
 ];

@@ -555,27 +555,28 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('ecs_2src_2sche
 <div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>                               async::Executor* async_executor)</div>
 <div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>    -&gt; std::unique_ptr&lt;Executor&gt; {</div>
 <div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>  <span class="keywordflow">switch</span> (kind) {</div>
-<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacehelios_1_1ecs.html#a7a5c6a0217be376c4eac44438a936f23ad31f2dea8a5ff6355f51aee2eccbeb84">ExecutorKind::kMainThread</a>:</div>
-<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>      <span class="keywordflow">return</span> std::make_unique&lt;MainThreadExecutor&gt;();</div>
-<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacehelios_1_1ecs.html#a7a5c6a0217be376c4eac44438a936f23a709829dc0c7b7ea20cb8b95f05a33b76">ExecutorKind::kSingleThreaded</a>: {</div>
-<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>      <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(async_executor != <span class="keyword">nullptr</span>,</div>
-<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>                    <span class="stringliteral">&quot;Scheduler: cannot create SingleThreadedExecutor without &quot;</span></div>
-<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>                    <span class="stringliteral">&quot;an async::Executor! Call Build(async::Executor&amp;).&quot;</span>);</div>
-<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>      <span class="keywordflow">return</span> std::make_unique&lt;SingleThreadedExecutor&gt;(*async_executor);</div>
-<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>    }</div>
-<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacehelios_1_1ecs.html#a7a5c6a0217be376c4eac44438a936f23a63211e6ba329ba34026a0fec052723ff">ExecutorKind::kMultiThreaded</a>: {</div>
-<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>      <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(async_executor != <span class="keyword">nullptr</span>,</div>
-<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>                    <span class="stringliteral">&quot;Scheduler: cannot create MultiThreadedExecutor without &quot;</span></div>
-<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>                    <span class="stringliteral">&quot;an async::Executor! Call Build(async::Executor&amp;).&quot;</span>);</div>
-<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>      <span class="keywordflow">return</span> std::make_unique&lt;MultiThreadedExecutor&gt;(*async_executor);</div>
-<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>    }</div>
-<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>  }</div>
-<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span> </div>
-<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<span class="keyword">false</span>, <span class="stringliteral">&quot;Scheduler: unknown ExecutorKind!&quot;</span>);</div>
-<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>  <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>}</div>
-<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span> </div>
-<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>}  <span class="comment">// namespace helios::ecs</span></div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>    <span class="keyword">using </span>enum <a class="code hl_enumeration" href="namespacehelios_1_1ecs.html#a7a5c6a0217be376c4eac44438a936f23">ExecutorKind</a>;</div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacehelios_1_1ecs.html#a7a5c6a0217be376c4eac44438a936f23ad31f2dea8a5ff6355f51aee2eccbeb84">kMainThread</a>:</div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>      <span class="keywordflow">return</span> std::make_unique&lt;MainThreadExecutor&gt;();</div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacehelios_1_1ecs.html#a7a5c6a0217be376c4eac44438a936f23a709829dc0c7b7ea20cb8b95f05a33b76">kSingleThreaded</a>: {</div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>      <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(async_executor != <span class="keyword">nullptr</span>,</div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>                    <span class="stringliteral">&quot;Scheduler: cannot create SingleThreadedExecutor without &quot;</span></div>
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>                    <span class="stringliteral">&quot;an async::Executor! Call Build(async::Executor&amp;).&quot;</span>);</div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>      <span class="keywordflow">return</span> std::make_unique&lt;SingleThreadedExecutor&gt;(*async_executor);</div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>    }</div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacehelios_1_1ecs.html#a7a5c6a0217be376c4eac44438a936f23a63211e6ba329ba34026a0fec052723ff">kMultiThreaded</a>: {</div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>      <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(async_executor != <span class="keyword">nullptr</span>,</div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>                    <span class="stringliteral">&quot;Scheduler: cannot create MultiThreadedExecutor without &quot;</span></div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>                    <span class="stringliteral">&quot;an async::Executor! Call Build(async::Executor&amp;).&quot;</span>);</div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>      <span class="keywordflow">return</span> std::make_unique&lt;MultiThreadedExecutor&gt;(*async_executor);</div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>    }</div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>  }</div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span> </div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(<span class="keyword">false</span>, <span class="stringliteral">&quot;Scheduler: unknown ExecutorKind!&quot;</span>);</div>
+<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>  <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>}</div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span> </div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>}  <span class="comment">// namespace helios::ecs</span></div>
 <div class="ttc" id="aassert_8hpp_html"><div class="ttname"><a href="assert_8hpp.html">assert.hpp</a></div></div>
 <div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00259">assert.hpp:259</a></div></div>
 <div class="ttc" id="aclasshelios_1_1async_1_1Executor_html"><div class="ttname"><a href="classhelios_1_1async_1_1Executor.html">helios::async::Executor</a></div><div class="ttdoc">Manages worker threads and executes task graphs using work-stealing scheduling.</div><div class="ttdef"><b>Definition</b> <a href="async_2include_2helios_2async_2executor_8hpp_source.html#l00032">executor.hpp:32</a></div></div>

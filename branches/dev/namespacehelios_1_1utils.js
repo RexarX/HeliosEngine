@@ -67,13 +67,13 @@ var namespacehelios_1_1utils =
     [ "FastRandomGeneratorType", "namespacehelios_1_1utils.html#a851b4e170d6c739b36753930996cdd85", null ],
     [ "HashType", "namespacehelios_1_1utils.html#ae6f12943a45b892bec3a5e117dfc5aea", null ],
     [ "DynamicLibraryError", "namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365e", [
-      [ "FileNotFound", "namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea2767828026039e8ba7b38973cbb701f2", null ],
-      [ "LoadFailed", "namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea3729d9667c9ed82ae96b6174b288a3a5", null ],
-      [ "SymbolNotFound", "namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365eac11f7f7d37763d1430ed2682642ea0ac", null ],
-      [ "InvalidHandle", "namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea2d0e462e9958ce7bb443e70023241dfe", null ],
-      [ "AlreadyLoaded", "namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea3cd0dcca263062e228b48dc510f78334", null ],
-      [ "NotLoaded", "namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea5111e24c1ecc6266ce0de4b4dc42033b", null ],
-      [ "PlatformError", "namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365eaba8ea63548a12106e8f5aed4e964ae6a", null ]
+      [ "kFileNotFound", "namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea3a62d594c4725a38e29490fa75b0a0be", null ],
+      [ "kLoadFailed", "namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365eadaaa083d964d345af835fb40ace29ecd", null ],
+      [ "kSymbolNotFound", "namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea2c397ea515b9af699cbce29b0cfd5d5b", null ],
+      [ "kInvalidHandle", "namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365eab5969c805672b0f38b174248526ba0b1", null ],
+      [ "kAlreadyLoaded", "namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea068ef0faf98222e6cbd19b1c55378d75", null ],
+      [ "kNotLoaded", "namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365ea66f6c8c8f899853a80418298208a12fa", null ],
+      [ "kPlatformError", "namespacehelios_1_1utils.html#aca74c060b4e32cb671a0bc6fb378365eab5fcaa6a3f229eb78c8df3983db8651e", null ]
     ] ],
     [ "FileError", "namespacehelios_1_1utils.html#aa8f8d89ee8389efd92330df687025d68", [
       [ "kCouldNotOpen", "namespacehelios_1_1utils.html#aa8f8d89ee8389efd92330df687025d68a84f032166061bfc754d13eb5fde4a3f7", null ],

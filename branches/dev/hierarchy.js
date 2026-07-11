@@ -239,6 +239,7 @@ var hierarchy =
       [ "helios::app::FrameCountPlugin", "classhelios_1_1app_1_1FrameCountPlugin.html", null ],
       [ "helios::app::TimePlugin", "classhelios_1_1app_1_1TimePlugin.html", null ]
     ] ],
+    [ "helios::app::PluginGroup", "classhelios_1_1app_1_1PluginGroup.html", null ],
     [ "helios::app::PluginTypeExport", "structhelios_1_1app_1_1PluginTypeExport.html", null ],
     [ "helios::mem::PoolAllocatorOptions", "structhelios_1_1mem_1_1PoolAllocatorOptions.html", null ],
     [ "helios::app::PostShutdown", "structhelios_1_1app_1_1PostShutdown.html", null ],
@@ -306,8 +307,6 @@ var hierarchy =
     [ "helios::ecs::SystemParamTraits&lt; Query&lt; Args... &gt; &gt;", "structhelios_1_1ecs_1_1SystemParamTraits_3_01Query_3_01Args_8_8_8_01_4_01_4.html", null ],
     [ "helios::ecs::SystemParamTraits&lt; Res&lt; const T &gt; &gt;", "structhelios_1_1ecs_1_1SystemParamTraits_3_01Res_3_01const_01T_01_4_01_4.html", null ],
     [ "helios::ecs::SystemParamTraits&lt; Res&lt; T &gt; &gt;", "structhelios_1_1ecs_1_1SystemParamTraits_3_01Res_3_01T_01_4_01_4.html", null ],
-    [ "helios::ecs::SystemParamTraits&lt; std::optional&lt; Local&lt; const T &gt; &gt; &gt;", "structhelios_1_1ecs_1_1SystemParamTraits_3_01std_1_1optional_3_01Local_3_01const_01T_01_4_01_4_01_4.html", null ],
-    [ "helios::ecs::SystemParamTraits&lt; std::optional&lt; Local&lt; T &gt; &gt; &gt;", "structhelios_1_1ecs_1_1SystemParamTraits_3_01std_1_1optional_3_01Local_3_01T_01_4_01_4_01_4.html", null ],
     [ "helios::ecs::SystemParamTraits&lt; std::optional&lt; Res&lt; const T &gt; &gt; &gt;", "structhelios_1_1ecs_1_1SystemParamTraits_3_01std_1_1optional_3_01Res_3_01const_01T_01_4_01_4_01_4.html", null ],
     [ "helios::ecs::SystemParamTraits&lt; std::optional&lt; Res&lt; T &gt; &gt; &gt;", "structhelios_1_1ecs_1_1SystemParamTraits_3_01std_1_1optional_3_01Res_3_01T_01_4_01_4_01_4.html", null ],
     [ "helios::ecs::SystemParamTraits&lt; WorldView &gt;", "structhelios_1_1ecs_1_1SystemParamTraits_3_01WorldView_01_4.html", null ],

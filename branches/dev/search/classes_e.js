@@ -54,13 +54,11 @@ var searchData=
   ['systemparamtraits_3c_20query_3c_20args_2e_2e_2e_20_3e_20_3e_51',['SystemParamTraits&lt; Query&lt; Args... &gt; &gt;',['../structhelios_1_1ecs_1_1SystemParamTraits_3_01Query_3_01Args_8_8_8_01_4_01_4.html',1,'helios::ecs']]],
   ['systemparamtraits_3c_20res_3c_20const_20t_20_3e_20_3e_52',['SystemParamTraits&lt; Res&lt; const T &gt; &gt;',['../structhelios_1_1ecs_1_1SystemParamTraits_3_01Res_3_01const_01T_01_4_01_4.html',1,'helios::ecs']]],
   ['systemparamtraits_3c_20res_3c_20t_20_3e_20_3e_53',['SystemParamTraits&lt; Res&lt; T &gt; &gt;',['../structhelios_1_1ecs_1_1SystemParamTraits_3_01Res_3_01T_01_4_01_4.html',1,'helios::ecs']]],
-  ['systemparamtraits_3c_20std_3a_3aoptional_3c_20local_3c_20const_20t_20_3e_20_3e_20_3e_54',['SystemParamTraits&lt; std::optional&lt; Local&lt; const T &gt; &gt; &gt;',['../structhelios_1_1ecs_1_1SystemParamTraits_3_01std_1_1optional_3_01Local_3_01const_01T_01_4_01_4_01_4.html',1,'helios::ecs']]],
-  ['systemparamtraits_3c_20std_3a_3aoptional_3c_20local_3c_20t_20_3e_20_3e_20_3e_55',['SystemParamTraits&lt; std::optional&lt; Local&lt; T &gt; &gt; &gt;',['../structhelios_1_1ecs_1_1SystemParamTraits_3_01std_1_1optional_3_01Local_3_01T_01_4_01_4_01_4.html',1,'helios::ecs']]],
-  ['systemparamtraits_3c_20std_3a_3aoptional_3c_20res_3c_20const_20t_20_3e_20_3e_20_3e_56',['SystemParamTraits&lt; std::optional&lt; Res&lt; const T &gt; &gt; &gt;',['../structhelios_1_1ecs_1_1SystemParamTraits_3_01std_1_1optional_3_01Res_3_01const_01T_01_4_01_4_01_4.html',1,'helios::ecs']]],
-  ['systemparamtraits_3c_20std_3a_3aoptional_3c_20res_3c_20t_20_3e_20_3e_20_3e_57',['SystemParamTraits&lt; std::optional&lt; Res&lt; T &gt; &gt; &gt;',['../structhelios_1_1ecs_1_1SystemParamTraits_3_01std_1_1optional_3_01Res_3_01T_01_4_01_4_01_4.html',1,'helios::ecs']]],
-  ['systemparamtraits_3c_20worldview_20_3e_58',['SystemParamTraits&lt; WorldView &gt;',['../structhelios_1_1ecs_1_1SystemParamTraits_3_01WorldView_01_4.html',1,'helios::ecs']]],
-  ['systemset_59',['SystemSet',['../classhelios_1_1ecs_1_1SystemSet.html',1,'helios::ecs']]],
-  ['systemsethandle_60',['SystemSetHandle',['../classhelios_1_1ecs_1_1SystemSetHandle.html',1,'helios::ecs']]],
-  ['systemsetid_61',['SystemSetId',['../structhelios_1_1ecs_1_1SystemSetId.html',1,'helios::ecs']]],
-  ['systemstorage_62',['SystemStorage',['../structhelios_1_1ecs_1_1SystemStorage.html',1,'helios::ecs']]]
+  ['systemparamtraits_3c_20std_3a_3aoptional_3c_20res_3c_20const_20t_20_3e_20_3e_20_3e_54',['SystemParamTraits&lt; std::optional&lt; Res&lt; const T &gt; &gt; &gt;',['../structhelios_1_1ecs_1_1SystemParamTraits_3_01std_1_1optional_3_01Res_3_01const_01T_01_4_01_4_01_4.html',1,'helios::ecs']]],
+  ['systemparamtraits_3c_20std_3a_3aoptional_3c_20res_3c_20t_20_3e_20_3e_20_3e_55',['SystemParamTraits&lt; std::optional&lt; Res&lt; T &gt; &gt; &gt;',['../structhelios_1_1ecs_1_1SystemParamTraits_3_01std_1_1optional_3_01Res_3_01T_01_4_01_4_01_4.html',1,'helios::ecs']]],
+  ['systemparamtraits_3c_20worldview_20_3e_56',['SystemParamTraits&lt; WorldView &gt;',['../structhelios_1_1ecs_1_1SystemParamTraits_3_01WorldView_01_4.html',1,'helios::ecs']]],
+  ['systemset_57',['SystemSet',['../classhelios_1_1ecs_1_1SystemSet.html',1,'helios::ecs']]],
+  ['systemsethandle_58',['SystemSetHandle',['../classhelios_1_1ecs_1_1SystemSetHandle.html',1,'helios::ecs']]],
+  ['systemsetid_59',['SystemSetId',['../structhelios_1_1ecs_1_1SystemSetId.html',1,'helios::ecs']]],
+  ['systemstorage_60',['SystemStorage',['../structhelios_1_1ecs_1_1SystemStorage.html',1,'helios::ecs']]]
 ];

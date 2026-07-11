@@ -9,6 +9,9 @@ var classhelios_1_1app_1_1App =
     [ "~App", "classhelios_1_1app_1_1App.html#acf734aa3c7b0408127b3552551df50f4", null ],
     [ "AddDynamicPlugin", "classhelios_1_1app_1_1App.html#ae7e9c0b7ba8ec6b77a485f9a4b8139cf", null ],
     [ "AddMessages", "classhelios_1_1app_1_1App.html#a5f2c1a0106d181ec8a4956f2ab494e51", null ],
+    [ "AddPlugin", "classhelios_1_1app_1_1App.html#a59d31439eb80424d0a1393cb41ee1020", null ],
+    [ "AddPluginGroups", "classhelios_1_1app_1_1App.html#a52b6e967e77c2b4d73591366b0ac1644", null ],
+    [ "AddPluginGroups", "classhelios_1_1app_1_1App.html#ae5e0fd9eec40640c933f50b9fecf2012", null ],
     [ "AddPlugins", "classhelios_1_1app_1_1App.html#a77f59c028a07f66d00b4afec965aad45", null ],
     [ "AddPlugins", "classhelios_1_1app_1_1App.html#a1b75283648afee66b016d48d96141859", null ],
     [ "AddSchedule", "classhelios_1_1app_1_1App.html#a90e0c384ffcca13aa777a10c9682a900", null ],
@@ -53,5 +56,6 @@ var classhelios_1_1app_1_1App =
     [ "TryGetSchedule", "classhelios_1_1app_1_1App.html#aa424665277bba70ecb4144bf439eae17", null ],
     [ "TryInsertResources", "classhelios_1_1app_1_1App.html#a7b138db7d693bec44e026ddfb15a8f40", null ],
     [ "Update", "classhelios_1_1app_1_1App.html#ad9c41ded54e87910d24f1a592f9350d4", null ],
+    [ "PluginGroup", "classhelios_1_1app_1_1App.html#a1df4f9d837225e260229bf4dce7fa43b", null ],
     [ "Scheduler", "classhelios_1_1app_1_1App.html#afb88c77ea5daaefa6c8fa6bc5b9aa5c1", null ]
 ];

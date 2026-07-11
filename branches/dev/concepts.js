@@ -4,6 +4,7 @@ var concepts =
       [ "app", "namespacehelios_1_1app.html", [
         [ "AsyncSubAppTrait", "concepthelios_1_1app_1_1AsyncSubAppTrait.html", null ],
         [ "OverlappingUpdatesSubAppTrait", "concepthelios_1_1app_1_1OverlappingUpdatesSubAppTrait.html", null ],
+        [ "PluginGroupTrait", "concepthelios_1_1app_1_1PluginGroupTrait.html", null ],
         [ "PluginTrait", "concepthelios_1_1app_1_1PluginTrait.html", null ],
         [ "PluginWithNameTrait", "concepthelios_1_1app_1_1PluginWithNameTrait.html", null ],
         [ "SubAppTrait", "concepthelios_1_1app_1_1SubAppTrait.html", null ],

@@ -209,7 +209,7 @@ Static Public Attributes</h2></td></tr>
 <div class="textblock"><p>Message that requests the application to exit. </p>
 <p>Written by systems; <span class="tt"><a class="el" href="namespacehelios_1_1app.html#a022063119d282398a06fd9bba73f20fc" title="Runs the application until an AppExit message is received.">RunDefault</a></span> stops when this message is present. Uses manual clear policy so it survives per-schedule <span class="tt">World::Update()</span> sync points within a frame. </p>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00058">58</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00060">60</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="abb444cc49c98e4c39ed16bbf68a4273a" name="abb444cc49c98e4c39ed16bbf68a4273a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abb444cc49c98e4c39ed16bbf68a4273a">&#9670;&#160;</a></span>Failure()</h2>
@@ -237,7 +237,7 @@ Static Public Attributes</h2></td></tr>
 <p>Creates an <span class="tt"><a class="el" href="structhelios_1_1app_1_1AppExit.html" title="Message that requests the application to exit.">AppExit</a></span> message indicating failure. </p>
 <dl class="section return"><dt>Returns</dt><dd>An <span class="tt"><a class="el" href="structhelios_1_1app_1_1AppExit.html" title="Message that requests the application to exit.">AppExit</a></span> message with a failure exit code </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00088">88</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00090">90</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -273,7 +273,7 @@ Static Public Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>An <span class="tt"><a class="el" href="structhelios_1_1app_1_1AppExit.html" title="Message that requests the application to exit.">AppExit</a></span> message with the specified exit code </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00072">72</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00074">74</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -303,7 +303,7 @@ Static Public Attributes</h2></td></tr>
 <p>Creates an <span class="tt"><a class="el" href="structhelios_1_1app_1_1AppExit.html" title="Message that requests the application to exit.">AppExit</a></span> message indicating success. </p>
 <dl class="section return"><dt>Returns</dt><dd>An <span class="tt"><a class="el" href="structhelios_1_1app_1_1AppExit.html" title="Message that requests the application to exit.">AppExit</a></span> message with a success exit code </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00080">80</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00082">82</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -320,7 +320,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00065">65</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00067">67</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -344,7 +344,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00062">62</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00064">64</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -371,7 +371,7 @@ Static Public Attributes</h2></td></tr>
 <div class="line"><a class="code hl_enumvalue" href="namespacehelios_1_1ecs.html#a8e814f2d6b0d57fcb71731fc95c49e90a840f73673d401f2e539743e82e167a45">ecs::MessageClearPolicy::kManual</a></div>
 <div class="ttc" id="anamespacehelios_1_1ecs_html_a8e814f2d6b0d57fcb71731fc95c49e90a840f73673d401f2e539743e82e167a45"><div class="ttname"><a href="namespacehelios_1_1ecs.html#a8e814f2d6b0d57fcb71731fc95c49e90a840f73673d401f2e539743e82e167a45">helios::ecs::MessageClearPolicy::kManual</a></div><div class="ttdeci">@ kManual</div><div class="ttdoc">Messages persist until manually cleared.</div><div class="ttdef"><b>Definition</b> <a href="ecs_2include_2helios_2ecs_2message_2message_8hpp_source.html#l00019">message.hpp:19</a></div></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00060">60</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00062">62</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -395,7 +395,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00063">63</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00065">65</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>
@@ -419,7 +419,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00059">59</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="application_8hpp_source.html#l00061">61</a> of file <a class="el" href="application_8hpp_source.html">application.hpp</a>.</p>
 
 </div>
 </div>

@@ -7,9 +7,10 @@ var searchData=
   ['platform_2ehpp_4',['platform.hpp',['../platform_8hpp.html',1,'']]],
   ['plot_2ehpp_5',['plot.hpp',['../plot_8hpp.html',1,'']]],
   ['plugin_2ehpp_6',['plugin.hpp',['../plugin_8hpp.html',1,'']]],
-  ['pool_5fallocator_2ecpp_7',['pool_allocator.cpp',['../pool__allocator_8cpp.html',1,'']]],
-  ['pool_5fallocator_2ehpp_8',['pool_allocator.hpp',['../pool__allocator_8hpp.html',1,'']]],
-  ['profile_2ehpp_9',['profile.hpp',['../profile_8hpp.html',1,'']]],
-  ['profiler_2ecpp_10',['profiler.cpp',['../profiler_8cpp.html',1,'']]],
-  ['profiler_2ehpp_11',['profiler.hpp',['../profiler_8hpp.html',1,'']]]
+  ['plugin_5fgroup_2ehpp_7',['plugin_group.hpp',['../plugin__group_8hpp.html',1,'']]],
+  ['pool_5fallocator_2ecpp_8',['pool_allocator.cpp',['../pool__allocator_8cpp.html',1,'']]],
+  ['pool_5fallocator_2ehpp_9',['pool_allocator.hpp',['../pool__allocator_8hpp.html',1,'']]],
+  ['profile_2ehpp_10',['profile.hpp',['../profile_8hpp.html',1,'']]],
+  ['profiler_2ecpp_11',['profiler.cpp',['../profiler_8cpp.html',1,'']]],
+  ['profiler_2ehpp_12',['profiler.hpp',['../profiler_8hpp.html',1,'']]]
 ];
