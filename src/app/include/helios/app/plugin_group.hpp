@@ -74,7 +74,7 @@ public:
   void Build(App& app);
 
 protected:
-  constexpr PluginGroup() = default;
+  PluginGroup() = default;
 
   /**
    * @brief Constructs a group with the given default plugins.
