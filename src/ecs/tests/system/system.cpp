@@ -391,8 +391,8 @@ TEST_SUITE("helios::ecs::SystemTrait") {
       CHECK(SystemTrait<OptionalResourceSystem>);
     }
 
-    SUBCASE("Systems with optional Local params satisfy SystemTrait") {
-      CHECK(SystemTrait<OptionalLocalSystem>);
+    SUBCASE("Systems with optional Local params do not satisfy SystemTrait") {
+      CHECK_FALSE(SystemTrait<OptionalLocalSystem>);
     }
   }
 

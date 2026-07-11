@@ -6,6 +6,7 @@
 #include <helios/app/builtin/time.hpp>
 #include <helios/app/dynamic_plugin.hpp>
 #include <helios/app/plugin.hpp>
+#include <helios/app/plugin_group.hpp>
 #include <helios/app/runners.hpp>
 #include <helios/app/scheduler.hpp>
 #include <helios/app/schedules.hpp>

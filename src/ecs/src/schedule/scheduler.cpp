@@ -365,15 +365,16 @@ auto Scheduler::CreateExecutor(ExecutorKind kind,
                                async::Executor* async_executor)
     -> std::unique_ptr<Executor> {
   switch (kind) {
-    case ExecutorKind::kMainThread:
+    using enum ExecutorKind;
+    case kMainThread:
       return std::make_unique<MainThreadExecutor>();
-    case ExecutorKind::kSingleThreaded: {
+    case kSingleThreaded: {
       HELIOS_ASSERT(async_executor != nullptr,
                     "Scheduler: cannot create SingleThreadedExecutor without "
                     "an async::Executor! Call Build(async::Executor&).");
       return std::make_unique<SingleThreadedExecutor>(*async_executor);
     }
-    case ExecutorKind::kMultiThreaded: {
+    case kMultiThreaded: {
       HELIOS_ASSERT(async_executor != nullptr,
                     "Scheduler: cannot create MultiThreadedExecutor without "
                     "an async::Executor! Call Build(async::Executor&).");

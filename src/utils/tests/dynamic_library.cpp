@@ -45,7 +45,7 @@ TEST_SUITE("helios::utils::DynamicLibrary") {
     auto result = lib.Load("/nonexistent/path/to/library.so");
 
     CHECK_FALSE(result.has_value());
-    CHECK_EQ(result.error(), DynamicLibraryError::FileNotFound);
+    CHECK_EQ(result.error(), DynamicLibraryError::kFileNotFound);
     CHECK_FALSE(lib.Loaded());
   }
 
@@ -54,7 +54,7 @@ TEST_SUITE("helios::utils::DynamicLibrary") {
     auto result = lib.Unload();
 
     CHECK_FALSE(result.has_value());
-    CHECK_EQ(result.error(), DynamicLibraryError::NotLoaded);
+    CHECK_EQ(result.error(), DynamicLibraryError::kNotLoaded);
   }
 
   TEST_CASE("utils::DynamicLibrary::Reload: when not loaded") {
@@ -62,7 +62,7 @@ TEST_SUITE("helios::utils::DynamicLibrary") {
     auto result = lib.Reload();
 
     CHECK_FALSE(result.has_value());
-    CHECK_EQ(result.error(), DynamicLibraryError::NotLoaded);
+    CHECK_EQ(result.error(), DynamicLibraryError::kNotLoaded);
   }
 
   TEST_CASE("utils::DynamicLibrary::GetSymbolAddress: when not loaded") {
@@ -70,7 +70,7 @@ TEST_SUITE("helios::utils::DynamicLibrary") {
     auto result = lib.GetSymbolAddress("some_symbol");
 
     CHECK_FALSE(result.has_value());
-    CHECK_EQ(result.error(), DynamicLibraryError::NotLoaded);
+    CHECK_EQ(result.error(), DynamicLibraryError::kNotLoaded);
   }
 
   TEST_CASE("utils::DynamicLibrary::GetSymbol: typed version") {
@@ -79,7 +79,7 @@ TEST_SUITE("helios::utils::DynamicLibrary") {
     auto result = lib.GetSymbol<FnType>("some_function");
 
     CHECK_FALSE(result.has_value());
-    CHECK_EQ(result.error(), DynamicLibraryError::NotLoaded);
+    CHECK_EQ(result.error(), DynamicLibraryError::kNotLoaded);
   }
 
   TEST_CASE("utils::DynamicLibrary::ctor: move construction") {
@@ -101,19 +101,19 @@ TEST_SUITE("helios::utils::DynamicLibrary") {
   }
 
   TEST_CASE("utils::DynamicLibraryErrorToString::error to string") {
-    CHECK_EQ(DynamicLibraryErrorToString(DynamicLibraryError::FileNotFound),
+    CHECK_EQ(DynamicLibraryErrorToString(DynamicLibraryError::kFileNotFound),
              "Library file not found");
-    CHECK_EQ(DynamicLibraryErrorToString(DynamicLibraryError::LoadFailed),
+    CHECK_EQ(DynamicLibraryErrorToString(DynamicLibraryError::kLoadFailed),
              "Failed to load library");
-    CHECK_EQ(DynamicLibraryErrorToString(DynamicLibraryError::SymbolNotFound),
+    CHECK_EQ(DynamicLibraryErrorToString(DynamicLibraryError::kSymbolNotFound),
              "Symbol not found in library");
-    CHECK_EQ(DynamicLibraryErrorToString(DynamicLibraryError::InvalidHandle),
+    CHECK_EQ(DynamicLibraryErrorToString(DynamicLibraryError::kInvalidHandle),
              "Invalid library handle");
-    CHECK_EQ(DynamicLibraryErrorToString(DynamicLibraryError::AlreadyLoaded),
+    CHECK_EQ(DynamicLibraryErrorToString(DynamicLibraryError::kAlreadyLoaded),
              "Library is already loaded");
-    CHECK_EQ(DynamicLibraryErrorToString(DynamicLibraryError::NotLoaded),
+    CHECK_EQ(DynamicLibraryErrorToString(DynamicLibraryError::kNotLoaded),
              "Library is not loaded");
-    CHECK_EQ(DynamicLibraryErrorToString(DynamicLibraryError::PlatformError),
+    CHECK_EQ(DynamicLibraryErrorToString(DynamicLibraryError::kPlatformError),
              "Platform-specific error");
   }
 
@@ -139,12 +139,12 @@ TEST_SUITE("helios::utils::DynamicLibrary") {
 
   TEST_CASE("utils::DynamicLibrary::operator=: self move assignment is safe") {
     DynamicLibrary lib;
-#if defined(__GNUC__)
+#ifdef __GNUC__
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wself-move"
 #endif
     lib = std::move(lib);  // NOLINT(clang-diagnostic-self-move)
-#if defined(__GNUC__)
+#ifdef __GNUC__
 #pragma GCC diagnostic pop
 #endif
     CHECK_FALSE(lib.Loaded());

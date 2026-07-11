@@ -21,9 +21,10 @@ enum class FileError : uint8_t { kCouldNotOpen, kReadError };
 [[nodiscard]] constexpr std::string_view FileErrorToString(
     FileError error) noexcept {
   switch (error) {
-    case FileError::kCouldNotOpen:
+    using enum FileError;
+    case kCouldNotOpen:
       return "Could not open file";
-    case FileError::kReadError:
+    case kReadError:
       return "Could not read file";
     default:
       return "Unknown file error";

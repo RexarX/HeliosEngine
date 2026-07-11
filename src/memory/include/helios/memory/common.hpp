@@ -191,16 +191,17 @@ enum class MemoryError : uint8_t {
  */
 [[nodiscard]] constexpr std::string_view MemoryErrorToString(
     MemoryError error) noexcept {
+  using enum MemoryError;
   switch (error) {
-    case MemoryError::kOutOfMemory:
+    case kOutOfMemory:
       return "Out of memory";
-    case MemoryError::kInvalidAlignment:
+    case kInvalidAlignment:
       return "Invalid alignment";
-    case MemoryError::kInvalidSize:
+    case kInvalidSize:
       return "Invalid size";
-    case MemoryError::kGrowthDisabled:
+    case kGrowthDisabled:
       return "Growth is disabled";
-    case MemoryError::kOwnershipMismatch:
+    case kOwnershipMismatch:
       return "Pointer is not owned by allocator";
     default:
       return "Unknown memory error";

@@ -213,20 +213,6 @@ TEST_SUITE("helios::ecs::BuildPolicyFromParams") {
       CHECK_FALSE(policy.HasComponents());
       CHECK_FALSE(policy.HasResources());
     }
-
-    SUBCASE("optional<Local<T>> produces empty policy") {
-      const auto policy =
-          BuildPolicyFromParamsManual<std::optional<Local<Camera>>>();
-      CHECK_FALSE(policy.HasComponents());
-      CHECK_FALSE(policy.HasResources());
-    }
-
-    SUBCASE("optional<Local<const T>> produces empty policy") {
-      auto policy =
-          BuildPolicyFromParamsManual<std::optional<Local<const Camera>>>();
-      CHECK_FALSE(policy.HasComponents());
-      CHECK_FALSE(policy.HasResources());
-    }
   }
 
   TEST_CASE("ecs::BuildPolicyFromParams::Commands") {

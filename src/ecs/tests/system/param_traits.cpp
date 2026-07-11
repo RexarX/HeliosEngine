@@ -193,29 +193,40 @@ TEST_SUITE("helios::ecs::SystemParamTraits") {
       CHECK(HasRegisterAccess<Local<Camera>>);
     }
 
-    SUBCASE("optional<Local<const T>> exists as a system parameter trait") {
-      CHECK(HasSystemParamTraits<std::optional<Local<const Camera>>>);
-      CHECK(HasRegisterAccess<std::optional<Local<const Camera>>>);
+    SUBCASE("optional<Local<T>> is not a system parameter") {
+      CHECK_FALSE(SystemParam<std::optional<Local<const Camera>>>);
+      CHECK_FALSE(SystemParam<std::optional<Local<Camera>>>);
+      CHECK_FALSE(HasRegisterAccess<std::optional<Local<const Camera>>>);
+      CHECK_FALSE(HasRegisterAccess<std::optional<Local<Camera>>>);
     }
 
-    SUBCASE("optional<Local<T>> exists as a system parameter trait") {
-      CHECK(HasSystemParamTraits<std::optional<Local<Camera>>>);
-      CHECK(HasRegisterAccess<std::optional<Local<Camera>>>);
-    }
-
-    SUBCASE("Local<T> Make returns a wrapper over system-local resources") {
+    SUBCASE("Local<T> Make default-creates system-local resources") {
       World world;
       SystemLocalData data = SystemLocalData::From();
       AccessPolicy policy;
+      CHECK_FALSE(data.resource_manager.Has<Camera>());
 
       const Local<Camera> local =
           SystemParamTraits<Local<Camera>>::Make(world, data, policy);
-      local.Insert(Camera{.fov = 75.0F});
+      local = Camera{.fov = 75.0F};
 
       CHECK_EQ(data.resource_manager.Get<Camera>().fov, 75.0F);
     }
 
-    SUBCASE("Local<const T> Make reads system-local resources") {
+    SUBCASE("Local<const T> Make default-creates system-local resources") {
+      World world;
+      SystemLocalData data = SystemLocalData::From();
+      AccessPolicy policy;
+      CHECK_FALSE(data.resource_manager.Has<Camera>());
+
+      const Local<const Camera> local =
+          SystemParamTraits<Local<const Camera>>::Make(world, data, policy);
+
+      CHECK_EQ(local->fov, 90.0F);
+      CHECK(data.resource_manager.Has<Camera>());
+    }
+
+    SUBCASE("Local<const T> Make reads existing system-local resources") {
       World world;
       SystemLocalData data = SystemLocalData::From();
       AccessPolicy policy;
@@ -225,33 +236,6 @@ TEST_SUITE("helios::ecs::SystemParamTraits") {
           SystemParamTraits<Local<const Camera>>::Make(world, data, policy);
 
       CHECK_EQ(local->fov, 80.0F);
-    }
-
-    SUBCASE(
-        "std::optional<Local<T>> Make is empty when local resource is absent") {
-      World world;
-      SystemLocalData data = SystemLocalData::From();
-      AccessPolicy policy;
-
-      const auto local = SystemParamTraits<std::optional<Local<Camera>>>::Make(
-          world, data, policy);
-
-      CHECK_FALSE(local.has_value());
-    }
-
-    SUBCASE(
-        "std::optional<Local<T>> Make returns wrapper when resource exists") {
-      World world;
-      SystemLocalData data = SystemLocalData::From();
-      AccessPolicy policy;
-      data.resource_manager.Insert(Camera{.fov = 85.0F});
-
-      const auto local = SystemParamTraits<std::optional<Local<Camera>>>::Make(
-          world, data, policy);
-      REQUIRE(local.has_value());
-      local->Insert(Camera{.fov = 95.0F});
-
-      CHECK_EQ(data.resource_manager.Get<Camera>().fov, 95.0F);
     }
 
     SUBCASE("Local<const T> RegisterAccess produces empty policy") {
@@ -266,25 +250,6 @@ TEST_SUITE("helios::ecs::SystemParamTraits") {
     SUBCASE("Local<T> RegisterAccess produces empty policy") {
       AccessPolicyBuilder builder;
       SystemParamTraits<Local<Camera>>::RegisterAccess(builder);
-
-      const auto policy = builder.Build();
-      CHECK_FALSE(policy.HasComponents());
-      CHECK_FALSE(policy.HasResources());
-    }
-
-    SUBCASE("optional<Local<const T>> RegisterAccess produces empty policy") {
-      AccessPolicyBuilder builder;
-      SystemParamTraits<std::optional<Local<const Camera>>>::RegisterAccess(
-          builder);
-
-      const auto policy = builder.Build();
-      CHECK_FALSE(policy.HasComponents());
-      CHECK_FALSE(policy.HasResources());
-    }
-
-    SUBCASE("optional<Local<T>> RegisterAccess produces empty policy") {
-      AccessPolicyBuilder builder;
-      SystemParamTraits<std::optional<Local<Camera>>>::RegisterAccess(builder);
 
       const auto policy = builder.Build();
       CHECK_FALSE(policy.HasComponents());

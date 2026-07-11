@@ -81,26 +81,10 @@ struct ReadOptionalResources {
 
 struct UseLocalScratch {
   void operator()(hecs::Local<LocalScratch> scratch) const {
-    // The local resource manager starts empty for this run. Initialize the
-    // scratch value before reading it.
-    if (!scratch.Resources().Has<LocalScratch>()) {
-      scratch.Insert(LocalScratch{});
-    }
-
+    // Required local resources are default-created before the system runs.
     ++scratch->updates_this_run;
     hlog::Info("resources: local scratch updates={}",
                scratch->updates_this_run);
-  }
-};
-
-struct ReadOptionalLocalScratch {
-  void operator()(std::optional<hecs::Local<LocalScratch>> scratch) const {
-    // Optional Local behaves like optional Res, but it checks this system's own
-    // local resource manager. This system never creates LocalScratch, so the
-    // optional is empty.
-    if (!scratch.has_value()) {
-      hlog::Info("resources: optional local scratch is absent");
-    }
   }
 };
 
@@ -130,7 +114,7 @@ int main() {
   app.InsertResources(GameConfig{}, ThreadSafeCounter{});
 
   app.AddSystems(happ::kUpdate, UseRegularResource{}, IncrementThreadSafe{},
-                 UseLocalScratch{}, ReadOptionalLocalScratch{});
+                 UseLocalScratch{});
 
   app.AddSystems(happ::kPostUpdate, ReadThreadSafeResource{},
                  ReadOptionalResources{}, ExitAfterFrames{});

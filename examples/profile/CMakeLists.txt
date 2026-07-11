@@ -1,5 +1,7 @@
 helios_add_example(
     NAME profile
-    MODULES app profile log
-    ENABLE_PROFILE
+    SOURCES profile.cpp
+    MODULES app ecs log profile
 )
+
+target_compile_definitions(profile_example PRIVATE HELIOS_ENABLE_PROFILE)

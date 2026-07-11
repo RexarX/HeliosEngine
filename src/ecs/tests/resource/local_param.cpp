@@ -1,10 +1,10 @@
 #include <doctest/doctest.h>
 
 #include <helios/ecs/resource/local_param.hpp>
-#include <helios/ecs/resource/manager.hpp>
 
-#include <string>
+#include <concepts>
 #include <type_traits>
+#include <utility>
 
 using namespace helios::ecs;
 
@@ -14,196 +14,203 @@ struct Counter {
   int value = 0;
 };
 
-struct Config {
-  std::string name;
-  int version = 0;
-};
+template <typename T>
+concept HasInsert =
+    requires(const T& local, Counter counter) { local.Insert(counter); };
 
-struct Vec3 {
-  float x = 0.0F;
-  float y = 0.0F;
-  float z = 0.0F;
-};
+template <typename T>
+concept HasEmplace = requires(const T& local) { local.Emplace(); };
+
+template <typename T>
+concept HasResources = requires(const T& local) { local.Resources(); };
+
+template <typename T, typename U>
+concept HasResourceAssignment =
+    requires(const T& local, U value) { local = value; };
 
 }  // namespace
 
 TEST_SUITE("helios::ecs::Local") {
   TEST_CASE("ecs::Local::ctor") {
-    SUBCASE("Constructor stores resource manager reference") {
-      ResourceManager resources;
-      const Local<Counter> local(resources);
-      CHECK_EQ(local.Resources().Count(), 0);
+    SUBCASE("Constructor stores resource reference") {
+      Counter counter{42};
+
+      const Local<Counter> local(counter);
+
+      CHECK_EQ(&local.Get(), &counter);
+      CHECK_EQ(local.Get().value, 42);
     }
 
     SUBCASE("Constructor accepts const-qualified local resource type") {
-      ResourceManager resources;
-      const Local<const Counter> local(resources);
-      CHECK_EQ(local.Resources().Count(), 0);
+      const Counter counter{7};
+
+      const Local<const Counter> local(counter);
+
+      CHECK_EQ(&local.Get(), &counter);
+      CHECK_EQ(local.Get().value, 7);
     }
   }
 
   TEST_CASE("ecs::Local::copy") {
-    SUBCASE("Copy constructor creates a valid copy") {
-      ResourceManager resources;
-      resources.Emplace<Counter>(42);
-      const Local<Counter> original(resources);
+    SUBCASE("Copy constructor creates a wrapper for the same resource") {
+      Counter counter{42};
+      const Local<Counter> original(counter);
+
       const Local<Counter> copy(original);
+
+      CHECK_EQ(&copy.Get(), &counter);
       CHECK_EQ(copy.Get().value, 42);
     }
 
-    SUBCASE("Copy assignment copies the reference") {
-      ResourceManager resources;
-      resources.Emplace<Counter>(7);
-      const Local<Counter> local_a(resources);
-      Local<Counter> local_b(resources);
+    SUBCASE("Copy assignment copies the resource reference") {
+      Counter counter_a{7};
+      Counter counter_b{3};
+      const Local<Counter> local_a(counter_a);
+      Local<Counter> local_b(counter_b);
+
       local_b = local_a;
-      CHECK_EQ(local_b.Get().value, 7);
+      local_b = Counter{11};
+
+      CHECK_EQ(counter_a.value, 11);
+      CHECK_EQ(counter_b.value, 3);
     }
   }
 
   TEST_CASE("ecs::Local::move") {
-    SUBCASE("Move constructor transfers the reference") {
-      ResourceManager resources;
-      resources.Emplace<Counter>(99);
-      Local<Counter> original(resources);
+    SUBCASE("Move constructor transfers the resource reference") {
+      Counter counter{99};
+      Local<Counter> original(counter);
+
       const Local<Counter> moved(std::move(original));
+
+      CHECK_EQ(&moved.Get(), &counter);
       CHECK_EQ(moved.Get().value, 99);
     }
 
-    SUBCASE("Move assignment transfers the reference") {
-      ResourceManager resources;
-      resources.Emplace<Counter>(5);
-      Local<Counter> local_a(resources);
-      Local<Counter> local_b(resources);
+    SUBCASE("Move assignment transfers the resource reference") {
+      Counter counter_a{5};
+      Counter counter_b{8};
+      Local<Counter> local_a(counter_a);
+      Local<Counter> local_b(counter_b);
+
       local_b = std::move(local_a);
-      CHECK_EQ(local_b.Get().value, 5);
+      local_b = Counter{13};
+
+      CHECK_EQ(counter_a.value, 13);
+      CHECK_EQ(counter_b.value, 8);
     }
   }
 
-  TEST_CASE("ecs::Local::Insert") {
-    SUBCASE("Insert stores the resource and makes it retrievable") {
-      ResourceManager resources;
-      const Local<Counter> local(resources);
-      local.Insert(Counter{42});
-      CHECK_EQ(local.Get().value, 42);
+  TEST_CASE("ecs::Local::operator=") {
+    SUBCASE("Assignment with lvalue replaces the referenced resource value") {
+      Counter counter{0};
+      Counter replacement{10};
+      const Local<Counter> local(counter);
+
+      local = replacement;
+
+      CHECK_EQ(counter.value, 10);
     }
 
-    SUBCASE("Insert with lvalue copies the resource") {
-      ResourceManager resources;
-      const Local<Counter> local(resources);
-      Counter cnt{10};
-      local.Insert(cnt);
-      CHECK_EQ(local.Get().value, 10);
+    SUBCASE("Assignment with rvalue replaces the referenced resource value") {
+      Counter counter{1};
+      const Local<Counter> local(counter);
+
+      local = Counter{22};
+
+      CHECK_EQ(counter.value, 22);
     }
 
-    SUBCASE("Insert replaces an existing resource of the same type") {
-      ResourceManager resources;
-      const Local<Counter> local(resources);
-      local.Insert(Counter{1});
-      local.Insert(Counter{2});
-      CHECK_EQ(local.Get().value, 2);
-    }
-  }
+    SUBCASE("Assignment returns the referenced resource") {
+      Counter counter{0};
+      const Local<Counter> local(counter);
 
-  TEST_CASE("ecs::Local::Emplace") {
-    SUBCASE("Emplace default-constructs a resource in-place") {
-      ResourceManager resources;
-      const Local<Counter> local(resources);
-      local.Emplace();
-      CHECK_EQ(local.Get().value, 0);
+      Counter& assigned = (local = Counter{31});
+
+      CHECK_EQ(&assigned, &counter);
+      CHECK_EQ(assigned.value, 31);
     }
 
-    SUBCASE("Emplace forwards constructor arguments") {
-      ResourceManager resources;
-      const Local<Vec3> local(resources);
-      local.Emplace(1.0F, 2.0F, 3.0F);
-      CHECK_EQ(local.Get().x, 1.0F);
-      CHECK_EQ(local.Get().y, 2.0F);
-      CHECK_EQ(local.Get().z, 3.0F);
-    }
-
-    SUBCASE("Emplace replaces an existing resource") {
-      ResourceManager resources;
-      const Local<Counter> local(resources);
-      local.Emplace(1);
-      local.Emplace(2);
-      CHECK_EQ(local.Get().value, 2);
-    }
-
-    SUBCASE("Emplace with std::string resource stores the value correctly") {
-      ResourceManager resources;
-      const Local<Config> local(resources);
-      local.Emplace("engine", 3);
-      CHECK_EQ(local.Get().name, "engine");
-      CHECK_EQ(local.Get().version, 3);
+    SUBCASE("Const-qualified local resources cannot be assigned through") {
+      CHECK(std::is_assignable_v<const Local<Counter>&, Counter>);
+      CHECK_FALSE(std::is_assignable_v<const Local<const Counter>&, Counter>);
+      CHECK_FALSE((HasResourceAssignment<Local<const Counter>, Counter>));
     }
   }
 
   TEST_CASE("ecs::Local::operator*") {
     SUBCASE("operator* returns reference to stored resource") {
-      ResourceManager resources;
-      resources.Emplace<Counter>(5);
-      const Local<Counter> local(resources);
+      Counter counter{5};
+      const Local<Counter> local(counter);
+
       const auto& cnt = *local;
+
+      CHECK_EQ(&cnt, &counter);
       CHECK_EQ(cnt.value, 5);
     }
 
     SUBCASE(
         "Modification through operator* is reflected in subsequent access") {
-      ResourceManager resources;
-      resources.Emplace<Counter>(0);
-      const Local<Counter> local(resources);
+      Counter counter{0};
+      const Local<Counter> local(counter);
+
       (*local).value = 42;
+
       CHECK_EQ(local.Get().value, 42);
+      CHECK_EQ(counter.value, 42);
     }
   }
 
   TEST_CASE("ecs::Local::operator->") {
     SUBCASE("operator-> returns pointer to stored resource") {
-      ResourceManager resources;
-      resources.Emplace<Counter>(3);
-      const Local<Counter> local(resources);
+      Counter counter{3};
+      const Local<Counter> local(counter);
+
+      CHECK_EQ(local.operator->(), &counter);
       CHECK_EQ(local->value, 3);
     }
 
     SUBCASE(
         "Modification through operator-> is reflected in subsequent access") {
-      ResourceManager resources;
-      resources.Emplace<Counter>(0);
-      const Local<Counter> local(resources);
+      Counter counter{0};
+      const Local<Counter> local(counter);
+
       local->value = 77;
+
       CHECK_EQ(local.Get().value, 77);
+      CHECK_EQ(counter.value, 77);
     }
   }
 
   TEST_CASE("ecs::Local::Get") {
     SUBCASE("Get returns reference to stored resource") {
-      ResourceManager resources;
-      resources.Emplace<Counter>(9);
-      const Local<Counter> local(resources);
+      Counter counter{9};
+      const Local<Counter> local(counter);
+
+      CHECK_EQ(&local.Get(), &counter);
       CHECK_EQ(local.Get().value, 9);
     }
 
     SUBCASE("Get returns const reference for const-qualified local") {
-      ResourceManager resources;
-      resources.Emplace<Counter>(4);
-      const Local<const Counter> local(resources);
+      const Counter counter{4};
+      const Local<const Counter> local(counter);
+
+      CHECK_EQ(&local.Get(), &counter);
       CHECK_EQ(local.Get().value, 4);
     }
   }
 
-  TEST_CASE("ecs::Local::Resources") {
-    SUBCASE("Resources returns reference to the resource manager") {
-      ResourceManager resources;
-      const Local<Counter> local(resources);
-      CHECK_EQ(local.Resources().Count(), 0);
+  TEST_CASE("ecs::Local::removed manager methods") {
+    SUBCASE("Insert is not part of the Local API") {
+      CHECK_FALSE(HasInsert<Local<Counter>>);
     }
 
-    SUBCASE("Resources reflects changes made through the local") {
-      ResourceManager resources;
-      const Local<Counter> local(resources);
-      local.Emplace(1);
-      CHECK(local.Resources().Has<Counter>());
+    SUBCASE("Emplace is not part of the Local API") {
+      CHECK_FALSE(HasEmplace<Local<Counter>>);
+    }
+
+    SUBCASE("Resources is not part of the Local API") {
+      CHECK_FALSE(HasResources<Local<Counter>>);
     }
   }
 }

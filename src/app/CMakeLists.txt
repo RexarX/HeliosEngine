@@ -14,6 +14,7 @@ helios_module(
         include/helios/app/application.hpp
         include/helios/app/dynamic_plugin.hpp
         include/helios/app/plugin.hpp
+        include/helios/app/plugin_group.hpp
         include/helios/app/runners.hpp
         include/helios/app/scheduler.hpp
         include/helios/app/schedules.hpp
@@ -51,6 +52,7 @@ helios_module(
         tests/dynamic_plugin.cpp
         tests/main.cpp
         tests/plugin.cpp
+        tests/plugin_group.cpp
         tests/runners.cpp
         tests/scheduler.cpp
         tests/schedules.cpp
