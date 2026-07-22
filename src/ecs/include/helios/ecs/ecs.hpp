@@ -9,6 +9,7 @@
 #include <helios/ecs/command/world_buffer.hpp>
 #include <helios/ecs/component/archetype.hpp>
 #include <helios/ecs/component/archetype_id.hpp>
+#include <helios/ecs/component/bundle.hpp>
 #include <helios/ecs/component/component.hpp>
 #include <helios/ecs/component/manager.hpp>
 #include <helios/ecs/entity/entity.hpp>

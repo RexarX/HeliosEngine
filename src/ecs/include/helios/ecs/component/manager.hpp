@@ -7,6 +7,7 @@
 #include <helios/container/typed_buffer_array.hpp>
 #include <helios/ecs/component/archetype.hpp>
 #include <helios/ecs/component/archetype_id.hpp>
+#include <helios/ecs/component/bundle.hpp>
 #include <helios/ecs/component/component.hpp>
 #include <helios/ecs/component/sparse_storage.hpp>
 #include <helios/ecs/details/profile.hpp>
@@ -21,6 +22,7 @@
 #include <functional>
 #include <span>
 #include <string_view>
+#include <tuple>
 #include <type_traits>
 #include <unordered_map>
 #include <utility>
@@ -421,6 +423,37 @@ public:
                             std::array<bool, sizeof...(Ts)>>;
 
   /**
+   * @brief Adds every component in a component bundle to an entity.
+   * @details Flattened archetype components are added in a single migration.
+   * Existing components are replaced.
+   * @warning Triggers assertion in next cases:
+   * - Entity is invalid.
+   * - Entity is not tracked.
+   * @tparam B Component bundle type
+   * @param entity Entity
+   * @param bundle Component bundle value
+   */
+  template <ComponentBundleTrait B>
+  void AddBundle(Entity entity, B&& bundle);
+
+  /**
+   * @brief Tries to add every component in a component bundle.
+   * @details Components already present on the entity are left unchanged.
+   * Results follow the flattened declaration order of the bundle.
+   * @warning Triggers assertion in next cases:
+   * - Entity is invalid.
+   * - Entity is not tracked.
+   * @tparam B Component bundle type
+   * @param entity Entity
+   * @param bundle Component bundle value
+   * @return Whether each component was added. A single-component bundle
+   * returns a bool; all other bundles return an array.
+   */
+  template <ComponentBundleTrait B>
+  auto TryAddBundle(Entity entity, B&& bundle)
+      -> details::ComponentBundleResult<B>;
+
+  /**
    * @brief Emplaces a component (construct in-place), dispatching by storage
    * type.
    * @details Replaces if already present.
@@ -485,6 +518,34 @@ public:
   auto TryRemove(Entity entity)
       -> std::conditional_t<sizeof...(Ts) == 1, bool,
                             std::array<bool, sizeof...(Ts)>>;
+
+  /**
+   * @brief Removes every component type represented by a component bundle.
+   * @details Flattened archetype components are removed in a single migration.
+   * @warning Triggers assertion in next cases:
+   * - Entity is invalid.
+   * - Entity is not tracked.
+   * - Entity does not have any of the components in the bundle.
+   * @tparam B Component bundle type
+   * @param entity Entity
+   */
+  template <ComponentBundleTrait B>
+  void RemoveBundle(Entity entity);
+
+  /**
+   * @brief Tries to remove every component type represented by a component
+   * bundle.
+   * @details Results follow the flattened declaration order of the bundle.
+   * @warning Triggers assertion in next cases:
+   * - Entity is invalid.
+   * - Entity is not tracked.
+   * @tparam B Component bundle type
+   * @param entity Entity
+   * @return Whether each component was removed. A single-component bundle
+   * returns a bool; all other bundles return an array.
+   */
+  template <ComponentBundleTrait B>
+  auto TryRemoveBundle(Entity entity) -> details::ComponentBundleResult<B>;
 
   /**
    * @brief Gets a mutable reference to a component.
@@ -1109,11 +1170,21 @@ inline void ComponentManager::AddArchetypeComponents(Entity entity,
      ...);
   }(std::make_index_sequence<sizeof...(Ts)>{});
 
+  auto args = std::forward_as_tuple(std::forward<Ts>(components)...);
+
   if (target_id != current.Id()) {
+    // Replace existing components before migration so values passed by
+    // reference remain valid while they are consumed.
+    [&]<size_t... Is>(std::index_sequence<Is...>) {
+      ((!added[Is] ? current.Set(entity, std::forward<FwdTypeAt<Is, Ts...>>(
+                                             std::get<Is>(args)))
+                   : void()),
+       ...);
+    }(std::make_index_sequence<sizeof...(Ts)>{});
+
     Archetype& target = GetOrCreateArchetype(target_id);
     MigrateEntity(entity, current, target);
 
-    auto args = std::forward_as_tuple(std::forward<Ts>(components)...);
     [&]<size_t... Is>(std::index_sequence<Is...>) {
       ((added[Is] ? target.Set(entity, std::forward<FwdTypeAt<Is, Ts...>>(
                                            std::get<Is>(args)))
@@ -1123,7 +1194,11 @@ inline void ComponentManager::AddArchetypeComponents(Entity entity,
 
     ++structural_version_;
   } else {
-    (current.Set(entity, std::forward<Ts>(components)), ...);
+    [&]<size_t... Is>(std::index_sequence<Is...>) {
+      (current.Set(entity,
+                   std::forward<FwdTypeAt<Is, Ts...>>(std::get<Is>(args))),
+       ...);
+    }(std::make_index_sequence<sizeof...(Ts)>{});
   }
 }
 
@@ -1387,6 +1462,31 @@ inline auto ComponentManager::TryAdd(Entity entity, Ts&&... components)
   }
 }
 
+template <ComponentBundleTrait B>
+inline void ComponentManager::AddBundle(Entity entity, B&& bundle) {
+  HELIOS_ASSERT(entity.Valid(), "Entity '{}' is invalid!", entity);
+  HELIOS_ASSERT(Tracked(entity), "Entity '{}' not tracked!", entity);
+
+  details::ApplyComponentBundle(
+      std::forward<B>(bundle),
+      [this, entity]<typename... Ts>(Ts&&... components) {
+        Add(entity, std::forward<Ts>(components)...);
+      });
+}
+
+template <ComponentBundleTrait B>
+inline auto ComponentManager::TryAddBundle(Entity entity, B&& bundle)
+    -> details::ComponentBundleResult<B> {
+  HELIOS_ASSERT(entity.Valid(), "Entity '{}' is invalid!", entity);
+  HELIOS_ASSERT(Tracked(entity), "Entity '{}' not tracked!", entity);
+
+  return details::ApplyComponentBundle(
+      std::forward<B>(bundle),
+      [this, entity]<typename... Ts>(Ts&&... components) {
+        return TryAdd(entity, std::forward<Ts>(components)...);
+      });
+}
+
 template <ComponentTrait T, typename... Args>
   requires std::constructible_from<T, Args...>
 inline void ComponentManager::Emplace(Entity entity, Args&&... args) {
@@ -1471,10 +1571,10 @@ inline auto ComponentManager::TryRemove(Entity entity)
     std::array<bool, sizeof...(Ts)> results = {};
 
     auto arch_results = DispatchTryRemoveArchetype<Ts...>(entity, ArchIs{});
-    [&results,
-     &arch_results]<size_t... ArchPos>(std::index_sequence<ArchPos...>) {
-      ((results[ArchPos] = arch_results[ArchPos]), ...);
-    }(ArchIs{});
+    [&results, &arch_results]<size_t... ArchPos, size_t... SubIs>(
+        std::index_sequence<ArchPos...>, std::index_sequence<SubIs...>) {
+      ((results[ArchPos] = arch_results[SubIs]), ...);
+    }(ArchIs{}, std::make_index_sequence<arch_results.size()>{});
 
     [this, entity, &results]<size_t... Is>(std::index_sequence<Is...>) {
       ((results[Is] = TryRemoveSparseComponent<TypeAt<Is, Ts...>>(entity)),
@@ -1487,6 +1587,27 @@ inline auto ComponentManager::TryRemove(Entity entity)
       return results;
     }
   }
+}
+
+template <ComponentBundleTrait B>
+inline void ComponentManager::RemoveBundle(Entity entity) {
+  HELIOS_ASSERT(entity.Valid(), "Entity '{}' is invalid!", entity);
+  HELIOS_ASSERT(Tracked(entity), "Entity '{}' not tracked!", entity);
+
+  details::ApplyComponentBundleTypes<B>(
+      [this, entity]<ComponentTrait... Ts>() { Remove<Ts...>(entity); });
+}
+
+template <ComponentBundleTrait B>
+inline auto ComponentManager::TryRemoveBundle(Entity entity)
+    -> details::ComponentBundleResult<B> {
+  HELIOS_ASSERT(entity.Valid(), "Entity '{}' is invalid!", entity);
+  HELIOS_ASSERT(Tracked(entity), "Entity '{}' not tracked!", entity);
+
+  return details::ApplyComponentBundleTypes<B>(
+      [this, entity]<ComponentTrait... Ts>() {
+        return TryRemove<Ts...>(entity);
+      });
 }
 
 template <ComponentTrait T>

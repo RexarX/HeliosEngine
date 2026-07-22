@@ -11,6 +11,12 @@ helios_add_example(
 )
 
 helios_add_example(
+    NAME component_bundle
+    SOURCES component_bundle.cpp
+    MODULES app ecs log
+)
+
+helios_add_example(
     NAME entity
     SOURCES entity.cpp
     MODULES app ecs log

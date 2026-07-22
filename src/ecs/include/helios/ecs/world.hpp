@@ -4,6 +4,7 @@
 #include <helios/ecs/builtin_messages.hpp>
 #include <helios/ecs/command/command.hpp>
 #include <helios/ecs/command/queue.hpp>
+#include <helios/ecs/component/bundle.hpp>
 #include <helios/ecs/component/component.hpp>
 #include <helios/ecs/component/manager.hpp>
 #include <helios/ecs/details/profile.hpp>
@@ -304,6 +305,36 @@ public:
                             std::array<bool, sizeof...(Ts)>>;
 
   /**
+   * @brief Adds all components in a bundle to the entity.
+   * @details Nested bundles are flattened in declaration order. Existing
+   * components are replaced.
+   * @note Not thread-safe.
+   * @warning Triggers assertion if the entity is invalid or not owned by this
+   * world.
+   * @tparam B Component bundle type
+   * @param entity Entity to add components to
+   * @param bundle Bundle whose components to add
+   */
+  template <ComponentBundleTrait B>
+  void AddBundle(Entity entity, B&& bundle);
+
+  /**
+   * @brief Tries to add every component in a bundle that does not exist.
+   * @details Nested bundles are flattened in declaration order. Existing
+   * components are preserved.
+   * @note Not thread-safe.
+   * @warning Triggers assertion if the entity is invalid or not owned by this
+   * world.
+   * @tparam B Component bundle type
+   * @param entity Entity to add components to
+   * @param bundle Bundle whose components to add
+   * @return Whether each flattened component was added
+   */
+  template <ComponentBundleTrait B>
+  auto TryAddBundle(Entity entity, B&& bundle)
+      -> details::ComponentBundleResult<B>;
+
+  /**
    * @brief Emplaces component for the entity.
    * @details Constructs component in-place. If entity already has component of
    * provided type then it will be replaced.
@@ -369,6 +400,31 @@ public:
   auto TryRemoveComponents(Entity entity)
       -> std::conditional_t<sizeof...(Ts) == 1, bool,
                             std::array<bool, sizeof...(Ts)>>;
+
+  /**
+   * @brief Removes all components in a bundle from the entity.
+   * @details Nested bundle types are flattened in declaration order.
+   * @note Not thread-safe.
+   * @warning Triggers assertion if the entity is invalid, not owned by this
+   * world, or does not have every flattened component.
+   * @tparam B Component bundle type
+   * @param entity Entity to remove components from
+   */
+  template <ComponentBundleTrait B>
+  void RemoveBundle(Entity entity);
+
+  /**
+   * @brief Tries to remove every component in a bundle that exists.
+   * @details Nested bundle types are flattened in declaration order.
+   * @note Not thread-safe.
+   * @warning Triggers assertion if the entity is invalid or not owned by this
+   * world.
+   * @tparam B Component bundle type
+   * @param entity Entity to remove components from
+   * @return Whether each flattened component was removed
+   */
+  template <ComponentBundleTrait B>
+  auto TryRemoveBundle(Entity entity) -> details::ComponentBundleResult<B>;
 
   /**
    * @brief Removes all components from the entity.
@@ -975,8 +1031,7 @@ inline void World::AddComponents(Entity entity, Ts&&... components) {
                 "World does not own entity '{}'!", entity);
 
   AddMessages<ComponentAddedMsg<std::remove_cvref_t<Ts>>...>();
-  component_manager_.template Add<std::remove_cvref_t<Ts>...>(
-      entity, std::forward<Ts>(components)...);
+  component_manager_.Add(entity, std::forward<Ts>(components)...);
   (messages_.Write(ComponentAddedMsg<std::remove_cvref_t<Ts>>(entity)), ...);
 }
 
@@ -991,8 +1046,8 @@ inline auto World::TryAddComponents(Entity entity, Ts&&... components)
 
   AddMessages<ComponentAddedMsg<std::remove_cvref_t<Ts>>...>();
 
-  auto added = component_manager_.template TryAdd<std::remove_cvref_t<Ts>...>(
-      entity, std::forward<Ts>(components)...);
+  auto added =
+      component_manager_.TryAdd(entity, std::forward<Ts>(components)...);
 
   if constexpr (sizeof...(Ts) == 1) {
     if (added) {
@@ -1009,6 +1064,33 @@ inline auto World::TryAddComponents(Entity entity, Ts&&... components)
   }
 
   return added;
+}
+
+template <ComponentBundleTrait B>
+inline void World::AddBundle(Entity entity, B&& bundle) {
+  HELIOS_ASSERT(entity.Valid(), "Entity '{}' is invalid!", entity);
+  HELIOS_ASSERT(entity_manager_.Validate(entity),
+                "World does not own entity '{}'!", entity);
+
+  details::ApplyComponentBundle(
+      std::forward<B>(bundle), [this, entity](auto&&... components) {
+        AddComponents(entity,
+                      std::forward<decltype(components)>(components)...);
+      });
+}
+
+template <ComponentBundleTrait B>
+inline auto World::TryAddBundle(Entity entity, B&& bundle)
+    -> details::ComponentBundleResult<B> {
+  HELIOS_ASSERT(entity.Valid(), "Entity '{}' is invalid!", entity);
+  HELIOS_ASSERT(entity_manager_.Validate(entity),
+                "World does not own entity '{}'!", entity);
+
+  return details::ApplyComponentBundle(
+      std::forward<B>(bundle), [this, entity](auto&&... components) {
+        return TryAddComponents(
+            entity, std::forward<decltype(components)>(components)...);
+      });
 }
 
 template <ComponentTrait T, typename... Args>
@@ -1079,6 +1161,29 @@ inline auto World::TryRemoveComponents(Entity entity)
   }(std::index_sequence_for<Ts...>{});
 
   return removed;
+}
+
+template <ComponentBundleTrait B>
+inline void World::RemoveBundle(Entity entity) {
+  HELIOS_ASSERT(entity.Valid(), "Entity '{}' is invalid!", entity);
+  HELIOS_ASSERT(entity_manager_.Validate(entity),
+                "World does not own entity '{}'!", entity);
+
+  details::ApplyComponentBundleTypes<B>(
+      [this, entity]<typename... Ts>() { RemoveComponents<Ts...>(entity); });
+}
+
+template <ComponentBundleTrait B>
+inline auto World::TryRemoveBundle(Entity entity)
+    -> details::ComponentBundleResult<B> {
+  HELIOS_ASSERT(entity.Valid(), "Entity '{}' is invalid!", entity);
+  HELIOS_ASSERT(entity_manager_.Validate(entity),
+                "World does not own entity '{}'!", entity);
+
+  return details::ApplyComponentBundleTypes<B>(
+      [this, entity]<typename... Ts>() {
+        return TryRemoveComponents<Ts...>(entity);
+      });
 }
 
 inline void World::ClearComponents(Entity entity) {

@@ -2,6 +2,7 @@
 
 #include <helios/assert.hpp>
 #include <helios/ecs/command/command.hpp>
+#include <helios/ecs/component/bundle.hpp>
 #include <helios/ecs/component/component.hpp>
 #include <helios/ecs/entity/entity.hpp>
 #include <helios/ecs/message/message.hpp>
@@ -9,8 +10,8 @@
 #include <helios/ecs/world.hpp>
 #include <helios/utils/common_traits.hpp>
 
+#include <algorithm>
 #include <concepts>
-#include <ranges>
 #include <tuple>
 #include <type_traits>
 #include <utility>
@@ -286,6 +287,59 @@ AddComponentsCmd(Entity, Us&&...)
     -> AddComponentsCmd<std::remove_cvref_t<Us>...>;
 
 /**
+ * @brief Command to add a component bundle to an entity.
+ * @details Adds every component in the bundle in a single operation. Existing
+ * components are replaced.
+ * @warning Will trigger assertion if the entity does not exist in the world
+ * (when world updated).
+ * @tparam B Component bundle type
+ */
+template <ComponentBundleTrait B>
+class AddBundleCmd {
+public:
+  /**
+   * @brief Constructs add bundle command.
+   * @warning Triggers assertion if entity is invalid.
+   * @tparam U Component bundle type (must match `B`)
+   * @param entity Entity to add the bundle to
+   * @param bundle Component bundle to add
+   */
+  template <ComponentBundleTrait U>
+    requires std::same_as<B, std::remove_cvref_t<U>>
+  constexpr AddBundleCmd(Entity entity, U&& bundle) noexcept(
+      std::is_nothrow_constructible_v<B, U&&>)
+      : entity_(entity), bundle_(std::forward<U>(bundle)) {
+    HELIOS_ASSERT(entity.Valid(), "Entity '{}' is invalid!", entity);
+  }
+
+  constexpr AddBundleCmd(const AddBundleCmd&) noexcept(
+      std::is_nothrow_copy_constructible_v<B>) = default;
+  constexpr AddBundleCmd(AddBundleCmd&&) noexcept(
+      std::is_nothrow_move_constructible_v<B>) = default;
+  constexpr ~AddBundleCmd() noexcept(std::is_nothrow_destructible_v<B>) =
+      default;
+
+  constexpr AddBundleCmd& operator=(const AddBundleCmd&) noexcept(
+      std::is_nothrow_copy_assignable_v<B>) = default;
+  constexpr AddBundleCmd& operator=(AddBundleCmd&&) noexcept(
+      std::is_nothrow_move_assignable_v<B>) = default;
+
+  /**
+   * @brief Executes component bundle addition.
+   * @warning Triggers assertion if the entity does not exist in the world.
+   * @param world World to add components in
+   */
+  void Execute(World& world) { world.AddBundle(entity_, std::move(bundle_)); }
+
+private:
+  Entity entity_;  ///< Entity to add the component bundle to
+  B bundle_;       ///< Component bundle to add
+};
+
+template <ComponentBundleTrait B>
+AddBundleCmd(Entity, B&&) -> AddBundleCmd<std::remove_cvref_t<B>>;
+
+/**
  * @brief Command to try add multiple components (only missing ones).
  * @details Adds multiple components to the specified entity during execution
  * only if it doesn't already have them. If entity already has any of the
@@ -346,6 +400,61 @@ TryAddComponentsCmd(Entity, Us&&...)
     -> TryAddComponentsCmd<std::remove_cvref_t<Us>...>;
 
 /**
+ * @brief Command to try add a component bundle to an entity.
+ * @details Adds only the components from the bundle that the entity does not
+ * already have.
+ * @warning Will trigger assertion if the entity does not exist in the world
+ * (when world updated).
+ * @tparam B Component bundle type
+ */
+template <ComponentBundleTrait B>
+class TryAddBundleCmd {
+public:
+  /**
+   * @brief Constructs try add bundle command.
+   * @warning Triggers assertion if entity is invalid.
+   * @tparam U Component bundle type (must match `B`)
+   * @param entity Entity to add the bundle to
+   * @param bundle Component bundle to add
+   */
+  template <ComponentBundleTrait U>
+    requires std::same_as<B, std::remove_cvref_t<U>>
+  constexpr TryAddBundleCmd(Entity entity, U&& bundle) noexcept(
+      std::is_nothrow_constructible_v<B, U&&>)
+      : entity_(entity), bundle_(std::forward<U>(bundle)) {
+    HELIOS_ASSERT(entity.Valid(), "Entity '{}' is invalid!", entity);
+  }
+
+  constexpr TryAddBundleCmd(const TryAddBundleCmd&) noexcept(
+      std::is_nothrow_copy_constructible_v<B>) = default;
+  constexpr TryAddBundleCmd(TryAddBundleCmd&&) noexcept(
+      std::is_nothrow_move_constructible_v<B>) = default;
+  constexpr ~TryAddBundleCmd() noexcept(std::is_nothrow_destructible_v<B>) =
+      default;
+
+  constexpr TryAddBundleCmd& operator=(const TryAddBundleCmd&) noexcept(
+      std::is_nothrow_copy_assignable_v<B>) = default;
+  constexpr TryAddBundleCmd& operator=(TryAddBundleCmd&&) noexcept(
+      std::is_nothrow_move_assignable_v<B>) = default;
+
+  /**
+   * @brief Executes component bundle addition for missing components.
+   * @warning Triggers assertion if the entity does not exist in the world.
+   * @param world World to add components in
+   */
+  void Execute(World& world) {
+    world.TryAddBundle(entity_, std::move(bundle_));
+  }
+
+private:
+  Entity entity_;  ///< Entity to add the component bundle to
+  B bundle_;       ///< Component bundle to add
+};
+
+template <ComponentBundleTrait B>
+TryAddBundleCmd(Entity, B&&) -> TryAddBundleCmd<std::remove_cvref_t<B>>;
+
+/**
  * @brief Command to remove multiple components from an entity.
  * @details Efficiently removes multiple components in a single operation.
  * @warning Will trigger assertion if the entity does not exist in the world
@@ -383,6 +492,45 @@ public:
 
 private:
   Entity entity_;  ///< Entity to remove components from
+};
+
+/**
+ * @brief Command to remove a component bundle from an entity.
+ * @details Removes every component type represented by the bundle.
+ * @warning Will trigger assertion if the entity does not exist in the world
+ * or is missing a component from the bundle (when world updated).
+ * @tparam B Component bundle type
+ */
+template <ComponentBundleTrait B>
+class RemoveBundleCmd {
+public:
+  /**
+   * @brief Constructs remove bundle command.
+   * @warning Triggers assertion if entity is invalid.
+   * @param entity Entity to remove the bundle from
+   */
+  explicit constexpr RemoveBundleCmd(Entity entity) noexcept : entity_(entity) {
+    HELIOS_ASSERT(entity.Valid(), "Entity '{}' is invalid!", entity);
+  }
+
+  constexpr RemoveBundleCmd(const RemoveBundleCmd&) noexcept = default;
+  constexpr RemoveBundleCmd(RemoveBundleCmd&&) noexcept = default;
+  constexpr ~RemoveBundleCmd() noexcept = default;
+
+  constexpr RemoveBundleCmd& operator=(const RemoveBundleCmd&) noexcept =
+      default;
+  constexpr RemoveBundleCmd& operator=(RemoveBundleCmd&&) noexcept = default;
+
+  /**
+   * @brief Executes component bundle removal.
+   * @warning Triggers assertion if the entity does not exist in the world or
+   * is missing a component from the bundle.
+   * @param world World to remove components from
+   */
+  void Execute(World& world) { world.RemoveBundle<B>(entity_); }
+
+private:
+  Entity entity_;  ///< Entity to remove the component bundle from
 };
 
 /**
@@ -426,6 +574,46 @@ public:
 
 private:
   Entity entity_;  ///< Entity to remove components from
+};
+
+/**
+ * @brief Command to try remove a component bundle from an entity.
+ * @details Removes only the represented component types that the entity has.
+ * @warning Will trigger assertion if the entity does not exist in the world
+ * (when world updated).
+ * @tparam B Component bundle type
+ */
+template <ComponentBundleTrait B>
+class TryRemoveBundleCmd {
+public:
+  /**
+   * @brief Constructs try remove bundle command.
+   * @warning Triggers assertion if entity is invalid.
+   * @param entity Entity to remove the bundle from
+   */
+  explicit constexpr TryRemoveBundleCmd(Entity entity) noexcept
+      : entity_(entity) {
+    HELIOS_ASSERT(entity.Valid(), "Entity '{}' is invalid!", entity);
+  }
+
+  constexpr TryRemoveBundleCmd(const TryRemoveBundleCmd&) noexcept = default;
+  constexpr TryRemoveBundleCmd(TryRemoveBundleCmd&&) noexcept = default;
+  constexpr ~TryRemoveBundleCmd() noexcept = default;
+
+  constexpr TryRemoveBundleCmd& operator=(const TryRemoveBundleCmd&) noexcept =
+      default;
+  constexpr TryRemoveBundleCmd& operator=(TryRemoveBundleCmd&&) noexcept =
+      default;
+
+  /**
+   * @brief Executes component bundle removal for present components.
+   * @warning Triggers assertion if the entity does not exist in the world.
+   * @param world World to remove components from
+   */
+  void Execute(World& world) { world.TryRemoveBundle<B>(entity_); }
+
+private:
+  Entity entity_;  ///< Entity to remove the component bundle from
 };
 
 /**

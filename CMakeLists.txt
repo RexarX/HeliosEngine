@@ -1,5 +1,10 @@
 cmake_minimum_required(VERSION 3.25)
 
+# CMake 4.0+ compat
+if(CMAKE_VERSION VERSION_GREATER_EQUAL "4.0")
+  set(CMAKE_POLICY_VERSION_MINIMUM 3.5 CACHE STRING "Minimum CMake policy version" FORCE)
+endif()
+
 project(HeliosEngine
     VERSION 0.1.0
     DESCRIPTION "ECS based data-oriented game engine framework"
@@ -100,11 +105,6 @@ if(HELIOS_BUILD_TESTS)
   include(CTest)
   include(cmake/TestUtils.cmake)
   helios_init_test_infrastructure()
-endif()
-
-# CMake 4.0+ compat
-if(CMAKE_VERSION VERSION_GREATER_EQUAL "4.0")
-  set(CMAKE_POLICY_VERSION_MINIMUM 3.5 CACHE STRING "Minimum CMake policy version" FORCE)
 endif()
 
 helios_print_sanitizer_status()

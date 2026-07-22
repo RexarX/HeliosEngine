@@ -29,6 +29,10 @@ struct Tag {
   constexpr bool operator==(const Tag&) const noexcept = default;
 };
 
+using PositionBundle = ComponentBundle<Position>;
+using MovementBundle = ComponentBundle<Position, Velocity>;
+using TaggedMovementBundle = ComponentBundle<Tag, MovementBundle>;
+
 struct DeltaTime {
   float value = 0.0F;
 
@@ -390,6 +394,16 @@ TEST_SUITE("helios::ecs::World") {
       world.AddComponents(entity, Position{1.0F, 0.0F});
       CHECK_EQ(world.ReadComponent<Position>(entity), (Position{1.0F, 0.0F}));
     }
+
+    SUBCASE("AddComponents accepts lvalue and const lvalue components") {
+      World world;
+      const Entity entity = world.CreateEntity();
+      constexpr Position position{3.0F, 4.0F};
+      constexpr Velocity velocity{5.0F, 6.0F};
+      world.AddComponents(entity, position, velocity);
+      CHECK_EQ(world.ReadComponent<Position>(entity), position);
+      CHECK_EQ(world.ReadComponent<Velocity>(entity), velocity);
+    }
   }
 
   TEST_CASE("ecs::World::TryAddComponents") {
@@ -421,6 +435,106 @@ TEST_SUITE("helios::ecs::World") {
       const auto result = world.TryAddComponents(entity, Position{1.0F, 0.0F});
       CHECK(result);
       CHECK_EQ(world.ReadComponent<Position>(entity), (Position{1.0F, 0.0F}));
+    }
+
+    SUBCASE("TryAddComponents accepts lvalue and const lvalue components") {
+      World world;
+      const Entity entity = world.CreateEntity();
+      constexpr Position position{3.0F, 4.0F};
+      constexpr Velocity velocity{5.0F, 6.0F};
+      const auto result = world.TryAddComponents(entity, position, velocity);
+      CHECK(result[0]);
+      CHECK(result[1]);
+      CHECK_EQ(world.ReadComponent<Position>(entity), position);
+      CHECK_EQ(world.ReadComponent<Velocity>(entity), velocity);
+    }
+  }
+
+  TEST_CASE("ecs::World::AddBundle") {
+    SUBCASE("AddBundle adds a flat bundle and stores its values") {
+      World world;
+      const Entity entity = world.CreateEntity();
+      world.AddBundle(
+          entity, MovementBundle{Position{1.0F, 2.0F}, Velocity{3.0F, 4.0F}});
+      CHECK_EQ(world.ReadComponent<Position>(entity), (Position{1.0F, 2.0F}));
+      CHECK_EQ(world.ReadComponent<Velocity>(entity), (Velocity{3.0F, 4.0F}));
+    }
+
+    SUBCASE("AddBundle flattens nested bundles") {
+      World world;
+      const Entity entity = world.CreateEntity();
+      constexpr TaggedMovementBundle bundle{
+          Tag{}, MovementBundle{Position{1.0F, 2.0F}, Velocity{3.0F, 4.0F}}};
+      world.AddBundle(entity, bundle);
+      CHECK(world.HasComponent<Tag>(entity));
+      CHECK_EQ(world.ReadComponent<Position>(entity), (Position{1.0F, 2.0F}));
+      CHECK_EQ(world.ReadComponent<Velocity>(entity), (Velocity{3.0F, 4.0F}));
+    }
+
+    SUBCASE("AddBundle replaces existing leaf components") {
+      World world;
+      const Entity entity = world.CreateEntity();
+      world.AddComponents(entity, Position{1.0F, 2.0F});
+      world.AddBundle(
+          entity, MovementBundle{Position{5.0F, 6.0F}, Velocity{7.0F, 8.0F}});
+      CHECK_EQ(world.ReadComponent<Position>(entity), (Position{5.0F, 6.0F}));
+      CHECK_EQ(world.ReadComponent<Velocity>(entity), (Velocity{7.0F, 8.0F}));
+    }
+
+    SUBCASE("AddBundle emits a message for each leaf component") {
+      World world;
+      const Entity entity = world.CreateEntity();
+      world.AddBundle(entity, MovementBundle{});
+      CHECK_EQ(world.Messages()
+                   .CurrentMessages<ComponentAddedMsg<Position>>()
+                   .size(),
+               1);
+      CHECK_EQ(world.Messages()
+                   .CurrentMessages<ComponentAddedMsg<Velocity>>()
+                   .size(),
+               1);
+    }
+  }
+
+  TEST_CASE("ecs::World::TryAddBundle") {
+    SUBCASE("TryAddBundle returns results in flattened declaration order") {
+      World world;
+      const Entity entity = world.CreateEntity();
+      world.AddComponents(entity, Position{9.0F, 9.0F});
+      const auto result = world.TryAddBundle(
+          entity,
+          TaggedMovementBundle{Tag{}, MovementBundle{Position{1.0F, 2.0F},
+                                                     Velocity{3.0F, 4.0F}}});
+      CHECK(result[0]);
+      CHECK_FALSE(result[1]);
+      CHECK(result[2]);
+      CHECK_EQ(world.ReadComponent<Position>(entity), (Position{9.0F, 9.0F}));
+    }
+
+    SUBCASE("TryAddBundle returns bool for a single leaf") {
+      World world;
+      const Entity entity = world.CreateEntity();
+      CHECK(world.TryAddBundle(entity, PositionBundle{Position{1.0F, 2.0F}}));
+      CHECK_FALSE(
+          world.TryAddBundle(entity, PositionBundle{Position{3.0F, 4.0F}}));
+    }
+
+    SUBCASE("TryAddBundle emits messages only for added leaf components") {
+      World world;
+      const Entity entity = world.CreateEntity();
+      world.AddComponents(entity, Position{});
+      world.Update();
+      const auto result = world.TryAddBundle(entity, MovementBundle{});
+      CHECK_FALSE(result[0]);
+      CHECK(result[1]);
+      CHECK_EQ(world.Messages()
+                   .CurrentMessages<ComponentAddedMsg<Position>>()
+                   .size(),
+               0);
+      CHECK_EQ(world.Messages()
+                   .CurrentMessages<ComponentAddedMsg<Velocity>>()
+                   .size(),
+               1);
     }
   }
 
@@ -542,6 +656,79 @@ TEST_SUITE("helios::ecs::World") {
       const auto result = world.TryRemoveComponents<Position>(entity);
       CHECK(result);
       CHECK_FALSE(world.HasComponent<Position>(entity));
+    }
+  }
+
+  TEST_CASE("ecs::World::RemoveBundle") {
+    SUBCASE("RemoveBundle removes every flattened leaf component") {
+      World world;
+      const Entity entity = world.CreateEntity();
+      world.AddBundle(entity, TaggedMovementBundle{});
+      world.RemoveBundle<TaggedMovementBundle>(entity);
+      CHECK_FALSE(world.HasComponent<Tag>(entity));
+      CHECK_FALSE(world.HasComponent<Position>(entity));
+      CHECK_FALSE(world.HasComponent<Velocity>(entity));
+    }
+
+    SUBCASE("RemoveBundle preserves unrelated components") {
+      World world;
+      const Entity entity = world.CreateEntity();
+      world.AddBundle(entity, MovementBundle{});
+      world.AddComponents(entity, DeltaTime{1.0F});
+      world.RemoveBundle<MovementBundle>(entity);
+      CHECK(world.HasComponent<DeltaTime>(entity));
+    }
+
+    SUBCASE("RemoveBundle emits a message for each leaf component") {
+      World world;
+      const Entity entity = world.CreateEntity();
+      world.AddBundle(entity, MovementBundle{});
+      world.RemoveBundle<MovementBundle>(entity);
+      CHECK_EQ(world.Messages()
+                   .CurrentMessages<ComponentRemovedMsg<Position>>()
+                   .size(),
+               1);
+      CHECK_EQ(world.Messages()
+                   .CurrentMessages<ComponentRemovedMsg<Velocity>>()
+                   .size(),
+               1);
+    }
+  }
+
+  TEST_CASE("ecs::World::TryRemoveBundle") {
+    SUBCASE("TryRemoveBundle returns results in flattened declaration order") {
+      World world;
+      const Entity entity = world.CreateEntity();
+      world.AddComponents(entity, Position{});
+      const auto result = world.TryRemoveBundle<TaggedMovementBundle>(entity);
+      CHECK_FALSE(result[0]);
+      CHECK(result[1]);
+      CHECK_FALSE(result[2]);
+    }
+
+    SUBCASE("TryRemoveBundle returns bool for a single leaf") {
+      World world;
+      const Entity entity = world.CreateEntity();
+      world.AddComponents(entity, Position{});
+      CHECK(world.TryRemoveBundle<PositionBundle>(entity));
+      CHECK_FALSE(world.TryRemoveBundle<PositionBundle>(entity));
+    }
+
+    SUBCASE("TryRemoveBundle emits messages only for removed leaf components") {
+      World world;
+      const Entity entity = world.CreateEntity();
+      world.AddComponents(entity, Position{});
+      const auto result = world.TryRemoveBundle<MovementBundle>(entity);
+      CHECK(result[0]);
+      CHECK_FALSE(result[1]);
+      CHECK_EQ(world.Messages()
+                   .CurrentMessages<ComponentRemovedMsg<Position>>()
+                   .size(),
+               1);
+      CHECK_EQ(world.Messages()
+                   .CurrentMessages<ComponentRemovedMsg<Velocity>>()
+                   .size(),
+               0);
     }
   }
 

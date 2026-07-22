@@ -12,6 +12,7 @@
 #include <source_location>
 #include <span>
 #include <string_view>
+#include <thread>
 #include <utility>
 
 namespace happ = helios::app;
@@ -150,6 +151,9 @@ int main() {
   physics.InsertResources(PhysicsCounter{});
   physics.AddSystem(happ::kUpdate, SimulatePhysics{});
   app.InsertSubApp(PhysicsLabel{}, std::move(physics));
+
+  // Wait for tracy to connect
+  std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
   const auto code = app.Run();
   return std::to_underlying(code);

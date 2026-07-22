@@ -4,12 +4,14 @@
 #include <helios/ecs/builtin_commands.hpp>
 #include <helios/ecs/command/command.hpp>
 #include <helios/ecs/command/queue.hpp>
+#include <helios/ecs/component/bundle.hpp>
 #include <helios/ecs/component/component.hpp>
 #include <helios/ecs/entity/entity.hpp>
 
 #include <concepts>
 #include <memory_resource>
 #include <type_traits>
+#include <utility>
 
 namespace helios::ecs {
 
@@ -110,6 +112,21 @@ public:
       -> decltype(std::forward<decltype(self)>(self));
 
   /**
+   * @brief Enqueues a command to add a component bundle to the entity.
+   * @details If the entity already has a represented component, it will be
+   * replaced.
+   * @note Not thread-safe.
+   * @warning Triggers assertion in next cases:
+   * - Entity is invalid.
+   * - World does not own entity.
+   * @tparam B Component bundle type
+   * @param bundle Component bundle to add
+   */
+  template <ComponentBundleTrait B>
+  auto AddBundle(this auto&& self, B&& bundle)
+      -> decltype(std::forward<decltype(self)>(self));
+
+  /**
    * @brief Enqueues a command to try to add components to the entity if they
    * don't exist.
    * @note Not thread-safe.
@@ -122,6 +139,19 @@ public:
   template <ComponentTrait... Ts>
     requires utils::UniqueTypes<Ts...> && (sizeof...(Ts) > 0)
   auto TryAddComponents(this auto&& self, Ts&&... components)
+      -> decltype(std::forward<decltype(self)>(self));
+
+  /**
+   * @brief Enqueues a command to try to add missing components from a bundle.
+   * @note Not thread-safe.
+   * @warning Triggers assertion in next cases:
+   * - Entity is invalid.
+   * - World does not own entity.
+   * @tparam B Component bundle type
+   * @param bundle Component bundle to add
+   */
+  template <ComponentBundleTrait B>
+  auto TryAddBundle(this auto&& self, B&& bundle)
       -> decltype(std::forward<decltype(self)>(self));
 
   /**
@@ -139,6 +169,19 @@ public:
       -> decltype(std::forward<decltype(self)>(self));
 
   /**
+   * @brief Enqueues a command to remove a component bundle from the entity.
+   * @note Not thread-safe.
+   * @warning Triggers assertion in next cases:
+   * - Entity is invalid.
+   * - World does not own entity.
+   * - Entity does not have every component represented by the bundle.
+   * @tparam B Component bundle type
+   */
+  template <ComponentBundleTrait B>
+  auto RemoveBundle(this auto&& self)
+      -> decltype(std::forward<decltype(self)>(self));
+
+  /**
    * @brief Enqueues a command to try to remove components from the entity if
    * they exist.
    * @note Not thread-safe.
@@ -150,6 +193,19 @@ public:
   template <ComponentTrait... Ts>
     requires utils::UniqueTypes<Ts...> && (sizeof...(Ts) > 0)
   auto TryRemoveComponents(this auto&& self)
+      -> decltype(std::forward<decltype(self)>(self));
+
+  /**
+   * @brief Enqueues a command to try to remove present components represented
+   * by a bundle.
+   * @note Not thread-safe.
+   * @warning Triggers assertion in next cases:
+   * - Entity is invalid.
+   * - World does not own entity.
+   * @tparam B Component bundle type
+   */
+  template <ComponentBundleTrait B>
+  auto TryRemoveBundle(this auto&& self)
       -> decltype(std::forward<decltype(self)>(self));
 
   /**
@@ -232,6 +288,14 @@ inline auto EntityCmdBuffer<Allocator>::AddComponents(this auto&& self,
 }
 
 template <typename Allocator>
+template <ComponentBundleTrait B>
+inline auto EntityCmdBuffer<Allocator>::AddBundle(this auto&& self, B&& bundle)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  self.commands_.Enqueue(AddBundleCmd(self.entity_, std::forward<B>(bundle)));
+  return std::forward<decltype(self)>(self);
+}
+
+template <typename Allocator>
 template <ComponentTrait... Ts>
   requires utils::UniqueTypes<Ts...> && (sizeof...(Ts) > 0)
 inline auto EntityCmdBuffer<Allocator>::TryAddComponents(this auto&& self,
@@ -239,6 +303,16 @@ inline auto EntityCmdBuffer<Allocator>::TryAddComponents(this auto&& self,
     -> decltype(std::forward<decltype(self)>(self)) {
   self.commands_.Enqueue(
       TryAddComponentsCmd(self.entity_, std::forward<Ts>(components)...));
+  return std::forward<decltype(self)>(self);
+}
+
+template <typename Allocator>
+template <ComponentBundleTrait B>
+inline auto EntityCmdBuffer<Allocator>::TryAddBundle(this auto&& self,
+                                                     B&& bundle)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  self.commands_.Enqueue(
+      TryAddBundleCmd(self.entity_, std::forward<B>(bundle)));
   return std::forward<decltype(self)>(self);
 }
 
@@ -252,11 +326,27 @@ inline auto EntityCmdBuffer<Allocator>::RemoveComponents(this auto&& self)
 }
 
 template <typename Allocator>
+template <ComponentBundleTrait B>
+inline auto EntityCmdBuffer<Allocator>::RemoveBundle(this auto&& self)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  self.commands_.Enqueue(RemoveBundleCmd<B>(self.entity_));
+  return std::forward<decltype(self)>(self);
+}
+
+template <typename Allocator>
 template <ComponentTrait... Ts>
   requires utils::UniqueTypes<Ts...> && (sizeof...(Ts) > 0)
 inline auto EntityCmdBuffer<Allocator>::TryRemoveComponents(this auto&& self)
     -> decltype(std::forward<decltype(self)>(self)) {
   self.commands_.Enqueue(TryRemoveComponentsCmd<Ts...>(self.entity_));
+  return std::forward<decltype(self)>(self);
+}
+
+template <typename Allocator>
+template <ComponentBundleTrait B>
+inline auto EntityCmdBuffer<Allocator>::TryRemoveBundle(this auto&& self)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  self.commands_.Enqueue(TryRemoveBundleCmd<B>(self.entity_));
   return std::forward<decltype(self)>(self);
 }
 

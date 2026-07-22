@@ -38,19 +38,19 @@ enum class FileError : uint8_t { kCouldNotOpen, kReadError };
  */
 [[nodiscard]] inline auto ReadFileToString(std::string_view filepath)
     -> std::expected<std::string, FileError> {
-  if (filepath.empty()) {
+  if (filepath.empty()) [[unlikely]] {
     return std::unexpected(FileError::kCouldNotOpen);
   }
 
   std::ifstream in(filepath.data(), std::ios::in | std::ios::binary);
-  if (!in) {
+  if (!in) [[unlikely]] {
     return std::unexpected(FileError::kCouldNotOpen);
   }
 
   std::string result;
   in.seekg(0, std::ios::end);
   const auto pos = in.tellg();
-  if (pos == std::ifstream::pos_type(-1)) {
+  if (pos == std::ifstream::pos_type(-1)) [[unlikely]] {
     return std::unexpected(FileError::kReadError);
   }
 
@@ -58,7 +58,7 @@ enum class FileError : uint8_t { kCouldNotOpen, kReadError };
   result.resize(size);
   in.seekg(0, std::ios::beg);
   in.read(result.data(), static_cast<std::streamsize>(result.size()));
-  if (!in) {
+  if (!in) [[unlikely]] {
     return std::unexpected(FileError::kReadError);
   }
   in.close();
@@ -74,19 +74,19 @@ enum class FileError : uint8_t { kCouldNotOpen, kReadError };
 [[nodiscard]] inline auto ReadFileToString(
     const std::filesystem::path& filepath)
     -> std::expected<std::string, FileError> {
-  if (filepath.empty()) {
+  if (filepath.empty()) [[unlikely]] {
     return std::unexpected(FileError::kCouldNotOpen);
   }
 
   std::ifstream in(filepath, std::ios::in | std::ios::binary);
-  if (!in) {
+  if (!in) [[unlikely]] {
     return std::unexpected(FileError::kCouldNotOpen);
   }
 
   std::string result;
   in.seekg(0, std::ios::end);
   const auto pos = in.tellg();
-  if (pos == std::ifstream::pos_type(-1)) {
+  if (pos == std::ifstream::pos_type(-1)) [[unlikely]] {
     return std::unexpected(FileError::kReadError);
   }
 
@@ -94,7 +94,7 @@ enum class FileError : uint8_t { kCouldNotOpen, kReadError };
   result.resize(size);
   in.seekg(0, std::ios::beg);
   in.read(result.data(), static_cast<std::streamsize>(result.size()));
-  if (!in) {
+  if (!in) [[unlikely]] {
     return std::unexpected(FileError::kReadError);
   }
   in.close();
@@ -119,7 +119,7 @@ enum class FileError : uint8_t { kCouldNotOpen, kReadError };
  * @return The file extension, including the dot (e.g., ".txt"), or an empty
  * string if none exists
  */
-[[nodiscard]] static constexpr std::string_view GetFileExtension(
+[[nodiscard]] constexpr std::string_view GetFileExtension(
     std::string_view path) {
   const size_t last_dot = path.find_last_of('.');
   return (last_dot != std::string_view::npos) ? path.substr(last_dot) : "";
