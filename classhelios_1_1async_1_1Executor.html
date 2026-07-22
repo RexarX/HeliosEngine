@@ -238,11 +238,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad72a4ed87648d29843bd30aeb6abfb2e" id="r_ad72a4ed87648d29843bd30aeb6abfb2e"><td class="memTemplParams" colspan="2">template&lt;std::invocable C&gt; </td></tr>
 <tr class="memitem:ad72a4ed87648d29843bd30aeb6abfb2e template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad72a4ed87648d29843bd30aeb6abfb2e">SilentAsync</a> (std::string name, C &amp;&amp;callable)</td></tr>
 <tr class="memdesc:ad72a4ed87648d29843bd30aeb6abfb2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a named asynchronous task without returning a future.  <br /></td></tr>
-<tr class="memitem:aeb73a0112ec5245f84b03da8a97da43f" id="r_aeb73a0112ec5245f84b03da8a97da43f"><td class="memTemplParams" colspan="2">template&lt;std::invocable C, std::ranges::range Dependencies&gt; <br />
+<tr class="memitem:aeb73a0112ec5245f84b03da8a97da43f" id="r_aeb73a0112ec5245f84b03da8a97da43f"><td class="memTemplParams" colspan="2">template&lt;std::invocable C, std::ranges::input_range Dependencies&gt; <br />
 requires std::same_as&lt;std::ranges::range_value_t&lt;Dependencies&gt;, <a class="el" href="classhelios_1_1async_1_1AsyncTask.html">AsyncTask</a>&gt;</td></tr>
 <tr class="memitem:aeb73a0112ec5245f84b03da8a97da43f template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#aeb73a0112ec5245f84b03da8a97da43f">DependentAsync</a> (C &amp;&amp;callable, const Dependencies &amp;dependencies) -&gt; std::pair&lt; <a class="el" href="classhelios_1_1async_1_1AsyncTask.html">AsyncTask</a>, std::future&lt; std::invoke_result_t&lt; C &gt; &gt; &gt;</td></tr>
 <tr class="memdesc:aeb73a0112ec5245f84b03da8a97da43f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an asynchronous task that runs after specified dependencies complete.  <br /></td></tr>
-<tr class="memitem:a58b6e97b4eb956ebf57030bf3d804ddb" id="r_a58b6e97b4eb956ebf57030bf3d804ddb"><td class="memTemplParams" colspan="2">template&lt;std::invocable C, std::ranges::range Dependencies&gt; <br />
+<tr class="memitem:a58b6e97b4eb956ebf57030bf3d804ddb" id="r_a58b6e97b4eb956ebf57030bf3d804ddb"><td class="memTemplParams" colspan="2">template&lt;std::invocable C, std::ranges::input_range Dependencies&gt; <br />
 requires std::same_as&lt;std::ranges::range_value_t&lt;Dependencies&gt;, <a class="el" href="classhelios_1_1async_1_1AsyncTask.html">AsyncTask</a>&gt;</td></tr>
 <tr class="memitem:a58b6e97b4eb956ebf57030bf3d804ddb template"><td class="memItemLeft"><a class="el" href="classhelios_1_1async_1_1AsyncTask.html">AsyncTask</a>&#160;</td><td class="memItemRight"><a class="el" href="#a58b6e97b4eb956ebf57030bf3d804ddb">SilentDependentAsync</a> (C &amp;&amp;callable, const Dependencies &amp;dependencies)</td></tr>
 <tr class="memdesc:a58b6e97b4eb956ebf57030bf3d804ddb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an asynchronous task that runs after dependencies complete, without returning a future.  <br /></td></tr>
@@ -622,7 +622,7 @@ template&lt;std::predicate Predicate&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;std::invocable C, std::ranges::range Dependencies&gt; <br />
+template&lt;std::invocable C, std::ranges::input_range Dependencies&gt; <br />
 requires std::same_as&lt;std::ranges::range_value_t&lt;Dependencies&gt;, <a class="el" href="classhelios_1_1async_1_1AsyncTask.html">AsyncTask</a>&gt;</div>
 <table class="mlabels">
   <tr>
@@ -1525,7 +1525,7 @@ template&lt;std::invocable C&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;std::invocable C, std::ranges::range Dependencies&gt; <br />
+template&lt;std::invocable C, std::ranges::input_range Dependencies&gt; <br />
 requires std::same_as&lt;std::ranges::range_value_t&lt;Dependencies&gt;, <a class="el" href="classhelios_1_1async_1_1AsyncTask.html">AsyncTask</a>&gt;</div>
 <table class="mlabels">
   <tr>

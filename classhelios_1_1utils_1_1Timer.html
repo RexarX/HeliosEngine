@@ -201,10 +201,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a897f1c1edd225cc7da2723552d236744" id="r_a897f1c1edd225cc7da2723552d236744"><td class="memItemLeft">constexpr <a class="el" href="#a7d006ebfc4e5f472703b231a918c2ca7">Timer</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a897f1c1edd225cc7da2723552d236744">operator=</a> (<a class="el" href="#a7d006ebfc4e5f472703b231a918c2ca7">Timer</a> &amp;&amp;) noexcept(std::is_nothrow_move_assignable_v&lt; Clock &gt;)=default</td></tr>
 <tr class="memitem:a6a6ad506e0afa48b0a9b4496bfce3047" id="r_a6a6ad506e0afa48b0a9b4496bfce3047"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a6a6ad506e0afa48b0a9b4496bfce3047">Reset</a> () noexcept(noexcept(Clock::now()))</td></tr>
 <tr class="memdesc:a6a6ad506e0afa48b0a9b4496bfce3047"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the timer start point to current time.  <br /></td></tr>
-<tr class="memitem:aaad4fa06d1628ee7bd1dd4a75353732f" id="r_aaad4fa06d1628ee7bd1dd4a75353732f"><td class="memTemplParams" colspan="2">template&lt;details::DurationTrait Units = Duration&gt; </td></tr>
+<tr class="memitem:aaad4fa06d1628ee7bd1dd4a75353732f" id="r_aaad4fa06d1628ee7bd1dd4a75353732f"><td class="memTemplParams" colspan="2">template&lt;DurationTrait Units = Duration&gt; </td></tr>
 <tr class="memitem:aaad4fa06d1628ee7bd1dd4a75353732f template"><td class="memItemLeft">constexpr Units&#160;</td><td class="memItemRight"><a class="el" href="#aaad4fa06d1628ee7bd1dd4a75353732f">ElapsedDuration</a> () const</td></tr>
 <tr class="memdesc:aaad4fa06d1628ee7bd1dd4a75353732f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get elapsed time as a <span class="tt">std::chrono::duration</span>.  <br /></td></tr>
-<tr class="memitem:ac24f4712bb55b1c7282dfb362efcc38c" id="r_ac24f4712bb55b1c7282dfb362efcc38c"><td class="memTemplParams" colspan="2">template&lt;utils::ArithmeticTrait Type = typename Duration::rep, details::DurationTrait Units = Duration&gt; </td></tr>
+<tr class="memitem:ac24f4712bb55b1c7282dfb362efcc38c" id="r_ac24f4712bb55b1c7282dfb362efcc38c"><td class="memTemplParams" colspan="2">template&lt;utils::ArithmeticTrait Type = typename Duration::rep, DurationTrait Units = Duration&gt; </td></tr>
 <tr class="memitem:ac24f4712bb55b1c7282dfb362efcc38c template"><td class="memItemLeft">constexpr Type&#160;</td><td class="memItemRight"><a class="el" href="#ac24f4712bb55b1c7282dfb362efcc38c">Elapsed</a> () const</td></tr>
 <tr class="memdesc:ac24f4712bb55b1c7282dfb362efcc38c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get elapsed time converted to an arithmetic value with specified units.  <br /></td></tr>
 <tr class="memitem:a2c70efa88a72e7887ee8259dd2377d4a" id="r_a2c70efa88a72e7887ee8259dd2377d4a"><td class="memItemLeft">constexpr double&#160;</td><td class="memItemRight"><a class="el" href="#a2c70efa88a72e7887ee8259dd2377d4a">ElapsedSec</a> () const</td></tr>
@@ -219,7 +219,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:af17a89d57abf1cb92790633b565fff5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the raw start timestamp of the timer.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;details::ClockTrait Clock = std::chrono::steady_clock&gt;<br />
+<div class="textblock"><div class="compoundTemplParams">template&lt;ClockTrait Clock = std::chrono::steady_clock&gt;<br />
 class helios::utils::Timer&lt; Clock &gt;</div><p>High–resolution timer with configurable clock and rich elapsed API. </p>
 <p>The timer measures elapsed time from the last reset point.</p>
 <ul>
@@ -235,12 +235,12 @@ class helios::utils::Timer&lt; Clock &gt;</div><p>High–resolution timer with c
 <dl class="section note"><dt>Note</dt><dd>The default clock is <span class="tt">std::chrono::steady_clock</span>. </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">Clock</td><td>Clock type used to measure time. Must satisfy <span class="tt"><a class="el" href="concepthelios_1_1utils_1_1details_1_1ClockTrait.html" title="Concept for clock types compatible with std::chrono clocks.">details::ClockTrait</a></span>. </td></tr>
+    <tr><td class="paramname">Clock</td><td>Clock type used to measure time. Must satisfy <span class="tt"><a class="el" href="concepthelios_1_1utils_1_1ClockTrait.html" title="Concept for clock types compatible with std::chrono clocks.">ClockTrait</a></span>. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="timer_8hpp_source.html#l00067">67</a> of file <a class="el" href="timer_8hpp_source.html">timer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timer_8hpp_source.html#l00029">29</a> of file <a class="el" href="timer_8hpp_source.html">timer.hpp</a>.</p>
 </div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>
 <a id="aa7ff7972eeb8b2bd60f82bcbca3a22e8" name="aa7ff7972eeb8b2bd60f82bcbca3a22e8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa7ff7972eeb8b2bd60f82bcbca3a22e8">&#9670;&#160;</a></span>ClockType</h2>
@@ -248,7 +248,7 @@ class helios::utils::Timer&lt; Clock &gt;</div><p>High–resolution timer with c
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;details::ClockTrait Clock = std::chrono::steady_clock&gt; </div>
+template&lt;ClockTrait Clock = std::chrono::steady_clock&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">using <a class="el" href="classhelios_1_1utils_1_1Timer.html">helios::utils::Timer</a>&lt; Clock &gt;::ClockType = Clock</td>
@@ -256,7 +256,7 @@ template&lt;details::ClockTrait Clock = std::chrono::steady_clock&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="timer_8hpp_source.html#l00069">69</a> of file <a class="el" href="timer_8hpp_source.html">timer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timer_8hpp_source.html#l00031">31</a> of file <a class="el" href="timer_8hpp_source.html">timer.hpp</a>.</p>
 
 </div>
 </div>
@@ -266,7 +266,7 @@ template&lt;details::ClockTrait Clock = std::chrono::steady_clock&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;details::ClockTrait Clock = std::chrono::steady_clock&gt; </div>
+template&lt;ClockTrait Clock = std::chrono::steady_clock&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">using <a class="el" href="classhelios_1_1utils_1_1Timer.html">helios::utils::Timer</a>&lt; Clock &gt;::Duration = typename Clock::duration</td>
@@ -274,7 +274,7 @@ template&lt;details::ClockTrait Clock = std::chrono::steady_clock&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="timer_8hpp_source.html#l00071">71</a> of file <a class="el" href="timer_8hpp_source.html">timer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timer_8hpp_source.html#l00033">33</a> of file <a class="el" href="timer_8hpp_source.html">timer.hpp</a>.</p>
 
 </div>
 </div>
@@ -284,7 +284,7 @@ template&lt;details::ClockTrait Clock = std::chrono::steady_clock&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;details::ClockTrait Clock = std::chrono::steady_clock&gt; </div>
+template&lt;ClockTrait Clock = std::chrono::steady_clock&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">using <a class="el" href="classhelios_1_1utils_1_1Timer.html">helios::utils::Timer</a>&lt; Clock &gt;::TimePoint = typename Clock::time_point</td>
@@ -292,7 +292,7 @@ template&lt;details::ClockTrait Clock = std::chrono::steady_clock&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="timer_8hpp_source.html#l00070">70</a> of file <a class="el" href="timer_8hpp_source.html">timer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timer_8hpp_source.html#l00032">32</a> of file <a class="el" href="timer_8hpp_source.html">timer.hpp</a>.</p>
 
 </div>
 </div>
@@ -303,7 +303,7 @@ template&lt;details::ClockTrait Clock = std::chrono::steady_clock&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;details::ClockTrait Clock = std::chrono::steady_clock&gt; </div>
+template&lt;ClockTrait Clock = std::chrono::steady_clock&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -332,7 +332,7 @@ template&lt;details::ClockTrait Clock = std::chrono::steady_clock&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;details::ClockTrait Clock = std::chrono::steady_clock&gt; </div>
+template&lt;ClockTrait Clock = std::chrono::steady_clock&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -359,7 +359,7 @@ template&lt;details::ClockTrait Clock = std::chrono::steady_clock&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;details::ClockTrait Clock = std::chrono::steady_clock&gt; </div>
+template&lt;ClockTrait Clock = std::chrono::steady_clock&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -386,7 +386,7 @@ template&lt;details::ClockTrait Clock = std::chrono::steady_clock&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;details::ClockTrait Clock = std::chrono::steady_clock&gt; </div>
+template&lt;ClockTrait Clock = std::chrono::steady_clock&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -414,9 +414,9 @@ template&lt;details::ClockTrait Clock = std::chrono::steady_clock&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;details::ClockTrait Clock&gt; </div>
+template&lt;ClockTrait Clock&gt; </div>
 <div class="memtemplate">
-template&lt;utils::ArithmeticTrait Type, details::DurationTrait Units&gt; </div>
+template&lt;utils::ArithmeticTrait Type, DurationTrait Units&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -449,7 +449,7 @@ template&lt;utils::ArithmeticTrait Type, details::DurationTrait Units&gt; </div>
 </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="timer_8hpp_source.html#l00175">175</a> of file <a class="el" href="timer_8hpp_source.html">timer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timer_8hpp_source.html#l00133">133</a> of file <a class="el" href="timer_8hpp_source.html">timer.hpp</a>.</p>
 
 </div>
 </div>
@@ -459,9 +459,9 @@ template&lt;utils::ArithmeticTrait Type, details::DurationTrait Units&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;details::ClockTrait Clock&gt; </div>
+template&lt;ClockTrait Clock&gt; </div>
 <div class="memtemplate">
-template&lt;details::DurationTrait Units&gt; </div>
+template&lt;DurationTrait Units&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -483,13 +483,13 @@ template&lt;details::DurationTrait Units&gt; </div>
 <p>Get elapsed time as a <span class="tt">std::chrono::duration</span>. </p>
 <p>This is the primary API for time measurement and should be preferred when working with <span class="tt">std::chrono</span>. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">Units</td><td><a class="el" href="#acc84e414af2a17fc6021e27e3294a783">Duration</a> type to convert to. Must satisfy <span class="tt"><a class="el" href="concepthelios_1_1utils_1_1details_1_1DurationTrait.html" title="Concept for duration types based on std::chrono::duration.">details::DurationTrait</a></span>. Defaults to <span class="tt">Clock::duration</span>. </td></tr>
+    <tr><td class="paramname">Units</td><td><a class="el" href="#acc84e414af2a17fc6021e27e3294a783">Duration</a> type to convert to. Must satisfy <span class="tt"><a class="el" href="concepthelios_1_1utils_1_1DurationTrait.html" title="Concept for duration types based on std::chrono::duration.">DurationTrait</a></span>. Defaults to <span class="tt">Clock::duration</span>. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Elapsed time since last reset as <span class="tt">Units</span>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="timer_8hpp_source.html#l00167">167</a> of file <a class="el" href="timer_8hpp_source.html">timer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timer_8hpp_source.html#l00125">125</a> of file <a class="el" href="timer_8hpp_source.html">timer.hpp</a>.</p>
 
 </div>
 </div>
@@ -499,7 +499,7 @@ template&lt;details::DurationTrait Units&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;details::ClockTrait Clock = std::chrono::steady_clock&gt; </div>
+template&lt;ClockTrait Clock = std::chrono::steady_clock&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -521,7 +521,7 @@ template&lt;details::ClockTrait Clock = std::chrono::steady_clock&gt; </div>
 <p>Elapsed time in microseconds as 64-bit integer. </p>
 <dl class="section return"><dt>Returns</dt><dd>Elapsed time since last reset in microseconds. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="timer_8hpp_source.html#l00141">141</a> of file <a class="el" href="timer_8hpp_source.html">timer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timer_8hpp_source.html#l00099">99</a> of file <a class="el" href="timer_8hpp_source.html">timer.hpp</a>.</p>
 
 </div>
 </div>
@@ -531,7 +531,7 @@ template&lt;details::ClockTrait Clock = std::chrono::steady_clock&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;details::ClockTrait Clock = std::chrono::steady_clock&gt; </div>
+template&lt;ClockTrait Clock = std::chrono::steady_clock&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -553,7 +553,7 @@ template&lt;details::ClockTrait Clock = std::chrono::steady_clock&gt; </div>
 <p>Elapsed time in milliseconds as double. </p>
 <dl class="section return"><dt>Returns</dt><dd>Elapsed time since last reset in milliseconds. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="timer_8hpp_source.html#l00133">133</a> of file <a class="el" href="timer_8hpp_source.html">timer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timer_8hpp_source.html#l00091">91</a> of file <a class="el" href="timer_8hpp_source.html">timer.hpp</a>.</p>
 
 </div>
 </div>
@@ -563,7 +563,7 @@ template&lt;details::ClockTrait Clock = std::chrono::steady_clock&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;details::ClockTrait Clock = std::chrono::steady_clock&gt; </div>
+template&lt;ClockTrait Clock = std::chrono::steady_clock&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -585,7 +585,7 @@ template&lt;details::ClockTrait Clock = std::chrono::steady_clock&gt; </div>
 <p>Elapsed time in nanoseconds as 64-bit integer. </p>
 <dl class="section return"><dt>Returns</dt><dd>Elapsed time since last reset in nanoseconds. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="timer_8hpp_source.html#l00149">149</a> of file <a class="el" href="timer_8hpp_source.html">timer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timer_8hpp_source.html#l00107">107</a> of file <a class="el" href="timer_8hpp_source.html">timer.hpp</a>.</p>
 
 </div>
 </div>
@@ -595,7 +595,7 @@ template&lt;details::ClockTrait Clock = std::chrono::steady_clock&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;details::ClockTrait Clock = std::chrono::steady_clock&gt; </div>
+template&lt;ClockTrait Clock = std::chrono::steady_clock&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -617,7 +617,7 @@ template&lt;details::ClockTrait Clock = std::chrono::steady_clock&gt; </div>
 <p>Elapsed time in seconds as double. </p>
 <dl class="section return"><dt>Returns</dt><dd>Elapsed time since last reset in seconds. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="timer_8hpp_source.html#l00125">125</a> of file <a class="el" href="timer_8hpp_source.html">timer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timer_8hpp_source.html#l00083">83</a> of file <a class="el" href="timer_8hpp_source.html">timer.hpp</a>.</p>
 
 </div>
 </div>
@@ -627,7 +627,7 @@ template&lt;details::ClockTrait Clock = std::chrono::steady_clock&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;details::ClockTrait Clock = std::chrono::steady_clock&gt; </div>
+template&lt;ClockTrait Clock = std::chrono::steady_clock&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -654,7 +654,7 @@ template&lt;details::ClockTrait Clock = std::chrono::steady_clock&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;details::ClockTrait Clock = std::chrono::steady_clock&gt; </div>
+template&lt;ClockTrait Clock = std::chrono::steady_clock&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -681,7 +681,7 @@ template&lt;details::ClockTrait Clock = std::chrono::steady_clock&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;details::ClockTrait Clock = std::chrono::steady_clock&gt; </div>
+template&lt;ClockTrait Clock = std::chrono::steady_clock&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -702,7 +702,7 @@ template&lt;details::ClockTrait Clock = std::chrono::steady_clock&gt; </div>
 
 <p>Reset the timer start point to current time. </p>
 
-<p class="definition">Definition at line <a class="el" href="timer_8hpp_source.html#l00091">91</a> of file <a class="el" href="timer_8hpp_source.html">timer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timer_8hpp_source.html#l00049">49</a> of file <a class="el" href="timer_8hpp_source.html">timer.hpp</a>.</p>
 
 </div>
 </div>
@@ -712,7 +712,7 @@ template&lt;details::ClockTrait Clock = std::chrono::steady_clock&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;details::ClockTrait Clock = std::chrono::steady_clock&gt; </div>
+template&lt;ClockTrait Clock = std::chrono::steady_clock&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -734,7 +734,7 @@ template&lt;details::ClockTrait Clock = std::chrono::steady_clock&gt; </div>
 <p>Get the raw start timestamp of the timer. </p>
 <dl class="section return"><dt>Returns</dt><dd>Starting time point. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="timer_8hpp_source.html#l00157">157</a> of file <a class="el" href="timer_8hpp_source.html">timer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timer_8hpp_source.html#l00115">115</a> of file <a class="el" href="timer_8hpp_source.html">timer.hpp</a>.</p>
 
 </div>
 </div>

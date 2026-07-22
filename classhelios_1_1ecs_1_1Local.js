@@ -1,15 +1,14 @@
 var classhelios_1_1ecs_1_1Local =
 [
-    [ "Local", "classhelios_1_1ecs_1_1Local.html#a5c13ae7404d5e48ccc1a99bc7ccd58c2", null ],
+    [ "DecayedT", "classhelios_1_1ecs_1_1Local.html#a491e1c527c997d95824165ccd6138cf1", null ],
+    [ "Local", "classhelios_1_1ecs_1_1Local.html#a7f2921fae1336da9174a9186d9dfea4f", null ],
     [ "Local", "classhelios_1_1ecs_1_1Local.html#a8f62fd4a7e7bb319af3ccc10e8e77165", null ],
     [ "Local", "classhelios_1_1ecs_1_1Local.html#a49d49741474b17ebf9cf6a1b413fcdec", null ],
     [ "~Local", "classhelios_1_1ecs_1_1Local.html#a661360444b601f24d2abdf2729d28c08", null ],
-    [ "Emplace", "classhelios_1_1ecs_1_1Local.html#aee091221d99cebc710615ecd9d6bcbe2", null ],
-    [ "Get", "classhelios_1_1ecs_1_1Local.html#a679917513107461d418aa6a57db58996", null ],
-    [ "Insert", "classhelios_1_1ecs_1_1Local.html#a1963dbb774c724a9b9db5a31a12d861e", null ],
-    [ "operator*", "classhelios_1_1ecs_1_1Local.html#ab6f88745872a3e28f6410a9d1d2e0459", null ],
-    [ "operator->", "classhelios_1_1ecs_1_1Local.html#a0c414852d19dc788c37c31c69ceb3032", null ],
+    [ "Get", "classhelios_1_1ecs_1_1Local.html#ae86e9ac6c18f6dae87659df18c612cba", null ],
+    [ "operator*", "classhelios_1_1ecs_1_1Local.html#a61cda9b4bf14649112e546162246a704", null ],
+    [ "operator->", "classhelios_1_1ecs_1_1Local.html#a07b3317319c0d68cd0551815af20fff0", null ],
     [ "operator=", "classhelios_1_1ecs_1_1Local.html#a0d628908a480fff23d7da18019dc0252", null ],
     [ "operator=", "classhelios_1_1ecs_1_1Local.html#a2127583b9ca2d464f42f7278df94de12", null ],
-    [ "Resources", "classhelios_1_1ecs_1_1Local.html#aa849e43ebee3ead95971178706e9046c", null ]
+    [ "operator=", "classhelios_1_1ecs_1_1Local.html#ade6840e831ebe44bbb083cb4b25a075e", null ]
 ];

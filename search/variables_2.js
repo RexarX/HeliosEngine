@@ -11,5 +11,6 @@ var searchData=
   ['console_5fpattern_8',['console_pattern',['../structhelios_1_1log_1_1Config.html#a8eb7852d2fc795b8fa34e88f7ed0bc9b',1,'helios::log::Config']]],
   ['consumed_5fmessages_9',['consumed_messages',['../structhelios_1_1ecs_1_1SystemLocalData.html#a6876490aa1c48cab1d21b0933c6cc8a7',1,'helios::ecs::SystemLocalData']]],
   ['contains_5ffn_10',['contains_fn',['../structhelios_1_1ecs_1_1ComponentManager_1_1SparseStorageEntry.html#ab7ee259563151b84f348034b82b8107d',1,'helios::ecs::ComponentManager::SparseStorageEntry']]],
-  ['create_5fsymbol_11',['create_symbol',['../structhelios_1_1app_1_1DynamicPluginConfig.html#a59cce95fcc5aaa6474ba3e03546d78d7',1,'helios::app::DynamicPluginConfig']]]
+  ['count_11',['count',['../structhelios_1_1app_1_1FrameCount.html#a8443af6460d140d4a1bf94511457bc07',1,'helios::app::FrameCount']]],
+  ['create_5fsymbol_12',['create_symbol',['../structhelios_1_1app_1_1DynamicPluginConfig.html#a59cce95fcc5aaa6474ba3e03546d78d7',1,'helios::app::DynamicPluginConfig']]]
 ];

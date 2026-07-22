@@ -211,11 +211,11 @@ requires (sizeof...(Cs) &gt; 1)</td></tr>
 <tr class="memdesc:ae6f22b12a5832767569326c8130f8db7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates multiple tasks from a list of callables.  <br /></td></tr>
 <tr class="memitem:a293e17c48f3bb105bfbaa525d5e6787f" id="r_a293e17c48f3bb105bfbaa525d5e6787f"><td class="memItemLeft"><a class="el" href="classhelios_1_1async_1_1Task.html">Task</a>&#160;</td><td class="memItemRight"><a class="el" href="#a293e17c48f3bb105bfbaa525d5e6787f">CreatePlaceholder</a> ()</td></tr>
 <tr class="memdesc:a293e17c48f3bb105bfbaa525d5e6787f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a placeholder task with no assigned work.  <br /></td></tr>
-<tr class="memitem:acb6774e9775ba422bd8f6167cd85f979" id="r_acb6774e9775ba422bd8f6167cd85f979"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
+<tr class="memitem:acb6774e9775ba422bd8f6167cd85f979" id="r_acb6774e9775ba422bd8f6167cd85f979"><td class="memTemplParams" colspan="2">template&lt;std::ranges::input_range R&gt; <br />
 requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="el" href="classhelios_1_1async_1_1Task.html">Task</a>&gt;</td></tr>
 <tr class="memitem:acb6774e9775ba422bd8f6167cd85f979 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#acb6774e9775ba422bd8f6167cd85f979">Linearize</a> (const R &amp;tasks)</td></tr>
 <tr class="memdesc:acb6774e9775ba422bd8f6167cd85f979"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates linear dependencies between tasks in the given range.  <br /></td></tr>
-<tr class="memitem:a04d04592d13b52d6df748d7331533f7e" id="r_a04d04592d13b52d6df748d7331533f7e"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R, typename C&gt; <br />
+<tr class="memitem:a04d04592d13b52d6df748d7331533f7e" id="r_a04d04592d13b52d6df748d7331533f7e"><td class="memTemplParams" colspan="2">template&lt;std::ranges::input_range R, typename C&gt; <br />
 requires std::invocable&lt;C, std::ranges::range_reference_t&lt;R&gt;&gt;</td></tr>
 <tr class="memitem:a04d04592d13b52d6df748d7331533f7e template"><td class="memItemLeft"><a class="el" href="classhelios_1_1async_1_1Task.html">Task</a>&#160;</td><td class="memItemRight"><a class="el" href="#a04d04592d13b52d6df748d7331533f7e">ForEach</a> (const R &amp;range, C &amp;&amp;callable)</td></tr>
 <tr class="memdesc:a04d04592d13b52d6df748d7331533f7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a parallel for-each task over the given range.  <br /></td></tr>
@@ -223,10 +223,10 @@ requires std::invocable&lt;C, std::ranges::range_reference_t&lt;R&gt;&gt;</td></
 requires std::invocable&lt;C, I&gt;</td></tr>
 <tr class="memitem:a063b33de259eaa0d280be5c434f401bc template"><td class="memItemLeft"><a class="el" href="classhelios_1_1async_1_1Task.html">Task</a>&#160;</td><td class="memItemRight"><a class="el" href="#a063b33de259eaa0d280be5c434f401bc">ForEachIndex</a> (I start, I end, I step, C &amp;&amp;callable)</td></tr>
 <tr class="memdesc:a063b33de259eaa0d280be5c434f401bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a parallel for-each task over an index range.  <br /></td></tr>
-<tr class="memitem:a37d7f7fd5753ba287f6f66bf64762f7d" id="r_a37d7f7fd5753ba287f6f66bf64762f7d"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range InputRange, std::ranges::range OutputRange, std::invocable&lt; std::ranges::range_reference_t&lt; InputRange &gt; &gt; TransformFunc&gt; </td></tr>
+<tr class="memitem:a37d7f7fd5753ba287f6f66bf64762f7d" id="r_a37d7f7fd5753ba287f6f66bf64762f7d"><td class="memTemplParams" colspan="2">template&lt;std::ranges::input_range InputRange, std::ranges::input_range OutputRange, std::invocable&lt; std::ranges::range_reference_t&lt; InputRange &gt; &gt; TransformFunc&gt; </td></tr>
 <tr class="memitem:a37d7f7fd5753ba287f6f66bf64762f7d template"><td class="memItemLeft"><a class="el" href="classhelios_1_1async_1_1Task.html">Task</a>&#160;</td><td class="memItemRight"><a class="el" href="#a37d7f7fd5753ba287f6f66bf64762f7d">Transform</a> (const InputRange &amp;input_range, OutputRange &amp;output_range, TransformFunc &amp;&amp;transform_func)</td></tr>
 <tr class="memdesc:a37d7f7fd5753ba287f6f66bf64762f7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a parallel transform task that applies a function to each element.  <br /></td></tr>
-<tr class="memitem:a3f105770aceed2593f3ca9bb0e77a3a1" id="r_a3f105770aceed2593f3ca9bb0e77a3a1"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R, typename T, typename BinaryOp&gt; <br />
+<tr class="memitem:a3f105770aceed2593f3ca9bb0e77a3a1" id="r_a3f105770aceed2593f3ca9bb0e77a3a1"><td class="memTemplParams" colspan="2">template&lt;std::ranges::input_range R, typename T, typename BinaryOp&gt; <br />
 requires std::invocable&lt;BinaryOp, T, std::ranges::range_reference_t&lt;R&gt;&gt;</td></tr>
 <tr class="memitem:a3f105770aceed2593f3ca9bb0e77a3a1 template"><td class="memItemLeft"><a class="el" href="classhelios_1_1async_1_1Task.html">Task</a>&#160;</td><td class="memItemRight"><a class="el" href="#a3f105770aceed2593f3ca9bb0e77a3a1">Reduce</a> (const R &amp;range, T &amp;init, BinaryOp &amp;&amp;binary_op)</td></tr>
 <tr class="memdesc:a3f105770aceed2593f3ca9bb0e77a3a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a parallel reduction task that combines elements using a binary operation.  <br /></td></tr>
@@ -657,7 +657,7 @@ requires (sizeof...(Cs) &gt; 1)</div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;std::ranges::range R, typename C&gt; <br />
+template&lt;std::ranges::input_range R, typename C&gt; <br />
 requires std::invocable&lt;C, std::ranges::range_reference_t&lt;R&gt;&gt;</div>
 <table class="mlabels">
   <tr>
@@ -815,7 +815,7 @@ requires std::invocable&lt;Visitor, <a class="el" href="classhelios_1_1async_1_1
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;std::ranges::range R&gt; <br />
+template&lt;std::ranges::input_range R&gt; <br />
 requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="el" href="classhelios_1_1async_1_1Task.html">Task</a>&gt;</div>
 <table class="mlabels">
   <tr>
@@ -975,7 +975,7 @@ requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="el" href
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;std::ranges::range R, typename T, typename BinaryOp&gt; <br />
+template&lt;std::ranges::input_range R, typename T, typename BinaryOp&gt; <br />
 requires std::invocable&lt;BinaryOp, T, std::ranges::range_reference_t&lt;R&gt;&gt;</div>
 <table class="mlabels">
   <tr>
@@ -1189,7 +1189,7 @@ requires std::predicate&lt;Compare, std::ranges::range_reference_t&lt;R&gt;, std
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;std::ranges::range InputRange, std::ranges::range OutputRange, std::invocable&lt; std::ranges::range_reference_t&lt; InputRange &gt; &gt; TransformFunc&gt; </div>
+template&lt;std::ranges::input_range InputRange, std::ranges::input_range OutputRange, std::invocable&lt; std::ranges::range_reference_t&lt; InputRange &gt; &gt; TransformFunc&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">

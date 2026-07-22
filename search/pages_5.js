@@ -8,6 +8,8 @@ var searchData=
   ['build_20tools_5',['All platforms — build tools',['../index.html#all-platforms--build-tools',1,'']]],
   ['building_6',['Building',['../index.html#building',1,'Building'],['../md_docs_2guidelines.html#building-1',1,'Building']]],
   ['builds_7',['Selective module builds',['../md_docs_2guidelines.html#selective-module-builds',1,'']]],
-  ['builtin_20stages_20schedules_20schedules_20hpp_8',['Builtin Stages &amp;amp; Schedules (&lt;span class=&quot;tt&quot;&gt;schedules.hpp&lt;/span&gt;)',['../dir_5194e5fea318fda12687127c23f8aba1.html#builtin-stages--schedules-scheduleshpp',1,'']]],
-  ['builtin_20types_9',['Builtin Types',['../dir_ddca5f149c4ce13074f28b270e950ba9.html#builtin-types',1,'']]]
+  ['builtin_20resources_20plugins_20messages_8',['Builtin Resources, Plugins &amp;amp; Messages',['../dir_5194e5fea318fda12687127c23f8aba1.html#builtin-resources-plugins--messages',1,'']]],
+  ['builtin_20stages_20schedules_20schedules_20hpp_9',['Builtin Stages &amp;amp; Schedules (&lt;span class=&quot;tt&quot;&gt;schedules.hpp&lt;/span&gt;)',['../dir_5194e5fea318fda12687127c23f8aba1.html#builtin-stages--schedules-scheduleshpp',1,'']]],
+  ['builtin_20types_10',['Builtin Types',['../dir_ddca5f149c4ce13074f28b270e950ba9.html#builtin-types',1,'']]],
+  ['bundles_11',['Component Bundles',['../dir_ddca5f149c4ce13074f28b270e950ba9.html#component-bundles',1,'']]]
 ];

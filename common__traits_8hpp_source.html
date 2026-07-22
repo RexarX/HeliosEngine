@@ -178,95 +178,136 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('common__traits
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;<a class="code" href="type__info_8hpp.html">helios/utils/type_info.hpp</a>&gt;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;concepts&gt;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="foldopen" id="foldopen00008" data-start="{" data-end="}">
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="namespacehelios_1_1utils.html">    8</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1utils.html">helios::utils</a> {</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="foldopen" id="foldopen00010" data-start="{" data-end="}">
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="namespacehelios_1_1utils_1_1details.html">   10</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1utils_1_1details.html">details</a> {</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">// Helper: recursively check uniqueness after removing cv/ref.</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// Primary: empty pack =&gt; true</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span>...&gt;</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="structhelios_1_1utils_1_1details_1_1UniqueTypesHelper.html">   15</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structhelios_1_1utils_1_1details_1_1UniqueTypesHelper.html">UniqueTypesHelper</a> : std::true_type {};</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">// Recursive case</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... Rest&gt;</div>
-<div class="foldopen" id="foldopen00019" data-start="{" data-end="};">
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="structhelios_1_1utils_1_1details_1_1UniqueTypesHelper_3_01T_00_01Rest_8_8_8_01_4.html">   19</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structhelios_1_1utils_1_1details_1_1UniqueTypesHelper.html">UniqueTypesHelper</a>&lt;T, Rest...&gt;</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    : std::bool_constant&lt;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>          <span class="comment">// T must differ from every type in Rest (after remove_cvref)</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>          (!(std::same_as&lt;std::remove_cvref_t&lt;T&gt;, std::remove_cvref_t&lt;Rest&gt;&gt; ||</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>             ...))</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>          <span class="comment">// and Rest themselves must be unique</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>          &amp;&amp; UniqueTypesHelper&lt;Rest...&gt;::value&gt; {};</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;chrono&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;concepts&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="foldopen" id="foldopen00009" data-start="{" data-end="}">
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="namespacehelios_1_1utils.html">    9</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1utils.html">helios::utils</a> {</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="foldopen" id="foldopen00011" data-start="{" data-end="}">
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="namespacehelios_1_1utils_1_1details.html">   11</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1utils_1_1details.html">details</a> {</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// Helper: recursively check uniqueness after removing cv/ref.</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">// Primary: empty pack =&gt; true</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span>...&gt;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="structhelios_1_1utils_1_1details_1_1UniqueTypesHelper.html">   16</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structhelios_1_1utils_1_1details_1_1UniqueTypesHelper.html">UniqueTypesHelper</a> : std::true_type {};</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">// Recursive case</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... Rest&gt;</div>
+<div class="foldopen" id="foldopen00020" data-start="{" data-end="};">
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="structhelios_1_1utils_1_1details_1_1UniqueTypesHelper_3_01T_00_01Rest_8_8_8_01_4.html">   20</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structhelios_1_1utils_1_1details_1_1UniqueTypesHelper.html">UniqueTypesHelper</a>&lt;T, Rest...&gt;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    : std::bool_constant&lt;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>          <span class="comment">// T must differ from every type in Rest (after remove_cvref)</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>          (!(std::same_as&lt;std::remove_cvref_t&lt;T&gt;, std::remove_cvref_t&lt;Rest&gt;&gt; ||</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>             ...))</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>          <span class="comment">// and Rest themselves must be unique</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>          &amp;&amp; UniqueTypesHelper&lt;Rest...&gt;::value&gt; {};</div>
 </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>}  <span class="comment">// namespace details</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>}  <span class="comment">// namespace details</span></div>
 </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment"></span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment"> * @brief Concept for arithmetic types (integral or floating-point).</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="concepthelios_1_1utils_1_1ArithmeticTrait.html">   33</a></span><span class="keyword">concept </span><a class="code hl_concept" href="concepthelios_1_1utils_1_1ArithmeticTrait.html">ArithmeticTrait</a> = std::integral&lt;T&gt; || std::floating_point&lt;T&gt;;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment"></span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment"> * @brief Concept for lambda closure types.</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment"> * @details Detects lambdas via compiler-specific type-name heuristics (or</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment"> * C++26 reflection when available).</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="concepthelios_1_1utils_1_1LambdaTrait.html">   41</a></span><span class="keyword">concept </span><a class="code hl_concept" href="concepthelios_1_1utils_1_1LambdaTrait.html">LambdaTrait</a> = <a class="code hl_function" href="namespacehelios_1_1utils_1_1details.html#aa2df74705747920b7e9fa01a0bcd3bf2">details::IsLambdaType&lt;T&gt;</a>();</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment"></span> </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment"> * @brief Concept for regular functor types (named structs/classes that are not</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment"> * lambda closures).</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="concepthelios_1_1utils_1_1FunctorTrait.html">   48</a></span><span class="keyword">concept </span><a class="code hl_concept" href="concepthelios_1_1utils_1_1FunctorTrait.html">FunctorTrait</a> = std::is_class_v&lt;T&gt; &amp;&amp; !<a class="code hl_concept" href="concepthelios_1_1utils_1_1LambdaTrait.html">LambdaTrait&lt;T&gt;</a>;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment"></span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment"> * @brief Concept for arithmetic types (integral or floating-point).</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="concepthelios_1_1utils_1_1ArithmeticTrait.html">   34</a></span><span class="keyword">concept </span><a class="code hl_concept" href="concepthelios_1_1utils_1_1ArithmeticTrait.html">ArithmeticTrait</a> = std::integral&lt;T&gt; || std::floating_point&lt;T&gt;;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment"></span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment"> * @brief Concept for clock types compatible with std::chrono clocks.</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment"> * @details Requires nested types `rep`, `period`, `duration` and `time_point`,</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment"> * and a static `now()` function returning `time_point`.</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00042" data-start="{" data-end="}">
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="concepthelios_1_1utils_1_1ClockTrait.html">   42</a></span><span class="keyword">concept </span><a class="code hl_concept" href="concepthelios_1_1utils_1_1ClockTrait.html">ClockTrait</a> = <span class="keyword">requires</span> {</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  <span class="keyword">typename</span> T::rep;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  <span class="keyword">typename</span> T::period;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  <span class="keyword">typename</span> T::duration;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  <span class="keyword">typename</span> T::time_point;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  { T::now() } -&gt; std::same_as&lt;typename T::time_point&gt;;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>};</div>
+</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment"></span> </div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment"> * @brief Concept that checks if all types in a pack are unique (after removing</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment"> * cv/ref qualifiers).</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Ts&gt;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="concepthelios_1_1utils_1_1UniqueTypes.html">   55</a></span><span class="keyword">concept </span><a class="code hl_concept" href="concepthelios_1_1utils_1_1UniqueTypes.html">UniqueTypes</a> = <a class="code hl_struct" href="structhelios_1_1utils_1_1details_1_1UniqueTypesHelper.html">details::UniqueTypesHelper</a>&lt;Ts...&gt;::value;</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment"></span> </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment"> * @brief Concept to allow argument conversion with polymorphic relationships.</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment"> * @details Allows regular convertibility or base/derived relationship for</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment"> * polymorphic types. This is useful for type-erased containers and delegates to</span></div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment"> * provide flexible argument handling.</span></div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment"> *</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment"> * The concept is satisfied when:</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment"> * - From is convertible to To (standard conversion), OR</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment"> * - Both From and To are polymorphic types and one derives from the other</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment"> *</span></div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment"> * @tparam From Source type.</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment"> * @tparam To Target type.</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> From, <span class="keyword">typename</span> To&gt;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="concepthelios_1_1utils_1_1PolymorphicConvertible.html">   71</a></span><span class="keyword">concept </span><a class="code hl_concept" href="concepthelios_1_1utils_1_1PolymorphicConvertible.html">PolymorphicConvertible</a> =</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    std::convertible_to&lt;From, To&gt; ||</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    (std::is_polymorphic_v&lt;std::remove_reference_t&lt;From&gt;&gt; &amp;&amp;</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>     std::is_polymorphic_v&lt;std::remove_reference_t&lt;To&gt;&gt; &amp;&amp;</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>     (std::derived_from&lt;std::remove_cvref_t&lt;From&gt;, std::remove_cvref_t&lt;To&gt;&gt; ||</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>      std::derived_from&lt;std::remove_cvref_t&lt;To&gt;, std::remove_cvref_t&lt;From&gt;&gt;));</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>}  <span class="comment">// namespace helios::utils</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment"> * @brief Concept for duration types based on std::chrono::duration.</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment"> * @details Requires nested types `rep` and `period`, and must be a</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment"> * specialization of `std::chrono::duration`.</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00056" data-start="{" data-end="}">
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="concepthelios_1_1utils_1_1DurationTrait.html">   56</a></span><span class="keyword">concept </span><a class="code hl_concept" href="concepthelios_1_1utils_1_1DurationTrait.html">DurationTrait</a> =</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keyword">requires</span> {</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>      <span class="keyword">typename</span> T::rep;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>      <span class="keyword">typename</span> T::period;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    } &amp;&amp;</div>
 </div>
-<div class="ttc" id="aconcepthelios_1_1utils_1_1ArithmeticTrait_html"><div class="ttname"><a href="concepthelios_1_1utils_1_1ArithmeticTrait.html">helios::utils::ArithmeticTrait</a></div><div class="ttdoc">Concept for arithmetic types (integral or floating-point).</div><div class="ttdef"><b>Definition</b> <a href="#l00033">common_traits.hpp:33</a></div></div>
-<div class="ttc" id="aconcepthelios_1_1utils_1_1FunctorTrait_html"><div class="ttname"><a href="concepthelios_1_1utils_1_1FunctorTrait.html">helios::utils::FunctorTrait</a></div><div class="ttdoc">Concept for regular functor types (named structs/classes that are not lambda closures).</div><div class="ttdef"><b>Definition</b> <a href="#l00048">common_traits.hpp:48</a></div></div>
-<div class="ttc" id="aconcepthelios_1_1utils_1_1LambdaTrait_html"><div class="ttname"><a href="concepthelios_1_1utils_1_1LambdaTrait.html">helios::utils::LambdaTrait</a></div><div class="ttdoc">Concept for lambda closure types.</div><div class="ttdef"><b>Definition</b> <a href="#l00041">common_traits.hpp:41</a></div></div>
-<div class="ttc" id="aconcepthelios_1_1utils_1_1PolymorphicConvertible_html"><div class="ttname"><a href="concepthelios_1_1utils_1_1PolymorphicConvertible.html">helios::utils::PolymorphicConvertible</a></div><div class="ttdoc">Concept to allow argument conversion with polymorphic relationships.</div><div class="ttdef"><b>Definition</b> <a href="#l00071">common_traits.hpp:71</a></div></div>
-<div class="ttc" id="aconcepthelios_1_1utils_1_1UniqueTypes_html"><div class="ttname"><a href="concepthelios_1_1utils_1_1UniqueTypes.html">helios::utils::UniqueTypes</a></div><div class="ttdoc">Concept that checks if all types in a pack are unique (after removing cv/ref qualifiers).</div><div class="ttdef"><b>Definition</b> <a href="#l00055">common_traits.hpp:55</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1utils_1_1details_html"><div class="ttname"><a href="namespacehelios_1_1utils_1_1details.html">helios::utils::details</a></div><div class="ttdef"><b>Definition</b> <a href="#l00010">common_traits.hpp:10</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1utils_1_1details_html_aa2df74705747920b7e9fa01a0bcd3bf2"><div class="ttname"><a href="namespacehelios_1_1utils_1_1details.html#aa2df74705747920b7e9fa01a0bcd3bf2">helios::utils::details::IsLambdaType</a></div><div class="ttdeci">consteval bool IsLambdaType() noexcept</div><div class="ttdoc">Detects whether T is a lambda closure type.</div><div class="ttdef"><b>Definition</b> <a href="type__info_8hpp_source.html#l00214">type_info.hpp:214</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1utils_html"><div class="ttname"><a href="namespacehelios_1_1utils.html">helios::utils</a></div><div class="ttdef"><b>Definition</b> <a href="#l00008">common_traits.hpp:8</a></div></div>
-<div class="ttc" id="astructhelios_1_1utils_1_1details_1_1UniqueTypesHelper_html"><div class="ttname"><a href="structhelios_1_1utils_1_1details_1_1UniqueTypesHelper.html">helios::utils::details::UniqueTypesHelper</a></div><div class="ttdef"><b>Definition</b> <a href="#l00015">common_traits.hpp:15</a></div></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    std::same_as&lt;T, std::chrono::duration&lt;typename T::rep, typename T::period&gt;&gt;;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment"></span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment"> * @brief Concept for lambda closure types.</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment"> * @details Detects lambdas via compiler-specific type-name heuristics (or</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment"> * C++26 reflection when available).</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="concepthelios_1_1utils_1_1LambdaTrait.html">   69</a></span><span class="keyword">concept </span><a class="code hl_concept" href="concepthelios_1_1utils_1_1LambdaTrait.html">LambdaTrait</a> = <a class="code hl_function" href="namespacehelios_1_1utils_1_1details.html#aa2df74705747920b7e9fa01a0bcd3bf2">details::IsLambdaType&lt;T&gt;</a>();</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment"></span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment"> * @brief Concept for regular functor types (named structs/classes that are not</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment"> * lambda closures).</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="concepthelios_1_1utils_1_1FunctorTrait.html">   76</a></span><span class="keyword">concept </span><a class="code hl_concept" href="concepthelios_1_1utils_1_1FunctorTrait.html">FunctorTrait</a> = std::is_class_v&lt;T&gt; &amp;&amp; !<a class="code hl_concept" href="concepthelios_1_1utils_1_1LambdaTrait.html">LambdaTrait&lt;T&gt;</a>;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment"></span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">/// @brief Concept for free function pointer types.</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="concepthelios_1_1utils_1_1FreeFunctionTrait.html">   80</a></span><span class="keyword">concept </span><a class="code hl_concept" href="concepthelios_1_1utils_1_1FreeFunctionTrait.html">FreeFunctionTrait</a> =</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    std::is_pointer_v&lt;std::remove_cvref_t&lt;T&gt;&gt; &amp;&amp;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    std::is_function_v&lt;std::remove_pointer_t&lt;std::remove_cvref_t&lt;T&gt;&gt;&gt;;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment"></span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment"> * @brief Concept that checks if all types in a pack are unique (after removing</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment"> * cv/ref qualifiers).</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Ts&gt;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="concepthelios_1_1utils_1_1UniqueTypes.html">   89</a></span><span class="keyword">concept </span><a class="code hl_concept" href="concepthelios_1_1utils_1_1UniqueTypes.html">UniqueTypes</a> = <a class="code hl_struct" href="structhelios_1_1utils_1_1details_1_1UniqueTypesHelper.html">details::UniqueTypesHelper</a>&lt;Ts...&gt;::value;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment"></span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment"> * @brief Concept to allow argument conversion with polymorphic relationships.</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment"> * @details Allows regular convertibility or base/derived relationship for</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment"> * polymorphic types. This is useful for type-erased containers and delegates to</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="comment"> * provide flexible argument handling.</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment"> * The concept is satisfied when:</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment"> * - From is convertible to To (standard conversion), OR</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment"> * - Both From and To are polymorphic types and one derives from the other</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="comment"> * @tparam From Source type.</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="comment"> * @tparam To Target type.</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> From, <span class="keyword">typename</span> To&gt;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="concepthelios_1_1utils_1_1PolymorphicConvertible.html">  105</a></span><span class="keyword">concept </span><a class="code hl_concept" href="concepthelios_1_1utils_1_1PolymorphicConvertible.html">PolymorphicConvertible</a> =</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    std::convertible_to&lt;From, To&gt; ||</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    (std::is_polymorphic_v&lt;std::remove_reference_t&lt;From&gt;&gt; &amp;&amp;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>     std::is_polymorphic_v&lt;std::remove_reference_t&lt;To&gt;&gt; &amp;&amp;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>     (std::derived_from&lt;std::remove_cvref_t&lt;From&gt;, std::remove_cvref_t&lt;To&gt;&gt; ||</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>      std::derived_from&lt;std::remove_cvref_t&lt;To&gt;, std::remove_cvref_t&lt;From&gt;&gt;));</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>}  <span class="comment">// namespace helios::utils</span></div>
+</div>
+<div class="ttc" id="aconcepthelios_1_1utils_1_1ArithmeticTrait_html"><div class="ttname"><a href="concepthelios_1_1utils_1_1ArithmeticTrait.html">helios::utils::ArithmeticTrait</a></div><div class="ttdoc">Concept for arithmetic types (integral or floating-point).</div><div class="ttdef"><b>Definition</b> <a href="#l00034">common_traits.hpp:34</a></div></div>
+<div class="ttc" id="aconcepthelios_1_1utils_1_1ClockTrait_html"><div class="ttname"><a href="concepthelios_1_1utils_1_1ClockTrait.html">helios::utils::ClockTrait</a></div><div class="ttdoc">Concept for clock types compatible with std::chrono clocks.</div><div class="ttdef"><b>Definition</b> <a href="#l00042">common_traits.hpp:42</a></div></div>
+<div class="ttc" id="aconcepthelios_1_1utils_1_1DurationTrait_html"><div class="ttname"><a href="concepthelios_1_1utils_1_1DurationTrait.html">helios::utils::DurationTrait</a></div><div class="ttdoc">Concept for duration types based on std::chrono::duration.</div><div class="ttdef"><b>Definition</b> <a href="#l00056">common_traits.hpp:56</a></div></div>
+<div class="ttc" id="aconcepthelios_1_1utils_1_1FreeFunctionTrait_html"><div class="ttname"><a href="concepthelios_1_1utils_1_1FreeFunctionTrait.html">helios::utils::FreeFunctionTrait</a></div><div class="ttdoc">Concept for free function pointer types.</div><div class="ttdef"><b>Definition</b> <a href="#l00080">common_traits.hpp:80</a></div></div>
+<div class="ttc" id="aconcepthelios_1_1utils_1_1FunctorTrait_html"><div class="ttname"><a href="concepthelios_1_1utils_1_1FunctorTrait.html">helios::utils::FunctorTrait</a></div><div class="ttdoc">Concept for regular functor types (named structs/classes that are not lambda closures).</div><div class="ttdef"><b>Definition</b> <a href="#l00076">common_traits.hpp:76</a></div></div>
+<div class="ttc" id="aconcepthelios_1_1utils_1_1LambdaTrait_html"><div class="ttname"><a href="concepthelios_1_1utils_1_1LambdaTrait.html">helios::utils::LambdaTrait</a></div><div class="ttdoc">Concept for lambda closure types.</div><div class="ttdef"><b>Definition</b> <a href="#l00069">common_traits.hpp:69</a></div></div>
+<div class="ttc" id="aconcepthelios_1_1utils_1_1PolymorphicConvertible_html"><div class="ttname"><a href="concepthelios_1_1utils_1_1PolymorphicConvertible.html">helios::utils::PolymorphicConvertible</a></div><div class="ttdoc">Concept to allow argument conversion with polymorphic relationships.</div><div class="ttdef"><b>Definition</b> <a href="#l00105">common_traits.hpp:105</a></div></div>
+<div class="ttc" id="aconcepthelios_1_1utils_1_1UniqueTypes_html"><div class="ttname"><a href="concepthelios_1_1utils_1_1UniqueTypes.html">helios::utils::UniqueTypes</a></div><div class="ttdoc">Concept that checks if all types in a pack are unique (after removing cv/ref qualifiers).</div><div class="ttdef"><b>Definition</b> <a href="#l00089">common_traits.hpp:89</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1utils_1_1details_html"><div class="ttname"><a href="namespacehelios_1_1utils_1_1details.html">helios::utils::details</a></div><div class="ttdef"><b>Definition</b> <a href="#l00011">common_traits.hpp:11</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1utils_1_1details_html_aa2df74705747920b7e9fa01a0bcd3bf2"><div class="ttname"><a href="namespacehelios_1_1utils_1_1details.html#aa2df74705747920b7e9fa01a0bcd3bf2">helios::utils::details::IsLambdaType</a></div><div class="ttdeci">consteval bool IsLambdaType() noexcept</div><div class="ttdoc">Detects whether T is a lambda closure type.</div><div class="ttdef"><b>Definition</b> <a href="type__info_8hpp_source.html#l00322">type_info.hpp:322</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1utils_html"><div class="ttname"><a href="namespacehelios_1_1utils.html">helios::utils</a></div><div class="ttdef"><b>Definition</b> <a href="#l00009">common_traits.hpp:9</a></div></div>
+<div class="ttc" id="astructhelios_1_1utils_1_1details_1_1UniqueTypesHelper_html"><div class="ttname"><a href="structhelios_1_1utils_1_1details_1_1UniqueTypesHelper.html">helios::utils::details::UniqueTypesHelper</a></div><div class="ttdef"><b>Definition</b> <a href="#l00016">common_traits.hpp:16</a></div></div>
 <div class="ttc" id="atype__info_8hpp_html"><div class="ttname"><a href="type__info_8hpp.html">type_info.hpp</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

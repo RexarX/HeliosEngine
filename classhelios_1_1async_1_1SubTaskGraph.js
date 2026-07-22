@@ -45,7 +45,6 @@ var classhelios_1_1async_1_1SubTaskGraph =
     [ "SilentDependentAsync", "classhelios_1_1async_1_1SubTaskGraph.html#ae7a980910241199a19e237fc090da24b", null ],
     [ "Sort", "classhelios_1_1async_1_1SubTaskGraph.html#a80a7464a29c8abd48510a78f525806fc", null ],
     [ "Transform", "classhelios_1_1async_1_1SubTaskGraph.html#a845bc2898e98956b92ba6ee1d542c56a", null ],
-    [ "WaitForAll", "classhelios_1_1async_1_1SubTaskGraph.html#a9d4b7d3c01b077654e3fd6d0259f17a7", null ],
     [ "WillBeRetained", "classhelios_1_1async_1_1SubTaskGraph.html#affa63ac653761a18168fb68e5dd7b75c", null ],
     [ "WorkerCount", "classhelios_1_1async_1_1SubTaskGraph.html#a16d5fc02da8985c9559df9c1e38f5ad0", null ],
     [ "Executor", "classhelios_1_1async_1_1SubTaskGraph.html#a763b2f90bc53f92d680a635fe28e858e", null ],

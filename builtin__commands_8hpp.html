@@ -180,14 +180,15 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('builtin__comma
 <div class="contents">
 <div class="textblock"><code>#include &lt;<a class="el" href="assert_8hpp_source.html">helios/assert.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="command_8hpp_source.html">helios/ecs/command/command.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="bundle_8hpp_source.html">helios/ecs/component/bundle.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="component_8hpp_source.html">helios/ecs/component/component.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="entity_8hpp_source.html">helios/ecs/entity/entity.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="ecs_2include_2helios_2ecs_2message_2message_8hpp_source.html">helios/ecs/message/message.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="resource_8hpp_source.html">helios/ecs/resource/resource.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="world_8hpp_source.html">helios/ecs/world.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="common__traits_8hpp_source.html">helios/utils/common_traits.hpp</a>&gt;</code><br />
+<code>#include &lt;algorithm&gt;</code><br />
 <code>#include &lt;concepts&gt;</code><br />
-<code>#include &lt;ranges&gt;</code><br />
 <code>#include &lt;tuple&gt;</code><br />
 <code>#include &lt;type_traits&gt;</code><br />
 <code>#include &lt;utility&gt;</code><br />
@@ -209,12 +210,20 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command to try destroy multiple entities.  <a href="classhelios_1_1ecs_1_1TryDestroyEntitiesCmd.html#details">More...</a><br /></td></tr>
 <tr class="memitem:helios_3A_3Aecs_3A_3AAddComponentsCmd_3C_20Ts_20_3E" id="r_helios_3A_3Aecs_3A_3AAddComponentsCmd_3C_20Ts_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1AddComponentsCmd.html">helios::ecs::AddComponentsCmd&lt; Ts &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command to add multiple components to an entity.  <a href="classhelios_1_1ecs_1_1AddComponentsCmd.html#details">More...</a><br /></td></tr>
+<tr class="memitem:helios_3A_3Aecs_3A_3AAddBundleCmd_3C_20B_20_3E" id="r_helios_3A_3Aecs_3A_3AAddBundleCmd_3C_20B_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1AddBundleCmd.html">helios::ecs::AddBundleCmd&lt; B &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command to add a component bundle to an entity.  <a href="classhelios_1_1ecs_1_1AddBundleCmd.html#details">More...</a><br /></td></tr>
 <tr class="memitem:helios_3A_3Aecs_3A_3ATryAddComponentsCmd_3C_20Ts_20_3E" id="r_helios_3A_3Aecs_3A_3ATryAddComponentsCmd_3C_20Ts_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1TryAddComponentsCmd.html">helios::ecs::TryAddComponentsCmd&lt; Ts &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command to try add multiple components (only missing ones).  <a href="classhelios_1_1ecs_1_1TryAddComponentsCmd.html#details">More...</a><br /></td></tr>
+<tr class="memitem:helios_3A_3Aecs_3A_3ATryAddBundleCmd_3C_20B_20_3E" id="r_helios_3A_3Aecs_3A_3ATryAddBundleCmd_3C_20B_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1TryAddBundleCmd.html">helios::ecs::TryAddBundleCmd&lt; B &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command to try add a component bundle to an entity.  <a href="classhelios_1_1ecs_1_1TryAddBundleCmd.html#details">More...</a><br /></td></tr>
 <tr class="memitem:helios_3A_3Aecs_3A_3ARemoveComponentsCmd_3C_20Ts_20_3E" id="r_helios_3A_3Aecs_3A_3ARemoveComponentsCmd_3C_20Ts_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1RemoveComponentsCmd.html">helios::ecs::RemoveComponentsCmd&lt; Ts &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command to remove multiple components from an entity.  <a href="classhelios_1_1ecs_1_1RemoveComponentsCmd.html#details">More...</a><br /></td></tr>
+<tr class="memitem:helios_3A_3Aecs_3A_3ARemoveBundleCmd_3C_20B_20_3E" id="r_helios_3A_3Aecs_3A_3ARemoveBundleCmd_3C_20B_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1RemoveBundleCmd.html">helios::ecs::RemoveBundleCmd&lt; B &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command to remove a component bundle from an entity.  <a href="classhelios_1_1ecs_1_1RemoveBundleCmd.html#details">More...</a><br /></td></tr>
 <tr class="memitem:helios_3A_3Aecs_3A_3ATryRemoveComponentsCmd_3C_20Ts_20_3E" id="r_helios_3A_3Aecs_3A_3ATryRemoveComponentsCmd_3C_20Ts_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1TryRemoveComponentsCmd.html">helios::ecs::TryRemoveComponentsCmd&lt; Ts &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command to try remove multiple components (only those present).  <a href="classhelios_1_1ecs_1_1TryRemoveComponentsCmd.html#details">More...</a><br /></td></tr>
+<tr class="memitem:helios_3A_3Aecs_3A_3ATryRemoveBundleCmd_3C_20B_20_3E" id="r_helios_3A_3Aecs_3A_3ATryRemoveBundleCmd_3C_20B_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1TryRemoveBundleCmd.html">helios::ecs::TryRemoveBundleCmd&lt; B &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command to try remove a component bundle from an entity.  <a href="classhelios_1_1ecs_1_1TryRemoveBundleCmd.html#details">More...</a><br /></td></tr>
 <tr class="memitem:helios_3A_3Aecs_3A_3AClearComponentsCmd" id="r_helios_3A_3Aecs_3A_3AClearComponentsCmd"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1ClearComponentsCmd.html">helios::ecs::ClearComponentsCmd</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command to clear all components from an entity.  <a href="classhelios_1_1ecs_1_1ClearComponentsCmd.html#details">More...</a><br /></td></tr>
 <tr class="memitem:helios_3A_3Aecs_3A_3AInsertResourceCmd_3C_20T_20_3E" id="r_helios_3A_3Aecs_3A_3AInsertResourceCmd_3C_20T_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhelios_1_1ecs_1_1InsertResourceCmd.html">helios::ecs::InsertResourceCmd&lt; T &gt;</a></td></tr>
@@ -241,8 +250,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a8199a1e6e21d9647ad981f34dbd00f22 template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1ecs.html#a8199a1e6e21d9647ad981f34dbd00f22">helios::ecs::FunctionCmd</a> (G &amp;&amp;) -&gt; FunctionCmd&lt; std::remove_cvref_t&lt; G &gt; &gt;</td></tr>
 <tr class="memitem:a69dac1d6c9164b934af97c05a6ec53c7" id="r_a69dac1d6c9164b934af97c05a6ec53c7"><td class="memTemplParams" colspan="2">template&lt;ComponentTrait... Us&gt; </td></tr>
 <tr class="memitem:a69dac1d6c9164b934af97c05a6ec53c7 template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1ecs.html#a69dac1d6c9164b934af97c05a6ec53c7">helios::ecs::AddComponentsCmd</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>, Us &amp;&amp;...) -&gt; AddComponentsCmd&lt; std::remove_cvref_t&lt; Us &gt;... &gt;</td></tr>
+<tr class="memitem:ab58339650f46e5256f43615d53414a7d" id="r_ab58339650f46e5256f43615d53414a7d"><td class="memTemplParams" colspan="2">template&lt;ComponentBundleTrait B&gt; </td></tr>
+<tr class="memitem:ab58339650f46e5256f43615d53414a7d template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1ecs.html#ab58339650f46e5256f43615d53414a7d">helios::ecs::AddBundleCmd</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>, B &amp;&amp;) -&gt; AddBundleCmd&lt; std::remove_cvref_t&lt; B &gt; &gt;</td></tr>
 <tr class="memitem:a9b3736dcb167cbead8b16fb9b9a9acca" id="r_a9b3736dcb167cbead8b16fb9b9a9acca"><td class="memTemplParams" colspan="2">template&lt;ComponentTrait... Us&gt; </td></tr>
 <tr class="memitem:a9b3736dcb167cbead8b16fb9b9a9acca template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1ecs.html#a9b3736dcb167cbead8b16fb9b9a9acca">helios::ecs::TryAddComponentsCmd</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>, Us &amp;&amp;...) -&gt; TryAddComponentsCmd&lt; std::remove_cvref_t&lt; Us &gt;... &gt;</td></tr>
+<tr class="memitem:a8c67dfbf45b4cfe7d80c2df1951a72bf" id="r_a8c67dfbf45b4cfe7d80c2df1951a72bf"><td class="memTemplParams" colspan="2">template&lt;ComponentBundleTrait B&gt; </td></tr>
+<tr class="memitem:a8c67dfbf45b4cfe7d80c2df1951a72bf template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="namespacehelios_1_1ecs.html#a8c67dfbf45b4cfe7d80c2df1951a72bf">helios::ecs::TryAddBundleCmd</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a>, B &amp;&amp;) -&gt; TryAddBundleCmd&lt; std::remove_cvref_t&lt; B &gt; &gt;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->

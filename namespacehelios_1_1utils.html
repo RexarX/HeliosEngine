@@ -251,8 +251,12 @@ Concepts</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for bidirectional iterators that support decrement operations. <br /></td></tr>
 <tr class="memitem:ChainAdapterRequirements" id="r_ChainAdapterRequirements"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1utils_1_1ChainAdapterRequirements.html">ChainAdapterRequirements</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept to validate <span class="tt">ChainAdapter</span> requirements. <br /></td></tr>
+<tr class="memitem:ClockTrait" id="r_ClockTrait"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1utils_1_1ClockTrait.html">ClockTrait</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for clock types compatible with std::chrono clocks. <br /></td></tr>
 <tr class="memitem:Distribution" id="r_Distribution"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1utils_1_1Distribution.html">Distribution</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for standard-like distributions. <br /></td></tr>
+<tr class="memitem:DurationTrait" id="r_DurationTrait"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1utils_1_1DurationTrait.html">DurationTrait</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for duration types based on std::chrono::duration. <br /></td></tr>
 <tr class="memitem:EnumerateAdapterRequirements" id="r_EnumerateAdapterRequirements"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1utils_1_1EnumerateAdapterRequirements.html">EnumerateAdapterRequirements</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept to validate <span class="tt">EnumerateAdapter</span> requirements. <br /></td></tr>
 <tr class="memitem:ExternalRange" id="r_ExternalRange"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1utils_1_1ExternalRange.html">ExternalRange</a></td></tr>
@@ -261,6 +265,8 @@ Concepts</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept to validate <span class="tt">FilterAdapter</span> requirements. <br /></td></tr>
 <tr class="memitem:FolderFor" id="r_FolderFor"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1utils_1_1FolderFor.html">FolderFor</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for folder functions that accumulate values. <br /></td></tr>
+<tr class="memitem:FreeFunctionTrait" id="r_FreeFunctionTrait"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1utils_1_1FreeFunctionTrait.html">FreeFunctionTrait</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for free function pointer types. <br /></td></tr>
 <tr class="memitem:FunctorTrait" id="r_FunctorTrait"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1utils_1_1FunctorTrait.html">FunctorTrait</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for regular functor types (named structs/classes that are not lambda closures). <br /></td></tr>
 <tr class="memitem:InspectAdapterRequirements" id="r_InspectAdapterRequirements"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1utils_1_1InspectAdapterRequirements.html">InspectAdapterRequirements</a></td></tr>
@@ -319,14 +325,14 @@ Typedefs</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
 <tr class="memitem:aca74c060b4e32cb671a0bc6fb378365e" id="r_aca74c060b4e32cb671a0bc6fb378365e"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#aca74c060b4e32cb671a0bc6fb378365e">DynamicLibraryError</a> : uint8_t { <br />
-&#160;&#160;<a class="el" href="#aca74c060b4e32cb671a0bc6fb378365ea2767828026039e8ba7b38973cbb701f2">FileNotFound</a>
-, <a class="el" href="#aca74c060b4e32cb671a0bc6fb378365ea3729d9667c9ed82ae96b6174b288a3a5">LoadFailed</a>
-, <a class="el" href="#aca74c060b4e32cb671a0bc6fb378365eac11f7f7d37763d1430ed2682642ea0ac">SymbolNotFound</a>
-, <a class="el" href="#aca74c060b4e32cb671a0bc6fb378365ea2d0e462e9958ce7bb443e70023241dfe">InvalidHandle</a>
+&#160;&#160;<a class="el" href="#aca74c060b4e32cb671a0bc6fb378365ea3a62d594c4725a38e29490fa75b0a0be">kFileNotFound</a>
+, <a class="el" href="#aca74c060b4e32cb671a0bc6fb378365eadaaa083d964d345af835fb40ace29ecd">kLoadFailed</a>
+, <a class="el" href="#aca74c060b4e32cb671a0bc6fb378365ea2c397ea515b9af699cbce29b0cfd5d5b">kSymbolNotFound</a>
+, <a class="el" href="#aca74c060b4e32cb671a0bc6fb378365eab5969c805672b0f38b174248526ba0b1">kInvalidHandle</a>
 , <br />
-&#160;&#160;<a class="el" href="#aca74c060b4e32cb671a0bc6fb378365ea3cd0dcca263062e228b48dc510f78334">AlreadyLoaded</a>
-, <a class="el" href="#aca74c060b4e32cb671a0bc6fb378365ea5111e24c1ecc6266ce0de4b4dc42033b">NotLoaded</a>
-, <a class="el" href="#aca74c060b4e32cb671a0bc6fb378365eaba8ea63548a12106e8f5aed4e964ae6a">PlatformError</a>
+&#160;&#160;<a class="el" href="#aca74c060b4e32cb671a0bc6fb378365ea068ef0faf98222e6cbd19b1c55378d75">kAlreadyLoaded</a>
+, <a class="el" href="#aca74c060b4e32cb671a0bc6fb378365ea66f6c8c8f899853a80418298208a12fa">kNotLoaded</a>
+, <a class="el" href="#aca74c060b4e32cb671a0bc6fb378365eab5fcaa6a3f229eb78c8df3983db8651e">kPlatformError</a>
 <br />
  }</td></tr>
 <tr class="memdesc:aca74c060b4e32cb671a0bc6fb378365e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Error codes for dynamic library operations.  <a href="#aca74c060b4e32cb671a0bc6fb378365e">More...</a><br /></td></tr>
@@ -347,8 +353,8 @@ Functions</h2></td></tr>
 <tr class="memdesc:a16f2deb86c747a978225f21607e135da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads the entire contents of a file into a string.  <br /></td></tr>
 <tr class="memitem:a7ac5167111686abbfdf1126b47034746" id="r_a7ac5167111686abbfdf1126b47034746"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#a7ac5167111686abbfdf1126b47034746">GetFileName</a> (std::string_view path)</td></tr>
 <tr class="memdesc:a7ac5167111686abbfdf1126b47034746"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the file name from a given path.  <br /></td></tr>
-<tr class="memitem:a1e85990bc74f7ba9ae1a47fdf4720dc9" id="r_a1e85990bc74f7ba9ae1a47fdf4720dc9"><td class="memItemLeft">static constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#a1e85990bc74f7ba9ae1a47fdf4720dc9">GetFileExtension</a> (std::string_view path)</td></tr>
-<tr class="memdesc:a1e85990bc74f7ba9ae1a47fdf4720dc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the file extension from a given path.  <br /></td></tr>
+<tr class="memitem:a783dd124bde96f901ac50dca9069eb3f" id="r_a783dd124bde96f901ac50dca9069eb3f"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#a783dd124bde96f901ac50dca9069eb3f">GetFileExtension</a> (std::string_view path)</td></tr>
+<tr class="memdesc:a783dd124bde96f901ac50dca9069eb3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the file extension from a given path.  <br /></td></tr>
 <tr class="memitem:a4e2676a8aaba7f9f532bc83c92238790" id="r_a4e2676a8aaba7f9f532bc83c92238790"><td class="memTemplParams" colspan="2">template&lt;ExternalRange R, typename Pred&gt; </td></tr>
 <tr class="memitem:a4e2676a8aaba7f9f532bc83c92238790 template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a4e2676a8aaba7f9f532bc83c92238790">FilterAdapter</a> (R &amp;, Pred) -&gt; FilterAdapter&lt; std::ranges::iterator_t&lt; R &gt;, Pred &gt;</td></tr>
 <tr class="memitem:ac677e0b92368250e9b7b9e99a64167b7" id="r_ac677e0b92368250e9b7b9e99a64167b7"><td class="memTemplParams" colspan="2">template&lt;ExternalRange R, typename Pred&gt; </td></tr>
@@ -464,6 +470,12 @@ requires ZipAdapterRequirements&lt;std::ranges::iterator_t&lt;const R1&gt;, std:
 <tr class="memitem:ae06d01d2b4521bcfe1195c1365cec951" id="r_ae06d01d2b4521bcfe1195c1365cec951"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:ae06d01d2b4521bcfe1195c1365cec951 template"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#ae06d01d2b4521bcfe1195c1365cec951">QualifiedTypeNameOf</a> (const T &amp;) noexcept</td></tr>
 <tr class="memdesc:ae06d01d2b4521bcfe1195c1365cec951"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the fully qualified type name of the type of the given instance.  <br /></td></tr>
+<tr class="memitem:afab2ea1b662ddf82ffc07347c12ffff0" id="r_afab2ea1b662ddf82ffc07347c12ffff0"><td class="memTemplParams" colspan="2">template&lt;auto Fn&gt; </td></tr>
+<tr class="memitem:afab2ea1b662ddf82ffc07347c12ffff0 template"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#afab2ea1b662ddf82ffc07347c12ffff0">FunctionNameOf</a> () noexcept</td></tr>
+<tr class="memdesc:afab2ea1b662ddf82ffc07347c12ffff0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the unqualified function name of <span class="tt">Fn</span>.  <br /></td></tr>
+<tr class="memitem:a675eb5e5f1273c6c8ccd31ae72b5c7fb" id="r_a675eb5e5f1273c6c8ccd31ae72b5c7fb"><td class="memTemplParams" colspan="2">template&lt;auto Fn&gt; </td></tr>
+<tr class="memitem:a675eb5e5f1273c6c8ccd31ae72b5c7fb template"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#a675eb5e5f1273c6c8ccd31ae72b5c7fb">QualifiedFunctionNameOf</a> () noexcept</td></tr>
+<tr class="memdesc:a675eb5e5f1273c6c8ccd31ae72b5c7fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the fully qualified function name of <span class="tt">Fn</span>.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -586,23 +598,23 @@ Variables</h2></td></tr>
 
 <p>Error codes for dynamic library operations. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aca74c060b4e32cb671a0bc6fb378365ea2767828026039e8ba7b38973cbb701f2" name="aca74c060b4e32cb671a0bc6fb378365ea2767828026039e8ba7b38973cbb701f2"></a>FileNotFound&#160;</td><td class="fielddoc"><p>Library file not found. </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aca74c060b4e32cb671a0bc6fb378365ea3a62d594c4725a38e29490fa75b0a0be" name="aca74c060b4e32cb671a0bc6fb378365ea3a62d594c4725a38e29490fa75b0a0be"></a>kFileNotFound&#160;</td><td class="fielddoc"><p>Library file not found. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="aca74c060b4e32cb671a0bc6fb378365ea3729d9667c9ed82ae96b6174b288a3a5" name="aca74c060b4e32cb671a0bc6fb378365ea3729d9667c9ed82ae96b6174b288a3a5"></a>LoadFailed&#160;</td><td class="fielddoc"><p>Failed to load library. </p>
+<tr><td class="fieldname"><a id="aca74c060b4e32cb671a0bc6fb378365eadaaa083d964d345af835fb40ace29ecd" name="aca74c060b4e32cb671a0bc6fb378365eadaaa083d964d345af835fb40ace29ecd"></a>kLoadFailed&#160;</td><td class="fielddoc"><p>Failed to load library. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="aca74c060b4e32cb671a0bc6fb378365eac11f7f7d37763d1430ed2682642ea0ac" name="aca74c060b4e32cb671a0bc6fb378365eac11f7f7d37763d1430ed2682642ea0ac"></a>SymbolNotFound&#160;</td><td class="fielddoc"><p>Symbol not found in library. </p>
+<tr><td class="fieldname"><a id="aca74c060b4e32cb671a0bc6fb378365ea2c397ea515b9af699cbce29b0cfd5d5b" name="aca74c060b4e32cb671a0bc6fb378365ea2c397ea515b9af699cbce29b0cfd5d5b"></a>kSymbolNotFound&#160;</td><td class="fielddoc"><p>Symbol not found in library. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="aca74c060b4e32cb671a0bc6fb378365ea2d0e462e9958ce7bb443e70023241dfe" name="aca74c060b4e32cb671a0bc6fb378365ea2d0e462e9958ce7bb443e70023241dfe"></a>InvalidHandle&#160;</td><td class="fielddoc"><p>Invalid library handle. </p>
+<tr><td class="fieldname"><a id="aca74c060b4e32cb671a0bc6fb378365eab5969c805672b0f38b174248526ba0b1" name="aca74c060b4e32cb671a0bc6fb378365eab5969c805672b0f38b174248526ba0b1"></a>kInvalidHandle&#160;</td><td class="fielddoc"><p>Invalid library handle. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="aca74c060b4e32cb671a0bc6fb378365ea3cd0dcca263062e228b48dc510f78334" name="aca74c060b4e32cb671a0bc6fb378365ea3cd0dcca263062e228b48dc510f78334"></a>AlreadyLoaded&#160;</td><td class="fielddoc"><p>Library is already loaded. </p>
+<tr><td class="fieldname"><a id="aca74c060b4e32cb671a0bc6fb378365ea068ef0faf98222e6cbd19b1c55378d75" name="aca74c060b4e32cb671a0bc6fb378365ea068ef0faf98222e6cbd19b1c55378d75"></a>kAlreadyLoaded&#160;</td><td class="fielddoc"><p>Library is already loaded. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="aca74c060b4e32cb671a0bc6fb378365ea5111e24c1ecc6266ce0de4b4dc42033b" name="aca74c060b4e32cb671a0bc6fb378365ea5111e24c1ecc6266ce0de4b4dc42033b"></a>NotLoaded&#160;</td><td class="fielddoc"><p>Library is not loaded. </p>
+<tr><td class="fieldname"><a id="aca74c060b4e32cb671a0bc6fb378365ea66f6c8c8f899853a80418298208a12fa" name="aca74c060b4e32cb671a0bc6fb378365ea66f6c8c8f899853a80418298208a12fa"></a>kNotLoaded&#160;</td><td class="fielddoc"><p>Library is not loaded. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="aca74c060b4e32cb671a0bc6fb378365eaba8ea63548a12106e8f5aed4e964ae6a" name="aca74c060b4e32cb671a0bc6fb378365eaba8ea63548a12106e8f5aed4e964ae6a"></a>PlatformError&#160;</td><td class="fielddoc"><p>Platform-specific error. </p>
+<tr><td class="fieldname"><a id="aca74c060b4e32cb671a0bc6fb378365eab5fcaa6a3f229eb78c8df3983db8651e" name="aca74c060b4e32cb671a0bc6fb378365eab5fcaa6a3f229eb78c8df3983db8651e"></a>kPlatformError&#160;</td><td class="fielddoc"><p>Platform-specific error. </p>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00015">15</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00014">14</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
 
 </div>
 </div>
@@ -745,7 +757,7 @@ requires ChainAdapterRequirements&lt;std::ranges::iterator_t&lt;R1&gt;, std::ran
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>String description of the error </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00030">30</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00029">29</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
 
 </div>
 </div>
@@ -1007,12 +1019,50 @@ template&lt;size_t N&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00216">216</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__library_8hpp_source.html#l00214">214</a> of file <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a1e85990bc74f7ba9ae1a47fdf4720dc9" name="a1e85990bc74f7ba9ae1a47fdf4720dc9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1e85990bc74f7ba9ae1a47fdf4720dc9">&#9670;&#160;</a></span>GetFileExtension()</h2>
+<a id="afab2ea1b662ddf82ffc07347c12ffff0" name="afab2ea1b662ddf82ffc07347c12ffff0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afab2ea1b662ddf82ffc07347c12ffff0">&#9670;&#160;</a></span>FunctionNameOf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;auto Fn&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string_view helios::utils::FunctionNameOf </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Retrieves the unqualified function name of <span class="tt">Fn</span>. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Fn</td><td>Function pointer value to retrieve the name for </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Unqualified function name </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00621">621</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a783dd124bde96f901ac50dca9069eb3f" name="a783dd124bde96f901ac50dca9069eb3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a783dd124bde96f901ac50dca9069eb3f">&#9670;&#160;</a></span>GetFileExtension()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1021,7 +1071,7 @@ template&lt;size_t N&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr std::string_view helios::utils::GetFileExtension </td>
+          <td class="memname">std::string_view helios::utils::GetFileExtension </td>
           <td>(</td>
           <td class="paramtype">std::string_view</td>          <td class="paramname"><span class="paramname"><em>path</em></span></td><td>)</td>
           <td></td>
@@ -1029,7 +1079,7 @@ template&lt;size_t N&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1043,7 +1093,7 @@ template&lt;size_t N&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The file extension, including the dot (e.g., ".txt"), or an empty string if none exists </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="filesystem_8hpp_source.html#l00121">121</a> of file <a class="el" href="filesystem_8hpp_source.html">filesystem.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="filesystem_8hpp_source.html#l00122">122</a> of file <a class="el" href="filesystem_8hpp_source.html">filesystem.hpp</a>.</p>
 
 </div>
 </div>
@@ -1079,7 +1129,7 @@ template&lt;size_t N&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The file name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="filesystem_8hpp_source.html#l00109">109</a> of file <a class="el" href="filesystem_8hpp_source.html">filesystem.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="filesystem_8hpp_source.html#l00110">110</a> of file <a class="el" href="filesystem_8hpp_source.html">filesystem.hpp</a>.</p>
 
 </div>
 </div>
@@ -1272,7 +1322,7 @@ template&lt;ExternalRange R, typename Func&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><span class="tt">std::strong_ordering</span> result of the comparison </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00435">435</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00543">543</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -1313,7 +1363,7 @@ template&lt;ExternalRange R, typename Func&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><span class="tt">std::strong_ordering</span> result of the comparison </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00457">457</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00565">565</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -1354,7 +1404,7 @@ template&lt;ExternalRange R, typename Func&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><span class="tt">true</span> if the <span class="tt"><a class="el" href="classhelios_1_1utils_1_1TypeId.html">TypeId</a></span> and <span class="tt"><a class="el" href="classhelios_1_1utils_1_1TypeIndex.html">TypeIndex</a></span> refer to the same type, <span class="tt">false</span> otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00425">425</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00533">533</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -1395,7 +1445,45 @@ template&lt;ExternalRange R, typename Func&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><span class="tt">true</span> if the <span class="tt"><a class="el" href="classhelios_1_1utils_1_1TypeIndex.html">TypeIndex</a></span> and <span class="tt"><a class="el" href="classhelios_1_1utils_1_1TypeId.html">TypeId</a></span> refer to the same type, <span class="tt">false</span> otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00447">447</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00555">555</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a675eb5e5f1273c6c8ccd31ae72b5c7fb" name="a675eb5e5f1273c6c8ccd31ae72b5c7fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a675eb5e5f1273c6c8ccd31ae72b5c7fb">&#9670;&#160;</a></span>QualifiedFunctionNameOf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;auto Fn&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string_view helios::utils::QualifiedFunctionNameOf </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Retrieves the fully qualified function name of <span class="tt">Fn</span>. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Fn</td><td>Function pointer value to retrieve the name for </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Fully qualified function name </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00631">631</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -1433,7 +1521,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Fully qualified type name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00490">490</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00598">598</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -1477,7 +1565,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Fully qualified type name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00502">502</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00610">610</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -1779,7 +1867,7 @@ template&lt;utils::ArithmeticTrait T, utils::ArithmeticTrait U&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>An expected containing the file contents or a <a class="el" href="#aa8f8d89ee8389efd92330df687025d68">FileError</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="filesystem_8hpp_source.html#l00073">73</a> of file <a class="el" href="filesystem_8hpp_source.html">filesystem.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="filesystem_8hpp_source.html#l00074">74</a> of file <a class="el" href="filesystem_8hpp_source.html">filesystem.hpp</a>.</p>
 
 </div>
 </div>
@@ -1815,7 +1903,7 @@ template&lt;utils::ArithmeticTrait T, utils::ArithmeticTrait U&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>An expected containing the file contents or a <a class="el" href="#aa8f8d89ee8389efd92330df687025d68">FileError</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="filesystem_8hpp_source.html#l00038">38</a> of file <a class="el" href="filesystem_8hpp_source.html">filesystem.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="filesystem_8hpp_source.html#l00039">39</a> of file <a class="el" href="filesystem_8hpp_source.html">filesystem.hpp</a>.</p>
 
 </div>
 </div>
@@ -2217,7 +2305,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Unqualified type name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00468">468</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00576">576</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>
@@ -2261,7 +2349,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Unqualified type name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00479">479</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="type__info_8hpp_source.html#l00587">587</a> of file <a class="el" href="type__info_8hpp_source.html">type_info.hpp</a>.</p>
 
 </div>
 </div>

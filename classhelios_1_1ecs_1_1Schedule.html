@@ -542,7 +542,7 @@ template&lt;FunctorSystemTrait T&gt; </div>
 <p>Adds a param-style functor system to the schedule. </p>
 <p>Auto-deduces the access policy from the system's parameter types and derives the system name and <span class="tt"><a class="el" href="structhelios_1_1ecs_1_1SystemId.html" title="Id for systems.">SystemId</a></span> from the functor type. Lambdas are rejected; use <span class="tt"><a class="el" href="#a3f5cdecd1020d57258f83d2f03b8978d" title="Adds a param-style functor system to the schedule.">Add</a>(std::string, T&amp;&amp;, ...)</span> to register them with an explicit name. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">T</td><td>System type satisfying <span class="tt"><a class="el" href="concepthelios_1_1ecs_1_1FunctorSystemTrait.html" title="Concept for system types that are not lambda closures.">FunctorSystemTrait</a></span> </td></tr>
+    <tr><td class="paramname">T</td><td>System type satisfying <span class="tt"><a class="el" href="concepthelios_1_1ecs_1_1FunctorSystemTrait.html" title="Concept for named functor-like system objects.">FunctorSystemTrait</a></span> </td></tr>
   </table>
   </dd>
 </dl>
@@ -588,7 +588,7 @@ requires (sizeof...(Ts) &gt; 1)</div>
 <p>Adds multiple param-style functor systems as a system group. </p>
 <p>Each system is added to the schedule and assigned to a unique anonymous group. The returned handle configures all members collectively and can assign them to a named set via <span class="tt">InSet</span>. Lambdas must be registered individually with explicit names. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">Ts</td><td>System types satisfying <span class="tt"><a class="el" href="concepthelios_1_1ecs_1_1FunctorSystemTrait.html" title="Concept for system types that are not lambda closures.">FunctorSystemTrait</a></span> </td></tr>
+    <tr><td class="paramname">Ts</td><td>System types satisfying <span class="tt"><a class="el" href="concepthelios_1_1ecs_1_1FunctorSystemTrait.html" title="Concept for named functor-like system objects.">FunctorSystemTrait</a></span> </td></tr>
   </table>
   </dd>
 </dl>

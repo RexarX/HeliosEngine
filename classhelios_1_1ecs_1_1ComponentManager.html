@@ -273,6 +273,12 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</td><
 requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</td></tr>
 <tr class="memitem:a6fce848cdaee4e90bb5c78a86f5a927a template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a6fce848cdaee4e90bb5c78a86f5a927a">TryAdd</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> entity, Ts &amp;&amp;... components) -&gt; std::conditional_t&lt; sizeof...(Ts)==1, bool, std::array&lt; bool, sizeof...(Ts)&gt; &gt;</td></tr>
 <tr class="memdesc:a6fce848cdaee4e90bb5c78a86f5a927a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to add multiple components.  <br /></td></tr>
+<tr class="memitem:a33eb500a9c3f0665882f3d39b1a8f54e" id="r_a33eb500a9c3f0665882f3d39b1a8f54e"><td class="memTemplParams" colspan="2">template&lt;ComponentBundleTrait B&gt; </td></tr>
+<tr class="memitem:a33eb500a9c3f0665882f3d39b1a8f54e template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a33eb500a9c3f0665882f3d39b1a8f54e">AddBundle</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> entity, B &amp;&amp;bundle)</td></tr>
+<tr class="memdesc:a33eb500a9c3f0665882f3d39b1a8f54e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds every component in a component bundle to an entity.  <br /></td></tr>
+<tr class="memitem:a142153478594b8c40e51e7e4e80086e8" id="r_a142153478594b8c40e51e7e4e80086e8"><td class="memTemplParams" colspan="2">template&lt;ComponentBundleTrait B&gt; </td></tr>
+<tr class="memitem:a142153478594b8c40e51e7e4e80086e8 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a142153478594b8c40e51e7e4e80086e8">TryAddBundle</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> entity, B &amp;&amp;bundle) -&gt; <a class="el" href="namespacehelios_1_1ecs_1_1details.html#a6a6aca024921727aeabea1f0abe9f7dd">details::ComponentBundleResult</a>&lt; B &gt;</td></tr>
+<tr class="memdesc:a142153478594b8c40e51e7e4e80086e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to add every component in a component bundle.  <br /></td></tr>
 <tr class="memitem:a9df40e2f5b99322ec23acf5e63368096" id="r_a9df40e2f5b99322ec23acf5e63368096"><td class="memTemplParams" colspan="2">template&lt;ComponentTrait T, typename... Args&gt; <br />
 requires std::constructible_from&lt;T, Args...&gt;</td></tr>
 <tr class="memitem:a9df40e2f5b99322ec23acf5e63368096 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a9df40e2f5b99322ec23acf5e63368096">Emplace</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> entity, Args &amp;&amp;... args)</td></tr>
@@ -289,6 +295,12 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</td><
 requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</td></tr>
 <tr class="memitem:a5599db478ba936436f0eda2d0f0f44b0 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a5599db478ba936436f0eda2d0f0f44b0">TryRemove</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> entity) -&gt; std::conditional_t&lt; sizeof...(Ts)==1, bool, std::array&lt; bool, sizeof...(Ts)&gt; &gt;</td></tr>
 <tr class="memdesc:a5599db478ba936436f0eda2d0f0f44b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to remove multiple components.  <br /></td></tr>
+<tr class="memitem:aeb1863ec5924506fd75ef89770f0903f" id="r_aeb1863ec5924506fd75ef89770f0903f"><td class="memTemplParams" colspan="2">template&lt;ComponentBundleTrait B&gt; </td></tr>
+<tr class="memitem:aeb1863ec5924506fd75ef89770f0903f template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aeb1863ec5924506fd75ef89770f0903f">RemoveBundle</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> entity)</td></tr>
+<tr class="memdesc:aeb1863ec5924506fd75ef89770f0903f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes every component type represented by a component bundle.  <br /></td></tr>
+<tr class="memitem:a885cccdd9e367a1f1cd13c2b9920fd11" id="r_a885cccdd9e367a1f1cd13c2b9920fd11"><td class="memTemplParams" colspan="2">template&lt;ComponentBundleTrait B&gt; </td></tr>
+<tr class="memitem:a885cccdd9e367a1f1cd13c2b9920fd11 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a885cccdd9e367a1f1cd13c2b9920fd11">TryRemoveBundle</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> entity) -&gt; <a class="el" href="namespacehelios_1_1ecs_1_1details.html#a6a6aca024921727aeabea1f0abe9f7dd">details::ComponentBundleResult</a>&lt; B &gt;</td></tr>
+<tr class="memdesc:a885cccdd9e367a1f1cd13c2b9920fd11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to remove every component type represented by a component bundle.  <br /></td></tr>
 <tr class="memitem:a510d783f7af293aafe7f12c36287ebe8" id="r_a510d783f7af293aafe7f12c36287ebe8"><td class="memTemplParams" colspan="2">template&lt;ComponentTrait T&gt; </td></tr>
 <tr class="memitem:a510d783f7af293aafe7f12c36287ebe8 template"><td class="memItemLeft">T &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a510d783f7af293aafe7f12c36287ebe8">Get</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> entity)</td></tr>
 <tr class="memdesc:a510d783f7af293aafe7f12c36287ebe8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a mutable reference to a component.  <br /></td></tr>
@@ -353,7 +365,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 1)</td><
 <p>Archetypes are owned by a <span class="tt">std::deque&lt;<a class="el" href="classhelios_1_1ecs_1_1Archetype.html" title="Stores entities and their component data in a Structure-of-Arrays layout for a specific archetype.">Archetype</a>&gt;</span> which provides pointer/reference stability on <span class="tt">push_back</span>, allowing all maps and edge caches to safely hold <span class="tt">std::reference_wrapper&lt;<a class="el" href="classhelios_1_1ecs_1_1Archetype.html" title="Stores entities and their component data in a Structure-of-Arrays layout for a specific archetype.">Archetype</a>&gt;</span> without invalidation concerns.</p>
 <dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l00133">133</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l00135">135</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 </div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>
 <a id="a9da84f139a424d3d414e7d268b92c13d" name="a9da84f139a424d3d414e7d268b92c13d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9da84f139a424d3d414e7d268b92c13d">&#9670;&#160;</a></span>size_type</h2>
@@ -367,7 +379,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 1)</td><
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l00135">135</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l00137">137</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -523,7 +535,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01306">1306</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01381">1381</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -578,7 +590,60 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01087">1087</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01148">1148</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a33eb500a9c3f0665882f3d39b1a8f54e" name="a33eb500a9c3f0665882f3d39b1a8f54e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33eb500a9c3f0665882f3d39b1a8f54e">&#9670;&#160;</a></span>AddBundle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentBundleTrait B&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::ecs::ComponentManager::AddBundle </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a></td>          <td class="paramname"><span class="paramname"><em>entity</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">B &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>bundle</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Adds every component in a component bundle to an entity. </p>
+<p>Flattened archetype components are added in a single migration. Existing components are replaced. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion in next cases:<ul>
+<li><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> is invalid.</li>
+<li><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> is not tracked. </li>
+</ul>
+</dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">B</td><td>Component bundle type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entity</td><td><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> </td></tr>
+    <tr><td class="paramname">bundle</td><td>Component bundle value </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01466">1466</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -631,7 +696,7 @@ template&lt;SparseComponentTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01240">1240</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01315">1315</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -661,7 +726,7 @@ template&lt;SparseComponentTrait T&gt; </div>
 <p>Gets the number of archetypes currently in the manager. </p>
 <dl class="section return"><dt>Returns</dt><dd>Number of archetypes </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l00655">655</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l00716">716</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -691,7 +756,7 @@ template&lt;SparseComponentTrait T&gt; </div>
 <p>Gets all archetypes (const). </p>
 <dl class="section return"><dt>Returns</dt><dd>Span of const reference wrappers to all archetypes </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l00674">674</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l00735">735</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -721,7 +786,7 @@ template&lt;SparseComponentTrait T&gt; </div>
 <p>Gets all archetypes currently in the manager. </p>
 <p>Useful for query iteration. Callers can filter archetypes by their <a class="el" href="classhelios_1_1ecs_1_1ArchetypeId.html" title="Unique identifier for an archetype, represented as a sorted set of component type indices.">ArchetypeId</a>. </p><dl class="section return"><dt>Returns</dt><dd>Span of reference wrappers to all archetypes </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l00665">665</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l00726">726</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -750,7 +815,7 @@ template&lt;SparseComponentTrait T&gt; </div>
 
 <p>Clears all component data, archetypes, and metadata. </p>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l00966">966</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01027">1027</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -790,7 +855,7 @@ template&lt;SparseComponentTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01056">1056</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01117">1117</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -819,7 +884,7 @@ template&lt;SparseComponentTrait T&gt; </div>
 
 <p>Clears all component data and archetypes but retains metadata registrations. </p>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l00977">977</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01038">1038</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -874,7 +939,7 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01392">1392</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01492">1492</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -929,7 +994,7 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01178">1178</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01253">1253</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -984,7 +1049,7 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01260">1260</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01335">1335</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1025,7 +1090,7 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the entity's archetype </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01616">1616</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01737">1737</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1066,7 +1131,7 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to the entity's archetype </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01624">1624</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01745">1745</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1117,7 +1182,7 @@ template&lt;ComponentTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Mutable reference to component </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01493">1493</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01614">1614</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1168,7 +1233,7 @@ template&lt;ComponentTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to component </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01517">1517</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01638">1638</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1213,7 +1278,7 @@ template&lt;ComponentTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if entity has the component </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01590">1590</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01711">1711</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1259,7 +1324,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 1)</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Array of bools indicating whether the entity has each component </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01610">1610</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01731">1731</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1299,7 +1364,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 1)</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l00998">998</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01059">1059</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1338,7 +1403,7 @@ template&lt;ComponentTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to metadata </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01642">1642</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01763">1763</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1374,7 +1439,7 @@ template&lt;ComponentTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to metadata, or <span class="tt">nullptr</span> if not registered </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01650">1650</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01771">1771</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1461,7 +1526,7 @@ template&lt;ComponentTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l00990">990</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01051">1051</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1499,7 +1564,7 @@ requires (sizeof...(Ts) &gt; 1)</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l00168">168</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l00170">170</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1537,7 +1602,7 @@ template&lt;ComponentTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if registered </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01579">1579</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01700">1700</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1587,7 +1652,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01418">1418</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01518">1518</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1636,7 +1701,56 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01195">1195</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01270">1270</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aeb1863ec5924506fd75ef89770f0903f" name="aeb1863ec5924506fd75ef89770f0903f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb1863ec5924506fd75ef89770f0903f">&#9670;&#160;</a></span>RemoveBundle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentBundleTrait B&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::ecs::ComponentManager::RemoveBundle </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a></td>          <td class="paramname"><span class="paramname"><em>entity</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Removes every component type represented by a component bundle. </p>
+<p>Flattened archetype components are removed in a single migration. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion in next cases:<ul>
+<li><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> is invalid.</li>
+<li><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> is not tracked.</li>
+<li><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> does not have any of the components in the bundle. </li>
+</ul>
+</dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">B</td><td>Component bundle type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entity</td><td><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01593">1593</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1676,7 +1790,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01013">1013</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01074">1074</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1726,7 +1840,7 @@ template&lt;SparseComponentTrait T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01281">1281</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01356">1356</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1753,7 +1867,7 @@ template&lt;SparseComponentTrait T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l00637">637</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l00698">698</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1791,7 +1905,7 @@ template&lt;SparseComponentTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Mutable reference to the sparse-set storage </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l00604">604</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l00665">665</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1830,7 +1944,7 @@ template&lt;SparseComponentTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to the sparse-set storage </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01633">1633</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01754">1754</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1860,7 +1974,7 @@ template&lt;SparseComponentTrait T&gt; </div>
 <p>Gets the current structural version of the component manager. </p>
 <p>Incremented on every archetype creation or entity migration. </p><dl class="section return"><dt>Returns</dt><dd>Structural version counter </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l00684">684</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l00745">745</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1897,7 +2011,7 @@ template&lt;SparseComponentTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the entity has been initialized </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01584">1584</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01705">1705</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1927,7 +2041,7 @@ template&lt;SparseComponentTrait T&gt; </div>
 <p>Gets the number of entities currently tracked by the component manager. </p>
 <dl class="section return"><dt>Returns</dt><dd>Number of tracked entities </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l00647">647</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l00708">708</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -1982,7 +2096,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Array of bools indicating whether each component was added if multiple components were added, or a single bool if only one component was added </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01334">1334</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01409">1409</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -2036,7 +2150,61 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01132">1132</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01207">1207</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a142153478594b8c40e51e7e4e80086e8" name="a142153478594b8c40e51e7e4e80086e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a142153478594b8c40e51e7e4e80086e8">&#9670;&#160;</a></span>TryAddBundle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentBundleTrait B&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::ecs::ComponentManager::TryAddBundle </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a></td>          <td class="paramname"><span class="paramname"><em>entity</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">B &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>bundle</em></span>&#160;) -&gt; <a class="el" href="namespacehelios_1_1ecs_1_1details.html#a6a6aca024921727aeabea1f0abe9f7dd">details::ComponentBundleResult</a>&lt; B &gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Tries to add every component in a component bundle. </p>
+<p>Components already present on the entity are left unchanged. Results follow the flattened declaration order of the bundle. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion in next cases:<ul>
+<li><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> is invalid.</li>
+<li><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> is not tracked. </li>
+</ul>
+</dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">B</td><td>Component bundle type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entity</td><td><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> </td></tr>
+    <tr><td class="paramname">bundle</td><td>Component bundle value </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Whether each component was added. A single-component bundle returns a bool; all other bundles return an array. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01478">1478</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -2090,7 +2258,7 @@ template&lt;SparseComponentTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if added, false if entity already had the component </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01249">1249</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01324">1324</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -2146,7 +2314,7 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if emplaced, false if entity already had the component </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01405">1405</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01505">1505</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -2202,7 +2370,7 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if emplaced, false if entity already had the component </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01186">1186</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01261">1261</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -2258,7 +2426,7 @@ requires std::constructible_from&lt;T, Args...&gt;</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if emplaced, false if entity already had the component </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01271">1271</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01346">1346</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -2303,7 +2471,7 @@ template&lt;ComponentTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to component or <span class="tt">nullptr</span> if not found </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01541">1541</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01662">1662</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -2348,7 +2516,7 @@ template&lt;ComponentTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Const pointer to component or <span class="tt">nullptr</span> if not found </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01560">1560</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01681">1681</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -2398,7 +2566,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Array of bools indicating whether each component was removed if more than one type was passed, or a single bool if only one type was passed </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01443">1443</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01543">1543</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -2448,7 +2616,56 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Array of bools indicating whether each component was removed if more than one type passed, or a single bool if only one type passed </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01215">1215</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01290">1290</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a885cccdd9e367a1f1cd13c2b9920fd11" name="a885cccdd9e367a1f1cd13c2b9920fd11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a885cccdd9e367a1f1cd13c2b9920fd11">&#9670;&#160;</a></span>TryRemoveBundle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ComponentBundleTrait B&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto helios::ecs::ComponentManager::TryRemoveBundle </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a></td>          <td class="paramname"><span class="paramname"><em>entity</em></span></td><td>)</td>
+          <td> -&gt; <a class="el" href="namespacehelios_1_1ecs_1_1details.html#a6a6aca024921727aeabea1f0abe9f7dd">details::ComponentBundleResult</a>&lt; B &gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Tries to remove every component type represented by a component bundle. </p>
+<p>Results follow the flattened declaration order of the bundle. </p><dl class="section warning"><dt>Warning</dt><dd>Triggers assertion in next cases:<ul>
+<li><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> is invalid.</li>
+<li><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> is not tracked. </li>
+</ul>
+</dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">B</td><td>Component bundle type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entity</td><td><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Whether each component was removed. A single-component bundle returns a bool; all other bundles return an array. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01602">1602</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -2485,7 +2702,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if removed, false if entity was not tracked </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01035">1035</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01096">1096</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -2534,7 +2751,7 @@ template&lt;SparseComponentTrait T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if removed, false if entity didn't have the component or storage doesn't exist </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01293">1293</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="component_2manager_8hpp_source.html#l01368">1368</a> of file <a class="el" href="component_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>

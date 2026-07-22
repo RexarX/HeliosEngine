@@ -9,10 +9,11 @@ var searchData=
   ['reference_20doxygen_6',['API reference (Doxygen)',['../index.html#api-reference-doxygen',1,'']]],
   ['registration_20module_20cmake_7',['Registration (&lt;span class=&quot;tt&quot;&gt;Module.cmake&lt;/span&gt;)',['../md_docs_2guidelines.html#registration-modulecmake',1,'']]],
   ['requirements_8',['Requirements',['../index.html#requirements',1,'']]],
-  ['roadmap_9',['Roadmap',['../index.html#roadmap',1,'']]],
-  ['rules_10',['Code rules',['../md_docs_2guidelines.html#code-rules',1,'']]],
-  ['run_20the_20example_11',['Run the Example',['../index.html#run-the-example',1,'']]],
-  ['runner_12',['Custom Runner',['../dir_5194e5fea318fda12687127c23f8aba1.html#custom-runner',1,'']]],
-  ['running_20tests_13',['Running tests',['../md_docs_2guidelines.html#running-tests',1,'']]],
-  ['runtime_20control_14',['Runtime Control',['../dir_2241064965c8d9ca993f08b926076f7d.html#runtime-control',1,'']]]
+  ['resources_20plugins_20messages_9',['Builtin Resources, Plugins &amp;amp; Messages',['../dir_5194e5fea318fda12687127c23f8aba1.html#builtin-resources-plugins--messages',1,'']]],
+  ['roadmap_10',['Roadmap',['../index.html#roadmap',1,'']]],
+  ['rules_11',['Code rules',['../md_docs_2guidelines.html#code-rules',1,'']]],
+  ['run_20the_20example_12',['Run the Example',['../index.html#run-the-example',1,'']]],
+  ['runner_13',['Custom Runner',['../dir_5194e5fea318fda12687127c23f8aba1.html#custom-runner',1,'']]],
+  ['running_20tests_14',['Running tests',['../md_docs_2guidelines.html#running-tests',1,'']]],
+  ['runtime_20control_15',['Runtime Control',['../dir_2241064965c8d9ca993f08b926076f7d.html#runtime-control',1,'']]]
 ];

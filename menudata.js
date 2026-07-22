@@ -84,7 +84,6 @@ var menudata={children:[
 {text:"h",url:"namespacemembers_type.html#index_h"},
 {text:"l",url:"namespacemembers_type.html#index_l"},
 {text:"m",url:"namespacemembers_type.html#index_m"},
-{text:"n",url:"namespacemembers_type.html#index_n"},
 {text:"p",url:"namespacemembers_type.html#index_p"},
 {text:"q",url:"namespacemembers_type.html#index_q"},
 {text:"r",url:"namespacemembers_type.html#index_r"},
@@ -191,8 +190,10 @@ var menudata={children:[
 {text:"Related Symbols",url:"functions_rela.html",children:[
 {text:"a",url:"functions_rela.html#index_a"},
 {text:"b",url:"functions_rela.html#index_b"},
+{text:"d",url:"functions_rela.html#index_d"},
 {text:"e",url:"functions_rela.html#index_e"},
 {text:"m",url:"functions_rela.html#index_m"},
+{text:"p",url:"functions_rela.html#index_p"},
 {text:"r",url:"functions_rela.html#index_r"},
 {text:"s",url:"functions_rela.html#index_s"},
 {text:"t",url:"functions_rela.html#index_t"},

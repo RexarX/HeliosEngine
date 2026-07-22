@@ -203,7 +203,7 @@ Public Member Functions</h2></td></tr>
 requires (std::same_as&lt;std::remove_cvref_t&lt;Tasks&gt;, <a class="el" href="#aea1265741d345060852c3df58112033e">Task</a>&gt; &amp;&amp; ...)</td></tr>
 <tr class="memitem:ad1e521640ba6fcb3d4ffc55b671749ff template"><td class="memItemLeft"><a class="el" href="#aea1265741d345060852c3df58112033e">Task</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ad1e521640ba6fcb3d4ffc55b671749ff">Precede</a> (Tasks &amp;&amp;... tasks)</td></tr>
 <tr class="memdesc:ad1e521640ba6fcb3d4ffc55b671749ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Makes this task run before the specified tasks.  <br /></td></tr>
-<tr class="memitem:a231406512592a1de3fda3ca562715a2b" id="r_a231406512592a1de3fda3ca562715a2b"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
+<tr class="memitem:a231406512592a1de3fda3ca562715a2b" id="r_a231406512592a1de3fda3ca562715a2b"><td class="memTemplParams" colspan="2">template&lt;std::ranges::input_range R&gt; <br />
 requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="el" href="#aea1265741d345060852c3df58112033e">Task</a>&gt;</td></tr>
 <tr class="memitem:a231406512592a1de3fda3ca562715a2b template"><td class="memItemLeft"><a class="el" href="#aea1265741d345060852c3df58112033e">Task</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a231406512592a1de3fda3ca562715a2b">Precede</a> (const R &amp;tasks)</td></tr>
 <tr class="memdesc:a231406512592a1de3fda3ca562715a2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Makes this task run before all tasks in the specified range.  <br /></td></tr>
@@ -211,7 +211,7 @@ requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="el" href
 requires (std::same_as&lt;std::remove_cvref_t&lt;Tasks&gt;, <a class="el" href="#aea1265741d345060852c3df58112033e">Task</a>&gt; &amp;&amp; ...)</td></tr>
 <tr class="memitem:ad7db0243fda9ff488d31fe74ee7b8732 template"><td class="memItemLeft"><a class="el" href="#aea1265741d345060852c3df58112033e">Task</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ad7db0243fda9ff488d31fe74ee7b8732">Succeed</a> (Tasks &amp;&amp;... tasks)</td></tr>
 <tr class="memdesc:ad7db0243fda9ff488d31fe74ee7b8732"><td class="mdescLeft">&#160;</td><td class="mdescRight">Makes this task run after the specified tasks.  <br /></td></tr>
-<tr class="memitem:a1f29758095ca548bd37d785328698857" id="r_a1f29758095ca548bd37d785328698857"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
+<tr class="memitem:a1f29758095ca548bd37d785328698857" id="r_a1f29758095ca548bd37d785328698857"><td class="memTemplParams" colspan="2">template&lt;std::ranges::input_range R&gt; <br />
 requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="el" href="#aea1265741d345060852c3df58112033e">Task</a>&gt;</td></tr>
 <tr class="memitem:a1f29758095ca548bd37d785328698857 template"><td class="memItemLeft"><a class="el" href="#aea1265741d345060852c3df58112033e">Task</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a1f29758095ca548bd37d785328698857">Succeed</a> (const R &amp;tasks)</td></tr>
 <tr class="memdesc:a1f29758095ca548bd37d785328698857"><td class="mdescLeft">&#160;</td><td class="mdescRight">Makes this task run after all tasks in the specified range.  <br /></td></tr>
@@ -619,7 +619,7 @@ Friends</h2></td></tr>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;std::ranges::range R&gt; <br />
+template&lt;std::ranges::input_range R&gt; <br />
 requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="el" href="#aea1265741d345060852c3df58112033e">Task</a>&gt;</div>
 <table class="mlabels">
   <tr>
@@ -835,7 +835,7 @@ requires (std::same_as&lt;std::remove_cvref_t&lt;Tasks&gt;, <a class="el" href="
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;std::ranges::range R&gt; <br />
+template&lt;std::ranges::input_range R&gt; <br />
 requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="el" href="#aea1265741d345060852c3df58112033e">Task</a>&gt;</div>
 <table class="mlabels">
   <tr>

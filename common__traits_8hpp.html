@@ -179,6 +179,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('common__traits
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;<a class="el" href="type__info_8hpp_source.html">helios/utils/type_info.hpp</a>&gt;</code><br />
+<code>#include &lt;chrono&gt;</code><br />
 <code>#include &lt;concepts&gt;</code><br />
 <code>#include &lt;type_traits&gt;</code><br />
 </div>
@@ -199,10 +200,16 @@ Namespaces</h2></td></tr>
 Concepts</h2></td></tr>
 <tr class="memitem:helios_3A_3Autils_3A_3AArithmeticTrait" id="r_helios_3A_3Autils_3A_3AArithmeticTrait"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1utils_1_1ArithmeticTrait.html">helios::utils::ArithmeticTrait</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for arithmetic types (integral or floating-point). <br /></td></tr>
+<tr class="memitem:helios_3A_3Autils_3A_3AClockTrait" id="r_helios_3A_3Autils_3A_3AClockTrait"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1utils_1_1ClockTrait.html">helios::utils::ClockTrait</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for clock types compatible with std::chrono clocks. <br /></td></tr>
+<tr class="memitem:helios_3A_3Autils_3A_3ADurationTrait" id="r_helios_3A_3Autils_3A_3ADurationTrait"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1utils_1_1DurationTrait.html">helios::utils::DurationTrait</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for duration types based on std::chrono::duration. <br /></td></tr>
 <tr class="memitem:helios_3A_3Autils_3A_3ALambdaTrait" id="r_helios_3A_3Autils_3A_3ALambdaTrait"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1utils_1_1LambdaTrait.html">helios::utils::LambdaTrait</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for lambda closure types. <br /></td></tr>
 <tr class="memitem:helios_3A_3Autils_3A_3AFunctorTrait" id="r_helios_3A_3Autils_3A_3AFunctorTrait"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1utils_1_1FunctorTrait.html">helios::utils::FunctorTrait</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for regular functor types (named structs/classes that are not lambda closures). <br /></td></tr>
+<tr class="memitem:helios_3A_3Autils_3A_3AFreeFunctionTrait" id="r_helios_3A_3Autils_3A_3AFreeFunctionTrait"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1utils_1_1FreeFunctionTrait.html">helios::utils::FreeFunctionTrait</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for free function pointer types. <br /></td></tr>
 <tr class="memitem:helios_3A_3Autils_3A_3AUniqueTypes" id="r_helios_3A_3Autils_3A_3AUniqueTypes"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1utils_1_1UniqueTypes.html">helios::utils::UniqueTypes</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept that checks if all types in a pack are unique (after removing cv/ref qualifiers). <br /></td></tr>
 <tr class="memitem:helios_3A_3Autils_3A_3APolymorphicConvertible" id="r_helios_3A_3Autils_3A_3APolymorphicConvertible"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="concepthelios_1_1utils_1_1PolymorphicConvertible.html">helios::utils::PolymorphicConvertible</a></td></tr>

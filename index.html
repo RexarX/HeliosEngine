@@ -403,11 +403,8 @@ Run the Example</h3>
 <h2 class="doxsection"><a class="anchor" id="usage-2"></a>
 Usage</h2>
 <p>Systems are plain structs — <span class="tt">operator()</span> parameters declare data access. <span class="tt">App</span> owns the main world, executor, and frame scheduler.</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="application_8hpp.html">helios/app/application.hpp</a>&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="commands_8hpp.html">helios/ecs/command/commands.hpp</a>&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="query_8hpp.html">helios/ecs/query/query.hpp</a>&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="param_8hpp.html">helios/ecs/resource/param.hpp</a>&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="system__set_8hpp.html">helios/ecs/schedule/system_set.hpp</a>&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="app_8hpp.html">helios/app/app.hpp</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="ecs_8hpp.html">helios/ecs/ecs.hpp</a>&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;utility&gt;</span></div>
 <div class="line"> </div>
@@ -423,12 +420,8 @@ Usage</h2>
 <div class="line">  <span class="keywordtype">float</span> dy = 0.0F;</div>
 <div class="line">};</div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">struct </span>FrameCount {</div>
-<div class="line">  <span class="keywordtype">size_t</span> count = 0;</div>
-<div class="line">};</div>
-<div class="line"> </div>
 <div class="line"><span class="keyword">struct </span>SpawnEntities {</div>
-<div class="line">  <span class="keywordtype">void</span> operator()(helios::ecs::Res&lt;const FrameCount&gt; frame_count,</div>
+<div class="line">  <span class="keywordtype">void</span> operator()(helios::ecs::Res&lt;const helios::app::FrameCount&gt; frame_count,</div>
 <div class="line">                  helios::ecs::Commands commands) {</div>
 <div class="line">    <span class="comment">// Spawning new entity every even frame</span></div>
 <div class="line">    <span class="keywordflow">if</span> (frame_count-&gt;count % 2 == 0) {</div>
@@ -449,8 +442,8 @@ Usage</h2>
 <div class="line"><span class="keyword">struct </span>ChangeVelocity {</div>
 <div class="line">  <span class="keywordtype">void</span> operator()(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#a2222a8ceaa7f9005447fc4e1bf219cb5">helios::ecs::Query&lt;Velocity&amp;&gt;</a> movables) {</div>
 <div class="line">    movables.<a class="code hl_function" href="classhelios_1_1ecs_1_1BasicQuery.html#a96897d89cdf618e38944a1a9ba9b6f46">ForEach</a>([](Velocity&amp; vel) {</div>
-<div class="line">      vel.dx *= kVelocityBoost ;</div>
-<div class="line">      vel.dy *= kVelocityBoost ;</div>
+<div class="line">      vel.dx *= kVelocityBoost;</div>
+<div class="line">      vel.dy *= kVelocityBoost;</div>
 <div class="line">    });</div>
 <div class="line">  }</div>
 <div class="line">};</div>
@@ -458,47 +451,47 @@ Usage</h2>
 <div class="line"><span class="keyword">struct </span>RequestExit {</div>
 <div class="line">  <span class="keywordtype">void</span> operator()(<a class="code hl_typedef" href="namespacehelios_1_1ecs.html#a1a3cca45d631afb052c728c7589f4554">helios::ecs::MessageWriter&lt;helios::app::AppExit&gt;</a> exit) {</div>
 <div class="line">    <span class="comment">// Sending message that would be handled in the next schedule</span></div>
-<div class="line">    exit.<a class="code hl_function" href="classhelios_1_1ecs_1_1BasicMessageWriter.html#a1879828695519f011fbaad76115245dd">Write</a>({.code = <a class="code hl_enumvalue" href="namespacehelios_1_1app.html#a4825c33ecb12c84774fbf8af4424743ea8c632159fa131f09d04f94e3cbcd8782">helios::app::ExitCode::kSuccess</a>});</div>
+<div class="line">    exit.<a class="code hl_function" href="classhelios_1_1ecs_1_1BasicMessageWriter.html#a1879828695519f011fbaad76115245dd">Write</a>(<a class="code hl_function" href="structhelios_1_1app_1_1AppExit.html#a3543c341dd1220bde5767f0b88ba1619">helios::app::AppExit::Success</a>());</div>
 <div class="line">  }</div>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main() {</div>
 <div class="line">  <a class="code hl_class" href="classhelios_1_1app_1_1App.html">helios::app::App</a> app;</div>
-<div class="line">  app.InsertResource(FrameCount{});</div>
+<div class="line">  app.<a class="code hl_function" href="classhelios_1_1app_1_1App.html#a77f59c028a07f66d00b4afec965aad45">AddPlugins</a>(<a class="code hl_class" href="classhelios_1_1app_1_1FrameCountPlugin.html">helios::app::FrameCountPlugin</a>{});</div>
 <div class="line"> </div>
 <div class="line">  app.<a class="code hl_function" href="classhelios_1_1app_1_1App.html#aabbdf71882c4e7219a73fc527fae150e">AddSystem</a>(<a class="code hl_variable" href="namespacehelios_1_1app.html#a9ae6423443d7b91d02971971253e2e1c">helios::app::kPreUpdate</a>, SpawnEntities{}); <span class="comment">// Spawn entities, before modifying</span></div>
 <div class="line">  app.<a class="code hl_function" href="classhelios_1_1app_1_1App.html#ad88147a9c541ed672401349ccb6d42fd">AddSystems</a>(<a class="code hl_variable" href="namespacehelios_1_1app.html#a6336fe1dd31d2537c02c2571437ab93f">helios::app::kUpdate</a>, ChangePosition{}, ChangeVelocity{})</div>
 <div class="line">      .Sequence(); <span class="comment">// Sytems will run one after another (ChangePosition -&gt; ChangeVelocity)</span></div>
 <div class="line">  app.<a class="code hl_function" href="classhelios_1_1app_1_1App.html#aabbdf71882c4e7219a73fc527fae150e">AddSystem</a>(<a class="code hl_variable" href="namespacehelios_1_1app.html#a12383482410e87f279ccb7f69e4381af">helios::app::kPostUpdate</a>, RequestExit{}) <span class="comment">// Shutdown after 500 frames</span></div>
-<div class="line">      .RunIf(<span class="stringliteral">&quot;IsFrameCountReached&quot;</span>, [](<a class="code hl_class" href="classhelios_1_1ecs_1_1Res.html">helios::ecs::Res&lt;const FrameCount&gt;</a> frame_count) {</div>
-<div class="line">                                      <span class="keywordflow">return</span> frame_count-&gt;count &gt; 500;</div>
-<div class="line">                                    });</div>
+<div class="line">      .RunIf(<span class="stringliteral">&quot;IsFrameCountReached&quot;</span>,</div>
+<div class="line">             [](<a class="code hl_class" href="classhelios_1_1ecs_1_1Res.html">helios::ecs::Res&lt;const helios::app::FrameCount&gt;</a> frame_count) {</div>
+<div class="line">               <span class="keywordflow">return</span> frame_count-&gt;count &gt; 500;</div>
+<div class="line">             });</div>
 <div class="line"> </div>
 <div class="line">  app.<a class="code hl_function" href="classhelios_1_1app_1_1App.html#a5f2c1a0106d181ec8a4956f2ab494e51">AddMessages</a>&lt;<a class="code hl_struct" href="structhelios_1_1app_1_1AppExit.html">helios::app::AppExit</a>&gt;();</div>
 <div class="line">  <span class="keywordflow">return</span> std::to_underlying(app.<a class="code hl_function" href="classhelios_1_1app_1_1App.html#ae1bc7b5b668ca63cc91dfd87757e99be">Run</a>());</div>
 <div class="line">}</div>
-<div class="ttc" id="aapplication_8hpp_html"><div class="ttname"><a href="application_8hpp.html">application.hpp</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html"><div class="ttname"><a href="classhelios_1_1app_1_1App.html">helios::app::App</a></div><div class="ttdoc">Application class.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00074">application.hpp:74</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a5f2c1a0106d181ec8a4956f2ab494e51"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a5f2c1a0106d181ec8a4956f2ab494e51">helios::app::App::AddMessages</a></div><div class="ttdeci">auto AddMessages(this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Registers multiple message types on the main world.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00813">application.hpp:813</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_aabbdf71882c4e7219a73fc527fae150e"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#aabbdf71882c4e7219a73fc527fae150e">helios::app::App::AddSystem</a></div><div class="ttdeci">auto AddSystem(const L &amp;label, S &amp;&amp;system, ecs::SystemLocalDataOptions options={}) -&gt; ecs::SystemHandle</div><div class="ttdoc">Adds a functor system to a main sub-app schedule.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00291">application.hpp:291</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1App_html_ad88147a9c541ed672401349ccb6d42fd"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#ad88147a9c541ed672401349ccb6d42fd">helios::app::App::AddSystems</a></div><div class="ttdeci">ecs::SystemGroupHandle AddSystems(const L &amp;label, Systems &amp;&amp;... systems)</div><div class="ttdoc">Adds multiple functor systems to the same main sub-app schedule.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00784">application.hpp:784</a></div></div>
+<div class="ttc" id="aapp_8hpp_html"><div class="ttname"><a href="app_8hpp.html">app.hpp</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html"><div class="ttname"><a href="classhelios_1_1app_1_1App.html">helios::app::App</a></div><div class="ttdoc">Application class.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00101">application.hpp:101</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a5f2c1a0106d181ec8a4956f2ab494e51"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a5f2c1a0106d181ec8a4956f2ab494e51">helios::app::App::AddMessages</a></div><div class="ttdeci">auto AddMessages(this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Registers multiple message types on the main world.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00918">application.hpp:918</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_a77f59c028a07f66d00b4afec965aad45"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#a77f59c028a07f66d00b4afec965aad45">helios::app::App::AddPlugins</a></div><div class="ttdeci">auto AddPlugins(this auto &amp;&amp;self, T &amp;&amp;plugin) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Adds plugin instance, if plugin of the same type is not already added.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00765">application.hpp:765</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_aabbdf71882c4e7219a73fc527fae150e"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#aabbdf71882c4e7219a73fc527fae150e">helios::app::App::AddSystem</a></div><div class="ttdeci">auto AddSystem(const L &amp;label, S &amp;&amp;system, ecs::SystemLocalDataOptions options={}) -&gt; ecs::SystemHandle</div><div class="ttdoc">Adds a functor system to a main sub-app schedule.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00356">application.hpp:356</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1App_html_ad88147a9c541ed672401349ccb6d42fd"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#ad88147a9c541ed672401349ccb6d42fd">helios::app::App::AddSystems</a></div><div class="ttdeci">ecs::SystemGroupHandle AddSystems(const L &amp;label, Systems &amp;&amp;... systems)</div><div class="ttdoc">Adds multiple functor systems to the same main sub-app schedule.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00889">application.hpp:889</a></div></div>
 <div class="ttc" id="aclasshelios_1_1app_1_1App_html_ae1bc7b5b668ca63cc91dfd87757e99be"><div class="ttname"><a href="classhelios_1_1app_1_1App.html#ae1bc7b5b668ca63cc91dfd87757e99be">helios::app::App::Run</a></div><div class="ttdeci">ExitCode Run()</div><div class="ttdoc">Runs the application with the given arguments.</div><div class="ttdef"><b>Definition</b> <a href="application_8cpp_source.html#l00074">application.cpp:74</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1FrameCountPlugin_html"><div class="ttname"><a href="classhelios_1_1app_1_1FrameCountPlugin.html">helios::app::FrameCountPlugin</a></div><div class="ttdoc">Adds the FrameCount resource and its per-frame update system.</div><div class="ttdef"><b>Definition</b> <a href="frame__count_8hpp_source.html#l00030">frame_count.hpp:30</a></div></div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1BasicMessageWriter_html_a1879828695519f011fbaad76115245dd"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicMessageWriter.html#a1879828695519f011fbaad76115245dd">helios::ecs::BasicMessageWriter::Write</a></div><div class="ttdeci">void Write(U &amp;&amp;message) const</div><div class="ttdoc">Writes a single message to the local queue.</div><div class="ttdef"><b>Definition</b> <a href="writer_8hpp_source.html#l00049">writer.hpp:49</a></div></div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1BasicQuery_html_a96897d89cdf618e38944a1a9ba9b6f46"><div class="ttname"><a href="classhelios_1_1ecs_1_1BasicQuery.html#a96897d89cdf618e38944a1a9ba9b6f46">helios::ecs::BasicQuery::ForEach</a></div><div class="ttdeci">void ForEach(const Action &amp;action) const</div><div class="ttdoc">Executes an action for each matching entity&#39;s components.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l01408">query.hpp:1408</a></div></div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1Commands_html_abbeb6d3300b05c05040341c7d770af3e"><div class="ttname"><a href="classhelios_1_1ecs_1_1Commands.html#abbeb6d3300b05c05040341c7d770af3e">helios::ecs::Commands::Spawn</a></div><div class="ttdeci">PmrEntityCmdBuffer Spawn()</div><div class="ttdoc">Spawns a new entity and returns a command buffer for it.</div><div class="ttdef"><b>Definition</b> <a href="commands_8hpp_source.html#l00099">commands.hpp:99</a></div></div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1EntityCmdBuffer_html_a1e9f63a74267618291aae7c9db5ea8db"><div class="ttname"><a href="classhelios_1_1ecs_1_1EntityCmdBuffer.html#a1e9f63a74267618291aae7c9db5ea8db">helios::ecs::EntityCmdBuffer::AddComponents</a></div><div class="ttdeci">auto AddComponents(this auto &amp;&amp;self, Ts &amp;&amp;... components) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Enqueues a command to add components to the entity.</div><div class="ttdef"><b>Definition</b> <a href="entity__buffer_8hpp_source.html#l00226">entity_buffer.hpp:226</a></div></div>
+<div class="ttc" id="aclasshelios_1_1ecs_1_1EntityCmdBuffer_html_a1e9f63a74267618291aae7c9db5ea8db"><div class="ttname"><a href="classhelios_1_1ecs_1_1EntityCmdBuffer.html#a1e9f63a74267618291aae7c9db5ea8db">helios::ecs::EntityCmdBuffer::AddComponents</a></div><div class="ttdeci">auto AddComponents(this auto &amp;&amp;self, Ts &amp;&amp;... components) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</div><div class="ttdoc">Enqueues a command to add components to the entity.</div><div class="ttdef"><b>Definition</b> <a href="entity__buffer_8hpp_source.html#l00282">entity_buffer.hpp:282</a></div></div>
 <div class="ttc" id="aclasshelios_1_1ecs_1_1Res_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1Res.html">helios::ecs::Res</a></div><div class="ttdoc">Read-only or mutable access to resource.</div><div class="ttdef"><b>Definition</b> <a href="param_8hpp_source.html#l00017">param.hpp:17</a></div></div>
-<div class="ttc" id="acommands_8hpp_html"><div class="ttname"><a href="commands_8hpp.html">commands.hpp</a></div></div>
+<div class="ttc" id="aecs_8hpp_html"><div class="ttname"><a href="ecs_8hpp.html">ecs.hpp</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1app_html_a12383482410e87f279ccb7f69e4381af"><div class="ttname"><a href="namespacehelios_1_1app.html#a12383482410e87f279ccb7f69e4381af">helios::app::kPostUpdate</a></div><div class="ttdeci">constexpr PostUpdate kPostUpdate</div><div class="ttdoc">Builtin post-update schedule.</div><div class="ttdef"><b>Definition</b> <a href="schedules_8hpp_source.html#l00106">schedules.hpp:106</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1app_html_a4825c33ecb12c84774fbf8af4424743ea8c632159fa131f09d04f94e3cbcd8782"><div class="ttname"><a href="namespacehelios_1_1app.html#a4825c33ecb12c84774fbf8af4424743ea8c632159fa131f09d04f94e3cbcd8782">helios::app::ExitCode::kSuccess</a></div><div class="ttdeci">@ kSuccess</div><div class="ttdoc">Successful execution.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00048">application.hpp:48</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1app_html_a6336fe1dd31d2537c02c2571437ab93f"><div class="ttname"><a href="namespacehelios_1_1app.html#a6336fe1dd31d2537c02c2571437ab93f">helios::app::kUpdate</a></div><div class="ttdeci">constexpr Update kUpdate</div><div class="ttdoc">Builtin update schedule.</div><div class="ttdef"><b>Definition</b> <a href="schedules_8hpp_source.html#l00098">schedules.hpp:98</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1app_html_a9ae6423443d7b91d02971971253e2e1c"><div class="ttname"><a href="namespacehelios_1_1app.html#a9ae6423443d7b91d02971971253e2e1c">helios::app::kPreUpdate</a></div><div class="ttdeci">constexpr PreUpdate kPreUpdate</div><div class="ttdoc">Builtin pre-update schedule.</div><div class="ttdef"><b>Definition</b> <a href="schedules_8hpp_source.html#l00090">schedules.hpp:90</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1ecs_html_a1a3cca45d631afb052c728c7589f4554"><div class="ttname"><a href="namespacehelios_1_1ecs.html#a1a3cca45d631afb052c728c7589f4554">helios::ecs::MessageWriter</a></div><div class="ttdeci">PmrBasicMessageWriter&lt; T &gt; MessageWriter</div><div class="ttdoc">Alias for BasicMessageWriter bound to a PMR allocator.</div><div class="ttdef"><b>Definition</b> <a href="writer_8hpp_source.html#l00097">writer.hpp:97</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1ecs_html_a2222a8ceaa7f9005447fc4e1bf219cb5"><div class="ttname"><a href="namespacehelios_1_1ecs.html#a2222a8ceaa7f9005447fc4e1bf219cb5">helios::ecs::Query</a></div><div class="ttdeci">BasicQuery&lt; World, std::pmr::polymorphic_allocator&lt;&gt;, Args... &gt; Query</div><div class="ttdoc">Alias for BasicQuery bound to World with a PMR allocator.</div><div class="ttdef"><b>Definition</b> <a href="query_8hpp_source.html#l02264">query.hpp:2264</a></div></div>
-<div class="ttc" id="aparam_8hpp_html"><div class="ttname"><a href="param_8hpp.html">param.hpp</a></div></div>
-<div class="ttc" id="aquery_8hpp_html"><div class="ttname"><a href="query_8hpp.html">query.hpp</a></div></div>
-<div class="ttc" id="astructhelios_1_1app_1_1AppExit_html"><div class="ttname"><a href="structhelios_1_1app_1_1AppExit.html">helios::app::AppExit</a></div><div class="ttdoc">Message that requests the application to exit.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00058">application.hpp:58</a></div></div>
-<div class="ttc" id="asystem__set_8hpp_html"><div class="ttname"><a href="system__set_8hpp.html">system_set.hpp</a></div></div>
+<div class="ttc" id="astructhelios_1_1app_1_1AppExit_html"><div class="ttname"><a href="structhelios_1_1app_1_1AppExit.html">helios::app::AppExit</a></div><div class="ttdoc">Message that requests the application to exit.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00060">application.hpp:60</a></div></div>
+<div class="ttc" id="astructhelios_1_1app_1_1AppExit_html_a3543c341dd1220bde5767f0b88ba1619"><div class="ttname"><a href="structhelios_1_1app_1_1AppExit.html#a3543c341dd1220bde5767f0b88ba1619">helios::app::AppExit::Success</a></div><div class="ttdeci">static constexpr AppExit Success() noexcept</div><div class="ttdoc">Creates an AppExit message indicating success.</div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00082">application.hpp:82</a></div></div>
 </div><!-- fragment --><table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Parameter  </th><th class="markdownTableHeadNone">Purpose  </th></tr>
@@ -515,7 +508,7 @@ Usage</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">AsyncMessageWriter&lt;T&gt;</span> / <span class="tt">AsyncMessageReader&lt;T&gt;</span>  </td><td class="markdownTableBodyNone">Lock-free async messages between systems  </td></tr>
 </table>
-<p>Builtin schedules (<span class="tt"><a class="el" href="schedules_8hpp.html">helios/app/schedules.hpp</a></span>): <span class="tt">MainStartup</span> → <span class="tt">PreStartup</span> → <span class="tt">Startup</span> → <span class="tt">PostStartup</span> → <span class="tt">First</span> → <span class="tt">PreUpdate</span> → <span class="tt">Update</span> → <span class="tt">PostUpdate</span> → <span class="tt">Last</span> → <span class="tt">Extract</span> → shutdown stages.</p>
+<p>Builtin schedules are available through <span class="tt">&lt;<a class="el" href="app_8hpp.html">helios/app/app.hpp</a>&gt;</span>: <span class="tt">MainStartup</span> → <span class="tt">PreStartup</span> → <span class="tt">Startup</span> → <span class="tt">PostStartup</span> → <span class="tt">First</span> → <span class="tt">PreUpdate</span> → <span class="tt">Update</span> → <span class="tt">PostUpdate</span> → <span class="tt">Last</span> → <span class="tt">Extract</span> → shutdown stages. By default, <span class="tt">MainStartup</span> and <span class="tt">Shutdown</span> use the main-thread schedule executor; the other built-in schedules, including <span class="tt">First</span> and <span class="tt">Last</span>, use the multi-threaded executor.</p>
 <p><a href="#readme-top">↑ Back to Top</a></p>
 <hr  />
 <h2 class="doxsection"><a class="anchor" id="architecture"></a>

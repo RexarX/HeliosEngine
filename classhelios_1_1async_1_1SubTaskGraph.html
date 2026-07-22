@@ -207,20 +207,20 @@ requires (sizeof...(Cs) &gt; 1)</td></tr>
 <tr class="memdesc:a6e86e6cb9ad5ceef3b91d517c062763e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates multiple tasks from a list of callables.  <br /></td></tr>
 <tr class="memitem:ab492076deae14f6165d57a194589318c" id="r_ab492076deae14f6165d57a194589318c"><td class="memItemLeft"><a class="el" href="classhelios_1_1async_1_1Task.html">Task</a>&#160;</td><td class="memItemRight"><a class="el" href="#ab492076deae14f6165d57a194589318c">CreatePlaceholder</a> ()</td></tr>
 <tr class="memdesc:ab492076deae14f6165d57a194589318c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a placeholder task with no assigned work.  <br /></td></tr>
-<tr class="memitem:a878a2528e2b0290af2e765d974a37b78" id="r_a878a2528e2b0290af2e765d974a37b78"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R&gt; <br />
+<tr class="memitem:a878a2528e2b0290af2e765d974a37b78" id="r_a878a2528e2b0290af2e765d974a37b78"><td class="memTemplParams" colspan="2">template&lt;std::ranges::input_range R&gt; <br />
 requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="el" href="classhelios_1_1async_1_1Task.html">Task</a>&gt;</td></tr>
 <tr class="memitem:a878a2528e2b0290af2e765d974a37b78 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a878a2528e2b0290af2e765d974a37b78">Linearize</a> (const R &amp;tasks)</td></tr>
 <tr class="memdesc:a878a2528e2b0290af2e765d974a37b78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates linear dependencies between tasks in the given range.  <br /></td></tr>
-<tr class="memitem:a16c05f5969f9eea602fdf3dac1d8f778" id="r_a16c05f5969f9eea602fdf3dac1d8f778"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R, std::invocable&lt; std::ranges::range_reference_t&lt; R &gt; &gt; C&gt; </td></tr>
+<tr class="memitem:a16c05f5969f9eea602fdf3dac1d8f778" id="r_a16c05f5969f9eea602fdf3dac1d8f778"><td class="memTemplParams" colspan="2">template&lt;std::ranges::input_range R, std::invocable&lt; std::ranges::range_reference_t&lt; R &gt; &gt; C&gt; </td></tr>
 <tr class="memitem:a16c05f5969f9eea602fdf3dac1d8f778 template"><td class="memItemLeft"><a class="el" href="classhelios_1_1async_1_1Task.html">Task</a>&#160;</td><td class="memItemRight"><a class="el" href="#a16c05f5969f9eea602fdf3dac1d8f778">ForEach</a> (const R &amp;range, C &amp;&amp;callable)</td></tr>
 <tr class="memdesc:a16c05f5969f9eea602fdf3dac1d8f778"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a parallel for-each task over the given range.  <br /></td></tr>
 <tr class="memitem:ae1fedb2e32dd91036fa294733dce72b6" id="r_ae1fedb2e32dd91036fa294733dce72b6"><td class="memTemplParams" colspan="2">template&lt;std::integral I, std::invocable&lt; I &gt; C&gt; </td></tr>
 <tr class="memitem:ae1fedb2e32dd91036fa294733dce72b6 template"><td class="memItemLeft"><a class="el" href="classhelios_1_1async_1_1Task.html">Task</a>&#160;</td><td class="memItemRight"><a class="el" href="#ae1fedb2e32dd91036fa294733dce72b6">ForEachIndex</a> (I start, I end, I step, C &amp;&amp;callable)</td></tr>
 <tr class="memdesc:ae1fedb2e32dd91036fa294733dce72b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a parallel for-each task over an index range.  <br /></td></tr>
-<tr class="memitem:a845bc2898e98956b92ba6ee1d542c56a" id="r_a845bc2898e98956b92ba6ee1d542c56a"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range InputRange, std::ranges::range OutputRange, std::invocable&lt; std::ranges::range_reference_t&lt; InputRange &gt; &gt; TransformFunc&gt; </td></tr>
+<tr class="memitem:a845bc2898e98956b92ba6ee1d542c56a" id="r_a845bc2898e98956b92ba6ee1d542c56a"><td class="memTemplParams" colspan="2">template&lt;std::ranges::input_range InputRange, std::ranges::input_range OutputRange, std::invocable&lt; std::ranges::range_reference_t&lt; InputRange &gt; &gt; TransformFunc&gt; </td></tr>
 <tr class="memitem:a845bc2898e98956b92ba6ee1d542c56a template"><td class="memItemLeft"><a class="el" href="classhelios_1_1async_1_1Task.html">Task</a>&#160;</td><td class="memItemRight"><a class="el" href="#a845bc2898e98956b92ba6ee1d542c56a">Transform</a> (const InputRange &amp;input_range, OutputRange &amp;output_range, TransformFunc &amp;&amp;transform_func)</td></tr>
 <tr class="memdesc:a845bc2898e98956b92ba6ee1d542c56a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a parallel transform task that applies a function to each element.  <br /></td></tr>
-<tr class="memitem:ab468eec58e8572d4395d42e77d2acf39" id="r_ab468eec58e8572d4395d42e77d2acf39"><td class="memTemplParams" colspan="2">template&lt;std::ranges::range R, typename T, typename BinaryOp&gt; <br />
+<tr class="memitem:ab468eec58e8572d4395d42e77d2acf39" id="r_ab468eec58e8572d4395d42e77d2acf39"><td class="memTemplParams" colspan="2">template&lt;std::ranges::input_range R, typename T, typename BinaryOp&gt; <br />
 requires std::invocable&lt;BinaryOp, T, std::ranges::range_reference_t&lt;R&gt;&gt;</td></tr>
 <tr class="memitem:ab468eec58e8572d4395d42e77d2acf39 template"><td class="memItemLeft"><a class="el" href="classhelios_1_1async_1_1Task.html">Task</a>&#160;</td><td class="memItemRight"><a class="el" href="#ab468eec58e8572d4395d42e77d2acf39">Reduce</a> (const R &amp;range, T &amp;init, BinaryOp &amp;&amp;binary_op)</td></tr>
 <tr class="memdesc:ab468eec58e8572d4395d42e77d2acf39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a parallel reduction task that combines elements using a binary operation.  <br /></td></tr>
@@ -281,16 +281,14 @@ requires std::predicate&lt;Compare, std::ranges::range_reference_t&lt;R&gt;, std
 <tr class="memitem:acffcf3da7c355faed4dcee9f44b191d5" id="r_acffcf3da7c355faed4dcee9f44b191d5"><td class="memTemplParams" colspan="2">template&lt;std::invocable C&gt; </td></tr>
 <tr class="memitem:acffcf3da7c355faed4dcee9f44b191d5 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#acffcf3da7c355faed4dcee9f44b191d5">SilentAsync</a> (std::string name, C &amp;&amp;callable)</td></tr>
 <tr class="memdesc:acffcf3da7c355faed4dcee9f44b191d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a named asynchronous task without returning a future.  <br /></td></tr>
-<tr class="memitem:add77cf1c949e1d4a23df0a5b227ebcd8" id="r_add77cf1c949e1d4a23df0a5b227ebcd8"><td class="memTemplParams" colspan="2">template&lt;std::invocable C, std::ranges::range Dependencies&gt; <br />
+<tr class="memitem:add77cf1c949e1d4a23df0a5b227ebcd8" id="r_add77cf1c949e1d4a23df0a5b227ebcd8"><td class="memTemplParams" colspan="2">template&lt;std::invocable C, std::ranges::input_range Dependencies&gt; <br />
 requires std::same_as&lt;std::ranges::range_value_t&lt;Dependencies&gt;, <a class="el" href="classhelios_1_1async_1_1AsyncTask.html">AsyncTask</a>&gt;</td></tr>
 <tr class="memitem:add77cf1c949e1d4a23df0a5b227ebcd8 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#add77cf1c949e1d4a23df0a5b227ebcd8">DependentAsync</a> (C &amp;&amp;callable, const Dependencies &amp;dependencies) -&gt; std::pair&lt; <a class="el" href="classhelios_1_1async_1_1AsyncTask.html">AsyncTask</a>, std::future&lt; std::invoke_result_t&lt; C &gt; &gt; &gt;</td></tr>
 <tr class="memdesc:add77cf1c949e1d4a23df0a5b227ebcd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an asynchronous task that runs after specified dependencies complete.  <br /></td></tr>
-<tr class="memitem:ae7a980910241199a19e237fc090da24b" id="r_ae7a980910241199a19e237fc090da24b"><td class="memTemplParams" colspan="2">template&lt;std::invocable C, std::ranges::range Dependencies&gt; <br />
+<tr class="memitem:ae7a980910241199a19e237fc090da24b" id="r_ae7a980910241199a19e237fc090da24b"><td class="memTemplParams" colspan="2">template&lt;std::invocable C, std::ranges::input_range Dependencies&gt; <br />
 requires std::same_as&lt;std::ranges::range_value_t&lt;Dependencies&gt;, <a class="el" href="classhelios_1_1async_1_1AsyncTask.html">AsyncTask</a>&gt;</td></tr>
 <tr class="memitem:ae7a980910241199a19e237fc090da24b template"><td class="memItemLeft"><a class="el" href="classhelios_1_1async_1_1AsyncTask.html">AsyncTask</a>&#160;</td><td class="memItemRight"><a class="el" href="#ae7a980910241199a19e237fc090da24b">SilentDependentAsync</a> (C &amp;&amp;callable, const Dependencies &amp;dependencies)</td></tr>
 <tr class="memdesc:ae7a980910241199a19e237fc090da24b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an asynchronous task that runs after dependencies complete, without returning a future.  <br /></td></tr>
-<tr class="memitem:a9d4b7d3c01b077654e3fd6d0259f17a7" id="r_a9d4b7d3c01b077654e3fd6d0259f17a7"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a9d4b7d3c01b077654e3fd6d0259f17a7">WaitForAll</a> ()</td></tr>
-<tr class="memdesc:a9d4b7d3c01b077654e3fd6d0259f17a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Blocks until all submitted tasks complete.  <br /></td></tr>
 <tr class="memitem:a65ede9bd67bf85f00d08b660a3ee47de" id="r_a65ede9bd67bf85f00d08b660a3ee47de"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a65ede9bd67bf85f00d08b660a3ee47de">CoRun</a> (<a class="el" href="#a77eb4e04900b9ae67d00ef7a589cb623">TaskGraph</a> &amp;graph)</td></tr>
 <tr class="memdesc:a65ede9bd67bf85f00d08b660a3ee47de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs a task graph cooperatively and waits until it completes using the current worker thread.  <br /></td></tr>
 <tr class="memitem:afecea249f4b5f914c06f7a0f1795f8b6" id="r_afecea249f4b5f914c06f7a0f1795f8b6"><td class="memTemplParams" colspan="2">template&lt;std::predicate Predicate&gt; </td></tr>
@@ -438,7 +436,7 @@ template&lt;std::invocable C&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Future.html" title="Wrapper around tf::Future for handling asynchronous task results.">Future</a> that will hold the result of the execution </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00443">443</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00444">444</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -488,7 +486,7 @@ template&lt;std::invocable C&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Future.html" title="Wrapper around tf::Future for handling asynchronous task results.">Future</a> that will hold the result of the execution </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00457">457</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00458">458</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -527,7 +525,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> handle representing the composed graph </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00223">223</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00224">224</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -563,7 +561,7 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00702">702</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00696">696</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -607,7 +605,7 @@ template&lt;std::predicate Predicate&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00709">709</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00703">703</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -638,7 +636,7 @@ template&lt;std::predicate Predicate&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Not thread-safe </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> handle that can later be assigned work </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00106">106</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00107">107</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -669,7 +667,7 @@ template&lt;std::predicate Predicate&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Worker ID (0 to N-1) or -1 if not a worker thread </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00560">560</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00554">554</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -679,7 +677,7 @@ template&lt;std::predicate Predicate&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;std::invocable C, std::ranges::range Dependencies&gt; <br />
+template&lt;std::invocable C, std::ranges::input_range Dependencies&gt; <br />
 requires std::same_as&lt;std::ranges::range_value_t&lt;Dependencies&gt;, <a class="el" href="classhelios_1_1async_1_1AsyncTask.html">AsyncTask</a>&gt;</div>
 <table class="mlabels">
   <tr>
@@ -721,7 +719,7 @@ requires std::same_as&lt;std::ranges::range_value_t&lt;Dependencies&gt;, <a clas
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pair containing <a class="el" href="classhelios_1_1async_1_1AsyncTask.html" title="Handle to an asynchronous task managed by the Executor.">AsyncTask</a> handle and <a class="el" href="classhelios_1_1async_1_1Future.html" title="Wrapper around tf::Future for handling asynchronous task results.">Future</a> for the result </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00659">659</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00653">653</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -801,7 +799,7 @@ template&lt;SubTask C&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> handle for the created task </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00074">74</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00075">75</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -847,7 +845,7 @@ requires (sizeof...(Cs) &gt; 1)</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Array of task handles for the created tasks </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00097">97</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00098">98</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -857,7 +855,7 @@ requires (sizeof...(Cs) &gt; 1)</div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;std::ranges::range R, std::invocable&lt; std::ranges::range_reference_t&lt; R &gt; &gt; C&gt; </div>
+template&lt;std::ranges::input_range R, std::invocable&lt; std::ranges::range_reference_t&lt; R &gt; &gt; C&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -898,7 +896,7 @@ template&lt;std::ranges::range R, std::invocable&lt; std::ranges::range_referenc
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> handle for the parallel operation </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00129">129</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00130">130</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -961,7 +959,7 @@ template&lt;std::integral I, std::invocable&lt; I &gt; C&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> handle for the parallel operation </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00147">147</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00148">148</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -992,7 +990,7 @@ template&lt;std::integral I, std::invocable&lt; I &gt; C&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Thread safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Count of idle workers. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00578">578</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00572">572</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -1023,7 +1021,7 @@ template&lt;std::integral I, std::invocable&lt; I &gt; C&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Thread safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>True if current thread is a worker, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00553">553</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00547">547</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -1053,7 +1051,7 @@ template&lt;std::integral I, std::invocable&lt; I &gt; C&gt; </div>
 <p>Joins the subflow with its parent task. </p>
 <p>Called automatically when the <span class="tt"><a class="el" href="classhelios_1_1async_1_1SubTaskGraph.html" title="Dynamic task graph that can be created within the execution of a task.">SubTaskGraph</a></span> goes out of scope, unless <span class="tt"><a class="el" href="#a61b89f007aca8810fce649b351874b32" title="Joins the subflow with its parent task.">Join()</a></span> has already been called. </p><dl class="section warning"><dt>Warning</dt><dd>Must be called by the same worker thread that created this subflow. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00614">614</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00608">608</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -1083,7 +1081,7 @@ template&lt;std::integral I, std::invocable&lt; I &gt; C&gt; </div>
 <p>Checks if this subflow can be joined. </p>
 <p>A subflow is joinable if it has not yet been joined with its parent task. </p><dl class="section return"><dt>Returns</dt><dd>True if the subflow is joinable, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00233">233</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00234">234</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -1093,7 +1091,7 @@ template&lt;std::integral I, std::invocable&lt; I &gt; C&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;std::ranges::range R&gt; <br />
+template&lt;std::ranges::input_range R&gt; <br />
 requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="el" href="classhelios_1_1async_1_1Task.html">Task</a>&gt;</div>
 <table class="mlabels">
   <tr>
@@ -1128,7 +1126,7 @@ requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="el" href
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00630">630</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00624">624</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -1209,7 +1207,7 @@ requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="el" href
 <dl class="section note"><dt>Note</dt><dd>Thread safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Count of queues. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00587">587</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00581">581</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -1219,7 +1217,7 @@ requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="el" href
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;std::ranges::range R, typename T, typename BinaryOp&gt; <br />
+template&lt;std::ranges::input_range R, typename T, typename BinaryOp&gt; <br />
 requires std::invocable&lt;BinaryOp, T, std::ranges::range_reference_t&lt;R&gt;&gt;</div>
 <table class="mlabels">
   <tr>
@@ -1268,7 +1266,7 @@ requires std::invocable&lt;BinaryOp, T, std::ranges::range_reference_t&lt;R&gt;&
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> handle for the parallel operation </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00189">189</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00190">190</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -1304,7 +1302,7 @@ requires std::invocable&lt;BinaryOp, T, std::ranges::range_reference_t&lt;R&gt;&
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00214">214</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00215">215</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -1340,7 +1338,7 @@ requires std::invocable&lt;BinaryOp, T, std::ranges::range_reference_t&lt;R&gt;&
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00064">64</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00065">65</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -1377,7 +1375,7 @@ requires std::invocable&lt;BinaryOp, T, std::ranges::range_reference_t&lt;R&gt;&
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Future.html" title="Wrapper around tf::Future for handling asynchronous task results.">Future</a> that completes when execution finishes </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00264">264</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00265">265</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -1427,7 +1425,7 @@ template&lt;std::invocable C&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Future.html" title="Wrapper around tf::Future for handling asynchronous task results.">Future</a> that completes when execution finishes </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00294">294</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00295">295</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -1464,7 +1462,7 @@ template&lt;std::invocable C&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Future.html" title="Wrapper around tf::Future for handling asynchronous task results.">Future</a> that completes when execution finishes </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00254">254</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00255">255</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -1514,7 +1512,7 @@ template&lt;std::invocable C&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Future.html" title="Wrapper around tf::Future for handling asynchronous task results.">Future</a> that completes when execution finishes </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00280">280</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00281">281</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -1556,7 +1554,7 @@ template&lt;std::invocable C&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Future.html" title="Wrapper around tf::Future for handling asynchronous task results.">Future</a> that completes when all executions finish </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00321">321</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00322">322</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -1612,7 +1610,7 @@ template&lt;std::invocable C&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Future.html" title="Wrapper around tf::Future for handling asynchronous task results.">Future</a> that completes when all executions finish </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00355">355</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00356">356</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -1654,7 +1652,7 @@ template&lt;std::invocable C&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Future.html" title="Wrapper around tf::Future for handling asynchronous task results.">Future</a> that completes when all executions finish </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00309">309</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00310">310</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -1710,7 +1708,7 @@ template&lt;std::invocable C&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Future.html" title="Wrapper around tf::Future for handling asynchronous task results.">Future</a> that completes when all executions finish </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00339">339</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00340">340</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -1741,7 +1739,7 @@ template&lt;std::invocable C&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Thread safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Count of running topologies. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00596">596</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00590">590</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -1791,7 +1789,7 @@ template&lt;std::predicate Predicate&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Future.html" title="Wrapper around tf::Future for handling asynchronous task results.">Future</a> that completes when predicate returns true </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00386">386</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00387">387</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -1848,7 +1846,7 @@ template&lt;std::predicate Predicate, std::invocable C&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Future.html" title="Wrapper around tf::Future for handling asynchronous task results.">Future</a> that completes when predicate returns true and callback finishes </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00427">427</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00428">428</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -1898,7 +1896,7 @@ template&lt;std::predicate Predicate&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Future.html" title="Wrapper around tf::Future for handling asynchronous task results.">Future</a> that completes when predicate returns true </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00372">372</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00373">373</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -1955,7 +1953,7 @@ template&lt;std::predicate Predicate, std::invocable C&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Future.html" title="Wrapper around tf::Future for handling asynchronous task results.">Future</a> that completes when predicate returns true and callback finishes </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00407">407</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00408">408</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -1999,7 +1997,7 @@ template&lt;std::invocable C&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00471">471</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00472">472</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -2048,7 +2046,7 @@ template&lt;std::invocable C&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00484">484</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00485">485</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -2058,7 +2056,7 @@ template&lt;std::invocable C&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;std::invocable C, std::ranges::range Dependencies&gt; <br />
+template&lt;std::invocable C, std::ranges::input_range Dependencies&gt; <br />
 requires std::same_as&lt;std::ranges::range_value_t&lt;Dependencies&gt;, <a class="el" href="classhelios_1_1async_1_1AsyncTask.html">AsyncTask</a>&gt;</div>
 <table class="mlabels">
   <tr>
@@ -2100,7 +2098,7 @@ requires std::same_as&lt;std::ranges::range_value_t&lt;Dependencies&gt;, <a clas
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1AsyncTask.html" title="Handle to an asynchronous task managed by the Executor.">AsyncTask</a> handle </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00678">678</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00672">672</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -2152,7 +2150,7 @@ requires std::predicate&lt;Compare, std::ranges::range_reference_t&lt;R&gt;, std
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> handle for the parallel operation </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00646">646</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00640">640</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -2162,7 +2160,7 @@ requires std::predicate&lt;Compare, std::ranges::range_reference_t&lt;R&gt;, std
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;std::ranges::range InputRange, std::ranges::range OutputRange, std::invocable&lt; std::ranges::range_reference_t&lt; InputRange &gt; &gt; TransformFunc&gt; </div>
+template&lt;std::ranges::input_range InputRange, std::ranges::input_range OutputRange, std::invocable&lt; std::ranges::range_reference_t&lt; InputRange &gt; &gt; TransformFunc&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -2210,37 +2208,7 @@ template&lt;std::ranges::range InputRange, std::ranges::range OutputRange, std::
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1async_1_1Task.html" title="Represents a single task within a task graph.">Task</a> handle for the parallel operation </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00167">167</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a9d4b7d3c01b077654e3fd6d0259f17a7" name="a9d4b7d3c01b077654e3fd6d0259f17a7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9d4b7d3c01b077654e3fd6d0259f17a7">&#9670;&#160;</a></span>WaitForAll()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void helios::async::SubTaskGraph::WaitForAll </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Blocks until all submitted tasks complete. </p>
-<p>Waits for all taskflows and async tasks to finish. </p><dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00526">526</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00168">168</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -2270,7 +2238,7 @@ template&lt;std::ranges::range InputRange, std::ranges::range OutputRange, std::
 <p>Checks if this subflow will be retained. </p>
 <p>A retained subflow remains valid after being joined. </p><dl class="section return"><dt>Returns</dt><dd>True if the subflow will be retained, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00240">240</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00241">241</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -2301,7 +2269,7 @@ template&lt;std::ranges::range InputRange, std::ranges::range OutputRange, std::
 <dl class="section note"><dt>Note</dt><dd>Thread safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Count of workers. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00569">569</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00563">563</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -2326,7 +2294,7 @@ template&lt;std::ranges::range InputRange, std::ranges::range OutputRange, std::
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00611">611</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00605">605</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -2350,7 +2318,7 @@ template&lt;std::ranges::range InputRange, std::ranges::range OutputRange, std::
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00610">610</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sub__task__graph_8hpp_source.html#l00604">604</a> of file <a class="el" href="sub__task__graph_8hpp_source.html">sub_task_graph.hpp</a>.</p>
 
 </div>
 </div>
