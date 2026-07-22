@@ -8,6 +8,7 @@ var classhelios_1_1ecs_1_1EntityCmdBuffer =
     [ "EntityCmdBuffer", "classhelios_1_1ecs_1_1EntityCmdBuffer.html#abeb6f372e6c3878d05c9f9eb0f4954bf", null ],
     [ "EntityCmdBuffer", "classhelios_1_1ecs_1_1EntityCmdBuffer.html#a733d1c96ad4a43580e79b70bb6b37bbe", null ],
     [ "~EntityCmdBuffer", "classhelios_1_1ecs_1_1EntityCmdBuffer.html#ae1d1748be411a64d30b351c3b0d289be", null ],
+    [ "AddBundle", "classhelios_1_1ecs_1_1EntityCmdBuffer.html#ab9f6fd69ecab4b2d399e5f199539bdd2", null ],
     [ "AddComponents", "classhelios_1_1ecs_1_1EntityCmdBuffer.html#a1e9f63a74267618291aae7c9db5ea8db", null ],
     [ "Clear", "classhelios_1_1ecs_1_1EntityCmdBuffer.html#ade70c3f2610fc43d50b3c43a031c1db7", null ],
     [ "ClearComponents", "classhelios_1_1ecs_1_1EntityCmdBuffer.html#a4ec6f5085ea24ec3337492e451448be2", null ],
@@ -17,10 +18,13 @@ var classhelios_1_1ecs_1_1EntityCmdBuffer =
     [ "GetEntity", "classhelios_1_1ecs_1_1EntityCmdBuffer.html#a51874c63ad30191a06b0604d28ace188", null ],
     [ "operator=", "classhelios_1_1ecs_1_1EntityCmdBuffer.html#a8917312604d92bc7630f47cb712605dc", null ],
     [ "operator=", "classhelios_1_1ecs_1_1EntityCmdBuffer.html#af0f520347c5effcbaccac20a6991d85e", null ],
+    [ "RemoveBundle", "classhelios_1_1ecs_1_1EntityCmdBuffer.html#ac1190e3587b2943bf56a3c67dca27c86", null ],
     [ "RemoveComponents", "classhelios_1_1ecs_1_1EntityCmdBuffer.html#ab4058d428a1da141c017e3a4918f19c3", null ],
     [ "Reserve", "classhelios_1_1ecs_1_1EntityCmdBuffer.html#add1eb1c7bb6e7cbfd7ec35314833b4d4", null ],
     [ "Size", "classhelios_1_1ecs_1_1EntityCmdBuffer.html#a0a65ec37ab1945203b4ac5be60340734", null ],
+    [ "TryAddBundle", "classhelios_1_1ecs_1_1EntityCmdBuffer.html#a58b682799c5e98e28a41048aab24ca60", null ],
     [ "TryAddComponents", "classhelios_1_1ecs_1_1EntityCmdBuffer.html#adda9313b02eca04f00ac7d86df52ab20", null ],
     [ "TryDestroy", "classhelios_1_1ecs_1_1EntityCmdBuffer.html#a956ea90ad0960989c7ad5fe689982511", null ],
+    [ "TryRemoveBundle", "classhelios_1_1ecs_1_1EntityCmdBuffer.html#a642acfa1b925c16cdf4eaed08ef828e6", null ],
     [ "TryRemoveComponents", "classhelios_1_1ecs_1_1EntityCmdBuffer.html#af6c0dce2a34e5024b42b51e024f85e1c", null ]
 ];

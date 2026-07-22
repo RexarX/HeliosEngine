@@ -1,5 +1,7 @@
 var component_8hpp =
 [
+    [ "helios::ecs::details::IsComponentBundle&lt; T &gt;", "structhelios_1_1ecs_1_1details_1_1IsComponentBundle.html", null ],
+    [ "helios::ecs::details::IsComponentBundle&lt; ComponentBundle&lt; Ts... &gt; &gt;", "structhelios_1_1ecs_1_1details_1_1IsComponentBundle_3_01ComponentBundle_3_01Ts_8_8_8_01_4_01_4.html", null ],
     [ "helios::ecs::ComponentTraits&lt; T &gt;", "structhelios_1_1ecs_1_1ComponentTraits.html", "structhelios_1_1ecs_1_1ComponentTraits" ],
     [ "helios::ecs::ComponentTypeInfo", "classhelios_1_1ecs_1_1ComponentTypeInfo.html", "classhelios_1_1ecs_1_1ComponentTypeInfo" ],
     [ "std::hash&lt; helios::ecs::ComponentTypeInfo &gt;", "structstd_1_1hash_3_01helios_1_1ecs_1_1ComponentTypeInfo_01_4.html", "structstd_1_1hash_3_01helios_1_1ecs_1_1ComponentTypeInfo_01_4" ],

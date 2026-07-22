@@ -73,6 +73,8 @@ var searchData=
   ['builtin_20types_70',['Builtin Types',['../dir_ddca5f149c4ce13074f28b270e950ba9.html#builtin-types',1,'']]],
   ['builtin_5fcommands_2ehpp_71',['builtin_commands.hpp',['../builtin__commands_8hpp.html',1,'']]],
   ['builtin_5fmessages_2ehpp_72',['builtin_messages.hpp',['../builtin__messages_8hpp.html',1,'']]],
-  ['byte_5fallocator_5ftype_73',['byte_allocator_type',['../classhelios_1_1container_1_1CallableBufferImpl.html#ac6a60ba724c5251498b5724bf0ce6ac2',1,'helios::container::CallableBufferImpl::byte_allocator_type'],['../classhelios_1_1container_1_1CallableBufferArrayImpl.html#a4634a789e68b3f776925cceac31dfeb0',1,'helios::container::CallableBufferArrayImpl::byte_allocator_type']]],
-  ['bytes_74',['Bytes',['../classhelios_1_1container_1_1TypedBuffer.html#aabb51aec3a36ae8af33e30dcb06aaba8',1,'helios::container::TypedBuffer::Bytes()'],['../classhelios_1_1container_1_1TypedBufferArray.html#a3c87d2c98a4efa1ed4a704ece714c727',1,'helios::container::TypedBufferArray::Bytes()']]]
+  ['bundle_2ehpp_73',['bundle.hpp',['../bundle_8hpp.html',1,'']]],
+  ['bundles_74',['Component Bundles',['../dir_ddca5f149c4ce13074f28b270e950ba9.html#component-bundles',1,'']]],
+  ['byte_5fallocator_5ftype_75',['byte_allocator_type',['../classhelios_1_1container_1_1CallableBufferImpl.html#ac6a60ba724c5251498b5724bf0ce6ac2',1,'helios::container::CallableBufferImpl::byte_allocator_type'],['../classhelios_1_1container_1_1CallableBufferArrayImpl.html#a4634a789e68b3f776925cceac31dfeb0',1,'helios::container::CallableBufferArrayImpl::byte_allocator_type']]],
+  ['bytes_76',['Bytes',['../classhelios_1_1container_1_1TypedBuffer.html#aabb51aec3a36ae8af33e30dcb06aaba8',1,'helios::container::TypedBuffer::Bytes()'],['../classhelios_1_1container_1_1TypedBufferArray.html#a3c87d2c98a4efa1ed4a704ece714c727',1,'helios::container::TypedBufferArray::Bytes()']]]
 ];

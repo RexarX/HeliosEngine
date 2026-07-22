@@ -190,6 +190,7 @@ var menudata={children:[
 {text:"Related Symbols",url:"functions_rela.html",children:[
 {text:"a",url:"functions_rela.html#index_a"},
 {text:"b",url:"functions_rela.html#index_b"},
+{text:"d",url:"functions_rela.html#index_d"},
 {text:"e",url:"functions_rela.html#index_e"},
 {text:"m",url:"functions_rela.html#index_m"},
 {text:"p",url:"functions_rela.html#index_p"},

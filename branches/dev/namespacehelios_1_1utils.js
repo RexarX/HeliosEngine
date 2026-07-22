@@ -93,7 +93,7 @@ var namespacehelios_1_1utils =
     [ "Fnv1aHash", "namespacehelios_1_1utils.html#ae635ba6ee826abad41ffd39ef791c2fe", null ],
     [ "FromPath", "namespacehelios_1_1utils.html#ac60a7361517b211c989c0a9f1d5518b3", null ],
     [ "FunctionNameOf", "namespacehelios_1_1utils.html#afab2ea1b662ddf82ffc07347c12ffff0", null ],
-    [ "GetFileExtension", "namespacehelios_1_1utils.html#a1e85990bc74f7ba9ae1a47fdf4720dc9", null ],
+    [ "GetFileExtension", "namespacehelios_1_1utils.html#a783dd124bde96f901ac50dca9069eb3f", null ],
     [ "GetFileName", "namespacehelios_1_1utils.html#a7ac5167111686abbfdf1126b47034746", null ],
     [ "InspectAdapter", "namespacehelios_1_1utils.html#a04c79635944dd37d6aa4616ce2418e7f", null ],
     [ "InspectAdapter", "namespacehelios_1_1utils.html#a67b30747a0791e805babf794abf3770c", null ],

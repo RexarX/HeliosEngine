@@ -213,18 +213,30 @@ Public Member Functions</h2></td></tr>
 requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</td></tr>
 <tr class="memitem:a1e9f63a74267618291aae7c9db5ea8db template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a1e9f63a74267618291aae7c9db5ea8db">AddComponents</a> (this auto &amp;&amp;self, Ts &amp;&amp;... components) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
 <tr class="memdesc:a1e9f63a74267618291aae7c9db5ea8db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to add components to the entity.  <br /></td></tr>
+<tr class="memitem:ab9f6fd69ecab4b2d399e5f199539bdd2" id="r_ab9f6fd69ecab4b2d399e5f199539bdd2"><td class="memTemplParams" colspan="2">template&lt;ComponentBundleTrait B&gt; </td></tr>
+<tr class="memitem:ab9f6fd69ecab4b2d399e5f199539bdd2 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#ab9f6fd69ecab4b2d399e5f199539bdd2">AddBundle</a> (this auto &amp;&amp;self, B &amp;&amp;bundle) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
+<tr class="memdesc:ab9f6fd69ecab4b2d399e5f199539bdd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to add a component bundle to the entity.  <br /></td></tr>
 <tr class="memitem:adda9313b02eca04f00ac7d86df52ab20" id="r_adda9313b02eca04f00ac7d86df52ab20"><td class="memTemplParams" colspan="2">template&lt;ComponentTrait... Ts&gt; <br />
 requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</td></tr>
 <tr class="memitem:adda9313b02eca04f00ac7d86df52ab20 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#adda9313b02eca04f00ac7d86df52ab20">TryAddComponents</a> (this auto &amp;&amp;self, Ts &amp;&amp;... components) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
 <tr class="memdesc:adda9313b02eca04f00ac7d86df52ab20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to try to add components to the entity if they don't exist.  <br /></td></tr>
+<tr class="memitem:a58b682799c5e98e28a41048aab24ca60" id="r_a58b682799c5e98e28a41048aab24ca60"><td class="memTemplParams" colspan="2">template&lt;ComponentBundleTrait B&gt; </td></tr>
+<tr class="memitem:a58b682799c5e98e28a41048aab24ca60 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a58b682799c5e98e28a41048aab24ca60">TryAddBundle</a> (this auto &amp;&amp;self, B &amp;&amp;bundle) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
+<tr class="memdesc:a58b682799c5e98e28a41048aab24ca60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to try to add missing components from a bundle.  <br /></td></tr>
 <tr class="memitem:ab4058d428a1da141c017e3a4918f19c3" id="r_ab4058d428a1da141c017e3a4918f19c3"><td class="memTemplParams" colspan="2">template&lt;ComponentTrait... Ts&gt; <br />
 requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</td></tr>
 <tr class="memitem:ab4058d428a1da141c017e3a4918f19c3 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#ab4058d428a1da141c017e3a4918f19c3">RemoveComponents</a> (this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
 <tr class="memdesc:ab4058d428a1da141c017e3a4918f19c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to remove components from the entity.  <br /></td></tr>
+<tr class="memitem:ac1190e3587b2943bf56a3c67dca27c86" id="r_ac1190e3587b2943bf56a3c67dca27c86"><td class="memTemplParams" colspan="2">template&lt;ComponentBundleTrait B&gt; </td></tr>
+<tr class="memitem:ac1190e3587b2943bf56a3c67dca27c86 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#ac1190e3587b2943bf56a3c67dca27c86">RemoveBundle</a> (this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
+<tr class="memdesc:ac1190e3587b2943bf56a3c67dca27c86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to remove a component bundle from the entity.  <br /></td></tr>
 <tr class="memitem:af6c0dce2a34e5024b42b51e024f85e1c" id="r_af6c0dce2a34e5024b42b51e024f85e1c"><td class="memTemplParams" colspan="2">template&lt;ComponentTrait... Ts&gt; <br />
 requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</td></tr>
 <tr class="memitem:af6c0dce2a34e5024b42b51e024f85e1c template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#af6c0dce2a34e5024b42b51e024f85e1c">TryRemoveComponents</a> (this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
 <tr class="memdesc:af6c0dce2a34e5024b42b51e024f85e1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to try to remove components from the entity if they exist.  <br /></td></tr>
+<tr class="memitem:a642acfa1b925c16cdf4eaed08ef828e6" id="r_a642acfa1b925c16cdf4eaed08ef828e6"><td class="memTemplParams" colspan="2">template&lt;ComponentBundleTrait B&gt; </td></tr>
+<tr class="memitem:a642acfa1b925c16cdf4eaed08ef828e6 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a642acfa1b925c16cdf4eaed08ef828e6">TryRemoveBundle</a> (this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
+<tr class="memdesc:a642acfa1b925c16cdf4eaed08ef828e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to try to remove present components represented by a bundle.  <br /></td></tr>
 <tr class="memitem:a4ec6f5085ea24ec3337492e451448be2" id="r_a4ec6f5085ea24ec3337492e451448be2"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a4ec6f5085ea24ec3337492e451448be2">ClearComponents</a> (this auto &amp;&amp;self) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td></tr>
 <tr class="memdesc:a4ec6f5085ea24ec3337492e451448be2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a command to remove all components from the entity.  <br /></td></tr>
 <tr class="memitem:a453db6557b89ea1cba9dfcbde8796643" id="r_a453db6557b89ea1cba9dfcbde8796643"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#a453db6557b89ea1cba9dfcbde8796643">Empty</a> () const noexcept</td></tr>
@@ -247,7 +259,7 @@ class helios::ecs::EntityCmdBuffer&lt; Allocator &gt;</div><p>Command buffer for
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00026">26</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00028">28</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
 </div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>
 <a id="ae580895f79e51cbb583d82581a21662f" name="ae580895f79e51cbb583d82581a21662f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae580895f79e51cbb583d82581a21662f">&#9670;&#160;</a></span>allocator_type</h2>
@@ -263,7 +275,7 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00029">29</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00031">31</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
 
 </div>
 </div>
@@ -281,7 +293,7 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00028">28</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00030">30</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
 
 </div>
 </div>
@@ -331,7 +343,7 @@ template&lt;typename Allocator&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00203">203</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00259">259</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
 
 </div>
 </div>
@@ -379,7 +391,7 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00049">49</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00051">51</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
 
 </div>
 </div>
@@ -498,11 +510,66 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00059">59</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00061">61</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
 
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="ab9f6fd69ecab4b2d399e5f199539bdd2" name="ab9f6fd69ecab4b2d399e5f199539bdd2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9f6fd69ecab4b2d399e5f199539bdd2">&#9670;&#160;</a></span>AddBundle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Allocator&gt; </div>
+<div class="memtemplate">
+template&lt;ComponentBundleTrait B&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1EntityCmdBuffer.html">helios::ecs::EntityCmdBuffer</a>&lt; Allocator &gt;::AddBundle </td>
+          <td>(</td>
+          <td class="paramtype">this auto &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>self</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">B &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>bundle</em></span>&#160;) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Enqueues a command to add a component bundle to the entity. </p>
+<p>If the entity already has a represented component, it will be replaced. </p><dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion in next cases:<ul>
+<li><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> is invalid.</li>
+<li><a class="el" href="classhelios_1_1ecs_1_1World.html" title="The World class manages entities with their components and systems.">World</a> does not own entity. </li>
+</ul>
+</dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">B</td><td>Component bundle type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bundle</td><td>Component bundle to add </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00292">292</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+
+</div>
+</div>
 <a id="a1e9f63a74267618291aae7c9db5ea8db" name="a1e9f63a74267618291aae7c9db5ea8db"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1e9f63a74267618291aae7c9db5ea8db">&#9670;&#160;</a></span>AddComponents()</h2>
 
@@ -556,7 +623,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00226">226</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00282">282</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
 
 </div>
 </div>
@@ -588,7 +655,7 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <p>Clears all pending commands from the buffer. </p>
 <p>Removes all commands currently in the buffer. </p>
 
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00068">68</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00070">70</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
 
 </div>
 </div>
@@ -625,7 +692,7 @@ template&lt;typename Allocator&gt; </div>
 </ul>
 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00264">264</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00354">354</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
 
 </div>
 </div>
@@ -662,7 +729,7 @@ template&lt;typename Allocator&gt; </div>
 </ul>
 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00210">210</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00266">266</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
 
 </div>
 </div>
@@ -694,7 +761,7 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <p>Checks if the buffer is empty. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if buffer is empty, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00169">169</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00225">225</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
 
 </div>
 </div>
@@ -726,7 +793,7 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <p>Gets the allocator used by the command storage. </p>
 <dl class="section return"><dt>Returns</dt><dd>Allocator instance </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00191">191</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00247">247</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
 
 </div>
 </div>
@@ -758,7 +825,7 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <p>Gets the entity associated with this buffer. </p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> instance </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00177">177</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00233">233</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
 
 </div>
 </div>
@@ -816,6 +883,52 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 
 </div>
 </div>
+<a id="ac1190e3587b2943bf56a3c67dca27c86" name="ac1190e3587b2943bf56a3c67dca27c86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1190e3587b2943bf56a3c67dca27c86">&#9670;&#160;</a></span>RemoveBundle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Allocator&gt; </div>
+<div class="memtemplate">
+template&lt;ComponentBundleTrait B&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1EntityCmdBuffer.html">helios::ecs::EntityCmdBuffer</a>&lt; Allocator &gt;::RemoveBundle </td>
+          <td>(</td>
+          <td class="paramtype">this auto &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>self</em></span></td><td>)</td>
+          <td> -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Enqueues a command to remove a component bundle from the entity. </p>
+<dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion in next cases:<ul>
+<li><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> is invalid.</li>
+<li><a class="el" href="classhelios_1_1ecs_1_1World.html" title="The World class manages entities with their components and systems.">World</a> does not own entity.</li>
+<li><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> does not have every component represented by the bundle. </li>
+</ul>
+</dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">B</td><td>Component bundle type </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00330">330</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+
+</div>
+</div>
 <a id="ab4058d428a1da141c017e3a4918f19c3" name="ab4058d428a1da141c017e3a4918f19c3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab4058d428a1da141c017e3a4918f19c3">&#9670;&#160;</a></span>RemoveComponents()</h2>
 
@@ -860,7 +973,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00248">248</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00322">322</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
 
 </div>
 </div>
@@ -897,7 +1010,7 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00076">76</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00078">78</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
 
 </div>
 </div>
@@ -929,7 +1042,62 @@ template&lt;typename Allocator = std::allocator&lt;std::byte&gt;&gt; </div>
 <p>Gets the number of commands in the buffer. </p>
 <dl class="section return"><dt>Returns</dt><dd>Number of commands in buffer </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00183">183</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00239">239</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a58b682799c5e98e28a41048aab24ca60" name="a58b682799c5e98e28a41048aab24ca60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58b682799c5e98e28a41048aab24ca60">&#9670;&#160;</a></span>TryAddBundle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Allocator&gt; </div>
+<div class="memtemplate">
+template&lt;ComponentBundleTrait B&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1EntityCmdBuffer.html">helios::ecs::EntityCmdBuffer</a>&lt; Allocator &gt;::TryAddBundle </td>
+          <td>(</td>
+          <td class="paramtype">this auto &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>self</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">B &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>bundle</em></span>&#160;) -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Enqueues a command to try to add missing components from a bundle. </p>
+<dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion in next cases:<ul>
+<li><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> is invalid.</li>
+<li><a class="el" href="classhelios_1_1ecs_1_1World.html" title="The World class manages entities with their components and systems.">World</a> does not own entity. </li>
+</ul>
+</dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">B</td><td>Component bundle type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bundle</td><td>Component bundle to add </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00311">311</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
 
 </div>
 </div>
@@ -986,7 +1154,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00237">237</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00301">301</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
 
 </div>
 </div>
@@ -1019,7 +1187,52 @@ template&lt;typename Allocator&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if entity is invalid. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00217">217</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00273">273</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a642acfa1b925c16cdf4eaed08ef828e6" name="a642acfa1b925c16cdf4eaed08ef828e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a642acfa1b925c16cdf4eaed08ef828e6">&#9670;&#160;</a></span>TryRemoveBundle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Allocator&gt; </div>
+<div class="memtemplate">
+template&lt;ComponentBundleTrait B&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto <a class="el" href="classhelios_1_1ecs_1_1EntityCmdBuffer.html">helios::ecs::EntityCmdBuffer</a>&lt; Allocator &gt;::TryRemoveBundle </td>
+          <td>(</td>
+          <td class="paramtype">this auto &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>self</em></span></td><td>)</td>
+          <td> -&gt; decltype(std::forward&lt; decltype(self)&gt;(self))</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Enqueues a command to try to remove present components represented by a bundle. </p>
+<dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion in next cases:<ul>
+<li><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> is invalid.</li>
+<li><a class="el" href="classhelios_1_1ecs_1_1World.html" title="The World class manages entities with their components and systems.">World</a> does not own entity. </li>
+</ul>
+</dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">B</td><td>Component bundle type </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00347">347</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
 
 </div>
 </div>
@@ -1066,7 +1279,7 @@ requires utils::UniqueTypes&lt;Ts...&gt; &amp;&amp; (sizeof...(Ts) &gt; 0)</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00257">257</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity__buffer_8hpp_source.html#l00339">339</a> of file <a class="el" href="entity__buffer_8hpp_source.html">entity_buffer.hpp</a>.</p>
 
 </div>
 </div>

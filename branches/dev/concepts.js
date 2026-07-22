@@ -26,6 +26,7 @@ var concepts =
         [ "AsyncMessageTrait", "concepthelios_1_1ecs_1_1AsyncMessageTrait.html", null ],
         [ "AsyncResourceTrait", "concepthelios_1_1ecs_1_1AsyncResourceTrait.html", null ],
         [ "CommandTrait", "concepthelios_1_1ecs_1_1CommandTrait.html", null ],
+        [ "ComponentBundleTrait", "concepthelios_1_1ecs_1_1ComponentBundleTrait.html", null ],
         [ "ComponentTrait", "concepthelios_1_1ecs_1_1ComponentTrait.html", null ],
         [ "ComponentWithNameTrait", "concepthelios_1_1ecs_1_1ComponentWithNameTrait.html", null ],
         [ "ComponentWithStorageTypeTrait", "concepthelios_1_1ecs_1_1ComponentWithStorageTypeTrait.html", null ],

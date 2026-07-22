@@ -9,13 +9,14 @@ var searchData=
   ['refcounted_3c_20t_2c_20std_3a_3apmr_3a_3apolymorphic_5fallocator_3c_20t_20_3e_20_3e_6',['RefCounted&lt; T, std::pmr::polymorphic_allocator&lt; T &gt; &gt;',['../classhelios_1_1mem_1_1RefCounted.html',1,'helios::mem']]],
   ['registerqueryaccess_7',['RegisterQueryAccess',['../structhelios_1_1ecs_1_1details_1_1RegisterQueryAccess.html',1,'helios::ecs::details']]],
   ['registerqueryaccess_3c_20std_3a_3atuple_3c_20cs_2e_2e_2e_20_3e_20_3e_8',['RegisterQueryAccess&lt; std::tuple&lt; Cs... &gt; &gt;',['../structhelios_1_1ecs_1_1details_1_1RegisterQueryAccess_3_01std_1_1tuple_3_01Cs_8_8_8_01_4_01_4.html',1,'helios::ecs::details']]],
-  ['removecomponentscmd_9',['RemoveComponentsCmd',['../classhelios_1_1ecs_1_1RemoveComponentsCmd.html',1,'helios::ecs']]],
-  ['removeresourcecmd_10',['RemoveResourceCmd',['../structhelios_1_1ecs_1_1RemoveResourceCmd.html',1,'helios::ecs']]],
-  ['res_11',['Res',['../classhelios_1_1ecs_1_1Res.html',1,'helios::ecs']]],
-  ['resourceconflictinfo_12',['ResourceConflictInfo',['../structhelios_1_1ecs_1_1ResourceConflictInfo.html',1,'helios::ecs']]],
-  ['resourceinsertedmsg_13',['ResourceInsertedMsg',['../structhelios_1_1ecs_1_1ResourceInsertedMsg.html',1,'helios::ecs']]],
-  ['resourcemanager_14',['ResourceManager',['../classhelios_1_1ecs_1_1ResourceManager.html',1,'helios::ecs']]],
-  ['resourceremovedmsg_15',['ResourceRemovedMsg',['../structhelios_1_1ecs_1_1ResourceRemovedMsg.html',1,'helios::ecs']]],
-  ['reverseadapter_16',['ReverseAdapter',['../classhelios_1_1utils_1_1ReverseAdapter.html',1,'helios::utils']]],
-  ['runconditionstorage_17',['RunConditionStorage',['../structhelios_1_1ecs_1_1RunConditionStorage.html',1,'helios::ecs']]]
+  ['removebundlecmd_9',['RemoveBundleCmd',['../classhelios_1_1ecs_1_1RemoveBundleCmd.html',1,'helios::ecs']]],
+  ['removecomponentscmd_10',['RemoveComponentsCmd',['../classhelios_1_1ecs_1_1RemoveComponentsCmd.html',1,'helios::ecs']]],
+  ['removeresourcecmd_11',['RemoveResourceCmd',['../structhelios_1_1ecs_1_1RemoveResourceCmd.html',1,'helios::ecs']]],
+  ['res_12',['Res',['../classhelios_1_1ecs_1_1Res.html',1,'helios::ecs']]],
+  ['resourceconflictinfo_13',['ResourceConflictInfo',['../structhelios_1_1ecs_1_1ResourceConflictInfo.html',1,'helios::ecs']]],
+  ['resourceinsertedmsg_14',['ResourceInsertedMsg',['../structhelios_1_1ecs_1_1ResourceInsertedMsg.html',1,'helios::ecs']]],
+  ['resourcemanager_15',['ResourceManager',['../classhelios_1_1ecs_1_1ResourceManager.html',1,'helios::ecs']]],
+  ['resourceremovedmsg_16',['ResourceRemovedMsg',['../structhelios_1_1ecs_1_1ResourceRemovedMsg.html',1,'helios::ecs']]],
+  ['reverseadapter_17',['ReverseAdapter',['../classhelios_1_1utils_1_1ReverseAdapter.html',1,'helios::utils']]],
+  ['runconditionstorage_18',['RunConditionStorage',['../structhelios_1_1ecs_1_1RunConditionStorage.html',1,'helios::ecs']]]
 ];

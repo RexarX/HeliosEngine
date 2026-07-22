@@ -8,6 +8,7 @@ var classhelios_1_1ecs_1_1ComponentManager =
     [ "~ComponentManager", "classhelios_1_1ecs_1_1ComponentManager.html#ab0fe4720454ea8c63d8b25a08cffa463", null ],
     [ "Add", "classhelios_1_1ecs_1_1ComponentManager.html#a86f06be7d972b5eaa004edefcf3160e9", null ],
     [ "AddArchetypeComponents", "classhelios_1_1ecs_1_1ComponentManager.html#af6bfa7d69e2480f28d95a4a6b0abdda4", null ],
+    [ "AddBundle", "classhelios_1_1ecs_1_1ComponentManager.html#a33eb500a9c3f0665882f3d39b1a8f54e", null ],
     [ "AddSparseComponent", "classhelios_1_1ecs_1_1ComponentManager.html#a8976ccdf74fa9388d1b8f252935d0557", null ],
     [ "ArchetypeCount", "classhelios_1_1ecs_1_1ComponentManager.html#aa52200da1ac7b99bbdb29f8cc9f0fbe0", null ],
     [ "Archetypes", "classhelios_1_1ecs_1_1ComponentManager.html#a25dbc1aebc8a9b57c92afb9f3f1c4681", null ],
@@ -34,6 +35,7 @@ var classhelios_1_1ecs_1_1ComponentManager =
     [ "Registered", "classhelios_1_1ecs_1_1ComponentManager.html#a3ac51681af2ea4e968b52dd1cbbd1ad7", null ],
     [ "Remove", "classhelios_1_1ecs_1_1ComponentManager.html#ae661eda307a9a3d82771eeda66997d11", null ],
     [ "RemoveArchetypeComponents", "classhelios_1_1ecs_1_1ComponentManager.html#a36aa67041038ff97c1acad5c265850e3", null ],
+    [ "RemoveBundle", "classhelios_1_1ecs_1_1ComponentManager.html#aeb1863ec5924506fd75ef89770f0903f", null ],
     [ "RemoveEntity", "classhelios_1_1ecs_1_1ComponentManager.html#af405f8915e196585223971aa84700216", null ],
     [ "RemoveSparseComponent", "classhelios_1_1ecs_1_1ComponentManager.html#ae025639dc6677fdc6ff59477525799ac", null ],
     [ "SparseEntry", "classhelios_1_1ecs_1_1ComponentManager.html#a40c02f693ff880d2d6fb67864703b962", null ],
@@ -44,6 +46,7 @@ var classhelios_1_1ecs_1_1ComponentManager =
     [ "TrackedEntityCount", "classhelios_1_1ecs_1_1ComponentManager.html#a3063fe599ad461da0e7e44e8c06f50c5", null ],
     [ "TryAdd", "classhelios_1_1ecs_1_1ComponentManager.html#a6fce848cdaee4e90bb5c78a86f5a927a", null ],
     [ "TryAddArchetypeComponents", "classhelios_1_1ecs_1_1ComponentManager.html#a67476aa85aabff116b1f899a13c32158", null ],
+    [ "TryAddBundle", "classhelios_1_1ecs_1_1ComponentManager.html#a142153478594b8c40e51e7e4e80086e8", null ],
     [ "TryAddSparseComponent", "classhelios_1_1ecs_1_1ComponentManager.html#a6d57bfab925f5147050bb3c659d30dc3", null ],
     [ "TryEmplace", "classhelios_1_1ecs_1_1ComponentManager.html#a9d1c495c816f19e10b652d161df4ad94", null ],
     [ "TryEmplaceArchetypeComponent", "classhelios_1_1ecs_1_1ComponentManager.html#a5191f21e66845f5c6a4b135f5384aac8", null ],
@@ -52,6 +55,7 @@ var classhelios_1_1ecs_1_1ComponentManager =
     [ "TryGet", "classhelios_1_1ecs_1_1ComponentManager.html#aa8d9636278d33e780ef5003a6e5fa074", null ],
     [ "TryRemove", "classhelios_1_1ecs_1_1ComponentManager.html#a5599db478ba936436f0eda2d0f0f44b0", null ],
     [ "TryRemoveArchetypeComponents", "classhelios_1_1ecs_1_1ComponentManager.html#a193a93bc2dd985447400b986d9e2f1c3", null ],
+    [ "TryRemoveBundle", "classhelios_1_1ecs_1_1ComponentManager.html#a885cccdd9e367a1f1cd13c2b9920fd11", null ],
     [ "TryRemoveEntity", "classhelios_1_1ecs_1_1ComponentManager.html#af484d2abe9ad73606910a5d71e9a8494", null ],
     [ "TryRemoveSparseComponent", "classhelios_1_1ecs_1_1ComponentManager.html#a172149d385892a4be926ef9d259fa837", null ]
 ];

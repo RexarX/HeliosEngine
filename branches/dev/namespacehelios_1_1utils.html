@@ -353,8 +353,8 @@ Functions</h2></td></tr>
 <tr class="memdesc:a16f2deb86c747a978225f21607e135da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads the entire contents of a file into a string.  <br /></td></tr>
 <tr class="memitem:a7ac5167111686abbfdf1126b47034746" id="r_a7ac5167111686abbfdf1126b47034746"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#a7ac5167111686abbfdf1126b47034746">GetFileName</a> (std::string_view path)</td></tr>
 <tr class="memdesc:a7ac5167111686abbfdf1126b47034746"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the file name from a given path.  <br /></td></tr>
-<tr class="memitem:a1e85990bc74f7ba9ae1a47fdf4720dc9" id="r_a1e85990bc74f7ba9ae1a47fdf4720dc9"><td class="memItemLeft">static constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#a1e85990bc74f7ba9ae1a47fdf4720dc9">GetFileExtension</a> (std::string_view path)</td></tr>
-<tr class="memdesc:a1e85990bc74f7ba9ae1a47fdf4720dc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the file extension from a given path.  <br /></td></tr>
+<tr class="memitem:a783dd124bde96f901ac50dca9069eb3f" id="r_a783dd124bde96f901ac50dca9069eb3f"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#a783dd124bde96f901ac50dca9069eb3f">GetFileExtension</a> (std::string_view path)</td></tr>
+<tr class="memdesc:a783dd124bde96f901ac50dca9069eb3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the file extension from a given path.  <br /></td></tr>
 <tr class="memitem:a4e2676a8aaba7f9f532bc83c92238790" id="r_a4e2676a8aaba7f9f532bc83c92238790"><td class="memTemplParams" colspan="2">template&lt;ExternalRange R, typename Pred&gt; </td></tr>
 <tr class="memitem:a4e2676a8aaba7f9f532bc83c92238790 template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a4e2676a8aaba7f9f532bc83c92238790">FilterAdapter</a> (R &amp;, Pred) -&gt; FilterAdapter&lt; std::ranges::iterator_t&lt; R &gt;, Pred &gt;</td></tr>
 <tr class="memitem:ac677e0b92368250e9b7b9e99a64167b7" id="r_ac677e0b92368250e9b7b9e99a64167b7"><td class="memTemplParams" colspan="2">template&lt;ExternalRange R, typename Pred&gt; </td></tr>
@@ -1061,8 +1061,8 @@ template&lt;auto Fn&gt; </div>
 
 </div>
 </div>
-<a id="a1e85990bc74f7ba9ae1a47fdf4720dc9" name="a1e85990bc74f7ba9ae1a47fdf4720dc9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1e85990bc74f7ba9ae1a47fdf4720dc9">&#9670;&#160;</a></span>GetFileExtension()</h2>
+<a id="a783dd124bde96f901ac50dca9069eb3f" name="a783dd124bde96f901ac50dca9069eb3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a783dd124bde96f901ac50dca9069eb3f">&#9670;&#160;</a></span>GetFileExtension()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1071,7 +1071,7 @@ template&lt;auto Fn&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr std::string_view helios::utils::GetFileExtension </td>
+          <td class="memname">std::string_view helios::utils::GetFileExtension </td>
           <td>(</td>
           <td class="paramtype">std::string_view</td>          <td class="paramname"><span class="paramname"><em>path</em></span></td><td>)</td>
           <td></td>
@@ -1079,7 +1079,7 @@ template&lt;auto Fn&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

@@ -6,9 +6,13 @@ var builtin__commands_8hpp =
     [ "helios::ecs::TryDestroyEntityCmd", "classhelios_1_1ecs_1_1TryDestroyEntityCmd.html", "classhelios_1_1ecs_1_1TryDestroyEntityCmd" ],
     [ "helios::ecs::TryDestroyEntitiesCmd&lt; Alloc &gt;", "classhelios_1_1ecs_1_1TryDestroyEntitiesCmd.html", "classhelios_1_1ecs_1_1TryDestroyEntitiesCmd" ],
     [ "helios::ecs::AddComponentsCmd&lt; Ts &gt;", "classhelios_1_1ecs_1_1AddComponentsCmd.html", "classhelios_1_1ecs_1_1AddComponentsCmd" ],
+    [ "helios::ecs::AddBundleCmd&lt; B &gt;", "classhelios_1_1ecs_1_1AddBundleCmd.html", "classhelios_1_1ecs_1_1AddBundleCmd" ],
     [ "helios::ecs::TryAddComponentsCmd&lt; Ts &gt;", "classhelios_1_1ecs_1_1TryAddComponentsCmd.html", "classhelios_1_1ecs_1_1TryAddComponentsCmd" ],
+    [ "helios::ecs::TryAddBundleCmd&lt; B &gt;", "classhelios_1_1ecs_1_1TryAddBundleCmd.html", "classhelios_1_1ecs_1_1TryAddBundleCmd" ],
     [ "helios::ecs::RemoveComponentsCmd&lt; Ts &gt;", "classhelios_1_1ecs_1_1RemoveComponentsCmd.html", "classhelios_1_1ecs_1_1RemoveComponentsCmd" ],
+    [ "helios::ecs::RemoveBundleCmd&lt; B &gt;", "classhelios_1_1ecs_1_1RemoveBundleCmd.html", "classhelios_1_1ecs_1_1RemoveBundleCmd" ],
     [ "helios::ecs::TryRemoveComponentsCmd&lt; Ts &gt;", "classhelios_1_1ecs_1_1TryRemoveComponentsCmd.html", "classhelios_1_1ecs_1_1TryRemoveComponentsCmd" ],
+    [ "helios::ecs::TryRemoveBundleCmd&lt; B &gt;", "classhelios_1_1ecs_1_1TryRemoveBundleCmd.html", "classhelios_1_1ecs_1_1TryRemoveBundleCmd" ],
     [ "helios::ecs::ClearComponentsCmd", "classhelios_1_1ecs_1_1ClearComponentsCmd.html", "classhelios_1_1ecs_1_1ClearComponentsCmd" ],
     [ "helios::ecs::InsertResourceCmd&lt; T &gt;", "classhelios_1_1ecs_1_1InsertResourceCmd.html", "classhelios_1_1ecs_1_1InsertResourceCmd" ],
     [ "helios::ecs::TryInsertResourceCmd&lt; T &gt;", "classhelios_1_1ecs_1_1TryInsertResourceCmd.html", "classhelios_1_1ecs_1_1TryInsertResourceCmd" ],
@@ -16,7 +20,9 @@ var builtin__commands_8hpp =
     [ "helios::ecs::TryRemoveResourceCmd&lt; T &gt;", "structhelios_1_1ecs_1_1TryRemoveResourceCmd.html", "structhelios_1_1ecs_1_1TryRemoveResourceCmd" ],
     [ "helios::ecs::ClearMessagesCmd&lt; T &gt;", "structhelios_1_1ecs_1_1ClearMessagesCmd.html", "structhelios_1_1ecs_1_1ClearMessagesCmd" ],
     [ "helios::ecs::ClearAllMessagesCmd", "structhelios_1_1ecs_1_1ClearAllMessagesCmd.html", "structhelios_1_1ecs_1_1ClearAllMessagesCmd" ],
+    [ "helios::ecs::AddBundleCmd", "namespacehelios_1_1ecs.html#ab58339650f46e5256f43615d53414a7d", null ],
     [ "helios::ecs::AddComponentsCmd", "namespacehelios_1_1ecs.html#a69dac1d6c9164b934af97c05a6ec53c7", null ],
     [ "helios::ecs::FunctionCmd", "namespacehelios_1_1ecs.html#a8199a1e6e21d9647ad981f34dbd00f22", null ],
+    [ "helios::ecs::TryAddBundleCmd", "namespacehelios_1_1ecs.html#a8c67dfbf45b4cfe7d80c2df1951a72bf", null ],
     [ "helios::ecs::TryAddComponentsCmd", "namespacehelios_1_1ecs.html#a9b3736dcb167cbead8b16fb9b9a9acca", null ]
 ];
