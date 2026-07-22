@@ -475,7 +475,7 @@ TEST_SUITE("helios::app::SubApp") {
     SUBCASE("Propagates AppExit from owner app") {
       struct ExitOnFirst {
         void operator()(MessageWriter<AppExit> exits) const {
-          exits.Write(AppExit{.code = ExitCode::kSuccess});
+          exits.Write(AppExit::Success());
         }
       };
 

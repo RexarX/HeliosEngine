@@ -65,7 +65,7 @@ struct FixedRunnerConfig {
  */
 inline ExitCode RunDefault(App& app) {
   std::optional<ExitCode> exit_code;
-  while (exit_code = app.ShouldExit(), !exit_code.has_value()) {
+  while (exit_code = app.ShouldExit(), !exit_code) {
     app.Update();
   }
   return *exit_code;
@@ -84,7 +84,7 @@ inline ExitCode RunFixed(App& app, const FixedRunnerConfig& config = {}) {
   auto next_tick = std::chrono::steady_clock::now();
 
   std::optional<ExitCode> exit_code;
-  while (exit_code = app.ShouldExit(), !exit_code.has_value()) {
+  while (exit_code = app.ShouldExit(), !exit_code) {
     next_tick += config.update_interval;
 
     app.Update();

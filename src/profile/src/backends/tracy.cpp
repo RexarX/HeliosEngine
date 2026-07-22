@@ -32,13 +32,14 @@ static_assert(kTracyZoneStorageSize <= kZoneStorageBytes,
 [[nodiscard]] constexpr tracy::PlotFormatType ToTracyPlotFormat(
     PlotFormat format) noexcept {
   switch (format) {
-    case PlotFormat::kNumber:
+    using enum PlotFormat;
+    case kNumber:
       return tracy::PlotFormatType::Number;
-    case PlotFormat::kMemory:
+    case kMemory:
       return tracy::PlotFormatType::Memory;
-    case PlotFormat::kPercentage:
+    case kPercentage:
       return tracy::PlotFormatType::Percentage;
-    case PlotFormat::kWatts:
+    case kWatts:
       return tracy::PlotFormatType::Number;
   }
   return tracy::PlotFormatType::Number;

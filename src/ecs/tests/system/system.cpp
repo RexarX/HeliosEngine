@@ -11,14 +11,18 @@
 #include <helios/ecs/resource/local_param.hpp>
 #include <helios/ecs/resource/param.hpp>
 #include <helios/ecs/resource/resource.hpp>
+#include <helios/ecs/schedule/executor/main_thread.hpp>
+#include <helios/ecs/schedule/schedule.hpp>
 #include <helios/ecs/system/param_traits.hpp>
 #include <helios/ecs/system/system.hpp>
+#include <helios/ecs/world.hpp>
 #include <helios/ecs/world_view.hpp>
 #include <helios/utils/hash.hpp>
 
 #include <algorithm>
 #include <optional>
 #include <string_view>
+#include <type_traits>
 #include <vector>
 
 using namespace helios;
@@ -219,6 +223,14 @@ struct ConstOperatorAllParamsSystem {
                   Commands /*commands*/, WorldView /*view*/) const {}
 };
 
+struct NoexceptSystem {
+  void operator()(Query<const Position&> /*query*/) noexcept {}
+};
+
+struct ConstNoexceptSystem {
+  void operator()(Res<const Camera> /*camera*/) const noexcept {}
+};
+
 struct StaticOperatorSystem {
   static void operator()(Query<const Position&> /*query*/) {}
 };
@@ -256,7 +268,7 @@ struct MixedValidInvalidParamSystem {
 };
 
 // Free function for testing
-constexpr void FreeFunctionSystem() {}
+constexpr void FreeFunctionNoParams() {}
 
 // Free function with ECS params
 constexpr void FreeFunctionWithQuery(Query<const Position&> /*query*/) {}
@@ -265,10 +277,56 @@ constexpr void FreeFunctionWithQuery(Query<const Position&> /*query*/) {}
 constexpr void FreeFunctionWithMixed(Query<const Position&> /*query*/,
                                      Res<const Camera> /*camera*/) {}
 
+// Noexcept free function with ECS params
+constexpr void FreeFunctionWithQueryNoexcept(
+    Query<const Position&> /*query*/) noexcept {}
+
 // Another free function for testing (invalid param)
 constexpr void AnotherFreeFunction(int /*value*/) {}
 
 }  // namespace
+
+namespace helios::ecs::free_function_system_test {
+
+struct FreeCounter {
+  int value = 0;
+};
+
+struct FreePosition {
+  float x = 0.0F;
+};
+
+struct FreeSet {};
+
+inline int no_param_calls = 0;
+
+void CountNoParamCall() {
+  ++no_param_calls;
+}
+
+void IncrementCounter(Res<FreeCounter> counter) {
+  ++counter->value;
+}
+
+void IncrementCounterNoexcept(Res<FreeCounter> counter) noexcept {
+  ++counter->value;
+}
+
+void AccumulatePositions(Query<const FreePosition&> query,
+                         Res<FreeCounter> counter) {
+  query.ForEach(
+      [&counter](const FreePosition& /*position*/) { ++counter->value; });
+}
+
+bool CounterIsZero(Res<const FreeCounter> counter) {
+  return counter->value == 0;
+}
+
+bool CounterIsPositive(Res<const FreeCounter> counter) {
+  return counter->value > 0;
+}
+
+}  // namespace helios::ecs::free_function_system_test
 
 TEST_SUITE("helios::ecs::SystemTrait") {
   TEST_CASE("ecs::SystemTrait::concept") {
@@ -279,7 +337,7 @@ TEST_SUITE("helios::ecs::SystemTrait") {
     }
 
     SUBCASE("Free functions satisfy SystemTrait") {
-      CHECK(SystemTrait<decltype(&FreeFunctionSystem)>);
+      CHECK(SystemTrait<decltype(&FreeFunctionNoParams)>);
       CHECK_FALSE(SystemTrait<decltype(&AnotherFreeFunction)>);
     }
 
@@ -333,8 +391,8 @@ TEST_SUITE("helios::ecs::SystemTrait") {
       CHECK(SystemTrait<OptionalResourceSystem>);
     }
 
-    SUBCASE("Systems with optional Local params satisfy SystemTrait") {
-      CHECK(SystemTrait<OptionalLocalSystem>);
+    SUBCASE("Systems with optional Local params do not satisfy SystemTrait") {
+      CHECK_FALSE(SystemTrait<OptionalLocalSystem>);
     }
   }
 
@@ -382,6 +440,20 @@ TEST_SUITE("helios::ecs::SystemTrait") {
     }
   }
 
+  TEST_CASE("ecs::SystemTrait::noexcept_operator") {
+    SUBCASE("Noexcept operator() satisfies SystemTrait") {
+      CHECK(SystemTrait<NoexceptSystem>);
+    }
+
+    SUBCASE("Const noexcept operator() satisfies SystemTrait") {
+      CHECK(SystemTrait<ConstNoexceptSystem>);
+    }
+
+    SUBCASE("Noexcept free function satisfies SystemTrait") {
+      CHECK(SystemTrait<decltype(&FreeFunctionWithQueryNoexcept)>);
+    }
+  }
+
   TEST_CASE("ecs::SystemTrait::negative") {
     SUBCASE("Polymorphic type does not satisfy SystemTrait") {
       CHECK_FALSE(SystemTrait<PolymorphicSystem>);
@@ -412,7 +484,7 @@ TEST_SUITE("helios::ecs::SystemTrait") {
 
   TEST_CASE("ecs::SystemTrait::free_functions") {
     SUBCASE("Free function with no params satisfies SystemTrait") {
-      CHECK(SystemTrait<decltype(&FreeFunctionSystem)>);
+      CHECK(SystemTrait<decltype(&FreeFunctionNoParams)>);
     }
 
     SUBCASE("Free function with Query param satisfies SystemTrait") {
@@ -546,6 +618,145 @@ TEST_SUITE("helios::ecs::SystemNameOf") {
     SUBCASE("System type index is constexpr") {
       constexpr auto index = SystemTypeIndex::From<SimpleSystem>();
       CHECK_NE(index.Hash(), 0);
+    }
+  }
+}
+
+TEST_SUITE("helios::ecs::FreeFunctionSystem") {
+  namespace ff = free_function_system_test;
+
+  using FreeIncrementSystem =
+      std::remove_cvref_t<decltype(kSystem<ff::IncrementCounter>)>;
+
+  TEST_CASE("ecs::FreeFunctionSystem::concept") {
+    SUBCASE("Wrapped free function satisfies functor system traits") {
+      CHECK(SystemTrait<FreeIncrementSystem>);
+      CHECK(FunctorSystemTrait<FreeIncrementSystem>);
+      CHECK(SystemWithNameTrait<FreeIncrementSystem>);
+    }
+
+    SUBCASE("Raw free function pointer is not an unnamed functor system") {
+      CHECK(SystemTrait<decltype(&ff::IncrementCounter)>);
+      CHECK_FALSE(FunctorSystemTrait<decltype(&ff::IncrementCounter)>);
+    }
+
+    SUBCASE("Invalid free function params keep wrapper out of SystemTrait") {
+      CHECK_FALSE(SystemTrait<decltype(kSystem<AnotherFreeFunction>)>);
+    }
+  }
+
+  TEST_CASE("ecs::FreeFunctionSystem::kName") {
+    SUBCASE("Name contains namespace-qualified free function") {
+      constexpr std::string_view name = SystemNameOf<FreeIncrementSystem>();
+
+      CHECK_EQ(name,
+               "helios::ecs::free_function_system_test::"
+               "IncrementCounter");
+    }
+  }
+
+  TEST_CASE("ecs::FreeFunctionSystem::operator()") {
+    SUBCASE("Wrapper directly invokes no-param free function") {
+      ff::no_param_calls = 0;
+
+      kSystem<ff::CountNoParamCall>();
+
+      CHECK_EQ(ff::no_param_calls, 1);
+    }
+  }
+
+  TEST_CASE("ecs::FreeFunctionSystem through Schedule::Add") {
+    SUBCASE("Runs a wrapped free function system with resource params") {
+      Schedule schedule;
+      schedule.Add(kSystem<ff::IncrementCounter>);
+      REQUIRE(schedule.Build().has_value());
+
+      World world;
+      world.InsertResources(ff::FreeCounter{});
+
+      MainThreadExecutor executor;
+      schedule.RunAndWait(world, executor);
+
+      CHECK_EQ(world.ReadResource<ff::FreeCounter>().value, 1);
+    }
+
+    SUBCASE("Deduces query and resource access from wrapped free function") {
+      Schedule schedule;
+      schedule.Add(kSystem<ff::AccumulatePositions>);
+      REQUIRE(schedule.Build().has_value());
+
+      World world;
+      world.InsertResources(ff::FreeCounter{});
+      const Entity entity = world.CreateEntity();
+      world.AddComponents(entity, ff::FreePosition{});
+
+      MainThreadExecutor executor;
+      schedule.RunAndWait(world, executor);
+
+      CHECK_EQ(world.ReadResource<ff::FreeCounter>().value, 1);
+    }
+
+    SUBCASE("Supports explicit-name raw free function pointer registration") {
+      Schedule schedule;
+      schedule.Add("RawFreeFunctionSystem", &ff::IncrementCounter);
+      REQUIRE(schedule.Build().has_value());
+
+      World world;
+      world.InsertResources(ff::FreeCounter{});
+
+      MainThreadExecutor executor;
+      schedule.RunAndWait(world, executor);
+
+      CHECK_EQ(world.ReadResource<ff::FreeCounter>().value, 1);
+    }
+  }
+
+  TEST_CASE("ecs::FreeFunctionSystem through grouped Schedule::Add") {
+    SUBCASE("Runs multiple wrapped free function systems as a group") {
+      Schedule schedule;
+      schedule.Add(kSystem<ff::IncrementCounter>,
+                   kSystem<ff::IncrementCounterNoexcept>);
+      REQUIRE(schedule.Build().has_value());
+
+      World world;
+      world.InsertResources(ff::FreeCounter{});
+
+      MainThreadExecutor executor;
+      schedule.RunAndWait(world, executor);
+
+      CHECK_EQ(world.ReadResource<ff::FreeCounter>().value, 2);
+    }
+  }
+
+  TEST_CASE("ecs::FreeFunctionSystem through RunIf") {
+    SUBCASE("Wrapped free function run condition can enable a system") {
+      Schedule schedule;
+      schedule.Add(kSystem<ff::IncrementCounter>)
+          .RunIf(kSystem<ff::CounterIsZero>);
+      REQUIRE(schedule.Build().has_value());
+
+      World world;
+      world.InsertResources(ff::FreeCounter{});
+
+      MainThreadExecutor executor;
+      schedule.RunAndWait(world, executor);
+
+      CHECK_EQ(world.ReadResource<ff::FreeCounter>().value, 1);
+    }
+
+    SUBCASE("Wrapped free function set condition can skip a system") {
+      Schedule schedule;
+      schedule.Set<ff::FreeSet>().RunIf(kSystem<ff::CounterIsPositive>);
+      schedule.Add(kSystem<ff::IncrementCounter>).InSet<ff::FreeSet>();
+      REQUIRE(schedule.Build().has_value());
+
+      World world;
+      world.InsertResources(ff::FreeCounter{});
+
+      MainThreadExecutor executor;
+      schedule.RunAndWait(world, executor);
+
+      CHECK_EQ(world.ReadResource<ff::FreeCounter>().value, 0);
     }
   }
 }

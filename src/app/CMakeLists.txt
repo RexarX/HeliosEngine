@@ -6,11 +6,15 @@ helios_module(
     DESCRIPTION "Application framework module"
 
     HEADERS
+        include/helios/app/builtin/executor.hpp
+        include/helios/app/builtin/frame_count.hpp
+        include/helios/app/builtin/time.hpp
         include/helios/app/details/profile.hpp
         include/helios/app/app.hpp
         include/helios/app/application.hpp
         include/helios/app/dynamic_plugin.hpp
         include/helios/app/plugin.hpp
+        include/helios/app/plugin_group.hpp
         include/helios/app/runners.hpp
         include/helios/app/scheduler.hpp
         include/helios/app/schedules.hpp
@@ -41,10 +45,14 @@ helios_module(
             $<$<BOOL:HELIOS_APP_ENABLE_PROFILE>:HELIOS_APP_ENABLE_PROFILE>
 
     TEST_SOURCES
+        tests/builtin/executor.cpp
+        tests/builtin/frame_count.cpp
+        tests/builtin/time.cpp
         tests/application.cpp
         tests/dynamic_plugin.cpp
         tests/main.cpp
         tests/plugin.cpp
+        tests/plugin_group.cpp
         tests/runners.cpp
         tests/scheduler.cpp
         tests/schedules.cpp

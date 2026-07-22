@@ -40,19 +40,20 @@ enum class AsyncError : uint8_t {
  */
 [[nodiscard]] constexpr std::string_view ToString(AsyncError error) noexcept {
   switch (error) {
-    case AsyncError::kInvalidTask:
+    using enum AsyncError;
+    case kInvalidTask:
       return "Invalid task";
-    case AsyncError::kExecutorShutdown:
+    case kExecutorShutdown:
       return "Executor is shutdown";
-    case AsyncError::kTaskNotFound:
+    case kTaskNotFound:
       return "Task not found";
-    case AsyncError::kInvalidDependency:
+    case kInvalidDependency:
       return "Invalid dependency";
-    case AsyncError::kCircularDependency:
+    case kCircularDependency:
       return "Circular dependency detected";
-    case AsyncError::kSchedulingFailed:
+    case kSchedulingFailed:
       return "Task scheduling failed";
-    case AsyncError::kThreadNotAvailable:
+    case kThreadNotAvailable:
       return "Thread not available";
     default:
       return "Unknown async error";
@@ -86,11 +87,12 @@ namespace details {
 [[nodiscard]] static constexpr TaskType ConvertTaskType(
     tf::TaskType type) noexcept {
   switch (type) {
-    case tf::TaskType::STATIC:
+    using enum tf::TaskType;
+    case STATIC:
       return TaskType::kStatic;
-    case tf::TaskType::SUBFLOW:
+    case SUBFLOW:
       return TaskType::kSubTask;
-    case tf::TaskType::ASYNC:
+    case ASYNC:
       return TaskType::kAsync;
     default:
       return TaskType::kStatic;  // Fallback to Static if unknown

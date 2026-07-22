@@ -108,17 +108,18 @@ using DynamicPluginResult = std::expected<T, DynamicPluginError>;
 [[nodiscard]] constexpr std::string_view DynamicPluginErrorToString(
     DynamicPluginError error) noexcept {
   switch (error) {
-    case DynamicPluginError::kLibraryLoadFailed:
+    using enum DynamicPluginError;
+    case kLibraryLoadFailed:
       return "Failed to load dynamic library";
-    case DynamicPluginError::kCreateSymbolNotFound:
+    case kCreateSymbolNotFound:
       return "Plugin creation function not found";
-    case DynamicPluginError::kIdSymbolNotFound:
+    case kIdSymbolNotFound:
       return "Plugin ID function not found";
-    case DynamicPluginError::kNameSymbolNotFound:
+    case kNameSymbolNotFound:
       return "Plugin name function not found";
-    case DynamicPluginError::kCreateFailed:
+    case kCreateFailed:
       return "Plugin creation function returned nullptr";
-    case DynamicPluginError::kReloadFailed:
+    case kReloadFailed:
       return "Failed to reload plugin";
     default:
       return "Unknown error";

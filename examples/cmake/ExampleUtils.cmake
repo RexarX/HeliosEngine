@@ -13,17 +13,15 @@ endif()
 #[[
     helios_add_example(
         NAME <example_name>           # target becomes <name>_example
-        [SOURCES src/main.cpp ...]
+        SOURCES src/main.cpp ...
         [HEADERS ...]
-        [MODULES app log ...]
-        [ENABLE_PROFILE]
-        [DISABLE_SANITIZERS]
+        [MODULES app ecs log ...]
     )
 ]]
 function(helios_add_example)
   cmake_parse_arguments(
     ARG
-    "DISABLE_SANITIZERS;ENABLE_PROFILE"
+    ""
     "NAME"
     "SOURCES;HEADERS;MODULES"
     ${ARGN}
@@ -36,7 +34,7 @@ function(helios_add_example)
   set(_target "${ARG_NAME}_example")
 
   if(NOT ARG_SOURCES)
-    set(ARG_SOURCES src/main.cpp)
+    message(FATAL_ERROR "helios_add_example: SOURCES is required")
   endif()
 
   add_executable(${_target} ${ARG_HEADERS} ${ARG_SOURCES})
@@ -54,11 +52,5 @@ function(helios_add_example)
 
   if(ARG_MODULES)
     helios_link_modules(TARGET ${_target} MODULES ${ARG_MODULES})
-  endif()
-
-  if(ARG_ENABLE_PROFILE)
-    target_compile_definitions(${_target} PRIVATE
-      $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:HELIOS_ENABLE_PROFILE>
-    )
   endif()
 endfunction()

@@ -2,9 +2,11 @@
 
 #include <helios/ecs/command/entity_buffer.hpp>
 #include <helios/ecs/command/queue.hpp>
+#include <helios/ecs/component/bundle.hpp>
 #include <helios/ecs/entity/entity.hpp>
 #include <helios/ecs/world.hpp>
 
+#include <memory>
 #include <memory_resource>
 
 using namespace helios::ecs;
@@ -25,9 +27,16 @@ struct Health {
   int value = 100;
 };
 
+struct MoveOnly {
+  std::unique_ptr<int> value;
+};
+
 struct Score {
   int value = 0;
 };
+
+using MotionBundle = ComponentBundle<Position, Velocity>;
+using GameplayBundle = ComponentBundle<MotionBundle, Health>;
 
 }  // namespace
 
@@ -202,6 +211,77 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     }
   }
 
+  TEST_CASE("ecs::EntityCmdBuffer::AddBundle") {
+    SUBCASE("Adds a nested bundle as one deferred command") {
+      World world;
+      const Entity entity = world.CreateEntity();
+      PmrCmdQueue queue(std::pmr::get_default_resource());
+
+      {
+        EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
+        buf.AddBundle(GameplayBundle{
+            MotionBundle{Position{1.0F, 2.0F}, Velocity{3.0F, 4.0F}},
+            Health{75}});
+
+        CHECK_EQ(buf.Size(), 1);
+      }
+
+      queue.ExecuteAll(world);
+
+      CHECK_EQ(world.ReadComponent<Position>(entity).x, doctest::Approx(1.0F));
+      CHECK_EQ(world.ReadComponent<Velocity>(entity).dx, doctest::Approx(3.0F));
+      CHECK_EQ(world.ReadComponent<Health>(entity).value, 75);
+    }
+
+    SUBCASE("Copies an lvalue bundle into deferred storage") {
+      World world;
+      const Entity entity = world.CreateEntity();
+      PmrCmdQueue queue(std::pmr::get_default_resource());
+
+      {
+        EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
+        {
+          const MotionBundle bundle{Position{5.0F, 6.0F}, Velocity{7.0F, 8.0F}};
+          buf.AddBundle(bundle);
+        }
+      }
+
+      queue.ExecuteAll(world);
+
+      CHECK_EQ(world.ReadComponent<Position>(entity).x, doctest::Approx(5.0F));
+      CHECK_EQ(world.ReadComponent<Velocity>(entity).dx, doctest::Approx(7.0F));
+    }
+
+    SUBCASE("Moves a move-only bundle into deferred storage") {
+      World world;
+      const Entity entity = world.CreateEntity();
+      PmrCmdQueue queue(std::pmr::get_default_resource());
+
+      {
+        EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
+        buf.AddBundle(
+            ComponentBundle<MoveOnly>{MoveOnly{std::make_unique<int>(42)}});
+      }
+
+      queue.ExecuteAll(world);
+
+      const auto& component = world.ReadComponent<MoveOnly>(entity);
+      CHECK_NE(component.value.get(), nullptr);
+      CHECK_EQ(*component.value, 42);
+    }
+
+    SUBCASE("Returns self for chaining") {
+      World world;
+      const Entity entity = world.CreateEntity();
+      PmrCmdQueue queue(std::pmr::get_default_resource());
+
+      EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
+      auto& ref = buf.AddBundle(MotionBundle{Position{}, Velocity{}});
+
+      CHECK_EQ(&ref, &buf);
+    }
+  }
+
   TEST_CASE("ecs::EntityCmdBuffer::TryAddComponents") {
     SUBCASE("Adds only missing components") {
       World world;
@@ -227,6 +307,39 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
 
       EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
       auto& ref = buf.TryAddComponents(Position{}, Velocity{});
+
+      CHECK_EQ(&ref, &buf);
+    }
+  }
+
+  TEST_CASE("ecs::EntityCmdBuffer::TryAddBundle") {
+    SUBCASE("Adds only missing components from bundle") {
+      World world;
+      const Entity entity = world.CreateEntity();
+      world.AddComponents(entity, Position{7.0F, 7.0F});
+      PmrCmdQueue queue(std::pmr::get_default_resource());
+
+      {
+        EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
+        buf.TryAddBundle(
+            MotionBundle{Position{0.0F, 0.0F}, Velocity{1.0F, 2.0F}});
+
+        CHECK_EQ(buf.Size(), 1);
+      }
+
+      queue.ExecuteAll(world);
+
+      CHECK_EQ(world.ReadComponent<Position>(entity).x, doctest::Approx(7.0F));
+      CHECK_EQ(world.ReadComponent<Velocity>(entity).dx, doctest::Approx(1.0F));
+    }
+
+    SUBCASE("Returns self for chaining") {
+      World world;
+      const Entity entity = world.CreateEntity();
+      PmrCmdQueue queue(std::pmr::get_default_resource());
+
+      EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
+      auto& ref = buf.TryAddBundle(MotionBundle{Position{}, Velocity{}});
 
       CHECK_EQ(&ref, &buf);
     }
@@ -263,6 +376,40 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
     }
   }
 
+  TEST_CASE("ecs::EntityCmdBuffer::RemoveBundle") {
+    SUBCASE("Removes a nested bundle as one deferred command") {
+      World world;
+      const Entity entity = world.CreateEntity();
+      world.AddComponents(entity, Position{}, Velocity{}, Health{});
+      PmrCmdQueue queue(std::pmr::get_default_resource());
+
+      {
+        EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
+        buf.RemoveBundle<GameplayBundle>();
+
+        CHECK_EQ(buf.Size(), 1);
+      }
+
+      queue.ExecuteAll(world);
+
+      CHECK_FALSE(world.HasComponent<Position>(entity));
+      CHECK_FALSE(world.HasComponent<Velocity>(entity));
+      CHECK_FALSE(world.HasComponent<Health>(entity));
+    }
+
+    SUBCASE("Returns self for chaining") {
+      World world;
+      const Entity entity = world.CreateEntity();
+      world.AddComponents(entity, Position{}, Velocity{});
+      PmrCmdQueue queue(std::pmr::get_default_resource());
+
+      EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
+      auto& ref = buf.RemoveBundle<MotionBundle>();
+
+      CHECK_EQ(&ref, &buf);
+    }
+  }
+
   TEST_CASE("ecs::EntityCmdBuffer::TryRemoveComponents") {
     SUBCASE("Removes present components, ignores absent ones") {
       World world;
@@ -288,6 +435,38 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
 
       EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
       auto& ref = buf.TryRemoveComponents<Position, Velocity>();
+
+      CHECK_EQ(&ref, &buf);
+    }
+  }
+
+  TEST_CASE("ecs::EntityCmdBuffer::TryRemoveBundle") {
+    SUBCASE("Removes only present components represented by bundle") {
+      World world;
+      const Entity entity = world.CreateEntity();
+      world.AddComponents(entity, Position{});
+      PmrCmdQueue queue(std::pmr::get_default_resource());
+
+      {
+        EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
+        buf.TryRemoveBundle<MotionBundle>();
+
+        CHECK_EQ(buf.Size(), 1);
+      }
+
+      queue.ExecuteAll(world);
+
+      CHECK_FALSE(world.HasComponent<Position>(entity));
+      CHECK_FALSE(world.HasComponent<Velocity>(entity));
+    }
+
+    SUBCASE("Returns self for chaining") {
+      World world;
+      const Entity entity = world.CreateEntity();
+      PmrCmdQueue queue(std::pmr::get_default_resource());
+
+      EntityCmdBuffer buf(entity, queue, std::pmr::get_default_resource());
+      auto& ref = buf.TryRemoveBundle<MotionBundle>();
 
       CHECK_EQ(&ref, &buf);
     }

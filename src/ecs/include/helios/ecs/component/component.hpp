@@ -10,6 +10,19 @@
 
 namespace helios::ecs {
 
+template <typename... Ts>
+class ComponentBundle;
+
+namespace details {
+
+template <typename T>
+struct IsComponentBundle : std::false_type {};
+
+template <typename... Ts>
+struct IsComponentBundle<ComponentBundle<Ts...>> : std::true_type {};
+
+}  // namespace details
+
 /// @brief Type index for components.
 using ComponentTypeIndex = utils::TypeIndex;
 
@@ -29,6 +42,7 @@ enum class ComponentStorageType : uint8_t {
  */
 template <typename T>
 concept ComponentTrait =
+    !details::IsComponentBundle<std::remove_cvref_t<T>>::value &&
     std::destructible<T> &&
     (std::move_constructible<T> || std::copy_constructible<T>) &&
     !std::is_polymorphic_v<std::remove_cvref_t<T>> &&

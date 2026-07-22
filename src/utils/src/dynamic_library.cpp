@@ -28,11 +28,11 @@ namespace helios::utils {
 auto DynamicLibrary::Load(const std::filesystem::path& path)
     -> std::expected<void, DynamicLibraryError> {
   if (Loaded()) {
-    return std::unexpected(DynamicLibraryError::AlreadyLoaded);
+    return std::unexpected(DynamicLibraryError::kAlreadyLoaded);
   }
 
   if (!std::filesystem::exists(path)) {
-    return std::unexpected(DynamicLibraryError::FileNotFound);
+    return std::unexpected(DynamicLibraryError::kFileNotFound);
   }
 
 #ifdef HELIOS_PLATFORM_WINDOWS
@@ -45,7 +45,7 @@ auto DynamicLibrary::Load(const std::filesystem::path& path)
   if (handle_ == kInvalidHandle) {
     // Note: Log macros not available here due to circular dependency with log
     // module
-    return std::unexpected(DynamicLibraryError::LoadFailed);
+    return std::unexpected(DynamicLibraryError::kLoadFailed);
   }
 
   path_ = path;
@@ -54,7 +54,7 @@ auto DynamicLibrary::Load(const std::filesystem::path& path)
 
 auto DynamicLibrary::Unload() -> std::expected<void, DynamicLibraryError> {
   if (!Loaded()) {
-    return std::unexpected(DynamicLibraryError::NotLoaded);
+    return std::unexpected(DynamicLibraryError::kNotLoaded);
   }
 
   bool success = false;
@@ -68,7 +68,7 @@ auto DynamicLibrary::Unload() -> std::expected<void, DynamicLibraryError> {
   if (!success) {
     // Note: Log macros not available here due to circular dependency with log
     // module
-    return std::unexpected(DynamicLibraryError::PlatformError);
+    return std::unexpected(DynamicLibraryError::kPlatformError);
   }
 
   handle_ = kInvalidHandle;
@@ -79,7 +79,7 @@ auto DynamicLibrary::Unload() -> std::expected<void, DynamicLibraryError> {
 auto DynamicLibrary::GetSymbolAddress(std::string_view name) const
     -> std::expected<void*, DynamicLibraryError> {
   if (!Loaded()) {
-    return std::unexpected(DynamicLibraryError::NotLoaded);
+    return std::unexpected(DynamicLibraryError::kNotLoaded);
   }
 
   // Need null-terminated string for platform APIs
@@ -97,7 +97,7 @@ auto DynamicLibrary::GetSymbolAddress(std::string_view name) const
   if (symbol == nullptr) {
     // Note: Log macros not available here due to circular dependency with log
     // module
-    return std::unexpected(DynamicLibraryError::SymbolNotFound);
+    return std::unexpected(DynamicLibraryError::kSymbolNotFound);
   }
 
   return symbol;

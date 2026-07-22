@@ -207,16 +207,17 @@ void Scheduler::ExtractSubApp(SubAppFrameState& state,
   state.fresh_extract_this_frame = false;
 
   switch (state.mode) {
-    case SubAppMode::kBlocking:
+    using enum SubAppMode;
+    case kBlocking:
       sub_app.WaitUntilFullyIdle();
       sub_app.Extract(main_world);
       state.fresh_extract_this_frame = true;
       state.consecutive_extract_skips = 0;
       return;
-    case SubAppMode::kAsync:
+    case kAsync:
       sub_app.Extract(main_world, true);
       return;
-    case SubAppMode::kOverlapping:
+    case kOverlapping:
       break;
   }
 

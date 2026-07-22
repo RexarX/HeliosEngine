@@ -14,6 +14,7 @@ helios_module(
         include/helios/ecs/command/world_buffer.hpp
         include/helios/ecs/component/archetype.hpp
         include/helios/ecs/component/archetype_id.hpp
+        include/helios/ecs/component/bundle.hpp
         include/helios/ecs/component/component.hpp
         include/helios/ecs/component/manager.hpp
         include/helios/ecs/component/sparse_storage.hpp
@@ -104,6 +105,7 @@ helios_module(
         tests/command/world_buffer.cpp
         tests/component/archetype.cpp
         tests/component/archetype_id.cpp
+        tests/component/bundle.cpp
         tests/component/component.cpp
         tests/component/manager.cpp
         tests/component/sparse_storage.cpp

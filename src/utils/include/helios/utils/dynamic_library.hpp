@@ -6,20 +6,19 @@
 #include <string>
 #include <string_view>
 #include <type_traits>
+#include <utility>
 
 namespace helios::utils {
 
-/**
- * @brief Error codes for dynamic library operations.
- */
+/// @brief Error codes for dynamic library operations.
 enum class DynamicLibraryError : uint8_t {
-  FileNotFound,    ///< Library file not found
-  LoadFailed,      ///< Failed to load library
-  SymbolNotFound,  ///< Symbol not found in library
-  InvalidHandle,   ///< Invalid library handle
-  AlreadyLoaded,   ///< Library is already loaded
-  NotLoaded,       ///< Library is not loaded
-  PlatformError,   ///< Platform-specific error
+  kFileNotFound,    ///< Library file not found
+  kLoadFailed,      ///< Failed to load library
+  kSymbolNotFound,  ///< Symbol not found in library
+  kInvalidHandle,   ///< Invalid library handle
+  kAlreadyLoaded,   ///< Library is already loaded
+  kNotLoaded,       ///< Library is not loaded
+  kPlatformError,   ///< Platform-specific error
 };
 
 /**
@@ -30,19 +29,20 @@ enum class DynamicLibraryError : uint8_t {
 [[nodiscard]] constexpr std::string_view DynamicLibraryErrorToString(
     DynamicLibraryError error) noexcept {
   switch (error) {
-    case DynamicLibraryError::FileNotFound:
+    using enum DynamicLibraryError;
+    case kFileNotFound:
       return "Library file not found";
-    case DynamicLibraryError::LoadFailed:
+    case kLoadFailed:
       return "Failed to load library";
-    case DynamicLibraryError::SymbolNotFound:
+    case kSymbolNotFound:
       return "Symbol not found in library";
-    case DynamicLibraryError::InvalidHandle:
+    case kInvalidHandle:
       return "Invalid library handle";
-    case DynamicLibraryError::AlreadyLoaded:
+    case kAlreadyLoaded:
       return "Library is already loaded";
-    case DynamicLibraryError::NotLoaded:
+    case kNotLoaded:
       return "Library is not loaded";
-    case DynamicLibraryError::PlatformError:
+    case kPlatformError:
       return "Platform-specific error";
     default:
       return "Unknown error";
@@ -78,9 +78,7 @@ public:
   DynamicLibrary(const DynamicLibrary&) = delete;
   DynamicLibrary(DynamicLibrary&& other) noexcept;
 
-  /**
-   * @brief Destructor that unloads the library if loaded.
-   */
+  /// @brief Destructor that unloads the library if loaded.
   ~DynamicLibrary() noexcept;
 
   DynamicLibrary& operator=(const DynamicLibrary&) = delete;
@@ -147,7 +145,7 @@ public:
 
   /**
    * @brief Gets the native handle of the loaded library.
-   * @return Native handle, or kInvalidHandle if not loaded
+   * @return Native handle, or `kInvalidHandle` if not loaded
    */
   [[nodiscard]] HandleType Handle() const noexcept { return handle_; }
 
@@ -196,7 +194,7 @@ inline DynamicLibrary::DynamicLibrary(DynamicLibrary&& other) noexcept
 
 inline DynamicLibrary::~DynamicLibrary() noexcept {
   if (Loaded()) {
-    auto _ = Unload();
+    std::ignore = Unload();
   }
 }
 
@@ -225,7 +223,7 @@ inline auto FromPath(const std::filesystem::path& path)
 inline auto DynamicLibrary::Reload()
     -> std::expected<void, DynamicLibraryError> {
   if (!Loaded()) {
-    return std::unexpected(DynamicLibraryError::NotLoaded);
+    return std::unexpected(DynamicLibraryError::kNotLoaded);
   }
 
   const auto saved_path = path_;

@@ -35,7 +35,7 @@ struct ExitSystem {
   ExitCode code = ExitCode::kSuccess;
 
   void operator()(MessageWriter<AppExit> exits) const {
-    exits.Write(AppExit{.code = code});
+    exits.Write(AppExit::From(code));
   }
 };
 
@@ -153,6 +153,14 @@ private:
 
 struct SecondTestPlugin final : public Plugin {
   void Build(App& /*app*/) override {}
+};
+
+struct NamedTestPluginGroup final : public PluginGroup {
+  NamedTestPluginGroup() : PluginGroup(NamedTestPlugin{}) {}
+};
+
+struct SecondTestPluginGroup final : public PluginGroup {
+  SecondTestPluginGroup() : PluginGroup(SecondTestPlugin{}) {}
 };
 
 struct CustomSchedule {
@@ -467,6 +475,50 @@ TEST_SUITE("helios::app::App") {
     }
   }
 
+  TEST_CASE("app::App::AddPlugin") {
+    SUBCASE("Single plugin registers and runs Build on Initialize") {
+      App app;
+      constexpr auto type_id = PluginTypeId::From<NamedTestPlugin>();
+
+      app.AddPlugin(type_id, std::make_unique<NamedTestPlugin>());
+      CHECK(app.HasPlugins<NamedTestPlugin>());
+      app.Initialize();
+
+      CHECK_EQ(app.GetWorld().ReadResource<CounterResource>().value, 5);
+    }
+
+    SUBCASE("Safe to add same plugin multiple times") {
+      App app;
+      constexpr auto type_id = PluginTypeId::From<NamedTestPlugin>();
+
+      app.AddPlugin(type_id, std::make_unique<NamedTestPlugin>());
+      app.AddPlugin(type_id, std::make_unique<NamedTestPlugin>());
+
+      CHECK(app.HasPlugins<NamedTestPlugin>());
+    }
+  }
+
+  TEST_CASE("app::App::EmplacePlugin") {
+    SUBCASE("Single plugin registers and runs Build on Initialize") {
+      App app;
+
+      app.EmplacePlugin<NamedTestPlugin>();
+      CHECK(app.HasPlugins<NamedTestPlugin>());
+      app.Initialize();
+
+      CHECK_EQ(app.GetWorld().ReadResource<CounterResource>().value, 5);
+    }
+
+    SUBCASE("Safe to emplace same plugin multiple times") {
+      App app;
+
+      app.EmplacePlugin<NamedTestPlugin>();
+      app.EmplacePlugin<NamedTestPlugin>();
+
+      CHECK(app.HasPlugins<NamedTestPlugin>());
+    }
+  }
+
   TEST_CASE("app::App::AddPlugins") {
     SUBCASE("Single plugin registers and runs Build on Initialize") {
       App app;
@@ -482,6 +534,39 @@ TEST_SUITE("helios::app::App") {
       const auto has = app.HasPlugins<NamedTestPlugin, SecondTestPlugin>();
       CHECK(has[0]);
       CHECK(has[1]);
+    }
+
+    SUBCASE("Safe to add same plugin multiple times") {
+      App app;
+      app.AddPlugins(NamedTestPlugin{});
+      app.AddPlugins(NamedTestPlugin{});
+      CHECK(app.HasPlugins<NamedTestPlugin>());
+    }
+  }
+
+  TEST_CASE("app::App::AddPluginGroups") {
+    SUBCASE("Single plugin group registers contained plugin") {
+      App app;
+      app.AddPluginGroups(NamedTestPluginGroup{});
+
+      CHECK(app.HasPlugins<NamedTestPlugin>());
+    }
+
+    SUBCASE("Multiple plugin groups register independently") {
+      App app;
+      app.AddPluginGroups(NamedTestPluginGroup{}, SecondTestPluginGroup{});
+      const auto has = app.HasPlugins<NamedTestPlugin, SecondTestPlugin>();
+
+      CHECK(has[0]);
+      CHECK(has[1]);
+    }
+
+    SUBCASE("Group-added plugin runs Build on Initialize") {
+      App app;
+      app.AddPluginGroups(NamedTestPluginGroup{});
+      app.Initialize();
+
+      CHECK_EQ(app.GetWorld().ReadResource<CounterResource>().value, 5);
     }
   }
 

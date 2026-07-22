@@ -3,6 +3,7 @@
 #include <helios/app/details/profile.hpp>
 #include <helios/app/dynamic_plugin.hpp>
 #include <helios/app/plugin.hpp>
+#include <helios/app/plugin_group.hpp>
 #include <helios/app/scheduler.hpp>
 #include <helios/app/schedules.hpp>
 #include <helios/app/sub_app.hpp>
@@ -28,6 +29,7 @@
 #include <memory>
 #include <mutex>
 #include <optional>
+#include <ranges>
 #include <string_view>
 
 #if defined(HELIOS_APP_ENABLE_PROFILE) && \
@@ -56,13 +58,38 @@ enum class ExitCode : uint8_t {
  * points within a frame.
  */
 struct AppExit {
-  static constexpr std::string_view kName = "AppExit";
+  static constexpr std::string_view kName = "helios::app::AppExit";
   static constexpr ecs::MessageClearPolicy kClearPolicy =
       ecs::MessageClearPolicy::kManual;
   static constexpr bool kAsync = false;
   static constexpr bool kConsumable = false;
 
   ExitCode code = ExitCode::kSuccess;
+
+  /**
+   * @brief Creates an `AppExit` message from an `ExitCode`.
+   * @param exit_code The exit code to use
+   * @return An `AppExit` message with the specified exit code
+   */
+  [[nodiscard]] static constexpr AppExit From(ExitCode exit_code) noexcept {
+    return AppExit{.code = exit_code};
+  }
+
+  /**
+   * @brief Creates an `AppExit` message indicating success.
+   * @return An `AppExit` message with a success exit code
+   */
+  [[nodiscard]] static constexpr AppExit Success() noexcept {
+    return AppExit::From(ExitCode::kSuccess);
+  }
+
+  /**
+   * @brief Creates an `AppExit` message indicating failure.
+   * @return An `AppExit` message with a failure exit code
+   */
+  [[nodiscard]] static constexpr AppExit Failure() noexcept {
+    return AppExit::From(ExitCode::kFailure);
+  }
 };
 
 /**
@@ -123,7 +150,7 @@ public:
 
   /**
    * @brief Updates the application and its subsystems.
-   * @details Calls Update on the main sub-app and all registered sub-apps.
+   * @details Calls Update on the main sub-app and all added sub-apps.
    * Spawns async tasks as needed.
    * @note Not thread-safe.
    * @warning Triggers assertion if app is not initialized.
@@ -149,49 +176,87 @@ public:
   }
 
   /**
-   * @brief Adds plugin instance, if plugin of the same type is not already
-   * registered.
+   * @brief Adds a plugin instance, if a plugin of the same type is not already
+   * added.
    * @note Not thread-safe.
    * @warning Triggers assertion if app is initialized or running.
-   * @tparam Plugin Plugin type
+   * @param id Plugin type id
    * @param plugin Plugin instance to add
    * @return Reference to app for method chaining
    */
-  template <PluginTrait Plugin>
-  auto AddPlugins(this auto&& self, Plugin&& plugin)
-      -> decltype(std::forward<decltype(self)>(self));
-
-  /**
-   * @brief Adds multiple plugin instances, if plugins of the same types are not
-   * already registered.
-   * @note Not thread-safe.
-   * @warning Triggers assertion if app is initialized or running.
-   * @tparam Plugins Plugin types
-   * @param plugins Plugin instances to add
-   * @return Reference to app for method chaining
-   */
-  template <PluginTrait... Plugins>
-    requires utils::UniqueTypes<Plugins...> && (sizeof...(Plugins) > 1)
-  auto AddPlugins(this auto&& self, Plugins&&... plugins)
+  auto AddPlugin(this auto&& self, PluginTypeId id,
+                 std::unique_ptr<Plugin> plugin)
       -> decltype(std::forward<decltype(self)>(self));
 
   /**
    * @brief Adds one plugin, constructing it in-place with the given arguments
-   * if a plugin of the same type is not already registered.
+   * if a plugin of the same type is not already added.
    * @note Not thread-safe.
    * @warning Triggers assertion if app is initialized or running.
-   * @tparam Plugin Plugin type
+   * @tparam T Plugin type
    * @param args Arguments to construct the plugin
    * @return Reference to app for method chaining
    */
-  template <PluginTrait Plugin, typename... Args>
-    requires std::constructible_from<Plugin, Args...>
+  template <PluginTrait T, typename... Args>
+    requires std::constructible_from<T, Args...>
   auto EmplacePlugin(this auto&& self, Args&&... args)
       -> decltype(std::forward<decltype(self)>(self));
 
   /**
+   * @brief Adds plugin instance, if plugin of the same type is not already
+   * added.
+   * @note Not thread-safe.
+   * @warning Triggers assertion if app is initialized or running.
+   * @tparam T Plugin type
+   * @param plugin Plugin instance to add
+   * @return Reference to app for method chaining
+   */
+  template <PluginTrait T>
+  auto AddPlugins(this auto&& self, T&& plugin)
+      -> decltype(std::forward<decltype(self)>(self));
+
+  /**
+   * @brief Adds multiple plugin instances, if plugins of the same types are not
+   * already added.
+   * @note Not thread-safe.
+   * @warning Triggers assertion if app is initialized or running.
+   * @tparam Ts Plugin types
+   * @param plugins Plugin instances to add
+   * @return Reference to app for method chaining
+   */
+  template <PluginTrait... Ts>
+    requires utils::UniqueTypes<Ts...> && (sizeof...(Ts) > 1)
+  auto AddPlugins(this auto&& self, Ts&&... plugins)
+      -> decltype(std::forward<decltype(self)>(self));
+
+  /**
+   * @brief Adds a plugin group and registers the plugins it builds.
+   * @note Not thread-safe.
+   * @warning Triggers assertion if app is initialized or running.
+   * @tparam T Plugin group type
+   * @param plugin_group Plugin group instance to build
+   * @return Reference to app for method chaining
+   */
+  template <PluginGroupTrait T>
+  auto AddPluginGroups(this auto&& self, T&& plugin_group)
+      -> decltype(std::forward<decltype(self)>(self));
+
+  /**
+   * @brief Adds multiple plugin groups and registers the plugins they build.
+   * @note Not thread-safe.
+   * @warning Triggers assertion if app is initialized or running.
+   * @tparam Ts Plugin group types
+   * @param plugin_groups Plugin group instances to build
+   * @return Reference to app for method chaining
+   */
+  template <PluginGroupTrait... Ts>
+    requires utils::UniqueTypes<Ts...> && (sizeof...(Ts) > 1)
+  auto AddPluginGroups(this auto&& self, Ts&&... plugin_groups)
+      -> decltype(std::forward<decltype(self)>(self));
+
+  /**
    * @brief Adds a dynamic plugin instance, if a plugin of the same type is not
-   * already registered.
+   * already added.
    * @note Not thread-safe.
    * @warning Triggers assertion if app is initialized or running.
    * @param plugin Dynamic plugin instance to add
@@ -202,7 +267,7 @@ public:
 
   /**
    * @brief Inserts a sub-app under the given label, if a sub-app with the same
-   * label is not already registered.
+   * label is not already added.
    * @note Not thread-safe.
    * @warning Triggers assertion if app is initialized or running.
    * @tparam T Sub-app label type
@@ -215,7 +280,7 @@ public:
       -> decltype(std::forward<decltype(self)>(self));
 
   /**
-   * @brief Removes a registered sub-app.
+   * @brief Removes sub-app from app.
    * @note Not thread-safe.
    * @warning Triggers assertion if app is initialized or running.
    * @tparam T Sub-app label type
@@ -424,7 +489,7 @@ public:
   /**
    * @brief Checks if the app has a plugin of the given type.
    * @note Not thread-safe.
-   * @return True if the plugin is registered, false otherwise
+   * @return True if the plugin exists, false otherwise
    */
   [[nodiscard]] bool HasPlugin(PluginTypeIndex index) const noexcept {
     return plugins_.contains(index) || dynamic_plugins_.contains(index);
@@ -433,30 +498,32 @@ public:
   /**
    * @brief Checks if the app has a plugin of the given type.
    * @note Not thread-safe.
-   * @return True if the plugin is registered, false otherwise
+   * @tparam T Plugin type
+   * @return True if the plugin exists, false otherwise
    */
-  template <PluginTrait Plugin>
+  template <PluginTrait T>
   [[nodiscard]] bool HasPlugins() const noexcept {
-    return HasPlugin(PluginTypeIndex::From<Plugin>());
+    return HasPlugin(PluginTypeIndex::From<T>());
   }
 
   /**
    * @brief Checks if the app has plugins of  given types.
    * @note Not thread-safe.
-   * @return Array of bools indicating whether each plugin is registered
+   * @tparam Ts Plugin types
+   * @return Array of bools indicating whether each plugin is exists
    */
-  template <PluginTrait... Plugins>
-    requires utils::UniqueTypes<Plugins...> && (sizeof...(Plugins) > 1)
+  template <PluginTrait... Ts>
+    requires utils::UniqueTypes<Ts...> && (sizeof...(Ts) > 1)
   [[nodiscard]] auto HasPlugins() const noexcept
-      -> std::array<bool, sizeof...(Plugins)> {
-    return {HasPlugin(PluginTypeIndex::From<Plugins>())...};
+      -> std::array<bool, sizeof...(Ts)> {
+    return {HasPlugin(PluginTypeIndex::From<Ts>())...};
   }
 
   /**
-   * @brief Returns whether a sub-app is registered for the label.
+   * @brief Returns whether a sub-app exists for the label.
    * @tparam T Sub-app label type
    * @param label Sub-app label to check
-   * @return True if the sub-app is registered, false otherwise
+   * @return True if the sub-app exists, false otherwise
    */
   template <SubAppTrait T>
   [[nodiscard]] bool HasSubApp(const T& label = {}) const noexcept {
@@ -560,6 +627,22 @@ public:
   }
 
   /**
+   * @brief Gets the application frame scheduler.
+   * @note Thread-safe.
+   * @return Reference to the application frame scheduler
+   */
+  [[nodiscard]] Scheduler& GetScheduler() noexcept { return scheduler_; }
+
+  /**
+   * @brief Gets the application frame scheduler (const version).
+   * @note Thread-safe.
+   * @return Const reference to the application frame scheduler
+   */
+  [[nodiscard]] const Scheduler& GetScheduler() const noexcept {
+    return scheduler_;
+  }
+
+  /**
    * @brief Gets the main sub-app's ECS world.
    * @note Thread-safe.
    * @return Reference to the main sub-app's ECS world
@@ -577,22 +660,6 @@ public:
     return main_sub_app_.GetWorld();
   }
 
-  /**
-   * @brief Gets the application frame scheduler.
-   * @note Thread-safe.
-   * @return Reference to the application frame scheduler
-   */
-  [[nodiscard]] Scheduler& GetScheduler() noexcept { return scheduler_; }
-
-  /**
-   * @brief Gets the application frame scheduler (const version).
-   * @note Thread-safe.
-   * @return Const reference to the application frame scheduler
-   */
-  [[nodiscard]] const Scheduler& GetScheduler() const noexcept {
-    return scheduler_;
-  }
-
 private:
   struct MainSubAppLabel {};
   static constexpr MainSubAppLabel kMainSubApp{};
@@ -601,12 +668,12 @@ private:
     std::unique_ptr<Plugin> plugin;
     std::string_view name;
 
-    template <PluginTrait Plugin, typename... Args>
-      requires std::constructible_from<Plugin, Args...>
+    template <PluginTrait T, typename... Args>
+      requires std::constructible_from<T, Args...>
     [[nodiscard]] static PluginStorage From(Args&&... args) {
       return PluginStorage{
-          .plugin = std::make_unique<Plugin>(std::forward<Args>(args)...),
-          .name = PluginNameOf<Plugin>(),
+          .plugin = std::make_unique<T>(std::forward<Args>(args)...),
+          .name = PluginNameOf<T>(),
       };
     }
   };
@@ -660,6 +727,7 @@ private:
   mutable std::mutex plugins_ready_mutex_;
   std::condition_variable plugins_ready_cv_;
 
+  friend class PluginGroup;
   friend class Scheduler;
 };
 
@@ -680,42 +748,79 @@ inline void App::Update() {
   HELIOS_APP_PROFILE_FRAME();
 }
 
-template <PluginTrait Plugin>
-inline auto App::AddPlugins(this auto&& self, Plugin&& plugin)
+inline auto App::AddPlugin(this auto&& self, PluginTypeId id,
+                           std::unique_ptr<Plugin> plugin)
     -> decltype(std::forward<decltype(self)>(self)) {
   HELIOS_ASSERT(!self.IsInitialized(),
                 "Cannot add plugin after app initialization!");
   HELIOS_ASSERT(!self.IsRunning(), "Cannot add plugin while app is running!");
 
-  auto storage = PluginStorage::From<std::remove_cvref_t<Plugin>>(
-      std::forward<Plugin>(plugin));
+  auto storage =
+      PluginStorage{.plugin = std::move(plugin), .name = id.QualifiedName()};
+  self.plugins_.try_emplace(id.Index(), std::move(storage));
+  return std::forward<decltype(self)>(self);
+}
+
+template <PluginTrait T>
+inline auto App::AddPlugins(this auto&& self, T&& plugin)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  HELIOS_ASSERT(!self.IsInitialized(),
+                "Cannot add plugin after app initialization!");
+  HELIOS_ASSERT(!self.IsRunning(), "Cannot add plugin while app is running!");
+
+  auto storage =
+      PluginStorage::From<std::remove_cvref_t<T>>(std::forward<T>(plugin));
   self.plugins_.try_emplace(PluginTypeIndex::From(plugin), std::move(storage));
   return std::forward<decltype(self)>(self);
 }
 
-template <PluginTrait... Plugins>
-  requires utils::UniqueTypes<Plugins...> && (sizeof...(Plugins) > 1)
-inline auto App::AddPlugins(this auto&& self, Plugins&&... plugins)
-    -> decltype(std::forward<decltype(self)>(self)) {
-  HELIOS_ASSERT(!self.IsInitialized(),
-                "Cannot add plugin after app initialization!");
-  HELIOS_ASSERT(!self.IsRunning(), "Cannot add plugin while app is running!");
-
-  (self.AddPlugins(std::forward<Plugins>(plugins)), ...);
-  return std::forward<decltype(self)>(self);
-}
-
-template <PluginTrait Plugin, typename... Args>
-  requires std::constructible_from<Plugin, Args...>
+template <PluginTrait T, typename... Args>
+  requires std::constructible_from<T, Args...>
 inline auto App::EmplacePlugin(this auto&& self, Args&&... args)
     -> decltype(std::forward<decltype(self)>(self)) {
   HELIOS_ASSERT(!self.IsInitialized(),
                 "Cannot add plugin after app initialization!");
   HELIOS_ASSERT(!self.IsRunning(), "Cannot add plugin while app is running!");
 
-  auto storage = PluginStorage::From<Plugin>(std::forward<Args>(args)...);
-  self.plugins_.try_emplace(PluginTypeIndex::From<Plugin>(),
-                            std::move(storage));
+  auto storage = PluginStorage::From<T>(std::forward<Args>(args)...);
+  self.plugins_.try_emplace(PluginTypeIndex::From<T>(), std::move(storage));
+  return std::forward<decltype(self)>(self);
+}
+
+template <PluginTrait... Ts>
+  requires utils::UniqueTypes<Ts...> && (sizeof...(Ts) > 1)
+inline auto App::AddPlugins(this auto&& self, Ts&&... plugins)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  HELIOS_ASSERT(!self.IsInitialized(),
+                "Cannot add plugin after app initialization!");
+  HELIOS_ASSERT(!self.IsRunning(), "Cannot add plugin while app is running!");
+
+  (self.AddPlugins(std::forward<Ts>(plugins)), ...);
+  return std::forward<decltype(self)>(self);
+}
+
+template <PluginGroupTrait T>
+inline auto App::AddPluginGroups(this auto&& self, T&& plugin_group)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  HELIOS_ASSERT(!self.IsInitialized(),
+                "Cannot add plugin group after app initialization!");
+  HELIOS_ASSERT(!self.IsRunning(),
+                "Cannot add plugin group while app is running!");
+
+  static_cast<PluginGroup&>(plugin_group).Build(self);
+  return std::forward<decltype(self)>(self);
+}
+
+template <PluginGroupTrait... Ts>
+  requires utils::UniqueTypes<Ts...> && (sizeof...(Ts) > 1)
+inline auto App::AddPluginGroups(this auto&& self, Ts&&... plugin_groups)
+    -> decltype(std::forward<decltype(self)>(self)) {
+  HELIOS_ASSERT(!self.IsInitialized(),
+                "Cannot add plugin groups after app initialization!");
+  HELIOS_ASSERT(!self.IsRunning(),
+                "Cannot add plugin groups while app is running!");
+
+  (self.AddPluginGroups(std::forward<Ts>(plugin_groups)), ...);
   return std::forward<decltype(self)>(self);
 }
 
@@ -867,6 +972,22 @@ inline void App::ApplySubAppLabelTraits(SubApp& sub_app, const T& label) {
   } else if constexpr (OverlappingUpdatesSubAppTrait<T>) {
     sub_app.SetAllowOverlappingUpdates(true);
     sub_app.SetMaxExtractionSkips(SubAppMaxOverlappingUpdates<T>());
+  }
+}
+
+inline void PluginGroup::Build(App& app) {
+  for (auto& storage : plugins_ | std::views::values) {
+    if (storage.disabled) [[unlikely]] {
+      continue;
+    }
+
+    HELIOS_ASSERT(storage.plugin != nullptr,
+                  "Enabled plugin storage has no plugin instance!");
+    if (storage.plugin == nullptr) [[unlikely]] {
+      continue;
+    }
+
+    app.AddPlugin(storage.id, std::move(storage.plugin));
   }
 }
 

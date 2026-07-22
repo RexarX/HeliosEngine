@@ -48,7 +48,7 @@ struct BaseVirtual {
   virtual ~BaseVirtual() = default;
 };
 
-struct DerivedVirtual : BaseVirtual {
+struct DerivedVirtual : public BaseVirtual {
   int compute(int x) override { return x + 42; }
   int compute_const(int x) const override { return x + 100; }
 };
@@ -63,9 +63,13 @@ struct Base {
   virtual ~Base() = default;
 };
 
-struct Derived : Base {
+struct Derived : public Base {
   int get_id() const override { return 2; }
 };
+
+int PolymorphicArgumentFunction(const Derived& base) {
+  return base.get_id();
+}
 
 }  // namespace
 
@@ -445,8 +449,9 @@ TEST_SUITE("helios::Delegate") {
   TEST_CASE("Delegate::Invoke: Polymorphic conversion") {
     SUBCASE("Derived to base conversion in arguments") {
       Derived derived;
-      CHECK_EQ(derived.get_id(), 2);
-      CHECK_EQ(static_cast<Base&>(derived).get_id(), 2);
+      auto delegate =
+          Delegate<int(const Base&)>::From<&PolymorphicArgumentFunction>();
+      CHECK_EQ(delegate.Invoke(derived), 2);
     }
   }
 

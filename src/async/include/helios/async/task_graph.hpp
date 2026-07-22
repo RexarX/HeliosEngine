@@ -103,7 +103,7 @@ public:
    * @tparam R Range type containing Task objects
    * @param tasks Range of tasks to linearize (first->second->third->...)
    */
-  template <std::ranges::range R>
+  template <std::ranges::input_range R>
     requires std::same_as<std::ranges::range_value_t<R>, Task>
   void Linearize(const R& tasks);
 
@@ -115,7 +115,7 @@ public:
    * @param callable Function to apply to each element
    * @return Task handle for the parallel operation
    */
-  template <std::ranges::range R, typename C>
+  template <std::ranges::input_range R, typename C>
     requires std::invocable<C, std::ranges::range_reference_t<R>>
   Task ForEach(const R& range, C&& callable) {
     return Task(taskflow_.for_each(std::ranges::begin(range),
@@ -152,7 +152,7 @@ public:
    * @return Task handle for the parallel operation
    */
   template <
-      std::ranges::range InputRange, std::ranges::range OutputRange,
+      std::ranges::input_range InputRange, std::ranges::input_range OutputRange,
       std::invocable<std::ranges::range_reference_t<InputRange>> TransformFunc>
   Task Transform(const InputRange& input_range, OutputRange& output_range,
                  TransformFunc&& transform_func) {
@@ -173,7 +173,7 @@ public:
    * @param binary_op Binary function to combine elements
    * @return Task handle for the parallel operation
    */
-  template <std::ranges::range R, typename T, typename BinaryOp>
+  template <std::ranges::input_range R, typename T, typename BinaryOp>
     requires std::invocable<BinaryOp, T, std::ranges::range_reference_t<R>>
   Task Reduce(const R& range, T& init, BinaryOp&& binary_op) {
     return Task(taskflow_.reduce(std::ranges::begin(range),
@@ -274,7 +274,7 @@ inline void TaskGraph::ForEachTask(const Visitor& visitor) const {
   });
 }
 
-template <std::ranges::range R>
+template <std::ranges::input_range R>
   requires std::same_as<std::ranges::range_value_t<R>, Task>
 inline void TaskGraph::Linearize(const R& tasks) {
   HELIOS_ASYNC_PROFILE_SCOPE_N("helios::async::TaskGraph::Linearize");

@@ -15,6 +15,7 @@
 #include <helios/ecs/world.hpp>
 #include <helios/ecs/world_view.hpp>
 
+#include <concepts>
 #include <optional>
 #include <tuple>
 
@@ -129,9 +130,11 @@ struct SystemParamTraits<std::optional<Res<T>>> {
 // ---------------------------------------------------------------------------
 
 template <ResourceTrait T>
+  requires std::default_initializable<T>
 struct SystemParamTraits<Local<const T>> {
   static auto Make(World& /*world*/, SystemLocalData& data,
                    const AccessPolicy& /*policy*/) noexcept -> Local<const T> {
+    data.resource_manager.TryEmplace<T>();
     return Local<const T>(data.resource_manager.Get<T>());
   }
 
@@ -140,40 +143,12 @@ struct SystemParamTraits<Local<const T>> {
 };
 
 template <ResourceTrait T>
+  requires std::default_initializable<T>
 struct SystemParamTraits<Local<T>> {
   static auto Make(World& /*world*/, SystemLocalData& data,
                    const AccessPolicy& /*policy*/) noexcept -> Local<T> {
+    data.resource_manager.TryEmplace<T>();
     return Local<T>(data.resource_manager.Get<T>());
-  }
-
-  static constexpr void RegisterAccess(
-      AccessPolicyBuilder& /*builder*/) noexcept {}
-};
-
-template <ResourceTrait T>
-struct SystemParamTraits<std::optional<Local<const T>>> {
-  static auto Make(World& /*world*/, SystemLocalData& data,
-                   const AccessPolicy& /*policy*/) noexcept
-      -> std::optional<Local<const T>> {
-    if (const T* ptr = data.resource_manager.TryGet<T>()) {
-      return Local<const T>(*ptr);
-    }
-    return std::nullopt;
-  }
-
-  static constexpr void RegisterAccess(
-      AccessPolicyBuilder& /*builder*/) noexcept {}
-};
-
-template <ResourceTrait T>
-struct SystemParamTraits<std::optional<Local<T>>> {
-  static auto Make(World& /*world*/, SystemLocalData& data,
-                   const AccessPolicy& /*policy*/) noexcept
-      -> std::optional<Local<T>> {
-    if (T* ptr = data.resource_manager.TryGet<T>()) {
-      return Local<T>(*ptr);
-    }
-    return std::nullopt;
   }
 
   static constexpr void RegisterAccess(

@@ -11,6 +11,7 @@ Data-oriented ECS with deferred commands, double-buffered messages, archetype-ba
 | `World`                                           | Owns entities, components, resources, messages, and the global command queue. |
 | `WorldView`                                       | Read-only, thread-safe projection of a `const World&`.                        |
 | `Entity`                                          | 64-bit ID: 32-bit index + 32-bit generation.                                  |
+| `ComponentBundle<Ts...>`                          | Owning, composable group of component values for structural operations.       |
 | `Schedule`                                        | System collection with ordering, access policies, and executor selection.     |
 | `Scheduler`                                       | Groups schedules into stages; builds and runs them.                           |
 | `Commands`                                        | Deferred mutation queue for systems (`Spawn`, `Entity`, `World`).             |
@@ -283,6 +284,29 @@ Two storage models, chosen per component type:
 
 Override with `static constexpr ComponentStorageType kStorageType = ...` in the component struct.
 
+### Component Bundles
+
+`ComponentBundle<Ts...>` groups component values that are commonly added or
+removed together. A bundle can contain other bundles; nested leaves are
+flattened depth-first and left-to-right.
+
+```cpp
+#include <helios/ecs/component/bundle.hpp>
+
+using MovementBundle = helios::ecs::ComponentBundle<Position, Velocity>;
+using PlayerBundle =
+    helios::ecs::ComponentBundle<Player, MovementBundle, Health>;
+
+world.AddBundle(entity, PlayerBundle{
+    Player{}, MovementBundle{Position{}, Velocity{}}, Health{100}});
+world.RemoveBundle<MovementBundle>(entity);
+```
+
+Bundles are transfer objects rather than components: queries access their leaf
+components, and `ComponentTrait<ComponentBundle<...>>` is false. Bundle element
+types must be unqualified values, every leaf must be a component, and flattened
+leaf component types must be unique. Empty bundles are rejected.
+
 ## Queries
 
 ```cpp
@@ -291,7 +315,8 @@ auto q = world.Query<Transform&, const Mesh&, const Light*,
                      helios::ecs::With<Visible>, helios::ecs::Without<Hidden>>();
 
 q.ForEach([](Transform& t, const Mesh& mesh, const Light* light) { /* ... */ });
-q.ForEachWithEntity([](helios::ecs::Entity e, Transform& t) { /* ... */ });
+q.ForEachWithEntity([](helios::ecs::Entity e, Transform& t,
+                       const Mesh& mesh, const Light* light) { /* ... */ });
 
 // Lazy adapters: Filter, Map, Take, Skip, Enumerate, Chain, Zip, ...
 // Terminals: Collect, Fold, Find, Count, Any, All, None, GroupBy, ...
@@ -307,7 +332,7 @@ q.ForEachWithEntity([](helios::ecs::Entity e, Transform& t) { /* ... */ });
 
 ## Builtin Types
 
-- **Commands:** `DestroyEntityCmd`, `AddComponentsCmd`, `InsertResourceCmd`, `FunctionCmd`, … (`builtin_commands.hpp`)
+- **Commands:** `DestroyEntityCmd`, `AddComponentsCmd`, `AddBundleCmd`, `InsertResourceCmd`, `FunctionCmd`, … (`builtin_commands.hpp`)
 - **Messages:** `EntityAddedMsg`, `EntityDestroyedMsg`, `ComponentAddedMsg<T>`, `ResourceInsertedMsg<T>`, … (`builtin_messages.hpp`)
 
 ## Dependencies

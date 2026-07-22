@@ -28,7 +28,7 @@ struct ExitSystem {
   ExitCode code = ExitCode::kSuccess;
 
   void operator()(MessageWriter<AppExit> exits) const {
-    exits.Write(AppExit{.code = code});
+    exits.Write(AppExit::From(code));
   }
 };
 
@@ -144,7 +144,7 @@ TEST_SUITE("helios::app::RunDefaultSubApp") {
           ++counter->value;
           if (counter->value >= 3 && owner != nullptr) {
             owner->GetWorld().WriteMessages<AppExit>().Write(
-                AppExit{.code = ExitCode::kSuccess});
+                AppExit::Success());
           }
         }
       };

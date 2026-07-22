@@ -8,6 +8,7 @@
 
 #include <functional>
 #include <string>
+#include <tuple>
 #include <type_traits>
 #include <utility>
 
@@ -148,6 +149,7 @@ template <FunctorSystemTrait T>
 inline SystemStorage SystemStorage::FromParam(T&& system,
                                               SystemLocalDataOptions options) {
   using Decayed = std::remove_cvref_t<T>;
+  using ArgsTuple = details::SystemArgsTuple<Decayed>;
 
   constexpr auto name = SystemNameOf<Decayed>();
   constexpr SystemId id = SystemId::From<Decayed>();
@@ -160,9 +162,7 @@ inline SystemStorage SystemStorage::FromParam(T&& system,
                            const AccessPolicy& inner_policy) {
       inner_system(SystemParamTraits<std::remove_cvref_t<Params>>::Make(
           inner_world, inner_data, inner_policy)...);
-    }(static_cast<typename details::MemberFnArgs<
-          decltype(&Decayed::operator())>::ArgsTuple*>(nullptr),
-      system, world, local, policy_);
+    }(static_cast<ArgsTuple*>(nullptr), system, world, local, policy_);
   };
 
   return {id, std::string(name), std::move(policy), std::move(wrapped),
@@ -173,6 +173,7 @@ template <SystemTrait T>
 inline SystemStorage SystemStorage::FromParamNamed(
     std::string name, T&& system, SystemLocalDataOptions options) {
   using Decayed = std::remove_cvref_t<T>;
+  using ArgsTuple = details::SystemArgsTuple<Decayed>;
 
   SystemId id = SystemId::From(name);
   AccessPolicy policy = BuildPolicyFromSystem<Decayed>();
@@ -184,9 +185,7 @@ inline SystemStorage SystemStorage::FromParamNamed(
                            const AccessPolicy& inner_policy) {
       inner_system(SystemParamTraits<std::remove_cvref_t<Params>>::Make(
           inner_world, inner_data, inner_policy)...);
-    }(static_cast<typename details::MemberFnArgs<
-          decltype(&Decayed::operator())>::ArgsTuple*>(nullptr),
-      system, world, local, policy_);
+    }(static_cast<ArgsTuple*>(nullptr), system, world, local, policy_);
   };
 
   return {id, std::move(name), std::move(policy), std::move(wrapped), options};

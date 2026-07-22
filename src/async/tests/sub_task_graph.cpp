@@ -694,8 +694,6 @@ TEST_SUITE("helios::async::SubTaskGraph") {
       auto main_task = main_graph.EmplaceTask([&silent_executed](
                                                   SubTaskGraph& sub_graph) {
         sub_graph.SilentAsync([&silent_executed]() { silent_executed = true; });
-
-        // sub_graph.WaitForAll();  // Deadlock
         sub_graph.Join();
       });
 

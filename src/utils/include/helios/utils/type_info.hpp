@@ -25,6 +25,123 @@ namespace helios::utils {
 
 namespace details {
 
+/**
+ * @brief Extracts a template argument fragment from a compiler signature.
+ * @param function Compiler-provided signature text
+ * @param prefix Text immediately before the fragment
+ * @param suffix Text immediately after the fragment
+ * @return Extracted signature fragment
+ */
+[[nodiscard]] consteval std::string_view ExtractSignatureArgument(
+    std::string_view function, std::string_view prefix,
+    std::string_view suffix) noexcept {
+  const size_t prefix_pos = function.find(prefix);
+  const size_t end = function.rfind(suffix);
+
+  if (prefix_pos == std::string_view::npos || end == std::string_view::npos) {
+    return {};
+  }
+
+  const size_t start = prefix_pos + prefix.size();
+  if (start >= end) {
+    return {};
+  }
+
+  return function.substr(start, end - start);
+}
+
+/**
+ * @brief Removes GCC alias exposition from a signature fragment.
+ * @param name Extracted signature fragment
+ * @return Fragment before the first alias exposition
+ */
+[[nodiscard]] constexpr std::string_view StripGccAliasExposition(
+    std::string_view name) noexcept {
+#if defined(__GNUC__) && !defined(__clang__)
+  const size_t semicolon = name.find(';');
+  if (semicolon != std::string_view::npos) {
+    return name.substr(0, semicolon);
+  }
+#endif
+  return name;
+}
+
+/**
+ * @brief Extracts the unqualified name from a fully qualified name.
+ * @param full_name Fully qualified name
+ * @return Unqualified name
+ */
+[[nodiscard]] constexpr std::string_view ExtractUnqualifiedName(
+    std::string_view full_name) noexcept {
+  size_t last_separator = 0;
+
+  for (size_t i = 0; i < full_name.size(); ++i) {
+    if (full_name[i] == ':' && i + 1 < full_name.size() &&
+        full_name[i + 1] == ':') {
+      last_separator = i + 2;
+      ++i;
+    }
+  }
+
+  if (last_separator < full_name.size()) {
+    return full_name.substr(last_separator);
+  }
+
+  return full_name;
+}
+
+/**
+ * @brief Strips compiler-specific function decorations from a function name.
+ * @param name Compiler-provided function name fragment
+ * @return Qualified function name without return type, address marker, or args
+ */
+[[nodiscard]] constexpr std::string_view StripFunctionNameDecorations(
+    std::string_view name) noexcept {
+  if (!name.empty() && name.front() == '&') {
+    name.remove_prefix(1);
+  }
+
+  const size_t open_paren = name.find('(');
+  if (open_paren == std::string_view::npos) {
+    return name;
+  }
+
+  const std::string_view before_args = name.substr(0, open_paren);
+
+#ifdef _MSC_VER
+  constexpr std::string_view kCdecl = " __cdecl ";
+  if (const size_t convention = before_args.rfind(kCdecl);
+      convention != std::string_view::npos) {
+    return before_args.substr(convention + kCdecl.size());
+  }
+
+  constexpr std::string_view kStdcall = " __stdcall ";
+  if (const size_t convention = before_args.rfind(kStdcall);
+      convention != std::string_view::npos) {
+    return before_args.substr(convention + kStdcall.size());
+  }
+
+  constexpr std::string_view kFastcall = " __fastcall ";
+  if (const size_t convention = before_args.rfind(kFastcall);
+      convention != std::string_view::npos) {
+    return before_args.substr(convention + kFastcall.size());
+  }
+
+  constexpr std::string_view kVectorcall = " __vectorcall ";
+  if (const size_t convention = before_args.rfind(kVectorcall);
+      convention != std::string_view::npos) {
+    return before_args.substr(convention + kVectorcall.size());
+  }
+#endif
+
+  if (const size_t space = before_args.rfind(' ');
+      space != std::string_view::npos) {
+    return before_args.substr(space + 1);
+  }
+
+  return before_args;
+}
+
 #if HELIOS_HAS_REFLECTION
 
 // C++26 reflection path
@@ -49,6 +166,17 @@ template <typename T>
 template <typename T>
 [[nodiscard]] consteval std::string_view GetUnqualifiedTypeName() noexcept {
   return std::meta::identifier_of(^^T);
+}
+
+/**
+ * @brief Retrieves the fully qualified name of a function via C++26 reflection.
+ * @tparam Fn Function pointer value to retrieve the name for
+ * @return The fully qualified function name
+ */
+template <auto Fn>
+[[nodiscard]] consteval std::string_view GetFullFunctionName() noexcept {
+  return StripFunctionNameDecorations(
+      std::meta::display_string_of(std::meta::reflect_value(Fn)));
 }
 
 #else  // fallback: compiler-signature scraping
@@ -93,66 +221,36 @@ template <typename T>
 #error Unsupported compiler
 #endif
 
-  constexpr auto start = function.find(prefix) + prefix.size();
-  constexpr auto end = function.rfind(suffix);
+  return StripGccAliasExposition(
+      ExtractSignatureArgument(function, prefix, suffix));
+}
 
-  static_assert(start < end, "Compiler function signature parsing failed!");
-
-#if defined(__GNUC__) && !defined(__clang__)
-  // GCC may append alias expositions after the type parameter, e.g.:
-  //   [with T = int; std::string_view = std::basic_string_view<char>]
-  // We need to stop at the first ';' after 'start' if present.
-  constexpr auto semicolon = function.find(';', start);
-  constexpr auto actual_end =
-      (semicolon != std::string_view::npos && semicolon < end) ? semicolon
-                                                               : end;
-  return function.substr(start, actual_end - start);
+/**
+ * @brief Extracts a fully qualified function name from compiler signature text.
+ * @tparam Fn Function pointer value to extract the name for
+ * @return The extracted fully qualified function name
+ */
+template <auto Fn>
+[[nodiscard]] consteval std::string_view ExtractFunctionName() noexcept {
+#if defined(__clang__)
+  constexpr auto prefix = std::string_view{"[Fn = "};
+  constexpr auto suffix = std::string_view{"]"};
+  constexpr auto function = std::string_view{__PRETTY_FUNCTION__};
+#elif defined(__GNUC__)
+  constexpr auto prefix = std::string_view{"with auto Fn = "};
+  constexpr auto suffix = std::string_view{"]"};
+  constexpr auto function = std::string_view{__PRETTY_FUNCTION__};
+#elif defined(_MSC_VER)
+  constexpr auto prefix = std::string_view{"ExtractFunctionName<"};
+  constexpr auto suffix = std::string_view{">(void)"};
+  constexpr auto function = std::string_view{__FUNCSIG__};
 #else
-  return function.substr(start, end - start);
+#error Unsupported compiler
 #endif
-}
 
-/**
- * @brief Counts the number of qualifiers (namespaces and class scopes) in a
- * fully qualified type name.
- * @param full_name The fully qualified type name to analyze
- * @return The number of qualifiers in the type name
- */
-[[nodiscard]] consteval size_t CountQualifiers(
-    std::string_view full_name) noexcept {
-  size_t count = 0;
-  for (size_t i = 0; i < full_name.size(); ++i) {
-    if (full_name[i] == ':' && i + 1 < full_name.size() &&
-        full_name[i + 1] == ':') {
-      ++count;
-      ++i;
-    }
-  }
-  return count;
-}
-
-/**
- * @brief Extracts the unqualified type name from a fully qualified type name.
- * @param full_name The fully qualified type name to extract from
- * @return The unqualified type name
- */
-[[nodiscard]] constexpr std::string_view ExtractUnqualifiedName(
-    std::string_view full_name) noexcept {
-  size_t last_separator = 0;
-
-  for (size_t i = 0; i < full_name.size(); ++i) {
-    if (full_name[i] == ':' && i + 1 < full_name.size() &&
-        full_name[i + 1] == ':') {
-      last_separator = i + 2;
-      ++i;
-    }
-  }
-
-  if (last_separator < full_name.size()) {
-    return full_name.substr(last_separator);
-  }
-
-  return full_name;
+  constexpr auto raw = StripGccAliasExposition(
+      ExtractSignatureArgument(function, prefix, suffix));
+  return StripFunctionNameDecorations(raw);
 }
 
 template <typename T>
@@ -187,6 +285,16 @@ template <typename T>
 template <typename T>
 [[nodiscard]] constexpr std::string_view GetUnqualifiedTypeName() noexcept {
   return ExtractUnqualifiedName(GetFullTypeName<T>());
+}
+
+/**
+ * @brief Retrieves the fully qualified function name for `Fn`.
+ * @tparam Fn Function pointer value to retrieve the name for
+ * @return The fully qualified function name
+ */
+template <auto Fn>
+[[nodiscard]] constexpr std::string_view GetFullFunctionName() noexcept {
+  return ExtractFunctionName<Fn>();
 }
 
 #endif  // HELIOS_HAS_REFLECTION
@@ -502,6 +610,26 @@ template <typename T>
 [[nodiscard]] constexpr std::string_view QualifiedTypeNameOf(
     const T& /*instance*/) noexcept {
   return details::GetFullTypeName<std::remove_cvref_t<T>>();
+}
+
+/**
+ * @brief Retrieves the unqualified function name of `Fn`.
+ * @tparam Fn Function pointer value to retrieve the name for
+ * @return Unqualified function name
+ */
+template <auto Fn>
+[[nodiscard]] constexpr std::string_view FunctionNameOf() noexcept {
+  return details::ExtractUnqualifiedName(details::GetFullFunctionName<Fn>());
+}
+
+/**
+ * @brief Retrieves the fully qualified function name of `Fn`.
+ * @tparam Fn Function pointer value to retrieve the name for
+ * @return Fully qualified function name
+ */
+template <auto Fn>
+[[nodiscard]] constexpr std::string_view QualifiedFunctionNameOf() noexcept {
+  return details::GetFullFunctionName<Fn>();
 }
 
 }  // namespace helios::utils

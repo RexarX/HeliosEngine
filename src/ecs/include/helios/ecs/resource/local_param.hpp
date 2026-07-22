@@ -1,11 +1,10 @@
 #pragma once
 
-#include <helios/assert.hpp>
-#include <helios/ecs/resource/manager.hpp>
 #include <helios/ecs/resource/resource.hpp>
 
 #include <concepts>
 #include <functional>
+#include <type_traits>
 #include <utility>
 
 namespace helios::ecs {
@@ -18,16 +17,14 @@ namespace helios::ecs {
  */
 template <ResourceTrait T>
 class Local {
-private:
-  using DecayedT = std::remove_const_t<T>;
-
 public:
+  using DecayedT = std::remove_cvref_t<T>;
+
   /**
    * @brief Constructs a local resource.
-   * @param resources Resource manager
+   * @param resource Resource value
    */
-  explicit constexpr Local(ResourceManager& resources) noexcept
-      : resources_(resources) {}
+  explicit constexpr Local(T& resource) noexcept : resource_(resource) {}
   constexpr Local(const Local&) noexcept = default;
   constexpr Local(Local&&) noexcept = default;
   constexpr ~Local() noexcept = default;
@@ -36,57 +33,36 @@ public:
   constexpr Local& operator=(Local&&) noexcept = default;
 
   /**
-   * @brief Inserts a local resource.
-   * @details Replaces existing resource if present.
+   * @brief Assigns a new value to the local resource.
    * @tparam U Resource type
    * @param value Resource value
+   * @return Reference to the assigned resource
    */
   template <ResourceTrait U>
     requires std::same_as<DecayedT, std::remove_cvref_t<U>> &&
-             (!std::is_const_v<T>)
-  void Insert(U&& value) const {
-    return resources_.get().Insert(std::forward<U>(value));
+             std::is_assignable_v<T&, U> && (!std::is_const_v<T>)
+  constexpr T& operator=(U&& value) const
+      noexcept(std::is_nothrow_assignable_v<T&, U>) {
+    resource_.get() = std::forward<U>(value);
+    return resource_.get();
   }
 
-  /**
-   * @brief Emplaces a local resource.
-   * @details Replaces existing resource if present.
-   * @tparam Args Resource constructor arguments
-   * @param args Resource constructor arguments
-   */
-  template <typename... Args>
-    requires std::constructible_from<DecayedT, Args...> && (!std::is_const_v<T>)
-  void Emplace(Args&&... args) const {
-    return resources_.get().template Emplace<DecayedT>(
-        std::forward<Args>(args)...);
+  [[nodiscard]] constexpr T& operator*() const noexcept {
+    return resource_.get();
   }
 
-  [[nodiscard]] T& operator*() const noexcept {
-    return resources_.get().template Get<DecayedT>();
-  }
-
-  [[nodiscard]] T* operator->() const noexcept {
-    return &resources_.get().template Get<DecayedT>();
+  [[nodiscard]] constexpr T* operator->() const noexcept {
+    return &resource_.get();
   }
 
   /**
    * @brief Gets the local resource.
    * @return Reference to the local resource
    */
-  [[nodiscard]] T& Get() const noexcept {
-    return resources_.get().template Get<DecayedT>();
-  }
-
-  /**
-   * @brief Gets the local resource manager.
-   * @return Reference to the local resource manager
-   */
-  [[nodiscard]] constexpr ResourceManager& Resources() const noexcept {
-    return resources_.get();
-  }
+  [[nodiscard]] constexpr T& Get() const noexcept { return resource_.get(); }
 
 private:
-  std::reference_wrapper<ResourceManager> resources_;
+  std::reference_wrapper<T> resource_;
 };
 
 }  // namespace helios::ecs

@@ -32,9 +32,7 @@ template <SystemTrait T>
 [[nodiscard]] constexpr AccessPolicy BuildPolicyFromSystem() {
   return []<typename... Args>(std::tuple<Args...>*) {
     return BuildPolicyFromParams<Args...>();
-  }(static_cast<typename details::MemberFnArgs<
-             decltype(&std::remove_cvref_t<T>::operator())>::ArgsTuple*>(
-             nullptr));
+  }(static_cast<details::SystemArgsTuple<T>*>(nullptr));
 }
 
 }  // namespace helios::ecs

@@ -10,7 +10,7 @@ helios_dependency(
         pkg_config doctest
 
     CPM_REPOSITORY doctest/doctest
-    CPM_GIT_TAG v2.4.11
+    CPM_GIT_TAG v2.5.3
     CPM_OPTIONS
         "DOCTEST_WITH_TESTS OFF"
         "DOCTEST_WITH_MAIN_IN_STATIC_LIB OFF"

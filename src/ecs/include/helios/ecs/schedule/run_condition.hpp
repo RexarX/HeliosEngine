@@ -8,6 +8,7 @@
 
 #include <functional>
 #include <string>
+#include <tuple>
 #include <type_traits>
 
 namespace helios::ecs {
@@ -100,8 +101,7 @@ inline auto RunConditionStorage::FromParam(T&& instance,
                                            SystemLocalDataOptions options)
     -> RunConditionStorage {
   using Decayed = std::remove_cvref_t<T>;
-  using ArgsTuple =
-      typename details::MemberFnArgs<decltype(&Decayed::operator())>::ArgsTuple;
+  using ArgsTuple = details::SystemArgsTuple<Decayed>;
 
   constexpr auto cond_name = SystemNameOf<Decayed>();
   AccessPolicy policy = BuildPolicyFromSystem<Decayed>();
@@ -126,8 +126,7 @@ inline auto RunConditionStorage::FromParamNamed(std::string name, T&& instance,
                                                 SystemLocalDataOptions options)
     -> RunConditionStorage {
   using Decayed = std::remove_cvref_t<T>;
-  using ArgsTuple =
-      typename details::MemberFnArgs<decltype(&Decayed::operator())>::ArgsTuple;
+  using ArgsTuple = details::SystemArgsTuple<Decayed>;
 
   AccessPolicy policy = BuildPolicyFromSystem<Decayed>();
 

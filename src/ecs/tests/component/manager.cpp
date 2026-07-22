@@ -1,8 +1,9 @@
 #include <doctest/doctest.h>
 
+#include <helios/ecs/component/bundle.hpp>
+#include <helios/ecs/component/component.hpp>
 #include <helios/ecs/component/manager.hpp>
 #include <helios/ecs/entity/entity.hpp>
-#include "helios/ecs/component/component.hpp"
 
 using namespace helios::ecs;
 
@@ -66,6 +67,23 @@ struct ScriptComponent {
   constexpr bool operator==(const ScriptComponent& other) const noexcept =
       default;
 };
+
+struct MoveOnlyComponent {
+  int value = 0;
+
+  explicit constexpr MoveOnlyComponent(int initial_value = 0) noexcept
+      : value(initial_value) {}
+  MoveOnlyComponent(const MoveOnlyComponent&) = delete;
+  constexpr MoveOnlyComponent(MoveOnlyComponent&&) noexcept = default;
+
+  MoveOnlyComponent& operator=(const MoveOnlyComponent&) = delete;
+  constexpr MoveOnlyComponent& operator=(MoveOnlyComponent&&) noexcept =
+      default;
+};
+
+using MotionBundle = ComponentBundle<Position, SparseVelocity>;
+using StateBundle = ComponentBundle<Health, SparseHealth>;
+using NestedBundle = ComponentBundle<MotionBundle, StateBundle>;
 
 }  // namespace
 
@@ -810,6 +828,95 @@ TEST_SUITE("helios::ecs::ComponentManager") {
     }
   }
 
+  TEST_CASE("ecs::ComponentManager::AddBundle") {
+    constexpr Entity entity{1, 0};
+
+    SUBCASE("Nested bundle is flattened in one operation") {
+      ComponentManager mgr;
+
+      mgr.InitEntity(entity);
+      mgr.AddBundle(
+          entity,
+          NestedBundle{
+              MotionBundle{Position{.x = 1.0F, .y = 2.0F},
+                           SparseVelocity{.x = 3.0F, .y = 4.0F}},
+              StateBundle{Health{.value = 80}, SparseHealth{.value = 60}}});
+
+      CHECK_EQ(mgr.Get<Position>(entity), Position{.x = 1.0F, .y = 2.0F});
+      CHECK_EQ(mgr.Get<SparseVelocity>(entity),
+               SparseVelocity{.x = 3.0F, .y = 4.0F});
+      CHECK_EQ(mgr.Get<Health>(entity), Health{.value = 80});
+      CHECK_EQ(mgr.Get<SparseHealth>(entity), SparseHealth{.value = 60});
+      CHECK_EQ(mgr.ArchetypeCount(), 2);
+    }
+
+    SUBCASE("Lvalue bundle copies its components") {
+      ComponentManager mgr;
+      const MotionBundle bundle{Position{.x = 1.0F, .y = 2.0F},
+                                SparseVelocity{.x = 3.0F, .y = 4.0F}};
+
+      mgr.InitEntity(entity);
+      mgr.AddBundle(entity, bundle);
+
+      CHECK_EQ(mgr.Get<Position>(entity), Position{.x = 1.0F, .y = 2.0F});
+      CHECK_EQ(mgr.Get<SparseVelocity>(entity),
+               SparseVelocity{.x = 3.0F, .y = 4.0F});
+    }
+
+    SUBCASE("Existing components are replaced during archetype migration") {
+      ComponentManager mgr;
+
+      mgr.InitEntity(entity);
+      mgr.Add(entity, Position{.x = 1.0F, .y = 2.0F});
+      mgr.AddBundle(entity, ComponentBundle{Position{.x = 5.0F, .y = 6.0F},
+                                            Velocity{.x = 7.0F, .y = 8.0F}});
+
+      CHECK_EQ(mgr.Get<Position>(entity), Position{.x = 5.0F, .y = 6.0F});
+      CHECK_EQ(mgr.Get<Velocity>(entity), Velocity{.x = 7.0F, .y = 8.0F});
+    }
+
+    SUBCASE("Rvalue bundle moves move-only components") {
+      ComponentManager mgr;
+
+      mgr.InitEntity(entity);
+      mgr.AddBundle(entity, ComponentBundle{MoveOnlyComponent{42}});
+
+      CHECK_EQ(mgr.Get<MoveOnlyComponent>(entity).value, 42);
+    }
+  }
+
+  TEST_CASE("ecs::ComponentManager::TryAddBundle") {
+    constexpr Entity entity{1, 0};
+
+    SUBCASE("Results follow flattened declaration order") {
+      using Bundle = ComponentBundle<SparsePosition,
+                                     ComponentBundle<Position, SparseVelocity>>;
+      ComponentManager mgr;
+
+      mgr.InitEntity(entity);
+      mgr.Add(entity, Position{});
+      const auto results = mgr.TryAddBundle(
+          entity, Bundle{SparsePosition{.x = 1.0F},
+                         ComponentBundle{Position{.x = 2.0F},
+                                         SparseVelocity{.x = 3.0F}}});
+
+      CHECK(results[0]);
+      CHECK_FALSE(results[1]);
+      CHECK(results[2]);
+      CHECK_EQ(mgr.Get<Position>(entity), Position{});
+    }
+
+    SUBCASE("Single-component bundle returns bool") {
+      ComponentManager mgr;
+
+      mgr.InitEntity(entity);
+      const bool added =
+          mgr.TryAddBundle(entity, ComponentBundle{Position{.x = 1.0F}});
+
+      CHECK(added);
+    }
+  }
+
   TEST_CASE("ecs::ComponentManager::Emplace") {
     constexpr Entity entity{1, 0};
 
@@ -975,6 +1082,66 @@ TEST_SUITE("helios::ecs::ComponentManager") {
       CHECK_FALSE(results[1]);
       CHECK_FALSE(mgr.Has<Position>(entity));
       CHECK_FALSE(mgr.Has<SparseVelocity>(entity));
+    }
+
+    SUBCASE("Sparse component before archetype component") {
+      ComponentManager mgr;
+
+      mgr.InitEntity(entity);
+      mgr.Add(entity, Position{});
+      const auto results = mgr.TryRemove<SparseVelocity, Position>(entity);
+
+      CHECK_FALSE(results[0]);
+      CHECK(results[1]);
+      CHECK_FALSE(mgr.Has<Position>(entity));
+    }
+  }
+
+  TEST_CASE("ecs::ComponentManager::RemoveBundle") {
+    constexpr Entity entity{1, 0};
+
+    SUBCASE("Nested archetype and sparse components are removed") {
+      ComponentManager mgr;
+
+      mgr.InitEntity(entity);
+      mgr.Add(entity, Position{}, SparseVelocity{}, Health{}, SparseHealth{});
+      mgr.RemoveBundle<NestedBundle>(entity);
+
+      CHECK_FALSE(mgr.Has<Position>(entity));
+      CHECK_FALSE(mgr.Has<SparseVelocity>(entity));
+      CHECK_FALSE(mgr.Has<Health>(entity));
+      CHECK_FALSE(mgr.Has<SparseHealth>(entity));
+    }
+  }
+
+  TEST_CASE("ecs::ComponentManager::TryRemoveBundle") {
+    constexpr Entity entity{1, 0};
+
+    SUBCASE("Results follow flattened declaration order") {
+      using Bundle =
+          ComponentBundle<SparsePosition,
+                          ComponentBundle<Position, SparseVelocity, Health>>;
+      ComponentManager mgr;
+
+      mgr.InitEntity(entity);
+      mgr.Add(entity, Position{}, SparseVelocity{});
+      const auto results = mgr.TryRemoveBundle<Bundle>(entity);
+
+      CHECK_FALSE(results[0]);
+      CHECK(results[1]);
+      CHECK(results[2]);
+      CHECK_FALSE(results[3]);
+    }
+
+    SUBCASE("Single-component bundle returns bool") {
+      ComponentManager mgr;
+
+      mgr.InitEntity(entity);
+      mgr.Add(entity, Position{});
+      const bool removed =
+          mgr.TryRemoveBundle<ComponentBundle<Position>>(entity);
+
+      CHECK(removed);
     }
   }
 

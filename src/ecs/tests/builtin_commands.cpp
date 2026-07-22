@@ -1,8 +1,11 @@
 #include <doctest/doctest.h>
 
 #include <helios/ecs/builtin_commands.hpp>
+#include <helios/ecs/component/bundle.hpp>
 #include <helios/ecs/world.hpp>
 
+#include <memory>
+#include <utility>
 #include <vector>
 
 using namespace helios::ecs;
@@ -23,9 +26,16 @@ struct Health {
   int value = 100;
 };
 
+struct MoveOnly {
+  std::unique_ptr<int> value;
+};
+
 struct Score {
   int value = 0;
 };
+
+using MotionBundle = ComponentBundle<Position, Velocity>;
+using GameplayBundle = ComponentBundle<MotionBundle, Health>;
 
 }  // namespace
 
@@ -223,6 +233,38 @@ TEST_SUITE("helios::ecs::AddComponentsCmd") {
   }
 }
 
+TEST_SUITE("helios::ecs::AddBundleCmd") {
+  TEST_CASE("ecs::AddBundleCmd::Execute") {
+    SUBCASE("Adds a nested component bundle to entity") {
+      World world;
+      const Entity entity = world.CreateEntity();
+
+      AddBundleCmd cmd(
+          entity, GameplayBundle{
+                      MotionBundle{Position{1.0F, 2.0F}, Velocity{3.0F, 4.0F}},
+                      Health{75}});
+      cmd.Execute(world);
+
+      CHECK_EQ(world.ReadComponent<Position>(entity).x, doctest::Approx(1.0F));
+      CHECK_EQ(world.ReadComponent<Velocity>(entity).dx, doctest::Approx(3.0F));
+      CHECK_EQ(world.ReadComponent<Health>(entity).value, 75);
+    }
+
+    SUBCASE("Owns a move-only bundle until execution") {
+      World world;
+      const Entity entity = world.CreateEntity();
+
+      AddBundleCmd cmd(entity, ComponentBundle<MoveOnly>{
+                                   MoveOnly{std::make_unique<int>(42)}});
+      cmd.Execute(world);
+
+      const auto& component = world.ReadComponent<MoveOnly>(entity);
+      CHECK_NE(component.value.get(), nullptr);
+      CHECK_EQ(*component.value, 42);
+    }
+  }
+}
+
 TEST_SUITE("helios::ecs::TryAddComponentsCmd") {
   TEST_CASE("ecs::TryAddComponentsCmd::Execute") {
     SUBCASE("Adds only missing components") {
@@ -237,6 +279,23 @@ TEST_SUITE("helios::ecs::TryAddComponentsCmd") {
       // Position was already present — must not be overwritten
       CHECK_EQ(world.ReadComponent<Position>(entity).x, doctest::Approx(7.0F));
       CHECK(world.HasComponent<Velocity>(entity));
+    }
+  }
+}
+
+TEST_SUITE("helios::ecs::TryAddBundleCmd") {
+  TEST_CASE("ecs::TryAddBundleCmd::Execute") {
+    SUBCASE("Adds only missing components from bundle") {
+      World world;
+      const Entity entity = world.CreateEntity();
+      world.AddComponents(entity, Position{7.0F, 7.0F});
+
+      TryAddBundleCmd cmd(
+          entity, MotionBundle{Position{0.0F, 0.0F}, Velocity{3.0F, 4.0F}});
+      cmd.Execute(world);
+
+      CHECK_EQ(world.ReadComponent<Position>(entity).x, doctest::Approx(7.0F));
+      CHECK_EQ(world.ReadComponent<Velocity>(entity).dx, doctest::Approx(3.0F));
     }
   }
 }
@@ -257,6 +316,23 @@ TEST_SUITE("helios::ecs::RemoveComponentsCmd") {
   }
 }
 
+TEST_SUITE("helios::ecs::RemoveBundleCmd") {
+  TEST_CASE("ecs::RemoveBundleCmd::Execute") {
+    SUBCASE("Removes every component represented by a nested bundle") {
+      World world;
+      const Entity entity = world.CreateEntity();
+      world.AddComponents(entity, Position{}, Velocity{}, Health{});
+
+      RemoveBundleCmd<GameplayBundle> cmd(entity);
+      cmd.Execute(world);
+
+      CHECK_FALSE(world.HasComponent<Position>(entity));
+      CHECK_FALSE(world.HasComponent<Velocity>(entity));
+      CHECK_FALSE(world.HasComponent<Health>(entity));
+    }
+  }
+}
+
 TEST_SUITE("helios::ecs::TryRemoveComponentsCmd") {
   TEST_CASE("ecs::TryRemoveComponentsCmd::Execute") {
     SUBCASE("Removes only present components") {
@@ -265,6 +341,22 @@ TEST_SUITE("helios::ecs::TryRemoveComponentsCmd") {
       world.AddComponents(entity, Position{});
 
       TryRemoveComponentsCmd<Position, Velocity> cmd(entity);
+      cmd.Execute(world);
+
+      CHECK_FALSE(world.HasComponent<Position>(entity));
+      CHECK_FALSE(world.HasComponent<Velocity>(entity));
+    }
+  }
+}
+
+TEST_SUITE("helios::ecs::TryRemoveBundleCmd") {
+  TEST_CASE("ecs::TryRemoveBundleCmd::Execute") {
+    SUBCASE("Removes only present components represented by bundle") {
+      World world;
+      const Entity entity = world.CreateEntity();
+      world.AddComponents(entity, Position{});
+
+      TryRemoveBundleCmd<MotionBundle> cmd(entity);
       cmd.Execute(world);
 
       CHECK_FALSE(world.HasComponent<Position>(entity));

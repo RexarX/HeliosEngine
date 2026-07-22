@@ -1,4 +1,5 @@
 helios_add_example(
     NAME simple
-    MODULES app log
+    SOURCES simple.cpp
+    MODULES app ecs log
 )
