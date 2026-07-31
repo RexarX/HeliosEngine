@@ -1,5 +1,7 @@
 var NAVTREEINDEX30 =
 {
+"namespacehelios_1_1log.html#af1a1fc368da4e12ebbbcd0ba3d5bc856":[2,0,6,6,9],
+"namespacehelios_1_1log.html#af369f6c3b41ae150aa198b57020da7d9":[2,0,6,6,28],
 "namespacehelios_1_1log_1_1details.html":[2,0,6,6,0],
 "namespacehelios_1_1log_1_1details.html#a201722f711a427b79a0f2c1d1be79762":[2,0,6,6,0,0],
 "namespacehelios_1_1mem.html":[2,0,6,7],
@@ -247,7 +249,5 @@ var NAVTREEINDEX30 =
 "platform_8hpp.html#af82a8ce6d0033191eafb5eff2173159c":[5,0,2,8,0,0,0,0,0],
 "platform_8hpp_source.html":[5,0,2,8,0,0,0,0],
 "plot_8hpp.html":[5,0,2,9,0,0,0,9],
-"plot_8hpp_source.html":[5,0,2,9,0,0,0,9],
-"plugin_8hpp.html":[5,0,2,0,0,0,0,4],
-"plugin_8hpp_source.html":[5,0,2,0,0,0,0,4]
+"plot_8hpp_source.html":[5,0,2,9,0,0,0,9]
 };

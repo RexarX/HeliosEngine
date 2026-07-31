@@ -217,6 +217,8 @@ requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="el" href
 <tr class="memdesc:ab4f394cb943faf55ad19bd4173d048fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys an entity by incrementing its generation.  <br /></td></tr>
 <tr class="memitem:ae142132888fb9323c171542864b4d104" id="r_ae142132888fb9323c171542864b4d104"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ae142132888fb9323c171542864b4d104">Validate</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> entity) const noexcept</td></tr>
 <tr class="memdesc:ae142132888fb9323c171542864b4d104"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if an entity exists and is valid.  <br /></td></tr>
+<tr class="memitem:a36b3d4267f1a0dc08d4ac655803c86ff" id="r_a36b3d4267f1a0dc08d4ac655803c86ff"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a36b3d4267f1a0dc08d4ac655803c86ff">NeedsFlush</a> () const noexcept</td></tr>
+<tr class="memdesc:a36b3d4267f1a0dc08d4ac655803c86ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether reserved entities are awaiting <span class="tt"><a class="el" href="#a42e43f9934ceeddc5e1aad3a34bf4d12" title="Creates reserved entities in the metadata.">Flush()</a></span>.  <br /></td></tr>
 <tr class="memitem:a51ae6e9393bd0535ba15c332d80acbff" id="r_a51ae6e9393bd0535ba15c332d80acbff"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="#a51ae6e9393bd0535ba15c332d80acbff">Count</a> () const noexcept</td></tr>
 <tr class="memdesc:a51ae6e9393bd0535ba15c332d80acbff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the current number of living entities.  <br /></td></tr>
 <tr class="memitem:afe4a338799b29cf0a03b97190426807a" id="r_afe4a338799b29cf0a03b97190426807a"><td class="memItemLeft"><a class="el" href="classhelios_1_1ecs_1_1Entity.html#a40d8cd0e93ef835aeb26252597b23b90">Entity::GenerationType</a>&#160;</td><td class="memItemRight"><a class="el" href="#afe4a338799b29cf0a03b97190426807a">GetGeneration</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html#a3a1347d7a9307abaaccc75279f8db2de">Entity::IndexType</a> index) const noexcept</td></tr>
@@ -276,7 +278,7 @@ requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="el" href
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="entity_2manager_8hpp_source.html#l00187">187</a> of file <a class="el" href="entity_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity_2manager_8hpp_source.html#l00202">202</a> of file <a class="el" href="entity_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -303,7 +305,7 @@ requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="el" href
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="entity_2manager_8hpp_source.html#l00194">194</a> of file <a class="el" href="entity_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity_2manager_8hpp_source.html#l00209">209</a> of file <a class="el" href="entity_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -359,7 +361,7 @@ requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="el" href
 <p>Clears all entities. </p>
 <p>Destroys all entities and resets the manager state. </p><dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="entity_2manager_8hpp_source.html#l00243">243</a> of file <a class="el" href="entity_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity_2manager_8hpp_source.html#l00258">258</a> of file <a class="el" href="entity_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -390,7 +392,7 @@ requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="el" href
 <p>Returns count of entities that are currently alive. </p><dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Number of living entities </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="entity_2manager_8hpp_source.html#l00159">159</a> of file <a class="el" href="entity_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity_2manager_8hpp_source.html#l00174">174</a> of file <a class="el" href="entity_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -419,9 +421,10 @@ requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="el" href
 
 <p>Creates a new entity. </p>
 <p>Reuses dead entity slots when available, otherwise creates new ones. </p><dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if reserved entities have not been flushed (<span class="tt"><a class="el" href="#a36b3d4267f1a0dc08d4ac655803c86ff" title="Checks whether reserved entities are awaiting Flush().">NeedsFlush()</a></span>). </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Newly created entity with valid index and generation </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="entity_2manager_8hpp_source.html#l00428">428</a> of file <a class="el" href="entity_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity_2manager_8hpp_source.html#l00480">480</a> of file <a class="el" href="entity_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -457,6 +460,7 @@ requires std::output_iterator&lt;OutputIt, <a class="el" href="classhelios_1_1ec
 
 <p>Creates multiple entities at once and outputs them via an output iterator. </p>
 <p>Batch creation is more efficient than individual calls. Entities are written to the provided output iterator, avoiding internal allocations. </p><dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if reserved entities have not been flushed (<span class="tt"><a class="el" href="#a36b3d4267f1a0dc08d4ac655803c86ff" title="Checks whether reserved entities are awaiting Flush().">NeedsFlush()</a></span>). </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">OutputIt</td><td>Output iterator type that accepts <a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> values </td></tr>
@@ -478,13 +482,8 @@ requires std::output_iterator&lt;OutputIt, <a class="el" href="classhelios_1_1ec
 <div class="line"><span class="comment">// Or with pre-allocated array:</span></div>
 <div class="line">std::array&lt;Entity, 10&gt; arr;</div>
 <div class="line">manager.Create(10, arr.begin());</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Or with span output:</span></div>
-<div class="line"><a class="code hl_class" href="classhelios_1_1ecs_1_1Entity.html">Entity</a> buffer[50];</div>
-<div class="line">manager.Create(50, std::begin(buffer));</div>
-<div class="ttc" id="aclasshelios_1_1ecs_1_1Entity_html"><div class="ttname"><a href="classhelios_1_1ecs_1_1Entity.html">helios::ecs::Entity</a></div><div class="ttdoc">Unique identifier for entities with generation counter to handle recycling.</div><div class="ttdef"><b>Definition</b> <a href="entity_8hpp_source.html#l00022">entity.hpp:22</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="entity_2manager_8hpp_source.html#l00349">349</a> of file <a class="el" href="entity_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity_2manager_8hpp_source.html#l00395">395</a> of file <a class="el" href="entity_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -516,7 +515,7 @@ requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="el" href
 
 <p>Destroys an entity by incrementing its generation. </p>
 <p>Marks entity as dead and adds its index to the free list for reuse. Entities that do not exist or are already destroyed are ignored. </p><dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
-<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if any entity is invalid. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if any entity is invalid, or if reserved entities have not been flushed (<span class="tt"><a class="el" href="#a36b3d4267f1a0dc08d4ac655803c86ff" title="Checks whether reserved entities are awaiting Flush().">NeedsFlush()</a></span>). </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">R</td><td>Range type containing <a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> elements </td></tr>
@@ -530,7 +529,7 @@ requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="el" href
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="entity_2manager_8hpp_source.html#l00324">324</a> of file <a class="el" href="entity_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity_2manager_8hpp_source.html#l00365">365</a> of file <a class="el" href="entity_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -559,7 +558,7 @@ requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="el" href
 
 <p>Destroys an entity by incrementing its generation. </p>
 <p>Marks entity as dead and adds its index to the free list for reuse. Entities that do not exist or are already destroyed are ignored. </p><dl class="section note"><dt>Note</dt><dd>Not thread-safe. </dd></dl>
-<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if entity is invalid. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if entity is invalid, or if reserved entities have not been flushed (<span class="tt"><a class="el" href="#a36b3d4267f1a0dc08d4ac655803c86ff" title="Checks whether reserved entities are awaiting Flush().">NeedsFlush()</a></span>). </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">entity</td><td><a class="el" href="classhelios_1_1ecs_1_1Entity.html" title="Unique identifier for entities with generation counter to handle recycling.">Entity</a> to destroy </td></tr>
@@ -567,7 +566,7 @@ requires std::same_as&lt;std::ranges::range_value_t&lt;R&gt;, <a class="el" href
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="entity_2manager_8hpp_source.html#l00307">307</a> of file <a class="el" href="entity_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity_2manager_8hpp_source.html#l00347">347</a> of file <a class="el" href="entity_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -642,7 +641,7 @@ requires std::invocable&lt;F&amp;, <a class="el" href="classhelios_1_1ecs_1_1Ent
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="entity_2manager_8hpp_source.html#l00253">253</a> of file <a class="el" href="entity_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity_2manager_8hpp_source.html#l00268">268</a> of file <a class="el" href="entity_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -672,7 +671,38 @@ requires std::invocable&lt;F&amp;, <a class="el" href="classhelios_1_1ecs_1_1Ent
 <p>Returns current generation value for a given index (or <span class="tt">kInvalidGeneration</span> if out of range). </p>
 <dl class="section warning"><dt>Warning</dt><dd>Triggers assertion if index is invalid. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="entity_2manager_8hpp_source.html#l00421">421</a> of file <a class="el" href="entity_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity_2manager_8hpp_source.html#l00473">473</a> of file <a class="el" href="entity_2manager_8hpp_source.html">manager.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a36b3d4267f1a0dc08d4ac655803c86ff" name="a36b3d4267f1a0dc08d4ac655803c86ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36b3d4267f1a0dc08d4ac655803c86ff">&#9670;&#160;</a></span>NeedsFlush()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::ecs::EntityManager::NeedsFlush </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks whether reserved entities are awaiting <span class="tt"><a class="el" href="#a42e43f9934ceeddc5e1aad3a34bf4d12" title="Creates reserved entities in the metadata.">Flush()</a></span>. </p>
+<p>Returns true when <span class="tt"><a class="el" href="#a76b864f5698782458d93638ed8ade096" title="Reserves an entity ID that can be used immediately.">ReserveEntity()</a></span> has claimed freelist slots or new indices that have not yet been materialized by <span class="tt"><a class="el" href="#a42e43f9934ceeddc5e1aad3a34bf4d12" title="Creates reserved entities in the metadata.">Flush()</a></span>. </p><dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>True if there are reserved entities to flush </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="entity_2manager_8hpp_source.html#l00163">163</a> of file <a class="el" href="entity_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -699,7 +729,7 @@ requires std::invocable&lt;F&amp;, <a class="el" href="classhelios_1_1ecs_1_1Ent
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="entity_2manager_8hpp_source.html#l00205">205</a> of file <a class="el" href="entity_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity_2manager_8hpp_source.html#l00220">220</a> of file <a class="el" href="entity_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -726,7 +756,7 @@ requires std::invocable&lt;F&amp;, <a class="el" href="classhelios_1_1ecs_1_1Ent
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="entity_2manager_8hpp_source.html#l00222">222</a> of file <a class="el" href="entity_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity_2manager_8hpp_source.html#l00237">237</a> of file <a class="el" href="entity_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -762,7 +792,7 @@ requires std::invocable&lt;F&amp;, <a class="el" href="classhelios_1_1ecs_1_1Ent
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="entity_2manager_8hpp_source.html#l00287">287</a> of file <a class="el" href="entity_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity_2manager_8hpp_source.html#l00323">323</a> of file <a class="el" href="entity_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -790,10 +820,10 @@ requires std::invocable&lt;F&amp;, <a class="el" href="classhelios_1_1ecs_1_1Ent
 </div><div class="memdoc">
 
 <p>Reserves an entity ID that can be used immediately. </p>
-<p>The actual entity creation is deferred until <span class="tt"><a class="el" href="#a42e43f9934ceeddc5e1aad3a34bf4d12" title="Creates reserved entities in the metadata.">Flush()</a></span> is called. </p><dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
+<p>Prefers recycled indices from the free list (with their current generation), otherwise allocates a new index with generation <span class="tt">1</span>. The actual metadata materialization is deferred until <span class="tt"><a class="el" href="#a42e43f9934ceeddc5e1aad3a34bf4d12" title="Creates reserved entities in the metadata.">Flush()</a></span> is called. </p><dl class="section note"><dt>Note</dt><dd>Thread-safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Reserved entity with valid index and generation </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="entity_2manager_8hpp_source.html#l00294">294</a> of file <a class="el" href="entity_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity_2manager_8hpp_source.html#l00330">330</a> of file <a class="el" href="entity_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>
@@ -830,7 +860,7 @@ requires std::invocable&lt;F&amp;, <a class="el" href="classhelios_1_1ecs_1_1Ent
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if entity exists and is valid, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="entity_2manager_8hpp_source.html#l00410">410</a> of file <a class="el" href="entity_2manager_8hpp_source.html">manager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="entity_2manager_8hpp_source.html#l00462">462</a> of file <a class="el" href="entity_2manager_8hpp_source.html">manager.hpp</a>.</p>
 
 </div>
 </div>

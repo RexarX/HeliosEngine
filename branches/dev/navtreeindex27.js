@@ -1,5 +1,7 @@
 var NAVTREEINDEX27 =
 {
+"concepthelios_1_1utils_1_1StrideAdapterRequirements.html":[2,0,6,9,55],
+"concepthelios_1_1utils_1_1StrideAdapterRequirements.html":[3,0,6,29],
 "concepthelios_1_1utils_1_1TakeAdapterRequirements.html":[2,0,6,9,56],
 "concepthelios_1_1utils_1_1TakeAdapterRequirements.html":[3,0,6,30],
 "concepthelios_1_1utils_1_1TakeWhileAdapterRequirements.html":[2,0,6,9,57],
@@ -247,7 +249,5 @@ var NAVTREEINDEX27 =
 "functions_vars.html":[4,3,2],
 "functions_vars.html":[4,3,2,0],
 "functions_vars_b.html":[4,3,2,1],
-"functions_vars_c.html":[4,3,2,2],
-"functions_vars_d.html":[4,3,2,3],
-"functions_vars_e.html":[4,3,2,4]
+"functions_vars_c.html":[4,3,2,2]
 };
