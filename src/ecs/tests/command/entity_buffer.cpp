@@ -157,7 +157,8 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
 
     SUBCASE("Does not assert when entity does not exist in world") {
       World world;
-      const Entity entity = world.ReserveEntity();
+      const Entity entity = world.CreateEntity();
+      world.DestroyEntity(entity);
       PmrCmdQueue queue(std::pmr::get_default_resource());
 
       {
@@ -165,7 +166,7 @@ TEST_SUITE("helios::ecs::EntityCmdBuffer") {
         buf.TryDestroy();
       }
 
-      // Reserved entity never committed — TryDestroy must be a silent no-op
+      // Already-destroyed entity — TryDestroy must be a silent no-op
       queue.ExecuteAll(world);
     }
 

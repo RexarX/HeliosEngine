@@ -72,8 +72,9 @@ public:
 
   /**
    * @brief Reserves an entity ID that can be used immediately.
-   * @details The actual entity creation is deferred until
-   * `Flush()` is called.
+   * @details Prefers recycled indices from the free list (with their current
+   * generation), otherwise allocates a new index with generation `1`. The
+   * actual metadata materialization is deferred until `Flush()` is called.
    * @note Thread-safe.
    * @return Reserved entity with valid index and generation
    */
@@ -84,6 +85,8 @@ public:
    * @details Reuses dead entity slots when available, otherwise creates new
    * ones.
    * @note Not thread-safe.
+   * @warning Triggers assertion if reserved entities have not been flushed
+   * (`NeedsFlush()`).
    * @return Newly created entity with valid index and generation
    */
   [[nodiscard]] Entity Create();
@@ -95,6 +98,8 @@ public:
    * Entities are written to the provided output iterator, avoiding internal
    * allocations.
    * @note Not thread-safe.
+   * @warning Triggers assertion if reserved entities have not been flushed
+   * (`NeedsFlush()`).
    * @tparam OutputIt Output iterator type that accepts Entity values
    * @param count Number of entities to create
    * @param out Output iterator to write created entities to
@@ -108,10 +113,6 @@ public:
    * // Or with pre-allocated array:
    * std::array<Entity, 10> arr;
    * manager.Create(10, arr.begin());
-   *
-   * // Or with span output:
-   * Entity buffer[50];
-   * manager.Create(50, std::begin(buffer));
    * @endcode
    */
   template <typename OutputIt>
@@ -123,7 +124,8 @@ public:
    * @details Marks entity as dead and adds its index to the free list for
    * reuse. Entities that do not exist or are already destroyed are ignored.
    * @note Not thread-safe.
-   * @warning Triggers assertion if entity is invalid.
+   * @warning Triggers assertion if entity is invalid, or if reserved entities
+   * have not been flushed (`NeedsFlush()`).
    * @param entity Entity to destroy
    */
   void Destroy(Entity entity);
@@ -133,7 +135,8 @@ public:
    * @details Marks entity as dead and adds its index to the free list for
    * reuse. Entities that do not exist or are already destroyed are ignored.
    * @note Not thread-safe.
-   * @warning Triggers assertion if any entity is invalid.
+   * @warning Triggers assertion if any entity is invalid, or if reserved
+   * entities have not been flushed (`NeedsFlush()`).
    * @tparam R Range type containing Entity elements
    * @param entities Entities to destroy
    */
@@ -149,6 +152,18 @@ public:
    * @return True if entity exists and is valid, false otherwise
    */
   [[nodiscard]] bool Validate(Entity entity) const noexcept;
+
+  /**
+   * @brief Checks whether reserved entities are awaiting `Flush()`.
+   * @details Returns true when `ReserveEntity()` has claimed freelist slots or
+   * new indices that have not yet been materialized by `Flush()`.
+   * @note Thread-safe.
+   * @return True if there are reserved entities to flush
+   */
+  [[nodiscard]] bool NeedsFlush() const noexcept {
+    return free_cursor_.load(std::memory_order_relaxed) !=
+           static_cast<int64_t>(free_indices_.size());
+  }
 
   /**
    * @brief Gets the current number of living entities.
@@ -180,7 +195,7 @@ private:
   /// Next available index (thread-safe)
   std::atomic<Entity::IndexType> next_index_{0};
 
-  /// Cursor for free list (negative means reserved entities)
+  /// Cursor for free list (negative means reserved brand-new entities)
   std::atomic<int64_t> free_cursor_{0};
 };
 
@@ -253,29 +268,50 @@ template <typename F>
 inline void EntityManager::Flush(const F& callback) {
   HELIOS_ECS_PROFILE_SCOPE_N("helios::ecs::EntityManager::Flush");
 
-  const auto current_next = next_index_.load(std::memory_order_relaxed);
-  if (current_next == 0) {
-    return;
-  }
+  const int64_t current_free_cursor =
+      free_cursor_.load(std::memory_order_relaxed);
 
-  // Ensure generations array covers all reserved indices.
-  if (current_next > generations_.size()) {
-    generations_.resize(current_next, Entity::kInvalidGeneration);
-  }
-
-  // Initialize any reserved-but-unflushed entries.
-  // Reserved entities get generation 1 (as returned by ReserveEntity).
-  // Entries that were already created via Create
-  // will already have a valid generation (!= kInvalidGeneration), so we skip
-  // them.
+  size_t new_free_cursor = 0;
   size_t new_entities_count = 0;
-  for (Entity::IndexType i = 0; i < current_next; ++i) {
-    if (generations_[i] == Entity::kInvalidGeneration) {
-      generations_[i] = 1;
-      ++new_entities_count;
-      callback(Entity{i, 1});
+
+  if (current_free_cursor >= 0) {
+    new_free_cursor = static_cast<size_t>(current_free_cursor);
+  } else {
+    // Negative free_cursor: allocate brand-new indices beyond next_index_.
+    const Entity::IndexType old_next =
+        next_index_.load(std::memory_order_relaxed);
+    const auto freshly_reserved =
+        static_cast<Entity::IndexType>(-current_free_cursor);
+    const Entity::IndexType new_next = old_next + freshly_reserved;
+
+    if (new_next > generations_.size()) {
+      generations_.resize(new_next, Entity::kInvalidGeneration);
     }
+
+    for (Entity::IndexType index = old_next; index < new_next; ++index) {
+      generations_[index] = 1;
+      callback(Entity{index, 1});
+    }
+
+    new_entities_count += freshly_reserved;
+    next_index_.store(new_next, std::memory_order_relaxed);
+    new_free_cursor = 0;
   }
+
+  // Reserved freelist entries live in free_indices_[new_free_cursor .. end).
+  // Their generations were already bumped in Destroy / prior lifecycle.
+  HELIOS_ASSERT(new_free_cursor <= free_indices_.size(),
+                "free_cursor is out of sync with free list!");
+  const size_t recycled_reserved = free_indices_.size() - new_free_cursor;
+  for (size_t i = new_free_cursor; i < free_indices_.size(); ++i) {
+    const Entity::IndexType index = free_indices_[i];
+    callback(Entity{index, generations_[index]});
+  }
+  new_entities_count += recycled_reserved;
+
+  free_indices_.resize(new_free_cursor);
+  free_cursor_.store(static_cast<int64_t>(new_free_cursor),
+                     std::memory_order_relaxed);
 
   if (new_entities_count > 0) {
     entity_count_.fetch_add(new_entities_count, std::memory_order_relaxed);
@@ -292,19 +328,24 @@ inline void EntityManager::Reserve(size_t count) {
 }
 
 inline Entity EntityManager::ReserveEntity() {
-  // Atomically reserve an index by incrementing the next available index.
-  // NOTE: Do NOT mutate metadata (e.g. `generations_` or `entity_count_`) here
-  // because this function is thread-safe and may be called concurrently. The
-  // actual metadata initialization for reserved indices is performed in
-  // `Flush()` which must be called from the main thread.
-  const Entity::IndexType index =
-      next_index_.fetch_add(1, std::memory_order_relaxed);
+  // Atomically claim one slot: freelist first, then brand-new indices.
+  // Do NOT mutate `generations_` or `entity_count_` here — concurrent callers
+  // only touch `free_cursor_`. Metadata is materialized in `Flush()`.
+  const int64_t n = free_cursor_.fetch_sub(1, std::memory_order_relaxed);
+  if (n > 0) {
+    const Entity::IndexType index = free_indices_[static_cast<size_t>(n - 1)];
+    return {index, generations_[index]};
+  }
 
-  // Return a placeholder entity with generation 1.
-  return {index, 1};
+  // `free_cursor_` is 0 or negative: hand out a fresh index at/after
+  // `next_index_`. As the cursor goes more negative, indices extend farther.
+  const auto index = static_cast<Entity::IndexType>(
+      static_cast<int64_t>(next_index_.load(std::memory_order_relaxed)) - n);
+  return {index, Entity::GenerationType{1}};
 }
 
 inline void EntityManager::Destroy(Entity entity) {
+  HELIOS_ASSERT(!NeedsFlush(), "Flush reserved entities before destruction!");
   HELIOS_ASSERT(entity.Valid(), "Entity '{}' is invalid!", entity);
   if (!Validate(entity)) [[unlikely]] {
     return;
@@ -322,6 +363,8 @@ inline void EntityManager::Destroy(Entity entity) {
 template <std::ranges::range R>
   requires std::same_as<std::ranges::range_value_t<R>, Entity>
 inline void EntityManager::Destroy(const R& entities) {
+  HELIOS_ASSERT(!NeedsFlush(), "Flush reserved entities before destruction!");
+
   if constexpr (std::ranges::sized_range<R>) {
     const size_t incoming = std::ranges::size(entities);
     free_indices_.reserve(free_indices_.size() + incoming);
@@ -342,11 +385,16 @@ inline void EntityManager::Destroy(const R& entities) {
     free_indices_.push_back(index);
     entity_count_.fetch_sub(1, std::memory_order_relaxed);
   }
+
+  free_cursor_.store(static_cast<int64_t>(free_indices_.size()),
+                     std::memory_order_relaxed);
 }
 
 template <typename OutputIt>
   requires std::output_iterator<OutputIt, Entity>
 inline OutputIt EntityManager::Create(size_t count, OutputIt&& out) {
+  HELIOS_ASSERT(!NeedsFlush(), "Flush reserved entities before creation!");
+
   if (count == 0) [[unlikely]] {
     return out;
   }
@@ -381,6 +429,10 @@ inline OutputIt EntityManager::Create(size_t count, OutputIt&& out) {
         ++out;
       }
       remaining -= from_free_list;
+      free_indices_.resize(
+          static_cast<size_t>(std::max(int64_t{0}, new_cursor)));
+      free_cursor_.store(static_cast<int64_t>(free_indices_.size()),
+                         std::memory_order_relaxed);
     }
   }
 
@@ -426,6 +478,8 @@ inline Entity::GenerationType EntityManager::GetGeneration(
 }
 
 inline Entity EntityManager::Create() {
+  HELIOS_ASSERT(!NeedsFlush(), "Flush reserved entities before creation!");
+
   // Reuse a free slot if available
   const int64_t cursor = free_cursor_.load(std::memory_order_relaxed);
   if (cursor > 0) {
@@ -436,6 +490,9 @@ inline Entity EntityManager::Create() {
                                              std::memory_order_relaxed)) {
       const Entity::IndexType index =
           free_indices_[static_cast<size_t>(new_cursor)];
+      free_indices_.pop_back();
+      free_cursor_.store(static_cast<int64_t>(free_indices_.size()),
+                         std::memory_order_relaxed);
       const Entity::GenerationType generation = generations_[index];
       return CreateEntityWithId(index, generation);
     }

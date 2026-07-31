@@ -174,10 +174,10 @@ TEST_SUITE("helios::ecs::TryDestroyEntityCmd") {
 
     SUBCASE("Does not assert on non-existing entity") {
       World world;
-      const Entity entity = world.ReserveEntity();
+      const Entity entity = world.CreateEntity();
+      world.DestroyEntity(entity);
 
-      // Entity was reserved but never committed to the world — should not
-      // assert
+      // Entity was destroyed — should not assert on a second try-destroy
       TryDestroyEntityCmd cmd(entity);
       cmd.Execute(world);
     }

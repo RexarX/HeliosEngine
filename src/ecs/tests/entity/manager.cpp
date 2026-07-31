@@ -321,6 +321,34 @@ TEST_SUITE("helios::ecs::EntityManager") {
     }
   }
 
+  TEST_CASE("ecs::EntityManager::NeedsFlush") {
+    SUBCASE("NeedsFlush is false initially") {
+      const EntityManager manager;
+      CHECK_FALSE(manager.NeedsFlush());
+    }
+
+    SUBCASE("NeedsFlush is true after ReserveEntity") {
+      EntityManager manager;
+      [[maybe_unused]] const auto reserved = manager.ReserveEntity();
+      CHECK(manager.NeedsFlush());
+    }
+
+    SUBCASE("NeedsFlush is false after Flush") {
+      EntityManager manager;
+      [[maybe_unused]] const auto reserved = manager.ReserveEntity();
+      manager.Flush();
+      CHECK_FALSE(manager.NeedsFlush());
+    }
+
+    SUBCASE("NeedsFlush is false after Create and Destroy") {
+      EntityManager manager;
+      const auto entity = manager.Create();
+      CHECK_FALSE(manager.NeedsFlush());
+      manager.Destroy(entity);
+      CHECK_FALSE(manager.NeedsFlush());
+    }
+  }
+
   TEST_CASE("ecs::EntityManager::Count") {
     SUBCASE("Count is zero initially") {
       const EntityManager manager;
@@ -429,6 +457,7 @@ TEST_SUITE("helios::ecs::EntityManager") {
       EntityManager manager;
       const auto reserved = manager.ReserveEntity();
       CHECK(reserved.Valid());
+      CHECK_EQ(reserved.Generation(), 1);
     }
 
     SUBCASE("Reserve multiple entities") {
@@ -453,6 +482,23 @@ TEST_SUITE("helios::ecs::EntityManager") {
       manager.Flush();
 
       CHECK(manager.Validate(reserved));
+    }
+
+    SUBCASE("Reserve reuses free list with correct generation") {
+      EntityManager manager;
+
+      const auto original = manager.Create();
+      const auto original_gen = original.Generation();
+      manager.Destroy(original);
+
+      const auto reserved = manager.ReserveEntity();
+      CHECK_EQ(reserved.Index(), original.Index());
+      CHECK_EQ(reserved.Generation(), original_gen + 1);
+      CHECK(manager.NeedsFlush());
+
+      manager.Flush();
+      CHECK(manager.Validate(reserved));
+      CHECK_FALSE(manager.NeedsFlush());
     }
   }
 
