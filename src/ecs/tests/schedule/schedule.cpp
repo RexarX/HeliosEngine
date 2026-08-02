@@ -18,7 +18,6 @@
 
 #include <compare>
 #include <memory>
-#include <memory_resource>
 #include <string>
 #include <vector>
 
@@ -997,7 +996,7 @@ TEST_SUITE("ecs::Schedule") {
 
       const Entity entity{static_cast<Entity::IndexType>(
                               world.ReadResource<CounterResource>().value),
-                          1};
+                          Entity::kInitialAliveGeneration};
       CHECK_EQ(world.EntityCount(), 1);
       CHECK(world.HasComponent<Enemy>(entity));
       CHECK_EQ(world.ReadComponent<Lifetime>(entity).remaining,

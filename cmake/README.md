@@ -4,42 +4,6 @@ Helios CMake is organized as small helpers composed into higher-level behavior.
 The rule of thumb is Linux-like: each function does one simple job well, and
 larger functions read as recipes made from those smaller pieces.
 
-## Layers
-
-```mermaid
-flowchart TD
-    subgraph L1 [Layer 1: Primitives]
-        P1[helios_parse_visibility]
-        P2[helios_target_apply]
-        P3[helios_mark_system_includes]
-        P4[helios_copy_shared_lib]
-        P5[helios_add_test_executable]
-    end
-    subgraph L2 [Layer 2: Module System]
-        M1[ModuleRegistry]
-        M2[ModuleDiscovery]
-        M3[ModuleBuilder]
-        M4[ModuleLinking]
-    end
-    subgraph L3 [Layer 3: Dependencies]
-        D1[DependencyFinder]
-        D2[DownloadUsingCPM]
-        D3[dependencies/*.cmake]
-    end
-    subgraph L4 [Layer 4: Policy]
-        S1[Sanitizers]
-        S2[SimdUtils]
-        S3[Install]
-    end
-    L2 --> L1
-    L3 --> L1
-    L4 --> L1
-    M3 --> D1
-```
-
-Higher layers may call lower-layer helpers. Lower layers should stay generic and
-avoid module-specific policy.
-
 ## Public API Index
 
 Module authoring:

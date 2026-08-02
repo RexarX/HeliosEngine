@@ -4,7 +4,13 @@
 
 #include <algorithm>
 #include <array>
+#include <barrier>
+#include <cstddef>
+#include <cstdint>
 #include <iterator>
+#include <random>
+#include <thread>
+#include <unordered_set>
 #include <vector>
 
 using namespace helios::ecs;
@@ -74,6 +80,208 @@ TEST_SUITE("helios::ecs::EntityManager") {
     }
   }
 
+  TEST_CASE("ecs::EntityManager::Clear") {
+    SUBCASE("Clear with no entities") {
+      EntityManager manager;
+      manager.Clear();
+      CHECK_EQ(manager.Count(), 0);
+    }
+
+    SUBCASE("Clear with entities") {
+      EntityManager manager;
+      const auto e1 = manager.Create();
+      const auto e2 = manager.Create();
+      const auto e3 = manager.Create();
+
+      manager.Clear();
+
+      CHECK_EQ(manager.Count(), 0);
+      CHECK_FALSE(manager.Validate(e1));
+      CHECK_FALSE(manager.Validate(e2));
+      CHECK_FALSE(manager.Validate(e3));
+    }
+
+    SUBCASE("Clear and recreate") {
+      EntityManager manager;
+      [[maybe_unused]] auto e1 = manager.Create();
+      [[maybe_unused]] auto e2 = manager.Create();
+
+      manager.Clear();
+      const auto entity = manager.Create();
+
+      CHECK_EQ(manager.Count(), 1);
+      CHECK(manager.Validate(entity));
+    }
+  }
+
+  TEST_CASE("ecs::EntityManager::Flush") {
+    SUBCASE("Flush with no reservations is a no-op") {
+      EntityManager manager;
+      manager.Flush();
+      CHECK_EQ(manager.Count(), 0);
+      CHECK_FALSE(manager.NeedsFlush());
+    }
+
+    SUBCASE("Flush materializes fresh reservation") {
+      EntityManager manager;
+      const auto reserved = manager.ReserveEntity();
+
+      Entity flushed{};
+      manager.Flush([&](Entity entity) { flushed = entity; });
+
+      CHECK_EQ(flushed, reserved);
+      CHECK(manager.Validate(reserved));
+      CHECK_EQ(manager.Count(), 1);
+      CHECK_FALSE(manager.NeedsFlush());
+    }
+
+    SUBCASE("Flush materializes recycled reservation with matching handle") {
+      EntityManager manager;
+      const auto original = manager.Create();
+      manager.Destroy(original);
+
+      const auto reserved = manager.ReserveEntity();
+      CHECK_FALSE(manager.Validate(reserved));
+
+      Entity flushed{};
+      manager.Flush([&](Entity entity) { flushed = entity; });
+
+      CHECK_EQ(flushed, reserved);
+      CHECK(manager.Validate(reserved));
+      CHECK_FALSE(manager.Validate(original));
+      CHECK_EQ(manager.Count(), 1);
+    }
+  }
+
+  TEST_CASE("ecs::EntityManager::Reserve") {
+    SUBCASE("Reserve capacity") {
+      EntityManager manager;
+      manager.Reserve(100);
+      CHECK_EQ(manager.Count(), 0);
+    }
+
+    SUBCASE("Reserve and create") {
+      EntityManager manager;
+      manager.Reserve(100);
+
+      for (int i = 0; i < 100; ++i) {
+        [[maybe_unused]] auto _ = manager.Create();
+      }
+
+      CHECK_EQ(manager.Count(), 100);
+    }
+  }
+
+  TEST_CASE("ecs::EntityManager::ReserveEntity") {
+    SUBCASE("Reserve single entity") {
+      EntityManager manager;
+      const auto reserved = manager.ReserveEntity();
+      CHECK(reserved.Valid());
+      CHECK_EQ(reserved.Generation(), Entity::kInitialAliveGeneration);
+      CHECK(reserved.Alive());
+    }
+
+    SUBCASE("Reserve multiple entities") {
+      EntityManager manager;
+
+      const auto r1 = manager.ReserveEntity();
+      const auto r2 = manager.ReserveEntity();
+      const auto r3 = manager.ReserveEntity();
+
+      CHECK(r1.Valid());
+      CHECK(r2.Valid());
+      CHECK(r3.Valid());
+
+      CHECK_NE(r1, r2);
+      CHECK_NE(r2, r3);
+    }
+
+    SUBCASE("Fresh reservation is invalid before Flush") {
+      EntityManager manager;
+      const auto reserved = manager.ReserveEntity();
+      CHECK_FALSE(manager.Validate(reserved));
+      manager.Flush();
+      CHECK(manager.Validate(reserved));
+    }
+
+    SUBCASE("Recycled reservation is invalid before Flush") {
+      EntityManager manager;
+
+      const auto original = manager.Create();
+      const auto original_gen = original.Generation();
+      manager.Destroy(original);
+
+      const auto reserved = manager.ReserveEntity();
+      CHECK_EQ(reserved.Index(), original.Index());
+      CHECK_EQ(reserved.Generation(),
+               NextGeneration(NextGeneration(original_gen, /*alive=*/false),
+                              /*alive=*/true));
+      CHECK(manager.NeedsFlush());
+      CHECK_FALSE(manager.Validate(reserved));
+      CHECK_FALSE(manager.Validate(original));
+
+      const auto stored_free = manager.GetGeneration(reserved.Index());
+      CHECK_FALSE(IsAliveGeneration(stored_free));
+      CHECK_EQ(reserved.Generation(),
+               NextGeneration(stored_free, /*alive=*/true));
+
+      manager.Flush();
+      CHECK(manager.Validate(reserved));
+      CHECK_FALSE(manager.Validate(original));
+      CHECK_FALSE(manager.NeedsFlush());
+    }
+
+    SUBCASE("Concurrent reservations during stable phase are unique") {
+      EntityManager manager;
+      manager.Reserve(256);
+
+      std::vector<Entity> recycled_seed;
+      recycled_seed.reserve(64);
+      manager.Create(64, std::back_inserter(recycled_seed));
+      manager.Destroy(recycled_seed);
+
+      constexpr size_t kThreads = 8;
+      constexpr size_t kPerThread = 16;
+      std::barrier start(static_cast<std::ptrdiff_t>(kThreads));
+      std::vector<std::vector<Entity>> per_thread(kThreads);
+      std::vector<std::thread> threads;
+      threads.reserve(kThreads);
+
+      for (size_t t = 0; t < kThreads; ++t) {
+        threads.emplace_back([&, t] {
+          per_thread[t].reserve(kPerThread);
+          start.arrive_and_wait();
+          for (size_t i = 0; i < kPerThread; ++i) {
+            const Entity reserved = manager.ReserveEntity();
+            CHECK_FALSE(manager.Validate(reserved));
+            per_thread[t].push_back(reserved);
+          }
+        });
+      }
+
+      for (auto& thread : threads) {
+        thread.join();
+      }
+
+      std::unordered_set<Entity::IndexType> indices;
+      std::vector<Entity> all;
+      all.reserve(kThreads * kPerThread);
+      for (const auto& batch : per_thread) {
+        for (const Entity entity : batch) {
+          CHECK(indices.insert(entity.Index()).second);
+          all.push_back(entity);
+        }
+      }
+      CHECK_EQ(indices.size(), kThreads * kPerThread);
+
+      manager.Flush();
+      CHECK_EQ(manager.Count(), kThreads * kPerThread);
+      for (const Entity entity : all) {
+        CHECK(manager.Validate(entity));
+      }
+    }
+  }
+
   TEST_CASE("ecs::EntityManager::Create") {
     SUBCASE("Create single entity") {
       EntityManager manager;
@@ -81,6 +289,7 @@ TEST_SUITE("helios::ecs::EntityManager") {
       const auto entity = manager.Create();
 
       CHECK(entity.Valid());
+      CHECK_EQ(entity.Generation(), Entity::kInitialAliveGeneration);
       CHECK_EQ(manager.Count(), 1);
       CHECK(manager.Validate(entity));
     }
@@ -122,10 +331,19 @@ TEST_SUITE("helios::ecs::EntityManager") {
       CHECK_EQ(last.begin(), indices.end());
     }
 
-    SUBCASE("Created entities are alive") {
+    SUBCASE("Immediate reuse performs free to alive transition") {
       EntityManager manager;
-      const auto entity = manager.Create();
-      CHECK(manager.Validate(entity));
+      const auto original = manager.Create();
+      const auto original_gen = original.Generation();
+      manager.Destroy(original);
+
+      const auto reused = manager.Create();
+      CHECK_EQ(reused.Index(), original.Index());
+      CHECK_EQ(reused.Generation(),
+               NextGeneration(NextGeneration(original_gen, /*alive=*/false),
+                              /*alive=*/true));
+      CHECK(manager.Validate(reused));
+      CHECK_FALSE(manager.Validate(original));
     }
   }
 
@@ -186,6 +404,26 @@ TEST_SUITE("helios::ecs::EntityManager") {
           });
       CHECK(all_valid);
     }
+
+    SUBCASE("Batch create reuses free list with alive generations") {
+      EntityManager manager;
+      std::vector<Entity> originals;
+      originals.reserve(4);
+      manager.Create(4, std::back_inserter(originals));
+      manager.Destroy(originals);
+
+      std::vector<Entity> reused;
+      reused.reserve(4);
+      manager.Create(4, std::back_inserter(reused));
+
+      CHECK_EQ(reused.size(), 4);
+      CHECK_EQ(manager.Count(), 4);
+      for (size_t i = 0; i < reused.size(); ++i) {
+        CHECK(manager.Validate(reused[i]));
+        CHECK_FALSE(manager.Validate(originals[i]));
+        CHECK(IsAliveGeneration(reused[i].Generation()));
+      }
+    }
   }
 
   TEST_CASE("ecs::EntityManager::Destroy") {
@@ -197,6 +435,7 @@ TEST_SUITE("helios::ecs::EntityManager") {
 
       CHECK_FALSE(manager.Validate(entity));
       CHECK_EQ(manager.Count(), 0);
+      CHECK_FALSE(IsAliveGeneration(manager.GetGeneration(entity.Index())));
     }
 
     SUBCASE("Destroy multiple entities") {
@@ -319,6 +558,17 @@ TEST_SUITE("helios::ecs::EntityManager") {
       CHECK(manager1.Validate(entity));
       CHECK_FALSE(manager2.Validate(entity));
     }
+
+    SUBCASE("Validate rejects pending recycled reservation") {
+      EntityManager manager;
+      const auto original = manager.Create();
+      manager.Destroy(original);
+      const auto reserved = manager.ReserveEntity();
+
+      CHECK_FALSE(manager.Validate(reserved));
+      manager.Flush();
+      CHECK(manager.Validate(reserved));
+    }
   }
 
   TEST_CASE("ecs::EntityManager::NeedsFlush") {
@@ -399,111 +649,49 @@ TEST_SUITE("helios::ecs::EntityManager") {
     }
   }
 
-  TEST_CASE("ecs::EntityManager::Clear") {
-    SUBCASE("Clear with no entities") {
-      EntityManager manager;
-      manager.Clear();
-      CHECK_EQ(manager.Count(), 0);
+  TEST_CASE("ecs::EntityManager::GetGeneration") {
+    SUBCASE("Out of range index returns invalid generation") {
+      const EntityManager manager;
+      CHECK_EQ(manager.GetGeneration(0), Entity::kInvalidGeneration);
     }
 
-    SUBCASE("Clear with entities") {
+    SUBCASE("Fresh creation stores initial alive generation") {
       EntityManager manager;
-      const auto e1 = manager.Create();
-      const auto e2 = manager.Create();
-      const auto e3 = manager.Create();
-
-      manager.Clear();
-
-      CHECK_EQ(manager.Count(), 0);
-      CHECK_FALSE(manager.Validate(e1));
-      CHECK_FALSE(manager.Validate(e2));
-      CHECK_FALSE(manager.Validate(e3));
-    }
-
-    SUBCASE("Clear and recreate") {
-      EntityManager manager;
-      [[maybe_unused]] auto e1 = manager.Create();
-      [[maybe_unused]] auto e2 = manager.Create();
-
-      manager.Clear();
       const auto entity = manager.Create();
-
-      CHECK_EQ(manager.Count(), 1);
-      CHECK(manager.Validate(entity));
-    }
-  }
-
-  TEST_CASE("ecs::EntityManager::Reserve") {
-    SUBCASE("Reserve capacity") {
-      EntityManager manager;
-      manager.Reserve(100);
-      CHECK_EQ(manager.Count(), 0);
+      CHECK_EQ(manager.GetGeneration(entity.Index()),
+               Entity::kInitialAliveGeneration);
+      CHECK_EQ(manager.GetGeneration(entity.Index()), entity.Generation());
     }
 
-    SUBCASE("Reserve and create") {
+    SUBCASE("Destroy stores free generation encoding") {
       EntityManager manager;
-      manager.Reserve(100);
+      const auto entity = manager.Create();
+      const auto expected_free =
+          NextGeneration(entity.Generation(), /*alive=*/false);
+      manager.Destroy(entity);
 
-      for (int i = 0; i < 100; ++i) {
-        [[maybe_unused]] auto _ = manager.Create();
-      }
-
-      CHECK_EQ(manager.Count(), 100);
-    }
-  }
-
-  TEST_CASE("ecs::EntityManager::ReserveEntity") {
-    SUBCASE("Reserve single entity") {
-      EntityManager manager;
-      const auto reserved = manager.ReserveEntity();
-      CHECK(reserved.Valid());
-      CHECK_EQ(reserved.Generation(), 1);
+      const auto stored = manager.GetGeneration(entity.Index());
+      CHECK_EQ(stored, expected_free);
+      CHECK_FALSE(IsAliveGeneration(stored));
     }
 
-    SUBCASE("Reserve multiple entities") {
+    SUBCASE("Recycled reservation leaves free generation until Flush") {
       EntityManager manager;
-
-      const auto r1 = manager.ReserveEntity();
-      const auto r2 = manager.ReserveEntity();
-      const auto r3 = manager.ReserveEntity();
-
-      CHECK(r1.Valid());
-      CHECK(r2.Valid());
-      CHECK(r3.Valid());
-
-      CHECK_NE(r1, r2);
-      CHECK_NE(r2, r3);
-    }
-
-    SUBCASE("Flush makes reserved entities valid") {
-      EntityManager manager;
-
-      const auto reserved = manager.ReserveEntity();
-      manager.Flush();
-
-      CHECK(manager.Validate(reserved));
-    }
-
-    SUBCASE("Reserve reuses free list with correct generation") {
-      EntityManager manager;
-
       const auto original = manager.Create();
-      const auto original_gen = original.Generation();
       manager.Destroy(original);
-
       const auto reserved = manager.ReserveEntity();
-      CHECK_EQ(reserved.Index(), original.Index());
-      CHECK_EQ(reserved.Generation(), original_gen + 1);
-      CHECK(manager.NeedsFlush());
+
+      CHECK_EQ(manager.GetGeneration(reserved.Index()),
+               NextGeneration(original.Generation(), /*alive=*/false));
+      CHECK_NE(manager.GetGeneration(reserved.Index()), reserved.Generation());
 
       manager.Flush();
-      CHECK(manager.Validate(reserved));
-      CHECK_FALSE(manager.NeedsFlush());
+      CHECK_EQ(manager.GetGeneration(reserved.Index()), reserved.Generation());
     }
   }
 
   TEST_CASE("ecs::EntityManager::generation") {
-    SUBCASE("Entity generation increases after destroy and recreate") {
+    SUBCASE("Entity generation advances after destroy and recreate") {
       EntityManager manager;
 
       const auto entity1 = manager.Create();
@@ -515,7 +703,9 @@ TEST_SUITE("helios::ecs::EntityManager") {
       const auto gen2 = entity2.Generation();
 
       CHECK_EQ(entity1.Index(), entity2.Index());
-      CHECK_GT(gen2, gen1);
+      CHECK_EQ(gen2, NextGeneration(NextGeneration(gen1, /*alive=*/false),
+                                    /*alive=*/true));
+      CHECK_GT(gen2 & Entity::kCounterMask, gen1 & Entity::kCounterMask);
     }
 
     SUBCASE("Different entities have independent generations") {
@@ -530,7 +720,11 @@ TEST_SUITE("helios::ecs::EntityManager") {
       const auto e4 = manager.Create();
 
       CHECK_EQ(e4.Index(), e2.Index());
-      CHECK_NE(e4.Generation(), e2.Generation());
+      CHECK_EQ(e4.Generation(),
+               NextGeneration(NextGeneration(e2.Generation(), /*alive=*/false),
+                              /*alive=*/true));
+      CHECK(manager.Validate(e1));
+      CHECK(manager.Validate(e3));
     }
   }
 
@@ -599,6 +793,56 @@ TEST_SUITE("helios::ecs::EntityManager") {
           entities,
           [&copy](const Entity& entity) { return copy.Validate(entity); });
       CHECK(all_valid);
+    }
+
+    SUBCASE("Deterministic interleaved Create Destroy Reserve Flush stress") {
+      EntityManager manager;
+      std::mt19937 rng(42);
+      std::uniform_int_distribution<int> op_dist(0, 3);
+
+      std::vector<Entity> live;
+      live.reserve(256);
+      std::vector<Entity> pending;
+      pending.reserve(64);
+
+      auto flush_pending = [&] {
+        if (pending.empty()) {
+          return;
+        }
+        manager.Flush();
+        for (const Entity entity : pending) {
+          CHECK(manager.Validate(entity));
+          live.push_back(entity);
+        }
+        pending.clear();
+      };
+
+      for (int step = 0; step < 1000; ++step) {
+        const int op = op_dist(rng);
+        if (op == 0 || live.empty()) {
+          flush_pending();
+          live.push_back(manager.Create());
+        } else if (op == 1) {
+          flush_pending();
+          const size_t index =
+              static_cast<size_t>(rng() % static_cast<uint32_t>(live.size()));
+          manager.Destroy(live[index]);
+          live.erase(live.begin() + static_cast<std::ptrdiff_t>(index));
+        } else if (op == 2) {
+          pending.push_back(manager.ReserveEntity());
+          CHECK_FALSE(manager.Validate(pending.back()));
+        } else {
+          flush_pending();
+        }
+
+        CHECK_EQ(manager.Count(), live.size());
+        for (const Entity entity : live) {
+          CHECK(manager.Validate(entity));
+        }
+      }
+
+      flush_pending();
+      CHECK_EQ(manager.Count(), live.size());
     }
   }
 }

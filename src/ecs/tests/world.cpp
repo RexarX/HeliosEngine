@@ -257,6 +257,21 @@ TEST_SUITE("helios::ecs::World") {
       CHECK(world.Exists(e1));
       CHECK(world.Exists(e2));
     }
+
+    SUBCASE("Recycled reservation is not alive until Flush") {
+      World world;
+      const Entity original = world.CreateEntity();
+      world.DestroyEntity(original);
+
+      const Entity reserved = world.ReserveEntity();
+      CHECK_EQ(reserved.Index(), original.Index());
+      CHECK_FALSE(world.Exists(reserved));
+      CHECK_FALSE(world.Exists(original));
+
+      world.Flush();
+      CHECK(world.Exists(reserved));
+      CHECK_FALSE(world.Exists(original));
+    }
   }
 
   TEST_CASE("ecs::World::DestroyEntity") {
