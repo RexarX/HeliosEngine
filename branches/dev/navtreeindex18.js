@@ -1,5 +1,13 @@
 var NAVTREEINDEX18 =
 {
+"classhelios_1_1ecs_1_1TryRemoveBundleCmd.html#a3b5c78758be18ce57ac336a28dcc5732":[4,0,2,4,108,0],
+"classhelios_1_1ecs_1_1TryRemoveBundleCmd.html#a5a436cf354a1a22b9845699542e68ba4":[2,0,6,5,109,3],
+"classhelios_1_1ecs_1_1TryRemoveBundleCmd.html#a5a436cf354a1a22b9845699542e68ba4":[4,0,2,4,108,3],
+"classhelios_1_1ecs_1_1TryRemoveBundleCmd.html#a746aa3407bc2d606ea3c0edd777deb5d":[2,0,6,5,109,6],
+"classhelios_1_1ecs_1_1TryRemoveBundleCmd.html#a746aa3407bc2d606ea3c0edd777deb5d":[4,0,2,4,108,6],
+"classhelios_1_1ecs_1_1TryRemoveComponentsCmd.html":[2,0,6,5,110],
+"classhelios_1_1ecs_1_1TryRemoveComponentsCmd.html":[4,0,2,4,109],
+"classhelios_1_1ecs_1_1TryRemoveComponentsCmd.html#a0bfb460ee29c4d2b4ec78a0d83943689":[2,0,6,5,110,2],
 "classhelios_1_1ecs_1_1TryRemoveComponentsCmd.html#a0bfb460ee29c4d2b4ec78a0d83943689":[4,0,2,4,109,2],
 "classhelios_1_1ecs_1_1TryRemoveComponentsCmd.html#a0c93f596eb796bd9f0b7bd7fa5362995":[2,0,6,5,110,3],
 "classhelios_1_1ecs_1_1TryRemoveComponentsCmd.html#a0c93f596eb796bd9f0b7bd7fa5362995":[4,0,2,4,109,3],
@@ -241,13 +249,5 @@ var NAVTREEINDEX18 =
 "classhelios_1_1ecs_1_1WorldCmdBuffer.html#a32914b1c86e2e0530241bf2da00f127f":[4,0,2,4,113,2],
 "classhelios_1_1ecs_1_1WorldCmdBuffer.html#a418798085115d7026a991cddba20f696":[2,0,6,5,114,13],
 "classhelios_1_1ecs_1_1WorldCmdBuffer.html#a418798085115d7026a991cddba20f696":[4,0,2,4,113,13],
-"classhelios_1_1ecs_1_1WorldCmdBuffer.html#a428c502c33fb57d681994cb16045164f":[2,0,6,5,114,18],
-"classhelios_1_1ecs_1_1WorldCmdBuffer.html#a428c502c33fb57d681994cb16045164f":[4,0,2,4,113,18],
-"classhelios_1_1ecs_1_1WorldCmdBuffer.html#a45a009a76d8bfa9857c8473a6ead2413":[2,0,6,5,114,15],
-"classhelios_1_1ecs_1_1WorldCmdBuffer.html#a45a009a76d8bfa9857c8473a6ead2413":[4,0,2,4,113,15],
-"classhelios_1_1ecs_1_1WorldCmdBuffer.html#a57f49e2b44b45a3975abfc79b4abe200":[2,0,6,5,114,8],
-"classhelios_1_1ecs_1_1WorldCmdBuffer.html#a57f49e2b44b45a3975abfc79b4abe200":[4,0,2,4,113,8],
-"classhelios_1_1ecs_1_1WorldCmdBuffer.html#a712e5770defe7e12e843c7ea7ce06ef4":[2,0,6,5,114,5],
-"classhelios_1_1ecs_1_1WorldCmdBuffer.html#a712e5770defe7e12e843c7ea7ce06ef4":[4,0,2,4,113,5],
-"classhelios_1_1ecs_1_1WorldCmdBuffer.html#a75fc8268a3ab5b8ab947e06d7a36fa89":[2,0,6,5,114,6]
+"classhelios_1_1ecs_1_1WorldCmdBuffer.html#a428c502c33fb57d681994cb16045164f":[2,0,6,5,114,18]
 };

@@ -4,8 +4,9 @@ var searchData=
   ['needsflush_1',['NeedsFlush',['../classhelios_1_1ecs_1_1EntityManager.html#a36b3d4267f1a0dc08d4ac655803c86ff',1,'helios::ecs::EntityManager']]],
   ['next_2',['Next',['../classhelios_1_1utils_1_1RandomGenerator.html#a2b9ed14d7b9c848e7173a79543763cc9',1,'helios::utils::RandomGenerator']]],
   ['nextcapacity_3',['NextCapacity',['../structhelios_1_1mem_1_1GrowthPolicy.html#a0cf2f8a63f9f6417e49d0441c2d48c3b',1,'helios::mem::GrowthPolicy']]],
-  ['nodes_4',['Nodes',['../classhelios_1_1ecs_1_1Dag.html#a751b5787a048dd171ee31ad6f827e193',1,'helios::ecs::Dag']]],
-  ['none_5',['None',['../classhelios_1_1ecs_1_1MessageReaderBase.html#a1f601f646f1764a2ea747afcf51a1ff6',1,'helios::ecs::MessageReaderBase::None()'],['../classhelios_1_1ecs_1_1BasicQueryWithEntity.html#a3315dc8434c7dbbcaa4040919d95e7d0',1,'helios::ecs::BasicQueryWithEntity::None()'],['../classhelios_1_1ecs_1_1BasicQuery.html#a5ab1017e0bc28cc28dc05f4d73c7f7aa',1,'helios::ecs::BasicQuery::None()'],['../classhelios_1_1utils_1_1FunctionalAdapterBase.html#a791509606f43cb6011e5975d483d6589',1,'helios::utils::FunctionalAdapterBase::None()']]],
-  ['normalizepathseparators_6',['NormalizePathSeparators',['../namespaceanonymous__namespace_02stacktrace_8cpp_03.html#a68c657b10aabf35a67e8bbcc0225f480',1,'anonymous_namespace{stacktrace.cpp}']]],
-  ['notifypluginreadinesschanged_7',['NotifyPluginReadinessChanged',['../classhelios_1_1app_1_1App.html#ac34e107cb6fd9145d5a01ebf3024813a',1,'helios::app::App']]]
+  ['nextgeneration_4',['NextGeneration',['../namespacehelios_1_1ecs.html#a3fd2a8f4805ddb81d85e7557052d579f',1,'helios::ecs']]],
+  ['nodes_5',['Nodes',['../classhelios_1_1ecs_1_1Dag.html#a751b5787a048dd171ee31ad6f827e193',1,'helios::ecs::Dag']]],
+  ['none_6',['None',['../classhelios_1_1ecs_1_1MessageReaderBase.html#a1f601f646f1764a2ea747afcf51a1ff6',1,'helios::ecs::MessageReaderBase::None()'],['../classhelios_1_1ecs_1_1BasicQueryWithEntity.html#a3315dc8434c7dbbcaa4040919d95e7d0',1,'helios::ecs::BasicQueryWithEntity::None()'],['../classhelios_1_1ecs_1_1BasicQuery.html#a5ab1017e0bc28cc28dc05f4d73c7f7aa',1,'helios::ecs::BasicQuery::None()'],['../classhelios_1_1utils_1_1FunctionalAdapterBase.html#a791509606f43cb6011e5975d483d6589',1,'helios::utils::FunctionalAdapterBase::None()']]],
+  ['normalizepathseparators_7',['NormalizePathSeparators',['../namespaceanonymous__namespace_02stacktrace_8cpp_03.html#a68c657b10aabf35a67e8bbcc0225f480',1,'anonymous_namespace{stacktrace.cpp}']]],
+  ['notifypluginreadinesschanged_8',['NotifyPluginReadinessChanged',['../classhelios_1_1app_1_1App.html#ac34e107cb6fd9145d5a01ebf3024813a',1,'helios::app::App']]]
 ];

@@ -1,5 +1,13 @@
 var NAVTREEINDEX21 =
 {
+"classhelios_1_1mem_1_1RefCounted.html#a339327a5f4559e5481c67156e6aed59c":[4,0,2,6,18,32],
+"classhelios_1_1mem_1_1RefCounted.html#a36486a295745593ac8ca3dd8575c2560":[2,0,6,7,18,11],
+"classhelios_1_1mem_1_1RefCounted.html#a36486a295745593ac8ca3dd8575c2560":[4,0,2,6,18,11],
+"classhelios_1_1mem_1_1RefCounted.html#a39752030374988ea0530c9752467f1fb":[2,0,6,7,18,21],
+"classhelios_1_1mem_1_1RefCounted.html#a39752030374988ea0530c9752467f1fb":[4,0,2,6,18,21],
+"classhelios_1_1mem_1_1RefCounted.html#a4050f02a8a13c050e81cae70b0c72b71":[2,0,6,7,18,15],
+"classhelios_1_1mem_1_1RefCounted.html#a4050f02a8a13c050e81cae70b0c72b71":[4,0,2,6,18,15],
+"classhelios_1_1mem_1_1RefCounted.html#a5364bca3ebba074f3374fc0a2a46c188":[2,0,6,7,18,25],
 "classhelios_1_1mem_1_1RefCounted.html#a5364bca3ebba074f3374fc0a2a46c188":[4,0,2,6,18,25],
 "classhelios_1_1mem_1_1RefCounted.html#a56ee0833ea628ef7cc001bfb1402cb6f":[2,0,6,7,18,13],
 "classhelios_1_1mem_1_1RefCounted.html#a56ee0833ea628ef7cc001bfb1402cb6f":[4,0,2,6,18,13],
@@ -241,13 +249,5 @@ var NAVTREEINDEX21 =
 "classhelios_1_1profile_1_1Profiler.html#a7f914ea6f8623fd17ce5a28d35d3a6e0":[4,0,2,7,3,12],
 "classhelios_1_1profile_1_1Profiler.html#a80465c402e3ce6382336e6d1912c4454":[2,0,6,8,8,22],
 "classhelios_1_1profile_1_1Profiler.html#a80465c402e3ce6382336e6d1912c4454":[4,0,2,7,3,22],
-"classhelios_1_1profile_1_1Profiler.html#a8422ed2ce877a1d3d13e2ca2796d1036":[2,0,6,8,8,13],
-"classhelios_1_1profile_1_1Profiler.html#a8422ed2ce877a1d3d13e2ca2796d1036":[4,0,2,7,3,13],
-"classhelios_1_1profile_1_1Profiler.html#a84735e64763381d8bcc3c28b75454e8a":[2,0,6,8,8,32],
-"classhelios_1_1profile_1_1Profiler.html#a84735e64763381d8bcc3c28b75454e8a":[4,0,2,7,3,32],
-"classhelios_1_1profile_1_1Profiler.html#a850b06195a56fb96ae3353548c1a46b0":[2,0,6,8,8,8],
-"classhelios_1_1profile_1_1Profiler.html#a850b06195a56fb96ae3353548c1a46b0":[4,0,2,7,3,8],
-"classhelios_1_1profile_1_1Profiler.html#a8d776cd0adfb275a5cefdb91480b8682":[2,0,6,8,8,11],
-"classhelios_1_1profile_1_1Profiler.html#a8d776cd0adfb275a5cefdb91480b8682":[4,0,2,7,3,11],
-"classhelios_1_1profile_1_1Profiler.html#aa03d6a16e8e81b14e7aebf8b8d71ddf4":[2,0,6,8,8,28]
+"classhelios_1_1profile_1_1Profiler.html#a8422ed2ce877a1d3d13e2ca2796d1036":[2,0,6,8,8,13]
 };
