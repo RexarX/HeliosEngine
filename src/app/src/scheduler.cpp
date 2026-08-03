@@ -9,6 +9,7 @@
 #include <helios/ecs/schedule/schedule.hpp>
 #include <helios/ecs/world.hpp>
 
+#include <chrono>
 #include <cstddef>
 
 namespace helios::app {
@@ -17,6 +18,12 @@ void Scheduler::Clear() {
   HELIOS_ASSERT(async_loops_running_.load(std::memory_order_acquire) == 0,
                 "Cannot clear scheduler while async update loops are running! "
                 "Call Stop() or Shutdown() first.");
+  HELIOS_ASSERT(async_loop_futures_.empty(),
+                "Cannot clear scheduler while async loop futures remain! Call "
+                "Stop() or Shutdown() first.");
+  HELIOS_ASSERT(overlapping_update_futures_.empty(),
+                "Cannot clear scheduler while overlapping updates remain! Call "
+                "Stop() or Shutdown() first.");
 
   for (const SubAppFrameState& state : sub_app_states_) {
     HELIOS_ASSERT(!state.sub_app.get().IsUpdating(),
@@ -33,6 +40,12 @@ void Scheduler::Clear() {
   shutdown_graph_.Clear();
   sub_app_states_.clear();
   blocking_update_future_.reset();
+}
+
+void Scheduler::Stop(async::Executor& /*executor*/) {
+  StopAsyncUpdateLoops();
+  WaitForOverlappingUpdates();
+  WaitForSubApps();
 }
 
 void Scheduler::Build(App& app) {
@@ -114,6 +127,8 @@ void Scheduler::Shutdown(App& app) {
   HELIOS_APP_PROFILE_SCOPE_N("helios::app::Scheduler::Shutdown");
 
   StopAsyncLoops(app);
+  WaitForOverlappingUpdates();
+  WaitForSubApps();
 
   auto& main = app.GetMainSubApp();
   auto& executor = app.GetExecutor();
@@ -140,7 +155,7 @@ void Scheduler::StopAsyncLoops(App& app) {
     }
   }
 
-  StopAsyncUpdateLoops(app.GetExecutor());
+  StopAsyncUpdateLoops();
 }
 
 void Scheduler::WaitForSubApps() {
@@ -192,6 +207,8 @@ void Scheduler::LaunchSubAppUpdates(App& app) {
     blocking_update_future_ = executor.Run(blocking_update_graph_);
   }
 
+  PruneCompletedOverlappingUpdates();
+
   for (SubAppFrameState& state : sub_app_states_) {
     if (state.mode != SubAppMode::kOverlapping ||
         !state.fresh_extract_this_frame) {
@@ -199,8 +216,8 @@ void Scheduler::LaunchSubAppUpdates(App& app) {
     }
 
     SubApp& sub_app = state.sub_app.get();
-    executor.SilentAsync(
-        [&sub_app, &executor]() { sub_app.RunUpdatePass(executor); });  // +
+    overlapping_update_futures_.push_back(executor.Async(
+        [&sub_app, &executor]() { sub_app.RunUpdatePass(executor); }));
   }
 }
 
@@ -215,14 +232,23 @@ void Scheduler::StartAsyncUpdateLoops(App& app) {
     sub_app.ResetAsyncLoopStop();
     async_loops_running_.fetch_add(1, std::memory_order_acq_rel);
 
-    executor.SilentAsync([&sub_app, &executor, this]() {  // +
+    async_loop_futures_.push_back(executor.Async([&sub_app, &executor, this]() {
+      struct LoopGuard {
+        Scheduler& self;
+
+        ~LoopGuard() {
+          self.async_loops_running_.fetch_sub(1, std::memory_order_acq_rel);
+        }
+      } guard{*this};
+
       sub_app.RunUpdatePass(executor);
-      async_loops_running_.fetch_sub(1, std::memory_order_acq_rel);
-    });
+    }));
   }
 }
 
-void Scheduler::StopAsyncUpdateLoops(async::Executor& executor) {
+void Scheduler::StopAsyncUpdateLoops() {
+  HELIOS_APP_PROFILE_SCOPE_N("helios::app::Scheduler::StopAsyncUpdateLoops");
+
   for (SubAppFrameState& state : sub_app_states_) {
     if (state.mode != SubAppMode::kAsync) {
       continue;
@@ -231,8 +257,32 @@ void Scheduler::StopAsyncUpdateLoops(async::Executor& executor) {
     state.sub_app.get().RequestAsyncLoopStop();
   }
 
-  executor.WaitForAll();
+  for (auto& future : async_loop_futures_) {
+    if (future.valid()) {
+      future.wait();
+    }
+  }
+  async_loop_futures_.clear();
   async_loops_running_.store(0, std::memory_order_release);
+}
+
+void Scheduler::WaitForOverlappingUpdates() {
+  HELIOS_APP_PROFILE_SCOPE_N(
+      "helios::app::Scheduler::WaitForOverlappingUpdates");
+
+  for (auto& future : overlapping_update_futures_) {
+    if (future.valid()) {
+      future.wait();
+    }
+  }
+  overlapping_update_futures_.clear();
+}
+
+void Scheduler::PruneCompletedOverlappingUpdates() {
+  std::erase_if(overlapping_update_futures_, [](std::future<void>& future) {
+    return !future.valid() || future.wait_for(std::chrono::seconds{0}) ==
+                                  std::future_status::ready;
+  });
 }
 
 void Scheduler::ExtractSubApp(SubAppFrameState& state,

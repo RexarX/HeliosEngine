@@ -35,6 +35,9 @@ struct SlowUpdateSystem {
 
 struct RenderSubAppLabel {};
 struct PhysicsSubAppLabel {};
+struct OverlappingStopSubAppLabel {
+  static constexpr bool kAllowOverlappingUpdates = true;
+};
 
 struct ParallelProbeSystem {
   static inline std::atomic<int> active{0};
@@ -130,7 +133,7 @@ TEST_SUITE("helios::app::Scheduler") {
     }
 
     SUBCASE("Stop stops async update loops") {
-      App app(4);
+      App app(2);
 
       SubApp render;
       render.SetAsync(true);
@@ -142,6 +145,58 @@ TEST_SUITE("helios::app::Scheduler") {
       app.GetScheduler().Stop(app.GetExecutor());
       app.GetScheduler().Clear();
       CHECK_FALSE(app.GetSubApp<RenderSubAppLabel>().IsUpdating());
+    }
+
+    SUBCASE("Stop is idempotent for async sub-apps") {
+      App app(1);
+
+      SubApp render;
+      render.SetAsync(true);
+      render.SetRunner(RunDefaultSubApp);
+      render.AddSystem(kUpdate, SlowUpdateSystem{});
+      app.InsertSubApp(RenderSubAppLabel{}, std::move(render));
+      app.Initialize();
+
+      app.GetScheduler().Stop(app.GetExecutor());
+      app.GetScheduler().Stop(app.GetExecutor());
+      app.GetScheduler().Clear();
+      CHECK_FALSE(app.GetSubApp<RenderSubAppLabel>().IsUpdating());
+    }
+
+    SUBCASE("Stop joins multiple async sub-apps") {
+      App app(2);
+
+      SubApp render;
+      render.SetAsync(true);
+      render.SetRunner(RunDefaultSubApp);
+      render.AddSystem(kUpdate, SlowUpdateSystem{});
+
+      SubApp physics;
+      physics.SetAsync(true);
+      physics.SetRunner(RunDefaultSubApp);
+      physics.AddSystem(kUpdate, SlowUpdateSystem{});
+
+      app.InsertSubApp(RenderSubAppLabel{}, std::move(render));
+      app.InsertSubApp(PhysicsSubAppLabel{}, std::move(physics));
+      app.Initialize();
+
+      app.GetScheduler().Stop(app.GetExecutor());
+      CHECK_FALSE(app.GetSubApp<RenderSubAppLabel>().IsUpdating());
+      CHECK_FALSE(app.GetSubApp<PhysicsSubAppLabel>().IsUpdating());
+    }
+
+    SUBCASE("Stop waits for overlapping sub-app updates") {
+      App app(2);
+      app.InsertResources(CounterResource{1});
+
+      SubApp render;
+      render.AddSystem(kUpdate, SlowUpdateSystem{});
+      render.SetExtractFunction([](const World& /*main*/, World& /*sub*/) {});
+      app.InsertSubApp(OverlappingStopSubAppLabel{}, std::move(render));
+      app.Initialize();
+      app.Update();
+      app.GetScheduler().Stop(app.GetExecutor());
+      CHECK_FALSE(app.GetSubApp<OverlappingStopSubAppLabel>().IsUpdating());
     }
   }
 

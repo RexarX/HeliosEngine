@@ -579,9 +579,7 @@ public:
 
 private:
   [[nodiscard]] bool TryBeginUpdate() noexcept;
-  void EndUpdate() noexcept {
-    is_updating_.store(false, std::memory_order_release);
-  }
+  void EndUpdate() noexcept;
 
   void RunStartupUnchecked(async::Executor& executor) {
     RunStageUnchecked(executor, ecs::StageTypeIndex::From(kStartupStage),

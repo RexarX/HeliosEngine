@@ -298,4 +298,20 @@ TEST_SUITE("helios::log::Logger") {
     }
   }
 
+  // Must remain last: Shutdown terminates the process-global logger.
+  TEST_CASE("helios::log::Logger::Shutdown") {
+    auto& logger = Logger::Instance();
+
+    SUBCASE("Idempotent second call") {
+      logger.Shutdown();
+      CHECK_NOTHROW(logger.Shutdown());
+    }
+
+    SUBCASE("Post-shutdown Log does not crash") {
+      logger.Shutdown();
+      CHECK_NOTHROW(logger.Log(Level::kInfo, "after shutdown"));
+      CHECK_NOTHROW(Info("after shutdown {}", 1));
+      CHECK_NOTHROW(logger.FlushAll());
+    }
+  }
 }  // TEST_SUITE

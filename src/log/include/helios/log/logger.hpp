@@ -2,6 +2,7 @@
 
 #include <helios/log/config.hpp>
 
+#include <atomic>
 #include <format>
 #include <memory>
 #include <mutex>
@@ -85,6 +86,16 @@ public:
   void Flush(T /*logger*/ = {}) noexcept {
     FlushImpl(LoggerTypeIndex::From<T>());
   }
+
+  /**
+   * @brief Terminates logging and joins any spdlog background workers.
+   * @details Flushes and drops all registered loggers, clears Helios-owned
+   * logger state, then calls `spdlog::shutdown()`. Safe to call more than once.
+   * After the first successful call, further `Log` / `Flush` operations are
+   * no-ops until process exit.
+   * @note Thread-safe.
+   */
+  void Shutdown() noexcept;
 
   /**
    * @brief Logs a string message with typed logger.
@@ -263,6 +274,7 @@ private:
   mutable std::shared_mutex loggers_mutex_;
 
   Config default_config_;
+  std::atomic<bool> shut_down_{false};
 };
 
 inline Logger::Logger() noexcept {
@@ -280,7 +292,11 @@ inline Logger::Logger() noexcept {
 
 template <LoggerTrait T>
 inline void Logger::AddLogger(T /*logger*/, Config config) noexcept {
-  constexpr LoggerTypeIndex logger_index = LoggerTypeIndex::From<T>();
+  if (shut_down_.load(std::memory_order_acquire)) [[unlikely]] {
+    return;
+  }
+
+  constexpr auto logger_index = LoggerTypeIndex::From<T>();
   constexpr std::string_view logger_name = LoggerNameOf<T>();
 
   const std::scoped_lock lock(loggers_mutex_);
@@ -317,6 +333,10 @@ inline void Logger::RemoveLogger(T /*logger*/) noexcept {
 template <LoggerTrait T>
 inline void Logger::Log(T /*logger*/, Level level,
                         std::string_view message) noexcept {
+  if (shut_down_.load(std::memory_order_acquire)) [[unlikely]] {
+    return;
+  }
+
   if (auto spdlog_logger = GetLogger(LoggerTypeIndex::From<T>())) [[likely]] {
     LogMessageImpl(spdlog_logger, level, message);
   }
@@ -335,6 +355,9 @@ inline void Logger::Log(T logger, Level level, std::format_string<Args...> fmt,
 }
 
 inline void Logger::Log(Level level, std::string_view message) noexcept {
+  if (shut_down_.load(std::memory_order_acquire)) [[unlikely]] {
+    return;
+  }
   if (auto logger = GetDefaultLogger()) [[likely]] {
     LogMessageImpl(logger, level, message);
   }

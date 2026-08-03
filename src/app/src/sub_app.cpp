@@ -78,7 +78,7 @@ void SubApp::WaitUntilFullyIdle() const noexcept {
       allow_overlapping_updates_, max_extraction_skips_, is_async_));
 
   while (IsUpdating()) {
-    std::this_thread::yield();
+    is_updating_.wait(true, std::memory_order_acquire);
   }
 }
 
@@ -98,6 +98,11 @@ bool SubApp::TryBeginUpdate() noexcept {
   bool expected = false;
   return is_updating_.compare_exchange_strong(expected, true,
                                               std::memory_order_acq_rel);
+}
+
+void SubApp::EndUpdate() noexcept {
+  is_updating_.store(false, std::memory_order_release);
+  is_updating_.notify_all();
 }
 
 void SubApp::RunUpdatePass(async::Executor& executor) {

@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - dev
     paths:
       - ".github/workflows/macos-clang.yaml"
       - "cmake/**"
@@ -25,6 +24,10 @@ on:
       - "CMakeLists.txt"
       - "CMakePresets.json"
       - "!**.md"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -65,4 +68,55 @@ jobs:
 
       - name: Test (${{ matrix.preset }})
         timeout-minutes: 10
-        run: ctest --preset ${{ matrix.preset }} --output-on-failure --timeout 120
+        run: ctest --preset ${{ matrix.preset }} --output-on-failure --timeout 120 -E '^helios_app_tests$'
+
+      - name: Test helios_app_tests with hang sampling (${{ matrix.preset }})
+        id: app_tests
+        timeout-minutes: 5
+        env:
+          APP_TEST_TIMEOUT_SEC: "120"
+          PRESET: ${{ matrix.preset }}
+        run: |
+          set -euo pipefail
+          mkdir -p "${RUNNER_TEMP}/helios-app-hang"
+          APP_TEST_BIN="$(find "build/${PRESET}" -type f -name helios_app_tests | head -n 1)"
+          if [[ -z "${APP_TEST_BIN}" ]]; then
+            echo "helios_app_tests binary not found under build/${PRESET}" >&2
+            exit 1
+          fi
+          echo "Running ${APP_TEST_BIN}"
+          SAMPLE_OUT="${RUNNER_TEMP}/helios-app-hang/helios_app_tests-${PRESET}.sample.txt"
+          "${APP_TEST_BIN}" &
+          APP_PID=$!
+          (
+            sleep "${APP_TEST_TIMEOUT_SEC}"
+            if kill -0 "${APP_PID}" 2>/dev/null; then
+              echo "helios_app_tests still running after ${APP_TEST_TIMEOUT_SEC}s; sampling pid ${APP_PID}" >&2
+              sample "${APP_PID}" 5 -file "${SAMPLE_OUT}" || true
+              kill -TERM "${APP_PID}" 2>/dev/null || true
+              sleep 2
+              kill -KILL "${APP_PID}" 2>/dev/null || true
+            fi
+          ) &
+          WATCHDOG_PID=$!
+          set +e
+          wait "${APP_PID}"
+          APP_EXIT=$?
+          set -e
+          kill "${WATCHDOG_PID}" 2>/dev/null || true
+          wait "${WATCHDOG_PID}" 2>/dev/null || true
+          if [[ -f "${SAMPLE_OUT}" ]]; then
+            echo "Hang sample captured at ${SAMPLE_OUT}"
+            echo "sampled=true" >> "${GITHUB_OUTPUT}"
+          else
+            echo "sampled=false" >> "${GITHUB_OUTPUT}"
+          fi
+          exit "${APP_EXIT}"
+
+      - name: Upload hang sample (${{ matrix.preset }})
+        if: failure() && steps.app_tests.outputs.sampled == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: helios-app-hang-${{ matrix.preset }}
+          path: ${{ runner.temp }}/helios-app-hang/
+          if-no-files-found: ignore

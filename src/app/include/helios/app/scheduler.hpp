@@ -9,6 +9,7 @@
 #include <atomic>
 #include <cstddef>
 #include <functional>
+#include <future>
 #include <optional>
 #include <vector>
 
@@ -43,7 +44,10 @@ public:
 
   /**
    * @brief Stops async update loops and waits for in-flight sub-app work.
-   * @param executor Executor that runs all current async tasks
+   * @details Joins only scheduler-owned async loops and overlapping updates,
+   * then blocking frame updates. Does not drain unrelated executor tasks.
+   * @param executor Executor that runs scheduler-owned tasks (unused for the
+   * global drain; kept for API consistency with earlier versions)
    */
   void Stop(async::Executor& executor);
 
@@ -103,7 +107,9 @@ private:
 
   void LaunchSubAppUpdates(App& app);
   void StartAsyncUpdateLoops(App& app);
-  void StopAsyncUpdateLoops(async::Executor& executor);
+  void StopAsyncUpdateLoops();
+  void WaitForOverlappingUpdates();
+  void PruneCompletedOverlappingUpdates();
 
   static void ExtractSubApp(SubAppFrameState& state,
                             const ecs::World& main_world);
@@ -116,6 +122,8 @@ private:
   async::TaskGraph shutdown_graph_{"SubAppShutdown"};
   std::vector<SubAppFrameState> sub_app_states_;
   std::optional<async::Future<void>> blocking_update_future_;
+  std::vector<std::future<void>> async_loop_futures_;
+  std::vector<std::future<void>> overlapping_update_futures_;
   std::atomic<size_t> async_loops_running_{0};
 };
 
@@ -125,8 +133,10 @@ inline Scheduler::Scheduler(Scheduler&& other) noexcept
       shutdown_graph_(std::move(other.shutdown_graph_)),
       sub_app_states_(std::move(other.sub_app_states_)),
       blocking_update_future_(std::move(other.blocking_update_future_)),
+      async_loop_futures_(std::move(other.async_loop_futures_)),
+      overlapping_update_futures_(std::move(other.overlapping_update_futures_)),
       async_loops_running_(
-          other.async_loops_running_.load(std::memory_order_relaxed)) {}
+          other.async_loops_running_.exchange(0, std::memory_order_relaxed)) {}
 
 inline Scheduler& Scheduler::operator=(Scheduler&& other) noexcept {
   if (this == &other) [[unlikely]] {
@@ -138,16 +148,13 @@ inline Scheduler& Scheduler::operator=(Scheduler&& other) noexcept {
   shutdown_graph_ = std::move(other.shutdown_graph_);
   sub_app_states_ = std::move(other.sub_app_states_);
   blocking_update_future_ = std::move(other.blocking_update_future_);
+  async_loop_futures_ = std::move(other.async_loop_futures_);
+  overlapping_update_futures_ = std::move(other.overlapping_update_futures_);
   async_loops_running_.store(
-      other.async_loops_running_.load(std::memory_order_relaxed),
+      other.async_loops_running_.exchange(0, std::memory_order_relaxed),
       std::memory_order_release);
 
   return *this;
-}
-
-inline void Scheduler::Stop(async::Executor& executor) {
-  StopAsyncUpdateLoops(executor);
-  WaitForSubApps();
 }
 
 }  // namespace helios::app

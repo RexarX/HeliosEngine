@@ -135,37 +135,39 @@ TEST_SUITE("helios::app::RunOnce") {
 TEST_SUITE("helios::app::RunDefaultSubApp") {
   TEST_CASE("helios::app::RunDefaultSubApp") {
     SUBCASE("Runs update loop until owner app requests exit") {
-      App app(2);
+      std::atomic<int> updates{0};
 
-      struct CountAndExitMain {
-        App* owner = nullptr;
+      struct CountingAtomicSystem {
+        std::atomic<int>* counter = nullptr;
 
-        void operator()(Res<UpdateCountResource> counter) const {
-          ++counter->value;
-          if (counter->value >= 3 && owner != nullptr) {
-            owner->GetWorld().WriteMessages<AppExit>().Write(
-                AppExit::Success());
+        void operator()() const {
+          if (counter != nullptr) {
+            counter->fetch_add(1, std::memory_order_relaxed);
           }
         }
       };
 
+      App app(2);
+
       SubApp sub_app;
       sub_app.SetAsync(true);
       sub_app.SetRunner(RunDefaultSubApp);
-      sub_app.InsertResources(UpdateCountResource{});
-      sub_app.AddSystem(kUpdate, CountAndExitMain{.owner = &app});
+      sub_app.AddSystem(kUpdate, CountingAtomicSystem{.counter = &updates});
 
       app.InsertSubApp(RenderSubAppLabel{}, std::move(sub_app));
       app.Initialize();
 
-      std::this_thread::sleep_for(std::chrono::milliseconds{100});
+      const auto deadline =
+          std::chrono::steady_clock::now() + std::chrono::milliseconds{200};
+      while (updates.load(std::memory_order_relaxed) < 3 &&
+             std::chrono::steady_clock::now() < deadline) {
+        std::this_thread::sleep_for(std::chrono::milliseconds{1});
+      }
+
       app.GetScheduler().Shutdown(app);
 
-      CHECK_GE(app.GetSubApp<RenderSubAppLabel>()
-                   .GetWorld()
-                   .ReadResource<UpdateCountResource>()
-                   .value,
-               3);
+      CHECK_GE(updates.load(std::memory_order_relaxed), 3);
+      CHECK_FALSE(app.GetSubApp<RenderSubAppLabel>().IsUpdating());
     }
   }
 }
@@ -173,7 +175,19 @@ TEST_SUITE("helios::app::RunDefaultSubApp") {
 TEST_SUITE("helios::app::RunFixedSubApp") {
   TEST_CASE("helios::app::RunFixedSubApp") {
     SUBCASE("Background fixed loop increments update counter") {
-      App app(4);
+      std::atomic<int> updates{0};
+
+      struct CountingAtomicSystem {
+        std::atomic<int>* counter = nullptr;
+
+        void operator()() const {
+          if (counter != nullptr) {
+            counter->fetch_add(1, std::memory_order_relaxed);
+          }
+        }
+      };
+
+      App app(2);
 
       SubApp sub_app;
       sub_app.SetAsync(true);
@@ -182,8 +196,7 @@ TEST_SUITE("helios::app::RunFixedSubApp") {
             sa, ex,
             FixedRunnerConfig::FromInterval(std::chrono::milliseconds{1}));
       });
-      sub_app.InsertResources(UpdateCountResource{});
-      sub_app.AddSystem(kUpdate, CountingUpdateSystem{});
+      sub_app.AddSystem(kUpdate, CountingAtomicSystem{.counter = &updates});
 
       app.InsertSubApp(AsyncSoundSubAppLabel{}, std::move(sub_app));
       app.Initialize();
@@ -191,11 +204,8 @@ TEST_SUITE("helios::app::RunFixedSubApp") {
       std::this_thread::sleep_for(std::chrono::milliseconds{50});
       app.GetScheduler().Shutdown(app);
 
-      CHECK_GE(app.GetSubApp<AsyncSoundSubAppLabel>()
-                   .GetWorld()
-                   .ReadResource<UpdateCountResource>()
-                   .value,
-               1);
+      CHECK_GE(updates.load(std::memory_order_relaxed), 1);
+      CHECK_FALSE(app.GetSubApp<AsyncSoundSubAppLabel>().IsUpdating());
     }
   }
 }

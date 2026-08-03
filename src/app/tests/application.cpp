@@ -261,49 +261,61 @@ TEST_SUITE("helios::app::App") {
     }
 
     SUBCASE("Initialize starts background updates for async sub-apps") {
-      App app(4);
+      std::atomic<int> updates{0};
+
+      struct CountingAtomicSystem {
+        std::atomic<int>* counter = nullptr;
+
+        void operator()() const {
+          if (counter != nullptr) {
+            counter->fetch_add(1, std::memory_order_relaxed);
+          }
+        }
+      };
+
+      App app(2);
 
       SubApp sound;
       sound.SetRunner(RunDefaultSubApp);
-      sound.InsertResources(UpdateCountResource{});
-      sound.AddSystem(kUpdate, CountingUpdateSystem{});
+      sound.AddSystem(kUpdate, CountingAtomicSystem{.counter = &updates});
 
       app.InsertSubApp(AsyncSoundSubAppLabel{}, std::move(sound));
       app.Initialize();
 
       std::this_thread::sleep_for(std::chrono::milliseconds{100});
-
-      CHECK_GE(app.GetSubApp<AsyncSoundSubAppLabel>()
-                   .GetWorld()
-                   .ReadResource<UpdateCountResource>()
-                   .value,
-               1);
-
       app.GetScheduler().Shutdown(app);
+
+      CHECK_GE(updates.load(std::memory_order_relaxed), 1);
       CHECK_FALSE(app.GetSubApp<AsyncSoundSubAppLabel>().IsUpdating());
     }
 
     SUBCASE("Destructor stops async sub-app loops without explicit Shutdown") {
-      int observed = 0;
+      std::atomic<int> observed{0};
+
+      struct CountingAtomicSystem {
+        std::atomic<int>* counter = nullptr;
+
+        void operator()() const {
+          if (counter != nullptr) {
+            counter->fetch_add(1, std::memory_order_relaxed);
+          }
+        }
+      };
+
       {
         App app(2);
 
         SubApp sound;
         sound.SetRunner(RunDefaultSubApp);
-        sound.InsertResources(UpdateCountResource{});
-        sound.AddSystem(kUpdate, CountingUpdateSystem{});
+        sound.AddSystem(kUpdate, CountingAtomicSystem{.counter = &observed});
 
         app.InsertSubApp(AsyncSoundSubAppLabel{}, std::move(sound));
         app.Initialize();
 
         std::this_thread::sleep_for(std::chrono::milliseconds{50});
-        observed = app.GetSubApp<AsyncSoundSubAppLabel>()
-                       .GetWorld()
-                       .ReadResource<UpdateCountResource>()
-                       .value;
       }
 
-      CHECK_GE(observed, 1);
+      CHECK_GE(observed.load(std::memory_order_relaxed), 1);
     }
   }
 
