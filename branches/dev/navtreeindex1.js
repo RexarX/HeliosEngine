@@ -1,5 +1,7 @@
 var NAVTREEINDEX1 =
 {
+"classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#a7eb677265ad023c56dd50192f8dbca15":[4,0,2,11,17],
+"classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#a7ffd51bc5d6de517d4377b4e3cb856a2":[2,0,6,12,13],
 "classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#a7ffd51bc5d6de517d4377b4e3cb856a2":[4,0,2,11,13],
 "classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#a967ac7ecaa2cc04d793f34b54b555e55":[2,0,6,12,6],
 "classhelios_1_1Delegate_3_01ReturnType_07Args_8_8_8_08_4.html#a967ac7ecaa2cc04d793f34b54b555e55":[4,0,2,11,6],
@@ -241,13 +243,11 @@ var NAVTREEINDEX1 =
 "classhelios_1_1app_1_1DynamicPlugin.html#a2dbdd7851da682412c4f81d9090bd547":[4,0,2,0,3,8],
 "classhelios_1_1app_1_1DynamicPlugin.html#a2edf7b61ce3efa230319564b1fafe3e8":[2,0,6,1,4,6],
 "classhelios_1_1app_1_1DynamicPlugin.html#a2edf7b61ce3efa230319564b1fafe3e8":[4,0,2,0,3,6],
+"classhelios_1_1app_1_1DynamicPlugin.html#a3a84edf20dc18ac99ce7236e08eec86b":[2,0,6,1,4,12],
+"classhelios_1_1app_1_1DynamicPlugin.html#a3a84edf20dc18ac99ce7236e08eec86b":[4,0,2,0,3,12],
 "classhelios_1_1app_1_1DynamicPlugin.html#a41e5d495449b9cc9a2b5be0513a58b0f":[2,0,6,1,4,22],
 "classhelios_1_1app_1_1DynamicPlugin.html#a41e5d495449b9cc9a2b5be0513a58b0f":[4,0,2,0,3,22],
 "classhelios_1_1app_1_1DynamicPlugin.html#a5098123c654dbe948dcc85614bf2c6c4":[2,0,6,1,4,10],
 "classhelios_1_1app_1_1DynamicPlugin.html#a5098123c654dbe948dcc85614bf2c6c4":[4,0,2,0,3,10],
-"classhelios_1_1app_1_1DynamicPlugin.html#a62fa0c7bcc38be9bcde87e59f6cc5600":[2,0,6,1,4,16],
-"classhelios_1_1app_1_1DynamicPlugin.html#a62fa0c7bcc38be9bcde87e59f6cc5600":[4,0,2,0,3,16],
-"classhelios_1_1app_1_1DynamicPlugin.html#a6ebf28ec321d00ca7fc3acf55529b628":[2,0,6,1,4,14],
-"classhelios_1_1app_1_1DynamicPlugin.html#a6ebf28ec321d00ca7fc3acf55529b628":[4,0,2,0,3,14],
-"classhelios_1_1app_1_1DynamicPlugin.html#a7517cbb034358deda18c4c73ac9538b5":[2,0,6,1,4,3]
+"classhelios_1_1app_1_1DynamicPlugin.html#a62fa0c7bcc38be9bcde87e59f6cc5600":[2,0,6,1,4,16]
 };

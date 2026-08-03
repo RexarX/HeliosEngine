@@ -1,5 +1,9 @@
 var NAVTREEINDEX20 =
 {
+"classhelios_1_1mem_1_1FixedArenaAllocator.html#a87a06fbaf17b29fe300a28309dc8d25b":[4,0,2,6,5,6],
+"classhelios_1_1mem_1_1FixedArenaAllocator.html#a8def16c9508172a89ee274cac57c9f3a":[2,0,6,7,5,11],
+"classhelios_1_1mem_1_1FixedArenaAllocator.html#a8def16c9508172a89ee274cac57c9f3a":[4,0,2,6,5,11],
+"classhelios_1_1mem_1_1FixedArenaAllocator.html#aa2ceea9f29626cc4004a6f4233a84d34":[2,0,6,7,5,3],
 "classhelios_1_1mem_1_1FixedArenaAllocator.html#aa2ceea9f29626cc4004a6f4233a84d34":[4,0,2,6,5,3],
 "classhelios_1_1mem_1_1FixedArenaAllocator.html#aab4af459c3e0aa1aa321c23cd0ef70f2":[2,0,6,7,5,10],
 "classhelios_1_1mem_1_1FixedArenaAllocator.html#aab4af459c3e0aa1aa321c23cd0ef70f2":[4,0,2,6,5,10],
@@ -245,9 +249,5 @@ var NAVTREEINDEX20 =
 "classhelios_1_1mem_1_1RcFromThis.html#ad731268ade4cbbe4e5c0e174cc9f8e26":[4,0,2,6,17,0],
 "classhelios_1_1mem_1_1RefCounted.html":[2,0,6,7,18],
 "classhelios_1_1mem_1_1RefCounted.html":[4,0,2,6,18],
-"classhelios_1_1mem_1_1RefCounted.html#a11aa2c5715ce0d81501e47cfeae65ad7":[2,0,6,7,18,17],
-"classhelios_1_1mem_1_1RefCounted.html#a11aa2c5715ce0d81501e47cfeae65ad7":[4,0,2,6,18,17],
-"classhelios_1_1mem_1_1RefCounted.html#a24a8eac4c82dbd7930b6c631ed02ccb8":[2,0,6,7,18,29],
-"classhelios_1_1mem_1_1RefCounted.html#a24a8eac4c82dbd7930b6c631ed02ccb8":[4,0,2,6,18,29],
-"classhelios_1_1mem_1_1RefCounted.html#a339327a5f4559e5481c67156e6aed59c":[2,0,6,7,18,32]
+"classhelios_1_1mem_1_1RefCounted.html#a11aa2c5715ce0d81501e47cfeae65ad7":[2,0,6,7,18,17]
 };

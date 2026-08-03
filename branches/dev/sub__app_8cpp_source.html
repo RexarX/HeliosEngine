@@ -211,109 +211,139 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('sub__app_8cpp_
 </div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
 <div class="foldopen" id="foldopen00033" data-start="{" data-end="}">
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classhelios_1_1app_1_1SubApp.html#a025e14a168fd6d551bcb97612eb30a8b">   33</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a025e14a168fd6d551bcb97612eb30a8b">SubApp::Clear</a>() {</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!<a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">IsUpdating</a>(), <span class="stringliteral">&quot;Cannot clear while sub-app is updating!&quot;</span>);</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  world_.Clear();</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  scheduler_.Clear();</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  <a class="code hl_function" href="namespacehelios_1_1app.html#a60d91b67bd8440f11125ee67906c6da2">RegisterBuiltinSubAppSchedules</a>(scheduler_);</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  update_stage_ = <a class="code hl_function" href="classhelios_1_1utils_1_1TypeIndex.html#a297644a5a2859e698149e927a691d622">ecs::StageTypeIndex::From</a>(<a class="code hl_variable" href="namespacehelios_1_1app.html#aad0e9cb0d1b47caf5140069e17729d66">kUpdateStage</a>);</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  extract_fn_ = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  runner_ = <a class="code hl_function" href="namespacehelios_1_1app.html#a8e052e1da732c35b13c145cafe5b675f">RunOnceSubApp</a>;</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  owner_app_ = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  async_loop_stop_.store(<span class="keyword">false</span>, std::memory_order_release);</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>}</div>
-</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
-<div class="foldopen" id="foldopen00046" data-start="{" data-end="}">
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classhelios_1_1app_1_1SubApp.html#aebc2bf4d88d71f166696e21be37f6af7">   46</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#aebc2bf4d88d71f166696e21be37f6af7">SubApp::WaitUntilFullyIdle</a>() const noexcept {</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  HELIOS_APP_PROFILE_SCOPE();</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  HELIOS_APP_PROFILE_ZONE_NAME(std::format(</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>      <span class="stringliteral">&quot;helios::app::SubApp::WaitUntilFullyIdle{{name: {}}}&quot;</span>, <a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#af0135453e3b3ef1e0b792a165b525bb3">GetName</a>()));</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  HELIOS_APP_PROFILE_ZONE_TEXT(std::format(</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>      <span class="stringliteral">&quot;allow_overlapping_updates: {}, max_extraction_skips: {}, is_async: {}&quot;</span>,</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>      allow_overlapping_updates_, max_extraction_skips_, is_async_));</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  <span class="keywordflow">while</span> (<a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">IsUpdating</a>()) {</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    std::this_thread::yield();</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  }</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classhelios_1_1app_1_1SubApp.html#a51a3dc5c6d822d277b9eab9cb0c567aa">   33</a></span><a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ac0e8df1e6a0f19dd76e1c21140b01ed1">SubApp</a>&amp; <a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a5c480be3b750f30315116d9869e25eed">SubApp::operator=</a>(<a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ac0e8df1e6a0f19dd76e1c21140b01ed1">SubApp</a>&amp;&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!<a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">IsUpdating</a>(), <span class="stringliteral">&quot;Cannot assign while updating!&quot;</span>);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!other.IsUpdating(), <span class="stringliteral">&quot;Cannot assign from updating sub-app!&quot;</span>);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  <span class="keywordflow">if</span> (<span class="keyword">this</span> == &amp;other) [[unlikely]] {</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  }</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  name_ = std::move(other.name_);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  world_ = std::move(other.world_);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  scheduler_ = std::move(other.scheduler_);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  update_stage_ = other.update_stage_;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  extract_fn_ = std::move(other.extract_fn_);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  runner_ = std::move(other.runner_);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  is_updating_.store(other.is_updating_.load(std::memory_order_acquire),</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>                     std::memory_order_release);</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  async_loop_stop_.store(other.async_loop_stop_.load(std::memory_order_acquire),</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>                         std::memory_order_release);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  allow_overlapping_updates_ = other.allow_overlapping_updates_;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  is_async_ = other.is_async_;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  max_extraction_skips_ = other.max_extraction_skips_;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  owner_app_ = other.owner_app_;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>}</div>
 </div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
 <div class="foldopen" id="foldopen00059" data-start="{" data-end="}">
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="classhelios_1_1app_1_1SubApp.html#a92bcf99a059f786ea7f1995ebd8260e3">   59</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a92bcf99a059f786ea7f1995ebd8260e3">SubApp::ShouldExit</a>() const noexcept {</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  <span class="keywordflow">if</span> (AsyncLoopStopRequested()) {</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  }</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  <span class="keywordflow">if</span> (owner_app_ == <span class="keyword">nullptr</span>) [[unlikely]] {</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  }</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  <span class="keywordflow">return</span> owner_app_-&gt;ShouldExit().has_value();</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>}</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="classhelios_1_1app_1_1SubApp.html#a025e14a168fd6d551bcb97612eb30a8b">   59</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a025e14a168fd6d551bcb97612eb30a8b">SubApp::Clear</a>() {</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  <a class="code hl_define" href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a>(!<a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">IsUpdating</a>(), <span class="stringliteral">&quot;Cannot clear while sub-app is updating!&quot;</span>);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  world_.Clear();</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  scheduler_.Clear();</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  <a class="code hl_function" href="namespacehelios_1_1app.html#a60d91b67bd8440f11125ee67906c6da2">RegisterBuiltinSubAppSchedules</a>(scheduler_);</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  update_stage_ = <a class="code hl_function" href="classhelios_1_1utils_1_1TypeIndex.html#a297644a5a2859e698149e927a691d622">ecs::StageTypeIndex::From</a>(<a class="code hl_variable" href="namespacehelios_1_1app.html#aad0e9cb0d1b47caf5140069e17729d66">kUpdateStage</a>);</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  extract_fn_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  runner_ = <a class="code hl_function" href="namespacehelios_1_1app.html#a8e052e1da732c35b13c145cafe5b675f">RunOnceSubApp</a>;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  owner_app_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  async_loop_stop_.store(<span class="keyword">false</span>, std::memory_order_release);</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>}</div>
 </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="keywordtype">bool</span> SubApp::TryBeginUpdate() noexcept {</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  <span class="keywordtype">bool</span> expected = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  <span class="keywordflow">return</span> is_updating_.compare_exchange_strong(expected, <span class="keyword">true</span>,</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>                                              std::memory_order_acq_rel);</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>}</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="keywordtype">void</span> SubApp::RunUpdatePass(<a class="code hl_class" href="classhelios_1_1async_1_1Executor.html">async::Executor</a>&amp; executor) {</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>  <span class="keywordflow">if</span> (!TryBeginUpdate()) [[unlikely]] {</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <a class="code hl_function" href="namespacehelios_1_1log.html#a173df16cba4f24a87e3550c3fbbdd55b">log::Warn</a>(<span class="stringliteral">&quot;Failed to update sub-app, update already in progress!&quot;</span>);</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  }</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  <span class="keyword">struct </span>UpdateGuard {</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    SubApp&amp; sub_app;</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    ~UpdateGuard() { sub_app.EndUpdate(); }</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  } guard{*<span class="keyword">this</span>};</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  <span class="keywordflow">if</span> (runner_) [[likely]] {</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    runner_(*<span class="keyword">this</span>, executor);</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="foldopen" id="foldopen00072" data-start="{" data-end="}">
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="classhelios_1_1app_1_1SubApp.html#aebc2bf4d88d71f166696e21be37f6af7">   72</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#aebc2bf4d88d71f166696e21be37f6af7">SubApp::WaitUntilFullyIdle</a>() const noexcept {</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  HELIOS_APP_PROFILE_SCOPE();</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  HELIOS_APP_PROFILE_ZONE_NAME(std::format(</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>      <span class="stringliteral">&quot;helios::app::SubApp::WaitUntilFullyIdle{{name: {}}}&quot;</span>, <a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#af0135453e3b3ef1e0b792a165b525bb3">GetName</a>()));</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  HELIOS_APP_PROFILE_ZONE_TEXT(std::format(</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>      <span class="stringliteral">&quot;allow_overlapping_updates: {}, max_extraction_skips: {}, is_async: {}&quot;</span>,</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>      allow_overlapping_updates_, max_extraction_skips_, is_async_));</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  <span class="keywordflow">while</span> (<a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">IsUpdating</a>()) {</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    std::this_thread::yield();</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  }</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>}</div>
+</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="foldopen" id="foldopen00085" data-start="{" data-end="}">
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="classhelios_1_1app_1_1SubApp.html#a92bcf99a059f786ea7f1995ebd8260e3">   85</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a92bcf99a059f786ea7f1995ebd8260e3">SubApp::ShouldExit</a>() const noexcept {</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  <span class="keywordflow">if</span> (AsyncLoopStopRequested()) {</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  }</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>  <span class="keywordflow">if</span> (owner_app_ == <span class="keyword">nullptr</span>) [[unlikely]] {</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  }</div>
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  <span class="keywordflow">if</span> (is_async_) {</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="keywordflow">while</span> (!<a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a92bcf99a059f786ea7f1995ebd8260e3">ShouldExit</a>()) {</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>      <a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a191f625d927932ab72b7b28dd5412665">Update</a>(executor);</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    }</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  }</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>  <a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a191f625d927932ab72b7b28dd5412665">Update</a>(executor);</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>}</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="keywordtype">void</span> SubApp::RunStageUnchecked(async::Executor&amp; executor,</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>                               <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#ad211936eaf13c1cac7777d379555d04b">ecs::StageTypeIndex</a> stage, ecs::World&amp; world) {</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>  <span class="keyword">const</span> std::scoped_lock lock(stage_run_mutex_);</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>  <a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ab9266ff66aed0f6d7bd5dd984b4c8a0a">BuildScheduler</a>(executor);</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>  scheduler_.RunStage(stage, world);</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>}</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>}  <span class="comment">// namespace helios::app</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  <span class="keywordflow">return</span> owner_app_-&gt;ShouldExit().has_value();</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>}</div>
+</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="keywordtype">bool</span> SubApp::TryBeginUpdate() noexcept {</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>  <span class="keywordtype">bool</span> expected = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  <span class="keywordflow">return</span> is_updating_.compare_exchange_strong(expected, <span class="keyword">true</span>,</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>                                              std::memory_order_acq_rel);</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>}</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="keywordtype">void</span> SubApp::RunUpdatePass(<a class="code hl_class" href="classhelios_1_1async_1_1Executor.html">async::Executor</a>&amp; executor) {</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>  <span class="keywordflow">if</span> (!TryBeginUpdate()) [[unlikely]] {</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    <a class="code hl_function" href="namespacehelios_1_1log.html#a173df16cba4f24a87e3550c3fbbdd55b">log::Warn</a>(<span class="stringliteral">&quot;Failed to update sub-app, update already in progress!&quot;</span>);</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>  }</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>  <span class="keyword">struct </span>UpdateGuard {</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    SubApp&amp; sub_app;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    ~UpdateGuard() { sub_app.EndUpdate(); }</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>  } guard{*<span class="keyword">this</span>};</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>  <span class="keywordflow">if</span> (runner_) [[likely]] {</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    runner_(*<span class="keyword">this</span>, executor);</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>  }</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>  <span class="keywordflow">if</span> (is_async_) {</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    <span class="keywordflow">while</span> (!<a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a92bcf99a059f786ea7f1995ebd8260e3">ShouldExit</a>()) {</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>      <a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a191f625d927932ab72b7b28dd5412665">Update</a>(executor);</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>      std::this_thread::yield();</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    }</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>  }</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>  <a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#a191f625d927932ab72b7b28dd5412665">Update</a>(executor);</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>}</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span><span class="keywordtype">void</span> SubApp::RunStageUnchecked(async::Executor&amp; executor,</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>                               <a class="code hl_typedef" href="namespacehelios_1_1ecs.html#ad211936eaf13c1cac7777d379555d04b">ecs::StageTypeIndex</a> stage, ecs::World&amp; world) {</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>  <span class="keyword">const</span> std::scoped_lock lock(stage_run_mutex_);</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>  <a class="code hl_function" href="classhelios_1_1app_1_1SubApp.html#ab9266ff66aed0f6d7bd5dd984b4c8a0a">BuildScheduler</a>(executor);</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>  scheduler_.RunStage(stage, world);</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>}</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>}  <span class="comment">// namespace helios::app</span></div>
 <div class="ttc" id="aapp_2src_2pch_8hpp_html"><div class="ttname"><a href="app_2src_2pch_8hpp.html">pch.hpp</a></div></div>
 <div class="ttc" id="aapp_8hpp_html"><div class="ttname"><a href="app_8hpp.html">app.hpp</a></div></div>
 <div class="ttc" id="aassert_8hpp_html"><div class="ttname"><a href="assert_8hpp.html">assert.hpp</a></div></div>
 <div class="ttc" id="aassert_8hpp_html_a242b112c1c22a1166b0873f5dbcaa5fc"><div class="ttname"><a href="assert_8hpp.html#a242b112c1c22a1166b0873f5dbcaa5fc">HELIOS_ASSERT</a></div><div class="ttdeci">#define HELIOS_ASSERT(condition,...)</div><div class="ttdoc">Assertion macro that aborts execution in debug builds.</div><div class="ttdef"><b>Definition</b> <a href="assert_8hpp_source.html#l00259">assert.hpp:259</a></div></div>
 <div class="ttc" id="aasync_2include_2helios_2async_2executor_8hpp_html"><div class="ttname"><a href="async_2include_2helios_2async_2executor_8hpp.html">executor.hpp</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_a025e14a168fd6d551bcb97612eb30a8b"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#a025e14a168fd6d551bcb97612eb30a8b">helios::app::SubApp::Clear</a></div><div class="ttdeci">void Clear()</div><div class="ttdoc">Clears the sub-app world, ECS scheduler, and extract function.</div><div class="ttdef"><b>Definition</b> <a href="#l00033">sub_app.cpp:33</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_a191f625d927932ab72b7b28dd5412665"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#a191f625d927932ab72b7b28dd5412665">helios::app::SubApp::Update</a></div><div class="ttdeci">void Update(async::Executor &amp;executor)</div><div class="ttdoc">Runs the configured update stage.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00680">sub_app.hpp:680</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_a92bcf99a059f786ea7f1995ebd8260e3"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#a92bcf99a059f786ea7f1995ebd8260e3">helios::app::SubApp::ShouldExit</a></div><div class="ttdeci">bool ShouldExit() const noexcept</div><div class="ttdoc">Returns whether this sub-app should stop its update loop.</div><div class="ttdef"><b>Definition</b> <a href="#l00059">sub_app.cpp:59</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_ab9266ff66aed0f6d7bd5dd984b4c8a0a"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#ab9266ff66aed0f6d7bd5dd984b4c8a0a">helios::app::SubApp::BuildScheduler</a></div><div class="ttdeci">void BuildScheduler(async::Executor &amp;executor)</div><div class="ttdoc">Builds all ECS schedules when any are dirty.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00716">sub_app.hpp:716</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_a025e14a168fd6d551bcb97612eb30a8b"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#a025e14a168fd6d551bcb97612eb30a8b">helios::app::SubApp::Clear</a></div><div class="ttdeci">void Clear()</div><div class="ttdoc">Clears the sub-app world, ECS scheduler, and extract function.</div><div class="ttdef"><b>Definition</b> <a href="#l00059">sub_app.cpp:59</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_a191f625d927932ab72b7b28dd5412665"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#a191f625d927932ab72b7b28dd5412665">helios::app::SubApp::Update</a></div><div class="ttdeci">void Update(async::Executor &amp;executor)</div><div class="ttdoc">Runs the configured update stage.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00654">sub_app.hpp:654</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_a5c480be3b750f30315116d9869e25eed"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#a5c480be3b750f30315116d9869e25eed">helios::app::SubApp::operator=</a></div><div class="ttdeci">SubApp &amp; operator=(const SubApp &amp;)=delete</div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_a92bcf99a059f786ea7f1995ebd8260e3"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#a92bcf99a059f786ea7f1995ebd8260e3">helios::app::SubApp::ShouldExit</a></div><div class="ttdeci">bool ShouldExit() const noexcept</div><div class="ttdoc">Returns whether this sub-app should stop its update loop.</div><div class="ttdef"><b>Definition</b> <a href="#l00085">sub_app.cpp:85</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_ab9266ff66aed0f6d7bd5dd984b4c8a0a"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#ab9266ff66aed0f6d7bd5dd984b4c8a0a">helios::app::SubApp::BuildScheduler</a></div><div class="ttdeci">void BuildScheduler(async::Executor &amp;executor)</div><div class="ttdoc">Builds all ECS schedules when any are dirty.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00690">sub_app.hpp:690</a></div></div>
 <div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_ac0e8df1e6a0f19dd76e1c21140b01ed1"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#ac0e8df1e6a0f19dd76e1c21140b01ed1">helios::app::SubApp::SubApp</a></div><div class="ttdeci">SubApp()</div><div class="ttdoc">Constructs a sub-app with built-in schedules registered.</div><div class="ttdef"><b>Definition</b> <a href="#l00024">sub_app.cpp:24</a></div></div>
 <div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_ae4f1c424bf407b7f63a7558d9b7e734a"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#ae4f1c424bf407b7f63a7558d9b7e734a">helios::app::SubApp::IsUpdating</a></div><div class="ttdeci">bool IsUpdating() const noexcept</div><div class="ttdoc">Returns whether an update is in flight.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00522">sub_app.hpp:522</a></div></div>
-<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_aebc2bf4d88d71f166696e21be37f6af7"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#aebc2bf4d88d71f166696e21be37f6af7">helios::app::SubApp::WaitUntilFullyIdle</a></div><div class="ttdeci">void WaitUntilFullyIdle() const noexcept</div><div class="ttdoc">Blocks until no update is in flight.</div><div class="ttdef"><b>Definition</b> <a href="#l00046">sub_app.cpp:46</a></div></div>
+<div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_aebc2bf4d88d71f166696e21be37f6af7"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#aebc2bf4d88d71f166696e21be37f6af7">helios::app::SubApp::WaitUntilFullyIdle</a></div><div class="ttdeci">void WaitUntilFullyIdle() const noexcept</div><div class="ttdoc">Blocks until no update is in flight.</div><div class="ttdef"><b>Definition</b> <a href="#l00072">sub_app.cpp:72</a></div></div>
 <div class="ttc" id="aclasshelios_1_1app_1_1SubApp_html_af0135453e3b3ef1e0b792a165b525bb3"><div class="ttname"><a href="classhelios_1_1app_1_1SubApp.html#af0135453e3b3ef1e0b792a165b525bb3">helios::app::SubApp::GetName</a></div><div class="ttdeci">const std::string &amp; GetName() const noexcept</div><div class="ttdoc">Gets the human-readable sub-app name.</div><div class="ttdef"><b>Definition</b> <a href="sub__app_8hpp_source.html#l00412">sub_app.hpp:412</a></div></div>
 <div class="ttc" id="aclasshelios_1_1async_1_1Executor_html"><div class="ttname"><a href="classhelios_1_1async_1_1Executor.html">helios::async::Executor</a></div><div class="ttdoc">Manages worker threads and executes task graphs using work-stealing scheduling.</div><div class="ttdef"><b>Definition</b> <a href="async_2include_2helios_2async_2executor_8hpp_source.html#l00032">executor.hpp:32</a></div></div>
 <div class="ttc" id="aclasshelios_1_1utils_1_1TypeIndex_html_a297644a5a2859e698149e927a691d622"><div class="ttname"><a href="classhelios_1_1utils_1_1TypeIndex.html#a297644a5a2859e698149e927a691d622">helios::utils::TypeIndex::From</a></div><div class="ttdeci">static constexpr TypeIndex From() noexcept</div><div class="ttdoc">Constructs a TypeIndex from a type T.</div><div class="ttdef"><b>Definition</b> <a href="type__info_8hpp_source.html#l00376">type_info.hpp:376</a></div></div>
 <div class="ttc" id="alogger_8hpp_html"><div class="ttname"><a href="logger_8hpp.html">logger.hpp</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1app_html"><div class="ttname"><a href="namespacehelios_1_1app.html">helios::app</a></div><div class="ttdef"><b>Definition</b> <a href="application_8hpp_source.html#l00046">application.hpp:46</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1app_html_a60d91b67bd8440f11125ee67906c6da2"><div class="ttname"><a href="namespacehelios_1_1app.html#a60d91b67bd8440f11125ee67906c6da2">helios::app::RegisterBuiltinSubAppSchedules</a></div><div class="ttdeci">void RegisterBuiltinSubAppSchedules(ecs::Scheduler &amp;scheduler)</div><div class="ttdoc">Registers built-in schedules for a sub-app ECS scheduler.</div><div class="ttdef"><b>Definition</b> <a href="schedules_8hpp_source.html#l00225">schedules.hpp:225</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1app_html_a8e052e1da732c35b13c145cafe5b675f"><div class="ttname"><a href="namespacehelios_1_1app.html#a8e052e1da732c35b13c145cafe5b675f">helios::app::RunOnceSubApp</a></div><div class="ttdeci">void RunOnceSubApp(SubApp &amp;sub_app, async::Executor &amp;executor)</div><div class="ttdoc">Runs a single sub-app update stage.</div><div class="ttdef"><b>Definition</b> <a href="runners_8hpp_source.html#l00152">runners.hpp:152</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1app_html_a8e052e1da732c35b13c145cafe5b675f"><div class="ttname"><a href="namespacehelios_1_1app.html#a8e052e1da732c35b13c145cafe5b675f">helios::app::RunOnceSubApp</a></div><div class="ttdeci">void RunOnceSubApp(SubApp &amp;sub_app, async::Executor &amp;executor)</div><div class="ttdoc">Runs a single sub-app update stage.</div><div class="ttdef"><b>Definition</b> <a href="runners_8hpp_source.html#l00155">runners.hpp:155</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1app_html_aad0e9cb0d1b47caf5140069e17729d66"><div class="ttname"><a href="namespacehelios_1_1app.html#aad0e9cb0d1b47caf5140069e17729d66">helios::app::kUpdateStage</a></div><div class="ttdeci">constexpr UpdateStage kUpdateStage</div><div class="ttdoc">Builtin stage for per-frame updates.</div><div class="ttdef"><b>Definition</b> <a href="schedules_8hpp_source.html#l00026">schedules.hpp:26</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1ecs_html_ad211936eaf13c1cac7777d379555d04b"><div class="ttname"><a href="namespacehelios_1_1ecs.html#ad211936eaf13c1cac7777d379555d04b">helios::ecs::StageTypeIndex</a></div><div class="ttdeci">utils::TypeIndex StageTypeIndex</div><div class="ttdoc">Type index for stages.</div><div class="ttdef"><b>Definition</b> <a href="stage_8hpp_source.html#l00012">stage.hpp:12</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1log_html_a173df16cba4f24a87e3550c3fbbdd55b"><div class="ttname"><a href="namespacehelios_1_1log.html#a173df16cba4f24a87e3550c3fbbdd55b">helios::log::Warn</a></div><div class="ttdeci">void Warn(std::string_view message) noexcept</div><div class="ttdoc">Logs a warning message with the default logger.</div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00530">logger.hpp:530</a></div></div>

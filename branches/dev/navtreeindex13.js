@@ -1,5 +1,9 @@
 var NAVTREEINDEX13 =
 {
+"classhelios_1_1ecs_1_1EntityAddedMsg.html#abc3b849a08a8b04b723ca62990249ef1":[4,0,2,4,41,10],
+"classhelios_1_1ecs_1_1EntityAddedMsg.html#ae5c1e56d8ff9a5a5006ccfaf41e68bcb":[2,0,6,5,42,2],
+"classhelios_1_1ecs_1_1EntityAddedMsg.html#ae5c1e56d8ff9a5a5006ccfaf41e68bcb":[4,0,2,4,41,2],
+"classhelios_1_1ecs_1_1EntityCmdBuffer.html":[2,0,6,5,43],
 "classhelios_1_1ecs_1_1EntityCmdBuffer.html":[4,0,2,4,42],
 "classhelios_1_1ecs_1_1EntityCmdBuffer.html#a0a65ec37ab1945203b4ac5be60340734":[2,0,6,5,43,21],
 "classhelios_1_1ecs_1_1EntityCmdBuffer.html#a0a65ec37ab1945203b4ac5be60340734":[4,0,2,4,42,21],
@@ -245,9 +249,5 @@ var NAVTREEINDEX13 =
 "classhelios_1_1ecs_1_1MessageManager.html#aaa44e164506d9b475291740f1b9431a2":[4,0,2,4,51,19],
 "classhelios_1_1ecs_1_1MessageManager.html#aae786195663d6f17a19e2aa84bbb5f59":[2,0,6,5,52,3],
 "classhelios_1_1ecs_1_1MessageManager.html#aae786195663d6f17a19e2aa84bbb5f59":[4,0,2,4,51,3],
-"classhelios_1_1ecs_1_1MessageManager.html#ab65d2ee1328e58e2ed1ca4dbe3fd5f3a":[2,0,6,5,52,11],
-"classhelios_1_1ecs_1_1MessageManager.html#ab65d2ee1328e58e2ed1ca4dbe3fd5f3a":[4,0,2,4,51,11],
-"classhelios_1_1ecs_1_1MessageManager.html#ab872c679bc6fe8136c053e8903605787":[2,0,6,5,52,8],
-"classhelios_1_1ecs_1_1MessageManager.html#ab872c679bc6fe8136c053e8903605787":[4,0,2,4,51,8],
-"classhelios_1_1ecs_1_1MessageManager.html#ac5bef9f69e93665c1997a61df3d7046b":[2,0,6,5,52,4]
+"classhelios_1_1ecs_1_1MessageManager.html#ab65d2ee1328e58e2ed1ca4dbe3fd5f3a":[2,0,6,5,52,11]
 };

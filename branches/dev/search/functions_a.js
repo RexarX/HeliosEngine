@@ -1,7 +1,7 @@
 var searchData=
 [
   ['length_0',['Length',['../classhelios_1_1container_1_1BasicStaticString.html#a30dca0085ba704f316fab217bba8113f',1,'helios::container::BasicStaticString::Length()'],['../classhelios_1_1BasicCStringView.html#ac114486c7823ff77a116aeb468d41528',1,'helios::BasicCStringView::Length()']]],
-  ['library_1',['Library',['../classhelios_1_1app_1_1DynamicPlugin.html#ad31e5ab8f52b59d02c32ca601dbddb05',1,'helios::app::DynamicPlugin::Library() noexcept'],['../classhelios_1_1app_1_1DynamicPlugin.html#abbb1ba75dc8609dc3b98bb39cb627272',1,'helios::app::DynamicPlugin::Library() const noexcept']]],
+  ['library_1',['Library',['../classhelios_1_1app_1_1DynamicPlugin.html#a919bfa9e57fbd88e32653e4258376d85',1,'helios::app::DynamicPlugin::Library() noexcept'],['../classhelios_1_1app_1_1DynamicPlugin.html#a3a84edf20dc18ac99ce7236e08eec86b',1,'helios::app::DynamicPlugin::Library() const noexcept']]],
   ['linear_2',['Linear',['../structhelios_1_1mem_1_1GrowthPolicy.html#a088e5526869b8462e658161532eca454',1,'helios::mem::GrowthPolicy']]],
   ['linearize_3',['Linearize',['../classhelios_1_1async_1_1SubTaskGraph.html#a878a2528e2b0290af2e765d974a37b78',1,'helios::async::SubTaskGraph::Linearize()'],['../classhelios_1_1async_1_1TaskGraph.html#acb6774e9775ba422bd8f6167cd85f979',1,'helios::async::TaskGraph::Linearize()']]],
   ['load_4',['Load',['../classhelios_1_1app_1_1DynamicPlugin.html#a6ebf28ec321d00ca7fc3acf55529b628',1,'helios::app::DynamicPlugin::Load()'],['../classhelios_1_1utils_1_1DynamicLibrary.html#ac1ca51a6830a4159681abbe401bfe49a',1,'helios::utils::DynamicLibrary::Load()']]],

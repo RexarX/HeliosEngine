@@ -199,6 +199,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a42835b0c1df276d5f303afe853901f05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs one full application frame.  <br /></td></tr>
 <tr class="memitem:a592a558083433d722cdc508862fc9ca1" id="r_a592a558083433d722cdc508862fc9ca1"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a592a558083433d722cdc508862fc9ca1">Shutdown</a> (<a class="el" href="classhelios_1_1app_1_1App.html">App</a> &amp;app)</td></tr>
 <tr class="memdesc:a592a558083433d722cdc508862fc9ca1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops async loops, waits for in-flight updates, shuts down sub-apps, then the main sub-app.  <br /></td></tr>
+<tr class="memitem:a2117448d8406907a7a4ffbac20b7d24a" id="r_a2117448d8406907a7a4ffbac20b7d24a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a2117448d8406907a7a4ffbac20b7d24a">StopAsyncLoops</a> ()</td></tr>
+<tr class="memdesc:a2117448d8406907a7a4ffbac20b7d24a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Requests async sub-app loops to exit and waits until they finish.  <br /></td></tr>
 <tr class="memitem:a97b865094431f7a9b10d363c76354d66" id="r_a97b865094431f7a9b10d363c76354d66"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a97b865094431f7a9b10d363c76354d66">WaitForSubApps</a> ()</td></tr>
 <tr class="memdesc:a97b865094431f7a9b10d363c76354d66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Waits until blocking sub-apps finish their frame update.  <br /></td></tr>
 <tr class="memitem:a81e159fa7e987001473e3591990bee18" id="r_a81e159fa7e987001473e3591990bee18"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a81e159fa7e987001473e3591990bee18">Clear</a> ()</td></tr>
@@ -283,7 +285,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2scheduler_8hpp_source.html#l00106">106</a> of file <a class="el" href="app_2include_2helios_2app_2scheduler_8hpp_source.html">scheduler.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2scheduler_8hpp_source.html#l00110">110</a> of file <a class="el" href="app_2include_2helios_2app_2scheduler_8hpp_source.html">scheduler.hpp</a>.</p>
 
 </div>
 </div>
@@ -345,9 +347,6 @@ Public Member Functions</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void helios::app::Scheduler::Clear </td>
@@ -356,16 +355,12 @@ Public Member Functions</h2></td></tr>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Clears cached task graphs and pending sub-app update state. </p>
+<p>Stops async update loops before discarding tracking state. </p>
 
-<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2scheduler_8hpp_source.html#l00132">132</a> of file <a class="el" href="app_2include_2helios_2app_2scheduler_8hpp_source.html">scheduler.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2src_2scheduler_8cpp_source.html#l00128">128</a> of file <a class="el" href="app_2src_2scheduler_8cpp_source.html">scheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -417,7 +412,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2scheduler_8hpp_source.html#l00115">115</a> of file <a class="el" href="app_2include_2helios_2app_2scheduler_8hpp_source.html">scheduler.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2include_2helios_2app_2scheduler_8hpp_source.html#l00119">119</a> of file <a class="el" href="app_2include_2helios_2app_2scheduler_8hpp_source.html">scheduler.hpp</a>.</p>
 
 </div>
 </div>
@@ -502,6 +497,27 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a2117448d8406907a7a4ffbac20b7d24a" name="a2117448d8406907a7a4ffbac20b7d24a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2117448d8406907a7a4ffbac20b7d24a">&#9670;&#160;</a></span>StopAsyncLoops()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::app::Scheduler::StopAsyncLoops </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Requests async sub-app loops to exit and waits until they finish. </p>
+
+<p class="definition">Definition at line <a class="el" href="app_2src_2scheduler_8cpp_source.html#l00115">115</a> of file <a class="el" href="app_2src_2scheduler_8cpp_source.html">scheduler.cpp</a>.</p>
+
+</div>
+</div>
 <a id="a97b865094431f7a9b10d363c76354d66" name="a97b865094431f7a9b10d363c76354d66"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a97b865094431f7a9b10d363c76354d66">&#9670;&#160;</a></span>WaitForSubApps()</h2>
 
@@ -519,7 +535,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Waits until blocking sub-apps finish their frame update. </p>
 
-<p class="definition">Definition at line <a class="el" href="app_2src_2scheduler_8cpp_source.html#l00115">115</a> of file <a class="el" href="app_2src_2scheduler_8cpp_source.html">scheduler.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="app_2src_2scheduler_8cpp_source.html#l00119">119</a> of file <a class="el" href="app_2src_2scheduler_8cpp_source.html">scheduler.cpp</a>.</p>
 
 </div>
 </div>

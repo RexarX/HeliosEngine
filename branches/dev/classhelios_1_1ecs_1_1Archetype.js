@@ -9,8 +9,8 @@ var classhelios_1_1ecs_1_1Archetype =
     [ "Add", "classhelios_1_1ecs_1_1Archetype.html#a3f1f815ec566d36f8029c829db1596fe", null ],
     [ "AllocateRow", "classhelios_1_1ecs_1_1Archetype.html#a5613a69c2d95ae923973449f64781d09", null ],
     [ "Clear", "classhelios_1_1ecs_1_1Archetype.html#a1472ff07ea71f7b3cf68a032d726ed41", null ],
-    [ "Column", "classhelios_1_1ecs_1_1Archetype.html#a20f7e5860d7825a05a50ae33559ed2f7", null ],
-    [ "Column", "classhelios_1_1ecs_1_1Archetype.html#a4bd275b392c7da0f284a2b0cff4c4601", null ],
+    [ "Column", "classhelios_1_1ecs_1_1Archetype.html#a7621f3e087efd6b7c0a08160d958f5b2", null ],
+    [ "Column", "classhelios_1_1ecs_1_1Archetype.html#a45071f98e709f588dd26e30ab949f3de", null ],
     [ "ColumnCount", "classhelios_1_1ecs_1_1Archetype.html#aebad37b32cde4477efcf6d83fe57f344", null ],
     [ "ComponentColumn", "classhelios_1_1ecs_1_1Archetype.html#a41281c91e8257aa2289471f6ef423534", null ],
     [ "ComponentColumn", "classhelios_1_1ecs_1_1Archetype.html#a64a61d054fd216d1198d50a28758ff1c", null ],
@@ -30,9 +30,9 @@ var classhelios_1_1ecs_1_1Archetype =
     [ "Remove", "classhelios_1_1ecs_1_1Archetype.html#af93f828b13ddd8e74419b680cc1a1cdc", null ],
     [ "Row", "classhelios_1_1ecs_1_1Archetype.html#a309bc1309d85cfed4714d7e80a2c32cc", null ],
     [ "Set", "classhelios_1_1ecs_1_1Archetype.html#a37a5ba24920609a5fb4cb55a37c35f47", null ],
-    [ "TryColumn", "classhelios_1_1ecs_1_1Archetype.html#a4f65c98c7ee9eb9d363d0266b7f99a29", null ],
-    [ "TryColumn", "classhelios_1_1ecs_1_1Archetype.html#aa194b42a2b98e2caf0c0ba0237d750f7", null ],
+    [ "TryColumn", "classhelios_1_1ecs_1_1Archetype.html#ad1aab45c2af217314cd28bfecb575418", null ],
+    [ "TryColumn", "classhelios_1_1ecs_1_1Archetype.html#a43407da1ca626defd840737ee5692076", null ],
     [ "TryGet", "classhelios_1_1ecs_1_1Archetype.html#af8e5a25765582cb89ed3e17a8bfaae9e", null ],
     [ "TryGet", "classhelios_1_1ecs_1_1Archetype.html#a60675fa050180566d56b36d21f59649b", null ],
-    [ "kInvalidRow", "classhelios_1_1ecs_1_1Archetype.html#af019dfb14382e78477c9ed6150432cd9", null ]
+    [ "kInvalidRow", "classhelios_1_1ecs_1_1Archetype.html#a3fa7818e53635d64e2cecd06a16e9a50", null ]
 ];
