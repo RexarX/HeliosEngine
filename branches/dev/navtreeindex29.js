@@ -1,5 +1,7 @@
 var NAVTREEINDEX29 =
 {
+"namespacehelios.html#a3cc4370a16e087a93b8545f2495c12c4":[2,0,6,17],
+"namespacehelios.html#a5dd8e95e4cb808a93be15d4df228eb36":[2,0,6,30],
 "namespacehelios.html#a5e276a5c70bbb86023543f06d4c58d28":[2,0,6,25],
 "namespacehelios.html#a7982e4af7b9267b962018d6cfd53c165":[2,0,6,24],
 "namespacehelios.html#a972743e2f2714ec185e080de5028f319":[2,0,6,20],
@@ -247,7 +249,5 @@ var NAVTREEINDEX29 =
 "namespacehelios_1_1log.html#a4df9bd70b8616da138bef7540e9e645d":[2,0,6,6,11],
 "namespacehelios_1_1log.html#a53f5b0ad131c8f661cdf796e0a632d7b":[2,0,6,6,18],
 "namespacehelios_1_1log.html#a589dccda0174e0acc80b78d31bc0d63b":[2,0,6,6,14],
-"namespacehelios_1_1log.html#a5a708c42cd19cd113221274d8cc1b5f7":[2,0,6,6,31],
-"namespacehelios_1_1log.html#a5e0f2faa9710b7d3045802095b10d6de":[2,0,6,6,22],
-"namespacehelios_1_1log.html#a6f1c00019cf9bda615ed9b84c1ebfc11":[2,0,6,6,21]
+"namespacehelios_1_1log.html#a5a708c42cd19cd113221274d8cc1b5f7":[2,0,6,6,31]
 };

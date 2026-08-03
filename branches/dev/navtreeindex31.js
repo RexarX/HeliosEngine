@@ -1,5 +1,7 @@
 var NAVTREEINDEX31 =
 {
+"namespacemembers_u.html":[2,1,0,19],
+"namespacemembers_vars.html":[2,1,2],
 "namespacemembers_w.html":[2,1,0,20],
 "namespacemembers_z.html":[2,1,0,21],
 "namespaces.html":[2,0],
@@ -247,7 +249,5 @@ var NAVTREEINDEX31 =
 "structhelios_1_1app_1_1Shutdown.html":[2,0,6,1,26],
 "structhelios_1_1app_1_1Shutdown.html":[4,0,2,0,25],
 "structhelios_1_1app_1_1Shutdown.html#a4c952ba3e166aa5d072d95db777dc913":[2,0,6,1,26,0],
-"structhelios_1_1app_1_1Shutdown.html#a4c952ba3e166aa5d072d95db777dc913":[4,0,2,0,25,0],
-"structhelios_1_1app_1_1ShutdownStage.html":[2,0,6,1,27],
-"structhelios_1_1app_1_1ShutdownStage.html":[4,0,2,0,26]
+"structhelios_1_1app_1_1Shutdown.html#a4c952ba3e166aa5d072d95db777dc913":[4,0,2,0,25,0]
 };

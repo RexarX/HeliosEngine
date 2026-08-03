@@ -1,5 +1,7 @@
 var NAVTREEINDEX27 =
 {
+"concepthelios_1_1utils_1_1PolymorphicConvertible.html":[2,0,6,9,47],
+"concepthelios_1_1utils_1_1PolymorphicConvertible.html":[3,0,6,21],
 "concepthelios_1_1utils_1_1PredicateFor.html":[2,0,6,9,48],
 "concepthelios_1_1utils_1_1PredicateFor.html":[3,0,6,22],
 "concepthelios_1_1utils_1_1RandomEngine.html":[2,0,6,9,49],
@@ -247,7 +249,5 @@ var NAVTREEINDEX27 =
 "functions_type_c.html":[4,3,3,2],
 "functions_type_d.html":[4,3,3,3],
 "functions_type_e.html":[4,3,3,4],
-"functions_type_f.html":[4,3,3,5],
-"functions_type_g.html":[4,3,3,6],
-"functions_type_h.html":[4,3,3,7]
+"functions_type_f.html":[4,3,3,5]
 };

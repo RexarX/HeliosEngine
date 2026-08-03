@@ -1,5 +1,7 @@
 var NAVTREEINDEX30 =
 {
+"namespacehelios_1_1log.html#a5e0f2faa9710b7d3045802095b10d6de":[2,0,6,6,22],
+"namespacehelios_1_1log.html#a6f1c00019cf9bda615ed9b84c1ebfc11":[2,0,6,6,21],
 "namespacehelios_1_1log.html#a719d5c971dea79590f40b51b05f9ab0d":[2,0,6,6,12],
 "namespacehelios_1_1log.html#a7f8ec5d77267ecea753714c1da965a6b":[2,0,6,6,20],
 "namespacehelios_1_1log.html#a8142b0365811db503db54adfe84e1837":[2,0,6,6,25],
@@ -247,7 +249,5 @@ var NAVTREEINDEX30 =
 "namespacemembers_r.html":[2,1,0,16],
 "namespacemembers_s.html":[2,1,0,17],
 "namespacemembers_t.html":[2,1,0,18],
-"namespacemembers_type.html":[2,1,3],
-"namespacemembers_u.html":[2,1,0,19],
-"namespacemembers_vars.html":[2,1,2]
+"namespacemembers_type.html":[2,1,3]
 };
