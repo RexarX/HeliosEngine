@@ -106,13 +106,41 @@ TEST_SUITE("helios::app::Scheduler") {
   }
 
   TEST_CASE("helios::app::Scheduler::Clear") {
-    SUBCASE("Clear resets sub-app tracking so WaitForSubApps is immediate") {
+    SUBCASE("Clear on idle scheduler discards cached sub-app tracking") {
       App app(2);
       app.InsertSubApp(RenderSubAppLabel{}, SubApp{});
       app.Initialize();
       app.Update();
+      app.GetScheduler().WaitForSubApps();
       app.GetScheduler().Clear();
       app.GetScheduler().WaitForSubApps();
+      CHECK_FALSE(app.GetSubApp<RenderSubAppLabel>().IsUpdating());
+    }
+  }
+
+  TEST_CASE("helios::app::Scheduler::Stop") {
+    SUBCASE("Stop drains in-flight blocking sub-app updates") {
+      App app(2);
+      app.InsertSubApp(RenderSubAppLabel{}, SubApp{});
+      app.Initialize();
+      app.Update();
+      app.GetScheduler().Stop(app.GetExecutor());
+      app.GetScheduler().Clear();
+      CHECK_FALSE(app.GetSubApp<RenderSubAppLabel>().IsUpdating());
+    }
+
+    SUBCASE("Stop stops async update loops") {
+      App app(4);
+
+      SubApp render;
+      render.SetAsync(true);
+      render.SetRunner(RunDefaultSubApp);
+      render.AddSystem(kUpdate, SlowUpdateSystem{});
+      app.InsertSubApp(RenderSubAppLabel{}, std::move(render));
+      app.Initialize();
+
+      app.GetScheduler().Stop(app.GetExecutor());
+      app.GetScheduler().Clear();
       CHECK_FALSE(app.GetSubApp<RenderSubAppLabel>().IsUpdating());
     }
   }

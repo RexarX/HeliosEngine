@@ -10,9 +10,30 @@
 #include <helios/ecs/world.hpp>
 
 #include <cstddef>
-#include <thread>
 
 namespace helios::app {
+
+void Scheduler::Clear() {
+  HELIOS_ASSERT(async_loops_running_.load(std::memory_order_acquire) == 0,
+                "Cannot clear scheduler while async update loops are running! "
+                "Call Stop() or Shutdown() first.");
+
+  for (const SubAppFrameState& state : sub_app_states_) {
+    HELIOS_ASSERT(!state.sub_app.get().IsUpdating(),
+                  "Cannot clear scheduler while sub-apps are updating! Call "
+                  "Stop() or Shutdown() first.");
+  }
+
+  HELIOS_ASSERT(!blocking_update_future_.has_value(),
+                "Cannot clear scheduler while blocking sub-app updates are in "
+                "flight! Call Stop() or Shutdown() first.");
+
+  startup_graph_.Clear();
+  blocking_update_graph_.Clear();
+  shutdown_graph_.Clear();
+  sub_app_states_.clear();
+  blocking_update_future_.reset();
+}
 
 void Scheduler::Build(App& app) {
   HELIOS_APP_PROFILE_SCOPE_N("helios::app::Scheduler::Build");
@@ -69,7 +90,7 @@ void Scheduler::RunStartup(App& app) {
 
   if (!app.sub_apps_.empty()) {
     executor.Run(startup_graph_).Wait();
-    StartAsyncUpdateLoops(app, executor);
+    StartAsyncUpdateLoops(app);
   }
 }
 
@@ -85,14 +106,14 @@ void Scheduler::RunFrame(App& app) {
 
   RunUpdateStage(main, executor);
   RunExtractStage(main, executor);
-  LaunchSubAppUpdates(app, executor);
+  LaunchSubAppUpdates(app);
   WaitForSubApps();
 }
 
 void Scheduler::Shutdown(App& app) {
   HELIOS_APP_PROFILE_SCOPE_N("helios::app::Scheduler::Shutdown");
 
-  StopAsyncUpdateLoops();
+  StopAsyncLoops(app);
 
   auto& main = app.GetMainSubApp();
   auto& executor = app.GetExecutor();
@@ -112,8 +133,14 @@ void Scheduler::Shutdown(App& app) {
   RunMainShutdown(main, executor);
 }
 
-void Scheduler::StopAsyncLoops() {
-  StopAsyncUpdateLoops();
+void Scheduler::StopAsyncLoops(App& app) {
+  for (auto&& [index, sub_app] : app.sub_apps_) {
+    if (sub_app.IsAsync()) {
+      sub_app.RequestAsyncLoopStop();
+    }
+  }
+
+  StopAsyncUpdateLoops(app.GetExecutor());
 }
 
 void Scheduler::WaitForSubApps() {
@@ -123,17 +150,6 @@ void Scheduler::WaitForSubApps() {
     blocking_update_future_->Wait();
     blocking_update_future_.reset();
   }
-}
-
-void Scheduler::Clear() {
-  StopAsyncUpdateLoops();
-
-  startup_graph_.Clear();
-  blocking_update_graph_.Clear();
-  shutdown_graph_.Clear();
-  sub_app_states_.clear();
-  blocking_update_future_.reset();
-  async_loops_running_.store(0, std::memory_order_release);
 }
 
 void Scheduler::RunMainStartup(SubApp& main, async::Executor& executor) {
@@ -165,10 +181,12 @@ void Scheduler::RunExtractStage(SubApp& main, async::Executor& executor) {
   }
 }
 
-void Scheduler::LaunchSubAppUpdates(App& app, async::Executor& executor) {
+void Scheduler::LaunchSubAppUpdates(App& app) {
   if (app.sub_apps_.empty()) {
     return;
   }
+
+  auto& executor = app.GetExecutor();
 
   if (blocking_update_graph_.TaskCount() > 0) {
     blocking_update_future_ = executor.Run(blocking_update_graph_);
@@ -186,7 +204,9 @@ void Scheduler::LaunchSubAppUpdates(App& app, async::Executor& executor) {
   }
 }
 
-void Scheduler::StartAsyncUpdateLoops(App& app, async::Executor& executor) {
+void Scheduler::StartAsyncUpdateLoops(App& app) {
+  auto& executor = app.GetExecutor();
+
   for (auto&& [index, sub_app] : app.sub_apps_) {
     if (!sub_app.IsAsync()) {
       continue;
@@ -202,7 +222,7 @@ void Scheduler::StartAsyncUpdateLoops(App& app, async::Executor& executor) {
   }
 }
 
-void Scheduler::StopAsyncUpdateLoops() {
+void Scheduler::StopAsyncUpdateLoops(async::Executor& executor) {
   for (SubAppFrameState& state : sub_app_states_) {
     if (state.mode != SubAppMode::kAsync) {
       continue;
@@ -211,9 +231,8 @@ void Scheduler::StopAsyncUpdateLoops() {
     state.sub_app.get().RequestAsyncLoopStop();
   }
 
-  while (async_loops_running_.load(std::memory_order_acquire) > 0) {
-    std::this_thread::yield();
-  }
+  executor.WaitForAll();
+  async_loops_running_.store(0, std::memory_order_release);
 }
 
 void Scheduler::ExtractSubApp(SubAppFrameState& state,

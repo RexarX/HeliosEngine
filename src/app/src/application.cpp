@@ -43,18 +43,15 @@ App::~App() {
   // Ensure we're not running (should already be false if properly shut down)
   is_running_.store(false, std::memory_order_release);
 
-  // Async SilentAsync loops run until stop is requested. Skipping Shutdown
-  // leaves those tasks alive, and WaitForAll() below would hang indefinitely.
-  // Only stop loops here — full Shutdown may already have run and must stay
-  // idempotent for callers that shut down explicitly before destroy.
   for (auto&& [_, sub_app] : sub_apps_) {
     if (sub_app.IsAsync()) {
       sub_app.RequestAsyncLoopStop();
     }
+    sub_app.WaitUntilFullyIdle();
   }
-  scheduler_.StopAsyncLoops();
-  scheduler_.WaitForSubApps();
 
+  scheduler_.StopAsyncLoops(*this);
+  scheduler_.WaitForSubApps();
   executor_.WaitForAll();
 }
 
@@ -68,10 +65,12 @@ void App::Clear() {
     scheduler_.Shutdown(*this);
   }
 
+  scheduler_.Stop(executor_);
+  scheduler_.Clear();
+
   is_initialized_ = false;
   plugins_.clear();
   dynamic_plugins_.clear();
-  scheduler_.Clear();
   main_sub_app_.Clear();
   sub_apps_.clear();
 

@@ -35,6 +35,19 @@ public:
   Scheduler& operator=(Scheduler&& other) noexcept;
 
   /**
+   * @brief Clears cached task graphs and pending sub-app update state.
+   * @details Asserts that no sub-app updates or async loops are in flight. Call
+   * @ref Stop() or @ref Shutdown() first if work may still be running.
+   */
+  void Clear();
+
+  /**
+   * @brief Stops async update loops and waits for in-flight sub-app work.
+   * @param executor Executor that runs all current async tasks
+   */
+  void Stop(async::Executor& executor);
+
+  /**
    * @brief Builds schedulers and precomputes sub-app task graphs.
    * @param app Owning application
    */
@@ -60,15 +73,14 @@ public:
    */
   void Shutdown(App& app);
 
-  /// @brief Requests async sub-app loops to exit and waits until they finish.
-  void StopAsyncLoops();
+  /**
+   * @brief Requests async sub-app loops to exit and waits until they finish.
+   * @param app Owning application
+   */
+  void StopAsyncLoops(App& app);
 
   /// @brief Waits until blocking sub-apps finish their frame update.
   void WaitForSubApps();
-
-  /// @brief Clears cached task graphs and pending sub-app update state.
-  /// @details Stops async update loops before discarding tracking state.
-  void Clear();
 
 private:
   enum class SubAppMode : uint8_t {
@@ -89,9 +101,9 @@ private:
   void RunExtractStage(SubApp& main, async::Executor& executor);
   static void RunMainShutdown(SubApp& main, async::Executor& executor);
 
-  void LaunchSubAppUpdates(App& app, async::Executor& executor);
-  void StartAsyncUpdateLoops(App& app, async::Executor& executor);
-  void StopAsyncUpdateLoops();
+  void LaunchSubAppUpdates(App& app);
+  void StartAsyncUpdateLoops(App& app);
+  void StopAsyncUpdateLoops(async::Executor& executor);
 
   static void ExtractSubApp(SubAppFrameState& state,
                             const ecs::World& main_world);
@@ -131,6 +143,11 @@ inline Scheduler& Scheduler::operator=(Scheduler&& other) noexcept {
       std::memory_order_release);
 
   return *this;
+}
+
+inline void Scheduler::Stop(async::Executor& executor) {
+  StopAsyncUpdateLoops(executor);
+  WaitForSubApps();
 }
 
 }  // namespace helios::app
