@@ -11,5 +11,7 @@ var classhelios_1_1app_1_1Scheduler =
     [ "RunFrame", "classhelios_1_1app_1_1Scheduler.html#a42835b0c1df276d5f303afe853901f05", null ],
     [ "RunStartup", "classhelios_1_1app_1_1Scheduler.html#a051b22aba8937d2c67b39d582a10b646", null ],
     [ "Shutdown", "classhelios_1_1app_1_1Scheduler.html#a592a558083433d722cdc508862fc9ca1", null ],
+    [ "Stop", "classhelios_1_1app_1_1Scheduler.html#a5ec41f3c7e552628e8cbabee50f46546", null ],
+    [ "StopAsyncLoops", "classhelios_1_1app_1_1Scheduler.html#abc405f3dd6f3f77f4843fcdcb6f7cb68", null ],
     [ "WaitForSubApps", "classhelios_1_1app_1_1Scheduler.html#a97b865094431f7a9b10d363c76354d66", null ]
 ];

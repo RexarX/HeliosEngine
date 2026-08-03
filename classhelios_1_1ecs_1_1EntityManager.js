@@ -13,6 +13,7 @@ var classhelios_1_1ecs_1_1EntityManager =
     [ "Flush", "classhelios_1_1ecs_1_1EntityManager.html#a42e43f9934ceeddc5e1aad3a34bf4d12", null ],
     [ "Flush", "classhelios_1_1ecs_1_1EntityManager.html#a0040845a7721c4245910fc95cfc89d26", null ],
     [ "GetGeneration", "classhelios_1_1ecs_1_1EntityManager.html#afe4a338799b29cf0a03b97190426807a", null ],
+    [ "NeedsFlush", "classhelios_1_1ecs_1_1EntityManager.html#a36b3d4267f1a0dc08d4ac655803c86ff", null ],
     [ "operator=", "classhelios_1_1ecs_1_1EntityManager.html#a73270bbea3aa16123520453a09a81174", null ],
     [ "operator=", "classhelios_1_1ecs_1_1EntityManager.html#a0df0989d8b4be5d7ec7cca27446b1231", null ],
     [ "Reserve", "classhelios_1_1ecs_1_1EntityManager.html#a223ea56ab93db658545e292b8ff6a3a4", null ],

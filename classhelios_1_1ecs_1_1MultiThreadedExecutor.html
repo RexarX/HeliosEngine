@@ -204,7 +204,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad2d609a7a53b6d9eb8f4b7953b0d9f52" id="r_ad2d609a7a53b6d9eb8f4b7953b0d9f52"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad2d609a7a53b6d9eb8f4b7953b0d9f52">Execute</a> (<a class="el" href="classhelios_1_1ecs_1_1Schedule.html">Schedule</a> &amp;schedule, <a class="el" href="classhelios_1_1ecs_1_1World.html">World</a> &amp;world) override</td></tr>
 <tr class="memdesc:ad2d609a7a53b6d9eb8f4b7953b0d9f52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes the schedule using the multi-threaded executor.  <br /></td></tr>
 <tr class="memitem:aa406b841b28eb0e36d2f21ddd1974054" id="r_aa406b841b28eb0e36d2f21ddd1974054"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aa406b841b28eb0e36d2f21ddd1974054">ExecuteAndWait</a> (<a class="el" href="classhelios_1_1ecs_1_1Schedule.html">Schedule</a> &amp;schedule, <a class="el" href="classhelios_1_1ecs_1_1World.html">World</a> &amp;world) override</td></tr>
-<tr class="memdesc:aa406b841b28eb0e36d2f21ddd1974054"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes all systems in the schedule and blocks until completion.  <br /></td></tr>
+<tr class="memdesc:aa406b841b28eb0e36d2f21ddd1974054"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes the schedule and waits for completion.  <br /></td></tr>
 <tr class="memitem:a5188a5d3a53a5919446c07b0f2398ebf" id="r_a5188a5d3a53a5919446c07b0f2398ebf"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a5188a5d3a53a5919446c07b0f2398ebf">Wait</a> () override</td></tr>
 <tr class="memdesc:a5188a5d3a53a5919446c07b0f2398ebf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Waits for the most recent <a class="el" href="#ad2d609a7a53b6d9eb8f4b7953b0d9f52" title="Executes the schedule using the multi-threaded executor.">Execute()</a> to complete.  <br /></td></tr>
 <tr class="inherit_header pub_methods_classhelios_1_1ecs_1_1Executor"><td colspan="2">Public Member Functions inherited from <a class="el" href="classhelios_1_1ecs_1_1Executor.html">helios::ecs::Executor</a></td></tr>
@@ -214,7 +214,7 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><p>Multi-threaded executor that runs systems in parallel using work-stealing. </p>
 <p>Uses an injected <span class="tt"><a class="el" href="classhelios_1_1async_1_1Executor.html" title="Manages worker threads and executes task graphs using work-stealing scheduling.">async::Executor</a></span> reference to run a <span class="tt"><a class="el" href="classhelios_1_1async_1_1TaskGraph.html" title="Represents a task dependency graph that can be executed by an Executor.">async::TaskGraph</a></span> that respects ordering constraints and access-policy conflicts. The <span class="tt"><a class="el" href="classhelios_1_1async_1_1TaskGraph.html" title="Represents a task dependency graph that can be executed by an Executor.">async::TaskGraph</a></span> and task vector are cached across frames and cleared/rebuilt each execution. </p>
 
-<p class="definition">Definition at line <a class="el" href="multi__threaded_8hpp_source.html#l00023">23</a> of file <a class="el" href="multi__threaded_8hpp_source.html">multi_threaded.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__threaded_8hpp_source.html#l00025">25</a> of file <a class="el" href="multi__threaded_8hpp_source.html">multi_threaded.hpp</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a17f64ba975096be229a8cffec5063b3d" name="a17f64ba975096be229a8cffec5063b3d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a17f64ba975096be229a8cffec5063b3d">&#9670;&#160;</a></span>MultiThreadedExecutor() <span class="overload">[1/3]</span></h2>
@@ -247,7 +247,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="multi__threaded_8hpp_source.html#l00030">30</a> of file <a class="el" href="multi__threaded_8hpp_source.html">multi_threaded.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__threaded_8hpp_source.html#l00032">32</a> of file <a class="el" href="multi__threaded_8hpp_source.html">multi_threaded.hpp</a>.</p>
 
 </div>
 </div>
@@ -396,11 +396,11 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Executes all systems in the schedule and blocks until completion. </p>
-<p>Default implementation calls <a class="el" href="#ad2d609a7a53b6d9eb8f4b7953b0d9f52" title="Executes the schedule using the multi-threaded executor.">Execute()</a> then <a class="el" href="#a5188a5d3a53a5919446c07b0f2398ebf" title="Waits for the most recent Execute() to complete.">Wait()</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Executes the schedule and waits for completion. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">schedule</td><td>Compiled schedule to execute </td></tr>
-    <tr><td class="paramname">world</td><td><a class="el" href="classhelios_1_1ecs_1_1World.html" title="The World class manages entities with their components and systems.">World</a> to pass to each system </td></tr>
+    <tr><td class="paramname">schedule</td><td>The schedule to execute </td></tr>
+    <tr><td class="paramname">world</td><td>The world context for system execution </td></tr>
   </table>
   </dd>
 </dl>
@@ -489,7 +489,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classhelios_1_1ecs_1_1Executor.html#ab19d3cb668201668cd8e3e11a19ed185">helios::ecs::Executor</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="multi__threaded_8hpp_source.html#l00064">64</a> of file <a class="el" href="multi__threaded_8hpp_source.html">multi_threaded.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multi__threaded_8hpp_source.html#l00071">71</a> of file <a class="el" href="multi__threaded_8hpp_source.html">multi_threaded.hpp</a>.</p>
 
 </div>
 </div>

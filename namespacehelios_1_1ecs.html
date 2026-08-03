@@ -608,6 +608,10 @@ Functions</h2></td></tr>
 <tr class="memitem:ab196dc54614f735dec3ab3b56962c3e7" id="r_ab196dc54614f735dec3ab3b56962c3e7"><td class="memTemplParams" colspan="2">template&lt;ComponentTrait T&gt; </td></tr>
 <tr class="memitem:ab196dc54614f735dec3ab3b56962c3e7 template"><td class="memItemLeft">consteval <a class="el" href="#a08aef08eb2f21afe5eccf220aac779d4">ComponentStorageType</a>&#160;</td><td class="memItemRight"><a class="el" href="#ab196dc54614f735dec3ab3b56962c3e7">ComponentStorageTypeOf</a> (const T &amp;) noexcept</td></tr>
 <tr class="memdesc:ab196dc54614f735dec3ab3b56962c3e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Component storage type.  <br /></td></tr>
+<tr class="memitem:a611178061cf531fb5c04d2b80a6f4109" id="r_a611178061cf531fb5c04d2b80a6f4109"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#a611178061cf531fb5c04d2b80a6f4109">IsAliveGeneration</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html#a40d8cd0e93ef835aeb26252597b23b90">Entity::GenerationType</a> gen) noexcept</td></tr>
+<tr class="memdesc:a611178061cf531fb5c04d2b80a6f4109"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if generation is considered alive.  <br /></td></tr>
+<tr class="memitem:a3fd2a8f4805ddb81d85e7557052d579f" id="r_a3fd2a8f4805ddb81d85e7557052d579f"><td class="memItemLeft">constexpr <a class="el" href="classhelios_1_1ecs_1_1Entity.html#a40d8cd0e93ef835aeb26252597b23b90">Entity::GenerationType</a>&#160;</td><td class="memItemRight"><a class="el" href="#a3fd2a8f4805ddb81d85e7557052d579f">NextGeneration</a> (<a class="el" href="classhelios_1_1ecs_1_1Entity.html#a40d8cd0e93ef835aeb26252597b23b90">Entity::GenerationType</a> gen, bool alive) noexcept</td></tr>
+<tr class="memdesc:a3fd2a8f4805ddb81d85e7557052d579f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advances a generation toward the requested liveness state.  <br /></td></tr>
 <tr class="memitem:ad16ba5ae4406faf596f281e41bc09e2e" id="r_ad16ba5ae4406faf596f281e41bc09e2e"><td class="memTemplParams" colspan="2">template&lt;AnyMessageTrait T&gt; </td></tr>
 <tr class="memitem:ad16ba5ae4406faf596f281e41bc09e2e template"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#ad16ba5ae4406faf596f281e41bc09e2e">MessageNameOf</a> () noexcept</td></tr>
 <tr class="memdesc:ad16ba5ae4406faf596f281e41bc09e2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the name of an message.  <br /></td></tr>
@@ -2126,6 +2130,42 @@ template&lt;typename G&gt; </div>
 
 </div>
 </div>
+<a id="a611178061cf531fb5c04d2b80a6f4109" name="a611178061cf531fb5c04d2b80a6f4109"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a611178061cf531fb5c04d2b80a6f4109">&#9670;&#160;</a></span>IsAliveGeneration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::ecs::IsAliveGeneration </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1Entity.html#a40d8cd0e93ef835aeb26252597b23b90">Entity::GenerationType</a></td>          <td class="paramname"><span class="paramname"><em>gen</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if generation is considered alive. </p>
+<p>Requires the alive bit and rejects the unreachable invalid sentinel. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">gen</td><td>Generation encoding to check </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if generation is alive and not invalid </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00145">145</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
+
+</div>
+</div>
 <a id="aaf39601579364e59606a4d7a0ea11376" name="aaf39601579364e59606a4d7a0ea11376"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aaf39601579364e59606a4d7a0ea11376">&#9670;&#160;</a></span>IsResourceThreadSafe() <span class="overload">[1/2]</span></h2>
 
@@ -2369,6 +2409,49 @@ template&lt;AnyMessageTrait T&gt; </div>
 <dl class="section return"><dt>Returns</dt><dd>Message name </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="ecs_2include_2helios_2ecs_2message_2message_8hpp_source.html#l00113">113</a> of file <a class="el" href="ecs_2include_2helios_2ecs_2message_2message_8hpp_source.html">message.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a3fd2a8f4805ddb81d85e7557052d579f" name="a3fd2a8f4805ddb81d85e7557052d579f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3fd2a8f4805ddb81d85e7557052d579f">&#9670;&#160;</a></span>NextGeneration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1ecs_1_1Entity.html#a40d8cd0e93ef835aeb26252597b23b90">Entity::GenerationType</a> helios::ecs::NextGeneration </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1ecs_1_1Entity.html#a40d8cd0e93ef835aeb26252597b23b90">Entity::GenerationType</a></td>          <td class="paramname"><span class="paramname"><em>gen</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>alive</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Advances a generation toward the requested liveness state. </p>
+<p>One counter increment occurs per full reuse cycle, on the alive-&gt;free transition. Free-&gt;alive only sets the alive bit so a reserved handle can carry the future alive value while storage still holds the free encoding (making pre-<span class="tt">Flush</span> validation fail).</p>
+<p>The reserved counter value <span class="tt">kCounterMask</span> is skipped so <span class="tt">kInvalidGeneration</span> stays unreachable.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">gen</td><td>Current generation encoding </td></tr>
+    <tr><td class="paramname">alive</td><td>Target liveness (<span class="tt">true</span> = free-&gt;alive, <span class="tt">false</span> = alive-&gt;free) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Next generation encoding for the requested state </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="entity_8hpp_source.html#l00168">168</a> of file <a class="el" href="entity_8hpp_source.html">entity.hpp</a>.</p>
 
 </div>
 </div>

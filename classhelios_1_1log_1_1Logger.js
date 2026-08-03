@@ -22,5 +22,6 @@ var classhelios_1_1log_1_1Logger =
     [ "SetLevel", "classhelios_1_1log_1_1Logger.html#abc9f6e9a43e42f747a222d1ae0a42c5b", null ],
     [ "SetLevel", "classhelios_1_1log_1_1Logger.html#aa1ae785045a85af01656bb9610936e41", null ],
     [ "ShouldLog", "classhelios_1_1log_1_1Logger.html#acd63f3f446cd786ec755763c289142e7", null ],
-    [ "ShouldLog", "classhelios_1_1log_1_1Logger.html#a3bf6e8178489720e0a8468d66bda1335", null ]
+    [ "ShouldLog", "classhelios_1_1log_1_1Logger.html#a3bf6e8178489720e0a8468d66bda1335", null ],
+    [ "Shutdown", "classhelios_1_1log_1_1Logger.html#a83aea152779991132b1580c253528808", null ]
 ];

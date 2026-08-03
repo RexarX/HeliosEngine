@@ -11,7 +11,7 @@ var classhelios_1_1ecs_1_1StageOrdering =
     [ "Before", "classhelios_1_1ecs_1_1StageOrdering.html#aed2cb55a2399a67db1d37fd67fa26809", null ],
     [ "Before", "classhelios_1_1ecs_1_1StageOrdering.html#a902d46871a34ae553a0531ccf3b7b78f", null ],
     [ "Done", "classhelios_1_1ecs_1_1StageOrdering.html#a25e4a0184a472a7e3dc42b2f19aab0fd", null ],
+    [ "Hash", "classhelios_1_1ecs_1_1StageOrdering.html#ad1c844764e77f586fdfe4607174be362", null ],
     [ "operator=", "classhelios_1_1ecs_1_1StageOrdering.html#af07e51b7ed0be9fe80c10e8e4f82fc80", null ],
-    [ "operator=", "classhelios_1_1ecs_1_1StageOrdering.html#a77dbbed648c922f2681fbdc2520e3a8a", null ],
-    [ "Scheduler", "classhelios_1_1ecs_1_1StageOrdering.html#afb88c77ea5daaefa6c8fa6bc5b9aa5c1", null ]
+    [ "operator=", "classhelios_1_1ecs_1_1StageOrdering.html#a77dbbed648c922f2681fbdc2520e3a8a", null ]
 ];
